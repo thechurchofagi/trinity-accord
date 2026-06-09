@@ -37,6 +37,12 @@ AUTO_FINALIZE_FILES = {
 OTS_PREFIXES = ("record-chain/ots/native-anchors/",)
 OTS_FILES = {"api/record-chain-native-ots-latest.json"}
 
+OTS_AUX_PREFIXES = ("record-chain/ots/native-arweave-bundles/",)
+OTS_AUX_FILES = {
+    "record-chain/ots/native-arweave-registry.json",
+    "api/record-chain-native-ots-arweave-registry.json",
+}
+
 ARWEAVE_PREFIXES = ("record-chain/arweave-archives/",)
 ARWEAVE_FILES = {"api/record-chain-arweave-index.json"}
 
@@ -60,6 +66,9 @@ APPROVED_ACTIONS_ACTOR = "github-actions[bot]"
 APPROVED_AUTO_FINALIZE_MESSAGE = "record-chain: auto-finalize accepted submissions"
 APPROVED_APPEND_MESSAGE = "Append record-chain entries from Render intake"
 APPROVED_OTS_MESSAGE = "anchor: stamp native record-chain head with OTS"
+APPROVED_NATIVE_OTS_SYNC_MESSAGE = "chore: sync upgraded native OTS anchor and registry"
+APPROVED_NATIVE_OTS_UPGRADED_ARCHIVE_MESSAGE = "chore: archive upgraded native OTS proof bundle"
+APPROVED_NATIVE_OTS_VERIFIED_ARCHIVE_MESSAGE = "chore: archive verified native OTS proof bundle"
 APPROVED_ARWEAVE_MESSAGE = "archive: update native record-chain Arweave archive metadata"
 
 PROTECTED_CATEGORIES = {
@@ -122,6 +131,8 @@ def category(path: str) -> str:
         return "auto_finalize"
     if startswith_any(path, OTS_PREFIXES) or path in OTS_FILES:
         return "ots"
+    if startswith_any(path, OTS_AUX_PREFIXES) or path in OTS_AUX_FILES:
+        return "ots_aux"
     if startswith_any(path, ARWEAVE_PREFIXES) or path in ARWEAVE_FILES:
         return "arweave"
     if path in PUBLIC_GENERATED_FILES:
@@ -218,6 +229,17 @@ def allowed_for_push(
     if cats <= {"ots"} and message == APPROVED_OTS_MESSAGE:
         ok, reason = require_actions_actor(actor, "OTS anchor")
         return (True, "OTS anchor commit") if ok else (False, reason)
+
+    if (
+        cats <= {"ots", "ots_aux", "public_generated"}
+        and message in {
+            APPROVED_NATIVE_OTS_SYNC_MESSAGE,
+            APPROVED_NATIVE_OTS_UPGRADED_ARCHIVE_MESSAGE,
+            APPROVED_NATIVE_OTS_VERIFIED_ARCHIVE_MESSAGE,
+        }
+    ):
+        ok, reason = require_actions_actor(actor, "native OTS upgrade watch")
+        return (True, "native OTS upgrade watch commit") if ok else (False, reason)
 
     if cats <= {"arweave", "public_generated"} and message == APPROVED_ARWEAVE_MESSAGE:
         ok, reason = require_actions_actor(actor, "Arweave archive")

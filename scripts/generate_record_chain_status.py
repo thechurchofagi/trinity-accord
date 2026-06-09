@@ -23,6 +23,13 @@ def read_json(rel: str) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def read_json_if_exists(rel: str) -> Any | None:
+    path = ROOT / rel
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def write_json(rel: str, data: Any) -> None:
     (ROOT / rel).write_text(dump_json(data), encoding="utf-8")
 
@@ -137,12 +144,59 @@ def build_pipeline_status(tip: dict[str, Any], ots: dict[str, Any], latest_live:
     }
 
 
+def latest_native_ots_proof_bundle_archive(
+    registry: dict[str, Any] | None,
+    ots: dict[str, Any],
+) -> dict[str, Any]:
+    entries = list((registry or {}).get("entries", []))
+    anchored_sha = ots.get("anchored_file_sha256")
+    matching = [entry for entry in entries if entry.get("anchored_file_sha256") == anchored_sha]
+    matching.sort(key=lambda entry: entry.get("registered_at") or entry.get("uploaded_at") or "")
+    latest = matching[-1] if matching else None
+    tx_id = (latest or {}).get("tx_id")
+    archive_status = (latest or {}).get("archive_status")
+
+    if tx_id and archive_status == "arweave_archived":
+        status = "arweave_archived"
+    elif latest:
+        status = "registered_without_arweave_tx"
+    elif ots.get("ots_status") in {"upgraded", "verified"}:
+        status = "archive-needed"
+    else:
+        status = "waiting-for-ots-upgrade"
+
+    return {
+        "implemented": True,
+        "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
+        "registry_api": "/api/record-chain-native-ots-arweave-registry.json",
+        "status": status,
+        "archive_status": status,
+        "latest_bundle_file": (latest or {}).get("bundle_file"),
+        "latest_bundle_sha256": (latest or {}).get("bundle_sha256"),
+        "latest_tx_id": tx_id,
+        "latest_gateway_url": (latest or {}).get("gateway_url"),
+        "latest_ots_status": (latest or {}).get("ots_status", ots.get("ots_status")),
+        "latest_bitcoin_verified": (latest or {}).get("bitcoin_verified", ots.get("bitcoin_verified")),
+        "archive_needed": status == "archive-needed",
+        "registered_without_arweave_tx": status == "registered_without_arweave_tx",
+        "arweave_archived": status == "arweave_archived",
+        "boundary": {
+            "ots_proof_bundle_arweave_archive_is_mirror_only": True,
+            "ots_proof_bundle_arweave_archive_is_not_authority": True,
+            "ots_proof_bundle_arweave_archive_is_not_attestation": True,
+            "ots_proof_bundle_arweave_archive_is_not_amendment": True,
+            "ots_proof_bundle_arweave_archive_is_not_successor_reception": True,
+        },
+    }
+
+
 def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status = copy.deepcopy(existing)
 
     tip = read_json("record-chain/chain-tip.json")
     ots = read_json("api/record-chain-native-ots-latest.json")
     arweave = read_json("api/record-chain-arweave-index.json")
+    native_ots_registry = read_json_if_exists("api/record-chain-native-ots-arweave-registry.json")
     record_index = read_json("record-chain/indexes/record-index.json")
 
     records = load_records_from_index(record_index)
@@ -221,6 +275,7 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
         else "anchor-needed"
     )
     ot["anchor_needed"] = pipeline["ots_anchor_needed"]
+    ot["proof_bundle_archive"] = latest_native_ots_proof_bundle_archive(native_ots_registry, ots)
 
     status["anchoring"].setdefault("arweave_archive", {})
     aa = status["anchoring"]["arweave_archive"]

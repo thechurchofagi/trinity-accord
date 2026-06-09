@@ -7,8 +7,10 @@ Asserts:
   - supports pending/upgraded/verified states
   - upgraded bundle keeps bitcoin_verified=false
   - verified bundle requires strict verify success
-  - paid upload requires explicit confirmation
+  - paid upload requires explicit confirmation and an ARKEY/JWK gate
   - registry keyed by anchored_file_sha256 and bundle_sha256
+  - registry cannot claim arweave_archived without tx_id
+  - public status exposes native OTS proof-bundle archive state
 """
 from __future__ import annotations
 
@@ -28,17 +30,25 @@ def forbid(text: str, needle: str, label: str) -> None:
 def main() -> None:
     workflow_path = Path(".github/workflows/native-ots-upgrade-watch.yml")
     runner_path = Path("scripts/run_native_ots_upgrade_verify.py")
+    status_generator_path = Path("scripts/generate_record_chain_status.py")
+    home_generator_path = Path("scripts/generate_public_home_status.py")
     contract_path = Path("scripts/test_native_ots_upgrade_workflow_contract.py")
 
     if not workflow_path.exists():
         raise SystemExit(f"missing workflow: {workflow_path}")
     if not runner_path.exists():
         raise SystemExit(f"missing runner: {runner_path}")
+    if not status_generator_path.exists():
+        raise SystemExit(f"missing status generator: {status_generator_path}")
+    if not home_generator_path.exists():
+        raise SystemExit(f"missing home generator: {home_generator_path}")
     if not contract_path.exists():
         raise SystemExit(f"missing contract test: {contract_path}")
 
     workflow = workflow_path.read_text(encoding="utf-8")
     runner = runner_path.read_text(encoding="utf-8")
+    status_generator = status_generator_path.read_text(encoding="utf-8")
+    home_generator = home_generator_path.read_text(encoding="utf-8")
 
     # Workflow markers
     workflow_markers = [
@@ -51,6 +61,16 @@ def main() -> None:
         "api/record-chain-native-ots-latest.json",
         "record-chain/ots/native-anchors/",
         "record-chain/audit/native-ots/",
+        "steps.jwk.outputs.has_jwk == 'true'",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+        "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
+        "python3 scripts/generate_record_chain_status.py",
+        "python3 scripts/generate_public_home_status.py",
+        "api/record-chain-status.json",
+        "api/public-home-status.json",
+        "index.md",
+        "sitemap.xml",
     ]
     for marker in workflow_markers:
         require(workflow, marker, "workflow")
@@ -77,6 +97,11 @@ def main() -> None:
         "ots_upgrade_and_verify",
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
         "registry_has_bundle_sha",
+        "upload_native_ots_bundle_to_arweave",
+        "ALLOW_PAID_ARWEAVE_CANARY",
+        "arweave_archived",
+        "registered_without_arweave_tx",
+        "claims arweave_archived without tx_id",
         "has_upgraded_archive",
         "has_verified_archive",
     ]
@@ -108,6 +133,31 @@ def main() -> None:
         "cannot build verified bundle before strict Bitcoin verification",
         "runner verified strict verify guard",
     )
+
+
+    status_markers = [
+        "latest_native_ots_proof_bundle_archive",
+        "proof_bundle_archive",
+        "api/record-chain-native-ots-arweave-registry.json",
+        "arweave_archived",
+        "registered_without_arweave_tx",
+        "waiting-for-ots-upgrade",
+        "ots_proof_bundle_arweave_archive_is_mirror_only",
+        "ots_proof_bundle_arweave_archive_is_not_authority",
+        "ots_proof_bundle_arweave_archive_is_not_attestation",
+        "ots_proof_bundle_arweave_archive_is_not_amendment",
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception",
+    ]
+    for marker in status_markers:
+        require(status_generator, marker, "status generator")
+
+    home_markers = [
+        "proof_bundle_archive",
+        "Native OTS proof bundle Arweave archive",
+        "not authority, attestation, amendment, or successor reception",
+    ]
+    for marker in home_markers:
+        require(home_generator, marker, "public home generator")
 
     # Contract test exists and self-references
     contract = contract_path.read_text(encoding="utf-8")

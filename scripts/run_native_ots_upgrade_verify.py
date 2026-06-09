@@ -136,7 +136,6 @@ def precheck_files() -> None:
 
 def snapshot_core_files() -> dict[str, str | None]:
     return {
-        "native_ots_latest_sha256": sha256_file(NATIVE_LATEST_OTS),
         "chain_tip_sha256": sha256_file(CHAIN_TIP),
         "record_index_sha256": sha256_file(RECORD_INDEX),
     }
@@ -211,6 +210,14 @@ def validate_native_registry() -> dict[str, Any]:
         return registry
 
     registry = read_json(NATIVE_REGISTRY)
+    for index, entry in enumerate(registry.get("entries", [])):
+        tx_id = entry.get("tx_id")
+        archive_status = entry.get("archive_status")
+        if tx_id and archive_status != "arweave_archived":
+            raise SystemExit(f"native registry entry[{index}] has tx_id but is not arweave_archived")
+        if not tx_id and archive_status == "arweave_archived":
+            raise SystemExit(f"native registry entry[{index}] claims arweave_archived without tx_id")
+
     if NATIVE_API_REGISTRY.exists():
         api_registry = read_json(NATIVE_API_REGISTRY)
         if registry != api_registry:
@@ -218,11 +225,19 @@ def validate_native_registry() -> dict[str, Any]:
     return registry
 
 
-def registry_has_bundle_sha(registry: dict[str, Any], bundle_sha: str) -> bool:
+def registry_entry_for_bundle_sha(registry: dict[str, Any], bundle_sha: str) -> dict[str, Any] | None:
     for entry in registry.get("entries", []):
         if entry.get("bundle_sha256") == bundle_sha:
-            return True
-    return False
+            return entry
+    return None
+
+
+def registry_has_bundle_sha(registry: dict[str, Any], bundle_sha: str) -> bool:
+    return registry_entry_for_bundle_sha(registry, bundle_sha) is not None
+
+
+def registry_entry_is_arweave_archived(entry: dict[str, Any] | None) -> bool:
+    return bool(entry and entry.get("tx_id") and entry.get("archive_status") == "arweave_archived")
 
 
 def has_upgraded_archive(registry: dict[str, Any], anchored_sha: str) -> bool:
@@ -231,6 +246,7 @@ def has_upgraded_archive(registry: dict[str, Any], anchored_sha: str) -> bool:
             entry.get("anchored_file_sha256") == anchored_sha
             and entry.get("ots_status") == "upgraded"
             and entry.get("tx_id")
+            and entry.get("archive_status") == "arweave_archived"
         ):
             return True
     return False
@@ -242,6 +258,7 @@ def has_verified_archive(registry: dict[str, Any], anchored_sha: str) -> bool:
             entry.get("anchored_file_sha256") == anchored_sha
             and entry.get("ots_status") == "verified"
             and entry.get("tx_id")
+            and entry.get("archive_status") == "arweave_archived"
         ):
             return True
     return False
@@ -362,6 +379,7 @@ def update_native_registry(
     *,
     tx_id: str | None = None,
     wallet_address: str | None = None,
+    gateway_url: str | None = None,
 ) -> dict[str, Any]:
     """Update native OTS Arweave registry with a new bundle entry."""
     anchor = validate_native_anchor(anchor_rel)
@@ -383,16 +401,105 @@ def update_native_registry(
         "bitcoin_verified": anchor.get("bitcoin_verified", False),
         "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified", False),
         "tx_id": tx_id,
+        "gateway_url": gateway_url,
         "wallet_address": wallet_address,
-        "uploaded_at": utc_now(),
+        "archive_status": (
+            "arweave_archived" if tx_id else "registered_without_arweave_tx"
+        ),
+        "uploaded_at": utc_now() if tx_id else None,
+        "registered_at": utc_now(),
+        "boundary": {
+            "ots_proof_bundle_arweave_archive_is_mirror_only": True,
+            "ots_proof_bundle_arweave_archive_is_not_authority": True,
+            "ots_proof_bundle_arweave_archive_is_not_attestation": True,
+            "ots_proof_bundle_arweave_archive_is_not_amendment": True,
+            "ots_proof_bundle_arweave_archive_is_not_successor_reception": True,
+        },
     }
 
-    registry.setdefault("entries", []).append(entry)
+    entries = registry.setdefault("entries", [])
+    existing = registry_entry_for_bundle_sha(registry, bundle_sha)
+    if existing:
+        if tx_id and not existing.get("tx_id"):
+            existing.update(entry)
+        elif tx_id and existing.get("tx_id") != tx_id:
+            raise SystemExit("bundle already registered with different tx_id")
+        else:
+            entry = existing
+    else:
+        entries.append(entry)
     registry["updated_at"] = utc_now()
 
     write_json(NATIVE_REGISTRY, registry)
     write_json(NATIVE_API_REGISTRY, registry)
     return registry
+
+
+def upload_native_ots_bundle_to_arweave(
+    *,
+    bundle: Path,
+    log_dir: Path,
+    run_id: str,
+    jwk_path: str,
+    gateway_url: str,
+    readback_gateways: str,
+    readback_timeout_seconds: str,
+    readback_retry_seconds: str,
+) -> dict[str, Any]:
+    """Upload a native OTS proof bundle to Arweave through the paid cost gate."""
+    paid_dir = log_dir / "paid-upload"
+    paid_dir.mkdir(parents=True, exist_ok=True)
+
+    extra_tags = [
+        {"name": "Trinity-Artifact-Type", "value": "Native-OTS-Proof-Bundle"},
+        {"name": "Trinity-Boundary", "value": "mirror-only-not-authority-not-attestation-not-amendment"},
+    ]
+    env = {
+        "ALLOW_PAID_ARWEAVE_CANARY": "true",
+        "ARWEAVE_READBACK_GATEWAYS": readback_gateways,
+        "ARWEAVE_READBACK_TIMEOUT_SECONDS": str(readback_timeout_seconds),
+        "ARWEAVE_READBACK_RETRY_SECONDS": str(readback_retry_seconds),
+    }
+    run_cmd([
+        "node",
+        "scripts/arweave_cost_gate.mjs",
+        "--payload-file", rel(bundle),
+        "--record-type", "native_ots_proof_bundle",
+        "--run-id", run_id,
+        "--log-dir", rel(paid_dir),
+        "--mode", "production",
+        "--expected-owner", EXPECTED_OWNER,
+        "--gateway-url", gateway_url,
+        "--max-upload-usd", MAX_UPLOAD_USD,
+        "--safety-multiplier", SAFETY_MULTIPLIER,
+        "--jwk-path", jwk_path,
+        "--content-type", "application/json",
+        "--app-name", "Trinity-Accord-Native-OTS-Proof-Bundle",
+        "--extra-tags-json", json.dumps(extra_tags, separators=(",", ":")),
+    ], env=env)
+
+    upload = read_json(paid_dir / "11-arweave-upload-result.native_ots_proof_bundle.json")
+    readback = read_json(paid_dir / "11b-arweave-readback-verify.native_ots_proof_bundle.json")
+    bundle_sha = sha256_bytes(bundle.read_bytes())
+
+    if upload.get("result") != "uploaded":
+        raise SystemExit(f"native OTS proof bundle upload did not complete: {upload.get('result')}")
+    if not upload.get("tx_id"):
+        raise SystemExit("native OTS proof bundle upload result missing tx_id")
+    if upload.get("payload_sha256") != bundle_sha:
+        raise SystemExit("native OTS proof bundle upload payload sha mismatch")
+    if readback.get("result") != "pass" or readback.get("hash_match") is not True:
+        raise SystemExit("native OTS proof bundle readback verification failed")
+    if readback.get("downloaded_sha256") != bundle_sha:
+        raise SystemExit("native OTS proof bundle readback sha mismatch")
+
+    return {
+        "tx_id": upload["tx_id"],
+        "wallet_address": upload.get("wallet_address"),
+        "gateway_url": upload.get("gateway_url"),
+        "upload_result": rel(paid_dir / "11-arweave-upload-result.native_ots_proof_bundle.json"),
+        "readback_result": rel(paid_dir / "11b-arweave-readback-verify.native_ots_proof_bundle.json"),
+    }
 
 
 def write_summary(log_dir: Path, summary: dict[str, Any]) -> None:
@@ -493,14 +600,45 @@ def main() -> int:
         else:
             result = "upgraded_archived"
 
+    paid_upload_performed = False
+    upload_info: dict[str, Any] | None = None
+    registry_updated = False
+
     if bundle and not args.verify_only:
         bundle_sha = sha256_bytes(bundle.read_bytes())
-        if registry_has_bundle_sha(registry, bundle_sha):
+        existing_entry = registry_entry_for_bundle_sha(registry, bundle_sha)
+        if registry_entry_is_arweave_archived(existing_entry):
+            result = f"{result}_archived" if "archived" not in result else result
+        elif args.enable_paid_upload:
+            if args.confirm_paid_upload != CONFIRM_PAID_UPLOAD:
+                raise SystemExit(f"paid upload requires --confirm-paid-upload {CONFIRM_PAID_UPLOAD!r}")
+            if not args.jwk_path:
+                raise SystemExit("paid upload requires --jwk-path or ARWEAVE_JWK_PATH")
+            upload_info = upload_native_ots_bundle_to_arweave(
+                bundle=bundle,
+                log_dir=log_dir,
+                run_id=args.run_id,
+                jwk_path=args.jwk_path,
+                gateway_url=args.gateway_url,
+                readback_gateways=args.readback_gateways,
+                readback_timeout_seconds=args.readback_timeout_seconds,
+                readback_retry_seconds=args.readback_retry_seconds,
+            )
+            registry = update_native_registry(
+                anchor_rel,
+                bundle,
+                log_dir,
+                tx_id=upload_info["tx_id"],
+                wallet_address=upload_info.get("wallet_address"),
+                gateway_url=upload_info.get("gateway_url"),
+            )
+            paid_upload_performed = True
+            registry_updated = True
             result = f"{result}_archived" if "archived" not in result else result
         else:
-            # For now, just register without paid upload (no JWK required)
-            update_native_registry(anchor_rel, bundle, log_dir)
-            result = f"{result}_archived" if "archived" not in result else result
+            registry = update_native_registry(anchor_rel, bundle, log_dir)
+            registry_updated = existing_entry is None
+            result = f"{result}_registered"
 
     write_summary(log_dir, {
         "schema": "trinity_native_ots_summary.v1",
@@ -509,8 +647,9 @@ def main() -> int:
         "anchor_ots_status": anchor.get("ots_status"),
         "anchor_bitcoin_verified": anchor.get("bitcoin_verified"),
         "anchor_bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded", False),
-        "paid_upload_performed": False,
-        "registry_updated": bundle is not None,
+        "paid_upload_performed": paid_upload_performed,
+        "registry_updated": registry_updated,
+        "native_ots_proof_bundle_archive": upload_info,
         "core_files_unchanged": True,
     })
 

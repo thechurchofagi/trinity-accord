@@ -59,8 +59,12 @@ def main() -> None:
     include_base64 = args.include_base64 and not args.no_base64
 
     anchor = load_json(anchor_path)
-    if anchor.get("schema") != "trinity_record_chain_ots_anchor.v1":
+    if anchor.get("schema") not in {
+        "trinity_record_chain_ots_anchor.v1",
+        "trinityaccord.native-record-chain-ots-anchor.v1",
+    }:
         raise SystemExit(f"anchor schema mismatch: {anchor.get('schema')}")
+    is_native = anchor.get("schema") == "trinityaccord.native-record-chain-ots-anchor.v1"
 
     anchored_file = Path(anchor.get("anchored_file", ""))
     if not anchored_file.exists():
@@ -93,9 +97,13 @@ def main() -> None:
         "schema": "trinity_record_chain_ots_arweave_bundle.v1",
         "chain_id": anchor.get("chain_id"),
         "chain_version": anchor.get("chain_version"),
-        "height": anchor.get("height"),
-        "entry_count": anchor.get("entry_count"),
-        "head_entry_hash": anchor.get("head_entry_hash"),
+        "height": anchor.get("height", anchor.get("latest_record_index")),
+        "entry_count": anchor.get("entry_count", anchor.get("native_record_count")),
+        "head_entry_hash": anchor.get("head_entry_hash", anchor.get("latest_record_sha256")),
+        "native_anchor": is_native,
+        "native_latest_record_id": anchor.get("latest_record_id"),
+        "native_latest_record_sha256": anchor.get("latest_record_sha256"),
+        "native_record_count": anchor.get("native_record_count"),
         "anchored_file_sha256": anchor.get("anchored_file_sha256"),
         "ots_status": anchor.get("ots_status"),
         "bitcoin_verified": anchor.get("bitcoin_verified"),
@@ -106,7 +114,7 @@ def main() -> None:
         "files": files,
         "semantics": (
             "Arweave bundle for an OTS proof of a stable Record-Chain head commitment. "
-            "This archive is outside main.chain.jsonl and does not modify entry_hash."
+            "This archive is separate from the main Record-Chain Arweave archive and does not modify entry_hash."
         ),
     }
 
