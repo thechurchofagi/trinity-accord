@@ -94,7 +94,9 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/run_native_ots_upgrade_verify.py \
-            --run-id "$NATIVE_OTS_RUN_ID"
+            --run-id "$NATIVE_OTS_RUN_ID" \
+            --enable-paid-upload \
+            --confirm-paid-upload "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
 
       - name: Summarize native OTS result
         if: always()
@@ -121,10 +123,14 @@ jobs:
           RESULT=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("result","missing"))' "$SUMMARY")
           echo "Native OTS result: $RESULT"
 
-          if [ "$RESULT" != "upgraded" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded_archived" ]; then
+          if [ "$RESULT" != "upgraded" ] && [ "$RESULT" != "verified" ] && [ "$RESULT" != "upgraded_archived" ] && [ "$RESULT" != "verified_archived" ]; then
             echo "No production commit for result=$RESULT"
             exit 0
           fi
+
+          python3 scripts/generate_record_chain_status.py
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/generate_sitemap.py
 
           git status --short
           git add \
@@ -132,7 +138,11 @@ jobs:
             record-chain/ots/native-arweave-bundles/ \
             record-chain/ots/native-arweave-registry.json \
             api/record-chain-native-ots-arweave-registry.json \
-            api/record-chain-native-ots-latest.json
+            api/record-chain-native-ots-latest.json \
+            api/record-chain-status.json \
+            api/public-home-status.json \
+            index.md \
+            sitemap.xml
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
@@ -141,8 +151,8 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ "$RESULT" = "verified" ]; then
-            git commit -m "chore: sync verified native OTS anchor and registry"
+          if [ "$RESULT" = "verified" ] || [ "$RESULT" = "verified_archived" ]; then
+            git commit -m "chore: archive verified native OTS proof bundle"
           elif [ "$RESULT" = "upgraded_archived" ]; then
             git commit -m "chore: archive upgraded native OTS proof bundle"
           else

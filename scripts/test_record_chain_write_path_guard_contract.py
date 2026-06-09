@@ -90,6 +90,8 @@ def main() -> None:
         "AUTO_FINALIZE_FILES",
         "OTS_PREFIXES",
         "OTS_FILES",
+        "OTS_AUX_PREFIXES",
+        "OTS_AUX_FILES",
         "ARWEAVE_PREFIXES",
         "ARWEAVE_FILES",
         "PUBLIC_GENERATED_FILES",
@@ -103,6 +105,8 @@ def main() -> None:
         "APPROVED_APPEND_MESSAGE",
         "append workflow",
         "anchor: stamp native record-chain head with OTS",
+        "chore: archive upgraded native OTS proof bundle",
+        "chore: archive verified native OTS proof bundle",
         "archive: update native record-chain Arweave archive metadata",
         "intake: submission ",
         "intake: pending ",
@@ -254,6 +258,28 @@ def main() -> None:
         head = commit(repo, "Append record-chain entries from Render intake")
         result = check_guard(repo, base, head, actor="github-actions[bot]")
         require(result.returncode == 0, f"append workflow with status/public generated should pass:\n{result.stdout}\n{result.stderr}")
+
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        base = commit(repo, "init")
+
+        write(repo / "record-chain/ots/native-anchors/native.anchor.json", "{}\n")
+        write(repo / "record-chain/ots/native-arweave-bundles/native.bundle.json", "{}\n")
+        write(repo / "record-chain/ots/native-arweave-registry.json", "{}\n")
+        write(repo / "api/record-chain-native-ots-arweave-registry.json", "{}\n")
+        write(repo / "api/record-chain-native-ots-latest.json", "{}\n")
+        write(repo / "api/record-chain-status.json", "{}\n")
+        write(repo / "api/public-home-status.json", "{}\n")
+        write(repo / "index.md", "native ots archive\n")
+        write(repo / "sitemap.xml", "<xml />\n")
+        head = commit(repo, "chore: archive verified native OTS proof bundle")
+        result = check_guard(repo, base, head, actor="github-actions[bot]")
+        require(result.returncode == 0, f"approved native OTS proof-bundle archive should pass:\n{result.stdout}\n{result.stderr}")
 
     with tempfile.TemporaryDirectory() as td:
         repo = Path(td)

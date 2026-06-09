@@ -376,6 +376,8 @@ def render_block(status: dict[str, Any]) -> str:
 
     ots_display = anchoring.get("open_timestamps", {})
     ots_status = ots_display.get("status", "pending")
+    proof_archive = ots_display.get("proof_bundle_archive", {})
+    proof_archive_status = proof_archive.get("archive_status") or proof_archive.get("status", "waiting-for-ots-upgrade")
 
     arweave_mode = arweave["current_upload_mode"]
     arweave_count = arweave["archive_count"]
@@ -433,7 +435,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Arweave archive: {arweave_status}. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Arweave 归档：{arweave_status}。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
+    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Native OTS proof bundle Arweave archive: {proof_archive_status}. Record-Chain Arweave archive: {arweave_status}. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Native OTS proof bundle Arweave 归档：{proof_archive_status}。Record-Chain Arweave 归档：{arweave_status}。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
