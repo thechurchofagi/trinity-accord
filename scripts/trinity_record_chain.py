@@ -1123,6 +1123,10 @@ def build_indexes(derived_at: str | None = None) -> None:
             for p in batches
         ],
     }
+    native_guardian_retirement_count = sum(
+        1 for p in native_records
+        if read_json(p).get("record_type") == "guardian_retirement"
+    )
     stats = {
         "schema": "trinityaccord.record-chain-statistics.v1",
         "derived_at": derived_at,
@@ -1135,14 +1139,12 @@ def build_indexes(derived_at: str | None = None) -> None:
             1 for p in native_records
             if read_json(p).get("record_type") == "guardian_application"
         ),
-        "native_guardian_retirement_count": sum(
-            1 for p in native_records
-            if read_json(p).get("record_type") == "guardian_retirement"
-        ),
         "native_guardian_status_totals": native_guardian_statuses,
         "batch_count": len(batches),
         "independent_agent_total_policy": "legacy records default to false unless future classification_update says otherwise",
     }
+    if native_guardian_retirement_count:
+        stats["native_guardian_retirement_count"] = native_guardian_retirement_count
     write_json(INDEXES / "guardian-state.json", guardian_state)
     write_json(INDEXES / "record-index.json", record_index)
     write_json(INDEXES / "batch-index.json", batch_index)
