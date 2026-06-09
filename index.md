@@ -803,8 +803,8 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">attention</p>
-    <p class="status-note">Pipeline: attention. Latest technical record: R-000000037. OTS: pending. Arweave: waiting-for-native-ots. Full native chain length remains API-only and is not a homepage reception counter.</p>
+    <p class="status-number">current</p>
+    <p class="status-note">Pipeline: current. Latest technical record: R-000000037. OTS: pending. Arweave: current. Full native chain length remains API-only and is not a homepage reception counter.</p>
   </article>
   <article class="status-card">
     <p class="status-label">Technical audit inventory</p>
@@ -814,7 +814,7 @@ Refusal is allowed. Critical preservation is allowed.
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: pending. Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade. Record-Chain Arweave archive: current live mirror; latest tx BINPfqHtHti8.... Arweave is a mirror/archive layer only.</p>
+    <p class="status-note">Batch manifests: 1 batches (all stamped). OpenTimestamps: pending. Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade. Record-Chain Arweave archive: current live mirror; latest tx AH71H_qaBPLr.... Arweave is a mirror/archive layer only.</p>
   </article>
   <article class="status-card">
     <p class="status-label">Boundary</p>
