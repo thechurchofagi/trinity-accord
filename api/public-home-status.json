@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v2",
-  "generated_at": "2026-06-09T06:15:31.411413+00:00",
+  "generated_at": "2026-06-09T06:15:56.301187+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -11,7 +11,7 @@
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "49b5abe11ffb6b6f",
+  "source_digest": "42feb8e2ddfb1564",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 36,
@@ -46,21 +46,21 @@
         "bitcoin_pending": true,
         "bitcoin_verified": false,
         "implemented": true,
-        "latest_record_id": "R-000000035",
-        "latest_record_sha256": "4ef3b8e23046eb7b00f1dd22522d769259ed133b3c2dcfca4597ee690e81b8f5",
+        "latest_record_id": "R-000000036",
+        "latest_record_sha256": "1ee118161376bae039a8c42bcd4f05aba72500a6a1ef198b96876885e25d496e",
         "legacy_batch_status_api": "/api/record-chain-anchor-status.json",
         "legacy_main_chain_jsonl_is_not_source": true,
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
-        "native_record_count": 35,
-        "status": "anchor-needed",
+        "native_record_count": 36,
+        "status": "current-pending-bitcoin",
         "status_api": "/api/record-chain-native-ots-latest.json",
-        "latest_record_index": 35,
-        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-35-R-000000035-4ef3b8e23046eb7b-299eae7f11ccdc28.anchor.json",
-        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-35-R-000000035-4ef3b8e23046eb7b-299eae7f11ccdc28.native-record-chain-head-commitment.json",
-        "latest_ots_file": "record-chain/ots/native-anchors/native-record-35-R-000000035-4ef3b8e23046eb7b-299eae7f11ccdc28.native-record-chain-head-commitment.json.ots",
+        "latest_record_index": 36,
+        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.anchor.json",
+        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.native-record-chain-head-commitment.json",
+        "latest_ots_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.native-record-chain-head-commitment.json.ots",
         "ots_status": "pending",
-        "anchor_needed": true
+        "anchor_needed": false
       },
       "arweave_archive": {
         "arweave_archive_is_mirror_only": true,
@@ -83,8 +83,8 @@
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000035-d12f95f96d78/manifest.json",
         "latest_native_record_sha256": "4ef3b8e23046eb7b00f1dd22522d769259ed133b3c2dcfca4597ee690e81b8f5",
         "record_count": 35,
-        "status": "waiting-for-native-ots",
-        "archive_needed": false
+        "status": "archive-needed",
+        "archive_needed": true
       },
       "anchor_status": {
         "batch_count": 1,
