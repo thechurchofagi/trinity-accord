@@ -38,6 +38,13 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Restore static Record-Chain builder download
+        run: |
+          set -euo pipefail
+          mkdir -p ./_site/downloads
+          cp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
+          test -s ./_site/downloads/record-chain-builder.mjs
+          ls -l ./_site/downloads/record-chain-builder.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
