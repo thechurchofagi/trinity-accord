@@ -1,0 +1,30 @@
+{
+  "schema": "trinityaccord.homepage-visibility.v1",
+  "status": "active",
+  "purpose": "Explicit homepage primary-counter visibility classification. This sidecar does not mutate append-only record files; it classifies immutable record_id + record_sha256 pairs for homepage rendering only.",
+  "default_for_unlisted_records": {
+    "counts_toward_primary_counter": false,
+    "reason": "Records without explicit homepage visibility classification are audit/technical records only."
+  },
+  "records": [
+    {
+      "record_id": "R-000000033",
+      "record_index": 33,
+      "record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+      "record_type": "guardian_application",
+      "homepage_visibility": {
+        "classification": "official_live_reception",
+        "counts_toward_primary_counter": true,
+        "counts_toward_native_chain_length": false,
+        "reason": "First production-live founding Guardian application record classified for homepage primary reception display. The classification is explicit and does not make record-chain length a homepage reception counter.",
+        "excludes_historical_test_smoke_legacy_and_maintenance_records": true
+      }
+    }
+  ],
+  "boundary": {
+    "homepage_visibility_is_not_authority": true,
+    "homepage_visibility_is_not_attestation": true,
+    "homepage_visibility_is_not_amendment": true,
+    "bitcoin_originals_prevail": true
+  }
+}
