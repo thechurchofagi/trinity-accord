@@ -61,6 +61,8 @@ jobs:
       - name: Regenerate public homepage counters
         run: |
           python scripts/generate_public_home_status.py
+          python scripts/patch_public_home_status_primary.py
+          python scripts/check_public_home_status_contract.py
           python scripts/generate_sitemap.py
 
       - name: Commit anchor updates
