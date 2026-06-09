@@ -457,6 +457,18 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
     gac.guardian_public_key_sha256 = pubSha;
   }
 
+  if (recordDraft.record_type === "guardian_retirement") {
+    if (opts.guardianKeySha && opts.guardianKeySha !== pubSha) {
+      errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
+    }
+
+    if (recordDraft.guardian_public_key_sha256 && recordDraft.guardian_public_key_sha256 !== pubSha) {
+      errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+
+    recordDraft.guardian_public_key_sha256 = pubSha;
+  }
+
   const linked = recordDraft.optional_linked_guardian_application_request;
   if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
     if (linked.guardian_public_key_sha256 && linked.guardian_public_key_sha256 !== pubSha) {

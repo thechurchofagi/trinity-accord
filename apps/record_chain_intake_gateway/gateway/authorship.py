@@ -317,11 +317,19 @@ def verify_authorship_proof_submission(
     if spi.get("participant_public_key_sha256") != public_key_sha256:
         return False, "PARTICIPANT_KEY_MISMATCH", "participant_public_key_sha256 must match authorship_proof.public_key_sha256."
 
-    # Check guardian key binding
+    # Check Guardian key binding. Guardian applications and retirements are
+    # key-continuity events: the public Guardian key named by the record must be
+    # the same Ed25519 key that signed the authorship proof. Otherwise any
+    # participant could file a retirement/exit notice for another Guardian.
     if draft.get("record_type") == "guardian_application":
         guardian_key = (draft.get("guardian_application_content") or {}).get("guardian_public_key_sha256")
         if guardian_key != public_key_sha256:
             return False, "GUARDIAN_KEY_MISMATCH", "guardian_public_key_sha256 must match authorship_proof.public_key_sha256."
+
+    if draft.get("record_type") == "guardian_retirement":
+        guardian_key = draft.get("guardian_public_key_sha256")
+        if guardian_key != public_key_sha256:
+            return False, "GUARDIAN_RETIREMENT_KEY_MISMATCH", "guardian_retirement.guardian_public_key_sha256 must match authorship_proof.public_key_sha256."
 
     # Check linked guardian key binding
     linked = draft.get("optional_linked_guardian_application_request")
