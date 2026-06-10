@@ -314,7 +314,10 @@ def ots_upgrade_and_verify(
 
     Returns (anchor_dict, success_bool).
     """
-    if not shutil.which(ots_bin):
+    ots_found = shutil.which(ots_bin)
+    print(f"[ots-upgrade] ots_bin={ots_bin} found={ots_found} skip_upgrade={skip_upgrade}", file=sys.stderr)
+
+    if not ots_found:
         raise SystemExit("OTS CLI missing. Install: python3 -m pip install -r requirements-ots.txt")
 
     cmd = [
@@ -326,6 +329,7 @@ def ots_upgrade_and_verify(
     ]
     if not skip_upgrade:
         cmd.append("--upgrade")
+    print(f"[ots-upgrade] cmd={' '.join(cmd)}", file=sys.stderr)
     if bitcoin_node_url:
         cmd += ["--bitcoin-node-url", bitcoin_node_url]
     if strict:
@@ -337,6 +341,12 @@ def ots_upgrade_and_verify(
         stdout_file=log_dir / ("ots.strict.stdout.log" if strict else "ots.nonstrict.stdout.log"),
         stderr_file=log_dir / ("ots.strict.stderr.log" if strict else "ots.nonstrict.stderr.log"),
     )
+
+    print(f"[ots-upgrade] returncode={result.returncode}", file=sys.stderr)
+    if result.stdout:
+        print(f"[ots-upgrade] stdout={result.stdout.strip()[-500:]}", file=sys.stderr)
+    if result.stderr:
+        print(f"[ots-upgrade] stderr={result.stderr.strip()[-500:]}", file=sys.stderr)
 
     anchor = validate_native_anchor(anchor_rel)
 

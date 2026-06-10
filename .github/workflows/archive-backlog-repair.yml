@@ -128,7 +128,8 @@ jobs:
             api/record-chain-status.json \
             api/public-home-status.json \
             index.md \
-            sitemap.xml
+            sitemap.xml \
+            record-chain/audit/
 
           git diff --cached --name-only | while read -r path; do
             case "$path" in
