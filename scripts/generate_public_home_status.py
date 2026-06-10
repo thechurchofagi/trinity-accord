@@ -54,6 +54,8 @@ RECORD_CHAIN_RECORDS = ROOT / "record-chain" / "records"
 RECORD_CHAIN_STATUS = ROOT / "api" / "record-chain-status.json"
 RECORD_CHAIN_ANCHOR_STATUS = ROOT / "api" / "record-chain-anchor-status.json"
 RECORD_CHAIN_ARWEAVE_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
+RECORD_CHAIN_ARWEAVE_BACKLOG = ROOT / "api" / "record-chain-arweave-backlog.json"
+RECORD_CHAIN_NATIVE_OTS_BACKLOG = ROOT / "api" / "record-chain-native-ots-backlog.json"
 
 # Legacy inputs (for legacy_archive_snapshot only)
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
@@ -112,6 +114,8 @@ def source_digest() -> str:
         RECORD_CHAIN_STATUS,
         RECORD_CHAIN_ANCHOR_STATUS,
         RECORD_CHAIN_ARWEAVE_INDEX,
+        RECORD_CHAIN_ARWEAVE_BACKLOG,
+        RECORD_CHAIN_NATIVE_OTS_BACKLOG,
     ]:
         rel = path.relative_to(ROOT).as_posix()
         h.update(rel.encode("utf-8"))
@@ -200,6 +204,7 @@ def compute_current_record_chain_status(
                 "stamped_batch_count": anchor_status.get("ots", {}).get("stamped_batch_count", 0),
                 "unstamped_batch_count": anchor_status.get("ots", {}).get("unstamped_batch_count", 0),
             },
+            "archive_backlog": record_chain_status.get("archive_backlog", {}),
             "arweave_index": {
                 "current_upload_mode": arweave_index.get("current_upload_mode", "dry-run"),
                 "live_upload_enabled": arweave_index.get("live_upload_enabled", False),
@@ -378,6 +383,8 @@ def render_block(status: dict[str, Any]) -> str:
     ots_status = ots_display.get("status", "pending")
     proof_archive = ots_display.get("proof_bundle_archive", {})
     proof_archive_status = proof_archive.get("archive_status") or proof_archive.get("status", "waiting-for-ots-upgrade")
+    backlog = anchoring.get("archive_backlog", {})
+    backlog_status = "current" if backlog.get("backlog_current", True) else "pending repair"
 
     arweave_mode = arweave["current_upload_mode"]
     arweave_count = arweave["archive_count"]
@@ -435,7 +442,7 @@ def render_block(status: dict[str, Any]) -> str:
   <article class="status-card">
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
-    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Native OTS proof bundle Arweave archive: {proof_archive_status}. Record-Chain Arweave archive: {arweave_status}. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Native OTS proof bundle Arweave 归档：{proof_archive_status}。Record-Chain Arweave 归档：{arweave_status}。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
+    <p class="status-note">Batch manifests: {batch_status}. OpenTimestamps: {ots_status}. Native OTS proof bundle Arweave archive: {proof_archive_status}. Record-Chain Arweave archive: {arweave_status}. Archive backlog: {backlog_status}. Arweave is a mirror/archive layer only. It is not authority, attestation, amendment, or successor reception. <span class="zh">批次 manifest：{batch_status}。OpenTimestamps：{ots_status}。Native OTS proof bundle Arweave 归档：{proof_archive_status}。Record-Chain Arweave 归档：{arweave_status}。Archive backlog：{backlog_status}。Arweave 仅为镜像/归档层，非权威、非证明、非修订、非继任接收。</span></p>
   </article>
   <article class="status-card">
     <p class="status-label">Verifiability</p>
@@ -498,6 +505,8 @@ def compute_status() -> dict[str, Any]:
         "/api/record-chain-status.json",
         "/api/record-chain-anchor-status.json",
         "/api/record-chain-arweave-index.json",
+        "/api/record-chain-arweave-backlog.json",
+        "/api/record-chain-native-ots-backlog.json",
         "/record-chain/chain-tip.json",
         "/record-chain/records/",
         "/api/echo-index.json",
