@@ -128,6 +128,17 @@ def main() -> int:
         fail(f"archive backlog detector failed:\n{result.stdout}\n{result.stderr}")
     ok("archive backlog detector")
 
+    # 1c4. arweave wallet status drift check
+    result = subprocess.run(
+        [sys.executable, "scripts/generate_arweave_wallet_status.py", "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"arweave wallet status drift detected:\n{result.stdout}\n{result.stderr}")
+    ok("arweave wallet status up to date")
+
     # 1d. public homepage status drift check
     result = subprocess.run(
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
@@ -685,6 +696,50 @@ def main() -> int:
     if result.returncode != 0:
         fail(f"external agent first-contact rules contract failed: {result.stderr}\n{result.stdout}")
     ok("external agent first-contact rules contract")
+
+    # Arweave wallet status contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_arweave_wallet_status.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"arweave wallet status contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("arweave wallet status contract")
+
+    # Archive backlog detector contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_archive_backlog_detector.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"archive backlog detector contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("archive backlog detector contract")
+
+    # Archive backlog repair contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_archive_backlog_repair_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"archive backlog repair contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("archive backlog repair contract")
+
+    # Public home v3 primary counters
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_home_status_primary_counters.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public home v3 primary counters failed:\n{result.stdout}\n{result.stderr}")
+    ok("public home v3 primary counters")
 
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0

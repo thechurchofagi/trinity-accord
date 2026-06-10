@@ -37,13 +37,15 @@ def main() -> int:
         "contents: write",
         "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
         "fetch-depth: 0",
-        "git pull --rebase origin",
         "python3 scripts/detect_archive_backlog.py --write",
         "--kind record_chain_arweave --max-items 1 --mode live",
         "--kind native_ots_bundle --max-items 1 --enable-paid-upload",
-        "archive: repair record-chain archive backlog",
-        "Forbidden archive backlog repair write",
+        "archive: repair backlog and wallet status metadata",
+        "Forbidden write path",
         "record-chain/chain-tip.json",
+        "generate_arweave_wallet_status.py --use-env-balance",
+        "arweave-wallet-ledger.json",
+        "arweave-wallet-status.json",
     ]:
         require(needle in workflow, f"workflow missing {needle}")
 
@@ -59,7 +61,7 @@ def main() -> int:
     for needle in ["--anchor-file", "--all-backlog", "--max-items", "waiting_for_key", "upload_failed", "readback_failed", "arweave_archived"]:
         require(needle in runner, f"native OTS runner missing {needle}")
 
-    for needle in ["BACKLOG_FILES", "archive_backlog", "archive: repair record-chain archive backlog", "github-actions[bot]"]:
+    for needle in ["BACKLOG_FILES", "archive_backlog", "archive: repair backlog and wallet status metadata", "github-actions[bot]"]:
         require(needle in guard, f"write-path guard missing {needle}")
 
     print("PASS: archive backlog repair contract")

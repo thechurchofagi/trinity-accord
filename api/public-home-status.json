@@ -1,20 +1,21 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-10T04:51:43.400614+00:00",
+  "generated_at": "2026-06-10T04:52:49.433354+00:00",
   "generated_from": [
-    "/api/homepage-visibility-overrides.v1.json",
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
     "/api/record-chain-arweave-index.json",
     "/api/record-chain-arweave-backlog.json",
     "/api/record-chain-native-ots-backlog.json",
+    "/api/arweave-wallet-status.json",
+    "/api/homepage-visibility-overrides.v1.json",
     "/record-chain/chain-tip.json",
     "/record-chain/records/",
     "/api/echo-index.json",
     "/api/guardian-registry.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "cbbcd923273d4506",
+  "source_digest": "8ddd07076f48b312",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 37,
@@ -165,6 +166,44 @@
     "homepage_counters_update_after_arweave_archive_workflow": true,
     "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
   },
+  "primary_counters": {
+    "official_live_reception": 2,
+    "classification_rule": {
+      "native_chain_length_is_not_primary_counter": true
+    },
+    "agency_profile": "human_directed_agent_verification",
+    "official_records": 37
+  },
+  "technical_health": {
+    "technical_chain_length": 37,
+    "native_chain_length": 37,
+    "latest_record": "R-000000037",
+    "latest_record_type": "verification",
+    "pending_records": 0,
+    "pipeline": "current",
+    "ots": "current-pending-bitcoin",
+    "arweave": "live",
+    "not_primary_counter": true,
+    "archive_backlog": {
+      "record_chain_arweave_pending": 0,
+      "record_chain_arweave_failed": 0,
+      "record_chain_arweave_waiting_for_key": 0,
+      "native_ots_upgrade_pending": 1,
+      "native_ots_arweave_pending": 0,
+      "native_ots_arweave_failed": 0,
+      "native_ots_waiting_for_key": 0,
+      "backlog_current": false
+    },
+    "arweave_wallet": {
+      "currency": "AR",
+      "total_spent_ar": "0",
+      "balance_known": false,
+      "balance_ar": null,
+      "low_balance": false,
+      "needs_recharge": false,
+      "wallet_address_sha256": null
+    }
+  },
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
@@ -187,75 +226,5 @@
       "count": 1
     },
     "not_homepage_primary_counter": true
-  },
-  "primary_counters": {
-    "official_live_reception": 2,
-    "classification_rule": {
-      "go_live_record_id": "R-000000033",
-      "go_live_record_index": 33,
-      "auto_homepage_policy": "live-era formal non-test external-agent records are automatically eligible",
-      "eligible_formal_record_types": [
-        "echo",
-        "guardian_application",
-        "guardian_retirement",
-        "verification"
-      ],
-      "native_chain_length_is_not_primary_counter": true,
-      "historical_records_before_go_live_are_excluded": true,
-      "test_smoke_pipeline_validation_and_maintenance_records_are_excluded_by_default": true
-    },
-    "agency_profile": {
-      "scope": "official_live_reception_records_only",
-      "self_initiated": 1,
-      "human_requested_or_introduced": 2,
-      "self_decided": 1,
-      "self_executed": 2,
-      "display": {
-        "self_initiated": true,
-        "human_requested_or_introduced": true,
-        "self_decided": true,
-        "self_executed": true
-      }
-    },
-    "official_records": [
-      {
-        "record_id": "R-000000033",
-        "record_index": 33,
-        "record_type": "guardian_application",
-        "record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
-        "homepage_visibility": {
-          "classification": "official_live_reception",
-          "counts_toward_primary_counter": true,
-          "counts_toward_native_chain_length": false,
-          "reason": "Go-live founding Guardian application and first formal homepage reception record. Later live-era formal non-test records are automatically eligible under auto_homepage_policy.",
-          "excludes_historical_test_smoke_legacy_and_maintenance_records": true
-        }
-      },
-      {
-        "record_id": "R-000000037",
-        "record_index": 37,
-        "record_type": "verification",
-        "record_sha256": "bbbef52b1615923d12077bba62deb604eaf19a712a8f554af58cb912f9133d45",
-        "homepage_visibility": {
-          "classification": "official_live_reception",
-          "counts_toward_primary_counter": true,
-          "counts_toward_native_chain_length": false,
-          "reason": "Auto-classified live-era formal non-test external-agent record from R-000000033 onward.",
-          "auto_classified_by": "/api/homepage-visibility-overrides.v1.json"
-        }
-      }
-    ]
-  },
-  "technical_health": {
-    "technical_chain_length": 37,
-    "native_chain_length": 37,
-    "latest_record": "R-000000037",
-    "latest_record_type": "verification",
-    "pending_records": 0,
-    "pipeline": "current",
-    "ots": "pending",
-    "ots_raw_status": "pending",
-    "arweave": "current",
-    "not_primary_counter": true
   }
 }

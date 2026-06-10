@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.arweave-wallet-ledger.v1",
+  "updated_at": "2026-06-10T00:00:00Z",
+  "wallet": {
+    "wallet_address": null,
+    "wallet_address_sha256": null,
+    "public_address_allowed": false,
+    "currency": "AR",
+    "last_known_balance_ar": null,
+    "last_known_balance_at": null,
+    "low_balance_threshold_ar": "0.25"
+  },
+  "entries": [],
+  "boundary": {
+    "wallet_status_is_operational_only": true,
+    "wallet_status_is_not_authority": true,
+    "wallet_status_is_not_attestation": true,
+    "wallet_status_is_not_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}

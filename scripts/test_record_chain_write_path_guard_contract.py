@@ -95,7 +95,7 @@ def main() -> None:
         "ARWEAVE_PREFIXES",
         "ARWEAVE_FILES",
         "BACKLOG_FILES",
-        "archive: repair record-chain archive backlog",
+        "archive: repair backlog and wallet status metadata",
         "archive_backlog",
         "PUBLIC_GENERATED_FILES",
         "MAINTENANCE_OVERRIDE_TOKEN",
@@ -335,7 +335,7 @@ def main() -> None:
         write(repo / "api/public-home-status.json", "{}\n")
         write(repo / "index.md", "archive backlog\n")
         write(repo / "sitemap.xml", "<xml />\n")
-        head = commit(repo, "archive: repair record-chain archive backlog")
+        head = commit(repo, "archive: repair backlog and wallet status metadata")
         result = check_guard(repo, base, head, actor="github-actions[bot]")
         require(result.returncode == 0, f"approved archive backlog repair should pass:\n{result.stdout}\n{result.stderr}")
 
@@ -347,7 +347,7 @@ def main() -> None:
         write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
         base = commit(repo, "init")
         write(repo / "record-chain/arweave-backlog.json", "{}\n")
-        head = commit(repo, "archive: repair record-chain archive backlog")
+        head = commit(repo, "archive: repair backlog and wallet status metadata")
         result = check_guard(repo, base, head, actor="human-user")
         require(result.returncode != 0, "human actor spoofing archive backlog repair message must fail")
 

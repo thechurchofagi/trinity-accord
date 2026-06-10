@@ -77,7 +77,7 @@ APPROVED_NATIVE_OTS_SYNC_MESSAGE = "chore: sync upgraded native OTS anchor and r
 APPROVED_NATIVE_OTS_UPGRADED_ARCHIVE_MESSAGE = "chore: archive upgraded native OTS proof bundle"
 APPROVED_NATIVE_OTS_VERIFIED_ARCHIVE_MESSAGE = "chore: archive verified native OTS proof bundle"
 APPROVED_ARWEAVE_MESSAGE = "archive: update native record-chain Arweave archive metadata"
-APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE = "archive: repair record-chain archive backlog"
+APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE = "archive: repair backlog and wallet status metadata"
 
 PROTECTED_CATEGORIES = {
     "gateway_intake",
