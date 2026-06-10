@@ -1,8 +1,35 @@
 {
   "schema": "trinityaccord.native-ots-arweave-registry.v1",
-  "entries": [],
+  "entries": [
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "74684e4c2585b43951c24462ef3306060080811e33d2646237b12a4d820fcfc2",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "b943d3076cd401e9d0a4a4cda97833d3d60995a4a4befdb4c957349d235df5c5",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "f13f29636aaec0523101eec6963ebe07201746c9079bd177f8d1626288af63a3",
+      "ots_status": "upgraded",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": false,
+      "strict_bitcoin_verified": false,
+      "tx_id": "W71cJFZoZ0s6XBrJbebiFROz_GvO3QBEc3d2y_THlQs",
+      "gateway_url": "https://arweave.net/W71cJFZoZ0s6XBrJbebiFROz_GvO3QBEc3d2y_THlQs",
+      "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+      "archive_status": "arweave_archived",
+      "uploaded_at": "2026-06-10T13:38:13Z",
+      "registered_at": "2026-06-10T13:38:13Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
+    }
+  ],
   "created_at": "2026-06-09T00:00:00Z",
-  "updated_at": "2026-06-09T00:00:00Z",
+  "updated_at": "2026-06-10T13:38:13Z",
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
     "native_ots_proof_bundle_arweave_archive_is_not_authority": true,

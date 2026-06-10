@@ -1,0 +1,25 @@
+{
+  "schema": "trinity_native_ots_summary.v1",
+  "run_id": "native-ots-20260610T133232Z",
+  "result": "upgraded_archived",
+  "anchor_ots_status": "upgraded",
+  "anchor_bitcoin_verified": false,
+  "anchor_bitcoin_attestation_embedded": true,
+  "paid_upload_performed": true,
+  "registry_updated": true,
+  "native_ots_proof_bundle_archive": {
+    "tx_id": "W71cJFZoZ0s6XBrJbebiFROz_GvO3QBEc3d2y_THlQs",
+    "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+    "gateway_url": "https://arweave.net/W71cJFZoZ0s6XBrJbebiFROz_GvO3QBEc3d2y_THlQs",
+    "actual_delta_winston": "0",
+    "actual_delta_ar": "0.000000000000",
+    "estimated_upload_cost_winston": "2511389742",
+    "estimated_upload_cost_ar": "0.002511389742",
+    "balance_after_ar": "2.888135426017",
+    "balance_after_winston": "2888135426017",
+    "upload_result": "record-chain/audit/native-ots/native-ots-20260610T133232Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json",
+    "readback_result": "record-chain/audit/native-ots/native-ots-20260610T133232Z/paid-upload/11b-arweave-readback-verify.native_ots_proof_bundle.json"
+  },
+  "core_files_unchanged": true,
+  "generated_at": "2026-06-10T13:38:13Z"
+}
