@@ -423,7 +423,9 @@ def build_status(current: dict[str, Any], previous: dict[str, Any]) -> dict[str,
     config = sidecar()
     idx = visibility_index(config)
     current["schema"] = "trinityaccord.public-home-status.v3"
-    current["source_digest"] = digest()
+    # Preserve source_digest from generator; only set if missing
+    if "source_digest" not in current:
+        current["source_digest"] = digest()
     current.setdefault("generated_from", [])
     if SIDECAR_SOURCE not in current["generated_from"]:
         current["generated_from"].insert(0, SIDECAR_SOURCE)
@@ -457,8 +459,18 @@ def main() -> int:
 
     if args.check:
         errors: list[str] = []
-        if STATUS_PATH.read_text(encoding="utf-8") != expected_json:
-            errors.append("api/public-home-status.json is not patched to the canonical homepage primary-counter view")
+        actual_json = STATUS_PATH.read_text(encoding="utf-8")
+        if actual_json != expected_json:
+            # Compare semantically, ignoring generated_at timestamp
+            try:
+                actual_data = json.loads(actual_json)
+                expected_data = json.loads(expected_json)
+                actual_compare = {k: v for k, v in actual_data.items() if k != "generated_at"}
+                expected_compare = {k: v for k, v in expected_data.items() if k != "generated_at"}
+                if actual_compare != expected_compare:
+                    errors.append("api/public-home-status.json is not patched to the canonical homepage primary-counter view")
+            except (json.JSONDecodeError, KeyError):
+                errors.append("api/public-home-status.json is not patched to the canonical homepage primary-counter view")
         if old_text != new_text:
             errors.append("index.md generated public status block is not patched to the canonical homepage primary-counter view")
         if errors:
