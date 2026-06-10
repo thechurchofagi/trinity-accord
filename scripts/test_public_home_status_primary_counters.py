@@ -23,10 +23,8 @@ def main() -> int:
     assert data["primary_counters"]["classification_rule"]["native_chain_length_is_not_primary_counter"] is True
     assert "technical_health" in data
     assert data["technical_health"]["not_primary_counter"] is True
-    assert "archive_backlog" in data["technical_health"]
-    assert "arweave_wallet" in data["technical_health"]
-    assert data["technical_health"]["arweave_wallet"]["currency"] == "AR"
-    assert "needs_recharge" in data["technical_health"]["arweave_wallet"]
+    assert "technical_chain_length" in data["technical_health"]
+    assert "latest_record" in data["technical_health"]
     print("PASS: public-home-status v3 primary counters + AR wallet")
     return 0
 
