@@ -6,17 +6,17 @@
       "key": "82741119d21e11b42cf4627c5ae5575a749db9d16ae141797a5bd4e616872b2a",
       "kind": "native_ots_bundle",
       "record_index": 33,
-      "archive_status": "upgrade_due",
+      "archive_status": "upgrade_failed",
       "anchored_file_sha256": "74684e4c2585b43951c24462ef3306060080811e33d2646237b12a4d820fcfc2",
       "ots_status": "pending",
       "anchor_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.anchor.json",
       "bundle_file": null,
       "bundle_sha256": null,
       "tx_id": null,
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "last_error": null,
-      "next_action": "upgrade_native_ots_anchor"
+      "retry_count": 1,
+      "last_attempt_at": "2026-06-10T13:20:06Z",
+      "last_error": "{\n  \"anchor_bitcoin_attestation_embedded\": false,\n  \"anchor_bitcoin_verified\": false,\n  \"anchor_ots_status\": \"pending\",\n  \"core_files_unchanged\": true,\n  \"generated_at\": \"2026-06-10T13:20:06Z\",\n  \"native_ots_proof_bundle_archive\": null,\n  \"paid_upload_performed\": false,\n  \"registry_updated\": false,\n  \"result\": \"pending\",\n  \"run_id\": \"native-ots-20260610T132006Z\",\n  \"schema\": \"trinity_native_ots_summary.v1\"\n}",
+      "next_action": "retry_native_ots_upgrade"
     },
     {
       "key": "020f96534595062f6b63b1f753c71af66856c891521cc50c5b5d428cc1f9619f",
@@ -85,8 +85,8 @@
   ],
   "summary": {
     "waiting_for_upgrade_count": 1,
-    "upgrade_due_count": 4,
-    "upgrade_failed_count": 0,
+    "upgrade_due_count": 3,
+    "upgrade_failed_count": 1,
     "pending_upload_count": 0,
     "failed_upload_count": 0,
     "readback_failed_count": 0,
