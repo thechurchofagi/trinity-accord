@@ -43,7 +43,7 @@
     "record-chain/ots/native-anchors/native-record-37-R-000000037-bbbef52b1615923d-d7c0a9c39df3128c.native-record-chain-head-commitment.json.ots"
   ],
   "ots_upgrade_exit_code": 0,
-  "ots_upgrade_stderr": "Got 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org\nGot 1 attestation(s) from https://btc.calendar.catallaxy.com\nGot 1 attestation(s) from https://bob.btc.calendar.opentimestamps.org\nGot 1 attestation(s) from https://finney.calendar.eternitywall.com\nSuccess! Timestamp complete\n",
+  "ots_upgrade_stderr": "Success! Timestamp complete\n",
   "ots_upgrade_stdout": "",
   "ots_verify_command": null,
   "ots_verify_exit_code": null,
@@ -94,5 +94,5 @@
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
   "strict_bitcoin_verified": false,
   "strict_verify_unavailable_reason": "no_bitcoin_node",
-  "verified_at": "2026-06-10T16:48:58Z"
+  "verified_at": "2026-06-10T19:56:41Z"
 }
