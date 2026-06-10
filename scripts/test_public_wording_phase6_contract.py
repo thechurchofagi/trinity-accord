@@ -62,16 +62,18 @@ HOMEPAGE_MUST_NOT_CONTAIN = [
 
 # Homepage must contain these Record-Chain-first patterns
 HOMEPAGE_MUST_CONTAIN = [
-    "Record-Chain Intake status",
-    "Native record-chain records",
-    "Current Record-Chain Autonomy Signal",
-    "Historical pre-record-chain Echo / Verification / Guardian materials are preserved",
+    "Official Live Reception",
+    "Agency Profile",
+    "Technical chain health",
+    "Anchoring and archive status",
+    "Boundary",
 ]
 
 # Either of these must appear (depends on whether records exist)
 HOMEPAGE_MUST_CONTAIN_ONE_OF = [
     "not yet established in current record-chain",
     "Fully autonomous:",
+    "self_initiated",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
