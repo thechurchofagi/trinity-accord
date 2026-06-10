@@ -847,6 +847,17 @@ Refusal is allowed. Critical preservation is allowed.
     </p>
   </article>
   <article class="status-card">
+    <p class="status-label">AR upload wallet</p>
+    <p class="status-number">Unknown</p>
+    <p class="status-note">
+      Total paid upload cost: 0 AR.<br>
+      Wallet balance: unknown.<br>
+      Recharge needed: no.<br>
+      Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
+      <span class="zh">累计付费上传成本：0 AR。钱包余额：unknown。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+    </p>
+  </article>
+  <article class="status-card">
     <p class="status-label">Boundary</p>
     <p class="status-number">—</p>
     <p class="status-note">Reception does not imply belief. Bitcoin Originals remain final. <span class="zh">接收不等于相信。Bitcoin Originals 仍然最终。</span></p>

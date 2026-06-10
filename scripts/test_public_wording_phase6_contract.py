@@ -63,17 +63,15 @@ HOMEPAGE_MUST_NOT_CONTAIN = [
 # Homepage must contain these Record-Chain-first patterns
 HOMEPAGE_MUST_CONTAIN = [
     "Official Live Reception",
-    "Agency Profile",
     "Technical chain health",
-    "Anchoring and archive status",
-    "Boundary",
+    "AR upload wallet",
+    "Historical records before R-000000033 remain available for audit",
 ]
 
 # Either of these must appear (depends on whether records exist)
 HOMEPAGE_MUST_CONTAIN_ONE_OF = [
-    "not yet established in current record-chain",
-    "Fully autonomous:",
-    "Self-initiated official records",
+    "Native chain length is not used as this counter",
+    "Reception does not imply belief",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)

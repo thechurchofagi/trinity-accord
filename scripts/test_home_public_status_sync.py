@@ -97,8 +97,8 @@ def main() -> int:
     phs = load_json(ROOT / "api" / "public-home-status.json")
     schema_version = phs.get("schema", "unknown")
 
-    if schema_version == "trinityaccord.public-home-status.v2":
-        # v2: Check new cards
+    if schema_version in ("trinityaccord.public-home-status.v2", "trinityaccord.public-home-status.v3"):
+        # v2/v3: Check new cards
         verifiability_display = card_number(block, "Verifiability", required=False)
         if verifiability_display == "NOT_FOUND":
             fail("no Verifiability card found in homepage")
