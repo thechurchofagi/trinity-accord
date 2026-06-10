@@ -46,10 +46,16 @@ def main() -> int:
         "generate_arweave_wallet_status.py",
         "arweave-wallet-ledger.json",
         "arweave-wallet-status.json",
+        "requirements-ots.txt",
+        "ots --help",
+        "record-chain/ots/native-anchors/",
+        "record-chain/ots/native-arweave-bundles/",
+        "record-chain/ots/native-arweave-registry.json",
+        "api/record-chain-native-ots-arweave-registry.json",
     ]:
         require(needle in workflow, f"workflow missing {needle}")
 
-    for needle in ["waiting_for_key", "upload_failed", "readback_failed", "archived", "retry_count", "last_attempt_at", "last_error", "next_action"]:
+    for needle in ["waiting_for_key", "upgrade_due", "upgrade_failed", "upgrade_native_ots_anchor", "retry_native_ots_upgrade", "upload_failed", "readback_failed", "archived", "retry_count", "last_attempt_at", "last_error", "next_action"]:
         require(needle in processor, f"processor missing {needle}")
 
     for needle in ["posted_pending_readback", "readback_failed", "retryable", "fs.writeFileSync(outPath"]:
@@ -58,7 +64,7 @@ def main() -> int:
     for needle in ["archive_status", "waiting_for_key", "upload_failed", "readback_failed", "hash_match", "refresh_archive_backlog"]:
         require(needle in builder, f"record-chain archive builder missing {needle}")
 
-    for needle in ["--anchor-file", "--all-backlog", "--max-items", "waiting_for_key", "upload_failed", "readback_failed", "arweave_archived"]:
+    for needle in ["--anchor-file", "--all-backlog", "--max-items", "upgrade_due", "upgrade_failed", "waiting_for_key", "upload_failed", "readback_failed", "arweave_archived", "is_current_latest_anchor"]:
         require(needle in runner, f"native OTS runner missing {needle}")
 
     for needle in ["BACKLOG_FILES", "archive_backlog", "archive: repair backlog and wallet status metadata", "github-actions[bot]"]:

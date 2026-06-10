@@ -47,6 +47,12 @@ jobs:
       - name: Install CI dependencies
         run: python -m pip install -r requirements-ci.txt
 
+      - name: Install OpenTimestamps client
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ots.txt
+          ots --help
+
       - name: Install Node dependencies
         run: npm ci
 
@@ -113,6 +119,10 @@ jobs:
             api/record-chain-arweave-backlog.json \
             record-chain/ots/native-ots-backlog.json \
             api/record-chain-native-ots-backlog.json \
+            record-chain/ots/native-anchors/ \
+            record-chain/ots/native-arweave-bundles/ \
+            record-chain/ots/native-arweave-registry.json \
+            api/record-chain-native-ots-arweave-registry.json \
             record-chain/arweave-wallet-ledger.json \
             api/arweave-wallet-status.json \
             api/record-chain-status.json \

@@ -145,6 +145,8 @@ GROUPS = {
         ["python3", "scripts/detect_archive_backlog.py"],
         ["python3", "scripts/test_archive_backlog_detector.py"],
         ["python3", "scripts/test_archive_backlog_repair_contract.py"],
+        ["python3", "scripts/test_native_ots_repair_state_machine.py"],
+        ["python3", "scripts/test_native_ots_repair_source_contract.py"],
 
         # Generated drift
         ["python3", "scripts/generate_record_chain_status.py", "--check"],

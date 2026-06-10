@@ -100,20 +100,34 @@ def summarize_record_chain(items: list[dict[str, Any]]) -> dict[str, Any]:
 
 def summarize_native_ots(items: list[dict[str, Any]]) -> dict[str, Any]:
     waiting_upgrade = sum(1 for i in items if i.get("archive_status") == "waiting_for_upgrade")
+    upgrade_due = sum(1 for i in items if i.get("archive_status") == "upgrade_due")
+    upgrade_failed = sum(1 for i in items if i.get("archive_status") == "upgrade_failed")
     pending = sum(1 for i in items if i.get("archive_status") == "pending_upload")
     failed = sum(1 for i in items if i.get("archive_status") == "upload_failed")
     readback = sum(1 for i in items if i.get("archive_status") == "readback_failed")
     waiting_key = sum(1 for i in items if i.get("archive_status") == "waiting_for_key")
     archived = sum(1 for i in items if i.get("archive_status") == "archived")
-    actionable = waiting_upgrade + pending + failed + readback + waiting_key
+
+    actionable = upgrade_due + upgrade_failed + pending + failed + readback + waiting_key
+    record_indices = [
+        i.get("record_index")
+        for i in items
+        if isinstance(i.get("record_index"), int)
+    ]
+    first_open = min(record_indices) if record_indices else None
+
     return {
         "waiting_for_upgrade_count": waiting_upgrade,
+        "upgrade_due_count": upgrade_due,
+        "upgrade_failed_count": upgrade_failed,
         "pending_upload_count": pending,
         "failed_upload_count": failed,
         "readback_failed_count": readback,
         "waiting_for_key_count": waiting_key,
         "archived_count": archived,
-        "backlog_current": actionable == 0,
+        "open_item_count": len(items),
+        "first_open_record_index": first_open,
+        "backlog_current": actionable == 0 and waiting_upgrade == 0,
     }
 
 
@@ -127,12 +141,19 @@ def record_chain_backlog_doc(items: list[dict[str, Any]], updated_at: str) -> di
     }
 
 
-def native_ots_backlog_doc(items: list[dict[str, Any]], updated_at: str) -> dict[str, Any]:
+def native_ots_backlog_doc(
+    items: list[dict[str, Any]],
+    updated_at: str,
+    scan: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    summary = summarize_native_ots(items)
+    if scan:
+        summary.update(scan)
     return {
         "schema": OTS_SCHEMA,
         "updated_at": updated_at,
         "items": items,
-        "summary": summarize_native_ots(items),
+        "summary": summary,
         "boundary": OTS_BOUNDARY,
     }
 

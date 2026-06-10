@@ -92,6 +92,8 @@ def mark_native_ots_backlog_status(anchor_rel: str | None, status: str, error: s
             item["tx_id"] = tx_id
         item["next_action"] = {
             "waiting_for_key": "provide_arweave_key",
+            "upgrade_due": "upgrade_native_ots_anchor",
+            "upgrade_failed": "retry_native_ots_upgrade",
             "upload_failed": "retry_upload",
             "readback_failed": "retry_readback_or_upload",
             "archived": "no_op",
@@ -620,7 +622,17 @@ def main() -> int:
     if args.all_backlog:
         refresh_native_ots_backlog()
         backlog = read_json(NATIVE_OTS_BACKLOG) if NATIVE_OTS_BACKLOG.exists() else {"items": []}
-        candidates = [item for item in backlog.get("items", []) if item.get("archive_status") in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}]
+        candidates = [
+            item for item in backlog.get("items", [])
+            if item.get("archive_status") in {
+                "upgrade_due",
+                "upgrade_failed",
+                "pending_upload",
+                "upload_failed",
+                "readback_failed",
+                "waiting_for_key",
+            }
+        ]
         if not candidates:
             write_summary(log_dir, {"schema": "trinity_native_ots_summary.v1", "run_id": args.run_id, "result": "backlog_empty", "paid_upload_performed": False, "registry_updated": False, "next_action": "no_op"})
             return 0
@@ -670,8 +682,15 @@ def main() -> int:
             strict=True,
         )
 
-    # Sync latest from anchor
-    sync_native_latest_from_anchor(anchor_rel)
+    # Sync latest only when the selected anchor is the current latest.
+    # Historical repair must not rewind or pollute api/record-chain-native-ots-latest.json.
+    is_current_latest_anchor = (
+        anchor_rel == latest.get("latest_anchor_file")
+        or anchor.get("anchored_file_sha256") == latest.get("anchored_file_sha256")
+    )
+    if is_current_latest_anchor:
+        sync_native_latest_from_anchor(anchor_rel)
+
     assert_core_files_unchanged(core_before)
 
     # Build bundle based on state

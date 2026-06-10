@@ -58,6 +58,11 @@ def main() -> int:
         "tx_id",
         "native-arweave-bundles",
         "native-arweave-registry.json",
+        "all_native_anchors",
+        "upgrade_due",
+        "upgrade_failed",
+        "upgrade_completed_prefix_record_index",
+        "arweave_archive_completed_prefix_record_index",
     ]:
         require(needle in text, f"detector missing contract marker: {needle}")
 

@@ -60,6 +60,8 @@ def update_item(path: Path, api_path: Path, kind: str, key: str, status: str, er
                 item["tx_id"] = tx_id
             item["next_action"] = {
                 "waiting_for_key": "provide_arweave_key",
+                "upgrade_due": "upgrade_native_ots_anchor",
+                "upgrade_failed": "retry_native_ots_upgrade",
                 "upload_failed": "retry_upload",
                 "readback_failed": "retry_readback_or_upload",
                 "archived": "no_op",
@@ -95,34 +97,86 @@ def process_record_chain(max_items: int, mode: str) -> int:
     return 0
 
 
+ACTIONABLE_NATIVE_STATUSES = {
+    "upgrade_due",
+    "upgrade_failed",
+    "pending_upload",
+    "upload_failed",
+    "readback_failed",
+    "waiting_for_key",
+}
+
+UPLOAD_NATIVE_STATUSES = {
+    "pending_upload",
+    "upload_failed",
+    "readback_failed",
+    "waiting_for_key",
+}
+
+
 def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
     data = read_json(OTS_BACKLOG, {"items": []})
-    candidates = [i for i in data.get("items", []) if i.get("archive_status") in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}]
+    candidates = [
+        i for i in data.get("items", [])
+        if i.get("archive_status") in ACTIONABLE_NATIVE_STATUSES
+    ]
+
     processed = 0
     for item in candidates[:max_items]:
+        status = item.get("archive_status")
         jwk_path = prepare_native_ots_jwk_path() if enable_paid_upload else None
-        if enable_paid_upload and not jwk_path:
-            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "waiting_for_key", "ARKEY/ARWEAVE_JWK JSON or ARWEAVE_JWK_PATH not configured")
+
+        # Upload/re-upload states need a JWK when paid upload is requested.
+        # Upgrade states may still run without a JWK; they can upgrade/build/register_without_tx.
+        if enable_paid_upload and not jwk_path and status in UPLOAD_NATIVE_STATUSES:
+            update_item(
+                OTS_BACKLOG,
+                API_OTS_BACKLOG,
+                "native_ots_bundle",
+                item["key"],
+                "waiting_for_key",
+                "ARKEY/ARWEAVE_JWK JSON or ARWEAVE_JWK_PATH not configured",
+            )
             processed += 1
             continue
-        if not enable_paid_upload:
+
+        if not enable_paid_upload and status in UPLOAD_NATIVE_STATUSES:
             update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "pending_upload", None)
             processed += 1
             continue
+
         cmd = [
             "python3", "scripts/run_native_ots_upgrade_verify.py",
-            "--all-backlog",
             "--max-items", "1",
-            "--enable-paid-upload",
-            "--confirm-paid-upload", CONFIRM_PAID_UPLOAD,
-            "--jwk-path", jwk_path,
         ]
+
+        anchor_file = item.get("anchor_file")
+        if anchor_file:
+            cmd += ["--anchor-file", anchor_file]
+        else:
+            cmd += ["--all-backlog"]
+
+        if enable_paid_upload and jwk_path:
+            cmd += [
+                "--enable-paid-upload",
+                "--confirm-paid-upload", CONFIRM_PAID_UPLOAD,
+                "--jwk-path", jwk_path,
+            ]
+
         result = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, env=os.environ.copy())
         if result.returncode != 0:
-            err = (result.stderr or result.stdout or "native OTS bundle upload failed").strip()[-1000:]
-            status = "readback_failed" if "readback" in err.lower() else "upload_failed"
-            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], status, err)
+            err = (result.stderr or result.stdout or "native OTS repair failed").strip()[-1000:]
+            lower = err.lower()
+            if "readback" in lower:
+                new_status = "readback_failed"
+            elif "upgrade" in lower or "ots" in lower or "pending" in lower:
+                new_status = "upgrade_failed"
+            else:
+                new_status = "upload_failed"
+            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status, err)
+
         processed += 1
+
     run_detector_write()
     print(f"processed native_ots_bundle items: {processed}")
     return 0

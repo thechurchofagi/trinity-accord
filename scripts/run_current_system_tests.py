@@ -776,6 +776,28 @@ def main() -> int:
         fail(f"archive backlog repair contract failed:\n{result.stdout}\n{result.stderr}")
     ok("archive backlog repair contract")
 
+    # Native OTS repair backlog state machine
+    result = subprocess.run(
+        [sys.executable, "scripts/test_native_ots_repair_state_machine.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"native OTS repair state machine failed:\n{result.stdout}\n{result.stderr}")
+    ok("native OTS repair state machine")
+
+    # Native OTS repair source contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_native_ots_repair_source_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"native OTS repair source contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("native OTS repair source contract")
+
     # Public home v3 primary counters
     result = subprocess.run(
         [sys.executable, "scripts/test_public_home_status_primary_counters.py"],
