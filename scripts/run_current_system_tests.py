@@ -140,8 +140,21 @@ def main() -> int:
     ok("arweave wallet status up to date")
 
     # 1d. public homepage status drift check
+    # Run generator first, then patch script (CI runs both)
+    subprocess.run(
+        [sys.executable, "scripts/generate_public_home_status.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        [sys.executable, "scripts/patch_public_home_status_primary.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
     result = subprocess.run(
-        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
+        [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
         cwd=ROOT,
         capture_output=True,
         text=True,

@@ -24,9 +24,11 @@ jobs:
       - name: Verify record-chain integrity
         run: python scripts/trinity_record_chain.py verify
       - name: Regenerate public homepage status
-        run: python scripts/generate_public_home_status.py
+        run: |
+          python scripts/generate_public_home_status.py
+          python scripts/patch_public_home_status_primary.py
       - name: Verify generated homepage files are canonical
-        run: python scripts/generate_public_home_status.py --check
+        run: python scripts/patch_public_home_status_primary.py --check
       - name: Verify public homepage counter contract
         run: python scripts/check_public_home_status_contract.py
       - name: Commit regenerated public homepage status
