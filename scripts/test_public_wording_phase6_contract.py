@@ -73,7 +73,7 @@ HOMEPAGE_MUST_CONTAIN = [
 HOMEPAGE_MUST_CONTAIN_ONE_OF = [
     "not yet established in current record-chain",
     "Fully autonomous:",
-    "self_initiated",
+    "Self-initiated official records",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
