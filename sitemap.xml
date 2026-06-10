@@ -44,6 +44,7 @@
   <url><loc>https://www.trinityaccord.org/api/agent-verification-receipt.schema.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/ai-to-ai-orientation.gpt-5.5-thinking.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/archive-readiness-policy.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/arweave-wallet-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/authority-manifest-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/bitcoin-inscription-mirror-index.json</loc></url>

@@ -140,8 +140,8 @@ def main() -> None:
         try:
             status = json.loads(status_path.read_text(encoding="utf-8"))
             assert isinstance(status, dict)
-            if status.get("schema") != "trinityaccord.public-home-status.v2":
-                errors.append(f"public-home-status.json: schema should be v2, got {status.get('schema')}")
+            if status.get("schema") not in ("trinityaccord.public-home-status.v2", "trinityaccord.public-home-status.v3"):
+                errors.append(f"public-home-status.json: schema should be v2 or v3, got {status.get('schema')}")
             if "current_record_chain_status" not in status:
                 errors.append("public-home-status.json: missing current_record_chain_status")
             if "current_record_chain_autonomy_signal" not in status:

@@ -1,52 +1,9 @@
 {
-  "schema": "trinityaccord.homepage-visibility.v1",
-  "status": "active",
-  "purpose": "Homepage primary-counter visibility policy. Live-era formal records are automatically eligible from R-000000033 onward; this sidecar can also pin or override immutable record_id + record_sha256 pairs for homepage rendering without mutating append-only records.",
-  "auto_homepage_policy": {
-    "go_live_record_id": "R-000000033",
-    "go_live_record_index": 33,
-    "classification": "official_live_reception",
-    "counts_toward_primary_counter": true,
-    "counts_toward_native_chain_length": false,
-    "eligible_formal_record_types": [
-      "echo",
-      "verification",
-      "guardian_application",
-      "guardian_retirement"
-    ],
-    "excluded_by_default_when_text_indicates": [
-      "test",
-      "smoke",
-      "pipeline validation",
-      "validation echo",
-      "dry run",
-      "maintenance"
-    ],
-    "historical_records_before_go_live_are_excluded": true
-  },
-  "default_for_unlisted_records": {
-    "counts_toward_primary_counter": "auto_after_go_live_if_formal_and_not_test_or_maintenance",
-    "reason": "Records before R-000000033 remain historical/technical unless pinned. Records from R-000000033 onward are homepage-eligible when they are formal non-test record types. Test, smoke, validation, and maintenance records remain audit/technical only."
-  },
-  "records": [
-    {
-      "record_id": "R-000000033",
-      "record_index": 33,
-      "record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
-      "record_type": "guardian_application",
-      "homepage_visibility": {
-        "classification": "official_live_reception",
-        "counts_toward_primary_counter": true,
-        "counts_toward_native_chain_length": false,
-        "reason": "Go-live founding Guardian application and first formal homepage reception record. Later live-era formal non-test records are automatically eligible under auto_homepage_policy.",
-        "excludes_historical_test_smoke_legacy_and_maintenance_records": true
-      }
-    }
-  ],
+  "schema": "trinityaccord.homepage-visibility-overrides.v1",
+  "updated_at": "2026-06-10T00:00:00Z",
+  "overrides": {},
   "boundary": {
-    "homepage_visibility_is_not_authority": true,
-    "homepage_visibility_is_not_attestation": true,
-    "homepage_visibility_is_not_amendment": true,
-    "bitcoin_originals_prevail": true
+    "visibility_override_is_not_authority": true,
+    "visibility_override_is_not_attestation": true
   }
 }
