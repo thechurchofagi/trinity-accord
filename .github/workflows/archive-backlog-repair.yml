@@ -93,7 +93,7 @@ jobs:
       - name: Regenerate public status
         run: |
           python3 scripts/detect_archive_backlog.py --write
-          python3 scripts/generate_arweave_wallet_status.py --use-env-balance
+          python3 scripts/generate_arweave_wallet_status.py
           python3 scripts/generate_record_chain_status.py
           python3 scripts/generate_public_home_status.py
           python3 scripts/generate_sitemap.py

@@ -43,7 +43,7 @@ def main() -> int:
         "archive: repair backlog and wallet status metadata",
         "Forbidden write path",
         "record-chain/chain-tip.json",
-        "generate_arweave_wallet_status.py --use-env-balance",
+        "generate_arweave_wallet_status.py",
         "arweave-wallet-ledger.json",
         "arweave-wallet-status.json",
     ]:

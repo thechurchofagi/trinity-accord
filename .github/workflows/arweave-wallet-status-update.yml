@@ -1,0 +1,102 @@
+name: Arweave wallet status update
+
+on:
+  workflow_dispatch:
+    inputs:
+      balance_ar:
+        description: "Last known AR wallet balance"
+        required: true
+        type: string
+      wallet_address_sha256:
+        description: "SHA256 of public AR wallet address"
+        required: false
+        type: string
+      low_balance_threshold_ar:
+        description: "Low balance threshold in AR"
+        required: false
+        default: "0.25"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arweave-wallet-status-update-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update-wallet-status:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Authorize write workflow actor
+        run: |
+          set -euo pipefail
+          case "${{ github.actor }}" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor"
+              ;;
+            *)
+              echo "Unauthorized actor: ${{ github.actor }}" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Update wallet balance snapshot
+        run: |
+          set -euo pipefail
+          args=(
+            python3 scripts/update_arweave_wallet_ledger.py set-balance
+            --balance-ar "${{ inputs.balance_ar }}"
+            --low-balance-threshold-ar "${{ inputs.low_balance_threshold_ar }}"
+          )
+          if [ -n "${{ inputs.wallet_address_sha256 }}" ]; then
+            args+=(--wallet-address-sha256 "${{ inputs.wallet_address_sha256 }}")
+          fi
+          "${args[@]}"
+
+      - name: Regenerate public status
+        run: |
+          python3 scripts/generate_arweave_wallet_status.py
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/generate_sitemap.py
+          python3 scripts/run_current_system_tests.py
+
+      - name: Commit wallet status update
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No wallet status changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            record-chain/arweave-wallet-ledger.json \
+            api/arweave-wallet-status.json \
+            api/public-home-status.json \
+            index.md \
+            sitemap.xml
+
+          git diff --cached --name-only | while read -r path; do
+            case "$path" in
+              record-chain/records/*|record-chain/pending/*|record-chain/processed/*|record-chain/rejected/*|record-chain/chain-tip.json|archive/authority-*|authority/*|Bitcoin\ Originals/*)
+                echo "Forbidden write path: $path" >&2
+                exit 1
+                ;;
+            esac
+          done
+
+          git commit -m "ops: update arweave wallet status"
+          git push
