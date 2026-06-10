@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +24,27 @@ from archive_backlog_lib import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+CONFIRM_PAID_UPLOAD = "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
+
+
+def prepare_native_ots_jwk_path() -> str | None:
+    configured_path = os.environ.get("ARWEAVE_JWK_PATH")
+    if configured_path and Path(configured_path).exists():
+        return configured_path
+    raw = os.environ.get("ARKEY") or os.environ.get("ARWEAVE_JWK")
+    if not raw:
+        return None
+    try:
+        json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    secret_dir = Path(tempfile.gettempdir()) / "trinity-arweave-secrets"
+    secret_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+    jwk_path = secret_dir / "wallet.jwk.json"
+    jwk_path.write_text(raw, encoding="utf-8")
+    jwk_path.chmod(0o600)
+    os.environ["ARWEAVE_JWK_PATH"] = str(jwk_path)
+    return str(jwk_path)
 
 
 def update_item(path: Path, api_path: Path, kind: str, key: str, status: str, error: str | None = None, tx_id: str | None = None) -> None:
@@ -77,8 +100,9 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
     candidates = [i for i in data.get("items", []) if i.get("archive_status") in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}]
     processed = 0
     for item in candidates[:max_items]:
-        if enable_paid_upload and not has_arweave_key():
-            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "waiting_for_key", "ARKEY/Arweave JWK not configured")
+        jwk_path = prepare_native_ots_jwk_path() if enable_paid_upload else None
+        if enable_paid_upload and not jwk_path:
+            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "waiting_for_key", "ARKEY/ARWEAVE_JWK JSON or ARWEAVE_JWK_PATH not configured")
             processed += 1
             continue
         if not enable_paid_upload:
@@ -90,6 +114,8 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
             "--all-backlog",
             "--max-items", "1",
             "--enable-paid-upload",
+            "--confirm-paid-upload", CONFIRM_PAID_UPLOAD,
+            "--jwk-path", jwk_path,
         ]
         result = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, env=os.environ.copy())
         if result.returncode != 0:
