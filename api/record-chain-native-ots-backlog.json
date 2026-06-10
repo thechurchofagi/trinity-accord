@@ -13,9 +13,9 @@
       "bundle_file": null,
       "bundle_sha256": null,
       "tx_id": null,
-      "retry_count": 1,
-      "last_attempt_at": "2026-06-10T13:20:06Z",
-      "last_error": "{\n  \"anchor_bitcoin_attestation_embedded\": false,\n  \"anchor_bitcoin_verified\": false,\n  \"anchor_ots_status\": \"pending\",\n  \"core_files_unchanged\": true,\n  \"generated_at\": \"2026-06-10T13:20:06Z\",\n  \"native_ots_proof_bundle_archive\": null,\n  \"paid_upload_performed\": false,\n  \"registry_updated\": false,\n  \"result\": \"pending\",\n  \"run_id\": \"native-ots-20260610T132006Z\",\n  \"schema\": \"trinity_native_ots_summary.v1\"\n}",
+      "retry_count": 2,
+      "last_attempt_at": "2026-06-10T13:29:09Z",
+      "last_error": "\": false,\n  \"bitcoin_verified\": false,\n  \"calendar_attested\": false,\n  \"errors\": [\n    \"anchor schema mismatch\"\n  ],\n  \"generated_at\": \"2026-06-10T13:29:09Z\",\n  \"ots_file\": \"record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.native-record-chain-head-commitment.json.ots\",\n  \"result\": \"fail\",\n  \"schema\": \"trinity_record_chain_ots_verify_report.v1\",\n  \"strict_bitcoin\": false,\n  \"strict_bitcoin_verified\": false,\n  \"strict_verify_unavailable_reason\": null\n}",
       "next_action": "retry_native_ots_upgrade"
     },
     {
