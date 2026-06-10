@@ -173,6 +173,8 @@ GROUPS = {
         ["python3", "scripts/test_operator_secret_names_contract.py"],
         ["python3", "scripts/test_arweave_live_readiness_contract.py"],
         ["python3", "scripts/test_arweave_upload_contract.py"],
+        ["python3", "scripts/test_arweave_upload_wallet_ledger_integration.py"],
+        ["python3", "scripts/test_arweave_paid_upload_wallet_wiring.py"],
         ["python3", "scripts/test_render_manual_deploy_contract.py"],
 
         # Phase 6 scheduled OTS watch
