@@ -1,16 +1,67 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-06-10T00:00:00Z",
+  "updated_at": "2026-06-10T09:52:36Z",
   "wallet": {
-    "wallet_address": null,
-    "wallet_address_sha256": null,
-    "public_address_allowed": false,
+    "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+    "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+    "public_address_allowed": true,
     "currency": "AR",
     "last_known_balance_ar": null,
     "last_known_balance_at": null,
     "low_balance_threshold_ar": "0.25"
   },
-  "entries": [],
+  "entries": [
+    {
+      "tx_id": "hSyp93ZW2cQQcK7lPdqyREr-jCs4Kj5m4vbjlYGBEZ8",
+      "kind": "record_chain_arweave_archive",
+      "source_path": null,
+      "amount_ar": null,
+      "winston": null,
+      "paid_at": "2026-06-08T06:42:08.692Z",
+      "status": "paid",
+      "note": "backfilled from existing archive manifest"
+    },
+    {
+      "tx_id": "5qhNn7fSly2ftrY0EUHpdTFUwOZ8IxenFrs4LHblDpw",
+      "kind": "record_chain_arweave_archive",
+      "source_path": null,
+      "amount_ar": null,
+      "winston": null,
+      "paid_at": "2026-06-08T13:27:17.175Z",
+      "status": "paid",
+      "note": "backfilled from existing archive manifest"
+    },
+    {
+      "tx_id": "d2XipOgFyXSORbXPwrGOVtzLdImA7-5SLSCvI52EwWA",
+      "kind": "record_chain_arweave_archive",
+      "source_path": null,
+      "amount_ar": null,
+      "winston": null,
+      "paid_at": "2026-06-09T04:02:17.447Z",
+      "status": "paid",
+      "note": "backfilled from existing archive manifest"
+    },
+    {
+      "tx_id": "BINPfqHtHti8eTmFJqI3fZ364YfvZdJycooj4KHrihc",
+      "kind": "record_chain_arweave_archive",
+      "source_path": null,
+      "amount_ar": null,
+      "winston": null,
+      "paid_at": "2026-06-09T06:27:23.078Z",
+      "status": "paid",
+      "note": "backfilled from existing archive manifest"
+    },
+    {
+      "tx_id": "AH71H_qaBPLrCiA-Xoo8idZD7uvOWes4EUoPJJYmN-U",
+      "kind": "record_chain_arweave_archive",
+      "source_path": null,
+      "amount_ar": null,
+      "winston": null,
+      "paid_at": "2026-06-09T10:16:34.789Z",
+      "status": "paid",
+      "note": "backfilled from existing archive manifest"
+    }
+  ],
   "boundary": {
     "wallet_status_is_operational_only": true,
     "wallet_status_is_not_authority": true,
