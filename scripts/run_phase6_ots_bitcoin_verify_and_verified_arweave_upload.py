@@ -525,7 +525,7 @@ def main() -> int:
     parser.add_argument("--ots-bin", default="ots")
     parser.add_argument("--bitcoin-node-url", default=os.environ.get("OTS_BITCOIN_NODE_URL"))
     parser.add_argument("--skip-upgrade", action="store_true",
-                        default=bool(os.environ.get("OTS_SKIP_UPGRADE")),
+                        default=(os.environ.get("OTS_SKIP_UPGRADE", "").strip().lower() in {"1", "true", "yes", "on"}),
                         help="Skip ots upgrade step (use when calendar servers are unreachable)")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--dry-run-cost-only", action="store_true")

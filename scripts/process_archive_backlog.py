@@ -174,6 +174,27 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
             else:
                 new_status = "upload_failed"
             update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status, err)
+        else:
+            # Subprocess succeeded — determine new status from anchor state.
+            anchor_file = item.get("anchor_file")
+            new_status = None
+            if anchor_file:
+                try:
+                    anchor_data = read_json(ROOT / anchor_file, {})
+                    ots_status = anchor_data.get("ots_status")
+                    if ots_status in {"upgraded", "verified"}:
+                        if enable_paid_upload:
+                            # Upload was requested; check if tx_id was written
+                            if anchor_data.get("tx_id"):
+                                new_status = "archived"
+                            else:
+                                new_status = "pending_upload"
+                        else:
+                            new_status = "pending_upload"
+                except Exception:
+                    pass
+            if new_status:
+                update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status)
 
         processed += 1
 
