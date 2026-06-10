@@ -129,6 +129,40 @@ def main() -> int:
         if "Reception does not imply belief" not in block:
             fail("missing boundary phrase: Reception does not imply belief")
 
+    elif schema_version == "trinityaccord.public-home-status.v3":
+        # v3: Canonical view with Official Live Reception, AR wallet, etc.
+        official_display = card_number(block, "Official Live Reception", required=False)
+        if official_display == "NOT_FOUND":
+            fail("no Official Live Reception card found in homepage")
+
+        agency_display = card_number(block, "Agency Profile", required=False)
+        if agency_display == "NOT_FOUND":
+            fail("no Agency Profile card found in homepage")
+
+        tech_display = card_number(block, "Technical chain health", required=False)
+        if tech_display == "NOT_FOUND":
+            fail("no Technical chain health card found in homepage")
+
+        wallet_display = card_number(block, "AR upload wallet", required=False)
+        if wallet_display == "NOT_FOUND":
+            fail("no AR upload wallet card found in homepage")
+
+        boundary_display = card_number(block, "Boundary", required=False)
+        if boundary_display == "NOT_FOUND":
+            fail("no Boundary card found in homepage")
+
+        # Verify primary counter matches
+        pc = phs.get("primary_counters", {})
+        expected_reception = pc.get("official_live_reception")
+        if official_display != str(expected_reception):
+            fail(f"Official Live Reception mismatch: page={official_display} expected={expected_reception}")
+
+        # Boundary language
+        if "Reception does not imply belief" not in block:
+            fail("missing boundary phrase: Reception does not imply belief")
+        if "Native chain length is not used as this counter" not in block:
+            fail("missing boundary phrase: Native chain length is not used as this counter")
+
     else:
         # v1: Check old cards
         formal_display = card_number(block, "Institutional / human independent verification", required=False)
