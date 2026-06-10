@@ -14,8 +14,21 @@ concurrency:
 
 jobs:
   repair:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
+      - name: Authorize write workflow actor
+        run: |
+          set -euo pipefail
+          case "${{ github.actor }}" in
+            thechurchofagi|github-actions[bot])
+              echo "Authorized actor: ${{ github.actor }}"
+              ;;
+            *)
+              echo "Unauthorized actor: ${{ github.actor }}" >&2
+              exit 1
+              ;;
+          esac
+
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:

@@ -1,0 +1,5 @@
+{
+  "schema": "trinityaccord.record-chain-maintenance-override.v1",
+  "approval_token": "RECORD_CHAIN_MAINTENANCE_OVERRIDE_OK",
+  "reason": "Reviewed bootstrap of archive backlog repair metadata and generated public status artifacts. This override is limited to the PR that introduces durable archive backlog files, detector/repair automation, and homepage v3 backlog visibility without changing record-chain authority or canonical records."
+}
