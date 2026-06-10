@@ -164,6 +164,13 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
             ]
 
         result = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, env=os.environ.copy())
+
+        # Always surface subprocess output for debugging
+        if result.stdout:
+            print(f"[native-ots stdout] {result.stdout.strip()[-2000:]}")
+        if result.stderr:
+            print(f"[native-ots stderr] {result.stderr.strip()[-2000:]}")
+
         if result.returncode != 0:
             err = (result.stderr or result.stdout or "native OTS repair failed").strip()[-1000:]
             lower = err.lower()
@@ -175,24 +182,34 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
                 new_status = "upload_failed"
             update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status, err)
         else:
-            # Subprocess succeeded — determine new status from anchor state.
+            # Subprocess returned 0 — determine new status from anchor state.
             anchor_file = item.get("anchor_file")
             new_status = None
             if anchor_file:
                 try:
                     anchor_data = read_json(ROOT / anchor_file, {})
                     ots_status = anchor_data.get("ots_status")
+                    ots_upgrade_cmd = anchor_data.get("ots_upgrade_command")
                     if ots_status in {"upgraded", "verified"}:
                         if enable_paid_upload:
-                            # Upload was requested; check if tx_id was written
                             if anchor_data.get("tx_id"):
                                 new_status = "archived"
                             else:
                                 new_status = "pending_upload"
                         else:
                             new_status = "pending_upload"
-                except Exception:
-                    pass
+                    elif ots_status == "pending" and ots_upgrade_cmd is None:
+                        # Script returned 0 but ots upgrade was never executed.
+                        # This means ots binary was not found or skip-upgrade was active.
+                        # Do NOT advance status — mark as upgrade_failed so it retries.
+                        err = (result.stderr or result.stdout or "ots upgrade was not executed; anchor still pending").strip()[-500:]
+                        update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "upgrade_failed", err)
+                        processed += 1
+                        continue
+                except Exception as exc:
+                    update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "upgrade_failed", f"failed to read anchor after repair: {exc}")
+                    processed += 1
+                    continue
             if new_status:
                 update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status)
 
