@@ -59,6 +59,20 @@ def sha256_file(path: Path) -> str:
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
+
+def archive_status_from_upload(upload_result: dict) -> str:
+    if upload_result.get("txid") and upload_result.get("hash_match") is True and upload_result.get("result") == "uploaded":
+        return "archived"
+    if upload_result.get("result") == "readback_failed" or (upload_result.get("txid") and upload_result.get("hash_match") is not True):
+        return "readback_failed"
+    return "upload_failed"
+
+
+def refresh_archive_backlog() -> None:
+    detector = ROOT / "scripts" / "detect_archive_backlog.py"
+    if detector.exists():
+        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=False)
+
 def source_file_ref(path: Path) -> dict:
     return {
         "path": str(path.relative_to(ROOT)),
@@ -266,6 +280,7 @@ def build_archive_manifest(mode: str) -> None:
             and native_source.get("latest_record_sha256") == latest_record_sha256
             and native_source.get("native_record_count") == native_record_count
             and existing.get("arweave", {}).get("txid")
+            and existing.get("arweave", {}).get("archive_status", "archived") == "archived"
         ):
             print(f"No new Arweave archive needed: native archive for {latest_record_id} already has txid; skipping.")
             return
@@ -329,6 +344,11 @@ def build_archive_manifest(mode: str) -> None:
             "wallet_address_sha256": None,
             "uploaded_at": None,
             "verified": False,
+            "archive_status": "pending_upload",
+            "retry_count": 0,
+            "last_attempt_at": None,
+            "last_error": None,
+            "hash_match": False,
         },
         "boundary": {
             "not_authority": True,
@@ -339,27 +359,68 @@ def build_archive_manifest(mode: str) -> None:
         },
     }
 
+    upload_failed = False
     if mode == "live":
         arkey = os.environ.get("ARKEY")
         if not arkey:
-            raise SystemExit("ARKEY required for live Arweave upload")
-
-        payload_path = build_payload_json(manifest, archive_dir)
-        upload_result = upload_to_arweave(payload_path, archive_dir)
-
-        manifest["arweave"] = {
-            "enabled": True,
-            "upload_mode": "live",
-            "txid": upload_result.get("txid"),
-            "wallet_address_sha256": upload_result.get("wallet_address_sha256"),
-            "uploaded_at": upload_result.get("uploaded_at"),
-            "verified": False,
-        }
+            manifest["arweave"].update({
+                "enabled": True,
+                "upload_mode": "live",
+                "archive_status": "waiting_for_key",
+                "last_attempt_at": utc_now(),
+                "last_error": "ARKEY required for live Arweave upload",
+                "next_action": "provide_arweave_key",
+            })
+            upload_failed = True
+        else:
+            payload_path = build_payload_json(manifest, archive_dir)
+            try:
+                upload_result = upload_to_arweave(payload_path, archive_dir)
+            except SystemExit as exc:
+                partial = archive_dir / "upload-result.json"
+                upload_result = read_json(partial) if partial.exists() else {}
+                status = archive_status_from_upload(upload_result) if upload_result else "upload_failed"
+                manifest["arweave"].update({
+                    "enabled": True,
+                    "upload_mode": "live",
+                    "txid": upload_result.get("txid") or upload_result.get("tx_id"),
+                    "wallet_address_sha256": upload_result.get("wallet_address_sha256"),
+                    "uploaded_at": upload_result.get("uploaded_at"),
+                    "verified": False,
+                    "hash_match": upload_result.get("hash_match", False),
+                    "readback_sha256": upload_result.get("readback_sha256"),
+                    "archive_status": status,
+                    "last_attempt_at": utc_now(),
+                    "last_error": str(exc),
+                    "next_action": "retry_readback_or_upload" if status == "readback_failed" else "retry_upload",
+                })
+                upload_failed = True
+            else:
+                status = archive_status_from_upload(upload_result)
+                manifest["arweave"] = {
+                    "enabled": True,
+                    "upload_mode": "live",
+                    "txid": upload_result.get("txid") or upload_result.get("tx_id"),
+                    "wallet_address_sha256": upload_result.get("wallet_address_sha256"),
+                    "uploaded_at": upload_result.get("uploaded_at"),
+                    "verified": status == "archived",
+                    "hash_match": upload_result.get("hash_match", False),
+                    "readback_sha256": upload_result.get("readback_sha256"),
+                    "archive_status": status,
+                    "retry_count": 0,
+                    "last_attempt_at": utc_now(),
+                    "last_error": None if status == "archived" else upload_result.get("result"),
+                    "next_action": "no_op" if status == "archived" else "retry_readback_or_upload",
+                }
+                upload_failed = status != "archived"
         manifest["mode"] = "live"
 
     manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
     write_json(archive_dir / "manifest.json", manifest)
     update_arweave_index()
+    refresh_archive_backlog()
+    if upload_failed:
+        raise SystemExit(1)
 
 
 def update_arweave_index() -> None:

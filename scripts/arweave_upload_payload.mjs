@@ -64,6 +64,40 @@ if (response.status < 200 || response.status >= 300) {
 
 const address = await arweave.wallets.jwkToAddress(jwk);
 
+function uploadResult(result, readbackSha256, hashMatch, retryable) {
+  return {
+    schema: "trinityaccord.arweave-upload-result.v1",
+    result,
+    txid: tx.id,
+    tx_id: tx.id,
+    uploaded_at: new Date().toISOString(),
+    data_sha256: payloadSha256,
+    payload_sha256: payloadSha256,
+    readback_sha256: readbackSha256,
+    hash_match: hashMatch,
+    retryable,
+    wallet_address_sha256: sha256Hex(address),
+    tags: {
+      "Content-Type": "application/json",
+      "App-Name": "Trinity-Accord",
+      "Record-Chain": "trinity-accord-public-reception-ledger",
+      "Archive-Type": "record-chain-batch-archive",
+      "Data-SHA256": payloadSha256,
+      Boundary: "mirror-not-authority",
+    },
+    boundary: {
+      arweave_archive_is_mirror_only: true,
+      arweave_archive_is_not_authority: true,
+      arweave_archive_is_not_attestation: true,
+      arweave_archive_is_not_amendment: true,
+      arweave_archive_is_not_successor_reception: true,
+      bitcoin_originals_prevail: true,
+    },
+  };
+}
+
+fs.writeFileSync(outPath, JSON.stringify(uploadResult("posted_pending_readback", null, false, true), null, 2) + "\n");
+
 // --- Readback verification ---
 const READBACK_MAX_RETRIES = 30;
 const READBACK_DELAY_MS = 15000;
@@ -97,37 +131,12 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
 }
 
 if (!readbackVerified) {
+  fs.writeFileSync(outPath, JSON.stringify(uploadResult("readback_failed", readbackSha256, false, true), null, 2) + "\n");
   throw new Error(
     `ARWEAVE_READBACK_FAILED after ${READBACK_MAX_RETRIES} attempts: hash_match=false payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`
   );
 }
 
-const result = {
-  schema: "trinityaccord.arweave-upload-result.v1",
-  txid: tx.id,
-  uploaded_at: new Date().toISOString(),
-  data_sha256: payloadSha256,
-  payload_sha256: payloadSha256,
-  readback_sha256: readbackSha256,
-  hash_match: readbackVerified,
-  wallet_address_sha256: sha256Hex(address),
-  tags: {
-    "Content-Type": "application/json",
-    "App-Name": "Trinity-Accord",
-    "Record-Chain": "trinity-accord-public-reception-ledger",
-    "Archive-Type": "record-chain-batch-archive",
-    "Data-SHA256": payloadSha256,
-    Boundary: "mirror-not-authority",
-  },
-  boundary: {
-    arweave_archive_is_mirror_only: true,
-    arweave_archive_is_not_authority: true,
-    arweave_archive_is_not_attestation: true,
-    arweave_archive_is_not_amendment: true,
-    arweave_archive_is_not_successor_reception: true,
-    bitcoin_originals_prevail: true,
-  },
-};
-
+const result = uploadResult("uploaded", readbackSha256, true, false);
 fs.writeFileSync(outPath, JSON.stringify(result, null, 2) + "\n");
 console.log(`ARWEAVE_UPLOAD_OK txid=${tx.id} data_sha256=${payloadSha256} readback_sha256=${readbackSha256} hash_match=${readbackVerified}`);

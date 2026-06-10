@@ -1,0 +1,37 @@
+{
+  "schema": "trinityaccord.native-ots-backlog.v1",
+  "updated_at": "2026-06-09T10:09:16Z",
+  "items": [
+    {
+      "key": "ad3cdee0b32b727c7b94400a8d8c5dc734474aff0261ae351d10404e95e43403",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "d7c0a9c39df3128c42799865253b10e2dbc52ed57a5f2886ff3d9dc767122c8d",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-37-R-000000037-bbbef52b1615923d-d7c0a9c39df3128c.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    }
+  ],
+  "summary": {
+    "waiting_for_upgrade_count": 1,
+    "pending_upload_count": 0,
+    "failed_upload_count": 0,
+    "readback_failed_count": 0,
+    "waiting_for_key_count": 0,
+    "archived_count": 0,
+    "backlog_current": false
+  },
+  "boundary": {
+    "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_authority": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_attestation": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_amendment": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+  }
+}

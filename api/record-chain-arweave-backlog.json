@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.record-chain-arweave-backlog.v1",
+  "updated_at": "2026-06-09T10:09:16Z",
+  "items": [],
+  "summary": {
+    "pending_upload_count": 0,
+    "failed_upload_count": 0,
+    "readback_failed_count": 0,
+    "waiting_for_key_count": 0,
+    "archived_count": 0,
+    "backlog_current": true
+  },
+  "boundary": {
+    "arweave_archive_is_mirror_only": true,
+    "arweave_archive_is_not_authority": true,
+    "arweave_archive_is_not_attestation": true,
+    "arweave_archive_is_not_amendment": true,
+    "arweave_archive_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}

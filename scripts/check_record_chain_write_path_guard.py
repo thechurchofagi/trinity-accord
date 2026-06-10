@@ -46,6 +46,13 @@ OTS_AUX_FILES = {
 ARWEAVE_PREFIXES = ("record-chain/arweave-archives/",)
 ARWEAVE_FILES = {"api/record-chain-arweave-index.json"}
 
+BACKLOG_FILES = {
+    "record-chain/arweave-backlog.json",
+    "api/record-chain-arweave-backlog.json",
+    "record-chain/ots/native-ots-backlog.json",
+    "api/record-chain-native-ots-backlog.json",
+}
+
 PUBLIC_GENERATED_FILES = {
     "api/record-chain-status.json",
     "api/public-home-status.json",
@@ -70,6 +77,7 @@ APPROVED_NATIVE_OTS_SYNC_MESSAGE = "chore: sync upgraded native OTS anchor and r
 APPROVED_NATIVE_OTS_UPGRADED_ARCHIVE_MESSAGE = "chore: archive upgraded native OTS proof bundle"
 APPROVED_NATIVE_OTS_VERIFIED_ARCHIVE_MESSAGE = "chore: archive verified native OTS proof bundle"
 APPROVED_ARWEAVE_MESSAGE = "archive: update native record-chain Arweave archive metadata"
+APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE = "archive: repair record-chain archive backlog"
 
 PROTECTED_CATEGORIES = {
     "gateway_intake",
@@ -77,6 +85,7 @@ PROTECTED_CATEGORIES = {
     "auto_finalize",
     "ots",
     "arweave",
+    "archive_backlog",
 }
 
 
@@ -133,6 +142,8 @@ def category(path: str) -> str:
         return "ots"
     if startswith_any(path, OTS_AUX_PREFIXES) or path in OTS_AUX_FILES:
         return "ots_aux"
+    if path in BACKLOG_FILES:
+        return "archive_backlog"
     if startswith_any(path, ARWEAVE_PREFIXES) or path in ARWEAVE_FILES:
         return "arweave"
     if path in PUBLIC_GENERATED_FILES:
@@ -244,6 +255,10 @@ def allowed_for_push(
     if cats <= {"arweave", "public_generated"} and message == APPROVED_ARWEAVE_MESSAGE:
         ok, reason = require_actions_actor(actor, "Arweave archive")
         return (True, "Arweave archive commit") if ok else (False, reason)
+
+    if cats <= {"archive_backlog", "arweave", "ots_aux", "public_generated"} and message == APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE:
+        ok, reason = require_actions_actor(actor, "archive backlog repair")
+        return (True, "archive backlog repair commit") if ok else (False, reason)
 
     return False, f"unauthorized push write categories={sorted(cats)} message={message!r} actor={actor!r}"
 

@@ -58,6 +58,9 @@ def test_script_source_has_readback():
         "hash_match",
         "ARWEAVE_READBACK",
         "getData",
+        "posted_pending_readback",
+        "readback_failed",
+        "retryable",
     ]:
         if needle not in text:
             fail(f"arweave_upload_payload.mjs missing: {needle}")

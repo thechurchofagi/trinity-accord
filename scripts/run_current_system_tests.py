@@ -117,6 +117,17 @@ def main() -> int:
         fail(f"pipeline backlog detector failed:\n{result.stdout}\n{result.stderr}")
     ok("pipeline backlog detector")
 
+    # 1c3. archive backlog detector smoke
+    result = subprocess.run(
+        [sys.executable, "scripts/detect_archive_backlog.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"archive backlog detector failed:\n{result.stdout}\n{result.stderr}")
+    ok("archive backlog detector")
+
     # 1d. public homepage status drift check
     result = subprocess.run(
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
