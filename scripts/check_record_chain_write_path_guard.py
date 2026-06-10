@@ -256,7 +256,7 @@ def allowed_for_push(
         ok, reason = require_actions_actor(actor, "Arweave archive")
         return (True, "Arweave archive commit") if ok else (False, reason)
 
-    if cats <= {"archive_backlog", "arweave", "ots_aux", "public_generated"} and message == APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE:
+    if cats <= {"archive_backlog", "arweave", "ots", "ots_aux", "public_generated"} and message == APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE:
         ok, reason = require_actions_actor(actor, "archive backlog repair")
         return (True, "archive backlog repair commit") if ok else (False, reason)
 
