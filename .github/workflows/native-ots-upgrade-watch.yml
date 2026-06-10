@@ -133,6 +133,7 @@ jobs:
             exit 0
           fi
 
+          python3 scripts/generate_arweave_wallet_status.py
           python3 scripts/generate_record_chain_status.py
           python3 scripts/generate_public_home_status.py
           python3 scripts/generate_sitemap.py
@@ -142,6 +143,8 @@ jobs:
             record-chain/ots/native-anchors/ \
             record-chain/ots/native-arweave-bundles/ \
             record-chain/ots/native-arweave-registry.json \
+            record-chain/arweave-wallet-ledger.json \
+            api/arweave-wallet-status.json \
             api/record-chain-native-ots-arweave-registry.json \
             api/record-chain-native-ots-latest.json \
             api/record-chain-status.json \

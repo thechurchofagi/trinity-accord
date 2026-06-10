@@ -717,6 +717,8 @@ async function main() {
     balance_after_ar: balanceAfter.ar,
     actual_delta_winston: actualDeltaWinston,
     actual_delta_ar: actualDeltaAr,
+    estimated_upload_cost_winston: uploadPrice.winston,
+    estimated_upload_cost_ar: estimatedAr,
     estimated_cost_usd: Number(estimatedUsd.toFixed(8)),
     remaining_balance_estimated_usd:
       remainingBalanceEstimatedUsd == null

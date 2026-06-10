@@ -99,6 +99,10 @@ required = [
     "python3 scripts/test_archive_backlog_detector.py",
     "python3 scripts/test_archive_backlog_repair_contract.py",
 
+    # Arweave wallet ledger wiring
+    "python3 scripts/test_arweave_upload_wallet_ledger_integration.py",
+    "python3 scripts/test_arweave_paid_upload_wallet_wiring.py",
+
     # Generated drift
     "python3 scripts/generate_record_chain_status.py --check",
     "python3 scripts/generate_public_home_status.py --check",

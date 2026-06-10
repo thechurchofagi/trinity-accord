@@ -25,6 +25,38 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const WINSTON_PER_AR = 1_000_000_000_000n;
+
+function winstonToArDecimal(winstonValue) {
+  if (winstonValue == null) return null;
+  const value = BigInt(String(winstonValue));
+  const negative = value < 0n;
+  const abs = negative ? -value : value;
+  const whole = abs / WINSTON_PER_AR;
+  const frac = abs % WINSTON_PER_AR;
+  const fracString = frac.toString().padStart(12, "0");
+  return `${negative ? "-" : ""}${whole.toString()}.${fracString}`;
+}
+
+async function safeBalance(arweave, address) {
+  try {
+    const winston = await arweave.wallets.getBalance(address);
+    return {
+      available: true,
+      winston: String(winston),
+      ar: winstonToArDecimal(winston),
+      reason: null
+    };
+  } catch (err) {
+    return {
+      available: false,
+      winston: null,
+      ar: null,
+      reason: err.message
+    };
+  }
+}
+
 const payloadPath = arg("--payload");
 const outPath = arg("--out");
 
@@ -46,6 +78,9 @@ const arweave = Arweave.init({
   logging: false,
 });
 
+const address = await arweave.wallets.jwkToAddress(jwk);
+const balanceBefore = await safeBalance(arweave, address);
+
 const tx = await arweave.createTransaction({ data: payload }, jwk);
 
 tx.addTag("Content-Type", "application/json");
@@ -55,6 +90,9 @@ tx.addTag("Archive-Type", "record-chain-batch-archive");
 tx.addTag("Data-SHA256", payloadSha256);
 tx.addTag("Boundary", "mirror-not-authority");
 
+const uploadCostWinston = String(tx.reward);
+const uploadCostAr = winstonToArDecimal(uploadCostWinston);
+
 await arweave.transactions.sign(tx, jwk);
 
 const response = await arweave.transactions.post(tx);
@@ -62,7 +100,19 @@ if (response.status < 200 || response.status >= 300) {
   throw new Error(`Arweave post failed: ${response.status} ${response.statusText}`);
 }
 
-const address = await arweave.wallets.jwkToAddress(jwk);
+const balanceAfter = await safeBalance(arweave, address);
+
+let actualDeltaWinston = null;
+let actualDeltaAr = null;
+if (
+  balanceBefore.winston &&
+  balanceAfter.winston &&
+  /^\d+$/.test(balanceBefore.winston) &&
+  /^\d+$/.test(balanceAfter.winston)
+) {
+  actualDeltaWinston = (BigInt(balanceBefore.winston) - BigInt(balanceAfter.winston)).toString();
+  actualDeltaAr = winstonToArDecimal(actualDeltaWinston);
+}
 
 function uploadResult(result, readbackSha256, hashMatch, retryable) {
   return {
@@ -77,6 +127,17 @@ function uploadResult(result, readbackSha256, hashMatch, retryable) {
     hash_match: hashMatch,
     retryable,
     wallet_address_sha256: sha256Hex(address),
+    wallet_balance_before_available: balanceBefore.available,
+    wallet_balance_before_winston: balanceBefore.winston,
+    wallet_balance_before_ar: balanceBefore.ar,
+    wallet_balance_after_available: balanceAfter.available,
+    wallet_balance_after_reason: balanceAfter.reason,
+    wallet_balance_after_winston: balanceAfter.winston,
+    wallet_balance_after_ar: balanceAfter.ar,
+    upload_cost_winston: uploadCostWinston,
+    upload_cost_ar: uploadCostAr,
+    actual_delta_winston: actualDeltaWinston,
+    actual_delta_ar: actualDeltaAr,
     tags: {
       "Content-Type": "application/json",
       "App-Name": "Trinity-Accord",

@@ -108,7 +108,7 @@ PY
       - name: Live upload
         if: inputs.upload_mode == 'live'
         run: |
-          set -euo pipefail
+          set +e
           test "${{ inputs.confirm }}" = "I_UNDERSTAND_THIS_UPLOADS_RECORD_CHAIN_DATA_TO_ARWEAVE"
           test -n "$ARKEY"
           mkdir -p /tmp/arweave-data
@@ -118,6 +118,20 @@ PY
           node scripts/arweave_upload_payload.mjs \
             --payload "${{ steps.build.outputs.bundle_file }}" \
             --out /tmp/data-arweave-upload-result.json
+          UPLOAD_EXIT=$?
+          set -e
+
+          if [ -f /tmp/data-arweave-upload-result.json ]; then
+            python3 scripts/record_arweave_upload_result.py \
+              --upload-result-json /tmp/data-arweave-upload-result.json \
+              --kind record_chain_data_arweave_archive \
+              --source-path "${{ steps.build.outputs.bundle_file }}"
+          fi
+
+          if [ "$UPLOAD_EXIT" -ne 0 ]; then
+            exit "$UPLOAD_EXIT"
+          fi
+
           python3 scripts/update_record_chain_data_arweave_registry.py \
             --bundle-file "${{ steps.build.outputs.bundle_file }}" \
             --upload-result-json /tmp/data-arweave-upload-result.json \
@@ -128,6 +142,13 @@ PY
           python3 scripts/verify_record_chain_data_arweave_registry.py \
             --registry record-chain/arweave-data-registry.json \
             --verify-local-bundles
+
+      - name: Regenerate wallet and public status
+        if: inputs.upload_mode == 'live'
+        run: |
+          python3 scripts/generate_arweave_wallet_status.py
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/generate_sitemap.py
 
       - name: Restore drill for snapshot
         if: inputs.mode == 'snapshot'
@@ -142,7 +163,12 @@ PY
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add record-chain/arweave-data-bundles \
                   record-chain/arweave-data-registry.json \
-                  api/record-chain-arweave-data-registry.json
+                  api/record-chain-arweave-data-registry.json \
+                  record-chain/arweave-wallet-ledger.json \
+                  api/arweave-wallet-status.json \
+                  api/public-home-status.json \
+                  index.md \
+                  sitemap.xml
           if git diff --cached --quiet; then
             echo "No data archive changes."
           else

@@ -470,6 +470,25 @@ def update_native_registry(
     return registry
 
 
+def record_wallet_upload_result(upload_result_path: Path, source_path: Path) -> None:
+    if not upload_result_path.exists():
+        return
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/record_arweave_upload_result.py",
+            "--upload-result-json",
+            str(upload_result_path),
+            "--kind",
+            "native_ots_bundle_archive",
+            "--source-path",
+            rel(source_path),
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+
+
 def upload_native_ots_bundle_to_arweave(
     *,
     bundle: Path,
@@ -495,25 +514,36 @@ def upload_native_ots_bundle_to_arweave(
         "ARWEAVE_READBACK_TIMEOUT_SECONDS": str(readback_timeout_seconds),
         "ARWEAVE_READBACK_RETRY_SECONDS": str(readback_retry_seconds),
     }
-    run_cmd([
-        "node",
-        "scripts/arweave_cost_gate.mjs",
-        "--payload-file", rel(bundle),
-        "--record-type", "native_ots_proof_bundle",
-        "--run-id", run_id,
-        "--log-dir", rel(paid_dir),
-        "--mode", "production",
-        "--expected-owner", EXPECTED_OWNER,
-        "--gateway-url", gateway_url,
-        "--max-upload-usd", MAX_UPLOAD_USD,
-        "--safety-multiplier", SAFETY_MULTIPLIER,
-        "--jwk-path", jwk_path,
-        "--content-type", "application/json",
-        "--app-name", "Trinity-Accord-Native-OTS-Proof-Bundle",
-        "--extra-tags-json", json.dumps(extra_tags, separators=(",", ":")),
-    ], env=env)
+    upload_result_path = paid_dir / "11-arweave-upload-result.native_ots_proof_bundle.json"
 
-    upload = read_json(paid_dir / "11-arweave-upload-result.native_ots_proof_bundle.json")
+    try:
+        run_cmd([
+            "node",
+            "scripts/arweave_cost_gate.mjs",
+            "--payload-file", rel(bundle),
+            "--record-type", "native_ots_proof_bundle",
+            "--run-id", run_id,
+            "--log-dir", rel(paid_dir),
+            "--mode", "production",
+            "--expected-owner", EXPECTED_OWNER,
+            "--gateway-url", gateway_url,
+            "--max-upload-usd", MAX_UPLOAD_USD,
+            "--safety-multiplier", SAFETY_MULTIPLIER,
+            "--jwk-path", jwk_path,
+            "--content-type", "application/json",
+            "--app-name", "Trinity-Accord-Native-OTS-Proof-Bundle",
+            "--extra-tags-json", json.dumps(extra_tags, separators=(",", ":")),
+        ], env=env)
+    except SystemExit:
+        # If tx was posted but later readback failed, the result file may exist and AR may already be spent.
+        if upload_result_path.exists():
+            try:
+                record_wallet_upload_result(upload_result_path, bundle)
+            except Exception as wallet_exc:
+                print(f"WARNING: failed to record wallet ledger after upload error: {wallet_exc}", file=sys.stderr)
+        raise
+
+    upload = read_json(upload_result_path)
     readback = read_json(paid_dir / "11b-arweave-readback-verify.native_ots_proof_bundle.json")
     bundle_sha = sha256_bytes(bundle.read_bytes())
 
@@ -528,11 +558,19 @@ def upload_native_ots_bundle_to_arweave(
     if readback.get("downloaded_sha256") != bundle_sha:
         raise SystemExit("native OTS proof bundle readback sha mismatch")
 
+    record_wallet_upload_result(upload_result_path, bundle)
+
     return {
         "tx_id": upload["tx_id"],
         "wallet_address": upload.get("wallet_address"),
         "gateway_url": upload.get("gateway_url"),
-        "upload_result": rel(paid_dir / "11-arweave-upload-result.native_ots_proof_bundle.json"),
+        "actual_delta_winston": upload.get("actual_delta_winston"),
+        "actual_delta_ar": upload.get("actual_delta_ar"),
+        "estimated_upload_cost_winston": upload.get("estimated_upload_cost_winston"),
+        "estimated_upload_cost_ar": upload.get("estimated_upload_cost_ar"),
+        "balance_after_ar": upload.get("balance_after_ar"),
+        "balance_after_winston": upload.get("balance_after_winston"),
+        "upload_result": rel(upload_result_path),
         "readback_result": rel(paid_dir / "11b-arweave-readback-verify.native_ots_proof_bundle.json"),
     }
 

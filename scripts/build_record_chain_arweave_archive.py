@@ -73,6 +73,25 @@ def refresh_archive_backlog() -> None:
     if detector.exists():
         subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=False)
 
+
+def record_wallet_upload(upload_result_path: Path, source_path: Path) -> None:
+    if not upload_result_path.exists():
+        return
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/record_arweave_upload_result.py",
+            "--upload-result-json",
+            str(upload_result_path),
+            "--kind",
+            "record_chain_arweave_archive",
+            "--source-path",
+            str(source_path.relative_to(ROOT)),
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+
 def source_file_ref(path: Path) -> dict:
     return {
         "path": str(path.relative_to(ROOT)),
@@ -379,6 +398,11 @@ def build_archive_manifest(mode: str) -> None:
             except SystemExit as exc:
                 partial = archive_dir / "upload-result.json"
                 upload_result = read_json(partial) if partial.exists() else {}
+
+                # If Arweave already returned a tx_id before readback failed, record the wallet spend.
+                if upload_result.get("txid") or upload_result.get("tx_id"):
+                    record_wallet_upload(partial, payload_path)
+
                 status = archive_status_from_upload(upload_result) if upload_result else "upload_failed"
                 manifest["arweave"].update({
                     "enabled": True,
@@ -397,6 +421,11 @@ def build_archive_manifest(mode: str) -> None:
                 upload_failed = True
             else:
                 status = archive_status_from_upload(upload_result)
+
+                result_path = archive_dir / "upload-result.json"
+                if upload_result.get("txid") or upload_result.get("tx_id"):
+                    record_wallet_upload(result_path, payload_path)
+
                 manifest["arweave"] = {
                     "enabled": True,
                     "upload_mode": "live",

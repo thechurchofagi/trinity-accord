@@ -732,6 +732,28 @@ def main() -> int:
         fail(f"arweave wallet ledger update contract failed:\n{result.stdout}\n{result.stderr}")
     ok("arweave wallet ledger update contract")
 
+    # Arweave upload wallet ledger integration
+    result = subprocess.run(
+        [sys.executable, "scripts/test_arweave_upload_wallet_ledger_integration.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"arweave upload wallet ledger integration failed:\n{result.stdout}\n{result.stderr}")
+    ok("arweave upload wallet ledger integration")
+
+    # Paid upload wallet wiring contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_arweave_paid_upload_wallet_wiring.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"paid upload wallet wiring contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("paid upload wallet wiring contract")
+
     # Archive backlog detector contract
     result = subprocess.run(
         [sys.executable, "scripts/test_archive_backlog_detector.py"],
