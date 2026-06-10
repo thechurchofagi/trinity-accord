@@ -62,16 +62,17 @@ HOMEPAGE_MUST_NOT_CONTAIN = [
 
 # Homepage must contain these Record-Chain-first patterns
 HOMEPAGE_MUST_CONTAIN = [
-    "Record-Chain Intake status",
-    "Native record-chain records",
-    "Current Record-Chain Autonomy Signal",
-    "Historical pre-record-chain Echo / Verification / Guardian materials are preserved",
+    "Official Live Reception",
+    "Agency Profile",
+    "Technical chain health",
+    "Technical audit inventory",
+    "Primary homepage counters are live-era display counters beginning at R-000000033",
 ]
 
 # Either of these must appear (depends on whether records exist)
 HOMEPAGE_MUST_CONTAIN_ONE_OF = [
-    "not yet established in current record-chain",
-    "Fully autonomous:",
+    "Self-initiated official records:",
+    "Official records:",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
@@ -140,8 +141,13 @@ def main() -> None:
         try:
             status = json.loads(status_path.read_text(encoding="utf-8"))
             assert isinstance(status, dict)
-            if status.get("schema") != "trinityaccord.public-home-status.v2":
-                errors.append(f"public-home-status.json: schema should be v2, got {status.get('schema')}")
+            if status.get("schema") != "trinityaccord.public-home-status.v3":
+                errors.append(f"public-home-status.json: schema should be v3, got {status.get('schema')}")
+            primary = status.get("primary_counters", {})
+            if primary.get("classification_rule", {}).get("native_chain_length_is_not_primary_counter") is not True:
+                errors.append("public-home-status.json: native chain length must not be the primary counter")
+            if primary.get("official_live_reception") == status.get("technical_health", {}).get("native_chain_length"):
+                errors.append("public-home-status.json: official_live_reception must not equal native_chain_length")
             if "current_record_chain_status" not in status:
                 errors.append("public-home-status.json: missing current_record_chain_status")
             if "current_record_chain_autonomy_signal" not in status:

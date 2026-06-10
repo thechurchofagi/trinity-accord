@@ -94,6 +94,9 @@ def main() -> None:
         "OTS_AUX_FILES",
         "ARWEAVE_PREFIXES",
         "ARWEAVE_FILES",
+        "BACKLOG_FILES",
+        "archive: repair record-chain archive backlog",
+        "archive_backlog",
         "PUBLIC_GENERATED_FILES",
         "MAINTENANCE_OVERRIDE_TOKEN",
         "APPROVED_ACTIONS_ACTOR",
@@ -313,6 +316,40 @@ def main() -> None:
         head = commit(repo, "record-chain: auto-finalize accepted submissions")
         result = check_guard(repo, base, head, actor="github-actions[bot]")
         require(result.returncode != 0, "multi-commit protected push must fail")
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        base = commit(repo, "init")
+
+        write(repo / "record-chain/arweave-backlog.json", "{}\n")
+        write(repo / "api/record-chain-arweave-backlog.json", "{}\n")
+        write(repo / "record-chain/ots/native-ots-backlog.json", "{}\n")
+        write(repo / "api/record-chain-native-ots-backlog.json", "{}\n")
+        write(repo / "record-chain/arweave-archives/archive/manifest.json", "{}\n")
+        write(repo / "record-chain/ots/native-arweave-registry.json", "{}\n")
+        write(repo / "api/record-chain-status.json", "{}\n")
+        write(repo / "api/public-home-status.json", "{}\n")
+        write(repo / "index.md", "archive backlog\n")
+        write(repo / "sitemap.xml", "<xml />\n")
+        head = commit(repo, "archive: repair record-chain archive backlog")
+        result = check_guard(repo, base, head, actor="github-actions[bot]")
+        require(result.returncode == 0, f"approved archive backlog repair should pass:\n{result.stdout}\n{result.stderr}")
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        base = commit(repo, "init")
+        write(repo / "record-chain/arweave-backlog.json", "{}\n")
+        head = commit(repo, "archive: repair record-chain archive backlog")
+        result = check_guard(repo, base, head, actor="human-user")
+        require(result.returncode != 0, "human actor spoofing archive backlog repair message must fail")
 
     print("Record-chain write-path guard contract PASSED.")
 

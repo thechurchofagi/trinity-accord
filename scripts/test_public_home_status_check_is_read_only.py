@@ -53,7 +53,7 @@ def main():
     # --- Test 2: --check fails on stale JSON without rewriting it ---
     original_status = status_path.read_text(encoding="utf-8")
     corrupted = original_status.replace(
-        '"schema": "trinityaccord.public-home-status.v2"',
+        '"schema": "trinityaccord.public-home-status.v3"',
         '"schema": "BROKEN_TEST_SCHEMA"',
         1,
     )

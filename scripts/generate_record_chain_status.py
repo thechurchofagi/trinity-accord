@@ -197,6 +197,8 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     ots = read_json("api/record-chain-native-ots-latest.json")
     arweave = read_json("api/record-chain-arweave-index.json")
     native_ots_registry = read_json_if_exists("api/record-chain-native-ots-arweave-registry.json")
+    record_chain_backlog = read_json_if_exists("api/record-chain-arweave-backlog.json") or {"summary": {}}
+    native_ots_backlog = read_json_if_exists("api/record-chain-native-ots-backlog.json") or {"summary": {}}
     record_index = read_json("record-chain/indexes/record-index.json")
 
     records = load_records_from_index(record_index)
@@ -242,6 +244,19 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
         rc["latest_batch_manifest_sha256"] = tip.get("latest_batch_manifest_sha256")
 
     status["pipeline_status"] = pipeline
+
+    rc_backlog_summary = record_chain_backlog.get("summary", {})
+    ots_backlog_summary = native_ots_backlog.get("summary", {})
+    status["archive_backlog"] = {
+        "record_chain_arweave_pending": rc_backlog_summary.get("pending_upload_count", 0),
+        "record_chain_arweave_failed": rc_backlog_summary.get("failed_upload_count", 0) + rc_backlog_summary.get("readback_failed_count", 0),
+        "record_chain_arweave_waiting_for_key": rc_backlog_summary.get("waiting_for_key_count", 0),
+        "native_ots_upgrade_pending": ots_backlog_summary.get("waiting_for_upgrade_count", 0),
+        "native_ots_arweave_pending": ots_backlog_summary.get("pending_upload_count", 0),
+        "native_ots_arweave_failed": ots_backlog_summary.get("failed_upload_count", 0) + ots_backlog_summary.get("readback_failed_count", 0),
+        "native_ots_waiting_for_key": ots_backlog_summary.get("waiting_for_key_count", 0),
+        "backlog_current": bool(rc_backlog_summary.get("backlog_current", True) and ots_backlog_summary.get("backlog_current", True)),
+    }
 
     status.setdefault("legacy_compatibility", {})
     status["legacy_compatibility"]["native_record_count"] = native_count

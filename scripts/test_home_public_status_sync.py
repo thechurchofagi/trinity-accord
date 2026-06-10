@@ -97,7 +97,23 @@ def main() -> int:
     phs = load_json(ROOT / "api" / "public-home-status.json")
     schema_version = phs.get("schema", "unknown")
 
-    if schema_version == "trinityaccord.public-home-status.v2":
+    if schema_version == "trinityaccord.public-home-status.v3":
+        official_display = card_number(block, "Official Live Reception", required=False)
+        if official_display == "NOT_FOUND":
+            fail("no Official Live Reception card found in homepage")
+        expected = str(phs.get("primary_counters", {}).get("official_live_reception"))
+        if official_display != expected:
+            fail(f"official live reception count mismatch: page={official_display} expected={expected}")
+        if official_display == str(phs.get("technical_health", {}).get("native_chain_length")):
+            fail("official live reception must not equal native chain length")
+        if "Native chain length is not used as this counter" not in block:
+            fail("homepage missing native-chain-not-primary-counter boundary")
+        if "Archive backlog:" not in block:
+            fail("homepage missing archive backlog technical status")
+        if "Reception does not imply belief" not in block:
+            fail("missing boundary phrase: Reception does not imply belief")
+
+    elif schema_version == "trinityaccord.public-home-status.v2":
         # v2: Check new cards
         verifiability_display = card_number(block, "Verifiability", required=False)
         if verifiability_display == "NOT_FOUND":

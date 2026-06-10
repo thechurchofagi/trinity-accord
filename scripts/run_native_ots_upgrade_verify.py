@@ -33,6 +33,8 @@ NATIVE_ANCHORS_DIR = ROOT / "record-chain/ots/native-anchors"
 NATIVE_BUNDLES_DIR = ROOT / "record-chain/ots/native-arweave-bundles"
 NATIVE_REGISTRY = ROOT / "record-chain/ots/native-arweave-registry.json"
 NATIVE_API_REGISTRY = ROOT / "api/record-chain-native-ots-arweave-registry.json"
+NATIVE_OTS_BACKLOG = ROOT / "record-chain/ots/native-ots-backlog.json"
+NATIVE_OTS_API_BACKLOG = ROOT / "api/record-chain-native-ots-backlog.json"
 
 CHAIN_TIP = ROOT / "record-chain/chain-tip.json"
 RECORD_INDEX = ROOT / "record-chain/indexes/record-index.json"
@@ -67,6 +69,39 @@ def write_json(path: Path, obj: Any) -> None:
         json.dumps(obj, indent=2, sort_keys=False, ensure_ascii=False, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+
+
+def refresh_native_ots_backlog() -> None:
+    detector = ROOT / "scripts" / "detect_archive_backlog.py"
+    if detector.exists():
+        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=False)
+
+
+def mark_native_ots_backlog_status(anchor_rel: str | None, status: str, error: str | None = None, tx_id: str | None = None) -> None:
+    refresh_native_ots_backlog()
+    data = read_json(NATIVE_OTS_BACKLOG) if NATIVE_OTS_BACKLOG.exists() else {"items": []}
+    changed = False
+    for item in data.get("items", []):
+        if anchor_rel and item.get("anchor_file") != anchor_rel:
+            continue
+        item["archive_status"] = status
+        item["retry_count"] = int(item.get("retry_count") or 0) + 1
+        item["last_attempt_at"] = utc_now()
+        item["last_error"] = error
+        if tx_id:
+            item["tx_id"] = tx_id
+        item["next_action"] = {
+            "waiting_for_key": "provide_arweave_key",
+            "upload_failed": "retry_upload",
+            "readback_failed": "retry_readback_or_upload",
+            "archived": "no_op",
+        }.get(status, "review")
+        changed = True
+        break
+    if changed:
+        # Keep the existing detector-generated envelope and let the detector recompute on the next pass.
+        write_json(NATIVE_OTS_BACKLOG, data)
+        write_json(NATIVE_OTS_API_BACKLOG, data)
 
 
 def is_repo_relative(value: str) -> bool:
@@ -519,6 +554,9 @@ def main() -> int:
                         help="Skip ots upgrade step")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--enable-paid-upload", action="store_true")
+    parser.add_argument("--anchor-file", default=None)
+    parser.add_argument("--all-backlog", action="store_true")
+    parser.add_argument("--max-items", type=int, default=1)
     parser.add_argument("--confirm-paid-upload", default="")
     parser.add_argument("--jwk-path", default=os.environ.get("ARWEAVE_JWK_PATH"))
     parser.add_argument("--gateway-url", default=os.environ.get("ARWEAVE_GATEWAY_URL", "https://arweave.net"))
@@ -541,7 +579,19 @@ def main() -> int:
     core_before = snapshot_core_files()
 
     latest = validate_native_latest_ots()
-    anchor_rel = latest["latest_anchor_file"]
+    if args.all_backlog:
+        refresh_native_ots_backlog()
+        backlog = read_json(NATIVE_OTS_BACKLOG) if NATIVE_OTS_BACKLOG.exists() else {"items": []}
+        candidates = [item for item in backlog.get("items", []) if item.get("archive_status") in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}]
+        if not candidates:
+            write_summary(log_dir, {"schema": "trinity_native_ots_summary.v1", "run_id": args.run_id, "result": "backlog_empty", "paid_upload_performed": False, "registry_updated": False, "next_action": "no_op"})
+            return 0
+        if args.max_items < 1:
+            raise SystemExit("--max-items must be >= 1")
+        args.anchor_file = candidates[0].get("anchor_file") or args.anchor_file
+    anchor_rel = args.anchor_file or latest["latest_anchor_file"]
+    if not is_repo_relative(anchor_rel):
+        raise SystemExit(f"--anchor-file must be repo-relative: {anchor_rel}")
     anchor = validate_native_anchor(anchor_rel)
     registry = validate_native_registry()
     anchored_sha = anchor.get("anchored_file_sha256")
@@ -613,8 +663,10 @@ def main() -> int:
             if args.confirm_paid_upload != CONFIRM_PAID_UPLOAD:
                 raise SystemExit(f"paid upload requires --confirm-paid-upload {CONFIRM_PAID_UPLOAD!r}")
             if not args.jwk_path:
+                mark_native_ots_backlog_status(anchor_rel, "waiting_for_key", "paid upload requires --jwk-path or ARWEAVE_JWK_PATH")
                 raise SystemExit("paid upload requires --jwk-path or ARWEAVE_JWK_PATH")
-            upload_info = upload_native_ots_bundle_to_arweave(
+            try:
+                upload_info = upload_native_ots_bundle_to_arweave(
                 bundle=bundle,
                 log_dir=log_dir,
                 run_id=args.run_id,
@@ -623,7 +675,11 @@ def main() -> int:
                 readback_gateways=args.readback_gateways,
                 readback_timeout_seconds=args.readback_timeout_seconds,
                 readback_retry_seconds=args.readback_retry_seconds,
-            )
+                )
+            except SystemExit as exc:
+                message = str(exc)
+                mark_native_ots_backlog_status(anchor_rel, "readback_failed" if "readback" in message.lower() else "upload_failed", message)
+                raise
             registry = update_native_registry(
                 anchor_rel,
                 bundle,
@@ -634,6 +690,7 @@ def main() -> int:
             )
             paid_upload_performed = True
             registry_updated = True
+            mark_native_ots_backlog_status(anchor_rel, "archived", None, upload_info.get("tx_id"))
             result = f"{result}_archived" if "archived" not in result else result
         else:
             registry = update_native_registry(anchor_rel, bundle, log_dir)

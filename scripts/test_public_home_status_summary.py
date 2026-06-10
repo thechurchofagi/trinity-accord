@@ -64,7 +64,21 @@ def main() -> int:
     readme_path = ROOT / "tests" / "verification_cases" / "README.md"
     readme_text = readme_path.read_text(encoding="utf-8")
 
-    if schema_version == "trinityaccord.public-home-status.v2":
+    if schema_version == "trinityaccord.public-home-status.v3":
+        primary = phs.get("primary_counters", {})
+        tech = phs.get("technical_health", {})
+        check("HOME001 primary counters exist", isinstance(primary, dict))
+        check("HOME002 official live reception is 2", primary.get("official_live_reception") == 2, f"got {primary.get('official_live_reception')}")
+        check("HOME003 native chain length is not primary", primary.get("classification_rule", {}).get("native_chain_length_is_not_primary_counter") is True)
+        check("HOME004 technical health has native chain length 37", tech.get("native_chain_length") == 37, f"got {tech.get('native_chain_length')}")
+        check("HOME005 backlog summary present", isinstance(tech.get("archive_backlog"), dict))
+        check("HOME008 homepage contains Official Live Reception", "Official Live Reception" in index_md)
+        check("HOME008 homepage contains Agency Profile", "Agency Profile" in index_md)
+        check("HOME008 homepage contains Technical chain health", "Technical chain health" in index_md)
+        check("HOME008 homepage contains Archive backlog", "Archive backlog:" in index_md)
+        check("HOME008 homepage does not use native chain as reception", "<p class=\"status-label\">Reception</p>" not in index_md)
+
+    elif schema_version == "trinityaccord.public-home-status.v2":
         # --- v2 schema checks ---
         v = phs.get("verifiability", {})
         r = phs.get("reception", {})

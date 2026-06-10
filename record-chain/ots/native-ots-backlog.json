@@ -1,0 +1,97 @@
+{
+  "schema": "trinityaccord.native-ots-backlog.v1",
+  "updated_at": "2026-06-09T10:09:16Z",
+  "items": [
+    {
+      "key": "82741119d21e11b42cf4627c5ae5575a749db9d16ae141797a5bd4e616872b2a",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "74684e4c2585b43951c24462ef3306060080811e33d2646237b12a4d820fcfc2",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    },
+    {
+      "key": "020f96534595062f6b63b1f753c71af66856c891521cc50c5b5d428cc1f9619f",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "3ca459e1b9b74f60e20ad041aa67bcdc9fa53907818a785c36579049ed4de31a",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    },
+    {
+      "key": "41ac030919708c09d4be1213435fd5a08565f5ff5d81aa537416dee9dc1dae7b",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "299eae7f11ccdc282bf73671604dc72356433c31c76f3b4974455d2de0ede8b0",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-35-R-000000035-4ef3b8e23046eb7b-299eae7f11ccdc28.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    },
+    {
+      "key": "0b9d57d9d15b981d45af7da483aa0040ad0a8ec4343b66af5da567632119bfcc",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "6281b094a560c48ff0e0b1092775708809394ef71534efe882138e5bd33960a5",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    },
+    {
+      "key": "ad3cdee0b32b727c7b94400a8d8c5dc734474aff0261ae351d10404e95e43403",
+      "kind": "native_ots_bundle",
+      "archive_status": "waiting_for_upgrade",
+      "anchored_file_sha256": "d7c0a9c39df3128c42799865253b10e2dbc52ed57a5f2886ff3d9dc767122c8d",
+      "ots_status": "pending",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-37-R-000000037-bbbef52b1615923d-d7c0a9c39df3128c.anchor.json",
+      "bundle_file": null,
+      "bundle_sha256": null,
+      "tx_id": null,
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "last_error": null,
+      "next_action": "wait_for_ots_upgrade"
+    }
+  ],
+  "summary": {
+    "waiting_for_upgrade_count": 5,
+    "pending_upload_count": 0,
+    "failed_upload_count": 0,
+    "readback_failed_count": 0,
+    "waiting_for_key_count": 0,
+    "archived_count": 0,
+    "backlog_current": false
+  },
+  "boundary": {
+    "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_authority": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_attestation": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_amendment": true,
+    "native_ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+  }
+}

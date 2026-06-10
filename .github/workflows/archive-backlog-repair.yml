@@ -1,0 +1,112 @@
+name: Archive backlog repair
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive-backlog-repair-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Rebase latest branch
+        run: git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+
+
+      - name: Prepare Arweave JWK if available
+        id: jwk
+        env:
+          ARKEY_CONFIGURED: ${{ secrets.ARKEY || vars.ARKEY }}
+          ARWEAVE_JWK_CONFIGURED: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
+        run: |
+          set -euo pipefail
+          ARWEAVE_JWK_JSON="${ARKEY_CONFIGURED:-${ARWEAVE_JWK_CONFIGURED:-}}"
+          if [ -z "${ARWEAVE_JWK_JSON:-}" ]; then
+            echo "has_jwk=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "::add-mask::$ARWEAVE_JWK_JSON"
+          mkdir -p /tmp/arweave-secrets
+          printf '%s' "$ARWEAVE_JWK_JSON" > /tmp/arweave-secrets/wallet.jwk.json
+          chmod 600 /tmp/arweave-secrets/wallet.jwk.json
+          python3 - <<'PY'
+          import json
+          json.load(open("/tmp/arweave-secrets/wallet.jwk.json"))
+          PY
+          echo "ARWEAVE_JWK_PATH=/tmp/arweave-secrets/wallet.jwk.json" >> "$GITHUB_ENV"
+          echo "has_jwk=true" >> "$GITHUB_OUTPUT"
+
+      - name: Detect archive backlog
+        run: python3 scripts/detect_archive_backlog.py --write --github-output | tee /tmp/archive-backlog-output.txt
+
+      - name: Repair one record-chain Arweave item
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          ARWEAVE_JWK: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
+          ARWEAVE_JWK_PATH: ${{ env.ARWEAVE_JWK_PATH || secrets.ARWEAVE_JWK_PATH || vars.ARWEAVE_JWK_PATH }}
+        run: python3 scripts/process_archive_backlog.py --kind record_chain_arweave --max-items 1 --mode live
+
+      - name: Repair one native OTS proof-bundle item
+        env:
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          ARWEAVE_JWK: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
+          ARWEAVE_JWK_PATH: ${{ env.ARWEAVE_JWK_PATH || secrets.ARWEAVE_JWK_PATH || vars.ARWEAVE_JWK_PATH }}
+        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 1 --enable-paid-upload
+
+      - name: Regenerate public status
+        run: |
+          python3 scripts/generate_record_chain_status.py
+          python3 scripts/generate_public_home_status.py
+          python3 scripts/check_public_home_status_contract.py
+          python3 scripts/generate_sitemap.py
+
+      - name: Commit repaired backlog metadata
+        run: |
+          if git diff --quiet; then
+            echo "No archive backlog changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            record-chain/arweave-backlog.json \
+            api/record-chain-arweave-backlog.json \
+            record-chain/ots/native-ots-backlog.json \
+            api/record-chain-native-ots-backlog.json \
+            record-chain/arweave-archives/ \
+            record-chain/ots/native-arweave-bundles/ \
+            record-chain/ots/native-arweave-registry.json \
+            api/record-chain-native-ots-arweave-registry.json \
+            api/record-chain-status.json \
+            api/public-home-status.json \
+            index.md \
+            sitemap.xml
+          git diff --cached --name-only | while read -r path; do
+            case "$path" in
+              record-chain/records/*|record-chain/pending/*|record-chain/processed/*|record-chain/rejected/*|record-chain/chain-tip.json|archive/authority-*|authority/*|Bitcoin\ Originals/*)
+                echo "Forbidden archive backlog repair write: $path" >&2
+                exit 1
+                ;;
+            esac
+          done
+          git commit -m "archive: repair record-chain archive backlog"
+          git push

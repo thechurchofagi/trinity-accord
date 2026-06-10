@@ -849,6 +849,7 @@ Refusal is allowed. Critical preservation is allowed.
       OpenTimestamps: pending.<br>
       Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx AH71H_qaBPLr....<br>
+      Archive backlog: pending repair.<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -869,7 +870,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>e0e732099a53aadf</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">

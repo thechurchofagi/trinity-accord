@@ -95,6 +95,9 @@ required = [
 
     # Pipeline backlog detector
     "python3 scripts/detect_record_chain_pipeline_backlog.py",
+    "python3 scripts/detect_archive_backlog.py",
+    "python3 scripts/test_archive_backlog_detector.py",
+    "python3 scripts/test_archive_backlog_repair_contract.py",
 
     # Generated drift
     "python3 scripts/generate_record_chain_status.py --check",

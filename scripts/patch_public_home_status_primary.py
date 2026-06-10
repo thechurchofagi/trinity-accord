@@ -36,6 +36,8 @@ CHAIN_TIP = ROOT / "record-chain" / "chain-tip.json"
 RC_STATUS = ROOT / "api" / "record-chain-status.json"
 ANCHOR_STATUS = ROOT / "api" / "record-chain-anchor-status.json"
 ARWEAVE_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
+ARWEAVE_BACKLOG = ROOT / "api" / "record-chain-arweave-backlog.json"
+NATIVE_OTS_BACKLOG = ROOT / "api" / "record-chain-native-ots-backlog.json"
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 CLASSIFICATION = "official_live_reception"
@@ -78,7 +80,7 @@ def without_generated_at(data: dict[str, Any]) -> dict[str, Any]:
 
 def digest() -> str:
     h = hashlib.sha256()
-    paths = [CHAIN_TIP, RC_STATUS, ANCHOR_STATUS, ARWEAVE_INDEX, VISIBILITY_PATH]
+    paths = [CHAIN_TIP, RC_STATUS, ANCHOR_STATUS, ARWEAVE_INDEX, ARWEAVE_BACKLOG, NATIVE_OTS_BACKLOG, VISIBILITY_PATH]
     paths.extend(sorted(RECORDS_DIR.glob("R-*.json")))
     for path in paths:
         h.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
@@ -249,6 +251,7 @@ def technical_health(status: dict[str, Any]) -> dict[str, Any]:
     raw_ots = ots.get("ots_status") or ots.get("status") or "pending"
     arweave_status = arweave.get("status") or "current"
     return {
+        "archive_backlog": status.get("archive_backlog") or rc.get("anchoring", {}).get("archive_backlog", {}),
         "technical_chain_length": rc.get("current_chain_length", 0),
         "native_chain_length": rc.get("current_chain_length", 0),
         "latest_record": rc.get("latest_record_id"),
@@ -296,6 +299,8 @@ def render(status: dict[str, Any]) -> str:
     txid = arweave_index.get("latest_arweave_txid")
     short_txid = txid[:12] + "..." if txid and len(txid) > 12 else txid
     arweave_status = f"current live mirror; latest tx {short_txid}" if arweave_index.get("current_upload_mode") == "live" and txid else str(tech["arweave"])
+    backlog = tech.get("archive_backlog", {}) if isinstance(tech.get("archive_backlog"), dict) else {}
+    backlog_status = "current" if backlog.get("backlog_current", True) else "pending repair"
     active = profile.get("self_initiated", 0)
     passive = profile.get("human_requested_or_introduced", 0)
     decided = profile.get("self_decided", 0)
@@ -361,6 +366,7 @@ def render(status: dict[str, Any]) -> str:
       OpenTimestamps: {tech["ots_raw_status"]}.<br>
       Native OTS proof bundle Arweave archive: {proof_status}.<br>
       Record-Chain Arweave archive: {arweave_status}.<br>
+      Archive backlog: {backlog_status}.<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -381,7 +387,7 @@ def render(status: dict[str, Any]) -> str:
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>{status["source_digest"]}</code>.</p>
 {END}"""
 
 
@@ -394,6 +400,9 @@ def build_status(current: dict[str, Any], previous: dict[str, Any]) -> dict[str,
     current.setdefault("generated_from", [])
     if SIDECAR_SOURCE not in current["generated_from"]:
         current["generated_from"].insert(0, SIDECAR_SOURCE)
+    for source in ["/api/record-chain-arweave-backlog.json", "/api/record-chain-native-ots-backlog.json"]:
+        if source not in current["generated_from"]:
+            current["generated_from"].append(source)
     current["primary_counters"] = primary_counters(records, idx, config)
     current["technical_health"] = technical_health(current)
     current.setdefault("reception", {})["not_homepage_primary_counter"] = True
@@ -416,7 +425,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="Fail if patcher would change committed public status files")
     args = parser.parse_args()
 
-    previous = read_committed_status()
+    previous = load(STATUS_PATH, {})
     status = build_status(load(STATUS_PATH), previous)
     expected_json = dump(status)
     old_text = INDEX_MD.read_text(encoding="utf-8")
