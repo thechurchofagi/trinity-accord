@@ -29,6 +29,7 @@ jobs:
       - name: Regenerate public homepage status for deployment
         run: |
           python scripts/generate_public_home_status.py
+          python scripts/ensure_public_home_status_block.py
           python scripts/patch_public_home_status_primary.py
           python scripts/check_public_home_status_contract.py
       - name: Setup Pages
