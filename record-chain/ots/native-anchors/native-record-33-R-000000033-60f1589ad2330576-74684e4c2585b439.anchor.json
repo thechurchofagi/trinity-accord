@@ -3,8 +3,10 @@
   "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "74684e4c2585b43951c24462ef3306060080811e33d2646237b12a4d820fcfc2",
   "bitcoin_attestation": null,
-  "bitcoin_pending": true,
+  "bitcoin_attestation_embedded": false,
+  "bitcoin_pending": false,
   "bitcoin_verified": false,
+  "calendar_attested": false,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
   "created_at": "2026-06-08T06:36:50Z",
@@ -24,9 +26,21 @@
   "ots_file": "record-chain/ots/native-anchors/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.native-record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
   "ots_file_sha256": "9ebdc092a64b6d3f0a20da578447b38397c96d338fcb4006f4369c4c3465d7fe",
+  "ots_info_command": null,
+  "ots_info_exit_code": null,
+  "ots_info_stderr": null,
+  "ots_info_stdout": null,
   "ots_status": "pending",
   "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
   "ots_stdout": "",
+  "ots_upgrade_command": null,
+  "ots_upgrade_exit_code": null,
+  "ots_upgrade_stderr": null,
+  "ots_upgrade_stdout": null,
+  "ots_verify_command": null,
+  "ots_verify_exit_code": null,
+  "ots_verify_stderr": null,
+  "ots_verify_stdout": null,
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000033",
@@ -70,5 +84,7 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
-  "verified_at": null
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": null,
+  "verified_at": "2026-06-10T11:49:22Z"
 }
