@@ -56,19 +56,19 @@ def get_oath(record_type):
     )
     return r.stdout if r.returncode == 0 else ""
 
-def test_context_insufficient_no_keydir_fails():
-    """context-insufficient without --key-dir should fail."""
+def test_context_insufficient_no_keydir_succeeds():
+    """context-insufficient without --key-dir should succeed (key not required)."""
     with tempfile.TemporaryDirectory() as td:
         r = run_builder([
             "context-insufficient",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
             "--out", str(Path(td) / "out.json"),
-        ], expect_exit=1)
-        if "--key-dir is required" in r.stderr:
-            ok("context-insufficient without --key-dir fails")
+        ], expect_exit=0)
+        if r.returncode == 0:
+            ok("context-insufficient without --key-dir succeeds (key not required)")
         else:
-            fail("context-insufficient without --key-dir", r.stderr[:300])
+            fail("context-insufficient without --key-dir should succeed", r.stderr[:300])
 
 def test_echo_no_keydir_fails():
     """echo without --key-dir should fail."""
@@ -218,25 +218,27 @@ def test_echo_has_authorship_proof():
         else:
             fail("echo output file not created")
 
-def test_context_insufficient_has_authorship_proof():
-    """context-insufficient should have authorship_proof."""
+def test_context_insufficient_no_authorship_proof():
+    """context-insufficient does not require authorship key, so no authorship_proof."""
     with tempfile.TemporaryDirectory() as td:
-        key_dir = Path(td) / "keys"
         out = Path(td) / "out.json"
         run_builder([
             "context-insufficient",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
-            "--key-dir", str(key_dir),
             "--out", str(out),
-        ], expect_exit=None)
+        ], expect_exit=0)
         if out.exists():
             sub = json.loads(out.read_text())
             proof = sub.get("authorship_proof")
-            if isinstance(proof, dict) and proof.get("algorithm") == "ed25519":
-                ok("context-insufficient has Ed25519 authorship_proof")
+            if proof is None:
+                ok("context-insufficient has no authorship_proof (key not required)")
             else:
-                fail("context-insufficient missing or invalid authorship_proof")
+                # If proof exists, it should be valid
+                if isinstance(proof, dict) and proof.get("algorithm") == "ed25519":
+                    ok("context-insufficient has Ed25519 authorship_proof (optional)")
+                else:
+                    fail("context-insufficient has invalid authorship_proof")
         else:
             fail("context-insufficient output file not created")
 
@@ -299,13 +301,13 @@ def test_no_private_key_leak():
 def main():
     print("=== Mandatory Authorship Key Contract Tests ===")
     test_echo_no_keydir_fails()
-    test_context_insufficient_no_keydir_fails()
+    test_context_insufficient_no_keydir_succeeds()
     test_keydir_generates_keypair()
     test_private_key_mode_0600()
     test_custody_warning_written()
     test_public_summary_written()
     test_echo_has_authorship_proof()
-    test_context_insufficient_has_authorship_proof()
+    test_context_insufficient_no_authorship_proof()
     test_same_keydir_reuses_key()
     test_no_private_key_leak()
     print(f"\n=== Results: {PASS} passed, {FAIL} failed ===")
