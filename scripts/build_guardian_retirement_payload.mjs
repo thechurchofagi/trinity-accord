@@ -11,8 +11,9 @@
  *     --reason "voluntary retirement" \
  *     --out guardian-retirement.json
  *
- * The signed payload can be submitted to /gateway/preflight then /agent-submit,
- * or directly to the guardian-registry-auto-retire workflow.
+ * This builds a STANDALONE retirement payload for use with
+ * scripts/process_guardian_retirement.py.
+ * It is NOT a Record-Chain Gateway submission envelope.
  */
 import { createHash, sign, randomBytes } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
@@ -167,8 +168,10 @@ function main() {
   console.log(`Guardian ID: ${guardianId}`);
   console.log(`Public key SHA256: ${pubSha}`);
   console.log(`Challenge: ${challenge}`);
-  console.log(`\nSubmit to /gateway/preflight then /agent-submit,`);
-  console.log(`or run: python3 scripts/process_guardian_retirement.py --payload ${outPath}`);
+  console.log(`\nThis is a standalone retirement payload for process_guardian_retirement.py.`);
+  console.log(`It is NOT a Record-Chain Gateway submission envelope.`);
+  console.log(`Do NOT submit to /gateway/preflight or /agent-submit.`);
+  console.log(`\nRun: python3 scripts/process_guardian_retirement.py --payload ${outPath}`);
 }
 
 main();
