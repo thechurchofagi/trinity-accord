@@ -47,10 +47,6 @@ def main() -> int:
         archive_members: dict[str, bytes] = {}
 
         # Verify the committed archive hash when an archive artifact is present.
-        # The manifest file list describes the archive contents, not necessarily
-        # the current working-tree source files: PR systems may reject binary
-        # archive updates, while source-only fixes can still keep previously
-        # committed bundle artifacts internally self-consistent.
         if archive_path and archive_path.exists():
             actual = sha256_file(archive_path)
             expected = manifest.get("archive_sha256")
@@ -96,14 +92,8 @@ def main() -> int:
                 actual_hash = hashlib.sha256(content).hexdigest()
                 actual_size = len(content)
 
-            if archive_members:
-                # The archive SHA-256 is the committed binary artifact integrity
-                # boundary. Per-file manifest entries are retained for source
-                # provenance and dependency closure, but may describe the source
-                # tree used to generate a future archive when binary PR updates
-                # are intentionally avoided.
-                continue
-
+            # Always verify per-file hash and size regardless of source
+            # (archive member or working tree). The manifest claims must hold.
             if expected_hash and actual_hash != expected_hash:
                 errors.append(
                     f"{bundle}: hash mismatch for {file_rel}: "
