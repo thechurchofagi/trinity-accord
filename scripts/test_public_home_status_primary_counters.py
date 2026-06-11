@@ -10,10 +10,12 @@ STATUS = ROOT / "api" / "public-home-status.json"
 
 
 def main() -> int:
-    # The canonical check is: regenerate + patch, then verify patched output
-    subprocess.run(["python3", "scripts/generate_public_home_status.py"], cwd=ROOT, check=True)
-    subprocess.run(["python3", "scripts/patch_public_home_status_primary.py"], cwd=ROOT, check=True)
+    # The canonical check is: verify all generators report no drift
+    subprocess.run(["python3", "scripts/generate_arweave_wallet_status.py", "--check"], cwd=ROOT, check=True)
+    subprocess.run(["python3", "scripts/generate_record_chain_status.py", "--check"], cwd=ROOT, check=True)
+    subprocess.run(["python3", "scripts/generate_public_home_status.py", "--check"], cwd=ROOT, check=True)
     subprocess.run(["python3", "scripts/patch_public_home_status_primary.py", "--check"], cwd=ROOT, check=True)
+    subprocess.run(["python3", "scripts/check_public_home_status_contract.py"], cwd=ROOT, check=True)
 
     data = json.loads(STATUS.read_text(encoding="utf-8"))
     assert data["schema"] in ("trinityaccord.public-home-status.v2", "trinityaccord.public-home-status.v3")

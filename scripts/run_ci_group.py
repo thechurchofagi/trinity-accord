@@ -139,6 +139,7 @@ GROUPS = {
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
         ["python3", "scripts/test_external_agent_first_contact_rules_contract.py"],
+        ["python3", "scripts/test_homepage_status_sync_contract.py"],
 
         # Pipeline backlog detector
         ["python3", "scripts/detect_record_chain_pipeline_backlog.py"],
@@ -149,9 +150,13 @@ GROUPS = {
         ["python3", "scripts/test_native_ots_repair_source_contract.py"],
 
         # Generated drift
+        ["python3", "scripts/generate_arweave_wallet_status.py", "--check"],
         ["python3", "scripts/generate_record_chain_status.py", "--check"],
         ["python3", "scripts/generate_public_home_status.py", "--check"],
+        ["python3", "scripts/patch_public_home_status_primary.py", "--check"],
+        ["python3", "scripts/check_public_home_status_contract.py"],
         ["python3", "scripts/test_home_public_status_sync.py"],
+        ["python3", "scripts/test_homepage_status_sync_contract.py"],
 
         # v30.3 authorship closure
         ["python3", "scripts/test_zero_clone_authorship_dependency_closure.py"],

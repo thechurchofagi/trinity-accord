@@ -1,0 +1,160 @@
+name: Homepage Status Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: "Dispatch Deploy Pages even when generated files do not change"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      run_live_check:
+        description: "Check live homepage/API freshness before deciding whether to redeploy"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+  schedule:
+    # Central hourly sync. Do not add homepage status writes back into business workflows.
+    - cron: "7 * * * *"
+
+  workflow_run:
+    workflows:
+      - "Record Chain Auto Finalize"
+      - "Append Record Chain Entries"
+      - "Record Chain Head OTS Anchor"
+      - "Record Chain Arweave Archive"
+      - "Native OTS Upgrade Watch"
+      - "Archive backlog repair"
+      - "Record Chain Data Arweave Archive"
+      - "Build Echo Index"
+      - "Record Chain Anchor"
+      - "Upgrade OpenTimestamps Proofs"
+      - "Arweave wallet status update"
+      - "Echo human review action"
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: homepage-status-sync
+  cancel-in-progress: false
+
+env:
+  SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
+
+jobs:
+  sync:
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Rebase before homepage sync
+        run: |
+          set -euo pipefail
+          git pull --rebase origin main
+
+      - name: Verify record-chain before sync
+        run: python3 scripts/trinity_record_chain.py verify
+
+      - name: Generate public homepage artifacts
+        run: |
+          set -euo pipefail
+          python3 scripts/update_public_generated_artifacts.py
+
+      - name: Validate generated homepage artifacts
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_arweave_wallet_status.py --check
+          python3 scripts/generate_record_chain_status.py --check
+          python3 scripts/generate_public_home_status.py --check
+          python3 scripts/patch_public_home_status_primary.py --check
+          python3 scripts/check_public_home_status_contract.py
+          python3 scripts/test_home_public_status_sync.py
+          python3 scripts/test_homepage_status_sync_contract.py
+          python3 scripts/generate_sitemap.py --check
+
+      - name: Commit homepage status sync
+        id: commit
+        run: |
+          set -euo pipefail
+          printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
+
+          git add \
+            api/arweave-wallet-status.json \
+            api/record-chain-status.json \
+            api/public-home-status.json \
+            index.md \
+            sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No generated homepage status changes."
+            exit 0
+          fi
+
+          git config user.name "trinity-homepage-status-bot"
+          git config user.email "actions@github.com"
+          git commit -m "home: sync public homepage status"
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              printf '%s\n' "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+            git pull --rebase origin main
+          done
+
+          printf '%s\n' "::error::Failed to push homepage status sync after retries."
+          exit 1
+
+      - name: Check live homepage freshness before optional redeploy
+        id: live_pre
+        if: ${{ steps.commit.outputs.changed != 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_live_check == 'true') }}
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20
+
+      - name: Dispatch Deploy Pages
+        id: deploy_dispatch
+        if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || steps.live_pre.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "Dispatching deploy-pages.yml for homepage status sync."
+          gh workflow run deploy-pages.yml --ref main
+
+      - name: Post-dispatch freshness probe
+        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          echo "Waiting briefly before probing live site. Pages deployment may still be in progress."
+          sleep 90
+          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 60

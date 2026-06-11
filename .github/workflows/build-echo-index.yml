@@ -6,8 +6,6 @@ on:
       - "echoes/records/**"
       - "api/independent-attestation-index.json"
       - "scripts/generate_echo_index.py"
-      - "scripts/generate_public_home_status.py"
-      - "scripts/test_home_public_status_sync.py"
       - "scripts/build-echo-index.sh"
   workflow_dispatch:
 
@@ -91,19 +89,11 @@ jobs:
       - name: Rebuild archive and digests
         run: bash scripts/build-echo-index.sh
 
-      - name: Generate homepage public status
-        run: python3 scripts/generate_public_home_status.py
-
-      - name: Test homepage public status sync
-        run: python3 scripts/test_home_public_status_sync.py
-
       - name: Commit and push changes
         id: push
         run: |
           if git diff --quiet -- \
             api/echo-index.json \
-            api/public-home-status.json \
-            index.md \
             echoes/archive.md \
             echoes/digests.md \
             echoes/digests; then
@@ -118,8 +108,6 @@ jobs:
 
           git add \
             api/echo-index.json \
-            api/public-home-status.json \
-            index.md \
             echoes/archive.md \
             echoes/digests.md \
             echoes/digests
@@ -135,13 +123,9 @@ jobs:
           # Regenerate after rebase before push.
           python3 scripts/generate_echo_index.py
           bash scripts/build-echo-index.sh
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/test_home_public_status_sync.py
 
           git add \
             api/echo-index.json \
-            api/public-home-status.json \
-            index.md \
             echoes/archive.md \
             echoes/digests.md \
             echoes/digests
@@ -151,21 +135,3 @@ jobs:
           fi
 
           git push --force-with-lease
-
-      - name: Trigger Deploy Pages
-        if: steps.push.outputs.pushed == 'true'
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          set -euo pipefail
-          if [ -z "$GH_PAT" ]; then
-            echo "::warning::GH_PAT not set, skipping Deploy Pages trigger"
-            exit 0
-          fi
-          echo "Triggering Deploy Pages..."
-          curl -sS -X POST \
-            -H "Authorization: Bearer $GH_PAT" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" \
-            -d '{"ref":"main"}'
-          echo "Deploy Pages triggered."

@@ -70,6 +70,23 @@ def main() -> int:
     for needle in ["BACKLOG_FILES", "archive_backlog", "archive: repair backlog and wallet status metadata", "github-actions[bot]"]:
         require(needle in guard, f"write-path guard missing {needle}")
 
+    # Business workflow must NOT directly write homepage status
+    for forbidden in [
+        "generate_record_chain_status.py",
+        "generate_public_home_status.py",
+        "patch_public_home_status_primary.py",
+        "api/public-home-status.json",
+        "api/record-chain-status.json",
+        "index.md",
+        "sitemap.xml",
+    ]:
+        require(forbidden not in workflow, f"archive backlog repair workflow must not directly write homepage status: {forbidden}")
+
+    # Homepage sync must listen to this workflow
+    home_sync = read(".github/workflows/homepage-status-sync.yml")
+    for needle in ["Archive backlog repair", "scripts/update_public_generated_artifacts.py"]:
+        require(needle in home_sync, f"homepage sync missing {needle}")
+
     print("PASS: archive backlog repair contract")
     return 0
 

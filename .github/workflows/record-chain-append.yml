@@ -68,14 +68,6 @@ jobs:
       - name: Verify record chain after append
         if: steps.append_run.outputs.changed == 'true'
         run: python scripts/trinity_record_chain.py verify
-      - name: Regenerate phase-aware public status and homepage counters
-        if: steps.append_run.outputs.changed == 'true'
-        run: |
-          python scripts/generate_record_chain_status.py
-          python scripts/generate_public_home_status.py
-          python scripts/patch_public_home_status_primary.py
-          python scripts/check_public_home_status_contract.py
-          python scripts/generate_sitemap.py
       - name: Commit and push append updates
         id: append_commit
         if: steps.append_run.outputs.changed == 'true'
@@ -86,7 +78,7 @@ jobs:
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
-            git add record-chain/ api/record-chain-status.json index.md api/public-home-status.json sitemap.xml
+            git add record-chain/
             git commit -m "Append record-chain entries from Render intake"
 
             for attempt in 1 2 3; do

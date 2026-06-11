@@ -143,12 +143,9 @@ PY
             --registry record-chain/arweave-data-registry.json \
             --verify-local-bundles
 
-      - name: Regenerate wallet and public status
+      - name: Regenerate wallet status
         if: inputs.upload_mode == 'live'
-        run: |
-          python3 scripts/generate_arweave_wallet_status.py
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/generate_sitemap.py
+        run: python3 scripts/generate_arweave_wallet_status.py
 
       - name: Restore drill for snapshot
         if: inputs.mode == 'snapshot'
@@ -165,10 +162,7 @@ PY
                   record-chain/arweave-data-registry.json \
                   api/record-chain-arweave-data-registry.json \
                   record-chain/arweave-wallet-ledger.json \
-                  api/arweave-wallet-status.json \
-                  api/public-home-status.json \
-                  index.md \
-                  sitemap.xml
+                  api/arweave-wallet-status.json
           if git diff --cached --quiet; then
             echo "No data archive changes."
           else

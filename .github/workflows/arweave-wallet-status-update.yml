@@ -64,12 +64,9 @@ jobs:
           fi
           "${args[@]}"
 
-      - name: Regenerate public status
+      - name: Regenerate wallet status
         run: |
           python3 scripts/generate_arweave_wallet_status.py
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/generate_sitemap.py
-          python3 scripts/run_current_system_tests.py
 
       - name: Commit wallet status update
         run: |
@@ -84,10 +81,7 @@ jobs:
 
           git add \
             record-chain/arweave-wallet-ledger.json \
-            api/arweave-wallet-status.json \
-            api/public-home-status.json \
-            index.md \
-            sitemap.xml
+            api/arweave-wallet-status.json
 
           git diff --cached --name-only | while read -r path; do
             case "$path" in

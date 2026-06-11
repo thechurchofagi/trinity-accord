@@ -23,24 +23,13 @@ jobs:
         run: python -m pip install -r requirements-ci.txt
       - name: Verify record-chain integrity
         run: python scripts/trinity_record_chain.py verify
-      - name: Regenerate public homepage status
-        run: |
-          python scripts/generate_public_home_status.py
-          python scripts/patch_public_home_status_primary.py
-      - name: Verify generated homepage files are canonical
-        run: python scripts/patch_public_home_status_primary.py --check
-      - name: Verify public homepage counter contract
-        run: python scripts/check_public_home_status_contract.py
-      - name: Commit regenerated public homepage status
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Verify public homepage status is canonical
         run: |
           set -euo pipefail
-          if git diff --quiet -- index.md api/public-home-status.json; then
-            echo "No generated homepage status changes."
-            exit 0
-          fi
-          git config user.name "trinity-record-chain-bot"
-          git config user.email "actions@github.com"
-          git add index.md api/public-home-status.json
-          git commit -m "home: regenerate public homepage status"
-          git push
+          python scripts/generate_arweave_wallet_status.py --check
+          python scripts/generate_record_chain_status.py --check
+          python scripts/generate_public_home_status.py --check
+          python scripts/patch_public_home_status_primary.py --check
+          python scripts/check_public_home_status_contract.py
+          python scripts/test_home_public_status_sync.py
+          python scripts/test_homepage_status_sync_contract.py

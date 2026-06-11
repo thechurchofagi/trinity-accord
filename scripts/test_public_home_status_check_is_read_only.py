@@ -52,11 +52,23 @@ def main():
 
     # --- Test 2: --check fails on stale JSON without rewriting it ---
     original_status = status_path.read_text(encoding="utf-8")
-    corrupted = original_status.replace(
-        '"schema": "trinityaccord.public-home-status.v2"',
-        '"schema": "BROKEN_TEST_SCHEMA"',
-        1,
-    )
+    corrupted = original_status
+    if '"schema": "trinityaccord.public-home-status.v3"' in corrupted:
+        corrupted = corrupted.replace(
+            '"schema": "trinityaccord.public-home-status.v3"',
+            '"schema": "BROKEN_TEST_SCHEMA"',
+            1,
+        )
+    elif '"schema": "trinityaccord.public-home-status.v2"' in corrupted:
+        corrupted = corrupted.replace(
+            '"schema": "trinityaccord.public-home-status.v2"',
+            '"schema": "BROKEN_TEST_SCHEMA"',
+            1,
+        )
+    else:
+        corrupted = corrupted.replace('"schema":', '"schema_broken":', 1)
+
+    require(corrupted != original_status, "test corruption did not modify public-home-status.json")
 
     try:
         status_path.write_text(corrupted, encoding="utf-8")

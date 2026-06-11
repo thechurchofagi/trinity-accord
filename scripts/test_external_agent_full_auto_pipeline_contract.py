@@ -30,6 +30,7 @@ def main() -> None:
     arweave_workflow = read(".github/workflows/record-chain-arweave-archive.yml")
     guard_script = read("scripts/check_record_chain_write_path_guard.py")
     detector_script = read("scripts/detect_record_chain_pipeline_backlog.py")
+    home_sync_workflow = read(".github/workflows/homepage-status-sync.yml")
 
     # Gateway default append workflow
     require(
@@ -55,24 +56,6 @@ def main() -> None:
         "append workflow must have actions: write permission for dispatching OTS",
     )
 
-    # Append must generate record-chain-status before public-home
-    require(
-        "generate_record_chain_status.py" in append_workflow,
-        "append workflow must generate record-chain-status",
-    )
-    status_pos = append_workflow.index("generate_record_chain_status.py")
-    home_pos = append_workflow.index("generate_public_home_status.py")
-    require(
-        status_pos < home_pos,
-        "record-chain-status must be generated before public-home status in append workflow",
-    )
-
-    # Append must commit api/record-chain-status.json
-    require(
-        "api/record-chain-status.json" in append_workflow,
-        "append workflow must commit api/record-chain-status.json",
-    )
-
     # Append must dispatch OTS after successful commit
     require(
         "gh workflow run record-chain-head-ots-anchor.yml" in append_workflow,
@@ -83,20 +66,41 @@ def main() -> None:
         "append workflow must track commit output for conditional dispatch",
     )
 
-    # OTS anchor workflow must rebuild record-chain-status before public-home.
+    # Central homepage sync workflow must exist
     require(
-        "generate_record_chain_status.py" in ots_workflow,
-        "OTS anchor workflow must regenerate record-chain-status",
+        "name: Homepage Status Sync" in home_sync_workflow,
+        "central homepage status sync workflow must exist",
     )
-    ots_status_pos = ots_workflow.index("generate_record_chain_status.py")
-    ots_home_pos = ots_workflow.index("generate_public_home_status.py")
+    for workflow_name in [
+        "Record Chain Auto Finalize",
+        "Append Record Chain Entries",
+        "Record Chain Head OTS Anchor",
+        "Record Chain Arweave Archive",
+    ]:
+        require(
+            workflow_name in home_sync_workflow,
+            f"homepage sync must listen to {workflow_name}",
+        )
+
+    # Business workflows must not write homepage generated artifacts
+    for forbidden in [
+        "generate_public_home_status.py",
+        "patch_public_home_status_primary.py",
+        "api/public-home-status.json",
+        "index.md",
+        "sitemap.xml",
+    ]:
+        require(forbidden not in append_workflow, f"append workflow must not write homepage generated artifact: {forbidden}")
+        require(forbidden not in ots_workflow, f"OTS workflow must not write homepage generated artifact: {forbidden}")
+        require(forbidden not in arweave_workflow, f"Arweave workflow must not write homepage generated artifact: {forbidden}")
+
     require(
-        ots_status_pos < ots_home_pos,
-        "record-chain-status must be generated before public-home status in OTS anchor workflow",
+        "scripts/update_public_generated_artifacts.py" in home_sync_workflow,
+        "homepage sync must run centralized generated artifacts updater",
     )
     require(
-        "api/record-chain-status.json" in ots_workflow,
-        "OTS anchor workflow must commit api/record-chain-status.json",
+        "gh workflow run deploy-pages.yml --ref main" in home_sync_workflow,
+        "homepage sync must dispatch deploy-pages.yml explicitly",
     )
 
     # OTS listens to Append Record Chain Entries
@@ -188,24 +192,6 @@ def main() -> None:
         "Arweave workflow must check ots_matches_chain for OTS wait guard",
     )
 
-    # Arweave must generate record-chain-status before public-home
-    require(
-        "generate_record_chain_status.py" in arweave_workflow,
-        "Arweave workflow must regenerate record-chain-status",
-    )
-    ar_status_pos = arweave_workflow.index("generate_record_chain_status.py")
-    ar_home_pos = arweave_workflow.index("generate_public_home_status.py")
-    require(
-        ar_status_pos < ar_home_pos,
-        "record-chain-status must be generated before public-home status in Arweave workflow",
-    )
-
-    # Arweave must commit api/record-chain-status.json
-    require(
-        "api/record-chain-status.json" in arweave_workflow,
-        "Arweave workflow must commit api/record-chain-status.json",
-    )
-
     # Arweave has early no-op for already archived head
     require(
         "backlog" in arweave_workflow,
@@ -254,16 +240,6 @@ def main() -> None:
     require(
         "git push" in append_workflow,
         "append workflow must push changes",
-    )
-
-    # Append workflow must regenerate public counters
-    require(
-        "generate_public_home_status.py" in append_workflow,
-        "append workflow must regenerate public home status",
-    )
-    require(
-        "generate_sitemap.py" in append_workflow,
-        "append workflow must regenerate sitemap",
     )
 
     # Backlog detector script must exist and have key outputs

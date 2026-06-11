@@ -65,16 +65,23 @@ def card_number(block: str, label: str, required: bool = True) -> str:
 
 
 def run_generator_check() -> None:
-    result = subprocess.run(
-        [sys.executable, str(GENERATOR), "--check"],
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-    )
-    if result.returncode != 0:
-        print(result.stdout)
-        fail("generator --check reported drift")
+    for cmd in [
+        [sys.executable, "scripts/generate_arweave_wallet_status.py", "--check"],
+        [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
+        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
+        [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
+        [sys.executable, "scripts/check_public_home_status_contract.py"],
+    ]:
+        result = subprocess.run(
+            cmd,
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        if result.returncode != 0:
+            print(result.stdout)
+            fail("homepage generated status check reported drift: " + " ".join(cmd))
 
 
 def main() -> int:
