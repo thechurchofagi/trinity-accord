@@ -140,27 +140,23 @@ def main() -> int:
     ok("arweave wallet status up to date")
 
     # 1d. public homepage status drift check
-    # Run generator first, then patch script (CI runs both)
-    subprocess.run(
-        [sys.executable, "scripts/generate_public_home_status.py"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    subprocess.run(
-        [sys.executable, "scripts/patch_public_home_status_primary.py"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    result = subprocess.run(
+    for cmd in [
+        [sys.executable, "scripts/generate_arweave_wallet_status.py", "--check"],
+        [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
+        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
         [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        fail(f"public homepage status drift detected:\n{result.stdout}\n{result.stderr}")
+        [sys.executable, "scripts/check_public_home_status_contract.py"],
+        [sys.executable, "scripts/test_home_public_status_sync.py"],
+        [sys.executable, "scripts/test_homepage_status_sync_contract.py"],
+    ]:
+        result = subprocess.run(
+            cmd,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            fail(f"public homepage status drift/contract check failed ({' '.join(cmd)}):\n{result.stdout}\n{result.stderr}")
     ok("public homepage status up to date")
 
     # 2. record-chain-status.json marks record-chain primary

@@ -59,13 +59,12 @@ def main() -> None:
         if "ots_matches_chain" not in text:
             errors.append("arweave-archive workflow missing OTS wait guard")
         # Must regenerate record-chain-status
-        if "generate_record_chain_status.py" not in text:
-            errors.append("arweave-archive workflow must regenerate record-chain-status")
-        # record-chain-status must be generated before public-home status
-        if text.index("generate_record_chain_status.py") > text.index("generate_public_home_status.py"):
-            errors.append("record-chain-status must be generated before public-home status")
-        if "api/record-chain-status.json" not in text:
-            errors.append("arweave archive commit must include api/record-chain-status.json")
+        if "generate_public_home_status.py" in text or "patch_public_home_status_primary.py" in text:
+            errors.append("arweave-archive workflow must not regenerate homepage status directly")
+        if "api/public-home-status.json" in text or "index.md" in text or "sitemap.xml" in text:
+            errors.append("arweave-archive workflow must not commit homepage generated artifacts directly")
+        if "api/record-chain-status.json" in text:
+            errors.append("arweave-archive workflow must not commit derived record-chain-status directly")
         # workflow_run from OTS resolves to live
         if "workflow_run" not in text:
             errors.append("arweave-archive workflow missing workflow_run trigger")
@@ -136,6 +135,17 @@ def main() -> None:
     detector = ROOT / "scripts" / "detect_record_chain_pipeline_backlog.py"
     if not detector.exists():
         errors.append("missing scripts/detect_record_chain_pipeline_backlog.py")
+
+    # 8. Homepage sync workflow must exist and listen to Arweave
+    home_sync = ROOT / ".github" / "workflows" / "homepage-status-sync.yml"
+    if not home_sync.exists():
+        errors.append("missing centralized homepage-status-sync.yml")
+    else:
+        home_text = home_sync.read_text(encoding="utf-8")
+        if "Record Chain Arweave Archive" not in home_text:
+            errors.append("homepage-status-sync.yml must listen to Record Chain Arweave Archive")
+        if "scripts/update_public_generated_artifacts.py" not in home_text:
+            errors.append("homepage-status-sync.yml must run centralized generated artifact updater")
 
     if errors:
         print("Arweave archive contract tests FAILED:", file=sys.stderr)

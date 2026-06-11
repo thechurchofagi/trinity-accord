@@ -69,16 +69,28 @@ def main() -> None:
         "--enable-paid-upload",
         "--confirm-paid-upload",
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
-        "python3 scripts/generate_record_chain_status.py",
-        "python3 scripts/generate_public_home_status.py",
-        "python3 scripts/patch_public_home_status_primary.py",
-        "api/record-chain-status.json",
-        "api/public-home-status.json",
-        "index.md",
-        "sitemap.xml",
+        "python3 scripts/generate_arweave_wallet_status.py",
     ]
     for marker in workflow_markers:
         require(workflow, marker, "workflow")
+
+    # Workflow must NOT directly write homepage generated artifacts
+    for marker in [
+        "generate_public_home_status.py",
+        "patch_public_home_status_primary.py",
+        "api/public-home-status.json",
+        "index.md",
+        "sitemap.xml",
+    ]:
+        forbid(workflow, marker, "workflow scattered homepage write")
+
+    # Homepage sync workflow must listen to native OTS
+    home_sync_path = Path(".github/workflows/homepage-status-sync.yml")
+    if not home_sync_path.exists():
+        raise SystemExit(f"missing workflow: {home_sync_path}")
+    home_sync = home_sync_path.read_text(encoding="utf-8")
+    require(home_sync, "Native OTS Upgrade Watch", "homepage sync workflow_run native OTS watch")
+    require(home_sync, "scripts/update_public_generated_artifacts.py", "homepage sync updater")
 
     # Runner markers — native paths only
     runner_markers = [

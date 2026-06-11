@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SCRIPTS = [
+    "scripts/generate_arweave_wallet_status.py",
     "scripts/generate_record_chain_status.py",
     "scripts/generate_public_home_status.py",
     "scripts/patch_public_home_status_primary.py",
