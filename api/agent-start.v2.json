@@ -31,36 +31,32 @@
     "status": "historical_archive_only"
   },
   "policy_references": {
-    "mainnet_prelaunch_policy": "/api/record-chain-mainnet-prelaunch-policy.v1.json",
-    "live_test_policy": "/api/record-chain-live-test-policy.v1.json"
+    "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json",
+    "historical_mainnet_prelaunch_policy": "/api/record-chain-mainnet-prelaunch-policy.v1.json",
+    "historical_live_test_policy": "/api/record-chain-live-test-policy.v1.json"
   },
   "public_phase": {
     "mainnet_activation_marker_recorded": false,
-    "network_phase": "live_test",
-    "live_test_active": true,
-    "live_test_is_not_production_official_live": true,
-    "not_final_public_launch": true,
-    "official_live_record_marker_required_before_production": true,
-    "official_live_records_allowed": false,
-    "test_records_allowed_at_scale": true,
+    "network_phase": "production",
+    "not_final_public_launch": false,
+    "official_live_record_marker_required_before_live": false,
+    "official_live_records_allowed": true,
+    "prelaunch_test_records_allowed": false,
+    "production_enablement_marker_recorded": true,
+    "enabled_by_marker": "PRODUCTION_ENABLEMENT_OK",
     "receipt_is_intake_only": true,
     "receipt_is_not_active_guardian_status": true,
     "receipt_is_not_final_inclusion": true,
-    "records_before_production_enablement_marker_are_test_records": true,
-    "status": "live_test_active",
-    "test_record_required_fields": {
-      "test_record": true,
-      "official_live_record": false,
-      "does_not_create_guardian_status": true
-    },
-    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
-    "test_phase_submissions_may_be_reclassified": true,
-    "test_phase_submissions_may_move_to_historical_test_archive": true
+    "records_before_activation_marker_are_historical_tests": true,
+    "status": "production_live",
+    "test_phase_submissions_may_be_excluded_from_final_public_indexes": false,
+    "test_phase_submissions_may_be_reclassified": false,
+    "test_phase_submissions_may_move_to_historical_test_archive": false
   },
   "schema": "trinityaccord.agent-start.v2",
   "status": "active",
-  "updated_at": "2026-06-07T15:22:00Z",
-  "version": "2.1.0",
+  "updated_at": "2026-06-11T10:05:00Z",
+  "version": "2.2.0",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
