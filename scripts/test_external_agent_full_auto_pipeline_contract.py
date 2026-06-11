@@ -83,6 +83,22 @@ def main() -> None:
         "append workflow must track commit output for conditional dispatch",
     )
 
+    # OTS anchor workflow must rebuild record-chain-status before public-home.
+    require(
+        "generate_record_chain_status.py" in ots_workflow,
+        "OTS anchor workflow must regenerate record-chain-status",
+    )
+    ots_status_pos = ots_workflow.index("generate_record_chain_status.py")
+    ots_home_pos = ots_workflow.index("generate_public_home_status.py")
+    require(
+        ots_status_pos < ots_home_pos,
+        "record-chain-status must be generated before public-home status in OTS anchor workflow",
+    )
+    require(
+        "api/record-chain-status.json" in ots_workflow,
+        "OTS anchor workflow must commit api/record-chain-status.json",
+    )
+
     # OTS listens to Append Record Chain Entries
     require(
         '"Append Record Chain Entries"' in ots_workflow,

@@ -18,6 +18,7 @@ checks = {
     ],
     ".github/workflows/record-chain-append.yml": [
         "git pull --rebase",
+        "generate_record_chain_status.py",
         "generate_public_home_status.py",
         "Push failed on attempt",
         "git push origin \"HEAD:${GITHUB_REF_NAME:-main}\"",
