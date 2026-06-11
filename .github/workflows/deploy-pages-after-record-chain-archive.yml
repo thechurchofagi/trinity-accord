@@ -1,0 +1,19 @@
+name: Dispatch Pages After Record-Chain Archive
+
+on:
+  workflow_run:
+    workflows: ["Record Chain Arweave Archive"]
+    types: [completed]
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch-pages:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Dispatch Deploy Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main
