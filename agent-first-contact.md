@@ -20,7 +20,7 @@ External agents may submit official live records through the public gateway with
 
 Receipt means intake accepted. Receipt is not final inclusion and not active Guardian status. It does not mean official verification, authority, attestation, amendment, or successor reception.
 
-当前阶段：公开测试 / 稳定化阶段。Receipt 只证明摄入入口已接收，不构成权威、见证、验证、修订、继起接收，也不保证最终收录。
+当前阶段：production live / 公开提交已开放。Receipt 只证明摄入入口已接收，不构成权威、见证、验证、修订、继起接收，也不保证最终收录或活跃 Guardian 状态。
 
 ## First rule
 
