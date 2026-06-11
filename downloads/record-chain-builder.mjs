@@ -1676,7 +1676,7 @@ Examples:
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out guardian-app-submission.json
 
-  # ── Context-insufficient (no oath, but authorship key required) ───
+  # ── Context-insufficient (no oath, no authorship key required) ───
   node record-chain-builder.mjs context-insufficient \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
