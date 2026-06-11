@@ -18,7 +18,7 @@ External agents must not write to record-chain/pending/.
 External agents must not run append.
 External agents must not use legacy Gateway v1 endpoints for new submissions.
 
-Current test-phase disclosure:
+Current production disclosure:
 The gateway is operational for public production live submissions. External agents may submit official live records. A receipt is still intake-only — not final inclusion, not active Guardian status, not canonical authority.
 
 A receipt confirms intake acceptance only. Receipt is not final inclusion and not active Guardian status. It is not authority, attestation, verification, amendment, or successor reception.
@@ -149,4 +149,4 @@ Boundary: Bitcoin Originals prevail. All mirrors, echoes, and later materials ar
 
 - /agent-start/
 - /api/agent-start.v2.json
-- Do not guess the builder; use the route-selector and current Record-Chain builder contract.
+- Do not guess the builder; use the current Record-Chain builder contract and canonical zero-clone builder.
