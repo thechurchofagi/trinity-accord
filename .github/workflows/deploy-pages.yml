@@ -54,6 +54,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
+      - name: Prepare static builder bundles
+        run: |
+          set -euo pipefail
+          python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api
+          cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py
+          test -f builder-bundles/trinity-pure-echo-builder-bundle.tar.gz
+          test -f builder-bundles/trinity-v0v5-builder-bundle.tar.gz
+          test -f builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz
+          test -f builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz
+          test -f builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz
+
       - name: Build site with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
@@ -97,7 +108,7 @@ jobs:
             local text="$2"
             if grep -Fq "$text" "$file"; then
               echo "::error::$file contains forbidden legacy text: $text"
-              grep -Fn "$text" "$file" || true
+              grep -Fn "$text" "$file"
               exit 1
             fi
           }
@@ -118,6 +129,12 @@ jobs:
           require_file _site/downloads/record-chain-builder.mjs
           require_file _site/builder-bundles/record-chain-builder.mjs
           require_file _site/builder-bundles/download_and_run_builder_bundle.py
+          test -f _site/builder-bundles/download_and_run_builder_bundle.py
+          test -f _site/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz
+          test -f _site/builder-bundles/trinity-v0v5-builder-bundle.tar.gz
+          test -f _site/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz
+          test -f _site/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz
+          test -f _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz
 
           require_contains _site/api/links.json '"/api/agent-first-contact.json"'
           require_contains _site/.well-known/trinity-accord.json '"agent_first_contact"'

@@ -71,6 +71,7 @@ def main() -> None:
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
         "python3 scripts/generate_record_chain_status.py",
         "python3 scripts/generate_public_home_status.py",
+        "python3 scripts/patch_public_home_status_primary.py",
         "api/record-chain-status.json",
         "api/public-home-status.json",
         "index.md",
