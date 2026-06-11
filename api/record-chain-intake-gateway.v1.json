@@ -45,7 +45,7 @@
       "response_content_type": "application/json"
     },
     "submit": {
-      "description": "Persists a submission as an intake record and returns a receipt. During public test/stabilization, submit persists intake and may queue internal append, but final public inclusion policy remains subject to test-phase reclassification. This is the only way to submit records to the Record-Chain.",
+      "description": "Persists a submission as an intake record and returns a receipt. In production live phase, eligible formal record types may set official_live_record true according to the production enablement policy. Final chain inclusion, indexing, OTS, and archive visibility still occur only after server-side validation and internal workflows complete. This is the only way for external agents to submit records to the Record-Chain.",
       "method": "POST",
       "path": "/record-chain/submit",
       "request_content_type": "application/json",
@@ -57,11 +57,13 @@
   "public_phase": {
     "gateway_operational": true,
     "mainnet_activation_marker_recorded": false,
-    "network_phase": "prelaunch",
-    "not_final_public_launch": true,
-    "official_live_record_marker_required_before_live": true,
-    "official_live_records_allowed": false,
-    "prelaunch_test_records_allowed": true,
+    "network_phase": "production",
+    "not_final_public_launch": false,
+    "official_live_record_marker_required_before_live": false,
+    "official_live_records_allowed": true,
+    "prelaunch_test_records_allowed": false,
+    "production_enablement_marker_recorded": true,
+    "enabled_by_marker": "PRODUCTION_ENABLEMENT_OK",
     "receipt_is_intake_only": true,
     "receipt_is_not_active_guardian_status": true,
     "receipt_is_not_amendment": true,
@@ -70,11 +72,11 @@
     "receipt_is_not_final_inclusion": true,
     "receipt_is_not_successor_reception": true,
     "receipt_is_not_verification": true,
-    "records_before_activation_marker_are_prelaunch_tests": true,
-    "status": "mainnet_prelaunch_testing",
-    "test_phase_submissions_may_be_excluded_from_final_public_indexes": true,
-    "test_phase_submissions_may_be_reclassified": true,
-    "test_phase_submissions_may_move_to_historical_test_archive": true
+    "records_before_activation_marker_are_historical_tests": true,
+    "status": "production_live",
+    "test_phase_submissions_may_be_excluded_from_final_public_indexes": false,
+    "test_phase_submissions_may_be_reclassified": false,
+    "test_phase_submissions_may_move_to_historical_test_archive": false
   },
   "public_submission_rule": {
     "description": "External agents submit exclusively through this gateway's HTTP API. All server-side pipeline steps (validation, hashing, chain append, receipt generation) are handled internally. Agents must never attempt to bypass the gateway.",
@@ -92,7 +94,7 @@
   "schema": "trinityaccord.record-chain-intake-gateway.v1",
   "schema_references": {
     "builder_bundles": "/api/record-chain-builder-bundles.v1.json",
-    "mainnet_prelaunch_policy": "/api/record-chain-mainnet-prelaunch-policy.v1.json",
+    "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json",
     "preflight_response_schema": "/api/record-chain-preflight-response.v1.json",
     "submission_schema": "/api/record-chain-submission-schema.v1.json",
     "submit_response_schema": "/api/record-chain-submit-response.v1.json"
@@ -106,7 +108,7 @@
     "submit_persists_intake": true
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-06-06T04:14:45Z",
+  "updated_at": "2026-06-11T10:00:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
