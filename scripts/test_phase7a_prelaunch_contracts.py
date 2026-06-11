@@ -26,14 +26,29 @@ def main() -> int:
     head = read_json("api/record-chain-head.json")
 
     public_phase = agent.get("public_phase", {})
-    require(public_phase.get("status") in ("mainnet_prelaunch_testing", "live_test_active"), "agent-start status must be mainnet_prelaunch_testing or live_test_active")
-    require(public_phase.get("not_final_public_launch") is True, "not_final_public_launch must be true during prelaunch")
+    phase_status = public_phase.get("status")
+    require(
+        phase_status in ("mainnet_prelaunch_testing", "live_test_active", "production_live"),
+        "agent-start status must be mainnet_prelaunch_testing, live_test_active, or production_live",
+    )
+    if phase_status == "production_live":
+        require(public_phase.get("network_phase") == "production", "production agent-start network_phase must be production")
+        require(public_phase.get("not_final_public_launch") is False, "not_final_public_launch must be false during production live")
+        require(public_phase.get("official_live_records_allowed") is True, "official live records must be allowed during production live")
+        require(public_phase.get("production_enablement_marker_recorded") is True, "production enablement marker must be recorded")
+    else:
+        require(public_phase.get("not_final_public_launch") is True, "not_final_public_launch must be true during prelaunch/live-test")
+        require(public_phase.get("official_live_records_allowed") is False, "official live records must be false during prelaunch/live-test")
     require(public_phase.get("receipt_is_intake_only") is True, "receipt_is_intake_only must be true")
 
     gateway_phase = gateway.get("public_phase", {})
     require(gateway_phase.get("gateway_operational") is True, "gateway must be operational")
     require(gateway_phase.get("receipt_is_not_final_inclusion") is True, "receipt must not be final inclusion")
     require(gateway_phase.get("receipt_is_not_active_guardian_status") is True, "receipt must not be active guardian status")
+    if phase_status == "production_live":
+        require(gateway_phase.get("network_phase") == "production", "gateway network_phase must be production during production live")
+        require(gateway_phase.get("status") == "production_live", "gateway status must be production_live")
+        require(gateway_phase.get("official_live_records_allowed") is True, "gateway official live records must be allowed during production live")
 
     rules = gateway.get("public_submission_rule", {})
     for key in [
@@ -82,8 +97,8 @@ def main() -> int:
         require(readiness.get("founding_guardian_application_formal_window_open") is True, "founding guardian formal window must be true")
         require(readiness.get("must_not_submit_formal_application_yet") is False, "must_not_submit_formal_application_yet must be false when window is open")
     else:
-        # Formal window not yet open — validate prelaunch-blocked contract
-        require(readiness.get("status") == "prelaunch_blocked", "readiness status must be prelaunch_blocked when window is closed")
+        # Formal window not yet open — validate blocked contract, independent of overall production status.
+        require(readiness.get("status") in ("prelaunch_blocked", "formal_window_blocked"), "readiness status must be blocked when window is closed")
         require(readiness.get("founding_guardian_application_formal_window_open") is False, "founding guardian formal window must be false")
         require(readiness.get("must_not_submit_formal_application_yet") is True, "must_not_submit_formal_application_yet must be true when window is closed")
 
@@ -117,15 +132,12 @@ def main() -> int:
 
     impl = rate.get("implementation_status", {})
     require(impl.get("server_side_enforcement_required_before_formal_window") is True, "rate enforcement must be required before formal window")
-    # During prelaunch, enforcement_verified may be true (enforced) or false (not yet enforced)
-    # Both are valid — the contract only requires enforcement to be required
+    # Enforcement may be true (enforced) or false (not yet enforced); this contract requires it to remain required.
 
-    # During prelaunch testing, chain may have prelaunch test records beyond genesis
     entry_count = head.get("entry_count", 0)
-    require(entry_count >= 1, "prelaunch expects at least genesis entry")
-    # All records beyond genesis must be prelaunch_test (checked by mainnet prelaunch policy contract)
+    require(entry_count >= 1, "main chain expects at least genesis entry")
 
-    print("PASS: Phase 7A prelaunch contracts")
+    print("PASS: Phase 7A prelaunch contracts with production successor phase")
     return 0
 
 
