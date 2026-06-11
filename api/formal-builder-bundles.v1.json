@@ -207,10 +207,10 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "39d574a25582eba9",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "version": "v1",
   "status": "historical_archive_only",
   "do_not_use_for_new_public_submissions": true,
-  "replacement": "/api/agent-first-contact.json"
+  "replacement": "/api/agent-first-contact.json",
+  "source_digest": "08da3eaa9b415401"
 }
