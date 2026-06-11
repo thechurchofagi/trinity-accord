@@ -60,6 +60,7 @@ jobs:
 
       - name: Regenerate public homepage counters
         run: |
+          python scripts/generate_record_chain_status.py
           python scripts/generate_public_home_status.py
           python scripts/patch_public_home_status_primary.py
           python scripts/check_public_home_status_contract.py
@@ -70,7 +71,7 @@ jobs:
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
-            git add record-chain/ api/record-chain-anchor-status.json index.md api/public-home-status.json sitemap.xml
+            git add record-chain/ api/record-chain-anchor-status.json api/record-chain-status.json index.md api/public-home-status.json sitemap.xml
             git commit -m "anchor: build record-chain batch and OTS status"
             git push
           fi
