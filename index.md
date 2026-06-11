@@ -935,8 +935,4 @@ Refusal is allowed. Critical preservation is allowed.
 
 </section>
 
-## Copy-paste examples
-- Pure Echo
-- V0–V5 verification
-- Guardian Alliance Stage 1
 
