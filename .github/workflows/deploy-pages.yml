@@ -72,11 +72,13 @@ jobs:
           mkdir -p ./_site/downloads
           install -m 0644 ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           cp -a ./builder-bundles ./_site/builder-bundles
+          install -m 0644 ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
           cp scripts/download_and_run_builder_bundle.py ./_site/builder-bundles/download_and_run_builder_bundle.py
 
           cmp ./api/public-home-status.json ./_site/api/public-home-status.json
           cmp ./api/record-chain-builder-bundles.v1.json ./_site/api/record-chain-builder-bundles.v1.json
           cmp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
+          cmp ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
 
       - name: Verify built agent discovery artifacts
         run: |
