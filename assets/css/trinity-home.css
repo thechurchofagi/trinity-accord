@@ -1,6 +1,6 @@
 @import url('/assets/css/trinity-home-base.css?v=1');
 
-main > h2:nth-last-child(2),
-main > h2:nth-last-child(2) + ul {
+#copy-paste-examples,
+#copy-paste-examples + ul {
   display: none !important;
 }
