@@ -1,14 +1,14 @@
 {
   "archive": "trinity-guardian-stage1-builder-bundle.tar.gz",
-  "archive_sha256": "94428200ffb27fba1934610b42c24b7729b8f05e89c214c6046e057ab0875263",
-  "archive_size_bytes": 24903,
+  "archive_sha256": "676cd406a2c7bf5850243949a517a0816e21b903aeb66b3ff3b5236ade29f810",
+  "archive_size_bytes": 24601,
   "bundle": "guardian_application_stage_1",
   "entrypoint": "scripts/create_guardian_application.mjs",
   "files": [
     {
       "path": "api/agent-issue-gateway-payload-schema.v1.json",
       "sha256": "f4f7f7d1eec5c726a0cf9c6bc00189e49b1d1b98bbd4bfb0ef865a8ec301d552",
-      "size_bytes": 49984
+      "size_bytes": 50198
     },
     {
       "path": "api/agent-output-policy.v1.json",
@@ -23,12 +23,12 @@
     {
       "path": "api/gateway-builder-route-map.v1.json",
       "sha256": "a212b2705e77105f6945a2d393ce5a7dbbff10c689845698c82c09ed12f49705",
-      "size_bytes": 7430
+      "size_bytes": 7569
     },
     {
       "path": "api/gateway-workflows.v1.json",
       "sha256": "c08b3322229046f7fb1fbae4bb45d2a17996ebb4840f457e8012261625bd1ecb",
-      "size_bytes": 34172
+      "size_bytes": 34310
     },
     {
       "path": "api/guardian-application-oath.v1.txt",
@@ -37,8 +37,8 @@
     },
     {
       "path": "scripts/create_guardian_application.mjs",
-      "sha256": "8d9c6f4d90b8f3a07d839f14934a06fa84cefd376a2f29ea3a2a862bced9208e",
-      "size_bytes": 250
+      "sha256": "de4d36a22d255a9fe4f1fa9b8fb5e8483790a096d2db740b6a0c5f2bd1d8b6b1",
+      "size_bytes": 1075
     },
     {
       "path": "scripts/proof_canonical.mjs",
@@ -47,8 +47,8 @@
     },
     {
       "path": "scripts/trinity_record_builder.py",
-      "sha256": "8370e3dd415e49b3fb39ba93f9905fc8170af963097e42768245a686cd3ce788",
-      "size_bytes": 32772
+      "sha256": "f3bef82d0f7b7e052b56b47a0d929c5617ce5de29c1e84e1c5d8df2f4820f19a",
+      "size_bytes": 32859
     }
   ],
   "forbidden_contents_checked": [
