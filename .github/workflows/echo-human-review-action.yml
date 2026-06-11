@@ -162,8 +162,6 @@ jobs:
           # Rebuild all Echo-derived public indexes and status snapshots.
           python3 scripts/generate_echo_index.py
           bash scripts/build-echo-index.sh
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/test_home_public_status_sync.py
 
           # Validate the archived record. Manual human review path should stay strict.
           python3 scripts/validate_agent_submission.py --mode ci "$record_path"
@@ -177,9 +175,7 @@ jobs:
             echoes/archive.md \
             echoes/digests.md \
             echoes/digests \
-            api/echo-index.json \
-            api/public-home-status.json \
-            index.md
+            api/echo-index.json
 
           if git diff --cached --quiet; then
             echo "No archive or generated file changes to commit."

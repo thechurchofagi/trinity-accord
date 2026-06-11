@@ -100,9 +100,6 @@ jobs:
         run: |
           python3 scripts/detect_archive_backlog.py --write
           python3 scripts/generate_arweave_wallet_status.py
-          python3 scripts/generate_record_chain_status.py
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/generate_sitemap.py
 
       - name: Commit repaired backlog metadata
         run: |
@@ -125,10 +122,6 @@ jobs:
             api/record-chain-native-ots-arweave-registry.json \
             record-chain/arweave-wallet-ledger.json \
             api/arweave-wallet-status.json \
-            api/record-chain-status.json \
-            api/public-home-status.json \
-            index.md \
-            sitemap.xml \
             record-chain/audit/
 
           git diff --cached --name-only | while read -r path; do

@@ -125,15 +125,6 @@ jobs:
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
         run: python scripts/trinity_record_chain.py verify
 
-      - name: Regenerate public status and homepage counters
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
-        run: |
-          python scripts/generate_record_chain_status.py
-          python scripts/generate_public_home_status.py
-          python scripts/patch_public_home_status_primary.py
-          python scripts/check_public_home_status_contract.py
-          python scripts/generate_sitemap.py
-
       - name: Commit Arweave archive metadata
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
         run: |
@@ -146,7 +137,7 @@ jobs:
 
           git config user.name "trinity-record-chain-bot"
           git config user.email "actions@github.com"
-          git add record-chain/arweave-archives/ api/record-chain-arweave-index.json api/record-chain-status.json index.md api/public-home-status.json sitemap.xml
+          git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
           git commit -m "archive: update native record-chain Arweave archive metadata"
 
           for attempt in 1 2 3; do

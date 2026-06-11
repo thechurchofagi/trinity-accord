@@ -144,15 +144,11 @@ jobs:
             --repo "${{ github.repository }}" \
             $EXTRA_ARGS
 
-      - name: Regenerate homepage status
-        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
-        run: python3 scripts/generate_public_home_status.py
-
       - name: Check for changes
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         id: diff
         run: |
-          if git diff --quiet api/agent-declared-verification-index.json api/public-home-status.json index.md; then
+          if git diff --quiet api/agent-declared-verification-index.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -164,7 +160,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add api/agent-declared-verification-index.json api/public-home-status.json index.md
+          git add api/agent-declared-verification-index.json
           git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
           # DEEP-REBASE-001: regenerate after rebase
           if ! git pull --rebase -X theirs origin main; then
@@ -172,9 +168,10 @@ jobs:
             git status --short
             exit 1
           fi
-          python3 scripts/generate_public_home_status.py
-          python3 scripts/test_home_public_status_sync.py
-          git add api/agent-declared-verification-index.json api/public-home-status.json index.md
+          python3 scripts/build_agent_declared_verification_index_from_issues.py \
+            --repo "${{ github.repository }}" \
+            $EXTRA_ARGS
+          git add api/agent-declared-verification-index.json
           if ! git diff --cached --quiet; then
             git commit --amend --no-edit
           fi
