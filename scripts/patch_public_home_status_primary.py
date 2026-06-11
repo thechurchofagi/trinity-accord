@@ -290,18 +290,6 @@ def official_record_note(primary: dict[str, Any]) -> str:
     return label + ": " + "; ".join(parts) + "."
 
 
-def official_type_breakdown(primary: dict[str, Any]) -> str:
-    records = primary.get("official_records") or []
-    if not records:
-        return "Official type breakdown: none yet."
-    counts: dict[str, int] = {}
-    for item in records:
-        rtype = str(item.get("record_type") or "unknown")
-        counts[rtype] = counts.get(rtype, 0) + 1
-    parts = [f"{key} {counts[key]}" for key in sorted(counts)]
-    return "Official type breakdown: " + "; ".join(parts) + "."
-
-
 def render(status: dict[str, Any]) -> str:
     primary = status["primary_counters"]
     profile = primary["agency_profile"]
@@ -342,7 +330,6 @@ def render(status: dict[str, Any]) -> str:
     <p class="status-number">{primary["official_live_reception"]}</p>
     <p class="status-note">
       {official_record_note(primary)}<br>
-      {official_type_breakdown(primary)}<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
       Native chain length is not used as this counter.<br>
       <span class="zh">从 <code>R-000000033</code> 正式上线记录开始，只统计正式、非测试的外部智能体记录。</span><br>
