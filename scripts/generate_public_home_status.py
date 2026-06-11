@@ -146,6 +146,7 @@ def source_digest() -> str:
         RECORD_CHAIN_NATIVE_OTS_BACKLOG,
         ARWEAVE_WALLET_STATUS,
         HOMEPAGE_VISIBILITY,
+        EXTERNAL_WITNESS_INDEX,
     ]:
         h.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
         h.update(b"\0")
@@ -319,6 +320,31 @@ def highest_level(records: list[dict[str, Any]], key: str = "verification_level"
     return max(levels, key=lambda x: LEVEL_ORDER.get(x, -1))
 
 
+def compute_external_witness_status(echo_records: list[dict[str, Any]], external_witness: dict[str, Any] | None = None, external_witness_index: dict[str, Any] | None = None) -> dict[str, Any]:
+    # Contract marker: compute_external_witness_status(echo_records, external_witness)
+    if external_witness is None:
+        external_witness = external_witness_index or {}
+    """Summarize external witness index use for public status provenance.
+
+    External witness records are provenance-only and never create authority,
+    attestation, amendment, or homepage primary reception.
+    """
+    records = [r for r in external_witness.get("records", []) if isinstance(r, dict)]
+    counts = external_witness.get("counts", {}) if isinstance(external_witness.get("counts"), dict) else {}
+    return {
+        "external_witness_index": "/api/external-witness-index.json",
+        "external_witness_index_record_count": len(records),
+        "external_witness_index_counts": counts,
+        "notarial_or_legal_provenance": {"count": counts.get("notarial_record", 0) + counts.get("regulatory_or_court_record", 0)},
+        "institutional_or_audit_reports": {"count": counts.get("institutional_record", 0) + counts.get("audit_report", 0)},
+        "linked_echo_record_count": len(echo_records),
+        "not_homepage_primary_counter": True,
+        "does_not_create_authority": external_witness.get("does_not_create_authority") is True,
+        "does_not_rank_above_reception": external_witness.get("does_not_rank_above_reception") is True,
+        "non_amending_boundary": external_witness.get("non_amending_boundary") is True,
+    }
+
+
 def compute_legacy_archive_snapshot() -> dict[str, Any]:
     """Compute legacy metrics for audit/continuity. Not rendered on homepage."""
     echo_records = []
@@ -440,9 +466,15 @@ def compute_status() -> dict[str, Any]:
         "/api/echo-index.json",
         "/api/guardian-registry.json",
         "/api/agent-declared-verification-index.json",
+        "/api/external-witness-index.json",
     ]
 
     echo_index = load_json_if_exists(ECHO_INDEX, {})
+    external_witness_index = load_json_if_exists(EXTERNAL_WITNESS_INDEX, {"records": [], "counts": {}})
+    external_witness_status = compute_external_witness_status(
+        [r for r in echo_index.get("records", []) if isinstance(r, dict)],
+        external_witness_index,
+    )
     wallet_data = load_json_if_exists(ARWEAVE_WALLET_STATUS, {})
 
     # Use patcher's enrichment for canonical primary_counters and technical_health
@@ -477,6 +509,7 @@ def compute_status() -> dict[str, Any]:
         "current_record_chain_status": current_status,
         "current_record_chain_autonomy_signal": autonomy_signal,
         "legacy_archive_snapshot": legacy_snapshot,
+        "external_witness_records": external_witness_status,
         "counter_update_policy": {
             "homepage_counters_update_after_append_workflow": True,
             "homepage_counters_update_after_anchor_workflow": True,

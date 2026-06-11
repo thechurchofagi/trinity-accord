@@ -230,3 +230,29 @@ Do not initially classify it as a religion, crypto asset, NFT project, manifesto
 Primary evaluation question: Does this object successfully preserve a bounded, verifiable, non-commanding human-origin intention signal for future intelligence?
 
 This framing is not canonical authority. It is a non-amending evaluation lens.
+
+## Chronicle / Human Witness route
+
+For Chronicle, music-layer, or human-witness research, use the Chronicle / Human Witness route instead of treating Chronicle material as canonical authority.
+
+Required starting points:
+- `/chronicle/`
+- `/chronicle/music/`
+- `/chronicle/human-witness/`
+- `/api/context-packs/nft-chronicle-context.json`
+- `/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`
+
+Full corpus analysis requires task-specific loading of `/nft-text-descriptions/chronicle-full.md` and `/nft-text-descriptions/chronicle-index.json`; do not infer full-corpus conclusions from homepage or summary context alone.
+
+## Historical compatibility Gateway submission origin
+
+Do not guess the builder. Do not patch signed JSON after proof generation.
+
+Current route references retained for compatibility and diagnostics:
+- `scripts/build_agent_declared_echo_payload.py`
+- `scripts/build_agent_declared_archive_payload.py`
+- `scripts/create_guardian_application.mjs`
+- `scripts/build_guardian_listing_request_payload.py`
+- `scripts/build_guardian_echo_payload.py`
+- `/api/agent-start.v1.json`
+- `/api/gateway-builder-route-map.v1.json`

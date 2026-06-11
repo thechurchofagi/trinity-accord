@@ -42,14 +42,16 @@
     "v0_v5_agent_declared_archive",
     "guardian_application_stage_1",
     "guardian_listing_stage_2",
-    "guardian_signed_echo"
+    "guardian_signed_echo",
+    "guardian_retirement"
   ],
   "valid_archive_kinds": [
     "agent_declared_echo_archive",
     "agent_declared_verification_archive",
     "guardian_application_record",
     "guardian_listing_request",
-    "guardian_signed_echo_record"
+    "guardian_signed_echo_record",
+    "guardian_retirement"
   ],
   "valid_legacy_receipt_fields": [
     "created_by_gateway: true",
@@ -97,7 +99,7 @@
     }
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "083811d1b7d92d02",
+  "source_digest": "19c9afa38ac73024",
   "receipt_recognition_must_run_before_strict_intake_parse": true,
   "duplicate_non_receipt_keys_must_not_invalidate_trusted_gateway_receipt": true
 }

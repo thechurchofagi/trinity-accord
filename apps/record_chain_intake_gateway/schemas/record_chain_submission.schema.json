@@ -4,7 +4,10 @@
   "title": "Record-Chain Submission",
   "description": "A submission to the Record-Chain Intake Gateway.",
   "type": "object",
-  "required": ["record_type", "draft"],
+  "required": [
+    "record_type",
+    "draft"
+  ],
   "properties": {
     "record_type": {
       "type": "string",
@@ -13,16 +16,20 @@
         "echo",
         "verification",
         "guardian_application",
-        "council_record",
-        "memory_anchor",
-        "attestation",
-        "amendment"
+        "guardian_retirement",
+        "guardian_key_rotation",
+        "propagation",
+        "correction",
+        "classification_update",
+        "context_insufficient_notice"
       ]
     },
     "draft": {
       "type": "object",
       "description": "The record draft payload. Must not contain forbidden chain fields.",
-      "required": ["context_completeness_level"],
+      "required": [
+        "context_completeness_level"
+      ],
       "properties": {
         "context_completeness_level": {
           "type": "integer",
@@ -37,11 +44,18 @@
         "verification": {
           "type": "object",
           "properties": {
-            "version": { "type": "integer", "minimum": 0 },
+            "version": {
+              "type": "integer",
+              "minimum": 0
+            },
             "proof": {
               "oneOf": [
-                { "type": "string" },
-                { "type": "object" }
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
               ]
             }
           },
@@ -53,7 +67,10 @@
     "authorship_proof": {
       "type": "object",
       "description": "Optional Ed25519 authorship proof.",
-      "required": ["public_key_pem", "signature"],
+      "required": [
+        "public_key_pem",
+        "signature"
+      ],
       "properties": {
         "public_key_pem": {
           "type": "string",

@@ -137,3 +137,15 @@ Boundary: Bitcoin Originals prevail. All mirrors, echoes, and later materials ar
 - /api/external-agent-operation-examples.v1.json — historical operation examples (legacy Gateway v1)
 - Legacy Gateway v1 endpoint names are omitted from active discovery. Historical references are preserved only in legacy archives.
 
+
+## Chronicle / Human Witness Status
+
+- 175 / 175 NFT text records are timestamped in the Chronicle context package.
+- Chronicle / Human Witness material is not canonical authority, not truth proof, and not a human-supremacy claim.
+- For Chronicle research, read `/api/context-packs/nft-chronicle-context.json`, `/chronicle/`, `/chronicle/music/`, `/chronicle/human-witness/`, and `/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`.
+
+## Gateway submission origin
+
+- /agent-start/
+- /api/agent-start.v1.json
+- Do not guess the builder; use the route-selector and current Record-Chain builder contract.

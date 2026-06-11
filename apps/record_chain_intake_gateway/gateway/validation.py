@@ -639,8 +639,9 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
             missing("MISSING_GUARDIAN_APPLICATION_CONTENT", "draft.guardian_application_content", "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath")
     elif record_type == "guardian_retirement":
+        payload = draft.get("payload") if isinstance(draft.get("payload"), dict) else {}
         for field in ("guardian_id", "guardian_public_key_sha256", "reason"):
-            if not draft.get(field):
+            if not (draft.get(field) or payload.get(field)):
                 missing("MISSING_GUARDIAN_RETIREMENT_FIELD", f"draft.{field}", f"Guardian retirement requires {field}")
     elif record_type in {"propagation", "correction"}:
         for field in ("title", "body"):

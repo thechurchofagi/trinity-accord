@@ -285,6 +285,8 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     ot["status"] = (
         "verified-bitcoin"
         if ots.get("bitcoin_verified") is True
+        else "current-upgraded-bitcoin-attestation"
+        if pipeline["ots_matches_chain"] and ots.get("ots_status") == "upgraded"
         else "current-pending-bitcoin"
         if pipeline["ots_matches_chain"] and ots.get("ots_status") == "pending"
         else "anchor-needed"

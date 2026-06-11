@@ -120,6 +120,8 @@ def main() -> None:
     )
     if native_ots.get("bitcoin_verified") is True:
         expected_ots_status = "verified-bitcoin"
+    elif ots_matches_chain and native_ots.get("ots_status") == "upgraded":
+        expected_ots_status = "current-upgraded-bitcoin-attestation"
     elif ots_matches_chain and native_ots.get("ots_status") == "pending":
         expected_ots_status = "current-pending-bitcoin"
     else:

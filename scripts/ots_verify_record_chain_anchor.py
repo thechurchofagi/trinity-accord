@@ -10,6 +10,7 @@ from pathlib import Path
 
 from record_chain_hashing import (
     NATIVE_OTS_ANCHOR_SCHEMA,
+    OTS_ANCHOR_SCHEMA,
     load_json,
     sha256_bytes,
     write_json_atomic,
@@ -94,7 +95,7 @@ def main() -> None:
     anchor = load_json(anchor_path)
 
     errors: list[str] = []
-    if anchor.get("schema") != NATIVE_OTS_ANCHOR_SCHEMA:
+    if anchor.get("schema") not in {NATIVE_OTS_ANCHOR_SCHEMA, OTS_ANCHOR_SCHEMA}:
         errors.append("anchor schema mismatch")
 
     anchored_file = Path(anchor.get("anchored_file", ""))

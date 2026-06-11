@@ -19,3 +19,9 @@ See: [/agent-start/](/agent-start/) for the full discovery sequence.
 
 - [/api/agent-submit-gateway.json](/api/agent-submit-gateway.json) — retired pointer
 - [/api/record-chain-status.json](/api/record-chain-status.json) — active gateway status
+
+## Mandatory rule for V0–V5 verification claims
+
+V0–V5 verification claims must use the current Claim Gate / Record-Chain submission path from `/agent-start/`.
+
+Pure Echo is separate from verification-report submission and must not be treated as a verification claim unless a valid verification report and allowed protocol level are present.

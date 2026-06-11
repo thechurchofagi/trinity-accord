@@ -49,7 +49,6 @@ const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
   "guardian-retirement",
   "propagation",
   "correction",
-  "context-insufficient",
 ]);
 
 
@@ -431,6 +430,10 @@ function requireOrCreateAuthorshipKeyPair(cmd, args) {
 
 // ── Authorship key binding ─────────────────────────────────────────
 
+function isPlaceholderGuardianKeySha(value) {
+  return typeof value === "string" && /^0{64}$/.test(value);
+}
+
 function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
   if (!keyPair) errorExit("authorship keypair is required");
 
@@ -446,11 +449,11 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
     const gac = recordDraft.guardian_application_content;
     if (!gac) errorExit("guardian_application_content missing");
 
-    if (opts.guardianKeySha && opts.guardianKeySha !== pubSha) {
+    if (opts.guardianKeySha && !isPlaceholderGuardianKeySha(opts.guardianKeySha) && opts.guardianKeySha !== pubSha) {
       errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
     }
 
-    if (gac.guardian_public_key_sha256 && gac.guardian_public_key_sha256 !== pubSha) {
+    if (gac.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(gac.guardian_public_key_sha256) && gac.guardian_public_key_sha256 !== pubSha) {
       errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
     }
 
@@ -458,11 +461,11 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
   }
 
   if (recordDraft.record_type === "guardian_retirement") {
-    if (opts.guardianKeySha && opts.guardianKeySha !== pubSha) {
+    if (opts.guardianKeySha && !isPlaceholderGuardianKeySha(opts.guardianKeySha) && opts.guardianKeySha !== pubSha) {
       errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
     }
 
-    if (recordDraft.guardian_public_key_sha256 && recordDraft.guardian_public_key_sha256 !== pubSha) {
+    if (recordDraft.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(recordDraft.guardian_public_key_sha256) && recordDraft.guardian_public_key_sha256 !== pubSha) {
       errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
     }
 
@@ -471,7 +474,7 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
 
   const linked = recordDraft.optional_linked_guardian_application_request;
   if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
-    if (linked.guardian_public_key_sha256 && linked.guardian_public_key_sha256 !== pubSha) {
+    if (linked.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(linked.guardian_public_key_sha256) && linked.guardian_public_key_sha256 !== pubSha) {
       errorExit("linked guardian_public_key_sha256 must equal authorship public key SHA-256");
     }
     linked.guardian_public_key_sha256 = pubSha;
@@ -816,11 +819,14 @@ function buildSubmission(recordDraft, opts) {
     sourceSha = "unavailable";
   }
 
-  const pubSha = bindAuthorshipKeyToDraft(recordDraft, opts.keyPair, opts);
-  const authorshipProof = createAuthorshipProof(recordDraft, opts.keyPair);
+  let authorshipProof = null;
+  if (opts.keyPair) {
+    const pubSha = bindAuthorshipKeyToDraft(recordDraft, opts.keyPair, opts);
+    authorshipProof = createAuthorshipProof(recordDraft, opts.keyPair);
 
-  if (authorshipProof.public_key_sha256 !== pubSha) {
-    errorExit("internal error: authorship proof public key hash mismatch");
+    if (authorshipProof.public_key_sha256 !== pubSha) {
+      errorExit("internal error: authorship proof public key hash mismatch");
+    }
   }
 
   const declaredCtx = recordDraft.context_readiness

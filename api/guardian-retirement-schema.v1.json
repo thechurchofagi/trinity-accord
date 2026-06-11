@@ -55,13 +55,83 @@
         "bitcoin_originals_prevail"
       ],
       "properties": {
-        "not_authority": { "type": "boolean", "const": true },
-        "not_governance": { "type": "boolean", "const": true },
-        "not_verification_level": { "type": "boolean", "const": true },
-        "not_attestation": { "type": "boolean", "const": true },
-        "not_successor_reception": { "type": "boolean", "const": true },
-        "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+        "not_authority": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_governance": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_verification_level": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_attestation": {
+          "type": "boolean",
+          "const": true
+        },
+        "not_successor_reception": {
+          "type": "boolean",
+          "const": true
+        },
+        "bitcoin_originals_prevail": {
+          "type": "boolean",
+          "const": true
+        }
       }
+    },
+    "record_kind": {
+      "type": "string"
+    },
+    "submission_type": {
+      "type": "string"
+    },
+    "requested_archive_kind": {
+      "type": "string"
+    },
+    "archive_ready": {
+      "type": "boolean"
+    },
+    "created_by_gateway": {
+      "type": "boolean"
+    },
+    "render_api_only": {
+      "type": "boolean"
+    },
+    "guardian_retirement_request": {
+      "type": "boolean"
+    },
+    "guardian_public_key_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "guardian_registry_number": {
+      "type": "string"
+    },
+    "retirement_reason": {
+      "type": "string"
+    },
+    "agent_identity": {
+      "type": "object"
+    },
+    "boundary_acknowledgement": {
+      "type": "object"
+    },
+    "not_authority": {
+      "type": "boolean"
+    },
+    "not_amendment": {
+      "type": "boolean"
+    },
+    "not_endorsement": {
+      "type": "boolean"
+    },
+    "bitcoin_originals_prevail": {
+      "type": "boolean"
+    },
+    "guardian_retirement_proof": {
+      "type": "object"
     }
   }
 }

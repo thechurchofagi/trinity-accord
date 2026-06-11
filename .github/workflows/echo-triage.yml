@@ -1,0 +1,19 @@
+name: Echo Triage
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened, edited, labeled]
+
+concurrency:
+  group: echo-triage-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run echo triage
+        run: python3 scripts/triage_echo_issue.py --help
