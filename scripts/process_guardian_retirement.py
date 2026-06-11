@@ -12,6 +12,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -51,12 +52,40 @@ def verify_signature(signed_message: str, signature_b64: str, public_key_pem: st
         Path(proof_path).unlink(missing_ok=True)
 
 
-def find_guardian_in_registry(registry: dict, guardian_id: str, public_key_sha256: str) -> dict | None:
-    """Find a Guardian entry by ID or public key hash."""
+def public_key_sha256_from_pem(public_key_pem: str) -> str:
+    """Compute SHA256 of the normalized PEM string.
+
+    Must match the convention used in api/guardian-registry.json and
+    build_guardian_retirement_payload.mjs (normalizePem -> trim + trailing newline).
+    """
+    normalized = public_key_pem.strip() + "\n"
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def canonical_retirement_payload_sha256(payload: dict) -> str:
+    """Compute SHA256 of the retirement payload WITHOUT the proof attached.
+
+    Must match build_guardian_retirement_payload.mjs behavior: the payload is
+    hashed before guardian_retirement_proof is attached, using stable JSON
+    stringify (sorted keys, no whitespace around separators).
+    """
+    payload_copy = {k: v for k, v in payload.items() if k != "guardian_retirement_proof"}
+    # Use the same stable stringify as the JS builder: sorted keys, compact
+    canonical = json.dumps(payload_copy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def find_guardian_strict(registry: dict, guardian_id: str, public_key_sha256: str) -> dict | None:
+    """Find a Guardian entry requiring BOTH guardian_id AND public_key_sha256 to match.
+
+    This prevents an attacker from using their own key to retire a different Guardian
+    by matching on guardian_id alone.
+    """
     for g in registry.get("guardians", []):
-        if g.get("guardian_id") == guardian_id:
-            return g
-        if g.get("public_key_sha256") == public_key_sha256:
+        if (
+            g.get("guardian_id") == guardian_id
+            and g.get("public_key_sha256") == public_key_sha256
+        ):
             return g
     return None
 
@@ -67,43 +96,95 @@ def process_retirement(payload: dict, dry_run: bool = False) -> dict:
     if not proof:
         raise ValueError("Missing guardian_retirement_proof")
 
-    guardian_id = payload.get("guardian_id") or proof.get("guardian_id")
-    pub_sha = payload.get("guardian_public_key_sha256") or proof.get("public_key_sha256")
+    # --- Strict binding: all identifiers must agree ---
+
+    payload_guardian_id = payload.get("guardian_id")
+    proof_guardian_id = proof.get("guardian_id")
+    if not payload_guardian_id or payload_guardian_id != proof_guardian_id:
+        raise ValueError("guardian_id mismatch between payload and proof")
+
+    payload_pub_sha = payload.get("guardian_public_key_sha256")
+    proof_pub_sha = proof.get("public_key_sha256")
+    if not payload_pub_sha or payload_pub_sha != proof_pub_sha:
+        raise ValueError("guardian public key hash mismatch between payload and proof")
+
+    public_key_pem = proof.get("public_key_pem")
+    if not public_key_pem:
+        raise ValueError("Missing public_key_pem in proof")
+
+    # Verify PEM-derived hash matches claimed hash
+    computed_pub_sha = public_key_sha256_from_pem(public_key_pem)
+    if computed_pub_sha != proof_pub_sha:
+        raise ValueError(
+            f"public_key_pem hash does not match proof.public_key_sha256: "
+            f"computed {computed_pub_sha} != claimed {proof_pub_sha}"
+        )
+
     signed_message = proof.get("signed_message")
     signature_b64 = proof.get("signature_base64")
-    public_key_pem = proof.get("public_key_pem")
 
-    if not all([guardian_id, pub_sha, signed_message, signature_b64, public_key_pem]):
+    if not all([signed_message, signature_b64]):
         raise ValueError("Incomplete retirement proof fields")
 
     # Verify signature
     if not verify_signature(signed_message, signature_b64, public_key_pem):
         raise ValueError("Invalid Guardian retirement signature")
 
-    print(f"✅ Signature verified for {guardian_id}")
+    print(f"✅ Signature verified for {payload_guardian_id}")
 
-    # Load registry
+    # --- Verify signed_payload_sha256 binds to actual payload ---
+    expected_payload_sha = canonical_retirement_payload_sha256(payload)
+    claimed_payload_sha = proof.get("signed_payload_sha256")
+    if claimed_payload_sha and claimed_payload_sha != expected_payload_sha:
+        raise ValueError(
+            f"signed_payload_sha256 does not match payload: "
+            f"claimed {claimed_payload_sha} != computed {expected_payload_sha}"
+        )
+
+    # --- Verify signed message contains required binding lines ---
+    required_lines = {
+        f"guardian_id={payload_guardian_id}",
+        f"payload_sha256={expected_payload_sha}",
+        f"public_key_sha256={computed_pub_sha}",
+        "boundary=key_possession_only_not_authority_not_attestation",
+    }
+    # challenge_sha256 is optional but if present in proof, must be in message
+    challenge_sha = proof.get("challenge_sha256")
+    if challenge_sha:
+        required_lines.add(f"challenge_sha256={challenge_sha}")
+
+    message_lines = set(signed_message.splitlines())
+    missing = sorted(required_lines - message_lines)
+    if missing:
+        raise ValueError(
+            "signed_message missing required binding line(s): " + ", ".join(missing)
+        )
+
+    # --- Strict registry lookup: guardian_id AND public_key_sha256 ---
     registry_path = ROOT / "api" / "guardian-registry.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
 
-    guardian = find_guardian_in_registry(registry, guardian_id, pub_sha)
+    guardian = find_guardian_strict(registry, payload_guardian_id, computed_pub_sha)
     if not guardian:
-        raise ValueError(f"Guardian {guardian_id} not found in registry")
+        raise ValueError(
+            f"Guardian {payload_guardian_id} with key hash {computed_pub_sha} "
+            f"not found in registry (strict match required)"
+        )
 
     current_status = guardian.get("status")
     if current_status == "retired":
-        print(f"⚠️ Guardian {guardian_id} is already retired")
-        return {"status": "already_retired", "guardian_id": guardian_id}
+        print(f"⚠️ Guardian {payload_guardian_id} is already retired")
+        return {"status": "already_retired", "guardian_id": payload_guardian_id}
 
     if current_status not in ("active", "pending_review"):
         raise ValueError(f"Cannot retire Guardian with status: {current_status}")
 
     registry_number = guardian.get("guardian_registry_number", "unknown")
-    print(f"Guardian #{registry_number} ({guardian_id}) current status: {current_status}")
+    print(f"Guardian #{registry_number} ({payload_guardian_id}) current status: {current_status}")
 
     if dry_run:
         print("DRY RUN: would update status to 'retired'")
-        return {"status": "dry_run", "guardian_id": guardian_id, "registry_number": registry_number}
+        return {"status": "dry_run", "guardian_id": payload_guardian_id, "registry_number": registry_number}
 
     # Update status
     guardian["status"] = "retired"
@@ -120,7 +201,7 @@ def process_retirement(payload: dict, dry_run: bool = False) -> dict:
 
     return {
         "status": "retired",
-        "guardian_id": guardian_id,
+        "guardian_id": payload_guardian_id,
         "registry_number": registry_number,
     }
 
@@ -140,8 +221,6 @@ def rebuild_indexes() -> None:
 
 def commit_and_push(guardian_id: str, registry_number: str) -> bool:
     """Commit registry change and push."""
-    # Commit registry changes first, then stash any other unstaged files
-    # (e.g. toolchain-provenance.json from CI) before rebasing.
     commit_cmds = [
         ["git", "config", "user.name", "github-actions[bot]"],
         ["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"],
@@ -241,6 +320,11 @@ def main() -> int:
     ap.add_argument("--issue-json", help="Path to Gateway Issue JSON")
     ap.add_argument("--dry-run", action="store_true", help="Verify only, don't update registry")
     ap.add_argument("--no-push", action="store_true", help="Update registry but don't commit/push")
+    ap.add_argument(
+        "--push-main",
+        action="store_true",
+        help="Commit and push directly to main. DANGEROUS; intended only for trusted automation.",
+    )
     args = ap.parse_args()
 
     if args.payload:
@@ -271,10 +355,14 @@ def main() -> int:
     # Rebuild indexes
     rebuild_indexes()
 
-    # Commit and push
-    if not args.no_push:
+    # Commit and push — only when explicitly requested via --push-main
+    if args.push_main:
         if not commit_and_push(result["guardian_id"], result["registry_number"]):
             return 1
+    elif not args.no_push:
+        print("No push performed. Use --push-main to push directly to main (dangerous),")
+        print("or --no-push to skip. Default is no-push for safety.")
+        print("Preferred workflow: commit to a branch and open a PR.")
 
     print(f"\n✅ Guardian #{result['registry_number']} retired successfully")
     return 0
