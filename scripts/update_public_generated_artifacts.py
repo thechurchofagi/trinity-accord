@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Update all public generated artifacts.
 
-Runs generate_sitemap.py unconditionally, and if generate_public_home_status.py
-exists, runs that too.  Exit code is non-zero if any sub-script fails.
+Regenerates derived record-chain status before the public homepage snapshot so
+archive / OTS / wallet metadata cannot be rendered from stale status JSON.
+Exit code is non-zero if any sub-script fails.
 
 Usage:
     python3 scripts/update_public_generated_artifacts.py
@@ -16,13 +17,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SCRIPTS = [
+    "scripts/generate_record_chain_status.py",
+    "scripts/generate_public_home_status.py",
+    "scripts/patch_public_home_status_primary.py",
     "scripts/generate_sitemap.py",
 ]
 
-# Optional: only run if the file exists
-OPTIONAL_SCRIPTS = [
-    "scripts/generate_public_home_status.py",
-]
+OPTIONAL_SCRIPTS: list[str] = []
 
 
 def run_script(script: str) -> int:
