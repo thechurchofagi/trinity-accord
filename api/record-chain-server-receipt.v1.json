@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "trinityaccord.record-chain-server-receipt.v1",
   "title": "Server Receipt",
-  "description": "A server receipt returned after a successful record-chain submission. commit_sha is NOT in the receipt body — it is immutable once created. Use receipt_commit_sha at the response envelope level.",
+  "description": "A server receipt returned after a successful record-chain submission. commit_sha is NOT in the receipt body \u2014 it is immutable once created. Use receipt_commit_sha at the response envelope level.",
   "type": "object",
   "required": [
     "server_receipt_id",
@@ -19,8 +19,8 @@
   "properties": {
     "server_receipt_id": {
       "type": "string",
-      "pattern": "^rcg-\\d{8}-[a-f0-9]{12}$",
-      "description": "Unique receipt identifier in the format rcg-YYYYMMDD-<12hex>."
+      "pattern": "^rcg-\\d{8}-[a-f0-9]{24}$",
+      "description": "Unique receipt identifier in the format rcg-YYYYMMDD-<24hex>."
     },
     "service": {
       "type": "string",
@@ -86,7 +86,10 @@
       "description": "Always true. Receipt is intake acknowledgement only."
     },
     "oath_verification": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Summary of oath verification results (excludes raw readback text)."
     },
     "receipt_sha256": {

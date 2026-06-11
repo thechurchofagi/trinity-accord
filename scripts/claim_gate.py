@@ -1233,7 +1233,18 @@ def evaluate(input_path):
         schema = json.load(open(ROOT / "api" / "evidence-input-schema.v1.json"))
         jsonschema.Draft202012Validator(schema).validate(evidence_input)
     except ImportError:
-        pass  # jsonschema not available, basic checks above are sufficient
+        # Minimal fail-closed fallback for environments without jsonschema: reject
+        # unknown top-level fields from the canonical Evidence Input schema while
+        # allowing otherwise well-formed payloads to proceed to semantic checks.
+        allowed_top = {
+            "schema", "agent", "provenance", "requested_record_kind", "evidence",
+            "limitations", "claims_requested_by_agent", "agent_integrity_declaration",
+            "verification_session", "prior_report_use", "requested_archive_kind",
+            "archive_payload",
+        }
+        extra_top = sorted(set(evidence_input) - allowed_top)
+        if extra_top:
+            schema_validation_error = "Unexpected top-level field(s): " + ", ".join(extra_top)
     except jsonschema.ValidationError as e:
         schema_validation_error = str(e)
 

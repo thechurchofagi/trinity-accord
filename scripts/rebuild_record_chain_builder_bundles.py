@@ -53,6 +53,28 @@ def main() -> None:
             "external_agents_do_not_need_github": True,
             "external_agents_must_not_clone_repository": True,
         },
+        "acquisition_policy": {
+            "canonical_download_only": True,
+            "verify_sha256": True,
+            "verify_size_bytes": True,
+            "do_not_copy_from_search_snippets": True,
+            "do_not_copy_from_chat_or_tool_output": True,
+            "do_not_use_partial_or_truncated_source": True,
+            "do_not_reconstruct_or_simplify_builder": True,
+            "fail_closed_if_unverifiable": True,
+        },
+        "download_methods": [
+            {
+                "name": "canonical_public_site_manifest_verified",
+                "url": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
+                "verify_with": "canonical_builder.sha256_and_size_bytes",
+            },
+            {
+                "name": "github_raw_manifest_verified_fallback",
+                "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
+                "verify_with": "canonical_builder.sha256_and_size_bytes",
+            },
+        ],
     }
 
     OUTPUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n")

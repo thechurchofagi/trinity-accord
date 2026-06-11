@@ -14,9 +14,9 @@
       "record_type_slug": "echo"
     },
     {
-      "index_file": "record-chain-index.exit_application.json",
-      "record_type": "exit_application",
-      "record_type_slug": "exit_application"
+      "index_file": "record-chain-index.verification.json",
+      "record_type": "verification",
+      "record_type_slug": "verification"
     },
     {
       "index_file": "record-chain-index.guardian_application.json",
@@ -24,14 +24,29 @@
       "record_type_slug": "guardian_application"
     },
     {
-      "index_file": "record-chain-index.guardian_exit_application.json",
-      "record_type": "guardian_exit_application",
-      "record_type_slug": "guardian_exit_application"
+      "index_file": "record-chain-index.guardian_retirement.json",
+      "record_type": "guardian_retirement",
+      "record_type_slug": "guardian_retirement"
     },
     {
-      "index_file": "record-chain-index.verification.json",
-      "record_type": "verification",
-      "record_type_slug": "verification"
+      "index_file": "record-chain-index.guardian_key_rotation.json",
+      "record_type": "guardian_key_rotation",
+      "record_type_slug": "guardian_key_rotation"
+    },
+    {
+      "index_file": "record-chain-index.propagation.json",
+      "record_type": "propagation",
+      "record_type_slug": "propagation"
+    },
+    {
+      "index_file": "record-chain-index.correction.json",
+      "record_type": "correction",
+      "record_type_slug": "correction"
+    },
+    {
+      "index_file": "record-chain-index.classification_update.json",
+      "record_type": "classification_update",
+      "record_type_slug": "classification_update"
     }
   ],
   "schema": "trinity_record_chain_index_manifest.v1",

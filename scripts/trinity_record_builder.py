@@ -406,11 +406,13 @@ def build_guardian_application(args: argparse.Namespace) -> dict[str, Any]:
 
 def build_guardian_retirement(args: argparse.Namespace) -> dict[str, Any]:
     draft = base_draft("guardian_retirement", args)
-    draft["payload"] = {
+    retirement_payload = {
         "guardian_id": args.guardian_id,
         "guardian_public_key_sha256": args.guardian_public_key_sha256,
         "reason": args.reason or "Voluntary retirement",
     }
+    draft["payload"] = dict(retirement_payload)
+    draft.update(retirement_payload)
     draft["boundary_acknowledgement"]["retirement_does_not_remove_historical_record"] = True
     return draft
 

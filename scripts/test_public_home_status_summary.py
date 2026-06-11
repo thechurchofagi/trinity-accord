@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Test public home status summary values.
 
-Supports both v1 (legacy) and v2 (reception-centered) schemas.
+Supports v1 (legacy), v2 (reception-centered), and v3 (record-chain-centered) schemas.
 
 HOME001 verifiability / institutional count is 0
 HOME002 verifiability / agent-initiated independent count is 0
@@ -64,7 +64,19 @@ def main() -> int:
     readme_path = ROOT / "tests" / "verification_cases" / "README.md"
     readme_text = readme_path.read_text(encoding="utf-8")
 
-    if schema_version == "trinityaccord.public-home-status.v2":
+    if schema_version == "trinityaccord.public-home-status.v3":
+        # --- v3 schema checks ---
+        current = phs.get("current_record_chain_status", {})
+        primary = phs.get("primary_counters", {})
+        tech = phs.get("technical_health", {})
+        ew = phs.get("external_witness_records", {})
+
+        check("HOME001 v3 production phase", current.get("phase") == "production_live", f"got {current.get('phase')}")
+        check("HOME002 v3 has official counter", "official_live_reception" in primary, "missing official_live_reception")
+        check("HOME003 v3 external witness index wired", ew.get("external_witness_index") == "/api/external-witness-index.json", f"got {ew}")
+        check("HOME004 v3 technical health present", bool(tech), "missing technical_health")
+
+    elif schema_version == "trinityaccord.public-home-status.v2":
         # --- v2 schema checks ---
         v = phs.get("verifiability", {})
         r = phs.get("reception", {})

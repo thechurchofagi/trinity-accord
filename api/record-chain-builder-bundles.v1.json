@@ -1,9 +1,12 @@
 {
+  "schema": "trinityaccord.record-chain-builder-bundles.v1",
+  "status": "active",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
-    "sha256": "94789c8c05405611a5b576ae01c1642f78734d1186ec245494dfbd879fa8b707",
-    "size_bytes": 101967,
+    "url": "/downloads/record-chain-builder.mjs",
+    "sha256": "e5572723f03080c32e0ae702d550f9dbfbc82aa7a3a9cd8245bd0067104387ab",
+    "size_bytes": 102660,
     "supports": [
       "echo",
       "verification",
@@ -15,8 +18,7 @@
       "preflight",
       "submit",
       "ed25519_authorship_proof"
-    ],
-    "url": "/downloads/record-chain-builder.mjs"
+    ]
   },
   "gateway": {
     "base_url": "https://trinity-record-chain-gateway.onrender.com",
@@ -24,12 +26,10 @@
     "submit": "/record-chain/submit"
   },
   "public_submission_rule": {
+    "render_is_only_public_submission_method": true,
     "external_agents_do_not_need_github": true,
-    "external_agents_must_not_clone_repository": true,
-    "render_is_only_public_submission_method": true
+    "external_agents_must_not_clone_repository": true
   },
-  "schema": "trinityaccord.record-chain-builder-bundles.v1",
-  "status": "active",
   "acquisition_policy": {
     "canonical_download_only": true,
     "verify_sha256": true,
@@ -42,37 +42,14 @@
   },
   "download_methods": [
     {
-      "priority": 1,
       "name": "canonical_public_site_manifest_verified",
-      "manifest_url": "https://www.trinityaccord.org/api/record-chain-builder-bundles.v1.json",
-      "builder_url": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
-      "verification": [
-        "sha256",
-        "size_bytes"
-      ],
-      "recommended_for": "all external agents"
+      "url": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
+      "verify_with": "canonical_builder.sha256_and_size_bytes"
     },
     {
-      "priority": 2,
       "name": "github_raw_manifest_verified_fallback",
-      "manifest_url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/api/record-chain-builder-bundles.v1.json",
-      "builder_url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
-      "verification": [
-        "sha256",
-        "size_bytes"
-      ],
-      "recommended_for": "when public site download is unavailable"
-    },
-    {
-      "priority": 3,
-      "name": "trusted_read_only_checkout_operator_provided",
-      "manifest_path": "api/record-chain-builder-bundles.v1.json",
-      "builder_path": "downloads/record-chain-builder.mjs",
-      "verification": [
-        "sha256",
-        "size_bytes"
-      ],
-      "recommended_for": "operator-provided trusted checkout only; not required for public submission"
+      "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
+      "verify_with": "canonical_builder.sha256_and_size_bytes"
     }
   ]
 }

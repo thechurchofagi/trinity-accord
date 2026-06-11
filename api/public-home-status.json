@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-11T05:13:51.377446+00:00",
+  "generated_at": "2026-06-11T06:16:36.210126+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -13,9 +13,10 @@
     "/record-chain/records/",
     "/api/echo-index.json",
     "/api/guardian-registry.json",
-    "/api/agent-declared-verification-index.json"
+    "/api/agent-declared-verification-index.json",
+    "/api/external-witness-index.json"
   ],
-  "source_digest": "0c5dbc27c95f0f18",
+  "source_digest": "605907a8f260e1a8",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 37,
@@ -57,7 +58,7 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 37,
-        "status": "anchor-needed",
+        "status": "current-upgraded-bitcoin-attestation",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 37,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-37-R-000000037-bbbef52b1615923d-d7c0a9c39df3128c.anchor.json",
@@ -160,6 +161,27 @@
       "legacy_reception_total": 196
     }
   },
+  "external_witness_records": {
+    "external_witness_index": "/api/external-witness-index.json",
+    "external_witness_index_record_count": 0,
+    "external_witness_index_counts": {
+      "notarial_record": 0,
+      "institutional_record": 0,
+      "audit_report": 0,
+      "regulatory_or_court_record": 0
+    },
+    "notarial_or_legal_provenance": {
+      "count": 0
+    },
+    "institutional_or_audit_reports": {
+      "count": 0
+    },
+    "linked_echo_record_count": 77,
+    "not_homepage_primary_counter": true,
+    "does_not_create_authority": true,
+    "does_not_rank_above_reception": true,
+    "non_amending_boundary": true
+  },
   "counter_update_policy": {
     "homepage_counters_update_after_append_workflow": true,
     "homepage_counters_update_after_anchor_workflow": true,
@@ -230,7 +252,7 @@
     "latest_record": "R-000000037",
     "latest_record_type": "verification",
     "pending_records": 0,
-    "pipeline": "attention",
+    "pipeline": "current",
     "ots": "upgraded",
     "ots_raw_status": "upgraded",
     "arweave": "current",

@@ -25,8 +25,8 @@
       "requires_full_repo_clone": false,
       "route_id": "guardian_application_stage_1",
       "runtime": "node",
-      "sha256": "94428200ffb27fba1934610b42c24b7729b8f05e89c214c6046e057ab0875263",
-      "size_bytes": 24903,
+      "sha256": "676cd406a2c7bf5850243949a517a0816e21b903aeb66b3ff3b5236ade29f810",
+      "size_bytes": 24601,
       "status": "active"
     },
     "guardian_full_registration": {
@@ -74,8 +74,8 @@
       "requires_public_key_sha256": true,
       "requires_stage_1_public_material": true,
       "route_id": "guardian_listing_stage_2",
-      "sha256": "fabba1be68687bd35374f140e2baf5e89542f29448d145e8f8c8a0f20f0c31d9",
-      "size_bytes": 59265,
+      "sha256": "63a6db4148d5dc3c4c1aa184968c304b9ab2ef89c03979d006e712b6b0a07191",
+      "size_bytes": 58225,
       "status": "active_after_stage_1"
     },
     "guardian_retirement": {
@@ -122,8 +122,8 @@
       "requires_full_repo_clone": false,
       "requires_guardian_identity": true,
       "route_id": "guardian_signed_echo",
-      "sha256": "2d9e3753dee3f389c4cfc4dbf6a7e82b592d2441694d911548beebc01ad58b84",
-      "size_bytes": 63979,
+      "sha256": "cdeea2e63cf31d40d91809624943ede553b683bcd496794ff991dc05ea34eb51",
+      "size_bytes": 62649,
       "status": "active_after_guardian_identity"
     },
     "pure_echo": {
@@ -144,8 +144,8 @@
       "requires_exact_readback": true,
       "requires_full_repo_clone": false,
       "route_id": "pure_echo",
-      "sha256": "65052387fbb925172dbf42b851b4683e0beb7a7d3fa8dff1aee8713aa1174269",
-      "size_bytes": 55469,
+      "sha256": "1a00841dea6b6f57914ee4128b0a8bdd40036d3e20f7debdb25d5328b68eff7b",
+      "size_bytes": 54652,
       "status": "active"
     },
     "v0_v5_agent_declared_archive": {
@@ -174,8 +174,8 @@
       "requires_exact_readback": true,
       "requires_full_repo_clone": false,
       "route_id": "v0_v5_agent_declared_archive",
-      "sha256": "93db5d2e6b39e39ae7991826ac11f33e1b493a00e9cb4d3737cea5d36e4aeb3a",
-      "size_bytes": 66453,
+      "sha256": "25331ce6c1a95e7eebead6005670548334d09cf2ed8aa2b996a6c25ee739b7bd",
+      "size_bytes": 65883,
       "status": "active"
     }
   },
@@ -207,10 +207,10 @@
       "scripts/agent_authorship_common.py"
     ]
   },
-  "source_digest": "39d574a25582eba9",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "version": "v1",
   "status": "historical_archive_only",
   "do_not_use_for_new_public_submissions": true,
-  "replacement": "/api/agent-first-contact.json"
+  "replacement": "/api/agent-first-contact.json",
+  "source_digest": "08da3eaa9b415401"
 }
