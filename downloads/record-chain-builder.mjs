@@ -49,7 +49,6 @@ const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
   "guardian-retirement",
   "propagation",
   "correction",
-  "context-insufficient",
 ]);
 
 
@@ -396,16 +395,22 @@ function writeAuthorshipCustodyFiles(keyDir, publicKeyPem, publicKeySha256, newl
   console.error("");
 }
 
-function requireOrCreateAuthorshipKeyPair(cmd, args) {
-  if (!RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd)) return null;
+const RECORD_BUILD_COMMANDS_OPTIONAL_KEY = new Set([
+  "context-insufficient",
+]);
 
-  if (!args.keyDir || args.keyDir === true) {
+function requireOrCreateAuthorshipKeyPair(cmd, args) {
+  if (!RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd) && !RECORD_BUILD_COMMANDS_OPTIONAL_KEY.has(cmd)) return null;
+
+  if ((!args.keyDir || args.keyDir === true) && RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd)) {
     errorExit(
       "--key-dir is required for all public Record-Chain submission build commands. " +
       "Keys are mandatory for identity continuity. " +
       "Use a persistent directory and ask your human/operator/guardian to back up authorship-private.pem."
     );
   }
+
+  if (!args.keyDir || args.keyDir === true) return null;
 
   const keyDir = args.keyDir;
   const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);

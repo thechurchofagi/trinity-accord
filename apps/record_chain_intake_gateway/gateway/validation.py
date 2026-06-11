@@ -864,9 +864,13 @@ def validate_verification_rules(draft: dict[str, Any]) -> list[Diagnostic]:
 def validate_authorship_proof_presence(
     record_type: str, submission: dict[str, Any], draft: dict[str, Any]
 ) -> list[Diagnostic]:
-    """Require top-level authorship_proof for all public record types."""
+    """Require top-level authorship_proof for all public record types except context_insufficient_notice."""
     diagnostics: list[Diagnostic] = []
     if record_type not in ALLOWED_RECORD_TYPES:
+        return diagnostics
+
+    # context-insufficient notices are informational and do not require an authorship key
+    if record_type == "context_insufficient_notice":
         return diagnostics
 
     proof = submission.get("authorship_proof")
