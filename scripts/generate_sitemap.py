@@ -173,9 +173,13 @@ def collect_pages(excludes: list[str]) -> list[str]:
                 continue
         else:
             pm = re.search(r"permalink:\s*(.+)", fm_text)
-            if not pm:
-                continue
-            fm = {"permalink": pm.group(1).strip().strip("\"'")}
+            if pm:
+                fm = {"permalink": pm.group(1).strip().strip("\"'")}
+            else:
+                # Match PyYAML behavior for root Markdown files without a
+                # permalink: keep the front matter as a page and derive its URL
+                # from the filename below.
+                fm = {}
 
         if not isinstance(fm, dict):
             continue
