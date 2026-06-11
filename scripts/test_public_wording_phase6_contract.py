@@ -167,7 +167,17 @@ def main() -> None:
     else:
         errors.append("public-home-status.json: file missing")
 
-    # Workflow checks: all three workflows must call generators and commit generated files
+    # Workflow checks: centralized homepage-status-sync must exist and handle generators.
+    # Business workflows must NOT directly call homepage generators or commit generated files.
+    home_sync = ROOT / ".github" / "workflows" / "homepage-status-sync.yml"
+    if not home_sync.exists():
+        errors.append("homepage-status-sync.yml: centralized sync workflow missing")
+    else:
+        hs_text = home_sync.read_text(encoding="utf-8")
+        for needle in ["generate_public_home_status.py", "generate_sitemap.py", "update_public_generated_artifacts.py"]:
+            if needle not in hs_text:
+                errors.append(f"homepage-status-sync.yml: missing {needle}")
+
     for workflow in [
         ".github/workflows/record-chain-append.yml",
         ".github/workflows/record-chain-anchor.yml",
@@ -179,11 +189,11 @@ def main() -> None:
             continue
         wtext = wpath.read_text(encoding="utf-8")
         for needle in ["generate_public_home_status.py", "generate_sitemap.py"]:
-            if needle not in wtext:
-                errors.append(f"{workflow}: missing {needle}")
-        for needle in ["index.md", "api/public-home-status.json", "sitemap.xml"]:
-            if needle not in wtext:
-                errors.append(f"{workflow}: commit step missing {needle}")
+            if needle in wtext:
+                errors.append(f"{workflow}: must not directly call {needle}; use homepage-status-sync.yml")
+        for needle in ["api/public-home-status.json", "sitemap.xml"]:
+            if needle in wtext:
+                errors.append(f"{workflow}: must not commit {needle}; use homepage-status-sync.yml")
 
     # --- Phase 6B Hotfix L: oath/readback wording checks ---
 
