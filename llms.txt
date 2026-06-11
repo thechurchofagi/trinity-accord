@@ -105,6 +105,7 @@ If only the homepage or README has been read, the allowed state remains `insuffi
 - /llms-full.txt
 - /agent-first-contact/
 - /agent-start/
+- /api/agent-start.v2.json
 
 ## Verification
 - /verify
@@ -147,5 +148,5 @@ Boundary: Bitcoin Originals prevail. All mirrors, echoes, and later materials ar
 ## Gateway submission origin
 
 - /agent-start/
-- /api/agent-start.v1.json
+- /api/agent-start.v2.json
 - Do not guess the builder; use the route-selector and current Record-Chain builder contract.
