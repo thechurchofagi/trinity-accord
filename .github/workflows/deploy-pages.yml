@@ -29,10 +29,6 @@ jobs:
       - run: python3 -m pip install -r requirements-ci.txt
       - name: Verify record-chain integrity
         run: python3 scripts/trinity_record_chain.py verify
-      - name: Regenerate sitemap from current files
-        run: python3 scripts/generate_sitemap.py
-      - name: Run current system tests
-        run: python3 scripts/run_current_system_tests.py
       - name: Verify sitemap has no drift
         run: python3 scripts/generate_sitemap.py --check
       - name: Verify public home status has no drift
@@ -40,10 +36,13 @@ jobs:
           python3 scripts/generate_public_home_status.py
           python3 scripts/patch_public_home_status_primary.py
           python3 scripts/patch_public_home_status_primary.py --check
+      - name: Run current system tests
+        run: python3 scripts/run_current_system_tests.py
       - name: Scan for secret material (broad)
         run: python3 scripts/test_no_secret_material_committed.py
       - name: Check no private keys or tokens (focused PEM)
         run: python3 scripts/test_no_private_key_material_committed.py
+
   build:
     needs: verify
     runs-on: ubuntu-24.04
@@ -55,60 +54,29 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
-      - name: Build formal builder bundles
-        run: |
-          python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api
-          cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py
-
-      - name: Verify formal builder bundle API was updated (legacy, non-blocking)
-        run: |
-          set -euo pipefail
-          python3 scripts/test_formal_builder_bundles_contract.py || {
-            echo "::warning::Legacy formal builder bundle verification failed — non-blocking for deployment"
-          }
-
       - name: Build site with Jekyll
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
 
-      - name: Inject builder-bundles into Pages artifact
+      - name: Restore committed static API, builder, and bundles
         run: |
           set -euo pipefail
-          # Jekyll Docker action creates _site/ as root. Fix ownership so we
-          # can copy builder-bundle files into it.
-          sudo chown -R "$(id -u):$(id -g)" _site
-          mkdir -p _site/downloads
-          mkdir -p _site/builder-bundles
-          cp downloads/record-chain-builder.mjs _site/downloads/record-chain-builder.mjs
-          cp downloads/record-chain-builder.mjs _site/builder-bundles/record-chain-builder.mjs
-          cp builder-bundles/*.tar.gz _site/builder-bundles/
-          cp builder-bundles/*.json _site/builder-bundles/
-          cp scripts/download_and_run_builder_bundle.py _site/builder-bundles/
-          cp api/builder-bundle-signing-key.v1.json _site/api/
-          cp api/formal-builder-bundle-signatures.v1.json _site/api/
 
-      - name: Verify legacy builder bundle artifacts (non-blocking)
-        run: |
-          set -euo pipefail
-          failures=0
-          for f in \
-            _site/api/builder-bundle-signing-key.v1.json \
-            _site/api/formal-builder-bundle-signatures.v1.json \
-            _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json; do
-            if ! test -f "$f"; then
-              echo "::warning::Missing legacy builder bundle artifact: $f"
-              failures=$((failures + 1))
-            fi
-          done
-          if [ "$failures" -gt 0 ]; then
-            echo "::warning::${failures} legacy builder bundle artifact(s) missing — non-blocking for deployment"
-          fi
+          # Publish the reviewed committed artifacts exactly as they exist on main.
+          # Do not generate deployment-only API/status/builder data here.
+          sudo chown -R "$(id -u):$(id -g)" _site
+          rm -rf ./_site/api ./_site/downloads ./_site/builder-bundles
+          cp -a ./api ./_site/api
+          mkdir -p ./_site/downloads
+          install -m 0644 ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
+          cp -a ./builder-bundles ./_site/builder-bundles
+          cp scripts/download_and_run_builder_bundle.py ./_site/builder-bundles/download_and_run_builder_bundle.py
+
+          cmp ./api/public-home-status.json ./_site/api/public-home-status.json
+          cmp ./api/record-chain-builder-bundles.v1.json ./_site/api/record-chain-builder-bundles.v1.json
+          cmp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
 
       - name: Verify built agent discovery artifacts
         run: |
@@ -141,30 +109,6 @@ jobs:
           ! grep -q '/agent-submit\|/gateway/preflight\|/api/agent-start.v1.json\|/api/gateway-builder-route-map.v1.json\|/api/gateway-workflows.v1.json' _site/llms.txt
           ! grep -q '/agent-submit\|/gateway/preflight\|/api/agent-start.v1.json\|/api/gateway-builder-route-map.v1.json\|/api/gateway-workflows.v1.json' _site/ai.txt
 
-      - name: Verify zero-clone builder bundles in Pages artifact (non-blocking)
-        run: |
-          failures=0
-          for f in \
-            _site/builder-bundles/download_and_run_builder_bundle.py \
-            _site/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz \
-            _site/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-v0v5-builder-bundle.tar.gz \
-            _site/builder-bundles/trinity-v0v5-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz \
-            _site/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz \
-            _site/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json \
-            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz \
-            _site/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json; do
-            if ! test -f "$f"; then
-              echo "::warning::Missing legacy zero-clone builder bundle: $f"
-              failures=$((failures + 1))
-            fi
-          done
-          if [ "$failures" -gt 0 ]; then
-            echo "::warning::${failures} legacy zero-clone builder bundle artifact(s) missing — non-blocking"
-          fi
-
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 
@@ -173,6 +117,8 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: ./_site
 
   deploy:
     environment:
@@ -192,18 +138,6 @@ jobs:
         run: |
           set -euo pipefail
           echo "deployment page_url=${{ steps.deployment.outputs.page_url }}"
-
-          case "${{ steps.deployment.outputs.page_url }}" in
-            https://www.trinityaccord.org/*|https://www.trinityaccord.org)
-              echo "Deployment URL is canonical custom domain."
-              ;;
-            *)
-              echo "WARNING: Deployment page_url is not canonical custom domain."
-              echo "Expected: https://www.trinityaccord.org/"
-              echo "Actual:   ${{ steps.deployment.outputs.page_url }}"
-              echo "This may be normal if GitHub returns the .github.io URL."
-              ;;
-          esac
 
       - name: Smoke live public discovery contract
         run: |
