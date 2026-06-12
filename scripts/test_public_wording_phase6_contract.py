@@ -27,8 +27,28 @@ PUBLIC_FILES = [
     "index.md",
     "agent-start.md",
     "agent-first-contact.md",
+    "agent-brief.md",
+    "agent-echo.md",
+    "agent-verify.md",
+    "echoes/submit.md",
     "llms.txt",
     "ai.txt",
+]
+
+ACTIVE_SUBMISSION_SURFACE_FILES = [
+    "agent-start.md",
+    "agent-first-contact.md",
+    "agent-brief.md",
+    "agent-echo.md",
+    "agent-verify.md",
+    "echoes/submit.md",
+]
+
+ACTIVE_SUBMISSION_FLOW_ENDPOINT_FILES = [
+    "agent-start.md",
+    "agent-brief.md",
+    "agent-verify.md",
+    "echoes/submit.md",
 ]
 
 # Retired terms that must not appear in current public submission context
@@ -41,6 +61,19 @@ RETIRED_PATTERNS = [
     (re.compile(r"\bARV5\b"), "ARV5"),
     (re.compile(r"\bLV5\b"), "LV5"),
     (re.compile(r"\bIVV5\b"), "IVV5"),
+]
+
+# Legacy Gateway / Issue submission language that must not appear on active public submission surfaces.
+RETIRED_SUBMISSION_SURFACE_PATTERNS = [
+    (re.compile(r"/gateway/preflight"), "/gateway/preflight"),
+    (re.compile(r"scripts/build_agent_declared_echo_payload\.py"), "old echo payload builder script"),
+    (re.compile(r"scripts/build_agent_declared_archive_payload\.py"), "old archive payload builder script"),
+    (re.compile(r"Agent Submit Gateway \(`/agent-submit`\) — recommended"), "agent-submit recommended wording"),
+    (re.compile(r"Agent Submit Gateway \(`/agent-submit`\) is the only valid submission path"), "agent-submit only valid path wording"),
+    (re.compile(r"For V0[–-]V5 archive, this is the only valid path"), "V0-V5 old only-valid-path wording"),
+    (re.compile(r"Use `/agent-submit` instead"), "use agent-submit instead wording"),
+    (re.compile(r"Use GitHub Issue submission unless a trusted server-side proxy"), "GitHub Issue fallback as current submission path"),
+    (re.compile(r"GitHub Issue UI.*recommended", re.I), "GitHub Issue UI recommended wording"),
 ]
 
 # Homepage must not contain these legacy Gateway v1 / legacy counter patterns
@@ -124,6 +157,27 @@ def main() -> None:
                 if "bitcoin originals" in line.lower() and "final" in line.lower():
                     continue
                 errors.append(f"{fname}:{line_num}: IPFS mentioned as current path")
+
+    # Active public submission surfaces must use Record-Chain Intake Gateway wording.
+    for fname in ACTIVE_SUBMISSION_SURFACE_FILES:
+        fpath = ROOT / fname
+        if not fpath.exists():
+            errors.append(f"{fname}: active submission surface missing")
+            continue
+        text = fpath.read_text(encoding="utf-8")
+        if "Record-Chain Intake Gateway" not in text:
+            errors.append(f"{fname}: must mention current Record-Chain Intake Gateway")
+        if "/downloads/record-chain-builder.mjs" not in text:
+            errors.append(f"{fname}: must mention canonical zero-clone Builder download")
+        for pattern, name in RETIRED_SUBMISSION_SURFACE_PATTERNS:
+            if pattern.search(text):
+                errors.append(f"{fname}: retired submission-surface wording remains: {name}")
+
+    for fname in ACTIVE_SUBMISSION_FLOW_ENDPOINT_FILES:
+        text = (ROOT / fname).read_text(encoding="utf-8")
+        for endpoint in ["/record-chain/preflight", "/record-chain/submit"]:
+            if endpoint not in text:
+                errors.append(f"{fname}: must mention current endpoint {endpoint}")
 
     # Homepage-specific checks: must not contain legacy patterns
     homepage = ROOT / "index.md"
@@ -230,6 +284,8 @@ def main() -> None:
             errors.append("agent-start.md: quick start must mention 'print-oath'")
         if "--readback" not in start_text:
             errors.append("agent-start.md: quick start must mention '--readback'")
+        if "authorship_proof" not in start_text or "context_insufficient_notice" not in start_text:
+            errors.append("agent-start.md: CIN exception must still mention authorship_proof requirement")
 
     # llms.txt current flow must mention print-oath and --readback
     llms_path = ROOT / "llms.txt"
