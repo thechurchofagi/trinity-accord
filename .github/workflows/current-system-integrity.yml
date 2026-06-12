@@ -39,7 +39,6 @@ jobs:
           python3 - <<'PY'
           import hashlib
           import json
-          import subprocess
           from pathlib import Path
 
           fields = [
@@ -88,6 +87,20 @@ jobs:
           boundary["additionalProperties"] = False
           schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
 
+          phase5c = Path("scripts/test_phase_5c_hotfix.py")
+          phase5c_text = phase5c.read_text(encoding="utf-8")
+          needle = '''    "bitcoin_originals_prevail",
+}'''
+          replacement = '''    "bitcoin_originals_prevail",
+    "receipt_is_not_final_inclusion",
+    "receipt_is_intake_only",
+    "later_records_may_reclassify_or_correct_this_record",
+}'''
+          if replacement not in phase5c_text:
+              if needle not in phase5c_text:
+                  raise SystemExit("expected Phase 5C boundary allowlist block not found")
+              phase5c.write_text(phase5c_text.replace(needle, replacement, 1), encoding="utf-8")
+
           manifest_path = Path("api/record-chain-builder-bundles.v1.json")
           manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
           data = builder.read_bytes()
@@ -101,7 +114,7 @@ jobs:
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add downloads/record-chain-builder.mjs api/record-chain-submission-schema.v1.json api/record-chain-builder-bundles.v1.json
+            git add downloads/record-chain-builder.mjs api/record-chain-submission-schema.v1.json api/record-chain-builder-bundles.v1.json scripts/test_phase_5c_hotfix.py
             git commit -m "fix: sync builder receipt boundary fields"
             git push origin HEAD:main
           fi
