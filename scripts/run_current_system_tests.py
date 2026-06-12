@@ -191,7 +191,18 @@ def main() -> int:
         fail(f"Phase 5C-HOTFIX tests failed: {result.stderr}\n{result.stdout}")
     ok("Phase 5C-HOTFIX regression tests")
 
-    # 2d. Record type separation contract
+    # 2d. Builder receipt-boundary synchronization guard
+    result = subprocess.run(
+        [sys.executable, "scripts/check_builder_receipt_boundary_sync.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Builder receipt-boundary sync check failed: {result.stderr}\n{result.stdout}")
+    ok("Builder receipt-boundary synchronization guard")
+
+    # 2e. Record type separation contract
     result = subprocess.run(
         [sys.executable, "scripts/test_record_type_separation_contract.py"],
         cwd=ROOT,
