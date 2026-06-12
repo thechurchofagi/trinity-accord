@@ -32,13 +32,12 @@ REQUIRED_SUBMISSION_BOUNDARY_FIELDS = {
     "not_successor_reception",
     "not_amendment",
     "bitcoin_originals_prevail",
-}
-
-REQUIRED_DRAFT_BOUNDARY_FIELDS = REQUIRED_SUBMISSION_BOUNDARY_FIELDS | {
     "receipt_is_not_final_inclusion",
     "receipt_is_intake_only",
     "later_records_may_reclassify_or_correct_this_record",
 }
+
+REQUIRED_DRAFT_BOUNDARY_FIELDS = REQUIRED_SUBMISSION_BOUNDARY_FIELDS
 
 # Retired field names that must not appear in diagnostic fix text
 RETIRED_FIELDS = [
@@ -196,7 +195,7 @@ def get_helper_content_fields(content_block_name: str) -> set:
 # ── Tests ────────────────────────────────────────────────────────────
 
 def test_builder_submission_boundary_schema_clean_with_draft_extensions() -> None:
-    """Builder-generated echo keeps top-level submission_boundary schema-clean and draft boundary extended."""
+    """Builder-generated echo has schema-clean submission_boundary and draft boundary."""
     with tempfile.TemporaryDirectory() as td:
         data = build_echo(td)
         boundary = data.get("submission_boundary")
@@ -223,7 +222,7 @@ def test_builder_submission_boundary_schema_clean_with_draft_extensions() -> Non
             if draft_boundary.get(field) is not True:
                 fail(f"record_draft.non_authority_boundary_acknowledgement.{field} is not true: {draft_boundary.get(field)}")
 
-    ok("builder echo has schema-clean submission_boundary and extended draft boundary")
+    ok("builder echo has schema-clean submission_boundary and draft boundary")
 
 
 def test_builder_echo_authorship_proof_valid() -> None:
