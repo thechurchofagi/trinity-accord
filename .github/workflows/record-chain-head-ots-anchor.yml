@@ -25,7 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
@@ -133,4 +132,4 @@ jobs:
         run: |
           set -euo pipefail
           printf '%s\n' "Dispatching Record Chain Arweave Archive in live mode"
-          gh workflow run record-chain-arweave-archive.yml --ref main -f upload_mode=live
+          gh workflow run record-chain-arweave-archive.yml --repo "${GITHUB_REPOSITORY}" --ref main -f upload_mode=live
