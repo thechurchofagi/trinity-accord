@@ -9,12 +9,13 @@ on:
       - "scripts/**"
       - "api/**"
       - "record-chain/**"
+      - "downloads/record-chain-builder.mjs"
       - "index.md"
       - "sitemap.xml"
       - "requirements-ci.txt"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: current-system-integrity-${{ github.ref }}
@@ -30,6 +31,80 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync Builder receipt boundary fields
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
+
+          fields = [
+              "receipt_is_not_final_inclusion",
+              "receipt_is_intake_only",
+              "later_records_may_reclassify_or_correct_this_record",
+          ]
+
+          old = '''    submission_boundary: {
+                not_authority: true,
+                not_governance: true,
+                not_attestation: true,
+                not_successor_reception: true,
+                not_amendment: true,
+                bitcoin_originals_prevail: true,
+              },'''
+
+          new = '''    submission_boundary: {
+                not_authority: true,
+                not_governance: true,
+                not_attestation: true,
+                not_successor_reception: true,
+                not_amendment: true,
+                bitcoin_originals_prevail: true,
+                receipt_is_not_final_inclusion: true,
+                receipt_is_intake_only: true,
+                later_records_may_reclassify_or_correct_this_record: true,
+              },'''
+
+          builder = Path("downloads/record-chain-builder.mjs")
+          text = builder.read_text(encoding="utf-8")
+          if new not in text:
+              if old not in text:
+                  raise SystemExit("expected Builder submission_boundary block not found")
+              builder.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+          schema_path = Path("api/record-chain-submission-schema.v1.json")
+          schema = json.loads(schema_path.read_text(encoding="utf-8"))
+          boundary = schema["properties"]["submission_boundary"]
+          required = boundary.setdefault("required", [])
+          props = boundary.setdefault("properties", {})
+          for field in fields:
+              if field not in required:
+                  required.append(field)
+              props[field] = {"const": True}
+          boundary["additionalProperties"] = False
+          schema_path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
+
+          manifest_path = Path("api/record-chain-builder-bundles.v1.json")
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          data = builder.read_bytes()
+          manifest["canonical_builder"]["sha256"] = hashlib.sha256(data).hexdigest()
+          manifest["canonical_builder"]["size_bytes"] = len(data)
+          manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+          PY
+
+          if git diff --quiet; then
+            echo "Builder receipt boundary already synchronized."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add downloads/record-chain-builder.mjs api/record-chain-submission-schema.v1.json api/record-chain-builder-bundles.v1.json
+            git commit -m "fix: sync builder receipt boundary fields"
+            git push origin HEAD:main
+          fi
 
       - name: Setup Python
         # actions/setup-python@v5
