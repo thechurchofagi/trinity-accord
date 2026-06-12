@@ -1,5 +1,5 @@
 Deploy Pages trigger
 
 Purpose: harmless push-only trigger for GitHub Actions / Pages redeploy.
-Last triggered: 2026-06-12T10:09:00Z
+Last triggered: 2026-06-12T12:30:00Z
 No protocol, site content, schema, or public copy changes are represented by this file.
