@@ -99,8 +99,8 @@ def main() -> None:
         "homepage sync must run centralized generated artifacts updater",
     )
     require(
-        "gh workflow run deploy-pages.yml --ref main" in home_sync_workflow,
-        "homepage sync must dispatch deploy-pages.yml explicitly",
+        'gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main' in home_sync_workflow,
+        "homepage sync must dispatch deploy-pages.yml explicitly with --repo",
     )
 
     # OTS listens to Append Record Chain Entries
@@ -260,7 +260,7 @@ def main() -> None:
         "backlog detector must support --github-output flag",
     )
 
-    print("External-agent full-auto pipeline contract PASSED.")
+    print("PASS: external-agent full-auto record-chain pipeline contract")
 
 
 if __name__ == "__main__":
