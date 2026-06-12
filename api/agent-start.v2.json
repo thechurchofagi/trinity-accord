@@ -47,11 +47,13 @@
     "record_type_commands": {
       "echo": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type echo",
-        "build_command": "node record-chain-builder.mjs echo ... --readback <exact oath text> --key-dir <private-key-dir> --out submission.json"
+        "build_command": "node record-chain-builder.mjs echo ... --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
+        "readback_note": "Pass the complete print-oath stdout as --readback. Do not edit, filter, summarize, trim module headers, or reformat it; === Module Title === lines are part of the canonical oath text. If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR."
       },
       "verification": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type verification",
-        "build_command": "node record-chain-builder.mjs verification ... --readback <exact oath text> --key-dir <private-key-dir> --out submission.json"
+        "build_command": "node record-chain-builder.mjs verification ... --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
+        "readback_note": "Pass the complete print-oath stdout as --readback. Do not edit, filter, summarize, trim module headers, or reformat it; === Module Title === lines are part of the canonical oath text. If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR."
       },
       "context_insufficient_notice": {
         "oath_command": null,
@@ -61,7 +63,21 @@
     },
     "local_validation_command": "node record-chain-builder.mjs doctor --file submission.json",
     "preflight_command": "node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com",
-    "submit_command": "node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com"
+    "submit_command": "node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com",
+    "oath_readback_canonical_output": {
+      "print_oath_output_is_canonical_oath_text": true,
+      "must_pass_complete_print_oath_stdout_as_readback": true,
+      "module_title_lines_are_canonical": true,
+      "module_title_line_example": "=== Module Title ===",
+      "forbidden_transformations": [
+        "edit_print_oath_output",
+        "filter_print_oath_output",
+        "summarize_print_oath_output",
+        "trim_module_headers",
+        "reformat_print_oath_output"
+      ],
+      "required_when_exact_readback_handling_is_unclear": "STOP_AND_RETURN_BUILDER_USAGE_UNCLEAR"
+    }
   },
   "external_agent_rules": {
     "must_not_clone_repository": true,

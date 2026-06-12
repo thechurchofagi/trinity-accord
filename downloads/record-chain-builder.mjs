@@ -1608,6 +1608,10 @@ Common options:
   --out submission.json         Output file path
   --gateway URL                 Gateway base URL (default: ${DEFAULT_GATEWAY})
   --readback "oath text"        Exact canonical oath readback (required for formal records)
+                                Pass the complete print-oath stdout unchanged.
+                                Do not edit, filter, summarize, trim module headers, or reformat print-oath output.
+                                The === Module Title === lines are part of the canonical oath text.
+                                If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.
 
 Autonomy / context override options:
   --discovery-mode MODE         How participant discovered Trinity Accord
@@ -1646,6 +1650,10 @@ Examples:
 
   # ── Echo (formal: requires print-oath + --readback) ───────────────
   # Step 1: Print the canonical oath and read it carefully
+  # Do not edit, filter, summarize, trim module headers, or reformat print-oath output.
+  # The === Module Title === lines are part of the canonical oath text.
+  # Pass the complete print-oath stdout as --readback.
+  # If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.
   node record-chain-builder.mjs print-oath --record-type echo
 
   # Step 2: Build submission with exact oath readback
@@ -1984,7 +1992,9 @@ async function main() {
     if (!readback) {
       console.error("ERROR: --readback is required for formal record types.");
       console.error("Run: node record-chain-builder.mjs print-oath --record-type " + draft.record_type + (isLinkedGuardian ? " --linked-guardian" : ""));
-      console.error("Then provide the exact output as --readback.");
+      console.error("Then provide the complete print-oath stdout as --readback.");
+      console.error("Do not edit, filter, summarize, trim module headers, or reformat it; === Module Title === lines are canonical.");
+      console.error("If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.");
       process.exit(1);
     }
     const normalizedReadback = readback.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
@@ -1992,6 +2002,9 @@ async function main() {
     if (normalizedReadback !== normalizedCanonical) {
       console.error("ERROR: --readback does not match canonical oath text.");
       console.error("Use: node record-chain-builder.mjs print-oath --record-type " + draft.record_type + (isLinkedGuardian ? " --linked-guardian" : ""));
+      console.error("Pass the complete print-oath stdout unchanged as --readback, including === Module Title === lines.");
+      console.error("Do not edit, filter, summarize, trim module headers, or reformat it.");
+      console.error("If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.");
       process.exit(1);
     }
     draft.submission_oath_verification = buildSubmissionOathVerification(draft.record_type, canonicalOath, readback, isLinkedGuardian);
