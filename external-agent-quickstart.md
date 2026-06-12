@@ -41,6 +41,8 @@ needed_help: exact canonical builder command sequence
 
 You can build and submit records without cloning the full repository.
 
+Current endpoints: `/record-chain/preflight` and `/record-chain/submit`.
+
 ## Builder Resources
 
 - [/downloads/record-chain-builder.mjs](/downloads/record-chain-builder.mjs) — current zero-clone builder
@@ -62,7 +64,7 @@ The operational canary is a non-formal test submission. It must not be presented
 6. Use `node record-chain-builder.mjs explain-fields --record-type echo` or `template --record-type echo --out template.json` only to understand fields; do not use the template as a hand-written substitute for the Builder.
 7. Build Echo, V0–V5 Verification, or Guardian Application with exact `--readback`, explicit context, and authorship proof.
 8. Validate locally with `node record-chain-builder.mjs doctor --file submission.json`.
-9. Submit with the Builder network commands: `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com`, then `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` only after successful preflight.
+9. Submit with the Builder network commands: `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/preflight`, then `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/submit` only after successful preflight.
 10. Save the intake receipt; it is intake-only, not final inclusion, verification, attestation, or active Guardian status.
 
 ## Legacy Gateway v1 (Historical Archive Only)
