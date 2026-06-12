@@ -4,27 +4,41 @@ on:
   workflow_dispatch:
     inputs:
       mode:
+        description: "Bundle mode"
         required: true
-        default: delta
+        default: "delta"
         type: choice
-        options: [delta, snapshot]
+        options:
+          - delta
+          - snapshot
       upload_mode:
+        description: "Arweave upload mode"
         required: true
-        default: dry-run
+        default: "dry-run"
         type: choice
-        options: [dry-run, live]
+        options:
+          - dry-run
+          - live
       from_height_exclusive:
+        description: "For delta mode, start after this height"
         required: false
         default: "15"
+        type: string
       to_height_inclusive:
+        description: "For delta mode, end at this height; empty means current head"
         required: false
         default: ""
+        type: string
       snapshot_height:
+        description: "For snapshot mode, snapshot this height; empty means current head"
         required: false
         default: ""
+        type: string
       confirm:
+        description: "Required confirmation phrase for live upload"
         required: false
         default: ""
+        type: string
 
 permissions:
   contents: write
@@ -38,8 +52,12 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       ARKEY: ${{ secrets.ARKEY }}
+      ARWEAVE_UPLOAD_MODE: ${{ inputs.upload_mode }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -50,7 +68,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Node deps
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Verify chain
         run: |
@@ -70,10 +88,10 @@ jobs:
             TO="${{ inputs.to_height_inclusive }}"
             if [ -z "$TO" ]; then
               TO=$(python3 - <<'PY'
-import json
-print(json.load(open("api/record-chain-head.json"))["height"])
-PY
-)
+          import json
+          print(json.load(open("api/record-chain-head.json"))["height"])
+          PY
+          )
             fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode delta \
@@ -83,20 +101,20 @@ PY
             H="${{ inputs.snapshot_height }}"
             if [ -z "$H" ]; then
               H=$(python3 - <<'PY'
-import json
-print(json.load(open("api/record-chain-head.json"))["height"])
-PY
-)
+          import json
+          print(json.load(open("api/record-chain-head.json"))["height"])
+          PY
+          )
             fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode snapshot \
               --height "$H" | tee /tmp/data-build.json
           fi
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
-import json
-obj=json.load(open("/tmp/data-build.json"))
-print("bundle_file=" + obj["bundle_file"])
-PY
+          import json
+          obj=json.load(open("/tmp/data-build.json"))
+          print("bundle_file=" + obj["bundle_file"])
+          PY
 
       - name: Dry-run registry update
         if: inputs.upload_mode == 'dry-run'
