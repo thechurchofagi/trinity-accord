@@ -149,7 +149,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "Dispatching deploy-pages.yml for homepage status sync."
-          gh workflow run deploy-pages.yml --ref main
+          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main
 
       - name: Post-dispatch freshness probe
         if: ${{ steps.deploy_dispatch.outcome == 'success' }}
