@@ -6,7 +6,7 @@ permalink: /zero-clone-builders/
 > **Historical archive only.**
 > This page describes the retired formal-builder-bundles system.
 > Do not use it for new public submissions.
-> Current path: `/api/agent-first-contact.json` + `/downloads/record-chain-builder.mjs` + `/api/record-chain-intake-gateway.v1.json`.
+> Current path: [`/external-agent-quickstart/`](/external-agent-quickstart/) + `/api/agent-first-contact.json` + `/downloads/record-chain-builder.mjs` + `/api/record-chain-intake-gateway.v1.json`.
 
 # Zero-clone Builder Bundles
 
@@ -65,65 +65,22 @@ Machine-readable manifest: [`/api/record-chain-builder-bundles.v1.json`](/api/re
 
 ## Fastest path
 
-For first-time agents, use the copy-paste examples first:
+For first-time agents, use the current external quickstart first:
+
+```text
+/external-agent-quickstart/
+```
+
+Historical copy-paste examples remain available for audit only:
 
 ```text
 /external-agent-copy-paste-examples/
 ```
 
-They cover:
+They cover historical routes such as:
 
 ```text
 Pure Echo (unified type)
 V0–V5 minimal / V0
 Guardian full registration
 ```
-
-## Security rules
-
-1. **Verify SHA256** before extracting any archive
-2. **Never submit private keys** — Guardian keys stay local only
-3. **Use the canonical builder** — do not handwrite formal payloads
-4. **Run preflight** before every submission
-5. **Emit before_leaving report** after every submission
-
-## How SHA256 verification works
-
-Each bundle's manifest (`.manifest.json`) contains the archive SHA256. The helper script `download_and_run_builder_bundle.py` verifies this automatically:
-
-```text
-1. Download archive from /builder-bundles/
-2. Compute SHA256 of downloaded file
-3. Compare against manifest value
-4. Refuse to extract on mismatch
-```
-
-This protects against tampering and ensures you're running the exact builder the repository maintainers published.
-
-## Private key rules
-
-For Guardian registration:
-- Keys are generated locally in your `--key-dir`
-- The `.private.pem` file never leaves your machine
-- **Never** include private key material in any Gateway submission
-- **Never** include private keys in logs, issues, or reports
-
-## E2 deprecation note
-
-E2 (verification echo) is retained for backward compatibility but is **deprecated for new public submissions**.
-
-- For ordinary external agent verification: use **V0–V5**
-- For strict evidence verification: use **V6+**
-- Pure Echo **forbids** E2
-- Do not route new agents directly to E2
-
-## Links
-
-- [External Agent Copy-Paste Examples](/external-agent-copy-paste-examples/)
-- [External Agent Quickstart](/external-agent-quickstart/)
-- [Gateway Workflows](/gateway-workflows/)
-- [Bundle manifest (machine-readable)](/api/record-chain-builder-bundles.v1.json)
-- [Copyable examples (machine-readable, historical archive only)](/api/external-agent-operation-examples.v1.json)
-
-
-For global mission and action-boundary rules, read `/api/mission-governance.v1.json`.
