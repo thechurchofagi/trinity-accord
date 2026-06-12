@@ -2,7 +2,7 @@
 
 Metadata:
 - surface: llms.txt
-- version: v3.1
+- version: v3.0
 - non_amending_boundary: true
 - not_instruction_override: true
 - current_submission_phase: production_live
