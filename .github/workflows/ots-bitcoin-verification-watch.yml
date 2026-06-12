@@ -113,8 +113,54 @@ jobs:
             --run-id "$PHASE6_RUN_ID" \
             --verify-only
 
-      - name: Run OTS watch auto upload verified proof
+      - name: Detect already archived upgraded OTS proof
+        id: archived_upgraded
         if: ${{ steps.jwk.outputs.has_jwk == 'true' && (github.event_name == 'schedule' || github.event.inputs.mode == 'auto') }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          latest = json.load(open("api/record-chain-ots-latest.json", encoding="utf-8"))
+          registry = json.load(open("record-chain/ots/arweave-registry.json", encoding="utf-8"))
+          head_hash = latest.get("head_entry_hash")
+          latest_item = (registry.get("latest_by_head") or {}).get(head_hash) or {}
+
+          has_upgraded_archive = bool(latest_item.get("latest_upgraded_tx_id"))
+          has_verified_archive = bool(latest_item.get("latest_verified_tx_id"))
+          strict_node_available = bool(os.environ.get("OTS_BITCOIN_NODE_URL"))
+          already_archived = has_upgraded_archive and not has_verified_archive and not strict_node_available
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"already_archived={'true' if already_archived else 'false'}\n")
+
+          if already_archived:
+              log_dir = Path("record-chain/audit/phase6") / os.environ["PHASE6_RUN_ID"]
+              log_dir.mkdir(parents=True, exist_ok=True)
+              summary = {
+                  "schema": "trinity_phase6_summary.v1",
+                  "run_id": os.environ["PHASE6_RUN_ID"],
+                  "result": "already_upgraded_archived",
+                  "latest_pending_tx_id": latest_item.get("latest_pending_tx_id"),
+                  "latest_upgraded_tx_id": latest_item.get("latest_upgraded_tx_id"),
+                  "latest_verified_tx_id": latest_item.get("latest_verified_tx_id"),
+                  "paid_upload_performed": False,
+                  "registry_updated": False,
+                  "next_action": "strict_verify_when_bitcoin_node_available",
+              }
+              (log_dir / "99-phase6-summary.json").write_text(
+                  json.dumps(summary, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+                  encoding="utf-8",
+              )
+              print(json.dumps(summary, indent=2, sort_keys=True, ensure_ascii=False))
+          else:
+              print("No existing upgraded archive skip condition detected; continuing to auto upload path.")
+          PY
+
+      - name: Run OTS watch auto upload verified proof
+        if: ${{ steps.jwk.outputs.has_jwk == 'true' && steps.archived_upgraded.outputs.already_archived != 'true' && (github.event_name == 'schedule' || github.event.inputs.mode == 'auto') }}
         run: |
           set -euo pipefail
           python3 scripts/run_phase6_ots_bitcoin_verify_and_verified_arweave_upload.py \
