@@ -863,6 +863,9 @@ function buildSubmission(recordDraft, opts) {
       not_successor_reception: true,
       not_amendment: true,
       bitcoin_originals_prevail: true,
+      receipt_is_not_final_inclusion: true,
+      receipt_is_intake_only: true,
+      later_records_may_reclassify_or_correct_this_record: true,
     },
   };
 }
