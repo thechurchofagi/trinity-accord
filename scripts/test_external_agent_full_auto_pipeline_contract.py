@@ -56,10 +56,10 @@ def main() -> None:
         "append workflow must have actions: write permission for dispatching OTS",
     )
 
-    # Append must dispatch OTS after successful commit
+    # Append must dispatch OTS after successful commit.
     require(
-        "gh workflow run record-chain-head-ots-anchor.yml" in append_workflow,
-        "append workflow must dispatch native OTS anchor workflow after commit",
+        'gh workflow run record-chain-head-ots-anchor.yml --repo "$GITHUB_REPOSITORY" --ref main' in append_workflow,
+        "append workflow must dispatch native OTS anchor workflow after commit with --repo",
     )
     require(
         "append_commit" in append_workflow,
@@ -141,10 +141,10 @@ def main() -> None:
         "OTS workflow must check ots_anchor_needed from detector",
     )
 
-    # OTS must dispatch Arweave after successful push
+    # OTS must dispatch Arweave after successful push.
     require(
-        "gh workflow run record-chain-arweave-archive.yml" in ots_workflow,
-        "OTS workflow must dispatch Arweave archive workflow after successful push",
+        'gh workflow run record-chain-arweave-archive.yml --repo "${GITHUB_REPOSITORY}" --ref main' in ots_workflow,
+        "OTS workflow must dispatch Arweave archive workflow after successful push with --repo",
     )
     require(
         "-f upload_mode=live" in ots_workflow,
