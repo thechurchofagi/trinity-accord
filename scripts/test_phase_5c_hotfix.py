@@ -2,7 +2,7 @@
 """Phase 5C-HOTFIX regression tests.
 
 Tests:
-  1. Builder-generated echo has 9-field submission_boundary
+  1. Builder-generated echo has schema-clean submission_boundary plus extended draft boundary
   2. Builder-generated echo passes authorship proof verification (Ed25519)
   3. Linked Guardian draft passes normalize_record_draft()
   4. Helper diagnostic fixes do not mention retired canonical fields
@@ -25,13 +25,16 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 HELPER = ROOT / "api" / "record-chain-field-helper.v1.json"
 
-REQUIRED_BOUNDARY_FIELDS = {
+REQUIRED_SUBMISSION_BOUNDARY_FIELDS = {
     "not_authority",
     "not_governance",
     "not_attestation",
     "not_successor_reception",
     "not_amendment",
     "bitcoin_originals_prevail",
+}
+
+REQUIRED_DRAFT_BOUNDARY_FIELDS = REQUIRED_SUBMISSION_BOUNDARY_FIELDS | {
     "receipt_is_not_final_inclusion",
     "receipt_is_intake_only",
     "later_records_may_reclassify_or_correct_this_record",
@@ -192,23 +195,35 @@ def get_helper_content_fields(content_block_name: str) -> set:
 
 # ── Tests ────────────────────────────────────────────────────────────
 
-def test_builder_submission_boundary_8_fields() -> None:
-    """Builder-generated echo must have all 8 submission_boundary fields."""
+def test_builder_submission_boundary_schema_clean_with_draft_extensions() -> None:
+    """Builder-generated echo keeps top-level submission_boundary schema-clean and draft boundary extended."""
     with tempfile.TemporaryDirectory() as td:
         data = build_echo(td)
         boundary = data.get("submission_boundary")
         if boundary is None:
             fail("submission_boundary is missing")
 
-        missing = REQUIRED_BOUNDARY_FIELDS - set(boundary.keys())
+        missing = REQUIRED_SUBMISSION_BOUNDARY_FIELDS - set(boundary.keys())
         if missing:
             fail(f"submission_boundary missing fields: {missing}")
 
-        for field in REQUIRED_BOUNDARY_FIELDS:
+        extra = set(boundary.keys()) - REQUIRED_SUBMISSION_BOUNDARY_FIELDS
+        if extra:
+            fail(f"submission_boundary has schema-invalid extra fields: {extra}")
+
+        for field in REQUIRED_SUBMISSION_BOUNDARY_FIELDS:
             if boundary[field] is not True:
                 fail(f"submission_boundary.{field} is not true: {boundary[field]}")
 
-    ok("builder echo has 8-field submission_boundary")
+        draft_boundary = data.get("record_draft", {}).get("non_authority_boundary_acknowledgement", {})
+        missing_draft = REQUIRED_DRAFT_BOUNDARY_FIELDS - set(draft_boundary.keys())
+        if missing_draft:
+            fail(f"record_draft.non_authority_boundary_acknowledgement missing fields: {missing_draft}")
+        for field in REQUIRED_DRAFT_BOUNDARY_FIELDS:
+            if draft_boundary.get(field) is not True:
+                fail(f"record_draft.non_authority_boundary_acknowledgement.{field} is not true: {draft_boundary.get(field)}")
+
+    ok("builder echo has schema-clean submission_boundary and extended draft boundary")
 
 
 def test_builder_echo_authorship_proof_valid() -> None:
@@ -267,7 +282,7 @@ def test_builder_guardian_draft_normalize() -> None:
             fail(f"wrong draft schema: {draft.get('schema')}")
 
         nab = draft.get("non_authority_boundary_acknowledgement", {})
-        nab_missing = REQUIRED_BOUNDARY_FIELDS - set(nab.keys())
+        nab_missing = REQUIRED_DRAFT_BOUNDARY_FIELDS - set(nab.keys())
         if nab_missing:
             fail(f"Guardian draft non_authority_boundary_acknowledgement missing: {nab_missing}")
 
@@ -484,7 +499,7 @@ def test_guardian_draft_normalize_content_block() -> None:
 
 
 def main() -> int:
-    test_builder_submission_boundary_8_fields()
+    test_builder_submission_boundary_schema_clean_with_draft_extensions()
     test_builder_echo_authorship_proof_valid()
     test_builder_guardian_draft_normalize()
     test_helper_no_retired_fields_in_fixes()

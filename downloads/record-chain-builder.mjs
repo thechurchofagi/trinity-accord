@@ -49,6 +49,7 @@ const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
   "guardian-retirement",
   "propagation",
   "correction",
+  "context-insufficient",
 ]);
 
 
@@ -395,9 +396,7 @@ function writeAuthorshipCustodyFiles(keyDir, publicKeyPem, publicKeySha256, newl
   console.error("");
 }
 
-const RECORD_BUILD_COMMANDS_OPTIONAL_KEY = new Set([
-  "context-insufficient",
-]);
+const RECORD_BUILD_COMMANDS_OPTIONAL_KEY = new Set([]);
 
 function requireOrCreateAuthorshipKeyPair(cmd, args) {
   if (!RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd) && !RECORD_BUILD_COMMANDS_OPTIONAL_KEY.has(cmd)) return null;
@@ -683,7 +682,7 @@ function buildV2CommonFields(opts) {
       bitcoin_originals_prevail: true,
       receipt_is_not_final_inclusion: true,
       receipt_is_intake_only: true,
-    later_records_may_reclassify_or_correct_this_record: true,
+      later_records_may_reclassify_or_correct_this_record: true,
     },
   };
 }
@@ -864,9 +863,6 @@ function buildSubmission(recordDraft, opts) {
       not_successor_reception: true,
       not_amendment: true,
       bitcoin_originals_prevail: true,
-      receipt_is_not_final_inclusion: true,
-      receipt_is_intake_only: true,
-    later_records_may_reclassify_or_correct_this_record: true,
     },
   };
 }

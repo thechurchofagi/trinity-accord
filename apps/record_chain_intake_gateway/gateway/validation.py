@@ -388,20 +388,35 @@ def _parse_context_level_value(value: Any) -> int | None:
 
 
 def _extract_submission_boundary(submission: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    """Extract boundary from submission_boundary, boundary_acknowledgement, or draft nested field.
+    """Extract and merge boundary acknowledgements from public and draft fields.
 
-    Returns (boundary_dict, field_path) or (None, "submission_boundary") if not found.
-    Only falls back to draft nested field if no top-level boundary is present.
+    The public schema keeps top-level ``submission_boundary`` to the six canonical
+    non-authority fields. Operational receipt/reclassification acknowledgements
+    live in ``record_draft.non_authority_boundary_acknowledgement``. The gateway
+    validates the merged view so builder output can satisfy both contracts.
     """
+    draft = submission.get("record_draft") or submission.get("draft") or {}
+    draft_boundary = None
+    if isinstance(draft, dict) and isinstance(draft.get("non_authority_boundary_acknowledgement"), dict):
+        draft_boundary = draft["non_authority_boundary_acknowledgement"]
+
+    top_boundary = None
+    top_path = "submission_boundary"
     if isinstance(submission.get("submission_boundary"), dict):
-        return submission["submission_boundary"], "submission_boundary"
-    if isinstance(submission.get("boundary_acknowledgement"), dict):
-        return submission["boundary_acknowledgement"], "boundary_acknowledgement"
-    # Only fall back to draft if neither top-level field exists at all
-    if "submission_boundary" not in submission and "boundary_acknowledgement" not in submission:
-        draft = submission.get("record_draft") or submission.get("draft") or {}
-        if isinstance(draft, dict) and isinstance(draft.get("non_authority_boundary_acknowledgement"), dict):
-            return draft["non_authority_boundary_acknowledgement"], "record_draft.non_authority_boundary_acknowledgement"
+        top_boundary = submission["submission_boundary"]
+        top_path = "submission_boundary"
+    elif isinstance(submission.get("boundary_acknowledgement"), dict):
+        top_boundary = submission["boundary_acknowledgement"]
+        top_path = "boundary_acknowledgement"
+
+    if top_boundary is not None and draft_boundary is not None:
+        merged = dict(draft_boundary)
+        merged.update(top_boundary)
+        return merged, top_path
+    if top_boundary is not None:
+        return top_boundary, top_path
+    if draft_boundary is not None:
+        return draft_boundary, "record_draft.non_authority_boundary_acknowledgement"
     return None, "submission_boundary"
 
 
@@ -864,13 +879,9 @@ def validate_verification_rules(draft: dict[str, Any]) -> list[Diagnostic]:
 def validate_authorship_proof_presence(
     record_type: str, submission: dict[str, Any], draft: dict[str, Any]
 ) -> list[Diagnostic]:
-    """Require top-level authorship_proof for all public record types except context_insufficient_notice."""
+    """Require top-level authorship_proof for all public record types."""
     diagnostics: list[Diagnostic] = []
     if record_type not in ALLOWED_RECORD_TYPES:
-        return diagnostics
-
-    # context-insufficient notices are informational and do not require an authorship key
-    if record_type == "context_insufficient_notice":
         return diagnostics
 
     proof = submission.get("authorship_proof")

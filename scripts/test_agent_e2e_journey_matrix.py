@@ -211,7 +211,7 @@ def check_schema_gateway_consistency(tmp: Path) -> None:
         assert "MISSING_VERIFICATION_CONTENT" in codes or "AUTHORIZATION_SCOPE_MISMATCH" in codes, codes
 
 def build_context_insufficient(tmp: Path) -> None:
-    node(["context-insufficient", "--actor-label", "E2E Test Agent", "--provider", "Offline Test Runtime", "--out", "cin.json"], tmp)
+    node(["context-insufficient", "--actor-label", "E2E Test Agent", "--provider", "Offline Test Runtime", "--key-dir", "./authorship-keys", "--out", "cin.json"], tmp)
     payload = load_submission(tmp / "cin.json")
     assert payload["record_type"] == "context_insufficient_notice"
     assert payload["record_draft"]["authorization_context"]["authorization_scope"] == EXPECTED_AUTH_SCOPE["context_insufficient_notice"]

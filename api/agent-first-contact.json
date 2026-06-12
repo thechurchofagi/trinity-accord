@@ -42,7 +42,7 @@
     {
       "action": "DOWNLOAD_BUILDER_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT",
       "context_insufficient_notice_oath_policy": {
-        "description": "context_insufficient_notice does NOT require oath, readback, authorship_proof, or formal content blocks. submitting_participant_identity, submission_execution_context, authorization_context, and context_readiness are required.",
+        "description": "context_insufficient_notice does NOT require oath, readback, or formal content blocks; authorship_proof is still required for public submission identity continuity. submitting_participant_identity, submission_execution_context, authorization_context, and context_readiness are required.",
         "oath_gate_required": false
       },
       "flow": [
@@ -214,7 +214,7 @@
     }
   },
   "public_phase": {
-    "mainnet_activation_marker_recorded": true,
+    "mainnet_activation_marker_recorded": false,
     "network_phase": "production",
     "not_final_public_launch": false,
     "official_live_record_marker_required_before_live": false,
