@@ -16,6 +16,30 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd, cwd=ROOT, check=True)
 
 
+def default_ledger() -> dict:
+    return {
+        "schema": "trinityaccord.arweave-wallet-ledger.v1",
+        "updated_at": "2026-06-10T00:00:00Z",
+        "wallet": {
+            "wallet_address": None,
+            "wallet_address_sha256": None,
+            "public_address_allowed": False,
+            "currency": "AR",
+            "last_known_balance_ar": None,
+            "last_known_balance_at": None,
+            "low_balance_threshold_ar": "0.25",
+        },
+        "entries": [],
+        "boundary": {
+            "wallet_status_is_operational_only": True,
+            "wallet_status_is_not_authority": True,
+            "wallet_status_is_not_attestation": True,
+            "wallet_status_is_not_reception": True,
+            "bitcoin_originals_prevail": True,
+        },
+    }
+
+
 def main() -> int:
     if not LEDGER.exists():
         raise SystemExit("missing record-chain/arweave-wallet-ledger.json")
@@ -29,6 +53,14 @@ def main() -> int:
         shutil.copy2(STATUS, backup_status)
 
         try:
+            # Start from a clean ledger so pre-existing entries
+            # (which may have real winston values) don't affect
+            # the total_spent_ar assertion.
+            LEDGER.write_text(
+                json.dumps(default_ledger(), indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+
             run([
                 "python3", "scripts/update_arweave_wallet_ledger.py",
                 "set-balance",
