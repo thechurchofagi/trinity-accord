@@ -107,8 +107,8 @@ class TestMissingAuthorshipProof:
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes
 
-    def test_context_insufficient_without_proof_accepted(self):
-        """Context insufficient notices don't require authorship proof."""
+    def test_context_insufficient_without_proof_rejected(self):
+        """Context insufficient notices also require authorship proof for public submission identity continuity."""
         sub = {
             "record_type": "context_insufficient_notice",
             "record_draft": {
@@ -120,10 +120,10 @@ class TestMissingAuthorshipProof:
         }
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
-        assert "MISSING_AUTHORSHIP_PROOF" not in codes
+        assert "MISSING_AUTHORSHIP_PROOF" in codes
 
-    def test_echo_with_proof_at_draft_level_accepted(self):
-        """Proof in draft.authorship_proof should also satisfy the requirement."""
+    def test_echo_with_proof_at_draft_level_rejected(self):
+        """Proof in draft.authorship_proof does not satisfy the top-level public submission requirement."""
         draft = _make_echo_draft()
         draft["authorship_proof"] = {
             "method": "ed25519",
@@ -138,7 +138,7 @@ class TestMissingAuthorshipProof:
         }
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
-        assert "MISSING_AUTHORSHIP_PROOF" not in codes
+        assert "MISSING_AUTHORSHIP_PROOF" in codes
 
 
 class TestPreflightSignatureVerification:

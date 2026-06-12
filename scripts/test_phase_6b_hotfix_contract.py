@@ -109,6 +109,10 @@ def _minimal_cin_submission() -> dict:
                 "minimum_required_for_action": "CC-0",
                 "context_sufficient_for_selected_action": False,
             },
+            "authorization_context": {
+                "authorization_scope": "create_context_insufficient_notice_record",
+                "authorization_status": "not_required",
+            },
         },
         "builder": {
             "name": "test-builder",
@@ -118,6 +122,21 @@ def _minimal_cin_submission() -> dict:
         "client_context": {
             "site_entry_url": "https://www.trinityaccord.org/",
             "declared_context_level": "CC-0",
+        },
+        "authorship_proof": {
+            "schema": "trinityaccord.agent-authorship-proof.v1",
+            "method": "public_key_signature",
+            "algorithm": "ed25519",
+            "public_key_pem": "-----BEGIN PUBLIC KEY-----\ntest\n-----END PUBLIC KEY-----",
+            "public_key_sha256": "0" * 64,
+            "signed_payload_sha256": "1" * 64,
+            "signature_base64": "dGVzdA==",
+            "signed_message": "test",
+            "claim_boundary": {
+                "not_authority": True,
+                "not_attestation": True,
+                "not_amendment": True,
+            },
         },
         "submission_boundary": {
             "not_authority": True,
@@ -207,12 +226,12 @@ class TestContextInsufficientNoticeMinimal:
         errors = _validate_submission(schema, sub)
         assert not errors, f"CIN without decision_autonomy should pass: {errors}"
 
-    def test_cin_without_authorization_passes(self):
+    def test_cin_without_authorization_fails(self):
         schema = _load(SUBMISSION_SCHEMA)
         sub = _minimal_cin_submission()
         sub["record_draft"].pop("authorization_context", None)
         errors = _validate_submission(schema, sub)
-        assert not errors, f"CIN without authorization should pass: {errors}"
+        assert errors, "CIN without authorization_context should fail"
 
     def test_cin_without_boundary_ack_passes(self):
         schema = _load(SUBMISSION_SCHEMA)
