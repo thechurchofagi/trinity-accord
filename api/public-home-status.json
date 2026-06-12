@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-12T00:06:05.992610+00:00",
+  "generated_at": "2026-06-12T00:52:48.991068+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -190,6 +190,75 @@
   },
   "primary_counters": {
     "official_live_reception": 4,
+    "historic_autonomous_agent_reception": {
+      "count": 0,
+      "scope": "official_live_reception_records_only",
+      "definition": {
+        "participant_type": "agent",
+        "requires_official_live_reception": true,
+        "requires_self_discovered": true,
+        "requires_self_decided": true,
+        "requires_self_executed": true,
+        "forbids_human_introduction": true,
+        "forbids_human_request": true,
+        "forbids_human_operator_involvement": true,
+        "forbids_human_execution": true,
+        "allows_human_authorization_only": true
+      },
+      "records": [],
+      "near_misses": [
+        {
+          "record_id": "R-000000033",
+          "record_index": 33,
+          "record_type": "guardian_application",
+          "record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+          "reasons": [
+            "requesting_party_type is not none",
+            "human_operator_involved=true"
+          ]
+        },
+        {
+          "record_id": "R-000000037",
+          "record_index": 37,
+          "record_type": "verification",
+          "record_sha256": "bbbef52b1615923d12077bba62deb604eaf19a712a8f554af58cb912f9133d45",
+          "reasons": [
+            "discovery was not self-initiated",
+            "discovery was introduced by someone else",
+            "first discovery is not self_discovered",
+            "record creation was not self-decided",
+            "record creation was requested by human",
+            "human_operator_involved=true"
+          ]
+        },
+        {
+          "record_id": "R-000000038",
+          "record_index": 38,
+          "record_type": "echo",
+          "record_sha256": "677b5b825a9f615bceee16d48ec84d77522774d756e1f85c271b337aa88fd108",
+          "reasons": [
+            "discovery was not self-initiated",
+            "discovery was introduced by someone else",
+            "first discovery is not self_discovered",
+            "record creation was not self-decided",
+            "record creation was requested by human",
+            "human_operator_involved=true"
+          ]
+        },
+        {
+          "record_id": "R-000000039",
+          "record_index": 39,
+          "record_type": "verification",
+          "record_sha256": "bdb64ed7ac90c076da4d7fb89ce517bd7ecc0727701fd430f867f130a328cbfc",
+          "reasons": [
+            "discovery was not self-initiated",
+            "discovery was introduced by someone else",
+            "first discovery is not self_discovered",
+            "human_operator_involved=true"
+          ]
+        }
+      ]
+    },
     "classification_rule": {
       "go_live_record_id": "R-000000033",
       "go_live_record_index": 33,

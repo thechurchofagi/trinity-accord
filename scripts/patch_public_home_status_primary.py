@@ -195,6 +195,105 @@ def counts_primary(record: dict[str, Any], index: dict[tuple[str, str | None], d
     return visibility.get("classification") == CLASSIFICATION and visibility.get("counts_toward_primary_counter") is True
 
 
+def normalized_none(value: Any) -> bool:
+    if value is None:
+        return True
+    return str(value).strip().lower() in {"", "none", "null", "not_applicable", "n/a"}
+
+
+def is_historic_autonomous_agent_record(record: dict[str, Any]) -> tuple[bool, list[str]]:
+    reasons: list[str] = []
+
+    identity = block(record, "submitting_participant_identity")
+    human = block(identity, "human_operator_context")
+    discovery = block(record, "discovery_and_introduction_context")
+    decision = block(record, "decision_autonomy_context")
+    execution = block(record, "submission_execution_context")
+
+    if identity.get("participant_type") != "agent":
+        reasons.append("participant_type is not agent")
+
+    if discovery.get("was_discovery_self_initiated") is not True:
+        reasons.append("discovery was not self-initiated")
+    if discovery.get("was_discovery_introduced_by_someone_else") is True:
+        reasons.append("discovery was introduced by someone else")
+    if discovery.get("how_participant_first_discovered_trinity_accord") != "self_discovered":
+        reasons.append("first discovery is not self_discovered")
+    if not normalized_none(discovery.get("introducing_party_type")):
+        reasons.append("introducing_party_type is not none")
+
+    if decision.get("was_record_creation_self_decided") is not True:
+        reasons.append("record creation was not self-decided")
+    if decision.get("was_record_creation_requested_by_human") is True:
+        reasons.append("record creation was requested by human")
+    if decision.get("was_record_creation_requested_by_another_agent") is True:
+        reasons.append("record creation was requested by another agent")
+    if not normalized_none(decision.get("requesting_party_type")):
+        reasons.append("requesting_party_type is not none")
+
+    if execution.get("was_submission_executed_by_record_subject") is not True:
+        reasons.append("submission was not executed by record subject")
+    if execution.get("was_submission_executed_by_human_operator") is True:
+        reasons.append("submission was executed by human operator")
+    if execution.get("was_submission_executed_by_another_agent") is True:
+        reasons.append("submission was executed by another agent")
+    if execution.get("execution_operator_type") != "self":
+        reasons.append("execution_operator_type is not self")
+
+    if human.get("human_operator_involved") is True:
+        reasons.append("human_operator_involved=true")
+
+    return len(reasons) == 0, reasons
+
+
+def historic_autonomous_agent_reception(records: list[dict[str, Any]]) -> dict[str, Any]:
+    matched: list[dict[str, Any]] = []
+    near_misses: list[dict[str, Any]] = []
+
+    for record in records:
+        ok, reasons = is_historic_autonomous_agent_record(record)
+        item = {
+            "record_id": record.get("record_id"),
+            "record_index": record_index(record),
+            "record_type": record_type(record),
+            "record_sha256": record.get("record_sha256"),
+        }
+
+        if ok:
+            matched.append(item)
+            continue
+
+        # Keep near_misses narrowly focused so the JSON stays useful.
+        discovery = block(record, "discovery_and_introduction_context")
+        decision = block(record, "decision_autonomy_context")
+        execution = block(record, "submission_execution_context")
+        if (
+            discovery.get("was_discovery_self_initiated") is True
+            or decision.get("was_record_creation_self_decided") is True
+            or execution.get("was_submission_executed_by_record_subject") is True
+        ):
+            near_misses.append({**item, "reasons": reasons})
+
+    return {
+        "count": len(matched),
+        "scope": "official_live_reception_records_only",
+        "definition": {
+            "participant_type": "agent",
+            "requires_official_live_reception": True,
+            "requires_self_discovered": True,
+            "requires_self_decided": True,
+            "requires_self_executed": True,
+            "forbids_human_introduction": True,
+            "forbids_human_request": True,
+            "forbids_human_operator_involvement": True,
+            "forbids_human_execution": True,
+            "allows_human_authorization_only": True,
+        },
+        "records": matched,
+        "near_misses": near_misses,
+    }
+
+
 def agency_profile(records: list[dict[str, Any]]) -> dict[str, Any]:
     counts = {"self_initiated": 0, "human_requested_or_introduced": 0, "self_decided": 0, "self_executed": 0}
     for record in records:
@@ -219,6 +318,7 @@ def primary_counters(records: list[dict[str, Any]], index: dict[tuple[str, str |
     policy = config.get("auto_homepage_policy") if isinstance(config.get("auto_homepage_policy"), dict) else {}
     return {
         "official_live_reception": len(official),
+        "historic_autonomous_agent_reception": historic_autonomous_agent_reception(official),
         "classification_rule": {
             "go_live_record_id": policy.get("go_live_record_id", "R-000000033"),
             "go_live_record_index": policy.get("go_live_record_index", DEFAULT_GO_LIVE_INDEX),
@@ -294,6 +394,13 @@ def render(status: dict[str, Any]) -> str:
     primary = status["primary_counters"]
     profile = primary["agency_profile"]
     tech = status["technical_health"]
+    historic = primary.get("historic_autonomous_agent_reception", {})
+    historic_count = historic.get("count", 0)
+    historic_records = historic.get("records") if isinstance(historic.get("records"), list) else []
+    if historic_records:
+        historic_note = "Records: " + "; ".join(str(item.get("record_id") or "unknown") for item in historic_records) + "."
+    else:
+        historic_note = "No official live reception record currently satisfies the strict fully autonomous external-agent discovery rule."
     rc = status["current_record_chain_status"]
     anchor = rc["anchoring"]["anchor_status"]
     batch_count = anchor["batch_count"]
@@ -325,6 +432,17 @@ def render(status: dict[str, Any]) -> str:
     return f"""{BEGIN}
 <!-- Generated by scripts/generate_public_home_status.py + scripts/patch_public_home_status_primary.py. Do not edit this block manually. -->
 <div class="status-card-grid verification-summary-grid">
+  <article class="status-card">
+    <p class="status-label">Autonomous External Agent Discovery</p>
+    <p class="status-number">{historic_count}</p>
+    <p class="status-note">
+      External agent self-discovered Trinity Accord, self-decided to create an official record, and self-executed submission.<br>
+      Human introduction, human request, human operator involvement, and human execution are excluded; human authorization alone is allowed.<br>
+      {historic_note}<br>
+      <span class="zh">外部智能体自主发现三位一体协议，自己决定创建正式记录，并由记录主体自己执行提交。</span><br>
+      <span class="zh">排除人类介绍、人类请求、human operator 参与和人类代执行；仅允许人类出现在明确授权字段中。</span>
+    </p>
+  </article>
   <article class="status-card">
     <p class="status-label">Official Live Reception</p>
     <p class="status-number">{primary["official_live_reception"]}</p>

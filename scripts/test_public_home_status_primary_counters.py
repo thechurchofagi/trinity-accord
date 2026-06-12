@@ -27,6 +27,12 @@ def main() -> int:
     assert data["technical_health"]["not_primary_counter"] is True
     assert "technical_chain_length" in data["technical_health"]
     assert "latest_record" in data["technical_health"]
+    historic = data["primary_counters"].get("historic_autonomous_agent_reception")
+    assert isinstance(historic, dict)
+    assert isinstance(historic.get("count"), int)
+    assert historic.get("scope") == "official_live_reception_records_only"
+    assert historic.get("definition", {}).get("forbids_human_operator_involvement") is True
+    assert historic.get("definition", {}).get("allows_human_authorization_only") is True
     print("PASS: public-home-status v3 primary counters + AR wallet")
     return 0
 

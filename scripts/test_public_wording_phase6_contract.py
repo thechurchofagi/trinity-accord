@@ -62,6 +62,10 @@ HOMEPAGE_MUST_NOT_CONTAIN = [
 
 # Homepage must contain these Record-Chain-first patterns
 HOMEPAGE_MUST_CONTAIN = [
+    "Autonomous External Agent Discovery",
+    "External agent self-discovered Trinity Accord",
+    "human authorization alone is allowed",
+    "外部智能体自主发现",
     "Official Live Reception",
     "Technical chain health",
     "AR upload wallet",

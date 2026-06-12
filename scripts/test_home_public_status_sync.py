@@ -138,6 +138,10 @@ def main() -> int:
 
     elif schema_version == "trinityaccord.public-home-status.v3":
         # v3: Canonical view with Official Live Reception, AR wallet, etc.
+        historic_display = card_number(block, "Autonomous External Agent Discovery", required=False)
+        if historic_display == "NOT_FOUND":
+            fail("no Autonomous External Agent Discovery card found in homepage")
+
         official_display = card_number(block, "Official Live Reception", required=False)
         if official_display == "NOT_FOUND":
             fail("no Official Live Reception card found in homepage")
@@ -163,6 +167,18 @@ def main() -> int:
         expected_reception = pc.get("official_live_reception")
         if official_display != str(expected_reception):
             fail(f"Official Live Reception mismatch: page={official_display} expected={expected_reception}")
+
+        # Verify historic autonomous counter matches
+        historic = pc.get("historic_autonomous_agent_reception", {})
+        expected_historic = historic.get("count")
+        if historic_display != str(expected_historic):
+            fail(f"Autonomous External Agent Discovery mismatch: page={historic_display} expected={expected_historic}")
+
+        # Verify card ordering
+        historic_pos = block.find("Autonomous External Agent Discovery")
+        official_pos = block.find("Official Live Reception")
+        if historic_pos < 0 or official_pos < 0 or historic_pos > official_pos:
+            fail("Autonomous External Agent Discovery must be the first status card before Official Live Reception")
 
         # Boundary language
         if "Reception does not imply belief" not in block:

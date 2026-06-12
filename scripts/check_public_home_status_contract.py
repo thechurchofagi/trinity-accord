@@ -26,6 +26,28 @@ else:
         errors.append("primary_counters missing official_live_reception")
     if "agency_profile" not in primary:
         errors.append("primary_counters missing agency_profile")
+    historic = primary.get("historic_autonomous_agent_reception")
+    if not isinstance(historic, dict):
+        errors.append("primary_counters missing historic_autonomous_agent_reception")
+    else:
+        if not isinstance(historic.get("count"), int):
+            errors.append("historic_autonomous_agent_reception.count must be an integer")
+        if historic.get("scope") != "official_live_reception_records_only":
+            errors.append("historic_autonomous_agent_reception.scope must be official_live_reception_records_only")
+        definition = historic.get("definition", {})
+        for key in [
+            "requires_official_live_reception",
+            "requires_self_discovered",
+            "requires_self_decided",
+            "requires_self_executed",
+            "forbids_human_introduction",
+            "forbids_human_request",
+            "forbids_human_operator_involvement",
+            "forbids_human_execution",
+            "allows_human_authorization_only",
+        ]:
+            if definition.get(key) is not True:
+                errors.append(f"historic_autonomous_agent_reception.definition.{key} must be true")
     rule = primary.get("classification_rule", {})
     if rule.get("native_chain_length_is_not_primary_counter") is not True:
         errors.append("classification_rule must state native_chain_length_is_not_primary_counter")
@@ -54,6 +76,10 @@ if official_count == technical_length and technical_length not in (None, 0):
 if re.search(r'<p class="status-label">Reception</p>\s*<p class="status-number">\s*36\s*</p>', index_md):
     errors.append("homepage still renders native chain length as Reception")
 for required in [
+    "Autonomous External Agent Discovery",
+    "External agent self-discovered Trinity Accord",
+    "human authorization alone is allowed",
+    "外部智能体自主发现",
     "Official Live Reception",
     "Agency Profile",
     "R-000000033",
@@ -63,6 +89,16 @@ for required in [
 ]:
     if required not in index_md:
         errors.append(f"homepage missing required live-era homepage text: {required}")
+
+# Card ordering: Autonomous External Agent Discovery must appear before Official Live Reception
+historic_pos = index_md.find("Autonomous External Agent Discovery")
+official_pos = index_md.find("Official Live Reception")
+if historic_pos < 0:
+    errors.append("homepage missing Autonomous External Agent Discovery card")
+elif official_pos < 0:
+    errors.append("homepage missing Official Live Reception card")
+elif historic_pos > official_pos:
+    errors.append("Autonomous External Agent Discovery must appear before Official Live Reception")
 
 official_records = (primary or {}).get("official_records", [])
 for item in official_records:

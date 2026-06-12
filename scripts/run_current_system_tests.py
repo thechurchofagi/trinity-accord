@@ -146,6 +146,7 @@ def main() -> int:
         [sys.executable, "scripts/generate_public_home_status.py", "--check"],
         [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
         [sys.executable, "scripts/check_public_home_status_contract.py"],
+        [sys.executable, "scripts/test_historic_autonomous_agent_reception_contract.py"],
         [sys.executable, "scripts/test_home_public_status_sync.py"],
         [sys.executable, "scripts/test_homepage_status_sync_contract.py"],
     ]:
