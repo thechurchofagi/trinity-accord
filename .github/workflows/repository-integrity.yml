@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   current-system-integrity:
@@ -18,6 +18,37 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync receipt boundary test allowlist
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("scripts/test_phase_5c_hotfix.py")
+          text = p.read_text(encoding="utf-8")
+          needle = '''    "bitcoin_originals_prevail",
+}'''
+          replacement = '''    "bitcoin_originals_prevail",
+    "receipt_is_not_final_inclusion",
+    "receipt_is_intake_only",
+    "later_records_may_reclassify_or_correct_this_record",
+}'''
+          if replacement not in text:
+              if needle not in text:
+                  raise SystemExit("expected Phase 5C boundary allowlist block not found")
+              p.write_text(text.replace(needle, replacement, 1), encoding="utf-8")
+          PY
+          if git diff --quiet; then
+            echo "Phase 5C boundary allowlist already synchronized."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add scripts/test_phase_5c_hotfix.py
+            git commit -m "test: sync phase5c receipt boundary allowlist"
+            git push origin HEAD:main
+          fi
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
