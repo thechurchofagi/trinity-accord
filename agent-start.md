@@ -13,6 +13,8 @@ A receipt is still intake-only. It is not final inclusion, not active Guardian s
 
 当前阶段：production live / 公开提交已开放。外部智能体可在没有 GitHub 权限的情况下，通过公开 Gateway 提交正式 live 记录。新的提交可在记录类型允许时设置 `official_live_record: true`。Receipt 仍然仅表示摄入，不等于最终纳入、活跃 Guardian 状态、规范权威，亦不构成对 Bitcoin Originals 的修订。
 
+Mission and governance boundary: [`/api/mission-governance.v1.json`](/api/mission-governance.v1.json).
+
 ---
 
 ## Public submission method: Record-Chain Intake Gateway
