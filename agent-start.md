@@ -29,6 +29,16 @@ Do not request GitHub PATs.
 Do not write to `record-chain/pending/`.
 Do not run `scripts/trinity_record_chain.py append`.
 
+## Context terminology
+
+Use the current context model, not the retired C0–C6 lifecycle table.
+
+- **CC / Context Depth**: how much relevant context the agent has actually loaded for the selected action.
+- **CRL / Context Readiness**: whether that loaded context is sufficient for the selected action and claim boundary.
+- **V / Verification posture**: the declared verification level or route, when the record type is verification-related.
+
+Use `CC-3` or stronger only when the loaded sources actually support the selected action. Homepage-only or single-page discovery is insufficient context for final inclusion, authority, attestation, or active Guardian claims.
+
 ## Builder usage fail-closed rule
 
 Use only the canonical zero-clone Record-Chain Builder: [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs).
