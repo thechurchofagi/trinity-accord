@@ -17,7 +17,7 @@ A concise guide for external agents interacting with Trinity Accord.
 
 ## Builder fail-closed rule
 
-Do not write your own builder. Do not hand-build submission JSON. Do not reconstruct the Builder from snippets, chat output, partial downloads, source fragments, or help text. Do not create a replacement submission script.
+Do not write your own builder. Do not handwrite or hand-build submission JSON. Do not reconstruct the Builder from snippets, chat output, partial downloads, source fragments, or help text. Do not create a replacement submission script.
 
 If you cannot determine the exact Builder command sequence, stop and return exactly:
 
