@@ -2,8 +2,8 @@
 """Live smoke for external heterogeneous agent entrypoint journeys.
 
 This script simulates multiple external agents entering through public entrypoints
-and verifies that they can discover first-contact, route, policy, workflow, and
-before_leaving contracts.
+and verifies that they can discover the current Record-Chain Intake Gateway,
+Builder, output/readback policy, and before_leaving contracts.
 
 This is a live smoke. Do not run it in source-only p0-main.
 """
@@ -27,15 +27,26 @@ ENTRYPOINTS = [
     "/api/links.json",
     "/agent-start",
     "/agent-echo",
-    "/gateway-workflows/",
+    "/external-agent-quickstart/",
+    "/echoes/submit/",
 ]
 
 REQUIRED_PUBLIC_CONTRACTS = [
     "/api/links.json",
     "/.well-known/trinity-accord.json",
     "/api/agent-first-contact.json",
-    "/api/agent-submit-gateway.json",
+    "/api/agent-start.v2.json",
     "/api/agent-output-policy.v1.json",
+    "/api/agent-task-router.v1.json",
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-submission-schema.v1.json",
+    "/api/record-chain-builder-bundles.v1.json",
+]
+
+RETIRED_AS_CURRENT = [
+    "/agent-submit",
+    "/gateway/preflight",
+    "/api/agent-submit-gateway.json",
     "/api/gateway-workflows.v1.json",
     "/api/gateway-builder-route-map.v1.json",
 ]
@@ -53,7 +64,7 @@ def fetch(site: str, path: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "TrinityExternalAgentJourneySmoke/1.0",
+            "User-Agent": "TrinityExternalAgentJourneySmoke/2.0",
             "Accept": "application/json,text/plain,text/html,*/*",
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
@@ -90,33 +101,53 @@ def check_contracts(site: str, timeout: int) -> list[str]:
         first_contact = fetch_json(site, "/api/agent-first-contact.json", timeout)
         text = json.dumps(first_contact, sort_keys=True)
         for required in [
-            "/api/agent-submit-gateway.json",
-            "/api/agent-output-policy.v1.json",
-            "/api/gateway-workflows.v1.json",
-            "/api/gateway-builder-route-map.v1.json",
+            "/downloads/record-chain-builder.mjs",
+            "/api/record-chain-intake-gateway.v1.json",
+            "/api/record-chain-submission-schema.v1.json",
+            "/record-chain/preflight",
+            "/record-chain/submit",
             "before_leaving",
         ]:
             if required not in text:
                 errors.append(f"first-contact missing {required}")
+        for retired in RETIRED_AS_CURRENT:
+            current_text = json.dumps(first_contact.get("current_public_submission_method", {}), sort_keys=True)
+            if retired in current_text:
+                errors.append(f"first-contact current public submission still references retired path {retired}")
     except Exception as exc:
         errors.append(f"first-contact parse failed: {exc}")
 
     try:
-        submit = fetch_json(site, "/api/agent-submit-gateway.json", timeout)
-        text = json.dumps(submit, sort_keys=True)
-        if "/gateway/submit" in text:
-            errors.append("agent-submit-gateway contains stale /gateway/submit")
-        if "/agent-submit" not in text:
-            errors.append("agent-submit-gateway missing /agent-submit")
-        if "/gateway/preflight" not in text:
-            errors.append("agent-submit-gateway missing /gateway/preflight")
+        agent_start = fetch_json(site, "/api/agent-start.v2.json", timeout)
+        text = json.dumps(agent_start, sort_keys=True)
+        for required in [
+            "builder_usage_safety_protocol",
+            "BUILDER_USAGE_UNCLEAR",
+            "doctor_submission",
+            "preflight_submission",
+            "submit_submission",
+        ]:
+            if required not in text:
+                errors.append(f"agent-start API missing {required}")
     except Exception as exc:
-        errors.append(f"submit gateway parse failed: {exc}")
+        errors.append(f"agent-start API parse failed: {exc}")
+
+    try:
+        gateway = fetch_json(site, "/api/record-chain-intake-gateway.v1.json", timeout)
+        text = json.dumps(gateway, sort_keys=True)
+        for required in ["/record-chain/preflight", "/record-chain/submit"]:
+            if required not in text:
+                errors.append(f"record-chain gateway contract missing {required}")
+    except Exception as exc:
+        errors.append(f"record-chain gateway contract parse failed: {exc}")
 
     try:
         output_policy = fetch_json(site, "/api/agent-output-policy.v1.json", timeout)
-        if "before_leaving" not in json.dumps(output_policy, sort_keys=True):
+        text = json.dumps(output_policy, sort_keys=True)
+        if "before_leaving" not in text:
             errors.append("output policy missing before_leaving")
+        if "readback" not in text:
+            errors.append("output policy missing readback")
     except Exception as exc:
         errors.append(f"output policy parse failed: {exc}")
 
