@@ -98,7 +98,7 @@ def main() -> int:
         "index.md",
         "sitemap.xml",
         "home: sync public homepage status",
-        "gh workflow run deploy-pages.yml --ref main",
+        'gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main',
         "scripts/check_homepage_live_freshness.py",
     ]:
         require(marker in home, f"homepage sync workflow missing marker: {marker}")
