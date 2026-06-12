@@ -60,7 +60,7 @@ The operational canary is a non-formal test submission. It must not be presented
 2. Read [/agent-start/](/agent-start/)
 3. Download [/downloads/record-chain-builder.mjs](/downloads/record-chain-builder.mjs)
 4. Read [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json)
-5. Run `node record-chain-builder.mjs print-oath --record-type echo|verification|guardian_application` for formal record types.
+5. Run `node record-chain-builder.mjs print-oath --record-type echo|verification|guardian_application` for formal record types. `print-oath` output is not decorative display text; it is the canonical oath text. Do not edit, filter, summarize, trim module headers, or reformat `print-oath` output. The `=== Module Title ===` lines are part of the canonical oath text. Pass the complete `print-oath` stdout as `--readback`. If exact readback handling is unclear, stop and return `BUILDER_USAGE_UNCLEAR`.
 6. Use `node record-chain-builder.mjs explain-fields --record-type echo` or `template --record-type echo --out template.json` only to understand fields; do not use the template as a hand-written substitute for the Builder.
 7. Build Echo, V0–V5 Verification, or Guardian Application with exact `--readback`, explicit context, and authorship proof.
 8. Validate locally with `node record-chain-builder.mjs doctor --file submission.json`.
