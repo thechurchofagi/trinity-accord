@@ -26,11 +26,14 @@ def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
-def pick(data: dict[str, Any], *names: str) -> Any:
+def pick(data: dict[str, Any], *names: str, skip_zero: bool = False) -> Any:
     for name in names:
         value = data.get(name)
-        if value not in (None, ""):
-            return value
+        if value in (None, ""):
+            continue
+        if skip_zero and str(value) in ("0", "0.0", "0.000000000000"):
+            continue
+        return value
     return None
 
 
@@ -68,7 +71,7 @@ def main() -> int:
         wallet_hash = sha256_text(wallet_address)
 
     # Preferred cost order:
-    # 1. actual balance delta
+    # 1. actual balance delta (non-zero only — zero means balance check raced with on-chain confirmation)
     # 2. tx.reward / direct upload cost
     # 3. cost gate estimate
     winston = pick(
@@ -77,6 +80,7 @@ def main() -> int:
         "upload_cost_winston",
         "estimated_upload_cost_winston",
         "estimated_cost_winston",
+        skip_zero=True,
     )
     amount_ar = pick(
         data,
@@ -84,6 +88,7 @@ def main() -> int:
         "upload_cost_ar",
         "estimated_upload_cost_ar",
         "estimated_cost_ar",
+        skip_zero=True,
     )
 
     # If tx_id exists and result indicates the tx was posted/uploaded, count it as paid.

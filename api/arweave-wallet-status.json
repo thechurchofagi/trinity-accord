@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.arweave-wallet-status.v1",
-  "generated_at": "2026-06-11T17:56:40Z",
+  "generated_at": "2026-06-12T00:06:02Z",
   "currency": "AR",
   "wallet": {
     "wallet_address": null,
@@ -9,8 +9,8 @@
   },
   "spending": {
     "total_paid_uploads": 12,
-    "total_spent_ar": "0",
-    "last_upload_cost_ar": "0",
+    "total_spent_ar": "0.030378292729",
+    "last_upload_cost_ar": "0.002531524394",
     "last_upload_tx_id": "APZQ_mrPLhFG3hseDJMH7XNErZG4olCVVsVCkONp6Ig",
     "last_upload_kind": "native_ots_bundle_archive",
     "last_upload_at": "2026-06-11T17:55:08.385Z"

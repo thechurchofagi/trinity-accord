@@ -641,6 +641,8 @@ async function main() {
   }
 
   const tx = await arweave.createTransaction({ data: payloadBytes }, jwk);
+  const txRewardWinston = tx.reward ? String(tx.reward) : null;
+  const txRewardAr = txRewardWinston ? winstonToArDecimal(txRewardWinston) : null;
   tx.addTag("Content-Type", args.contentType);
   tx.addTag("App-Name", args.appName);
   tx.addTag("Record-Type", args.recordType);
@@ -717,6 +719,8 @@ async function main() {
     balance_after_ar: balanceAfter.ar,
     actual_delta_winston: actualDeltaWinston,
     actual_delta_ar: actualDeltaAr,
+    upload_cost_winston: txRewardWinston,
+    upload_cost_ar: txRewardAr,
     estimated_upload_cost_winston: uploadPrice.winston,
     estimated_upload_cost_ar: estimatedAr,
     estimated_cost_usd: Number(estimatedUsd.toFixed(8)),

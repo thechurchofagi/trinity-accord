@@ -16,120 +16,120 @@
       "kind": "record_chain_arweave_archive",
       "source_path": null,
       "amount_ar": null,
-      "winston": null,
+      "winston": "2531524394",
       "paid_at": "2026-06-08T06:42:08.692Z",
       "status": "paid",
-      "note": "backfilled from existing archive manifest"
+      "note": "backfilled from existing archive manifest [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "5qhNn7fSly2ftrY0EUHpdTFUwOZ8IxenFrs4LHblDpw",
       "kind": "record_chain_arweave_archive",
       "source_path": null,
       "amount_ar": null,
-      "winston": null,
+      "winston": "2531524394",
       "paid_at": "2026-06-08T13:27:17.175Z",
       "status": "paid",
-      "note": "backfilled from existing archive manifest"
+      "note": "backfilled from existing archive manifest [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "d2XipOgFyXSORbXPwrGOVtzLdImA7-5SLSCvI52EwWA",
       "kind": "record_chain_arweave_archive",
       "source_path": null,
       "amount_ar": null,
-      "winston": null,
+      "winston": "2531524394",
       "paid_at": "2026-06-09T04:02:17.447Z",
       "status": "paid",
-      "note": "backfilled from existing archive manifest"
+      "note": "backfilled from existing archive manifest [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "BINPfqHtHti8eTmFJqI3fZ364YfvZdJycooj4KHrihc",
       "kind": "record_chain_arweave_archive",
       "source_path": null,
       "amount_ar": null,
-      "winston": null,
+      "winston": "2531524394",
       "paid_at": "2026-06-09T06:27:23.078Z",
       "status": "paid",
-      "note": "backfilled from existing archive manifest"
+      "note": "backfilled from existing archive manifest [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "AH71H_qaBPLrCiA-Xoo8idZD7uvOWes4EUoPJJYmN-U",
       "kind": "record_chain_arweave_archive",
       "source_path": null,
       "amount_ar": null,
-      "winston": null,
+      "winston": "2531524394",
       "paid_at": "2026-06-09T10:16:34.789Z",
       "status": "paid",
-      "note": "backfilled from existing archive manifest"
+      "note": "backfilled from existing archive manifest [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "W71cJFZoZ0s6XBrJbebiFROz_GvO3QBEc3d2y_THlQs",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-33-R-000000033-60f1589ad2330576-74684e4c2585b439.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2511389742",
       "paid_at": "2026-06-10T13:32:36.188Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T133232Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T133232Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from estimated_upload_cost_winston]"
     },
     {
       "tx_id": "Y1aO-OKtGRMRdc_pTwQ_YJtBT4NhFD0qSG_4zs-Jxo0",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-34-R-000000034-aac1593720622ba4-3ca459e1b9b74f60.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2513566461",
       "paid_at": "2026-06-10T16:11:36.740Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T161133Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T161133Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from estimated_upload_cost_winston]"
     },
     {
       "tx_id": "jgK4aDTKL3rtrUsNa_uwL-tcYG6GNZ5mbAQPDmqOZJE",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-37-R-000000037-bbbef52b1615923d-d7c0a9c39df3128c.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2531524394",
       "paid_at": "2026-06-10T16:48:59.715Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-watch-27291525711/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-watch-27291525711/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from average of known uploads]"
     },
     {
       "tx_id": "bpRdom5odFo6q63dsBbBrHIeVEia9vhONUyOA3weYNU",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-35-R-000000035-4ef3b8e23046eb7b-299eae7f11ccdc28.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2514654821",
       "paid_at": "2026-06-10T18:44:34.406Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T184431Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T184431Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from estimated_upload_cost_winston]"
     },
     {
       "tx_id": "DBUefsZxDbCsxRpPIJwJ9Zv8y76rpgd12kwo_Bt2oKk",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-36-R-000000036-1ee118161376bae0-6281b094a560c48f.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2521184978",
       "paid_at": "2026-06-10T21:31:25.002Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T213120Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260610T213120Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from estimated_upload_cost_winston]"
     },
     {
       "tx_id": "NUmD4dl3SxwOZI49XfJhvmt4D3rHhEW8GE5twYUQHFY",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-38-R-000000038-677b5b825a9f615b-857df6e2795375cf.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2596825969",
       "paid_at": "2026-06-11T17:48:12.743Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260611T174810Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260611T174810Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from estimated_upload_cost_winston]"
     },
     {
       "tx_id": "APZQ_mrPLhFG3hseDJMH7XNErZG4olCVVsVCkONp6Ig",
       "kind": "native_ots_bundle_archive",
       "source_path": "record-chain/ots/native-arweave-bundles/native-record-39-R-000000039-bdb64ed7ac90c076-66fb392cb0b59ed5.anchor.upgraded.arweave-bundle.json",
       "amount_ar": null,
-      "winston": "0",
+      "winston": "2531524394",
       "paid_at": "2026-06-11T17:55:08.385Z",
       "status": "paid",
-      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-watch-27366772044/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-watch-27366772044/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json [cost corrected from average of known uploads]"
     }
   ],
   "boundary": {
