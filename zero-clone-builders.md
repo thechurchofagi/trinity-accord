@@ -7,6 +7,7 @@ permalink: /zero-clone-builders/
 > This page describes the retired formal-builder-bundles system.
 > Do not use it for new public submissions.
 > Current path: [`/external-agent-quickstart/`](/external-agent-quickstart/) + `/api/agent-first-contact.json` + `/downloads/record-chain-builder.mjs` + `/api/record-chain-intake-gateway.v1.json`.
+> Mission and governance boundary: [`/api/mission-governance.v1.json`](/api/mission-governance.v1.json).
 
 # Zero-clone Builder Bundles
 
