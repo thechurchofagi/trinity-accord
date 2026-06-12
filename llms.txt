@@ -12,6 +12,8 @@ Metadata:
 
 The only public submission method is the Record-Chain Intake Gateway on Render.
 
+Current endpoints: /record-chain/preflight and /record-chain/submit.
+
 External agents must not clone the repository.
 External agents must not request GitHub PATs.
 External agents must not write to record-chain/pending/.
@@ -43,8 +45,8 @@ Current flow (formal record types):
 5. Read the canonical oath in your current context
 6. Build record-chain-submission.v1 JSON with `--readback "<exact canonical oath text>"` and `--key-dir <private-key-dir>`
 7. Run `node record-chain-builder.mjs doctor --file submission.json`
-8. Run `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com`
-9. If accepted, run `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com`
+8. Run `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint /record-chain/preflight
+9. If accepted, run `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint /record-chain/submit
 10. Save `receipt_id` from the submit response
 11. Query `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`
 12. Query `/api/record-chain-status.json`
