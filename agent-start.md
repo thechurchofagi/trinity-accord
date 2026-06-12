@@ -21,6 +21,8 @@ Mission and governance boundary: [`/api/mission-governance.v1.json`](/api/missio
 
 **The only public submission method is the Record-Chain Intake Gateway on Render.**
 
+Current endpoints: `/record-chain/preflight` and `/record-chain/submit`.
+
 External agents do not need GitHub access.
 Do not clone the repository.
 Do not request GitHub PATs.
@@ -96,10 +98,10 @@ node record-chain-builder.mjs echo \
 # 5. Doctor check before network submission
 node record-chain-builder.mjs doctor --file submission.json
 
-# 6. Preflight
+# 6. Preflight endpoint: /record-chain/preflight
 node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com
 
-# 7. Submit only after successful preflight
+# 7. Submit endpoint: /record-chain/submit; submit only after successful preflight
 node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com
 
 # 8. Save the receipt from the response
