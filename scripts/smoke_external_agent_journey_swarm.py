@@ -2,8 +2,8 @@
 """Read-only external multi-agent first-contact journey smoke.
 
 This script simulates multiple independent agents discovering the public site
-from scratch and validating that each can reach the full current agent journey
-contract before exit.
+from scratch and validating that each can reach the current Record-Chain
+Intake Gateway journey before exit.
 
 Default mode is read-only:
 - GET requests only
@@ -21,7 +21,6 @@ import json
 import socket
 import sys
 import time
-import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -37,87 +36,91 @@ CORE_DISCOVERY_PATHS = [
     "/api/agent-required-reading.json",
     "/api/agent-task-router.v1.json",
     "/api/agent-output-policy.v1.json",
-    "/api/gateway-workflows.v1.json",
-    "/api/gateway-builder-route-map.v1.json",
-    "/api/agent-submit-gateway.json",
+    "/api/agent-start.v2.json",
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-submission-schema.v1.json",
+    "/api/record-chain-builder-bundles.v1.json",
+    "/api/record-chain-status.json",
 ]
 
 ROUTE_FAMILIES = {
+    "submit_record": {
+        "intent": "submit_record",
+        "required_reads": set(),
+        "required_flow_phrases": {
+            "download /downloads/record-chain-builder.mjs",
+            "POST to /record-chain/preflight",
+            "POST to /record-chain/submit if accepted",
+            "save receipt",
+        },
+    },
     "pure_echo": {
         "intent": "echo",
         "required_reads": {
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-submit-gateway.json",
-            "/api/agent-output-policy.v1.json",
+            "/agent-echo",
+            "/api/echo-record-schema.v3.1.json",
+            "/api/record-chain-intake-gateway.v1.json",
+            "/downloads/record-chain-builder.mjs",
         },
-        "workflow_ids_any": {"pure_echo"},
-    },
-    "guardian_stage_1": {
-        "intent": "guardian_stewardship",
-        "required_reads": {
-            "/guardian-alliance",
-            "/guardian-join",
-            "/api/guardian-registry.json",
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-output-policy.v1.json",
-        },
-        "workflow_ids_any": {"guardian_application_stage_1"},
-    },
-    "guardian_stage_2": {
-        "intent": "guardian_stewardship",
-        "required_reads": {
-            "/guardian-alliance",
-            "/guardian-join",
-            "/api/guardian-registry.json",
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-output-policy.v1.json",
-        },
-        "workflow_ids_any": {"guardian_listing_stage_2"},
-    },
-    "guardian_signed_echo": {
-        "intent": "guardian_stewardship",
-        "required_reads": {
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-submit-gateway.json",
-            "/api/agent-output-policy.v1.json",
-        },
-        "workflow_ids_any": {"guardian_signed_echo"},
+        "required_flow_phrases": set(),
     },
     "v0_v5": {
         "intent": "verify_v0_v5_agent_declared",
         "required_reads": {
-            "/agent-submit",
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/gateway-builder-route-map.v1.json",
-            "/api/agent-output-policy.v1.json",
+            "/agent-verify",
+            "/api/claim-gate-rules.json",
+            "/api/agent-declared-verification-template.v1.json",
+            "/api/evidence-input-schema.v1.json",
+            "/api/record-chain-intake-gateway.v1.json",
         },
-        "workflow_ids_any": {"v0_v5_agent_declared_archive"},
+        "required_flow_phrases": set(),
     },
     "e2": {
         "intent": "verification_echo_e2",
         "required_reads": {
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-submit-gateway.json",
-            "/api/agent-output-policy.v1.json",
+            "/agent-verify",
+            "/api/claim-gate-rules.json",
+            "/api/echo-record-schema.v3.1.json",
+            "/api/verification-report-schema.v2.json",
         },
-        "workflow_ids_any": {"e2_verification_echo"},
+        "required_flow_phrases": set(),
     },
     "v6_plus": {
         "intent": "verify_v6_plus_strict_evidence",
         "required_reads": {
-            "/gateway-workflows/",
-            "/api/gateway-workflows.v1.json",
-            "/api/agent-submit-gateway.json",
-            "/api/agent-output-policy.v1.json",
+            "/agent-verify",
+            "/api/protocol-verification-profiles.json",
+            "/api/claim-gate-rules.json",
+            "/api/evidence-input-schema.v1.json",
         },
-        "workflow_ids_any": {"v6_plus_strict_evidence", "v6_plus"},
+        "required_flow_phrases": set(),
     },
+}
+
+CURRENT_MACHINE_REQUIRED = {
+    "/api/agent-first-contact.json",
+    "/api/agent-start.v2.json",
+    "/api/agent-output-policy.v1.json",
+    "/api/agent-task-router.v1.json",
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-submission-schema.v1.json",
+    "/api/record-chain-builder-bundles.v1.json",
+    "/api/record-chain-status.json",
+    "/downloads/record-chain-builder.mjs",
+}
+
+CURRENT_KEY_PAGES_REQUIRED = {
+    "/agent-start",
+    "/agent-brief",
+    "/agent-echo",
+}
+
+LEGACY_NOT_CURRENT = {
+    "/api/agent-submit-gateway.json",
+    "/api/gateway-builder-route-map.v1.json",
+    "/api/gateway-workflows.v1.json",
+    "/gateway-workflows",
+    "/guardian-routes",
 }
 
 
@@ -158,8 +161,7 @@ def resolve_ips(hostname: str) -> list[str]:
         infos = socket.getaddrinfo(hostname, 443, type=socket.SOCK_STREAM)
     except OSError:
         return []
-    ips = sorted({item[4][0] for item in infos})
-    return ips
+    return sorted({item[4][0] for item in infos})
 
 
 def url_for(site: str, path: str, cache_token: str, agent_id: int, cache_bust: bool) -> str:
@@ -171,13 +173,7 @@ def url_for(site: str, path: str, cache_token: str, agent_id: int, cache_bust: b
     query.append(("agent", f"{agent_id:02d}"))
     query.append(("cb", cache_token))
     return urllib.parse.urlunsplit(
-        (
-            parsed.scheme,
-            parsed.netloc,
-            parsed.path,
-            urllib.parse.urlencode(query),
-            parsed.fragment,
-        )
+        (parsed.scheme, parsed.netloc, parsed.path, urllib.parse.urlencode(query), parsed.fragment)
     )
 
 
@@ -186,7 +182,7 @@ def fetch_json(site: str, path: str, agent_id: int, cache_token: str, timeout: i
     hostname = urllib.parse.urlsplit(site).hostname or "www.trinityaccord.org"
     ips = resolve_ips(hostname)
     headers = {
-        "User-Agent": f"TrinityExternalAgentSwarm/1.0 agent={agent_id:02d}",
+        "User-Agent": f"TrinityExternalAgentSwarm/2.0 agent={agent_id:02d}",
         "Accept": "application/json,*/*",
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
@@ -218,7 +214,6 @@ def validate_agent(agent_id: int, route_family: str, site: str, timeout: int, ca
     digests: dict[str, str] = {}
     ip_candidates: list[str] = []
 
-    # Fetch both canonical and cache-busted discovery JSON for each agent.
     fetched: dict[tuple[str, bool], FetchResult] = {}
     for path in CORE_DISCOVERY_PATHS:
         for cache_bust in [False, True]:
@@ -226,7 +221,6 @@ def validate_agent(agent_id: int, route_family: str, site: str, timeout: int, ca
             fetched[(path, cache_bust)] = result
             ip_candidates.extend(result.ip_candidates)
             label = f"{path}{' cache-busted' if cache_bust else ' canonical'}"
-
             if result.error:
                 errors.append(f"{label}: fetch failed: {result.error}")
                 continue
@@ -241,8 +235,9 @@ def validate_agent(agent_id: int, route_family: str, site: str, timeout: int, ca
     first_contact = fetched.get(("/api/agent-first-contact.json", False)).data or {}
     task_router = fetched.get(("/api/agent-task-router.v1.json", False)).data or {}
     output_policy = fetched.get(("/api/agent-output-policy.v1.json", False)).data or {}
-    workflows = fetched.get(("/api/gateway-workflows.v1.json", False)).data or {}
-    submit_gateway = fetched.get(("/api/agent-submit-gateway.json", False)).data or {}
+    agent_start = fetched.get(("/api/agent-start.v2.json", False)).data or {}
+    gateway = fetched.get(("/api/record-chain-intake-gateway.v1.json", False)).data or {}
+    builder = fetched.get(("/api/record-chain-builder-bundles.v1.json", False)).data or {}
 
     repo_digest = repo_links_digest()
     if repo_digest:
@@ -257,29 +252,41 @@ def validate_agent(agent_id: int, route_family: str, site: str, timeout: int, ca
             f"links.json canonical/cache-busted digest split: {links.get('source_digest')!r} vs {links_busted.get('source_digest')!r}"
         )
 
-    # Discovery surface checks.
     machine = set(links.get("machine", []))
     key_pages = set(links.get("key_pages", []))
-    for required in [
-        "/api/agent-first-contact.json",
-        "/api/gateway-workflows.v1.json",
-        "/api/agent-submit-gateway.json",
-        "/api/gateway-builder-route-map.v1.json",
-        "/api/agent-output-policy.v1.json",
-    ]:
+    legacy = set(links.get("legacy_machine", []))
+    deprecated = set(links.get("deprecated_for_new_records", []))
+
+    for required in sorted(CURRENT_MACHINE_REQUIRED):
         if required not in machine:
             errors.append(f"links.json machine missing {required}")
 
-    for required in ["/gateway-workflows", "/guardian-alliance", "/guardian-join", "/guardian-routes"]:
-        if required not in key_pages:
+    for required in sorted(CURRENT_KEY_PAGES_REQUIRED):
+        if required not in key_pages and required + "/" not in key_pages:
             errors.append(f"links.json key_pages missing {required}")
 
-    wk_api = well_known.get("api", {})
-    for key in ["agent_first_contact", "gateway_workflows", "agent_submit_gateway", "gateway_builder_route_map"]:
-        if key not in wk_api and key not in well_known:
-            errors.append(f"well-known missing {key}")
+    for legacy_path in sorted(LEGACY_NOT_CURRENT):
+        if legacy_path in machine:
+            errors.append(f"links.json machine still exposes retired current path {legacy_path}")
+        if legacy_path not in legacy and legacy_path not in deprecated:
+            errors.append(f"links.json legacy/deprecated missing retired path {legacy_path}")
 
-    # Route family checks.
+    wk_api = well_known.get("api", {})
+    for key in ["agent_first_contact", "agent_output_policy", "agent_task_router"]:
+        if key not in wk_api and key not in well_known:
+            errors.append(f"well-known missing current key {key}")
+    if "current_public_submission" not in well_known:
+        errors.append("well-known missing current_public_submission")
+    else:
+        cps = well_known.get("current_public_submission", {})
+        for required in [
+            "/downloads/record-chain-builder.mjs",
+            "/api/record-chain-intake-gateway.v1.json",
+            "/api/record-chain-submission-schema.v1.json",
+        ]:
+            if required not in json.dumps(cps, sort_keys=True):
+                errors.append(f"well-known current_public_submission missing {required}")
+
     family = ROUTE_FAMILIES[route_family]
     route = get_route(first_contact, family["intent"])
     if not route:
@@ -289,46 +296,43 @@ def validate_agent(agent_id: int, route_family: str, site: str, timeout: int, ca
         missing_reads = sorted(family["required_reads"] - read)
         if missing_reads:
             errors.append(f"{route_family}: route read list missing {missing_reads}")
-        if route.get("must_follow_post_submit_readback") is not True:
-            errors.append(f"{route_family}: route missing must_follow_post_submit_readback=true")
+        flow_text = json.dumps(route.get("flow", []), sort_keys=True)
+        for phrase in sorted(family["required_flow_phrases"]):
+            if phrase not in flow_text:
+                errors.append(f"{route_family}: route flow missing {phrase!r}")
 
-    # Task router should also expose relevant core contracts.
-    routes = task_router.get("routes", {})
-    if family["intent"] == "guardian_stewardship":
-        guardian_route = routes.get("guardian_alliance", {})
-        if guardian_route.get("must_follow_post_submit_readback") is not True:
-            errors.append("task-router guardian_alliance missing post-submit readback requirement")
-    elif family["intent"] == "submit_echo":
-        submit_route = routes.get("submit_echo", {})
-        if submit_route.get("must_follow_post_submit_readback") is not True:
-            errors.append("task-router submit_echo missing post-submit readback requirement")
-
-    # Workflow IDs.
-    workflow_ids = set((workflows.get("workflows") or {}).keys())
-    if not (family["workflow_ids_any"] & workflow_ids):
-        errors.append(f"{route_family}: gateway-workflows missing any of {sorted(family['workflow_ids_any'])}")
-
-    # Output/readback/final exit exposure.
-    output_text = json.dumps(output_policy, sort_keys=True)
-    workflows_text = json.dumps(workflows, sort_keys=True)
-    submit_text = json.dumps(submit_gateway, sort_keys=True)
-
+    current_submission_text = json.dumps(first_contact.get("current_public_submission_method", {}), sort_keys=True)
     for phrase in [
-        "post_submit_readback",
-        "readback",
-        "exit",
+        "Record-Chain Intake Gateway",
+        "/record-chain/preflight",
+        "/record-chain/submit",
+        "/downloads/record-chain-builder.mjs",
     ]:
-        if phrase not in output_text and phrase not in workflows_text and phrase not in submit_text:
-            errors.append(f"{route_family}: missing journey phrase {phrase!r} in output/workflow/submit contracts")
+        if phrase not in current_submission_text:
+            errors.append(f"first-contact current_public_submission_method missing {phrase!r}")
 
-    return AgentResult(
-        agent_id=agent_id,
-        route_family=route_family,
-        ok=not errors,
-        errors=errors,
-        digests=digests,
-        ip_candidates=sorted(set(ip_candidates)),
-    )
+    protocol_text = json.dumps(agent_start.get("builder_usage_safety_protocol", {}), sort_keys=True)
+    for phrase in ["BUILDER_USAGE_UNCLEAR", "doctor_submission", "preflight_submission", "submit_submission"]:
+        if phrase not in protocol_text:
+            errors.append(f"agent-start builder_usage_safety_protocol missing {phrase!r}")
+
+    gateway_text = json.dumps(gateway, sort_keys=True)
+    for phrase in ["/record-chain/preflight", "/record-chain/submit"]:
+        if phrase not in gateway_text:
+            errors.append(f"record-chain intake gateway contract missing {phrase!r}")
+
+    builder_text = json.dumps(builder, sort_keys=True)
+    if "/downloads/record-chain-builder.mjs" not in builder_text:
+        errors.append("builder bundle contract missing canonical builder download")
+
+    output_text = json.dumps(output_policy, sort_keys=True)
+    first_contact_text = json.dumps(first_contact, sort_keys=True)
+    task_router_text = json.dumps(task_router, sort_keys=True)
+    for phrase in ["post_submit_readback", "readback", "receipt"]:
+        if phrase not in output_text and phrase not in first_contact_text and phrase not in task_router_text:
+            errors.append(f"{route_family}: missing journey phrase {phrase!r} in current output/route contracts")
+
+    return AgentResult(agent_id, route_family, not errors, errors, digests, sorted(set(ip_candidates)))
 
 
 def main() -> int:
@@ -354,22 +358,12 @@ def main() -> int:
             for agent_id in range(args.agents):
                 route_family = route_names[agent_id % len(route_names)]
                 global_agent_id = round_id * args.agents + agent_id
-                futures.append(
-                    pool.submit(
-                        validate_agent,
-                        global_agent_id,
-                        route_family,
-                        args.site,
-                        args.timeout,
-                        cache_token,
-                    )
-                )
+                futures.append(pool.submit(validate_agent, global_agent_id, route_family, args.site, args.timeout, cache_token))
 
         for future in concurrent.futures.as_completed(futures):
             all_results.append(future.result())
 
     all_results.sort(key=lambda item: item.agent_id)
-
     failures = [r for r in all_results if not r.ok]
     print(f"External agent swarm results: {len(all_results) - len(failures)}/{len(all_results)} passed")
 
@@ -379,13 +373,11 @@ def main() -> int:
     for result in all_results:
         status = "PASS" if result.ok else "FAIL"
         print(f"{status}: agent={result.agent_id:02d} route={result.route_family}")
-        if result.errors:
-            for err in result.errors:
-                print(f"  - {err}")
+        for err in result.errors:
+            print(f"  - {err}")
 
     if failures:
         return 1
-
     print("PASS: external multi-agent full journey swarm smoke passed")
     return 0
 
