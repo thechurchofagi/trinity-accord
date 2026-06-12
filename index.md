@@ -833,12 +833,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">attention</p>
+    <p class="status-number">current</p>
     <p class="status-note">
-      Pipeline: attention.<br>
+      Pipeline: current.<br>
       Latest technical record: R-000000040.<br>
-      OTS: upgraded.<br>
-      Arweave: waiting-for-native-ots.<br>
+      OTS: pending.<br>
+      Arweave: current.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -857,9 +857,9 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 1 batches (all stamped).<br>
-      OpenTimestamps: upgraded.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
-      Record-Chain Arweave archive: current live mirror; latest tx 9yQOQPAxpAHd....<br>
+      OpenTimestamps: pending.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
+      Record-Chain Arweave archive: current live mirror; latest tx wGg3Ytq9iQhB....<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -891,7 +891,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>f302d0d78d9e3c00</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>a4be6b4a01d13435</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
