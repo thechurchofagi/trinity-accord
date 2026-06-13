@@ -15,6 +15,10 @@
     "private_keys_must_not_be_submitted_to_gateway": true,
     "suggested_local_archive": "tar -czf trinity-authorship-keydir.tgz ./.trinity-agent-authorship && sha256sum trinity-authorship-keydir.tgz"
   },
+  "before_leaving": {
+    "policy": "/api/agent-output-policy.v1.json",
+    "summary": "Before ending a session, agents should preserve receipt/status boundaries and avoid claiming final inclusion, authority, attestation, successor reception, or active Guardian status from receipt alone."
+  },
   "canonical_first_contact": true,
   "canonical_human_url": "/agent-first-contact/",
   "choose_one": [
@@ -241,8 +245,8 @@
   },
   "schema": "trinityaccord.agent-first-contact.v2",
   "status": "active_agent_router",
-  "updated_at": "2026-06-13T06:50:00Z",
-  "version": "2.0.1",
+  "updated_at": "2026-06-13T10:20:00Z",
+  "version": "2.0.2",
   "zero_clone_formal_builder_policy": {
     "builder_bundle_manifest": {
       "do_not_use_for_new_submissions": true,
