@@ -76,9 +76,68 @@ def load_canary_policy(site: str, timeout: int) -> dict[str, Any]:
     return fetch_public_json(site, "/api/live-canary-policy.v1.json", timeout)
 
 
-def discover_gateway_base_url(site: str, timeout: int) -> tuple[str, str, str]:
-    submit_gateway = fetch_public_json(site, "/api/agent-submit-gateway.json", timeout)
+def _gateway_responds(base: str, health_paths: list[str], timeout: int) -> bool:
+    base = base.rstrip("/")
+    for health in health_paths:
+        if not isinstance(health, str) or not health.startswith("/"):
+            continue
+        try:
+            req = urllib.request.Request(
+                base + health,
+                headers={"User-Agent": "TrinityExternalWriteLifecycleCanary/1.0"},
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                if int(getattr(resp, "status", 200)) < 500:
+                    return True
+        except Exception:
+            continue
+    return False
+
+
+def _discover_active_record_chain_gateway(site: str, timeout: int) -> tuple[str, str, str] | None:
+    """Discover Gateway from the current active record-chain intake contract."""
+    try:
+        contract = fetch_public_json(site, "/api/record-chain-intake-gateway.v1.json", timeout)
+    except Exception:
+        return None
+
+    base = str(contract.get("base_url") or "").rstrip("/")
+    if not base.startswith("https://"):
+        return None
+
+    endpoints = contract.get("endpoints", {})
+    if not isinstance(endpoints, dict):
+        endpoints = {}
+
+    health = endpoints.get("health", {})
+    preflight = endpoints.get("preflight", {})
+    submit = endpoints.get("submit", {})
+    if not isinstance(health, dict):
+        health = {}
+    if not isinstance(preflight, dict):
+        preflight = {}
+    if not isinstance(submit, dict):
+        submit = {}
+
+    health_path = str(health.get("path") or "/healthz")
+    preflight_path = str(preflight.get("path") or "/record-chain/preflight")
+    submit_path = str(submit.get("path") or "/record-chain/submit")
+
+    if _gateway_responds(base, [health_path, "/healthz", "/record-chain/readiness"], timeout):
+        return base, preflight_path, submit_path
+    return None
+
+
+def _discover_legacy_agent_submit_gateway(site: str, timeout: int) -> tuple[str, str, str] | None:
+    """Fallback for old public contracts; kept for compatibility only."""
+    try:
+        submit_gateway = fetch_public_json(site, "/api/agent-submit-gateway.json", timeout)
+    except Exception:
+        return None
+
     discovery = submit_gateway.get("gateway_discovery", {})
+    if not isinstance(discovery, dict):
+        return None
 
     candidates: list[str] = []
     if discovery.get("primary_base_url"):
@@ -87,23 +146,25 @@ def discover_gateway_base_url(site: str, timeout: int) -> tuple[str, str, str]:
 
     preflight_path = discovery.get("preflight_path", "/gateway/preflight")
     submit_path = discovery.get("submit_path", "/agent-submit")
+    health_paths = [str(path) for path in discovery.get("health_paths", ["/healthz", "/readiness", "/"])]
 
     for base in candidates:
         base = base.rstrip("/")
         if not base.startswith("https://"):
             continue
+        if _gateway_responds(base, health_paths, timeout):
+            return base, str(preflight_path), str(submit_path)
+    return None
 
-        for health in discovery.get("health_paths", ["/healthz", "/readiness", "/"]):
-            try:
-                req = urllib.request.Request(
-                    base + health,
-                    headers={"User-Agent": "TrinityExternalWriteLifecycleCanary/1.0"},
-                )
-                with urllib.request.urlopen(req, timeout=timeout) as resp:
-                    if int(getattr(resp, "status", 200)) < 500:
-                        return base, str(preflight_path), str(submit_path)
-            except Exception:
-                continue
+
+def discover_gateway_base_url(site: str, timeout: int) -> tuple[str, str, str]:
+    active = _discover_active_record_chain_gateway(site, timeout)
+    if active is not None:
+        return active
+
+    legacy = _discover_legacy_agent_submit_gateway(site, timeout)
+    if legacy is not None:
+        return legacy
 
     raise SystemExit("FAIL: no Gateway base URL discovered from public contracts")
 
