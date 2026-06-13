@@ -828,6 +828,28 @@ def main() -> int:
         fail(f"public home v3 primary counters failed:\n{result.stdout}\n{result.stderr}")
     ok("public home v3 primary counters")
 
+    # Legacy gateway retired contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_legacy_gateway_retired_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"legacy gateway retired contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("legacy gateway retired contract")
+
+    # Record-chain receipt contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_receipt_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain receipt contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("record-chain receipt contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
