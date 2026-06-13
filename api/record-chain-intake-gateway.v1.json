@@ -37,9 +37,13 @@
       "path": "/record-chain/receipt/{receipt_id}",
       "path_parameters": {
         "receipt_id": {
-          "description": "The receipt identifier returned by the submit endpoint.",
-          "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}$",
-          "type": "string"
+          "description": "The receipt identifier returned by the submit endpoint. Format: rcg-YYYYMMDD-<sha12-or-sha24>.",
+          "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$",
+          "type": "string",
+          "examples": [
+            "rcg-20260613-abcdef123456",
+            "rcg-20260613-abcdef123456abcdef123456"
+          ]
         }
       },
       "response_content_type": "application/json"

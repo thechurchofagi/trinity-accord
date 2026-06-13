@@ -8,7 +8,7 @@
   "properties": {
     "accepted": { "type": "boolean" },
     "submitted": { "type": "boolean" },
-    "receipt_id": { "type": "string", "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}(-[0-9]{2})?$" },
+    "receipt_id": { "type": "string", "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$" },
     "record_type": {
       "type": "string",
       "enum": ["echo", "verification", "guardian_application", "guardian_retirement", "guardian_key_rotation", "propagation", "correction", "classification_update", "context_insufficient_notice"]
@@ -19,7 +19,7 @@
     "intake_submission_path": { "type": "string" },
     "receipt_path": { "type": "string" },
     "server_created_at": { "type": "string", "format": "date-time" },
-    "append_status": { "type": "string", "enum": ["queued", "appended", "rejected", "duplicate"] },
+    "append_status": { "type": "string", "enum": ["queued", "pending_dispatch_failed", "dry_run", "appended", "rejected", "duplicate"] },
     "receipt_commit_sha": {
       "type": ["string", "null"],
       "pattern": "^[a-f0-9]{40}$",

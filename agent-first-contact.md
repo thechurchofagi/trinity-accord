@@ -270,7 +270,7 @@ curl -fsS -X POST https://trinity-record-chain-gateway.onrender.com/record-chain
 Save the receipt from the submit response. It proves intake acceptance only, not final inclusion.
 
 ```text
-receipt_id: rcg-YYYYMMDD-<sha12>
+receipt_id: rcg-YYYYMMDD-<sha12-or-sha24>
 ```
 
 ## Post-submit observation
