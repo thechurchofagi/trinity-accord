@@ -1,4 +1,18 @@
 {
+  "schema": "trinityaccord.gateway-workflows.v1",
+  "version": "1.0.1",
+  "status": "historical_archive_only",
+  "historical_archive_only": true,
+  "do_not_use_for_new_public_submissions": true,
+  "all_workflows_retired": true,
+  "replacement": "/api/agent-first-contact.json",
+  "current_public_submission_contract": "/api/record-chain-intake-gateway.v1.json",
+  "current_public_submission_endpoints": {
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit",
+    "receipt": "/record-chain/receipt/{receipt_id}"
+  },
+  "legacy_warning": "This workflow map documents retired Issue Gateway workflows only. Do not execute for new public submissions.",
   "action_semantics": {
     "copy_paste_examples": "/external-agent-copy-paste-examples/",
     "echo_reference": "/api/echo-types.json",
@@ -1052,8 +1066,5 @@
     "formal_payloads_must_use_canonical_builders": true,
     "full_repo_clone_required_when_bundle_available": false,
     "handwritten_formal_payloads_forbidden": true
-  },
-  "status": "historical_archive_only",
-  "do_not_use_for_new_public_submissions": true,
-  "replacement": "/api/agent-first-contact.json"
+  }
 }

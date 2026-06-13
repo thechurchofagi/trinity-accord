@@ -740,8 +740,6 @@ async def submit(request: Request) -> SubmitResponse:
             boundary={},
         )
 
-    _check_config()
-
     try:
         body = json.loads(raw_body)
     except json.JSONDecodeError as exc:
@@ -925,6 +923,7 @@ async def submit(request: Request) -> SubmitResponse:
     warnings: list[str] = []
 
     if _WRITE_MODE == "github_contents_pending":
+        _check_config()
         try:
             existing_match = await _find_existing_matching_receipt(
                 candidate_receipt_paths=[receipt_path, legacy_receipt_path],

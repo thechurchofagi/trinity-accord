@@ -839,6 +839,17 @@ def main() -> int:
         fail(f"legacy gateway retired contract failed:\n{result.stdout}\n{result.stderr}")
     ok("legacy gateway retired contract")
 
+    # Public agent entrypoints source scan
+    result = subprocess.run(
+        [sys.executable, "scripts/check_public_agent_entrypoints.py", "api"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public agent entrypoints source scan failed:\n{result.stdout}\n{result.stderr}")
+    ok("public agent entrypoints source scan")
+
     # Record-chain receipt contract
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_receipt_contract.py"],

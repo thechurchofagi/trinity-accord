@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import base64
 import copy
+import os
 from typing import Any
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -51,7 +52,7 @@ def _sign_draft(draft: dict[str, Any]) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 def _make_v2_echo_draft() -> dict[str, Any]:
-    """Build a minimal valid v2 echo record_draft."""
+    """Build a minimal valid v2 echo record_draft matching current validation contract."""
     return {
         "record_type": "echo",
         "schema": "trinityaccord.record-chain-entry.v1",
@@ -76,16 +77,21 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "operator_type": "ai_agent",
         },
         "submission_execution_context": {
-            "builder_tool": "test-builder",
-            "submitted_via": "gateway-api",
+            "builder_tool": "test-current-fixture",
+            "submitted_via": "record-chain-intake-gateway",
         },
         "authorization_context": {
             "authorization_basis": "self_initiated",
+            "authorization_scope": "create_echo_record",
         },
         "context_readiness": {
-            "declared_context_level": 3,
+            "declared_context_level": "CC-3",
             "minimum_required_for_action": "CC-3",
             "context_sufficient_for_selected_action": True,
+            "loaded_context_urls": [
+                "https://www.trinityaccord.org/agent-start/",
+                "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
+            ],
         },
         "non_authority_boundary_acknowledgement": {
             "not_authority": True,
@@ -95,25 +101,34 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
         },
-        "optional_linked_guardian_application_request": None,
-        "payload": {
-            "title": "Test Echo",
-            "body": "This is a test echo submission.",
+        "echo_content": {
+            "echo_text": "This is a test echo submission.",
             "echo_intent": "recognition",
         },
     }
 
 
 def _make_valid_submission() -> dict[str, Any]:
-    """Build a full valid submission envelope with real authorship proof."""
+    """Build a full valid submission envelope with real authorship proof and oath gate."""
     draft = _make_v2_echo_draft()
+
+    # Build oath verification from the actual oath policy file
+    readback_text, oath_verification = _build_oath_for_record_type("echo", draft)
+    draft["submission_oath_verification"] = oath_verification
+
+    # Sign AFTER adding oath verification (signature covers the full draft)
     proof = _sign_draft(draft)
+
     return {
         "record_type": "echo",
         "record_draft": draft,
         "authorship_proof": proof,
+        "client_oath_readback": {
+            "readback_text": readback_text,
+        },
         "boundary_acknowledgement": {
             "not_authority": True,
             "not_governance": True,
@@ -122,9 +137,67 @@ def _make_valid_submission() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
         },
     }
+
+
+def _build_oath_for_record_type(record_type: str, draft: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    """Build canonical oath text and verification dict from the oath policy file."""
+    import hashlib
+    import json
+    import unicodedata
+    from pathlib import Path
+
+    from gateway.security import normalize_oath_text, sha256_text
+
+    root = Path(__file__).resolve().parents[3]
+    policy_path = root / "api" / "record-chain-oath-policy.v1.json"
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+
+    policy_json = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    policy_sha256 = hashlib.sha256(policy_json.encode("utf-8")).hexdigest()
+
+    modules = list(policy.get("record_type_modules", {}).get(record_type, []))
+    linked = draft.get("optional_linked_guardian_application_request")
+    if isinstance(linked, dict) and linked.get("does_participant_request_guardian_application_with_this_record") is True:
+        if "guardian_stewardship_v1" not in modules:
+            modules.append("guardian_stewardship_v1")
+
+    module_defs = policy.get("modules", {})
+    canonical_parts = []
+    for module_id in modules:
+        module = module_defs[module_id]
+        text = unicodedata.normalize("NFC", normalize_oath_text(module["text"]))
+        canonical_parts.append(f"=== {module['label']} ({module_id}) ===\n\n{text}")
+
+    joiner = policy.get("canonicalization", {}).get("module_joiner", "\n\n---\n\n")
+    canonical_text = joiner.join(canonical_parts).strip()
+    canonical_hash = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
+    readback_hash = sha256_text(unicodedata.normalize("NFC", normalize_oath_text(canonical_text)))
+
+    verification = {
+        "oath_policy": "/api/record-chain-oath-policy.v1.json",
+        "oath_policy_sha256": policy_sha256,
+        "oath_modules": modules,
+        "canonical_oath_text_sha256": canonical_hash,
+        "participant_readback_sha256": readback_hash,
+        "readback_method_declared": "participant_generated_in_current_context",
+        "readback_matches_canonical_oath": True,
+        "oath_read": True,
+        "participant_readback_provided": True,
+        "readback_was_not_piped_from_file": True,
+        "readback_was_not_generated_by_script": True,
+        "readback_was_not_loaded_from_cache": True,
+        "readback_was_not_summary_or_paraphrase": True,
+        "readback_was_not_generated_by_external_automation": True,
+        "readback_was_not_auto_filled_by_builder": True,
+        "no_shortcut_oath_acknowledged": True,
+        "oath_does_not_prove_subjective_understanding": True,
+        "oath_verifies_exact_readback_only": True,
+    }
+    return canonical_text, verification
 
 
 def _make_signed_submission() -> dict[str, Any]:
@@ -187,7 +260,14 @@ def mock_github():
     dispatch_mock = AsyncMock(return_value=None)
     delete_mock = AsyncMock(return_value={})
 
-    with patch("app.put_file", put_mock), \
+    env = {
+        "TRINITY_REPO_FULL_NAME": "thechurchofagi/trinity-accord",
+        "TRINITY_TARGET_BRANCH": "main",
+        "TRINITY_GITHUB_TOKEN": "test-token",
+    }
+
+    with patch.dict(os.environ, env), \
+         patch("app.put_file", put_mock), \
          patch("app.get_file_sha", sha_mock), \
          patch("app.get_file_text", text_mock), \
          patch("app.dispatch_workflow", dispatch_mock), \

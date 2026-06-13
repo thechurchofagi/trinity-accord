@@ -97,6 +97,9 @@ jobs:
           cmp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           cmp ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
 
+      - name: Verify public agent JSON entrypoints in Pages artifact
+        run: python3 scripts/check_public_agent_entrypoints.py _site/api
+
       - name: Verify built agent discovery artifacts
         run: |
           set -euo pipefail

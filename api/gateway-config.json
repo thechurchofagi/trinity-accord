@@ -1,14 +1,26 @@
 {
-  "schema": "trinityaccord.gateway-config.v1",
-  "description": "Single source of truth for Gateway URL and submission endpoints. Other pages should reference this file instead of hardcoding URLs.",
-  "gateway_base_url": "https://trinity-agent-issue-gateway.onrender.com",
+  "schema": "trinityaccord.gateway-config.v2",
+  "status": "active",
+  "description": "Current source of truth for the public Record-Chain Intake Gateway URL and submission endpoints.",
+  "gateway_base_url": "https://trinity-record-chain-gateway.onrender.com",
+  "contract": "/api/record-chain-intake-gateway.v1.json",
   "endpoints": {
-    "preflight": "https://trinity-agent-issue-gateway.onrender.com/gateway/preflight",
-    "submit": "https://trinity-agent-issue-gateway.onrender.com/agent-submit"
+    "health": "https://trinity-record-chain-gateway.onrender.com/healthz",
+    "readiness": "https://trinity-record-chain-gateway.onrender.com/record-chain/readiness",
+    "preflight": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+    "submit": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+    "receipt": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/{receipt_id}"
   },
   "method": "POST",
   "content_type": "application/json",
   "timeout_recommendation_seconds": 30,
   "retry_on_503": true,
-  "note": "Render free-tier deployments may cold-start. If you get a 503 or timeout, wait 30 seconds and retry."
+  "retired_gateway_v1": {
+    "gateway_base_url": "https://trinity-agent-issue-gateway.onrender.com",
+    "preflight": "/gateway/preflight",
+    "submit": "/agent-submit",
+    "status": "retired",
+    "do_not_use_for_new_public_submissions": true
+  },
+  "note": "Receipt proves intake acceptance only. Final chain inclusion requires record-chain status/index readback."
 }

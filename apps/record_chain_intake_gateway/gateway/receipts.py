@@ -27,9 +27,12 @@ def make_legacy_receipt_id(submission_sha256: str, now: datetime | None = None) 
 
 
 def make_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
-    """Generate a receipt ID.
+    """Generate the current receipt ID.
 
-    Format: ``rcg-YYYYMMDD-<first_12_hex_chars_of_submission_sha256>``
+    Format: ``rcg-YYYYMMDD-<first_24_hex_chars_of_submission_sha256>``.
+
+    Legacy duplicate lookup may also recognize the older 12-hex receipt ID
+    produced by :func:`make_legacy_receipt_id`, but new receipts use 24 hex.
     """
     if now is None:
         now = datetime.now(timezone.utc)

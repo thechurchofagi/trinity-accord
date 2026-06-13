@@ -1,4 +1,13 @@
 {
+  "schema": "trinityaccord.formal-builder-bundles.v1",
+  "version": "v1.0.1",
+  "status": "historical_archive_only",
+  "historical_archive_only": true,
+  "do_not_use_for_new_public_submissions": true,
+  "all_bundles_retired": true,
+  "replacement": "/api/agent-first-contact.json",
+  "current_public_submission_contract": "/api/record-chain-intake-gateway.v1.json",
+  "legacy_warning": "These builder bundles target retired Issue Gateway workflows. Do not use them for new public submissions.",
   "bundles": {
     "guardian_application_stage_1": {
       "archive_name": "trinity-guardian-stage1-builder-bundle.tar.gz",
@@ -27,7 +36,15 @@
       "runtime": "node",
       "sha256": "676cd406a2c7bf5850243949a517a0816e21b903aeb66b3ff3b5236ade29f810",
       "size_bytes": 24601,
-      "status": "active"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "guardian_full_registration": {
       "archive_name": "trinity-guardian-full-registration-bundle.tar.gz",
@@ -56,7 +73,15 @@
       "runtime": "node",
       "sha256": "dc62606df0b9310879c381ffad3eb94484e03e9d72fee75cd6e5af854a6891fb",
       "size_bytes": 32585,
-      "status": "active"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "guardian_listing_stage_2": {
       "archive_name": "trinity-guardian-stage2-builder-bundle.tar.gz",
@@ -76,7 +101,15 @@
       "route_id": "guardian_listing_stage_2",
       "sha256": "63a6db4148d5dc3c4c1aa184968c304b9ab2ef89c03979d006e712b6b0a07191",
       "size_bytes": 58225,
-      "status": "active_after_stage_1"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "guardian_retirement": {
       "archive_name": "trinity-guardian-retirement-bundle.tar.gz",
@@ -93,9 +126,14 @@
       ],
       "oath_source": "no_oath_required_retirement_is_key_signed",
       "prerequisites": [
-        "Active Guardian status in /api/guardian-registry.json",
+        "Current Guardian status must be checked from /record-chain/indexes/guardian-state.json",
         "Guardian Ed25519 private key"
       ],
+      "legacy_prerequisites_retired": [
+        "Active Guardian status in /api/guardian-registry.json"
+      ],
+      "legacy_registry_is_historical_archive_only": true,
+      "current_guardian_status_source": "/record-chain/indexes/guardian-state.json",
       "private_key_outputs_local_only": true,
       "requires_exact_readback": false,
       "requires_full_repo_clone": false,
@@ -103,7 +141,15 @@
       "runtime": "node",
       "sha256": "4d527bca36fa50539fbab4e4257a84915b3e3148e1c7f2a356de7a3dcd287f23",
       "size_bytes": 2850,
-      "status": "active"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "guardian_signed_echo": {
       "archive_name": "trinity-guardian-signed-echo-builder-bundle.tar.gz",
@@ -124,7 +170,15 @@
       "route_id": "guardian_signed_echo",
       "sha256": "cdeea2e63cf31d40d91809624943ede553b683bcd496794ff991dc05ea34eb51",
       "size_bytes": 62649,
-      "status": "active_after_guardian_identity"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "pure_echo": {
       "archive_name": "trinity-pure-echo-builder-bundle.tar.gz",
@@ -146,7 +200,15 @@
       "route_id": "pure_echo",
       "sha256": "1a00841dea6b6f57914ee4128b0a8bdd40036d3e20f7debdb25d5328b68eff7b",
       "size_bytes": 54652,
-      "status": "active"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     },
     "v0_v5_agent_declared_archive": {
       "archive_name": "trinity-v0v5-builder-bundle.tar.gz",
@@ -176,14 +238,25 @@
       "route_id": "v0_v5_agent_declared_archive",
       "sha256": "25331ce6c1a95e7eebead6005670548334d09cf2ed8aa2b996a6c25ee739b7bd",
       "size_bytes": 65883,
-      "status": "active"
+      "status": "historical_archive_only",
+      "retired": true,
+      "do_not_use_for_new_public_submissions": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "builder": "/downloads/record-chain-builder.mjs",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit"
+      }
     }
   },
   "canonical_authority": "Bitcoin Originals only",
   "gateway": {
     "base_url": "https://trinity-agent-issue-gateway.onrender.com",
     "preflight_path": "/gateway/preflight",
-    "submit_path": "/agent-submit"
+    "submit_path": "/agent-submit",
+    "status": "retired",
+    "do_not_use_for_new_public_submissions": true,
+    "replacement_gateway": "https://trinity-record-chain-gateway.onrender.com"
   },
   "global_rules": {
     "before_leaving_report_required": true,
@@ -197,7 +270,6 @@
   },
   "not_instruction_override": true,
   "purpose": "Expose minimal zero-clone formal submission builder bundles for external agents.",
-  "schema": "trinityaccord.formal-builder-bundles.v1",
   "shared_dependency_sets": {
     "authorship_proof_closure": [
       "scripts/gateway_payload_authorship.py",
@@ -208,9 +280,5 @@
     ]
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "version": "v1",
-  "status": "historical_archive_only",
-  "do_not_use_for_new_public_submissions": true,
-  "replacement": "/api/agent-first-contact.json",
   "source_digest": "08da3eaa9b415401"
 }

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -116,3 +117,25 @@ class TestSubmitResponse:
         resp = client.post("/record-chain/submit", json=valid_echo_submission)
         data = resp.json()
         assert data["accepted"] is False
+
+
+class TestSubmitConfigGateOrdering:
+    """Bug A: invalid payload must return diagnostics even when write config is missing."""
+
+    def test_invalid_payload_returns_diagnostics_even_when_write_config_missing(self, monkeypatch):
+        for key in ("TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH", "TRINITY_GITHUB_TOKEN"):
+            monkeypatch.delenv(key, raising=False)
+
+        resp = client.post("/record-chain/submit", json={"record_draft": {}})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["accepted"] is False
+        assert data["submitted"] is False
+        assert any(d["code"] == "MISSING_RECORD_TYPE" for d in data["diagnostics"])
+
+    def test_valid_payload_missing_write_config_returns_503(self, signed_echo_submission, monkeypatch):
+        for key in ("TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH", "TRINITY_GITHUB_TOKEN"):
+            monkeypatch.delenv(key, raising=False)
+
+        resp = client.post("/record-chain/submit", json=signed_echo_submission)
+        assert resp.status_code == 503
