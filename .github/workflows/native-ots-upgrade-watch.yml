@@ -159,7 +159,19 @@ jobs:
           else
             git commit -m "chore: sync upgraded native OTS anchor and registry"
           fi
-          git push
+
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+            git fetch origin main
+            git rebase origin main || { git rebase --abort; }
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push native OTS upgrade after retries."
+          exit 1
 
       - name: Upload native OTS audit logs
         if: always()

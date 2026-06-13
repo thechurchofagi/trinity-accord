@@ -195,7 +195,11 @@ def require_actions_actor(actor: str | None, writer: str) -> tuple[bool, str]:
 
 def require_gateway_actor(actor: str | None, allowed_gateway_actors: set[str]) -> tuple[bool, str]:
     if not allowed_gateway_actors:
-        return False, "gateway intake actor allow-list is not configured"
+        return False, (
+            "gateway intake actor allow-list is not configured; "
+            "set repo variable RECORD_CHAIN_GATEWAY_ACTORS to a comma-separated list of allowed GitHub actors "
+            f"(e.g. RECORD_CHAIN_GATEWAY_ACTORS={actor or 'thechurchofagi'})"
+        )
     if actor in allowed_gateway_actors:
         return True, "gateway intake actor verified"
     return False, f"gateway intake actor not allowed: actor={actor!r} allowed={sorted(allowed_gateway_actors)!r}"

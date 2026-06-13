@@ -60,10 +60,23 @@ jobs:
 
       - name: Commit anchor updates
         run: |
+          set -euo pipefail
           if ! git diff --quiet; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
             git add record-chain/ api/record-chain-anchor-status.json
             git commit -m "anchor: build record-chain batch and OTS status"
-            git push
+
+            for attempt in 1 2 3; do
+              if git push; then
+                exit 0
+              fi
+              printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+              git fetch origin main
+              git rebase origin main || { git rebase --abort; }
+              sleep $((attempt * 5))
+            done
+
+            echo "::error::Failed to push anchor updates after retries."
+            exit 1
           fi
