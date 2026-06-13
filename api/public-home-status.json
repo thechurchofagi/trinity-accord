@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-13T01:40:50.381964+00:00",
+  "generated_at": "2026-06-13T01:55:35.583772+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -16,7 +16,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/external-witness-index.json"
   ],
-  "source_digest": "26d09df08a2bbe6b",
+  "source_digest": "974d9f64973b3645",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 42,
@@ -48,7 +48,7 @@
       },
       "open_timestamps": {
         "automated_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
-        "bitcoin_pending": true,
+        "bitcoin_pending": false,
         "bitcoin_verified": false,
         "implemented": true,
         "latest_record_id": "R-000000042",
@@ -58,29 +58,29 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 42,
-        "status": "current-pending-bitcoin",
+        "status": "current-upgraded-bitcoin-attestation",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 42,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-42-R-000000042-40a21b24142e65b9-fe199f603fb6c003.anchor.json",
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-42-R-000000042-40a21b24142e65b9-fe199f603fb6c003.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-42-R-000000042-40a21b24142e65b9-fe199f603fb6c003.native-record-chain-head-commitment.json.ots",
-        "ots_status": "pending",
+        "ots_status": "upgraded",
         "anchor_needed": false,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
           "registry_api": "/api/record-chain-native-ots-arweave-registry.json",
-          "status": "waiting-for-ots-upgrade",
-          "archive_status": "waiting-for-ots-upgrade",
-          "latest_bundle_file": null,
-          "latest_bundle_sha256": null,
-          "latest_tx_id": null,
-          "latest_gateway_url": null,
-          "latest_ots_status": "pending",
+          "status": "arweave_archived",
+          "archive_status": "arweave_archived",
+          "latest_bundle_file": "record-chain/ots/native-arweave-bundles/native-record-42-R-000000042-40a21b24142e65b9-fe199f603fb6c003.anchor.upgraded.arweave-bundle.json",
+          "latest_bundle_sha256": "0ca8f79442846ad80079f03a425e6fa61fd2aee38891fa734767dae9f74075d8",
+          "latest_tx_id": "RTlU_-KSWbMJZa_xAyzJAaWqrv47p2aSUle55nBWCkQ",
+          "latest_gateway_url": "https://arweave.net/RTlU_-KSWbMJZa_xAyzJAaWqrv47p2aSUle55nBWCkQ",
+          "latest_ots_status": "upgraded",
           "latest_bitcoin_verified": false,
           "archive_needed": false,
           "registered_without_arweave_tx": false,
-          "arweave_archived": false,
+          "arweave_archived": true,
           "boundary": {
             "ots_proof_bundle_arweave_archive_is_mirror_only": true,
             "ots_proof_bundle_arweave_archive_is_not_authority": true,
@@ -375,8 +375,8 @@
     "latest_record_type": "verification",
     "pending_records": 0,
     "pipeline": "current",
-    "ots": "pending",
-    "ots_raw_status": "pending",
+    "ots": "upgraded",
+    "ots_raw_status": "upgraded",
     "arweave": "current",
     "not_primary_counter": true,
     "archive_backlog": {
@@ -391,9 +391,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.033008857846",
+      "total_spent_ar": "0.03564595312",
       "balance_known": true,
-      "balance_ar": "2.8392131185",
+      "balance_ar": "2.828674532639",
       "low_balance": false,
       "needs_recharge": false
     }
