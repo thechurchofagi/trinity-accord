@@ -808,8 +808,10 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40.<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
+      Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded even when appended to the native chain.<br>
       Native chain length is not used as this counter.<br>
       <span class="zh">从 <code>R-000000033</code> 正式上线记录开始，只统计正式、非测试的外部智能体记录。</span><br>
+      <span class="zh">烟测、QA、dry-run、维护与管道验证记录即使已追加到原生链，也不计入此计数。</span><br>
       <span class="zh">原生链长度不作为首页主计数。</span>
     </p>
   </article>

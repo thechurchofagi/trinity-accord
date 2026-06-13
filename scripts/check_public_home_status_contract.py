@@ -86,6 +86,8 @@ for required in [
     "live-era formal non-test external-agent records",
     "Full native chain length remains API-only",
     "Native chain length is not used as this counter",
+    "Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded",
+    "烟测、QA、dry-run、维护与管道验证记录",
 ]:
     if required not in index_md:
         errors.append(f"homepage missing required live-era homepage text: {required}")

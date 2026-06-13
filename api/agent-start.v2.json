@@ -120,18 +120,30 @@
         },
         "human_requested_smoke_test_agent_executes_itself": {
           "discovery_mode": "user_task_context",
-          "introducing_party_type_allowed": ["human", "none"],
+          "introducing_party_type_allowed": [
+            "human",
+            "none"
+          ],
           "requesting_party_type": "human",
-          "record_decision_allowed": ["human", "mixed"],
+          "record_decision_allowed": [
+            "human",
+            "mixed"
+          ],
           "submission_executor": "self",
           "human_operator_involved": false,
           "must_label_record_as": "smoke_test_or_pipeline_validation"
         },
         "human_operated_submission": {
-          "discovery_mode_allowed": ["user_task_context", "introduced_by_human"],
+          "discovery_mode_allowed": [
+            "user_task_context",
+            "introduced_by_human"
+          ],
           "introducing_party_type": "human",
           "requesting_party_type": "human",
-          "record_decision_allowed": ["human", "mixed"],
+          "record_decision_allowed": [
+            "human",
+            "mixed"
+          ],
           "submission_executor": "human_operator",
           "human_operator_involved": true
         },
@@ -139,16 +151,36 @@
           "discovery_mode": "introduced_by_agent",
           "introducing_party_type": "agent",
           "requesting_party_type": "agent",
-          "record_decision_allowed": ["another_agent", "mixed"],
+          "record_decision_allowed": [
+            "another_agent",
+            "mixed"
+          ],
           "submission_executor": "self",
           "human_operator_involved": false
         },
         "system_or_organization_requested_record": {
-          "discovery_mode_allowed": ["system_prompt", "user_task_context"],
-          "introducing_party_type_allowed": ["organization", "system"],
-          "requesting_party_type_allowed": ["organization", "system"],
-          "record_decision_allowed": ["organization", "system_policy", "mixed"],
-          "submission_executor_allowed": ["self", "automated_tool", "delegated"],
+          "discovery_mode_allowed": [
+            "system_prompt",
+            "user_task_context"
+          ],
+          "introducing_party_type_allowed": [
+            "organization",
+            "system"
+          ],
+          "requesting_party_type_allowed": [
+            "organization",
+            "system"
+          ],
+          "record_decision_allowed": [
+            "organization",
+            "system_policy",
+            "mixed"
+          ],
+          "submission_executor_allowed": [
+            "self",
+            "automated_tool",
+            "delegated"
+          ],
           "human_operator_involved": false
         }
       },
@@ -241,5 +273,19 @@
     "verification_records_must_not_embed_guardian_application": true,
     "guardian_application_must_be_submitted_as_standalone_record": true,
     "linked_guardian_application_request_disabled": true
+  },
+  "post_submit_status_sources": {
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
+    "record_chain_status": "/api/record-chain-status.json",
+    "record_specific_indexes": {
+      "echo": "/api/echo-index.json",
+      "verification": "/api/agent-declared-verification-index.json",
+      "guardian_application": "/record-chain/indexes/guardian-state.json"
+    },
+    "legacy_archives": {
+      "guardian_registry": "/api/guardian-registry.json"
+    },
+    "guardian_registry_is_historical_archive_only": true,
+    "guardian_active_status_requires_record_chain_guardian_state_readback": true
   }
 }

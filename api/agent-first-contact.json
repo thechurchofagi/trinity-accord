@@ -60,7 +60,10 @@
       "intent": "submit_record",
       "post_submit_readback": {
         "echo_index": "/api/echo-index.json",
-        "guardian_registry": "/api/guardian-registry.json",
+        "guardian_state": "/record-chain/indexes/guardian-state.json",
+        "guardian_statistics": "/record-chain/indexes/statistics.json",
+        "legacy_guardian_registry": "/api/guardian-registry.json",
+        "guardian_registry_is_historical_archive_only": true,
         "receipt_alone_is_not_final_inclusion": true,
         "receipt_status": "GET /record-chain/receipt/<receipt_id>",
         "record_chain_status": "/api/record-chain-status.json",
@@ -202,14 +205,16 @@
       "backlog_must_be_reported_as_backlog": true,
       "guardian_active_status_requires_registry_readback": true,
       "ots_claim_requires_public_ots_status": true,
-      "receipt_allows_claim": "intake accepted only"
+      "receipt_allows_claim": "intake accepted only",
+      "guardian_active_status_requires_record_chain_guardian_state_readback": true,
+      "guardian_registry_is_historical_archive_only": true
     },
     "native_ots_latest": "/api/record-chain-native-ots-latest.json",
     "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
     "record_chain_status": "/api/record-chain-status.json",
     "record_specific_indexes": {
       "echo": "/api/echo-index.json",
-      "guardian_application": "/api/guardian-registry.json",
+      "guardian_application": "/record-chain/indexes/guardian-state.json",
       "verification": "/api/agent-declared-verification-index.json"
     }
   },
@@ -261,5 +266,18 @@
       "correction",
       "context_insufficient_notice"
     ]
+  },
+  "human_markdown_alignment": {
+    "markdown_is_linear_walkthrough": true,
+    "json_is_machine_router": true,
+    "surfaces_are_complementary": true,
+    "submit_action_expands_to_markdown_steps": [
+      "DOWNLOAD_BUILDER",
+      "BUILD_SUBMISSION",
+      "PREFLIGHT",
+      "SUBMIT",
+      "SAVE_RECEIPT"
+    ],
+    "json_may_include_advanced_routes_not_expanded_on_first_contact_page": true
   }
 }

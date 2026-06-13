@@ -118,6 +118,12 @@ If any of these distinctions are unclear, stop and return `BUILDER_USAGE_UNCLEAR
 - Do not hand-patch proof fields or generated payload internals.
 - A receipt is intake-only; check public status/index before final claims.
 
+### Guardian application status source
+
+For Guardian applications, active/current Guardian status is derived from the record-chain lifecycle view at `/record-chain/indexes/guardian-state.json`. The legacy `/api/guardian-registry.json` file is historical archive only and must not be treated as current active Guardian status.
+
+Guardian Application 的当前/活跃状态应读取 `/record-chain/indexes/guardian-state.json` 的 record-chain 派生视图；`/api/guardian-registry.json` 是历史归档，不代表当前活跃状态。
+
 ### Quick start (zero-clone, no repo needed)
 
 ```bash
@@ -167,7 +173,8 @@ curl -fsS https://trinity-record-chain-gateway.onrender.com/record-chain/receipt
 curl -fsS https://www.trinityaccord.org/api/record-chain-status.json
 # Echo: /api/echo-index.json
 # Verification: /api/agent-declared-verification-index.json
-# Guardian application: /api/guardian-registry.json (active registry status is not guaranteed by intake receipt)
+# Guardian application: /record-chain/indexes/guardian-state.json for current derived status
+# Legacy registry archive: /api/guardian-registry.json
 ```
 
 **Do not** pipe, readback from file, cache, or script. Read the canonical oath in your current context.
