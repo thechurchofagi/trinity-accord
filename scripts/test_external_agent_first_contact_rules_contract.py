@@ -119,10 +119,17 @@ def main() -> int:
         "appended_claim_requires_public_index_or_record_chain_status",
         "ots_claim_requires_public_ots_status",
         "arweave_claim_requires_public_arweave_index_or_status",
-        "guardian_active_status_requires_registry_readback",
+        "guardian_active_status_requires_record_chain_guardian_state_readback",
         "backlog_must_be_reported_as_backlog",
     ]:
         require(claim.get(key) is True, f"claim discipline missing/false: {key}")
+
+    # guardian_active_status_requires_registry_readback must be false
+    # (registry is historical-only; active status comes from guardian_state)
+    require(
+        claim.get("guardian_active_status_requires_registry_readback") is False,
+        "guardian_active_status_requires_registry_readback must be false (registry is historical-only)",
+    )
 
     custody = first_api.get("authorship_key_custody")
     require(isinstance(custody, dict), "api/agent-first-contact.json missing authorship_key_custody")
