@@ -522,7 +522,7 @@ def main() -> int:
 
     # Phase 6B Contract Hotfix I tests
     result = subprocess.run(
-        [sys.executable, "scripts/test_phase_6b_hotfix_contract.py"],
+        [sys.executable, "-m", "pytest", "scripts/test_phase_6b_hotfix_contract.py", "-v"],
         cwd=ROOT,
         capture_output=True,
         text=True,
