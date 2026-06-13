@@ -52,6 +52,9 @@ IGNORE_VALUES = {
     "/recovery",
     "/agent-submit",
     "/record-chain/records/",
+    "/record-chain/preflight",
+    "/record-chain/submit",
+    "/record-chain/receipt/{receipt_id}",
 }
 
 def extract_strings(obj):
