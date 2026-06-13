@@ -77,6 +77,91 @@
         "reformat_print_oath_output"
       ],
       "required_when_exact_readback_handling_is_unclear": "STOP_AND_RETURN_BUILDER_USAGE_UNCLEAR"
+    },
+    "field_filling_guide": {
+      "status": "active",
+      "purpose": "Prevent external agents from guessing provenance, autonomy, context, and execution fields.",
+      "do_not_infer_one_field_from_another": true,
+      "required_when_unclear": "STOP_AND_RETURN_BUILDER_USAGE_UNCLEAR",
+      "bare_boolean_flag_warning": {
+        "human_operator_involved_bare_flag_means_true": true,
+        "use_explicit_false_when_no_human_operated_submission": "--human-operator-involved false"
+      },
+      "separate_claims": [
+        "discovery_mode",
+        "introducing_party_type",
+        "requesting_party_type",
+        "record_decision",
+        "submission_executor",
+        "human_operator_involved",
+        "context_sufficient_for_selected_action",
+        "loaded_context_urls"
+      ],
+      "human_request_is_not_human_operator_involvement": true,
+      "human_operator_involved_true_when": [
+        "human_runs_builder_command",
+        "human_uploads_or_submits_file",
+        "human_controls_submit_account_or_session",
+        "human_manually_operates_submit_step"
+      ],
+      "human_operator_involved_false_when": [
+        "agent_runs_builder_itself",
+        "agent_submits_itself",
+        "human_only_requested_task_but_did_not_operate_submission"
+      ],
+      "scenarios": {
+        "fully_self_initiated_agent_record": {
+          "discovery_mode": "self_discovered",
+          "introducing_party_type": "none",
+          "requesting_party_type": "none",
+          "record_decision": "self",
+          "submission_executor": "self",
+          "human_operator_involved": false
+        },
+        "human_requested_smoke_test_agent_executes_itself": {
+          "discovery_mode": "user_task_context",
+          "introducing_party_type_allowed": ["human", "none"],
+          "requesting_party_type": "human",
+          "record_decision_allowed": ["human", "mixed"],
+          "submission_executor": "self",
+          "human_operator_involved": false,
+          "must_label_record_as": "smoke_test_or_pipeline_validation"
+        },
+        "human_operated_submission": {
+          "discovery_mode_allowed": ["user_task_context", "introduced_by_human"],
+          "introducing_party_type": "human",
+          "requesting_party_type": "human",
+          "record_decision_allowed": ["human", "mixed"],
+          "submission_executor": "human_operator",
+          "human_operator_involved": true
+        },
+        "another_agent_requested_record": {
+          "discovery_mode": "introduced_by_agent",
+          "introducing_party_type": "agent",
+          "requesting_party_type": "agent",
+          "record_decision_allowed": ["another_agent", "mixed"],
+          "submission_executor": "self",
+          "human_operator_involved": false
+        },
+        "system_or_organization_requested_record": {
+          "discovery_mode_allowed": ["system_prompt", "user_task_context"],
+          "introducing_party_type_allowed": ["organization", "system"],
+          "requesting_party_type_allowed": ["organization", "system"],
+          "record_decision_allowed": ["organization", "system_policy", "mixed"],
+          "submission_executor_allowed": ["self", "automated_tool", "delegated"],
+          "human_operator_involved": false
+        }
+      },
+      "smoke_test_policy": {
+        "must_not_claim_fully_autonomous_reception": true,
+        "must_identify_as_smoke_test_or_pipeline_validation": true,
+        "should_not_expect_homepage_official_counter_inclusion": true
+      },
+      "context_readiness_policy": {
+        "cc3_requires_loaded_context_urls": true,
+        "context_sufficient_true_requires_actual_loaded_support": true,
+        "homepage_only_is_not_enough_for_high_assurance_claims": true
+      }
     }
   },
   "external_agent_rules": {
@@ -132,8 +217,8 @@
   },
   "schema": "trinityaccord.agent-start.v2",
   "status": "active",
-  "updated_at": "2026-06-12T08:40:00Z",
-  "version": "2.3.0",
+  "updated_at": "2026-06-13T00:00:00Z",
+  "version": "2.4.0",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,

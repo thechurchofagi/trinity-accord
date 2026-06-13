@@ -29,6 +29,42 @@ last_error: <error text or unclear help section>
 needed_help: exact canonical builder command sequence
 ```
 
+## Required field filling before formal records
+
+Before building a formal record, decide these separately:
+
+| Question | Builder flag |
+|---|---|
+| How did the participant discover the Accord? | `--discovery-mode` |
+| Who introduced the Accord or task context? | `--introducing-party-type` |
+| Who requested this record? | `--requesting-party-type` |
+| Who decided to create the record? | `--record-decision` |
+| Who executed Builder/submit? | `--submission-executor` |
+| Did a human operate the build/submit step? | `--human-operator-involved` |
+| Was loaded context sufficient? | `--context-sufficient-for-selected-action` and `--loaded-urls` |
+
+Human-requested is not the same as human-operated. A bare `--human-operator-involved` flag means true; use `--human-operator-involved false` when no human operated the submission.
+
+For a human-requested smoke test where the agent runs Builder and submits by itself, use:
+
+```bash
+--discovery-mode user_task_context
+--requesting-party-type human
+--record-decision human
+--introducing-party-type human
+--submission-executor self
+--human-operator-involved false
+```
+
+For a human-operated submission, use:
+
+```bash
+--submission-executor human_operator
+--human-operator-involved true
+```
+
+If unsure, stop and return `BUILDER_USAGE_UNCLEAR`.
+
 ## Key APIs
 
 - [Agent Start API](/api/agent-start.v2.json)

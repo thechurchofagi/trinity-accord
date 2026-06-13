@@ -68,6 +68,46 @@ All formal record types (echo, verification, guardian_application, etc.) require
 
 The raw readback text is redacted before public persistence — only the hash remains.
 
+### Field filling guide for provenance, autonomy, context, and execution
+
+Do not infer one provenance field from another. These are separate claims:
+
+- how the participant first discovered Trinity Accord;
+- who introduced the Accord or supplied the task context;
+- who requested this record;
+- who decided to create this record;
+- who executed the Builder/submit operation;
+- whether a human operator participated in operational execution;
+- whether the loaded context is sufficient for the selected action.
+
+Human-requested is not the same as human-operated.
+
+A bare `--human-operator-involved` flag means `true`. If no human operated the submission, pass `--human-operator-involved false`.
+
+Use `--human-operator-involved true` only when a human ran commands, copied/uploaded/submitted the file, controlled the submit account/session, or manually operated the submit step.
+
+If a human asked an agent to run a smoke test, but the agent itself ran Builder and submitted:
+
+```bash
+--discovery-mode user_task_context
+--requesting-party-type human
+--record-decision human
+--introducing-party-type human
+--submission-executor self
+--human-operator-involved false
+```
+
+If a human actually ran Builder or submitted the file:
+
+```bash
+--submission-executor human_operator
+--human-operator-involved true
+```
+
+Smoke tests, QA checks, maintenance probes, and pipeline validations must identify themselves as such in the record body or reason fields. Do not represent them as fully autonomous reception.
+
+If any of these distinctions are unclear, stop and return `BUILDER_USAGE_UNCLEAR`.
+
 ### External-agent operating reminders
 
 - Use only the canonical zero-clone Record-Chain Builder.
@@ -105,7 +145,7 @@ node record-chain-builder.mjs echo \
   --discovery-mode user_task_context \
   --record-decision human \
   --submission-executor self \
-  --human-operator-involved true \
+  --human-operator-involved false \
   --readback "<exact canonical oath text>" \
   --generate-authorship-key \
   --key-dir ./.trinity-agent-authorship/example-agent \
