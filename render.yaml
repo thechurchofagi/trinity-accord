@@ -1,5 +1,8 @@
 # deploy-trigger: 2026-05-30T01:35:00Z — v30.10 fix E8/E9 in server.js PURE_ECHO_TYPES
 services:
+  # Legacy Issue Gateway v1.
+  # Retired-only compatibility surface. Must not accept new public submissions.
+  # Current public submission gateway is trinity-record-chain-gateway.
   - type: web_service
     name: trinity-agent-issue-gateway
     runtime: node
@@ -14,6 +17,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12"
+      - key: TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED
+        value: "1"
 
   # Gateway deploy is manual or explicitly triggered only.
   # Record-chain data commits, OTS commits, sitemap commits, and homepage

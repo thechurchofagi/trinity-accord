@@ -1,4 +1,19 @@
 {
+  "schema": "trinityaccord.gateway-builder-route-map.v1",
+  "version": "1.0.1",
+  "source_digest": "508f61c054c97779",
+  "status": "historical_archive_only",
+  "historical_archive_only": true,
+  "do_not_use_for_new_public_submissions": true,
+  "all_routes_retired": true,
+  "replacement": "/api/agent-first-contact.json",
+  "current_public_submission_contract": "/api/record-chain-intake-gateway.v1.json",
+  "current_public_submission_endpoints": {
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit",
+    "receipt": "/record-chain/receipt/{receipt_id}"
+  },
+  "legacy_warning": "This file is preserved only to document retired Gateway v1 routes. Do not execute routes from this file for new public submissions.",
   "routes": {
     "guardian_application_stage_1": {
       "active_guardian_status_created": false,
@@ -27,7 +42,14 @@
       "wrong_builders": [
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/build_agent_declared_archive_payload.py"
-      ]
+      ],
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     },
     "guardian_listing_stage_2": {
       "active_only_after_registry_readback": true,
@@ -57,7 +79,14 @@
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/build_agent_declared_archive_payload.py",
         "scripts/create_guardian_application.mjs"
-      ]
+      ],
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     },
     "guardian_retirement": {
       "builder": "scripts/build_guardian_retirement_payload.mjs",
@@ -71,9 +100,14 @@
       "min_readiness_level": "CRL-5",
       "payload_schema": "trinityaccord.guardian-retirement.v1",
       "prerequisites": [
-        "Active Guardian status in /api/guardian-registry.json",
+        "Current Guardian status must be checked from /record-chain/indexes/guardian-state.json",
         "Guardian Ed25519 private key"
       ],
+      "legacy_prerequisites_retired": [
+        "Active Guardian status in /api/guardian-registry.json"
+      ],
+      "legacy_registry_is_historical_archive_only": true,
+      "current_guardian_status_source": "/record-chain/indexes/guardian-state.json",
       "processor": "scripts/process_guardian_retirement.py",
       "requires": [
         "guardian_id",
@@ -104,7 +138,14 @@
         "scripts/build_agent_declared_archive_payload.py",
         "scripts/create_guardian_application.mjs",
         "scripts/build_guardian_listing_request_payload.py"
-      ]
+      ],
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     },
     "guardian_signed_echo": {
       "base_builder": "scripts/build_agent_declared_echo_payload.py",
@@ -137,6 +178,13 @@
           "endpoint": "/agent-submit",
           "method": "POST"
         }
+      },
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
       }
     },
     "pure_echo": {
@@ -172,7 +220,14 @@
         "scripts/build_agent_declared_archive_payload.py",
         "scripts/create_guardian_application.mjs",
         "scripts/build_guardian_listing_request_payload.py"
-      ]
+      ],
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     },
     "v0_v5_agent_declared_archive": {
       "builder": "scripts/build_agent_declared_archive_payload.py",
@@ -207,18 +262,19 @@
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/create_guardian_application.mjs",
         "scripts/build_guardian_listing_request_payload.py"
-      ]
+      ],
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     },
     "guardian_full_registration": {
       "builder": "scripts/create_guardian_full_registration.mjs",
       "requested_archive_kind": "guardian_full_registration",
       "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration"
     }
-  },
-  "schema": "trinityaccord.gateway-builder-route-map.v1",
-  "version": "1.0.0",
-  "source_digest": "508f61c054c97779",
-  "status": "historical_archive_only",
-  "do_not_use_for_new_public_submissions": true,
-  "replacement": "/api/agent-first-contact.json"
+  }
 }

@@ -16,6 +16,31 @@ const WORKFLOW_MANUAL = "https://www.trinityaccord.org/gateway-workflows/";
 const WORKFLOW_MANUAL_MACHINE = "https://www.trinityaccord.org/api/gateway-workflows.v1.json";
 const ARTIFACT_CUSTODY = "https://www.trinityaccord.org/api/gateway-artifact-custody.v1.json";
 
+// --- Legacy Gateway v1 retired constants ---
+const CURRENT_RECORD_CHAIN_CONTRACT = "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json";
+const CURRENT_RECORD_CHAIN_GATEWAY = "https://trinity-record-chain-gateway.onrender.com";
+const LEGACY_GATEWAY_RETIRED = (process.env.TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED || "1") !== "0";
+
+function retiredGatewayV1Response(extra = {}) {
+  return {
+    retired: true,
+    accepted: false,
+    submitted: false,
+    issue_created: false,
+    status: "retired_legacy_gateway_v1",
+    message: "Legacy Issue Gateway v1 is retired. Use the Record-Chain Intake Gateway for all new public submissions.",
+    replacement: {
+      contract: "/api/record-chain-intake-gateway.v1.json",
+      base_url: CURRENT_RECORD_CHAIN_GATEWAY,
+      preflight: "/record-chain/preflight",
+      submit: "/record-chain/submit",
+      receipt: "/record-chain/receipt/{receipt_id}"
+    },
+    legacy_warning: "Do not use /gateway/preflight or /agent-submit for new submissions.",
+    ...extra
+  };
+}
+
 function recoveryContext(extra = {}) {
   return {
     recovery_entrypoint: RECOVERY_ENTRYPOINT,
@@ -26,7 +51,7 @@ function recoveryContext(extra = {}) {
     artifact_custody: ARTIFACT_CUSTODY,
     recovery_rule: (
       "Stop. Do not patch signed JSON. Return to /agent-start/, choose the route again, "
-      + "regenerate with the correct builder, run /gateway/preflight, then /agent-submit."
+      + "regenerate with the correct builder, then use the Record-Chain Intake Gateway: POST /record-chain/preflight, then POST /record-chain/submit."
     ),
     ...extra
   };
@@ -3322,6 +3347,25 @@ app.get("/gateway/version", (req, res) => {
     idempotency_enabled: IDEMPOTENCY_ENABLED,
   });
 });
+
+// --- Legacy Gateway v1 retired guards ---
+if (LEGACY_GATEWAY_RETIRED) {
+  app.all("/gateway/preflight", (req, res) => {
+    res.status(410).json(retiredGatewayV1Response({
+      endpoint: "/gateway/preflight",
+      method: req.method,
+      redirect_to: "/record-chain/preflight"
+    }));
+  });
+
+  app.all("/agent-submit", (req, res) => {
+    res.status(410).json(retiredGatewayV1Response({
+      endpoint: "/agent-submit",
+      method: req.method,
+      redirect_to: "/record-chain/submit"
+    }));
+  });
+}
 
 // --- Task #3: POST /gateway/preflight ---
 app.post("/gateway/preflight", async (req, res) => {
