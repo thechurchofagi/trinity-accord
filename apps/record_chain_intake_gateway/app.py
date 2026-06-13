@@ -572,6 +572,11 @@ async def healthz() -> dict[str, Any]:
     return {"ok": True, "service": "record-chain-intake-gateway"}
 
 
+@app.head("/healthz")
+async def healthz_head() -> Response:
+    return Response(status_code=200)
+
+
 @app.get("/record-chain/readiness", response_model=ReadinessResponse)
 async def readiness(response: Response) -> ReadinessResponse:
     info = get_runtime_info()
