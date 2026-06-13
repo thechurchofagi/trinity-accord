@@ -112,10 +112,29 @@ def main() -> int:
         "Archive backlog repair",
         "Record Chain Data Arweave Archive",
         "Build Echo Index",
+        "Record Chain Anchor",
+        "Upgrade OpenTimestamps Proofs",
         "Arweave wallet status update",
         "Echo human review action",
     ]:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
+
+    # Deploy conditions must not be weakened.
+    for marker in [
+        "steps.commit.outputs.changed == 'true'",
+        "github.event.inputs.force_deploy == 'true'",
+        "steps.live_pre.outcome == 'failure'",
+    ]:
+        require(marker in home, f"homepage sync deploy condition missing marker: {marker}")
+
+    # Deploy reason logging markers (observability, not behavior change).
+    for marker in [
+        "deploy_reason=",
+        "generated_files_changed",
+        "manual_force_deploy",
+        "live_freshness_failed",
+    ]:
+        require(marker in home, f"homepage sync deploy reason logging missing marker: {marker}")
 
     # Deploy workflow should verify committed artifacts, not generate a deployment-only state.
     for marker in [

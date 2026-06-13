@@ -146,9 +146,23 @@ jobs:
         if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || steps.live_pre.outcome == 'failure' }}
         env:
           GH_TOKEN: ${{ github.token }}
+          COMMIT_CHANGED: ${{ steps.commit.outputs.changed }}
+          FORCE_DEPLOY: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true' }}
+          LIVE_PRE_OUTCOME: ${{ steps.live_pre.outcome }}
         run: |
           set -euo pipefail
+
+          reason="unknown"
+          if [[ "${COMMIT_CHANGED}" == "true" ]]; then
+            reason="generated_files_changed"
+          elif [[ "${FORCE_DEPLOY}" == "true" ]]; then
+            reason="manual_force_deploy"
+          elif [[ "${LIVE_PRE_OUTCOME}" == "failure" ]]; then
+            reason="live_freshness_failed"
+          fi
+
           echo "Dispatching deploy-pages.yml for homepage status sync."
+          echo "deploy_reason=${reason}"
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main
 
       - name: Post-dispatch freshness probe
