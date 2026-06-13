@@ -60,10 +60,13 @@
       "intent": "submit_record",
       "post_submit_readback": {
         "echo_index": "/api/echo-index.json",
+        "guardian_registry": "/record-chain/indexes/guardian-state.json",
         "guardian_state": "/record-chain/indexes/guardian-state.json",
         "guardian_statistics": "/record-chain/indexes/statistics.json",
         "legacy_guardian_registry": "/api/guardian-registry.json",
-        "guardian_registry_is_historical_archive_only": true,
+        "guardian_registry_key_is_compatibility_alias": true,
+        "guardian_registry_alias_target": "guardian_state",
+        "legacy_guardian_registry_is_historical_archive_only": true,
         "receipt_alone_is_not_final_inclusion": true,
         "receipt_status": "GET /record-chain/receipt/<receipt_id>",
         "record_chain_status": "/api/record-chain-status.json",
@@ -203,11 +206,12 @@
       "appended_claim_requires_public_index_or_record_chain_status": true,
       "arweave_claim_requires_public_arweave_index_or_status": true,
       "backlog_must_be_reported_as_backlog": true,
-      "guardian_active_status_requires_registry_readback": true,
-      "ots_claim_requires_public_ots_status": true,
-      "receipt_allows_claim": "intake accepted only",
+      "guardian_active_status_requires_registry_readback": false,
       "guardian_active_status_requires_record_chain_guardian_state_readback": true,
-      "guardian_registry_is_historical_archive_only": true
+      "guardian_registry_key_is_compatibility_alias": true,
+      "legacy_guardian_registry_is_historical_archive_only": true,
+      "ots_claim_requires_public_ots_status": true,
+      "receipt_allows_claim": "intake accepted only"
     },
     "native_ots_latest": "/api/record-chain-native-ots-latest.json",
     "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
@@ -237,8 +241,8 @@
   },
   "schema": "trinityaccord.agent-first-contact.v2",
   "status": "active_agent_router",
-  "updated_at": "2026-06-06T04:16:00Z",
-  "version": "2.0.0",
+  "updated_at": "2026-06-13T06:50:00Z",
+  "version": "2.0.1",
   "zero_clone_formal_builder_policy": {
     "builder_bundle_manifest": {
       "do_not_use_for_new_submissions": true,
