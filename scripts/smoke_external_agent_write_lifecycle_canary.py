@@ -95,7 +95,12 @@ def _gateway_responds(base: str, health_paths: list[str], timeout: int) -> bool:
 
 
 def _discover_active_record_chain_gateway(site: str, timeout: int) -> tuple[str, str, str] | None:
-    """Discover Gateway from the current active record-chain intake contract."""
+    """Discover Gateway from the current active record-chain intake contract.
+
+    Discovery should be based on the public contract itself. A transient health
+    probe failure must not hide a valid contract-provided Gateway URL; later
+    preflight calls are responsible for reporting runtime availability.
+    """
     try:
         contract = fetch_public_json(site, "/api/record-chain-intake-gateway.v1.json", timeout)
     except Exception:
@@ -109,23 +114,17 @@ def _discover_active_record_chain_gateway(site: str, timeout: int) -> tuple[str,
     if not isinstance(endpoints, dict):
         endpoints = {}
 
-    health = endpoints.get("health", {})
     preflight = endpoints.get("preflight", {})
     submit = endpoints.get("submit", {})
-    if not isinstance(health, dict):
-        health = {}
     if not isinstance(preflight, dict):
         preflight = {}
     if not isinstance(submit, dict):
         submit = {}
 
-    health_path = str(health.get("path") or "/healthz")
     preflight_path = str(preflight.get("path") or "/record-chain/preflight")
     submit_path = str(submit.get("path") or "/record-chain/submit")
 
-    if _gateway_responds(base, [health_path, "/healthz", "/record-chain/readiness"], timeout):
-        return base, preflight_path, submit_path
-    return None
+    return base, preflight_path, submit_path
 
 
 def _discover_legacy_agent_submit_gateway(site: str, timeout: int) -> tuple[str, str, str] | None:
