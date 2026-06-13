@@ -274,7 +274,14 @@
     "guardian_full_registration": {
       "builder": "scripts/create_guardian_full_registration.mjs",
       "requested_archive_kind": "guardian_full_registration",
-      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration"
+      "zero_clone_builder_bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_full_registration",
+      "retired": true,
+      "retired_replacement": {
+        "contract": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/{receipt_id}"
+      }
     }
   }
 }

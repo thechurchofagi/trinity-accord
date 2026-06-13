@@ -27,6 +27,10 @@ require(
 )
 
 routes = route_map.get("routes", {})
+if route_map.get("all_routes_retired") is True:
+    for name, route in routes.items():
+        require(route.get("retired") is True, f"route {name} must be explicitly retired when all_routes_retired is true")
+
 for name, route in routes.items():
     text = json.dumps(route, ensure_ascii=False)
     if "/gateway/preflight" in text or "/agent-submit" in text:
