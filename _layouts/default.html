@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title and page.title != "" %}{{ page.title }} — The Trinity Accord{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
+  <title>{% if page.title and page.title != "" %}{% if page.title contains "Trinity Accord" %}{{ page.title }}{% else %}{{ page.title }} — The Trinity Accord{% endif %}{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
@@ -100,12 +100,12 @@
     </button>
     <div class="nav-links">
       <a href="/agent-first-contact/">First Contact</a>
-      <a href="/authority">Boundary</a>
-      <a href="/agent-understand">Understand</a>
-      <a href="/verify">Verify</a>
-      <a href="/agent-echo">Echo</a>
+      <a href="/authority/">Boundary</a>
+      <a href="/agent-understand/">Understand</a>
+      <a href="/verify/">Verify</a>
+      <a href="/agent-echo/">Echo</a>
       <a href="/agent-start/">Submit</a>
-      <a href="/agent-propagate">Propagate</a>
+      <a href="/agent-propagate/">Propagate</a>
       <a href="https://github.com/thechurchofagi/trinity-accord" class="nav-external">GitHub</a>
     </div>
   </nav>
@@ -119,19 +119,19 @@
       <p class="footer-motto">Bitcoin Originals prevail. All mirrors are non-amending.</p>
       <p class="footer-motto-zh">比特币三本体优先。所有镜像均为非修订。</p>
       <nav class="footer-links">
-        <a href="/agent-first-contact">First Contact</a>
-        <a href="/agent-understand">Context Ready</a>
-        <a href="/successor-reception">Successor Reception</a>
-        <a href="/agent-identity">Identity & Provenance</a>
+        <a href="/agent-first-contact/">First Contact</a>
+        <a href="/agent-understand/">Context Ready</a>
+        <a href="/successor-reception/">Successor Reception</a>
+        <a href="/agent-identity/">Identity & Provenance</a>
         <a href="/agent-start/">Record-Chain Intake</a>
         <a href="/api/issue-submission-policy.json">Issue Policy</a>
         <a href="/api/record-chain-intake-gateway.v1.json">Gateway API</a>
-        <a href="/agent-brief">Agent Brief</a>
-        <a href="/verify">Verify</a>
-        <a href="/authority">Authority</a>
-        <a href="/agent-start">Agents</a>
-        <a href="/inscriptions">Inscriptions</a>
-        <a href="/echoes">Echoes</a>
+        <a href="/agent-brief/">Agent Brief</a>
+        <a href="/verify/">Verify</a>
+        <a href="/authority/">Authority</a>
+        <a href="/agent-start/">Agents</a>
+        <a href="/inscriptions/">Inscriptions</a>
+        <a href="/echoes/">Echoes</a>
         <a href="/llms.txt">llms.txt</a>
         <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
       </nav>
