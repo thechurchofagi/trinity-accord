@@ -1090,39 +1090,99 @@ async def submit(request: Request) -> SubmitResponse:
 # Receipt retrieval
 # ---------------------------------------------------------------------------
 
-@app.get("/record-chain/receipt/{receipt_id}")
-async def get_receipt(receipt_id: str) -> dict[str, Any]:
-    """Retrieve a receipt by ID. Checks in-memory cache first, then GitHub.
+def _receipt_path_from_id(receipt_id: str) -> str:
+    """Parse receipt ID and return the durable storage path.
 
-    Receipt ID format: rcg-YYYYMMDD-<sha12-or-sha24>
-    The date in the ID determines the storage path directly.
+    Raises HTTPException(400) for invalid format.
     """
-    receipt = _receipt_store.get(receipt_id)
-    if receipt is not None:
-        return receipt
-
-    # Parse receipt ID to extract date
     import re
+
     match = re.fullmatch(r"rcg-(\d{8})-([a-f0-9]{12}|[a-f0-9]{24})", receipt_id)
     if not match:
-        raise HTTPException(status_code=400, detail=f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12-or-sha24>")
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "code": "INVALID_RECEIPT_ID_FORMAT",
+                "message": f"Invalid receipt ID format: '{receipt_id}'. Expected: rcg-YYYYMMDD-<sha12-or-sha24>",
+                "expected": "rcg-YYYYMMDD-<sha12-or-sha24>",
+            },
+        )
 
     try:
         dt = datetime.strptime(match.group(1), "%Y%m%d")
     except ValueError:
-        raise HTTPException(status_code=400, detail=f"Invalid date in receipt ID: '{receipt_id}'")
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "code": "INVALID_RECEIPT_ID_DATE",
+                "message": f"Invalid date in receipt ID: '{receipt_id}'",
+            },
+        )
 
-    receipt_path = f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
+    return f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
+
+
+@app.get("/record-chain/receipt/{receipt_id}")
+async def get_receipt(receipt_id: str) -> dict[str, Any]:
+    """Retrieve a receipt by ID.
+
+    Receipt ID format: rcg-YYYYMMDD-<sha12-or-sha24>.
+    Durable receipt files are the primary source; memory is only a cache.
+    """
+    receipt_path = _receipt_path_from_id(receipt_id)
+
+    # Try durable store first (primary source)
+    backend_error: Exception | None = None
     try:
         text = await get_file_text(receipt_path)
         if text is not None:
             receipt = json.loads(text)
-            _receipt_store[receipt_id] = receipt
+            _receipt_store[receipt_id] = receipt  # update cache
             return receipt
     except Exception as exc:
-        logger.debug("GitHub lookup for %s at %s failed: %s", receipt_id, receipt_path, exc)
+        backend_error = exc
+        logger.warning("Durable receipt lookup failed for %s at %s: %s", receipt_id, receipt_path, exc)
 
-    raise HTTPException(status_code=404, detail=f"Receipt '{receipt_id}' not found")
+    # Fallback to memory cache
+    cached = _receipt_store.get(receipt_id)
+    if cached is not None:
+        if backend_error is None:
+            # Durable returned None (not found) but cache exists — return cache
+            return cached
+        # Backend errored but we have cache — return cache with warning
+        out = dict(cached)
+        warnings = out.setdefault("warnings", [])
+        if isinstance(warnings, list):
+            warnings.append({
+                "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
+                "receipt_path": receipt_path,
+                "retryable": True,
+            })
+        return out
+
+    # No cache, no durable — determine error type
+    if backend_error is not None:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "RECEIPT_BACKEND_UNAVAILABLE",
+                "message": "Receipt durable store lookup failed. Retry later.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "retryable": True,
+            },
+        )
+
+    raise HTTPException(
+        status_code=404,
+        detail={
+            "code": "RECEIPT_NOT_FOUND",
+            "message": f"Receipt '{receipt_id}' not found",
+            "receipt_id": receipt_id,
+            "receipt_path": receipt_path,
+            "retryable": False,
+        },
+    )
 
 
 # ---------------------------------------------------------------------------
