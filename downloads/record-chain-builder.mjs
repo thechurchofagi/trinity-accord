@@ -1209,6 +1209,16 @@ const ERROR_HELP_MAP = {
     fix: "Rebuild the submission with the latest builder, which computes SHA-256 from raw public key bytes correctly.",
     help_url: "https://www.trinityaccord.org/docs/authorship-proof",
   },
+  MISSING_CLASSIFICATION_UPDATE_CONTENT: {
+    meaning: "The record draft is missing required classification_update_content fields.",
+    fix: "Provide target_record_id, target_record_sha256, previous_classification, new_classification, classification_reason, and evidence_or_review_basis, or rebuild with the classification-update command.",
+    help_url: "https://www.trinityaccord.org/docs/classification-update",
+  },
+  INVALID_CLASSIFICATION_TARGET_SHA: {
+    meaning: "classification_update_content.target_record_sha256 is not a valid lowercase SHA-256.",
+    fix: "Use the canonical 64-character lowercase SHA-256 of the target record.",
+    help_url: "https://www.trinityaccord.org/docs/classification-update",
+  },
 };
 
 // ── Doctor checks ────────────────────────────────────────────────────
@@ -1296,6 +1306,49 @@ function runDoctor(submission) {
     const gc = draft.guardian_application_content || {};
     if (!gc.requested_guardian_identifier || !gc.guardian_public_key_sha256 || !gc.guardian_stewardship_oath) {
       results.push({ status: "FAIL", code: "MISSING_GUARDIAN_APPLICATION_CONTENT", field: "record_draft.guardian_application_content", meaning: "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath.", fix: "Provide guardian application content before submission." });
+    }
+  }
+
+  // Check classification_update_content
+  if (draft.record_type === "classification_update") {
+    const cc = draft.classification_update_content || {};
+    const missing = [];
+
+    for (const field of [
+      "target_record_id",
+      "target_record_sha256",
+      "previous_classification",
+      "new_classification",
+      "classification_reason",
+      "evidence_or_review_basis",
+    ]) {
+      if (typeof cc[field] !== "string" || !cc[field].trim()) {
+        missing.push(field);
+      }
+    }
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_CLASSIFICATION_UPDATE_CONTENT",
+        field: "record_draft.classification_update_content",
+        meaning: `Classification update content is missing required field(s): ${missing.join(", ")}`,
+        fix: "Provide all required classification_update_content fields or rebuild with the classification-update command.",
+      });
+    }
+
+    if (
+      typeof cc.target_record_sha256 === "string" &&
+      cc.target_record_sha256.trim() &&
+      !/^[0-9a-f]{64}$/.test(cc.target_record_sha256)
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_CLASSIFICATION_TARGET_SHA",
+        field: "record_draft.classification_update_content.target_record_sha256",
+        meaning: "target_record_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the canonical SHA-256 of the target record.",
+      });
     }
   }
 
@@ -1481,6 +1534,7 @@ function repairSubmission(submission, opts = {}) {
 // ── Template generator ───────────────────────────────────────────────
 
 function generateTemplate(recordType) {
+  const rt = normalizeRecordType(recordType);
   const builders = {
     echo: () => ({
       schema: DRAFT_SCHEMA,
@@ -1501,7 +1555,7 @@ function generateTemplate(recordType) {
         fresh_actions_performed: ["__helper_note: List each fresh action performed for this verification"],
       },
     }),
-    "guardian-application": () => ({
+    "guardian_application": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "guardian_application",
       guardian_application_content: {
@@ -1514,7 +1568,7 @@ function generateTemplate(recordType) {
         guardian_understands_retirement_does_not_delete_history: true,
       },
     }),
-    "guardian-retirement": () => ({
+    "guardian_retirement": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "guardian_retirement",
       guardian_id: "__helper_note: Your guardian identifier",
@@ -1534,7 +1588,7 @@ function generateTemplate(recordType) {
       title: "__helper_note: Title for this correction",
       body: "__helper_note: The correction text content",
     }),
-    "classification-update": () => ({
+    "classification_update": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "classification_update",
       classification_update_content: {
@@ -1546,16 +1600,16 @@ function generateTemplate(recordType) {
         evidence_or_review_basis: "__helper_note: Evidence or review basis",
       },
     }),
-    "context-insufficient": () => ({
+    "context_insufficient": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "context_insufficient_notice",
       reason: "__helper_note: Reason why context is insufficient",
     }),
   };
 
-  const builder = builders[recordType];
+  const builder = builders[rt];
   if (!builder) {
-    console.error(`Unknown record type: ${recordType}`);
+    console.error(`Unknown record type: ${recordType} (normalized: ${rt})`);
     console.error(`Valid types: ${Object.keys(builders).join(", ")}`);
     process.exit(1);
   }
