@@ -79,7 +79,7 @@ class TestSubmitWrites:
         data = resp.json()
 
         assert data["accepted"] is False
-        assert data["diagnostics"][0]["code"] == "PERSIST_FAILED"
+        assert data["diagnostics"][0]["code"] == "IDEMPOTENCY_INDEX_PERSIST_FAILED"
         deleted = [call.args[0] for call in mock_github["delete_file"].await_args_list]
         assert any("pending/" in p for p in deleted)
         assert any("intake/submissions/" in p for p in deleted)
