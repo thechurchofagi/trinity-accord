@@ -185,12 +185,17 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-field-helper.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-head.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.all.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-index.classification_update.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.context_insufficient_notice.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-index.correction.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.echo.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.exit_application.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.guardian_application.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.guardian_exit_application.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-index.guardian_key_rotation.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-index.guardian_retirement.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.manifest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-index.propagation.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-index.verification.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-live-test-policy.v1.json</loc></url>
