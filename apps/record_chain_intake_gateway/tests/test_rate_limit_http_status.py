@@ -2,12 +2,17 @@
 from __future__ import annotations
 
 import pytest
+from fastapi.testclient import TestClient
+
+from app import app
+
+client = TestClient(app)
 
 
 class TestRateLimitHttpStatus:
     """Verify rate-limited submit returns HTTP 429."""
 
-    def test_submit_rate_limit_returns_429(self, client, signed_echo_submission, monkeypatch):
+    def test_submit_rate_limit_returns_429(self, signed_echo_submission, monkeypatch):
         """Rate-limited submit must return 429 with retry_after_seconds."""
         def fake_limited(_submission):
             return {

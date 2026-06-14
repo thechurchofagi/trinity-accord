@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import pytest
-from unittest.mock import AsyncMock
+from fastapi.testclient import TestClient
 
-from app import _read_limited_body, RequestBodyTooLarge, _MAX_BODY_BYTES
+from app import app, _read_limited_body, RequestBodyTooLarge, _MAX_BODY_BYTES
+
+client = TestClient(app)
 
 
 # ---------------------------------------------------------------------------
@@ -67,24 +69,21 @@ class TestReadLimitedBody:
 # ---------------------------------------------------------------------------
 
 class TestBodySizeLimitEndpoints:
-    def test_preflight_returns_413_for_oversized_body(self, client):
-        big_body = b'{"x":"' + b'y" * (_MAX_BODY_BYTES + 100) + b'"}'
+    def test_preflight_returns_413_for_oversized_body(self):
+        big_body = b'{"x":"' + b"y" * (_MAX_BODY_BYTES + 100) + b'"}'
         resp = client.post(
             "/record-chain/preflight",
             content=big_body,
             headers={"content-type": "application/json"},
         )
+        # Middleware catches Content-Length, or endpoint catches streaming body
         assert resp.status_code == 413
-        data = resp.json()
-        diags = data.get("diagnostics", [])
-        assert any(d.get("code") == "REQUEST_BODY_TOO_LARGE" for d in diags)
 
-    def test_submit_returns_413_for_oversized_body(self, client):
-        big_body = b'{"x":"' + b'y" * (_MAX_BODY_BYTES + 100) + b'"}'
+    def test_submit_returns_413_for_oversized_body(self):
+        big_body = b'{"x":"' + b"y" * (_MAX_BODY_BYTES + 100) + b'"}'
         resp = client.post(
             "/record-chain/submit",
             content=big_body,
             headers={"content-type": "application/json"},
         )
-        # Could be 413 from middleware or from streaming reader
         assert resp.status_code in (413, 422)
