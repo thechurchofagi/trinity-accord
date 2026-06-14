@@ -307,7 +307,7 @@ def mock_github():
     """Mock the GitHub adapter so tests don't make real API calls."""
     put_mock = AsyncMock(return_value={"commit": {"sha": "abc123"}})
     sha_mock = AsyncMock(return_value=None)
-    text_mock = AsyncMock(return_value="")
+    text_mock = AsyncMock(return_value=None)
     dispatch_mock = AsyncMock(return_value=None)
     delete_mock = AsyncMock(return_value={})
 
