@@ -322,6 +322,28 @@ def validate_live_agent_entrypoints(
     if missing_commands:
         errors.append(f"live agent-start record_type_commands missing supported record types: {missing_commands}")
 
+    # Guardian command flag checks
+    guardian_application_cmd = commands.get("guardian_application", {}).get("build_command", "")
+    for required in ["--guardian-id", "--guardian-key-sha", "--oath"]:
+        if required not in guardian_application_cmd:
+            errors.append(f"live guardian_application build_command missing {required}")
+    for forbidden in [
+        "--requested-guardian-identifier",
+        "--guardian-public-key-sha256",
+        "--guardian-stewardship-oath",
+        "--guardian-application-statement",
+    ]:
+        if forbidden in guardian_application_cmd:
+            errors.append(f"live guardian_application build_command uses unsupported flag {forbidden}")
+
+    guardian_retirement_cmd = commands.get("guardian_retirement", {}).get("build_command", "")
+    for required in ["--guardian-id", "--guardian-key-sha", "--body"]:
+        if required not in guardian_retirement_cmd:
+            errors.append(f"live guardian_retirement build_command missing {required}")
+    for forbidden in ["--guardian-public-key-sha256", "--reason"]:
+        if forbidden in guardian_retirement_cmd:
+            errors.append(f"live guardian_retirement build_command uses unsupported flag {forbidden}")
+
     if field_helper.get("current_public_phase") != "production_live":
         errors.append("live field helper current_public_phase is not production_live")
 

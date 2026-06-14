@@ -67,12 +67,12 @@
       },
       "guardian_application": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type guardian_application",
-        "build_command": "node record-chain-builder.mjs guardian-application ... --requested-guardian-identifier <identifier> --guardian-public-key-sha256 <sha256> --guardian-stewardship-oath <oath> --guardian-application-statement <statement> --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
+        "build_command": "node record-chain-builder.mjs guardian-application ... --guardian-id <identifier> --guardian-key-sha <sha256> --oath <stewardship oath> --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
         "readback_note": "Pass the complete print-oath stdout as --readback. Do not edit, filter, summarize, trim module headers, or reformat it; === Module Title === lines are part of the canonical oath text. Receipt is intake-only and does not guarantee active Guardian status; read /record-chain/indexes/guardian-state.json before claiming active status."
       },
       "guardian_retirement": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type guardian_retirement",
-        "build_command": "node record-chain-builder.mjs guardian-retirement ... --guardian-id <guardian_id> --guardian-public-key-sha256 <sha256> --reason <reason> --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
+        "build_command": "node record-chain-builder.mjs guardian-retirement ... --guardian-id <guardian_id> --guardian-key-sha <sha256> --body <reason> --readback <exact oath text> --key-dir <private-key-dir> --out submission.json",
         "readback_note": "Pass the complete print-oath stdout as --readback. Do not edit, filter, summarize, trim module headers, or reformat it. Receipt is intake-only; read public status and guardian-state before claiming any state change."
       },
       "propagation": {
@@ -274,8 +274,8 @@
   },
   "schema": "trinityaccord.agent-start.v2",
   "status": "active",
-  "updated_at": "2026-06-14T14:32:35Z",
-  "version": "2.4.2",
+  "updated_at": "2026-06-14T15:00:00Z",
+  "version": "2.4.3",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,

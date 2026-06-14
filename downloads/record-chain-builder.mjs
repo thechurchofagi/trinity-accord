@@ -1686,7 +1686,7 @@ function generateTemplate(recordType) {
     authorization_source_type: "none",
     authorizing_party_public_label: "",
     authorizing_party_identifier: "",
-    authorization_scope: authorizationScopeFor(recordType),
+    authorization_scope: authorizationScopeFor(rt),
     authorization_limitations: "",
     authorization_evidence_description: "",
   };
@@ -1703,7 +1703,7 @@ function generateTemplate(recordType) {
     later_records_may_reclassify_or_correct_this_record: true,
   };
 
-  if (recordType === "guardian_application" || recordType === "guardian_retirement") {
+  if (rt === "guardian_application" || rt === "guardian_retirement") {
     draft.optional_linked_guardian_application_request = {
       does_participant_request_guardian_application_with_this_record: false,
     };

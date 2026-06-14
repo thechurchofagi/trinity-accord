@@ -94,6 +94,54 @@ def main() -> int:
         "classification_update build_command must use builder classification-update",
     )
 
+    # Specific: Guardian application flags must match actual Builder CLI
+    guardian_application_cmd = commands["guardian_application"]["build_command"]
+    require(
+        "--guardian-id" in guardian_application_cmd,
+        "guardian_application build_command must use actual Builder flag --guardian-id",
+    )
+    require(
+        "--guardian-key-sha" in guardian_application_cmd,
+        "guardian_application build_command must use actual Builder flag --guardian-key-sha",
+    )
+    require(
+        "--oath" in guardian_application_cmd,
+        "guardian_application build_command must use actual Builder flag --oath",
+    )
+    for forbidden in [
+        "--requested-guardian-identifier",
+        "--guardian-public-key-sha256",
+        "--guardian-stewardship-oath",
+        "--guardian-application-statement",
+    ]:
+        require(
+            forbidden not in guardian_application_cmd,
+            f"guardian_application build_command must not use unsupported flag {forbidden}",
+        )
+
+    # Specific: Guardian retirement flags must match actual Builder CLI
+    guardian_retirement_cmd = commands["guardian_retirement"]["build_command"]
+    require(
+        "--guardian-id" in guardian_retirement_cmd,
+        "guardian_retirement build_command must use actual Builder flag --guardian-id",
+    )
+    require(
+        "--guardian-key-sha" in guardian_retirement_cmd,
+        "guardian_retirement build_command must use actual Builder flag --guardian-key-sha",
+    )
+    require(
+        "--body" in guardian_retirement_cmd,
+        "guardian_retirement build_command must use actual Builder flag --body for reason text",
+    )
+    for forbidden in [
+        "--guardian-public-key-sha256",
+        "--reason",
+    ]:
+        require(
+            forbidden not in guardian_retirement_cmd,
+            f"guardian_retirement build_command must not use unsupported flag {forbidden}",
+        )
+
     require(
         "Classification Update" in agent_start_md and "classification-update" in agent_start_md,
         "agent-start.md supported table missing Classification Update",

@@ -31,7 +31,7 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
-def assert_template(record_type: str) -> None:
+def assert_template(record_type: str) -> dict:
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "template.json"
         result = run([
@@ -48,6 +48,32 @@ def assert_template(record_type: str) -> None:
         require(out.exists(), f"template did not write output for {record_type}")
         data = json.loads(out.read_text(encoding="utf-8"))
         require(isinstance(data, dict), f"template output not JSON object for {record_type}")
+        return data
+
+
+def assert_guardian_template(record_type: str, expected_type: str, expected_scope: str) -> None:
+    data = assert_template(record_type)
+
+    require(
+        data.get("record_type") == expected_type,
+        f"{record_type} template record_type mismatch: {data.get('record_type')!r}",
+    )
+
+    optional = data.get("optional_linked_guardian_application_request")
+    require(
+        isinstance(optional, dict),
+        f"{record_type} template missing optional_linked_guardian_application_request",
+    )
+    require(
+        optional.get("does_participant_request_guardian_application_with_this_record") is False,
+        f"{record_type} template optional linked guardian request must default false",
+    )
+
+    auth = data.get("authorization_context") or {}
+    require(
+        auth.get("authorization_scope") == expected_scope,
+        f"{record_type} template authorization_scope mismatch: {auth.get('authorization_scope')!r}",
+    )
 
 
 def assert_bad_classification_doctor_fails() -> None:
@@ -133,6 +159,28 @@ def main() -> None:
         "context_insufficient_notice",
     ]:
         assert_template(record_type)
+
+    # Guardian semantic template assertions (hyphen and underscore forms)
+    assert_guardian_template(
+        "guardian-application",
+        "guardian_application",
+        "create_guardian_application_record",
+    )
+    assert_guardian_template(
+        "guardian_application",
+        "guardian_application",
+        "create_guardian_application_record",
+    )
+    assert_guardian_template(
+        "guardian-retirement",
+        "guardian_retirement",
+        "create_guardian_retirement_record",
+    )
+    assert_guardian_template(
+        "guardian_retirement",
+        "guardian_retirement",
+        "create_guardian_retirement_record",
+    )
 
     assert_bad_classification_doctor_fails()
 

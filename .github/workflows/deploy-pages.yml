@@ -121,6 +121,20 @@ jobs:
               exit 1
             fi
           }
+          require_contains_literal() {
+            local file="$1"
+            local text="$2"
+            grep -Fq -- "$text" "$file" || { echo "::error::$file missing required text: $text"; exit 1; }
+          }
+          forbid_contains_literal() {
+            local file="$1"
+            local text="$2"
+            if grep -Fq -- "$text" "$file"; then
+              echo "::error::$file contains forbidden text: $text"
+              grep -Fn -- "$text" "$file"
+              exit 1
+            fi
+          }
 
           require_file _site/CNAME
           grep -Fxq 'www.trinityaccord.org' _site/CNAME || { echo "::error::_site/CNAME is not www.trinityaccord.org"; exit 1; }
@@ -175,6 +189,18 @@ jobs:
             forbid_contains _site/llms.txt "$forbidden"
             forbid_contains _site/ai.txt "$forbidden"
           done
+
+          # Guardian command flag checks (patterns starting with -- need literal grep)
+          require_contains_literal _site/api/agent-start.v2.json '--guardian-id'
+          require_contains_literal _site/api/agent-start.v2.json '--guardian-key-sha'
+          require_contains_literal _site/api/agent-start.v2.json '--oath'
+          require_contains_literal _site/api/agent-start.v2.json '--body'
+
+          forbid_contains_literal _site/api/agent-start.v2.json '--requested-guardian-identifier'
+          forbid_contains_literal _site/api/agent-start.v2.json '--guardian-public-key-sha256'
+          forbid_contains_literal _site/api/agent-start.v2.json '--guardian-stewardship-oath'
+          forbid_contains_literal _site/api/agent-start.v2.json '--guardian-application-statement'
+          forbid_contains_literal _site/api/agent-start.v2.json '--reason'
 
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
