@@ -177,7 +177,15 @@ def _build_oath_for_record_type(record_type: str, draft: dict[str, Any]) -> tupl
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
 
     policy_json = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    policy_sha256 = hashlib.sha256(policy_json.encode("utf-8")).hexdigest()
+    # Compute policy-core hash (excluding self-describing metadata keys)
+    _METADATA_KEYS = {
+        "oath_policy_sha256",
+        "oath_policy_sha256_semantics",
+        "canonical_oath_text_hash_is_record_type_specific",
+    }
+    core_policy = {k: v for k, v in policy.items() if k not in _METADATA_KEYS}
+    core_json = json.dumps(core_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+    policy_sha256 = hashlib.sha256(core_json.encode("utf-8")).hexdigest()
 
     modules = list(policy.get("record_type_modules", {}).get(record_type, []))
     linked = draft.get("optional_linked_guardian_application_request")
