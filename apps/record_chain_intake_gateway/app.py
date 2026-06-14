@@ -594,6 +594,132 @@ async def _best_effort_delete_created_files(created_files: list[tuple[str, str]]
 
 
 # ---------------------------------------------------------------------------
+# BLOCKER 1 helpers: Idempotency index fail-closed
+# ---------------------------------------------------------------------------
+
+def _idempotency_index_path(submission_sha256: str) -> str:
+    return f"record-chain/intake/by-submission-sha256/{submission_sha256}.json"
+
+
+def _build_idempotency_index_data(
+    *,
+    submission_sha256: str,
+    stored_submission_sha256: str,
+    receipt_id: str,
+    receipt_path: str,
+    pending_file_path: str,
+    intake_submission_path: str,
+    record_type: str,
+    now: datetime,
+) -> dict[str, Any]:
+    return {
+        "schema": "trinityaccord.record-chain-intake-idempotency.v1",
+        "submission_sha256": submission_sha256,
+        "stored_submission_sha256": stored_submission_sha256,
+        "receipt_id": receipt_id,
+        "receipt_path": receipt_path,
+        "pending_file_path": pending_file_path,
+        "intake_submission_path": intake_submission_path,
+        "record_type": record_type,
+        "created_at": now.isoformat().replace("+00:00", "Z"),
+    }
+
+
+async def _read_idempotency_index(submission_sha256: str) -> dict[str, Any] | None:
+    path = _idempotency_index_path(submission_sha256)
+    text = await get_file_text(path)
+    if text is None:
+        return None
+    data = json.loads(text)
+    if data.get("submission_sha256") != submission_sha256:
+        raise RuntimeError(f"Idempotency index hash mismatch at {path}")
+    return data
+
+
+async def _submit_response_from_idempotency_index(
+    *,
+    index: dict[str, Any],
+    record_type: str,
+    submission_sha256: str,
+    received_raw_body_sha256: str,
+    body: dict[str, Any],
+) -> SubmitResponse:
+    receipt_path = index.get("receipt_path", "")
+    receipt_data: dict[str, Any] | None = None
+    if isinstance(receipt_path, str) and receipt_path:
+        receipt_text = await get_file_text(receipt_path)
+        if receipt_text:
+            parsed = json.loads(receipt_text)
+            if isinstance(parsed, dict):
+                receipt_data = parsed
+
+    receipt_id = (
+        (receipt_data or {}).get("server_receipt_id")
+        or (receipt_data or {}).get("receipt_id")
+        or index.get("receipt_id")
+        or ""
+    )
+
+    return SubmitResponse(
+        accepted=True,
+        submitted=True,
+        receipt_id=receipt_id,
+        record_type=index.get("record_type", record_type),
+        submission_sha256=submission_sha256,
+        received_raw_body_sha256=received_raw_body_sha256,
+        pending_file_path=index.get("pending_file_path", ""),
+        intake_submission_path=index.get("intake_submission_path", ""),
+        receipt_path=receipt_path,
+        server_created_at=(receipt_data or {}).get("accepted_at", index.get("created_at", "")),
+        append_status="duplicate_existing_submission_returned",
+        receipt=receipt_data,
+        diagnostics=[],
+        warnings=["Duplicate submission: existing idempotency index found; original receipt returned."],
+        boundary=_build_boundary(body),
+        created_pending_records=[
+            p for p in [index.get("pending_file_path", "")]
+            if isinstance(p, str) and p
+        ],
+    )
+
+
+# ---------------------------------------------------------------------------
+# BLOCKER 2 helper: Streaming body overflow 413 payload
+# ---------------------------------------------------------------------------
+
+def _request_body_too_large_payload(size: int, *, preflight: bool) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "accepted": False,
+        "received_raw_body_sha256": "",
+        "diagnostics": [{
+            "code": "REQUEST_BODY_TOO_LARGE",
+            "severity": "error",
+            "field": None,
+            "message": f"Request body too large ({size} > {_MAX_BODY_BYTES} bytes)",
+            "meaning": "The request body exceeded the gateway maximum before it could be safely parsed.",
+            "suggested_fix": f"Submit a JSON body no larger than {_MAX_BODY_BYTES} bytes.",
+            "retry_allowed": True,
+        }],
+        "boundary": {},
+    }
+    if preflight:
+        payload.update({
+            "preflight": True,
+            "route_detected": "unknown",
+            "record_type": "",
+            "submission_sha256": "",
+            "warnings": [],
+            "gateway_runtime": _build_gateway_runtime(),
+            "gateway_schema": _GATEWAY_SCHEMA,
+        })
+    else:
+        payload.update({
+            "submitted": False,
+        })
+    return payload
+
+
+# ---------------------------------------------------------------------------
 # Health & readiness
 # ---------------------------------------------------------------------------
 
@@ -650,26 +776,9 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
     try:
         raw_body = await _read_limited_body(request)
     except RequestBodyTooLarge as exc:
-        diag = Diagnostic(
-            code="REQUEST_BODY_TOO_LARGE",
-            severity="error",
-            message=f"Request body too large ({exc.size} > {_MAX_BODY_BYTES} bytes)",
-        )
         return JSONResponse(
             status_code=413,
-            content={
-                "accepted": False,
-                "preflight": True,
-                "route_detected": "unknown",
-                "record_type": "",
-                "submission_sha256": "",
-                "received_raw_body_sha256": "",
-                "diagnostics": [diag.model_dump()],
-                "gateway_runtime": _build_gateway_runtime(),
-                "gateway_schema": _GATEWAY_SCHEMA,
-                "boundary": {},
-                "agent_recovery": _build_agent_recovery([diag]).model_dump(),
-            },
+            content=_request_body_too_large_payload(exc.size, preflight=True),
         )
 
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
@@ -763,17 +872,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     except RequestBodyTooLarge as exc:
         return JSONResponse(
             status_code=413,
-            content={
-                "accepted": False,
-                "submitted": False,
-                "received_raw_body_sha256": "",
-                "diagnostics": [Diagnostic(
-                    code="REQUEST_BODY_TOO_LARGE",
-                    severity="error",
-                    message=f"Request body too large ({exc.size} > {_MAX_BODY_BYTES} bytes)",
-                ).model_dump()],
-                "boundary": {},
-            },
+            content=_request_body_too_large_payload(exc.size, preflight=False),
         )
 
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
@@ -1094,80 +1193,78 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
             commit_sha = result4.get("commit", {}).get("sha")
 
-            # Part B: write global idempotency index
-            idempotency_index_data = {
-                "schema": "trinityaccord.record-chain-intake-idempotency.v1",
-                "submission_sha256": original_submission_sha256,
-                "stored_submission_sha256": stored_submission_sha256,
-                "receipt_id": receipt_id,
-                "receipt_path": receipt_path,
-                "pending_file_path": pending_file_path,
-                "intake_submission_path": intake_submission_path,
-                "record_type": record_type,
-                "created_at": now.isoformat().replace("+00:00", "Z"),
-            }
+            # Part B: write global idempotency index (fail-closed)
+            idempotency_index_data = _build_idempotency_index_data(
+                submission_sha256=original_submission_sha256,
+                stored_submission_sha256=stored_submission_sha256,
+                receipt_id=receipt_id,
+                receipt_path=receipt_path,
+                pending_file_path=pending_file_path,
+                intake_submission_path=intake_submission_path,
+                record_type=record_type,
+                now=now,
+            )
+
             try:
-                await put_file(
+                result_idx = await put_file(
                     idempotency_path,
                     canonical_dumps(idempotency_index_data),
                     f"intake: idempotency index {original_submission_sha256[:16]}",
                     sha=None,
                 )
+                if result_idx.get("content", {}).get("sha"):
+                    created_files_for_rollback.append((idempotency_path, result_idx["content"]["sha"]))
                 logger.info("Wrote idempotency index %s", idempotency_path)
-            except Exception as idemp_exc:
-                # Idempotency index write failed — check if race (existing index)
-                logger.warning("Idempotency index write failed for %s: %s", original_submission_sha256[:16], idemp_exc)
-                try:
-                    existing_idx_text = await get_file_text(idempotency_path)
-                    if existing_idx_text is not None:
-                        existing_idx = json.loads(existing_idx_text)
-                        existing_receipt_id = existing_idx.get("receipt_id", "")
-                        if existing_receipt_id and existing_receipt_id != receipt_id:
-                            # Race: another submission won. Rollback our files, return existing.
-                            logger.error(
-                                "Idempotency race: existing receipt_id=%s, ours=%s. Rolling back.",
-                                existing_receipt_id, receipt_id,
-                            )
-                            await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
-                            existing_receipt_path = existing_idx.get("receipt_path", "")
-                            existing_receipt_data = None
-                            if existing_receipt_path:
-                                existing_receipt_text = await get_file_text(existing_receipt_path)
-                                if existing_receipt_text:
-                                    existing_receipt_data = json.loads(existing_receipt_text)
-                            return SubmitResponse(
-                                accepted=True,
-                                submitted=True,
-                                receipt_id=existing_receipt_id,
-                                record_type=record_type,
-                                submission_sha256=submission_sha256,
-                                received_raw_body_sha256=received_raw_body_sha256,
-                                pending_file_path=existing_idx.get("pending_file_path", ""),
-                                intake_submission_path=existing_idx.get("intake_submission_path", ""),
-                                receipt_path=existing_receipt_path,
-                                server_created_at=existing_idx.get("created_at", ""),
-                                append_status="duplicate_existing_submission_returned",
-                                receipt=existing_receipt_data,
-                                diagnostics=[],
-                                warnings=["Idempotency race: rolled back new files, returned existing receipt."],
-                                boundary=_build_boundary(body),
-                            )
-                except Exception:
-                    pass
 
-                # Cannot confirm existing index — rollback and fail
-                logger.error("Idempotency index write failed and no existing index confirmed. Rolling back %d files.", len(created_files_for_rollback))
+            except Exception as idemp_exc:
+                logger.warning(
+                    "Idempotency index write failed for %s: %s",
+                    original_submission_sha256[:16],
+                    idemp_exc,
+                )
+
+                existing_idx: dict[str, Any] | None = None
+                try:
+                    existing_idx = await _read_idempotency_index(original_submission_sha256)
+                except Exception as read_exc:
+                    logger.warning(
+                        "Could not read existing idempotency index for %s after write failure: %s",
+                        original_submission_sha256[:16],
+                        read_exc,
+                    )
+
                 await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
+
+                if existing_idx is not None:
+                    try:
+                        return await _submit_response_from_idempotency_index(
+                            index=existing_idx,
+                            record_type=record_type,
+                            submission_sha256=original_submission_sha256,
+                            received_raw_body_sha256=received_raw_body_sha256,
+                            body=body,
+                        )
+                    except Exception as response_exc:
+                        logger.error(
+                            "Existing idempotency index could not be converted into response for %s: %s",
+                            original_submission_sha256[:16],
+                            response_exc,
+                        )
+
                 return SubmitResponse(
                     accepted=False,
                     submitted=False,
                     record_type=record_type,
-                    submission_sha256=submission_sha256,
+                    submission_sha256=original_submission_sha256,
                     received_raw_body_sha256=received_raw_body_sha256,
                     diagnostics=[Diagnostic(
-                        code="IDEMPOTENCY_INDEX_WRITE_FAILED",
+                        code="IDEMPOTENCY_INDEX_PERSIST_FAILED",
                         severity="error",
-                        message=f"Idempotency index write failed: {idemp_exc}. Created files rolled back.",
+                        field="record-chain/intake/by-submission-sha256",
+                        message=f"Persisted intake artifacts were rolled back because idempotency index creation failed: {idemp_exc}",
+                        meaning="The gateway must not accept an intake without its global duplicate-submission index.",
+                        suggested_fix="Retry the same submission later; if the original request succeeded concurrently, the gateway will return the existing receipt.",
+                        retry_allowed=True,
                     )],
                     boundary=_build_boundary(body),
                 )
