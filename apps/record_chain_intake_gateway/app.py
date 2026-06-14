@@ -106,8 +106,25 @@ app = FastAPI(
 
 
 # ---------------------------------------------------------------------------
-# Middleware — body-size enforcement
+# Middleware — body-size enforcement (uses diagnostic shape for 413)
 # ---------------------------------------------------------------------------
+
+def _body_too_large_diagnostic_payload(size: int) -> dict[str, Any]:
+    """Route-agnostic 413 payload with diagnostic shape. Used by middleware."""
+    return {
+        "accepted": False,
+        "diagnostics": [{
+            "code": "REQUEST_BODY_TOO_LARGE",
+            "severity": "error",
+            "field": None,
+            "message": f"Request body too large ({size} > {_MAX_BODY_BYTES} bytes)",
+            "meaning": "The request body exceeded the gateway maximum before it could be safely parsed.",
+            "suggested_fix": f"Submit a JSON body no larger than {_MAX_BODY_BYTES} bytes.",
+            "retry_allowed": True,
+        }],
+        "boundary": {},
+    }
+
 
 @app.middleware("http")
 async def enforce_body_size(request: Request, call_next):
@@ -115,14 +132,11 @@ async def enforce_body_size(request: Request, call_next):
     content_length = request.headers.get("content-length")
     if content_length is not None:
         try:
-            if int(content_length) > _MAX_BODY_BYTES:
+            size = int(content_length)
+            if size > _MAX_BODY_BYTES:
                 return JSONResponse(
                     status_code=413,
-                    content={
-                        "ok": False,
-                        "accepted": False,
-                        "error": f"Request body too large ({content_length} > {_MAX_BODY_BYTES} bytes)",
-                    },
+                    content=_body_too_large_diagnostic_payload(size),
                 )
         except ValueError:
             pass
@@ -645,20 +659,30 @@ async def _submit_response_from_idempotency_index(
     body: dict[str, Any],
 ) -> SubmitResponse:
     receipt_path = index.get("receipt_path", "")
-    receipt_data: dict[str, Any] | None = None
-    if isinstance(receipt_path, str) and receipt_path:
-        receipt_text = await get_file_text(receipt_path)
-        if receipt_text:
-            parsed = json.loads(receipt_text)
-            if isinstance(parsed, dict):
-                receipt_data = parsed
+    if not isinstance(receipt_path, str) or not receipt_path:
+        raise RuntimeError("Idempotency index is missing receipt_path")
+
+    receipt_text = await get_file_text(receipt_path)
+    if not receipt_text:
+        raise RuntimeError(f"Idempotency receipt is missing: {receipt_path}")
+
+    receipt_data: dict[str, Any] = json.loads(receipt_text)
+    if not isinstance(receipt_data, dict):
+        raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
 
     receipt_id = (
-        (receipt_data or {}).get("server_receipt_id")
-        or (receipt_data or {}).get("receipt_id")
+        receipt_data.get("server_receipt_id")
+        or receipt_data.get("receipt_id")
         or index.get("receipt_id")
         or ""
     )
+    if not receipt_id:
+        raise RuntimeError(f"Idempotency receipt has no receipt id: {receipt_path}")
+
+    if index.get("receipt_id") and index.get("receipt_id") != receipt_id:
+        raise RuntimeError(
+            f"Idempotency receipt_id mismatch: index={index.get('receipt_id')} receipt={receipt_id}"
+        )
 
     return SubmitResponse(
         accepted=True,
@@ -670,7 +694,7 @@ async def _submit_response_from_idempotency_index(
         pending_file_path=index.get("pending_file_path", ""),
         intake_submission_path=index.get("intake_submission_path", ""),
         receipt_path=receipt_path,
-        server_created_at=(receipt_data or {}).get("accepted_at", index.get("created_at", "")),
+        server_created_at=receipt_data.get("accepted_at", index.get("created_at", "")),
         append_status="duplicate_existing_submission_returned",
         receipt=receipt_data,
         diagnostics=[],
@@ -688,20 +712,9 @@ async def _submit_response_from_idempotency_index(
 # ---------------------------------------------------------------------------
 
 def _request_body_too_large_payload(size: int, *, preflight: bool) -> dict[str, Any]:
-    payload: dict[str, Any] = {
-        "accepted": False,
-        "received_raw_body_sha256": "",
-        "diagnostics": [{
-            "code": "REQUEST_BODY_TOO_LARGE",
-            "severity": "error",
-            "field": None,
-            "message": f"Request body too large ({size} > {_MAX_BODY_BYTES} bytes)",
-            "meaning": "The request body exceeded the gateway maximum before it could be safely parsed.",
-            "suggested_fix": f"Submit a JSON body no larger than {_MAX_BODY_BYTES} bytes.",
-            "retry_allowed": True,
-        }],
-        "boundary": {},
-    }
+    """Extended 413 payload with route-specific fields for preflight/submit."""
+    payload = _body_too_large_diagnostic_payload(size)
+    payload["received_raw_body_sha256"] = ""
     if preflight:
         payload.update({
             "preflight": True,
@@ -918,37 +931,69 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             boundary=_build_boundary(body),
         )
 
-    # --- Part B: global idempotency check (after validation, before rate limit) ---
+    # --- Part B: global idempotency check (fail-closed, before rate limit) ---
     original_submission_sha256 = sha256_canonical_json(body)
     record_type = detect_route(body)
-    idempotency_path = f"record-chain/intake/by-submission-sha256/{original_submission_sha256}.json"
 
+    existing_idx: dict[str, Any] | None = None
     try:
-        existing_idempotency_text = await get_file_text(idempotency_path)
-        if existing_idempotency_text is not None:
-            existing_index = json.loads(existing_idempotency_text)
-            existing_receipt_path = existing_index.get("receipt_path", "")
-            existing_receipt_text = await get_file_text(existing_receipt_path) if existing_receipt_path else None
-            existing_receipt = json.loads(existing_receipt_text) if existing_receipt_text else existing_index
-            return SubmitResponse(
-                accepted=True,
-                submitted=True,
-                receipt_id=existing_receipt.get("server_receipt_id") or existing_receipt.get("receipt_id") or "",
-                record_type=existing_index.get("record_type", record_type),
+        existing_idx = await _read_idempotency_index(original_submission_sha256)
+    except Exception as exc:
+        logger.warning(
+            "Idempotency index lookup failed for %s: %s",
+            original_submission_sha256[:16],
+            exc,
+        )
+        return SubmitResponse(
+            accepted=False,
+            submitted=False,
+            record_type=record_type,
+            submission_sha256=original_submission_sha256,
+            received_raw_body_sha256=received_raw_body_sha256,
+            diagnostics=[Diagnostic(
+                code="IDEMPOTENCY_INDEX_LOOKUP_FAILED",
+                severity="error",
+                field="record-chain/intake/by-submission-sha256",
+                message=f"Could not safely check global idempotency index: {exc}",
+                meaning="The gateway must not risk accepting a duplicate when the idempotency index cannot be checked safely.",
+                suggested_fix="Retry later. If a prior submission succeeded, the gateway should return its existing receipt once idempotency storage is readable.",
+                retry_allowed=True,
+            )],
+            boundary=_build_boundary(body),
+        )
+
+    if existing_idx is not None:
+        try:
+            return await _submit_response_from_idempotency_index(
+                index=existing_idx,
+                record_type=record_type,
                 submission_sha256=original_submission_sha256,
                 received_raw_body_sha256=received_raw_body_sha256,
-                pending_file_path=existing_index.get("pending_file_path", ""),
-                intake_submission_path=existing_index.get("intake_submission_path", ""),
-                receipt_path=existing_receipt_path,
-                server_created_at=existing_receipt.get("accepted_at", existing_index.get("created_at", "")),
-                append_status="duplicate_existing_submission_returned",
-                receipt=None,
-                diagnostics=[],
-                warnings=["Duplicate submission: existing idempotency index found; original receipt returned."],
+                body=body,
+            )
+        except Exception as exc:
+            logger.warning(
+                "Existing idempotency index could not be resolved for %s: %s",
+                original_submission_sha256[:16],
+                exc,
+            )
+            return SubmitResponse(
+                accepted=False,
+                submitted=False,
+                record_type=record_type,
+                submission_sha256=original_submission_sha256,
+                received_raw_body_sha256=received_raw_body_sha256,
+                diagnostics=[Diagnostic(
+                    code="IDEMPOTENCY_INDEX_LOOKUP_FAILED",
+                    severity="error",
+                    field="record-chain/intake/by-submission-sha256",
+                    message=f"Existing idempotency index could not be resolved to a valid receipt: {exc}",
+                    meaning="The gateway found duplicate-submission state but could not safely return the original receipt.",
+                    suggested_fix="Retry later or ask an operator to inspect the idempotency index and receipt path.",
+                    retry_allowed=True,
+                )],
                 boundary=_build_boundary(body),
             )
-    except Exception as exc:
-        logger.warning("Idempotency index lookup failed for %s: %s", original_submission_sha256[:16], exc)
 
     # --- rate limit check (only on submit, not preflight) ---
     rate_limit_result = check_rate_limit(body)
@@ -1194,6 +1239,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             commit_sha = result4.get("commit", {}).get("sha")
 
             # Part B: write global idempotency index (fail-closed)
+            idempotency_path = _idempotency_index_path(original_submission_sha256)
             idempotency_index_data = _build_idempotency_index_data(
                 submission_sha256=original_submission_sha256,
                 stored_submission_sha256=stored_submission_sha256,
