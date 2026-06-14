@@ -1605,6 +1605,11 @@ function generateTemplate(recordType) {
       record_type: "context_insufficient_notice",
       reason: "__helper_note: Reason why context is insufficient",
     }),
+    "context_insufficient_notice": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "context_insufficient_notice",
+      reason: "__helper_note: Reason why context is insufficient",
+    }),
   };
 
   const builder = builders[rt];
