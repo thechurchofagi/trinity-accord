@@ -94,5 +94,5 @@
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
   "strict_bitcoin_verified": false,
   "strict_verify_unavailable_reason": "no_bitcoin_node",
-  "verified_at": "2026-06-14T18:54:57Z"
+  "verified_at": "2026-06-14T20:50:59Z"
 }
