@@ -750,7 +750,7 @@ def main() -> int:
         fail(f"archive backlog and builder flow contract failed:\n{result.stdout}\n{result.stderr}")
     ok("archive backlog and builder flow contract")
 
-        # Record-chain pipeline real-bug contract
+    # Record-chain pipeline real-bug contract
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_pipeline_real_bug_contract.py"],
         cwd=ROOT,
