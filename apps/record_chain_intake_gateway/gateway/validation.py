@@ -395,7 +395,7 @@ def _extract_submission_boundary(submission: dict[str, Any]) -> tuple[dict[str, 
     live in ``record_draft.non_authority_boundary_acknowledgement``. The gateway
     validates the merged view so builder output can satisfy both contracts.
     """
-    draft = submission.get("record_draft") or submission.get("draft") or {}
+    draft = submission.get("record_draft") or {}
     draft_boundary = None
     if isinstance(draft, dict) and isinstance(draft.get("non_authority_boundary_acknowledgement"), dict):
         draft_boundary = draft["non_authority_boundary_acknowledgement"]
@@ -548,7 +548,7 @@ def validate_linked_guardian_request(draft: dict[str, Any]) -> list[Diagnostic]:
     if does_request is not True:
         return diagnostics
 
-    record_type = draft.get("record_type") or draft.get("type") or ""
+    record_type = draft.get("record_type") or ""
     if isinstance(record_type, str):
         record_type = record_type.strip().lower()
 
@@ -924,17 +924,119 @@ def validate_authorship_proof_presence(
     return diagnostics
 
 
+# ---------------------------------------------------------------------------
+# Part A: envelope alias / record-type helpers
+# ---------------------------------------------------------------------------
+
+_DRAFT_MISSING = object()
+
+
+def normalize_record_type_value(value: Any) -> str:
+    """Normalize a record_type value to lowercase underscored form."""
+    if isinstance(value, str):
+        return value.strip().lower().replace("-", "_")
+    return ""
+
+
+def record_draft_value(submission: dict[str, Any]) -> Any:
+    """Return the raw record_draft value, or _DRAFT_MISSING sentinel."""
+    return submission.get("record_draft", _DRAFT_MISSING)
+
+
+def extract_record_draft(submission: dict[str, Any]) -> dict[str, Any] | None:
+    """Return record_draft if it is a dict, else None."""
+    draft = submission.get("record_draft")
+    return draft if isinstance(draft, dict) else None
+
+
+def validate_envelope_aliases_and_record_type(
+    submission: dict[str, Any],
+    draft: dict[str, Any] | None,
+) -> list[Diagnostic]:
+    """Reject retired top-level aliases and enforce record_type consistency."""
+    diagnostics: list[Diagnostic] = []
+
+    if "draft" in submission:
+        diagnostics.append(_make_diagnostic(
+            code="DRAFT_ALIAS_RETIRED",
+            severity="error",
+            field="draft",
+            message="The top-level 'draft' alias is retired. Use only 'record_draft'.",
+            meaning="The gateway signs, verifies, and persists record_draft. Keeping draft creates ambiguous signing semantics.",
+            suggested_fix="Remove top-level draft, keep record_draft, and rebuild the authorship proof if the signed object changed.",
+            retry_allowed=True,
+        ))
+
+    if "type" in submission:
+        diagnostics.append(_make_diagnostic(
+            code="TYPE_ALIAS_RETIRED",
+            severity="error",
+            field="type",
+            message="The top-level 'type' alias is retired. Use only 'record_type'.",
+            meaning="The gateway must not route using a legacy type alias when record_type is the public schema field.",
+            suggested_fix="Remove top-level type and set record_type explicitly.",
+            retry_allowed=True,
+        ))
+
+    top_rt = normalize_record_type_value(submission.get("record_type"))
+    if not top_rt:
+        diagnostics.append(_make_diagnostic(
+            code="MISSING_RECORD_TYPE",
+            severity="error",
+            field="record_type",
+            message="Missing required field 'record_type'.",
+            meaning="Every public submission must specify record_type.",
+            suggested_fix="Add a top-level record_type matching record_draft.record_type.",
+            retry_allowed=True,
+        ))
+
+    if draft is None:
+        return diagnostics
+
+    draft_rt = normalize_record_type_value(draft.get("record_type"))
+    if not draft_rt:
+        diagnostics.append(_make_diagnostic(
+            code="MISSING_DRAFT_RECORD_TYPE",
+            severity="error",
+            field="record_draft.record_type",
+            message="record_draft.record_type is required.",
+            meaning="The signed record draft must declare the same record type as the submission envelope.",
+            suggested_fix="Add record_draft.record_type matching top-level record_type and rebuild the authorship proof.",
+            retry_allowed=True,
+        ))
+        return diagnostics
+
+    if top_rt and draft_rt and top_rt != draft_rt:
+        diagnostics.append(_make_diagnostic(
+            code="RECORD_TYPE_MISMATCH",
+            severity="error",
+            field="record_draft.record_type",
+            message=f"Top-level record_type {top_rt!r} does not match record_draft.record_type {draft_rt!r}.",
+            meaning="The gateway cannot route one record type while persisting a signed draft of another record type.",
+            suggested_fix="Rebuild so record_type and record_draft.record_type are identical.",
+            retry_allowed=True,
+        ))
+
+    return diagnostics
+
+
 def detect_route(submission: dict[str, Any]) -> str:
     """Determine the processing route for *submission*.
 
     Returns the record_type string if valid, otherwise ``"unknown"``.
     """
-    record_type = submission.get("record_type") or submission.get("type") or ""
-    if isinstance(record_type, str):
-        record_type = record_type.strip().lower()
-    if record_type in ALLOWED_RECORD_TYPES:
-        return record_type
-    return "unknown"
+    if "type" in submission or "draft" in submission:
+        return "unknown"
+
+    top_rt = normalize_record_type_value(submission.get("record_type"))
+    draft = extract_record_draft(submission)
+    draft_rt = normalize_record_type_value((draft or {}).get("record_type")) if draft else ""
+
+    if top_rt and draft_rt and top_rt != draft_rt:
+        return "unknown"
+
+    record_type = draft_rt or top_rt
+    return record_type if record_type in ALLOWED_RECORD_TYPES else "unknown"
 
 
 def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
@@ -955,27 +1057,40 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
             suggested_fix="Wrap your submission in a JSON object.",
         )]
 
-    record_type = submission.get("record_type") or submission.get("type")
-    rt = ""
-    if not record_type:
+    # --- Part A: sentinel-safe record_draft extraction ---
+    draft_raw = record_draft_value(submission)
+    draft: dict[str, Any] | None = None
+
+    if draft_raw is _DRAFT_MISSING:
         diagnostics.append(_make_diagnostic(
-            code="MISSING_RECORD_TYPE",
+            code="MISSING_DRAFT",
             severity="error",
-            field="record_type",
-            message="Missing required field 'record_type'",
-            meaning="Every submission must specify a record_type.",
-            suggested_fix="Add 'record_type' to your submission (e.g. 'echo', 'verification').",
+            field="record_draft",
+            message="Missing required field 'record_draft'.",
+            meaning="Every public submission must include a signed record_draft object.",
+            suggested_fix="Add record_draft and rebuild the authorship proof.",
+            retry_allowed=True,
         ))
-    elif not isinstance(record_type, str):
+    elif not isinstance(draft_raw, dict):
         diagnostics.append(_make_diagnostic(
-            code="INVALID_RECORD_TYPE",
+            code="INVALID_DRAFT",
             severity="error",
-            field="record_type",
-            message=f"'record_type' must be a string, got {type(record_type).__name__}",
-            meaning="record_type must be a string value.",
-            suggested_fix="Change record_type to a string.",
+            field="record_draft",
+            message="'record_draft' must be a JSON object.",
+            meaning="The signed draft must be a JSON object.",
+            suggested_fix="Change record_draft to an object and rebuild the authorship proof.",
+            retry_allowed=True,
         ))
     else:
+        draft = draft_raw
+
+    # --- Part A: reject retired aliases + enforce record_type consistency ---
+    diagnostics.extend(validate_envelope_aliases_and_record_type(submission, draft))
+
+    # Derive rt from record_type only (not legacy 'type' alias)
+    record_type = submission.get("record_type")
+    rt = ""
+    if isinstance(record_type, str):
         rt = record_type.strip().lower()
         if rt not in ALLOWED_RECORD_TYPES:
             diagnostics.append(_make_diagnostic(
@@ -989,26 +1104,6 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
                 meaning="The submitted record_type is not in the list of accepted types.",
                 suggested_fix=f"Use one of: {', '.join(sorted(ALLOWED_RECORD_TYPES))}",
             ))
-
-    draft = submission.get("draft") or submission.get("record_draft")
-    if draft is None:
-        diagnostics.append(_make_diagnostic(
-            code="MISSING_DRAFT",
-            severity="error",
-            field="draft",
-            message="Missing required field 'draft' (or 'record_draft')",
-            meaning="Every submission must include a draft record.",
-            suggested_fix="Add a 'record_draft' object to your submission.",
-        ))
-    elif not isinstance(draft, dict):
-        diagnostics.append(_make_diagnostic(
-            code="INVALID_DRAFT",
-            severity="error",
-            field="draft",
-            message="'draft' must be a JSON object",
-            meaning="The draft must be a JSON object.",
-            suggested_fix="Change draft to a JSON object.",
-        ))
 
     # --- linked Guardian auto-creation disabled (fail-fast at preflight) ---
     if isinstance(draft, dict):

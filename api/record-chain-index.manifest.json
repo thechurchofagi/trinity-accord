@@ -1,7 +1,10 @@
 {
   "authority": "derived indexes; main.chain.jsonl is authoritative",
   "chain_id": "trinity-record-chain-main",
-  "generated_at": "2026-06-06T13:59:49Z",
+  "generated_at": "2026-06-14T06:58:35Z",
+  "historical_archive_only": true,
+  "legacy_hash_chain_view": true,
+  "not_current_native_record_chain_index": true,
   "record_types": [
     {
       "index_file": "record-chain-index.context_insufficient_notice.json",
@@ -14,9 +17,9 @@
       "record_type_slug": "echo"
     },
     {
-      "index_file": "record-chain-index.verification.json",
-      "record_type": "verification",
-      "record_type_slug": "verification"
+      "index_file": "record-chain-index.exit_application.json",
+      "record_type": "exit_application",
+      "record_type_slug": "exit_application"
     },
     {
       "index_file": "record-chain-index.guardian_application.json",
@@ -24,31 +27,19 @@
       "record_type_slug": "guardian_application"
     },
     {
-      "index_file": "record-chain-index.guardian_retirement.json",
-      "record_type": "guardian_retirement",
-      "record_type_slug": "guardian_retirement"
+      "index_file": "record-chain-index.guardian_exit_application.json",
+      "record_type": "guardian_exit_application",
+      "record_type_slug": "guardian_exit_application"
     },
     {
-      "index_file": "record-chain-index.guardian_key_rotation.json",
-      "record_type": "guardian_key_rotation",
-      "record_type_slug": "guardian_key_rotation"
-    },
-    {
-      "index_file": "record-chain-index.propagation.json",
-      "record_type": "propagation",
-      "record_type_slug": "propagation"
-    },
-    {
-      "index_file": "record-chain-index.correction.json",
-      "record_type": "correction",
-      "record_type_slug": "correction"
-    },
-    {
-      "index_file": "record-chain-index.classification_update.json",
-      "record_type": "classification_update",
-      "record_type_slug": "classification_update"
+      "index_file": "record-chain-index.verification.json",
+      "record_type": "verification",
+      "record_type_slug": "verification"
     }
   ],
+  "replacement_current_status_api": "/api/record-chain-status.json",
+  "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+  "replacement_native_record_index": "/record-chain/indexes/record-index.json",
   "schema": "trinity_record_chain_index_manifest.v1",
   "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
 }

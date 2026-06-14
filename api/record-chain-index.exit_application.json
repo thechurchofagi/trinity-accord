@@ -1,13 +1,19 @@
 {
-  "authority": "derived index; main.chain.jsonl is authoritative",
+  "authority": "legacy hash-chain derived index; not current native Record-Chain index",
   "chain_id": "trinity-record-chain-main",
   "chain_version": 1,
   "entries": [],
   "entry_count": 0,
-  "generated_at": "2026-06-06T13:59:49Z",
+  "generated_at": "2026-06-14T06:58:35Z",
+  "historical_archive_only": true,
   "index_file": "record-chain-index.exit_application.json",
+  "legacy_hash_chain_view": true,
+  "not_current_native_record_chain_index": true,
   "record_type": "exit_application",
   "record_type_slug": "exit_application",
+  "replacement_current_status_api": "/api/record-chain-status.json",
+  "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+  "replacement_native_record_index": "/record-chain/indexes/record-index.json",
   "schema": "trinity_record_chain_type_index.v1",
   "source_ledger": "record-chain/hash-chain/main.chain.jsonl"
 }

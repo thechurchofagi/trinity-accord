@@ -9,9 +9,13 @@ The machine-readable registry source is:
 
 [`/api/guardian-registry.json`](/api/guardian-registry.json)
 
-## Current active Guardians
+## Historical legacy Guardian key listings
 
-**Total: 26** (reserved: 3, ordinary: 23)
+This page is a historical, non-authoritative key-continuity listing from the pre-Record-Chain Guardian application system.
+
+It is not the current active Guardian status. Current Guardian status must be derived from Record-Chain Guardian records and public status APIs. A registry number or legacy listing alone does not create authority, governance, verification level, successor reception, legal status, rank, or amendment.
+
+**Historical listings: 26** (reserved: 3, ordinary: 23)
 
 Human-AI joint: 23; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 

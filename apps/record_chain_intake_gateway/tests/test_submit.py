@@ -23,14 +23,15 @@ class TestSubmitWrites:
             pytest.fail(f"Submit not accepted: {_json.dumps(data, indent=2)}")
         assert data["submitted"] is True
 
-        # Check put_file was called 3 times
+        # Check put_file was called 4 times (submission + pending + receipt + idempotency index)
         put_mock = mock_github["put_file"]
-        assert put_mock.call_count == 3
+        assert put_mock.call_count == 4
 
         paths = [call.args[0] for call in put_mock.call_args_list]
         assert any("intake/submissions/" in p for p in paths), f"Missing intake submission: {paths}"
         assert any("intake/receipts/" in p for p in paths), f"Missing intake receipt: {paths}"
         assert any("pending/" in p for p in paths), f"Missing pending file: {paths}"
+        assert any("by-submission-sha256/" in p for p in paths), f"Missing idempotency index: {paths}"
 
     def test_pending_file_is_draft_only(self, signed_echo_submission, mock_github):
         resp = client.post("/record-chain/submit", json=signed_echo_submission)

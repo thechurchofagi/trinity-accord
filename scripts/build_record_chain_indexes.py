@@ -91,10 +91,41 @@ def main() -> None:
     head = build_chain_head(entries, chain_id=args.chain_id, generated_at=generated_at)
     all_index = build_all_index(entries, chain_id=args.chain_id, generated_at=generated_at)
 
+    # Part D: fail-closed metadata for legacy APIs
+    _FAIL_CLOSED_META = {
+        "historical_archive_only": True,
+        "legacy_hash_chain_view": True,
+        "not_current_native_record_chain_head": True,
+        "replacement_current_status_api": "/api/record-chain-status.json",
+        "replacement_native_record_index": "/record-chain/indexes/record-index.json",
+        "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+        "authority": "legacy hash-chain view; not current native Record-Chain head",
+    }
+    head.update(_FAIL_CLOSED_META)
+    all_index.update({
+        "historical_archive_only": True,
+        "legacy_hash_chain_view": True,
+        "not_current_native_record_chain_index": True,
+        "replacement_current_status_api": "/api/record-chain-status.json",
+        "replacement_native_record_index": "/record-chain/indexes/record-index.json",
+        "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+        "authority": "legacy hash-chain derived index; not current native Record-Chain index",
+    })
+
     write_json_atomic(out_dir / "record-chain-head.json", head)
+    write_json_atomic(out_dir / "record-chain-index.all.json", all_index)
     write_json_atomic(out_dir / "record-chain-index.all.json", all_index)
 
     written_indexes = []
+    _INDEX_FAIL_CLOSED_META = {
+        "historical_archive_only": True,
+        "legacy_hash_chain_view": True,
+        "not_current_native_record_chain_index": True,
+        "replacement_current_status_api": "/api/record-chain-status.json",
+        "replacement_native_record_index": "/record-chain/indexes/record-index.json",
+        "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+        "authority": "legacy hash-chain derived index; not current native Record-Chain index",
+    }
     for record_type in record_types:
         index = build_type_index(
             entries,
@@ -102,6 +133,7 @@ def main() -> None:
             record_type=record_type,
             generated_at=generated_at,
         )
+        index.update(_INDEX_FAIL_CLOSED_META)
         out_file = out_dir / index["index_file"]
         write_json_atomic(out_file, index)
         written_indexes.append(str(out_file))
@@ -111,6 +143,13 @@ def main() -> None:
         "chain_id": args.chain_id,
         "generated_at": generated_at,
         "source_ledger": str(ledger_path),
+        "historical_archive_only": True,
+        "legacy_hash_chain_view": True,
+        "not_current_native_record_chain_index": True,
+        "replacement_current_status_api": "/api/record-chain-status.json",
+        "replacement_native_record_index": "/record-chain/indexes/record-index.json",
+        "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+        "authority": "legacy hash-chain derived indexes; not current native Record-Chain authority",
         "record_types": [
             {
                 "record_type": record_type,

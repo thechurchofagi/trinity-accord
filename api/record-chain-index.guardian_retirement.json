@@ -1,7 +1,0 @@
-{
-  "schema": "trinity_record_chain_type_index.v1",
-  "chain_id": "trinity-record-chain-main",
-  "record_type": "guardian_retirement",
-  "records": [],
-  "count": 0
-}

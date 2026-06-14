@@ -40,6 +40,7 @@ from apps.record_chain_intake_gateway.gateway.validation import (
     ALLOWED_RECORD_TYPES,
     REQUIRED_BOUNDARY_FIELDS,
     detect_route,
+    extract_record_draft,
     validate_submission,
 )
 
@@ -129,6 +130,30 @@ async def enforce_body_size(request: Request, call_next):
 
 
 # ---------------------------------------------------------------------------
+# Part G: Streaming body-size limit
+# ---------------------------------------------------------------------------
+
+class RequestBodyTooLarge(Exception):
+    def __init__(self, size: int):
+        self.size = size
+
+
+async def _read_limited_body(request: Request) -> bytes:
+    """Read request body with streaming size enforcement.
+
+    Works even when Content-Length is absent (chunked transfer).
+    """
+    chunks: list[bytes] = []
+    total = 0
+    async for chunk in request.stream():
+        total += len(chunk)
+        if total > _MAX_BODY_BYTES:
+            raise RequestBodyTooLarge(total)
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
@@ -212,7 +237,7 @@ def _client_projection_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
     External clients should submit the pre-append signed draft. Projection and
     append-assigned fields are derived by the server after verification.
     """
-    draft = body.get("record_draft") or body.get("draft") or {}
+    draft = extract_record_draft(body) or {}
     if not isinstance(draft, dict):
         return []
     diagnostics: list[Diagnostic] = []
@@ -377,7 +402,7 @@ _FORMAL_RECORD_TYPES = {
 
 def _authorship_preflight_diagnostic(body: dict[str, Any]) -> Diagnostic | None:
     """Verify authorship proof during preflight if proof is present."""
-    draft = body.get("record_draft") or body.get("draft") or {}
+    draft = extract_record_draft(body) or {}
     proof = (
         body.get("authorship_proof")
         or body.get("proof")
@@ -385,7 +410,6 @@ def _authorship_preflight_diagnostic(body: dict[str, Any]) -> Diagnostic | None:
     )
     record_type = (
         body.get("record_type")
-        or body.get("type")
         or (draft.get("record_type") if isinstance(draft, dict) else "")
     )
 
@@ -622,15 +646,14 @@ async def readiness(response: Response) -> ReadinessResponse:
 
 @app.post("/record-chain/preflight", response_model=PreflightResponse)
 async def preflight(request: Request) -> PreflightResponse:
-    raw_body = await request.body()
-    received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
-
-    # Check raw body size (handles requests without Content-Length)
-    if len(raw_body) > _MAX_BODY_BYTES:
+    # Part G: streaming body-size limit
+    try:
+        raw_body = await _read_limited_body(request)
+    except RequestBodyTooLarge as exc:
         diag = Diagnostic(
             code="REQUEST_BODY_TOO_LARGE",
             severity="error",
-            message=f"Request body too large ({len(raw_body)} > {_MAX_BODY_BYTES} bytes)",
+            message=f"Request body too large ({exc.size} > {_MAX_BODY_BYTES} bytes)",
         )
         return PreflightResponse(
             accepted=False,
@@ -638,13 +661,15 @@ async def preflight(request: Request) -> PreflightResponse:
             route_detected="unknown",
             record_type="",
             submission_sha256="",
-            received_raw_body_sha256=received_raw_body_sha256,
+            received_raw_body_sha256="",
             diagnostics=[diag],
             gateway_runtime=_build_gateway_runtime(),
             gateway_schema=_GATEWAY_SCHEMA,
             boundary={},
             agent_recovery=_build_agent_recovery([diag]),
         )
+
+    received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
 
     try:
         body = json.loads(raw_body)
@@ -700,7 +725,7 @@ async def preflight(request: Request) -> PreflightResponse:
 
     route = detect_route(body)
     submission_sha256 = sha256_canonical_json(body)
-    record_type = body.get("record_type") or body.get("type") or ""
+    record_type = body.get("record_type") or ""
     if isinstance(record_type, str):
         record_type = record_type.strip().lower()
 
@@ -728,23 +753,24 @@ async def preflight(request: Request) -> PreflightResponse:
 # ---------------------------------------------------------------------------
 
 @app.post("/record-chain/submit", response_model=SubmitResponse)
-async def submit(request: Request) -> SubmitResponse:
-    raw_body = await request.body()
-    received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
-
-    # Check raw body size (handles requests without Content-Length)
-    if len(raw_body) > _MAX_BODY_BYTES:
+async def submit(request: Request) -> SubmitResponse | JSONResponse:
+    # Part G: streaming body-size limit
+    try:
+        raw_body = await _read_limited_body(request)
+    except RequestBodyTooLarge as exc:
         return SubmitResponse(
             accepted=False,
             submitted=False,
-            received_raw_body_sha256=received_raw_body_sha256,
+            received_raw_body_sha256="",
             diagnostics=[Diagnostic(
                 code="REQUEST_BODY_TOO_LARGE",
                 severity="error",
-                message=f"Request body too large ({len(raw_body)} > {_MAX_BODY_BYTES} bytes)",
+                message=f"Request body too large ({exc.size} > {_MAX_BODY_BYTES} bytes)",
             )],
             boundary={},
         )
+
+    received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
 
     try:
         body = json.loads(raw_body)
@@ -787,6 +813,38 @@ async def submit(request: Request) -> SubmitResponse:
             boundary=_build_boundary(body),
         )
 
+    # --- Part B: global idempotency check (after validation, before rate limit) ---
+    original_submission_sha256 = sha256_canonical_json(body)
+    record_type = detect_route(body)
+    idempotency_path = f"record-chain/intake/by-submission-sha256/{original_submission_sha256}.json"
+
+    try:
+        existing_idempotency_text = await get_file_text(idempotency_path)
+        if existing_idempotency_text is not None:
+            existing_index = json.loads(existing_idempotency_text)
+            existing_receipt_path = existing_index.get("receipt_path", "")
+            existing_receipt_text = await get_file_text(existing_receipt_path) if existing_receipt_path else None
+            existing_receipt = json.loads(existing_receipt_text) if existing_receipt_text else existing_index
+            return SubmitResponse(
+                accepted=True,
+                submitted=True,
+                receipt_id=existing_receipt.get("server_receipt_id") or existing_receipt.get("receipt_id") or "",
+                record_type=existing_index.get("record_type", record_type),
+                submission_sha256=original_submission_sha256,
+                received_raw_body_sha256=received_raw_body_sha256,
+                pending_file_path=existing_index.get("pending_file_path", ""),
+                intake_submission_path=existing_index.get("intake_submission_path", ""),
+                receipt_path=existing_receipt_path,
+                server_created_at=existing_receipt.get("accepted_at", existing_index.get("created_at", "")),
+                append_status="duplicate_existing_submission_returned",
+                receipt=None,
+                diagnostics=[],
+                warnings=["Duplicate submission: existing idempotency index found; original receipt returned."],
+                boundary=_build_boundary(body),
+            )
+    except Exception as exc:
+        logger.warning("Idempotency index lookup failed for %s: %s", original_submission_sha256[:16], exc)
+
     # --- rate limit check (only on submit, not preflight) ---
     rate_limit_result = check_rate_limit(body)
     if rate_limit_result is not None:
@@ -803,21 +861,24 @@ async def submit(request: Request) -> SubmitResponse:
             )
             for d in rate_limit_result.get("diagnostics", [])
         ]
-        return SubmitResponse(
+        payload = SubmitResponse(
             accepted=False,
             submitted=False,
             received_raw_body_sha256=received_raw_body_sha256,
             submission_sha256=sha256_canonical_json(body),
             diagnostics=rate_diags,
             boundary=_build_boundary(body),
-        )
+        ).model_dump(mode="json")
+        payload["retry_after_seconds"] = rate_limit_result.get("retry_after_seconds")
+        payload["rate_limit"] = rate_limit_result.get("rate_limit")
+        return JSONResponse(status_code=429, content=payload)
 
     # --- compute hashes ---
     submission_sha256 = sha256_canonical_json(body)
     record_type = detect_route(body)
 
     # --- extract draft ---
-    draft: dict[str, Any] = body.get("record_draft") or body.get("draft") or {}
+    draft: dict[str, Any] = extract_record_draft(body) or {}
 
     # --- authorship verification (if proof supplied) ---
     proof = body.get("authorship_proof") or body.get("proof")
@@ -849,7 +910,7 @@ async def submit(request: Request) -> SubmitResponse:
     body = redact_transient_oath_readback(body)
     stored_submission_sha256 = sha256_canonical_json(body)
     # Re-extract draft after redaction
-    draft = body.get("record_draft") or body.get("draft") or {}
+    draft = extract_record_draft(body) or {}
 
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)
@@ -1026,6 +1087,41 @@ async def submit(request: Request) -> SubmitResponse:
             logger.info("Wrote receipt %s", receipt_path)
 
             commit_sha = result4.get("commit", {}).get("sha")
+
+            # Part B: write global idempotency index
+            idempotency_index_data = {
+                "schema": "trinityaccord.record-chain-intake-idempotency.v1",
+                "submission_sha256": original_submission_sha256,
+                "stored_submission_sha256": stored_submission_sha256,
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "pending_file_path": pending_file_path,
+                "intake_submission_path": intake_submission_path,
+                "record_type": record_type,
+                "created_at": now.isoformat().replace("+00:00", "Z"),
+            }
+            try:
+                await put_file(
+                    idempotency_path,
+                    canonical_dumps(idempotency_index_data),
+                    f"intake: idempotency index {original_submission_sha256[:16]}",
+                    sha=None,
+                )
+                logger.info("Wrote idempotency index %s", idempotency_path)
+            except Exception as idemp_exc:
+                # Idempotency index creation race — read existing and compare
+                logger.warning("Idempotency index write failed for %s: %s", original_submission_sha256[:16], idemp_exc)
+                try:
+                    existing_idx_text = await get_file_text(idempotency_path)
+                    if existing_idx_text is not None:
+                        existing_idx = json.loads(existing_idx_text)
+                        if existing_idx.get("receipt_id") != receipt_id:
+                            logger.error(
+                                "Idempotency race: existing index receipt_id=%s, ours=%s",
+                                existing_idx.get("receipt_id"), receipt_id,
+                            )
+                except Exception:
+                    pass
 
             if _DISPATCH_APPEND_WORKFLOW:
                 try:

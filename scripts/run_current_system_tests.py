@@ -872,6 +872,50 @@ def main() -> int:
         fail(f"record-chain receipt contract failed:\n{result.stdout}\n{result.stderr}")
     ok("record-chain receipt contract")
 
+    # Part C: native record hash semantics contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_native_record_hash_semantics_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"native record hash semantics contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("native record hash semantics contract")
+
+    # Part D: legacy record-chain API boundary
+    result = subprocess.run(
+        [sys.executable, "scripts/test_legacy_record_chain_api_boundary.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"legacy record-chain API boundary test failed:\n{result.stdout}\n{result.stderr}")
+    ok("legacy record-chain API boundary")
+
+    # Part D: sitemap legacy API boundary
+    result = subprocess.run(
+        [sys.executable, "scripts/test_sitemap_legacy_api_boundary.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"sitemap legacy API boundary test failed:\n{result.stdout}\n{result.stderr}")
+    ok("sitemap legacy API boundary")
+
+    # Part E: guardian registry page boundary
+    result = subprocess.run(
+        [sys.executable, "scripts/test_guardian_registry_page_boundary.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"guardian registry page boundary test failed:\n{result.stdout}\n{result.stderr}")
+    ok("guardian registry page boundary")
+
     # Phase 5 OTS-Arweave upgraded status contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase5_ots_arweave_upgraded_status_contract.py"],

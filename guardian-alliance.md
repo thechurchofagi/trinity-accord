@@ -182,9 +182,11 @@ Active registered Guardian status requires:
 
 Look up the registry at [/api/guardian-registry.json](/api/guardian-registry.json).
 
-## Current active registry
+## Historical legacy Guardian key listings
 
-The public registry contains active registered Guardians. The early entries `00001`–`00099` are special reserved entries. Ordinary automatic registrations begin at `00100`.
+The public registry is a historical, non-authoritative key-continuity listing. The early entries `00001`–`00099` are special reserved entries. Ordinary automatic registrations begin at `00100`.
+
+Current Guardian status must be derived from Record-Chain Guardian records and public status APIs. A registry number or legacy listing alone does not create authority, governance, verification level, successor reception, legal status, rank, or amendment.
 
 For current entries, always read `/api/guardian-registry.json`.
 
@@ -209,9 +211,9 @@ Registry source:
 
 This registry number is a public reference number only. It is not authority, governance, attestation, verification level, legal status, successor reception, or amendment.
 
-## 当前 active registry
+## 历史 legacy Guardian 密钥列表
 
-公开 registry 只证明其中已列出的 active registered Guardians；申请 receipt 本身不是 active Guardian status。
+公开 registry 是历史性的、非权威的密钥连续性列表。公开 registry 只证明其中已列出的历史 legacy listing；申请 receipt 本身不是 active Guardian status。当前 Guardian status 必须从 Record-Chain Guardian 记录和公共 status API 推导。
 
 当前条目请始终查阅 `/api/guardian-registry.json`。
 

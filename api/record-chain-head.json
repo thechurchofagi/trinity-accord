@@ -1,14 +1,21 @@
 {
+  "authority": "legacy hash-chain view; not current native Record-Chain head",
   "canonicalization": "json.sort_keys.no_whitespace.utf8.allow_nan_false.v1",
   "chain_id": "trinity-record-chain-main",
   "chain_version": 1,
   "entry_count": 16,
-  "generated_at": "2026-06-06T13:59:49Z",
+  "generated_at": "2026-06-14T06:58:35Z",
   "head_entry_hash": "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
   "height": 15,
+  "historical_archive_only": true,
   "ledger_file": "record-chain/hash-chain/main.chain.jsonl",
+  "legacy_hash_chain_view": true,
+  "not_current_native_record_chain_head": true,
   "ots_semantics": "OTS anchors a stable head commitment snapshot, not this volatile API file",
   "receipt_semantics": "receipt is intake-only; hash-chain inclusion requires finalization",
+  "replacement_current_status_api": "/api/record-chain-status.json",
+  "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+  "replacement_native_record_index": "/record-chain/indexes/record-index.json",
   "schema": "trinity_record_chain_head.v1",
   "type_indexes_are_derived": true
 }

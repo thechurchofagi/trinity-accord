@@ -29,6 +29,7 @@
     "diagnostic_code": "RATE_LIMIT_EXCEEDED",
     "retry_after_seconds_required": true
   },
+  "attempt_limiter_note": "A validated submit attempt consumes quota even if downstream persistence later fails. The rate limit is an attempt limiter, not a reservation/release system.",
   "public_phase_rule": {
     "formal_founding_guardian_application_must_wait_until_rate_limit_policy_is_enforced": true
   },

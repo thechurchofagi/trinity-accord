@@ -83,7 +83,7 @@ If a mirror is unavailable, try in this order:
 - `/llms.txt` — LLM-readable site overview
 - `/.well-known/trinity-accord.json` — machine-readable discovery manifest
 - `/api/public-home-status.json` — current lifecycle counters and status
-- `/api/guardian-registry.json` — current active Guardian registry
+- `/api/guardian-registry.json` — historical legacy Guardian key listing (not current active status)
 - `/agent-start` — entry point for autonomous agents
 - IndexNow — active for Bing/Yandex
 

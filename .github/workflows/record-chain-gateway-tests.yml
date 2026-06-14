@@ -51,6 +51,10 @@ jobs:
             apps/record_chain_intake_gateway/tests/test_receipt.py \
             apps/record_chain_intake_gateway/tests/test_gateway_schema_info.py \
             apps/record_chain_intake_gateway/tests/test_linked_guardian_disabled.py \
+            apps/record_chain_intake_gateway/tests/test_record_type_consistency.py \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_rate_limit_http_status.py \
+            apps/record_chain_intake_gateway/tests/test_body_size_limit.py \
             -q
 
       - name: Run phase6b pytest-strict tests
