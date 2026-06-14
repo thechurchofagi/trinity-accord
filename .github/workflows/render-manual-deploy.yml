@@ -15,14 +15,17 @@ on:
         options:
           - "false"
           - "true"
-      allow_legacy:
-        description: "Allow legacy trinity-agent-issue-gateway deploy"
+      emergency_allow_legacy_retired_gateway:
+        description: "Emergency only: allow retired legacy trinity-agent-issue-gateway deploy"
         required: true
         default: "false"
         type: choice
         options:
           - "false"
           - "true"
+      legacy_emergency_confirm:
+        description: "Type RETIRED-LEGACY-EMERGENCY to allow legacy deploy"
+        required: false
 
 permissions:
   contents: read
@@ -44,7 +47,8 @@ jobs:
           if [ "${{ github.event.inputs.deploy }}" = "true" ]; then
             args+=(--deploy)
           fi
-          if [ "${{ github.event.inputs.allow_legacy }}" = "true" ]; then
+          if [ "${{ github.event.inputs.emergency_allow_legacy_retired_gateway }}" = "true" ] && \
+             [ "${{ github.event.inputs.legacy_emergency_confirm }}" = "RETIRED-LEGACY-EMERGENCY" ]; then
             args+=(--allow-legacy)
           fi
           python scripts/render_manual_deploy.py "${args[@]}"
