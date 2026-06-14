@@ -138,8 +138,14 @@ def main() -> None:
             if m:
                 embedded_sha = m.group(1)
                 policy = json.loads(oath_policy_path.read_text(encoding="utf-8"))
-                # Hash the full policy JSON (same as gateway validation.py)
-                canonical = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+                # Compute policy-core hash (excluding self-describing metadata keys)
+                _METADATA_KEYS = {
+                    "oath_policy_sha256",
+                    "oath_policy_sha256_semantics",
+                    "canonical_oath_text_hash_is_record_type_specific",
+                }
+                core_policy = {k: v for k, v in policy.items() if k not in _METADATA_KEYS}
+                canonical = json.dumps(core_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
                 actual_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
                 if embedded_sha != actual_sha:
                     errors.append(

@@ -116,13 +116,20 @@ def main() -> None:
             errors.append("builder missing print-oath command")
         if "OATH_POLICY_SHA256" not in builder_text:
             errors.append("builder missing OATH_POLICY_SHA256")
-        # Verify embedded hash matches actual policy hash
+        # Verify embedded hash matches actual policy-core hash
+        # (excluding self-describing metadata keys, matching gateway compute_oath_policy_sha256)
         import re
         m = re.search(r'OATH_POLICY_SHA256\s*=\s*"([a-f0-9]{64})"', builder_text)
         if m:
             embedded_sha = m.group(1)
-            # Hash full policy JSON (same as gateway validation.py)
-            canonical = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            # Compute policy-core hash (same domain as gateway compute_oath_policy_sha256)
+            _METADATA_KEYS = {
+                "oath_policy_sha256",
+                "oath_policy_sha256_semantics",
+                "canonical_oath_text_hash_is_record_type_specific",
+            }
+            core_policy = {k: v for k, v in policy.items() if k not in _METADATA_KEYS}
+            canonical = json.dumps(core_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
             actual_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
             if embedded_sha != actual_sha:
                 errors.append(f"builder OATH_POLICY_SHA256 mismatch: embedded={embedded_sha[:16]}... actual={actual_sha[:16]}...")
@@ -370,6 +377,10 @@ def main() -> None:
     # Test 22-24: Gateway rejects missing hash fields (OATH_REQUIRED_HASH_MISSING)
     if VALIDATION.exists():
         import importlib
+        import sys as _sys
+
+        if str(ROOT) not in _sys.path:
+            _sys.path.insert(0, str(ROOT))
 
         try:
             mod = importlib.import_module("apps.record_chain_intake_gateway.gateway.validation")
