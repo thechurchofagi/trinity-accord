@@ -140,6 +140,9 @@ class TestSubmitConfigGateOrdering:
         assert preflight.status_code == 200
         assert preflight.json()["accepted"] is True, f"Fixture must pass preflight: {preflight.json()}"
 
+        # Skip idempotency lookup so we reach the config gate
+        monkeypatch.setattr("app._read_idempotency_index", AsyncMock(return_value=None))
+
         for key in ("TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH", "TRINITY_GITHUB_TOKEN"):
             monkeypatch.delenv(key, raising=False)
 
