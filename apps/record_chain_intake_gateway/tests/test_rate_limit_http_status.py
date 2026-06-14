@@ -1,6 +1,8 @@
 """Part F: rate-limit returns HTTP 429 test."""
 from __future__ import annotations
 
+from unittest.mock import AsyncMock
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -30,6 +32,7 @@ class TestRateLimitHttpStatus:
             }
 
         monkeypatch.setattr("app.check_rate_limit", fake_limited)
+        monkeypatch.setattr("app._read_idempotency_index", AsyncMock(return_value=None))
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         assert resp.status_code == 429
         data = resp.json()
