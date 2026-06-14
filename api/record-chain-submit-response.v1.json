@@ -19,7 +19,21 @@
     "intake_submission_path": { "type": "string" },
     "receipt_path": { "type": "string" },
     "server_created_at": { "type": "string", "format": "date-time" },
-    "append_status": { "type": "string", "enum": ["queued", "pending_dispatch_failed", "dry_run", "appended", "rejected", "duplicate"] },
+    "append_status": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "pending",
+        "queued",
+        "pending_dispatch_failed",
+        "dry_run",
+        "appended",
+        "rejected",
+        "duplicate",
+        "duplicate_existing_submission_returned",
+        "duplicate_existing_receipt_returned"
+      ]
+    },
     "receipt_commit_sha": {
       "type": ["string", "null"],
       "pattern": "^[a-f0-9]{40}$",

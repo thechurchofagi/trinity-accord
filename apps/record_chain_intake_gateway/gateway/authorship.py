@@ -279,6 +279,10 @@ def verify_authorship_proof_submission(
     if not isinstance(signature_base64, str) or not signature_base64:
         return False, "INVALID_AUTHORSHIP_SIGNATURE", "Missing signature_base64."
 
+    boundary_err = _check_claim_boundary(proof)
+    if boundary_err:
+        return False, "AUTHORSHIP_CLAIM_BOUNDARY_INVALID", boundary_err
+
     draft = submission.get("record_draft")
     if not isinstance(draft, dict):
         return False, "MISSING_RECORD_DRAFT", "Missing record_draft."

@@ -228,10 +228,33 @@ def _build_boundary(submission: dict[str, Any]) -> dict[str, bool]:
     return {}
 
 
+def _build_preflight_boundary(submission: dict[str, Any] | None = None) -> dict[str, bool]:
+    base = _build_boundary(submission or {})
+    base.update({
+        "preflight_is_not_submission": True,
+        "not_authority": True,
+        "not_attestation": True,
+        "not_amendment": True,
+    })
+    return base
+
+
+def _build_submit_boundary(submission: dict[str, Any] | None = None) -> dict[str, bool]:
+    base = _build_boundary(submission or {})
+    base.update({
+        "receipt_is_not_authority": True,
+        "receipt_is_not_attestation": True,
+        "receipt_is_not_final_chain_record": True,
+        "record_chain_append_is_server_side": True,
+    })
+    return base
+
+
 _UNSIGNED_CLIENT_PROJECTION_FIELDS = frozenset({
     "actor_identity",
     "boundary",
     "server_normalization",
+    "server_append_metadata",
     "append_assigned_metadata",
     "authorship_verification_status",
     "record_id",
@@ -553,7 +576,7 @@ async def _submit_response_from_idempotency_index(
         receipt=receipt_data,
         diagnostics=[],
         warnings=["Duplicate submission: existing idempotency index found; original receipt returned."],
-        boundary=_build_boundary(body),
+        boundary=_build_submit_boundary(body),
         created_pending_records=[
             p for p in [index.get("pending_file_path", "")]
             if isinstance(p, str) and p
@@ -668,7 +691,7 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
             diagnostics=[diag],
             gateway_runtime=_build_gateway_runtime(),
             gateway_schema=_GATEWAY_SCHEMA,
-            boundary={},
+            boundary=_build_preflight_boundary({}),
             agent_recovery=_build_agent_recovery([diag]),
         )
 
@@ -688,7 +711,7 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
             diagnostics=[diag],
             gateway_runtime=_build_gateway_runtime(),
             gateway_schema=_GATEWAY_SCHEMA,
-            boundary={},
+            boundary=_build_preflight_boundary({}),
             agent_recovery=_build_agent_recovery([diag]),
         )
 
@@ -719,7 +742,7 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
         warnings=[],
         gateway_runtime=_build_gateway_runtime(),
         gateway_schema=_GATEWAY_SCHEMA,
-        boundary=_build_boundary(body),
+        boundary=_build_preflight_boundary(body),
         agent_recovery=agent_recovery,
     )
 
@@ -753,7 +776,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 severity="error",
                 message=f"Invalid JSON: {exc}",
             )],
-            boundary={},
+            boundary=_build_submit_boundary({}),
         )
 
     if not isinstance(body, dict):
@@ -766,7 +789,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 severity="error",
                 message="Request body must be a JSON object",
             )],
-            boundary={},
+            boundary=_build_submit_boundary({}),
         )
 
     # --- validate (now returns list[Diagnostic] directly) ---
@@ -779,7 +802,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             received_raw_body_sha256=received_raw_body_sha256,
             submission_sha256=sha256_canonical_json(body),
             diagnostics=diagnostics,
-            boundary=_build_boundary(body),
+            boundary=_build_submit_boundary(body),
         )
 
     # --- Part B: global idempotency check (fail-closed, before rate limit) ---
@@ -810,7 +833,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 suggested_fix="Retry later. If a prior submission succeeded, the gateway should return its existing receipt once idempotency storage is readable.",
                 retry_allowed=True,
             )],
-            boundary=_build_boundary(body),
+            boundary=_build_submit_boundary(body),
         )
 
     if existing_idx is not None:
@@ -843,7 +866,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     suggested_fix="Retry later or ask an operator to inspect the idempotency index and receipt path.",
                     retry_allowed=True,
                 )],
-                boundary=_build_boundary(body),
+                boundary=_build_submit_boundary(body),
             )
 
     # --- rate limit check (only on submit, not preflight) ---
@@ -868,7 +891,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             received_raw_body_sha256=received_raw_body_sha256,
             submission_sha256=sha256_canonical_json(body),
             diagnostics=rate_diags,
-            boundary=_build_boundary(body),
+            boundary=_build_submit_boundary(body),
         ).model_dump(mode="json")
         payload["retry_after_seconds"] = rate_limit_result.get("retry_after_seconds")
         payload["rate_limit"] = rate_limit_result.get("rate_limit")
@@ -912,7 +935,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 suggested_fix="Build and sign a standalone guardian_application submission.",
                 retry_allowed=True,
             )],
-            boundary=_build_boundary(body),
+            boundary=_build_submit_boundary(body),
         )
 
     # --- build receipt (prepare all paths FIRST, receipt is immutable after creation) ---
@@ -1004,7 +1027,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     receipt=existing_receipt,
                     diagnostics=[],
                     warnings=["Duplicate submission: existing immutable receipt returned; no files were updated."],
-                    boundary=_build_boundary(body),
+                    boundary=_build_submit_boundary(body),
                     created_pending_records=[
                         p for p in [existing_receipt.get("pending_file_path", "")]
                         if isinstance(p, str) and p
@@ -1141,7 +1164,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                         suggested_fix="Retry the same submission later; if the original request succeeded concurrently, the gateway will return the existing receipt.",
                         retry_allowed=True,
                     )],
-                    boundary=_build_boundary(body),
+                    boundary=_build_submit_boundary(body),
                 )
 
             # Write 4: pending file (create only) — LAST.
@@ -1191,7 +1214,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     severity="error",
                     message=f"Persist failed: {exc}",
                 )],
-                boundary=_build_boundary(body),
+                boundary=_build_submit_boundary(body),
             )
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
@@ -1216,7 +1239,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
         receipt=receipt_data,
         diagnostics=[],
         warnings=warnings,
-        boundary=_build_boundary(body),
+        boundary=_build_submit_boundary(body),
         created_pending_records=created_pending_records,
     )
 

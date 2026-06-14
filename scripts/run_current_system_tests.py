@@ -893,6 +893,17 @@ def main() -> int:
         fail(f"record-chain receipt contract failed:\n{result.stdout}\n{result.stderr}")
     ok("record-chain receipt contract")
 
+    # Record-chain field contract bug contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_field_contract_bug_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain field contract bug contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("record-chain field contract bug contract")
+
     # Part C: native record hash semantics contract
     result = subprocess.run(
         [sys.executable, "scripts/test_native_record_hash_semantics_contract.py"],

@@ -764,6 +764,38 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
         for field in ("title", "body"):
             if not draft.get(field):
                 missing("MISSING_RECORD_CONTENT", f"draft.{field}", f"{record_type} requires {field}")
+    elif record_type == "classification_update":
+        content = draft.get("classification_update_content")
+        if not isinstance(content, dict):
+            missing(
+                "MISSING_CLASSIFICATION_UPDATE_CONTENT",
+                "draft.classification_update_content",
+                "Classification updates require classification_update_content",
+            )
+        else:
+            required_fields = {
+                "target_record_id": content.get("target_record_id"),
+                "target_record_sha256": content.get("target_record_sha256"),
+                "previous_classification": content.get("previous_classification"),
+                "new_classification": content.get("new_classification"),
+                "classification_reason": content.get("classification_reason"),
+                "evidence_or_review_basis": content.get("evidence_or_review_basis"),
+            }
+            for field_name, value in required_fields.items():
+                if not isinstance(value, str) or not value.strip():
+                    missing(
+                        "MISSING_CLASSIFICATION_UPDATE_CONTENT",
+                        f"draft.classification_update_content.{field_name}",
+                        f"Classification updates require non-empty {field_name}",
+                    )
+
+            target_sha = content.get("target_record_sha256")
+            if isinstance(target_sha, str) and not re.fullmatch(r"[a-f0-9]{64}", target_sha):
+                missing(
+                    "INVALID_CLASSIFICATION_TARGET_SHA",
+                    "draft.classification_update_content.target_record_sha256",
+                    "target_record_sha256 must be a 64-character lowercase hex SHA-256",
+                )
     elif record_type == "context_insufficient_notice" and not draft.get("reason"):
         missing("MISSING_CONTEXT_INSUFFICIENT_REASON", "draft.reason", "Context-insufficient notices require reason")
 
@@ -1229,9 +1261,9 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     if isinstance(draft, dict) and rt:
         diagnostics.extend(validate_record_type_separation(rt, draft))
 
-    # --- claim_boundary type check ---
-    if isinstance(draft, dict):
-        diagnostics.extend(validate_claim_boundary(draft))
+    # --- claim_boundary type check (moved to verify_authorship_proof_submission) ---
+    # Authoritative validation is now in authorship.py at submission level.
+    # validate_claim_boundary() is retained for backward compatibility but not called here.
 
     # --- oath gate validation (before authorship proof) ---
     if isinstance(draft, dict) and rt:

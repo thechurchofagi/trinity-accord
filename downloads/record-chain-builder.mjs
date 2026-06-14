@@ -14,6 +14,7 @@
  *   guardian-retirement     Build a guardian retirement submission
  *   propagation             Build a propagation submission
  *   correction              Build a correction submission
+ *   classification-update   Build a classification update submission
  *   context-insufficient    Build a context-insufficient notice
  *   preflight               POST submission to gateway /record-chain/preflight
  *   submit                  POST submission to gateway /record-chain/submit
@@ -49,6 +50,7 @@ const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
   "guardian-retirement",
   "propagation",
   "correction",
+  "classification-update",
   "context-insufficient",
 ]);
 
@@ -542,6 +544,7 @@ const FORMAL_RECORD_COMMANDS = new Set([
   "guardian-retirement",
   "propagation",
   "correction",
+  "classification-update",
 ]);
 
 function normalizeRecordType(recordTypeOrCommand) {
@@ -585,6 +588,19 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "whatWasChecked", "--what-was-checked");
     requireExplicit(opts, "verificationClaim", "--verification-claim");
     requireExplicit(opts, "freshActions", "--fresh-actions");
+  }
+
+  if (command === "classification-update") {
+    requireExplicit(opts, "targetRecordId", "--target-record-id");
+    requireExplicit(opts, "targetRecordSha256", "--target-record-sha256");
+    requireExplicit(opts, "previousClassification", "--previous-classification");
+    requireExplicit(opts, "newClassification", "--new-classification");
+    requireExplicit(opts, "classificationReason", "--classification-reason");
+    requireExplicit(opts, "evidenceOrReviewBasis", "--evidence-or-review-basis");
+
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetRecordSha256))) {
+      errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
   }
 }
 
@@ -792,6 +808,24 @@ function buildCorrectionDraft(opts) {
     body: opts.body || "",
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
+    created_at: isoNow(),
+  };
+}
+
+function buildClassificationUpdateDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "classification_update",
+    classification_update_content: {
+      target_record_id: opts.targetRecordId || "",
+      target_record_sha256: opts.targetRecordSha256 || "",
+      previous_classification: opts.previousClassification || "",
+      new_classification: opts.newClassification || "",
+      classification_reason: opts.classificationReason || "",
+      evidence_or_review_basis: opts.evidenceOrReviewBasis || "",
+    },
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-2" }),
     created_at: isoNow(),
   };
 }
@@ -1072,6 +1106,13 @@ const FIELD_EXPLANATIONS = {
 
   "reason": "The reason for this record (e.g. retirement reason).",
   "retirement_does_not_remove_historical_record": "Whether retirement preserves historical records.",
+  "classification_update_content": "Content specific to classification update records.",
+  "classification_update_content.target_record_id": "The record_id of the record being classified or reclassified.",
+  "classification_update_content.target_record_sha256": "The SHA-256 of the target record being classified.",
+  "classification_update_content.previous_classification": "Previous classification label or status.",
+  "classification_update_content.new_classification": "New classification label or status.",
+  "classification_update_content.classification_reason": "Reason for the classification update.",
+  "classification_update_content.evidence_or_review_basis": "Evidence, review basis, or reasoning supporting this classification update.",
 };
 
 const RECORD_TYPE_FIELDS = {
@@ -1081,6 +1122,7 @@ const RECORD_TYPE_FIELDS = {
   "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "classification-update": ["schema", "record_type", "classification_update_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
 };
 
@@ -1492,6 +1534,18 @@ function generateTemplate(recordType) {
       title: "__helper_note: Title for this correction",
       body: "__helper_note: The correction text content",
     }),
+    "classification-update": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "classification_update",
+      classification_update_content: {
+        target_record_id: "__helper_note: Target record_id being reclassified",
+        target_record_sha256: "__helper_note: 64-character lowercase SHA-256 of target record",
+        previous_classification: "__helper_note: Previous classification",
+        new_classification: "__helper_note: New classification",
+        classification_reason: "__helper_note: Reason for classification update",
+        evidence_or_review_basis: "__helper_note: Evidence or review basis",
+      },
+    }),
     "context-insufficient": () => ({
       schema: DRAFT_SCHEMA,
       record_type: "context_insufficient_notice",
@@ -1618,6 +1672,7 @@ const RECORD_BUILDERS = {
   "guardian-retirement": buildGuardianRetirementDraft,
   propagation: buildPropagationDraft,
   correction: buildCorrectionDraft,
+  "classification-update": buildClassificationUpdateDraft,
   "context-insufficient": buildContextInsufficientDraft,
 };
 
@@ -1633,6 +1688,7 @@ Commands:
   guardian-retirement     Build a guardian retirement submission
   propagation             Build a propagation submission
   correction              Build a correction submission
+  classification-update   Build a classification update submission
   context-insufficient    Build a context-insufficient notice
   preflight               POST submission to gateway /record-chain/preflight
   submit                  POST submission to gateway /record-chain/submit
@@ -1863,7 +1919,7 @@ async function main() {
 
   // ── print-oath ────────────────────────────────────────────────────
   if (cmd === "print-oath") {
-    const recordType = args.recordType || errorExit("--record-type required");
+    const recordType = normalizeRecordType(args.recordType || errorExit("--record-type required"));
     const linkedGuardian = !!args.linkedGuardian;
     const modules = getOathModules(recordType, linkedGuardian);
     if (!modules.length) {
@@ -1990,7 +2046,7 @@ async function main() {
 
   // ── template ────────────────────────────────────────────────────
   if (cmd === "template") {
-    const recordType = args.recordType || errorExit("--record-type required");
+    const recordType = normalizeRecordType(args.recordType || errorExit("--record-type required"));
     const outPath = args.out || `${recordType}-template.json`;
     const template = generateTemplate(recordType);
     writeFileSync(resolve(outPath), JSON.stringify(template, null, 2));
@@ -2067,6 +2123,12 @@ async function main() {
     requestingPartyType: args.requestingPartyType || "none",
     introducingPartyType: args.introducingPartyType || "none",
     humanOperatorInvolved: args.humanOperatorInvolved,
+    targetRecordId: args.targetRecordId || "",
+    targetRecordSha256: args.targetRecordSha256 || "",
+    previousClassification: args.previousClassification || "",
+    newClassification: args.newClassification || "",
+    classificationReason: args.classificationReason || "",
+    evidenceOrReviewBasis: args.evidenceOrReviewBasis || "",
   };
 
   validateFormalInputs(cmd, opts);

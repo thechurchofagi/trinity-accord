@@ -160,7 +160,7 @@ class SubmitResponse(BaseModel):
     intake_submission_path: str = ""
     receipt_path: str = ""
     server_created_at: str = ""
-    append_status: str = ""
+    append_status: str = "not_applicable"
     receipt_commit_sha: str | None = None
     receipt: dict[str, Any] | None = None
     diagnostics: list[Diagnostic] = Field(default_factory=list)
