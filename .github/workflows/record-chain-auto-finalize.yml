@@ -68,9 +68,9 @@ jobs:
                   record-chain/chain-tip.json \
                   record-chain/indexes \
                   api/record-chain-head.json \
-                  api/record-chain-index.json \
-                  api/record-chain-index.by-type.json \
-                  api/record-chain-index.latest.json
+                  api/record-chain-index.all.json \
+                  api/record-chain-index.manifest.json \
+                  api/record-chain-index.*.json
           if git diff --cached --quiet; then
             echo "No finalization changes."
           else

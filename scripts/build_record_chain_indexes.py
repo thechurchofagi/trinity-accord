@@ -157,7 +157,6 @@ def main() -> None:
             }
             for record_type in record_types
         ],
-        "authority": "derived indexes; main.chain.jsonl is authoritative",
     }
     write_json_atomic(out_dir / "record-chain-index.manifest.json", manifest)
 

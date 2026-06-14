@@ -739,6 +739,17 @@ def main() -> int:
         fail(f"P0 transaction/finalizer contract failed:\n{result.stdout}\n{result.stderr}")
     ok("P0 transaction/finalizer contract")
 
+    # Record-chain pipeline real-bug contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_pipeline_real_bug_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain pipeline real-bug contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("record-chain pipeline real-bug contract")
+
     # External agent first-contact rules contract
     result = subprocess.run(
         [sys.executable, "scripts/test_external_agent_first_contact_rules_contract.py"],

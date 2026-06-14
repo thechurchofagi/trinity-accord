@@ -618,6 +618,37 @@ def require_gateway_pending_durable_intake_binding(path: Path) -> None:
         raise ValueError("idempotency index intake_submission_path mismatch")
 
 
+def allow_local_finalizer_pending() -> bool:
+    return os.environ.get("TRINITY_ALLOW_LOCAL_FINALIZER_PENDING", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
+def require_pending_file_is_appendable(path: Path) -> None:
+    """Fail closed unless a pending file comes from a known append source.
+
+    Allowed sources:
+    1. Gateway canonical pending files, with durable receipt/idempotency binding.
+    2. Finalizer-local pending files, only when explicitly enabled by env var.
+
+    This prevents scheduled/manual append from consuming stray test, old-format,
+    or hand-written JSON files under record-chain/pending.
+    """
+    if _gateway_pending_receipt_id(path) is not None:
+        require_gateway_pending_durable_intake_binding(path)
+        return
+
+    if path.name.startswith("mainnet-prelaunch-") and allow_local_finalizer_pending():
+        return
+
+    raise ValueError(
+        f"refusing non-canonical pending file outside finalizer-local mode: {path.name}"
+    )
+
+
 def extract_server_append_metadata(raw_draft: dict[str, Any]) -> dict[str, Any]:
     """Return unsigned server append metadata carried by a pending file.
 
@@ -652,7 +683,8 @@ def append_records(all_records: bool = False) -> None:
 
             # Gateway-created pending files must not be appendable unless durable
             # submission, receipt, and idempotency state already exist and bind to them.
-            require_gateway_pending_durable_intake_binding(path)
+            # Non-canonical pending files are rejected unless explicitly allowed.
+            require_pending_file_is_appendable(path)
 
             # Extract unsigned server append metadata before stripping unsigned projection fields.
             server_append_metadata = extract_server_append_metadata(raw_draft)

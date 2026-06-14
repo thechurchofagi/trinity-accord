@@ -85,6 +85,47 @@ def existing_receipt_ids() -> set[str]:
             out.add(rid)
     return out
 
+
+def pending_path_from_receipt(receipt: dict) -> Path | None:
+    """Return the repository path for the Gateway pending file bound to a receipt."""
+    raw = receipt.get("pending_file_path")
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    return ROOT / raw
+
+
+def native_artifact_path_for_pending(pending_path: Path, directory: str) -> Path:
+    """Map record-chain/pending/<name>.json to record-chain/<directory>/<name>.json."""
+    return ROOT / "record-chain" / directory / pending_path.name
+
+
+def native_pending_artifact_status(receipt: dict) -> tuple[str, str]:
+    """Return native processing state for the pending file bound to a receipt.
+
+    States:
+    - none: no native pending/processed/rejected artifact was found.
+    - pending: Gateway pending still exists and must be consumed by append workflow.
+    - processed: pending was consumed into native record-chain.
+    - rejected: pending was rejected by native append and must not be finalized blindly.
+    - no_pending_path: older receipt shape without pending_file_path; leave legacy behavior.
+    """
+    pending_path = pending_path_from_receipt(receipt)
+    if pending_path is None:
+        return "no_pending_path", "receipt has no pending_file_path"
+
+    if pending_path.exists():
+        return "pending", f"native pending still queued: {pending_path.relative_to(ROOT)}"
+
+    processed_path = native_artifact_path_for_pending(pending_path, "processed")
+    if processed_path.exists():
+        return "processed", f"native pending already processed: {processed_path.relative_to(ROOT)}"
+
+    rejected_path = native_artifact_path_for_pending(pending_path, "rejected")
+    if rejected_path.exists():
+        return "rejected", f"native pending already rejected: {rejected_path.relative_to(ROOT)}"
+
+    return "none", "native pending artifact not found"
+
 def current_confirm_string() -> str:
     """Return the correct confirm string based on the active public test phase."""
     agent = read_json(AGENT_START)
@@ -153,6 +194,17 @@ def main() -> int:
         receipt_id = receipt_id_from_receipt(rec)
         if receipt_id in existing:
             skipped.append({"submission": str(sub.relative_to(ROOT)), "reason": "already finalized", "receipt_id": receipt_id})
+            continue
+
+        native_state, native_detail = native_pending_artifact_status(rec)
+        if native_state in {"pending", "processed", "rejected"}:
+            skipped.append({
+                "submission": str(sub.relative_to(ROOT)),
+                "receipt": str(receipt.relative_to(ROOT)),
+                "reason": f"native_pending_{native_state}",
+                "detail": native_detail,
+                "receipt_id": receipt_id,
+            })
             continue
 
         if args.mode == "live":

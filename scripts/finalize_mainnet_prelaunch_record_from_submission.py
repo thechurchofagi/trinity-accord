@@ -5,6 +5,7 @@ import argparse
 import copy
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -361,9 +362,16 @@ def assert_test_safe_input(submission: dict[str, Any], receipt: dict[str, Any]) 
         raise SystemExit("formal/live marker found in test input: " + ", ".join(found))
 
 
-def run(cmd: list[str]) -> None:
+def run(cmd: list[str], *, env: dict[str, str] | None = None) -> None:
     print("[RUN]", " ".join(cmd))
-    result = subprocess.run(cmd, cwd=str(ROOT), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(
+        cmd,
+        cwd=str(ROOT),
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=env,
+    )
     if result.stdout:
         print(result.stdout)
     if result.stderr:
@@ -497,7 +505,9 @@ def append_native_record_from_draft(native_draft: dict[str, Any], receipt_id: An
     write_json(pending_path, native_draft)
 
     try:
-        run([sys.executable, "scripts/trinity_record_chain.py", "append"])
+        append_env = dict(os.environ)
+        append_env["TRINITY_ALLOW_LOCAL_FINALIZER_PENDING"] = "1"
+        run([sys.executable, "scripts/trinity_record_chain.py", "append"], env=append_env)
     except BaseException:
         if pending_path.exists():
             print(f"pending file still exists after append failure: {pending_path.relative_to(ROOT)}", file=sys.stderr)
