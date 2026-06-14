@@ -249,7 +249,7 @@ def _cleanup(tmp: Path) -> None:
     shutil.rmtree(tmp, ignore_errors=True)
 
 
-def test_1_append_includes_authorship_verification_status() -> list[str]:
+def _check_1_append_includes_authorship_verification_status() -> list[str]:
     """After append, formal record includes authorship_verification_status."""
     errors = []
     tmp = _setup_chain()
@@ -286,7 +286,7 @@ def test_1_append_includes_authorship_verification_status() -> list[str]:
     return errors
 
 
-def test_2_verify_fails_missing_authorship_verification_status() -> list[str]:
+def _check_2_verify_fails_missing_authorship_verification_status() -> list[str]:
     """verify_native_records fails if formal record lacks authorship_verification_status."""
     errors = []
     tmp = _setup_chain()
@@ -313,7 +313,7 @@ def test_2_verify_fails_missing_authorship_verification_status() -> list[str]:
     return errors
 
 
-def test_3_verify_fails_oath_hash_missing() -> list[str]:
+def _check_3_verify_fails_oath_hash_missing() -> list[str]:
     """verify fails when oath hash fields are missing or invalid."""
     errors = []
     tmp = _setup_chain()
@@ -356,7 +356,7 @@ def test_3_verify_fails_oath_hash_missing() -> list[str]:
     return errors
 
 
-def test_4_verify_fails_guardian_without_stewardship() -> list[str]:
+def _check_4_verify_fails_guardian_without_stewardship() -> list[str]:
     """verify fails when guardian_application oath lacks guardian_stewardship_v1."""
     errors = []
     tmp = _setup_chain()
@@ -397,7 +397,7 @@ def test_4_verify_fails_guardian_without_stewardship() -> list[str]:
     return errors
 
 
-def test_5_append_all_continues_after_rejection() -> list[str]:
+def _check_5_append_all_continues_after_rejection() -> list[str]:
     """append --all continues processing after one pending is rejected."""
     errors = []
     tmp = _setup_chain()
@@ -421,7 +421,7 @@ def test_5_append_all_continues_after_rejection() -> list[str]:
     return errors
 
 
-def test_6_rejection_reason_file_written() -> list[str]:
+def _check_6_rejection_reason_file_written() -> list[str]:
     """Rejection writes a .rejection.json with reason."""
     errors = []
     tmp = _setup_chain()
@@ -443,7 +443,7 @@ def test_6_rejection_reason_file_written() -> list[str]:
     return errors
 
 
-def test_7_raw_readback_text_fails_verify() -> list[str]:
+def _check_7_raw_readback_text_fails_verify() -> list[str]:
     """Raw readback_text in persisted record fails verify."""
     errors = []
     tmp = _setup_chain()
@@ -485,7 +485,7 @@ def test_7_raw_readback_text_fails_verify() -> list[str]:
     return errors
 
 
-def test_8_post_append_verify_passes() -> list[str]:
+def _check_8_post_append_verify_passes() -> list[str]:
     """After a successful append, verify_native_records() must pass (post-append gate)."""
     errors = []
     tmp = _setup_chain()
@@ -504,15 +504,47 @@ def test_8_post_append_verify_passes() -> list[str]:
     return errors
 
 
+def test_1_append_includes_authorship_verification_status() -> None:
+    errors = _check_1_append_includes_authorship_verification_status()
+    assert not errors, "\n".join(errors)
+
+def test_2_verify_fails_missing_authorship_verification_status() -> None:
+    errors = _check_2_verify_fails_missing_authorship_verification_status()
+    assert not errors, "\n".join(errors)
+
+def test_3_verify_fails_oath_hash_missing() -> None:
+    errors = _check_3_verify_fails_oath_hash_missing()
+    assert not errors, "\n".join(errors)
+
+def test_4_verify_fails_guardian_without_stewardship() -> None:
+    errors = _check_4_verify_fails_guardian_without_stewardship()
+    assert not errors, "\n".join(errors)
+
+def test_5_append_all_continues_after_rejection() -> None:
+    errors = _check_5_append_all_continues_after_rejection()
+    assert not errors, "\n".join(errors)
+
+def test_6_rejection_reason_file_written() -> None:
+    errors = _check_6_rejection_reason_file_written()
+    assert not errors, "\n".join(errors)
+
+def test_7_raw_readback_text_fails_verify() -> None:
+    errors = _check_7_raw_readback_text_fails_verify()
+    assert not errors, "\n".join(errors)
+
+def test_8_post_append_verify_passes() -> None:
+    errors = _check_8_post_append_verify_passes()
+    assert not errors, "\n".join(errors)
+
 ALL_TESTS = [
-    ("append includes authorship_verification_status", test_1_append_includes_authorship_verification_status),
-    ("verify fails missing authorship_verification_status", test_2_verify_fails_missing_authorship_verification_status),
-    ("verify fails oath hash missing/invalid", test_3_verify_fails_oath_hash_missing),
-    ("verify fails guardian without stewardship_v1", test_4_verify_fails_guardian_without_stewardship),
-    ("append --all continues after rejection", test_5_append_all_continues_after_rejection),
-    ("rejection reason file written", test_6_rejection_reason_file_written),
-    ("raw readback_text fails verify", test_7_raw_readback_text_fails_verify),
-    ("post-append verify passes", test_8_post_append_verify_passes),
+    ("append includes authorship_verification_status", _check_1_append_includes_authorship_verification_status),
+    ("verify fails missing authorship_verification_status", _check_2_verify_fails_missing_authorship_verification_status),
+    ("verify fails oath hash missing/invalid", _check_3_verify_fails_oath_hash_missing),
+    ("verify fails guardian without stewardship_v1", _check_4_verify_fails_guardian_without_stewardship),
+    ("append --all continues after rejection", _check_5_append_all_continues_after_rejection),
+    ("rejection reason file written", _check_6_rejection_reason_file_written),
+    ("raw readback_text fails verify", _check_7_raw_readback_text_fails_verify),
+    ("post-append verify passes", _check_8_post_append_verify_passes),
 ]
 
 

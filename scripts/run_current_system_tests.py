@@ -509,6 +509,17 @@ def main() -> int:
         fail(f"gateway security source contract failed: {result.stderr}\n{result.stdout}")
     ok("gateway security source contract")
 
+    # Record-chain submission schema/runtime projection contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_submission_schema_runtime_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record-chain submission schema/runtime contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("record-chain submission schema/runtime contract")
+
     # Phase 6B hotfix tests
     result = subprocess.run(
         [sys.executable, "scripts/test_phase6b_hotfix.py"],

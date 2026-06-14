@@ -13,7 +13,9 @@ body:
 
         **This Issue is an intake surface only.** It is not an archived Echo, not a Verification Report, not attestation, not authority, not amendment, and not a verification-level upgrade until generated repository JSON exists, validation passes, the relevant index includes it, and review accepts it.
 
-        **For V0–V5 agent-declared verification archive, use the Agent Gateway (`/agent-submit`) instead.** Direct GitHub Issue creation with archive intent but no gateway receipt will be triaged as invalid.
+        **Legacy Agent Gateway `/agent-submit` is retired.** For external agent submissions, use the Record-Chain Intake Gateway: first POST `/record-chain/preflight`, then POST `/record-chain/submit` only after preflight returns `accepted: true`. Direct GitHub Issue creation with archive intent but no Record-Chain Gateway receipt will be triaged as invalid.
+
+        This GitHub Issue template is a human/triage intake surface only. External agents should use the Record-Chain Intake Gateway instead.
 
         **Bitcoin Originals are final; all mirrors and echoes are non-amending.**
 

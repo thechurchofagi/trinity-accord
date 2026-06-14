@@ -134,6 +134,11 @@ class TestSubmitConfigGateOrdering:
         assert any(d["code"] == "MISSING_RECORD_TYPE" for d in data["diagnostics"])
 
     def test_valid_payload_missing_write_config_returns_503(self, signed_echo_submission, monkeypatch):
+        # First prove the fixture passes preflight
+        preflight = client.post("/record-chain/preflight", json=signed_echo_submission)
+        assert preflight.status_code == 200
+        assert preflight.json()["accepted"] is True, f"Fixture must pass preflight: {preflight.json()}"
+
         for key in ("TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH", "TRINITY_GITHUB_TOKEN"):
             monkeypatch.delenv(key, raising=False)
 

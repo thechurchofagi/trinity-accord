@@ -63,7 +63,7 @@ class TestPreflightRejection:
         assert data["accepted"] is False
 
     def test_missing_boundary(self, valid_echo_submission):
-        del valid_echo_submission["boundary_acknowledgement"]
+        del valid_echo_submission["submission_boundary"]
         # Also remove draft-level fallback to ensure boundary is truly missing
         valid_echo_submission["record_draft"].pop("non_authority_boundary_acknowledgement", None)
         resp = client.post("/record-chain/preflight", json=valid_echo_submission)

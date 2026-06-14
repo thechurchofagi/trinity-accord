@@ -105,7 +105,7 @@
         "actor_identity": {
           "type": "object",
           "deprecated": true,
-          "description": "DEPRECATED compatibility property. Use submitting_participant_identity instead.",
+          "description": "FORBIDDEN for client submissions. This is a server-derived compatibility projection after append. Clients must use submitting_participant_identity instead.",
           "required": [
             "label",
             "provider"
@@ -296,7 +296,75 @@
           }
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "actor_identity"
+                ]
+              },
+              {
+                "required": [
+                  "boundary"
+                ]
+              },
+              {
+                "required": [
+                  "server_normalization"
+                ]
+              },
+              {
+                "required": [
+                  "append_assigned_metadata"
+                ]
+              },
+              {
+                "required": [
+                  "authorship_verification_status"
+                ]
+              },
+              {
+                "required": [
+                  "record_id"
+                ]
+              },
+              {
+                "required": [
+                  "record_index"
+                ]
+              },
+              {
+                "required": [
+                  "assigned_at"
+                ]
+              },
+              {
+                "required": [
+                  "previous_record_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "content_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "record_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "chain_id"
+                ]
+              }
+            ]
+          }
+        }
+      ]
     },
     "authorship_proof": {
       "$ref": "#/$defs/authorship_proof"

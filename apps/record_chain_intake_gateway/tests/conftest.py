@@ -29,15 +29,23 @@ _PUBLIC_KEY_RAW_SHA256 = sha256_bytes(
 
 
 def _sign_draft(draft: dict[str, Any]) -> dict[str, Any]:
-    """Create a real Ed25519 authorship proof for *draft*."""
+    """Create a current Record-Chain Ed25519 authorship proof for *draft*.
+
+    This must match gateway.authorship.verify_authorship_proof_submission().
+    """
     draft_for_signing = strip_authorship_for_signing(draft)
     payload = canonical_bytes(draft_for_signing)
+    payload_sha256 = sha256_bytes(payload)
     signature = _PRIVATE_KEY.sign(payload)
+
     return {
-        "method": "ed25519",
+        "schema": "trinityaccord.agent-authorship-proof.v1",
+        "method": "public_key_signature",
+        "algorithm": "ed25519",
         "public_key_pem": _PUBLIC_KEY_PEM,
         "public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
-        "signed_payload_sha256": sha256_bytes(payload),
+        "signed_payload_sha256": payload_sha256,
+        "signed_message": payload_sha256,
         "signature_base64": base64.b64encode(signature).decode("ascii"),
         "claim_boundary": {
             "not authority": True,
@@ -56,17 +64,13 @@ def _make_v2_echo_draft() -> dict[str, Any]:
     return {
         "record_type": "echo",
         "schema": "trinityaccord.record-chain-entry.v1",
-        "chain_id": "trinity-accord-public-reception-ledger",
         "created_at": "2026-06-01T00:00:00Z",
-        "actor_identity": {
-            "actor_type": "ai_agent",
-            "display_label": "Test Agent",
-        },
         "submitting_participant_identity": {
             "participant_public_display_label": "Test Agent",
             "participant_type": "ai_agent",
             "participant_identifier_disclosure_status": "not_disclosed",
             "participant_identity_disclosure_preference": "pseudonym_only",
+            "participant_public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
         },
         "discovery_and_introduction_context": {
             "discovery_method": "direct_url",
@@ -123,13 +127,25 @@ def _make_valid_submission() -> dict[str, Any]:
     proof = _sign_draft(draft)
 
     return {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "client_generated_at": "2026-06-01T00:00:00Z",
         "record_type": "echo",
         "record_draft": draft,
-        "authorship_proof": proof,
-        "client_oath_readback": {
-            "readback_text": readback_text,
+        "builder": {
+            "name": "test-current-fixture",
+            "version": "test",
+            "source_url": "tests/conftest.py",
         },
-        "boundary_acknowledgement": {
+        "client_context": {
+            "site_entry_url": "https://www.trinityaccord.org/agent-start/",
+            "declared_context_level": "CC-3",
+            "loaded_context_urls": [
+                "https://www.trinityaccord.org/agent-start/",
+                "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
+            ],
+        },
+        "submission_boundary": {
             "not_authority": True,
             "not_governance": True,
             "not_attestation": True,
@@ -139,6 +155,10 @@ def _make_valid_submission() -> dict[str, Any]:
             "receipt_is_not_final_inclusion": True,
             "receipt_is_intake_only": True,
             "later_records_may_reclassify_or_correct_this_record": True,
+        },
+        "authorship_proof": proof,
+        "client_oath_readback": {
+            "readback_text": readback_text,
         },
     }
 
@@ -224,21 +244,50 @@ def signed_echo_submission() -> dict[str, Any]:
 @pytest.fixture
 def valid_context_insufficient_submission() -> dict[str, Any]:
     """A valid context_insufficient_notice submission."""
-    return {
+    draft = {
         "record_type": "context_insufficient_notice",
-        "record_draft": {
-            "record_type": "context_insufficient_notice",
-            "schema": "trinityaccord.record-chain-entry.v1",
-            "chain_id": "trinity-accord-public-reception-ledger",
-            "created_at": "2026-06-01T00:00:00Z",
-            "actor_identity": {"actor_type": "ai_agent", "display_label": "Test Agent"},
-            "context_readiness": {
-                "declared_context_level": 0,
-                "minimum_required_for_action": "CC-0",
-                "context_sufficient_for_selected_action": False,
-            },
+        "schema": "trinityaccord.record-chain-entry.v1",
+        "created_at": "2026-06-01T00:00:00Z",
+        "submitting_participant_identity": {
+            "participant_public_display_label": "Test Agent",
+            "participant_type": "ai_agent",
+            "participant_identifier_disclosure_status": "not_disclosed",
+            "participant_identity_disclosure_preference": "pseudonym_only",
+            "participant_public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
         },
-        "boundary_acknowledgement": {
+        "submission_execution_context": {
+            "builder_tool": "test-current-fixture",
+            "submitted_via": "record-chain-intake-gateway",
+        },
+        "context_readiness": {
+            "declared_context_level": 0,
+            "minimum_required_for_action": "CC-0",
+            "context_sufficient_for_selected_action": False,
+        },
+        "authorization_context": {
+            "authorization_basis": "self_initiated",
+            "authorization_scope": "create_context_insufficient_notice_record",
+        },
+        "reason": "Insufficient context loaded for any formal record type.",
+    }
+    proof = _sign_draft(draft)
+    return {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "client_generated_at": "2026-06-01T00:00:00Z",
+        "record_type": "context_insufficient_notice",
+        "record_draft": draft,
+        "builder": {
+            "name": "test-current-fixture",
+            "version": "test",
+            "source_url": "tests/conftest.py",
+        },
+        "client_context": {
+            "site_entry_url": "https://www.trinityaccord.org/agent-start/",
+            "declared_context_level": "CC-0",
+            "loaded_context_urls": [],
+        },
+        "submission_boundary": {
             "not_authority": True,
             "not_governance": True,
             "not_attestation": True,
@@ -246,8 +295,10 @@ def valid_context_insufficient_submission() -> dict[str, Any]:
             "not_amendment": True,
             "bitcoin_originals_prevail": True,
             "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
         },
+        "authorship_proof": proof,
     }
 
 
