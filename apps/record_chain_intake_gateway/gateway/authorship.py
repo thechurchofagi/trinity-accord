@@ -32,6 +32,7 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
     "actor_identity",
     "boundary",
     "server_normalization",
+    "server_append_metadata",
     "append_assigned_metadata",
     "authorship_verification_status",
     "record_id",

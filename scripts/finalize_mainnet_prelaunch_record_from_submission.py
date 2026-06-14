@@ -396,66 +396,74 @@ def build_native_test_draft(
     draft["authorship_proof"] = proof
 
     if public_test_phase == "live_test":
-        draft["network_phase"] = "live_test"
-        draft["record_scope"] = "mainnet_live_test"
-        draft["live_test"] = True
-        draft["operational_test"] = True
-        draft["test_record"] = True
-        draft["prelaunch_test"] = False
-        draft["official_live_record"] = False
-        draft["does_not_create_guardian_status"] = True
-        draft["does_not_activate_system"] = True
+        phase_metadata = {
+            "network_phase": "live_test",
+            "record_scope": "mainnet_live_test",
+            "live_test": True,
+            "operational_test": True,
+            "test_record": True,
+            "prelaunch_test": False,
+            "official_live_record": False,
+            "does_not_create_guardian_status": True,
+            "does_not_activate_system": True,
+        }
     else:
-        draft["network_phase"] = "prelaunch"
-        draft["record_scope"] = "mainnet_prelaunch_test"
-        draft["prelaunch_test"] = True
-        draft["official_live_record"] = False
-        draft["does_not_create_guardian_status"] = True
-        draft["does_not_activate_system"] = True
+        phase_metadata = {
+            "network_phase": "prelaunch",
+            "record_scope": "mainnet_prelaunch_test",
+            "prelaunch_test": True,
+            "official_live_record": False,
+            "does_not_create_guardian_status": True,
+            "does_not_activate_system": True,
+        }
 
-    draft["source_receipt_semantics"] = {
-        "receipt_is_intake_only": True,
-        "receipt_is_not_final_inclusion": True,
-        "receipt_is_not_active_guardian_status": True,
-    }
-
-    draft["receipt_id"] = receipt_id
-    draft["source_artifacts"] = {
-        "submission_filename": submission_path.name,
-        "submission_sha256": sha256_file(submission_path),
-        "submission_canonical_sha256": sha256_obj(submission),
-        "receipt_filename": receipt_path.name,
-        "receipt_sha256": sha256_file(receipt_path),
-        "receipt_canonical_sha256": sha256_obj(receipt),
-    }
-    draft["source_run_id"] = source_run_id
-
-    draft["source_summary"] = {
-        "record_type": record_type,
-        "verification_level": verification_level,
-        "submission_schema": submission.get("schema"),
-        "submission_type": submission.get("submission_type"),
-        "accepted": receipt_is_accepted(receipt),
-        "accepted_at": receipt.get("accepted_at"),
+    server_append_metadata = {
+        "schema": "trinityaccord.server-append-metadata.v1",
+        "metadata_type": "test_phase_finalization",
+        **phase_metadata,
+        "source_receipt_semantics": {
+            "receipt_is_intake_only": True,
+            "receipt_is_not_final_inclusion": True,
+            "receipt_is_not_active_guardian_status": True,
+        },
         "receipt_id": receipt_id,
-        "oath_summary": extract_oath_summary(submission),
-        "authorship_summary": require_authorship_summary(submission),
+        "source_artifacts": {
+            "submission_filename": submission_path.name,
+            "submission_sha256": sha256_file(submission_path),
+            "submission_canonical_sha256": sha256_obj(submission),
+            "receipt_filename": receipt_path.name,
+            "receipt_sha256": sha256_file(receipt_path),
+            "receipt_canonical_sha256": sha256_obj(receipt),
+        },
+        "source_run_id": source_run_id,
+        "source_summary": {
+            "record_type": record_type,
+            "verification_level": verification_level,
+            "submission_schema": submission.get("schema"),
+            "submission_type": submission.get("submission_type"),
+            "accepted": receipt_is_accepted(receipt),
+            "accepted_at": receipt.get("accepted_at"),
+            "receipt_id": receipt_id,
+            "oath_summary": extract_oath_summary(submission),
+            "authorship_summary": require_authorship_summary(submission),
+        },
+        "finalization": {
+            "finalized_at": utc_now(),
+            "finalized_by": "record-chain-test-phase-finalizer",
+            "hash_chain_inclusion_is_finalization_event": True,
+            "test_phase_finalization": True,
+            "public_test_phase": public_test_phase,
+            "prelaunch_test_finalization": public_test_phase == "prelaunch",
+            "live_test_finalization": public_test_phase == "live_test",
+            "official_live_record": False,
+            "does_not_activate_system": True,
+            "does_not_create_guardian_status": True,
+            "native_record_append_is_performed_by_trinity_record_chain": True,
+            "global_hash_chain_append_is_performed_by_append_record_chain_link": True,
+        },
     }
 
-    draft["finalization"] = {
-        "finalized_at": utc_now(),
-        "finalized_by": "record-chain-test-phase-finalizer",
-        "hash_chain_inclusion_is_finalization_event": True,
-        "test_phase_finalization": True,
-        "public_test_phase": public_test_phase,
-        "prelaunch_test_finalization": public_test_phase == "prelaunch",
-        "live_test_finalization": public_test_phase == "live_test",
-        "official_live_record": False,
-        "does_not_activate_system": True,
-        "does_not_create_guardian_status": True,
-        "native_record_append_is_performed_by_trinity_record_chain": True,
-        "global_hash_chain_append_is_performed_by_append_record_chain_link": True,
-    }
+    draft["server_append_metadata"] = server_append_metadata
 
     assert_no_raw_readback(draft)
     assert_no_private_key_material(draft, "native test draft")
@@ -575,33 +583,41 @@ def main() -> int:
 
     record_id, payload_path, native_record = append_native_record_from_draft(native_draft, receipt_id)
 
+    server_append_metadata = (
+        (native_record.get("server_normalization") or {})
+        .get("server_append_metadata") or {}
+    )
+    if not isinstance(server_append_metadata, dict):
+        raise SystemExit("native appended record missing server_normalization.server_append_metadata")
+
     if native_record.get("record_type") != record_type:
         raise SystemExit("native appended record_type mismatch")
 
-    # Phase-aware native record validation
+    # Phase-aware native record validation. These fields are server-added metadata,
+    # not participant-signed payload fields.
     if phase == "live_test":
-        if native_record.get("network_phase") != "live_test":
-            raise SystemExit("native appended record missing network_phase=live_test")
-        if native_record.get("live_test") is not True:
-            raise SystemExit("native appended record missing live_test=true")
-        if native_record.get("operational_test") is not True:
-            raise SystemExit("native appended record missing operational_test=true")
-        if native_record.get("test_record") is not True:
-            raise SystemExit("native appended record missing test_record=true")
+        if server_append_metadata.get("network_phase") != "live_test":
+            raise SystemExit("native appended record missing server_append_metadata.network_phase=live_test")
+        if server_append_metadata.get("live_test") is not True:
+            raise SystemExit("native appended record missing server_append_metadata.live_test=true")
+        if server_append_metadata.get("operational_test") is not True:
+            raise SystemExit("native appended record missing server_append_metadata.operational_test=true")
+        if server_append_metadata.get("test_record") is not True:
+            raise SystemExit("native appended record missing server_append_metadata.test_record=true")
     else:
-        if native_record.get("network_phase") != "prelaunch":
-            raise SystemExit("native appended record missing network_phase=prelaunch")
-        if native_record.get("prelaunch_test") is not True:
-            raise SystemExit("native appended record missing prelaunch_test=true")
+        if server_append_metadata.get("network_phase") != "prelaunch":
+            raise SystemExit("native appended record missing server_append_metadata.network_phase=prelaunch")
+        if server_append_metadata.get("prelaunch_test") is not True:
+            raise SystemExit("native appended record missing server_append_metadata.prelaunch_test=true")
 
-    if native_record.get("official_live_record") is not False:
-        raise SystemExit("native appended record must have official_live_record=false")
-    if native_record.get("does_not_create_guardian_status") is not True:
-        raise SystemExit("native appended record must have does_not_create_guardian_status=true")
-    if native_record.get("does_not_activate_system") is not True:
-        raise SystemExit("native appended record must have does_not_activate_system=true")
+    if server_append_metadata.get("official_live_record") is not False:
+        raise SystemExit("native appended record must have server_append_metadata.official_live_record=false")
+    if server_append_metadata.get("does_not_create_guardian_status") is not True:
+        raise SystemExit("native appended record must have server_append_metadata.does_not_create_guardian_status=true")
+    if server_append_metadata.get("does_not_activate_system") is not True:
+        raise SystemExit("native appended record must have server_append_metadata.does_not_activate_system=true")
 
-    source_summary = native_record.get("source_summary") or {}
+    source_summary = server_append_metadata.get("source_summary") or {}
     authorship_summary = source_summary.get("authorship_summary")
     if not isinstance(authorship_summary, dict):
         raise SystemExit("native appended record missing source_summary.authorship_summary")
@@ -657,7 +673,7 @@ def main() -> int:
         "receipt_id": receipt_id,
         "payload_file": str(payload_path.relative_to(ROOT)),
         "native_record_sha256": native_record.get("record_sha256"),
-        "network_phase": phase,
+        "network_phase": server_append_metadata.get("network_phase"),
         "official_live_record": False,
     }, indent=2, sort_keys=True, ensure_ascii=False))
     return 0

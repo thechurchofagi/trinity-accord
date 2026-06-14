@@ -728,6 +728,16 @@ def main() -> int:
         fail(f"record-chain write-path guard contract failed: {result.stderr}\n{result.stdout}")
     ok("record-chain write-path guard contract")
 
+    # P0 transaction/finalizer contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_chain_p0_transaction_and_finalizer_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"P0 transaction/finalizer contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("P0 transaction/finalizer contract")
 
     # External agent first-contact rules contract
     result = subprocess.run(

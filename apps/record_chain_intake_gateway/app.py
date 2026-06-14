@@ -964,8 +964,15 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
     receipt_content = canonical_dumps(receipt_data)
 
-    # --- persist to GitHub (write order: submission → pending → linked guardian → receipt LAST) ---
-    # receipt_data is NOT mutated after creation; commit_sha is returned at response envelope level
+    # --- persist to GitHub ---
+    # Safe order:
+    #   1. submission
+    #   2. receipt
+    #   3. idempotency index
+    #   4. pending LAST
+    #
+    # The pending file is the append-eligibility marker. It must not be visible
+    # until durable intake state exists and is globally idempotent.
     commit_sha: str | None = None
     created_files_for_rollback: list[tuple[str, str]] = []
     append_status = "pending"
@@ -1046,31 +1053,21 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 created_files_for_rollback.append((intake_submission_path, result1["content"]["sha"]))
             logger.info("Wrote submission %s", intake_submission_path)
 
-            # Write 2: pending file (create only)
-            result2 = await put_file(
-                pending_file_path,
-                pending_content,
-                f"intake: pending {receipt_id} ({record_type})",
-                sha=None,
-            )
-            if result2.get("content", {}).get("sha"):
-                created_files_for_rollback.append((pending_file_path, result2["content"]["sha"]))
-            logger.info("Wrote pending %s", pending_file_path)
-
-            # Write 3: receipt (LAST — create only)
-            result4 = await put_file(
+            # Write 2: receipt (create only)
+            # The receipt must exist before pending becomes visible to append workers.
+            result_receipt = await put_file(
                 receipt_path,
                 receipt_content,
                 f"intake: receipt {receipt_id}",
                 sha=None,
             )
-            if result4.get("content", {}).get("sha"):
-                created_files_for_rollback.append((receipt_path, result4["content"]["sha"]))
+            if result_receipt.get("content", {}).get("sha"):
+                created_files_for_rollback.append((receipt_path, result_receipt["content"]["sha"]))
             logger.info("Wrote receipt %s", receipt_path)
 
-            commit_sha = result4.get("commit", {}).get("sha")
+            commit_sha = result_receipt.get("commit", {}).get("sha")
 
-            # Part B: write global idempotency index (fail-closed)
+            # Write 3: global idempotency index (create only, fail-closed)
             idempotency_path = _idempotency_index_path(original_submission_sha256)
             idempotency_index_data = _build_idempotency_index_data(
                 submission_sha256=original_submission_sha256,
@@ -1146,6 +1143,19 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     )],
                     boundary=_build_boundary(body),
                 )
+
+            # Write 4: pending file (create only) — LAST.
+            # This file is the append-eligibility marker. It must not exist until
+            # submission, receipt, and idempotency index are durable.
+            result_pending = await put_file(
+                pending_file_path,
+                pending_content,
+                f"intake: pending {receipt_id} ({record_type})",
+                sha=None,
+            )
+            if result_pending.get("content", {}).get("sha"):
+                created_files_for_rollback.append((pending_file_path, result_pending["content"]["sha"]))
+            logger.info("Wrote pending %s", pending_file_path)
 
             if _DISPATCH_APPEND_WORKFLOW:
                 try:

@@ -548,6 +548,92 @@ def load_tip(allow_generate: bool = False) -> dict[str, Any]:
     return read_json(CHAIN_TIP)
 
 
+_GATEWAY_PENDING_RE = re.compile(
+    r"^(rcg-(?P<date>\d{8})-[0-9a-f]{12,24})\.[a-z_]+\.pending\.json$"
+)
+
+
+def _gateway_pending_receipt_id(path: Path) -> str | None:
+    match = _GATEWAY_PENDING_RE.fullmatch(path.name)
+    if not match:
+        return None
+    return match.group(1)
+
+
+def _receipt_path_for_gateway_pending(path: Path) -> Path | None:
+    receipt_id = _gateway_pending_receipt_id(path)
+    if receipt_id is None:
+        return None
+    date_text = receipt_id.split("-")[1]
+    yyyy = date_text[:4]
+    mm = date_text[4:6]
+    return CHAIN / "intake" / "receipts" / yyyy / mm / f"{receipt_id}.receipt.json"
+
+
+def require_gateway_pending_durable_intake_binding(path: Path) -> None:
+    """Fail closed unless a Gateway-created pending file has durable intake state.
+
+    Applies only to canonical Gateway pending files:
+        rcg-YYYYMMDD-<sha-prefix>.<record_type>.pending.json
+
+    Does not apply to finalizer-local temporary pending files such as:
+        mainnet-prelaunch-<receipt-id>.json
+    because those are created and consumed inside one finalizer workflow before commit.
+    """
+    receipt_id = _gateway_pending_receipt_id(path)
+    if receipt_id is None:
+        return
+
+    receipt_path = _receipt_path_for_gateway_pending(path)
+    if receipt_path is None or not receipt_path.exists():
+        raise ValueError(f"gateway pending has no durable receipt: {path.relative_to(ROOT)}")
+
+    receipt = read_json(receipt_path)
+    rel_pending = str(path.relative_to(ROOT))
+    if receipt.get("pending_file_path") != rel_pending:
+        raise ValueError(
+            f"receipt.pending_file_path does not bind to pending file: {path.relative_to(ROOT)}"
+        )
+
+    submission_sha = receipt.get("original_submission_sha256") or receipt.get("submission_sha256")
+    if not isinstance(submission_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", submission_sha):
+        raise ValueError(
+            f"receipt has no valid original_submission_sha256/submission_sha256: {receipt_path.relative_to(ROOT)}"
+        )
+
+    idempotency_path = CHAIN / "intake" / "by-submission-sha256" / f"{submission_sha}.json"
+    if not idempotency_path.exists():
+        raise ValueError(f"gateway pending has no idempotency index: {idempotency_path.relative_to(ROOT)}")
+
+    idx = read_json(idempotency_path)
+    if idx.get("submission_sha256") != submission_sha:
+        raise ValueError("idempotency index submission_sha256 mismatch")
+    if idx.get("receipt_id") != receipt_id:
+        raise ValueError("idempotency index receipt_id mismatch")
+    if idx.get("receipt_path") != str(receipt_path.relative_to(ROOT)):
+        raise ValueError("idempotency index receipt_path mismatch")
+    if idx.get("pending_file_path") != rel_pending:
+        raise ValueError("idempotency index pending_file_path mismatch")
+    if idx.get("intake_submission_path") != receipt.get("intake_submission_path"):
+        raise ValueError("idempotency index intake_submission_path mismatch")
+
+
+def extract_server_append_metadata(raw_draft: dict[str, Any]) -> dict[str, Any]:
+    """Return unsigned server append metadata carried by a pending file.
+
+    The metadata is stripped before authorship verification and then merged
+    under server_normalization in the final record.
+    """
+    metadata = raw_draft.get("server_append_metadata")
+    if metadata is None:
+        return {}
+    if not isinstance(metadata, dict):
+        raise ValueError("server_append_metadata must be an object when present")
+    if metadata.get("schema") != "trinityaccord.server-append-metadata.v1":
+        raise ValueError("server_append_metadata.schema must be trinityaccord.server-append-metadata.v1")
+    return metadata
+
+
 def append_records(all_records: bool = False) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
@@ -563,11 +649,23 @@ def append_records(all_records: bool = False) -> None:
     for path in selected:
         try:
             raw_draft = read_json(path)
+
+            # Gateway-created pending files must not be appendable unless durable
+            # submission, receipt, and idempotency state already exist and bind to them.
+            require_gateway_pending_durable_intake_binding(path)
+
+            # Extract unsigned server append metadata before stripping unsigned projection fields.
+            server_append_metadata = extract_server_append_metadata(raw_draft)
+
             # Verify authorship proof on the signed-scope pending draft before normalization
             # modifies it. Then append the same sanitized object that was verified.
             signed_scope_draft = sanitize_pending_record_for_append(raw_draft)
             verify_pending_record_authorship(signed_scope_draft)
             draft = normalize_record_draft(signed_scope_draft)
+
+            if server_append_metadata:
+                draft.setdefault("server_normalization", {})
+                draft["server_normalization"]["server_append_metadata"] = server_append_metadata
 
             # --- Phase 6B: authorship_verification_status ---
             # Record the scope of the authorship proof relative to the final

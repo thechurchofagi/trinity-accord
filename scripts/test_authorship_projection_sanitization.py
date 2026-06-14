@@ -129,6 +129,11 @@ def make_signed_pending_with_projection() -> tuple[dict, dict]:
     polluted_pending["record_index"] = 999999999
     polluted_pending["content_sha256"] = "0" * 64
     polluted_pending["record_sha256"] = "1" * 64
+    polluted_pending["server_append_metadata"] = {
+        "schema": "trinityaccord.server-append-metadata.v1",
+        "metadata_type": "test_phase_finalization",
+        "network_phase": "prelaunch",
+    }
 
     return signed_draft, polluted_pending
 
@@ -148,6 +153,7 @@ def main() -> None:
     require("record_index" not in sanitized, "record_index must be stripped")
     require("content_sha256" not in sanitized, "content_sha256 must be stripped")
     require("record_sha256" not in sanitized, "record_sha256 must be stripped")
+    require("server_append_metadata" not in sanitized, "server_append_metadata must be stripped")
     require(sanitized["echo_content"] == signed_draft["echo_content"], "signed content must remain")
 
     ok, err = verify_authorship_proof(sanitized, proof)

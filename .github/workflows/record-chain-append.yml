@@ -11,10 +11,6 @@ on:
         description: "Pending file path that requested this append run"
         required: false
         default: ""
-  push:
-    branches: [main]
-    paths:
-      - "record-chain/pending/**"
   schedule:
     - cron: "*/15 * * * *"
 
