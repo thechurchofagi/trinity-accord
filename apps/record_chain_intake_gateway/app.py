@@ -19,7 +19,6 @@ from fastapi.responses import JSONResponse
 from apps.record_chain_intake_gateway.gateway.authorship import (
     strip_authorship_for_signing,
     strip_unsigned_projection_fields,
-    verify_authorship_proof,
 )
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
 from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file
@@ -412,38 +411,6 @@ _FORMAL_RECORD_TYPES = {
     "correction",
     "classification_update",
 }
-
-
-def _authorship_preflight_diagnostic(body: dict[str, Any]) -> Diagnostic | None:
-    """Verify authorship proof during preflight if proof is present."""
-    draft = extract_record_draft(body) or {}
-    proof = (
-        body.get("authorship_proof")
-        or body.get("proof")
-        or (draft.get("authorship_proof") if isinstance(draft, dict) else None)
-    )
-    record_type = (
-        body.get("record_type")
-        or (draft.get("record_type") if isinstance(draft, dict) else "")
-    )
-
-    if not isinstance(draft, dict):
-        return None
-
-    if record_type in _FORMAL_RECORD_TYPES and isinstance(proof, dict):
-        ok, err = verify_authorship_proof(draft, proof)
-        if not ok:
-            return Diagnostic(
-                code="AUTHORSHIP_PROOF_INVALID",
-                severity="error",
-                field="authorship_proof",
-                message=f"Authorship proof verification failed: {err}",
-                meaning="The signature or public-key proof does not match the record draft.",
-                suggested_fix="Rebuild the submission with the latest builder and the correct authorship key.",
-                help_url="https://www.trinityaccord.org/record-chain-field-helper/#AUTHORSHIP_PROOF_INVALID",
-                retry_allowed=True,
-            )
-    return None
 
 
 def _normalize_public_v2_draft_for_pending(draft: dict[str, Any]) -> dict[str, Any]:
@@ -914,29 +881,10 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     # --- extract draft ---
     draft: dict[str, Any] = extract_record_draft(body) or {}
 
-    # --- authorship verification (if proof supplied) ---
+    # --- authorship verification is performed inside validate_submission() ---
+    # At this point the proof is trusted as validation-passed input.
     proof = body.get("authorship_proof") or body.get("proof")
-    authorship_verified = False
-    authorship_error: str | None = None
-
-    if proof and isinstance(proof, dict):
-        ok, err = verify_authorship_proof(draft, proof)
-        if not ok:
-            authorship_error = f"Authorship verification failed: {err}"
-            return SubmitResponse(
-                accepted=False,
-                submitted=False,
-                record_type=record_type,
-                submission_sha256=submission_sha256,
-                received_raw_body_sha256=received_raw_body_sha256,
-                diagnostics=[Diagnostic(
-                    code="AUTHORSHIP_FAILED",
-                    severity="error",
-                    message=authorship_error,
-                )],
-                boundary=_build_boundary(body),
-            )
-        authorship_verified = True
+    authorship_verified = isinstance(proof, dict)
 
     # --- redact transient oath readback before persistence ---
     from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
