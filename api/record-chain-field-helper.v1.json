@@ -43,7 +43,7 @@
   "bitcoin_originals_prevail": true,
   "canonical_submission_schema": "/api/record-chain-submission-schema.v1.json",
   "common_field_model": "/api/record-chain-common-field-model.v1.json",
-  "current_public_phase": "mainnet_prelaunch_testing",
+  "current_public_phase": "production_live",
   "diagnostic_code_help": {
     "AUTHORSHIP_PROOF_INVALID": {
       "fix": "Rebuild the submission with the latest builder and the correct authorship key. Do not modify the draft after signing.",
@@ -186,6 +186,30 @@
     "VERIFICATION_EVIDENCE_REQUIRED_FOR_V6_PLUS": {
       "fix": "Either provide the required evidence (run scripts, include artifact hashes, attach verification report), or downgrade your verification level to V5 or below.",
       "meaning": "Verification levels V6, V7, and V8 require strict evidence: scripts, artifacts, and reproducible methods. You claimed V6+ but did not provide evidence.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "AUTHORSHIP_CLAIM_BOUNDARY_INVALID": {
+      "meaning": "The top-level authorship_proof.claim_boundary is missing or invalid. It must acknowledge non-authority boundaries.",
+      "fix": "Rebuild the submission with the latest Builder. Do not hand-edit authorship_proof. Ensure claim_boundary contains not_authority, not_attestation, and not_amendment set to true.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD": {
+      "meaning": "The submission draft contains a server-derived or append-assigned field that clients must not supply.",
+      "fix": "Remove the field named in the diagnostic, then rebuild and sign the submission with the latest Builder. Do not include server_append_metadata, server_normalization, append_assigned_metadata, record hashes, record_id, chain_id, or similar server fields.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "MISSING_CLASSIFICATION_UPDATE_CONTENT": {
+      "meaning": "A classification_update record is missing its required classification_update_content fields.",
+      "fix": "Rebuild with the classification-update Builder command and provide target_record_id, target_record_sha256, previous_classification, new_classification, classification_reason, and evidence_or_review_basis.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "INVALID_CLASSIFICATION_TARGET_SHA": {
+      "meaning": "classification_update_content.target_record_sha256 is not a valid 64-character lowercase SHA-256.",
+      "fix": "Use the canonical lowercase SHA-256 of the target record.",
       "recovery_possible": true,
       "severity": "error"
     }
@@ -697,5 +721,5 @@
   "schema": "trinityaccord.record-chain-field-helper.v1",
   "status": "active",
   "submit_endpoint": "/record-chain/submit",
-  "updated_at": "2026-06-06T04:16:49Z"
+  "updated_at": "2026-06-14T14:01:02Z"
 }

@@ -772,6 +772,17 @@ def main() -> int:
         fail(f"external agent first-contact rules contract failed: {result.stderr}\n{result.stdout}")
     ok("external agent first-contact rules contract")
 
+    # External agent entrypoint consistency contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_external_agent_entrypoint_consistency_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"external agent entrypoint consistency contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("external agent entrypoint consistency contract")
+
     # Arweave wallet status contract
     result = subprocess.run(
         [sys.executable, "scripts/test_arweave_wallet_status.py"],

@@ -94,6 +94,28 @@ def fetch_json(url: str, timeout: int) -> Any:
     return data
 
 
+def fetch_text(url: str, timeout: int) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "trinity-accord-live-discovery-smoke/1.0",
+            "Accept": "text/plain,*/*",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            status = getattr(resp, "status", None)
+            if status and status >= 400:
+                raise RuntimeError(f"HTTP {status} from {url}")
+            return resp.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"HTTP {e.code} from {url}: {e.reason}") from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"Failed to fetch {url}: {e.reason}") from e
+
+
 def with_cache_bust(url: str, token: str) -> str:
     parsed = urllib.parse.urlsplit(url)
     query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
@@ -256,6 +278,65 @@ def validate_builder_contract(label: str, site: str, timeout: int, errors: list[
         pass  # mirror is optional
 
 
+def validate_live_agent_entrypoints(
+    first_contact: dict[str, Any],
+    agent_start: dict[str, Any],
+    field_helper: dict[str, Any],
+    llms_text: str,
+    ai_text: str,
+    errors: list[str],
+) -> None:
+    submit_action = None
+    for item in first_contact.get("choose_one", []):
+        if isinstance(item, dict) and item.get("intent") == "submit_record":
+            submit_action = item
+            break
+
+    if not isinstance(submit_action, dict):
+        errors.append("live first-contact missing submit_record action")
+        return
+
+    if "classification_update" not in submit_action.get("supported_record_types", []):
+        errors.append("live first-contact supported_record_types missing classification_update")
+
+    zc = first_contact.get("zero_clone_formal_builder_policy", {})
+    if "classification_update" not in zc.get("supported_zero_clone_routes", []):
+        errors.append("live first-contact zero_clone routes missing classification_update")
+
+    observation = first_contact.get("post_submit_observation_protocol", {})
+    record_indexes = observation.get("record_specific_indexes", {})
+    if record_indexes.get("guardian_application") != "/record-chain/indexes/guardian-state.json":
+        errors.append("live first-contact guardian_application index is not guardian-state")
+
+    claim = observation.get("claim_discipline", {})
+    if claim.get("guardian_active_status_requires_record_chain_guardian_state_readback") is not True:
+        errors.append("live first-contact must require record-chain guardian-state readback")
+    if claim.get("guardian_active_status_requires_registry_readback") is not False:
+        errors.append("live first-contact must not require legacy registry readback for active Guardian status")
+
+    commands = agent_start.get("builder_usage_safety_protocol", {}).get("record_type_commands", {})
+    if "classification_update" not in commands:
+        errors.append("live agent-start record_type_commands missing classification_update")
+
+    if field_helper.get("current_public_phase") != "production_live":
+        errors.append("live field helper current_public_phase is not production_live")
+
+    for code in [
+        "AUTHORSHIP_CLAIM_BOUNDARY_INVALID",
+        "CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD",
+        "MISSING_CLASSIFICATION_UPDATE_CONTENT",
+        "INVALID_CLASSIFICATION_TARGET_SHA",
+    ]:
+        if code not in field_helper.get("diagnostic_code_help", {}):
+            errors.append(f"live field helper missing diagnostic help for {code}")
+
+    for label, text in [("llms.txt", llms_text), ("ai.txt", ai_text)]:
+        if "/record-chain/indexes/guardian-state.json" not in text:
+            errors.append(f"live {label} missing current guardian-state source")
+        if "Guardian application → `/api/guardian-registry.json`" in text:
+            errors.append(f"live {label} presents legacy registry as active Guardian application index")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", default=DEFAULT_SITE)
@@ -344,6 +425,26 @@ def main() -> int:
 
     # Verify builder contract
     validate_builder_contract("canonical", site, args.timeout, errors)
+
+    # Fetch and validate live active entrypoints
+    print(f"Fetching live agent entrypoints...")
+    try:
+        first_contact = fetch_json(f"{site}/api/agent-first-contact.json", args.timeout)
+        agent_start = fetch_json(f"{site}/api/agent-start.v2.json", args.timeout)
+        field_helper = fetch_json(f"{site}/api/record-chain-field-helper.v1.json", args.timeout)
+        llms_text = fetch_text(f"{site}/llms.txt", args.timeout)
+        ai_text = fetch_text(f"{site}/ai.txt", args.timeout)
+
+        validate_live_agent_entrypoints(
+            first_contact,
+            agent_start,
+            field_helper,
+            llms_text,
+            ai_text,
+            errors,
+        )
+    except RuntimeError as e:
+        errors.append(f"live agent entrypoint fetch failed: {e}")
 
     if errors:
         print("FAIL: live discovery contract errors:")

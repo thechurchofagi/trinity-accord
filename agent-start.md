@@ -213,4 +213,5 @@ The archive and its checksum must be stored privately by the human operator. The
 | Guardian Retirement | `record-chain-builder.mjs guardian-retirement` |
 | Propagation | `record-chain-builder.mjs propagation` |
 | Correction | `record-chain-builder.mjs correction` |
+| Classification Update | `record-chain-builder.mjs classification-update` |
 | Context-insufficient notice | `record-chain-builder.mjs context-insufficient` |

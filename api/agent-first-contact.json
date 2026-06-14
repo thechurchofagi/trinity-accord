@@ -83,6 +83,7 @@
         "guardian_retirement",
         "propagation",
         "correction",
+        "classification_update",
         "context_insufficient_notice"
       ]
     },
@@ -223,7 +224,9 @@
     "record_specific_indexes": {
       "echo": "/api/echo-index.json",
       "guardian_application": "/record-chain/indexes/guardian-state.json",
-      "verification": "/api/agent-declared-verification-index.json"
+      "verification": "/api/agent-declared-verification-index.json",
+      "classification_update": "/api/record-chain-status.json",
+      "classification_update_note": "classification_update does not currently have a dedicated type index; use record-chain status or native record readback before claiming final inclusion."
     }
   },
   "public_phase": {
@@ -245,8 +248,8 @@
   },
   "schema": "trinityaccord.agent-first-contact.v2",
   "status": "active_agent_router",
-  "updated_at": "2026-06-13T10:20:00Z",
-  "version": "2.0.2",
+  "updated_at": "2026-06-14T14:00:22Z",
+  "version": "2.0.3",
   "zero_clone_formal_builder_policy": {
     "builder_bundle_manifest": {
       "do_not_use_for_new_submissions": true,
@@ -272,6 +275,7 @@
       "guardian_retirement",
       "propagation",
       "correction",
+      "classification_update",
       "context_insufficient_notice"
     ]
   },

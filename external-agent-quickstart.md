@@ -113,6 +113,8 @@ The following are historical references only. Do not use for new submissions:
 - `download_and_run_builder_bundle.py`
 - Historical copy-paste examples such as `E1_recognition_echo`, `Guardian Stage 1`, and legacy declared-level flags
 
-## Route-selector and gateway runtime contract
+## Route and gateway contract
 
-Use `/external-agent-copy-paste-examples/` only as examples. Select the current route through the route-selector in `/api/agent-first-contact.json` and confirm the gateway-runtime-contract before submission.
+Use `/api/agent-first-contact.json` and `/api/record-chain-intake-gateway.v1.json` as the current route and gateway contract for new public submissions.
+
+Do not use `/api/route-selector.v1.json`, `/api/gateway-runtime-contract.v1.json`, `/api/gateway-workflows.v1.json`, or legacy Gateway v1 endpoints for new submissions. Those are historical archive references only.

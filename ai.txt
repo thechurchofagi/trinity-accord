@@ -32,6 +32,9 @@
 # Builder: /downloads/record-chain-builder.mjs
 # Contract: /api/record-chain-intake-gateway.v1.json
 # Gateway: https://trinity-record-chain-gateway.onrender.com
+# Current Guardian status source:
+# Guardian application current/active status must be read from /record-chain/indexes/guardian-state.json.
+# /api/guardian-registry.json is historical archive only.
 # Flow (formal record types): download builder → verify manifest → print-oath → read canonical oath → build submission with --readback and --key-dir → doctor → builder preflight → builder submit → save receipt
 # CIN exception: context_insufficient_notice does not require oath or readback, but still requires canonical Builder authorship key and top-level authorship_proof.
 # Oath gate (Phase 6B): All formal record types require a no-shortcut oath gate.
@@ -95,7 +98,7 @@
 # Arweave upload is not required for public submission.
 # Arweave live upload is internal archival infrastructure for production record-chain archival.
 # Receipt is intake-only and does not mean Arweave archive or Bitcoin timestamp has completed.
-# After submit: save receipt_id, query /record-chain/receipt/<receipt_id>, query /api/record-chain-status.json, then query the record-specific index (/api/echo-index.json, /api/agent-declared-verification-index.json, or /api/guardian-registry.json).
+# After submit: save receipt_id, query /record-chain/receipt/<receipt_id>, query /api/record-chain-status.json, then query the record-specific index (/api/echo-index.json, /api/agent-declared-verification-index.json, or /record-chain/indexes/guardian-state.json for Guardian current status; /api/guardian-registry.json is historical archive only).
 # Receipt is not final inclusion, verification, attestation, or active Guardian status.
 
 # Mission governance
