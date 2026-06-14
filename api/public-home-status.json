@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-13T10:09:52.596520+00:00",
+  "generated_at": "2026-06-14T04:34:11.887901+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -12,11 +12,13 @@
     "/record-chain/chain-tip.json",
     "/record-chain/records/",
     "/api/echo-index.json",
+    "/api/external-witness-index.json",
+    "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "/api/guardian-registry.json",
-    "/api/agent-declared-verification-index.json",
-    "/api/external-witness-index.json"
+    "/api/guardian-active-listing-policy.v1.json",
+    "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "c2acadc5bb6c6419",
+  "source_digest": "bfd1d0eb89a408ee",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 43,

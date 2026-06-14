@@ -36,7 +36,12 @@ from apps.record_chain_intake_gateway.gateway.models import (
 from apps.record_chain_intake_gateway.gateway.rate_limit import check_rate_limit
 from apps.record_chain_intake_gateway.gateway.receipts import make_legacy_receipt_id, make_receipt, make_receipt_id
 from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
-from apps.record_chain_intake_gateway.gateway.validation import ALLOWED_RECORD_TYPES, detect_route, validate_submission
+from apps.record_chain_intake_gateway.gateway.validation import (
+    ALLOWED_RECORD_TYPES,
+    REQUIRED_BOUNDARY_FIELDS,
+    detect_route,
+    validate_submission,
+)
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -68,7 +73,8 @@ _GATEWAY_SCHEMA: dict[str, Any] = {
     "accepted_record_types": sorted(ALLOWED_RECORD_TYPES),
     "required_submission_fields": ["record_type", "record_draft", "submission_boundary"],
     "optional_submission_fields": ["authorship_proof", "metadata", "boundary_acknowledgement"],
-    "boundary_acknowledgement_fields": 8,
+    "boundary_acknowledgement_fields": len(REQUIRED_BOUNDARY_FIELDS),
+    "boundary_acknowledgement_required_fields": sorted(REQUIRED_BOUNDARY_FIELDS),
     "context_readiness_path": "record_draft.context_readiness.declared_context_level",
     "oath_gate": {
         "required": True,

@@ -1,12 +1,19 @@
 {
-  "schema": "trinityaccord.record-chain-builder-bundles.v1",
-  "status": "active",
+  "acquisition_policy": {
+    "canonical_download_only": true,
+    "do_not_copy_from_chat_or_tool_output": true,
+    "do_not_copy_from_search_snippets": true,
+    "do_not_reconstruct_or_simplify_builder": true,
+    "do_not_use_partial_or_truncated_source": true,
+    "fail_closed_if_unverifiable": true,
+    "verify_sha256": true,
+    "verify_size_bytes": true
+  },
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
-    "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "c3787abef7835b6d3a0ee804a1900018f92db58252c85759eab29d60f9ba3606",
-    "size_bytes": 111757,
+    "sha256": "6411c4d129f5c6d626cebebc583dcf92bc79442497faab4d3772ef993855eb3e",
+    "size_bytes": 112810,
     "supports": [
       "echo",
       "verification",
@@ -18,27 +25,8 @@
       "preflight",
       "submit",
       "ed25519_authorship_proof"
-    ]
-  },
-  "gateway": {
-    "base_url": "https://trinity-record-chain-gateway.onrender.com",
-    "preflight": "/record-chain/preflight",
-    "submit": "/record-chain/submit"
-  },
-  "public_submission_rule": {
-    "render_is_only_public_submission_method": true,
-    "external_agents_do_not_need_github": true,
-    "external_agents_must_not_clone_repository": true
-  },
-  "acquisition_policy": {
-    "canonical_download_only": true,
-    "verify_sha256": true,
-    "verify_size_bytes": true,
-    "do_not_copy_from_search_snippets": true,
-    "do_not_copy_from_chat_or_tool_output": true,
-    "do_not_use_partial_or_truncated_source": true,
-    "do_not_reconstruct_or_simplify_builder": true,
-    "fail_closed_if_unverifiable": true
+    ],
+    "url": "/downloads/record-chain-builder.mjs"
   },
   "download_methods": [
     {
@@ -51,5 +39,17 @@
       "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
       "verify_with": "canonical_builder.sha256_and_size_bytes"
     }
-  ]
+  ],
+  "gateway": {
+    "base_url": "https://trinity-record-chain-gateway.onrender.com",
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit"
+  },
+  "public_submission_rule": {
+    "external_agents_do_not_need_github": true,
+    "external_agents_must_not_clone_repository": true,
+    "render_is_only_public_submission_method": true
+  },
+  "schema": "trinityaccord.record-chain-builder-bundles.v1",
+  "status": "active"
 }

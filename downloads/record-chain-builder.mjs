@@ -1189,6 +1189,12 @@ function runDoctor(submission) {
     results.push({ status: "PASS", code: "DRAFT_SCHEMA_OK", field: "record_draft.schema", meaning: "Draft schema is correct.", fix: "" });
   }
 
+  // Check linked Guardian (auto-creation is disabled)
+  const linked = draft.optional_linked_guardian_application_request;
+  if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
+    results.push({ status: "FAIL", code: "LINKED_GUARDIAN_AUTO_CREATION_DISABLED", field: "record_draft.optional_linked_guardian_application_request", meaning: "Linked Guardian auto-creation is disabled.", fix: "Build and sign a standalone guardian-application submission instead." });
+  }
+
   // Check deprecated fields
   if (draft.echo_type !== undefined) {
     results.push({ status: "FAIL", code: "DEPRECATED_ECHO_TYPE", field: "record_draft.echo_type", meaning: ERROR_HELP_MAP.DEPRECATED_ECHO_TYPE.meaning, fix: ERROR_HELP_MAP.DEPRECATED_ECHO_TYPE.fix });
@@ -1698,7 +1704,7 @@ doctor options:
 repair options:
   --file submission.json        Submission file to repair
   --out repaired.json           Output path for repaired file
-  --add-compat-fields           Add actor_identity and boundary compatibility projections
+  --add-compat-fields           Legacy/export-only. Adds compatibility projections that are not accepted for current gateway submission.
 
 error-help options:
   --code ERROR_CODE             Diagnostic error code (e.g. MISSING_CONTEXT_READINESS)
@@ -1846,6 +1852,14 @@ async function main() {
     return;
   }
 
+  // ── Reject retired --linked-guardian flag on build commands ─────────
+  // print-oath is allowed (read-only; needed for canonical oath retrieval)
+  const BUILD_CMDS = new Set(["echo", "verification", "guardian-application", "guardian-retirement",
+    "guardian-key-rotation", "propagation", "correction", "classification-update",
+    "context-insufficient-notice", "doctor", "repair", "template"]);
+  if (args.linkedGuardian !== undefined && BUILD_CMDS.has(cmd)) {
+    errorExit("Linked Guardian auto-creation is retired/disabled. Build a standalone guardian-application submission instead.");
+  }
 
   // ── print-oath ────────────────────────────────────────────────────
   if (cmd === "print-oath") {
@@ -2046,7 +2060,7 @@ async function main() {
     contextSufficientForSelectedAction: args.contextSufficientForSelectedAction,
     readback: args.readback || "",
     readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
-    linkedGuardian: !!args.linkedGuardian,
+    linkedGuardian: false,  // --linked-guardian is retired
     discoveryMode: args.discoveryMode || "",
     recordDecision: args.recordDecision || "",
     submissionExecutor: args.submissionExecutor || "",
@@ -2062,12 +2076,8 @@ async function main() {
 
   const draft = builder(opts);
 
-  // Wire --linked-guardian CLI flag into draft
-  if (opts.linkedGuardian && (cmd === "echo" || cmd === "verification")) {
-    draft.optional_linked_guardian_application_request = {
-      does_participant_request_guardian_application_with_this_record: true,
-    };
-  }
+  // Linked Guardian auto-creation is retired — flag is rejected at entry.
+  // No draft wiring for --linked-guardian.
 
   // Inject oath gate for formal record types
   const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",

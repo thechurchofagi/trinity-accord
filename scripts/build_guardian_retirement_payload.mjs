@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 /**
+ * DEPRECATED / LEGACY-REGISTRY-ONLY TOOL.
+ * Not for current public Record-Chain Guardian retirement.
+ * Use downloads/record-chain-builder.mjs guardian-retirement and submit
+ * through /record-chain/preflight then /record-chain/submit.
+ *
  * Build a signed Guardian retirement request payload.
  *
  * Usage:
  *   node scripts/build_guardian_retirement_payload.mjs \
+ *     --i-understand-this-is-legacy-registry-only \
  *     --private-key ./guardian-output/guardian-key.private.pem \
  *     --public-key ./guardian-output/guardian-key.public.pem \
  *     --guardian-id guardian_ed25519_XXXXXXXX \
@@ -63,6 +69,7 @@ function parseArgs() {
     else if (args[i] === "--guardian-registry-number") parsed.registryNumber = args[++i];
     else if (args[i] === "--reason") parsed.reason = args[++i];
     else if (args[i] === "--out") parsed.out = args[++i];
+    else if (args[i] === "--i-understand-this-is-legacy-registry-only") parsed.legacyOnlyConfirm = true;
   }
   return parsed;
 }
@@ -71,6 +78,12 @@ function parseArgs() {
 
 function main() {
   const opts = parseArgs();
+
+  if (!opts.legacyOnlyConfirm) {
+    console.error("This is a deprecated legacy-registry-only tool. For current public retirement, use downloads/record-chain-builder.mjs guardian-retirement.");
+    console.error("If you are performing a legacy migration only, pass --i-understand-this-is-legacy-registry-only.");
+    process.exit(1);
+  }
 
   if (!opts.privateKey || !opts.publicKey) {
     console.error("Usage: --private-key <path> --public-key <path> [--guardian-id <id>] [--guardian-registry-number <num>] [--reason <text>] --out <path>");

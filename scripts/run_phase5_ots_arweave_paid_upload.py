@@ -15,6 +15,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RUN_ID = time.strftime("phase5-ots-arweave-%Y%m%dT%H%M%SZ", time.gmtime())
 
+UPLOADABLE_OTS_STATUSES = frozenset({"pending", "upgraded", "verified"})
+REFUSED_OTS_STATUSES = frozenset({"dry_run"})
+
 CONFIRM_PAID_UPLOAD = "I_UNDERSTAND_THIS_UPLOADS_THE_OTS_PROOF_BUNDLE_TO_ARWEAVE"
 EXPECTED_OWNER = "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
 RECORD_TYPE = "ots_anchor_archive"
@@ -152,10 +155,16 @@ def validate_latest_ots(latest_path: Path) -> dict[str, Any]:
         raise SystemExit(f"unexpected latest schema: {latest.get('schema')}")
 
     ots_status = latest.get("ots_status")
-    if ots_status == "dry_run":
+    if ots_status in REFUSED_OTS_STATUSES:
         raise SystemExit("Refusing Phase 5: latest OTS anchor is dry_run")
-    if ots_status not in {"pending", "verified"}:
+    if ots_status not in UPLOADABLE_OTS_STATUSES:
         raise SystemExit(f"Refusing Phase 5: unexpected ots_status={ots_status!r}")
+
+    if ots_status == "upgraded":
+        if latest.get("bitcoin_attestation_embedded") is not True:
+            raise SystemExit("upgraded OTS status requires bitcoin_attestation_embedded=true")
+        if latest.get("bitcoin_pending") is True:
+            raise SystemExit("upgraded OTS status must not report bitcoin_pending=true")
 
     if latest.get("chain_id") != "trinity-record-chain-main":
         raise SystemExit(f"unexpected chain_id: {latest.get('chain_id')}")
@@ -185,11 +194,18 @@ def validate_anchor(anchor_path_rel: str) -> dict[str, Any]:
     if anchor.get("schema") != "trinity_record_chain_ots_anchor.v1":
         raise SystemExit(f"anchor schema mismatch: {anchor.get('schema')}")
 
-    if anchor.get("ots_status") == "dry_run":
+    anchor_status = anchor.get("ots_status")
+    if anchor_status in REFUSED_OTS_STATUSES:
         raise SystemExit("Refusing Phase 5: anchor ots_status is dry_run")
+    if anchor_status not in UPLOADABLE_OTS_STATUSES:
+        raise SystemExit(f"unexpected anchor ots_status: {anchor_status}")
 
-    if anchor.get("ots_status") not in {"pending", "verified"}:
-        raise SystemExit(f"unexpected anchor ots_status: {anchor.get('ots_status')}")
+    # Boundary check for upgraded anchor if fields present
+    if anchor_status == "upgraded" and "bitcoin_attestation_embedded" in anchor:
+        if anchor.get("bitcoin_attestation_embedded") is not True:
+            raise SystemExit("upgraded anchor requires bitcoin_attestation_embedded=true")
+        if anchor.get("bitcoin_pending") is True:
+            raise SystemExit("upgraded anchor must not report bitcoin_pending=true")
 
     if anchor.get("chain_id") != "trinity-record-chain-main":
         raise SystemExit("anchor chain_id mismatch")

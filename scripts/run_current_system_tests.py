@@ -872,6 +872,28 @@ def main() -> int:
         fail(f"record-chain receipt contract failed:\n{result.stdout}\n{result.stderr}")
     ok("record-chain receipt contract")
 
+    # Phase 5 OTS-Arweave upgraded status contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_phase5_ots_arweave_upgraded_status_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Phase 5 OTS-Arweave upgraded status contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("Phase 5 OTS-Arweave upgraded status contract")
+
+    # Public status declared inputs/source_digest contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_status_declared_inputs_match_source_digest.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public status declared inputs/source_digest contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("public status declared inputs/source_digest contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

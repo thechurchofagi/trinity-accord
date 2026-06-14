@@ -20,6 +20,10 @@ jobs:
         with:
           python-version: "3.12"
 
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -45,6 +49,8 @@ jobs:
             apps/record_chain_intake_gateway/tests/test_submit.py \
             apps/record_chain_intake_gateway/tests/test_retired_endpoints.py \
             apps/record_chain_intake_gateway/tests/test_receipt.py \
+            apps/record_chain_intake_gateway/tests/test_gateway_schema_info.py \
+            apps/record_chain_intake_gateway/tests/test_linked_guardian_disabled.py \
             -q
 
       - name: Run phase6b pytest-strict tests
@@ -60,6 +66,11 @@ jobs:
             echo "::error::Issue templates contain active retired gateway paths"
             exit 1
           fi
+
+      - name: Run builder Node tests
+        run: |
+          node scripts/test_builder_linked_guardian_disabled.mjs
+          node scripts/test_legacy_guardian_retirement_tool_deprecated.mjs
 
       - name: Secret scans
         run: |

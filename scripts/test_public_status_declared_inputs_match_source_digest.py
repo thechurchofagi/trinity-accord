@@ -9,6 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 src = (ROOT / "scripts/generate_public_home_status.py").read_text(encoding="utf-8")
 
 EXPECTED_GENERATED_FROM = {
+    # Primary record-chain inputs
+    "/api/record-chain-status.json",
+    "/api/record-chain-anchor-status.json",
+    "/api/record-chain-arweave-index.json",
+    "/api/record-chain-arweave-backlog.json",
+    "/api/record-chain-native-ots-backlog.json",
+    "/api/arweave-wallet-status.json",
+    "/api/homepage-visibility-overrides.v1.json",
+    "/record-chain/chain-tip.json",
+    "/record-chain/records/",
+    # Legacy/archive inputs
     "/api/echo-index.json",
     "/api/external-witness-index.json",
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",

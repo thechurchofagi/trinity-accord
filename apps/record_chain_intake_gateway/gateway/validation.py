@@ -534,7 +534,11 @@ def validate_human_name_privacy(draft: dict[str, Any]) -> list[Diagnostic]:
 
 
 def validate_linked_guardian_request(draft: dict[str, Any]) -> list[Diagnostic]:
-    """Validate optional_linked_guardian_application_request when present."""
+    """DEPRECATED: Validate optional_linked_guardian_application_request when present.
+
+    Kept for backward compatibility. The primary rejection path is now
+    validate_linked_guardian_disabled() which rejects at preflight time.
+    """
     diagnostics: list[Diagnostic] = []
     linked = draft.get("optional_linked_guardian_application_request")
     if not isinstance(linked, dict):
@@ -602,6 +606,25 @@ def validate_linked_guardian_request(draft: dict[str, Any]) -> list[Diagnostic]:
             ))
 
     return diagnostics
+
+
+def validate_linked_guardian_disabled(draft: dict[str, Any]) -> list[Diagnostic]:
+    """Reject linked Guardian auto-creation requests at validation/preflight time."""
+    linked = draft.get("optional_linked_guardian_application_request")
+    if not isinstance(linked, dict):
+        return []
+    if linked.get("does_participant_request_guardian_application_with_this_record") is not True:
+        return []
+
+    return [_make_diagnostic(
+        code="LINKED_GUARDIAN_AUTO_CREATION_DISABLED",
+        severity="error",
+        field="record_draft.optional_linked_guardian_application_request",
+        message="Linked guardian auto-creation is disabled. Submit a separate signed guardian_application record instead.",
+        meaning="The gateway must not copy an authorship proof from one draft onto a newly constructed guardian_application draft.",
+        suggested_fix="Build and sign a standalone guardian_application submission.",
+        retry_allowed=True,
+    )]
 
 
 def validate_record_type_specific_content(record_type: str, draft: dict[str, Any]) -> list[Diagnostic]:
@@ -986,6 +1009,10 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
             meaning="The draft must be a JSON object.",
             suggested_fix="Change draft to a JSON object.",
         ))
+
+    # --- linked Guardian auto-creation disabled (fail-fast at preflight) ---
+    if isinstance(draft, dict):
+        diagnostics.extend(validate_linked_guardian_disabled(draft))
 
     # --- retired field rejection (draft-level) ---
     if isinstance(draft, dict):

@@ -146,7 +146,14 @@ def source_digest() -> str:
         RECORD_CHAIN_NATIVE_OTS_BACKLOG,
         ARWEAVE_WALLET_STATUS,
         HOMEPAGE_VISIBILITY,
+
+        # Declared legacy/archive inputs used by generated_from/docstring.
+        ECHO_INDEX,
         EXTERNAL_WITNESS_INDEX,
+        PHYSICAL_ANCHOR,
+        GUARDIAN_REGISTRY,
+        GUARDIAN_ACTIVE_LISTING_POLICY,
+        AGENT_DECLARED_INDEX,
     ]:
         h.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
         h.update(b"\0")
@@ -464,9 +471,11 @@ def compute_status() -> dict[str, Any]:
         "/record-chain/chain-tip.json",
         "/record-chain/records/",
         "/api/echo-index.json",
-        "/api/guardian-registry.json",
-        "/api/agent-declared-verification-index.json",
         "/api/external-witness-index.json",
+        "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "/api/guardian-registry.json",
+        "/api/guardian-active-listing-policy.v1.json",
+        "/api/agent-declared-verification-index.json",
     ]
 
     echo_index = load_json_if_exists(ECHO_INDEX, {})
