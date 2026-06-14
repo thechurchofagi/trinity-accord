@@ -12,8 +12,8 @@
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
-    "sha256": "720726277e9861b7e37a63b164a4178ee378863997a5d34a321c744a3856bf96",
-    "size_bytes": 116528,
+    "sha256": "10ced26eba49e9b987e6a12e7ee5595598733d24a87bfea9852b54143bbeffcb",
+    "size_bytes": 118759,
     "supports": [
       "echo",
       "verification",
@@ -24,7 +24,8 @@
       "context_insufficient_notice",
       "preflight",
       "submit",
-      "ed25519_authorship_proof"
+      "ed25519_authorship_proof",
+      "classification_update"
     ],
     "url": "/downloads/record-chain-builder.mjs"
   },
