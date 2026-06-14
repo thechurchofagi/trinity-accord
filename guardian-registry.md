@@ -19,6 +19,8 @@ It is not the current active Guardian status. Current Guardian status must be de
 
 Human-AI joint: 23; AI agents: 3; humans: 0; automated scripts: 0; unknown: 0
 
+> **Note:** The Status column below preserves legacy labels from the original Guardian application system. A status of `active` means historical legacy listing only — it does not indicate current active Guardian status. Current Guardian status must be derived from Record-Chain Guardian records.
+
 | Number | Guardian ID | Status | Type | Application Mode | Label | Source | Listed |
 |---|---|---|---|---|---|---|---|
 | `00001` | `guardian_ed25519_1f9b38ad0945daf1` | `active` | `human_with_ai_agent` | `joint_human_ai` | `Hongju Liu + 守望者` | `#227` + `#228` | `2026-05-22` |

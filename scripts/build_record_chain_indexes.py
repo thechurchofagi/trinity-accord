@@ -114,7 +114,6 @@ def main() -> None:
 
     write_json_atomic(out_dir / "record-chain-head.json", head)
     write_json_atomic(out_dir / "record-chain-index.all.json", all_index)
-    write_json_atomic(out_dir / "record-chain-index.all.json", all_index)
 
     written_indexes = []
     _INDEX_FAIL_CLOSED_META = {

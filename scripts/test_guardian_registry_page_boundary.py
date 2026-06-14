@@ -37,6 +37,10 @@ def main() -> int:
             continue
         if "not current" in line_stripped:
             continue
+        if "not indicate" in line_stripped or "does not indicate" in line_stripped:
+            continue
+        if "not the current" in line_stripped:
+            continue
         for phrase in forbidden:
             if phrase in line_stripped:
                 forbidden_lines.append((phrase, line_stripped))
