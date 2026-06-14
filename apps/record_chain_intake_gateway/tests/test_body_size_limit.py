@@ -75,7 +75,7 @@ class TestReadLimitedBody:
 
 class TestBodySizeLimitEndpoints:
     def test_preflight_413_for_oversized_body(self):
-        """Middleware catches Content-Length > max → 413."""
+        """Middleware catches Content-Length > max → 413 with diagnostic payload."""
         big_body = b'{"x":"' + b"y" * (_MAX_BODY_BYTES + 100) + b'"}'
         resp = client.post(
             "/record-chain/preflight",
@@ -83,9 +83,12 @@ class TestBodySizeLimitEndpoints:
             headers={"content-type": "application/json"},
         )
         assert resp.status_code == 413
+        data = resp.json()
+        assert data["accepted"] is False
+        assert data["diagnostics"][0]["code"] == "REQUEST_BODY_TOO_LARGE"
 
     def test_submit_413_for_oversized_body(self):
-        """Middleware catches Content-Length > max → 413."""
+        """Middleware catches Content-Length > max → 413 with diagnostic payload."""
         big_body = b'{"x":"' + b"y" * (_MAX_BODY_BYTES + 100) + b'"}'
         resp = client.post(
             "/record-chain/submit",
@@ -93,6 +96,9 @@ class TestBodySizeLimitEndpoints:
             headers={"content-type": "application/json"},
         )
         assert resp.status_code == 413
+        data = resp.json()
+        assert data["accepted"] is False
+        assert data["diagnostics"][0]["code"] == "REQUEST_BODY_TOO_LARGE"
 
     def test_preflight_413_via_endpoint_streaming(self, monkeypatch):
         """Endpoint streaming path returns 413 when body exceeds tiny limit.
