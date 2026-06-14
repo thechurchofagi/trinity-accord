@@ -147,6 +147,7 @@ class TestNewAcceptedSubmissionWritesIdempotencyIndex:
         monkeypatch.setattr("app.get_file_text", AsyncMock(return_value=None))
         monkeypatch.setattr("app.get_file_sha", AsyncMock(return_value=None))
         monkeypatch.setattr("app.dispatch_workflow", AsyncMock())
+        monkeypatch.setattr("app.check_rate_limit", lambda body: None)
 
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         data = resp.json()
@@ -190,6 +191,7 @@ class TestIndexWriteFailureRollbacksAndDoesNotDispatch:
         monkeypatch.setattr("app.get_file_sha", AsyncMock(return_value=None))
         monkeypatch.setattr("app.delete_file", delete_mock)
         monkeypatch.setattr("app.dispatch_workflow", dispatch_mock)
+        monkeypatch.setattr("app.check_rate_limit", lambda body: None)
 
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         data = resp.json()
@@ -268,6 +270,7 @@ class TestIndexWriteRaceReturnsExistingReceipt:
         monkeypatch.setattr("app.get_file_sha", AsyncMock(return_value=None))
         monkeypatch.setattr("app.delete_file", delete_mock)
         monkeypatch.setattr("app.dispatch_workflow", dispatch_mock)
+        monkeypatch.setattr("app.check_rate_limit", lambda body: None)
 
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         data = resp.json()
@@ -320,6 +323,7 @@ class TestSameDayOldReceiptFallback:
         monkeypatch.setattr("app.get_file_text", mock_get_file_text)
         monkeypatch.setattr("app.put_file", put_mock)
         monkeypatch.setattr("app.dispatch_workflow", dispatch_mock)
+        monkeypatch.setattr("app.check_rate_limit", lambda body: None)
 
         # The _existing_receipt_matches_current check requires the receipt
         # to match submission_sha256 and stored_submission_sha256.
