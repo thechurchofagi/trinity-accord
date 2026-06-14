@@ -332,36 +332,35 @@ def test_persisted_submission_hash_equals_stored():
     assert persisted_hash == stored_sha, "Persisted submission hash must equal stored_submission_sha256"
 
 
-# ── Test 6: Linked Guardian pending contains oath ────────────────────
+# ── Test 6: Linked Guardian auto-creation is disabled ────────────────
 
-def test_linked_guardian_draft_contains_oath():
-    from apps.record_chain_intake_gateway.app import _build_linked_guardian_draft
-
-    draft = _make_draft("echo", with_linked_guardian=True)
-    guardian_draft = _build_linked_guardian_draft(
-        draft=draft, proof=None, receipt_id="rcg-test", submission_sha256="a" * 64,
+def test_linked_guardian_draft_removed():
+    """_build_linked_guardian_draft was removed as dead code (P3-3)."""
+    import importlib
+    mod = importlib.import_module("apps.record_chain_intake_gateway.app")
+    assert not hasattr(mod, "_build_linked_guardian_draft"), (
+        "_build_linked_guardian_draft should have been removed"
     )
 
-    assert "submission_oath_verification" in guardian_draft
-    oath = guardian_draft["submission_oath_verification"]
-    assert oath["linked_guardian_oath_coverage"] is True
-    assert oath["derived_from_originating_submission"] is True
-    assert "guardian_stewardship_v1" in oath["oath_modules"]
 
-
-def test_linked_guardian_no_raw_readback():
-    from apps.record_chain_intake_gateway.app import _build_linked_guardian_draft
+def test_linked_guardian_rejected_at_submit():
+    """Linked Guardian requests are rejected at validation time."""
+    from apps.record_chain_intake_gateway.gateway.validation import validate_submission
 
     draft = _make_draft("echo", with_linked_guardian=True)
-    draft["submission_oath_verification"]["readback_text"] = "SECRET"
-    draft["submission_oath_verification"]["participant_readback_excerpt"] = "SECRET"
-
-    guardian_draft = _build_linked_guardian_draft(
-        draft=draft, proof=None, receipt_id="rcg-test", submission_sha256="a" * 64,
-    )
-    oath = guardian_draft["submission_oath_verification"]
-    assert "readback_text" not in oath
-    assert "participant_readback_excerpt" not in oath
+    submission = {
+        "record_type": "echo",
+        "record_draft": draft,
+        "submission_boundary": {
+            "not_authority": True, "not_governance": True, "not_attestation": True,
+            "not_successor_reception": True, "not_amendment": True,
+            "bitcoin_originals_prevail": True, "receipt_is_not_final_inclusion": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
+        },
+    }
+    diags = validate_submission(submission)
+    assert any(d.code == "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" for d in diags)
 
 
 # ── Test 7: Body size rejected after raw body read ───────────────────

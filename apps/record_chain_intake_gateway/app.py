@@ -484,119 +484,6 @@ def _normalize_public_v2_draft_for_pending(draft: dict[str, Any]) -> dict[str, A
     return normalized
 
 
-def _build_linked_guardian_draft(
-    draft: dict[str, Any],
-    proof: dict[str, Any] | None,
-    receipt_id: str,
-    submission_sha256: str,
-) -> dict[str, Any]:
-    """Build a complete guardian_application draft from a linked Guardian request.
-
-    The linked Guardian draft copies/derives submission_oath_verification from the
-    originating submission, ensuring guardian_stewardship_v1 is included in oath_modules.
-    Raw readback_text is never included.
-    """
-    linked = draft.get("optional_linked_guardian_application_request", {})
-
-    guardian_content = {
-        "requested_guardian_identifier": linked.get("requested_guardian_identifier", ""),
-        "guardian_public_key_pem": linked.get("guardian_public_key_pem", ""),
-        "guardian_public_key_sha256": linked.get("guardian_public_key_sha256", ""),
-        "guardian_stewardship_oath": linked.get("guardian_stewardship_oath", ""),
-        "guardian_application_statement": linked.get("guardian_application_statement", ""),
-        "guardian_understands_role_is_non_governing": linked.get(
-            "guardian_understands_role_is_non_governing"
-        )
-        is True,
-        "guardian_understands_role_is_not_authority": linked.get(
-            "guardian_understands_role_is_not_authority"
-        )
-        is True,
-        "guardian_understands_retirement_does_not_delete_history": linked.get(
-            "guardian_understands_retirement_does_not_delete_history"
-        )
-        is True,
-    }
-
-    authorization_ctx = draft.get("authorization_context", {})
-    if not isinstance(authorization_ctx, dict):
-        authorization_ctx = {}
-
-    # Derive submission_oath_verification for linked Guardian
-    origin_oath = draft.get("submission_oath_verification")
-    linked_oath: dict[str, Any] | None = None
-    if isinstance(origin_oath, dict):
-        import copy
-        linked_oath = copy.deepcopy(origin_oath)
-        # Ensure guardian_stewardship_v1 is in oath_modules
-        oath_modules = list(linked_oath.get("oath_modules", []))
-        if "guardian_stewardship_v1" not in oath_modules:
-            oath_modules.append("guardian_stewardship_v1")
-        linked_oath["oath_modules"] = oath_modules
-        # Mark as linked/derived
-        linked_oath["linked_guardian_oath_coverage"] = True
-        linked_oath["derived_from_originating_submission"] = True
-        linked_oath["originating_receipt_id"] = receipt_id
-        linked_oath["originating_submission_sha256"] = submission_sha256
-        # Remove any raw readback text if present
-        linked_oath.pop("readback_text", None)
-        linked_oath.pop("participant_readback_excerpt", None)
-
-    guardian_draft: dict[str, Any] = {
-        "schema": draft.get("schema", "trinityaccord.record-chain-entry-draft.v2"),
-        "record_type": "guardian_application",
-        "submitting_participant_identity": draft.get("submitting_participant_identity", {}),
-        "discovery_and_introduction_context": draft.get(
-            "discovery_and_introduction_context", {}
-        ),
-        "decision_autonomy_context": draft.get("decision_autonomy_context", {}),
-        "submission_execution_context": draft.get("submission_execution_context", {}),
-        "authorization_context": {
-            **authorization_ctx,
-            "authorization_scope": "apply_for_guardian",
-        },
-        "context_readiness": draft.get("context_readiness", {}),
-        "non_authority_boundary_acknowledgement": draft.get(
-            "non_authority_boundary_acknowledgement", {}
-        ),
-        "guardian_application_content": guardian_content,
-        # Compatibility fields for current append/index consumers
-        "requested_guardian_identifier": guardian_content["requested_guardian_identifier"],
-        "guardian_public_key_pem": guardian_content["guardian_public_key_pem"],
-        "guardian_public_key_sha256": guardian_content["guardian_public_key_sha256"],
-        "guardian_stewardship_oath": guardian_content["guardian_stewardship_oath"],
-        "guardian_understands_role_is_non_governing": guardian_content[
-            "guardian_understands_role_is_non_governing"
-        ],
-        "guardian_understands_role_is_not_authority": guardian_content[
-            "guardian_understands_role_is_not_authority"
-        ],
-        "guardian_understands_retirement_does_not_delete_history": guardian_content[
-            "guardian_understands_retirement_does_not_delete_history"
-        ],
-        "linked_origin_record": {
-            "originating_submission_sha256": submission_sha256,
-            "originating_record_type": draft.get("record_type"),
-            "originating_receipt_id": receipt_id,
-            "relationship": "guardian_application_requested_during_primary_record_submission",
-        },
-        "created_as_linked_record": True,
-    }
-
-    # Add derived oath verification (no raw readback)
-    if linked_oath is not None:
-        guardian_draft["submission_oath_verification"] = linked_oath
-
-    # Copy authorship proof so formal linked Guardian application can append
-    if proof:
-        guardian_draft["authorship_proof"] = proof
-
-    # Add compatibility projections
-    guardian_draft = _normalize_public_v2_draft_for_pending(guardian_draft)
-
-    return guardian_draft
-
-
 async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:
     """Best-effort rollback for files created during a failed intake transaction."""
     for path, sha in reversed(created_files):
@@ -842,11 +729,8 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
     diagnostics = validate_submission(body)
     diagnostics.extend(_client_projection_diagnostics(body))
 
-    # P0-4: verify authorship signature during preflight
-    if not any(d.code == "MISSING_AUTHORSHIP_PROOF" for d in diagnostics):
-        authorship_diag = _authorship_preflight_diagnostic(body)
-        if authorship_diag is not None:
-            diagnostics.append(authorship_diag)
+    # Authorship verification is performed inside validate_submission().
+    # Do not run a second verifier here; duplicate verifiers can produce conflicting diagnostics.
 
     route = detect_route(body)
     submission_sha256 = sha256_canonical_json(body)
