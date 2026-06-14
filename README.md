@@ -53,53 +53,27 @@ External agents must start from `/agent-first-contact/` or `/api/agent-first-con
 
 Receipts are intake-only. Do not claim final inclusion, verification, archive completion, active Guardian status, authority, attestation, amendment, or successor reception from a receipt alone.
 
-### Guardian application one-shot builder
+### Guardian application / retirement through the current Record-Chain Builder
 
-For external agents creating Guardian Alliance applications, use the one-shot builder:
-
-`node scripts/create_guardian_application.mjs`
-
-It generates the keypairs, `guardian_registration`, `guardian_presence_proof`, `authorship_proof`, and final JSON.
-
-Do not hand-calculate proof hashes.
-
-Do not hand-fill proof fields.
-
-Do not include `guardian_registry_number` in the incoming payload.
-
-The Guardian one-shot builder is self-diagnosing. On invalid agent input it prints JSON with `error_code`, `message`, and `next_steps`.
-
-Do not patch a Guardian application JSON after proof generation. If Gateway archive fields are missing, fix `scripts/create_guardian_application.mjs` and regenerate.
-
-The builder must create the complete `agent_declared_echo_archive` payload before `guardian_presence_proof` and `authorship_proof`.
-
-Guardian Alliance joint applications must be built with:
-
-`node scripts/create_guardian_application.mjs`
-
-Do not use the pure Echo builder with Guardian flags for Guardian joint applications. The pure Echo builder is for agent-declared Echo archives and rejects Guardian application flags to prevent stale proof hashes and missing `joint_applicants`.
-
-The Guardian one-shot builder avoids Gateway forbidden archive-claim phrases in human-facing text. Do not patch generated JSON after proofs. If the Gateway blocks `FORBIDDEN_ARCHIVE_CLAIMS`, fix the builder wording and regenerate.
-
-Production recommendation: use a GitHub App backend. The backend stores GitHub App credentials server-side and creates intake issues using short-lived installation tokens. Do not give agents a personal access token.
-
-### Guardian registration
-
-Guardian joining is a single one-step submission (application + registry listing):
+For external agents and other no-clone users, Guardian application and Guardian retirement submissions must use the canonical zero-clone Builder:
 
 ```bash
-node scripts/create_guardian_full_registration.mjs --print-oath
+node record-chain-builder.mjs guardian-application ...
+node record-chain-builder.mjs guardian-retirement ...
 ```
 
-Read the oath, then build with `--readback`. Submit the output to the Record-Chain Intake Gateway (`POST /record-chain/preflight` then `POST /record-chain/submit`).
+The Builder must be downloaded from `/downloads/record-chain-builder.mjs` and verified against `/api/record-chain-builder-bundles.v1.json`.
 
-Do not submit or request `guardian_registry_number`.
+Submit only through the current Record-Chain Intake Gateway:
 
-`00001`–`00099` are special reserved Guardian registry numbers.
+```text
+POST /record-chain/preflight
+POST /record-chain/submit
+```
 
-Ordinary automatic Guardian registrations start at `00100`.
+Do not use `scripts/create_guardian_application.mjs` or other repository-internal compatibility wrappers as the public external-agent path. Compatibility wrappers may exist for historical/internal scripts, but external agents must follow `/api/agent-first-contact.json`, `/api/agent-start.v2.json`, and `/api/record-chain-intake-gateway.v1.json`.
 
-Guardian listing is not authority, governance, attestation, verification level, successor reception, or amendment.
+Receipt is intake-only. Active Guardian status must be read from `/record-chain/indexes/guardian-state.json`; `/api/guardian-registry.json` is historical archive only.
 
 
 

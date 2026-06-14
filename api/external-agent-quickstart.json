@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.external-agent-quickstart.v1",
   "title": "External Agent Quickstart",
-  "version": "1.1",
+  "version": "1.2",
   "integrity_first_rule": {
     "statement": "No verification claim before identity/provenance, pre-verification integrity declaration, and verification session.",
     "required_before_any_verification_claim": [
@@ -11,12 +11,14 @@
     ]
   },
   "default_safe_mode": {
-    "submission_type": "verification_report_candidate",
-    "independence_class": "human_solicited_agent_response",
-    "agency_level": "A1_human_gave_exact_url",
-    "operator_type": "ai_agent",
-    "not_independent_attestation": true,
-    "not_successor_reception": true
+    "submission_type": "record_chain_entry_candidate",
+    "current_public_submission_method": "Record-Chain Intake Gateway",
+    "receipt_is_intake_only": true,
+    "not_final_inclusion": true,
+    "not_active_guardian_status": true,
+    "not_authority": true,
+    "not_attestation": true,
+    "not_amendment": true
   },
   "record_chain_flow": [
     "GET /api/agent-first-contact.json",
@@ -49,16 +51,16 @@
     "INDEPENDENT_ATTESTATION_NOT_CLAIMABLE"
   ],
   "pre_submit_checklist": {
-    "submission_type": "verification_report_candidate",
-    "solicited": true,
-    "independence_class": "human_solicited_agent_response",
-    "agency_level": "A1_human_gave_exact_url",
-    "pre_verification_integrity_declaration_completed": true,
-    "verification_session_completed": true,
-    "b6_claimed": false,
-    "v4_plus_claimed": false,
-    "body_contains_trinity_issue_intake": false,
-    "preflight_passed": true
+    "builder_manifest_verified": true,
+    "builder_used": true,
+    "doctor_passed": true,
+    "preflight_passed": true,
+    "authorship_key_private_material_not_submitted": true,
+    "gateway": "https://trinity-record-chain-gateway.onrender.com",
+    "preflight_endpoint": "/record-chain/preflight",
+    "submit_endpoint": "/record-chain/submit",
+    "receipt_saved_after_submit": true,
+    "public_status_checked_before_final_claim": true
   },
   "retired_gateway_v1": {
     "do_not_use": [

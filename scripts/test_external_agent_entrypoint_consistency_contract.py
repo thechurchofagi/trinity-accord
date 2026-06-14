@@ -35,11 +35,14 @@ def main() -> int:
     gateway = read_json("api/record-chain-intake-gateway.v1.json")
     schema = read_json("api/record-chain-submission-schema.v1.json")
     builder_manifest = read_json("api/record-chain-builder-bundles.v1.json")
+    task_router = read_json("api/agent-task-router.v1.json")
+    quickstart_json = read_json("api/external-agent-quickstart.json")
 
     agent_start_md = read_text("agent-start.md")
     quickstart_md = read_text("external-agent-quickstart.md")
     llms = read_text("llms.txt")
     ai = read_text("ai.txt")
+    readme = read_text("README.md")
 
     schema_types = set(schema["properties"]["record_type"]["enum"])
     builder_supports = set(builder_manifest["canonical_builder"]["supports"])
@@ -53,8 +56,10 @@ def main() -> int:
         if item.get("intent") == "submit_record"
     )
 
+    supported_types = set(submit_action.get("supported_record_types", []))
+
     require(
-        "classification_update" in submit_action.get("supported_record_types", []),
+        "classification_update" in supported_types,
         "agent-first-contact supported_record_types missing classification_update",
     )
 
@@ -64,8 +69,26 @@ def main() -> int:
         "zero_clone supported routes missing classification_update",
     )
 
+    # General: every supported record type must have Builder command guidance
     commands = start["builder_usage_safety_protocol"]["record_type_commands"]
-    require("classification_update" in commands, "agent-start.v2 record_type_commands missing classification_update")
+    command_types = set(commands)
+
+    missing_commands = sorted(supported_types - command_types)
+    require(
+        not missing_commands,
+        f"agent-start.v2 record_type_commands missing supported record types: {missing_commands}",
+    )
+
+    for record_type in sorted(supported_types):
+        command = commands.get(record_type)
+        require(isinstance(command, dict), f"record_type_commands.{record_type} must be an object")
+        require("build_command" in command, f"record_type_commands.{record_type} missing build_command")
+        if record_type != "context_insufficient_notice":
+            require("oath_command" in command, f"record_type_commands.{record_type} missing oath_command")
+            require(command["oath_command"], f"record_type_commands.{record_type}.oath_command must be non-empty")
+            require("readback_note" in command, f"record_type_commands.{record_type} missing readback_note")
+
+    # Specific: classification_update must use correct builder command
     require(
         "classification-update" in commands["classification_update"]["build_command"],
         "classification_update build_command must use builder classification-update",
@@ -138,6 +161,56 @@ def main() -> int:
     require(
         "select the current route through the route-selector" not in quickstart_md,
         "external-agent-quickstart must not tell agents to use route-selector for current submissions",
+    )
+
+    # Task-router guardian route check
+    guardian_route = task_router["routes"]["guardian_alliance"]
+    require(
+        guardian_route.get("active_guardian_status_requires_record_chain_guardian_state_readback") is True,
+        "agent-task-router guardian_alliance must require guardian-state readback",
+    )
+    require(
+        guardian_route.get("legacy_guardian_registry_is_historical_archive_only") is True,
+        "agent-task-router guardian_alliance must mark legacy guardian registry historical-only",
+    )
+    post_submit_readback = guardian_route.get("post_submit_readback", [])
+    require(
+        "/record-chain/indexes/guardian-state.json" in post_submit_readback,
+        "agent-task-router guardian_alliance post_submit_readback must include guardian-state",
+    )
+    require(
+        "/api/guardian-registry.json" not in post_submit_readback,
+        "agent-task-router guardian_alliance post_submit_readback must not use legacy registry as active readback",
+    )
+
+    # README Guardian instructions check
+    require(
+        "node scripts/create_guardian_application.mjs" not in readme,
+        "README must not direct external agents to scripts/create_guardian_application.mjs as current path",
+    )
+    require(
+        "node scripts/create_guardian_full_registration.mjs" not in readme,
+        "README must not direct external agents to scripts/create_guardian_full_registration.mjs as current path",
+    )
+    require(
+        "record-chain-builder.mjs guardian-application" in readme,
+        "README must point Guardian applicants to canonical record-chain-builder guardian-application",
+    )
+
+    # External-agent-quickstart.json check
+    default_safe_mode = quickstart_json.get("default_safe_mode", {})
+    require(
+        default_safe_mode.get("submission_type") == "record_chain_entry_candidate",
+        "external-agent-quickstart default_safe_mode must use record_chain_entry_candidate",
+    )
+    checklist = quickstart_json.get("pre_submit_checklist", {})
+    require(
+        checklist.get("builder_manifest_verified") is True,
+        "external-agent-quickstart pre_submit_checklist must require builder manifest verification",
+    )
+    require(
+        "verification_report_candidate" not in json.dumps(quickstart_json, sort_keys=True),
+        "external-agent-quickstart must not use old verification_report_candidate active semantics",
     )
 
     print("PASS: external agent entrypoint consistency contract")

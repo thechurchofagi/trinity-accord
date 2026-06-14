@@ -282,6 +282,8 @@ def validate_live_agent_entrypoints(
     first_contact: dict[str, Any],
     agent_start: dict[str, Any],
     field_helper: dict[str, Any],
+    task_router: dict[str, Any],
+    quickstart: dict[str, Any],
     llms_text: str,
     ai_text: str,
     errors: list[str],
@@ -315,8 +317,10 @@ def validate_live_agent_entrypoints(
         errors.append("live first-contact must not require legacy registry readback for active Guardian status")
 
     commands = agent_start.get("builder_usage_safety_protocol", {}).get("record_type_commands", {})
-    if "classification_update" not in commands:
-        errors.append("live agent-start record_type_commands missing classification_update")
+    supported = set(submit_action.get("supported_record_types", []))
+    missing_commands = sorted(supported - set(commands))
+    if missing_commands:
+        errors.append(f"live agent-start record_type_commands missing supported record types: {missing_commands}")
 
     if field_helper.get("current_public_phase") != "production_live":
         errors.append("live field helper current_public_phase is not production_live")
@@ -335,6 +339,21 @@ def validate_live_agent_entrypoints(
             errors.append(f"live {label} missing current guardian-state source")
         if "Guardian application → `/api/guardian-registry.json`" in text:
             errors.append(f"live {label} presents legacy registry as active Guardian application index")
+
+    # Task-router guardian route checks
+    guardian_route = task_router.get("routes", {}).get("guardian_alliance", {})
+    if guardian_route.get("active_guardian_status_requires_record_chain_guardian_state_readback") is not True:
+        errors.append("live task-router guardian_alliance must require guardian-state readback")
+    if guardian_route.get("legacy_guardian_registry_is_historical_archive_only") is not True:
+        errors.append("live task-router guardian_alliance must mark legacy registry historical-only")
+    if "/api/guardian-registry.json" in guardian_route.get("post_submit_readback", []):
+        errors.append("live task-router guardian_alliance uses legacy registry as active post-submit readback")
+
+    # External-agent-quickstart checks
+    if quickstart.get("default_safe_mode", {}).get("submission_type") != "record_chain_entry_candidate":
+        errors.append("live external-agent-quickstart default_safe_mode is not record_chain_entry_candidate")
+    if "verification_report_candidate" in json.dumps(quickstart, sort_keys=True):
+        errors.append("live external-agent-quickstart still contains verification_report_candidate")
 
 
 def main() -> int:
@@ -432,6 +451,8 @@ def main() -> int:
         first_contact = fetch_json(f"{site}/api/agent-first-contact.json", args.timeout)
         agent_start = fetch_json(f"{site}/api/agent-start.v2.json", args.timeout)
         field_helper = fetch_json(f"{site}/api/record-chain-field-helper.v1.json", args.timeout)
+        task_router = fetch_json(f"{site}/api/agent-task-router.v1.json", args.timeout)
+        quickstart = fetch_json(f"{site}/api/external-agent-quickstart.json", args.timeout)
         llms_text = fetch_text(f"{site}/llms.txt", args.timeout)
         ai_text = fetch_text(f"{site}/ai.txt", args.timeout)
 
@@ -439,6 +460,8 @@ def main() -> int:
             first_contact,
             agent_start,
             field_helper,
+            task_router,
+            quickstart,
             llms_text,
             ai_text,
             errors,

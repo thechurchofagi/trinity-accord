@@ -153,6 +153,19 @@ jobs:
           require_contains _site/llms.txt '/record-chain/submit'
           require_contains _site/llms.txt '/downloads/record-chain-builder.mjs'
 
+          require_contains _site/api/agent-first-contact.json '"classification_update"'
+          require_contains _site/api/agent-start.v2.json '"guardian_application"'
+          require_contains _site/api/agent-start.v2.json '"guardian_retirement"'
+          require_contains _site/api/agent-start.v2.json '"propagation"'
+          require_contains _site/api/agent-start.v2.json '"correction"'
+          require_contains _site/api/agent-start.v2.json '"classification_update"'
+
+          require_contains _site/api/agent-task-router.v1.json '/record-chain/indexes/guardian-state.json'
+          forbid_contains _site/api/agent-task-router.v1.json '"active_registered_guardian_requires_registry_match": true'
+
+          require_contains _site/api/external-agent-quickstart.json '"record_chain_entry_candidate"'
+          forbid_contains _site/api/external-agent-quickstart.json '"verification_report_candidate"'
+
           for forbidden in \
             '/agent-submit' \
             '/gateway/preflight' \

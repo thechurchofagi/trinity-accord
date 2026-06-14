@@ -132,7 +132,6 @@
       "contract": "/api/record-chain-intake-gateway.v1.json",
       "must_follow_post_submit_readback": true,
       "valid_signature_alone_is_not_active_guardian": true,
-      "active_registered_guardian_requires_registry_match": true,
       "does_not_affect_counts": true,
       "does_not_affect_verification_level": true,
       "does_not_affect_archive_readiness": true,
@@ -154,10 +153,15 @@
       "post_submit_readback": [
         "receipt_status",
         "/api/record-chain-status.json",
-        "/api/guardian-registry.json"
+        "/record-chain/indexes/guardian-state.json"
       ],
       "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
-      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+      "active_guardian_status_requires_record_chain_guardian_state_readback": true,
+      "legacy_guardian_registry_is_historical_archive_only": true,
+      "legacy_post_submit_archives": [
+        "/api/guardian-registry.json"
+      ]
     },
     "propagate": {
       "read": [
