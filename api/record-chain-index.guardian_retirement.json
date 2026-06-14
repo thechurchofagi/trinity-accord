@@ -1,0 +1,14 @@
+{
+  "schema": "trinity_record_chain_type_index.v1",
+  "chain_id": "trinity-record-chain-main",
+  "record_type": "guardian_retirement",
+  "records": [],
+  "count": 0,
+  "historical_archive_only": true,
+  "legacy_hash_chain_view": true,
+  "not_current_native_record_chain_index": true,
+  "replacement_current_status_api": "/api/record-chain-status.json",
+  "replacement_native_record_index": "/record-chain/indexes/record-index.json",
+  "replacement_native_chain_tip": "/record-chain/chain-tip.json",
+  "authority": "legacy hash-chain derived index; not current native Record-Chain index"
+}
