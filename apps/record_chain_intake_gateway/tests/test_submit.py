@@ -81,8 +81,10 @@ class TestSubmitWrites:
         assert data["accepted"] is False
         assert data["diagnostics"][0]["code"] == "IDEMPOTENCY_INDEX_PERSIST_FAILED"
         deleted = [call.args[0] for call in mock_github["delete_file"].await_args_list]
-        assert any("pending/" in p for p in deleted)
+        # Idempotency index (Write 3) fails; rollback deletes submission and
+        # receipt (Writes 1-2). Pending file (Write 4) was never created.
         assert any("intake/submissions/" in p for p in deleted)
+        assert any("intake/receipts/" in p for p in deleted)
 
 
 class TestSubmitResponse:
