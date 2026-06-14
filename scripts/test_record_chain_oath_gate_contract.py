@@ -369,14 +369,17 @@ def main() -> None:
 
     # Test 22-24: Gateway rejects missing hash fields (OATH_REQUIRED_HASH_MISSING)
     if VALIDATION.exists():
-        import importlib.util
-        spec = importlib.util.spec_from_file_location("validation", str(VALIDATION))
-        mod = importlib.util.module_from_spec(spec)
+        import importlib
+
         try:
-            spec.loader.exec_module(mod)
+            mod = importlib.import_module("apps.record_chain_intake_gateway.gateway.validation")
             _validate = getattr(mod, "validate_submission_oath", None)
-        except Exception:
+        except Exception as exc:
+            errors.append(f"cannot import gateway validation module: {exc}")
             _validate = None
+
+        if _validate is None:
+            errors.append("validate_submission_oath is unavailable; oath validation tests did not run")
 
         if _validate:
             # Build a valid base submission to mutate
@@ -384,17 +387,22 @@ def main() -> None:
                 ["node", str(BUILDER), "print-oath", "--record-type", "echo"],
                 capture_output=True, text=True, timeout=10,
             )
-            if result.returncode == 0:
+            if result.returncode != 0:
+                errors.append(f"failed to build print-oath for echo: {result.stderr[:500]}")
+            else:
                 canonical = result.stdout
                 result = subprocess.run(
                     ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
                      "--body", "test", "--context-level", "CC-3",
+                     *REQUIRED_BUILDER_CONTEXT_ARGS,
                      "--readback", canonical,
                      "--generate-authorship-key", "--key-dir", "/tmp/test-hash-key",
                      "--out", "/tmp/test-hash-echo.json"],
                     capture_output=True, text=True, timeout=10,
                 )
-                if result.returncode == 0:
+                if result.returncode != 0:
+                    errors.append(f"failed to build valid echo sample: {result.stderr[:500]}")
+                else:
                     valid_data = json.loads(Path("/tmp/test-hash-echo.json").read_text())
                     valid_draft = valid_data.get("record_draft", {})
                     valid_submission = valid_data

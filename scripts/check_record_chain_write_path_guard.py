@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INTAKE_IMMUTABLE_PREFIXES = (
     "record-chain/intake/submissions/",
     "record-chain/intake/receipts/",
+    "record-chain/intake/by-submission-sha256/",
 )
 
 PENDING_PREFIXES = (
@@ -67,6 +68,7 @@ APPROVED_GATEWAY_PREFIXES = (
     "intake: submission ",
     "intake: pending ",
     "intake: receipt ",
+    "intake: idempotency index ",
 )
 
 APPROVED_ACTIONS_ACTOR = "github-actions[bot]"

@@ -1,10 +1,21 @@
 # Deployment Checklist (GitHub Pages)
 
-## 1) Pages source
-In repository settings:
-- Source: **Deploy from a branch**
-- Branch: **main**
-- Folder: **/(root)**
+## 1) GitHub Pages deployment mode
+
+Current production deployment uses GitHub Actions artifact deployment.
+
+Canonical workflow:
+
+- `.github/workflows/deploy-pages.yml`
+- builds Jekyll output into `_site`
+- restores committed static API and builder artifacts into `_site`
+- verifies public agent JSON entrypoints
+- uploads the Pages artifact
+- deploys with `actions/deploy-pages`
+
+Do not configure production Pages as plain branch/root deployment unless this repository intentionally reverts to the legacy deployment mode.
+
+Legacy fallback: branch/root deployment is historical documentation only and must not bypass `deploy-pages.yml` checks.
 
 ## 2) Required published paths
 - `/.well-known/trinity-accord.json`

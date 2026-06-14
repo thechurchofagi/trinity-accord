@@ -183,7 +183,7 @@ const OATH_POLICY = {
   },
   "linked_guardian_module": "guardian_stewardship_v1"
 };
-const OATH_POLICY_SHA256 = "9356e8c0955d7f17814dff1a93300cb271acfa21cfe39da63a7b5201364cb820";
+const OATH_POLICY_SHA256 = "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4";
 
 function getCanonicalOath(recordType, linkedGuardian = false) {
   const modules = getOathModules(recordType, linkedGuardian);
@@ -1158,8 +1158,8 @@ const ERROR_HELP_MAP = {
     help_url: "https://www.trinityaccord.org/docs/v2-migration",
   },
   INVALID_CONTEXT_LEVEL: {
-    meaning: "The declared context level is not a valid value (CC-0 through CC-4).",
-    fix: "Set 'declared_context_level' to one of: CC-0, CC-1, CC-2, CC-3, CC-4.",
+    meaning: "The declared context level is not a valid value (CC-0 through CC-5).",
+    fix: "Set 'declared_context_level' to one of: CC-0, CC-1, CC-2, CC-3, CC-4, CC-5.",
     help_url: "https://www.trinityaccord.org/docs/context-levels",
   },
   PUBLIC_KEY_SHA256_MISMATCH: {
@@ -1218,8 +1218,8 @@ function runDoctor(submission) {
   } else {
     results.push({ status: "PASS", code: "CONTEXT_READINESS_OK", field: "record_draft.context_readiness", meaning: "context_readiness is present.", fix: "" });
     const cl = draft.context_readiness.declared_context_level;
-    const clValid = (typeof cl === 'number' && cl >= 0 && cl <= 4) ||
-                    (typeof cl === 'string' && /^CC-[0-4]$/i.test(cl.trim()));
+    const clValid = (typeof cl === 'number' && cl >= 0 && cl <= 5) ||
+                    (typeof cl === 'string' && /^CC-[0-5]$/i.test(cl.trim()));
     if (!cl || !clValid) {
       results.push({ status: "FAIL", code: "INVALID_CONTEXT_LEVEL", field: "record_draft.context_readiness.declared_context_level", meaning: ERROR_HELP_MAP.INVALID_CONTEXT_LEVEL.meaning, fix: ERROR_HELP_MAP.INVALID_CONTEXT_LEVEL.fix });
     } else {

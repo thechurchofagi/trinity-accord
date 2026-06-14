@@ -3,9 +3,10 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 import re
-import hashlib
 import unicodedata
 from typing import Any
 
@@ -19,6 +20,44 @@ from .security import (
 )
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Oath policy hash canonicalization
+# ---------------------------------------------------------------------------
+
+OATH_POLICY_HASH_METADATA_KEYS: frozenset[str] = frozenset({
+    "oath_policy_sha256",
+    "oath_policy_sha256_semantics",
+    "canonical_oath_text_hash_is_record_type_specific",
+})
+
+
+def canonicalize_oath_policy_for_hash(policy: dict[str, Any]) -> dict[str, Any]:
+    """Return the policy object that is actually covered by oath_policy_sha256.
+
+    The public API file may contain self-describing metadata fields. Those fields
+    must not be part of the hash domain, otherwise the file attempts to hash
+    itself and builder/Gateway hashes drift.
+    """
+    return {
+        key: value
+        for key, value in policy.items()
+        if key not in OATH_POLICY_HASH_METADATA_KEYS
+    }
+
+
+def compute_oath_policy_sha256(policy: dict[str, Any]) -> str:
+    """SHA-256 of canonical JSON for the oath policy hash domain."""
+    material = canonicalize_oath_policy_for_hash(policy)
+    canonical = json.dumps(
+        material,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
 
 # ---------------------------------------------------------------------------
 # Allowed public intake record types
@@ -232,6 +271,9 @@ _CC_RULES: dict[str, list[tuple[tuple[int, int | None], int]]] = {
 
 _DEFAULT_CC_MINIMUM = 3  # fallback for unknown record types
 
+MIN_CONTEXT_LEVEL = 0
+MAX_CONTEXT_LEVEL = 5
+
 
 # ---------------------------------------------------------------------------
 # Diagnostic builder helper
@@ -353,6 +395,43 @@ def _find_forbidden_keys_recursive(obj: Any, path: str = "") -> list[Diagnostic]
         for i, item in enumerate(obj):
             diagnostics.extend(_find_forbidden_keys_recursive(item, f"{path}[{i}]"))
     return diagnostics
+
+
+def _parse_verification_level_value(value: Any) -> int | None:
+    """Parse verification level from V3, V3+, 3, or legacy integer values."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        raw = value.strip()
+        if raw.isdigit():
+            return int(raw)
+        match = re.fullmatch(r"[Vv]([0-9]+)\+?", raw)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _extract_verification_version(draft: dict[str, Any]) -> int | None:
+    candidates: list[Any] = []
+
+    candidates.append(draft.get("verification_version"))
+
+    verification = draft.get("verification")
+    if isinstance(verification, dict):
+        candidates.append(verification.get("version"))
+
+    verification_content = draft.get("verification_content")
+    if isinstance(verification_content, dict):
+        candidates.append(verification_content.get("verification_level"))
+
+    for candidate in candidates:
+        parsed = _parse_verification_level_value(candidate)
+        if parsed is not None:
+            return parsed
+
+    return None
 
 
 def _extract_context_level(draft: dict[str, Any]) -> Any:
@@ -790,13 +869,18 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
         return diagnostics
     cc_level = parsed_cc
 
-    verification_version: int | None = None
-    ver_raw = draft.get("verification_version") or draft.get("verification", {}).get("version")
-    if ver_raw is not None:
-        try:
-            verification_version = int(ver_raw)
-        except (TypeError, ValueError):
-            pass
+    if cc_level < MIN_CONTEXT_LEVEL or cc_level > MAX_CONTEXT_LEVEL:
+        diagnostics.append(_make_diagnostic(
+            code="INVALID_CONTEXT_LEVEL_RANGE",
+            severity="error",
+            field="draft.context_readiness.declared_context_level",
+            message=f"declared_context_level must be between CC-{MIN_CONTEXT_LEVEL} and CC-{MAX_CONTEXT_LEVEL}, got {cc_level!r}",
+            meaning="The public schema accepts only bounded CC levels.",
+            suggested_fix=f"Use CC-{MIN_CONTEXT_LEVEL} through CC-{MAX_CONTEXT_LEVEL}.",
+        ))
+        return diagnostics
+
+    verification_version = _extract_verification_version(draft)
 
     rules = _CC_RULES.get(record_type, [((0, None), _DEFAULT_CC_MINIMUM)])
     required_cc = _DEFAULT_CC_MINIMUM
@@ -1279,9 +1363,8 @@ def validate_submission_oath(
         ))
         return diagnostics
 
-    # Compute local policy hash (canonical JSON, sorted keys, no spaces)
-    local_policy_json = _json.dumps(local_policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    local_policy_sha256 = hashlib.sha256(local_policy_json.encode("utf-8")).hexdigest()
+    # Compute local policy hash over the stable policy-core domain.
+    local_policy_sha256 = compute_oath_policy_sha256(local_policy)
 
     # Require and validate hash fields (must exist and be 64 hex)
     import re as _re
@@ -1455,11 +1538,11 @@ def redact_transient_oath_readback(submission: dict[str, Any]) -> dict[str, Any]
     redacted = copy.deepcopy(submission)
     client_oath = redacted.get("client_oath_readback")
     if isinstance(client_oath, dict):
-        # Keep metadata, remove raw text
-        _readback_text = client_oath.get("readback_text", "") or ""
-        _readback_hash = (
-            sha256_text(normalize_oath_text(_readback_text))
-            if _readback_text
+        raw_readback_text = client_oath.get("readback_text", "") or ""
+        normalized_readback_text = normalize_oath_text(raw_readback_text)
+        readback_hash = (
+            sha256_text(normalized_readback_text)
+            if normalized_readback_text
             else client_oath.get("readback_text_sha256", "")
         )
         redacted["client_oath_readback"] = {
@@ -1467,9 +1550,9 @@ def redact_transient_oath_readback(submission: dict[str, Any]) -> dict[str, Any]
             "record_type": client_oath.get("record_type", ""),
             "oath_policy_sha256": client_oath.get("oath_policy_sha256", ""),
             "oath_modules": client_oath.get("oath_modules", []),
-            "readback_text_sha256": _readback_hash,
+            "readback_text_sha256": readback_hash,
             "readback_text_hash_canonicalization": "NFC_CRLF_TO_LF_STRIP",
-            "readback_text_char_count": len(_readback_text),
+            "readback_text_char_count": len(normalized_readback_text),
             "redacted_after_gateway_validation": True,
         }
     return redacted
