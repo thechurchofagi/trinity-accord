@@ -114,6 +114,8 @@ jobs:
           git add \
             record-chain/arweave-backlog.json \
             api/record-chain-arweave-backlog.json \
+            record-chain/arweave-archives/ \
+            api/record-chain-arweave-index.json \
             record-chain/ots/native-ots-backlog.json \
             api/record-chain-native-ots-backlog.json \
             record-chain/ots/native-anchors/ \
@@ -134,4 +136,14 @@ jobs:
           done
 
           git commit -m "archive: repair backlog and wallet status metadata"
-          git push
+
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+              exit 0
+            fi
+            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+          done
+
+          echo "::error::Failed to push archive backlog repair metadata after retries."
+          exit 1
