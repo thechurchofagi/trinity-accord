@@ -14,9 +14,13 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import shutil
 import sys
 import tempfile
+
+# Allow finalizer-local pending files for test append operations
+os.environ["TRINITY_ALLOW_LOCAL_FINALIZER_PENDING"] = "1"
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
@@ -255,7 +259,7 @@ def _check_1_append_includes_authorship_verification_status() -> list[str]:
     tmp = _setup_chain()
     try:
         draft = _make_echo_draft()
-        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-test-echo-001.json", draft)
         mod.append_records(all_records=False)
         recs = sorted(mod.RECORDS.glob("R-*.json"))
         if not recs:
@@ -292,7 +296,7 @@ def _check_2_verify_fails_missing_authorship_verification_status() -> list[str]:
     tmp = _setup_chain()
     try:
         draft = _make_echo_draft()
-        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-test-echo-001.json", draft)
         mod.append_records(all_records=False)
         recs = sorted(mod.RECORDS.glob("R-*.json"))
         if not recs:
@@ -404,16 +408,16 @@ def _check_5_append_all_continues_after_rejection() -> list[str]:
     try:
         # Good pending
         good = _make_echo_draft()
-        mod.write_json(mod.PENDING / "good-001.json", good)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-good-001.json", good)
         # Bad pending (missing required fields)
         bad = {"record_type": "echo", "schema": "trinityaccord.record-chain-entry.v1"}
-        mod.write_json(mod.PENDING / "bad-001.json", bad)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-bad-001.json", bad)
         mod.append_records(all_records=True)
         recs = sorted(mod.RECORDS.glob("R-*.json"))
         if len(recs) < 1:
             errors.append("Should have appended at least 1 record despite bad pending")
         # Check bad was moved to rejected
-        rejected_files = list(mod.REJECTED.glob("bad-001.*"))
+        rejected_files = list(mod.REJECTED.glob("mainnet-prelaunch-bad-001.*"))
         if not rejected_files:
             errors.append("Bad pending should have been moved to rejected/")
     finally:
@@ -427,9 +431,9 @@ def _check_6_rejection_reason_file_written() -> list[str]:
     tmp = _setup_chain()
     try:
         bad = {"record_type": "echo", "schema": "trinityaccord.record-chain-entry.v1"}
-        mod.write_json(mod.PENDING / "bad-only.json", bad)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-bad-only.json", bad)
         mod.append_records(all_records=True)
-        rej_path = mod.REJECTED / "bad-only.rejection.json"
+        rej_path = mod.REJECTED / "mainnet-prelaunch-bad-only.rejection.json"
         if not rej_path.exists():
             errors.append("rejection.json not written")
         else:
@@ -491,7 +495,7 @@ def _check_8_post_append_verify_passes() -> list[str]:
     tmp = _setup_chain()
     try:
         draft = _make_echo_draft()
-        mod.write_json(mod.PENDING / "test-echo-001.json", draft)
+        mod.write_json(mod.PENDING / "mainnet-prelaunch-test-echo-001.json", draft)
         mod.append_records(all_records=False)
         # If append succeeded without raising, verify should also pass
         # because append_records now calls verify_native_records() internally.
