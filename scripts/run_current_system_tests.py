@@ -487,6 +487,17 @@ def main() -> int:
         fail(f"gateway authorship proof contract failed: {result.stderr}\n{result.stdout}")
     ok("gateway authorship proof contract")
 
+    # Gateway diagnostic helper contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_gateway_diagnostic_helper_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway diagnostic helper contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("gateway diagnostic helper contract")
+
     # Record-chain intake integrity regression tests
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_intake_integrity_regressions.py"],

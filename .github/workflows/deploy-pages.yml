@@ -209,6 +209,19 @@ jobs:
           require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_CONTEXT_INSUFFICIENT_REASON"'
           require_contains _site/api/record-chain-field-helper.v1.json '"INVALID_GUARDIAN_PUBLIC_KEY_SHA"'
 
+          # Gateway diagnostic helper contract — mission-critical codes
+          require_contains _site/api/record-chain-field-helper.v1.json '"SECURITY_VIOLATION"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"PLACEHOLDER_DETECTED"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"FORBIDDEN_FIELD"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_V2_BLOCK"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_IDENTITY_FIELD"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"INSUFFICIENT_CONTEXT_COMPLETENESS"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"HUMAN_PRIVATE_NAME_SUBMITTED_FORBIDDEN"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"AUTHORSHIP_PAYLOAD_SHA_MISMATCH"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"GUARDIAN_KEY_MISMATCH"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"GUARDIAN_RETIREMENT_KEY_MISMATCH"'
+
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 
