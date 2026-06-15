@@ -198,6 +198,7 @@ def content_hash(record: dict[str, Any]) -> str:
     body = dict(record)
     for key in [
         "content_sha256",
+        "content_sha256_v2",
         "record_sha256",
         "previous_record_sha256",
         "record_index",
@@ -1167,9 +1168,11 @@ def verify_native_records() -> list[str]:
             rid = obj.get("record_id")
             compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
 
-            # Skip AVS/signature checks for historical records missing authorship_proof
-            if not (compat and compat.get("allowed_missing_authorship_proof")):
-                proof = obj.get("authorship_proof") if isinstance(obj.get("authorship_proof"), dict) else {}
+            # Skip AVS/signature checks for historical records only when authorship_proof is actually missing
+            proof = obj.get("authorship_proof") if isinstance(obj.get("authorship_proof"), dict) else None
+            if not (compat and compat.get("allowed_missing_authorship_proof") and proof is None):
+                if proof is None:
+                    proof = {}
                 # Enforce retirement/exit key-continuity for native records.
                 if rtype == "guardian_retirement":
                     try:
