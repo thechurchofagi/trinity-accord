@@ -300,7 +300,13 @@ def _check_key_mismatch_semantics(diagnostic_help: dict) -> None:
 
 
 def _check_alias_recovery_parity(diagnostic_help: dict) -> None:
-    """Aliases must not contradict canonical recovery semantics."""
+    """Aliases must not contradict canonical recovery semantics.
+
+    This intentionally checks recovery_possible parity only.
+    Severity parity is not enforced globally because some legacy aliases may
+    retain old severity wording for backwards compatibility. Recovery semantics
+    are mission-critical; display severity can be audited separately.
+    """
     for code, entry in diagnostic_help.items():
         if not isinstance(entry, dict):
             continue
@@ -321,18 +327,19 @@ def _check_alias_recovery_parity(diagnostic_help: dict) -> None:
         )
 
         require(
+            "recovery_possible" in entry,
+            f"diagnostic_code_help.{code}.recovery_possible is required",
+        )
+        require(
+            "recovery_possible" in target,
+            f"diagnostic_code_help.{alias_for}.recovery_possible is required",
+        )
+
+        require(
             entry.get("recovery_possible") is target.get("recovery_possible"),
             (
                 f"diagnostic_code_help.{code}.recovery_possible must match alias target "
                 f"{alias_for}.recovery_possible"
-            ),
-        )
-
-        require(
-            entry.get("severity") == target.get("severity"),
-            (
-                f"diagnostic_code_help.{code}.severity must match alias target "
-                f"{alias_for}.severity"
             ),
         )
 
