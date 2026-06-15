@@ -60,12 +60,35 @@ FORMAL_RECORD_TYPES = {
     "propagation",
     "correction",
     "classification_update",
+    "context_insufficient_notice",
 }
 
 RESERVED_RECORD_TYPES = {
     "guardian_key_rotation",
 }
-AUTHORSHIP_EXEMPT_TYPES = {"legacy_import", "batch_anchor", "context_insufficient_notice"}
+AUTHORSHIP_EXEMPT_TYPES = {"legacy_import", "batch_anchor"}
+OATH_EXEMPT_TYPES = {"context_insufficient_notice"}
+
+# Historical compatibility exceptions for records that predate stricter
+# verification rules (9-field boundary, signature re-verification, CIN
+# authorship). These exceptions apply ONLY to records with record_index <=
+# HISTORICAL_COMPAT_MAX_INDEX. New records must pass full verification.
+HISTORICAL_COMPAT_MAX_INDEX = 43
+HISTORICAL_RECORD_COMPAT_EXCEPTIONS: dict[str, dict[str, Any]] = {
+    rid: {
+        "reason": "pre-repair record; predates 9-field boundary, signature re-verify, and CIN authorship enforcement",
+        "allowed_boundary_missing": [
+            "receipt_is_not_final_inclusion",
+            "receipt_is_intake_only",
+            "later_records_may_reclassify_or_correct_this_record",
+        ],
+        "allowed_skip_signature_reverify": True,
+        "allowed_skip_oath_new_fields": True,
+    }
+    for rid in (f"R-{i:09d}" for i in range(1, HISTORICAL_COMPAT_MAX_INDEX + 1))
+}
+# R-000000001 is a CIN that predates CIN authorship enforcement
+HISTORICAL_RECORD_COMPAT_EXCEPTIONS["R-000000001"]["allowed_missing_authorship_proof"] = True
 
 
 def require_not_reserved_record_type(record: dict[str, Any]) -> None:
@@ -84,7 +107,22 @@ BOUNDARY = {
     "not_successor_reception": True,
     "not_amendment": True,
     "bitcoin_originals_prevail": True,
+    "receipt_is_not_final_inclusion": True,
+    "receipt_is_intake_only": True,
+    "later_records_may_reclassify_or_correct_this_record": True,
 }
+
+REQUIRED_FINAL_BOUNDARY_FIELDS = frozenset({
+    "not_authority",
+    "not_governance",
+    "not_attestation",
+    "not_successor_reception",
+    "not_amendment",
+    "bitcoin_originals_prevail",
+    "receipt_is_not_final_inclusion",
+    "receipt_is_intake_only",
+    "later_records_may_reclassify_or_correct_this_record",
+})
 
 PRIVATE_KEY_PATTERNS = [
     re.compile(r"BEGIN (?:OPENSSH |RSA |EC )?PRIVATE KEY"),
@@ -170,6 +208,38 @@ def content_hash(record: dict[str, Any]) -> str:
         "server_receipt",
     ]:
         body.pop(key, None)
+    return sha256_canonical_json(body)
+
+
+CONTENT_HASH_V2_EXCLUDED_FIELDS = frozenset({
+    "record_id",
+    "record_index",
+    "assigned_at",
+    "previous_record_sha256",
+    "content_sha256",
+    "content_sha256_v2",
+    "record_sha256",
+    "chain_id",
+    "append_assigned_metadata",
+    "server_append_metadata",
+    "server_normalization",
+    "authorship_verification_status",
+    "actor_identity",
+    "boundary",
+    "batch_id",
+    "batch_membership",
+    "server_receipt",
+})
+
+
+def content_hash_v2(record: dict[str, Any]) -> str:
+    """Content hash excluding all server-derived and append-assigned fields.
+
+    This is the participant-content-domain hash. It should be identical for
+    the same participant content regardless of record_id, append metadata,
+    or server normalization.
+    """
+    body = {k: v for k, v in record.items() if k not in CONTENT_HASH_V2_EXCLUDED_FIELDS}
     return sha256_canonical_json(body)
 
 
@@ -382,14 +452,27 @@ def record_id(index: int) -> str:
 
 def require_boundary(record: dict[str, Any]) -> None:
     boundary = record.get("boundary_acknowledgement") or record.get("boundary") or {}
-    for key in ["not_authority", "not_governance", "not_attestation", "not_successor_reception", "not_amendment", "bitcoin_originals_prevail"]:
-        if boundary.get(key) is not True:
-            raise ValueError(f"record boundary missing/false: {key}")
+    missing = [key for key in REQUIRED_FINAL_BOUNDARY_FIELDS if boundary.get(key) is not True]
+
+    # Check historical compatibility exceptions
+    rid = record.get("record_id")
+    compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
+    if compat:
+        allowed = set(compat.get("allowed_boundary_missing", []))
+        missing = [m for m in missing if m not in allowed]
+
+    if missing:
+        raise ValueError(f"record boundary missing/false: {', '.join(sorted(missing))}")
 
 
 def require_authorship(record: dict[str, Any]) -> None:
     rtype = record.get("record_type")
     if rtype in FORMAL_RECORD_TYPES and not record.get("authorship_proof"):
+        # Check historical exception (e.g. R-000000001 CIN predates authorship enforcement)
+        rid = record.get("record_id")
+        compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
+        if compat and compat.get("allowed_missing_authorship_proof"):
+            return
         raise ValueError(f"formal record_type={rtype} requires authorship_proof")
 
 
@@ -449,6 +532,42 @@ def verify_pending_record_authorship(record: dict[str, Any]) -> None:
     ok, err = verify_authorship_proof(record_for_verification, proof)
     if not ok:
         raise ValueError(f"authorship proof verification failed for pending record: {err}")
+
+
+def verify_final_record_authorship(record: dict[str, Any], path: Path) -> list[str]:
+    """Re-verify Ed25519 signature for a final persisted record.
+
+    Status fields like authorship_verification_status are not cryptographic proof.
+    Final records must be reverified against their stored authorship_proof.
+    """
+    errors: list[str] = []
+    rtype = record.get("record_type")
+    if rtype not in FORMAL_RECORD_TYPES or rtype in AUTHORSHIP_EXEMPT_TYPES:
+        return errors
+
+    rid = record.get("record_id")
+    compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
+
+    proof = record.get("authorship_proof")
+    if not isinstance(proof, dict):
+        if compat and compat.get("allowed_missing_authorship_proof"):
+            return errors
+        errors.append(f"{path}: formal record_type={rtype} requires authorship_proof")
+        return errors
+
+    # Historical records may have signature mismatch due to unsigned projection differences
+    if compat and compat.get("allowed_skip_signature_reverify"):
+        return errors
+
+    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    from gateway.authorship import strip_unsigned_projection_fields, verify_authorship_proof  # noqa: WPS433
+
+    signed_scope = strip_unsigned_projection_fields(record)
+    ok, err = verify_authorship_proof(signed_scope, proof)
+    if not ok:
+        errors.append(f"{path}: final authorship proof verification failed: {err}")
+
+    return errors
 
 
 def sanitize_pending_record_for_append(record: dict[str, Any]) -> dict[str, Any]:
@@ -765,6 +884,7 @@ def append_records(all_records: bool = False) -> None:
             })
 
             draft["content_sha256"] = content_hash(draft)
+            draft["content_sha256_v2"] = content_hash_v2(draft)
             draft["record_sha256"] = record_hash(draft)
 
             out = RECORDS / f"{draft['record_id']}.json"
@@ -948,8 +1068,8 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
     if isinstance(record_type, str):
         record_type = record_type.strip().lower()
 
-    # Skip non-formal types and historical imports
-    if record_type in AUTHORSHIP_EXEMPT_TYPES or record_type not in FORMAL_RECORD_TYPES:
+    # Skip non-formal types, historical imports, and oath-exempt types (e.g. CIN)
+    if record_type in AUTHORSHIP_EXEMPT_TYPES or record_type in OATH_EXEMPT_TYPES or record_type not in FORMAL_RECORD_TYPES:
         return
 
     # Check for raw readback_text in persisted records (must not exist)
@@ -964,9 +1084,23 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             "no_shortcut_oath_acknowledged", "oath_does_not_prove_subjective_understanding",
             "oath_verifies_exact_readback_only", "not_authority", "not_governance",
             "not_attestation", "not_amendment", "bitcoin_originals_prevail",
+            "not_successor_reception", "receipt_is_not_final_inclusion",
+            "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
         ]
+
+        # Historical records may predate the new oath fields
+        rid = obj.get("record_id")
+        compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
+        historical_new_oath_fields = {
+            "not_successor_reception", "receipt_is_not_final_inclusion",
+            "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
+        }
+
         for field in required_bools:
             if oath.get(field) is not True:
+                # Skip new oath fields for historical records
+                if compat and compat.get("allowed_skip_oath_new_fields") and field in historical_new_oath_fields:
+                    continue
                 errors.append(f"{path}: oath.{field} is not true")
 
         # --- Phase 6B: strengthened oath hash verification ---
@@ -1018,6 +1152,9 @@ def verify_native_records() -> list[str]:
             errors.append(f"{p}: content_sha256 mismatch")
         if obj.get("record_sha256") != record_hash(obj):
             errors.append(f"{p}: record_sha256 mismatch")
+        # Verify content_sha256_v2 if present (new records)
+        if "content_sha256_v2" in obj and obj.get("content_sha256_v2") != content_hash_v2(obj):
+            errors.append(f"{p}: content_sha256_v2 mismatch")
         try:
             require_boundary(obj)
             require_authorship(obj)
@@ -1027,31 +1164,35 @@ def verify_native_records() -> list[str]:
         # --- Phase 6B: authorship_verification_status for formal records ---
         rtype = obj.get("record_type") or ""
         if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
-            proof = obj.get("authorship_proof") if isinstance(obj.get("authorship_proof"), dict) else {}
-            # Enforce retirement/exit key-continuity for native records. Some
-            # early pre-finalization guardian_application records predate the
-            # stricter application binding, so verify_chain must not retroactively
-            # break on historical intake records. New applications are still
-            # enforced by gateway validation and append-time pending checks.
-            if rtype == "guardian_retirement":
-                try:
-                    _require_guardian_lifecycle_key_binding(obj, proof)
-                except Exception as exc:
-                    errors.append(f"{p}: {exc}")
+            rid = obj.get("record_id")
+            compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
 
-            avs = obj.get("authorship_verification_status")
-            if not isinstance(avs, dict):
-                errors.append(f"{p}: formal record_type={rtype} missing authorship_verification_status")
-            else:
-                if avs.get("signed_payload_scope") != "pre_append_record_draft":
-                    errors.append(f"{p}: authorship_verification_status.signed_payload_scope must be 'pre_append_record_draft'")
-                if avs.get("verified_by_append_before_record") is not True and avs.get("verified_by_gateway_before_pending") is not True:
-                    errors.append(
-                        f"{p}: authorship_verification_status must include verified_by_append_before_record=true "
-                        "or legacy verified_by_gateway_before_pending=true"
-                    )
-                if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
-                    errors.append(f"{p}: authorship_verification_status.final_record_contains_append_assigned_fields_not_in_signed_payload must be true")
+            # Skip AVS/signature checks for historical records missing authorship_proof
+            if not (compat and compat.get("allowed_missing_authorship_proof")):
+                proof = obj.get("authorship_proof") if isinstance(obj.get("authorship_proof"), dict) else {}
+                # Enforce retirement/exit key-continuity for native records.
+                if rtype == "guardian_retirement":
+                    try:
+                        _require_guardian_lifecycle_key_binding(obj, proof)
+                    except Exception as exc:
+                        errors.append(f"{p}: {exc}")
+
+                avs = obj.get("authorship_verification_status")
+                if not isinstance(avs, dict):
+                    errors.append(f"{p}: formal record_type={rtype} missing authorship_verification_status")
+                else:
+                    if avs.get("signed_payload_scope") != "pre_append_record_draft":
+                        errors.append(f"{p}: authorship_verification_status.signed_payload_scope must be 'pre_append_record_draft'")
+                    if avs.get("verified_by_append_before_record") is not True and avs.get("verified_by_gateway_before_pending") is not True:
+                        errors.append(
+                            f"{p}: authorship_verification_status must include verified_by_append_before_record=true "
+                            "or legacy verified_by_gateway_before_pending=true"
+                        )
+                    if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
+                        errors.append(f"{p}: authorship_verification_status.final_record_contains_append_assigned_fields_not_in_signed_payload must be true")
+
+                # --- Re-verify Ed25519 signature against stored proof ---
+                errors.extend(verify_final_record_authorship(obj, p))
 
         # --- oath gate verification ---
         _verify_oath_in_record(obj, p, errors)
