@@ -67,18 +67,29 @@ _GATEWAY_BASE_URL = os.environ.get("TRINITY_GATEWAY_BASE_URL", "")
 # In-memory receipt store (ephemeral; resets on restart)
 _receipt_store: dict[str, dict[str, Any]] = {}
 
-# Gateway schema info
+# Gateway schema info — must reflect actual validation rules.
+# authorship_proof is REQUIRED for all formal record types (not optional).
 _GATEWAY_SCHEMA: dict[str, Any] = {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "accepted_record_types": sorted(ALLOWED_RECORD_TYPES),
-    "required_submission_fields": ["record_type", "record_draft", "submission_boundary"],
-    "optional_submission_fields": ["authorship_proof", "metadata", "boundary_acknowledgement"],
+    "required_submission_fields": [
+        "record_type",
+        "record_draft",
+        "submission_boundary",
+        "authorship_proof",
+    ],
+    "optional_submission_fields": ["metadata", "boundary_acknowledgement"],
     "boundary_acknowledgement_fields": len(REQUIRED_BOUNDARY_FIELDS),
     "boundary_acknowledgement_required_fields": sorted(REQUIRED_BOUNDARY_FIELDS),
     "context_readiness_path": "record_draft.context_readiness.declared_context_level",
     "oath_gate": {
         "required": True,
         "policy_url": "/api/record-chain-oath-policy.v1.json",
+        "required_for": sorted({
+            "echo", "verification", "guardian_application", "guardian_retirement",
+            "propagation", "correction", "classification_update",
+        }),
+        "not_required_for": ["context_insufficient_notice"],
     },
 }
 

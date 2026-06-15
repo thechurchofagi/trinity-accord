@@ -1536,8 +1536,10 @@ function runDoctor(submission) {
     }
   }
 
-  // Check authorship proof claim_boundary
-  if (submission.authorship_proof) {
+  // Check authorship proof is present (required for ALL public record types including CIN)
+  if (!submission.authorship_proof || typeof submission.authorship_proof !== "object") {
+    results.push({ status: "FAIL", code: "MISSING_AUTHORSHIP_PROOF", field: "authorship_proof", meaning: "All public record types (including context_insufficient_notice) require an authorship_proof.", fix: "Rebuild with --key-dir to include Ed25519 authorship proof." });
+  } else {
     const cb = submission.authorship_proof.claim_boundary;
     if (typeof cb === "string") {
       results.push({ status: "FAIL", code: "DEPRECATED_CLAIM_BOUNDARY_STRING", field: "authorship_proof.claim_boundary", meaning: ERROR_HELP_MAP.DEPRECATED_CLAIM_BOUNDARY_STRING.meaning, fix: ERROR_HELP_MAP.DEPRECATED_CLAIM_BOUNDARY_STRING.fix });
