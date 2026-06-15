@@ -1568,7 +1568,32 @@ def build_indexes(derived_at: str | None = None) -> None:
     write_json(INDEXES / "record-index.json", record_index)
     write_json(INDEXES / "batch-index.json", batch_index)
     write_json(INDEXES / "statistics.json", stats)
-    write_json(INDEXES / "propagation-index.json", {"schema": "trinityaccord.propagation-index.v1", "derived_at": derived_at, "records": []})
+
+    # F.3: Generate native type indexes
+    type_indexes: dict[str, list[dict[str, Any]]] = {
+        "echo": [],
+        "verification": [],
+        "propagation": [],
+        "correction": [],
+        "classification_update": [],
+    }
+    for p in native_records:
+        rec = read_json(p)
+        rtype = rec.get("record_type")
+        if rtype in type_indexes:
+            type_indexes[rtype].append({
+                "record_id": rec.get("record_id"),
+                "record_type": rtype,
+                "record_sha256": rec.get("record_sha256"),
+                "path": str(p.relative_to(ROOT)),
+            })
+
+    for index_name, records_list in type_indexes.items():
+        write_json(INDEXES / f"{index_name}-index.json", {
+            "schema": f"trinityaccord.{index_name}-index.v1",
+            "derived_at": derived_at,
+            "records": records_list,
+        })
 
 
 def run_ots(args: list[str]) -> bool:
