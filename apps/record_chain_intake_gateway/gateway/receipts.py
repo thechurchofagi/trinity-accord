@@ -18,6 +18,20 @@ def compute_receipt_sha256(receipt: dict[str, Any]) -> str:
     return sha256_canonical_json(material)
 
 
+def verify_receipt_sha256(receipt: dict[str, Any]) -> tuple[bool, str]:
+    """Verify that a receipt's stored hash matches its computed hash.
+
+    Returns (True, "") on success, (False, error_message) on failure.
+    """
+    expected = receipt.get("receipt_sha256")
+    if not isinstance(expected, str) or not expected:
+        return False, "receipt_sha256 missing or not a string"
+    actual = compute_receipt_sha256(receipt)
+    if expected != actual:
+        return False, f"receipt_sha256 mismatch: expected {expected}, got {actual}"
+    return True, ""
+
+
 def make_legacy_receipt_id(submission_sha256: str, now: datetime | None = None) -> str:
     """Generate the legacy 12-hex receipt ID for duplicate lookup only."""
     if now is None:
