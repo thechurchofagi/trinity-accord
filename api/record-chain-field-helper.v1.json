@@ -663,6 +663,24 @@
       "fix": "Do not retry as guardian_key_rotation. If the Guardian is ending service, use guardian_retirement. If a new Guardian identity is needed, submit a new guardian_application. Wait for the future key-rotation protocol before attempting key migration.",
       "recovery_possible": false,
       "severity": "error"
+    },
+    "PROVENANCE_DISCOVERY_CONTEXT_CONFLICT": {
+      "meaning": "Discovery context contradicts itself. A record cannot be self-discovered if the Accord/context was supplied by a human, agent, organization, system prompt, or current user task.",
+      "fix": "Use self_discovered only for independent discovery. Use user_task_context or introduced_by_human/agent/organization when another party supplied the context.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_DECISION_CONTEXT_CONFLICT": {
+      "meaning": "Decision autonomy context contradicts itself. A record cannot be purely self-decided while also being requested by a human, another agent, organization, or system.",
+      "fix": "Use record_decision human when a human requested the record, another_agent when another agent requested it, or mixed when the participant made substantive independent choices after an external request.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_EXECUTION_CONTEXT_CONFLICT": {
+      "meaning": "Submission execution context contradicts human operator context. Human request, introduction, instruction, command, or approval is not the same as operational human execution.",
+      "fix": "If the agent ran Builder/preflight/submit itself, use submission_executor self and human_operator_involved false. If a human ran commands, uploaded JSON, controlled the submit session, or submitted, use submission_executor human_operator and human_operator_involved true.",
+      "recovery_possible": true,
+      "severity": "error"
     }
   },
   "field_groups": [

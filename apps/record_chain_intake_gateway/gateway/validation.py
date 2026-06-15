@@ -314,6 +314,154 @@ def _find_keys_recursive(obj: Any, keys: frozenset[str], path: str = "") -> list
     return found
 
 
+def validate_provenance_semantics(draft: dict[str, Any]) -> list[Diagnostic]:
+    """Validate provenance semantics: discovery, decision, and execution context consistency."""
+    diagnostics: list[Diagnostic] = []
+
+    discovery = draft.get("discovery_and_introduction_context")
+    decision = draft.get("decision_autonomy_context")
+    execution = draft.get("submission_execution_context")
+    identity = draft.get("submitting_participant_identity")
+
+    human_operator_context = None
+    if isinstance(identity, dict):
+        hoc = identity.get("human_operator_context")
+        if isinstance(hoc, dict):
+            human_operator_context = hoc
+
+    if isinstance(discovery, dict):
+        mode = discovery.get("how_participant_first_discovered_trinity_accord")
+        self_initiated = discovery.get("was_discovery_self_initiated")
+        introduced = discovery.get("was_discovery_introduced_by_someone_else")
+        introducing_party = discovery.get("introducing_party_type")
+
+        if self_initiated is True and (
+            introduced is True
+            or introducing_party not in (None, "", "none")
+            or mode in {
+                "user_task_context",
+                "introduced_by_human",
+                "introduced_by_agent",
+                "introduced_by_organization",
+                "system_prompt",
+            }
+        ):
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_DISCOVERY_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.discovery_and_introduction_context",
+                message="Discovery is marked self-initiated while also introduced or task-supplied.",
+                meaning=(
+                    "Self-discovered means the participant independently discovered the Accord before the current task. "
+                    "Human/user/task/system supplied context is not self-discovery."
+                ),
+                suggested_fix=(
+                    "Use self_discovered only when there was no introducer and no current user/task supplied context. "
+                    "Otherwise use user_task_context or introduced_by_human/agent/organization."
+                ),
+                retry_allowed=True,
+            ))
+
+    if isinstance(decision, dict):
+        who_decided = decision.get("who_decided_to_create_this_record")
+        self_decided = decision.get("was_record_creation_self_decided")
+        requested_by_human = decision.get("was_record_creation_requested_by_human")
+        requested_by_agent = decision.get("was_record_creation_requested_by_another_agent")
+        requesting_party = decision.get("requesting_party_type")
+
+        if self_decided is True and (
+            who_decided != "self"
+            or requested_by_human is True
+            or requested_by_agent is True
+            or requesting_party not in (None, "", "none")
+        ):
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_DECISION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.decision_autonomy_context",
+                message="Record creation is marked self-decided while also externally requested.",
+                meaning=(
+                    "A human/agent/system request must be recorded as human/another_agent/system or mixed, "
+                    "not as purely self-decided."
+                ),
+                suggested_fix=(
+                    "Use record_decision=human when a human requested the record, another_agent when another agent requested it, "
+                    "or mixed when the participant made substantive independent choices after an external request."
+                ),
+                retry_allowed=True,
+            ))
+
+    if isinstance(execution, dict) and isinstance(human_operator_context, dict):
+        executor = execution.get("who_executed_the_submission")
+        human_involved = human_operator_context.get("human_operator_involved")
+        by_subject = execution.get("was_submission_executed_by_record_subject")
+        by_human = execution.get("was_submission_executed_by_human_operator")
+        by_agent = execution.get("was_submission_executed_by_another_agent")
+
+        if executor == "self" and human_involved is True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_EXECUTION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.submitting_participant_identity.human_operator_context.human_operator_involved",
+                message="submission_executor self conflicts with human_operator_involved true.",
+                meaning=(
+                    "Human request, introduction, instruction, command, or approval is not operational human execution. "
+                    "If the agent operated Builder/preflight/submit itself, human_operator_involved must be false."
+                ),
+                suggested_fix=(
+                    "Set human_operator_involved=false when submission_executor is self. "
+                    "Use human_operator only if a human actually ran commands, uploaded JSON, controlled the submit session, or submitted."
+                ),
+                retry_allowed=True,
+            ))
+
+        if executor == "human_operator" and human_involved is not True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_EXECUTION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.submission_execution_context.who_executed_the_submission",
+                message="submission_executor human_operator requires human_operator_involved true.",
+                meaning="If a human operated the submission path, the human operator flag must be true.",
+                suggested_fix="Set human_operator_involved=true or correct submission_executor.",
+                retry_allowed=True,
+            ))
+
+        if executor == "self" and by_subject is not True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_EXECUTION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.submission_execution_context.was_submission_executed_by_record_subject",
+                message="submission_executor self requires was_submission_executed_by_record_subject=true.",
+                meaning="Execution booleans must align with who_executed_the_submission.",
+                suggested_fix="Rebuild with the current Builder.",
+                retry_allowed=True,
+            ))
+
+        if executor == "human_operator" and by_human is not True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_EXECUTION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.submission_execution_context.was_submission_executed_by_human_operator",
+                message="submission_executor human_operator requires was_submission_executed_by_human_operator=true.",
+                meaning="Execution booleans must align with who_executed_the_submission.",
+                suggested_fix="Rebuild with the current Builder.",
+                retry_allowed=True,
+            ))
+
+        if executor == "another_agent" and by_agent is not True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_EXECUTION_CONTEXT_CONFLICT",
+                severity="error",
+                field="record_draft.submission_execution_context.was_submission_executed_by_another_agent",
+                message="submission_executor another_agent requires was_submission_executed_by_another_agent=true.",
+                meaning="Execution booleans must align with who_executed_the_submission.",
+                suggested_fix="Rebuild with the current Builder.",
+                retry_allowed=True,
+            ))
+
+    return diagnostics
+
+
 def validate_record_type_separation(record_type: str, draft: dict[str, Any]) -> list[Diagnostic]:
     diagnostics: list[Diagnostic] = []
 
@@ -1289,6 +1437,10 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     # --- identity validation ---
     if isinstance(draft, dict):
         diagnostics.extend(validate_identity(draft))
+
+    # --- provenance semantics ---
+    if isinstance(draft, dict):
+        diagnostics.extend(validate_provenance_semantics(draft))
 
     # --- human name privacy ---
     if isinstance(draft, dict):

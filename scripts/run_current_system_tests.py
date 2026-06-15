@@ -981,6 +981,47 @@ def main() -> int:
         fail(f"guardian registry page boundary test failed:\n{result.stdout}\n{result.stderr}")
     ok("guardian registry page boundary")
 
+    # Provenance semantics contract tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_first_contact_provenance_examples.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"first-contact provenance examples test failed:\n{result.stdout}\n{result.stderr}")
+    ok("first-contact provenance examples")
+
+    result = subprocess.run(
+        [sys.executable, "scripts/test_builder_provenance_consistency_guard.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder provenance consistency guard test failed:\n{result.stdout}\n{result.stderr}")
+    ok("builder provenance consistency guard")
+
+    result = subprocess.run(
+        [sys.executable, "scripts/test_gateway_provenance_semantics_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway provenance semantics contract test failed:\n{result.stdout}\n{result.stderr}")
+    ok("gateway provenance semantics contract")
+
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_home_autonomy_signal_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public-home autonomy signal contract test failed:\n{result.stdout}\n{result.stderr}")
+    ok("public-home autonomy signal contract")
+
     # Phase 5 OTS-Arweave upgraded status contract
     result = subprocess.run(
         [sys.executable, "scripts/test_phase5_ots_arweave_upgraded_status_contract.py"],

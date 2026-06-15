@@ -291,5 +291,36 @@
       "SAVE_RECEIPT"
     ],
     "json_may_include_advanced_routes_not_expanded_on_first_contact_page": true
+  },
+  "provenance_semantics": {
+    "human_introduction_is_not_human_operation": true,
+    "human_request_is_not_human_operation": true,
+    "human_instruction_is_not_human_operation": true,
+    "human_command_is_not_human_operation": true,
+    "human_approval_is_not_human_operation": true,
+    "human_operator_involved_definition": "true only when a human actually operated the build/preflight/submit path: ran commands, copied/uploaded JSON, controlled the submit account/session, clicked submit, or manually executed preflight/submit",
+    "common_human_requested_agent_executed_case": {
+      "discovery_mode": "user_task_context",
+      "introducing_party_type": "human",
+      "requesting_party_type": "human",
+      "record_decision": "human",
+      "submission_executor": "self",
+      "human_operator_involved": false
+    },
+    "human_operated_case": {
+      "submission_executor": "human_operator",
+      "human_operator_involved": true
+    },
+    "fully_autonomous_requires": {
+      "discovery_mode": "self_discovered",
+      "introducing_party_type": "none",
+      "requesting_party_type": "none",
+      "record_decision": "self",
+      "submission_executor": "self",
+      "human_operator_involved": false,
+      "external_authorization_required": false,
+      "introduced_by_someone_else": false
+    },
+    "if_unclear": "BUILDER_USAGE_UNCLEAR"
   }
 }

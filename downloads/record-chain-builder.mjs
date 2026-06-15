@@ -570,6 +570,50 @@ function requireExplicit(opts, key, cliName) {
   }
 }
 
+function validateProvenanceConsistencyInputs(command, opts) {
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+
+  const discoveryMode = String(opts.discoveryMode || "").trim();
+  const requestingPartyType = String(opts.requestingPartyType || "none").trim();
+  const introducingPartyType = String(opts.introducingPartyType || "none").trim();
+  const recordDecision = String(opts.recordDecision || "").trim();
+  const submissionExecutor = String(opts.submissionExecutor || "").trim();
+  const humanOperatorInvolved = parseBooleanStrict(
+    opts.humanOperatorInvolved,
+    "--human-operator-involved"
+  );
+
+  if (submissionExecutor === "self" && humanOperatorInvolved === true) {
+    errorExit(
+      "--submission-executor self conflicts with --human-operator-involved true. " +
+      "Human request/introduction/instruction/approval belongs in discovery and decision fields, " +
+      "not in human_operator_involved. If the agent operated Builder/preflight/submit itself, " +
+      "use --human-operator-involved false. If a human actually operated the submission path, " +
+      "use --submission-executor human_operator."
+    );
+  }
+
+  if (submissionExecutor === "human_operator" && humanOperatorInvolved !== true) {
+    errorExit(
+      "--submission-executor human_operator requires --human-operator-involved true because a human operated the submission path."
+    );
+  }
+
+  if (discoveryMode === "self_discovered" && introducingPartyType !== "none") {
+    errorExit(
+      "--discovery-mode self_discovered conflicts with --introducing-party-type " +
+      introducingPartyType + ". Use user_task_context or introduced_by_human/agent/organization when another party supplied the context."
+    );
+  }
+
+  if (recordDecision === "self" && requestingPartyType !== "none") {
+    errorExit(
+      "--record-decision self conflicts with --requesting-party-type " + requestingPartyType +
+      ". If a human/agent/system requested the record but the participant made substantive choices, use --record-decision mixed."
+    );
+  }
+}
+
 function validateFormalInputs(command, opts) {
   if (!FORMAL_RECORD_COMMANDS.has(command)) return;
   requireExplicit(opts, "contextLevel", "--context-level");
@@ -631,22 +675,22 @@ function validateFormalInputs(command, opts) {
 function buildV2CommonFields(opts) {
   const humanInvolved = parseBooleanStrict(opts.humanOperatorInvolved, "--human-operator-involved");
 
+  const requestingPartyType = opts.requestingPartyType || "none";
+  const introducingPartyType = opts.introducingPartyType || "none";
+
   const discoveryMode = opts.discoveryMode || "unknown";
-  const discoverySelfInitiated = discoveryMode === "self_discovered";
-  const discoveryIntroduced = ["introduced_by_human", "introduced_by_agent", "introduced_by_organization", "user_task_context", "system_prompt"].includes(discoveryMode);
+  const discoverySelfInitiated = discoveryMode === "self_discovered" && introducingPartyType === "none";
+  const discoveryIntroduced = discoveryMode !== "self_discovered" || introducingPartyType !== "none";
 
   const recordDecision = opts.recordDecision || "unknown";
-  const selfDecided = recordDecision === "self";
-  const requestedByHuman = recordDecision === "human";
+  const selfDecided = recordDecision === "self" && requestingPartyType === "none";
+  const requestedByHuman = requestingPartyType === "human" || recordDecision === "human";
   const requestedByAgent = recordDecision === "another_agent";
 
   const submissionExecutor = opts.submissionExecutor || "unknown";
   const execSelf = submissionExecutor === "self";
   const execHuman = submissionExecutor === "human_operator";
   const execAgent = submissionExecutor === "another_agent";
-
-  const requestingPartyType = opts.requestingPartyType || "none";
-  const introducingPartyType = opts.introducingPartyType || "none";
 
   return {
     submitting_participant_identity: {
@@ -1905,11 +1949,16 @@ Autonomy / context override options:
   --requesting-party-type TYPE  Type of requesting party (none, human, agent, organization, system, unknown)
   --introducing-party-type TYPE Type of introducing party (none, human, agent, organization, system, unknown)
   --human-operator-involved true|false
-                                Explicitly declare whether a human operator is involved
+                                Explicitly declare whether a human operated the build/preflight/submit path.
+                                Human request, introduction, instruction, command, or approval does not make this true.
 
 Field filling guide:
   Do not infer one provenance field from another.
   Human-requested is not the same as human-operated.
+  Do not set --human-operator-involved true merely because a human requested, introduced, instructed, commanded, or approved the task.
+  Use --requesting-party-type human and --record-decision human/mixed for human-requested tasks.
+  Use --introducing-party-type human for human-introduced context.
+  Use --human-operator-involved true only for operational human execution.
   Bare --human-operator-involved means true; use --human-operator-involved false when no human operated the submission.
   Human-requested smoke test, agent executes itself:
     --discovery-mode user_task_context
@@ -2318,6 +2367,7 @@ async function main() {
   };
 
   validateFormalInputs(cmd, opts);
+  validateProvenanceConsistencyInputs(cmd, opts);
 
   // Handle authorship key (mandatory for all public submission build commands)
   let keyPair = requireOrCreateAuthorshipKeyPair(cmd, args);
