@@ -72,7 +72,7 @@ def assert_common_integrity(payload: dict, expected_type: str) -> None:
     assert ctx["declared_context_level"] != "CC-3" or ctx.get("loaded_context_urls"), "CC-3 requires loaded URLs"
     assert draft["discovery_and_introduction_context"]["how_participant_first_discovered_trinity_accord"] != "self_discovered"
     assert draft["decision_autonomy_context"]["who_decided_to_create_this_record"] != "self"
-    assert draft["submitting_participant_identity"]["human_operator_context"]["human_operator_involved"] is True
+    assert draft["submitting_participant_identity"]["human_operator_context"]["human_operator_involved"] is False
 
 
 def build_formal_journeys(tmp: Path) -> None:
@@ -86,7 +86,7 @@ def build_formal_journeys(tmp: Path) -> None:
         "--discovery-mode", "user_task_context",
         "--record-decision", "human",
         "--submission-executor", "self",
-        "--human-operator-involved", "true",
+            "--human-operator-involved", "false",
         "--generate-authorship-key",
         "--key-dir", "./authorship-keys",
     ]

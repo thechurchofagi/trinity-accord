@@ -101,7 +101,7 @@ def main() -> None:
                 "--discovery-mode", "user_task_context",
                 "--record-decision", "human",
                 "--submission-executor", "self",
-                "--human-operator-involved", "true",
+            "--human-operator-involved", "false",
                 "--readback", canonical_oath,
                 "--generate-authorship-key",
                 "--key-dir", str(tmp_key),

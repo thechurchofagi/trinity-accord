@@ -25,7 +25,7 @@ ECHO_CTX = [
     "--discovery-mode", "user_task_context",
     "--record-decision", "human",
     "--submission-executor", "self",
-    "--human-operator-involved", "true",
+            "--human-operator-involved", "false",
 ]
 
 def ok(msg):
@@ -251,7 +251,7 @@ def test_same_keydir_reuses_key():
         oath = get_oath("echo")
         ctx = ["--context-level", "CC-3", "--context-sufficient-for-selected-action", "true",
                "--loaded-urls", "https://www.trinityaccord.org/", "--discovery-mode", "user_task_context",
-               "--record-decision", "human", "--submission-executor", "self", "--human-operator-involved", "true"]
+               "--record-decision", "human", "--submission-executor", "self", "--human-operator-involved", "false"]
         run_builder([
             "echo", "--actor-label", "A1", "--provider", "R1",
             "--body-file", str(body), *ctx,

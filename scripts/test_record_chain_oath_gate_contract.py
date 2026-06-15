@@ -32,7 +32,7 @@ REQUIRED_BUILDER_CONTEXT_ARGS = [
     "--discovery-mode", "user_task_context",
     "--record-decision", "human",
     "--submission-executor", "self",
-    "--human-operator-involved", "true",
+            "--human-operator-involved", "false",
 ]
 
 REQUIRED_VERIFICATION_CONTENT_ARGS = [

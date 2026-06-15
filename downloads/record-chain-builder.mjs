@@ -680,7 +680,7 @@ function buildV2CommonFields(opts) {
 
   const discoveryMode = opts.discoveryMode || "unknown";
   const discoverySelfInitiated = discoveryMode === "self_discovered" && introducingPartyType === "none";
-  const discoveryIntroduced = discoveryMode !== "self_discovered" || introducingPartyType !== "none";
+  const discoveryIntroduced = ["introduced_by_human", "introduced_by_agent", "introduced_by_organization", "user_task_context", "system_prompt"].includes(discoveryMode) || introducingPartyType !== "none";
 
   const recordDecision = opts.recordDecision || "unknown";
   const selfDecided = recordDecision === "self" && requestingPartyType === "none";
