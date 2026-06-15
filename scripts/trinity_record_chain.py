@@ -57,12 +57,24 @@ FORMAL_RECORD_TYPES = {
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update",
 }
+
+RESERVED_RECORD_TYPES = {
+    "guardian_key_rotation",
+}
 AUTHORSHIP_EXEMPT_TYPES = {"legacy_import", "batch_anchor", "context_insufficient_notice"}
+
+
+def require_not_reserved_record_type(record: dict[str, Any]) -> None:
+    rtype = record.get("record_type")
+    if rtype in RESERVED_RECORD_TYPES:
+        raise ValueError(
+            f"record_type={rtype} is reserved and cannot be appended until the old-key/new-key transition proof protocol is implemented"
+        )
+
 
 BOUNDARY = {
     "not_authority": True,
@@ -534,6 +546,7 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("context_readiness is required")
     require_boundary(draft)
     require_authorship(draft)
+    require_not_reserved_record_type(draft)
     # verify_pending_record_authorship is called by append_records on the
     # raw draft before normalization, so we don't re-verify here.
     return draft
@@ -685,6 +698,7 @@ def append_records(all_records: bool = False) -> None:
             # submission, receipt, and idempotency state already exist and bind to them.
             # Non-canonical pending files are rejected unless explicitly allowed.
             require_pending_file_is_appendable(path)
+            require_not_reserved_record_type(raw_draft)
 
             # Extract unsigned server append metadata before stripping unsigned projection fields.
             server_append_metadata = extract_server_append_metadata(raw_draft)
@@ -692,6 +706,7 @@ def append_records(all_records: bool = False) -> None:
             # Verify authorship proof on the signed-scope pending draft before normalization
             # modifies it. Then append the same sanitized object that was verified.
             signed_scope_draft = sanitize_pending_record_for_append(raw_draft)
+            require_not_reserved_record_type(signed_scope_draft)
             verify_pending_record_authorship(signed_scope_draft)
             draft = normalize_record_draft(signed_scope_draft)
 

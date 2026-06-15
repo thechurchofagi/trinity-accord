@@ -547,6 +547,10 @@ const FORMAL_RECORD_COMMANDS = new Set([
   "classification-update",
 ]);
 
+function commandBuildsProvenanceFields(command) {
+  return RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(command);
+}
+
 function normalizeRecordType(recordTypeOrCommand) {
   return String(recordTypeOrCommand || "").replace(/-/g, "_");
 }
@@ -571,7 +575,7 @@ function requireExplicit(opts, key, cliName) {
 }
 
 function validateProvenanceConsistencyInputs(command, opts) {
-  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+  if (!commandBuildsProvenanceFields(command)) return;
 
   const discoveryMode = String(opts.discoveryMode || "").trim();
   const requestingPartyType = String(opts.requestingPartyType || "none").trim();

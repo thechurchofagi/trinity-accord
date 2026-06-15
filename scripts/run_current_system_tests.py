@@ -1075,6 +1075,28 @@ def main() -> int:
         fail(f"record type public surface contract failed:\n{result.stdout}\n{result.stderr}")
     ok("record type public surface contract")
 
+    # Reserved record type append contract (Bug 1 hardening)
+    result = subprocess.run(
+        [sys.executable, "scripts/test_reserved_record_type_append_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"reserved record type append contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("reserved record type append contract")
+
+    # Context depth helper parity (Bug 3 hardening)
+    result = subprocess.run(
+        [sys.executable, "scripts/test_context_depth_helper_parity.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"context depth helper parity failed:\n{result.stdout}\n{result.stderr}")
+    ok("context depth helper parity")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

@@ -980,10 +980,12 @@
         "CC-0",
         "CC-1",
         "CC-2",
-        "CC-3"
+        "CC-3",
+        "CC-4",
+        "CC-5"
       ],
       "field": "context_readiness.declared_context_level",
-      "meaning": "Maps to the Context Completeness scale: CC-0 (none) through CC-3 (full). Accepts 'CC-3' string or integer 3.",
+      "meaning": "Maps to the Context Completeness scale: CC-0 through CC-5. Use only levels whose required loads were actually read. CC-4 means Full Context; CC-5 means Deep Research.",
       "plain_language_question": "How much Trinity Accord context have you loaded and understood?",
       "required": true,
       "safe_default_when_unknown": "CC-0"
