@@ -13,7 +13,7 @@
     "language": "node",
     "runtime": "node>=18",
     "sha256": "630f22948963cb54258c0eeaf6d9bde1c2505448f3efc36bc83b619682f76681",
-    "size_bytes": 126747,
+    "size_bytes": 126862,
     "supports": [
       "echo",
       "verification",
