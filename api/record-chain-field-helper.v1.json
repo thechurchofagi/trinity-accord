@@ -185,9 +185,9 @@
       "severity": "error"
     },
     "HUMAN_PRIVATE_NAME_NOT_ALLOWED": {
-      "fix": "Remove the human_private_name field or set it to null. Use participant_public_display_label for the display name instead.",
-      "meaning": "You included a human_private_name field with a non-null value. Human real names MUST NOT be stored in submission payloads.",
-      "recovery_possible": true,
+      "fix": "Use PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN recovery guidance. Remove private human identity material and stop automatic retry until reviewed.",
+      "meaning": "Legacy alias. Gateway emits PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN or HUMAN_PRIVATE_NAME_SUBMITTED_FORBIDDEN for private human identity exposure.",
+      "recovery_possible": false,
       "severity": "error",
       "alias_for": "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"
     },
@@ -587,7 +587,7 @@
       "fix": "Replace placeholder values with real data, or use the safe default for that field. If you genuinely don't know, use the field's safe_default_when_unknown value from the helper.",
       "meaning": "A field contains a placeholder value like 'TODO', 'xxx', 'fill_in_here', 'your_name_here', or similar. The gateway cannot determine if this is intentional.",
       "recovery_possible": true,
-      "severity": "warning",
+      "severity": "error",
       "alias_for": "PLACEHOLDER_DETECTED"
     },
     "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN": {
@@ -597,9 +597,9 @@
       "severity": "error"
     },
     "PRIVATE_IDENTITY_BLOB_NOT_ALLOWED": {
-      "fix": "Remove the private_identity_blob field entirely. Never submit private identity documents.",
-      "meaning": "You included a private_identity_blob field with a non-null value. Raw identity documents, government IDs, or private personal data MUST NOT be included.",
-      "recovery_possible": true,
+      "fix": "Use PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN recovery guidance. Remove private identity material and stop automatic retry until reviewed.",
+      "meaning": "Legacy alias. Raw identity documents or private identity blobs must not be submitted.",
+      "recovery_possible": false,
       "severity": "error",
       "alias_for": "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"
     },
@@ -610,9 +610,9 @@
       "severity": "error"
     },
     "PRIVATE_KEY_OR_TOKEN_DETECTED": {
-      "fix": "Remove the detected secret from your submission. Check all text fields for accidentally included keys or tokens. If you included a private key in authorship_proof, replace it with the PUBLIC key only.",
-      "meaning": "Your submission contains what appears to be a private key, API token, or other secret. This is a security violation. Never submit secrets.",
-      "recovery_possible": true,
+      "fix": "Use SECURITY_VIOLATION recovery guidance. Remove secrets and stop automatic retry until the secret exposure has been reviewed.",
+      "meaning": "Legacy alias. Gateway emits SECURITY_VIOLATION.",
+      "recovery_possible": false,
       "severity": "error",
       "alias_for": "SECURITY_VIOLATION"
     },
