@@ -62,6 +62,8 @@ def test_guardian_retirement_updates_derived_guardian_state(monkeypatch, tmp_pat
             "record_sha256": "retire-sha",
             "guardian_id": "guardian-alpha",
             "guardian_public_key_sha256": guardian_key,
+            "target_guardian_application_record_id": "R-000000001",
+            "target_guardian_application_record_sha256": "app-sha",
             "reason": "Voluntary exit after completing the audit.",
             "retirement_does_not_remove_historical_record": True,
             "authorship_verification_status": {"verified_by_append_before_record": True},

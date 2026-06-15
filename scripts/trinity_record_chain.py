@@ -1180,6 +1180,30 @@ def verify_native_records() -> list[str]:
                     except Exception as exc:
                         errors.append(f"{p}: {exc}")
 
+                    # B.4: Require target_guardian_application_record_id and sha
+                    target_rid = obj.get("target_guardian_application_record_id")
+                    target_sha = obj.get("target_guardian_application_record_sha256")
+                    if not isinstance(target_rid, str) or not target_rid:
+                        errors.append(f"{p}: guardian_retirement requires target_guardian_application_record_id")
+                    elif not isinstance(target_sha, str) or not target_sha:
+                        errors.append(f"{p}: guardian_retirement requires target_guardian_application_record_sha256")
+                    else:
+                        target_path = RECORDS / f"{target_rid}.json"
+                        if not target_path.exists():
+                            errors.append(f"{p}: target_guardian_application_record {target_rid} does not exist")
+                        else:
+                            target_rec = read_json(target_path)
+                            if target_rec.get("record_type") != "guardian_application":
+                                errors.append(f"{p}: target {target_rid} is not guardian_application")
+                            if target_rec.get("record_sha256") != target_sha:
+                                errors.append(f"{p}: target_guardian_application_record_sha256 mismatch")
+                            # Target guardian key must match retirement guardian key
+                            target_gac = target_rec.get("guardian_application_content") or {}
+                            target_key = target_gac.get("guardian_public_key_sha256")
+                            retire_key = obj.get("guardian_public_key_sha256")
+                            if isinstance(target_key, str) and isinstance(retire_key, str) and target_key != retire_key:
+                                errors.append(f"{p}: guardian_public_key_sha256 does not match target application")
+
                 avs = obj.get("authorship_verification_status")
                 if not isinstance(avs, dict):
                     errors.append(f"{p}: formal record_type={rtype} missing authorship_verification_status")
@@ -1243,12 +1267,42 @@ def verify_batches() -> list[str]:
     return errors
 
 
+def verify_guardian_uniqueness() -> list[str]:
+    """Verify that no two guardian_application records share the same guardian_id or public key."""
+    errors: list[str] = []
+    records = sorted(RECORDS.glob("R-*.json"))
+    seen_ids: dict[str, Path] = {}
+    seen_keys: dict[str, Path] = {}
+
+    for p in records:
+        rec = read_json(p)
+        if rec.get("record_type") != "guardian_application":
+            continue
+
+        content = rec.get("guardian_application_content") or {}
+        gid = content.get("requested_guardian_identifier")
+        gkey = content.get("guardian_public_key_sha256")
+
+        if isinstance(gid, str) and gid:
+            if gid in seen_ids:
+                errors.append(f"{p}: duplicate guardian_id {gid}; first seen at {seen_ids[gid]}")
+            seen_ids[gid] = p
+
+        if isinstance(gkey, str) and gkey:
+            if gkey in seen_keys:
+                errors.append(f"{p}: duplicate guardian_public_key_sha256 {gkey}; first seen at {seen_keys[gkey]}")
+            seen_keys[gkey] = p
+
+    return errors
+
+
 def verify_chain() -> None:
     ensure_dirs()
     errors: list[str] = []
     errors += verify_genesis()
     errors += verify_native_records()
     errors += verify_batches()
+    errors += verify_guardian_uniqueness()
     scan_targets = [*CHAIN.rglob("*"), ROOT / "scripts" / "trinity_record_chain.py"]
     leak_hits = scan_private_keys(scan_targets)
     # Allowlist: this script contains regex patterns that match private-key text
@@ -1316,6 +1370,7 @@ def build_indexes(derived_at: str | None = None) -> None:
     native_guardian_entries: list[dict[str, Any]] = []
     native_guardians_by_id: dict[str, dict[str, Any]] = {}
     native_guardians_by_key: dict[str, dict[str, Any]] = {}
+    native_guardians_by_record_id: dict[str, dict[str, Any]] = {}
 
     for p in native_records:
         rec = read_json(p)
@@ -1327,9 +1382,8 @@ def build_indexes(derived_at: str | None = None) -> None:
             verified = avs.get("verified_by_append_before_record", False)
             guardian_id = gac.get("requested_guardian_identifier")
             guardian_key = gac.get("guardian_public_key_sha256")
-            is_founding = bool(str(guardian_id or "").endswith("-founding"))
             if verified:
-                derived = "active_founding_guardian" if is_founding else "active_guardian"
+                derived = "application_recorded_pending_activation"
             else:
                 derived = "pending_verification"
             entry = {
@@ -1340,13 +1394,16 @@ def build_indexes(derived_at: str | None = None) -> None:
                 "source_record_path": str(p.relative_to(ROOT)),
                 "source_record_sha256": rec.get("record_sha256"),
                 "verified_by_append_before_record": verified,
-                "is_founding_guardian": is_founding,
+                "is_founding_guardian": False,
             }
             native_guardian_entries.append(entry)
             if isinstance(guardian_id, str) and guardian_id:
                 native_guardians_by_id[guardian_id] = entry
             if isinstance(guardian_key, str) and guardian_key:
                 native_guardians_by_key[guardian_key] = entry
+            source_rid = rec.get("record_id")
+            if isinstance(source_rid, str) and source_rid:
+                native_guardians_by_record_id[source_rid] = entry
             continue
 
         if record_type == "guardian_retirement":
@@ -1354,8 +1411,12 @@ def build_indexes(derived_at: str | None = None) -> None:
             guardian_key = rec.get("guardian_public_key_sha256")
             avs = rec.get("authorship_verification_status", {})
             verified = avs.get("verified_by_append_before_record", False)
+            # Prefer target_guardian_application_record_id for matching
+            target_rid = rec.get("target_guardian_application_record_id")
             target = None
-            if isinstance(guardian_id, str) and guardian_id:
+            if isinstance(target_rid, str) and target_rid:
+                target = native_guardians_by_id.get(target_rid) or native_guardians_by_record_id.get(target_rid)
+            if target is None and isinstance(guardian_id, str) and guardian_id:
                 target = native_guardians_by_id.get(guardian_id)
             if target is None and isinstance(guardian_key, str) and guardian_key:
                 target = native_guardians_by_key.get(guardian_key)
