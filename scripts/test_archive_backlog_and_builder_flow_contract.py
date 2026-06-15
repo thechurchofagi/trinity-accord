@@ -76,6 +76,87 @@ def assert_guardian_template(record_type: str, expected_type: str, expected_scop
     )
 
 
+def assert_builder_command_fails(args: list[str], expected_text: str) -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp) / "submission.json"
+        result = run([
+            "node",
+            "downloads/record-chain-builder.mjs",
+            *args,
+            "--actor-label",
+            "Test Agent",
+            "--provider",
+            "Test Runtime",
+            "--context-level",
+            "CC-3",
+            "--context-sufficient-for-selected-action",
+            "true",
+            "--loaded-urls",
+            "https://www.trinityaccord.org/agent-start/",
+            "--discovery-mode",
+            "user_task_context",
+            "--requesting-party-type",
+            "human",
+            "--record-decision",
+            "human",
+            "--submission-executor",
+            "self",
+            "--human-operator-involved",
+            "false",
+            "--readback",
+            "not-used-because-validation-should-fail-before-oath",
+            "--key-dir",
+            str(Path(tmp) / "keys"),
+            "--out",
+            str(out),
+        ])
+        require(
+            result.returncode != 0,
+            f"builder command unexpectedly passed: {' '.join(args)}",
+        )
+        combined = result.stdout + "\n" + result.stderr
+        require(
+            expected_text in combined,
+            f"builder failure did not mention {expected_text!r}; got:\n{combined}",
+        )
+
+
+def assert_doctor_fails_for_draft(record_type: str, draft: dict, expected_code: str, expected_scope: str) -> None:
+    submission = {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "record_type": record_type,
+        "record_draft": {
+            "schema": "trinityaccord.record-chain-entry-draft.v2",
+            "record_type": record_type,
+            "context_readiness": {
+                "declared_context_level": "CC-3",
+                "minimum_required_for_action": "CC-3",
+                "context_sufficient_for_selected_action": True,
+                "loaded_context_urls": ["https://www.trinityaccord.org/agent-start/"],
+            },
+            "authorization_context": {
+                "authorization_scope": expected_scope,
+            },
+            **draft,
+        },
+    }
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "bad-submission.json"
+        path.write_text(json.dumps(submission, indent=2), encoding="utf-8")
+        result = run(["node", "downloads/record-chain-builder.mjs", "doctor", "--file", str(path)])
+        require(
+            result.returncode != 0,
+            f"builder doctor unexpectedly passed invalid {record_type}",
+        )
+        combined = result.stdout + "\n" + result.stderr
+        require(
+            expected_code in combined,
+            f"doctor failure did not mention {expected_code}; got:\n{combined}",
+        )
+
+
 def assert_bad_classification_doctor_fails() -> None:
     bad = {
         "submission_type": "record_chain_entry",
@@ -183,6 +264,57 @@ def main() -> None:
     )
 
     assert_bad_classification_doctor_fails()
+
+    # Patch 5: Negative tests for Builder build fail-fast
+    assert_builder_command_fails(["guardian-application"], "--guardian-id is required")
+    assert_builder_command_fails(
+        ["guardian-application", "--guardian-id", "guardian-test"],
+        "--guardian-key-sha is required",
+    )
+    assert_builder_command_fails(
+        ["guardian-application", "--guardian-id", "guardian-test", "--guardian-key-sha", "bad", "--oath", "test oath"],
+        "--guardian-key-sha must be a 64-character lowercase hex SHA-256",
+    )
+    assert_builder_command_fails(["guardian-retirement"], "--guardian-id is required")
+    assert_builder_command_fails(
+        ["guardian-retirement", "--guardian-id", "guardian-test", "--guardian-key-sha", "bad", "--body", "test reason"],
+        "--guardian-key-sha must be a 64-character lowercase hex SHA-256",
+    )
+    assert_builder_command_fails(["propagation"], "--body is required")
+    assert_builder_command_fails(["correction"], "--body is required")
+
+    # Patch 6: Negative tests for Builder doctor content validation
+    assert_doctor_fails_for_draft(
+        "guardian_retirement",
+        {
+            "guardian_id": "",
+            "guardian_public_key_sha256": "",
+            "reason": "",
+            "optional_linked_guardian_application_request": {
+                "does_participant_request_guardian_application_with_this_record": False,
+            },
+        },
+        "MISSING_GUARDIAN_RETIREMENT_FIELD",
+        "create_guardian_retirement_record",
+    )
+    assert_doctor_fails_for_draft(
+        "propagation",
+        {"title": "Propagation Record", "body": ""},
+        "MISSING_RECORD_CONTENT",
+        "create_propagation_record",
+    )
+    assert_doctor_fails_for_draft(
+        "correction",
+        {"title": "Correction", "body": ""},
+        "MISSING_RECORD_CONTENT",
+        "create_correction_record",
+    )
+    assert_doctor_fails_for_draft(
+        "context_insufficient_notice",
+        {"reason": ""},
+        "MISSING_CONTEXT_INSUFFICIENT_REASON",
+        "create_context_insufficient_notice_record",
+    )
 
     canonical = manifest["canonical_builder"]
     require(

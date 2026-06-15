@@ -212,6 +212,36 @@
       "fix": "Use the canonical lowercase SHA-256 of the target record.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "MISSING_GUARDIAN_APPLICATION_CONTENT": {
+      "meaning": "guardian_application is missing required guardian_application_content fields.",
+      "fix": "Rebuild with guardian-application and provide --guardian-id, --guardian-key-sha, and --oath.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "MISSING_GUARDIAN_RETIREMENT_FIELD": {
+      "meaning": "guardian_retirement is missing guardian_id, guardian_public_key_sha256, or reason.",
+      "fix": "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "MISSING_RECORD_CONTENT": {
+      "meaning": "A propagation or correction record is missing title or body.",
+      "fix": "Rebuild with propagation or correction and provide --body; optionally provide --title.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "MISSING_CONTEXT_INSUFFICIENT_REASON": {
+      "meaning": "context_insufficient_notice is missing its reason field.",
+      "fix": "Rebuild with context-insufficient and provide --body <reason>.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "INVALID_GUARDIAN_PUBLIC_KEY_SHA": {
+      "meaning": "Guardian public key SHA is not a valid 64-character lowercase SHA-256.",
+      "fix": "Use the lowercase SHA-256 of the Guardian public key.",
+      "recovery_possible": true,
+      "severity": "error"
     }
   },
   "field_groups": [

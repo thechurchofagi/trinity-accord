@@ -158,6 +158,11 @@ def main() -> int:
         "CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD",
         "MISSING_CLASSIFICATION_UPDATE_CONTENT",
         "INVALID_CLASSIFICATION_TARGET_SHA",
+        "MISSING_GUARDIAN_APPLICATION_CONTENT",
+        "MISSING_GUARDIAN_RETIREMENT_FIELD",
+        "MISSING_RECORD_CONTENT",
+        "MISSING_CONTEXT_INSUFFICIENT_REASON",
+        "INVALID_GUARDIAN_PUBLIC_KEY_SHA",
     ]:
         require(code in diagnostic_help, f"field helper missing diagnostic help for {code}")
 

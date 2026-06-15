@@ -202,6 +202,13 @@ jobs:
           forbid_contains_literal _site/api/agent-start.v2.json '--guardian-application-statement'
           forbid_contains_literal _site/api/agent-start.v2.json '--reason'
 
+          # Field helper diagnostic coverage checks
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_GUARDIAN_APPLICATION_CONTENT"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_GUARDIAN_RETIREMENT_FIELD"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_RECORD_CONTENT"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"MISSING_CONTEXT_INSUFFICIENT_REASON"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"INVALID_GUARDIAN_PUBLIC_KEY_SHA"'
+
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 

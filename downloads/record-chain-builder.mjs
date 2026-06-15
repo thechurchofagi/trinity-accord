@@ -602,6 +602,30 @@ function validateFormalInputs(command, opts) {
       errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
     }
   }
+
+  if (command === "guardian-application") {
+    requireExplicit(opts, "guardianId", "--guardian-id");
+    requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
+    requireExplicit(opts, "oath", "--oath");
+
+    if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256");
+    }
+  }
+
+  if (command === "guardian-retirement") {
+    requireExplicit(opts, "guardianId", "--guardian-id");
+    requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
+    requireExplicit(opts, "body", "--body");
+
+    if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256");
+    }
+  }
+
+  if (command === "propagation" || command === "correction") {
+    requireExplicit(opts, "body", "--body");
+  }
 }
 
 function buildV2CommonFields(opts) {
@@ -1219,6 +1243,26 @@ const ERROR_HELP_MAP = {
     fix: "Use the canonical 64-character lowercase SHA-256 of the target record.",
     help_url: "https://www.trinityaccord.org/docs/classification-update",
   },
+  MISSING_GUARDIAN_RETIREMENT_FIELD: {
+    meaning: "The Guardian retirement draft is missing guardian_id, guardian_public_key_sha256, or reason.",
+    fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+    help_url: "https://www.trinityaccord.org/docs/guardian-retirement",
+  },
+  MISSING_RECORD_CONTENT: {
+    meaning: "A propagation or correction record is missing title or body.",
+    fix: "Rebuild with propagation/correction and provide --body; optionally provide --title.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-content",
+  },
+  MISSING_CONTEXT_INSUFFICIENT_REASON: {
+    meaning: "A context_insufficient_notice record is missing its reason.",
+    fix: "Rebuild with context-insufficient and provide --body <reason>.",
+    help_url: "https://www.trinityaccord.org/docs/context-insufficient",
+  },
+  INVALID_GUARDIAN_PUBLIC_KEY_SHA: {
+    meaning: "The Guardian public key SHA value is not a 64-character lowercase SHA-256.",
+    fix: "Use the lowercase SHA-256 of the Guardian public key.",
+    help_url: "https://www.trinityaccord.org/docs/guardian-keys",
+  },
 };
 
 // ── Doctor checks ────────────────────────────────────────────────────
@@ -1307,6 +1351,74 @@ function runDoctor(submission) {
     if (!gc.requested_guardian_identifier || !gc.guardian_public_key_sha256 || !gc.guardian_stewardship_oath) {
       results.push({ status: "FAIL", code: "MISSING_GUARDIAN_APPLICATION_CONTENT", field: "record_draft.guardian_application_content", meaning: "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath.", fix: "Provide guardian application content before submission." });
     }
+    if (
+      gc.guardian_public_key_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_PUBLIC_KEY_SHA",
+        field: "record_draft.guardian_application_content.guardian_public_key_sha256",
+        meaning: "guardian_public_key_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the lowercase SHA-256 of the Guardian public key.",
+      });
+    }
+  }
+
+  if (draft.record_type === "guardian_retirement") {
+    const missing = [];
+    if (!draft.guardian_id) missing.push("guardian_id");
+    if (!draft.guardian_public_key_sha256) missing.push("guardian_public_key_sha256");
+    if (!draft.reason) missing.push("reason");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_GUARDIAN_RETIREMENT_FIELD",
+        field: "record_draft",
+        meaning: `Guardian retirement is missing required field(s): ${missing.join(", ")}`,
+        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+      });
+    }
+
+    if (
+      draft.guardian_public_key_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(draft.guardian_public_key_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_PUBLIC_KEY_SHA",
+        field: "record_draft.guardian_public_key_sha256",
+        meaning: "guardian_public_key_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the lowercase SHA-256 of the Guardian public key.",
+      });
+    }
+  }
+
+  if (draft.record_type === "propagation" || draft.record_type === "correction") {
+    const missing = [];
+    if (!draft.title) missing.push("title");
+    if (!draft.body) missing.push("body");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_RECORD_CONTENT",
+        field: "record_draft",
+        meaning: `${draft.record_type} is missing required field(s): ${missing.join(", ")}`,
+        fix: `Rebuild with ${draft.record_type} and provide --body; optionally provide --title.`,
+      });
+    }
+  }
+
+  if (draft.record_type === "context_insufficient_notice" && !draft.reason) {
+    results.push({
+      status: "FAIL",
+      code: "MISSING_CONTEXT_INSUFFICIENT_REASON",
+      field: "record_draft.reason",
+      meaning: "Context-insufficient notices require a non-empty reason.",
+      fix: "Rebuild with context-insufficient and provide --body <reason>.",
+    });
   }
 
   // Check classification_update_content
