@@ -222,6 +222,13 @@ jobs:
           require_contains _site/api/record-chain-field-helper.v1.json '"GUARDIAN_KEY_MISMATCH"'
           require_contains _site/api/record-chain-field-helper.v1.json '"GUARDIAN_RETIREMENT_KEY_MISMATCH"'
 
+          # Field helper alias recovery parity checks
+          require_contains _site/api/record-chain-field-helper.v1.json '"PRIVATE_KEY_OR_TOKEN_DETECTED"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"alias_for": "SECURITY_VIOLATION"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"HUMAN_PRIVATE_NAME_NOT_ALLOWED"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"PRIVATE_IDENTITY_BLOB_NOT_ALLOWED"'
+          require_contains _site/api/record-chain-field-helper.v1.json '"alias_for": "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"'
+
       - name: Verify Pages builder artifact contract
         run: python3 scripts/test_pages_builder_artifact_contract.py --site-dir _site
 
