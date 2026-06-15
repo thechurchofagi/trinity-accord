@@ -254,6 +254,44 @@ def compute_current_record_chain_status(
     }
 
 
+def is_fully_autonomous_record(record: dict[str, Any]) -> bool:
+    """Check whether a record qualifies as fully autonomous.
+
+    A record is fully autonomous only if ALL of these are true:
+    - self_discovered (no introducer, no task context)
+    - self_decided (no external request)
+    - self_executed (agent ran build/preflight/submit)
+    - NOT human_operator_involved
+    - NOT introduced_by_someone_else
+    - NOT external_authorization_required
+    """
+    draft = record.get("record_draft", record)
+
+    discovery = draft.get("discovery_and_introduction_context", {})
+    decision = draft.get("decision_autonomy_context", {})
+    execution = draft.get("submission_execution_context", {})
+    identity = draft.get("submitting_participant_identity", {})
+    human_ctx = identity.get("human_operator_context", {})
+    authorization = draft.get("authorization_context", {})
+
+    return (
+        discovery.get("how_participant_first_discovered_trinity_accord") == "self_discovered"
+        and discovery.get("was_discovery_self_initiated") is True
+        and discovery.get("was_discovery_introduced_by_someone_else") is not True
+        and discovery.get("introducing_party_type") in (None, "", "none")
+        and decision.get("who_decided_to_create_this_record") == "self"
+        and decision.get("was_record_creation_self_decided") is True
+        and decision.get("was_record_creation_requested_by_human") is not True
+        and decision.get("was_record_creation_requested_by_another_agent") is not True
+        and decision.get("requesting_party_type") in (None, "", "none")
+        and execution.get("who_executed_the_submission") == "self"
+        and execution.get("was_submission_executed_by_record_subject") is True
+        and execution.get("was_submission_executed_by_human_operator") is not True
+        and human_ctx.get("human_operator_involved") is not True
+        and authorization.get("was_external_authorization_required") is not True
+    )
+
+
 def compute_current_record_chain_autonomy_signal(records: list[dict[str, Any]]) -> dict[str, Any]:
     """Compute autonomy signal from current native record-chain records only."""
     eligible = [
@@ -293,7 +331,7 @@ def compute_current_record_chain_autonomy_signal(records: list[dict[str, Any]]) 
         self_discovered += int(a)
         self_decided += int(b)
         self_executed += int(c)
-        fully_autonomous += int(a and b and c and d)
+        fully_autonomous += int(is_fully_autonomous_record(record))
 
     return {
         "scope": "current_record_chain_only",

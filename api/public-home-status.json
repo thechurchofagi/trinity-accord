@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-14T04:45:37.466170+00:00",
+  "generated_at": "2026-06-15T04:47:52.174582+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -148,7 +148,7 @@
     "self_discovered_records": 28,
     "self_decided_records": 30,
     "self_executed_records": 42,
-    "fully_autonomous_records": 28,
+    "fully_autonomous_records": 27,
     "legacy_autonomy_claims_excluded": true
   },
   "legacy_archive_snapshot": {
