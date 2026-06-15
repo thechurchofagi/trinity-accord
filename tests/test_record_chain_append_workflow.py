@@ -24,7 +24,6 @@ class TestRecordChainAppendWorkflow:
         workflow = _workflow_text()
         guarded_steps = [
             "- name: Verify record chain after append",
-            "- name: Regenerate phase-aware public status and homepage counters",
             "- name: Commit and push append updates",
         ]
         guard = "if: steps.append_run.outputs.changed == 'true'"
@@ -36,3 +35,8 @@ class TestRecordChainAppendWorkflow:
             next_step_index = workflow.find("\n      - name:", step_index + 1)
             if next_step_index != -1:
                 assert guard_index < next_step_index, f"guard for {step} must appear before the next step"
+
+        # Status generation is handled by homepage-status-sync.yml via workflow_run trigger.
+        # The append workflow must NOT directly commit generated status files.
+        assert "generate_public_home_status" not in workflow, "append workflow must not run homepage status generator; use homepage-status-sync.yml"
+        assert "generate_record_chain_status" not in workflow, "append workflow must not run record-chain status generator; use homepage-status-sync.yml"
