@@ -587,7 +587,7 @@
       "fix": "Replace placeholder values with real data, or use the safe default for that field. If you genuinely don't know, use the field's safe_default_when_unknown value from the helper.",
       "meaning": "A field contains a placeholder value like 'TODO', 'xxx', 'fill_in_here', 'your_name_here', or similar. The gateway cannot determine if this is intentional.",
       "recovery_possible": true,
-      "severity": "error",
+      "severity": "warning",
       "alias_for": "PLACEHOLDER_DETECTED"
     },
     "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN": {
