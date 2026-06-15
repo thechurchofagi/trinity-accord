@@ -1418,6 +1418,8 @@ function runDoctor(submission) {
     if (!draft.guardian_id) missing.push("guardian_id");
     if (!draft.guardian_public_key_sha256) missing.push("guardian_public_key_sha256");
     if (!draft.reason) missing.push("reason");
+    if (!draft.target_guardian_application_record_id) missing.push("target_guardian_application_record_id");
+    if (!draft.target_guardian_application_record_sha256) missing.push("target_guardian_application_record_sha256");
 
     if (missing.length) {
       results.push({
@@ -1425,7 +1427,7 @@ function runDoctor(submission) {
         code: "MISSING_GUARDIAN_RETIREMENT_FIELD",
         field: "record_draft",
         meaning: `Guardian retirement is missing required field(s): ${missing.join(", ")}`,
-        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, --body, --target-application-record-id, and --target-application-record-sha.",
       });
     }
 

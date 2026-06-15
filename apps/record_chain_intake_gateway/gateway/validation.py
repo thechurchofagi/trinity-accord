@@ -906,6 +906,11 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
         for field in ("guardian_id", "guardian_public_key_sha256", "reason"):
             if not (draft.get(field) or payload.get(field)):
                 missing("MISSING_GUARDIAN_RETIREMENT_FIELD", f"draft.{field}", f"Guardian retirement requires {field}")
+        # B.4: Require target_guardian_application_record_id and sha for retirement binding
+        if not (draft.get("target_guardian_application_record_id") or payload.get("target_guardian_application_record_id")):
+            missing("MISSING_GUARDIAN_RETIREMENT_TARGET", "draft.target_guardian_application_record_id", "Guardian retirement requires target_guardian_application_record_id to bind to the specific application record being retired")
+        if not (draft.get("target_guardian_application_record_sha256") or payload.get("target_guardian_application_record_sha256")):
+            missing("MISSING_GUARDIAN_RETIREMENT_TARGET_SHA", "draft.target_guardian_application_record_sha256", "Guardian retirement requires target_guardian_application_record_sha256 to verify the target application record integrity")
     elif record_type in {"propagation", "correction"}:
         for field in ("title", "body"):
             if not draft.get(field):
