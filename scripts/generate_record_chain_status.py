@@ -71,16 +71,31 @@ def record_type_counts(records: list[dict[str, Any]]) -> dict[str, int]:
     return dict(sorted(counts.items()))
 
 
+def is_verified_live_archive(arweave_entry: dict[str, Any]) -> bool:
+    """Return True only if the archive entry is live AND fully verified.
+
+    Requires: txid present, upload_mode=live, archive_status=archived,
+    verified=True, hash_match=True. A txid alone is NOT sufficient.
+    """
+    return (
+        bool(arweave_entry.get("arweave_txid") or arweave_entry.get("txid"))
+        and arweave_entry.get("source_type") == "native-record-chain"
+        and arweave_entry.get("mode") == "live"
+        and arweave_entry.get("archive_status") == "archived"
+        and arweave_entry.get("verified") is True
+        and arweave_entry.get("hash_match") is True
+    )
+
+
 def latest_live_native_archive(arweave: dict[str, Any]) -> dict[str, Any] | None:
     """Return the latest live native Arweave archive, or None if none exist.
 
+    Only returns archives that are fully verified (archived + verified + hash_match).
     Does NOT require chain-tip equality — the caller decides what to do with lag.
     """
     live = [
         a for a in arweave.get("archives", [])
-        if a.get("source_type") == "native-record-chain"
-        and a.get("mode") == "live"
-        and a.get("arweave_txid")
+        if is_verified_live_archive(a)
     ]
     if not live:
         return None
@@ -281,11 +296,15 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     ot["ots_status"] = ots.get("ots_status")
     ot["bitcoin_pending"] = ots.get("bitcoin_pending")
     ot["bitcoin_verified"] = ots.get("bitcoin_verified")
+    ot["strict_bitcoin_verified"] = ots.get("strict_bitcoin_verified")
+    ot["checked_at"] = ots.get("checked_at")
+    ot["upgraded_at"] = ots.get("upgraded_at")
+    ot["strict_bitcoin_verified_at"] = ots.get("strict_bitcoin_verified_at")
     ot["legacy_main_chain_jsonl_is_not_source"] = ots.get("legacy_main_chain_jsonl_is_not_source")
     ot["status"] = (
         "verified-bitcoin"
-        if ots.get("bitcoin_verified") is True
-        else "current-upgraded-bitcoin-attestation"
+        if ots.get("strict_bitcoin_verified") is True
+        else "current-upgraded-timestamp-proof"
         if pipeline["ots_matches_chain"] and ots.get("ots_status") == "upgraded"
         else "current-pending-bitcoin"
         if pipeline["ots_matches_chain"] and ots.get("ots_status") == "pending"

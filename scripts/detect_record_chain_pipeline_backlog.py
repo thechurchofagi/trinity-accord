@@ -18,12 +18,27 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def is_verified_live_archive(arweave_entry: dict[str, Any]) -> bool:
+    """Return True only if the archive entry is live AND fully verified.
+
+    Requires: txid present, upload_mode=live, archive_status=archived,
+    verified=True, hash_match=True.
+    A txid alone is NOT sufficient.
+    """
+    return (
+        bool(arweave_entry.get("arweave_txid") or arweave_entry.get("txid"))
+        and arweave_entry.get("source_type") == "native-record-chain"
+        and arweave_entry.get("mode") == "live"
+        and arweave_entry.get("archive_status") == "archived"
+        and arweave_entry.get("verified") is True
+        and arweave_entry.get("hash_match") is True
+    )
+
+
 def latest_live_native_archive(index: dict[str, Any]) -> dict[str, Any] | None:
     live = [
         a for a in index.get("archives", [])
-        if a.get("source_type") == "native-record-chain"
-        and a.get("mode") == "live"
-        and a.get("arweave_txid")
+        if is_verified_live_archive(a)
     ]
     if not live:
         return None

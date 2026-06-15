@@ -57,6 +57,10 @@ def sha256_canonical_json(obj) -> str:
     return sha256_bytes(canonical_bytes(obj))
 
 
+def sha256_canonical_json(obj) -> str:
+    return sha256_bytes(canonical_bytes(obj))
+
+
 def sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -261,6 +265,16 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
         if manifest.get("mode") == "dry-run" and arweave.get("txid") is not None:
             errors.append(f"{archive_id}: dry-run but claims arweave_txid")
 
+        # Verify live archive status consistency
+        if manifest.get("mode") == "live" and arweave.get("txid"):
+            if arweave.get("archive_status") == "archived":
+                if arweave.get("verified") is not True:
+                    errors.append(f"{archive_id}: archive_status=archived but verified is not true")
+                if arweave.get("hash_match") is not True:
+                    errors.append(f"{archive_id}: archive_status=archived but hash_match is not true")
+            if arweave.get("verified") is True and arweave.get("hash_match") is not True:
+                errors.append(f"{archive_id}: verified=true but hash_match is not true")
+
         # Check boundary fields in manifest
         m_boundary = manifest.get("boundary", {})
         for key in ["not_authority", "not_attestation", "not_amendment",
@@ -306,6 +320,23 @@ def verify(network: bool = False, strict_network: bool = False) -> list[str]:
             rec_data = read_json(rec_path)
             if rec_data.get("record_sha256") != rec.get("record_sha256"):
                 errors.append(f"{archive_id}: record {rec.get('record_id')} sha mismatch")
+            # Recompute raw file hash and compare against manifest
+            actual_raw_sha = sha256_file(rec_path)
+            if rec.get("raw_file_sha256") and rec["raw_file_sha256"] != actual_raw_sha:
+                errors.append(
+                    f"{archive_id}: record {rec.get('record_id')} raw_file_sha256 mismatch: "
+                    f"manifest={rec['raw_file_sha256'][:16]} actual={actual_raw_sha[:16]}"
+                )
+            # Recompute record_sha256 using the same algorithm as trinity_record_chain.py:
+            # remove record_sha256 field, then canonical JSON hash the rest
+            rec_body = dict(rec_data)
+            rec_body.pop("record_sha256", None)
+            expected_record_sha = sha256_canonical_json(rec_body)
+            if rec_data.get("record_sha256") != expected_record_sha:
+                errors.append(
+                    f"{archive_id}: record {rec.get('record_id')} record_sha256 does not match "
+                    f"recomputed hash"
+                )
 
         # Check forbidden terminology in manifest
         manifest_text = canonical_dumps(manifest)
