@@ -82,7 +82,6 @@
         "verification",
         "guardian_application",
         "guardian_retirement",
-        "guardian_key_rotation",
         "propagation",
         "correction",
         "classification_update",
@@ -991,35 +990,6 @@
                 "properties": {
                   "authorization_scope": {
                     "const": "create_guardian_retirement_record"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "$comment": "record type authorization scope: guardian_key_rotation",
-      "if": {
-        "properties": {
-          "record_type": {
-            "const": "guardian_key_rotation"
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "record_draft": {
-            "properties": {
-              "authorization_context": {
-                "type": "object",
-                "required": [
-                  "authorization_scope"
-                ],
-                "properties": {
-                  "authorization_scope": {
-                    "const": "create_guardian_key_rotation_record"
                   }
                 }
               }

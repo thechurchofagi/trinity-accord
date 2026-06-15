@@ -1003,6 +1003,37 @@ def main() -> int:
         fail(f"public status declared inputs/source_digest contract failed:\n{result.stdout}\n{result.stderr}")
     ok("public status declared inputs/source_digest contract")
 
+    # Guardian key rotation reserved-state contract tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_gateway_reserved_record_types_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway reserved record types contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("gateway reserved record types contract")
+
+    result = subprocess.run(
+        [sys.executable, "scripts/test_builder_reserved_record_types_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder reserved record types contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("builder reserved record types contract")
+
+    result = subprocess.run(
+        [sys.executable, "scripts/test_record_type_public_surface_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"record type public surface contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("record type public surface contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

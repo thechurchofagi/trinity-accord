@@ -110,11 +110,16 @@ const OATH_POLICY = {
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update"
   ],
+  "reserved_future_record_types": [
+    "guardian_key_rotation"
+  ],
+  "reserved_future_record_type_notes": {
+    "guardian_key_rotation": "Reserved until old-key/new-key signed transition proof is implemented."
+  },
   "record_type_modules": {
     "echo": [
       "common_submission_integrity_v1",
@@ -129,10 +134,6 @@ const OATH_POLICY = {
       "guardian_stewardship_v1"
     ],
     "guardian_retirement": [
-      "common_submission_integrity_v1",
-      "retirement_or_key_management_integrity_v1"
-    ],
-    "guardian_key_rotation": [
       "common_submission_integrity_v1",
       "retirement_or_key_management_integrity_v1"
     ],
@@ -185,7 +186,7 @@ const OATH_POLICY = {
   },
   "linked_guardian_module": "guardian_stewardship_v1"
 };
-const OATH_POLICY_SHA256 = "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4";
+const OATH_POLICY_SHA256 = "6327c8fbf16cb859d951c42f77c7e185c453df5f05cd648ff94c7eca4d3caf7d";
 
 function getCanonicalOath(recordType, linkedGuardian = false) {
   const modules = getOathModules(recordType, linkedGuardian);
@@ -530,7 +531,6 @@ const AUTHORIZATION_SCOPE_BY_RECORD_TYPE = {
   verification: "create_verification_record",
   guardian_application: "create_guardian_application_record",
   guardian_retirement: "create_guardian_retirement_record",
-  guardian_key_rotation: "create_guardian_key_rotation_record",
   propagation: "create_propagation_record",
   correction: "create_correction_record",
   classification_update: "create_classification_update_record",
@@ -1862,6 +1862,9 @@ Commands:
   classification-update   Build a classification update submission
   context-insufficient    Build a context-insufficient notice
   preflight               POST submission to gateway /record-chain/preflight
+
+Reserved future type:
+  guardian-key-rotation   Reserved; not currently accepted by public intake.
   submit                  POST submission to gateway /record-chain/submit
   explain-fields          Show field explanations for a record type or specific field
   doctor                  Validate a submission file locally
@@ -2082,8 +2085,20 @@ async function main() {
   // ── Reject retired --linked-guardian flag on build commands ─────────
   // print-oath is allowed (read-only; needed for canonical oath retrieval)
   const BUILD_CMDS = new Set(["echo", "verification", "guardian-application", "guardian-retirement",
-    "guardian-key-rotation", "propagation", "correction", "classification-update",
+    "propagation", "correction", "classification-update",
     "context-insufficient-notice", "doctor", "repair", "template"]);
+
+  // ── Reserved commands (not yet enabled) ────────────────────────────
+  const RESERVED_COMMANDS = new Set([
+    "guardian-key-rotation",
+  ]);
+  if (RESERVED_COMMANDS.has(cmd)) {
+    errorExit(
+      "guardian-key-rotation is reserved for a future old-key/new-key transition proof protocol and is not currently accepted. " +
+      "Use guardian-retirement if the Guardian is ending service, or guardian-application for a new Guardian identity."
+    );
+  }
+
   if (args.linkedGuardian !== undefined && BUILD_CMDS.has(cmd)) {
     errorExit("Linked Guardian auto-creation is retired/disabled. Build a standalone guardian-application submission instead.");
   }
@@ -2314,7 +2329,7 @@ async function main() {
 
   // Inject oath gate for formal record types
   const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",
-    "guardian_key_rotation", "propagation", "correction", "classification_update"];
+    "propagation", "correction", "classification_update"];
   const isLinkedGuardian = !!(
     draft.optional_linked_guardian_application_request &&
     draft.optional_linked_guardian_application_request.does_participant_request_guardian_application_with_this_record === true

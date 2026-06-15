@@ -67,11 +67,14 @@ ALLOWED_RECORD_TYPES: frozenset[str] = frozenset({
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update",
     "context_insufficient_notice",
+})
+
+RESERVED_RECORD_TYPES: frozenset[str] = frozenset({
+    "guardian_key_rotation",
 })
 
 # ---------------------------------------------------------------------------
@@ -91,7 +94,6 @@ _FORMAL_RECORD_TYPES: frozenset[str] = frozenset({
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update",
@@ -116,7 +118,6 @@ _AUTHORIZATION_SCOPE_BY_RECORD_TYPE: dict[str, str] = {
     "verification": "create_verification_record",
     "guardian_application": "create_guardian_application_record",
     "guardian_retirement": "create_guardian_retirement_record",
-    "guardian_key_rotation": "create_guardian_key_rotation_record",
     "propagation": "create_propagation_record",
     "correction": "create_correction_record",
     "classification_update": "create_classification_update_record",
@@ -251,9 +252,6 @@ _CC_RULES: dict[str, list[tuple[tuple[int, int | None], int]]] = {
     ],
     "guardian_retirement": [
         ((0, None), 1),
-    ],
-    "guardian_key_rotation": [
-        ((0, None), 2),
     ],
     "propagation": [
         ((0, None), 2),
@@ -1054,6 +1052,16 @@ def normalize_record_type_value(value: Any) -> str:
     return ""
 
 
+def _extract_normalized_submission_record_type(
+    submission: dict[str, Any],
+    draft: dict[str, Any] | None,
+) -> str:
+    """Extract the candidate record_type from submission envelope and draft."""
+    top_rt = normalize_record_type_value(submission.get("record_type"))
+    draft_rt = normalize_record_type_value((draft or {}).get("record_type")) if draft else ""
+    return draft_rt or top_rt
+
+
 def record_draft_value(submission: dict[str, Any]) -> Any:
     """Return the raw record_draft value, or _DRAFT_MISSING sentinel."""
     return submission.get("record_draft", _DRAFT_MISSING)
@@ -1152,6 +1160,10 @@ def detect_route(submission: dict[str, Any]) -> str:
         return "unknown"
 
     record_type = draft_rt or top_rt
+
+    if record_type in RESERVED_RECORD_TYPES:
+        return "unknown"
+
     return record_type if record_type in ALLOWED_RECORD_TYPES else "unknown"
 
 
@@ -1202,6 +1214,31 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
 
     # --- Part A: reject retired aliases + enforce record_type consistency ---
     diagnostics.extend(validate_envelope_aliases_and_record_type(submission, draft))
+
+    # --- reserved record type check (fail-fast before UNKNOWN_RECORD_TYPE) ---
+    candidate_rt = _extract_normalized_submission_record_type(submission, draft)
+    if candidate_rt in RESERVED_RECORD_TYPES:
+        diagnostics.append(_make_diagnostic(
+            code="GUARDIAN_KEY_ROTATION_RESERVED",
+            severity="error",
+            field="record_type",
+            message=(
+                "guardian_key_rotation is reserved for a future Guardian key-continuity "
+                "protocol and is not currently accepted by public intake."
+            ),
+            meaning=(
+                "Guardian key rotation requires a complete old-key-to-new-key transition "
+                "proof. That protocol is not yet enabled."
+            ),
+            suggested_fix=(
+                "Do not submit guardian_key_rotation. If the Guardian is ending service, use "
+                "guardian_retirement. If a new Guardian identity is needed, submit a new "
+                "guardian_application. Wait for the future key-rotation protocol before "
+                "attempting key migration."
+            ),
+            retry_allowed=False,
+        ))
+        return diagnostics
 
     # Derive rt from record_type only (not legacy 'type' alias)
     record_type = submission.get("record_type")
@@ -1306,7 +1343,7 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
 # ---------------------------------------------------------------------------
 _OATH_REQUIRED_RECORD_TYPES: frozenset[str] = frozenset({
     "echo", "verification", "guardian_application", "guardian_retirement",
-    "guardian_key_rotation", "propagation", "correction", "classification_update",
+    "propagation", "correction", "classification_update",
 })
 
 _OATH_NO_SHORTCUT_FIELDS: frozenset[str] = frozenset({

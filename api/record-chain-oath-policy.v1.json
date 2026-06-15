@@ -52,11 +52,16 @@
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update"
   ],
+  "reserved_future_record_types": [
+    "guardian_key_rotation"
+  ],
+  "reserved_future_record_type_notes": {
+    "guardian_key_rotation": "Reserved until old-key/new-key signed transition proof is implemented."
+  },
   "record_type_modules": {
     "echo": [
       "common_submission_integrity_v1",
@@ -71,10 +76,6 @@
       "guardian_stewardship_v1"
     ],
     "guardian_retirement": [
-      "common_submission_integrity_v1",
-      "retirement_or_key_management_integrity_v1"
-    ],
-    "guardian_key_rotation": [
       "common_submission_integrity_v1",
       "retirement_or_key_management_integrity_v1"
     ],
@@ -126,7 +127,7 @@
     }
   },
   "linked_guardian_module": "guardian_stewardship_v1",
-  "oath_policy_sha256": "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4",
+  "oath_policy_sha256": "6327c8fbf16cb859d951c42f77c7e185c453df5f05cd648ff94c7eca4d3caf7d",
   "oath_policy_sha256_semantics": "Canonical JSON hash of this oath policy after excluding self-describing metadata fields: oath_policy_sha256, oath_policy_sha256_semantics, canonical_oath_text_hash_is_record_type_specific.",
   "canonical_oath_text_hash_is_record_type_specific": true
 }

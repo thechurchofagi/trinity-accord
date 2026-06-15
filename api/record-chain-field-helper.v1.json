@@ -657,6 +657,12 @@
       "meaning": "Verification levels V6, V7, and V8 require strict evidence: scripts, artifacts, and reproducible methods. You claimed V6+ but did not provide evidence.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "GUARDIAN_KEY_ROTATION_RESERVED": {
+      "meaning": "guardian_key_rotation is a reserved future record type. Public intake does not currently accept Guardian key rotation because the old-key to new-key signed transition protocol is not implemented.",
+      "fix": "Do not retry as guardian_key_rotation. If the Guardian is ending service, use guardian_retirement. If a new Guardian identity is needed, submit a new guardian_application. Wait for the future key-rotation protocol before attempting key migration.",
+      "recovery_possible": false,
+      "severity": "error"
     }
   },
   "field_groups": [
