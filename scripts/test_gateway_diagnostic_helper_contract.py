@@ -181,6 +181,8 @@ def main() -> None:
 
     # Semantic assertions: key mismatch recovery + security leak semantics
     _check_key_mismatch_semantics(diagnostic_help)
+    _check_alias_recovery_parity(diagnostic_help)
+    _check_security_privacy_aliases(diagnostic_help)
 
     print(
         f"PASS: gateway diagnostic helper contract ({len(active_codes)} active codes)"
@@ -294,6 +296,71 @@ def _check_key_mismatch_semantics(diagnostic_help: dict) -> None:
             diagnostic_help,
             code,
             recovery_possible=False,
+        )
+
+
+def _check_alias_recovery_parity(diagnostic_help: dict) -> None:
+    """Aliases must not contradict canonical recovery semantics."""
+    for code, entry in diagnostic_help.items():
+        if not isinstance(entry, dict):
+            continue
+
+        alias_for = entry.get("alias_for")
+        if not alias_for:
+            continue
+
+        require(
+            alias_for in diagnostic_help,
+            f"diagnostic_code_help.{code}.alias_for target {alias_for!r} is missing",
+        )
+
+        target = diagnostic_help[alias_for]
+        require(
+            isinstance(target, dict),
+            f"diagnostic_code_help.{code}.alias_for target {alias_for!r} must be an object",
+        )
+
+        require(
+            entry.get("recovery_possible") is target.get("recovery_possible"),
+            (
+                f"diagnostic_code_help.{code}.recovery_possible must match alias target "
+                f"{alias_for}.recovery_possible"
+            ),
+        )
+
+        require(
+            entry.get("severity") == target.get("severity"),
+            (
+                f"diagnostic_code_help.{code}.severity must match alias target "
+                f"{alias_for}.severity"
+            ),
+        )
+
+
+def _check_security_privacy_aliases(diagnostic_help: dict) -> None:
+    """Explicitly assert known non-recoverable security/privacy aliases."""
+    for alias, target in [
+        ("PRIVATE_KEY_OR_TOKEN_DETECTED", "SECURITY_VIOLATION"),
+        ("HUMAN_PRIVATE_NAME_NOT_ALLOWED", "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"),
+        ("PRIVATE_IDENTITY_BLOB_NOT_ALLOWED", "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN"),
+    ]:
+        require(alias in diagnostic_help, f"field helper missing legacy alias {alias}")
+        require(target in diagnostic_help, f"field helper missing canonical target {target}")
+
+        alias_entry = diagnostic_help[alias]
+        target_entry = diagnostic_help[target]
+
+        require(
+            alias_entry.get("alias_for") == target,
+            f"{alias}.alias_for must be {target}",
+        )
+        require(
+            alias_entry.get("recovery_possible") is False,
+            f"{alias}.recovery_possible must be false because {target} is non-recoverable",
+        )
+        require(
+            target_entry.get("recovery_possible") is False,
+            f"{target}.recovery_possible must remain false",
         )
 
 
