@@ -103,11 +103,14 @@ def main() -> None:
     # Test 7: Record type modules mapping
     rtm = policy.get("record_type_modules", {})
     for rt in ["echo", "verification", "guardian_application", "guardian_retirement",
-               "guardian_key_rotation", "propagation", "correction", "classification_update"]:
+               "propagation", "correction", "classification_update"]:
         if rt not in rtm:
             errors.append(f"record_type_modules missing: {rt}")
         elif "common_submission_integrity_v1" not in rtm[rt]:
             errors.append(f"record_type_modules[{rt}] missing common_submission_integrity_v1")
+    # guardian_key_rotation must be reserved (not in active modules)
+    if "guardian_key_rotation" in rtm:
+        errors.append("guardian_key_rotation must not be in active record_type_modules (reserved)")
 
     # Test 8: Builder has print-oath command and OATH_POLICY_SHA256
     if BUILDER.exists():

@@ -25,7 +25,6 @@ FORMAL_RECORD_TYPES = [
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update",
