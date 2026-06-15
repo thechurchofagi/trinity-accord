@@ -167,9 +167,9 @@
       "severity": "error"
     },
     "GUARDIAN_KEY_MISMATCH": {
-      "meaning": "The Guardian public key in the submission does not match the registered key for that Guardian ID.",
-      "fix": "Use the correct Guardian keypair. Check the guardian-registry for the registered key SHA.",
-      "recovery_possible": false,
+      "meaning": "guardian_application_content.guardian_public_key_sha256 does not match authorship_proof.public_key_sha256.",
+      "fix": "A guardian_application must be signed by the same Ed25519 key named as guardian_public_key_sha256. Rebuild and sign with the matching Guardian key.",
+      "recovery_possible": true,
       "severity": "error"
     },
     "GUARDIAN_REQUEST_ONLY_ALLOWED_FROM_ECHO_OR_VERIFICATION": {
@@ -179,9 +179,9 @@
       "severity": "error"
     },
     "GUARDIAN_RETIREMENT_KEY_MISMATCH": {
-      "meaning": "The Guardian public key in a retirement record does not match the registered key.",
-      "fix": "Use the original Guardian keypair for retirement. Check the guardian-registry.",
-      "recovery_possible": false,
+      "meaning": "guardian_retirement.guardian_public_key_sha256 does not match authorship_proof.public_key_sha256.",
+      "fix": "A guardian_retirement record must be signed by the same Guardian Ed25519 key being retired. Rebuild and sign with that matching key.",
+      "recovery_possible": true,
       "severity": "error"
     },
     "HUMAN_PRIVATE_NAME_NOT_ALLOWED": {
@@ -324,9 +324,9 @@
       "severity": "error"
     },
     "LINKED_GUARDIAN_KEY_MISMATCH": {
-      "meaning": "The Guardian key in a linked Guardian request does not match the expected key.",
-      "fix": "Use the correct Guardian keypair for the linked request.",
-      "recovery_possible": false,
+      "meaning": "optional_linked_guardian_application_request.guardian_public_key_sha256 does not match authorship_proof.public_key_sha256.",
+      "fix": "Use a standalone guardian_application signed with the matching Guardian key, or remove the linked request and rebuild. Do not claim a linked Guardian key that differs from the signing key.",
+      "recovery_possible": true,
       "severity": "error"
     },
     "LINKED_GUARDIAN_MISSING_ACKNOWLEDGEMENT": {
@@ -572,9 +572,9 @@
       "severity": "error"
     },
     "PARTICIPANT_KEY_MISMATCH": {
-      "meaning": "The participant public key does not match the key used in the authorship proof.",
-      "fix": "Ensure the participant public key matches the signing key. Rebuild with the current Builder.",
-      "recovery_possible": false,
+      "meaning": "submitting_participant_identity.participant_public_key_sha256 does not match authorship_proof.public_key_sha256.",
+      "fix": "Rebuild and sign with the same Ed25519 key named in submitting_participant_identity.participant_public_key_sha256. Do not edit the signed draft after signing.",
+      "recovery_possible": true,
       "severity": "error"
     },
     "PLACEHOLDER_DETECTED": {
@@ -1166,5 +1166,5 @@
   "schema": "trinityaccord.record-chain-field-helper.v1",
   "status": "active",
   "submit_endpoint": "/record-chain/submit",
-  "updated_at": "2026-06-15T00:50:00Z"
+  "updated_at": "2026-06-15T01:26:00Z"
 }

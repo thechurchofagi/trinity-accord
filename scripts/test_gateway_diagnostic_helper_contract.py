@@ -179,9 +179,122 @@ def main() -> None:
         + ", ".join(missing_mission_critical),
     )
 
+    # Semantic assertions: key mismatch recovery + security leak semantics
+    _check_key_mismatch_semantics(diagnostic_help)
+
     print(
         f"PASS: gateway diagnostic helper contract ({len(active_codes)} active codes)"
     )
+
+
+def require_entry(
+    diagnostic_help: dict,
+    code: str,
+    *,
+    recovery_possible: bool | None = None,
+    meaning_contains: list[str] | None = None,
+    fix_contains: list[str] | None = None,
+) -> None:
+    require(code in diagnostic_help, f"field helper missing {code}")
+    entry = diagnostic_help[code]
+    require(isinstance(entry, dict), f"diagnostic_code_help.{code} must be an object")
+
+    if recovery_possible is not None:
+        require(
+            entry.get("recovery_possible") is recovery_possible,
+            f"diagnostic_code_help.{code}.recovery_possible must be {recovery_possible}",
+        )
+
+    meaning = str(entry.get("meaning", ""))
+    fix = str(entry.get("fix", ""))
+
+    for text in meaning_contains or []:
+        require(
+            text in meaning,
+            f"diagnostic_code_help.{code}.meaning must contain {text!r}",
+        )
+
+    for text in fix_contains or []:
+        require(
+            text in fix,
+            f"diagnostic_code_help.{code}.fix must contain {text!r}",
+        )
+
+
+def _check_key_mismatch_semantics(diagnostic_help: dict) -> None:
+    """Key mismatch codes must be recoverable; security/privacy leaks must not."""
+
+    # Key mismatches: recoverable by rebuilding/re-signing
+    require_entry(
+        diagnostic_help,
+        "PARTICIPANT_KEY_MISMATCH",
+        recovery_possible=True,
+        meaning_contains=[
+            "submitting_participant_identity.participant_public_key_sha256",
+            "authorship_proof.public_key_sha256",
+        ],
+        fix_contains=[
+            "Rebuild",
+            "same Ed25519 key",
+        ],
+    )
+
+    require_entry(
+        diagnostic_help,
+        "GUARDIAN_KEY_MISMATCH",
+        recovery_possible=True,
+        meaning_contains=[
+            "guardian_application_content.guardian_public_key_sha256",
+            "authorship_proof.public_key_sha256",
+        ],
+        fix_contains=[
+            "guardian_application",
+            "same Ed25519 key",
+            "Rebuild",
+        ],
+    )
+
+    require_entry(
+        diagnostic_help,
+        "GUARDIAN_RETIREMENT_KEY_MISMATCH",
+        recovery_possible=True,
+        meaning_contains=[
+            "guardian_retirement.guardian_public_key_sha256",
+            "authorship_proof.public_key_sha256",
+        ],
+        fix_contains=[
+            "guardian_retirement",
+            "same Guardian Ed25519 key",
+            "Rebuild",
+        ],
+    )
+
+    require_entry(
+        diagnostic_help,
+        "LINKED_GUARDIAN_KEY_MISMATCH",
+        recovery_possible=True,
+        meaning_contains=[
+            "optional_linked_guardian_application_request.guardian_public_key_sha256",
+            "authorship_proof.public_key_sha256",
+        ],
+        fix_contains=[
+            "standalone guardian_application",
+            "matching Guardian key",
+        ],
+    )
+
+    # Security/privacy leaks: NOT recoverable (stop / human review)
+    for code in [
+        "SECURITY_VIOLATION",
+        "PRIVATE_KEY_LEAK",
+        "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN",
+        "HUMAN_PRIVATE_NAME_SUBMITTED_FORBIDDEN",
+    ]:
+        require_entry(
+            diagnostic_help,
+            code,
+            recovery_possible=False,
+        )
 
 
 if __name__ == "__main__":
