@@ -54,7 +54,11 @@ jobs:
         id: append_run
         run: |
           set -euo pipefail
-          python scripts/trinity_record_chain.py append --all
+          if [ -n "${{ github.event.inputs.pending_file_path }}" ] && [ -n "${{ github.event.inputs.receipt_id }}" ]; then
+            python scripts/trinity_record_chain.py append --pending-file "${{ github.event.inputs.pending_file_path }}" --receipt-id "${{ github.event.inputs.receipt_id }}" --allow-rejections
+          else
+            python scripts/trinity_record_chain.py append --all --allow-rejections
+          fi
           if git diff --quiet -- record-chain/; then
             printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
             printf '%s\n' "No record-chain changes after append; skipping derived status commit."

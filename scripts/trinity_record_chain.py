@@ -40,6 +40,7 @@ RECORDS = CHAIN / "records"
 PENDING = CHAIN / "pending"
 PROCESSED = CHAIN / "processed"
 REJECTED = CHAIN / "rejected"
+RECEIPT_STATUS = CHAIN / "receipt-status"
 BATCHES = CHAIN / "batches"
 INDEXES = CHAIN / "indexes"
 POLICIES = CHAIN / "policies"
@@ -268,7 +269,7 @@ def merkle_root(hex_hashes: list[str]) -> str:
 
 
 def ensure_dirs() -> None:
-    for p in [CHAIN, GENESIS, LEGACY_RECORDS, RECORDS, PENDING, PROCESSED, REJECTED, BATCHES, INDEXES, POLICIES, SCHEMAS, ANCHORS, ARWEAVE_ARCHIVES]:
+    for p in [CHAIN, GENESIS, LEGACY_RECORDS, RECORDS, PENDING, PROCESSED, REJECTED, RECEIPT_STATUS, BATCHES, INDEXES, POLICIES, SCHEMAS, ANCHORS, ARWEAVE_ARCHIVES]:
         p.mkdir(parents=True, exist_ok=True)
     for p in [PENDING, PROCESSED, REJECTED, RECORDS, BATCHES, LEGACY_RECORDS]:
         keep = p / ".gitkeep"
@@ -703,6 +704,21 @@ def _receipt_path_for_gateway_pending(path: Path) -> Path | None:
     return CHAIN / "intake" / "receipts" / yyyy / mm / f"{receipt_id}.receipt.json"
 
 
+def verify_receipt_sha256(receipt: dict[str, Any]) -> tuple[bool, str]:
+    """Verify receipt_sha256 against recomputed hash.
+
+    Returns (True, "") on success, (False, error_message) on mismatch.
+    """
+    from gateway.receipts import compute_receipt_sha256
+    expected = receipt.get("receipt_sha256")
+    if not expected:
+        return False, "receipt missing receipt_sha256"
+    actual = compute_receipt_sha256(receipt)
+    if expected != actual:
+        return False, f"receipt_sha256 mismatch: expected {expected}, got {actual}"
+    return True, ""
+
+
 def require_gateway_pending_durable_intake_binding(path: Path) -> None:
     """Fail closed unless a Gateway-created pending file has durable intake state.
 
@@ -722,6 +738,12 @@ def require_gateway_pending_durable_intake_binding(path: Path) -> None:
         raise ValueError(f"gateway pending has no durable receipt: {path.relative_to(ROOT)}")
 
     receipt = read_json(receipt_path)
+
+    # C.4: Verify receipt hash whenever receipt is read
+    receipt_ok, receipt_err = verify_receipt_sha256(receipt)
+    if not receipt_ok:
+        raise ValueError(f"receipt hash verification failed: {receipt_err}")
+
     rel_pending = str(path.relative_to(ROOT))
     if receipt.get("pending_file_path") != rel_pending:
         raise ValueError(
@@ -798,12 +820,22 @@ def extract_server_append_metadata(raw_draft: dict[str, Any]) -> dict[str, Any]:
     return metadata
 
 
-def append_records(all_records: bool = False) -> None:
+def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
         import_genesis()
     tip = load_tip(allow_generate=True)
-    pending = sorted(PENDING.glob("*.json"))
+
+    if pending_file:
+        # Single-file mode: append one specific pending file
+        p = Path(pending_file)
+        if not p.is_absolute():
+            p = ROOT / p
+        if not p.exists():
+            raise SystemExit(f"pending file not found: {p}")
+        pending = [p]
+    else:
+        pending = sorted(PENDING.glob("*.json"))
     if not pending:
         print("No pending records.")
         return
@@ -902,6 +934,23 @@ def append_records(all_records: bool = False) -> None:
             })
             write_json(CHAIN_TIP, tip)
             appended_count += 1
+
+            # C.1: Write durable receipt-status for appended record
+            _rcid = _gateway_pending_receipt_id(path)
+            if _rcid:
+                rs_path = RECEIPT_STATUS / f"{_rcid}.json"
+                write_json(rs_path, {
+                    "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+                    "receipt_id": _rcid,
+                    "pending_file_path": str(path.relative_to(ROOT)),
+                    "append_status": "appended",
+                    "final_record_id": draft["record_id"],
+                    "final_record_path": str(out.relative_to(ROOT)),
+                    "final_record_sha256": draft["record_sha256"],
+                    "rejection_path": None,
+                    "rejection_code": None,
+                    "updated_at": utc_now(),
+                })
         except Exception as exc:
             # Phase 6B: --all continues after rejection; writes rejection JSON
             REJECTED.mkdir(parents=True, exist_ok=True)
@@ -916,11 +965,31 @@ def append_records(all_records: bool = False) -> None:
             if path.exists():
                 shutil.move(str(path), str(REJECTED / path.name))
             rejected_count += 1
+
+            # C.1: Write durable receipt-status for rejected record
+            _rcid = _gateway_pending_receipt_id(path)
+            if _rcid:
+                rs_path = RECEIPT_STATUS / f"{_rcid}.json"
+                write_json(rs_path, {
+                    "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+                    "receipt_id": _rcid,
+                    "pending_file_path": str(path.relative_to(ROOT)),
+                    "append_status": "rejected",
+                    "final_record_id": None,
+                    "final_record_path": None,
+                    "final_record_sha256": None,
+                    "rejection_path": str(rejection_path.relative_to(ROOT)),
+                    "rejection_code": str(exc),
+                    "updated_at": utc_now(),
+                })
+
             if not all_records:
                 raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
             print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
     if rejected_count:
         print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
+        if not allow_rejections:
+            raise SystemExit(2)
 
     # Phase 6B: immediately verify after append — newly appended records
     # must pass verify_native_records() before building indexes.
@@ -1624,6 +1693,9 @@ def main() -> None:
     sub.add_parser("verify", help="Verify record-chain integrity")
     append_p = sub.add_parser("append", help="Append pending native records")
     append_p.add_argument("--all", action="store_true", help="Append all pending records")
+    append_p.add_argument("--allow-rejections", action="store_true", help="Exit 0 even if some pending records were rejected")
+    append_p.add_argument("--pending-file", type=str, help="Append a single specific pending file")
+    append_p.add_argument("--receipt-id", type=str, help="Receipt ID for single-file append")
     batch_p = sub.add_parser("build-batch", help="Build a Merkle batch")
     batch_p.add_argument("--max-count", type=int, default=25)
     batch_p.add_argument("--force", action="store_true")
@@ -1642,7 +1714,7 @@ def main() -> None:
     elif args.cmd == "verify":
         verify_chain()
     elif args.cmd == "append":
-        append_records(all_records=args.all)
+        append_records(all_records=args.all, allow_rejections=args.allow_rejections, pending_file=args.pending_file, receipt_id=args.receipt_id)
         verify_chain()
     elif args.cmd == "build-batch":
         build_batch(max_count=args.max_count, force=args.force)

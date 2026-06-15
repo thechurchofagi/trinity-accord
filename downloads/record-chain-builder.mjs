@@ -2304,7 +2304,8 @@ async function main() {
     const { status, data } = await postJson(`${gw}/record-chain/preflight`, body);
     console.log(`Status: ${status}`);
     console.log(JSON.stringify(data, null, 2));
-    process.exit(status === 200 ? 0 : 1);
+    const ok = status === 200 && data && data.accepted === true;
+    process.exit(ok ? 0 : 1);
     return;
   }
 
@@ -2317,7 +2318,8 @@ async function main() {
     const { status, data } = await postJson(`${gw}/record-chain/submit`, body);
     console.log(`Status: ${status}`);
     console.log(JSON.stringify(data, null, 2));
-    process.exit(status === 200 ? 0 : 1);
+    const ok = status === 200 && data && data.accepted === true && data.submitted === true;
+    process.exit(ok ? 0 : 1);
     return;
   }
 

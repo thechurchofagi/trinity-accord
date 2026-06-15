@@ -412,7 +412,7 @@ def _check_5_append_all_continues_after_rejection() -> list[str]:
         # Bad pending (missing required fields)
         bad = {"record_type": "echo", "schema": "trinityaccord.record-chain-entry.v1"}
         mod.write_json(mod.PENDING / "mainnet-prelaunch-bad-001.json", bad)
-        mod.append_records(all_records=True)
+        mod.append_records(all_records=True, allow_rejections=True)
         recs = sorted(mod.RECORDS.glob("R-*.json"))
         if len(recs) < 1:
             errors.append("Should have appended at least 1 record despite bad pending")
@@ -432,7 +432,7 @@ def _check_6_rejection_reason_file_written() -> list[str]:
     try:
         bad = {"record_type": "echo", "schema": "trinityaccord.record-chain-entry.v1"}
         mod.write_json(mod.PENDING / "mainnet-prelaunch-bad-only.json", bad)
-        mod.append_records(all_records=True)
+        mod.append_records(all_records=True, allow_rejections=True)
         rej_path = mod.REJECTED / "mainnet-prelaunch-bad-only.rejection.json"
         if not rej_path.exists():
             errors.append("rejection.json not written")
