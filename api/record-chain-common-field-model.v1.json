@@ -426,13 +426,18 @@
           "enum": [
             "create_echo_record",
             "create_verification_record",
-            "apply_for_guardian",
+            "create_guardian_application_record",
+            "create_guardian_retirement_record",
+            "create_propagation_record",
+            "create_correction_record",
+            "create_classification_update_record",
+            "create_context_insufficient_notice_record",
             "submit_record_only",
             "generate_record_only",
             "mixed",
             "unknown"
           ],
-          "description": "Scope of the authorization."
+          "description": "Scope of the authorization. Must match the record_type being submitted."
         },
         "authorization_limitations": {
           "type": [
@@ -520,10 +525,6 @@
           "type": "boolean",
           "description": "Acknowledges this record does not create governance."
         },
-        "not_attestation": {
-          "type": "boolean",
-          "description": "Acknowledges this record is not a formal attestation."
-        },
         "not_successor_reception": {
           "type": "boolean",
           "description": "Acknowledges this record does not succeed or replace prior reception."
@@ -547,6 +548,10 @@
         "later_records_may_reclassify_or_correct_this_record": {
           "type": "boolean",
           "description": "Later records may reclassify or correct this record; submission is not immutable until canonical inclusion."
+        },
+        "not_attestation": {
+          "type": "boolean",
+          "description": "Acknowledgement that this record is not an attestation."
         }
       },
       "additionalProperties": false
