@@ -615,11 +615,14 @@ def build_native_record_chain_head_commitment(root: Path) -> dict[str, Any]:
 
         record_ids.append(record_id)
         record_sha256s.append(record_sha256)
+        raw_file_sha = sha256_file(record_path)
         record_refs.append({
             "record_id": record_id,
             "record_sha256": record_sha256,
             "record_type": item.get("record_type"),
             "path": path,
+            "raw_file_sha256": raw_file_sha,
+            "bytes": record_path.stat().st_size,
         })
 
     latest_item = records[-1]
@@ -703,6 +706,9 @@ def build_native_record_chain_head_commitment(root: Path) -> dict[str, Any]:
             "record_count": len(record_refs),
             "record_ids_sha256": canonical_json_sha256(record_ids),
             "record_sha256s_sha256": canonical_json_sha256(record_sha256s),
+            "raw_file_sha256s_sha256": canonical_json_sha256(
+                [r["raw_file_sha256"] for r in record_refs]
+            ),
             "records": record_refs,
         },
         "auxiliary_batch_coverage": {

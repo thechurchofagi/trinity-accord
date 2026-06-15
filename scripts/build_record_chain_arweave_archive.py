@@ -155,6 +155,8 @@ def load_native_chain_sources() -> dict:
             "path": rec["path"],
             "record_type": rec.get("record_type"),
             "record_sha256": rec["record_sha256"],
+            "raw_file_sha256": sha256_file(rec_path),
+            "bytes": rec_path.stat().st_size,
         })
 
     included_batches = []
@@ -223,7 +225,23 @@ def build_archive_id(first_batch_id: str, last_batch_id: str, source_hash: str) 
 
 
 def build_payload_json(manifest: dict, archive_dir: Path) -> Path:
-    """Build the Arweave upload payload from the manifest."""
+    """Build the Arweave upload payload from the manifest.
+
+    Includes full record content (base64-encoded) so the archive is reconstructable.
+    """
+    included_records = []
+    for r in manifest.get("included_records", []):
+        rec_path = ROOT / r.get("path", "")
+        raw_bytes = rec_path.read_bytes() if rec_path.exists() else b""
+        included_records.append({
+            "record_id": r["record_id"],
+            "path": r.get("path"),
+            "record_sha256": r.get("record_sha256"),
+            "raw_file_sha256": sha256_bytes(raw_bytes),
+            "bytes": len(raw_bytes),
+            "content_base64": __import__("base64").b64encode(raw_bytes).decode("ascii"),
+        })
+
     payload = {
         "schema": "trinityaccord.record-chain-arweave-payload.v1",
         "archive_id": manifest["archive_id"],
@@ -233,10 +251,7 @@ def build_payload_json(manifest: dict, archive_dir: Path) -> Path:
             {"batch_id": b["batch_id"], "batch_manifest_sha256": b.get("batch_manifest_sha256")}
             for b in manifest.get("included_batches", [])
         ],
-        "included_records": [
-            {"record_id": r["record_id"], "record_sha256": r.get("record_sha256")}
-            for r in manifest.get("included_records", [])
-        ],
+        "included_records": included_records,
         "source": manifest.get("source", {}),
         "boundary": {
             "arweave_archive_is_mirror_only": True,
@@ -393,6 +408,15 @@ def build_archive_manifest(mode: str) -> None:
             upload_failed = True
         else:
             payload_path = build_payload_json(manifest, archive_dir)
+            # Bind payload hash into manifest after building
+            manifest["payload"] = {
+                "path": str(payload_path.relative_to(ROOT)),
+                "sha256": sha256_file(payload_path),
+                "bytes": payload_path.stat().st_size,
+                "canonicalization": "json.sort_keys.no_whitespace.utf8.allow_nan_false.v1",
+            }
+            # Recompute archive_manifest_sha256 after payload binding
+            manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
             try:
                 upload_result = upload_to_arweave(payload_path, archive_dir)
             except SystemExit as exc:

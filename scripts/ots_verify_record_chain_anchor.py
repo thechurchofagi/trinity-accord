@@ -255,7 +255,13 @@ def main() -> None:
     if ots_file and ots_file.exists():
         anchor["ots_file_sha256"] = sha256_bytes(ots_file.read_bytes())
 
-    anchor["verified_at"] = utc_now()
+    now = utc_now()
+    anchor["checked_at"] = now
+    if bitcoin_attestation_embedded:
+        anchor["upgraded_at"] = now
+    if strict_bitcoin_verified:
+        anchor["verified_at"] = now
+        anchor["strict_bitcoin_verified_at"] = now
     anchor["ots_verify_command"] = ots_verify_command
     anchor["ots_verify_exit_code"] = ots_verify_exit_code
     anchor["ots_verify_stdout"] = ots_verify_stdout
@@ -274,7 +280,7 @@ def main() -> None:
     anchor["bitcoin_attestation_embedded"] = bitcoin_attestation_embedded
     anchor["strict_bitcoin_verified"] = strict_bitcoin_verified
     anchor["strict_verify_unavailable_reason"] = strict_verify_unavailable_reason
-    anchor["ots_status"] = "verified" if bitcoin_verified else ("upgraded" if bitcoin_attestation_embedded else "pending")
+    anchor["ots_status"] = "verified" if strict_bitcoin_verified else ("upgraded" if bitcoin_attestation_embedded else "pending")
 
     if args.write_updated_anchor:
         write_json_atomic(anchor_path, anchor)
