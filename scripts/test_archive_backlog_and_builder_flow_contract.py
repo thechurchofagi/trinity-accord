@@ -308,7 +308,7 @@ def main() -> None:
     assert_doctor_fails_for_draft(
         "correction",
         {"title": "Correction", "body": ""},
-        "MISSING_RECORD_CONTENT",
+        "MISSING_CORRECTION_CONTENT",
         "create_correction_record",
     )
     assert_doctor_fails_for_draft(

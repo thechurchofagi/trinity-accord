@@ -2483,6 +2483,8 @@ async function main() {
     humanOperatorInvolved: args.humanOperatorInvolved,
     targetRecordId: args.targetRecordId || "",
     targetRecordSha256: args.targetRecordSha256 || "",
+    targetGuardianApplicationRecordId: args.targetGuardianApplicationRecordId || "",
+    targetGuardianApplicationRecordSha256: args.targetGuardianApplicationRecordSha256 || "",
     previousClassification: args.previousClassification || "",
     newClassification: args.newClassification || "",
     classificationReason: args.classificationReason || "",
