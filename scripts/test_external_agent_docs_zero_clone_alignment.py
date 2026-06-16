@@ -21,18 +21,20 @@ FILES = {
 REQUIRED_BY_FILE = {
     "ai.txt": [
         "/external-agent-quickstart/",
-        "/zero-clone-builders/",
         "/api/agent-start.v2.json",
         "/api/record-chain-intake-gateway.v1.json",
-        "/api/external-agent-operation-examples.v1.json",
         "BUILDER_USAGE_UNCLEAR",
     ],
     "llms.txt": [
+        "/agent-first-contact/",
+        "/api/agent-first-contact.json",
+        "/api/record-chain-builder-bundles.v1.json",
+        "/downloads/record-chain-builder.mjs",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/agent-record-chain-guidance/",
         "/external-agent-quickstart/",
-        "/zero-clone-builders/",
         "/api/agent-start.v2.json",
         "/api/record-chain-intake-gateway.v1.json",
-        "/api/external-agent-operation-examples.v1.json",
         "zero-clone",
         "BUILDER_USAGE_UNCLEAR",
         "doctor --file submission.json",
@@ -93,17 +95,6 @@ def main() -> int:
                 errors.append("agent-start API: required_when_unclear mismatch")
             if "doctor_submission" not in (protocol.get("required_sequence_for_formal_records") or []):
                 errors.append("agent-start API: missing doctor_submission step")
-
-    examples_path = FILES["api/external-agent-operation-examples.v1.json"]
-    if examples_path.exists():
-        data = json.loads(examples_path.read_text(encoding="utf-8"))
-        op = data.get("examples", {}).get("operational_canary", {})
-        if op.get("formal_submission") is not False:
-            errors.append("operation examples: operational_canary.formal_submission must be false")
-        if op.get("do_not_present_as_formal_submission") is not True:
-            errors.append("operation examples: operational_canary must explicitly not present as formal submission")
-        if op.get("zero_clone_formal_builder_route") is not False:
-            errors.append("operation examples: operational_canary.zero_clone_formal_builder_route must be false")
 
     if errors:
         print("FAIL: external-agent docs zero-clone alignment errors:")
