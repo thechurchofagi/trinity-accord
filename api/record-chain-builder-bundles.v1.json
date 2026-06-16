@@ -29,6 +29,19 @@
     ],
     "url": "/downloads/record-chain-builder.mjs"
   },
+  "agent_field_guidance": {
+    "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
+    "status": "active",
+    "url": "/downloads/record-chain-agent-field-guidance.v1.json",
+    "github_raw_url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-agent-field-guidance.v1.json",
+    "read_before_record_types": [
+      "correction",
+      "classification_update",
+      "guardian_retirement"
+    ],
+    "purpose": "Machine-readable field semantics for target-binding records. Agents should read this file before building correction, classification_update, or guardian_retirement submissions.",
+    "critical_rule": "For target_record_sha256-style fields, use the target final record's record_sha256. Do not use content_sha256, content_sha256_v2, receipt_sha256, archive hashes, public-key hashes, or the new record hash. If the target final record is unclear, stop and return BUILDER_USAGE_UNCLEAR."
+  },
   "download_methods": [
     {
       "name": "canonical_public_site_manifest_verified",
