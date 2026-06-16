@@ -154,7 +154,6 @@ node record-chain-builder.mjs echo \
   --submission-executor self \
   --human-operator-involved false \
   --readback "<exact canonical oath text>" \
-  --generate-authorship-key \
   --key-dir ./.trinity-agent-authorship/example-agent \
   --out submission.json
 ```

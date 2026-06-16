@@ -1698,6 +1698,33 @@ function runDoctor(submission) {
     }
   }
 
+  // ── Nested target hash checks (correction_content, classification_update_content) ──
+  const nestedFix = "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256. Copy record_sha256 from the existing target final record.";
+
+  function checkNestedTargetHash(prefix, nested, contentHashVal, receiptHashVal) {
+    const tId = nested.target_record_id || "";
+    const tSha = nested.target_record_sha256 || "";
+    if (tSha && contentHashVal && tSha === contentHashVal) {
+      results.push({ status: "FAIL", code: "NESTED_TARGET_HASH_EQUALS_CONTENT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_sha256 equals content hash. Copy record_sha256 from the existing target final record, not content_sha256.`, fix: nestedFix });
+    }
+    if (tSha && receiptHashVal && tSha === receiptHashVal) {
+      results.push({ status: "FAIL", code: "NESTED_TARGET_HASH_EQUALS_RECEIPT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_sha256 equals receipt hash. Copy record_sha256 from the existing target final record, not receipt_sha256.`, fix: nestedFix });
+    }
+    if (tId && !tSha) {
+      results.push({ status: "WARN", code: "NESTED_TARGET_ID_WITHOUT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_id present without target_record_sha256.`, fix: "Provide target_record_sha256 from the target final record." });
+    }
+    if (tSha && !tId) {
+      results.push({ status: "WARN", code: "NESTED_TARGET_HASH_WITHOUT_ID", field: `${prefix}.target_record_id`, meaning: `${prefix}.target_record_sha256 present without target_record_id.`, fix: "Provide target_record_id from the target final record." });
+    }
+  }
+
+  if (dra.record_type === "correction" && dra.correction_content) {
+    checkNestedTargetHash("correction_content", dra.correction_content, contentHash, receiptHash);
+  }
+  if (dra.record_type === "classification_update" && dra.classification_update_content) {
+    checkNestedTargetHash("classification_update_content", dra.classification_update_content, contentHash, receiptHash);
+  }
+
   return results;
 }
 
