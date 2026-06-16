@@ -189,5 +189,6 @@
     "common_human_requested_agent_executed_case": {
       "human_operator_involved": false
     }
-  }
+  },
+  "mission_governance": "/api/mission-governance.v1.json"
 }

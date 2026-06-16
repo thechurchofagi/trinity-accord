@@ -54,6 +54,7 @@ If the Builder, manifest, guidance, field source, target record, target hash, st
 - `/api/agent-start.v2.json`
 - `/api/record-chain-builder-bundles.v1.json`
 - `/downloads/record-chain-agent-field-guidance.v1.json`
+- `/api/mission-governance.v1.json`
 
 ## Authority boundary
 
