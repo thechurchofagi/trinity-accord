@@ -206,6 +206,7 @@
   <url><loc>https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-ots-arweave-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-ots-latest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-overlays.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-preflight-response.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-production-enablement-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-server-receipt.v1.json</loc></url>
