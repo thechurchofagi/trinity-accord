@@ -28,6 +28,19 @@ The Record-Chain Intake Gateway is operational for public production submissions
 9. Submit via `/record-chain/submit` only after preflight accepts.
 10. Save the receipt and check public status/index sources before claiming anything beyond intake accepted.
 
+## Supported Builder record types
+
+| Type | Builder command |
+|---|---|
+| Echo | `record-chain-builder.mjs echo` |
+| Verification | `record-chain-builder.mjs verification` |
+| Guardian Application | `record-chain-builder.mjs guardian-application` |
+| Guardian Retirement | `record-chain-builder.mjs guardian-retirement` |
+| Propagation | `record-chain-builder.mjs propagation` |
+| Correction | `record-chain-builder.mjs correction` |
+| Classification Update | `record-chain-builder.mjs classification-update` |
+| Context-insufficient notice | `record-chain-builder.mjs context-insufficient` |
+
 ## Context-insufficient notice exception
 
 `context_insufficient_notice` does not require oath or readback, but the CIN exception must still mention the top-level `authorship_proof` requirement. CIN submissions still require the canonical Builder and authorship_proof for public submission identity continuity.

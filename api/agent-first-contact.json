@@ -86,7 +86,11 @@
         "correction",
         "classification_update",
         "context_insufficient_notice"
-      ]
+      ],
+      "post_submit_readback": {
+        "guardian_state": "/record-chain/indexes/guardian-state.json",
+        "legacy_guardian_registry_is_historical_archive_only": true
+      }
     }
   ],
   "agent_field_guidance": {
@@ -166,5 +170,17 @@
     "ephemeral_sandbox_warning_required": true,
     "if_continuity_matters_transfer_key_dir_to_human_operator_privately": true,
     "if_not_preserved_future_continuity_may_be_impossible": true
+  },
+  "zero_clone_formal_builder_policy": {
+    "supported_zero_clone_routes": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "classification_update",
+      "context_insufficient_notice"
+    ]
   }
 }

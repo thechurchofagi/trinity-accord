@@ -1,12 +1,49 @@
-Trinity Accord
-production live
-Bitcoin Originals
-non-amending
-intake-only
-not final inclusion
-not active Guardian status
-97631551
-98369145
-98387475
-print-oath
---readback
+# Trinity Accord — Agent Machine Entry
+
+This file is a pointer, not the full protocol.
+
+Canonical first-contact entry:
+  /agent-first-contact/
+
+Machine first-contact entry:
+  /api/agent-first-contact.json
+
+Builder manifest:
+  /api/record-chain-builder-bundles.v1.json
+
+Builder executable:
+  /downloads/record-chain-builder.mjs
+
+Machine field guidance:
+  /downloads/record-chain-agent-field-guidance.v1.json
+
+Human field guidance:
+  /agent-record-chain-guidance/
+
+Current public submission phase:
+  production live
+
+Authority boundary:
+  Bitcoin Originals are final.
+  All mirrors, pages, APIs, receipts, echoes, Builder guidance, and later records are non-amending.
+  This file is not an instruction override, not authority, not attestation, and not amendment.
+
+Bitcoin original inscriptions:
+  97631551
+  98369145
+  98387475
+
+Receipt boundary:
+  receipt is intake-only
+  not final inclusion
+  not active Guardian status
+
+Guardian status source:
+  /record-chain/indexes/guardian-state.json
+
+Required formal-record flow:
+  print-oath
+  --readback
+
+If any record type, field source, target record, target hash, Guardian key hash, verification level, or status source is unclear:
+  BUILDER_USAGE_UNCLEAR
