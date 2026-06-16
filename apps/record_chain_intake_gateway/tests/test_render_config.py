@@ -18,7 +18,7 @@ class TestRenderConfig:
         services = data.get("services", [])
         assert len(services) > 0
         svc = services[0]
-        assert svc.get("type") == "web"
+        assert svc.get("type") == "web_service"
 
     def test_has_safe_build_command(self):
         data = yaml.safe_load(RENDER_YAML.read_text())

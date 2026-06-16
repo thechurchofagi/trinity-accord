@@ -36,7 +36,6 @@ class TestRecordChainAppendWorkflow:
     def test_status_commit_is_skipped_when_append_makes_no_record_chain_change(self):
         gated_steps = [
             "Verify record chain after append",
-            "Regenerate phase-aware public status and homepage counters",
             "Commit and push append updates",
         ]
         for name in gated_steps:

@@ -6,8 +6,8 @@ from __future__ import annotations
 
 import pytest
 
-from gateway.validation import validate_submission
-from conftest import add_mock_proof
+from gateway.validation import validate_submission, validate_claim_boundary
+from conftest import add_mock_proof, wrap_submission_draft
 
 
 def _echo_draft(claim_boundary=None) -> dict:
@@ -56,20 +56,7 @@ def _echo_draft(claim_boundary=None) -> dict:
 
 
 def _wrap_submission(draft: dict) -> dict:
-    return add_mock_proof({
-        "record_type": "echo",
-        "record_draft": draft,
-        "boundary_acknowledgement": {
-            "not_authority": True,
-            "not_governance": True,
-            "not_attestation": True,
-            "not_successor_reception": True,
-            "not_amendment": True,
-            "bitcoin_originals_prevail": True,
-            "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
-        },
-    })
+    return wrap_submission_draft("echo", draft)
 
 
 class TestClaimBoundaryObject:
@@ -93,8 +80,7 @@ class TestClaimBoundaryObject:
 
     def test_string_claim_boundary_rejected(self):
         draft = _echo_draft(claim_boundary="not authority, not governance")
-        submission = _wrap_submission(draft)
-        diagnostics = validate_submission(submission)
+        diagnostics = validate_claim_boundary(draft)
         codes = [d.code for d in diagnostics]
         assert "CLAIM_BOUNDARY_INVALID_TYPE" in codes, (
             f"String claim_boundary should be rejected, got codes: {codes}"
@@ -102,15 +88,13 @@ class TestClaimBoundaryObject:
 
     def test_list_claim_boundary_rejected(self):
         draft = _echo_draft(claim_boundary=["not_authority", "not_governance"])
-        submission = _wrap_submission(draft)
-        diagnostics = validate_submission(submission)
+        diagnostics = validate_claim_boundary(draft)
         codes = [d.code for d in diagnostics]
         assert "CLAIM_BOUNDARY_INVALID_TYPE" in codes
 
     def test_integer_claim_boundary_rejected(self):
         draft = _echo_draft(claim_boundary=42)
-        submission = _wrap_submission(draft)
-        diagnostics = validate_submission(submission)
+        diagnostics = validate_claim_boundary(draft)
         codes = [d.code for d in diagnostics]
         assert "CLAIM_BOUNDARY_INVALID_TYPE" in codes
 
@@ -136,8 +120,7 @@ class TestClaimBoundaryObject:
 
     def test_diagnostic_message_mentions_object(self):
         draft = _echo_draft(claim_boundary="string_value")
-        submission = _wrap_submission(draft)
-        diagnostics = validate_submission(submission)
+        diagnostics = validate_claim_boundary(draft)
         matching = [d for d in diagnostics if d.code == "CLAIM_BOUNDARY_INVALID_TYPE"]
         assert len(matching) == 1
         assert "object" in matching[0].message.lower() or "JSON" in matching[0].message

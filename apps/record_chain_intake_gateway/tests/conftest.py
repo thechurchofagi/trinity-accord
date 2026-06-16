@@ -368,3 +368,51 @@ def add_mock_proof(submission: dict[str, Any]) -> dict[str, Any]:
     if "authorship_proof" not in sub:
         sub["authorship_proof"] = dict(MOCK_AUTHORSHIP_PROOF)
     return sub
+
+
+def wrap_submission_draft(
+    record_type: str,
+    record_draft: dict[str, Any],
+    authorship_proof: dict[str, Any] | None = None,
+    **extra: Any,
+) -> dict[str, Any]:
+    """Wrap a record_draft into a full submission envelope with all 9 required top-level fields.
+
+    Used by test fixtures that build minimal submissions for validation testing.
+    """
+    sub: dict[str, Any] = {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "client_generated_at": "2026-06-01T00:00:00Z",
+        "record_type": record_type,
+        "record_draft": record_draft,
+        "builder": {
+            "name": "test-fixture",
+            "version": "test",
+            "source_url": "tests/conftest.py",
+        },
+        "client_context": {
+            "site_entry_url": "https://www.trinityaccord.org/agent-start/",
+            "declared_context_level": "CC-3",
+            "loaded_context_urls": [
+                "https://www.trinityaccord.org/agent-start/",
+            ],
+        },
+        "submission_boundary": {
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_successor_reception": True,
+            "not_amendment": True,
+            "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
+        },
+    }
+    if authorship_proof is not None:
+        sub["authorship_proof"] = authorship_proof
+    else:
+        sub["authorship_proof"] = dict(MOCK_AUTHORSHIP_PROOF)
+    sub.update(extra)
+    return sub
