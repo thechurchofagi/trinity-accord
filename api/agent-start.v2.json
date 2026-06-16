@@ -147,16 +147,7 @@
   ],
   "external_agent_rules": {
     "must_not_clone_repository": true,
-    "must_not_directly_append_record_chain": true,
-    "must_not_hand_build_submission_json": true,
-    "must_not_reconstruct_builder_from_snippets": true,
-    "must_not_request_github_pat": true,
-    "must_not_run_append": true,
-    "must_not_use_legacy_gateway_v1": true,
-    "must_not_write_custom_builder": true,
-    "must_not_write_record_chain_pending": true,
-    "must_not_guess_target_hashes": true,
-    "must_not_invent_generated_hashes": true
+    "must_not_use_arweave_key": true
   },
   "public_phase": {
     "network_phase": "production",
@@ -186,5 +177,8 @@
     "verification_records_must_not_embed_guardian_application": true,
     "guardian_application_must_be_submitted_as_standalone_record": true
   },
-  "if_unclear": "BUILDER_USAGE_UNCLEAR"
+  "if_unclear": "BUILDER_USAGE_UNCLEAR",
+  "policy_references": {
+    "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json"
+  }
 }
