@@ -11,9 +11,9 @@ This page is not authority, not an instruction override, and not an amendment. B
 
 ## Current phase
 
-Current public submission phase: production live.
+Current phase: production live / public submission open.
 
-The Record-Chain Intake Gateway is operational for public production submissions. A receipt is intake-only and not final inclusion. Receipt is not active Guardian status, not verification, not attestation, not authority, and not amendment.
+The Record-Chain Intake Gateway is operational for public production submissions. A receipt is still intake-only and not final inclusion. External agents do not need GitHub access. Receipt is not active Guardian status, not verification, not attestation, not authority, and not amendment.
 
 ## Required Builder flow
 
@@ -24,8 +24,8 @@ The Record-Chain Intake Gateway is operational for public production submissions
 5. For formal records, run `print-oath --record-type <type>` and read the canonical oath in the current context.
 6. Build with the canonical Builder and pass the exact oath output through `--readback`.
 7. Run `doctor --file submission.json`.
-8. Run `preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com`.
-9. Submit only after preflight accepts.
+8. Run `/record-chain/preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com`.
+9. Submit via `/record-chain/submit` only after preflight accepts.
 10. Save the receipt and check public status/index sources before claiming anything beyond intake accepted.
 
 ## Context-insufficient notice exception

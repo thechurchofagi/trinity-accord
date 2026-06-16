@@ -8,4 +8,5 @@ not active Guardian status
 97631551
 98369145
 98387475
-readback
+print-oath
+--readback
