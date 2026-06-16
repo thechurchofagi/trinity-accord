@@ -19,6 +19,8 @@
  *   preflight               POST submission to gateway /record-chain/preflight
  *   submit                  POST submission to gateway /record-chain/submit
  *   explain-fields          Show field explanations for a record type or specific field
+ *   guidance                Show field/hash guidance for a record type
+ *   explain-hash            Explain source and rules for a specific hash field
  *   doctor                  Validate a submission file locally
  *   repair                  Auto-repair a submission file for common issues
  *   error-help              Show help for a diagnostic error code
@@ -1671,6 +1673,31 @@ function runDoctor(submission) {
     }
   }
 
+  // ── Target hash misuse checks ─────────────────────────────────────
+  const dra = submission.record_draft || {};
+  const contentHash = dra.content_sha256 || dra.content_sha256_v2 || "";
+  const targetHash = dra.target_record_sha256 || dra.target_guardian_application_record_sha256 || "";
+  const receiptHash = dra.receipt_sha256 || "";
+
+  if (targetHash && contentHash && targetHash === contentHash) {
+    results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_CONTENT_HASH", field: "target_record_sha256", meaning: "Target hash equals content hash. Copy record_sha256 from the existing target final record, not content_sha256.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256." });
+  }
+  if (targetHash && receiptHash && targetHash === receiptHash) {
+    results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_RECEIPT_HASH", field: "target_record_sha256", meaning: "Target hash equals receipt hash. Copy record_sha256 from the existing target final record, not receipt_sha256.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256." });
+  }
+  if (dra.target_record_id && !dra.target_record_sha256 && dra.record_type !== "context_insufficient_notice") {
+    results.push({ status: "WARN", code: "TARGET_ID_WITHOUT_HASH", field: "target_record_sha256", meaning: "target_record_id present without target_record_sha256.", fix: "Provide target_record_sha256 from the target final record." });
+  }
+  if (dra.target_record_sha256 && !dra.target_record_id) {
+    results.push({ status: "WARN", code: "TARGET_HASH_WITHOUT_ID", field: "target_record_id", meaning: "target_record_sha256 present without target_record_id.", fix: "Provide target_record_id from the target final record." });
+  }
+  if (dra.record_type === "guardian_application" && dra.guardian_application_content) {
+    const gpk = dra.guardian_application_content.guardian_public_key_sha256 || "";
+    if (targetHash && gpk && targetHash === gpk) {
+      results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_GUARDIAN_KEY_HASH", field: "target_record_sha256", meaning: "Target hash equals guardian key hash. These are different values.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field guardian_key_sha." });
+    }
+  }
+
   return results;
 }
 
@@ -2032,6 +2059,8 @@ Reserved future type:
   guardian-key-rotation   Reserved; not currently accepted by public intake.
   submit                  POST submission to gateway /record-chain/submit
   explain-fields          Show field explanations for a record type or specific field
+  guidance                Show field/hash guidance for a record type
+  explain-hash            Explain source and rules for a specific hash field
   doctor                  Validate a submission file locally
   repair                  Auto-repair a submission file for common issues
   error-help              Show help for a diagnostic error code
@@ -2243,6 +2272,32 @@ Examples:
 `);
 }
 
+// ── Agent Field Guidance loader ───────────────────────────────────
+function loadAgentFieldGuidance() {
+  const candidates = [
+    resolve(__dirname, "record-chain-agent-field-guidance.v1.json"),
+    resolve(__dirname, "..", "downloads", "record-chain-agent-field-guidance.v1.json"),
+    resolve(process.cwd(), "downloads", "record-chain-agent-field-guidance.v1.json"),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return JSON.parse(readFileSync(candidate, "utf8"));
+    }
+  }
+  throw new Error("AGENT_FIELD_GUIDANCE_NOT_FOUND");
+}
+
+function normalizeGuidanceRecordType(value) {
+  const map = {
+    "guardian-application": "guardian_application",
+    "guardian-retirement": "guardian_retirement",
+    "classification-update": "classification_update",
+    "context-insufficient": "context_insufficient_notice",
+    "context-insufficient-notice": "context_insufficient_notice",
+  };
+  return map[value] || value;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cmd = args._[0] || "help";
@@ -2329,6 +2384,98 @@ async function main() {
       console.log("\nUse --field <path> for detailed guidance on a specific field.");
     } else {
       errorExit("Usage: explain-fields --record-type TYPE  OR  explain-fields --field PATH");
+    }
+    return;
+  }
+
+  // ── guidance ─────────────────────────────────────────────────────
+  if (cmd === "guidance") {
+    const rtArg = args.recordType || errorExit("--record-type required");
+    const rt = normalizeGuidanceRecordType(rtArg);
+    let guidance;
+    try {
+      guidance = loadAgentFieldGuidance();
+    } catch (e) {
+      errorExit("Cannot load agent field guidance JSON: " + e.message);
+    }
+    const recordType = guidance.record_types?.[rt];
+    if (!recordType) {
+      console.error(`Unknown record type in guidance: ${rt}`);
+      console.error(`Available: ${Object.keys(guidance.record_types || {}).join(", ")}`);
+      process.exit(1);
+    }
+    console.log(`record_type: ${rt}`);
+    console.log(`purpose: ${recordType.purpose || "(not specified)"}`);
+    console.log(`builder_command: ${recordType.builder_command || rtArg}`);
+    if (recordType.required_cli_options) {
+      console.log(`required_cli_options: ${recordType.required_cli_options.join(", ")}`);
+    }
+    console.log();
+    // Field help
+    const fields = guidance.fields || {};
+    const rtFields = recordType.field_help || {};
+    if (Object.keys(rtFields).length > 0) {
+      console.log("Field guidance:");
+      for (const [field, info] of Object.entries(rtFields)) {
+        console.log(`  ${field}: ${typeof info === "string" ? info : JSON.stringify(info)}`);
+      }
+      console.log();
+    }
+    // Hash help
+    const hashRules = guidance.hash_rules || {};
+    if (rt === "correction" || rt === "classification_update" || rt === "guardian_retirement") {
+      console.log("Hash guidance (target-bound record):");
+      console.log("  copy record_sha256 from the existing target final record");
+      console.log("  do not use content_sha256");
+      console.log("  do not use receipt_sha256");
+      console.log("  do not use public-key hash");
+      console.log("  do not use new record hash");
+      console.log();
+    }
+    if (rt === "guardian_application") {
+      console.log("Hash guidance (Guardian key):");
+      console.log("  guardian_key_sha = SHA-256 of exact public key material");
+      console.log("  not record_sha256, not content_sha256, not receipt_sha256");
+      console.log();
+    }
+    console.log(`unclear_action: ${recordType.unclear_action || "BUILDER_USAGE_UNCLEAR"}`);
+    return;
+  }
+
+  // ── explain-hash ──────────────────────────────────────────────────
+  if (cmd === "explain-hash") {
+    const field = args.field || errorExit("--field required");
+    if (field === "target_record_sha256" || field === "target_guardian_application_record_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: target final record.record_sha256");
+      console.log("never use: content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, new record hash");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "guardian_key_sha" || field === "guardian_public_key_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: exact Guardian public key material");
+      console.log("not record_sha256");
+      console.log("not content_sha256");
+      console.log("not receipt_sha256");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "content_sha256" || field === "content_sha256_v2") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by Builder from record content");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "record_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by final-chain tooling after append");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "receipt_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by Gateway receipt tooling");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else {
+      console.error(`Unknown hash field: ${field}`);
+      console.error("Known fields: target_record_sha256, guardian_key_sha, content_sha256, record_sha256, receipt_sha256");
+      process.exit(1);
     }
     return;
   }

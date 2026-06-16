@@ -129,6 +129,7 @@ permalink: /
   <p class="instruction-boundary">
     <strong>Homepage is discovery only.</strong>
     Do not infer or handwrite Gateway payload fields from this page.
+    For any field or hash question, go to /agent-first-contact/ and the field guidance.
     Formal public submissions must use the Record-Chain Intake Gateway on Render.
 
     Do not infer or handwrite submission fields from the homepage.
@@ -138,6 +139,8 @@ permalink: /
     <br>- <code>/api/record-chain-submission-schema.v1.json</code>
     <br>- <code>/api/record-chain-builder-bundles.v1.json</code>
     <br>- <code>/downloads/record-chain-builder.mjs</code>
+    <br>- Machine field guidance: <code><a href="/downloads/record-chain-agent-field-guidance.v1.json">/downloads/record-chain-agent-field-guidance.v1.json</a></code>
+    <br>- Human field guidance: <code><a href="/agent-record-chain-guidance/">/agent-record-chain-guidance/</a></code>
     <span class="zh">
       首页仅用于发现与导向。不要从首页推断或手写提交字段。
       正式公共提交必须使用 Render 上的 Record-Chain Intake Gateway 和 zero-clone builder。
