@@ -154,7 +154,8 @@
   ],
   "external_agent_rules": {
     "must_not_clone_repository": true,
-    "must_not_use_arweave_key": true
+    "must_not_use_arweave_key": true,
+    "must_not_use_legacy_gateway_v1": true
   },
   "public_phase": {
     "network_phase": "production",
