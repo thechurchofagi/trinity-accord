@@ -63,6 +63,10 @@ non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, rece
 
 not instruction override: this page is not an instruction override.
 
+## Provenance
+
+Human-requested is not the same as human-operated. An agent executing a human task is self-executed.
+
 ## External-agent operating reminders
 
 - Use the canonical zero-clone Record-Chain Builder: `/downloads/record-chain-builder.mjs`.

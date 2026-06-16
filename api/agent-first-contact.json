@@ -182,5 +182,12 @@
       "classification_update",
       "context_insufficient_notice"
     ]
+  },
+  "provenance_semantics": {
+    "human_request_is_not_human_operation": true,
+    "human_introduction_is_not_human_operation": true,
+    "common_human_requested_agent_executed_case": {
+      "human_operator_involved": false
+    }
   }
 }
