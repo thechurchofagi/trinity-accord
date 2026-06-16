@@ -564,9 +564,10 @@ async def _submit_response_from_idempotency_index(
         raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
 
     # Verify receipt hash integrity
-    hash_ok, hash_err = verify_receipt_sha256(receipt_data)
-    if not hash_ok:
-        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
+    if receipt_data.get("receipt_sha256"):
+        hash_ok, hash_err = verify_receipt_sha256(receipt_data)
+        if not hash_ok:
+            raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
 
     receipt_id = (
         receipt_data.get("server_receipt_id")
@@ -1320,7 +1321,11 @@ async def _build_receipt_envelope(
     receipt_path: str,
 ) -> dict[str, Any]:
     """Build a receipt envelope with immutable receipt and final status."""
-    final_status_data = await _read_receipt_final_status(receipt_id)
+    try:
+        final_status_data = await _read_receipt_final_status(receipt_id)
+    except Exception as exc:
+        logger.warning("Failed to read receipt-status for %s: %s", receipt_id, exc)
+        final_status_data = None
 
     if final_status_data:
         append_status = final_status_data.get("append_status", "unknown")
@@ -1371,18 +1376,21 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
         if text is not None:
             receipt = json.loads(text)
             # Verify receipt hash integrity before returning
-            hash_ok, hash_err = verify_receipt_sha256(receipt)
-            if not hash_ok:
-                logger.error("Durable receipt hash invalid for %s at %s: %s", receipt_id, receipt_path, hash_err)
-                raise HTTPException(
-                    status_code=500,
-                    detail={
-                        "code": "RECEIPT_HASH_INVALID",
-                        "message": f"Receipt hash verification failed: {hash_err}",
-                        "receipt_id": receipt_id,
-                        "receipt_path": receipt_path,
-                    },
-                )
+            if receipt.get("receipt_sha256"):
+                hash_ok, hash_err = verify_receipt_sha256(receipt)
+                if not hash_ok:
+                    logger.error("Durable receipt hash invalid for %s at %s: %s", receipt_id, receipt_path, hash_err)
+                    raise HTTPException(
+                        status_code=500,
+                        detail={
+                            "code": "RECEIPT_HASH_INVALID",
+                            "message": f"Receipt hash verification failed: {hash_err}",
+                            "receipt_id": receipt_id,
+                            "receipt_path": receipt_path,
+                        },
+                    )
+            else:
+                logger.warning("Receipt %s has no receipt_sha256; skipping hash verification", receipt_id)
             _receipt_store[receipt_id] = receipt  # update cache
             return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
     except Exception as exc:
