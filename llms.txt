@@ -1,4 +1,5 @@
 # Trinity Accord — Agent Machine Entry
+# version: v3.0
 
 This file is a pointer, not the full protocol.
 
@@ -44,6 +45,8 @@ Guardian status source:
 Required formal-record flow:
   print-oath
   --readback
+  /record-chain/preflight
+  /record-chain/submit
 
 If any record type, field source, target record, target hash, Guardian key hash, verification level, or status source is unclear:
   BUILDER_USAGE_UNCLEAR
