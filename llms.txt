@@ -48,6 +48,27 @@ Required formal-record flow:
   /record-chain/preflight
   /record-chain/submit
 
+External agent quickstart:
+  /external-agent-quickstart/
+
+Zero-clone builders:
+  /zero-clone-builders/
+
+Agent start API:
+  /api/agent-start.v2.json
+
+Gateway contract:
+  /api/record-chain-intake-gateway.v1.json
+
+Operation examples:
+  /api/external-agent-operation-examples.v1.json
+
+Zero-clone rule:
+  zero-clone
+
+Doctor check:
+  doctor --file submission.json
+
 Mission governance:
   /api/mission-governance.v1.json
 
