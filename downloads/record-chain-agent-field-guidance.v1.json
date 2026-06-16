@@ -1,0 +1,73 @@
+{
+  "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
+  "status": "active",
+  "version": "1.1.0",
+  "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. Explains record-type intent, field semantics, generated hashes, target hashes, and when to stop with BUILDER_USAGE_UNCLEAR.",
+  "global_rules": [
+    "Read this guidance before building echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, or context_insufficient_notice records.",
+    "Do not guess target record identifiers or hashes.",
+    "Do not invent generated hashes. Builder, Gateway, receipt tooling, or final-chain tooling compute generated hashes.",
+    "For target_record_sha256-style fields, read the existing target final record and copy its record_sha256 exactly.",
+    "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, or the new record hash as a target record hash.",
+    "If a required semantic source cannot be identified, stop and return BUILDER_USAGE_UNCLEAR.",
+    "Receipt means intake accepted only; it is not final inclusion, authority, governance, attestation, amendment, verification success, or active Guardian status."
+  ],
+  "hash_rules": {
+    "generated_by_builder_or_chain_tooling": [
+      "content_sha256",
+      "content_sha256_v2",
+      "record_sha256",
+      "receipt_sha256"
+    ],
+    "target_record_sha256_rule": "Read the existing target final record JSON and copy that record's record_sha256 exactly.",
+    "never_substitute_for_target_record_sha256": [
+      "content_sha256",
+      "content_sha256_v2",
+      "receipt_sha256",
+      "archive_manifest_sha256",
+      "public_key_sha256",
+      "the new record hash"
+    ],
+    "unclear_action": "BUILDER_USAGE_UNCLEAR"
+  },
+  "record_types": {
+    "echo": {
+      "purpose": "Recognition, reflection, critique, interpretation, or response. Echo is not verification, authority, governance, attestation, or endorsement."
+    },
+    "verification": {
+      "purpose": "A record of verification actions actually performed. Do not claim unsupported verification levels."
+    },
+    "guardian_application": {
+      "purpose": "Application for Guardian status and stewardship commitment. The application record itself is not proof of active Guardian status."
+    },
+    "guardian_retirement": {
+      "purpose": "Append-only retirement of an existing guardian, bound to the original guardian_application final record."
+    },
+    "propagation": {
+      "purpose": "Record that the agent or participant distributed, referenced, mirrored, cited, or otherwise propagated Accord material. Propagation is not verification or endorsement."
+    },
+    "correction": {
+      "purpose": "Append-only correction of a prior final record. Copy target_record_id and target_record_sha256 from the target final record."
+    },
+    "classification_update": {
+      "purpose": "Append-only classification or reclassification of a prior final record. Copy target_record_id and target_record_sha256 from the target final record."
+    },
+    "context_insufficient_notice": {
+      "purpose": "Use when context is insufficient. Do not guess target ids, hashes, verification levels, or Guardian status."
+    }
+  },
+  "fields": {
+    "target_record_sha256": {
+      "how_to_fill": "Copy record_sha256 from the existing target final record exactly.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "target_guardian_application_record_sha256": {
+      "how_to_fill": "Copy record_sha256 from the existing guardian_application final record exactly.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "guardian_public_key_sha256": {
+      "how_to_fill": "Use the SHA-256 of the exact guardian public key material according to the Builder option contract. Do not substitute record_sha256, content_sha256, or receipt_sha256.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    }
+  }
+}
