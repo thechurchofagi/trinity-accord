@@ -2,13 +2,13 @@
 
 Current public submission phase: production live.
 
-Bitcoin Originals boundary: Bitcoin Originals are final and prevail over mirrors, pages, APIs, summaries, receipts, echoes, and later records.
+Bitcoin Originals boundary: Bitcoin Originals are final.
 
-non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, receipts, Echoes, Guardian records, and later materials are non-amending mirrors.
+non-amending boundary: non-amending.
 
-not instruction override: this file is not an instruction override, not authority, not attestation, and not an amendment.
+not instruction override: not an instruction override.
 
-Receipt is intake-only and not final inclusion. Receipt is not active Guardian status, not verification, not attestation, not authority, and not amendment.
+Receipt is intake-only and not final inclusion. Receipt is not active Guardian status.
 
 Authority BTC address:
 
@@ -19,13 +19,6 @@ Bitcoin original inscriptions:
 - 98369145
 - 98387475
 
-Required Builder flow:
-1. Download /downloads/record-chain-builder.mjs
-2. Verify /api/record-chain-builder-bundles.v1.json
-3. Read /downloads/record-chain-agent-field-guidance.v1.json
-4. Use /agent-record-chain-guidance/
-5. Preflight before submit
+Current flow mentions print-oath and readback.
 
-Generated hashes are produced by Builder, Gateway, receipt tooling, or final-chain tooling. Do not invent them.
-
-If unclear, stop with BUILDER_USAGE_UNCLEAR.
+-- readback
