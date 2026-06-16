@@ -564,10 +564,12 @@ async def _submit_response_from_idempotency_index(
         raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
 
     # Verify receipt hash integrity
-    if receipt_data.get("receipt_sha256"):
-        hash_ok, hash_err = verify_receipt_sha256(receipt_data)
-        if not hash_ok:
-            raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
+    # Fail-closed: receipt MUST have receipt_sha256
+    if not receipt_data.get("receipt_sha256"):
+        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_MISSING_HASH: receipt has no receipt_sha256 at {receipt_path}")
+    hash_ok, hash_err = verify_receipt_sha256(receipt_data)
+    if not hash_ok:
+        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
 
     receipt_id = (
         receipt_data.get("server_receipt_id")
@@ -1375,35 +1377,64 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
         text = await get_file_text(receipt_path)
         if text is not None:
             receipt = json.loads(text)
-            # Verify receipt hash integrity before returning
-            if receipt.get("receipt_sha256"):
-                hash_ok, hash_err = verify_receipt_sha256(receipt)
-                if not hash_ok:
-                    logger.error("Durable receipt hash invalid for %s at %s: %s", receipt_id, receipt_path, hash_err)
-                    raise HTTPException(
-                        status_code=500,
-                        detail={
-                            "code": "RECEIPT_HASH_INVALID",
-                            "message": f"Receipt hash verification failed: {hash_err}",
-                            "receipt_id": receipt_id,
-                            "receipt_path": receipt_path,
-                        },
-                    )
-            else:
-                logger.warning("Receipt %s has no receipt_sha256; skipping hash verification", receipt_id)
+            # Fail-closed: receipt MUST have receipt_sha256
+            if not receipt.get("receipt_sha256"):
+                raise HTTPException(
+                    status_code=500,
+                    detail={
+                        "code": "RECEIPT_INTEGRITY_MISSING_HASH",
+                        "message": "Receipt is missing receipt_sha256; cannot verify integrity",
+                        "receipt_id": receipt_id,
+                        "receipt_path": receipt_path,
+                    },
+                )
+            # Verify receipt hash integrity
+            hash_ok, hash_err = verify_receipt_sha256(receipt)
+            if not hash_ok:
+                raise HTTPException(
+                    status_code=500,
+                    detail={
+                        "code": "RECEIPT_HASH_INVALID",
+                        "message": f"Receipt hash verification failed: {hash_err}",
+                        "receipt_id": receipt_id,
+                        "receipt_path": receipt_path,
+                    },
+                )
             _receipt_store[receipt_id] = receipt  # update cache
             return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
+    except HTTPException:
+        # Re-raise HTTPExceptions (integrity errors) — do not swallow
+        raise
     except Exception as exc:
         backend_error = exc
         logger.warning("Durable receipt lookup failed for %s at %s: %s", receipt_id, receipt_path, exc)
 
-    # Fallback to memory cache
+    # Fallback to memory cache — also must verify hash
     cached = _receipt_store.get(receipt_id)
     if cached is not None:
+        if not cached.get("receipt_sha256"):
+            raise HTTPException(
+                status_code=500,
+                detail={
+                    "code": "RECEIPT_INTEGRITY_MISSING_HASH",
+                    "message": "Cached receipt is missing receipt_sha256; cannot verify integrity",
+                    "receipt_id": receipt_id,
+                },
+            )
+        hash_ok, hash_err = verify_receipt_sha256(cached)
+        if not hash_ok:
+            _receipt_store.pop(receipt_id, None)  # evict corrupt cache
+            raise HTTPException(
+                status_code=500,
+                detail={
+                    "code": "RECEIPT_HASH_INVALID",
+                    "message": f"Cached receipt hash verification failed: {hash_err}",
+                    "receipt_id": receipt_id,
+                },
+            )
         if backend_error is None:
-            # Durable returned None (not found) but cache exists — return cache
             return await _build_receipt_envelope(cached, receipt_id, receipt_path)
-        # Backend errored but we have cache — return cache with warning
+        # Backend errored but we have verified cache — return cache with warning
         out = dict(cached)
         warnings = out.setdefault("warnings", [])
         if isinstance(warnings, list):

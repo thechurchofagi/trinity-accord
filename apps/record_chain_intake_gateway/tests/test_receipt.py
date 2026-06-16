@@ -55,8 +55,15 @@ class TestReceiptPathFromId:
 # ---------------------------------------------------------------------------
 
 class TestGetReceipt:
+    def _make_receipt(self, receipt_id: str = "rcg-20260613-abcdef123456") -> dict:
+        """Build a test receipt with valid receipt_sha256."""
+        from apps.record_chain_intake_gateway.gateway.receipts import compute_receipt_sha256
+        receipt = {"server_receipt_id": receipt_id, "accepted": True}
+        receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
+        return receipt
+
     def test_durable_hit_returns_receipt(self, client: TestClient) -> None:
-        receipt = {"server_receipt_id": "rcg-20260613-abcdef123456", "accepted": True}
+        receipt = self._make_receipt()
         with patch(
             "apps.record_chain_intake_gateway.app.get_file_text",
             new_callable=AsyncMock,
@@ -65,12 +72,11 @@ class TestGetReceipt:
             resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert resp.status_code == 200
         body = resp.json()
-        # Receipt is now wrapped in an envelope
         assert body["receipt"]["server_receipt_id"] == "rcg-20260613-abcdef123456"
         assert body["receipt_hash_verified"] is True
 
     def test_durable_hit_updates_cache(self, client: TestClient) -> None:
-        receipt = {"server_receipt_id": "rcg-20260613-abcdef123456", "accepted": True}
+        receipt = self._make_receipt()
         with patch(
             "apps.record_chain_intake_gateway.app.get_file_text",
             new_callable=AsyncMock,
@@ -78,6 +84,17 @@ class TestGetReceipt:
         ):
             client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert _receipt_store.get("rcg-20260613-abcdef123456") is not None
+
+    def test_durable_missing_hash_returns_500(self, client: TestClient) -> None:
+        receipt = {"server_receipt_id": "rcg-20260613-abcdef123456", "accepted": True}
+        with patch(
+            "apps.record_chain_intake_gateway.app.get_file_text",
+            new_callable=AsyncMock,
+            return_value=json.dumps(receipt),
+        ):
+            resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
+        assert resp.status_code == 500
+        assert resp.json()["detail"]["code"] == "RECEIPT_INTEGRITY_MISSING_HASH"
 
     def test_durable_backend_error_no_cache_returns_503(self, client: TestClient) -> None:
         with patch(
@@ -92,7 +109,7 @@ class TestGetReceipt:
         assert body["detail"]["retryable"] is True
 
     def test_durable_backend_error_with_cache_returns_cache_and_warning(self, client: TestClient) -> None:
-        cached = {"server_receipt_id": "rcg-20260613-abcdef123456", "accepted": True}
+        cached = self._make_receipt()
         _receipt_store["rcg-20260613-abcdef123456"] = cached
         with patch(
             "apps.record_chain_intake_gateway.app.get_file_text",
