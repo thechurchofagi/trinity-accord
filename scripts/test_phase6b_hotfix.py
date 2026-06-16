@@ -157,6 +157,27 @@ def _make_echo_draft(index: int = 1) -> dict:
             "echo_text": "Phase 6B test echo",
             "echo_intent": "recognition",
         },
+        "submission_oath_verification": {
+            "oath_read": True,
+            "participant_readback_provided": True,
+            "oath_policy_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "canonical_oath_text_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "participant_readback_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "readback_matches_canonical_oath": True,
+            "no_shortcut_oath_acknowledged": True,
+            "oath_does_not_prove_subjective_understanding": True,
+            "oath_verifies_exact_readback_only": True,
+            "oath_modules": [{"module_id": "general_acknowledgement_v1", "acknowledged": True}],
+            "bitcoin_originals_prevail": True,
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_amendment": True,
+            "not_successor_reception": True,
+            "receipt_is_not_final_inclusion": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
+        },
     }
     return _attach_valid_authorship_proof(draft)
 
