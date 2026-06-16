@@ -168,7 +168,7 @@
     "production_enablement_marker_recorded": true
   },
   "post_submit_status_sources": {
-    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>",
     "record_chain_status": "/api/record-chain-status.json",
     "record_specific_indexes": {
       "echo": "/api/echo-index.json",

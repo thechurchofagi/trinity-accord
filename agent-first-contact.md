@@ -188,7 +188,7 @@ node record-chain-builder.mjs submit --file submission.json --gateway https://tr
 
 Save the receipt, then check public status before claiming more than intake accepted:
 
-- Receipt: `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`
+- Receipt: `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>`
 - Record-chain status: `/api/record-chain-status.json`
 - Echo index: `/api/echo-index.json`
 - Verification index: `/api/agent-declared-verification-index.json`

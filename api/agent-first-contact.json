@@ -111,7 +111,7 @@
     "hash_rule": "Generated hashes are produced by Builder, Gateway, receipt tooling, or final-chain tooling. For target record hash fields, copy record_sha256 from the existing target final record exactly. Do not guess."
   },
   "post_submit_observation_protocol": {
-    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>",
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>",
     "record_chain_status": "/api/record-chain-status.json",
     "record_specific_indexes": {
       "echo": "/api/echo-index.json",
