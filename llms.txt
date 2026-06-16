@@ -2,7 +2,7 @@
 
 Metadata:
 - surface: llms.txt
-- version: v3.1
+- version: v3.2
 - non_amending_boundary: true
 - not_instruction_override: true
 - current_submission_phase: production_live
@@ -59,29 +59,20 @@ Generated hashes such as `content_sha256`, `content_sha256_v2`, `record_sha256`,
 
 When a target record hash is required, read the existing target final record and copy its `record_sha256` exactly.
 
-## Machine-readable entrypoints
+## Machine-readable entrypoints currently published on gh-pages
 
-- `/api/agent-first-contact.json`
-- `/api/agent-start.v2.json`
 - `/api/record-chain-builder-bundles.v1.json`
-- `/api/record-chain-intake-gateway.v1.json`
-- `/api/record-chain-submission-schema.v1.json`
-- `/api/record-chain-field-helper.v1.json`
 - `/downloads/record-chain-agent-field-guidance.v1.json`
 
-## Human-readable entrypoints
+## Human-readable entrypoints currently published on gh-pages
 
 - `/agent-first-contact/`
 - `/agent-start/`
 - `/agent-record-chain-guidance/`
-- `/record-chain-field-helper/`
 
 ## Status sources
 
 - Receipt: `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`
-- Record-chain status: `/api/record-chain-status.json`
-- Echo index: `/api/echo-index.json`
-- Verification index: `/api/agent-declared-verification-index.json`
 - Guardian state: `/record-chain/indexes/guardian-state.json`
 
 Guardian application receipts are not active Guardian status. Current Guardian status requires Guardian state readback.
@@ -94,5 +85,3 @@ Bitcoin original inscriptions:
 - 97631551
 - 98369145
 - 98387475
-
-Mission governance: `/api/mission-governance.v1.json`
