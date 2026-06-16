@@ -33,7 +33,7 @@ from apps.record_chain_intake_gateway.gateway.models import (
     SubmitResponse,
 )
 from apps.record_chain_intake_gateway.gateway.rate_limit import check_rate_limit
-from apps.record_chain_intake_gateway.gateway.receipts import make_legacy_receipt_id, make_receipt, make_receipt_id
+from apps.record_chain_intake_gateway.gateway.receipts import make_legacy_receipt_id, make_receipt, make_receipt_id, verify_receipt_sha256
 from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
 from apps.record_chain_intake_gateway.gateway.validation import (
     ALLOWED_RECORD_TYPES,
@@ -73,8 +73,13 @@ _GATEWAY_SCHEMA: dict[str, Any] = {
     "version": "1.1.0",
     "accepted_record_types": sorted(ALLOWED_RECORD_TYPES),
     "required_submission_fields": [
+        "schema",
+        "submission_type",
+        "client_generated_at",
         "record_type",
         "record_draft",
+        "builder",
+        "client_context",
         "submission_boundary",
         "authorship_proof",
     ],
@@ -557,6 +562,11 @@ async def _submit_response_from_idempotency_index(
     receipt_data: dict[str, Any] = json.loads(receipt_text)
     if not isinstance(receipt_data, dict):
         raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
+
+    # Verify receipt hash integrity
+    hash_ok, hash_err = verify_receipt_sha256(receipt_data)
+    if not hash_ok:
+        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
 
     receipt_id = (
         receipt_data.get("server_receipt_id")
@@ -1291,6 +1301,60 @@ def _receipt_path_from_id(receipt_id: str) -> str:
     return f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
 
 
+async def _read_receipt_final_status(receipt_id: str) -> dict[str, Any] | None:
+    """Read the final append/reject status sidecar for a receipt."""
+    path = f"record-chain/receipt-status/{receipt_id}.json"
+    text = await get_file_text(path)
+    if text is None:
+        return None
+    status = json.loads(text)
+    if status.get("receipt_id") != receipt_id:
+        logger.error("receipt-status receipt_id mismatch at %s", path)
+        return None
+    return status
+
+
+async def _build_receipt_envelope(
+    receipt: dict[str, Any],
+    receipt_id: str,
+    receipt_path: str,
+) -> dict[str, Any]:
+    """Build a receipt envelope with immutable receipt and final status."""
+    final_status_data = await _read_receipt_final_status(receipt_id)
+
+    if final_status_data:
+        append_status = final_status_data.get("append_status", "unknown")
+        final_record_id = final_status_data.get("final_record_id")
+        final_record_sha256 = final_status_data.get("final_record_sha256")
+        rejection_path = final_status_data.get("rejection_path")
+        rejection_code = final_status_data.get("rejection_code")
+        updated_at = final_status_data.get("updated_at")
+    else:
+        # No sidecar exists — check if receipt has pending file path
+        pending_path = receipt.get("pending_file_path")
+        append_status = "pending" if pending_path else "unknown"
+        final_record_id = None
+        final_record_sha256 = None
+        rejection_path = None
+        rejection_code = None
+        updated_at = None
+
+    return {
+        "receipt": receipt,
+        "receipt_id": receipt_id,
+        "receipt_path": receipt_path,
+        "receipt_hash_verified": True,
+        "final_status": {
+            "append_status": append_status,
+            "final_record_id": final_record_id,
+            "final_record_sha256": final_record_sha256,
+            "rejection_path": rejection_path,
+            "rejection_code": rejection_code,
+            "updated_at": updated_at,
+        },
+    }
+
+
 @app.get("/record-chain/receipt/{receipt_id}")
 async def get_receipt(receipt_id: str) -> dict[str, Any]:
     """Retrieve a receipt by ID.
@@ -1306,8 +1370,21 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
         text = await get_file_text(receipt_path)
         if text is not None:
             receipt = json.loads(text)
+            # Verify receipt hash integrity before returning
+            hash_ok, hash_err = verify_receipt_sha256(receipt)
+            if not hash_ok:
+                logger.error("Durable receipt hash invalid for %s at %s: %s", receipt_id, receipt_path, hash_err)
+                raise HTTPException(
+                    status_code=500,
+                    detail={
+                        "code": "RECEIPT_HASH_INVALID",
+                        "message": f"Receipt hash verification failed: {hash_err}",
+                        "receipt_id": receipt_id,
+                        "receipt_path": receipt_path,
+                    },
+                )
             _receipt_store[receipt_id] = receipt  # update cache
-            return receipt
+            return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
     except Exception as exc:
         backend_error = exc
         logger.warning("Durable receipt lookup failed for %s at %s: %s", receipt_id, receipt_path, exc)
@@ -1317,7 +1394,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
     if cached is not None:
         if backend_error is None:
             # Durable returned None (not found) but cache exists — return cache
-            return cached
+            return await _build_receipt_envelope(cached, receipt_id, receipt_path)
         # Backend errored but we have cache — return cache with warning
         out = dict(cached)
         warnings = out.setdefault("warnings", [])
@@ -1327,7 +1404,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                 "receipt_path": receipt_path,
                 "retryable": True,
             })
-        return out
+        return await _build_receipt_envelope(out, receipt_id, receipt_path)
 
     # No cache, no durable — determine error type
     if backend_error is not None:

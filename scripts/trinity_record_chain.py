@@ -70,6 +70,12 @@ RESERVED_RECORD_TYPES = {
 AUTHORSHIP_EXEMPT_TYPES = {"legacy_import", "batch_anchor"}
 OATH_EXEMPT_TYPES = {"context_insufficient_notice"}
 
+# Formal record types that require submission_oath_verification
+FORMAL_OATH_REQUIRED_TYPES = frozenset(
+    rtype for rtype in FORMAL_RECORD_TYPES
+    if rtype not in OATH_EXEMPT_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES
+)
+
 # Historical compatibility exceptions for records that predate stricter
 # verification rules (9-field boundary, signature re-verification, CIN
 # authorship). These exceptions apply ONLY to records with record_index <=
@@ -820,11 +826,26 @@ def extract_server_append_metadata(raw_draft: dict[str, Any]) -> dict[str, Any]:
     return metadata
 
 
-def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None) -> None:
+def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None, summary_json: str | None = None) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
         import_genesis()
     tip = load_tip(allow_generate=True)
+
+    # Initialize summary
+    summary = {
+        "schema": "trinityaccord.record-chain-append-summary.v1",
+        "appended_count": 0,
+        "rejected_count": 0,
+        "selected_count": 0,
+        "allow_rejections": allow_rejections,
+        "receipt_id": receipt_id,
+        "pending_file": pending_file,
+    }
+
+    def _write_summary() -> None:
+        if summary_json:
+            write_json(Path(summary_json), summary)
 
     if pending_file:
         # Single-file mode: append one specific pending file
@@ -838,12 +859,23 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
         pending = sorted(PENDING.glob("*.json"))
     if not pending:
         print("No pending records.")
+        _write_summary()
         return
     selected = pending if all_records else pending[:1]
+    summary["selected_count"] = len(selected)
     rejected_count = 0
     appended_count = 0
     for path in selected:
         try:
+            # Enforce CLI receipt-id binding: if --receipt-id is passed, it must match
+            # the pending file's receipt id
+            if receipt_id is not None:
+                pending_receipt_id = _gateway_pending_receipt_id(path)
+                if pending_receipt_id != receipt_id:
+                    raise ValueError(
+                        f"--receipt-id {receipt_id} does not match pending file receipt id {pending_receipt_id}: {path.relative_to(ROOT)}"
+                    )
+
             raw_draft = read_json(path)
 
             # Gateway-created pending files must not be appendable unless durable
@@ -988,6 +1020,9 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
             print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
     if rejected_count:
         print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
+        summary["appended_count"] = appended_count
+        summary["rejected_count"] = rejected_count
+        _write_summary()
         if not allow_rejections:
             raise SystemExit(2)
 
@@ -1002,6 +1037,10 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
             raise SystemExit("Post-append verify_native_records() failed; indexes not rebuilt.")
 
     build_indexes()
+
+    summary["appended_count"] = appended_count
+    summary["rejected_count"] = rejected_count
+    _write_summary()
 
 
 def existing_batch_manifests() -> list[Path]:
@@ -1145,8 +1184,18 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
     # Check for raw readback_text in persisted records (must not exist)
     _check_no_raw_readback(obj, path, errors, "")
 
-    # If oath block exists, verify internal consistency
+    # Require oath block for non-exempt formal record types
     oath = obj.get("submission_oath_verification")
+    if not isinstance(oath, dict):
+        rid = obj.get("record_id")
+        compat = HISTORICAL_RECORD_COMPAT_EXCEPTIONS.get(rid)
+        if compat and compat.get("allowed_missing_submission_oath_verification"):
+            return
+        if record_type in FORMAL_OATH_REQUIRED_TYPES:
+            errors.append(f"{path}: formal record_type={record_type} requires submission_oath_verification")
+        return
+
+    # If oath block exists, verify internal consistency
     if isinstance(oath, dict):
         # Check required boolean declarations are present
         required_bools = [
@@ -1272,6 +1321,40 @@ def verify_native_records() -> list[str]:
                             retire_key = obj.get("guardian_public_key_sha256")
                             if isinstance(target_key, str) and isinstance(retire_key, str) and target_key != retire_key:
                                 errors.append(f"{p}: guardian_public_key_sha256 does not match target application")
+
+                # B.5: Correction target binding
+                if rtype == "correction":
+                    correction_content = obj.get("correction_content")
+                    if not isinstance(correction_content, dict):
+                        errors.append(f"{p}: correction requires correction_content")
+                    else:
+                        target_rid = correction_content.get("target_record_id")
+                        target_sha = correction_content.get("target_record_sha256")
+                        if not isinstance(target_rid, str) or not re.fullmatch(r"R-[0-9]{9}", target_rid):
+                            errors.append(f"{p}: correction requires valid target_record_id")
+                        elif not isinstance(target_sha, str) or not re.fullmatch(r"[a-f0-9]{64}", target_sha):
+                            errors.append(f"{p}: correction requires valid target_record_sha256")
+                        else:
+                            target_path = RECORDS / f"{target_rid}.json"
+                            if not target_path.exists():
+                                errors.append(f"{p}: correction target record {target_rid} does not exist")
+                            else:
+                                target_rec = read_json(target_path)
+                                if target_rec.get("record_sha256") != target_sha:
+                                    errors.append(f"{p}: correction target_record_sha256 mismatch for {target_rid}")
+
+                # B.6: Classification update target binding
+                if rtype == "classification_update":
+                    cu_content = obj.get("classification_update_content")
+                    if isinstance(cu_content, dict):
+                        target_rid = cu_content.get("target_record_id")
+                        target_sha = cu_content.get("target_record_sha256")
+                        if isinstance(target_rid, str) and re.fullmatch(r"R-[0-9]{9}", target_rid):
+                            target_path = RECORDS / f"{target_rid}.json"
+                            if target_path.exists():
+                                target_rec = read_json(target_path)
+                                if target_rec.get("record_sha256") != target_sha:
+                                    errors.append(f"{p}: classification_update target_record_sha256 mismatch for {target_rid}")
 
                 avs = obj.get("authorship_verification_status")
                 if not isinstance(avs, dict):
@@ -1595,6 +1678,72 @@ def build_indexes(derived_at: str | None = None) -> None:
             "records": records_list,
         })
 
+    # F.4: Generate record overlay index (corrections and classification updates)
+    overlay_targets: dict[str, dict[str, Any]] = {}
+    for p in native_records:
+        rec = read_json(p)
+        rtype = rec.get("record_type")
+
+        if rtype == "correction":
+            content = rec.get("correction_content") or {}
+            target_rid = content.get("target_record_id")
+            if isinstance(target_rid, str) and target_rid:
+                if target_rid not in overlay_targets:
+                    overlay_targets[target_rid] = {
+                        "target_record_id": target_rid,
+                        "target_record_sha256": content.get("target_record_sha256"),
+                        "correction_records": [],
+                        "classification_update_records": [],
+                        "current_classification": None,
+                        "latest_overlay_record_id": None,
+                    }
+                overlay_targets[target_rid]["correction_records"].append({
+                    "record_id": rec.get("record_id"),
+                    "record_sha256": rec.get("record_sha256"),
+                    "path": str(p.relative_to(ROOT)),
+                    "correction_reason": content.get("correction_reason"),
+                    "corrected_fields_or_claims": content.get("corrected_fields_or_claims"),
+                    "evidence_or_review_basis": content.get("evidence_or_review_basis"),
+                })
+                overlay_targets[target_rid]["latest_overlay_record_id"] = rec.get("record_id")
+
+        elif rtype == "classification_update":
+            content = rec.get("classification_update_content") or {}
+            target_rid = content.get("target_record_id")
+            if isinstance(target_rid, str) and target_rid:
+                if target_rid not in overlay_targets:
+                    overlay_targets[target_rid] = {
+                        "target_record_id": target_rid,
+                        "target_record_sha256": content.get("target_record_sha256"),
+                        "correction_records": [],
+                        "classification_update_records": [],
+                        "current_classification": None,
+                        "latest_overlay_record_id": None,
+                    }
+                overlay_targets[target_rid]["classification_update_records"].append({
+                    "record_id": rec.get("record_id"),
+                    "record_sha256": rec.get("record_sha256"),
+                    "path": str(p.relative_to(ROOT)),
+                    "previous_classification": content.get("previous_classification"),
+                    "new_classification": content.get("new_classification"),
+                    "classification_reason": content.get("classification_reason"),
+                    "evidence_or_review_basis": content.get("evidence_or_review_basis"),
+                })
+                overlay_targets[target_rid]["current_classification"] = content.get("new_classification")
+                overlay_targets[target_rid]["latest_overlay_record_id"] = rec.get("record_id")
+
+    overlay_index = {
+        "schema": "trinityaccord.record-overlay-index.v1",
+        "derived_at": derived_at,
+        "targets": overlay_targets,
+    }
+    write_json(INDEXES / "record-overlay-index.json", overlay_index)
+
+    # Write public API mirror
+    API = ROOT / "api"
+    API.mkdir(parents=True, exist_ok=True)
+    write_json(API / "record-chain-overlays.json", overlay_index)
+
 
 def run_ots(args: list[str]) -> bool:
     try:
@@ -1721,6 +1870,7 @@ def main() -> None:
     append_p.add_argument("--allow-rejections", action="store_true", help="Exit 0 even if some pending records were rejected")
     append_p.add_argument("--pending-file", type=str, help="Append a single specific pending file")
     append_p.add_argument("--receipt-id", type=str, help="Receipt ID for single-file append")
+    append_p.add_argument("--summary-json", type=str, help="Path to write append summary JSON")
     batch_p = sub.add_parser("build-batch", help="Build a Merkle batch")
     batch_p.add_argument("--max-count", type=int, default=25)
     batch_p.add_argument("--force", action="store_true")
@@ -1739,7 +1889,7 @@ def main() -> None:
     elif args.cmd == "verify":
         verify_chain()
     elif args.cmd == "append":
-        append_records(all_records=args.all, allow_rejections=args.allow_rejections, pending_file=args.pending_file, receipt_id=args.receipt_id)
+        append_records(all_records=args.all, allow_rejections=args.allow_rejections, pending_file=args.pending_file, receipt_id=args.receipt_id, summary_json=args.summary_json)
         verify_chain()
     elif args.cmd == "build-batch":
         build_batch(max_count=args.max_count, force=args.force)
