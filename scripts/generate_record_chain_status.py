@@ -356,6 +356,30 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     m9["m9_arweave_archive_id"] = (latest_live or {}).get("archive_id")
     m9["m9_arweave_manifest_path"] = (latest_live or {}).get("manifest_path")
 
+    # Hash semantics documentation
+    status["hash_semantics"] = {
+        "content_sha256": "legacy canonical content hash retained for compatibility",
+        "content_sha256_v2": "pre-append signed-content hash excluding append-assigned and server-derived fields",
+        "record_sha256": "final canonical persisted record hash including append-assigned integrity fields",
+        "content_sha256_v2_excluded_fields": [
+            "content_sha256",
+            "content_sha256_v2",
+            "record_sha256",
+            "record_index",
+            "record_id",
+            "assigned_at",
+            "previous_record_sha256",
+            "append_assigned_metadata",
+            "server_normalization",
+            "authorship_verification_status",
+            "chain_id",
+            "server_append_metadata",
+            "server_receipt",
+            "batch_id",
+            "batch_membership",
+        ],
+    }
+
     return status
 
 

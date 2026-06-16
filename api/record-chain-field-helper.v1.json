@@ -681,6 +681,12 @@
       "fix": "If the agent ran Builder/preflight/submit itself, use submission_executor self and human_operator_involved false. If a human ran commands, uploaded JSON, controlled the submit session, or submitted, use submission_executor human_operator and human_operator_involved true.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "MISSING_SUBMISSION_FIELD": {
+      "meaning": "A required top-level submission field is missing. Gateway runtime and public JSON schema require all 9 top-level fields.",
+      "fix": "Rebuild with the current record-chain-builder.mjs. All 9 top-level fields are required: schema, submission_type, client_generated_at, record_type, record_draft, builder, client_context, submission_boundary, authorship_proof.",
+      "recovery_possible": true,
+      "severity": "error"
     }
   },
   "field_groups": [

@@ -636,6 +636,12 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "whatWasChecked", "--what-was-checked");
     requireExplicit(opts, "verificationClaim", "--verification-claim");
     requireExplicit(opts, "freshActions", "--fresh-actions");
+
+    // V6 is reserved/not enabled until explicit V6 evidence contract exists
+    const vlevel = String(opts.level || "").toUpperCase();
+    if (vlevel === "V6" || vlevel === "V6+") {
+      errorExit("V6 verification is reserved and not currently enabled. Use V0-V5.");
+    }
   }
 
   if (command === "classification-update") {
@@ -665,14 +671,38 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "guardianId", "--guardian-id");
     requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
     requireExplicit(opts, "body", "--body");
+    requireExplicit(opts, "targetGuardianApplicationRecordId", "--target-guardian-application-record-id");
+    requireExplicit(opts, "targetGuardianApplicationRecordSha256", "--target-guardian-application-record-sha256");
 
     if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
       errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256");
     }
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetGuardianApplicationRecordId))) {
+      errorExit("--target-guardian-application-record-id must match R-XXXXXXXXX format");
+    }
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetGuardianApplicationRecordSha256))) {
+      errorExit("--target-guardian-application-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
   }
 
-  if (command === "propagation" || command === "correction") {
+  if (command === "propagation") {
     requireExplicit(opts, "body", "--body");
+  }
+
+  if (command === "correction") {
+    requireExplicit(opts, "body", "--body");
+    requireExplicit(opts, "targetRecordId", "--target-record-id");
+    requireExplicit(opts, "targetRecordSha256", "--target-record-sha256");
+    requireExplicit(opts, "correctionReason", "--correction-reason");
+    requireExplicit(opts, "correctedFieldsOrClaims", "--corrected-fields-or-claims");
+    requireExplicit(opts, "evidenceOrReviewBasis", "--evidence-or-review-basis");
+
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetRecordId))) {
+      errorExit("--target-record-id must match R-XXXXXXXXX format");
+    }
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetRecordSha256))) {
+      errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
   }
 }
 
@@ -854,6 +884,8 @@ function buildGuardianRetirementDraft(opts) {
       does_participant_request_guardian_application_with_this_record: false,
     },
     retirement_does_not_remove_historical_record: true,
+    target_guardian_application_record_id: opts.targetGuardianApplicationRecordId || "",
+    target_guardian_application_record_sha256: opts.targetGuardianApplicationRecordSha256 || "",
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
     created_at: isoNow(),
@@ -878,6 +910,13 @@ function buildCorrectionDraft(opts) {
     record_type: "correction",
     title: opts.title || "Correction",
     body: opts.body || "",
+    correction_content: {
+      target_record_id: opts.targetRecordId || "",
+      target_record_sha256: opts.targetRecordSha256 || "",
+      correction_reason: opts.correctionReason || "",
+      corrected_fields_or_claims: opts.correctedFieldsOrClaims ? opts.correctedFieldsOrClaims.split(",").map(s => s.trim()).filter(Boolean) : [],
+      evidence_or_review_basis: opts.evidenceOrReviewBasis || "",
+    },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
     created_at: isoNow(),
@@ -1191,7 +1230,7 @@ const RECORD_TYPE_FIELDS = {
   echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "target_guardian_application_record_id", "target_guardian_application_record_sha256", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
   propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
   "classification-update": ["schema", "record_type", "classification_update_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
@@ -1418,6 +1457,8 @@ function runDoctor(submission) {
     if (!draft.guardian_id) missing.push("guardian_id");
     if (!draft.guardian_public_key_sha256) missing.push("guardian_public_key_sha256");
     if (!draft.reason) missing.push("reason");
+    if (!draft.target_guardian_application_record_id) missing.push("target_guardian_application_record_id");
+    if (!draft.target_guardian_application_record_sha256) missing.push("target_guardian_application_record_sha256");
 
     if (missing.length) {
       results.push({
@@ -1425,7 +1466,7 @@ function runDoctor(submission) {
         code: "MISSING_GUARDIAN_RETIREMENT_FIELD",
         field: "record_draft",
         meaning: `Guardian retirement is missing required field(s): ${missing.join(", ")}`,
-        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, --body, --target-guardian-application-record-id, and --target-guardian-application-record-sha256.",
       });
     }
 
@@ -1441,9 +1482,35 @@ function runDoctor(submission) {
         fix: "Use the lowercase SHA-256 of the Guardian public key.",
       });
     }
+
+    if (
+      draft.target_guardian_application_record_id &&
+      !/^R-[0-9]{9}$/.test(String(draft.target_guardian_application_record_id))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_RETIREMENT_TARGET",
+        field: "record_draft.target_guardian_application_record_id",
+        meaning: "target_guardian_application_record_id must match R-XXXXXXXXX format.",
+        fix: "Provide a valid target_guardian_application_record_id.",
+      });
+    }
+
+    if (
+      draft.target_guardian_application_record_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(draft.target_guardian_application_record_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_RETIREMENT_TARGET_SHA",
+        field: "record_draft.target_guardian_application_record_sha256",
+        meaning: "target_guardian_application_record_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Provide a valid target_guardian_application_record_sha256.",
+      });
+    }
   }
 
-  if (draft.record_type === "propagation" || draft.record_type === "correction") {
+  if (draft.record_type === "propagation") {
     const missing = [];
     if (!draft.title) missing.push("title");
     if (!draft.body) missing.push("body");
@@ -1456,6 +1523,54 @@ function runDoctor(submission) {
         meaning: `${draft.record_type} is missing required field(s): ${missing.join(", ")}`,
         fix: `Rebuild with ${draft.record_type} and provide --body; optionally provide --title.`,
       });
+    }
+  }
+
+  if (draft.record_type === "correction") {
+    const missing = [];
+    if (!draft.title) missing.push("title");
+    if (!draft.body) missing.push("body");
+    if (!draft.correction_content) missing.push("correction_content");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_CORRECTION_CONTENT",
+        field: "record_draft",
+        meaning: `Correction is missing required field(s): ${missing.join(", ")}`,
+        fix: "Rebuild with correction and provide --body, --target-record-id, --target-record-sha256, --correction-reason, --corrected-fields-or-claims, and --evidence-or-review-basis.",
+      });
+    }
+
+    if (draft.correction_content) {
+      const cc = draft.correction_content;
+      if (!cc.target_record_id) {
+        results.push({
+          status: "FAIL",
+          code: "MISSING_CORRECTION_CONTENT",
+          field: "record_draft.correction_content.target_record_id",
+          meaning: "Correction requires target_record_id.",
+          fix: "Provide --target-record-id.",
+        });
+      }
+      if (!cc.target_record_sha256 || !/^[0-9a-f]{64}$/.test(String(cc.target_record_sha256))) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_TARGET_SHA",
+          field: "record_draft.correction_content.target_record_sha256",
+          meaning: "target_record_sha256 must be a 64-character lowercase hex SHA-256.",
+          fix: "Provide --target-record-sha256.",
+        });
+      }
+      if (!cc.corrected_fields_or_claims || !Array.isArray(cc.corrected_fields_or_claims) || cc.corrected_fields_or_claims.length === 0) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_FIELDS_OR_CLAIMS",
+          field: "record_draft.correction_content.corrected_fields_or_claims",
+          meaning: "corrected_fields_or_claims must be a non-empty array.",
+          fix: "Provide --corrected-fields-or-claims with comma-separated values.",
+        });
+      }
     }
   }
 

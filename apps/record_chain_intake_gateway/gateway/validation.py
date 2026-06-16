@@ -897,19 +897,60 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
                 or not isinstance(required["fresh_actions_performed"], list) or not required["fresh_actions_performed"]
             ):
                 missing("MISSING_VERIFICATION_CONTENT", "draft.verification_content", "Verification records require explicit level, checked items, claim, and fresh actions")
+
+            # V6 is reserved/not enabled until explicit V6 evidence contract exists
+            vlevel = str(content.get("verification_level", "")).strip().upper()
+            if vlevel in ("V6", "V6+"):
+                missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "V6 verification is reserved and not currently enabled")
     elif record_type == "guardian_application":
         content = draft.get("guardian_application_content")
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
             missing("MISSING_GUARDIAN_APPLICATION_CONTENT", "draft.guardian_application_content", "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath")
     elif record_type == "guardian_retirement":
         payload = draft.get("payload") if isinstance(draft.get("payload"), dict) else {}
-        for field in ("guardian_id", "guardian_public_key_sha256", "reason"):
+        for field in ("guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record"):
             if not (draft.get(field) or payload.get(field)):
                 missing("MISSING_GUARDIAN_RETIREMENT_FIELD", f"draft.{field}", f"Guardian retirement requires {field}")
-    elif record_type in {"propagation", "correction"}:
+        # Target binding: require target_guardian_application_record_id and target_guardian_application_record_sha256
+        target_id = draft.get("target_guardian_application_record_id") or payload.get("target_guardian_application_record_id")
+        target_sha = draft.get("target_guardian_application_record_sha256") or payload.get("target_guardian_application_record_sha256")
+        if not target_id:
+            missing("MISSING_GUARDIAN_RETIREMENT_TARGET", "draft.target_guardian_application_record_id", "Guardian retirement requires target_guardian_application_record_id")
+        if not target_sha:
+            missing("MISSING_GUARDIAN_RETIREMENT_TARGET_SHA", "draft.target_guardian_application_record_sha256", "Guardian retirement requires target_guardian_application_record_sha256")
+        elif not re.fullmatch(r"[a-f0-9]{64}", str(target_sha)):
+            missing("INVALID_GUARDIAN_RETIREMENT_TARGET_SHA", "draft.target_guardian_application_record_sha256", "target_guardian_application_record_sha256 must be 64 lowercase hex chars")
+    elif record_type == "propagation":
         for field in ("title", "body"):
             if not draft.get(field):
                 missing("MISSING_RECORD_CONTENT", f"draft.{field}", f"{record_type} requires {field}")
+    elif record_type == "correction":
+        for field in ("title", "body"):
+            if not draft.get(field):
+                missing("MISSING_RECORD_CONTENT", f"draft.{field}", f"{record_type} requires {field}")
+        # Correction content with target binding
+        content = draft.get("correction_content")
+        if not isinstance(content, dict):
+            missing("MISSING_CORRECTION_CONTENT", "draft.correction_content", "Correction records require correction_content")
+        else:
+            required_fields = {
+                "target_record_id": content.get("target_record_id"),
+                "target_record_sha256": content.get("target_record_sha256"),
+                "correction_reason": content.get("correction_reason"),
+                "corrected_fields_or_claims": content.get("corrected_fields_or_claims"),
+                "evidence_or_review_basis": content.get("evidence_or_review_basis"),
+            }
+            for field_name, value in required_fields.items():
+                if field_name == "corrected_fields_or_claims":
+                    if not isinstance(value, list) or len(value) == 0:
+                        missing("INVALID_CORRECTION_FIELDS_OR_CLAIMS", f"draft.correction_content.{field_name}", "corrected_fields_or_claims must be a non-empty array")
+                    continue
+                if not isinstance(value, str) or not value.strip():
+                    missing("MISSING_CORRECTION_CONTENT", f"draft.correction_content.{field_name}", f"Correction requires non-empty {field_name}")
+
+            target_sha = content.get("target_record_sha256")
+            if isinstance(target_sha, str) and not re.fullmatch(r"[a-f0-9]{64}", target_sha):
+                missing("INVALID_CORRECTION_TARGET_SHA", "draft.correction_content.target_record_sha256", "target_record_sha256 must be 64 lowercase hex chars")
     elif record_type == "classification_update":
         content = draft.get("classification_update_content")
         if not isinstance(content, dict):
@@ -1332,6 +1373,31 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
             meaning="The top-level submission must be a JSON object.",
             suggested_fix="Wrap your submission in a JSON object.",
         )]
+
+    # --- required top-level field checks ---
+    REQUIRED_SUBMISSION_TOP_LEVEL_FIELDS: frozenset[str] = frozenset({
+        "schema",
+        "submission_type",
+        "client_generated_at",
+        "record_type",
+        "record_draft",
+        "builder",
+        "client_context",
+        "submission_boundary",
+        "authorship_proof",
+    })
+
+    for field in sorted(REQUIRED_SUBMISSION_TOP_LEVEL_FIELDS):
+        if field not in submission:
+            diagnostics.append(_make_diagnostic(
+                code="MISSING_SUBMISSION_FIELD",
+                severity="error",
+                field=field,
+                message=f"Missing required top-level submission field {field!r}",
+                meaning="Gateway runtime and public JSON schema require this top-level field.",
+                suggested_fix="Rebuild with the current record-chain-builder.mjs.",
+                retry_allowed=True,
+            ))
 
     # --- Part A: sentinel-safe record_draft extraction ---
     draft_raw = record_draft_value(submission)

@@ -476,10 +476,23 @@ def build_archive_manifest(mode: str) -> None:
         raise SystemExit(1)
 
 
+def _is_verified_live_archive_entry(entry: dict[str, Any]) -> bool:
+    """Check if an archive entry qualifies as a strict verified live archive."""
+    return (
+        bool(entry.get("arweave_txid"))
+        and entry.get("source_type") == "native-record-chain"
+        and entry.get("mode") == "live"
+        and entry.get("archive_status") == "archived"
+        and entry.get("verified") is True
+        and entry.get("hash_match") is True
+    )
+
+
 def update_arweave_index() -> None:
     archives = sorted(ARCHIVES.glob("*/manifest.json"))
     archive_entries = []
-    live_count = 0
+    live_attempt_count = 0
+    verified_live_count = 0
     latest_txid = None
     wallet_address_sha256 = None
 
@@ -491,14 +504,13 @@ def update_arweave_index() -> None:
         is_live = arweave.get("upload_mode") == "live" and txid is not None
 
         if is_live:
-            live_count += 1
-            latest_txid = txid
+            live_attempt_count += 1
             if arweave.get("wallet_address_sha256"):
                 wallet_address_sha256 = arweave["wallet_address_sha256"]
 
         source = mf.get("source", {})
         native_chain = source.get("native_chain", {})
-        archive_entries.append({
+        entry = {
             "archive_id": mf.get("archive_id"),
             "mode": mf.get("mode"),
             "manifest_path": str(mf_path.relative_to(ROOT)),
@@ -514,11 +526,27 @@ def update_arweave_index() -> None:
             "native_record_count": native_chain.get("native_record_count"),
             "native_ots_latest": source.get("native_ots_latest"),
             "created_at": mf.get("created_at"),
-        })
+            # Verification fields from arweave block
+            "archive_status": arweave.get("archive_status"),
+            "verified": arweave.get("verified") is True,
+            "hash_match": arweave.get("hash_match") is True,
+            "readback_sha256": arweave.get("readback_sha256"),
+            "wallet_address_sha256": arweave.get("wallet_address_sha256"),
+            "uploaded_at": arweave.get("uploaded_at"),
+            "last_attempt_at": arweave.get("last_attempt_at"),
+            "last_error": arweave.get("last_error"),
+            "next_action": arweave.get("next_action"),
+        }
+        archive_entries.append(entry)
+
+        # Count verified live archives for strict current gate
+        if _is_verified_live_archive_entry(entry):
+            verified_live_count += 1
+            latest_txid = txid
 
     current_mode = "dry-run"
     live_upload_implemented = True
-    if live_count > 0:
+    if verified_live_count > 0:
         current_mode = "live"
 
     index = {
@@ -530,7 +558,9 @@ def update_arweave_index() -> None:
         "live_upload_implemented": live_upload_implemented,
         "arweave_wallet_address_sha256": wallet_address_sha256,
         "latest_arweave_txid": latest_txid,
-        "live_archive_count": live_count,
+        "live_archive_count": verified_live_count,
+        "verified_live_archive_count": verified_live_count,
+        "live_upload_attempt_count": live_attempt_count,
         "archives": archive_entries,
         "boundary": {
             "arweave_archive_is_mirror_only": True,

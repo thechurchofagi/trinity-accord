@@ -64,7 +64,10 @@ class TestGetReceipt:
         ):
             resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert resp.status_code == 200
-        assert resp.json()["server_receipt_id"] == "rcg-20260613-abcdef123456"
+        body = resp.json()
+        # Receipt is now wrapped in an envelope
+        assert body["receipt"]["server_receipt_id"] == "rcg-20260613-abcdef123456"
+        assert body["receipt_hash_verified"] is True
 
     def test_durable_hit_updates_cache(self, client: TestClient) -> None:
         receipt = {"server_receipt_id": "rcg-20260613-abcdef123456", "accepted": True}
@@ -99,10 +102,10 @@ class TestGetReceipt:
             resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert resp.status_code == 200
         body = resp.json()
-        assert body["server_receipt_id"] == "rcg-20260613-abcdef123456"
+        assert body["receipt"]["server_receipt_id"] == "rcg-20260613-abcdef123456"
         assert any(
             w.get("code") == "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE"
-            for w in body.get("warnings", [])
+            for w in body["receipt"].get("warnings", [])
         )
 
     def test_durable_none_no_cache_returns_404(self, client: TestClient) -> None:
