@@ -847,200 +847,200 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
         if summary_json:
             write_json(Path(summary_json), summary)
 
-    if pending_file:
-        # Single-file mode: append one specific pending file
-        p = Path(pending_file)
-        if not p.is_absolute():
-            p = ROOT / p
-        if not p.exists():
-            raise SystemExit(f"pending file not found: {p}")
-        pending = [p]
-    else:
-        pending = sorted(PENDING.glob("*.json"))
-    if not pending:
-        print("No pending records.")
-        _write_summary()
-        return
-    selected = pending if all_records else pending[:1]
-    summary["selected_count"] = len(selected)
-    rejected_count = 0
-    appended_count = 0
-    for path in selected:
-        try:
-            # Enforce CLI receipt-id binding: if --receipt-id is passed, it must match
-            # the pending file's receipt id
-            if receipt_id is not None:
-                pending_receipt_id = _gateway_pending_receipt_id(path)
-                if pending_receipt_id != receipt_id:
-                    raise ValueError(
-                        f"--receipt-id {receipt_id} does not match pending file receipt id {pending_receipt_id}: {path.relative_to(ROOT)}"
-                    )
+    try:
+        if pending_file:
+            # Single-file mode: append one specific pending file
+            p = Path(pending_file)
+            if not p.is_absolute():
+                p = ROOT / p
+            if not p.exists():
+                raise SystemExit(f"pending file not found: {p}")
+            pending = [p]
+        else:
+            pending = sorted(PENDING.glob("*.json"))
+        if not pending:
+            print("No pending records.")
+            return
+        selected = pending if all_records else pending[:1]
+        summary["selected_count"] = len(selected)
+        rejected_count = 0
+        appended_count = 0
+        for path in selected:
+            try:
+                # Enforce CLI receipt-id binding: if --receipt-id is passed, it must match
+                # the pending file's receipt id
+                if receipt_id is not None:
+                    pending_receipt_id = _gateway_pending_receipt_id(path)
+                    if pending_receipt_id != receipt_id:
+                        raise ValueError(
+                            f"--receipt-id {receipt_id} does not match pending file receipt id {pending_receipt_id}: {path.relative_to(ROOT)}"
+                        )
 
-            raw_draft = read_json(path)
+                raw_draft = read_json(path)
 
-            # Gateway-created pending files must not be appendable unless durable
-            # submission, receipt, and idempotency state already exist and bind to them.
-            # Non-canonical pending files are rejected unless explicitly allowed.
-            require_pending_file_is_appendable(path)
-            require_not_reserved_record_type(raw_draft)
+                # Gateway-created pending files must not be appendable unless durable
+                # submission, receipt, and idempotency state already exist and bind to them.
+                # Non-canonical pending files are rejected unless explicitly allowed.
+                require_pending_file_is_appendable(path)
+                require_not_reserved_record_type(raw_draft)
 
-            # Extract unsigned server append metadata before stripping unsigned projection fields.
-            server_append_metadata = extract_server_append_metadata(raw_draft)
+                # Extract unsigned server append metadata before stripping unsigned projection fields.
+                server_append_metadata = extract_server_append_metadata(raw_draft)
 
-            # Verify authorship proof on the signed-scope pending draft before normalization
-            # modifies it. Then append the same sanitized object that was verified.
-            signed_scope_draft = sanitize_pending_record_for_append(raw_draft)
-            require_not_reserved_record_type(signed_scope_draft)
-            verify_pending_record_authorship(signed_scope_draft)
-            draft = normalize_record_draft(signed_scope_draft)
+                # Verify authorship proof on the signed-scope pending draft before normalization
+                # modifies it. Then append the same sanitized object that was verified.
+                signed_scope_draft = sanitize_pending_record_for_append(raw_draft)
+                require_not_reserved_record_type(signed_scope_draft)
+                verify_pending_record_authorship(signed_scope_draft)
+                draft = normalize_record_draft(signed_scope_draft)
 
-            if server_append_metadata:
-                draft.setdefault("server_normalization", {})
-                draft["server_normalization"]["server_append_metadata"] = server_append_metadata
+                if server_append_metadata:
+                    draft.setdefault("server_normalization", {})
+                    draft["server_normalization"]["server_append_metadata"] = server_append_metadata
 
-            # --- Phase 6B: authorship_verification_status ---
-            # Record the scope of the authorship proof relative to the final
-            # appended record.  The builder signs the *draft* before gateway
-            # append-assigned fields exist; the final record hash is the
-            # server append hash, not the signed payload hash.
-            rtype = draft.get("record_type", "")
-            if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
-                existing_status = draft.get("authorship_verification_status")
-                if not isinstance(existing_status, dict):
-                    existing_status = {}
-                draft["authorship_verification_status"] = {
-                    "signed_payload_scope": "pre_append_record_draft",
-                    "verified_by_gateway_before_pending": existing_status.get("verified_by_gateway_before_pending") is True,
-                    "verified_by_append_before_record": True,
-                    "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
+                # --- Phase 6B: authorship_verification_status ---
+                # Record the scope of the authorship proof relative to the final
+                # appended record.  The builder signs the *draft* before gateway
+                # append-assigned fields exist; the final record hash is the
+                # server append hash, not the signed payload hash.
+                rtype = draft.get("record_type", "")
+                if rtype in FORMAL_RECORD_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES:
+                    existing_status = draft.get("authorship_verification_status")
+                    if not isinstance(existing_status, dict):
+                        existing_status = {}
+                    draft["authorship_verification_status"] = {
+                        "signed_payload_scope": "pre_append_record_draft",
+                        "verified_by_gateway_before_pending": existing_status.get("verified_by_gateway_before_pending") is True,
+                        "verified_by_append_before_record": True,
+                        "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
+                    }
+
+                next_index = int(tip.get("latest_record_index") or 0) + 1
+                draft["record_index"] = next_index
+                draft["record_id"] = record_id(next_index)
+                draft["assigned_at"] = utc_now()
+                draft["previous_record_sha256"] = tip.get("latest_record_sha256")
+
+                # --- Phase 6B: append_assigned_metadata ---
+                # Mark fields that are assigned by the server during append and
+                # are NOT part of the original signed payload.
+                # Hash fields (content_sha256, record_sha256) are intentionally
+                # excluded — they are record-integrity fields, not append assignments.
+                draft["append_assigned_metadata"] = {
+                    "record_index": next_index,
+                    "record_id": record_id(next_index),
+                    "assigned_at": draft["assigned_at"],
+                    "previous_record_sha256": draft["previous_record_sha256"],
                 }
 
-            next_index = int(tip.get("latest_record_index") or 0) + 1
-            draft["record_index"] = next_index
-            draft["record_id"] = record_id(next_index)
-            draft["assigned_at"] = utc_now()
-            draft["previous_record_sha256"] = tip.get("latest_record_sha256")
-
-            # --- Phase 6B: append_assigned_metadata ---
-            # Mark fields that are assigned by the server during append and
-            # are NOT part of the original signed payload.
-            # Hash fields (content_sha256, record_sha256) are intentionally
-            # excluded — they are record-integrity fields, not append assignments.
-            draft["append_assigned_metadata"] = {
-                "record_index": next_index,
-                "record_id": record_id(next_index),
-                "assigned_at": draft["assigned_at"],
-                "previous_record_sha256": draft["previous_record_sha256"],
-            }
-
-            # --- Phase 6B: server_normalization projection ---
-            # Legacy compatibility defaults that used to be scattered into the
-            # draft are now isolated in a server_normalization block so they
-            # don't pollute the canonical content hash signed by the author.
-            draft.setdefault("server_normalization", {})
-            sn = draft["server_normalization"]
-            sn.setdefault("legacy_compatibility_projection", {
-                "human_context": None,
-                "discovery_autonomy": None,
-                "decision_autonomy": None,
-                "execution_authorization": None,
-                "guardian_proof": None,
-                "oath": None,
-            })
-
-            draft["content_sha256"] = content_hash(draft)
-            draft["content_sha256_v2"] = content_hash_v2(draft)
-            draft["record_sha256"] = record_hash(draft)
-
-            out = RECORDS / f"{draft['record_id']}.json"
-            if out.exists():
-                raise ValueError(f"record output already exists: {out}")
-            write_json(out, draft)
-            shutil.move(str(path), str(PROCESSED / path.name))
-            tip.update({
-                "native_record_count": int(tip.get("native_record_count") or 0) + 1,
-                "latest_record_index": next_index,
-                "latest_record_id": draft["record_id"],
-                "latest_record_sha256": draft["record_sha256"],
-                "updated_at": utc_now(),
-            })
-            write_json(CHAIN_TIP, tip)
-            appended_count += 1
-
-            # C.1: Write durable receipt-status for appended record
-            _rcid = _gateway_pending_receipt_id(path)
-            if _rcid:
-                rs_path = RECEIPT_STATUS / f"{_rcid}.json"
-                write_json(rs_path, {
-                    "schema": "trinityaccord.record-chain-receipt-final-status.v1",
-                    "receipt_id": _rcid,
-                    "pending_file_path": str(path.relative_to(ROOT)),
-                    "append_status": "appended",
-                    "final_record_id": draft["record_id"],
-                    "final_record_path": str(out.relative_to(ROOT)),
-                    "final_record_sha256": draft["record_sha256"],
-                    "rejection_path": None,
-                    "rejection_code": None,
-                    "updated_at": utc_now(),
-                })
-        except Exception as exc:
-            # Phase 6B: --all continues after rejection; writes rejection JSON
-            REJECTED.mkdir(parents=True, exist_ok=True)
-            rejection_path = REJECTED / f"{path.stem}.rejection.json"
-            rejection = {
-                "schema": "trinityaccord.record-chain-rejection.v1",
-                "rejected_at": utc_now(),
-                "source_pending": path.name,
-                "reason": str(exc),
-            }
-            write_json(rejection_path, rejection)
-            if path.exists():
-                shutil.move(str(path), str(REJECTED / path.name))
-            rejected_count += 1
-
-            # C.1: Write durable receipt-status for rejected record
-            _rcid = _gateway_pending_receipt_id(path)
-            if _rcid:
-                rs_path = RECEIPT_STATUS / f"{_rcid}.json"
-                write_json(rs_path, {
-                    "schema": "trinityaccord.record-chain-receipt-final-status.v1",
-                    "receipt_id": _rcid,
-                    "pending_file_path": str(path.relative_to(ROOT)),
-                    "append_status": "rejected",
-                    "final_record_id": None,
-                    "final_record_path": None,
-                    "final_record_sha256": None,
-                    "rejection_path": str(rejection_path.relative_to(ROOT)),
-                    "rejection_code": str(exc),
-                    "updated_at": utc_now(),
+                # --- Phase 6B: server_normalization projection ---
+                # Legacy compatibility defaults that used to be scattered into the
+                # draft are now isolated in a server_normalization block so they
+                # don't pollute the canonical content hash signed by the author.
+                draft.setdefault("server_normalization", {})
+                sn = draft["server_normalization"]
+                sn.setdefault("legacy_compatibility_projection", {
+                    "human_context": None,
+                    "discovery_autonomy": None,
+                    "decision_autonomy": None,
+                    "execution_authorization": None,
+                    "guardian_proof": None,
+                    "oath": None,
                 })
 
-            if not all_records:
-                raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
-            print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
-    if rejected_count:
-        print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
+                draft["content_sha256"] = content_hash(draft)
+                draft["content_sha256_v2"] = content_hash_v2(draft)
+                draft["record_sha256"] = record_hash(draft)
+
+                out = RECORDS / f"{draft['record_id']}.json"
+                if out.exists():
+                    raise ValueError(f"record output already exists: {out}")
+                write_json(out, draft)
+                shutil.move(str(path), str(PROCESSED / path.name))
+                tip.update({
+                    "native_record_count": int(tip.get("native_record_count") or 0) + 1,
+                    "latest_record_index": next_index,
+                    "latest_record_id": draft["record_id"],
+                    "latest_record_sha256": draft["record_sha256"],
+                    "updated_at": utc_now(),
+                })
+                write_json(CHAIN_TIP, tip)
+                appended_count += 1
+
+                # C.1: Write durable receipt-status for appended record
+                _rcid = _gateway_pending_receipt_id(path)
+                if _rcid:
+                    rs_path = RECEIPT_STATUS / f"{_rcid}.json"
+                    write_json(rs_path, {
+                        "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+                        "receipt_id": _rcid,
+                        "pending_file_path": str(path.relative_to(ROOT)),
+                        "append_status": "appended",
+                        "final_record_id": draft["record_id"],
+                        "final_record_path": str(out.relative_to(ROOT)),
+                        "final_record_sha256": draft["record_sha256"],
+                        "rejection_path": None,
+                        "rejection_code": None,
+                        "updated_at": utc_now(),
+                    })
+            except Exception as exc:
+                # Phase 6B: --all continues after rejection; writes rejection JSON
+                REJECTED.mkdir(parents=True, exist_ok=True)
+                rejection_path = REJECTED / f"{path.stem}.rejection.json"
+                rejection = {
+                    "schema": "trinityaccord.record-chain-rejection.v1",
+                    "rejected_at": utc_now(),
+                    "source_pending": path.name,
+                    "reason": str(exc),
+                }
+                write_json(rejection_path, rejection)
+                if path.exists():
+                    shutil.move(str(path), str(REJECTED / path.name))
+                rejected_count += 1
+
+                # C.1: Write durable receipt-status for rejected record
+                _rcid = _gateway_pending_receipt_id(path)
+                if _rcid:
+                    rs_path = RECEIPT_STATUS / f"{_rcid}.json"
+                    write_json(rs_path, {
+                        "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+                        "receipt_id": _rcid,
+                        "pending_file_path": str(path.relative_to(ROOT)),
+                        "append_status": "rejected",
+                        "final_record_id": None,
+                        "final_record_path": None,
+                        "final_record_sha256": None,
+                        "rejection_path": str(rejection_path.relative_to(ROOT)),
+                        "rejection_code": str(exc),
+                        "updated_at": utc_now(),
+                    })
+
+                if not all_records:
+                    raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
+                print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
+        if rejected_count:
+            print(f"Append summary: {appended_count} appended, {rejected_count} rejected.")
+            summary["appended_count"] = appended_count
+            summary["rejected_count"] = rejected_count
+            if not allow_rejections:
+                raise SystemExit(2)
+
+        # Phase 6B: immediately verify after append — newly appended records
+        # must pass verify_native_records() before building indexes.
+        if appended_count > 0:
+            verrors = verify_native_records()
+            if verrors:
+                print("Post-append verification FAILED:", file=sys.stderr)
+                for e in verrors:
+                    print(f"  - {e}", file=sys.stderr)
+                raise SystemExit("Post-append verify_native_records() failed; indexes not rebuilt.")
+
+        build_indexes()
+
         summary["appended_count"] = appended_count
         summary["rejected_count"] = rejected_count
+    finally:
         _write_summary()
-        if not allow_rejections:
-            raise SystemExit(2)
-
-    # Phase 6B: immediately verify after append — newly appended records
-    # must pass verify_native_records() before building indexes.
-    if appended_count > 0:
-        verrors = verify_native_records()
-        if verrors:
-            print("Post-append verification FAILED:", file=sys.stderr)
-            for e in verrors:
-                print(f"  - {e}", file=sys.stderr)
-            raise SystemExit("Post-append verify_native_records() failed; indexes not rebuilt.")
-
-    build_indexes()
-
-    summary["appended_count"] = appended_count
-    summary["rejected_count"] = rejected_count
-    _write_summary()
 
 
 def existing_batch_manifests() -> list[Path]:

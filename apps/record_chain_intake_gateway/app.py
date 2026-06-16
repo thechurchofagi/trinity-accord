@@ -566,10 +566,22 @@ async def _submit_response_from_idempotency_index(
     # Verify receipt hash integrity
     # Fail-closed: receipt MUST have receipt_sha256
     if not receipt_data.get("receipt_sha256"):
-        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_MISSING_HASH: receipt has no receipt_sha256 at {receipt_path}")
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "IDEMPOTENCY_RECEIPT_MISSING_HASH",
+                "message": f"Receipt has no receipt_sha256 at {receipt_path}",
+            },
+        )
     hash_ok, hash_err = verify_receipt_sha256(receipt_data)
     if not hash_ok:
-        raise RuntimeError(f"IDEMPOTENCY_RECEIPT_HASH_INVALID: {hash_err} at {receipt_path}")
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "IDEMPOTENCY_RECEIPT_HASH_INVALID",
+                "message": f"Receipt hash invalid: {hash_err} at {receipt_path}",
+            },
+        )
 
     receipt_id = (
         receipt_data.get("server_receipt_id")
@@ -869,6 +881,10 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 received_raw_body_sha256=received_raw_body_sha256,
                 body=body,
             )
+        except HTTPException:
+            # Fail-closed: receipt integrity errors (missing/invalid receipt_sha256)
+            # must not be swallowed by the broad except below.
+            raise
         except Exception as exc:
             logger.warning(
                 "Existing idempotency index could not be resolved for %s: %s",
@@ -1166,6 +1182,9 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                             received_raw_body_sha256=received_raw_body_sha256,
                             body=body,
                         )
+                    except HTTPException:
+                        # Fail-closed: receipt integrity errors must propagate.
+                        raise
                     except Exception as response_exc:
                         logger.error(
                             "Existing idempotency index could not be converted into response for %s: %s",
