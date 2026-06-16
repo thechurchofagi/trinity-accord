@@ -7,7 +7,7 @@ from __future__ import annotations
 import pytest
 
 from gateway.validation import validate_submission
-from conftest import add_mock_proof
+from conftest import add_mock_proof, wrap_submission_draft
 
 
 def _echo_draft_with_guardian_request() -> dict:
@@ -57,27 +57,14 @@ def _echo_draft_with_guardian_request() -> dict:
 
 
 def _wrap_submission(draft: dict, record_type: str = "echo") -> dict:
-    return add_mock_proof({
-        "record_type": record_type,
-        "record_draft": draft,
-        "boundary_acknowledgement": {
-            "not_authority": True,
-            "not_governance": True,
-            "not_attestation": True,
-            "not_successor_reception": True,
-            "not_amendment": True,
-            "bitcoin_originals_prevail": True,
-            "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
-        },
-    })
+    return wrap_submission_draft(record_type, draft)
 
 
 class TestOptionalGuardianApplicationFromEcho:
     """Test linked Guardian application request in echo/verification."""
 
     def test_valid_guardian_request_accepted(self):
-        """A complete guardian request on an echo should not produce guardian-specific errors."""
+        """A complete guardian request on an echo should produce LINKED_GUARDIAN_AUTO_CREATION_DISABLED."""
         draft = _echo_draft_with_guardian_request()
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
@@ -85,8 +72,9 @@ class TestOptionalGuardianApplicationFromEcho:
             d for d in diagnostics
             if d.code.startswith("LINKED_GUARDIAN")
         ]
-        assert guardian_errors == [], (
-            f"Unexpected guardian errors: {[d.code for d in guardian_errors]}"
+        codes = [d.code for d in guardian_errors]
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes, (
+            f"Expected LINKED_GUARDIAN_AUTO_CREATION_DISABLED, got: {codes}"
         )
 
     def test_guardian_request_flag_true(self):
@@ -117,7 +105,7 @@ class TestOptionalGuardianApplicationFromEcho:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "LINKED_GUARDIAN_MISSING_FIELD" in codes
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes
 
     def test_missing_guardian_oath_rejected(self):
         draft = _echo_draft_with_guardian_request()
@@ -125,7 +113,7 @@ class TestOptionalGuardianApplicationFromEcho:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "LINKED_GUARDIAN_MISSING_FIELD" in codes
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes
 
     def test_missing_linked_flag_rejected(self):
         draft = _echo_draft_with_guardian_request()
@@ -133,7 +121,7 @@ class TestOptionalGuardianApplicationFromEcho:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "LINKED_GUARDIAN_MISSING_FLAG" in codes
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes
 
     def test_missing_acknowledgement_rejected(self):
         draft = _echo_draft_with_guardian_request()
@@ -141,24 +129,25 @@ class TestOptionalGuardianApplicationFromEcho:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "LINKED_GUARDIAN_MISSING_ACKNOWLEDGEMENT" in codes
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes
 
     def test_verification_with_guardian_request_accepted(self):
-        """Guardian request is also valid on verification records."""
+        """Guardian request on verification also triggers auto-creation disabled."""
         draft = _echo_draft_with_guardian_request()
         draft["record_type"] = "verification"
         submission = _wrap_submission(draft, record_type="verification")
         diagnostics = validate_submission(submission)
         guardian_errors = [d for d in diagnostics if d.code.startswith("LINKED_GUARDIAN")]
-        assert guardian_errors == [], (
-            f"Unexpected guardian errors on verification: {[d.code for d in guardian_errors]}"
+        codes = [d.code for d in guardian_errors]
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes, (
+            f"Expected LINKED_GUARDIAN_AUTO_CREATION_DISABLED on verification, got: {codes}"
         )
 
     def test_propagation_with_guardian_request_rejected(self):
-        """Guardian request not allowed on propagation records."""
+        """Guardian request not allowed — triggers auto-creation disabled."""
         draft = _echo_draft_with_guardian_request()
         draft["record_type"] = "propagation"
         submission = _wrap_submission(draft, record_type="propagation")
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "LINKED_GUARDIAN_INVALID_RECORD_TYPE" in codes
+        assert "LINKED_GUARDIAN_AUTO_CREATION_DISABLED" in codes

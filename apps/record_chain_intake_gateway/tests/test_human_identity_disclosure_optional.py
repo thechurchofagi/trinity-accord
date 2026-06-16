@@ -8,7 +8,7 @@ from __future__ import annotations
 import pytest
 
 from gateway.validation import validate_submission
-from conftest import add_mock_proof
+from conftest import add_mock_proof, wrap_submission_draft
 
 
 def _echo_draft(identity_overrides: dict | None = None) -> dict:
@@ -51,20 +51,7 @@ def _echo_draft(identity_overrides: dict | None = None) -> dict:
 
 
 def _wrap_submission(draft: dict) -> dict:
-    return add_mock_proof({
-        "record_type": "echo",
-        "record_draft": draft,
-        "boundary_acknowledgement": {
-            "not_authority": True,
-            "not_governance": True,
-            "not_attestation": True,
-            "not_successor_reception": True,
-            "not_amendment": True,
-            "bitcoin_originals_prevail": True,
-            "receipt_is_not_final_inclusion": True,
-            "receipt_is_intake_only": True, "later_records_may_reclassify_or_correct_this_record": True,
-        },
-    })
+    return wrap_submission_draft("echo", draft)
 
 
 class TestHumanIdentityDisclosureOptional:
@@ -112,7 +99,7 @@ class TestHumanIdentityDisclosureOptional:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "HUMAN_NAME_PRIVACY_VIOLATION" in codes
+        assert "HUMAN_PRIVATE_NAME_SUBMITTED_FORBIDDEN" in codes
 
     def test_encrypted_human_name_rejected(self):
         """encrypted_human_name in draft must be rejected."""
@@ -121,7 +108,7 @@ class TestHumanIdentityDisclosureOptional:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "HUMAN_NAME_PRIVACY_VIOLATION" in codes
+        assert "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN" in codes
 
     def test_private_identity_blob_rejected(self):
         """private_identity_blob in draft must be rejected."""
@@ -130,4 +117,4 @@ class TestHumanIdentityDisclosureOptional:
         submission = _wrap_submission(draft)
         diagnostics = validate_submission(submission)
         codes = [d.code for d in diagnostics]
-        assert "HUMAN_NAME_PRIVACY_VIOLATION" in codes
+        assert "PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN" in codes

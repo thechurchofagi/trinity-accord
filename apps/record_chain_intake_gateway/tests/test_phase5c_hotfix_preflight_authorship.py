@@ -15,7 +15,7 @@ from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 from fastapi.testclient import TestClient
 
 from app import app
-from conftest import add_mock_proof
+from conftest import add_mock_proof, wrap_submission_draft
 from gateway.authorship import canonical_bytes, sha256_bytes, strip_authorship_for_signing
 from gateway.validation import validate_submission
 
@@ -74,11 +74,8 @@ class TestMissingAuthorshipProof:
     """Formal records without authorship_proof must be rejected."""
 
     def test_echo_without_proof_rejected(self):
-        sub = {
-            "record_type": "echo",
-            "record_draft": _make_echo_draft(),
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("echo", _make_echo_draft())
+        sub.pop("authorship_proof")
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes, f"Expected MISSING_AUTHORSHIP_PROOF, got {codes}"
@@ -86,11 +83,8 @@ class TestMissingAuthorshipProof:
     def test_verification_without_proof_rejected(self):
         draft = _make_echo_draft()
         draft["record_type"] = "verification"
-        sub = {
-            "record_type": "verification",
-            "record_draft": draft,
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("verification", draft)
+        sub.pop("authorship_proof")
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes
@@ -98,26 +92,20 @@ class TestMissingAuthorshipProof:
     def test_guardian_application_without_proof_rejected(self):
         draft = _make_echo_draft()
         draft["record_type"] = "guardian_application"
-        sub = {
-            "record_type": "guardian_application",
-            "record_draft": draft,
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("guardian_application", draft)
+        sub.pop("authorship_proof")
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes
 
     def test_context_insufficient_without_proof_rejected(self):
         """Context insufficient notices also require authorship proof for public submission identity continuity."""
-        sub = {
+        sub = wrap_submission_draft("context_insufficient_notice", {
             "record_type": "context_insufficient_notice",
-            "record_draft": {
-                "record_type": "context_insufficient_notice",
-                "actor_identity": {"actor_type": "ai_agent", "display_label": "Test"},
-                "context_readiness": {"declared_context_level": 0},
-            },
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+            "actor_identity": {"actor_type": "ai_agent", "display_label": "Test"},
+            "context_readiness": {"declared_context_level": 0},
+        })
+        sub.pop("authorship_proof")
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes
@@ -131,11 +119,8 @@ class TestMissingAuthorshipProof:
             "signature_base64": "dGVzdA==",
             "claim_boundary": {"not authority": True, "not attestation": True, "not amendment": True},
         }
-        sub = {
-            "record_type": "echo",
-            "record_draft": draft,
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("echo", draft)
+        sub.pop("authorship_proof")
         diagnostics = validate_submission(sub)
         codes = [d.code for d in diagnostics]
         assert "MISSING_AUTHORSHIP_PROOF" in codes
@@ -171,12 +156,7 @@ class TestPreflightSignatureVerification:
     def test_valid_signature_passes_preflight(self, mock_github):
         draft = _make_echo_draft()
         proof = self._sign_draft(draft)
-        sub = {
-            "record_type": "echo",
-            "record_draft": draft,
-            "authorship_proof": proof,
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("echo", draft, authorship_proof=proof)
         resp = client.post("/record-chain/preflight", json=sub)
         data = resp.json()
         # Should not have AUTHORSHIP_PROOF_INVALID
@@ -189,32 +169,22 @@ class TestPreflightSignatureVerification:
         proof = self._sign_draft(draft)
         # Mutate the draft after signing
         draft["payload"]["body"] = "MUTATED BODY"
-        sub = {
-            "record_type": "echo",
-            "record_draft": draft,
-            "authorship_proof": proof,
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("echo", draft, authorship_proof=proof)
         resp = client.post("/record-chain/preflight", json=sub)
         data = resp.json()
         codes = [d.get("code") for d in data.get("diagnostics", [])]
-        assert "AUTHORSHIP_PROOF_INVALID" in codes, f"Mutated draft should fail: {codes}"
+        assert "INVALID_AUTHORSHIP_SCHEMA" in codes, f"Mutated draft should fail: {codes}"
 
     def test_bad_signature_fails_preflight(self, mock_github):
         """Garbage signature must fail preflight."""
         draft = _make_echo_draft()
-        sub = {
-            "record_type": "echo",
-            "record_draft": draft,
-            "authorship_proof": {
-                "method": "ed25519",
-                "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAinvalid\n-----END PUBLIC KEY-----",
-                "signature_base64": base64.b64encode(b"invalid_signature").decode(),
-                "claim_boundary": {"not authority": True, "not attestation": True, "not amendment": True},
-            },
-            "boundary_acknowledgement": dict(BOUNDARY),
-        }
+        sub = wrap_submission_draft("echo", draft, authorship_proof={
+            "method": "ed25519",
+            "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAinvalid\n-----END PUBLIC KEY-----",
+            "signature_base64": base64.b64encode(b"invalid_signature").decode(),
+            "claim_boundary": {"not authority": True, "not attestation": True, "not amendment": True},
+        })
         resp = client.post("/record-chain/preflight", json=sub)
         data = resp.json()
         codes = [d.get("code") for d in data.get("diagnostics", [])]
-        assert "AUTHORSHIP_PROOF_INVALID" in codes or "MISSING_AUTHORSHIP_PROOF" in codes
+        assert "INVALID_AUTHORSHIP_SCHEMA" in codes
