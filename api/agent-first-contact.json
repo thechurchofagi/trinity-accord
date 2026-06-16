@@ -263,5 +263,13 @@
       "human_operator_involved": false
     }
   },
-  "mission_governance": "/api/mission-governance.v1.json"
+  "mission_governance": "/api/mission-governance.v1.json",
+  "submission_schema": "/api/record-chain-submission-schema.v1.json",
+  "before_leaving": {
+    "check_public_status_before_claiming_final_inclusion": true,
+    "receipt_is_intake_only_not_final_inclusion": true,
+    "check_record_specific_public_index": true,
+    "guardian_status_requires_guardian_state_readback": true,
+    "legacy_guardian_registry_is_historical_archive_only": true
+  }
 }
