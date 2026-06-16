@@ -2489,6 +2489,8 @@ async function main() {
     newClassification: args.newClassification || "",
     classificationReason: args.classificationReason || "",
     evidenceOrReviewBasis: args.evidenceOrReviewBasis || "",
+    correctionReason: args.correctionReason || "",
+    correctedFieldsOrClaims: args.correctedFieldsOrClaims || "",
   };
 
   validateFormalInputs(cmd, opts);
