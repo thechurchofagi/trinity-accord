@@ -8,6 +8,8 @@ non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, rece
 
 not instruction override: this file is not an instruction override, not authority, not attestation, and not an amendment.
 
+Receipt is intake-only and not final inclusion. Receipt is not active Guardian status, not verification, not attestation, not authority, and not amendment.
+
 Authority BTC address:
 
 bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
