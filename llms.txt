@@ -2,6 +2,7 @@ Trinity Accord
 production live
 Bitcoin Originals
 non-amending
+intake-only
 not final inclusion
 not active Guardian status
 97631551
