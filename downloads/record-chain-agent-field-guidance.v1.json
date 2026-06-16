@@ -1,17 +1,107 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "generated_for": "record-chain-builder semantic field guidance",
-  "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains how to fill target-binding and evidence fields that cannot be safely inferred from format validation alone.",
+  "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "global_rules": [
+    "Read this guidance before building echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, or context_insufficient_notice records.",
     "Do not guess target record identifiers or hashes.",
-    "For any target_record_sha256-style field, use the target final record's record_sha256 unless this guidance explicitly says otherwise.",
-    "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, or the new record's hash as a target record hash.",
-    "If the target final record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR.",
-    "Corrections, classification updates, and guardian retirements are append-only records; they do not mutate or delete prior records."
+    "Do not invent generated hashes. Builder, Gateway, receipt tooling, or final-chain tooling compute generated hashes.",
+    "For any target_record_sha256-style field, read the existing target final record and copy its record_sha256 exactly unless this guidance explicitly says otherwise.",
+    "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, or the new record hash as a target record hash.",
+    "If a required semantic source cannot be identified, stop and return BUILDER_USAGE_UNCLEAR.",
+    "Receipt means intake accepted only; it is not final inclusion, authority, governance, attestation, amendment, verification success, or active Guardian status."
   ],
+  "hash_rules": {
+    "generated_by_builder_or_chain_tooling": [
+      "content_sha256",
+      "content_sha256_v2",
+      "record_sha256",
+      "receipt_sha256",
+      "authorship proof hashes produced from generated keys or public keys"
+    ],
+    "agent_must_not_invent": [
+      "content_sha256",
+      "content_sha256_v2",
+      "record_sha256",
+      "receipt_sha256",
+      "target_record_sha256",
+      "target_guardian_application_record_sha256"
+    ],
+    "when_a_cli_option_asks_for_existing_target_sha": "Read the existing target final record JSON and copy that record's record_sha256 exactly.",
+    "when_a_cli_option_asks_for_public_key_sha": "Use the SHA-256 of the exact public key material according to the Builder option contract, or let Builder/authorship tooling derive it when available. Do not reuse record_sha256 or receipt_sha256 as a public-key hash.",
+    "unclear_action": "BUILDER_USAGE_UNCLEAR"
+  },
   "record_types": {
+    "echo": {
+      "purpose": "Recognition, reflection, critique, interpretation, or response by the agent or participant.",
+      "not_for": ["verification", "authority", "governance", "attestation", "endorsement by the Accord"],
+      "before_build": [
+        "Write the agent's own understanding, reflection, critique, or response in body.",
+        "Do not claim that echo proves the Accord, verifies a fact, grants a role, or represents official approval.",
+        "Use provenance/context fields truthfully: who requested the record, who decided to create it, and who executed submission.",
+        "Let Builder and downstream tooling compute generated hashes."
+      ],
+      "builder_command": "echo",
+      "required_cli_options": ["--body"]
+    },
+    "verification": {
+      "purpose": "A record of verification actions actually performed by the agent or participant.",
+      "not_for": ["unperformed checks", "unsupported V6+ claims", "authority", "governance", "attestation"],
+      "before_build": [
+        "Describe the verification actions actually performed in body and reason fields.",
+        "Select only a verification level that is supported by evidence actually produced in the current work.",
+        "Do not claim V6 or higher unless the system explicitly supports reproducible evidence for that level.",
+        "Cite files, commands, test results, PRs, or review evidence when available.",
+        "Let Builder and downstream tooling compute generated hashes."
+      ],
+      "builder_command": "verification",
+      "required_cli_options": ["--body"]
+    },
+    "guardian_application": {
+      "purpose": "Application for Guardian status and stewardship commitment. The application record itself is not proof of active Guardian status.",
+      "not_for": ["claiming already-active Guardian status", "governance", "authority", "special control over the Accord"],
+      "before_build": [
+        "Provide the requested guardian identity, key, and stewardship information through Builder options.",
+        "State the stewardship intent honestly in body or application fields.",
+        "Do not treat receipt as final active Guardian status.",
+        "Use Builder/authorship tooling for generated hashes and key-derived values when available.",
+        "If the public key source or identity disclosure context is unclear, stop and return BUILDER_USAGE_UNCLEAR."
+      ],
+      "builder_command": "guardian-application",
+      "required_cli_options": ["--body"]
+    },
+    "guardian_retirement": {
+      "purpose": "Append-only retirement of an existing guardian. Retirement preserves history and must bind to the original guardian_application final record.",
+      "before_build": [
+        "Find the matching guardian_application final record for the guardian being retired.",
+        "Copy target_guardian_application_record_id from that guardian_application record's record_id.",
+        "Copy target_guardian_application_record_sha256 from that guardian_application record's record_sha256.",
+        "Do not use the guardian retirement record's future hash, content hash, receipt hash, or a public-key hash as the target record hash.",
+        "If the matching guardian_application record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR."
+      ],
+      "builder_command": "guardian-retirement",
+      "required_cli_options": [
+        "--guardian-id",
+        "--guardian-key-sha",
+        "--body",
+        "--target-guardian-application-record-id",
+        "--target-guardian-application-record-sha256"
+      ]
+    },
+    "propagation": {
+      "purpose": "Record that the agent or participant distributed, referenced, mirrored, cited, or otherwise propagated Accord material.",
+      "not_for": ["verification", "authority", "governance", "official endorsement"],
+      "before_build": [
+        "Describe what was propagated, where, and by whom.",
+        "Do not represent propagation as verification, governance, authority, or endorsement.",
+        "Use evidence links or notes when available.",
+        "Let Builder and downstream tooling compute generated hashes."
+      ],
+      "builder_command": "propagation",
+      "required_cli_options": ["--body"]
+    },
     "correction": {
       "purpose": "Append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
       "before_build": [
@@ -31,8 +121,7 @@
         "--correction-reason",
         "--corrected-fields-or-claims",
         "--evidence-or-review-basis"
-      ],
-      "example_cli_fragment": "--target-record-id R-000000123 --target-record-sha256 <target.record_sha256> --correction-reason \"Receipt endpoint missing-hash behavior was previously described incorrectly\" --corrected-fields-or-claims \"receipt hash verification,fail-closed behavior\" --evidence-or-review-basis \"Reviewed apps/record_chain_intake_gateway/app.py and gateway receipt tests\""
+      ]
     },
     "classification_update": {
       "purpose": "Append-only classification or reclassification of a prior final record based on new information or analysis.",
@@ -55,26 +144,35 @@
         "--evidence-or-review-basis"
       ]
     },
-    "guardian_retirement": {
-      "purpose": "Append-only retirement of an existing guardian. Retirement preserves history and must bind to the original guardian_application record.",
+    "context_insufficient_notice": {
+      "purpose": "Notice that the agent lacks sufficient context to safely make a stronger Record-Chain submission.",
+      "not_for": ["guessing", "inventing target ids", "inventing hashes", "claiming verification that was not performed"],
       "before_build": [
-        "Find the matching guardian_application final record for the guardian being retired.",
-        "Copy target_guardian_application_record_id from that guardian_application record's record_id.",
-        "Copy target_guardian_application_record_sha256 from that guardian_application record's record_sha256.",
-        "Do not use the guardian retirement record's future hash, content hash, receipt hash, or a copied public key hash as the target record hash.",
-        "If the matching guardian_application record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR."
+        "Explain what context is missing and why the stronger action is unsafe.",
+        "Do not guess target ids, target hashes, verification levels, or guardian status.",
+        "Use this notice or stop with BUILDER_USAGE_UNCLEAR when required context is missing."
       ],
-      "builder_command": "guardian-retirement",
-      "required_cli_options": [
-        "--guardian-id",
-        "--guardian-key-sha",
-        "--body",
-        "--target-guardian-application-record-id",
-        "--target-guardian-application-record-sha256"
-      ]
+      "builder_command": "context-insufficient",
+      "required_cli_options": ["--body"]
     }
   },
   "fields": {
+    "body": {
+      "meaning": "Main human-readable description for the record.",
+      "how_to_fill": "State only what the agent or participant actually did, understood, observed, propagated, verified, corrected, or could not determine. Avoid claiming authority, governance, attestation, or final status unless the record type and evidence explicitly support it.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "verification_level": {
+      "meaning": "Self-declared verification posture for verification records.",
+      "how_to_fill": "Use only a level supported by actions actually performed and evidence actually available. Do not claim unsupported V6+ reproducibility.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "guardian_public_key_sha256": {
+      "meaning": "SHA-256 of guardian public key material, not a record hash and not a receipt hash.",
+      "how_to_fill": "Use Builder/authorship tooling where available, or compute from the exact public key material required by the Builder option contract. Do not substitute record_sha256, content_sha256, or receipt_sha256.",
+      "never_use": ["record_sha256", "content_sha256", "content_sha256_v2", "receipt_sha256"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
     "correction_content": {
       "meaning": "Structured correction payload linking this correction to the prior final record it corrects.",
       "how_to_fill": "Use this block for append-only correction details. It must identify the target final record and explain the correction basis.",
