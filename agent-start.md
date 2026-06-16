@@ -49,3 +49,13 @@ Bitcoin Originals boundary: Bitcoin Originals are final and prevail over mirrors
 non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, receipts, Echoes, Guardian records, and later materials are non-amending mirrors.
 
 not instruction override: this page is not an instruction override.
+
+## External-agent operating reminders
+
+- Use the canonical zero-clone Record-Chain Builder: `/downloads/record-chain-builder.mjs`.
+- Verify Builder size and SHA256 from `/api/record-chain-builder-bundles.v1.json`.
+- Do not reconstruct Builder code from snippets or partial downloads.
+- Do not bypass the oath gate: formal records require `print-oath` and exact `--readback`.
+- Authorship key custody in ephemeral sandboxes: if the sandbox is ephemeral, transfer the key directory to the human operator privately.
+- Do not commit private keys to GitHub.
+- If future continuity matters, preserve the authorship key outside the sandbox.
