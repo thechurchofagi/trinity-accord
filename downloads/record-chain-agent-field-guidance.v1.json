@@ -1,0 +1,160 @@
+{
+  "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
+  "status": "active",
+  "version": "1.0.0",
+  "generated_for": "record-chain-builder semantic field guidance",
+  "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains how to fill target-binding and evidence fields that cannot be safely inferred from format validation alone.",
+  "global_rules": [
+    "Do not guess target record identifiers or hashes.",
+    "For any target_record_sha256-style field, use the target final record's record_sha256 unless this guidance explicitly says otherwise.",
+    "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, or the new record's hash as a target record hash.",
+    "If the target final record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR.",
+    "Corrections, classification updates, and guardian retirements are append-only records; they do not mutate or delete prior records."
+  ],
+  "record_types": {
+    "correction": {
+      "purpose": "Append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
+      "before_build": [
+        "Read the target final record first.",
+        "Copy target_record_id from the target final record's record_id.",
+        "Copy target_record_sha256 from the target final record's record_sha256.",
+        "Write a specific correction_reason; do not use vague text such as 'fix' or 'update'.",
+        "List the corrected fields or claims explicitly.",
+        "State the evidence or review basis, such as source paths, tests, PRs, CI results, command output, or manual audit findings.",
+        "If any target binding value is uncertain, stop and return BUILDER_USAGE_UNCLEAR."
+      ],
+      "builder_command": "correction",
+      "required_cli_options": [
+        "--body",
+        "--target-record-id",
+        "--target-record-sha256",
+        "--correction-reason",
+        "--corrected-fields-or-claims",
+        "--evidence-or-review-basis"
+      ],
+      "example_cli_fragment": "--target-record-id R-000000123 --target-record-sha256 <target.record_sha256> --correction-reason \"Receipt endpoint missing-hash behavior was previously described incorrectly\" --corrected-fields-or-claims \"receipt hash verification,fail-closed behavior\" --evidence-or-review-basis \"Reviewed apps/record_chain_intake_gateway/app.py and gateway receipt tests\""
+    },
+    "classification_update": {
+      "purpose": "Append-only classification or reclassification of a prior final record based on new information or analysis.",
+      "before_build": [
+        "Read the target final record first.",
+        "Copy target_record_id from the target final record's record_id.",
+        "Copy target_record_sha256 from the target final record's record_sha256.",
+        "Use previous_classification for the classification/status before this update.",
+        "Use new_classification for the classification/status this update asserts now.",
+        "State the classification_reason and evidence_or_review_basis explicitly.",
+        "If the target or prior classification is unclear, stop and return BUILDER_USAGE_UNCLEAR."
+      ],
+      "builder_command": "classification-update",
+      "required_cli_options": [
+        "--target-record-id",
+        "--target-record-sha256",
+        "--previous-classification",
+        "--new-classification",
+        "--classification-reason",
+        "--evidence-or-review-basis"
+      ]
+    },
+    "guardian_retirement": {
+      "purpose": "Append-only retirement of an existing guardian. Retirement preserves history and must bind to the original guardian_application record.",
+      "before_build": [
+        "Find the matching guardian_application final record for the guardian being retired.",
+        "Copy target_guardian_application_record_id from that guardian_application record's record_id.",
+        "Copy target_guardian_application_record_sha256 from that guardian_application record's record_sha256.",
+        "Do not use the guardian retirement record's future hash, content hash, receipt hash, or a copied public key hash as the target record hash.",
+        "If the matching guardian_application record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR."
+      ],
+      "builder_command": "guardian-retirement",
+      "required_cli_options": [
+        "--guardian-id",
+        "--guardian-key-sha",
+        "--body",
+        "--target-guardian-application-record-id",
+        "--target-guardian-application-record-sha256"
+      ]
+    }
+  },
+  "fields": {
+    "correction_content": {
+      "meaning": "Structured correction payload linking this correction to the prior final record it corrects.",
+      "how_to_fill": "Use this block for append-only correction details. It must identify the target final record and explain the correction basis.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "correction_content.target_record_id": {
+      "meaning": "The record_id of the final record being corrected.",
+      "how_to_fill": "Read the target final record and copy its record_id exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_id",
+      "never_use": ["the new correction record id", "receipt id", "batch id", "archive id"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "correction_content.target_record_sha256": {
+      "meaning": "The record_sha256 of the final record being corrected.",
+      "how_to_fill": "Read the target final record and copy its record_sha256 exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_sha256",
+      "never_use": ["content_sha256", "content_sha256_v2", "receipt_sha256", "archive_manifest_sha256", "the new correction record hash"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "correction_content.correction_reason": {
+      "meaning": "Specific reason the prior record needs correction.",
+      "how_to_fill": "State the concrete error, omission, or bounded claim being corrected. Avoid vague values such as 'fix' or 'update'.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "correction_content.corrected_fields_or_claims": {
+      "meaning": "Non-empty list of fields or claims being corrected.",
+      "how_to_fill": "Use specific field names or claim labels. In the CLI, pass comma-separated values.",
+      "example": ["receipt hash verification", "arweave current status"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "correction_content.evidence_or_review_basis": {
+      "meaning": "Evidence, review basis, or reasoning supporting the correction.",
+      "how_to_fill": "Cite source file paths, tests, PR numbers, CI results, command output, or manual audit findings.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.target_record_id": {
+      "meaning": "The record_id of the final record being classified or reclassified.",
+      "how_to_fill": "Read the target final record and copy its record_id exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_id",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.target_record_sha256": {
+      "meaning": "The record_sha256 of the final record being classified or reclassified.",
+      "how_to_fill": "Read the target final record and copy its record_sha256 exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_sha256",
+      "never_use": ["content_sha256", "content_sha256_v2", "receipt_sha256", "the new classification_update record hash"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.previous_classification": {
+      "meaning": "The classification/status before this update.",
+      "how_to_fill": "Use the best known prior classification from prior records, overlay index, or explicit review context.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.new_classification": {
+      "meaning": "The classification/status asserted by this update.",
+      "how_to_fill": "Use the new bounded classification supported by the stated evidence or review basis.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.classification_reason": {
+      "meaning": "Reason for changing or setting the classification.",
+      "how_to_fill": "Explain the new information or analysis that supports the update.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "classification_update_content.evidence_or_review_basis": {
+      "meaning": "Evidence, review basis, or reasoning supporting this classification update.",
+      "how_to_fill": "Cite source file paths, tests, PRs, CI results, command output, or manual audit findings.",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "target_guardian_application_record_id": {
+      "meaning": "The record_id of the original guardian_application final record for the guardian being retired.",
+      "how_to_fill": "Find the matching guardian_application record and copy its record_id exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_id where record_type is guardian_application",
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    },
+    "target_guardian_application_record_sha256": {
+      "meaning": "The record_sha256 of the original guardian_application final record for the guardian being retired.",
+      "how_to_fill": "Find the matching guardian_application record and copy its record_sha256 exactly.",
+      "source_of_truth": "records/R-XXXXXXXXX.json.record_sha256 where record_type is guardian_application",
+      "never_use": ["guardian_public_key_sha256", "content_sha256", "content_sha256_v2", "receipt_sha256", "the new guardian_retirement record hash"],
+      "unclear_action": "BUILDER_USAGE_UNCLEAR"
+    }
+  }
+}
