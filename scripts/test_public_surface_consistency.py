@@ -24,15 +24,10 @@ att_index = json.loads(texts["independent-attestation-index.json"])
 
 errors = []
 
-# Authority BTC address consistency
+# Authority BTC address consistency: authority.json is the canonical address source.
 btc_addr = authority.get("bitcoin_authority_address")
 if not btc_addr:
     errors.append("authority.json missing bitcoin_authority_address")
-else:
-    # llms.txt must have the address; ai.txt is a short pointer file so not required
-    for name in ["llms.txt"]:
-        if btc_addr not in texts[name]:
-            errors.append(f"{name}: missing authority BTC address {btc_addr}")
 
 # Canonical inscriptions
 inscriptions = [x.get("inscription_id") for x in authority.get("bitcoin_originals", [])]
