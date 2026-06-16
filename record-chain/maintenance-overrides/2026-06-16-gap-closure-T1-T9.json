@@ -1,0 +1,7 @@
+{
+  "schema": "trinityaccord.record-chain-maintenance-override.v1",
+  "approval_token": "RECORD_CHAIN_MAINTENANCE_OVERRIDE_OK",
+  "reason": "PR #506: close remaining record-chain gap closure T1-T9 — indexes regenerated after verification contract changes (oath gate, guardian retirement target binding, correction target binding, overlay index generation, Arweave verified/current gate)",
+  "created_at": "2026-06-16T01:00:00Z",
+  "pr": 506
+}
