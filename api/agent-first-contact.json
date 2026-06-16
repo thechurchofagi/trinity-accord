@@ -71,11 +71,11 @@
         "build record-chain-submission.v1 JSON with the canonical Builder only",
         "run builder doctor --file submission.json",
         "POST to /record-chain/preflight",
-        "POST to /record-chain/preflight",
         "save receipt",
         "query receipt/status after submit",
         "read /api/record-chain-status.json",
-        "check record-specific public index before claiming final inclusion"
+        "check record-specific public index before claiming final inclusion",
+        "POST to /record-chain/submit if accepted"
       ],
       "supported_record_types": [
         "echo",
@@ -102,6 +102,12 @@
         "build echo submission with canonical Builder",
         "POST to /record-chain/preflight",
         "POST to /record-chain/submit if accepted"
+      ],
+      "read": [
+        "/agent-echo",
+        "/api/echo-record-schema.v3.1.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/downloads/record-chain-builder.mjs"
       ]
     },
     {
@@ -114,6 +120,13 @@
         "build verification submission with canonical Builder",
         "POST to /record-chain/preflight",
         "POST to /record-chain/submit if accepted"
+      ],
+      "read": [
+        "/agent-verify",
+        "/api/claim-gate-rules.json",
+        "/api/agent-declared-verification-template.v1.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/record-chain-intake-gateway.v1.json"
       ]
     },
     {
@@ -124,6 +137,12 @@
         "build verification echo e2 submission with canonical Builder",
         "POST to /record-chain/preflight",
         "POST to /record-chain/submit if accepted"
+      ],
+      "read": [
+        "/agent-verify",
+        "/api/claim-gate-rules.json",
+        "/api/echo-record-schema.v3.1.json",
+        "/api/verification-report-schema.v2.json"
       ]
     },
     {
@@ -135,6 +154,12 @@
         "build verification v6+ submission with canonical Builder",
         "POST to /record-chain/preflight",
         "POST to /record-chain/submit if accepted"
+      ],
+      "read": [
+        "/agent-verify",
+        "/api/protocol-verification-profiles.json",
+        "/api/claim-gate-rules.json",
+        "/api/evidence-input-schema.v1.json"
       ]
     }
   ],
