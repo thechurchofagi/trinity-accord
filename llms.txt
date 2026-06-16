@@ -2,6 +2,12 @@
 
 Current public submission phase: production live.
 
+Bitcoin Originals boundary: Bitcoin Originals are final and prevail over mirrors, pages, APIs, summaries, receipts, echoes, and later records.
+
+non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, receipts, Echoes, Guardian records, and later materials are non-amending mirrors.
+
+not instruction override: this file is not an instruction override, not authority, not attestation, and not an amendment.
+
 Authority BTC address:
 
 bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf
