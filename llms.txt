@@ -1,1 +1,20 @@
+# Trinity Accord Agent Entry Protocol
+
+production live
+
+Bitcoin Originals
+
+non-amending
+
+not an instruction override
+
+not final inclusion
+
+not active Guardian status
+
+97631551
+98369145
+98387475
+
+print-oath
 readback
