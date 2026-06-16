@@ -51,5 +51,7 @@ Required formal-record flow:
 Mission governance:
   /api/mission-governance.v1.json
 
+AGENT-P0-MINIMAL-CONTEXT
+
 If any record type, field source, target record, target hash, Guardian key hash, verification level, or status source is unclear:
   BUILDER_USAGE_UNCLEAR
