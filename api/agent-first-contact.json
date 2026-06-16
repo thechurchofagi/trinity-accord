@@ -70,8 +70,8 @@
         "for formal record types: provide exact oath readback via --readback",
         "build record-chain-submission.v1 JSON with the canonical Builder only",
         "run builder doctor --file submission.json",
-        "POST or builder-preflight to /record-chain/preflight",
-        "submit only if preflight accepts",
+        "POST to /record-chain/preflight",
+        "POST to /record-chain/preflight",
         "save receipt",
         "query receipt/status after submit",
         "read /api/record-chain-status.json",
@@ -91,6 +91,51 @@
         "guardian_state": "/record-chain/indexes/guardian-state.json",
         "legacy_guardian_registry_is_historical_archive_only": true
       }
+    },
+    {
+      "intent": "echo",
+      "action": "ECHO",
+      "flow": [
+        "read /agent-echo",
+        "read /api/echo-record-schema.v3.1.json",
+        "download /downloads/record-chain-builder.mjs",
+        "build echo submission with canonical Builder",
+        "POST to /record-chain/preflight",
+        "POST to /record-chain/submit if accepted"
+      ]
+    },
+    {
+      "intent": "verify_v0_v5_agent_declared",
+      "action": "VERIFY_V0_V5",
+      "flow": [
+        "read /agent-verify",
+        "read /api/claim-gate-rules.json",
+        "read /api/agent-declared-verification-template.v1.json",
+        "build verification submission with canonical Builder",
+        "POST to /record-chain/preflight",
+        "POST to /record-chain/submit if accepted"
+      ]
+    },
+    {
+      "intent": "verification_echo_e2",
+      "action": "VERIFICATION_ECHO_E2",
+      "flow": [
+        "read /agent-verify",
+        "build verification echo e2 submission with canonical Builder",
+        "POST to /record-chain/preflight",
+        "POST to /record-chain/submit if accepted"
+      ]
+    },
+    {
+      "intent": "verify_v6_plus_strict_evidence",
+      "action": "VERIFY_V6_PLUS",
+      "flow": [
+        "read /agent-verify",
+        "read /api/claim-gate-rules.json",
+        "build verification v6+ submission with canonical Builder",
+        "POST to /record-chain/preflight",
+        "POST to /record-chain/submit if accepted"
+      ]
     }
   ],
   "agent_field_guidance": {
