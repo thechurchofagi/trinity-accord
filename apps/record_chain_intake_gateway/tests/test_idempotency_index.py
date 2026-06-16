@@ -245,6 +245,7 @@ class TestValidDuplicateReturnsReceipt:
     def test_valid_duplicate_returns_receipt(self, signed_echo_submission, monkeypatch):
         """When valid idempotency index and receipt exist, return duplicate with receipt."""
         from gateway.canonical import sha256_canonical_json
+        from gateway.receipts import compute_receipt_sha256
 
         actual_sha = sha256_canonical_json(signed_echo_submission)
         existing_receipt_id = "rcg-20260101-existing123"
@@ -268,6 +269,7 @@ class TestValidDuplicateReturnsReceipt:
             "pending_file_path": existing_index["pending_file_path"],
             "intake_submission_path": existing_index["intake_submission_path"],
         }
+        existing_receipt["receipt_sha256"] = compute_receipt_sha256(existing_receipt)
 
         async def mock_get_file_text(path):
             if "by-submission-sha256" in path:
@@ -381,6 +383,7 @@ class TestIndexWriteRaceReturnsExistingReceipt:
         """When idempotency index write fails but existing index found,
         return the existing receipt and rollback new files."""
         from gateway.canonical import sha256_canonical_json
+        from gateway.receipts import compute_receipt_sha256
 
         actual_sha = sha256_canonical_json(signed_echo_submission)
         existing_receipt_id = "rcg-20260101-existing123"
@@ -404,6 +407,7 @@ class TestIndexWriteRaceReturnsExistingReceipt:
             "pending_file_path": existing_index["pending_file_path"],
             "intake_submission_path": existing_index["intake_submission_path"],
         }
+        existing_receipt["receipt_sha256"] = compute_receipt_sha256(existing_receipt)
 
         put_call_count = 0
         get_text_call_count = 0
