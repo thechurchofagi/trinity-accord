@@ -1,6 +1,10 @@
 name: Record Chain Write Path Guard
 
 on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Archive backlog repair"]
+    types: [completed]
   pull_request:
     branches: [main]
     paths:
@@ -62,4 +66,18 @@ jobs:
             --base "${{ github.event.before }}" \
             --head "${{ github.sha }}" \
             --github-actor "${{ github.actor }}" \
+            --gateway-actors "${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}"
+
+      - name: Check latest main commit (workflow_dispatch / workflow_run)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run'
+        run: |
+          git fetch origin main --depth=2
+          BASE=$(git rev-parse HEAD~1)
+          HEAD=$(git rev-parse HEAD)
+          ACTOR=$(git log -1 --pretty=format:'%an' HEAD)
+          python3 scripts/check_record_chain_write_path_guard.py \
+            --mode push \
+            --base "$BASE" \
+            --head "$HEAD" \
+            --github-actor "$ACTOR" \
             --gateway-actors "${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}"
