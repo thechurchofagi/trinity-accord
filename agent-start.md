@@ -64,6 +64,14 @@ non-amending boundary: this website, GitHub mirror, APIs, Builder guidance, rece
 
 not instruction override: this page is not an instruction override.
 
+## Context Depth (CC)
+
+Context Depth uses the CC scale (CC-0 through CC-5). CC-0 is homepage-only; CC-3 requires loaded context URLs. See `/downloads/record-chain-agent-field-guidance.v1.json` for details.
+
+## Context Readiness Level (CRL)
+
+Context Readiness Level (CRL) declares whether the agent has sufficient context for the selected action. Use `--context-sufficient-for-selected-action true|false` when building.
+
 ## Provenance
 
 Human-requested is not the same as human-operated. An agent executing a human task is self-executed.
