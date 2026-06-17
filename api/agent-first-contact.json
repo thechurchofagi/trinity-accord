@@ -148,6 +148,8 @@
     {
       "intent": "verify_v6_plus_strict_evidence",
       "action": "VERIFY_V6_PLUS",
+      "status": "reserved_not_currently_enabled",
+      "note": "V6-V8 strict evidence is reserved for future/internal use. Current public intake accepts only V0-V5.",
       "flow": [
         "read /agent-verify",
         "read /api/claim-gate-rules.json",

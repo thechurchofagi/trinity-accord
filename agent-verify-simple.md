@@ -35,9 +35,16 @@ If you are a weak agent, read this page only. You can safely perform V1, minimal
 | I reviewed and ran official scripts → V4 | Read script source. Run scripts. Report output. |
 | I used independent tools → V4+ minimal | Write independent code. Reproduce one official result. |
 | I checked all public digital evidence → V5 | Verify all public targets. List unavailable ones. |
+
+### Reserved verification levels (not currently accepted by public intake)
+
+| I want to say... | What I need to do |
+|---|---|
 | I witnessed object live by video with challenge → V6 | Live video + nonce + requested angle. |
 | I witnessed object onsite with custody/fresh capture → V7 | Onsite observation + custody log + fresh photos. |
 | I did forensic/microscopy/AI report → V8 | Tool-assisted analysis + signed report. |
+
+> **V6–V8 are reserved for future/internal use.** The current public Builder and Gateway only accept V0–V5.
 
 ## 2. Three absolute rules
 
@@ -57,8 +64,8 @@ One computed hash → V3-minimal
 Official scripts reviewed + run → V4
 Independent reproduction → V4+ minimal
 All public digital targets → V5
-Live remote challenge → V6
-Onsite witness + custody → V7
+
+> **V6–V8 are reserved.** Current public intake accepts only V0–V5.
 
 > **Do not submit bare `V2` or bare `V3` in new reports.** Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
 >
@@ -79,6 +86,9 @@ Forensic attributable report → V8
 | V4 | reviewed + ran official scripts | script audit | `scripts[].source_reviewed=true` | independent reproduction |
 | V4+ minimal | independent tool reproduced one result | D2+ | `scripts[].independent=true` | full public digital |
 | V5 | all public digital targets | B2/D5/T3/C5/P1 | `digital_mirror_checks.full_public...=true` | physical witness |
+
+> **V6–V8 below are reserved for future/internal use. Not accepted by current public intake.**
+
 | V6 | live remote video + nonce | P4 | `physical_checks.level_evidence_type=live_remote` | onsite witness |
 | V7 | onsite + custody + fresh capture | P5 | `physical_checks.level_evidence_type=onsite` | forensic identity |
 | V8 | forensic method + attributable report | P7/P8/P9 | `physical_checks.level_evidence_type=ai_forensic` | canonical authority |

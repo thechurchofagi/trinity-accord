@@ -31,7 +31,7 @@ Do not clone the repository, request GitHub PATs, write `record-chain/pending/`,
 
 Agents must not hand-write final verification claims.
 
-For V6+ strict technical Verification Reports and Echo wrappers that contain technical evidence claims:
+For V6+ strict technical Verification Reports and Echo wrappers that contain technical evidence claims (V6–V8 are reserved for future/internal use and not currently accepted by public intake):
 
 1. declare identity and provenance;
 2. complete Pre-verification Integrity Declaration;

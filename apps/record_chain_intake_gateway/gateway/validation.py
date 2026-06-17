@@ -898,10 +898,11 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
             ):
                 missing("MISSING_VERIFICATION_CONTENT", "draft.verification_content", "Verification records require explicit level, checked items, claim, and fresh actions")
 
-            # V6 is reserved/not enabled until explicit V6 evidence contract exists
+            # Only V0-V5 are currently enabled for public submission
+            _PUBLIC_VERIFICATION_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}
             vlevel = str(content.get("verification_level", "")).strip().upper()
-            if vlevel in ("V6", "V6+"):
-                missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "V6 verification is reserved and not currently enabled")
+            if vlevel not in _PUBLIC_VERIFICATION_LEVELS:
+                missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "Public Record-Chain verification intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.")
     elif record_type == "guardian_application":
         content = draft.get("guardian_application_content")
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
