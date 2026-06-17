@@ -639,10 +639,11 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "verificationClaim", "--verification-claim");
     requireExplicit(opts, "freshActions", "--fresh-actions");
 
-    // V6 is reserved/not enabled until explicit V6 evidence contract exists
+    // Only V0-V5 are currently enabled for public submission
     const vlevel = String(opts.level || "").toUpperCase();
-    if (vlevel === "V6" || vlevel === "V6+") {
-      errorExit("V6 verification is reserved and not currently enabled. Use V0-V5.");
+    const PUBLIC_VERIFICATION_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V5"]);
+    if (!PUBLIC_VERIFICATION_LEVELS.has(vlevel)) {
+      errorExit("Public intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.");
     }
   }
 

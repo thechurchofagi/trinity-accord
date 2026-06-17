@@ -636,7 +636,7 @@
                 "properties": {
                   "verification_level": {
                     "type": "string",
-                    "pattern": "^V([0-9]|[1-9][0-9])\\+?$"
+                    "enum": ["V0", "V1", "V2", "V3", "V4", "V5"]
                   },
                   "what_was_checked": {
                     "type": "array",

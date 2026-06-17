@@ -307,7 +307,7 @@
     },
     "INVALID_VERIFICATION_VERSION": {
       "meaning": "The verification version specified is not valid.",
-      "fix": "Use a valid verification version (V0-V8). Rebuild with the current Builder.",
+      "fix": "Use V0-V5 for current public intake. Rebuild with the current Builder.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -654,7 +654,7 @@
     },
     "VERIFICATION_EVIDENCE_REQUIRED_FOR_V6_PLUS": {
       "fix": "Either provide the required evidence (run scripts, include artifact hashes, attach verification report), or downgrade your verification level to V5 or below.",
-      "meaning": "Verification levels V6, V7, and V8 require strict evidence: scripts, artifacts, and reproducible methods. You claimed V6+ but did not provide evidence.",
+      "meaning": "V6+ verification levels are reserved for future/internal use and are not currently accepted by public intake.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -1054,10 +1054,7 @@
         "V2",
         "V3",
         "V4",
-        "V5",
-        "V6",
-        "V7",
-        "V8"
+        "V5"
       ],
       "field": "verification_content.verification_level",
       "meaning": "V0-V5 are agent-declared posture; V6+ require evidence.",
