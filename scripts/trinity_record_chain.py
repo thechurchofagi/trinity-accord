@@ -1656,9 +1656,12 @@ def build_indexes(derived_at: str | None = None) -> None:
     type_indexes: dict[str, list[dict[str, Any]]] = {
         "echo": [],
         "verification": [],
+        "guardian_application": [],
+        "guardian_retirement": [],
         "propagation": [],
         "correction": [],
         "classification_update": [],
+        "context_insufficient_notice": [],
     }
     for p in native_records:
         rec = read_json(p)
