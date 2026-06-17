@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.native-ots-backlog.v1",
-  "updated_at": "2026-06-17T17:36:18Z",
+  "updated_at": "2026-06-17T19:48:22Z",
   "items": [
     {
       "key": "bb9f4df77c99ccc44fe84e2b24d4f0645273e5c08833afe298daf38b5b65d478",
@@ -17,22 +17,6 @@
       "last_attempt_at": null,
       "last_error": null,
       "next_action": "wait_for_ots_upgrade"
-    },
-    {
-      "key": "340e718e240a0aa49c3f394d61283c44867cc51aff7f3dbb0cdca3fed84980c6",
-      "kind": "native_ots_bundle",
-      "record_index": 44,
-      "archive_status": "upgrade_due",
-      "anchored_file_sha256": "47505585cdffc3c2b9a4db9258f2330bda8dda7fd760809022568c0919be7ee3",
-      "ots_status": "pending",
-      "anchor_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.anchor.json",
-      "bundle_file": null,
-      "bundle_sha256": null,
-      "tx_id": null,
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "last_error": null,
-      "next_action": "upgrade_native_ots_anchor"
     },
     {
       "key": "9e6607180a324cc8a99a424860ff7c74c34b4282c6fe794e8544101ec188fef0",
@@ -69,22 +53,22 @@
   ],
   "summary": {
     "waiting_for_upgrade_count": 1,
-    "upgrade_due_count": 3,
+    "upgrade_due_count": 2,
     "upgrade_failed_count": 0,
     "pending_upload_count": 0,
     "failed_upload_count": 0,
     "readback_failed_count": 0,
     "waiting_for_key_count": 0,
     "archived_count": 0,
-    "open_item_count": 4,
+    "open_item_count": 3,
     "first_open_record_index": 43,
     "backlog_current": false,
     "scan_scope": "all_native_anchors",
     "native_anchor_count": 18,
-    "native_anchor_pending_count": 4,
-    "native_anchor_upgraded_count": 14,
+    "native_anchor_pending_count": 3,
+    "native_anchor_upgraded_count": 15,
     "native_anchor_verified_count": 0,
-    "native_anchor_upgraded_or_verified_count": 14,
+    "native_anchor_upgraded_or_verified_count": 15,
     "upgrade_completed_prefix_record_index": 42,
     "arweave_archive_completed_prefix_record_index": 42
   },

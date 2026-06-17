@@ -1,0 +1,16 @@
+{
+  "anchor_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.anchor.json",
+  "anchored_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.native-record-chain-head-commitment.json",
+  "bitcoin_attestation_embedded": true,
+  "bitcoin_pending": false,
+  "bitcoin_verified": false,
+  "calendar_attested": true,
+  "errors": [],
+  "generated_at": "2026-06-17T21:24:39Z",
+  "ots_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.native-record-chain-head-commitment.json.ots",
+  "result": "pass",
+  "schema": "trinity_record_chain_ots_verify_report.v1",
+  "strict_bitcoin": false,
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "no_bitcoin_node"
+}
