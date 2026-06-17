@@ -894,6 +894,24 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 verify_pending_record_authorship(signed_scope_draft)
                 draft = normalize_record_draft(signed_scope_draft)
 
+                # --- A-066: Duplicate signed payload guard ---
+                # If an existing native record has the same signed_payload_sha256 and
+                # record_type, reject this pending file to prevent duplicate appends.
+                proof = raw_draft.get("authorship_proof") or {}
+                sp_sha = proof.get("signed_payload_sha256")
+                if sp_sha:
+                    for existing_path in sorted(RECORDS.glob("R-*.json")):
+                        existing_rec = read_json(existing_path)
+                        if existing_rec.get("record_type") != (raw_draft.get("record_type") or "unknown"):
+                            continue
+                        existing_proof = existing_rec.get("authorship_proof") or {}
+                        if existing_proof.get("signed_payload_sha256") == sp_sha:
+                            raise ValueError(
+                                f"Duplicate signed_payload_sha256 {sp_sha[:16]}... "
+                                f"matches existing record {existing_rec.get('record_id')} "
+                                f"({existing_path.name}). Same author signed the same payload twice."
+                            )
+
                 if server_append_metadata:
                     draft.setdefault("server_normalization", {})
                     draft["server_normalization"]["server_append_metadata"] = server_append_metadata
@@ -1015,7 +1033,7 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                         "updated_at": utc_now(),
                     })
 
-                if not all_records:
+                if not all_records and not allow_rejections:
                     raise SystemExit(f"Rejected pending record {path.name}: {exc}") from exc
                 print(f"REJECTED {path.name}: {exc}", file=sys.stderr)
         if rejected_count:
