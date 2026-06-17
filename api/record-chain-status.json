@@ -334,7 +334,7 @@
     "record_chain_arweave_pending": 0,
     "record_chain_arweave_failed": 0,
     "record_chain_arweave_waiting_for_key": 0,
-    "native_ots_upgrade_pending": 2,
+    "native_ots_upgrade_pending": 1,
     "native_ots_arweave_pending": 0,
     "native_ots_arweave_failed": 0,
     "native_ots_waiting_for_key": 0,
