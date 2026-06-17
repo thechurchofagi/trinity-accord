@@ -3,25 +3,327 @@
   "$id": "trinityaccord.record-chain-submit-response.v1",
   "title": "Record-Chain Submit Response",
   "description": "Schema for the response from POST /record-chain/submit. The receipt is not a final chain record.",
-  "type": "object",
-  "required": [
-    "accepted",
-    "submitted",
-    "receipt_id",
-    "record_type",
-    "submission_sha256",
-    "received_raw_body_sha256",
-    "pending_file_path",
-    "intake_submission_path",
-    "receipt_path",
-    "server_created_at",
-    "append_status",
-    "diagnostics",
-    "warnings",
-    "boundary",
-    "created_pending_records",
-    "receipt_commit_sha"
+  "oneOf": [
+    {
+      "$ref": "#/$defs/success"
+    },
+    {
+      "$ref": "#/$defs/duplicate"
+    },
+    {
+      "$ref": "#/$defs/failure"
+    }
   ],
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ]
+        },
+        "field": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "meaning": {
+          "type": "string"
+        },
+        "suggested_fix": {
+          "type": "string"
+        },
+        "help_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "retry_allowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "record_type_enum": {
+      "type": "string",
+      "enum": [
+        "echo",
+        "verification",
+        "guardian_application",
+        "guardian_retirement",
+        "propagation",
+        "correction",
+        "classification_update",
+        "context_insufficient_notice"
+      ]
+    },
+    "append_status_enum": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "pending",
+        "queued",
+        "pending_dispatch_failed",
+        "dry_run",
+        "appended",
+        "rejected",
+        "duplicate",
+        "duplicate_existing_submission_returned",
+        "duplicate_existing_receipt_returned"
+      ]
+    },
+    "boundary": {
+      "type": "object",
+      "required": [
+        "receipt_is_not_authority",
+        "receipt_is_not_attestation",
+        "receipt_is_not_final_chain_record",
+        "record_chain_append_is_server_side"
+      ],
+      "properties": {
+        "receipt_is_not_authority": {
+          "const": true
+        },
+        "receipt_is_not_attestation": {
+          "const": true
+        },
+        "receipt_is_not_final_chain_record": {
+          "const": true
+        },
+        "record_chain_append_is_server_side": {
+          "const": true
+        }
+      }
+    },
+    "success": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "submitted",
+        "receipt_id",
+        "record_type",
+        "submission_sha256",
+        "received_raw_body_sha256",
+        "pending_file_path",
+        "intake_submission_path",
+        "receipt_path",
+        "server_created_at",
+        "append_status",
+        "diagnostics",
+        "warnings",
+        "boundary",
+        "created_pending_records"
+      ],
+      "properties": {
+        "accepted": {
+          "const": true
+        },
+        "submitted": {
+          "const": true
+        },
+        "receipt_id": {
+          "type": "string",
+          "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$"
+        },
+        "record_type": {
+          "$ref": "#/$defs/record_type_enum"
+        },
+        "submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "received_raw_body_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pending_file_path": {
+          "type": "string"
+        },
+        "intake_submission_path": {
+          "type": "string"
+        },
+        "receipt_path": {
+          "type": "string"
+        },
+        "server_created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "append_status": {
+          "$ref": "#/$defs/append_status_enum"
+        },
+        "receipt_commit_sha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "receipt": {
+          "type": "object"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        },
+        "created_pending_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "duplicate": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "submitted",
+        "duplicate",
+        "receipt_id",
+        "submission_sha256",
+        "received_raw_body_sha256",
+        "diagnostics",
+        "warnings",
+        "boundary"
+      ],
+      "properties": {
+        "accepted": {
+          "const": true
+        },
+        "submitted": {
+          "const": true
+        },
+        "duplicate": {
+          "const": true
+        },
+        "receipt_id": {
+          "type": "string"
+        },
+        "record_type": {
+          "$ref": "#/$defs/record_type_enum"
+        },
+        "submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "received_raw_body_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "append_status": {
+          "$ref": "#/$defs/append_status_enum"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        }
+      },
+      "additionalProperties": true
+    },
+    "failure": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "submitted",
+        "received_raw_body_sha256",
+        "diagnostics"
+      ],
+      "properties": {
+        "accepted": {
+          "const": false
+        },
+        "submitted": {
+          "const": false
+        },
+        "receipt_id": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "submission_sha256": {
+          "type": "string"
+        },
+        "received_raw_body_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pending_file_path": {
+          "type": "string"
+        },
+        "intake_submission_path": {
+          "type": "string"
+        },
+        "receipt_path": {
+          "type": "string"
+        },
+        "server_created_at": {
+          "type": "string"
+        },
+        "append_status": {
+          "type": "string"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          },
+          "minItems": 1
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        },
+        "created_pending_records": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
   "properties": {
     "accepted": {
       "type": "boolean"
@@ -34,17 +336,7 @@
       "pattern": "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$"
     },
     "record_type": {
-      "type": "string",
-      "enum": [
-        "echo",
-        "verification",
-        "guardian_application",
-        "guardian_retirement",
-        "propagation",
-        "correction",
-        "classification_update",
-        "context_insufficient_notice"
-      ]
+      "type": "string"
     },
     "submission_sha256": {
       "type": "string",
@@ -87,96 +379,22 @@
         "string",
         "null"
       ],
-      "pattern": "^[a-f0-9]{40}$",
-      "description": "Git commit SHA of the write. Lives in the response envelope, NOT inside the immutable receipt body."
+      "pattern": "^[a-f0-9]{40}$"
     },
     "receipt": {
       "type": "object"
     },
     "diagnostics": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/diagnostic"
-      }
+      "type": "array"
     },
     "warnings": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "array"
     },
     "boundary": {
-      "type": "object",
-      "required": [
-        "receipt_is_not_authority",
-        "receipt_is_not_attestation",
-        "receipt_is_not_final_chain_record",
-        "record_chain_append_is_server_side"
-      ],
-      "properties": {
-        "receipt_is_not_authority": {
-          "const": true
-        },
-        "receipt_is_not_attestation": {
-          "const": true
-        },
-        "receipt_is_not_final_chain_record": {
-          "const": true
-        },
-        "record_chain_append_is_server_side": {
-          "const": true
-        }
-      }
+      "type": "object"
     },
     "created_pending_records": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "List of pending file paths created by this submission. Contains the primary record path, and optionally a linked guardian_application path."
-    }
-  },
-  "additionalProperties": true,
-  "$defs": {
-    "diagnostic": {
-      "type": "object",
-      "required": [
-        "code",
-        "severity",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "severity": {
-          "type": "string",
-          "enum": [
-            "error",
-            "warning",
-            "info"
-          ]
-        },
-        "field": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "meaning": {
-          "type": "string"
-        },
-        "suggested_fix": {
-          "type": "string"
-        },
-        "help_url": {
-          "type": "string",
-          "format": "uri"
-        },
-        "retry_allowed": {
-          "type": "boolean"
-        }
-      }
+      "type": "array"
     }
   }
 }

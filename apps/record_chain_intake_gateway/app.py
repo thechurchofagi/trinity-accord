@@ -96,6 +96,7 @@ _GATEWAY_SCHEMA: dict[str, Any] = {
         }),
         "not_required_for": ["context_insufficient_notice"],
     },
+    "receipt_response_schema": "/api/record-chain-receipt-response.v1.json",
 }
 
 
@@ -842,6 +843,9 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
         )
 
     # --- Part B: global idempotency check (fail-closed, before rate limit) ---
+    # --- Check config BEFORE idempotency lookup (A-055 fix) ---
+    _check_config()  # raises HTTPException(503) if config missing
+
     original_submission_sha256 = sha256_canonical_json(body)
     record_type = detect_route(body)
 
@@ -1042,7 +1046,6 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     warnings: list[str] = []
 
     if _WRITE_MODE == "github_contents_pending":
-        _check_config()
         try:
             existing_match = await _find_existing_matching_receipt(
                 candidate_receipt_paths=[receipt_path, legacy_receipt_path],
@@ -1340,8 +1343,13 @@ async def _build_receipt_envelope(
     receipt: dict[str, Any],
     receipt_id: str,
     receipt_path: str,
+    envelope_warnings: list[str | dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Build a receipt envelope with immutable receipt and final status."""
+    """Build a receipt envelope with immutable receipt and final status.
+
+    The receipt object is immutable — warnings live in the envelope, not inside
+    the receipt body, so receipt_hash_verified remains correct.
+    """
     try:
         final_status_data = await _read_receipt_final_status(receipt_id)
     except Exception as exc:
@@ -1365,7 +1373,7 @@ async def _build_receipt_envelope(
         rejection_code = None
         updated_at = None
 
-    return {
+    result: dict[str, Any] = {
         "receipt": receipt,
         "receipt_id": receipt_id,
         "receipt_path": receipt_path,
@@ -1379,6 +1387,9 @@ async def _build_receipt_envelope(
             "updated_at": updated_at,
         },
     }
+    if envelope_warnings:
+        result["envelope_warnings"] = envelope_warnings
+    return result
 
 
 @app.get("/record-chain/receipt/{receipt_id}")
@@ -1454,15 +1465,13 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
         if backend_error is None:
             return await _build_receipt_envelope(cached, receipt_id, receipt_path)
         # Backend errored but we have verified cache — return cache with warning
-        out = dict(cached)
-        warnings = out.setdefault("warnings", [])
-        if isinstance(warnings, list):
-            warnings.append({
-                "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
-                "receipt_path": receipt_path,
-                "retryable": True,
-            })
-        return await _build_receipt_envelope(out, receipt_id, receipt_path)
+        # Don't mutate the receipt; put warnings in the envelope instead.
+        envelope_warnings = [{
+            "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
+            "receipt_path": receipt_path,
+            "retryable": True,
+        }]
+        return await _build_receipt_envelope(cached, receipt_id, receipt_path, envelope_warnings=envelope_warnings)
 
     # No cache, no durable — determine error type
     if backend_error is not None:
