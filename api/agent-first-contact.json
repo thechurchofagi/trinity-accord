@@ -147,22 +147,21 @@
     },
     {
       "intent": "verify_v6_plus_strict_evidence",
-      "action": "VERIFY_V6_PLUS",
+      "action": "DO_NOT_SUBMIT_V6_PLUS",
       "status": "reserved_not_currently_enabled",
       "note": "V6-V8 strict evidence is reserved for future/internal use. Current public intake accepts only V0-V5.",
       "flow": [
-        "read /agent-verify",
-        "read /api/claim-gate-rules.json",
-        "build verification v6+ submission with canonical Builder",
-        "POST to /record-chain/preflight",
-        "POST to /record-chain/submit if accepted"
+        "do not build a public Gateway submission for V6+",
+        "current public Gateway accepts only V0-V5",
+        "stop with VERIFICATION_LEVEL_NOT_ENABLED if V6+ is requested"
       ],
       "read": [
         "/agent-verify",
         "/api/protocol-verification-profiles.json",
         "/api/claim-gate-rules.json",
         "/api/evidence-input-schema.v1.json"
-      ]
+      ],
+      "public_gateway_route_enabled": false
     }
   ],
   "agent_field_guidance": {

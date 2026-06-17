@@ -419,8 +419,8 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
             recommended_next_step=f"Fix the validation errors ({codes_summary}) and resubmit. Each diagnostic includes a suggested_fix and help_url.",
             helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
             human_readable_helper_url="Trinity Accord Validation Error Reference",
-            builder_doctor_command="trinity-doctor validate",
-            builder_error_help_command=f"trinity-doctor explain {' '.join(error_codes[:5])}",
+            builder_doctor_command="node record-chain-builder.mjs doctor --file <submission.json>",
+            builder_error_help_command=f"node record-chain-builder.mjs error-help --code {' '.join(error_codes[:5])}",
             requires_human_attention=False,
         )
 
@@ -519,6 +519,8 @@ def _build_idempotency_index_data(
     intake_submission_path: str,
     record_type: str,
     now: datetime,
+    pending_written: bool = False,
+    pending_committed_at: str | None = None,
 ) -> dict[str, Any]:
     return {
         "schema": "trinityaccord.record-chain-intake-idempotency.v1",
@@ -530,6 +532,11 @@ def _build_idempotency_index_data(
         "intake_submission_path": intake_submission_path,
         "record_type": record_type,
         "created_at": now.isoformat().replace("+00:00", "Z"),
+        "transaction_state": "pending_written" if pending_written else "idempotency_written",
+        "receipt_written": True,
+        "idempotency_written": True,
+        "pending_written": pending_written,
+        "pending_committed_at": pending_committed_at,
     }
 
 
@@ -1225,6 +1232,21 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             if result_pending.get("content", {}).get("sha"):
                 created_files_for_rollback.append((pending_file_path, result_pending["content"]["sha"]))
             logger.info("Wrote pending %s", pending_file_path)
+
+            # Update idempotency index: mark pending_written=true
+            idempotency_index_data["transaction_state"] = "pending_written"
+            idempotency_index_data["pending_written"] = True
+            idempotency_index_data["pending_committed_at"] = now.isoformat().replace("+00:00", "Z")
+            try:
+                result_idx_update = await put_file(
+                    idempotency_path,
+                    canonical_dumps(idempotency_index_data),
+                    f"intake: idempotency index update {original_submission_sha256[:16]}",
+                    sha=result_idx.get("content", {}).get("sha"),
+                )
+                logger.info("Updated idempotency index with pending_written")
+            except Exception:
+                logger.warning("Failed to update idempotency index with pending_written (non-fatal)")
 
             if _DISPATCH_APPEND_WORKFLOW:
                 try:

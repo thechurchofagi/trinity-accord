@@ -148,10 +148,11 @@
       "severity": "error"
     },
     "ECHO_TYPE_RETIRED": {
-      "fix": "Remove the echo_type field from your submission, or leave it — it will be ignored.",
-      "meaning": "The echo_type field is deprecated. Echo types (E1–E9) have been removed. Echo is now a unified type. Your submission will be processed but the echo_type value is ignored.",
+      "fix": "Remove echo_type and rebuild with the current Builder. Use echo_content.echo_text and echo_content.echo_intent.",
+      "meaning": "echo_type is retired and no longer accepted by public intake.",
       "recovery_possible": true,
-      "severity": "warning"
+      "severity": "error",
+      "alias_for": "RETIRED_FIELD"
     },
     "FINAL_CHAIN_FIELD_FORBIDDEN": {
       "fix": "Remove the final-chain field. The gateway assigns chain hashes and positions server-side.",
@@ -440,7 +441,7 @@
     },
     "MISSING_GUARDIAN_RETIREMENT_FIELD": {
       "meaning": "guardian_retirement is missing guardian_id, guardian_public_key_sha256, or reason.",
-      "fix": "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+      "fix": "Provide --guardian-id, --guardian-key-sha, --body, --target-guardian-application-record-id <R-...>, and --target-guardian-application-record-sha256 <64 hex>.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -687,6 +688,18 @@
       "fix": "Rebuild with the current record-chain-builder.mjs. All 9 top-level fields are required: schema, submission_type, client_generated_at, record_type, record_draft, builder, client_context, submission_boundary, authorship_proof.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "MISSING_GUARDIAN_RETIREMENT_TARGET": {
+      "meaning": "guardian_retirement must bind to the original guardian_application record id.",
+      "fix": "Provide --target-guardian-application-record-id <R-...> copied from the accepted guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "MISSING_GUARDIAN_RETIREMENT_TARGET_SHA": {
+      "meaning": "guardian_retirement must bind to the original guardian_application record SHA-256.",
+      "fix": "Provide --target-guardian-application-record-sha256 <64 hex> copied from record_sha256 of the accepted guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
     }
   },
   "field_groups": [
