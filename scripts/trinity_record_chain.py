@@ -648,6 +648,9 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
             "not_successor_reception": b.get("not_successor_reception") is True,
             "not_amendment": b.get("not_amendment") is True,
             "bitcoin_originals_prevail": b.get("bitcoin_originals_prevail") is True,
+            "receipt_is_not_final_inclusion": b.get("receipt_is_not_final_inclusion") is True,
+            "receipt_is_intake_only": b.get("receipt_is_intake_only") is True,
+            "later_records_may_reclassify_or_correct_this_record": b.get("later_records_may_reclassify_or_correct_this_record") is True,
         }
 
     # --- Content block normalization (B model) ---
