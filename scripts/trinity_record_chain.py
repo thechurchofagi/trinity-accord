@@ -712,31 +712,6 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     require_authorship(draft)
     require_not_reserved_record_type(draft)
 
-    # --- Oath gate field backfill (non-destructive) ---
-    # Gateway intake may produce submission_oath_verification without the
-    # newer required boolean fields. These values exist in
-    # non_authority_boundary_acknowledgement. Store the backfill under
-    # server_normalization so it does NOT modify the signed payload.
-    oath = draft.get("submission_oath_verification")
-    if isinstance(oath, dict):
-        naba = draft.get("non_authority_boundary_acknowledgement")
-        if isinstance(naba, dict):
-            _OATH_BACKFILL_FIELDS = (
-                "not_successor_reception",
-                "receipt_is_not_final_inclusion",
-                "receipt_is_intake_only",
-                "later_records_may_reclassify_or_correct_this_record",
-            )
-            missing_oath_fields = {}
-            for field in _OATH_BACKFILL_FIELDS:
-                if field not in oath and field in naba:
-                    missing_oath_fields[field] = naba[field]
-            if missing_oath_fields:
-                sn = draft.setdefault("server_normalization", {})
-                sn.setdefault("oath_field_backfill", missing_oath_fields)
-                # Also apply to the live oath dict for the final record,
-                # but only after the hash is computed (deferred to post-hash).
-
     # verify_pending_record_authorship is called by append_records on the
     # raw draft before normalization, so we don't re-verify here.
     return draft
@@ -1034,13 +1009,6 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 draft["content_sha256_v2"] = content_hash_v2(draft)
                 draft["record_sha256"] = record_hash(draft)
 
-                # Apply deferred oath backfill AFTER hash computation
-                # so it doesn't affect the signed payload hash.
-                _deferred_backfill = (draft.get("server_normalization") or {}).get("oath_field_backfill")
-                if _deferred_backfill and isinstance(draft.get("submission_oath_verification"), dict):
-                    for _bf_key, _bf_val in _deferred_backfill.items():
-                        if _bf_key not in draft["submission_oath_verification"]:
-                            draft["submission_oath_verification"][_bf_key] = _bf_val
 
                 out = RECORDS / f"{draft['record_id']}.json"
                 if out.exists():
@@ -1313,10 +1281,23 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
         }
 
+        # Boundary-side oath fields: if the record has non_authority_boundary_acknowledgement
+        # with these fields set to True, treat them as valid even if submission_oath_verification
+        # doesn't include them (Gateway intake compatibility).
+        naba = obj.get("non_authority_boundary_acknowledgement")
+        naba_validated = set()
+        if isinstance(naba, dict):
+            for field in historical_new_oath_fields:
+                if naba.get(field) is True:
+                    naba_validated.add(field)
+
         for field in required_bools:
             if oath.get(field) is not True:
                 # Skip new oath fields for historical records
                 if compat and compat.get("allowed_skip_oath_new_fields") and field in historical_new_oath_fields:
+                    continue
+                # Skip if validated via non_authority_boundary_acknowledgement
+                if field in naba_validated:
                     continue
                 errors.append(f"{path}: oath.{field} is not true")
 
