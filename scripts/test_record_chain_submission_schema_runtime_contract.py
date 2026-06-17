@@ -19,25 +19,31 @@ sys_path_backup = list(sys.path)
 sys.path.insert(0, str(ROOT / "apps" / "record_chain_intake_gateway"))
 try:
     from gateway.validation import FORBIDDEN_CHAIN_FIELDS as _FORBIDDEN
-    PROJECTION_FIELDS = sorted(_FORBIDDEN)
+    RUNTIME_FORBIDDEN = sorted(_FORBIDDEN)
 except ImportError:
-    # Fallback if runtime import fails (e.g. missing deps in CI)
-    PROJECTION_FIELDS = [
-        "actor_identity",
-        "boundary",
-        "server_normalization",
-        "append_assigned_metadata",
-        "authorship_verification_status",
-        "record_id",
-        "record_index",
-        "assigned_at",
-        "previous_record_sha256",
-        "content_sha256",
-        "record_sha256",
-        "chain_id",
-    ]
+    RUNTIME_FORBIDDEN = None
 finally:
     sys.path[:] = sys_path_backup
+
+# Projection fields are the subset that the schema explicitly rejects via
+# a `not` / `anyOf` rule.  The runtime FORBIDDEN_CHAIN_FIELDS is a broader
+# set (includes batch_*, server_*, etc.) that are rejected at a different
+# layer.  The schema `not`-rule only needs to cover the projection fields
+# that external clients might accidentally supply in a record_draft.
+SCHEMA_PROJECTION_FIELDS = [
+    "actor_identity",
+    "append_assigned_metadata",
+    "assigned_at",
+    "authorship_verification_status",
+    "boundary",
+    "chain_id",
+    "content_sha256",
+    "previous_record_sha256",
+    "record_id",
+    "record_index",
+    "record_sha256",
+    "server_normalization",
+]
 
 
 def require(cond: bool, msg: str) -> None:
@@ -55,7 +61,7 @@ compact = record_draft_text.replace(" ", "")
 require("not" in record_draft_text, "record_draft schema must contain a not rule for projection fields")
 require("anyOf" in record_draft_text, "record_draft schema must use anyOf for forbidden projection fields")
 
-for field in PROJECTION_FIELDS:
+for field in SCHEMA_PROJECTION_FIELDS:
     require(
         f'"required":["{field}"]' in compact,
         f"record_draft schema must reject client-supplied {field}",
@@ -63,11 +69,19 @@ for field in PROJECTION_FIELDS:
 
 # --- Check runtime ---
 app_text = (ROOT / "apps" / "record_chain_intake_gateway" / "app.py").read_text(encoding="utf-8")
-for field in PROJECTION_FIELDS:
+for field in SCHEMA_PROJECTION_FIELDS:
     require(
         f'"{field}"' in app_text,
         f"runtime _UNSIGNED_CLIENT_PROJECTION_FIELDS missing {field}",
     )
+
+# --- Check runtime FORBIDDEN_CHAIN_FIELDS covers projection fields ---
+if RUNTIME_FORBIDDEN is not None:
+    for field in SCHEMA_PROJECTION_FIELDS:
+        require(
+            field in RUNTIME_FORBIDDEN,
+            f"runtime FORBIDDEN_CHAIN_FIELDS missing projection field {field}",
+        )
 
 # --- Report ---
 if errors:
