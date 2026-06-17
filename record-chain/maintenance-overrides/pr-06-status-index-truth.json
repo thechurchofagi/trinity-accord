@@ -1,0 +1,7 @@
+{
+  "schema": "trinityaccord.record-chain-maintenance-override.v1",
+  "approval_token": "RECORD_CHAIN_MAINTENANCE_OVERRIDE_OK",
+  "reason": "PR-06: Rebuild status/index from native sources. Fixes stale total_records (1->43), adds missing type indexes (guardian_application, guardian_retirement, context_insufficient_notice), corrects CIN authorship_proof_required, separates current vs legacy api_endpoints.",
+  "pr": 523,
+  "batch": "PR-06"
+}
