@@ -23,9 +23,9 @@ class TestSubmitWrites:
             pytest.fail(f"Submit not accepted: {_json.dumps(data, indent=2)}")
         assert data["submitted"] is True
 
-        # Check put_file was called 4 times (submission + pending + receipt + idempotency index)
+        # Check put_file was called 5 times (submission + pending + receipt + idempotency index + idempotency update)
         put_mock = mock_github["put_file"]
-        assert put_mock.call_count == 4
+        assert put_mock.call_count == 5
 
         paths = [call.args[0] for call in put_mock.call_args_list]
         assert any("intake/submissions/" in p for p in paths), f"Missing intake submission: {paths}"
