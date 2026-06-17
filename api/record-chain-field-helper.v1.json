@@ -700,6 +700,12 @@
       "fix": "Provide --target-guardian-application-record-sha256 <64 hex> copied from record_sha256 of the accepted guardian_application record.",
       "severity": "error",
       "recovery_possible": true
+    },
+    "INTAKE_TRANSACTION_NOT_MATERIALIZED": {
+      "meaning": "The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
+      "fix": "Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",
+      "recovery_possible": true,
+      "severity": "error"
     }
   },
   "field_groups": [

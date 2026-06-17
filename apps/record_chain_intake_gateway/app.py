@@ -605,6 +605,22 @@ async def _submit_response_from_idempotency_index(
             f"Idempotency receipt_id mismatch: index={index.get('receipt_id')} receipt={receipt_id}"
         )
 
+    # --- Materialization gate: confirm pending file exists ---
+    if index.get("pending_written") is not True:
+        raise RuntimeError(
+            "Idempotency index is not materialized: pending_written is not true"
+        )
+    if index.get("transaction_state") != "pending_written":
+        raise RuntimeError(
+            f"Idempotency index is not materialized: transaction_state={index.get('transaction_state')!r}"
+        )
+    pending_path = index.get("pending_file_path")
+    if not isinstance(pending_path, str) or not pending_path:
+        raise RuntimeError("Idempotency index missing pending_file_path")
+    pending_sha = await get_file_sha(pending_path)
+    if pending_sha is None:
+        raise RuntimeError(f"Idempotency pending file is missing: {pending_path}")
+
     return SubmitResponse(
         accepted=True,
         submitted=True,
@@ -896,6 +912,52 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             # Fail-closed: receipt integrity errors (missing/invalid receipt_sha256)
             # must not be swallowed by the broad except below.
             raise
+        except RuntimeError as exc:
+            if "not materialized" in str(exc) or "pending file is missing" in str(exc):
+                logger.warning(
+                    "Idempotency index not materialized for %s: %s",
+                    original_submission_sha256[:16],
+                    exc,
+                )
+                return SubmitResponse(
+                    accepted=False,
+                    submitted=False,
+                    record_type=record_type,
+                    submission_sha256=original_submission_sha256,
+                    received_raw_body_sha256=received_raw_body_sha256,
+                    diagnostics=[Diagnostic(
+                        code="INTAKE_TRANSACTION_NOT_MATERIALIZED",
+                        severity="error",
+                        field="record-chain/intake/by-submission-sha256",
+                        message=f"Duplicate idempotency index exists but pending file not materialized: {exc}",
+                        meaning="The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
+                        suggested_fix="Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",
+                        retry_allowed=True,
+                    )],
+                    boundary=_build_submit_boundary(body),
+                )
+            logger.warning(
+                "Existing idempotency index could not be resolved for %s: %s",
+                original_submission_sha256[:16],
+                exc,
+            )
+            return SubmitResponse(
+                accepted=False,
+                submitted=False,
+                record_type=record_type,
+                submission_sha256=original_submission_sha256,
+                received_raw_body_sha256=received_raw_body_sha256,
+                diagnostics=[Diagnostic(
+                    code="IDEMPOTENCY_INDEX_LOOKUP_FAILED",
+                    severity="error",
+                    field="record-chain/intake/by-submission-sha256",
+                    message=f"Existing idempotency index could not be resolved to a valid receipt: {exc}",
+                    meaning="The gateway found duplicate-submission state but could not safely return the original receipt.",
+                    suggested_fix="Retry later or ask an operator to inspect the idempotency index and receipt path.",
+                    retry_allowed=True,
+                )],
+                boundary=_build_submit_boundary(body),
+            )
         except Exception as exc:
             logger.warning(
                 "Existing idempotency index could not be resolved for %s: %s",
