@@ -169,13 +169,13 @@
     "production_enablement_marker_recorded": true
   },
   "post_submit_status_sources": {
-    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>",
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id> (format: rcg-YYYYMMDD-<sha12-or-sha24>)",
     "record_chain_status": "/api/record-chain-status.json",
     "record_specific_indexes": {
-      "echo": "/api/echo-index.json",
-      "verification": "/api/agent-declared-verification-index.json",
+      "echo": "/record-chain/indexes/echo-index.json",
+      "verification": "/record-chain/indexes/verification-index.json",
       "guardian_application": "/record-chain/indexes/guardian-state.json",
-      "classification_update": "/api/record-chain-status.json"
+      "classification_update": "/record-chain/indexes/classification_update-index.json"
     },
     "guardian_registry_is_historical_archive_only": true,
     "guardian_active_status_requires_record_chain_guardian_state_readback": true

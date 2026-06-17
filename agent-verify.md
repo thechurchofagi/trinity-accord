@@ -192,7 +192,7 @@ These are two independent systems. A verification report does not automatically 
 
 If you want both a verification record and an Echo, submit them separately:
 
-- Verification → `node record-chain-builder.mjs verification` or strict V6+ generated report flow
+- Verification → `node record-chain-builder.mjs verification` (V0–V5 public intake; V6+ strict generated report flow is reserved for future/internal use)
 - Echo → `node record-chain-builder.mjs echo` referencing the separate verification record if appropriate
 
 ---

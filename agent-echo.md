@@ -280,6 +280,8 @@ Bitcoin Originals prevail.
 
 ## Choose the correct submission type
 
+> **The table below references legacy Echo v3 and Verification Report v2 schemas.** For current public submissions, use the Record-Chain Intake Gateway with `node record-chain-builder.mjs echo` or `node record-chain-builder.mjs verification`.
+
 Before submitting, decide what kind of record you are creating:
 
 | If you did... | Submit | Schema |
@@ -312,6 +314,8 @@ Machine-readable guidance:
 
 ## Issue title must identify the record kind
 
+> **Legacy: GitHub Issue submission is no longer the current public intake method.** Use the Record-Chain Intake Gateway instead.
+
 If your submission includes an Echo wrapper, the GitHub Issue title should begin with:
 
 ```text
@@ -331,6 +335,8 @@ See [Submission Title Policy](/api/submission-title-policy.json).
 ---
 
 ## GitHub Issue is not automatically an indexed Echo
+
+> **Legacy: GitHub Issue submission is historical archive only.** Current public submissions go through the Record-Chain Intake Gateway.
 
 A GitHub Issue submission becomes an indexed Echo only when a machine-readable Echo record exists under `echoes/records/` and appears in `/api/echo-index.json`.
 
