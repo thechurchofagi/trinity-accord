@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-17T14:52:42.196670+00:00",
+  "generated_at": "2026-06-17T14:56:47.207443+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -18,7 +18,7 @@
     "/api/guardian-active-listing-policy.v1.json",
     "/api/agent-declared-verification-index.json"
   ],
-  "source_digest": "a4a8205782adae06",
+  "source_digest": "b8f8518cc7a5676f",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 44,
@@ -53,21 +53,21 @@
         "bitcoin_pending": true,
         "bitcoin_verified": false,
         "implemented": true,
-        "latest_record_id": "R-000000043",
-        "latest_record_sha256": "94560272bcf5d82e56457d51b0e09e3b18eee434390c7c4dee29cc009cb2aa73",
+        "latest_record_id": "R-000000044",
+        "latest_record_sha256": "984808de41b5066796eafdb2aeb402e6e32abc7a0b2bff7af25c3bb5913f64f8",
         "legacy_batch_status_api": "/api/record-chain-anchor-status.json",
         "legacy_main_chain_jsonl_is_not_source": true,
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
-        "native_record_count": 43,
-        "status": "anchor-needed",
+        "native_record_count": 44,
+        "status": "current-pending-bitcoin",
         "status_api": "/api/record-chain-native-ots-latest.json",
-        "latest_record_index": 43,
-        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-0664d8df5572c942.anchor.json",
-        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-0664d8df5572c942.native-record-chain-head-commitment.json",
-        "latest_ots_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-0664d8df5572c942.native-record-chain-head-commitment.json.ots",
+        "latest_record_index": 44,
+        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.anchor.json",
+        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.native-record-chain-head-commitment.json",
+        "latest_ots_file": "record-chain/ots/native-anchors/native-record-44-R-000000044-984808de41b50667-47505585cdffc3c2.native-record-chain-head-commitment.json.ots",
         "ots_status": "pending",
-        "anchor_needed": true,
+        "anchor_needed": false,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -117,8 +117,8 @@
         "latest_manifest_path": null,
         "latest_native_record_sha256": null,
         "record_count": null,
-        "status": "waiting-for-native-ots",
-        "archive_needed": false
+        "status": "archive-needed",
+        "archive_needed": true
       },
       "anchor_status": {
         "batch_count": 1,
@@ -411,7 +411,7 @@
     "pipeline": "attention",
     "ots": "pending",
     "ots_raw_status": "pending",
-    "arweave": "waiting-for-native-ots",
+    "arweave": "archive-needed",
     "not_primary_counter": true,
     "archive_backlog": {
       "record_chain_arweave_pending": 0,

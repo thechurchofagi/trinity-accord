@@ -843,7 +843,7 @@ Refusal is allowed. Critical preservation is allowed.
       Pipeline: attention.<br>
       Latest technical record: R-000000044.<br>
       OTS: pending.<br>
-      Arweave: waiting-for-native-ots.<br>
+      Arweave: archive-needed.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -896,7 +896,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>a4a8205782adae06</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>b8f8518cc7a5676f</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
