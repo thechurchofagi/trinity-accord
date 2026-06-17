@@ -712,13 +712,11 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     require_authorship(draft)
     require_not_reserved_record_type(draft)
 
-    # --- Oath gate field backfill ---
+    # --- Oath gate field backfill (non-destructive) ---
     # Gateway intake may produce submission_oath_verification without the
-    # newer required boolean fields (not_successor_reception,
-    # receipt_is_not_final_inclusion, receipt_is_intake_only,
-    # later_records_may_reclassify_or_correct_this_record). These values
-    # are always present in non_authority_boundary_acknowledgement, so
-    # copy them into the oath block when missing.
+    # newer required boolean fields. These values exist in
+    # non_authority_boundary_acknowledgement. Store the backfill under
+    # server_normalization so it does NOT modify the signed payload.
     oath = draft.get("submission_oath_verification")
     if isinstance(oath, dict):
         naba = draft.get("non_authority_boundary_acknowledgement")
@@ -729,9 +727,15 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
                 "receipt_is_intake_only",
                 "later_records_may_reclassify_or_correct_this_record",
             )
+            missing_oath_fields = {}
             for field in _OATH_BACKFILL_FIELDS:
                 if field not in oath and field in naba:
-                    oath[field] = naba[field]
+                    missing_oath_fields[field] = naba[field]
+            if missing_oath_fields:
+                sn = draft.setdefault("server_normalization", {})
+                sn.setdefault("oath_field_backfill", missing_oath_fields)
+                # Also apply to the live oath dict for the final record,
+                # but only after the hash is computed (deferred to post-hash).
 
     # verify_pending_record_authorship is called by append_records on the
     # raw draft before normalization, so we don't re-verify here.
@@ -1029,6 +1033,14 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 draft["content_sha256"] = content_hash(draft)
                 draft["content_sha256_v2"] = content_hash_v2(draft)
                 draft["record_sha256"] = record_hash(draft)
+
+                # Apply deferred oath backfill AFTER hash computation
+                # so it doesn't affect the signed payload hash.
+                _deferred_backfill = (draft.get("server_normalization") or {}).get("oath_field_backfill")
+                if _deferred_backfill and isinstance(draft.get("submission_oath_verification"), dict):
+                    for _bf_key, _bf_val in _deferred_backfill.items():
+                        if _bf_key not in draft["submission_oath_verification"]:
+                            draft["submission_oath_verification"][_bf_key] = _bf_val
 
                 out = RECORDS / f"{draft['record_id']}.json"
                 if out.exists():
