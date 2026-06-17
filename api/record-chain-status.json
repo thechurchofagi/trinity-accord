@@ -9,20 +9,20 @@
       "default_mode": "dry-run",
       "implemented": true,
       "index_api": "/api/record-chain-arweave-index.json",
-      "latest_arweave_txid": "Ofs15HgBCAfIBXikm3_Uk4EWP2kwKHhf-LByfiUBXYw",
-      "latest_native_record_id": null,
-      "live_archive_count": 11,
+      "latest_arweave_txid": "3KBsg71SN1ZZg1AKE5-dwggEg9tHoGo1MhXWwKy7Iyw",
+      "latest_native_record_id": "R-000000047",
+      "live_archive_count": 7,
       "live_upload_enabled": true,
       "live_upload_implemented": true,
-      "native_record_count": null,
+      "native_record_count": 47,
       "source_type": "native-record-chain",
       "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-      "latest_archive_id": null,
-      "latest_manifest_path": null,
-      "latest_native_record_sha256": null,
-      "record_count": null,
-      "status": "archive-needed",
-      "archive_needed": true
+      "latest_archive_id": "archive-native-R-000000047-2df77e4efacf",
+      "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000047-2df77e4efacf/manifest.json",
+      "latest_native_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
+      "record_count": 47,
+      "status": "current",
+      "archive_needed": false
     },
     "batch_manifests": {
       "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
@@ -146,15 +146,15 @@
     "legacy_heavy_ci_retired": true
   },
   "post_m9_status": {
-    "m9_archive_status": "backlog",
-    "m9_arweave_txid": "Ofs15HgBCAfIBXikm3_Uk4EWP2kwKHhf-LByfiUBXYw",
+    "m9_archive_status": "pass",
+    "m9_arweave_txid": "3KBsg71SN1ZZg1AKE5-dwggEg9tHoGo1MhXWwKy7Iyw",
     "m9_latest_record_id": "R-000000047",
     "m9_native_record_count": 47,
     "m9_ots_status": "current-pending-bitcoin",
-    "m9_status": "backlog",
+    "m9_status": "pass",
     "m9_latest_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
-    "m9_arweave_archive_id": null,
-    "m9_arweave_manifest_path": null
+    "m9_arweave_archive_id": "archive-native-R-000000047-2df77e4efacf",
+    "m9_arweave_manifest_path": "record-chain/arweave-archives/archive-native-R-000000047-2df77e4efacf/manifest.json"
   },
   "public_phase": {
     "bitcoin_originals_prevail": true,
@@ -317,24 +317,24 @@
       "bitcoin_verified": false
     },
     "arweave_head": {
-      "latest_record_id": null,
-      "latest_record_sha256": null,
-      "native_record_count": null,
-      "archive_id": null,
-      "arweave_txid": null
+      "latest_record_id": "R-000000047",
+      "latest_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
+      "native_record_count": 47,
+      "archive_id": "archive-native-R-000000047-2df77e4efacf",
+      "arweave_txid": "3KBsg71SN1ZZg1AKE5-dwggEg9tHoGo1MhXWwKy7Iyw"
     },
     "ots_matches_chain": true,
-    "arweave_matches_ots": false,
-    "arweave_matches_chain": false,
+    "arweave_matches_ots": true,
+    "arweave_matches_chain": true,
     "ots_anchor_needed": false,
-    "arweave_archive_needed": true,
-    "pipeline_current": false
+    "arweave_archive_needed": false,
+    "pipeline_current": true
   },
   "archive_backlog": {
     "record_chain_arweave_pending": 0,
     "record_chain_arweave_failed": 0,
     "record_chain_arweave_waiting_for_key": 0,
-    "native_ots_upgrade_pending": 1,
+    "native_ots_upgrade_pending": 2,
     "native_ots_arweave_pending": 0,
     "native_ots_arweave_failed": 0,
     "native_ots_waiting_for_key": 0,
