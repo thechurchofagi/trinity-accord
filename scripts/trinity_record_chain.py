@@ -492,7 +492,7 @@ def record_id(index: int) -> str:
 
 
 def require_boundary(record: dict[str, Any]) -> None:
-    boundary = record.get("boundary_acknowledgement") or record.get("boundary") or {}
+    boundary = record.get("boundary_acknowledgement") or record.get("boundary") or record.get("non_authority_boundary_acknowledgement") or {}
     missing = [key for key in REQUIRED_FINAL_BOUNDARY_FIELDS if boundary.get(key) is not True]
 
     # Check historical compatibility exceptions
@@ -697,7 +697,8 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
         "record_may_be_corrected_by_later_record": True,
         "record_may_not_be_deleted_or_mutated": True,
     })
-    draft.setdefault("boundary_acknowledgement", BOUNDARY)
+    if not draft.get("boundary_acknowledgement") and not draft.get("non_authority_boundary_acknowledgement"):
+        draft["boundary_acknowledgement"] = BOUNDARY
     if not draft.get("record_type"):
         raise ValueError("record_type is required")
     if not draft.get("actor_identity"):
@@ -707,6 +708,28 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
     require_boundary(draft)
     require_authorship(draft)
     require_not_reserved_record_type(draft)
+
+    # --- Oath gate field backfill ---
+    # Gateway intake may produce submission_oath_verification without the
+    # newer required boolean fields (not_successor_reception,
+    # receipt_is_not_final_inclusion, receipt_is_intake_only,
+    # later_records_may_reclassify_or_correct_this_record). These values
+    # are always present in non_authority_boundary_acknowledgement, so
+    # copy them into the oath block when missing.
+    oath = draft.get("submission_oath_verification")
+    if isinstance(oath, dict):
+        naba = draft.get("non_authority_boundary_acknowledgement")
+        if isinstance(naba, dict):
+            _OATH_BACKFILL_FIELDS = (
+                "not_successor_reception",
+                "receipt_is_not_final_inclusion",
+                "receipt_is_intake_only",
+                "later_records_may_reclassify_or_correct_this_record",
+            )
+            for field in _OATH_BACKFILL_FIELDS:
+                if field not in oath and field in naba:
+                    oath[field] = naba[field]
+
     # verify_pending_record_authorship is called by append_records on the
     # raw draft before normalization, so we don't re-verify here.
     return draft
