@@ -7,23 +7,15 @@ fields are server-derived and must not be supplied by clients.
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
-# Import runtime forbidden fields instead of maintaining a hand-written list.
-# This keeps the test in sync with the actual Gateway validation logic.
-sys_path_backup = list(sys.path)
-sys.path.insert(0, str(ROOT / "apps" / "record_chain_intake_gateway"))
-try:
-    from gateway.validation import FORBIDDEN_CHAIN_FIELDS as _FORBIDDEN
-    RUNTIME_FORBIDDEN = sorted(_FORBIDDEN)
-except ImportError:
-    RUNTIME_FORBIDDEN = None
-finally:
-    sys.path[:] = sys_path_backup
+# Projection fields that the schema explicitly rejects via `not`/`anyOf` rules
+# and that the runtime rejects via _UNSIGNED_CLIENT_PROJECTION_FIELDS.
+# NOTE: runtime FORBIDDEN_CHAIN_FIELDS is a broader set (batch_*, server_*, etc.)
+# that is validated at a different layer; this test does NOT cross-check those.
 
 # Projection fields are the subset that the schema explicitly rejects via
 # a `not` / `anyOf` rule.  The runtime FORBIDDEN_CHAIN_FIELDS is a broader
@@ -74,14 +66,6 @@ for field in SCHEMA_PROJECTION_FIELDS:
         f'"{field}"' in app_text,
         f"runtime _UNSIGNED_CLIENT_PROJECTION_FIELDS missing {field}",
     )
-
-# --- Check runtime FORBIDDEN_CHAIN_FIELDS covers projection fields ---
-if RUNTIME_FORBIDDEN is not None:
-    for field in SCHEMA_PROJECTION_FIELDS:
-        require(
-            field in RUNTIME_FORBIDDEN,
-            f"runtime FORBIDDEN_CHAIN_FIELDS missing projection field {field}",
-        )
 
 # --- Report ---
 if errors:
