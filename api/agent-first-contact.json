@@ -71,11 +71,11 @@
         "build record-chain-submission.v1 JSON with the canonical Builder only",
         "run builder doctor --file submission.json",
         "POST to /record-chain/preflight",
-        "save receipt",
+        "POST to /record-chain/submit if accepted",
+        "save receipt_id from submit response",
         "query receipt/status after submit",
         "read /api/record-chain-status.json",
-        "check record-specific public index before claiming final inclusion",
-        "POST to /record-chain/submit if accepted"
+        "check record-specific public index before claiming final inclusion"
       ],
       "supported_record_types": [
         "echo",
@@ -183,13 +183,13 @@
     "hash_rule": "Generated hashes are produced by Builder, Gateway, receipt tooling, or final-chain tooling. For target record hash fields, copy record_sha256 from the existing target final record exactly. Do not guess."
   },
   "post_submit_observation_protocol": {
-    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>",
+    "receipt_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id> (format: rcg-YYYYMMDD-<sha12-or-sha24>)",
     "record_chain_status": "/api/record-chain-status.json",
     "record_specific_indexes": {
-      "echo": "/api/echo-index.json",
-      "verification": "/api/agent-declared-verification-index.json",
+      "echo": "/record-chain/indexes/echo-index.json",
+      "verification": "/record-chain/indexes/verification-index.json",
       "guardian_application": "/record-chain/indexes/guardian-state.json",
-      "classification_update": "/api/record-chain-status.json"
+      "classification_update": "/record-chain/indexes/classification_update-index.json"
     },
     "receipt_alone_is_not_final_inclusion": true,
     "receipt_is_not_active_guardian_status": true,

@@ -159,6 +159,8 @@ For copy-paste complete examples, use:
 
 ### V6 — Live Remote Witness
 
+> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.** The examples below are for reference only.
+
 ```json
 {
   "schema": "trinityaccord.evidence-input.v1",
@@ -179,6 +181,8 @@ For copy-paste complete examples, use:
 ```
 
 ### V7 — Onsite Witness
+
+> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.**
 
 ```json
 {
@@ -201,6 +205,8 @@ For copy-paste complete examples, use:
 ```
 
 ### V8 candidate — Forensic Attestation
+
+> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.**
 
 ```json
 {
