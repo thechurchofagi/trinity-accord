@@ -271,7 +271,7 @@ def main() -> int:
     ok("gateway v1 historical status API")
 
     # 4. Homepage points to record-chain
-    require_text("index.md", ["record-chain", "trinity_record_builder.py", "trinity_record_chain.py"])
+    require_text("index.md", ["record-chain", "downloads/record-chain-builder.mjs", "trinity_record_chain.py"])
 
     # 5. Agent entry pages point to record-chain
     for candidate in ["agent-first-contact.md", "agent-first-contact/index.md"]:

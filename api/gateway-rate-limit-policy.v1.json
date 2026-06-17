@@ -1,7 +1,10 @@
 {
   "schema": "trinityaccord.gateway-rate-limit-policy.v1",
-  "status": "prelaunch_policy",
-  "purpose": "Simple trust-first rate limit for early external agent submissions.",
+  "status": "production_live_policy",
+  "purpose": "Trust-first rate limit for public Record-Chain Intake Gateway. Single-process in-memory; not durable across restarts; not multi-instance safe.",
+  "limiter_class": "single_process_in_memory",
+  "durable_across_restart": false,
+  "multi_instance_safe": false,
   "policy": {
     "global_submit_limit_per_hour": 100,
     "participant_submit_limit_per_hour": 10,
