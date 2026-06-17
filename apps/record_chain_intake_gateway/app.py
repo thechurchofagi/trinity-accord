@@ -607,12 +607,12 @@ async def _submit_response_from_idempotency_index(
 
     # --- Materialization gate: confirm pending file exists ---
     # Only enforce when fields are present (backward compat with pre-gate indexes)
-    if "pending_written" in index:
+    has_materialization_fields = "pending_written" in index or "transaction_state" in index
+    if has_materialization_fields:
         if index.get("pending_written") is not True:
             raise RuntimeError(
                 "Idempotency index is not materialized: pending_written is not true"
             )
-    if "transaction_state" in index:
         if index.get("transaction_state") != "pending_written":
             raise RuntimeError(
                 f"Idempotency index is not materialized: transaction_state={index.get('transaction_state')!r}"
@@ -620,9 +620,10 @@ async def _submit_response_from_idempotency_index(
     pending_path = index.get("pending_file_path")
     if not isinstance(pending_path, str) or not pending_path:
         raise RuntimeError("Idempotency index missing pending_file_path")
-    pending_sha = await get_file_sha(pending_path)
-    if pending_sha is None:
-        raise RuntimeError(f"Idempotency pending file is missing: {pending_path}")
+    if has_materialization_fields:
+        pending_sha = await get_file_sha(pending_path)
+        if pending_sha is None:
+            raise RuntimeError(f"Idempotency pending file is missing: {pending_path}")
 
     return SubmitResponse(
         accepted=True,
