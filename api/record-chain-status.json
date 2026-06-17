@@ -79,17 +79,17 @@
     }
   },
   "api_endpoints": {
-    "arweave_archive_index": "/api/record-chain-arweave-index.json",
-    "builder_bundles": "/api/record-chain-builder-bundles.v1.json",
-    "echo_index": "/api/echo-index.json",
-    "gateway_contract": "/api/record-chain-intake-gateway.v1.json",
-    "guardian_registry": "/api/guardian-registry.json",
-    "native_ots_latest": "/api/record-chain-native-ots-latest.json",
-    "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json",
-    "public_home_status": "/api/public-home-status.json",
+    "record_chain_intake_gateway": "/api/record-chain-intake-gateway.v1.json",
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit",
+    "receipt": "/record-chain/receipt/<receipt_id>",
     "record_chain_status": "/api/record-chain-status.json",
-    "submission_schema": "/api/record-chain-submission-schema.v1.json",
-    "verification_archive_index": "/api/verification-archive-index.json"
+    "record_index": "/record-chain/indexes/record-index.json",
+    "echo_index": "/record-chain/indexes/echo-index.json",
+    "verification_index": "/record-chain/indexes/verification-index.json",
+    "guardian_state": "/record-chain/indexes/guardian-state.json",
+    "legacy_echo_archive_index": "/api/echo-index.json",
+    "legacy_verification_archive_index": "/api/agent-declared-verification-index.json"
   },
   "boundary": {
     "append_only": true,
@@ -102,7 +102,6 @@
   },
   "builder_script": "downloads/record-chain-builder.mjs",
   "chain_storage": "record-chain/",
-  "committed_records": 1,
   "committed_storage": "record-chain/committed/",
   "legacy_compatibility": {
     "legacy_jsonl_entry_count": 16,
@@ -113,7 +112,6 @@
     "status": "non_blocking_post_m9_maintenance"
   },
   "ots_stamp_storage": "record-chain/ots-stamps/",
-  "pending_records": 0,
   "pending_storage": "record-chain/pending/",
   "phase2_status": {
     "acceptance": {
@@ -257,18 +255,30 @@
     "verification": 15
   },
   "record_type_requirements": {
-    "batch_anchor": {
-      "authorship_proof_required": false,
+    "echo": {
+      "authorship_proof_required": true,
       "minimum_context_level": "CC-0",
       "oath_extensions": []
     },
-    "classification_update": {
+    "verification": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-1",
+      "oath_extensions": []
+    },
+    "guardian_application": {
+      "authorship_proof_required": true,
+      "minimum_context_level": "CC-2",
+      "oath_extensions": [
+        "guardian_stewardship_v1"
+      ]
+    },
+    "guardian_retirement": {
       "authorship_proof_required": true,
       "minimum_context_level": "CC-2",
       "oath_extensions": []
     },
-    "context_insufficient_notice": {
-      "authorship_proof_required": false,
+    "propagation": {
+      "authorship_proof_required": true,
       "minimum_context_level": "CC-0",
       "oath_extensions": []
     },
@@ -277,60 +287,21 @@
       "minimum_context_level": "CC-1",
       "oath_extensions": []
     },
-    "echo": {
-      "authorship_proof_required": true,
-      "minimum_context_level": "CC-3",
-      "oath_extensions": []
-    },
-    "guardian_application": {
-      "authorship_proof_required": true,
-      "minimum_context_level": "CC-3",
-      "oath_extensions": [
-        "guardian_stewardship_oath_extension"
-      ]
-    },
-    "guardian_key_rotation": {
-      "authorship_proof_required": true,
-      "minimum_context_level": "CC-3",
-      "oath_extensions": [
-        "guardian_stewardship_oath_extension"
-      ]
-    },
-    "guardian_retirement": {
+    "classification_update": {
       "authorship_proof_required": true,
       "minimum_context_level": "CC-1",
-      "oath_extensions": [
-        "guardian_stewardship_oath_extension"
-      ]
+      "oath_extensions": []
     },
-    "legacy_import": {
-      "authorship_proof_required": false,
+    "context_insufficient_notice": {
+      "authorship_proof_required": true,
       "minimum_context_level": "CC-0",
       "oath_extensions": []
-    },
-    "propagation": {
-      "authorship_proof_required": true,
-      "minimum_context_level": "CC-2",
-      "oath_extensions": []
-    },
-    "verification": {
-      "authorship_proof_required": true,
-      "minimum_context_level": "CC-3",
-      "minimum_context_levels_by_verification_level": {
-        "V0-V2": "CC-2",
-        "V3-V5": "CC-3",
-        "V6+": "CC-3"
-      },
-      "oath_extensions": [
-        "verification_oath_extension"
-      ]
     }
   },
   "schema": "trinityaccord.record-chain-status.v1",
-  "source_digest": "b8b376744fdb4167",
+  "source_digest": "94560272bcf5d82e",
   "status": "production_live",
-  "total_records": 1,
-  "updated_at": "2026-06-06T04:16:00Z",
+  "updated_at": "2026-06-13T01:56:50.271Z",
   "pipeline_status": {
     "chain_head": {
       "latest_record_id": "R-000000043",
@@ -390,5 +361,8 @@
       "batch_id",
       "batch_membership"
     ]
-  }
+  },
+  "total_records": 43,
+  "committed_records": 43,
+  "pending_records": 0
 }

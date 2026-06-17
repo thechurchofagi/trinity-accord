@@ -219,7 +219,7 @@ def compute_current_record_chain_status(
     pending_count = len(list(pending_dir.glob("*.json"))) if pending_dir.exists() else 0
 
     return {
-        "phase": phase.get("phase") or "mainnet_prelaunch_testing",
+        "phase": phase.get("phase") or "status_source_missing_or_invalid",
         "total_records": len(records),
         "current_chain_length": len(records),
         "pending_records": pending_count,

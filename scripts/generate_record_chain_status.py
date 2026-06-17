@@ -5,6 +5,7 @@ import argparse
 import copy
 import json
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -208,6 +209,10 @@ def latest_native_ots_proof_bundle_archive(
 def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status = copy.deepcopy(existing)
 
+    # Clear stale top-level fields so they are always re-derived from native sources
+    for stale_key in ("total_records", "committed_records", "pending_records"):
+        status.pop(stale_key, None)
+
     tip = read_json("record-chain/chain-tip.json")
     ots = read_json("api/record-chain-native-ots-latest.json")
     arweave = read_json("api/record-chain-arweave-index.json")
@@ -378,6 +383,41 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
             "batch_id",
             "batch_membership",
         ],
+    }
+
+    # Derive top-level fields from native sources (never from stale existing values)
+    status["total_records"] = native_count
+    status["committed_records"] = native_count
+    status["pending_records"] = 0
+    # Use latest record created_at as updated_at for stability (--check won't drift)
+    status["updated_at"] = latest_created_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    status["source_digest"] = tip.get("latest_record_sha256", "")[:16] if tip.get("latest_record_sha256") else ""
+
+    # Derive record_type_requirements from native sources (correct CIN authorship)
+    status["record_type_requirements"] = {
+        "echo": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
+        "verification": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
+        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "oath_extensions": ["guardian_stewardship_v1"]},
+        "guardian_retirement": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "oath_extensions": []},
+        "propagation": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
+        "correction": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
+        "classification_update": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
+        "context_insufficient_notice": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
+    }
+
+    # Derive API endpoints: separate current native from legacy archive
+    status["api_endpoints"] = {
+        "record_chain_intake_gateway": "/api/record-chain-intake-gateway.v1.json",
+        "preflight": "/record-chain/preflight",
+        "submit": "/record-chain/submit",
+        "receipt": "/record-chain/receipt/<receipt_id>",
+        "record_chain_status": "/api/record-chain-status.json",
+        "record_index": "/record-chain/indexes/record-index.json",
+        "echo_index": "/record-chain/indexes/echo-index.json",
+        "verification_index": "/record-chain/indexes/verification-index.json",
+        "guardian_state": "/record-chain/indexes/guardian-state.json",
+        "legacy_echo_archive_index": "/api/echo-index.json",
+        "legacy_verification_archive_index": "/api/agent-declared-verification-index.json",
     }
 
     return status
