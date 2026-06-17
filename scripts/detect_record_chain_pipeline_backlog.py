@@ -72,6 +72,8 @@ def main() -> int:
         and ots_sha == chain_sha
         and ots_count == chain_count
         and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+        and ots.get("ots_status") in ("upgraded", "verified")
+        and ots.get("bitcoin_verified") is True
     )
 
     arweave_matches_ots = (
