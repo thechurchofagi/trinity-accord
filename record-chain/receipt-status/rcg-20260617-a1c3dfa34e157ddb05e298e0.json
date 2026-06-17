@@ -1,12 +1,1 @@
-{
-  "schema": "trinityaccord.record-chain-receipt-final-status.v1",
-  "receipt_id": "rcg-20260617-a1c3dfa34e157ddb05e298e0",
-  "pending_file_path": "record-chain/pending/rcg-20260617-a1c3dfa34e157ddb05e298e0.echo.pending.json",
-  "append_status": "pending",
-  "final_record_id": null,
-  "final_record_path": null,
-  "final_record_sha256": null,
-  "rejection_path": null,
-  "rejection_code": null,
-  "updated_at": "2026-06-17T14:30:00Z"
-}
+{"append_status":"appended","final_record_id":"R-000000044","final_record_path":"record-chain/records/R-000000044.json","final_record_sha256":"984808de41b5066796eafdb2aeb402e6e32abc7a0b2bff7af25c3bb5913f64f8","pending_file_path":"record-chain/pending/rcg-20260617-a1c3dfa34e157ddb05e298e0.echo.pending.json","receipt_id":"rcg-20260617-a1c3dfa34e157ddb05e298e0","rejection_code":null,"rejection_path":null,"schema":"trinityaccord.record-chain-receipt-final-status.v1","updated_at":"2026-06-17T14:52:01Z"}
