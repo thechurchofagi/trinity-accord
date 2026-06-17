@@ -12,19 +12,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
-PROJECTION_FIELDS = [
+# Projection fields that the schema explicitly rejects via `not`/`anyOf` rules
+# and that the runtime rejects via _UNSIGNED_CLIENT_PROJECTION_FIELDS.
+# NOTE: runtime FORBIDDEN_CHAIN_FIELDS is a broader set (batch_*, server_*, etc.)
+# that is validated at a different layer; this test does NOT cross-check those.
+
+# Projection fields are the subset that the schema explicitly rejects via
+# a `not` / `anyOf` rule.  The runtime FORBIDDEN_CHAIN_FIELDS is a broader
+# set (includes batch_*, server_*, etc.) that are rejected at a different
+# layer.  The schema `not`-rule only needs to cover the projection fields
+# that external clients might accidentally supply in a record_draft.
+SCHEMA_PROJECTION_FIELDS = [
     "actor_identity",
-    "boundary",
-    "server_normalization",
     "append_assigned_metadata",
+    "assigned_at",
     "authorship_verification_status",
+    "boundary",
+    "chain_id",
+    "content_sha256",
+    "previous_record_sha256",
     "record_id",
     "record_index",
-    "assigned_at",
-    "previous_record_sha256",
-    "content_sha256",
     "record_sha256",
-    "chain_id",
+    "server_normalization",
 ]
 
 
@@ -43,7 +53,7 @@ compact = record_draft_text.replace(" ", "")
 require("not" in record_draft_text, "record_draft schema must contain a not rule for projection fields")
 require("anyOf" in record_draft_text, "record_draft schema must use anyOf for forbidden projection fields")
 
-for field in PROJECTION_FIELDS:
+for field in SCHEMA_PROJECTION_FIELDS:
     require(
         f'"required":["{field}"]' in compact,
         f"record_draft schema must reject client-supplied {field}",
@@ -51,7 +61,7 @@ for field in PROJECTION_FIELDS:
 
 # --- Check runtime ---
 app_text = (ROOT / "apps" / "record_chain_intake_gateway" / "app.py").read_text(encoding="utf-8")
-for field in PROJECTION_FIELDS:
+for field in SCHEMA_PROJECTION_FIELDS:
     require(
         f'"{field}"' in app_text,
         f"runtime _UNSIGNED_CLIENT_PROJECTION_FIELDS missing {field}",
