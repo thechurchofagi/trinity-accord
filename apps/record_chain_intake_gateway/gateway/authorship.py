@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 UNSIGNED_PROJECTION_FIELDS = frozenset({
     "actor_identity",
     "boundary",
+    "boundary_acknowledgement",
     "server_normalization",
     "server_append_metadata",
     "append_assigned_metadata",
@@ -40,8 +41,13 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
     "assigned_at",
     "previous_record_sha256",
     "content_sha256",
+    "content_sha256_v2",
     "record_sha256",
     "chain_id",
+    "what_i_checked",
+    "limitations",
+    "related_records",
+    "immutability_policy",
 })
 
 
