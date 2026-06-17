@@ -327,18 +327,26 @@ class TestNewAcceptedSubmissionWritesIdempotencyIndex:
         assert resp.status_code == 200
         assert data["accepted"] is True
 
-        # Find the idempotency index write
+        # Find the idempotency index writes (initial + update with pending_written)
         idempotency_writes = [
             (path, content) for path, content in put_calls
             if "by-submission-sha256" in path
         ]
-        assert len(idempotency_writes) == 1, f"Expected 1 idempotency write, got {len(idempotency_writes)}"
+        assert len(idempotency_writes) == 2, f"Expected 2 idempotency writes (initial + pending update), got {len(idempotency_writes)}"
 
+        # First write: initial idempotency index
         idx_path, idx_content = idempotency_writes[0]
         idx_data = json.loads(idx_content)
         assert idx_data["schema"] == "trinityaccord.record-chain-intake-idempotency.v1"
         assert len(idx_data["submission_sha256"]) == 64
         assert "stored_submission_sha256" in idx_data
+
+        # Second write: update with pending_written=true
+        idx_path2, idx_content2 = idempotency_writes[1]
+        idx_data2 = json.loads(idx_content2)
+        assert idx_data2["transaction_state"] == "pending_written"
+        assert idx_data2["pending_written"] is True
+        assert idx_data2["pending_committed_at"] is not None
 
 
 class TestIndexWriteFailureRollbacksAndDoesNotDispatch:
