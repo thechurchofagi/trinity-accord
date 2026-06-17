@@ -120,9 +120,10 @@ class TestGetReceipt:
         assert resp.status_code == 200
         body = resp.json()
         assert body["receipt"]["server_receipt_id"] == "rcg-20260613-abcdef123456"
+        # Warnings are now in the envelope, not inside the immutable receipt body
         assert any(
             w.get("code") == "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE"
-            for w in body["receipt"].get("warnings", [])
+            for w in body.get("envelope_warnings", [])
         )
 
     def test_durable_none_no_cache_returns_404(self, client: TestClient) -> None:

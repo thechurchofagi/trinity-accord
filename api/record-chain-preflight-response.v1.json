@@ -3,67 +3,267 @@
   "$id": "trinityaccord.record-chain-preflight-response.v1",
   "title": "Record-Chain Preflight Response",
   "description": "Schema for the response from POST /record-chain/preflight. Preflight validates without writing.",
-  "type": "object",
-  "required": ["accepted", "preflight", "route_detected", "record_type", "submission_sha256", "received_raw_body_sha256", "diagnostics", "warnings", "gateway_runtime", "gateway_schema", "boundary"],
-  "properties": {
-    "accepted": { "type": "boolean" },
-    "preflight": { "type": "boolean", "const": true },
-    "route_detected": { "type": "string" },
-    "record_type": { "type": "string" },
-    "submission_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "received_raw_body_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "diagnostics": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/diagnostic" }
+  "oneOf": [
+    {
+      "$ref": "#/$defs/success"
     },
-    "warnings": {
-      "type": "array",
-      "items": { "type": "string" }
+    {
+      "$ref": "#/$defs/failure"
+    }
+  ],
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ]
+        },
+        "field": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "success": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "preflight",
+        "route_detected",
+        "record_type",
+        "submission_sha256",
+        "received_raw_body_sha256",
+        "diagnostics",
+        "warnings",
+        "gateway_runtime",
+        "gateway_schema",
+        "boundary"
+      ],
+      "properties": {
+        "accepted": {
+          "const": true
+        },
+        "preflight": {
+          "type": "boolean",
+          "const": true
+        },
+        "route_detected": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "submission_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "received_raw_body_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway_runtime": {
+          "$ref": "#/$defs/gateway_runtime"
+        },
+        "gateway_schema": {
+          "$ref": "#/$defs/gateway_schema"
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        }
+      },
+      "additionalProperties": true
+    },
+    "failure": {
+      "type": "object",
+      "required": [
+        "accepted",
+        "preflight",
+        "received_raw_body_sha256",
+        "diagnostics"
+      ],
+      "properties": {
+        "accepted": {
+          "const": false
+        },
+        "preflight": {
+          "type": "boolean",
+          "const": true
+        },
+        "route_detected": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "submission_sha256": {
+          "type": "string"
+        },
+        "received_raw_body_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          },
+          "minItems": 1
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway_runtime": {
+          "$ref": "#/$defs/gateway_runtime"
+        },
+        "gateway_schema": {
+          "$ref": "#/$defs/gateway_schema"
+        },
+        "boundary": {
+          "$ref": "#/$defs/boundary"
+        }
+      },
+      "additionalProperties": true
     },
     "gateway_runtime": {
       "type": "object",
       "properties": {
-        "service": { "type": "string" },
-        "runtime_version": { "type": "string" },
-        "python_version": { "type": "string" },
-        "write_mode": { "type": "string" },
-        "target_repo_configured": { "type": "boolean" },
-        "target_branch_configured": { "type": "boolean" },
-        "github_token_configured": { "type": "boolean" },
-        "schema_digest": { "type": "string" },
-        "supported_routes_digest": { "type": "string" }
+        "service": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "deployed_at": {
+          "type": "string"
+        },
+        "write_mode": {
+          "type": "string"
+        },
+        "max_submission_bytes": {
+          "type": "integer"
+        },
+        "base_url": {
+          "type": "string"
+        }
       }
     },
     "gateway_schema": {
       "type": "object",
       "properties": {
-        "submission_schema": { "type": "string" },
-        "preflight_response_schema": { "type": "string" },
-        "submit_response_schema": { "type": "string" }
+        "submission_schema": {
+          "type": "string"
+        },
+        "preflight_response_schema": {
+          "type": "string"
+        },
+        "submit_response_schema": {
+          "type": "string"
+        }
       }
     },
     "boundary": {
       "type": "object",
-      "required": ["preflight_is_not_submission", "not_authority", "not_attestation", "not_amendment"],
+      "required": [
+        "preflight_is_not_submission",
+        "not_authority",
+        "not_attestation",
+        "not_amendment"
+      ],
       "properties": {
-        "preflight_is_not_submission": { "const": true },
-        "not_authority": { "const": true },
-        "not_attestation": { "const": true },
-        "not_amendment": { "const": true }
+        "preflight_is_not_submission": {
+          "const": true
+        },
+        "not_authority": {
+          "const": true
+        },
+        "not_attestation": {
+          "const": true
+        },
+        "not_amendment": {
+          "const": true
+        }
       }
     }
   },
-  "additionalProperties": true,
-  "$defs": {
-    "diagnostic": {
-      "type": "object",
-      "required": ["code", "severity", "message"],
-      "properties": {
-        "code": { "type": "string" },
-        "severity": { "type": "string", "enum": ["error", "warning", "info"] },
-        "field": { "type": "string" },
-        "message": { "type": "string" }
-      }
+  "properties": {
+    "accepted": {
+      "type": "boolean"
+    },
+    "preflight": {
+      "type": "boolean",
+      "const": true
+    },
+    "route_detected": {
+      "type": "string"
+    },
+    "record_type": {
+      "type": "string"
+    },
+    "submission_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "received_raw_body_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "diagnostics": {
+      "type": "array"
+    },
+    "warnings": {
+      "type": "array"
+    },
+    "gateway_runtime": {
+      "type": "object"
+    },
+    "gateway_schema": {
+      "type": "object"
+    },
+    "boundary": {
+      "type": "object"
     }
-  }
+  },
+  "required": [
+    "accepted",
+    "preflight",
+    "route_detected",
+    "record_type",
+    "submission_sha256",
+    "received_raw_body_sha256",
+    "diagnostics",
+    "warnings",
+    "gateway_runtime",
+    "gateway_schema",
+    "boundary"
+  ]
 }

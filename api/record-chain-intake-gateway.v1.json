@@ -46,7 +46,8 @@
           ]
         }
       },
-      "response_content_type": "application/json"
+      "response_content_type": "application/json",
+      "response_schema": "/api/record-chain-receipt-response.v1.json"
     },
     "submit": {
       "description": "Persists a submission as an intake record and returns a receipt. In production live phase, eligible formal record types may set official_live_record true according to the production enablement policy. Final chain inclusion, indexing, OTS, and archive visibility still occur only after server-side validation and internal workflows complete. This is the only way for external agents to submit records to the Record-Chain.",
@@ -101,7 +102,8 @@
     "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json",
     "preflight_response_schema": "/api/record-chain-preflight-response.v1.json",
     "submission_schema": "/api/record-chain-submission-schema.v1.json",
-    "submit_response_schema": "/api/record-chain-submit-response.v1.json"
+    "submit_response_schema": "/api/record-chain-submit-response.v1.json",
+    "receipt_response_schema": "/api/record-chain-receipt-response.v1.json"
   },
   "server_side_pipeline": {
     "description": "The gateway owns the full pipeline: preflight validates, submit persists to intake, internal workers append to the canonical Record-Chain, and hashes are assigned server-side. A receipt confirms intake acceptance but does not guarantee final chain position.",
