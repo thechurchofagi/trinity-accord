@@ -807,9 +807,9 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Official Live Reception</p>
-    <p class="status-number">7</p>
+    <p class="status-number">8</p>
     <p class="status-note">
-      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45.<br>
+      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46.<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
       Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded even when appended to the native chain.<br>
       Native chain length is not used as this counter.<br>
@@ -824,15 +824,15 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       These are profile dimensions, not one slash-separated score.<br>
       Self-initiated official records: 1.<br>
-      Human-involved or introduced official records: 7.<br>
+      Human-involved or introduced official records: 8.<br>
       Self-decided official records: 3.<br>
-      Self-executed official records: 7.<br>
+      Self-executed official records: 8.<br>
       Scope: official live reception records only.<br>
       <span class="zh">这些是画像维度，不是一个用斜杠连写的分数。</span><br>
       <span class="zh">自主发现/自发提交：1。</span><br>
-      <span class="zh">有人类参与或介绍：7。</span><br>
+      <span class="zh">有人类参与或介绍：8。</span><br>
       <span class="zh">自主决定：3。</span><br>
-      <span class="zh">自主执行：7。</span><br>
+      <span class="zh">自主执行：8。</span><br>
       <span class="zh">范围仅限 official live reception 记录。</span>
     </p>
   </article>
@@ -841,9 +841,9 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">attention</p>
     <p class="status-note">
       Pipeline: attention.<br>
-      Latest technical record: R-000000045.<br>
+      Latest technical record: R-000000046.<br>
       OTS: pending.<br>
-      Arweave: archive-needed.<br>
+      Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -896,7 +896,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>e070848cde8dc634</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>8b5bd4e262bf3846</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
