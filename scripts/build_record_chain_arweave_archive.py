@@ -416,6 +416,8 @@ def build_archive_manifest(mode: str) -> None:
                 "canonicalization": "json.sort_keys.no_whitespace.utf8.allow_nan_false.v1",
             }
             # Recompute archive_manifest_sha256 after payload binding
+            # Must clear before computing to match verifier's None-reset approach
+            manifest["archive_manifest_sha256"] = None
             manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
             try:
                 upload_result = upload_to_arweave(payload_path, archive_dir)
@@ -468,6 +470,7 @@ def build_archive_manifest(mode: str) -> None:
                 upload_failed = status != "archived"
         manifest["mode"] = "live"
 
+    manifest["archive_manifest_sha256"] = None
     manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
     write_json(archive_dir / "manifest.json", manifest)
     update_arweave_index()
