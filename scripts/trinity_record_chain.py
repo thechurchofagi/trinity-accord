@@ -33,6 +33,39 @@ from pathlib import Path
 from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
+GATEWAY_APP_ROOT = ROOT / "apps" / "record_chain_intake_gateway"
+
+
+def ensure_gateway_import_path() -> None:
+    """Expose the Gateway package to record-chain scripts in clean CI runners.
+
+    GitHub Actions invokes this script from repository root without installing the
+    Gateway app as an editable package. Any lazy import of `gateway.*` must call
+    this helper first.
+    """
+    gateway_root = str(GATEWAY_APP_ROOT)
+    if gateway_root not in sys.path:
+        sys.path.insert(0, gateway_root)
+
+
+def is_infrastructure_append_error(exc: BaseException) -> bool:
+    """Classify whether an exception is an infrastructure/import failure.
+
+    Infrastructure failures (missing modules, broken imports) must NOT be
+    recorded as semantic submission rejections. They must fail CI while
+    keeping the pending file in pending/ so a retry after the fix succeeds.
+    """
+    if isinstance(exc, (ImportError, ModuleNotFoundError)):
+        return True
+    text = str(exc)
+    infrastructure_markers = [
+        "No module named",
+        "cannot import name",
+        "receipt hash verification import failed",
+    ]
+    return any(marker in text for marker in infrastructure_markers)
+
+
 CHAIN = ROOT / "record-chain"
 GENESIS = CHAIN / "genesis"
 LEGACY_RECORDS = GENESIS / "legacy-records"
@@ -530,7 +563,7 @@ def verify_pending_record_authorship(record: dict[str, Any]) -> None:
     _require_guardian_lifecycle_key_binding(record, proof)
 
     # Import lazily so non-authorship commands do not pay this dependency cost.
-    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    ensure_gateway_import_path()
     from gateway.authorship import (  # noqa: WPS433
         strip_unsigned_projection_fields,
         verify_authorship_proof,
@@ -567,7 +600,7 @@ def verify_final_record_authorship(record: dict[str, Any], path: Path) -> list[s
     if compat and compat.get("allowed_skip_signature_reverify"):
         return errors
 
-    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    ensure_gateway_import_path()
     from gateway.authorship import strip_unsigned_projection_fields, verify_authorship_proof  # noqa: WPS433
 
     signed_scope = strip_unsigned_projection_fields(record)
@@ -586,7 +619,7 @@ def sanitize_pending_record_for_append(record: dict[str, Any]) -> dict[str, Any]
     same signed-scope object rather than verifying a cleaned view but appending
     the polluted raw pending file.
     """
-    sys.path.insert(0, str(ROOT / "apps/record_chain_intake_gateway"))
+    ensure_gateway_import_path()
     from gateway.authorship import strip_unsigned_projection_fields  # noqa: WPS433
 
     return strip_unsigned_projection_fields(record)
@@ -715,6 +748,7 @@ def verify_receipt_sha256(receipt: dict[str, Any]) -> tuple[bool, str]:
 
     Returns (True, "") on success, (False, error_message) on mismatch.
     """
+    ensure_gateway_import_path()
     from gateway.receipts import compute_receipt_sha256
     expected = receipt.get("receipt_sha256")
     if not expected:
@@ -1002,6 +1036,14 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                         "updated_at": utc_now(),
                     })
             except Exception as exc:
+                # Infrastructure failures (missing modules, broken imports) must
+                # NOT be recorded as semantic rejections. Fail CI immediately
+                # so the pending file stays pending and a retry after fix works.
+                if is_infrastructure_append_error(exc):
+                    raise SystemExit(
+                        f"Append infrastructure failure; pending record was not semantically rejected: {exc}"
+                    ) from exc
+
                 # Phase 6B: --all continues after rejection; writes rejection JSON
                 REJECTED.mkdir(parents=True, exist_ok=True)
                 rejection_path = REJECTED / f"{path.stem}.rejection.json"

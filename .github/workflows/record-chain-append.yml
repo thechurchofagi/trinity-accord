@@ -35,6 +35,8 @@ jobs:
           python-version: "3.11"
       - name: Install Python dependencies for append verification
         run: python3 -m pip install -r requirements-ci.txt
+      - name: Verify Gateway import path contract
+        run: python -m pytest tests/test_record_chain_gateway_import_path_contract.py -q
       - name: Authorize write workflow actor
         if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
