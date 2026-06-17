@@ -1,13 +1,13 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-06-13T06:43:52Z",
+  "updated_at": "2026-06-17T16:21:41Z",
   "wallet": {
     "wallet_address": null,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "public_address_allowed": false,
     "currency": "AR",
-    "last_known_balance_ar": "2.818128328262",
-    "last_known_balance_at": "2026-06-13T06:41:18.581Z",
+    "last_known_balance_ar": "6.812877537445",
+    "last_known_balance_at": "2026-06-17T16:09:50.655Z",
     "low_balance_threshold_ar": "0.25"
   },
   "entries": [
@@ -170,6 +170,26 @@
       "paid_at": "2026-06-13T06:41:18.581Z",
       "status": "paid",
       "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-watch-27459348691/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+    },
+    {
+      "tx_id": "3KBsg71SN1ZZg1AKE5-dwggEg9tHoGo1MhXWwKy7Iyw",
+      "kind": "record_chain_arweave_archive",
+      "source_path": "record-chain/arweave-archives/archive-native-R-000000047-2df77e4efacf/payload.json",
+      "amount_ar": null,
+      "winston": "7790805618",
+      "paid_at": "2026-06-17T16:09:47.932Z",
+      "status": "paid",
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/arweave-archives/archive-native-R-000000047-2df77e4efacf/upload-result.json"
+    },
+    {
+      "tx_id": "MAySVo_Dd55Qr14_1ITda4l-5XCQNVGe0xLd-HgXnVU",
+      "kind": "native_ots_bundle_archive",
+      "source_path": "record-chain/ots/native-arweave-bundles/native-record-43-R-000000043-94560272bcf5d82e-03fdce712b0bd0e6.anchor.upgraded.arweave-bundle.json",
+      "amount_ar": null,
+      "winston": "2618048981",
+      "paid_at": "2026-06-17T16:09:50.655Z",
+      "status": "paid",
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260617T160948Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
     }
   ],
   "boundary": {
