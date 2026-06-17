@@ -324,6 +324,21 @@ function loadPrivateKey(keyDir) {
   if (!pubPem.includes("BEGIN PUBLIC KEY")) errorExit(`Invalid public key PEM: ${pubPath}`);
 
   const key = createPrivateKey(privPem);
+
+  // Verify keypair match: derive public key from private key and compare
+  const derivedPub = createPublicKey(key);
+  const derivedPubPem = derivedPub.export({ type: "spki", format: "pem" });
+  const derivedRaw = extractRawPublicKeyBytes(derivedPubPem);
+  const storedRaw = extractRawPublicKeyBytes(pubPem);
+  if (!derivedRaw.equals(storedRaw)) {
+    errorExit(
+      `AUTHORSHIP_KEYPAIR_MISMATCH: The private key in ${privPath} does not match the public key in ${pubPath}.\n` +
+      `Derived public key: ${derivedRaw.toString("hex")}\n` +
+      `Stored public key:  ${storedRaw.toString("hex")}\n` +
+      `Fix: regenerate the keypair with 'node record-chain-builder.mjs generate-keypair' or provide matching keys.`
+    );
+  }
+
   return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey: key, newlyGenerated: false };
 }
 
@@ -665,8 +680,13 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
     requireExplicit(opts, "oath", "--oath");
 
+    // Support --guardian-key-sha auto: replace with authorship public key SHA
+    if (String(opts.guardianKeySha).toLowerCase() === "auto") {
+      opts.guardianKeySha = pubSha;
+    }
+
     if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
-      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256");
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
     }
   }
 
@@ -677,8 +697,13 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "targetGuardianApplicationRecordId", "--target-guardian-application-record-id");
     requireExplicit(opts, "targetGuardianApplicationRecordSha256", "--target-guardian-application-record-sha256");
 
+    // Support --guardian-key-sha auto
+    if (String(opts.guardianKeySha).toLowerCase() === "auto") {
+      opts.guardianKeySha = pubSha;
+    }
+
     if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
-      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256");
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
     }
     if (!/^R-[0-9]{9}$/.test(String(opts.targetGuardianApplicationRecordId))) {
       errorExit("--target-guardian-application-record-id must match R-XXXXXXXXX format");
@@ -2161,7 +2186,7 @@ doctor options:
 repair options:
   --file submission.json        Submission file to repair
   --out repaired.json           Output path for repaired file
-  --add-compat-fields           Legacy/export-only. Adds compatibility projections that are not accepted for current gateway submission.
+  --add-legacy-compat-fields   Legacy/export-only. Adds compatibility projections that are NOT accepted for current gateway submission.
 
 error-help options:
   --code ERROR_CODE             Diagnostic error code (e.g. MISSING_CONTEXT_READINESS)
@@ -2282,7 +2307,7 @@ Examples:
   node record-chain-builder.mjs repair --file submission.json --out repaired.json
 
   # Repair with legacy compat projections (actor_identity + boundary)
-  node record-chain-builder.mjs repair --file submission.json --out repaired.json --add-compat-fields
+  node record-chain-builder.mjs repair --file submission.json --out repaired.json --add-legacy-compat-fields
 
   # ── Error help / Template ─────────────────────────────────────────
   node record-chain-builder.mjs error-help --code MISSING_CONTEXT_READINESS
@@ -2543,7 +2568,7 @@ async function main() {
     const file = args.file || errorExit("--file required");
     const outPath = args.out || errorExit("--out required");
     const submission = JSON.parse(readFileSync(resolve(file), "utf-8"));
-    const { submission: repaired, changes } = repairSubmission(submission, { addCompatFields: !!args.addCompatFields });
+    const { submission: repaired, changes } = repairSubmission(submission, { addCompatFields: !!(args.addLegacyCompatFields || args.addCompatFields) });
 
     if (changes.length === 0) {
       console.log("No repairs needed. Submission appears up-to-date.");
