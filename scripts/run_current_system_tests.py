@@ -915,6 +915,17 @@ def main() -> int:
         fail(f"public agent entrypoints source scan failed:\n{result.stdout}\n{result.stderr}")
     ok("public agent entrypoints source scan")
 
+    # Gateway smoke test (app importable, health endpoints respond)
+    result = subprocess.run(
+        [sys.executable, "scripts/test_builder_gateway_preflight_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"gateway smoke test failed:\n{result.stdout}\n{result.stderr}")
+    ok("gateway smoke test")
+
     # Record-chain receipt contract
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_receipt_contract.py"],

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -157,6 +158,48 @@ def check_file(path: Path) -> None:
         )
 
 
+# Active public surface files that must not contain retired gateway references.
+# These are Markdown/txt/html files that agents and humans read for current routing.
+ACTIVE_PUBLIC_SURFACES: list[str] = [
+    "index.md",
+    "agent-first-contact.md",
+    "agent-start.md",
+    "agent-echo.md",
+    "agent-verify.md",
+    "agent-verify-simple.md",
+    "external-agent-quickstart.md",
+    "llms.txt",
+    "ai.txt",
+    "downloads/record-chain-agent-field-guidance.v1.json",
+    "api/agent-first-contact.json",
+    "api/agent-start.v2.json",
+    "api/record-chain-field-helper.v1.json",
+]
+
+# Warnings (non-fatal) for active surfaces — these are known issues tracked
+# in later PR batches. PR-01 establishes the scan; later PRs fix the content.
+surface_warnings: list[str] = []
+
+
+def check_active_surface(path: Path) -> None:
+    """Check that an active public surface file does not contain retired gateway refs.
+
+    For PR-01, surface issues are warnings (non-fatal). They become errors once
+    the corresponding PR batch (PR-05) fixes the content.
+    """
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    hits = [token for token in FORBIDDEN if token in text]
+    if not hits:
+        return
+    for token in FORBIDDEN:
+        if token in text:
+            surface_warnings.append(
+                f"WARNING: {path}: active public surface contains retired gateway reference '{token}'"
+            )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check public agent JSON entrypoints")
     parser.add_argument("paths", nargs="+", help="Directories or files to scan")
@@ -169,10 +212,21 @@ def main() -> int:
     for path in files:
         check_file(path)
 
+    # Also scan active public surfaces
+    root = Path.cwd()
+    for surface in ACTIVE_PUBLIC_SURFACES:
+        check_active_surface(root / surface)
+
     if errors:
         raise SystemExit("\n".join(f"ERROR: {e}" for e in errors))
 
-    print(f"public agent entrypoints OK ({len(files)} JSON files checked)")
+    # Print surface warnings (non-fatal for PR-01, will become errors after PR-05)
+    for warning in surface_warnings:
+        print(warning, file=sys.stderr)
+
+    print(f"public agent entrypoints OK ({len(files)} JSON files + {len(ACTIVE_PUBLIC_SURFACES)} active surfaces checked)")
+    if surface_warnings:
+        print(f"  ({len(surface_warnings)} surface warnings — tracked for later PR batches)", file=sys.stderr)
     return 0
 
 

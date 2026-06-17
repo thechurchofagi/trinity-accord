@@ -7,25 +7,37 @@ fields are server-derived and must not be supplied by clients.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
-PROJECTION_FIELDS = [
-    "actor_identity",
-    "boundary",
-    "server_normalization",
-    "append_assigned_metadata",
-    "authorship_verification_status",
-    "record_id",
-    "record_index",
-    "assigned_at",
-    "previous_record_sha256",
-    "content_sha256",
-    "record_sha256",
-    "chain_id",
-]
+# Import runtime forbidden fields instead of maintaining a hand-written list.
+# This keeps the test in sync with the actual Gateway validation logic.
+sys_path_backup = list(sys.path)
+sys.path.insert(0, str(ROOT / "apps" / "record_chain_intake_gateway"))
+try:
+    from gateway.validation import FORBIDDEN_CHAIN_FIELDS as _FORBIDDEN
+    PROJECTION_FIELDS = sorted(_FORBIDDEN)
+except ImportError:
+    # Fallback if runtime import fails (e.g. missing deps in CI)
+    PROJECTION_FIELDS = [
+        "actor_identity",
+        "boundary",
+        "server_normalization",
+        "append_assigned_metadata",
+        "authorship_verification_status",
+        "record_id",
+        "record_index",
+        "assigned_at",
+        "previous_record_sha256",
+        "content_sha256",
+        "record_sha256",
+        "chain_id",
+    ]
+finally:
+    sys.path[:] = sys_path_backup
 
 
 def require(cond: bool, msg: str) -> None:

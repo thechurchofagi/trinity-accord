@@ -10,9 +10,16 @@ on:
       - "api/**"
       - "record-chain/**"
       - "downloads/record-chain-builder.mjs"
+      - "downloads/record-chain-agent-field-guidance.v1.json"
       - "index.md"
       - "sitemap.xml"
       - "requirements-ci.txt"
+      - "apps/record_chain_intake_gateway/**"
+      - "agent-*.md"
+      - "agent-*/**"
+      - "external-agent-quickstart.md"
+      - "llms.txt"
+      - "ai.txt"
 
 permissions:
   contents: read
