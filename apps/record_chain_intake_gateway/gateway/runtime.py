@@ -7,8 +7,8 @@ import os
 from datetime import datetime, timezone
 from typing import Any
 
-# Bump on each deploy
-SERVICE_VERSION = "1.0.0"
+# Bump on each deploy; allow env override for CI/CD
+SERVICE_VERSION = os.environ.get("TRINITY_GATEWAY_RUNTIME_VERSION", "1.1.0")
 SERVICE_NAME = "record-chain-intake-gateway"
 
 # Set at module load; overwritten by healthcheck if needed
