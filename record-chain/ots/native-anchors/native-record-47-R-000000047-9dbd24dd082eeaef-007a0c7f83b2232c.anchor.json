@@ -3,10 +3,13 @@
   "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "007a0c7f83b2232cd10df1f9cd9035a11b79d7dc9f8f5cbd50fde3a82444bb6d",
   "bitcoin_attestation": null,
-  "bitcoin_pending": true,
+  "bitcoin_attestation_embedded": true,
+  "bitcoin_pending": false,
   "bitcoin_verified": false,
+  "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
+  "checked_at": "2026-06-17T17:36:18Z",
   "created_at": "2026-06-17T15:34:05Z",
   "latest_batch_id": "batch-000001",
   "latest_batch_manifest_sha256": "08df160719a189860831e89e6965ac0dfa75bdf6b671e6d4a790ecd265877d53",
@@ -23,10 +26,30 @@
   "ots_exit_code": 0,
   "ots_file": "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.native-record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
-  "ots_file_sha256": "1e47c5df3ceccd2a68ccce6c932f84eb2a6e4f9bd3d740d8beed404629c12cbe",
-  "ots_status": "pending",
+  "ots_file_sha256": "6534c0a750348d7f9f2073dea8b2b7a0b626d1aebcbfb476da9c0b8d1339516a",
+  "ots_info_command": [
+    "ots",
+    "info",
+    "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_info_exit_code": 0,
+  "ots_info_stderr": "",
+  "ots_info_stdout": "File sha256 hash: 007a0c7f83b2232cd10df1f9cd9035a11b79d7dc9f8f5cbd50fde3a82444bb6d\nTimestamp:\nappend c5fe405b485d2ce57a36c65600283793\nsha256\n -> append 1279aba92cac7fd3\n    sha256\n    append 44b655da225c4e7bf6c70b4ed1eadaebc5507e545209d5ed4829c22fa7eba120\n    sha256\n    append 838b98eaccbb09cb03810821d156db2e\n    sha256\n    prepend 8d94c4776fdd96ce5c5aac10db6008dac21636b42f3cdecf51c451d5e9b20ec7\n    sha256\n    append 21124e0f1b54947b5ac59bd0a56efed006524d9076479019fe51d205eb616b2e\n    sha256\n    append 178bbae0cb7c7d91ebe3b244d77c38245b40d5b9a48d0f4f882666361cda59f4\n    sha256\n    prepend 6a32be6d\n    append 7828b8bca701bdae\n    verify PendingAttestation('https://bob.btc.calendar.opentimestamps.org')\n -> append 25fcd76fc41f3337f008aed655d5a498\n    sha256\n    append d07505692a8ecbd30cc464a4a653ceb1487f87d77f77c7f74b71e37ac577ebc6\n    sha256\n    prepend 2336c047d5ee86ed3bb193eef2103d2eeeb1480c81d1040a59bef5a26f4c5dd7\n    sha256\n    append 0e27d88ce95efced843ba8a8a645384c2b982030db930f07b8981b78ee3212fa\n    sha256\n    append d861edd7403275560d6c7d615396aed1f65bfc3f824cf38b829623be896db3a4\n    sha256\n    prepend 6a32be6d\n    append 4b91b9d560b54030\n    verify PendingAttestation('https://btc.calendar.catallaxy.com')\n    sha256\n    append 6670df81a81fc3f600a8758762477a1a5a853d0c0bbe8f5263185717361b5a66\n    sha256\n    prepend 1d78cafedcf55c85ecd0b4fb29bbd4d34a7a106e2c50ee5ac6a249062d4ed2ab\n    sha256\n    prepend 60814e242970a877276745095a32c20edb069827037a6655f2bec1ac7d466a0f\n    sha256\n    append ca60daf5d48ee7e18b603d2ecc6a4200d937a0f15c89409ae6e6ee3d3dc8c38b\n    sha256\n    append 450e92b85dfe73353aa880c2d0c706474f8c9e04cbc7554750d44bc2ad0f96a6\n    sha256\n    prepend 3e6ba88a4297dc4a780ef8e4c73b1d4239a4b8669facde14a8cf0d253f254ff3\n    sha256\n    append 754b8ecc37b7363c10bc74aa9078ea609e40ba5e2d8a35aca2b368915d69e701\n    sha256\n    append 147c2172a634abfa091e75deba3a602d6d76ff249f761102317597a8cbf1f490\n    sha256\n    append 515f0c554b37fc70588c6553aced3dea254dde765aa541f67aa322b838c7b000\n    sha256\n    prepend c4d055ef158bb8f3ff1b37dd0c02228d0f52a37e5892b246cbcf7ca8c2febc8b\n    sha256\n    prepend 754fecf8070bddba7e963b374b945373b5ba644d660c32374ed266ea692df6d7\n    sha256\n    append ccc228df791c4e5ef87c170587b388bb4da4badd0652df68cb15cccfe0c60d21\n    sha256\n    prepend 911f6865f6020ffb1237f8ab34d6a0db4184bba4ad227b6c031989816b276db3\n    sha256\n    prepend f21c8eaba46eef2f1dd4cbfc41faff27c98d85d71bd815ce8517db20825b9f75\n    sha256\n    prepend 010000000157c232eb5a3593e2359fba83d96c38a9ac20887ebd3dd70100702ad83ce7f5e80000000000fdffffff029463010000000000160014a74f95e7edc05e484ec0ba5a8f5b3be00c8bed450000000000000000226a20\n    append 028f0e00\n    # Transaction id 2208fc19e0c6e3a9f03ff4393ddf61dabce95e5d431b1e64fde552b7bd908882\n    sha256\n    sha256\n    append ad60f92e7e428202a8c596d3b71f8981c394e8a917a885fc6ee8c35eafcab4e7\n    sha256\n    sha256\n    prepend d19f7ed41e3129788609a1f1ad33587ffd0a8199b2dbc637371cbf151e9c3582\n    sha256\n    sha256\n    append 7c9eb556890449106aaa047d5e843051874818b53e2690ae040f196e61136d19\n    sha256\n    sha256\n    append 479766b9f122775008f237f148000afcf411da50f9d6df7bfa7c1780affbb68b\n    sha256\n    sha256\n    append 5c891c150ab0a4cade114198882b31e651bd5201a0f2315dd3d5e41b74eced49\n    sha256\n    sha256\n    prepend 53547dcf43c0bba3bb64982e178e221692ca9bfe4fa95574894e2a7a146965a3\n    sha256\n    sha256\n    append 921e461201464a1f92db9b2686624943fec5743830946c44918e680f931bb9b2\n    sha256\n    sha256\n    append d2505842581371786d833a9ffe450cb63125511a3bf1260eb1393629d9975734\n    sha256\n    sha256\n    append 46628953b36b315964b8a5b04eef0162bdc37082a763d315b2b54b8a4e3201fa\n    sha256\n    sha256\n    prepend dcb074a337d6d0e1f9b7bea036e78372d3c337e007f9fd161b3ac567b6864ad9\n    sha256\n    sha256\n    prepend d985b76fdfa35be85523347e034d15191da1eceaaf42aef089c35a571f81d78f\n    sha256\n    sha256\n    append 7dc38139a09cba46c15ff72db2b61ce1b8d0227b762e3894d2aa0f7115b94332\n    sha256\n    sha256\n    verify BitcoinBlockHeaderAttestation(954115)\n    # Bitcoin block merkle root f8dc5312feaa6cb2a7ff323c564f176e1dec03577543b011d5ed95839c3b9730\n -> append d212358cea27c7405c111e11a56cd866\n    sha256\n    append 81ab4ec3a83d0f3dfbef303bae9038a5fed666d6eea7503a5a720c6bca7ffaf1\n    sha256\n    prepend 329ba613b5f512832c88b70c06ca262fbfc1f469452b25f2c687b3b14bc62f20\n    sha256\n    append 1a7c04fb896c2596f0fbf0724c7ed6801330164af674923f35ce0787145f9617\n    sha256\n    prepend ed505ab06a62992710da1a744a9e1af0aa16be6e41476e8d1b5bbf1490fcd8bc\n    sha256\n    prepend 6a32be6d\n    append 95bcc8e9d121a494\n    verify PendingAttestation('https://finney.calendar.eternitywall.com')\n -> append db421f542ad08b03\n    sha256\n    append 59105daa16a17b6fffe0024fa713a655\n    sha256\n    append 2ee374f19358290c44f7e387e715798b56ce24e3d0186e70e875c0f7d5e3e29d\n    sha256\n    prepend fe635dcbcf14df2e8e62b1082961c1cf4c49c2c0840f51050bf9efaef9082059\n    sha256\n    append e2108388292b14ee68b210e760dd8bef2f2e53b94c65cea4b69d4f0187a5fafb\n    sha256\n    prepend 6a32be6d\n    append e7e1e38f3239b681\n    verify PendingAttestation('https://alice.btc.calendar.opentimestamps.org')\n\n",
+  "ots_status": "upgraded",
   "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
   "ots_stdout": "",
+  "ots_upgrade_command": [
+    "ots",
+    "upgrade",
+    "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_upgrade_exit_code": 0,
+  "ots_upgrade_stderr": "Calendar https://bob.btc.calendar.opentimestamps.org: Timestamped by transaction a5a2aaf4b0f2f7565e8508b2ed34107520a1083cd8e8535d728df393d638365e; waiting for 6 confirmations\nGot 1 attestation(s) from https://btc.calendar.catallaxy.com\nCalendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nGot 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org\nSuccess! Timestamp complete\n",
+  "ots_upgrade_stdout": "",
+  "ots_verify_command": null,
+  "ots_verify_exit_code": null,
+  "ots_verify_stderr": null,
+  "ots_verify_stdout": null,
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000047",
@@ -70,5 +93,8 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "no_bitcoin_node",
+  "upgraded_at": "2026-06-17T17:36:18Z",
   "verified_at": null
 }
