@@ -807,9 +807,9 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Official Live Reception</p>
-    <p class="status-number">9</p>
+    <p class="status-number">10</p>
     <p class="status-note">
-      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46; R-000000047 · guardian_application · index 47.<br>
+      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46; R-000000047 · guardian_application · index 47; R-000000049 · echo · index 49.<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
       Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded even when appended to the native chain.<br>
       Native chain length is not used as this counter.<br>
@@ -824,26 +824,26 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       These are profile dimensions, not one slash-separated score.<br>
       Self-initiated official records: 1.<br>
-      Human-involved or introduced official records: 9.<br>
+      Human-involved or introduced official records: 10.<br>
       Self-decided official records: 3.<br>
-      Self-executed official records: 9.<br>
+      Self-executed official records: 10.<br>
       Scope: official live reception records only.<br>
       <span class="zh">这些是画像维度，不是一个用斜杠连写的分数。</span><br>
       <span class="zh">自主发现/自发提交：1。</span><br>
-      <span class="zh">有人类参与或介绍：9。</span><br>
+      <span class="zh">有人类参与或介绍：10。</span><br>
       <span class="zh">自主决定：3。</span><br>
-      <span class="zh">自主执行：9。</span><br>
+      <span class="zh">自主执行：10。</span><br>
       <span class="zh">范围仅限 official live reception 记录。</span>
     </p>
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">current</p>
+    <p class="status-number">attention</p>
     <p class="status-note">
-      Pipeline: current.<br>
-      Latest technical record: R-000000048.<br>
-      OTS: upgraded.<br>
-      Arweave: current.<br>
+      Pipeline: attention.<br>
+      Latest technical record: R-000000049.<br>
+      OTS: pending.<br>
+      Arweave: archive-needed.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 1 batches (all stamped).<br>
-      OpenTimestamps: upgraded.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      OpenTimestamps: pending.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx 7reprtQJM-M3....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -892,16 +892,16 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">alive</p>
+    <p class="status-number">degraded</p>
     <p class="status-note">
-      Daily alive status: success.<br>
+      Daily alive status: degraded.<br>
       Heartbeat ID: hwb-20260618.<br>
       Key continuity: ok.<br>
-      OTS covers heartbeat: yes.<br>
+      OTS covers heartbeat: no.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：成功。</span><br>
+      <span class="zh">每日存活状态：已降级。</span><br>
       <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>ddca6854d4f873dd</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>f8511836e1bf620f</code>.</p>
 <!-- END GENERATED PUBLIC STATUS -->
 
   <p class="status-boundary">
