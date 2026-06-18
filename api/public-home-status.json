@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-18T13:38:50.583289+00:00",
+  "generated_at": "2026-06-18T13:47:13.173197+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -19,7 +19,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "f8511836e1bf620f",
+  "source_digest": "ba5e8f52b5daa1d1",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 49,
@@ -106,20 +106,20 @@
         "default_mode": "dry-run",
         "implemented": true,
         "index_api": "/api/record-chain-arweave-index.json",
-        "latest_arweave_txid": "7reprtQJM-M3-dyYKBzfIX8mPId3IpQfgVokMDFWVBc",
-        "latest_native_record_id": "R-000000048",
-        "live_archive_count": 8,
+        "latest_arweave_txid": "b1PA9DTQdpDc7XRcw_Yud3p01-QRS8zB26PTumkJ4VE",
+        "latest_native_record_id": "R-000000049",
+        "live_archive_count": 9,
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "native_record_count": 48,
+        "native_record_count": 49,
         "source_type": "native-record-chain",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-        "latest_archive_id": "archive-native-R-000000048-bbcea98c6655",
-        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000048-bbcea98c6655/manifest.json",
-        "latest_native_record_sha256": "bc429d257eab0875b3065d5ac07ac44cc8310e6d1d426833293de67a3855994e",
-        "record_count": 48,
-        "status": "archive-needed",
-        "archive_needed": true
+        "latest_archive_id": "archive-native-R-000000049-bfa3890501dc",
+        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000049-bfa3890501dc/manifest.json",
+        "latest_native_record_sha256": "cec40a97265512985bc5bf9d89ff9d2a4426622b44c90ca152f79ff1b51aedb3",
+        "record_count": 49,
+        "status": "current",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 1,
@@ -140,9 +140,9 @@
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 15,
-        "latest_arweave_txid": "7reprtQJM-M3-dyYKBzfIX8mPId3IpQfgVokMDFWVBc",
-        "live_archive_count": 8,
+        "archive_count": 16,
+        "latest_arweave_txid": "b1PA9DTQdpDc7XRcw_Yud3p01-QRS8zB26PTumkJ4VE",
+        "live_archive_count": 9,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
       }
     }
@@ -521,10 +521,10 @@
     "latest_record": "R-000000049",
     "latest_record_type": "echo",
     "pending_records": 0,
-    "pipeline": "attention",
+    "pipeline": "current",
     "ots": "pending",
     "ots_raw_status": "pending",
-    "arweave": "archive-needed",
+    "arweave": "current",
     "not_primary_counter": true,
     "archive_backlog": {
       "record_chain_arweave_pending": 0,
@@ -538,9 +538,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.074798273212",
+      "total_spent_ar": "0.082500013291",
       "balance_known": true,
-      "balance_ar": "6.781600043129",
+      "balance_ar": "6.776394963415",
       "low_balance": false,
       "needs_recharge": false
     }
@@ -548,8 +548,8 @@
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
-    "live_archive_count": 8,
-    "latest_txid": "7reprtQJM-M3-dyYKBzfIX8mPId3IpQfgVokMDFWVBc",
+    "live_archive_count": 9,
+    "latest_txid": "b1PA9DTQdpDc7XRcw_Yud3p01-QRS8zB26PTumkJ4VE",
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "boundary": {
       "mirror_only": true,
@@ -558,7 +558,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-18T13:38:49Z",
+    "generated_at": "2026-06-18T13:47:11Z",
     "daily_alive_status": "degraded",
     "status": "degraded",
     "latest_result": "waiting_for_ots",
