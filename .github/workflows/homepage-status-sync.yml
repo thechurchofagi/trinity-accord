@@ -163,7 +163,12 @@ jobs:
 
           echo "Dispatching deploy-pages.yml for homepage status sync."
           echo "deploy_reason=${reason}"
-          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+          deploy_ref="$(git rev-parse HEAD)"
+          echo "deploy_ref=${deploy_ref}"
+          gh workflow run deploy-pages.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f checkout_ref="${deploy_ref}"
 
       - name: Post-dispatch freshness probe
         if: ${{ steps.deploy_dispatch.outcome == 'success' }}
