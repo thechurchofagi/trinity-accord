@@ -241,6 +241,7 @@
   <url><loc>https://www.trinityaccord.org/api/verification-targets.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verify-release-report-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/waiting-heartbeat-key.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/waiting-heartbeat-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/worth-preserving-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/archive_legacy_index_2025_09/</loc></url>
   <url><loc>https://www.trinityaccord.org/authority-address-inscriptions/</loc></url>

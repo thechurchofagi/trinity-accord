@@ -154,6 +154,7 @@ def source_digest() -> str:
         GUARDIAN_REGISTRY,
         GUARDIAN_ACTIVE_LISTING_POLICY,
         AGENT_DECLARED_INDEX,
+        ROOT / "api" / "waiting-heartbeat-status.json",
     ]:
         h.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
         h.update(b"\0")
@@ -514,6 +515,7 @@ def compute_status() -> dict[str, Any]:
         "/api/guardian-registry.json",
         "/api/guardian-active-listing-policy.v1.json",
         "/api/agent-declared-verification-index.json",
+        "/api/waiting-heartbeat-status.json",
     ]
 
     echo_index = load_json_if_exists(ECHO_INDEX, {})
@@ -576,6 +578,14 @@ def compute_status() -> dict[str, Any]:
                 "not_authority": True,
             },
         },
+        "waiting_heartbeat": load_json_if_exists(
+            ROOT / "api" / "waiting-heartbeat-status.json",
+            {
+                "schema": "trinityaccord.waiting-heartbeat-status.v1",
+                "daily_alive_status": "not_configured",
+                "status": "not_configured",
+            },
+        ),
         "boundary": {
             "homepage_status_is_not_authority": True,
             "homepage_status_is_not_attestation": True,

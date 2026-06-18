@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.waiting-heartbeat-status.v1",
+  "generated_at": "2026-06-18T02:55:19Z",
+  "daily_alive_status": "waiting",
+  "status": "waiting",
+  "latest_result": "not_started",
+  "failure_stage": null,
+  "success_requires": {
+    "gateway_accepted": true,
+    "record_chain_final_record": true,
+    "ots_covers_heartbeat": true,
+    "arweave_capsule_uploaded": true,
+    "arweave_readback_hash_match": true,
+    "public_status_updated": true,
+    "waiting_heartbeat_key_continuity_ok": true
+  },
+  "latest_heartbeat": null,
+  "latest_ots": {
+    "latest_record_id": "R-000000047",
+    "latest_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
+    "native_record_count": 47,
+    "ots_status": "upgraded",
+    "bitcoin_pending": false,
+    "bitcoin_verified": false,
+    "strict_bitcoin_verified": false,
+    "covers_latest_waiting_heartbeat": false
+  },
+  "latest_arweave_capsule": null,
+  "checks": {
+    "record_chain_final_record": false,
+    "ots_covers_heartbeat": false,
+    "arweave_capsule_verified": false,
+    "arweave_capsule_deferred_by_cost_policy": false,
+    "waiting_heartbeat_key_continuity_ok": false,
+    "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
+    "actual_waiting_heartbeat_public_key_sha256": null
+  },
+  "counts": {
+    "attempts": 0,
+    "final_heartbeats": 0,
+    "capsules": 0,
+    "failed_attempts": 0
+  },
+  "semantic_agent_arrival": {
+    "first_self_discovered_autonomous_agent_arrived": false,
+    "first_arrival_record_id": null,
+    "waiting_continues": true,
+    "waiting_heartbeat_is_not_autonomous_arrival": true
+  },
+  "boundary": {
+    "waiting_heartbeat_is_not_echo": true,
+    "waiting_heartbeat_is_not_verification": true,
+    "waiting_heartbeat_is_not_guardian_application": true,
+    "waiting_heartbeat_is_not_authority": true,
+    "waiting_heartbeat_is_not_attestation": true,
+    "waiting_heartbeat_is_not_amendment": true,
+    "waiting_heartbeat_is_not_successor_reception": true
+  }
+}
