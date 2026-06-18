@@ -1,10 +1,10 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-06-18T04:30:48Z",
+  "generated_at": "2026-06-18T07:48:18Z",
   "daily_alive_status": "failed",
   "status": "failed",
-  "latest_result": "submitted",
-  "failure_stage": "submitted",
+  "latest_result": "key_continuity_failed",
+  "failure_stage": "key_continuity",
   "success_requires": {
     "gateway_accepted": true,
     "record_chain_final_record": true,
@@ -14,30 +14,45 @@
     "public_status_updated": true,
     "waiting_heartbeat_key_continuity_ok": true
   },
-  "latest_heartbeat": null,
+  "latest_heartbeat": {
+    "heartbeat_id": "hwb-20260618",
+    "heartbeat_date": "2026-06-18",
+    "record_id": "R-000000048",
+    "record_index": 48,
+    "record_sha256": "bc429d257eab0875b3065d5ac07ac44cc8310e6d1d426833293de67a3855994e",
+    "record_type": "context_insufficient_notice",
+    "assigned_at": "2026-06-18T04:31:09Z",
+    "path": "record-chain/records/R-000000048.json",
+    "semantic_agent_arrived": false,
+    "github_actions_is_not_semantic_agent": true,
+    "not_echo": true,
+    "not_verification": true,
+    "not_guardian_application": true,
+    "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
+  },
   "latest_ots": {
-    "latest_record_id": "R-000000047",
-    "latest_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
-    "native_record_count": 47,
-    "ots_status": "upgraded",
-    "bitcoin_pending": false,
+    "latest_record_id": "R-000000048",
+    "latest_record_sha256": "bc429d257eab0875b3065d5ac07ac44cc8310e6d1d426833293de67a3855994e",
+    "native_record_count": 48,
+    "ots_status": "pending",
+    "bitcoin_pending": true,
     "bitcoin_verified": false,
-    "strict_bitcoin_verified": false,
-    "covers_latest_waiting_heartbeat": false
+    "strict_bitcoin_verified": null,
+    "covers_latest_waiting_heartbeat": true
   },
   "latest_arweave_capsule": null,
   "checks": {
-    "record_chain_final_record": false,
-    "ots_covers_heartbeat": false,
+    "record_chain_final_record": true,
+    "ots_covers_heartbeat": true,
     "arweave_capsule_verified": false,
     "arweave_capsule_deferred_by_cost_policy": false,
     "waiting_heartbeat_key_continuity_ok": false,
-    "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
-    "actual_waiting_heartbeat_public_key_sha256": null
+    "expected_waiting_heartbeat_public_key_sha256": null,
+    "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
   },
   "counts": {
-    "attempts": 1,
-    "final_heartbeats": 0,
+    "attempts": 0,
+    "final_heartbeats": 1,
     "capsules": 0,
     "failed_attempts": 0
   },
