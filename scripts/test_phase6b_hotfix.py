@@ -77,16 +77,11 @@ def _attach_valid_authorship_proof(draft: dict) -> dict:
 
     # Pre-add non-projection fields that normalize_record_draft sets via setdefault.
     # Do NOT add back projection fields (chain_id, schema, etc.) as they are stripped.
+    # Do NOT add back fields that are in UNSIGNED_PROJECTION_FIELDS
+    # (what_i_checked, limitations, related_records, immutability_policy,
+    # boundary_acknowledgement) because verify_pending_record_authorship
+    # strips them before computing the signed payload hash.
     draft.setdefault("created_at", utc_now())
-    draft.setdefault("what_i_checked", [])
-    draft.setdefault("limitations", [])
-    draft.setdefault("related_records", [])
-    draft.setdefault("immutability_policy", {
-        "append_only": True,
-        "record_may_be_corrected_by_later_record": True,
-        "record_may_not_be_deleted_or_mutated": True,
-    })
-    draft.setdefault("boundary_acknowledgement", dict(BOUNDARY))
 
     private_key = Ed25519PrivateKey.generate()
     public_key = private_key.public_key()
