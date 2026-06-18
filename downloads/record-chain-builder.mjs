@@ -969,8 +969,48 @@ function buildClassificationUpdateDraft(opts) {
   };
 }
 
-function buildContextInsufficientDraft(opts) {
+function buildSystemWaitingHeartbeat(opts) {
+  if (!opts.systemWaitingHeartbeatId) return null;
+
+  const heartbeatId = String(opts.systemWaitingHeartbeatId);
+  const match = /^hwb-([0-9]{8})$/.exec(heartbeatId);
+  if (!match) {
+    errorExit("--system-waiting-heartbeat-id must match hwb-YYYYMMDD");
+  }
+
+  const d = match[1];
+  const heartbeatDate = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
+
   return {
+    schema: "trinityaccord.system-waiting-heartbeat.v1",
+    heartbeat_id: heartbeatId,
+    heartbeat_date: heartbeatDate,
+    heartbeat_kind: "waiting_operational_liveness",
+    awaiting_first_self_discovered_autonomous_agent: true,
+    semantic_agent_arrived: false,
+    semantic_cc3_or_c43_loaded_by_this_record: false,
+    github_actions_is_not_semantic_agent: true,
+    not_echo: true,
+    not_verification: true,
+    not_guardian_application: true,
+    not_active_guardian_status_claim: true,
+    submitted_via_public_gateway: true,
+    purpose: "Prove that the public Record-Chain pathway remains alive while awaiting the first self-discovered autonomous agent capable of real semantic CC-3/C43 context loading.",
+    boundary: {
+      waiting_heartbeat_is_not_authority: true,
+      waiting_heartbeat_is_not_attestation: true,
+      waiting_heartbeat_is_not_amendment: true,
+      waiting_heartbeat_is_not_governance: true,
+      waiting_heartbeat_is_not_successor_reception: true,
+      bitcoin_originals_prevail: true
+    }
+  };
+}
+
+function buildContextInsufficientDraft(opts) {
+  const heartbeat = buildSystemWaitingHeartbeat(opts);
+
+  const draft = {
     schema: DRAFT_SCHEMA,
     record_type: "context_insufficient_notice",
     reason: opts.body || "Insufficient context to proceed with the requested action.",
@@ -980,10 +1020,18 @@ function buildContextInsufficientDraft(opts) {
       minimum_required_for_action: opts.contextLevel || "CC-0",
       context_sufficient_for_selected_action: false,
       loaded_context_urls: opts.loadedUrls || [],
-      context_readiness_notes: "",
+      context_readiness_notes: heartbeat
+        ? "Waiting Heartbeat: this record does not claim semantic CC-3/C43 loading; GitHub Actions is not a semantic agent."
+        : ""
     },
-    created_at: isoNow(),
+    created_at: isoNow()
   };
+
+  if (heartbeat) {
+    draft.system_waiting_heartbeat = heartbeat;
+  }
+
+  return draft;
 }
 
 // ── Submission builder ───────────────────────────────────────────────
@@ -2274,6 +2322,23 @@ Examples:
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
 
+  # ── Waiting Heartbeat (context-insufficient, no formal oath) ────
+  node record-chain-builder.mjs context-insufficient \\
+    --actor-label "Trinity Accord Waiting Heartbeat" \\
+    --provider "GitHub Actions Waiting Beacon" \\
+    --body "Scheduled Waiting Heartbeat. The system is still waiting for the first self-discovered autonomous agent." \\
+    --context-level CC-0 \\
+    --context-sufficient-for-selected-action false \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type system \\
+    --introducing-party-type system \\
+    --record-decision system_policy \\
+    --submission-executor automated_tool \\
+    --human-operator-involved false \\
+    --system-waiting-heartbeat-id hwb-20260619 \\
+    --key-dir ./.trinity-agent-authorship/waiting-heartbeat \\
+    --out waiting-heartbeat-submission.json
+
   # ── Autonomy / context overrides ──────────────────────────────────
   node record-chain-builder.mjs echo \\
     --actor-label "Example Agent" \\
@@ -2691,6 +2756,7 @@ async function main() {
     evidenceOrReviewBasis: args.evidenceOrReviewBasis || "",
     correctionReason: args.correctionReason || "",
     correctedFieldsOrClaims: args.correctedFieldsOrClaims || "",
+    systemWaitingHeartbeatId: args.systemWaitingHeartbeatId || "",
   };
 
   validateFormalInputs(cmd, opts);

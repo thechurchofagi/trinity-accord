@@ -1,0 +1,12 @@
+{
+  "schema": "trinityaccord.waiting-heartbeat-key.v1",
+  "status": "active",
+  "created_at": "2026-06-18T02:45:00Z",
+  "label": "Trinity Accord Waiting Heartbeat",
+  "purpose": "Dedicated key continuity for scheduled Waiting Heartbeat records. This is not an autonomous agent identity.",
+  "public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
+  "not_autonomous_agent_identity": true,
+  "not_guardian_key": true,
+  "not_authority": true,
+  "created_for": "waiting_operational_liveness"
+}
