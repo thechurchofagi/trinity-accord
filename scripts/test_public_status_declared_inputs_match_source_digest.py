@@ -26,6 +26,7 @@ EXPECTED_GENERATED_FROM = {
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
     "/api/agent-declared-verification-index.json",
+    "/api/waiting-heartbeat-status.json",
 }
 
 expected_constants = {
