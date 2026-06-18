@@ -342,6 +342,18 @@ def primary_counters(records: list[dict[str, Any]], index: dict[tuple[str, str |
     }
 
 
+
+def _pipeline_display(status: dict[str, Any], ots: dict[str, Any], arweave_status: str) -> str:
+    pipeline_status = status.get("pipeline_status", {})
+    pipeline_current = pipeline_status.get("pipeline_current")
+    if isinstance(pipeline_current, bool):
+        return "current" if pipeline_current else "attention"
+    return (
+        "current"
+        if str(ots.get("status", "")).startswith("current") and arweave_status == "current"
+        else "attention"
+    )
+
 def technical_health(status: dict[str, Any]) -> dict[str, Any]:
     rc = status.get("current_record_chain_status", {})
     anchoring = rc.get("anchoring", {})
@@ -358,10 +370,12 @@ def technical_health(status: dict[str, Any]) -> dict[str, Any]:
         "latest_record": rc.get("latest_record_id"),
         "latest_record_type": rc.get("latest_record_type"),
         "pending_records": rc.get("pending_records", 0),
-        "pipeline": "current" if str(ots.get("status", "")).startswith("current") and arweave_status == "current" else "attention",
+        "pipeline": _pipeline_display(status, ots, arweave_status),
         "ots": "pending" if "pending" in str(raw_ots) else str(raw_ots),
         "ots_raw_status": raw_ots,
         "arweave": arweave_status,
+        "ots_archivable_for_arweave": (status.get("pipeline_status") or {}).get("ots_archivable_for_arweave"),
+        "arweave_archive_needed": (status.get("pipeline_status") or {}).get("arweave_archive_needed"),
         "not_primary_counter": True,
         "archive_backlog": status.get("technical_health", {}).get("archive_backlog", {}),
         "arweave_wallet": {

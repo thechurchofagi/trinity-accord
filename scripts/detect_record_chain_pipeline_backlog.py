@@ -18,6 +18,57 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+
+def native_ots_head_matches_chain(tip: dict[str, Any], ots: dict[str, Any]) -> bool:
+    """Return True when current native chain head already has a matching OTS anchor.
+
+    This must not require Bitcoin verification. A pending/upgraded anchor still
+    means the current head has already been stamped and should not be stamped again.
+    """
+    return (
+        bool(tip.get("latest_record_id"))
+        and ots.get("latest_record_id") == tip.get("latest_record_id")
+        and ots.get("latest_record_sha256") == tip.get("latest_record_sha256")
+        and ots.get("native_record_count") == tip.get("native_record_count")
+        and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+        and bool(ots.get("latest_anchor_file"))
+        and bool(ots.get("latest_ots_file"))
+    )
+
+
+def native_ots_is_strictly_verified(ots: dict[str, Any]) -> bool:
+    """Return True only when strict Bitcoin-node verification succeeded."""
+    return (
+        ots.get("ots_status") == "verified"
+        and ots.get("bitcoin_verified") is True
+        and ots.get("strict_bitcoin_verified") is True
+    )
+
+
+def native_ots_has_bitcoin_attestation(ots: dict[str, Any]) -> bool:
+    """Return True for upgraded proofs with embedded BitcoinBlockHeaderAttestation."""
+    return (
+        ots.get("ots_status") == "upgraded"
+        and ots.get("bitcoin_attestation_embedded") is True
+        and ots.get("bitcoin_pending") is False
+    )
+
+
+def native_ots_archivable_for_arweave(tip: dict[str, Any], ots: dict[str, Any]) -> bool:
+    """Return True when native OTS is sufficient for Arweave mirror/archive.
+
+    This does not imply strict Bitcoin verification and must not set
+    bitcoin_verified=true.
+    """
+    return (
+        native_ots_head_matches_chain(tip, ots)
+        and (
+            native_ots_is_strictly_verified(ots)
+            or native_ots_has_bitcoin_attestation(ots)
+        )
+    )
+
 def is_verified_live_archive(arweave_entry: dict[str, Any]) -> bool:
     """Return True only if the archive entry is live AND fully verified.
 
@@ -67,14 +118,8 @@ def main() -> int:
     ar_sha = ar.get("native_latest_record_sha256") or ""
     ar_count = ar.get("native_record_count") or ""
 
-    ots_matches_chain = (
-        ots_id == chain_id
-        and ots_sha == chain_sha
-        and ots_count == chain_count
-        and ots.get("legacy_main_chain_jsonl_is_not_source") is True
-        and ots.get("ots_status") in ("upgraded", "verified")
-        and ots.get("bitcoin_verified") is True
-    )
+    ots_head_matches_chain = native_ots_head_matches_chain(tip, ots)
+    ots_archivable = native_ots_archivable_for_arweave(tip, ots)
 
     arweave_matches_ots = (
         ar_id == ots_id
@@ -100,12 +145,24 @@ def main() -> int:
         "arweave_latest_record_id": ar_id,
         "arweave_latest_record_sha256": ar_sha,
         "arweave_native_record_count": str(ar_count),
-        "ots_matches_chain": str(ots_matches_chain).lower(),
+
+        # Backward-compatible name, corrected semantics:
+        # current chain head has a matching native OTS anchor.
+        "ots_matches_chain": str(ots_head_matches_chain).lower(),
+
+        # New explicit archive gate.
+        "ots_archivable_for_arweave": str(ots_archivable).lower(),
+
         "arweave_matches_ots": str(arweave_matches_ots).lower(),
         "arweave_matches_chain": str(arweave_matches_chain).lower(),
-        "ots_anchor_needed": str(not ots_matches_chain).lower(),
-        "arweave_archive_needed": str(ots_matches_chain and not arweave_matches_ots).lower(),
-        "pipeline_current": str(ots_matches_chain and arweave_matches_chain).lower(),
+
+        # Do not restamp an already-stamped head.
+        "ots_anchor_needed": str(not ots_head_matches_chain).lower(),
+
+        # Full native record-chain archive waits for archivable OTS.
+        "arweave_archive_needed": str(ots_archivable and not arweave_matches_ots).lower(),
+
+        "pipeline_current": str(ots_archivable and arweave_matches_chain).lower(),
     }
 
     if args.github_output:

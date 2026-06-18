@@ -88,6 +88,30 @@ def is_verified_live_archive(arweave_entry: dict[str, Any]) -> bool:
     )
 
 
+
+
+def native_ots_is_strictly_verified(ots: dict[str, Any]) -> bool:
+    return (
+        ots.get("ots_status") == "verified"
+        and ots.get("bitcoin_verified") is True
+        and ots.get("strict_bitcoin_verified") is True
+    )
+
+
+def native_ots_has_bitcoin_attestation(ots: dict[str, Any]) -> bool:
+    return (
+        ots.get("ots_status") == "upgraded"
+        and ots.get("bitcoin_attestation_embedded") is True
+        and ots.get("bitcoin_pending") is False
+    )
+
+
+def native_ots_archivable_for_arweave(ots_matches_chain: bool, ots: dict[str, Any]) -> bool:
+    return ots_matches_chain and (
+        native_ots_is_strictly_verified(ots)
+        or native_ots_has_bitcoin_attestation(ots)
+    )
+
 def latest_live_native_archive(arweave: dict[str, Any]) -> dict[str, Any] | None:
     """Return the latest live native Arweave archive, or None if none exist.
 
@@ -117,6 +141,8 @@ def build_pipeline_status(tip: dict[str, Any], ots: dict[str, Any], latest_live:
         "ots_status": ots.get("ots_status"),
         "bitcoin_pending": ots.get("bitcoin_pending"),
         "bitcoin_verified": ots.get("bitcoin_verified"),
+        "bitcoin_attestation_embedded": ots.get("bitcoin_attestation_embedded"),
+        "strict_bitcoin_verified": ots.get("strict_bitcoin_verified"),
     }
     arweave_head = {
         "latest_record_id": (latest_live or {}).get("native_latest_record_id"),
@@ -147,16 +173,19 @@ def build_pipeline_status(tip: dict[str, Any], ots: dict[str, Any], latest_live:
         and bool(arweave_head["latest_record_id"])
     )
 
+    ots_archivable = native_ots_archivable_for_arweave(ots_matches_chain, ots)
+
     return {
         "chain_head": chain_head,
         "ots_head": ots_head,
         "arweave_head": arweave_head,
         "ots_matches_chain": ots_matches_chain,
+        "ots_archivable_for_arweave": ots_archivable,
         "arweave_matches_ots": arweave_matches_ots,
         "arweave_matches_chain": arweave_matches_chain,
         "ots_anchor_needed": not ots_matches_chain,
-        "arweave_archive_needed": ots_matches_chain and not arweave_matches_ots,
-        "pipeline_current": ots_matches_chain and arweave_matches_chain,
+        "arweave_archive_needed": ots_archivable and not arweave_matches_ots,
+        "pipeline_current": ots_archivable and arweave_matches_chain,
     }
 
 

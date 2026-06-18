@@ -60,6 +60,7 @@ def update_item(path: Path, api_path: Path, kind: str, key: str, status: str, er
                 item["tx_id"] = tx_id
             item["next_action"] = {
                 "waiting_for_key": "provide_arweave_key",
+                "waiting_for_ots_upgrade": "wait_for_native_ots_upgrade",
                 "upgrade_due": "upgrade_native_ots_anchor",
                 "upgrade_failed": "retry_native_ots_upgrade",
                 "upload_failed": "retry_upload",

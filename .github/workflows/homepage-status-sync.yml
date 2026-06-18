@@ -22,7 +22,7 @@ on:
 
   schedule:
     # Central hourly sync. Do not add homepage status writes back into business workflows.
-    - cron: "7 * * * *"
+    - cron: "7,22,37,52 * * * *"
 
   workflow_run:
     workflows:
@@ -168,6 +168,7 @@ jobs:
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
 
       - name: Post-dispatch freshness probe
+        id: post_freshness
         if: ${{ steps.deploy_dispatch.outcome == 'success' }}
         continue-on-error: true
         run: |
@@ -175,3 +176,13 @@ jobs:
           echo "Waiting briefly before probing live site. Pages deployment may still be in progress."
           sleep 90
           python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 60
+
+      - name: Retry Deploy Pages if post-dispatch freshness probe failed
+        if: ${{ steps.post_freshness.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "Post-dispatch freshness probe failed; retrying Deploy Pages once."
+          deploy_ref="$(git rev-parse HEAD)"
+          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"

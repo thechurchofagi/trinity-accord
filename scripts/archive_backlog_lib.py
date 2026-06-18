@@ -86,6 +86,7 @@ def summarize_record_chain(items: list[dict[str, Any]]) -> dict[str, Any]:
     failed = sum(1 for i in items if i.get("archive_status") == "upload_failed")
     readback = sum(1 for i in items if i.get("archive_status") == "readback_failed")
     waiting = sum(1 for i in items if i.get("archive_status") == "waiting_for_key")
+    waiting_ots = sum(1 for i in items if i.get("archive_status") == "waiting_for_ots_upgrade")
     archived = sum(1 for i in items if i.get("archive_status") == "archived")
     actionable = pending + failed + readback + waiting
     return {
@@ -93,8 +94,9 @@ def summarize_record_chain(items: list[dict[str, Any]]) -> dict[str, Any]:
         "failed_upload_count": failed,
         "readback_failed_count": readback,
         "waiting_for_key_count": waiting,
+        "waiting_for_ots_upgrade_count": waiting_ots,
         "archived_count": archived,
-        "backlog_current": actionable == 0,
+        "backlog_current": actionable == 0 and waiting_ots == 0,
     }
 
 

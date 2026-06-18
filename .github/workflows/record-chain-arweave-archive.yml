@@ -5,7 +5,9 @@ name: Record Chain Arweave Archive
 
 on:
   workflow_run:
-    workflows: ["Record Chain Head OTS Anchor"]
+    workflows:
+      - "Record Chain Head OTS Anchor"
+      - "Native OTS Upgrade Watch"
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -69,9 +71,9 @@ jobs:
           printf 'Resolved ARWEAVE_UPLOAD_MODE=%s\n' "${ARWEAVE_UPLOAD_MODE}"
 
       - name: Wait for native OTS
-        if: steps.backlog.outputs.ots_matches_chain != 'true'
+        if: steps.backlog.outputs.ots_archivable_for_arweave != 'true'
         run: |
-          printf '%s\n' "Native OTS is behind current chain-tip; waiting for OTS scanner."
+          printf '%s\n' "Native OTS is not archivable for Arweave yet; waiting for OTS upgrade/verification."
           printf 'chain=%s ots=%s\n' "${{ steps.backlog.outputs.chain_latest_record_id }}" "${{ steps.backlog.outputs.ots_latest_record_id }}"
 
       - name: Verify native OTS latest before archive
@@ -108,6 +110,28 @@ jobs:
               print("WARN:", msg, "- dry-run may continue")
           else:
               print("Native OTS latest matches current chain-tip.")
+
+          archivable = (
+              ots.get("ots_status") == "verified"
+              and ots.get("bitcoin_verified") is True
+              and ots.get("strict_bitcoin_verified") is True
+          ) or (
+              ots.get("ots_status") == "upgraded"
+              and ots.get("bitcoin_attestation_embedded") is True
+              and ots.get("bitcoin_pending") is False
+          )
+
+          if not archivable:
+              msg = (
+                  "native OTS latest is not archivable: requires either "
+                  "verified+bitcoin_verified=true+strict_bitcoin_verified=true or "
+                  "upgraded+bitcoin_attestation_embedded=true+bitcoin_pending=false"
+              )
+              if mode == "live":
+                  raise SystemExit(msg + "; refusing live Arweave upload")
+              print("WARN:", msg, "- dry-run may continue")
+          else:
+              print("Native OTS latest is archivable for Arweave mirror/archive.")
           PY
 
       - name: Build Arweave archive manifest

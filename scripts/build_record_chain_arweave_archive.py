@@ -196,6 +196,10 @@ def load_native_chain_sources() -> dict:
             "latest_anchor_file": native_ots_latest.get("latest_anchor_file"),
             "latest_anchored_file": native_ots_latest.get("latest_anchored_file"),
             "ots_status": native_ots_latest.get("ots_status"),
+            "bitcoin_pending": native_ots_latest.get("bitcoin_pending"),
+            "bitcoin_verified": native_ots_latest.get("bitcoin_verified"),
+            "bitcoin_attestation_embedded": native_ots_latest.get("bitcoin_attestation_embedded"),
+            "strict_bitcoin_verified": native_ots_latest.get("strict_bitcoin_verified"),
         }
 
     source_files = {
@@ -393,6 +397,23 @@ def build_archive_manifest(mode: str) -> None:
         },
     }
 
+    # Hard gate: refuse live upload if native OTS is not archivable
+    native_ots_latest_data = read_json(NATIVE_OTS_LATEST) if NATIVE_OTS_LATEST.exists() else {}
+    ots_archivable, ots_errors = native_ots_archivable_for_chain(native_ots_latest_data, chain_tip)
+
+    if mode == "live" and not ots_archivable:
+        raise SystemExit(
+            "refusing live Arweave archive because native OTS latest is not archivable: "
+            + "; ".join(ots_errors)
+        )
+
+    if mode != "live" and not ots_archivable:
+        print(
+            "WARN: native OTS latest is not archivable yet; dry-run continues: "
+            + "; ".join(ots_errors),
+            file=sys.stderr,
+        )
+
     upload_failed = False
     if mode == "live":
         arkey = os.environ.get("ARKEY")
@@ -477,6 +498,47 @@ def build_archive_manifest(mode: str) -> None:
     refresh_archive_backlog()
     if upload_failed:
         raise SystemExit(1)
+
+
+
+def native_ots_archivable_for_chain(native_ots_latest: dict, chain_tip: dict) -> tuple[bool, list[str]]:
+    errors: list[str] = []
+
+    if not native_ots_latest:
+        return False, ["api/record-chain-native-ots-latest.json missing or empty"]
+
+    expected = {
+        "latest_record_id": chain_tip.get("latest_record_id"),
+        "latest_record_sha256": chain_tip.get("latest_record_sha256"),
+        "native_record_count": chain_tip.get("native_record_count"),
+    }
+
+    for key, value in expected.items():
+        if native_ots_latest.get(key) != value:
+            errors.append(f"{key} mismatch")
+
+    if native_ots_latest.get("legacy_main_chain_jsonl_is_not_source") is not True:
+        errors.append("legacy_main_chain_jsonl_is_not_source is not true")
+
+    is_strictly_verified = (
+        native_ots_latest.get("ots_status") == "verified"
+        and native_ots_latest.get("bitcoin_verified") is True
+        and native_ots_latest.get("strict_bitcoin_verified") is True
+    )
+
+    has_bitcoin_attestation = (
+        native_ots_latest.get("ots_status") == "upgraded"
+        and native_ots_latest.get("bitcoin_attestation_embedded") is True
+        and native_ots_latest.get("bitcoin_pending") is False
+    )
+
+    if not (is_strictly_verified or has_bitcoin_attestation):
+        errors.append(
+            "native OTS is not archivable; expected verified+bitcoin_verified=true+strict_bitcoin_verified=true "
+            "or upgraded+bitcoin_attestation_embedded=true+bitcoin_pending=false"
+        )
+
+    return not errors, errors
 
 
 def _is_verified_live_archive_entry(entry: dict[str, Any]) -> bool:

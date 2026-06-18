@@ -38,6 +38,43 @@ def stable_updated_at() -> str:
     return ots.get("updated_at") or tip.get("updated_at") or "2026-06-10T00:00:00Z"
 
 
+
+def is_verified_live_native_archive(entry: dict[str, Any]) -> bool:
+    return (
+        bool(entry.get("arweave_txid"))
+        and entry.get("source_type") == "native-record-chain"
+        and entry.get("mode") == "live"
+        and entry.get("archive_status") == "archived"
+        and entry.get("verified") is True
+        and entry.get("hash_match") is True
+    )
+
+
+def native_ots_archivable_for_current_chain() -> bool:
+    tip = read_json(CHAIN_TIP, {})
+    ots = read_json(OTS_LATEST, {})
+    return (
+        bool(tip.get("latest_record_id"))
+        and ots.get("latest_record_id") == tip.get("latest_record_id")
+        and ots.get("latest_record_sha256") == tip.get("latest_record_sha256")
+        and ots.get("native_record_count") == tip.get("native_record_count")
+        and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+        and bool(ots.get("latest_anchor_file"))
+        and bool(ots.get("latest_ots_file"))
+        and (
+            (
+                ots.get("ots_status") == "verified"
+                and ots.get("bitcoin_verified") is True
+                and ots.get("strict_bitcoin_verified") is True
+            )
+            or (
+                ots.get("ots_status") == "upgraded"
+                and ots.get("bitcoin_attestation_embedded") is True
+                and ots.get("bitcoin_pending") is False
+            )
+        )
+    )
+
 def native_archive_sources() -> list[dict[str, Any]]:
     entries: list[dict[str, Any]] = []
     index = read_json(ARWEAVE_INDEX, {"archives": []})
@@ -82,12 +119,28 @@ def record_chain_items() -> list[dict[str, Any]]:
         and entry.get("native_latest_record_sha256") == latest_sha
         and entry.get("native_record_count") == count
     ]
-    if any(entry.get("arweave_txid") for entry in matching):
+    if any(is_verified_live_native_archive(entry) for entry in matching):
         return []
 
     key = item_key([latest_id, latest_sha, count])
     previous = attempts.get(key, {})
-    status = previous.get("archive_status") or "pending_upload"
+    previous_status = previous.get("archive_status")
+
+    ots_archivable = native_ots_archivable_for_current_chain()
+
+    if not ots_archivable:
+        status = "waiting_for_ots_upgrade"
+        next_action = "wait_for_native_ots_upgrade"
+    else:
+        if previous_status in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}:
+            status = previous_status
+        else:
+            status = "pending_upload"
+
+        next_action = previous.get("next_action")
+        if not next_action or next_action == "wait_for_native_ots_upgrade":
+            next_action = "provide_arweave_key" if status == "waiting_for_key" else "upload_record_chain_archive"
+
     return [{
         "key": key,
         "kind": "record_chain_arweave",
@@ -97,7 +150,7 @@ def record_chain_items() -> list[dict[str, Any]]:
         "native_record_count": count,
         "tx_id": previous.get("tx_id"),
         **attempt_fields(previous),
-        "next_action": previous.get("next_action") or ("provide_arweave_key" if status == "waiting_for_key" else "upload_record_chain_archive"),
+        "next_action": next_action,
     }]
 
 
