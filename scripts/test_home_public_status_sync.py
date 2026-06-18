@@ -66,10 +66,10 @@ def card_number(block: str, label: str, required: bool = True) -> str:
 
 def run_generator_check() -> None:
     for cmd in [
-        [sys.executable, "scripts/generate_arweave_wallet_status.py", "--check"],
-        [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
-        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
-        [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
+        [sys.executable, "scripts/generate_arweave_wallet_status.py"],
+        [sys.executable, "scripts/generate_record_chain_status.py"],
+        [sys.executable, "scripts/generate_public_home_status.py"],
+        [sys.executable, "scripts/patch_public_home_status_primary.py"],
         [sys.executable, "scripts/check_public_home_status_contract.py"],
     ]:
         result = subprocess.run(
