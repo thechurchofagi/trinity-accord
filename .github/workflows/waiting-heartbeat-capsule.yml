@@ -1,0 +1,88 @@
+name: Waiting Heartbeat Arweave Capsule
+
+on:
+  workflow_run:
+    workflows: ["Record Chain Head OTS Anchor"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: waiting-heartbeat-capsule
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  capsule:
+    if: ${{ (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') && (github.event_name == 'workflow_dispatch' || vars.WAITING_HEARTBEAT_ARWEAVE_CAPSULE_ENABLED == 'true') }}
+    runs-on: ubuntu-24.04
+    env:
+      ARKEY: ${{ secrets.ARKEY }}
+      WAITING_HEARTBEAT_ARWEAVE_MAX_COST_AR: ${{ vars.WAITING_HEARTBEAT_ARWEAVE_MAX_COST_AR || '0.001' }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -r requirements-ci.txt
+          npm ci
+
+      - name: Rebase
+        run: git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+
+      - name: Generate waiting heartbeat status
+        run: python3 scripts/generate_waiting_heartbeat_status.py
+
+      - name: Build capsule
+        id: build
+        run: |
+          set -euo pipefail
+          capsule_path="$(python3 scripts/build_waiting_heartbeat_arweave_capsule.py)"
+          echo "capsule_path=${capsule_path}" >> "$GITHUB_OUTPUT"
+          heartbeat_id="$(basename "$capsule_path" .capsule.json)"
+          echo "heartbeat_id=${heartbeat_id}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload capsule
+        run: |
+          node scripts/arweave_upload_waiting_heartbeat_capsule.mjs \
+            --payload "${{ steps.build.outputs.capsule_path }}" \
+            --heartbeat-id "${{ steps.build.outputs.heartbeat_id }}" \
+            --out "record-chain/heartbeat/capsules/${{ steps.build.outputs.heartbeat_id }}.upload-result.json"
+
+      - name: Regenerate status and public artifacts
+        run: |
+          python3 scripts/generate_waiting_heartbeat_status.py
+          python3 scripts/update_public_generated_artifacts.py
+          python3 scripts/generate_public_home_status.py --check
+          python3 scripts/trinity_record_chain.py verify
+
+      - name: Commit capsule metadata
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "trinity-waiting-heartbeat-bot"
+          git config user.email "actions@github.com"
+          git add record-chain/heartbeat api/waiting-heartbeat-status.json api/public-home-status.json index.md sitemap.xml || true
+          git commit -m "heartbeat: archive waiting heartbeat capsule"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+              exit 0
+            fi
+            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+          done
+          exit 1
