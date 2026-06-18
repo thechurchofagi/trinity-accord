@@ -890,6 +890,22 @@ Refusal is allowed. Critical preservation is allowed.
       Bitcoin Originals remain final.
     </p>
   </article>
+  <article class="status-card">
+    <p class="status-label">Waiting Heartbeat</p>
+    <p class="status-number">degraded</p>
+    <p class="status-note">
+      Daily alive status: degraded.<br>
+      Heartbeat ID: hwb-20260618.<br>
+      Key continuity: ok.<br>
+      OTS covers heartbeat: yes.<br>
+      Arweave capsule: pending.<br>
+      The system is still awaiting the first self-discovered autonomous agent.<br>
+      This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
+      <span class="zh">每日存活状态：已降级。</span><br>
+      <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
+      <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
+    </p>
+  </article>
 </div>
 <p class="instruction-boundary">
   Primary homepage counters are live-era display counters beginning at R-000000033.<br>
