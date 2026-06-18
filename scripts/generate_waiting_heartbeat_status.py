@@ -104,11 +104,28 @@ def load_capsules() -> list[dict[str, Any]]:
 def capsule_is_verified(c: dict[str, Any] | None) -> bool:
     if not c:
         return False
-    return bool(c.get("txid") or c.get("tx_id")) and c.get("hash_match") is True and c.get("result") in {"uploaded", "success"}
+    txid = (
+        c.get("txid")
+        or c.get("tx_id")
+        or c.get("arweave_txid")
+        or c.get("arweave_tx_id")
+    )
+    status = c.get("result") or c.get("status")
+    return bool(txid) and c.get("hash_match") is True and status in {
+        "uploaded",
+        "success",
+        "arweave_archived",
+    }
 
 
 def capsule_is_deferred(c: dict[str, Any] | None) -> bool:
-    return bool(c and c.get("result") == "deferred_by_cost_policy")
+    if not c:
+        return False
+    status = c.get("result") or c.get("status")
+    return status in {
+        "deferred_by_cost_policy",
+        "cost_exceeded",
+    }
 
 
 def main() -> int:
