@@ -44,10 +44,12 @@ jobs:
           ALLOWED_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi' }}
         run: |
           set -euo pipefail
-          case ",${ALLOWED_ACTORS}," in
-            *,${ACTOR},*) echo "Authorized write workflow actor: ${ACTOR}" ;;
-            *) echo "Unauthorized actor: ${ACTOR}"; exit 1 ;;
-          esac
+          if echo ",${ALLOWED_ACTORS}," | grep -qF ",${ACTOR},"; then
+            echo "Authorized write workflow actor: ${ACTOR}"
+          else
+            echo "Unauthorized actor: ${ACTOR}"
+            exit 1
+          fi
       - name: Rebase before append
         run: |
           set -euo pipefail
