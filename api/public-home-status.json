@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-18T09:32:09.355186+00:00",
+  "generated_at": "2026-06-18T09:49:19.049892+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -530,7 +530,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-18T09:32:08Z",
+    "generated_at": "2026-06-18T09:49:17Z",
     "daily_alive_status": "degraded",
     "status": "degraded",
     "latest_result": "waiting_for_arweave_capsule",
