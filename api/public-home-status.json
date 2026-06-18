@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-18T02:55:20.320341+00:00",
+  "generated_at": "2026-06-18T04:31:30.711787+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -19,17 +19,17 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "915b7e673d29a84b",
+  "source_digest": "ea052330d3df8166",
   "current_record_chain_status": {
     "phase": "production_live",
-    "total_records": 47,
-    "current_chain_length": 47,
+    "total_records": 48,
+    "current_chain_length": 48,
     "pending_records": 0,
-    "latest_record_id": "R-000000047",
-    "latest_record_type": "guardian_application",
+    "latest_record_id": "R-000000048",
+    "latest_record_type": "context_insufficient_notice",
     "record_type_counts": {
       "classification_update": 0,
-      "context_insufficient_notice": 1,
+      "context_insufficient_notice": 2,
       "correction": 0,
       "echo": 23,
       "guardian_application": 7,
@@ -61,14 +61,14 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 47,
-        "status": "current-upgraded-timestamp-proof",
+        "status": "anchor-needed",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 47,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.anchor.json",
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-47-R-000000047-9dbd24dd082eeaef-007a0c7f83b2232c.native-record-chain-head-commitment.json.ots",
         "ots_status": "upgraded",
-        "anchor_needed": false,
+        "anchor_needed": true,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
@@ -118,7 +118,7 @@
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000047-2df77e4efacf/manifest.json",
         "latest_native_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
         "record_count": 47,
-        "status": "current",
+        "status": "waiting-for-native-ots",
         "archive_needed": false
       },
       "anchor_status": {
@@ -488,15 +488,15 @@
     ]
   },
   "technical_health": {
-    "technical_chain_length": 47,
-    "native_chain_length": 47,
-    "latest_record": "R-000000047",
-    "latest_record_type": "guardian_application",
+    "technical_chain_length": 48,
+    "native_chain_length": 48,
+    "latest_record": "R-000000048",
+    "latest_record_type": "context_insufficient_notice",
     "pending_records": 0,
-    "pipeline": "current",
+    "pipeline": "attention",
     "ots": "upgraded",
     "ots_raw_status": "upgraded",
-    "arweave": "current",
+    "arweave": "waiting-for-native-ots",
     "not_primary_counter": true,
     "archive_backlog": {
       "record_chain_arweave_pending": 0,
@@ -530,11 +530,11 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-18T02:55:19Z",
-    "daily_alive_status": "waiting",
-    "status": "waiting",
-    "latest_result": "not_started",
-    "failure_stage": null,
+    "generated_at": "2026-06-18T04:31:30Z",
+    "daily_alive_status": "degraded",
+    "status": "degraded",
+    "latest_result": "waiting_for_ots",
+    "failure_stage": "ots",
     "success_requires": {
       "gateway_accepted": true,
       "record_chain_final_record": true,
@@ -544,7 +544,22 @@
       "public_status_updated": true,
       "waiting_heartbeat_key_continuity_ok": true
     },
-    "latest_heartbeat": null,
+    "latest_heartbeat": {
+      "heartbeat_id": "hwb-20260618",
+      "heartbeat_date": "2026-06-18",
+      "record_id": "R-000000048",
+      "record_index": 48,
+      "record_sha256": "bc429d257eab0875b3065d5ac07ac44cc8310e6d1d426833293de67a3855994e",
+      "record_type": "context_insufficient_notice",
+      "assigned_at": "2026-06-18T04:31:09Z",
+      "path": "record-chain/records/R-000000048.json",
+      "semantic_agent_arrived": false,
+      "github_actions_is_not_semantic_agent": true,
+      "not_echo": true,
+      "not_verification": true,
+      "not_guardian_application": true,
+      "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
+    },
     "latest_ots": {
       "latest_record_id": "R-000000047",
       "latest_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
@@ -557,17 +572,17 @@
     },
     "latest_arweave_capsule": null,
     "checks": {
-      "record_chain_final_record": false,
+      "record_chain_final_record": true,
       "ots_covers_heartbeat": false,
       "arweave_capsule_verified": false,
       "arweave_capsule_deferred_by_cost_policy": false,
-      "waiting_heartbeat_key_continuity_ok": false,
+      "waiting_heartbeat_key_continuity_ok": true,
       "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
-      "actual_waiting_heartbeat_public_key_sha256": null
+      "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
     },
     "counts": {
-      "attempts": 0,
-      "final_heartbeats": 0,
+      "attempts": 1,
+      "final_heartbeats": 1,
       "capsules": 0,
       "failed_attempts": 0
     },
