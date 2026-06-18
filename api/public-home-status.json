@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-18T10:01:57.906741+00:00",
+  "generated_at": "2026-06-18T10:03:41.543445+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -19,7 +19,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "484d7179c1a0de36",
+  "source_digest": "5c1ffb05c7bd7584",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 48,
@@ -530,7 +530,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-18T10:01:56Z",
+    "generated_at": "2026-06-18T10:03:41Z",
     "daily_alive_status": "degraded",
     "status": "degraded",
     "latest_result": "waiting_for_arweave_capsule",
@@ -570,7 +570,21 @@
       "strict_bitcoin_verified": false,
       "covers_latest_waiting_heartbeat": true
     },
-    "latest_arweave_capsule": null,
+    "latest_arweave_capsule": {
+      "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
+      "heartbeat_id": "hwb-20260618",
+      "status": "cost_exceeded",
+      "attempted_at": "2026-06-18T10:03:41.191Z",
+      "payload_sha256": "9b744ba0cf2693e011f4772b66a7f83dd495e8dddc33639f4f957351fdb390d6",
+      "upload_cost_winston": "2600091048",
+      "upload_cost_ar": "0.002600091048",
+      "max_cost_ar": "0.001",
+      "boundary": {
+        "arweave_archive_is_mirror_only": true,
+        "arweave_archive_is_not_authority": true
+      },
+      "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260618.upload-result.json"
+    },
     "checks": {
       "record_chain_final_record": true,
       "ots_covers_heartbeat": true,
@@ -583,7 +597,7 @@
     "counts": {
       "attempts": 1,
       "final_heartbeats": 1,
-      "capsules": 0,
+      "capsules": 1,
       "failed_attempts": 0
     },
     "semantic_agent_arrival": {
