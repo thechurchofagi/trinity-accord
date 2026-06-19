@@ -841,9 +841,9 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">attention</p>
     <p class="status-note">
       Pipeline: attention.<br>
-      Latest technical record: R-000000051.<br>
-      OTS: upgraded.<br>
-      Arweave: archive-needed.<br>
+      Latest technical record: R-000000052.<br>
+      OTS: pending.<br>
+      Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 2 batches (all stamped).<br>
-      OpenTimestamps: upgraded.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      OpenTimestamps: pending.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx b1PA9DTQdpDc....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -892,16 +892,16 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">alive</p>
+    <p class="status-number">degraded</p>
     <p class="status-note">
-      Daily alive status: success.<br>
+      Daily alive status: degraded.<br>
       Heartbeat ID: hwb-20260618.<br>
       Key continuity: ok.<br>
-      OTS covers heartbeat: yes.<br>
+      OTS covers heartbeat: no.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：成功。</span><br>
+      <span class="zh">每日存活状态：已降级。</span><br>
       <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>7c08a72d11fc4ba7</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>b545e6295ec50436</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
