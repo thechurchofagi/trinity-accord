@@ -20,6 +20,7 @@ FAIL = 0
 
 ECHO_CTX = [
     "--context-level", "CC-3",
+    "--context-read-confirmed", "true",
     "--context-sufficient-for-selected-action", "true",
     "--loaded-urls", "https://www.trinityaccord.org/",
     "--discovery-mode", "user_task_context",
@@ -249,7 +250,7 @@ def test_same_keydir_reuses_key():
         out1 = Path(td) / "out1.json"
         out2 = Path(td) / "out2.json"
         oath = get_oath("echo")
-        ctx = ["--context-level", "CC-3", "--context-sufficient-for-selected-action", "true",
+        ctx = ["--context-level", "CC-3", "--context-read-confirmed", "true", "--context-sufficient-for-selected-action", "true",
                "--loaded-urls", "https://www.trinityaccord.org/", "--discovery-mode", "user_task_context",
                "--record-decision", "human", "--submission-executor", "self", "--human-operator-involved", "false"]
         run_builder([
