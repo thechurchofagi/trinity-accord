@@ -578,14 +578,18 @@ def compute_status() -> dict[str, Any]:
                 "not_authority": True,
             },
         },
-        "waiting_heartbeat": load_json_if_exists(
-            ROOT / "api" / "waiting-heartbeat-status.json",
-            {
-                "schema": "trinityaccord.waiting-heartbeat-status.v1",
-                "daily_alive_status": "not_configured",
-                "status": "not_configured",
-            },
-        ),
+        "waiting_heartbeat": {
+            **load_json_if_exists(
+                ROOT / "api" / "waiting-heartbeat-status.json",
+                {
+                    "schema": "trinityaccord.waiting-heartbeat-status.v1",
+                    "daily_alive_status": "not_configured",
+                    "status": "not_configured",
+                },
+            ),
+            "snapshot_only": True,
+            "canonical_status_api": "/api/waiting-heartbeat-status.json",
+        },
         "boundary": {
             "homepage_status_is_not_authority": True,
             "homepage_status_is_not_attestation": True,
