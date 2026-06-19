@@ -28,6 +28,7 @@ EXPECTED_MODULES = [
 
 REQUIRED_BUILDER_CONTEXT_ARGS = [
     "--context-sufficient-for-selected-action", "true",
+    "--context-read-confirmed", "true",
     "--loaded-urls", "https://www.trinityaccord.org/agent-first-contact/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
     "--discovery-mode", "user_task_context",
     "--record-decision", "human",
