@@ -686,8 +686,11 @@ def main() -> int:
             try:
                 actual_data = json.loads(actual_json)
                 expected_data = json.loads(expected_json)
-                actual_compare = {k: v for k, v in actual_data.items() if k != "generated_at"}
-                expected_compare = {k: v for k, v in expected_data.items() if k != "generated_at"}
+                # Ignore generated_at (timestamp) and source_digest (dynamic;
+                # recomputed from record-chain state which changes between sync runs).
+                skip = {"generated_at", "source_digest"}
+                actual_compare = {k: v for k, v in actual_data.items() if k not in skip}
+                expected_compare = {k: v for k, v in expected_data.items() if k not in skip}
                 if actual_compare != expected_compare:
                     errors.append("api/public-home-status.json is not patched to the canonical homepage primary-counter view")
             except (json.JSONDecodeError, KeyError):
