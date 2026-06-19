@@ -93,8 +93,20 @@
               "possibly_compromised",
               "compromised",
               "superseded",
-              "unknown"
+              "unknown",
+              "historical_legacy_listing"
             ]
+          },
+          "status_note": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "retired_at": {
+            "type": "string"
+          },
+          "retirement_reason": {
+            "type": "string",
+            "maxLength": 500
           },
           "guardian_type": {
             "type": "string",

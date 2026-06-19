@@ -459,6 +459,19 @@ function isPlaceholderGuardianKeySha(value) {
   return typeof value === "string" && /^0{64}$/.test(value);
 }
 
+function isAutoGuardianKeySha(value) {
+  return typeof value === "string" && value.trim().toLowerCase() === "auto";
+}
+
+function isConcreteSha256(value) {
+  return /^[0-9a-f]{64}$/.test(String(value || ""));
+}
+
+function guardianKeyShaForDraft(value) {
+  if (isAutoGuardianKeySha(value)) return "";
+  return value || "";
+}
+
 function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
   if (!keyPair) errorExit("authorship keypair is required");
 
@@ -685,12 +698,9 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
     requireExplicit(opts, "oath", "--oath");
 
-    // Support --guardian-key-sha auto: replace with authorship public key SHA
-    if (String(opts.guardianKeySha).toLowerCase() === "auto") {
-      opts.guardianKeySha = pubSha;
-    }
-
-    if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
+    // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
+    const guardianKeySha = String(opts.guardianKeySha || "").trim();
+    if (!isAutoGuardianKeySha(guardianKeySha) && !isConcreteSha256(guardianKeySha)) {
       errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
     }
   }
@@ -702,12 +712,9 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "targetGuardianApplicationRecordId", "--target-guardian-application-record-id");
     requireExplicit(opts, "targetGuardianApplicationRecordSha256", "--target-guardian-application-record-sha256");
 
-    // Support --guardian-key-sha auto
-    if (String(opts.guardianKeySha).toLowerCase() === "auto") {
-      opts.guardianKeySha = pubSha;
-    }
-
-    if (!/^[0-9a-f]{64}$/.test(String(opts.guardianKeySha))) {
+    // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
+    const guardianKeySha = String(opts.guardianKeySha || "").trim();
+    if (!isAutoGuardianKeySha(guardianKeySha) && !isConcreteSha256(guardianKeySha)) {
       errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
     }
     if (!/^R-[0-9]{9}$/.test(String(opts.targetGuardianApplicationRecordId))) {
@@ -891,7 +898,7 @@ function buildGuardianApplicationDraft(opts) {
     record_type: "guardian_application",
     guardian_application_content: {
       requested_guardian_identifier: opts.guardianId || "",
-      guardian_public_key_sha256: opts.guardianKeySha || "",
+      guardian_public_key_sha256: guardianKeyShaForDraft(opts.guardianKeySha),
       guardian_stewardship_oath: opts.oath || "I voluntarily join the Guardian Alliance as a non-governing steward.",
       guardian_understands_role_is_non_governing: true,
       guardian_understands_role_is_not_authority: true,
@@ -911,7 +918,7 @@ function buildGuardianRetirementDraft(opts) {
     schema: DRAFT_SCHEMA,
     record_type: "guardian_retirement",
     guardian_id: opts.guardianId || "",
-    guardian_public_key_sha256: opts.guardianKeySha || "",
+    guardian_public_key_sha256: guardianKeyShaForDraft(opts.guardianKeySha),
     reason: opts.body || "Voluntary retirement",
     optional_linked_guardian_application_request: {
       does_participant_request_guardian_application_with_this_record: false,
