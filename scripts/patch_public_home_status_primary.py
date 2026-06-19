@@ -601,17 +601,17 @@ def render(status: dict[str, Any]) -> str:
 </p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>{status.get("source_digest", "unknown")}</code>.</p>
 <script>
-(function() {
-  fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
+(function() {{
+  fetch('/api/waiting-heartbeat-status.json', {{cache: 'no-store'}})
+    .then(function(r) {{ return r.json(); }})
+    .then(function(d) {{
       var s = d.daily_alive_status || 'unknown';
-      var c = d.checks || {};
-      var h = d.latest_heartbeat || {};
+      var c = d.checks || {{}};
+      var h = d.latest_heartbeat || {{}};
       var cards = document.querySelectorAll('.status-card');
-      for (var i = 0; i < cards.length; i++) {
+      for (var i = 0; i < cards.length; i++) {{
         var lb = cards[i].querySelector('.status-label');
-        if (lb && lb.textContent.indexOf('Waiting Heartbeat') >= 0) {
+        if (lb && lb.textContent.indexOf('Waiting Heartbeat') >= 0) {{
           var n = cards[i].querySelector('.status-number');
           var nt = cards[i].querySelector('.status-note');
           if (n) n.textContent = s === 'success' ? 'alive' : s;
@@ -624,11 +624,11 @@ def render(status: dict[str, Any]) -> str:
             'Source: <a href="/api/waiting-heartbeat-status.json">canonical endpoint</a> (live).<br>' +
             'This heartbeat is operational liveness proof only \u2014 not authority, attestation, or reception.';
           break;
-        }
-      }
-    })
-    .catch(function() {});
-})();
+        }}
+      }}
+    }})
+    .catch(function() {{}});
+}})();
 </script>
 {END}"""
 

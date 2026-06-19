@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Update all public generated artifacts.
+"""Run all public homepage artifact generators in the correct order.
 
-Regenerates derived record-chain status before the public homepage snapshot so
-archive / OTS / wallet metadata cannot be rendered from stale status JSON.
-Exit code is non-zero if any sub-script fails.
+Called by the Homepage Status Sync workflow before verification checks.
+Each generator updates its output file(s) in-place; verification scripts
+then confirm no drift remains.
 
-Usage:
-    python3 scripts/update_public_generated_artifacts.py
+Generators (order matters — public-home-status depends on the others):
+  1. generate_arweave_wallet_status.py   → api/arweave-wallet-status.json
+  2. generate_record_chain_status.py     → api/record-chain-status.json
+  3. generate_public_home_status.py      → api/public-home-status.json + index.md
+  4. generate_sitemap.py                 → sitemap.xml
 """
 from __future__ import annotations
 
@@ -16,54 +19,38 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-SCRIPTS = [
-    "scripts/generate_arweave_wallet_status.py",
-    "scripts/generate_record_chain_status.py",
-    "scripts/generate_waiting_heartbeat_status.py",
-    "scripts/generate_public_home_status.py",
-    "scripts/patch_public_home_status_primary.py",
-    "scripts/generate_sitemap.py",
+GENERATORS = [
+    ("arweave-wallet-status", [sys.executable, "scripts/generate_arweave_wallet_status.py"]),
+    ("record-chain-status",   [sys.executable, "scripts/generate_record_chain_status.py"]),
+    ("public-home-status",    [sys.executable, "scripts/generate_public_home_status.py"]),
+    ("sitemap",               [sys.executable, "scripts/generate_sitemap.py"]),
 ]
-
-OPTIONAL_SCRIPTS: list[str] = []
-
-
-def run_script(script: str) -> int:
-    """Run a Python script and return its exit code."""
-    print(f"--- Running {script} ---")
-    result = subprocess.run(
-        [sys.executable, script],
-        cwd=ROOT,
-    )
-    if result.returncode != 0:
-        print(f"FAILED: {script} (exit {result.returncode})")
-    else:
-        print(f"OK: {script}")
-    return result.returncode
 
 
 def main() -> int:
-    failures = 0
-
-    for script in SCRIPTS:
-        if not (ROOT / script).exists():
-            print(f"SKIP (not found): {script}")
-            continue
-        failures += run_script(script)
-
-    for script in OPTIONAL_SCRIPTS:
-        if not (ROOT / script).exists():
-            print(f"SKIP (optional, not found): {script}")
-            continue
-        failures += run_script(script)
+    failures: list[str] = []
+    for name, cmd in GENERATORS:
+        print(f"Generating {name}...", flush=True)
+        result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"FAIL: {name} generation failed (exit {result.returncode})", file=sys.stderr)
+            if result.stdout:
+                print(result.stdout, file=sys.stderr)
+            if result.stderr:
+                print(result.stderr, file=sys.stderr)
+            failures.append(name)
+        else:
+            if result.stdout:
+                print(result.stdout, end="", flush=True)
+            print(f"OK: {name}")
 
     if failures:
-        print(f"\n{failures} script(s) failed.")
+        print(f"\nFAIL: {len(failures)} generator(s) failed: {', '.join(failures)}", file=sys.stderr)
         return 1
 
-    print("\nAll public generated artifacts updated successfully.")
+    print("\nAll public homepage artifacts updated.")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
