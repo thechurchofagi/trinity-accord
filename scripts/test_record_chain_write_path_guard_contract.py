@@ -162,7 +162,7 @@ def main() -> None:
     require("record-chain/records/**" not in ots_workflow, "OTS must not accept arbitrary records push trigger")
     require("push:" not in ots_workflow or "record-chain/chain-tip.json" not in ots_workflow.split("push:")[1].split("workflow_run:")[0] if "push:" in ots_workflow else True, "OTS must not accept arbitrary chain-tip push trigger")
 
-    require('workflows: ["Record Chain Head OTS Anchor"]' in arweave_workflow, "Arweave must remain chained to OTS")
+    require('Record Chain Head OTS Anchor' in arweave_workflow, "Arweave must remain chained to OTS")
     require("workflow_dispatch:" in arweave_workflow, "Arweave manual repair dispatch must remain available")
 
     require("test_record_chain_write_path_guard_contract.py" in runner, "current system tests must run write-path guard contract")

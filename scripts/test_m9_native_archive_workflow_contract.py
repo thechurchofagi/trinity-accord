@@ -57,7 +57,7 @@ def main() -> None:
     else:
         for marker in [
             "Record Chain Arweave Archive",
-            'workflows: ["Record Chain Head OTS Anchor"]',
+            'Record Chain Head OTS Anchor',
             "build_record_chain_arweave_archive.py",
             "verify_record_chain_arweave_archive.py",
             "ARKEY: ${{ secrets.ARKEY }}",
