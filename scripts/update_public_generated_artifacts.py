@@ -9,7 +9,8 @@ Generators (order matters — public-home-status depends on the others):
   1. generate_arweave_wallet_status.py   → api/arweave-wallet-status.json
   2. generate_record_chain_status.py     → api/record-chain-status.json
   3. generate_public_home_status.py      → api/public-home-status.json + index.md
-  4. generate_sitemap.py                 → sitemap.xml
+  4. patch_public_home_status_primary.py → api/public-home-status.json + index.md (primary counters)
+  5. generate_sitemap.py                 → sitemap.xml
 """
 from __future__ import annotations
 
@@ -23,6 +24,7 @@ GENERATORS = [
     ("arweave-wallet-status", [sys.executable, "scripts/generate_arweave_wallet_status.py"]),
     ("record-chain-status",   [sys.executable, "scripts/generate_record_chain_status.py"]),
     ("public-home-status",    [sys.executable, "scripts/generate_public_home_status.py"]),
+    ("public-home-status-primary-patch", [sys.executable, "scripts/patch_public_home_status_primary.py"]),
     ("sitemap",               [sys.executable, "scripts/generate_sitemap.py"]),
 ]
 
