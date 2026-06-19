@@ -205,9 +205,11 @@ def load_native_chain_sources() -> dict:
     source_files = {
         "chain_tip": source_file_ref(chain_tip_path),
         "record_index": source_file_ref(record_index_path),
-        "guardian_state": source_file_ref(guardian_state_path),
-        "statistics": source_file_ref(statistics_path),
     }
+    if guardian_state_path.exists():
+        source_files["guardian_state"] = source_file_ref(guardian_state_path)
+    if statistics_path.exists():
+        source_files["statistics"] = source_file_ref(statistics_path)
     if batch_index_path.exists():
         source_files["batch_index"] = source_file_ref(batch_index_path)
 
