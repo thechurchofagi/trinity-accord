@@ -134,6 +134,8 @@ def check_builder_generated_submission() -> None:
                 "Receipt boundary guard echo",
                 "--context-level",
                 "CC-3",
+                "--context-read-confirmed",
+                "true",
                 "--context-sufficient-for-selected-action",
                 "true",
                 "--loaded-urls",
