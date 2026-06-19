@@ -143,6 +143,25 @@
                 "type": "string"
               },
               "description": "URLs actually loaded for the declared context level."
+            },
+            "context_read_confirmed": {
+              "type": "boolean",
+              "description": "Self-declared confirmation that the participant actually loaded and read the context required for the declared context level. Required by Builder for formal CC-3+ records; does not prove subjective understanding."
+            },
+            "context_read_confirmation_boundary": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "self_declared_only": { "type": "boolean", "const": true },
+                "does_not_prove_subjective_understanding": { "type": "boolean", "const": true },
+                "false_claim_is_oath_violation": { "type": "boolean", "const": true },
+                "context_map": { "type": "string", "const": "/api/context-load-map.json" },
+                "not_authority": { "type": "boolean", "const": true },
+                "not_attestation": { "type": "boolean", "const": true },
+                "not_amendment": { "type": "boolean", "const": true },
+                "not_successor_reception": { "type": "boolean", "const": true },
+                "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+              }
             }
           }
         },
