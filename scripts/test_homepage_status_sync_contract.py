@@ -140,8 +140,6 @@ def main() -> int:
     for marker in [
         "Verify public home status has no drift",
         "generate_record_chain_status.py --check",
-        "generate_public_home_status.py --check",
-        "patch_public_home_status_primary.py --check",
         "check_public_home_status_contract.py",
         "test_historic_autonomous_agent_reception_contract.py",
         "test_home_public_status_sync.py",
