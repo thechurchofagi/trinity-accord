@@ -108,15 +108,15 @@ def main() -> int:
 
     chain_id = tip.get("latest_record_id") or ""
     chain_sha = tip.get("latest_record_sha256") or ""
-    chain_count = tip.get("native_record_count") or ""
+    chain_count = tip.get("native_record_count") 
 
     ots_id = ots.get("latest_record_id") or ""
     ots_sha = ots.get("latest_record_sha256") or ""
-    ots_count = ots.get("native_record_count") or ""
+    ots_count = ots.get("native_record_count") 
 
     ar_id = ar.get("native_latest_record_id") or ""
     ar_sha = ar.get("native_latest_record_sha256") or ""
-    ar_count = ar.get("native_record_count") or ""
+    ar_count = ar.get("native_record_count") 
 
     ots_head_matches_chain = native_ots_head_matches_chain(tip, ots)
     ots_archivable = native_ots_archivable_for_arweave(tip, ots)
@@ -138,13 +138,13 @@ def main() -> int:
     result = {
         "chain_latest_record_id": chain_id,
         "chain_latest_record_sha256": chain_sha,
-        "chain_native_record_count": str(chain_count),
+        "chain_native_record_count": str(chain_count or ""),
         "ots_latest_record_id": ots_id,
         "ots_latest_record_sha256": ots_sha,
-        "ots_native_record_count": str(ots_count),
+        "ots_native_record_count": str(ots_count or ""),
         "arweave_latest_record_id": ar_id,
         "arweave_latest_record_sha256": ar_sha,
-        "arweave_native_record_count": str(ar_count),
+        "arweave_native_record_count": str(ar_count or ""),
 
         # Backward-compatible name, corrected semantics:
         # current chain head has a matching native OTS anchor.
