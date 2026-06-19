@@ -298,11 +298,9 @@ def native_ots_scan_checkpoint(
         if idx in open_indices:
             break
         completed_prefix = idx
-    for idx in known_indices:
-        if idx in open_indices:
-            break
-        archive_prefix = idx
-
+    # archive_prefix tracks the same completed prefix as above.
+    # TODO: separate arweave-specific tracking when arweave archive lag is monitored.
+    archive_prefix = completed_prefix
     pending = sum(1 for _path, data, _idx in anchors if data.get("ots_status") == "pending")
     upgraded = sum(1 for _path, data, _idx in anchors if data.get("ots_status") == "upgraded")
     verified = sum(1 for _path, data, _idx in anchors if data.get("ots_status") == "verified")
