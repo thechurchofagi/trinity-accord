@@ -26,7 +26,7 @@
   "schema": "trinityaccord.native-record-chain-ots-latest.v1",
   "semantics": "Latest native OTS anchor for the native Record-Chain head commitment snapshot.",
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
-  "updated_at": "2026-06-19T20:20:04Z",
+  "updated_at": "2026-06-19T21:48:46Z",
   "bitcoin_attestation_embedded": true,
   "strict_bitcoin_verified": false
 }
