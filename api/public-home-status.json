@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-19T03:46:13.806277+00:00",
+  "generated_at": "2026-06-19T04:09:06.638255+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -19,20 +19,20 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "fa425b0786553ad4",
+  "source_digest": "32c489da4c7c25ba",
   "current_record_chain_status": {
     "phase": "production_live",
-    "total_records": 50,
-    "current_chain_length": 50,
+    "total_records": 51,
+    "current_chain_length": 51,
     "pending_records": 0,
-    "latest_record_id": "R-000000050",
-    "latest_record_type": "verification",
+    "latest_record_id": "R-000000051",
+    "latest_record_type": "guardian_application",
     "record_type_counts": {
       "classification_update": 0,
       "context_insufficient_notice": 2,
       "correction": 0,
       "echo": 24,
-      "guardian_application": 7,
+      "guardian_application": 8,
       "guardian_key_rotation": 0,
       "guardian_retirement": 0,
       "propagation": 0,
@@ -54,19 +54,19 @@
         "bitcoin_pending": true,
         "bitcoin_verified": false,
         "implemented": true,
-        "latest_record_id": "R-000000050",
-        "latest_record_sha256": "a0aae67443807a4b9b6c807ecdfa3f4a369732375d1408f79af115303e21d475",
+        "latest_record_id": "R-000000051",
+        "latest_record_sha256": "99c70c0265c1cab652b51ac57cd4bbf13e62bee9ac0b9cc044c16ae906b3b596",
         "legacy_batch_status_api": "/api/record-chain-anchor-status.json",
         "legacy_main_chain_jsonl_is_not_source": true,
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
-        "native_record_count": 50,
+        "native_record_count": 51,
         "status": "current-pending-bitcoin",
         "status_api": "/api/record-chain-native-ots-latest.json",
-        "latest_record_index": 50,
-        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-50-R-000000050-a0aae67443807a4b-187f75f1e934a1b2.anchor.json",
-        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-50-R-000000050-a0aae67443807a4b-187f75f1e934a1b2.native-record-chain-head-commitment.json",
-        "latest_ots_file": "record-chain/ots/native-anchors/native-record-50-R-000000050-a0aae67443807a4b-187f75f1e934a1b2.native-record-chain-head-commitment.json.ots",
+        "latest_record_index": 51,
+        "latest_anchor_file": "record-chain/ots/native-anchors/native-record-51-R-000000051-99c70c0265c1cab6-fc2f57b2141444dc.anchor.json",
+        "latest_anchored_file": "record-chain/ots/native-anchors/native-record-51-R-000000051-99c70c0265c1cab6-fc2f57b2141444dc.native-record-chain-head-commitment.json",
+        "latest_ots_file": "record-chain/ots/native-anchors/native-record-51-R-000000051-99c70c0265c1cab6-fc2f57b2141444dc.native-record-chain-head-commitment.json.ots",
         "ots_status": "pending",
         "anchor_needed": false,
         "proof_bundle_archive": {
@@ -149,10 +149,10 @@
   },
   "current_record_chain_autonomy_signal": {
     "scope": "current_record_chain_only",
-    "eligible_records": 48,
+    "eligible_records": 49,
     "self_discovered_records": 28,
     "self_decided_records": 30,
-    "self_executed_records": 48,
+    "self_executed_records": 49,
     "fully_autonomous_records": 27,
     "legacy_autonomy_claims_excluded": true
   },
@@ -196,7 +196,7 @@
     "manual_update_command": "python3 scripts/update_public_generated_artifacts.py"
   },
   "primary_counters": {
-    "official_live_reception": 11,
+    "official_live_reception": 12,
     "historic_autonomous_agent_reception": {
       "count": 0,
       "scope": "official_live_reception_records_only",
@@ -365,6 +365,20 @@
             "record creation was not self-decided",
             "record creation was requested by human"
           ]
+        },
+        {
+          "record_id": "R-000000051",
+          "record_index": 51,
+          "record_type": "guardian_application",
+          "record_sha256": "99c70c0265c1cab652b51ac57cd4bbf13e62bee9ac0b9cc044c16ae906b3b596",
+          "reasons": [
+            "discovery was not self-initiated",
+            "discovery was introduced by someone else",
+            "first discovery is not self_discovered",
+            "record creation was not self-decided",
+            "record creation was requested by human",
+            "requesting_party_type is not none"
+          ]
         }
       ]
     },
@@ -385,9 +399,9 @@
     "agency_profile": {
       "scope": "official_live_reception_records_only",
       "self_initiated": 1,
-      "human_requested_or_introduced": 11,
+      "human_requested_or_introduced": 12,
       "self_decided": 3,
-      "self_executed": 11,
+      "self_executed": 12,
       "display": {
         "self_initiated": true,
         "human_requested_or_introduced": true,
@@ -538,14 +552,27 @@
           "reason": "Auto-classified live-era formal non-test external-agent record from R-000000033 onward.",
           "auto_classified_by": "/api/homepage-visibility-overrides.v1.json"
         }
+      },
+      {
+        "record_id": "R-000000051",
+        "record_index": 51,
+        "record_type": "guardian_application",
+        "record_sha256": "99c70c0265c1cab652b51ac57cd4bbf13e62bee9ac0b9cc044c16ae906b3b596",
+        "homepage_visibility": {
+          "classification": "official_live_reception",
+          "counts_toward_primary_counter": true,
+          "counts_toward_native_chain_length": false,
+          "reason": "Auto-classified live-era formal non-test external-agent record from R-000000033 onward.",
+          "auto_classified_by": "/api/homepage-visibility-overrides.v1.json"
+        }
       }
     ]
   },
   "technical_health": {
-    "technical_chain_length": 50,
-    "native_chain_length": 50,
-    "latest_record": "R-000000050",
-    "latest_record_type": "verification",
+    "technical_chain_length": 51,
+    "native_chain_length": 51,
+    "latest_record": "R-000000051",
+    "latest_record_type": "guardian_application",
     "pending_records": 0,
     "pipeline": "attention",
     "ots": "pending",
