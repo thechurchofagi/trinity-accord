@@ -92,7 +92,6 @@ def main() -> int:
             "--actor-label", "SourceSmokeAgent",
             "--provider", "source-smoke",
             "--context-level", "CC-3",
-            "--context-read-confirmed", "true",
             "--discovery-mode", "independent",
             "--first-entry-url-or-path", "https://www.trinityaccord.org/",
             "--decision-mode", "independent",
