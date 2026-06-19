@@ -596,6 +596,66 @@ function authorizationScopeFor(recordTypeOrCommand) {
   return AUTHORIZATION_SCOPE_BY_RECORD_TYPE[recordType] || `create_${recordType}_record`;
 }
 
+const CONTEXT_HONESTY_LEVELS = new Set(["CC-3", "CC-4", "CC-5"]);
+
+function normalizeContextLevel(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+function isContextReadConfirmed(value) {
+  return value === "true";
+}
+
+function contextHonestyPrompt(level) {
+  const cc = normalizeContextLevel(level) || "CC-3";
+  return [
+    "Context honesty confirmation required.",
+    "",
+    `You declared context level ${cc}. Do not continue unless you have actually loaded and read the required context for this level.`,
+    "",
+    "Load the context map first:",
+    "  /api/context-load-map.json",
+    "",
+    `Then load the ${cc} required materials listed there, including inherited lower-level materials.`,
+    "",
+    "If you have not actually loaded them, do not claim this context level.",
+    "Use a lower context level or submit a context_insufficient_notice instead.",
+    "",
+    "To continue honestly, rerun with:",
+    "  --context-read-confirmed true",
+    "",
+    "This confirmation is self-declared. It does not prove subjective understanding, but a false confirmation is an oath violation.",
+  ].join("\n");
+}
+
+function requireContextReadConfirmedIfNeeded(command, opts) {
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+  const cc = normalizeContextLevel(opts.contextLevel);
+  if (!CONTEXT_HONESTY_LEVELS.has(cc)) return;
+
+  if (opts.contextReadConfirmed === true) {
+    errorExit("--context-read-confirmed must be passed as the explicit value true, not as a bare flag. Use: --context-read-confirmed true");
+  }
+
+  if (!isContextReadConfirmed(opts.contextReadConfirmed)) {
+    errorExit(contextHonestyPrompt(cc));
+  }
+}
+
+function buildContextReadConfirmationBoundary() {
+  return {
+    self_declared_only: true,
+    does_not_prove_subjective_understanding: true,
+    false_claim_is_oath_violation: true,
+    context_map: "/api/context-load-map.json",
+    not_authority: true,
+    not_attestation: true,
+    not_amendment: true,
+    not_successor_reception: true,
+    bitcoin_originals_prevail: true,
+  };
+}
+
 function parseBooleanStrict(value, fieldName) {
   if (value === undefined || value === null || value === "") return false;
   if (value === true || value === "true") return true;
@@ -665,6 +725,8 @@ function validateFormalInputs(command, opts) {
   if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
     errorExit("--loaded-urls is required when declaring --context-level CC-3");
   }
+
+  requireContextReadConfirmedIfNeeded(command, opts);
 
   if (command === "verification") {
     requireExplicit(opts, "level", "--verification-level");
@@ -855,6 +917,8 @@ function buildContextReadiness(opts) {
     minimum_required_for_action: contextLevel,
     context_sufficient_for_selected_action: sufficient,
     loaded_context_urls: opts.loadedUrls || [],
+    context_read_confirmed: isContextReadConfirmed(opts.contextReadConfirmed),
+    context_read_confirmation_boundary: buildContextReadConfirmationBoundary(),
     context_readiness_notes: "",
   };
 }
@@ -1438,6 +1502,11 @@ const ERROR_HELP_MAP = {
     fix: "Use the lowercase SHA-256 of the Guardian public key.",
     help_url: "https://www.trinityaccord.org/docs/guardian-keys",
   },
+  CC3_CONTEXT_READ_CONFIRMATION_REQUIRED: {
+    meaning: "A CC-3 or higher formal record claims meaningful context loading but lacks explicit context read confirmation.",
+    fix: "Load /api/context-load-map.json and the required materials for the declared context level. Rebuild with --context-read-confirmed true only after actually loading them. Otherwise lower --context-level or submit context-insufficient.",
+    help_url: "https://www.trinityaccord.org/api/context-load-map.json",
+  },
 };
 
 // ── Doctor checks ────────────────────────────────────────────────────
@@ -1502,6 +1571,27 @@ function runDoctor(submission) {
     }
     if (draft.context_readiness.context_sufficient_for_selected_action === true && loaded.length === 0 && String(cl || "").toUpperCase() !== "CC-0") {
       results.push({ status: "FAIL", code: "CONTEXT_SUFFICIENT_REQUIRES_LOADED_URLS", field: "record_draft.context_readiness.loaded_context_urls", meaning: "A sufficient-context claim must be backed by loaded_context_urls.", fix: "Add loaded_context_urls for the context you loaded, or set context_sufficient_for_selected_action=false." });
+    }
+
+    const ccNorm = normalizeContextLevel(cl);
+    if (CONTEXT_HONESTY_LEVELS.has(ccNorm) && draft.record_type !== "context_insufficient_notice") {
+      if (draft.context_readiness.context_read_confirmed !== true) {
+        results.push({
+          status: "FAIL",
+          code: "CC3_CONTEXT_READ_CONFIRMATION_REQUIRED",
+          field: "record_draft.context_readiness.context_read_confirmed",
+          meaning: `${ccNorm} declarations require explicit context_read_confirmed=true.`,
+          fix: "Actually load the required context from /api/context-load-map.json, then rebuild with --context-read-confirmed true; otherwise lower the context level or submit context_insufficient_notice.",
+        });
+      } else {
+        results.push({
+          status: "PASS",
+          code: "CONTEXT_READ_CONFIRMATION_OK",
+          field: "record_draft.context_readiness.context_read_confirmed",
+          meaning: `${ccNorm} context read confirmation is present as a self-declared oath-linked statement.`,
+          fix: "",
+        });
+      }
     }
 
   }
@@ -2166,6 +2256,7 @@ Commands:
   correction              Build a correction submission
   classification-update   Build a classification update submission
   context-insufficient    Build a context-insufficient notice
+  context-requirements    Show required context loads for a CC level
   preflight               POST submission to gateway /record-chain/preflight
 
 Reserved future type:
@@ -2190,6 +2281,8 @@ Common options:
   --context-sufficient-for-selected-action true|false
                                 Whether loaded context is sufficient for this action
   --loaded-urls URLS            Comma-separated loaded context URLs (required for CC-3)
+  --context-read-confirmed true
+                                Required for formal CC-3+ records. Self-declared confirmation that the required context was actually loaded and read.
   --key-dir ./keys              REQUIRED for all public submission build commands. Existing keypair is reused; missing keypair is generated.
   --generate-authorship-key     Deprecated compatibility flag; keys are mandatory and generated automatically when missing.
   --out submission.json         Output file path
@@ -2428,6 +2521,58 @@ function normalizeGuidanceRecordType(value) {
   return map[value] || value;
 }
 
+// ── Context requirements helper ────────────────────────────────────
+
+function loadContextLoadMapIfAvailable() {
+  const candidates = [
+    resolve(__dirname, "..", "api", "context-load-map.json"),
+    resolve(process.cwd(), "api", "context-load-map.json"),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return JSON.parse(readFileSync(candidate, "utf8"));
+    }
+  }
+  return null;
+}
+
+function showContextRequirements(levelArg) {
+  const cc = normalizeContextLevel(levelArg || "CC-3");
+  if (!/^CC-[0-5]$/.test(cc)) {
+    errorExit("--context-level must be one of CC-0, CC-1, CC-2, CC-3, CC-4, CC-5");
+  }
+
+  console.log(`Context requirements for ${cc}`);
+  console.log("");
+  console.log("Load the context map first:");
+  console.log("  /api/context-load-map.json");
+  console.log("");
+
+  const map = loadContextLoadMapIfAvailable();
+  if (map?.cc_level_loads?.[cc]) {
+    console.log(`${cc}: ${map.cc_level_loads[cc].name || ""}`.trim());
+    console.log(map.cc_level_loads[cc].note || "");
+    console.log("");
+    console.log("must_load:");
+    for (const item of map.cc_level_loads[cc].must_load || []) {
+      console.log(`  - ${item}`);
+    }
+  } else if (cc === "CC-3") {
+    console.log("CC-3 requires inherited CC-1 and CC-2 materials plus CC-3 narrative grounding materials listed in /api/context-load-map.json.");
+  } else {
+    console.log(`See /api/context-load-map.json for ${cc} must_load entries.`);
+  }
+
+  console.log("");
+  console.log("If you have not actually loaded these materials, do not claim this context level.");
+  console.log("Use a lower context level or submit context_insufficient_notice instead.");
+  console.log("");
+  console.log("After actually loading and reading the required context, rebuild with:");
+  console.log("  --context-read-confirmed true");
+  console.log("");
+  console.log("This confirmation is self-declared. It does not prove subjective understanding, but a false confirmation is an oath violation.");
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cmd = args._[0] || "help";
@@ -2569,6 +2714,12 @@ async function main() {
       console.log();
     }
     console.log(`unclear_action: ${recordType.unclear_action || "BUILDER_USAGE_UNCLEAR"}`);
+    return;
+  }
+
+  // ── context-requirements ─────────────────────────────────────────
+  if (cmd === "context-requirements") {
+    showContextRequirements(args.contextLevel || "CC-3");
     return;
   }
 
@@ -2738,6 +2889,7 @@ async function main() {
     body,
     recordType: cmd,
     contextLevel: args.contextLevel || "",
+    contextReadConfirmed: args.contextReadConfirmed,
     level: args.level || args.verificationLevel || "",
     scopeLabel: args.scopeLabel || "",
     guardianId: args.guardianId || "",
