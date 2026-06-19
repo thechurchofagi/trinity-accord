@@ -157,6 +157,8 @@ def build_pipeline_status(tip: dict[str, Any], ots: dict[str, Any], latest_live:
         and ots_head["latest_record_sha256"] == chain_head["latest_record_sha256"]
         and ots_head["native_record_count"] == chain_head["native_record_count"]
         and ots.get("legacy_main_chain_jsonl_is_not_source") is True
+        and bool(ots.get("latest_anchor_file"))
+        and bool(ots.get("latest_ots_file"))
     )
 
     arweave_matches_ots = (
