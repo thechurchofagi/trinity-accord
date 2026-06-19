@@ -419,7 +419,7 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status["committed_records"] = native_count
     status["pending_records"] = 0
     # Use latest record created_at as updated_at for stability (--check won't drift)
-    status["updated_at"] = latest_created_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    status["updated_at"] = latest_created_at or tip.get("updated_at") or "unknown"
     status["source_digest"] = tip.get("latest_record_sha256", "")[:16] if tip.get("latest_record_sha256") else ""
 
     # Derive record_type_requirements from native sources (correct CIN authorship)
