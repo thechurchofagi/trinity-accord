@@ -314,7 +314,9 @@
       "native_record_count": 49,
       "ots_status": "upgraded",
       "bitcoin_pending": false,
-      "bitcoin_verified": false
+      "bitcoin_verified": false,
+      "bitcoin_attestation_embedded": true,
+      "strict_bitcoin_verified": false
     },
     "arweave_head": {
       "latest_record_id": "R-000000049",
@@ -324,6 +326,7 @@
       "arweave_txid": "b1PA9DTQdpDc7XRcw_Yud3p01-QRS8zB26PTumkJ4VE"
     },
     "ots_matches_chain": true,
+    "ots_archivable_for_arweave": true,
     "arweave_matches_ots": true,
     "arweave_matches_chain": true,
     "ots_anchor_needed": false,
