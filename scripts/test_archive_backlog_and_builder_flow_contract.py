@@ -133,11 +133,7 @@ def assert_doctor_fails_for_draft(record_type: str, draft: dict, expected_code: 
             "record_type": record_type,
             "context_readiness": {
                 "declared_context_level": "CC-3",
-            "--context-read-confirmed",
-            "true",
                 "minimum_required_for_action": "CC-3",
-            "--context-read-confirmed",
-            "true",
                 "context_sufficient_for_selected_action": True,
                 "loaded_context_urls": ["https://www.trinityaccord.org/agent-start/"],
             },
