@@ -74,6 +74,8 @@ def main() -> None:
                 "Production-live builder boundary smoke.",
                 "--context-level",
                 "CC-3",
+                "--context-read-confirmed",
+                "true",
                 "--context-sufficient-for-selected-action",
                 "true",
                 "--loaded-urls",
