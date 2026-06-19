@@ -638,9 +638,8 @@ def build_status(current: dict[str, Any], previous: dict[str, Any]) -> dict[str,
     config = sidecar()
     idx = visibility_index(config)
     current["schema"] = "trinityaccord.public-home-status.v3"
-    # Preserve source_digest from generator; only set if missing
-    if "source_digest" not in current:
-        current["source_digest"] = digest()
+    # Canonical source_digest must reflect the current generated source set.
+    current["source_digest"] = digest()
     current.setdefault("generated_from", [])
     if SIDECAR_SOURCE not in current["generated_from"]:
         current["generated_from"].insert(0, SIDECAR_SOURCE)
