@@ -73,7 +73,7 @@ def main() -> int:
         "name: Homepage Status Sync",
         "workflow_dispatch:",
         "schedule:",
-        'cron: "7 * * * *"',
+        'cron: "7,22,37,52 * * * *"',
         "workflow_run:",
         "contents: write",
         "actions: write",
