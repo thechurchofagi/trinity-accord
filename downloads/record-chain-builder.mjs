@@ -464,6 +464,11 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
 
   const pubSha = sha256(extractRawPublicKeyBytes(keyPair.publicKeyPem));
 
+  // Normalize --guardian-key-sha auto → use current authorship public key SHA
+  if (opts.guardianKeySha && String(opts.guardianKeySha).toLowerCase() === "auto") {
+    opts.guardianKeySha = pubSha;
+  }
+
   if (!recordDraft.submitting_participant_identity) {
     errorExit("record_draft.submitting_participant_identity is required");
   }
