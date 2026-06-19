@@ -21,6 +21,7 @@ FAIL = 0
 
 ECHO_CTX = [
     "--context-level", "CC-3",
+    "--context-read-confirmed", "true",
     "--context-sufficient-for-selected-action", "true",
     "--loaded-urls", "https://www.trinityaccord.org/",
     "--discovery-mode", "user_task_context",
