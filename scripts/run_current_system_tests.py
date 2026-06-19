@@ -139,12 +139,9 @@ def main() -> int:
         fail(f"arweave wallet status drift detected:\n{result.stdout}\n{result.stderr}")
     ok("arweave wallet status up to date")
 
-    # 1d. public homepage status drift check
+    # 1d. deployment-safe public homepage contract checks.
+    # Dynamic homepage drift checks are owned exclusively by homepage-status-sync.yml.
     for cmd in [
-        [sys.executable, "scripts/generate_arweave_wallet_status.py", "--check"],
-        [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
-        [sys.executable, "scripts/generate_public_home_status.py", "--check"],
-        [sys.executable, "scripts/patch_public_home_status_primary.py", "--check"],
         [sys.executable, "scripts/check_public_home_status_contract.py"],
         [sys.executable, "scripts/test_historic_autonomous_agent_reception_contract.py"],
         [sys.executable, "scripts/test_home_public_status_sync.py"],
