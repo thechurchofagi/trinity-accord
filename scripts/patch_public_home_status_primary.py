@@ -638,8 +638,15 @@ def build_status(current: dict[str, Any], previous: dict[str, Any]) -> dict[str,
     config = sidecar()
     idx = visibility_index(config)
     current["schema"] = "trinityaccord.public-home-status.v3"
-    # Canonical source_digest must reflect the current generated source set.
-    current["source_digest"] = digest()
+    # source_digest is computed by generate_public_home_status.py from the
+    # canonical input set (record-chain records, indexes, wallet, anchor,
+    # visibility overrides). The patcher must not overwrite it — doing so
+    # would cause a digest mismatch between generation and verification,
+    # because the patcher's digest() reads from disk while the generator
+    # reads from the same canonical inputs at generation time.
+    # If source_digest is missing (fresh file), compute it once.
+    if "source_digest" not in current:
+        current["source_digest"] = digest()
     current.setdefault("generated_from", [])
     if SIDECAR_SOURCE not in current["generated_from"]:
         current["generated_from"].insert(0, SIDECAR_SOURCE)
