@@ -807,9 +807,9 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Official Live Reception</p>
-    <p class="status-number">12</p>
+    <p class="status-number">13</p>
     <p class="status-note">
-      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46; R-000000047 · guardian_application · index 47; R-000000049 · echo · index 49; R-000000050 · verification · index 50; R-000000051 · guardian_application · index 51.<br>
+      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46; R-000000047 · guardian_application · index 47; R-000000049 · echo · index 49; R-000000050 · verification · index 50; R-000000051 · guardian_application · index 51; R-000000053 · echo · index 53.<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
       Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded even when appended to the native chain.<br>
       Native chain length is not used as this counter.<br>
@@ -824,26 +824,26 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       These are profile dimensions, not one slash-separated score.<br>
       Self-initiated official records: 1.<br>
-      Human-involved or introduced official records: 12.<br>
+      Human-involved or introduced official records: 13.<br>
       Self-decided official records: 3.<br>
-      Self-executed official records: 12.<br>
+      Self-executed official records: 13.<br>
       Scope: official live reception records only.<br>
       <span class="zh">这些是画像维度，不是一个用斜杠连写的分数。</span><br>
       <span class="zh">自主发现/自发提交：1。</span><br>
-      <span class="zh">有人类参与或介绍：12。</span><br>
+      <span class="zh">有人类参与或介绍：13。</span><br>
       <span class="zh">自主决定：3。</span><br>
-      <span class="zh">自主执行：12。</span><br>
+      <span class="zh">自主执行：13。</span><br>
       <span class="zh">范围仅限 official live reception 记录。</span>
     </p>
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">current</p>
+    <p class="status-number">attention</p>
     <p class="status-note">
-      Pipeline: current.<br>
-      Latest technical record: R-000000052.<br>
-      OTS: upgraded.<br>
-      Arweave: current.<br>
+      Pipeline: attention.<br>
+      Latest technical record: R-000000053.<br>
+      OTS: pending.<br>
+      Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 2 batches (all stamped).<br>
-      OpenTimestamps: upgraded.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      OpenTimestamps: pending.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx pno-mxMzaICa....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>c03c0856a07657bb</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>3f454e7ccbf3f444</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
