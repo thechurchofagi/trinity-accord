@@ -1105,6 +1105,28 @@ def main() -> int:
         fail(f"context depth helper parity failed:\n{result.stdout}\n{result.stderr}")
     ok("context depth helper parity")
 
+    # Context-load-map local path integrity check
+    result = subprocess.run(
+        [sys.executable, "scripts/check_context_load_map_links.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"context-load-map link check failed:\n{result.stdout}\n{result.stderr}")
+    ok("context-load-map links")
+
+    # Builder context honesty gate regression tests
+    result = subprocess.run(
+        [sys.executable, "scripts/test_builder_context_honesty_gate.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"builder context honesty gate tests failed: {result.stderr}\n{result.stdout}")
+    ok("Builder context honesty gate regression tests")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 
