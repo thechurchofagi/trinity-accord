@@ -99,6 +99,7 @@ def native_archive_sources() -> list[dict[str, Any]]:
             "arweave_txid": ar.get("txid") or ar.get("tx_id"),
             "archive_status": ar.get("archive_status"),
             "hash_match": ar.get("hash_match"),
+            "verified": ar.get("verified") is True,
         })
     return entries
 
