@@ -71,10 +71,10 @@ jobs:
           printf 'Resolved ARWEAVE_UPLOAD_MODE=%s\n' "${ARWEAVE_UPLOAD_MODE}"
 
       - name: Wait for native OTS
-        if: steps.backlog.outputs.ots_archivable_for_arweave != 'true'
+        if: steps.backlog.outputs.ots_matches_chain != 'true' || steps.backlog.outputs.ots_archivable_for_arweave != 'true'
         run: |
           printf '%s\n' "Native OTS is not archivable for Arweave yet; waiting for OTS upgrade/verification."
-          printf 'chain=%s ots=%s\n' "${{ steps.backlog.outputs.chain_latest_record_id }}" "${{ steps.backlog.outputs.ots_latest_record_id }}"
+          printf 'chain=%s ots=%s ots_matches=%s archivable=%s\n' "${{ steps.backlog.outputs.chain_latest_record_id }}" "${{ steps.backlog.outputs.ots_latest_record_id }}" "${{ steps.backlog.outputs.ots_matches_chain }}" "${{ steps.backlog.outputs.ots_archivable_for_arweave }}"
 
       - name: Verify native OTS latest before archive
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
