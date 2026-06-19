@@ -35,6 +35,7 @@ def main():
             "--title", "Provenance Guard Smoke Test",
             "--body-file", str(body),
             "--context-level", "CC-3",
+            "--context-read-confirmed", "true",
             "--context-sufficient-for-selected-action", "true",
             "--loaded-urls", "https://www.trinityaccord.org/agent-start/",
             "--readback", "dummy",
