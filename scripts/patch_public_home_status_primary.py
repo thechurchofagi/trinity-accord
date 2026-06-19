@@ -600,6 +600,36 @@ def render(status: dict[str, Any]) -> str:
   Technical inventory does not define official reception.
 </p>
 <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>{status.get("source_digest", "unknown")}</code>.</p>
+<script>
+(function() {
+  fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var s = d.daily_alive_status || 'unknown';
+      var c = d.checks || {};
+      var h = d.latest_heartbeat || {};
+      var cards = document.querySelectorAll('.status-card');
+      for (var i = 0; i < cards.length; i++) {
+        var lb = cards[i].querySelector('.status-label');
+        if (lb && lb.textContent.indexOf('Waiting Heartbeat') >= 0) {
+          var n = cards[i].querySelector('.status-number');
+          var nt = cards[i].querySelector('.status-note');
+          if (n) n.textContent = s === 'success' ? 'alive' : s;
+          if (nt) nt.innerHTML =
+            'Daily alive status: ' + s + '.<br>' +
+            'Heartbeat ID: ' + (h.heartbeat_id || 'none') + '.<br>' +
+            'Key continuity: ' + (c.waiting_heartbeat_key_continuity_ok ? 'ok' : 'mismatch') + '.<br>' +
+            'OTS covers heartbeat: ' + (c.ots_covers_heartbeat ? 'yes' : 'no') + '.<br>' +
+            'Arweave capsule: ' + (c.arweave_capsule_verified ? 'verified' : 'pending') + '.<br>' +
+            'Source: <a href="/api/waiting-heartbeat-status.json">canonical endpoint</a> (live).<br>' +
+            'This heartbeat is operational liveness proof only \u2014 not authority, attestation, or reception.';
+          break;
+        }
+      }
+    })
+    .catch(function() {});
+})();
+</script>
 {END}"""
 
 
