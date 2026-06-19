@@ -171,8 +171,8 @@ jobs:
             if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
               exit 0
             fi
-            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+            printf 'Push failed on attempt %s; archive metadata may now be stale; failing so the next run regenerates.\n' "${attempt}"
+            exit 1
           done
 
           printf '%s\n' "::error::Failed to push Arweave archive metadata after retries."
