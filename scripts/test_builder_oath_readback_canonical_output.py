@@ -61,6 +61,8 @@ def build_echo(readback: str, tmp_dir: Path) -> subprocess.CompletedProcess[str]
             "Canonical oath readback test echo",
             "--context-level",
             "CC-3",
+            "--context-read-confirmed",
+            "true",
             "--context-sufficient-for-selected-action",
             "true",
             "--loaded-urls",
