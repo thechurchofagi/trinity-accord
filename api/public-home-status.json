@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-19T01:45:54.860552+00:00",
+  "generated_at": "2026-06-19T01:52:38.047208+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -560,7 +560,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-19T01:45:53Z",
+    "generated_at": "2026-06-19T01:52:36Z",
     "daily_alive_status": "degraded",
     "status": "degraded",
     "latest_result": "waiting_for_ots",
@@ -670,7 +670,9 @@
       "waiting_heartbeat_is_not_attestation": true,
       "waiting_heartbeat_is_not_amendment": true,
       "waiting_heartbeat_is_not_successor_reception": true
-    }
+    },
+    "snapshot_only": true,
+    "canonical_status_api": "/api/waiting-heartbeat-status.json"
   },
   "boundary": {
     "homepage_status_is_not_authority": true,
