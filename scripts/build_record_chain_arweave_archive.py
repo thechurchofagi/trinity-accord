@@ -442,6 +442,16 @@ def build_archive_manifest(mode: str) -> None:
             manifest["archive_manifest_sha256"] = sha256_canonical_json(manifest)
             try:
                 upload_result = upload_to_arweave(payload_path, archive_dir)
+            except subprocess.TimeoutExpired as exc:
+                manifest["arweave"].update({
+                    "enabled": True,
+                    "upload_mode": "live",
+                    "archive_status": "upload_failed",
+                    "last_attempt_at": utc_now(),
+                    "last_error": f"Arweave upload timed out after {timeout_seconds}s: {exc}",
+                    "next_action": "retry_upload",
+                })
+                upload_failed = True
             except SystemExit as exc:
                 partial = archive_dir / "upload-result.json"
                 upload_result = read_json(partial) if partial.exists() else {}
