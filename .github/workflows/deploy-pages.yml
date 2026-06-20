@@ -61,8 +61,16 @@ jobs:
           python3 scripts/test_historic_autonomous_agent_reception_contract.py
           python3 scripts/test_home_public_status_sync.py
           python3 scripts/test_homepage_status_sync_contract.py
-      - name: Run current system tests
-        run: python3 scripts/run_current_system_tests.py
+      - name: Run current system tests with log capture
+        run: |
+          set -o pipefail
+          python3 scripts/run_current_system_tests.py 2>&1 | tee current-system-tests.log
+      - name: Upload current system test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-system-tests-log
+          path: current-system-tests.log
       - name: Scan for secret material (broad)
         run: python3 scripts/test_no_secret_material_committed.py
       - name: Check no private keys or tokens (focused PEM)
