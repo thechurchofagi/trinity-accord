@@ -25,6 +25,9 @@ EXPECTED_GENERATED_FROM = {
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
+    "/api/guardian-state.json",
+    "/api/guardian-current-registry.json",
+    "/api/guardian-active-listing-policy.v2.json",
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json",
 }
@@ -35,6 +38,9 @@ expected_constants = {
     "PHYSICAL_ANCHOR": "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "GUARDIAN_REGISTRY": "/api/guardian-registry.json",
     "GUARDIAN_ACTIVE_LISTING_POLICY": "/api/guardian-active-listing-policy.v1.json",
+    "GUARDIAN_STATE": "/api/guardian-state.json",
+    "GUARDIAN_CURRENT_REGISTRY": "/api/guardian-current-registry.json",
+    "GUARDIAN_ACTIVE_LISTING_POLICY_V2": "/api/guardian-active-listing-policy.v2.json",
     "AGENT_DECLARED_INDEX": "/api/agent-declared-verification-index.json",
 }
 
