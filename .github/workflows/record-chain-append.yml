@@ -37,7 +37,14 @@ jobs:
       - name: Install system dependencies for cryptography
         run: sudo apt-get update && sudo apt-get update && sudo apt-get install -y libffi-dev build-essential
 
-        run: python3 -m pip install --prefer-binary -r requirements-ci.txt
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip --version
+      - name: Install Python dependencies
+        env:
+          PIP_PREFER_BINARY: "1"
+          PIP_ONLY_BINARY: "cryptography,cffi"
+        run: python3 -m pip install -r requirements-ci.txt
       - name: Verify Gateway import path contract
         run: python -m pytest tests/test_record_chain_gateway_import_path_contract.py -q
       - name: Authorize write workflow actor
