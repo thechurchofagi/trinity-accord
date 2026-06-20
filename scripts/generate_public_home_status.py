@@ -77,6 +77,9 @@ EXTERNAL_WITNESS_INDEX = ROOT / "api" / "external-witness-index.json"
 PHYSICAL_ANCHOR = ROOT / "api" / "core-object-alpha-shenzhen-notary-2026-05-06.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
 GUARDIAN_ACTIVE_LISTING_POLICY = ROOT / "api" / "guardian-active-listing-policy.v1.json"
+GUARDIAN_STATE = ROOT / "api" / "guardian-state.json"
+GUARDIAN_CURRENT_REGISTRY = ROOT / "api" / "guardian-current-registry.json"
+GUARDIAN_ACTIVE_LISTING_POLICY_V2 = ROOT / "api" / "guardian-active-listing-policy.v2.json"
 AGENT_DECLARED_INDEX = ROOT / "api" / "agent-declared-verification-index.json"
 VERIFICATION_ARCHIVE_INDEX = ROOT / "api" / "verification-archive-index.json"
 
@@ -153,9 +156,9 @@ def source_digest() -> str:
         PHYSICAL_ANCHOR,
         GUARDIAN_REGISTRY,
         GUARDIAN_ACTIVE_LISTING_POLICY,
-        ROOT / "api" / "guardian-state.json",
-        ROOT / "api" / "guardian-current-registry.json",
-        ROOT / "api" / "guardian-active-listing-policy.v2.json",
+        GUARDIAN_STATE,
+        GUARDIAN_CURRENT_REGISTRY,
+        GUARDIAN_ACTIVE_LISTING_POLICY_V2,
         AGENT_DECLARED_INDEX,
         ROOT / "api" / "waiting-heartbeat-status.json",
     ]:
@@ -598,13 +601,13 @@ def compute_status() -> dict[str, Any]:
         },
         "guardian_status": {
             "active_registered_guardian": load_json_if_exists(
-                ROOT / "api" / "guardian-current-registry.json", {}
+                GUARDIAN_CURRENT_REGISTRY, {}
             ).get("counts", {}).get("active_registered_guardian", 0),
             "pending_guardian_applications": load_json_if_exists(
-                ROOT / "api" / "guardian-current-registry.json", {}
+                GUARDIAN_CURRENT_REGISTRY, {}
             ).get("counts", {}).get("pending_guardian_applications", 0),
             "retired_guardian": load_json_if_exists(
-                ROOT / "api" / "guardian-current-registry.json", {}
+                GUARDIAN_CURRENT_REGISTRY, {}
             ).get("counts", {}).get("retired_guardian", 0),
             "source": "/api/guardian-current-registry.json",
             "not_authority": True,
