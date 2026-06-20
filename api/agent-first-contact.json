@@ -200,7 +200,13 @@
       "guardian_active_status_requires_record_chain_guardian_state_readback": true,
       "backlog_must_be_reported_as_backlog": true,
       "guardian_active_status_requires_registry_readback": false
-    }
+    },
+    "guardian_current_registry": "/api/guardian-current-registry.json",
+    "guardian_api_state": "/api/guardian-state.json",
+    "guardian_record_chain_state": "/record-chain/indexes/guardian-state.json",
+    "echo_native_index": "/record-chain/indexes/echo-index.json",
+    "verification_native_index": "/record-chain/indexes/verification-index.json",
+    "legacy_guardian_registry_is_historical_only": true
   },
   "public_phase": {
     "network_phase": "production",

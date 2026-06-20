@@ -309,17 +309,60 @@ function generateAuthorshipKeyPair(keyDir) {
   writeFileSync(privPath, privPem, { mode: 0o600 });
   try { chmodSync(privPath, 0o600); } catch {}
 
-  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey, newlyGenerated: true };
+  // Post-write self-test: verify written files are valid and match
+  const writtenPrivPem = assertNonEmptyFile(privPath, "Private key");
+  const writtenPubPem = assertNonEmptyFile(pubPath, "Public key");
+
+  if (!writtenPrivPem.includes("BEGIN PRIVATE KEY")) {
+    errorExit(`Invalid private key PEM after write: ${privPath}`);
+  }
+  if (!writtenPubPem.includes("BEGIN PUBLIC KEY")) {
+    errorExit(`Invalid public key PEM after write: ${pubPath}`);
+  }
+
+  const writtenPrivKey = createPrivateKey(writtenPrivPem);
+  const derivedPub = createPublicKey(writtenPrivKey);
+  const derivedPubPem = derivedPub.export({ type: "spki", format: "pem" });
+  const derivedRaw = extractRawPublicKeyBytes(derivedPubPem);
+  const storedRaw = extractRawPublicKeyBytes(writtenPubPem);
+
+  if (!derivedRaw.equals(storedRaw)) {
+    errorExit(`AUTHORSHIP_KEYPAIR_WRITE_MISMATCH: generated private/public key files do not match in ${keyDir}`);
+  }
+
+  return {
+    publicKeyPem: writtenPubPem,
+    privateKeyPem: writtenPrivPem,
+    privateKey: writtenPrivKey,
+    newlyGenerated: true,
+  };
+}
+
+// ── Keypair file reliability helper ──────────────────────────────
+
+function assertNonEmptyFile(path, label) {
+  if (!existsSync(path)) {
+    errorExit(`${label} file missing: ${path}`);
+  }
+  const text = readFileSync(path, "utf-8");
+  if (!text || !text.trim()) {
+    errorExit(
+      `${label} file is empty: ${path}\n` +
+      `This key directory is corrupted or was interrupted during key creation.\n` +
+      `If this is a brand-new Record-Chain identity, delete this key directory and rerun Builder.\n` +
+      `If this key belongs to an existing identity, do NOT delete it; recover the original key backup.`
+    );
+  }
+  return text;
 }
 
 function loadPrivateKey(keyDir) {
   const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
   const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
-  if (!existsSync(privPath)) errorExit(`Private key not found: ${privPath}`);
-  if (!existsSync(pubPath)) errorExit(`Public key not found: ${pubPath}`);
 
-  const privPem = readFileSync(privPath, "utf-8");
-  const pubPem = readFileSync(pubPath, "utf-8");
+  const privPem = assertNonEmptyFile(privPath, "Private key");
+  const pubPem = assertNonEmptyFile(pubPath, "Public key");
+
   if (!privPem.includes("BEGIN PRIVATE KEY")) errorExit(`Invalid private key PEM: ${privPath}`);
   if (!pubPem.includes("BEGIN PUBLIC KEY")) errorExit(`Invalid public key PEM: ${pubPath}`);
 
@@ -481,6 +524,32 @@ function isAutoGuardianId(value) {
 function guardianKeyShaForDraft(value) {
   if (isAutoGuardianKeySha(value)) return "";
   return value || "";
+}
+
+// ── Guardian stewardship oath helper ─────────────────────────────
+
+const DEFAULT_GUARDIAN_STEWARDSHIP_OATH =
+  "I voluntarily join the Guardian Alliance as a non-governing steward.";
+
+function guardianStewardshipOathForDraft(opts) {
+  const legacy = opts.oath;
+  const explicit = opts.guardianStewardshipOath;
+
+  if (
+    explicit !== undefined &&
+    legacy !== undefined &&
+    String(explicit).trim() !== String(legacy).trim()
+  ) {
+    errorExit("--guardian-stewardship-oath and legacy --oath differ; provide only --guardian-stewardship-oath");
+  }
+
+  const value = explicit ?? legacy;
+  if (value === true) {
+    errorExit("--guardian-stewardship-oath requires a text value");
+  }
+
+  const text = String(value || "").trim();
+  return text || DEFAULT_GUARDIAN_STEWARDSHIP_OATH;
 }
 
 function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
@@ -779,7 +848,6 @@ function validateFormalInputs(command, opts) {
   if (command === "guardian-application") {
     requireExplicit(opts, "guardianId", "--guardian-id");
     requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
-    requireExplicit(opts, "oath", "--oath");
 
     // Validate --guardian-id: must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>
     const guardianId = String(opts.guardianId || "").trim();
@@ -990,7 +1058,7 @@ function buildGuardianApplicationDraft(opts) {
     guardian_application_content: {
       requested_guardian_identifier: opts.guardianId || "",
       guardian_public_key_sha256: guardianKeyShaForDraft(opts.guardianKeySha),
-      guardian_stewardship_oath: opts.oath || "I voluntarily join the Guardian Alliance as a non-governing steward.",
+      guardian_stewardship_oath: guardianStewardshipOathForDraft(opts),
       guardian_understands_role_is_non_governing: true,
       guardian_understands_role_is_not_authority: true,
       guardian_understands_retirement_does_not_delete_history: true,
@@ -1538,6 +1606,34 @@ const ERROR_HELP_MAP = {
 
 // ── Doctor checks ────────────────────────────────────────────────────
 
+function guardianApplicationActiveEligibilityDiagnostics(draft) {
+  const diagnostics = [];
+  if (draft.record_type !== "guardian_application") return diagnostics;
+
+  const gc = draft.guardian_application_content || {};
+  const ctx = draft.context_readiness || {};
+
+  if (!/^guardian_ed25519_[0-9a-f]{16}$/.test(String(gc.requested_guardian_identifier || ""))) {
+    diagnostics.push("guardian_id_not_derived");
+  }
+  if (!/^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256 || ""))) {
+    diagnostics.push("guardian_key_not_sha256");
+  }
+  if (!["CC-3", "CC-4", "CC-5"].includes(String(ctx.declared_context_level || "").toUpperCase())) {
+    diagnostics.push("context_level_below_active_minimum");
+  }
+  if (ctx.context_sufficient_for_selected_action !== true) {
+    diagnostics.push("context_not_sufficient");
+  }
+  if (ctx.context_read_confirmed !== true) {
+    diagnostics.push("context_read_not_confirmed");
+  }
+  if (!Array.isArray(ctx.loaded_context_urls) || ctx.loaded_context_urls.length === 0) {
+    diagnostics.push("missing_loaded_context_urls");
+  }
+  return diagnostics;
+}
+
 function runDoctor(submission) {
   const results = [];
   const draft = submission.record_draft;
@@ -1654,6 +1750,14 @@ function runDoctor(submission) {
         meaning: "guardian_public_key_sha256 must be a 64-character lowercase hex SHA-256.",
         fix: "Use the lowercase SHA-256 of the Guardian public key.",
       });
+    }
+
+    // Guardian active-eligible diagnostic
+    const eligibilityDiags = guardianApplicationActiveEligibilityDiagnostics(draft);
+    if (eligibilityDiags.length === 0) {
+      results.push({ status: "PASS", code: "GUARDIAN_APPLICATION_ACTIVE_ELIGIBLE_INPUTS", field: "guardian_application", meaning: "Guardian application has all inputs for active-eligible status.", fix: "" });
+    } else {
+      results.push({ status: "FAIL", code: "GUARDIAN_APPLICATION_NOT_ACTIVE_ELIGIBLE", field: "guardian_application", meaning: `Guardian application not active-eligible: ${eligibilityDiags.join(", ")}.`, fix: "Ensure guardian_id is derived, key SHA is valid, context level is CC-3+, context is sufficient and read-confirmed, and loaded_context_urls are present." });
     }
   }
 
@@ -2319,6 +2423,14 @@ Common options:
                                 Do not edit, filter, summarize, trim module headers, or reformat print-oath output.
                                 The === Module Title === lines are part of the canonical oath text.
                                 If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.
+  --guardian-stewardship-oath "text"
+                                Optional Guardian stewardship oath text.
+                                Builder uses a canonical default if omitted.
+                                Do not confuse this with --readback.
+                                --readback is the exact formal Record-Chain oath printed by print-oath.
+
+Legacy alias:
+  --oath is still accepted for Guardian stewardship oath, but --guardian-stewardship-oath is preferred.
 
 Autonomy / context override options:
   --discovery-mode MODE         How participant discovered Trinity Accord
@@ -2392,6 +2504,7 @@ Examples:
     --body-file echo.md \\
     --context-level CC-3 \\
     --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
     --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
     --discovery-mode user_task_context \\
     --requesting-party-type human \\
@@ -2416,6 +2529,7 @@ Examples:
     --fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\
     --context-level CC-3 \\
     --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
     --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
     --discovery-mode user_task_context \\
     --requesting-party-type human \\
@@ -2431,11 +2545,59 @@ Examples:
   node record-chain-builder.mjs print-oath --record-type guardian_application
 
   node record-chain-builder.mjs guardian-application \\
-    --actor-label "Example Agent" \\
+    --actor-label "Example Guardian" \\
     --provider "Example Runtime" \\
-    --guardian-id "my-guardian-id" \\
+    --guardian-id auto \\
+    --guardian-key-sha auto \\
     --context-level CC-3 \\
     --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/guardian-join/,https://www.trinityaccord.org/api/guardian-active-listing-policy.v2.json,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --key-dir ./.trinity-agent-authorship/example-guardian \\
+    --out guardian-app-submission.json
+
+  # ── Guardian Retirement (formal: requires print-oath + --readback) ──
+  node record-chain-builder.mjs print-oath --record-type guardian_retirement
+
+  node record-chain-builder.mjs guardian-retirement \\
+    --actor-label "Example Guardian" \\
+    --provider "Example Runtime" \\
+    --guardian-id auto \\
+    --guardian-key-sha auto \\
+    --body "Voluntary retirement" \\
+    --target-guardian-application-record-id R-000000001 \\
+    --target-guardian-application-record-sha256 <sha256-of-target-application> \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --key-dir ./.trinity-agent-authorship/example-guardian \\
+    --out guardian-retirement-submission.json
+
+  # ── Propagation (formal: requires print-oath + --readback) ────────
+  node record-chain-builder.mjs print-oath --record-type propagation
+
+  node record-chain-builder.mjs propagation \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body "Propagation content" \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
     --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
     --discovery-mode user_task_context \\
     --requesting-party-type human \\
@@ -2445,9 +2607,59 @@ Examples:
     --human-operator-involved false \\
     --readback "..." \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
-    --out guardian-app-submission.json
+    --out propagation-submission.json
+
+  # ── Correction (formal: requires print-oath + --readback) ─────────
+  node record-chain-builder.mjs print-oath --record-type correction
+
+  node record-chain-builder.mjs correction \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body "Correction details" \\
+    --target-record-id R-000000001 \\
+    --target-record-sha256 <sha256-of-target-record> \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out correction-submission.json
+
+  # ── Classification Update (formal: requires print-oath + --readback)
+  node record-chain-builder.mjs print-oath --record-type classification_update
+
+  node record-chain-builder.mjs classification-update \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --new-classification "classification_value" \\
+    --classification-reason "Reason for classification change" \\
+    --target-record-id R-000000001 \\
+    --target-record-sha256 <sha256-of-target-record> \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out classification-update-submission.json
 
   # ── Context-insufficient (no oath, but authorship key required) ───
+  # context-insufficient requires --key-dir
+  # context-insufficient does not require print-oath
+  # context-insufficient does not require --readback
   node record-chain-builder.mjs context-insufficient \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\

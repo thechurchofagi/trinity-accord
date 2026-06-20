@@ -45,9 +45,8 @@ node record-chain-builder.mjs guardian-application \
   --discovery-mode user_task_context \
   --record-decision human \
   --submission-executor self \
-  --human-operator-involved true \
+  --human-operator-involved false \
   --readback "<exact canonical oath text>" \
-  --generate-authorship-key \
   --key-dir ./.trinity-agent-authorship/example-guardian \
   --out guardian-application-submission.json
 

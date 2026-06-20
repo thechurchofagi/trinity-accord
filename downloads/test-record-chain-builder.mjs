@@ -378,7 +378,7 @@ function testKeyPairReturnShape() {
   // Verify the code fix directly
   const source = readFileSync(BUILDER, "utf-8");
   assert.ok(
-    (source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey };") || source.includes("return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey, newlyGenerated:")),
+    source.includes("privateKey: writtenPrivKey"),
     "generateAuthorshipKeyPair must return privateKey field"
   );
   assert.ok(
@@ -503,6 +503,224 @@ function testAutonomyFlags() {
   console.log("  ✅ CLI autonomy/context override flags verified (values match field helper)");
 }
 
+// ── Test 9: help includes --guardian-id auto ───────────────────────
+
+function testHelpIncludesGuardianIdAuto() {
+  console.log("Test 9: help includes --guardian-id auto");
+  const { stdout } = runBuilder("help");
+  assert.ok(stdout.includes("--guardian-id auto"), "Help must include --guardian-id auto");
+  console.log("  ✅ Help includes --guardian-id auto");
+}
+
+// ── Test 10: help includes --guardian-key-sha auto ──────────────────
+
+function testHelpIncludesGuardianKeyShaAuto() {
+  console.log("Test 10: help includes --guardian-key-sha auto");
+  const { stdout } = runBuilder("help");
+  assert.ok(stdout.includes("--guardian-key-sha auto"), "Help must include --guardian-key-sha auto");
+  console.log("  ✅ Help includes --guardian-key-sha auto");
+}
+
+// ── Test 11: help does not include --guardian-id "my-guardian-id" ───
+
+function testHelpNoMyGuardianId() {
+  console.log("Test 11: help does not include --guardian-id \"my-guardian-id\"");
+  const { stdout } = runBuilder("help");
+  assert.ok(!stdout.includes('"my-guardian-id"'), 'Help must not include --guardian-id "my-guardian-id"');
+  console.log("  ✅ Help does not include --guardian-id \"my-guardian-id\"");
+}
+
+// ── Test 12: help contains --context-read-confirmed true ────────────
+
+function testHelpIncludesContextReadConfirmed() {
+  console.log("Test 12: help contains --context-read-confirmed true");
+  const { stdout } = runBuilder("help");
+  assert.ok(stdout.includes("--context-read-confirmed true"), "Help must include --context-read-confirmed true");
+  console.log("  ✅ Help contains --context-read-confirmed true");
+}
+
+// ── Test 13: Guardian application builds without --oath ─────────────
+
+function testGuardianApplicationWithoutOath() {
+  console.log("Test 13: Guardian application builds without --oath");
+  cleanTmp();
+  const keyDir = resolve(TMP_DIR, "guardian-no-oath-keys");
+  const outFile = resolve(TMP_DIR, "guardian-no-oath.json");
+
+  // Generate oath dynamically
+  const oath = execSync(`node "${BUILDER}" print-oath --record-type guardian_application`, {
+    encoding: "utf-8",
+    cwd: __dirname,
+  }).trim();
+
+  const { stdout, exitCode } = runBuilder(
+    `guardian-application \\
+      --actor-label "Test Guardian" \\
+      --provider "Test Runtime" \\
+      --guardian-id auto \\
+      --guardian-key-sha auto \\
+      --context-level CC-3 \\
+      --context-sufficient-for-selected-action true \\
+      --context-read-confirmed true \\
+      --loaded-urls "https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+      --discovery-mode user_task_context \\
+      --requesting-party-type human \\
+      --introducing-party-type human \\
+      --record-decision human \\
+      --submission-executor self \\
+      --human-operator-involved false \\
+      --readback "${oath.replace(/"/g, '\\"')}" \\
+      --key-dir "${keyDir}" \\
+      --out "${outFile}"`
+  );
+
+  assert.equal(exitCode, 0, `Guardian application without --oath should succeed: ${stdout}`);
+  const submission = JSON.parse(readFileSync(outFile, "utf-8"));
+  assert.equal(submission.record_draft.record_type, "guardian_application");
+  assert.ok(
+    submission.record_draft.guardian_application_content.guardian_stewardship_oath,
+    "Guardian stewardship oath should be present even without --oath"
+  );
+  assert.equal(
+    submission.record_draft.guardian_application_content.guardian_stewardship_oath,
+    "I voluntarily join the Guardian Alliance as a non-governing steward.",
+    "Default stewardship oath should match"
+  );
+  console.log("  ✅ Guardian application builds without --oath");
+}
+
+// ── Test 14: Guardian default stewardship oath is present ───────────
+
+function testGuardianDefaultStewardshipOath() {
+  console.log("Test 14: Guardian default stewardship oath is present");
+  const source = readFileSync(BUILDER, "utf-8");
+  assert.ok(
+    source.includes('"I voluntarily join the Guardian Alliance as a non-governing steward."'),
+    "Builder source must contain default guardian stewardship oath"
+  );
+  assert.ok(
+    source.includes("DEFAULT_GUARDIAN_STEWARDSHIP_OATH"),
+    "Builder must define DEFAULT_GUARDIAN_STEWARDSHIP_OATH constant"
+  );
+  console.log("  ✅ Guardian default stewardship oath verified");
+}
+
+// ── Test 15: empty public key diagnostic ────────────────────────────
+
+function testEmptyPublicKeyDiagnostic() {
+  console.log("Test 15: empty public key diagnostic");
+  const source = readFileSync(BUILDER, "utf-8");
+  assert.ok(
+    source.includes('file is empty'),
+    "Builder must include 'file is empty' diagnostic"
+  );
+  assert.ok(
+    source.includes("assertNonEmptyFile"),
+    "Builder must use assertNonEmptyFile helper"
+  );
+  console.log("  ✅ Empty public key diagnostic verified");
+}
+
+// ── Test 16: context-insufficient builds without --readback ─────────
+
+function testContextInsufficientWithoutReadback() {
+  console.log("Test 16: context-insufficient builds without --readback but with --key-dir");
+  cleanTmp();
+  const keyDir = resolve(TMP_DIR, "ctx-insufficient-keys");
+  const outFile = resolve(TMP_DIR, "ctx-insufficient.json");
+
+  const { stdout, exitCode } = runBuilder(
+    `context-insufficient \\
+      --actor-label "Test Agent" \\
+      --provider "Test Runtime" \\
+      --body "Insufficient context" \\
+      --key-dir "${keyDir}" \\
+      --out "${outFile}"`
+  );
+
+  assert.equal(exitCode, 0, `context-insufficient without --readback should succeed: ${stdout}`);
+  const submission = JSON.parse(readFileSync(outFile, "utf-8"));
+  assert.equal(submission.record_draft.record_type, "context_insufficient_notice");
+  console.log("  ✅ context-insufficient builds without --readback");
+}
+
+// ── Test 17: Verification V6 fails ─────────────────────────────────
+
+function testVerificationV6Fails() {
+  console.log("Test 17: Verification V6 fails");
+  cleanTmp();
+  const keyDir = resolve(TMP_DIR, "v6-keys");
+  const outFile = resolve(TMP_DIR, "v6.json");
+
+  const oath = execSync(`node "${BUILDER}" print-oath --record-type verification`, {
+    encoding: "utf-8",
+    cwd: __dirname,
+  }).trim();
+
+  const { exitCode } = runBuilder(
+    `verification \\
+      --actor-label "Test Agent" \\
+      --provider "Test Runtime" \\
+      --verification-level V6 \\
+      --what-was-checked "test" \\
+      --verification-claim "test" \\
+      --fresh-actions "test" \\
+      --context-level CC-3 \\
+      --context-sufficient-for-selected-action true \\
+      --context-read-confirmed true \\
+      --loaded-urls "https://www.trinityaccord.org/agent-start/" \\
+      --discovery-mode user_task_context \\
+      --requesting-party-type human \\
+      --introducing-party-type human \\
+      --record-decision human \\
+      --submission-executor self \\
+      --human-operator-involved false \\
+      --readback "${oath.replace(/"/g, '\\"')}" \\
+      --key-dir "${keyDir}" \\
+      --out "${outFile}"`
+  );
+
+  assert.notEqual(exitCode, 0, "Verification V6 should fail");
+  console.log("  ✅ Verification V6 correctly fails");
+}
+
+// ── Test 18: --submission-executor self --human-operator-involved true fails
+
+function testSelfExecutorHumanInvolvedFails() {
+  console.log("Test 18: --submission-executor self --human-operator-involved true fails");
+  cleanTmp();
+  const keyDir = resolve(TMP_DIR, "conflict-keys");
+  const outFile = resolve(TMP_DIR, "conflict.json");
+
+  const oath = execSync(`node "${BUILDER}" print-oath --record-type echo`, {
+    encoding: "utf-8",
+    cwd: __dirname,
+  }).trim();
+
+  const { exitCode } = runBuilder(
+    `echo \\
+      --actor-label "Test Agent" \\
+      --provider "Test Runtime" \\
+      --body "test" \\
+      --context-level CC-3 \\
+      --context-sufficient-for-selected-action true \\
+      --context-read-confirmed true \\
+      --loaded-urls "https://www.trinityaccord.org/agent-start/" \\
+      --discovery-mode user_task_context \\
+      --requesting-party-type human \\
+      --introducing-party-type human \\
+      --record-decision human \\
+      --submission-executor self \\
+      --human-operator-involved true \\
+      --readback "${oath.replace(/"/g, '\\"')}" \\
+      --key-dir "${keyDir}" \\
+      --out "${outFile}"`
+  );
+
+  assert.notEqual(exitCode, 0, "--submission-executor self --human-operator-involved true should fail");
+  console.log("  ✅ Conflicting executor/involvement flags correctly fail");
+}
+
 // ── Run all tests ────────────────────────────────────────────────────
 
 console.log("=== record-chain-builder.mjs Phase 6B Hotfix Tests ===\n");
@@ -516,6 +734,16 @@ try {
   testKeyPairReturnShape();
   testRepairCompatFields();
   testAutonomyFlags();
+  testHelpIncludesGuardianIdAuto();
+  testHelpIncludesGuardianKeyShaAuto();
+  testHelpNoMyGuardianId();
+  testHelpIncludesContextReadConfirmed();
+  testGuardianApplicationWithoutOath();
+  testGuardianDefaultStewardshipOath();
+  testEmptyPublicKeyDiagnostic();
+  testContextInsufficientWithoutReadback();
+  testVerificationV6Fails();
+  testSelfExecutorHumanInvolvedFails();
 
   console.log("\n✅ All tests passed!");
 } catch (e) {

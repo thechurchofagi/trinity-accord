@@ -1,9 +1,30 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
+  "formal_common_required_cli_options": [
+    "--context-level",
+    "--context-sufficient-for-selected-action true|false",
+    "--loaded-urls when declaring CC-3 or higher",
+    "--context-read-confirmed true when declaring CC-3 or higher",
+    "--discovery-mode",
+    "--requesting-party-type",
+    "--introducing-party-type",
+    "--record-decision",
+    "--submission-executor",
+    "--human-operator-involved true|false",
+    "--readback",
+    "--key-dir",
+    "--out"
+  ],
+  "formal_oath_rule": "Run print-oath --record-type <record_type> and pass exact output through --readback. Do not edit, trim, summarize, or reformat print-oath stdout.",
+  "context_insufficient_notice_common_required_cli_options": [
+    "--body or --body-file",
+    "--key-dir",
+    "--out"
+  ],
   "global_rules": [
     "Read this guidance before building echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, or context_insufficient_notice records.",
     "Do not guess target record identifiers or hashes.",
@@ -50,9 +71,10 @@
         "Let Builder and downstream tooling compute generated hashes."
       ],
       "builder_command": "echo",
-      "required_cli_options": [
-        "--body"
-      ]
+      "record_specific_required_cli_options": [
+        "--body or --body-file"
+      ],
+      "also_requires": "formal_common_required_cli_options"
     },
     "verification": {
       "purpose": "A record of verification actions actually performed by the agent or participant.",
@@ -71,13 +93,14 @@
         "Let Builder and downstream tooling compute generated hashes."
       ],
       "builder_command": "verification",
-      "required_cli_options": [
+      "record_specific_required_cli_options": [
         "--verification-level",
         "--what-was-checked",
         "--verification-claim",
-        "--fresh-actions",
-        "--body"
-      ]
+        "--fresh-actions"
+      ],
+      "public_verification_level_limit": "V0-V5 only",
+      "also_requires": "formal_common_required_cli_options"
     },
     "guardian_application": {
       "purpose": "Application for Guardian status and stewardship commitment. The application record itself is not proof of active Guardian status.",
@@ -96,12 +119,15 @@
         "If the public key source or identity disclosure context is unclear, stop and return BUILDER_USAGE_UNCLEAR."
       ],
       "builder_command": "guardian-application",
-      "required_cli_options": [
-        "--guardian-id (prefer 'auto')",
-        "--guardian-key-sha (prefer 'auto')",
-        "--oath",
-        "--body"
-      ]
+      "record_specific_required_cli_options": [
+        "--guardian-id auto",
+        "--guardian-key-sha auto"
+      ],
+      "optional_cli_options": [
+        "--guardian-stewardship-oath"
+      ],
+      "also_requires": "formal_common_required_cli_options",
+      "notes": "remove --oath and --body from required options; --guardian-stewardship-oath is optional with canonical default"
     },
     "guardian_retirement": {
       "purpose": "Append-only retirement of an existing guardian. Retirement preserves history and must bind to the original guardian_application final record.",
@@ -113,13 +139,15 @@
         "If the matching guardian_application record cannot be identified, stop and return BUILDER_USAGE_UNCLEAR."
       ],
       "builder_command": "guardian-retirement",
-      "required_cli_options": [
+      "record_specific_required_cli_options": [
         "--guardian-id",
-        "--guardian-key-sha",
-        "--body",
+        "--guardian-key-sha auto or exact current guardian key sha",
+        "--body or --body-file",
         "--target-guardian-application-record-id",
         "--target-guardian-application-record-sha256"
-      ]
+      ],
+      "warning": "same Guardian key required",
+      "also_requires": "formal_common_required_cli_options"
     },
     "propagation": {
       "purpose": "Record that the agent or participant distributed, referenced, mirrored, cited, or otherwise propagated Accord material.",
@@ -136,9 +164,10 @@
         "Let Builder and downstream tooling compute generated hashes."
       ],
       "builder_command": "propagation",
-      "required_cli_options": [
-        "--body"
-      ]
+      "record_specific_required_cli_options": [
+        "--body or --body-file"
+      ],
+      "also_requires": "formal_common_required_cli_options"
     },
     "correction": {
       "purpose": "Append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
@@ -152,14 +181,14 @@
         "If any target binding value is uncertain, stop and return BUILDER_USAGE_UNCLEAR."
       ],
       "builder_command": "correction",
-      "required_cli_options": [
-        "--body",
+      "record_specific_required_cli_options": [
         "--target-record-id",
         "--target-record-sha256",
         "--correction-reason",
         "--corrected-fields-or-claims",
         "--evidence-or-review-basis"
-      ]
+      ],
+      "also_requires": "formal_common_required_cli_options"
     },
     "classification_update": {
       "purpose": "Append-only classification or reclassification of a prior final record based on new information or analysis.",
@@ -173,14 +202,15 @@
         "If the target or prior classification is unclear, stop and return BUILDER_USAGE_UNCLEAR."
       ],
       "builder_command": "classification-update",
-      "required_cli_options": [
+      "record_specific_required_cli_options": [
         "--target-record-id",
         "--target-record-sha256",
         "--previous-classification",
         "--new-classification",
         "--classification-reason",
         "--evidence-or-review-basis"
-      ]
+      ],
+      "also_requires": "formal_common_required_cli_options"
     },
     "context_insufficient_notice": {
       "purpose": "Notice that the agent lacks sufficient context to safely make a stronger Record-Chain submission.",
@@ -197,7 +227,13 @@
       ],
       "builder_command": "context-insufficient",
       "required_cli_options": [
-        "--body"
+        "--body or --body-file",
+        "--key-dir",
+        "--out"
+      ],
+      "does_not_require": [
+        "print-oath",
+        "--readback"
       ]
     }
   },

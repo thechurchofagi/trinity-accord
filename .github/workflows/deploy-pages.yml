@@ -212,12 +212,11 @@ jobs:
           # Guardian command flag checks (patterns starting with -- need literal grep)
           require_contains_literal _site/api/agent-start.v2.json '--guardian-id'
           require_contains_literal _site/api/agent-start.v2.json '--guardian-key-sha'
-          require_contains_literal _site/api/agent-start.v2.json '--oath'
+          require_contains_literal _site/api/agent-start.v2.json 'guardian_stewardship_oath_note'
           require_contains_literal _site/api/agent-start.v2.json '--body'
 
           forbid_contains_literal _site/api/agent-start.v2.json '--requested-guardian-identifier'
           forbid_contains_literal _site/api/agent-start.v2.json '--guardian-public-key-sha256'
-          forbid_contains_literal _site/api/agent-start.v2.json '--guardian-stewardship-oath'
           forbid_contains_literal _site/api/agent-start.v2.json '--guardian-application-statement'
           forbid_contains_literal _site/api/agent-start.v2.json '--reason'
 

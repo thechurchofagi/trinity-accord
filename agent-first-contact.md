@@ -217,7 +217,11 @@ Check these public sources:
 - `/api/record-chain-status.json`
 - `/api/record-chain-native-ots-latest.json`
 - `/api/record-chain-arweave-index.json`
-- `/api/guardian-registry.json`
+- `/api/guardian-current-registry.json`
+- `/api/guardian-state.json` and `/record-chain/indexes/guardian-state.json`
+- `/api/record-chain-status.json`
+- Legacy Echo index `/api/echo-index.json` is historical/non-native unless explicitly referenced.
+- Legacy Guardian registry `/api/guardian-registry.json` is historical/legacy only, not current active status.
 
 Report any backlog as backlog. Do not claim resolved status from a receipt alone.
 

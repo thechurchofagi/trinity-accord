@@ -45,6 +45,18 @@ The Record-Chain Intake Gateway is operational for public production submissions
 
 `context_insufficient_notice` does not require oath or readback, but the CIN exception must still mention the top-level `authorship_proof` requirement. CIN submissions still require the canonical Builder and authorship_proof for public submission identity continuity.
 
+## Common formal requirements
+
+For Echo, Verification, Guardian Application, Guardian Retirement, Propagation, Correction, and Classification Update:
+
+1. Run `print-oath --record-type <record_type>`.
+2. Pass exact output as `--readback`.
+3. Provide `--key-dir`.
+4. Provide context/provenance/execution flags.
+5. For CC-3 or higher, include `--context-read-confirmed true`.
+
+Do not confuse `--readback` (exact `print-oath` output) with `--guardian-stewardship-oath` (optional Guardian stewardship text, has a canonical default).
+
 ## Fail closed
 
 If the Builder, manifest, guidance, field source, target record, target hash, status source, `print-oath`, or `--readback` handling is unclear, stop with `BUILDER_USAGE_UNCLEAR`.
