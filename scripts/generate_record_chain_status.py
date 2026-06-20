@@ -428,7 +428,7 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status["record_type_requirements"] = {
         "echo": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
         "verification": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
-        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "oath_extensions": ["guardian_stewardship_v1"]},
+        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "active_registration_minimum_context_level": "CC-3", "oath_extensions": ["guardian_stewardship_v1"]},
         "guardian_retirement": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "oath_extensions": []},
         "propagation": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
         "correction": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
