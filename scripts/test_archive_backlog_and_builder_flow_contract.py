@@ -270,11 +270,11 @@ def main() -> None:
     # Patch 5: Negative tests for Builder build fail-fast
     assert_builder_command_fails(["guardian-application"], "--guardian-id is required")
     assert_builder_command_fails(
-        ["guardian-application", "--guardian-id", "guardian-test"],
+        ["guardian-application", "--guardian-id", "auto"],
         "--guardian-key-sha is required",
     )
     assert_builder_command_fails(
-        ["guardian-application", "--guardian-id", "guardian-test", "--guardian-key-sha", "bad", "--oath", "test oath"],
+        ["guardian-application", "--guardian-id", "auto", "--guardian-key-sha", "bad", "--oath", "test oath"],
         "--guardian-key-sha must be a 64-character lowercase hex SHA-256",
     )
     assert_builder_command_fails(["guardian-retirement"], "--guardian-id is required")
