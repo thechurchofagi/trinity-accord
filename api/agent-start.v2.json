@@ -82,7 +82,7 @@
       },
       "guardian_application": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type guardian_application",
-        "build_command": "node record-chain-builder.mjs guardian-application --guardian-id auto --guardian-key-sha auto --readback <exact oath text> --key-dir <key-dir> --out submission.json",
+        "build_command": "node record-chain-builder.mjs guardian-application --guardian-id auto --guardian-key-sha auto --context-level CC-3 --context-sufficient-for-selected-action true --context-read-confirmed true --loaded-urls \"https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/guardian-join/,https://www.trinityaccord.org/api/guardian-active-listing-policy.v2.json,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json\" --readback <exact oath text> --key-dir <key-dir> --out submission.json",
         "guidance_required": true,
         "receipt_note": "Receipt is intake-only and does not guarantee active Guardian status; read /api/guardian-current-registry.json or /record-chain/indexes/guardian-state.json before claiming active status.",
         "readback_note": "Pass the exact canonical oath text through --readback.",
@@ -118,7 +118,10 @@
         "build_command": "node record-chain-builder.mjs context-insufficient ... --key-dir <key-dir> --out submission.json",
         "guidance_required": true,
         "note": "No oath/readback required, but canonical Builder and authorship proof fields are still required.",
-        "does_not_require": ["print-oath", "--readback"]
+        "does_not_require": [
+          "print-oath",
+          "--readback"
+        ]
       }
     },
     "local_validation_command": "node record-chain-builder.mjs doctor --file submission.json",
