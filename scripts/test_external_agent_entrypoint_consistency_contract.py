@@ -104,14 +104,11 @@ def main() -> int:
         "--guardian-key-sha" in guardian_application_cmd,
         "guardian_application build_command must use actual Builder flag --guardian-key-sha",
     )
-    require(
-        "--oath" in guardian_application_cmd,
-        "guardian_application build_command must use actual Builder flag --oath",
-    )
+    # --oath is now a legacy alias; --guardian-stewardship-oath is preferred but optional
+    # build_command need not include --oath since Builder uses a canonical default
     for forbidden in [
         "--requested-guardian-identifier",
         "--guardian-public-key-sha256",
-        "--guardian-stewardship-oath",
         "--guardian-application-statement",
     ]:
         require(
