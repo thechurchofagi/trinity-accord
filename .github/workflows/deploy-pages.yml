@@ -33,8 +33,8 @@ jobs:
         with:
           node-version: "20"
       - name: Install system dependencies for cryptography
-        run: sudo apt-get update && sudo apt-get install -y libffi-dev build-essential rustc cargo
-      - run: python3 -m pip install -r requirements-ci.txt
+        run: sudo apt-get update && sudo apt-get install -y libffi-dev build-essential
+      - run: python3 -m pip install --prefer-binary -r requirements-ci.txt
       - name: Verify record-chain integrity
         run: python3 scripts/trinity_record_chain.py verify
       - name: Verify sitemap has no drift
