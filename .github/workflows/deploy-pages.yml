@@ -32,6 +32,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
+      - name: Install system dependencies for cryptography
+        run: sudo apt-get update && sudo apt-get install -y libffi-dev build-essential rustc cargo
       - run: python3 -m pip install -r requirements-ci.txt
       - name: Verify record-chain integrity
         run: python3 scripts/trinity_record_chain.py verify

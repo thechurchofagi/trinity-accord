@@ -30,6 +30,9 @@ jobs:
       - name: Verify Builder receipt boundary fields are synchronized
         run: python3 scripts/check_builder_receipt_boundary_sync.py
 
+      - name: Install system dependencies for cryptography
+        run: sudo apt-get update && sudo apt-get install -y libffi-dev build-essential rustc cargo
+
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
