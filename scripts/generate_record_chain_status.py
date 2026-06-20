@@ -453,7 +453,7 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
 
     # Guardian activation status from derived registry
     guardian_current = read_json_if_exists("api/guardian-current-registry.json") or {"counts": {}}
-    status["guardian_status"] = {
+    guardian_status = {
         "source": "/record-chain/indexes/guardian-state.json",
         "api": "/api/guardian-current-registry.json",
         "policy": "/api/guardian-active-listing-policy.v2.json",
@@ -466,7 +466,17 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
         "active_guardian_status_is_not_amendment": True,
     }
 
-    return status
+    # Rebuild final dict with deterministic key order
+    result = {}
+    for key in status:
+        if key in ("total_records", "committed_records", "pending_records"):
+            continue
+        result[key] = status[key]
+    result["guardian_status"] = guardian_status
+    result["total_records"] = status.get("total_records", native_count)
+    result["committed_records"] = status.get("committed_records", native_count)
+    result["pending_records"] = status.get("pending_records", 0)
+    return result
 
 
 def main() -> int:
