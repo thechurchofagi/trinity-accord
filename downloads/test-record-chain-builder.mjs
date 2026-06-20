@@ -326,8 +326,6 @@ function testGuardianApplicationAuthorshipProof() {
 
   const payload = canonicalBytes(recordDraft);
   const payloadSha = sha256(payload);
-  const rawPubBytes = extractRawPublicKeyBytes(pubPem);
-  const pubSha = sha256(rawPubBytes);
   const signature = sign(null, payload, privateKey);
 
   const authorshipProof = {
