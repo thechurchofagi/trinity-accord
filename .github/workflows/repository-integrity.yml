@@ -30,21 +30,10 @@ jobs:
       - name: Verify Builder receipt boundary fields are synchronized
         run: python3 scripts/check_builder_receipt_boundary_sync.py
 
-      - name: Install Python packaging tools
-        run: |
-          python3 -m pip install --upgrade pip setuptools wheel
-          python3 -m pip --version
-          python3 - <<'PY'
-          import platform, sys
-          print(sys.version)
-          print(platform.platform())
-          print(platform.machine())
-          PY
+      - name: Install system dependencies for cryptography
+        run: sudo apt-get update && sudo apt-get install -y libffi-dev build-essential rustc cargo
 
       - name: Install Python dependencies
-        env:
-          PIP_PREFER_BINARY: "1"
-          PIP_ONLY_BINARY: "cryptography,cffi"
         run: python3 -m pip install -r requirements-ci.txt
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
