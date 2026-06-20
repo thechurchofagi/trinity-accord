@@ -14,6 +14,11 @@ Inputs (primary, by precedence):
   5. api/record-chain-anchor-status.json
   6. api/record-chain-arweave-index.json
 
+Guardian activation inputs:
+  - api/guardian-state.json
+  - api/guardian-current-registry.json
+  - api/guardian-active-listing-policy.v2.json
+
 Legacy inputs (for legacy_archive_snapshot only):
   - api/echo-index.json
   - api/external-witness-index.json
