@@ -324,13 +324,13 @@ def validate_live_agent_entrypoints(
 
     # Guardian command flag checks
     guardian_application_cmd = commands.get("guardian_application", {}).get("build_command", "")
-    for required in ["--guardian-id", "--guardian-key-sha", "--oath"]:
+    for required in ["--guardian-id", "--guardian-key-sha"]:
         if required not in guardian_application_cmd:
             errors.append(f"live guardian_application build_command missing {required}")
+    # --oath is now a legacy alias; Builder uses canonical default when omitted
     for forbidden in [
         "--requested-guardian-identifier",
         "--guardian-public-key-sha256",
-        "--guardian-stewardship-oath",
         "--guardian-application-statement",
     ]:
         if forbidden in guardian_application_cmd:
