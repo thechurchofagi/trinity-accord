@@ -88,16 +88,17 @@
         "special control over the Accord"
       ],
       "before_build": [
-        "Provide the requested guardian identity, key, and stewardship information through Builder options.",
+        "Use --guardian-id auto --guardian-key-sha auto to derive guardian identity from your authorship key.",
+        "guardian_id is derived as guardian_ed25519_<first16-of-public-key-sha256>.",
         "State the stewardship intent honestly in body or application fields.",
         "Do not treat receipt as final active Guardian status.",
-        "Use Builder/authorship tooling for generated hashes and key-derived values when available.",
+        "Active status requires /api/guardian-current-registry.json or /record-chain/indexes/guardian-state.json readback.",
         "If the public key source or identity disclosure context is unclear, stop and return BUILDER_USAGE_UNCLEAR."
       ],
       "builder_command": "guardian-application",
       "required_cli_options": [
-        "--guardian-id",
-        "--guardian-key-sha",
+        "--guardian-id (prefer 'auto')",
+        "--guardian-key-sha (prefer 'auto')",
         "--oath",
         "--body"
       ]

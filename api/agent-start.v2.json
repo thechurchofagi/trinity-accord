@@ -82,9 +82,9 @@
       },
       "guardian_application": {
         "oath_command": "node record-chain-builder.mjs print-oath --record-type guardian_application",
-        "build_command": "node record-chain-builder.mjs guardian-application --guardian-id <id> --guardian-key-sha <sha> --oath <oath-text> --readback <exact oath text> --key-dir <key-dir> --out submission.json",
+        "build_command": "node record-chain-builder.mjs guardian-application --guardian-id auto --guardian-key-sha auto --oath <oath-text> --readback <exact oath text> --key-dir <key-dir> --out submission.json",
         "guidance_required": true,
-        "receipt_note": "Receipt is intake-only and does not guarantee active Guardian status; read /record-chain/indexes/guardian-state.json before claiming active status.",
+        "receipt_note": "Receipt is intake-only and does not guarantee active Guardian status; read /api/guardian-current-registry.json or /record-chain/indexes/guardian-state.json before claiming active status.",
         "readback_note": "Pass the exact canonical oath text through --readback."
       },
       "guardian_retirement": {
@@ -178,7 +178,9 @@
       "classification_update": "/record-chain/indexes/classification_update-index.json"
     },
     "guardian_registry_is_historical_archive_only": true,
-    "guardian_active_status_requires_record_chain_guardian_state_readback": true
+    "guardian_active_status_requires_record_chain_guardian_state_readback": true,
+    "guardian_current_registry": "/api/guardian-current-registry.json",
+    "guardian_state_api": "/api/guardian-state.json"
   },
   "record_type_separation_policy": {
     "echo_records_must_not_embed_guardian_application": true,

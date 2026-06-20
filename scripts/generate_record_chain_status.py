@@ -451,6 +451,21 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
         "legacy_verification_archive_index": "/api/agent-declared-verification-index.json",
     }
 
+    # Guardian activation status from derived registry
+    guardian_current = read_json_if_exists("api/guardian-current-registry.json") or {"counts": {}}
+    status["guardian_status"] = {
+        "source": "/record-chain/indexes/guardian-state.json",
+        "api": "/api/guardian-current-registry.json",
+        "policy": "/api/guardian-active-listing-policy.v2.json",
+        "counts": guardian_current.get("counts", {}),
+        "active_guardian_status_is_not_authority": True,
+        "active_guardian_status_is_not_governance": True,
+        "active_guardian_status_is_not_attestation": True,
+        "active_guardian_status_is_not_verification_level": True,
+        "active_guardian_status_is_not_successor_reception": True,
+        "active_guardian_status_is_not_amendment": True,
+    }
+
     return status
 
 

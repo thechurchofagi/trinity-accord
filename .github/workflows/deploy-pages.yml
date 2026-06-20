@@ -158,6 +158,9 @@ jobs:
           require_file _site/api/record-chain-submission-schema.v1.json
           require_file _site/api/record-chain-field-helper.v1.json
           require_file _site/api/record-chain-oath-policy.v1.json
+          require_file _site/api/guardian-state.json
+          require_file _site/api/guardian-current-registry.json
+          require_file _site/api/guardian-active-listing-policy.v2.json
           require_file _site/downloads/record-chain-builder.mjs
           require_file _site/downloads/record-chain-agent-field-guidance.v1.json
           require_file _site/agent-record-chain-guidance/index.html
@@ -184,6 +187,8 @@ jobs:
           require_contains _site/api/agent-first-contact.json '"classification_update"'
           require_contains _site/api/agent-start.v2.json '"guardian_application"'
           require_contains _site/api/agent-start.v2.json '"guardian_retirement"'
+          require_contains _site/api/guardian-current-registry.json '"active_guardians"'
+          require_contains _site/api/guardian-current-registry.json '"receipt_is_not_active_guardian_status"'
           require_contains _site/api/agent-start.v2.json '"propagation"'
           require_contains _site/api/agent-start.v2.json '"correction"'
           require_contains _site/api/agent-start.v2.json '"classification_update"'

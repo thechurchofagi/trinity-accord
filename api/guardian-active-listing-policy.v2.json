@@ -1,0 +1,31 @@
+{
+  "schema": "trinityaccord.guardian-active-listing-policy.v2",
+  "version": "2.0.0",
+  "status": "active",
+  "source_model": "record_chain_derived_guardian_state",
+  "legacy_policy": "/api/guardian-active-listing-policy.v1.json",
+  "activation_status": "derived_not_asserted_by_receipt",
+  "normal_path_requires_manual_review": false,
+  "required_for_active_registered_guardian": [
+    "final_record_chain_guardian_application",
+    "valid_ed25519_authorship_proof",
+    "guardian_public_key_matches_authorship_public_key",
+    "guardian_id_derived_from_public_key",
+    "unique_guardian_id",
+    "unique_guardian_public_key_sha256",
+    "guardian_stewardship_v1_oath_verified",
+    "context_read_confirmed_for_cc3_plus",
+    "non_authority_boundary_acknowledged",
+    "not_retired_by_later_guardian_retirement_record"
+  ],
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true,
+    "receipt_is_not_active_guardian_status": true
+  }
+}

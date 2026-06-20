@@ -27,6 +27,8 @@ REQUIRED_TESTS = [
     "scripts/test_operator_secret_names_contract.py",
     "scripts/test_arweave_live_readiness_contract.py",
     "scripts/test_render_manual_deploy_contract.py",
+    # Guardian activation
+    "scripts/test_guardian_activation_derivation_contract.py",
 ]
 
 # CI wiring targets

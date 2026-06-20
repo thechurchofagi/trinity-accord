@@ -467,6 +467,17 @@ function isConcreteSha256(value) {
   return /^[0-9a-f]{64}$/.test(String(value || ""));
 }
 
+function guardianIdForPublicKeySha(pubSha) {
+  if (!isConcreteSha256(pubSha)) {
+    errorExit("cannot derive guardian_id from invalid public key sha256");
+  }
+  return `guardian_ed25519_${pubSha.slice(0, 16)}`;
+}
+
+function isAutoGuardianId(value) {
+  return typeof value === "string" && value.trim().toLowerCase() === "auto";
+}
+
 function guardianKeyShaForDraft(value) {
   if (isAutoGuardianKeySha(value)) return "";
   return value || "";
@@ -501,6 +512,16 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
     }
 
     gac.guardian_public_key_sha256 = pubSha;
+
+    // Derive guardian_id from public key SHA-256
+    const derivedGuardianId = guardianIdForPublicKeySha(pubSha);
+    const requestedId = String(gac.requested_guardian_identifier || "").trim();
+
+    if (!requestedId || isAutoGuardianId(requestedId)) {
+      gac.requested_guardian_identifier = derivedGuardianId;
+    } else if (requestedId !== derivedGuardianId) {
+      errorExit("--guardian-id must equal guardian_ed25519_<first16-of-authorship-public-key-sha256>; use --guardian-id auto");
+    }
   }
 
   if (recordDraft.record_type === "guardian_retirement") {
@@ -759,6 +780,12 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "guardianId", "--guardian-id");
     requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
     requireExplicit(opts, "oath", "--oath");
+
+    // Validate --guardian-id: must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>
+    const guardianId = String(opts.guardianId || "").trim();
+    if (!isAutoGuardianId(guardianId) && !/^guardian_ed25519_[0-9a-f]{16}$/.test(guardianId)) {
+      errorExit("--guardian-id must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>");
+    }
 
     // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
     const guardianKeySha = String(opts.guardianKeySha || "").trim();

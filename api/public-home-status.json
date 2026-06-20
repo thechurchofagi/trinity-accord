@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-19T16:16:26.663452+00:00",
+  "generated_at": "2026-06-20T06:20:07.565439+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -16,10 +16,13 @@
     "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
     "/api/guardian-registry.json",
     "/api/guardian-active-listing-policy.v1.json",
+    "/api/guardian-state.json",
+    "/api/guardian-current-registry.json",
+    "/api/guardian-active-listing-policy.v2.json",
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "d444f9ddde7a856c",
+  "source_digest": "15030a9007dcb160",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 53,
@@ -754,6 +757,18 @@
     },
     "snapshot_only": true,
     "canonical_status_api": "/api/waiting-heartbeat-status.json"
+  },
+  "guardian_status": {
+    "active_registered_guardian": 0,
+    "pending_guardian_applications": 8,
+    "retired_guardian": 0,
+    "source": "/api/guardian-current-registry.json",
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true
   },
   "boundary": {
     "homepage_status_is_not_authority": true,

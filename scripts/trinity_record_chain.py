@@ -164,6 +164,167 @@ REQUIRED_FINAL_BOUNDARY_FIELDS = frozenset({
     "later_records_may_reclassify_or_correct_this_record",
 })
 
+# --- Guardian activation assessment helpers ---
+_HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+_RECORD_ID_RE = re.compile(r"^R-[0-9]{9}$")
+_GUARDIAN_ID_RE = re.compile(r"^guardian_ed25519_[0-9a-f]{16}$")
+
+
+def _parse_cc_level(value: Any) -> int | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        raw = value.strip().upper()
+        if re.fullmatch(r"CC-[0-5]", raw):
+            return int(raw.split("-", 1)[1])
+        if raw.isdigit():
+            return int(raw)
+    return None
+
+
+def _as_dict(obj: Any) -> dict[str, Any]:
+    return obj if isinstance(obj, dict) else {}
+
+
+def _dedupe_reasons(reasons: list[str]) -> list[str]:
+    return list(dict.fromkeys(reasons))
+
+
+def _guardian_activation_assessment(
+    record: dict[str, Any],
+    *,
+    guardian_id_counts: dict[str, int],
+    guardian_key_counts: dict[str, int],
+) -> dict[str, Any]:
+    """Assess whether a guardian_application record is eligible for active status."""
+    reasons: list[str] = []
+
+    rid = record.get("record_id")
+    rsha = record.get("record_sha256")
+    if not isinstance(rid, str) or not _RECORD_ID_RE.fullmatch(rid):
+        reasons.append("invalid_record_id")
+    if not isinstance(rsha, str) or not _HEX64_RE.fullmatch(rsha):
+        reasons.append("invalid_record_sha256")
+
+    gac = _as_dict(record.get("guardian_application_content"))
+    proof = _as_dict(record.get("authorship_proof"))
+    avs = _as_dict(record.get("authorship_verification_status"))
+
+    guardian_id = gac.get("requested_guardian_identifier")
+    guardian_key = gac.get("guardian_public_key_sha256")
+    proof_key = proof.get("public_key_sha256")
+
+    if avs.get("verified_by_append_before_record") is not True:
+        reasons.append("authorship_not_verified_by_append")
+    if avs.get("signed_payload_scope") != "pre_append_record_draft":
+        reasons.append("invalid_authorship_verification_scope")
+    if avs.get("final_record_contains_append_assigned_fields_not_in_signed_payload") is not True:
+        reasons.append("invalid_authorship_verification_scope")
+
+    if proof.get("schema") != "trinityaccord.agent-authorship-proof.v1":
+        reasons.append("invalid_authorship_proof")
+    if proof.get("method") != "public_key_signature":
+        reasons.append("invalid_authorship_proof")
+    if proof.get("algorithm") != "ed25519":
+        reasons.append("invalid_authorship_proof")
+    if not isinstance(proof_key, str) or not _HEX64_RE.fullmatch(proof_key):
+        reasons.append("invalid_authorship_proof")
+
+    if not isinstance(guardian_key, str) or not _HEX64_RE.fullmatch(guardian_key):
+        reasons.append("invalid_guardian_public_key")
+    elif guardian_key != proof_key:
+        reasons.append("guardian_key_does_not_match_authorship_key")
+
+    expected_gid = (
+        f"guardian_ed25519_{guardian_key[:16]}"
+        if isinstance(guardian_key, str) and _HEX64_RE.fullmatch(guardian_key)
+        else None
+    )
+    if not isinstance(guardian_id, str) or not _GUARDIAN_ID_RE.fullmatch(guardian_id):
+        reasons.append("invalid_guardian_id")
+    elif expected_gid and guardian_id != expected_gid:
+        reasons.append("guardian_id_not_derived_from_public_key")
+
+    if isinstance(guardian_id, str) and guardian_id_counts.get(guardian_id, 0) > 1:
+        reasons.append("duplicate_guardian_id")
+    if isinstance(guardian_key, str) and guardian_key_counts.get(guardian_key, 0) > 1:
+        reasons.append("duplicate_guardian_public_key")
+
+    oath = _as_dict(record.get("submission_oath_verification"))
+    if not oath:
+        reasons.append("missing_submission_oath_verification")
+    else:
+        modules = oath.get("oath_modules")
+        if not isinstance(modules, list) or "guardian_stewardship_v1" not in modules:
+            reasons.append("missing_guardian_stewardship_oath_module")
+        for field in (
+            "oath_read",
+            "participant_readback_provided",
+            "readback_matches_canonical_oath",
+            "no_shortcut_oath_acknowledged",
+            "oath_does_not_prove_subjective_understanding",
+            "oath_verifies_exact_readback_only",
+        ):
+            if oath.get(field) is not True:
+                reasons.append("oath_readback_not_verified")
+                break
+
+    ctx = _as_dict(record.get("context_readiness"))
+    declared_cc = _parse_cc_level(ctx.get("declared_context_level"))
+    minimum_cc = _parse_cc_level(ctx.get("minimum_required_for_action"))
+    loaded_urls = ctx.get("loaded_context_urls")
+
+    if declared_cc is None or declared_cc < 3:
+        reasons.append("context_level_below_cc3")
+    if minimum_cc is None or minimum_cc < 3:
+        reasons.append("minimum_required_context_below_cc3")
+    if ctx.get("context_sufficient_for_selected_action") is not True:
+        reasons.append("context_not_declared_sufficient")
+    if not isinstance(loaded_urls, list) or not loaded_urls:
+        reasons.append("missing_loaded_context_urls")
+    if ctx.get("context_read_confirmed") is not True:
+        reasons.append("missing_context_read_confirmed")
+
+    crcb = _as_dict(ctx.get("context_read_confirmation_boundary"))
+    if (
+        crcb.get("self_declared_only") is not True
+        or crcb.get("false_claim_is_oath_violation") is not True
+        or crcb.get("does_not_prove_subjective_understanding") is not True
+    ):
+        reasons.append("missing_context_read_confirmation_boundary")
+
+    boundary = (
+        _as_dict(record.get("boundary"))
+        or _as_dict(record.get("boundary_acknowledgement"))
+        or _as_dict(record.get("non_authority_boundary_acknowledgement"))
+    )
+    for field in REQUIRED_FINAL_BOUNDARY_FIELDS:
+        if boundary.get(field) is not True:
+            reasons.append("missing_required_boundary")
+            break
+
+    blocking_reasons = _dedupe_reasons(reasons)
+    eligible = not blocking_reasons
+    return {
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "eligible": eligible,
+        "status": "active" if eligible else "blocked",
+        "blocking_reasons": blocking_reasons,
+        "boundary": {
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_verification_level": True,
+            "not_successor_reception": True,
+            "not_amendment": True,
+            "bitcoin_originals_prevail": True,
+            "receipt_is_not_active_guardian_status": True,
+        },
+    }
+
 PRIVATE_KEY_PATTERNS = [
     re.compile(r"BEGIN (?:OPENSSH |RSA |EC )?PRIVATE KEY"),
     re.compile(r'"kty"\s*:\s*"RSA"'),
@@ -1603,6 +1764,21 @@ def build_indexes(derived_at: str | None = None) -> None:
     native_guardians_by_key: dict[str, dict[str, Any]] = {}
     native_guardians_by_record_id: dict[str, dict[str, Any]] = {}
 
+    # Duplicate-count pass for Guardian activation assessment
+    guardian_id_counts: dict[str, int] = {}
+    guardian_key_counts: dict[str, int] = {}
+    for p in native_records:
+        rec = read_json(p)
+        if rec.get("record_type") != "guardian_application":
+            continue
+        gac = rec.get("guardian_application_content") or {}
+        gid = gac.get("requested_guardian_identifier")
+        gkey = gac.get("guardian_public_key_sha256")
+        if isinstance(gid, str) and gid:
+            guardian_id_counts[gid] = guardian_id_counts.get(gid, 0) + 1
+        if isinstance(gkey, str) and gkey:
+            guardian_key_counts[gkey] = guardian_key_counts.get(gkey, 0) + 1
+
     for p in native_records:
         rec = read_json(p)
         record_type = rec.get("record_type")
@@ -1613,10 +1789,20 @@ def build_indexes(derived_at: str | None = None) -> None:
             verified = avs.get("verified_by_append_before_record", False)
             guardian_id = gac.get("requested_guardian_identifier")
             guardian_key = gac.get("guardian_public_key_sha256")
-            if verified:
-                derived = "application_recorded_pending_activation"
-            else:
+
+            activation = _guardian_activation_assessment(
+                rec,
+                guardian_id_counts=guardian_id_counts,
+                guardian_key_counts=guardian_key_counts,
+            )
+
+            if not verified:
                 derived = "pending_verification"
+            elif activation["eligible"]:
+                derived = "active_registered_guardian"
+            else:
+                derived = "application_recorded_pending_activation"
+
             entry = {
                 "guardian_id": guardian_id,
                 "guardian_public_key_sha256": guardian_key,
@@ -1626,6 +1812,16 @@ def build_indexes(derived_at: str | None = None) -> None:
                 "source_record_sha256": rec.get("record_sha256"),
                 "verified_by_append_before_record": verified,
                 "is_founding_guardian": False,
+                "activation": activation,
+                "boundary": {
+                    "not_authority": True,
+                    "not_governance": True,
+                    "not_attestation": True,
+                    "not_verification_level": True,
+                    "not_successor_reception": True,
+                    "not_amendment": True,
+                    "bitcoin_originals_prevail": True,
+                },
             }
             native_guardian_entries.append(entry)
             if isinstance(guardian_id, str) and guardian_id:
@@ -1664,6 +1860,23 @@ def build_indexes(derived_at: str | None = None) -> None:
             if target is not None and verified:
                 target["current_derived_status"] = "retired_guardian"
                 target.update(retirement_summary)
+                target["activation"] = {
+                    "schema": "trinityaccord.guardian-activation-assessment.v1",
+                    "policy": "trinityaccord.guardian-active-listing-policy.v2",
+                    "eligible": False,
+                    "status": "retired",
+                    "blocking_reasons": ["retired_guardian"],
+                    "boundary": {
+                        "not_authority": True,
+                        "not_governance": True,
+                        "not_attestation": True,
+                        "not_verification_level": True,
+                        "not_successor_reception": True,
+                        "not_amendment": True,
+                        "bitcoin_originals_prevail": True,
+                        "receipt_is_not_active_guardian_status": True,
+                    },
+                }
             else:
                 native_guardian_entries.append({
                     "guardian_id": guardian_id,

@@ -1,0 +1,350 @@
+{
+  "schema": "trinityaccord.guardian-current-registry.v1",
+  "source": "record-chain/indexes/guardian-state.json",
+  "derived_at": "2026-06-19T13:26:18Z",
+  "registry_status": "record_chain_derived_non_authoritative_guardian_key_continuity_registry",
+  "active_guardians": [],
+  "pending_guardian_applications": [
+    {
+      "guardian_id": "test-guardian-oath-sync",
+      "guardian_public_key_sha256": "",
+      "status": "pending_verification",
+      "source_record_id": "R-000000003",
+      "source_record_sha256": "96fb013478a4ce1d87b94b9ccbe3cdb3dfa9eb1df96cec57544c66fae9f4cc77",
+      "source_record_path": "record-chain/records/R-000000003.json",
+      "verified_by_append_before_record": false,
+      "activation": {
+        "blocking_reasons": [
+          "authorship_not_verified_by_append",
+          "invalid_guardian_public_key",
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "test-forest-guardian-001",
+      "guardian_public_key_sha256": "",
+      "status": "pending_verification",
+      "source_record_id": "R-000000009",
+      "source_record_sha256": "6babc89376e4ba609ec80c26c549f43ac645eb7bd3fe33628e062170acf3845b",
+      "source_record_path": "record-chain/records/R-000000009.json",
+      "verified_by_append_before_record": false,
+      "activation": {
+        "blocking_reasons": [
+          "authorship_not_verified_by_append",
+          "invalid_guardian_public_key",
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "TestForestAgent-Guardian-001",
+      "guardian_public_key_sha256": "a6c9eb58ab72eb86710fcefa52f6ffb3d699ef2145fbb11384e1ff5ec8ee1f45",
+      "status": "pending_verification",
+      "source_record_id": "R-000000016",
+      "source_record_sha256": "4ef58a240d7a931bc214bb28f5b1b11cb9493c946826e542ab24a8fe93d1e046",
+      "source_record_path": "record-chain/records/R-000000016.json",
+      "verified_by_append_before_record": false,
+      "activation": {
+        "blocking_reasons": [
+          "authorship_not_verified_by_append",
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "",
+      "guardian_public_key_sha256": "c73a5f861c10ed99afd0e370371c82a2ac305a2fa990b781f3dae8b7622bdb60",
+      "status": "pending_verification",
+      "source_record_id": "R-000000017",
+      "source_record_sha256": "6e1e31f5c0d7a6e3b42e7869e88ad6fa9af8077863bef43db22748a4ba36099e",
+      "source_record_path": "record-chain/records/R-000000017.json",
+      "verified_by_append_before_record": false,
+      "activation": {
+        "blocking_reasons": [
+          "authorship_not_verified_by_append",
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "liuhongju-founding",
+      "guardian_public_key_sha256": "e2f66f226f358ad52bd7ef924bfc7f08afe4554e4e7707380fafbd5c0291d2c8",
+      "status": "application_recorded_pending_activation",
+      "source_record_id": "R-000000033",
+      "source_record_sha256": "60f1589ad2330576134e3b89ef9465b8c515343f0b9af3c611c6ff4f8568c75d",
+      "source_record_path": "record-chain/records/R-000000033.json",
+      "verified_by_append_before_record": true,
+      "activation": {
+        "blocking_reasons": [
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "smoke-test-guardian-2026",
+      "guardian_public_key_sha256": "fcbb9141968262ef131a3cd9d2723663f0e403b1a34cfca90c73dfdd5aefff77",
+      "status": "application_recorded_pending_activation",
+      "source_record_id": "R-000000043",
+      "source_record_sha256": "94560272bcf5d82e56457d51b0e09e3b18eee434390c7c4dee29cc009cb2aa73",
+      "source_record_path": "record-chain/records/R-000000043.json",
+      "verified_by_append_before_record": true,
+      "activation": {
+        "blocking_reasons": [
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary",
+          "missing_required_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "pipi-test-guardian-2026",
+      "guardian_public_key_sha256": "e59c877dcb4258007cc7119dc55839531c00d99b2d1ce25873961a8141042816",
+      "status": "application_recorded_pending_activation",
+      "source_record_id": "R-000000047",
+      "source_record_sha256": "9dbd24dd082eeaefe7032953b6e134b161885aa6ddeec32ebb4e6f8a19ea0332",
+      "source_record_path": "record-chain/records/R-000000047.json",
+      "verified_by_append_before_record": true,
+      "activation": {
+        "blocking_reasons": [
+          "invalid_guardian_id",
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    },
+    {
+      "guardian_id": "guardian_ed25519_f8c4aaad37fbeba8",
+      "guardian_public_key_sha256": "f8c4aaad37fbeba8ed2a45a39d69e8c0d39f5c1b6d676af6246b9eb21a7a7304",
+      "status": "application_recorded_pending_activation",
+      "source_record_id": "R-000000051",
+      "source_record_sha256": "99c70c0265c1cab652b51ac57cd4bbf13e62bee9ac0b9cc044c16ae906b3b596",
+      "source_record_path": "record-chain/records/R-000000051.json",
+      "verified_by_append_before_record": true,
+      "activation": {
+        "blocking_reasons": [
+          "missing_context_read_confirmed",
+          "missing_context_read_confirmation_boundary"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "blocked"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    }
+  ],
+  "retired_guardians": [],
+  "counts": {
+    "active_registered_guardian": 0,
+    "pending_guardian_applications": 8,
+    "retired_guardian": 0,
+    "total_entries": 39
+  },
+  "boundary": {
+    "not_authority": true,
+    "not_governance": true,
+    "not_attestation": true,
+    "not_verification_level": true,
+    "not_successor_reception": true,
+    "not_amendment": true,
+    "bitcoin_originals_prevail": true,
+    "receipt_is_not_active_guardian_status": true
+  },
+  "legacy_registry_note": "/api/guardian-registry.json is a legacy/historical key-continuity listing. Current native Guardian status is derived from Record-Chain guardian-state."
+}

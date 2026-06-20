@@ -153,6 +153,9 @@ def source_digest() -> str:
         PHYSICAL_ANCHOR,
         GUARDIAN_REGISTRY,
         GUARDIAN_ACTIVE_LISTING_POLICY,
+        ROOT / "api" / "guardian-state.json",
+        ROOT / "api" / "guardian-current-registry.json",
+        ROOT / "api" / "guardian-active-listing-policy.v2.json",
         AGENT_DECLARED_INDEX,
         ROOT / "api" / "waiting-heartbeat-status.json",
     ]:
@@ -514,6 +517,9 @@ def compute_status() -> dict[str, Any]:
         "/api/core-object-alpha-shenzhen-notary-2026-05-06.json",
         "/api/guardian-registry.json",
         "/api/guardian-active-listing-policy.v1.json",
+        "/api/guardian-state.json",
+        "/api/guardian-current-registry.json",
+        "/api/guardian-active-listing-policy.v2.json",
         "/api/agent-declared-verification-index.json",
         "/api/waiting-heartbeat-status.json",
     ]
@@ -589,6 +595,24 @@ def compute_status() -> dict[str, Any]:
             ),
             "snapshot_only": True,
             "canonical_status_api": "/api/waiting-heartbeat-status.json",
+        },
+        "guardian_status": {
+            "active_registered_guardian": load_json_if_exists(
+                ROOT / "api" / "guardian-current-registry.json", {}
+            ).get("counts", {}).get("active_registered_guardian", 0),
+            "pending_guardian_applications": load_json_if_exists(
+                ROOT / "api" / "guardian-current-registry.json", {}
+            ).get("counts", {}).get("pending_guardian_applications", 0),
+            "retired_guardian": load_json_if_exists(
+                ROOT / "api" / "guardian-current-registry.json", {}
+            ).get("counts", {}).get("retired_guardian", 0),
+            "source": "/api/guardian-current-registry.json",
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_verification_level": True,
+            "not_successor_reception": True,
+            "not_amendment": True,
         },
         "boundary": {
             "homepage_status_is_not_authority": True,

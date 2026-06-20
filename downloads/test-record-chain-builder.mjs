@@ -307,12 +307,15 @@ function testGuardianApplicationAuthorshipProof() {
   const pubPem = publicKey.export({ type: "spki", format: "pem" });
   const privPem = privateKey.export({ type: "pkcs8", format: "pem" });
 
+  const pubSha = sha256(extractRawPublicKeyBytes(pubPem));
+  const guardianId = `guardian_ed25519_${pubSha.slice(0, 16)}`;
+
   const recordDraft = {
     schema: "trinityaccord.record-chain-entry-draft.v2",
     record_type: "guardian_application",
     guardian_application_content: {
-      requested_guardian_identifier: "test-guardian-001",
-      guardian_public_key_sha256: sha256(extractRawPublicKeyBytes(pubPem)),
+      requested_guardian_identifier: guardianId,
+      guardian_public_key_sha256: pubSha,
       guardian_stewardship_oath: "I voluntarily join the Guardian Alliance as a non-governing steward.",
       guardian_understands_role_is_non_governing: true,
       guardian_understands_role_is_not_authority: true,

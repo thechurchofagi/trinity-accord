@@ -367,5 +367,22 @@
   },
   "total_records": 53,
   "committed_records": 53,
-  "pending_records": 0
+  "pending_records": 0,
+  "guardian_status": {
+    "source": "/record-chain/indexes/guardian-state.json",
+    "api": "/api/guardian-current-registry.json",
+    "policy": "/api/guardian-active-listing-policy.v2.json",
+    "counts": {
+      "active_registered_guardian": 0,
+      "pending_guardian_applications": 8,
+      "retired_guardian": 0,
+      "total_entries": 39
+    },
+    "active_guardian_status_is_not_authority": true,
+    "active_guardian_status_is_not_governance": true,
+    "active_guardian_status_is_not_attestation": true,
+    "active_guardian_status_is_not_verification_level": true,
+    "active_guardian_status_is_not_successor_reception": true,
+    "active_guardian_status_is_not_amendment": true
+  }
 }

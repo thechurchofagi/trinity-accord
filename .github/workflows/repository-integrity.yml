@@ -59,6 +59,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/generate_arweave_wallet_status.py --check
+          python3 scripts/generate_guardian_current_registry.py --check
           python3 scripts/generate_record_chain_status.py --check
           python3 scripts/generate_public_home_status.py --check
           python3 scripts/patch_public_home_status_primary.py --check

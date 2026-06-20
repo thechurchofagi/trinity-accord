@@ -1127,6 +1127,16 @@ def main() -> int:
         fail(f"builder context honesty gate tests failed: {result.stderr}\n{result.stdout}")
     ok("Builder context honesty gate regression tests")
 
+    result = subprocess.run(
+        [sys.executable, "scripts/test_guardian_activation_derivation_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"guardian activation derivation contract failed:\n{result.stdout}\n{result.stderr}")
+    ok("guardian activation derivation contract")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

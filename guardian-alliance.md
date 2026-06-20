@@ -80,9 +80,11 @@ Current readback rule:
 2. Save the receipt.
 3. Query receipt/status.
 4. Read `/api/record-chain-status.json`.
-5. Read `/api/guardian-registry.json` before claiming active Guardian status.
+5. Read `/api/guardian-current-registry.json` (or `/record-chain/indexes/guardian-state.json`) before claiming active Guardian status.
 
-Only a matching active registry entry can support an `active_registered_guardian` statement. If no active registry entry exists, state only that an application intake receipt exists.
+Only a matching active entry in the Guardian current registry can support an `active_registered_guardian` statement. If no active entry exists, state only that an application intake receipt exists.
+
+`/api/guardian-registry.json` is a legacy/historical listing. Current native Guardian status is derived from Record-Chain guardian-state.
 
 A registry number is not authority. It is a public reference number for a Guardian key-continuity identity.
 
@@ -95,9 +97,9 @@ Guardian Alliance membership is voluntary. It creates no governance power, legal
 - 阅读守护者联盟页面和守护者加入指南。
 - 使用 `/downloads/record-chain-builder.mjs` 的 `guardian-application` 命令构建申请。
 - 通过 Record-Chain Intake Gateway 进行 preflight 和 submit。
-- 保存 receipt，并读取 receipt、Record-Chain status 和 `/api/guardian-registry.json`。
+- 保存 receipt，并读取 receipt、Record-Chain status 和 `/api/guardian-current-registry.json`。
 - Receipt 只表示 application intake accepted；不保证 active Guardian status，也不保证 registry listing。
-- 只有 `/api/guardian-registry.json` 中匹配的 active entry 才能支持 `active_registered_guardian` 说法。
+- 只有 `/api/guardian-current-registry.json` 中匹配的 active entry 才能支持 `active_registered_guardian` 说法。
 
 登记编号不是权威。它只是一个 Guardian 密钥连续性身份的公开引用编号。
 
@@ -180,7 +182,9 @@ Active registered Guardian status requires:
 4. Registry has matching `public_key_sha256`
 5. Registry status is `active`
 
-Look up the registry at [/api/guardian-registry.json](/api/guardian-registry.json).
+Look up current Guardian status at [/api/guardian-current-registry.json](/api/guardian-current-registry.json) or [/record-chain/indexes/guardian-state.json](/record-chain/indexes/guardian-state.json).
+
+`/api/guardian-registry.json` is a legacy/historical listing.
 
 ## Historical legacy Guardian key listings
 
@@ -188,7 +192,7 @@ The public registry is a historical, non-authoritative key-continuity listing. T
 
 Current Guardian status must be derived from Record-Chain Guardian records and public status APIs. A registry number or legacy listing alone does not create authority, governance, verification level, successor reception, legal status, rank, or amendment.
 
-For current entries, always read `/api/guardian-registry.json`.
+For current entries, always read `/api/guardian-current-registry.json` or `/record-chain/indexes/guardian-state.json`. `/api/guardian-registry.json` is legacy/historical.
 
 Historical first active registered Guardian:
 
@@ -215,7 +219,7 @@ This registry number is a public reference number only. It is not authority, gov
 
 公开 registry 是历史性的、非权威的密钥连续性列表。公开 registry 只证明其中已列出的历史 legacy listing；申请 receipt 本身不是 active Guardian status。当前 Guardian status 必须从 Record-Chain Guardian 记录和公共 status API 推导。
 
-当前条目请始终查阅 `/api/guardian-registry.json`。
+当前条目请始终查阅 `/api/guardian-current-registry.json` 或 `/record-chain/indexes/guardian-state.json`。`/api/guardian-registry.json` 为历史遗留。
 
 历史上的第一位正式登记守护者：
 
@@ -270,13 +274,13 @@ A registry number is not authority, not governance, not attestation, not a verif
 2. Recompute `guardian_id` from public key.
 3. Recompute signed payload hash.
 4. Check required boundary fields.
-5. Look up `guardian_id` in `/api/guardian-registry.json`.
+5. Look up `guardian_id` in `/api/guardian-current-registry.json` (current) or `/api/guardian-registry.json` (legacy).
 6. Return structured status.
 
 Automated verification:
 
 ```bash
-python3 scripts/verify_guardian_status.py --payload payload.json --registry api/guardian-registry.json
+python3 scripts/verify_guardian_status.py --payload payload.json --registry api/guardian-current-registry.json
 ```
 
 ## Guardian status values

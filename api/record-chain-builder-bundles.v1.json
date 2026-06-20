@@ -12,8 +12,8 @@
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
-    "sha256": "52e6c5b35a24544e8b43879bfeb370d83b1069672db4a944cefac170aa285810",
-    "size_bytes": 154619,
+    "sha256": "d4ad9d9bc3550c2bb248c8023220c3674ef5524bdf9cb2fa555b0dd5bf2fbea5",
+    "size_bytes": 155810,
     "supports": [
       "echo",
       "verification",

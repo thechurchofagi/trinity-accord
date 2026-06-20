@@ -139,7 +139,9 @@
   <url><loc>https://www.trinityaccord.org/api/gateway-workflows.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/generated-by-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-active-listing-policy.v2.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-alliance.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-current-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-key-metadata-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-presence-proof-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-principles.json</loc></url>
@@ -147,6 +149,7 @@
   <url><loc>https://www.trinityaccord.org/api/guardian-registry-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-registry.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-retirement-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/guardian-state.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/guardian-verification-result-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/hash-source-classes.json</loc></url>
