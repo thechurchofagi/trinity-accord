@@ -45,8 +45,15 @@ jobs:
       - name: Generate waiting heartbeat status
         run: python3 scripts/generate_waiting_heartbeat_status.py
 
+      - name: Capsule OTS coverage preflight
+        id: capsule_preflight
+        run: |
+          set -euo pipefail
+          python3 scripts/build_waiting_heartbeat_arweave_capsule.py
+
       - name: Build capsule
         id: build
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
           set -euo pipefail
           capsule_path="$(python3 scripts/build_waiting_heartbeat_arweave_capsule.py)"
@@ -55,6 +62,7 @@ jobs:
           echo "heartbeat_id=${heartbeat_id}" >> "$GITHUB_OUTPUT"
 
       - name: Upload capsule
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
           node scripts/arweave_upload_waiting_heartbeat_capsule.mjs \
             --payload "${{ steps.build.outputs.capsule_path }}" \
@@ -62,6 +70,7 @@ jobs:
             --out "record-chain/heartbeat/capsules/${{ steps.build.outputs.heartbeat_id }}.upload-result.json"
 
       - name: Regenerate status and public artifacts
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
           python3 scripts/generate_waiting_heartbeat_status.py
           python3 scripts/update_public_generated_artifacts.py
@@ -69,6 +78,7 @@ jobs:
           python3 scripts/trinity_record_chain.py verify
 
       - name: Commit capsule metadata
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
           set -euo pipefail
           if git diff --quiet; then
@@ -86,3 +96,10 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME:-main}"
           done
           exit 1
+
+      - name: Capsule waiting summary
+        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true'
+        run: |
+          echo "Capsule upload skipped."
+          echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
+          echo "reason=${{ steps.capsule_preflight.outputs.capsule_skip_reason }}"
