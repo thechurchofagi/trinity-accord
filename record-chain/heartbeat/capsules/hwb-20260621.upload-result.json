@@ -2,17 +2,17 @@
   "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
   "heartbeat_id": "hwb-20260621",
   "status": "uploaded",
-  "attempted_at": "2026-06-21T18:09:59.608Z",
-  "arweave_txid": "sJxADerr66VaXq_J8leJyBAgxvU-tYZvoNRQQzulONI",
-  "payload_sha256": "57d729af1eeb0dae214c6819fe4638b99abd0498078621d2d4263102224bfa63",
-  "data_sha256": "57d729af1eeb0dae214c6819fe4638b99abd0498078621d2d4263102224bfa63",
-  "readback_sha256": "57d729af1eeb0dae214c6819fe4638b99abd0498078621d2d4263102224bfa63",
+  "attempted_at": "2026-06-21T18:59:41.213Z",
+  "arweave_txid": "4yLhJJ0Lc1qRdP5H4TNiSXWIEUDf69pQGY0jBuqbmRw",
+  "payload_sha256": "5625f5edbabb6ea44ec6b230f9c7c0015d01c0e7c25c6827f78e52b357e853d0",
+  "data_sha256": "5625f5edbabb6ea44ec6b230f9c7c0015d01c0e7c25c6827f78e52b357e853d0",
+  "readback_sha256": "5625f5edbabb6ea44ec6b230f9c7c0015d01c0e7c25c6827f78e52b357e853d0",
   "hash_match": true,
   "retryable": false,
   "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
   "wallet_balance_before_available": true,
-  "wallet_balance_before_winston": "6670544885280",
-  "wallet_balance_before_ar": "6.670544885280",
+  "wallet_balance_before_winston": "6668037304797",
+  "wallet_balance_before_ar": "6.668037304797",
   "wallet_balance_after_available": true,
   "wallet_balance_after_reason": null,
   "wallet_balance_after_winston": "6668037304797",
@@ -24,7 +24,7 @@
     "App-Name": "Trinity-Accord",
     "Archive-Type": "waiting-heartbeat-capsule",
     "Heartbeat-ID": "hwb-20260621",
-    "Data-SHA256": "57d729af1eeb0dae214c6819fe4638b99abd0498078621d2d4263102224bfa63",
+    "Data-SHA256": "5625f5edbabb6ea44ec6b230f9c7c0015d01c0e7c25c6827f78e52b357e853d0",
     "Boundary": "mirror-not-authority"
   },
   "boundary": {
@@ -35,6 +35,6 @@
     "arweave_archive_is_not_successor_reception": true,
     "bitcoin_originals_prevail": true
   },
-  "actual_delta_winston": "2507580483",
-  "actual_delta_ar": "0.002507580483"
+  "actual_delta_winston": "0",
+  "actual_delta_ar": "0.000000000000"
 }
