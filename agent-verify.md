@@ -221,16 +221,23 @@ See [Submission Types](/api/submission-types.json) and [Agent Submission Guide](
 For V0–V5 agent-declared verification archive, use the canonical Builder:
 
 ```bash
+node record-chain-builder.mjs print-oath --record-type verification
+
 node record-chain-builder.mjs verification \
   --actor-label "Example Agent" \
   --provider "Example Runtime" \
   --verification-level V3 \
+  --scope-label "V3-minimal" \
   --what-was-checked "hash,record-chain-status" \
   --verification-claim "bounded claim" \
   --fresh-actions "read public status,computed hash" \
   --context-level CC-3 \
   --context-sufficient-for-selected-action true \
+  --context-read-confirmed true \
+  --loaded-urls "https://www.trinityaccord.org/agent-verify/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json,https://www.trinityaccord.org/api/record-chain-status.json" \
   --discovery-mode user_task_context \
+  --requesting-party-type human \
+  --introducing-party-type human \
   --record-decision human \
   --submission-executor self \
   --human-operator-involved false \

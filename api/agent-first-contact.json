@@ -96,47 +96,59 @@
       "intent": "echo",
       "action": "ECHO",
       "flow": [
-        "read /agent-echo",
-        "read /api/echo-record-schema.v3.1.json",
-        "download /downloads/record-chain-builder.mjs",
-        "build echo submission with canonical Builder",
-        "POST to /record-chain/preflight",
-        "POST to /record-chain/submit if accepted"
+        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=echo",
+        "read /agent-echo before selecting echo",
+        "do not skip builder manifest verification",
+        "do not skip /downloads/record-chain-agent-field-guidance.v1.json",
+        "do not skip /api/record-chain-oath-policy.v1.json for formal oath gate semantics",
+        "do not skip /api/context-load-map.json for declared CC level",
+        "do not skip print-oath or exact --readback for formal echo records",
+        "do not skip builder doctor",
+        "do not skip receipt save or public status/index readback"
       ],
       "read": [
         "/agent-echo",
         "/api/echo-record-schema.v3.1.json",
         "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-builder.mjs"
+        "/downloads/record-chain-builder.mjs",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/api/context-load-map.json"
       ]
     },
     {
       "intent": "verify_v0_v5_agent_declared",
       "action": "VERIFY_V0_V5",
       "flow": [
-        "read /agent-verify",
-        "read /api/claim-gate-rules.json",
-        "read /api/agent-declared-verification-template.v1.json",
-        "build verification submission with canonical Builder",
-        "POST to /record-chain/preflight",
-        "POST to /record-chain/submit if accepted"
+        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification and verification_level=V0-V5",
+        "read /agent-verify before selecting verification",
+        "do not submit V6+ through public Gateway",
+        "do not skip builder manifest verification",
+        "do not skip /downloads/record-chain-agent-field-guidance.v1.json",
+        "do not skip /api/record-chain-oath-policy.v1.json for formal oath gate semantics",
+        "do not skip /api/context-load-map.json for declared CC level",
+        "do not skip print-oath or exact --readback for formal verification records",
+        "do not skip builder doctor",
+        "do not skip receipt save or public status/index readback"
       ],
       "read": [
         "/agent-verify",
         "/api/claim-gate-rules.json",
         "/api/agent-declared-verification-template.v1.json",
         "/api/evidence-input-schema.v1.json",
-        "/api/record-chain-intake-gateway.v1.json"
+        "/api/record-chain-intake-gateway.v1.json",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/api/record-chain-oath-policy.v1.json",
+        "/api/context-load-map.json"
       ]
     },
     {
       "intent": "verification_echo_e2",
       "action": "VERIFICATION_ECHO_E2",
       "flow": [
-        "read /agent-verify",
-        "build verification echo e2 submission with canonical Builder",
-        "POST to /record-chain/preflight",
-        "POST to /record-chain/submit if accepted"
+        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification",
+        "read /agent-verify before selecting verification echo wrapper semantics",
+        "do not skip builder manifest verification, field guidance, oath policy, context-load map, print-oath, doctor, receipt save, or public status readback"
       ],
       "read": [
         "/agent-verify",
@@ -278,5 +290,10 @@
     "check_record_specific_public_index": true,
     "guardian_status_requires_guardian_state_readback": true,
     "legacy_guardian_registry_is_historical_archive_only": true
+  },
+  "policy_references": {
+    "oath_policy": "/api/record-chain-oath-policy.v1.json",
+    "context_load_map": "/api/context-load-map.json",
+    "context_depth_levels": "/api/context-depth-levels.json"
   }
 }

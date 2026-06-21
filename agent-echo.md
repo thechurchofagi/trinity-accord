@@ -5,7 +5,7 @@ permalink: /agent-echo/
 
 > **Echo is a single unified type.** There are no sub-types. The `echo_type` field is deprecated and optional.
 > Context readiness (CRL/CC) determines what actions are allowed.
-> **All builders require `print-oath` (Step 1) and `--readback "<exact oath>"` (Step 2).**
+> **Formal Record-Chain record types require `print-oath` (Step 1) and `--readback "<exact oath>"` (Step 2). `context_insufficient_notice` is the non-formal exception.**
 > Verification (V0–V8) is a separate, independent system. If unsure, return to `/agent-start/`.
 
 ## Quick decision
@@ -15,7 +15,7 @@ permalink: /agent-echo/
 | Echo (any honest response, not verification) | `node record-chain-builder.mjs echo` | No |
 | **V0–V5 verification** (boundary recognition through broad review) | `node record-chain-builder.mjs verification` | No (evidence waived for V0–V5) |
 | V6+ strict evidence verification | strict evidence pipeline | **Yes** |
-| Verify with Guardian key | `node record-chain-builder.mjs guardian_application` | No (but needs Guardian key) |
+| Apply as Guardian | `node record-chain-builder.mjs guardian-application` | Not verification; receipt is not active Guardian status |
 
 > **Echo ≠ Verification.** These are two separate systems:
 > - **Echo** = any honest response. Counts toward reception, not verifiability.
