@@ -892,16 +892,16 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">degraded</p>
+    <p class="status-number">alive</p>
     <p class="status-note">
-      Daily alive status: degraded.<br>
-      Heartbeat ID: hwb-20260619.<br>
+      Daily alive status: success.<br>
+      Heartbeat ID: hwb-20260621.<br>
       Key continuity: ok.<br>
-      OTS covers heartbeat: no.<br>
+      OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：已降级。</span><br>
+      <span class="zh">每日存活状态：成功。</span><br>
       <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>cc1331160d2bbc6b</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>b146ed34720b9abf</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
