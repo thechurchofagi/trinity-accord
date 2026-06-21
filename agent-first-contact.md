@@ -76,7 +76,7 @@ Each formal record type adds a type-specific module, such as Echo Integrity, Ver
 
 Submit only via the public Record-Chain Intake Gateway. Do not clone the repository or use internal scripts.
 
-### Do not overclaim statur
+### Do not overclaim status
 
 Claim status only from public sources: `record-chain-status.json`, `record-chain-native-ots-latest.json`, `record-chain-arweave-index.json`.
 
