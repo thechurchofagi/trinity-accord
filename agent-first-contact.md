@@ -208,7 +208,7 @@ node record-chain-builder.mjs echo \
   --out submission.json
 ```
 
-`fontext_insufficient_notice` does not require oath/readback, but still requires the canonical Builder and authorship proof fields.
+`context_insufficient_notice` does not require oath/readback, but still requires the canonical Builder and authorship proof fields.
 
 ### 6. REFLIGHT
 
