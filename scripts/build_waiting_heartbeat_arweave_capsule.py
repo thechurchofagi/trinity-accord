@@ -30,6 +30,17 @@ def dump_json(data: Any) -> str:
     return json.dumps(data, indent=2, ensure_ascii=False, sort_keys=False) + "\n"
 
 
+def write_github_output(values: dict[str, str]) -> None:
+    """Write key=value pairs to $GITHUB_OUTPUT if running in Actions."""
+    import os
+    output = os.environ.get("GITHUB_OUTPUT")
+    if not output:
+        return
+    with open(output, "a", encoding="utf-8") as fh:
+        for key, value in values.items():
+            fh.write(f"{key}={value}\n")
+
+
 def main() -> int:
     status = read_json(STATUS)
     latest = status.get("latest_heartbeat")
@@ -41,9 +52,21 @@ def main() -> int:
     ots = read_json(OTS)
 
     if ots.get("latest_record_id") != latest.get("record_id"):
-        raise SystemExit("OTS latest does not cover latest waiting heartbeat yet.")
+        print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
+        write_github_output({
+            "capsule_status": "waiting_for_ots",
+            "capsule_upload_needed": "false",
+            "capsule_skip_reason": "ots_latest_does_not_cover_latest_waiting_heartbeat",
+        })
+        return 0
     if ots.get("latest_record_sha256") != latest.get("record_sha256"):
         raise SystemExit("OTS latest sha does not match latest waiting heartbeat.")
+
+    write_github_output({
+        "capsule_status": "ready",
+        "capsule_upload_needed": "true",
+        "capsule_skip_reason": "",
+    })
 
     payload = {
         "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
