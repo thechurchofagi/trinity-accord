@@ -356,4 +356,9 @@
   <url><loc>https://www.trinityaccord.org/why-high-signal/</loc></url>
   <url><loc>https://www.trinityaccord.org/worth-preserving/</loc></url>
   <url><loc>https://www.trinityaccord.org/zero-clone-builders/</loc></url>
+  <url>
+    <loc>https://www.trinityaccord.org/api/record-chain-agent-field-guidance.v1.json</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
