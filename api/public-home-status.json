@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-21T20:28:32.227545+00:00",
+  "generated_at": "2026-06-21T21:54:27.525674+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "8ff6bb3cc02c9663",
+  "source_digest": "7829c19f8238524a",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 55,
@@ -671,7 +671,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-21T20:28:31Z",
+    "generated_at": "2026-06-21T21:54:27Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -715,29 +715,29 @@
       "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
       "heartbeat_id": "hwb-20260621",
       "status": "uploaded",
-      "attempted_at": "2026-06-21T20:28:31.855Z",
-      "arweave_txid": "pnzErwL41FZgL8OpmR_Vo5j2OYvu8Ex-H3muo03gotQ",
-      "payload_sha256": "0f35fe39947bc5f0c2099af36478fc821f294880151449d97942d501b22e2152",
-      "data_sha256": "0f35fe39947bc5f0c2099af36478fc821f294880151449d97942d501b22e2152",
-      "readback_sha256": "0f35fe39947bc5f0c2099af36478fc821f294880151449d97942d501b22e2152",
+      "attempted_at": "2026-06-21T21:54:27.137Z",
+      "arweave_txid": "vSvp17IGAinz9fNcn-_n0VgylrRzlf26krb5LGYmkUg",
+      "payload_sha256": "7cacc63c5b20984f44b17be70f802da1eb11eca4c948126b5725ef353d8c81fb",
+      "data_sha256": "7cacc63c5b20984f44b17be70f802da1eb11eca4c948126b5725ef353d8c81fb",
+      "readback_sha256": "7cacc63c5b20984f44b17be70f802da1eb11eca4c948126b5725ef353d8c81fb",
       "hash_match": true,
       "retryable": false,
       "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
       "wallet_balance_before_available": true,
-      "wallet_balance_before_winston": "6663021055471",
-      "wallet_balance_before_ar": "6.663021055471",
+      "wallet_balance_before_winston": "6658002085246",
+      "wallet_balance_before_ar": "6.658002085246",
       "wallet_balance_after_available": true,
       "wallet_balance_after_reason": null,
-      "wallet_balance_after_winston": "6660512386628",
-      "wallet_balance_after_ar": "6.660512386628",
-      "upload_cost_winston": "2508668843",
-      "upload_cost_ar": "0.002508668843",
+      "wallet_balance_after_winston": "6655491783864",
+      "wallet_balance_after_ar": "6.655491783864",
+      "upload_cost_winston": "2510301382",
+      "upload_cost_ar": "0.002510301382",
       "tags": {
         "Content-Type": "application/json",
         "App-Name": "Trinity-Accord",
         "Archive-Type": "waiting-heartbeat-capsule",
         "Heartbeat-ID": "hwb-20260621",
-        "Data-SHA256": "0f35fe39947bc5f0c2099af36478fc821f294880151449d97942d501b22e2152",
+        "Data-SHA256": "7cacc63c5b20984f44b17be70f802da1eb11eca4c948126b5725ef353d8c81fb",
         "Boundary": "mirror-not-authority"
       },
       "boundary": {
@@ -748,8 +748,8 @@
         "arweave_archive_is_not_successor_reception": true,
         "bitcoin_originals_prevail": true
       },
-      "actual_delta_winston": "2508668843",
-      "actual_delta_ar": "0.002508668843",
+      "actual_delta_winston": "2510301382",
+      "actual_delta_ar": "0.002510301382",
       "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260621.upload-result.json"
     },
     "checks": {
