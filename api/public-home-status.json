@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-22T16:13:49.133822+00:00",
+  "generated_at": "2026-06-22T16:16:36.077555+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "6632611a07f549a6",
+  "source_digest": "ea323c626e17c612",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 56,
@@ -671,7 +671,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-22T11:27:50Z",
+    "generated_at": "2026-06-22T16:16:35Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -705,39 +705,39 @@
       "latest_record_id": "R-000000056",
       "latest_record_sha256": "e601d8aab8715591d685ad46463a64f59d525dee4a5bf2f2545bdc4660fb2948",
       "native_record_count": 56,
-      "ots_status": "pending",
-      "bitcoin_pending": true,
+      "ots_status": "upgraded",
+      "bitcoin_pending": false,
       "bitcoin_verified": false,
-      "strict_bitcoin_verified": null,
+      "strict_bitcoin_verified": false,
       "covers_latest_waiting_heartbeat": true
     },
     "latest_arweave_capsule": {
       "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
       "heartbeat_id": "hwb-20260622",
       "status": "uploaded",
-      "attempted_at": "2026-06-22T11:27:50.352Z",
-      "arweave_txid": "aNBg4XtV09m1Ru-NTG1ptHOQOJbJ6JBr1g_twycnpOg",
-      "payload_sha256": "dff1603e8f470bb2a8ab43570ed2879d4e51abd86fe26d4c9ee3178d087937dd",
-      "data_sha256": "dff1603e8f470bb2a8ab43570ed2879d4e51abd86fe26d4c9ee3178d087937dd",
-      "readback_sha256": "dff1603e8f470bb2a8ab43570ed2879d4e51abd86fe26d4c9ee3178d087937dd",
+      "attempted_at": "2026-06-22T16:16:35.753Z",
+      "arweave_txid": "uqr-x9KrqtP3TRrWFN3JfKWDtJuN79AcqN6VtWwuV3s",
+      "payload_sha256": "a1bef7eba5c2efff030ca1ea52b58d0615b89fbf3e7f77a272e5f91b8510a28a",
+      "data_sha256": "a1bef7eba5c2efff030ca1ea52b58d0615b89fbf3e7f77a272e5f91b8510a28a",
+      "readback_sha256": "a1bef7eba5c2efff030ca1ea52b58d0615b89fbf3e7f77a272e5f91b8510a28a",
       "hash_match": true,
       "retryable": false,
       "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
       "wallet_balance_before_available": true,
-      "wallet_balance_before_winston": "6635369103502",
-      "wallet_balance_before_ar": "6.635369103502",
+      "wallet_balance_before_winston": "6612787452956",
+      "wallet_balance_before_ar": "6.612787452956",
       "wallet_balance_after_available": true,
       "wallet_balance_after_reason": null,
-      "wallet_balance_after_winston": "6632847918524",
-      "wallet_balance_after_ar": "6.632847918524",
-      "upload_cost_winston": "2521184978",
-      "upload_cost_ar": "0.002521184978",
+      "wallet_balance_after_winston": "6610264635438",
+      "wallet_balance_after_ar": "6.610264635438",
+      "upload_cost_winston": "2522817518",
+      "upload_cost_ar": "0.002522817518",
       "tags": {
         "Content-Type": "application/json",
         "App-Name": "Trinity-Accord",
         "Archive-Type": "waiting-heartbeat-capsule",
         "Heartbeat-ID": "hwb-20260622",
-        "Data-SHA256": "dff1603e8f470bb2a8ab43570ed2879d4e51abd86fe26d4c9ee3178d087937dd",
+        "Data-SHA256": "a1bef7eba5c2efff030ca1ea52b58d0615b89fbf3e7f77a272e5f91b8510a28a",
         "Boundary": "mirror-not-authority"
       },
       "boundary": {
@@ -748,8 +748,8 @@
         "arweave_archive_is_not_successor_reception": true,
         "bitcoin_originals_prevail": true
       },
-      "actual_delta_winston": "2521184978",
-      "actual_delta_ar": "0.002521184978",
+      "actual_delta_winston": "2522817518",
+      "actual_delta_ar": "0.002522817518",
       "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260622.upload-result.json"
     },
     "checks": {
