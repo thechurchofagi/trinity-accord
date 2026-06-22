@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>4fa202cec99260c3</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>e9e604927cd50837</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
