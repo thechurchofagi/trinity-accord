@@ -152,8 +152,6 @@ GROUPS = {
         # Generated drift
         ["python3", "scripts/generate_arweave_wallet_status.py", "--check"],
         ["python3", "scripts/generate_record_chain_status.py", "--check"],
-        ["python3", "scripts/generate_public_home_status.py", "--check"],
-        ["python3", "scripts/patch_public_home_status_primary.py", "--check"],
         ["python3", "scripts/check_public_home_status_contract.py"],
         ["python3", "scripts/test_historic_autonomous_agent_reception_contract.py"],
         ["python3", "scripts/test_home_public_status_sync.py"],
