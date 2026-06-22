@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: waiting-heartbeat-capsule
+  group: main-write-lock
   cancel-in-progress: false
 
 permissions:
@@ -39,8 +39,11 @@ jobs:
           python3 -m pip install -r requirements-ci.txt
           npm ci
 
-      - name: Rebase
-        run: git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+      - name: Rebase onto latest main
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Generate waiting heartbeat status
         run: python3 scripts/generate_waiting_heartbeat_status.py
@@ -81,20 +84,67 @@ jobs:
         if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
           set -euo pipefail
-          if git diff --quiet; then
-            echo "No changes."
-            exit 0
-          fi
+
           git config user.name "trinity-waiting-heartbeat-bot"
           git config user.email "actions@github.com"
-          git add record-chain/heartbeat api/waiting-heartbeat-status.json api/public-home-status.json index.md sitemap.xml
+
+          regenerate_status_artifacts() {
+            python3 scripts/generate_waiting_heartbeat_status.py
+            python3 scripts/update_public_generated_artifacts.py
+            python3 scripts/generate_public_home_status.py --check
+            python3 scripts/trinity_record_chain.py verify
+          }
+
+          stage_capsule_metadata() {
+            git status --short
+            git add -A \
+              record-chain/heartbeat \
+              api/waiting-heartbeat-status.json \
+              api/public-home-status.json \
+              index.md \
+              sitemap.xml
+          }
+
+          stage_capsule_metadata
+
+          if git diff --cached --quiet; then
+            echo "No generated capsule metadata changes to commit."
+            exit 0
+          fi
+
           git commit -m "heartbeat: archive waiting heartbeat capsule"
+
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Worktree dirty after commit; generated files were not fully staged."
+            git status --short
+            exit 1
+          fi
+
           for attempt in 1 2 3; do
-            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+            if git push origin HEAD:main; then
+              echo "Push succeeded."
               exit 0
             fi
-            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+
+            echo "Push rejected; remote main advanced. Rebasing and regenerating. Attempt ${attempt}."
+            git fetch origin main --prune
+            git rebase origin/main
+
+            regenerate_status_artifacts
+            stage_capsule_metadata
+
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+
+            if ! git diff --quiet || ! git diff --cached --quiet; then
+              echo "Worktree dirty after amend; refusing to push."
+              git status --short
+              exit 1
+            fi
           done
+
+          echo "Failed to push after retries."
           exit 1
 
       - name: Capsule waiting summary
