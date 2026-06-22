@@ -895,7 +895,7 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">alive</p>
     <p class="status-note">
       Daily alive status: success.<br>
-      Heartbeat ID: hwb-20260621.<br>
+      Heartbeat ID: hwb-20260622.<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
@@ -912,7 +912,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>bee9accb678294ea</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>7cf1e931c4526a29</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
