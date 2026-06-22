@@ -100,6 +100,7 @@ jobs:
             git add -A \
               record-chain/heartbeat \
               api/waiting-heartbeat-status.json \
+              api/record-chain-overlays.json \
               api/public-home-status.json \
               index.md \
               sitemap.xml
@@ -114,7 +115,7 @@ jobs:
 
           git commit -m "heartbeat: archive waiting heartbeat capsule"
 
-          if ! git diff --quiet || ! git diff --cached --quiet; then
+          if [ -n "$(git status --porcelain)" ]; then
             echo "Worktree dirty after commit; generated files were not fully staged."
             git status --short
             exit 1
@@ -137,7 +138,7 @@ jobs:
               git commit --amend --no-edit
             fi
 
-            if ! git diff --quiet || ! git diff --cached --quiet; then
+            if [ -n "$(git status --porcelain)" ]; then
               echo "Worktree dirty after amend; refusing to push."
               git status --short
               exit 1

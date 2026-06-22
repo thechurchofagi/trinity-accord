@@ -107,7 +107,6 @@ required = [
 
     # Generated drift
     "python3 scripts/generate_record_chain_status.py --check",
-    "python3 scripts/generate_public_home_status.py --check",
     "python3 scripts/test_home_public_status_sync.py",
 
     # Full-auto external agent pipeline

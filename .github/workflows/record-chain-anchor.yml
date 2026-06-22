@@ -62,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet; then
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
             echo "No anchor updates."
             exit 0
           fi
@@ -72,7 +72,7 @@ jobs:
 
           stage_anchor_updates() {
             git status --short
-            git add record-chain/ api/record-chain-anchor-status.json
+            git add record-chain/ api/record-chain-anchor-status.json api/record-chain-overlays.json
           }
 
           rebuild_anchor_outputs() {
@@ -96,7 +96,7 @@ jobs:
 
           git commit -m "anchor: build record-chain batch and OTS status"
 
-          if ! git diff --quiet || ! git diff --cached --quiet; then
+          if [ -n "$(git status --porcelain)" ]; then
             echo "Worktree dirty after commit; generated files were not fully staged."
             git status --short
             exit 1
@@ -119,7 +119,7 @@ jobs:
               git commit --amend --no-edit
             fi
 
-            if ! git diff --quiet || ! git diff --cached --quiet; then
+            if [ -n "$(git status --porcelain)" ]; then
               echo "Worktree dirty after amend; refusing to push."
               git status --short
               exit 1
