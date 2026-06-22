@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-06-22T23:18:48Z",
+  "generated_at": "2026-06-22T23:45:47Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "success",
@@ -44,17 +44,17 @@
     "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
     "heartbeat_id": "hwb-20260622",
     "status": "uploaded",
-    "attempted_at": "2026-06-22T23:18:47.958Z",
-    "arweave_txid": "VJ2dC7CXEEIHoZKNbiL7EDD3WkNo6iCbP4t9SO60tAU",
-    "payload_sha256": "df0ca15d7beace2e831ebbc58e7585cc9ce5be526697bf6b4759c186a1db6d7f",
-    "data_sha256": "df0ca15d7beace2e831ebbc58e7585cc9ce5be526697bf6b4759c186a1db6d7f",
-    "readback_sha256": "df0ca15d7beace2e831ebbc58e7585cc9ce5be526697bf6b4759c186a1db6d7f",
+    "attempted_at": "2026-06-22T23:45:47.386Z",
+    "arweave_txid": "mRTJLVVKlCxEusRFPAVDc3RpPG-rPVb8_3gPED8Hv6Q",
+    "payload_sha256": "5f5fa916b8ac0e7b9637fe778934d83a00eb23ea15fbfcd567386409284cd013",
+    "data_sha256": "5f5fa916b8ac0e7b9637fe778934d83a00eb23ea15fbfcd567386409284cd013",
+    "readback_sha256": "5f5fa916b8ac0e7b9637fe778934d83a00eb23ea15fbfcd567386409284cd013",
     "hash_match": true,
     "retryable": false,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "wallet_balance_before_available": true,
-    "wallet_balance_before_winston": "6600148333098",
-    "wallet_balance_before_ar": "6.600148333098",
+    "wallet_balance_before_winston": "6597614087805",
+    "wallet_balance_before_ar": "6.597614087805",
     "wallet_balance_after_available": true,
     "wallet_balance_after_reason": null,
     "wallet_balance_after_winston": "6597614087805",
@@ -66,7 +66,7 @@
       "App-Name": "Trinity-Accord",
       "Archive-Type": "waiting-heartbeat-capsule",
       "Heartbeat-ID": "hwb-20260622",
-      "Data-SHA256": "df0ca15d7beace2e831ebbc58e7585cc9ce5be526697bf6b4759c186a1db6d7f",
+      "Data-SHA256": "5f5fa916b8ac0e7b9637fe778934d83a00eb23ea15fbfcd567386409284cd013",
       "Boundary": "mirror-not-authority"
     },
     "boundary": {
@@ -77,8 +77,8 @@
       "arweave_archive_is_not_successor_reception": true,
       "bitcoin_originals_prevail": true
     },
-    "actual_delta_winston": "2534245293",
-    "actual_delta_ar": "0.002534245293",
+    "actual_delta_winston": "0",
+    "actual_delta_ar": "0.000000000000",
     "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260622.upload-result.json"
   },
   "checks": {
