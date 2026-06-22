@@ -14,7 +14,7 @@ on:
     - cron: "17 */6 * * *"
 
 concurrency:
-  group: record-chain-anchor
+  group: main-write-lock
   cancel-in-progress: false
 
 permissions:
@@ -61,22 +61,72 @@ jobs:
       - name: Commit anchor updates
         run: |
           set -euo pipefail
-          if ! git diff --quiet; then
-            git config user.name "trinity-record-chain-bot"
-            git config user.email "actions@github.com"
+
+          if git diff --quiet; then
+            echo "No anchor updates."
+            exit 0
+          fi
+
+          git config user.name "trinity-record-chain-bot"
+          git config user.email "actions@github.com"
+
+          stage_anchor_updates() {
+            git status --short
             git add record-chain/ api/record-chain-anchor-status.json
-            git commit -m "anchor: build record-chain batch and OTS status"
+          }
 
-            for attempt in 1 2 3; do
-              if git push; then
-                exit 0
-              fi
-              printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-              git fetch origin main
-              git rebase origin main || { git rebase --abort; }
-              sleep $((attempt * 5))
-            done
+          rebuild_anchor_outputs() {
+            if [ "${{ github.event.inputs.force_batch }}" = "true" ]; then
+              python scripts/trinity_record_chain.py build-batch --force
+            else
+              python scripts/trinity_record_chain.py build-batch
+            fi
+            python scripts/trinity_record_chain.py ots-stamp
+            python scripts/trinity_record_chain.py ots-upgrade
+            python scripts/trinity_record_chain.py build-anchor-status
+            python scripts/trinity_record_chain.py verify
+          }
 
-            echo "::error::Failed to push anchor updates after retries."
+          stage_anchor_updates
+
+          if git diff --cached --quiet; then
+            echo "No staged anchor updates."
+            exit 0
+          fi
+
+          git commit -m "anchor: build record-chain batch and OTS status"
+
+          if ! git diff --quiet || ! git diff --cached --quiet; then
+            echo "Worktree dirty after commit; generated files were not fully staged."
+            git status --short
             exit 1
           fi
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "Push succeeded."
+              exit 0
+            fi
+
+            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+            git fetch origin main --prune
+            git rebase origin/main
+
+            rebuild_anchor_outputs
+            stage_anchor_updates
+
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+
+            if ! git diff --quiet || ! git diff --cached --quiet; then
+              echo "Worktree dirty after amend; refusing to push."
+              git status --short
+              exit 1
+            fi
+
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push anchor updates after retries."
+          exit 1
