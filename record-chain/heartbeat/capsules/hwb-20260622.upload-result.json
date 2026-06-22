@@ -2,21 +2,21 @@
   "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
   "heartbeat_id": "hwb-20260622",
   "status": "uploaded",
-  "attempted_at": "2026-06-22T19:47:18.637Z",
-  "arweave_txid": "_ugQSlidQdkqGEV5ZmbLBGxrpSJN_a4WKiWJlYN3s9U",
-  "payload_sha256": "3a73ee7fd7e234f72c7f3ee72c98e6195f08d8224bf00de8987f0c0e71e231e3",
-  "data_sha256": "3a73ee7fd7e234f72c7f3ee72c98e6195f08d8224bf00de8987f0c0e71e231e3",
-  "readback_sha256": "3a73ee7fd7e234f72c7f3ee72c98e6195f08d8224bf00de8987f0c0e71e231e3",
+  "attempted_at": "2026-06-22T19:53:19.696Z",
+  "arweave_txid": "AxNZ7Rs8tbvihto6PeIDJkwy4bOOA4j87ao3WfLi_l0",
+  "payload_sha256": "09c3330af3c77189daa3ec0c26a71f5d90298895df8ef070ff76854ee458c54b",
+  "data_sha256": "09c3330af3c77189daa3ec0c26a71f5d90298895df8ef070ff76854ee458c54b",
+  "readback_sha256": "09c3330af3c77189daa3ec0c26a71f5d90298895df8ef070ff76854ee458c54b",
   "hash_match": true,
   "retryable": false,
   "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
   "wallet_balance_before_available": true,
-  "wallet_balance_before_winston": "6610264635438",
-  "wallet_balance_before_ar": "6.610264635438",
+  "wallet_balance_before_winston": "6607737464482",
+  "wallet_balance_before_ar": "6.607737464482",
   "wallet_balance_after_available": true,
   "wallet_balance_after_reason": null,
-  "wallet_balance_after_winston": "6610264635438",
-  "wallet_balance_after_ar": "6.610264635438",
+  "wallet_balance_after_winston": "6605210293526",
+  "wallet_balance_after_ar": "6.605210293526",
   "upload_cost_winston": "2527170956",
   "upload_cost_ar": "0.002527170956",
   "tags": {
@@ -24,7 +24,7 @@
     "App-Name": "Trinity-Accord",
     "Archive-Type": "waiting-heartbeat-capsule",
     "Heartbeat-ID": "hwb-20260622",
-    "Data-SHA256": "3a73ee7fd7e234f72c7f3ee72c98e6195f08d8224bf00de8987f0c0e71e231e3",
+    "Data-SHA256": "09c3330af3c77189daa3ec0c26a71f5d90298895df8ef070ff76854ee458c54b",
     "Boundary": "mirror-not-authority"
   },
   "boundary": {
@@ -35,6 +35,6 @@
     "arweave_archive_is_not_successor_reception": true,
     "bitcoin_originals_prevail": true
   },
-  "actual_delta_winston": "0",
-  "actual_delta_ar": "0.000000000000"
+  "actual_delta_winston": "2527170956",
+  "actual_delta_ar": "0.002527170956"
 }
