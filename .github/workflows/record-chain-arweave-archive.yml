@@ -58,8 +58,7 @@ jobs:
       - name: Rebase before Arweave scan
         run: |
           set -euo pipefail
-          git fetch origin main --prune
-          git rebase origin/main
+          git pull --rebase origin main
 
       - name: Detect Arweave backlog
         id: backlog
@@ -174,7 +173,7 @@ jobs:
 
           assert_clean_worktree() {
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Worktree dirty after archive metadata commit/amend; generated files were not fully staged."
+              printf '%s\n' "Worktree dirty after archive metadata commit/amend; generated files were not fully staged."
               git status --short
               exit 1
             fi
@@ -183,7 +182,7 @@ jobs:
           stage_archive_metadata
 
           if git diff --cached --quiet; then
-            echo "No Arweave archive metadata changes to commit."
+            printf '%s\n' "No Arweave archive metadata changes to commit."
             exit 0
           fi
 
@@ -191,13 +190,12 @@ jobs:
 
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
-              echo "Push succeeded."
+              printf '%s\n' "Push succeeded."
               exit 0
             fi
 
-            echo "Push rejected; remote main advanced. Rebasing and regenerating archive metadata. Attempt ${attempt}."
-            git fetch origin main --prune
-            git rebase origin/main
+            printf '%s\n' "Push rejected; remote main advanced. Rebasing and regenerating archive metadata. Attempt ${attempt}."
+            git pull --rebase origin main
 
             rebuild_archive_outputs
             stage_archive_metadata
@@ -211,5 +209,5 @@ jobs:
             sleep $((attempt * 5))
           done
 
-          echo "::error::Failed to push Arweave archive metadata after retries."
+          printf '%s\n' "::error::Failed to push Arweave archive metadata after retries."
           exit 1
