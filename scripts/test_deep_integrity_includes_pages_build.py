@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""deep-integrity.yml must include pages-build so GitHub Pages/Jekyll smoke runs."""
+"""deep-integrity.yml must run only active grouped CI slices."""
 from pathlib import Path
 import re
 import sys
@@ -37,8 +37,17 @@ else:
             elif line.strip() and not line.startswith("          "):
                 break
 
-if "pages-build" not in groups:
-    print("FAIL: deep-integrity.yml matrix missing pages-build")
+required = {"pages-build"}
+stale = {"guardian", "route-correction", "gateway-workflows"}
+
+missing = sorted(required - set(groups))
+if missing:
+    print(f"FAIL: deep-integrity.yml matrix missing required groups: {missing}")
     sys.exit(1)
 
-print("PASS: deep-integrity.yml includes pages-build")
+present_stale = sorted(stale & set(groups))
+if present_stale:
+    print(f"FAIL: deep-integrity.yml matrix includes stale groups: {present_stale}")
+    sys.exit(1)
+
+print("PASS: deep-integrity.yml includes active pages-build group and excludes stale groups")
