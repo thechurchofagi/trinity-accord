@@ -129,6 +129,8 @@ required = [
 
     # CI hardening
     "python3 scripts/test_run_ci_group_timeouts.py",
+    "python3 scripts/test_waiting_heartbeat_summary_metrics.py",
+    "python3 scripts/test_waiting_heartbeat_homepage_card_metrics.py",
 
     # v30.3 authorship closure
     "python3 scripts/test_zero_clone_authorship_dependency_closure.py",
