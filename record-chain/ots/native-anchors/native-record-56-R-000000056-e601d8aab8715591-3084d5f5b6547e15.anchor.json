@@ -9,7 +9,7 @@
   "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
-  "checked_at": "2026-06-23T04:45:05Z",
+  "checked_at": "2026-06-23T08:45:34Z",
   "created_at": "2026-06-22T09:25:20Z",
   "latest_batch_id": "batch-000002",
   "latest_batch_manifest_sha256": "c73783a816142035d72dcbfd9b8302558611e44f23fa55a0f6fb66fb9f2ec57d",
@@ -95,6 +95,6 @@
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
   "strict_bitcoin_verified": false,
   "strict_verify_unavailable_reason": "no_bitcoin_node",
-  "upgraded_at": "2026-06-23T04:45:05Z",
+  "upgraded_at": "2026-06-23T08:45:34Z",
   "verified_at": null
 }
