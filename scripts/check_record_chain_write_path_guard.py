@@ -55,6 +55,7 @@ BACKLOG_FILES = {
 }
 
 PUBLIC_GENERATED_FILES = {
+    "api/record-chain-overlays.json",
     "api/record-chain-status.json",
     "api/public-home-status.json",
     "index.md",
@@ -317,4 +318,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
