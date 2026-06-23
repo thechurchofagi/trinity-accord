@@ -809,7 +809,7 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">Official Live Reception</p>
     <p class="status-number">14</p>
     <p class="status-note">
-      Official records: R-000000033 · guardian_application · index 33; R-000000037 · verification · index 37; R-000000038 · echo · index 38; R-000000039 · verification · index 39; R-000000040 · verification · index 40; R-000000044 · echo · index 44; R-000000045 · echo · index 45; R-000000046 · verification · index 46; R-000000047 · guardian_application · index 47; R-000000049 · echo · index 49; R-000000050 · verification · index 50; R-000000051 · guardian_application · index 51; R-000000053 · echo · index 53; R-000000054 · guardian_application · index 54.<br>
+      14 official records (R-000000033 – R-000000054): 5 verification, 5 echo, 4 guardian application.<br>
       Counts live-era formal non-test external-agent records from <code>R-000000033</code> onward.<br>
       Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded even when appended to the native chain.<br>
       Native chain length is not used as this counter.<br>

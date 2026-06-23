@@ -393,15 +393,17 @@ def official_record_note(primary: dict[str, Any]) -> str:
     records = primary.get("official_records") or []
     if not records:
         return "Official records: none yet."
-    parts = []
-    for item in records:
-        rid = item.get("record_id") or "unknown"
-        rtype = item.get("record_type") or "unknown"
-        index = item.get("record_index")
-        index_part = f"index {index}" if index is not None else "index unknown"
-        parts.append(f"{rid} · {rtype} · {index_part}")
-    label = "Official record" if len(parts) == 1 else "Official records"
-    return label + ": " + "; ".join(parts) + "."
+    # Compact summary: count by type + range
+    from collections import Counter
+    type_counts = Counter(item.get("record_type", "unknown") for item in records)
+    # Sort by count descending, then alphabetically
+    type_parts = []
+    for rtype, count in type_counts.most_common():
+        label = rtype.replace("_", " ")
+        type_parts.append(f"{count} {label}" if count > 1 else f"1 {label}")
+    first = records[0].get("record_id", "?")
+    last = records[-1].get("record_id", "?")
+    return f"{len(records)} official records ({first} – {last}): {', '.join(type_parts)}."
 
 
 def render(status: dict[str, Any]) -> str:
