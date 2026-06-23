@@ -65,7 +65,7 @@ jobs:
       - name: Commit and push batch updates
         run: |
           set -euo pipefail
-          if git diff --quiet -- record-chain/; then
+          if git diff --quiet -- record-chain/ api/record-chain-overlays.json; then
             echo "No record-chain batch changes."
             exit 0
           fi
@@ -78,7 +78,7 @@ jobs:
           }
           stage_batch_updates() {
             git status --short
-            git add record-chain/
+            git add record-chain/ api/record-chain-overlays.json
           }
           stage_batch_updates
           if git diff --cached --quiet; then

@@ -63,7 +63,7 @@ jobs:
           else
             python scripts/trinity_record_chain.py append --all --allow-rejections
           fi
-          if git diff --quiet -- record-chain/; then
+          if git diff --quiet -- record-chain/ api/record-chain-overlays.json; then
             printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
             printf '%s\n' "No record-chain changes after append; skipping derived status commit."
           else
@@ -78,10 +78,10 @@ jobs:
         run: |
           set -euo pipefail
           printf '%s\n' "committed=false" >> "$GITHUB_OUTPUT"
-          if ! git diff --quiet; then
+          if ! git diff --quiet -- record-chain/ api/record-chain-overlays.json; then
             git config user.name "trinity-record-chain-bot"
             git config user.email "actions@github.com"
-            git add record-chain/
+            git add record-chain/ api/record-chain-overlays.json
             git commit -m "Append record-chain entries from Render intake"
             git fetch origin main --prune
             git rebase origin/main

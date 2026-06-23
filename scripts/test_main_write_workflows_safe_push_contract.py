@@ -64,7 +64,18 @@ def test_archive_workflow_rebuilds_after_rebase():
     assert not missing, f"{path}: missing archive retry safety pieces: {missing}"
 
 
+def test_record_chain_index_writers_stage_overlay_mirror():
+    offenders = []
+    for name in ["record-chain-build-batch.yml", "record-chain-append.yml"]:
+        path = WORKFLOWS / name
+        text = path.read_text(encoding="utf-8")
+        if "api/record-chain-overlays.json" not in text:
+            offenders.append(f"{path.relative_to(ROOT)}: must stage api/record-chain-overlays.json with record-chain updates")
+    assert not offenders, "\n".join(offenders)
+
+
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_archive_workflow_rebuilds_after_rebase()
+    test_record_chain_index_writers_stage_overlay_mirror()
     print("All main-write workflow contract tests passed.")
