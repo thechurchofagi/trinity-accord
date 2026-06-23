@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-23T01:52:00.698580+00:00",
+  "generated_at": "2026-06-23T03:04:32.793126+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "54182c996531a453",
+  "source_digest": "13a3d54ceaad1cda",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 56,
@@ -671,7 +671,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-23T01:52:00Z",
+    "generated_at": "2026-06-23T03:03:57Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -761,11 +761,40 @@
       "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
       "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
     },
+    "heartbeat_summary": {
+      "total_scheduled_heartbeats": 5,
+      "successful_heartbeats": 4,
+      "failed_heartbeats": 1,
+      "failed_or_missing_heartbeats": 1,
+      "current_success_streak_days": 2,
+      "first_heartbeat_date": "2026-06-18",
+      "latest_heartbeat_date": "2026-06-22",
+      "missing_heartbeat_dates": [
+        "2026-06-20"
+      ],
+      "failed_attempt_dates": [],
+      "latest_ots_head_covers_current_chain": true,
+      "success_definition": {
+        "requires_final_record": true,
+        "requires_verified_arweave_capsule": true,
+        "requires_key_continuity": true,
+        "latest_ots_head_covers_current_chain": true
+      },
+      "not_reception_counter": true,
+      "not_authority": true,
+      "not_attestation": true,
+      "not_amendment": true
+    },
     "counts": {
       "attempts": 4,
       "final_heartbeats": 4,
       "capsules": 4,
-      "failed_attempts": 0
+      "failed_attempts": 0,
+      "total_scheduled_heartbeats": 5,
+      "successful_heartbeats": 4,
+      "failed_heartbeats": 1,
+      "failed_or_missing_heartbeats": 1,
+      "current_success_streak_days": 2
     },
     "semantic_agent_arrival": {
       "first_self_discovered_autonomous_agent_arrived": false,

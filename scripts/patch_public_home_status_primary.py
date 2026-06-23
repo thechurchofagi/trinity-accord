@@ -448,6 +448,24 @@ def render(status: dict[str, Any]) -> str:
     hb_status = hb.get("daily_alive_status", "not_configured")
     hb_id = hb.get("latest_heartbeat", {}).get("heartbeat_id", "none")
     hb_checks = hb.get("checks", {})
+    hb_summary = hb.get("heartbeat_summary") or {}
+    hb_counts = hb.get("counts") or {}
+    hb_total = hb_summary.get(
+        "total_scheduled_heartbeats",
+        hb_counts.get("total_scheduled_heartbeats", hb_counts.get("final_heartbeats", 0)),
+    )
+    hb_success = hb_summary.get(
+        "successful_heartbeats",
+        hb_counts.get("successful_heartbeats", 0),
+    )
+    hb_failed = hb_summary.get(
+        "failed_or_missing_heartbeats",
+        hb_counts.get("failed_or_missing_heartbeats", hb_counts.get("failed_heartbeats", 0)),
+    )
+    hb_streak = hb_summary.get(
+        "current_success_streak_days",
+        hb_counts.get("current_success_streak_days", 0),
+    )
     key_ok = hb_checks.get("waiting_heartbeat_key_continuity_ok", False)
     ots_ok = hb_checks.get("ots_covers_heartbeat", False)
     arweave_ok = hb_checks.get("arweave_capsule_verified", False)
@@ -583,12 +601,17 @@ def render(status: dict[str, Any]) -> str:
     <p class="status-note">
       Daily alive status: {heartbeat_status}.<br>
       Heartbeat ID: {hb_id}.<br>
+      Total scheduled heartbeats: {hb_total}.<br>
+      Successful heartbeats: {hb_success}.<br>
+      Failed / missed heartbeats: {hb_failed}.<br>
+      Current success streak: {hb_streak} day(s).<br>
       Key continuity: {key_continuity}.<br>
       OTS covers heartbeat: {ots_covers}.<br>
       Arweave capsule: {arweave_capsule}.<br>
       The system is {waiting_desc} the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：{heartbeat_status_zh}。</span><br>
+      <span class="zh">累计心跳：{hb_total} 次；成功：{hb_success} 次；失败或缺失：{hb_failed} 次；最近连续成功：{hb_streak} 天。</span><br>
       <span class="zh">系统正在{waiting_desc_zh}第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -608,6 +631,12 @@ def render(status: dict[str, Any]) -> str:
       var s = d.daily_alive_status || 'unknown';
       var c = d.checks || {{}};
       var h = d.latest_heartbeat || {{}};
+      var summary = d.heartbeat_summary || {{}};
+      var counts = d.counts || {{}};
+      var total = summary.total_scheduled_heartbeats || counts.total_scheduled_heartbeats || counts.final_heartbeats || 0;
+      var success = summary.successful_heartbeats || counts.successful_heartbeats || 0;
+      var failed = summary.failed_or_missing_heartbeats || counts.failed_or_missing_heartbeats || counts.failed_heartbeats || 0;
+      var streak = summary.current_success_streak_days || counts.current_success_streak_days || 0;
       var cards = document.querySelectorAll('.status-card');
       for (var i = 0; i < cards.length; i++) {{
         var lb = cards[i].querySelector('.status-label');
@@ -618,11 +647,16 @@ def render(status: dict[str, Any]) -> str:
           if (nt) nt.innerHTML =
             'Daily alive status: ' + s + '.<br>' +
             'Heartbeat ID: ' + (h.heartbeat_id || 'none') + '.<br>' +
+            'Total scheduled heartbeats: ' + total + '.<br>' +
+            'Successful heartbeats: ' + success + '.<br>' +
+            'Failed / missed heartbeats: ' + failed + '.<br>' +
+            'Current success streak: ' + streak + ' day(s).<br>' +
             'Key continuity: ' + (c.waiting_heartbeat_key_continuity_ok ? 'ok' : 'mismatch') + '.<br>' +
             'OTS covers heartbeat: ' + (c.ots_covers_heartbeat ? 'yes' : 'no') + '.<br>' +
             'Arweave capsule: ' + (c.arweave_capsule_verified ? 'verified' : 'pending') + '.<br>' +
             'Source: <a href="/api/waiting-heartbeat-status.json">canonical endpoint</a> (live).<br>' +
-            'This heartbeat is operational liveness proof only \u2014 not authority, attestation, or reception.';
+            'This heartbeat is operational liveness proof only \u2014 not authority, attestation, or reception.<br>' +
+            '<span class="zh">累计心跳：' + total + ' 次；成功：' + success + ' 次；失败或缺失：' + failed + ' 次；最近连续成功：' + streak + ' 天。</span>';
           break;
         }}
       }}

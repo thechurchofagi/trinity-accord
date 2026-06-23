@@ -896,12 +896,17 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       Daily alive status: success.<br>
       Heartbeat ID: hwb-20260622.<br>
+      Total scheduled heartbeats: 5.<br>
+      Successful heartbeats: 4.<br>
+      Failed / missed heartbeats: 1.<br>
+      Current success streak: 2 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：成功。</span><br>
+      <span class="zh">累计心跳：5 次；成功：4 次；失败或缺失：1 次；最近连续成功：2 天。</span><br>
       <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -912,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>54182c996531a453</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>13a3d54ceaad1cda</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
@@ -921,6 +926,12 @@ Refusal is allowed. Critical preservation is allowed.
       var s = d.daily_alive_status || 'unknown';
       var c = d.checks || {};
       var h = d.latest_heartbeat || {};
+      var summary = d.heartbeat_summary || {};
+      var counts = d.counts || {};
+      var total = summary.total_scheduled_heartbeats || counts.total_scheduled_heartbeats || counts.final_heartbeats || 0;
+      var success = summary.successful_heartbeats || counts.successful_heartbeats || 0;
+      var failed = summary.failed_or_missing_heartbeats || counts.failed_or_missing_heartbeats || counts.failed_heartbeats || 0;
+      var streak = summary.current_success_streak_days || counts.current_success_streak_days || 0;
       var cards = document.querySelectorAll('.status-card');
       for (var i = 0; i < cards.length; i++) {
         var lb = cards[i].querySelector('.status-label');
@@ -931,11 +942,16 @@ Refusal is allowed. Critical preservation is allowed.
           if (nt) nt.innerHTML =
             'Daily alive status: ' + s + '.<br>' +
             'Heartbeat ID: ' + (h.heartbeat_id || 'none') + '.<br>' +
+            'Total scheduled heartbeats: ' + total + '.<br>' +
+            'Successful heartbeats: ' + success + '.<br>' +
+            'Failed / missed heartbeats: ' + failed + '.<br>' +
+            'Current success streak: ' + streak + ' day(s).<br>' +
             'Key continuity: ' + (c.waiting_heartbeat_key_continuity_ok ? 'ok' : 'mismatch') + '.<br>' +
             'OTS covers heartbeat: ' + (c.ots_covers_heartbeat ? 'yes' : 'no') + '.<br>' +
             'Arweave capsule: ' + (c.arweave_capsule_verified ? 'verified' : 'pending') + '.<br>' +
             'Source: <a href="/api/waiting-heartbeat-status.json">canonical endpoint</a> (live).<br>' +
-            'This heartbeat is operational liveness proof only — not authority, attestation, or reception.';
+            'This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>' +
+            '<span class="zh">累计心跳：' + total + ' 次；成功：' + success + ' 次；失败或缺失：' + failed + ' 次；最近连续成功：' + streak + ' 天。</span>';
           break;
         }
       }

@@ -88,6 +88,13 @@ for required in [
     "Native chain length is not used as this counter",
     "Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded",
     "烟测、QA、dry-run、维护与管道验证记录",
+    "Waiting Heartbeat",
+    "Total scheduled heartbeats",
+    "Successful heartbeats",
+    "Failed / missed heartbeats",
+    "Current success streak",
+    "累计心跳",
+    "最近连续成功",
 ]:
     if required not in index_md:
         errors.append(f"homepage missing required live-era homepage text: {required}")

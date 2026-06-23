@@ -15,7 +15,7 @@ Writes:
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -128,6 +128,176 @@ def capsule_is_deferred(c: dict[str, Any] | None) -> bool:
     }
 
 
+def parse_heartbeat_date(value: str | None) -> date | None:
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def heartbeat_date_from_id(value: str | None) -> date | None:
+    """Parse hwb-YYYYMMDD into a date."""
+    if not value or not value.startswith("hwb-"):
+        return None
+    raw = value.removeprefix("hwb-")
+    if len(raw) != 8 or not raw.isdigit():
+        return None
+    try:
+        return date(int(raw[0:4]), int(raw[4:6]), int(raw[6:8]))
+    except ValueError:
+        return None
+
+
+def observed_heartbeat_date(item: dict[str, Any]) -> date | None:
+    return (
+        parse_heartbeat_date(item.get("heartbeat_date"))
+        or heartbeat_date_from_id(item.get("heartbeat_id"))
+    )
+
+
+def date_range(start: date, end: date) -> list[date]:
+    out: list[date] = []
+    cur = start
+    while cur <= end:
+        out.append(cur)
+        cur += timedelta(days=1)
+    return out
+
+
+def attempt_failed(attempt: dict[str, Any]) -> bool:
+    status = str(attempt.get("status", ""))
+    return (
+        status.endswith("failed")
+        or status in {"builder_failed", "doctor_failed"}
+    )
+
+
+def compute_heartbeat_summary(
+    records: list[dict[str, Any]],
+    attempts: list[dict[str, Any]],
+    capsules: list[dict[str, Any]],
+    key_manifest: dict[str, Any],
+    ots_covers_latest: bool,
+) -> dict[str, Any]:
+    records_by_date: dict[date, dict[str, Any]] = {}
+    for record in records:
+        observed = observed_heartbeat_date(record)
+        if observed is not None:
+            records_by_date[observed] = record
+
+    capsules_by_heartbeat: dict[str, list[dict[str, Any]]] = {}
+    for capsule in capsules:
+        heartbeat_id = capsule.get("heartbeat_id")
+        if isinstance(heartbeat_id, str) and heartbeat_id:
+            capsules_by_heartbeat.setdefault(heartbeat_id, []).append(capsule)
+
+    attempt_dates: set[date] = set()
+    failed_attempt_dates: set[date] = set()
+    for attempt in attempts:
+        observed = observed_heartbeat_date(attempt)
+        if observed is None:
+            continue
+        attempt_dates.add(observed)
+        if attempt_failed(attempt):
+            failed_attempt_dates.add(observed)
+
+    capsule_dates: set[date] = set()
+    for capsule in capsules:
+        observed = observed_heartbeat_date(capsule)
+        if observed is not None:
+            capsule_dates.add(observed)
+
+    observed_dates = set(records_by_date) | attempt_dates | capsule_dates
+
+    if not observed_dates:
+        return {
+            "total_scheduled_heartbeats": 0,
+            "successful_heartbeats": 0,
+            "failed_heartbeats": 0,
+            "failed_or_missing_heartbeats": 0,
+            "current_success_streak_days": 0,
+            "first_heartbeat_date": None,
+            "latest_heartbeat_date": None,
+            "missing_heartbeat_dates": [],
+            "failed_attempt_dates": [],
+            "success_definition": {
+                "requires_final_record": True,
+                "requires_verified_arweave_capsule": True,
+                "requires_key_continuity": True,
+                "latest_ots_head_covers_current_chain": True,
+            },
+            "not_reception_counter": True,
+            "not_authority": True,
+            "not_attestation": True,
+            "not_amendment": True,
+        }
+
+    first = min(observed_dates)
+    latest = max(observed_dates)
+    scheduled_dates = date_range(first, latest)
+
+    expected_key_sha = key_manifest.get("public_key_sha256")
+    success_by_date: dict[date, bool] = {}
+    missing_heartbeat_dates: list[str] = []
+
+    for scheduled in scheduled_dates:
+        record = records_by_date.get(scheduled)
+        if record is None:
+            success_by_date[scheduled] = False
+            missing_heartbeat_dates.append(scheduled.isoformat())
+            continue
+
+        actual_key_sha = record.get("authorship_public_key_sha256")
+        key_continuity_ok = bool(
+            expected_key_sha
+            and actual_key_sha
+            and expected_key_sha == actual_key_sha
+        )
+
+        same_capsules = capsules_by_heartbeat.get(str(record.get("heartbeat_id")), [])
+        verified_capsule = any(capsule_is_verified(capsule) for capsule in same_capsules)
+
+        success_by_date[scheduled] = bool(
+            key_continuity_ok
+            and verified_capsule
+        )
+
+    successful = sum(1 for ok in success_by_date.values() if ok)
+    total = len(scheduled_dates)
+    failed = total - successful
+
+    streak = 0
+    cur = latest
+    while cur in success_by_date and success_by_date[cur]:
+        streak += 1
+        cur -= timedelta(days=1)
+
+    return {
+        "total_scheduled_heartbeats": total,
+        "successful_heartbeats": successful,
+        "failed_heartbeats": failed,
+        "failed_or_missing_heartbeats": failed,
+        "current_success_streak_days": streak,
+        "first_heartbeat_date": first.isoformat(),
+        "latest_heartbeat_date": latest.isoformat(),
+        "missing_heartbeat_dates": missing_heartbeat_dates,
+        "failed_attempt_dates": sorted(d.isoformat() for d in failed_attempt_dates),
+        "latest_ots_head_covers_current_chain": bool(ots_covers_latest),
+        "success_definition": {
+            "requires_final_record": True,
+            "requires_verified_arweave_capsule": True,
+            "requires_key_continuity": True,
+            "latest_ots_head_covers_current_chain": True,
+        },
+        "not_reception_counter": True,
+        "not_authority": True,
+        "not_attestation": True,
+        "not_amendment": True,
+    }
+
+
 def main() -> int:
     records = load_final_heartbeats()
     attempts = load_attempts()
@@ -156,6 +326,14 @@ def main() -> int:
     expected_key_sha = key_manifest.get("public_key_sha256")
     actual_key_sha = latest.get("authorship_public_key_sha256") if latest else None
     key_continuity_ok = bool(expected_key_sha and actual_key_sha and expected_key_sha == actual_key_sha)
+
+    heartbeat_summary = compute_heartbeat_summary(
+        records=records,
+        attempts=attempts,
+        capsules=capsules,
+        key_manifest=key_manifest,
+        ots_covers_latest=ots_covers_latest,
+    )
 
     if final_record_exists and not key_continuity_ok:
         daily_alive_status = "failed"
@@ -229,11 +407,17 @@ def main() -> int:
             "expected_waiting_heartbeat_public_key_sha256": expected_key_sha,
             "actual_waiting_heartbeat_public_key_sha256": actual_key_sha,
         },
+        "heartbeat_summary": heartbeat_summary,
         "counts": {
             "attempts": len(attempts),
             "final_heartbeats": len(records),
             "capsules": len(capsules),
             "failed_attempts": len(failed_attempts),
+            "total_scheduled_heartbeats": heartbeat_summary["total_scheduled_heartbeats"],
+            "successful_heartbeats": heartbeat_summary["successful_heartbeats"],
+            "failed_heartbeats": heartbeat_summary["failed_heartbeats"],
+            "failed_or_missing_heartbeats": heartbeat_summary["failed_or_missing_heartbeats"],
+            "current_success_streak_days": heartbeat_summary["current_success_streak_days"],
         },
         "semantic_agent_arrival": {
             "first_self_discovered_autonomous_agent_arrived": False,

@@ -140,6 +140,8 @@ GROUPS = {
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
         ["python3", "scripts/test_external_agent_first_contact_rules_contract.py"],
         ["python3", "scripts/test_homepage_status_sync_contract.py"],
+        ["python3", "scripts/test_waiting_heartbeat_summary_metrics.py"],
+        ["python3", "scripts/test_waiting_heartbeat_homepage_card_metrics.py"],
         ["python3", "scripts/test_main_write_workflows_safe_push_contract.py"],
 
         # Pipeline backlog detector
