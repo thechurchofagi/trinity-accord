@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: archive-backlog-repair-${{ github.ref }}
+  group: main-write-lock
   cancel-in-progress: false
 
 jobs:
@@ -137,12 +137,19 @@ jobs:
 
           git commit -m "archive: repair backlog and wallet status metadata"
 
+          git fetch origin main --prune
+          git rebase origin/main
+
           for attempt in 1 2 3; do
             if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
               exit 0
             fi
+
             printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+            git fetch origin main --prune
+            git rebase origin/main
+
+            sleep $((attempt * 5))
           done
 
           echo "::error::Failed to push archive backlog repair metadata after retries."
