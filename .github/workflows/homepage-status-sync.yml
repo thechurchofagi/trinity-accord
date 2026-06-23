@@ -45,7 +45,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: homepage-status-sync
+  group: main-write-lock
   cancel-in-progress: false
 
 env:
@@ -123,6 +123,8 @@ jobs:
 
             git commit -m "home: sync public homepage status"
 
+            git fetch origin main --prune
+            git rebase origin/main
             if git push origin HEAD:main; then
               printf '%s\n' "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
