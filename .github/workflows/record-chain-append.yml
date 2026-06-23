@@ -86,6 +86,9 @@ jobs:
             git add record-chain/
             git commit -m "Append record-chain entries from Render intake"
 
+            git fetch origin main --prune
+            git rebase origin/main
+
             for attempt in 1 2 3; do
               if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
                 printf '%s\n' "committed=true" >> "$GITHUB_OUTPUT"
@@ -93,7 +96,8 @@ jobs:
               fi
               printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
               git fetch origin main --prune
-          git rebase origin/main
+              git rebase origin/main
+              sleep $((attempt * 5))
             done
 
             printf '%s\n' "::error::Failed to push append updates after retries."
