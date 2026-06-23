@@ -6,7 +6,7 @@ on:
     - cron: "17 3 * * *"
 
 concurrency:
-  group: record-chain-batch
+  group: main-write-lock
   cancel-in-progress: false
 
 permissions:
@@ -15,7 +15,6 @@ permissions:
 jobs:
   build-batch:
     runs-on: ubuntu-24.04
-    # Authorize write workflow actor
     if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
     steps:
       - name: Authorize write workflow actor
@@ -24,34 +23,95 @@ jobs:
           ACTOR: ${{ github.actor }}
           GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
         run: |
+          set -euo pipefail
           ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
-
           if [ "$ACTOR" = "github-actions[bot]" ]; then
             echo "Authorized actor: $ACTOR"
             exit 0
           fi
-
           case ",$ALLOWLIST," in
-            *",$ACTOR,"*)
-              echo "Authorized actor: $ACTOR"
-              ;;
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
             *)
               echo "Unauthorized actor for write workflow: $ACTOR"
               echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
               exit 1
               ;;
           esac
+
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
-      - run: python scripts/trinity_record_chain.py build-batch
-      - run: python scripts/trinity_record_chain.py verify
-      - run: |
-          if ! git diff --quiet; then
-            git config user.name "trinity-record-chain-bot"
-            git config user.email "actions@github.com"
-            git add record-chain/
-            git commit -m "Build record-chain batch"
-            git push
+          cache: "pip"
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Install Python dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-ci.txt
+
+      - name: Build and verify record-chain batch
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+          python scripts/trinity_record_chain.py build-batch
+          python scripts/trinity_record_chain.py verify
+
+      - name: Commit and push batch updates
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- record-chain/; then
+            echo "No record-chain batch changes."
+            exit 0
           fi
+          git config user.name "trinity-record-chain-bot"
+          git config user.email "actions@github.com"
+
+          rebuild_batch_outputs() {
+            python scripts/trinity_record_chain.py build-batch
+            python scripts/trinity_record_chain.py verify
+          }
+          stage_batch_updates() {
+            git status --short
+            git add record-chain/
+          }
+          stage_batch_updates
+          if git diff --cached --quiet; then
+            echo "No staged record-chain batch changes."
+            exit 0
+          fi
+          git commit -m "anchor: build record-chain batch"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Worktree dirty after batch commit; generated files were not fully staged."
+            git status --short
+            exit 1
+          fi
+          git fetch origin main --prune
+          git rebase origin/main
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "Push succeeded."
+              exit 0
+            fi
+            echo "Push rejected; remote main advanced. Rebasing and rebuilding batch. Attempt ${attempt}."
+            git fetch origin main --prune
+            git rebase origin/main
+            rebuild_batch_outputs
+            stage_batch_updates
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Worktree dirty after amend; refusing to push."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::Failed to push record-chain batch updates after retries."
+          exit 1

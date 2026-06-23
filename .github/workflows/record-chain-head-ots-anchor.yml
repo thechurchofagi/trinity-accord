@@ -113,6 +113,8 @@ jobs:
           fi
 
           git commit -m "anchor: stamp native record-chain head with OTS"
+          git fetch origin main --prune
+          git rebase origin/main
 
           for attempt in 1 2 3; do
             if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
@@ -121,7 +123,8 @@ jobs:
             fi
             printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
             git fetch origin main --prune
-          git rebase origin/main
+            git rebase origin/main
+            sleep $((attempt * 5))
           done
 
           printf '%s\n' "::error::Failed to push native OTS anchor after retries."
