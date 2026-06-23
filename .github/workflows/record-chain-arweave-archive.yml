@@ -188,6 +188,9 @@ jobs:
 
           git commit -m "archive: update native record-chain Arweave archive metadata"
 
+          git fetch origin main --prune
+          git rebase origin/main
+
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               printf '%s\n' "Push succeeded."
@@ -195,7 +198,8 @@ jobs:
             fi
 
             printf '%s\n' "Push rejected; remote main advanced. Rebasing and regenerating archive metadata. Attempt ${attempt}."
-            git pull --rebase origin main
+            git fetch origin main --prune
+            git rebase origin/main
 
             rebuild_archive_outputs
             stage_archive_metadata
