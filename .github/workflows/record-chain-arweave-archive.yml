@@ -58,7 +58,8 @@ jobs:
       - name: Rebase before Arweave scan
         run: |
           set -euo pipefail
-          git pull --rebase origin main
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Detect Arweave backlog
         id: backlog
