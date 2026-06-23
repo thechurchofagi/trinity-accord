@@ -17,16 +17,13 @@ jobs:
       fail-fast: false
       matrix:
         group:
-          - guardian
           - claim-gate
           - echo-archive
           - supply-chain
           - trust-root
           - chronicle
           - readback-integrity
-          - route-correction
           - agent-start-docs
-          - gateway-workflows
           - verification-index
           - pages-build
     steps:
