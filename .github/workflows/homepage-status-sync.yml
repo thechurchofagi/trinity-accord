@@ -45,7 +45,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: homepage-status-sync
+  group: main-write-lock
   cancel-in-progress: false
 
 env:
@@ -99,36 +99,38 @@ jobs:
             python3 scripts/generate_sitemap.py --check
           }
 
+          git fetch origin main --prune
+          git rebase origin/main
+
+          generate_and_verify
+
+          git add \
+            api/arweave-wallet-status.json \
+            api/guardian-state.json \
+            api/guardian-current-registry.json \
+            api/record-chain-status.json \
+            api/public-home-status.json \
+            index.md \
+            sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No generated homepage status changes."
+            exit 0
+          fi
+
+          git commit -m "home: sync public homepage status"
+
           for attempt in 1 2 3; do
-            echo "Homepage sync attempt ${attempt}"
-
-            git fetch origin main
-            git reset --hard origin/main
-
-            generate_and_verify
-
-            git add \
-              api/arweave-wallet-status.json \
-              api/guardian-state.json \
-              api/guardian-current-registry.json \
-              api/record-chain-status.json \
-              api/public-home-status.json \
-              index.md \
-              sitemap.xml
-
-            if git diff --cached --quiet; then
-              echo "No generated homepage status changes."
-              exit 0
-            fi
-
-            git commit -m "home: sync public homepage status"
-
             if git push origin HEAD:main; then
               printf '%s\n' "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
 
-            echo "Push failed on attempt ${attempt}; resetting to latest main and regenerating."
+            echo "Push failed on attempt ${attempt}; rebasing and retrying."
+            git fetch origin main --prune
+            git rebase origin/main
+
+            sleep $((attempt * 5))
           done
 
           echo "::error::Failed to push homepage status sync after regenerated retries."

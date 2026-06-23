@@ -23,7 +23,7 @@ on:
     - cron: "*/30 * * * *"
 
 concurrency:
-  group: record-chain-arweave-archive
+  group: main-write-lock
   cancel-in-progress: false
 
 permissions:
@@ -58,7 +58,8 @@ jobs:
       - name: Rebase before Arweave scan
         run: |
           set -euo pipefail
-          git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Detect Arweave backlog
         id: backlog
@@ -157,22 +158,60 @@ jobs:
         run: |
           set -euo pipefail
 
-          if git diff --quiet; then
-            printf '%s\n' "No Arweave archive metadata changes."
+          git config user.name "trinity-record-chain-bot"
+          git config user.email "actions@github.com"
+
+          rebuild_archive_outputs() {
+            python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+            python scripts/verify_record_chain_arweave_archive.py
+            python scripts/trinity_record_chain.py verify
+          }
+
+          stage_archive_metadata() {
+            git status --short
+            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
+          }
+
+          assert_clean_worktree() {
+            if [ -n "$(git status --porcelain)" ]; then
+              printf '%s\n' "Worktree dirty after archive metadata commit/amend; generated files were not fully staged."
+              git status --short
+              exit 1
+            fi
+          }
+
+          stage_archive_metadata
+
+          if git diff --cached --quiet; then
+            printf '%s\n' "No Arweave archive metadata changes to commit."
             exit 0
           fi
 
-          git config user.name "trinity-record-chain-bot"
-          git config user.email "actions@github.com"
-          git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
           git commit -m "archive: update native record-chain Arweave archive metadata"
 
+          git fetch origin main --prune
+          git rebase origin/main
+
           for attempt in 1 2 3; do
-            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+            if git push origin HEAD:main; then
+              printf '%s\n' "Push succeeded."
               exit 0
             fi
-            printf 'Push failed on attempt %s; archive metadata may now be stale; failing so the next run regenerates.\n' "${attempt}"
-            exit 1
+
+            printf '%s\n' "Push rejected; remote main advanced. Rebasing and regenerating archive metadata. Attempt ${attempt}."
+            git fetch origin main --prune
+            git rebase origin/main
+
+            rebuild_archive_outputs
+            stage_archive_metadata
+
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+
+            assert_clean_worktree
+
+            sleep $((attempt * 5))
           done
 
           printf '%s\n' "::error::Failed to push Arweave archive metadata after retries."

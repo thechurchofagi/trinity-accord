@@ -100,6 +100,7 @@ jobs:
             git add -A \
               record-chain/heartbeat \
               api/waiting-heartbeat-status.json \
+              api/record-chain-status.json \
               api/record-chain-overlays.json \
               api/public-home-status.json \
               index.md \

@@ -48,9 +48,20 @@ def main() -> None:
             errors.append("arweave-archive workflow missing ARKEY reference")
         if "ARWEAVE_WALLET_JWK_B64" in text:
             errors.append("arweave-archive workflow must not use ARWEAVE_WALLET_JWK_B64 (use ARKEY)")
-        # Check no lowercase "echo" in the workflow file when ARKEY is present
-        if "echo" in text.lower() and "ARKEY" in text:
-            errors.append("arweave-archive workflow may echo wallet secret")
+        # Check no direct echo of ARKEY or dangerous debug
+        for forbidden in [
+            "echo $ARKEY",
+            "echo ${ARKEY}",
+            'echo "$ARKEY"',
+            "printf $ARKEY",
+            "printf ${ARKEY}",
+            'printf "$ARKEY"',
+            "printenv",
+            "env |",
+            "set -x",
+        ]:
+            if forbidden in text:
+                errors.append(f"arweave-archive workflow may expose wallet secret: {forbidden}")
         # Backlog detector
         if "detect_record_chain_pipeline_backlog.py" not in text:
             errors.append("arweave-archive workflow missing backlog detector")
@@ -74,8 +85,13 @@ def main() -> None:
         if "*/30 * * * *" not in text:
             errors.append("arweave-archive workflow must have 30-minute schedule scanner")
         # Rebase/retry
-        if "git pull --rebase origin" not in text:
-            errors.append("arweave-archive workflow must rebase before push retry")
+        if "git fetch origin main --prune" not in text or "git rebase origin/main" not in text:
+            errors.append("arweave-archive workflow must fetch origin main and rebase origin/main before push retry")
+        # Rebase must happen before push retry loop
+        first_rebase = text.find("git rebase origin/main")
+        push_loop = text.find("for attempt in 1 2 3")
+        if first_rebase == -1 or push_loop == -1 or first_rebase > push_loop:
+            errors.append("arweave-archive workflow must rebase before entering push retry loop")
 
     # 2. Scripts exist
     build_script = ROOT / "scripts" / "build_record_chain_arweave_archive.py"

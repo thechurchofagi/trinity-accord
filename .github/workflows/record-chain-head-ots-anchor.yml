@@ -15,7 +15,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: record-chain-head-ots-anchor
+  group: main-write-lock
   cancel-in-progress: false
 
 jobs:
@@ -37,7 +37,8 @@ jobs:
       - name: Rebase before native OTS scan
         run: |
           set -euo pipefail
-          git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Verify native record chain
         run: python3 scripts/trinity_record_chain.py verify
@@ -119,7 +120,8 @@ jobs:
               exit 0
             fi
             printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+            git fetch origin main --prune
+          git rebase origin/main
           done
 
           printf '%s\n' "::error::Failed to push native OTS anchor after retries."

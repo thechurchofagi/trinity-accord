@@ -153,8 +153,8 @@ def main() -> None:
 
     # OTS must have rebase/retry on push
     require(
-        "git pull --rebase origin" in ots_workflow,
-        "OTS workflow must rebase before push retry",
+        "git fetch origin main --prune" in ots_workflow and "git rebase origin/main" in ots_workflow,
+        "OTS workflow must fetch and rebase origin/main before push retry",
     )
 
     # Arweave workflow_run from OTS resolves to live
@@ -200,8 +200,8 @@ def main() -> None:
 
     # Arweave workflow must have rebase/retry on push
     require(
-        "git pull --rebase origin" in arweave_workflow,
-        "Arweave workflow must rebase before push retry",
+        "git fetch origin main --prune" in arweave_workflow and "git rebase origin/main" in arweave_workflow,
+        "Arweave workflow must fetch and rebase origin/main before push retry",
     )
 
     # Arweave workflow contains ARKEY but does not contain lowercase echo
