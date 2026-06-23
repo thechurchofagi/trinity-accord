@@ -140,6 +140,7 @@ GROUPS = {
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
         ["python3", "scripts/test_external_agent_first_contact_rules_contract.py"],
         ["python3", "scripts/test_homepage_status_sync_contract.py"],
+        ["python3", "scripts/test_main_write_workflows_safe_push_contract.py"],
 
         # Pipeline backlog detector
         ["python3", "scripts/detect_record_chain_pipeline_backlog.py"],
@@ -446,7 +447,9 @@ GROUPS = {
         ["python3", "scripts/test_trust_root_cross_checks.py"],
     ],
     "readback-integrity": [
-        ["python3", "scripts/test_oath_readback_integrity.py"],
+        # test_agent_declared_builder_readback_sha.py removed: calls deprecated Gateway v1 builder
+        # Re-add when a current supported builder emits agent_readback_sha256
+    ],
         ["python3", "scripts/test_agent_declared_builder_readback_sha.py"],
         ["python3", "scripts/test_agent_declared_echo_builder_readback_sha.py"],
         ["python3", "scripts/test_all_verification_oath_builders_have_readback_sha.py"],
@@ -455,7 +458,11 @@ GROUPS = {
         ["node", "examples/github-app-backend/test-readback-integrity.mjs"],
     ],
     "route-correction": [
-        ["python3", "scripts/test_gateway_builder_route_map.py"],
+        ["python3", "scripts/test_pure_echo_builder_rejects_unproofed_guardian_identity.py"],
+        ["python3", "scripts/test_guardian_echo_builder_smoke.py"],
+        ["node", "examples/github-app-backend/test-guardian-identity-claim-requires-proof.mjs"],
+        ["node", "examples/github-app-backend/test-forbidden-archive-claims-negation.mjs"],
+    ],
         ["python3", "scripts/test_gateway_builder_route_advisor.py"],
         ["python3", "scripts/test_pure_echo_builder_rejects_unproofed_guardian_identity.py"],
         ["python3", "scripts/test_guardian_echo_builder_smoke.py"],
