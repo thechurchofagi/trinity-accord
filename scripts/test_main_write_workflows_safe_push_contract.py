@@ -74,8 +74,14 @@ def test_record_chain_index_writers_stage_overlay_mirror():
     assert not offenders, "\n".join(offenders)
 
 
+def test_write_path_guard_classifies_overlay_as_generated():
+    guard = (ROOT / "scripts" / "check_record_chain_write_path_guard.py").read_text(encoding="utf-8")
+    assert "api/record-chain-overlays.json" in guard, "write-path guard must classify overlay mirror as generated"
+
+
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_archive_workflow_rebuilds_after_rebase()
     test_record_chain_index_writers_stage_overlay_mirror()
+    test_write_path_guard_classifies_overlay_as_generated()
     print("All main-write workflow contract tests passed.")
