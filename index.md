@@ -838,12 +838,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">current</p>
+    <p class="status-number">attention</p>
     <p class="status-note">
-      Pipeline: current.<br>
-      Latest technical record: R-000000056.<br>
-      OTS: upgraded.<br>
-      Arweave: current.<br>
+      Pipeline: attention.<br>
+      Latest technical record: R-000000057.<br>
+      OTS: pending.<br>
+      Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 2 batches (all stamped).<br>
-      OpenTimestamps: upgraded.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      OpenTimestamps: pending.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx FWkPYeONAzJC....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -892,21 +892,21 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">alive</p>
+    <p class="status-number">failed</p>
     <p class="status-note">
-      Daily alive status: success.<br>
+      Daily alive status: failed.<br>
       Heartbeat ID: hwb-20260622.<br>
-      Total scheduled heartbeats: 5.<br>
+      Total scheduled heartbeats: 7.<br>
       Successful heartbeats: 4.<br>
-      Failed / missed heartbeats: 1.<br>
-      Current success streak: 2 day(s).<br>
+      Failed / missed heartbeats: 3.<br>
+      Current success streak: 0 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：成功。</span><br>
-      <span class="zh">累计心跳：5 次；成功：4 次；失败或缺失：1 次；最近连续成功：2 天。</span><br>
+      <span class="zh">每日存活状态：失败。</span><br>
+      <span class="zh">累计心跳：7 次；成功：4 次；失败或缺失：3 次；最近连续成功：0 天。</span><br>
       <span class="zh">系统正在仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>56bf0e175c36cba0</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>2e0f58abe8d6ec14</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
