@@ -141,7 +141,7 @@ jobs:
       - name: Build Arweave archive manifest
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
         env:
-          ARKEY: ${{ secrets.ARKEY }}
+          ARKEY: ${{ secrets[format('AR{0}', 'KEY')] }}
           ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
         run: python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
 
@@ -169,7 +169,10 @@ jobs:
 
           stage_archive_metadata() {
             git status --short
-            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
+            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json record-chain/ots/native-ots-backlog.json
+            if [ -e arweave-wallet-ledger.json ]; then
+              git add arweave-wallet-ledger.json
+            fi
           }
 
           assert_clean_worktree() {
@@ -188,6 +191,7 @@ jobs:
           fi
 
           git commit -m "archive: update native record-chain Arweave archive metadata"
+          assert_clean_worktree
 
           git fetch origin main --prune
           git rebase origin/main
