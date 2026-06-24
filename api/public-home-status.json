@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-24T09:00:46.111836+00:00",
+  "generated_at": "2026-06-24T10:08:45.872567+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "2c0025fddf4b917a",
+  "source_digest": "07f0cd7b816b2b34",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 57,
@@ -54,7 +54,7 @@
       },
       "open_timestamps": {
         "automated_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
-        "bitcoin_pending": true,
+        "bitcoin_pending": false,
         "bitcoin_verified": false,
         "implemented": true,
         "latest_record_id": "R-000000057",
@@ -64,29 +64,29 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 57,
-        "status": "current-pending-bitcoin",
+        "status": "current-upgraded-timestamp-proof",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 57,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-57-R-000000057-640cb1e46850c9f0-5465f093d5a0d4e5.anchor.json",
         "latest_anchored_file": "record-chain/ots/native-anchors/native-record-57-R-000000057-640cb1e46850c9f0-5465f093d5a0d4e5.native-record-chain-head-commitment.json",
         "latest_ots_file": "record-chain/ots/native-anchors/native-record-57-R-000000057-640cb1e46850c9f0-5465f093d5a0d4e5.native-record-chain-head-commitment.json.ots",
-        "ots_status": "pending",
+        "ots_status": "upgraded",
         "anchor_needed": false,
         "proof_bundle_archive": {
           "implemented": true,
           "workflow": "/.github/workflows/native-ots-upgrade-watch.yml",
           "registry_api": "/api/record-chain-native-ots-arweave-registry.json",
-          "status": "waiting-for-ots-upgrade",
-          "archive_status": "waiting-for-ots-upgrade",
-          "latest_bundle_file": null,
-          "latest_bundle_sha256": null,
-          "latest_tx_id": null,
-          "latest_gateway_url": null,
-          "latest_ots_status": "pending",
+          "status": "arweave_archived",
+          "archive_status": "arweave_archived",
+          "latest_bundle_file": "record-chain/ots/native-arweave-bundles/native-record-57-R-000000057-640cb1e46850c9f0-5465f093d5a0d4e5.anchor.upgraded.arweave-bundle.json",
+          "latest_bundle_sha256": "086e3da7d69e66bab7677e7dae3ac3911de24ebde25f938fbdfa084c1816efbf",
+          "latest_tx_id": "wXSxGI3ngEv5RE-BRkSElY_NCrs4LEUullRl8Sx65fo",
+          "latest_gateway_url": "https://arweave.net/wXSxGI3ngEv5RE-BRkSElY_NCrs4LEUullRl8Sx65fo",
+          "latest_ots_status": "upgraded",
           "latest_bitcoin_verified": false,
           "archive_needed": false,
           "registered_without_arweave_tx": false,
-          "arweave_archived": false,
+          "arweave_archived": true,
           "boundary": {
             "ots_proof_bundle_arweave_archive_is_mirror_only": true,
             "ots_proof_bundle_arweave_archive_is_not_authority": true,
@@ -95,7 +95,7 @@
             "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
           }
         },
-        "strict_bitcoin_verified": null,
+        "strict_bitcoin_verified": false,
         "checked_at": null,
         "upgraded_at": null,
         "strict_bitcoin_verified_at": null
@@ -121,8 +121,8 @@
         "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000056-44f6d6c00c4d/manifest.json",
         "latest_native_record_sha256": "e601d8aab8715591d685ad46463a64f59d525dee4a5bf2f2545bdc4660fb2948",
         "record_count": 56,
-        "status": "waiting-for-native-ots",
-        "archive_needed": false
+        "status": "archive-needed",
+        "archive_needed": true
       },
       "anchor_status": {
         "batch_count": 2,
@@ -633,9 +633,9 @@
     "latest_record_type": "context_insufficient_notice",
     "pending_records": 0,
     "pipeline": "attention",
-    "ots": "pending",
-    "ots_raw_status": "pending",
-    "arweave": "waiting-for-native-ots",
+    "ots": "upgraded",
+    "ots_raw_status": "upgraded",
+    "arweave": "archive-needed",
     "ots_archivable_for_arweave": null,
     "arweave_archive_needed": null,
     "not_primary_counter": true,
@@ -651,9 +651,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.102787035953",
+      "total_spent_ar": "0.105329443943",
       "balance_known": true,
-      "balance_ar": "6.632847918524",
+      "balance_ar": "15.577219861726",
       "low_balance": false,
       "needs_recharge": false
     }

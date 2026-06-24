@@ -842,8 +842,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-note">
       Pipeline: attention.<br>
       Latest technical record: R-000000057.<br>
-      OTS: pending.<br>
-      Arweave: waiting-for-native-ots.<br>
+      OTS: upgraded.<br>
+      Arweave: archive-needed.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 2 batches (all stamped).<br>
-      OpenTimestamps: pending.<br>
-      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
+      OpenTimestamps: upgraded.<br>
+      Native OTS proof bundle Arweave archive: arweave_archived.<br>
       Record-Chain Arweave archive: current live mirror; latest tx FWkPYeONAzJC....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -872,11 +872,11 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">AR upload wallet</p>
     <p class="status-number">OK</p>
     <p class="status-note">
-      Total paid upload cost: 0.102787035953 AR.<br>
-      Wallet balance: 6.632847918524 AR.<br>
+      Total paid upload cost: 0.105329443943 AR.<br>
+      Wallet balance: 15.577219861726 AR.<br>
       Recharge needed: no.<br>
       Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
-      <span class="zh">累计付费上传成本：0.102787035953 AR。钱包余额：6.632847918524 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+      <span class="zh">累计付费上传成本：0.105329443943 AR。钱包余额：15.577219861726 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
     </p>
   </article>
   <article class="status-card">
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>2c0025fddf4b917a</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>07f0cd7b816b2b34</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
