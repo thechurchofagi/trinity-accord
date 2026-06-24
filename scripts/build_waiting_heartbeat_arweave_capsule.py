@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Waiting Heartbeat Arweave capsule from the latest heartbeat status.
+"""Build or select a Waiting Heartbeat Arweave capsule.
 
 Reads the latest heartbeat from api/waiting-heartbeat-status.json and
 creates a capsule JSON that can be uploaded to Arweave.
@@ -17,6 +17,10 @@ CHAIN_TIP = ROOT / "record-chain" / "chain-tip.json"
 OTS = ROOT / "api" / "record-chain-native-ots-latest.json"
 CAPSULE_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
 
+VERIFIED_CAPSULE_STATUSES = {"uploaded", "success", "arweave_archived"}
+PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable"}
+NON_RETRYABLE_READBACK_STATUSES = {"readback_hash_mismatch", "local_payload_mismatch_for_existing_tx"}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -28,6 +32,51 @@ def read_json(path: Path) -> Any:
 
 def dump_json(data: Any) -> str:
     return json.dumps(data, indent=2, ensure_ascii=False, sort_keys=False) + "\n"
+
+
+def repo_rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
+
+
+def capsule_payload_path(heartbeat_id: str) -> Path:
+    return CAPSULE_DIR / f"{heartbeat_id}.capsule.json"
+
+
+def capsule_upload_result_path(heartbeat_id: str) -> Path:
+    return CAPSULE_DIR / f"{heartbeat_id}.upload-result.json"
+
+
+def capsule_txid(capsule: dict[str, Any] | None) -> str | None:
+    if not capsule:
+        return None
+    value = capsule.get("arweave_txid") or capsule.get("arweave_tx_id") or capsule.get("txid") or capsule.get("tx_id")
+    return value if isinstance(value, str) and value else None
+
+
+def capsule_status(capsule: dict[str, Any] | None) -> str | None:
+    if not capsule:
+        return None
+    value = capsule.get("result") or capsule.get("status")
+    return value if isinstance(value, str) else None
+
+
+def capsule_is_verified(capsule: dict[str, Any] | None) -> bool:
+    status = capsule_status(capsule)
+    return bool(capsule_txid(capsule)) and capsule.get("hash_match") is True and status in VERIFIED_CAPSULE_STATUSES
+
+
+def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:
+    status = capsule_status(capsule)
+    if status in NON_RETRYABLE_READBACK_STATUSES:
+        return False
+    return bool(capsule_txid(capsule)) and capsule.get("hash_match") is not True and capsule.get("retryable") is not False and status in PENDING_READBACK_STATUSES
+
+
+def load_existing_capsule_result(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    data = read_json(path)
+    return data if isinstance(data, dict) else None
 
 
 def write_github_output(values: dict[str, str]) -> None:
@@ -56,32 +105,9 @@ def ots_covers_record(ots: dict[str, Any], heartbeat: dict[str, Any]) -> bool:
     return isinstance(ots_count, int) and isinstance(record_index, int) and ots_count >= record_index
 
 
-def main() -> int:
-    status = read_json(STATUS)
-    latest = status.get("latest_heartbeat")
-    if not latest:
-        raise SystemExit("No latest waiting heartbeat final record yet.")
-
-    heartbeat_id = latest.get("heartbeat_id")
-    chain_tip = read_json(CHAIN_TIP)
-    ots = read_json(OTS)
-
-    if not ots_covers_record(ots, latest):
-        print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
-        write_github_output({
-            "capsule_status": "waiting_for_ots",
-            "capsule_upload_needed": "false",
-            "capsule_skip_reason": "ots_latest_does_not_cover_latest_waiting_heartbeat",
-        })
-        return 0
-
-    write_github_output({
-        "capsule_status": "ready",
-        "capsule_upload_needed": "true",
-        "capsule_skip_reason": "",
-    })
-
-    payload = {
+def build_payload(latest: dict[str, Any], chain_tip: dict[str, Any], ots: dict[str, Any]) -> dict[str, Any]:
+    heartbeat_id = str(latest.get("heartbeat_id"))
+    return {
         "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
         "created_at": utc_now(),
         "heartbeat_id": heartbeat_id,
@@ -116,7 +142,7 @@ def main() -> int:
             "capsule_is_not_echo": True,
             "capsule_is_not_verification": True,
             "capsule_is_not_guardian_application": True,
-            "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": True
+            "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": True,
         },
         "boundary": {
             "capsule_is_mirror_only": True,
@@ -129,10 +155,49 @@ def main() -> int:
         },
     }
 
+
+def main() -> int:
+    status = read_json(STATUS)
+    latest = status.get("latest_heartbeat")
+    if not latest:
+        raise SystemExit("No latest waiting heartbeat final record yet.")
+
+    heartbeat_id_value = latest.get("heartbeat_id")
+    if not isinstance(heartbeat_id_value, str) or not heartbeat_id_value:
+        raise SystemExit("Latest waiting heartbeat is missing heartbeat_id")
+    heartbeat_id = heartbeat_id_value
+
+    chain_tip = read_json(CHAIN_TIP)
+    ots = read_json(OTS)
+    capsule_path = capsule_payload_path(heartbeat_id)
+    upload_result_path = capsule_upload_result_path(heartbeat_id)
+    common_outputs = {"heartbeat_id": heartbeat_id, "capsule_path": repo_rel(capsule_path), "upload_result_path": repo_rel(upload_result_path)}
+
+    if not ots_covers_record(ots, latest):
+        print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
+        write_github_output({**common_outputs, "capsule_status": "waiting_for_ots", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_skip_reason": "ots_latest_does_not_cover_latest_waiting_heartbeat"})
+        return 0
+
+    existing_result = load_existing_capsule_result(upload_result_path)
+    if capsule_is_verified(existing_result):
+        print(f"::notice::Verified Arweave capsule already exists for {heartbeat_id}; upload skipped.")
+        write_github_output({**common_outputs, "capsule_status": "already_verified", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_skip_reason": "existing_verified_arweave_capsule"})
+        return 0
+
+    if capsule_needs_readback_repair(existing_result):
+        if capsule_path.exists():
+            print(f"::notice::Existing Arweave transaction for {heartbeat_id} needs readback repair; upload skipped.")
+            write_github_output({**common_outputs, "capsule_status": "readback_repair_needed", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "true", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_upload_needs_readback_repair"})
+            return 0
+        print(f"::warning::Existing Arweave transaction for {heartbeat_id} has no local capsule payload; upload skipped.")
+        write_github_output({**common_outputs, "capsule_status": "missing_payload_for_existing_tx", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_arweave_tx_without_local_capsule_payload"})
+        return 0
+
+    payload = build_payload(latest, chain_tip, ots)
     CAPSULE_DIR.mkdir(parents=True, exist_ok=True)
-    out = CAPSULE_DIR / f"{heartbeat_id}.capsule.json"
-    out.write_text(dump_json(payload), encoding="utf-8")
-    print(str(out.relative_to(ROOT)))
+    capsule_path.write_text(dump_json(payload), encoding="utf-8")
+    write_github_output({**common_outputs, "capsule_status": "ready", "capsule_upload_needed": "true", "capsule_readback_repair_needed": "false", "capsule_skip_reason": ""})
+    print(repo_rel(capsule_path))
     return 0
 
 
