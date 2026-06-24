@@ -153,7 +153,7 @@ while (!uploader.isComplete) {
 
 console.log(`ARWEAVE_UPLOAD_POSTED txid=${tx.id}`);
 
-function uploadResult(status, readbackSha256, hashMatch, retryable) {
+function uploadResult(status, readbackSha256, hashMatch, retryable, extra = {}) {
   const balanceAfter = { available: false, winston: null, ar: null, reason: "pending" };
   return {
     schema: "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
@@ -192,16 +192,19 @@ function uploadResult(status, readbackSha256, hashMatch, retryable) {
       arweave_archive_is_not_successor_reception: true,
       bitcoin_originals_prevail: true,
     },
+    ...extra,
   };
 }
 
 fs.writeFileSync(outPath, JSON.stringify(uploadResult("posted_pending_readback", null, false, true), null, 2) + "\n");
 
 // --- Readback verification ---
-const READBACK_MAX_RETRIES = 30;
-const READBACK_DELAY_MS = 15000;
+const READBACK_MAX_RETRIES = Number(process.env.WAITING_HEARTBEAT_ARWEAVE_READBACK_MAX_RETRIES || "30");
+const READBACK_DELAY_MS = Number(process.env.WAITING_HEARTBEAT_ARWEAVE_READBACK_DELAY_MS || "15000");
 let readbackSha256 = null;
 let readbackVerified = false;
+let readbackMismatch = false;
+let lastReadbackError = null;
 
 for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
   try {
@@ -213,18 +216,39 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
     if (readbackVerified) {
       console.log(`ARWEAVE_READBACK_OK readback_sha256=${readbackSha256}`);
       break;
-    } else {
-      console.error(`ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`);
     }
+    readbackMismatch = true;
+    console.error(`ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`);
+    break;
   } catch (err) {
+    lastReadbackError = err.message;
     console.error(`ARWEAVE_READBACK_RETRY attempt=${attempt} error=${err.message}`);
   }
   if (attempt < READBACK_MAX_RETRIES) await sleep(READBACK_DELAY_MS);
 }
 
+if (readbackMismatch) {
+  fs.writeFileSync(
+    outPath,
+    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, false, {
+      last_readback_error: "payload_sha256_mismatch",
+      readback_attempted_at: new Date().toISOString(),
+    }), null, 2) + "\n"
+  );
+  throw new Error(`ARWEAVE_READBACK_HASH_MISMATCH payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`);
+}
+
 if (!readbackVerified) {
-  fs.writeFileSync(outPath, JSON.stringify(uploadResult("readback_failed", readbackSha256, false, true), null, 2) + "\n");
-  throw new Error(`ARWEAVE_READBACK_FAILED after ${READBACK_MAX_RETRIES} attempts`);
+  fs.writeFileSync(
+    outPath,
+    JSON.stringify(uploadResult("posted_pending_readback", readbackSha256, false, true, {
+      last_readback_error: lastReadbackError,
+      readback_attempted_at: new Date().toISOString(),
+      next_action: "retry_readback_without_reupload",
+    }), null, 2) + "\n"
+  );
+  console.warn(`ARWEAVE_READBACK_PENDING after ${READBACK_MAX_RETRIES} attempts; preserving txid for later readback repair.`);
+  process.exit(0);
 }
 
 // --- Update balance after ---
@@ -234,7 +258,7 @@ const actualDeltaWinston = balanceBefore.available && balanceAfter.available
   : null;
 const actualDeltaAr = actualDeltaWinston ? winstonToArDecimal(actualDeltaWinston) : null;
 
-const result = uploadResult("uploaded", readbackSha256, true, false);
+const result = uploadResult("uploaded", readbackSha256, true, false, { verified_at: new Date().toISOString() });
 result.wallet_balance_after_available = balanceAfter.available;
 result.wallet_balance_after_winston = balanceAfter.winston;
 result.wallet_balance_after_ar = balanceAfter.ar;
