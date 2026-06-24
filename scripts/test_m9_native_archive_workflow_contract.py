@@ -63,6 +63,13 @@ def main() -> None:
             "ARKEY: ${{ secrets.ARKEY }}",
             "record-chain-native-ots-latest.json",
             "refusing live Arweave upload without native OTS",
+            "record-chain/arweave-archives/",
+            "api/record-chain-arweave-index.json",
+            "record-chain/arweave-backlog.json",
+            "api/record-chain-arweave-backlog.json",
+            "record-chain/ots/native-ots-backlog.json",
+            "api/record-chain-native-ots-backlog.json",
+            "record-chain/arweave-wallet-ledger.json",
         ]:
             require_contains(arweave_wf, marker, errors)
 
@@ -77,6 +84,14 @@ def main() -> None:
         if "ARKEY" in arweave_text and "echo" in arweave_text.lower():
             errors.append("record-chain-arweave-archive.yml must not contain both ARKEY and echo")
 
+        first_rebase_guard = '''git commit -m "archive: update native record-chain Arweave archive metadata"
+          assert_clean_worktree
+
+          git fetch origin main --prune
+          git rebase origin/main'''
+        if first_rebase_guard not in arweave_text:
+            errors.append("record-chain-arweave-archive.yml must assert a clean worktree before the first rebase")
+
     if not data_wf.exists():
         errors.append("missing .github/workflows/record-chain-data-arweave-archive.yml")
     else:
@@ -87,7 +102,7 @@ def main() -> None:
     if errors:
         print("M9 native archive workflow contract FAILED:", file=sys.stderr)
         for error in errors:
-            print(f"  - {error}", file=sys.stderr)
+            print(f"  - {error}")
         raise SystemExit(1)
 
     print("M9 native archive workflow contract PASSED.")

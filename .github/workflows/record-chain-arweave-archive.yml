@@ -169,7 +169,14 @@ jobs:
 
           stage_archive_metadata() {
             git status --short
-            git add record-chain/arweave-archives/ api/record-chain-arweave-index.json
+            git add \
+              record-chain/arweave-archives/ \
+              api/record-chain-arweave-index.json \
+              record-chain/arweave-backlog.json \
+              api/record-chain-arweave-backlog.json \
+              record-chain/ots/native-ots-backlog.json \
+              api/record-chain-native-ots-backlog.json \
+              record-chain/arweave-wallet-ledger.json
           }
 
           assert_clean_worktree() {
@@ -188,9 +195,11 @@ jobs:
           fi
 
           git commit -m "archive: update native record-chain Arweave archive metadata"
+          assert_clean_worktree
 
           git fetch origin main --prune
           git rebase origin/main
+          assert_clean_worktree
 
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
