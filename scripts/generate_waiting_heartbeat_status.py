@@ -28,13 +28,12 @@ STATUS_PATH = ROOT / "api" / "waiting-heartbeat-status.json"
 OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
 WAITING_HEARTBEAT_KEY = ROOT / "api" / "waiting-heartbeat-key.v1.json"
 
-# The scheduled submit workflow runs at 03:17 UTC. Before that daily window,
-# the current UTC date is not expected to have a heartbeat yet, so the expected
-# heartbeat is yesterday's UTC date. This prevents Beijing-morning page renders
-# from falsely marking the same UTC day missing before the scheduled run is due,
-# while still marking genuinely stale prior days as missing.
+# The scheduled submit workflow runs at 03:17 UTC. Give the submit/append/OTS
+# and capsule chain time to run before declaring the current UTC day due. This
+# avoids a normal Actions queue overlap publishing a false freshness failure.
 HEARTBEAT_DUE_UTC_HOUR = 3
 HEARTBEAT_DUE_UTC_MINUTE = 17
+HEARTBEAT_DUE_GRACE_MINUTES = 90
 
 
 def utc_now() -> str:
@@ -51,7 +50,7 @@ def expected_heartbeat_date(now: datetime | None = None) -> date:
         minute=HEARTBEAT_DUE_UTC_MINUTE,
         second=0,
         microsecond=0,
-    )
+    ) + timedelta(minutes=HEARTBEAT_DUE_GRACE_MINUTES)
     if now < due:
         return now.date() - timedelta(days=1)
     return now.date()
@@ -99,6 +98,7 @@ def load_final_heartbeats() -> list[dict[str, Any]]:
                 else None
             ),
         })
+    records.sort(key=heartbeat_record_sort_key)
     return records
 
 
@@ -181,6 +181,12 @@ def observed_heartbeat_date(item: dict[str, Any]) -> date | None:
     )
 
 
+def heartbeat_record_sort_key(record: dict[str, Any]) -> tuple[date, int]:
+    observed = observed_heartbeat_date(record) or date.min
+    index = record.get("record_index")
+    return observed, index if isinstance(index, int) else -1
+
+
 def date_range(start: date, end: date) -> list[date]:
     out: list[date] = []
     cur = start
@@ -246,6 +252,7 @@ def compute_heartbeat_summary(
             "first_heartbeat_date": None,
             "latest_heartbeat_date": None,
             "latest_observed_heartbeat_date": None,
+            "latest_successful_heartbeat_date": None,
             "through_heartbeat_date": expected_date.isoformat() if expected_date else None,
             "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
             "latest_heartbeat_is_expected_date": False,
@@ -267,6 +274,7 @@ def compute_heartbeat_summary(
 
     first = min(observed_dates)
     latest_observed = max(observed_dates)
+    latest_final = max(records_by_date) if records_by_date else None
     through = max(latest_observed, expected_date) if expected_date is not None else latest_observed
     scheduled_dates = date_range(first, through)
 
@@ -306,13 +314,19 @@ def compute_heartbeat_summary(
         streak += 1
         cur -= timedelta(days=1)
 
+    successful_dates = [d for d, ok in success_by_date.items() if ok]
+    latest_successful = max(successful_dates) if successful_dates else None
+
     lag_days = None
     latest_is_expected = False
     is_stale = False
     if expected_date is not None:
-        lag_days = max(0, (expected_date - latest_observed).days)
-        latest_is_expected = latest_observed >= expected_date
-        is_stale = lag_days > 0
+        latest_is_expected = success_by_date.get(expected_date) is True
+        is_stale = not latest_is_expected
+        lag_anchor = latest_successful or latest_final or latest_observed
+        lag_days = max(0, (expected_date - lag_anchor).days)
+
+    latest_heartbeat_date = latest_final or latest_observed
 
     return {
         "total_scheduled_heartbeats": total,
@@ -321,8 +335,9 @@ def compute_heartbeat_summary(
         "failed_or_missing_heartbeats": failed,
         "current_success_streak_days": streak,
         "first_heartbeat_date": first.isoformat(),
-        "latest_heartbeat_date": latest_observed.isoformat(),
+        "latest_heartbeat_date": latest_heartbeat_date.isoformat(),
         "latest_observed_heartbeat_date": latest_observed.isoformat(),
+        "latest_successful_heartbeat_date": latest_successful.isoformat() if latest_successful else None,
         "through_heartbeat_date": through.isoformat(),
         "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
         "latest_heartbeat_is_expected_date": latest_is_expected,
