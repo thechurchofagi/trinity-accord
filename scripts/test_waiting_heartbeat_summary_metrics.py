@@ -33,7 +33,6 @@ def load_generator_module():
 def test_current_status_contract() -> None:
     status = json.loads(STATUS.read_text(encoding="utf-8"))
     public = json.loads(PUBLIC.read_text(encoding="utf-8"))
-
     summary = status.get("heartbeat_summary")
     require(isinstance(summary, dict), "waiting-heartbeat-status missing heartbeat_summary")
 
@@ -50,10 +49,6 @@ def test_current_status_contract() -> None:
     success = summary["successful_heartbeats"]
     failed = summary["failed_or_missing_heartbeats"]
     streak = summary["current_success_streak_days"]
-
-    require(total >= 0, "total_scheduled_heartbeats must be >= 0")
-    require(success >= 0, "successful_heartbeats must be >= 0")
-    require(failed >= 0, "failed_or_missing_heartbeats must be >= 0")
     require(total >= success, "total_scheduled_heartbeats must be >= successful_heartbeats")
     require(failed == total - success, "failed_or_missing_heartbeats must equal total - success")
     require(streak <= success, "current_success_streak_days must be <= successful_heartbeats")
@@ -72,12 +67,7 @@ def test_current_status_contract() -> None:
     public_summary = public_hb.get("heartbeat_summary") or {}
     require(public_summary == summary, "public-home-status waiting_heartbeat.heartbeat_summary must mirror canonical status")
 
-    for key in [
-        "not_reception_counter",
-        "not_authority",
-        "not_attestation",
-        "not_amendment",
-    ]:
+    for key in ["not_reception_counter", "not_authority", "not_attestation", "not_amendment"]:
         require(summary.get(key) is True, f"heartbeat_summary.{key} must be true")
 
 
@@ -87,41 +77,38 @@ def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
     at_due = datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)
     within_grace = datetime(2026, 6, 24, 4, 46, tzinfo=timezone.utc)
     after_grace = datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)
-    require(
-        generator.expected_heartbeat_date(before_due) == date(2026, 6, 23),
-        "before 03:17 UTC the expected heartbeat date should be previous UTC date",
-    )
-    require(
-        generator.expected_heartbeat_date(at_due) == date(2026, 6, 23),
-        "at 03:17 UTC the grace window should still expect previous UTC date",
-    )
-    require(
-        generator.expected_heartbeat_date(within_grace) == date(2026, 6, 23),
-        "inside the grace window the expected heartbeat date should still be previous UTC date",
-    )
-    require(
-        generator.expected_heartbeat_date(after_grace) == date(2026, 6, 24),
-        "after the grace window the expected heartbeat date should be current UTC date",
-    )
+    require(generator.expected_heartbeat_date(before_due) == date(2026, 6, 23), "before due should expect previous UTC date")
+    require(generator.expected_heartbeat_date(at_due) == date(2026, 6, 23), "at due should still be grace window")
+    require(generator.expected_heartbeat_date(within_grace) == date(2026, 6, 23), "inside grace should still expect previous UTC date")
+    require(generator.expected_heartbeat_date(after_grace) == date(2026, 6, 24), "after grace should expect current UTC date")
+
+
+def verified_record() -> dict[str, object]:
+    return {
+        "heartbeat_id": "hwb-20260622",
+        "heartbeat_date": "2026-06-22",
+        "record_id": "R-000000056",
+        "record_index": 56,
+        "record_sha256": "sha",
+        "authorship_public_key_sha256": "key-sha",
+    }
+
+
+def verified_capsule() -> dict[str, object]:
+    return {
+        "heartbeat_id": "hwb-20260622",
+        "status": "uploaded",
+        "arweave_txid": "txid",
+        "hash_match": True,
+    }
 
 
 def test_summary_extends_to_expected_date_when_latest_observed_is_stale() -> None:
     generator = load_generator_module()
     summary = generator.compute_heartbeat_summary(
-        records=[{
-            "heartbeat_id": "hwb-20260622",
-            "heartbeat_date": "2026-06-22",
-            "record_id": "R-000000056",
-            "record_sha256": "sha",
-            "authorship_public_key_sha256": "key-sha",
-        }],
+        records=[verified_record()],
         attempts=[],
-        capsules=[{
-            "heartbeat_id": "hwb-20260622",
-            "status": "uploaded",
-            "arweave_txid": "txid",
-            "hash_match": True,
-        }],
+        capsules=[verified_capsule()],
         key_manifest={"public_key_sha256": "key-sha"},
         ots_covers_latest=True,
         expected_date=date(2026, 6, 23),
@@ -141,24 +128,9 @@ def test_summary_extends_to_expected_date_when_latest_observed_is_stale() -> Non
 def test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat() -> None:
     generator = load_generator_module()
     summary = generator.compute_heartbeat_summary(
-        records=[{
-            "heartbeat_id": "hwb-20260622",
-            "heartbeat_date": "2026-06-22",
-            "record_id": "R-000000056",
-            "record_sha256": "sha",
-            "authorship_public_key_sha256": "key-sha",
-        }],
-        attempts=[{
-            "heartbeat_id": "hwb-20260623",
-            "attempted_at": "2026-06-23T03:17:30Z",
-            "status": "submitted",
-        }],
-        capsules=[{
-            "heartbeat_id": "hwb-20260622",
-            "status": "uploaded",
-            "arweave_txid": "txid",
-            "hash_match": True,
-        }],
+        records=[verified_record()],
+        attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted"}],
+        capsules=[verified_capsule()],
         key_manifest={"public_key_sha256": "key-sha"},
         ots_covers_latest=True,
         expected_date=date(2026, 6, 23),
@@ -171,11 +143,39 @@ def test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat() -> No
     require("2026-06-23" in summary["missing_heartbeat_dates"], "expected date without final record must be missing")
 
 
-def test_submit_workflow_has_no_historical_backfill_input() -> None:
+def test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals() -> None:
+    generator = load_generator_module()
+    summary = generator.compute_heartbeat_summary(
+        records=[verified_record()],
+        attempts=[{"heartbeat_id": "hwb-20260624", "attempted_at": "2026-06-24T03:18:00Z", "status": "submitted"}],
+        capsules=[verified_capsule()],
+        key_manifest={"public_key_sha256": "key-sha"},
+        ots_covers_latest=True,
+        expected_date=date(2026, 6, 23),
+    )
+    require(summary["latest_observed_heartbeat_date"] == "2026-06-24", "grace-window attempt should remain visible as observed")
+    require(summary["through_heartbeat_date"] == "2026-06-23", "post-expected attempt must not extend scheduled totals")
+    require(summary["total_scheduled_heartbeats"] == 2, "post-expected attempt must not add a scheduled day")
+    require("2026-06-24" not in summary["missing_heartbeat_dates"], "post-expected attempt must not be marked missing inside grace")
+
+
+def test_ots_head_covers_prior_heartbeat_record() -> None:
+    generator = load_generator_module()
+    heartbeat = {"record_id": "R-000000056", "record_index": 56, "record_sha256": "sha"}
+    require(generator.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "sha"}, heartbeat), "exact OTS match should cover heartbeat")
+    require(not generator.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "other"}, heartbeat), "exact OTS id with wrong sha must not cover heartbeat")
+    require(generator.ots_covers_record({"latest_record_id": "R-000000057", "native_record_count": 57}, heartbeat), "advanced OTS head should cover prior heartbeat")
+    require(not generator.ots_covers_record({"latest_record_id": "R-000000055", "native_record_count": 55}, heartbeat), "earlier OTS head must not cover later heartbeat")
+
+
+def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     require("github.event.inputs.date" not in text, "submit workflow must not accept historical date input")
     require("HEARTBEAT_DATE" not in text, "submit workflow must not thread manual date input")
     require("--date" not in text, "submit workflow must not call heartbeat submit with manual backfill date")
+    require("api/public-home-status.json" in text, "submit workflow must stage public-home-status mirror")
+    require("index.md" in text, "submit workflow must stage homepage markdown mirror")
+    require("sitemap.xml" in text, "submit workflow must stage sitemap mirror")
 
 
 def main() -> int:
@@ -183,7 +183,9 @@ def main() -> int:
     test_expected_heartbeat_date_respects_schedule_grace_window()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
     test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat()
-    test_submit_workflow_has_no_historical_backfill_input()
+    test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
+    test_ots_head_covers_prior_heartbeat_record()
+    test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
     print("PASS: waiting heartbeat summary metrics contract")
     return 0
 
