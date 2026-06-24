@@ -10,8 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 STATUS = ROOT / "api" / "waiting-heartbeat-status.json"
 PUBLIC = ROOT / "api" / "public-home-status.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-submit.yml"
+CAPSULE_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-capsule.yml"
 GENERATOR = ROOT / "scripts" / "generate_waiting_heartbeat_status.py"
 CAPSULE_BUILDER = ROOT / "scripts" / "build_waiting_heartbeat_arweave_capsule.py"
+CAPSULE_UPLOAD = ROOT / "scripts" / "arweave_upload_waiting_heartbeat_capsule.mjs"
+CAPSULE_REPAIR = ROOT / "scripts" / "repair_waiting_heartbeat_arweave_capsule_readback.mjs"
 
 
 def fail(message: str) -> None:
@@ -170,6 +173,34 @@ def test_ots_head_covers_prior_heartbeat_record() -> None:
         require(not module.ots_covers_record({"latest_record_id": "R-000000055", "native_record_count": 55}, heartbeat), "earlier OTS head must not cover later heartbeat")
 
 
+def test_capsule_builder_recognizes_existing_result_states() -> None:
+    builder = load_capsule_builder_module()
+    require(builder.capsule_is_verified({"status": "uploaded", "arweave_txid": "txid", "hash_match": True}), "verified result should skip upload")
+    require(builder.capsule_needs_readback_repair({"status": "posted_pending_readback", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "pending result should request readback repair")
+    require(builder.capsule_needs_readback_repair({"status": "readback_failed", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "legacy readback_failed should request readback repair")
+    require(not builder.capsule_needs_readback_repair({"status": "readback_hash_mismatch", "arweave_txid": "txid", "hash_match": False, "retryable": False}), "hash mismatch must not request retry repair")
+
+
+def test_capsule_workflow_preserves_upload_result_before_status_update() -> None:
+    text = CAPSULE_WORKFLOW.read_text(encoding="utf-8")
+    require("capsule_readback_repair_needed" in text, "capsule workflow must support readback repair mode")
+    require("repair_waiting_heartbeat_arweave_capsule_readback.mjs" in text, "capsule workflow must call readback repair script")
+    require("steps.capsule_preflight.outputs.capsule_path" in text, "capsule workflow must use the preflight-selected payload path")
+    require("echo \"exit_code=$?\" >> \"$GITHUB_OUTPUT\"" in text, "capsule workflow must capture upload/repair exit code without skipping commit")
+    require("Commit capsule metadata" in text, "capsule workflow must still commit generated capsule metadata")
+
+
+def test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable() -> None:
+    upload = CAPSULE_UPLOAD.read_text(encoding="utf-8")
+    repair = CAPSULE_REPAIR.read_text(encoding="utf-8")
+    require("ARWEAVE_READBACK_PENDING" in upload, "upload script must treat unavailable readback as pending")
+    require("readback_hash_mismatch" in upload, "upload script must preserve hard hash mismatch status")
+    require("retry_readback_without_reupload" in upload, "upload script must direct follow-up to readback repair")
+    require("posted_pending_readback" in repair, "repair script must keep unavailable txids pending")
+    require("local_payload_mismatch_for_existing_tx" in repair, "repair script must detect local payload drift")
+    require("retry_readback_without_reupload" in repair, "repair script must avoid duplicate upload on delayed readback")
+
+
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     require("github.event.inputs.date" not in text, "submit workflow must not accept historical date input")
@@ -187,6 +218,9 @@ def main() -> int:
     test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat()
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
     test_ots_head_covers_prior_heartbeat_record()
+    test_capsule_builder_recognizes_existing_result_states()
+    test_capsule_workflow_preserves_upload_result_before_status_update()
+    test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable()
     test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
     print("PASS: waiting heartbeat summary metrics contract")
     return 0
