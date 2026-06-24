@@ -11,6 +11,7 @@ STATUS = ROOT / "api" / "waiting-heartbeat-status.json"
 PUBLIC = ROOT / "api" / "public-home-status.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-submit.yml"
 GENERATOR = ROOT / "scripts" / "generate_waiting_heartbeat_status.py"
+CAPSULE_BUILDER = ROOT / "scripts" / "build_waiting_heartbeat_arweave_capsule.py"
 
 
 def fail(message: str) -> None:
@@ -22,12 +23,20 @@ def require(condition: bool, message: str) -> None:
         fail(message)
 
 
-def load_generator_module():
-    spec = importlib.util.spec_from_file_location("generate_waiting_heartbeat_status", GENERATOR)
-    require(spec is not None and spec.loader is not None, "could not load waiting heartbeat generator")
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
+    require(spec is not None and spec.loader is not None, f"could not load {name}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def load_generator_module():
+    return load_module(GENERATOR, "generate_waiting_heartbeat_status")
+
+
+def load_capsule_builder_module():
+    return load_module(CAPSULE_BUILDER, "build_waiting_heartbeat_arweave_capsule")
 
 
 def test_current_status_contract() -> None:
@@ -73,14 +82,10 @@ def test_current_status_contract() -> None:
 
 def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
     generator = load_generator_module()
-    before_due = datetime(2026, 6, 24, 1, 32, tzinfo=timezone.utc)
-    at_due = datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)
-    within_grace = datetime(2026, 6, 24, 4, 46, tzinfo=timezone.utc)
-    after_grace = datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)
-    require(generator.expected_heartbeat_date(before_due) == date(2026, 6, 23), "before due should expect previous UTC date")
-    require(generator.expected_heartbeat_date(at_due) == date(2026, 6, 23), "at due should still be grace window")
-    require(generator.expected_heartbeat_date(within_grace) == date(2026, 6, 23), "inside grace should still expect previous UTC date")
-    require(generator.expected_heartbeat_date(after_grace) == date(2026, 6, 24), "after grace should expect current UTC date")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 1, 32, tzinfo=timezone.utc)) == date(2026, 6, 23), "before due should expect previous UTC date")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "at due should still be grace window")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside grace should still expect previous UTC date")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "after grace should expect current UTC date")
 
 
 def verified_record() -> dict[str, object]:
@@ -95,12 +100,7 @@ def verified_record() -> dict[str, object]:
 
 
 def verified_capsule() -> dict[str, object]:
-    return {
-        "heartbeat_id": "hwb-20260622",
-        "status": "uploaded",
-        "arweave_txid": "txid",
-        "hash_match": True,
-    }
+    return {"heartbeat_id": "hwb-20260622", "status": "uploaded", "arweave_txid": "txid", "hash_match": True}
 
 
 def test_summary_extends_to_expected_date_when_latest_observed_is_stale() -> None:
@@ -161,11 +161,13 @@ def test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_tota
 
 def test_ots_head_covers_prior_heartbeat_record() -> None:
     generator = load_generator_module()
+    builder = load_capsule_builder_module()
     heartbeat = {"record_id": "R-000000056", "record_index": 56, "record_sha256": "sha"}
-    require(generator.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "sha"}, heartbeat), "exact OTS match should cover heartbeat")
-    require(not generator.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "other"}, heartbeat), "exact OTS id with wrong sha must not cover heartbeat")
-    require(generator.ots_covers_record({"latest_record_id": "R-000000057", "native_record_count": 57}, heartbeat), "advanced OTS head should cover prior heartbeat")
-    require(not generator.ots_covers_record({"latest_record_id": "R-000000055", "native_record_count": 55}, heartbeat), "earlier OTS head must not cover later heartbeat")
+    for module in [generator, builder]:
+        require(module.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "sha"}, heartbeat), "exact OTS match should cover heartbeat")
+        require(not module.ots_covers_record({"latest_record_id": "R-000000056", "latest_record_sha256": "other"}, heartbeat), "exact OTS id with wrong sha must not cover heartbeat")
+        require(module.ots_covers_record({"latest_record_id": "R-000000057", "native_record_count": 57}, heartbeat), "advanced OTS head should cover prior heartbeat")
+        require(not module.ots_covers_record({"latest_record_id": "R-000000055", "native_record_count": 55}, heartbeat), "earlier OTS head must not cover later heartbeat")
 
 
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
