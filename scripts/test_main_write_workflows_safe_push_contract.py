@@ -64,6 +64,21 @@ def test_archive_workflow_rebuilds_after_rebase():
     assert not missing, f"{path}: missing archive retry safety pieces: {missing}"
 
 
+def test_archive_workflow_stages_all_generated_metadata_before_rebase():
+    path = WORKFLOWS / "record-chain-arweave-archive.yml"
+    text = path.read_text(encoding="utf-8")
+    for target in [
+        "record-chain/arweave-archives/",
+        "api/record-chain-arweave-index.json",
+        "record-chain/ots/native-ots-backlog.json",
+        "arweave-wallet-ledger.json",
+    ]:
+        assert target in text, f"{path}: missing archive generated target {target}"
+    first_commit = text.index("archive: update native record-chain Arweave archive metadata")
+    first_rebase = text.index("git rebase origin/main", first_commit)
+    assert "assert_clean_worktree" in text[first_commit:first_rebase]
+
+
 def test_record_chain_index_writers_stage_overlay_mirror():
     offenders = []
     for name in ["record-chain-build-batch.yml", "record-chain-append.yml"]:
@@ -82,6 +97,7 @@ def test_write_path_guard_classifies_overlay_as_generated():
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_archive_workflow_rebuilds_after_rebase()
+    test_archive_workflow_stages_all_generated_metadata_before_rebase()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()
     print("All main-write workflow contract tests passed.")
