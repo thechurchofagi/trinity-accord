@@ -32,7 +32,11 @@ function txUrl(gateway, txid) {
 }
 
 function writeResult(path, result, patch) {
-  fs.writeFileSync(path, JSON.stringify({ ...result, ...patch }, null, 2) + "\n");
+  const merged = { ...result, ...patch };
+  if (Object.prototype.hasOwnProperty.call(patch, "status")) {
+    delete merged.result;
+  }
+  fs.writeFileSync(path, JSON.stringify(merged, null, 2) + "\n");
 }
 
 async function fetchBytes(url) {
