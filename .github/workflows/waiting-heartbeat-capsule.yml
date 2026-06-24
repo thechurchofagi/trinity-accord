@@ -54,26 +54,26 @@ jobs:
           set -euo pipefail
           python3 scripts/build_waiting_heartbeat_arweave_capsule.py
 
-      - name: Build capsule
-        id: build
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
-        run: |
-          set -euo pipefail
-          capsule_path="$(python3 scripts/build_waiting_heartbeat_arweave_capsule.py)"
-          echo "capsule_path=${capsule_path}" >> "$GITHUB_OUTPUT"
-          heartbeat_id="$(basename "$capsule_path" .capsule.json)"
-          echo "heartbeat_id=${heartbeat_id}" >> "$GITHUB_OUTPUT"
-
       - name: Upload capsule
+        id: upload
         if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
         run: |
-          node scripts/arweave_upload_waiting_heartbeat_capsule.mjs \
-            --payload "${{ steps.build.outputs.capsule_path }}" \
-            --heartbeat-id "${{ steps.build.outputs.heartbeat_id }}" \
-            --out "record-chain/heartbeat/capsules/${{ steps.build.outputs.heartbeat_id }}.upload-result.json"
+          set +e
+          node scripts/arweave_upload_waiting_heartbeat_capsule.mjs --payload "${{ steps.capsule_preflight.outputs.capsule_path }}" --heartbeat-id "${{ steps.capsule_preflight.outputs.heartbeat_id }}" --out "${{ steps.capsule_preflight.outputs.upload_result_path }}"
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Repair pending capsule readback
+        id: repair
+        if: steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
+        run: |
+          set +e
+          node scripts/repair_waiting_heartbeat_arweave_capsule_readback.mjs --payload "${{ steps.capsule_preflight.outputs.capsule_path }}" --heartbeat-id "${{ steps.capsule_preflight.outputs.heartbeat_id }}" --upload-result "${{ steps.capsule_preflight.outputs.upload_result_path }}"
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Regenerate status and public artifacts
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true' || steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
         run: |
           python3 scripts/generate_waiting_heartbeat_status.py
           python3 scripts/update_public_generated_artifacts.py
@@ -81,7 +81,7 @@ jobs:
           python3 scripts/trinity_record_chain.py verify
 
       - name: Commit capsule metadata
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
+        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true' || steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
         run: |
           set -euo pipefail
 
@@ -97,14 +97,7 @@ jobs:
 
           stage_capsule_metadata() {
             git status --short
-            git add -A \
-              record-chain/heartbeat \
-              api/waiting-heartbeat-status.json \
-              api/record-chain-status.json \
-              api/record-chain-overlays.json \
-              api/public-home-status.json \
-              index.md \
-              sitemap.xml
+            git add -A record-chain/heartbeat api/waiting-heartbeat-status.json api/record-chain-status.json api/record-chain-overlays.json api/public-home-status.json index.md sitemap.xml
           }
 
           stage_capsule_metadata
@@ -140,7 +133,7 @@ jobs:
             fi
 
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Worktree dirty after amend; refusing to push."
+              echo "Worktree dirty after amend."
               git status --short
               exit 1
             fi
@@ -150,7 +143,7 @@ jobs:
           exit 1
 
       - name: Capsule waiting summary
-        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true'
+        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true' && steps.capsule_preflight.outputs.capsule_readback_repair_needed != 'true'
         run: |
           echo "Capsule upload skipped."
           echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
