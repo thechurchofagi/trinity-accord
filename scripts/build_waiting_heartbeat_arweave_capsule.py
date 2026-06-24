@@ -56,13 +56,17 @@ def capsule_txid(capsule: dict[str, Any] | None) -> str | None:
 def capsule_status(capsule: dict[str, Any] | None) -> str | None:
     if not capsule:
         return None
-    value = capsule.get("result") or capsule.get("status")
+    value = capsule.get("status") or capsule.get("result")
     return value if isinstance(value, str) else None
 
 
 def capsule_is_verified(capsule: dict[str, Any] | None) -> bool:
     status = capsule_status(capsule)
     return bool(capsule_txid(capsule)) and capsule.get("hash_match") is True and status in VERIFIED_CAPSULE_STATUSES
+
+
+def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
+    return capsule_status(capsule) in NON_RETRYABLE_READBACK_STATUSES
 
 
 def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:
@@ -171,7 +175,12 @@ def main() -> int:
     ots = read_json(OTS)
     capsule_path = capsule_payload_path(heartbeat_id)
     upload_result_path = capsule_upload_result_path(heartbeat_id)
-    common_outputs = {"heartbeat_id": heartbeat_id, "capsule_path": repo_rel(capsule_path), "upload_result_path": repo_rel(upload_result_path)}
+    common_outputs = {
+        "heartbeat_id": heartbeat_id,
+        "capsule_path": repo_rel(capsule_path),
+        "upload_result_path": repo_rel(upload_result_path),
+        "capsule_hard_failure": "false",
+    }
 
     if not ots_covers_record(ots, latest):
         print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
@@ -184,13 +193,19 @@ def main() -> int:
         write_github_output({**common_outputs, "capsule_status": "already_verified", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_skip_reason": "existing_verified_arweave_capsule"})
         return 0
 
+    if capsule_has_non_retryable_failure(existing_result):
+        existing_status = str(capsule_status(existing_result))
+        print(f"::error::Existing Arweave capsule result for {heartbeat_id} is non-retryable: {existing_status}")
+        write_github_output({**common_outputs, "capsule_status": existing_status, "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_hard_failure": "true", "capsule_skip_reason": "existing_non_retryable_arweave_capsule_result"})
+        return 0
+
     if capsule_needs_readback_repair(existing_result):
         if capsule_path.exists():
             print(f"::notice::Existing Arweave transaction for {heartbeat_id} needs readback repair; upload skipped.")
             write_github_output({**common_outputs, "capsule_status": "readback_repair_needed", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "true", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_upload_needs_readback_repair"})
             return 0
         print(f"::warning::Existing Arweave transaction for {heartbeat_id} has no local capsule payload; upload skipped.")
-        write_github_output({**common_outputs, "capsule_status": "missing_payload_for_existing_tx", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_arweave_tx_without_local_capsule_payload"})
+        write_github_output({**common_outputs, "capsule_status": "missing_payload_for_existing_tx", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_hard_failure": "true", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_arweave_tx_without_local_capsule_payload"})
         return 0
 
     payload = build_payload(latest, chain_tip, ots)
