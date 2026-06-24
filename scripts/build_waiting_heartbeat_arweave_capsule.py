@@ -41,7 +41,7 @@ def write_github_output(values: dict[str, str]) -> None:
             fh.write(f"{key}={value}\n")
 
 
-def ots_covers_heartbeat(ots: dict[str, Any], heartbeat: dict[str, Any]) -> bool:
+def ots_covers_record(ots: dict[str, Any], heartbeat: dict[str, Any]) -> bool:
     """Return whether the native OTS head covers a heartbeat record.
 
     Exact matches must also match the heartbeat record hash. When OTS has
@@ -66,7 +66,7 @@ def main() -> int:
     chain_tip = read_json(CHAIN_TIP)
     ots = read_json(OTS)
 
-    if not ots_covers_heartbeat(ots, latest):
+    if not ots_covers_record(ots, latest):
         print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
         write_github_output({
             "capsule_status": "waiting_for_ots",
