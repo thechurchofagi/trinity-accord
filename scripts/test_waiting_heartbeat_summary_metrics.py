@@ -176,9 +176,12 @@ def test_ots_head_covers_prior_heartbeat_record() -> None:
 def test_capsule_builder_recognizes_existing_result_states() -> None:
     builder = load_capsule_builder_module()
     require(builder.capsule_is_verified({"status": "uploaded", "arweave_txid": "txid", "hash_match": True}), "verified result should skip upload")
+    require(builder.capsule_is_verified({"result": "readback_failed", "status": "uploaded", "arweave_txid": "txid", "hash_match": True}), "canonical status should win over legacy result")
     require(builder.capsule_needs_readback_repair({"status": "posted_pending_readback", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "pending result should request readback repair")
     require(builder.capsule_needs_readback_repair({"status": "readback_failed", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "legacy readback_failed should request readback repair")
     require(not builder.capsule_needs_readback_repair({"status": "readback_hash_mismatch", "arweave_txid": "txid", "hash_match": False, "retryable": False}), "hash mismatch must not request retry repair")
+    require(builder.capsule_has_non_retryable_failure({"status": "readback_hash_mismatch", "arweave_txid": "txid", "hash_match": False, "retryable": False}), "hash mismatch must be a hard failure")
+    require(builder.capsule_has_non_retryable_failure({"status": "local_payload_mismatch_for_existing_tx", "arweave_txid": "txid", "hash_match": False, "retryable": False}), "local payload mismatch must be a hard failure")
 
 
 def test_capsule_workflow_preserves_upload_result_before_status_update() -> None:
@@ -188,6 +191,10 @@ def test_capsule_workflow_preserves_upload_result_before_status_update() -> None
     require("steps.capsule_preflight.outputs.capsule_path" in text, "capsule workflow must use the preflight-selected payload path")
     require("echo \"exit_code=$?\" >> \"$GITHUB_OUTPUT\"" in text, "capsule workflow must capture upload/repair exit code without skipping commit")
     require("Commit capsule metadata" in text, "capsule workflow must still commit generated capsule metadata")
+    require("Fail on preserved upload or repair error" in text, "capsule workflow must fail after committing nonzero upload or repair exits")
+    require("steps.upload.outputs.exit_code != '0'" in text, "capsule workflow must check upload exit code after commit")
+    require("steps.repair.outputs.exit_code != '0'" in text, "capsule workflow must check repair exit code after commit")
+    require("capsule_hard_failure" in text, "capsule workflow must surface non-retryable preflight states")
 
 
 def test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable() -> None:
@@ -199,6 +206,7 @@ def test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable() -> 
     require("posted_pending_readback" in repair, "repair script must keep unavailable txids pending")
     require("local_payload_mismatch_for_existing_tx" in repair, "repair script must detect local payload drift")
     require("retry_readback_without_reupload" in repair, "repair script must avoid duplicate upload on delayed readback")
+    require("delete merged.result" in repair, "repair script must clear legacy result when writing canonical status")
 
 
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
