@@ -28,9 +28,33 @@ STATUS_PATH = ROOT / "api" / "waiting-heartbeat-status.json"
 OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
 WAITING_HEARTBEAT_KEY = ROOT / "api" / "waiting-heartbeat-key.v1.json"
 
+# The scheduled submit workflow runs at 03:17 UTC. Before that daily window,
+# the current UTC date is not expected to have a heartbeat yet, so the expected
+# heartbeat is yesterday's UTC date. This prevents Beijing-morning page renders
+# from falsely marking the same UTC day missing before the scheduled run is due,
+# while still marking genuinely stale prior days as missing.
+HEARTBEAT_DUE_UTC_HOUR = 3
+HEARTBEAT_DUE_UTC_MINUTE = 17
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def expected_heartbeat_date(now: datetime | None = None) -> date:
+    now = now or datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    now = now.astimezone(timezone.utc)
+    due = now.replace(
+        hour=HEARTBEAT_DUE_UTC_HOUR,
+        minute=HEARTBEAT_DUE_UTC_MINUTE,
+        second=0,
+        microsecond=0,
+    )
+    if now < due:
+        return now.date() - timedelta(days=1)
+    return now.date()
 
 
 def read_json(path: Path, default: Any = None) -> Any:
@@ -180,6 +204,7 @@ def compute_heartbeat_summary(
     capsules: list[dict[str, Any]],
     key_manifest: dict[str, Any],
     ots_covers_latest: bool,
+    expected_date: date | None = None,
 ) -> dict[str, Any]:
     records_by_date: dict[date, dict[str, Any]] = {}
     for record in records:
@@ -220,6 +245,12 @@ def compute_heartbeat_summary(
             "current_success_streak_days": 0,
             "first_heartbeat_date": None,
             "latest_heartbeat_date": None,
+            "latest_observed_heartbeat_date": None,
+            "through_heartbeat_date": expected_date.isoformat() if expected_date else None,
+            "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
+            "latest_heartbeat_is_expected_date": False,
+            "heartbeat_lag_days": None,
+            "is_stale": False,
             "missing_heartbeat_dates": [],
             "failed_attempt_dates": [],
             "success_definition": {
@@ -235,8 +266,9 @@ def compute_heartbeat_summary(
         }
 
     first = min(observed_dates)
-    latest = max(observed_dates)
-    scheduled_dates = date_range(first, latest)
+    latest_observed = max(observed_dates)
+    through = max(latest_observed, expected_date) if expected_date is not None else latest_observed
+    scheduled_dates = date_range(first, through)
 
     expected_key_sha = key_manifest.get("public_key_sha256")
     success_by_date: dict[date, bool] = {}
@@ -269,10 +301,18 @@ def compute_heartbeat_summary(
     failed = total - successful
 
     streak = 0
-    cur = latest
+    cur = through
     while cur in success_by_date and success_by_date[cur]:
         streak += 1
         cur -= timedelta(days=1)
+
+    lag_days = None
+    latest_is_expected = False
+    is_stale = False
+    if expected_date is not None:
+        lag_days = max(0, (expected_date - latest_observed).days)
+        latest_is_expected = latest_observed >= expected_date
+        is_stale = lag_days > 0
 
     return {
         "total_scheduled_heartbeats": total,
@@ -281,7 +321,13 @@ def compute_heartbeat_summary(
         "failed_or_missing_heartbeats": failed,
         "current_success_streak_days": streak,
         "first_heartbeat_date": first.isoformat(),
-        "latest_heartbeat_date": latest.isoformat(),
+        "latest_heartbeat_date": latest_observed.isoformat(),
+        "latest_observed_heartbeat_date": latest_observed.isoformat(),
+        "through_heartbeat_date": through.isoformat(),
+        "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
+        "latest_heartbeat_is_expected_date": latest_is_expected,
+        "heartbeat_lag_days": lag_days,
+        "is_stale": is_stale,
         "missing_heartbeat_dates": missing_heartbeat_dates,
         "failed_attempt_dates": sorted(d.isoformat() for d in failed_attempt_dates),
         "latest_ots_head_covers_current_chain": bool(ots_covers_latest),
@@ -309,7 +355,7 @@ def main() -> int:
     latest_capsule = None
     if latest:
         same = [c for c in capsules if c.get("heartbeat_id") == latest.get("heartbeat_id")]
-        same.sort(key=lambda c: c.get("uploaded_at") or "")
+        same.sort(key=lambda c: c.get("uploaded_at") or c.get("attempted_at") or "")
         latest_capsule = same[-1] if same else None
 
     final_record_exists = latest is not None
@@ -333,9 +379,14 @@ def main() -> int:
         capsules=capsules,
         key_manifest=key_manifest,
         ots_covers_latest=ots_covers_latest,
+        expected_date=expected_heartbeat_date(),
     )
 
-    if final_record_exists and not key_continuity_ok:
+    if heartbeat_summary.get("is_stale") is True:
+        daily_alive_status = "failed"
+        latest_result = "missing_expected_waiting_heartbeat"
+        failure_stage = "freshness"
+    elif final_record_exists and not key_continuity_ok:
         daily_alive_status = "failed"
         latest_result = "key_continuity_failed"
         failure_stage = "key_continuity"
@@ -406,6 +457,9 @@ def main() -> int:
             "waiting_heartbeat_key_continuity_ok": key_continuity_ok,
             "expected_waiting_heartbeat_public_key_sha256": expected_key_sha,
             "actual_waiting_heartbeat_public_key_sha256": actual_key_sha,
+            "expected_heartbeat_date": heartbeat_summary.get("expected_heartbeat_date"),
+            "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
+            "latest_heartbeat_is_expected_date": heartbeat_summary.get("latest_heartbeat_is_expected_date"),
         },
         "heartbeat_summary": heartbeat_summary,
         "counts": {
@@ -418,6 +472,7 @@ def main() -> int:
             "failed_heartbeats": heartbeat_summary["failed_heartbeats"],
             "failed_or_missing_heartbeats": heartbeat_summary["failed_or_missing_heartbeats"],
             "current_success_streak_days": heartbeat_summary["current_success_streak_days"],
+            "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
         },
         "semantic_agent_arrival": {
             "first_self_discovered_autonomous_agent_arrived": False,
