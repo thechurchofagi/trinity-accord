@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
-  "created_at": "2026-06-24T08:56:04Z",
+  "created_at": "2026-06-24T11:41:04Z",
   "heartbeat_id": "hwb-20260624",
   "heartbeat_record": {
     "record_id": "R-000000057",
@@ -19,10 +19,10 @@
     "latest_record_id": "R-000000057",
     "latest_record_sha256": "640cb1e46850c9f08d1aec629a213f8a61f100d9f798e7b49de28ee67a77cd92",
     "native_record_count": 57,
-    "ots_status": "pending",
-    "bitcoin_pending": true,
+    "ots_status": "upgraded",
+    "bitcoin_pending": false,
     "bitcoin_verified": false,
-    "strict_bitcoin_verified": null,
+    "strict_bitcoin_verified": false,
     "latest_ots_file": "record-chain/ots/native-anchors/native-record-57-R-000000057-640cb1e46850c9f0-5465f093d5a0d4e5.native-record-chain-head-commitment.json.ots",
     "anchored_file_sha256": "5465f093d5a0d4e52c5b24c27d6d19bfe1240b20e826c6848c2376c9b6f1793a"
   },
