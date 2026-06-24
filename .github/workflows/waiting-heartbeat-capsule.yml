@@ -142,8 +142,23 @@ jobs:
           echo "Failed to push after retries."
           exit 1
 
+      - name: Fail on preserved upload or repair error
+        if: ${{ (steps.capsule_preflight.outputs.capsule_upload_needed == 'true' && steps.upload.outputs.exit_code != '0') || (steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true' && steps.repair.outputs.exit_code != '0') }}
+        run: |
+          echo "::error::Capsule upload or repair exited nonzero after generated metadata was preserved."
+          echo "upload_exit=${{ steps.upload.outputs.exit_code }} repair_exit=${{ steps.repair.outputs.exit_code }}"
+          exit 1
+
+      - name: Fail on non-retryable capsule state
+        if: steps.capsule_preflight.outputs.capsule_hard_failure == 'true'
+        run: |
+          echo "::error::Waiting heartbeat capsule has a non-retryable Arweave state."
+          echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
+          echo "reason=${{ steps.capsule_preflight.outputs.capsule_skip_reason }}"
+          exit 1
+
       - name: Capsule waiting summary
-        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true' && steps.capsule_preflight.outputs.capsule_readback_repair_needed != 'true'
+        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true' && steps.capsule_preflight.outputs.capsule_readback_repair_needed != 'true' && steps.capsule_preflight.outputs.capsule_hard_failure != 'true'
         run: |
           echo "Capsule upload skipped."
           echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
