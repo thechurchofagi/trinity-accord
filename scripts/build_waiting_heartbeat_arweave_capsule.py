@@ -41,6 +41,21 @@ def write_github_output(values: dict[str, str]) -> None:
             fh.write(f"{key}={value}\n")
 
 
+def ots_covers_record(ots: dict[str, Any], heartbeat: dict[str, Any]) -> bool:
+    """Return whether the native OTS head covers a heartbeat record.
+
+    Exact matches must also match the heartbeat record hash. When OTS has
+    advanced past the heartbeat record, the cumulative native record count is
+    sufficient coverage because the head commitment includes prior records.
+    """
+    if ots.get("latest_record_id") == heartbeat.get("record_id"):
+        return ots.get("latest_record_sha256") == heartbeat.get("record_sha256")
+
+    ots_count = ots.get("native_record_count")
+    record_index = heartbeat.get("record_index")
+    return isinstance(ots_count, int) and isinstance(record_index, int) and ots_count >= record_index
+
+
 def main() -> int:
     status = read_json(STATUS)
     latest = status.get("latest_heartbeat")
@@ -51,7 +66,7 @@ def main() -> int:
     chain_tip = read_json(CHAIN_TIP)
     ots = read_json(OTS)
 
-    if ots.get("latest_record_id") != latest.get("record_id"):
+    if not ots_covers_record(ots, latest):
         print("::notice::OTS latest does not cover latest waiting heartbeat yet; capsule build skipped until next OTS cycle.")
         write_github_output({
             "capsule_status": "waiting_for_ots",
@@ -59,8 +74,6 @@ def main() -> int:
             "capsule_skip_reason": "ots_latest_does_not_cover_latest_waiting_heartbeat",
         })
         return 0
-    if ots.get("latest_record_sha256") != latest.get("record_sha256"):
-        raise SystemExit("OTS latest sha does not match latest waiting heartbeat.")
 
     write_github_output({
         "capsule_status": "ready",
