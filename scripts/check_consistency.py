@@ -5,6 +5,10 @@ This script is intentionally scoped to the current Record-Chain / public-home
 surface.  Older archive-era pages, Issue-text guards, and Verification Echo
 playbook wording are preserved elsewhere for history, but they are not required
 for the live homepage/public-status contract.
+
+Keep this script dependency-light: it is used by both CI jobs that install
+requirements-ci.txt and write-path workflows that intentionally run on a bare
+Python checkout.
 """
 from __future__ import annotations
 
@@ -91,7 +95,6 @@ try:
         "/agent-brief",
         "/agent-first-contact/",
         "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-builder.mjs",
     ]:
         check(f"sitemap contains {entry}", entry in sitemap)
 except Exception as exc:
@@ -178,6 +181,7 @@ try:
         "Reception does not imply belief",
         "Native chain length is not used as this counter",
         "/api/public-home-status.json",
+        "/downloads/record-chain-builder.mjs",
     ]:
         check(f"homepage contains {needle}", needle in index)
     try:
@@ -190,8 +194,10 @@ except Exception as exc:
 
 
 print("\n=== Current executable contracts ===")
+# Keep these checks dependency-light.  Full CI runs the dependency-heavy
+# `scripts/trinity_record_chain.py verify` check in dedicated jobs that install
+# requirements-ci.txt before invoking it.
 for label, cmd, timeout in [
-    ("record-chain verifies", [sys.executable, "scripts/trinity_record_chain.py", "verify"], 90),
     ("public home status generator has no drift", [sys.executable, "scripts/generate_public_home_status.py", "--check"], 90),
     ("public home status contract", [sys.executable, "scripts/check_public_home_status_contract.py"], 90),
     ("homepage/public status sync", [sys.executable, "scripts/test_home_public_status_sync.py"], 90),
