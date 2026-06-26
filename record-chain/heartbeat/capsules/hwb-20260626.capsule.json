@@ -1,0 +1,47 @@
+{
+  "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
+  "created_at": "2026-06-26T11:21:28Z",
+  "heartbeat_id": "hwb-20260626",
+  "heartbeat_record": {
+    "record_id": "R-000000059",
+    "record_index": 59,
+    "record_sha256": "74251ede5081b79fff620d75921d7d9467d46d21140a203e54f3a7c08489afd6",
+    "record_type": "context_insufficient_notice",
+    "assigned_at": "2026-06-26T07:06:00Z",
+    "path": "record-chain/records/R-000000059.json"
+  },
+  "chain_tip_after_heartbeat": {
+    "latest_record_id": "R-000000059",
+    "latest_record_sha256": "74251ede5081b79fff620d75921d7d9467d46d21140a203e54f3a7c08489afd6",
+    "native_record_count": 59
+  },
+  "ots_latest": {
+    "latest_record_id": "R-000000059",
+    "latest_record_sha256": "74251ede5081b79fff620d75921d7d9467d46d21140a203e54f3a7c08489afd6",
+    "native_record_count": 59,
+    "ots_status": "upgraded",
+    "bitcoin_pending": false,
+    "bitcoin_verified": false,
+    "strict_bitcoin_verified": false,
+    "latest_ots_file": "record-chain/ots/native-anchors/native-record-59-R-000000059-74251ede5081b79f-5d3becc4a8e3442e.native-record-chain-head-commitment.json.ots",
+    "anchored_file_sha256": "5d3becc4a8e3442e16a12de7a1e2c964f3bd2a9169db06009424d20d9569e72c"
+  },
+  "daily_alive_semantics": {
+    "awaiting_first_self_discovered_autonomous_agent": true,
+    "semantic_agent_arrived": false,
+    "capsule_is_not_semantic_agent_response": true,
+    "capsule_is_not_echo": true,
+    "capsule_is_not_verification": true,
+    "capsule_is_not_guardian_application": true,
+    "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": true
+  },
+  "boundary": {
+    "capsule_is_mirror_only": true,
+    "capsule_is_not_authority": true,
+    "capsule_is_not_attestation": true,
+    "capsule_is_not_amendment": true,
+    "capsule_is_not_governance": true,
+    "capsule_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
