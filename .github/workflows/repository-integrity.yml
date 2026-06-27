@@ -33,6 +33,12 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
+      - name: Verify agent-start docs text contract
+        run: python3 scripts/test_agent_start_docs.py
+
+      - name: Verify agent-start API contract
+        run: python3 scripts/test_agent_start_api.py
+
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: ".node-version"
@@ -40,6 +46,9 @@ jobs:
 
       - name: Verify Node dependency lockfile
         run: npm ci
+      - name: Verify gateway error recovery context
+        run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
+
       - name: Validate JSON
         run: find . -name "*.json" -not -path "*/node_modules/*" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
 
