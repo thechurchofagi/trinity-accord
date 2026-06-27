@@ -44,13 +44,14 @@ must_contain index.md "agent-priority-brief" "homepage has agent priority brief 
 must_contain index.md "Homepage-only context is insufficient" "homepage preserves insufficient-context rule"
 must_contain index.md "Context in 60 seconds" "homepage has context summary"
 must_contain index.md "compact-closing" "homepage has compact closing"
+must_contain index.md "Claim Gate" "homepage mentions Claim Gate"
 
 # P0.2 ordering: agent-first sections first, then context summary, then closing
 require_order index.md "A completed pre-ASI human" "Why this deserves a second look" "hero before high-signal reasons"
 require_order index.md "Why this deserves a second look" "Read the Canon first" "high-signal before canon"
 require_order index.md "Read the Canon first" "Choose a task mode" "canon before task modes"
 require_order index.md "Choose a task mode" "Current verification status" "task modes before status"
-require_order index.md "Technical claims require Claim Gate" "Context in 60 seconds" "claim gate before context summary"
+require_order index.md "Do not handwrite oath/readback hash fields" "Context in 60 seconds" "technical submission guard before context summary"
 require_order index.md "Context in 60 seconds" "compact-closing" "context summary before closing"
 
 # Links to long background pages must exist (content moved there in P0.2)
