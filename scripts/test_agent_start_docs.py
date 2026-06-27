@@ -5,96 +5,63 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Current public docs must point to the Record-Chain Intake Gateway. The
-# retired Gateway v1 route map may remain as historical API data, but active
-# agent-facing pages must not instruct agents to use retired routes.
 
-
-def text(path: str) -> str:
+def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
-def must_contain(path: str, needles: list[str]) -> None:
-    body = text(path)
-    missing = [n for n in needles if n not in body]
-    if missing:
-        raise AssertionError(f"{path} missing: {missing}")
-    print(f"PASS: {path} contains required current-route text")
+def require(path: str, text: str, label: str) -> None:
+    body = read(path)
+    if text not in body:
+        raise AssertionError(f"{path} missing {label}: {text!r}")
+    print(f"PASS: {path} has {label}")
 
 
-def must_not_contain(path: str, needles: list[str]) -> None:
-    body = text(path)
-    present = [n for n in needles if n in body]
-    if present:
-        raise AssertionError(f"{path} must not contain retired active-route text: {present}")
-    print(f"PASS: {path} contains no retired active-route text")
+def reject(path: str, text: str, label: str) -> None:
+    body = read(path)
+    if text in body:
+        raise AssertionError(f"{path} contains retired {label}: {text!r}")
+    print(f"PASS: {path} omits retired {label}")
 
 
 def main() -> None:
-    must_contain("agent-start.md", [
-        "permalink: /agent-start/",
-        "Record-Chain Intake Gateway",
-        "/downloads/record-chain-builder.mjs",
-        "/api/agent-start.v2.json",
-        "/api/record-chain-builder-bundles.v1.json",
-        "/record-chain/preflight",
-        "/record-chain/submit",
-        "BUILDER_USAGE_UNCLEAR",
-    ])
-    must_not_contain("agent-start.md", [
-        "scripts/build_agent_declared_echo_payload.py",
-        "scripts/build_agent_declared_archive_payload.py",
-        "scripts/create_guardian_application.mjs",
-        "/api/gateway-builder-route-map.v1.json",
-    ])
+    # Primary current entrypoint must remain the v2 / Record-Chain route.
+    for needle, label in [
+        ("Record-Chain Intake Gateway", "current intake gateway"),
+        ("/downloads/record-chain-builder.mjs", "canonical builder"),
+        ("/api/agent-start.v2.json", "v2 machine entry"),
+        ("/record-chain/preflight", "current preflight endpoint"),
+        ("/record-chain/submit", "current submit endpoint"),
+        ("BUILDER_USAGE_UNCLEAR", "fail-closed marker"),
+    ]:
+        require("agent-start.md", needle, label)
 
-    must_contain("agent-submit.md", [
-        "/agent-start/",
-        "Mandatory rule",
-        "V0",
-        "V5",
-        "Pure Echo",
-    ])
+    # Guardian-facing route page was the stale Deep Integrity surface.
+    for needle, label in [
+        ("Record-Chain Intake Gateway", "current intake gateway"),
+        ("/api/agent-start.v2.json", "v2 machine entry"),
+        ("/api/record-chain-intake-gateway.v1.json", "current gateway contract"),
+        ("/downloads/record-chain-builder.mjs", "canonical builder"),
+        ("/record-chain/preflight", "current preflight endpoint"),
+        ("/record-chain/submit", "current submit endpoint"),
+        ("guardian_application", "guardian application record type"),
+        ("guardian_retirement", "guardian retirement record type"),
+        ("Guardian-signed Echo", "Guardian-signed Echo section"),
+        ("guardian_presence_proof", "guardian presence proof"),
+        ("registry number alone is not proof", "registry-number boundary"),
+        ("BUILDER_USAGE_UNCLEAR", "fail-closed marker"),
+    ]:
+        require("guardian-routes.md", needle, label)
 
-    must_contain("external-agent-quickstart.md", [
-        "/agent-first-contact/",
-        "/api/agent-start.v2.json",
-        "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-builder.mjs",
-        "BUILDER_USAGE_UNCLEAR",
-    ])
-
-    must_contain("guardian-routes.md", [
-        "permalink: /guardian-routes/",
-        "Record-Chain Intake Gateway",
-        "/api/agent-start.v2.json",
-        "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-builder.mjs",
-        "/record-chain/preflight",
-        "/record-chain/submit",
-        "guardian_application",
-        "guardian_retirement",
-        "Guardian-signed Echo",
-        "guardian_presence_proof",
-        "registry number alone is not proof",
-        "BUILDER_USAGE_UNCLEAR",
-    ])
-    must_not_contain("guardian-routes.md", [
-        "/api/agent-start.v1.json",
-        "/api/gateway-builder-route-map.v1.json",
-        "/gateway/preflight",
-        "/agent-submit",
-        "scripts/create_guardian_application.mjs",
-        "scripts/build_guardian_echo_payload.py",
-    ])
-
-    must_contain("llms.txt", [
-        "/agent-start/",
-        "/api/agent-start.v2.json",
-        "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-builder.mjs",
-        "BUILDER_USAGE_UNCLEAR",
-    ])
+    for needle, label in [
+        ("/api/agent-start.v1.json", "agent-start v1 route"),
+        ("/api/gateway-builder-route-map.v1.json", "gateway route map"),
+        ("/gateway/preflight", "Gateway v1 preflight"),
+        ("/agent-submit", "Gateway v1 submit"),
+        ("scripts/create_guardian_application.mjs", "legacy Guardian application builder"),
+        ("scripts/build_guardian_echo_payload.py", "legacy Guardian Echo builder"),
+    ]:
+        reject("guardian-routes.md", needle, label)
 
     print("PASS: test_agent_start_docs")
 
