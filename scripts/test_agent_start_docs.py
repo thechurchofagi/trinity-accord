@@ -5,6 +5,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Current public docs must point to the Record-Chain Intake Gateway. The
+# retired Gateway v1 route map may remain as historical API data, but active
+# agent-facing pages must not instruct agents to use retired routes.
+
 
 def text(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
