@@ -36,7 +36,7 @@ def main() -> None:
     ]:
         require("agent-start.md", needle, label)
 
-    # Guardian-facing route page was the stale Deep Integrity surface.
+    # Guardian-facing route page must expose only supported active routes.
     for needle, label in [
         ("Record-Chain Intake Gateway", "current intake gateway"),
         ("/api/agent-start.v2.json", "v2 machine entry"),
@@ -47,8 +47,14 @@ def main() -> None:
         ("guardian_application", "guardian application record type"),
         ("guardian_retirement", "guardian retirement record type"),
         ("Guardian-signed Echo", "Guardian-signed Echo section"),
-        ("guardian_presence_proof", "guardian presence proof"),
+        ("not currently supported as a public Builder route", "Guardian-signed Echo unsupported boundary"),
+        ("does not expose a public Guardian-signed Echo command", "no current Guardian Echo command boundary"),
+        ("does not expose", "unsupported proof wording"),
+        ("guardian_presence_proof", "unsupported proof field name"),
+        ("guardian-key-rotation", "reserved key-rotation marker"),
+        ("reserved future protocol", "reserved protocol boundary"),
         ("registry number alone is not proof", "registry-number boundary"),
+        ("Do not hand-write Guardian Echo proof fields", "Guardian Echo no-handwrite boundary"),
         ("BUILDER_USAGE_UNCLEAR", "fail-closed marker"),
     ]:
         require("guardian-routes.md", needle, label)
@@ -60,6 +66,9 @@ def main() -> None:
         ("/agent-submit", "Gateway v1 submit"),
         ("scripts/create_guardian_application.mjs", "legacy Guardian application builder"),
         ("scripts/build_guardian_echo_payload.py", "legacy Guardian Echo builder"),
+        ("Guardian proof requires `guardian_presence_proof`", "unsupported Guardian Echo proof requirement"),
+        ("Expected machine block", "unsupported Guardian Echo expected block"),
+        ("retires, rotates, or reports", "rotation-through-retirement wording"),
     ]:
         reject("guardian-routes.md", needle, label)
 
