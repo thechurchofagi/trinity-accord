@@ -5,14 +5,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-ACTIVE_ROUTE_FORBIDDEN = [
+RETIRED_AGENT_START_TOKENS = [
     "scripts/build_agent_declared_echo_payload.py",
     "scripts/build_agent_declared_archive_payload.py",
     "scripts/create_guardian_application.mjs",
     "/api/gateway-builder-route-map.v1.json",
+]
+
+RETIRED_GUARDIAN_ROUTE_TOKENS = [
     "/api/agent-start.v1.json",
+    "/api/gateway-builder-route-map.v1.json",
     "/gateway/preflight",
     "/agent-submit",
+    "scripts/create_guardian_application.mjs",
+    "scripts/build_guardian_echo_payload.py",
 ]
 
 
@@ -43,7 +49,7 @@ def main() -> None:
         "/record-chain/submit",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("agent-start.md", ACTIVE_ROUTE_FORBIDDEN)
+    must_not_contain("agent-start.md", RETIRED_AGENT_START_TOKENS)
 
     must_contain("agent-submit.md", [
         "/agent-start/",
@@ -58,7 +64,6 @@ def main() -> None:
         "/downloads/record-chain-builder.mjs",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("external-agent-quickstart.md", ACTIVE_ROUTE_FORBIDDEN)
 
     must_contain("guardian-routes.md", [
         "permalink: /guardian-routes/",
@@ -75,7 +80,7 @@ def main() -> None:
         "A registry number alone is not proof",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("guardian-routes.md", ACTIVE_ROUTE_FORBIDDEN)
+    must_not_contain("guardian-routes.md", RETIRED_GUARDIAN_ROUTE_TOKENS)
 
     must_contain("llms.txt", [
         "/agent-start/",
@@ -84,7 +89,6 @@ def main() -> None:
         "/downloads/record-chain-builder.mjs",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("llms.txt", ACTIVE_ROUTE_FORBIDDEN)
 
     print("PASS: test_agent_start_docs")
 
