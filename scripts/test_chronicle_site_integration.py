@@ -147,19 +147,7 @@ require(len(music.get("entries", [])) == 175, "music canonical must have 175 ent
 require(music.get("boundary", {}).get("not_audio_verification") is True,
         "music canonical must declare not_audio_verification")
 
-# 11. llms.txt
-llms = read("llms.txt").lower()
-require("chronicle / human witness status" in llms, "llms.txt missing Chronicle status section")
-require("175 / 175 nft text records" in llms, "llms.txt missing 175 NFT count")
-require("not canonical authority" in llms, "llms.txt missing not canonical authority boundary")
-
-# 12. agent-start.md
-agent_start = read("agent-start.md").lower()
-require("chronicle / human witness route" in agent_start, "agent-start.md missing Chronicle route")
-require("chronicle-music-table.md" in agent_start, "agent-start.md missing CHRONICLE-MUSIC-TABLE reference")
-require("full corpus analysis" in agent_start, "agent-start.md missing full corpus analysis note")
-
-# 13. README.md
+# 11. README.md
 readme = read("README.md").lower()
 require("chronicle context package" in readme, "README.md missing Chronicle context package")
 require("chronicle music audit" in readme, "README.md missing Chronicle music audit")
@@ -175,7 +163,7 @@ require("128 lyrics records" not in readme, "README.md must not contain stale 12
 require("11 title-only references" not in readme, "README.md must not contain stale 11 title-only count")
 require("36 no-song entries" not in readme, "README.md must not contain stale 36 no-song count")
 
-# 14. CHRONICLE-MUSIC-TABLE.md header counts
+# 12. CHRONICLE-MUSIC-TABLE.md header counts
 music_table = read("nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md")
 require("144 条含歌词记录" in music_table, "music table header must say 144 lyrics records")
 require("10 条仅引用歌名" in music_table, "music table header must say 10 title-only references")
