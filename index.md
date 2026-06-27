@@ -895,14 +895,14 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">failed</p>
     <p class="status-note">
       Daily alive status: failed.<br>
-      Heartbeat ID: hwb-20260626.<br>
+      Heartbeat ID: hwb-20260627.<br>
       Total scheduled heartbeats: 10.<br>
       Successful heartbeats: 7.<br>
       Failed / missed heartbeats: 3.<br>
       Current success streak: 0 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
-      Arweave capsule: verified.<br>
+      Arweave capsule: pending.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：失败。</span><br>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>984eb1a48bb327f4</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>c01371de80d8a3f5</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
