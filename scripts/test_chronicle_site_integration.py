@@ -87,9 +87,9 @@ require("chronicle_output_policy" in out_policy, "output policy missing chronicl
 
 # 6. Agent first contact + minimal context
 first = load_json("api/agent-first-contact.json")
-choose_json = json.dumps(first.get("choose_one", []), ensure_ascii=False)
-require("chronicle_or_human_witness_research" in choose_json,
-        "agent-first-contact missing chronicle_or_human_witness_research intent")
+require(first.get("status") == "active_agent_router", "agent-first-contact must remain active router")
+require(first.get("current_public_submission_method", {}).get("contract") == "/api/record-chain-intake-gateway.v1.json",
+        "agent-first-contact must point to current Record-Chain gateway contract")
 minimal = load_json("api/agent-minimal-context.v1.json")
 require("chronicle_status_signal" in minimal, "agent-minimal-context missing chronicle_status_signal")
 
