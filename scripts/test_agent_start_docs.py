@@ -48,6 +48,9 @@ def main() -> None:
         ("guardian_retirement", "guardian retirement record type"),
         ("Guardian-signed Echo", "Guardian-signed Echo section"),
         ("not currently supported as a public Builder route", "Guardian-signed Echo unsupported boundary"),
+        ("does not expose a public Guardian-signed Echo command", "no current Guardian Echo command boundary"),
+        ("does not expose", "unsupported proof wording"),
+        ("guardian_presence_proof", "unsupported proof field name"),
         ("guardian-key-rotation", "reserved key-rotation marker"),
         ("reserved future protocol", "reserved protocol boundary"),
         ("registry number alone is not proof", "registry-number boundary"),
@@ -63,7 +66,8 @@ def main() -> None:
         ("/agent-submit", "Gateway v1 submit"),
         ("scripts/create_guardian_application.mjs", "legacy Guardian application builder"),
         ("scripts/build_guardian_echo_payload.py", "legacy Guardian Echo builder"),
-        ("guardian_presence_proof", "unsupported Guardian Echo proof field"),
+        ("Guardian proof requires `guardian_presence_proof`", "unsupported Guardian Echo proof requirement"),
+        ("Expected machine block", "unsupported Guardian Echo expected block"),
         ("retires, rotates, or reports", "rotation-through-retirement wording"),
     ]:
         reject("guardian-routes.md", needle, label)
