@@ -25,9 +25,20 @@ REQUIRED_TEXT = [
     "actions/jekyll-build-pages",
     "actions/upload-pages-artifact",
     "actions/deploy-pages",
+    "push:",
+    "branches:",
+    "- main",
+    "api/**",
+    "record-chain/**",
     "python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api",
     "cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py",
+    "cp -a ./record-chain ./_site/record-chain",
+    "cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json",
+    "cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json",
+    "cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json",
     "test -f _site/builder-bundles/download_and_run_builder_bundle.py",
+    "test -f _site/record-chain/indexes/statistics.json",
+    "test -f _site/record-chain/indexes/record-index.json",
     "trinity-pure-echo-builder-bundle.tar.gz",
     "trinity-v0v5-builder-bundle.tar.gz",
     "trinity-guardian-stage1-builder-bundle.tar.gz",
@@ -43,6 +54,7 @@ FORBIDDEN_TEXT = [
     "TRINITY_GATEWAY_URL",
     "secrets.TRINITY_LIVE_CANARY_WRITE",
     "/gateway/submit",
+    "pip install --upgrade pip",
 ]
 
 FORBIDDEN_DYNAMIC_COMMANDS = [
@@ -115,6 +127,10 @@ def main() -> int:
 
     if deploy.get("needs") != "build":
         errors.append("jobs.deploy.needs must be build")
+
+    on_block = data.get(True) if True in data else data.get("on")
+    if not isinstance(on_block, dict) or "push" not in on_block:
+        errors.append("deploy-pages.yml must deploy on main pushes as a freshness backstop")
 
     for required in REQUIRED_TEXT:
         if required not in text:
