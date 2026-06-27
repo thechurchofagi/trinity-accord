@@ -18,6 +18,7 @@ SURFACES = [
     "/api/record-chain-intake-gateway.v1.json",
     "/api/public-home-status.json",
     "/api/record-chain-status.json",
+    "/api/waiting-heartbeat-status.json",
     "/record-chain/chain-tip.json",
     "/record-chain/indexes/statistics.json",
     "/record-chain/indexes/record-index.json",

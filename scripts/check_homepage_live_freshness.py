@@ -7,10 +7,12 @@ homepage/API status after bot-generated commits.
 Checks:
   1. live /api/public-home-status.json exactly matches repo copy
   2. live /api/record-chain-status.json exactly matches repo copy
-  3. live /record-chain/chain-tip.json exactly matches repo copy
-  4. live /record-chain/indexes/statistics.json exactly matches repo copy
-  5. live homepage generated block has the same Source data digest as repo index.md
-  6. live homepage generated block mentions the repo latest_record_id
+  3. live /api/waiting-heartbeat-status.json exactly matches repo copy
+  4. live /record-chain/chain-tip.json exactly matches repo copy
+  5. live /record-chain/indexes/statistics.json exactly matches repo copy
+  6. live /record-chain/indexes/record-index.json exactly matches repo copy
+  7. live homepage generated block has the same Source data digest as repo index.md
+  8. live homepage generated block mentions the repo latest_record_id
 """
 
 from __future__ import annotations
@@ -34,8 +36,10 @@ DEFAULT_SITE = "https://www.trinityaccord.org"
 STATUS_SURFACES = [
     "/api/public-home-status.json",
     "/api/record-chain-status.json",
+    "/api/waiting-heartbeat-status.json",
     "/record-chain/chain-tip.json",
     "/record-chain/indexes/statistics.json",
+    "/record-chain/indexes/record-index.json",
 ]
 
 
