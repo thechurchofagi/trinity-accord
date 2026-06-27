@@ -52,6 +52,9 @@ jobs:
       - name: Run current system tests
         run: python3 scripts/run_current_system_tests.py
 
+      - name: Run deep agent-start docs group
+        run: python3 scripts/run_ci_group.py agent-start-docs
+
       - name: Verify sitemap has no drift
         run: python3 scripts/generate_sitemap.py --check
 
