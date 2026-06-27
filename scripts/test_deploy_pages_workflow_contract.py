@@ -29,13 +29,17 @@ REQUIRED_TEXT = [
     "branches:",
     "- main",
     "api/**",
-    "record-chain/**",
+    "sitemap.xml",
     "python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api",
     "cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py",
     "cp -a ./record-chain ./_site/record-chain",
+    "cmp ./api/public-home-status.json ./_site/api/public-home-status.json",
+    "cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json",
+    "cmp ./api/waiting-heartbeat-status.json ./_site/api/waiting-heartbeat-status.json",
     "cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json",
     "cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json",
     "cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json",
+    "require_file _site/api/waiting-heartbeat-status.json",
     "test -f _site/builder-bundles/download_and_run_builder_bundle.py",
     "test -f _site/record-chain/indexes/statistics.json",
     "test -f _site/record-chain/indexes/record-index.json",
@@ -55,6 +59,7 @@ FORBIDDEN_TEXT = [
     "secrets.TRINITY_LIVE_CANARY_WRITE",
     "/gateway/submit",
     "pip install --upgrade pip",
+    '      - "record-chain/**"',
 ]
 
 FORBIDDEN_DYNAMIC_COMMANDS = [
@@ -83,9 +88,11 @@ def main() -> int:
     else:
         # Minimal dependency-free fallback for local smoke environments where
         # requirements-ci.txt cannot be installed. CI still uses PyYAML above.
+        trigger_block = {"push": {}} if re.search(r"(?m)^  push:\s*$", text) else {}
         data = {
             "name": re.search(r"^name:\s*(.+)$", text, re.M).group(1) if re.search(r"^name:\s*(.+)$", text, re.M) else None,
             "permissions": dict(re.findall(r"^  ([A-Za-z-]+):\s*(read|write)$", text, re.M)),
+            True: trigger_block,
             "jobs": {},
         }
         for job in ("build", "deploy"):
