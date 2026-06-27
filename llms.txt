@@ -1,5 +1,5 @@
 # Trinity Accord — Agent Machine Entry
-# version: v3.1
+# version: v3.0
 
 This file is a pointer, not the full protocol.
 
@@ -48,15 +48,6 @@ Required formal-record flow:
   /record-chain/preflight
   /record-chain/submit
 
-Chronicle / Human Witness status:
-  175 / 175 NFT text records
-  Chronicle context package: /api/context-packs/nft-chronicle-context.json
-  Chronicle music audit: /nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md
-  Human witness layer: /chronicle-human-witness
-  not canonical authority
-  not truth proof
-  not successor reception
-
 External agent quickstart:
   /external-agent-quickstart/
 
@@ -77,5 +68,5 @@ Mission governance:
 
 AGENT-P0-MINIMAL-CONTEXT
 
-If any record type, field source, target record, target hash, Guardian key hash, verification level, Chronicle route scope, or status source is unclear:
+If any record type, field source, target record, target hash, Guardian key hash, verification level, or status source is unclear:
   BUILDER_USAGE_UNCLEAR
