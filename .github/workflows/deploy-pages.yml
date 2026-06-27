@@ -13,7 +13,6 @@ on:
       - main
     paths:
       - "api/**"
-      - "record-chain/**"
       - "index.md"
       - "llms.txt"
       - "ai.txt"
@@ -21,6 +20,7 @@ on:
       - ".well-known/**"
       - "downloads/**"
       - "builder-bundles/**"
+      - "sitemap.xml"
       - "_config.yml"
       - ".github/workflows/deploy-pages.yml"
 
@@ -131,6 +131,7 @@ jobs:
 
           cmp ./api/public-home-status.json ./_site/api/public-home-status.json
           cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json
+          cmp ./api/waiting-heartbeat-status.json ./_site/api/waiting-heartbeat-status.json
           cmp ./api/record-chain-builder-bundles.v1.json ./_site/api/record-chain-builder-bundles.v1.json
           cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json
           cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json
@@ -195,6 +196,7 @@ jobs:
           require_file _site/api/guardian-active-listing-policy.v2.json
           require_file _site/api/public-home-status.json
           require_file _site/api/record-chain-status.json
+          require_file _site/api/waiting-heartbeat-status.json
           require_file _site/record-chain/chain-tip.json
           require_file _site/record-chain/indexes/statistics.json
           require_file _site/record-chain/indexes/record-index.json
@@ -297,6 +299,7 @@ jobs:
           set -euo pipefail
           cmp ./api/public-home-status.json ./_site/api/public-home-status.json
           cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json
+          cmp ./api/waiting-heartbeat-status.json ./_site/api/waiting-heartbeat-status.json
           cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json
           cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json
           cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json
