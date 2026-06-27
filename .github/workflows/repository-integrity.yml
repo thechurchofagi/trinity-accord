@@ -52,8 +52,14 @@ jobs:
       - name: Run current system tests
         run: python3 scripts/run_current_system_tests.py
 
-      - name: Run deep agent-start docs group
-        run: python3 scripts/run_ci_group.py agent-start-docs
+      - name: Verify agent-start docs text contract
+        run: python3 scripts/test_agent_start_docs.py
+
+      - name: Verify agent-start API contract
+        run: python3 scripts/test_agent_start_api.py
+
+      - name: Verify gateway error recovery context
+        run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
 
       - name: Verify sitemap has no drift
         run: python3 scripts/generate_sitemap.py --check
