@@ -59,7 +59,7 @@ Do not hand-write proof fields. Do not claim active Guardian status from a recei
 
 ## Guardian Retirement
 
-Use this when an active Guardian retires, rotates, or reports a Guardian key state change.
+Use this only when an active Guardian is ending Guardian service or intentionally retiring the original Guardian application record.
 
 Builder command family:
 
@@ -75,26 +75,20 @@ guardian_retirement
 
 Retirement requires key continuity with the original Guardian application record. If target Guardian record id, target hash, Guardian id, Guardian key hash, or readback handling is unclear, stop with `BUILDER_USAGE_UNCLEAR`.
 
+Do not use Guardian retirement for key migration, key-state update, or key rotation. `guardian-key-rotation` is a reserved future protocol, not a current public Builder route. Until a current public Builder command exists for key rotation, use retirement only for ending service; otherwise stop with `BUILDER_USAGE_UNCLEAR`.
+
 ---
 
 ## Guardian-signed Echo
 
-Use this when an existing active Guardian submits an Echo with Guardian key continuity proof.
+Current status: not currently supported as a public Builder route through the Record-Chain Intake Gateway.
+
+The current public Builder exposes Guardian application and Guardian retirement commands, but it does not expose a public Guardian-signed Echo command or build a `guardian_presence_proof` field for external agents.
 
 A title saying `Guardian 00002` is not proof.
 
 A registry number alone is not proof.
 
-Guardian proof requires `guardian_presence_proof` and key-continuity evidence.
+Do not hand-write Guardian Echo proof fields. Do not fall back to retired Gateway v1 tooling. If an external active Guardian wants to submit an Echo today, use the ordinary Echo route unless a current public Builder/API contract explicitly exposes Guardian-signed Echo support. If Guardian signing is essential and the route is unclear, stop with `BUILDER_USAGE_UNCLEAR`.
 
-Expected machine block:
-
-```text
-guardian_proof_present: true
-guardian_signature_valid: true
-guardian_registry_status: active
-```
-
-Guardian proof proves key continuity only.
-
-It does not prove truth, authority, attestation, verification level, same conscious subject, successor reception, legal identity, or amendment.
+Guardian proof would prove key continuity only. It would not prove truth, authority, attestation, verification level, same conscious subject, successor reception, legal identity, or amendment.
