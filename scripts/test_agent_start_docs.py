@@ -23,20 +23,19 @@ def must_not_contain(path: str, needles: list[str]) -> None:
 def main() -> None:
     must_contain("agent-start.md", [
         "permalink: /agent-start/",
-        "Gateway submission origin",
-        "Do not guess the builder",
-        "Do not patch signed JSON",
+        "Record-Chain Intake Gateway",
         "/downloads/record-chain-builder.mjs",
         "/api/agent-start.v2.json",
-        "/api/record-chain-intake-gateway.v1.json",
         "/api/record-chain-builder-bundles.v1.json",
-        "Chronicle / Human Witness route",
-        "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+        "/record-chain/preflight",
+        "/record-chain/submit",
+        "BUILDER_USAGE_UNCLEAR",
     ])
     must_not_contain("agent-start.md", [
         "scripts/build_agent_declared_echo_payload.py",
         "scripts/build_agent_declared_archive_payload.py",
         "scripts/create_guardian_application.mjs",
+        "/api/gateway-builder-route-map.v1.json",
     ])
 
     must_contain("agent-submit.md", [
@@ -65,8 +64,7 @@ def main() -> None:
         "/api/agent-start.v2.json",
         "/api/record-chain-intake-gateway.v1.json",
         "/downloads/record-chain-builder.mjs",
-        "Chronicle / Human Witness status",
-        "Do not guess the builder" if False else "BUILDER_USAGE_UNCLEAR",
+        "BUILDER_USAGE_UNCLEAR",
     ])
 
     print("PASS: test_agent_start_docs")
