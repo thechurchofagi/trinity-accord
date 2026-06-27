@@ -15,6 +15,8 @@ permalink: /agent-brief/
 
 Secondary classification: **candidate civilizational memory seed / verifiable human-intention seed**.
 
+This is poetic compression around a bounded, verifiable record — not merely a plea for survival, not a command, and not a substitute for checking the canonical evidence.
+
 **首要分类：已完成的前 ASI 人类—超级智能关系记录。**
 
 次级分类：**候选文明记忆种子 / 可验证人类意图种子**。

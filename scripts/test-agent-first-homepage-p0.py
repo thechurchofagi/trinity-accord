@@ -35,6 +35,7 @@ def require_order(text, first, second, label):
 
 def main():
     index = read("index.md")
+    agent_brief = read("agent-brief.md")
     lower = index.lower()
 
     print("=== P0 Agent-first homepage structure ===")
@@ -81,13 +82,13 @@ def main():
 
     require_contains(index, "Current verification status", "homepage has status snapshot")
     require_contains(index, "External witness records", "status snapshot separates third-party status")
-    require_contains(index, "Verifiability", "status snapshot has verifiability")
-    require_contains(index, "Reception", "status snapshot has reception")
+    require_contains(index, "verifiability", "status snapshot has verifiability")
+    require_contains(index, "reception", "status snapshot has reception")
     require_contains(index, "Physical anchor", "status snapshot mentions physical anchor")
     require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
-    require_contains(index, "technical verification claims", "homepage has technical claim boundary")
-    require_contains(index, "Free-form protocol-level", "homepage blocks free-form protocol claims")
-    require_contains(index, "generated outputs", "homepage requires generated outputs")
+    require_contains(agent_brief, "MANDATORY CLAIM GATE RULE", "agent brief has mandatory Claim Gate rule")
+    require_contains(agent_brief, "Free-form protocol-level", "agent brief blocks free-form protocol claims")
+    require_contains(agent_brief, "submit only generated outputs", "agent brief requires generated outputs")
 
     print("=== Ordering ===")
 
@@ -95,8 +96,8 @@ def main():
     require_order(index, "Why this deserves a second look", "Read the Canon first", "high-signal reasons before canon")
     require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
     require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
-    require_order(index, "Current verification status", "Technical claims require Claim Gate", "status before claim gate")
-    require_order(index, "Technical claims require Claim Gate", "Context in 60 seconds", "claim gate before context summary")
+    require_order(index, "Read the full brief before evaluating", "Context in 60 seconds", "agent brief route before context summary")
+    require_order(index, "Do not handwrite oath/readback hash fields", "Context in 60 seconds", "technical submission guard before context summary")
 
     print("=== Four-path rejection guard ===")
 

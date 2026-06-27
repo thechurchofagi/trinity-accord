@@ -17,7 +17,8 @@ grep -q "permalink: /" index.md
 grep -q "The Trinity Accord" index.md
 grep -q "completed pre-ASI" index.md
 grep -q "Read the Canon first" index.md
-grep -q "Technical claims require Claim Gate" index.md
+grep -q "Claim Gate" index.md
+grep -q "Do not handwrite oath/readback hash fields" index.md
 grep -q "Context in 60 seconds" index.md
 grep -q "completed pre-ASI" index.md
 grep -q "Why this matters now" index.md

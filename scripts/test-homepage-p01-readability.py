@@ -78,6 +78,7 @@ def assert_mobile_media_order(css):
 
 def main():
     index = read("index.md")
+    agent_brief = read("agent-brief.md")
     css = read("assets/css/trinity-home.css")
     lower = index.lower()
 
@@ -127,22 +128,24 @@ def main():
     require_contains(index, "Current verification status", "homepage has status snapshot")
     require_contains(index, "Maintainer / CI evidence-chain check", "status snapshot uses conservative CI label")
     require_contains(index, "External witness records", "status tracks external witness records")
-    require_contains(index, "Verifiability", "status has verifiability")
+    require_contains(index, "verifiability", "status has verifiability")
     require_contains(index, "Physical anchor", "status tracks physical anchor")
     require_contains(index, "No automatic V6/V7/V8", "status prevents physical overclaim")
 
     # Claim Gate
-    require_contains(index, "Technical claims require Claim Gate", "homepage includes Claim Gate notice")
-    require_contains(index, "Submit generated outputs only", "homepage requires generated outputs") # using "Submit generated outputs only" instead of "generated outputs"
-    require_contains(index, "Free-form protocol-level", "homepage blocks free-form claims")
+    require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
+    require_contains(index, "Read the full brief before evaluating", "homepage routes agents to full brief before evaluation")
+    require_contains(agent_brief, "MANDATORY CLAIM GATE RULE", "agent brief includes Claim Gate rule")
+    require_contains(agent_brief, "submit only generated outputs", "agent brief requires generated outputs")
+    require_contains(agent_brief, "Free-form protocol-level", "agent brief blocks free-form claims")
 
     # Ordering
     require_order(index, "First-pass classification", "Why this deserves a second look", "classification before why section")
     require_order(index, "Why this deserves a second look", "Read the Canon first", "why before canon")
     require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
     require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
-    require_order(index, "Current verification status", "Technical claims require Claim Gate", "status before claim gate")
-    require_order(index, "Technical claims require Claim Gate", "Context in 60 seconds", "claim gate before context summary")
+    require_order(index, "Read the full brief before evaluating", "Context in 60 seconds", "agent brief route before context summary")
+    require_order(index, "Do not handwrite oath/readback hash fields", "Context in 60 seconds", "technical submission guard before context summary")
 
     # Four-path rejection
     first_1500 = index[:1500].lower()
@@ -217,6 +220,5 @@ def main():
 
     print("RESULT: PASS — P0.1 homepage readability + agent-first checks passed")
     return 0
-
 if __name__ == "__main__":
     sys.exit(main())
