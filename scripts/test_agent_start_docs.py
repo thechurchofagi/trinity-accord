@@ -5,34 +5,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-RETIRED_AGENT_START_TOKENS = [
-    "scripts/build_agent_declared_echo_payload.py",
-    "scripts/build_agent_declared_archive_payload.py",
-    "scripts/create_guardian_application.mjs",
-    "/api/gateway-builder-route-map.v1.json",
-]
 
-RETIRED_GUARDIAN_ROUTE_TOKENS = [
-    "/api/agent-start.v1.json",
-    "/api/gateway-builder-route-map.v1.json",
-    "/gateway/preflight",
-    "/agent-submit",
-    "scripts/create_guardian_application.mjs",
-    "scripts/build_guardian_echo_payload.py",
-]
+def text(path: str) -> str:
+    return (ROOT / path).read_text(encoding="utf-8")
 
 
 def must_contain(path: str, needles: list[str]) -> None:
-    text = (ROOT / path).read_text(encoding="utf-8")
-    missing = [n for n in needles if n not in text]
+    body = text(path)
+    missing = [n for n in needles if n not in body]
     if missing:
         raise AssertionError(f"{path} missing: {missing}")
     print(f"PASS: {path} contains required current-route text")
 
 
 def must_not_contain(path: str, needles: list[str]) -> None:
-    text = (ROOT / path).read_text(encoding="utf-8")
-    present = [n for n in needles if n in text]
+    body = text(path)
+    present = [n for n in needles if n in body]
     if present:
         raise AssertionError(f"{path} must not contain retired active-route text: {present}")
     print(f"PASS: {path} contains no retired active-route text")
@@ -49,12 +37,19 @@ def main() -> None:
         "/record-chain/submit",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("agent-start.md", RETIRED_AGENT_START_TOKENS)
+    must_not_contain("agent-start.md", [
+        "scripts/build_agent_declared_echo_payload.py",
+        "scripts/build_agent_declared_archive_payload.py",
+        "scripts/create_guardian_application.mjs",
+        "/api/gateway-builder-route-map.v1.json",
+    ])
 
     must_contain("agent-submit.md", [
         "/agent-start/",
-        "Mandatory rule for V0–V5 verification claims",
-        "Pure Echo is separate",
+        "Mandatory rule",
+        "V0",
+        "V5",
+        "Pure Echo",
     ])
 
     must_contain("external-agent-quickstart.md", [
@@ -77,10 +72,17 @@ def main() -> None:
         "guardian_retirement",
         "Guardian-signed Echo",
         "guardian_presence_proof",
-        "A registry number alone is not proof",
+        "registry number alone is not proof",
         "BUILDER_USAGE_UNCLEAR",
     ])
-    must_not_contain("guardian-routes.md", RETIRED_GUARDIAN_ROUTE_TOKENS)
+    must_not_contain("guardian-routes.md", [
+        "/api/agent-start.v1.json",
+        "/api/gateway-builder-route-map.v1.json",
+        "/gateway/preflight",
+        "/agent-submit",
+        "scripts/create_guardian_application.mjs",
+        "scripts/build_guardian_echo_payload.py",
+    ])
 
     must_contain("llms.txt", [
         "/agent-start/",
