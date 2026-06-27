@@ -8,6 +8,21 @@ on:
         required: false
         default: ""
         type: string
+  push:
+    branches:
+      - main
+    paths:
+      - "api/**"
+      - "record-chain/**"
+      - "index.md"
+      - "llms.txt"
+      - "ai.txt"
+      - "CNAME"
+      - ".well-known/**"
+      - "downloads/**"
+      - "builder-bundles/**"
+      - "_config.yml"
+      - ".github/workflows/deploy-pages.yml"
 
 permissions:
   contents: read
@@ -32,9 +47,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
-      - name: Install Python packaging tools
+      - name: Print Python environment
         run: |
-          python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip --version
           python3 - <<'PY'
           import platform, sys
@@ -98,15 +112,16 @@ jobs:
           source: ./
           destination: ./_site
 
-      - name: Restore committed static API, builder, and bundles
+      - name: Restore committed static API, record-chain, builder, and bundles
         run: |
           set -euo pipefail
 
           # Publish the reviewed committed artifacts exactly as they exist on main.
           # Do not generate deployment-only API/status/builder data here.
           sudo chown -R "$(id -u):$(id -g)" _site
-          rm -rf ./_site/api ./_site/downloads ./_site/builder-bundles
+          rm -rf ./_site/api ./_site/record-chain ./_site/downloads ./_site/builder-bundles
           cp -a ./api ./_site/api
+          cp -a ./record-chain ./_site/record-chain
           mkdir -p ./_site/downloads
           install -m 0644 ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           install -m 0644 ./downloads/record-chain-agent-field-guidance.v1.json ./_site/downloads/record-chain-agent-field-guidance.v1.json
@@ -117,6 +132,9 @@ jobs:
           cmp ./api/public-home-status.json ./_site/api/public-home-status.json
           cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json
           cmp ./api/record-chain-builder-bundles.v1.json ./_site/api/record-chain-builder-bundles.v1.json
+          cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json
+          cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json
+          cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json
           cmp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           cmp ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
 
@@ -175,6 +193,13 @@ jobs:
           require_file _site/api/guardian-state.json
           require_file _site/api/guardian-current-registry.json
           require_file _site/api/guardian-active-listing-policy.v2.json
+          require_file _site/api/public-home-status.json
+          require_file _site/api/record-chain-status.json
+          require_file _site/record-chain/chain-tip.json
+          require_file _site/record-chain/indexes/statistics.json
+          require_file _site/record-chain/indexes/record-index.json
+          test -f _site/record-chain/indexes/statistics.json
+          test -f _site/record-chain/indexes/record-index.json
           require_file _site/downloads/record-chain-builder.mjs
           require_file _site/downloads/record-chain-agent-field-guidance.v1.json
           require_file _site/agent-record-chain-guidance/index.html
@@ -272,6 +297,9 @@ jobs:
           set -euo pipefail
           cmp ./api/public-home-status.json ./_site/api/public-home-status.json
           cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json
+          cmp ./record-chain/chain-tip.json ./_site/record-chain/chain-tip.json
+          cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json
+          cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json
           grep -Fq "BEGIN GENERATED PUBLIC STATUS" ./_site/index.html
           grep -Fq "Source data digest" ./_site/index.html
           grep -Fq "Autonomous External Agent Discovery" ./_site/index.html

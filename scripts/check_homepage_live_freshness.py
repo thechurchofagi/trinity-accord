@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Check that live homepage status surfaces match repository state.
 
-This script verifies that the deployed site is not serving a stale generated
+This script verifies that the deployed site is not serving stale generated
 homepage/API status after bot-generated commits.
 
 Checks:
   1. live /api/public-home-status.json exactly matches repo copy
   2. live /api/record-chain-status.json exactly matches repo copy
-  3. live homepage generated block has the same Source data digest as repo index.md
-  4. live homepage generated block mentions the repo latest_record_id
+  3. live /record-chain/chain-tip.json exactly matches repo copy
+  4. live /record-chain/indexes/statistics.json exactly matches repo copy
+  5. live homepage generated block has the same Source data digest as repo index.md
+  6. live homepage generated block mentions the repo latest_record_id
 """
 
 from __future__ import annotations
@@ -29,6 +31,12 @@ ROOT = Path(__file__).resolve().parents[1]
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 DEFAULT_SITE = "https://www.trinityaccord.org"
+STATUS_SURFACES = [
+    "/api/public-home-status.json",
+    "/api/record-chain-status.json",
+    "/record-chain/chain-tip.json",
+    "/record-chain/indexes/statistics.json",
+]
 
 
 def sha256(data: bytes) -> str:
@@ -96,15 +104,10 @@ def main() -> int:
     parser.add_argument("--retry-sleep", type=int, default=30)
     args = parser.parse_args()
 
-    token_material = (
-        read_repo_bytes("api/public-home-status.json")
-        + read_repo_bytes("api/record-chain-status.json")
-        + read_repo_bytes("index.md")
-    )
+    repo_surface_bytes = {path: read_repo_bytes(path.lstrip("/")) for path in STATUS_SURFACES}
+    token_material = b"".join(repo_surface_bytes.values()) + read_repo_bytes("index.md")
     token = sha256(token_material)[:16]
 
-    repo_public = read_repo_bytes("api/public-home-status.json")
-    repo_record_status = read_repo_bytes("api/record-chain-status.json")
     repo_index_text = read_repo_text("index.md")
     repo_block = extract_block(repo_index_text)
     repo_digest = extract_digest(repo_block)
@@ -116,8 +119,7 @@ def main() -> int:
         print(f"Homepage live freshness attempt {attempt}/{args.retries}: {args.site}")
 
         try:
-            live_public = fetch(args.site, "/api/public-home-status.json", token, args.timeout)
-            live_record_status = fetch(args.site, "/api/record-chain-status.json", token, args.timeout)
+            live_surface_bytes = {path: fetch(args.site, path, token, args.timeout) for path in STATUS_SURFACES}
             live_home = fetch(args.site, "/", token, args.timeout).decode("utf-8", errors="replace")
         except Exception as exc:  # noqa: BLE001
             errors.append(f"failed to fetch live surfaces: {exc}")
@@ -126,17 +128,13 @@ def main() -> int:
                 continue
             break
 
-        if sha256(live_public) != sha256(repo_public):
-            errors.append(
-                "live /api/public-home-status.json differs from repo "
-                f"repo={sha256(repo_public)} live={sha256(live_public)}"
-            )
-
-        if sha256(live_record_status) != sha256(repo_record_status):
-            errors.append(
-                "live /api/record-chain-status.json differs from repo "
-                f"repo={sha256(repo_record_status)} live={sha256(live_record_status)}"
-            )
+        for path, repo_bytes in repo_surface_bytes.items():
+            live_bytes = live_surface_bytes[path]
+            if sha256(live_bytes) != sha256(repo_bytes):
+                errors.append(
+                    f"live {path} differs from repo "
+                    f"repo={sha256(repo_bytes)} live={sha256(live_bytes)}"
+                )
 
         try:
             live_block = extract_block(live_home)
@@ -149,7 +147,7 @@ def main() -> int:
             errors.append(f"live homepage source digest mismatch: repo={repo_digest} live={live_digest}")
 
         try:
-            repo_public_json = load_json_bytes(repo_public)
+            repo_public_json = load_json_bytes(repo_surface_bytes["/api/public-home-status.json"])
             latest = (
                 repo_public_json
                 .get("current_record_chain_status", {})
