@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare deployed/built public agent surfaces against repository files."""
+"""Compare deployed/built public agent and status surfaces against repository files."""
 from __future__ import annotations
 
 import argparse
@@ -16,6 +16,11 @@ SURFACES = [
     "/api/agent-first-contact.json",
     "/api/agent-start.v2.json",
     "/api/record-chain-intake-gateway.v1.json",
+    "/api/public-home-status.json",
+    "/api/record-chain-status.json",
+    "/record-chain/chain-tip.json",
+    "/record-chain/indexes/statistics.json",
+    "/record-chain/indexes/record-index.json",
     "/downloads/record-chain-builder.mjs",
 ]
 FORBIDDEN_ACTIVE = [
