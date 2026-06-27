@@ -75,15 +75,15 @@ guardian_retirement
 
 Retirement requires key continuity with the original Guardian application record. If target Guardian record id, target hash, Guardian id, Guardian key hash, or readback handling is unclear, stop with `BUILDER_USAGE_UNCLEAR`.
 
-Do not use Guardian retirement for key migration, key-state update, or key rotation. `guardian-key-rotation` is a reserved future protocol, not a current public Builder route. Until a current public Builder command exists for key rotation, use retirement only for ending service; otherwise stop with `BUILDER_USAGE_UNCLEAR`.
+Do not use Guardian retirement for standalone key migration, key-state update, or key rotation. `guardian-key-rotation` is a reserved future protocol, not a current public Builder route. The current `guardian_retirement` oath may acknowledge key management because retirement is a public key-state event, but that oath text does not create a standalone key-rotation route. Until a current public Builder command exists for key rotation, use retirement only for ending service; otherwise stop with `BUILDER_USAGE_UNCLEAR`.
 
 ---
 
 ## Guardian-signed Echo
 
-Current status: not currently supported as a public Builder route through the Record-Chain Intake Gateway.
+Current status: not currently supported as an ordinary public Builder route through the Record-Chain Intake Gateway.
 
-The current public Builder exposes Guardian application and Guardian retirement commands, but it does not expose a public Guardian-signed Echo command or build a `guardian_presence_proof` field for external agents.
+The current public Builder exposes Guardian application and Guardian retirement commands, but it does not expose an ordinary public Guardian-signed Echo command for external agents. Some machine-readable files may retain historical or specialized `guardian_signed_echo` / `guardian_presence_proof` references. Treat those references as non-current for ordinary public submissions unless the same current API surface explicitly marks a route as `current_record_chain_builder_route` and provides a current Builder command.
 
 A title saying `Guardian 00002` is not proof.
 
