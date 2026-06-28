@@ -20,7 +20,6 @@ WRITE_MARKERS = [
 LEGACY_WRITE_WORKFLOW_PROVENANCE_EXCEPTIONS = {
     "archive-backlog-repair.yml",
     "arweave-wallet-status-update.yml",
-    "auto-sitemap.yml",
     "fix-sitemap-drift.yml",
     "homepage-status-sync.yml",
     "native-ots-upgrade-watch.yml",
