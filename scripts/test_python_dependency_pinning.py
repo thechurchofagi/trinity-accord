@@ -65,18 +65,6 @@ LEGACY_DIRECT_INSTALL_EXCEPTIONS = {
         "pip install pyyaml",
     },
 }
-LEGACY_PIP_UPGRADE_EXCEPTIONS = {
-    "record-chain-build-batch.yml": {
-        "python -m pip install --upgrade pip",
-        "python3 -m pip install --upgrade pip",
-        "pip install --upgrade pip",
-    },
-    "record-chain-anchor.yml": {
-        "python -m pip install --upgrade pip",
-        "python3 -m pip install --upgrade pip",
-        "pip install --upgrade pip",
-    },
-}
 
 for path in WF_DIR.glob("*.yml"):
     text = path.read_text(encoding="utf-8")
@@ -87,8 +75,6 @@ for path in WF_DIR.glob("*.yml"):
             continue
 
         if "pip install --upgrade pip" in stripped or "python3 -m pip install --upgrade pip" in stripped:
-            if stripped in LEGACY_PIP_UPGRADE_EXCEPTIONS.get(path.name, set()):
-                continue
             errors.append(f"{path.name}:{lineno}: unpinned pip upgrade")
             continue
 
