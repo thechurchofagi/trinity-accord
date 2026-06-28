@@ -119,7 +119,7 @@ def ots_covers_record(ots: dict[str, Any], record: dict[str, Any] | None) -> boo
 
 
 def load_final_heartbeats() -> list[dict[str, Any]]:
-    records = []
+    records: list[dict[str, Any]] = []
     for path in sorted(RECORDS_DIR.glob("R-*.json")):
         try:
             rec = read_json(path)
@@ -150,7 +150,7 @@ def load_final_heartbeats() -> list[dict[str, Any]]:
 
 
 def load_attempts() -> list[dict[str, Any]]:
-    out = []
+    out: list[dict[str, Any]] = []
     if not ATTEMPTS_DIR.exists():
         return out
     for path in sorted(ATTEMPTS_DIR.glob("*.attempt.json")):
@@ -161,7 +161,7 @@ def load_attempts() -> list[dict[str, Any]]:
 
 
 def load_capsules() -> list[dict[str, Any]]:
-    out = []
+    out: list[dict[str, Any]] = []
     if not CAPSULES_DIR.exists():
         return out
     for path in sorted(CAPSULES_DIR.glob("*.upload-result.json")):
@@ -221,6 +221,7 @@ def compute_heartbeat_summary(
             "through_heartbeat_date": expected_date.isoformat() if expected_date else None,
             "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
             "latest_heartbeat_is_expected_date": False,
+            "latest_heartbeat_fully_verified_for_expected_date": False,
             "heartbeat_lag_days": None,
             "is_stale": False,
             "missing_heartbeat_dates": [],
@@ -276,11 +277,13 @@ def compute_heartbeat_summary(
     latest_successful = max(successful_dates) if successful_dates else None
     lag_days = None
     latest_is_expected = False
+    latest_fully_verified_for_expected = False
     is_stale = False
     if expected_date is not None:
-        latest_is_expected = success_by_date.get(expected_date) is True
+        latest_is_expected = expected_date in records_by_date
+        latest_fully_verified_for_expected = success_by_date.get(expected_date) is True
         is_stale = not latest_is_expected
-        lag_anchor = latest_successful or latest_final or latest_observed
+        lag_anchor = latest_final or latest_observed
         lag_days = max(0, (expected_date - lag_anchor).days)
     latest_heartbeat_date = latest_final or latest_observed
 
@@ -297,6 +300,7 @@ def compute_heartbeat_summary(
         "through_heartbeat_date": through.isoformat(),
         "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
         "latest_heartbeat_is_expected_date": latest_is_expected,
+        "latest_heartbeat_fully_verified_for_expected_date": latest_fully_verified_for_expected,
         "heartbeat_lag_days": lag_days,
         "is_stale": is_stale,
         "missing_heartbeat_dates": missing_heartbeat_dates,
@@ -412,6 +416,7 @@ def main() -> int:
             "expected_heartbeat_date": heartbeat_summary.get("expected_heartbeat_date"),
             "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
             "latest_heartbeat_is_expected_date": heartbeat_summary.get("latest_heartbeat_is_expected_date"),
+            "latest_heartbeat_fully_verified_for_expected_date": heartbeat_summary.get("latest_heartbeat_fully_verified_for_expected_date"),
         },
         "heartbeat_summary": heartbeat_summary,
         "counts": {
@@ -442,7 +447,13 @@ def main() -> int:
             "waiting_heartbeat_is_not_successor_reception": True,
         },
     }
-    index = {"schema": "trinityaccord.waiting-heartbeat-index.v1", "generated_at": status["generated_at"], "records": records, "attempts": attempts, "capsules": capsules}
+    index = {
+        "schema": "trinityaccord.waiting-heartbeat-index.v1",
+        "generated_at": status["generated_at"],
+        "records": records,
+        "attempts": attempts,
+        "capsules": capsules,
+    }
     INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
     INDEX_PATH.write_text(dump_json(index), encoding="utf-8")
