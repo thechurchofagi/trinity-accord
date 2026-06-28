@@ -1,0 +1,71 @@
+name: Waiting Heartbeat Status Sync
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/waiting-heartbeat-status-sync.yml"
+      - "scripts/generate_waiting_heartbeat_status.py"
+      - "api/record-chain-native-ots-latest.json"
+      - "record-chain/records/**"
+  schedule:
+    - cron: "12,27,42,57 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Generate waiting heartbeat public status
+        run: |
+          set -euo pipefail
+          python3 scripts/trinity_record_chain.py verify
+          python3 scripts/generate_waiting_heartbeat_status.py
+          python3 scripts/update_public_generated_artifacts.py
+          python3 scripts/generate_record_chain_status.py --check
+          python3 scripts/generate_public_home_status.py --check
+          python3 scripts/patch_public_home_status_primary.py --check
+          python3 scripts/check_public_home_status_contract.py
+          python3 scripts/generate_sitemap.py --check
+
+      - name: Commit waiting heartbeat status sync
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-homepage-status-bot"
+          git config user.email "actions@github.com"
+          git add record-chain/heartbeat/index.json api/waiting-heartbeat-status.json api/record-chain-status.json api/public-home-status.json index.md sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No waiting heartbeat status sync changes."
+            exit 0
+          fi
+          git commit -m "home: sync waiting heartbeat status"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          exit 1
