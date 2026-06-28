@@ -54,27 +54,7 @@ jobs:
         run: python3 scripts/test_runner_image_pinning.py
 
       - name: Supply-chain Python dependency pinning
-        id: python_dependency_pinning
-        continue-on-error: true
-        run: |
-          set +e
-          python3 scripts/test_python_dependency_pinning.py > /tmp/python-dependency-pinning.log 2>&1
-          code=$?
-          cat /tmp/python-dependency-pinning.log
-          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Upload Python dependency pinning diagnostics
-        if: steps.python_dependency_pinning.outputs.exit_code != '0'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: python-dependency-pinning-diagnostics
-          path: /tmp/python-dependency-pinning.log
-          retention-days: 1
-
-      - name: Fail Python dependency pinning
-        if: steps.python_dependency_pinning.outputs.exit_code != '0'
-        run: exit 1
+        run: python3 scripts/test_python_dependency_pinning.py
 
       - name: Supply-chain Node dependency pinning
         run: python3 scripts/test_node_dependency_pinning.py
@@ -83,7 +63,27 @@ jobs:
         run: python3 scripts/test_toolchain_provenance.py
 
       - name: Supply-chain write workflow provenance
-        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+        id: write_workflow_provenance
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/test_write_workflow_toolchain_provenance.py > /tmp/write-workflow-provenance.log 2>&1
+          code=$?
+          cat /tmp/write-workflow-provenance.log
+          echo "exit_code=${code}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload write workflow provenance diagnostics
+        if: steps.write_workflow_provenance.outputs.exit_code != '0'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: write-workflow-provenance-diagnostics
+          path: /tmp/write-workflow-provenance.log
+          retention-days: 1
+
+      - name: Fail write workflow provenance
+        if: steps.write_workflow_provenance.outputs.exit_code != '0'
+        run: exit 1
 
       - name: Supply-chain remote script guard
         run: python3 scripts/test_no_remote_script_execution.py
