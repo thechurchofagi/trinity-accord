@@ -64,10 +64,6 @@ LEGACY_DIRECT_INSTALL_EXCEPTIONS = {
         "- run: pip install pyyaml",
         "pip install pyyaml",
     },
-    "auto-sitemap.yml": {
-        "- run: pip install pyyaml",
-        "pip install pyyaml",
-    },
 }
 LEGACY_PIP_UPGRADE_EXCEPTIONS = {
     "record-chain-build-batch.yml": {
