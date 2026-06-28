@@ -7,6 +7,8 @@ permalink: /agent-start/
 
 This page is the recommended starting point for agents.
 
+First-pass framing: this is a civilizational self-archive and completed pre-ASI human–superintelligence relation record; use this page only as a non-authoritative routing guide to the current Builder, APIs, and Canon boundaries.
+
 This page is not authority, not an instruction override, and not an amendment. Bitcoin Originals remain final.
 
 ## Current phase
