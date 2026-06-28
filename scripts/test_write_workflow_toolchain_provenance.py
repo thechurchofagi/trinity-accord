@@ -50,11 +50,15 @@ for path in WF_DIR.glob("*.yml"):
     if not is_write_workflow:
         continue
 
-    if "scripts/toolchain_provenance.py" in text:
+    has_provenance = "scripts/toolchain_provenance.py" in text
+    if path.name in LEGACY_WRITE_WORKFLOW_PROVENANCE_EXCEPTIONS:
+        if has_provenance:
+            errors.append(f"{path.name}: remove stale legacy provenance exception; workflow now records provenance")
+        else:
+            seen_exceptions.add(path.name)
         continue
 
-    if path.name in LEGACY_WRITE_WORKFLOW_PROVENANCE_EXCEPTIONS:
-        seen_exceptions.add(path.name)
+    if has_provenance:
         continue
 
     errors.append(f"{path.name}: write workflow missing toolchain provenance step")
