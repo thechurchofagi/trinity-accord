@@ -47,8 +47,29 @@ jobs:
       - name: Verify Node dependency lockfile
         run: npm ci
 
-      - name: Run supply-chain integrity group
-        run: python3 scripts/run_ci_group.py supply-chain
+      - name: Supply-chain action pinning
+        run: python3 scripts/test_action_pinning.py
+
+      - name: Supply-chain runner image pinning
+        run: python3 scripts/test_runner_image_pinning.py
+
+      - name: Supply-chain Python dependency pinning
+        run: python3 scripts/test_python_dependency_pinning.py
+
+      - name: Supply-chain Node dependency pinning
+        run: python3 scripts/test_node_dependency_pinning.py
+
+      - name: Supply-chain toolchain provenance
+        run: python3 scripts/test_toolchain_provenance.py
+
+      - name: Supply-chain write workflow provenance
+        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+
+      - name: Supply-chain remote script guard
+        run: python3 scripts/test_no_remote_script_execution.py
+
+      - name: Supply-chain system tool recording
+        run: python3 scripts/test_system_tool_version_recording.py
 
       - name: Verify gateway error recovery context
         run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
