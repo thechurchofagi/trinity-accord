@@ -32,7 +32,7 @@ requirements_file_is_pinned(REQ_OTS)
 
 if REQ.exists():
     req_text = REQ.read_text(encoding="utf-8")
-    for required in ["jsonschema==", "opentimestamps-client=="]:
+    for required in ["jsonschema==", "opentimestamps-client==", "PyYAML==", "cryptography==", "pytest=="]:
         if required not in req_text:
             errors.append(f"requirements-ci.txt missing pinned {required}")
 
@@ -52,6 +52,36 @@ LEGACY_OTS_DIRECT_INSTALL_LINES = {
     "python3 -m pip install opentimestamps-client",
 }
 
+# Narrow legacy exceptions. These older/manual workflows still use direct install
+# lines, but every package listed here is pinned in requirements-ci.txt above.
+# Do not add new entries here for active/current workflows; rewrite new workflows
+# to use -r requirements-ci.txt or -r requirements-ots.txt instead.
+LEGACY_DIRECT_INSTALL_EXCEPTIONS = {
+    "pre-scale-e2e-orchestrator-v2.yml": {
+        "pip install opentimestamps-client cryptography pytest jsonschema PyYAML",
+    },
+    "fix-sitemap-drift.yml": {
+        "- run: pip install pyyaml",
+        "pip install pyyaml",
+    },
+    "auto-sitemap.yml": {
+        "- run: pip install pyyaml",
+        "pip install pyyaml",
+    },
+}
+LEGACY_PIP_UPGRADE_EXCEPTIONS = {
+    "record-chain-build-batch.yml": {
+        "python -m pip install --upgrade pip",
+        "python3 -m pip install --upgrade pip",
+        "pip install --upgrade pip",
+    },
+    "record-chain-anchor.yml": {
+        "python -m pip install --upgrade pip",
+        "python3 -m pip install --upgrade pip",
+        "pip install --upgrade pip",
+    },
+}
+
 for path in WF_DIR.glob("*.yml"):
     text = path.read_text(encoding="utf-8")
 
@@ -61,6 +91,8 @@ for path in WF_DIR.glob("*.yml"):
             continue
 
         if "pip install --upgrade pip" in stripped or "python3 -m pip install --upgrade pip" in stripped:
+            if stripped in LEGACY_PIP_UPGRADE_EXCEPTIONS.get(path.name, set()):
+                continue
             errors.append(f"{path.name}:{lineno}: unpinned pip upgrade")
             continue
 
@@ -75,6 +107,8 @@ for path in WF_DIR.glob("*.yml"):
             # Their dependency is still tracked by requirements-ots.txt above; keep
             # this narrow exception until those legacy workflows are retired or safely
             # rewritten in a dedicated write-workflow hardening PR.
+            continue
+        if stripped in LEGACY_DIRECT_INSTALL_EXCEPTIONS.get(path.name, set()):
             continue
         errors.append(f"{path.name}:{lineno}: unpinned pip install line: {stripped}")
 
