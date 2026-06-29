@@ -2,7 +2,8 @@
 
 /* Agent-first homepage P0 structure hooks.
    Keep these selectors in this top-level file so source-only P0 checks do not
-   depend on resolving imported CSS. */
+   depend on resolving imported CSS. These rules must not override the imported
+   base layout for section wrappers. */
 .agent-priority-brief {
   border: 1px solid rgba(201, 168, 76, 0.28);
   border-radius: 18px;
@@ -37,19 +38,43 @@
 
 .authority-chips {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin: 1rem 0;
+  max-width: 100%;
+}
+
+.authority-chip {
+  min-width: 0;
+}
+
+.authority-chip code,
+.authority-chip .chip-value {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .reason-grid,
-.canon-grid,
-.task-mode-selector,
-.status-snapshot {
+.canon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin: 1.25rem 0;
+}
+
+.task-mode-selector,
+.status-snapshot {
+  display: block;
+  margin: 1.25rem 0;
+}
+
+.task-mode-grid,
+.status-grid,
+.task-mode-selector .card-grid,
+.status-snapshot .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
 }
 
 .reason-card,
@@ -102,10 +127,18 @@
 @media (max-width: 900px) {
   .reason-grid,
   .canon-grid,
+  .task-mode-grid,
+  .status-grid,
+  .task-mode-selector .card-grid,
+  .status-snapshot .card-grid {
+    grid-template-columns: 1fr;
+  }
+
   .task-mode-selector,
   .status-snapshot,
   .authority-chips {
-    grid-template-columns: 1fr;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
