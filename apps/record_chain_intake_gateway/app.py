@@ -1027,11 +1027,14 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     authorship_verified = isinstance(proof, dict)
 
     # --- redact transient oath readback before persistence ---
+    # FIX: Do NOT redact oath readback from the signed payload.
+    # The Builder signs the submission including readback_text.
+    # Redacting after signing breaks signed_payload_sha256 verification
+    # in the append workflow. Keep the original signed body intact.
     from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
     original_submission_sha256 = sha256_canonical_json(body)
-    body = redact_transient_oath_readback(body)
-    stored_submission_sha256 = sha256_canonical_json(body)
-    # Re-extract draft after redaction
+    stored_submission_sha256 = original_submission_sha256  # no redaction = same hash
+    # draft unchanged after validation
     draft = extract_record_draft(body) or {}
 
     # --- check for linked Guardian request ---
