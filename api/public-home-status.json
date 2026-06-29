@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-29T16:14:08.631295+00:00",
+  "generated_at": "2026-06-29T17:16:33.072486+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "08a1d12a4e615c7d",
+  "source_digest": "0bb35291fc7c78c8",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 64,
@@ -725,7 +725,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-29T14:19:18Z",
+    "generated_at": "2026-06-29T17:16:32Z",
     "daily_alive_status": "degraded",
     "status": "degraded",
     "latest_result": "waiting_for_arweave_capsule",
@@ -756,13 +756,13 @@
       "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
     },
     "latest_ots": {
-      "latest_record_id": "R-000000062",
-      "latest_record_sha256": "98f3cd06d62bc338b0a85068ffff6a3040fbe82904312d7ef9293b9b98d8d719",
-      "native_record_count": 62,
-      "ots_status": "upgraded",
-      "bitcoin_pending": false,
+      "latest_record_id": "R-000000064",
+      "latest_record_sha256": "12d198638ce05ccd9bbae1c3b3de1dcf5007d6be541910cbf95670d7ddad5db2",
+      "native_record_count": 64,
+      "ots_status": "pending",
+      "bitcoin_pending": true,
       "bitcoin_verified": false,
-      "strict_bitcoin_verified": false,
+      "strict_bitcoin_verified": null,
       "covers_latest_waiting_heartbeat": true
     },
     "latest_arweave_capsule": null,
