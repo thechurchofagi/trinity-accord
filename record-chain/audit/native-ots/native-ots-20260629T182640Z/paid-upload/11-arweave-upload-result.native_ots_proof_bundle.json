@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-06-29T18:26:43.781Z",
+  "run_id": "native-ots-20260629T182640Z",
+  "record_type": "native_ots_proof_bundle",
+  "result": "uploaded",
+  "tx_id": "Xc7bLNtMkKJNhYmlH3kvVxhRdhxOCkSK3d6EK8KtX2o",
+  "gateway_url": "https://arweave.net/Xc7bLNtMkKJNhYmlH3kvVxhRdhxOCkSK3d6EK8KtX2o",
+  "post_status": 200,
+  "post_duration_ms": 394,
+  "payload_file": "record-chain/ots/native-arweave-bundles/native-record-63-R-000000063-3d5bdddf6766c350-dc64b9cc98c5725a.anchor.upgraded.arweave-bundle.json",
+  "payload_bytes": 50343,
+  "payload_sha256": "2e4f38de4eceb8b113370332b6120331f785c73c06b2cf2f786f2a3e1b04b3cc",
+  "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+  "balance_before_available": true,
+  "balance_before_winston": "15472424292863",
+  "balance_before_ar": "15.472424292863",
+  "balance_after_available": true,
+  "balance_after_reason": null,
+  "balance_after_winston": "15472424292863",
+  "balance_after_ar": "15.472424292863",
+  "actual_delta_winston": "0",
+  "actual_delta_ar": "0.000000000000",
+  "upload_cost_winston": "2625667498",
+  "upload_cost_ar": "0.002625667498",
+  "estimated_upload_cost_winston": "2625667498",
+  "estimated_upload_cost_ar": "0.002625667498",
+  "estimated_cost_usd": 0.00525133,
+  "remaining_balance_estimated_usd": 30.94484859,
+  "readback_required": true,
+  "extra_tags": [
+    {
+      "name": "Trinity-Artifact-Type",
+      "value": "Native-OTS-Proof-Bundle"
+    },
+    {
+      "name": "Trinity-Boundary",
+      "value": "mirror-only-not-authority-not-attestation-not-amendment"
+    }
+  ]
+}
