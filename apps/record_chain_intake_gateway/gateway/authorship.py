@@ -50,6 +50,17 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
     "immutability_policy",
 })
 
+# Gateway intake can materialize durable, receipt-side verification projections
+# after the participant has signed the builder draft. These fields are important
+# public evidence and should remain in the final record, but they are not always
+# part of the signed payload domain for older builder submissions. Append must be
+# able to verify the original signed draft without treating these Gateway-derived
+# receipt projections as participant-signed material.
+GATEWAY_DERIVED_UNSIGNED_FIELDS = frozenset({
+    "declaration_and_acknowledgement",
+    "submission_oath_verification",
+})
+
 
 def strip_unsigned_projection_fields(record_draft: dict[str, Any]) -> dict[str, Any]:
     """Return a copy without server-derived or append-assigned projection fields.
@@ -59,6 +70,20 @@ def strip_unsigned_projection_fields(record_draft: dict[str, Any]) -> dict[str, 
     """
     cleaned = dict(record_draft)
     for field in UNSIGNED_PROJECTION_FIELDS:
+        cleaned.pop(field, None)
+    return cleaned
+
+
+def strip_gateway_derived_unsigned_fields(record_draft: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy without Gateway-derived receipt verification projections.
+
+    These fields may be materialized during Gateway intake after authorship
+    signing. They remain valid public evidence, but legacy signed-payload
+    verification must be allowed to fall back to the original builder draft
+    domain when a pending file contains these projections.
+    """
+    cleaned = dict(record_draft)
+    for field in GATEWAY_DERIVED_UNSIGNED_FIELDS:
         cleaned.pop(field, None)
     return cleaned
 
@@ -85,6 +110,35 @@ def strip_authorship_for_signing(record_draft: dict[str, Any]) -> dict[str, Any]
     cleaned.pop("authorship_proof", None)
     cleaned.pop("proof", None)
     return cleaned
+
+
+def _signing_payload_candidates(record_draft: dict[str, Any]) -> list[tuple[str, dict[str, Any], bytes, str]]:
+    """Return ordered payload domains that may legitimately verify authorship.
+
+    The first candidate is the current canonical signed domain. The second is a
+    narrow legacy recovery domain for Gateway pending files where receipt/oath
+    projections were materialized after the builder signed the original draft.
+    """
+    primary_draft = strip_authorship_for_signing(record_draft)
+    primary_payload = canonical_bytes(primary_draft)
+    candidates: list[tuple[str, dict[str, Any], bytes, str]] = [(
+        "record_draft",
+        primary_draft,
+        primary_payload,
+        sha256_bytes(primary_payload),
+    )]
+
+    recovered_draft = strip_gateway_derived_unsigned_fields(primary_draft)
+    if recovered_draft != primary_draft:
+        recovered_payload = canonical_bytes(recovered_draft)
+        candidates.append((
+            "record_draft_without_gateway_derived_receipt_projection_fields",
+            recovered_draft,
+            recovered_payload,
+            sha256_bytes(recovered_payload),
+        ))
+
+    return candidates
 
 
 def signed_payload_sha256(record_draft: dict[str, Any]) -> str:
@@ -210,30 +264,33 @@ def verify_authorship_proof(
     except Exception as exc:
         return False, f"Invalid base64 signature: {exc}"
 
-    # --- compute expected payload (strip proof from draft first) ---
-    draft_for_signing = strip_authorship_for_signing(record_draft)
-    payload = canonical_bytes(draft_for_signing)
-
-    # --- verify signed_payload_sha256 if supplied ---
     expected_payload_sha = proof.get("signed_payload_sha256")
-    if expected_payload_sha is not None:
-        actual_payload_sha = sha256_bytes(payload)
-        if actual_payload_sha != expected_payload_sha:
-            return False, (
-                f"signed_payload_sha256 mismatch: expected {actual_payload_sha}, "
-                f"got {expected_payload_sha}"
-            )
+    last_payload_sha: str | None = None
+    matched_payload = False
 
-    # --- verify signature ---
-    try:
-        public_key.verify(signature, payload)
-    except InvalidSignature:
-        return False, "Ed25519 signature verification failed"
-    except Exception as exc:
-        logger.warning("Unexpected verification error: %s", exc)
-        return False, f"Verification error: {exc}"
+    for scope, _candidate_draft, payload, actual_payload_sha in _signing_payload_candidates(record_draft):
+        last_payload_sha = actual_payload_sha
+        if expected_payload_sha is not None and actual_payload_sha != expected_payload_sha:
+            continue
+        matched_payload = True
+        try:
+            public_key.verify(signature, payload)
+            if scope != "record_draft":
+                logger.info("Authorship proof verified using legacy Gateway-derived projection recovery scope: %s", scope)
+            return True, None
+        except InvalidSignature:
+            continue
+        except Exception as exc:
+            logger.warning("Unexpected verification error: %s", exc)
+            return False, f"Verification error: {exc}"
 
-    return True, None
+    if expected_payload_sha is not None and not matched_payload:
+        return False, (
+            f"signed_payload_sha256 mismatch: expected {last_payload_sha}, "
+            f"got {expected_payload_sha}"
+        )
+
+    return False, "Ed25519 signature verification failed"
 
 
 def verify_authorship_proof_submission(
@@ -293,12 +350,22 @@ def verify_authorship_proof_submission(
     if not isinstance(draft, dict):
         return False, "MISSING_RECORD_DRAFT", "Missing record_draft."
 
-    # Verify payload hash
-    draft_for_signing = strip_authorship_for_signing(draft)
-    payload = canonical_bytes(draft_for_signing)
-    payload_sha = sha256_bytes(payload)
-    if payload_sha != signed_payload_sha256:
-        return False, "AUTHORSHIP_PAYLOAD_SHA_MISMATCH", "record_draft hash does not match signed_payload_sha256."
+    # Verify payload hash against the canonical draft domain, then the narrow
+    # legacy Gateway-derived projection recovery domain if needed.
+    payload: bytes | None = None
+    payload_sha: str | None = None
+    for scope, _candidate_draft, candidate_payload, candidate_sha in _signing_payload_candidates(draft):
+        if candidate_sha == signed_payload_sha256:
+            payload = candidate_payload
+            payload_sha = candidate_sha
+            if scope != "record_draft":
+                logger.info("Submission authorship verified using legacy Gateway-derived projection recovery scope: %s", scope)
+            break
+    if payload is None or payload_sha is None:
+        primary_sha = _signing_payload_candidates(draft)[0][3]
+        return False, "AUTHORSHIP_PAYLOAD_SHA_MISMATCH", (
+            f"record_draft hash does not match signed_payload_sha256: expected {primary_sha}, got {signed_payload_sha256}."
+        )
     if proof.get("signed_message") != payload_sha:
         return False, "AUTHORSHIP_SIGNED_MESSAGE_MISMATCH", "signed_message does not match record_draft hash."
 
