@@ -59,6 +59,7 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
 GATEWAY_DERIVED_UNSIGNED_FIELDS = frozenset({
     "declaration_and_acknowledgement",
     "submission_oath_verification",
+    "created_at",
 })
 
 
