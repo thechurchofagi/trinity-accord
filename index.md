@@ -838,12 +838,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">attention</p>
+    <p class="status-number">current</p>
     <p class="status-note">
-      Pipeline: attention.<br>
+      Pipeline: current.<br>
       Latest technical record: R-000000064.<br>
       OTS: upgraded.<br>
-      Arweave: archive-needed.<br>
+      Arweave: current.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -864,7 +864,7 @@ Refusal is allowed. Critical preservation is allowed.
       Batch manifests: 2 batches (all stamped).<br>
       OpenTimestamps: upgraded.<br>
       Native OTS proof bundle Arweave archive: arweave_archived.<br>
-      Record-Chain Arweave archive: current live mirror; latest tx 6lezX7tIX-tW....<br>
+      Record-Chain Arweave archive: current live mirror; latest tx hW89wIdlM2ot....<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -872,11 +872,11 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">AR upload wallet</p>
     <p class="status-number">OK</p>
     <p class="status-note">
-      Total paid upload cost: 0.166766201826 AR.<br>
-      Wallet balance: 15.482854782994 AR.<br>
+      Total paid upload cost: 0.174573201178 AR.<br>
+      Wallet balance: 15.480231292215 AR.<br>
       Recharge needed: no.<br>
       Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
-      <span class="zh">累计付费上传成本：0.166766201826 AR。钱包余额：15.482854782994 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+      <span class="zh">累计付费上传成本：0.174573201178 AR。钱包余额：15.480231292215 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
     </p>
   </article>
   <article class="status-card">
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>b1f121cd96f810a4</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>49f119361d5e55f3</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
