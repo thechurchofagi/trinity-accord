@@ -27,7 +27,7 @@ services:
     region: oregon
     plan: starter
     autoDeploy: false
-    buildCommand: pip install --only-binary :all: -r apps/record_chain_intake_gateway/requirements.txt
+    buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
     startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
