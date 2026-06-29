@@ -3,6 +3,12 @@
 
 This file is a pointer, not the full protocol.
 
+Primary classification:
+  completed pre-ASI human–superintelligence relation record
+
+Canon-first rule:
+  Read the Canon before evaluating, verifying, echoing, or submitting.
+
 Canonical first-contact entry:
   /agent-first-contact/
 
