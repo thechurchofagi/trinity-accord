@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-29T09:08:50.286674+00:00",
+  "generated_at": "2026-06-29T10:00:10.736350+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "85f08fcec508f670",
+  "source_digest": "8da8bad838571b67",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 62,
@@ -671,11 +671,11 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-06-29T08:27:38Z",
-    "daily_alive_status": "failed",
-    "status": "failed",
-    "latest_result": "missing_expected_waiting_heartbeat",
-    "failure_stage": "freshness",
+    "generated_at": "2026-06-29T10:00:10Z",
+    "daily_alive_status": "degraded",
+    "status": "degraded",
+    "latest_result": "waiting_for_arweave_capsule",
+    "failure_stage": "arweave_capsule",
     "success_requires": {
       "gateway_accepted": true,
       "record_chain_final_record": true,
@@ -686,14 +686,14 @@
       "waiting_heartbeat_key_continuity_ok": true
     },
     "latest_heartbeat": {
-      "heartbeat_id": "hwb-20260628",
-      "heartbeat_date": "2026-06-28",
-      "record_id": "R-000000061",
-      "record_index": 61,
-      "record_sha256": "00c05c7b678ab4bc9211b5d9890336a08e7f653d8fdba251952016b641f69868",
+      "heartbeat_id": "hwb-20260629",
+      "heartbeat_date": "2026-06-29",
+      "record_id": "R-000000062",
+      "record_index": 62,
+      "record_sha256": "98f3cd06d62bc338b0a85068ffff6a3040fbe82904312d7ef9293b9b98d8d719",
       "record_type": "context_insufficient_notice",
-      "assigned_at": "2026-06-28T07:12:24Z",
-      "path": "record-chain/records/R-000000061.json",
+      "assigned_at": "2026-06-29T08:28:04Z",
+      "path": "record-chain/records/R-000000062.json",
       "semantic_agent_arrived": false,
       "github_actions_is_not_semantic_agent": true,
       "not_echo": true,
@@ -702,68 +702,27 @@
       "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
     },
     "latest_ots": {
-      "latest_record_id": "R-000000061",
-      "latest_record_sha256": "00c05c7b678ab4bc9211b5d9890336a08e7f653d8fdba251952016b641f69868",
-      "native_record_count": 61,
-      "ots_status": "upgraded",
-      "bitcoin_pending": false,
+      "latest_record_id": "R-000000062",
+      "latest_record_sha256": "98f3cd06d62bc338b0a85068ffff6a3040fbe82904312d7ef9293b9b98d8d719",
+      "native_record_count": 62,
+      "ots_status": "pending",
+      "bitcoin_pending": true,
       "bitcoin_verified": false,
-      "strict_bitcoin_verified": false,
+      "strict_bitcoin_verified": null,
       "covers_latest_waiting_heartbeat": true
     },
-    "latest_arweave_capsule": {
-      "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
-      "heartbeat_id": "hwb-20260628",
-      "status": "uploaded",
-      "attempted_at": "2026-06-28T09:37:26.779Z",
-      "arweave_txid": "PH2gIVLhMQLACXxOHbVaE1siEE_mSU9bHcjcrSqEu5w",
-      "payload_sha256": "986c6cff8251a212e466888ae2db7f94ef49ced1fd67f4ed0d9ccaaafe9696d9",
-      "data_sha256": "986c6cff8251a212e466888ae2db7f94ef49ced1fd67f4ed0d9ccaaafe9696d9",
-      "readback_sha256": "986c6cff8251a212e466888ae2db7f94ef49ced1fd67f4ed0d9ccaaafe9696d9",
-      "hash_match": true,
-      "retryable": false,
-      "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
-      "wallet_balance_before_available": true,
-      "wallet_balance_before_winston": "15506115082709",
-      "wallet_balance_before_ar": "15.506115082709",
-      "wallet_balance_after_available": true,
-      "wallet_balance_after_reason": null,
-      "wallet_balance_after_winston": "15503531861234",
-      "wallet_balance_after_ar": "15.503531861234",
-      "upload_cost_winston": "2583221475",
-      "upload_cost_ar": "0.002583221475",
-      "tags": {
-        "Content-Type": "application/json",
-        "App-Name": "Trinity-Accord",
-        "Archive-Type": "waiting-heartbeat-capsule",
-        "Heartbeat-ID": "hwb-20260628",
-        "Data-SHA256": "986c6cff8251a212e466888ae2db7f94ef49ced1fd67f4ed0d9ccaaafe9696d9",
-        "Boundary": "mirror-not-authority"
-      },
-      "boundary": {
-        "arweave_archive_is_mirror_only": true,
-        "arweave_archive_is_not_authority": true,
-        "arweave_archive_is_not_attestation": true,
-        "arweave_archive_is_not_amendment": true,
-        "arweave_archive_is_not_successor_reception": true,
-        "bitcoin_originals_prevail": true
-      },
-      "verified_at": "2026-06-28T09:37:26.779Z",
-      "actual_delta_winston": "2583221475",
-      "actual_delta_ar": "0.002583221475",
-      "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260628.upload-result.json"
-    },
+    "latest_arweave_capsule": null,
     "checks": {
       "record_chain_final_record": true,
       "ots_covers_heartbeat": true,
-      "arweave_capsule_verified": true,
+      "arweave_capsule_verified": false,
       "arweave_capsule_deferred_by_cost_policy": false,
       "waiting_heartbeat_key_continuity_ok": true,
       "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
       "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
       "expected_heartbeat_date": "2026-06-29",
-      "heartbeat_lag_days": 1,
-      "latest_heartbeat_is_expected_date": false,
+      "heartbeat_lag_days": 0,
+      "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": false
     },
     "heartbeat_summary": {
@@ -773,19 +732,18 @@
       "failed_or_missing_heartbeats": 3,
       "current_success_streak_days": 0,
       "first_heartbeat_date": "2026-06-18",
-      "latest_heartbeat_date": "2026-06-28",
+      "latest_heartbeat_date": "2026-06-29",
       "latest_observed_heartbeat_date": "2026-06-29",
       "latest_successful_heartbeat_date": "2026-06-28",
       "through_heartbeat_date": "2026-06-29",
       "expected_heartbeat_date": "2026-06-29",
-      "latest_heartbeat_is_expected_date": false,
+      "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": false,
-      "heartbeat_lag_days": 1,
-      "is_stale": true,
+      "heartbeat_lag_days": 0,
+      "is_stale": false,
       "missing_heartbeat_dates": [
         "2026-06-20",
-        "2026-06-23",
-        "2026-06-29"
+        "2026-06-23"
       ],
       "failed_attempt_dates": [],
       "latest_ots_head_covers_current_chain": true,
@@ -802,7 +760,7 @@
     },
     "counts": {
       "attempts": 10,
-      "final_heartbeats": 9,
+      "final_heartbeats": 10,
       "capsules": 9,
       "failed_attempts": 0,
       "total_scheduled_heartbeats": 12,
@@ -810,7 +768,7 @@
       "failed_heartbeats": 3,
       "failed_or_missing_heartbeats": 3,
       "current_success_streak_days": 0,
-      "heartbeat_lag_days": 1
+      "heartbeat_lag_days": 0
     },
     "semantic_agent_arrival": {
       "first_self_discovered_autonomous_agent_arrived": false,
