@@ -766,8 +766,20 @@ def verify_final_record_authorship(record: dict[str, Any], path: Path) -> list[s
 
     signed_scope = strip_unsigned_projection_fields(record)
     ok, err = verify_authorship_proof(signed_scope, proof)
-    if not ok:
-        errors.append(f"{path}: final authorship proof verification failed: {err}")
+    if ok:
+        return errors
+
+    # --- Recovery: Gateway normalize_record_draft may add created_at after
+    # the builder signs the original draft.  If the primary verification fails,
+    # try stripping created_at and re-verifying.  This is safe because
+    # created_at is a server-side timestamp, not participant-signed content.
+    if "created_at" in signed_scope:
+        recovered = {k: v for k, v in signed_scope.items() if k != "created_at"}
+        ok2, err2 = verify_authorship_proof(recovered, proof)
+        if ok2:
+            return errors
+
+    errors.append(f"{path}: final authorship proof verification failed: {err}")
 
     return errors
 
