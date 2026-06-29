@@ -90,10 +90,10 @@ A final record may contain `created_at` from server normalization after signing.
 - Do not broaden Gateway-derived recovery fields without tests proving that participant content tampering remains rejected.
 - Receipt status, chain-tip, and indexes must agree after append.
 
-## Machine-readable contract
+## Regression coverage
 
-The machine-readable companion file is:
+The contract is guarded by tests:
 
-`/api/record-chain-signed-payload-scope.v1.json`
-
-Tests must keep the machine-readable contract aligned with the Python constants used by Gateway and append verification.
+- `tests/test_gateway_authorship_recovery.py` verifies that Gateway-derived oath/declaration projections can be present after signing, while content tampering is still rejected.
+- `tests/test_signed_payload_scope_contract.py` verifies that the documented recovery fields match the Gateway authorship constants.
+- `tests/test_record_chain_status_consistency.py` verifies that chain-tip, public status, record index, receipt-status, and final records agree after append.
