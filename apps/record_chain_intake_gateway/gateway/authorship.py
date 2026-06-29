@@ -48,7 +48,6 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
     "limitations",
     "related_records",
     "immutability_policy",
-    "created_at",
 })
 
 # Gateway intake can materialize durable, receipt-side verification projections
@@ -58,6 +57,7 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
 # able to verify the original signed draft without treating these Gateway-derived
 # receipt projections as participant-signed material.
 GATEWAY_DERIVED_UNSIGNED_FIELDS = frozenset({
+    "created_at",
 })
 
 
