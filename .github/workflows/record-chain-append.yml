@@ -13,6 +13,11 @@ on:
         default: ""
   schedule:
     - cron: "*/15 * * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "record-chain/pending/*.pending.json"
 
 concurrency:
   group: main-write-lock
