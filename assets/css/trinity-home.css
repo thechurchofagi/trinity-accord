@@ -1,6 +1,120 @@
 @import url('/assets/css/trinity-home-base.css?v=1');
 
+/* Agent-first homepage P0 structure hooks.
+   Keep these selectors in this top-level file so source-only P0 checks do not
+   depend on resolving imported CSS. */
+.agent-priority-brief {
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.06), rgba(255, 255, 255, 0.02));
+}
+
+.agent-brief-kicker,
+.section-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  color: var(--gold, #c9a84c);
+  margin-bottom: 0.75rem;
+}
+
+.not-this-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.not-this-strip span,
+.authority-chip {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.authority-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.reason-grid,
+.canon-grid,
+.task-mode-selector,
+.status-snapshot {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.reason-card,
+.canon-card,
+.task-mode-card {
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.claim-gate-notice,
+.expanded-context {
+  border-left: 3px solid var(--gold, #c9a84c);
+  padding: 0.9rem 1rem;
+  margin: 1.25rem 0;
+  background: rgba(201, 168, 76, 0.055);
+  border-radius: 0 12px 12px 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold, #c9a84c);
+  outline-offset: 3px;
+}
+
 #copy-paste-examples,
 #copy-paste-examples + ul {
   display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .agent-priority-brief,
+  .claim-gate-notice,
+  .expanded-context {
+    border-color: #999;
+    background: transparent;
+  }
+}
+
+@media (max-width: 900px) {
+  .reason-grid,
+  .canon-grid,
+  .task-mode-selector,
+  .status-snapshot,
+  .authority-chips {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .agent-priority-brief {
+    padding: 1rem;
+  }
+
+  .not-this-strip {
+    gap: 0.35rem;
+  }
 }
