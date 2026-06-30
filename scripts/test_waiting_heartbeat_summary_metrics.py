@@ -128,6 +128,24 @@ def test_summary_extends_to_expected_date_when_latest_observed_is_stale() -> Non
     require("2026-06-23" in summary["missing_heartbeat_dates"], "expected missing date should be listed")
 
 
+def test_current_expected_record_is_alive_while_arweave_capsule_is_pending() -> None:
+    generator = load_generator_module()
+    current = {**verified_record(), "heartbeat_id": "hwb-20260623", "heartbeat_date": "2026-06-23", "record_id": "R-000000057", "record_index": 57}
+    summary = generator.compute_heartbeat_summary(
+        records=[verified_record(), current],
+        attempts=[],
+        capsules=[verified_capsule()],
+        key_manifest={"public_key_sha256": "key-sha"},
+        ots_covers_latest=True,
+        expected_date=date(2026, 6, 23),
+    )
+    require(summary["latest_heartbeat_is_expected_date"] is True, "expected final record should be fresh")
+    require(summary["latest_heartbeat_fully_verified_for_expected_date"] is True, "current final record plus OTS coverage should be alive before archive capsule readback")
+    require(summary["successful_heartbeats"] == 2, "current archive-pending heartbeat should count as operationally successful")
+    require(summary["failed_or_missing_heartbeats"] == 0, "archive-pending current heartbeat should not be counted failed/missing")
+    require(summary["success_definition"].get("arweave_capsule_is_archive_followup") is True, "summary must classify Arweave capsule as archive follow-up")
+
+
 def test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat() -> None:
     generator = load_generator_module()
     summary = generator.compute_heartbeat_summary(
@@ -215,6 +233,7 @@ def main() -> int:
     test_current_status_contract()
     test_expected_heartbeat_date_respects_schedule_grace_window()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
+    test_current_expected_record_is_alive_while_arweave_capsule_is_pending()
     test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat()
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
     test_ots_head_covers_prior_heartbeat_record()

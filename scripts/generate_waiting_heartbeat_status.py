@@ -228,9 +228,9 @@ def compute_heartbeat_summary(
             "failed_attempt_dates": [],
             "success_definition": {
                 "requires_final_record": True,
-                "requires_verified_arweave_capsule": True,
                 "requires_key_continuity": True,
                 "latest_ots_head_covers_current_chain": True,
+                "arweave_capsule_is_archive_followup": True,
             },
             "not_reception_counter": True,
             "not_authority": True,
@@ -251,6 +251,7 @@ def compute_heartbeat_summary(
     scheduled_dates = date_range(first, through)
 
     expected_key_sha = key_manifest.get("public_key_sha256")
+    latest_record_date = max(records_by_date) if records_by_date else None
     success_by_date: dict[date, bool] = {}
     missing_heartbeat_dates: list[str] = []
     for scheduled in scheduled_dates:
@@ -262,7 +263,13 @@ def compute_heartbeat_summary(
         key_ok = bool(expected_key_sha and record.get("authorship_public_key_sha256") == expected_key_sha)
         same_capsules = capsules_by_heartbeat.get(str(record.get("heartbeat_id")), [])
         verified_capsule = any(capsule_is_verified(capsule) for capsule in same_capsules)
-        success_by_date[scheduled] = bool(key_ok and verified_capsule)
+        # Daily liveness is established by the final heartbeat record, key
+        # continuity, and the native OTS head covering that record.  Arweave
+        # capsule upload/readback is a mirror/archive follow-up and must not
+        # make an otherwise current heartbeat look failed/degraded while the
+        # archive workflow is still waiting for normal post-OTS processing.
+        current_record_operational = bool(scheduled == latest_record_date and key_ok and ots_covers_latest)
+        success_by_date[scheduled] = bool(key_ok and (verified_capsule or current_record_operational))
 
     successful = sum(1 for ok in success_by_date.values() if ok)
     total = len(scheduled_dates)
@@ -308,9 +315,9 @@ def compute_heartbeat_summary(
         "latest_ots_head_covers_current_chain": bool(ots_covers_latest),
         "success_definition": {
             "requires_final_record": True,
-            "requires_verified_arweave_capsule": True,
             "requires_key_continuity": True,
             "latest_ots_head_covers_current_chain": True,
+            "arweave_capsule_is_archive_followup": True,
         },
         "not_reception_counter": True,
         "not_authority": True,
@@ -351,22 +358,19 @@ def main() -> int:
         daily_alive_status = "failed"
         latest_result = "key_continuity_failed"
         failure_stage = "key_continuity"
-    elif final_record_exists and ots_covers_latest and arweave_verified:
-        daily_alive_status = "success"
-        latest_result = "success"
-        failure_stage = None
-    elif final_record_exists and ots_covers_latest and arweave_deferred:
-        daily_alive_status = "degraded"
-        latest_result = "arweave_capsule_deferred_by_cost_policy"
-        failure_stage = "arweave_capsule"
     elif final_record_exists and ots_covers_latest:
-        daily_alive_status = "degraded"
-        latest_result = "waiting_for_arweave_capsule"
-        failure_stage = "arweave_capsule"
+        daily_alive_status = "success"
+        if arweave_verified:
+            latest_result = "success"
+        elif arweave_deferred:
+            latest_result = "operational_alive_arweave_capsule_deferred"
+        else:
+            latest_result = "operational_alive_arweave_capsule_pending"
+        failure_stage = None
     elif final_record_exists:
         daily_alive_status = "degraded"
-        latest_result = "waiting_for_ots"
-        failure_stage = "ots"
+        latest_result = "waiting_for_ots_head_coverage"
+        failure_stage = "ots_head_coverage"
     elif attempts:
         daily_alive_status = "failed"
         latest_result = attempts[-1].get("status", "attempted")
@@ -410,6 +414,7 @@ def main() -> int:
             "ots_covers_heartbeat": ots_covers_latest,
             "arweave_capsule_verified": arweave_verified,
             "arweave_capsule_deferred_by_cost_policy": arweave_deferred,
+            "arweave_capsule_pending_archive_followup": bool(final_record_exists and ots_covers_latest and not arweave_verified and not arweave_deferred),
             "waiting_heartbeat_key_continuity_ok": key_continuity_ok,
             "expected_waiting_heartbeat_public_key_sha256": expected_key_sha,
             "actual_waiting_heartbeat_public_key_sha256": actual_key_sha,
