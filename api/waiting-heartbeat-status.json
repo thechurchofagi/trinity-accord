@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-06-30T09:53:14Z",
+  "generated_at": "2026-06-30T12:07:58Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "operational_alive_arweave_capsule_pending",
@@ -34,10 +34,10 @@
     "latest_record_id": "R-000000066",
     "latest_record_sha256": "a95eb0e66c6ee040c6e41d9d70a46905c00c5e4745c46f4b1072eefa555b0328",
     "native_record_count": 66,
-    "ots_status": "pending",
-    "bitcoin_pending": true,
+    "ots_status": "upgraded",
+    "bitcoin_pending": false,
     "bitcoin_verified": false,
-    "strict_bitcoin_verified": null,
+    "strict_bitcoin_verified": false,
     "covers_latest_waiting_heartbeat": true
   },
   "latest_arweave_capsule": null,
