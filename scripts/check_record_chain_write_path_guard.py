@@ -124,6 +124,11 @@ def commit_message(ref: str) -> str:
     return run_git(["log", "-1", "--pretty=%B", ref]).strip()
 
 
+def is_github_pull_request_merge_commit(ref: str, message: str) -> bool:
+    parents = run_git(["rev-list", "--parents", "-n", "1", ref]).split()
+    return len(parents) >= 3 and message.startswith("Merge pull request #")
+
+
 def startswith_any(path: str, prefixes: Iterable[str]) -> bool:
     return any(path.startswith(prefix) for prefix in prefixes)
 
@@ -212,6 +217,7 @@ def allowed_for_push(
     files: list[str],
     message: str,
     commits: list[str],
+    head: str,
     actor: str | None,
     allowed_gateway_actors: set[str],
 ) -> tuple[bool, str]:
@@ -221,9 +227,9 @@ def allowed_for_push(
     if not protected:
         return True, "no protected runtime data changed"
 
-    # Maintenance override is intentionally NOT accepted on direct push.
-    # It must be reviewed through a PR.
     if len(commits) != 1:
+        if is_github_pull_request_merge_commit(head, message) and has_valid_maintenance_override(files):
+            return True, "merged pull request contains explicit maintenance override"
         return False, (
             "protected runtime data changed across multiple commits; "
             "only single-commit approved writers are allowed"
@@ -306,6 +312,7 @@ def main() -> int:
             files,
             commit_message(args.head),
             commits,
+            args.head,
             args.github_actor,
             parse_actor_list(args.gateway_actors),
         )
