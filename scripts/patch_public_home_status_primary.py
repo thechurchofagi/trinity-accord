@@ -37,6 +37,7 @@ RC_STATUS = ROOT / "api" / "record-chain-status.json"
 ANCHOR_STATUS = ROOT / "api" / "record-chain-anchor-status.json"
 ARWEAVE_INDEX = ROOT / "api" / "record-chain-arweave-index.json"
 ARWEAVE_WALLET = ROOT / "api" / "arweave-wallet-status.json"
+NATIVE_OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 CLASSIFICATION = "official_live_reception"
@@ -346,11 +347,25 @@ def primary_counters(records: list[dict[str, Any]], index: dict[tuple[str, str |
 def _pipeline_display(status: dict[str, Any], ots: dict[str, Any], arweave_status: str) -> str:
     pipeline_status = status.get("pipeline_status", {})
     pipeline_current = pipeline_status.get("pipeline_current")
-    if isinstance(pipeline_current, bool):
-        return "current" if pipeline_current else "attention"
+    if pipeline_current is True:
+        return "current"
+    if pipeline_current is False:
+        # A freshly stamped native head with Bitcoin/calendar confirmation still
+        # pending, or an Arweave mirror waiting for that OTS upgrade, is a normal
+        # in-progress archive state. Reserve "attention" for actual needed work
+        # or failed/pending upload backlog, not for expected OTS/Arweave latency.
+        if (
+            pipeline_status.get("ots_anchor_needed") is False
+            and pipeline_status.get("arweave_archive_needed") is False
+            and str(ots.get("status", "")).startswith("current")
+            and arweave_status in {"current", "waiting-for-native-ots"}
+        ):
+            return "active"
+        return "attention"
     return (
         "current"
         if str(ots.get("status", "")).startswith("current") and arweave_status == "current"
+        else "active" if str(ots.get("status", "")).startswith("current") and arweave_status == "waiting-for-native-ots"
         else "attention"
     )
 
@@ -360,6 +375,13 @@ def technical_health(status: dict[str, Any]) -> dict[str, Any]:
     ots = anchoring.get("open_timestamps", {})
     arweave = anchoring.get("arweave_archive", {})
     raw_ots = ots.get("ots_status") or ots.get("status") or "pending"
+    native_ots_latest = load(NATIVE_OTS_LATEST, {})
+    ots_pending_since = (
+        ots.get("created_at")
+        or ots.get("updated_at")
+        or native_ots_latest.get("created_at")
+        or native_ots_latest.get("updated_at")
+    )
     arweave_status = arweave.get("status") or "current"
     wallet = load(ARWEAVE_WALLET, {})
     spending = wallet.get("spending", {})
@@ -373,6 +395,8 @@ def technical_health(status: dict[str, Any]) -> dict[str, Any]:
         "pipeline": _pipeline_display(status, ots, arweave_status),
         "ots": "pending" if "pending" in str(raw_ots) else str(raw_ots),
         "ots_raw_status": raw_ots,
+        "ots_pending_since": ots_pending_since if "pending" in str(raw_ots) else None,
+        "ots_pending_expected_window": "calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window",
         "arweave": arweave_status,
         "ots_archivable_for_arweave": (status.get("pipeline_status") or {}).get("ots_archivable_for_arweave"),
         "arweave_archive_needed": (status.get("pipeline_status") or {}).get("arweave_archive_needed"),
@@ -432,6 +456,8 @@ def render(status: dict[str, Any]) -> str:
     txid = arweave_index.get("latest_arweave_txid")
     short_txid = txid[:12] + "..." if txid and len(txid) > 12 else txid
     arweave_status = f"current live mirror; latest tx {short_txid}" if arweave_index.get("current_upload_mode") == "live" and txid else str(tech["arweave"])
+    ots_pending_since = tech.get("ots_pending_since") or "unknown"
+    ots_pending_window = tech.get("ots_pending_expected_window") or "calendar/Bitcoin upgrade timing varies"
     active = profile.get("self_initiated", 0)
     passive = profile.get("human_requested_or_introduced", 0)
     decided = profile.get("self_decided", 0)
@@ -486,17 +512,17 @@ def render(status: dict[str, Any]) -> str:
     elif arweave_deferred:
         arweave_capsule = "deferred by cost policy"
     else:
-        arweave_capsule = "pending"
+        arweave_capsule = "archive pending"
     ots_covers = "yes" if ots_ok else "no"
     semantic_arrived = hb.get("semantic_agent_arrival", {}).get("first_self_discovered_autonomous_agent_arrived", False)
     if semantic_arrived:
         waiting_desc = "no longer waiting \u2014 arrival detected"
         waiting_desc_zh = "\u4e0d\u518d\u7b49\u5f85\u2014\u2014\u5df2\u68c0\u6d4b\u5230\u667a\u80fd\u4f53\u5230\u6765"
-        heartbeat_status_zh = "\u6210\u529f" if hb_status == "success" else "\u5df2\u964d\u7ea7" if hb_status == "degraded" else "\u5931\u8d25" if hb_status == "failed" else "\u672a\u914d\u7f6e"
+        heartbeat_status_zh = "\u6b63\u5e38" if hb_status == "success" else "\u5df2\u964d\u7ea7" if hb_status == "degraded" else "\u5931\u8d25" if hb_status == "failed" else "\u672a\u914d\u7f6e"
     else:
         waiting_desc = "still awaiting"
         waiting_desc_zh = "\u4ecd\u5728\u7b49\u5f85"
-        heartbeat_status_zh = "\u5df2\u964d\u7ea7" if hb_status == "degraded" else "\u5931\u8d25" if hb_status == "failed" else "\u6210\u529f" if hb_status == "success" else "\u672a\u914d\u7f6e"
+        heartbeat_status_zh = "\u5df2\u964d\u7ea7" if hb_status == "degraded" else "\u5931\u8d25" if hb_status == "failed" else "\u6b63\u5e38" if hb_status == "success" else "\u672a\u914d\u7f6e"
     heartbeat_status = hb_status
     return f"""{BEGIN}
 <!-- Generated by scripts/generate_public_home_status.py + scripts/patch_public_home_status_primary.py. Do not edit this block manually. -->
@@ -549,7 +575,7 @@ def render(status: dict[str, Any]) -> str:
     <p class="status-note">
       Pipeline: {tech["pipeline"]}.<br>
       Latest technical record: {tech.get("latest_record") or "none"}.<br>
-      OTS: {tech["ots"]}.<br>
+      OTS: {tech["ots"]} since {ots_pending_since} ({ots_pending_window}).<br>
       Arweave: {tech["arweave"]}.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
@@ -569,7 +595,7 @@ def render(status: dict[str, Any]) -> str:
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: {batch_status}.<br>
-      OpenTimestamps: {tech["ots_raw_status"]}.<br>
+      OpenTimestamps: {tech["ots_raw_status"]} since {ots_pending_since}; expected initial window is 2-3 hours.<br>
       Native OTS proof bundle Arweave archive: {proof_status}.<br>
       Record-Chain Arweave archive: {arweave_status}.<br>
       Arweave is a mirror/archive layer only.
@@ -614,7 +640,7 @@ def render(status: dict[str, Any]) -> str:
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：{heartbeat_status_zh}。</span><br>
       <span class="zh">累计心跳：{hb_total} 次；成功：{hb_success} 次；失败或缺失：{hb_failed} 次；最近连续成功：{hb_streak} 天。</span><br>
-      <span class="zh">系统正在{waiting_desc_zh}第一个自主发现的智能体。</span><br>
+      <span class="zh">系统{waiting_desc_zh}第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
   </article>
