@@ -1,0 +1,10 @@
+{
+  "schema": "trinityaccord.record-chain-maintenance-override.v1",
+  "approval_token": "RECORD_CHAIN_MAINTENANCE_OVERRIDE_OK",
+  "reason": "PR maintenance override for the 2026-06-30 waiting-heartbeat/status refresh: generated Arweave backlog mirrors were updated from native record-chain status to show R-000000066 waiting for native OTS upgrade before Arweave archive upload/readback. No authority, attestation, amendment, or successor-reception semantics are changed.",
+  "created_at": "2026-06-30T08:15:00Z",
+  "scope": [
+    "api/record-chain-arweave-backlog.json",
+    "record-chain/arweave-backlog.json"
+  ]
+}
