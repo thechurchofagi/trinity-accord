@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-06-29T23:33:19Z",
+  "generated_at": "2026-06-30T01:37:04Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "success",
@@ -31,13 +31,13 @@
     "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
   },
   "latest_ots": {
-    "latest_record_id": "R-000000064",
-    "latest_record_sha256": "12d198638ce05ccd9bbae1c3b3de1dcf5007d6be541910cbf95670d7ddad5db2",
-    "native_record_count": 64,
-    "ots_status": "upgraded",
-    "bitcoin_pending": false,
+    "latest_record_id": "R-000000065",
+    "latest_record_sha256": "f114044d7af03085fd1bf6d35e7a739be325cf862f5ad82ea3198e484623f083",
+    "native_record_count": 65,
+    "ots_status": "pending",
+    "bitcoin_pending": true,
     "bitcoin_verified": false,
-    "strict_bitcoin_verified": false,
+    "strict_bitcoin_verified": null,
     "covers_latest_waiting_heartbeat": true
   },
   "latest_arweave_capsule": {
