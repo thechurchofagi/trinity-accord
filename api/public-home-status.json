@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-06-29T23:55:23.824648+00:00",
+  "generated_at": "2026-06-30T01:28:07.701286+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "1b2690925d0632c6",
+  "source_digest": "d5d036932be94e4c",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 65,
@@ -133,7 +133,7 @@
         "record_chain_arweave_pending": 0,
         "record_chain_arweave_failed": 0,
         "record_chain_arweave_waiting_for_key": 0,
-        "native_ots_upgrade_pending": 1,
+        "native_ots_upgrade_pending": 2,
         "native_ots_arweave_pending": 0,
         "native_ots_arweave_failed": 0,
         "native_ots_waiting_for_key": 0,
@@ -724,7 +724,7 @@
       "record_chain_arweave_pending": 0,
       "record_chain_arweave_failed": 0,
       "record_chain_arweave_waiting_for_key": 0,
-      "native_ots_upgrade_pending": 1,
+      "native_ots_upgrade_pending": 2,
       "native_ots_arweave_pending": 0,
       "native_ots_arweave_failed": 0,
       "native_ots_waiting_for_key": 0,
