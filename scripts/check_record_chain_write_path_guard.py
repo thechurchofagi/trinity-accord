@@ -87,6 +87,7 @@ APPROVED_NATIVE_OTS_UPGRADED_ARCHIVE_MESSAGE = "chore: archive upgraded native O
 APPROVED_NATIVE_OTS_VERIFIED_ARCHIVE_MESSAGE = "chore: archive verified native OTS proof bundle"
 APPROVED_ARWEAVE_MESSAGE = "archive: update native record-chain Arweave archive metadata"
 APPROVED_ARCHIVE_BACKLOG_REPAIR_MESSAGE = "archive: repair backlog and wallet status metadata"
+APPROVED_ARWEAVE_WALLET_STATUS_MESSAGE = "ops: update arweave wallet status"
 
 PROTECTED_CATEGORIES = {
     "gateway_intake",
@@ -241,9 +242,6 @@ def allowed_for_push(
             "only single-commit approved writers are allowed"
         )
 
-    # Gateway contents API writes one intake artifact per commit. Pending belongs
-    # both to Gateway creation and Auto Finalize deletion/move, so it is modeled
-    # as its own category and allowed for both specific writers.
     if cats <= {"gateway_intake", "pending"} and any(message.startswith(prefix) for prefix in APPROVED_GATEWAY_PREFIXES):
         ok, reason = require_gateway_actor(actor, allowed_gateway_actors)
         return (True, "gateway intake commit") if ok else (False, reason)
@@ -279,14 +277,15 @@ def allowed_for_push(
         ok, reason = require_actions_actor(actor, "archive backlog repair")
         return (True, "archive backlog repair commit") if ok else (False, reason)
 
+    if cats <= {"archive_backlog"} and message == APPROVED_ARWEAVE_WALLET_STATUS_MESSAGE:
+        ok, reason = require_actions_actor(actor, "Arweave wallet status")
+        return (True, "Arweave wallet status commit") if ok else (False, reason)
+
     return False, f"unauthorized push write categories={sorted(cats)} message={message!r} actor={actor!r}"
 
 
 def allowed_for_pull_request(files: list[str]) -> tuple[bool, str]:
-    protected = [
-        path for path in files
-        if category(path) in PROTECTED_CATEGORIES
-    ]
+    protected = [path for path in files if category(path) in PROTECTED_CATEGORIES]
     if not protected:
         return True, "no protected record-chain runtime data changed"
 
