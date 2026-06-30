@@ -47,11 +47,17 @@ OTS_AUX_FILES = {
 ARWEAVE_PREFIXES = ("record-chain/arweave-archives/",)
 ARWEAVE_FILES = {"api/record-chain-arweave-index.json"}
 
+BACKLOG_PREFIXES = (
+    "record-chain/audit/",
+)
+
 BACKLOG_FILES = {
     "record-chain/arweave-backlog.json",
     "api/record-chain-arweave-backlog.json",
     "record-chain/ots/native-ots-backlog.json",
     "api/record-chain-native-ots-backlog.json",
+    "record-chain/arweave-wallet-ledger.json",
+    "api/arweave-wallet-status.json",
 }
 
 PUBLIC_GENERATED_FILES = {
@@ -150,7 +156,7 @@ def category(path: str) -> str:
         return "ots"
     if startswith_any(path, OTS_AUX_PREFIXES) or path in OTS_AUX_FILES:
         return "ots_aux"
-    if path in BACKLOG_FILES:
+    if startswith_any(path, BACKLOG_PREFIXES) or path in BACKLOG_FILES:
         return "archive_backlog"
     if startswith_any(path, ARWEAVE_PREFIXES) or path in ARWEAVE_FILES:
         return "arweave"
