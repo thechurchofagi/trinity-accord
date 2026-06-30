@@ -5,6 +5,8 @@ on:
     workflows: ["Record Chain Head OTS Anchor"]
     types: [completed]
   workflow_dispatch:
+  schedule:
+    - cron: "27 * * * *"
 
 concurrency:
   group: main-write-lock
