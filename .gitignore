@@ -27,6 +27,10 @@ package-lock.json
 
 # Build
 _site/
+
+# CI-generated provenance logs
+/toolchain-provenance.json
+
 # Wallets and secrets — never commit
 *.jwk
 *.wallet.json
