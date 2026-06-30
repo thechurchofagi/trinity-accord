@@ -96,6 +96,7 @@ def main() -> None:
         "ARWEAVE_FILES",
         "BACKLOG_FILES",
         "archive: repair backlog and wallet status metadata",
+        "ops: update arweave wallet status",
         "archive_backlog",
         "PUBLIC_GENERATED_FILES",
         "MAINTENANCE_OVERRIDE_TOKEN",
@@ -130,6 +131,8 @@ def main() -> None:
         "record-chain/chain-tip.json",
         "record-chain/hash-chain/main.chain.jsonl",
         "api/record-chain-head.json",
+        "record-chain/arweave-wallet-ledger.json",
+        "api/arweave-wallet-status.json",
     ]:
         require(protected_path in guard_script, f"guard script does not classify {protected_path}")
 
@@ -262,7 +265,6 @@ def main() -> None:
         result = check_guard(repo, base, head, actor="github-actions[bot]")
         require(result.returncode == 0, f"append workflow with status/public generated should pass:\n{result.stdout}\n{result.stderr}")
 
-
     with tempfile.TemporaryDirectory() as td:
         repo = Path(td)
         run(["git", "init"], cwd=repo)
@@ -346,6 +348,23 @@ def main() -> None:
         run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
         write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
         base = commit(repo, "init")
+
+        write(repo / "record-chain/arweave-wallet-ledger.json", "{}\n")
+        write(repo / "api/arweave-wallet-status.json", "{}\n")
+        head = commit(repo, "ops: update arweave wallet status")
+        result = check_guard(repo, base, head, actor="github-actions[bot]")
+        require(result.returncode == 0, f"approved wallet status write should pass:\n{result.stdout}\n{result.stderr}")
+
+        result = check_guard(repo, base, head, actor="human-user")
+        require(result.returncode != 0, "human actor spoofing wallet status message must fail")
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        run(["git", "init"], cwd=repo)
+        run(["git", "config", "user.email", "test@example.invalid"], cwd=repo)
+        run(["git", "config", "user.name", "Write Path Guard Test"], cwd=repo)
+        write(repo / "scripts/check_record_chain_write_path_guard.py", guard_script)
+        base = commit(repo, "init")
         write(repo / "record-chain/arweave-backlog.json", "{}\n")
         head = commit(repo, "archive: repair backlog and wallet status metadata")
         result = check_guard(repo, base, head, actor="human-user")
@@ -356,4 +375,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
