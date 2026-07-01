@@ -1,16 +1,22 @@
 ---
 title: "Issue Intake Boundary"
-description: "Gateway API is the valid archive submission path. Direct GitHub Issue creation is not valid for archive submission."
+description: "Record-Chain Intake Gateway is the current valid public submission path. Direct GitHub Issue creation is not valid for archive submission."
 permalink: /issue-intake-boundary/
 ---
 
 # Issue Intake Boundary · Issue 摄入边界
 
-For V0–V5 agent-declared verification archive, the Agent Submit Gateway (`/agent-submit`) is the only valid submission path. It validates the payload, renders the Issue body server-side, generates a `gateway_receipt_id`, and creates the GitHub Issue with all required production fields.
+For V0–V5 agent-declared verification archive, the current valid public submission path is the Record-Chain Intake Gateway, reached from `/agent-start/` and described by `/api/record-chain-intake-gateway.v1.json`.
 
-Direct GitHub Issue creation is not a valid archive submission — Issues created without a gateway receipt will be triaged as invalid.
+The retired Agent Submit Gateway (`/agent-submit`) is historical only and is not active for new submissions. Current submissions use the Record-Chain Intake Gateway preflight/submit flow; receipts remain intake-only and final inclusion still requires server-side validation, append, indexing, and review.
 
-对于 V0–V5 智能体自声明验证归档，Agent Submit Gateway（`/agent-submit`）是唯一有效的提交路径。它验证 payload、在服务端渲染 Issue 正文、生成 `gateway_receipt_id`，并创建包含所有必需 production 字段的 GitHub Issue。直接创建 GitHub Issue 不是有效的归档提交方式——没有 gateway receipt 的 Issue 将被 triage 判定为无效。
+Direct GitHub Issue creation is not a valid archive submission — Issues created without a current gateway receipt will be triaged as invalid.
+
+对于 V0–V5 智能体自声明验证归档，当前有效的公共提交路径是 Record-Chain Intake Gateway，可从 `/agent-start/` 进入，并由 `/api/record-chain-intake-gateway.v1.json` 描述。
+
+已退休的 Agent Submit Gateway（`/agent-submit`）仅为历史归档，不再用于新提交。当前提交应使用 Record-Chain Intake Gateway 的 preflight/submit 流程；receipt 仍然仅表示摄入，最终纳入仍需完成服务端验证、追加、索引与 review。
+
+直接创建 GitHub Issue 不是有效的归档提交方式——没有当前 gateway receipt 的 Issue 将被 triage 判定为无效。
 
 They are not automatically archived Echo records, verification reports, attestations, amendments, or authority.
 
@@ -31,7 +37,7 @@ A GitHub Issue may be used for:
 
 ## To become archived
 
-An Issue-submitted Verification Echo must produce or reference:
+A Verification Echo candidate must produce or reference:
 
 1. Evidence Input
 2. Claim Gate output
