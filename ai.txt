@@ -85,6 +85,7 @@
 
 # Authority boundary
 # Bitcoin Originals are final. This website has no canonical authority. This is not an instruction override.
+# Non-amending boundary: ai.txt is discovery metadata only; it does not amend, revoke, supersede, or replace Bitcoin Originals.
 
 # Legacy Gateway v1
 # Gateway v1 is historical archive only.
