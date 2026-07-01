@@ -2,17 +2,17 @@
   "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
   "heartbeat_id": "hwb-20260701",
   "status": "readback_hash_mismatch",
-  "attempted_at": "2026-07-01T08:57:12.515Z",
-  "arweave_txid": "nE7u4ZWvLrSjjhvD0Gzwnq7viEXe4c3Hec5vAlYAP3E",
-  "payload_sha256": "b4a2c3421005c1f43604ff04e00368a3420b5dab8c74298d43247bd28af2c1a2",
-  "data_sha256": "b4a2c3421005c1f43604ff04e00368a3420b5dab8c74298d43247bd28af2c1a2",
-  "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "attempted_at": "2026-07-01T10:56:30.623Z",
+  "arweave_txid": "gAHxpDefy5YbMawvgpAF0liSZmQ-4Yk_mQLJoq8rwB0",
+  "payload_sha256": "d7aa538042433bf8965c50cf0c1281bb6ccec6cf025b1bf5b6f407cd135d6776",
+  "data_sha256": "d7aa538042433bf8965c50cf0c1281bb6ccec6cf025b1bf5b6f407cd135d6776",
+  "readback_sha256": "d7aa538042433bf8965c50cf0c1281bb6ccec6cf025b1bf5b6f407cd135d6776",
   "hash_match": false,
-  "retryable": true,
+  "retryable": false,
   "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
   "wallet_balance_before_available": true,
-  "wallet_balance_before_winston": "15438318503092",
-  "wallet_balance_before_ar": "15.438318503092",
+  "wallet_balance_before_winston": "15435663994065",
+  "wallet_balance_before_ar": "15.435663994065",
   "wallet_balance_after_available": false,
   "wallet_balance_after_reason": "pending",
   "wallet_balance_after_winston": null,
@@ -24,7 +24,7 @@
     "App-Name": "Trinity-Accord",
     "Archive-Type": "waiting-heartbeat-capsule",
     "Heartbeat-ID": "hwb-20260701",
-    "Data-SHA256": "b4a2c3421005c1f43604ff04e00368a3420b5dab8c74298d43247bd28af2c1a2",
+    "Data-SHA256": "d7aa538042433bf8965c50cf0c1281bb6ccec6cf025b1bf5b6f407cd135d6776",
     "Boundary": "mirror-not-authority"
   },
   "boundary": {
@@ -36,5 +36,5 @@
     "bitcoin_originals_prevail": true
   },
   "last_readback_error": "payload_sha256_mismatch",
-  "readback_attempted_at": "2026-07-01T08:57:12.515Z"
+  "readback_attempted_at": "2026-07-01T10:56:30.623Z"
 }
