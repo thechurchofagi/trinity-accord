@@ -228,13 +228,21 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
 }
 
 if (readbackMismatch) {
+  // Empty readback data (Arweave gateway returned nothing) is retryable;
+  // non-empty data with wrong hash is a real mismatch and not retryable.
+  const isEmptyReadback = readbackSha256 === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const retryable = isEmptyReadback;
   fs.writeFileSync(
     outPath,
-    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, false, {
-      last_readback_error: "payload_sha256_mismatch",
+    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, retryable, {
+      last_readback_error: isEmptyReadback ? "readback_data_empty" : "payload_sha256_mismatch",
       readback_attempted_at: new Date().toISOString(),
     }), null, 2) + "\n"
   );
+  if (isEmptyReadback) {
+    console.warn(`ARWEAVE_READBACK_EMPTY after ${READBACK_MAX_RETRIES} attempts; txid preserved for later readback repair.`);
+    process.exit(0);
+  }
   throw new Error(`ARWEAVE_READBACK_HASH_MISMATCH payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`);
 }
 

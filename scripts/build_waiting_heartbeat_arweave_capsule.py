@@ -18,8 +18,8 @@ OTS = ROOT / "api" / "record-chain-native-ots-latest.json"
 CAPSULE_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
 
 VERIFIED_CAPSULE_STATUSES = {"uploaded", "success", "arweave_archived"}
-PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable"}
-NON_RETRYABLE_READBACK_STATUSES = {"readback_hash_mismatch", "local_payload_mismatch_for_existing_tx"}
+PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable", "readback_hash_mismatch"}
+NON_RETRYABLE_READBACK_STATUSES = {"local_payload_mismatch_for_existing_tx"}
 
 
 def utc_now() -> str:
