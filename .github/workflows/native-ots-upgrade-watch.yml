@@ -171,7 +171,15 @@ jobs:
             fi
             printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
             git fetch origin main
-            git rebase origin/main || { git rebase --abort; }
+            # Stash any unstaged generated files before rebase
+            git stash --include-untracked || true
+            if ! git rebase origin/main; then
+              git rebase --abort
+              git stash pop 2>/dev/null || true
+              sleep $((attempt * 5))
+              continue
+            fi
+            git stash pop 2>/dev/null || true
             sleep $((attempt * 5))
           done
 

@@ -69,6 +69,12 @@ def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
     status = capsule_status(capsule)
     if status not in NON_RETRYABLE_READBACK_STATUSES:
         return False
+    # Self-heal: if payload and readback hashes actually match, the status
+    # is contradictory (likely a state-machine bug). Treat as not a hard
+    # failure so the next run can attempt repair or fresh upload.
+    if capsule.get("payload_sha256") and capsule.get("readback_sha256"):
+        if capsule["payload_sha256"] == capsule["readback_sha256"]:
+            return False
     # A result marked retryable (e.g. empty readback from gateway failure)
     # should be retried, not treated as a hard failure.
     if capsule.get("retryable") is True:
