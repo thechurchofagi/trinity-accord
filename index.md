@@ -892,21 +892,21 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">alive</p>
+    <p class="status-number">failed</p>
     <p class="status-note">
-      Daily alive status: success.<br>
+      Daily alive status: failed.<br>
       Heartbeat ID: hwb-20260630.<br>
-      Total scheduled heartbeats: 13.<br>
+      Total scheduled heartbeats: 14.<br>
       Successful heartbeats: 11.<br>
-      Failed / missed heartbeats: 2.<br>
-      Current success streak: 7 day(s).<br>
+      Failed / missed heartbeats: 3.<br>
+      Current success streak: 0 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：正常。</span><br>
-      <span class="zh">累计心跳：13 次；成功：11 次；失败或缺失：2 次；最近连续成功：7 天。</span><br>
+      <span class="zh">每日存活状态：失败。</span><br>
+      <span class="zh">累计心跳：14 次；成功：11 次；失败或缺失：3 次；最近连续成功：0 天。</span><br>
       <span class="zh">系统仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>cbbd10f578a485c7</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>57d3a1c35d390a86</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
