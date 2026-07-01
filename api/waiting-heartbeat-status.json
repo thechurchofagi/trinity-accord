@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-07-01T08:57:12Z",
+  "generated_at": "2026-07-01T09:59:07Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "operational_alive_arweave_capsule_pending",
@@ -50,7 +50,7 @@
     "data_sha256": "b4a2c3421005c1f43604ff04e00368a3420b5dab8c74298d43247bd28af2c1a2",
     "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "hash_match": false,
-    "retryable": false,
+    "retryable": true,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "wallet_balance_before_available": true,
     "wallet_balance_before_winston": "15438318503092",

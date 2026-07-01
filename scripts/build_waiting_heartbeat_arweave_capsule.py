@@ -66,7 +66,14 @@ def capsule_is_verified(capsule: dict[str, Any] | None) -> bool:
 
 
 def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
-    return capsule_status(capsule) in NON_RETRYABLE_READBACK_STATUSES
+    status = capsule_status(capsule)
+    if status not in NON_RETRYABLE_READBACK_STATUSES:
+        return False
+    # A result marked retryable (e.g. empty readback from gateway failure)
+    # should be retried, not treated as a hard failure.
+    if capsule.get("retryable") is True:
+        return False
+    return True
 
 
 def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:
