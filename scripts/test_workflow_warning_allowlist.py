@@ -18,6 +18,8 @@ allowed_warning_fragments = {
     'sha256sum archive/evidence/flaw-archive-bundle.zip 2>/dev/null || true',
     'git commit -m "feat: mirror flaw images from Arweave (11 JPGs, Core Object Alpha physical evidence)" || echo "No changes"',
     'git rebase --abort || true',
+    'git stash --include-untracked || true',
+    'git stash pop 2>/dev/null || true',
     'git add record-chain/ots/arweave-bundles/ record-chain/ots/arweave-registry.json api/record-chain-ots-arweave-registry.json 2>/dev/null || true',
     '"${GATEWAY}/gateway/capabilities" || echo "000")',
     '"${GATEWAY}/gateway/preflight" || echo "000")',

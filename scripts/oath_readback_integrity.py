@@ -3,19 +3,12 @@
 
 from __future__ import annotations
 
-import hashlib
 from typing import Any
+
+from oath_contracts import sha256_text, canonicalize_readback
 
 READBACK_PATH = "agent_integrity_declaration.verification_oath.agent_readback"
 READBACK_SHA_PATH = "agent_integrity_declaration.verification_oath.agent_readback_sha256"
-
-
-def sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def canonical_readback_text(value: Any) -> str:
-    return str(value or "").strip()
 
 
 def get_verification_oath(payload: dict[str, Any]) -> dict[str, Any] | None:
@@ -29,7 +22,7 @@ def get_verification_oath(payload: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def expected_agent_readback_sha256(oath: dict[str, Any]) -> str | None:
-    readback = canonical_readback_text(oath.get("agent_readback"))
+    readback = canonicalize_readback(oath.get("agent_readback", ""))
     if not readback:
         return None
     return sha256_text(readback)
@@ -65,7 +58,7 @@ def validate_oath_readback_integrity(payload: dict[str, Any]) -> list[dict[str, 
     if oath is None:
         return errors
 
-    readback = canonical_readback_text(oath.get("agent_readback"))
+    readback = canonicalize_readback(oath.get("agent_readback", ""))
     if not readback:
         return errors
 

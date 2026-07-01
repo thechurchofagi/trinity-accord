@@ -202,9 +202,11 @@ fs.writeFileSync(outPath, JSON.stringify(uploadResult("posted_pending_readback",
 const READBACK_MAX_RETRIES = Number(process.env.WAITING_HEARTBEAT_ARWEAVE_READBACK_MAX_RETRIES || "30");
 const READBACK_DELAY_MS = Number(process.env.WAITING_HEARTBEAT_ARWEAVE_READBACK_DELAY_MS || "15000");
 let readbackSha256 = null;
-let readbackVerified = false;
-let readbackMismatch = false;
 let lastReadbackError = null;
+// Outcome is mutually exclusive: only the final state matters.
+// "verified" = hash matched; "empty" = all attempts returned empty data;
+// "mismatch" = non-empty data with wrong hash; "pending" = transient errors.
+let readbackOutcome = "pending";
 
 const EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
 
@@ -214,18 +216,19 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
     const readbackData = await arweave.transactions.getData(tx.id, { decode: true, string: false });
     const readbackBuf = Buffer.from(readbackData);
     readbackSha256 = sha256Hex(readbackBuf);
-    readbackVerified = readbackSha256 === payloadSha256;
-    if (readbackVerified) {
+    if (readbackSha256 === payloadSha256) {
+      readbackOutcome = "verified";
       console.log(`ARWEAVE_READBACK_OK readback_sha256=${readbackSha256}`);
       break;
     }
-    readbackMismatch = true;
-    // Empty readback data (gateway returned nothing) is transient — keep retrying.
     // Non-empty data with wrong hash is a real mismatch — stop immediately.
     if (readbackSha256 !== EMPTY_SHA256) {
+      readbackOutcome = "mismatch";
       console.error(`ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`);
       break;
     }
+    // Empty readback data (gateway returned nothing) is transient — keep retrying.
+    readbackOutcome = "empty";
     console.warn(`ARWEAVE_READBACK_EMPTY attempt=${attempt}/${READBACK_MAX_RETRIES}; will retry`);
   } catch (err) {
     lastReadbackError = err.message;
@@ -234,26 +237,31 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
   if (attempt < READBACK_MAX_RETRIES) await sleep(READBACK_DELAY_MS);
 }
 
-if (readbackMismatch) {
-  // Empty readback data (Arweave gateway returned nothing) is retryable;
-  // non-empty data with wrong hash is a real mismatch and not retryable.
-  const isEmptyReadback = readbackSha256 === EMPTY_SHA256;
-  const retryable = isEmptyReadback;
+if (readbackOutcome === "verified") {
+  // Continue to "Update balance after" below.
+} else if (readbackOutcome === "mismatch") {
+  // Real hash mismatch (non-empty wrong data) — not retryable.
   fs.writeFileSync(
     outPath,
-    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, retryable, {
-      last_readback_error: isEmptyReadback ? "readback_data_empty" : "payload_sha256_mismatch",
+    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, false, {
+      last_readback_error: "payload_sha256_mismatch",
       readback_attempted_at: new Date().toISOString(),
     }), null, 2) + "\n"
   );
-  if (isEmptyReadback) {
-    console.warn(`ARWEAVE_READBACK_EMPTY after ${attempt} attempts; txid preserved for later readback repair.`);
-    process.exit(0);
-  }
   throw new Error(`ARWEAVE_READBACK_HASH_MISMATCH payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`);
-}
-
-if (!readbackVerified) {
+} else if (readbackOutcome === "empty") {
+  // All attempts returned empty data — retryable, defer to repair.
+  fs.writeFileSync(
+    outPath,
+    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, true, {
+      last_readback_error: "readback_data_empty",
+      readback_attempted_at: new Date().toISOString(),
+    }), null, 2) + "\n"
+  );
+  console.warn(`ARWEAVE_READBACK_EMPTY after ${READBACK_MAX_RETRIES} attempts; txid preserved for later readback repair.`);
+  process.exit(0);
+} else {
+  // Only transient errors, no successful readback at all — pending.
   fs.writeFileSync(
     outPath,
     JSON.stringify(uploadResult("posted_pending_readback", readbackSha256, false, true, {
