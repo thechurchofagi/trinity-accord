@@ -137,6 +137,7 @@ GROUPS = {
         ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
+        ["python3", "scripts/test_readback_hash_parity.py"],
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],
         ["python3", "scripts/test_external_agent_first_contact_rules_contract.py"],
         ["python3", "scripts/test_homepage_status_sync_contract.py"],

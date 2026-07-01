@@ -14,11 +14,8 @@ SCRIPT = ROOT / "scripts" / "build_agent_declared_archive_payload.py"
 # Import shared oath text
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from test_oath_helper import get_oath_readback
+from oath_contracts import sha256_text, canonicalize_readback
 OATH_READBACK = get_oath_readback()
-
-
-def sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 LEVELS = ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
@@ -55,7 +52,7 @@ def test_level(level: str) -> None:
     if not readback:
         raise AssertionError(f"{level}: agent_readback is empty")
 
-    expected_sha = sha256_text(readback.strip())
+    expected_sha = sha256_text(canonicalize_readback(readback))
     actual_sha = oath.get("agent_readback_sha256")
 
     if not actual_sha:

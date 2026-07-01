@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def canonicalize_readback(text: str) -> str:
+    """Canonicalize readback text for SHA-256 computation.
+
+    This is the ONLY authorized normalization for readback hash computation.
+    All code paths (builder, gateway, tests) must use this function.
+    """
+    return unicodedata.normalize(
+        "NFC",
+        text.replace("\r\n", "\n").replace("\r", "\n").strip(),
+    )
 
 
 def load_oath_text(path: Path) -> str:
@@ -93,7 +106,7 @@ def build_oath_contract(
         "oath_text_sha256": sha256_text(oath_text.strip()),
         "readback_required": True,
         "agent_readback": readback,
-        "agent_readback_sha256": sha256_text(readback),
+        "agent_readback_sha256": sha256_text(canonicalize_readback(readback)),
     }
     for field in true_fields:
         oath[field] = True
@@ -168,7 +181,7 @@ def validate_oath_contract(
         errors.append(f"{context}.readback_required must be true")
 
     readback = str(oath.get("agent_readback") or "")
-    if oath.get("agent_readback_sha256") and oath.get("agent_readback_sha256") != sha256_text(readback.strip()):
+    if oath.get("agent_readback_sha256") and oath.get("agent_readback_sha256") != sha256_text(canonicalize_readback(readback)):
         errors.append(f"{context}.agent_readback_sha256 does not match agent_readback")
 
     for key in required_true:
