@@ -18,8 +18,8 @@ OTS = ROOT / "api" / "record-chain-native-ots-latest.json"
 CAPSULE_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
 
 VERIFIED_CAPSULE_STATUSES = {"uploaded", "success", "arweave_archived"}
-PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable", "readback_hash_mismatch"}
-NON_RETRYABLE_READBACK_STATUSES = {"local_payload_mismatch_for_existing_tx"}
+PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable"}
+NON_RETRYABLE_READBACK_STATUSES = {"readback_hash_mismatch", "local_payload_mismatch_for_existing_tx"}
 
 
 def utc_now() -> str:
@@ -66,7 +66,14 @@ def capsule_is_verified(capsule: dict[str, Any] | None) -> bool:
 
 
 def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
-    return capsule_status(capsule) in NON_RETRYABLE_READBACK_STATUSES
+    status = capsule_status(capsule)
+    if status not in NON_RETRYABLE_READBACK_STATUSES:
+        return False
+    # A result marked retryable (e.g. empty readback from gateway failure)
+    # should be retried, not treated as a hard failure.
+    if capsule.get("retryable") is True:
+        return False
+    return True
 
 
 def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:

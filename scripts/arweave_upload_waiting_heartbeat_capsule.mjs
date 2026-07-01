@@ -206,6 +206,8 @@ let readbackVerified = false;
 let readbackMismatch = false;
 let lastReadbackError = null;
 
+const EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
 for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
   try {
     console.log(`ARWEAVE_READBACK attempt ${attempt}/${READBACK_MAX_RETRIES} txid=${tx.id}`);
@@ -218,8 +220,13 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
       break;
     }
     readbackMismatch = true;
-    console.error(`ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`);
-    break;
+    // Empty readback data (gateway returned nothing) is transient — keep retrying.
+    // Non-empty data with wrong hash is a real mismatch — stop immediately.
+    if (readbackSha256 !== EMPTY_SHA256) {
+      console.error(`ARWEAVE_READBACK_MISMATCH attempt=${attempt} payload=${payloadSha256} readback=${readbackSha256}`);
+      break;
+    }
+    console.warn(`ARWEAVE_READBACK_EMPTY attempt=${attempt}/${READBACK_MAX_RETRIES}; will retry`);
   } catch (err) {
     lastReadbackError = err.message;
     console.error(`ARWEAVE_READBACK_RETRY attempt=${attempt} error=${err.message}`);
@@ -230,7 +237,7 @@ for (let attempt = 1; attempt <= READBACK_MAX_RETRIES; attempt++) {
 if (readbackMismatch) {
   // Empty readback data (Arweave gateway returned nothing) is retryable;
   // non-empty data with wrong hash is a real mismatch and not retryable.
-  const isEmptyReadback = readbackSha256 === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  const isEmptyReadback = readbackSha256 === EMPTY_SHA256;
   const retryable = isEmptyReadback;
   fs.writeFileSync(
     outPath,
@@ -240,7 +247,7 @@ if (readbackMismatch) {
     }), null, 2) + "\n"
   );
   if (isEmptyReadback) {
-    console.warn(`ARWEAVE_READBACK_EMPTY after ${READBACK_MAX_RETRIES} attempts; txid preserved for later readback repair.`);
+    console.warn(`ARWEAVE_READBACK_EMPTY after ${attempt} attempts; txid preserved for later readback repair.`);
     process.exit(0);
   }
   throw new Error(`ARWEAVE_READBACK_HASH_MISMATCH payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`);
