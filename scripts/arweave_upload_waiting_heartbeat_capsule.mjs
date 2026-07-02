@@ -250,10 +250,13 @@ if (readbackOutcome === "verified") {
   );
   throw new Error(`ARWEAVE_READBACK_HASH_MISMATCH payload_sha256=${payloadSha256} readback_sha256=${readbackSha256}`);
 } else if (readbackOutcome === "empty") {
-  // All attempts returned empty data — retryable, defer to repair.
+  // All attempts returned empty data — retryable, defer to readback repair
+  // (existing txid is valid, Arweave gateway just hasn't propagated yet).
+  // Use a distinct status so repair path can distinguish empty-gateway
+  // responses from actual hash mismatches.
   fs.writeFileSync(
     outPath,
-    JSON.stringify(uploadResult("readback_hash_mismatch", readbackSha256, false, true, {
+    JSON.stringify(uploadResult("readback_data_empty", readbackSha256, false, true, {
       last_readback_error: "readback_data_empty",
       readback_attempted_at: new Date().toISOString(),
     }), null, 2) + "\n"
