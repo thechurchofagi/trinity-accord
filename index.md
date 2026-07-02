@@ -838,12 +838,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">active</p>
+    <p class="status-number">current</p>
     <p class="status-note">
-      Pipeline: active.<br>
-      Latest technical record: R-000000067.<br>
-      OTS: pending since 2026-07-01T08:32:34Z (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
-      Arweave: waiting-for-native-ots.<br>
+      Pipeline: current.<br>
+      Latest technical record: R-000000068.<br>
+      OTS: upgraded since unknown (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
+      Arweave: current.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,9 +862,9 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 2 batches (all stamped).<br>
-      OpenTimestamps: pending since 2026-07-01T08:32:34Z; expected initial window is 2-3 hours.<br>
-      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
-      Record-Chain Arweave archive: current live mirror; latest tx q432MgNpIhwu....<br>
+      OpenTimestamps: upgraded since unknown; expected initial window is 2-3 hours.<br>
+      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      Record-Chain Arweave archive: current live mirror; latest tx vVHARexzX3UY....<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -872,11 +872,11 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">AR upload wallet</p>
     <p class="status-number">OK</p>
     <p class="status-note">
-      Total paid upload cost: 0.187672629872 AR.<br>
-      Wallet balance: 15.448792808468 AR.<br>
+      Total paid upload cost: 0.198228606091 AR.<br>
+      Wallet balance: 15.425044869597 AR.<br>
       Recharge needed: no.<br>
       Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
-      <span class="zh">累计付费上传成本：0.187672629872 AR。钱包余额：15.448792808468 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+      <span class="zh">累计付费上传成本：0.198228606091 AR。钱包余额：15.425044869597 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
     </p>
   </article>
   <article class="status-card">
@@ -892,21 +892,21 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Waiting Heartbeat</p>
-    <p class="status-number">failed</p>
+    <p class="status-number">alive</p>
     <p class="status-note">
-      Daily alive status: failed.<br>
-      Heartbeat ID: hwb-20260701.<br>
+      Daily alive status: success.<br>
+      Heartbeat ID: hwb-20260702.<br>
       Total scheduled heartbeats: 15.<br>
       Successful heartbeats: 12.<br>
       Failed / missed heartbeats: 3.<br>
-      Current success streak: 0 day(s).<br>
+      Current success streak: 1 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: archive pending.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
-      <span class="zh">每日存活状态：失败。</span><br>
-      <span class="zh">累计心跳：15 次；成功：12 次；失败或缺失：3 次；最近连续成功：0 天。</span><br>
+      <span class="zh">每日存活状态：正常。</span><br>
+      <span class="zh">累计心跳：15 次；成功：12 次；失败或缺失：3 次；最近连续成功：1 天。</span><br>
       <span class="zh">系统仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>a95fff3a3d438a3e</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>179ea11c4d237397</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
