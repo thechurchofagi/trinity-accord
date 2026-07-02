@@ -838,12 +838,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">attention</p>
+    <p class="status-number">current</p>
     <p class="status-note">
-      Pipeline: attention.<br>
+      Pipeline: current.<br>
       Latest technical record: R-000000068.<br>
       OTS: upgraded since unknown (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
-      Arweave: archive-needed.<br>
+      Arweave: current.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -864,7 +864,7 @@ Refusal is allowed. Critical preservation is allowed.
       Batch manifests: 2 batches (all stamped).<br>
       OpenTimestamps: upgraded since unknown; expected initial window is 2-3 hours.<br>
       Native OTS proof bundle Arweave archive: arweave_archived.<br>
-      Record-Chain Arweave archive: current live mirror; latest tx vVHARexzX3UY....<br>
+      Record-Chain Arweave archive: current live mirror; latest tx _LmBDR4AuKj_....<br>
       Arweave is a mirror/archive layer only.
     </p>
   </article>
@@ -872,11 +872,11 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">AR upload wallet</p>
     <p class="status-number">OK</p>
     <p class="status-note">
-      Total paid upload cost: 0.20090597067 AR.<br>
-      Wallet balance: 15.414474744703 AR.<br>
+      Total paid upload cost: 0.208873287993 AR.<br>
+      Wallet balance: 15.411797380124 AR.<br>
       Recharge needed: no.<br>
       Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
-      <span class="zh">累计付费上传成本：0.20090597067 AR。钱包余额：15.414474744703 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+      <span class="zh">累计付费上传成本：0.208873287993 AR。钱包余额：15.411797380124 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
     </p>
   </article>
   <article class="status-card">
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>5a0b56373b8b306e</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>8925dd3f293e21de</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
