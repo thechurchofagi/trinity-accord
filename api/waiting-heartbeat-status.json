@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-07-02T06:40:09Z",
+  "generated_at": "2026-07-02T06:52:33Z",
   "daily_alive_status": "failed",
   "status": "failed",
   "latest_result": "missing_expected_waiting_heartbeat",
@@ -104,7 +104,7 @@
     "current_success_streak_days": 0,
     "first_heartbeat_date": "2026-06-18",
     "latest_heartbeat_date": "2026-07-01",
-    "latest_observed_heartbeat_date": "2026-07-01",
+    "latest_observed_heartbeat_date": "2026-07-02",
     "latest_successful_heartbeat_date": "2026-07-01",
     "through_heartbeat_date": "2026-07-02",
     "expected_heartbeat_date": "2026-07-02",
@@ -131,7 +131,7 @@
     "not_amendment": true
   },
   "counts": {
-    "attempts": 12,
+    "attempts": 13,
     "final_heartbeats": 12,
     "capsules": 12,
     "failed_attempts": 0,
