@@ -6,12 +6,13 @@ Each generator updates its output file(s) in-place; verification scripts
 then confirm no drift remains.
 
 Generators (order matters — public-home-status depends on the others):
-  1. generate_arweave_wallet_status.py     → api/arweave-wallet-status.json
-  2. generate_guardian_current_registry.py → api/guardian-state.json + api/guardian-current-registry.json
-  3. generate_record_chain_status.py       → api/record-chain-status.json
-  4. generate_public_home_status.py        → api/public-home-status.json + index.md
-  5. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)
-  6. generate_sitemap.py                   → sitemap.xml
+  1. generate_waiting_heartbeat_status.py  → api/waiting-heartbeat-status.json + record-chain/heartbeat/index.json
+  2. generate_arweave_wallet_status.py     → api/arweave-wallet-status.json
+  3. generate_guardian_current_registry.py → api/guardian-state.json + api/guardian-current-registry.json
+  4. generate_record_chain_status.py       → api/record-chain-status.json
+  5. generate_public_home_status.py        → api/public-home-status.json + index.md
+  6. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)
+  7. generate_sitemap.py                   → sitemap.xml
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 GENERATORS = [
+    ("waiting-heartbeat-status", [sys.executable, "scripts/generate_waiting_heartbeat_status.py"]),
     ("arweave-wallet-status", [sys.executable, "scripts/generate_arweave_wallet_status.py"]),
     ("guardian-current-registry", [sys.executable, "scripts/generate_guardian_current_registry.py"]),
     ("record-chain-status",   [sys.executable, "scripts/generate_record_chain_status.py"]),
