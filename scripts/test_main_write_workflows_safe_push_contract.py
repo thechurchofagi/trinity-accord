@@ -41,13 +41,37 @@ def test_main_writers_use_shared_lock_and_safe_rebase():
         if "git rebase origin main" in text:
             offenders.append(f"{rel}: malformed rebase; use git rebase origin/main")
 
-        if "git fetch origin main --prune" not in text or "git rebase origin/main" not in text:
-            offenders.append(f"{rel}: missing safe fetch/rebase origin/main sequence")
+        uses_reset_regenerate_retry = (
+            rel.as_posix() == ".github/workflows/auto-sitemap.yml"
+            and "git reset --hard origin/main" in text
+            and "python3 scripts/generate_sitemap.py" in text
+            and "Failed to push regenerated sitemap after retries" in text
+        )
+        if not uses_reset_regenerate_retry:
+            if "git fetch origin main --prune" not in text or "git rebase origin/main" not in text:
+                offenders.append(f"{rel}: missing safe fetch/rebase origin/main sequence")
 
         if "archive metadata may now be stale; failing so the next run regenerates" in text:
             offenders.append(f"{rel}: fail-open archive retry message still present; rebase/regenerate/amend/retry instead")
 
     assert not offenders, "\n".join(offenders)
+
+
+def test_auto_sitemap_rebuilds_after_push_race():
+    path = WORKFLOWS / "auto-sitemap.yml"
+    text = path.read_text(encoding="utf-8")
+    required = [
+        "group: main-write-lock",
+        "fetch-depth: 0",
+        "ref: main",
+        "git push origin HEAD:main",
+        "git fetch origin main --prune",
+        "git reset --hard origin/main",
+        "python3 scripts/generate_sitemap.py",
+        "Failed to push regenerated sitemap after retries",
+    ]
+    missing = [item for item in required if item not in text]
+    assert not missing, f"{path}: missing auto-sitemap retry safety pieces: {missing}"
 
 
 def test_archive_workflow_rebuilds_after_rebase():
@@ -81,6 +105,7 @@ def test_write_path_guard_classifies_overlay_as_generated():
 
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
+    test_auto_sitemap_rebuilds_after_push_race()
     test_archive_workflow_rebuilds_after_rebase()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()
