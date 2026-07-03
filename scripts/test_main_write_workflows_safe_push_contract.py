@@ -35,6 +35,9 @@ def test_main_writers_use_shared_lock_and_safe_rebase():
         if "group: main-write-lock" not in text:
             offenders.append(f"{rel}: main writer must use concurrency group main-write-lock")
 
+        if rel.as_posix() == ".github/workflows/auto-sitemap.yml" and "queue: max" not in text:
+            offenders.append(f"{rel}: push-triggered sitemap writer must use queue: max so it cannot replace a pending main writer")
+
         if "git pull --rebase" in text:
             offenders.append(f"{rel}: main writer must not use git pull --rebase; use fetch + rebase origin/main")
 
@@ -62,6 +65,7 @@ def test_auto_sitemap_rebuilds_after_push_race():
     text = path.read_text(encoding="utf-8")
     required = [
         "group: main-write-lock",
+        "queue: max",
         "fetch-depth: 0",
         "ref: main",
         "git push origin HEAD:main",
