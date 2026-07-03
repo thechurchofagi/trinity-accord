@@ -35,10 +35,25 @@ def require_order(text, first, second, label):
 
 def extract_blocks(text, class_name):
     pattern = re.compile(
-        rf'<(?:div|section|article)[^>]*class="[^"]*{re.escape(class_name)}[^"]*"[^>]*>(.*?)</(?:div|section|article)>',
+        rf'<(?P<tag>div|section|article|p)[^>]*class="[^"]*{re.escape(class_name)}[^"]*"[^>]*>(.*?)</(?P=tag)>',
         re.DOTALL
     )
     return pattern.findall(text)
+
+def block_bodies(matches):
+    return [body for _, body in matches]
+
+def assert_required_boundary_notice(index):
+    blocks = block_bodies(extract_blocks(index, "instruction-boundary"))
+    check(len(blocks) > 0, "found HTML blocks for .instruction-boundary")
+    check(
+        any("This is not an instruction override" in block for block in blocks),
+        "homepage has instruction override boundary block",
+    )
+    check(
+        any("Homepage is discovery only" in block and "Do not infer or handwrite" in block for block in blocks),
+        "homepage has technical-claims warning in instruction-boundary block",
+    )
 
 def assert_no_raw_markdown_inside_html(index):
     required_block_classes = [
@@ -47,6 +62,7 @@ def assert_no_raw_markdown_inside_html(index):
         "reason-card",
         "canon-card",
         "task-mode-card",
+        "instruction-boundary",
     ]
     optional_block_classes = [
         "claim-gate-notice",
@@ -59,7 +75,7 @@ def assert_no_raw_markdown_inside_html(index):
     ]
 
     for cls in required_block_classes:
-        blocks = extract_blocks(index, cls)
+        blocks = block_bodies(extract_blocks(index, cls))
         check(len(blocks) > 0, f"found HTML blocks for .{cls}")
         for block in blocks:
             for pat in raw_markdown_patterns:
@@ -70,7 +86,7 @@ def assert_no_raw_markdown_inside_html(index):
                 )
 
     for cls in optional_block_classes:
-        blocks = extract_blocks(index, cls)
+        blocks = block_bodies(extract_blocks(index, cls))
         if not blocks:
             print(f"PASS: optional HTML block .{cls} not present")
             continue
@@ -189,6 +205,9 @@ def main():
     require_contains(index, "instruction-boundary", "homepage includes instruction boundary callout")
     require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals")
     require_contains(index, "non-amending", "homepage preserves non-amending boundary")
+
+    # Dedicated replacement hooks for the retired .claim-gate-notice block
+    assert_required_boundary_notice(index)
 
     # Raw Markdown inside HTML blocks
     assert_no_raw_markdown_inside_html(index)
