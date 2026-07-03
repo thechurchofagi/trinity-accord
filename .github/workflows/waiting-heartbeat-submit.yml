@@ -61,13 +61,13 @@ jobs:
       - name: Commit attempt metadata
         run: |
           set -euo pipefail
-          if git diff --quiet -- record-chain/heartbeat; then
-            echo "No waiting heartbeat changes."
-            exit 0
-          fi
           git config user.name "trinity-waiting-heartbeat-bot"
           git config user.email "actions@github.com"
           git add record-chain/heartbeat
+          if git diff --cached --quiet; then
+            echo "No waiting heartbeat changes."
+            exit 0
+          fi
           git commit -m "heartbeat: submit waiting heartbeat"
           for attempt in 1 2 3; do
             if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
