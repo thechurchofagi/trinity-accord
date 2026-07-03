@@ -110,6 +110,8 @@ jobs:
           generate_and_verify
 
           git add \
+            record-chain/heartbeat/index.json \
+            api/waiting-heartbeat-status.json \
             api/arweave-wallet-status.json \
             api/guardian-state.json \
             api/guardian-current-registry.json \
