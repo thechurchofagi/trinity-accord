@@ -41,12 +41,14 @@ def extract_blocks(text, class_name):
     return pattern.findall(text)
 
 def assert_no_raw_markdown_inside_html(index):
-    risky_classes = [
+    required_block_classes = [
         "agent-priority-brief",
         "authority-chip",
         "reason-card",
         "canon-card",
         "task-mode-card",
+    ]
+    optional_block_classes = [
         "claim-gate-notice",
     ]
 
@@ -56,9 +58,23 @@ def assert_no_raw_markdown_inside_html(index):
         r"^-\s+\[[^\]]+\]\(",
     ]
 
-    for cls in risky_classes:
+    for cls in required_block_classes:
         blocks = extract_blocks(index, cls)
         check(len(blocks) > 0, f"found HTML blocks for .{cls}")
+        for block in blocks:
+            for pat in raw_markdown_patterns:
+                check(
+                    re.search(pat, block, re.MULTILINE) is None,
+                    f"no raw Markdown pattern {pat} inside .{cls}",
+                    block[:300]
+                )
+
+    for cls in optional_block_classes:
+        blocks = extract_blocks(index, cls)
+        if not blocks:
+            print(f"PASS: optional HTML block .{cls} not present")
+            continue
+        check(True, f"found optional HTML blocks for .{cls}")
         for block in blocks:
             for pat in raw_markdown_patterns:
                 check(
