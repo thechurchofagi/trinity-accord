@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - ".github/workflows/waiting-heartbeat-status-sync.yml"
+      - ".github/workflows/waiting-heartbeat-submit.yml"
+      - ".github/workflows/record-chain-head-ots-anchor.yml"
       - "scripts/generate_waiting_heartbeat_status.py"
       - "api/record-chain-native-ots-latest.json"
       - "record-chain/records/**"
