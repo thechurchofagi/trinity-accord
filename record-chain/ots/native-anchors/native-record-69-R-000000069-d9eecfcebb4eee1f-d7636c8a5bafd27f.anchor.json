@@ -9,7 +9,7 @@
   "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
-  "checked_at": "2026-07-03T11:15:41Z",
+  "checked_at": "2026-07-03T13:22:44Z",
   "created_at": "2026-07-03T08:36:36Z",
   "latest_batch_id": "batch-000002",
   "latest_batch_manifest_sha256": "c73783a816142035d72dcbfd9b8302558611e44f23fa55a0f6fb66fb9f2ec57d",
@@ -44,7 +44,7 @@
     "record-chain/ots/native-anchors/native-record-69-R-000000069-d9eecfcebb4eee1f-d7636c8a5bafd27f.native-record-chain-head-commitment.json.ots"
   ],
   "ots_upgrade_exit_code": 0,
-  "ots_upgrade_stderr": "Calendar https://finney.calendar.eternitywall.com: Timestamped by transaction b21a607e343171016c611cae0e7d395fd56d2c262ac3220b271a9f984346f9b5; waiting for 6 confirmations\nGot 1 attestation(s) from https://alice.btc.calendar.opentimestamps.org\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nGot 1 attestation(s) from https://bob.btc.calendar.opentimestamps.org\nSuccess! Timestamp complete\n",
+  "ots_upgrade_stderr": "Success! Timestamp complete\n",
   "ots_upgrade_stdout": "",
   "ots_verify_command": null,
   "ots_verify_exit_code": null,
@@ -95,6 +95,6 @@
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
   "strict_bitcoin_verified": false,
   "strict_verify_unavailable_reason": "no_bitcoin_node",
-  "upgraded_at": "2026-07-03T11:15:41Z",
+  "upgraded_at": "2026-07-03T13:22:44Z",
   "verified_at": null
 }
