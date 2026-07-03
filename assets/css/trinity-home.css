@@ -1,9 +1,5 @@
 @import url('/assets/css/trinity-home-base.css?v=1');
 
-/* Agent-first homepage P0 structure hooks.
-   Keep these selectors in this top-level file so source-only P0 checks do not
-   depend on resolving imported CSS. These rules must not override the imported
-   base layout for section wrappers. */
 .agent-priority-brief {
   border: 1px solid rgba(201, 168, 76, 0.28);
   border-radius: 18px;
@@ -87,6 +83,7 @@
 }
 
 .claim-gate-notice,
+.instruction-boundary,
 .expanded-context {
   border-left: 3px solid var(--gold, #c9a84c);
   padding: 0.9rem 1rem;
@@ -118,6 +115,7 @@
 @media print {
   .agent-priority-brief,
   .claim-gate-notice,
+  .instruction-boundary,
   .expanded-context {
     border-color: #999;
     background: transparent;
