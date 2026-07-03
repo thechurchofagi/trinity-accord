@@ -55,6 +55,9 @@ jobs:
       - name: Submit waiting heartbeat
         run: python3 scripts/submit_waiting_heartbeat.py
 
+      # Public mirrors are intentionally not generated before append. The centralized
+      # homepage/status sync owns these paths after final record + OTS coverage exists:
+      # api/waiting-heartbeat-status.json, api/public-home-status.json, index.md, sitemap.xml.
       - name: Commit attempt metadata
         run: |
           set -euo pipefail
