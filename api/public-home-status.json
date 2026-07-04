@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-04T10:21:36.185816+00:00",
+  "generated_at": "2026-07-04T10:26:16.328443+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "75aaa13a38ed37ad",
+  "source_digest": "1acc58efc8a4c05c",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 70,
@@ -754,10 +754,10 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-04T10:21:34Z",
+    "generated_at": "2026-07-04T10:26:16Z",
     "daily_alive_status": "success",
     "status": "success",
-    "latest_result": "operational_alive_arweave_capsule_pending",
+    "latest_result": "success",
     "failure_stage": null,
     "success_requires": {
       "gateway_accepted": true,
@@ -794,13 +794,54 @@
       "strict_bitcoin_verified": null,
       "covers_latest_waiting_heartbeat": true
     },
-    "latest_arweave_capsule": null,
+    "latest_arweave_capsule": {
+      "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
+      "heartbeat_id": "hwb-20260704",
+      "status": "uploaded",
+      "attempted_at": "2026-07-04T10:26:15.884Z",
+      "arweave_txid": "esPGcyDcBWe7ygzWQ-zwJnOJSjQc9LOfYkuLmvoVw1w",
+      "payload_sha256": "61b184313fd037399a4b12876a4c3a2682c3bd542c9db0b880db3f25aa2eea51",
+      "data_sha256": "61b184313fd037399a4b12876a4c3a2682c3bd542c9db0b880db3f25aa2eea51",
+      "readback_sha256": "61b184313fd037399a4b12876a4c3a2682c3bd542c9db0b880db3f25aa2eea51",
+      "hash_match": true,
+      "retryable": false,
+      "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+      "wallet_balance_before_available": true,
+      "wallet_balance_before_winston": "15390337429139",
+      "wallet_balance_before_ar": "15.390337429139",
+      "wallet_balance_after_available": true,
+      "wallet_balance_after_reason": null,
+      "wallet_balance_after_winston": "15390337429139",
+      "wallet_balance_after_ar": "15.390337429139",
+      "upload_cost_winston": "2670834421",
+      "upload_cost_ar": "0.002670834421",
+      "tags": {
+        "Content-Type": "application/json",
+        "App-Name": "Trinity-Accord",
+        "Archive-Type": "waiting-heartbeat-capsule",
+        "Heartbeat-ID": "hwb-20260704",
+        "Data-SHA256": "61b184313fd037399a4b12876a4c3a2682c3bd542c9db0b880db3f25aa2eea51",
+        "Boundary": "mirror-not-authority"
+      },
+      "boundary": {
+        "arweave_archive_is_mirror_only": true,
+        "arweave_archive_is_not_authority": true,
+        "arweave_archive_is_not_attestation": true,
+        "arweave_archive_is_not_amendment": true,
+        "arweave_archive_is_not_successor_reception": true,
+        "bitcoin_originals_prevail": true
+      },
+      "verified_at": "2026-07-04T10:26:15.884Z",
+      "actual_delta_winston": "0",
+      "actual_delta_ar": "0.000000000000",
+      "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260704.upload-result.json"
+    },
     "checks": {
       "record_chain_final_record": true,
       "ots_covers_heartbeat": true,
-      "arweave_capsule_verified": false,
+      "arweave_capsule_verified": true,
       "arweave_capsule_deferred_by_cost_policy": false,
-      "arweave_capsule_pending_archive_followup": true,
+      "arweave_capsule_pending_archive_followup": false,
       "waiting_heartbeat_key_continuity_ok": true,
       "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
       "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
@@ -845,7 +886,7 @@
     "counts": {
       "attempts": 15,
       "final_heartbeats": 15,
-      "capsules": 14,
+      "capsules": 15,
       "failed_attempts": 0,
       "total_scheduled_heartbeats": 17,
       "successful_heartbeats": 14,
