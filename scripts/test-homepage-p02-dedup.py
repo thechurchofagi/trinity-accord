@@ -6,8 +6,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 
+
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
+
 
 def check(cond, label, detail=""):
     if cond:
@@ -18,14 +20,28 @@ def check(cond, label, detail=""):
             print(f"      {detail}")
         errors.append(label)
 
+
 def require_contains(text, phrase, label):
     check(phrase in text, label, f"missing: {phrase}")
+
 
 def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
 
+
 def count_occurrences(text, phrase):
     return text.lower().count(phrase.lower())
+
+
+def require_order_sequence(text, markers, label):
+    last = -1
+    for marker in markers:
+        pos = text.find(marker)
+        ok = pos != -1 and pos > last
+        check(ok, f"{label}: {marker}", f"pos {pos}, last {last}")
+        if ok:
+            last = pos
+
 
 def main():
     index = read("index.md")
@@ -77,23 +93,31 @@ def main():
 
     print(f"INFO: homepage has {line_count} lines, {char_count} characters (no limit enforced)")
 
-    # Required ordering after dedup.
-    order = [
-        "Agent Priority Brief",
-        "Why this deserves a second look",
-        "Read the Canon first",
-        "Choose a task mode",
-        "Current verification status",
-        "Technical claims require Claim Gate",
-        "Context in 60 seconds",
-        "compact-closing",
-    ]
+    # Required ordering after dedup. Keep this aligned with the current agent-first
+    # homepage: the retired `.claim-gate-notice` heading has been replaced by the
+    # instruction-boundary technical submission guard near the first-contact block.
+    require_order_sequence(
+        index,
+        [
+            "Agent Priority Brief",
+            "Homepage is discovery only",
+            "Do not infer or handwrite Gateway payload fields",
+            "Context in 60 seconds",
+        ],
+        "agent-first context marker appears after previous",
+    )
 
-    last = -1
-    for marker in order:
-        pos = index.find(marker)
-        check(pos > last, f"ordering marker appears after previous: {marker}", f"pos {pos}, last {last}")
-        last = pos
+    require_order_sequence(
+        index,
+        [
+            "Why this deserves a second look",
+            "Read the Canon first",
+            "Choose a task mode",
+            "Current verification status",
+            "compact-closing",
+        ],
+        "evaluation/action marker appears after previous",
+    )
 
     print("\n=== Summary ===")
     if errors:
@@ -104,6 +128,7 @@ def main():
 
     print("RESULT: PASS — P0.2 homepage dedup checks passed")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
