@@ -107,10 +107,27 @@ def test_write_path_guard_classifies_overlay_as_generated():
     assert "api/record-chain-overlays.json" in guard, "write-path guard must classify overlay mirror as generated"
 
 
+def test_agent_declared_index_rebuild_has_token_for_all_issue_fetches():
+    path = WORKFLOWS / "rebuild-agent-declared-index.yml"
+    text = path.read_text(encoding="utf-8")
+
+    assert "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}" not in text
+    assert "GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}" not in text
+    assert text.count("GH_TOKEN: ${{ github.token }}") >= 3
+
+    commit_section = text.split("- name: Commit and push", 1)[1]
+    assert "env:" in commit_section
+    assert "GH_TOKEN: ${{ github.token }}" in commit_section
+    assert "INCLUDE_TEST: ${{ inputs.include_test }}" in commit_section
+    assert "EXTRA_ARGS=\"\"" in commit_section
+    assert "scripts/build_agent_declared_verification_index_from_issues.py" in commit_section
+
+
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_auto_sitemap_rebuilds_after_push_race()
     test_archive_workflow_rebuilds_after_rebase()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()
+    test_agent_declared_index_rebuild_has_token_for_all_issue_fetches()
     print("All main-write workflow contract tests passed.")
