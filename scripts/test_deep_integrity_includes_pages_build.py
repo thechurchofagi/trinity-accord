@@ -50,4 +50,16 @@ if present_stale:
     print(f"FAIL: deep-integrity.yml matrix includes stale groups: {present_stale}")
     sys.exit(1)
 
-print("PASS: deep-integrity.yml includes active pages-build group and excludes stale groups")
+if "verification-index" not in groups:
+    print("FAIL: deep-integrity.yml matrix must include verification-index")
+    sys.exit(1)
+
+if "GH_TOKEN: ${{ github.token }}" not in text:
+    print("FAIL: deep-integrity.yml must pass github.token to gh-based issue checks")
+    sys.exit(1)
+
+if "GH_TOKEN: ${{ secrets.GH_PAT }}" in text:
+    print("FAIL: deep-integrity.yml must not depend on optional GH_PAT for read-only issue checks")
+    sys.exit(1)
+
+print("PASS: deep-integrity.yml includes active pages-build group, excludes stale groups, and uses github.token for issue checks")
