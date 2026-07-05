@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-05T23:30:36.643764+00:00",
+  "generated_at": "2026-07-05T23:36:37.128420+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -754,7 +754,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-05T23:30:35Z",
+    "generated_at": "2026-07-05T23:36:35Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
