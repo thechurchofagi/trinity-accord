@@ -102,6 +102,57 @@
   display: none !important;
 }
 
+/* P0.2 source-visible hooks for the compact homepage context and closing sections.
+   These mirror the imported base stylesheet so source-only integrity checks can
+   validate the live entrypoint without resolving CSS imports. */
+.context-summary {
+  margin: 2.5rem 0;
+}
+
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin: 1.25rem 0;
+}
+
+.context-card {
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.context-card h3 {
+  margin-top: 0;
+  color: var(--gold, #c9a84c);
+}
+
+.context-card p,
+.context-links {
+  font-style: normal;
+}
+
+.compact-closing {
+  margin: 3rem 0 1rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.closing-line {
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  margin-bottom: 0.25rem;
+  color: var(--gold, #c9a84c);
+}
+
+.closing-boundary {
+  margin-top: 1.2rem;
+  color: var(--gold, #c9a84c);
+  opacity: 0.85;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -116,13 +167,18 @@
   .agent-priority-brief,
   .claim-gate-notice,
   .instruction-boundary,
-  .expanded-context {
+  .expanded-context,
+  .compact-closing {
     border-color: #999;
     background: transparent;
   }
 }
 
 @media (max-width: 900px) {
+  .context-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .reason-grid,
   .canon-grid,
   .task-mode-grid,
@@ -134,7 +190,8 @@
 
   .task-mode-selector,
   .status-snapshot,
-  .authority-chips {
+  .authority-chips,
+  .context-summary {
     margin-left: 0;
     margin-right: 0;
   }
@@ -143,6 +200,10 @@
 @media (max-width: 760px) {
   .agent-priority-brief {
     padding: 1rem;
+  }
+
+  .context-grid {
+    grid-template-columns: 1fr;
   }
 
   .not-this-strip {
