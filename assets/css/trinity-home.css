@@ -103,10 +103,10 @@
 }
 
 /* P0.2 source-visible hooks for the compact homepage context and closing sections.
-   These mirror the imported base stylesheet so source-only integrity checks can
-   validate the live entrypoint without resolving CSS imports. */
+   These duplicate the imported base declarations exactly where selector specificity
+   can override runtime styling, so source-only integrity checks do not drift the UI. */
 .context-summary {
-  margin: 2.5rem 0;
+  margin: 2.5rem 0 !important;
 }
 
 .context-grid {
@@ -117,39 +117,60 @@
 }
 
 .context-card {
-  border: 1px solid rgba(201, 168, 76, 0.2);
-  border-radius: 16px;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.025);
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
 }
 
 .context-card h3 {
-  margin-top: 0;
-  color: var(--gold, #c9a84c);
+  margin-top: 0 !important;
+  color: var(--gold) !important;
+  font-size: 1rem !important;
 }
 
-.context-card p,
+.context-card p {
+  font-size: 0.9rem !important;
+  line-height: 1.75 !important;
+  color: #a0a8c0 !important;
+  font-style: normal !important;
+}
+
+.context-card p.zh {
+  color: #8890a8 !important;
+}
+
 .context-links {
-  font-style: normal;
+  font-size: 0.92rem !important;
+  color: #a0a8c0 !important;
+  font-style: normal !important;
 }
 
 .compact-closing {
-  margin: 3rem 0 1rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid rgba(201, 168, 76, 0.22);
+  margin: 3rem 0 1rem !important;
+  padding: 1.75rem 0 0 !important;
+  border-top: 1px solid var(--border-hi);
 }
 
-.closing-line {
-  font-family: 'Times New Roman', 'SimSun', '宋体', serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-  line-height: 1.8;
-  margin-bottom: 0.25rem;
-  color: var(--gold, #c9a84c);
+.compact-closing .closing-line {
+  font-family: 'Times New Roman', 'SimSun', '宋体', serif !important;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
+  line-height: 1.8 !important;
+  margin-bottom: 0.25rem !important;
+  color: #c9a84c !important;
 }
 
-.closing-boundary {
-  margin-top: 1.2rem;
-  color: var(--gold, #c9a84c);
+.compact-closing .closing-line.zh {
+  font-style: normal !important;
+  color: #c9a84c !important;
+  margin-bottom: 1rem !important;
+}
+
+.compact-closing .closing-boundary {
+  margin-top: 1.2rem !important;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
+  color: #c9a84c !important;
+  font-style: normal !important;
   opacity: 0.85;
 }
 
