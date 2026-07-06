@@ -100,7 +100,7 @@ def attempt_pending_append(attempt: dict[str, Any]) -> bool:
         return False
     status = str(attempt.get("status", ""))
     append_status = str(attempt.get("append_status", ""))
-    return status == "submitted" and append_status in {"", "queued"}
+    return status == "submitted" and append_status in {"", "queued", "pending"}
 
 
 def capsule_is_verified(c: dict[str, Any] | None) -> bool:
@@ -208,6 +208,19 @@ def compute_heartbeat_summary(
     attempt_dates: set[date] = set()
     failed_attempt_dates: set[date] = set()
     pending_append_date_set: set[date] = set()
+    rejected_dates: set[date] = set()
+    # Scan rejected directory to exclude rejected pending appends
+    rejected_dir = ROOT / "record-chain" / "rejected"
+    if rejected_dir.is_dir():
+        for rej_file in rejected_dir.glob("*.rejection.json"):
+            rej_data = read_json(rej_file)
+            rej_date = parse_heartbeat_date(rej_data.get("heartbeat_date"))
+            if rej_date is None:
+                # Try to extract from source_pending filename
+                source = rej_data.get("source_pending", "")
+                rej_date = heartbeat_date_from_id(source) if source else None
+            if rej_date is not None:
+                rejected_dates.add(rej_date)
     for attempt in attempts:
         observed = observed_heartbeat_date(attempt)
         if observed is None:
@@ -215,7 +228,7 @@ def compute_heartbeat_summary(
         attempt_dates.add(observed)
         if attempt_failed(attempt):
             failed_attempt_dates.add(observed)
-        if attempt_pending_append(attempt):
+        if attempt_pending_append(attempt) and observed not in rejected_dates:
             pending_append_date_set.add(observed)
 
     observed_dates = set(records_by_date) | attempt_dates | capsule_dates
@@ -375,11 +388,7 @@ def main() -> int:
 
     heartbeat_summary = compute_heartbeat_summary(records, attempts, capsules, key_manifest, ots_covers_latest, expected_heartbeat_date())
 
-    if heartbeat_summary.get("is_stale") is True and heartbeat_summary.get("expected_heartbeat_pending_append") is True:
-        daily_alive_status = "degraded"
-        latest_result = "submitted_pending_append"
-        failure_stage = "append_queue"
-    elif heartbeat_summary.get("is_stale") is True:
+    if heartbeat_summary.get("is_stale") is True:
         daily_alive_status = "failed"
         latest_result = "missing_expected_waiting_heartbeat"
         failure_stage = "freshness"
@@ -387,6 +396,10 @@ def main() -> int:
         daily_alive_status = "failed"
         latest_result = "key_continuity_failed"
         failure_stage = "key_continuity"
+    elif heartbeat_summary.get("expected_heartbeat_pending_append") is True:
+        daily_alive_status = "degraded"
+        latest_result = "submitted_pending_append"
+        failure_stage = "append_queue"
     elif final_record_exists and ots_covers_latest:
         daily_alive_status = "success"
         if arweave_verified:
