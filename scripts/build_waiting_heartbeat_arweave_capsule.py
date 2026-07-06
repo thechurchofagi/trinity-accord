@@ -18,17 +18,7 @@ OTS = ROOT / "api" / "record-chain-native-ots-latest.json"
 CAPSULE_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
 
 VERIFIED_CAPSULE_STATUSES = {"uploaded", "success", "arweave_archived"}
-PENDING_READBACK_STATUSES = {
-    "posted_pending_readback",
-    "readback_pending",
-    "readback_failed",
-    "readback_unavailable",
-    "readback_data_empty",
-    # Legacy runs wrote this as a hard stop after a single non-empty readback
-    # mismatch.  Treat it as repairable unless the repair script has explicitly
-    # classified it as a local payload mismatch.
-    "readback_hash_mismatch",
-}
+PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable", "readback_data_empty"}
 NON_RETRYABLE_READBACK_STATUSES = {"local_payload_mismatch_for_existing_tx"}
 
 
@@ -94,10 +84,10 @@ def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
 def capsule_needs_fresh_upload(capsule: dict[str, Any] | None) -> bool:
     """Return whether the existing tx is exhausted and should be superseded.
 
-    A valid same-heartbeat capsule read back with a different hash means the
-    existing Arweave tx cannot verify this local payload.  Because the capsule is
-    mirror/archive material, the safe recovery is to preserve the failed result
-    in git history and write a fresh upload-result for a new tx.
+    A readback_hash_mismatch result must not wedge the workflow.  If a repair
+    run later proves the old tx contains a same-heartbeat capsule with the wrong
+    bytes it can set next_action=fresh_upload_required; otherwise legacy
+    mismatches fall through to a fresh upload below.
     """
     if capsule_status(capsule) != "readback_hash_mismatch":
         return False
@@ -108,10 +98,8 @@ def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:
     status = capsule_status(capsule)
     if status in NON_RETRYABLE_READBACK_STATUSES:
         return False
-    if capsule_needs_fresh_upload(capsule):
-        return False
     if status == "readback_hash_mismatch":
-        return bool(capsule_txid(capsule)) and capsule.get("hash_match") is not True
+        return False
     return bool(capsule_txid(capsule)) and capsule.get("hash_match") is not True and capsule.get("retryable") is not False and status in PENDING_READBACK_STATUSES
 
 
