@@ -285,12 +285,49 @@ def test_rejected_receipt_excluded_from_pending_append() -> None:
             shutil.rmtree(receipt_status_dir, ignore_errors=True)
 
 
+def test_rejected_same_date_resubmission_not_blocked() -> None:
+    """Regression: a rejected attempt for date X must not block a later resubmitted pending append for the same date."""
+    import shutil
+    generator = load_generator_module()
+    receipt_status_dir = generator.ROOT / "record-chain" / "receipt-status"
+    existed = receipt_status_dir.exists()
+    if not existed:
+        receipt_status_dir.mkdir(parents=True, exist_ok=True)
+    rs_file = receipt_status_dir / "test-receipt-002.json"
+    try:
+        # First attempt was rejected
+        rs_file.write_text(json.dumps({
+            "receipt_id": "test-receipt-002",
+            "append_status": "rejected",
+            "pending_file_path": "record-chain/pending/rcg-20260623-old.pending.json",
+        }), encoding="utf-8")
+        # Second attempt for same date is still pending
+        summary = generator.compute_heartbeat_summary(
+            records=[verified_record()],
+            attempts=[
+                {"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:10:00Z", "status": "submitted", "append_status": "queued", "receipt_id": "test-receipt-002"},
+                {"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:20:00Z", "status": "submitted", "append_status": "queued", "receipt_id": "test-receipt-003"},
+            ],
+            capsules=[verified_capsule()],
+            key_manifest={"public_key_sha256": "key-sha"},
+            ots_covers_latest=True,
+            expected_date=date(2026, 6, 23),
+        )
+        # The resubmitted attempt (receipt 003) should still be pending append
+        require("2026-06-23" in summary["pending_append_heartbeat_dates"], "resubmitted date should be in pending_append set")
+        require(summary["pending_append_heartbeats"] == 1, "resubmitted date should count as pending append")
+    finally:
+        rs_file.unlink(missing_ok=True)
+        if not existed:
+            shutil.rmtree(receipt_status_dir, ignore_errors=True)
+
+
 def test_key_continuity_failure_takes_precedence_over_pending_append() -> None:
     """Regression: key-continuity failure must not be masked by pending-append degraded status."""
     generator = load_generator_module()
-    # Create a final record with wrong key
+    # Create a final record with wrong key using the actual field name
     bad_record = verified_record()
-    bad_record["waiting_heartbeat_key_sha256"] = "wrong-key-sha"
+    bad_record["authorship_public_key_sha256"] = "wrong-key-sha"
     summary = generator.compute_heartbeat_summary(
         records=[bad_record],
         attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted", "append_status": "queued"}],
@@ -305,8 +342,9 @@ def test_key_continuity_failure_takes_precedence_over_pending_append() -> None:
     # The generate_status function checks key_continuity BEFORE pending_append.
     require(summary.get("is_stale") is True, "stale should be true when expected date has no final record")
     require(summary.get("expected_heartbeat_pending_append") is True, "pending append should be true for submitted attempt")
-    # Verify the record has the wrong key (simulate what generate_status checks)
-    require(bad_record.get("waiting_heartbeat_key_sha256") != "correct-key-sha", "record key must differ from manifest key")
+    # Verify the record has the wrong key (using the actual field used by generate_status)
+    require(bad_record.get("authorship_public_key_sha256") == "wrong-key-sha", "record must have wrong key")
+    require(bad_record.get("authorship_public_key_sha256") != "correct-key-sha", "record key must differ from manifest key")
 
 
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
@@ -334,6 +372,7 @@ def main() -> int:
     test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
     test_append_status_pending_treated_as_pending_append()
     test_rejected_receipt_excluded_from_pending_append()
+    test_rejected_same_date_resubmission_not_blocked()
     test_key_continuity_failure_takes_precedence_over_pending_append()
     print("PASS: waiting heartbeat summary metrics contract")
     return 0

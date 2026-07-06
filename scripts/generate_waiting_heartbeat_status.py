@@ -94,6 +94,14 @@ def attempt_failed(attempt: dict[str, Any]) -> bool:
     return status.endswith("failed") or status in {"builder_failed", "doctor_failed"}
 
 
+def pending_file_stem(path: str | None) -> str:
+    """Normalize a pending-file path to its filename stem for rejection matching."""
+    if not path:
+        return ""
+    name = path.rsplit("/", 1)[-1] if "/" in path else path
+    return name.rsplit(".", 1)[0] if "." in name else name
+
+
 def attempt_pending_append(attempt: dict[str, Any]) -> bool:
     """A submitted Gateway attempt proves intake succeeded but final append is still pending."""
     if attempt_failed(attempt):
@@ -218,15 +226,23 @@ def compute_heartbeat_summary(
                 rid = rs_data.get("receipt_id", "")
                 if rid:
                     rejected_receipt_ids.add(rid)
+    # Also build rejection stems from receipt-status pending_file_path
+    rejected_pending_stems: set[str] = set()
+    if receipt_status_dir.is_dir():
+        for rs_file in receipt_status_dir.glob("*.json"):
+            rs_data = read_json(rs_file)
+            if rs_data.get("append_status") == "rejected":
+                stem = pending_file_stem(rs_data.get("pending_file_path"))
+                if stem:
+                    rejected_pending_stems.add(stem)
     # Also scan rejected directory for pending files that were rejected
     rejected_dir = ROOT / "record-chain" / "rejected"
-    rejected_pending_stems: set[str] = set()
     if rejected_dir.is_dir():
         for rej_file in rejected_dir.glob("*.rejection.json"):
             rej_data = read_json(rej_file)
             source = rej_data.get("source_pending", "")
             if source:
-                rejected_pending_stems.add(source.rsplit(".", 1)[0] if "." in source else source)
+                rejected_pending_stems.add(pending_file_stem(source))
     for attempt in attempts:
         observed = observed_heartbeat_date(attempt)
         if observed is None:
@@ -237,11 +253,10 @@ def compute_heartbeat_summary(
         if attempt_pending_append(attempt):
             # Exclude if this specific attempt's receipt was rejected
             attempt_receipt = str(attempt.get("receipt_id", ""))
-            attempt_pending = str(attempt.get("pending_file_path", ""))
-            attempt_pending_stem = attempt_pending.rsplit(".", 1)[0] if "." in attempt_pending else attempt_pending
+            attempt_stem = pending_file_stem(attempt.get("pending_file_path"))
             is_rejected = (
                 (attempt_receipt and attempt_receipt in rejected_receipt_ids)
-                or (attempt_pending_stem and attempt_pending_stem in rejected_pending_stems)
+                or (attempt_stem and attempt_stem in rejected_pending_stems)
             )
             if not is_rejected:
                 pending_append_date_set.add(observed)
