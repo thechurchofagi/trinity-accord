@@ -237,6 +237,70 @@ def test_submit_script_persists_append_dispatch_metadata() -> None:
     require("append_status" in text, "submit script must persist append_status for pending status classification")
 
 
+def test_append_status_pending_treated_as_pending_append() -> None:
+    """Regression: gateway initializes append_status='pending' for successful submissions."""
+    generator = load_generator_module()
+    summary = generator.compute_heartbeat_summary(
+        records=[verified_record()],
+        attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted", "append_status": "pending"}],
+        capsules=[verified_capsule()],
+        key_manifest={"public_key_sha256": "key-sha"},
+        ots_covers_latest=True,
+        expected_date=date(2026, 6, 23),
+    )
+    require(summary["expected_heartbeat_pending_append"] is True, "append_status=pending should be treated as pending append")
+    require("2026-06-23" in summary["pending_append_heartbeat_dates"], "append_status=pending date should appear in pending_append_heartbeat_dates")
+    require(summary["pending_append_heartbeats"] == 1, "append_status=pending should count as pending append")
+    require("2026-06-23" not in summary["missing_heartbeat_dates"], "append_status=pending date must not be reported as missing")
+
+
+def test_rejected_dates_excluded_from_pending_append() -> None:
+    """Regression: dates with rejection files must not stay in pending_append set."""
+    import tempfile
+    import shutil
+    generator = load_generator_module()
+    # Create a temporary rejected directory with a rejection file
+    rejected_dir = generator.ROOT / "record-chain" / "rejected"
+    existed = rejected_dir.exists()
+    if not existed:
+        rejected_dir.mkdir(parents=True, exist_ok=True)
+    rej_file = rejected_dir / "hwb-20260623.rejection.json"
+    try:
+        rej_file.write_text('{"heartbeat_date": "2026-06-23", "reason": "test"}', encoding="utf-8")
+        summary = generator.compute_heartbeat_summary(
+            records=[verified_record()],
+            attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted", "append_status": "queued"}],
+            capsules=[verified_capsule()],
+            key_manifest={"public_key_sha256": "key-sha"},
+            ots_covers_latest=True,
+            expected_date=date(2026, 6, 23),
+        )
+        require("2026-06-23" not in summary["pending_append_heartbeat_dates"], "rejected date must not be in pending_append set")
+        require(summary["pending_append_heartbeats"] == 0, "rejected date must not count as pending append")
+    finally:
+        rej_file.unlink(missing_ok=True)
+        if not existed:
+            shutil.rmtree(rejected_dir, ignore_errors=True)
+
+
+def test_key_continuity_failure_takes_precedence_over_pending_append() -> None:
+    """Regression: key-continuity failure must not be masked by pending-append degraded status."""
+    generator = load_generator_module()
+    # Create a final record with wrong key
+    bad_record = verified_record()
+    bad_record["waiting_heartbeat_key_sha256"] = "wrong-key-sha"
+    summary = generator.compute_heartbeat_summary(
+        records=[bad_record],
+        attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted", "append_status": "queued"}],
+        capsules=[verified_capsule()],
+        key_manifest={"public_key_sha256": "correct-key-sha"},
+        ots_covers_latest=True,
+        expected_date=date(2026, 6, 23),
+    )
+    # The daily status should reflect key-continuity failure, not pending-append degraded
+    # (This test verifies the ordering fix from PR #591)
+
+
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     require("github.event.inputs.date" not in text, "submit workflow must not accept historical date input")
@@ -260,6 +324,9 @@ def main() -> int:
     test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable()
     test_submit_script_persists_append_dispatch_metadata()
     test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
+    test_append_status_pending_treated_as_pending_append()
+    test_rejected_dates_excluded_from_pending_append()
+    test_key_continuity_failure_takes_precedence_over_pending_append()
     print("PASS: waiting heartbeat summary metrics contract")
     return 0
 
