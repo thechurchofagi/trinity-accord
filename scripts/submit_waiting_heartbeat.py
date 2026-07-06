@@ -37,6 +37,19 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
 
 
+def parse_stdout_json(stdout: str) -> dict[str, Any]:
+    """Extract the JSON response from builder output that prefixes status text."""
+    start = stdout.find("{")
+    end = stdout.rfind("}")
+    if start < 0 or end < start:
+        return {}
+    try:
+        data = json.loads(stdout[start:end + 1])
+    except json.JSONDecodeError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
 def write_key_dir(key_dir: Path) -> None:
     priv = os.environ.get("WAITING_HEARTBEAT_AUTHORSHIP_PRIVATE_KEY_PEM", "").strip()
     pub = os.environ.get("WAITING_HEARTBEAT_AUTHORSHIP_PUBLIC_KEY_PEM", "").strip()
@@ -155,7 +168,8 @@ def main() -> int:
 
     submit = run(["node", str(BUILDER), "submit", "--file", str(submission_path), "--gateway", args.gateway])
     status = "submitted" if submit.returncode == 0 else "submit_failed"
-    write_attempt(attempt_path, {
+    submit_json = parse_stdout_json(submit.stdout)
+    attempt = {
         "schema": "trinityaccord.waiting-heartbeat-attempt.v1",
         "heartbeat_id": heartbeat_id,
         "attempted_at": utc_now(),
@@ -164,12 +178,26 @@ def main() -> int:
         "preflight_stdout": preflight.stdout,
         "submit_stdout": submit.stdout,
         "submit_stderr": submit.stderr,
-    })
+    }
+    for key in [
+        "receipt_id",
+        "pending_file_path",
+        "intake_submission_path",
+        "receipt_path",
+        "append_status",
+        "receipt_commit_sha",
+    ]:
+        value = submit_json.get(key)
+        if value:
+            attempt[key] = value
+    write_attempt(attempt_path, attempt)
 
     if submit.returncode != 0:
         raise SystemExit("submit failed")
 
-    print(f"WAITING_HEARTBEAT_SUBMITTED heartbeat_id={heartbeat_id}")
+    receipt_id = attempt.get("receipt_id", "")
+    pending_file_path = attempt.get("pending_file_path", "")
+    print(f"WAITING_HEARTBEAT_SUBMITTED heartbeat_id={heartbeat_id} receipt_id={receipt_id} pending_file_path={pending_file_path}")
     return 0
 
 

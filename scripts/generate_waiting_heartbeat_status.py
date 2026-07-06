@@ -94,6 +94,15 @@ def attempt_failed(attempt: dict[str, Any]) -> bool:
     return status.endswith("failed") or status in {"builder_failed", "doctor_failed"}
 
 
+def attempt_pending_append(attempt: dict[str, Any]) -> bool:
+    """A submitted Gateway attempt proves intake succeeded but final append is still pending."""
+    if attempt_failed(attempt):
+        return False
+    status = str(attempt.get("status", ""))
+    append_status = str(attempt.get("append_status", ""))
+    return status == "submitted" and append_status in {"", "queued"}
+
+
 def capsule_is_verified(c: dict[str, Any] | None) -> bool:
     if not c:
         return False
@@ -198,6 +207,7 @@ def compute_heartbeat_summary(
 
     attempt_dates: set[date] = set()
     failed_attempt_dates: set[date] = set()
+    pending_append_date_set: set[date] = set()
     for attempt in attempts:
         observed = observed_heartbeat_date(attempt)
         if observed is None:
@@ -205,6 +215,8 @@ def compute_heartbeat_summary(
         attempt_dates.add(observed)
         if attempt_failed(attempt):
             failed_attempt_dates.add(observed)
+        if attempt_pending_append(attempt):
+            pending_append_date_set.add(observed)
 
     observed_dates = set(records_by_date) | attempt_dates | capsule_dates
     if not observed_dates:
@@ -213,6 +225,7 @@ def compute_heartbeat_summary(
             "successful_heartbeats": 0,
             "failed_heartbeats": 0,
             "failed_or_missing_heartbeats": 0,
+            "pending_append_heartbeats": 0,
             "current_success_streak_days": 0,
             "first_heartbeat_date": None,
             "latest_heartbeat_date": None,
@@ -222,9 +235,11 @@ def compute_heartbeat_summary(
             "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
             "latest_heartbeat_is_expected_date": False,
             "latest_heartbeat_fully_verified_for_expected_date": False,
+            "expected_heartbeat_pending_append": False,
             "heartbeat_lag_days": None,
             "is_stale": False,
             "missing_heartbeat_dates": [],
+            "pending_append_heartbeat_dates": [],
             "failed_attempt_dates": [],
             "success_definition": {
                 "requires_final_record": True,
@@ -254,11 +269,15 @@ def compute_heartbeat_summary(
     latest_record_date = max(records_by_date) if records_by_date else None
     success_by_date: dict[date, bool] = {}
     missing_heartbeat_dates: list[str] = []
+    pending_append_heartbeat_dates: list[str] = []
     for scheduled in scheduled_dates:
         record = records_by_date.get(scheduled)
         if record is None:
             success_by_date[scheduled] = False
-            missing_heartbeat_dates.append(scheduled.isoformat())
+            if scheduled in pending_append_date_set:
+                pending_append_heartbeat_dates.append(scheduled.isoformat())
+            else:
+                missing_heartbeat_dates.append(scheduled.isoformat())
             continue
         key_ok = bool(expected_key_sha and record.get("authorship_public_key_sha256") == expected_key_sha)
         same_capsules = capsules_by_heartbeat.get(str(record.get("heartbeat_id")), [])
@@ -273,7 +292,8 @@ def compute_heartbeat_summary(
 
     successful = sum(1 for ok in success_by_date.values() if ok)
     total = len(scheduled_dates)
-    failed = total - successful
+    pending_append = len(pending_append_heartbeat_dates)
+    failed = total - successful - pending_append
     streak = 0
     cur = through
     while cur in success_by_date and success_by_date[cur]:
@@ -285,10 +305,12 @@ def compute_heartbeat_summary(
     lag_days = None
     latest_is_expected = False
     latest_fully_verified_for_expected = False
+    expected_pending_append = False
     is_stale = False
     if expected_date is not None:
         latest_is_expected = expected_date in records_by_date
         latest_fully_verified_for_expected = success_by_date.get(expected_date) is True
+        expected_pending_append = expected_date in pending_append_date_set and expected_date not in records_by_date
         is_stale = not latest_is_expected
         lag_anchor = latest_final or latest_observed
         lag_days = max(0, (expected_date - lag_anchor).days)
@@ -299,6 +321,7 @@ def compute_heartbeat_summary(
         "successful_heartbeats": successful,
         "failed_heartbeats": failed,
         "failed_or_missing_heartbeats": failed,
+        "pending_append_heartbeats": pending_append,
         "current_success_streak_days": streak,
         "first_heartbeat_date": first.isoformat(),
         "latest_heartbeat_date": latest_heartbeat_date.isoformat(),
@@ -308,9 +331,11 @@ def compute_heartbeat_summary(
         "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
         "latest_heartbeat_is_expected_date": latest_is_expected,
         "latest_heartbeat_fully_verified_for_expected_date": latest_fully_verified_for_expected,
+        "expected_heartbeat_pending_append": expected_pending_append,
         "heartbeat_lag_days": lag_days,
         "is_stale": is_stale,
         "missing_heartbeat_dates": missing_heartbeat_dates,
+        "pending_append_heartbeat_dates": pending_append_heartbeat_dates,
         "failed_attempt_dates": sorted(d.isoformat() for d in failed_attempt_dates),
         "latest_ots_head_covers_current_chain": bool(ots_covers_latest),
         "success_definition": {
@@ -350,7 +375,11 @@ def main() -> int:
 
     heartbeat_summary = compute_heartbeat_summary(records, attempts, capsules, key_manifest, ots_covers_latest, expected_heartbeat_date())
 
-    if heartbeat_summary.get("is_stale") is True:
+    if heartbeat_summary.get("is_stale") is True and heartbeat_summary.get("expected_heartbeat_pending_append") is True:
+        daily_alive_status = "degraded"
+        latest_result = "submitted_pending_append"
+        failure_stage = "append_queue"
+    elif heartbeat_summary.get("is_stale") is True:
         daily_alive_status = "failed"
         latest_result = "missing_expected_waiting_heartbeat"
         failure_stage = "freshness"
@@ -372,9 +401,9 @@ def main() -> int:
         latest_result = "waiting_for_ots_head_coverage"
         failure_stage = "ots_head_coverage"
     elif attempts:
-        daily_alive_status = "failed"
-        latest_result = attempts[-1].get("status", "attempted")
-        failure_stage = latest_result
+        daily_alive_status = "degraded" if attempt_pending_append(attempts[-1]) else "failed"
+        latest_result = "submitted_pending_append" if attempt_pending_append(attempts[-1]) else attempts[-1].get("status", "attempted")
+        failure_stage = "append_queue" if attempt_pending_append(attempts[-1]) else latest_result
     else:
         daily_alive_status = "waiting"
         latest_result = "not_started"
@@ -422,6 +451,7 @@ def main() -> int:
             "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
             "latest_heartbeat_is_expected_date": heartbeat_summary.get("latest_heartbeat_is_expected_date"),
             "latest_heartbeat_fully_verified_for_expected_date": heartbeat_summary.get("latest_heartbeat_fully_verified_for_expected_date"),
+            "expected_heartbeat_pending_append": heartbeat_summary.get("expected_heartbeat_pending_append"),
         },
         "heartbeat_summary": heartbeat_summary,
         "counts": {
@@ -433,6 +463,7 @@ def main() -> int:
             "successful_heartbeats": heartbeat_summary["successful_heartbeats"],
             "failed_heartbeats": heartbeat_summary["failed_heartbeats"],
             "failed_or_missing_heartbeats": heartbeat_summary["failed_or_missing_heartbeats"],
+            "pending_append_heartbeats": heartbeat_summary["pending_append_heartbeats"],
             "current_success_streak_days": heartbeat_summary["current_success_streak_days"],
             "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
         },
