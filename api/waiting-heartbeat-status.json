@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-07-06T09:12:54Z",
+  "generated_at": "2026-07-06T09:17:27Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "operational_alive_arweave_capsule_pending",
@@ -40,7 +40,47 @@
     "strict_bitcoin_verified": null,
     "covers_latest_waiting_heartbeat": true
   },
-  "latest_arweave_capsule": null,
+  "latest_arweave_capsule": {
+    "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
+    "heartbeat_id": "hwb-20260706",
+    "status": "readback_hash_mismatch",
+    "attempted_at": "2026-07-06T09:17:27.683Z",
+    "arweave_txid": "OeX8cjTolb7O67U5X7Ni9vOTRe9dDaVjOo-IOWeh_eM",
+    "payload_sha256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
+    "data_sha256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
+    "readback_sha256": "a91343451b9e6eebd7f51116c8c2d63948ceeef3dae7aeab5c18d63928f1fc43",
+    "hash_match": false,
+    "retryable": false,
+    "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+    "wallet_balance_before_available": true,
+    "wallet_balance_before_winston": "15358520215308",
+    "wallet_balance_before_ar": "15.358520215308",
+    "wallet_balance_after_available": false,
+    "wallet_balance_after_reason": "pending",
+    "wallet_balance_after_winston": null,
+    "wallet_balance_after_ar": null,
+    "upload_cost_winston": "2641448712",
+    "upload_cost_ar": "0.002641448712",
+    "tags": {
+      "Content-Type": "application/json",
+      "App-Name": "Trinity-Accord",
+      "Archive-Type": "waiting-heartbeat-capsule",
+      "Heartbeat-ID": "hwb-20260706",
+      "Data-SHA256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
+      "Boundary": "mirror-not-authority"
+    },
+    "boundary": {
+      "arweave_archive_is_mirror_only": true,
+      "arweave_archive_is_not_authority": true,
+      "arweave_archive_is_not_attestation": true,
+      "arweave_archive_is_not_amendment": true,
+      "arweave_archive_is_not_successor_reception": true,
+      "bitcoin_originals_prevail": true
+    },
+    "last_readback_error": "payload_sha256_mismatch",
+    "readback_attempted_at": "2026-07-06T09:17:27.683Z",
+    "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260706.upload-result.json"
+  },
   "checks": {
     "record_chain_final_record": true,
     "ots_covers_heartbeat": true,
@@ -91,7 +131,7 @@
   "counts": {
     "attempts": 17,
     "final_heartbeats": 17,
-    "capsules": 16,
+    "capsules": 17,
     "failed_attempts": 0,
     "total_scheduled_heartbeats": 19,
     "successful_heartbeats": 16,
