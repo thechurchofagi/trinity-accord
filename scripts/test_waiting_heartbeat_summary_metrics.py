@@ -12,6 +12,7 @@ PUBLIC = ROOT / "api" / "public-home-status.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-submit.yml"
 CAPSULE_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-capsule.yml"
 GENERATOR = ROOT / "scripts" / "generate_waiting_heartbeat_status.py"
+SUBMIT_SCRIPT = ROOT / "scripts" / "submit_waiting_heartbeat.py"
 CAPSULE_BUILDER = ROOT / "scripts" / "build_waiting_heartbeat_arweave_capsule.py"
 CAPSULE_UPLOAD = ROOT / "scripts" / "arweave_upload_waiting_heartbeat_capsule.mjs"
 CAPSULE_REPAIR = ROOT / "scripts" / "repair_waiting_heartbeat_arweave_capsule_readback.mjs"
@@ -60,9 +61,10 @@ def test_current_status_contract() -> None:
     total = summary["total_scheduled_heartbeats"]
     success = summary["successful_heartbeats"]
     failed = summary["failed_or_missing_heartbeats"]
+    pending = summary.get("pending_append_heartbeats", 0)
     streak = summary["current_success_streak_days"]
     require(total >= success, "total_scheduled_heartbeats must be >= successful_heartbeats")
-    require(failed == total - success, "failed_or_missing_heartbeats must equal total - success")
+    require(failed + pending == total - success, "failed_or_missing_heartbeats plus pending_append_heartbeats must equal total - success")
     require(streak <= success, "current_success_streak_days must be <= successful_heartbeats")
 
     counts = status.get("counts") or {}
@@ -74,6 +76,8 @@ def test_current_status_contract() -> None:
         "current_success_streak_days",
     ]:
         require(counts.get(key) == summary.get(key), f"counts.{key} must mirror heartbeat_summary.{key}")
+    if "pending_append_heartbeats" in summary:
+        require(counts.get("pending_append_heartbeats") == summary.get("pending_append_heartbeats"), "counts.pending_append_heartbeats must mirror heartbeat_summary.pending_append_heartbeats")
 
     public_hb = public.get("waiting_heartbeat") or {}
     public_summary = public_hb.get("heartbeat_summary") or {}
@@ -119,12 +123,14 @@ def test_summary_extends_to_expected_date_when_latest_observed_is_stale() -> Non
     require(summary["total_scheduled_heartbeats"] == 2, "summary should extend through expected heartbeat date")
     require(summary["successful_heartbeats"] == 1, "only observed verified heartbeat should be successful")
     require(summary["failed_or_missing_heartbeats"] == 1, "missing expected heartbeat should be counted failed/missing")
+    require(summary["pending_append_heartbeats"] == 0, "missing expected heartbeat without submitted attempt is not pending append")
     require(summary["current_success_streak_days"] == 0, "stale expected date should reset current streak")
     require(summary["latest_heartbeat_date"] == "2026-06-22", "latest final heartbeat date should remain visible")
     require(summary["through_heartbeat_date"] == "2026-06-23", "summary should declare schedule range end")
     require(summary["expected_heartbeat_date"] == "2026-06-23", "summary should declare expected heartbeat date")
     require(summary["heartbeat_lag_days"] == 1, "stale lag should be one day")
     require(summary["is_stale"] is True, "summary should mark stale heartbeat data")
+    require(summary["expected_heartbeat_pending_append"] is False, "missing expected heartbeat should not be pending append")
     require("2026-06-23" in summary["missing_heartbeat_dates"], "expected missing date should be listed")
 
 
@@ -146,11 +152,11 @@ def test_current_expected_record_is_alive_while_arweave_capsule_is_pending() -> 
     require(summary["success_definition"].get("arweave_capsule_is_archive_followup") is True, "summary must classify Arweave capsule as archive follow-up")
 
 
-def test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat() -> None:
+def test_attempt_for_expected_date_is_pending_append_not_missing_final_heartbeat() -> None:
     generator = load_generator_module()
     summary = generator.compute_heartbeat_summary(
         records=[verified_record()],
-        attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted"}],
+        attempts=[{"heartbeat_id": "hwb-20260623", "attempted_at": "2026-06-23T03:17:30Z", "status": "submitted", "append_status": "queued"}],
         capsules=[verified_capsule()],
         key_manifest={"public_key_sha256": "key-sha"},
         ots_covers_latest=True,
@@ -159,9 +165,13 @@ def test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat() -> No
     require(summary["latest_observed_heartbeat_date"] == "2026-06-23", "attempt should remain visible as observed")
     require(summary["latest_heartbeat_date"] == "2026-06-22", "attempt must not replace latest final heartbeat")
     require(summary["latest_heartbeat_is_expected_date"] is False, "attempt must not make expected heartbeat fresh")
+    require(summary["expected_heartbeat_pending_append"] is True, "submitted expected attempt should be pending append")
     require(summary["heartbeat_lag_days"] == 1, "attempt must not zero out heartbeat lag")
-    require(summary["is_stale"] is True, "attempt without final record/capsule must remain stale")
-    require("2026-06-23" in summary["missing_heartbeat_dates"], "expected date without final record must be missing")
+    require(summary["is_stale"] is True, "attempt without final record/capsule must remain stale at the data layer")
+    require("2026-06-23" not in summary["missing_heartbeat_dates"], "submitted expected date must not be reported as missing")
+    require("2026-06-23" in summary["pending_append_heartbeat_dates"], "submitted expected date should be reported as pending append")
+    require(summary["pending_append_heartbeats"] == 1, "submitted expected date should count as pending append")
+    require(summary["failed_or_missing_heartbeats"] == 0, "submitted expected date should not be counted failed/missing before append SLA")
 
 
 def test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals() -> None:
@@ -219,6 +229,14 @@ def test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable() -> 
     require("retry_readback_without_reupload" in repair, "repair script must avoid duplicate upload on delayed readback")
 
 
+def test_submit_script_persists_append_dispatch_metadata() -> None:
+    text = SUBMIT_SCRIPT.read_text(encoding="utf-8")
+    require("parse_stdout_json" in text, "submit script must parse Gateway JSON response")
+    require("receipt_id" in text, "submit script must persist receipt_id for append dispatch")
+    require("pending_file_path" in text, "submit script must persist pending_file_path for append dispatch")
+    require("append_status" in text, "submit script must persist append_status for pending status classification")
+
+
 def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     require("github.event.inputs.date" not in text, "submit workflow must not accept historical date input")
@@ -234,12 +252,13 @@ def main() -> int:
     test_expected_heartbeat_date_respects_schedule_grace_window()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
     test_current_expected_record_is_alive_while_arweave_capsule_is_pending()
-    test_attempt_for_expected_date_does_not_mask_missing_final_heartbeat()
+    test_attempt_for_expected_date_is_pending_append_not_missing_final_heartbeat()
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
     test_ots_head_covers_prior_heartbeat_record()
     test_capsule_builder_recognizes_existing_result_states()
     test_capsule_workflow_preserves_upload_result_before_status_update()
     test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable()
+    test_submit_script_persists_append_dispatch_metadata()
     test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
     print("PASS: waiting heartbeat summary metrics contract")
     return 0
