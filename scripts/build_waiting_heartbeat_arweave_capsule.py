@@ -18,8 +18,18 @@ OTS = ROOT / "api" / "record-chain-native-ots-latest.json"
 CAPSULE_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
 
 VERIFIED_CAPSULE_STATUSES = {"uploaded", "success", "arweave_archived"}
-PENDING_READBACK_STATUSES = {"posted_pending_readback", "readback_pending", "readback_failed", "readback_unavailable", "readback_data_empty"}
-NON_RETRYABLE_READBACK_STATUSES = {"readback_hash_mismatch", "local_payload_mismatch_for_existing_tx"}
+PENDING_READBACK_STATUSES = {
+    "posted_pending_readback",
+    "readback_pending",
+    "readback_failed",
+    "readback_unavailable",
+    "readback_data_empty",
+    # Legacy runs wrote this as a hard stop after a single non-empty readback
+    # mismatch.  Treat it as repairable unless the repair script has explicitly
+    # classified it as a local payload mismatch.
+    "readback_hash_mismatch",
+}
+NON_RETRYABLE_READBACK_STATUSES = {"local_payload_mismatch_for_existing_tx"}
 
 
 def utc_now() -> str:
@@ -75,17 +85,33 @@ def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
     if capsule.get("payload_sha256") and capsule.get("readback_sha256"):
         if capsule["payload_sha256"] == capsule["readback_sha256"]:
             return False
-    # A result marked retryable (e.g. empty readback from gateway failure)
-    # should be retried, not treated as a hard failure.
+    # A result marked retryable should be retried, not treated as a hard failure.
     if capsule.get("retryable") is True:
         return False
     return True
+
+
+def capsule_needs_fresh_upload(capsule: dict[str, Any] | None) -> bool:
+    """Return whether the existing tx is exhausted and should be superseded.
+
+    A valid same-heartbeat capsule read back with a different hash means the
+    existing Arweave tx cannot verify this local payload.  Because the capsule is
+    mirror/archive material, the safe recovery is to preserve the failed result
+    in git history and write a fresh upload-result for a new tx.
+    """
+    if capsule_status(capsule) != "readback_hash_mismatch":
+        return False
+    return capsule.get("next_action") == "fresh_upload_required"
 
 
 def capsule_needs_readback_repair(capsule: dict[str, Any] | None) -> bool:
     status = capsule_status(capsule)
     if status in NON_RETRYABLE_READBACK_STATUSES:
         return False
+    if capsule_needs_fresh_upload(capsule):
+        return False
+    if status == "readback_hash_mismatch":
+        return bool(capsule_txid(capsule)) and capsule.get("hash_match") is not True
     return bool(capsule_txid(capsule)) and capsule.get("hash_match") is not True and capsule.get("retryable") is not False and status in PENDING_READBACK_STATUSES
 
 
@@ -173,6 +199,22 @@ def build_payload(latest: dict[str, Any], chain_tip: dict[str, Any], ots: dict[s
     }
 
 
+def write_payload_and_ready_outputs(
+    latest: dict[str, Any],
+    chain_tip: dict[str, Any],
+    ots: dict[str, Any],
+    capsule_path: Path,
+    common_outputs: dict[str, str],
+    skip_reason: str = "",
+) -> int:
+    payload = build_payload(latest, chain_tip, ots)
+    CAPSULE_DIR.mkdir(parents=True, exist_ok=True)
+    capsule_path.write_text(dump_json(payload), encoding="utf-8")
+    write_github_output({**common_outputs, "capsule_status": "ready", "capsule_upload_needed": "true", "capsule_readback_repair_needed": "false", "capsule_skip_reason": skip_reason})
+    print(repo_rel(capsule_path))
+    return 0
+
+
 def main() -> int:
     status = read_json(STATUS)
     latest = status.get("latest_heartbeat")
@@ -212,6 +254,10 @@ def main() -> int:
         write_github_output({**common_outputs, "capsule_status": existing_status, "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_hard_failure": "true", "capsule_skip_reason": "existing_non_retryable_arweave_capsule_result"})
         return 0
 
+    if capsule_needs_fresh_upload(existing_result):
+        print(f"::warning::Existing Arweave transaction for {heartbeat_id} cannot verify the local capsule; preparing a fresh upload.")
+        return write_payload_and_ready_outputs(latest, chain_tip, ots, capsule_path, common_outputs, "existing_readback_hash_mismatch_fresh_upload_required")
+
     if capsule_needs_readback_repair(existing_result):
         if capsule_path.exists():
             print(f"::notice::Existing Arweave transaction for {heartbeat_id} needs readback repair; upload skipped.")
@@ -221,12 +267,7 @@ def main() -> int:
         write_github_output({**common_outputs, "capsule_status": "missing_payload_for_existing_tx", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_hard_failure": "true", "capsule_repair_txid": str(capsule_txid(existing_result)), "capsule_skip_reason": "existing_arweave_tx_without_local_capsule_payload"})
         return 0
 
-    payload = build_payload(latest, chain_tip, ots)
-    CAPSULE_DIR.mkdir(parents=True, exist_ok=True)
-    capsule_path.write_text(dump_json(payload), encoding="utf-8")
-    write_github_output({**common_outputs, "capsule_status": "ready", "capsule_upload_needed": "true", "capsule_readback_repair_needed": "false", "capsule_skip_reason": ""})
-    print(repo_rel(capsule_path))
-    return 0
+    return write_payload_and_ready_outputs(latest, chain_tip, ots, capsule_path, common_outputs)
 
 
 if __name__ == "__main__":
