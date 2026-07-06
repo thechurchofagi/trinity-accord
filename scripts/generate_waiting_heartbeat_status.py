@@ -208,19 +208,25 @@ def compute_heartbeat_summary(
     attempt_dates: set[date] = set()
     failed_attempt_dates: set[date] = set()
     pending_append_date_set: set[date] = set()
-    rejected_dates: set[date] = set()
-    # Scan rejected directory to exclude rejected pending appends
+    # Build set of receipt_ids that have been rejected (from receipt-status files)
+    rejected_receipt_ids: set[str] = set()
+    receipt_status_dir = ROOT / "record-chain" / "receipt-status"
+    if receipt_status_dir.is_dir():
+        for rs_file in receipt_status_dir.glob("*.json"):
+            rs_data = read_json(rs_file)
+            if rs_data.get("append_status") == "rejected":
+                rid = rs_data.get("receipt_id", "")
+                if rid:
+                    rejected_receipt_ids.add(rid)
+    # Also scan rejected directory for pending files that were rejected
     rejected_dir = ROOT / "record-chain" / "rejected"
+    rejected_pending_stems: set[str] = set()
     if rejected_dir.is_dir():
         for rej_file in rejected_dir.glob("*.rejection.json"):
             rej_data = read_json(rej_file)
-            rej_date = parse_heartbeat_date(rej_data.get("heartbeat_date"))
-            if rej_date is None:
-                # Try to extract from source_pending filename
-                source = rej_data.get("source_pending", "")
-                rej_date = heartbeat_date_from_id(source) if source else None
-            if rej_date is not None:
-                rejected_dates.add(rej_date)
+            source = rej_data.get("source_pending", "")
+            if source:
+                rejected_pending_stems.add(source.rsplit(".", 1)[0] if "." in source else source)
     for attempt in attempts:
         observed = observed_heartbeat_date(attempt)
         if observed is None:
@@ -228,8 +234,17 @@ def compute_heartbeat_summary(
         attempt_dates.add(observed)
         if attempt_failed(attempt):
             failed_attempt_dates.add(observed)
-        if attempt_pending_append(attempt) and observed not in rejected_dates:
-            pending_append_date_set.add(observed)
+        if attempt_pending_append(attempt):
+            # Exclude if this specific attempt's receipt was rejected
+            attempt_receipt = str(attempt.get("receipt_id", ""))
+            attempt_pending = str(attempt.get("pending_file_path", ""))
+            attempt_pending_stem = attempt_pending.rsplit(".", 1)[0] if "." in attempt_pending else attempt_pending
+            is_rejected = (
+                (attempt_receipt and attempt_receipt in rejected_receipt_ids)
+                or (attempt_pending_stem and attempt_pending_stem in rejected_pending_stems)
+            )
+            if not is_rejected:
+                pending_append_date_set.add(observed)
 
     observed_dates = set(records_by_date) | attempt_dates | capsule_dates
     if not observed_dates:
@@ -388,11 +403,7 @@ def main() -> int:
 
     heartbeat_summary = compute_heartbeat_summary(records, attempts, capsules, key_manifest, ots_covers_latest, expected_heartbeat_date())
 
-    if heartbeat_summary.get("is_stale") is True:
-        daily_alive_status = "failed"
-        latest_result = "missing_expected_waiting_heartbeat"
-        failure_stage = "freshness"
-    elif final_record_exists and not key_continuity_ok:
+    if final_record_exists and not key_continuity_ok:
         daily_alive_status = "failed"
         latest_result = "key_continuity_failed"
         failure_stage = "key_continuity"
@@ -400,6 +411,10 @@ def main() -> int:
         daily_alive_status = "degraded"
         latest_result = "submitted_pending_append"
         failure_stage = "append_queue"
+    elif heartbeat_summary.get("is_stale") is True:
+        daily_alive_status = "failed"
+        latest_result = "missing_expected_waiting_heartbeat"
+        failure_stage = "freshness"
     elif final_record_exists and ots_covers_latest:
         daily_alive_status = "success"
         if arweave_verified:
