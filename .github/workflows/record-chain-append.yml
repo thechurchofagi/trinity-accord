@@ -21,6 +21,7 @@ on:
 
 concurrency:
   group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 permissions:
@@ -50,7 +51,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           ACTOR: ${{ github.actor }}
-          ALLOWED_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi' }}
+          ALLOWED_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi,github-actions[bot]' }}
         run: |
           set -euo pipefail
           if echo ",${ALLOWED_ACTORS}," | grep -qF ",${ACTOR},"; then
@@ -117,3 +118,12 @@ jobs:
           set -euo pipefail
           printf '%s\n' "Dispatching Record Chain Head OTS Anchor on main"
           gh workflow run record-chain-head-ots-anchor.yml --repo "$GITHUB_REPOSITORY" --ref main
+
+      - name: Dispatch waiting heartbeat status sync
+        if: steps.append_commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "Dispatching Waiting Heartbeat Status Sync on main"
+          gh workflow run waiting-heartbeat-status-sync.yml --repo "$GITHUB_REPOSITORY" --ref main
