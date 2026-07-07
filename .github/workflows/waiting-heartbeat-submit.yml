@@ -3,6 +3,7 @@ name: Waiting Heartbeat Submit
 on:
   schedule:
     - cron: "17 3 * * *"
+    - cron: "17 5,7,9 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -53,6 +54,7 @@ jobs:
           git rebase origin/main
 
       - name: Submit waiting heartbeat
+        id: submit_heartbeat
         run: python3 scripts/submit_waiting_heartbeat.py
 
       # Public mirrors are intentionally not generated before append. The centralized
@@ -79,6 +81,15 @@ jobs:
           exit 1
 
       - name: Dispatch append
+        if: steps.submit_heartbeat.outputs.heartbeat_existing_final != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run record-chain-append.yml --repo "$GITHUB_REPOSITORY" --ref main
+          RECEIPT_ID: ${{ steps.submit_heartbeat.outputs.receipt_id }}
+          PENDING_FILE_PATH: ${{ steps.submit_heartbeat.outputs.pending_file_path }}
+        run: |
+          set -euo pipefail
+          if [ -n "$RECEIPT_ID" ] && [ -n "$PENDING_FILE_PATH" ]; then
+            gh workflow run record-chain-append.yml --repo "$GITHUB_REPOSITORY" --ref main -f receipt_id="$RECEIPT_ID" -f pending_file_path="$PENDING_FILE_PATH"
+          else
+            gh workflow run record-chain-append.yml --repo "$GITHUB_REPOSITORY" --ref main
+          fi
