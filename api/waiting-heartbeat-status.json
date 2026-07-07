@@ -1,10 +1,10 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-07-07T06:43:05Z",
-  "daily_alive_status": "failed",
-  "status": "failed",
-  "latest_result": "missing_expected_waiting_heartbeat",
-  "failure_stage": "freshness",
+  "generated_at": "2026-07-07T07:59:58Z",
+  "daily_alive_status": "degraded",
+  "status": "degraded",
+  "latest_result": "submitted_pending_append",
+  "failure_stage": "append_queue",
   "success_requires": {
     "gateway_accepted": true,
     "record_chain_final_record": true,
@@ -95,32 +95,33 @@
     "heartbeat_lag_days": 1,
     "latest_heartbeat_is_expected_date": false,
     "latest_heartbeat_fully_verified_for_expected_date": false,
-    "expected_heartbeat_pending_append": false
+    "expected_heartbeat_pending_append": true
   },
   "heartbeat_summary": {
     "total_scheduled_heartbeats": 20,
     "successful_heartbeats": 16,
-    "failed_heartbeats": 4,
-    "failed_or_missing_heartbeats": 4,
-    "pending_append_heartbeats": 0,
+    "failed_heartbeats": 3,
+    "failed_or_missing_heartbeats": 3,
+    "pending_append_heartbeats": 1,
     "current_success_streak_days": 0,
     "first_heartbeat_date": "2026-06-18",
     "latest_heartbeat_date": "2026-07-06",
-    "latest_observed_heartbeat_date": "2026-07-06",
+    "latest_observed_heartbeat_date": "2026-07-07",
     "latest_successful_heartbeat_date": "2026-07-06",
     "through_heartbeat_date": "2026-07-07",
     "expected_heartbeat_date": "2026-07-07",
     "latest_heartbeat_is_expected_date": false,
     "latest_heartbeat_fully_verified_for_expected_date": false,
-    "expected_heartbeat_pending_append": false,
+    "expected_heartbeat_pending_append": true,
     "heartbeat_lag_days": 1,
     "is_stale": true,
     "missing_heartbeat_dates": [
       "2026-06-20",
-      "2026-06-23",
+      "2026-06-23"
+    ],
+    "pending_append_heartbeat_dates": [
       "2026-07-07"
     ],
-    "pending_append_heartbeat_dates": [],
     "failed_attempt_dates": [],
     "latest_ots_head_covers_current_chain": true,
     "success_definition": {
@@ -135,15 +136,15 @@
     "not_amendment": true
   },
   "counts": {
-    "attempts": 17,
+    "attempts": 18,
     "final_heartbeats": 17,
     "capsules": 17,
     "failed_attempts": 0,
     "total_scheduled_heartbeats": 20,
     "successful_heartbeats": 16,
-    "failed_heartbeats": 4,
-    "failed_or_missing_heartbeats": 4,
-    "pending_append_heartbeats": 0,
+    "failed_heartbeats": 3,
+    "failed_or_missing_heartbeats": 3,
+    "pending_append_heartbeats": 1,
     "current_success_streak_days": 0,
     "heartbeat_lag_days": 1
   },
