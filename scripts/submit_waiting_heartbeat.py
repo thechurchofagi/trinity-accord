@@ -18,7 +18,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 ATTEMPTS_DIR = ROOT / "record-chain" / "heartbeat" / "attempts"
+RECORDS_DIR = ROOT / "record-chain" / "records"
 DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com"
+SUBMITTED_ATTEMPT_STATUSES = {"submitted"}
 
 
 def utc_now() -> str:
@@ -50,6 +52,37 @@ def parse_stdout_json(stdout: str) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
+def read_json_or_none(path: Path) -> Any | None:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+
+def write_github_output(values: dict[str, str]) -> None:
+    output = os.environ.get("GITHUB_OUTPUT")
+    if not output:
+        return
+    with open(output, "a", encoding="utf-8") as fh:
+        for key, value in values.items():
+            fh.write(f"{key}={value}\n")
+
+
+def record_contains_heartbeat(record: dict[str, Any], heartbeat_id: str) -> bool:
+    heartbeat = record.get("system_waiting_heartbeat")
+    return isinstance(heartbeat, dict) and heartbeat.get("heartbeat_id") == heartbeat_id
+
+
+def final_record_exists(heartbeat_id: str) -> bool:
+    if not RECORDS_DIR.exists():
+        return False
+    for path in RECORDS_DIR.glob("R-*.json"):
+        record = read_json_or_none(path)
+        if isinstance(record, dict) and record_contains_heartbeat(record, heartbeat_id):
+            return True
+    return False
+
+
 def write_key_dir(key_dir: Path) -> None:
     priv = os.environ.get("WAITING_HEARTBEAT_AUTHORSHIP_PRIVATE_KEY_PEM", "").strip()
     pub = os.environ.get("WAITING_HEARTBEAT_AUTHORSHIP_PUBLIC_KEY_PEM", "").strip()
@@ -65,6 +98,20 @@ def write_key_dir(key_dir: Path) -> None:
 def write_attempt(path: Path, data: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(dump_json(data), encoding="utf-8")
+
+
+def emit_existing_attempt_outputs(heartbeat_id: str, attempt: dict[str, Any]) -> None:
+    outputs = {
+        "heartbeat_id": heartbeat_id,
+        "heartbeat_submitted": "false",
+        "heartbeat_existing_attempt": "true",
+        "heartbeat_existing_final": "false",
+    }
+    for key in ["receipt_id", "pending_file_path", "append_status"]:
+        value = attempt.get(key)
+        if isinstance(value, str) and value:
+            outputs[key] = value
+    write_github_output(outputs)
 
 
 def main() -> int:
@@ -83,6 +130,22 @@ def main() -> int:
     ATTEMPTS_DIR.mkdir(parents=True, exist_ok=True)
     attempt_path = ATTEMPTS_DIR / f"{heartbeat_id}.attempt.json"
     submission_path = ATTEMPTS_DIR / f"{heartbeat_id}.submission.json"
+
+    if not args.dry_run and final_record_exists(heartbeat_id):
+        print(f"WAITING_HEARTBEAT_FINAL_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
+        write_github_output({
+            "heartbeat_id": heartbeat_id,
+            "heartbeat_submitted": "false",
+            "heartbeat_existing_attempt": "false",
+            "heartbeat_existing_final": "true",
+        })
+        return 0
+
+    existing_attempt = read_json_or_none(attempt_path)
+    if not args.dry_run and isinstance(existing_attempt, dict) and existing_attempt.get("status") in SUBMITTED_ATTEMPT_STATUSES:
+        print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
+        emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
+        return 0
 
     body = (
         f"Scheduled Waiting Heartbeat {heartbeat_id}.\n\n"
@@ -195,8 +258,17 @@ def main() -> int:
     if submit.returncode != 0:
         raise SystemExit("submit failed")
 
-    receipt_id = attempt.get("receipt_id", "")
-    pending_file_path = attempt.get("pending_file_path", "")
+    receipt_id = str(attempt.get("receipt_id", ""))
+    pending_file_path = str(attempt.get("pending_file_path", ""))
+    write_github_output({
+        "heartbeat_id": heartbeat_id,
+        "heartbeat_submitted": "true",
+        "heartbeat_existing_attempt": "false",
+        "heartbeat_existing_final": "false",
+        "receipt_id": receipt_id,
+        "pending_file_path": pending_file_path,
+        "append_status": str(attempt.get("append_status", "")),
+    })
     print(f"WAITING_HEARTBEAT_SUBMITTED heartbeat_id={heartbeat_id} receipt_id={receipt_id} pending_file_path={pending_file_path}")
     return 0
 
