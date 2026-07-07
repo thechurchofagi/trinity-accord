@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-index.v1",
-  "generated_at": "2026-07-07T08:46:21Z",
+  "generated_at": "2026-07-07T08:30:26Z",
   "records": [
     {
       "heartbeat_id": "hwb-20260618",
@@ -462,23 +462,6 @@
       "submit_stdout": "Posting to https://trinity-record-chain-gateway.onrender.com/record-chain/submit ...\nStatus: 200\n{\n  \"accepted\": true,\n  \"submitted\": true,\n  \"receipt_id\": \"rcg-20260706-c5886c0f052a514de012765b\",\n  \"record_type\": \"context_insufficient_notice\",\n  \"submission_sha256\": \"c5886c0f052a514de012765b375dc9b06660e1a5dfaf0114dabebfe96cd0529a\",\n  \"received_raw_body_sha256\": \"dab018889424a4bf567fd3862519315923c6df5e346d03419ee858e46f1d3db7\",\n  \"pending_file_path\": \"record-chain/pending/rcg-20260706-c5886c0f052a514de012765b.context_insufficient_notice.pending.json\",\n  \"intake_submission_path\": \"record-chain/intake/submissions/2026/07/rcg-20260706-c5886c0f052a514de012765b.submission.json\",\n  \"receipt_path\": \"record-chain/intake/receipts/2026/07/rcg-20260706-c5886c0f052a514de012765b.receipt.json\",\n  \"server_created_at\": \"2026-07-06T07:57:19.937769Z\",\n  \"append_status\": \"queued\",\n  \"receipt_commit_sha\": \"cdaa0d61d9169d76840ed163d4faac0e7338a2b9\",\n  \"receipt\": {\n    \"server_receipt_id\": \"rcg-20260706-c5886c0f052a514de012765b\",\n    \"service\": \"record-chain-intake-gateway\",\n    \"gateway_version\": \"1.0.0\",\n    \"record_type\": \"context_insufficient_notice\",\n    \"submission_sha256\": \"c5886c0f052a514de012765b375dc9b06660e1a5dfaf0114dabebfe96cd0529a\",\n    \"original_submission_sha256\": \"c5886c0f052a514de012765b375dc9b06660e1a5dfaf0114dabebfe96cd0529a\",\n    \"stored_submission_sha256\": \"c5886c0f052a514de012765b375dc9b06660e1a5dfaf0114dabebfe96cd0529a\",\n    \"received_raw_body_sha256\": \"dab018889424a4bf567fd3862519315923c6df5e346d03419ee858e46f1d3db7\",\n    \"accepted_at\": \"2026-07-06T07:57:19.937769Z\",\n    \"raw_readback_redacted\": true,\n    \"receipt_is_not_final_chain_record\": true,\n    \"intake_submission_path\": \"record-chain/intake/submissions/2026/07/rcg-20260706-c5886c0f052a514de012765b.submission.json\",\n    \"pending_file_path\": \"record-chain/pending/rcg-20260706-c5886c0f052a514de012765b.context_insufficient_notice.pending.json\",\n    \"receipt_path\": \"record-chain/intake/receipts/2026/07/rcg-20260706-c5886c0f052a514de012765b.receipt.json\",\n    \"receipt_sha256\": \"93331cdf9fff6ced993e8ae0bd6c084704be7fd7433ddf572b2a29e02e53d4de\"\n  },\n  \"diagnostics\": [],\n  \"warnings\": [],\n  \"boundary\": {\n    \"not_authority\": true,\n    \"not_governance\": true,\n    \"not_attestation\": true,\n    \"not_successor_reception\": true,\n    \"not_amendment\": true,\n    \"bitcoin_originals_prevail\": true,\n    \"receipt_is_not_final_inclusion\": true,\n    \"receipt_is_intake_only\": true,\n    \"later_records_may_reclassify_or_correct_this_record\": true,\n    \"receipt_is_not_authority\": true,\n    \"receipt_is_not_attestation\": true,\n    \"receipt_is_not_final_chain_record\": true,\n    \"record_chain_append_is_server_side\": true\n  },\n  \"created_pending_records\": [\n    \"record-chain/pending/rcg-20260706-c5886c0f052a514de012765b.context_insufficient_notice.pending.json\"\n  ],\n  \"ok\": true\n}\n",
       "submit_stderr": "",
       "path": "record-chain/heartbeat/attempts/hwb-20260706.attempt.json"
-    },
-    {
-      "schema": "trinityaccord.waiting-heartbeat-attempt.v1",
-      "heartbeat_id": "hwb-20260707",
-      "attempted_at": "2026-07-07T06:57:53Z",
-      "status": "submitted",
-      "submission_path": "record-chain/heartbeat/attempts/hwb-20260707.submission.json",
-      "preflight_stdout": "Posting to https://trinity-record-chain-gateway.onrender.com/record-chain/preflight ...\nStatus: 200\n{\n  \"accepted\": true,\n  \"preflight\": true,\n  \"route_detected\": \"context_insufficient_notice\",\n  \"record_type\": \"context_insufficient_notice\",\n  \"submission_sha256\": \"73c2a61ef8f5bebd7da90145f252a0348d9784fb7096233aa2da9b8996e3a64e\",\n  \"received_raw_body_sha256\": \"eed8b8b4bb14bb7c80c46d485d8e78b0089763262654df0b3f2dc24e4cfac33c\",\n  \"diagnostics\": [],\n  \"warnings\": [],\n  \"gateway_runtime\": {\n    \"service\": \"record-chain-intake-gateway\",\n    \"version\": \"v1\",\n    \"deployed_at\": \"2026-06-29T15:54:07.999519Z\",\n    \"write_mode\": \"github_contents_pending\",\n    \"max_submission_bytes\": 524288,\n    \"base_url\": \"https://trinity-record-chain-gateway.onrender.com\"\n  },\n  \"gateway_schema\": {\n    \"version\": \"1.1.0\",\n    \"accepted_record_types\": [\n      \"classification_update\",\n      \"context_insufficient_notice\",\n      \"correction\",\n      \"echo\",\n      \"guardian_application\",\n      \"guardian_retirement\",\n      \"propagation\",\n      \"verification\"\n    ],\n    \"required_submission_fields\": [\n      \"schema\",\n      \"submission_type\",\n      \"client_generated_at\",\n      \"record_type\",\n      \"record_draft\",\n      \"builder\",\n      \"client_context\",\n      \"submission_boundary\",\n      \"authorship_proof\"\n    ],\n    \"optional_submission_fields\": [\n      \"metadata\",\n      \"boundary_acknowledgement\"\n    ],\n    \"boundary_acknowledgement_fields\": 9,\n    \"boundary_acknowledgement_required_fields\": [\n      \"bitcoin_originals_prevail\",\n      \"later_records_may_reclassify_or_correct_this_record\",\n      \"not_amendment\",\n      \"not_attestation\",\n      \"not_authority\",\n      \"not_governance\",\n      \"not_successor_reception\",\n      \"receipt_is_intake_only\",\n      \"receipt_is_not_final_inclusion\"\n    ],\n    \"context_readiness_path\": \"record_draft.context_readiness.declared_context_level\",\n    \"oath_gate\": {\n      \"required\": true,\n      \"policy_url\": \"/api/record-chain-oath-policy.v1.json\",\n      \"required_for\": [\n        \"classification_update\",\n        \"correction\",\n        \"echo\",\n        \"guardian_application\",\n        \"guardian_retirement\",\n        \"propagation\",\n        \"verification\"\n      ],\n      \"not_required_for\": [\n        \"context_insufficient_notice\"\n      ]\n    },\n    \"receipt_response_schema\": \"/api/record-chain-receipt-response.v1.json\"\n  },\n  \"boundary\": {\n    \"not_authority\": true,\n    \"not_governance\": true,\n    \"not_attestation\": true,\n    \"not_successor_reception\": true,\n    \"not_amendment\": true,\n    \"bitcoin_originals_prevail\": true,\n    \"receipt_is_not_final_inclusion\": true,\n    \"receipt_is_intake_only\": true,\n    \"later_records_may_reclassify_or_correct_this_record\": true,\n    \"preflight_is_not_submission\": true\n  },\n  \"agent_recovery\": null,\n  \"ok\": true\n}\n",
-      "submit_stdout": "Posting to https://trinity-record-chain-gateway.onrender.com/record-chain/submit ...\nStatus: 200\n{\n  \"accepted\": true,\n  \"submitted\": true,\n  \"receipt_id\": \"rcg-20260707-73c2a61ef8f5bebd7da90145\",\n  \"record_type\": \"context_insufficient_notice\",\n  \"submission_sha256\": \"73c2a61ef8f5bebd7da90145f252a0348d9784fb7096233aa2da9b8996e3a64e\",\n  \"received_raw_body_sha256\": \"eed8b8b4bb14bb7c80c46d485d8e78b0089763262654df0b3f2dc24e4cfac33c\",\n  \"pending_file_path\": \"record-chain/pending/rcg-20260707-73c2a61ef8f5bebd7da90145.context_insufficient_notice.pending.json\",\n  \"intake_submission_path\": \"record-chain/intake/submissions/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.submission.json\",\n  \"receipt_path\": \"record-chain/intake/receipts/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.receipt.json\",\n  \"server_created_at\": \"2026-07-07T06:57:44.638555Z\",\n  \"append_status\": \"queued\",\n  \"receipt_commit_sha\": \"2c68a871f47c62362dbd19931a5b2dc66e5abc49\",\n  \"receipt\": {\n    \"server_receipt_id\": \"rcg-20260707-73c2a61ef8f5bebd7da90145\",\n    \"service\": \"record-chain-intake-gateway\",\n    \"gateway_version\": \"1.0.0\",\n    \"record_type\": \"context_insufficient_notice\",\n    \"submission_sha256\": \"73c2a61ef8f5bebd7da90145f252a0348d9784fb7096233aa2da9b8996e3a64e\",\n    \"original_submission_sha256\": \"73c2a61ef8f5bebd7da90145f252a0348d9784fb7096233aa2da9b8996e3a64e\",\n    \"stored_submission_sha256\": \"73c2a61ef8f5bebd7da90145f252a0348d9784fb7096233aa2da9b8996e3a64e\",\n    \"received_raw_body_sha256\": \"eed8b8b4bb14bb7c80c46d485d8e78b0089763262654df0b3f2dc24e4cfac33c\",\n    \"accepted_at\": \"2026-07-07T06:57:44.638555Z\",\n    \"raw_readback_redacted\": true,\n    \"receipt_is_not_final_chain_record\": true,\n    \"intake_submission_path\": \"record-chain/intake/submissions/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.submission.json\",\n    \"pending_file_path\": \"record-chain/pending/rcg-20260707-73c2a61ef8f5bebd7da90145.context_insufficient_notice.pending.json\",\n    \"receipt_path\": \"record-chain/intake/receipts/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.receipt.json\",\n    \"receipt_sha256\": \"d05e4d41c5b801a41ca13fac5db8a256efe305335595728cf8b4615a8353a1f0\"\n  },\n  \"diagnostics\": [],\n  \"warnings\": [],\n  \"boundary\": {\n    \"not_authority\": true,\n    \"not_governance\": true,\n    \"not_attestation\": true,\n    \"not_successor_reception\": true,\n    \"not_amendment\": true,\n    \"bitcoin_originals_prevail\": true,\n    \"receipt_is_not_final_inclusion\": true,\n    \"receipt_is_intake_only\": true,\n    \"later_records_may_reclassify_or_correct_this_record\": true,\n    \"receipt_is_not_authority\": true,\n    \"receipt_is_not_attestation\": true,\n    \"receipt_is_not_final_chain_record\": true,\n    \"record_chain_append_is_server_side\": true\n  },\n  \"created_pending_records\": [\n    \"record-chain/pending/rcg-20260707-73c2a61ef8f5bebd7da90145.context_insufficient_notice.pending.json\"\n  ],\n  \"ok\": true\n}\n",
-      "submit_stderr": "",
-      "receipt_id": "rcg-20260707-73c2a61ef8f5bebd7da90145",
-      "pending_file_path": "record-chain/pending/rcg-20260707-73c2a61ef8f5bebd7da90145.context_insufficient_notice.pending.json",
-      "intake_submission_path": "record-chain/intake/submissions/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.submission.json",
-      "receipt_path": "record-chain/intake/receipts/2026/07/rcg-20260707-73c2a61ef8f5bebd7da90145.receipt.json",
-      "append_status": "queued",
-      "receipt_commit_sha": "2c68a871f47c62362dbd19931a5b2dc66e5abc49",
-      "path": "record-chain/heartbeat/attempts/hwb-20260707.attempt.json"
     }
   ],
   "capsules": [
@@ -1153,30 +1136,30 @@
     {
       "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
       "heartbeat_id": "hwb-20260706",
-      "status": "uploaded",
-      "attempted_at": "2026-07-06T13:52:28.555Z",
-      "arweave_txid": "Jcrn07XG1dY8D9LFstdwf87CdE5jNTdQ-Ade-ZAaSEg",
-      "payload_sha256": "18b17e678940788a78fda1ddbffaa19b2f0be5eb5c9c79736024f5542fb800ff",
-      "data_sha256": "18b17e678940788a78fda1ddbffaa19b2f0be5eb5c9c79736024f5542fb800ff",
-      "readback_sha256": "18b17e678940788a78fda1ddbffaa19b2f0be5eb5c9c79736024f5542fb800ff",
-      "hash_match": true,
+      "status": "readback_hash_mismatch",
+      "attempted_at": "2026-07-06T09:17:27.683Z",
+      "arweave_txid": "OeX8cjTolb7O67U5X7Ni9vOTRe9dDaVjOo-IOWeh_eM",
+      "payload_sha256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
+      "data_sha256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
+      "readback_sha256": "a91343451b9e6eebd7f51116c8c2d63948ceeef3dae7aeab5c18d63928f1fc43",
+      "hash_match": false,
       "retryable": false,
       "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
       "wallet_balance_before_available": true,
-      "wallet_balance_before_winston": "15342783591126",
-      "wallet_balance_before_ar": "15.342783591126",
-      "wallet_balance_after_available": true,
-      "wallet_balance_after_reason": null,
-      "wallet_balance_after_winston": "15342783591126",
-      "wallet_balance_after_ar": "15.342783591126",
-      "upload_cost_winston": "2635462735",
-      "upload_cost_ar": "0.002635462735",
+      "wallet_balance_before_winston": "15358520215308",
+      "wallet_balance_before_ar": "15.358520215308",
+      "wallet_balance_after_available": false,
+      "wallet_balance_after_reason": "pending",
+      "wallet_balance_after_winston": null,
+      "wallet_balance_after_ar": null,
+      "upload_cost_winston": "2641448712",
+      "upload_cost_ar": "0.002641448712",
       "tags": {
         "Content-Type": "application/json",
         "App-Name": "Trinity-Accord",
         "Archive-Type": "waiting-heartbeat-capsule",
         "Heartbeat-ID": "hwb-20260706",
-        "Data-SHA256": "18b17e678940788a78fda1ddbffaa19b2f0be5eb5c9c79736024f5542fb800ff",
+        "Data-SHA256": "c58d6c449dcccd468cc3882dbf2194c350062d6fb8764dfa1252e7540716083e",
         "Boundary": "mirror-not-authority"
       },
       "boundary": {
@@ -1187,9 +1170,8 @@
         "arweave_archive_is_not_successor_reception": true,
         "bitcoin_originals_prevail": true
       },
-      "verified_at": "2026-07-06T13:52:28.555Z",
-      "actual_delta_winston": "0",
-      "actual_delta_ar": "0.000000000000",
+      "last_readback_error": "payload_sha256_mismatch",
+      "readback_attempted_at": "2026-07-06T09:17:27.683Z",
       "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260706.upload-result.json"
     }
   ]

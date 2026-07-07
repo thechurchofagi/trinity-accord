@@ -35,8 +35,8 @@ def test_main_writers_use_shared_lock_and_safe_rebase():
         if "group: main-write-lock" not in text:
             offenders.append(f"{rel}: main writer must use concurrency group main-write-lock")
 
-        if rel.as_posix() == ".github/workflows/auto-sitemap.yml" and "queue: max" not in text:
-            offenders.append(f"{rel}: push-triggered sitemap writer must use queue: max so it cannot replace a pending main writer")
+        if "group: main-write-lock" in text and "queue: max" not in text:
+            offenders.append(f"{rel}: main-write-lock workflow must use queue: max to prevent replacing pending runs")
 
         if "git pull --rebase" in text:
             offenders.append(f"{rel}: main writer must not use git pull --rebase; use fetch + rebase origin/main")
@@ -90,6 +90,14 @@ def test_archive_workflow_rebuilds_after_rebase():
     ]
     missing = [item for item in required if item not in text]
     assert not missing, f"{path}: missing archive retry safety pieces: {missing}"
+
+
+def test_append_workflow_allows_internal_actions_dispatch():
+    path = WORKFLOWS / "record-chain-append.yml"
+    text = path.read_text(encoding="utf-8")
+    assert "github-actions[bot]" in text, f"{path}: must allow github-actions[bot] for internal dispatch"
+    assert "workflow_dispatch" in text, f"{path}: must support workflow_dispatch trigger"
+    assert "Authorize write workflow actor" in text, f"{path}: must have actor authorization gate"
 
 
 def test_record_chain_index_writers_stage_overlay_mirror():

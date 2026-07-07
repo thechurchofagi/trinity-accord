@@ -16,6 +16,7 @@ permissions:
 
 concurrency:
   group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -143,3 +144,12 @@ jobs:
           set -euo pipefail
           printf '%s\n' "Dispatching Record Chain Arweave Archive in live mode"
           gh workflow run record-chain-arweave-archive.yml --repo "${GITHUB_REPOSITORY}" --ref main -f upload_mode=live
+
+      - name: Dispatch waiting heartbeat status sync
+        if: steps.ots_commit.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "Dispatching Waiting Heartbeat Status Sync on main"
+          gh workflow run waiting-heartbeat-status-sync.yml --repo "$GITHUB_REPOSITORY" --ref main
