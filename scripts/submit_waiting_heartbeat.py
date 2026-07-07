@@ -350,13 +350,36 @@ def main() -> int:
         saved_submission = existing_submission_path(existing_attempt)
 
         # Case 1: submitted + not rejected → skip (idempotent)
+        # BUT: if final record exists with wrong key, allow resubmission
         if (
             existing_attempt.get("status") in SUBMITTED_ATTEMPT_STATUSES
             and not attempt_append_was_rejected(existing_attempt)
         ):
-            print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
-            emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
-            return 0
+            # If a final record exists, verify key continuity before skipping
+            if final_record_exists(heartbeat_id):
+                print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; final record with correct key exists; skipping")
+                emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
+                return 0
+            # No final record with correct key yet — check if one exists with wrong key
+            # If so, don't skip; allow resubmission to fix key continuity
+            expected_key = expected_heartbeat_public_key_sha256()
+            if expected_key and RECORDS_DIR.exists():
+                for rpath in RECORDS_DIR.glob("R-*.json"):
+                    record = read_json_or_none(rpath)
+                    if isinstance(record, dict) and record_contains_heartbeat(record, heartbeat_id):
+                        actual_key = record_authorship_public_key_sha256(record)
+                        if actual_key and actual_key != expected_key:
+                            print(f"WAITING_HEARTBEAT_KEY_MISMATCH heartbeat_id={heartbeat_id}; allowing resubmission")
+                            break
+                else:
+                    # No final record at all — submitted attempt still valid, skip
+                    print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
+                    emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
+                    return 0
+            else:
+                print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
+                emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
+                return 0
 
         # Case 2: submit_failed with saved submission → retry without rebuilding
         if should_retry_saved_submission(existing_attempt) and saved_submission is not None:
