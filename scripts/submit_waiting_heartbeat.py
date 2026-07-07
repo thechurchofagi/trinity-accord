@@ -326,12 +326,6 @@ def main() -> int:
         })
         return 0
 
-    existing_attempt = read_json_or_none(attempt_path)
-    if not args.dry_run and isinstance(existing_attempt, dict) and existing_attempt.get("status") in SUBMITTED_ATTEMPT_STATUSES:
-        print(f"WAITING_HEARTBEAT_ATTEMPT_EXISTS heartbeat_id={heartbeat_id}; skipping duplicate submission")
-        emit_existing_attempt_outputs(heartbeat_id, existing_attempt)
-        return 0
-
     body = (
         f"Scheduled Waiting Heartbeat {heartbeat_id}.\n\n"
         "The Trinity Accord public Record-Chain system is still waiting for the first "
