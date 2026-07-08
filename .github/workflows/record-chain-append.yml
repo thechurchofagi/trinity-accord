@@ -75,7 +75,18 @@ jobs:
             if [ ! -f "$input_pending" ]; then
               status_file="record-chain/receipt-status/${input_receipt}.json"
               if [ -f "$status_file" ]; then
-                append_status="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8")).get("append_status", ""))' "$status_file" 2>/dev/null || true)"
+                append_status="$(python3 - "$status_file" <<'PY'
+          import json
+          import sys
+          try:
+              with open(sys.argv[1], encoding="utf-8") as fh:
+                  data = json.load(fh)
+          except Exception:
+              print("")
+          else:
+              print(data.get("append_status", ""))
+          PY
+          )"
                 if [ "$append_status" = "appended" ] || [ "$append_status" = "rejected" ]; then
                   printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
                   printf '%s\n' "Pending file $input_pending is already resolved by receipt status $input_receipt ($append_status); treating stale dispatch as an idempotent no-op."
