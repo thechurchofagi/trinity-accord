@@ -75,22 +75,28 @@ jobs:
             if [ ! -f "$input_pending" ]; then
               status_file="record-chain/receipt-status/${input_receipt}.json"
               if [ -f "$status_file" ]; then
-                append_status="$(python3 - "$status_file" <<'PY'
+                status_meta="$(python3 - "$status_file" <<'PY'
           import json
           import sys
           try:
               with open(sys.argv[1], encoding="utf-8") as fh:
                   data = json.load(fh)
           except Exception:
-              print("")
+              print("|")
           else:
-              print(data.get("append_status", ""))
+              print(f"{data.get('append_status', '')}|{data.get('pending_file_path', '')}")
           PY
           )"
+                append_status="${status_meta%%|*}"
+                status_pending_path="${status_meta#*|}"
                 if [ "$append_status" = "appended" ] || [ "$append_status" = "rejected" ]; then
-                  printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
-                  printf '%s\n' "Pending file $input_pending is already resolved by receipt status $input_receipt ($append_status); treating stale dispatch as an idempotent no-op."
-                  exit 0
+                  if [ "$status_pending_path" = "$input_pending" ]; then
+                    printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
+                    printf '%s\n' "Pending file $input_pending is already resolved by receipt status $input_receipt ($append_status); treating stale dispatch as an idempotent no-op."
+                    exit 0
+                  fi
+                  printf '%s\n' "::error::receipt status $input_receipt resolves $status_pending_path, not requested pending file $input_pending"
+                  exit 1
                 fi
               fi
               printf '%s\n' "::error::pending file not found: $PWD/$input_pending"
