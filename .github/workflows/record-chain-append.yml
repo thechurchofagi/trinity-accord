@@ -69,8 +69,34 @@ jobs:
         id: append_run
         run: |
           set -euo pipefail
-          if [ -n "${{ github.event.inputs.pending_file_path }}" ] && [ -n "${{ github.event.inputs.receipt_id }}" ]; then
-            python scripts/trinity_record_chain.py append --pending-file "${{ github.event.inputs.pending_file_path }}" --receipt-id "${{ github.event.inputs.receipt_id }}" --allow-rejections
+          input_pending="${{ github.event.inputs.pending_file_path }}"
+          input_receipt="${{ github.event.inputs.receipt_id }}"
+          if [ -n "$input_pending" ] && [ -n "$input_receipt" ]; then
+            if [ ! -f "$input_pending" ]; then
+              status_file="record-chain/receipt-status/${input_receipt}.json"
+              if [ -f "$status_file" ]; then
+                append_status="$(python3 - "$status_file" <<'PY'
+          import json
+          import sys
+          try:
+              with open(sys.argv[1], encoding="utf-8") as fh:
+                  data = json.load(fh)
+          except Exception:
+              print("")
+          else:
+              print(data.get("append_status", ""))
+          PY
+          )"
+                if [ "$append_status" = "appended" ] || [ "$append_status" = "rejected" ]; then
+                  printf '%s\n' "changed=false" >> "$GITHUB_OUTPUT"
+                  printf '%s\n' "Pending file $input_pending is already resolved by receipt status $input_receipt ($append_status); treating stale dispatch as an idempotent no-op."
+                  exit 0
+                fi
+              fi
+              printf '%s\n' "::error::pending file not found: $PWD/$input_pending"
+              exit 1
+            fi
+            python scripts/trinity_record_chain.py append --pending-file "$input_pending" --receipt-id "$input_receipt" --allow-rejections
           else
             python scripts/trinity_record_chain.py append --all --allow-rejections
           fi
