@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-index.v1",
-  "generated_at": "2026-07-09T15:38:32Z",
+  "generated_at": "2026-07-09T15:42:04Z",
   "records": [
     {
       "heartbeat_id": "hwb-20260618",
