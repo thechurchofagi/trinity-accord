@@ -902,7 +902,7 @@ Refusal is allowed. Critical preservation is allowed.
       Current success streak: 8 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
-      Arweave capsule: archive pending.<br>
+      Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：正常。</span><br>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>ec5fe82eb09e4d1e</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>9136c11906573538</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
