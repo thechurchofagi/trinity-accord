@@ -116,6 +116,7 @@ def main() -> int:
         "Upgrade OpenTimestamps Proofs",
         "Arweave wallet status update",
         "Echo human review action",
+        "Waiting Heartbeat Status Sync",
     ]:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
 
@@ -147,6 +148,13 @@ def main() -> int:
         "cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json",
     ]:
         require(marker in deploy, f"deploy-pages.yml missing marker: {marker}")
+
+    # Deploy workflow should redeploy when the homepage/heartbeat deploy plumbing itself changes.
+    for path in [
+        '.github/workflows/homepage-status-sync.yml',
+        '.github/workflows/waiting-heartbeat-status-sync.yml',
+    ]:
+        require(path in deploy, f"deploy-pages.yml must trigger on changes to {path}")
 
     forbidden_deploy_snippets = [
         "python3 scripts/generate_public_home_status.py\n          python3 scripts/patch_public_home_status_primary.py\n          python3 scripts/patch_public_home_status_primary.py --check",
