@@ -38,6 +38,7 @@ on:
       - "Upgrade OpenTimestamps Proofs"
       - "Arweave wallet status update"
       - "Echo human review action"
+      - "Waiting Heartbeat Status Sync"
     types: [completed]
 
 permissions:
