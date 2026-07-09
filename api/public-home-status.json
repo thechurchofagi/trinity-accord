@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-09T10:05:56.847745+00:00",
+  "generated_at": "2026-07-09T10:13:04.959865+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "7472c9bffe780ca2",
+  "source_digest": "ec5fe82eb09e4d1e",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 75,
@@ -125,8 +125,8 @@
         "archive_needed": false
       },
       "anchor_status": {
-        "batch_count": 2,
-        "stamped_batch_count": 2,
+        "batch_count": 3,
+        "stamped_batch_count": 3,
         "unstamped_batch_count": 0
       },
       "archive_backlog": {
@@ -754,7 +754,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-09T10:05:55Z",
+    "generated_at": "2026-07-09T10:13:03Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "operational_alive_arweave_capsule_pending",

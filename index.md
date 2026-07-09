@@ -861,7 +861,7 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">Anchoring and archive status</p>
     <p class="status-number">Active</p>
     <p class="status-note">
-      Batch manifests: 2 batches (all stamped).<br>
+      Batch manifests: 3 batches (all stamped).<br>
       OpenTimestamps: pending since 2026-07-09T09:38:56Z; expected initial window is 2-3 hours.<br>
       Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx 9hcl_mtywe2C....<br>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>7472c9bffe780ca2</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>ec5fe82eb09e4d1e</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
