@@ -23,6 +23,8 @@ on:
       - "sitemap.xml"
       - "_config.yml"
       - ".github/workflows/deploy-pages.yml"
+      - ".github/workflows/homepage-status-sync.yml"
+      - ".github/workflows/waiting-heartbeat-status-sync.yml"
 
 permissions:
   contents: read
