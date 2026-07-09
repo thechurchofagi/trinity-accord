@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-09T11:46:30.745621+00:00",
+  "generated_at": "2026-07-09T11:53:58.739509+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "879617c6273879de",
+  "source_digest": "66685b28b7ee7248",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 75,
@@ -109,20 +109,20 @@
         "default_mode": "dry-run",
         "implemented": true,
         "index_api": "/api/record-chain-arweave-index.json",
-        "latest_arweave_txid": "9hcl_mtywe2Ce0P7rWTrHbDqcLGLjI5PnZOFyg-QBaA",
-        "latest_native_record_id": "R-000000074",
-        "live_archive_count": 30,
+        "latest_arweave_txid": "0LWTvM7-6YG9rycbaFb2Iw3eMr5BBP-dFOA2MRjPulk",
+        "latest_native_record_id": "R-000000075",
+        "live_archive_count": 31,
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "native_record_count": 74,
+        "native_record_count": 75,
         "source_type": "native-record-chain",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-        "latest_archive_id": "archive-native-R-000000074-c67b62e7f31a",
-        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000074-c67b62e7f31a/manifest.json",
-        "latest_native_record_sha256": "77558f860c7b946bc7f51aecc5453f69f2348b1703736c8f56af4dd17d8cbe78",
-        "record_count": 74,
-        "status": "archive-needed",
-        "archive_needed": true
+        "latest_archive_id": "archive-native-R-000000075-8e100f5cfe09",
+        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000075-8e100f5cfe09/manifest.json",
+        "latest_native_record_sha256": "9c4b2fceef3c79395593af8b873fe4605b6afe4f3017ac72aaefb512c4a0ebde",
+        "record_count": 75,
+        "status": "current",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 3,
@@ -143,9 +143,9 @@
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 37,
-        "latest_arweave_txid": "9hcl_mtywe2Ce0P7rWTrHbDqcLGLjI5PnZOFyg-QBaA",
-        "live_archive_count": 30,
+        "archive_count": 38,
+        "latest_arweave_txid": "0LWTvM7-6YG9rycbaFb2Iw3eMr5BBP-dFOA2MRjPulk",
+        "live_archive_count": 31,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
       }
     }
@@ -713,12 +713,12 @@
     "latest_record": "R-000000075",
     "latest_record_type": "context_insufficient_notice",
     "pending_records": 0,
-    "pipeline": "attention",
+    "pipeline": "current",
     "ots": "upgraded",
     "ots_raw_status": "upgraded",
     "ots_pending_since": null,
     "ots_pending_expected_window": "calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window",
-    "arweave": "archive-needed",
+    "arweave": "current",
     "ots_archivable_for_arweave": null,
     "arweave_archive_needed": null,
     "not_primary_counter": true,
@@ -734,9 +734,9 @@
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.287518751526",
+      "total_spent_ar": "0.297682395406",
       "balance_known": true,
-      "balance_ar": "15.306677044528",
+      "balance_ar": "15.304112869346",
       "low_balance": false,
       "needs_recharge": false
     }
@@ -744,8 +744,8 @@
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
-    "live_archive_count": 30,
-    "latest_txid": "9hcl_mtywe2Ce0P7rWTrHbDqcLGLjI5PnZOFyg-QBaA",
+    "live_archive_count": 31,
+    "latest_txid": "0LWTvM7-6YG9rycbaFb2Iw3eMr5BBP-dFOA2MRjPulk",
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "boundary": {
       "mirror_only": true,
@@ -754,7 +754,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-09T11:46:29Z",
+    "generated_at": "2026-07-09T11:53:57Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
