@@ -539,6 +539,18 @@ def main() -> int:
         "attempts": attempts,
         "capsules": capsules,
     }
+    old_status = read_json(STATUS_PATH, {})
+    old_index = read_json(INDEX_PATH, {})
+    status_semantic = {k: v for k, v in status.items() if k != "generated_at"}
+    old_status_semantic = {k: v for k, v in old_status.items() if k != "generated_at"}
+    index_semantic = {k: v for k, v in index.items() if k != "generated_at"}
+    old_index_semantic = {k: v for k, v in old_index.items() if k != "generated_at"}
+    if status_semantic == old_status_semantic and index_semantic == old_index_semantic:
+        stable_generated_at = old_status.get("generated_at") or old_index.get("generated_at")
+        if stable_generated_at:
+            status["generated_at"] = stable_generated_at
+            index["generated_at"] = stable_generated_at
+
     INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
     INDEX_PATH.write_text(dump_json(index), encoding="utf-8")

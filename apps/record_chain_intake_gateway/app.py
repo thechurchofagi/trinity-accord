@@ -20,7 +20,7 @@ from apps.record_chain_intake_gateway.gateway.authorship import (
     strip_authorship_for_signing,
     strip_unsigned_projection_fields,
 )
-from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, sha256_canonical_json
+from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, parse_json_strict, sha256_canonical_json
 from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file
 from apps.record_chain_intake_gateway.gateway.models import (
     AgentRecovery,
@@ -32,7 +32,7 @@ from apps.record_chain_intake_gateway.gateway.models import (
     ServerReceipt,
     SubmitResponse,
 )
-from apps.record_chain_intake_gateway.gateway.rate_limit import check_rate_limit
+from apps.record_chain_intake_gateway.gateway.rate_limit import check_preflight_rate_limit, check_rate_limit
 from apps.record_chain_intake_gateway.gateway.receipts import make_legacy_receipt_id, make_receipt, make_receipt_id, verify_receipt_sha256
 from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
 from apps.record_chain_intake_gateway.gateway.validation import (
@@ -519,6 +519,22 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
             requires_human_attention=True,
         )
 
+    permanent_errors = [
+        d for d in diagnostics if d.severity == "error" and not d.retry_allowed
+    ]
+    if permanent_errors:
+        codes_summary = ", ".join(sorted({d.code for d in permanent_errors}))
+        return AgentRecovery(
+            should_retry=False,
+            recommended_next_step=(
+                f"Do not automatically retry this unchanged submission. Permanent error(s): {codes_summary}. "
+                "Follow each diagnostic's suggested_fix; obtain the required original key or human review when applicable."
+            ),
+            helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+            human_readable_helper_url="Trinity Accord Validation Error Reference",
+            requires_human_attention=True,
+        )
+
     # Check if all diagnostics are retryable
     all_retryable = all(d.retry_allowed for d in diagnostics if d.severity == "error")
 
@@ -599,6 +615,30 @@ def _normalize_public_v2_draft_for_pending(draft: dict[str, Any]) -> dict[str, A
         }
 
     return normalized
+
+
+async def put_file_confirmed(
+    path: str,
+    content: str,
+    message: str,
+    sha: str | None = None,
+) -> dict[str, Any]:
+    """Write through the injectable app-level adapter and reconcile ambiguity."""
+    try:
+        return await put_file(path, content, message, sha=sha)
+    except Exception:
+        remote_text = await get_file_text(path)
+        if remote_text != content:
+            raise
+        remote_sha = await get_file_sha(path)
+        if not remote_sha:
+            raise RuntimeError(f"GitHub write for {path} appears durable but has no readable blob SHA")
+        logger.warning("Reconciled ambiguous GitHub write for %s after transport/API error", path)
+        return {
+            "content": {"sha": remote_sha},
+            "commit": {"sha": None},
+            "reconciled_after_error": True,
+        }
 
 
 async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:
@@ -836,6 +876,14 @@ async def readiness(response: Response) -> ReadinessResponse:
 
 @app.post("/record-chain/preflight", response_model=PreflightResponse)
 async def preflight(request: Request) -> PreflightResponse | JSONResponse:
+    client_key = request.client.host if request.client else "unknown"
+    preflight_limit = check_preflight_rate_limit(client_key)
+    if preflight_limit is not None:
+        preflight_limit["boundary"] = _build_preflight_boundary({})
+        preflight_limit["gateway_runtime"] = _build_gateway_runtime()
+        preflight_limit["gateway_schema"] = _GATEWAY_SCHEMA
+        return JSONResponse(status_code=429, content=preflight_limit)
+
     # Part G: streaming body-size limit
     try:
         raw_body = await _read_limited_body(request)
@@ -848,8 +896,8 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
 
     try:
-        body = json.loads(raw_body)
-    except json.JSONDecodeError as exc:
+        body = parse_json_strict(raw_body)
+    except (json.JSONDecodeError, ValueError) as exc:
         diag = Diagnostic(
             code="INVALID_JSON",
             severity="error",
@@ -941,8 +989,8 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     received_raw_body_sha256 = _compute_raw_body_sha256(raw_body)
 
     try:
-        body = json.loads(raw_body)
-    except json.JSONDecodeError as exc:
+        body = parse_json_strict(raw_body)
+    except (json.JSONDecodeError, ValueError) as exc:
         return SubmitResponse(
             accepted=False,
             submitted=False,
@@ -1299,7 +1347,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 )
 
             # Write 1: intake submission (create only)
-            result1 = await put_file(
+            result1 = await put_file_confirmed(
                 intake_submission_path,
                 submission_content,
                 f"intake: submission {receipt_id}",
@@ -1311,7 +1359,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
             # Write 2: receipt (create only)
             # The receipt must exist before pending becomes visible to append workers.
-            result_receipt = await put_file(
+            result_receipt = await put_file_confirmed(
                 receipt_path,
                 receipt_content,
                 f"intake: receipt {receipt_id}",
@@ -1337,7 +1385,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             )
 
             try:
-                result_idx = await put_file(
+                result_idx = await put_file_confirmed(
                     idempotency_path,
                     canonical_dumps(idempotency_index_data),
                     f"intake: idempotency index {original_submission_sha256[:16]}",
@@ -1364,49 +1412,88 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                         read_exc,
                     )
 
-                await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
-
                 if existing_idx is not None:
-                    try:
-                        return await _submit_response_from_idempotency_index(
-                            index=existing_idx,
-                            record_type=record_type,
-                            submission_sha256=original_submission_sha256,
-                            received_raw_body_sha256=received_raw_body_sha256,
-                            body=body,
-                        )
-                    except HTTPException:
-                        # Fail-closed: receipt integrity errors must propagate.
-                        raise
-                    except Exception as response_exc:
-                        logger.error(
-                            "Existing idempotency index could not be converted into response for %s: %s",
-                            original_submission_sha256[:16],
-                            response_exc,
-                        )
-
-                return SubmitResponse(
-                    accepted=False,
-                    submitted=False,
-                    record_type=record_type,
-                    submission_sha256=original_submission_sha256,
-                    received_raw_body_sha256=received_raw_body_sha256,
-                    diagnostics=[Diagnostic(
-                        code="IDEMPOTENCY_INDEX_PERSIST_FAILED",
-                        severity="error",
-                        field="record-chain/intake/by-submission-sha256",
-                        message=f"Persisted intake artifacts were rolled back because idempotency index creation failed: {idemp_exc}",
-                        meaning="The gateway must not accept an intake without its global duplicate-submission index.",
-                        suggested_fix="Retry the same submission later; if the original request succeeded concurrently, the gateway will return the existing receipt.",
-                        retry_allowed=True,
-                    )],
-                    boundary=_build_submit_boundary(body),
-                )
+                    exact_same_transaction = all((
+                        existing_idx.get("submission_sha256") == original_submission_sha256,
+                        existing_idx.get("stored_submission_sha256") == stored_submission_sha256,
+                        existing_idx.get("receipt_id") == receipt_id,
+                        existing_idx.get("receipt_path") == receipt_path,
+                        existing_idx.get("pending_file_path") == pending_file_path,
+                        existing_idx.get("intake_submission_path") == intake_submission_path,
+                    ))
+                    if exact_same_transaction:
+                        if existing_idx.get("pending_written") is True:
+                            return await _submit_response_from_idempotency_index(
+                                index=existing_idx,
+                                record_type=record_type,
+                                submission_sha256=original_submission_sha256,
+                                received_raw_body_sha256=received_raw_body_sha256,
+                                body=body,
+                            )
+                        existing_sha = await get_file_sha(idempotency_path)
+                        if not existing_sha:
+                            raise RuntimeError("Matching idempotency index exists but its blob SHA is unreadable")
+                        result_idx = {"content": {"sha": existing_sha}, "commit": {"sha": None}}
+                        logger.info("Recovered matching idempotency index %s after ambiguous write", idempotency_path)
+                    else:
+                        await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
+                        try:
+                            return await _submit_response_from_idempotency_index(
+                                index=existing_idx,
+                                record_type=record_type,
+                                submission_sha256=original_submission_sha256,
+                                received_raw_body_sha256=received_raw_body_sha256,
+                                body=body,
+                            )
+                        except HTTPException:
+                            raise
+                        except Exception as response_exc:
+                            logger.error(
+                                "Concurrent idempotency state could not be converted into response for %s: %s",
+                                original_submission_sha256[:16],
+                                response_exc,
+                            )
+                            return SubmitResponse(
+                                accepted=False,
+                                submitted=False,
+                                record_type=record_type,
+                                submission_sha256=original_submission_sha256,
+                                received_raw_body_sha256=received_raw_body_sha256,
+                                diagnostics=[Diagnostic(
+                                    code="IDEMPOTENCY_INDEX_CONFLICT",
+                                    severity="error",
+                                    field="record-chain/intake/by-submission-sha256",
+                                    message="A different durable transaction already owns this submission hash.",
+                                    meaning="The gateway refused to overwrite or roll back another intake transaction.",
+                                    suggested_fix="Retry the exact same submission later or ask an operator to inspect the durable index.",
+                                    retry_allowed=True,
+                                )],
+                                boundary=_build_submit_boundary(body),
+                            )
+                else:
+                    await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
+                    return SubmitResponse(
+                        accepted=False,
+                        submitted=False,
+                        record_type=record_type,
+                        submission_sha256=original_submission_sha256,
+                        received_raw_body_sha256=received_raw_body_sha256,
+                        diagnostics=[Diagnostic(
+                            code="IDEMPOTENCY_INDEX_PERSIST_FAILED",
+                            severity="error",
+                            field="record-chain/intake/by-submission-sha256",
+                            message=f"Persisted intake artifacts were rolled back because idempotency index creation failed: {idemp_exc}",
+                            meaning="The gateway must not accept an intake without its global duplicate-submission index.",
+                            suggested_fix="Retry the same submission later; if the original request succeeded concurrently, the gateway will return the existing receipt.",
+                            retry_allowed=True,
+                        )],
+                        boundary=_build_submit_boundary(body),
+                    )
 
             # Write 4: pending file (create only) — LAST.
             # This file is the append-eligibility marker. It must not exist until
             # submission, receipt, and idempotency index are durable.
-            result_pending = await put_file(
+            result_pending = await put_file_confirmed(
                 pending_file_path,
                 pending_content,
                 f"intake: pending {receipt_id} ({record_type})",
@@ -1421,15 +1508,17 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             idempotency_index_data["pending_written"] = True
             idempotency_index_data["pending_committed_at"] = now.isoformat().replace("+00:00", "Z")
             try:
-                result_idx_update = await put_file(
+                result_idx_update = await put_file_confirmed(
                     idempotency_path,
                     canonical_dumps(idempotency_index_data),
                     f"intake: idempotency index update {original_submission_sha256[:16]}",
                     sha=result_idx.get("content", {}).get("sha"),
                 )
                 logger.info("Updated idempotency index with pending_written")
-            except Exception:
-                logger.warning("Failed to update idempotency index with pending_written (non-fatal)")
+            except Exception as finalize_exc:
+                raise RuntimeError(
+                    "Pending file was written but the idempotency index could not be finalized"
+                ) from finalize_exc
 
             if _DISPATCH_APPEND_WORKFLOW:
                 try:
@@ -1451,6 +1540,8 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     warnings.append(warning)
                     logger.warning("Append dispatch failed for %s: %s", receipt_id, dispatch_exc)
 
+        except HTTPException:
+            raise
         except Exception as exc:
             logger.error("Failed to persist %s: %s", receipt_id, exc)
             await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)

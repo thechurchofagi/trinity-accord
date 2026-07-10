@@ -22,6 +22,9 @@ from typing import Any
 GLOBAL_LIMIT_PER_HOUR = 100
 PARTICIPANT_LIMIT_PER_HOUR = 10
 _WINDOW_SECONDS = 3600
+PREFLIGHT_GLOBAL_LIMIT_PER_MINUTE = 600
+PREFLIGHT_CLIENT_LIMIT_PER_MINUTE = 120
+_PREFLIGHT_WINDOW_SECONDS = 60
 
 # ---------------------------------------------------------------------------
 # In-memory sliding window stores
@@ -29,6 +32,8 @@ _WINDOW_SECONDS = 3600
 # Each entry: list of timestamps (seconds since epoch)
 _global_timestamps: list[float] = []
 _participant_timestamps: dict[str, list[float]] = {}
+_preflight_global_timestamps: list[float] = []
+_preflight_client_timestamps: dict[str, list[float]] = {}
 _state_lock = threading.Lock()
 
 
@@ -169,9 +174,62 @@ def _build_rate_limit_response(
     }
 
 
+def check_preflight_rate_limit(client_key: str) -> dict[str, Any] | None:
+    """Protect the public preflight route and downstream GitHub lookups."""
+    key = client_key.strip() or "unknown"
+    now = time.time()
+    cutoff = now - _PREFLIGHT_WINDOW_SECONDS
+    with _state_lock:
+        global _preflight_global_timestamps
+        _preflight_global_timestamps = [t for t in _preflight_global_timestamps if t >= cutoff]
+        client_entries = [t for t in _preflight_client_timestamps.get(key, []) if t >= cutoff]
+        _preflight_client_timestamps[key] = client_entries
+
+        if len(_preflight_global_timestamps) >= PREFLIGHT_GLOBAL_LIMIT_PER_MINUTE:
+            return _build_preflight_rate_limit_response(
+                "global", PREFLIGHT_GLOBAL_LIMIT_PER_MINUTE, _preflight_global_timestamps, now
+            )
+        if len(client_entries) >= PREFLIGHT_CLIENT_LIMIT_PER_MINUTE:
+            return _build_preflight_rate_limit_response(
+                "client", PREFLIGHT_CLIENT_LIMIT_PER_MINUTE, client_entries, now
+            )
+
+        _preflight_global_timestamps.append(now)
+        client_entries.append(now)
+        return None
+
+
+def _build_preflight_rate_limit_response(
+    limit_type: str, limit: int, entries: list[float], now: float
+) -> dict[str, Any]:
+    retry_after = max(int(entries[0] + _PREFLIGHT_WINDOW_SECONDS - now), 1) if entries else 1
+    return {
+        "accepted": False,
+        "preflight": True,
+        "diagnostics": [{
+            "code": "PREFLIGHT_RATE_LIMIT_EXCEEDED",
+            "severity": "error",
+            "field": "preflight",
+            "message": f"Preflight {limit_type} limit of {limit} requests per minute reached.",
+            "meaning": "The validation endpoint is temporarily rate limited to protect public availability and dependent repository lookups.",
+            "suggested_fix": f"Wait {retry_after} seconds before retrying preflight.",
+            "help_url": "https://www.trinityaccord.org/api/gateway-rate-limit-policy.v1.json",
+            "retry_allowed": True,
+        }],
+        "retry_after_seconds": retry_after,
+        "rate_limit": {
+            "limit_type": f"preflight_{limit_type}",
+            "limit": limit,
+            "window_seconds": _PREFLIGHT_WINDOW_SECONDS,
+        },
+    }
+
+
 def reset() -> None:
     """Reset all rate limit state (for testing)."""
-    global _global_timestamps
+    global _global_timestamps, _preflight_global_timestamps
     with _state_lock:
         _global_timestamps = []
         _participant_timestamps.clear()
+        _preflight_global_timestamps = []
+        _preflight_client_timestamps.clear()
