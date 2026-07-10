@@ -12,7 +12,7 @@ permissions:
 jobs:
   repair:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Prepare repair script
+      - name: Prepare repair scripts
         run: |
           set -euo pipefail
           git show c21c55b0548ba663e2965143b2cdccb8e9c9e3d5:.github/workflows/_temporary-deep-audit-round2-fix.yml > /tmp/repair.yml
@@ -45,6 +45,22 @@ jobs:
               'from apps.record_chain_intake_gateway.app import _build_agent_recovery',
           )
           Path('/tmp/apply_repair.py').write_text(body, encoding='utf-8')
+          Path('/tmp/apply_compat.py').write_text(r'''from pathlib import Path
+
+path = Path('apps/record_chain_intake_gateway/app.py')
+text = path.read_text(encoding='utf-8')
+old_import = 'from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file_confirmed'
+new_import = 'from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file'
+if text.count(old_import) != 1:
+    raise SystemExit(f'expected one confirmed adapter import, found {text.count(old_import)}')
+text = text.replace(old_import, new_import, 1)
+marker = '\n\nasync def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:\n'
+if marker not in text:
+    raise SystemExit('best-effort rollback marker not found')
+helper = '''\n\nasync def put_file_confirmed(\n    path: str,\n    content: str,\n    message: str,\n    sha: str | None = None,\n) -> dict[str, Any]:\n    """Write through the injectable app-level adapter and reconcile ambiguity."""\n    try:\n        return await put_file(path, content, message, sha=sha)\n    except Exception:\n        remote_text = await get_file_text(path)\n        if remote_text != content:\n            raise\n        remote_sha = await get_file_sha(path)\n        if not remote_sha:\n            raise RuntimeError(f"GitHub write for {path} appears durable but has no readable blob SHA")\n        logger.warning("Reconciled ambiguous GitHub write for %s after transport/API error", path)\n        return {\n            "content": {"sha": remote_sha},\n            "commit": {"sha": None},\n            "reconciled_after_error": True,\n        }\n'''
+text = text.replace(marker, helper + marker, 1)
+path.write_text(text, encoding='utf-8')
+''', encoding='utf-8')
           PY
 
       - name: Apply repair
@@ -55,6 +71,7 @@ jobs:
           git fetch origin agent/fix-deep-audit-round2 --prune
           git checkout -B agent/fix-deep-audit-round2 origin/agent/fix-deep-audit-round2
           python3 /tmp/apply_repair.py > /tmp/repair.log 2>&1
+          python3 /tmp/apply_compat.py >> /tmp/repair.log 2>&1
           cat /tmp/repair.log
 
       - name: Validate repaired branch
@@ -93,6 +110,7 @@ jobs:
           git config user.email 'actions@github.com'
           if [[ "${{ steps.apply.outcome }}" == "success" && "${{ steps.validate.outcome }}" == "success" ]]; then
             python3 /tmp/apply_repair.py
+            python3 /tmp/apply_compat.py
             rm -f _audit_repair_failure.log
             python3 scripts/generate_waiting_heartbeat_status.py
             python3 scripts/update_public_generated_artifacts.py
