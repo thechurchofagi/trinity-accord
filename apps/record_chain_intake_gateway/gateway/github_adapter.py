@@ -130,6 +130,35 @@ async def put_file(
     return resp.json()
 
 
+async def put_file_confirmed(
+    path: str,
+    content: str,
+    message: str,
+    sha: str | None = None,
+) -> dict[str, Any]:
+    """Write a file and reconcile timeout-after-commit ambiguity.
+
+    A failed HTTP response does not prove GitHub rejected the commit. Before
+    reporting failure or rolling anything back, read the remote path and accept
+    the operation only when the exact intended bytes are already durable.
+    """
+    try:
+        return await put_file(path, content, message, sha=sha)
+    except Exception:
+        remote_text = await get_file_text(path)
+        if remote_text != content:
+            raise
+        remote_sha = await get_file_sha(path)
+        if not remote_sha:
+            raise RuntimeError(f"GitHub write for {path} appears durable but has no readable blob SHA")
+        logger.warning("Reconciled ambiguous GitHub write for %s after transport/API error", path)
+        return {
+            "content": {"sha": remote_sha},
+            "commit": {"sha": None},
+            "reconciled_after_error": True,
+        }
+
+
 async def delete_file(
     path: str,
     message: str,

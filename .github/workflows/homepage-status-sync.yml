@@ -20,6 +20,27 @@ on:
           - "true"
           - "false"
 
+  push:
+    branches:
+      - main
+    paths:
+      - "api/**"
+      - "*.md"
+      - "*.json"
+      - "*.xml"
+      - "llms.txt"
+      - "llms-full.txt"
+      - "ai.txt"
+      - ".well-known/**"
+      - "assets/**"
+      - "downloads/**"
+      - "agent-record-chain-guidance/**"
+      - "_layouts/**"
+      - "_config.yml"
+      - "CNAME"
+      - ".github/workflows/deploy-pages.yml"
+      - ".github/workflows/homepage-status-sync.yml"
+
   schedule:
     # Central hourly sync. Do not add homepage status writes back into business workflows.
     - cron: "7,22,37,52 * * * *"
@@ -39,6 +60,7 @@ on:
       - "Arweave wallet status update"
       - "Echo human review action"
       - "Waiting Heartbeat Status Sync"
+      - "Waiting Heartbeat Submit"
     types: [completed]
 
 permissions:
@@ -135,9 +157,21 @@ jobs:
               exit 0
             fi
 
-            echo "Push failed on attempt ${attempt}; rebasing and retrying."
+            echo "Push failed on attempt ${attempt}; rebasing, regenerating, and retrying."
             git fetch origin main --prune
             git rebase origin/main
+            generate_and_verify
+            git add \
+              record-chain/heartbeat/index.json \
+              api/waiting-heartbeat-status.json \
+              api/arweave-wallet-status.json \
+              api/guardian-state.json \
+              api/guardian-current-registry.json \
+              api/record-chain-status.json \
+              api/public-home-status.json \
+              index.md \
+              sitemap.xml
+            git commit --amend --no-edit
 
             sleep $((attempt * 5))
           done
@@ -152,10 +186,12 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20
+          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
 
+      # Deploy Pages push freshness backstop handles steps.commit.outputs.changed == 'true'; explicit dispatch is reserved for manual force or stale-live recovery.
       - name: Dispatch Deploy Pages
         id: deploy_dispatch
-        if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || steps.live_pre.outcome == 'failure' }}
+        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
         env:
           GH_TOKEN: ${{ github.token }}
           COMMIT_CHANGED: ${{ steps.commit.outputs.changed }}
@@ -169,6 +205,8 @@ jobs:
             reason="generated_files_changed"
           elif [[ "${FORCE_DEPLOY}" == "true" ]]; then
             reason="manual_force_deploy"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            reason="source_push"
           elif [[ "${LIVE_PRE_OUTCOME}" == "failure" ]]; then
             reason="live_freshness_failed"
           fi
@@ -188,6 +226,7 @@ jobs:
           echo "Waiting briefly before probing live site. Pages deployment may still be in progress."
           sleep 90
           python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 60
+          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
 
       - name: Retry Deploy Pages if post-dispatch freshness probe failed
         if: ${{ steps.post_freshness.outcome == 'failure' }}
@@ -198,3 +237,14 @@ jobs:
           echo "Post-dispatch freshness probe failed; retrying Deploy Pages once."
           deploy_ref="$(git rev-parse HEAD)"
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
+
+      - name: Final live deployment contract check
+        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.post_freshness.outcome }}" == "failure" ]]; then
+            echo "Waiting for the retry deployment to finish."
+            sleep 120
+          fi
+          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 30
+          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20

@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.gateway-rate-limit-policy.v1",
   "status": "production_live_policy",
-  "purpose": "Trust-first rate limit for public Record-Chain Intake Gateway. Single-process in-memory; not durable across restarts; not multi-instance safe.",
+  "purpose": "Trust-first rate limits for public Record-Chain Intake Gateway submit and preflight routes. Single-process in-memory; not durable across restarts; not multi-instance safe.",
   "limiter_class": "single_process_in_memory",
   "durable_across_restart": false,
   "multi_instance_safe": false,
@@ -42,5 +42,12 @@
     "multi_instance_safe": false,
     "durable_across_restart": false,
     "operator_note": "Current enforcement is process-local and intended for single-instance live-test operation. Production multi-instance deployment requires a shared durable limiter."
+  },
+  "preflight_policy": {
+    "global_request_limit_per_minute": 600,
+    "client_request_limit_per_minute": 120,
+    "applies_before_expensive_target_repository_lookups": true,
+    "response_http_status": 429,
+    "diagnostic_code": "PREFLIGHT_RATE_LIMIT_EXCEEDED"
   }
 }
