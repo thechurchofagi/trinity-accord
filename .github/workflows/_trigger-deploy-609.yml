@@ -9,18 +9,91 @@ permissions:
   contents: read
 
 jobs:
-  dispatch:
+  dispatch-and-verify:
     if: ${{ github.event.pull_request.head.ref == 'agent/trigger-deploy-609' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - name: Dispatch current main Pages deployment
+      - name: Dispatch current main Pages deployment and identify run
+        id: dispatch
         env:
           GH_TOKEN: ${{ github.token }}
           DEPLOY_REF: '5134b2f8cbb961a1c1c094aff261ebe73ded5e94'
         run: |
           set -euo pipefail
+          gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy-pages.yml --event workflow_dispatch --limit 20 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/before.txt
           gh workflow run deploy-pages.yml \
             --repo "$GITHUB_REPOSITORY" \
             --ref main \
             -f checkout_ref="$DEPLOY_REF"
-          echo "Dispatched deploy-pages.yml for $DEPLOY_REF"
+
+          run_id=""
+          for attempt in $(seq 1 30); do
+            sleep 5
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy-pages.yml --event workflow_dispatch --limit 20 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/after.txt
+            run_id="$(comm -13 /tmp/before.txt /tmp/after.txt | tail -n 1)"
+            if [[ -n "$run_id" ]]; then
+              break
+            fi
+          done
+          test -n "$run_id"
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "Dispatched Deploy Pages run $run_id for $DEPLOY_REF"
+
+      - name: Wait for Deploy Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.dispatch.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          gh run watch "$RUN_ID" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
+
+      - name: Verify live discovery, Builder, and chain state
+        env:
+          EXPECTED_BUILDER_SHA: baa8cce5f20b0a0913d41114c0a3d2507602cf67169ed9c77e329956588a598d
+          EXPECTED_BUILDER_SIZE: '167286'
+        run: |
+          set -euo pipefail
+          token="$(date +%s)-$RANDOM"
+          base='https://www.trinityaccord.org'
+
+          for attempt in $(seq 1 12); do
+            rm -rf /tmp/live && mkdir -p /tmp/live
+            if curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/ai.txt?freshness=$token-$attempt" -o /tmp/live/ai.txt \
+              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-builder-bundles.v1.json?freshness=$token-$attempt" -o /tmp/live/bundles.json \
+              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/downloads/record-chain-builder.mjs?freshness=$token-$attempt" -o /tmp/live/builder.mjs \
+              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-status.json?freshness=$token-$attempt" -o /tmp/live/status.json; then
+              ai_ok=false
+              manifest_ok=false
+              builder_ok=false
+              status_ok=false
+              grep -Fq 'version: v3.0' /tmp/live/ai.txt \
+                && grep -Fq '/record-chain/preflight' /tmp/live/ai.txt \
+                && grep -Fq '/record-chain/submit' /tmp/live/ai.txt \
+                && ! grep -Fq '/gateway/preflight' /tmp/live/ai.txt \
+                && ! grep -Fq '/agent-submit' /tmp/live/ai.txt \
+                && ai_ok=true
+              [[ "$(jq -r '.canonical_builder.sha256' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SHA" ]] \
+                && [[ "$(jq -r '.canonical_builder.size_bytes' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SIZE" ]] \
+                && jq -e '.canonical_builder.supports | index("classification_update") != null' /tmp/live/bundles.json >/dev/null \
+                && manifest_ok=true
+              [[ "$(wc -c < /tmp/live/builder.mjs | tr -d ' ')" == "$EXPECTED_BUILDER_SIZE" ]] \
+                && [[ "$(sha256sum /tmp/live/builder.mjs | awk '{print $1}')" == "$EXPECTED_BUILDER_SHA" ]] \
+                && builder_ok=true
+              [[ "$(jq -r '.record_chain.latest_record_id // .pipeline_status.chain_head.latest_record_id' /tmp/live/status.json)" == 'R-000000078' ]] \
+                && [[ "$(jq -r '.total_records // .record_chain.native_record_count' /tmp/live/status.json)" == '78' ]] \
+                && status_ok=true
+              if $ai_ok && $manifest_ok && $builder_ok && $status_ok; then
+                echo "LIVE_DEPLOYMENT_OK"
+                echo "builder_sha=$(sha256sum /tmp/live/builder.mjs | awk '{print $1}')"
+                echo "builder_size=$(wc -c < /tmp/live/builder.mjs | tr -d ' ')"
+                echo "latest_record_id=$(jq -r '.record_chain.latest_record_id // .pipeline_status.chain_head.latest_record_id' /tmp/live/status.json)"
+                exit 0
+              fi
+              echo "Attempt $attempt not current yet: ai=$ai_ok manifest=$manifest_ok builder=$builder_ok status=$status_ok"
+            fi
+            sleep 15
+          done
+
+          echo 'Live deployment did not converge to the merged artifact.' >&2
+          exit 1
