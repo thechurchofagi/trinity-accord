@@ -1,99 +1,77 @@
-name: Trigger Post-609 Pages Deployment
+name: Diagnose Post-609 Pages Deployment
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 permissions:
-  actions: write
-  contents: read
+  contents: write
 
 jobs:
-  dispatch-and-verify:
+  diagnose:
     if: ${{ github.event.pull_request.head.ref == 'agent/trigger-deploy-609' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
-      - name: Dispatch current main Pages deployment and identify run
-        id: dispatch
-        env:
-          GH_TOKEN: ${{ github.token }}
-          DEPLOY_REF: '5134b2f8cbb961a1c1c094aff261ebe73ded5e94'
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/trigger-deploy-609
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip after diagnostics are committed
+        id: gate
         run: |
-          set -euo pipefail
-          gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy-pages.yml --event workflow_dispatch --limit 20 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/before.txt
-          gh workflow run deploy-pages.yml \
-            --repo "$GITHUB_REPOSITORY" \
-            --ref main \
-            -f checkout_ref="$DEPLOY_REF"
+          if [[ -f _live_deployment_diagnostic.txt ]]; then
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
 
-          run_id=""
-          for attempt in $(seq 1 30); do
-            sleep 5
-            gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy-pages.yml --event workflow_dispatch --limit 20 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/after.txt
-            run_id="$(comm -13 /tmp/before.txt /tmp/after.txt | tail -n 1)"
-            if [[ -n "$run_id" ]]; then
-              break
-            fi
-          done
-          test -n "$run_id"
-          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
-          echo "Dispatched Deploy Pages run $run_id for $DEPLOY_REF"
-
-      - name: Wait for Deploy Pages
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RUN_ID: ${{ steps.dispatch.outputs.run_id }}
-        run: |
-          set -euo pipefail
-          gh run watch "$RUN_ID" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
-
-      - name: Verify live discovery, Builder, and chain state
-        env:
-          EXPECTED_BUILDER_SHA: baa8cce5f20b0a0913d41114c0a3d2507602cf67169ed9c77e329956588a598d
-          EXPECTED_BUILDER_SIZE: '167286'
+      - name: Capture live responses
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -euo pipefail
           token="$(date +%s)-$RANDOM"
           base='https://www.trinityaccord.org'
+          mkdir -p /tmp/live
 
-          for attempt in $(seq 1 12); do
-            rm -rf /tmp/live && mkdir -p /tmp/live
-            if curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/ai.txt?freshness=$token-$attempt" -o /tmp/live/ai.txt \
-              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-builder-bundles.v1.json?freshness=$token-$attempt" -o /tmp/live/bundles.json \
-              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/downloads/record-chain-builder.mjs?freshness=$token-$attempt" -o /tmp/live/builder.mjs \
-              && curl -fsSL --retry 2 --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-status.json?freshness=$token-$attempt" -o /tmp/live/status.json; then
-              ai_ok=false
-              manifest_ok=false
-              builder_ok=false
-              status_ok=false
-              grep -Fq 'version: v3.0' /tmp/live/ai.txt \
-                && grep -Fq '/record-chain/preflight' /tmp/live/ai.txt \
-                && grep -Fq '/record-chain/submit' /tmp/live/ai.txt \
-                && ! grep -Fq '/gateway/preflight' /tmp/live/ai.txt \
-                && ! grep -Fq '/agent-submit' /tmp/live/ai.txt \
-                && ai_ok=true
-              [[ "$(jq -r '.canonical_builder.sha256' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SHA" ]] \
-                && [[ "$(jq -r '.canonical_builder.size_bytes' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SIZE" ]] \
-                && jq -e '.canonical_builder.supports | index("classification_update") != null' /tmp/live/bundles.json >/dev/null \
-                && manifest_ok=true
-              [[ "$(wc -c < /tmp/live/builder.mjs | tr -d ' ')" == "$EXPECTED_BUILDER_SIZE" ]] \
-                && [[ "$(sha256sum /tmp/live/builder.mjs | awk '{print $1}')" == "$EXPECTED_BUILDER_SHA" ]] \
-                && builder_ok=true
-              [[ "$(jq -r '.record_chain.latest_record_id // .pipeline_status.chain_head.latest_record_id' /tmp/live/status.json)" == 'R-000000078' ]] \
-                && [[ "$(jq -r '.total_records // .record_chain.native_record_count' /tmp/live/status.json)" == '78' ]] \
-                && status_ok=true
-              if $ai_ok && $manifest_ok && $builder_ok && $status_ok; then
-                echo "LIVE_DEPLOYMENT_OK"
-                echo "builder_sha=$(sha256sum /tmp/live/builder.mjs | awk '{print $1}')"
-                echo "builder_size=$(wc -c < /tmp/live/builder.mjs | tr -d ' ')"
-                echo "latest_record_id=$(jq -r '.record_chain.latest_record_id // .pipeline_status.chain_head.latest_record_id' /tmp/live/status.json)"
-                exit 0
-              fi
-              echo "Attempt $attempt not current yet: ai=$ai_ok manifest=$manifest_ok builder=$builder_ok status=$status_ok"
-            fi
-            sleep 15
-          done
+          fetch() {
+            local name="$1"
+            local path="$2"
+            local code
+            code="$(curl -sSL --max-time 30 -H 'Cache-Control: no-cache' -w '%{http_code}' "$base$path?freshness=$token" -o "/tmp/live/$name" || true)"
+            printf '%s_http=%s\n' "$name" "$code"
+            printf '%s_size=%s\n' "$name" "$(wc -c < "/tmp/live/$name" 2>/dev/null || echo 0)"
+            printf '%s_sha256=%s\n' "$name" "$(sha256sum "/tmp/live/$name" 2>/dev/null | awk '{print $1}' || true)"
+          }
 
-          echo 'Live deployment did not converge to the merged artifact.' >&2
-          exit 1
+          {
+            echo "checked_at=$(date -u +%FT%TZ)"
+            fetch ai.txt /ai.txt
+            fetch bundles.json /api/record-chain-builder-bundles.v1.json
+            fetch builder.mjs /downloads/record-chain-builder.mjs
+            fetch status.json /api/record-chain-status.json
+            echo "ai_version_v3=$(grep -Fq 'version: v3.0' /tmp/live/ai.txt && echo true || echo false)"
+            echo "ai_current_preflight=$(grep -Fq '/record-chain/preflight' /tmp/live/ai.txt && echo true || echo false)"
+            echo "ai_legacy_gateway=$(grep -Fq '/gateway/preflight' /tmp/live/ai.txt && echo true || echo false)"
+            echo "ai_legacy_submit=$(grep -Fq '/agent-submit' /tmp/live/ai.txt && echo true || echo false)"
+            echo "ai_head_begin"
+            head -n 25 /tmp/live/ai.txt || true
+            echo "ai_head_end"
+            echo "manifest_builder_sha=$(jq -r '.canonical_builder.sha256 // empty' /tmp/live/bundles.json 2>/dev/null || true)"
+            echo "manifest_builder_size=$(jq -r '.canonical_builder.size_bytes // empty' /tmp/live/bundles.json 2>/dev/null || true)"
+            echo "manifest_classification_update=$(jq -r '(.canonical_builder.supports // []) | index("classification_update") != null' /tmp/live/bundles.json 2>/dev/null || true)"
+            echo "status_latest_record=$(jq -r '.record_chain.latest_record_id // .pipeline_status.chain_head.latest_record_id // empty' /tmp/live/status.json 2>/dev/null || true)"
+            echo "status_total_records=$(jq -r '.total_records // .record_chain.native_record_count // empty' /tmp/live/status.json 2>/dev/null || true)"
+          } > _live_deployment_diagnostic.txt
+          cat _live_deployment_diagnostic.txt
+
+      - name: Commit diagnostics
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-deployment-diagnostic-bot'
+          git config user.email 'actions@github.com'
+          git add _live_deployment_diagnostic.txt
+          git commit -m 'chore: capture live deployment diagnostics'
+          git push origin HEAD:agent/trigger-deploy-609
