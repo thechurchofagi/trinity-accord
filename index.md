@@ -838,12 +838,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">current</p>
+    <p class="status-number">active</p>
     <p class="status-note">
-      Pipeline: current.<br>
-      Latest technical record: R-000000076.<br>
-      OTS: upgraded since unknown (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
-      Arweave: current.<br>
+      Pipeline: active.<br>
+      Latest technical record: R-000000077.<br>
+      OTS: pending since 2026-07-10T10:55:55Z (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
+      Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -862,8 +862,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 3 batches (all stamped).<br>
-      OpenTimestamps: upgraded since unknown; expected initial window is 2-3 hours.<br>
-      Native OTS proof bundle Arweave archive: arweave_archived.<br>
+      OpenTimestamps: pending since 2026-07-10T10:55:55Z; expected initial window is 2-3 hours.<br>
+      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
       Record-Chain Arweave archive: current live mirror; latest tx x9VZW4nQ0urr....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>7602f922df99d21d</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>abf836dca766a52d</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
