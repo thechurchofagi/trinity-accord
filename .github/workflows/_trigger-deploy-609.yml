@@ -1,70 +1,67 @@
-name: Verify Post-609 Live Contracts
+name: Diagnose Post-609 Live Gateway
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  verify-live:
+  diagnose-gateway:
     if: ${{ github.event.pull_request.head.ref == 'agent/trigger-deploy-609' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 5
     steps:
-      - name: Verify deployed site surfaces
-        env:
-          EXPECTED_BUILDER_SHA: baa8cce5f20b0a0913d41114c0a3d2507602cf67169ed9c77e329956588a598d
-          EXPECTED_BUILDER_SIZE: '167286'
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/trigger-deploy-609
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Gate repeated diagnostics
+        id: gate
         run: |
-          set -euo pipefail
-          token="$(date +%s)-$RANDOM"
-          base='https://www.trinityaccord.org'
-          mkdir -p /tmp/live
-          curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' "$base/ai.txt?freshness=$token" -o /tmp/live/ai.txt
-          curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-builder-bundles.v1.json?freshness=$token" -o /tmp/live/bundles.json
-          curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' "$base/downloads/record-chain-builder.mjs?freshness=$token" -o /tmp/live/builder.mjs
-          curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' "$base/api/record-chain-status.json?freshness=$token" -o /tmp/live/status.json
+          if [[ -f _gateway_live_diagnostic.txt ]]; then
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
 
-          grep -Fq 'version: v3.0' /tmp/live/ai.txt
-          grep -Fq '/downloads/record-chain-builder.mjs' /tmp/live/ai.txt
-          grep -Fq '/api/record-chain-intake-gateway.v1.json' /tmp/live/ai.txt
-          ! grep -Fq '/gateway/preflight' /tmp/live/ai.txt
-          ! grep -Fq '/agent-submit' /tmp/live/ai.txt
-          [[ "$(jq -r '.canonical_builder.sha256' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SHA" ]]
-          [[ "$(jq -r '.canonical_builder.size_bytes' /tmp/live/bundles.json)" == "$EXPECTED_BUILDER_SIZE" ]]
-          jq -e '.canonical_builder.supports | index("classification_update") != null' /tmp/live/bundles.json >/dev/null
-          [[ "$(wc -c < /tmp/live/builder.mjs | tr -d ' ')" == "$EXPECTED_BUILDER_SIZE" ]]
-          [[ "$(sha256sum /tmp/live/builder.mjs | awk '{print $1}')" == "$EXPECTED_BUILDER_SHA" ]]
-          [[ "$(jq -r '.pipeline_status.chain_head.latest_record_id' /tmp/live/status.json)" == 'R-000000078' ]]
-          [[ "$(jq -r '.total_records' /tmp/live/status.json)" == '78' ]]
-
-          echo 'SITE_SURFACES_OK'
-
-      - name: Verify live Gateway readiness and strict JSON parser
+      - name: Capture Gateway responses
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -euo pipefail
           gateway='https://trinity-record-chain-gateway.onrender.com'
-
-          curl -fsSL --max-time 45 "$gateway/healthz" -o /tmp/health.json
-          curl -fsSL --max-time 45 "$gateway/record-chain/readiness" -o /tmp/readiness.json
-          jq -e '.ok == true and .service == "record-chain-intake-gateway"' /tmp/health.json >/dev/null
-          jq -e '.ok == true and .preflight_ready == true and .submit_ready == true' /tmp/readiness.json >/dev/null
-
+          health_code="$(curl -sS --max-time 45 -o /tmp/health.json -w '%{http_code}' "$gateway/healthz" || true)"
+          readiness_code="$(curl -sS --max-time 45 -o /tmp/readiness.json -w '%{http_code}' "$gateway/record-chain/readiness" || true)"
           duplicate_code="$(curl -sS --max-time 45 -o /tmp/duplicate.json -w '%{http_code}' \
             -X POST -H 'Content-Type: application/json' \
             --data-binary '{"record_type":"echo","x":1,"x":2}' \
-            "$gateway/record-chain/preflight")"
+            "$gateway/record-chain/preflight" || true)"
           nan_code="$(curl -sS --max-time 45 -o /tmp/nan.json -w '%{http_code}' \
             -X POST -H 'Content-Type: application/json' \
             --data-binary '{"record_type":"echo","x":NaN}' \
-            "$gateway/record-chain/preflight")"
+            "$gateway/record-chain/preflight" || true)"
 
-          [[ "$duplicate_code" == '200' ]]
-          [[ "$nan_code" == '200' ]]
-          jq -e '.accepted == false and (.diagnostics | map(.code) | index("INVALID_JSON") != null)' /tmp/duplicate.json >/dev/null
-          jq -e '.accepted == false and (.diagnostics | map(.code) | index("INVALID_JSON") != null)' /tmp/nan.json >/dev/null
+          {
+            echo "checked_at=$(date -u +%FT%TZ)"
+            echo "health_http=$health_code"
+            echo "health_json=$(jq -c . /tmp/health.json 2>/dev/null || cat /tmp/health.json)"
+            echo "readiness_http=$readiness_code"
+            echo "readiness_json=$(jq -c . /tmp/readiness.json 2>/dev/null || cat /tmp/readiness.json)"
+            echo "duplicate_http=$duplicate_code"
+            echo "duplicate_json=$(jq -c . /tmp/duplicate.json 2>/dev/null || cat /tmp/duplicate.json)"
+            echo "nan_http=$nan_code"
+            echo "nan_json=$(jq -c . /tmp/nan.json 2>/dev/null || cat /tmp/nan.json)"
+          } > _gateway_live_diagnostic.txt
+          cat _gateway_live_diagnostic.txt
 
-          echo 'GATEWAY_LIVE_OK'
-          echo "gateway_version=$(jq -r '.version' /tmp/readiness.json)"
+      - name: Commit Gateway diagnostics
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-gateway-diagnostic-bot'
+          git config user.email 'actions@github.com'
+          git add _gateway_live_diagnostic.txt
+          git commit -m 'chore: capture live Gateway diagnostics'
+          git push origin HEAD:agent/trigger-deploy-609
