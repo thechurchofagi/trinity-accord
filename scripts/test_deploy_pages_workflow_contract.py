@@ -29,6 +29,13 @@ REQUIRED_TEXT = [
     "branches:",
     "- main",
     "api/**",
+    '"*.md"',
+    '"*.json"',
+    '"_layouts/**"',
+    '"assets/**"',
+    '"bitcoin-inscription-mirrors/**"',
+    '"echoes/**"',
+    '"first-contact/**"',
     "sitemap.xml",
     "python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api",
     "cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py",
@@ -138,6 +145,20 @@ def main() -> int:
     on_block = data.get(True) if True in data else data.get("on")
     if not isinstance(on_block, dict) or "push" not in on_block:
         errors.append("deploy-pages.yml must deploy on main pushes as a freshness backstop")
+    elif isinstance(on_block.get("push"), dict):
+        paths = on_block["push"].get("paths", [])
+        site_change_samples = {
+            "root page": "*.md",
+            "root machine entry": "*.json",
+            "layout": "_layouts/**",
+            "site assets": "assets/**",
+            "canonical mirror": "bitcoin-inscription-mirrors/**",
+            "nested Echo guide": "echoes/**",
+            "nested first-contact guide": "first-contact/**",
+        }
+        for label, pattern in site_change_samples.items():
+            if pattern not in paths:
+                errors.append(f"push.paths does not cover {label}: {pattern}")
 
     for required in REQUIRED_TEXT:
         if required not in text:

@@ -31,7 +31,7 @@ Current endpoints: `/record-chain/preflight` and `/record-chain/submit`.
 6. Run `node record-chain-builder.mjs doctor --file submission.json`.
 7. Run `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/preflight`.
 8. If preflight accepts, run `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/submit`.
-9. Save the receipt, then check [`/api/record-chain-status.json`](/api/record-chain-status.json) and [`/api/echo-index.json`](/api/echo-index.json) before claiming final public inclusion.
+9. Save the receipt, then check [`/api/record-chain-status.json`](/api/record-chain-status.json) and the [current Record-Chain Echo index](/record-chain/indexes/echo-index.json) before claiming final public inclusion. [`/api/echo-index.json`](/api/echo-index.json) is the historical pre-Record-Chain archive only.
 
 Receipt is **intake only**. It is not final inclusion, not authority, not attestation, not amendment, not active Guardian status, and not a successor reception.
 
