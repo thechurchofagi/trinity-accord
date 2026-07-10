@@ -37,31 +37,11 @@ jobs:
           end = text.index("\n          PY\n", start)
           lines = text[start:end].splitlines()
           body = '\n'.join(line[10:] if line.startswith('          ') else line for line in lines) + '\n'
-          body = body.replace(
-              'apps/record_chain_intake_gateway/gateway/app.py',
-              'apps/record_chain_intake_gateway/app.py',
-          ).replace(
-              'from apps.record_chain_intake_gateway.gateway.app import _build_agent_recovery',
-              'from apps.record_chain_intake_gateway.app import _build_agent_recovery',
-          )
+          body = body.replace('apps/record_chain_intake_gateway/gateway/app.py', 'apps/record_chain_intake_gateway/app.py')
+          body = body.replace('from apps.record_chain_intake_gateway.gateway.app import _build_agent_recovery', 'from apps.record_chain_intake_gateway.app import _build_agent_recovery')
           Path('/tmp/apply_repair.py').write_text(body, encoding='utf-8')
-          Path('/tmp/apply_compat.py').write_text(r'''from pathlib import Path
-
-path = Path('apps/record_chain_intake_gateway/app.py')
-text = path.read_text(encoding='utf-8')
-old_import = 'from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file_confirmed'
-new_import = 'from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file'
-if text.count(old_import) != 1:
-    raise SystemExit(f'expected one confirmed adapter import, found {text.count(old_import)}')
-text = text.replace(old_import, new_import, 1)
-marker = '\n\nasync def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:\n'
-if marker not in text:
-    raise SystemExit('best-effort rollback marker not found')
-helper = '''\n\nasync def put_file_confirmed(\n    path: str,\n    content: str,\n    message: str,\n    sha: str | None = None,\n) -> dict[str, Any]:\n    """Write through the injectable app-level adapter and reconcile ambiguity."""\n    try:\n        return await put_file(path, content, message, sha=sha)\n    except Exception:\n        remote_text = await get_file_text(path)\n        if remote_text != content:\n            raise\n        remote_sha = await get_file_sha(path)\n        if not remote_sha:\n            raise RuntimeError(f"GitHub write for {path} appears durable but has no readable blob SHA")\n        logger.warning("Reconciled ambiguous GitHub write for %s after transport/API error", path)\n        return {\n            "content": {"sha": remote_sha},\n            "commit": {"sha": None},\n            "reconciled_after_error": True,\n        }\n'''
-text = text.replace(marker, helper + marker, 1)
-path.write_text(text, encoding='utf-8')
-''', encoding='utf-8')
           PY
+          echo 'ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgpwYXRoID0gUGF0aCgnYXBwcy9yZWNvcmRfY2hhaW5faW50YWtlX2dhdGV3YXkvYXBwLnB5JykKdGV4dCA9IHBhdGgucmVhZF90ZXh0KGVuY29kaW5nPSd1dGYtOCcpCm9sZF9pbXBvcnQgPSAnZnJvbSBhcHBzLnJlY29yZF9jaGFpbl9pbnRha2VfZ2F0ZXdheS5nYXRld2F5LmdpdGh1Yl9hZGFwdGVyIGltcG9ydCBkZWxldGVfZmlsZSwgZGlzcGF0Y2hfd29ya2Zsb3csIGdldF9maWxlX3NoYSwgZ2V0X2ZpbGVfdGV4dCwgcHV0X2ZpbGVfY29uZmlybWVkJwpuZXdfaW1wb3J0ID0gJ2Zyb20gYXBwcy5yZWNvcmRfY2hhaW5faW50YWtlX2dhdGV3YXkuZ2F0ZXdheS5naXRodWJfYWRhcHRlciBpbXBvcnQgZGVsZXRlX2ZpbGUsIGRpc3BhdGNoX3dvcmtmbG93LCBnZXRfZmlsZV9zaGEsIGdldF9maWxlX3RleHQsIHB1dF9maWxlJwppZiB0ZXh0LmNvdW50KG9sZF9pbXBvcnQpICE9IDE6CiAgICByYWlzZSBTeXN0ZW1FeGl0KGYnZXhwZWN0ZWQgb25lIGNvbmZpcm1lZCBhZGFwdGVyIGltcG9ydCwgZm91bmQge3RleHQuY291bnQob2xkX2ltcG9ydCl9JykKdGV4dCA9IHRleHQucmVwbGFjZShvbGRfaW1wb3J0LCBuZXdfaW1wb3J0LCAxKQptYXJrZXIgPSAnXG5cbmFzeW5jIGRlZiBfYmVzdF9lZmZvcnRfZGVsZXRlX2NyZWF0ZWRfZmlsZXMoY3JlYXRlZF9maWxlczogbGlzdFt0dXBsZVtzdHIsIHN0cl1dLCByZWNlaXB0X2lkOiBzdHIpIC0+IE5vbmU6XG4nCmlmIG1hcmtlciBub3QgaW4gdGV4dDoKICAgIHJhaXNlIFN5c3RlbUV4aXQoJ2Jlc3QtZWZmb3J0IHJvbGxiYWNrIG1hcmtlciBub3QgZm91bmQnKQpoZWxwZXIgPSAnJydcblxuYXN5bmMgZGVmIHB1dF9maWxlX2NvbmZpcm1lZCgKICAgIHBhdGg6IHN0ciwKICAgIGNvbnRlbnQ6IHN0ciwKICAgIG1lc3NhZ2U6IHN0ciwKICAgIHNoYTogc3RyIHwgTm9uZSA9IE5vbmUsCikgLT4gZGljdFtzdHIsIEFueV06CiAgICAiIiJXcml0ZSB0aHJvdWdoIHRoZSBpbmplY3RhYmxlIGFwcC1sZXZlbCBhZGFwdGVyIGFuZCByZWNvbmNpbGUgYW1iaWd1aXR5LiIiIgogICAgdHJ5OgogICAgICAgIHJldHVybiBhd2FpdCBwdXRfZmlsZShwYXRoLCBjb250ZW50LCBtZXNzYWdlLCBzaGE9c2hhKQogICAgZXhjZXB0IEV4Y2VwdGlvbjoKICAgICAgICByZW1vdGVfdGV4dCA9IGF3YWl0IGdldF9maWxlX3RleHQocGF0aCkKICAgICAgICBpZiByZW1vdGVfdGV4dCAhPSBjb250ZW50OgogICAgICAgICAgICByYWlzZQogICAgICAgIHJlbW90ZV9zaGEgPSBhd2FpdCBnZXRfZmlsZV9zaGEocGF0aCkKICAgICAgICBpZiBub3QgcmVtb3RlX3NoYToKICAgICAgICAgICAgcmFpc2UgUnVudGltZUVycm9yKGYiR2l0SHViIHdyaXRlIGZvciB7cGF0aH0gYXBwZWFycyBkdXJhYmxlIGJ1dCBoYXMgbm8gcmVhZGFibGUgYmxvYiBTSEEiKQogICAgICAgIGxvZ2dlci53YXJuaW5nKCJSZWNvbmNpbGVkIGFtYmlndW91cyBHaXRIdWIgd3JpdGUgZm9yICVzIGFmdGVyIHRyYW5zcG9ydC9BUEkgZXJyb3IiLCBwYXRoKQogICAgICAgIHJldHVybiB7CiAgICAgICAgICAgICJjb250ZW50IjogeyJzaGEiOiByZW1vdGVfc2hhfSwKICAgICAgICAgICAgImNvbW1pdCI6IHsic2hhIjogTm9uZX0sCiAgICAgICAgICAgICJyZWNvbmNpbGVkX2FmdGVyX2Vycm9yIjogVHJ1ZSwKICAgICAgICB9CicnJwp0ZXh0ID0gdGV4dC5yZXBsYWNlKG1hcmtlciwgaGVscGVyICsgbWFya2VyLCAxKQpwYXRoLndyaXRlX3RleHQodGV4dCwgZW5jb2Rpbmc9J3V0Zi04JykK' | base64 -d > /tmp/apply_compat.py
 
       - name: Apply repair
         id: apply
