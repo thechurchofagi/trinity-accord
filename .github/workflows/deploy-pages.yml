@@ -12,7 +12,7 @@ permissions:
 jobs:
   repair:
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -26,13 +26,9 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Apply repair and capture diagnostics
-        id: apply
-        continue-on-error: true
+      - name: Prepare repair script
         run: |
-          set -uo pipefail
-          git fetch origin main agent/fix-deep-audit-round2 --prune
-          git checkout -B agent/fix-deep-audit-round2 origin/agent/fix-deep-audit-round2
+          set -euo pipefail
           git show c21c55b0548ba663e2965143b2cdccb8e9c9e3d5:.github/workflows/_temporary-deep-audit-round2-fix.yml > /tmp/repair.yml
           python3 - <<'PY'
           from pathlib import Path
@@ -50,20 +46,23 @@ jobs:
           )
           Path('/tmp/apply_repair.py').write_text(body, encoding='utf-8')
           PY
-          set +e
-          python3 /tmp/apply_repair.py > /tmp/repair.log 2>&1
-          rc=$?
-          set -e
-          cat /tmp/repair.log
-          echo "rc=$rc" >> "$GITHUB_OUTPUT"
-          exit "$rc"
 
-      - name: Validate repaired branch and capture diagnostics
+      - name: Apply repair
+        id: apply
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          git fetch origin agent/fix-deep-audit-round2 --prune
+          git checkout -B agent/fix-deep-audit-round2 origin/agent/fix-deep-audit-round2
+          python3 /tmp/apply_repair.py > /tmp/repair.log 2>&1
+          cat /tmp/repair.log
+
+      - name: Validate repaired branch
         id: validate
         if: steps.apply.outcome == 'success'
         continue-on-error: true
         env:
-          PYTHONPATH: .
+          PYTHONPATH: .:apps/record_chain_intake_gateway
         run: |
           set +e
           {
@@ -80,13 +79,15 @@ jobs:
           rc=$?
           set -e
           cat /tmp/validation.log
-          echo "rc=$rc" >> "$GITHUB_OUTPUT"
           exit "$rc"
 
-      - name: Commit repair or diagnostic log to branch
+      - name: Commit repair or diagnostics
         if: always()
+        env:
+          PYTHONPATH: .:apps/record_chain_intake_gateway
         run: |
           set -euo pipefail
+          git fetch origin agent/fix-deep-audit-round2 --prune
           git checkout -B agent/fix-deep-audit-round2 origin/agent/fix-deep-audit-round2
           git config user.name 'trinity-audit-repair-bot'
           git config user.email 'actions@github.com'
@@ -99,8 +100,8 @@ jobs:
             git commit -m 'Fix deployment, intake recovery, and agent contracts'
           else
             {
-              echo "apply_outcome=${{ steps.apply.outcome }} apply_rc=${{ steps.apply.outputs.rc }}"
-              echo "validate_outcome=${{ steps.validate.outcome }} validate_rc=${{ steps.validate.outputs.rc }}"
+              echo "apply_outcome=${{ steps.apply.outcome }}"
+              echo "validate_outcome=${{ steps.validate.outcome }}"
               echo
               echo '=== apply log ==='
               cat /tmp/repair.log 2>/dev/null || true
@@ -113,15 +114,24 @@ jobs:
           fi
           git push origin HEAD:agent/fix-deep-audit-round2
 
-      - name: Restore deploy workflow
+      - name: Restore deploy workflow with retry
         if: always()
         run: |
           set -euo pipefail
-          git fetch origin main --prune
-          git checkout -B main origin/main
-          git show origin/main^:.github/workflows/deploy-pages.yml > .github/workflows/deploy-pages.yml
           git config user.name 'trinity-audit-repair-bot'
           git config user.email 'actions@github.com'
-          git add .github/workflows/deploy-pages.yml
-          git commit -m 'chore: restore deploy workflow after audit repair retry'
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            git fetch origin main --prune
+            git checkout -B main origin/main
+            git show b7fc44d47f3ef07339ad04c65f033374309a5cec:.github/workflows/deploy-pages.yml > .github/workflows/deploy-pages.yml
+            git add .github/workflows/deploy-pages.yml
+            if git diff --cached --quiet; then
+              exit 0
+            fi
+            git commit -m 'chore: restore deploy workflow after audit repair'
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          exit 1
