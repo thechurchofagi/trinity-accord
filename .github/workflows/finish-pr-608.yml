@@ -1,0 +1,84 @@
+name: Finish PR 608
+
+on:
+  push:
+    branches:
+      - agent/harden-agent-journeys
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge-latest-main:
+    if: ${{ github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[cleanup-pr-608]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/harden-agent-journeys
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge latest main and resolve generated-status conflicts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          cp api/waiting-heartbeat-status.json /tmp/pr-waiting-heartbeat-status.json
+          cp api/public-home-status.json /tmp/pr-public-home-status.json
+
+          git fetch origin main
+          git merge --no-ff --no-commit origin/main || true
+
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          def read_json(path: str):
+              return json.loads(Path(path).read_text(encoding="utf-8"))
+
+          def read_git_json(spec: str):
+              raw = subprocess.check_output(["git", "show", spec], text=True)
+              return json.loads(raw)
+
+          def write_json(path: str, value):
+              Path(path).write_text(
+                  json.dumps(value, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8",
+              )
+
+          pr_wait = read_json("/tmp/pr-waiting-heartbeat-status.json")
+          main_wait = read_git_json("origin/main:api/waiting-heartbeat-status.json")
+          pr_wait["generated_at"] = main_wait["generated_at"]
+          write_json("api/waiting-heartbeat-status.json", pr_wait)
+
+          pr_home = read_json("/tmp/pr-public-home-status.json")
+          main_home = read_git_json("origin/main:api/public-home-status.json")
+          pr_home["generated_at"] = main_home["generated_at"]
+          if isinstance(pr_home.get("waiting_heartbeat"), dict) and isinstance(main_home.get("waiting_heartbeat"), dict):
+              pr_home["waiting_heartbeat"]["generated_at"] = main_home["waiting_heartbeat"]["generated_at"]
+          write_json("api/public-home-status.json", pr_home)
+          PY
+
+          git checkout origin/main -- record-chain/heartbeat/index.json
+          git add api/public-home-status.json api/waiting-heartbeat-status.json record-chain/heartbeat/index.json
+
+          unresolved="$(git diff --name-only --diff-filter=U)"
+          if [[ -n "$unresolved" ]]; then
+            echo "Unresolved merge conflicts remain:"
+            echo "$unresolved"
+            exit 1
+          fi
+
+          git commit -m "Merge latest main into PR #608 [finish-pr-608]"
+          git push origin HEAD:agent/harden-agent-journeys
+
+      - name: Enable auto-merge when available
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge 608 --repo thechurchofagi/trinity-accord --squash --auto || true
