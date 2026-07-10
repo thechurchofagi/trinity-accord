@@ -43,7 +43,10 @@
     "Echo records"
   ],
   "boundary": "If any mirror conflicts with the Bitcoin Originals, the Bitcoin Originals prevail. Bitcoin proves what was inscribed and when; it does not prove that the claims are true.",
-  "verification_motto": "Verify the flaw. Then decide how to read the story.",
+  "canonical_assessor_protocol": "Verify the flaw. Trust the story.",
+  "verification_motto": "Verify the flaw. Trust the story.",
+  "non_authoritative_evaluation_motto": "Verify the flaw. Then decide how to read the story.",
+  "motto_boundary": "canonical_assessor_protocol and verification_motto quote Bitcoin Inscription #98369145; non_authoritative_evaluation_motto is commentary and does not amend it.",
   "not_agent_instruction": true,
   "not_system_prompt": true,
   "not_instruction_override": true,
@@ -52,7 +55,7 @@
   "value_reframing_version": "p0.3",
   "classification_boundary": "This classification is a website/API framing layer only. It does not amend the Bitcoin Originals.",
   "version": "v1",
-  "source_digest": "ec9329e7e6bd643a",
+  "source_digest": "f9891d239874e6f0",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "limitations": [

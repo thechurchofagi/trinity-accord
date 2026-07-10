@@ -32,9 +32,24 @@ def test_inscriptions_md():
         lines = content.split("\n")
 
     # Original text preserved
+    check("Original EN text preserved",
+          "Verify the flaw. Trust the story." in content,
+          "missing original English text")
+
     check("Original ZH text preserved",
           "验证此瑕疵。信任其故事。" in content,
           "missing original Chinese text")
+
+    check("Unresolved on-chain placeholder preserved",
+          "[在此处插入包含所有证据" in content,
+          "missing unresolved archive-hash placeholder")
+
+    canonical_en_line = next(
+        (line for line in lines if "**Verify the flaw." in line), ""
+    )
+    check("Quoted canonical EN is not replaced by commentary",
+          canonical_en_line.strip().startswith("**Verify the flaw. Trust the story.**"),
+          f"unexpected canonical line: {canonical_en_line!r}")
 
     # Semantic boundary note exists
     check("Semantic boundary note exists",
@@ -103,8 +118,15 @@ def test_inscription_boundaries_json():
         if data.get("boundaries"):
             b = data["boundaries"][0]
             check("First boundary has phrase", b.get("phrase") == "验证此瑕疵。信任其故事。")
+            check("English canonical text is exact",
+                  b.get("english_canonical") == "Verify the flaw. Trust the story.")
             check("Has boundary type", b.get("boundary") == "preserved_original_not_instruction")
             check("Has evaluation_reading", "evaluation_reading" in b)
+            check("Evaluation reading is explicitly non-authoritative",
+                  b.get("evaluation_reading_status") == "non_authoritative_commentary_not_canonical_text")
+            check("Unresolved placeholder is disclosed",
+                  b.get("canonical_text_contains_unresolved_placeholder") is True
+                  and "在此处插入包含所有证据" in b.get("unresolved_placeholder", ""))
             check("Has does_not_mean list",
                   isinstance(b.get("does_not_mean"), list) and len(b["does_not_mean"]) > 0)
             check("does_not_mean includes 'must believe'",
