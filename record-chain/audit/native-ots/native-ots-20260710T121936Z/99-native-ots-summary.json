@@ -1,0 +1,13 @@
+{
+  "schema": "trinity_native_ots_summary.v1",
+  "run_id": "native-ots-20260710T121936Z",
+  "result": "pending",
+  "anchor_ots_status": "pending",
+  "anchor_bitcoin_verified": false,
+  "anchor_bitcoin_attestation_embedded": false,
+  "paid_upload_performed": false,
+  "registry_updated": false,
+  "native_ots_proof_bundle_archive": null,
+  "core_files_unchanged": true,
+  "generated_at": "2026-07-10T12:19:37Z"
+}

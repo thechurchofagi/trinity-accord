@@ -3,10 +3,13 @@
   "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "8ec007b52c86f9b9c7cab8003e012a2d4802096b08df4be753f1aa8223c18781",
   "bitcoin_attestation": null,
+  "bitcoin_attestation_embedded": false,
   "bitcoin_pending": true,
   "bitcoin_verified": false,
+  "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
+  "checked_at": "2026-07-10T12:19:37Z",
   "created_at": "2026-07-10T10:55:55Z",
   "latest_batch_id": "batch-000003",
   "latest_batch_manifest_sha256": "a9406a9c06409b886959cdd0ccbb279ff8c35acc59e023b8edc79cdff7e3853a",
@@ -24,9 +27,29 @@
   "ots_file": "record-chain/ots/native-anchors/native-record-77-R-000000077-90707beeae99e765-8ec007b52c86f9b9.native-record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
   "ots_file_sha256": "74dda32540e8e8d25e9446d488548d40a65e41df62d7e0497a28fed8eb8d2f1c",
+  "ots_info_command": [
+    "ots",
+    "info",
+    "record-chain/ots/native-anchors/native-record-77-R-000000077-90707beeae99e765-8ec007b52c86f9b9.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_info_exit_code": 0,
+  "ots_info_stderr": "",
+  "ots_info_stdout": "File sha256 hash: 8ec007b52c86f9b9c7cab8003e012a2d4802096b08df4be753f1aa8223c18781\nTimestamp:\nappend 773ca8de1aa43fc4a67098045ad9e2f0\nsha256\n -> append 3bf39486ff45b737\n    sha256\n    append 46922eac214e3ace85e967d14b19bcaa\n    sha256\n    prepend 731a46a333f28907eaf2ba7991a4ae7241dd2180a3e17a61849cc06c81c40531\n    sha256\n    prepend 6a50cfba\n    append 2654317aa59e89d5\n    verify PendingAttestation('https://bob.btc.calendar.opentimestamps.org')\n -> append 78c98202e5f2088b\n    sha256\n    append 59a6e56846eefca0b8e278788e952319\n    sha256\n    prepend 7fd75423cd0855a57dc4522e7c2e5244658fa843f504e03284b19a4e2d0297a7\n    sha256\n    prepend 9f1f6da50f91beee79426c57fc6f2f0b95ff161743e84c230ea0f50298d5ee51\n    sha256\n    prepend 6a50cfba\n    append 49b14fb2dded3d2c\n    verify PendingAttestation('https://alice.btc.calendar.opentimestamps.org')\n -> append d63aee5dea44e9295732c3a1756360c2\n    sha256\n    prepend 6a50cfbb\n    append 674731101647027a\n    verify PendingAttestation('https://btc.calendar.catallaxy.com')\n -> append ecf0dbdfa6fdab495815d615a881d07e\n    sha256\n    append 26958cd2222cc4f9e000ad002fd33c3506782ad3401d45b41a6f5fc8899440ef\n    sha256\n    append 59a29251fb87ef1bdf4fcb8d5abca79ee0d198ece17414d1d73065bf57489463\n    sha256\n    append c57fcff4f49ebc71fe6de13fe8e0f6f09fe39711112ed763c2b3f2a028421123\n    sha256\n    prepend 6a50cfbb\n    append 1cc2fd795212fd5c\n    verify PendingAttestation('https://finney.calendar.eternitywall.com')\n\n",
   "ots_status": "pending",
   "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
   "ots_stdout": "",
+  "ots_upgrade_command": [
+    "ots",
+    "upgrade",
+    "record-chain/ots/native-anchors/native-record-77-R-000000077-90707beeae99e765-8ec007b52c86f9b9.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_upgrade_exit_code": 1,
+  "ots_upgrade_stderr": "Calendar https://bob.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://alice.btc.calendar.opentimestamps.org: Timestamped by transaction 3eb9eefc7909d83a687d7203f972188a50af3ebc54ac8eb8980949e2e9316ec5; waiting for 6 confirmations\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nCalendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nFailed! Timestamp not complete\n",
+  "ots_upgrade_stdout": "",
+  "ots_verify_command": null,
+  "ots_verify_exit_code": null,
+  "ots_verify_stderr": null,
+  "ots_verify_stdout": null,
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000077",
@@ -70,5 +93,7 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "no_bitcoin_node",
   "verified_at": null
 }
