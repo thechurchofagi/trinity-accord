@@ -1,0 +1,68 @@
+name: Consume Deep Audit Round 2 Repair
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  consume:
+    if: ${{ github.event.pull_request.head.ref == 'agent/fix-deep-audit-round2' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download and verify validated artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: '8229377051'
+          EXPECTED_BASE: '3ee6d8c64e5c008eead8f30686517e7ca6c4d911'
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/repair
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/repair.zip
+          unzip -q /tmp/repair.zip -d /tmp/repair
+          test "$(tr -d '\r\n' < /tmp/repair/base-main-sha.txt)" = "$EXPECTED_BASE"
+          cat > /tmp/expected-changed.txt <<'EOF'
+          .github/workflows/homepage-status-sync.yml
+          .github/workflows/waiting-heartbeat-status-sync.yml
+          agent-record-chain-guidance/index.html
+          api/gateway-rate-limit-policy.v1.json
+          apps/record_chain_intake_gateway/app.py
+          apps/record_chain_intake_gateway/gateway/canonical.py
+          apps/record_chain_intake_gateway/gateway/github_adapter.py
+          apps/record_chain_intake_gateway/gateway/rate_limit.py
+          apps/record_chain_intake_gateway/tests/test_deep_audit_round2.py
+          scripts/generate_waiting_heartbeat_status.py
+          EOF
+          diff -u /tmp/expected-changed.txt /tmp/repair/changed.txt
+          while IFS= read -r path; do
+            test -f "/tmp/repair/files/$path"
+          done < /tmp/expected-changed.txt
+
+      - name: Force-update clean repair branch
+        env:
+          TARGET_BRANCH: agent/fix-deep-audit-round2
+          EXPECTED_BASE: '3ee6d8c64e5c008eead8f30686517e7ca6c4d911'
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-audit-repair-bot'
+          git config user.email 'actions@github.com'
+          git checkout -B "$TARGET_BRANCH" "$EXPECTED_BASE"
+          while IFS= read -r path; do
+            mkdir -p "$(dirname "$path")"
+            cp "/tmp/repair/files/$path" "$path"
+          done < /tmp/repair/changed.txt
+          rm -f .github/workflows/_apply-deep-audit-round2.yml _audit_repair_failure.log _audit_repair_pr_marker.md
+          git add -A
+          git diff --cached --check
+          git commit -m 'Fix deployment, intake recovery, and agent contracts'
+          git push --force origin "HEAD:$TARGET_BRANCH"
