@@ -487,7 +487,7 @@ GROUPS = {
         ["python3", "scripts/diagnose_live_propagation.py"],
     ],
     "live-site-swarm": [
-        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--max-failures", "20"],
+        ["python3", "scripts/smoke_external_agent_concurrent_preflight_swarm.py", "--agents", "20", "--workers", "8", "--min-success-ratio", "0.9"],
     ],
     "live-site-gateway-core": [
         ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
@@ -532,4 +532,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

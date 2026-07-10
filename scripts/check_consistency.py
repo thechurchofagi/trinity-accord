@@ -156,7 +156,8 @@ try:
     heartbeat = phs.get("waiting_heartbeat", {})
     success_requires = heartbeat.get("success_requires", {})
     check("waiting heartbeat status embedded", heartbeat.get("schema") == "trinityaccord.waiting-heartbeat-status.v1")
-    check("waiting heartbeat requires Arweave hash match", success_requires.get("arweave_readback_hash_match") is True)
+    check("waiting heartbeat treats Arweave as archive follow-up", success_requires.get("arweave_capsule_is_archive_followup") is True)
+    check("waiting heartbeat daily alive does not require Arweave hash match", success_requires.get("arweave_readback_hash_match") is False)
     check("waiting heartbeat requires public status update", success_requires.get("public_status_updated") is True)
 except Exception as exc:
     check("public-home-status current structure", False, str(exc))

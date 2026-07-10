@@ -17,7 +17,7 @@
       "response_content_type": "application/json"
     },
     "preflight": {
-      "description": "Validates a submission without persisting it. Returns diagnostics, warnings, and route detection. Use before submit to catch errors cheaply.",
+      "description": "Validates a submission without persisting it. Returns diagnostics, warnings, and route detection. Guardian retirement preflight also verifies the immutable target application record id, record SHA-256, Guardian key, and Guardian identifier. Use before submit to catch errors cheaply.",
       "method": "POST",
       "path": "/record-chain/preflight",
       "request_content_type": "application/json",
@@ -108,13 +108,14 @@
   "server_side_pipeline": {
     "description": "The gateway owns the full pipeline: preflight validates, submit persists to intake, internal workers append to the canonical Record-Chain, and hashes are assigned server-side. A receipt confirms intake acceptance but does not guarantee final chain position.",
     "preflight_validates_only": true,
+    "guardian_retirement_preflight_binds_final_application": true,
     "receipt_is_not_final_chain_record": true,
     "record_chain_append_is_internal": true,
     "record_hashes_assigned_server_side": true,
     "submit_persists_intake": true
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-06-11T10:00:00Z",
+  "updated_at": "2026-07-10T00:00:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,

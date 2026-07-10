@@ -394,6 +394,116 @@ def _diagnostics_from_errors(errors: list[str | Diagnostic]) -> list[Diagnostic]
     return diagnostics
 
 
+async def _guardian_retirement_target_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
+    """Verify a Guardian retirement against its immutable application record.
+
+    Syntax, oath, and signature checks run in ``validate_submission``.  This
+    check closes the remaining gap: preflight and submit must not accept a
+    retirement whose target record is missing or belongs to another Guardian
+    key/identifier.  Append repeats the same binding checks as defense in
+    depth.
+    """
+    draft = extract_record_draft(body)
+    if draft.get("record_type") != "guardian_retirement":
+        return []
+
+    target_id = draft.get("target_guardian_application_record_id")
+    target_sha = draft.get("target_guardian_application_record_sha256")
+    guardian_id = draft.get("guardian_id")
+    guardian_key = draft.get("guardian_public_key_sha256")
+    if not all(isinstance(value, str) and value for value in (target_id, target_sha, guardian_id, guardian_key)):
+        # The synchronous validator emits the field-level diagnostics.
+        return []
+
+    target_path = f"record-chain/records/{target_id}.json"
+    try:
+        target_text = await get_file_text(target_path)
+    except Exception as exc:
+        logger.warning("Guardian retirement target lookup failed for %s: %s", target_id, exc)
+        return [Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED",
+            severity="error",
+            field="record_draft.target_guardian_application_record_id",
+            message=f"Could not verify Guardian application target {target_id}.",
+            meaning="Guardian retirement must fail closed when the immutable target application cannot be read.",
+            suggested_fix="Retry preflight later without changing or re-signing the submission.",
+            retry_allowed=True,
+        )]
+
+    if target_text is None:
+        return [Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_NOT_FOUND",
+            severity="error",
+            field="record_draft.target_guardian_application_record_id",
+            message=f"Guardian application target {target_id} does not exist.",
+            meaning="A Guardian retirement must identify an existing final guardian_application record.",
+            suggested_fix="Read the public Guardian state and copy the exact source_record_id from the Guardian application.",
+            retry_allowed=True,
+        )]
+
+    try:
+        target = json.loads(target_text)
+    except (json.JSONDecodeError, TypeError) as exc:
+        logger.error("Guardian retirement target is invalid JSON at %s: %s", target_path, exc)
+        return [Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_INVALID",
+            severity="error",
+            field="record_draft.target_guardian_application_record_id",
+            message=f"Guardian application target {target_id} could not be verified as a final record.",
+            meaning="The target record must be readable canonical JSON before retirement can be accepted.",
+            suggested_fix="Retry later; do not guess or replace the target hash.",
+            retry_allowed=True,
+        )]
+
+    if not isinstance(target, dict) or target.get("record_type") != "guardian_application":
+        return [Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE",
+            severity="error",
+            field="record_draft.target_guardian_application_record_id",
+            message=f"Target {target_id} is not a guardian_application record.",
+            meaning="Guardian retirement can only bind to the Guardian's final application record.",
+            suggested_fix="Use the source_record_id shown for this Guardian in the public Guardian state.",
+            retry_allowed=True,
+        )]
+
+    content = target.get("guardian_application_content")
+    if not isinstance(content, dict):
+        content = {}
+
+    mismatches: list[Diagnostic] = []
+    if target.get("record_sha256") != target_sha:
+        mismatches.append(Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH",
+            severity="error",
+            field="record_draft.target_guardian_application_record_sha256",
+            message=f"Target SHA-256 does not match final record {target_id}.",
+            meaning="The retirement must bind to the exact immutable Guardian application record.",
+            suggested_fix="Copy record_sha256 exactly from the public final application record.",
+            retry_allowed=True,
+        ))
+    if content.get("guardian_public_key_sha256") != guardian_key:
+        mismatches.append(Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH",
+            severity="error",
+            field="record_draft.guardian_public_key_sha256",
+            message="Retirement key does not match the target Guardian application key.",
+            meaning="Only the same Guardian key that authored the application may retire that Guardian identity.",
+            suggested_fix="Use the original Guardian authorship key and rebuild the retirement submission.",
+            retry_allowed=False,
+        ))
+    if content.get("requested_guardian_identifier") != guardian_id:
+        mismatches.append(Diagnostic(
+            code="GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH",
+            severity="error",
+            field="record_draft.guardian_id",
+            message="Retirement Guardian identifier does not match the target application.",
+            meaning="A retirement record must name the exact Guardian identity created by its target application.",
+            suggested_fix="Copy requested_guardian_identifier exactly from the public final application record.",
+            retry_allowed=True,
+        ))
+    return mismatches
+
+
 def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
     """Build agent recovery guidance from diagnostics."""
     error_codes = [d.code for d in diagnostics if d.severity == "error"]
@@ -782,6 +892,8 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
     # validate_submission now returns list[Diagnostic] directly
     diagnostics = validate_submission(body)
     diagnostics.extend(_client_projection_diagnostics(body))
+    if not diagnostics:
+        diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
 
     # Authorship verification is performed inside validate_submission().
     # Do not run a second verifier here; duplicate verifiers can produce conflicting diagnostics.
@@ -859,6 +971,8 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     # --- validate (now returns list[Diagnostic] directly) ---
     diagnostics = validate_submission(body)
     diagnostics.extend(_client_projection_diagnostics(body))
+    if not diagnostics:
+        diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
     if diagnostics:
         return SubmitResponse(
             accepted=False,

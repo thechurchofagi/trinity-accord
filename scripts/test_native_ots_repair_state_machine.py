@@ -10,6 +10,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 OTS_LATEST = ROOT / "api/record-chain-native-ots-latest.json"
+RC_BACKLOG = ROOT / "record-chain/arweave-backlog.json"
+API_RC_BACKLOG = ROOT / "api/record-chain-arweave-backlog.json"
 OTS_BACKLOG = ROOT / "record-chain/ots/native-ots-backlog.json"
 OTS_API_BACKLOG = ROOT / "api/record-chain-native-ots-backlog.json"
 NATIVE_ANCHORS = ROOT / "record-chain/ots/native-anchors"
@@ -46,7 +48,16 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as td:
         tmp = Path(td)
 
-        for p in [OTS_LATEST, OTS_BACKLOG, OTS_API_BACKLOG, NATIVE_REGISTRY, NATIVE_API_REGISTRY]:
+        mutable_state = [
+            OTS_LATEST,
+            RC_BACKLOG,
+            API_RC_BACKLOG,
+            OTS_BACKLOG,
+            OTS_API_BACKLOG,
+            NATIVE_REGISTRY,
+            NATIVE_API_REGISTRY,
+        ]
+        for p in mutable_state:
             backup(p, tmp)
 
         latest_pending_anchor = NATIVE_ANCHORS / "zz-contract-native-record-004.anchor.json"
@@ -198,7 +209,7 @@ def main() -> int:
 
             print("PASS: native OTS repair backlog state machine")
         finally:
-            for p in [OTS_LATEST, OTS_BACKLOG, OTS_API_BACKLOG, NATIVE_REGISTRY, NATIVE_API_REGISTRY]:
+            for p in mutable_state:
                 restore(p, tmp)
             for p in created:
                 if p.exists():

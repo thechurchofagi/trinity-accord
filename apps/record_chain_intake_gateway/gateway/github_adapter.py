@@ -20,7 +20,6 @@ def _token() -> str:
     token = os.environ.get("TRINITY_GITHUB_TOKEN", "")
     if not token:
         raise RuntimeError("TRINITY_GITHUB_TOKEN environment variable is not set")
-    logger.info("TRINITY_GITHUB_TOKEN length: %d, starts: %s", len(token), token[:15])
     return token
 
 

@@ -90,12 +90,11 @@ class TestNormalizeRecordDraftV2:
         assert result["boundary"]["bitcoin_originals_prevail"] is True
 
     def test_v2_boundary_partial_false(self):
-        """If a boundary field is missing/false in the ack, derived boundary reflects that."""
+        """A false authority boundary must fail closed before append."""
         draft = _minimal_v2_draft()
         draft["non_authority_boundary_acknowledgement"]["not_authority"] = False
-        result = normalize_record_draft(draft)
-        assert result["boundary"]["not_authority"] is False
-        assert result["boundary"]["not_governance"] is True
+        with pytest.raises(ValueError, match="not_authority"):
+            normalize_record_draft(draft)
 
     def test_existing_actor_identity_not_overwritten(self):
         """If actor_identity is already set, it should not be overwritten."""
@@ -105,10 +104,11 @@ class TestNormalizeRecordDraftV2:
         assert result["actor_identity"]["display_label"] == "Custom Agent"
 
     def test_existing_boundary_not_overwritten(self):
+        """An incomplete compatibility projection must not bypass the signed boundary."""
         draft = _minimal_v2_draft()
         draft["boundary"] = {"custom": True}
-        result = normalize_record_draft(draft)
-        assert result["boundary"]["custom"] is True
+        with pytest.raises(ValueError, match="record boundary missing/false"):
+            normalize_record_draft(draft)
 
 
 class TestNormalizeRecordDraftErrors:

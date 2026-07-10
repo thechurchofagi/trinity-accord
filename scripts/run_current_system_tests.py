@@ -102,6 +102,8 @@ def main() -> int:
         "scripts/test_deploy_pages_workflow_contract.py",
         "scripts/test_mission_governance_contract.py",
         "scripts/test_no_stale_echo_taxonomy_names.py",
+        "scripts/test_concurrent_preflight_swarm_contract.py",
+        "scripts/test_agent_e2e_journey_matrix.py",
     ]:
         result = subprocess.run(
             [sys.executable, script],

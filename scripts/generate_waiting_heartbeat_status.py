@@ -464,10 +464,16 @@ def main() -> int:
             "gateway_accepted": True,
             "record_chain_final_record": True,
             "ots_covers_heartbeat": True,
-            "arweave_capsule_uploaded": True,
-            "arweave_readback_hash_match": True,
+            "arweave_capsule_uploaded": False,
+            "arweave_readback_hash_match": False,
             "public_status_updated": True,
             "waiting_heartbeat_key_continuity_ok": True,
+            "arweave_capsule_is_archive_followup": True,
+        },
+        "archive_followup": {
+            "arweave_capsule_upload_expected": True,
+            "arweave_readback_hash_match_expected": True,
+            "does_not_gate_daily_alive_success": True,
         },
         "latest_heartbeat": latest,
         "latest_ots": {

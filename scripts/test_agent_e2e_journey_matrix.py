@@ -70,6 +70,7 @@ def assert_common_integrity(payload: dict, expected_type: str) -> None:
     assert draft["authorization_context"]["authorization_scope"] == EXPECTED_AUTH_SCOPE[expected_type]
     ctx = draft["context_readiness"]
     assert ctx["declared_context_level"] != "CC-3" or ctx.get("loaded_context_urls"), "CC-3 requires loaded URLs"
+    assert ctx["declared_context_level"] != "CC-3" or ctx.get("context_read_confirmed") is True, "CC-3 requires explicit read confirmation"
     assert draft["discovery_and_introduction_context"]["how_participant_first_discovered_trinity_accord"] != "self_discovered"
     assert draft["decision_autonomy_context"]["who_decided_to_create_this_record"] != "self"
     assert draft["submitting_participant_identity"]["human_operator_context"]["human_operator_involved"] is False
@@ -82,11 +83,14 @@ def build_formal_journeys(tmp: Path) -> None:
         "--provider", "Offline Test Runtime",
         "--context-level", "CC-3",
         "--context-sufficient-for-selected-action", "true",
+        "--context-read-confirmed", "true",
         "--loaded-urls", loaded,
         "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
         "--record-decision", "human",
         "--submission-executor", "self",
-            "--human-operator-involved", "false",
+        "--human-operator-involved", "false",
         "--generate-authorship-key",
         "--key-dir", "./authorship-keys",
     ]
@@ -116,8 +120,8 @@ def build_formal_journeys(tmp: Path) -> None:
             "guardian_application",
             [
                 "guardian-application",
-                "--guardian-id", "e2e-guardian-applicant",
-                "--guardian-key-sha", "0" * 64,
+                "--guardian-id", "auto",
+                "--guardian-key-sha", "auto",
                 "--readback", oath("guardian_application", tmp),
                 "--out", "guardian.json",
                 *common,
@@ -128,9 +132,11 @@ def build_formal_journeys(tmp: Path) -> None:
             "guardian_retirement",
             [
                 "guardian-retirement",
-                "--guardian-id", "e2e-guardian-applicant",
-                "--guardian-key-sha", "0" * 64,
+                "--guardian-id", "auto",
+                "--guardian-key-sha", "auto",
                 "--body", "Offline E2E guardian retirement notice.",
+                "--target-guardian-application-record-id", "R-000000054",
+                "--target-guardian-application-record-sha256", "e28938ab8f7b1748ee1d8bd42424b4dfedf2d7d579fff10e6678c1feecfec25c",
                 "--readback", oath("guardian_retirement", tmp),
                 "--out", "guardian-retirement.json",
                 *common,
@@ -155,6 +161,11 @@ def build_formal_journeys(tmp: Path) -> None:
                 "correction",
                 "--title", "Offline E2E correction",
                 "--body", "Offline E2E correction record.",
+                "--target-record-id", "R-000000001",
+                "--target-record-sha256", "a" * 64,
+                "--correction-reason", "Offline E2E correction reason.",
+                "--corrected-fields-or-claims", "body",
+                "--evidence-or-review-basis", "Fresh offline Builder and validator review.",
                 "--readback", oath("correction", tmp),
                 "--out", "correction.json",
                 *common,
