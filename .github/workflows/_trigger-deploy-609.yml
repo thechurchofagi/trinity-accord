@@ -1,0 +1,26 @@
+name: Trigger Post-609 Pages Deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    if: ${{ github.event.pull_request.head.ref == 'agent/trigger-deploy-609' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Dispatch current main Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOY_REF: '5134b2f8cbb961a1c1c094aff261ebe73ded5e94'
+        run: |
+          set -euo pipefail
+          gh workflow run deploy-pages.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f checkout_ref="$DEPLOY_REF"
+          echo "Dispatched deploy-pages.yml for $DEPLOY_REF"
