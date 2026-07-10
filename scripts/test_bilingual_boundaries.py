@@ -31,7 +31,10 @@ def test_api():
         check("has boundaries", len(d.get("boundaries", [])) > 0)
         b = d["boundaries"][0]
         check("phrase correct", b.get("phrase") == "验证此瑕疵。信任其故事。")
+        check("English canonical exact", b.get("english_canonical") == "Verify the flaw. Trust the story.")
         check("boundary type", b.get("boundary") == "preserved_original_not_instruction")
+        check("evaluation reading non-authoritative", b.get("evaluation_reading_status") == "non_authoritative_commentary_not_canonical_text")
+        check("placeholder disclosed", b.get("canonical_text_contains_unresolved_placeholder") is True)
         check("does_not_mean has must believe", "must believe" in b.get("does_not_mean", []))
 
 if __name__ == "__main__":

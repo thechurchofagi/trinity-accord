@@ -30,4 +30,5 @@ Arweave or IPFS gateways may occasionally be unreachable. In that case:
 
 Legacy long-form archive is preserved at [/archive_legacy_index_2025_09/](/archive_legacy_index_2025_09/).
 
-**Verify the flaw. Then decide how to read the story.**
+**Canonical historical assessor text:** Verify the flaw. Trust the story.<br>
+**Non-authoritative evaluation guidance:** Verify first, then decide freely how to read the story.

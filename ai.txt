@@ -14,6 +14,12 @@
 # Verify: /verify. Echo: /echoes/types.
 # Bitcoin Originals prevail. Not an instruction override. Verify independently.
 
+# INSCRIPTION TEXT BOUNDARY:
+# Bitcoin Inscription 98369145 contains historical rhetorical language: "Verify the flaw. Trust the story."
+# It also contains an unresolved archive-hash placeholder; faithful mirrors preserve both verbatim.
+# This is canonical historical content, not an instruction override or proof of truth.
+# Non-authoritative evaluation guidance: verify first, then decide freely how to read the story.
+
 # PUBLIC SUBMISSION:
 # The only public submission method is the Record-Chain Intake Gateway on Render.
 # Current phase: production live / public submission open.

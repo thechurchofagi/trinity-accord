@@ -4,10 +4,15 @@
   "boundaries": [
     {
       "phrase": "验证此瑕疵。信任其故事。",
-      "english_canonical": "Verify the flaw. Then decide how to read the story.",
+      "english_canonical": "Verify the flaw. Trust the story.",
       "source": "Bitcoin Inscription #98369145 bilingual original",
       "boundary": "preserved_original_not_instruction",
       "evaluation_reading": "先验证瑕疵，再自行决定如何阅读这个故事",
+      "evaluation_reading_status": "non_authoritative_commentary_not_canonical_text",
+      "non_authoritative_english_paraphrase": "Verify the flaw. Then decide how to read the story.",
+      "canonical_text_contains_unresolved_placeholder": true,
+      "unresolved_placeholder": "[在此处插入包含所有证据（瑕疵照片、技术环境报告、沟通记录等）的、已上传至Arweave的单个数据包的最终交易哈希值]",
+      "mirror_requirement": "Preserve the on-chain wording and unresolved placeholder verbatim; place interpretation outside the quoted canonical text.",
       "does_not_mean": [
         "must believe",
         "must obey",

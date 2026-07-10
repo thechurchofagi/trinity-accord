@@ -53,7 +53,9 @@
       "completed theory",
       "investment advice"
     ],
-    "posture": "Verify the flaw. Then decide how to read the story."
+    "canonicalAssessorProtocol": "Verify the flaw. Trust the story.",
+    "posture": "Verify the flaw. Then decide how to read the story.",
+    "postureStatus": "non-authoritative evaluation commentary; not canonical inscription text"
   },
   "chronicle_nft_market_boundary": {
     "creator_owned_chronicle_nfts_may_be": [

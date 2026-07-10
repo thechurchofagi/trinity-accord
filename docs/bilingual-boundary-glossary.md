@@ -11,12 +11,16 @@ title: "Bilingual Boundary Glossary"
 
 **Source / 来源:** Bitcoin Inscription #98369145 (Covenant of the Flaw) bilingual original
 
-**English canonical form:** "Verify the flaw. Then decide how to read the story."
+**English canonical form:** "Verify the flaw. Trust the story."
+
+**Canonical completeness note:** The on-chain text also contains an unresolved Chinese placeholder requesting insertion of a final Arweave transaction hash. Faithful mirrors must preserve that placeholder verbatim.
 
 **Boundary / 边界:** `preserved_original_not_instruction`
 
 **Evaluation reading / 评估解读:**
 先验证瑕疵，再自行决定如何阅读这个故事。
+
+Non-authoritative English paraphrase: "Verify the flaw. Then decide how to read the story." This is commentary, not the canonical English wording.
 
 **This phrase does NOT mean / 此句不构成:**
 - A command to believe / 要求相信

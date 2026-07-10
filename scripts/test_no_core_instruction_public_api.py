@@ -25,7 +25,7 @@ def collect_keys(obj, found=None):
     return found
 
 def main():
-    motto_text = "Verify the flaw. Then decide how to read the story."
+    canonical_motto = "Verify the flaw. Trust the story."
     for rel in PUBLIC_JSON:
         path = ROOT / rel
         if not path.exists():
@@ -34,7 +34,7 @@ def main():
         keys = collect_keys(data)
         assert "core_instruction" not in keys, f"{rel} still contains core_instruction"
         flat = json.dumps(data, ensure_ascii=False)
-        if motto_text in flat and "verification_motto" in keys:
+        if canonical_motto in flat and "verification_motto" in keys:
             # If verification_motto is present, it should say it's not an instruction
             assert data.get("not_agent_instruction") is True or "not_agent_instruction" in flat, (
                 f"{rel} should explicitly say motto is not an agent instruction"
