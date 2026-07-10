@@ -9,10 +9,16 @@
     "gateway_accepted": true,
     "record_chain_final_record": true,
     "ots_covers_heartbeat": true,
-    "arweave_capsule_uploaded": true,
-    "arweave_readback_hash_match": true,
+    "arweave_capsule_uploaded": false,
+    "arweave_readback_hash_match": false,
     "public_status_updated": true,
-    "waiting_heartbeat_key_continuity_ok": true
+    "waiting_heartbeat_key_continuity_ok": true,
+    "arweave_capsule_is_archive_followup": true
+  },
+  "archive_followup": {
+    "arweave_capsule_upload_expected": true,
+    "arweave_readback_hash_match_expected": true,
+    "does_not_gate_daily_alive_success": true
   },
   "latest_heartbeat": {
     "heartbeat_id": "hwb-20260710",

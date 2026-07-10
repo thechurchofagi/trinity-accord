@@ -13,6 +13,7 @@ it as multi-instance/durable enforcement unless replaced by a shared backend.
 from __future__ import annotations
 
 import time
+import threading
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -28,6 +29,7 @@ _WINDOW_SECONDS = 3600
 # Each entry: list of timestamps (seconds since epoch)
 _global_timestamps: list[float] = []
 _participant_timestamps: dict[str, list[float]] = {}
+_state_lock = threading.Lock()
 
 
 def _extract_participant_key(submission: dict[str, Any]) -> str:
@@ -84,6 +86,12 @@ def check_rate_limit(submission: dict[str, Any]) -> dict[str, Any] | None:
 
     Returns None if allowed, or a rate-limit violation response dict if denied.
     """
+    with _state_lock:
+        return _check_rate_limit_locked(submission)
+
+
+def _check_rate_limit_locked(submission: dict[str, Any]) -> dict[str, Any] | None:
+    """Mutate process-local counters while ``_state_lock`` is held."""
     now = time.time()
 
     # Prune global window
@@ -164,5 +172,6 @@ def _build_rate_limit_response(
 def reset() -> None:
     """Reset all rate limit state (for testing)."""
     global _global_timestamps
-    _global_timestamps = []
-    _participant_timestamps.clear()
+    with _state_lock:
+        _global_timestamps = []
+        _participant_timestamps.clear()

@@ -23,8 +23,6 @@ RECEIPT_STATUS_DIR = ROOT / "record-chain" / "receipt-status"
 KEY_MANIFEST = ROOT / "api" / "waiting-heartbeat-key.v1.json"
 DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com"
 SUBMITTED_ATTEMPT_STATUSES = {"submitted"}
-
-SUBMITTED_ATTEMPT_STATUSES = {"submitted"}
 REJECTED_APPEND_STATUSES = {"rejected"}
 AMBIGUOUS_SUBMIT_FAILURE_STATUSES = {"submit_failed"}
 
@@ -58,13 +56,6 @@ def parse_stdout_json(stdout: str) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
-def read_json_or_none(path: Path) -> Any | None:
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (FileNotFoundError, json.JSONDecodeError):
-        return None
-
-
 def write_github_output(values: dict[str, str]) -> None:
     output = os.environ.get("GITHUB_OUTPUT")
     if not output:
@@ -72,21 +63,6 @@ def write_github_output(values: dict[str, str]) -> None:
     with open(output, "a", encoding="utf-8") as fh:
         for key, value in values.items():
             fh.write(f"{key}={value}\n")
-
-
-def record_contains_heartbeat(record: dict[str, Any], heartbeat_id: str) -> bool:
-    heartbeat = record.get("system_waiting_heartbeat")
-    return isinstance(heartbeat, dict) and heartbeat.get("heartbeat_id") == heartbeat_id
-
-
-def final_record_exists(heartbeat_id: str) -> bool:
-    if not RECORDS_DIR.exists():
-        return False
-    for path in RECORDS_DIR.glob("R-*.json"):
-        record = read_json_or_none(path)
-        if isinstance(record, dict) and record_contains_heartbeat(record, heartbeat_id):
-            return True
-    return False
 
 
 def write_key_dir(key_dir: Path) -> None:

@@ -1582,6 +1582,36 @@ const ERROR_HELP_MAP = {
     fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
     help_url: "https://www.trinityaccord.org/docs/guardian-retirement",
   },
+  GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED: {
+    meaning: "The Gateway could not read the immutable target Guardian application and failed closed.",
+    fix: "Retry the exact same signed submission later. Do not replace or guess the target id or hash.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_NOT_FOUND: {
+    meaning: "The target id does not identify an existing final Guardian application.",
+    fix: "Read public Guardian state and copy the exact source_record_id of the Guardian application.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE: {
+    meaning: "The selected target final record is not a guardian_application.",
+    fix: "Use the source_record_id of the Guardian's final guardian_application record.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH: {
+    meaning: "The declared target SHA-256 does not match record_sha256 of the final Guardian application.",
+    fix: "Copy record_sha256 exactly from the final target application. Do not use content_sha256, receipt_sha256, or a key hash.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH: {
+    meaning: "The retirement key does not match the public key bound by the target Guardian application.",
+    fix: "Use the original Guardian authorship key. A different key cannot retire this Guardian identity.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH: {
+    meaning: "guardian_id does not match requested_guardian_identifier in the target application.",
+    fix: "Copy requested_guardian_identifier exactly from the final Guardian application.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
   MISSING_RECORD_CONTENT: {
     meaning: "A propagation or correction record is missing title or body.",
     fix: "Rebuild with propagation/correction and provide --body; optionally provide --title.",
@@ -2618,6 +2648,9 @@ Examples:
     --body "Correction details" \\
     --target-record-id R-000000001 \\
     --target-record-sha256 <sha256-of-target-record> \\
+    --correction-reason "Describe the error or omission" \\
+    --corrected-fields-or-claims "body,claim" \\
+    --evidence-or-review-basis "Describe the fresh review basis" \\
     --context-level CC-3 \\
     --context-sufficient-for-selected-action true \\
     --context-read-confirmed true \\
@@ -2638,8 +2671,10 @@ Examples:
   node record-chain-builder.mjs classification-update \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
+    --previous-classification "previous_classification_value" \\
     --new-classification "classification_value" \\
     --classification-reason "Reason for classification change" \\
+    --evidence-or-review-basis "Describe the fresh review basis" \\
     --target-record-id R-000000001 \\
     --target-record-sha256 <sha256-of-target-record> \\
     --context-level CC-3 \\
@@ -3232,4 +3267,3 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
-

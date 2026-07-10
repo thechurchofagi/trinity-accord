@@ -173,7 +173,8 @@ def build_payload(latest: dict[str, Any], chain_tip: dict[str, Any], ots: dict[s
             "capsule_is_not_echo": True,
             "capsule_is_not_verification": True,
             "capsule_is_not_guardian_application": True,
-            "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": True,
+            "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": False,
+            "capsule_upload_and_hash_match_are_archive_followup": True,
         },
         "boundary": {
             "capsule_is_mirror_only": True,

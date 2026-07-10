@@ -152,6 +152,18 @@ def test_current_expected_record_is_alive_while_arweave_capsule_is_pending() -> 
     require(summary["success_definition"].get("arweave_capsule_is_archive_followup") is True, "summary must classify Arweave capsule as archive follow-up")
 
 
+def test_capsule_payload_does_not_contradict_daily_alive_policy() -> None:
+    builder = load_capsule_builder_module()
+    payload = builder.build_payload(
+        {"heartbeat_id": "hwb-20260623", "record_id": "R-000000057"},
+        {"latest_record_id": "R-000000057"},
+        {"latest_record_id": "R-000000057"},
+    )
+    semantics = payload["daily_alive_semantics"]
+    require(semantics["daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched"] is False, "capsule must not gate daily alive success")
+    require(semantics["capsule_upload_and_hash_match_are_archive_followup"] is True, "capsule must declare archive follow-up semantics")
+
+
 def test_attempt_for_expected_date_is_pending_append_not_missing_final_heartbeat() -> None:
     generator = load_generator_module()
     summary = generator.compute_heartbeat_summary(
@@ -362,6 +374,7 @@ def main() -> int:
     test_expected_heartbeat_date_respects_schedule_grace_window()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
     test_current_expected_record_is_alive_while_arweave_capsule_is_pending()
+    test_capsule_payload_does_not_contradict_daily_alive_policy()
     test_attempt_for_expected_date_is_pending_append_not_missing_final_heartbeat()
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
     test_ots_head_covers_prior_heartbeat_record()

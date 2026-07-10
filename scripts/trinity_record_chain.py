@@ -1573,6 +1573,14 @@ def verify_native_records() -> list[str]:
                             retire_key = obj.get("guardian_public_key_sha256")
                             if isinstance(target_key, str) and isinstance(retire_key, str) and target_key != retire_key:
                                 errors.append(f"{p}: guardian_public_key_sha256 does not match target application")
+                            target_guardian_id = target_gac.get("requested_guardian_identifier")
+                            retire_guardian_id = obj.get("guardian_id")
+                            if (
+                                isinstance(target_guardian_id, str)
+                                and isinstance(retire_guardian_id, str)
+                                and target_guardian_id != retire_guardian_id
+                            ):
+                                errors.append(f"{p}: guardian_id does not match target application")
 
                 # B.5: Correction target binding
                 if rtype == "correction":

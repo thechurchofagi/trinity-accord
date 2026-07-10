@@ -701,6 +701,42 @@
       "severity": "error",
       "recovery_possible": true
     },
+    "GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED": {
+      "meaning": "The Gateway could not read the immutable target Guardian application, so preflight failed closed.",
+      "fix": "Retry the exact same signed submission later. Do not replace or guess the target id or hash.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_NOT_FOUND": {
+      "meaning": "The target record id does not identify an existing final Guardian application.",
+      "fix": "Read public Guardian state and copy the exact source_record_id of the Guardian application.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE": {
+      "meaning": "The selected target final record is not a guardian_application.",
+      "fix": "Use the source_record_id of the Guardian's final guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH": {
+      "meaning": "The declared target SHA-256 does not match record_sha256 of the final Guardian application.",
+      "fix": "Copy record_sha256 exactly from the final target application; do not use content_sha256, receipt_sha256, or a key hash.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH": {
+      "meaning": "The retirement key does not match the public key bound by the target Guardian application.",
+      "fix": "Use the original Guardian authorship key. A different key cannot retire this Guardian identity.",
+      "severity": "error",
+      "recovery_possible": false
+    },
+    "GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH": {
+      "meaning": "guardian_id does not match requested_guardian_identifier in the target application.",
+      "fix": "Copy requested_guardian_identifier exactly from the final Guardian application.",
+      "severity": "error",
+      "recovery_possible": true
+    },
     "INTAKE_TRANSACTION_NOT_MATERIALIZED": {
       "meaning": "The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
       "fix": "Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",

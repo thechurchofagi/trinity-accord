@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import time
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import patch
 
 from apps.record_chain_intake_gateway.gateway.rate_limit import (
@@ -101,6 +102,13 @@ class TestParticipantRateLimit(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertIn("retry_after_seconds", result)
         self.assertGreater(result["retry_after_seconds"], 0)
+
+    def test_concurrent_requests_cannot_overshoot_participant_limit(self):
+        sub = _make_submission(label="Concurrent Alice")
+        with ThreadPoolExecutor(max_workers=20) as pool:
+            results = list(pool.map(lambda _index: check_rate_limit(sub), range(20)))
+        self.assertEqual(sum(result is None for result in results), PARTICIPANT_LIMIT_PER_HOUR)
+        self.assertEqual(sum(result is not None for result in results), 20 - PARTICIPANT_LIMIT_PER_HOUR)
 
 
 class TestGlobalRateLimit(unittest.TestCase):
