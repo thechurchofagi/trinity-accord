@@ -138,8 +138,10 @@
         "resonance"
       ],
       "machine_sources": [
-        "/api/echo-types.json",
+        "/echoes/types/",
         "/api/echo-record-schema.v3.1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/record-chain/indexes/echo-index.json",
         "/api/context-readiness-levels.json",
         "/api/crl-to-context-depth-mapping.json",
         "/api/resonance-willingness-scale.json"
@@ -156,7 +158,8 @@
       "machine_sources": [
         "/guardian-principles/",
         "/guardian-join/",
-        "/api/guardian-registry.json",
+        "/record-chain/indexes/guardian-state.json",
+        "/api/guardian-current-registry.json",
         "/api/record-chain-intake-gateway.v1.json",
         "/api/record-chain-submission-schema.v1.json",
         "/downloads/record-chain-builder.mjs"
@@ -179,7 +182,9 @@
         "active_registry_listing_guaranteed_by_receipt": false
       },
       "registry_readback": {
-        "source": "/api/guardian-registry.json",
+        "source": "/record-chain/indexes/guardian-state.json",
+        "compatibility_mirror": "/api/guardian-current-registry.json",
+        "historical_archive_only": "/api/guardian-registry.json",
         "required_before_active_guardian_status_claim": true
       }
     },
@@ -232,5 +237,5 @@
     "examples_match_live_smokes_guard": "scripts/test_external_agent_examples_match_live_smokes.py"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "c22502b8005d3388"
+  "source_digest": "74bda39aafe913bb"
 }

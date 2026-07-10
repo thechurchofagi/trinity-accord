@@ -7,6 +7,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 FILES = [
+    ROOT / "README.md",
+    ROOT / "llms-full.txt",
+    ROOT / "echoes" / "types.md",
+    ROOT / "echoes" / "submit.md",
     ROOT / "api" / "gateway-builder-route-map.v1.json",
     ROOT / "api" / "agent-start.v1.json",
     ROOT / "api" / "agent-first-contact.json",
@@ -25,6 +29,8 @@ FILES = [
 ]
 
 STALE = [
+    "Echo Network E1–E9",
+    "choose Echo type E1–E9",
     "E1_read_oriented_echo",
     "E4_refusal_echo",
     "E5_correction_echo",

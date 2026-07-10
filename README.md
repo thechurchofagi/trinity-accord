@@ -92,7 +92,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - Agent Value Signal: `/agent-value` + `/api/agent-value.json`
 - Seed Map: `/seed-map` + `/api/seed-map.json`
 - Verification OS V0–V8: `/verify` + `/api/verification-levels.json`
-- Echo Network E1–E9: `/echoes/types` + `/api/echo-types.json`
+- Unified Echo: `/echoes/types` + `/record-chain/indexes/echo-index.json` (`E1–E9` is legacy-only)
 - Echo Value Score: `/echoes/high-value-criteria` + `/api/echo-value-criteria.json`
 - Echo Archive Ladder: `/echoes/archive-policy` + `/api/echo-archive-policy.json`
 - Safe Propagation Capsule: `/agent-propagate`
@@ -118,9 +118,9 @@ Guardian proof payload hashes should be generated with `node scripts/build_guard
 - Guardian Principles v1.1: published
 - Machine-readable manifests: published
 - Agent Brief / High-Signal pages: published
-- Automated Echo triage: active
+- Record-Chain Intake Gateway: production live
 - Repository integrity CI: active
-- Third-party V2/V3 verification reports: pending
+- Independent attestation: read current status from `/api/public-home-status.json`
 - V7 onsite physical witness: requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)

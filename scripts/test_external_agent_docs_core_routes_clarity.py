@@ -29,13 +29,15 @@ def main() -> int:
 
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
     for needle in [
-        "Pure Echo",
+        "unified Echo",
         "V0–V5 verification",
-        "Guardian Alliance Stage 1",
-        
+        "Guardian Application through the current Record-Chain flow",
     ]:
         if needle not in homepage:
             errors.append(f"index.md missing homepage first-contact phrase: {needle}")
+    for retired in ["Pure Echo, V0–V5 verification", "Guardian Alliance Stage 1"]:
+        if retired in homepage:
+            errors.append(f"index.md advertises retired first-contact phrase: {retired}")
 
     quickstart = (ROOT / "external-agent-quickstart.md").read_text(encoding="utf-8")
     for needle in REQUIRED_GLOBAL + [

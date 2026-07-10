@@ -95,6 +95,24 @@ def main() -> int:
         fail(f"active routes check failed:\n{result.stdout}\n{result.stderr}")
     ok("active public routes check")
 
+    # 1c1. Mission-critical public journey contracts. These keep the mutable
+    # website aligned with the current Record-Chain lifecycle while preserving
+    # legacy material as historical-only.
+    for script in [
+        "scripts/test_deploy_pages_workflow_contract.py",
+        "scripts/test_mission_governance_contract.py",
+        "scripts/test_no_stale_echo_taxonomy_names.py",
+    ]:
+        result = subprocess.run(
+            [sys.executable, script],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            fail(f"mission-critical journey contract failed ({script}):\n{result.stdout}\n{result.stderr}")
+    ok("mission-critical public journey contracts")
+
     # record-chain-status drift check must run before public-home source_digest check.
     result = subprocess.run(
         [sys.executable, "scripts/generate_record_chain_status.py", "--check"],
@@ -1143,4 +1161,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
