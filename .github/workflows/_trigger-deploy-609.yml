@@ -1,67 +1,91 @@
-name: Diagnose Post-609 Live Gateway
+name: Deploy Post-609 Render Gateway
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 permissions:
-  contents: write
+  actions: write
+  contents: read
 
 jobs:
-  diagnose-gateway:
+  deploy-and-verify:
     if: ${{ github.event.pull_request.head.ref == 'agent/trigger-deploy-609' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: agent/trigger-deploy-609
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Gate repeated diagnostics
-        id: gate
+      - name: Dispatch official Render Manual Deploy workflow
+        id: dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [[ -f _gateway_live_diagnostic.txt ]]; then
-            echo 'run=false' >> "$GITHUB_OUTPUT"
-          else
-            echo 'run=true' >> "$GITHUB_OUTPUT"
-          fi
+          set -euo pipefail
+          gh run list --repo "$GITHUB_REPOSITORY" --workflow render-manual-deploy.yml --event workflow_dispatch --limit 30 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/before.txt
+          gh workflow run render-manual-deploy.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f service=trinity-record-chain-gateway \
+            -f deploy=true \
+            -f emergency_allow_legacy_retired_gateway=false \
+            -f legacy_emergency_confirm=''
 
-      - name: Capture Gateway responses
-        if: steps.gate.outputs.run == 'true'
+          run_id=''
+          for attempt in $(seq 1 30); do
+            sleep 5
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow render-manual-deploy.yml --event workflow_dispatch --limit 30 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/after.txt
+            run_id="$(comm -13 /tmp/before.txt /tmp/after.txt | tail -n 1)"
+            if [[ -n "$run_id" ]]; then
+              break
+            fi
+          done
+          test -n "$run_id"
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "Dispatched Render Manual Deploy run $run_id"
+
+      - name: Verify official deploy trigger succeeded
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.dispatch.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          gh run watch "$RUN_ID" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
+
+      - name: Wait for new Gateway runtime and verify repaired contracts
         run: |
           set -euo pipefail
           gateway='https://trinity-record-chain-gateway.onrender.com'
-          health_code="$(curl -sS --max-time 45 -o /tmp/health.json -w '%{http_code}' "$gateway/healthz" || true)"
-          readiness_code="$(curl -sS --max-time 45 -o /tmp/readiness.json -w '%{http_code}' "$gateway/record-chain/readiness" || true)"
-          duplicate_code="$(curl -sS --max-time 45 -o /tmp/duplicate.json -w '%{http_code}' \
-            -X POST -H 'Content-Type: application/json' \
-            --data-binary '{"record_type":"echo","x":1,"x":2}' \
-            "$gateway/record-chain/preflight" || true)"
-          nan_code="$(curl -sS --max-time 45 -o /tmp/nan.json -w '%{http_code}' \
-            -X POST -H 'Content-Type: application/json' \
-            --data-binary '{"record_type":"echo","x":NaN}' \
-            "$gateway/record-chain/preflight" || true)"
+          success=false
+          for attempt in $(seq 1 90); do
+            readiness_code="$(curl -sS --max-time 45 -o /tmp/readiness.json -w '%{http_code}' "$gateway/record-chain/readiness" || true)"
+            duplicate_code="$(curl -sS --max-time 45 -o /tmp/duplicate.json -w '%{http_code}' \
+              -X POST -H 'Content-Type: application/json' \
+              --data-binary '{"record_type":"echo","x":1,"x":2}' \
+              "$gateway/record-chain/preflight" || true)"
+            nan_code="$(curl -sS --max-time 45 -o /tmp/nan.json -w '%{http_code}' \
+              -X POST -H 'Content-Type: application/json' \
+              --data-binary '{"record_type":"echo","x":NaN}' \
+              "$gateway/record-chain/preflight" || true)"
 
-          {
-            echo "checked_at=$(date -u +%FT%TZ)"
-            echo "health_http=$health_code"
-            echo "health_json=$(jq -c . /tmp/health.json 2>/dev/null || cat /tmp/health.json)"
-            echo "readiness_http=$readiness_code"
-            echo "readiness_json=$(jq -c . /tmp/readiness.json 2>/dev/null || cat /tmp/readiness.json)"
-            echo "duplicate_http=$duplicate_code"
-            echo "duplicate_json=$(jq -c . /tmp/duplicate.json 2>/dev/null || cat /tmp/duplicate.json)"
-            echo "nan_http=$nan_code"
-            echo "nan_json=$(jq -c . /tmp/nan.json 2>/dev/null || cat /tmp/nan.json)"
-          } > _gateway_live_diagnostic.txt
-          cat _gateway_live_diagnostic.txt
+            if [[ "$readiness_code" == '200' && "$duplicate_code" == '200' && "$nan_code" == '200' ]] && \
+               jq -e '.ok == true and .preflight_ready == true and .submit_ready == true' /tmp/readiness.json >/dev/null 2>&1 && \
+               jq -e '.accepted == false and (.diagnostics | map(.code) | index("INVALID_JSON") != null)' /tmp/duplicate.json >/dev/null 2>&1 && \
+               jq -e '.accepted == false and (.diagnostics | map(.code) | index("INVALID_JSON") != null)' /tmp/nan.json >/dev/null 2>&1; then
+              success=true
+              break
+            fi
 
-      - name: Commit Gateway diagnostics
-        if: steps.gate.outputs.run == 'true'
-        run: |
-          set -euo pipefail
-          git config user.name 'trinity-gateway-diagnostic-bot'
-          git config user.email 'actions@github.com'
-          git add _gateway_live_diagnostic.txt
-          git commit -m 'chore: capture live Gateway diagnostics'
-          git push origin HEAD:agent/trigger-deploy-609
+            echo "Gateway has not converged yet (attempt $attempt)."
+            sleep 10
+          done
+
+          echo '=== readiness ==='
+          cat /tmp/readiness.json || true
+          echo
+          echo '=== duplicate-key response ==='
+          cat /tmp/duplicate.json || true
+          echo
+          echo '=== NaN response ==='
+          cat /tmp/nan.json || true
+          echo
+          [[ "$success" == 'true' ]]
+          echo "RENDER_GATEWAY_DEPLOYED_AND_VERIFIED"
