@@ -15,7 +15,7 @@ on:
         type: choice
         options: [core, pages, all]
       batch_size:
-        description: "URLs per observable batch"
+        description: "URLs per observable batch (1-10)"
         required: true
         default: "10"
         type: string
@@ -88,8 +88,8 @@ jobs:
 
           scope = os.environ["ARCHIVE_SCOPE"]
           size = int(os.environ["ARCHIVE_BATCH_SIZE"])
-          if size < 1 or size > 50:
-              raise SystemExit("batch_size must be between 1 and 50")
+          if size < 1 or size > 10:
+              raise SystemExit("batch_size must be between 1 and 10")
           urls, _ = load_sitemap(Path("sitemap.xml"))
           selected = select_urls(urls, scope, 0)
           include = [
@@ -115,7 +115,7 @@ jobs:
     needs: plan
     name: capture batch ${{ matrix.batch }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 210
     strategy:
       fail-fast: false
       max-parallel: 1
