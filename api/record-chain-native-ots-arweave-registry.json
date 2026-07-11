@@ -1222,10 +1222,62 @@
         "ots_proof_bundle_arweave_archive_is_not_amendment": true,
         "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
       }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-1c46986c2899cc41.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "1c46986c2899cc417e4e18c44073900ae77e7cbb37b3269c1086b2e003bb20d7",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-1c46986c2899cc41.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-43-R-000000043-94560272bcf5d82e-1c46986c2899cc41.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "a6fccf059ba0a294fea5d221dea0bbebf09940f4674e979e72a7dc40ac372beb",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-43-R-000000043-94560272bcf5d82e-1c46986c2899cc41.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "7316e1893985c2e59e6122018ced1e0acebce366dd1162be54b7d80ea506db5a",
+      "ots_status": "upgraded",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": false,
+      "strict_bitcoin_verified": false,
+      "tx_id": "K6tekoFrjHSnoayHFLFHG5Y_N7fpcNdTNjnfzOPJKhk",
+      "gateway_url": "https://arweave.net/K6tekoFrjHSnoayHFLFHG5Y_N7fpcNdTNjnfzOPJKhk",
+      "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+      "archive_status": "arweave_archived",
+      "uploaded_at": "2026-07-11T01:24:39Z",
+      "registered_at": "2026-07-11T01:24:39Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-65-R-000000065-f114044d7af03085-d487c68d72892096.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "d487c68d728920962341142c3fa43b55e3dacc02ae124857902eb4de459a125d",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-65-R-000000065-f114044d7af03085-d487c68d72892096.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-65-R-000000065-f114044d7af03085-d487c68d72892096.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "2c10e4e6d37634f0c6056a0b73f653980e3d11ecbb9f3bffebd1402006cd853b",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-65-R-000000065-f114044d7af03085-d487c68d72892096.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "b6cdeea68c1e52f0abbf31ce34d2ac8fa84c748dab98e03b3fd7fc2144b63fcc",
+      "ots_status": "upgraded",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": false,
+      "strict_bitcoin_verified": false,
+      "tx_id": "2hSXSJM6Ls8hZ-UTLIPSJU8sBtX7GWC5iXdmxWHPDjw",
+      "gateway_url": "https://arweave.net/2hSXSJM6Ls8hZ-UTLIPSJU8sBtX7GWC5iXdmxWHPDjw",
+      "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+      "archive_status": "arweave_archived",
+      "uploaded_at": "2026-07-11T01:26:13Z",
+      "registered_at": "2026-07-11T01:26:13Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
     }
   ],
   "created_at": "2026-06-09T00:00:00Z",
-  "updated_at": "2026-07-10T20:11:49Z",
+  "updated_at": "2026-07-11T01:26:13Z",
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
     "native_ots_proof_bundle_arweave_archive_is_not_authority": true,

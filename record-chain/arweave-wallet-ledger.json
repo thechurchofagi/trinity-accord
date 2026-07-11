@@ -1,13 +1,13 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-07-10T20:12:25Z",
+  "updated_at": "2026-07-11T01:26:13Z",
   "wallet": {
     "wallet_address": null,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "public_address_allowed": false,
     "currency": "AR",
-    "last_known_balance_ar": "15.268504558788",
-    "last_known_balance_at": "2026-07-10T20:12:25.671Z",
+    "last_known_balance_ar": "15.255819997624",
+    "last_known_balance_at": "2026-07-11T01:24:41.681Z",
     "low_balance_threshold_ar": "0.25"
   },
   "entries": [
@@ -750,6 +750,26 @@
       "paid_at": "2026-07-10T20:12:25.671Z",
       "status": "paid",
       "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/arweave-archives/archive-native-R-000000078-8368d8fda318/upload-result.json"
+    },
+    {
+      "tx_id": "K6tekoFrjHSnoayHFLFHG5Y_N7fpcNdTNjnfzOPJKhk",
+      "kind": "native_ots_bundle_archive",
+      "source_path": "record-chain/ots/native-arweave-bundles/native-record-43-R-000000043-94560272bcf5d82e-1c46986c2899cc41.anchor.upgraded.arweave-bundle.json",
+      "amount_ar": null,
+      "winston": "2551114867",
+      "paid_at": "2026-07-11T01:21:51.809Z",
+      "status": "paid",
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260711T012149Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
+    },
+    {
+      "tx_id": "2hSXSJM6Ls8hZ-UTLIPSJU8sBtX7GWC5iXdmxWHPDjw",
+      "kind": "native_ots_bundle_archive",
+      "source_path": "record-chain/ots/native-arweave-bundles/native-record-65-R-000000065-f114044d7af03085-d487c68d72892096.anchor.upgraded.arweave-bundle.json",
+      "amount_ar": null,
+      "winston": "2551114867",
+      "paid_at": "2026-07-11T01:24:41.681Z",
+      "status": "paid",
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/audit/native-ots/native-ots-20260711T012439Z/paid-upload/11-arweave-upload-result.native_ots_proof_bundle.json"
     }
   ],
   "boundary": {
