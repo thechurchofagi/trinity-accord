@@ -1,0 +1,125 @@
+name: Public Internet Archive
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "Sitemap capture scope"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - core
+          - pages
+          - all
+      max_urls:
+        description: "Maximum URLs (0 means all selected URLs)"
+        required: true
+        default: "0"
+        type: string
+      delay_seconds:
+        description: "Delay between Wayback requests"
+        required: true
+        default: "15"
+        type: string
+      confirm_live_capture:
+        description: "Perform public external writes; false is dry-run"
+        required: true
+        default: false
+        type: boolean
+      request_software_heritage:
+        description: "Request Git repository archival by Software Heritage"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-internet-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate archive client
+        run: |
+          python3 -m unittest scripts/test_archive_public_web.py
+          python3 scripts/archive_public_web.py \
+            --dry-run \
+            --scope "${{ inputs.scope }}" \
+            --max-urls "${{ inputs.max_urls }}" \
+            --delay-seconds "0" \
+            --output "$RUNNER_TEMP/archive-dry-run.json"
+
+      - name: Capture sitemap URLs
+        id: capture
+        continue-on-error: true
+        env:
+          WAYBACK_ACCESS_KEY: ${{ secrets.WAYBACK_ACCESS_KEY }}
+          WAYBACK_SECRET_KEY: ${{ secrets.WAYBACK_SECRET_KEY }}
+        run: |
+          args=(
+            --scope "${{ inputs.scope }}"
+            --max-urls "${{ inputs.max_urls }}"
+            --delay-seconds "${{ inputs.delay_seconds }}"
+            --output "$RUNNER_TEMP/internet-archive-results.json"
+          )
+          if [ "${{ inputs.confirm_live_capture }}" != "true" ]; then
+            args+=(--dry-run)
+          fi
+          if [ "${{ inputs.request_software_heritage }}" = "true" ]; then
+            args+=(--request-software-heritage)
+          fi
+          python3 scripts/archive_public_web.py "${args[@]}"
+
+      - name: Publish archive run summary
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["RUNNER_TEMP"]) / "internet-archive-results.json"
+          if not path.exists():
+              raise SystemExit("archive result file was not created")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          summary = data.get("summary", {})
+          swh = data.get("software_heritage") or {}
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as out:
+              out.write("# Public Internet Archive run\n\n")
+              out.write(f"- Dry run: {data.get('dry_run')}\n")
+              out.write(f"- Scope: {data.get('scope')}\n")
+              out.write(f"- Sitemap URLs: {data.get('sitemap_url_count')}\n")
+              out.write(f"- Selected URLs: {data.get('selected_url_count')}\n")
+              out.write(f"- Wayback summary: \`{json.dumps(summary, sort_keys=True)}\`\n")
+              out.write(f"- Software Heritage: \`{swh.get('status', 'not-requested')}\`\n")
+              out.write("\nArchive copies are non-amending mirrors. Bitcoin Originals prevail.\n")
+          PY
+
+      - name: Upload auditable archive results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-internet-archive-results
+          path: |
+            ${{ runner.temp }}/internet-archive-results.json
+            ${{ runner.temp }}/archive-dry-run.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Enforce capture result
+        if: always() && steps.capture.outcome == 'failure'
+        run: |
+          echo "::error::One or more requested archive operations failed. Inspect the uploaded result manifest."
+          exit 1
