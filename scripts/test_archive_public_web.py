@@ -17,6 +17,7 @@ from scripts.archive_public_web import (
     load_sitemap,
     load_url_file,
     select_urls,
+    should_apply_inter_url_delay,
 )
 from scripts.merge_public_web_archive_results import merge_results
 
@@ -197,6 +198,24 @@ class ArchivePublicWebTests(unittest.TestCase):
             )
         self.assertIsNotNone(result)
         self.assertEqual(result["capture_url"], "https://web.archive.org/web/example")
+
+    def test_inter_url_delay_only_follows_wayback_write_attempt(self):
+        self.assertFalse(
+            should_apply_inter_url_delay(
+                {"status": "already_captured", "attempts": 0}
+            )
+        )
+        self.assertFalse(
+            should_apply_inter_url_delay(
+                {"status": "source_unavailable", "attempts": 0}
+            )
+        )
+        self.assertTrue(
+            should_apply_inter_url_delay({"status": "captured", "attempts": 1})
+        )
+        self.assertTrue(
+            should_apply_inter_url_delay({"status": "failed", "attempts": 4})
+        )
 
     def test_retry_overlay_replaces_initial_failures(self):
         initial = {
