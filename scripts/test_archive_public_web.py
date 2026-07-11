@@ -62,6 +62,7 @@ class ArchivePublicWebTests(unittest.TestCase):
             "https://www.trinityaccord.org/authority/",
         ]
         self.assertEqual(select_urls(urls, "pages", 2), urls[:2])
+        self.assertEqual(select_urls(urls, "pages", 2, 1), urls[1:3])
 
     def test_core_paths_are_absolute_and_unique(self):
         self.assertTrue(CORE_PATHS)

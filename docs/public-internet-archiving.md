@@ -35,9 +35,15 @@ Open **Actions → Public Internet Archive → Run workflow**.
    different rate.
 5. Inspect failures and rerun a smaller bounded batch when necessary.
 
-The live job can take more than 90 minutes because the sitemap is intentionally
+The workflow plans the selected sitemap into observable matrix batches. Batches
+run one at a time to respect the archive service, but each batch is a separate
+GitHub job and uploads its JSON result immediately. The Actions page therefore
+shows completed, running, queued, and failed batches while the full archive is
+still in progress. A final aggregate job combines all available batch results.
+
+The live workflow can take several hours because URLs are intentionally
 processed sequentially. A failed workflow does not mean every capture failed;
-the JSON result artifact is the source for per-URL outcomes.
+the batch artifacts and aggregate JSON are the sources for per-URL outcomes.
 
 ## Credentials
 
@@ -49,7 +55,7 @@ authenticated Internet Archive account:
 - `WAYBACK_SECRET_KEY`
 
 The client refuses a partial credential configuration. Secrets are used only in
-the request header and are never written to logs or result artifacts.
+  the request header and are never written to logs or result artifacts.
 
 ## Result semantics
 
