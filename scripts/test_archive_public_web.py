@@ -5,12 +5,43 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.error
+from datetime import datetime, timezone
 from pathlib import Path
+from unittest import mock
 
-from scripts.archive_public_web import CORE_PATHS, load_sitemap, select_urls
+from scripts.archive_public_web import (
+    CORE_PATHS,
+    capture_wayback,
+    find_recent_capture,
+    load_sitemap,
+    load_url_file,
+    select_urls,
+)
+from scripts.merge_public_web_archive_results import merge_results
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "public-internet-archive.yml"
+
+
+class FakeResponse:
+    def __init__(self, status=200, body=b"", headers=None, url="https://example.invalid/"):
+        self.status = status
+        self._body = body
+        self.headers = headers or {}
+        self._url = url
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        return False
+
+    def read(self):
+        return self._body
+
+    def geturl(self):
+        return self._url
 
 
 class ArchivePublicWebTests(unittest.TestCase):
@@ -43,6 +74,27 @@ class ArchivePublicWebTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "non-canonical"):
             load_sitemap(path)
 
+    def test_url_file_accepts_json_and_deduplicates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "urls.json"
+            path.write_text(
+                json.dumps(
+                    [
+                        "https://www.trinityaccord.org/",
+                        "https://www.trinityaccord.org/",
+                        "https://www.trinityaccord.org/agent-brief/",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                load_url_file(path),
+                [
+                    "https://www.trinityaccord.org/",
+                    "https://www.trinityaccord.org/agent-brief/",
+                ],
+            )
+
     def test_scope_selection(self):
         urls = [
             "https://www.trinityaccord.org/",
@@ -52,10 +104,7 @@ class ArchivePublicWebTests(unittest.TestCase):
             "https://www.trinityaccord.org/llms.txt",
         ]
         self.assertEqual(select_urls(urls, "all", 0), urls)
-        self.assertEqual(
-            select_urls(urls, "pages", 0),
-            urls[:2],
-        )
+        self.assertEqual(select_urls(urls, "pages", 0), urls[:2])
         core = select_urls(urls, "core", 0)
         self.assertIn("https://www.trinityaccord.org/", core)
         self.assertIn("https://www.trinityaccord.org/api/authority.json", core)
@@ -74,6 +123,116 @@ class ArchivePublicWebTests(unittest.TestCase):
     def test_core_paths_are_absolute_and_unique(self):
         self.assertTrue(CORE_PATHS)
         self.assertTrue(all(path.startswith("/") for path in CORE_PATHS))
+
+    def test_source_unavailable_is_distinct_from_wayback_failure(self):
+        with mock.patch(
+            "scripts.archive_public_web.probe_source",
+            return_value={"available": False, "http_status": 404, "attempts": 1},
+        ):
+            result = capture_wayback(
+                "https://www.trinityaccord.org/missing/",
+                10,
+                1,
+            )
+        self.assertEqual(result["status"], "source_unavailable")
+        self.assertEqual(result["source"]["http_status"], 404)
+        self.assertEqual(result["attempts"], 0)
+
+    def test_wayback_404_is_retried_when_source_is_healthy(self):
+        error = urllib.error.HTTPError(
+            "https://web.archive.org/save/example",
+            404,
+            "NOT FOUND",
+            {},
+            None,
+        )
+        success = FakeResponse(
+            status=200,
+            headers={"Content-Location": "/web/20260711000000/https://www.trinityaccord.org/"},
+        )
+        with (
+            mock.patch(
+                "scripts.archive_public_web.probe_source",
+                return_value={"available": True, "http_status": 200, "attempts": 1},
+            ),
+            mock.patch("scripts.archive_public_web.find_recent_capture", return_value=None),
+            mock.patch(
+                "scripts.archive_public_web.urllib.request.urlopen",
+                side_effect=[error, success],
+            ),
+            mock.patch("scripts.archive_public_web.time.sleep") as sleeper,
+        ):
+            result = capture_wayback(
+                "https://www.trinityaccord.org/",
+                10,
+                2,
+            )
+        self.assertEqual(result["status"], "captured")
+        self.assertEqual(result["attempts"], 2)
+        self.assertTrue(result["capture_url"].startswith("https://web.archive.org/"))
+        sleeper.assert_called_once()
+
+    def test_recent_capture_short_circuits_new_save(self):
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
+        body = json.dumps(
+            {
+                "archived_snapshots": {
+                    "closest": {
+                        "available": True,
+                        "status": "200",
+                        "timestamp": timestamp,
+                        "url": "https://web.archive.org/web/example",
+                    }
+                }
+            }
+        ).encode()
+        with mock.patch(
+            "scripts.archive_public_web.urllib.request.urlopen",
+            return_value=FakeResponse(status=200, body=body),
+        ):
+            result = find_recent_capture(
+                "https://www.trinityaccord.org/",
+                10,
+                7,
+            )
+        self.assertIsNotNone(result)
+        self.assertEqual(result["capture_url"], "https://web.archive.org/web/example")
+
+    def test_retry_overlay_replaces_initial_failures(self):
+        initial = {
+            "schema": "trinityaccord.public-internet-archive-results.v1",
+            "sitemap_sha256": "abc",
+            "scope": "all",
+            "dry_run": False,
+            "selected_start_index": 0,
+            "boundary": {"archive_is_mirror_only": True},
+            "wayback": [
+                {"url": "https://www.trinityaccord.org/", "status": "failed"},
+                {
+                    "url": "https://www.trinityaccord.org/agent-brief/",
+                    "status": "captured",
+                },
+            ],
+        }
+        base = merge_results([initial], expected_count=2)
+        self.assertEqual(base["unresolved_url_count"], 1)
+        retry = {
+            "schema": "trinityaccord.public-internet-archive-results.v1",
+            "sitemap_sha256": "abc",
+            "scope": "all",
+            "dry_run": False,
+            "run_kind": "retry",
+            "wayback": [
+                {
+                    "url": "https://www.trinityaccord.org/",
+                    "status": "already_captured",
+                }
+            ],
+        }
+        final = merge_results([retry], expected_count=2, base_aggregate=base)
+        self.assertEqual(final["unresolved_url_count"], 0)
+        self.assertEqual(final["summary"]["already_captured"], 1)
+        self.assertEqual(final["retry_update_count"], 1)
 
     def test_software_heritage_helper_runs_as_workflow_module(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -100,27 +259,27 @@ class ArchivePublicWebTests(unittest.TestCase):
             result = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "dry-run")
 
-    def test_workflow_preserves_partial_batch_observability(self):
+    def test_workflow_has_two_phase_retry_and_final_gate(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn(
-            "python3 -m scripts.request_software_heritage_archive",
-            workflow,
-        )
-        self.assertIn("if size < 1 or size > 10:", workflow)
-        self.assertIn("batch_size must be between 1 and 10", workflow)
+        self.assertIn(".github/archive-public-site-live-trigger-v4", workflow)
+        self.assertIn("timeout-minutes: 300", workflow)
+        self.assertIn("aggregate-initial:", workflow)
+        self.assertIn("retry-unresolved:", workflow)
+        self.assertIn("final:", workflow)
+        self.assertIn("--recent-days 7", workflow)
+        self.assertIn("--recent-days 14", workflow)
+        self.assertIn("--retries 5", workflow)
+        self.assertIn("public archive remains incomplete after retry wave", workflow)
+        self.assertNotIn("Enforce batch result", workflow)
 
-        capture = workflow.split("\n  capture:\n", 1)[1].split(
+        initial = workflow.split("\n  capture:\n", 1)[1].split(
             "\n  software-heritage:\n", 1
         )[0]
-        match = re.search(r"timeout-minutes:\s*(\d+)", capture)
-        self.assertIsNotNone(match, "capture timeout-minutes is missing")
+        match = re.search(r"timeout-minutes:\s*(\d+)", initial)
+        self.assertIsNotNone(match)
         timeout_minutes = int(match.group(1))
-
-        # Upper bound for the accepted 10-URL batch: three 180-second
-        # requests per URL, two Retry-After sleeps capped at 300 seconds,
-        # and nine 15-second inter-request delays.
-        worst_case_seconds = 10 * (3 * 180 + 2 * 300) + 9 * 15
-        required_seconds = worst_case_seconds + 15 * 60
+        worst_case_seconds = 10 * (4 * 120 + 3 * 300) + 9 * 30
+        required_seconds = worst_case_seconds + 20 * 60
         self.assertGreaterEqual(timeout_minutes * 60, required_seconds)
 
 
