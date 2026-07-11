@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from archive_public_web import CORE_PATHS, load_sitemap, select_urls
+from scripts.archive_public_web import CORE_PATHS, load_sitemap, select_urls
 
 
 class ArchivePublicWebTests(unittest.TestCase):
