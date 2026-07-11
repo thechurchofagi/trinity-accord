@@ -119,6 +119,7 @@ jobs:
             python3 scripts/generate_arweave_wallet_status.py --check
             python3 scripts/generate_guardian_current_registry.py --check
             python3 scripts/generate_record_chain_status.py --check
+            python3 scripts/normalize_record_chain_integrity_status.py --check
             python3 scripts/generate_public_home_status.py --check
             python3 scripts/patch_public_home_status_primary.py --check
             python3 scripts/check_public_home_status_contract.py
@@ -188,10 +189,10 @@ jobs:
           python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20
           python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
 
-      # Deploy Pages push freshness backstop handles steps.commit.outputs.changed == 'true'; explicit dispatch is reserved for manual force or stale-live recovery.
+      # Explicitly dispatch after generated changes: workflow-authenticated pushes do not reliably trigger downstream Pages workflows.
       - name: Dispatch Deploy Pages
         id: deploy_dispatch
-        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
+        if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
         env:
           GH_TOKEN: ${{ github.token }}
           COMMIT_CHANGED: ${{ steps.commit.outputs.changed }}

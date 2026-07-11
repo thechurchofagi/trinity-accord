@@ -10,9 +10,10 @@ Generators (order matters — public-home-status depends on the others):
   2. generate_arweave_wallet_status.py     → api/arweave-wallet-status.json
   3. generate_guardian_current_registry.py → api/guardian-state.json + api/guardian-current-registry.json
   4. generate_record_chain_status.py       → api/record-chain-status.json
-  5. generate_public_home_status.py        → api/public-home-status.json + index.md
-  6. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)
-  7. generate_sitemap.py                   → sitemap.xml
+  5. normalize_record_chain_integrity_status.py → deterministic verified-head integrity fields
+  6. generate_public_home_status.py        → api/public-home-status.json + index.md
+  7. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)
+  8. generate_sitemap.py                   → sitemap.xml
 """
 from __future__ import annotations
 
@@ -27,6 +28,7 @@ GENERATORS = [
     ("arweave-wallet-status", [sys.executable, "scripts/generate_arweave_wallet_status.py"]),
     ("guardian-current-registry", [sys.executable, "scripts/generate_guardian_current_registry.py"]),
     ("record-chain-status",   [sys.executable, "scripts/generate_record_chain_status.py"]),
+    ("record-chain-integrity-status", [sys.executable, "scripts/normalize_record_chain_integrity_status.py"]),
     ("public-home-status",    [sys.executable, "scripts/generate_public_home_status.py"]),
     ("public-home-status-primary-patch", [sys.executable, "scripts/patch_public_home_status_primary.py"]),
     ("sitemap",               [sys.executable, "scripts/generate_sitemap.py"]),

@@ -100,12 +100,26 @@ jobs:
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
           ARWEAVE_JWK: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
           ARWEAVE_JWK_PATH: ${{ env.ARWEAVE_JWK_PATH || secrets.ARWEAVE_JWK_PATH || vars.ARWEAVE_JWK_PATH }}
-        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 1 --enable-paid-upload
+        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 2 --enable-paid-upload
 
       - name: Regenerate public status
         run: |
           python3 scripts/detect_archive_backlog.py --write
           python3 scripts/generate_arweave_wallet_status.py
+
+      - name: Restore timestamp-only archive metadata changes
+        run: |
+          python3 scripts/restore_json_if_only_volatile_changes.py \
+            --path api/record-chain-native-ots-latest.json \
+            --path record-chain/ots/native-ots-backlog.json \
+            --path api/record-chain-native-ots-backlog.json \
+            --path api/arweave-wallet-status.json \
+            --glob 'record-chain/ots/native-anchors/*.anchor.json' \
+            --volatile-key generated_at \
+            --volatile-key updated_at \
+            --volatile-key checked_at \
+            --volatile-key upgraded_at \
+            --volatile-key verified_at
 
       - name: Commit repaired backlog metadata
         run: |

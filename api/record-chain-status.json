@@ -228,7 +228,7 @@
     "current_chain_length": 78,
     "hash_algorithm": "sha256",
     "immutability_policy": "append_only_no_deletion_no_mutation",
-    "last_integrity_check_at": "2026-06-02T00:30:53Z",
+    "last_integrity_check_at": "2026-07-10T11:25:10Z",
     "latest_record_created_at": "2026-07-10T11:22:21.372Z",
     "latest_record_id": "R-000000078",
     "latest_record_index": 78,
@@ -239,7 +239,11 @@
     "record_index": "record-chain/indexes/record-index.json",
     "source_of_current_head": "record-chain/chain-tip.json",
     "latest_batch_id": "batch-000003",
-    "latest_batch_manifest_sha256": "a9406a9c06409b886959cdd0ccbb279ff8c35acc59e023b8edc79cdff7e3853a"
+    "latest_batch_manifest_sha256": "a9406a9c06409b886959cdd0ccbb279ff8c35acc59e023b8edc79cdff7e3853a",
+    "last_integrity_check_at_semantics": "deterministic lower bound from the latest verified record timestamp; the publication workflow runs a full chain verification immediately before generation",
+    "integrity_verified_through_record_id": "R-000000078",
+    "integrity_verified_through_record_index": 78,
+    "integrity_verified_through_record_sha256": "5db3892991e324947ebacca5c95914147b10693eb56cb79ba6785bca61c5dfa7"
   },
   "record_type_counts": {
     "batch_anchor": 0,

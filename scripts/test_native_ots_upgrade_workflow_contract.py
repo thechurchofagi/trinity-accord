@@ -70,6 +70,7 @@ def main() -> None:
         "--confirm-paid-upload",
         "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
         "python3 scripts/generate_arweave_wallet_status.py",
+        "scripts/restore_json_if_only_volatile_changes.py",
     ]
     for marker in workflow_markers:
         require(workflow, marker, "workflow")

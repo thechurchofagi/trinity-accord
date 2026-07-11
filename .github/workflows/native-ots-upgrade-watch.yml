@@ -119,6 +119,17 @@ jobs:
             echo "::warning::Native OTS summary not found: $SUMMARY"
           fi
 
+      - name: Restore timestamp-only native OTS changes
+        if: success()
+        run: |
+          python3 scripts/restore_json_if_only_volatile_changes.py \
+            --path api/record-chain-native-ots-latest.json \
+            --glob 'record-chain/ots/native-anchors/*.anchor.json' \
+            --volatile-key updated_at \
+            --volatile-key checked_at \
+            --volatile-key upgraded_at \
+            --volatile-key verified_at
+
       - name: Commit native OTS state if changed
         if: success()
         run: |
