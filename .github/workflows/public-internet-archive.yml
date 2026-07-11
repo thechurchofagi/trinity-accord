@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/archive-public-site-live-trigger-v1"
+      - ".github/archive-public-site-live-trigger-v2"
   workflow_dispatch:
     inputs:
       scope:
@@ -13,14 +13,11 @@ on:
         required: true
         default: "all"
         type: choice
-        options:
-          - core
-          - pages
-          - all
-      max_urls:
-        description: "Maximum URLs (0 means all selected URLs)"
+        options: [core, pages, all]
+      batch_size:
+        description: "URLs per observable batch"
         required: true
-        default: "0"
+        default: "10"
         type: string
       delay_seconds:
         description: "Delay between Wayback requests"
@@ -43,36 +40,93 @@ permissions:
 
 concurrency:
   group: public-internet-archive
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  archive:
+  plan:
     runs-on: ubuntu-24.04
-    env:
-      ARCHIVE_SCOPE: ${{ github.event_name == 'push' && 'all' || inputs.scope }}
-      ARCHIVE_MAX_URLS: ${{ github.event_name == 'push' && '0' || inputs.max_urls }}
-      ARCHIVE_DELAY_SECONDS: ${{ github.event_name == 'push' && '15' || inputs.delay_seconds }}
-      ARCHIVE_LIVE: ${{ github.event_name == 'push' && 'true' || inputs.confirm_live_capture }}
-      ARCHIVE_REQUEST_SWH: ${{ github.event_name == 'push' && 'true' || inputs.request_software_heritage }}
-    timeout-minutes: 360
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      selected_count: ${{ steps.plan.outputs.selected_count }}
+      scope: ${{ steps.config.outputs.scope }}
+      batch_size: ${{ steps.config.outputs.batch_size }}
+      delay_seconds: ${{ steps.config.outputs.delay_seconds }}
+      live: ${{ steps.config.outputs.live }}
+      request_swh: ${{ steps.config.outputs.request_swh }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - id: config
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_SCOPE: ${{ inputs.scope }}
+          INPUT_BATCH_SIZE: ${{ inputs.batch_size }}
+          INPUT_DELAY_SECONDS: ${{ inputs.delay_seconds }}
+          INPUT_LIVE: ${{ inputs.confirm_live_capture }}
+          INPUT_REQUEST_SWH: ${{ inputs.request_software_heritage }}
+        run: |
+          if [ "$EVENT_NAME" = "push" ]; then
+            printf '%s\n' 'scope=all' 'batch_size=10' 'delay_seconds=15' 'live=true' 'request_swh=true' >> "$GITHUB_OUTPUT"
+          else
+            printf 'scope=%s\n' "$INPUT_SCOPE" >> "$GITHUB_OUTPUT"
+            printf 'batch_size=%s\n' "$INPUT_BATCH_SIZE" >> "$GITHUB_OUTPUT"
+            printf 'delay_seconds=%s\n' "$INPUT_DELAY_SECONDS" >> "$GITHUB_OUTPUT"
+            printf 'live=%s\n' "$INPUT_LIVE" >> "$GITHUB_OUTPUT"
+            printf 'request_swh=%s\n' "$INPUT_REQUEST_SWH" >> "$GITHUB_OUTPUT"
+          fi
+
+      - id: plan
+        env:
+          ARCHIVE_SCOPE: ${{ steps.config.outputs.scope }}
+          ARCHIVE_BATCH_SIZE: ${{ steps.config.outputs.batch_size }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+          from pathlib import Path
+          from scripts.archive_public_web import load_sitemap, select_urls
+
+          scope = os.environ["ARCHIVE_SCOPE"]
+          size = int(os.environ["ARCHIVE_BATCH_SIZE"])
+          if size < 1 or size > 50:
+              raise SystemExit("batch_size must be between 1 and 50")
+          urls, _ = load_sitemap(Path("sitemap.xml"))
+          selected = select_urls(urls, scope, 0)
+          include = [
+              {"batch": index // size + 1, "offset": index}
+              for index in range(0, len(selected), size)
+          ]
+          print("matrix=" + json.dumps({"include": include}, separators=(",", ":")))
+          print("selected_count=" + str(len(selected)))
+          PY
+
+      - name: Publish plan summary
+        run: |
+          {
+            echo "# Public Internet Archive plan"
+            echo
+            echo "- Scope: ${{ steps.config.outputs.scope }}"
+            echo "- Selected URLs: ${{ steps.plan.outputs.selected_count }}"
+            echo "- Batch size: ${{ steps.config.outputs.batch_size }}"
+            echo "- Live external writes: ${{ steps.config.outputs.live }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  capture:
+    needs: plan
+    name: capture batch ${{ matrix.batch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
-      - name: Validate archive client
-        run: |
-          python3 -m unittest scripts/test_archive_public_web.py
-          python3 scripts/archive_public_web.py \
-            --dry-run \
-            --scope "${ARCHIVE_SCOPE}" \
-            --max-urls "${ARCHIVE_MAX_URLS}" \
-            --delay-seconds "0" \
-            --output "$RUNNER_TEMP/archive-dry-run.json"
-
-      - name: Capture sitemap URLs
+      - name: Capture batch
         id: capture
         continue-on-error: true
         env:
@@ -80,57 +134,99 @@ jobs:
           WAYBACK_SECRET_KEY: ${{ secrets.WAYBACK_SECRET_KEY }}
         run: |
           args=(
-            --scope "${ARCHIVE_SCOPE}"
-            --max-urls "${ARCHIVE_MAX_URLS}"
-            --delay-seconds "${ARCHIVE_DELAY_SECONDS}"
-            --output "$RUNNER_TEMP/internet-archive-results.json"
+            --scope "${{ needs.plan.outputs.scope }}"
+            --offset "${{ matrix.offset }}"
+            --max-urls "${{ needs.plan.outputs.batch_size }}"
+            --delay-seconds "${{ needs.plan.outputs.delay_seconds }}"
+            --output "$RUNNER_TEMP/batch-${{ matrix.batch }}.json"
           )
-          if [ "${ARCHIVE_LIVE}" != "true" ]; then
+          if [ "${{ needs.plan.outputs.live }}" != "true" ]; then
             args+=(--dry-run)
-          fi
-          if [ "${ARCHIVE_REQUEST_SWH}" = "true" ]; then
-            args+=(--request-software-heritage)
           fi
           python3 scripts/archive_public_web.py "${args[@]}"
 
-      - name: Publish archive run summary
+      - name: Publish batch summary
         if: always()
+        env:
+          RESULT: ${{ runner.temp }}/batch-${{ matrix.batch }}.json
         run: |
           python3 - <<'PY'
           import json
           import os
           from pathlib import Path
-
-          path = Path(os.environ["RUNNER_TEMP"]) / "internet-archive-results.json"
+          path = Path(os.environ["RESULT"])
           if not path.exists():
-              raise SystemExit("archive result file was not created")
+              raise SystemExit("batch manifest missing")
           data = json.loads(path.read_text(encoding="utf-8"))
-          summary = data.get("summary", {})
-          swh = data.get("software_heritage") or {}
           with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as out:
-              out.write("# Public Internet Archive run\n\n")
-              out.write(f"- Dry run: {data.get('dry_run')}\n")
-              out.write(f"- Scope: {data.get('scope')}\n")
-              out.write(f"- Sitemap URLs: {data.get('sitemap_url_count')}\n")
-              out.write(f"- Selected URLs: {data.get('selected_url_count')}\n")
-              out.write(f"- Wayback summary: \`{json.dumps(summary, sort_keys=True)}\`\n")
-              out.write(f"- Software Heritage: \`{swh.get('status', 'not-requested')}\`\n")
-              out.write("\nArchive copies are non-amending mirrors. Bitcoin Originals prevail.\n")
+              out.write(f"# Archive batch {data['selected_start_index']}\n\n")
+              out.write(f"- URL count: {data['selected_url_count']}\n")
+              out.write(f"- Summary: `{json.dumps(data.get('summary', {}), sort_keys=True)}`\n")
           PY
 
-      - name: Upload auditable archive results
+      - name: Upload batch result immediately
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: public-internet-archive-results
-          path: |
-            ${{ runner.temp }}/internet-archive-results.json
-            ${{ runner.temp }}/archive-dry-run.json
+          name: public-internet-archive-batch-${{ matrix.batch }}
+          path: ${{ runner.temp }}/batch-${{ matrix.batch }}.json
           if-no-files-found: error
           retention-days: 90
 
-      - name: Enforce capture result
+      - name: Enforce batch result
         if: always() && steps.capture.outcome == 'failure'
+        run: exit 1
+
+  software-heritage:
+    needs: plan
+    if: needs.plan.outputs.request_swh == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Request Software Heritage preservation
+        id: swh
+        continue-on-error: true
         run: |
-          echo "::error::One or more requested archive operations failed. Inspect the uploaded result manifest."
-          exit 1
+          args=(--output "$RUNNER_TEMP/software-heritage.json")
+          if [ "${{ needs.plan.outputs.live }}" != "true" ]; then
+            args+=(--dry-run)
+          fi
+          python3 scripts/request_software_heritage_archive.py "${args[@]}"
+      - name: Upload Software Heritage result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-internet-archive-software-heritage
+          path: ${{ runner.temp }}/software-heritage.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Enforce Software Heritage result
+        if: always() && steps.swh.outcome == 'failure'
+        run: exit 1
+
+  aggregate:
+    needs: [plan, capture, software-heritage]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: public-internet-archive-*
+          path: ${{ runner.temp }}/archive-results
+          merge-multiple: true
+      - name: Merge auditable result manifests
+        run: |
+          python3 scripts/merge_public_web_archive_results.py \
+            --input-dir "$RUNNER_TEMP/archive-results" \
+            --expected-count "${{ needs.plan.outputs.selected_count }}" \
+            --software-heritage "$RUNNER_TEMP/archive-results/software-heritage.json" \
+            --output "$RUNNER_TEMP/internet-archive-results.json"
+      - name: Upload aggregate result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-internet-archive-aggregate
+          path: ${{ runner.temp }}/internet-archive-results.json
+          if-no-files-found: error
+          retention-days: 90
