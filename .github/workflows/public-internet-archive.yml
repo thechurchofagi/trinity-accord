@@ -1,6 +1,11 @@
 name: Public Internet Archive
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/archive-public-site-live-trigger-v1"
   workflow_dispatch:
     inputs:
       scope:
@@ -43,6 +48,12 @@ concurrency:
 jobs:
   archive:
     runs-on: ubuntu-24.04
+    env:
+      ARCHIVE_SCOPE: ${{ github.event_name == 'push' && 'all' || inputs.scope }}
+      ARCHIVE_MAX_URLS: ${{ github.event_name == 'push' && '0' || inputs.max_urls }}
+      ARCHIVE_DELAY_SECONDS: ${{ github.event_name == 'push' && '15' || inputs.delay_seconds }}
+      ARCHIVE_LIVE: ${{ github.event_name == 'push' && 'true' || inputs.confirm_live_capture }}
+      ARCHIVE_REQUEST_SWH: ${{ github.event_name == 'push' && 'true' || inputs.request_software_heritage }}
     timeout-minutes: 360
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -56,8 +67,8 @@ jobs:
           python3 -m unittest scripts/test_archive_public_web.py
           python3 scripts/archive_public_web.py \
             --dry-run \
-            --scope "${{ inputs.scope }}" \
-            --max-urls "${{ inputs.max_urls }}" \
+            --scope "${ARCHIVE_SCOPE}" \
+            --max-urls "${ARCHIVE_MAX_URLS}" \
             --delay-seconds "0" \
             --output "$RUNNER_TEMP/archive-dry-run.json"
 
@@ -69,15 +80,15 @@ jobs:
           WAYBACK_SECRET_KEY: ${{ secrets.WAYBACK_SECRET_KEY }}
         run: |
           args=(
-            --scope "${{ inputs.scope }}"
-            --max-urls "${{ inputs.max_urls }}"
-            --delay-seconds "${{ inputs.delay_seconds }}"
+            --scope "${ARCHIVE_SCOPE}"
+            --max-urls "${ARCHIVE_MAX_URLS}"
+            --delay-seconds "${ARCHIVE_DELAY_SECONDS}"
             --output "$RUNNER_TEMP/internet-archive-results.json"
           )
-          if [ "${{ inputs.confirm_live_capture }}" != "true" ]; then
+          if [ "${ARCHIVE_LIVE}" != "true" ]; then
             args+=(--dry-run)
           fi
-          if [ "${{ inputs.request_software_heritage }}" = "true" ]; then
+          if [ "${ARCHIVE_REQUEST_SWH}" = "true" ]; then
             args+=(--request-software-heritage)
           fi
           python3 scripts/archive_public_web.py "${args[@]}"
