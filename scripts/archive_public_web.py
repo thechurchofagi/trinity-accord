@@ -68,7 +68,9 @@ def load_sitemap(path: Path) -> tuple[list[str], str]:
     return urls, hashlib.sha256(raw).hexdigest()
 
 
-def select_urls(urls: Iterable[str], scope: str, maximum: int) -> list[str]:
+def select_urls(
+    urls: Iterable[str], scope: str, maximum: int, offset: int = 0
+) -> list[str]:
     selected: list[str] = []
     for url in urls:
         path = urllib.parse.urlsplit(url).path
@@ -81,6 +83,7 @@ def select_urls(urls: Iterable[str], scope: str, maximum: int) -> list[str]:
                 selected.append(url)
         else:
             selected.append(url)
+    selected = selected[offset:]
     if maximum > 0:
         selected = selected[:maximum]
     return selected
@@ -219,6 +222,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=Path("internet-archive-results.json"))
     parser.add_argument("--scope", choices=("core", "pages", "all"), default="core")
     parser.add_argument("--max-urls", type=int, default=0)
+    parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--delay-seconds", type=float, default=15.0)
     parser.add_argument("--timeout-seconds", type=float, default=180.0)
     parser.add_argument("--retries", type=int, default=2)
@@ -230,11 +234,18 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    if args.max_urls < 0 or args.delay_seconds < 0 or args.timeout_seconds <= 0 or args.retries < 0:
+    if (
+        args.max_urls < 0
+        or args.offset < 0
+        or args.delay_seconds < 0
+        or args.timeout_seconds <= 0
+        or args.retries < 0
+    ):
         raise SystemExit("numeric arguments must be non-negative and timeout must be positive")
 
     all_urls, sitemap_sha256 = load_sitemap(args.sitemap)
-    selected = select_urls(all_urls, args.scope, args.max_urls)
+    scoped_urls = select_urls(all_urls, args.scope, 0)
+    selected = select_urls(all_urls, args.scope, args.max_urls, args.offset)
     result = {
         "schema": "trinityaccord.public-internet-archive-results.v1",
         "generated_at": utc_now(),
@@ -243,6 +254,8 @@ def main() -> int:
         "sitemap": str(args.sitemap),
         "sitemap_sha256": sitemap_sha256,
         "sitemap_url_count": len(all_urls),
+        "scoped_url_count": len(scoped_urls),
+        "selected_start_index": args.offset,
         "selected_url_count": len(selected),
         "wayback": [],
         "software_heritage": None,
