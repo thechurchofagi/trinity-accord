@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/archive-public-site-live-trigger-v3"
+      - ".github/archive-public-site-live-trigger-v4"
   workflow_dispatch:
     inputs:
       scope:
@@ -22,7 +22,7 @@ on:
       delay_seconds:
         description: "Delay between Wayback requests"
         required: true
-        default: "15"
+        default: "30"
         type: string
       confirm_live_capture:
         description: "Perform public external writes; false is dry-run"
@@ -66,7 +66,7 @@ jobs:
           INPUT_REQUEST_SWH: ${{ inputs.request_software_heritage }}
         run: |
           if [ "$EVENT_NAME" = "push" ]; then
-            printf '%s\n' 'scope=all' 'batch_size=10' 'delay_seconds=15' 'live=true' 'request_swh=true' >> "$GITHUB_OUTPUT"
+            printf '%s\n' 'scope=all' 'batch_size=10' 'delay_seconds=30' 'live=true' 'request_swh=true' >> "$GITHUB_OUTPUT"
           else
             printf 'scope=%s\n' "$INPUT_SCOPE" >> "$GITHUB_OUTPUT"
             printf 'batch_size=%s\n' "$INPUT_BATCH_SIZE" >> "$GITHUB_OUTPUT"
@@ -109,13 +109,14 @@ jobs:
             echo "- Selected URLs: ${{ steps.plan.outputs.selected_count }}"
             echo "- Batch size: ${{ steps.config.outputs.batch_size }}"
             echo "- Live external writes: ${{ steps.config.outputs.live }}"
+            echo "- Initial delay: ${{ steps.config.outputs.delay_seconds }} seconds"
           } >> "$GITHUB_STEP_SUMMARY"
 
   capture:
     needs: plan
     name: capture batch ${{ matrix.batch }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 210
+    timeout-minutes: 300
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -138,6 +139,12 @@ jobs:
             --offset "${{ matrix.offset }}"
             --max-urls "${{ needs.plan.outputs.batch_size }}"
             --delay-seconds "${{ needs.plan.outputs.delay_seconds }}"
+            --timeout-seconds 120
+            --retries 3
+            --source-timeout-seconds 30
+            --source-retries 2
+            --recent-days 7
+            --run-kind initial
             --output "$RUNNER_TEMP/batch-${{ matrix.batch }}.json"
           )
           if [ "${{ needs.plan.outputs.live }}" != "true" ]; then
@@ -173,10 +180,6 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-      - name: Enforce batch result
-        if: always() && steps.capture.outcome == 'failure'
-        run: exit 1
-
   software-heritage:
     needs: plan
     if: needs.plan.outputs.request_swh == 'true'
@@ -200,29 +203,155 @@ jobs:
           path: ${{ runner.temp }}/software-heritage.json
           if-no-files-found: error
           retention-days: 90
-      - name: Enforce Software Heritage result
-        if: always() && steps.swh.outcome == 'failure'
-        run: exit 1
 
-  aggregate:
+  aggregate-initial:
     needs: [plan, capture, software-heritage]
     if: always() && needs.plan.result == 'success'
     runs-on: ubuntu-24.04
+    outputs:
+      retry_matrix: ${{ steps.retry-plan.outputs.matrix }}
+      retry_count: ${{ steps.retry-plan.outputs.count }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          pattern: public-internet-archive-*
-          path: ${{ runner.temp }}/archive-results
+          pattern: public-internet-archive-batch-*
+          path: ${{ runner.temp }}/initial-results
           merge-multiple: true
-      - name: Merge auditable result manifests
+      - name: Download Software Heritage result
+        if: needs.plan.outputs.request_swh == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: public-internet-archive-software-heritage
+          path: ${{ runner.temp }}/initial-results
+      - name: Merge initial manifests
         run: |
           python3 scripts/merge_public_web_archive_results.py \
-            --input-dir "$RUNNER_TEMP/archive-results" \
+            --input-dir "$RUNNER_TEMP/initial-results" \
             --expected-count "${{ needs.plan.outputs.selected_count }}" \
-            --software-heritage "$RUNNER_TEMP/archive-results/software-heritage.json" \
+            --software-heritage "$RUNNER_TEMP/initial-results/software-heritage.json" \
+            --allow-unresolved \
+            --output "$RUNNER_TEMP/internet-archive-initial.json"
+      - id: retry-plan
+        name: Build retry matrix from unresolved URLs
+        env:
+          AGGREGATE: ${{ runner.temp }}/internet-archive-initial.json
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+          from pathlib import Path
+
+          data = json.loads(Path(os.environ["AGGREGATE"]).read_text(encoding="utf-8"))
+          urls = data.get("unresolved_urls", [])
+          chunk_size = 5
+          include = [
+              {"batch": index // chunk_size + 1, "urls": urls[index:index + chunk_size]}
+              for index in range(0, len(urls), chunk_size)
+          ]
+          print("count=" + str(len(urls)))
+          print("matrix=" + json.dumps({"include": include}, separators=(",", ":")))
+          PY
+      - name: Upload initial aggregate
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-internet-archive-initial-aggregate
+          path: ${{ runner.temp }}/internet-archive-initial.json
+          if-no-files-found: error
+          retention-days: 90
+
+  retry-unresolved:
+    needs: [plan, aggregate-initial]
+    if: needs.aggregate-initial.outputs.retry_count != '0'
+    name: retry unresolved batch ${{ matrix.batch }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.aggregate-initial.outputs.retry_matrix) }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Write retry URL list
+        env:
+          RETRY_URLS_JSON: ${{ toJSON(matrix.urls) }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          urls = json.loads(os.environ["RETRY_URLS_JSON"])
+          Path(os.environ["RUNNER_TEMP"], "retry-urls.json").write_text(
+              json.dumps(urls, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          PY
+      - name: Retry unresolved URLs with extended backoff
+        id: retry
+        continue-on-error: true
+        env:
+          WAYBACK_ACCESS_KEY: ${{ secrets.WAYBACK_ACCESS_KEY }}
+          WAYBACK_SECRET_KEY: ${{ secrets.WAYBACK_SECRET_KEY }}
+        run: |
+          args=(
+            --urls-file "$RUNNER_TEMP/retry-urls.json"
+            --scope all
+            --delay-seconds 60
+            --timeout-seconds 120
+            --retries 5
+            --source-timeout-seconds 30
+            --source-retries 3
+            --recent-days 14
+            --run-kind retry
+            --output "$RUNNER_TEMP/retry-batch-${{ matrix.batch }}.json"
+          )
+          if [ "${{ needs.plan.outputs.live }}" != "true" ]; then
+            args+=(--dry-run)
+          fi
+          python3 scripts/archive_public_web.py "${args[@]}"
+      - name: Upload retry result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-internet-archive-retry-${{ matrix.batch }}
+          path: ${{ runner.temp }}/retry-batch-${{ matrix.batch }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  final:
+    needs: [plan, aggregate-initial, retry-unresolved]
+    if: always() && needs.aggregate-initial.result == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Download initial aggregate
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: public-internet-archive-initial-aggregate
+          path: ${{ runner.temp }}/final
+      - name: Download retry manifests
+        if: needs.aggregate-initial.outputs.retry_count != '0'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: public-internet-archive-retry-*
+          path: ${{ runner.temp }}/retry-results
+          merge-multiple: true
+      - name: Create retry directory when no retry was required
+        if: needs.aggregate-initial.outputs.retry_count == '0'
+        run: mkdir -p "$RUNNER_TEMP/retry-results"
+      - name: Produce final auditable aggregate
+        id: final-merge
+        continue-on-error: true
+        run: |
+          python3 scripts/merge_public_web_archive_results.py \
+            --base-aggregate "$RUNNER_TEMP/final/internet-archive-initial.json" \
+            --input-dir "$RUNNER_TEMP/retry-results" \
+            --expected-count "${{ needs.plan.outputs.selected_count }}" \
             --output "$RUNNER_TEMP/internet-archive-results.json"
-      - name: Upload aggregate result
+      - name: Upload final aggregate
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -230,3 +359,23 @@ jobs:
           path: ${{ runner.temp }}/internet-archive-results.json
           if-no-files-found: error
           retention-days: 90
+      - name: Publish final status
+        if: always()
+        env:
+          RESULT: ${{ runner.temp }}/internet-archive-results.json
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads(Path(os.environ["RESULT"]).read_text(encoding="utf-8"))
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as out:
+              out.write("# Final public archive status\n\n")
+              out.write(f"- Expected URLs: {data['expected_url_count']}\n")
+              out.write(f"- Observed URLs: {data['observed_url_count']}\n")
+              out.write(f"- Unresolved URLs: {data['unresolved_url_count']}\n")
+              out.write(f"- Software Heritage OK: {data['software_heritage_ok']}\n")
+              out.write(f"- Summary: `{json.dumps(data['summary'], sort_keys=True)}`\n")
+          if data["unresolved_url_count"] or not data["software_heritage_ok"]:
+              raise SystemExit("public archive remains incomplete after retry wave")
+          PY
