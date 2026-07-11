@@ -269,6 +269,8 @@ def previous_for(
 
 def status_after_previous(previous: dict[str, Any], default: str) -> str:
     previous_status = previous.get("archive_status")
+    if previous_status == "waiting_for_upgrade" and default == "upgrade_due":
+        return "upgrade_due"
     if previous_status in {
         "waiting_for_upgrade",
         "upgrade_due",

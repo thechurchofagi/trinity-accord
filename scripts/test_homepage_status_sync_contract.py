@@ -85,6 +85,7 @@ def main() -> int:
         "scripts/update_public_generated_artifacts.py",
         "scripts/generate_arweave_wallet_status.py --check",
         "scripts/generate_record_chain_status.py --check",
+        "scripts/normalize_record_chain_integrity_status.py --check",
         "scripts/generate_public_home_status.py --check",
         "scripts/patch_public_home_status_primary.py --check",
         "scripts/check_public_home_status_contract.py",
@@ -120,8 +121,10 @@ def main() -> int:
     ]:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
 
-    # Deploy conditions must not be weakened.
+    # Deploy conditions must not be weakened. Generated changes must be
+    # part of the actual dispatch condition, not merely mentioned in logging.
     for marker in [
+        "if: ${{ steps.commit.outputs.changed == 'true' ||",
         "steps.commit.outputs.changed == 'true'",
         "github.event.inputs.force_deploy == 'true'",
         "steps.live_pre.outcome == 'failure'",

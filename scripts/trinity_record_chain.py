@@ -2127,6 +2127,14 @@ def build_anchor_status() -> None:
             "bitcoin_originals_prevail": True,
         },
     }
+    if ANCHOR_STATUS_API.exists():
+        existing = read_json(ANCHOR_STATUS_API)
+        existing_semantic = dict(existing)
+        current_semantic = dict(status)
+        existing_semantic.pop('generated_at', None)
+        current_semantic.pop('generated_at', None)
+        if existing_semantic == current_semantic and existing.get('generated_at'):
+            status['generated_at'] = existing['generated_at']
     write_json(ANCHOR_STATUS_API, status)
 
 
