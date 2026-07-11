@@ -1,3 +1,3 @@
-Public Internet Archive production trigger v4.
+Public Internet Archive production trigger v4.1.
 
-This marker starts the resilient two-phase capture workflow after merge to main.
+This marker restarts the resilient two-phase capture workflow with selective pacing: read-only source checks and recent-snapshot reuse do not incur Save Page Now delays.

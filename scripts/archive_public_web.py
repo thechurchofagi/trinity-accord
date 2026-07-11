@@ -213,7 +213,13 @@ def find_recent_capture(url: str, timeout: float, recent_days: int) -> dict | No
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             payload = json.loads(response.read().decode("utf-8"))
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError):
+    except (
+        urllib.error.HTTPError,
+        urllib.error.URLError,
+        TimeoutError,
+        OSError,
+        json.JSONDecodeError,
+    ):
         return None
     closest = payload.get("archived_snapshots", {}).get("closest") or {}
     if not closest.get("available") or str(closest.get("status")) != "200":
@@ -222,7 +228,9 @@ def find_recent_capture(url: str, timeout: float, recent_days: int) -> dict | No
     if len(timestamp) < 8 or not timestamp[:8].isdigit():
         return None
     try:
-        captured_at = datetime.strptime(timestamp[:14], "%Y%m%d%H%M%S").replace(tzinfo=timezone.utc)
+        captured_at = datetime.strptime(timestamp[:14], "%Y%m%d%H%M%S").replace(
+            tzinfo=timezone.utc
+        )
     except ValueError:
         return None
     age_seconds = (datetime.now(timezone.utc) - captured_at).total_seconds()
@@ -319,6 +327,11 @@ def capture_wayback(
     raise AssertionError("unreachable")
 
 
+def should_apply_inter_url_delay(item: dict) -> bool:
+    """Pace only after an actual Save Page Now request was attempted."""
+    return int(item.get("attempts") or 0) > 0
+
+
 def request_software_heritage(repository: str, timeout: float) -> dict:
     encoded = urllib.parse.quote(repository, safe="")
     request = urllib.request.Request(
@@ -410,7 +423,9 @@ def main() -> int:
         or args.source_retries < 0
         or args.recent_days < 0
     ):
-        raise SystemExit("numeric arguments must be non-negative and timeouts must be positive")
+        raise SystemExit(
+            "numeric arguments must be non-negative and timeouts must be positive"
+        )
 
     all_urls, sitemap_sha256 = load_sitemap(args.sitemap)
     source_urls = load_url_file(args.urls_file) if args.urls_file else all_urls
@@ -459,7 +474,11 @@ def main() -> int:
             )
             result["wayback"].append(item)
             write_result(args.output, result)
-            if index + 1 < len(selected) and args.delay_seconds:
+            if (
+                index + 1 < len(selected)
+                and args.delay_seconds
+                and should_apply_inter_url_delay(item)
+            ):
                 time.sleep(args.delay_seconds)
         if args.request_software_heritage:
             result["software_heritage"] = request_software_heritage(
