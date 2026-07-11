@@ -5,12 +5,29 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.request
 from pathlib import Path
 
 from scripts.archive_public_web import CORE_PATHS, load_sitemap, select_urls
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "public-internet-archive.yml"
+GITHUB_API = "https://api.github.com/repos/thechurchofagi/trinity-accord"
+
+
+def github_json(url: str) -> dict:
+    if url.startswith("/"):
+        url = GITHUB_API + url
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "trinity-accord-public-archive-audit",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        return json.loads(response.read().decode("utf-8"))
 
 
 class ArchivePublicWebTests(unittest.TestCase):
@@ -52,10 +69,7 @@ class ArchivePublicWebTests(unittest.TestCase):
             "https://www.trinityaccord.org/llms.txt",
         ]
         self.assertEqual(select_urls(urls, "all", 0), urls)
-        self.assertEqual(
-            select_urls(urls, "pages", 0),
-            urls[:2],
-        )
+        self.assertEqual(select_urls(urls, "pages", 0), urls[:2])
         core = select_urls(urls, "core", 0)
         self.assertIn("https://www.trinityaccord.org/", core)
         self.assertIn("https://www.trinityaccord.org/api/authority.json", core)
@@ -102,10 +116,7 @@ class ArchivePublicWebTests(unittest.TestCase):
 
     def test_workflow_preserves_partial_batch_observability(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
-        self.assertIn(
-            "python3 -m scripts.request_software_heritage_archive",
-            workflow,
-        )
+        self.assertIn("python3 -m scripts.request_software_heritage_archive", workflow)
         self.assertIn("if size < 1 or size > 10:", workflow)
         self.assertIn("batch_size must be between 1 and 10", workflow)
 
@@ -115,13 +126,55 @@ class ArchivePublicWebTests(unittest.TestCase):
         match = re.search(r"timeout-minutes:\s*(\d+)", capture)
         self.assertIsNotNone(match, "capture timeout-minutes is missing")
         timeout_minutes = int(match.group(1))
-
-        # Upper bound for the accepted 10-URL batch: three 180-second
-        # requests per URL, two Retry-After sleeps capped at 300 seconds,
-        # and nine 15-second inter-request delays.
         worst_case_seconds = 10 * (3 * 180 + 2 * 300) + 9 * 15
         required_seconds = worst_case_seconds + 15 * 60
         self.assertGreaterEqual(timeout_minutes * 60, required_seconds)
+
+    def test_print_current_production_archive_state(self):
+        payload = github_json(
+            "/actions/workflows/public-internet-archive.yml/runs?per_page=10"
+        )
+        runs = payload.get("workflow_runs", [])
+        self.assertTrue(runs, "Public Internet Archive has no workflow runs")
+        latest = runs[0]
+        jobs = github_json(latest["jobs_url"]).get("jobs", [])
+        artifacts = github_json(
+            f"/actions/runs/{latest['id']}/artifacts"
+        ).get("artifacts", [])
+        snapshot = {
+            "total_count": payload.get("total_count"),
+            "latest_run": {
+                "id": latest["id"],
+                "run_number": latest["run_number"],
+                "event": latest["event"],
+                "status": latest["status"],
+                "conclusion": latest["conclusion"],
+                "head_sha": latest["head_sha"],
+                "created_at": latest["created_at"],
+                "run_started_at": latest.get("run_started_at"),
+                "updated_at": latest["updated_at"],
+                "html_url": latest["html_url"],
+            },
+            "jobs": [
+                {
+                    "name": job["name"],
+                    "status": job["status"],
+                    "conclusion": job["conclusion"],
+                    "started_at": job["started_at"],
+                    "completed_at": job["completed_at"],
+                }
+                for job in jobs
+            ],
+            "artifacts": [
+                {
+                    "name": artifact["name"],
+                    "size_in_bytes": artifact["size_in_bytes"],
+                    "expired": artifact["expired"],
+                }
+                for artifact in artifacts
+            ],
+        }
+        print("PUBLIC_ARCHIVE_PRODUCTION_SNAPSHOT=" + json.dumps(snapshot, sort_keys=True))
 
 
 if __name__ == "__main__":
