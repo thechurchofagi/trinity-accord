@@ -1,0 +1,377 @@
+name: Apply System Audit Round 3 Repair
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ github.event.pull_request.head.ref == 'agent/fix-system-audit-round3' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/fix-system-audit-round3
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Gate repeated application
+        id: gate
+        run: |
+          if git log -1 --pretty=%B | grep -Fq '[audit-round3-applied]'; then
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.gate.outputs.run == 'true'
+        with:
+          python-version: '3.12'
+
+      - name: Apply audited repairs
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import textwrap
+
+          def replace_once(path: str, old: str, new: str) -> None:
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected one replacement target, found {count}')
+              p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          # 1. Generated status changes must explicitly deploy Pages. GITHUB_TOKEN
+          # pushes do not reliably trigger downstream push workflows.
+          replace_once(
+              '.github/workflows/homepage-status-sync.yml',
+              "      # Deploy Pages push freshness backstop handles steps.commit.outputs.changed == 'true'; explicit dispatch is reserved for manual force or stale-live recovery.\n",
+              "      # Explicitly dispatch after generated changes: workflow-authenticated pushes do not reliably trigger downstream Pages workflows.\n",
+          )
+          replace_once(
+              '.github/workflows/homepage-status-sync.yml',
+              "        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}\n",
+              "        if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}\n",
+          )
+          replace_once(
+              '.github/workflows/homepage-status-sync.yml',
+              "            python3 scripts/generate_record_chain_status.py --check\n",
+              "            python3 scripts/generate_record_chain_status.py --check\n            python3 scripts/normalize_record_chain_integrity_status.py --check\n",
+          )
+
+          # 2. Preserve anchor generated_at when only the clock changed.
+          replace_once(
+              'scripts/trinity_record_chain.py',
+              "    write_json(ANCHOR_STATUS_API, status)\n",
+              "    if ANCHOR_STATUS_API.exists():\n        existing = read_json(ANCHOR_STATUS_API)\n        existing_semantic = dict(existing)\n        current_semantic = dict(status)\n        existing_semantic.pop('generated_at', None)\n        current_semantic.pop('generated_at', None)\n        if existing_semantic == current_semantic and existing.get('generated_at'):\n            status['generated_at'] = existing['generated_at']\n    write_json(ANCHOR_STATUS_API, status)\n",
+          )
+
+          # 3. Once a pending OTS anchor is no longer the latest head, promote it
+          # from passive waiting to actionable upgrade_due.
+          replace_once(
+              'scripts/detect_archive_backlog.py',
+              "def status_after_previous(previous: dict[str, Any], default: str) -> str:\n    previous_status = previous.get(\"archive_status\")\n    if previous_status in {\n",
+              "def status_after_previous(previous: dict[str, Any], default: str) -> str:\n    previous_status = previous.get(\"archive_status\")\n    if previous_status == \"waiting_for_upgrade\" and default == \"upgrade_due\":\n        return \"upgrade_due\"\n    if previous_status in {\n",
+          )
+
+          # 4. Normalize integrity status immediately after record-chain status.
+          replace_once(
+              'scripts/update_public_generated_artifacts.py',
+              "  4. generate_record_chain_status.py       → api/record-chain-status.json\n  5. generate_public_home_status.py        → api/public-home-status.json + index.md\n  6. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)\n  7. generate_sitemap.py                   → sitemap.xml\n",
+              "  4. generate_record_chain_status.py       → api/record-chain-status.json\n  5. normalize_record_chain_integrity_status.py → deterministic verified-head integrity fields\n  6. generate_public_home_status.py        → api/public-home-status.json + index.md\n  7. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)\n  8. generate_sitemap.py                   → sitemap.xml\n",
+          )
+          replace_once(
+              'scripts/update_public_generated_artifacts.py',
+              "    (\"record-chain-status\",   [sys.executable, \"scripts/generate_record_chain_status.py\"]),\n    (\"public-home-status\",    [sys.executable, \"scripts/generate_public_home_status.py\"]),\n",
+              "    (\"record-chain-status\",   [sys.executable, \"scripts/generate_record_chain_status.py\"]),\n    (\"record-chain-integrity-status\", [sys.executable, \"scripts/normalize_record_chain_integrity_status.py\"]),\n    (\"public-home-status\",    [sys.executable, \"scripts/generate_public_home_status.py\"]),\n",
+          )
+
+          # 5. Suppress timestamp-only native OTS commits.
+          replace_once(
+              '.github/workflows/native-ots-upgrade-watch.yml',
+              "      - name: Commit native OTS state if changed\n",
+              "      - name: Restore timestamp-only native OTS changes\n        if: success()\n        run: |\n          python3 scripts/restore_json_if_only_volatile_changes.py \\\n            --path api/record-chain-native-ots-latest.json \\\n            --glob 'record-chain/ots/native-anchors/*.anchor.json' \\\n            --volatile-key updated_at \\\n            --volatile-key checked_at \\\n            --volatile-key upgraded_at \\\n            --volatile-key verified_at\n\n      - name: Commit native OTS state if changed\n",
+          )
+
+          # 6. Repair all currently stuck historical pending OTS items in one run,
+          # while suppressing metadata-only backlog/wallet commits.
+          replace_once(
+              '.github/workflows/archive-backlog-repair.yml',
+              "        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 1 --enable-paid-upload\n",
+              "        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 2 --enable-paid-upload\n",
+          )
+          replace_once(
+              '.github/workflows/archive-backlog-repair.yml',
+              "      - name: Commit repaired backlog metadata\n",
+              "      - name: Restore timestamp-only archive metadata changes\n        run: |\n          python3 scripts/restore_json_if_only_volatile_changes.py \\\n            --path api/record-chain-native-ots-latest.json \\\n            --path record-chain/ots/native-ots-backlog.json \\\n            --path api/record-chain-native-ots-backlog.json \\\n            --path api/arweave-wallet-status.json \\\n            --glob 'record-chain/ots/native-anchors/*.anchor.json' \\\n            --volatile-key generated_at \\\n            --volatile-key updated_at \\\n            --volatile-key checked_at \\\n            --volatile-key upgraded_at \\\n            --volatile-key verified_at\n\n      - name: Commit repaired backlog metadata\n",
+          )
+
+          # 7. Strengthen existing contracts so the regression cannot return.
+          replace_once(
+              'scripts/test_homepage_status_sync_contract.py',
+              "    # Deploy conditions must not be weakened.\n    for marker in [\n        \"steps.commit.outputs.changed == 'true'\",\n",
+              "    # Deploy conditions must not be weakened. Generated changes must be\n    # part of the actual dispatch condition, not merely mentioned in logging.\n    for marker in [\n        \"if: ${{ steps.commit.outputs.changed == 'true' ||\",\n        \"steps.commit.outputs.changed == 'true'\",\n",
+          )
+          replace_once(
+              'scripts/test_homepage_status_sync_contract.py',
+              "        \"scripts/generate_record_chain_status.py --check\",\n",
+              "        \"scripts/generate_record_chain_status.py --check\",\n        \"scripts/normalize_record_chain_integrity_status.py --check\",\n",
+          )
+          replace_once(
+              'scripts/test_native_ots_upgrade_workflow_contract.py',
+              "        \"python3 scripts/generate_arweave_wallet_status.py\",\n",
+              "        \"python3 scripts/generate_arweave_wallet_status.py\",\n        \"scripts/restore_json_if_only_volatile_changes.py\",\n",
+          )
+
+          Path('scripts/restore_json_if_only_volatile_changes.py').write_text(textwrap.dedent('''\
+          #!/usr/bin/env python3
+          from __future__ import annotations
+
+          import argparse
+          import glob
+          import json
+          import subprocess
+          from pathlib import Path
+          from typing import Any
+
+          ROOT = Path(__file__).resolve().parents[1]
+
+
+          def strip_volatile(value: Any, keys: set[str]) -> Any:
+              if isinstance(value, dict):
+                  return {
+                      key: strip_volatile(item, keys)
+                      for key, item in value.items()
+                      if key not in keys
+                  }
+              if isinstance(value, list):
+                  return [strip_volatile(item, keys) for item in value]
+              return value
+
+
+          def head_text(rel: str) -> str | None:
+              result = subprocess.run(
+                  ['git', 'show', f'HEAD:{rel}'],
+                  cwd=ROOT,
+                  capture_output=True,
+                  text=True,
+              )
+              return result.stdout if result.returncode == 0 else None
+
+
+          def restore_if_volatile_only(path: Path, keys: set[str]) -> bool:
+              if not path.is_file():
+                  return False
+              rel = path.resolve().relative_to(ROOT).as_posix()
+              previous_text = head_text(rel)
+              if previous_text is None:
+                  return False
+              current_text = path.read_text(encoding='utf-8')
+              if current_text == previous_text:
+                  return False
+              try:
+                  previous = json.loads(previous_text)
+                  current = json.loads(current_text)
+              except json.JSONDecodeError:
+                  return False
+              if strip_volatile(previous, keys) != strip_volatile(current, keys):
+                  return False
+              path.write_text(previous_text, encoding='utf-8')
+              print(f'RESTORED_VOLATILE_ONLY {rel}')
+              return True
+
+
+          def main() -> int:
+              parser = argparse.ArgumentParser()
+              parser.add_argument('--path', action='append', default=[])
+              parser.add_argument('--glob', dest='globs', action='append', default=[])
+              parser.add_argument('--volatile-key', action='append', required=True)
+              args = parser.parse_args()
+
+              candidates: set[Path] = {ROOT / value for value in args.path}
+              for pattern in args.globs:
+                  candidates.update(Path(value) for value in glob.glob(str(ROOT / pattern)))
+
+              restored = 0
+              keys = set(args.volatile_key)
+              for path in sorted(candidates):
+                  restored += int(restore_if_volatile_only(path, keys))
+              print(f'volatile-only files restored: {restored}')
+              return 0
+
+
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '''), encoding='utf-8')
+
+          Path('scripts/normalize_record_chain_integrity_status.py').write_text(textwrap.dedent('''\
+          #!/usr/bin/env python3
+          from __future__ import annotations
+
+          import argparse
+          import json
+          from pathlib import Path
+          from typing import Any
+
+          ROOT = Path(__file__).resolve().parents[1]
+          STATUS = ROOT / 'api/record-chain-status.json'
+          TIP = ROOT / 'record-chain/chain-tip.json'
+
+
+          def dump_json(data: Any) -> str:
+              return json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False) + '\\n'
+
+
+          def read_json(path: Path) -> Any:
+              return json.loads(path.read_text(encoding='utf-8'))
+
+
+          def expected_status(current: dict[str, Any]) -> dict[str, Any]:
+              status = json.loads(json.dumps(current))
+              tip = read_json(TIP)
+              record_id = tip.get('latest_record_id')
+              record_path = ROOT / 'record-chain/records' / f'{record_id}.json'
+              record = read_json(record_path)
+              record_time = record.get('assigned_at') or record.get('created_at') or tip.get('updated_at')
+
+              rc = status.setdefault('record_chain', {})
+              rc['last_integrity_check_at'] = record_time
+              rc['last_integrity_check_at_semantics'] = (
+                  'deterministic lower bound from the latest verified record timestamp; '
+                  'the publication workflow runs a full chain verification immediately before generation'
+              )
+              rc['integrity_verified_through_record_id'] = tip.get('latest_record_id')
+              rc['integrity_verified_through_record_index'] = tip.get('latest_record_index')
+              rc['integrity_verified_through_record_sha256'] = tip.get('latest_record_sha256')
+              return status
+
+
+          def main() -> int:
+              parser = argparse.ArgumentParser()
+              parser.add_argument('--check', action='store_true')
+              args = parser.parse_args()
+              current = read_json(STATUS)
+              expected = expected_status(current)
+              expected_text = dump_json(expected)
+              current_text = STATUS.read_text(encoding='utf-8')
+              if args.check:
+                  if current_text != expected_text:
+                      print('record-chain integrity status drift detected')
+                      return 1
+                  print('record-chain integrity status is current')
+                  return 0
+              if current_text != expected_text:
+                  STATUS.write_text(expected_text, encoding='utf-8')
+                  print('updated deterministic record-chain integrity status')
+              else:
+                  print('record-chain integrity status unchanged')
+              return 0
+
+
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '''), encoding='utf-8')
+
+          Path('scripts/test_system_audit_round3.py').write_text(textwrap.dedent('''\
+          #!/usr/bin/env python3
+          from __future__ import annotations
+
+          import importlib.util
+          import json
+          import tempfile
+          from pathlib import Path
+
+          ROOT = Path(__file__).resolve().parents[1]
+
+
+          def load(name: str, path: Path):
+              spec = importlib.util.spec_from_file_location(name, path)
+              if spec is None or spec.loader is None:
+                  raise SystemExit(f'cannot load {path}')
+              module = importlib.util.module_from_spec(spec)
+              spec.loader.exec_module(module)
+              return module
+
+
+          def require(condition: bool, message: str) -> None:
+              if not condition:
+                  raise SystemExit(message)
+
+
+          def main() -> int:
+              detector = load('detect_archive_backlog', ROOT / 'scripts/detect_archive_backlog.py')
+              require(
+                  detector.status_after_previous({'archive_status': 'waiting_for_upgrade'}, 'upgrade_due') == 'upgrade_due',
+                  'historical pending OTS anchor was not promoted to upgrade_due',
+              )
+              require(
+                  detector.status_after_previous({'archive_status': 'waiting_for_upgrade'}, 'waiting_for_upgrade') == 'waiting_for_upgrade',
+                  'current latest pending OTS anchor must remain waiting_for_upgrade',
+              )
+
+              volatile = load('restore_volatile', ROOT / 'scripts/restore_json_if_only_volatile_changes.py')
+              left = {'status': 'ok', 'updated_at': 'old', 'nested': {'checked_at': 'old'}}
+              right = {'status': 'ok', 'updated_at': 'new', 'nested': {'checked_at': 'new'}}
+              require(
+                  volatile.strip_volatile(left, {'updated_at', 'checked_at'}) == volatile.strip_volatile(right, {'updated_at', 'checked_at'}),
+                  'volatile timestamp normalization failed',
+              )
+              right['status'] = 'changed'
+              require(
+                  volatile.strip_volatile(left, {'updated_at', 'checked_at'}) != volatile.strip_volatile(right, {'updated_at', 'checked_at'}),
+                  'semantic changes must not be hidden by volatile normalization',
+              )
+
+              status = json.loads((ROOT / 'api/record-chain-status.json').read_text(encoding='utf-8'))
+              tip = json.loads((ROOT / 'record-chain/chain-tip.json').read_text(encoding='utf-8'))
+              rc = status.get('record_chain', {})
+              require(rc.get('integrity_verified_through_record_id') == tip.get('latest_record_id'), 'integrity record id drift')
+              require(rc.get('integrity_verified_through_record_sha256') == tip.get('latest_record_sha256'), 'integrity record sha drift')
+
+              home = (ROOT / '.github/workflows/homepage-status-sync.yml').read_text(encoding='utf-8')
+              require("if: ${{ steps.commit.outputs.changed == 'true' ||" in home, 'generated changes do not explicitly dispatch Pages')
+              print('PASS: system audit round 3 contracts')
+              return 0
+
+
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '''), encoding='utf-8')
+          PY
+
+      - name: Install validation dependencies
+        if: steps.gate.outputs.run == 'true'
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Regenerate and validate audited outputs
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/trinity_record_chain.py verify
+          python3 scripts/update_public_generated_artifacts.py
+          python3 scripts/generate_record_chain_status.py --check
+          python3 scripts/normalize_record_chain_integrity_status.py --check
+          python3 scripts/generate_public_home_status.py --check
+          python3 scripts/patch_public_home_status_primary.py --check
+          python3 scripts/check_public_home_status_contract.py
+          python3 scripts/test_homepage_status_sync_contract.py
+          python3 scripts/test_native_ots_upgrade_workflow_contract.py
+          python3 scripts/test_system_audit_round3.py
+          python3 scripts/generate_sitemap.py --check
+
+      - name: Commit applied repair
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-system-audit-bot'
+          git config user.email 'actions@github.com'
+          git add -A
+          git commit -m 'fix: close system audit reliability gaps [audit-round3-applied]'
+          git push origin HEAD:agent/fix-system-audit-round3
