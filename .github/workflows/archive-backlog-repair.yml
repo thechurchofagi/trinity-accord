@@ -20,15 +20,12 @@ jobs:
       - name: Authorize write workflow actor
         run: |
           set -euo pipefail
-          case "${{ github.actor }}" in
-            thechurchofagi|github-actions[bot])
-              echo "Authorized actor"
-              ;;
-            *)
-              echo "Unauthorized actor" >&2
-              exit 1
-              ;;
-          esac
+          actor="${GITHUB_ACTOR:-}"
+          if [[ "$actor" != "thechurchofagi" && "$actor" != "github-actions[bot]" ]]; then
+            echo "Unauthorized actor: $actor" >&2
+            exit 1
+          fi
+          echo "Authorized actor: $actor"
 
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5

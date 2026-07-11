@@ -37,6 +37,9 @@ def main() -> int:
         "contents: write",
         "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
         "fetch-depth: 0",
+        'actor="${GITHUB_ACTOR:-}"',
+        '[[ "$actor" != "thechurchofagi" && "$actor" != "github-actions[bot]" ]]',
+        'Authorized actor: $actor',
         "python3 scripts/detect_archive_backlog.py --write",
         "--kind record_chain_arweave --max-items 1 --mode live",
         "--kind native_ots_bundle --max-items 2 --enable-paid-upload",
@@ -55,6 +58,11 @@ def main() -> int:
         "api/record-chain-native-ots-arweave-registry.json",
     ]:
         require(needle in workflow, f"workflow missing {needle}")
+
+    require(
+        'case "${{ github.actor }}" in' not in workflow,
+        "workflow must not use an unescaped case pattern for github-actions[bot]",
+    )
 
     for needle in ["waiting_for_key", "upgrade_due", "upgrade_failed", "upgrade_native_ots_anchor", "retry_native_ots_upgrade", "upload_failed", "readback_failed", "archived", "retry_count", "last_attempt_at", "last_error", "next_action"]:
         require(needle in processor, f"processor missing {needle}")
