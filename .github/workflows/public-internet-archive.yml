@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/archive-public-site-live-trigger-v2"
+      - ".github/archive-public-site-live-trigger-v3"
   workflow_dispatch:
     inputs:
       scope:
@@ -191,7 +191,7 @@ jobs:
           if [ "${{ needs.plan.outputs.live }}" != "true" ]; then
             args+=(--dry-run)
           fi
-          python3 scripts/request_software_heritage_archive.py "${args[@]}"
+          python3 -m scripts.request_software_heritage_archive "${args[@]}"
       - name: Upload Software Heritage result
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
