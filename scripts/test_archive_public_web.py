@@ -1,9 +1,16 @@
 import hashlib
+import json
+import re
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.archive_public_web import CORE_PATHS, load_sitemap, select_urls
+
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github" / "workflows" / "public-internet-archive.yml"
 
 
 class ArchivePublicWebTests(unittest.TestCase):
@@ -67,6 +74,54 @@ class ArchivePublicWebTests(unittest.TestCase):
     def test_core_paths_are_absolute_and_unique(self):
         self.assertTrue(CORE_PATHS)
         self.assertTrue(all(path.startswith("/") for path in CORE_PATHS))
+
+    def test_software_heritage_helper_runs_as_workflow_module(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "software-heritage.json"
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "scripts.request_software_heritage_archive",
+                    "--dry-run",
+                    "--output",
+                    str(output),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(
+                completed.returncode,
+                0,
+                msg=f"stdout={completed.stdout}\nstderr={completed.stderr}",
+            )
+            result = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(result["status"], "dry-run")
+
+    def test_workflow_preserves_partial_batch_observability(self):
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn(
+            "python3 -m scripts.request_software_heritage_archive",
+            workflow,
+        )
+        self.assertIn("if size < 1 or size > 10:", workflow)
+        self.assertIn("batch_size must be between 1 and 10", workflow)
+
+        capture = workflow.split("\n  capture:\n", 1)[1].split(
+            "\n  software-heritage:\n", 1
+        )[0]
+        match = re.search(r"timeout-minutes:\s*(\d+)", capture)
+        self.assertIsNotNone(match, "capture timeout-minutes is missing")
+        timeout_minutes = int(match.group(1))
+
+        # Upper bound for the accepted 10-URL batch: three 180-second
+        # requests per URL, two Retry-After sleeps capped at 300 seconds,
+        # and nine 15-second inter-request delays.
+        worst_case_seconds = 10 * (3 * 180 + 2 * 300) + 9 * 15
+        required_seconds = worst_case_seconds + 15 * 60
+        self.assertGreaterEqual(timeout_minutes * 60, required_seconds)
 
 
 if __name__ == "__main__":
