@@ -294,6 +294,9 @@ class ArchivePublicWebTests(unittest.TestCase):
         initial = workflow.split("\n  capture:\n", 1)[1].split(
             "\n  software-heritage:\n", 1
         )[0]
+        self.assertIn("max-parallel: 2", initial)
+        self.assertIn('sleep "${{ matrix.stagger_seconds }}"', initial)
+        self.assertIn('"stagger_seconds": 0 if batch % 2 else 15', workflow)
         match = re.search(r"timeout-minutes:\s*(\d+)", initial)
         self.assertIsNotNone(match)
         timeout_minutes = int(match.group(1))
