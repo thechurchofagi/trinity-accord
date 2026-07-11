@@ -9,7 +9,10 @@ include:
   - builder-bundles
   - "builder-bundles/*.py"
 
-# Exclude archival, dev, and generated directories from build
+# Exclude archival, dev, generated, and intentionally non-public source pages from build.
+# The eight page sources below currently resolve to 404 in the deployed Pages artifact;
+# excluding them keeps sitemap generation aligned with the actual public surface until
+# their publication path is intentionally restored.
 exclude:
   - audit/
   - archive/
@@ -22,6 +25,14 @@ exclude:
   - arweave-backup/
   - data/
   - audit-results/
+  - downloads.md
+  - downloads/arweave-bundle-verification.md
+  - downloads/gz2-notarial-certificate-github-release-backup-2026-05-14.md
+  - downloads/gz2-photos-arweave-2026-05-14.md
+  - downloads/redteam-audit-2026-05-08.md
+  - downloads/shenzhen-notary-arweave-2026-05-06.md
+  - downloads/shenzhen-notary-github-release-backup-2026-05-06.md
+  - echoes/verification-reports/index.md
   - Gemfile
   - Gemfile.lock
   - README.md
