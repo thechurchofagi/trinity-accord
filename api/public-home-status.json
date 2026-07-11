@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-11T00:59:33.381308+00:00",
+  "generated_at": "2026-07-11T01:26:57.677957+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "9d6c25bc824ec1a8",
+  "source_digest": "7f559f22ba254981",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 78,
@@ -133,11 +133,11 @@
         "record_chain_arweave_pending": 0,
         "record_chain_arweave_failed": 0,
         "record_chain_arweave_waiting_for_key": 0,
-        "native_ots_upgrade_pending": 2,
+        "native_ots_upgrade_pending": 0,
         "native_ots_arweave_pending": 0,
         "native_ots_arweave_failed": 0,
         "native_ots_waiting_for_key": 0,
-        "backlog_current": false
+        "backlog_current": true
       },
       "arweave_index": {
         "current_upload_mode": "live",
@@ -754,17 +754,17 @@
       "record_chain_arweave_pending": 0,
       "record_chain_arweave_failed": 0,
       "record_chain_arweave_waiting_for_key": 0,
-      "native_ots_upgrade_pending": 2,
+      "native_ots_upgrade_pending": 0,
       "native_ots_arweave_pending": 0,
       "native_ots_arweave_failed": 0,
       "native_ots_waiting_for_key": 0,
-      "backlog_current": false
+      "backlog_current": true
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.325595191824",
+      "total_spent_ar": "0.330697421558",
       "balance_known": true,
-      "balance_ar": "15.268504558788",
+      "balance_ar": "15.255819997624",
       "low_balance": false,
       "needs_recharge": false
     }
