@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   gateway-tests:
@@ -28,8 +29,7 @@ jobs:
         run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
 
       - name: Validate public JSON
-        run: |
-          python -m json.tool api/record-chain-submission-schema.v1.json >/tmp/record-chain-submission-schema.checked.json
+        run: python -m json.tool api/record-chain-submission-schema.v1.json >/tmp/record-chain-submission-schema.checked.json
 
       - name: Run source-level contract tests
         run: |
@@ -66,3 +66,189 @@ jobs:
         run: |
           python scripts/test_no_secret_material_committed.py
           python scripts/test_no_private_key_material_committed.py
+
+  post-613-production-verify:
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'agent/post-611-production-verify' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Dispatch and wait for official archive backlog repair
+        id: archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          gh run list --repo "$repo" --workflow archive-backlog-repair.yml --event workflow_dispatch --limit 50 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/archive-before.txt
+          gh workflow run archive-backlog-repair.yml --repo "$repo" --ref main
+          run_id=''
+          for attempt in $(seq 1 60); do
+            sleep 5
+            gh run list --repo "$repo" --workflow archive-backlog-repair.yml --event workflow_dispatch --limit 50 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/archive-after.txt
+            run_id="$(comm -13 /tmp/archive-before.txt /tmp/archive-after.txt | tail -n 1)"
+            if [[ -n "$run_id" ]]; then break; fi
+          done
+          test -n "$run_id"
+          echo "archive_run_id=$run_id" >> "$GITHUB_OUTPUT"
+          gh run watch "$run_id" --repo "$repo" --exit-status --interval 10
+
+      - name: Dispatch and wait for Homepage Status Sync and Pages
+        id: homepage
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          gh run list --repo "$repo" --workflow homepage-status-sync.yml --event workflow_dispatch --limit 50 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/home-before.txt
+          gh workflow run homepage-status-sync.yml --repo "$repo" --ref main -f force_deploy=true -f run_live_check=true
+          run_id=''
+          for attempt in $(seq 1 60); do
+            sleep 5
+            gh run list --repo "$repo" --workflow homepage-status-sync.yml --event workflow_dispatch --limit 50 --json databaseId --jq '.[].databaseId' | sort -n > /tmp/home-after.txt
+            run_id="$(comm -13 /tmp/home-before.txt /tmp/home-after.txt | tail -n 1)"
+            if [[ -n "$run_id" ]]; then break; fi
+          done
+          test -n "$run_id"
+          echo "homepage_run_id=$run_id" >> "$GITHUB_OUTPUT"
+          gh run watch "$run_id" --repo "$repo" --exit-status --interval 10
+
+      - name: Verify public site matches current main
+        env:
+          ARCHIVE_RUN_ID: ${{ steps.archive.outputs.archive_run_id }}
+          HOMEPAGE_RUN_ID: ${{ steps.homepage.outputs.homepage_run_id }}
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git show origin/main:api/record-chain-status.json > /tmp/main-record-status.json
+          git show origin/main:api/public-home-status.json > /tmp/main-home-status.json
+          git show origin/main:api/record-chain-native-ots-backlog.json > /tmp/main-ots-backlog.json
+
+          for attempt in $(seq 1 10); do
+            nonce="$(date +%s)-$attempt"
+            curl -fsS --max-time 30 -H 'Cache-Control: no-cache' \
+              "https://www.trinityaccord.org/api/record-chain-status.json?audit=$nonce" > /tmp/live-record-status.json || true
+            curl -fsS --max-time 30 -H 'Cache-Control: no-cache' \
+              "https://www.trinityaccord.org/api/public-home-status.json?audit=$nonce" > /tmp/live-home-status.json || true
+            curl -fsS --max-time 30 -H 'Cache-Control: no-cache' \
+              "https://www.trinityaccord.org/api/record-chain-native-ots-backlog.json?audit=$nonce" > /tmp/live-ots-backlog.json || true
+            curl -fsS --max-time 30 -H 'Cache-Control: no-cache' \
+              "https://www.trinityaccord.org/?audit=$nonce" > /tmp/live-homepage.html || true
+
+            if python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          def load(path):
+              return json.loads(Path(path).read_text())
+
+          main_record = load('/tmp/main-record-status.json')
+          live_record = load('/tmp/live-record-status.json')
+          main_home = load('/tmp/main-home-status.json')
+          live_home = load('/tmp/live-home-status.json')
+          main_backlog = load('/tmp/main-ots-backlog.json')
+          live_backlog = load('/tmp/live-ots-backlog.json')
+          homepage = Path('/tmp/live-homepage.html').read_text(errors='replace')
+
+          main_rc = main_record['record_chain']
+          live_rc = live_record['record_chain']
+          keys = (
+              'latest_record_id',
+              'latest_record_sha256',
+              'integrity_verified_through_record_id',
+              'integrity_verified_through_record_index',
+              'integrity_verified_through_record_sha256',
+              'last_integrity_check_at',
+              'last_integrity_check_at_semantics',
+          )
+          assert all(main_rc.get(key) == live_rc.get(key) for key in keys)
+          assert main_home.get('source_digest') == live_home.get('source_digest')
+          assert main_home['source_digest'] in homepage
+          assert main_backlog.get('summary') == live_backlog.get('summary')
+          PY
+            then
+              break
+            fi
+            if [[ "$attempt" == 10 ]]; then
+              echo "Public site did not converge to main." >&2
+              exit 1
+            fi
+            sleep 30
+          done
+
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          def load(path):
+              return json.loads(Path(path).read_text())
+
+          main_record = load('/tmp/main-record-status.json')
+          live_record = load('/tmp/live-record-status.json')
+          main_home = load('/tmp/main-home-status.json')
+          live_home = load('/tmp/live-home-status.json')
+          main_backlog = load('/tmp/main-ots-backlog.json')
+          live_backlog = load('/tmp/live-ots-backlog.json')
+          homepage = Path('/tmp/live-homepage.html').read_text(errors='replace')
+          main_rc = main_record['record_chain']
+          live_rc = live_record['record_chain']
+
+          for key in (
+              'latest_record_id',
+              'latest_record_sha256',
+              'integrity_verified_through_record_id',
+              'integrity_verified_through_record_index',
+              'integrity_verified_through_record_sha256',
+              'last_integrity_check_at',
+              'last_integrity_check_at_semantics',
+          ):
+              if main_rc.get(key) != live_rc.get(key):
+                  raise SystemExit(f'PUBLIC_RECORD_STATUS_MISMATCH {key}: main={main_rc.get(key)!r} live={live_rc.get(key)!r}')
+
+          if main_home.get('source_digest') != live_home.get('source_digest'):
+              raise SystemExit('PUBLIC_HOME_STATUS_DIGEST_MISMATCH')
+          digest = main_home['source_digest']
+          if digest not in homepage:
+              raise SystemExit('HOMEPAGE_MISSING_CURRENT_SOURCE_DIGEST')
+          if main_backlog.get('summary') != live_backlog.get('summary'):
+              raise SystemExit('PUBLIC_OTS_BACKLOG_SUMMARY_MISMATCH')
+
+          passively_stuck = [
+              item for item in main_backlog.get('items', [])
+              if item.get('record_index') in {43, 65}
+              and item.get('archive_status') == 'waiting_for_upgrade'
+          ]
+          if passively_stuck:
+              raise SystemExit(f'HISTORICAL_OTS_ITEMS_STILL_PASSIVELY_WAITING {passively_stuck}')
+
+          summary = {
+              'archive_workflow_run_id': os.environ.get('ARCHIVE_RUN_ID'),
+              'homepage_workflow_run_id': os.environ.get('HOMEPAGE_RUN_ID'),
+              'main_head_commit': subprocess.check_output(['git', 'rev-parse', 'origin/main'], text=True).strip(),
+              'latest_record_id': main_rc.get('latest_record_id'),
+              'latest_record_sha256': main_rc.get('latest_record_sha256'),
+              'integrity_verified_through_record_id': main_rc.get('integrity_verified_through_record_id'),
+              'last_integrity_check_at': main_rc.get('last_integrity_check_at'),
+              'public_home_source_digest': digest,
+              'ots_backlog_summary': main_backlog.get('summary'),
+              'ots_backlog_items': main_backlog.get('items'),
+              'public_matches_main': True,
+              'homepage_contains_current_digest': True,
+              'historical_items_43_65_not_passively_waiting': True,
+          }
+          Path('post-613-production-verification.json').write_text(json.dumps(summary, indent=2) + '\n')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Upload production verification evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: post-613-production-verification
+          path: post-613-production-verification.json
+          retention-days: 30
+          if-no-files-found: error
