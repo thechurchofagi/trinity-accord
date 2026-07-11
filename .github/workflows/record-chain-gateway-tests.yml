@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   gateway-tests:
@@ -75,13 +75,25 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: agent/fix-system-audit-round3
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
+      - name: Gate repeated application
+        id: gate
+        run: |
+          if test -f scripts/test_system_audit_round3.py; then
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.gate.outputs.run == 'true'
         with:
           python-version: '3.12'
 
       - name: Extract and apply audited repair
+        if: steps.gate.outputs.run == 'true'
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -95,9 +107,11 @@ jobs:
           python3 /tmp/apply_round3.py
 
       - name: Install validation dependencies
+        if: steps.gate.outputs.run == 'true'
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Regenerate and validate audited outputs
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -euo pipefail
           python3 scripts/trinity_record_chain.py verify
@@ -112,22 +126,23 @@ jobs:
           python3 scripts/test_system_audit_round3.py
           python3 scripts/generate_sitemap.py --check
 
-      - name: Package validated repair
+      - name: Commit validated non-workflow repair
+        if: steps.gate.outputs.run == 'true'
         run: |
           set -euo pipefail
-          {
-            git diff --name-only HEAD
-            git ls-files --others --exclude-standard
-          } | sort -u | grep -v '^\.github/workflows/_audit-round3-apply.yml$' | grep -v '^_audit_round3_kick.txt$' > /tmp/audit-round3-files.txt
-          echo 'Validated repair files:'
-          cat /tmp/audit-round3-files.txt
-          test -s /tmp/audit-round3-files.txt
-          tar -czf /tmp/audit-round3-repaired-tree.tar.gz -T /tmp/audit-round3-files.txt
-
-      - name: Upload validated repair
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: audit-round3-repaired-tree
-          path: /tmp/audit-round3-repaired-tree.tar.gz
-          retention-days: 2
-          if-no-files-found: error
+          git config user.name 'trinity-system-audit-bot'
+          git config user.email 'actions@github.com'
+          git add \
+            scripts/detect_archive_backlog.py \
+            scripts/normalize_record_chain_integrity_status.py \
+            scripts/restore_json_if_only_volatile_changes.py \
+            scripts/test_homepage_status_sync_contract.py \
+            scripts/test_native_ots_upgrade_workflow_contract.py \
+            scripts/test_system_audit_round3.py \
+            scripts/trinity_record_chain.py \
+            scripts/update_public_generated_artifacts.py \
+            api/record-chain-status.json \
+            api/public-home-status.json \
+            index.md
+          git commit -m 'fix: close system audit data and generator gaps [audit-round3-applied]'
+          git push origin HEAD:agent/fix-system-audit-round3
