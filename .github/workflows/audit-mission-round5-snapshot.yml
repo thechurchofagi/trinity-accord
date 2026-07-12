@@ -1,0 +1,32 @@
+name: Mission Round 5 Source Snapshot
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    if: github.event.pull_request.head.ref == 'audit/mission-deep-round5-snapshot'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Build tracked source snapshot
+        run: |
+          set -euo pipefail
+          git archive --format=tar.gz --output=/tmp/trinity-accord-main.tar.gz HEAD
+          sha256sum /tmp/trinity-accord-main.tar.gz
+          git ls-files | wc -l
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: trinity-accord-main-source-round5
+          path: /tmp/trinity-accord-main.tar.gz
+          if-no-files-found: error
+          retention-days: 1
