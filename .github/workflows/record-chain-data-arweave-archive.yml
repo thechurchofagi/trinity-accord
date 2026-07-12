@@ -47,6 +47,14 @@ concurrency:
   group: record-chain-data-arweave-archive
   cancel-in-progress: false
 
+env:
+  INPUT_MODE: ${{ inputs.mode }}
+  INPUT_UPLOAD_MODE: ${{ inputs.upload_mode }}
+  INPUT_TO_HEIGHT_INCLUSIVE: ${{ inputs.to_height_inclusive }}
+  INPUT_FROM_HEIGHT_EXCLUSIVE: ${{ inputs.from_height_exclusive }}
+  INPUT_SNAPSHOT_HEIGHT: ${{ inputs.snapshot_height }}
+  INPUT_CONFIRM: ${{ inputs.confirm }}
+
 jobs:
   archive:
     runs-on: ubuntu-24.04
@@ -89,8 +97,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ "${{ inputs.mode }}" = "delta" ]; then
-            TO="${{ inputs.to_height_inclusive }}"
+          if [ "$INPUT_MODE" = "delta" ]; then
+            TO="$INPUT_TO_HEIGHT_INCLUSIVE"
             if [ -z "$TO" ]; then
               TO=$(python3 - <<'PY'
           import json
@@ -100,10 +108,10 @@ jobs:
             fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode delta \
-              --from-height-exclusive "${{ inputs.from_height_exclusive }}" \
+              --from-height-exclusive "$INPUT_FROM_HEIGHT_EXCLUSIVE" \
               --to-height-inclusive "$TO" | tee /tmp/data-build.json
           else
-            H="${{ inputs.snapshot_height }}"
+            H="$INPUT_SNAPSHOT_HEIGHT"
             if [ -z "$H" ]; then
               H=$(python3 - <<'PY'
           import json
@@ -132,7 +140,7 @@ jobs:
         if: inputs.upload_mode == 'live'
         run: |
           set +e
-          test "${{ inputs.confirm }}" = "I_UNDERSTAND_THIS_UPLOADS_RECORD_CHAIN_DATA_TO_ARWEAVE"
+          test "$INPUT_CONFIRM" = "I_UNDERSTAND_THIS_UPLOADS_RECORD_CHAIN_DATA_TO_ARWEAVE"
           test -n "$ARKEY"
           mkdir -p /tmp/arweave-data
           printf '%s' "$ARKEY" > /tmp/arweave-data/wallet.jwk.json
@@ -189,6 +197,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data archive changes."
           else
-            git commit -m "archive: record-chain data ${{ inputs.mode }} ${{ inputs.upload_mode }}"
+            git commit -m "archive: record-chain data $INPUT_MODE $INPUT_UPLOAD_MODE"
             git push
           fi

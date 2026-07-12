@@ -36,6 +36,13 @@ concurrency:
   group: pre-scale-e2e-orchestrator
   cancel-in-progress: false
 
+env:
+  INPUT_CONFIRM: ${{ inputs.confirm }}
+  INPUT_REQUIRE_NEW_RECORDS: ${{ inputs.require_new_records }}
+  INPUT_MAX_RECORDS: ${{ inputs.max_records }}
+  INPUT_MODE: ${{ inputs.mode }}
+  INPUT_FROM_HEIGHT_EXCLUSIVE: ${{ inputs.from_height_exclusive }}
+
 jobs:
   orchestrate:
     runs-on: ubuntu-24.04
@@ -63,7 +70,7 @@ jobs:
       - name: Guard live mode
         if: inputs.mode == 'live'
         run: |
-          test "${{ inputs.confirm }}" = "I_UNDERSTAND_THIS_RUNS_PRE_SCALE_E2E_AUTOMATION"
+          test "$INPUT_CONFIRM" = "I_UNDERSTAND_THIS_RUNS_PRE_SCALE_E2E_AUTOMATION"
           test -n "$ARKEY"
 
       - name: Capture head before
@@ -74,13 +81,13 @@ jobs:
       - name: Auto finalize accepted submissions
         run: |
           REQUIRE_FLAG=""
-          if [ "${{ inputs.require_new_records }}" = "true" ]; then
+          if [ "$INPUT_REQUIRE_NEW_RECORDS" = "true" ]; then
             REQUIRE_FLAG="--require-new-records"
           fi
           python3 scripts/auto_finalize_accepted_submissions.py \
-            --max-records "${{ inputs.max_records }}" \
+            --max-records "$INPUT_MAX_RECORDS" \
             --source-run-id "pre-scale-e2e-${{ github.run_id }}" \
-            --mode "${{ inputs.mode }}" \
+            --mode "$INPUT_MODE" \
             $REQUIRE_FLAG \
             | tee /tmp/auto-finalize-summary.json
 
@@ -97,10 +104,10 @@ jobs:
       - name: Build data bundle
         id: data_bundle
         run: |
-          BEFORE="${{ inputs.from_height_exclusive }}"
+          BEFORE="$INPUT_FROM_HEIGHT_EXCLUSIVE"
           if [ -z "$BEFORE" ]; then BEFORE="${{ steps.before.outputs.height }}"; fi
           AFTER=$(python3 -c 'import json; print(json.load(open("api/record-chain-head.json"))["height"])')
-          if [ "$BEFORE" = "$AFTER" ] && [ "${{ inputs.require_new_records }}" = "true" ]; then
+          if [ "$BEFORE" = "$AFTER" ] && [ "$INPUT_REQUIRE_NEW_RECORDS" = "true" ]; then
             echo "::error::No new records: height unchanged ($BEFORE → $AFTER) with require_new_records=true"
             exit 1
           fi

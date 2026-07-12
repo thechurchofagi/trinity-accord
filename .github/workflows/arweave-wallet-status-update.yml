@@ -24,6 +24,11 @@ concurrency:
   group: arweave-wallet-status-update-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  INPUT_BALANCE_AR: ${{ inputs.balance_ar }}
+  INPUT_LOW_BALANCE_THRESHOLD_AR: ${{ inputs.low_balance_threshold_ar }}
+  INPUT_WALLET_ADDRESS_SHA256: ${{ inputs.wallet_address_sha256 }}
+
 jobs:
   update-wallet-status:
     runs-on: ubuntu-24.04
@@ -61,11 +66,11 @@ jobs:
           set -euo pipefail
           args=(
             python3 scripts/update_arweave_wallet_ledger.py set-balance
-            --balance-ar "${{ inputs.balance_ar }}"
-            --low-balance-threshold-ar "${{ inputs.low_balance_threshold_ar }}"
+            --balance-ar "$INPUT_BALANCE_AR"
+            --low-balance-threshold-ar "$INPUT_LOW_BALANCE_THRESHOLD_AR"
           )
-          if [ -n "${{ inputs.wallet_address_sha256 }}" ]; then
-            args+=(--wallet-address-sha256 "${{ inputs.wallet_address_sha256 }}")
+          if [ -n "$INPUT_WALLET_ADDRESS_SHA256" ]; then
+            args+=(--wallet-address-sha256 "$INPUT_WALLET_ADDRESS_SHA256")
           fi
           "${args[@]}"
 

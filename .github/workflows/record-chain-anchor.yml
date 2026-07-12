@@ -21,6 +21,9 @@ concurrency:
 permissions:
   contents: write
 
+env:
+  INPUT_FORCE_BATCH: ${{ github.event.inputs.force_batch }}
+
 jobs:
   anchor:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
@@ -45,7 +48,7 @@ jobs:
 
       - name: Build Merkle batch
         run: |
-          if [ "${{ github.event.inputs.force_batch }}" = "true" ]; then
+          if [ "$INPUT_FORCE_BATCH" = "true" ]; then
             python scripts/trinity_record_chain.py build-batch --force
           else
             python scripts/trinity_record_chain.py build-batch
@@ -81,7 +84,7 @@ jobs:
           }
 
           rebuild_anchor_outputs() {
-            if [ "${{ github.event.inputs.force_batch }}" = "true" ]; then
+            if [ "$INPUT_FORCE_BATCH" = "true" ]; then
               python scripts/trinity_record_chain.py build-batch --force
             else
               python scripts/trinity_record_chain.py build-batch

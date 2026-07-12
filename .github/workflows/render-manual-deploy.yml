@@ -30,6 +30,12 @@ on:
 permissions:
   contents: read
 
+env:
+  INPUT_SERVICE: ${{ github.event.inputs.service }}
+  INPUT_DEPLOY: ${{ github.event.inputs.deploy }}
+  INPUT_ALLOW_LEGACY: ${{ github.event.inputs.emergency_allow_legacy_retired_gateway }}
+  INPUT_LEGACY_CONFIRM: ${{ github.event.inputs.legacy_emergency_confirm }}
+
 jobs:
   deploy:
     runs-on: ubuntu-24.04
@@ -43,12 +49,12 @@ jobs:
         env:
           RENDER: ${{ secrets.RENDER }}
         run: |
-          args=(--service "${{ github.event.inputs.service }}")
-          if [ "${{ github.event.inputs.deploy }}" = "true" ]; then
+          args=(--service "$INPUT_SERVICE")
+          if [ "$INPUT_DEPLOY" = "true" ]; then
             args+=(--deploy)
           fi
-          if [ "${{ github.event.inputs.emergency_allow_legacy_retired_gateway }}" = "true" ] && \
-             [ "${{ github.event.inputs.legacy_emergency_confirm }}" = "RETIRED-LEGACY-EMERGENCY" ]; then
+          if [ "$INPUT_ALLOW_LEGACY" = "true" ] && \
+             [ "$INPUT_LEGACY_CONFIRM" = "RETIRED-LEGACY-EMERGENCY" ]; then
             args+=(--allow-legacy)
           fi
           python scripts/render_manual_deploy.py "${args[@]}"

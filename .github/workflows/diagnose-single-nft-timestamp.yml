@@ -31,6 +31,14 @@ on:
 permissions:
   contents: write
 
+env:
+  INPUT_CONTRACT: ${{ github.event.inputs.contract }}
+  INPUT_TOKEN_ID: ${{ github.event.inputs.token_id }}
+  INPUT_START_BLOCK: ${{ github.event.inputs.start_block }}
+  INPUT_END_BLOCK: ${{ github.event.inputs.end_block }}
+  INPUT_CHUNK: ${{ github.event.inputs.chunk }}
+  INPUT_APPLY: ${{ github.event.inputs.apply }}
+
 jobs:
   diagnose:
     runs-on: ubuntu-24.04
@@ -66,13 +74,13 @@ jobs:
           ETHEREUMMAINNET: ${{ secrets.ETHEREUMMAINNET }}
         run: |
           args=(
-            --contract "${{ github.event.inputs.contract }}"
-            --token-id "${{ github.event.inputs.token_id }}"
-            --start-block "${{ github.event.inputs.start_block }}"
-            --end-block "${{ github.event.inputs.end_block }}"
-            --chunk "${{ github.event.inputs.chunk }}"
+            --contract "$INPUT_CONTRACT"
+            --token-id "$INPUT_TOKEN_ID"
+            --start-block "$INPUT_START_BLOCK"
+            --end-block "$INPUT_END_BLOCK"
+            --chunk "$INPUT_CHUNK"
           )
-          if [ "${{ github.event.inputs.apply }}" = "true" ]; then
+          if [ "$INPUT_APPLY" = "true" ]; then
             args+=(--apply)
           fi
           set +e

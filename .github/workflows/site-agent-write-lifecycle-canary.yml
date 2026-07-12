@@ -25,6 +25,12 @@ on:
 permissions:
   contents: read
 
+env:
+  INPUT_SITE_URL: ${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}
+  INPUT_MODE: ${{ github.event.inputs.mode || 'preflight-only' }}
+  INPUT_ROUTE: ${{ github.event.inputs.route || 'pure_echo' }}
+  INPUT_CONFIRM_LIVE_CANARY: ${{ github.event.inputs.confirm_live_canary || '' }}
+
 jobs:
   canary:
     runs-on: ubuntu-24.04
@@ -36,7 +42,7 @@ jobs:
       - name: Run external write lifecycle canary
         run: |
           python3 scripts/smoke_external_agent_write_lifecycle_canary.py \
-            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
-            --mode "${{ github.event.inputs.mode || 'preflight-only' }}" \
-            --route "${{ github.event.inputs.route || 'pure_echo' }}" \
-            --confirm-live-canary "${{ github.event.inputs.confirm_live_canary || '' }}"
+            --site "$INPUT_SITE_URL" \
+            --mode "$INPUT_MODE" \
+            --route "$INPUT_ROUTE" \
+            --confirm-live-canary "$INPUT_CONFIRM_LIVE_CANARY"

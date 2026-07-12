@@ -30,6 +30,9 @@ concurrency:
   group: paid-arweave-canary
   cancel-in-progress: false
 
+env:
+  INPUT_RECORD_TYPE: ${{ github.event.inputs.record_type }}
+
 jobs:
   canary:
     runs-on: ubuntu-24.04
@@ -81,7 +84,7 @@ jobs:
 
       - name: Guard first paid canary scope
         run: |
-          if [ "${{ github.event.inputs.record_type }}" != "echo" ]; then
+          if [ "$INPUT_RECORD_TYPE" != "echo" ]; then
             echo "::error::First production paid canary is limited to record_type=echo. Use dry-run for verification/guardian_application until separate paid workflows exist."
             exit 1
           fi
@@ -110,8 +113,8 @@ jobs:
       - name: Run Arweave cost gate
         run: |
           node scripts/arweave_cost_gate.mjs \
-            --payload-file "$E2E_LOG_DIR/payloads/${{ github.event.inputs.record_type }}.json" \
-            --record-type "${{ github.event.inputs.record_type }}" \
+            --payload-file "$E2E_LOG_DIR/payloads/$INPUT_RECORD_TYPE.json" \
+            --record-type "$INPUT_RECORD_TYPE" \
             --run-id "$E2E_RUN_ID" \
             --log-dir "$E2E_LOG_DIR"
 

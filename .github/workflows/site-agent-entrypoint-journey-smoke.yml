@@ -13,6 +13,9 @@ on:
 permissions:
   contents: read
 
+env:
+  INPUT_SITE_URL: ${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}
+
 jobs:
   smoke:
     runs-on: ubuntu-24.04
@@ -24,4 +27,4 @@ jobs:
       - name: Run external agent entrypoint journey smoke
         run: |
           python3 scripts/smoke_external_agent_entrypoint_journeys.py \
-            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}"
+            --site "$INPUT_SITE_URL"
