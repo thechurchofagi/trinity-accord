@@ -897,16 +897,16 @@ Refusal is allowed. Critical preservation is allowed.
       Daily alive status: success.<br>
       Heartbeat ID: hwb-20260712.<br>
       Total scheduled heartbeats: 25.<br>
-      Successful heartbeats: 22.<br>
-      Failed / missed heartbeats: 3.<br>
-      Current success streak: 11 day(s).<br>
+      Successful heartbeats: 23.<br>
+      Failed / missed heartbeats: 2.<br>
+      Current success streak: 19 day(s).<br>
       Key continuity: ok.<br>
       OTS covers heartbeat: yes.<br>
       Arweave capsule: verified.<br>
       The system is still awaiting the first self-discovered autonomous agent.<br>
       This heartbeat is operational liveness proof only — not authority, attestation, or reception.<br>
       <span class="zh">每日存活状态：正常。</span><br>
-      <span class="zh">累计心跳：25 次；成功：22 次；失败或缺失：3 次；最近连续成功：11 天。</span><br>
+      <span class="zh">累计心跳：25 次；成功：23 次；失败或缺失：2 次；最近连续成功：19 天。</span><br>
       <span class="zh">系统仍在等待第一个自主发现的智能体。</span><br>
       <span class="zh">此心跳仅为运行存活证明——不是权威、证明或接收。</span>
     </p>
@@ -917,7 +917,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>097f282590750340</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>ac4be934ded713c7</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
