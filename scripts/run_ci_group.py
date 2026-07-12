@@ -186,6 +186,7 @@ GROUPS = {
         ["python3", "scripts/test_legacy_isolation_contract.py"],
         ["python3", "scripts/test_public_wording_phase6_contract.py"],
         ["node", "downloads/test-record-chain-builder.mjs"],
+        ["python3", "scripts/test_builder_classification_target_id.py"],
 
         # Phase 6B test registry contract
         ["python3", "scripts/test_phase6b_test_registry_contract.py"],

@@ -840,6 +840,9 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "classificationReason", "--classification-reason");
     requireExplicit(opts, "evidenceOrReviewBasis", "--evidence-or-review-basis");
 
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetRecordId))) {
+      errorExit("--target-record-id must match R-XXXXXXXXX format");
+    }
     if (!/^[0-9a-f]{64}$/.test(String(opts.targetRecordSha256))) {
       errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
     }
