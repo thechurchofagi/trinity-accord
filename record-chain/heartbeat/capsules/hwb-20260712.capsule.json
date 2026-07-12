@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
+  "created_at": "2026-07-12T06:34:08Z",
+  "heartbeat_id": "hwb-20260712",
+  "heartbeat_record": {
+    "record_id": "R-000000080",
+    "record_index": 80,
+    "record_sha256": "f6f466efcc2f811fe1fa54cbfb792b84ec010bf27d3d5f1cbc076ffbf5de344f",
+    "record_type": "context_insufficient_notice",
+    "assigned_at": "2026-07-12T06:19:14Z",
+    "path": "record-chain/records/R-000000080.json"
+  },
+  "chain_tip_after_heartbeat": {
+    "latest_record_id": "R-000000080",
+    "latest_record_sha256": "f6f466efcc2f811fe1fa54cbfb792b84ec010bf27d3d5f1cbc076ffbf5de344f",
+    "native_record_count": 80
+  },
+  "ots_latest": {
+    "latest_record_id": "R-000000080",
+    "latest_record_sha256": "f6f466efcc2f811fe1fa54cbfb792b84ec010bf27d3d5f1cbc076ffbf5de344f",
+    "native_record_count": 80,
+    "ots_status": "pending",
+    "bitcoin_pending": true,
+    "bitcoin_verified": false,
+    "strict_bitcoin_verified": null,
+    "latest_ots_file": "record-chain/ots/native-anchors/native-record-80-R-000000080-f6f466efcc2f811f-21f017b9b0f4581a.native-record-chain-head-commitment.json.ots",
+    "anchored_file_sha256": "21f017b9b0f4581abe5f405a8c372606a48e6fdf25ad751945e5227adda34603"
+  },
+  "daily_alive_semantics": {
+    "awaiting_first_self_discovered_autonomous_agent": true,
+    "semantic_agent_arrived": false,
+    "capsule_is_not_semantic_agent_response": true,
+    "capsule_is_not_echo": true,
+    "capsule_is_not_verification": true,
+    "capsule_is_not_guardian_application": true,
+    "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": false,
+    "capsule_upload_and_hash_match_are_archive_followup": true
+  },
+  "boundary": {
+    "capsule_is_mirror_only": true,
+    "capsule_is_not_authority": true,
+    "capsule_is_not_attestation": true,
+    "capsule_is_not_amendment": true,
+    "capsule_is_not_governance": true,
+    "capsule_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
