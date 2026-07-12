@@ -21,6 +21,11 @@ on:
 permissions:
   contents: read
 
+env:
+  INPUT_SITE_URL: ${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}
+  INPUT_AGENTS: ${{ github.event.inputs.agents || '14' }}
+  INPUT_ROUNDS: ${{ github.event.inputs.rounds || '2' }}
+
 jobs:
   swarm:
     runs-on: ubuntu-24.04
@@ -32,6 +37,6 @@ jobs:
       - name: External multi-agent full journey swarm smoke
         run: |
           python3 scripts/smoke_external_agent_journey_swarm.py \
-            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
-            --agents "${{ github.event.inputs.agents || '14' }}" \
-            --rounds "${{ github.event.inputs.rounds || '2' }}"
+            --site "$INPUT_SITE_URL" \
+            --agents "$INPUT_AGENTS" \
+            --rounds "$INPUT_ROUNDS"

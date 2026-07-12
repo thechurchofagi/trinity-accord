@@ -28,6 +28,10 @@ permissions:
   contents: write
   actions: write
 
+env:
+  INPUT_PENDING_FILE_PATH: ${{ github.event.inputs.pending_file_path }}
+  INPUT_RECEIPT_ID: ${{ github.event.inputs.receipt_id }}
+
 jobs:
   append:
     runs-on: ubuntu-24.04
@@ -69,8 +73,8 @@ jobs:
         id: append_run
         run: |
           set -euo pipefail
-          input_pending="${{ github.event.inputs.pending_file_path }}"
-          input_receipt="${{ github.event.inputs.receipt_id }}"
+          input_pending="$INPUT_PENDING_FILE_PATH"
+          input_receipt="$INPUT_RECEIPT_ID"
           if [ -n "$input_pending" ] && [ -n "$input_receipt" ]; then
             if [ ! -f "$input_pending" ]; then
               status_file="record-chain/receipt-status/${input_receipt}.json"

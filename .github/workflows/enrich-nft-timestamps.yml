@@ -23,6 +23,11 @@ on:
 permissions:
   contents: write
 
+env:
+  INPUT_START_BLOCK: ${{ github.event.inputs.start_block }}
+  INPUT_END_BLOCK: ${{ github.event.inputs.end_block }}
+  INPUT_CHUNK: ${{ github.event.inputs.chunk }}
+
 jobs:
   enrich:
     runs-on: ubuntu-24.04
@@ -71,9 +76,9 @@ jobs:
           PROGRESS_BRANCH: enrich-progress-${{ github.run_id }}
         run: |
           python3 scripts/enrich_nft_timestamps.py \
-            --start-block "${{ github.event.inputs.start_block }}" \
-            --end-block "${{ github.event.inputs.end_block }}" \
-            --chunk "${{ github.event.inputs.chunk }}"
+            --start-block "$INPUT_START_BLOCK" \
+            --end-block "$INPUT_END_BLOCK" \
+            --chunk "$INPUT_CHUNK"
 
       - name: Upload timestamp diagnostics
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

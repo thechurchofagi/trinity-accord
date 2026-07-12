@@ -18,6 +18,10 @@ on:
 permissions:
   contents: read
 
+env:
+  INPUT_STRICT_DIGEST: ${{ github.event.inputs.strict_digest || 'false' }}
+  INPUT_SITE_URL: ${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}
+
 jobs:
   live-discovery:
     runs-on: ubuntu-24.04
@@ -29,9 +33,9 @@ jobs:
       - name: Smoke live public discovery contract
         run: |
           STRICT=""
-          if [ "${{ github.event.inputs.strict_digest || 'false' }}" = "true" ]; then
+          if [ "$INPUT_STRICT_DIGEST" = "true" ]; then
             STRICT="--strict-digest"
           fi
           python3 scripts/smoke_live_discovery_contract.py \
-            --site "${{ github.event.inputs.site_url || 'https://www.trinityaccord.org' }}" \
+            --site "$INPUT_SITE_URL" \
             ${STRICT}

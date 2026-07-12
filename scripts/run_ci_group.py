@@ -149,6 +149,7 @@ GROUPS = {
         ["python3", "scripts/test_toolchain_provenance.py"],
         ["python3", "scripts/test_write_workflow_toolchain_provenance.py"],
         ["python3", "scripts/test_no_remote_script_execution.py"],
+        ["python3", "scripts/test_workflow_dispatch_input_safety.py"],
         ["python3", "scripts/test_system_tool_version_recording.py"],
         ["python3", "scripts/test_readback_hash_parity.py"],
         ["python3", "scripts/test_external_agent_full_auto_pipeline_contract.py"],

@@ -24,6 +24,9 @@ concurrency:
   group: phase5-ots-arweave
   cancel-in-progress: false
 
+env:
+  INPUT_CONFIRM: ${{ github.event.inputs.confirm }}
+
 jobs:
   phase5:
     runs-on: ubuntu-24.04
@@ -107,7 +110,7 @@ jobs:
           python3 scripts/run_phase5_ots_arweave_paid_upload.py \
             --run-id "$E2E_RUN_ID" \
             --enable-paid-upload \
-            --confirm-paid-upload "${{ github.event.inputs.confirm }}" \
+            --confirm-paid-upload "$INPUT_CONFIRM" \
             --jwk-path "$ARWEAVE_JWK_PATH"
 
       - name: Commit Phase 5 artifacts
