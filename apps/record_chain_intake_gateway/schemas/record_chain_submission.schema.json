@@ -1,93 +1,1259 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://trinity-accord.dev/schemas/record_chain_submission.schema.json",
+  "$id": "trinityaccord.record-chain-submission.v1",
   "title": "Record-Chain Submission",
-  "description": "A submission to the Record-Chain Intake Gateway.",
+  "description": "Schema for public submissions to the Record-Chain Intake Gateway. All public submissions require Ed25519 authorship_proof for key continuity and future identity claim.",
   "type": "object",
   "required": [
+    "schema",
+    "submission_type",
+    "client_generated_at",
     "record_type",
-    "draft"
+    "record_draft",
+    "builder",
+    "client_context",
+    "submission_boundary",
+    "authorship_proof"
   ],
+  "if": {
+    "properties": {
+      "record_type": {
+        "not": {
+          "const": "context_insufficient_notice"
+        }
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "client_oath_readback"
+    ],
+    "properties": {
+      "record_draft": {
+        "required": [
+          "record_type",
+          "submitting_participant_identity",
+          "submission_oath_verification",
+          "discovery_and_introduction_context",
+          "decision_autonomy_context",
+          "submission_execution_context",
+          "authorization_context",
+          "context_readiness",
+          "non_authority_boundary_acknowledgement"
+        ]
+      }
+    }
+  },
+  "else": {
+    "properties": {
+      "record_draft": {
+        "required": [
+          "record_type",
+          "submitting_participant_identity",
+          "submission_execution_context",
+          "context_readiness",
+          "authorization_context"
+        ],
+        "not": {
+          "required": [
+            "submission_oath_verification"
+          ]
+        }
+      }
+    }
+  },
   "properties": {
+    "schema": {
+      "type": "string",
+      "const": "trinityaccord.record-chain-submission.v1"
+    },
+    "submission_type": {
+      "type": "string",
+      "const": "record_chain_entry_candidate"
+    },
+    "client_generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "record_type": {
       "type": "string",
-      "description": "The type of record being submitted.",
       "enum": [
         "echo",
         "verification",
         "guardian_application",
         "guardian_retirement",
-        "guardian_key_rotation",
         "propagation",
         "correction",
         "classification_update",
         "context_insufficient_notice"
       ]
     },
-    "draft": {
+    "record_draft": {
       "type": "object",
-      "description": "The record draft payload. Must not contain forbidden chain fields.",
       "required": [
-        "context_completeness_level"
+        "record_type",
+        "submitting_participant_identity",
+        "submission_execution_context",
+        "context_readiness",
+        "authorization_context"
       ],
       "properties": {
-        "context_completeness_level": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Context-completeness level of this draft."
+        "record_type": {
+          "type": "string"
         },
-        "verification_version": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Verification schema version (when applicable)."
-        },
-        "verification": {
+        "actor_identity": {
           "type": "object",
+          "deprecated": true,
+          "description": "FORBIDDEN for client submissions. This is a server-derived compatibility projection after append. Clients must use submitting_participant_identity instead.",
+          "required": [
+            "label",
+            "provider"
+          ],
           "properties": {
-            "version": {
-              "type": "integer",
-              "minimum": 0
+            "label": {
+              "type": "string"
             },
-            "proof": {
-              "oneOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object"
-                }
-              ]
+            "provider": {
+              "type": "string"
+            }
+          }
+        },
+        "context_readiness": {
+          "type": "object",
+          "required": [
+            "declared_context_level",
+            "minimum_required_for_action",
+            "context_sufficient_for_selected_action"
+          ],
+          "properties": {
+            "declared_context_level": {
+              "type": "string",
+              "pattern": "^CC-[0-5]$"
+            },
+            "minimum_required_for_action": {
+              "type": "string",
+              "pattern": "^CC-[0-5]$"
+            },
+            "context_sufficient_for_selected_action": {
+              "type": "boolean"
+            },
+            "loaded_context_urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "URLs actually loaded for the declared context level."
+            },
+            "context_read_confirmed": {
+              "type": "boolean",
+              "description": "Self-declared confirmation that the participant actually loaded and read the context required for the declared context level. Required by Builder for formal CC-3+ records; does not prove subjective understanding."
+            },
+            "context_read_confirmation_boundary": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "self_declared_only": { "type": "boolean", "const": true },
+                "does_not_prove_subjective_understanding": { "type": "boolean", "const": true },
+                "false_claim_is_oath_violation": { "type": "boolean", "const": true },
+                "context_map": { "type": "string", "const": "/api/context-load-map.json" },
+                "not_authority": { "type": "boolean", "const": true },
+                "not_attestation": { "type": "boolean", "const": true },
+                "not_amendment": { "type": "boolean", "const": true },
+                "not_successor_reception": { "type": "boolean", "const": true },
+                "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+              }
+            }
+          }
+        },
+        "boundary": {
+          "type": "object",
+          "deprecated": true,
+          "description": "DEPRECATED compatibility property. Use submission_boundary at the top level instead.",
+          "required": [
+            "not_authority",
+            "not_governance",
+            "not_attestation",
+            "not_successor_reception",
+            "not_amendment",
+            "bitcoin_originals_prevail"
+          ],
+          "properties": {
+            "not_authority": {
+              "const": true
+            },
+            "not_governance": {
+              "const": true
+            },
+            "not_attestation": {
+              "const": true
+            },
+            "not_successor_reception": {
+              "const": true
+            },
+            "not_amendment": {
+              "const": true
+            },
+            "bitcoin_originals_prevail": {
+              "const": true
             }
           },
           "additionalProperties": true
+        },
+        "authorship_proof": {
+          "$ref": "#/$defs/authorship_proof"
+        },
+        "submission_oath_verification": {
+          "type": "object",
+          "description": "Oath gate verification data. Contains hashes and declarations only. Formal record types only.",
+          "properties": {
+            "schema": {
+              "type": "string"
+            },
+            "oath_policy": {
+              "type": "string"
+            },
+            "oath_policy_schema": {
+              "type": "string"
+            },
+            "oath_policy_version": {
+              "type": "string"
+            },
+            "oath_policy_sha256": {
+              "type": "string"
+            },
+            "oath_policy_source_url": {
+              "type": "string"
+            },
+            "oath_modules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "oath_applies_to": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "canonical_oath_text_sha256": {
+              "type": "string"
+            },
+            "canonical_oath_char_count": {
+              "type": "integer"
+            },
+            "canonical_oath_line_count": {
+              "type": "integer"
+            },
+            "participant_readback_sha256": {
+              "type": "string"
+            },
+            "participant_readback_char_count": {
+              "type": "integer"
+            },
+            "participant_readback_excerpt": {
+              "type": "string"
+            },
+            "oath_read": {
+              "type": "boolean"
+            },
+            "readback_required": {
+              "type": "boolean"
+            },
+            "participant_readback_provided": {
+              "type": "boolean"
+            },
+            "readback_matches_canonical_oath": {
+              "type": "boolean"
+            },
+            "readback_method_declared": {
+              "type": "string"
+            },
+            "readback_was_not_piped_from_file": {
+              "type": "boolean"
+            },
+            "readback_was_not_generated_by_script": {
+              "type": "boolean"
+            },
+            "readback_was_not_loaded_from_cache": {
+              "type": "boolean"
+            },
+            "readback_was_not_summary_or_paraphrase": {
+              "type": "boolean"
+            },
+            "readback_was_not_generated_by_external_automation": {
+              "type": "boolean"
+            },
+            "readback_was_not_auto_filled_by_builder": {
+              "type": "boolean"
+            },
+            "no_shortcut_oath_acknowledged": {
+              "type": "boolean"
+            },
+            "oath_does_not_prove_subjective_understanding": {
+              "type": "boolean"
+            },
+            "oath_verifies_exact_readback_only": {
+              "type": "boolean"
+            },
+            "not_authority": {
+              "type": "boolean"
+            },
+            "not_governance": {
+              "type": "boolean"
+            },
+            "not_attestation": {
+              "type": "boolean"
+            },
+            "not_amendment": {
+              "type": "boolean"
+            },
+            "bitcoin_originals_prevail": {
+              "type": "boolean"
+            }
+          }
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "actor_identity"
+                ]
+              },
+              {
+                "required": [
+                  "boundary"
+                ]
+              },
+              {
+                "required": [
+                  "boundary_acknowledgement"
+                ]
+              },
+              {
+                "required": [
+                  "server_normalization"
+                ]
+              },
+              {
+                "required": [
+                  "server_append_metadata"
+                ]
+              },
+              {
+                "required": [
+                  "append_assigned_metadata"
+                ]
+              },
+              {
+                "required": [
+                  "authorship_verification_status"
+                ]
+              },
+              {
+                "required": [
+                  "record_id"
+                ]
+              },
+              {
+                "required": [
+                  "record_index"
+                ]
+              },
+              {
+                "required": [
+                  "assigned_at"
+                ]
+              },
+              {
+                "required": [
+                  "previous_record_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "content_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "content_sha256_v2"
+                ]
+              },
+              {
+                "required": [
+                  "record_sha256"
+                ]
+              },
+              {
+                "required": [
+                  "chain_id"
+                ]
+              },
+              {
+                "required": [
+                  "what_i_checked"
+                ]
+              },
+              {
+                "required": [
+                  "limitations"
+                ]
+              },
+              {
+                "required": [
+                  "related_records"
+                ]
+              },
+              {
+                "required": [
+                  "immutability_policy"
+                ]
+              }
+            ]
+          }
+        }
+      ]
     },
     "authorship_proof": {
+      "$ref": "#/$defs/authorship_proof"
+    },
+    "builder": {
       "type": "object",
-      "description": "Optional Ed25519 authorship proof.",
       "required": [
-        "public_key_pem",
-        "signature"
+        "name",
+        "version",
+        "source_url"
       ],
       "properties": {
-        "public_key_pem": {
-          "type": "string",
-          "description": "PEM-encoded Ed25519 public key."
+        "name": {
+          "type": "string"
         },
-        "signature": {
+        "version": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "type": "string"
+        }
+      }
+    },
+    "client_context": {
+      "type": "object",
+      "required": [
+        "site_entry_url",
+        "declared_context_level"
+      ],
+      "properties": {
+        "site_entry_url": {
+          "type": "string"
+        },
+        "loaded_context_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "declared_context_level": {
           "type": "string",
-          "description": "Base-64 encoded Ed25519 signature over the canonical JSON of the draft."
+          "pattern": "^CC-[0-5]$"
+        }
+      }
+    },
+    "submission_boundary": {
+      "type": "object",
+      "required": [
+        "not_authority",
+        "not_governance",
+        "not_attestation",
+        "not_successor_reception",
+        "not_amendment",
+        "bitcoin_originals_prevail",
+        "receipt_is_not_final_inclusion",
+        "receipt_is_intake_only",
+        "later_records_may_reclassify_or_correct_this_record"
+      ],
+      "properties": {
+        "not_authority": {
+          "const": true
+        },
+        "not_governance": {
+          "const": true
+        },
+        "not_attestation": {
+          "const": true
+        },
+        "not_successor_reception": {
+          "const": true
+        },
+        "not_amendment": {
+          "const": true
+        },
+        "bitcoin_originals_prevail": {
+          "const": true
+        },
+        "receipt_is_not_final_inclusion": {
+          "const": true
+        },
+        "receipt_is_intake_only": {
+          "const": true
+        },
+        "later_records_may_reclassify_or_correct_this_record": {
+          "const": true
         }
       },
       "additionalProperties": false
     },
-    "metadata": {
+    "client_oath_readback": {
       "type": "object",
-      "description": "Freeform metadata attached by the submitting agent.",
-      "additionalProperties": true
+      "description": "Transient oath readback for gateway validation. Redacted before persistence. Formal record types only.",
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "record_type": {
+          "type": "string"
+        },
+        "oath_policy_sha256": {
+          "type": "string"
+        },
+        "oath_modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readback_text": {
+          "type": "string"
+        },
+        "readback_text_sha256": {
+          "type": "string"
+        },
+        "readback_text_char_count": {
+          "type": "integer"
+        },
+        "readback_method_declared": {
+          "type": "string"
+        }
+      }
+    },
+    "record_type_separation_policy": {
+      "type": "object",
+      "description": "Record type separation policy: echo, verification, and guardian_application are mutually exclusive record types. Guardian Application must be submitted as a standalone guardian_application record. Echo and verification records that include Guardian Application fields are rejected.",
+      "properties": {
+        "echo_records_must_not_embed_guardian_application": {
+          "type": "boolean",
+          "const": true
+        },
+        "verification_records_must_not_embed_guardian_application": {
+          "type": "boolean",
+          "const": true
+        },
+        "guardian_application_must_be_submitted_as_standalone_record": {
+          "type": "boolean",
+          "const": true
+        },
+        "linked_guardian_application_request_disabled": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true,
+  "$defs": {
+    "authorship_proof": {
+      "type": "object",
+      "required": [
+        "schema",
+        "method",
+        "algorithm",
+        "public_key_pem",
+        "public_key_sha256",
+        "signed_payload_sha256",
+        "signature_base64",
+        "signed_message",
+        "claim_boundary"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "trinityaccord.agent-authorship-proof.v1"
+        },
+        "method": {
+          "type": "string",
+          "const": "public_key_signature"
+        },
+        "algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "public_key_pem": {
+          "type": "string"
+        },
+        "public_key_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signed_payload_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signature_base64": {
+          "type": "string"
+        },
+        "signed_message": {
+          "type": "string"
+        },
+        "claim_boundary": {
+          "type": "object",
+          "description": "Boundary claims the signer acknowledges",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "echo"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "echo_content"
+            ],
+            "properties": {
+              "echo_content": {
+                "type": "object",
+                "required": [
+                  "echo_text",
+                  "echo_intent"
+                ],
+                "properties": {
+                  "echo_text": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "echo_intent": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "verification"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "verification_content"
+            ],
+            "properties": {
+              "verification_content": {
+                "type": "object",
+                "required": [
+                  "verification_level",
+                  "what_was_checked",
+                  "verification_claim",
+                  "fresh_actions_performed"
+                ],
+                "properties": {
+                  "verification_level": {
+                    "type": "string",
+                    "enum": ["V0", "V1", "V2", "V3", "V4", "V5"]
+                  },
+                  "what_was_checked": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "verification_claim": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fresh_actions_performed": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_application"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "guardian_application_content"
+            ],
+            "properties": {
+              "guardian_application_content": {
+                "type": "object",
+                "required": [
+                  "requested_guardian_identifier",
+                  "guardian_public_key_sha256",
+                  "guardian_stewardship_oath"
+                ],
+                "properties": {
+                  "requested_guardian_identifier": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "guardian_public_key_sha256": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "guardian_stewardship_oath": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_retirement"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "guardian_id",
+              "guardian_public_key_sha256",
+              "reason",
+              "retirement_does_not_remove_historical_record",
+              "target_guardian_application_record_id",
+              "target_guardian_application_record_sha256"
+            ],
+            "properties": {
+              "target_guardian_application_record_id": {
+                "type": "string",
+                "pattern": "^R-[0-9]{9}$"
+              },
+              "target_guardian_application_record_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "propagation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "title",
+              "body"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "correction"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "title",
+              "body",
+              "correction_content"
+            ],
+            "properties": {
+              "correction_content": {
+                "type": "object",
+                "required": [
+                  "target_record_id",
+                  "target_record_sha256",
+                  "correction_reason",
+                  "corrected_fields_or_claims",
+                  "evidence_or_review_basis"
+                ],
+                "properties": {
+                  "target_record_id": {
+                    "type": "string",
+                    "pattern": "^R-[0-9]{9}$"
+                  },
+                  "target_record_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "correction_reason": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "corrected_fields_or_claims": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "evidence_or_review_basis": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "classification_update"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "classification_update_content"
+            ],
+            "properties": {
+              "classification_update_content": {
+                "type": "object",
+                "required": [
+                  "target_record_id",
+                  "target_record_sha256",
+                  "previous_classification",
+                  "new_classification",
+                  "classification_reason",
+                  "evidence_or_review_basis"
+                ],
+                "properties": {
+                  "target_record_id": {
+                    "type": "string",
+                    "pattern": "^R-[0-9]{9}$"
+                  },
+                  "target_record_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "previous_classification": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "new_classification": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "classification_reason": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "evidence_or_review_basis": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "context_insufficient_notice"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "properties": {
+                  "declared_context_level": {
+                    "const": "CC-3"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "required": [
+                  "loaded_context_urls"
+                ],
+                "properties": {
+                  "loaded_context_urls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: echo",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "echo"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_echo_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: verification",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "verification"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_verification_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: guardian_application",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_application"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_guardian_application_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: guardian_retirement",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "guardian_retirement"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_guardian_retirement_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: propagation",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "propagation"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_propagation_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: correction",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "correction"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_correction_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: classification_update",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "classification_update"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_classification_update_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "record type authorization scope: context_insufficient_notice",
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "context_insufficient_notice"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "authorization_context": {
+                "type": "object",
+                "required": [
+                  "authorization_scope"
+                ],
+                "properties": {
+                  "authorization_scope": {
+                    "const": "create_context_insufficient_notice_record"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "context sufficient claims require loaded context URLs",
+      "if": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "properties": {
+                  "context_sufficient_for_selected_action": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "record_draft": {
+            "properties": {
+              "context_readiness": {
+                "required": [
+                  "loaded_context_urls"
+                ],
+                "properties": {
+                  "loaded_context_urls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

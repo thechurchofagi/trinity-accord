@@ -61,6 +61,12 @@ require(
 require("/record-chain/preflight" in server, "server.js retired response must mention current preflight")
 require("/record-chain/submit" in server, "server.js retired response must mention current submit")
 
+require("PROCESS_STARTED_AT" in server, "legacy version metadata must use stable process start time")
+require("retired: LEGACY_GATEWAY_RETIRED" in server, "legacy health/version must disclose retirement")
+require("accepts_submissions: !LEGACY_GATEWAY_RETIRED" in server, "legacy health/version must disclose submission capability")
+require("production_render_enabled: !LEGACY_GATEWAY_RETIRED" in server, "retired legacy health/version must not claim production enabled")
+require("if (LEGACY_GATEWAY_RETIRED)" in server and "ready: false" in server, "legacy readiness must fail closed when retired")
+
 render = (ROOT / "render.yaml").read_text(encoding="utf-8")
 require("TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED" in render, "render.yaml must set TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED")
 require("autoDeploy: false" in render, "legacy gateway must not auto-deploy")

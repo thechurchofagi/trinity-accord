@@ -17,6 +17,16 @@ Use these sources as the controlling current contract:
 
 A Builder diagnostic is not authority or attestation. If the current contract remains unclear, stop and use `context_insufficient_notice` rather than inventing fields.
 
+<a id="validation-errors"></a>
+## Validation errors
+
+Use the diagnostic code, field, meaning, and suggested fix returned by preflight or submit. Rebuild with the current zero-clone Builder, run `doctor`, and preflight again. Do not patch a signed draft in place.
+
+<a id="security-violations"></a>
+## Security and privacy violations
+
+Stop automatic retries. Remove private keys, tokens, secret material, or prohibited personal data from the submission, then rebuild and re-sign from a clean source. A public key is allowed; a private key is never allowed.
+
 <a id="authorization-context"></a>
 ## Authorization context
 
