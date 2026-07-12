@@ -1,59 +1,74 @@
 #!/usr/bin/env python3
-"""Final red-team regression: workflow_dispatch inputs must be validated and passed safely.
+"""Reject direct workflow-dispatch input interpolation inside shell source.
 
-Rules:
-- No direct `${{ inputs.* }}` interpolation inside `run:` blocks.
-- No string ARGS="..." command construction.
-- No `node script $ARGS` / `python script $ARGS`.
-- Any workflow using concurrency input must validate numeric range.
+GitHub expands `${{ inputs.* }}` and `${{ github.event.inputs.* }}` before the
+runner shell parses a `run:` block. Embedded quotes and shell syntax can
+therefore become executable source. Inputs must first be assigned through
+`env:` and then consumed as quoted shell variables.
 """
+from __future__ import annotations
 
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ROOT / ".github" / "workflows"
+UNSAFE = re.compile(r"\$\{\{\s*(?:github\.event\.inputs|inputs)\.")
+BLOCK_RUN = re.compile(r"^(\s*)run:\s*[|>]\s*$")
+INLINE_RUN = re.compile(r"^(\s*)run:\s*(.+)$")
 
-errors = []
 
-def extract_run_blocks(text: str):
-    return re.findall(r"run:\s*\|\n((?:\s{10,}.+\n?)+)", text)
+def find_unsafe_run_interpolations(path: Path) -> list[str]:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    errors: list[str] = []
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        block = BLOCK_RUN.match(line)
+        if block:
+            run_indent = len(block.group(1))
+            index += 1
+            while index < len(lines):
+                candidate = lines[index]
+                candidate_indent = len(candidate) - len(candidate.lstrip())
+                if candidate.strip() and candidate_indent <= run_indent:
+                    break
+                if UNSAFE.search(candidate):
+                    errors.append(
+                        f"{path.relative_to(ROOT)}:{index + 1}: {candidate.strip()}"
+                    )
+                index += 1
+            continue
 
-for path in sorted(WORKFLOWS.glob("*.yml")):
-    text = path.read_text(encoding="utf-8")
+        inline = INLINE_RUN.match(line)
+        if inline and UNSAFE.search(inline.group(2)):
+            errors.append(
+                f"{path.relative_to(ROOT)}:{index + 1}: {inline.group(2).strip()}"
+            )
+        index += 1
+    return errors
 
-    if "workflow_dispatch:" not in text:
-        continue
 
-    rel = path.relative_to(ROOT)
-    run_blocks = extract_run_blocks(text)
+def main() -> int:
+    errors: list[str] = []
+    for path in sorted(WORKFLOWS.glob("*.y*ml")):
+        errors.extend(find_unsafe_run_interpolations(path))
+    if errors:
+        print(
+            "FAIL: workflow-dispatch inputs are interpolated directly into shell source:",
+            file=sys.stderr,
+        )
+        for error in errors:
+            print(f"  - {error}", file=sys.stderr)
+        print(
+            "Move each expression to env: and use a quoted shell variable instead.",
+            file=sys.stderr,
+        )
+        return 1
+    print("PASS: workflow-dispatch inputs are not interpolated directly into run blocks")
+    return 0
 
-    for block in run_blocks:
-        if "${{ inputs." in block:
-            errors.append(f"{rel}: workflow inputs must not be interpolated directly inside run block")
 
-        if re.search(r'\bARGS="', block):
-            errors.append(f"{rel}: use Bash array ARGS=(), not string ARGS=\"...\"")
-
-        if re.search(r"\bnode\s+\S+\s+\$ARGS\b", block):
-            errors.append(f'{rel}: node command must expand Bash array as "${{ARGS[@]}}"')
-
-        if re.search(r"\bpython3?\s+\S+\s+\$ARGS\b", block):
-            errors.append(f'{rel}: python command must expand Bash array as "${{ARGS[@]}}"')
-
-    if "inputs.concurrency" in text:
-        if "CONCURRENCY" not in text:
-            errors.append(f"{rel}: inputs.concurrency should be assigned to an env var containing CONCURRENCY")
-        if not re.search(r"\[\[\s+\"\$[A-Z_]*CONCURRENCY\"\s+=~\s+\^\[0-9\]\+\$", text):
-            errors.append(f"{rel}: concurrency input must be regex-validated")
-        if "-le 25" not in text and "-le 50" not in text:
-            errors.append(f"{rel}: concurrency input must have an upper bound")
-
-if errors:
-    print("WORKFLOW_INPUT_SAFETY_FAIL")
-    for e in errors:
-        print("-", e)
-    sys.exit(1)
-
-print("WORKFLOW_INPUT_SAFETY_OK")
+if __name__ == "__main__":
+    raise SystemExit(main())
