@@ -20,39 +20,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
-      - name: Split source snapshot into text chunks
+      - name: Publish source snapshot text chunks
         run: |
           set -euo pipefail
           test -f audit/deep-audit-source.tar.gz
+          rm -rf audit/chunks
           mkdir -p audit/chunks
           archive_size="$(stat -c '%s' audit/deep-audit-source.tar.gz)"
           archive_sha="$(sha256sum audit/deep-audit-source.tar.gz | awk '{print $1}')"
           base64 -w0 audit/deep-audit-source.tar.gz > /tmp/deep-audit-source.b64
           split -b 700000 -d -a 3 /tmp/deep-audit-source.b64 audit/chunks/part-
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-          parts = sorted(p.name for p in Path('audit/chunks').glob('part-*'))
-          data = {
-              'schema': 'trinityaccord.deep-audit-source-chunks.v1',
-              'archive_size_bytes': int(os.environ['ARCHIVE_SIZE']),
-              'archive_sha256': os.environ['ARCHIVE_SHA'],
-              'base64_size_bytes': Path('/tmp/deep-audit-source.b64').stat().st_size,
-              'part_size_bytes': 700000,
-              'parts': parts,
-          }
-          Path('audit/chunks/index.json').write_text(json.dumps(data, indent=2, sort_keys=True) + '\n', encoding='utf-8')
-          PY
-        env:
-          ARCHIVE_SIZE: ${{ env.ARCHIVE_SIZE }}
-          ARCHIVE_SHA: ${{ env.ARCHIVE_SHA }}
-
-      - name: Publish chunks and remove temporary files
-        run: |
-          set -euo pipefail
-          archive_size="$(stat -c '%s' audit/deep-audit-source.tar.gz)"
-          archive_sha="$(sha256sum audit/deep-audit-source.tar.gz | awk '{print $1}')"
           ARCHIVE_SIZE="${archive_size}" ARCHIVE_SHA="${archive_sha}" python - <<'PY'
           import json
           import os
