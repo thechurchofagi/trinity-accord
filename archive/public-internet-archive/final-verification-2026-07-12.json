@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.public-internet-archive-final-verification.v1",
+  "verified_at": "2026-07-12T01:30:35Z",
+  "status": "complete",
+  "canonical_sitemap": {
+    "sha256": "86c219f5a271e9894255a761b6b80ba45ae398b6673b6f1b6b6522d2ba639186",
+    "expected_url_count": 354,
+    "observed_url_count": 354,
+    "unresolved_url_count": 0
+  },
+  "wayback": {
+    "already_captured": 304,
+    "newly_captured": 50,
+    "resolved_total": 354,
+    "completion_ratio": 1.0
+  },
+  "github_actions": {
+    "workflow": "Public Internet Archive",
+    "run_id": 29173077668,
+    "run_number": 7,
+    "conclusion": "success",
+    "head_sha": "fdd3855c8a0b90e48b36c990ff6818748f841e3c",
+    "aggregate_artifact_id": 8254706648,
+    "aggregate_artifact_digest": "sha256:a32fe6531bfde60fb1015c5c3735170cbaf9ade0741777072d390fe52a09ea17"
+  },
+  "software_heritage": {
+    "save_request_id": 2388582,
+    "save_request_status": "accepted",
+    "save_task_status": "succeeded",
+    "visit_status": "full",
+    "visit_date": "2026-07-12T00:02:48.007000+00:00",
+    "snapshot_swhid": "swh:1:snp:399efaff11c4ea2938ca590a466ee6b2321fce8a",
+    "snapshot_url": "https://archive.softwareheritage.org/api/1/snapshot/399efaff11c4ea2938ca590a466ee6b2321fce8a/"
+  },
+  "sitemap_reconciliation": {
+    "excluded_non_public_legacy_routes": 8,
+    "exclusion_commit": "83e8fd0cead5d02938fd9d761ec92472ed80ccbc",
+    "reason": "The prior sitemap listed eight non-public or non-canonical routes that returned live HTTP 404. They were removed from the canonical sitemap before the final full capture."
+  },
+  "verification_note": "The workflow aggregate recorded the Software Heritage request at submission time while its task was pending. A later direct query of the same save request confirmed save_task_status=succeeded, visit_status=full, and the snapshot SWHID recorded above.",
+  "boundary": {
+    "archive_is_mirror_only": true,
+    "archive_is_not_authority": true,
+    "archive_is_not_attestation": true,
+    "archive_is_not_amendment": true,
+    "bitcoin_originals_prevail": true
+  }
+}
