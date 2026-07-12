@@ -1,1 +1,0 @@
-Temporary trigger; removed immediately so the final PR diff remains source-only.
