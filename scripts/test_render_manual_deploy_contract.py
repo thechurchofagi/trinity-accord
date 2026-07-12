@@ -6,6 +6,7 @@ suspended or unconfirmed deployment as triggered.
 """
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -50,7 +51,16 @@ def main() -> int:
     if not behavior.exists():
         errors.append("Render deployment behavior regression is missing")
     else:
-        ok("Render deployment behavior regression exists")
+        result = subprocess.run(
+            [sys.executable, str(behavior)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            errors.append(f"Render deployment behavior regression failed: {result.stderr or result.stdout}")
+        else:
+            ok("Render deployment behavior regression passes")
 
     # 2. workflow is workflow_dispatch only
     wf = ROOT / ".github" / "workflows" / "render-manual-deploy.yml"
