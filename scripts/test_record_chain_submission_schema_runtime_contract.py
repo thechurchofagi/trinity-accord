@@ -1,74 +1,94 @@
 #!/usr/bin/env python3
-"""Source-level test: record-chain submission schema rejects runtime projection fields.
-
-Verifies that the public JSON schema and the runtime app.py agree on which
-fields are server-derived and must not be supplied by clients.
-"""
+"""Behavioral contract: public schema matches the canonical signed-domain field set."""
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
-# Projection fields that the schema explicitly rejects via `not`/`anyOf` rules
-# and that the runtime rejects via _UNSIGNED_CLIENT_PROJECTION_FIELDS.
-# NOTE: runtime FORBIDDEN_CHAIN_FIELDS is a broader set (batch_*, server_*, etc.)
-# that is validated at a different layer; this test does NOT cross-check those.
 
-# Projection fields are the subset that the schema explicitly rejects via
-# a `not` / `anyOf` rule.  The runtime FORBIDDEN_CHAIN_FIELDS is a broader
-# set (includes batch_*, server_*, etc.) that are rejected at a different
-# layer.  The schema `not`-rule only needs to cover the projection fields
-# that external clients might accidentally supply in a record_draft.
-SCHEMA_PROJECTION_FIELDS = [
-    "actor_identity",
-    "append_assigned_metadata",
-    "assigned_at",
-    "authorship_verification_status",
-    "boundary",
-    "chain_id",
-    "content_sha256",
-    "previous_record_sha256",
-    "record_id",
-    "record_index",
-    "record_sha256",
-    "server_normalization",
-]
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        errors.append(message)
 
 
-def require(cond: bool, msg: str) -> None:
-    if not cond:
-        errors.append(msg)
+def canonical_unsigned_fields() -> set[str]:
+    path = ROOT / "apps" / "record_chain_intake_gateway" / "gateway" / "authorship.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if not any(isinstance(target, ast.Name) and target.id == "UNSIGNED_PROJECTION_FIELDS" for target in node.targets):
+            continue
+        value = node.value
+        if not (
+            isinstance(value, ast.Call)
+            and isinstance(value.func, ast.Name)
+            and value.func.id == "frozenset"
+            and len(value.args) == 1
+            and isinstance(value.args[0], ast.Set)
+        ):
+            raise SystemExit("UNSIGNED_PROJECTION_FIELDS must remain a literal frozenset for contract extraction")
+        fields = {
+            element.value
+            for element in value.args[0].elts
+            if isinstance(element, ast.Constant) and isinstance(element.value, str)
+        }
+        if len(fields) != len(value.args[0].elts):
+            raise SystemExit("UNSIGNED_PROJECTION_FIELDS must contain only string literals")
+        return fields
+    raise SystemExit("UNSIGNED_PROJECTION_FIELDS assignment not found")
 
 
-# --- Check schema ---
+def classification_content(rule: dict) -> dict:
+    return (
+        rule.get("then", {})
+        .get("properties", {})
+        .get("record_draft", {})
+        .get("properties", {})
+        .get("classification_update_content", {})
+    )
+
+
 schema_path = ROOT / "api" / "record-chain-submission-schema.v1.json"
 schema = json.loads(schema_path.read_text(encoding="utf-8"))
 record_draft = schema.get("properties", {}).get("record_draft", {})
-record_draft_text = json.dumps(record_draft, ensure_ascii=False, sort_keys=True)
-compact = record_draft_text.replace(" ", "")
+forbidden_items: list[dict] = []
+for rule in record_draft.get("allOf", []):
+    items = ((rule.get("not") or {}).get("anyOf") or [])
+    if isinstance(items, list):
+        forbidden_items.extend(item for item in items if isinstance(item, dict))
 
-require("not" in record_draft_text, "record_draft schema must contain a not rule for projection fields")
-require("anyOf" in record_draft_text, "record_draft schema must use anyOf for forbidden projection fields")
+schema_forbidden = {
+    required[0]
+    for item in forbidden_items
+    if isinstance((required := item.get("required")), list)
+    and len(required) == 1
+    and isinstance(required[0], str)
+}
+canonical_forbidden = canonical_unsigned_fields()
+require(
+    schema_forbidden == canonical_forbidden,
+    "public schema/canonical unsigned-field drift: "
+    f"missing={sorted(canonical_forbidden - schema_forbidden)}, "
+    f"extra={sorted(schema_forbidden - canonical_forbidden)}",
+)
 
-for field in SCHEMA_PROJECTION_FIELDS:
-    require(
-        f'"required":["{field}"]' in compact,
-        f"record_draft schema must reject client-supplied {field}",
-    )
+classification_rules = [
+    rule
+    for rule in schema.get("allOf", [])
+    if (((rule.get("if") or {}).get("properties") or {}).get("record_type") or {}).get("const")
+    == "classification_update"
+    and classification_content(rule)
+]
+require(len(classification_rules) == 1, f"expected one classification_update content rule, found {len(classification_rules)}")
+if len(classification_rules) == 1:
+    target = classification_content(classification_rules[0]).get("properties", {}).get("target_record_id", {})
+    require(target.get("pattern") == "^R-[0-9]{9}$", "classification_update target_record_id must use canonical R-XXXXXXXXX format")
 
-# --- Check runtime ---
-app_text = (ROOT / "apps" / "record_chain_intake_gateway" / "app.py").read_text(encoding="utf-8")
-for field in SCHEMA_PROJECTION_FIELDS:
-    require(
-        f'"{field}"' in app_text,
-        f"runtime _UNSIGNED_CLIENT_PROJECTION_FIELDS missing {field}",
-    )
-
-# --- Report ---
 if errors:
-    raise SystemExit("\n".join(f"ERROR: {e}" for e in errors))
-
-print("record-chain submission schema/runtime projection contract OK")
+    raise SystemExit("\n".join(f"ERROR: {error}" for error in errors))
+print("record-chain submission schema/runtime contract OK")

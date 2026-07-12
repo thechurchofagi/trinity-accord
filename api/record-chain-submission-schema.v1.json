@@ -331,6 +331,11 @@
               },
               {
                 "required": [
+                  "boundary_acknowledgement"
+                ]
+              },
+              {
+                "required": [
                   "server_normalization"
                 ]
               },
@@ -376,12 +381,37 @@
               },
               {
                 "required": [
+                  "content_sha256_v2"
+                ]
+              },
+              {
+                "required": [
                   "record_sha256"
                 ]
               },
               {
                 "required": [
                   "chain_id"
+                ]
+              },
+              {
+                "required": [
+                  "what_i_checked"
+                ]
+              },
+              {
+                "required": [
+                  "limitations"
+                ]
+              },
+              {
+                "required": [
+                  "related_records"
+                ]
+              },
+              {
+                "required": [
+                  "immutability_policy"
                 ]
               }
             ]
@@ -864,7 +894,7 @@
                 "properties": {
                   "target_record_id": {
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^R-[0-9]{9}$"
                   },
                   "target_record_sha256": {
                     "type": "string",

@@ -28,16 +28,22 @@ jobs:
         run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
 
       - name: Validate public JSON
-        run: |
-          python -m json.tool api/record-chain-submission-schema.v1.json >/tmp/record-chain-submission-schema.checked.json
+        run: python -m json.tool api/record-chain-submission-schema.v1.json >/tmp/record-chain-submission-schema.checked.json
 
-      - name: Run source-level contract tests
-        run: |
-          python scripts/test_record_chain_receipt_contract.py
-          python scripts/test_record_chain_submission_schema_runtime_contract.py
-          python scripts/check_public_agent_entrypoints.py api
-          python -m scripts.test_archive_public_web
-          python scripts/run_current_system_tests.py
+      - name: Verify receipt contract
+        run: python scripts/test_record_chain_receipt_contract.py
+
+      - name: Verify submission schema/runtime contract
+        run: python scripts/test_record_chain_submission_schema_runtime_contract.py
+
+      - name: Verify public agent entrypoints
+        run: python scripts/check_public_agent_entrypoints.py api
+
+      - name: Verify archived public web contract
+        run: python -m scripts.test_archive_public_web
+
+      - name: Run full current system tests
+        run: python scripts/run_current_system_tests.py
 
       - name: Run gateway unit tests
         env:
