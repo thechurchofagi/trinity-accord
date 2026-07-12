@@ -1895,6 +1895,15 @@ function runDoctor(submission) {
           fix: "Provide --target-record-id.",
         });
       }
+      if (typeof cc.target_record_id === "string" && cc.target_record_id.trim() && !/^R-[0-9]{9}$/.test(cc.target_record_id)) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_TARGET_ID",
+          field: "record_draft.correction_content.target_record_id",
+          meaning: "target_record_id must use canonical R-XXXXXXXXX format.",
+          fix: "Copy the exact record_id from the public Record-Chain.",
+        });
+      }
       if (!cc.target_record_sha256 || !/^[0-9a-f]{64}$/.test(String(cc.target_record_sha256))) {
         results.push({
           status: "FAIL",

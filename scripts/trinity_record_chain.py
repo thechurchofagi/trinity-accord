@@ -48,22 +48,14 @@ def ensure_gateway_import_path() -> None:
         sys.path.insert(0, gateway_root)
 
 
-def is_infrastructure_append_error(exc: BaseException) -> bool:
-    """Classify whether an exception is an infrastructure/import failure.
+def is_semantic_append_rejection(exc: BaseException) -> bool:
+    """Return true only for expected participant/data validation failures.
 
-    Infrastructure failures (missing modules, broken imports) must NOT be
-    recorded as semantic submission rejections. They must fail CI while
-    keeping the pending file in pending/ so a retry after the fix succeeds.
+    Append must never turn internal programming errors, filesystem failures, or
+    dependency outages into durable semantic rejections. Those failures must
+    keep the pending artifact available for a later retry.
     """
-    if isinstance(exc, (ImportError, ModuleNotFoundError)):
-        return True
-    text = str(exc)
-    infrastructure_markers = [
-        "No module named",
-        "cannot import name",
-        "receipt hash verification import failed",
-    ]
-    return any(marker in text for marker in infrastructure_markers)
+    return isinstance(exc, ValueError)
 
 
 CHAIN = ROOT / "record-chain"
@@ -393,6 +385,12 @@ def sha256_file(path: Path) -> str:
 
 def sha256_canonical_json(obj: Any) -> str:
     return sha256_bytes(canonical_bytes(obj))
+
+
+def sha256_gateway_canonical_json(obj: Any) -> str:
+    """Hash Gateway-persisted canonical JSON (compact, without trailing newline)."""
+    text = json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return sha256_text(text)
 
 
 def content_hash(record: dict[str, Any]) -> str:
@@ -938,14 +936,12 @@ def verify_receipt_sha256(receipt: dict[str, Any]) -> tuple[bool, str]:
 
 
 def require_gateway_pending_durable_intake_binding(path: Path) -> None:
-    """Fail closed unless a Gateway-created pending file has durable intake state.
+    """Fail closed unless a Gateway pending file is fully materialized and bound.
 
-    Applies only to canonical Gateway pending files:
-        rcg-YYYYMMDD-<sha-prefix>.<record_type>.pending.json
-
-    Does not apply to finalizer-local temporary pending files such as:
-        mainnet-prelaunch-<receipt-id>.json
-    because those are created and consumed inside one finalizer workflow before commit.
+    The pending marker is append-eligible only after the immutable submission,
+    receipt, and idempotency index agree and the idempotency transaction is in
+    ``pending_written`` state. This prevents a partially rolled-back or
+    half-finalized intake transaction from entering the immutable chain.
     """
     receipt_id = _gateway_pending_receipt_id(path)
     if receipt_id is None:
@@ -956,39 +952,83 @@ def require_gateway_pending_durable_intake_binding(path: Path) -> None:
         raise ValueError(f"gateway pending has no durable receipt: {path.relative_to(ROOT)}")
 
     receipt = read_json(receipt_path)
-
-    # C.4: Verify receipt hash whenever receipt is read
     receipt_ok, receipt_err = verify_receipt_sha256(receipt)
     if not receipt_ok:
         raise ValueError(f"receipt hash verification failed: {receipt_err}")
 
+    rel_receipt = str(receipt_path.relative_to(ROOT))
     rel_pending = str(path.relative_to(ROOT))
+    if receipt.get("server_receipt_id") != receipt_id:
+        raise ValueError("receipt server_receipt_id mismatch")
+    if receipt.get("receipt_path") != rel_receipt:
+        raise ValueError("receipt receipt_path mismatch")
     if receipt.get("pending_file_path") != rel_pending:
         raise ValueError(
             f"receipt.pending_file_path does not bind to pending file: {path.relative_to(ROOT)}"
         )
 
+    pending_draft = read_json(path)
+    pending_record_type = pending_draft.get("record_type")
+    if not isinstance(pending_record_type, str) or not pending_record_type:
+        raise ValueError("gateway pending record_type missing")
+    if receipt.get("record_type") != pending_record_type:
+        raise ValueError("receipt record_type mismatch")
+
     submission_sha = receipt.get("original_submission_sha256") or receipt.get("submission_sha256")
+    stored_submission_sha = receipt.get("stored_submission_sha256")
     if not isinstance(submission_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", submission_sha):
         raise ValueError(
             f"receipt has no valid original_submission_sha256/submission_sha256: {receipt_path.relative_to(ROOT)}"
         )
+    if not isinstance(stored_submission_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", stored_submission_sha):
+        raise ValueError("receipt has no valid stored_submission_sha256")
 
     idempotency_path = CHAIN / "intake" / "by-submission-sha256" / f"{submission_sha}.json"
     if not idempotency_path.exists():
         raise ValueError(f"gateway pending has no idempotency index: {idempotency_path.relative_to(ROOT)}")
 
     idx = read_json(idempotency_path)
+    if idx.get("schema") != "trinityaccord.record-chain-intake-idempotency.v1":
+        raise ValueError("idempotency index schema mismatch")
     if idx.get("submission_sha256") != submission_sha:
         raise ValueError("idempotency index submission_sha256 mismatch")
+    if idx.get("stored_submission_sha256") != stored_submission_sha:
+        raise ValueError("idempotency index stored_submission_sha256 mismatch")
     if idx.get("receipt_id") != receipt_id:
         raise ValueError("idempotency index receipt_id mismatch")
-    if idx.get("receipt_path") != str(receipt_path.relative_to(ROOT)):
+    if idx.get("receipt_path") != rel_receipt:
         raise ValueError("idempotency index receipt_path mismatch")
     if idx.get("pending_file_path") != rel_pending:
         raise ValueError("idempotency index pending_file_path mismatch")
-    if idx.get("intake_submission_path") != receipt.get("intake_submission_path"):
+    if idx.get("record_type") != pending_record_type:
+        raise ValueError("idempotency index record_type mismatch")
+    if idx.get("receipt_written") is not True or idx.get("idempotency_written") is not True:
+        raise ValueError("idempotency index durable write flags are incomplete")
+    if idx.get("pending_written") is not True:
+        raise ValueError("idempotency index pending_written is not true")
+    if idx.get("transaction_state") != "pending_written":
+        raise ValueError("idempotency index transaction_state is not pending_written")
+    if not isinstance(idx.get("pending_committed_at"), str) or not idx.get("pending_committed_at"):
+        raise ValueError("idempotency index pending_committed_at missing")
+
+    intake_rel = receipt.get("intake_submission_path")
+    if not isinstance(intake_rel, str) or not intake_rel:
+        raise ValueError("receipt intake_submission_path missing")
+    if idx.get("intake_submission_path") != intake_rel:
         raise ValueError("idempotency index intake_submission_path mismatch")
+    intake_path = ROOT / intake_rel
+    try:
+        intake_path.relative_to(ROOT)
+    except ValueError as exc:
+        raise ValueError("intake_submission_path escapes repository root") from exc
+    if not intake_path.exists():
+        raise ValueError(f"gateway pending stored submission is missing: {intake_rel}")
+    stored_submission = read_json(intake_path)
+    if sha256_gateway_canonical_json(stored_submission) != stored_submission_sha:
+        raise ValueError("stored submission sha256 mismatch")
+    stored_record_type = stored_submission.get("record_type")
+    if stored_record_type != pending_record_type:
+        raise ValueError("stored submission record_type mismatch")
 
 
 def allow_local_finalizer_pending() -> bool:
@@ -1038,6 +1078,34 @@ def extract_server_append_metadata(raw_draft: dict[str, Any]) -> dict[str, Any]:
     return metadata
 
 
+def require_record_target_binding(draft: dict[str, Any]) -> None:
+    """Fail closed on correction/classification targets before any chain mutation."""
+    record_type = draft.get("record_type")
+    content_key = {
+        "correction": "correction_content",
+        "classification_update": "classification_update_content",
+    }.get(record_type)
+    if content_key is None:
+        return
+    content = draft.get(content_key)
+    if not isinstance(content, dict):
+        raise ValueError(f"{record_type} requires {content_key}")
+    target_id = content.get("target_record_id")
+    target_sha = content.get("target_record_sha256")
+    if not isinstance(target_id, str) or not re.fullmatch(r"R-[0-9]{9}", target_id):
+        raise ValueError(f"{record_type} requires valid target_record_id")
+    if not isinstance(target_sha, str) or not re.fullmatch(r"[a-f0-9]{64}", target_sha):
+        raise ValueError(f"{record_type} requires valid target_record_sha256")
+    target_path = RECORDS / f"{target_id}.json"
+    if not target_path.exists():
+        raise ValueError(f"{record_type} target record {target_id} does not exist")
+    target = read_json(target_path)
+    if target.get("record_id") != target_id:
+        raise ValueError(f"{record_type} target record_id mismatch for {target_id}")
+    if target.get("record_sha256") != target_sha:
+        raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")
+
+
 def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None, summary_json: str | None = None) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
@@ -1078,6 +1146,7 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
         rejected_count = 0
         appended_count = 0
         for path in selected:
+            mutation_started = False
             try:
                 # Enforce CLI receipt-id binding: if --receipt-id is passed, it must match
                 # the pending file's receipt id
@@ -1105,6 +1174,7 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 require_not_reserved_record_type(signed_scope_draft)
                 verify_pending_record_authorship(signed_scope_draft)
                 draft = normalize_record_draft(signed_scope_draft)
+                require_record_target_binding(draft)
 
                 # --- A-066: Duplicate signed payload guard ---
                 # If an existing native record has the same signed_payload_sha256 and
@@ -1186,6 +1256,7 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 out = RECORDS / f"{draft['record_id']}.json"
                 if out.exists():
                     raise ValueError(f"record output already exists: {out}")
+                mutation_started = True
                 write_json(out, draft)
                 shutil.move(str(path), str(PROCESSED / path.name))
                 tip.update({
@@ -1215,12 +1286,14 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                         "updated_at": utc_now(),
                     })
             except Exception as exc:
-                # Infrastructure failures (missing modules, broken imports) must
-                # NOT be recorded as semantic rejections. Fail CI immediately
-                # so the pending file stays pending and a retry after fix works.
-                if is_infrastructure_append_error(exc):
+                # Only expected validation failures before the first chain
+                # mutation may become durable semantic rejections. Internal,
+                # filesystem, dependency, and post-mutation failures must stop
+                # CI so the repository cannot record a contradictory outcome.
+                if mutation_started or not is_semantic_append_rejection(exc):
+                    phase = "after chain mutation started" if mutation_started else "before mutation"
                     raise SystemExit(
-                        f"Append infrastructure failure; pending record was not semantically rejected: {exc}"
+                        f"Append infrastructure/internal failure {phase}; pending record was not semantically rejected: {exc}"
                     ) from exc
 
                 # Phase 6B: --all continues after rejection; writes rejection JSON
@@ -1763,6 +1836,147 @@ def verify_batches() -> list[str]:
     return errors
 
 
+def verify_intake_lifecycle() -> list[str]:
+    """Verify materialized intake indexes, receipts, and final-status targets."""
+    errors: list[str] = []
+    index_dir = CHAIN / "intake" / "by-submission-sha256"
+    if not index_dir.exists():
+        return errors
+
+    for index_path in sorted(index_dir.glob("*.json")):
+        try:
+            idx = read_json(index_path)
+        except Exception as exc:
+            errors.append(f"{index_path}: invalid idempotency JSON: {exc}")
+            continue
+        submission_sha = index_path.stem
+        if not re.fullmatch(r"[a-f0-9]{64}", submission_sha):
+            errors.append(f"{index_path}: invalid idempotency filename")
+            continue
+        if idx.get("schema") != "trinityaccord.record-chain-intake-idempotency.v1":
+            errors.append(f"{index_path}: schema mismatch")
+        if idx.get("submission_sha256") != submission_sha:
+            errors.append(f"{index_path}: submission_sha256/filename mismatch")
+
+        receipt_id = idx.get("receipt_id")
+        receipt_rel = idx.get("receipt_path")
+        pending_rel = idx.get("pending_file_path")
+        intake_rel = idx.get("intake_submission_path")
+        record_type = idx.get("record_type")
+        stored_sha = idx.get("stored_submission_sha256")
+        if not isinstance(receipt_id, str) or _GATEWAY_PENDING_RE.fullmatch(
+            f"{receipt_id}.{record_type}.pending.json"
+        ) is None:
+            errors.append(f"{index_path}: invalid receipt_id/record_type binding")
+            continue
+        if idx.get("receipt_written") is not True or idx.get("idempotency_written") is not True:
+            errors.append(f"{index_path}: durable intake flags incomplete")
+        if idx.get("pending_written") is not True or idx.get("transaction_state") != "pending_written":
+            errors.append(f"{index_path}: intake transaction is not materialized")
+        if not isinstance(idx.get("pending_committed_at"), str) or not idx.get("pending_committed_at"):
+            errors.append(f"{index_path}: pending_committed_at missing")
+
+        if not all(isinstance(value, str) and value for value in (receipt_rel, pending_rel, intake_rel, record_type)):
+            errors.append(f"{index_path}: required path/type binding missing")
+            continue
+        receipt_path = ROOT / receipt_rel
+        intake_path = ROOT / intake_rel
+        pending_path = ROOT / pending_rel
+        if not receipt_path.exists():
+            errors.append(f"{index_path}: receipt missing: {receipt_rel}")
+            continue
+        receipt = read_json(receipt_path)
+        ok, err = verify_receipt_sha256(receipt)
+        if not ok:
+            errors.append(f"{receipt_path}: {err}")
+        expected_receipt = str(receipt_path.relative_to(ROOT))
+        for field, expected in [
+            ("server_receipt_id", receipt_id),
+            ("receipt_path", expected_receipt),
+            ("pending_file_path", pending_rel),
+            ("intake_submission_path", intake_rel),
+            ("record_type", record_type),
+            ("original_submission_sha256", submission_sha),
+            ("stored_submission_sha256", stored_sha),
+        ]:
+            if receipt.get(field) != expected:
+                errors.append(f"{receipt_path}: {field} mismatch")
+
+        if not intake_path.exists():
+            errors.append(f"{index_path}: stored submission missing: {intake_rel}")
+        else:
+            try:
+                stored_submission = read_json(intake_path)
+                if sha256_gateway_canonical_json(stored_submission) != stored_sha:
+                    errors.append(f"{intake_path}: stored_submission_sha256 mismatch")
+                if stored_submission.get("record_type") != record_type:
+                    errors.append(f"{intake_path}: record_type mismatch")
+            except Exception as exc:
+                errors.append(f"{intake_path}: invalid stored submission: {exc}")
+
+        status_path = RECEIPT_STATUS / f"{receipt_id}.json"
+        if pending_path.exists():
+            if status_path.exists():
+                errors.append(f"{status_path}: final status exists while pending marker still exists")
+            continue
+        if not status_path.exists():
+            errors.append(f"{index_path}: materialized pending has neither pending file nor final status")
+            continue
+        try:
+            status = read_json(status_path)
+        except Exception as exc:
+            errors.append(f"{status_path}: invalid JSON: {exc}")
+            continue
+        if status.get("schema") != "trinityaccord.record-chain-receipt-final-status.v1":
+            errors.append(f"{status_path}: schema mismatch")
+        if status.get("receipt_id") != receipt_id:
+            errors.append(f"{status_path}: receipt_id mismatch")
+        if status.get("pending_file_path") != pending_rel:
+            errors.append(f"{status_path}: pending_file_path mismatch")
+
+        append_status = status.get("append_status")
+        pending_name = Path(pending_rel).name
+        if append_status == "appended":
+            final_id = status.get("final_record_id")
+            expected_final_rel = f"record-chain/records/{final_id}.json"
+            if status.get("final_record_path") != expected_final_rel:
+                errors.append(f"{status_path}: final_record_path mismatch")
+            final_path = ROOT / expected_final_rel
+            if not final_path.exists():
+                errors.append(f"{status_path}: final record missing")
+            else:
+                final = read_json(final_path)
+                if final.get("record_id") != final_id:
+                    errors.append(f"{status_path}: final_record_id mismatch")
+                if final.get("record_sha256") != status.get("final_record_sha256"):
+                    errors.append(f"{status_path}: final_record_sha256 mismatch")
+                if final.get("record_type") != record_type:
+                    errors.append(f"{status_path}: final record_type mismatch")
+            if not (PROCESSED / pending_name).exists():
+                errors.append(f"{status_path}: processed pending artifact missing")
+            if status.get("rejection_path") is not None or status.get("rejection_code") is not None:
+                errors.append(f"{status_path}: appended status contains rejection fields")
+        elif append_status == "rejected":
+            rejection_rel = status.get("rejection_path")
+            if not isinstance(rejection_rel, str) or not rejection_rel:
+                errors.append(f"{status_path}: rejection_path missing")
+            else:
+                rejection_path = ROOT / rejection_rel
+                if not rejection_path.exists():
+                    errors.append(f"{status_path}: rejection metadata missing")
+                else:
+                    rejection = read_json(rejection_path)
+                    if rejection.get("source_pending") != pending_name:
+                        errors.append(f"{status_path}: rejection source_pending mismatch")
+            if not (REJECTED / pending_name).exists():
+                errors.append(f"{status_path}: rejected pending artifact missing")
+            if any(status.get(field) is not None for field in ("final_record_id", "final_record_path", "final_record_sha256")):
+                errors.append(f"{status_path}: rejected status contains final-record fields")
+        else:
+            errors.append(f"{status_path}: invalid append_status {append_status!r}")
+    return errors
+
+
 def verify_guardian_uniqueness() -> list[str]:
     """Verify that no two guardian_application records share the same guardian_id or public key."""
     errors: list[str] = []
@@ -1798,6 +2012,7 @@ def verify_chain() -> None:
     errors += verify_genesis()
     errors += verify_native_records()
     errors += verify_batches()
+    errors += verify_intake_lifecycle()
     errors += verify_guardian_uniqueness()
     scan_targets = [*CHAIN.rglob("*"), ROOT / "scripts" / "trinity_record_chain.py"]
     leak_hits = scan_private_keys(scan_targets)
