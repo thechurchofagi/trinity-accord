@@ -30,6 +30,5 @@ combined = result.stdout + result.stderr
 if result.returncode == 0:
     raise SystemExit("Builder accepted a noncanonical classification target_record_id")
 if "--target-record-id must match R-XXXXXXXXX format" not in combined:
-    raise SystemExit(f"Builder failed for the wrong reason:
-{combined}")
+    raise SystemExit(f"Builder failed for the wrong reason:\n{combined}")
 print("PASS: Builder rejects noncanonical classification target_record_id")
