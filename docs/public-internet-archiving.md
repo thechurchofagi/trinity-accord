@@ -29,15 +29,15 @@ Open **Actions → Public Internet Archive → Run workflow**.
 1. Run once with `confirm_live_capture=false`. This validates the sitemap,
    selection, result schema, and tests without making external writes.
 2. Inspect the uploaded `public-internet-archive-results` artifact.
-3. Run with `scope=all`, `max_urls=0`, and
+3. Run with `scope=all`, `batch_size=10`, and
    `confirm_live_capture=true` to request the full public archive.
 4. Keep the default delay unless Internet Archive explicitly recommends a
    different rate.
 5. Inspect failures and rerun a smaller bounded batch when necessary.
 
-The workflow plans the selected sitemap into observable matrix batches. Batches
-run one at a time to respect the archive service, but each batch is a separate
-GitHub job and uploads its JSON result immediately. The Actions page therefore
+The workflow plans the selected sitemap into observable matrix batches. At most
+two staggered initial batches run in parallel, while retries run serially. Each
+batch is a separate GitHub job and uploads its JSON result immediately. The Actions page therefore
 shows completed, running, queued, and failed batches while the full archive is
 still in progress. A final aggregate job combines all available batch results.
 
@@ -80,6 +80,19 @@ When `request_software_heritage=true`, the workflow sends the public Git
 repository URL to Software Heritage's Save Code Now API. A request response is
 not equivalent to completed ingestion. Confirm the resulting visit state and
 obtain an SWHID from Software Heritage after processing.
+
+Use the repository helper instead of constructing status URLs by hand:
+
+```bash
+python3 -m scripts.probe_software_heritage_status \
+  --request-id REQUEST_ID \
+  --output software-heritage-status.json
+```
+
+The aggregate distinguishes `software_heritage_request_ok` from
+`software_heritage_complete`. The former means that Software Heritage accepted
+the asynchronous request; only the latter requires a succeeded full visit and
+a snapshot SWHID.
 
 ## Limitations
 

@@ -17,6 +17,9 @@ from scripts.archive_public_web import (
     load_sitemap,
     load_url_file,
     select_urls,
+    software_heritage_latest_visit_url,
+    software_heritage_save_request_url,
+    software_heritage_save_url,
     should_apply_inter_url_delay,
 )
 from scripts.merge_public_web_archive_results import merge_results
@@ -216,6 +219,62 @@ class ArchivePublicWebTests(unittest.TestCase):
         self.assertTrue(
             should_apply_inter_url_delay({"status": "failed", "attempts": 4})
         )
+
+    def test_software_heritage_urls_follow_documented_route_order(self):
+        repository = "https://github.com/thechurchofagi/trinity-accord"
+        encoded = "https%3A%2F%2Fgithub.com%2Fthechurchofagi%2Ftrinity-accord"
+        self.assertEqual(
+            software_heritage_save_url(repository),
+            f"https://archive.softwareheritage.org/api/1/origin/save/git/url/{encoded}/",
+        )
+        self.assertEqual(
+            software_heritage_save_request_url(2388582),
+            "https://archive.softwareheritage.org/api/1/origin/save/2388582/",
+        )
+        self.assertEqual(
+            software_heritage_latest_visit_url(repository),
+            f"https://archive.softwareheritage.org/api/1/origin/{encoded}/visit/latest/",
+        )
+        self.assertNotIn(
+            "origin/visit/latest", software_heritage_latest_visit_url(repository)
+        )
+
+    def test_software_heritage_aggregate_separates_request_from_completion(self):
+        batch = {
+            "schema": "trinityaccord.public-internet-archive-results.v1",
+            "sitemap_sha256": "abc",
+            "scope": "all",
+            "dry_run": False,
+            "selected_start_index": 0,
+            "boundary": {"archive_is_mirror_only": True},
+            "wayback": [
+                {"url": "https://www.trinityaccord.org/", "status": "captured"}
+            ],
+        }
+        pending = merge_results(
+            [batch],
+            expected_count=1,
+            software_heritage={
+                "status": "requested",
+                "response": {"save_task_status": "pending"},
+            },
+        )
+        self.assertTrue(pending["software_heritage_request_ok"])
+        self.assertFalse(pending["software_heritage_complete"])
+
+        completed = merge_results(
+            [batch],
+            expected_count=1,
+            software_heritage={
+                "status": "requested",
+                "response": {
+                    "save_task_status": "succeeded",
+                    "visit_status": "full",
+                    "snapshot_swhid": "swh:1:snp:example",
+                },
+            },
+        )
+        self.assertTrue(completed["software_heritage_complete"])
 
     def test_retry_overlay_replaces_initial_failures(self):
         initial = {

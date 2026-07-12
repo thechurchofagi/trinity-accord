@@ -107,7 +107,14 @@ def merge_results(
         item for item in items if item.get("status") not in SUCCESS_STATUSES
     ]
     software_status = software.get("status") if isinstance(software, dict) else None
-    software_heritage_ok = software_status in {None, "requested", "dry-run"}
+    software_response = software.get("response", {}) if isinstance(software, dict) else {}
+    software_heritage_request_ok = software_status in {None, "requested", "dry-run"}
+    software_heritage_complete = bool(
+        isinstance(software_response, dict)
+        and software_response.get("save_task_status") == "succeeded"
+        and software_response.get("visit_status") == "full"
+        and software_response.get("snapshot_swhid")
+    )
     result = {
         "schema": AGGREGATE_SCHEMA,
         "sitemap_sha256": sitemap_sha256,
@@ -122,7 +129,11 @@ def merge_results(
         "unresolved_urls": [item.get("url") for item in unresolved_items],
         "wayback": items,
         "software_heritage": software,
-        "software_heritage_ok": software_heritage_ok,
+        # Backward-compatible alias: this means the request was accepted, not
+        # that asynchronous ingestion has completed.
+        "software_heritage_ok": software_heritage_request_ok,
+        "software_heritage_request_ok": software_heritage_request_ok,
+        "software_heritage_complete": software_heritage_complete,
         "boundary": boundary,
     }
     return result
