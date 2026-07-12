@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-12T10:22:34.703070+00:00",
+  "generated_at": "2026-07-12T15:15:09.761646+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -152,11 +152,17 @@
   },
   "current_record_chain_autonomy_signal": {
     "scope": "current_record_chain_only",
+    "inventory_scope": "all_current_native_records_including_non_official_test_and_maintenance_records",
     "eligible_records": 56,
+    "official_live_eligible_records": 0,
+    "includes_non_official_records": true,
+    "not_official_live_reception_counter": true,
+    "does_not_establish_autonomous_external_agent_discovery": true,
     "self_discovered_records": 28,
     "self_decided_records": 31,
     "self_executed_records": 55,
     "fully_autonomous_records": 27,
+    "metric_semantics": "declared autonomy inventory across the native chain; use primary_counters.historic_autonomous_agent_reception for the strict official-live reception count",
     "legacy_autonomy_claims_excluded": true
   },
   "legacy_archive_snapshot": {

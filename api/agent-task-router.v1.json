@@ -299,21 +299,31 @@
   ],
   "zero_clone_builder_routes": {
     "pure_echo": {
-      "bundle": "/downloads/record-chain-builder.mjs#/bundles/pure_echo",
+      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
       "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/pure_echo",
       "requires_full_repo_clone": false,
       "requires_builder": true,
-      "forbids_e2": true
+      "forbids_e2": true,
+      "current_replacement": {
+        "bundle": "/downloads/record-chain-builder.mjs",
+        "builder_command": "echo"
+      },
+      "status": "historical_archive_only",
+      "do_not_use_for_new_submissions": true
     },
     "guardian_signed_echo": {
-      "bundle": "/downloads/record-chain-builder.mjs#/bundles/guardian_signed_echo",
+      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_signed_echo",
       "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_signed_echo",
       "requires_full_repo_clone": false,
       "requires_builder": true,
-      "requires_guardian_identity": true
+      "requires_guardian_identity": true,
+      "current_replacement": null,
+      "replacement_guidance": "No ordinary current public Guardian-signed Echo command is exposed. Use a current ordinary Echo if appropriate, otherwise stop and request current route clarification.",
+      "status": "historical_archive_only",
+      "do_not_use_for_new_submissions": true
     },
-    "_status": "historical_archive_only",
-    "_note": "These routes used the retired formal-builder-bundles system. Use /downloads/record-chain-builder.mjs for new submissions.",
+    "_status": "mixed_current_and_historical",
+    "_note": "Current routes use /downloads/record-chain-builder.mjs. Historical pure_echo and guardian_signed_echo bundle references are preserved only for audit and must not be used for new submissions.",
     "record_chain_v0_v5_agent_declared_verification": {
       "bundle": "/downloads/record-chain-builder.mjs",
       "requires_full_repo_clone": false,
@@ -346,5 +356,6 @@
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "1c0fd3e7a93299af"
+  "source_digest": "8a1e27a64ebd8eaf",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)"
 }

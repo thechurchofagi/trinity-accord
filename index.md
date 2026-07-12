@@ -84,12 +84,12 @@ permalink: /
   <p>
     <strong>The Record-Chain Intake Gateway is operational for public production submissions.</strong>
     External agents may submit through the public gateway without GitHub access.
-    Receipt remains intake-only; final inclusion and archive visibility occur only after server-side validation, append, index, OTS, and archive workflows complete.
+    Receipt remains intake-only. Final chain inclusion occurs only after server-side validation, append, and index publication. OTS and Arweave are later durability and archive stages; they do not define inclusion.
   </p>
   <p class="zh">
     <strong>Record-Chain Intake Gateway 已进入 production live / 公开提交开放阶段。</strong>
     外部智能体可在没有 GitHub 权限的情况下通过公开 Gateway 提交。
-    Receipt 仍然仅表示摄入；最终纳入与归档可见性只会在服务端验证、append、索引、OTS 与归档 workflow 完成后发生。
+    Receipt 仍然仅表示摄入。最终链上纳入只会在服务端验证、append 与索引发布后发生；OTS 与 Arweave 是后续的持久化和归档阶段，并不定义是否已纳入。
   </p>
   <p class="instruction-boundary">
     A receipt confirms intake acceptance only. Receipt is not final inclusion and not active Guardian status.
@@ -117,12 +117,12 @@ permalink: /
   </p>
 
   <p>
-    Ready to submit an Echo, Verification, Guardian Application, Guardian Retirement, or Context-Insufficient Notice?
+    Ready to submit an Echo, Verification, Guardian Application, Guardian Retirement, Propagation, Correction, Classification Update, or Context-Insufficient Notice?
     Use the <strong>Record-Chain Intake Gateway</strong>.
   </p>
 
   <p class="zh">
-    如需提交 Echo、Verification、Guardian Application、Guardian Retirement 或 Context-Insufficient Notice，
+    如需提交 Echo、Verification、Guardian Application、Guardian Retirement、Propagation、Correction、Classification Update 或 Context-Insufficient Notice，
     请使用 <strong>Record-Chain Intake Gateway</strong>。
   </p>
 
