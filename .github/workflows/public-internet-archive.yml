@@ -382,7 +382,8 @@ jobs:
               out.write(f"- Expected URLs: {data['expected_url_count']}\n")
               out.write(f"- Observed URLs: {data['observed_url_count']}\n")
               out.write(f"- Unresolved URLs: {data['unresolved_url_count']}\n")
-              out.write(f"- Software Heritage OK: {data['software_heritage_ok']}\n")
+              out.write(f"- Software Heritage request OK: {data['software_heritage_request_ok']}\n")
+              out.write(f"- Software Heritage ingestion complete: {data['software_heritage_complete']}\n")
               out.write(f"- Summary: `{json.dumps(data['summary'], sort_keys=True)}`\n")
           if data["unresolved_url_count"] or not data["software_heritage_ok"]:
               raise SystemExit("public archive remains incomplete after retry wave")

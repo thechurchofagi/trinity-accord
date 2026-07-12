@@ -19,7 +19,7 @@ from typing import Iterable
 
 WAYBACK_SAVE_PREFIX = "https://web.archive.org/save/"
 WAYBACK_AVAILABLE_PREFIX = "https://archive.org/wayback/available?url="
-SWH_SAVE_PREFIX = "https://archive.softwareheritage.org/api/1/origin/save/git/url/"
+SWH_API_PREFIX = "https://archive.softwareheritage.org/api/1"
 ALLOWED_ORIGIN = "https://www.trinityaccord.org"
 DEFAULT_REPOSITORY = "https://github.com/thechurchofagi/trinity-accord"
 SUCCESS_STATUSES = {"captured", "already_captured", "dry-run"}
@@ -122,6 +122,53 @@ def common_headers() -> dict[str, str]:
         "User-Agent": "TrinityAccordArchive/1.1 (+https://www.trinityaccord.org/)",
         "Accept": "text/html,application/json;q=0.9,*/*;q=0.8",
     }
+
+
+def software_heritage_save_url(repository: str) -> str:
+    encoded = urllib.parse.quote(repository, safe="")
+    return f"{SWH_API_PREFIX}/origin/save/git/url/{encoded}/"
+
+
+def software_heritage_save_request_url(request_id: int) -> str:
+    if request_id <= 0:
+        raise ValueError("Software Heritage request ID must be positive")
+    return f"{SWH_API_PREFIX}/origin/save/{request_id}/"
+
+
+def software_heritage_latest_visit_url(repository: str) -> str:
+    """Build the documented origin latest-visit URL.
+
+    The origin URL belongs between ``origin/`` and ``/visit/latest/``. Keeping
+    this in one helper prevents probes from accidentally using the reversed,
+    always-404 ``origin/visit/latest/<origin>/`` shape.
+    """
+    encoded = urllib.parse.quote(repository, safe="")
+    return f"{SWH_API_PREFIX}/origin/{encoded}/visit/latest/"
+
+
+def query_software_heritage_json(url: str, timeout: float) -> dict:
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "TrinityAccordArchive/1.1 (+https://www.trinityaccord.org/)",
+            "Accept": "application/json",
+        },
+        method="GET",
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def query_software_heritage_save_request(request_id: int, timeout: float) -> dict:
+    return query_software_heritage_json(
+        software_heritage_save_request_url(request_id), timeout
+    )
+
+
+def query_software_heritage_latest_visit(repository: str, timeout: float) -> dict:
+    return query_software_heritage_json(
+        software_heritage_latest_visit_url(repository), timeout
+    )
 
 
 def wayback_headers() -> dict[str, str]:
@@ -333,9 +380,8 @@ def should_apply_inter_url_delay(item: dict) -> bool:
 
 
 def request_software_heritage(repository: str, timeout: float) -> dict:
-    encoded = urllib.parse.quote(repository, safe="")
     request = urllib.request.Request(
-        SWH_SAVE_PREFIX + encoded + "/",
+        software_heritage_save_url(repository),
         data=b"",
         headers={
             "User-Agent": "TrinityAccordArchive/1.1 (+https://www.trinityaccord.org/)",
