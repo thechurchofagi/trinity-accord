@@ -17,6 +17,7 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
 from apps.record_chain_intake_gateway.gateway.authorship import (
+    UNSIGNED_PROJECTION_FIELDS,
     strip_authorship_for_signing,
     strip_unsigned_projection_fields,
 )
@@ -267,21 +268,7 @@ def _build_submit_boundary(submission: dict[str, Any] | None = None) -> dict[str
     return base
 
 
-_UNSIGNED_CLIENT_PROJECTION_FIELDS = frozenset({
-    "actor_identity",
-    "boundary",
-    "server_normalization",
-    "server_append_metadata",
-    "append_assigned_metadata",
-    "authorship_verification_status",
-    "record_id",
-    "record_index",
-    "assigned_at",
-    "previous_record_sha256",
-    "content_sha256",
-    "record_sha256",
-    "chain_id",
-})
+_UNSIGNED_CLIENT_PROJECTION_FIELDS = frozenset(UNSIGNED_PROJECTION_FIELDS)
 
 
 def _client_projection_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:

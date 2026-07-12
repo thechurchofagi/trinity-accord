@@ -1390,6 +1390,8 @@ def verify_genesis() -> list[str]:
     mf = read_json(mf_path)
     if mf.get("record_count") != len(records):
         errors.append("genesis record_count mismatch")
+    if mf.get("record_sha256_list") != hashes:
+        errors.append("genesis record_sha256_list mismatch")
     if mf.get("merkle_root_sha256") != merkle_root(hashes):
         errors.append("genesis merkle root mismatch")
     mh = manifest_hash(mf)
@@ -1606,12 +1608,20 @@ def verify_native_records() -> list[str]:
                 # B.6: Classification update target binding
                 if rtype == "classification_update":
                     cu_content = obj.get("classification_update_content")
-                    if isinstance(cu_content, dict):
+                    if not isinstance(cu_content, dict):
+                        errors.append(f"{p}: classification_update requires classification_update_content")
+                    else:
                         target_rid = cu_content.get("target_record_id")
                         target_sha = cu_content.get("target_record_sha256")
-                        if isinstance(target_rid, str) and re.fullmatch(r"R-[0-9]{9}", target_rid):
+                        if not isinstance(target_rid, str) or not re.fullmatch(r"R-[0-9]{9}", target_rid):
+                            errors.append(f"{p}: classification_update requires valid target_record_id")
+                        elif not isinstance(target_sha, str) or not re.fullmatch(r"[a-f0-9]{64}", target_sha):
+                            errors.append(f"{p}: classification_update requires valid target_record_sha256")
+                        else:
                             target_path = RECORDS / f"{target_rid}.json"
-                            if target_path.exists():
+                            if not target_path.exists():
+                                errors.append(f"{p}: classification_update target record {target_rid} does not exist")
+                            else:
                                 target_rec = read_json(target_path)
                                 if target_rec.get("record_sha256") != target_sha:
                                     errors.append(f"{p}: classification_update target_record_sha256 mismatch for {target_rid}")
@@ -1638,18 +1648,28 @@ def verify_native_records() -> list[str]:
         previous = obj.get("record_sha256")
     if CHAIN_TIP.exists():
         tip = read_json(CHAIN_TIP)
+        if tip.get("chain_id") != CHAIN_ID:
+            errors.append("chain-tip chain_id mismatch")
         if records:
             latest = read_json(records[-1])
+            if tip.get("latest_record_id") != latest.get("record_id"):
+                errors.append("chain-tip latest_record_id mismatch")
             if tip.get("latest_record_sha256") != latest.get("record_sha256"):
                 errors.append("chain-tip latest_record_sha256 mismatch")
             if tip.get("latest_record_index") != latest.get("record_index"):
                 errors.append("chain-tip latest_record_index mismatch")
+            if tip.get("native_record_count") != len(records):
+                errors.append("chain-tip native_record_count mismatch")
         else:
             # No native records: tip must reflect Genesis-only state
+            if tip.get("latest_record_id") is not None:
+                errors.append("chain-tip latest_record_id should be null when no native records exist")
             if tip.get("latest_record_sha256") is not None:
                 errors.append("chain-tip latest_record_sha256 should be null when no native records exist")
             if tip.get("latest_record_index") != 0:
                 errors.append("chain-tip latest_record_index should be 0 when no native records exist")
+            if tip.get("native_record_count") != 0:
+                errors.append("chain-tip native_record_count should be 0 when no native records exist")
             genesis_path = GENESIS / "genesis-batch-manifest.json"
             if genesis_path.exists():
                 genesis_hash = read_json(genesis_path).get("batch_manifest_sha256")
@@ -1666,9 +1686,60 @@ def verify_batches() -> list[str]:
     genesis = GENESIS / "genesis-batch-manifest.json"
     if genesis.exists():
         prior_hash = read_json(genesis).get("batch_manifest_sha256")
-    for mf_path in existing_batch_manifests():
+
+    manifests = existing_batch_manifests()
+    covered_record_ids: set[str] = set()
+    for mf_path in manifests:
         mf = read_json(mf_path)
-        hashes = mf.get("record_sha256_list", [])
+        record_ids = mf.get("record_ids")
+        hashes = mf.get("record_sha256_list")
+
+        if mf.get("schema") != "trinityaccord.record-batch-manifest.v1":
+            errors.append(f"{mf_path}: schema mismatch")
+        if mf.get("chain_id") != CHAIN_ID:
+            errors.append(f"{mf_path}: chain_id mismatch")
+        if mf.get("batch_id") != mf_path.parent.name:
+            errors.append(f"{mf_path}: batch_id/path mismatch")
+        if not isinstance(record_ids, list) or not all(isinstance(rid, str) for rid in record_ids):
+            errors.append(f"{mf_path}: record_ids must be a string array")
+            record_ids = []
+        if not isinstance(hashes, list) or not all(isinstance(value, str) for value in hashes):
+            errors.append(f"{mf_path}: record_sha256_list must be a string array")
+            hashes = []
+        if mf.get("record_count") != len(record_ids) or len(record_ids) != len(hashes):
+            errors.append(f"{mf_path}: record_count/list length mismatch")
+
+        first_index = mf.get("first_record_index")
+        last_index = mf.get("last_record_index")
+        if not isinstance(first_index, int) or not isinstance(last_index, int) or first_index < 1 or last_index < first_index:
+            errors.append(f"{mf_path}: invalid first/last record index")
+            expected_ids: list[str] = []
+        else:
+            expected_ids = [record_id(index) for index in range(first_index, last_index + 1)]
+            if record_ids != expected_ids:
+                errors.append(f"{mf_path}: record_ids do not match first/last record index range")
+
+        actual_hashes: list[str] = []
+        for rid in record_ids:
+            if rid in covered_record_ids:
+                errors.append(f"{mf_path}: duplicate record id across batches: {rid}")
+            covered_record_ids.add(rid)
+            record_path = RECORDS / f"{rid}.json"
+            if not record_path.exists():
+                errors.append(f"{mf_path}: referenced record does not exist: {rid}")
+                continue
+            actual = read_json(record_path)
+            if actual.get("record_id") != rid:
+                errors.append(f"{mf_path}: referenced record_id mismatch: {rid}")
+            actual_hashes.append(actual.get("record_sha256"))
+
+        if len(actual_hashes) == len(hashes) and actual_hashes != hashes:
+            errors.append(f"{mf_path}: record_sha256_list does not match referenced records")
+        if hashes:
+            if mf.get("first_record_sha256") != hashes[0]:
+                errors.append(f"{mf_path}: first_record_sha256 mismatch")
+            if mf.get("last_record_sha256") != hashes[-1]:
+                errors.append(f"{mf_path}: last_record_sha256 mismatch")
         if mf.get("merkle_root_sha256") != merkle_root(hashes):
             errors.append(f"{mf_path}: merkle root mismatch")
         if mf.get("previous_batch_manifest_sha256") != prior_hash:
@@ -1676,6 +1747,19 @@ def verify_batches() -> list[str]:
         if mf.get("batch_manifest_sha256") != manifest_hash(mf):
             errors.append(f"{mf_path}: batch_manifest_sha256 mismatch")
         prior_hash = mf.get("batch_manifest_sha256")
+
+    if CHAIN_TIP.exists():
+        tip = read_json(CHAIN_TIP)
+        if manifests:
+            latest_manifest = read_json(manifests[-1])
+            if tip.get("latest_batch_id") != latest_manifest.get("batch_id"):
+                errors.append("chain-tip latest_batch_id mismatch")
+            if tip.get("latest_batch_manifest_sha256") != latest_manifest.get("batch_manifest_sha256"):
+                errors.append("chain-tip latest_batch_manifest_sha256 mismatch")
+        elif genesis.exists():
+            genesis_hash = read_json(genesis).get("batch_manifest_sha256")
+            if tip.get("latest_batch_manifest_sha256") != genesis_hash:
+                errors.append("chain-tip latest_batch_manifest_sha256 should equal genesis hash when no native batches exist")
     return errors
 
 

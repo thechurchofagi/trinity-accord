@@ -977,6 +977,14 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
                         f"Classification updates require non-empty {field_name}",
                     )
 
+            target_id = content.get("target_record_id")
+            if isinstance(target_id, str) and not re.fullmatch(r"R-[0-9]{9}", target_id):
+                missing(
+                    "INVALID_CLASSIFICATION_TARGET_ID",
+                    "draft.classification_update_content.target_record_id",
+                    "target_record_id must use canonical R-000000000 format",
+                )
+
             target_sha = content.get("target_record_sha256")
             if isinstance(target_sha, str) and not re.fullmatch(r"[a-f0-9]{64}", target_sha):
                 missing(
