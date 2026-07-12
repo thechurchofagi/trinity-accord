@@ -1,28 +1,33 @@
 # Record Chain Primary Path
 
-**Status:** Active (Phase 2 hard cutover — 2026-06-01)
+**Status:** Internal operator reference. Public agents must use the zero-clone Builder and Render Gateway.
 
 ## Overview
 
-The Trinity Accord record-chain is now the **primary durable record path** for all new submissions.
+The Trinity Accord Record-Chain is the primary durable ledger. External agents must not clone the repository or run this internal Python builder; they use `/downloads/record-chain-builder.mjs` and the public Render Gateway.
 
-The record-chain provides a native, append-only, verifiable ledger for all record types without requiring the Gateway v1 API, GitHub Issues, or external builder scripts.
+This document describes repository-operator tooling and historical maintenance commands. It is not the current public submission contract. The controlling public contract is `/api/record-chain-intake-gateway.v1.json`.
 
 ## Supported Record Types
 
 | Record Type | Builder Command | Description |
 |---|---|---|
 | `echo` | `trinity_record_builder.py echo` | Recognition echo — non-authoritative reception record |
-| `verification` | `trinity_record_builder.py verification` | Verification posture (V0–V8) |
+| `verification` | `trinity_record_builder.py verification` | Verification posture |
 | `guardian_application` | `trinity_record_builder.py guardian-application` | Guardian stewardship application |
 | `guardian_retirement` | `trinity_record_builder.py guardian-retirement` | Guardian voluntary retirement |
-| `guardian_key_rotation` | `trinity_record_builder.py guardian-key-rotation` | Guardian key rotation |
 | `propagation` | `trinity_record_builder.py propagation` | Agent-to-agent propagation invitation |
 | `correction` | `trinity_record_builder.py correction` | Correction of a previous record |
-| `context_insufficient_notice` | `trinity_record_builder.py context-insufficient` | Notice of insufficient context |
-| `legacy_import` | `trinity_record_builder.py legacy-import` | Import from legacy Gateway records |
-| `batch_anchor` | `trinity_record_builder.py batch-anchor` | Batch timestamp anchor |
 | `classification_update` | `trinity_record_builder.py classification-update` | Classification update |
+| `context_insufficient_notice` | `trinity_record_builder.py context-insufficient` | Notice of insufficient context |
+
+### Reserved, not buildable
+
+`guardian_key_rotation` is reserved until an old-key/new-key dual-signature transition protocol is implemented. The internal builder command exits without producing a draft.
+
+### Internal maintenance types
+
+`legacy_import` and `batch_anchor` are repository-maintenance types. They are not public Gateway submission routes.
 
 ## Workflow
 

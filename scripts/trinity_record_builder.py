@@ -13,7 +13,7 @@ Commands:
   context-insufficient    Build a context-insufficient notice draft.
   legacy-import           Build a legacy import record draft.
   batch-anchor            Build a batch anchor record draft.
-  guardian-key-rotation   Build a guardian key rotation record draft.
+  guardian-key-rotation   Reserved; exits without building until transition proof exists.
   classification-update   Build a classification update record draft.
 
 Boundary: this code never edits Bitcoin Originals, authority files, legacy
@@ -418,14 +418,11 @@ def build_guardian_retirement(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def build_guardian_key_rotation(args: argparse.Namespace) -> dict[str, Any]:
-    draft = base_draft("guardian_key_rotation", args)
-    draft["payload"] = {
-        "guardian_id": args.guardian_id,
-        "old_public_key_sha256": args.old_public_key_sha256,
-        "new_public_key_sha256": args.new_public_key_sha256,
-        "reason": args.reason or "Scheduled key rotation",
-    }
-    return draft
+    raise SystemExit(
+        "guardian_key_rotation is reserved and cannot be built. "
+        "The old-key/new-key dual-signature transition protocol is not implemented. "
+        "Use guardian_retirement or a new guardian_application as appropriate."
+    )
 
 
 def build_propagation(args: argparse.Namespace) -> dict[str, Any]:
@@ -623,7 +620,7 @@ def main() -> None:
     gr_p.add_argument("--reason", default="Voluntary retirement", help="Retirement reason")
 
     # Guardian Key Rotation
-    gkr_p = sub.add_parser("guardian-key-rotation", help="Build a guardian key rotation record draft")
+    gkr_p = sub.add_parser("guardian-key-rotation", help="Reserved: Guardian key rotation is not currently buildable")
     add_common(gkr_p)
     gkr_p.add_argument("--guardian-id", required=True, help="Guardian ID")
     gkr_p.add_argument("--old-public-key-sha256", required=True, help="Old public key SHA256")

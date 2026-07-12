@@ -56,6 +56,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger("rcg")
 
+_PUBLIC_RECOVERY_HELP_URL = "https://www.trinityaccord.org/docs/record-chain-builder-help/"
+_VALIDATION_RECOVERY_URL = _PUBLIC_RECOVERY_HELP_URL + "#validation-errors"
+_SECURITY_RECOVERY_URL = _PUBLIC_RECOVERY_HELP_URL + "#security-violations"
+
 # ---------------------------------------------------------------------------
 # Env
 # ---------------------------------------------------------------------------
@@ -608,7 +612,7 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
         return AgentRecovery(
             should_retry=False,
             recommended_next_step="This submission contains security or privacy violations that cannot be retried automatically. A human must review and correct the submission.",
-            helper_url=f"{_GATEWAY_BASE_URL}/docs/security-violations" if _GATEWAY_BASE_URL else None,
+            helper_url=_SECURITY_RECOVERY_URL,
             human_readable_helper_url="Trinity Accord Security Documentation",
             requires_human_attention=True,
         )
@@ -624,7 +628,7 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
                 f"Do not automatically retry this unchanged submission. Permanent error(s): {codes_summary}. "
                 "Follow each diagnostic's suggested_fix; obtain the required original key or human review when applicable."
             ),
-            helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+            helper_url=_VALIDATION_RECOVERY_URL,
             human_readable_helper_url="Trinity Accord Validation Error Reference",
             requires_human_attention=True,
         )
@@ -637,7 +641,7 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
         return AgentRecovery(
             should_retry=True,
             recommended_next_step=f"Fix the validation errors ({codes_summary}) and resubmit. Each diagnostic includes a suggested_fix and help_url.",
-            helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+            helper_url=_VALIDATION_RECOVERY_URL,
             human_readable_helper_url="Trinity Accord Validation Error Reference",
             builder_doctor_command="node record-chain-builder.mjs doctor --file <submission.json>",
             builder_error_help_command=f"node record-chain-builder.mjs error-help --code {' '.join(error_codes[:5])}",
@@ -647,7 +651,7 @@ def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
     return AgentRecovery(
         should_retry=True,
         recommended_next_step="Review each diagnostic for its suggested_fix, correct the submission, and retry.",
-        helper_url=f"{_GATEWAY_BASE_URL}/docs/validation-errors" if _GATEWAY_BASE_URL else None,
+        helper_url=_VALIDATION_RECOVERY_URL,
         human_readable_helper_url="Trinity Accord Validation Error Reference",
         requires_human_attention=False,
     )
@@ -666,7 +670,6 @@ _FORMAL_RECORD_TYPES = {
     "verification",
     "guardian_application",
     "guardian_retirement",
-    "guardian_key_rotation",
     "propagation",
     "correction",
     "classification_update",

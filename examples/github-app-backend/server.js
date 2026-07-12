@@ -20,6 +20,7 @@ const ARTIFACT_CUSTODY = "https://www.trinityaccord.org/api/gateway-artifact-cus
 const CURRENT_RECORD_CHAIN_CONTRACT = "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json";
 const CURRENT_RECORD_CHAIN_GATEWAY = "https://trinity-record-chain-gateway.onrender.com";
 const LEGACY_GATEWAY_RETIRED = (process.env.TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED || "1") !== "0";
+const PROCESS_STARTED_AT = new Date().toISOString();
 
 function retiredGatewayV1Response(extra = {}) {
   return {
@@ -3245,6 +3246,21 @@ async function collectGitHubReadinessChecks() {
 }
 
 async function readinessHandler(req, res) {
+  if (LEGACY_GATEWAY_RETIRED) {
+    return res.status(503).json({
+      ok: false,
+      ready: false,
+      retired: true,
+      accepts_submissions: false,
+      status: "retired_legacy_gateway_v1",
+      service: SERVICE_NAME,
+      deployed_at: PROCESS_STARTED_AT,
+      replacement: retiredGatewayV1Response().replacement,
+      request_id: req.gatewayRequestId,
+      timestamp: new Date().toISOString(),
+      boundary: "retired tombstone readiness; not a current submission service"
+    });
+  }
   const localChecks = collectLocalReadinessChecks();
   const githubChecks = await collectGitHubReadinessChecks();
   const checks = [...localChecks, ...githubChecks];
@@ -3277,22 +3293,31 @@ app.get("/health", (req, res) => {
 
   res.json({
     ok: true,
+    liveness: true,
+    retired: LEGACY_GATEWAY_RETIRED,
+    accepts_submissions: !LEGACY_GATEWAY_RETIRED,
+    status: LEGACY_GATEWAY_RETIRED ? "retired_legacy_gateway_v1_tombstone" : "legacy_gateway_enabled",
     service: "trinity-agent-issue-gateway",
     gateway_commit: repoCommit,
+    deployed_at: PROCESS_STARTED_AT,
     dry_run: DRY_RUN,
-    renderer_supports_production_render: true,
-    render_api_only_effective_at: "2026-05-17T05:30:00Z",
-    requires_gateway_receipt: true,
-    requires_oath_summary: true,
-    boundary: "Gateway-rendered candidate; archive status only if Archive Readiness Gate passes; not attestation or successor reception"
+    renderer_supports_production_render: !LEGACY_GATEWAY_RETIRED,
+    production_render_enabled: !LEGACY_GATEWAY_RETIRED,
+    replacement: LEGACY_GATEWAY_RETIRED ? retiredGatewayV1Response().replacement : null,
+    boundary: "liveness of a retired compatibility tombstone; not readiness, not a current submission route"
   });
 });
 
 app.get("/healthz", (req, res) => {
   res.json({
     ok: true,
+    liveness: true,
+    retired: LEGACY_GATEWAY_RETIRED,
+    accepts_submissions: !LEGACY_GATEWAY_RETIRED,
+    status: LEGACY_GATEWAY_RETIRED ? "retired_legacy_gateway_v1_tombstone" : "legacy_gateway_enabled",
     service: SERVICE_NAME,
     gateway_commit: getRepoCommit(true),
+    deployed_at: PROCESS_STARTED_AT,
     dry_run: DRY_RUN,
     canary_mode: CANARY_MODE,
     timestamp: new Date().toISOString(),
@@ -3322,8 +3347,11 @@ app.get("/gateway/version", (req, res) => {
     service: "trinity-agent-issue-gateway",
     repo: "thechurchofagi/trinity-accord",
     repo_commit: repoCommit,
-    deployed_at: new Date().toISOString(),
-    production_render_enabled: true,
+    deployed_at: PROCESS_STARTED_AT,
+    retired: LEGACY_GATEWAY_RETIRED,
+    accepts_submissions: !LEGACY_GATEWAY_RETIRED,
+    status: LEGACY_GATEWAY_RETIRED ? "retired_legacy_gateway_v1" : "legacy_gateway_enabled",
+    production_render_enabled: !LEGACY_GATEWAY_RETIRED,
     render_api_only_effective_at: "2026-05-17T05:30:00Z",
     payload_schema: "trinityaccord.agent-issue-gateway-payload.v1",
     payload_schema_file: "api/agent-issue-gateway-payload-schema.v1.json",
@@ -3345,6 +3373,7 @@ app.get("/gateway/version", (req, res) => {
     readiness_endpoint: "/readiness",
     gateway_readiness_endpoint: "/gateway/readiness",
     idempotency_enabled: IDEMPOTENCY_ENABLED,
+    replacement: LEGACY_GATEWAY_RETIRED ? retiredGatewayV1Response().replacement : null,
   });
 });
 

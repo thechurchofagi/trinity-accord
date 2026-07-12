@@ -73,15 +73,15 @@ def main() -> None:
         receipt_ep = gw.get("endpoints", {}).get("receipt", {})
         receipt_params = receipt_ep.get("path_parameters", {}).get("receipt_id", {})
         pattern = receipt_params.get("pattern", "")
-        if pattern != "^rcg-[0-9]{8}-[a-f0-9]{12}$":
+        if pattern != "^rcg-[0-9]{8}-[a-f0-9]{12}([a-f0-9]{12})?$":
             errors.append(f"receipt_id pattern wrong: {pattern}")
 
     # Test 8: public_phase exists
     if gw_path.exists():
         gw = json.loads(gw_path.read_text())
         pp = gw.get("public_phase", {})
-        if pp.get("status") != "mainnet_prelaunch_testing":
-            errors.append("public_phase.status not mainnet_prelaunch_testing")
+        if pp.get("status") != "production_live":
+            errors.append("public_phase.status not production_live")
         if not pp.get("receipt_is_not_final_inclusion"):
             errors.append("receipt_is_not_final_inclusion not true")
 
