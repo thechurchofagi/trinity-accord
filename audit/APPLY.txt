@@ -1,0 +1,1 @@
+Apply the locally verified deep transaction hardening patch, run focused regressions, and remove all temporary audit files.
