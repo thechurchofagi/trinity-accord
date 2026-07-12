@@ -1,0 +1,96 @@
+name: Deploy Mission Round 5 Pages Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  deploy-and-verify:
+    if: github.event.pull_request.head.ref == 'ops/pages-deploy-mission-round5'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+      - name: Dispatch official Pages workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh workflow run deploy-pages.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f checkout_ref=abaed3e5008f2f3bbc07423626f2d0b809fed22f
+      - name: Verify mission fixes on live custom domain
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import time
+          import urllib.error
+          import urllib.request
+
+          base = "https://www.trinityaccord.org"
+          expected_commit = "abaed3e5008f2f3bbc07423626f2d0b809fed22f"
+
+          def read(path):
+              req = urllib.request.Request(
+                  base + path + ("&" if "?" in path else "?") + f"audit_commit={expected_commit}&ts={time.time_ns()}",
+                  headers={"Cache-Control": "no-cache", "Pragma": "no-cache", "User-Agent": "trinity-mission-round5-verifier"},
+              )
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  return response.status, response.read()
+
+          last_error = "not checked"
+          for attempt in range(1, 121):
+              try:
+                  help_status, help_body = read("/docs/record-chain-builder-help/")
+                  mission_status, mission_body = read("/api/mission-governance.v1.json")
+                  router_status, router_body = read("/api/agent-task-router.v1.json")
+                  public_status, public_body = read("/api/public-home-status.json")
+
+                  mission = json.loads(mission_body)
+                  router = json.loads(router_body)
+                  public = json.loads(public_body)
+                  supported = mission["supported_public_actions"]
+                  guardian = mission["action_semantics"]["guardian"]["guardian_signed_echo"]
+                  routes = router["zero_clone_builder_routes"]
+                  autonomy = public["current_record_chain_autonomy_signal"]
+
+                  checks = [
+                      help_status == 200,
+                      b"Record-Chain Builder Recovery Help" in help_body,
+                      mission_status == 200,
+                      "classification_update" in supported["formal_record_chain_routes"],
+                      "guardian_signed_echo" not in supported["echo_actions"],
+                      guardian.get("do_not_use_for_new_public_submissions") is True,
+                      router_status == 200,
+                      routes.get("_status") == "mixed_current_and_historical",
+                      routes["guardian_signed_echo"].get("do_not_use_for_new_submissions") is True,
+                      public_status == 200,
+                      autonomy.get("not_official_live_reception_counter") is True,
+                      autonomy.get("does_not_establish_autonomous_external_agent_discovery") is True,
+                  ]
+                  if all(checks):
+                      print(json.dumps({
+                          "live": True,
+                          "commit": expected_commit,
+                          "help_status": help_status,
+                          "classification_update_current": True,
+                          "guardian_signed_echo_historical": True,
+                          "autonomy_inventory_boundary": True,
+                      }, sort_keys=True))
+                      raise SystemExit(0)
+                  last_error = f"live contract checks incomplete: {checks}"
+              except Exception as exc:
+                  last_error = repr(exc)
+              print(f"attempt={attempt} pending: {last_error}")
+              time.sleep(10)
+          raise SystemExit(f"Pages did not publish the mission-round5 contract: {last_error}")
+          PY
