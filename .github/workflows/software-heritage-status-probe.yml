@@ -1,0 +1,42 @@
+name: Software Heritage Status Probe
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Query Software Heritage save request
+        run: |
+          python3 - <<'PY'
+          import json
+          import urllib.parse
+          import urllib.request
+
+          headers = {
+              "Accept": "application/json",
+              "User-Agent": "trinity-accord-software-heritage-status-probe",
+          }
+          urls = [
+              "https://archive.softwareheritage.org/api/1/origin/save/2388582/",
+              "https://archive.softwareheritage.org/api/1/origin/save/2388254/",
+          ]
+          for url in urls:
+              request = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+              print("SWH_SAVE_STATUS=" + json.dumps(payload, sort_keys=True))
+
+          origin = "https://github.com/thechurchofagi/trinity-accord"
+          encoded = urllib.parse.quote(origin, safe="")
+          latest_url = "https://archive.softwareheritage.org/api/1/origin/visit/latest/" + encoded + "/"
+          request = urllib.request.Request(latest_url, headers=headers)
+          with urllib.request.urlopen(request, timeout=60) as response:
+              payload = json.loads(response.read().decode("utf-8"))
+          print("SWH_LATEST_VISIT=" + json.dumps(payload, sort_keys=True))
+          PY
