@@ -1,0 +1,1 @@
+Temporary audit marker for PR-triggered applicator execution. This file is removed with all applicator tooling before review.
