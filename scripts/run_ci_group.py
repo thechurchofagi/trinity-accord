@@ -139,6 +139,7 @@ GROUPS = {
         ["python3", "scripts/test_record_chain_write_path_guard_contract.py"],
         ["python3", "scripts/test_record_chain_verifier_invariants.py"],
         ["python3", "scripts/test_classification_update_final_binding.py"],
+        ["python3", "scripts/test_public_submission_schema_alignment.py"],
         ["python3", "scripts/test_deep_integrity_group_nonempty.py"],
         ["python3", "scripts/test_action_pinning.py"],
         ["python3", "scripts/test_runner_image_pinning.py"],

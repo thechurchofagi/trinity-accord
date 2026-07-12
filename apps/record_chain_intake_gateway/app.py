@@ -41,6 +41,7 @@ from apps.record_chain_intake_gateway.gateway.validation import (
     REQUIRED_BOUNDARY_FIELDS,
     detect_route,
     extract_record_draft,
+    redact_transient_oath_readback,
     validate_submission,
 )
 
@@ -1176,15 +1177,12 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     authorship_verified = isinstance(proof, dict)
 
     # --- redact transient oath readback before persistence ---
-    # FIX: Do NOT redact oath readback from the signed payload.
-    # The Builder signs the submission including readback_text.
-    # Redacting after signing breaks signed_payload_sha256 verification
-    # in the append workflow. Keep the original signed body intact.
-    from apps.record_chain_intake_gateway.gateway.validation import redact_transient_oath_readback
-    original_submission_sha256 = sha256_canonical_json(body)
-    stored_submission_sha256 = original_submission_sha256  # no redaction = same hash
-    # draft unchanged after validation
-    draft = extract_record_draft(body) or {}
+    # Authorship signs record_draft only. client_oath_readback is a transient
+    # top-level validation input, so its raw text can and must be removed after
+    # successful validation without changing the signed payload or pending draft.
+    original_submission_sha256 = submission_sha256
+    stored_submission = redact_transient_oath_readback(body)
+    stored_submission_sha256 = sha256_canonical_json(stored_submission)
 
     # --- check for linked Guardian request ---
     has_linked_guardian = _has_linked_guardian_request(draft)
@@ -1228,7 +1226,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     oath_summary = _extract_oath_verification_summary(draft)
 
     receipt_data = make_receipt(
-        submission=body,
+        submission=stored_submission,
         submission_sha256=submission_sha256,
         original_submission_sha256=original_submission_sha256,
         stored_submission_sha256=stored_submission_sha256,
@@ -1243,7 +1241,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     receipt_id = receipt_data["server_receipt_id"]
 
     # --- prepare file contents ---
-    submission_content = canonical_dumps(body)
+    submission_content = canonical_dumps(stored_submission)
 
     # Pending file = signed pre-append record_draft only (not outer submission).
     # Strip any server projection/append-assigned fields defensively. New clients
