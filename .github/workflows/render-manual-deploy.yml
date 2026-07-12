@@ -1,179 +1,115 @@
-name: Render Manual Deploy
+name: Render Redeploy Verification Report
 
 on:
-  workflow_dispatch:
-    inputs:
-      service:
-        description: "Render service name"
-        required: true
-        default: "trinity-record-chain-gateway"
-      deploy:
-        description: "Actually trigger deploy"
-        required: true
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
-      emergency_allow_legacy_retired_gateway:
-        description: "Emergency only: allow retired legacy trinity-agent-issue-gateway deploy"
-        required: true
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
-      legacy_emergency_confirm:
-        description: "Type RETIRED-LEGACY-EMERGENCY to allow legacy deploy"
-        required: false
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [synchronize]
     branches: [main]
 
 permissions:
   contents: read
 
-concurrency:
-  group: render-manual-deploy
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'ops/render-redeploy-20260712'
+  report:
+    if: github.head_ref == 'ops/render-redeploy-20260712'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.12"
-
-      - name: Capture pre-deploy runtime
-        if: github.event_name == 'pull_request' || github.event.inputs.deploy == 'true'
-        run: |
-          python - <<'PY'
-          import json
-          import urllib.error
-          import urllib.request
-
-          url = 'https://trinity-record-chain-gateway.onrender.com/record-chain/preflight'
-          request = urllib.request.Request(
-              url,
-              data=b'{}',
-              headers={'Content-Type': 'application/json'},
-              method='POST',
-          )
-          try:
-              with urllib.request.urlopen(request, timeout=60) as response:
-                  body = response.read().decode('utf-8')
-                  status = response.status
-          except urllib.error.HTTPError as exc:
-              body = exc.read().decode('utf-8')
-              status = exc.code
-          data = json.loads(body)
-          data['_http_status'] = status
-          runtime = data.get('gateway_runtime') or {}
-          if not runtime.get('deployed_at'):
-              raise SystemExit(f'pre-deploy response missing gateway_runtime.deployed_at: {data!r}')
-          with open('/tmp/render-preflight-before.json', 'w', encoding='utf-8') as handle:
-              json.dump(data, handle, ensure_ascii=False, indent=2, sort_keys=True)
-          print('RENDER_RUNTIME_BEFORE ' + json.dumps(runtime, ensure_ascii=False, sort_keys=True))
-          PY
-
-      - name: Render manual deploy
+      - name: Report latest Render deploy and live runtime
         env:
           RENDER: ${{ secrets.RENDER }}
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            args=(--service "trinity-record-chain-gateway" --deploy)
-          else
-            args=(--service "${{ github.event.inputs.service }}")
-            if [ "${{ github.event.inputs.deploy }}" = "true" ]; then
-              args+=(--deploy)
-            fi
-            if [ "${{ github.event.inputs.emergency_allow_legacy_retired_gateway }}" = "true" ] && \
-               [ "${{ github.event.inputs.legacy_emergency_confirm }}" = "RETIRED-LEGACY-EMERGENCY" ]; then
-              args+=(--allow-legacy)
-            fi
-          fi
-          python scripts/render_manual_deploy.py "${args[@]}" | tee /tmp/render-deploy-output.txt
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            grep -q 'RENDER_DEPLOY_TRIGGERED service=trinity-record-chain-gateway deploy_id=' /tmp/render-deploy-output.txt
-            if grep -q 'deploy_id=None' /tmp/render-deploy-output.txt; then
-              echo 'Render returned no deploy id' >&2
-              exit 1
-            fi
-          fi
-
-      - name: Verify restarted healthy runtime
-        if: github.event_name == 'pull_request' || github.event.inputs.deploy == 'true'
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           python - <<'PY'
           import json
-          import re
-          import time
+          import os
           import urllib.error
           import urllib.request
 
-          preflight_url = 'https://trinity-record-chain-gateway.onrender.com/record-chain/preflight'
-          health_url = 'https://trinity-record-chain-gateway.onrender.com/healthz'
-          readiness_url = 'https://trinity-record-chain-gateway.onrender.com/record-chain/readiness'
-          before = json.load(open('/tmp/render-preflight-before.json', encoding='utf-8'))
-          before_time = (before.get('gateway_runtime') or {}).get('deployed_at')
-          output = open('/tmp/render-deploy-output.txt', encoding='utf-8').read()
-          deploy_match = re.search(r'deploy_id=([^\s]+)', output)
-          deploy_id = deploy_match.group(1) if deploy_match else None
-          last = None
+          token = os.environ['RENDER'].strip()
+          api = 'https://api.render.com/v1'
 
-          def read_json(url: str, *, post: bool = False):
-              request = urllib.request.Request(
+          def api_json(path):
+              req = urllib.request.Request(
+                  api + path,
+                  headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
+              )
+              with urllib.request.urlopen(req, timeout=60) as response:
+                  return json.loads(response.read().decode('utf-8'))
+
+          services = api_json('/services?limit=100')
+          service = None
+          for item in services if isinstance(services, list) else []:
+              candidate = item.get('service') if isinstance(item, dict) else None
+              if isinstance(candidate, dict) and candidate.get('name') == 'trinity-record-chain-gateway':
+                  service = candidate
+                  break
+          if not service:
+              raise SystemExit('trinity-record-chain-gateway not found')
+          service_id = service.get('id')
+          deploy_data = api_json(f'/services/{service_id}/deploys?limit=10')
+          raw_items = deploy_data if isinstance(deploy_data, list) else deploy_data.get('deploys', [])
+          deploys = []
+          for item in raw_items[:5]:
+              deploy = item.get('deploy', item) if isinstance(item, dict) else {}
+              deploys.append({
+                  key: deploy.get(key)
+                  for key in (
+                      'id', 'status', 'createdAt', 'updatedAt', 'finishedAt',
+                      'commit', 'commitId', 'trigger', 'clearCache'
+                  )
+                  if deploy.get(key) is not None
+              })
+
+          def public_json(url, *, post=False):
+              req = urllib.request.Request(
                   url,
                   data=b'{}' if post else None,
                   headers={'Content-Type': 'application/json'} if post else {},
                   method='POST' if post else 'GET',
               )
               try:
-                  with urllib.request.urlopen(request, timeout=60) as response:
+                  with urllib.request.urlopen(req, timeout=60) as response:
                       return response.status, json.loads(response.read().decode('utf-8'))
               except urllib.error.HTTPError as exc:
                   return exc.code, json.loads(exc.read().decode('utf-8'))
 
-          for _ in range(72):
-              try:
-                  preflight_status, preflight = read_json(preflight_url, post=True)
-                  health_status, health = read_json(health_url)
-                  readiness_status, readiness = read_json(readiness_url)
-              except Exception as exc:
-                  last = {'error': type(exc).__name__}
-                  time.sleep(10)
-                  continue
-
-              runtime = preflight.get('gateway_runtime') or {}
-              deployed_at = runtime.get('deployed_at')
-              last = {
-                  'deploy_id': deploy_id,
-                  'preflight_status': preflight_status,
-                  'health_status': health_status,
-                  'readiness_status': readiness_status,
-                  'before_deployed_at': before_time,
-                  'after_deployed_at': deployed_at,
+          preflight_status, preflight = public_json(
+              'https://trinity-record-chain-gateway.onrender.com/record-chain/preflight',
+              post=True,
+          )
+          health_status, health = public_json(
+              'https://trinity-record-chain-gateway.onrender.com/healthz'
+          )
+          readiness_status, readiness = public_json(
+              'https://trinity-record-chain-gateway.onrender.com/record-chain/readiness'
+          )
+          report = {
+              'service': {
+                  key: service.get(key)
+                  for key in ('id', 'name', 'type', 'updatedAt', 'suspended')
+                  if service.get(key) is not None
+              },
+              'latest_deploys': deploys,
+              'live': {
+                  'preflight_http_status': preflight_status,
+                  'gateway_runtime': preflight.get('gateway_runtime'),
+                  'health_http_status': health_status,
                   'health': health,
+                  'readiness_http_status': readiness_status,
                   'readiness': readiness,
-                  'runtime': runtime,
-              }
-              if (
-                  preflight_status == 200
-                  and health_status == 200
-                  and health.get('ok') is True
-                  and readiness_status == 200
-                  and readiness.get('ok') is True
-                  and readiness.get('submit_ready') is True
-                  and deployed_at
-                  and deployed_at != before_time
-              ):
-                  print('RENDER_REDEPLOY_VERIFIED ' + json.dumps(last, ensure_ascii=False, sort_keys=True))
-                  break
-              time.sleep(10)
-          else:
-              raise SystemExit(f'Render runtime did not restart healthy within timeout; last={last!r}')
+              },
+              'pr_base_sha': os.environ.get('PR_BASE_SHA'),
+              'pr_head_sha': os.environ.get('PR_HEAD_SHA'),
+          }
+          print('RENDER_REDEPLOY_REPORT ' + json.dumps(report, ensure_ascii=False, sort_keys=True))
+          if not (
+              health_status == 200
+              and health.get('ok') is True
+              and readiness_status == 200
+              and readiness.get('ok') is True
+              and readiness.get('submit_ready') is True
+              and deploys
+          ):
+              raise SystemExit('live Render verification report is not healthy')
           PY
