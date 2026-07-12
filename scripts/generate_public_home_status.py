@@ -314,7 +314,12 @@ def compute_current_record_chain_autonomy_signal(records: list[dict[str, Any]]) 
     if not eligible:
         return {
             "scope": "current_record_chain_only",
+            "inventory_scope": "all_current_native_records_including_non_official_test_and_maintenance_records",
             "eligible_records": 0,
+            "official_live_eligible_records": 0,
+            "includes_non_official_records": False,
+            "not_official_live_reception_counter": True,
+            "does_not_establish_autonomous_external_agent_discovery": True,
             "status": "not_yet_established_in_current_record_chain",
             "display_status": "not yet established in current record-chain",
             "legacy_autonomy_claims_excluded": True,
@@ -345,13 +350,22 @@ def compute_current_record_chain_autonomy_signal(records: list[dict[str, Any]]) 
         self_executed += int(c)
         fully_autonomous += int(is_fully_autonomous_record(record))
 
+    official_live_eligible = sum(
+        int(record.get("official_live_record") is True) for record in eligible
+    )
     return {
         "scope": "current_record_chain_only",
+        "inventory_scope": "all_current_native_records_including_non_official_test_and_maintenance_records",
         "eligible_records": len(eligible),
+        "official_live_eligible_records": official_live_eligible,
+        "includes_non_official_records": official_live_eligible != len(eligible),
+        "not_official_live_reception_counter": True,
+        "does_not_establish_autonomous_external_agent_discovery": True,
         "self_discovered_records": self_discovered,
         "self_decided_records": self_decided,
         "self_executed_records": self_executed,
         "fully_autonomous_records": fully_autonomous,
+        "metric_semantics": "declared autonomy inventory across the native chain; use primary_counters.historic_autonomous_agent_reception for the strict official-live reception count",
         "legacy_autonomy_claims_excluded": True,
     }
 

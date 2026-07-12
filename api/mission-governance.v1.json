@@ -89,13 +89,11 @@
       "technical_audit_echo",
       "correction_echo",
       "propagation_echo",
-      "refusal_echo",
-      "guardian_signed_echo"
+      "refusal_echo"
     ],
     "guardian_actions": [
       "guardian_application_intake",
-      "guardian_retirement",
-      "guardian_signed_echo"
+      "guardian_retirement"
     ],
     "verification_actions": [
       "record_chain_v0_v5_agent_declared_verification",
@@ -119,7 +117,11 @@
       "guardian_retirement",
       "propagation",
       "correction",
+      "classification_update",
       "context_insufficient_notice"
+    ],
+    "historical_or_specialized_not_current_public_routes": [
+      "guardian_signed_echo"
     ]
   },
   "action_semantics": {
@@ -170,7 +172,11 @@
         "requires_guardian_presence_proof": true,
         "still_non_amending": true,
         "still_not_attestation": true,
-        "still_not_verification_by_default": true
+        "still_not_verification_by_default": true,
+        "status": "historical_or_specialized_not_current_public_route",
+        "current_public_builder_command": null,
+        "do_not_use_for_new_public_submissions": true,
+        "replacement_guidance": "Use an ordinary current Echo when Guardian signing is not essential. If Guardian signing is essential and no current public route is documented, stop with BUILDER_USAGE_UNCLEAR."
       },
       "current_public_decision": "application_intake_only",
       "application_intake": {
@@ -237,5 +243,5 @@
     "examples_match_live_smokes_guard": "scripts/test_external_agent_examples_match_live_smokes.py"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "74bda39aafe913bb"
+  "source_digest": "7a1b5e8998b31567"
 }
