@@ -949,6 +949,10 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
                 if not isinstance(value, str) or not value.strip():
                     missing("MISSING_CORRECTION_CONTENT", f"draft.correction_content.{field_name}", f"Correction requires non-empty {field_name}")
 
+            target_id = content.get("target_record_id")
+            if isinstance(target_id, str) and not re.fullmatch(r"R-[0-9]{9}", target_id):
+                missing("INVALID_CORRECTION_TARGET_ID", "draft.correction_content.target_record_id", "target_record_id must use canonical R-000000000 format")
+
             target_sha = content.get("target_record_sha256")
             if isinstance(target_sha, str) and not re.fullmatch(r"[a-f0-9]{64}", target_sha):
                 missing("INVALID_CORRECTION_TARGET_SHA", "draft.correction_content.target_record_sha256", "target_record_sha256 must be 64 lowercase hex chars")

@@ -7,6 +7,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -492,6 +493,111 @@ async def _guardian_retirement_target_diagnostics(body: dict[str, Any]) -> list[
     return mismatches
 
 
+async def _record_target_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
+    """Verify correction/classification targets against immutable final records.
+
+    Shape validation remains in ``validate_submission``. This asynchronous
+    check closes the repository-state gap before any intake artifacts are
+    persisted, while append repeats the binding as defense in depth.
+    """
+    draft = extract_record_draft(body)
+    record_type = draft.get("record_type")
+    specs = {
+        "correction": (
+            "correction_content",
+            "CORRECTION",
+            "Correction",
+        ),
+        "classification_update": (
+            "classification_update_content",
+            "CLASSIFICATION_UPDATE",
+            "Classification update",
+        ),
+    }
+    spec = specs.get(record_type)
+    if spec is None:
+        return []
+
+    content_key, code_prefix, label = spec
+    content = draft.get(content_key)
+    if not isinstance(content, dict):
+        return []
+    target_id = content.get("target_record_id")
+    target_sha = content.get("target_record_sha256")
+    if (
+        not isinstance(target_id, str)
+        or not re.fullmatch(r"R-[0-9]{9}", target_id)
+        or not isinstance(target_sha, str)
+        or not re.fullmatch(r"[a-f0-9]{64}", target_sha)
+    ):
+        # The synchronous validator emits the field-level diagnostics.
+        return []
+
+    field_prefix = f"record_draft.{content_key}"
+    target_path = f"record-chain/records/{target_id}.json"
+    try:
+        target_text = await get_file_text(target_path)
+    except Exception as exc:
+        logger.warning("%s target lookup failed for %s: %s", label, target_id, exc)
+        return [Diagnostic(
+            code=f"{code_prefix}_TARGET_LOOKUP_FAILED",
+            severity="error",
+            field=f"{field_prefix}.target_record_id",
+            message=f"Could not verify immutable target record {target_id}.",
+            meaning=f"{label} intake must fail closed when the target record cannot be read.",
+            suggested_fix="Retry preflight later without changing or re-signing the submission.",
+            retry_allowed=True,
+        )]
+
+    if target_text is None:
+        return [Diagnostic(
+            code=f"{code_prefix}_TARGET_NOT_FOUND",
+            severity="error",
+            field=f"{field_prefix}.target_record_id",
+            message=f"Target record {target_id} does not exist.",
+            meaning=f"{label} must bind to an existing immutable final record.",
+            suggested_fix="Copy the exact record_id and record_sha256 from the public Record-Chain.",
+            retry_allowed=True,
+        )]
+
+    try:
+        target = json.loads(target_text)
+    except (json.JSONDecodeError, TypeError) as exc:
+        logger.error("%s target is invalid JSON at %s: %s", label, target_path, exc)
+        return [Diagnostic(
+            code=f"{code_prefix}_TARGET_INVALID",
+            severity="error",
+            field=f"{field_prefix}.target_record_id",
+            message=f"Target record {target_id} could not be verified as canonical JSON.",
+            meaning="The target must be a readable immutable final Record-Chain record.",
+            suggested_fix="Retry later; do not guess or replace the target hash.",
+            retry_allowed=True,
+        )]
+
+    diagnostics: list[Diagnostic] = []
+    if not isinstance(target, dict) or target.get("record_id") != target_id:
+        diagnostics.append(Diagnostic(
+            code=f"{code_prefix}_TARGET_ID_MISMATCH",
+            severity="error",
+            field=f"{field_prefix}.target_record_id",
+            message=f"Target file does not canonically identify itself as {target_id}.",
+            meaning="The target path and immutable record_id must agree.",
+            suggested_fix="Retry later and use the canonical public target record.",
+            retry_allowed=True,
+        ))
+    if not isinstance(target, dict) or target.get("record_sha256") != target_sha:
+        diagnostics.append(Diagnostic(
+            code=f"{code_prefix}_TARGET_SHA_MISMATCH",
+            severity="error",
+            field=f"{field_prefix}.target_record_sha256",
+            message=f"Target SHA-256 does not match final record {target_id}.",
+            meaning=f"{label} must bind to the exact immutable target record bytes.",
+            suggested_fix="Copy record_sha256 exactly from the public final record.",
+            retry_allowed=True,
+        ))
+    return diagnostics
+
+
 def _build_agent_recovery(diagnostics: list[Diagnostic]) -> AgentRecovery:
     """Build agent recovery guidance from diagnostics."""
     error_codes = [d.code for d in diagnostics if d.severity == "error"]
@@ -629,14 +735,27 @@ async def put_file_confirmed(
         }
 
 
-async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> None:
-    """Best-effort rollback for files created during a failed intake transaction."""
+async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> bool:
+    """Roll back created files without deleting dependencies after a child failure.
+
+    Files are recorded in dependency order and removed in reverse. If deleting a
+    later artifact fails (for example the pending marker), stop immediately so
+    its receipt, idempotency index, and stored submission remain available for
+    reconciliation instead of creating a dangling append-eligible artifact.
+    """
     for path, sha in reversed(created_files):
         try:
             await delete_file(path, f"rollback failed intake {receipt_id}: delete {path}", sha=sha)
             logger.info("Rolled back created intake file %s for %s", path, receipt_id)
         except Exception as cleanup_exc:
-            logger.error("Failed to roll back %s for %s: %s", path, receipt_id, cleanup_exc)
+            logger.error(
+                "Failed to roll back %s for %s; preserving earlier dependencies: %s",
+                path,
+                receipt_id,
+                cleanup_exc,
+            )
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -930,6 +1049,8 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
     diagnostics.extend(_client_projection_diagnostics(body))
     if not diagnostics:
         diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
+    if not diagnostics:
+        diagnostics.extend(await _record_target_diagnostics(body))
 
     # Authorship verification is performed inside validate_submission().
     # Do not run a second verifier here; duplicate verifiers can produce conflicting diagnostics.
@@ -1009,6 +1130,8 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     diagnostics.extend(_client_projection_diagnostics(body))
     if not diagnostics:
         diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
+    if not diagnostics:
+        diagnostics.extend(await _record_target_diagnostics(body))
     if diagnostics:
         return SubmitResponse(
             accepted=False,
@@ -1608,15 +1731,55 @@ def _receipt_path_from_id(receipt_id: str) -> str:
 
 
 async def _read_receipt_final_status(receipt_id: str) -> dict[str, Any] | None:
-    """Read the final append/reject status sidecar for a receipt."""
+    """Read and verify the final append/reject status sidecar for a receipt."""
     path = f"record-chain/receipt-status/{receipt_id}.json"
     text = await get_file_text(path)
     if text is None:
         return None
     status = json.loads(text)
+    if not isinstance(status, dict):
+        raise RuntimeError(f"receipt-status is not an object at {path}")
+    if status.get("schema") != "trinityaccord.record-chain-receipt-final-status.v1":
+        raise RuntimeError(f"receipt-status schema mismatch at {path}")
     if status.get("receipt_id") != receipt_id:
-        logger.error("receipt-status receipt_id mismatch at %s", path)
-        return None
+        raise RuntimeError(f"receipt-status receipt_id mismatch at {path}")
+    pending_path = status.get("pending_file_path")
+    if not isinstance(pending_path, str) or not pending_path.startswith("record-chain/pending/"):
+        raise RuntimeError(f"receipt-status pending_file_path invalid at {path}")
+
+    append_status = status.get("append_status")
+    if append_status == "appended":
+        final_id = status.get("final_record_id")
+        final_sha = status.get("final_record_sha256")
+        expected_path = f"record-chain/records/{final_id}.json"
+        if not isinstance(final_id, str) or not re.fullmatch(r"R-[0-9]{9}", final_id):
+            raise RuntimeError(f"receipt-status final_record_id invalid at {path}")
+        if status.get("final_record_path") != expected_path:
+            raise RuntimeError(f"receipt-status final_record_path mismatch at {path}")
+        if not isinstance(final_sha, str) or not re.fullmatch(r"[a-f0-9]{64}", final_sha):
+            raise RuntimeError(f"receipt-status final_record_sha256 invalid at {path}")
+        final_text = await get_file_text(expected_path)
+        if final_text is None:
+            raise RuntimeError(f"receipt-status final record missing at {expected_path}")
+        final_record = json.loads(final_text)
+        if final_record.get("record_id") != final_id or final_record.get("record_sha256") != final_sha:
+            raise RuntimeError(f"receipt-status final record binding mismatch at {path}")
+        if status.get("rejection_path") is not None or status.get("rejection_code") is not None:
+            raise RuntimeError(f"receipt-status appended/rejection fields conflict at {path}")
+    elif append_status == "rejected":
+        rejection_path = status.get("rejection_path")
+        if not isinstance(rejection_path, str) or not rejection_path.startswith("record-chain/rejected/"):
+            raise RuntimeError(f"receipt-status rejection_path invalid at {path}")
+        rejection_text = await get_file_text(rejection_path)
+        if rejection_text is None:
+            raise RuntimeError(f"receipt-status rejection metadata missing at {rejection_path}")
+        rejection = json.loads(rejection_text)
+        if rejection.get("source_pending") != pending_path.rsplit("/", 1)[-1]:
+            raise RuntimeError(f"receipt-status rejection source binding mismatch at {path}")
+        if any(status.get(field) is not None for field in ("final_record_id", "final_record_path", "final_record_sha256")):
+            raise RuntimeError(f"receipt-status rejected/final fields conflict at {path}")
+    else:
+        raise RuntimeError(f"receipt-status append_status invalid at {path}")
     return status
 
 
