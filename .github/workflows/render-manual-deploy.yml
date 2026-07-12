@@ -14,10 +14,19 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          show-progress: false
-      - name: Report latest Render deploy and live runtime
+      - name: Emit concise Render deploy and runtime report
         env:
           RENDER: ${{ secrets.RENDER }}
-        run: python scripts/render_redeploy_report_once.py
+        run: |
+          set -euo pipefail
+          services="$(curl -fsS -H "Authorization: Bearer ${RENDER}" -H 'Accept: application/json' 'https://api.render.com/v1/services?limit=100')"
+          service_id="$(jq -r '.[] | select(.service.name == "trinity-record-chain-gateway") | .service.id' <<<"${services}" | head -n1)"
+          test -n "${service_id}"
+          deploys="$(curl -fsS -H "Authorization: Bearer ${RENDER}" -H 'Accept: application/json' "https://api.render.com/v1/services/${service_id}/deploys?limit=10")"
+          latest="$(jq -c 'if type == "array" then ((.[0].deploy // .[0]) // {}) else ((.deploys[0].deploy // .deploys[0]) // {}) end' <<<"${deploys}")"
+          preflight="$(curl -fsS -X POST -H 'Content-Type: application/json' -d '{}' 'https://trinity-record-chain-gateway.onrender.com/record-chain/preflight')"
+          health="$(curl -fsS 'https://trinity-record-chain-gateway.onrender.com/healthz')"
+          readiness="$(curl -fsS 'https://trinity-record-chain-gateway.onrender.com/record-chain/readiness')"
+          report="$(jq -nc --arg service_id "${service_id}" --argjson latest "${latest}" --argjson runtime "$(jq -c '.gateway_runtime' <<<"${preflight}")" --argjson health "${health}" --argjson readiness "${readiness}" '{service_id:$service_id,latest_deploy:$latest,gateway_runtime:$runtime,health:$health,readiness:$readiness}')"
+          echo "RENDER_REDEPLOY_REPORT=${report}"
+          jq -e '.health.ok == true and .readiness.ok == true and .readiness.submit_ready == true and (.latest_deploy.id | type == "string")' <<<"${report}" >/dev/null
