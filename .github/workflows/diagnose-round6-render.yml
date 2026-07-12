@@ -1,0 +1,50 @@
+name: Diagnose Deep Audit Round 6 Render Status
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    if: github.event.pull_request.head.ref == 'ops/deploy-deep-audit-round6'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Read Render deploys and public endpoints
+        env:
+          RENDER: ${{ secrets.RENDER }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.error, urllib.request
+          token=os.environ['RENDER']; api='https://api.render.com/v1'
+          def render(path):
+              req=urllib.request.Request(api+path,headers={'Authorization':f'Bearer {token}','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=30) as r:return json.loads(r.read())
+          services=render('/services?limit=100')
+          for name in ['trinity-record-chain-gateway','trinity-agent-issue-gateway']:
+              svc=next((x.get('service') for x in services if isinstance(x,dict) and isinstance(x.get('service'),dict) and x['service'].get('name')==name),None)
+              if not svc:
+                  print(json.dumps({'service':name,'error':'not_found'})); continue
+              deploys=render(f"/services/{svc['id']}/deploys?limit=5")
+              safe=[]
+              for item in deploys if isinstance(deploys,list) else []:
+                  d=item.get('deploy',item) if isinstance(item,dict) else {}
+                  safe.append({k:d.get(k) for k in ['id','status','trigger','createdAt','updatedAt','finishedAt','commit']})
+              print(json.dumps({'service':name,'id':svc.get('id'),'suspended':svc.get('suspended'),'latest_deploys':safe},sort_keys=True))
+          def public(url,post=False):
+              req=urllib.request.Request(url,data=b'{}' if post else None,headers={'Content-Type':'application/json'} if post else {},method='POST' if post else 'GET')
+              try:
+                  with urllib.request.urlopen(req,timeout=25) as r:return r.status,json.loads(r.read())
+              except urllib.error.HTTPError as e:
+                  try:return e.code,json.loads(e.read())
+                  except Exception:return e.code,{}
+              except Exception as e:return 0,{'error':type(e).__name__,'message':str(e)[:160]}
+          base='https://trinity-agent-issue-gateway.onrender.com'
+          for path,post in [('/health',False),('/readiness',False),('/gateway/version',False),('/gateway/preflight',True),('/agent-submit',True)]:
+              status,data=public(base+path,post)
+              print(json.dumps({'path':path,'status':status,'data':data},sort_keys=True)[:8000])
+          PY
