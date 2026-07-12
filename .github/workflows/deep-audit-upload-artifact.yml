@@ -1,0 +1,36 @@
+name: Deep Audit Upload Artifact
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    if: github.event.pull_request.head.ref == 'agent/deep-audit-20260712'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Build tracked main source archive
+        run: |
+          set -euo pipefail
+          git ls-files -z | tar --null --files-from=- -czf /tmp/deep-audit-main-source.tar.gz
+          sha256sum /tmp/deep-audit-main-source.tar.gz
+          stat -c 'archive_size_bytes=%s' /tmp/deep-audit-main-source.tar.gz
+
+      - name: Upload tracked main source archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-audit-main-source
+          path: /tmp/deep-audit-main-source.tar.gz
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
