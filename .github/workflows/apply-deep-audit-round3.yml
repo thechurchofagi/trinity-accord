@@ -1,16 +1,16 @@
 name: Apply Deep Audit Round 3
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/fix-deep-audit-round3
+      - main
 
 permissions:
   contents: write
 
 jobs:
   apply:
-    if: github.event.head_commit.message == 'audit: apply deep transaction hardening'
+    if: github.event.pull_request.head.ref == 'agent/fix-deep-audit-round3'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
