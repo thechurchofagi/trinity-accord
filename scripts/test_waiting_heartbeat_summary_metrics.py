@@ -152,6 +152,50 @@ def test_current_expected_record_is_alive_while_arweave_capsule_is_pending() -> 
     require(summary["success_definition"].get("arweave_capsule_is_archive_followup") is True, "summary must classify Arweave capsule as archive follow-up")
 
 
+def test_historical_record_stays_successful_without_verified_capsule() -> None:
+    generator = load_generator_module()
+    historical = verified_record()
+    current = {
+        **verified_record(),
+        "heartbeat_id": "hwb-20260623",
+        "heartbeat_date": "2026-06-23",
+        "record_id": "R-000000057",
+        "record_index": 57,
+        "record_sha256": "current-sha",
+    }
+    summary = generator.compute_heartbeat_summary(
+        records=[historical, current],
+        attempts=[],
+        capsules=[],
+        key_manifest={"public_key_sha256": "key-sha"},
+        ots_covers_latest=True,
+        expected_date=date(2026, 6, 23),
+        ots={
+            "latest_record_id": "R-000000057",
+            "latest_record_sha256": "current-sha",
+            "native_record_count": 57,
+        },
+    )
+    require(summary["successful_heartbeats"] == 2, "OTS-covered historical heartbeat must remain successful without an Arweave capsule")
+    require(summary["failed_or_missing_heartbeats"] == 0, "archive follow-up failure must not create a historical liveness failure")
+
+
+def test_verified_capsule_cannot_substitute_for_ots_coverage() -> None:
+    generator = load_generator_module()
+    summary = generator.compute_heartbeat_summary(
+        records=[verified_record()],
+        attempts=[],
+        capsules=[verified_capsule()],
+        key_manifest={"public_key_sha256": "key-sha"},
+        ots_covers_latest=False,
+        expected_date=date(2026, 6, 22),
+        ots={"latest_record_id": "R-000000055", "native_record_count": 55},
+    )
+    require(summary["successful_heartbeats"] == 0, "verified Arweave mirror must not substitute for native OTS coverage")
+    require(summary["failed_or_missing_heartbeats"] == 1, "record without OTS coverage must not be counted successful")
+    require(summary["latest_heartbeat_fully_verified_for_expected_date"] is False, "expected heartbeat without OTS coverage must not be fully verified")
+
+
 def test_capsule_payload_does_not_contradict_daily_alive_policy() -> None:
     builder = load_capsule_builder_module()
     payload = builder.build_payload(
@@ -374,6 +418,8 @@ def main() -> int:
     test_expected_heartbeat_date_respects_schedule_grace_window()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
     test_current_expected_record_is_alive_while_arweave_capsule_is_pending()
+    test_historical_record_stays_successful_without_verified_capsule()
+    test_verified_capsule_cannot_substitute_for_ots_coverage()
     test_capsule_payload_does_not_contradict_daily_alive_policy()
     test_attempt_for_expected_date_is_pending_append_not_missing_final_heartbeat()
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
