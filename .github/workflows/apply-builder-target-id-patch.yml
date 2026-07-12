@@ -36,6 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -f scripts/apply_builder_target_id_patch.py
+          rm -f scripts/force_run_builder_patch.py
           rm -f .github/workflows/apply-builder-target-id-patch.yml
           git config user.name "trinity-audit-bot"
           git config user.email "actions@github.com"
