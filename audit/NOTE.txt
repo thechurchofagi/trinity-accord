@@ -1,0 +1,1 @@
+This temporary branch will be reset after the source snapshot is retrieved.
