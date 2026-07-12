@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from apps.record_chain_intake_gateway.gateway.authorship import UNSIGNED_PROJECTION_FIELDS
 
-ROOT = Path(__file__).resolve().parents[1]
 schema = json.loads((ROOT / "api" / "record-chain-submission-schema.v1.json").read_text(encoding="utf-8"))
 record_draft = schema["properties"]["record_draft"]
 forbidden_items = record_draft["allOf"][0]["not"]["anyOf"]
