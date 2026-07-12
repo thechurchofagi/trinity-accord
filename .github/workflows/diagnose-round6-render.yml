@@ -14,37 +14,58 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
-      - name: Read Render deploys and public endpoints
+      - name: Read and, if needed, directly request legacy deploy
         env:
           RENDER: ${{ secrets.RENDER }}
         run: |
           python - <<'PY'
-          import json, os, urllib.error, urllib.request
-          token=os.environ['RENDER']; api='https://api.render.com/v1'
-          def render(path):
-              req=urllib.request.Request(api+path,headers={'Authorization':f'Bearer {token}','Accept':'application/json'})
-              with urllib.request.urlopen(req,timeout=30) as r:return json.loads(r.read())
-          services=render('/services?limit=100')
-          for name in ['trinity-record-chain-gateway','trinity-agent-issue-gateway']:
-              svc=next((x.get('service') for x in services if isinstance(x,dict) and isinstance(x.get('service'),dict) and x['service'].get('name')==name),None)
-              if not svc:
-                  print(json.dumps({'service':name,'error':'not_found'})); continue
-              deploys=render(f"/services/{svc['id']}/deploys?limit=5")
+          import json, os, time, urllib.error, urllib.request
+          token=os.environ['RENDER']; api='https://api.render.com/v1'; target='ec6e1ed642518e745b313615cd454ee80ae3e555'
+          headers={'Authorization':f'Bearer {token}','Accept':'application/json'}
+          def call(path,method='GET',body=None):
+              data=json.dumps(body).encode() if body is not None else None
+              h=dict(headers)
+              if data is not None:h['Content-Type']='application/json'
+              req=urllib.request.Request(api+path,data=data,headers=h,method=method)
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as r:
+                      raw=r.read().decode(); return r.status,(json.loads(raw) if raw else {})
+              except urllib.error.HTTPError as e:
+                  raw=e.read().decode('utf-8','replace');
+                  try:payload=json.loads(raw)
+                  except Exception:payload={'raw':raw[:1000]}
+                  return e.code,payload
+          status,services=call('/services?limit=100')
+          if status!=200:raise SystemExit({'services_status':status,'body':services})
+          svc=next((x.get('service') for x in services if isinstance(x,dict) and isinstance(x.get('service'),dict) and x['service'].get('name')=='trinity-agent-issue-gateway'),None)
+          if not svc:raise SystemExit('legacy service not found')
+          sid=svc['id']
+          print(json.dumps({'service':{k:svc.get(k) for k in ['id','name','type','suspended','suspenders','serviceDetails']}},sort_keys=True))
+          def deploy_summary():
+              s,d=call(f'/services/{sid}/deploys?limit=5')
               safe=[]
-              for item in deploys if isinstance(deploys,list) else []:
-                  d=item.get('deploy',item) if isinstance(item,dict) else {}
-                  safe.append({k:d.get(k) for k in ['id','status','trigger','createdAt','updatedAt','finishedAt','commit']})
-              print(json.dumps({'service':name,'id':svc.get('id'),'suspended':svc.get('suspended'),'latest_deploys':safe},sort_keys=True))
-          def public(url,post=False):
-              req=urllib.request.Request(url,data=b'{}' if post else None,headers={'Content-Type':'application/json'} if post else {},method='POST' if post else 'GET')
+              for item in d if s==200 and isinstance(d,list) else []:
+                  x=item.get('deploy',item) if isinstance(item,dict) else {}
+                  commit=x.get('commit') or {}
+                  safe.append({'id':x.get('id'),'status':x.get('status'),'trigger':x.get('trigger'),'createdAt':x.get('createdAt'),'finishedAt':x.get('finishedAt'),'commit_id':commit.get('id') if isinstance(commit,dict) else None})
+              print(json.dumps({'deploy_list_status':s,'deploys':safe},sort_keys=True))
+              return safe
+          safe=deploy_summary()
+          if not any(x.get('commit_id')==target for x in safe):
+              s,d=call(f'/services/{sid}/deploys','POST',{'clearCache':'do_not_clear'})
+              print(json.dumps({'direct_deploy_status':s,'direct_deploy_response':d},sort_keys=True))
+              time.sleep(5)
+              deploy_summary()
+          def public(path,post=False):
+              req=urllib.request.Request('https://trinity-agent-issue-gateway.onrender.com'+path,data=b'{}' if post else None,headers={'Content-Type':'application/json'} if post else {},method='POST' if post else 'GET')
               try:
                   with urllib.request.urlopen(req,timeout=25) as r:return r.status,json.loads(r.read())
               except urllib.error.HTTPError as e:
                   try:return e.code,json.loads(e.read())
                   except Exception:return e.code,{}
               except Exception as e:return 0,{'error':type(e).__name__,'message':str(e)[:160]}
-          base='https://trinity-agent-issue-gateway.onrender.com'
           for path,post in [('/health',False),('/readiness',False),('/gateway/version',False),('/gateway/preflight',True),('/agent-submit',True)]:
-              status,data=public(base+path,post)
-              print(json.dumps({'path':path,'status':status,'data':data},sort_keys=True)[:8000])
+              s,d=public(path,post)
+              compact={k:d.get(k) for k in ['ok','ready','retired','accepts_submissions','status','production_render_enabled','renderer_supports_production_render','deployed_at','replacement','error'] if isinstance(d,dict)}
+              print(json.dumps({'path':path,'http_status':s,'data':compact},sort_keys=True))
           PY
