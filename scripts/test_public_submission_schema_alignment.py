@@ -1,15 +1,40 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import ast
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
 
-from apps.record_chain_intake_gateway.gateway.authorship import UNSIGNED_PROJECTION_FIELDS
+
+def canonical_unsigned_fields() -> set[str]:
+    path = ROOT / "apps" / "record_chain_intake_gateway" / "gateway" / "authorship.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if not any(isinstance(target, ast.Name) and target.id == "UNSIGNED_PROJECTION_FIELDS" for target in node.targets):
+            continue
+        value = node.value
+        if not (
+            isinstance(value, ast.Call)
+            and isinstance(value.func, ast.Name)
+            and value.func.id == "frozenset"
+            and len(value.args) == 1
+            and isinstance(value.args[0], ast.Set)
+        ):
+            raise SystemExit("UNSIGNED_PROJECTION_FIELDS must remain a literal frozenset")
+        fields = {
+            element.value
+            for element in value.args[0].elts
+            if isinstance(element, ast.Constant) and isinstance(element.value, str)
+        }
+        if len(fields) != len(value.args[0].elts):
+            raise SystemExit("UNSIGNED_PROJECTION_FIELDS must contain only string literals")
+        return fields
+    raise SystemExit("UNSIGNED_PROJECTION_FIELDS assignment not found")
+
 
 schema = json.loads((ROOT / "api" / "record-chain-submission-schema.v1.json").read_text(encoding="utf-8"))
 record_draft = schema["properties"]["record_draft"]
@@ -19,9 +44,10 @@ forbidden = {
     for item in forbidden_items
     if isinstance(item.get("required"), list) and len(item["required"]) == 1
 }
-if forbidden != set(UNSIGNED_PROJECTION_FIELDS):
-    missing = sorted(set(UNSIGNED_PROJECTION_FIELDS) - forbidden)
-    extra = sorted(forbidden - set(UNSIGNED_PROJECTION_FIELDS))
+canonical = canonical_unsigned_fields()
+if forbidden != canonical:
+    missing = sorted(canonical - forbidden)
+    extra = sorted(forbidden - canonical)
     raise SystemExit(f"public submission schema unsigned-field drift: missing={missing}, extra={extra}")
 
 classification_rules = [
