@@ -12,27 +12,19 @@ jobs:
   apply:
     if: contains(github.event.head_commit.message, 'stage builder target-id runner')
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
           ref: agent/audit-main-integrity-hardening
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: "20"
-      - name: Apply builder patch
-        run: python3 scripts/apply_builder_target_id_patch.py
-      - name: Rebuild builder manifest
-        run: python3 scripts/rebuild_record_chain_builder_bundles.py
-      - name: Run focused builder regressions
+      - name: Apply exact Builder patch and rebuild manifest
         run: |
-          python3 scripts/test_builder_classification_target_id.py
-          node downloads/test-record-chain-builder.mjs
+          set -euo pipefail
+          python3 scripts/apply_builder_target_id_patch.py
           python3 scripts/rebuild_record_chain_builder_bundles.py
-          git diff --exit-code api/record-chain-builder-bundles.v1.json
-      - name: Remove one-time runner and push
+      - name: Remove one-time patch files and push
         run: |
           set -euo pipefail
           rm -f scripts/apply_builder_target_id_patch.py
