@@ -7,6 +7,12 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from waiting_heartbeat_capsule_integrity import (
+    capsule_claims_verified,
+    verified_capsule_binding_errors,
+    verified_capsule_is_bound,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = ROOT / "record-chain" / "records"
 ATTEMPTS_DIR = ROOT / "record-chain" / "heartbeat" / "attempts"
@@ -114,9 +120,32 @@ def attempt_pending_append(attempt: dict[str, Any]) -> bool:
 def capsule_is_verified(c: dict[str, Any] | None) -> bool:
     if not c:
         return False
-    txid = c.get("txid") or c.get("tx_id") or c.get("arweave_txid") or c.get("arweave_tx_id")
-    status = c.get("result") or c.get("status")
-    return bool(txid) and c.get("hash_match") is True and status in {"uploaded", "success", "arweave_archived"}
+    heartbeat_id = c.get("heartbeat_id")
+    if not isinstance(heartbeat_id, str) or not heartbeat_id:
+        return False
+    return verified_capsule_is_bound(
+        c,
+        capsule_path=CAPSULES_DIR / f"{heartbeat_id}.capsule.json",
+        repository_root=ROOT,
+    )
+
+
+def require_verified_capsule_bindings(capsules: list[dict[str, Any]]) -> None:
+    """Fail generation if any result claims verification without real binding."""
+    failures: list[str] = []
+    for capsule in capsules:
+        if not capsule_claims_verified(capsule):
+            continue
+        heartbeat_id = capsule.get("heartbeat_id")
+        capsule_path = CAPSULES_DIR / f"{heartbeat_id}.capsule.json"
+        for error in verified_capsule_binding_errors(
+            capsule,
+            capsule_path=capsule_path,
+            repository_root=ROOT,
+        ):
+            failures.append(f"{heartbeat_id}: {error}")
+    if failures:
+        raise SystemExit("Invalid verified Waiting Heartbeat capsule evidence:\n- " + "\n- ".join(failures))
 
 
 def capsule_is_deferred(c: dict[str, Any] | None) -> bool:
@@ -392,6 +421,7 @@ def main() -> int:
     records = load_final_heartbeats()
     attempts = load_attempts()
     capsules = load_capsules()
+    require_verified_capsule_bindings(capsules)
     ots = read_json(OTS_LATEST, {})
     key_manifest = read_json(WAITING_HEARTBEAT_KEY, {})
 
