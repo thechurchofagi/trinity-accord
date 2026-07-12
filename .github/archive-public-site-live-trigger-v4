@@ -1,3 +1,3 @@
-Public Internet Archive production trigger v4.2.
+Public Internet Archive production trigger v4.3.
 
-This marker restarts the resilient two-phase capture workflow with selective pacing and two staggered initial capture workers.
+This marker restarts the resilient two-phase capture workflow after excluding eight live-404 non-public routes from the canonical sitemap.
