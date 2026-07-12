@@ -196,6 +196,8 @@ def compute_heartbeat_summary(
     key_manifest: dict[str, Any],
     ots_covers_latest: bool,
     expected_date: date | None = None,
+    *,
+    ots: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     records_by_date: dict[date, dict[str, Any]] = {}
     for record in records:
@@ -203,12 +205,8 @@ def compute_heartbeat_summary(
         if observed is not None:
             records_by_date[observed] = record
 
-    capsules_by_heartbeat: dict[str, list[dict[str, Any]]] = {}
     capsule_dates: set[date] = set()
     for capsule in capsules:
-        heartbeat_id = capsule.get("heartbeat_id")
-        if isinstance(heartbeat_id, str) and heartbeat_id:
-            capsules_by_heartbeat.setdefault(heartbeat_id, []).append(capsule)
         observed = observed_heartbeat_date(capsule)
         if observed is not None:
             capsule_dates.add(observed)
@@ -309,7 +307,6 @@ def compute_heartbeat_summary(
     scheduled_dates = date_range(first, through)
 
     expected_key_sha = key_manifest.get("public_key_sha256")
-    latest_record_date = max(records_by_date) if records_by_date else None
     success_by_date: dict[date, bool] = {}
     missing_heartbeat_dates: list[str] = []
     pending_append_heartbeat_dates: list[str] = []
@@ -323,15 +320,12 @@ def compute_heartbeat_summary(
                 missing_heartbeat_dates.append(scheduled.isoformat())
             continue
         key_ok = bool(expected_key_sha and record.get("authorship_public_key_sha256") == expected_key_sha)
-        same_capsules = capsules_by_heartbeat.get(str(record.get("heartbeat_id")), [])
-        verified_capsule = any(capsule_is_verified(capsule) for capsule in same_capsules)
-        # Daily liveness is established by the final heartbeat record, key
-        # continuity, and the native OTS head covering that record.  Arweave
-        # capsule upload/readback is a mirror/archive follow-up and must not
-        # make an otherwise current heartbeat look failed/degraded while the
-        # archive workflow is still waiting for normal post-OTS processing.
-        current_record_operational = bool(scheduled == latest_record_date and key_ok and ots_covers_latest)
-        success_by_date[scheduled] = bool(key_ok and (verified_capsule or current_record_operational))
+        # Daily liveness is established only by the final heartbeat record, key
+        # continuity, and native OTS coverage. Arweave upload/readback is an
+        # archive mirror follow-up and therefore cannot create or remove daily
+        # liveness success for either current or historical heartbeats.
+        record_ots_covered = ots_covers_record(ots, record) if ots is not None else bool(ots_covers_latest)
+        success_by_date[scheduled] = bool(key_ok and record_ots_covered)
 
     successful = sum(1 for ok in success_by_date.values() if ok)
     total = len(scheduled_dates)
@@ -416,7 +410,15 @@ def main() -> int:
     actual_key_sha = latest.get("authorship_public_key_sha256") if latest else None
     key_continuity_ok = bool(expected_key_sha and actual_key_sha and expected_key_sha == actual_key_sha)
 
-    heartbeat_summary = compute_heartbeat_summary(records, attempts, capsules, key_manifest, ots_covers_latest, expected_heartbeat_date())
+    heartbeat_summary = compute_heartbeat_summary(
+        records,
+        attempts,
+        capsules,
+        key_manifest,
+        ots_covers_latest,
+        expected_heartbeat_date(),
+        ots=ots,
+    )
 
     if final_record_exists and not key_continuity_ok:
         daily_alive_status = "failed"
