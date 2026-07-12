@@ -29,6 +29,32 @@ def load_json(path: str) -> dict:
     return json.loads(read(path))
 
 
+def literal_frozenset(source: str, assignment_name: str) -> set[str]:
+    tree = ast.parse(source)
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if not any(isinstance(target, ast.Name) and target.id == assignment_name for target in node.targets):
+            continue
+        value = node.value
+        require(
+            isinstance(value, ast.Call)
+            and isinstance(value.func, ast.Name)
+            and value.func.id == "frozenset"
+            and len(value.args) == 1
+            and isinstance(value.args[0], ast.Set),
+            f"{assignment_name} must remain a literal frozenset",
+        )
+        fields = {
+            element.value
+            for element in value.args[0].elts
+            if isinstance(element, ast.Constant) and isinstance(element.value, str)
+        }
+        require(len(fields) == len(value.args[0].elts), f"{assignment_name} must contain only strings")
+        return fields
+    fail(f"missing {assignment_name}")
+
+
 def main() -> None:
     app = read("apps/record_chain_intake_gateway/app.py")
     authorship = read("apps/record_chain_intake_gateway/gateway/authorship.py")
@@ -51,8 +77,14 @@ def main() -> None:
 
     schema_text = json.dumps(submission_schema, ensure_ascii=False, sort_keys=True)
 
-    # A: server_append_metadata must be rejected before it can enter signed client draft flow.
-    require('"server_append_metadata"' in app, "app.py must reject client-supplied server_append_metadata")
+    # A: server_append_metadata must be rejected through the one canonical
+    # unsigned projection-field set, not through a second duplicated list.
+    unsigned_fields = literal_frozenset(authorship, "UNSIGNED_PROJECTION_FIELDS")
+    require("server_append_metadata" in unsigned_fields, "canonical set must reject client-supplied server_append_metadata")
+    require(
+        "_UNSIGNED_CLIENT_PROJECTION_FIELDS = frozenset(UNSIGNED_PROJECTION_FIELDS)" in app,
+        "app.py must derive its client rejection set from UNSIGNED_PROJECTION_FIELDS",
+    )
     require('"server_append_metadata"' in schema_text, "submission schema must forbid record_draft.server_append_metadata")
 
     # B: claim_boundary must be validated through top-level authorship_proof verifier.
