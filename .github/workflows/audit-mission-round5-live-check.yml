@@ -1,0 +1,27 @@
+name: Mission Round 5 Live Freshness Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    if: github.event.pull_request.head.ref == 'audit/mission-deep-round5-snapshot'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Compare live site with current main
+        run: |
+          set -euo pipefail
+          python3 scripts/check_homepage_live_freshness.py --site https://www.trinityaccord.org --timeout 30
+          python3 scripts/check_deployment_freshness.py --site https://www.trinityaccord.org --timeout 30
