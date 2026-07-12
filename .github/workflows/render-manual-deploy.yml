@@ -1,54 +1,64 @@
-name: Render Manual Deploy
+name: Render Deep Audit Gateway Redeploy
 
 on:
-  workflow_dispatch:
-    inputs:
-      service:
-        description: "Render service name"
-        required: true
-        default: "trinity-record-chain-gateway"
-      deploy:
-        description: "Actually trigger deploy"
-        required: true
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
-      emergency_allow_legacy_retired_gateway:
-        description: "Emergency only: allow retired legacy trinity-agent-issue-gateway deploy"
-        required: true
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
-      legacy_emergency_confirm:
-        description: "Type RETIRED-LEGACY-EMERGENCY to allow legacy deploy"
-        required: false
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
 
 jobs:
   deploy:
+    if: github.event.pull_request.head.ref == 'ops/render-redeploy-deep-audit-round3'
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: "3.12"
-
-      - name: Render manual deploy
+          python-version: '3.12'
+      - name: Capture previous runtime
+        run: |
+          python - <<'PY' > /tmp/before.txt
+          import json, urllib.error, urllib.request
+          req=urllib.request.Request('https://trinity-record-chain-gateway.onrender.com/record-chain/preflight',data=b'{}',headers={'Content-Type':'application/json'},method='POST')
+          try:
+              with urllib.request.urlopen(req,timeout=60) as r: data=json.loads(r.read())
+          except urllib.error.HTTPError as e: data=json.loads(e.read())
+          print((data.get('gateway_runtime') or {}).get('deployed_at',''))
+          PY
+          cat /tmp/before.txt
+      - name: Trigger official Render deploy helper
         env:
           RENDER: ${{ secrets.RENDER }}
+        run: python scripts/render_manual_deploy.py --service trinity-record-chain-gateway --deploy
+      - name: Verify restarted healthy runtime
         run: |
-          args=(--service "${{ github.event.inputs.service }}")
-          if [ "${{ github.event.inputs.deploy }}" = "true" ]; then
-            args+=(--deploy)
-          fi
-          if [ "${{ github.event.inputs.emergency_allow_legacy_retired_gateway }}" = "true" ] && \
-             [ "${{ github.event.inputs.legacy_emergency_confirm }}" = "RETIRED-LEGACY-EMERGENCY" ]; then
-            args+=(--allow-legacy)
-          fi
-          python scripts/render_manual_deploy.py "${args[@]}"
+          set -euo pipefail
+          before="$(cat /tmp/before.txt)"
+          for attempt in $(seq 1 90); do
+            python - <<'PY' > /tmp/runtime.json || true
+          import json, urllib.error, urllib.request
+          def get(url, post=False):
+              req=urllib.request.Request(url,data=b'{}' if post else None,headers={'Content-Type':'application/json'} if post else {},method='POST' if post else 'GET')
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as r: return r.status,json.loads(r.read())
+              except Exception: return 0,{}
+          ps,p=get('https://trinity-record-chain-gateway.onrender.com/record-chain/preflight',True)
+          hs,h=get('https://trinity-record-chain-gateway.onrender.com/healthz')
+          rs,r=get('https://trinity-record-chain-gateway.onrender.com/record-chain/readiness')
+          print(json.dumps({'preflight_status':ps,'deployed_at':(p.get('gateway_runtime') or {}).get('deployed_at',''),'health_status':hs,'health':h,'readiness_status':rs,'readiness':r},sort_keys=True))
+          PY
+            deployed_at="$(python -c 'import json; print(json.load(open("/tmp/runtime.json")).get("deployed_at",""))')"
+            ready="$(python -c 'import json; d=json.load(open("/tmp/runtime.json")); print(str(d.get("health",{}).get("ok") is True and d.get("readiness",{}).get("submit_ready") is True).lower())')"
+            if [ -n "$deployed_at" ] && [ "$deployed_at" != "$before" ] && [ "$ready" = true ]; then
+              cat /tmp/runtime.json
+              exit 0
+            fi
+            sleep 10
+          done
+          cat /tmp/runtime.json || true
+          exit 1
