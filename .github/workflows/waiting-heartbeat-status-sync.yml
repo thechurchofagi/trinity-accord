@@ -50,7 +50,23 @@ jobs:
           set -euo pipefail
           git config user.name "trinity-homepage-status-bot"
           git config user.email "actions@github.com"
-          git add record-chain/heartbeat/index.json api/waiting-heartbeat-status.json api/record-chain-status.json api/public-home-status.json index.md sitemap.xml
+
+          regenerate_waiting_status_artifacts() {
+            python3 scripts/trinity_record_chain.py verify
+            python3 scripts/generate_waiting_heartbeat_status.py
+            python3 scripts/update_public_generated_artifacts.py
+            python3 scripts/generate_record_chain_status.py --check
+            python3 scripts/generate_public_home_status.py --check
+            python3 scripts/patch_public_home_status_primary.py --check
+            python3 scripts/check_public_home_status_contract.py
+            python3 scripts/generate_sitemap.py --check
+          }
+
+          stage_waiting_status_artifacts() {
+            git add record-chain/heartbeat/index.json api/waiting-heartbeat-status.json api/record-chain-status.json api/public-home-status.json index.md sitemap.xml
+          }
+
+          stage_waiting_status_artifacts
           if git diff --cached --quiet; then
             echo "No waiting heartbeat status sync changes."
             exit 0
@@ -60,8 +76,19 @@ jobs:
             if git push origin HEAD:main; then
               exit 0
             fi
+            echo "Push rejected; main advanced. Rebasing and regenerating derived status. Attempt ${attempt}."
             git fetch origin main --prune
             git rebase origin/main
+            regenerate_waiting_status_artifacts
+            stage_waiting_status_artifacts
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Worktree dirty after status regeneration."
+              git status --short
+              exit 1
+            fi
             sleep $((attempt * 5))
           done
           exit 1

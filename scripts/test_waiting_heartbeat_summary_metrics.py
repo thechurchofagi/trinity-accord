@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
+import tempfile
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -11,6 +13,7 @@ STATUS = ROOT / "api" / "waiting-heartbeat-status.json"
 PUBLIC = ROOT / "api" / "public-home-status.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-submit.yml"
 CAPSULE_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-capsule.yml"
+STATUS_SYNC_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-status-sync.yml"
 GENERATOR = ROOT / "scripts" / "generate_waiting_heartbeat_status.py"
 SUBMIT_SCRIPT = ROOT / "scripts" / "submit_waiting_heartbeat.py"
 CAPSULE_BUILDER = ROOT / "scripts" / "build_waiting_heartbeat_arweave_capsule.py"
@@ -259,10 +262,80 @@ def test_ots_head_covers_prior_heartbeat_record() -> None:
 
 def test_capsule_builder_recognizes_existing_result_states() -> None:
     builder = load_capsule_builder_module()
-    require(builder.capsule_is_verified({"status": "uploaded", "arweave_txid": "txid", "hash_match": True}), "verified result should skip upload")
+    require(not builder.capsule_is_verified({"status": "uploaded", "arweave_txid": "x" * 43, "hash_match": True}), "self-declared verified result without local evidence must fail closed")
     require(builder.capsule_needs_readback_repair({"status": "posted_pending_readback", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "pending result should request readback repair")
     require(builder.capsule_needs_readback_repair({"status": "readback_failed", "arweave_txid": "txid", "hash_match": False, "retryable": True}), "legacy readback_failed should request readback repair")
     require(not builder.capsule_needs_readback_repair({"status": "readback_hash_mismatch", "arweave_txid": "txid", "hash_match": False, "retryable": False}), "hash mismatch must not request retry repair")
+
+
+
+
+def test_verified_capsule_binds_exact_bytes_and_final_record() -> None:
+    builder = load_capsule_builder_module()
+    with tempfile.TemporaryDirectory(prefix="heartbeat-capsule-integrity-") as tmp_value:
+        tmp = Path(tmp_value)
+        record_id = "R-000000001"
+        heartbeat_id = "hwb-20260712"
+        record_path = tmp / "record-chain" / "records" / f"{record_id}.json"
+        record_path.parent.mkdir(parents=True)
+        record = {
+            "record_id": record_id,
+            "record_index": 1,
+            "record_sha256": "a" * 64,
+            "record_type": "context_insufficient_notice",
+            "assigned_at": "2026-07-12T00:00:00Z",
+            "system_waiting_heartbeat": {"heartbeat_id": heartbeat_id},
+        }
+        record_path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+        capsule_path = tmp / "record-chain" / "heartbeat" / "capsules" / f"{heartbeat_id}.capsule.json"
+        capsule_path.parent.mkdir(parents=True)
+        capsule = {
+            "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
+            "heartbeat_id": heartbeat_id,
+            "heartbeat_record": {
+                "record_id": record_id,
+                "record_index": 1,
+                "record_sha256": "a" * 64,
+                "record_type": "context_insufficient_notice",
+                "assigned_at": "2026-07-12T00:00:00Z",
+                "path": f"record-chain/records/{record_id}.json",
+            },
+        }
+        capsule_path.write_text(json.dumps(capsule) + "\n", encoding="utf-8")
+        payload_sha = hashlib.sha256(capsule_path.read_bytes()).hexdigest()
+        result = {
+            "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
+            "heartbeat_id": heartbeat_id,
+            "status": "uploaded",
+            "arweave_txid": "x" * 43,
+            "payload_sha256": payload_sha,
+            "data_sha256": payload_sha,
+            "readback_sha256": payload_sha,
+            "hash_match": True,
+        }
+        old_root = builder.ROOT
+        try:
+            builder.ROOT = tmp
+            require(builder.capsule_is_verified(result, capsule_path=capsule_path), "fully bound verified capsule should be accepted")
+            capsule_path.write_text(json.dumps({**capsule, "created_at": "tampered"}) + "\n", encoding="utf-8")
+            require(not builder.capsule_is_verified(result, capsule_path=capsule_path), "changed local capsule bytes must invalidate verified result")
+        finally:
+            builder.ROOT = old_root
+
+
+def test_current_verified_capsules_all_bind_to_repository_evidence() -> None:
+    generator = load_generator_module()
+    generator.require_verified_capsule_bindings(generator.load_capsules())
+
+
+def test_status_sync_regenerates_after_rebase() -> None:
+    text = STATUS_SYNC_WORKFLOW.read_text(encoding="utf-8")
+    rebase_pos = text.find("git rebase origin/main")
+    regenerate_pos = text.find("regenerate_waiting_status_artifacts", rebase_pos)
+    amend_pos = text.find("git commit --amend --no-edit", regenerate_pos)
+    require(rebase_pos >= 0, "status sync must rebase when main advances")
+    require(regenerate_pos > rebase_pos, "status sync must regenerate derived state after rebase")
+    require(amend_pos > regenerate_pos, "status sync must amend regenerated state before retrying push")
 
 
 def test_capsule_workflow_preserves_upload_result_before_status_update() -> None:
@@ -425,6 +498,9 @@ def main() -> int:
     test_grace_window_attempt_after_expected_date_does_not_expand_scheduled_totals()
     test_ots_head_covers_prior_heartbeat_record()
     test_capsule_builder_recognizes_existing_result_states()
+    test_verified_capsule_binds_exact_bytes_and_final_record()
+    test_current_verified_capsules_all_bind_to_repository_evidence()
+    test_status_sync_regenerates_after_rebase()
     test_capsule_workflow_preserves_upload_result_before_status_update()
     test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable()
     test_submit_script_persists_append_dispatch_metadata()

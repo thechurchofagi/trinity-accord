@@ -349,21 +349,18 @@ def verify_authorship_proof_submission(
     if not isinstance(draft, dict):
         return False, "MISSING_RECORD_DRAFT", "Missing record_draft."
 
-    # Verify payload hash against the canonical draft domain, then the narrow
-    # legacy Gateway-derived projection recovery domain if needed.
-    payload: bytes | None = None
-    payload_sha: str | None = None
-    for scope, _candidate_draft, candidate_payload, candidate_sha in _signing_payload_candidates(draft):
-        if candidate_sha == signed_payload_sha256:
-            payload = candidate_payload
-            payload_sha = candidate_sha
-            if scope != "record_draft":
-                logger.info("Submission authorship verified using legacy Gateway-derived projection recovery scope: %s", scope)
-            break
-    if payload is None or payload_sha is None:
-        primary_sha = _signing_payload_candidates(draft)[0][3]
+    # New/untrusted Gateway submissions must verify against exactly the draft
+    # bytes presented at the submission boundary. The legacy recovery domain
+    # (which strips Gateway-added ``created_at`` from historical pending files)
+    # is intentionally limited to repository-side pending/final verification.
+    # Applying it here would let a caller add an unsigned ``created_at`` field
+    # to an otherwise valid signed draft and still pass intake verification.
+    primary_draft = strip_authorship_for_signing(draft)
+    payload = canonical_bytes(primary_draft)
+    payload_sha = sha256_bytes(payload)
+    if payload_sha != signed_payload_sha256:
         return False, "AUTHORSHIP_PAYLOAD_SHA_MISMATCH", (
-            f"record_draft hash does not match signed_payload_sha256: expected {primary_sha}, got {signed_payload_sha256}."
+            f"record_draft hash does not match signed_payload_sha256: expected {payload_sha}, got {signed_payload_sha256}."
         )
     if proof.get("signed_message") != payload_sha:
         return False, "AUTHORSHIP_SIGNED_MESSAGE_MISMATCH", "signed_message does not match record_draft hash."

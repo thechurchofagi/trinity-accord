@@ -11,6 +11,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from waiting_heartbeat_capsule_integrity import (
+    capsule_claims_verified,
+    verified_capsule_binding_errors,
+    verified_capsule_is_bound,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 STATUS = ROOT / "api" / "waiting-heartbeat-status.json"
 CHAIN_TIP = ROOT / "record-chain" / "chain-tip.json"
@@ -60,9 +66,18 @@ def capsule_status(capsule: dict[str, Any] | None) -> str | None:
     return value if isinstance(value, str) else None
 
 
-def capsule_is_verified(capsule: dict[str, Any] | None) -> bool:
-    status = capsule_status(capsule)
-    return bool(capsule_txid(capsule)) and capsule.get("hash_match") is True and status in VERIFIED_CAPSULE_STATUSES
+def capsule_is_verified(
+    capsule: dict[str, Any] | None,
+    *,
+    capsule_path: Path | None = None,
+) -> bool:
+    if capsule_path is None:
+        return False
+    return verified_capsule_is_bound(
+        capsule,
+        capsule_path=capsule_path,
+        repository_root=ROOT,
+    )
 
 
 def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
@@ -84,7 +99,7 @@ def capsule_has_non_retryable_failure(capsule: dict[str, Any] | None) -> bool:
 def capsule_needs_fresh_upload(capsule: dict[str, Any] | None) -> bool:
     """Return whether the existing tx is exhausted and should be superseded.
 
-    A readback_hash_mismatch result must not wedge the workflow.  If a repair
+    A readback_hash_mismatch result must not wedge the workflow. If a repair
     run later proves the old tx contains a same-heartbeat capsule with the wrong
     bytes it can set next_action=fresh_upload_required; otherwise legacy
     mismatches fall through to a fresh upload below.
@@ -232,10 +247,22 @@ def main() -> int:
         return 0
 
     existing_result = load_existing_capsule_result(upload_result_path)
-    if capsule_is_verified(existing_result):
-        print(f"::notice::Verified Arweave capsule already exists for {heartbeat_id}; upload skipped.")
-        write_github_output({**common_outputs, "capsule_status": "already_verified", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_skip_reason": "existing_verified_arweave_capsule"})
-        return 0
+    if capsule_claims_verified(existing_result):
+        binding_errors = verified_capsule_binding_errors(
+            existing_result,
+            capsule_path=capsule_path,
+            repository_root=ROOT,
+        )
+        if binding_errors:
+            print("::error::Existing result claims a verified Arweave capsule but is not bound to local evidence.")
+            for error in binding_errors:
+                print(f"::error::{error}")
+            write_github_output({**common_outputs, "capsule_status": "invalid_verified_capsule_binding", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_hard_failure": "true", "capsule_skip_reason": "verified_result_not_bound_to_capsule_and_final_record"})
+            return 0
+        if capsule_is_verified(existing_result, capsule_path=capsule_path):
+            print(f"::notice::Verified Arweave capsule already exists for {heartbeat_id}; upload skipped.")
+            write_github_output({**common_outputs, "capsule_status": "already_verified", "capsule_upload_needed": "false", "capsule_readback_repair_needed": "false", "capsule_skip_reason": "existing_verified_arweave_capsule"})
+            return 0
 
     if capsule_has_non_retryable_failure(existing_result):
         existing_status = str(capsule_status(existing_result))
