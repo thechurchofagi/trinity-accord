@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   apply:
-    if: github.event.pull_request.head.ref == 'agent/fix-deep-audit-round3' && !contains(github.event.pull_request.head.sha, 'never')
+    if: github.event.pull_request.head.ref == 'agent/fix-deep-audit-round3'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -41,31 +41,7 @@ jobs:
           python -m py_compile scripts/trinity_record_chain.py apps/record_chain_intake_gateway/app.py apps/record_chain_intake_gateway/gateway/validation.py
           node --check downloads/record-chain-builder.mjs
       - name: Deep intake and append fault injection
-        id: deep_test
-        continue-on-error: true
-        run: |
-          set +e
-          python scripts/test_deep_intake_append_transaction_invariants.py > /tmp/deep-test.log 2>&1
-          code=$?
-          cat /tmp/deep-test.log
-          if [ "$code" -ne 0 ]; then
-            mkdir -p audit
-            cp /tmp/deep-test.log audit/deep-test-error.log
-          fi
-          exit "$code"
-      - name: Publish focused diagnostic
-        if: steps.deep_test.outcome == 'failure'
-        run: |
-          set -euo pipefail
-          git restore .
-          git config user.name 'trinity-deep-audit-bot'
-          git config user.email 'actions@github.com'
-          git add audit/deep-test-error.log
-          git commit -m 'audit: capture deep transaction test failure'
-          git push origin HEAD:agent/fix-deep-audit-round3
-      - name: Stop after focused failure
-        if: steps.deep_test.outcome == 'failure'
-        run: exit 1
+        run: python scripts/test_deep_intake_append_transaction_invariants.py
       - name: Gateway transaction recovery tests
         run: python -m pytest -q apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py
       - name: P0 transaction and finalizer contract
