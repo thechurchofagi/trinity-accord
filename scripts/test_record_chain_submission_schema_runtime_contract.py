@@ -43,6 +43,16 @@ def canonical_unsigned_fields() -> set[str]:
     raise SystemExit("UNSIGNED_PROJECTION_FIELDS assignment not found")
 
 
+def classification_content(rule: dict) -> dict:
+    return (
+        rule.get("then", {})
+        .get("properties", {})
+        .get("record_draft", {})
+        .get("properties", {})
+        .get("classification_update_content", {})
+    )
+
+
 schema_path = ROOT / "api" / "record-chain-submission-schema.v1.json"
 schema = json.loads(schema_path.read_text(encoding="utf-8"))
 record_draft = schema.get("properties", {}).get("record_draft", {})
@@ -72,19 +82,11 @@ classification_rules = [
     for rule in schema.get("allOf", [])
     if (((rule.get("if") or {}).get("properties") or {}).get("record_type") or {}).get("const")
     == "classification_update"
+    and classification_content(rule)
 ]
-require(len(classification_rules) == 1, f"expected one classification_update rule, found {len(classification_rules)}")
+require(len(classification_rules) == 1, f"expected one classification_update content rule, found {len(classification_rules)}")
 if len(classification_rules) == 1:
-    target = (
-        classification_rules[0]
-        .get("then", {})
-        .get("properties", {})
-        .get("record_draft", {})
-        .get("properties", {})
-        .get("classification_update_content", {})
-        .get("properties", {})
-        .get("target_record_id", {})
-    )
+    target = classification_content(classification_rules[0]).get("properties", {}).get("target_record_id", {})
     require(target.get("pattern") == "^R-[0-9]{9}$", "classification_update target_record_id must use canonical R-XXXXXXXXX format")
 
 if errors:
