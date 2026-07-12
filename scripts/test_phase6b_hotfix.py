@@ -254,6 +254,7 @@ def _setup_chain() -> Path:
     mod.write_json(mod.GENESIS / "genesis-batch-manifest.json", genesis_manifest)
     mod.CHAIN_TIP.write_text(json.dumps({
         "schema": "trinityaccord.chain-tip.v1",
+        "chain_id": mod.CHAIN_ID,
         "native_record_count": 0,
         "latest_record_index": 0,
         "latest_record_id": None,
