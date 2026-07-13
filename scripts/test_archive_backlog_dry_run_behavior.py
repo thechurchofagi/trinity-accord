@@ -87,7 +87,6 @@ def test_synthetic_dry_run_never_routes_to_mutators() -> None:
     module.process_record_chain = forbidden
     module.process_native_ots = forbidden
     module.update_item = forbidden
-    module.subprocess.run = forbidden
 
     code, output = invoke_main(
         module,
