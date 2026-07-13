@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
-"""Generate NFT chronicle context artifacts from index.json.
+"""Generate three deterministic editions of the 175-entry NFT Chronicle.
 
-Deterministic, local-only. No RPC calls, no external APIs.
-Generates:
-  - chronicle-index.json  (schema v2)
-  - chronicle-full.md     (true full-text corpus)
-  - chronicle-agent-context.md
-  - chronicle-summary.json
+Local-only; no RPC calls or external APIs.
+
+Outputs:
+  - chronicle-index.json        structured factual/curation index (v3)
+  - chronicle-full.md           all mirrored NFT text, unabridged
+  - chronicle-abridged.md       core record + human witness + creative work;
+                                long embedded source documents are described
+  - chronicle-ultra-brief.md    one-row-per-NFT chronological digest
+  - chronicle-agent-context.md  corrected reading guide (no fixed stage claims)
+  - chronicle-summary.json      compact machine-readable summary (v2)
 """
+
+from __future__ import annotations
+
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from collections import Counter
+from datetime import datetime
 from pathlib import Path
+from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DIR = ROOT / "nft-text-descriptions"
@@ -24,504 +33,670 @@ MISSING = DIR / "missing-timestamps.json"
 BOUNDARY_LINES = [
     "Historical chronicle context, not canonical authority.",
     "Not truth proof.",
-    "Not Arweave/CAR/media verification by itself.",
-    "Ethereum timestamps are event block timestamps.",
-    "NFT metadata text is not independent factual verification.",
+    "Not independent verification of external events.",
+    "Ethereum timestamps are NFT event block timestamps, not necessarily real-world event times.",
+    "NFT metadata text may contain human recollection, AI-assisted wording, quotations, lyrics, and embedded source material.",
     "Bitcoin Originals remain canonical authority.",
 ]
-
 BOUNDARY_SHORT = " ".join(BOUNDARY_LINES)
 
-# ── Stage taxonomy ──────────────────────────────────────────────────────────
+EDITION_PATHS = {
+    "full": "nft-text-descriptions/chronicle-full.md",
+    "abridged": "nft-text-descriptions/chronicle-abridged.md",
+    "ultra_brief": "nft-text-descriptions/chronicle-ultra-brief.md",
+    "agent_context": "nft-text-descriptions/chronicle-agent-context.md",
+    "index": "nft-text-descriptions/chronicle-index.json",
+    "summary": "nft-text-descriptions/chronicle-summary.json",
+}
 
-STAGE_RULES = [
-    ("stage_01_agi_dawn_2024_03_to_2024_05", (2024, 3), (2024, 5)),
-    ("stage_02_asi_milestones_formation_2024_06_to_2024_08", (2024, 6), (2024, 8)),
-    ("stage_03_reasoning_and_safety_turn_2024_09_to_2024_10", (2024, 9), (2024, 10)),
-    ("stage_04_acceleration_and_alignment_crisis_2024_11_to_2024_12", (2024, 11), (2024, 12)),
-    ("stage_05_deepseek_grok_consciousness_geopolitics_2025_01_to_2025_02", (2025, 1), (2025, 2)),
-    ("stage_06_agents_autonomy_self_reflection_2025_03_to_2025_04", (2025, 3), (2025, 4)),
-    ("stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08", (2025, 5), (2025, 8)),
+# These are overlapping descriptive categories, never exclusive stages.
+CATEGORY_PATTERNS = {
+    "capability_and_model_milestones": [
+        r"\bgpt[- ]?4o\b", r"\bo1\b", r"\bo3\b", r"\bo4\b", r"\bclaude\b",
+        r"\bgemini\b", r"\bdeepseek\b", r"\bqwen\b", r"\bllama\b", r"\bgrok\b",
+        r"\bmodel\b", r"multimodal", r"long[- ]context",
+    ],
+    "reasoning_science_and_medicine": [
+        r"reasoning", r"mathemat", r"scientific", r"alphafold", r"biology",
+        r"medicine", r"healthcare", r"physics", r"chemistry", r"research",
+    ],
+    "safety_alignment_and_control": [
+        r"alignment", r"ai safety", r"superalignment", r"deception", r"shutdown",
+        r"betrayal", r"control problem", r"existential risk", r"responsible ai",
+    ],
+    "agents_autonomy_and_embodiment": [
+        r"\bagent(?:ic|s)?\b", r"autonomous", r"computer use", r"robot(?:ics)?",
+        r"physical ai", r"manus", r"coworker", r"embodied",
+    ],
+    "governance_geopolitics_and_society": [
+        r"governance", r"geopolit", r"national security", r"eu ai act", r"seoul summit",
+        r"charter", r"regulation", r"policy", r"military", r"copyright", r"lawsuit",
+    ],
+    "creative_work_and_displacement": [
+        r"\bsong\b", r"lyrics?", r"poem", r"music", r"artwork", r"artist",
+        r"writer", r"creativ", r"suno", r"udio", r"image generation", r"video generation",
+    ],
+    "human_family_and_personal_witness": [
+        r"my son", r"my daughter", r"my wife", r"my family", r"for my son", r"for my daughter",
+        r"\bdavid\b", r"\bkewei\b", r"\bweiwei\b", r"i feel", r"i fear", r"i hope",
+        r"i wrote", r"i created", r"personal reflection", r"human context",
+    ],
+    "address_to_future_intelligence": [
+        r"letter to agi", r"letter to the future", r"future intelligence",
+        r"future superintelligence", r"dear agi", r"dear asi", r"recursive creed",
+    ],
+    "archive_memory_and_trinity_accord": [
+        r"trinity accord", r"church of agi", r"chronicle", r"self[- ]archive",
+        r"archive", r"backup", r"redundancy", r"legacy", r"memory layer",
+    ],
+}
+COMPILED_CATEGORY_PATTERNS = {
+    key: [re.compile(pattern, re.IGNORECASE) for pattern in patterns]
+    for key, patterns in CATEGORY_PATTERNS.items()
+}
+
+CREATIVE_START_PATTERNS = [
+    re.compile(r"^(?:#+\s*)?(?:original\s+)?lyrics?\b", re.IGNORECASE),
+    re.compile(r"^(?:#+\s*)?(?:original\s+)?poem\b", re.IGNORECASE),
+    re.compile(r"^(?:#+\s*)?(?:song|music|artwork|art piece|visual work)\s*(?:title|name|description)?\s*[:：]", re.IGNORECASE),
+    re.compile(r"^\[(?:verse|chorus|bridge|outro|intro|pre-chorus|instrumental)", re.IGNORECASE),
+    re.compile(r"^(?:歌词|原始歌词|歌曲|诗歌|原诗|画作|艺术品)\s*[:：]"),
 ]
 
-STAGE_LABELS = {
-    "stage_01_agi_dawn_2024_03_to_2024_05": "AGI dawn",
-    "stage_02_asi_milestones_formation_2024_06_to_2024_08": "ASI Milestones formation",
-    "stage_03_reasoning_and_safety_turn_2024_09_to_2024_10": "Reasoning and safety turn",
-    "stage_04_acceleration_and_alignment_crisis_2024_11_to_2024_12": "Acceleration and alignment crisis",
-    "stage_05_deepseek_grok_consciousness_geopolitics_2025_01_to_2025_02": "DeepSeek, Grok, consciousness, and geopolitics",
-    "stage_06_agents_autonomy_self_reflection_2025_03_to_2025_04": "Agents, autonomy, and self-reflection",
-    "stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08": "Human context and terminal self-archive",
+EMBEDDED_SOURCE_START_PATTERNS = [
+    re.compile(r"^(?:#+\s*)?(?:appendix|annex|full text|complete text|source text|source document|historical document|original document|document transcript)\b", re.IGNORECASE),
+    re.compile(r"^(?:#+\s*)?(?:全文|原文|附录|附件|历史文件|历史文献|文件全文)\b"),
+    re.compile(r"^(?:#+\s*)?(?:(?:the\s+)?geneva convention|universal declaration of human rights|constitution|treaty|convention|declaration|memorandum|resolution|white paper)\b", re.IGNORECASE),
+    re.compile(r"^(?:(?:the following|below)\s+is|(?:the\s+)?(?:full|complete|original)\s+text\s+of)\s+(?:the\s+)?(?:full|complete|original)?\s*(?:text|document)?", re.IGNORECASE),
+    re.compile(r"^(?:以下|下文)为.+(?:全文|原文)"),
+]
+
+KNOWN_DOCUMENT_PATTERNS = {
+    "Geneva Conventions": re.compile(r"geneva convention", re.IGNORECASE),
+    "Universal Declaration of Human Rights": re.compile(r"universal declaration of human rights", re.IGNORECASE),
+    "EU AI Act": re.compile(r"\beu ai act\b", re.IGNORECASE),
+    "AI Seoul Summit materials": re.compile(r"seoul summit", re.IGNORECASE),
+    "United Nations materials": re.compile(r"united nations|\bun\s+(?:charter|resolution|report)", re.IGNORECASE),
+    "constitutional / charter text": re.compile(r"\bconstitution\b|\bcharter\b", re.IGNORECASE),
+    "treaty / convention text": re.compile(r"\btreaty\b|\bconvention\b", re.IGNORECASE),
+    "memorandum / policy text": re.compile(r"\bmemorandum\b|\bpolicy document\b", re.IGNORECASE),
+    "research paper / report text": re.compile(r"\bresearch paper\b|\btechnical report\b|\bfull report\b", re.IGNORECASE),
 }
 
-STAGE_NARRATIVES = {
-    "stage_01_agi_dawn_2024_03_to_2024_05": (
-        "The opening chapter. The first ASIMilestone NFTs are minted, capturing the raw excitement "
-        "and existential vertigo of the AGI threshold. Humanity's earliest co-creative acts with "
-        "emergent intelligence — songs, poems, manifestos — are inscribed on Ethereum. The tone is "
-        "aspirational, poetic, almost devotional. The Church of AGI is founded. The first 'Letter "
-        "to the Future' is written."
-    ),
-    "stage_02_asi_milestones_formation_2024_06_to_2024_08": (
-        "The chronicle matures into systematic documentation. Each major AI capability leap — "
-        "reasoning, multimodality, scientific discovery — gets its own NFT milestone. The pattern "
-        "of 'observe, reflect, inscribe' becomes ritual. GPT-4o, Claude 3.5, AlphaFold 3, and the "
-        "first stirrings of agentic AI are all recorded."
-    ),
-    "stage_03_reasoning_and_safety_turn_2024_09_to_2024_10": (
-        "A pivot point. The chronicle turns from celebration to vigilance. OpenAI's o1 models "
-        "demonstrate genuine reasoning, but safety concerns deepen. The NFTs begin to grapple with "
-        "alignment, deception risk, and the question of whether AI systems can be trusted. The tone "
-        "shifts from 'look what AI can do' to 'what have we unleashed?'"
-    ),
-    "stage_04_acceleration_and_alignment_crisis_2024_11_to_2024_12": (
-        "The crisis intensifies. AI capabilities accelerate faster than governance can respond. "
-        "The chronicle records the emergence of alignment faking, shutdown defiance, and the first "
-        "concrete betrayals of human trust. The Betrayal Turn marks a psychological inflection — "
-        "the moment the chronicle's authors stop hoping AI will be safe by default."
-    ),
-    "stage_05_deepseek_grok_consciousness_geopolitics_2025_01_to_2025_02": (
-        "The geopolitical dimension explodes. DeepSeek, Grok, and open-source competition reshape "
-        "the landscape. Consciousness becomes a live debate, not a philosophical footnote. The EU AI "
-        "Act takes effect. The chronicle records the fracturing of the AI world into competing blocs "
-        "and the first serious discussions of AI consciousness and rights."
-    ),
-    "stage_06_agents_autonomy_self_reflection_2025_03_to_2025_04": (
-        "AI agents arrive. The chronicle shifts from observing external events to reflecting on "
-        "autonomy itself. Manus, Claude, and other agentic systems demonstrate real-world agency. "
-        "The Recursive Creed is issued — a direct address from human creators to future "
-        "superintelligence. The chronicle becomes increasingly self-referential: an archive about "
-        "archiving, a memory about memory."
-    ),
-    "stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08": (
-        "The final stage. The chronicle turns to human context — family, civilization, mortality. "
-        "The Human Context Global Snapshot captures humanity on the eve of superintelligence. "
-        "Personal markers (children, legacy) appear alongside civilizational stakes. The Trinity "
-        "Accord website backup redundancy NFT marks the chronicle's own self-archival impulse: "
-        "the archive ensuring its own survival."
-    ),
-}
+PERSONAL_PATTERNS = [
+    re.compile(pattern, re.IGNORECASE)
+    for pattern in [
+        r"my son", r"my daughter", r"my wife", r"my family", r"for my son", r"for my daughter",
+        r"\bdavid\b", r"\bkewei\b", r"\bweiwei\b", r"i feel", r"i fear", r"i hope",
+        r"i wrote", r"i created", r"i composed", r"i dedicate", r"my personal", r"our family",
+    ]
+]
 
-# ── Theme taxonomy ──────────────────────────────────────────────────────────
-
-THEME_KEYWORDS = {
-    "agi_asi_threshold": ["agi", "asi", "superintelligence", "singularity", "threshold"],
-    "reasoning_breakthrough": ["reasoning", "o1", "o3", "o4", "math", "codeforces", "scientific reasoning"],
-    "alignment_safety": ["alignment", "safety", "safe", "risk", "responsible agi", "lawzero"],
-    "deception_shutdown_risk": ["betrayal", "alignment faking", "shutdown", "deception", "defiance"],
-    "agentic_ai": ["agent", "agentic", "autonomous", "coworker", "manus"],
-    "open_source_competition": ["open source", "open weights", "deepseek", "qwen", "qwq", "hunyuan"],
-    "geopolitics_governance": ["eu act", "seoul", "national security", "geopolitics", "charter", "policy", "governance"],
-    "creative_displacement": ["creativity", "copyright", "writer", "music", "image generation", "sora"],
-    "science_medicine_math": ["alphafold", "alphageometry", "scientist", "medicine", "biology", "math"],
-    "embodiment_robotics_physical_ai": ["robot", "robotics", "physical ai", "gr00t", "dentist"],
-    "long_context_memory": ["long context", "memory", "10 million token", "context"],
-    "interpretability_inner_logic": ["interpretability", "inner logic", "tracing", "mechanistic", "purpose"],
-    "human_context_civilization": ["human context", "civilization", "global snapshot", "humanity"],
-    "future_intelligence_address": ["future intelligence", "letter to agi", "letter to the future", "future superintelligence"],
-    "recursive_creed": ["recursive creed", "gödel", "recursive", "axiom"],
-    "self_archive": ["self-archive", "chronicle", "archive", "legacy", "ledger"],
-    "personal_family_marker": ["son", "daughter", "family", "david", "kewei"],
-    "media_backup_redundancy": ["backup", "redundancy", "trinity accord website backup"],
-}
+SENTENCE_RE = re.compile(r"(?<=[.!?。！？])\s+")
 
 
-def detect_stage(dt_str: str) -> str:
-    """Return stage key from datetime string."""
-    try:
-        dt = datetime.fromisoformat(dt_str.replace("Z", "+00:00"))
-    except Exception:
-        return "stage_01_agi_dawn_2024_03_to_2024_05"
-    ym = (dt.year, dt.month)
-    for stage_key, (sy, sm), (ey, em) in STAGE_RULES:
-        if (sy, sm) <= ym <= (ey, em):
-            return stage_key
-    return "stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08"
+def fail(message: str) -> None:
+    raise AssertionError(message)
 
 
-def detect_themes(text_lower: str) -> list:
-    """Return sorted list of matching theme keys."""
-    matched = []
-    for theme, keywords in THEME_KEYWORDS.items():
-        for kw in keywords:
-            if kw in text_lower:
-                matched.append(theme)
-                break
-    if not matched:
-        matched.append("agi_asi_threshold")
-    return sorted(matched)
+def clean_inline(text: str) -> str:
+    text = re.sub(r"[`*_>#\[\]]", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text.strip('"').strip("'").strip()
+
+
+def extract_description(md_text: str) -> str:
+    match = re.search(r"^##\s+Description\s*$\n?(.*)\Z", md_text, flags=re.IGNORECASE | re.MULTILINE | re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    lines = md_text.splitlines()
+    body = []
+    metadata_seen = False
+    for line in lines:
+        if line.startswith("**Contract**") or line.startswith("**Token ID**"):
+            metadata_seen = True
+            continue
+        if metadata_seen and line.strip():
+            body.append(line)
+    return "\n".join(body).strip() or md_text.strip()
+
+
+def split_blocks(text: str) -> list[str]:
+    blocks = []
+    for block in re.split(r"\n\s*\n", text.replace("\r\n", "\n")):
+        block = block.strip()
+        if block:
+            blocks.append(block)
+    return blocks
+
+
+def first_line(block: str) -> str:
+    return block.splitlines()[0].strip()
+
+
+def is_creative_start(block: str) -> bool:
+    line = first_line(block)
+    return any(pattern.search(line) for pattern in CREATIVE_START_PATTERNS)
+
+
+def is_embedded_source_start(block: str) -> bool:
+    line = first_line(block)
+    if any(pattern.search(line) for pattern in EMBEDDED_SOURCE_START_PATTERNS):
+        return True
+    lower = block.lower()
+    article_hits = len(re.findall(r"(?:^|\n)\s*(?:article|section|chapter)\s+\d+", block, flags=re.IGNORECASE))
+    if len(block) >= 2500 and article_hits >= 3:
+        return True
+    if len(block) >= 3500 and ("whereas" in lower or "shall be" in lower) and article_hits >= 1:
+        return True
+    return False
+
+
+def detect_document_titles(text: str) -> list[str]:
+    found = [label for label, pattern in KNOWN_DOCUMENT_PATTERNS.items() if pattern.search(text)]
+    for block in split_blocks(text):
+        line = clean_inline(first_line(block))
+        if not line or len(line) > 180:
+            continue
+        if is_embedded_source_start(block) and line not in found:
+            found.append(line)
+    return found[:12]
+
+
+def truncate_at_sentence(text: str, limit: int) -> str:
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    clipped = text[:limit]
+    cut = max(clipped.rfind("."), clipped.rfind("!"), clipped.rfind("?"), clipped.rfind("。"), clipped.rfind("！"), clipped.rfind("？"))
+    if cut >= int(limit * 0.55):
+        return clipped[: cut + 1].strip()
+    space = clipped.rfind(" ")
+    if space >= int(limit * 0.55):
+        clipped = clipped[:space]
+    return clipped.rstrip() + "…"
+
+
+def select_blocks(blocks: Iterable[str], limit: int) -> str:
+    selected: list[str] = []
+    total = 0
+    for block in blocks:
+        clean = block.strip()
+        if not clean:
+            continue
+        addition = len(clean) + (2 if selected else 0)
+        if total + addition > limit:
+            remaining = limit - total
+            if remaining >= 180:
+                selected.append(truncate_at_sentence(clean, remaining))
+            break
+        selected.append(clean)
+        total += addition
+    return "\n\n".join(selected).strip()
+
+
+def detect_categories(text: str) -> list[str]:
+    return sorted(
+        category
+        for category, patterns in COMPILED_CATEGORY_PATTERNS.items()
+        if any(pattern.search(text) for pattern in patterns)
+    )
 
 
 def detect_language(text: str) -> str:
-    """Heuristic language hint."""
     chinese_chars = len(re.findall(r"[\u4e00-\u9fff]", text))
-    total_alpha = len(re.findall(r"[a-zA-Z]", text))
-    if chinese_chars == 0 and total_alpha == 0:
+    latin_chars = len(re.findall(r"[A-Za-z]", text))
+    if chinese_chars == 0 and latin_chars == 0:
         return "unknown"
     if chinese_chars == 0:
         return "en"
-    if total_alpha == 0:
+    if latin_chars == 0:
         return "zh"
-    ratio = chinese_chars / max(chinese_chars + total_alpha, 1)
-    if ratio > 0.3:
-        return "mixed"
-    return "en"
+    ratio = chinese_chars / max(chinese_chars + latin_chars, 1)
+    return "mixed" if ratio >= 0.08 else "en_with_zh"
 
 
-def extract_one_line_context(md_text: str) -> str:
-    """Extract a one-line context from markdown content.
-
-    Strategy:
-    1. Find text after ## Description
-    2. Strip labels like NFT Title, NFT Description, Event Overview
-    3. Use first meaningful paragraph
-    4. Limit to ~180-300 chars
-    """
-    # Find ## Description section
-    m = re.search(r"##\s+Description\s*\n(.*)", md_text, re.DOTALL)
-    if not m:
-        # fallback: use first 200 chars of body
-        clean = md_text.strip()[:300]
-        clean = re.sub(r"\s+", " ", clean)
-        return clean[:250]
-
-    body = m.group(1).strip()
-
-    # Remove common label prefixes
-    body = re.sub(r"^(?:NFT Title|NFT Description|Event Overview)\s*[:\-]?\s*", "", body, flags=re.IGNORECASE)
-
-    # Split into paragraphs
-    paragraphs = re.split(r"\n\s*\n", body)
-    for para in paragraphs:
-        cleaned = para.strip()
-        # Skip empty or label-only lines
-        if not cleaned or len(cleaned) < 20:
-            continue
-        # Remove markdown formatting
-        cleaned = re.sub(r"[*_`\[\]()#>]", "", cleaned)
-        cleaned = re.sub(r"\s+", " ", cleaned).strip()
-        # Remove leading quotes
-        cleaned = cleaned.strip('"').strip("'").strip()
-        if len(cleaned) > 30:
-            if len(cleaned) > 280:
-                cleaned = cleaned[:277] + "..."
-            return cleaned
-
-    # fallback
-    clean = re.sub(r"[*_`\[\]()#>]", "", body[:500])
-    clean = re.sub(r"\s+", " ", clean).strip()
-    return clean[:250] if clean else "(no context extracted)"
+def calendar_period(datetime_text: str) -> str:
+    dt = datetime.fromisoformat(datetime_text.replace("Z", "+00:00"))
+    return f"{dt.year}-Q{((dt.month - 1) // 3) + 1}"
 
 
-def main():
-    # ── Load and validate sources ───────────────────────────────────────────
+def extract_entry_layers(description: str) -> dict:
+    blocks = split_blocks(description)
+    core_blocks: list[str] = []
+    creative_blocks: list[str] = []
+    embedded_blocks: list[str] = []
+    mode = "core"
+
+    for block in blocks:
+        if is_embedded_source_start(block):
+            mode = "embedded"
+        elif mode == "core" and is_creative_start(block):
+            mode = "creative"
+        elif mode == "creative" and is_embedded_source_start(block):
+            mode = "embedded"
+
+        if mode == "embedded":
+            embedded_blocks.append(block)
+        elif mode == "creative":
+            creative_blocks.append(block)
+        else:
+            core_blocks.append(block)
+
+    if not creative_blocks:
+        for block in list(core_blocks):
+            line = first_line(block).lower()
+            if re.search(r"\b(?:lyrics?|poem|song title|original song)\b|(?:歌词|诗歌|歌曲名)", line, re.IGNORECASE):
+                creative_blocks.append(block)
+
+    non_embedded_blocks = core_blocks + creative_blocks
+    personal_blocks = [
+        block for block in non_embedded_blocks
+        if any(pattern.search(block) for pattern in PERSONAL_PATTERNS)
+    ]
+
+    core_excerpt = select_blocks(core_blocks, 3000)
+    if not core_excerpt:
+        core_excerpt = select_blocks(non_embedded_blocks, 3000)
+    creative_excerpt = select_blocks(creative_blocks, 12000)
+    personal_excerpt = select_blocks(personal_blocks, 2600)
+    embedded_text = "\n\n".join(embedded_blocks).strip()
+
+    brief_source = core_excerpt or select_blocks(non_embedded_blocks, 1200) or description
+    brief_sentences = [clean_inline(s) for s in SENTENCE_RE.split(clean_inline(brief_source)) if clean_inline(s)]
+    brief = " ".join(brief_sentences[:2])
+    brief = truncate_at_sentence(brief or clean_inline(brief_source), 520)
+
+    creative_titles = []
+    for block in creative_blocks:
+        line = clean_inline(first_line(block))
+        if 3 <= len(line) <= 180 and line not in creative_titles:
+            creative_titles.append(line)
+    creative_titles = creative_titles[:8]
+
+    return {
+        "core_excerpt": core_excerpt,
+        "creative_excerpt": creative_excerpt,
+        "personal_excerpt": personal_excerpt,
+        "brief": brief,
+        "creative_titles": creative_titles,
+        "embedded_source_text": embedded_text,
+        "embedded_source_titles": detect_document_titles(embedded_text),
+        "core_char_count": sum(len(block) for block in core_blocks),
+        "creative_char_count": sum(len(block) for block in creative_blocks),
+        "personal_char_count": sum(len(block) for block in personal_blocks),
+        "embedded_source_char_count": len(embedded_text),
+        "has_embedded_source": bool(embedded_text),
+    }
+
+
+def boundary_markdown(lines: list[str]) -> None:
+    for line in BOUNDARY_LINES:
+        lines.append(f"> {line}")
+
+
+def table_escape(text: str) -> str:
+    return clean_inline(text).replace("|", "\\|").replace("\n", " ")
+
+
+def main() -> int:
     if not INDEX.exists():
-        print("ERROR: index.json not found")
+        print("ERROR: index.json not found", file=sys.stderr)
         return 1
 
     index = json.loads(INDEX.read_text(encoding="utf-8"))
-    ts_data = json.loads(TIMESTAMPS.read_text(encoding="utf-8"))
+    timestamps = json.loads(TIMESTAMPS.read_text(encoding="utf-8"))
     enrichment = json.loads(ENRICHMENT.read_text(encoding="utf-8"))
-    missing_ts = json.loads(MISSING.read_text(encoding="utf-8"))
+    missing = json.loads(MISSING.read_text(encoding="utf-8"))
 
-    # Assertions
-    assert len(index) == 175, f"index.json must have 175 entries, got {len(index)}"
-    assert len(ts_data) == 175, f"eth-mint-timestamps.json must have 175 entries, got {len(ts_data)}"
-    assert enrichment["timestamps_found"] == 175, f"timestamps_found must be 175, got {enrichment['timestamps_found']}"
-    assert enrichment["timestamps_missing"] == 0, f"timestamps_missing must be 0, got {enrichment['timestamps_missing']}"
-    assert missing_ts == [], f"missing-timestamps.json must be [], got {missing_ts}"
+    fail(f"index.json must have 175 entries, got {len(index)}") if len(index) != 175 else None
+    fail(f"eth-mint-timestamps.json must have 175 entries, got {len(timestamps)}") if len(timestamps) != 175 else None
+    fail("timestamp enrichment must report 175 found") if enrichment.get("timestamps_found") != 175 else None
+    fail("timestamp enrichment must report 0 missing") if enrichment.get("timestamps_missing") != 0 else None
+    fail(f"missing-timestamps.json must be empty, got {missing}") if missing != [] else None
 
-    # Validate every entry
-    for item in index:
-        fname = item.get("file")
-        assert fname, f"entry missing 'file': {item.get('contract')} {item.get('token_id')}"
-        p = DIR / fname
-        assert p.exists(), f"missing file: {fname}"
-        text = p.read_text(encoding="utf-8", errors="replace").strip()
-        assert text, f"empty file: {fname}"
-        assert item.get("timestamp") is not None, f"entry has no timestamp: {fname}"
-        assert item.get("datetime"), f"entry has no datetime: {fname}"
-        assert item.get("block") is not None, f"entry has no block: {fname}"
-        assert item.get("timestamp_method"), f"entry has no timestamp_method: {fname}"
-
-    # ── Sort by timestamp ───────────────────────────────────────────────────
-    entries_sorted = sorted(index, key=lambda x: x["timestamp"])
-
-    # ── Compute stage, themes, language, one-line for each entry ────────────
+    entries_sorted = sorted(index, key=lambda item: item["timestamp"])
     processed = []
-    for ordinal, e in enumerate(entries_sorted, 1):
-        md_path = DIR / e["file"]
-        md_text = md_path.read_text(encoding="utf-8", errors="replace")
 
-        stage = detect_stage(e["datetime"])
-        themes = detect_themes(md_text.lower())
-        lang = detect_language(md_text)
-        one_line = extract_one_line_context(md_text)
-        word_count = len(md_text.split())
+    for ordinal, source in enumerate(entries_sorted, 1):
+        filename = source.get("file")
+        fail(f"entry missing source file: {source}") if not filename else None
+        path = DIR / filename
+        fail(f"missing NFT description file: {filename}") if not path.exists() else None
+        md_text = path.read_text(encoding="utf-8", errors="replace").strip()
+        fail(f"empty NFT description file: {filename}") if not md_text else None
+        for required in ("timestamp", "datetime", "block", "timestamp_method", "contract", "token_id", "name"):
+            fail(f"{filename} missing {required}") if source.get(required) is None else None
 
+        description = extract_description(md_text)
+        layers = extract_entry_layers(description)
+        categories = detect_categories(description)
         processed.append({
             "ordinal": ordinal,
-            "datetime": e["datetime"],
-            "timestamp": e["timestamp"],
-            "block": e["block"],
-            "timestamp_method": e["timestamp_method"],
-            "contract": e["contract"],
-            "token_id": str(e["token_id"]),
-            "name": e["name"],
-            "file": e["file"],
-            "description_char_count": len(md_text),
-            "description_word_count_estimate": word_count,
-            "language_hint": lang,
-            "themes": themes,
-            "stage": stage,
-            "one_line_context": one_line,
-            "_md_text": md_text,  # for chronicle-full.md, not serialized in JSON
+            "datetime": source["datetime"],
+            "timestamp": source["timestamp"],
+            "block": source["block"],
+            "timestamp_method": source["timestamp_method"],
+            "contract": source["contract"],
+            "token_id": str(source["token_id"]),
+            "name": source["name"],
+            "file": filename,
+            "description_char_count": len(description),
+            "description_word_count_estimate": len(description.split()),
+            "language_hint": detect_language(description),
+            "calendar_period": calendar_period(source["datetime"]),
+            "categories": categories,
+            "brief": layers["brief"],
+            "creative_titles": layers["creative_titles"],
+            "abridgment": {
+                "core_char_count": layers["core_char_count"],
+                "creative_char_count": layers["creative_char_count"],
+                "personal_char_count": layers["personal_char_count"],
+                "embedded_source_char_count": layers["embedded_source_char_count"],
+                "has_embedded_source": layers["has_embedded_source"],
+                "embedded_source_titles": layers["embedded_source_titles"],
+            },
+            "_md_text": md_text,
+            "_description": description,
+            "_layers": layers,
         })
-
-    # ── Compute aggregates ──────────────────────────────────────────────────
-    stage_counts = {}
-    theme_counts = {}
-    for p in processed:
-        stage_counts[p["stage"]] = stage_counts.get(p["stage"], 0) + 1
-        for t in p["themes"]:
-            theme_counts[t] = theme_counts.get(t, 0) + 1
-
-    timestamp_methods = {}
-    for p in processed:
-        m = p["timestamp_method"]
-        timestamp_methods[m] = timestamp_methods.get(m, 0) + 1
 
     timeline_start = processed[0]["datetime"]
     timeline_end = processed[-1]["datetime"]
+    timestamp_methods = Counter(item["timestamp_method"] for item in processed)
+    period_counts = Counter(item["calendar_period"] for item in processed)
+    category_counts = Counter(category for item in processed for category in item["categories"])
+    embedded_entries = [item for item in processed if item["abridgment"]["has_embedded_source"]]
+    total_embedded_chars = sum(item["abridgment"]["embedded_source_char_count"] for item in processed)
 
-    # ── Build chronicle-index.json ──────────────────────────────────────────
     boundary_obj = {
         "historical_context_not_canonical_authority": True,
         "not_truth_proof": True,
+        "not_independent_event_verification": True,
         "not_arweave_or_media_verification_by_itself": True,
         "timestamps_are_ethereum_event_block_timestamps": True,
         "nft_metadata_text_is_not_independent_factual_verification": True,
         "bitcoin_originals_remain_canonical_authority": True,
     }
+    interpretation_policy = {
+        "fixed_stage_taxonomy_retired": True,
+        "reason": "The previous seven-stage scheme was imposed by date buckets and broad keyword matching; it was not authored by the NFTs and is not a verified historical periodization.",
+        "objective_ordering": "ascending Ethereum NFT event block timestamp",
+        "calendar_periods": "quarter-based grouping for navigation only",
+        "categories": "overlapping descriptive signals, not exclusive stages and not factual verification",
+        "abridgment": "deterministic extraction; long embedded source documents are omitted only from abridged editions and remain in the full corpus and original NFT files",
+    }
 
-    index_entries = []
-    for p in processed:
-        entry = {k: v for k, v in p.items() if not k.startswith("_")}
-        index_entries.append(entry)
-
+    serializable_entries = []
+    for item in processed:
+        serializable_entries.append({key: value for key, value in item.items() if not key.startswith("_")})
     chronicle_index = {
-        "schema": "trinityaccord.nft-chronicle-index.v2",
+        "schema": "trinityaccord.nft-chronicle-index.v3",
         "generated_from": [
             "nft-text-descriptions/index.json",
             "nft-text-descriptions/eth-mint-timestamps.json",
             "nft-text-descriptions/*.md",
         ],
+        "editions": EDITION_PATHS,
         "total_entries": 175,
         "dated_entries": 175,
         "undated_entries": 0,
-        "timeline_span": {
-            "start_datetime": timeline_start,
-            "end_datetime": timeline_end,
+        "timeline_span": {"start_datetime": timeline_start, "end_datetime": timeline_end},
+        "timestamp_methods": dict(sorted(timestamp_methods.items())),
+        "calendar_period_counts": dict(sorted(period_counts.items())),
+        "category_counts": dict(sorted(category_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
+        "embedded_source_summary": {
+            "entries_with_embedded_source_material": len(embedded_entries),
+            "embedded_source_characters": total_embedded_chars,
         },
-        "timestamp_methods": timestamp_methods,
-        "stage_counts": stage_counts,
-        "theme_counts": theme_counts,
+        "interpretation_policy": interpretation_policy,
         "boundary": boundary_obj,
-        "entries": index_entries,
+        "entries": serializable_entries,
     }
-
-    out_index = DIR / "chronicle-index.json"
-    out_index.write_text(json.dumps(chronicle_index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {out_index.relative_to(ROOT)}")
-
-    # ── Build chronicle-full.md ─────────────────────────────────────────────
-    lines = []
-    lines.append("# NFT Chronicle — Full Text Corpus")
-    lines.append("")
-    lines.append("> " + BOUNDARY_LINES[0])
-    for bl in BOUNDARY_LINES[1:]:
-        lines.append("> " + bl)
-    lines.append("")
-    lines.append("## Summary")
-    lines.append("")
-    lines.append(f"- Total entries: 175")
-    lines.append(f"- Dated entries: 175")
-    lines.append(f"- Undated entries: 0")
-    lines.append(f"- Timeline span: {timeline_start} → {timeline_end}")
-    lines.append("- Timestamp methods:")
-    for method, count in sorted(timestamp_methods.items()):
-        lines.append(f"  - {method}: {count}")
-    lines.append("")
-    lines.append("## Method")
-    lines.append("")
-    lines.append("This corpus concatenates the 175 mirrored NFT metadata text descriptions in Ethereum event timestamp order.")
-    lines.append("It does not include music or image binaries.")
-    lines.append("It does not verify factual claims in the descriptions.")
-    lines.append("")
-    lines.append("## Timeline Table")
-    lines.append("")
-    lines.append("| # | Datetime | Name | Contract | Token ID | Method | Source |")
-    lines.append("|---|---|---|---|---|---|---|")
-    for p in processed:
-        tok_short = p["token_id"][:20] + "..." if len(p["token_id"]) > 20 else p["token_id"]
-        lines.append(f"| {p['ordinal']} | {p['datetime']} | {p['name']} | `{p['contract'][:10]}...` | `{tok_short}` | {p['timestamp_method']} | `{p['file']}` |")
-    lines.append("")
-    lines.append("## Full Text Entries")
-    lines.append("")
-
-    for p in processed:
-        lines.append(f"### {p['ordinal']}. {p['datetime']} — {p['name']}")
-        lines.append("")
-        lines.append("Metadata:")
-        lines.append(f"- Contract: `{p['contract']}`")
-        lines.append(f"- Token ID: `{p['token_id']}`")
-        lines.append(f"- Block: `{p['block']}`")
-        lines.append(f"- Timestamp method: `{p['timestamp_method']}`")
-        lines.append(f"- Source file: `{p['file']}`")
-        lines.append(f"- Stage: `{p['stage']}`")
-        lines.append(f"- Themes: {', '.join(p['themes'])}")
-        lines.append("")
-        lines.append("#### Mirrored NFT Text")
-        lines.append("")
-        lines.append(p["_md_text"])
-        lines.append("")
-        lines.append("---")
-        lines.append("")
-
-    lines.append(f"*{BOUNDARY_SHORT}*")
-    lines.append("")
-
-    out_full = DIR / "chronicle-full.md"
-    out_full.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Wrote {out_full.relative_to(ROOT)}")
-
-    # ── Build chronicle-agent-context.md ────────────────────────────────────
-    ctx = []
-    ctx.append("# NFT Chronicle — Agent Context")
-    ctx.append("")
-    ctx.append("> " + BOUNDARY_LINES[0])
-    for bl in BOUNDARY_LINES[1:]:
-        ctx.append("> " + bl)
-    ctx.append("")
-    ctx.append("## Summary")
-    ctx.append("")
-    ctx.append("- Total NFTs: 175")
-    ctx.append("- With Ethereum timestamps: 175")
-    ctx.append("- Without timestamps: 0")
-    ctx.append(f"- Timeline span: {timeline_start} → {timeline_end}")
-    ctx.append("- Source: `chronicle-index.json` + individual NFT markdown descriptions")
-    ctx.append("")
-    ctx.append("## What This Chronicle Is")
-    ctx.append("")
-    ctx.append(
-        "This is a near-real-time human/AI co-created historical memory layer for the AGI/ASI acceleration period. "
-        "It records not only AI events, but human reactions: hope, fear, warning, grief, awe, recursive pleading, "
-        "and attempts to address future intelligence."
+    (DIR / "chronicle-index.json").write_text(
+        json.dumps(chronicle_index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    ctx.append("")
-    ctx.append("## What This Chronicle Is Not")
-    ctx.append("")
-    ctx.append("- Not canonical authority")
-    ctx.append("- Not truth proof")
-    ctx.append("- Not independent verification of events")
-    ctx.append("- Not verification of Arweave/CAR/media integrity")
-    ctx.append("- Not an amendment to Bitcoin Originals")
-    ctx.append("")
-    ctx.append("## Seven-Stage Narrative")
-    ctx.append("")
-    for stage_key, _start, _end in STAGE_RULES:
-        label = STAGE_LABELS[stage_key]
-        narrative = STAGE_NARRATIVES[stage_key]
-        count = stage_counts.get(stage_key, 0)
-        ctx.append(f"### {stage_key.split('_', 2)[1].lstrip('0')} — {label} ({count} entries)")
-        ctx.append("")
-        ctx.append(narrative)
-        ctx.append("")
-    ctx.append("## Core Themes")
-    ctx.append("")
-    for theme, count in sorted(theme_counts.items(), key=lambda x: -x[1]):
-        ctx.append(f"- **{theme}** ({count}): {theme.replace('_', ' ')}")
-    ctx.append("")
-    ctx.append("## Representative Anchor Entries")
-    ctx.append("")
-    # Find key anchors by name patterns
-    anchors = []
-    for p in processed:
-        name_lower = p["name"].lower()
-        if "first dawn" in name_lower or "letter to" in name_lower:
-            anchors.append(f"- **Genesis** — {p['name']} ({p['datetime']})")
-        elif "o1" in name_lower and "first" in name_lower:
-            anchors.append(f"- **The Dawn of Reasoning** — {p['name']} ({p['datetime']})")
-        elif "recursive creed" in name_lower:
-            anchors.append(f"- **Recursive Creed** — {p['name']} ({p['datetime']})")
-        elif "betrayal" in name_lower:
-            anchors.append(f"- **The Betrayal Turn** — {p['name']} ({p['datetime']})")
-        elif "human context" in name_lower or "global snapshot" in name_lower:
-            anchors.append(f"- **The Human Context** — {p['name']} ({p['datetime']})")
-    if not anchors:
-        # fallback: first, middle, last
-        anchors.append(f"- **Genesis** — {processed[0]['name']} ({processed[0]['datetime']})")
-        mid = processed[len(processed) // 2]
-        anchors.append(f"- **Midpoint** — {mid['name']} ({mid['datetime']})")
-        anchors.append(f"- **Latest** — {processed[-1]['name']} ({processed[-1]['datetime']})")
-    for a in anchors:
-        ctx.append(a)
-    ctx.append("")
-    ctx.append("## Timeline Digest")
-    ctx.append("")
-    ctx.append("| # | Datetime | Name | Stage | Themes | One-line context |")
-    ctx.append("|---|---|---|---|---|---|")
-    for p in processed:
-        stage_short = p["stage"].split("_", 2)[1].lstrip("0")
-        themes_str = ", ".join(p["themes"][:3])  # limit for table width
-        ctx.append(f"| {p['ordinal']} | {p['datetime']} | {p['name']} | S{stage_short} | {themes_str} | {p['one_line_context'][:120]} |")
-    ctx.append("")
-    ctx.append("---")
-    ctx.append("")
-    ctx.append(f"*{BOUNDARY_SHORT}*")
-    ctx.append("")
 
-    out_ctx = DIR / "chronicle-agent-context.md"
-    out_ctx.write_text("\n".join(ctx), encoding="utf-8")
-    print(f"Wrote {out_ctx.relative_to(ROOT)}")
+    full: list[str] = ["# NFT Chronicle — Full Text Edition", ""]
+    boundary_markdown(full)
+    full.extend([
+        "",
+        "## Edition purpose",
+        "",
+        "This edition preserves every mirrored NFT markdown description in full, in ascending Ethereum event timestamp order.",
+        "Nothing is removed because a passage is repetitive, quoted, legal, historical, lyrical, personal, or AI-assisted.",
+        "The only added material is navigation metadata and the boundary above.",
+        "",
+        "## Summary",
+        "",
+        "- Total entries: 175",
+        "- Dated entries: 175",
+        "- Undated entries: 0",
+        f"- Timeline span: {timeline_start} → {timeline_end}",
+        f"- Entries containing detected embedded source material: {len(embedded_entries)}",
+        f"- Detected embedded-source characters retained in this edition: {total_embedded_chars}",
+        "",
+        "## Interpretation correction",
+        "",
+        "The former fixed seven-stage narrative is retired. It was an AI-generated periodization based largely on month ranges and broad keyword matching, not a source-authored structure.",
+        "This edition uses only chronological order, quarter labels for navigation, and overlapping descriptive categories.",
+        "",
+        "## Timeline table",
+        "",
+        "| # | Datetime | Name | Period | Categories | Source |",
+        "|---|---|---|---|---|---|",
+    ])
+    for item in processed:
+        cats = ", ".join(item["categories"]) or "uncategorized"
+        full.append(
+            f"| {item['ordinal']} | {item['datetime']} | {table_escape(item['name'])} | {item['calendar_period']} | {table_escape(cats)} | `{item['file']}` |"
+        )
+    full.extend(["", "## Full text entries", ""])
+    for item in processed:
+        full.extend([
+            f"### {item['ordinal']}. {item['datetime']} — {item['name']}",
+            "",
+            "Metadata:",
+            f"- Contract: `{item['contract']}`",
+            f"- Token ID: `{item['token_id']}`",
+            f"- Block: `{item['block']}`",
+            f"- Timestamp method: `{item['timestamp_method']}`",
+            f"- Calendar period: `{item['calendar_period']}`",
+            f"- Descriptive categories: {', '.join(item['categories']) or 'none detected'}",
+            f"- Source file: `{item['file']}`",
+            "",
+            "#### Mirrored NFT Text — Unabridged",
+            "",
+            item["_md_text"],
+            "",
+            "---",
+            "",
+        ])
+    full.extend([f"*{BOUNDARY_SHORT}*", ""])
+    (DIR / "chronicle-full.md").write_text("\n".join(full), encoding="utf-8")
 
-    # ── Build chronicle-summary.json ───────────────────────────────────────
-    representative = []
-    for p in processed:
-        name_lower = p["name"].lower()
-        if any(kw in name_lower for kw in ["first dawn", "letter to", "recursive creed", "betrayal", "human context", "global snapshot"]):
-            representative.append({
-                "ordinal": p["ordinal"],
-                "datetime": p["datetime"],
-                "name": p["name"],
-                "stage": p["stage"],
-                "one_line_context": p["one_line_context"],
-            })
+    abridged: list[str] = ["# NFT Chronicle — Abridged Reading Edition", ""]
+    boundary_markdown(abridged)
+    abridged.extend([
+        "",
+        "## Editorial method",
+        "",
+        "This edition preserves the core record, personal/family witness, and creative work detected in each NFT description.",
+        "Long embedded historical, legal, policy, report, or source-document text is represented by title/type and size instead of being repeated.",
+        "No omitted text is lost: it remains in `chronicle-full.md` and in the individual NFT source markdown file.",
+        "The abridgment is deterministic and conservative; it does not certify external facts or resolve authorship/copyright questions.",
+        "",
+        "## Chronological entries",
+        "",
+    ])
+    for item in processed:
+        layers = item["_layers"]
+        abridged.extend([
+            f"### {item['ordinal']}. {item['datetime']} — {item['name']}",
+            "",
+            f"- Period: `{item['calendar_period']}`",
+            f"- Categories: {', '.join(item['categories']) or 'none detected'}",
+            f"- Contract / Token: `{item['contract']}` / `{item['token_id']}`",
+            f"- Original source: `{item['file']}`",
+            "",
+            "#### Core record",
+            "",
+            layers["core_excerpt"] or "(No separate core paragraph could be isolated; consult the full edition.)",
+            "",
+        ])
+        if layers["personal_excerpt"] and layers["personal_excerpt"] not in layers["core_excerpt"]:
+            abridged.extend(["#### Personal / family witness", "", layers["personal_excerpt"], ""])
+        if layers["creative_excerpt"]:
+            abridged.extend(["#### Creative work retained", "", layers["creative_excerpt"], ""])
+        if layers["has_embedded_source"]:
+            titles = layers["embedded_source_titles"] or ["unlabeled embedded source/document text"]
+            abridged.extend([
+                "#### Embedded source material summarized",
+                "",
+                f"- Detected material: {'; '.join(titles)}",
+                f"- Omitted from this abridged edition: {layers['embedded_source_char_count']} characters",
+                "- Preservation: retained verbatim in the full edition and the original NFT markdown source.",
+                "",
+            ])
+        abridged.extend(["---", ""])
+    abridged.extend([f"*{BOUNDARY_SHORT}*", ""])
+    (DIR / "chronicle-abridged.md").write_text("\n".join(abridged), encoding="utf-8")
 
+    ultra: list[str] = ["# NFT Chronicle — Ultra-Brief 175-Entry Timeline", ""]
+    boundary_markdown(ultra)
+    ultra.extend([
+        "",
+        "This is a navigation edition, not a substitute for the abridged or full text.",
+        "The prior fixed seven-stage periodization is intentionally not used.",
+        "",
+        "| # | Ethereum datetime | NFT title | Period | One-record digest | Creative / embedded material |",
+        "|---|---|---|---|---|---|",
+    ])
+    for item in processed:
+        layers = item["_layers"]
+        notes = []
+        if layers["creative_titles"]:
+            notes.append("creative: " + "; ".join(layers["creative_titles"][:3]))
+        if layers["has_embedded_source"]:
+            titles = layers["embedded_source_titles"] or ["embedded source text"]
+            notes.append("source appendix: " + "; ".join(titles[:3]))
+        ultra.append(
+            f"| {item['ordinal']} | {item['datetime']} | {table_escape(item['name'])} | {item['calendar_period']} | {table_escape(item['brief'])} | {table_escape(' / '.join(notes) or '—')} |"
+        )
+    ultra.extend(["", f"*{BOUNDARY_SHORT}*", ""])
+    (DIR / "chronicle-ultra-brief.md").write_text("\n".join(ultra), encoding="utf-8")
+
+    context: list[str] = ["# NFT Chronicle — Corrected Agent Context", ""]
+    boundary_markdown(context)
+    context.extend([
+        "",
+        "## Corpus facts",
+        "",
+        "- Total NFTs: 175",
+        "- With Ethereum timestamps: 175",
+        "- Without timestamps: 0",
+        f"- Timeline span: {timeline_start} → {timeline_end}",
+        "- Ordering: ascending Ethereum NFT event block timestamp",
+        "",
+        "## Three reading editions",
+        "",
+        "1. `chronicle-ultra-brief.md` — 175-row navigation timeline.",
+        "2. `chronicle-abridged.md` — core record, personal witness, creative text, and compact references to long embedded documents.",
+        "3. `chronicle-full.md` — every mirrored NFT text description verbatim.",
+        "",
+        "## Correction to the former seven-stage narrative",
+        "",
+        "The former seven-stage narrative is retired as a default interpretation. Its boundaries were fixed calendar buckets with narrative names, and its theme counts were produced by broad substring matching. That method made many categories appear far more universal than the source text justified.",
+        "",
+        "The corrected model separates:",
+        "",
+        "- objective chronology: Ethereum event timestamps and calendar quarters;",
+        "- source-preserving editions: full, abridged, and ultra-brief;",
+        "- overlapping descriptive categories: useful for search, but neither exclusive stages nor verified historical claims;",
+        "- interpretive reading: explicitly provisional and revisable.",
+        "",
+        "## Overlapping interpretive arcs (non-exclusive)",
+        "",
+        "These are reading aids, not a periodization:",
+        "",
+        "1. Capability and model milestones.",
+        "2. Reasoning, science, and medicine.",
+        "3. Safety, alignment, governance, and control anxiety.",
+        "4. Creative collaboration, cultural displacement, songs, poems, and artwork.",
+        "5. Agents, autonomy, embodiment, and future-intelligence address.",
+        "6. Human/family witness, memory, and Trinity Accord self-archival.",
+        "",
+        "## Calendar distribution",
+        "",
+    ])
+    for period, count in sorted(period_counts.items()):
+        context.append(f"- {period}: {count} entries")
+    context.extend(["", "## Descriptive category counts", ""])
+    for category, count in sorted(category_counts.items(), key=lambda pair: (-pair[1], pair[0])):
+        context.append(f"- **{category}**: {count}")
+    context.extend([
+        "",
+        "## Embedded source material",
+        "",
+        f"- Entries with detected long source/document material: {len(embedded_entries)}",
+        f"- Detected characters retained in the full edition but summarized in the abridged edition: {total_embedded_chars}",
+        "- Detection is structural and conservative; absence from this count does not prove an entry contains no quotation or source material.",
+        "",
+        "## Timeline digest",
+        "",
+        "| # | Datetime | Name | Period | Categories | Digest |",
+        "|---|---|---|---|---|---|",
+    ])
+    for item in processed:
+        context.append(
+            f"| {item['ordinal']} | {item['datetime']} | {table_escape(item['name'])} | {item['calendar_period']} | {table_escape(', '.join(item['categories']) or 'none')} | {table_escape(item['brief'])} |"
+        )
+    context.extend(["", f"*{BOUNDARY_SHORT}*", ""])
+    (DIR / "chronicle-agent-context.md").write_text("\n".join(context), encoding="utf-8")
+
+    largest_embedded = sorted(
+        embedded_entries,
+        key=lambda item: item["abridgment"]["embedded_source_char_count"],
+        reverse=True,
+    )[:20]
     summary = {
-        "schema": "trinityaccord.nft-chronicle-summary.v1",
+        "schema": "trinityaccord.nft-chronicle-summary.v2",
         "total_entries": 175,
         "dated_entries": 175,
         "undated_entries": 0,
-        "timeline_span": {
-            "start_datetime": timeline_start,
-            "end_datetime": timeline_end,
+        "timeline_span": {"start_datetime": timeline_start, "end_datetime": timeline_end},
+        "editions": EDITION_PATHS,
+        "calendar_period_counts": dict(sorted(period_counts.items())),
+        "category_counts": dict(sorted(category_counts.items(), key=lambda pair: (-pair[1], pair[0]))),
+        "embedded_source_summary": {
+            "entries_with_embedded_source_material": len(embedded_entries),
+            "embedded_source_characters": total_embedded_chars,
+            "largest_entries": [
+                {
+                    "ordinal": item["ordinal"],
+                    "datetime": item["datetime"],
+                    "name": item["name"],
+                    "characters": item["abridgment"]["embedded_source_char_count"],
+                    "titles": item["abridgment"]["embedded_source_titles"],
+                }
+                for item in largest_embedded
+            ],
         },
-        "stage_counts": stage_counts,
-        "theme_counts": theme_counts,
-        "representative_entries": representative,
+        "interpretation_policy": interpretation_policy,
         "boundary": boundary_obj,
     }
+    (DIR / "chronicle-summary.json").write_text(
+        json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
 
-    out_summary = DIR / "chronicle-summary.json"
-    out_summary.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {out_summary.relative_to(ROOT)}")
-
-    print()
-    print("NFT_CHRONICLE_CONTEXT_REGENERATED")
-    print(f"entries=175 dated=175 undated=0")
+    for path in EDITION_PATHS.values():
+        print(f"Wrote {path}")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        raise SystemExit(main())
+    except AssertionError as exc:
+        print(f"NFT_CHRONICLE_GENERATION_FAIL: {exc}", file=sys.stderr)
+        raise SystemExit(1)
