@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -33,16 +34,23 @@ def main() -> int:
 
     for needle in [
         "workflow_dispatch:",
-        "cron: \"17 * * * *\"",
+        'cron: "17 * * * *"',
         "contents: write",
+        "group: main-write-lock",
+        "timeout-minutes: 35",
         "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
         "fetch-depth: 0",
+        "ref: main",
         'actor="${GITHUB_ACTOR:-}"',
         '[[ "$actor" != "thechurchofagi" && "$actor" != "github-actions[bot]" ]]',
         'Authorized actor: $actor',
         "python3 scripts/detect_archive_backlog.py --write",
-        "--kind record_chain_arweave --max-items 1 --mode live",
-        "--kind native_ots_bundle --max-items 2 --enable-paid-upload",
+        "--kind record_chain_arweave",
+        "--kind native_ots_bundle",
+        "--max-items 1",
+        "--max-items 2",
+        "--mode live",
+        "--enable-paid-upload",
         "scripts/restore_json_if_only_volatile_changes.py",
         "archive: repair backlog and wallet status metadata",
         "Forbidden write path",
@@ -56,6 +64,12 @@ def main() -> int:
         "record-chain/ots/native-arweave-bundles/",
         "record-chain/ots/native-arweave-registry.json",
         "api/record-chain-native-ots-arweave-registry.json",
+        "set -euo pipefail",
+        "regenerate_and_stage",
+        "git rebase origin/main",
+        "git commit --amend --no-edit",
+        "git push origin HEAD:main",
+        "done < <(git diff --cached --name-only)",
     ]:
         require(needle in workflow, f"workflow missing {needle}")
 
@@ -63,9 +77,44 @@ def main() -> int:
         'case "${{ github.actor }}" in' not in workflow,
         "workflow must not use an unescaped case pattern for github-actions[bot]",
     )
+    require(
+        "${GITHUB_REF_NAME:-main}" not in workflow,
+        "write workflow must not push a manually selected dispatch branch",
+    )
+    require(
+        "if git diff --quiet" not in workflow,
+        "workflow must stage explicit evidence before deciding whether changes exist",
+    )
 
-    for needle in ["waiting_for_key", "upgrade_due", "upgrade_failed", "upgrade_native_ots_anchor", "retry_native_ots_upgrade", "upload_failed", "readback_failed", "archived", "retry_count", "last_attempt_at", "last_error", "next_action"]:
+    for needle in [
+        "dry_run_preview",
+        'if args.mode == "dry-run"',
+        '"repository_mutation": False',
+        '"subprocess_execution": False',
+        '"would_increment_retry_count": False',
+        "waiting_for_key",
+        "upgrade_due",
+        "upgrade_failed",
+        "upgrade_native_ots_anchor",
+        "retry_native_ots_upgrade",
+        "upload_failed",
+        "readback_failed",
+        "archived",
+        "retry_count",
+        "last_attempt_at",
+        "last_error",
+        "next_action",
+    ]:
         require(needle in processor, f"processor missing {needle}")
+
+    require(
+        processor.find('if args.mode == "dry-run"') < processor.find("run_detector_write()", processor.find("def main")),
+        "processor must route dry-run before detector writes",
+    )
+    require(
+        "return process_native_ots(args.max_items, args.enable_paid_upload)" in processor,
+        "explicit live Native OTS route missing",
+    )
 
     for needle in ["posted_pending_readback", "readback_failed", "retryable", "fs.writeFileSync(outPath"]:
         require(needle in uploader, f"uploader missing durable result marker {needle}")
@@ -79,7 +128,20 @@ def main() -> int:
     for needle in ["BACKLOG_FILES", "archive_backlog", "archive: repair backlog and wallet status metadata", "github-actions[bot]"]:
         require(needle in guard, f"write-path guard missing {needle}")
 
-    # Business workflow must NOT directly write homepage status
+    behavior = ROOT / "scripts/test_archive_backlog_dry_run_behavior.py"
+    require(behavior.exists(), "archive backlog dry-run behavior test missing")
+    result = subprocess.run(
+        [sys.executable, str(behavior)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    require(
+        result.returncode == 0,
+        "archive backlog dry-run behavior failed:\n" + (result.stderr or result.stdout)[-5000:],
+    )
+
+    # Business workflow must NOT directly write homepage status.
     for forbidden in [
         "generate_record_chain_status.py",
         "generate_public_home_status.py",
@@ -89,9 +151,11 @@ def main() -> int:
         "index.md",
         "sitemap.xml",
     ]:
-        require(forbidden not in workflow, f"archive backlog repair workflow must not directly write homepage status: {forbidden}")
+        require(
+            forbidden not in workflow,
+            f"archive backlog repair workflow must not directly write homepage status: {forbidden}",
+        )
 
-    # Homepage sync must listen to this workflow
     home_sync = read(".github/workflows/homepage-status-sync.yml")
     for needle in ["Archive backlog repair", "scripts/update_public_generated_artifacts.py"]:
         require(needle in home_sync, f"homepage sync missing {needle}")
