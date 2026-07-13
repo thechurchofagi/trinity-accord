@@ -19,6 +19,7 @@ jobs:
         run: |
           set -euo pipefail
           node <<'NODE'
+          const crypto = require('crypto');
           const contract = process.env.CONTRACT;
           const networks = [
             ['ethereum', 'https://ethereum-rpc.publicnode.com'],
@@ -65,9 +66,10 @@ jobs:
             try {
               row.chain_id_hex = await rpc(url, 'eth_chainId', []);
               row.chain_id = Number.parseInt(row.chain_id_hex, 16);
-              row.code = await rpc(url, 'eth_getCode', [contract, 'latest']);
-              row.code_bytes = row.code && row.code !== '0x' ? (row.code.length - 2) / 2 : 0;
+              const code = await rpc(url, 'eth_getCode', [contract, 'latest']);
+              row.code_bytes = code && code !== '0x' ? (code.length - 2) / 2 : 0;
               row.deployed = row.code_bytes > 0;
+              row.code_sha256 = row.deployed ? crypto.createHash('sha256').update(code).digest('hex') : null;
             } catch (error) {
               row.error = String(error?.message || error);
             }
