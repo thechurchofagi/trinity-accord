@@ -1,4 +1,4 @@
-name: TEMP Diagnose Chronicle P0
+name: TEMP Repair Chronicle P0
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  diagnose:
+  repair:
     if: ${{ github.head_ref == 'agent/rebuild-nft-chronicle-editions' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -35,21 +35,23 @@ jobs:
       - name: Install CI dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
-      - name: Reproduce P0 and persist diagnostic tail
+      - name: Regenerate routes and verify P0
         run: |
-          set +e
-          python3 scripts/run_ci_group.py p0-current > p0-diagnostic.full.log 2>&1
-          status=$?
-          {
-            echo "exit_status=$status"
-            echo "--- last 300 lines ---"
-            tail -n 300 p0-diagnostic.full.log
-          } > p0-diagnostic.log
-          rm -f p0-diagnostic.full.log
+          set -euo pipefail
+          python3 scripts/generate_nft_chronicle_context.py
+          python3 scripts/test_public_api_source_digest_if_present.py
+          python3 scripts/run_ci_group.py p0-current
 
+      - name: Commit repaired generated metadata
+        run: |
+          set -euo pipefail
+          rm -f p0-diagnostic.log
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add p0-diagnostic.log
-          git commit -m "Record temporary Chronicle P0 diagnostic" || true
+          git add -A api/agent-task-router.v1.json p0-diagnostic.log
+          if git diff --cached --quiet; then
+            echo "No generated metadata drift"
+            exit 0
+          fi
+          git commit -m "Refresh Chronicle router source digest"
           git push origin HEAD:agent/rebuild-nft-chronicle-editions
-          exit "$status"
