@@ -23,6 +23,7 @@ def main() -> None:
     errors: list[str] = []
 
     head_wf = ROOT / ".github" / "workflows" / "record-chain-head-ots-anchor.yml"
+    tip_helper = ROOT / "scripts" / "check_native_ots_latest_matches_chain_tip.py"
     arweave_wf = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
     data_wf = ROOT / ".github" / "workflows" / "record-chain-data-arweave-archive.yml"
 
@@ -34,11 +35,12 @@ def main() -> None:
             "requirements-ci.txt",
             "trinity_record_chain.py verify",
             "ots_anchor_native_record_chain_head.py",
-            "record-chain-native-ots-latest.json",
             "record-chain/ots/native-anchors",
-            "legacy_main_chain_jsonl_is_not_source",
+            "check_native_ots_latest_matches_chain_tip.py",
             '"Record Chain Auto Finalize"',
             '"Append Record Chain Entries"',
+            "head_branch == 'main'",
+            "git push origin HEAD:main",
         ]:
             require_contains(head_wf, marker, errors)
 
@@ -49,8 +51,31 @@ def main() -> None:
             "record-chain-ots-latest.json",
             "record-chain/ots/anchors",
             "verify_record_chain_integrity.py",
+            "${GITHUB_REF_NAME",
         ]:
             require_not_contains(head_wf, forbidden, errors)
+
+        head_text = head_wf.read_text(encoding="utf-8")
+        if head_text.count("check_native_ots_latest_matches_chain_tip.py") < 2:
+            errors.append("record-chain-head-ots-anchor.yml must revalidate the native OTS tip after rebase")
+
+    if not tip_helper.exists():
+        errors.append("missing scripts/check_native_ots_latest_matches_chain_tip.py")
+    else:
+        for marker in [
+            "record-chain/chain-tip.json",
+            "api/record-chain-native-ots-latest.json",
+            "legacy_main_chain_jsonl_is_not_source",
+            "latest_record_id",
+            "latest_record_sha256",
+            "native_record_count",
+            "latest_anchored_file",
+            "latest_anchor_file",
+            "latest_ots_file",
+            "trinity-accord-public-reception-ledger",
+        ]:
+            require_contains(tip_helper, marker, errors)
+        require_not_contains(tip_helper, "record-chain/hash-chain/main.chain.jsonl", errors)
 
     if not arweave_wf.exists():
         errors.append("missing .github/workflows/record-chain-arweave-archive.yml")
@@ -102,7 +127,7 @@ def main() -> None:
     if errors:
         print("M9 native archive workflow contract FAILED:", file=sys.stderr)
         for error in errors:
-            print(f"  - {error}")
+            print(f"  - {error}", file=sys.stderr)
         raise SystemExit(1)
 
     print("M9 native archive workflow contract PASSED.")
