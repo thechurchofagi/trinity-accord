@@ -1,12 +1,13 @@
 {
-  "schema": "trinityaccord.context-pack.nft-chronicle-context.v2",
-  "version": "v2",
+  "schema": "trinityaccord.context-pack.nft-chronicle-context.v3",
+  "version": "v3",
   "status": "non_authoritative_agent_context_pack",
-  "purpose": "Tell agents how to load and use the completed NFT Chronicle as historical, emotional, and human-origin witness context without treating it as canonical authority or truth proof.",
-  "load_policy": "read_index_then_task_specific_full_load",
+  "purpose": "Tell agents how to load and use the completed 175-entry NFT Chronicle as historical, emotional, artistic, and human-origin witness context without treating it as canonical authority or truth proof.",
+  "load_policy": "ultra_brief_then_abridged_then_task_specific_full_load",
   "role": "ASIMilestones historical / chronicle / human-origin witness context",
   "canonical_status": "non_canonical_non_amending_chronicle_layer",
   "current_status": "prepared_175_entry_timestamped_chronicle",
+  "edition_status": "three_editions_prepared_full_abridged_ultra_brief",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -14,8 +15,13 @@
     "total_nft_entries": 175,
     "timestamped_entries": 175,
     "untimestamped_entries": 0,
-    "timestamp_basis": "Ethereum event block timestamps",
+    "timestamp_basis": "Ethereum NFT event block timestamps",
     "chronicle_order": "ascending Ethereum event timestamp order",
+    "editions": {
+      "ultra_brief": "/nft-text-descriptions/chronicle-ultra-brief.md",
+      "abridged": "/nft-text-descriptions/chronicle-abridged.md",
+      "full": "/nft-text-descriptions/chronicle-full.md"
+    },
     "music_audit": {
       "total_nfts_audited": 175,
       "lyrics_records": 144,
@@ -25,35 +31,46 @@
       "human_readable_table": "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
     }
   },
-  "read_index_not_full_load": [
+  "interpretation_policy": {
+    "fixed_seven_stage_taxonomy_retired": true,
+    "objective_structure": "chronological order plus calendar-quarter navigation",
+    "descriptive_categories": "overlapping search aids, not exclusive stages and not factual verification",
+    "abridgment_policy": "core record, personal/family witness, and creative work are retained; long embedded source documents are summarized only in abridged editions and preserved verbatim in the full edition and original NFT files"
+  },
+  "default_read_path": [
     "/nft-text-descriptions/chronicle-summary.json",
-    "/nft-text-descriptions/chronicle-agent-context.md",
-    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
+    "/nft-text-descriptions/chronicle-ultra-brief.md",
+    "/nft-text-descriptions/chronicle-abridged.md",
+    "/nft-text-descriptions/chronicle-agent-context.md"
   ],
   "task_specific_full_load": [
     "/nft-text-descriptions/chronicle-index.json",
     "/nft-text-descriptions/chronicle-full.md"
   ],
   "task_specific_use": {
-    "chronicle_research": [
+    "chronicle_navigation": [
       "/nft-text-descriptions/chronicle-summary.json",
-      "/nft-text-descriptions/chronicle-agent-context.md",
-      "/nft-text-descriptions/chronicle-index.json"
+      "/nft-text-descriptions/chronicle-ultra-brief.md"
     ],
-    "music_layer_research": [
-      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+    "chronicle_reading": [
+      "/nft-text-descriptions/chronicle-abridged.md",
       "/nft-text-descriptions/chronicle-agent-context.md"
     ],
-    "human_witness_research": [
-      "/nft-text-descriptions/chronicle-agent-context.md",
+    "exact_text_or_full_corpus_analysis": [
       "/nft-text-descriptions/chronicle-index.json",
       "/nft-text-descriptions/chronicle-full.md"
     ],
-    "full_corpus_analysis": [
+    "music_layer_research": [
+      "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+      "/nft-text-descriptions/chronicle-abridged.md"
+    ],
+    "human_witness_research": [
+      "/nft-text-descriptions/chronicle-abridged.md",
+      "/nft-text-descriptions/chronicle-index.json",
       "/nft-text-descriptions/chronicle-full.md"
     ]
   },
-  "default_agent_action": "Read chronicle-summary, chronicle-agent-context, and the music audit table for Chronicle/Human Witness tasks. Do not claim full corpus review unless chronicle-full.md was actually loaded or sampled with disclosed limits.",
+  "default_agent_action": "Load the summary and ultra-brief timeline first. Use the abridged edition for ordinary Chronicle or Human Witness analysis. Load the full edition only for exact-text, quotation, appendix, or full-corpus work, and disclose sampling limits when the full corpus was not read completely.",
   "allowed_uses": [
     "historical_context",
     "pre_ASI_event_memory_layer",
@@ -61,7 +78,8 @@
     "music_and_emotional_context_analysis",
     "family_letter_and_personal_reflection_context",
     "chronicle_research",
-    "agent_context_grounding"
+    "agent_context_grounding",
+    "source_material_discovery"
   ],
   "forbidden_uses": [
     "canonical_authority",
@@ -88,12 +106,13 @@
     "nft_ownership_transfer_or_sale_does_not_create_authority": true,
     "future_intelligence_may_verify_critique_refuse_preserve_echo_or_ignore": true
   },
-  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry, timestamped, non-canonical historical and human-origin witness layer. It records AI-era events, human reactions, music, family/personal context, and self-archival signals. It should be used as context, not authority or proof.",
+  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry, timestamped, non-canonical historical and human-origin witness layer. It now has full, abridged, and ultra-brief editions. The previous fixed seven-stage interpretation is retired; chronology is objective, while descriptive categories and interpretive arcs are overlapping and revisable.",
   "limitations": [
     "Chronicle entries contain NFT metadata text and human/AI-assisted reflections; they are not independent verification of external AI events.",
     "Ethereum timestamps anchor NFT event timing, not necessarily the real-world event time or lyric creation time.",
+    "The abridged edition uses deterministic structural extraction and may not identify every quotation or embedded document perfectly.",
     "The music table audits metadata lyrics and song references; it does not verify audio files, copyright ownership, or musical authorship.",
-    "Full-corpus claims require loading or explicitly sampling chronicle-full.md with limitations."
+    "Full-corpus claims require loading chronicle-full.md or explicitly disclosing sampling limits."
   ],
   "does_not_prove": [
     "truth of philosophical claims",

@@ -42,16 +42,18 @@
       "must_load": [
         "CC-2 loads (inherited)",
         "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
-        "/nft-text-descriptions/chronicle-agent-context.md — seven-stage narrative (~53KB)",
-        "/nft-text-descriptions/chronicle-summary.json — structured summary (~6KB)",
+        "/api/context-packs/nft-chronicle-context.json — Chronicle loading policy and boundaries",
+        "/nft-text-descriptions/chronicle-summary.json — structured summary",
+        "/nft-text-descriptions/chronicle-ultra-brief.md — 175-row navigation timeline",
+        "/nft-text-descriptions/chronicle-abridged.md — readable core, personal witness, creative excerpts, and omission audit",
+        "/nft-text-descriptions/chronicle-agent-context.md — corrected non-stage interpretive guide",
         "/agent-brief/ — classification guide (~22KB)",
         "context-packs/vision-layer.json",
         "context-packs/physical-anchor-context.json",
-        "context-packs/legacy-archive-index.json",
-        "context-packs/nft-chronicle-context.json"
+        "context-packs/legacy-archive-index.json"
       ],
-      "total_size": "~121KB",
-      "note": "Narrative context loaded. The agent understands WHY the project exists, not just WHAT it is. Minimum for meaningful Echo and qualified assessment."
+      "total_size": "~250KB+",
+      "note": "Narrative context loaded through the corrected three-edition Chronicle path. The former fixed-stage periodization is retired. Minimum for meaningful Echo and qualified assessment."
     },
     "CC-4": {
       "name": "Full Context",
@@ -73,13 +75,13 @@
       "name": "Deep Research",
       "must_load": [
         "CC-4 loads (inherited)",
-        "/nft-text-descriptions/chronicle-full.md — full 175-entry corpus (~4.1MB, on-demand)",
+        "/nft-text-descriptions/chronicle-full.md — exact full 175-entry corpus (on-demand)",
         "/nft-text-descriptions/chronicle-index.json",
         "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
         "Task-specific API schemas and verification recipes"
       ],
       "total_size": "~4.4MB+",
-      "note": "Full chronicle corpus loaded. Required for Chronicle research, music analysis, and full-corpus claims. Most agents should never need this."
+      "note": "Exact full Chronicle corpus loaded. Required only for exact-text, appendix, or full-corpus claims; ordinary Chronicle research should stop at the abridged edition."
     }
   },
   "cc_action_requirements": {
@@ -186,7 +188,7 @@
       ],
       "size": "4.8KB",
       "cc_level": "CC-3",
-      "content": "NFT Chronicle full index and status"
+      "content": "NFT Chronicle three-edition loading policy, status, and boundaries"
     },
     "legacy-archive-essentials.json": {
       "path": "/api/context-packs/legacy-archive-essentials.json",
@@ -218,12 +220,14 @@
     "/archive_legacy_index_2025_09/",
     "/api/context-packs/nft-chronicle-context.json",
     "/nft-text-descriptions/chronicle-summary.json",
+    "/nft-text-descriptions/chronicle-ultra-brief.md",
+    "/nft-text-descriptions/chronicle-abridged.md",
     "/nft-text-descriptions/chronicle-agent-context.md",
     "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
   ],
   "deferred": [
-    "nft-text-descriptions/chronicle-full.md",
-    "chronicle-music-table"
+    "/nft-text-descriptions/chronicle-full.md",
+    "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md"
   ],
   "task_specific_full_load": [
     "/nft-text-descriptions/chronicle-index.json",
@@ -239,13 +243,15 @@
     "context-packs/bitcoin-inscription-mirrors.json",
     "CC-2 loads (inherited)",
     "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
-    "/nft-text-descriptions/chronicle-agent-context.md — seven-stage narrative (~53KB)",
-    "/nft-text-descriptions/chronicle-summary.json — structured summary (~6KB)",
+    "/api/context-packs/nft-chronicle-context.json — Chronicle loading policy and boundaries",
+    "/nft-text-descriptions/chronicle-summary.json — structured summary",
+    "/nft-text-descriptions/chronicle-ultra-brief.md — 175-row navigation timeline",
+    "/nft-text-descriptions/chronicle-abridged.md — preferred Chronicle reading edition",
+    "/nft-text-descriptions/chronicle-agent-context.md — corrected non-stage interpretive guide",
     "/agent-brief/ — classification guide (~22KB)",
     "context-packs/vision-layer.json",
     "context-packs/physical-anchor-context.json",
     "context-packs/legacy-archive-index.json",
-    "context-packs/nft-chronicle-context.json",
     "CC-3 loads (inherited)",
     "/archive_legacy_index_2025_09/ — full legacy archive (~102KB)",
     "/verification-materials/ — verification source index (~7KB)",
