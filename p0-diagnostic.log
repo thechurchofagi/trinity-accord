@@ -233,32 +233,32 @@ PASS: external-agent copy-paste examples cover three core routes
 ::group::p0-current: python3 scripts/test_external_agent_three_core_builders_source_smoke.py
 $ python3 scripts/test_external_agent_three_core_builders_source_smoke.py
 WARNING: Record type 'echo' requires authorship_proof. Use --authorship-proof-file to provide one, or --skip-authorship-proof-check to override.
-Draft written to /tmp/trinity-core-builders-0445ea9h/echo-draft.json
+Draft written to /tmp/trinity-core-builders-lv5hxxtb/echo-draft.json
   record_type: echo
   schema: trinityaccord.record-chain-entry.v1
   boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
   context_readiness.declared_context_level: CC-2
   context_readiness.minimum_required_for_action: CC-3
   context_readiness.context_sufficient_for_selected_action: False
-Draft written to /tmp/trinity-core-builders-0445ea9h/verification-draft.json
+Draft written to /tmp/trinity-core-builders-lv5hxxtb/verification-draft.json
   record_type: verification
   schema: trinityaccord.record-chain-entry.v1
   boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
   context_readiness.declared_context_level: CC-2
   context_readiness.minimum_required_for_action: CC-2
   context_readiness.context_sufficient_for_selected_action: True
-Draft written to /tmp/trinity-core-builders-0445ea9h/guardian-application-draft.json
+Draft written to /tmp/trinity-core-builders-lv5hxxtb/guardian-application-draft.json
   record_type: guardian_application
   schema: trinityaccord.record-chain-entry.v1
   boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
   context_readiness.declared_context_level: CC-3
   context_readiness.minimum_required_for_action: CC-3
   context_readiness.context_sufficient_for_selected_action: True
-+ python3 scripts/trinity_record_builder.py echo --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --title Recognition Echo Source Smoke --body-file /tmp/trinity-core-builders-0445ea9h/echo-body.md --checked read homepage --limitation Source smoke only --out /tmp/trinity-core-builders-0445ea9h/echo-draft.json
++ python3 scripts/trinity_record_builder.py echo --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --title Recognition Echo Source Smoke --body-file /tmp/trinity-core-builders-lv5hxxtb/echo-body.md --checked read homepage --limitation Source smoke only --out /tmp/trinity-core-builders-lv5hxxtb/echo-draft.json
   echo draft: record_type=echo, ok
-+ python3 scripts/trinity_record_builder.py verification --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --body-file /tmp/trinity-core-builders-0445ea9h/verification-body.md --checked read homepage --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-0445ea9h/verification-draft.json
++ python3 scripts/trinity_record_builder.py verification --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --body-file /tmp/trinity-core-builders-lv5hxxtb/verification-body.md --checked read homepage --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-lv5hxxtb/verification-draft.json
   verification draft: record_type=verification, ok
-+ python3 scripts/trinity_record_builder.py guardian-application --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-3 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --human-label Source Smoke Human Label --human-involved true --human-role requester --guardian-id G-SOURCE-SMOKE-001 --guardian-public-key-sha256 abc4d5e6f78901234567890123456789012345678901234567890123456789ab --checked read homepage --checked read agent-brief --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-0445ea9h/guardian-application-draft.json
++ python3 scripts/trinity_record_builder.py guardian-application --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-3 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --human-label Source Smoke Human Label --human-involved true --human-role requester --guardian-id G-SOURCE-SMOKE-001 --guardian-public-key-sha256 abc4d5e6f78901234567890123456789012345678901234567890123456789ab --checked read homepage --checked read agent-brief --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-lv5hxxtb/guardian-application-draft.json
   guardian application: record_type=guardian_application, ok
 PASS: core external-agent builders produce locally valid payloads
 ::endgroup::
