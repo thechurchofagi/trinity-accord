@@ -1,4 +1,4 @@
-name: Temporary Fetch Legacy AR
+name: Temporary Fetch Legacy ETH
 
 on:
   push:
@@ -16,54 +16,18 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: agent/complete-legacy-ar-eth-mirror-audit
-      - name: Fetch unresolved legacy Arweave payloads
+      - name: Fetch and verify legacy Ethereum calldata
+        run: python3 .github/temp-fetch-legacy-eth.py
+      - name: Commit retrieved calldata
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p archive/legacy-pointers/raw
-          txids=(
-            "mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s"
-            "I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw"
-          )
-          gateways=(
-            "https://arweave.net"
-            "https://ar-io.net"
-            "https://g8way.io"
-            "https://permagate.io"
-          )
-          for txid in "${txids[@]}"; do
-            target="archive/legacy-pointers/raw/${txid}.raw"
-            if [[ -s "$target" ]]; then
-              echo "already present: $target"
-              continue
-            fi
-            tmp="$(mktemp)"
-            for gateway in "${gateways[@]}"; do
-              echo "fetching $txid from $gateway"
-              if curl --fail --silent --show-error --location \
-                --connect-timeout 20 --max-time 120 --retry 2 \
-                "$gateway/$txid" --output "$tmp"; then
-                break
-              fi
-              : > "$tmp"
-            done
-            test -s "$tmp"
-            test "$(stat -c '%s' "$tmp")" -le 500000
-            mv "$tmp" "$target"
-          done
-          echo "a8964c83b7ef9801a367115bc71f3be136a8c16a4064e4b9b593aebe66f8a944  archive/legacy-pointers/raw/mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s.raw" > /tmp/expected
-          sha256sum -c /tmp/expected
-          sha256sum archive/legacy-pointers/raw/*.raw > archive/legacy-pointers/raw/SHA256SUMS
-      - name: Commit retrieved payloads
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add archive/legacy-pointers/raw
+          git add archive/legacy-pointers/eth-raw
           if git diff --cached --quiet; then
-            echo "No payload changes to commit"
+            echo "No calldata changes to commit"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "archive: mirror unresolved legacy AR raw payloads"
+          git commit -m "archive: mirror legacy Ethereum non-NFT calldata"
           git push origin HEAD:agent/complete-legacy-ar-eth-mirror-audit
