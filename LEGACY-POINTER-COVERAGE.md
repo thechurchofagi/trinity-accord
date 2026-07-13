@@ -9,7 +9,7 @@ This document audits the external records named by `archive_legacy_index_2025_09
 1. exact small-payload GitHub mirrors;
 2. large payloads already mirrored by hash-verified GitHub Release assets;
 3. payloads whose useful files were extracted rather than duplicated as one archive blob;
-4. context or metadata records that are preserved but not yet compared byte-for-byte with the named external object;
+4. records whose repository payload exists but whose historical hash semantics require care;
 5. sealed/non-public evidence that must not be published.
 
 The machine-readable registry is `archive/legacy-pointers/index.json`.
@@ -18,13 +18,14 @@ The machine-readable registry is `archive/legacy-pointers/index.json`.
 
 - Audited **35 Arweave records**, **10 Ethereum non-NFT records**, and the relevant IPFS pointers named by the legacy homepage.
 - The major Covenant archive, verification kit, digest manifests, OTS record, NFT recovery package, signature material, rotation records, pointer indexes, and authority documents already had repository or Release coverage.
-- The two previously missing small Arweave payloads have now been retrieved and mirrored exactly:
+- Three legacy Arweave payloads that required exact raw preservation have now been retrieved and mirrored:
+  - `Z_mRWz1jst-KUr4pyOyofFDLwj0H5bDHtPVYaUEX3jQ` — historical homepage raw payload, SHA-256 `006cf08f8a07e6aa3276eca9b9c2fe12717a74f062bfa03ca261acc6bc5915a7`.
   - `mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s` — merged Guardian Index, 2,783 bytes, SHA-256 `a8964c83b7ef9801a367115bc71f3be136a8c16a4064e4b9b593aebe66f8a944`.
   - `I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw` — Guardianship system documentation tar payload, SHA-256 `704b70ed311d4fbd39f898f722e98f3be616970d67eccb68a159481402113d12`.
 - Their exact bytes are under `archive/legacy-pointers/raw/`, with hashes in `archive/legacy-pointers/raw/SHA256SUMS`.
-- Four Ethereum calldata objects that previously lacked isolated raw files have also been retrieved from Ethereum mainnet and mirrored under `archive/legacy-pointers/eth-raw/`.
+- The readable `archive_legacy_index_2025_09.md` remains a separate human-oriented archival rendering; it is not substituted for the exact AR bytes.
+- Four Ethereum calldata objects that previously lacked isolated raw files have been retrieved from Ethereum mainnet and mirrored under `archive/legacy-pointers/eth-raw/`.
 - The three Ethereum text mirrors for Protocol, Covenant, and Accord are not duplicated: their calldata length and SHA-256 exactly match the existing Bitcoin inscription raw-text mirrors.
-- The historical homepage Arweave record `Z_mRWz1jst-KUr4pyOyofFDLwj0H5bDHtPVYaUEX3jQ` remains `context_recovered_not_byte_verified`: the archived homepage content and pointer are preserved, but a separate byte-for-byte comparison with that AR transaction has not been recorded.
 - `archive/hash-manifest.json` contains one semantic false positive: `7d6ac9...` is the JCS digest covered by Authority Manifest v1.0.2 and its EIP-712 signature, not an established SHA-256 of the Arweave transaction payload. The current mismatch label therefore does not prove that the repository copy differs from Arweave.
 
 ## Ethereum non-NFT records
@@ -56,8 +57,8 @@ Their hashes and Release asset names are the mirror. Duplicating them in Git wou
 
 ## Remaining qualifications
 
-The legacy raw-payload mirroring task is complete for the identified missing AR and Ethereum non-NFT objects. Remaining work is verification hardening rather than missing-payload recovery:
+The legacy raw-payload mirroring task is complete for the audited AR and Ethereum non-NFT objects. Remaining work is evidence-verification hardening rather than missing-payload recovery:
 
-1. optionally retrieve `Z_mRWz1jst-KUr4pyOyofFDLwj0H5bDHtPVYaUEX3jQ` and record a byte-for-byte comparison with `archive_legacy_index_2025_09.md`;
-2. correct the Authority Manifest v1.0.2 hash semantics in the manifest generator instead of replacing a file using the wrong expected value;
-3. continue treating sealed/non-public evidence as deliberately non-public rather than as a backup failure.
+1. correct the Authority Manifest v1.0.2 hash semantics in the manifest generator instead of replacing a file using the wrong expected value;
+2. continue treating sealed/non-public evidence as deliberately non-public rather than as a backup failure;
+3. periodically rerun the registry validator and Release/gateway availability checks.
