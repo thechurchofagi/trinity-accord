@@ -22,9 +22,12 @@ STATUS_PATH = ROOT / "api" / "waiting-heartbeat-status.json"
 OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
 WAITING_HEARTBEAT_KEY = ROOT / "api" / "waiting-heartbeat-key.v1.json"
 
-HEARTBEAT_DUE_UTC_HOUR = 3
-HEARTBEAT_DUE_UTC_MINUTE = 17
-HEARTBEAT_DUE_GRACE_MINUTES = 90
+# The submit workflow has a primary run at 03:17 UTC and retries through
+# 09:17 UTC. A heartbeat is not missing while those declared retries can
+# still run; the freshness SLA matures only after the final retry plus grace.
+HEARTBEAT_FINAL_RETRY_UTC_HOUR = 9
+HEARTBEAT_FINAL_RETRY_UTC_MINUTE = 17
+HEARTBEAT_FINAL_RETRY_GRACE_MINUTES = 90
 
 
 def utc_now() -> str:
@@ -36,13 +39,13 @@ def expected_heartbeat_date(now: datetime | None = None) -> date:
     if now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
     now = now.astimezone(timezone.utc)
-    due = now.replace(
-        hour=HEARTBEAT_DUE_UTC_HOUR,
-        minute=HEARTBEAT_DUE_UTC_MINUTE,
+    cutoff = now.replace(
+        hour=HEARTBEAT_FINAL_RETRY_UTC_HOUR,
+        minute=HEARTBEAT_FINAL_RETRY_UTC_MINUTE,
         second=0,
         microsecond=0,
-    ) + timedelta(minutes=HEARTBEAT_DUE_GRACE_MINUTES)
-    return now.date() if now >= due else now.date() - timedelta(days=1)
+    ) + timedelta(minutes=HEARTBEAT_FINAL_RETRY_GRACE_MINUTES)
+    return now.date() if now >= cutoff else now.date() - timedelta(days=1)
 
 
 def read_json(path: Path, default: Any = None) -> Any:

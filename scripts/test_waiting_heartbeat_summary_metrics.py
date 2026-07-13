@@ -92,10 +92,13 @@ def test_current_status_contract() -> None:
 
 def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
     generator = load_generator_module()
-    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 1, 32, tzinfo=timezone.utc)) == date(2026, 6, 23), "before due should expect previous UTC date")
-    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "at due should still be grace window")
-    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside grace should still expect previous UTC date")
-    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "after grace should expect current UTC date")
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    require('cron: "17 5,7,9 * * *"' in workflow, "submit workflow must retain retries through 09:17 UTC")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "primary run must not mature the daily SLA")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)) == date(2026, 6, 23), "the old primary-only cutoff must remain inside the retry window")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 9, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "final retry time must still expect the previous UTC date")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside final retry grace must expect the previous UTC date")
+    require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "only final retry plus grace may mature the current UTC date")
 
 
 def verified_record() -> dict[str, object]:
