@@ -35,11 +35,16 @@ jobs:
           node --check scripts/generate_nft_identity_index.mjs
           node scripts/generate_nft_identity_index.mjs --self-test
 
-      - name: Generate receipt-verified mint identity index
+      - name: Generate receipt-verified mint identity index when absent
         env:
           CONFIGURED_ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
         run: |
           set -euo pipefail
+          if [ -f nft-identity-index.json ]; then
+            echo "Committed identity index already exists; skipping live regeneration"
+            exit 0
+          fi
+
           endpoints=()
           if [ -n "$CONFIGURED_ETH_RPC_URL" ]; then
             endpoints+=("$CONFIGURED_ETH_RPC_URL")
@@ -64,22 +69,22 @@ jobs:
             exit 1
           fi
 
-      - name: Validate generated index
-        run: |
-          set -euo pipefail
-          python3 scripts/test_nft_identity_index_contract.py
-          test "$(wc -c < nft-identity-index.json)" -lt 2000000
-          git diff --check
-
-      - name: Commit generated index to branch
+      - name: Commit generated index to draft branch
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add nft-identity-index.json
           if git diff --cached --quiet; then
-            echo "Identity index already current"
+            echo "Identity index already committed"
             exit 0
           fi
           git commit -m "Generate receipt-verified NFT identity index"
           git push origin HEAD:agent/nft-mint-identity-index
+
+      - name: Validate committed/generated index
+        run: |
+          set -euo pipefail
+          python3 scripts/test_nft_identity_index_contract.py
+          test "$(wc -c < nft-identity-index.json)" -lt 2000000
+          git diff --check
