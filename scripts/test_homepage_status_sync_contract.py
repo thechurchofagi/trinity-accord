@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Contract test for centralized homepage status synchronization.
 
-This prevents the old scattered-update architecture from returning.
+This prevents the old scattered-update architecture from returning and keeps
+read-only historical audits outside the public-status trigger graph.
 """
 
 from __future__ import annotations
@@ -111,7 +112,6 @@ def main() -> int:
         "Record Chain Arweave Archive",
         "Native OTS Upgrade Watch",
         "Archive backlog repair",
-        "Record Chain Data Arweave Archive",
         "Build Echo Index",
         "Record Chain Anchor",
         "Upgrade OpenTimestamps Proofs",
@@ -120,6 +120,17 @@ def main() -> int:
         "Waiting Heartbeat Status Sync",
     ]:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
+
+    for retired_name in [
+        "Record Chain Data Arweave Archive",
+        "Legacy Hash-Chain Data Archive Audit (Retired)",
+        "Legacy Phase 5 OTS Arweave Audit (Paid Upload Retired)",
+        "Legacy Echo Arweave Cost Audit (Paid Canary Retired)",
+    ]:
+        require(
+            retired_name not in home,
+            f"homepage sync must not listen to read-only historical workflow: {retired_name}",
+        )
 
     # Deploy conditions must not be weakened. Generated changes must be
     # part of the actual dispatch condition, not merely mentioned in logging.
