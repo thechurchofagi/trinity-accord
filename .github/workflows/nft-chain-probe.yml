@@ -1,0 +1,80 @@
+name: Temporary NFT Chain Probe
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Probe public EVM mainnets for NFT contract bytecode
+        env:
+          CONTRACT: "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79"
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const contract = process.env.CONTRACT;
+          const networks = [
+            ['ethereum', 'https://ethereum-rpc.publicnode.com'],
+            ['base', 'https://mainnet.base.org'],
+            ['polygon', 'https://polygon-bor-rpc.publicnode.com'],
+            ['optimism', 'https://mainnet.optimism.io'],
+            ['arbitrum-one', 'https://arb1.arbitrum.io/rpc'],
+            ['zora', 'https://rpc.zora.energy'],
+            ['linea', 'https://rpc.linea.build'],
+            ['scroll', 'https://rpc.scroll.io'],
+            ['bnb-smart-chain', 'https://bsc-dataseed.binance.org'],
+            ['avalanche-c', 'https://api.avax.network/ext/bc/C/rpc'],
+            ['gnosis', 'https://rpc.gnosischain.com'],
+            ['celo', 'https://forno.celo.org'],
+            ['mode', 'https://mainnet.mode.network'],
+            ['blast', 'https://rpc.blast.io'],
+            ['mantle', 'https://rpc.mantle.xyz'],
+            ['world-chain', 'https://worldchain-mainnet.g.alchemy.com/public'],
+          ];
+
+          async function rpc(url, method, params) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 15000);
+            try {
+              const res = await fetch(url, {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({jsonrpc: '2.0', id: 1, method, params}),
+                signal: controller.signal,
+              });
+              const text = await res.text();
+              if (!res.ok) throw new Error(`HTTP ${res.status}: ${text.slice(0, 160)}`);
+              const body = JSON.parse(text);
+              if (body.error) throw new Error(JSON.stringify(body.error));
+              return body.result;
+            } finally {
+              clearTimeout(timer);
+            }
+          }
+
+          const results = [];
+          for (const [name, url] of networks) {
+            const row = {name, url};
+            try {
+              row.chain_id_hex = await rpc(url, 'eth_chainId', []);
+              row.chain_id = Number.parseInt(row.chain_id_hex, 16);
+              row.code = await rpc(url, 'eth_getCode', [contract, 'latest']);
+              row.code_bytes = row.code && row.code !== '0x' ? (row.code.length - 2) / 2 : 0;
+              row.deployed = row.code_bytes > 0;
+            } catch (error) {
+              row.error = String(error?.message || error);
+            }
+            results.push(row);
+          }
+          console.log('NFT_CHAIN_PROBE_JSON=' + JSON.stringify({contract, results}));
+          const deployed = results.filter(x => x.deployed);
+          console.log('NFT_CHAIN_PROBE_DEPLOYED=' + JSON.stringify(deployed));
+          if (deployed.length === 0) process.exitCode = 2;
+          NODE
