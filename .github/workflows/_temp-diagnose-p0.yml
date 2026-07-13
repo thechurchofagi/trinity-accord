@@ -1,0 +1,55 @@
+name: TEMP Diagnose Chronicle P0
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+    paths:
+      - '.github/workflows/_temp-diagnose-p0.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    if: ${{ github.head_ref == 'agent/rebuild-nft-chronicle-editions' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Chronicle branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: agent/rebuild-nft-chronicle-editions
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Install CI dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Reproduce P0 and persist diagnostic tail
+        run: |
+          set +e
+          python3 scripts/run_ci_group.py p0-current > p0-diagnostic.full.log 2>&1
+          status=$?
+          {
+            echo "exit_status=$status"
+            echo "--- last 300 lines ---"
+            tail -n 300 p0-diagnostic.full.log
+          } > p0-diagnostic.log
+          rm -f p0-diagnostic.full.log
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add p0-diagnostic.log
+          git commit -m "Record temporary Chronicle P0 diagnostic" || true
+          git push origin HEAD:agent/rebuild-nft-chronicle-editions
+          exit "$status"
