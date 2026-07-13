@@ -6,9 +6,8 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import time
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "archive" / "legacy-pointers" / "eth-raw"
@@ -45,26 +44,53 @@ RPCS = [
     "https://ethereum-rpc.publicnode.com",
     "https://eth.llamarpc.com",
     "https://1rpc.io/eth",
+    "https://rpc.flashbots.net",
 ]
 
 
 def rpc_fetch(tx_hash: str) -> tuple[dict[str, object], str]:
     body = json.dumps(
-        {"jsonrpc": "2.0", "id": 1, "method": "eth_getTransactionByHash", "params": [tx_hash]}
-    ).encode("utf-8")
+        {"jsonrpc": "2.0", "id": 1, "method": "eth_getTransactionByHash", "params": [tx_hash]},
+        separators=(",", ":"),
+    )
     errors: list[str] = []
     for rpc in RPCS:
-        request = Request(rpc, data=body, headers={"Content-Type": "application/json"})
+        result = subprocess.run(
+            [
+                "curl",
+                "--fail",
+                "--silent",
+                "--show-error",
+                "--location",
+                "--retry",
+                "2",
+                "--connect-timeout",
+                "20",
+                "--max-time",
+                "90",
+                "-H",
+                "Content-Type: application/json",
+                "--data",
+                body,
+                rpc,
+            ],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            errors.append(f"{rpc}: curl exit {result.returncode}: {result.stderr.strip()}")
+            time.sleep(1)
+            continue
         try:
-            with urlopen(request, timeout=45) as response:
-                payload = json.loads(response.read().decode("utf-8"))
-            result = payload.get("result")
-            if isinstance(result, dict) and isinstance(result.get("input"), str):
-                return result, rpc
-            errors.append(f"{rpc}: missing transaction result")
-        except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-            errors.append(f"{rpc}: {exc}")
-        time.sleep(1)
+            payload = json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            errors.append(f"{rpc}: invalid JSON: {exc}")
+            continue
+        transaction = payload.get("result")
+        if isinstance(transaction, dict) and isinstance(transaction.get("input"), str):
+            return transaction, rpc
+        errors.append(f"{rpc}: missing transaction result: {payload.get('error')}")
     raise RuntimeError(f"Unable to retrieve {tx_hash}: {'; '.join(errors)}")
 
 
