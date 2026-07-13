@@ -9,11 +9,12 @@ Asserts:
 - scripts/trinity_record_chain.py has build-anchor-status command
 - new build_batch manifest uses arweave_archive (not ipfs)
 - api/record-chain-anchor-status.json exists
+- all active Record-Chain/OTS/wallet main writers satisfy the Round 8 transaction contract
 """
 from __future__ import annotations
 
 import json
-import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -50,11 +51,6 @@ def main() -> None:
             errors.append("trinity_record_chain.py missing build-anchor-status command")
         if "def build_anchor_status" not in text:
             errors.append("trinity_record_chain.py missing build_anchor_status function")
-        # Check arweave_archive in build_batch (not ipfs for new batches)
-        if '"ipfs"' in text and '"enabled": False' in text and '"cid": None' in text:
-            # Only fail if ipfs is still the default for NEW batches
-            # Allow historical references
-            pass  # Need to check more carefully
         if '"arweave_archive"' not in text:
             errors.append("trinity_record_chain.py missing arweave_archive field in build_batch")
 
@@ -67,24 +63,40 @@ def main() -> None:
         if data.get("schema") != "trinityaccord.record-chain-anchor-status.v1":
             errors.append("anchor-status.json wrong schema")
         boundary = data.get("bitcoin_timestamp_boundary", {})
-        for key in ["ots_proof_is_timestamp_only", "ots_proof_is_not_authority",
-                     "ots_proof_is_not_attestation", "bitcoin_originals_prevail"]:
+        for key in [
+            "ots_proof_is_timestamp_only",
+            "ots_proof_is_not_authority",
+            "ots_proof_is_not_attestation",
+            "bitcoin_originals_prevail",
+        ]:
             if not boundary.get(key):
                 errors.append(f"anchor-status.json boundary missing: {key}")
 
     # 4. Anchors directory
     anchors = ROOT / "record-chain" / "anchors"
     if not anchors.exists():
-        # .gitkeep should exist
         gitkeep = anchors / ".gitkeep"
         if not gitkeep.exists():
             errors.append("record-chain/anchors/.gitkeep missing")
 
     if errors:
         print("Anchor contract tests FAILED:", file=sys.stderr)
-        for e in errors:
-            print(f"  - {e}", file=sys.stderr)
+        for error in errors:
+            print(f"  - {error}", file=sys.stderr)
         sys.exit(1)
+
+    round8 = ROOT / "scripts/test_round8_main_writer_transaction_contract.py"
+    if not round8.exists():
+        fail("missing Round 8 main-writer transaction contract")
+    result = subprocess.run(
+        [sys.executable, str(round8)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail("Round 8 main-writer transaction contract failed:\n" + (result.stderr or result.stdout)[-8000:])
+
     print("Anchor contract tests PASSED.")
 
 
