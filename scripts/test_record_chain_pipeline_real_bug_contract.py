@@ -57,12 +57,15 @@ def main() -> None:
     ]:
         require(needle in auto_finalize, f"auto-finalize missing native pending skip contract: {needle}")
 
-    # P1: OTS schedule must not be blocked by job-level if.
+    # P1: schedules/manual dispatches remain enabled, while workflow_run must be
+    # both successful and sourced from main before it can write or trigger paid archival.
     require("schedule:" in ots_workflow, "OTS workflow must still declare schedule")
-    require(
-        "github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'" in ots_workflow,
-        "OTS workflow job if must allow schedule and workflow_dispatch while gating workflow_run success",
-    )
+    for marker in [
+        "github.event_name != 'workflow_run'",
+        "github.event.workflow_run.conclusion == 'success'",
+        "github.event.workflow_run.head_branch == 'main'",
+    ]:
+        require(marker in ots_workflow, f"OTS workflow job gate missing: {marker}")
     require(
         "github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'" not in ots_workflow,
         "old OTS job if blocks schedule and must not remain",
