@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - name: Checkout probe branch
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Inspect Ethereum NFT contract interfaces and event history
         env:
           CONTRACT: "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79"
           RPC_URL: "https://ethereum-rpc.publicnode.com"
+          PROBE_URL: "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/agent/nft-identity-index/scripts/probe_nft_identity.mjs"
         run: |
           set -euo pipefail
-          node scripts/probe_nft_identity.mjs
+          curl --fail --silent --show-error --location "$PROBE_URL" -o "$RUNNER_TEMP/probe_nft_identity.mjs"
+          node "$RUNNER_TEMP/probe_nft_identity.mjs"
