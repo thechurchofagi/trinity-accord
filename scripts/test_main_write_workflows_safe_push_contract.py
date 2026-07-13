@@ -115,20 +115,43 @@ def test_write_path_guard_classifies_overlay_as_generated():
     assert "api/record-chain-overlays.json" in guard, "write-path guard must classify overlay mirror as generated"
 
 
-def test_agent_declared_index_rebuild_has_token_for_all_issue_fetches():
+def _step_section(text: str, name: str, next_name: str | None = None) -> str:
+    marker = f"- name: {name}"
+    assert marker in text, f"workflow missing step: {name}"
+    section = text.split(marker, 1)[1]
+    if next_name:
+        next_marker = f"- name: {next_name}"
+        assert next_marker in section, f"workflow missing following step: {next_name}"
+        section = section.split(next_marker, 1)[0]
+    return section
+
+
+def test_agent_declared_index_rebuild_has_token_for_all_github_calls():
     path = WORKFLOWS / "rebuild-agent-declared-index.yml"
     text = path.read_text(encoding="utf-8")
 
+    # Never fall back to a broad PAT or a secret alias for the standard token.
     assert "GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}" not in text
     assert "GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}" not in text
-    assert text.count("GH_TOKEN: ${{ github.token }}") >= 3
+    assert "GH_PAT" not in text
 
-    commit_section = text.split("- name: Commit and push", 1)[1]
-    assert "env:" in commit_section
-    assert "GH_TOKEN: ${{ github.token }}" in commit_section
-    assert "INCLUDE_TEST: ${{ inputs.include_test }}" in commit_section
-    assert "EXTRA_ARGS=\"\"" in commit_section
-    assert "scripts/build_agent_declared_verification_index_from_issues.py" in commit_section
+    rebuild = _step_section(text, "Rebuild, commit, and push index", "Trigger Deploy Pages")
+    assert "env:" in rebuild
+    assert "GH_TOKEN: ${{ github.token }}" in rebuild
+    assert "INCLUDE_TEST: ${{ inputs.include_test }}" in rebuild
+    assert "scripts/build_agent_declared_verification_index_from_issues.py" in rebuild
+    assert "--repo \"$GITHUB_REPOSITORY\"" in rebuild
+
+    deploy = _step_section(text, "Trigger Deploy Pages")
+    assert "env:" in deploy
+    assert "GH_TOKEN: ${{ github.token }}" in deploy
+    assert "gh workflow run deploy-pages.yml" in deploy
+    assert "--ref main" in deploy
+
+    # Both GitHub API consumers have an explicit workflow-token scope. The
+    # number of declarations is intentionally tied to command scopes, not to an
+    # arbitrary historical count of steps.
+    assert text.count("GH_TOKEN: ${{ github.token }}") == 2
 
 
 if __name__ == "__main__":
@@ -137,5 +160,5 @@ if __name__ == "__main__":
     test_archive_workflow_rebuilds_after_rebase()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()
-    test_agent_declared_index_rebuild_has_token_for_all_issue_fetches()
+    test_agent_declared_index_rebuild_has_token_for_all_github_calls()
     print("All main-write workflow contract tests passed.")
