@@ -14,7 +14,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.head.ref == 'agent/deep-audit-round7-arweave-boundaries'
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -22,6 +22,11 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Install current-system dependencies
+        run: python -m pip install -r requirements-ci.txt
       - name: Compile changed Python files
         run: |
           python -m py_compile \
@@ -41,15 +46,6 @@ jobs:
           echo "$code" > "$RUNNER_TEMP/behavior.code"
           tail -n 120 "$RUNNER_TEMP/behavior.log"
           exit "$code"
-      - name: Upload focused diagnostic
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: round7-arweave-focused-${{ github.run_id }}
-          path: |
-            ${{ runner.temp }}/behavior.log
-            ${{ runner.temp }}/behavior.code
-          retention-days: 7
       - name: Require retirement behavior success
         if: always()
         run: |
@@ -62,3 +58,29 @@ jobs:
           python scripts/verify_record_chain_data_arweave_registry.py \
             --verify-local-bundles \
             --allow-known-historical-duplicates
+      - name: Capture full current-system result
+        id: current
+        continue-on-error: true
+        run: |
+          set +e
+          python scripts/run_current_system_tests.py > "$RUNNER_TEMP/current-system.log" 2>&1
+          code=$?
+          echo "$code" > "$RUNNER_TEMP/current-system.code"
+          tail -n 160 "$RUNNER_TEMP/current-system.log"
+          exit "$code"
+      - name: Upload focused diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: round7-arweave-focused-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/behavior.log
+            ${{ runner.temp }}/behavior.code
+            ${{ runner.temp }}/current-system.log
+            ${{ runner.temp }}/current-system.code
+          retention-days: 7
+      - name: Require full current-system success
+        if: always()
+        run: |
+          test -f "$RUNNER_TEMP/current-system.code"
+          test "$(cat "$RUNNER_TEMP/current-system.code")" = "0"
