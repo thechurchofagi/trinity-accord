@@ -19,7 +19,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: record-chain-auto-finalize
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 env:
@@ -31,7 +32,24 @@ jobs:
   finalize:
     runs-on: ubuntu-24.04
     steps:
+      - name: Authorize write workflow actor
+        env:
+          ACTOR: ${{ github.actor }}
+          ALLOWED_ACTORS: ${{ format('{0},github-actions[bot]', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi') }}
+        run: |
+          set -euo pipefail
+          if echo ",${ALLOWED_ACTORS}," | grep -qF ",${ACTOR},"; then
+            echo "Authorized write workflow actor: ${ACTOR}"
+          else
+            echo "Unauthorized actor: ${ACTOR}" >&2
+            exit 1
+          fi
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
@@ -41,13 +59,21 @@ jobs:
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
           cat toolchain-provenance.json
 
+      - name: Rebase current main before finalization
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
       - name: Guard live mode
         if: inputs.mode == 'live'
         run: |
+          set -euo pipefail
           test "$INPUT_CONFIRM" = "I_UNDERSTAND_THIS_FINALIZES_ACCEPTED_RECORD_CHAIN_SUBMISSIONS"
 
       - name: Auto finalize
         run: |
+          set -euo pipefail
           python3 scripts/auto_finalize_accepted_submissions.py \
             --max-records "$INPUT_MAX_RECORDS" \
             --source-run-id "auto-finalize-${{ github.run_id }}" \
@@ -56,6 +82,7 @@ jobs:
 
       - name: Verify after finalize
         run: |
+          set -euo pipefail
           python3 scripts/trinity_record_chain.py verify
           python3 scripts/verify_record_chain_integrity.py \
             --ledger record-chain/hash-chain/main.chain.jsonl \
@@ -67,6 +94,7 @@ jobs:
       - name: Commit finalization outputs
         if: inputs.mode == 'live'
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A \
@@ -81,21 +109,50 @@ jobs:
                   api/record-chain-index.all.json \
                   api/record-chain-index.manifest.json \
                   api/record-chain-index.*.json
+          git diff --cached --check
+
           if git diff --cached --quiet; then
             echo "No finalization changes."
-          else
-            git commit -m "record-chain: auto-finalize accepted submissions"
+            exit 0
+          fi
 
-            for attempt in 1 2 3; do
-              if git push; then
-                exit 0
-              fi
-              printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-              git fetch origin main
-              git rebase origin main || { git rebase --abort; }
-              sleep $((attempt * 5))
-            done
-
-            echo "::error::Failed to push auto-finalize updates after retries."
+          git commit -m "record-chain: auto-finalize accepted submissions"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Finalization left unstaged or untracked repository changes."
+            git status --short
             exit 1
           fi
+
+          verify_rebased_transaction() {
+            python3 scripts/trinity_record_chain.py verify
+            python3 scripts/verify_record_chain_integrity.py \
+              --ledger record-chain/hash-chain/main.chain.jsonl \
+              --head api/record-chain-head.json \
+              --chain-id trinity-record-chain-main \
+              --verify-payload-files \
+              --base-dir .
+          }
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            printf 'Push failed on attempt %s; rebasing and re-verifying without rerunning finalization.\n' "${attempt}"
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Record Chain changed concurrently; accepted submissions must be finalized again from current main."
+              exit 1
+            fi
+            verify_rebased_transaction
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "::error::Verification changed the rebased finalization transaction."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push auto-finalize updates after retries."
+          exit 1

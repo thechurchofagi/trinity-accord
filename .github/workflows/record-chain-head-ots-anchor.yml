@@ -21,12 +21,27 @@ concurrency:
 
 jobs:
   anchor:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
     runs-on: ubuntu-24.04
     steps:
+      - name: Authorize manual write actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+          ALLOWED_ACTORS: ${{ format('{0},github-actions[bot]', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi') }}
+        run: |
+          set -euo pipefail
+          if echo ",${ALLOWED_ACTORS}," | grep -qF ",${ACTOR},"; then
+            echo "Authorized write workflow actor: ${ACTOR}"
+          else
+            echo "Unauthorized actor: ${ACTOR}" >&2
+            exit 1
+          fi
+
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Record toolchain provenance
         run: |
@@ -52,6 +67,7 @@ jobs:
       - name: Detect OTS backlog
         id: backlog
         run: |
+          set -euo pipefail
           python3 scripts/detect_record_chain_pipeline_backlog.py --github-output > /tmp/pipeline-backlog.env
           cat /tmp/pipeline-backlog.env >> "$GITHUB_OUTPUT"
           cat /tmp/pipeline-backlog.env
@@ -59,48 +75,14 @@ jobs:
       - name: Stamp native record-chain head
         if: steps.backlog.outputs.ots_anchor_needed == 'true'
         run: |
+          set -euo pipefail
           python3 scripts/ots_anchor_native_record_chain_head.py \
             --mode stamp \
             --overwrite
 
-      - name: Verify native OTS output
+      - name: Verify native OTS output binds current tip
         if: steps.backlog.outputs.ots_anchor_needed == 'true'
-        run: |
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
-          latest_path = Path("api/record-chain-native-ots-latest.json")
-          if not latest_path.exists():
-              raise SystemExit("api/record-chain-native-ots-latest.json was not created")
-
-          latest = json.loads(latest_path.read_text())
-          checks = {
-              "schema": latest.get("schema") == "trinityaccord.native-record-chain-ots-latest.v1",
-              "latest_record_id": latest.get("latest_record_id") == tip.get("latest_record_id"),
-              "latest_record_sha256": latest.get("latest_record_sha256") == tip.get("latest_record_sha256"),
-              "native_record_count": latest.get("native_record_count") == tip.get("native_record_count"),
-              "legacy_main_chain_jsonl_is_not_source": latest.get("legacy_main_chain_jsonl_is_not_source") is True,
-          }
-          failed = [name for name, ok in checks.items() if not ok]
-          if failed:
-              raise SystemExit(f"native OTS latest validation failed: {failed}")
-
-          anchored_file = Path(latest["latest_anchored_file"])
-          if not anchored_file.exists():
-              raise SystemExit(f"anchored commitment missing: {anchored_file}")
-
-          anchored_text = anchored_file.read_text()
-          _legacy = "main" + ".chain.jsonl"
-          if _legacy in anchored_text:
-              raise SystemExit("native anchored commitment references stale legacy JSONL chain")
-          ots_file = latest.get("latest_ots_file")
-          if not ots_file or not Path(ots_file).exists():
-              raise SystemExit(f"native OTS proof file missing: {ots_file}")
-
-          print("Native OTS output validated.")
-          PY
+        run: python3 scripts/check_native_ots_latest_matches_chain_tip.py
 
       - name: Commit native OTS anchor
         id: ots_commit
@@ -112,6 +94,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add record-chain/ots/native-anchors api/record-chain-native-ots-latest.json
+          git diff --cached --check
 
           if git diff --cached --quiet; then
             printf '%s\n' "No native OTS anchor changes."
@@ -119,17 +102,30 @@ jobs:
           fi
 
           git commit -m "anchor: stamp native record-chain head with OTS"
-          git fetch origin main --prune
-          git rebase origin/main
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Native OTS anchor commit left an incomplete worktree."
+            git status --short
+            exit 1
+          fi
 
           for attempt in 1 2 3; do
-            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Main changed incompatibly while stamping the native OTS head."
+              exit 1
+            fi
+
+            # Rebase may succeed even when a newer Record Chain tip appeared.
+            # Never publish or trigger paid archival for an anchor to an old tip.
+            python3 scripts/trinity_record_chain.py verify
+            python3 scripts/check_native_ots_latest_matches_chain_tip.py
+
+            if git push origin HEAD:main; then
               printf '%s\n' "committed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
-            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-            git fetch origin main --prune
-            git rebase origin/main
+            printf 'Push failed on attempt %s; rebasing and revalidating.\n' "${attempt}"
             sleep $((attempt * 5))
           done
 

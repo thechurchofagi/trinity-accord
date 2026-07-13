@@ -26,12 +26,28 @@ env:
 
 jobs:
   anchor:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
     runs-on: ubuntu-24.04
     steps:
+      - name: Authorize manual write actor
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          ACTOR: ${{ github.actor }}
+          ALLOWED_ACTORS: ${{ format('{0},github-actions[bot]', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi') }}
+        run: |
+          set -euo pipefail
+          if echo ",${ALLOWED_ACTORS}," | grep -qF ",${ACTOR},"; then
+            echo "Authorized write workflow actor: ${ACTOR}"
+          else
+            echo "Unauthorized actor: ${ACTOR}" >&2
+            exit 1
+          fi
+
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: main
 
       - name: Record toolchain provenance
         run: |
@@ -43,8 +59,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install OpenTimestamps client
+        run: python -m pip install -r requirements-ci.txt
+
+      - name: Rebase current main before anchor generation
         run: |
-          python -m pip install -r requirements-ci.txt
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Build Merkle batch
         run: |
@@ -81,6 +102,7 @@ jobs:
           stage_anchor_updates() {
             git status --short
             git add record-chain/ api/record-chain-anchor-status.json api/record-chain-overlays.json
+            git diff --cached --check
           }
 
           rebuild_anchor_outputs() {
@@ -96,14 +118,12 @@ jobs:
           }
 
           stage_anchor_updates
-
           if git diff --cached --quiet; then
             echo "No staged anchor updates."
             exit 0
           fi
 
           git commit -m "anchor: build record-chain batch and OTS status"
-
           if [ -n "$(git status --porcelain)" ]; then
             echo "Worktree dirty after commit; generated files were not fully staged."
             git status --short
@@ -116,13 +136,16 @@ jobs:
               exit 0
             fi
 
-            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+            printf 'Push failed on attempt %s; rebasing and rebuilding.\n' "${attempt}"
             git fetch origin main --prune
-            git rebase origin/main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Record Chain changed concurrently; anchor generation must restart on current main."
+              exit 1
+            fi
 
             rebuild_anchor_outputs
             stage_anchor_updates
-
             if ! git diff --cached --quiet; then
               git commit --amend --no-edit
             fi
@@ -132,7 +155,6 @@ jobs:
               git status --short
               exit 1
             fi
-
             sleep $((attempt * 5))
           done
 
