@@ -78,6 +78,18 @@ The Chronicle is a near-real-time memory layer from the AGI / ASI acceleration p
 - self-archival signals;
 - a non-authoritative environment that later agents may study, critique, preserve, refuse, or ignore.
 
+## Music Layer
+
+The Chronicle Music Layer is an AGI / ASI witness songbook and metadata audit. The abridged edition keeps detected creative text where practical, while the dedicated music table remains the canonical Chronicle music inventory. This layer is not audio verification and not copyright verification.
+
+See `/chronicle/music/` and `nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`.
+
+## Human Witness Layer
+
+The Human Witness Layer records human-origin context without claiming human centrality, supremacy, or future-intelligence obligation. It includes family letters, personal reflections, anxiety, hope, vulnerability, music, and direct address to future intelligence.
+
+See `/chronicle/human-witness/` and `nft-text-descriptions/chronicle-abridged.md`.
+
 ## What This Layer Is Not
 
 The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Original. It is not:
