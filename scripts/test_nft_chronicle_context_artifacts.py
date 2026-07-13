@@ -47,11 +47,25 @@ require("missing" not in methods, "timestamp methods must not contain missing")
 policy = idx.get("interpretation_policy", {})
 require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")
 require("seven" in policy.get("reason", "").lower(), "retirement reason must identify the former seven-stage scheme")
+require("character accounting" in policy.get("abridgment", ""), "abridgment policy must require character accounting")
 require(idx.get("calendar_period_counts"), "calendar period counts missing")
 require(idx.get("category_counts") is not None, "category counts missing")
 require(idx.get("editions", {}).get("abridged") == "nft-text-descriptions/chronicle-abridged.md", "abridged edition path missing")
 require(idx.get("editions", {}).get("ultra_brief") == "nft-text-descriptions/chronicle-ultra-brief.md", "ultra-brief edition path missing")
+require(idx.get("abridgment_summary", {}).get("entries_with_any_omission", 0) > 0, "abridgment summary must report reduced entries")
 
+required_abridgment_fields = [
+    "source_block_char_count",
+    "included_source_char_count",
+    "omitted_source_char_count",
+    "included_by_kind",
+    "omitted_by_kind",
+    "embedded_source_char_count",
+    "has_embedded_source",
+    "embedded_source_titles",
+    "has_personal_witness",
+    "has_creative_work",
+]
 for position, entry in enumerate(entries, 1):
     require(entry.get("ordinal") == position, f"entry {position} has wrong ordinal")
     require(entry.get("timestamp") is not None, f"entry {position} missing timestamp")
@@ -61,15 +75,15 @@ for position, entry in enumerate(entries, 1):
     require(entry.get("brief"), f"entry {position} missing brief digest")
     require(isinstance(entry.get("creative_titles"), list), f"entry {position} creative_titles must be a list")
     abridgment = entry.get("abridgment", {})
-    for field in [
-        "core_char_count",
-        "creative_char_count",
-        "personal_char_count",
-        "embedded_source_char_count",
-        "has_embedded_source",
-        "embedded_source_titles",
-    ]:
+    for field in required_abridgment_fields:
         require(field in abridgment, f"entry {position} abridgment missing {field}")
+    source_chars = abridgment.get("source_block_char_count", -1)
+    included_chars = abridgment.get("included_source_char_count", -1)
+    omitted_chars = abridgment.get("omitted_source_char_count", -1)
+    require(source_chars >= 0 and included_chars >= 0 and omitted_chars >= 0, f"entry {position} has invalid character accounting")
+    require(included_chars + omitted_chars == source_chars, f"entry {position} character accounting does not balance")
+    require(sum(abridgment.get("included_by_kind", {}).values()) == included_chars, f"entry {position} included-by-kind does not balance")
+    require(sum(abridgment.get("omitted_by_kind", {}).values()) == omitted_chars, f"entry {position} omitted-by-kind does not balance")
     require("stage" not in entry, f"entry {position} must not retain old fixed stage")
     require("themes" not in entry, f"entry {position} must not retain old broad theme field")
     require("one_line_context" not in entry, f"entry {position} must not retain old one_line_context field")
@@ -87,6 +101,12 @@ if full_path.exists():
     require(full.count("#### Mirrored NFT Text — Unabridged") == 175, "full edition must contain 175 unabridged text sections")
     require("former fixed seven-stage narrative is retired" in lower, "full edition must state seven-stage retirement")
     require("not canonical authority" in lower, "full edition boundary missing")
+    for position, entry in enumerate(entries, 1):
+        source_path = DIR / entry.get("file", "")
+        require(source_path.exists(), f"entry {position} source markdown missing")
+        if source_path.exists():
+            source_text = source_path.read_text(encoding="utf-8", errors="replace").strip()
+            require(source_text in full, f"entry {position} source text is not preserved verbatim in full edition")
 
 abridged_path = DIR / "chronicle-abridged.md"
 if abridged_path.exists():
@@ -94,8 +114,8 @@ if abridged_path.exists():
     lower = abridged.lower()
     require("abridged reading edition" in lower, "abridged heading missing")
     require(abridged.count("#### Core record") == 175, "abridged edition must contain 175 core-record sections")
-    require("retained verbatim in the full edition" in lower or idx.get("embedded_source_summary", {}).get("entries_with_embedded_source_material") == 0,
-            "abridged edition must explain preservation of omitted embedded sources")
+    require(abridged.count("#### Reduction and preservation record") == 175, "abridged edition must contain 175 reduction records")
+    require("all omitted text remains verbatim" in lower, "abridged edition must explain preservation of every omission")
     require("not canonical authority" in lower, "abridged edition boundary missing")
 
 ultra_path = DIR / "chronicle-ultra-brief.md"
@@ -103,8 +123,6 @@ if ultra_path.exists():
     ultra = ultra_path.read_text(encoding="utf-8")
     lower = ultra.lower()
     require("ultra-brief 175-entry timeline" in lower, "ultra-brief heading missing")
-    # The Markdown separator starts with "|---", so only the header row and
-    # actual data rows match "| ". Remove the single header row.
     data_rows = [line for line in ultra.splitlines() if line.startswith("| ")][1:]
     require(len(data_rows) == 175, f"ultra-brief timeline must have 175 rows, got {len(data_rows)}")
     require("seven-stage narrative" not in lower, "ultra-brief edition must not reinstate the old seven-stage narrative")
@@ -118,6 +136,7 @@ if ctx_path.exists():
     require("without timestamps: 0" in lower, "agent context must state zero untimestamped entries")
     require("correction to the former seven-stage narrative" in lower, "agent context must explain stage correction")
     require("overlapping interpretive arcs" in lower, "agent context must use overlapping arcs")
+    require("abridgment audit" in lower, "agent context must expose the abridgment audit")
     require("## seven-stage narrative" not in lower, "agent context must not retain old seven-stage section")
 
 summary_path = DIR / "chronicle-summary.json"
@@ -127,6 +146,7 @@ require(summary.get("total_entries") == 175, "summary total_entries must be 175"
 require(summary.get("undated_entries") == 0, "summary undated_entries must be 0")
 require(summary.get("interpretation_policy", {}).get("fixed_stage_taxonomy_retired") is True, "summary must retire fixed stages")
 require(summary.get("editions", {}).get("full") == "nft-text-descriptions/chronicle-full.md", "summary full edition path missing")
+require(summary.get("abridgment_summary", {}).get("omitted_source_characters", 0) > 0, "summary must report omitted characters")
 
 if all((DIR / name).exists() for name in GENERATED):
     result = subprocess.run(
