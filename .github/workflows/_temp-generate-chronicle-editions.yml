@@ -1,0 +1,63 @@
+name: TEMP Generate Chronicle Editions
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-generate-chronicle-editions
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: ${{ github.head_ref == 'agent/rebuild-nft-chronicle-editions' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout Chronicle branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: agent/rebuild-nft-chronicle-editions
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate all Chronicle editions
+        run: |
+          set -euo pipefail
+          python3 -m py_compile scripts/generate_nft_chronicle_context.py
+          python3 scripts/generate_nft_chronicle_context.py
+
+      - name: Commit generated Chronicle artifacts
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            nft-text-descriptions/chronicle-index.json \
+            nft-text-descriptions/chronicle-full.md \
+            nft-text-descriptions/chronicle-abridged.md \
+            nft-text-descriptions/chronicle-ultra-brief.md \
+            nft-text-descriptions/chronicle-agent-context.md \
+            nft-text-descriptions/chronicle-summary.json
+          if git diff --cached --quiet; then
+            echo "Chronicle editions already committed"
+            exit 0
+          fi
+          git commit -m "Generate corrected 175-entry Chronicle editions"
+          git push origin HEAD:agent/rebuild-nft-chronicle-editions
+
+      - name: Validate committed Chronicle artifacts
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_nft_chronicle_context.py
+          python3 scripts/test_nft_chronicle_context_artifacts.py
+          python3 scripts/test_chronicle_site_integration.py
+          git diff --check
