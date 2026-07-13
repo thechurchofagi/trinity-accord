@@ -95,7 +95,14 @@ def main() -> int:
     require("gh workflow run deploy-pages.yml" in agent, "Agent-declared index lacks fail-closed Pages dispatch")
     require("GH_PAT" not in agent, "Agent-declared index still depends on a broad PAT")
     require("curl -sS" not in agent, "Agent-declared index still uses non-failing curl dispatch")
-    require('[[ "$ACTOR" == "github-actions[bot]"' in agent, "Agent-declared actor gate still has a Bash case-pattern trap")
+    require(
+        '"$ACTOR" == "github-actions[bot]"' in agent,
+        "Agent-declared actor gate does not compare the bot name literally",
+    )
+    require(
+        'case "$ACTOR"' not in agent,
+        "Agent-declared actor gate still uses a Bash case pattern for github-actions[bot]",
+    )
 
     render_path = ".github/workflows/render-manual-deploy.yml"
     render = read(render_path)
