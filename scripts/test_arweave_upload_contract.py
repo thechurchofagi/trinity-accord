@@ -89,7 +89,7 @@ def main() -> int:
         '"uploaded"',
         '"readback_failed"',
         '"posted_pending_readback"',
-        '"update_arweave_wallet_ledger.py"',
+        "update_arweave_wallet_ledger.py",
         '"append-upload"',
     ]:
         require(marker in recorder, f"current Arweave result recorder missing: {marker}")
