@@ -4,7 +4,9 @@
 Active native upload paths must account for posted transactions, including
 readback failures. Retired historical/Phase-5 paths must not access wallets,
 write the wallet ledger, or regenerate public wallet status. Archive backlog
-preview mode must remain strictly read-only.
+preview mode must remain strictly read-only. Native OTS post-rebase wallet
+status may be generated through the derived-only reconciler rather than being
+inlined in the workflow YAML.
 """
 from __future__ import annotations
 
@@ -34,6 +36,20 @@ def require_absent(path: str, needles: list[str]) -> None:
     present = [needle for needle in needles if needle in text]
     if present:
         raise SystemExit(f"{path} retains forbidden retired wallet capability: {present}")
+
+
+def run_behavior(path: str, label: str) -> None:
+    target = ROOT / path
+    if not target.exists():
+        raise SystemExit(f"{label} missing: {path}")
+    result = subprocess.run(
+        [sys.executable, str(target)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise SystemExit(f"{label} failed:\n" + (result.stderr or result.stdout)[-5000:])
 
 
 def main() -> int:
@@ -90,7 +106,8 @@ def main() -> int:
         ],
     )
 
-    # Native OTS upload/repair paths remain active and must account for payment.
+    # Native OTS upload remains active in the runner and records every posted
+    # transaction before the workflow reconciles wallet/API projections.
     require_contains(
         "scripts/run_native_ots_upgrade_verify.py",
         [
@@ -98,6 +115,8 @@ def main() -> int:
             "native_ots_bundle_archive",
             "actual_delta_winston",
             "balance_after_ar",
+            "refresh_native_ots_backlog",
+            "check=True",
         ],
     )
     require_contains(
@@ -105,9 +124,30 @@ def main() -> int:
         [
             "record-chain/arweave-wallet-ledger.json",
             "api/arweave-wallet-status.json",
-            "generate_arweave_wallet_status.py",
+            "scripts/reconcile_native_ots_generated_state.py",
+            "group: main-write-lock",
+            "git push origin HEAD:main",
         ],
     )
+    require_contains(
+        "scripts/reconcile_native_ots_generated_state.py",
+        [
+            "scripts/generate_arweave_wallet_status.py",
+            "scripts/detect_archive_backlog.py",
+            '"paid_upload_performed": False',
+            '"ots_upgrade_performed": False',
+            "validate_native_registry",
+        ],
+    )
+    require_absent(
+        "scripts/reconcile_native_ots_generated_state.py",
+        [
+            "arweave_upload_payload.mjs",
+            "arweave_cost_gate.mjs",
+            "--enable-paid-upload",
+        ],
+    )
+
     require_contains(
         ".github/workflows/archive-backlog-repair.yml",
         [
@@ -146,24 +186,18 @@ def main() -> int:
     if "write_json" in updater:
         raise SystemExit("legacy data updater retains a historical registry write helper")
 
-    behavior_path = ROOT / "scripts/test_archive_backlog_dry_run_behavior.py"
-    if not behavior_path.exists():
-        raise SystemExit("archive backlog dry-run behavioral regression missing")
-    result = subprocess.run(
-        [sys.executable, str(behavior_path)],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
+    run_behavior(
+        "scripts/test_archive_backlog_dry_run_behavior.py",
+        "archive backlog dry-run behavioral regression",
     )
-    if result.returncode != 0:
-        raise SystemExit(
-            "archive backlog dry-run behavioral regression failed:\n"
-            + (result.stderr or result.stdout)[-5000:]
-        )
+    run_behavior(
+        "scripts/test_native_ots_transaction_behavior.py",
+        "Native OTS transaction behavioral regression",
+    )
 
     print(
         "PASS: active paid paths account for wallet spend; retired paths have no wallet capability; "
-        "backlog dry-run is read-only"
+        "backlog dry-run is read-only; Native OTS derived wallet state is reconciled safely"
     )
     return 0
 

@@ -74,7 +74,7 @@ def write_json(path: Path, obj: Any) -> None:
 def refresh_native_ots_backlog() -> None:
     detector = ROOT / "scripts" / "detect_archive_backlog.py"
     if detector.exists():
-        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=False)
+        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=True)
 
 
 def mark_native_ots_backlog_status(anchor_rel: str | None, status: str, error: str | None = None, tx_id: str | None = None) -> None:
