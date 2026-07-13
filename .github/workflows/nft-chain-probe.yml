@@ -18,8 +18,8 @@ jobs:
           CONTRACT: "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79"
         run: |
           set -euo pipefail
-          node <<'NODE'
-          const crypto = require('crypto');
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
           const contract = process.env.CONTRACT;
           const networks = [
             ['ethereum', 'https://ethereum-rpc.publicnode.com'],
