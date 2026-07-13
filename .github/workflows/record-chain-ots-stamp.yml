@@ -8,10 +8,15 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
 jobs:
   ots-stamp:
     runs-on: ubuntu-24.04
-    # Authorize write workflow actor
+    timeout-minutes: 30
     if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
     steps:
       - name: Authorize write workflow actor
@@ -20,39 +25,98 @@ jobs:
           ACTOR: ${{ github.actor }}
           GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
         run: |
+          set -euo pipefail
           ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
-
           if [ "$ACTOR" = "github-actions[bot]" ]; then
             echo "Authorized actor: $ACTOR"
             exit 0
           fi
-
           case ",$ALLOWLIST," in
-            *",$ACTOR,"*)
-              echo "Authorized actor: $ACTOR"
-              ;;
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
             *)
-              echo "Unauthorized actor for write workflow: $ACTOR"
-              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
+              echo "Unauthorized actor for write workflow: $ACTOR" >&2
               exit 1
               ;;
           esac
+
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
+
       - name: Record toolchain provenance
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - run: pip install opentimestamps-client
-      - run: python scripts/trinity_record_chain.py ots-stamp
-      - run: |
-          if ! git diff --quiet; then
-            git config user.name "trinity-ots-bot"
-            git config user.email "actions@github.com"
+      - name: Install pinned Python and OpenTimestamps dependencies
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt -r requirements-ots.txt
+          ots --help
+
+      - name: Rebase current main before stamping
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
+      - name: Stamp, verify, commit, and push batch proofs
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-ots-bot"
+          git config user.email "actions@github.com"
+
+          stamp_and_stage() {
+            python scripts/trinity_record_chain.py ots-stamp
+            python scripts/trinity_record_chain.py verify
+            # Stage before deciding whether anything changed so newly created
+            # untracked .ots files cannot be missed by git diff.
             git add record-chain/
-            git commit -m "Stamp record-chain batches with OTS"
-            git push
+            git diff --cached --check
+          }
+
+          stamp_and_stage
+          if git diff --cached --quiet; then
+            echo "No Record Chain batches require a new OTS stamp."
+            exit 0
           fi
+
+          git commit -m "Stamp record-chain batches with OTS"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::OTS stamp commit left unstaged or untracked files."
+            git status --short
+            exit 1
+          fi
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push failed on attempt ${attempt}; rebasing and reconciling OTS stamps."
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Record Chain changed concurrently; OTS stamping must restart on current main."
+              exit 1
+            fi
+
+            stamp_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "::error::OTS stamp reconciliation left an incomplete worktree."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push Record Chain OTS stamps after retries."
+          exit 1
