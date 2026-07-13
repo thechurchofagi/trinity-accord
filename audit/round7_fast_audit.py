@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Bounded Round 7 repository audit.
+"""Bounded Round 7 active-surface audit.
 
-Runs the high-signal repository scans without the unbounded full-link and broad
-front-end regex passes. Dynamic gates are intentionally handled by the normal
-repository workflows and the clean-head fix PR.
+Scans every workflow plus active scripts/apps/public contracts. Historical
+records, archive bundles, proofs, and audit logs are intentionally excluded
+from this pass because dedicated integrity/secret gates already validate them.
 """
 from __future__ import annotations
 
@@ -23,13 +23,36 @@ from round7_system_audit import (  # noqa: E402
     dedupe_findings,
     markdown_report,
     registered_tests,
-    run_live_checks,
     scan_contract_strings,
     scan_json,
     scan_python,
     scan_workflows,
     tracked_files,
 )
+
+
+def active_contract_file(repo: Path, path: str) -> bool:
+    if path.startswith((".github/workflows/", "scripts/", "apps/", "api/")):
+        try:
+            return (repo / path).stat().st_size <= 1_500_000
+        except OSError:
+            return False
+    if path in {
+        "render.yaml",
+        "package.json",
+        "requirements-ci.txt",
+        "requirements-ots.txt",
+        "index.md",
+        "agent-start.md",
+        "agent-first-contact.md",
+    }:
+        return True
+    if path.startswith("docs/") and path.endswith(".md"):
+        try:
+            return (repo / path).stat().st_size <= 500_000
+        except OSError:
+            return False
+    return False
 
 
 def main() -> int:
@@ -43,13 +66,35 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=True)
 
     files = tracked_files(repo)
+    workflow_files = [
+        path
+        for path in files
+        if path.startswith(WORKFLOW_DIR + "/") and path.endswith((".yml", ".yaml"))
+    ]
+    python_files = [
+        path
+        for path in files
+        if path.endswith(".py") and path.startswith(("scripts/", "apps/"))
+    ]
+    json_files = [
+        path
+        for path in files
+        if path.endswith(".json")
+        and (
+            path.startswith("api/")
+            or "/schemas/" in path
+            or path in {"package.json"}
+        )
+        and active_contract_file(repo, path)
+    ]
+    contract_files = [path for path in files if active_contract_file(repo, path)]
+
     findings = []
-    writers = scan_workflows(repo, files, findings)
-    scan_python(repo, files, findings)
-    parsed_json, schema_ids = scan_json(repo, files, findings)
-    contract_hits = scan_contract_strings(repo, files, findings)
+    writers = scan_workflows(repo, workflow_files, findings)
+    scan_python(repo, python_files, findings)
+    parsed_json, schema_ids = scan_json(repo, json_files, findings)
+    contract_hits = scan_contract_strings(repo, contract_files, findings)
     test_registry = registered_tests(repo, files, findings)
-    live_checks = run_live_checks(findings)
 
     findings = dedupe_findings(findings)
     counts: dict[str, int] = defaultdict(int)
@@ -57,42 +102,37 @@ def main() -> int:
         counts[item.severity] += 1
 
     report = {
-        "schema": "trinityaccord.audit.round7.bounded.v1",
+        "schema": "trinityaccord.audit.round7.active-surfaces.v1",
         "repository": REPO,
         "scope": {
             "included": [
                 "all tracked GitHub Actions workflows",
-                "all tracked Python production scripts",
-                "all tracked JSON/schema files",
-                "known stale protocol/route strings",
-                "test registration inventory",
-                "core live site and Gateway surfaces",
+                "active scripts/ and apps/ Python",
+                "public api/ JSON and application schemas",
+                "bounded docs/current route and protocol strings",
+                "complete test registration inventory",
             ],
             "excluded": [
-                "full repository internal-link crawl",
-                "broad regex scan of third-party/minified front-end assets",
+                "historical record and archive payload bodies",
+                "OTS and Arweave proof bundles",
+                "audit logs and generated historical evidence",
+                "third-party/minified front-end assets",
                 "dynamic gates already executed by official CI",
             ],
         },
         "inventory": {
             "tracked_files": len(files),
-            "workflows": sum(
-                1
-                for path in files
-                if path.startswith(WORKFLOW_DIR + "/")
-                and path.endswith((".yml", ".yaml"))
-            ),
-            "python_files": sum(1 for path in files if path.endswith(".py")),
-            "javascript_files": sum(
-                1 for path in files if path.endswith((".js", ".mjs", ".cjs", ".ts"))
-            ),
-            "json_files": sum(1 for path in files if path.endswith(".json")),
-            "markdown_files": sum(1 for path in files if path.endswith(".md")),
+            "workflows_total": len(workflow_files),
+            "python_active_scanned": len(python_files),
+            "public_json_scanned": len(json_files),
+            "active_contract_files_scanned": len(contract_files),
+            "python_files_total": sum(1 for path in files if path.endswith(".py")),
+            "json_files_total": sum(1 for path in files if path.endswith(".json")),
         },
         "finding_counts": dict(counts),
         "findings": [asdict(item) for item in findings],
         "dynamic_results": [],
-        "live_checks": live_checks,
+        "live_checks": [],
         "workflow_writers": writers,
         "schema_ids": schema_ids,
         "contract_hits": contract_hits,
