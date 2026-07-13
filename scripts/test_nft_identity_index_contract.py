@@ -17,6 +17,7 @@ ADDRESS_RE = re.compile(r"^0x[0-9a-f]{40}$")
 HASH_RE = re.compile(r"^0x[0-9a-f]{64}$")
 ARWEAVE_TXID_RE = re.compile(r"^[A-Za-z0-9_-]{43}$")
 DECIMAL_RE = re.compile(r"^(0|[1-9][0-9]*)$")
+ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
 
 
 def fail(message: str) -> None:
@@ -85,6 +86,7 @@ def main() -> int:
     require(isinstance(chain_id, str) and DECIMAL_RE.fullmatch(chain_id) and int(chain_id) > 0, "invalid chain ID")
     require(HASH_RE.fullmatch(source.get("snapshot_block_hash", "")) is not None, "invalid snapshot block hash")
     require(DECIMAL_RE.fullmatch(source.get("snapshot_block_number", "")) is not None, "invalid snapshot block number")
+    snapshot_block = int(source["snapshot_block_number"])
 
     expected: dict[tuple[str, str], dict] = {}
     for contract_raw, tokens in token_index.items():
@@ -101,6 +103,32 @@ def main() -> int:
     require(summary.get("receipt_verified") == len(expected), "not every mint receipt is verified")
     require(len(assets) == len(expected), "asset count does not match token_index")
     require(len(contracts) == len(token_index), "contract summary count mismatch")
+
+    contract_bounds: dict[str, tuple[int, int]] = {}
+    total_resolved = 0
+    for item in contracts:
+        contract = item.get("contract_address")
+        require(isinstance(contract, str) and ADDRESS_RE.fullmatch(contract) is not None, f"invalid contract summary address: {contract}")
+        require(contract in {value.lower() for value in token_index}, f"unknown contract summary: {contract}")
+        start = item.get("scan_start_block", "")
+        end = item.get("scan_end_block", "")
+        require(DECIMAL_RE.fullmatch(start) is not None, f"invalid scan start block: {contract}")
+        require(DECIMAL_RE.fullmatch(end) is not None, f"invalid scan end block: {contract}")
+        start_num = int(start)
+        end_num = int(end)
+        require(start_num > 0, f"scan must not fall back to block zero: {contract}")
+        require(end_num >= start_num, f"scan end precedes scan start: {contract}")
+        require(end_num <= snapshot_block, f"scan end exceeds snapshot block: {contract}")
+        require(item.get("scan_start_method") in {"historical_code_binary_search", "operator_override"}, f"untrusted scan start method: {contract}")
+        require(item.get("scan_start_warning") is None, f"scan start has warning/fallback: {contract}")
+        target = item.get("target_tokens")
+        resolved = item.get("resolved_tokens")
+        require(isinstance(target, int) and target > 0, f"invalid contract target count: {contract}")
+        require(resolved == target, f"contract has unresolved tokens: {contract}")
+        total_resolved += resolved
+        contract_bounds[contract] = (start_num, end_num)
+
+    require(total_resolved == len(expected), "contract summaries do not resolve all NFTs")
 
     seen: set[tuple[str, str]] = set()
     asset_ids: set[str] = set()
@@ -131,8 +159,12 @@ def main() -> int:
         require(HASH_RE.fullmatch(mint.get("block_hash", "")) is not None, f"invalid mint block hash: {contract}/{token_id}")
         for field in ("block_number", "transaction_index", "log_index", "quantity"):
             require(DECIMAL_RE.fullmatch(mint.get(field, "")) is not None, f"invalid mint {field}: {contract}/{token_id}")
+        mint_block = int(mint["block_number"])
+        require(contract in contract_bounds, f"missing contract scan bounds: {contract}")
+        scan_start, scan_end = contract_bounds[contract]
+        require(scan_start <= mint_block <= scan_end, f"mint block outside verified scan range: {contract}/{token_id}")
         require(mint.get("event") in {"Transfer", "TransferSingle", "TransferBatch"}, f"invalid mint event: {contract}/{token_id}")
-        require(mint.get("from") == "0x0000000000000000000000000000000000000000", f"mint is not from zero address: {contract}/{token_id}")
+        require(mint.get("from") == ZERO_ADDRESS, f"mint is not from zero address: {contract}/{token_id}")
         require(ADDRESS_RE.fullmatch(mint.get("to", "")) is not None, f"invalid mint recipient: {contract}/{token_id}")
         require(mint.get("receipt_verified") is True, f"mint receipt not verified: {contract}/{token_id}")
         require(mint.get("receipt_status") in {"1", None}, f"mint transaction failed: {contract}/{token_id}")
@@ -141,7 +173,9 @@ def main() -> int:
             require(tx_hash in tx_url, f"transaction URL does not contain hash: {contract}/{token_id}")
 
         content = asset.get("content") or {}
-        require(content == expected[key], f"content linkage drift: {contract}/{token_id}")
+        require(content.get("token_id") == token_id, f"content token ID mismatch: {contract}/{token_id}")
+        content_core = {"metadata": content.get("metadata"), "media": content.get("media")}
+        require(content_core == expected[key], f"content linkage drift: {contract}/{token_id}")
         require(ARWEAVE_TXID_RE.fullmatch(content["metadata"]["arweave_txid"] or "") is not None, f"invalid metadata Arweave TXID: {contract}/{token_id}")
         for media in content["media"]:
             require(ARWEAVE_TXID_RE.fullmatch(media["arweave_txid"] or "") is not None, f"invalid media Arweave TXID: {contract}/{token_id}")
@@ -164,6 +198,7 @@ def main() -> int:
         "TransferBatch(address,address,address,uint256[],uint256[])",
         "Transfer(address,address,uint256)",
         "ZERO_TOPIC",
+        "historical_code_binary_search",
         "receipt_verified: true",
         "eip155:${chainId}",
         "repository_does_not_embed_car_payloads: true",
@@ -171,7 +206,10 @@ def main() -> int:
     ]:
         require(marker in generator, f"generator missing control: {marker}")
 
-    print(f"PASS: NFT identity index links {len(assets)} NFTs to {len(mint_txs)} receipt-verified mint transactions")
+    print(
+        f"PASS: NFT identity index links {len(assets)} NFTs to "
+        f"{len(mint_txs)} receipt-verified mint transactions with non-zero scan bounds"
+    )
     return 0
 
 
