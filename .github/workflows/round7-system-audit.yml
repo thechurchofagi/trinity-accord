@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: round7-system-audit-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   audit:
@@ -18,7 +18,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.head.ref == 'audit/deep-round7-system-boundaries'
     runs-on: ubuntu-24.04
-    timeout-minutes: 18
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -28,13 +28,11 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
-      - name: Run static repository and live-surface audit
+      - name: Run bounded static repository and live-surface audit
         run: |
           set -euo pipefail
           rm -rf audit-results/round7
-          python audit/round7_system_audit.py . \
-            --output audit-results/round7 \
-            --skip-dynamic
+          python audit/round7_fast_audit.py . --output audit-results/round7
       - name: Commit deterministic audit report
         run: |
           set -euo pipefail
@@ -45,5 +43,5 @@ jobs:
             echo 'Round 7 audit report unchanged.'
             exit 0
           fi
-          git commit -m 'audit: record round7 static and live findings'
+          git commit -m 'audit: record round7 bounded static and live findings'
           git push origin HEAD:audit/deep-round7-system-boundaries
