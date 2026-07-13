@@ -97,11 +97,16 @@ def main() -> int:
     ]:
         require(marker in downloader, f"verified CAR downloader missing integrity control: {marker}")
 
-    legacy = read("scripts/backup-nft-individual-v2.mjs")
-    require(
-        "v1 script returned FIRST small JSON (~4 NFTs)" in legacy,
-        "v1 retirement no longer has the repository's documented partial-index root cause",
-    )
+    legacy = read("scripts/backup-nft-individual-v2.mjs").lower()
+    for marker in [
+        "returned the first match",
+        "only 4 nfts",
+        "largest token-index json object across all blocks",
+    ]:
+        require(
+            marker in legacy,
+            f"v1 retirement no longer documents its partial-index root cause: {marker}",
+        )
 
     print("PASS: NFT Release backup paths separate verified publishing from read-only legacy previews")
     return 0
