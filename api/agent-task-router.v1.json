@@ -183,6 +183,8 @@
         "/api/context-load-map.json",
         "/api/context-packs/nft-chronicle-context.json",
         "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-ultra-brief.md",
+        "/nft-text-descriptions/chronicle-abridged.md",
         "/nft-text-descriptions/chronicle-agent-context.md",
         "/nft-text-descriptions/chronicle-index.json"
       ],
@@ -192,7 +194,8 @@
       "allowed_use": [
         "historical_context_analysis",
         "timeline_analysis",
-        "stage_and_theme_analysis",
+        "calendar_timeline_and_overlapping_category_analysis",
+        "abridgment_audit_analysis",
         "human_origin_witness_analysis",
         "non_canonical_chronicle_summary"
       ],
@@ -211,6 +214,7 @@
       "read": [
         "/api/context-packs/nft-chronicle-context.json",
         "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
+        "/nft-text-descriptions/chronicle-abridged.md",
         "/nft-text-descriptions/chronicle-agent-context.md"
       ],
       "optional_full_load": [
@@ -237,6 +241,8 @@
         "/api/authority.json",
         "/api/context-packs/nft-chronicle-context.json",
         "/nft-text-descriptions/chronicle-summary.json",
+        "/nft-text-descriptions/chronicle-ultra-brief.md",
+        "/nft-text-descriptions/chronicle-abridged.md",
         "/nft-text-descriptions/chronicle-agent-context.md",
         "/nft-text-descriptions/chronicle-index.json"
       ],
