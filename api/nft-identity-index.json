@@ -1,0 +1,6 @@
+{
+  "schema": "trinityaccord.nft-identity-index.redirect.v1",
+  "canonical": "../nft-identity-index.json",
+  "status": "generation_pending",
+  "note": "The temporary generator replaces this projection with the verified canonical index before review."
+}
