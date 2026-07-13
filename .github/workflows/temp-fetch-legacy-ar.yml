@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - .github/workflows/temp-fetch-legacy-ar.yml
+      - .github/temp-fetch-legacy-ar.sh
 
 permissions:
   contents: read
@@ -16,40 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Fetch unresolved legacy Arweave payloads
         shell: bash
-        run: |
-          set -euo pipefail
-          txids=(
-            "mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s"
-            "I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw"
-          )
-          gateways=(
-            "https://arweave.net"
-            "https://ar-io.net"
-            "https://g8way.io"
-            "https://permagate.io"
-          )
-          for txid in "${txids[@]}"; do
-            out="${txid}.raw"
-            rm -f "$out"
-            for gateway in "${gateways[@]}"; do
-              echo "FETCH_ATTEMPT $txid $gateway"
-              if curl --fail --silent --show-error --location \
-                --connect-timeout 20 --max-time 120 --retry 2 \
-                "$gateway/$txid" --output "$out"; then
-                echo "FETCH_SUCCESS $txid $gateway"
-                break
-              fi
-              rm -f "$out"
-            done
-            test -s "$out"
-            size="$(stat -c '%s' "$out")"
-            test "$size" -le 500000
-            echo "PAYLOAD_BEGIN $txid"
-            echo "SIZE $size"
-            sha256sum "$out" | awk '{print "SHA256 " $1}'
-            printf 'BASE64 '
-            base64 -w0 "$out"
-            printf '\nPAYLOAD_END %s\n' "$txid"
-          done
+        run: bash .github/temp-fetch-legacy-ar.sh
