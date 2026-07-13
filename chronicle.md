@@ -47,6 +47,19 @@ This is the preferred human reading edition.
 
 It is an index, not a substitute for the source text.
 
+## Abridgment Audit
+
+The abridged edition is reduction-audited rather than silently truncated:
+
+- all 175 source entries are represented;
+- 136 entries contain some reduction;
+- 2,547,618 source characters are omitted from the abridged reading edition but remain verbatim in the full edition and individual NFT files;
+- 24 entries contain structurally detected long report, historical, legal, policy, transcript, or other source-document material;
+- 1,087,619 detected embedded-source characters are summarized rather than repeated;
+- every entry records source characters, included characters, omitted characters, omission class, and the preservation location.
+
+These counts describe the generated reading edition. They do not imply that omitted historical documents are unimportant; they prevent large appendices from obscuring the NFT title, time, personal witness, artwork, song, and core event record.
+
 ## Interpretation Correction
 
 The previous generated context divided the Chronicle into seven fixed stages. That scheme is retired as the default interpretation because:
