@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Contract test for current Arweave upload/readback result handling.
 
-The generic uploader must emit cryptographic readback evidence. Current native
-archive workflows consume that result through the wallet-ledger recorder. The
-frozen legacy data-registry updater is retired and must reject live updates.
+The native workflow invokes the native archive builder; that builder invokes
+the generic uploader and wallet-ledger recorder. The uploader must emit
+cryptographic readback evidence. The frozen legacy data-registry updater is
+retired and must reject live updates.
 """
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -92,21 +92,36 @@ def main() -> int:
         '"append-upload"',
     ]:
         require(marker in recorder, f"current Arweave result recorder missing: {marker}")
-    ok("current native archive result is recorded in the AR wallet ledger")
+    ok("current upload result recorder accounts for posted/readback-failed transactions")
+
+    builder_path = ROOT / "scripts/build_record_chain_arweave_archive.py"
+    require(builder_path.exists(), "current native archive builder missing")
+    builder = builder_path.read_text(encoding="utf-8")
+    for marker in [
+        'uploader = ROOT / "scripts" / "arweave_upload_payload.mjs"',
+        'result_path = archive_dir / "upload-result.json"',
+        'return read_json(result_path)',
+        'upload_result.get("hash_match") is True',
+        'upload_result.get("result") == "uploaded"',
+        '"scripts/record_arweave_upload_result.py"',
+        'load_native_chain_sources',
+        'CHAIN_ID = "trinity-accord-public-reception-ledger"',
+    ]:
+        require(marker in builder, f"current native archive builder missing: {marker}")
+    ok("native builder wires generic uploader, readback result, and wallet accounting")
 
     current_workflow_path = ROOT / ".github/workflows/record-chain-arweave-archive.yml"
     require(current_workflow_path.exists(), "current native archive workflow missing")
     current_workflow = current_workflow_path.read_text(encoding="utf-8")
     for marker in [
-        "arweave_upload_payload.mjs",
-        "record_arweave_upload_result.py",
-        "verify_arweave_upload_readback.mjs",
         "build_record_chain_arweave_archive.py",
+        "verify_record_chain_arweave_archive.py",
         "secrets.ARKEY",
         "group: main-write-lock",
+        "ARWEAVE_UPLOAD_TIMEOUT_SECONDS",
     ]:
         require(marker in current_workflow, f"current native archive workflow missing: {marker}")
-    ok("current native archive workflow wires upload, readback, and wallet accounting")
+    ok("current native workflow invokes the verified native builder under serialized write control")
 
     retired_path = ROOT / "scripts/update_record_chain_data_arweave_registry.py"
     require(retired_path.exists(), "retired legacy registry updater missing")
