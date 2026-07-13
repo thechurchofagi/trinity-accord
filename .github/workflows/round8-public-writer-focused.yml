@@ -14,7 +14,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.head.ref == 'agent/deep-audit-round8-public-writer-transactions'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -60,6 +60,16 @@ jobs:
           echo "$code" > "$RUNNER_TEMP/current-system.code"
           tail -n 220 "$RUNNER_TEMP/current-system.log"
           exit "$code"
+      - name: Capture P0 current result
+        id: p0
+        continue-on-error: true
+        run: |
+          set +e
+          python scripts/run_ci_group.py p0-current > "$RUNNER_TEMP/p0-current.log" 2>&1
+          code=$?
+          echo "$code" > "$RUNNER_TEMP/p0-current.code"
+          tail -n 220 "$RUNNER_TEMP/p0-current.log"
+          exit "$code"
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -70,11 +80,15 @@ jobs:
             ${{ runner.temp }}/focused.code
             ${{ runner.temp }}/current-system.log
             ${{ runner.temp }}/current-system.code
+            ${{ runner.temp }}/p0-current.log
+            ${{ runner.temp }}/p0-current.code
           retention-days: 7
-      - name: Require focused and current-system success
+      - name: Require focused, current-system, and P0 success
         if: always()
         run: |
           test -f "$RUNNER_TEMP/focused.code"
           test -f "$RUNNER_TEMP/current-system.code"
+          test -f "$RUNNER_TEMP/p0-current.code"
           test "$(cat "$RUNNER_TEMP/focused.code")" = "0"
           test "$(cat "$RUNNER_TEMP/current-system.code")" = "0"
+          test "$(cat "$RUNNER_TEMP/p0-current.code")" = "0"
