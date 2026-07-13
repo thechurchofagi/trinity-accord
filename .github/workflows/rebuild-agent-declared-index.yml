@@ -1,13 +1,8 @@
 name: Rebuild Agent-Declared Verification Index
 
 on:
-  # Trigger when an issue is closed only.
-  # Removed 'labeled' — each label addition created a separate run,
-  # causing 6+ concurrent runs per issue close (1 close + 5 labels).
-  # Authorship label changes can use workflow_dispatch manually.
   issues:
     types: [closed]
-  # Allow manual trigger
   workflow_dispatch:
     inputs:
       include_test:
@@ -19,49 +14,31 @@ on:
 permissions:
   contents: write
   issues: read
+  actions: write
 
 concurrency:
-  group: generated-public-status-writes
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
   rebuild-index:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - name: Authorize write workflow actor
         env:
           ACTOR: ${{ github.actor }}
           EVENT_NAME: ${{ github.event_name }}
-          SENDER: ${{ github.event.sender.login }}
         run: |
           set -euo pipefail
-          case "$ACTOR" in
-            thechurchofagi|github-actions[bot])
-              echo "Authorized actor: $ACTOR"
-              ;;
-            trinity-accord-agent-issue-gateway\[bot\])
-              if [ "$EVENT_NAME" = "issues" ]; then
-                echo "Authorized Gateway bot issue event: $ACTOR"
-              else
-                echo "Gateway bot is only authorized for issues events, got: $EVENT_NAME"
-                exit 1
-              fi
-              ;;
-            *)
-              echo "Unauthorized actor for write workflow: $ACTOR"
-              exit 1
-              ;;
-          esac
-          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
-            case "$SENDER" in
-              thechurchofagi|github-actions[bot])
-                echo "Authorized repository_dispatch sender: $SENDER"
-                ;;
-              *)
-                echo "Unauthorized repository_dispatch sender: $SENDER"
-                exit 1
-                ;;
-            esac
+          if [[ "$ACTOR" == "thechurchofagi" || "$ACTOR" == "github-actions[bot]" ]]; then
+            echo "Authorized actor: $ACTOR"
+          elif [[ "$ACTOR" == "trinity-accord-agent-issue-gateway[bot]" && "$EVENT_NAME" == "issues" ]]; then
+            echo "Authorized Gateway bot issue event: $ACTOR"
+          else
+            echo "Unauthorized actor for write workflow: $ACTOR" >&2
+            exit 1
           fi
 
       - name: Validate issue event
@@ -69,37 +46,22 @@ jobs:
         if: github.event_name == 'issues'
         env:
           ACTION: ${{ github.event.action }}
-          LABEL_NAME: ${{ github.event.label.name }}
         run: |
           set -euo pipefail
-
           if [ "$ACTION" = "closed" ]; then
             echo "Issue closed — rebuilding index."
             echo "should_run=true" >> "$GITHUB_OUTPUT"
-            exit 0
+          else
+            echo "Unsupported issue action: $ACTION — skipping rebuild."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
           fi
 
-          if [ "$ACTION" = "labeled" ]; then
-            case "$LABEL_NAME" in
-              authorship:claimed|authorship:key-verified)
-                echo "Authorship label '$LABEL_NAME' added — rebuilding index."
-                echo "should_run=true" >> "$GITHUB_OUTPUT"
-                exit 0
-                ;;
-              *)
-                echo "Label '$LABEL_NAME' is not an authorship label — skipping rebuild."
-                echo "should_run=false" >> "$GITHUB_OUTPUT"
-                exit 0
-                ;;
-            esac
-          fi
-
-          echo "Unsupported issue action: $ACTION — skipping rebuild."
-          echo "should_run=false" >> "$GITHUB_OUTPUT"
-
-      - name: Checkout
+      - name: Checkout current main
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: main
 
       - name: Setup Python
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
@@ -110,92 +72,97 @@ jobs:
       - name: Record toolchain provenance
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
 
       - name: Verify gh CLI
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         run: |
-          if ! command -v gh &>/dev/null; then
-            echo "::error::gh CLI not found on runner. Install it manually."
-            exit 1
-          fi
+          set -euo pipefail
+          command -v gh >/dev/null
           gh --version
 
-      - name: Authenticate gh
+      - name: Rebase current main before index generation
         if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh auth setup-git
-
-      - name: Rebuild index from Issues
-        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          INCLUDE_TEST: ${{ inputs.include_test }}
         run: |
-          EXTRA_ARGS=""
-          if [ "$INCLUDE_TEST" = "true" ]; then
-            EXTRA_ARGS="--include-test"
-          fi
-          python3 scripts/build_agent_declared_verification_index_from_issues.py \
-            --repo "${{ github.repository }}" \
-            $EXTRA_ARGS
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
 
-      - name: Check for changes
-        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
-        id: diff
-        run: |
-          if git diff --quiet api/agent-declared-verification-index.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Commit and push
+      - name: Rebuild, commit, and push index
         id: push
-        if: ${{ (github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true') && steps.diff.outputs.changed == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.gate.outputs.should_run == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           INCLUDE_TEST: ${{ inputs.include_test }}
         run: |
-          EXTRA_ARGS=""
+          set -euo pipefail
+          printf '%s\n' "pushed=false" >> "$GITHUB_OUTPUT"
+
+          args=(
+            python3 scripts/build_agent_declared_verification_index_from_issues.py
+            --repo "$GITHUB_REPOSITORY"
+          )
           if [ "${INCLUDE_TEST:-false}" = "true" ]; then
-            EXTRA_ARGS="--include-test"
+            args+=(--include-test)
           fi
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add api/agent-declared-verification-index.json
+
+          rebuild_and_stage() {
+            "${args[@]}"
+            git add api/agent-declared-verification-index.json
+            git diff --cached --check
+          }
+
+          rebuild_and_stage
+          if git diff --cached --quiet; then
+            echo "Agent-declared verification index is already current."
+            exit 0
+          fi
+
           git commit -m "chore: rebuild agent-declared verification index from Issues [skip ci]"
-          # DEEP-REBASE-001: regenerate after rebase
-          if ! git pull --rebase -X theirs origin main; then
-            echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            echo "::error::Tracked index changes remain outside the commit."
             git status --short
             exit 1
           fi
-          python3 scripts/build_agent_declared_verification_index_from_issues.py \
-            --repo "${{ github.repository }}" \
-            $EXTRA_ARGS
-          git add api/agent-declared-verification-index.json
-          if ! git diff --cached --quiet; then
-            git commit --amend --no-edit
-          fi
-          git push --force-with-lease
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              printf '%s\n' "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            echo "Push failed on attempt ${attempt}; rebasing and rebuilding the issue-derived index."
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Index source or projection changed concurrently; rebuild must restart."
+              exit 1
+            fi
+
+            rebuild_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+              echo "::error::Rebased issue index left tracked drift."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push agent-declared verification index after retries."
+          exit 1
 
       - name: Trigger Deploy Pages
-        if: steps.push.outcome == 'success'
+        if: steps.push.outputs.pushed == 'true'
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if [ -z "$GH_PAT" ]; then
-            echo "::warning::GH_PAT not set, skipping Deploy Pages trigger"
-            exit 0
-          fi
-          echo "Triggering Deploy Pages..."
-          curl -sS -X POST \
-            -H "Authorization: Bearer $GH_PAT" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" \
-            -d '{"ref":"main"}'
-          echo "Deploy Pages triggered."
+          echo "Dispatching Deploy Pages on main."
+          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main

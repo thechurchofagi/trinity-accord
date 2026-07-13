@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Phase 6C: Render manual deploy contract.
+"""Phase 6C: Render manual deploy and Round 8 public-writer contract.
 
 Verifies that Render manual deploy is properly configured and cannot report a
-suspended or unconfirmed deployment as triggered.
+suspended or unconfirmed deployment as triggered. Also registers the public
+index writer transaction regression because those workflows share the same
+production deployment/status boundary.
 """
 from __future__ import annotations
 
@@ -20,7 +22,6 @@ def ok(msg: str) -> None:
 def main() -> int:
     errors: list[str] = []
 
-    # 1. render_manual_deploy.py exists and references RENDER
     script = ROOT / "scripts" / "render_manual_deploy.py"
     if not script.exists():
         errors.append("scripts/render_manual_deploy.py missing")
@@ -62,7 +63,6 @@ def main() -> int:
         else:
             ok("Render deployment behavior regression passes")
 
-    # 2. workflow is workflow_dispatch only
     wf = ROOT / ".github" / "workflows" / "render-manual-deploy.yml"
     if not wf.exists():
         errors.append(".github/workflows/render-manual-deploy.yml missing")
@@ -79,8 +79,15 @@ def main() -> int:
         for trigger in ["workflow_run:", "schedule:", "push:", "pull_request:"]:
             if trigger in text:
                 errors.append(f"render-manual-deploy.yml has unexpected trigger: {trigger}")
+        for marker in [
+            "github.ref == 'refs/heads/main'",
+            "Authorize production deployment actor and ref",
+            "ref: main",
+            "contents: read",
+        ]:
+            if marker not in text:
+                errors.append(f"render-manual-deploy.yml missing main-only secret boundary: {marker}")
 
-    # 3. render.yaml has both gateways autoDeploy: false
     render_yaml = ROOT / "render.yaml"
     if render_yaml.exists():
         text = render_yaml.read_text(encoding="utf-8")
@@ -90,6 +97,21 @@ def main() -> int:
             errors.append("render.yaml may not have autoDeploy: false for all services")
     else:
         ok("render.yaml not found (services may be configured via API)")
+
+    round8 = ROOT / "scripts/test_round8_public_writer_transaction_contract.py"
+    if not round8.exists():
+        errors.append("Round 8 public writer transaction contract is missing")
+    else:
+        result = subprocess.run(
+            [sys.executable, str(round8)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            errors.append("Round 8 public writer transaction contract failed: " + (result.stderr or result.stdout)[-8000:])
+        else:
+            ok("Round 8 public writer transaction contract passes")
 
     if errors:
         print("FAIL: Render manual deploy contract errors:")
