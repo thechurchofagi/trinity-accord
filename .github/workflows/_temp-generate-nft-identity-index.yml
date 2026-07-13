@@ -3,6 +3,9 @@ name: TEMP Generate NFT Identity Index
 on:
   push:
     branches: [agent/nft-mint-identity-index]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -13,7 +16,7 @@ concurrency:
 
 jobs:
   generate:
-    if: ${{ github.ref == 'refs/heads/agent/nft-mint-identity-index' }}
+    if: ${{ github.ref == 'refs/heads/agent/nft-mint-identity-index' || github.head_ref == 'agent/nft-mint-identity-index' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     steps:
