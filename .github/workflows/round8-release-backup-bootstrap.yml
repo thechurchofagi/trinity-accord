@@ -1,0 +1,82 @@
+name: Round 8 Release Backup Bootstrap
+
+on:
+  push:
+    branches:
+      - agent/deep-audit-round8-release-backups
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: agent/deep-audit-round8-release-backups
+      - name: Make the applicator push-safe and self-removing
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/round8-release-backup-applicator.yml')
+          text = path.read_text(encoding='utf-8')
+          if '__GH_EXPR_OPEN__' in text:
+              print('Applicator already bootstrapped; no changes.')
+              raise SystemExit(0)
+
+          text = text.replace(
+              "on:\n  pull_request:\n    branches:\n      - main\n",
+              "on:\n  push:\n    branches:\n      - agent/deep-audit-round8-release-backups\n  pull_request:\n    branches:\n      - main\n",
+              1,
+          )
+          text = text.replace(
+              "    if: >-\n      github.event.pull_request.head.repo.full_name == github.repository &&\n      github.event.pull_request.head.ref == 'agent/deep-audit-round8-release-backups'\n",
+              "    if: >-\n      github.event_name == 'push' ||\n      (github.event.pull_request.head.repo.full_name == github.repository &&\n      github.event.pull_request.head.ref == 'agent/deep-audit-round8-release-backups')\n",
+              1,
+          )
+
+          lines = text.splitlines()
+          for index in range(30, len(lines)):
+              lines[index] = lines[index].replace('$' + '{{', '__GH_EXPR_OPEN__')
+          text = '\n'.join(lines) + '\n'
+
+          restore = """
+          for generated_path in [
+              '.github/workflows/backup-nft-arweave-mirror.yml',
+              '.github/workflows/backup-nft-cars.yml',
+              '.github/workflows/backup-nft-individual.yml',
+              '.github/workflows/backup-nft-individual-v2.yml',
+          ]:
+              generated = ROOT / generated_path
+              generated.write_text(
+                  generated.read_text(encoding='utf-8').replace('__GH_EXPR_OPEN__', '$' + '{{'),
+                  encoding='utf-8',
+              )
+"""
+          marker = "          PY\n\n      - name: Validate applied changes"
+          if marker not in text:
+              raise SystemExit('Applicator heredoc terminator not found')
+          text = text.replace(marker, restore + "          PY\n\n      - name: Validate applied changes", 1)
+
+          text = text.replace(
+              "          git add \\\n",
+              "          git rm .github/workflows/round8-release-backup-applicator.yml .github/workflows/round8-release-backup-bootstrap.yml\n          git add \\\n",
+              1,
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          if git diff --quiet; then
+            echo 'No bootstrap changes.'
+            exit 0
+          fi
+          git config user.name 'trinity-round8-audit-bot'
+          git config user.email 'actions@github.com'
+          git add .github/workflows/round8-release-backup-applicator.yml
+          git commit -m 'audit: enable release-backup applicator'
+          git push origin HEAD:agent/deep-audit-round8-release-backups
