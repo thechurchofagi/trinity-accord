@@ -29,10 +29,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate all Chronicle editions
+      - name: Generate all Chronicle editions and routes
         run: |
           set -euo pipefail
-          python3 -m py_compile scripts/generate_nft_chronicle_context.py
+          python3 -m py_compile \
+            scripts/generate_nft_chronicle_context.py \
+            scripts/chronicle_editions_v2.py \
+            scripts/update_chronicle_read_routes.py
           python3 scripts/generate_nft_chronicle_context.py
 
       - name: Commit generated Chronicle artifacts
@@ -46,12 +49,15 @@ jobs:
             nft-text-descriptions/chronicle-abridged.md \
             nft-text-descriptions/chronicle-ultra-brief.md \
             nft-text-descriptions/chronicle-agent-context.md \
-            nft-text-descriptions/chronicle-summary.json
+            nft-text-descriptions/chronicle-summary.json \
+            api/context-load-map.json \
+            api/agent-required-reading.json \
+            api/agent-task-router.v1.json
           if git diff --cached --quiet; then
-            echo "Chronicle editions already committed"
+            echo "Chronicle editions and routes already committed"
             exit 0
           fi
-          git commit -m "Generate corrected 175-entry Chronicle editions"
+          git commit -m "Generate corrected 175-entry Chronicle editions and routes"
           git push origin HEAD:agent/rebuild-nft-chronicle-editions
 
       - name: Validate committed Chronicle artifacts
