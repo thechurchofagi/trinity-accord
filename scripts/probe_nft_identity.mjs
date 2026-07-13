@@ -87,9 +87,9 @@ async function inspectProxy() {
   return proxy;
 }
 
-async function inspectBlockscout() {
-  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}`);
-  const addressSummary = {
+function selectAddressSummary(address) {
+  return {
+    available_keys: Object.keys(address).sort(),
     hash: address.hash,
     name: address.name,
     is_contract: address.is_contract,
@@ -97,19 +97,40 @@ async function inspectBlockscout() {
     implementations: address.implementations,
     creator_address_hash: address.creator_address_hash,
     creation_tx_hash: address.creation_tx_hash,
+    creation_transaction_hash: address.creation_transaction_hash,
     token: address.token,
   };
+}
+
+async function inspectBlockscout() {
+  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}`);
+  const addressSummary = selectAddressSummary(address);
   console.log(`PROBE blockscout-address=${JSON.stringify(addressSummary)}`);
 
-  const transfers = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}/token-transfers`);
-  const items = Array.isArray(transfers.items) ? transfers.items : [];
+  const token = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}`);
+  console.log(`PROBE blockscout-token=${JSON.stringify(token)}`);
+
+  const transfers = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/transfers`);
+  const transferItems = Array.isArray(transfers.items) ? transfers.items : [];
   const transferSummary = {
-    item_count: items.length,
+    available_keys: Object.keys(transfers).sort(),
+    item_count: transferItems.length,
     next_page_params: transfers.next_page_params || null,
-    first_items: items.slice(0, 3),
+    first_items: transferItems.slice(0, 3),
   };
-  console.log(`PROBE blockscout-transfers=${JSON.stringify(transferSummary)}`);
-  return {address: addressSummary, transfers: transferSummary};
+  console.log(`PROBE blockscout-token-transfers=${JSON.stringify(transferSummary)}`);
+
+  const instances = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/instances`);
+  const instanceItems = Array.isArray(instances.items) ? instances.items : [];
+  const instanceSummary = {
+    available_keys: Object.keys(instances).sort(),
+    item_count: instanceItems.length,
+    next_page_params: instances.next_page_params || null,
+    first_items: instanceItems.slice(0, 3),
+  };
+  console.log(`PROBE blockscout-instances=${JSON.stringify(instanceSummary)}`);
+
+  return {address: addressSummary, token, transfers: transferSummary, instances: instanceSummary};
 }
 
 async function main() {
