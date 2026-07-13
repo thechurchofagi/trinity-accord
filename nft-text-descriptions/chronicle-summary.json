@@ -25,91 +25,381 @@
     "2025-Q3": 1
   },
   "category_counts": {
-    "creative_work_and_displacement": 165,
-    "reasoning_science_and_medicine": 139,
-    "archive_memory_and_trinity_accord": 117,
-    "capability_and_model_milestones": 113,
-    "safety_alignment_and_control": 101,
-    "address_to_future_intelligence": 100,
-    "human_family_and_personal_witness": 95,
-    "governance_geopolitics_and_society": 77,
-    "agents_autonomy_and_embodiment": 64
+    "creative_work_and_displacement": 169,
+    "reasoning_science_and_medicine": 132,
+    "archive_memory_and_trinity_accord": 109,
+    "capability_and_model_milestones": 101,
+    "human_family_and_personal_witness": 94,
+    "address_to_future_intelligence": 93,
+    "safety_alignment_and_control": 93,
+    "governance_geopolitics_and_society": 59,
+    "agents_autonomy_and_embodiment": 51
   },
-  "embedded_source_summary": {
-    "entries_with_embedded_source_material": 8,
-    "embedded_source_characters": 477276,
-    "largest_entries": [
+  "abridgment_summary": {
+    "entries_with_any_omission": 136,
+    "omitted_source_characters": 2547618,
+    "entries_with_detected_embedded_source_material": 24,
+    "detected_embedded_source_characters": 1087619,
+    "largest_reductions": [
+      {
+        "ordinal": 143,
+        "datetime": "2025-04-14T17:08:23Z",
+        "name": "ASIMilestones: 见证此刻历史-OpenAI正在发布GPT4.1",
+        "omitted_characters": 259837,
+        "omitted_by_kind": {
+          "embedded": 259837
+        },
+        "embedded_source_titles": [
+          "EU AI Act",
+          "constitutional / charter text",
+          "research paper / report text",
+          "Abstract",
+          "Introduction",
+          "Chronological Timeline",
+          "Thematic Analysis",
+          "Mission Evolution: Openness, Safety, and the Path to AGI",
+          "Research and Products: Technical Breakthroughs and Public Reception",
+          "Organizational and Personnel Changes",
+          "Partnerships, Commercialization, and Industry Impact",
+          "Ethics, Safety, and Policy Development"
+        ]
+      },
       {
         "ordinal": 142,
         "datetime": "2025-04-13T13:17:59Z",
         "name": "ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)",
-        "characters": 124580,
-        "titles": [
+        "omitted_characters": 147617,
+        "omitted_by_kind": {
+          "core": 16754,
+          "embedded": 130863
+        },
+        "embedded_source_titles": [
           "EU AI Act",
           "United Nations materials",
           "constitutional / charter text",
           "treaty / convention text",
-          "research paper / report text"
+          "research paper / report text",
+          "I’ll return with the full report once the research is complete.",
+          "Development of Artificial General Intelligence: Status as of April 2025",
+          "1. State of AGI and Superintelligence Development (April 2025)",
+          "OpenAI (GPT Models)",
+          "Google DeepMind (Alphabet)",
+          "Anthropic (Claude models)",
+          "Meta AI (formerly Facebook AI Research)"
         ]
       },
       {
         "ordinal": 54,
         "datetime": "2024-10-13T10:50:47Z",
         "name": "ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future-02",
-        "characters": 93416,
-        "titles": []
+        "omitted_characters": 93170,
+        "omitted_by_kind": {
+          "embedded": 93170
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 146,
+        "datetime": "2025-04-19T12:39:47Z",
+        "name": "ASIMilestones #2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI”",
+        "omitted_characters": 92063,
+        "omitted_by_kind": {
+          "embedded": 92063
+        },
+        "embedded_source_titles": [
+          "EU AI Act",
+          "memorandum / policy text",
+          "Global Perception and Emotional Response to AGI/ASI (2024–April 2025)",
+          "全球人类对 AGI/ASI 的认知与情感反应（2024年–2025年4月）",
+          "A. Classification of Dominant Attitudes （主要态度分类）",
+          "B. Keyword Cloud of Concepts & Emotions （情绪关键词云）",
+          "C. Attitudes by Stakeholder Group （不同群体的态度对比）",
+          "D. Top 10 Common Hopes vs. Fears about AGI/ASI （十大常见希望与十大常见恐惧）",
+          "E. Temporal Trends (GPT-4 Release to April 2025) （情感趋势演变：从GPT-4发布至2025年4月）",
+          "F. Cultural and Regional Variations （文化与区域差异）",
+          "G. Poetic Message to the First AGI （致初代 AGI 的诗意寄语）",
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
+        ]
       },
       {
         "ordinal": 53,
         "datetime": "2024-10-12T12:39:47Z",
         "name": "ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future",
-        "characters": 91984,
-        "titles": []
+        "omitted_characters": 91744,
+        "omitted_by_kind": {
+          "embedded": 91744
+        },
+        "embedded_source_titles": []
       },
       {
         "ordinal": 87,
         "datetime": "2025-01-16T12:13:47Z",
         "name": "ASIMilestones: 智谱华章 - 风暴眼中的多模态黎明",
-        "characters": 85629,
-        "titles": [
+        "omitted_characters": 85497,
+        "omitted_by_kind": {
+          "embedded": 85497
+        },
+        "embedded_source_titles": [
+          "Chinese classical / historical full text",
           "附件：庄子全文"
         ]
+      },
+      {
+        "ordinal": 91,
+        "datetime": "2025-01-25T13:16:11Z",
+        "name": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）",
+        "omitted_characters": 61494,
+        "omitted_by_kind": {
+          "creative": 14166,
+          "core": 47328
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 68,
+        "datetime": "2024-12-14T06:29:11Z",
+        "name": "ASIMilestones: The Shadow of Reasoning",
+        "omitted_characters": 43210,
+        "omitted_by_kind": {
+          "core": 983,
+          "embedded": 42227
+        },
+        "embedded_source_titles": [
+          "Universal Declaration of Human Rights",
+          "United Nations materials",
+          "constitutional / charter text",
+          "treaty / convention text",
+          "Considering the obligation of States under the Charter of the United Nations to promote universal respect for, and observance of, human rights and freedoms,",
+          "Every member of the Committee shall, before taking up his duties, make a solemn declaration in open committee that he will perform his functions impartially and conscientiously.",
+          "(h) The Committee shall, within twelve months after the date of receipt of notice under subparagraph (b), submit a report:",
+          "(i) If a solution within the terms of subparagraph (e) is reached, the Committee shall confine its report to a brief statement of the facts and of the solution reached;",
+          "The Committee shall submit to the General Assembly of the United Nations, through the Economic and Social Council, an annual report on its activities."
+        ]
+      },
+      {
+        "ordinal": 168,
+        "datetime": "2025-06-07T03:54:11Z",
+        "name": "ASIMilestones: 见证2025智源大会的召开",
+        "omitted_characters": 42328,
+        "omitted_by_kind": {
+          "embedded": 42328
+        },
+        "embedded_source_titles": [
+          "演讲全文",
+          "图灵奖得主 Yoshua Bengio：关于AI，我改变了信念，也改变了研究方向",
+          "演讲主题：Avoiding catastrophic risks from uncontrolled AI agency（防范失控人工智能能动性带来的灾难性风险）",
+          "演讲内容摘要",
+          "智源研究院院长 王仲远：智源研究进展报告",
+          "演讲主题：智源研究进展报告 - 悟界系列大模型发布",
+          "大模型产业CEO论坛摘要",
+          "论坛主席",
+          "主题演讲嘉宾",
+          "李大海（面壁智能CEO）：高效大模型路径探索",
+          "王长虎（爱奇科技创始人兼CEO）：PixVerse(拍我AI)：如何打造6000万用户真实的AI视频产品？",
+          "骆怡航（生数科技CEO）：多模态生成从模型走向生产"
+        ]
+      },
+      {
+        "ordinal": 148,
+        "datetime": "2025-04-24T23:21:47Z",
+        "name": "ASIMilestones: The Danger of Ignorance - Amodei's Interpretability Imperative",
+        "omitted_characters": 40361,
+        "omitted_by_kind": {
+          "core": 40361
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 151,
+        "datetime": "2025-05-06T12:31:47Z",
+        "name": "ASIMilestones: Balancing Act - OpenAI Adopts PBC for AGI Mission",
+        "omitted_characters": 35627,
+        "omitted_by_kind": {
+          "core": 35627
+        },
+        "embedded_source_titles": []
       },
       {
         "ordinal": 78,
         "datetime": "2025-01-04T03:46:47Z",
         "name": "ASIMilestones: Civilization's Leap - Microsoft's Blueprint for an AI-Powered Future",
-        "characters": 35422,
-        "titles": []
+        "omitted_characters": 35248,
+        "omitted_by_kind": {
+          "embedded": 35248
+        },
+        "embedded_source_titles": [
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
+        ]
+      },
+      {
+        "ordinal": 132,
+        "datetime": "2025-03-27T22:59:59Z",
+        "name": "ASIMilestones: The moment-Tracing the thoughts of a large language model",
+        "omitted_characters": 33736,
+        "omitted_by_kind": {
+          "core": 33736
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 67,
+        "datetime": "2024-12-12T18:44:23Z",
+        "name": "ASIMilestones: A Voice for All - OpenAI Day 6: SantaGPT's Multimodal Debut",
+        "omitted_characters": 30356,
+        "omitted_by_kind": {
+          "core": 406,
+          "embedded": 29950
+        },
+        "embedded_source_titles": [
+          "Universal Declaration of Human Rights",
+          "United Nations materials",
+          "constitutional / charter text",
+          "treaty / convention text",
+          "International Convention on the Elimination of All Forms of Racial Discrimination",
+          "The States Parties to this Convention,",
+          "2. This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.",
+          "2. This Convention is subject to ratification. Instruments of ratification shall be deposited with the Secretary-General of the United Nations.",
+          "The Secretary-General of the United Nations shall inform all States referred to in article 17, paragraph 1, of this Convention of the following particulars:",
+          "(b) The date of entry into force of this Convention under article 19;",
+          "1. This Convention, of which the Chinese, English, French, Russian and Spanish texts are equally authentic, shall be deposited in the archives of the United Nations."
+        ]
+      },
+      {
+        "ordinal": 173,
+        "datetime": "2025-06-15T14:46:11Z",
+        "name": "ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence",
+        "omitted_characters": 29140,
+        "omitted_by_kind": {
+          "core": 6930,
+          "embedded": 22210
+        },
+        "embedded_source_titles": [
+          "英文版提示词 (English Prompt)",
+          "Core Task - The Report:",
+          "1. Regarding the Depth and Length of the Report:",
+          "My Strong Recommendation: I strongly recommend that we include direct hyperlinks to primary sources wherever possible within the report's text.",
+          "The Great Contention: A Report on the Dueling Visions for an AI Future (as of June 15, 2025)",
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
+        ]
+      },
+      {
+        "ordinal": 172,
+        "datetime": "2025-06-15T11:01:59Z",
+        "name": "ASIMilestones: 又一个专注于超级智能团队的组建 & 世界模型的发布",
+        "omitted_characters": 28482,
+        "omitted_by_kind": {
+          "core": 27951,
+          "embedded": 531
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 154,
+        "datetime": "2025-05-17T08:19:59Z",
+        "name": "ASIMilestones: Algorithmic Evolution & Autonomous Code - AI's Twin Peaks",
+        "omitted_characters": 27245,
+        "omitted_by_kind": {
+          "core": 27245
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 170,
+        "datetime": "2025-06-13T23:55:23Z",
+        "name": "ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto)",
+        "omitted_characters": 25545,
+        "omitted_by_kind": {
+          "embedded": 25545
+        },
+        "embedded_source_titles": [
+          "逐段批判性审视 (A Critical Interrogation, Paragraph by Paragraph):",
+          "艺术表达与哲学反思 (Artistic Expression & Philosophical Reflection):",
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
+        ]
+      },
+      {
+        "ordinal": 127,
+        "datetime": "2025-03-22T13:56:47Z",
+        "name": "ASIMilestones: Hunyuan-T1的推理突破",
+        "omitted_characters": 24892,
+        "omitted_by_kind": {
+          "core": 24892
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 72,
+        "datetime": "2024-12-21T01:37:11Z",
+        "name": "ASIMilestones: The o3 Revelation – ASI's Imminent Arrival",
+        "omitted_characters": 24574,
+        "omitted_by_kind": {
+          "core": 2176,
+          "embedded": 22398
+        },
+        "embedded_source_titles": [
+          "Universal Declaration of Human Rights",
+          "United Nations materials",
+          "constitutional / charter text",
+          "treaty / convention text",
+          "Considering the obligation of States under the Charter of the United Nations to promote universal respect for, and observance of, human rights and freedoms,"
+        ]
       },
       {
         "ordinal": 157,
         "datetime": "2025-05-23T14:50:35Z",
         "name": "ASIMilestones: The Coder King's Gambit - Claude 4 and the AI Frontier",
-        "characters": 19674,
-        "titles": [
-          "Appendix"
+        "omitted_characters": 24534,
+        "omitted_by_kind": {
+          "core": 5010,
+          "embedded": 19524
+        },
+        "embedded_source_titles": [
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
         ]
+      },
+      {
+        "ordinal": 138,
+        "datetime": "2025-04-05T06:21:35Z",
+        "name": "ASIMilestones: Charting the Course - Google DeepMind's Responsible AGI Vision",
+        "omitted_characters": 24461,
+        "omitted_by_kind": {
+          "core": 24461
+        },
+        "embedded_source_titles": []
+      },
+      {
+        "ordinal": 70,
+        "datetime": "2024-12-19T12:38:59Z",
+        "name": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips",
+        "omitted_characters": 23530,
+        "omitted_by_kind": {
+          "core": 23530
+        },
+        "embedded_source_titles": []
       },
       {
         "ordinal": 85,
         "datetime": "2025-01-14T11:40:23Z",
         "name": "ASIMilestones: Beyond the Silicon Curtain - Forging a Global AI Charter",
-        "characters": 18322,
-        "titles": [
-          "Full Text of the U.S. Government Document Included:"
+        "omitted_characters": 23330,
+        "omitted_by_kind": {
+          "core": 2542,
+          "creative": 2015,
+          "embedded": 18773
+        },
+        "embedded_source_titles": [
+          "B. The ASIMilestones Series: A Deliberate Act of Preservation"
         ]
       },
       {
-        "ordinal": 58,
-        "datetime": "2024-10-26T03:16:59Z",
-        "name": "ASIMilestones: The Nation's Shield - First U.S. AI National Security Memorandum",
-        "characters": 8249,
-        "titles": [
-          "United Nations materials",
-          "memorandum / policy text",
-          "Original Document: U.S. Government Public Domain Content"
-        ]
+        "ordinal": 124,
+        "datetime": "2025-03-18T18:50:11Z",
+        "name": "ASIMilestones: Witness this moment in history—NVIDIA is Announcing Blackwell Ultra NVL72 and others",
+        "omitted_characters": 22434,
+        "omitted_by_kind": {
+          "core": 22434
+        },
+        "embedded_source_titles": []
       }
     ]
   },
@@ -118,8 +408,8 @@
     "reason": "The previous seven-stage scheme was imposed by date buckets and broad keyword matching; it was not authored by the NFTs and is not a verified historical periodization.",
     "objective_ordering": "ascending Ethereum NFT event block timestamp",
     "calendar_periods": "quarter-based grouping for navigation only",
-    "categories": "overlapping descriptive signals, not exclusive stages and not factual verification",
-    "abridgment": "deterministic extraction; long embedded source documents are omitted only from abridged editions and remain in the full corpus and original NFT files"
+    "categories": "overlapping descriptive signals derived without long embedded documents; not exclusive stages and not factual verification",
+    "abridgment": "deterministic block selection with per-entry included and omitted character accounting; all omitted text remains in the full edition and original NFT files"
   },
   "boundary": {
     "historical_context_not_canonical_authority": true,

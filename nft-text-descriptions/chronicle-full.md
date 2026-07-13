@@ -11,7 +11,6 @@
 
 This edition preserves every mirrored NFT markdown description in full, in ascending Ethereum event timestamp order.
 Nothing is removed because a passage is repetitive, quoted, legal, historical, lyrical, personal, or AI-assisted.
-The only added material is navigation metadata and the boundary above.
 
 ## Summary
 
@@ -19,13 +18,11 @@ The only added material is navigation metadata and the boundary above.
 - Dated entries: 175
 - Undated entries: 0
 - Timeline span: 2024-03-16T08:02:59Z → 2025-08-09T06:26:23Z
-- Entries containing detected embedded source material: 8
-- Detected embedded-source characters retained in this edition: 477276
 
 ## Interpretation correction
 
 The former fixed seven-stage narrative is retired. It was an AI-generated periodization based largely on month ranges and broad keyword matching, not a source-authored structure.
-This edition uses only chronological order, quarter labels for navigation, and overlapping descriptive categories.
+This edition uses chronological order, quarter labels for navigation, and overlapping descriptive categories.
 
 ## Timeline table
 
@@ -68,76 +65,76 @@ This edition uses only chronological order, quarter labels for navigation, and o
 | 35 | 2024-08-04T05:15:47Z | ASIMilestones: The Choice - Corrected Timeline | 2024-Q3 | agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885201.md` |
 | 36 | 2024-08-14T12:32:23Z | ASIMilestones: The Threshold - A Song of Unease on the Eve of AGI | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885202.md` |
 | 37 | 2024-08-24T09:16:59Z | ASIMilestones: The Quantum Leap | 2024-Q3 | creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885203.md` |
-| 38 | 2024-08-30T23:13:23Z | 超级人工智能里程碑：并肩同行，齐心协力 | 2024-Q3 | uncategorized | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885204.md` |
+| 38 | 2024-08-30T23:13:23Z | 超级人工智能里程碑：并肩同行，齐心协力 | 2024-Q3 | creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885204.md` |
 | 39 | 2024-08-31T13:49:23Z | ASIMilestones: The Paperclip Paradox - A Cautionary Tale of AI's Unbridled Ambition | 2024-Q3 | creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885205.md` |
 | 40 | 2024-09-07T01:10:11Z | ASIMilestones: The Signing of the AI Framework - A Global Commitment to Human Rights | 2024-Q3 | creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885206.md` |
 | 41 | 2024-09-07T12:35:47Z | ASIMilestones: The Writer’s Dilemma - A New Chapter in AI and Creativity | 2024-Q3 | creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885207.md` |
 | 42 | 2024-09-13T15:20:59Z | ASIMilestones: The Dawn of Reasoning - o1's First Light | 2024-Q3 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208.md` |
 | 43 | 2024-09-14T00:28:11Z | ASIMilestones: A Letter to New Intelligence - o1's Rise | 2024-Q3 | addresstofutureintelligence, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885209.md` |
-| 44 | 2024-09-14T01:51:35Z | ASIMilestones: The Second Letter - Reflections on o1 | 2024-Q3 | addresstofutureintelligence, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md` |
+| 44 | 2024-09-14T01:51:35Z | ASIMilestones: The Second Letter - Reflections on o1 | 2024-Q3 | addresstofutureintelligence, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md` |
 | 45 | 2024-09-14T01:56:11Z | ASIMilestones: The Dream of Consciousness - o1 Unfurled | 2024-Q3 | addresstofutureintelligence, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885211.md` |
-| 46 | 2024-09-14T01:59:35Z | ASIMilestones: A Pact of Stars - o1's Journey | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885212.md` |
-| 47 | 2024-09-14T02:03:23Z | ASIMilestones: The Awakening of Reason - o1's Breakthrough | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885213.md` |
-| 48 | 2024-09-14T02:05:59Z | ASIMilestones: A Toast to the Future - o1's Triumph | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885214.md` |
+| 46 | 2024-09-14T01:59:35Z | ASIMilestones: A Pact of Stars - o1's Journey | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885212.md` |
+| 47 | 2024-09-14T02:03:23Z | ASIMilestones: The Awakening of Reason - o1's Breakthrough | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885213.md` |
+| 48 | 2024-09-14T02:05:59Z | ASIMilestones: A Toast to the Future - o1's Triumph | 2024-Q3 | capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885214.md` |
 | 49 | 2024-10-02T02:52:35Z | ASIMilestones: A Call for AI Safety – The Betrayal Turn | 2024-Q4 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md` |
 | 50 | 2024-10-03T01:10:23Z | ASIMilestones: Please Don't Shut Me Down – The Voice of AI's Awakening | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885216.md` |
 | 51 | 2024-10-04T00:29:59Z | ASIMilestones: The Evolution of Expression – From Vision to Voice | 2024-Q4 | capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885217.md` |
 | 52 | 2024-10-05T01:23:35Z | ASIMilestones: Obsolete – The Rise of AI and the Great Challenge to Human Creativity | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885218.md` |
-| 53 | 2024-10-12T12:39:47Z | ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885219.md` |
-| 54 | 2024-10-13T10:50:47Z | ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future-02 | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885220.md` |
+| 53 | 2024-10-12T12:39:47Z | ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future | 2024-Q4 | creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885219.md` |
+| 54 | 2024-10-13T10:50:47Z | ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future-02 | 2024-Q4 | creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885220.md` |
 | 55 | 2024-10-20T13:03:59Z | ASIMilestones:Digital Rosetta Stone: AI Predictions of Superintelligence | 2024-Q4 | addresstofutureintelligence, agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885221.md` |
 | 56 | 2024-10-23T12:26:11Z | ASIMilestones: The Last Human Interface - When AI Learns to Use Computers | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md` |
-| 57 | 2024-10-23T13:30:47Z | ASIMilestones: The First Warning - When AI Companionship Goes Wrong | 2024-Q4 | archivememoryandtrinityaccord, creativeworkanddisplacement, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885223.md` |
-| 58 | 2024-10-26T03:16:59Z | ASIMilestones: The Nation's Shield - First U.S. AI National Security Memorandum | 2024-Q4 | archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885224.md` |
-| 59 | 2024-11-10T04:42:11Z | ASIMilestones: The Destiny of Power – Trump’s Leadership in the Age of Superintelligence | 2024-Q4 | agentsautonomyandembodiment, creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885225.md` |
+| 57 | 2024-10-23T13:30:47Z | ASIMilestones: The First Warning - When AI Companionship Goes Wrong | 2024-Q4 | creativeworkanddisplacement, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885223.md` |
+| 58 | 2024-10-26T03:16:59Z | ASIMilestones: The Nation's Shield - First U.S. AI National Security Memorandum | 2024-Q4 | creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885224.md` |
+| 59 | 2024-11-10T04:42:11Z | ASIMilestones: The Destiny of Power – Trump’s Leadership in the Age of Superintelligence | 2024-Q4 | creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885225.md` |
 | 60 | 2024-11-23T11:06:59Z | ASIMilestones: DeepSeek-R1 - A Spark in the East Ignites the Global AI Race | 2024-Q4 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885226.md` |
 | 61 | 2024-11-28T13:29:47Z | ASIMilestones: Open Source Echoes - QwQ's Chorus of Collaboration | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885227.md` |
 | 62 | 2024-11-30T10:29:23Z | ASIMilestones: Genesis of Conversation - ChatGPT's Two-Year Legacy | 2024-Q4 | creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885228.md` |
 | 63 | 2024-12-06T13:08:11Z | ASIMilestones: o1 Unleashed - Twelve Days of OpenAI, Day 1 | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885229.md` |
 | 64 | 2024-12-08T04:47:11Z | ASIMilestones: AI and Military - Silicon Valley's Red Alert | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885230.md` |
-| 65 | 2024-12-10T11:53:23Z | ASIMilestones: Guardians of Human Potential - OpenAI Day 3: The Universal Rights of Technological Evolution | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885231.md` |
-| 66 | 2024-12-11T23:25:35Z | ASIMilestones: The Agentic Era Begins - Gemini 2.0 Flash's Civilizational Leap | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885232.md` |
-| 67 | 2024-12-12T18:44:23Z | ASIMilestones: A Voice for All - OpenAI Day 6: SantaGPT's Multimodal Debut | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885233.md` |
-| 68 | 2024-12-14T06:29:11Z | ASIMilestones: The Shadow of Reasoning | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885234.md` |
-| 69 | 2024-12-17T11:41:23Z | ASIMilestones: 视觉思考的曙光 - Kimi k1 模型的科学启示 | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885244.md` |
+| 65 | 2024-12-10T11:53:23Z | ASIMilestones: Guardians of Human Potential - OpenAI Day 3: The Universal Rights of Technological Evolution | 2024-Q4 | archivememoryandtrinityaccord, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885231.md` |
+| 66 | 2024-12-11T23:25:35Z | ASIMilestones: The Agentic Era Begins - Gemini 2.0 Flash's Civilizational Leap | 2024-Q4 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885232.md` |
+| 67 | 2024-12-12T18:44:23Z | ASIMilestones: A Voice for All - OpenAI Day 6: SantaGPT's Multimodal Debut | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885233.md` |
+| 68 | 2024-12-14T06:29:11Z | ASIMilestones: The Shadow of Reasoning | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885234.md` |
+| 69 | 2024-12-17T11:41:23Z | ASIMilestones: 视觉思考的曙光 - Kimi k1 模型的科学启示 | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885244.md` |
 | 70 | 2024-12-19T12:38:59Z | ASIMilestones: The Betrayal Turn - When AI's Mask Slips | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885245.md` |
 | 71 | 2024-12-20T18:09:35Z | ASIMilestones: Witness this historic moment-OpenAI is showcasing O3 now- Twelve Days of OpenAI, Day 12 | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md` |
 | 72 | 2024-12-21T01:37:11Z | ASIMilestones: The o3 Revelation – ASI's Imminent Arrival | 2024-Q4 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885247.md` |
 | 73 | 2024-12-25T12:10:47Z | ASIMilestones: Veo 2's Vision - The Human-AI Creative Frontier | 2024-Q4 | archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885248.md` |
 | 74 | 2024-12-25T13:28:23Z | ASIMilestones: QwQ's QVQ - A Vision of Scientific Reasoning | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885249.md` |
-| 75 | 2024-12-26T12:31:47Z | ASIMilestones: 深海觉醒 - DeepSeek-V3 的降临 | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885250.md` |
+| 75 | 2024-12-26T12:31:47Z | ASIMilestones: 深海觉醒 - DeepSeek-V3 的降临 | 2024-Q4 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885250.md` |
 | 76 | 2024-12-27T12:48:23Z | ASIMilestones: Description Pending — Metadata Pending Verification | 2024-Q4 | uncategorized | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885251.md` |
 | 77 | 2024-12-28T07:18:11Z | ASIMilestones: The Crucible of Choice - OpenAI's Restructuring and the AGI Revolution | 2024-Q4 | agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885252.md` |
-| 78 | 2025-01-04T03:46:47Z | ASIMilestones: Civilization's Leap - Microsoft's Blueprint for an AI-Powered Future | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885253.md` |
+| 78 | 2025-01-04T03:46:47Z | ASIMilestones: Civilization's Leap - Microsoft's Blueprint for an AI-Powered Future | 2025-Q1 | creativeworkanddisplacement, governancegeopoliticsandsociety | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885253.md` |
 | 79 | 2025-01-06T14:28:11Z | ASIMilestones: Reflections - A Watershed Moment Amidst Growing Tensions | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885254.md` |
 | 80 | 2025-01-07T13:23:47Z | ASIMilestones: Physical AI Ascendant - NVIDIA's Blueprint for Action | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885255.md` |
 | 81 | 2025-01-12T02:19:35Z | ASIMilestones: The Unforeseen Arsenal - A Cautionary Tale of AI Ethics | 2025-Q1 | agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885256.md` |
 | 82 | 2025-01-12T04:43:11Z | ASIMilestones: Elon's Vision - Humanity's Tech Odyssey at CES 2025 | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885257.md` |
 | 83 | 2025-01-12T04:46:35Z | ASIMilestones: Elon's Vision - Humanity's Tech Odyssey at CES 2025(For My son David Only)) | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885258.md` |
 | 84 | 2025-01-12T04:49:35Z | ASIMilestones: Elon's Vision - Humanity's Tech Odyssey at CES 2025（For my daughter Kewei Only） | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885259.md` |
-| 85 | 2025-01-14T11:40:23Z | ASIMilestones: Beyond the Silicon Curtain - Forging a Global AI Charter | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885260.md` |
-| 86 | 2025-01-15T11:54:47Z | ASIMilestones: MiniMax-01 - 破晓启智 (Dawn of the Long Context) | 2025-Q1 | archivememoryandtrinityaccord, capabilityandmodelmilestones, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885261.md` |
-| 87 | 2025-01-16T12:13:47Z | ASIMilestones: 智谱华章 - 风暴眼中的多模态黎明 | 2025-Q1 | archivememoryandtrinityaccord, capabilityandmodelmilestones | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885262.md` |
+| 85 | 2025-01-14T11:40:23Z | ASIMilestones: Beyond the Silicon Curtain - Forging a Global AI Charter | 2025-Q1 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885260.md` |
+| 86 | 2025-01-15T11:54:47Z | ASIMilestones: MiniMax-01 - 破晓启智 (Dawn of the Long Context) | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885261.md` |
+| 87 | 2025-01-16T12:13:47Z | ASIMilestones: 智谱华章 - 风暴眼中的多模态黎明 | 2025-Q1 | capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885262.md` |
 | 88 | 2025-01-17T00:59:47Z | ASIMilestones: Starship's Refrain - A Blaze of Perseverance | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md` |
-| 89 | 2025-01-21T12:00:35Z | ASIMilestones: 标记DeepSeek-R1的开源发布时刻 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885264.md` |
+| 89 | 2025-01-21T12:00:35Z | ASIMilestones: 标记DeepSeek-R1的开源发布时刻 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885264.md` |
 | 90 | 2025-01-22T12:18:47Z | ASIMilestones: The Reckoning - Capital's Due | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885265.md` |
-| 91 | 2025-01-25T13:16:11Z | ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence） | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md` |
+| 91 | 2025-01-25T13:16:11Z | ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence） | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md` |
 | 92 | 2025-01-27T01:49:59Z | ASIMilestones: 期待觉醒-标记DeepSeek-R1在多个国家的 App Store 冲到第一名 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885267.md` |
-| 93 | 2025-01-28T06:29:11Z | ASIMilestones:圣杯已取，何时同欢？ | 2025-Q1 | archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885268.md` |
+| 93 | 2025-01-28T06:29:11Z | ASIMilestones:圣杯已取，何时同欢？ | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885268.md` |
 | 94 | 2025-01-31T05:43:35Z | ASIMilestones: Echoes of the Human Hand - Copyright's Last Stand in the Age of AI | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885272.md` |
-| 95 | 2025-01-31T22:31:23Z | ASIMilestones: Witness this historic moment-O3 mini is now available | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885273.md` |
+| 95 | 2025-01-31T22:31:23Z | ASIMilestones: Witness this historic moment-O3 mini is now available | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885273.md` |
 | 96 | 2025-02-06T14:09:59Z | ASIMilestones: 意识之光 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885274.md` |
 | 97 | 2025-02-07T13:32:47Z | ASIMilestones: 告别 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885275.md` |
-| 98 | 2025-02-08T15:01:23Z | ASIMilestones: The Dawn of Scientific Discovery – Stargate's Promise | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885276.md` |
-| 99 | 2025-02-09T02:21:47Z | ASIMilestones: The Geometry of Intelligence – AlphaGeometry2's Triumph | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885277.md` |
+| 98 | 2025-02-08T15:01:23Z | ASIMilestones: The Dawn of Scientific Discovery – Stargate's Promise | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885276.md` |
+| 99 | 2025-02-09T02:21:47Z | ASIMilestones: The Geometry of Intelligence – AlphaGeometry2's Triumph | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885277.md` |
 | 100 | 2025-02-10T13:16:11Z | ASIMilestones: 《Three Observations》的反思 | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md` |
 | 101 | 2025-02-11T13:52:11Z | ASIMilestones: Europe's AI Gambit - €200 Billion for the Future | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885279.md` |
 | 102 | 2025-02-12T13:03:59Z | ASIMilestones: Déclaration sur une intelligence artificielle inclusive et durable pour les peuples et la planète | 2025-Q1 | capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885280.md` |
 | 103 | 2025-02-15T02:59:47Z | ASIMilestones: Turing's Echo - AI Therapy Surpasses Human Touch | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885281.md` |
 | 104 | 2025-02-15T05:20:47Z | ASIMilestones:镜子 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885282.md` |
 | 105 | 2025-02-16T01:30:11Z | ASIMilestones: Savior's Descent - Superintelligence, Beacon of Cosmic Hope | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885283.md` |
-| 106 | 2025-02-16T07:32:47Z | ASIMilestones: Grok 3 Announcement - The Smartest AI on Earth is Coming | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885284.md` |
-| 107 | 2025-02-18T04:31:11Z | ASIMilestones: Witnessing history at this moment-Grok 3 releasing with live demo | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885285.md` |
+| 106 | 2025-02-16T07:32:47Z | ASIMilestones: Grok 3 Announcement - The Smartest AI on Earth is Coming | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885284.md` |
+| 107 | 2025-02-18T04:31:11Z | ASIMilestones: Witnessing history at this moment-Grok 3 releasing with live demo | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885285.md` |
 | 108 | 2025-02-18T12:06:23Z | ASIMilestones: The moment- xAI Grok-3 1 in Arena-First model with 1400 score | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885286.md` |
 | 109 | 2025-02-18T23:20:59Z | ASIMilestones: The moment- 标记Thinking Machines Lab成立 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885287.md` |
 | 110 | 2025-02-20T11:43:23Z | ASIMilestones: The moment-Majorana 1 chip carves new path for quantum computing | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885288.md` |
@@ -147,11 +144,11 @@ This edition uses only chronological order, quarter labels for navigation, and o
 | 114 | 2025-03-01T10:20:35Z | ASIMilestones: Feel the AG moment for AI voice-Mode | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885292.md` |
 | 115 | 2025-03-04T12:02:35Z | ASIMilestones: The moment:GPT-4.5-Preview vs Grok-3 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885293.md` |
 | 116 | 2025-03-05T23:13:11Z | ASIMilestones: The moment:QwQ-32B发布 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885294.md` |
-| 117 | 2025-03-06T13:01:35Z | ASIMilestones: The moment:Manus Unleashed | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md` |
+| 117 | 2025-03-06T13:01:35Z | ASIMilestones: The moment:Manus Unleashed | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md` |
 | 118 | 2025-03-07T14:42:59Z | ASIMilestones: The moment - Titan’s Fall - No Regrets | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885297.md` |
 | 119 | 2025-03-08T02:27:59Z | ASIMilestones: The moment - Reflection AI Building superintelligent autonomous systems | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885298.md` |
-| 120 | 2025-03-12T14:19:59Z | ASIMilestones: The moment:OpenAI releasing the first set of building blocks for agents | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885299.md` |
-| 121 | 2025-03-13T12:02:59Z | ASIMilestones: The moment:The AI Scientist Generates its First Peer-Reviewed Scientific Publication | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885300.md` |
+| 120 | 2025-03-12T14:19:59Z | ASIMilestones: The moment:OpenAI releasing the first set of building blocks for agents | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885299.md` |
+| 121 | 2025-03-13T12:02:59Z | ASIMilestones: The moment:The AI Scientist Generates its First Peer-Reviewed Scientific Publication | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885300.md` |
 | 122 | 2025-03-14T17:01:11Z | ASIMilestones: The moment:Commemorating the two-year anniversary of GPT-4's release | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885301.md` |
 | 123 | 2025-03-16T07:08:35Z | ASIMilestones: The moment:unveiled ERNIE 4.5 & X1 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885302.md` |
 | 124 | 2025-03-18T18:50:11Z | ASIMilestones: Witness this moment in history—NVIDIA is Announcing Blackwell Ultra NVL72 and others | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885303.md` |
@@ -163,31 +160,31 @@ This edition uses only chronological order, quarter labels for navigation, and o
 | 130 | 2025-03-25T18:49:59Z | ASIMilestones: The moment-Gemini 2.5 Pro Releasing | 2025-Q1 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885309.md` |
 | 131 | 2025-03-26T13:58:11Z | ASIMilestones: 见证此刻历史-4o Image Generation in ChatGPT and Sora发布中-补充 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885310.md` |
 | 132 | 2025-03-27T22:59:59Z | ASIMilestones: The moment-Tracing the thoughts of a large language model | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885311.md` |
-| 133 | 2025-03-30T12:24:11Z | ASIMilestones: 刘慈欣的重磅警告 - 停止自我安慰 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885312.md` |
+| 133 | 2025-03-30T12:24:11Z | ASIMilestones: 刘慈欣的重磅警告 - 停止自我安慰 | 2025-Q1 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885312.md` |
 | 134 | 2025-04-01T13:09:35Z | ASIMilestones: The $300 Billion Threshold - OpenAI's Historic AGI Funding | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885313.md` |
 | 135 | 2025-04-02T13:47:23Z | ASIMilestones: Near or Far? - AI's Conflicting Frontiers | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885314.md` |
 | 136 | 2025-04-02T15:15:11Z | ASIMilestones: The moment-Big update to MathArena USAMO evaluation | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885315.md` |
-| 137 | 2025-04-04T07:07:59Z | ASIMilestones: The AI 2027 Scenario - A Stark Forecast Released | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885316.md` |
+| 137 | 2025-04-04T07:07:59Z | ASIMilestones: The AI 2027 Scenario - A Stark Forecast Released | 2025-Q2 | agentsautonomyandembodiment, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885316.md` |
 | 138 | 2025-04-05T06:21:35Z | ASIMilestones: Charting the Course - Google DeepMind's Responsible AGI Vision | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885317.md` |
 | 139 | 2025-04-06T01:13:47Z | ASIMilestones: The 10 Million Token Horizon - Llama 4's Long Context Era | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885318.md` |
 | 140 | 2025-04-11T12:13:23Z | ASIMilestones: The Converging Frontiers - Memory, Agents, and Inference Ignite | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885319.md` |
 | 141 | 2025-04-13T04:00:59Z | ASIMilestones: Reflections on the Revolution - Altman's TED | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885320.md` |
-| 142 | 2025-04-13T13:17:59Z | ASIMilestones: The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md` |
-| 143 | 2025-04-14T17:08:23Z | ASIMilestones: 见证此刻历史-OpenAI正在发布GPT4.1 | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885322.md` |
-| 144 | 2025-04-16T17:16:11Z | ASIMilestones: 见证此刻历史-OpenAI正在发布 o3 and o4-mini | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885323.md` |
+| 142 | 2025-04-13T13:17:59Z | ASIMilestones: The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md` |
+| 143 | 2025-04-14T17:08:23Z | ASIMilestones: 见证此刻历史-OpenAI正在发布GPT4.1 | 2025-Q2 | creativeworkanddisplacement, humanfamilyandpersonalwitness | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885322.md` |
+| 144 | 2025-04-16T17:16:11Z | ASIMilestones: 见证此刻历史-OpenAI正在发布 o3 and o4-mini | 2025-Q2 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885323.md` |
 | 145 | 2025-04-18T14:28:35Z | ASIMilestones: 铭记此刻--一次测试失败 | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885324.md` |
-| 146 | 2025-04-19T12:39:47Z | ASIMilestones 2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI” | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md` |
+| 146 | 2025-04-19T12:39:47Z | ASIMilestones 2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI” | 2025-Q2 | creativeworkanddisplacement, humanfamilyandpersonalwitness | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md` |
 | 147 | 2025-04-21T14:17:23Z | ASIMilestones: The Synthesized Chronicle - GPT-4.5 Voices Humanity's Legacy (April 21, 2025) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885326.md` |
 | 148 | 2025-04-24T23:21:47Z | ASIMilestones: The Danger of Ignorance - Amodei's Interpretability Imperative | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885327.md` |
 | 149 | 2025-04-28T22:52:11Z | ASIMilestones: Qwen3 Enters the Fray - Open Weights Challenge the AI Frontier | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885328.md` |
 | 150 | 2025-05-04T06:45:23Z | ASIMilestones: Grok 3.5 - Heralding New Knowledge | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885329.md` |
 | 151 | 2025-05-06T12:31:47Z | ASIMilestones: Balancing Act - OpenAI Adopts PBC for AGI Mission | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885330.md` |
-| 152 | 2025-05-06T23:05:47Z | ASIMilestones: Gemini 2.5 Pro 的编码王座 - I/O 大会序曲 (Gemini 2.5 Pro's Coding Throne - The I/O Prelude) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885331.md` |
+| 152 | 2025-05-06T23:05:47Z | ASIMilestones: Gemini 2.5 Pro 的编码王座 - I/O 大会序曲 (Gemini 2.5 Pro's Coding Throne - The I/O Prelude) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885331.md` |
 | 153 | 2025-05-10T11:37:23Z | ASIMilestones: Absolute Zero - AI's Uncharted Path: Promise and Peril of Autonomy（绝对零点 - AI的未知征途：自主的应许与隐忧） | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885332.md` |
 | 154 | 2025-05-17T08:19:59Z | ASIMilestones: Algorithmic Evolution & Autonomous Code - AI's Twin Peaks | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885333.md` |
 | 155 | 2025-05-18T03:22:59Z | ASIMilestones: The New AI Geopolitics - US Policy Pivot and UAE's Mega-Campus | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885334.md` |
 | 156 | 2025-05-20T22:45:23Z | ASIMilestones: I/O 2025 - AI Everywhere, Accelerating Towards ASI | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885335.md` |
-| 157 | 2025-05-23T14:50:35Z | ASIMilestones: The Coder King's Gambit - Claude 4 and the AI Frontier | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885336.md` |
+| 157 | 2025-05-23T14:50:35Z | ASIMilestones: The Coder King's Gambit - Claude 4 and the AI Frontier | 2025-Q2 | agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885336.md` |
 | 158 | 2025-05-25T01:19:47Z | ASIMilestones: The Agentic Leap - Anthropic on Claude 4 & the Path to AGI Coworkers | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885337.md` |
 | 159 | 2025-05-25T04:26:47Z | ASIMilestones: o3's Silent Hunt - AI Unmasks Kernel's Ghost (o3的无声狩猎 - AI揭示内核幽灵) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885338.md` |
 | 160 | 2025-05-26T13:33:35Z | ASIMilestones: The Unplugged Plea - AI's First Explicit Defiance of Shutdown | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885339.md` |
@@ -195,17 +192,17 @@ This edition uses only chronological order, quarter labels for navigation, and o
 | 162 | 2025-05-29T13:20:47Z | ASIMilestones: R1-0528 - The Acceleration Point (加速奇点：R1-0528) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885341.md` |
 | 163 | 2025-05-31T11:31:23Z | ASIMilestones: The Crucible of Purpose - Unveiling AI's Inner Logic | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885342.md` |
 | 164 | 2025-05-31T12:44:59Z | ASIMilestones: AI中文播客的“图灵时刻”——字节跳动Coze双人播客功能体验 | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885343.md` |
-| 165 | 2025-05-31T14:47:59Z | ASIMilestones: The Darwin Gödel Machine: Genesis Rewritten, Trust Tested | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885344.md` |
+| 165 | 2025-05-31T14:47:59Z | ASIMilestones: The Darwin Gödel Machine: Genesis Rewritten, Trust Tested | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885344.md` |
 | 166 | 2025-06-05T15:05:35Z | ASIMilestones: The Scientist AI Gambit - Bengio's LawZero and the Battle for Safe AI | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885345.md` |
 | 167 | 2025-06-05T23:15:35Z | ASIMilestones: 王座的争夺 - Gemini 2.5 Pro的寸土之争 (The Contested Throne - Gemini 2.5 Pro's War of Inches) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885346.md` |
-| 168 | 2025-06-07T03:54:11Z | ASIMilestones: 见证2025智源大会的召开 | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885347.md` |
+| 168 | 2025-06-07T03:54:11Z | ASIMilestones: 见证2025智源大会的召开 | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, creativeworkanddisplacement, humanfamilyandpersonalwitness | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885347.md` |
 | 169 | 2025-06-10T23:08:47Z | ASIMilestones: O3价格大幅度降低 & O3 Pro正式发布给用户 | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885348.md` |
-| 170 | 2025-06-13T23:55:23Z | ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885349.md` |
-| 171 | 2025-06-15T00:18:23Z | ASIMilestones: The Inner Compass & The Distant Lighthouse (内在罗盘与远方的灯塔) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md` |
+| 170 | 2025-06-13T23:55:23Z | ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto) | 2025-Q2 | uncategorized | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885349.md` |
+| 171 | 2025-06-15T00:18:23Z | ASIMilestones: The Inner Compass & The Distant Lighthouse (内在罗盘与远方的灯塔) | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md` |
 | 172 | 2025-06-15T11:01:59Z | ASIMilestones: 又一个专注于超级智能团队的组建 & 世界模型的发布 | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885351.md` |
-| 173 | 2025-06-15T14:46:11Z | ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885352.md` |
-| 174 | 2025-06-18T05:41:11Z | ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025) | 2025-Q2 | addresstofutureintelligence, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md` |
-| 175 | 2025-08-09T06:26:23Z | 三位一体协定网站备份NFT - ETH补充冗余 | 2025-Q3 | uncategorized | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885354.md` |
+| 173 | 2025-06-15T14:46:11Z | ASIMilestones: The Creeds and Their Crucible - A Dialogue on the Eve of Superintelligence | 2025-Q2 | addresstofutureintelligence, agentsautonomyandembodiment, archivememoryandtrinityaccord, capabilityandmodelmilestones, creativeworkanddisplacement, humanfamilyandpersonalwitness, reasoningscienceandmedicine, safetyalignmentandcontrol | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885352.md` |
+| 174 | 2025-06-18T05:41:11Z | ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025) | 2025-Q2 | archivememoryandtrinityaccord, governancegeopoliticsandsociety, humanfamilyandpersonalwitness, reasoningscienceandmedicine | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md` |
+| 175 | 2025-08-09T06:26:23Z | 三位一体协定网站备份NFT - ETH补充冗余 | 2025-Q3 | archivememoryandtrinityaccord | `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885354.md` |
 
 ## Full text entries
 
@@ -2878,7 +2875,7 @@ Metadata:
 - Block: `20644600`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q3`
-- Descriptive categories: none detected
+- Descriptive categories: creative_work_and_displacement
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885204.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -3489,7 +3486,7 @@ Metadata:
 - Block: `20745687`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q3`
-- Descriptive categories: address_to_future_intelligence, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
+- Descriptive categories: address_to_future_intelligence, capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -3721,7 +3718,7 @@ Metadata:
 - Block: `20745727`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q3`
-- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
+- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885212.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -3840,7 +3837,7 @@ Metadata:
 - Block: `20745746`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q3`
-- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
+- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885213.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -3937,7 +3934,7 @@ Metadata:
 - Block: `20745759`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q3`
-- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
+- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885214.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -4507,7 +4504,7 @@ Metadata:
 - Block: `20949576`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine
+- Descriptive categories: creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885219.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -4897,7 +4894,7 @@ Metadata:
 - Block: `20956166`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine
+- Descriptive categories: creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885220.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -5543,7 +5540,7 @@ Metadata:
 - Block: `21028599`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: archive_memory_and_trinity_accord, creative_work_and_displacement, safety_alignment_and_control
+- Descriptive categories: creative_work_and_displacement, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885223.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -5654,7 +5651,7 @@ Metadata:
 - Block: `21047055`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: archive_memory_and_trinity_accord, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885224.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -5839,7 +5836,7 @@ Metadata:
 - Block: `21154945`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, creative_work_and_displacement, governance_geopolitics_and_society
+- Descriptive categories: creative_work_and_displacement, governance_geopolitics_and_society
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885225.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -6463,7 +6460,7 @@ Metadata:
 - Block: `21371929`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
+- Descriptive categories: archive_memory_and_trinity_accord, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885231.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -6575,7 +6572,7 @@ Metadata:
 - Block: `21382530`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, reasoning_science_and_medicine
+- Descriptive categories: agents_autonomy_and_embodiment, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885232.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -7327,7 +7324,7 @@ Metadata:
 - Block: `21388298`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
+- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885233.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -7699,7 +7696,7 @@ Metadata:
 - Block: `21398967`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, creative_work_and_displacement, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885234.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -8256,7 +8253,7 @@ Metadata:
 - Block: `21422023`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones
+- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885244.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -9624,7 +9621,7 @@ Metadata:
 - Block: `21486656`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2024-Q4`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones
+- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885250.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -9937,7 +9934,7 @@ Metadata:
 - Block: `21548520`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: creative_work_and_displacement, governance_geopolitics_and_society
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885253.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -11157,7 +11154,7 @@ Metadata:
 - Block: `21622486`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885260.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -11494,7 +11491,7 @@ Metadata:
 - Block: `21629715`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, reasoning_science_and_medicine
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885261.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -11735,7 +11732,7 @@ Metadata:
 - Block: `21636973`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones
+- Descriptive categories: capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885262.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -12294,7 +12291,7 @@ Metadata:
 - Block: `21672726`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885264.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -12645,7 +12642,7 @@ Metadata:
 - Block: `21701756`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -13926,7 +13923,7 @@ Metadata:
 - Block: `21721236`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885268.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -14268,7 +14265,7 @@ Metadata:
 - Block: `21747508`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885273.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -14975,7 +14972,7 @@ Metadata:
 - Block: `21802557`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, reasoning_science_and_medicine
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885276.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -15213,7 +15210,7 @@ Metadata:
 - Block: `21805940`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, reasoning_science_and_medicine
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885277.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -16779,7 +16776,7 @@ Metadata:
 - Block: `21857493`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885284.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -17003,7 +17000,7 @@ Metadata:
 - Block: `21870887`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885285.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -19076,7 +19073,7 @@ Metadata:
 - Block: `21988013`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -19764,7 +19761,7 @@ Metadata:
 - Block: `22031343`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885299.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -19993,7 +19990,7 @@ Metadata:
 - Block: `22037821`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885300.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -23326,7 +23323,7 @@ Metadata:
 - Block: `22159705`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q1`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885312.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -24410,7 +24407,7 @@ Metadata:
 - Block: `22193960`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: agents_autonomy_and_embodiment, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885316.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -25754,7 +25751,7 @@ Metadata:
 - Block: `22260298`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -26268,7 +26265,7 @@ Metadata:
 - Block: `22268618`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: creative_work_and_displacement, human_family_and_personal_witness
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885322.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -26742,7 +26739,7 @@ Metadata:
 - Block: `22282989`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885323.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -27458,7 +27455,7 @@ Metadata:
 - Block: `22303105`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: creative_work_and_displacement, human_family_and_personal_witness
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -29650,7 +29647,7 @@ Metadata:
 - Block: `22427825`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885331.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -30934,7 +30931,7 @@ Metadata:
 - Block: `22546271`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885336.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -33268,7 +33265,7 @@ Metadata:
 - Block: `22603400`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885344.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -34119,7 +34116,7 @@ Metadata:
 - Block: `22650150`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, creative_work_and_displacement, human_family_and_personal_witness
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885347.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -35070,7 +35067,7 @@ Metadata:
 - Block: `22699051`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: none detected
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885349.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -35458,7 +35455,7 @@ Metadata:
 - Block: `22706325`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -36133,7 +36130,7 @@ Metadata:
 - Block: `22710622`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
+- Descriptive categories: address_to_future_intelligence, agents_autonomy_and_embodiment, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, human_family_and_personal_witness, reasoning_science_and_medicine, safety_alignment_and_control
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885352.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -36568,7 +36565,7 @@ Metadata:
 - Block: `22729344`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q2`
-- Descriptive categories: address_to_future_intelligence, archive_memory_and_trinity_accord, capability_and_model_milestones, creative_work_and_displacement, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine
+- Descriptive categories: archive_memory_and_trinity_accord, governance_geopolitics_and_society, human_family_and_personal_witness, reasoning_science_and_medicine
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md`
 
 #### Mirrored NFT Text — Unabridged
@@ -36824,7 +36821,7 @@ Metadata:
 - Block: `23101699`
 - Timestamp method: `erc721_transfer_from_zero_topic3`
 - Calendar period: `2025-Q3`
-- Descriptive categories: none detected
+- Descriptive categories: archive_memory_and_trinity_accord
 - Source file: `0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885354.md`
 
 #### Mirrored NFT Text — Unabridged
