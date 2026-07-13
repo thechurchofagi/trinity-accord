@@ -2,6 +2,8 @@ name: Build Echo Index
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "echoes/records/**"
       - "api/independent-attestation-index.json"
@@ -13,125 +15,115 @@ permissions:
   contents: write
 
 concurrency:
-  group: generated-public-status-writes
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 0
-
-      - name: Record toolchain provenance
-        run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
-
       - name: Authorize write workflow actor
         env:
           ACTOR: ${{ github.actor }}
-          EVENT_NAME: ${{ github.event_name }}
-          SENDER: ${{ github.event.sender.login }}
         run: |
           set -euo pipefail
-          case "$ACTOR" in
-            thechurchofagi|"github-actions[bot]")
-              echo "Authorized actor: $ACTOR"
-              ;;
-            *)
-              echo "Unauthorized actor for write workflow: $ACTOR"
-              exit 1
-              ;;
-          esac
-          if [ "$EVENT_NAME" = "repository_dispatch" ]; then
-            case "$SENDER" in
-              thechurchofagi|"github-actions[bot]")
-                echo "Authorized repository_dispatch sender: $SENDER"
-                ;;
-              *)
-                echo "Unauthorized repository_dispatch sender: $SENDER"
-                exit 1
-                ;;
-            esac
+          if [[ "$ACTOR" != "thechurchofagi" && "$ACTOR" != "github-actions[bot]" ]]; then
+            echo "Unauthorized actor for write workflow: $ACTOR" >&2
+            exit 1
           fi
+          echo "Authorized actor: $ACTOR"
+
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
 
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
-      - name: Authorize manual dispatch actor
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          ACTOR: ${{ github.actor }}
+      - name: Rebase current main before rebuilding Echo indexes
         run: |
           set -euo pipefail
-          case "$ACTOR" in
-            thechurchofagi|"github-actions[bot]")
-              echo "Authorized workflow_dispatch actor: $ACTOR"
-              ;;
-            *)
-              echo "Unauthorized workflow_dispatch actor: $ACTOR"
-              exit 1
-              ;;
-          esac
+          git fetch origin main --prune
+          git rebase origin/main
 
-      - name: Validate Echo records
-        run: python3 scripts/validate_echo_records.py
+      - name: Validate Echo source records
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_echo_records.py
+          python3 scripts/validate_independent_attestation_index.py
 
-      - name: Validate independent attestation index
-        run: python3 scripts/validate_independent_attestation_index.py
-
-      - name: Generate Echo index
-        run: python3 scripts/generate_echo_index.py
-
-      - name: Rebuild archive and digests
-        run: bash scripts/build-echo-index.sh
-
-      - name: Commit and push changes
+      - name: Commit and push regenerated Echo indexes
         id: push
         run: |
-          if git diff --quiet -- \
-            api/echo-index.json \
-            echoes/archive.md \
-            echoes/digests.md \
-            echoes/digests; then
-            echo "No generated file changes."
-            echo "pushed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          set -euo pipefail
+          printf '%s\n' "pushed=false" >> "$GITHUB_OUTPUT"
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            api/echo-index.json \
-            echoes/archive.md \
-            echoes/digests.md \
-            echoes/digests
+          rebuild_and_stage() {
+            python3 scripts/validate_echo_records.py
+            python3 scripts/validate_independent_attestation_index.py
+            python3 scripts/generate_echo_index.py
+            bash scripts/build-echo-index.sh
+
+            # Stage before change detection. New-quarter digest files are
+            # untracked on their first generation and plain git diff misses them.
+            git add \
+              api/echo-index.json \
+              echoes/archive.md \
+              echoes/digests.md \
+              echoes/digests
+            git diff --cached --check
+          }
+
+          rebuild_and_stage
+          if git diff --cached --quiet; then
+            echo "No generated Echo index changes."
+            exit 0
+          fi
 
           git commit -m "chore: rebuild public Echo status indexes"
-
-          if ! git pull --rebase -X theirs origin main; then
-            echo "::error::Failed to rebase generated Echo index changes onto origin/main."
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            echo "::error::Tracked Echo changes remain outside the generated commit."
             git status --short
             exit 1
           fi
 
-          # Regenerate after rebase before push.
-          python3 scripts/generate_echo_index.py
-          bash scripts/build-echo-index.sh
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              printf '%s\n' "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
 
-          git add \
-            api/echo-index.json \
-            echoes/archive.md \
-            echoes/digests.md \
-            echoes/digests
+            echo "Push failed on attempt ${attempt}; rebasing and rebuilding all Echo projections."
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Echo records changed concurrently; rebuild must restart on current main."
+              exit 1
+            fi
 
-          if ! git diff --cached --quiet; then
-            git commit --amend --no-edit
-          fi
+            rebuild_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+              echo "::error::Rebased Echo projections left tracked drift."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
 
-          git push --force-with-lease
+          echo "::error::Failed to push regenerated Echo indexes after retries."
+          exit 1
