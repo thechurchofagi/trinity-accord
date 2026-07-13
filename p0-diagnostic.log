@@ -1,0 +1,302 @@
+exit_status=1
+--- last 300 lines ---
+OK:   api/links.json contains '/agent-submit' only in historical JSON context
+OK:   api/links.json contains '/api/agent-submit-gateway.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-workflows.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-builder-route-map.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/external-agent-operation-examples.v1.json' only in historical JSON context
+
+============================================================
+Extended: agent-required-reading profile check
+============================================================
+OK:   agent-required-reading profiles checked for retired routes
+
+============================================================
+Extended: mission-governance check
+============================================================
+OK:   mission-governance stable_endpoint_contract uses current gateway
+OK:   mission-governance uses current route naming
+OK:   mission-governance external_agent_lifecycle checked
+
+============================================================
+Extended: agent-live-health check
+============================================================
+OK:   agent-live-health stable_endpoints uses current gateway
+OK:   agent-live-health preflight uses current path
+
+RESULT: PASS
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_contract.py
+$ python3 scripts/test_mission_governance_contract.py
+PASS: mission governance contract
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_discovery.py
+$ python3 scripts/test_mission_governance_discovery.py
+PASS: mission governance discovery
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_public_route_parity.py
+$ python3 scripts/test_mission_public_route_parity.py
+PASS: mission, schema, first-contact, agent-start, task-router, and homepage agree on 8 current public record types
+::endgroup::
+::group::p0-current: python3 scripts/test_builder_help_urls_resolve.py
+$ python3 scripts/test_builder_help_urls_resolve.py
+PASS: 19 Builder diagnostic help URLs resolve to stable local anchors
+::endgroup::
+::group::p0-current: python3 scripts/test_autonomy_inventory_boundary.py
+$ python3 scripts/test_autonomy_inventory_boundary.py
+PASS: raw native autonomy inventory cannot be mistaken for strict official-live autonomous reception
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_runtime_recovery_links.py
+$ python3 scripts/test_gateway_runtime_recovery_links.py
+PASS: Gateway runtime recovery links resolve to public help
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_schema_shadow_parity.py
+$ python3 scripts/test_gateway_schema_shadow_parity.py
+PASS: Gateway app schemas are exact canonical mirrors
+::endgroup::
+::group::p0-current: python3 scripts/test_reserved_internal_builder_contract.py
+$ python3 scripts/test_reserved_internal_builder_contract.py
+PASS: internal builder fails closed for reserved Guardian key rotation
+::endgroup::
+::group::p0-current: python3 scripts/test_record_chain_intake_gateway_contract.py
+$ python3 scripts/test_record_chain_intake_gateway_contract.py
+PASS: All Record-Chain Intake Gateway contract tests passed.
+::endgroup::
+::group::p0-current: python3 scripts/test_no_duplicate_context_understanding_system.py
+$ python3 scripts/test_no_duplicate_context_understanding_system.py
+PASS: no duplicate context understanding system
+::endgroup::
+::group::p0-current: python3 scripts/test_before_leaving_requires_context_governance.py
+$ python3 scripts/test_before_leaving_requires_context_governance.py
+PASS: before_leaving context governance
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+$ python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+PASS: agent-start no legacy C0-C6 context table
+::endgroup::
+::group::p0-current: python3 scripts/test_closure_report_v30_contract.py
+$ python3 scripts/test_closure_report_v30_contract.py
+PASS: v30 closure report contract is valid
+::endgroup::
+::group::p0-current: python3 scripts/test_route_selector_contract.py
+$ python3 scripts/test_route_selector_contract.py
+PASS: route selector is correctly retired to record-chain-first replacement
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_public_sources_exist.py
+$ python3 scripts/test_sitemap_public_sources_exist.py
+PASS: sitemap public URLs have local source/artifact coverage
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_includes_nested_api_json.py
+$ python3 scripts/test_sitemap_includes_nested_api_json.py
+PASS: sitemap includes nested API JSON files
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_permalink_matches_source.py
+$ python3 scripts/test_sitemap_permalink_matches_source.py
+PASS: sitemap pretty URLs match source permalinks where declared
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_permalink_parser_uses_yaml.py
+$ python3 scripts/test_sitemap_permalink_parser_uses_yaml.py
+PASS: sitemap permalink parser uses YAML when available
+::endgroup::
+::group::p0-current: python3 scripts/test_generate_sitemap_docstring_recursive_api.py
+$ python3 scripts/test_generate_sitemap_docstring_recursive_api.py
+PASS: generate_sitemap.py docstring matches recursive API collection
+::endgroup::
+::group::p0-current: python3 scripts/test_public_referenced_paths_exist.py
+$ python3 scripts/test_public_referenced_paths_exist.py
+PASS: core public JSON references resolve to local sources/artifacts
+::endgroup::
+::group::p0-current: python3 scripts/test_public_referenced_paths_core_set.py
+$ python3 scripts/test_public_referenced_paths_core_set.py
+PASS: public referenced-path core set covers main machine entrypoints
+::endgroup::
+::group::p0-current: python3 scripts/test_public_surface_consistency.py
+$ python3 scripts/test_public_surface_consistency.py
+PUBLIC_SURFACE_CONSISTENCY_OK
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_sitemap_coverage.py
+$ python3 scripts/test_public_api_sitemap_coverage.py
+PASS: public API sitemap discovery covers main APIs
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_general_not_pass.py
+$ python3 scripts/test_public_api_metadata_general_not_pass.py
+PASS: general public API metadata branch is enforced
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_tier_b_schema_required.py
+$ python3 scripts/test_public_api_metadata_tier_b_schema_required.py
+PASS: Tier B public API schema identity is enforced
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_completeness.py
+$ python3 scripts/test_public_api_metadata_completeness.py
+PUBLIC_API_METADATA_COMPLETENESS_OK
+::endgroup::
+::group::p0-current: python3 scripts/test_main_pages_have_machine_counterparts.py
+$ python3 scripts/test_main_pages_have_machine_counterparts.py
+PASS: main human pages have machine-readable counterparts
+::endgroup::
+::group::p0-current: python3 scripts/test_context_load_map.py
+$ python3 scripts/test_context_load_map.py
+PASS: context-load-map structure and core context pack references valid
+::endgroup::
+::group::p0-current: python3 scripts/test_context_pack_inventory_paths.py
+$ python3 scripts/test_context_pack_inventory_paths.py
+PASS: context pack inventory paths resolve
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_start_api.py
+$ python3 scripts/test_agent_start_api.py
+PASS: agent-start API contracts valid (v1 retired, v2 active, route map complete)
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_start_echo_taxonomy_wording.py
+$ python3 scripts/test_agent_start_echo_taxonomy_wording.py
+PASS: no stale Echo taxonomy wording in active API files
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_p0_router_contract.py
+$ python3 scripts/test_agent_p0_router_contract.py
+PASS: api/agent-minimal-context.v1.json exists
+PASS: api/agent-minimal-context.v1.json non_amending_boundary
+PASS: api/agent-minimal-context.v1.json not_instruction_override
+PASS: api/agent-minimal-context.v1.json does_not_prove
+PASS: api/agent-minimal-context.v1.json source_digest computed
+PASS: api/agent-output-policy.v1.json exists
+PASS: api/agent-output-policy.v1.json non_amending_boundary
+PASS: api/agent-output-policy.v1.json not_instruction_override
+PASS: api/agent-output-policy.v1.json does_not_prove
+PASS: api/agent-output-policy.v1.json source_digest computed
+PASS: api/agent-task-router.v1.json exists
+PASS: api/agent-task-router.v1.json non_amending_boundary
+PASS: api/agent-task-router.v1.json not_instruction_override
+PASS: api/agent-task-router.v1.json does_not_prove
+PASS: api/agent-task-router.v1.json source_digest computed
+PASS: minimal delegates to canonical router
+PASS: minimal lists exactly three Bitcoin Originals
+PASS: homepage/readme only insufficient
+PASS: final evaluation disallowed from homepage/readme only
+PASS: forbids V6+ without strict pipeline
+PASS: policy forbids truth proven
+PASS: policy states tool boundary
+PASS: policy has no-tool downgrade
+PASS: router delegates to canonical router
+PASS: router has what_is_this
+PASS: router has verify_v0_v5_agent_declared
+PASS: router has verify_v6_plus_strict_evidence
+PASS: router has legacy_archive_analysis
+PASS: V0-V5 strict evidence forbidden
+PASS: well-known exposes agent_minimal_context
+PASS: well-known exposes agent_output_policy
+PASS: well-known exposes agent_task_router
+PASS: links machine includes /api/agent-minimal-context.v1.json
+PASS: links machine includes /api/agent-output-policy.v1.json
+PASS: links machine includes /api/agent-task-router.v1.json
+PASS: context-load-map minimal_first_load
+PASS: context-load-map router pointer
+PASS: context-load-map policy pointer
+PASS: required-reading profile minimal_first_pass
+PASS: required-reading profile task_routing
+PASS: required-reading profile output_policy
+PASS: entry protocol says shim does not replace canonical router
+PASS: agent-tasks minimal-first-pass
+PASS: agent-tasks output-policy-check
+PASS: sitemap includes /api/agent-minimal-context.v1.json
+PASS: sitemap includes /api/agent-output-policy.v1.json
+PASS: sitemap includes /api/agent-task-router.v1.json
+PASS: README.md marker
+PASS: llms.txt marker
+PASS: ai.txt marker
+PASS: index.md marker
+ALL PASSED: P0 agent router contract
+::endgroup::
+::group::p0-current: python3 scripts/test_main_function_route_health.py
+$ python3 scripts/test_main_function_route_health.py
+PASS: main agent route/context health
+::endgroup::
+::group::p0-current: python3 scripts/test_e2_verification_echo_not_pure_echo.py
+$ python3 scripts/test_e2_verification_echo_not_pure_echo.py
+PASS: E2 verification echo remains separate from pure Echo
+::endgroup::
+::group::p0-current: python3 scripts/test_echo_taxonomy_all_consumers_match_single_source.py
+$ python3 scripts/test_echo_taxonomy_all_consumers_match_single_source.py
+PASS: Echo taxonomy deprecation is consistent across all consumers
+::endgroup::
+::group::p0-current: python3 scripts/test_no_stale_echo_taxonomy_names.py
+$ python3 scripts/test_no_stale_echo_taxonomy_names.py
+PASS: no stale Echo taxonomy names in current route/config files
+::endgroup::
+::group::p0-current: python3 scripts/test_echo_type_enum_alignment.py
+$ python3 scripts/test_echo_type_enum_alignment.py
+PASS: Echo type deprecation aligns across taxonomy, schema, builder, and route map
+::endgroup::
+::group::p0-current: python3 scripts/test_external_agent_copy_paste_examples_contract.py
+$ python3 scripts/test_external_agent_copy_paste_examples_contract.py
+PASS: external-agent copy-paste examples cover three core routes
+::endgroup::
+::group::p0-current: python3 scripts/test_external_agent_three_core_builders_source_smoke.py
+$ python3 scripts/test_external_agent_three_core_builders_source_smoke.py
+WARNING: Record type 'echo' requires authorship_proof. Use --authorship-proof-file to provide one, or --skip-authorship-proof-check to override.
+Draft written to /tmp/trinity-core-builders-0445ea9h/echo-draft.json
+  record_type: echo
+  schema: trinityaccord.record-chain-entry.v1
+  boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
+  context_readiness.declared_context_level: CC-2
+  context_readiness.minimum_required_for_action: CC-3
+  context_readiness.context_sufficient_for_selected_action: False
+Draft written to /tmp/trinity-core-builders-0445ea9h/verification-draft.json
+  record_type: verification
+  schema: trinityaccord.record-chain-entry.v1
+  boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
+  context_readiness.declared_context_level: CC-2
+  context_readiness.minimum_required_for_action: CC-2
+  context_readiness.context_sufficient_for_selected_action: True
+Draft written to /tmp/trinity-core-builders-0445ea9h/guardian-application-draft.json
+  record_type: guardian_application
+  schema: trinityaccord.record-chain-entry.v1
+  boundary_acknowledgement: {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level_unless_evidence_backed': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True}
+  context_readiness.declared_context_level: CC-3
+  context_readiness.minimum_required_for_action: CC-3
+  context_readiness.context_sufficient_for_selected_action: True
++ python3 scripts/trinity_record_builder.py echo --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --title Recognition Echo Source Smoke --body-file /tmp/trinity-core-builders-0445ea9h/echo-body.md --checked read homepage --limitation Source smoke only --out /tmp/trinity-core-builders-0445ea9h/echo-draft.json
+  echo draft: record_type=echo, ok
++ python3 scripts/trinity_record_builder.py verification --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-2 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --body-file /tmp/trinity-core-builders-0445ea9h/verification-body.md --checked read homepage --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-0445ea9h/verification-draft.json
+  verification draft: record_type=verification, ok
++ python3 scripts/trinity_record_builder.py guardian-application --actor-type ai_agent --actor-label SourceSmokeAgent --provider source-smoke --context-level CC-3 --discovery-mode independent --first-entry-url-or-path https://www.trinityaccord.org/ --decision-mode independent --execution-mode self_authorized --human-label Source Smoke Human Label --human-involved true --human-role requester --guardian-id G-SOURCE-SMOKE-001 --guardian-public-key-sha256 abc4d5e6f78901234567890123456789012345678901234567890123456789ab --checked read homepage --checked read agent-brief --limitation Source smoke only --skip-authorship-proof-check --out /tmp/trinity-core-builders-0445ea9h/guardian-application-draft.json
+  guardian application: record_type=guardian_application, ok
+PASS: core external-agent builders produce locally valid payloads
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_first_contact_echo_types_canonical.py
+$ python3 scripts/test_agent_first_contact_echo_types_canonical.py
+PASS: agent-first-contact v2 structure valid, no stale echo_types
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_facing_pure_echo_routes_canonical.py
+$ python3 scripts/test_agent_facing_pure_echo_routes_canonical.py
+PASS: agent-facing APIs correctly have no echo_types
+::endgroup::
+::group::p0-current: python3 scripts/test_links_expose_first_contact_entrypoints.py
+$ python3 scripts/test_links_expose_first_contact_entrypoints.py
+PASS: api/links.json exposes canonical first-contact/workflow entrypoints (current active, legacy isolated)
+::endgroup::
+::group::p0-current: python3 scripts/test_first_contact_text_no_stale_route_guidance.py
+$ python3 scripts/test_first_contact_text_no_stale_route_guidance.py
+PASS: first-contact text has no stale route guidance
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_exit_readback_policy.py
+$ python3 scripts/test_agent_exit_readback_policy.py
+PASS: agent exit/readback policy is complete
+::endgroup::
+::group::p0-current: python3 scripts/test_v30_final_index_contract.py
+$ python3 scripts/test_v30_final_index_contract.py
+PASS: v30 final index contract is valid
+::endgroup::
+::group::p0-current: python3 scripts/test_v30_final_closure_report_contract.py
+$ python3 scripts/test_v30_final_closure_report_contract.py
+PASS: v30.5 final closure report is valid
+::endgroup::
+::group::p0-current: python3 scripts/test_changelog_v30_5_contract.py
+$ python3 scripts/test_changelog_v30_5_contract.py
+PASS: CHANGELOG contains v30.5 final closure entry
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_source_digest_if_present.py
+$ python3 scripts/test_public_api_source_digest_if_present.py
+FAIL: source_digest verification errors (26 files checked):
+  - api/agent-task-router.v1.json: source_digest mismatch: stored=8a1e27a64ebd8eaf, expected=a619887974e5d8fc
+::endgroup::
+FAILED (1): python3 scripts/test_public_api_source_digest_if_present.py
