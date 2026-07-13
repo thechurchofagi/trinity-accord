@@ -9,25 +9,28 @@ permissions:
   issues: write
 
 concurrency:
-  group: echo-archive-writes
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
   review-action:
     if: ${{ !github.event.issue.pull_request && startsWith(github.event.comment.body, '/echo ') }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
-
+          ref: main
 
       - name: Record toolchain provenance
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
       - name: Parse and authorize command
         id: cmd
         env:
@@ -36,12 +39,10 @@ jobs:
           COMMENT_USER: ${{ github.event.comment.user.login }}
         run: |
           set -euo pipefail
-
           first_line="$(printf '%s\n' "$COMMENT_BODY" | sed -n '1p' | tr -d '\r')"
 
           case "$first_line" in
             "/echo archive")
-              # Archive writes repository content — restrict to OWNER|MEMBER only
               case "$COMMENT_ASSOC" in
                 OWNER|MEMBER)
                   echo "authorized=true" >> "$GITHUB_OUTPUT"
@@ -55,7 +56,6 @@ jobs:
               esac
               ;;
             "/echo close")
-              # Close does not write repository — allow COLLABORATOR
               case "$COMMENT_ASSOC" in
                 OWNER|MEMBER|COLLABORATOR)
                   echo "authorized=true" >> "$GITHUB_OUTPUT"
@@ -76,15 +76,20 @@ jobs:
 
       - name: Stop on ignored command
         if: ${{ steps.cmd.outputs.authorized != 'true' || steps.cmd.outputs.command == 'none' }}
+        run: echo "No authorized echo review action requested."
+
+      - name: Rebase current main before review action
+        if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         run: |
-          echo "No authorized echo review action requested."
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
 
       - name: Save review comment body
         if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
-        run: |
-          printf '%s\n' "$COMMENT_BODY" > review_comment_body.txt
+        run: printf '%s\n' "$COMMENT_BODY" > review_comment_body.txt
 
       - name: Fetch issue JSON
         if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
@@ -107,15 +112,12 @@ jobs:
           import json, sys
           issue = json.load(open("issue.json", encoding="utf-8"))
           labels = {x["name"] for x in issue.get("labels", [])}
-
           required = {"echo:screened", "needs-human-review"}
           missing = required - labels
-
           if missing:
               print(f"Refusing echo review action. Missing labels: {sorted(missing)}")
               print("Issue must pass triage and be awaiting human review before /echo archive or /echo close is honored.")
               sys.exit(1)
-
           print("Echo review state OK")
           PY
 
@@ -126,8 +128,7 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           set -euo pipefail
-          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments" \
-            --paginate > comments.json
+          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER/comments" --paginate > comments.json
 
       - name: Verify issue body matches screened digest
         if: ${{ steps.cmd.outputs.authorized == 'true' && steps.cmd.outputs.command != 'none' }}
@@ -137,7 +138,7 @@ jobs:
             --issue-json issue.json \
             --comments-json comments.json
 
-      - name: Archive Echo issue
+      - name: Archive Echo issue on current main
         if: ${{ steps.cmd.outputs.command == 'archive' }}
         env:
           REVIEWER: ${{ github.actor }}
@@ -159,42 +160,77 @@ jobs:
           PY
           )"
 
-          # Rebuild all Echo-derived public indexes and status snapshots.
-          python3 scripts/generate_echo_index.py
-          bash scripts/build-echo-index.sh
-
-          # Validate the archived record. Manual human review path should stay strict.
-          python3 scripts/validate_agent_submission.py --mode ci "$record_path"
-          python3 scripts/check_consistency.py
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            echoes/records \
-            echoes/archive.md \
-            echoes/digests.md \
-            echoes/digests \
-            api/echo-index.json
+          rebuild_and_stage() {
+            python3 scripts/generate_echo_index.py
+            bash scripts/build-echo-index.sh
+            python3 scripts/validate_agent_submission.py --mode ci "$record_path"
+            python3 scripts/check_consistency.py
+            git add \
+              echoes/records \
+              echoes/archive.md \
+              echoes/digests.md \
+              echoes/digests \
+              api/echo-index.json
+            git diff --cached --check
+          }
 
+          rebuild_and_stage
+          rm -f issue.json comments.json review_comment_body.txt archive_result.json
+
+          repository_changed=false
           if git diff --cached --quiet; then
-            echo "No archive or generated file changes to commit."
+            echo "Archive record and generated indexes are already present."
           else
             git commit -m "archive echo issue #${ISSUE_NUMBER}"
-            if ! git pull --rebase -X theirs origin main; then
-              echo "::error::Failed to rebase onto origin/main. Refusing to continue."
+            repository_changed=true
+          fi
+
+          if [ "$repository_changed" = "true" ]; then
+            if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+              echo "::error::Tracked Echo archive changes remain after commit."
               git status --short
               exit 1
             fi
-            git push --force-with-lease
+
+            pushed=false
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+
+              echo "Push failed on attempt ${attempt}; rebasing and rebuilding Echo projections."
+              git fetch origin main --prune
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Echo records changed concurrently; human archive must be retried."
+                exit 1
+              fi
+
+              rebuild_and_stage
+              if ! git diff --cached --quiet; then
+                git commit --amend --no-edit
+              fi
+              if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+                echo "::error::Rebased Echo archive left tracked drift."
+                git status --short
+                exit 1
+              fi
+              sleep $((attempt * 5))
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "::error::Failed to push reviewed Echo archive after retries."
+              exit 1
+            fi
           fi
 
           gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
-
           gh issue comment "$ISSUE_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
             --body "Human review completed. Archived as \`$record_path\`. Closing as completed."
-
           gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
 
       - name: Close reviewed Echo issue without archive
@@ -205,11 +241,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-
           gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "needs-human-review" || true
-
           gh issue comment "$ISSUE_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
             --body "Human review completed by @${REVIEWER}. Closed without archive record."
-
           gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
