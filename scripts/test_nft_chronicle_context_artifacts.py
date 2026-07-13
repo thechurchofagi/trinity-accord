@@ -103,7 +103,9 @@ if ultra_path.exists():
     ultra = ultra_path.read_text(encoding="utf-8")
     lower = ultra.lower()
     require("ultra-brief 175-entry timeline" in lower, "ultra-brief heading missing")
-    data_rows = [line for line in ultra.splitlines() if line.startswith("| ")][2:]
+    # The Markdown separator starts with "|---", so only the header row and
+    # actual data rows match "| ". Remove the single header row.
+    data_rows = [line for line in ultra.splitlines() if line.startswith("| ")][1:]
     require(len(data_rows) == 175, f"ultra-brief timeline must have 175 rows, got {len(data_rows)}")
     require("seven-stage narrative" not in lower, "ultra-brief edition must not reinstate the old seven-stage narrative")
 
