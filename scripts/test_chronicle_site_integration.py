@@ -22,12 +22,26 @@ def load_json(path):
     return json.loads(read(path))
 
 
-# 1. Context pack freshness
+ULTRA = "/nft-text-descriptions/chronicle-ultra-brief.md"
+ABRIDGED = "/nft-text-descriptions/chronicle-abridged.md"
+FULL = "/nft-text-descriptions/chronicle-full.md"
+
+# 1. Context pack freshness and three-edition policy
 ctx_pack = load_json("api/context-packs/nft-chronicle-context.json")
 require(ctx_pack.get("current_status") == "prepared_175_entry_timestamped_chronicle",
         "nft-chronicle-context current_status must be prepared")
+require(ctx_pack.get("edition_status") == "three_editions_prepared_full_abridged_ultra_brief",
+        "nft-chronicle-context edition_status must expose all three editions")
 require(ctx_pack.get("summary", {}).get("total_nft_entries") == 175,
         "nft-chronicle-context total_nft_entries must be 175")
+require(ctx_pack.get("summary", {}).get("editions", {}).get("ultra_brief") == ULTRA,
+        "context pack missing ultra-brief edition")
+require(ctx_pack.get("summary", {}).get("editions", {}).get("abridged") == ABRIDGED,
+        "context pack missing abridged edition")
+require(ctx_pack.get("summary", {}).get("editions", {}).get("full") == FULL,
+        "context pack missing full edition")
+require(ctx_pack.get("interpretation_policy", {}).get("fixed_seven_stage_taxonomy_retired") is True,
+        "context pack must retire the old fixed seven-stage taxonomy")
 require("deferred_until_context_package_is_prepared" not in json.dumps(ctx_pack),
         "nft-chronicle-context must not contain stale deferred text")
 for k in ["not_canonical_authority", "not_truth_proof", "not_human_supremacy_claim", "not_human_centered_command"]:
@@ -35,23 +49,28 @@ for k in ["not_canonical_authority", "not_truth_proof", "not_human_supremacy_cla
 
 # 2. Context load map
 load_map = load_json("api/context-load-map.json")
+load_map_text = json.dumps(load_map, ensure_ascii=False).lower()
 read_index = load_map.get("read_index_not_full_load", [])
 deferred = load_map.get("deferred", [])
 task_full = load_map.get("task_specific_full_load", [])
-for required in [
+for required_path in [
     "/api/context-packs/nft-chronicle-context.json",
     "/nft-text-descriptions/chronicle-summary.json",
+    ULTRA,
+    ABRIDGED,
     "/nft-text-descriptions/chronicle-agent-context.md",
     "/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md",
 ]:
-    require(required in read_index, f"context-load-map read_index missing {required}")
+    require(required_path in read_index, f"context-load-map read_index missing {required_path}")
 require("/api/context-packs/nft-chronicle-context.json" not in deferred,
         "nft-chronicle-context must not be deferred")
-for required in [
+for required_path in [
     "/nft-text-descriptions/chronicle-index.json",
-    "/nft-text-descriptions/chronicle-full.md",
+    FULL,
 ]:
-    require(required in task_full, f"context-load-map task_specific_full_load missing {required}")
+    require(required_path in task_full, f"context-load-map task_specific_full_load missing {required_path}")
+require("seven-stage narrative" not in load_map_text,
+        "context-load-map must not route agents to the retired seven-stage narrative")
 
 # 3. Agent required reading
 required = load_json("api/agent-required-reading.json")
@@ -63,6 +82,12 @@ for profile in [
     "full_context_with_chronicle",
 ]:
     require(profile in profiles, f"agent-required-reading missing profile {profile}")
+for profile in ["chronicle_research", "human_witness_research"]:
+    reads = profiles[profile].get("reads", [])
+    require(ULTRA in reads, f"{profile} missing ultra-brief edition")
+    require(ABRIDGED in reads, f"{profile} missing abridged edition")
+require(ABRIDGED in profiles["music_layer_research"].get("reads", []),
+        "music_layer_research missing abridged edition")
 
 # 4. Agent task router
 router = load_json("api/agent-task-router.v1.json")
@@ -73,7 +98,14 @@ for route in [
     "human_witness_research",
 ]:
     require(route in routes, f"agent-task-router missing route {route}")
-
+require(ULTRA in routes["chronicle_research"].get("read", []),
+        "chronicle_research route missing ultra-brief edition")
+require(ABRIDGED in routes["chronicle_research"].get("read", []),
+        "chronicle_research route missing abridged edition")
+require("stage_and_theme_analysis" not in routes["chronicle_research"].get("allowed_use", []),
+        "chronicle_research route must retire stage_and_theme_analysis")
+require("calendar_timeline_and_overlapping_category_analysis" in routes["chronicle_research"].get("allowed_use", []),
+        "chronicle_research route missing corrected analysis mode")
 require("human_supremacy_claim" in routes["human_witness_research"].get("forbidden_output", []),
         "human_witness_research must forbid human_supremacy_claim")
 require("audio_verification_claim" in routes["music_layer_research"].get("forbidden_output", []),
@@ -102,6 +134,8 @@ require("chronicle_recovery" in vm, "verification-materials missing chronicle_re
 chronicle = read("chronicle.md").lower()
 for phrase in [
     "current chronicle status",
+    "three reading editions",
+    "interpretation correction",
     "music layer",
     "human witness layer",
     "not canonical authority",
@@ -152,13 +186,9 @@ readme = read("README.md").lower()
 require("chronicle context package" in readme, "README.md missing Chronicle context package")
 require("chronicle music audit" in readme, "README.md missing Chronicle music audit")
 require("chronicle / human witness layer" in readme, "README.md missing Chronicle / Human Witness Layer section")
-
-# README music counts must match the current 175-NFT audit / canonical music JSON.
 require("144 lyrics records" in readme, "README.md music count must be 144 lyrics records")
 require("10 title-only references" in readme, "README.md music count must be 10 title-only references")
 require("21 no-song entries" in readme, "README.md music count must be 21 no-song entries")
-
-# Guard against stale pre-correction counts.
 require("128 lyrics records" not in readme, "README.md must not contain stale 128 lyrics count")
 require("11 title-only references" not in readme, "README.md must not contain stale 11 title-only count")
 require("36 no-song entries" not in readme, "README.md must not contain stale 36 no-song count")
@@ -171,7 +201,6 @@ require("21 条无歌曲" in music_table, "music table header must say 21 no-son
 require("128 条含歌词记录" not in music_table, "music table header must not contain stale 128 count")
 require("11 条仅引用歌名" not in music_table, "music table header must not contain stale 11 count")
 require("36 条无歌曲" not in music_table, "music table header must not contain stale 36 count")
-
 
 if errors:
     print("CHRONICLE_SITE_INTEGRATION_FAIL")
