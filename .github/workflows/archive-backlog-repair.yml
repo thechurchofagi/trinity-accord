@@ -16,6 +16,7 @@ concurrency:
 jobs:
   repair:
     runs-on: ubuntu-24.04
+    timeout-minutes: 35
     steps:
       - name: Authorize write workflow actor
         run: |
@@ -27,10 +28,11 @@ jobs:
           fi
           echo "Authorized actor: $actor"
 
-      - name: Checkout
+      - name: Checkout current main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Record toolchain provenance
         run: |
@@ -90,82 +92,96 @@ jobs:
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
           ARWEAVE_JWK: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
           ARWEAVE_JWK_PATH: ${{ env.ARWEAVE_JWK_PATH || secrets.ARWEAVE_JWK_PATH || vars.ARWEAVE_JWK_PATH }}
-        run: python3 scripts/process_archive_backlog.py --kind record_chain_arweave --max-items 1 --mode live
+        run: >-
+          python3 scripts/process_archive_backlog.py
+          --kind record_chain_arweave
+          --max-items 1
+          --mode live
 
-      - name: Repair one native OTS proof-bundle item
+      - name: Repair up to two native OTS proof-bundle items
         env:
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
           ARWEAVE_JWK: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}
           ARWEAVE_JWK_PATH: ${{ env.ARWEAVE_JWK_PATH || secrets.ARWEAVE_JWK_PATH || vars.ARWEAVE_JWK_PATH }}
-        run: python3 scripts/process_archive_backlog.py --kind native_ots_bundle --max-items 2 --enable-paid-upload
+        run: >-
+          python3 scripts/process_archive_backlog.py
+          --kind native_ots_bundle
+          --max-items 2
+          --mode live
+          --enable-paid-upload
 
-      - name: Regenerate public status
+      - name: Commit repaired backlog metadata to main
         run: |
-          python3 scripts/detect_archive_backlog.py --write
-          python3 scripts/generate_arweave_wallet_status.py
-
-      - name: Restore timestamp-only archive metadata changes
-        run: |
-          python3 scripts/restore_json_if_only_volatile_changes.py \
-            --path api/record-chain-native-ots-latest.json \
-            --path record-chain/ots/native-ots-backlog.json \
-            --path api/record-chain-native-ots-backlog.json \
-            --path api/arweave-wallet-status.json \
-            --glob 'record-chain/ots/native-anchors/*.anchor.json' \
-            --volatile-key generated_at \
-            --volatile-key updated_at \
-            --volatile-key checked_at \
-            --volatile-key upgraded_at \
-            --volatile-key verified_at
-
-      - name: Commit repaired backlog metadata
-        run: |
-          if git diff --quiet; then
-            echo "No archive backlog changes to commit."
-            exit 0
-          fi
+          set -euo pipefail
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            record-chain/arweave-backlog.json \
-            api/record-chain-arweave-backlog.json \
-            record-chain/arweave-archives/ \
-            api/record-chain-arweave-index.json \
-            record-chain/ots/native-ots-backlog.json \
-            api/record-chain-native-ots-backlog.json \
-            record-chain/ots/native-anchors/ \
-            record-chain/ots/native-arweave-bundles/ \
-            record-chain/ots/native-arweave-registry.json \
-            api/record-chain-native-ots-arweave-registry.json \
-            record-chain/arweave-wallet-ledger.json \
-            api/arweave-wallet-status.json \
-            record-chain/audit/
+          regenerate_and_stage() {
+            python3 scripts/detect_archive_backlog.py --write
+            python3 scripts/generate_arweave_wallet_status.py
 
-          git diff --cached --name-only | while read -r path; do
-            case "$path" in
-              record-chain/records/*|record-chain/pending/*|record-chain/processed/*|record-chain/rejected/*|record-chain/chain-tip.json|archive/authority-*|authority/*|Bitcoin\ Originals/*)
-                echo "Forbidden write path: $path" >&2
-                exit 1
-                ;;
-            esac
-          done
+            python3 scripts/restore_json_if_only_volatile_changes.py \
+              --path api/record-chain-native-ots-latest.json \
+              --path record-chain/ots/native-ots-backlog.json \
+              --path api/record-chain-native-ots-backlog.json \
+              --path api/arweave-wallet-status.json \
+              --glob 'record-chain/ots/native-anchors/*.anchor.json' \
+              --volatile-key generated_at \
+              --volatile-key updated_at \
+              --volatile-key checked_at \
+              --volatile-key upgraded_at \
+              --volatile-key verified_at
+
+            git add \
+              record-chain/arweave-backlog.json \
+              api/record-chain-arweave-backlog.json \
+              record-chain/arweave-archives/ \
+              api/record-chain-arweave-index.json \
+              record-chain/ots/native-ots-backlog.json \
+              api/record-chain-native-ots-backlog.json \
+              record-chain/ots/native-anchors/ \
+              record-chain/ots/native-arweave-bundles/ \
+              record-chain/ots/native-arweave-registry.json \
+              api/record-chain-native-ots-arweave-registry.json \
+              record-chain/arweave-wallet-ledger.json \
+              api/arweave-wallet-status.json \
+              record-chain/audit/
+
+            while IFS= read -r path; do
+              case "$path" in
+                record-chain/records/*|record-chain/pending/*|record-chain/processed/*|record-chain/rejected/*|record-chain/chain-tip.json|archive/authority-*|authority/*|Bitcoin\ Originals/*)
+                  echo "Forbidden write path: $path" >&2
+                  return 1
+                  ;;
+              esac
+            done < <(git diff --cached --name-only)
+          }
+
+          regenerate_and_stage
+          if git diff --cached --quiet; then
+            echo "No archive backlog changes to commit."
+            exit 0
+          fi
 
           git commit -m "archive: repair backlog and wallet status metadata"
 
-          git fetch origin main --prune
-          git rebase origin/main
-
           for attempt in 1 2 3; do
-            if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
-              exit 0
-            fi
-
-            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
             git fetch origin main --prune
             git rebase origin/main
 
+            # Main may have advanced while an OTS/Arweave operation was running.
+            # Recompute derived backlog and wallet views against the rebased tree.
+            regenerate_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            printf 'Push failed on attempt %s; rebasing, regenerating, and retrying.\n' "${attempt}"
             sleep $((attempt * 5))
           done
 

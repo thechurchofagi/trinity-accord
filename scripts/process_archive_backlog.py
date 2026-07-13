@@ -22,9 +22,33 @@ from archive_backlog_lib import (
     utc_now,
     write_json_if_changed,
 )
+from detect_archive_backlog import build_docs
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIRM_PAID_UPLOAD = "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
+
+RECORD_CHAIN_ACTIONABLE_STATUSES = {
+    "pending_upload",
+    "upload_failed",
+    "readback_failed",
+    "waiting_for_key",
+}
+
+ACTIONABLE_NATIVE_STATUSES = {
+    "upgrade_due",
+    "upgrade_failed",
+    "pending_upload",
+    "upload_failed",
+    "readback_failed",
+    "waiting_for_key",
+}
+
+UPLOAD_NATIVE_STATUSES = {
+    "pending_upload",
+    "upload_failed",
+    "readback_failed",
+    "waiting_for_key",
+}
 
 
 def prepare_native_ots_jwk_path() -> str | None:
@@ -47,7 +71,15 @@ def prepare_native_ots_jwk_path() -> str | None:
     return str(jwk_path)
 
 
-def update_item(path: Path, api_path: Path, kind: str, key: str, status: str, error: str | None = None, tx_id: str | None = None) -> None:
+def update_item(
+    path: Path,
+    api_path: Path,
+    kind: str,
+    key: str,
+    status: str,
+    error: str | None = None,
+    tx_id: str | None = None,
+) -> None:
     data = read_json(path, {"items": []})
     items = list(data.get("items", []))
     for item in items:
@@ -69,57 +101,116 @@ def update_item(path: Path, api_path: Path, kind: str, key: str, status: str, er
                 "pending_upload": "upload",
             }.get(status, "review")
             break
-    doc = record_chain_backlog_doc(items, utc_now()) if kind == "record_chain_arweave" else native_ots_backlog_doc(items, utc_now())
+    doc = (
+        record_chain_backlog_doc(items, utc_now())
+        if kind == "record_chain_arweave"
+        else native_ots_backlog_doc(items, utc_now())
+    )
     write_json_if_changed(path, doc)
     write_json_if_changed(api_path, doc)
 
 
-def process_record_chain(max_items: int, mode: str) -> int:
+def planned_action(kind: str, item: dict[str, Any], enable_paid_upload: bool) -> str:
+    status = item.get("archive_status")
+    if kind == "record_chain_arweave":
+        return "upload_record_chain_archive"
+    if status in {"upgrade_due", "upgrade_failed"}:
+        return "upgrade_native_ots_anchor"
+    if status in UPLOAD_NATIVE_STATUSES:
+        return "upload_native_ots_bundle" if enable_paid_upload else "leave_pending_without_paid_upload"
+    return str(item.get("next_action") or "review")
+
+
+def dry_run_preview(kind: str, max_items: int, enable_paid_upload: bool) -> int:
+    """Calculate current candidates without writing attempts or invoking repair tools."""
+    rc_doc, ots_doc = build_docs()
+    doc = rc_doc if kind == "record_chain_arweave" else ots_doc
+    allowed = RECORD_CHAIN_ACTIONABLE_STATUSES if kind == "record_chain_arweave" else ACTIONABLE_NATIVE_STATUSES
+    candidates = [
+        item
+        for item in doc.get("items", [])
+        if isinstance(item, dict) and item.get("archive_status") in allowed
+    ][:max_items]
+    preview = [
+        {
+            "key": item.get("key"),
+            "archive_status": item.get("archive_status"),
+            "current_next_action": item.get("next_action"),
+            "would_attempt": planned_action(kind, item, enable_paid_upload),
+            "would_increment_retry_count": False,
+            "would_write_backlog": False,
+        }
+        for item in candidates
+    ]
+    print(
+        json.dumps(
+            {
+                "result": "pass",
+                "mode": "dry-run",
+                "dry_run": True,
+                "kind": kind,
+                "enable_paid_upload": enable_paid_upload,
+                "candidate_count": len(candidates),
+                "candidates": preview,
+                "repository_mutation": False,
+                "subprocess_execution": False,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def process_record_chain(max_items: int) -> int:
     data = read_json(RC_BACKLOG, {"items": []})
-    candidates = [i for i in data.get("items", []) if i.get("archive_status") in {"pending_upload", "upload_failed", "readback_failed", "waiting_for_key"}]
+    candidates = [
+        item
+        for item in data.get("items", [])
+        if item.get("archive_status") in RECORD_CHAIN_ACTIONABLE_STATUSES
+    ]
     processed = 0
     for item in candidates[:max_items]:
-        if mode == "live" and not has_arweave_key():
-            update_item(RC_BACKLOG, API_RC_BACKLOG, "record_chain_arweave", item["key"], "waiting_for_key", "ARKEY/Arweave JWK not configured")
+        if not has_arweave_key():
+            update_item(
+                RC_BACKLOG,
+                API_RC_BACKLOG,
+                "record_chain_arweave",
+                item["key"],
+                "waiting_for_key",
+                "ARKEY/Arweave JWK not configured",
+            )
             processed += 1
             continue
-        if mode != "live":
-            update_item(RC_BACKLOG, API_RC_BACKLOG, "record_chain_arweave", item["key"], "pending_upload", None)
-            processed += 1
-            continue
-        result = subprocess.run(["python3", "scripts/build_record_chain_arweave_archive.py", "--mode", "live"], cwd=ROOT, text=True, capture_output=True)
+        result = subprocess.run(
+            ["python3", "scripts/build_record_chain_arweave_archive.py", "--mode", "live"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+        )
         if result.returncode != 0:
             err = (result.stderr or result.stdout or "record-chain Arweave upload failed").strip()[-1000:]
             status = "readback_failed" if "readback" in err.lower() else "upload_failed"
-            update_item(RC_BACKLOG, API_RC_BACKLOG, "record_chain_arweave", item["key"], status, err)
+            update_item(
+                RC_BACKLOG,
+                API_RC_BACKLOG,
+                "record_chain_arweave",
+                item["key"],
+                status,
+                err,
+            )
         processed += 1
     run_detector_write()
     print(f"processed record_chain_arweave items: {processed}")
     return 0
 
 
-ACTIONABLE_NATIVE_STATUSES = {
-    "upgrade_due",
-    "upgrade_failed",
-    "pending_upload",
-    "upload_failed",
-    "readback_failed",
-    "waiting_for_key",
-}
-
-UPLOAD_NATIVE_STATUSES = {
-    "pending_upload",
-    "upload_failed",
-    "readback_failed",
-    "waiting_for_key",
-}
-
-
 def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
     data = read_json(OTS_BACKLOG, {"items": []})
     candidates = [
-        i for i in data.get("items", [])
-        if i.get("archive_status") in ACTIONABLE_NATIVE_STATUSES
+        item
+        for item in data.get("items", [])
+        if item.get("archive_status") in ACTIONABLE_NATIVE_STATUSES
     ]
 
     processed = 0
@@ -142,13 +233,22 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
             continue
 
         if not enable_paid_upload and status in UPLOAD_NATIVE_STATUSES:
-            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "pending_upload", None)
+            update_item(
+                OTS_BACKLOG,
+                API_OTS_BACKLOG,
+                "native_ots_bundle",
+                item["key"],
+                "pending_upload",
+                None,
+            )
             processed += 1
             continue
 
         cmd = [
-            "python3", "scripts/run_native_ots_upgrade_verify.py",
-            "--max-items", "1",
+            "python3",
+            "scripts/run_native_ots_upgrade_verify.py",
+            "--max-items",
+            "1",
         ]
 
         anchor_file = item.get("anchor_file")
@@ -160,13 +260,20 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
         if enable_paid_upload and jwk_path:
             cmd += [
                 "--enable-paid-upload",
-                "--confirm-paid-upload", CONFIRM_PAID_UPLOAD,
-                "--jwk-path", jwk_path,
+                "--confirm-paid-upload",
+                CONFIRM_PAID_UPLOAD,
+                "--jwk-path",
+                jwk_path,
             ]
 
-        result = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, env=os.environ.copy())
+        result = subprocess.run(
+            cmd,
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            env=os.environ.copy(),
+        )
 
-        # Always surface subprocess output for debugging
         if result.stdout:
             print(f"[native-ots stdout] {result.stdout.strip()[-2000:]}")
         if result.stderr:
@@ -181,9 +288,15 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
                 new_status = "upgrade_failed"
             else:
                 new_status = "upload_failed"
-            update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status, err)
+            update_item(
+                OTS_BACKLOG,
+                API_OTS_BACKLOG,
+                "native_ots_bundle",
+                item["key"],
+                new_status,
+                err,
+            )
         else:
-            # Subprocess returned 0 — determine new status from anchor state.
             anchor_file = item.get("anchor_file")
             new_status = None
             if anchor_file:
@@ -193,26 +306,44 @@ def process_native_ots(max_items: int, enable_paid_upload: bool) -> int:
                     ots_upgrade_cmd = anchor_data.get("ots_upgrade_command")
                     if ots_status in {"upgraded", "verified"}:
                         if enable_paid_upload:
-                            if anchor_data.get("tx_id"):
-                                new_status = "archived"
-                            else:
-                                new_status = "pending_upload"
+                            new_status = "archived" if anchor_data.get("tx_id") else "pending_upload"
                         else:
                             new_status = "pending_upload"
                     elif ots_status == "pending" and ots_upgrade_cmd is None:
-                        # Script returned 0 but ots upgrade was never executed.
-                        # This means ots binary was not found or skip-upgrade was active.
-                        # Do NOT advance status — mark as upgrade_failed so it retries.
-                        err = (result.stderr or result.stdout or "ots upgrade was not executed; anchor still pending").strip()[-500:]
-                        update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "upgrade_failed", err)
+                        err = (
+                            result.stderr
+                            or result.stdout
+                            or "ots upgrade was not executed; anchor still pending"
+                        ).strip()[-500:]
+                        update_item(
+                            OTS_BACKLOG,
+                            API_OTS_BACKLOG,
+                            "native_ots_bundle",
+                            item["key"],
+                            "upgrade_failed",
+                            err,
+                        )
                         processed += 1
                         continue
                 except Exception as exc:
-                    update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], "upgrade_failed", f"failed to read anchor after repair: {exc}")
+                    update_item(
+                        OTS_BACKLOG,
+                        API_OTS_BACKLOG,
+                        "native_ots_bundle",
+                        item["key"],
+                        "upgrade_failed",
+                        f"failed to read anchor after repair: {exc}",
+                    )
                     processed += 1
                     continue
             if new_status:
-                update_item(OTS_BACKLOG, API_OTS_BACKLOG, "native_ots_bundle", item["key"], new_status)
+                update_item(
+                    OTS_BACKLOG,
+                    API_OTS_BACKLOG,
+                    "native_ots_bundle",
+                    item["key"],
+                    new_status,
+                )
 
         processed += 1
 
@@ -230,9 +361,15 @@ def main() -> int:
     args = parser.parse_args()
     if args.max_items < 1:
         raise SystemExit("--max-items must be >= 1")
+
+    if args.mode == "dry-run":
+        return dry_run_preview(args.kind, args.max_items, args.enable_paid_upload)
+
+    # Every mutation, OTS upgrade, paid upload, retry-count update, and backlog
+    # regeneration is reachable only after an explicit --mode live choice.
     run_detector_write()
     if args.kind == "record_chain_arweave":
-        return process_record_chain(args.max_items, args.mode)
+        return process_record_chain(args.max_items)
     return process_native_ots(args.max_items, args.enable_paid_upload)
 
 

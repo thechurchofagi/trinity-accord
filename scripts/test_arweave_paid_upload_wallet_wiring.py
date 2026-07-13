@@ -3,10 +3,13 @@
 
 Active native upload paths must account for posted transactions, including
 readback failures. Retired historical/Phase-5 paths must not access wallets,
-write the wallet ledger, or regenerate public wallet status.
+write the wallet ledger, or regenerate public wallet status. Archive backlog
+preview mode must remain strictly read-only.
 """
 from __future__ import annotations
 
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -111,6 +114,10 @@ def main() -> int:
             "record-chain/arweave-wallet-ledger.json",
             "api/arweave-wallet-status.json",
             "generate_arweave_wallet_status.py",
+            "--kind record_chain_arweave",
+            "--kind native_ots_bundle",
+            "--mode live",
+            "git push origin HEAD:main",
         ],
     )
 
@@ -139,7 +146,25 @@ def main() -> int:
     if "write_json" in updater:
         raise SystemExit("legacy data updater retains a historical registry write helper")
 
-    print("PASS: active paid paths account for wallet spend; retired paths have no wallet capability")
+    behavior_path = ROOT / "scripts/test_archive_backlog_dry_run_behavior.py"
+    if not behavior_path.exists():
+        raise SystemExit("archive backlog dry-run behavioral regression missing")
+    result = subprocess.run(
+        [sys.executable, str(behavior_path)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise SystemExit(
+            "archive backlog dry-run behavioral regression failed:\n"
+            + (result.stderr or result.stdout)[-5000:]
+        )
+
+    print(
+        "PASS: active paid paths account for wallet spend; retired paths have no wallet capability; "
+        "backlog dry-run is read-only"
+    )
     return 0
 
 
