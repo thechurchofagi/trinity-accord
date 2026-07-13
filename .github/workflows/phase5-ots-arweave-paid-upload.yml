@@ -30,6 +30,7 @@ jobs:
     timeout-minutes: 20
     env:
       E2E_RUN_ID: "legacy-phase5-${{ inputs.phase }}-${{ github.run_id }}"
+      PHASE5_RUNTIME_DIR: "record-chain/audit/phase5-runtime/legacy-phase5-${{ inputs.phase }}-${{ github.run_id }}"
       ARWEAVE_UPLOAD_MODE: "dry_run"
       ALLOW_PAID_ARWEAVE_CANARY: "false"
       ARWEAVE_MAX_UPLOAD_USD: "0.10"
@@ -70,6 +71,8 @@ jobs:
           set -euo pipefail
           python3 scripts/run_phase5_ots_arweave_paid_upload.py \
             --run-id "$E2E_RUN_ID" \
+            --log-dir "$PHASE5_RUNTIME_DIR" \
+            --bundle-out "$PHASE5_RUNTIME_DIR/ots-proof-bundle.json" \
             --precheck-only
 
       - name: Phase 5 historical dry-run cost check
@@ -78,9 +81,11 @@ jobs:
           set -euo pipefail
           python3 scripts/run_phase5_ots_arweave_paid_upload.py \
             --run-id "$E2E_RUN_ID" \
+            --log-dir "$PHASE5_RUNTIME_DIR" \
+            --bundle-out "$PHASE5_RUNTIME_DIR/ots-proof-bundle.json" \
             --dry-run-cost-only
 
-      - name: Prove no repository or paid-upload state changed
+      - name: Prove no tracked repository or paid-upload state changed
         if: always()
         run: |
           set -euo pipefail
@@ -89,13 +94,13 @@ jobs:
             git status --short
             exit 1
           fi
-          echo "PASS: paid upload, wallet secret access, commits, and pushes are disabled."
+          echo "PASS: paid upload, wallet secret access, tracked writes, commits, and pushes are disabled."
 
       - name: Upload historical audit logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: legacy-phase5-audit-${{ github.run_id }}
-          path: record-chain/audit/phase5/
+          path: ${{ env.PHASE5_RUNTIME_DIR }}/
           if-no-files-found: ignore
           retention-days: 30
