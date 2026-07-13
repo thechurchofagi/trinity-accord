@@ -362,6 +362,6 @@
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "8a1e27a64ebd8eaf",
+  "source_digest": "a619887974e5d8fc",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)"
 }
