@@ -31,8 +31,30 @@ jobs:
             scripts/verify_record_chain_data_arweave_registry.py \
             scripts/test_legacy_arweave_retirement_behavior.py \
             scripts/test_arweave_live_readiness_contract.py
-      - name: Run retirement behavior
-        run: python scripts/test_legacy_arweave_retirement_behavior.py
+      - name: Capture retirement behavior
+        id: behavior
+        continue-on-error: true
+        run: |
+          set +e
+          python scripts/test_legacy_arweave_retirement_behavior.py > "$RUNNER_TEMP/behavior.log" 2>&1
+          code=$?
+          echo "$code" > "$RUNNER_TEMP/behavior.code"
+          tail -n 120 "$RUNNER_TEMP/behavior.log"
+          exit "$code"
+      - name: Upload focused diagnostic
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: round7-arweave-focused-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/behavior.log
+            ${{ runner.temp }}/behavior.code
+          retention-days: 7
+      - name: Require retirement behavior success
+        if: always()
+        run: |
+          test -f "$RUNNER_TEMP/behavior.code"
+          test "$(cat "$RUNNER_TEMP/behavior.code")" = "0"
       - name: Run registered Arweave contract
         run: python scripts/test_arweave_live_readiness_contract.py
       - name: Verify historical registry
