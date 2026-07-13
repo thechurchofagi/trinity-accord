@@ -13,7 +13,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from verify_record_chain_data_arweave_bundle import ROOT, sha256_file, verify_bundle
+from verify_record_chain_data_arweave_bundle import ROOT, verify_bundle
 
 KNOWN_DUPLICATE_LIVE_TX_IDS = {
     "aAZ0lUPiRppjYWMjNQZEbOJyePPLSjHdZUs5Ifv2dSg",
@@ -40,21 +40,17 @@ def historical_target(entry: dict[str, Any]) -> tuple[Any, ...]:
 
 
 def entry_matches_projection(entry: dict[str, Any], projection: dict[str, Any]) -> bool:
+    """Compare only fields actually present in a sparse latest projection."""
     fields = {
         "height",
         "bundle_type",
         "bundle_file",
         "bundle_sha256",
         "arweave_tx_id",
+        "arweave_hash_match",
+        "head_entry_hash",
     }
-    for field in fields:
-        if projection.get(field) != entry.get(field):
-            return False
-    if "arweave_hash_match" in projection and projection.get("arweave_hash_match") != entry.get("arweave_hash_match"):
-        return False
-    if "head_entry_hash" in projection and projection.get("head_entry_hash") != entry.get("head_entry_hash"):
-        return False
-    return True
+    return all(projection.get(field) == entry.get(field) for field in fields if field in projection)
 
 
 def main() -> int:
@@ -68,7 +64,9 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    registry_path = ROOT / args.registry
+    registry_path = Path(args.registry)
+    if not registry_path.is_absolute():
+        registry_path = ROOT / registry_path
     registry = read_json(registry_path)
     require(isinstance(registry, dict), "registry must be a JSON object")
     require(registry.get("schema") == "trinityaccord.record-chain-data-arweave-registry.v1", "bad registry schema")
@@ -127,7 +125,11 @@ def main() -> int:
                 "42f42d3544627404593de86bd6b3453d3ae95b8829d7aac33471adb8cd473eb1",
             )
         )
-        require(known, f"duplicate live uploads for one historical target are not allowed: target={target}, tx_ids={sorted(str(value) for value in tx_ids)}")
+        require(
+            known,
+            "duplicate live uploads for one historical target are not allowed: "
+            f"target={target}, tx_ids={sorted(str(value) for value in tx_ids)}",
+        )
         duplicate_warnings.append(
             {
                 "type": "known_historical_duplicate_paid_upload",
