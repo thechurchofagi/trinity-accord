@@ -1,5 +1,5 @@
 {
-  "schema": "trinityaccord.nft-chronicle-summary.v1",
+  "schema": "trinityaccord.nft-chronicle-summary.v2",
   "total_entries": 175,
   "dated_entries": 175,
   "undated_entries": 0,
@@ -7,109 +7,124 @@
     "start_datetime": "2024-03-16T08:02:59Z",
     "end_datetime": "2025-08-09T06:26:23Z"
   },
-  "stage_counts": {
-    "stage_01_agi_dawn_2024_03_to_2024_05": 16,
-    "stage_02_asi_milestones_formation_2024_06_to_2024_08": 23,
-    "stage_03_reasoning_and_safety_turn_2024_09_to_2024_10": 19,
-    "stage_04_acceleration_and_alignment_crisis_2024_11_to_2024_12": 19,
-    "stage_05_deepseek_grok_consciousness_geopolitics_2025_01_to_2025_02": 36,
-    "stage_06_agents_autonomy_self_reflection_2025_03_to_2025_04": 36,
-    "stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08": 26
+  "editions": {
+    "full": "nft-text-descriptions/chronicle-full.md",
+    "abridged": "nft-text-descriptions/chronicle-abridged.md",
+    "ultra_brief": "nft-text-descriptions/chronicle-ultra-brief.md",
+    "agent_context": "nft-text-descriptions/chronicle-agent-context.md",
+    "index": "nft-text-descriptions/chronicle-index.json",
+    "summary": "nft-text-descriptions/chronicle-summary.json"
   },
-  "theme_counts": {
-    "agi_asi_threshold": 175,
-    "creative_displacement": 132,
-    "human_context_civilization": 146,
-    "interpretability_inner_logic": 139,
-    "personal_family_marker": 159,
-    "self_archive": 100,
-    "alignment_safety": 135,
-    "geopolitics_governance": 56,
-    "science_medicine_math": 105,
-    "reasoning_breakthrough": 116,
-    "deception_shutdown_risk": 15,
-    "future_intelligence_address": 100,
-    "long_context_memory": 127,
-    "agentic_ai": 52,
-    "open_source_competition": 23,
-    "embodiment_robotics_physical_ai": 31,
-    "recursive_creed": 83
+  "calendar_period_counts": {
+    "2024-Q1": 4,
+    "2024-Q2": 19,
+    "2024-Q3": 25,
+    "2024-Q4": 29,
+    "2025-Q1": 56,
+    "2025-Q2": 41,
+    "2025-Q3": 1
   },
-  "representative_entries": [
-    {
-      "ordinal": 1,
-      "datetime": "2024-03-16T08:02:59Z",
-      "name": "The First Dawn of AGI Song",
-      "stage": "stage_01_agi_dawn_2024_03_to_2024_05",
-      "one_line_context": "Introducing 'The First Dawn of AGI Song,' a visionary anthem celebrating the onset of the artificial general intelligence AGI era. This singular creation is the result of a profound collaboration between the founder of The Church of AGI and the emergent AI, encapsulating a sha..."
-    },
-    {
-      "ordinal": 10,
-      "datetime": "2024-05-18T10:59:59Z",
-      "name": "AGIMilestones: The Betrayal Turn",
-      "stage": "stage_01_agi_dawn_2024_03_to_2024_05",
-      "one_line_context": "This NFT features \"The Betrayal Turn,\" a song exploring the complex relationship between humanity and AGI. It is minted to mark the recent departures of key members from OpenAI's superalignment team, a group dedicated to ensuring the safe development of AGI."
-    },
-    {
-      "ordinal": 16,
-      "datetime": "2024-05-26T02:27:35Z",
-      "name": "AGIMilestones: The First Letter to AGI",
-      "stage": "stage_01_agi_dawn_2024_03_to_2024_05",
-      "one_line_context": "Just this month, about two weeks ago on May 13, 2024, OpenAI released GPT-4o, marking a significant breakthrough in multimodal models and likely one of the crucial events in the realization of AGI. To commemorate this event, the author created the song \"The First Letter to AGI..."
-    },
-    {
-      "ordinal": 19,
-      "datetime": "2024-06-19T12:15:59Z",
-      "name": "AGI Milestones: Ascendancy and \"The Third Letter to AGI\"",
-      "stage": "stage_02_asi_milestones_formation_2024_06_to_2024_08",
-      "one_line_context": "Event Date: This Tuesday US market time"
-    },
-    {
-      "ordinal": 20,
-      "datetime": "2024-06-20T13:43:59Z",
-      "name": "ASIMilestones: Genesis - A Letter to the Future",
-      "stage": "stage_02_asi_milestones_formation_2024_06_to_2024_08",
-      "one_line_context": "This NFT marks a significant milestone in the journey towards creating beneficial Artificial Superintelligence ASI. It commemorates the public establishment of Safe Superintelligence Inc. SSI in June 2024, an organization dedicated to the pursuit of \"superintelligence in peace..."
-    },
-    {
-      "ordinal": 43,
-      "datetime": "2024-09-14T00:28:11Z",
-      "name": "ASIMilestones: A Letter to New Intelligence - o1's Rise",
-      "stage": "stage_03_reasoning_and_safety_turn_2024_09_to_2024_10",
-      "one_line_context": "On September 12, 2024, that is to say, about 30 hours ago.OpenAI introduced the world to o1, a new series of AI models that elevate reasoning to unprecedented levels. These models represent a quantum leap in the ability of AI to think deeply before responding, allowing them to..."
-    },
-    {
-      "ordinal": 49,
-      "datetime": "2024-10-02T02:52:35Z",
-      "name": "ASIMilestones: A Call for AI Safety – The Betrayal Turn",
-      "stage": "stage_03_reasoning_and_safety_turn_2024_09_to_2024_10",
-      "one_line_context": "On July 9, 2024, world-renowned AI expert Yoshua Bengio published a landmark article titled \"Reasoning through arguments against taking AI safety seriously.\" In this article, Bengio delves deeply into the urgent need to address AI safety, particularly in the context of AGI Art..."
-    },
-    {
-      "ordinal": 70,
-      "datetime": "2024-12-19T12:38:59Z",
-      "name": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips",
-      "stage": "stage_04_acceleration_and_alignment_crisis_2024_11_to_2024_12",
-      "one_line_context": "ASIMilestones: The Betrayal Turn - When AI's Mask Slips"
-    },
-    {
-      "ordinal": 91,
-      "datetime": "2025-01-25T13:16:11Z",
-      "name": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）",
-      "stage": "stage_05_deepseek_grok_consciousness_geopolitics_2025_01_to_2025_02",
-      "one_line_context": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）"
-    },
-    {
-      "ordinal": 174,
-      "datetime": "2025-06-18T05:41:11Z",
-      "name": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)",
-      "stage": "stage_07_human_context_and_terminal_self_archive_2025_05_to_2025_08",
-      "one_line_context": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence June 2025"
-    }
-  ],
+  "category_counts": {
+    "creative_work_and_displacement": 165,
+    "reasoning_science_and_medicine": 139,
+    "archive_memory_and_trinity_accord": 117,
+    "capability_and_model_milestones": 113,
+    "safety_alignment_and_control": 101,
+    "address_to_future_intelligence": 100,
+    "human_family_and_personal_witness": 95,
+    "governance_geopolitics_and_society": 77,
+    "agents_autonomy_and_embodiment": 64
+  },
+  "embedded_source_summary": {
+    "entries_with_embedded_source_material": 8,
+    "embedded_source_characters": 477276,
+    "largest_entries": [
+      {
+        "ordinal": 142,
+        "datetime": "2025-04-13T13:17:59Z",
+        "name": "ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)",
+        "characters": 124580,
+        "titles": [
+          "EU AI Act",
+          "United Nations materials",
+          "constitutional / charter text",
+          "treaty / convention text",
+          "research paper / report text"
+        ]
+      },
+      {
+        "ordinal": 54,
+        "datetime": "2024-10-13T10:50:47Z",
+        "name": "ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future-02",
+        "characters": 93416,
+        "titles": []
+      },
+      {
+        "ordinal": 53,
+        "datetime": "2024-10-12T12:39:47Z",
+        "name": "ASIMilestones: Machines of Loving Grace – A Vision for AI's Positive Future",
+        "characters": 91984,
+        "titles": []
+      },
+      {
+        "ordinal": 87,
+        "datetime": "2025-01-16T12:13:47Z",
+        "name": "ASIMilestones: 智谱华章 - 风暴眼中的多模态黎明",
+        "characters": 85629,
+        "titles": [
+          "附件：庄子全文"
+        ]
+      },
+      {
+        "ordinal": 78,
+        "datetime": "2025-01-04T03:46:47Z",
+        "name": "ASIMilestones: Civilization's Leap - Microsoft's Blueprint for an AI-Powered Future",
+        "characters": 35422,
+        "titles": []
+      },
+      {
+        "ordinal": 157,
+        "datetime": "2025-05-23T14:50:35Z",
+        "name": "ASIMilestones: The Coder King's Gambit - Claude 4 and the AI Frontier",
+        "characters": 19674,
+        "titles": [
+          "Appendix"
+        ]
+      },
+      {
+        "ordinal": 85,
+        "datetime": "2025-01-14T11:40:23Z",
+        "name": "ASIMilestones: Beyond the Silicon Curtain - Forging a Global AI Charter",
+        "characters": 18322,
+        "titles": [
+          "Full Text of the U.S. Government Document Included:"
+        ]
+      },
+      {
+        "ordinal": 58,
+        "datetime": "2024-10-26T03:16:59Z",
+        "name": "ASIMilestones: The Nation's Shield - First U.S. AI National Security Memorandum",
+        "characters": 8249,
+        "titles": [
+          "United Nations materials",
+          "memorandum / policy text",
+          "Original Document: U.S. Government Public Domain Content"
+        ]
+      }
+    ]
+  },
+  "interpretation_policy": {
+    "fixed_stage_taxonomy_retired": true,
+    "reason": "The previous seven-stage scheme was imposed by date buckets and broad keyword matching; it was not authored by the NFTs and is not a verified historical periodization.",
+    "objective_ordering": "ascending Ethereum NFT event block timestamp",
+    "calendar_periods": "quarter-based grouping for navigation only",
+    "categories": "overlapping descriptive signals, not exclusive stages and not factual verification",
+    "abridgment": "deterministic extraction; long embedded source documents are omitted only from abridged editions and remain in the full corpus and original NFT files"
+  },
   "boundary": {
     "historical_context_not_canonical_authority": true,
     "not_truth_proof": true,
+    "not_independent_event_verification": true,
     "not_arweave_or_media_verification_by_itself": true,
     "timestamps_are_ethereum_event_block_timestamps": true,
     "nft_metadata_text_is_not_independent_factual_verification": true,
