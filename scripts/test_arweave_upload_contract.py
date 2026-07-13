@@ -8,6 +8,7 @@ retired and must reject live updates.
 """
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,7 +37,7 @@ BOUNDARY_FIELDS = {
 
 
 def fail(message: str) -> None:
-    print(f"FAIL: {message}")
+    print(f"FAIL: {message}", file=sys.stderr)
     raise SystemExit(1)
 
 
