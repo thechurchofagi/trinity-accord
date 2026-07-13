@@ -1,0 +1,84 @@
+name: TEMP Generate NFT Identity Index
+
+on:
+  push:
+    branches: [agent/nft-mint-identity-index]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-nft-identity-index-generator
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: ${{ github.ref == 'refs/heads/agent/nft-mint-identity-index' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Checkout generator branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: agent/nft-mint-identity-index
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: "22"
+
+      - name: Validate generator locally
+        run: |
+          set -euo pipefail
+          node --check scripts/generate_nft_identity_index.mjs
+          node scripts/generate_nft_identity_index.mjs --self-test
+
+      - name: Generate receipt-verified mint identity index
+        env:
+          CONFIGURED_ETH_RPC_URL: ${{ secrets.ETH_RPC_URL }}
+        run: |
+          set -euo pipefail
+          endpoints=()
+          if [ -n "$CONFIGURED_ETH_RPC_URL" ]; then
+            endpoints+=("$CONFIGURED_ETH_RPC_URL")
+          fi
+          endpoints+=(
+            "https://ethereum-rpc.publicnode.com"
+            "https://eth.llamarpc.com"
+          )
+
+          success=0
+          for endpoint in "${endpoints[@]}"; do
+            echo "Attempting Ethereum RPC endpoint ${endpoint%%/*}//[redacted]"
+            rm -f nft-identity-index.json
+            if ETH_RPC_URL="$endpoint" node scripts/generate_nft_identity_index.mjs; then
+              success=1
+              break
+            fi
+            echo "RPC attempt failed; trying next endpoint" >&2
+          done
+          if [ "$success" -ne 1 ]; then
+            echo "All configured Ethereum RPC endpoints failed" >&2
+            exit 1
+          fi
+
+      - name: Validate generated index
+        run: |
+          set -euo pipefail
+          python3 scripts/test_nft_identity_index_contract.py
+          test "$(wc -c < nft-identity-index.json)" -lt 2000000
+          git diff --check
+
+      - name: Commit generated index to branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nft-identity-index.json
+          if git diff --cached --quiet; then
+            echo "Identity index already current"
+            exit 0
+          fi
+          git commit -m "Generate receipt-verified NFT identity index"
+          git push origin HEAD:agent/nft-mint-identity-index
