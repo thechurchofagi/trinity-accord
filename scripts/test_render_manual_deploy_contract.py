@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Phase 6C: Render manual deploy and Round 8 public-writer contract.
+"""Phase 6C: Render manual deploy and Round 8 production-surface contracts.
 
 Verifies that Render manual deploy is properly configured and cannot report a
-suspended or unconfirmed deployment as triggered. Also registers the public
-index writer transaction regression because those workflows share the same
-production deployment/status boundary.
+suspended or unconfirmed deployment as triggered. Also registers public writer
+and NFT backup capability boundaries because those workflows can publish
+production-facing artifacts or Release assets.
 """
 from __future__ import annotations
 
@@ -17,6 +17,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def ok(msg: str) -> None:
     print(f"PASS: {msg}")
+
+
+def run_contract(path: Path, label: str, errors: list[str]) -> None:
+    if not path.exists():
+        errors.append(f"{label} is missing")
+        return
+    result = subprocess.run(
+        [sys.executable, str(path)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        errors.append(f"{label} failed: " + (result.stderr or result.stdout)[-8000:])
+    else:
+        ok(f"{label} passes")
 
 
 def main() -> int:
@@ -48,20 +64,11 @@ def main() -> int:
         else:
             ok("render_manual_deploy.py requires a confirmed deploy ID")
 
-    behavior = ROOT / "scripts" / "test_render_manual_deploy_behavior.py"
-    if not behavior.exists():
-        errors.append("Render deployment behavior regression is missing")
-    else:
-        result = subprocess.run(
-            [sys.executable, str(behavior)],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode != 0:
-            errors.append(f"Render deployment behavior regression failed: {result.stderr or result.stdout}")
-        else:
-            ok("Render deployment behavior regression passes")
+    run_contract(
+        ROOT / "scripts/test_render_manual_deploy_behavior.py",
+        "Render deployment behavior regression",
+        errors,
+    )
 
     wf = ROOT / ".github" / "workflows" / "render-manual-deploy.yml"
     if not wf.exists():
@@ -98,28 +105,24 @@ def main() -> int:
     else:
         ok("render.yaml not found (services may be configured via API)")
 
-    round8 = ROOT / "scripts/test_round8_public_writer_transaction_contract.py"
-    if not round8.exists():
-        errors.append("Round 8 public writer transaction contract is missing")
-    else:
-        result = subprocess.run(
-            [sys.executable, str(round8)],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode != 0:
-            errors.append("Round 8 public writer transaction contract failed: " + (result.stderr or result.stdout)[-8000:])
-        else:
-            ok("Round 8 public writer transaction contract passes")
+    run_contract(
+        ROOT / "scripts/test_round8_public_writer_transaction_contract.py",
+        "Round 8 public writer transaction contract",
+        errors,
+    )
+    run_contract(
+        ROOT / "scripts/test_round8_nft_backup_contract.py",
+        "Round 8 NFT backup capability contract",
+        errors,
+    )
 
     if errors:
-        print("FAIL: Render manual deploy contract errors:")
+        print("FAIL: Render/manual-public-surface contract errors:")
         for error in errors:
             print(f"  - {error}")
         return 1
 
-    print("\nPASS: Render manual deploy contract verified")
+    print("\nPASS: Render manual deploy and Round 8 production-surface contracts verified")
     return 0
 
 
