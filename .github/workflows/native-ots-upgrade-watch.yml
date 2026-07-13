@@ -23,7 +23,8 @@ defaults:
     shell: bash
 
 concurrency:
-  group: native-ots-upgrade-watch
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -36,9 +37,22 @@ jobs:
       OTS_UPGRADE_TIMEOUT: "180"
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Authorize write workflow actor
+        run: |
+          set -euo pipefail
+          actor="${GITHUB_ACTOR:-}"
+          if [[ "$actor" != "thechurchofagi" && "$actor" != "github-actions[bot]" ]]; then
+            echo "Unauthorized actor: $actor" >&2
+            exit 1
+          fi
+          echo "Authorized actor: $actor"
+
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: main
 
       - name: Record toolchain provenance
         run: |
@@ -122,15 +136,20 @@ jobs:
       - name: Restore timestamp-only native OTS changes
         if: success()
         run: |
+          set -euo pipefail
           python3 scripts/restore_json_if_only_volatile_changes.py \
             --path api/record-chain-native-ots-latest.json \
+            --path record-chain/ots/native-ots-backlog.json \
+            --path api/record-chain-native-ots-backlog.json \
+            --path api/arweave-wallet-status.json \
             --glob 'record-chain/ots/native-anchors/*.anchor.json' \
+            --volatile-key generated_at \
             --volatile-key updated_at \
             --volatile-key checked_at \
             --volatile-key upgraded_at \
             --volatile-key verified_at
 
-      - name: Commit native OTS state if changed
+      - name: Commit native OTS state to main if changed
         if: success()
         run: |
           set -euo pipefail
@@ -149,25 +168,55 @@ jobs:
             exit 0
           fi
 
-          python3 scripts/generate_arweave_wallet_status.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          reconcile_and_stage() {
+            python3 scripts/reconcile_native_ots_generated_state.py
+
+            python3 scripts/restore_json_if_only_volatile_changes.py \
+              --path api/record-chain-native-ots-latest.json \
+              --path record-chain/ots/native-ots-backlog.json \
+              --path api/record-chain-native-ots-backlog.json \
+              --path api/arweave-wallet-status.json \
+              --glob 'record-chain/ots/native-anchors/*.anchor.json' \
+              --volatile-key generated_at \
+              --volatile-key updated_at \
+              --volatile-key checked_at \
+              --volatile-key upgraded_at \
+              --volatile-key verified_at
+
+            git add \
+              record-chain/ots/native-anchors/ \
+              record-chain/ots/native-arweave-bundles/ \
+              record-chain/ots/native-arweave-registry.json \
+              record-chain/ots/native-ots-backlog.json \
+              record-chain/arweave-wallet-ledger.json \
+              api/arweave-wallet-status.json \
+              api/record-chain-native-ots-arweave-registry.json \
+              api/record-chain-native-ots-backlog.json \
+              api/record-chain-native-ots-latest.json
+
+            while IFS= read -r path; do
+              case "$path" in
+                record-chain/records/*|record-chain/pending/*|record-chain/processed/*|record-chain/rejected/*|record-chain/chain-tip.json|archive/authority-*|authority/*|Bitcoin\ Originals/*)
+                  echo "Forbidden write path: $path" >&2
+                  return 1
+                  ;;
+              esac
+            done < <(git diff --cached --name-only)
+
+            git diff --cached --check
+          }
+
+          reconcile_and_stage
           git status --short
-          git add \
-            record-chain/ots/native-anchors/ \
-            record-chain/ots/native-arweave-bundles/ \
-            record-chain/ots/native-arweave-registry.json \
-            record-chain/arweave-wallet-ledger.json \
-            api/arweave-wallet-status.json \
-            api/record-chain-native-ots-arweave-registry.json \
-            api/record-chain-native-ots-latest.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ "$RESULT" = "verified" ] || [ "$RESULT" = "verified_archived" ]; then
             git commit -m "chore: archive verified native OTS proof bundle"
           elif [ "$RESULT" = "upgraded_archived" ]; then
@@ -176,21 +225,33 @@ jobs:
             git commit -m "chore: sync upgraded native OTS anchor and registry"
           fi
 
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+            echo "::error::Tracked Native OTS changes remain after commit."
+            git status --short
+            exit 1
+          fi
+
           for attempt in 1 2 3; do
-            if git push; then
-              exit 0
-            fi
-            printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
-            git fetch origin main
-            # Stash any unstaged generated files before rebase
-            git stash --include-untracked || true
+            git fetch origin main --prune
             if ! git rebase origin/main; then
-              git rebase --abort
-              git stash pop 2>/dev/null || true
+              git rebase --abort || true
+              echo "Rebase failed on attempt ${attempt}; retrying without rerunning paid upload."
               sleep $((attempt * 5))
               continue
             fi
-            git stash pop 2>/dev/null || true
+
+            # Main may have advanced while OTS verification/readback was running.
+            # Recompute only derived views; never upgrade or upload again here.
+            reconcile_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            printf 'Push failed on attempt %s; rebasing, reconciling, and retrying.\n' "${attempt}"
             sleep $((attempt * 5))
           done
 
