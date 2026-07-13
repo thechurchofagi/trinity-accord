@@ -1,0 +1,127 @@
+name: One-time fix Waiting Heartbeat retry SLA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/one-time-fix-waiting-heartbeat-retry-sla.yml
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Patch retry-window semantics and regression coverage
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          generator_path = Path("scripts/generate_waiting_heartbeat_status.py")
+          generator = generator_path.read_text(encoding="utf-8")
+          old_constants = '''HEARTBEAT_DUE_UTC_HOUR = 3
+          HEARTBEAT_DUE_UTC_MINUTE = 17
+          HEARTBEAT_DUE_GRACE_MINUTES = 90
+          '''
+          new_constants = '''# The submit workflow has a primary run at 03:17 UTC and retries through
+          # 09:17 UTC. A heartbeat is not missing while those declared retries can
+          # still run; the freshness SLA matures only after the final retry plus grace.
+          HEARTBEAT_FINAL_RETRY_UTC_HOUR = 9
+          HEARTBEAT_FINAL_RETRY_UTC_MINUTE = 17
+          HEARTBEAT_FINAL_RETRY_GRACE_MINUTES = 90
+          '''
+          if generator.count(old_constants) != 1:
+              raise SystemExit("unexpected Waiting Heartbeat schedule constants")
+          generator = generator.replace(old_constants, new_constants)
+
+          old_cutoff = '''    due = now.replace(
+                  hour=HEARTBEAT_DUE_UTC_HOUR,
+                  minute=HEARTBEAT_DUE_UTC_MINUTE,
+                  second=0,
+                  microsecond=0,
+              ) + timedelta(minutes=HEARTBEAT_DUE_GRACE_MINUTES)
+              return now.date() if now >= due else now.date() - timedelta(days=1)
+          '''
+          new_cutoff = '''    cutoff = now.replace(
+                  hour=HEARTBEAT_FINAL_RETRY_UTC_HOUR,
+                  minute=HEARTBEAT_FINAL_RETRY_UTC_MINUTE,
+                  second=0,
+                  microsecond=0,
+              ) + timedelta(minutes=HEARTBEAT_FINAL_RETRY_GRACE_MINUTES)
+              return now.date() if now >= cutoff else now.date() - timedelta(days=1)
+          '''
+          if generator.count(old_cutoff) != 1:
+              raise SystemExit("unexpected expected_heartbeat_date implementation")
+          generator_path.write_text(generator.replace(old_cutoff, new_cutoff), encoding="utf-8")
+
+          test_path = Path("scripts/test_waiting_heartbeat_summary_metrics.py")
+          tests = test_path.read_text(encoding="utf-8")
+          old_test = '''def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
+              generator = load_generator_module()
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 1, 32, tzinfo=timezone.utc)) == date(2026, 6, 23), "before due should expect previous UTC date")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "at due should still be grace window")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside grace should still expect previous UTC date")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "after grace should expect current UTC date")
+          '''
+          new_test = '''def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
+              generator = load_generator_module()
+              workflow = WORKFLOW.read_text(encoding="utf-8")
+              require('cron: "17 5,7,9 * * *"' in workflow, "submit workflow must retain retries through 09:17 UTC")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 3, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "primary run must not mature the daily SLA")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 4, 47, tzinfo=timezone.utc)) == date(2026, 6, 23), "the old primary-only cutoff must remain inside the retry window")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 9, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "final retry time must still expect the previous UTC date")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside final retry grace must expect the previous UTC date")
+              require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "only final retry plus grace may mature the current UTC date")
+          '''
+          if tests.count(old_test) != 1:
+              raise SystemExit("unexpected retry-window regression test")
+          test_path.write_text(tests.replace(old_test, new_test), encoding="utf-8")
+          PY
+
+      - name: Run focused regression suite
+        run: |
+          set -euo pipefail
+          python3 scripts/test_waiting_heartbeat_summary_metrics.py
+          python3 -m py_compile scripts/generate_waiting_heartbeat_status.py
+
+      - name: Commit fix and remove one-time workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-heartbeat-repair-bot"
+          git config user.email "actions@github.com"
+          rm .github/workflows/one-time-fix-waiting-heartbeat-retry-sla.yml
+          git add scripts/generate_waiting_heartbeat_status.py scripts/test_waiting_heartbeat_summary_metrics.py .github/workflows/one-time-fix-waiting-heartbeat-retry-sla.yml
+          git commit -m "Fix Waiting Heartbeat retry-window freshness semantics"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              gh workflow run waiting-heartbeat-status-sync.yml --repo "$GITHUB_REPOSITORY" --ref main
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            python3 scripts/test_waiting_heartbeat_summary_metrics.py
+            sleep $((attempt * 5))
+          done
+          exit 1
