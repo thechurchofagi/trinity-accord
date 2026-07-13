@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import process from 'node:process';
 
-const CONTRACT = (process.env.CONTRACT || '0x019372bBee377109b8Eae66d7267f5C4EaAdBb79').toLowerCase();
 const RPC_URL = process.env.RPC_URL || 'https://ethereum-rpc.publicnode.com';
 const BLOCKSCOUT_API = process.env.BLOCKSCOUT_API || 'https://eth.blockscout.com/api/v2';
+const TOKEN_INDEX_URL = process.env.TOKEN_INDEX_URL;
+const ZERO = '0x0000000000000000000000000000000000000000';
 
 async function rpc(method, params, timeoutMs = 30_000) {
   const controller = new AbortController();
@@ -41,42 +42,6 @@ async function getJson(url, timeoutMs = 30_000) {
   }
 }
 
-const fromHex = value => Number.parseInt(value, 16);
-const call = data => rpc('eth_call', [{to: CONTRACT, data}, 'latest']);
-const supportsData = id => `0x01ffc9a7${id.replace(/^0x/, '')}${'0'.repeat(56)}`;
-const boolResult = value => typeof value === 'string' && BigInt(value) !== 0n;
-const ZERO = '0x0000000000000000000000000000000000000000';
-
-async function inspectInterfaces() {
-  const interfaces = {};
-  for (const [name, id] of [
-    ['erc165', '0x01ffc9a7'],
-    ['erc721', '0x80ac58cd'],
-    ['erc721_metadata', '0x5b5e139f'],
-    ['erc1155', '0xd9b67a26'],
-    ['erc1155_metadata_uri', '0x0e89341c'],
-  ]) {
-    try { interfaces[name] = boolResult(await call(supportsData(id))); }
-    catch (error) { interfaces[name] = {error: String(error?.message || error)}; }
-  }
-  console.log(`PROBE interfaces=${JSON.stringify(interfaces)}`);
-  return interfaces;
-}
-
-async function inspectProxy() {
-  const slots = {
-    implementation: '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc',
-    beacon: '0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50',
-  };
-  const proxy = {};
-  for (const [name, slot] of Object.entries(slots)) {
-    try { proxy[name] = await rpc('eth_getStorageAt', [CONTRACT, slot, 'latest']); }
-    catch (error) { proxy[name] = {error: String(error?.message || error)}; }
-  }
-  console.log(`PROBE proxy=${JSON.stringify(proxy)}`);
-  return proxy;
-}
-
 function withPage(baseUrl, params) {
   if (!params) return baseUrl;
   const url = new URL(baseUrl);
@@ -103,7 +68,6 @@ async function fetchAllPages(baseUrl, maxPages = 100) {
 
 function conciseTransfer(item) {
   return {
-    available_keys: Object.keys(item).sort(),
     transaction_hash: item.transaction_hash || item.transaction?.hash || null,
     block_hash: item.block_hash || null,
     block_number: item.block_number,
@@ -112,85 +76,91 @@ function conciseTransfer(item) {
     method: item.method,
     from: item.from?.hash || null,
     to: item.to?.hash || null,
-    token_id: item.total?.token_id || item.token_id || item.token_instance?.id || null,
+    token_id: String(item.total?.token_id || item.token_id || item.token_instance?.id || ''),
     token_type: item.token_type || item.token?.type || null,
   };
 }
 
-function conciseInstance(item) {
-  return {
-    available_keys: Object.keys(item).sort(),
-    token_id: item.id || item.token_id || null,
-    owner: item.owner?.hash || item.owner || null,
-    name: item.metadata?.name || null,
-    external_app_url: item.external_app_url || null,
-  };
-}
+async function inspectContract(contract, expectedTokenIds) {
+  const normalized = contract.toLowerCase();
+  const code = await rpc('eth_getCode', [normalized, 'latest']);
+  if (code === '0x') throw new Error(`no Ethereum mainnet code for ${contract}`);
 
-async function inspectBlockscout() {
-  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}`);
-  const addressSummary = {
-    available_keys: Object.keys(address).sort(),
-    hash: address.hash,
-    name: address.name,
-    is_contract: address.is_contract,
-    proxy_type: address.proxy_type,
-    implementations: address.implementations,
-    creator_address_hash: address.creator_address_hash,
-    creation_transaction_hash: address.creation_transaction_hash,
-    token: address.token,
-  };
-  console.log(`PROBE blockscout-address=${JSON.stringify(addressSummary)}`);
-
-  const token = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}`);
-  console.log(`PROBE blockscout-token=${JSON.stringify(token)}`);
-
-  const allTransfers = await fetchAllPages(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/transfers`);
+  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${normalized}`);
+  const token = await getJson(`${BLOCKSCOUT_API}/tokens/${normalized}`);
+  const allTransfers = await fetchAllPages(`${BLOCKSCOUT_API}/tokens/${normalized}/transfers`);
   const transfers = allTransfers.items.map(conciseTransfer);
   const mints = transfers.filter(item => String(item.from).toLowerCase() === ZERO);
-  const uniqueMintTokenIds = new Set(mints.map(item => item.token_id));
-  console.log(`PROBE transfers-summary=${JSON.stringify({
-    pages: allTransfers.pages,
-    transfers: transfers.length,
-    mints: mints.length,
-    unique_mint_token_ids: uniqueMintTokenIds.size,
-    first: transfers[0] || null,
-    last: transfers.at(-1) || null,
-    mint_first: mints[0] || null,
-    mint_last: mints.at(-1) || null,
-  })}`);
+  const mintByTokenId = new Map();
+  for (const mint of mints) {
+    if (mintByTokenId.has(mint.token_id)) throw new Error(`duplicate mint event ${contract}/${mint.token_id}`);
+    mintByTokenId.set(mint.token_id, mint);
+  }
 
-  const allInstances = await fetchAllPages(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/instances`);
-  const instances = allInstances.items.map(conciseInstance);
-  console.log(`PROBE instances-summary=${JSON.stringify({
-    pages: allInstances.pages,
-    instances: instances.length,
-    unique_token_ids: new Set(instances.map(item => item.token_id)).size,
-    first: instances[0] || null,
-    last: instances.at(-1) || null,
-  })}`);
+  const expected = new Set(expectedTokenIds.map(String));
+  const missing = [...expected].filter(tokenId => !mintByTokenId.has(tokenId)).sort((a, b) => BigInt(a) < BigInt(b) ? -1 : 1);
+  const unexpected = [...mintByTokenId.keys()].filter(tokenId => !expected.has(tokenId)).sort((a, b) => BigInt(a) < BigInt(b) ? -1 : 1);
+  const matched = expectedTokenIds.map(String).filter(tokenId => mintByTokenId.has(tokenId));
 
   return {
-    address: addressSummary,
-    token,
-    transfers: {pages: allTransfers.pages, count: transfers.length, mint_count: mints.length, unique_mint_token_ids: uniqueMintTokenIds.size},
-    instances: {pages: allInstances.pages, count: instances.length},
+    contract,
+    name: token.name || address.name || null,
+    symbol: token.symbol || null,
+    standard: token.type || null,
+    code_bytes: (code.length - 2) / 2,
+    proxy_type: address.proxy_type || null,
+    implementations: address.implementations || [],
+    creator_address: address.creator_address_hash || null,
+    creation_transaction_hash: address.creation_transaction_hash || null,
+    expected_tokens: expected.size,
+    transfer_pages: allTransfers.pages,
+    all_transfers: transfers.length,
+    mint_events: mints.length,
+    unique_mint_token_ids: mintByTokenId.size,
+    matched_tokens: matched.length,
+    missing_tokens: missing,
+    unexpected_tokens: unexpected,
+    oldest_mint: mints.at(-1) || null,
+    newest_mint: mints[0] || null,
   };
 }
 
 async function main() {
-  console.log(`PROBE contract=${CONTRACT} rpc=${RPC_URL}`);
-  const chainId = fromHex(await rpc('eth_chainId', []));
-  const latest = fromHex(await rpc('eth_blockNumber', []));
-  const latestCode = await rpc('eth_getCode', [CONTRACT, 'latest']);
-  if (latestCode === '0x') throw new Error('contract has no current bytecode');
-  console.log(`PROBE chain-id=${chainId} latest-block=${latest} code-bytes=${(latestCode.length - 2) / 2}`);
+  if (!TOKEN_INDEX_URL) throw new Error('TOKEN_INDEX_URL is required');
+  const chainId = Number.parseInt(await rpc('eth_chainId', []), 16);
+  const latest = Number.parseInt(await rpc('eth_blockNumber', []), 16);
+  if (chainId !== 1) throw new Error(`expected Ethereum mainnet chain id 1, got ${chainId}`);
 
-  const interfaces = await inspectInterfaces();
-  const proxy = await inspectProxy();
-  const blockscout = await inspectBlockscout();
+  const tokenIndex = await getJson(TOKEN_INDEX_URL, 60_000);
+  const contracts = Object.keys(tokenIndex);
+  const totalTokens = contracts.reduce((sum, contract) => sum + Object.keys(tokenIndex[contract] || {}).length, 0);
+  console.log(`PROBE token-index contracts=${contracts.length} tokens=${totalTokens}`);
 
-  console.log('NFT_CONTRACT_SUMMARY=' + JSON.stringify({contract: CONTRACT, chain_id: chainId, latest_block: latest, interfaces, proxy, blockscout}));
+  const contractResults = [];
+  for (const contract of contracts) {
+    const result = await inspectContract(contract, Object.keys(tokenIndex[contract] || {}));
+    contractResults.push(result);
+    console.log(`PROBE contract-summary=${JSON.stringify(result)}`);
+  }
+
+  const matched = contractResults.reduce((sum, item) => sum + item.matched_tokens, 0);
+  const missing = contractResults.reduce((sum, item) => sum + item.missing_tokens.length, 0);
+  const unexpected = contractResults.reduce((sum, item) => sum + item.unexpected_tokens.length, 0);
+  const summary = {
+    schema: 'trinityaccord.nft-identity-probe.v1',
+    chain_id: chainId,
+    latest_block: latest,
+    token_index_url: TOKEN_INDEX_URL,
+    contracts: contracts.length,
+    expected_tokens: totalTokens,
+    matched_tokens: matched,
+    missing_tokens: missing,
+    unexpected_tokens: unexpected,
+    complete: matched === totalTokens && missing === 0 && unexpected === 0,
+    contract_results: contractResults,
+  };
+  console.log('NFT_IDENTITY_PROBE=' + JSON.stringify(summary));
+  if (!summary.complete) process.exitCode = 2;
 }
 
 main().catch(error => {
