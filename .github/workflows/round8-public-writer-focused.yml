@@ -27,14 +27,29 @@ jobs:
           node-version: '24'
       - name: Install contract dependencies
         run: python -m pip install -r requirements-ci.txt
-      - name: Run focused Round 8 contracts
+      - name: Capture focused Round 8 contracts
+        id: focused
+        continue-on-error: true
         run: |
-          set -euo pipefail
-          python -m py_compile \
-            scripts/test_round8_public_writer_transaction_contract.py \
-            scripts/test_render_manual_deploy_contract.py
-          python scripts/test_round8_public_writer_transaction_contract.py
-          python scripts/test_render_manual_deploy_contract.py
+          set +e
+          {
+            python -m py_compile \
+              scripts/test_round8_public_writer_transaction_contract.py \
+              scripts/test_render_manual_deploy_contract.py
+            compile_rc=$?
+            echo "compile_rc=$compile_rc"
+            python scripts/test_round8_public_writer_transaction_contract.py
+            public_rc=$?
+            echo "public_rc=$public_rc"
+            python scripts/test_render_manual_deploy_contract.py
+            render_rc=$?
+            echo "render_rc=$render_rc"
+            test "$compile_rc" = 0 -a "$public_rc" = 0 -a "$render_rc" = 0
+          } > "$RUNNER_TEMP/focused.log" 2>&1
+          code=$?
+          echo "$code" > "$RUNNER_TEMP/focused.code"
+          cat "$RUNNER_TEMP/focused.log"
+          exit "$code"
       - name: Capture full current-system result
         id: current
         continue-on-error: true
@@ -51,11 +66,15 @@ jobs:
         with:
           name: round8-public-writer-focused-${{ github.run_id }}
           path: |
+            ${{ runner.temp }}/focused.log
+            ${{ runner.temp }}/focused.code
             ${{ runner.temp }}/current-system.log
             ${{ runner.temp }}/current-system.code
           retention-days: 7
-      - name: Require current-system success
+      - name: Require focused and current-system success
         if: always()
         run: |
+          test -f "$RUNNER_TEMP/focused.code"
           test -f "$RUNNER_TEMP/current-system.code"
+          test "$(cat "$RUNNER_TEMP/focused.code")" = "0"
           test "$(cat "$RUNNER_TEMP/current-system.code")" = "0"
