@@ -1,0 +1,42 @@
+name: Round 7 Arweave Focused Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'agent/deep-audit-round7-arweave-boundaries'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/deep-audit-round7-arweave-boundaries
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Compile changed Python files
+        run: |
+          python -m py_compile \
+            scripts/build_record_chain_data_arweave_bundle.py \
+            scripts/update_record_chain_data_arweave_registry.py \
+            scripts/verify_record_chain_data_arweave_bundle.py \
+            scripts/verify_record_chain_data_arweave_registry.py \
+            scripts/test_legacy_arweave_retirement_behavior.py \
+            scripts/test_arweave_live_readiness_contract.py
+      - name: Run retirement behavior
+        run: python scripts/test_legacy_arweave_retirement_behavior.py
+      - name: Run registered Arweave contract
+        run: python scripts/test_arweave_live_readiness_contract.py
+      - name: Verify historical registry
+        run: |
+          python scripts/verify_record_chain_data_arweave_registry.py \
+            --verify-local-bundles \
+            --allow-known-historical-duplicates
