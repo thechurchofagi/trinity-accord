@@ -1,4 +1,4 @@
-name: TEMP Repair Chronicle P0
+name: TEMP Finalize Chronicle P0
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  repair:
+  finalize:
     if: ${{ github.head_ref == 'agent/rebuild-nft-chronicle-editions' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -35,23 +35,35 @@ jobs:
       - name: Install CI dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
-      - name: Regenerate routes and verify P0
+      - name: Regenerate and validate final tree
         run: |
-          set -euo pipefail
+          set +e
           python3 scripts/generate_nft_chronicle_context.py
-          python3 scripts/test_public_api_source_digest_if_present.py
-          python3 scripts/run_ci_group.py p0-current
+          rm -f .github/workflows/_temp-diagnose-p0.yml p0-diagnostic.log
 
-      - name: Commit repaired generated metadata
-        run: |
-          set -euo pipefail
-          rm -f p0-diagnostic.log
+          {
+            python3 scripts/test_public_api_source_digest_if_present.py
+            python3 scripts/run_ci_group.py p0-current
+          } > p0-diagnostic.full.log 2>&1
+          status=$?
+
+          if [ "$status" -ne 0 ]; then
+            {
+              echo "exit_status=$status"
+              echo "--- last 300 lines ---"
+              tail -n 300 p0-diagnostic.full.log
+            } > p0-diagnostic.log
+          fi
+          rm -f p0-diagnostic.full.log
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A api/agent-task-router.v1.json p0-diagnostic.log
-          if git diff --cached --quiet; then
-            echo "No generated metadata drift"
-            exit 0
+          git add -A \
+            .github/workflows/_temp-diagnose-p0.yml \
+            p0-diagnostic.log \
+            api/agent-task-router.v1.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Finalize Chronicle router metadata and remove diagnostics"
+            git push origin HEAD:agent/rebuild-nft-chronicle-editions
           fi
-          git commit -m "Refresh Chronicle router source digest"
-          git push origin HEAD:agent/rebuild-nft-chronicle-editions
+          exit "$status"
