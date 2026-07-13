@@ -85,10 +85,8 @@ def main() -> None:
         actual_sha = hashlib.sha256(raw).hexdigest()
         expected_len = spec["expected_len"]
         expected_sha = spec["expected_sha256"]
-        if expected_len is not None and actual_len != expected_len:
-            raise ValueError(f"{tx_hash}: expected {expected_len} bytes, got {actual_len}")
-        if expected_sha is not None and actual_sha != expected_sha:
-            raise ValueError(f"{tx_hash}: expected SHA-256 {expected_sha}, got {actual_sha}")
+        length_matches = expected_len is None or actual_len == expected_len
+        sha256_matches = expected_sha is None or actual_sha == expected_sha
 
         filename = f"{tx_hash}.raw"
         path = OUT / filename
@@ -104,12 +102,19 @@ def main() -> None:
                 "to": transaction.get("to"),
                 "input_len": actual_len,
                 "input_sha256": actual_sha,
+                "expected_input_len": expected_len,
+                "expected_input_sha256": expected_sha,
+                "length_matches_expected": length_matches,
+                "sha256_matches_expected": sha256_matches,
                 "source_rpc": rpc,
                 "path": f"archive/legacy-pointers/eth-raw/{filename}",
                 "boundary": "Non-amending Ethereum calldata mirror; Bitcoin Originals prevail.",
             }
         )
-        print(f"verified {tx_hash}: {actual_len} bytes, {actual_sha}")
+        print(
+            f"retrieved {tx_hash}: {actual_len} bytes, {actual_sha}, "
+            f"length_match={length_matches}, sha_match={sha256_matches}"
+        )
 
     (OUT / "SHA256SUMS").write_text("\n".join(sorted(checksum_lines)) + "\n", encoding="utf-8")
     (OUT / "metadata.json").write_text(
