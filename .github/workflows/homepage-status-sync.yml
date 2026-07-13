@@ -216,3 +216,35 @@ jobs:
           deploy_ref="$(git rev-parse HEAD)"
           echo "deploy_ref=${deploy_ref}"
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
+
+      - name: Post-dispatch freshness probe
+        id: post_freshness
+        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          echo "Waiting briefly before probing live site. Pages deployment may still be in progress."
+          sleep 90
+          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 60
+          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
+
+      - name: Retry Deploy Pages if post-dispatch freshness probe failed
+        if: ${{ steps.post_freshness.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "Post-dispatch freshness probe failed; retrying Deploy Pages once."
+          deploy_ref="$(git rev-parse HEAD)"
+          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
+
+      - name: Final live deployment contract check
+        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.post_freshness.outcome }}" == "failure" ]]; then
+            echo "Waiting for the retry deployment to finish."
+            sleep 120
+          fi
+          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 30
+          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
