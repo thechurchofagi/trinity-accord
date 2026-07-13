@@ -1,0 +1,62 @@
+name: Apply Round 7 Native OTS Runner Fix
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-round7-native-ots-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'agent/deep-audit-round7-native-ots-transaction'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: agent/deep-audit-round7-native-ots-transaction
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Make backlog detector failure fatal
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/run_native_ots_upgrade_verify.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''def refresh_native_ots_backlog() -> None:\n    detector = ROOT / "scripts" / "detect_archive_backlog.py"\n    if detector.exists():\n        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=False)\n'''
+          new = '''def refresh_native_ots_backlog() -> None:\n    detector = ROOT / "scripts" / "detect_archive_backlog.py"\n    if detector.exists():\n        subprocess.run([sys.executable, str(detector), "--write"], cwd=ROOT, check=True)\n'''
+          if old not in text:
+              raise SystemExit('expected refresh_native_ots_backlog block not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Run focused validation
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/run_native_ots_upgrade_verify.py \
+            scripts/reconcile_native_ots_generated_state.py \
+            scripts/test_native_ots_transaction_behavior.py \
+            scripts/test_native_ots_upgrade_workflow_contract.py
+          python3 scripts/test_native_ots_transaction_behavior.py
+          python3 scripts/test_native_ots_upgrade_workflow_contract.py
+      - name: Commit runner fix
+        run: |
+          set -euo pipefail
+          git config user.name 'trinity-deep-audit-bot'
+          git config user.email 'actions@github.com'
+          git add scripts/run_native_ots_upgrade_verify.py
+          git commit -m 'ots: fail closed when backlog refresh fails'
+          git push origin HEAD:agent/deep-audit-round7-native-ots-transaction
