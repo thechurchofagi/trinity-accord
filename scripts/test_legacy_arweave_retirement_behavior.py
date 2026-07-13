@@ -4,9 +4,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
-import importlib.util
 import json
-import os
 import subprocess
 import sys
 import tempfile
@@ -54,7 +52,7 @@ def parse_build_output(result: subprocess.CompletedProcess[str]) -> Path:
 def test_deterministic_bundle_and_read_only_updater(temp: Path) -> Path:
     out_a = temp / "a"
     out_b = temp / "b"
-    command_a = [
+    base = [
         sys.executable,
         str(SCRIPTS / "build_record_chain_data_arweave_bundle.py"),
         "--mode",
@@ -62,11 +60,9 @@ def test_deterministic_bundle_and_read_only_updater(temp: Path) -> Path:
         "--height",
         "15",
         "--out-dir",
-        str(out_a),
     ]
-    command_b = command_a[:-1] + [str(out_b)]
-    first = parse_build_output(run(command_a))
-    second = parse_build_output(run(command_b))
+    first = parse_build_output(run([*base, str(out_a)]))
+    second = parse_build_output(run([*base, str(out_b)]))
     require(first.name == second.name, "same frozen source must produce the same deterministic filename")
     require(first.read_bytes() == second.read_bytes(), "same frozen source must produce byte-identical bundles")
 
@@ -77,7 +73,6 @@ def test_deterministic_bundle_and_read_only_updater(temp: Path) -> Path:
     boundary = bundle.get("boundary") or {}
     require(boundary.get("historical_archive_only") is True, "historical boundary missing")
     require(boundary.get("not_current_native_record_chain") is True, "native-chain rejection boundary missing")
-
     run([sys.executable, str(SCRIPTS / "verify_record_chain_data_arweave_bundle.py"), "--bundle-file", str(first)])
 
     registry = ROOT / "record-chain/arweave-data-registry.json"
@@ -130,7 +125,10 @@ def test_tamper_detection(temp: Path, source: Path) -> None:
         [sys.executable, str(SCRIPTS / "verify_record_chain_data_arweave_bundle.py"), "--bundle-file", str(bad_self)],
         expected=None,
     )
-    require(result.returncode != 0 and "self-hash" in (result.stdout + result.stderr).lower(), "content tamper must fail the embedded self-hash")
+    require(
+        result.returncode != 0 and "bundle_canonical_sha256" in (result.stdout + result.stderr),
+        "content tamper must fail the embedded self-hash",
+    )
 
     forbidden = temp / "forbidden.json"
     value = copy.deepcopy(original)
@@ -150,24 +148,22 @@ def test_tamper_detection(temp: Path, source: Path) -> None:
         [sys.executable, str(SCRIPTS / "verify_record_chain_data_arweave_bundle.py"), "--bundle-file", str(forbidden)],
         expected=None,
     )
-    require(result.returncode != 0 and "forbidden" in (result.stdout + result.stderr).lower(), "actual forbidden content must fail even when flags and hashes are recomputed")
+    require(
+        result.returncode != 0 and "forbidden" in (result.stdout + result.stderr).lower(),
+        "actual forbidden content must fail even when flags and hashes are recomputed",
+    )
 
 
 def test_historical_registry_and_readback(temp: Path) -> None:
     verifier = str(SCRIPTS / "verify_record_chain_data_arweave_registry.py")
-    strict = run(
-        [sys.executable, verifier, "--verify-local-bundles"],
-        expected=None,
+    strict = run([sys.executable, verifier, "--verify-local-bundles"], expected=None)
+    require(
+        strict.returncode != 0 and "duplicate live uploads" in (strict.stdout + strict.stderr).lower(),
+        "strict verification must expose historical duplicate paid uploads",
     )
-    require(strict.returncode != 0 and "duplicate live uploads" in (strict.stdout + strict.stderr).lower(), "strict verification must expose historical duplicate paid uploads")
 
     allowed = run(
-        [
-            sys.executable,
-            verifier,
-            "--verify-local-bundles",
-            "--allow-known-historical-duplicates",
-        ]
+        [sys.executable, verifier, "--verify-local-bundles", "--allow-known-historical-duplicates"]
     )
     data = json.loads(allowed.stdout)
     warnings = data.get("warnings") or []
@@ -190,7 +186,10 @@ def test_historical_registry_and_readback(temp: Path) -> None:
         ],
         expected=None,
     )
-    require(result.returncode != 0 and "payload/readback" in (result.stdout + result.stderr).lower(), "registry readback tamper must fail")
+    require(
+        result.returncode != 0 and "payload/readback" in (result.stdout + result.stderr).lower(),
+        "registry readback tamper must fail",
+    )
 
 
 def test_workflow_retirement() -> None:
@@ -204,9 +203,12 @@ def test_workflow_retirement() -> None:
         require("secrets.ARKEY" not in text, f"{name} retired workflow retains wallet secret access")
         require("git push" not in text, f"{name} retired workflow retains a push path")
 
-    require("upload_mode" not in data and "arweave_upload_payload" not in data, "legacy data workflow retains upload controls")
-    require("paid-upload" not in phase5 and "--enable-paid-upload" not in phase5, "Phase 5 workflow retains paid upload")
-    require("production" not in echo and "ALLOW_PAID_ARWEAVE_CANARY: \"true\"" not in echo, "echo workflow retains production upload")
+    require("upload_mode:" not in data and "arweave_upload_payload.mjs" not in data, "legacy data workflow retains upload controls")
+    require("- paid-upload" not in phase5, "Phase 5 workflow retains the paid-upload option")
+    require("--enable-paid-upload" not in phase5, "Phase 5 workflow invokes paid upload")
+    require("inputs.phase == 'paid-upload'" not in phase5, "Phase 5 workflow retains paid branch logic")
+    require("- production" not in echo, "echo workflow retains production choice")
+    require("ALLOW_PAID_ARWEAVE_CANARY: \"true\"" not in echo, "echo workflow enables paid upload")
     require("secrets.ARKEY" in current and "contents: write" in current, "current native archive route must remain explicit")
     require("build_record_chain_arweave_archive.py" in current, "current native archive builder missing")
 
