@@ -1,0 +1,44 @@
+name: NFT Identity Index Integrity
+
+on:
+  pull_request:
+    paths:
+      - token_index.json
+      - nft-identity-index.json
+      - scripts/generate_nft_identity_index.mjs
+      - scripts/test_nft_identity_index_contract.py
+      - .github/workflows/nft-identity-index-integrity.yml
+  push:
+    branches: [main]
+    paths:
+      - token_index.json
+      - nft-identity-index.json
+      - scripts/generate_nft_identity_index.mjs
+      - scripts/test_nft_identity_index_contract.py
+      - .github/workflows/nft-identity-index-integrity.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Set up Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: "22"
+
+      - name: Check generator syntax and ABI decoding
+        run: |
+          set -euo pipefail
+          node --check scripts/generate_nft_identity_index.mjs
+          node scripts/generate_nft_identity_index.mjs --self-test
+
+      - name: Validate committed identity index
+        run: python3 scripts/test_nft_identity_index_contract.py
