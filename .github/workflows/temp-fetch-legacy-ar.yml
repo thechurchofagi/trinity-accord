@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - agent/complete-legacy-ar-eth-mirror-audit
+  pull_request:
+    paths:
+      - .github/workflows/temp-fetch-legacy-ar.yml
+      - .github/temp-fetch-legacy-eth.py
 
 permissions:
   contents: write
