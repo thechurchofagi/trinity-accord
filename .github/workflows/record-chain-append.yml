@@ -39,6 +39,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
+          ref: main
       - name: Record toolchain provenance
         run: |
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
@@ -130,16 +131,31 @@ jobs:
             git config user.email "actions@github.com"
             git add record-chain/ api/record-chain-overlays.json
             git commit -m "Append record-chain entries from Render intake"
-            git fetch origin main --prune
-            git rebase origin/main
+
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "::error::Worktree dirty after append commit; refusing to push incomplete state."
+              git status --short
+              exit 1
+            fi
+
             for attempt in 1 2 3; do
-              if git push origin "HEAD:${GITHUB_REF_NAME:-main}"; then
+              if git push origin HEAD:main; then
                 printf '%s\n' "committed=true" >> "$GITHUB_OUTPUT"
                 exit 0
               fi
-              printf 'Push failed on attempt %s; rebasing and retrying.\n' "${attempt}"
+              printf 'Push failed on attempt %s; rebasing and verifying.\n' "${attempt}"
               git fetch origin main --prune
-              git rebase origin/main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Record Chain advanced concurrently; append must be retried from the pending artifact."
+                exit 1
+              fi
+              python scripts/trinity_record_chain.py verify
+              if [ -n "$(git status --porcelain)" ]; then
+                echo "::error::Verification changed the rebased append transaction."
+                git status --short
+                exit 1
+              fi
               sleep $((attempt * 5))
             done
             printf '%s\n' "::error::Failed to push append updates after retries."
