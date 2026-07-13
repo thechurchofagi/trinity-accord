@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""Contract for Arweave paid-upload wallet accounting boundaries.
+
+Active native upload paths must account for posted transactions, including
+readback failures. Retired historical/Phase-5 paths must not access wallets,
+write the wallet ledger, or regenerate public wallet status.
+"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -7,10 +13,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def body(path: str) -> str:
-    p = ROOT / path
-    if not p.exists():
+    file = ROOT / path
+    if not file.exists():
         raise SystemExit(f"missing required file: {path}")
-    return p.read_text(encoding="utf-8")
+    return file.read_text(encoding="utf-8")
 
 
 def require_contains(path: str, needles: list[str]) -> None:
@@ -20,62 +26,120 @@ def require_contains(path: str, needles: list[str]) -> None:
         raise SystemExit(f"{path} missing required wallet wiring: {missing}")
 
 
+def require_absent(path: str, needles: list[str]) -> None:
+    text = body(path)
+    present = [needle for needle in needles if needle in text]
+    if present:
+        raise SystemExit(f"{path} retains forbidden retired wallet capability: {present}")
+
+
 def main() -> int:
-    require_contains("scripts/arweave_upload_payload.mjs", [
-        "upload_cost_winston",
-        "upload_cost_ar",
-        "wallet_balance_after_ar",
-        "actual_delta_winston",
-        "wallet_address_sha256",
-    ])
+    require_contains(
+        "scripts/arweave_upload_payload.mjs",
+        [
+            "upload_cost_winston",
+            "upload_cost_ar",
+            "wallet_balance_after_ar",
+            "actual_delta_winston",
+            "wallet_address_sha256",
+        ],
+    )
 
-    require_contains("scripts/arweave_cost_gate.mjs", [
-        "actual_delta_winston",
-        "actual_delta_ar",
-        "estimated_upload_cost_winston",
-        "estimated_upload_cost_ar",
-        "balance_after_ar",
-    ])
+    require_contains(
+        "scripts/arweave_cost_gate.mjs",
+        [
+            "actual_delta_winston",
+            "actual_delta_ar",
+            "estimated_upload_cost_winston",
+            "estimated_upload_cost_ar",
+            "balance_after_ar",
+        ],
+    )
 
-    require_contains("scripts/record_arweave_upload_result.py", [
-        "PAID_RESULTS",
-        "readback_failed",
-        "append-upload",
-        "set-balance",
-    ])
+    require_contains(
+        "scripts/record_arweave_upload_result.py",
+        [
+            "PAID_RESULTS",
+            "readback_failed",
+            "posted_pending_readback",
+            "append-upload",
+            "set-balance",
+        ],
+    )
 
-    require_contains("scripts/build_record_chain_arweave_archive.py", [
-        "record_arweave_upload_result.py",
-        "record_chain_arweave_archive",
-    ])
+    # Current native Record-Chain archive owns the active Record-Chain paid path.
+    require_contains(
+        "scripts/build_record_chain_arweave_archive.py",
+        [
+            "record_arweave_upload_result.py",
+            "record_chain_arweave_archive",
+            "arweave_upload_payload.mjs",
+            "upload-result.json",
+        ],
+    )
+    require_contains(
+        ".github/workflows/record-chain-arweave-archive.yml",
+        [
+            "secrets.ARKEY",
+            "build_record_chain_arweave_archive.py",
+            "record-chain/arweave-wallet-ledger.json",
+            "group: main-write-lock",
+        ],
+    )
 
-    require_contains("scripts/run_native_ots_upgrade_verify.py", [
-        "record_arweave_upload_result.py",
-        "native_ots_bundle_archive",
-        "actual_delta_winston",
-        "balance_after_ar",
-    ])
+    # Native OTS upload/repair paths remain active and must account for payment.
+    require_contains(
+        "scripts/run_native_ots_upgrade_verify.py",
+        [
+            "record_arweave_upload_result.py",
+            "native_ots_bundle_archive",
+            "actual_delta_winston",
+            "balance_after_ar",
+        ],
+    )
+    require_contains(
+        ".github/workflows/native-ots-upgrade-watch.yml",
+        [
+            "record-chain/arweave-wallet-ledger.json",
+            "api/arweave-wallet-status.json",
+            "generate_arweave_wallet_status.py",
+        ],
+    )
+    require_contains(
+        ".github/workflows/archive-backlog-repair.yml",
+        [
+            "record-chain/arweave-wallet-ledger.json",
+            "api/arweave-wallet-status.json",
+            "generate_arweave_wallet_status.py",
+        ],
+    )
 
-    require_contains(".github/workflows/record-chain-data-arweave-archive.yml", [
-        "record_arweave_upload_result.py",
-        "record_chain_data_arweave_archive",
-        "record-chain/arweave-wallet-ledger.json",
-        "api/arweave-wallet-status.json",
-    ])
+    # Retired historical upload surfaces must not touch wallet or public status.
+    for path in [
+        ".github/workflows/record-chain-data-arweave-archive.yml",
+        ".github/workflows/phase5-ots-arweave-paid-upload.yml",
+        ".github/workflows/paid-echo-arweave-canary.yml",
+    ]:
+        require_absent(
+            path,
+            [
+                "secrets.ARKEY",
+                "record_arweave_upload_result.py",
+                "record-chain/arweave-wallet-ledger.json",
+                "api/arweave-wallet-status.json",
+                "generate_arweave_wallet_status.py",
+                "contents: write",
+                "git push",
+            ],
+        )
 
-    require_contains(".github/workflows/native-ots-upgrade-watch.yml", [
-        "record-chain/arweave-wallet-ledger.json",
-        "api/arweave-wallet-status.json",
-        "generate_arweave_wallet_status.py",
-    ])
+    updater = body("scripts/update_record_chain_data_arweave_registry.py")
+    if "legacy record-chain data Arweave uploads are retired" not in updater:
+        raise SystemExit("legacy data updater must explicitly reject paid/live updates")
+    if "write_json" in updater:
+        raise SystemExit("legacy data updater retains a historical registry write helper")
 
-    require_contains(".github/workflows/archive-backlog-repair.yml", [
-        "record-chain/arweave-wallet-ledger.json",
-        "api/arweave-wallet-status.json",
-        "generate_arweave_wallet_status.py",
-    ])
-
-    print("PASS: paid upload wallet ledger wiring")
+    print("PASS: active paid paths account for wallet spend; retired paths have no wallet capability")
     return 0
 
 

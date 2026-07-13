@@ -1,90 +1,96 @@
-name: Record Chain Data Arweave Archive
+name: Legacy Hash-Chain Data Archive Audit (Retired)
+
+# This workflow is intentionally read-only.
+#
+# The source files below are the frozen legacy hash-chain view at height 15,
+# not the current native Record-Chain. Historical Arweave transactions and
+# registry files are preserved as evidence, but this workflow must never create
+# another paid upload or modify repository state. Current native archives are
+# produced only by record-chain-arweave-archive.yml.
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Bundle mode"
+        description: "Historical bundle audit mode"
         required: true
-        default: "delta"
+        default: "snapshot"
         type: choice
         options:
-          - delta
           - snapshot
-      upload_mode:
-        description: "Arweave upload mode"
-        required: true
-        default: "dry-run"
-        type: choice
-        options:
-          - dry-run
-          - live
+          - delta
       from_height_exclusive:
-        description: "For delta mode, start after this height"
+        description: "Legacy delta start height (delta mode only)"
         required: false
-        default: "15"
+        default: "0"
         type: string
       to_height_inclusive:
-        description: "For delta mode, end at this height; empty means current head"
+        description: "Legacy delta end height; empty means frozen legacy head"
         required: false
         default: ""
         type: string
       snapshot_height:
-        description: "For snapshot mode, snapshot this height; empty means current head"
-        required: false
-        default: ""
-        type: string
-      confirm:
-        description: "Required confirmation phrase for live upload"
+        description: "Legacy snapshot height; empty means frozen legacy head"
         required: false
         default: ""
         type: string
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: record-chain-data-arweave-archive
+  group: legacy-hash-chain-data-archive-audit
+  queue: max
   cancel-in-progress: false
 
 env:
   INPUT_MODE: ${{ inputs.mode }}
-  INPUT_UPLOAD_MODE: ${{ inputs.upload_mode }}
   INPUT_TO_HEIGHT_INCLUSIVE: ${{ inputs.to_height_inclusive }}
   INPUT_FROM_HEIGHT_EXCLUSIVE: ${{ inputs.from_height_exclusive }}
   INPUT_SNAPSHOT_HEIGHT: ${{ inputs.snapshot_height }}
-  INPUT_CONFIRM: ${{ inputs.confirm }}
 
 jobs:
-  archive:
+  audit:
     runs-on: ubuntu-24.04
-    env:
-      ARKEY: ${{ secrets.ARKEY }}
-      ARWEAVE_UPLOAD_MODE: ${{ inputs.upload_mode }}
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+          fetch-depth: 1
+          ref: main
 
-      - name: Record toolchain provenance
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Confirm legacy-only source boundary
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: "20"
+          head = json.loads(Path("api/record-chain-head.json").read_text(encoding="utf-8"))
+          required = {
+              "legacy_hash_chain_view": True,
+              "historical_archive_only": True,
+              "not_current_native_record_chain_head": True,
+          }
+          failed = [key for key, value in required.items() if head.get(key) is not value]
+          if failed:
+              raise SystemExit(f"legacy source boundary missing: {failed}")
+          print(
+              "Historical audit only:",
+              f"legacy_height={head.get('height')}",
+              f"replacement={head.get('replacement_native_chain_tip')}",
+          )
+          PY
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Node deps
-        run: npm ci
-
-      - name: Verify chain
+      - name: Verify frozen legacy hash-chain view
         run: |
+          set -euo pipefail
           python3 scripts/verify_record_chain_integrity.py \
             --ledger record-chain/hash-chain/main.chain.jsonl \
             --head api/record-chain-head.json \
@@ -92,111 +98,63 @@ jobs:
             --verify-payload-files \
             --base-dir .
 
-      - name: Build data bundle
+      - name: Build an ephemeral deterministic historical bundle
         id: build
-        shell: bash
         run: |
           set -euo pipefail
+          out_dir="$RUNNER_TEMP/legacy-data-bundles"
+          mkdir -p "$out_dir"
           if [ "$INPUT_MODE" = "delta" ]; then
-            TO="$INPUT_TO_HEIGHT_INCLUSIVE"
-            if [ -z "$TO" ]; then
-              TO=$(python3 - <<'PY'
-          import json
-          print(json.load(open("api/record-chain-head.json"))["height"])
-          PY
-          )
+            to_height="$INPUT_TO_HEIGHT_INCLUSIVE"
+            if [ -z "$to_height" ]; then
+              to_height="$(python3 -c 'import json; print(json.load(open("api/record-chain-head.json"))["height"])')"
             fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode delta \
               --from-height-exclusive "$INPUT_FROM_HEIGHT_EXCLUSIVE" \
-              --to-height-inclusive "$TO" | tee /tmp/data-build.json
+              --to-height-inclusive "$to_height" \
+              --out-dir "$out_dir" | tee "$RUNNER_TEMP/legacy-data-build.json"
           else
-            H="$INPUT_SNAPSHOT_HEIGHT"
-            if [ -z "$H" ]; then
-              H=$(python3 - <<'PY'
-          import json
-          print(json.load(open("api/record-chain-head.json"))["height"])
-          PY
-          )
+            height="$INPUT_SNAPSHOT_HEIGHT"
+            if [ -z "$height" ]; then
+              height="$(python3 -c 'import json; print(json.load(open("api/record-chain-head.json"))["height"])')"
             fi
             python3 scripts/build_record_chain_data_arweave_bundle.py \
               --mode snapshot \
-              --height "$H" | tee /tmp/data-build.json
+              --height "$height" \
+              --out-dir "$out_dir" | tee "$RUNNER_TEMP/legacy-data-build.json"
           fi
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json
-          obj=json.load(open("/tmp/data-build.json"))
-          print("bundle_file=" + obj["bundle_file"])
+          import os
+          from pathlib import Path
+          data = json.loads(Path(os.environ["RUNNER_TEMP"] + "/legacy-data-build.json").read_text())
+          print("bundle_file=" + data["bundle_file"])
           PY
 
-      - name: Dry-run registry update
-        if: inputs.upload_mode == 'dry-run'
+      - name: Verify ephemeral bundle and historical registry
         run: |
-          python3 scripts/update_record_chain_data_arweave_registry.py \
-            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
-            --mode dry-run
-
-      - name: Live upload
-        if: inputs.upload_mode == 'live'
-        run: |
-          set +e
-          test "$INPUT_CONFIRM" = "I_UNDERSTAND_THIS_UPLOADS_RECORD_CHAIN_DATA_TO_ARWEAVE"
-          test -n "$ARKEY"
-          mkdir -p /tmp/arweave-data
-          printf '%s' "$ARKEY" > /tmp/arweave-data/wallet.jwk.json
-          chmod 600 /tmp/arweave-data/wallet.jwk.json
-          export ARWEAVE_JWK_PATH=/tmp/arweave-data/wallet.jwk.json
-          node scripts/arweave_upload_payload.mjs \
-            --payload "${{ steps.build.outputs.bundle_file }}" \
-            --out /tmp/data-arweave-upload-result.json
-          UPLOAD_EXIT=$?
-          set -e
-
-          if [ -f /tmp/data-arweave-upload-result.json ]; then
-            python3 scripts/record_arweave_upload_result.py \
-              --upload-result-json /tmp/data-arweave-upload-result.json \
-              --kind record_chain_data_arweave_archive \
-              --source-path "${{ steps.build.outputs.bundle_file }}"
-          fi
-
-          if [ "$UPLOAD_EXIT" -ne 0 ]; then
-            exit "$UPLOAD_EXIT"
-          fi
-
-          python3 scripts/update_record_chain_data_arweave_registry.py \
-            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
-            --upload-result-json /tmp/data-arweave-upload-result.json \
-            --mode live
-
-      - name: Verify data registry
-        run: |
+          set -euo pipefail
+          python3 scripts/verify_record_chain_data_arweave_bundle.py \
+            --bundle-file "${{ steps.build.outputs.bundle_file }}"
           python3 scripts/verify_record_chain_data_arweave_registry.py \
             --registry record-chain/arweave-data-registry.json \
-            --verify-local-bundles
+            --verify-local-bundles \
+            --allow-known-historical-duplicates
 
-      - name: Regenerate wallet status
-        if: inputs.upload_mode == 'live'
-        run: python3 scripts/generate_arweave_wallet_status.py
-
-      - name: Restore drill for snapshot
-        if: inputs.mode == 'snapshot'
+      - name: Prove audit did not mutate repository state
         run: |
-          python3 scripts/restore_record_chain_from_data_arweave_bundle.py \
-            --bundle-file "${{ steps.build.outputs.bundle_file }}" \
-            --verify
-
-      - name: Commit archive outputs
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add record-chain/arweave-data-bundles \
-                  record-chain/arweave-data-registry.json \
-                  api/record-chain-arweave-data-registry.json \
-                  record-chain/arweave-wallet-ledger.json \
-                  api/arweave-wallet-status.json
-          if git diff --cached --quiet; then
-            echo "No data archive changes."
-          else
-            git commit -m "archive: record-chain data $INPUT_MODE $INPUT_UPLOAD_MODE"
-            git push
+          set -euo pipefail
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Retired archive audit modified the repository working tree."
+            git status --short
+            exit 1
           fi
+          echo "PASS: no repository files, wallet state, or archive registries changed."
+
+      - name: Upload ephemeral audit bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: legacy-hash-chain-data-audit-${{ github.run_id }}
+          path: ${{ runner.temp }}/legacy-data-bundles/
+          retention-days: 14

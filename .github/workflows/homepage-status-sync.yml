@@ -53,7 +53,6 @@ on:
       - "Record Chain Arweave Archive"
       - "Native OTS Upgrade Watch"
       - "Archive backlog repair"
-      - "Record Chain Data Arweave Archive"
       - "Build Echo Index"
       - "Record Chain Anchor"
       - "Upgrade OpenTimestamps Proofs"

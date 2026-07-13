@@ -1,103 +1,56 @@
-name: Paid Echo Arweave Canary
+name: Legacy Echo Arweave Cost Audit (Paid Canary Retired)
+
+# This workflow preserves only the historical dry-run cost exercise. It cannot
+# access ARKEY, sign/post an Arweave transaction, or modify repository state.
 
 on:
   workflow_dispatch:
-    inputs:
-      upload_mode:
-        description: "Arweave upload mode"
-        required: true
-        default: "dry_run"
-        type: choice
-        options:
-          - dry_run
-          - production
-      record_type:
-        description: "Record type to upload"
-        required: true
-        default: "echo"
-        type: choice
-        options:
-          - echo
-      max_upload_usd:
-        description: "Max upload cost in USD"
-        required: false
-        default: "0.10"
 
 permissions:
   contents: read
 
 concurrency:
-  group: paid-arweave-canary
+  group: legacy-echo-arweave-cost-readonly
+  queue: max
   cancel-in-progress: false
 
-env:
-  INPUT_RECORD_TYPE: ${{ github.event.inputs.record_type }}
-
 jobs:
-  canary:
+  audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
-
+    timeout-minutes: 20
     env:
-      E2E_RUN_ID: "e2e-${{ github.event.inputs.upload_mode }}-${{ github.run_id }}"
-      E2E_LOG_DIR: "record-chain/audit/e2e/${{ github.run_id }}"
-      ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode }}
-      ALLOW_PAID_ARWEAVE_CANARY: ${{ github.event.inputs.upload_mode == 'production' && 'true' || 'false' }}
-      ARWEAVE_MAX_UPLOAD_USD: ${{ github.event.inputs.max_upload_usd || '0.10' }}
+      E2E_RUN_ID: "legacy-echo-dry-run-${{ github.run_id }}"
+      E2E_LOG_DIR: "${{ runner.temp }}/legacy-echo-arweave/${{ github.run_id }}"
+      ARWEAVE_UPLOAD_MODE: "dry_run"
+      ALLOW_PAID_ARWEAVE_CANARY: "false"
+      ARWEAVE_MAX_UPLOAD_USD: "0.10"
       ARWEAVE_SAFETY_MULTIPLIER: "1.20"
       EXPECTED_ARWEAVE_OWNER: "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"
       ARWEAVE_GATEWAY_URL: "https://arweave.net"
-      ARWEAVE_READBACK_GATEWAYS: "https://arweave.net"
-      ARWEAVE_READBACK_TIMEOUT_SECONDS: "900"
-      ARWEAVE_READBACK_RETRY_SECONDS: "15"
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: main
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: ".node-version"
 
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Prepare JWK from secret
+      - name: Build ephemeral echo payload
         run: |
-          mkdir -p /tmp/arweave-secrets
-          echo '${{ secrets.ARKEY }}' > /tmp/arweave-secrets/wallet.jwk.json
-          chmod 600 /tmp/arweave-secrets/wallet.jwk.json
-          echo "ARWEAVE_JWK_PATH=/tmp/arweave-secrets/wallet.jwk.json" >> "$GITHUB_ENV"
-
-      - name: Verify JWK owner
-        run: |
-          OWNER=$(node -e "
-            const Arweave = require('arweave');
-            const fs = require('fs');
-            const jwk = JSON.parse(fs.readFileSync(process.env.ARWEAVE_JWK_PATH, 'utf8'));
-            Arweave.init({}).wallets.jwkToAddress(jwk).then(a => console.log(a));
-          ")
-          echo "Derived owner: $OWNER"
-          if [ "$OWNER" != "$EXPECTED_ARWEAVE_OWNER" ]; then
-            echo "::error::JWK owner mismatch: derived=$OWNER expected=$EXPECTED_ARWEAVE_OWNER"
-            exit 1
-          fi
-
-      - name: Guard first paid canary scope
-        run: |
-          if [ "$INPUT_RECORD_TYPE" != "echo" ]; then
-            echo "::error::First production paid canary is limited to record_type=echo. Use dry-run for verification/guardian_application until separate paid workflows exist."
-            exit 1
-          fi
-
-      - name: Build echo payload
-        if: github.event.inputs.record_type == 'echo'
-        run: |
+          set -euo pipefail
           mkdir -p "$E2E_LOG_DIR/payloads"
-          OATH=$(node downloads/record-chain-builder.mjs print-oath --record-type echo 2>&1)
+          oath="$(node downloads/record-chain-builder.mjs print-oath --record-type echo 2>&1)"
           node downloads/record-chain-builder.mjs echo \
             --actor-label "Trinity Accord CI Agent" \
             --provider "GitHub Actions / Node.js" \
-            --body "Paid Echo Arweave Canary. Run ID: $E2E_RUN_ID. Verifying Arweave upload, cost gate, and readback hash." \
+            --body "Retired paid-canary dry-run cost audit. Run ID: $E2E_RUN_ID." \
             --context-level CC-3 \
             --context-sufficient-for-selected-action true \
             --loaded-urls "https://www.trinityaccord.org/agent-first-contact/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \
@@ -105,23 +58,39 @@ jobs:
             --record-decision human \
             --submission-executor self \
             --human-operator-involved true \
-            --readback "$OATH" \
+            --readback "$oath" \
             --generate-authorship-key \
-            --key-dir /tmp/canary-keys \
+            --key-dir "$RUNNER_TEMP/legacy-canary-keys" \
             --out "$E2E_LOG_DIR/payloads/echo.json"
 
-      - name: Run Arweave cost gate
+      - name: Run dry-run cost gate
         run: |
+          set -euo pipefail
           node scripts/arweave_cost_gate.mjs \
-            --payload-file "$E2E_LOG_DIR/payloads/$INPUT_RECORD_TYPE.json" \
-            --record-type "$INPUT_RECORD_TYPE" \
+            --payload-file "$E2E_LOG_DIR/payloads/echo.json" \
+            --record-type echo \
             --run-id "$E2E_RUN_ID" \
             --log-dir "$E2E_LOG_DIR"
 
-      - name: Upload audit logs
+      - name: Prove paid upload and repository mutation are disabled
+        if: always()
+        run: |
+          set -euo pipefail
+          test "${ARWEAVE_UPLOAD_MODE}" = "dry_run"
+          test "${ALLOW_PAID_ARWEAVE_CANARY}" = "false"
+          test -z "${ARWEAVE_JWK_PATH:-}"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Retired echo cost audit modified repository state."
+            git status --short
+            exit 1
+          fi
+          echo "PASS: no wallet secret, signing, paid upload, commit, or push path exists."
+
+      - name: Upload dry-run audit logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: arweave-canary-audit-${{ github.run_id }}
+          name: legacy-echo-arweave-audit-${{ github.run_id }}
           path: ${{ env.E2E_LOG_DIR }}/
-          retention-days: 90
+          if-no-files-found: ignore
+          retention-days: 30
