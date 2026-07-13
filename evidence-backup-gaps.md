@@ -22,7 +22,8 @@ The remaining items are cautions and optional hardening tasks.
 | Release asset count ambiguity | Low | GitHub pages include source archives, causing asset count to differ from custom evidence asset count | Always report custom evidence assets separately |
 | Guardian Attestation terminology | Low | It may be mistaken as part of the three canonical originals | Always describe it as Bitcoin-inscribed non-amending fortification |
 | ETH witness count terminology | Low | authority.jcs.json records 7 items while verification-report confirms 8/8 including Guardianship Principles v1.1 | Use "ETH witness verification: 8/8 PASS" |
-| Legacy homepage external pointer coverage | Low | Old homepage contains many pointers and explanatory materials | Generate a dedicated pointer coverage table |
+| Legacy homepage external pointer coverage | Low | Dedicated human- and machine-readable coverage registries now enumerate 35 Arweave records, 10 Ethereum non-NFT records, and IPFS pointers. Two small AR raw payloads remain unresolved. | Maintain `LEGACY-POINTER-COVERAGE.md` and `archive/legacy-pointers/index.json`; retrieve the two raw gaps when a functioning gateway or owner export is available |
+| Authority v1.0.2 hash semantics | Medium | The signed `7d6a...` value is a covered JCS digest, not established as the Arweave transaction payload SHA-256; the current asset manifest therefore reports a semantic false-positive mismatch | Correct the manifest generator before changing any mirrored authority file |
 | Arweave/GitHub authority confusion | Medium | Mirrors may be mistaken for canonical authority | Repeat boundary statement in all summary docs |
 | Large payload repository risk | Low | Videos/tar/CAR files should not be committed to repository tree | Keep large payloads in Arweave and GitHub Releases only |
 | Gateway availability for large ZIPs | ~~Medium~~ → Resolved | arweave.net returned 404 for large flaw archive ZIPs | ✅ Resolved: GitHub Release `flaw-covenant-archive-accessibility-mirror-v1` created as non-amending accessibility mirror |
@@ -38,6 +39,8 @@ The following are not evidence-chain failures:
 - Deprecated NFT releases existing as historical artifacts
 - GitHub release pages showing source archives in asset count
 - Gateway availability for large Arweave payloads (mitigated by GitHub Release accessibility mirror)
+- Reusing the exact Bitcoin inscription raw-text mirror when an Ethereum data transaction has the identical byte length and SHA-256
+- Deliberately withholding sealed/non-public evidence from the public GitHub mirror
 
 ## Optional Hardening Tasks
 
@@ -50,12 +53,10 @@ The following are not evidence-chain failures:
    - verify-report.json.ots
    - checksums and manifest
 
-2. Create `LEGACY-POINTER-COVERAGE.md` mapping:
-   - old homepage pointer
-   - object type
-   - Arweave / IPFS / ETH / Bitcoin reference
-   - GitHub mirror status
-   - verification status
+2. Complete the remaining raw-payload retrievals listed by `archive/legacy-pointers/index.json`:
+   - merged Guardian Index `mGW-QQyGyoNIybMghqZYo6PFhQIk44lbBy7_dNB4e2s`
+   - Guardianship system docs v1 `I0xNBwbgaGsODjnK5ze25sOwV9V8i7FtKe-8upRoohw`
+   - isolate currently metadata-only Ethereum readable payloads only after decoded bytes reproduce the chain-recorded length and SHA-256
 
 3. Add Guardian Attestation to the top-level evidence relationship diagram as:
    - non-amending Bitcoin-inscribed fortification
@@ -73,7 +74,8 @@ Current status:
 ```text
 Critical gaps: none identified
 Major payload backup gaps: none identified
-Documentation gaps: present but manageable
+Small raw-pointer payload gaps: 2 identified and explicitly registered
+Documentation mapping: completed; maintain periodically
 Optional hardening: recommended
 Evidence amendment risk: controlled by existing boundary statements
 ```
