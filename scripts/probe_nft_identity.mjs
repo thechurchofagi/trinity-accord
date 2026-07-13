@@ -45,6 +45,7 @@ const fromHex = value => Number.parseInt(value, 16);
 const call = data => rpc('eth_call', [{to: CONTRACT, data}, 'latest']);
 const supportsData = id => `0x01ffc9a7${id.replace(/^0x/, '')}${'0'.repeat(56)}`;
 const boolResult = value => typeof value === 'string' && BigInt(value) !== 0n;
+const ZERO = '0x0000000000000000000000000000000000000000';
 
 async function inspectInterfaces() {
   const interfaces = {};
@@ -55,11 +56,8 @@ async function inspectInterfaces() {
     ['erc1155', '0xd9b67a26'],
     ['erc1155_metadata_uri', '0x0e89341c'],
   ]) {
-    try {
-      interfaces[name] = boolResult(await call(supportsData(id)));
-    } catch (error) {
-      interfaces[name] = {error: String(error?.message || error)};
-    }
+    try { interfaces[name] = boolResult(await call(supportsData(id))); }
+    catch (error) { interfaces[name] = {error: String(error?.message || error)}; }
   }
   console.log(`PROBE interfaces=${JSON.stringify(interfaces)}`);
   return interfaces;
@@ -72,23 +70,66 @@ async function inspectProxy() {
   };
   const proxy = {};
   for (const [name, slot] of Object.entries(slots)) {
-    try {
-      proxy[name] = await rpc('eth_getStorageAt', [CONTRACT, slot, 'latest']);
-    } catch (error) {
-      proxy[name] = {error: String(error?.message || error)};
-    }
-  }
-  try {
-    proxy.implementation_call = await call('0x5c60da1b');
-  } catch (error) {
-    proxy.implementation_call = {error: String(error?.message || error)};
+    try { proxy[name] = await rpc('eth_getStorageAt', [CONTRACT, slot, 'latest']); }
+    catch (error) { proxy[name] = {error: String(error?.message || error)}; }
   }
   console.log(`PROBE proxy=${JSON.stringify(proxy)}`);
   return proxy;
 }
 
-function selectAddressSummary(address) {
+function withPage(baseUrl, params) {
+  if (!params) return baseUrl;
+  const url = new URL(baseUrl);
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== null && value !== undefined) url.searchParams.set(key, String(value));
+  }
+  return url.toString();
+}
+
+async function fetchAllPages(baseUrl, maxPages = 100) {
+  const items = [];
+  let next = null;
+  let pages = 0;
+  do {
+    const page = await getJson(withPage(baseUrl, next));
+    if (!Array.isArray(page.items)) throw new Error(`missing items array: ${baseUrl}`);
+    items.push(...page.items);
+    next = page.next_page_params || null;
+    pages += 1;
+    if (pages > maxPages) throw new Error(`pagination exceeded ${maxPages} pages: ${baseUrl}`);
+  } while (next);
+  return {items, pages};
+}
+
+function conciseTransfer(item) {
   return {
+    available_keys: Object.keys(item).sort(),
+    transaction_hash: item.transaction_hash || item.transaction?.hash || null,
+    block_hash: item.block_hash || null,
+    block_number: item.block_number,
+    log_index: item.log_index,
+    timestamp: item.timestamp,
+    method: item.method,
+    from: item.from?.hash || null,
+    to: item.to?.hash || null,
+    token_id: item.total?.token_id || item.token_id || item.token_instance?.id || null,
+    token_type: item.token_type || item.token?.type || null,
+  };
+}
+
+function conciseInstance(item) {
+  return {
+    available_keys: Object.keys(item).sort(),
+    token_id: item.id || item.token_id || null,
+    owner: item.owner?.hash || item.owner || null,
+    name: item.metadata?.name || null,
+    external_app_url: item.external_app_url || null,
+  };
+}
+
+async function inspectBlockscout() {
+  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}`);
+  const addressSummary = {
     available_keys: Object.keys(address).sort(),
     hash: address.hash,
     name: address.name,
@@ -96,41 +137,45 @@ function selectAddressSummary(address) {
     proxy_type: address.proxy_type,
     implementations: address.implementations,
     creator_address_hash: address.creator_address_hash,
-    creation_tx_hash: address.creation_tx_hash,
     creation_transaction_hash: address.creation_transaction_hash,
     token: address.token,
   };
-}
-
-async function inspectBlockscout() {
-  const address = await getJson(`${BLOCKSCOUT_API}/addresses/${CONTRACT}`);
-  const addressSummary = selectAddressSummary(address);
   console.log(`PROBE blockscout-address=${JSON.stringify(addressSummary)}`);
 
   const token = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}`);
   console.log(`PROBE blockscout-token=${JSON.stringify(token)}`);
 
-  const transfers = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/transfers`);
-  const transferItems = Array.isArray(transfers.items) ? transfers.items : [];
-  const transferSummary = {
-    available_keys: Object.keys(transfers).sort(),
-    item_count: transferItems.length,
-    next_page_params: transfers.next_page_params || null,
-    first_items: transferItems.slice(0, 3),
-  };
-  console.log(`PROBE blockscout-token-transfers=${JSON.stringify(transferSummary)}`);
+  const allTransfers = await fetchAllPages(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/transfers`);
+  const transfers = allTransfers.items.map(conciseTransfer);
+  const mints = transfers.filter(item => String(item.from).toLowerCase() === ZERO);
+  const uniqueMintTokenIds = new Set(mints.map(item => item.token_id));
+  console.log(`PROBE transfers-summary=${JSON.stringify({
+    pages: allTransfers.pages,
+    transfers: transfers.length,
+    mints: mints.length,
+    unique_mint_token_ids: uniqueMintTokenIds.size,
+    first: transfers[0] || null,
+    last: transfers.at(-1) || null,
+    mint_first: mints[0] || null,
+    mint_last: mints.at(-1) || null,
+  })}`);
 
-  const instances = await getJson(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/instances`);
-  const instanceItems = Array.isArray(instances.items) ? instances.items : [];
-  const instanceSummary = {
-    available_keys: Object.keys(instances).sort(),
-    item_count: instanceItems.length,
-    next_page_params: instances.next_page_params || null,
-    first_items: instanceItems.slice(0, 3),
-  };
-  console.log(`PROBE blockscout-instances=${JSON.stringify(instanceSummary)}`);
+  const allInstances = await fetchAllPages(`${BLOCKSCOUT_API}/tokens/${CONTRACT}/instances`);
+  const instances = allInstances.items.map(conciseInstance);
+  console.log(`PROBE instances-summary=${JSON.stringify({
+    pages: allInstances.pages,
+    instances: instances.length,
+    unique_token_ids: new Set(instances.map(item => item.token_id)).size,
+    first: instances[0] || null,
+    last: instances.at(-1) || null,
+  })}`);
 
-  return {address: addressSummary, token, transfers: transferSummary, instances: instanceSummary};
+  return {
+    address: addressSummary,
+    token,
+    transfers: {pages: allTransfers.pages, count: transfers.length, mint_count: mints.length, unique_mint_token_ids: uniqueMintTokenIds.size},
+    instances: {pages: allInstances.pages, count: instances.length},
+  };
 }
 
 async function main() {
@@ -145,14 +190,7 @@ async function main() {
   const proxy = await inspectProxy();
   const blockscout = await inspectBlockscout();
 
-  console.log('NFT_CONTRACT_SUMMARY=' + JSON.stringify({
-    contract: CONTRACT,
-    chain_id: chainId,
-    latest_block: latest,
-    interfaces,
-    proxy,
-    blockscout,
-  }));
+  console.log('NFT_CONTRACT_SUMMARY=' + JSON.stringify({contract: CONTRACT, chain_id: chainId, latest_block: latest, interfaces, proxy, blockscout}));
 }
 
 main().catch(error => {
