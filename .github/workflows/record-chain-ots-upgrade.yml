@@ -8,10 +8,15 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
 jobs:
   ots-upgrade:
     runs-on: ubuntu-24.04
-    # Authorize write workflow actor
+    timeout-minutes: 30
     if: github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]' || contains(format(',{0},', vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS || 'thechurchofagi'), format(',{0},', github.actor))
     steps:
       - name: Authorize write workflow actor
@@ -20,39 +25,96 @@ jobs:
           ACTOR: ${{ github.actor }}
           GUARDIAN_REGISTRY_WORKFLOW_ACTORS: ${{ vars.GUARDIAN_REGISTRY_WORKFLOW_ACTORS }}
         run: |
+          set -euo pipefail
           ALLOWLIST="${GUARDIAN_REGISTRY_WORKFLOW_ACTORS:-thechurchofagi}"
-
           if [ "$ACTOR" = "github-actions[bot]" ]; then
             echo "Authorized actor: $ACTOR"
             exit 0
           fi
-
           case ",$ALLOWLIST," in
-            *",$ACTOR,"*)
-              echo "Authorized actor: $ACTOR"
-              ;;
+            *",$ACTOR,"*) echo "Authorized actor: $ACTOR" ;;
             *)
-              echo "Unauthorized actor for write workflow: $ACTOR"
-              echo "Set repository variable GUARDIAN_REGISTRY_WORKFLOW_ACTORS to a comma-separated allowlist."
+              echo "Unauthorized actor for write workflow: $ACTOR" >&2
               exit 1
               ;;
           esac
+
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
+
       - name: Record toolchain provenance
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - run: pip install opentimestamps-client
-      - run: python scripts/trinity_record_chain.py ots-upgrade
-      - run: |
-          if ! git diff --quiet; then
-            git config user.name "trinity-ots-bot"
-            git config user.email "actions@github.com"
+      - name: Install pinned Python and OpenTimestamps dependencies
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt -r requirements-ots.txt
+          ots --help
+
+      - name: Rebase current main before upgrading
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
+      - name: Upgrade, verify, commit, and push proofs
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-ots-bot"
+          git config user.email "actions@github.com"
+
+          upgrade_and_stage() {
+            python scripts/trinity_record_chain.py ots-upgrade
+            python scripts/trinity_record_chain.py verify
             git add record-chain/
-            git commit -m "Upgrade record-chain OTS proofs"
-            git push
+            git diff --cached --check
+          }
+
+          upgrade_and_stage
+          if git diff --cached --quiet; then
+            echo "No Record Chain OTS proofs can be upgraded yet."
+            exit 0
           fi
+
+          git commit -m "Upgrade record-chain OTS proofs"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::OTS upgrade commit left unstaged or untracked files."
+            git status --short
+            exit 1
+          fi
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Push failed on attempt ${attempt}; rebasing and reconciling upgraded proofs."
+            git fetch origin main --prune
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Record Chain changed concurrently; OTS upgrade must restart on current main."
+              exit 1
+            fi
+
+            upgrade_and_stage
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "::error::OTS upgrade reconciliation left an incomplete worktree."
+              git status --short
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Failed to push upgraded Record Chain OTS proofs after retries."
+          exit 1
