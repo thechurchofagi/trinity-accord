@@ -1,8 +1,6 @@
 name: TEMP Generate NFT Identity Index
 
 on:
-  push:
-    branches: [agent/nft-mint-identity-index]
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
@@ -12,11 +10,11 @@ permissions:
 
 concurrency:
   group: temp-nft-identity-index-generator
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   generate:
-    if: ${{ github.ref == 'refs/heads/agent/nft-mint-identity-index' || github.head_ref == 'agent/nft-mint-identity-index' }}
+    if: ${{ github.head_ref == 'agent/nft-mint-identity-index' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     steps:
@@ -53,7 +51,7 @@ jobs:
 
           success=0
           for endpoint in "${endpoints[@]}"; do
-            echo "Attempting Ethereum RPC endpoint ${endpoint%%/*}//[redacted]"
+            echo "Attempting configured/public Ethereum RPC endpoint"
             rm -f nft-identity-index.json
             if ETH_RPC_URL="$endpoint" node scripts/generate_nft_identity_index.mjs; then
               success=1
