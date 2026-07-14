@@ -1,5 +1,5 @@
 exit_status=1
-head_sha=3aff55ea40c07bd9f2a1b0d1971dbbcd9a1c496d
+head_sha=3c4608bc1ecae687e8dd7ebd48aa18c16747870a
 ===== CURRENT TEST OUTPUT TAIL =====
 PASS: record-chain verify
 PASS: sitemap up to date
