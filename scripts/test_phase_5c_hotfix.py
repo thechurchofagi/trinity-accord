@@ -37,12 +37,9 @@ RETIRED_FIELDS = [
     "authorization_basis",
 ]
 LOADED_URLS = (
-    "https://www.trinityaccord.org/agent-first-contact/,
-"
-    "https://www.trinityaccord.org/api/context-action-profiles.v1.json,
-"
-    "https://www.trinityaccord.org/api/verification-claim-model.v1.json"
-).replace("\n", "")
+    "https://www.trinityaccord.org/agent-first-contact/,")
+LOADED_URLS += "https://www.trinityaccord.org/api/context-action-profiles.v1.json,"
+LOADED_URLS += "https://www.trinityaccord.org/api/verification-claim-model.v1.json"
 
 
 def fail(message: str) -> None:
