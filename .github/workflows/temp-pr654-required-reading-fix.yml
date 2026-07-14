@@ -1,0 +1,53 @@
+name: Temporary PR654 required-reading fix
+
+on:
+  push:
+    branches:
+      - agent/retire-fixed-stage-and-clarify-verification
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/retire-fixed-stage-and-clarify-verification
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Split required-reading path from condition
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('api/agent-required-reading.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          profile = data['profiles']['narrative_grounded']
+          profile['reads'] = [
+              '/api/corrections-index.json' if value == '/api/corrections-index.json when relevant' else value
+              for value in profile['reads']
+          ]
+          profile.setdefault('conditional_reads', {})['later_record_correction_retirement_or_supersession_claim'] = [
+              '/api/corrections-index.json'
+          ]
+          profile['corrections_index_condition'] = (
+              'Required when discussing a later record, report, correction, retirement, or supersession status.'
+          )
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+          rm -f .github/workflows/temp-pr654-required-reading-fix.yml
+      - name: Commit permanent path fix
+        shell: bash
+        run: |
+          git config user.name "trinity-accord-migration-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "model: split required-reading paths from conditions"
+          git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
