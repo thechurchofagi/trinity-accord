@@ -46,7 +46,7 @@ jobs:
           python3 scripts/temp_apply_interpretation_verification_migration.py
           python3 scripts/chronicle_editions_v2.py
 
-      - name: Refresh generated metadata and test contracts
+      - name: Refresh generated metadata and contracts
         shell: bash
         run: |
           set -euo pipefail
@@ -57,7 +57,6 @@ jobs:
           from pathlib import Path
 
           root = Path('.')
-
           def canonical(data):
               return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
 
@@ -79,7 +78,7 @@ jobs:
               s = s.replace(anchor, anchor + extra, 1)
           p.write_text(s, encoding='utf-8')
 
-          digest_paths = [
+          for rel in [
               'api/agent-first-contact.json',
               'api/agent-minimal-context.v1.json',
               'api/agent-start.v2.json',
@@ -88,16 +87,14 @@ jobs:
               'api/verification-levels.json',
               '.well-known/agent.json',
               '.well-known/trinity-accord.json',
-          ]
-          for rel in digest_paths:
+          ]:
               path = root / rel
               data = json.loads(path.read_text(encoding='utf-8'))
               if 'source_digest' not in data:
                   continue
               old = str(data['source_digest'])
               payload = {k: v for k, v in data.items() if k != 'source_digest'}
-              digest = hashlib.sha256(canonical(payload)).hexdigest()
-              data['source_digest'] = digest[:len(old)]
+              data['source_digest'] = hashlib.sha256(canonical(payload)).hexdigest()[:len(old)]
               path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
           builder = root / 'downloads/record-chain-builder.mjs'
@@ -137,47 +134,13 @@ jobs:
           rm -f scripts/temp_apply_interpretation_verification_migration.py
           rm -f .github/workflows/temp-apply-interpretation-verification-migration.yml
 
-      - name: Run focused migration validation
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 tests/test_interpretation_and_verification_migration.py
-          python3 scripts/test_builder_multidimensional_verification.py
-          python3 scripts/test_nft_chronicle_context_artifacts.py
-          python3 scripts/test_chronicle_site_integration.py
-          python3 scripts/test_builder_oath_readback_canonical_output.py
-          python3 scripts/check_builder_receipt_boundary_sync.py
-          python3 scripts/generate_sitemap.py --check
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          for rel in [
-              'api/interpretation-model-policy.v1.json',
-              'api/verification-claim-model.v1.json',
-              'api/context-action-profiles.v1.json',
-              'api/context-depth-levels.json',
-              'api/context-load-map.json',
-              'api/agent-required-reading.json',
-              'api/verification-profiles.v1.json',
-              'api/verification-levels.json',
-              'api/record-chain-submission-schema.v1.json',
-              'api/record-chain-oath-policy.v1.json',
-              'downloads/record-chain-agent-field-guidance.v1.json',
-          ]:
-              json.loads(Path(rel).read_text(encoding='utf-8'))
-          print('MIGRATION_JSON_OK')
-          PY
-
-      - name: Commit permanent migration
+      - name: Commit permanent migration for formal CI
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "trinity-accord-migration-bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
-          if git diff --cached --quiet; then
-            echo "No migration changes to commit"
-            exit 0
-          fi
+          git diff --cached --check
           git commit -m "model: migrate interpretation and verification claims"
           git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
