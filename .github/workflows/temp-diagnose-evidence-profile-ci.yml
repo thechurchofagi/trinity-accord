@@ -1,9 +1,6 @@
 name: Temporary Diagnose Evidence Profile CI
 
 on:
-  push:
-    branches:
-      - agent/complete-legacy-ar-eth-mirror-audit
   pull_request:
     paths:
       - .github/workflows/temp-diagnose-evidence-profile-ci.yml
@@ -26,34 +23,23 @@ jobs:
         with:
           node-version-file: ".node-version"
       - run: python3 -m pip install -r requirements-ci.txt
-      - name: Generate compact diagnostic report
+      - name: Generate actual P0 diagnostic report
         shell: bash
         run: |
           set +e
           report="evidence-profile-ci-diagnostic.txt"
           : > "$report"
           echo "HEAD=$(git rev-parse HEAD)" >> "$report"
-          echo "=== P0 WORKFLOW SOURCE ===" >> "$report"
-          grep -R -n -B4 -A10 "Run P0 current fast gate" .github/workflows >> "$report" 2>&1 || true
 
           python3 scripts/generate_sitemap.py >/tmp/sitemap.log 2>&1
           sitemap_code=$?
           echo "=== SITEMAP EXIT $sitemap_code ===" >> "$report"
-          tail -n 30 /tmp/sitemap.log >> "$report"
+          cat /tmp/sitemap.log >> "$report"
 
-          python3 scripts/run_current_system_tests.py >/tmp/current.log 2>&1
-          current_code=$?
-          echo "=== CURRENT SYSTEM EXIT $current_code ===" >> "$report"
-          tail -n 120 /tmp/current.log >> "$report"
-
-          workflow_file="$(grep -R -l "Run P0 current fast gate" .github/workflows | head -n1)"
-          command_line="$(awk '/name: Run P0 current fast gate/{found=1; next} found && /run:/{sub(/^.*run:[[:space:]]*/, ""); print; exit}' "$workflow_file")"
-          echo "=== P0 COMMAND ===" >> "$report"
-          echo "$command_line" >> "$report"
-          bash -lc "$command_line" >/tmp/p0.log 2>&1
+          python3 scripts/run_ci_group.py p0-current >/tmp/p0.log 2>&1
           p0_code=$?
           echo "=== P0 EXIT $p0_code ===" >> "$report"
-          tail -n 180 /tmp/p0.log >> "$report"
+          tail -n 240 /tmp/p0.log >> "$report"
 
           python3 -m pytest -q tests/test_evidence_relationship_profiles.py >/tmp/newtests.log 2>&1
           tests_code=$?
@@ -69,5 +55,5 @@ jobs:
           git add evidence-profile-ci-diagnostic.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "ci: record temporary evidence profile diagnostics"
+          git commit -m "ci: update temporary evidence profile diagnostics"
           git push origin HEAD:agent/complete-legacy-ar-eth-mirror-audit
