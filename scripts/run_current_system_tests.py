@@ -105,6 +105,7 @@ def main() -> int:
         "scripts/test_concurrent_preflight_swarm_contract.py",
         "scripts/test_agent_e2e_journey_matrix.py",
         "tests/test_interpretation_and_verification_migration.py",
+        "tests/test_verification_procedure_model.py",
         "scripts/test_builder_multidimensional_verification.py",
     ]:
         result = subprocess.run(

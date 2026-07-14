@@ -59,46 +59,17 @@
       "read": [
         "/api/agent-first-contact.json",
         "/api/verification-materials.json",
-        "/api/bitcoin-inscription-mirror-index.json",
-        "/api/claim-gate-rules.json",
+        "/api/verification-procedures.v1.json",
+        "/api/verification-claim-model.v1.json",
         "/api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/context-action-profiles.v1.json",
+        "/api/corrections-index.json"
       ],
       "requires_tools": true,
       "if_no_tools": "state_unverified_by_this_agent",
-      "allowed_output": "verification_report_only_if_actions_performed"
-    },
-    "verify_v0_v5_agent_declared": {
-      "route_id": "record_chain_v0_v5_agent_declared_verification",
-      "read": [
-        "/api/agent-first-contact.json",
-        "/api/agent-required-reading.json",
-        "/api/record-chain-intake-gateway.v1.json",
-        "/api/record-chain-submission-schema.v1.json",
-        "/downloads/record-chain-builder.mjs"
-      ],
-      "current_submission_method": "Record-Chain Intake Gateway",
-      "builder": "/downloads/record-chain-builder.mjs",
-      "builder_command": "node record-chain-builder.mjs verification --verification-level V0..V5 --what-was-checked <items> --verification-claim <claim> --fresh-actions <actions>",
-      "requires_explicit_verification_level": true,
-      "requires_explicit_checked_items_claim_and_fresh_actions": true,
-      "strict_evidence_forbidden_for_level_determination": true,
-      "v6_plus_must_use_strict_evidence_route": true,
-      "contract": "/api/record-chain-intake-gateway.v1.json",
-      "must_follow_post_submit_readback": true,
-      "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
-      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
-    },
-    "verify_v6_plus_strict_evidence": {
-      "delegate_to": "/api/agent-first-contact.json#verify_v6_plus_strict_evidence",
-      "pipeline": [
-        "evidence_input",
-        "strict_claim_gate",
-        "report_builder_if_allowed",
-        "validator"
-      ],
-      "if_pipeline_not_completed": "do_not_claim_v6_plus"
+      "allowed_output": "bounded_current_verification_report_only_if_fresh_actions_performed",
+      "profile_rule": "Choose the weakest supported digital_profile and report physical_observation and external_witness separately."
     },
     "submit_echo": {
       "read": [
@@ -291,6 +262,75 @@
         "verification_level_claim",
         "AI_endorsement_claim"
       ]
+    },
+    "verify_current_model": {
+      "route_id": "record_chain_current_multidimensional_verification",
+      "read": [
+        "/api/agent-first-contact.json",
+        "/api/agent-required-reading.json",
+        "/api/context-action-profiles.v1.json",
+        "/api/verification-procedures.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/verification-claim-model.v1.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/downloads/record-chain-builder.mjs"
+      ],
+      "current_submission_method": "Record-Chain Intake Gateway",
+      "builder": "/downloads/record-chain-builder.mjs",
+      "builder_command": "node record-chain-builder.mjs verification --verification-level V0..V5 --digital-profile <profile> --relationships-checked <relationships> --physical-observation <value> --external-witness <value> --coverage-scope <scope> --limitations <limits> --claims-not-made <claims> --corrections-or-supersession-checked true|false --what-was-checked <items> --verification-claim <claim> --fresh-actions <actions>",
+      "requires_current_dimensions": [
+        "digital_profile",
+        "relationships_checked",
+        "physical_observation",
+        "external_witness",
+        "coverage_scope",
+        "limitations",
+        "claims_not_made",
+        "corrections_or_supersession_checked"
+      ],
+      "legacy_builder_values": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "historical_only_labels": [
+        "V4+",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "requires_explicit_checked_items_claim_and_fresh_actions": true,
+      "requires_weakest_supported_profile": true,
+      "contract": "/api/record-chain-intake-gateway.v1.json",
+      "must_follow_post_submit_readback": true,
+      "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+      "receipt_is_intake_only": true
+    },
+    "physical_or_strict_evidence_verification": {
+      "delegate_to": "/api/agent-first-contact.json",
+      "status": "current",
+      "rule": "Do not request V6, V7, or V8 as new levels. Use physical_observation and external_witness independently from digital_profile.",
+      "read": [
+        "/api/verification-procedures.v1.json",
+        "/api/verification-claim-model.v1.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json"
+      ],
+      "pipeline_when_machine_evaluated_evidence_is_required": [
+        "fresh_evidence_input",
+        "strict_claim_gate",
+        "generated_report_if_allowed",
+        "validator"
+      ],
+      "if_pipeline_not_completed": "report only the actually performed current dimensions and limitations; do not claim strict machine-evaluated evidence",
+      "public_submission_legacy_value_rule": "Use one V0-V5 Builder compatibility value; V4+, V6, V7, and V8 are forbidden for new public submissions."
     }
   },
   "route_selection_rule": "If intent is ambiguous, read agent-minimal-context and agent-first-contact, then choose STOP or understand. Do not invent a new route.",
@@ -337,20 +377,29 @@
     },
     "_status": "mixed_current_and_historical",
     "_note": "Current routes use /downloads/record-chain-builder.mjs. Historical pure_echo and guardian_signed_echo bundle references are preserved only for audit and must not be used for new submissions.",
-    "record_chain_v0_v5_agent_declared_verification": {
-      "bundle": "/downloads/record-chain-builder.mjs",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "ordinary_external_agent_verification": true,
-      "builder_command": "verification",
-      "_status": "current_record_chain_builder_route"
-    },
     "guardian_application_intake": {
       "bundle": "/downloads/record-chain-builder.mjs",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "builder_command": "guardian-application",
       "current_public_decision": "application_intake_only",
+      "_status": "current_record_chain_builder_route"
+    },
+    "record_chain_current_verification": {
+      "bundle": "/downloads/record-chain-builder.mjs",
+      "requires_full_repo_clone": false,
+      "requires_builder": true,
+      "ordinary_external_agent_verification": true,
+      "builder_command": "verification",
+      "current_route": "verify_current_model",
+      "legacy_builder_values": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
       "_status": "current_record_chain_builder_route"
     }
   },
@@ -364,22 +413,30 @@
     "deprecated_direct_route": "e2_verification_echo",
     "do_not_route_to_pure_echo": true,
     "replacement_decision": {
-      "self_declared_template_or_basic_check": "record_chain_v0_v5_agent_declared_verification",
-      "strict_evidence_claim_gate_report": "v6_plus_strict_evidence"
+      "current_verification_record": "verify_current_model",
+      "physical_or_strict_evidence": "physical_or_strict_evidence_verification"
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "75d9510b5d573837",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
-    "legacy_builder_fields_remain_required": true
+    "legacy_builder_fields_remain_required": true,
+    "verification_procedures": "/api/verification-procedures.v1.json",
+    "verification_claim_model": "/api/verification-claim-model.v1.json"
   },
   "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
   "current_verification_claim_model": "/api/verification-claim-model.v1.json",
   "current_context_action_model": "/api/context-action-profiles.v1.json",
-  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.",
+  "current_verification_model": {
+    "procedures": "/api/verification-procedures.v1.json",
+    "profiles": "/api/verification-profiles.v1.json",
+    "claim_model": "/api/verification-claim-model.v1.json",
+    "relationships": "/api/evidence-relationship-map.v1.json"
+  },
+  "source_digest": "2ed6554a288b4113"
 }

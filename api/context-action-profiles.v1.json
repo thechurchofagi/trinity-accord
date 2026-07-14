@@ -82,6 +82,7 @@
         "/EVIDENCE-RELATIONSHIP-GUIDE.md or /api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
         "/api/verification-claim-model.v1.json",
+        "/api/verification-procedures.v1.json",
         "exact target source or bytes",
         "expected hash/signature/timestamp source",
         "target-specific verification recipe",
@@ -89,12 +90,17 @@
         "current status or supersession source for the target"
       ],
       "must_perform": [
-        "state target",
-        "state relationship checked",
-        "perform and record the operation",
-        "report result, limitations and claims not made"
+        "define bounded claim and claims not made",
+        "state exact targets",
+        "state evidence relationships checked",
+        "perform and record fresh operations",
+        "record per-target result including mismatch, unavailable, inconclusive or error",
+        "choose the weakest supported digital profile",
+        "report physical observation and external witness separately",
+        "report limitations and corrections or supersession status"
       ],
       "allowed_outputs": [
+        "context_only",
         "reference_checked",
         "integrity_checked",
         "independent_reproduction",
@@ -212,5 +218,6 @@
     "reason": "The inherited CC ladder forces unrelated materials into narrow tasks and duplicates the separate context-sufficient boolean."
   },
   "interpretation_model_policy": "/api/interpretation-model-policy.v1.json",
-  "verification_claim_model": "/api/verification-claim-model.v1.json"
+  "verification_claim_model": "/api/verification-claim-model.v1.json",
+  "verification_procedures": "/api/verification-procedures.v1.json"
 }

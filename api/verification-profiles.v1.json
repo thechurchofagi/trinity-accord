@@ -47,6 +47,7 @@
         "external_or_primary_source",
         "access_path",
         "observed_result",
+        "access_time",
         "limitations"
       ],
       "examples": [
@@ -218,7 +219,7 @@
   ],
   "legacy_compatibility": {
     "file": "/api/verification-levels.json",
-    "policy": "Existing V0-V8 and V4+ labels remain preserved in historical records. New public records use V0-V5 only as compatibility metadata and lead with the multidimensional verification claim model.",
+    "policy": "V0-V5 remain Builder/archive compatibility metadata for new records. V4+, V6, V7 and V8 remain visible only in historical records and legacy compatibility documentation.",
     "important_boundary": "V4+, V6, V7 and V8 are not accepted as new public legacy_v_level values. V6-V8 map only to separate physical observation states."
   },
   "verification_claim_model": "/api/verification-claim-model.v1.json",
@@ -243,5 +244,8 @@
       "claims_not_made",
       "corrections_or_supersession_checked"
     ]
-  }
+  },
+  "procedures": "/api/verification-procedures.v1.json",
+  "quick_map": "/api/verification-quick-map.json",
+  "agent_cheatsheet": "/api/agent-verification-cheatsheet.v1.json"
 }

@@ -242,6 +242,7 @@
   <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-materials.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-procedures.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-profiles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-quick-map.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-recipes.json</loc></url>
@@ -354,6 +355,7 @@
   <url><loc>https://www.trinityaccord.org/verification-echo-agent-playbook/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-materials/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-packages/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-procedures/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V1-boundary-recognition/</loc></url>
   <url><loc>https://www.trinityaccord.org/verification-reports/2026/2026-05-31-V2-full-cycle-tracking/</loc></url>

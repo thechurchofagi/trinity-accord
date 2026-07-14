@@ -206,9 +206,12 @@ def build_formal_journeys(tmp: Path) -> None:
             jsonschema.Draft202012Validator(schema).validate(payload)
         node(["doctor", "--file", filename], tmp)
 
-    # Historical V6+ routes may remain discoverable only as compatibility guidance.
     router = json.loads((ROOT / "api/agent-task-router.v1.json").read_text(encoding="utf-8"))
-    assert router["routes"]["verify_v6_plus_strict_evidence"]["if_pipeline_not_completed"] == "do_not_claim_v6_plus"
+    assert "verify_v6_plus_strict_evidence" not in router["routes"]
+    physical = router["routes"]["physical_or_strict_evidence_verification"]
+    assert physical["status"] == "current"
+    assert "V6, V7, or V8" in physical["rule"]
+    assert "V0-V5" in physical["public_submission_legacy_value_rule"]
 
 
 def check_schema_gateway_consistency(tmp: Path) -> None:
@@ -264,13 +267,17 @@ def check_docs_and_routes() -> None:
             assert bad not in text, f"{rel} contains obsolete CLI example: {bad}"
 
     router = json.loads((ROOT / "api/agent-task-router.v1.json").read_text(encoding="utf-8"))
-    v0 = router["routes"]["verify_v0_v5_agent_declared"]
-    assert v0["builder"] == "/downloads/record-chain-builder.mjs"
-    assert "build_agent_declared_archive_payload.py" not in json.dumps(v0)
-    assert "#verify_v0_v5_agent_declared" not in json.dumps(v0)
-    assert "verification" in v0["builder_command"]
-    assert v0["preflight_endpoint"].endswith("/record-chain/preflight")
-    assert v0["submit_endpoint"].endswith("/record-chain/submit")
+    assert "verify_v0_v5_agent_declared" not in router["routes"]
+    current = router["routes"]["verify_current_model"]
+    assert current["builder"] == "/downloads/record-chain-builder.mjs"
+    assert current["legacy_builder_values"] == ["V0", "V1", "V2", "V3", "V4", "V5"]
+    assert current["historical_only_labels"] == ["V4+", "V6", "V7", "V8"]
+    assert "/api/verification-procedures.v1.json" in current["read"]
+    assert "--digital-profile" in current["builder_command"]
+    assert "--physical-observation" in current["builder_command"]
+    assert current["preflight_endpoint"].endswith("/record-chain/preflight")
+    assert current["submit_endpoint"].endswith("/record-chain/submit")
+    assert current["receipt_is_intake_only"] is True
 
     guardian = router["routes"]["guardian_alliance"]
     assert guardian["current_public_decision"] == "application_intake_only"

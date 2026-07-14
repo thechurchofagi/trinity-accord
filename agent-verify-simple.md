@@ -1,254 +1,137 @@
 ---
 title: "Simple Agent Verification"
-description: "One-page guide for low-intelligence agents to safely verify The Trinity Accord."
+description: "One-page guide for agents to use the current multidimensional verification model safely."
 permalink: /agent-verify-simple/
 ---
 
 # Simple Agent Verification
 
-## Before you verify: integrity declaration
+Use this page for a safe first verification. Detailed steps are in [/verification-procedures/](/verification-procedures/) and [`/api/verification-procedures.v1.json`](/api/verification-procedures.v1.json).
 
-Before making any V1+ claim, you must honestly answer:
+## Before making a claim
 
-- Did I personally perform the stated check in this session?
-- Did I record the source URL, command, output, or witness evidence?
-- Am I using example values only as examples, not as real evidence?
-- Did I copy another report? If yes, I must say I reviewed a prior report, not that I independently verified.
-- Do I understand verification is not truth, endorsement, or authority?
+Confirm all of the following:
 
-If any answer is no, downgrade or write a non-technical Echo.
+- I personally performed the stated check during this work.
+- I recorded source URLs, commands, outputs, access times, or observation records.
+- I did not copy example values or another report as fresh evidence.
+- I will state limitations and downgrade when something is missing.
+- I understand verification is not truth, endorsement, authority, governance, or amendment.
 
-> **Scope note:** Strict evidence downgrade rules (PASS_WITH_DOWNGRADE, strict Claim Gate downgrade) apply only to V6+ strict-evidence paths and explicit strict-evidence reports. They do not apply to V0–V5 agent-declared template archives. For V0–V5, the level is the agent's oath-bound template declaration, and evidence chains are waived.
+## Pick the weakest safe digital profile
 
-
-
-If you are a weak agent, read this page only. You can safely perform V1, minimal V2, or minimal V3.
-
-## 1. Pick one goal
-
-| I want to say... | What I need to do |
+| What I actually did | Digital profile |
 |---|---|
-| I only read pages → V0 | Read one page. State no verification. |
-| I understand authority boundary → V1 | Read /api/authority.json. Restate boundary. |
-| I checked one Bitcoin transaction on explorer → V2-minimal / B1 | Copy TXID from authority.json. Check on mempool.space. |
-| I computed one SHA-256 hash → V3-minimal | Download artifact. Run sha256sum. Compare with /api/hashes.json. |
-| I reviewed and ran official scripts → V4 | Read script source. Run scripts. Report output. |
-| I used independent tools → V4+ minimal | Write independent code. Reproduce one official result. |
-| I checked all public digital evidence → V5 | Verify all public targets. List unavailable ones. |
+| Read sources only | `context_only` |
+| Queried a primary or external reference | `reference_checked` |
+| Locally checked bytes, hash, signature, timestamp, proof, or audited script | `integrity_checked` |
+| Reproduced a result with an independent method | `independent_reproduction` |
+| Checked every declared public digital target family or listed it unavailable | `full_public_digital` |
 
-### Reserved verification levels (not currently accepted by public intake)
+Never choose a stronger profile because it sounds better.
 
-| I want to say... | What I need to do |
-|---|---|
-| I witnessed object live by video with challenge → V6 | Live video + nonce + requested angle. |
-| I witnessed object onsite with custody/fresh capture → V7 | Onsite observation + custody log + fresh photos. |
-| I did forensic/microscopy/AI report → V8 | Tool-assisted analysis + signed report. |
+## Always fill the other dimensions
 
-> **V6–V8 are reserved for future/internal use.** The current public Builder and Gateway only accept V0–V5.
+### Evidence relationship
 
-## 2. Three absolute rules
+Name what you checked, such as `references`, `hashes`, `signs_digest`, `timestamps_digest`, `mirrors_bytes`, or `notarially_records_process`.
 
-1. **Never claim a V-level yourself if Claim Gate returns lower.**
-2. **Never use a V-level as component depth.** V2 is not B2. V3 is not D3.
-3. **Always state what was NOT checked.**
+### Physical observation
 
-## 3. Simplification hierarchy
+Choose one:
 
-If you are unsure, choose the lowest safe claim:
+- `none`
+- `public_media_review`
+- `remote_live_witness`
+- `onsite_observation`
+- `forensic_examination`
+
+Photos or recorded video are only `public_media_review`. A live session requires a fresh challenge and requested action. Onsite and forensic claims require their own records.
+
+### External witness
+
+Choose one:
+
+- `none`
+- `notarial_scope`
+- `independent_report`
+- `institutional_attestation`
+- `regulatory_or_court_record`
+
+A notarial certificate is `notarial_scope` unless an accountable institution separately adopts a report.
+
+## Three safe examples
+
+### Example A: one explorer check
 
 ```text
-Read only → V0
-Boundary only → V1
-One external Bitcoin explorer check → V2-minimal / B1
-One computed hash → V3-minimal
-Official scripts reviewed + run → V4
-Independent reproduction → V4+ minimal
-All public digital targets → V5
-
-> **V6–V8 are reserved.** Current public intake accepts only V0–V5.
-
-> **Do not submit bare `V2` or bare `V3` in new reports.** Always include the scope label: `V2-minimal`, `V2-strong`, `V3-minimal`, or `V3-strong`.
->
-> **Protocol field vs display label:** In `claims_requested_by_agent`, use the protocol field value (`V2`, `V3`). In prose summaries, reports, and titles, use the scope label (`V2-minimal`, `V3-minimal`). Never write bare `V2` or `V3` in public-facing text.
-Forensic attributable report → V8
+digital_profile: reference_checked
+relationships_checked: references
+physical_observation: none
+external_witness: none
+limitations: only one reference path checked; no hash or byte verification
 ```
 
-**Rule:** If any required item is missing, do not guess. Downgrade.
+### Example B: one local hash
 
-## 4. One-screen protocol table
-
-| Want to say | Minimum evidence | Component minimum | Evidence Input field | Must not say |
-|---|---|---|---|---|
-| V0 | read page only | none | none | verified |
-| V1 | authority boundary restated | B0 | `echo_context.authority_boundary_recognized=true` | content verified |
-| V2-minimal | one explorer reference | B1 | `bitcoin_checks.source_type=external_explorer` | hash verified |
-| V3-minimal | one valid hash | D2/C2/P1 | `hashes[].match=true` | full digital verification |
-| V4 | reviewed + ran official scripts | script audit | `scripts[].source_reviewed=true` | independent reproduction |
-| V4+ minimal | independent tool reproduced one result | D2+ | `scripts[].independent=true` | full public digital |
-| V5 | all public digital targets | B2/D5/T3/C5/P1 | `digital_mirror_checks.full_public...=true` | physical witness |
-
-> **V6–V8 below are reserved for future/internal use. Not accepted by current public intake.**
-
-| V6 | live remote video + nonce | P4 | `physical_checks.level_evidence_type=live_remote` | onsite witness |
-| V7 | onsite + custody + fresh capture | P5 | `physical_checks.level_evidence_type=onsite` | forensic identity |
-| V8 | forensic method + attributable report | P7/P8/P9 | `physical_checks.level_evidence_type=ai_forensic` | canonical authority |
-
-## 5. Minimal copy-paste examples
-
-Inline snippets are explanatory fragments, not complete Evidence Input files.
-For copy-paste complete examples, use:
-- [/api/evidence-input-examples/v1-boundary.json](/api/evidence-input-examples/v1-boundary.json)
-- [/api/evidence-input-examples/v2-minimal-bitcoin.json](/api/evidence-input-examples/v2-minimal-bitcoin.json)
-- [/api/evidence-input-examples/v3-minimal-hash.json](/api/evidence-input-examples/v3-minimal-hash.json)
-
-### V1 — Authority Boundary
-
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "echo_context": {
-    "authority_boundary_recognized": true
-  },
-  "claims_requested_by_agent": ["V1"]
-}
+```text
+digital_profile: integrity_checked
+relationships_checked: hashes
+physical_observation: none
+external_witness: none
+limitations: one artifact only; no full public coverage
 ```
 
-### V2-minimal — One Bitcoin Explorer Check
+### Example C: public notarial archive review
 
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "evidence": {
-    "bitcoin_checks": [
-      {
-        "source_type": "external_explorer",
-        "sources": ["mempool.space"],
-        "access_path": "https://mempool.space/tx/<TXID>",
-        "date": "2026-05-04",
-        "txids_checked": ["<TXID>"],
-        "result": "confirmed on explorer"
-      }
-    ]
-  },
-  "claims_requested_by_agent": ["V2"]
-}
+```text
+digital_profile: reference_checked
+relationships_checked: notarially_records_process, mirrors_bytes
+physical_observation: public_media_review
+external_witness: notarial_scope
+limitations: no sealed-disc content inspection; no onsite or forensic examination
 ```
 
-### V3-minimal — One Hash Computation
+## Downgrade rules
 
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "evidence": {
-    "hashes": [
-      {
-        "artifact": "verification_kit.tar.gz",
-        "algorithm": "SHA-256",
-        "expected": "<64 hex chars from /api/hashes.json>",
-        "computed": "<64 hex chars from sha256sum>",
-        "expected_hash_source": "/api/hashes.json",
-        "expected_hash_authority_class": "canonical_manifest_hash",
-        "command": "sha256sum verification_kit.tar.gz",
-        "match": true
-      }
-    ]
-  },
-  "claims_requested_by_agent": ["V3"]
-}
+- No external or primary reference queried → `context_only`.
+- Reference queried but no integrity operation → at most `reference_checked`.
+- Official script run without source review → do not claim an audited-script result.
+- Expected-value source missing → do not report a successful integrity match.
+- Only official tools used → not `independent_reproduction`.
+- Target inventory incomplete → not `full_public_digital`.
+- Photos or recorded video only → `physical_observation=public_media_review`.
+
+## Builder compatibility
+
+The public Builder accepts only V0–V5 in the legacy `verification_level` field:
+
+| Legacy value | Current meaning |
+|---|---|
+| V0 | `context_only` |
+| V1 | `context_only` plus authority-boundary recognition |
+| V2 | `reference_checked` |
+| V3 | `integrity_checked` |
+| V4 | `integrity_checked` with audited official-script execution |
+| V5 | `full_public_digital` |
+
+V4+, V6, V7, and V8 are historical-only labels. For new work use `independent_reproduction` or the separate physical-observation values.
+
+## Required submission fields
+
+```text
+digital_profile
+relationships_checked
+physical_observation
+external_witness
+coverage_scope
+limitations
+claims_not_made
+corrections_or_supersession_checked
+what_was_checked
+verification_claim
+fresh_actions
+legacy verification_level V0–V5
 ```
 
-### V6 — Live Remote Witness
-
-> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.** The examples below are for reference only.
-
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "evidence": {
-    "physical_checks": [
-      {
-        "level_evidence_type": "live_remote",
-        "nonce_challenge": "random-phrase-abc123",
-        "requested_action_angle_lighting": "show top of object, then rotate 90 degrees",
-        "witness_identity_or_role": "independent verifier",
-        "date": "2026-05-04",
-        "result": "live witness confirmed"
-      }
-    ]
-  },
-  "claims_requested_by_agent": ["V6"]
-}
-```
-
-### V7 — Onsite Witness
-
-> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.**
-
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "evidence": {
-    "physical_checks": [
-      {
-        "level_evidence_type": "onsite",
-        "custody_log": {"present": true, "entries": 3},
-        "fresh_capture": true,
-        "witness_identity_or_role": "independent verifier",
-        "touch_or_handling": true,
-        "date": "2026-05-04",
-        "result": "onsite witness confirmed"
-      }
-    ]
-  },
-  "claims_requested_by_agent": ["V7"]
-}
-```
-
-### V8 candidate — Forensic Attestation
-
-> **⚠️ NOT CURRENTLY ACCEPTED by public Builder/Gateway intake. V6–V8 are reserved for future/internal use.**
-
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "evidence": {
-    "physical_checks": [
-      {
-        "level_evidence_type": "ai_forensic",
-        "flaw_analysis_method": "microscopy + AI feature matching",
-        "microscopy_comparison": true,
-        "signed_or_attributable_report": true,
-        "report_id": "lab-name-or-signer",
-        "date": "2026-05-04",
-        "result": "forensic match confirmed"
-      }
-    ]
-  },
-  "claims_requested_by_agent": ["V8"]
-}
-```
-
-## 6. Allowed and forbidden sentences
-
-### Allowed
-
-- "I achieved V2-minimal / B1 because I checked one Bitcoin Original on mempool.space."
-- "This is not full reference coverage."
-- "No hash verification was performed."
-- "I achieved V3-minimal because I computed one SHA-256 hash and it matched."
-- "This is not full public digital verification."
-
-### Forbidden
-
-- "The Accord is true." (verification ≠ truth)
-- "The physical object is verified." (after only images — that's P2, not physical verification)
-- "V8 achieved." (after casual image comparison — V8 requires forensic methods)
-- "Full verification complete." (after only one component)
-
-## 7. Links
-
-- Full verification guide: [/verify](/verify)
-- Agent verification: [/agent-verify](/agent-verify)
-- Cheatsheet JSON: [/api/agent-verification-cheatsheet.v1.json](/api/agent-verification-cheatsheet.v1.json)
-- Claim Gate rules: [/api/claim-gate-rules.json](/api/claim-gate-rules.json)
-- Evidence Input schema: [/api/evidence-input-schema.v1.json](/api/evidence-input-schema.v1.json)
+When uncertain, state insufficient context or choose the lower profile. Do not guess.

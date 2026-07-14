@@ -41,7 +41,8 @@ def main():
     require(len(minimal.get("bitcoin_originals", [])) == 3, "minimal lists exactly three Bitcoin Originals")
     require(minimal["first_rule"]["if_only_homepage_or_readme_read"]["assessment_state"] == "insufficient_context", "homepage/readme only insufficient")
     require(minimal["first_rule"]["if_only_homepage_or_readme_read"]["final_evaluation_allowed"] is False, "final evaluation disallowed from homepage/readme only")
-    require("V6+ achieved without strict evidence pipeline" in minimal.get("hard_forbidden_first_pass_claims", []), "forbids V6+ without strict pipeline")
+    require("V4+, V6, V7, or V8 claimed as a current verification level" in minimal.get("hard_forbidden_first_pass_claims", []), "forbids retired V labels as current levels")
+    require(minimal.get("preferred_verification_procedures") == "/api/verification-procedures.v1.json", "minimal points to current verification procedures")
 
     policy = load("api/agent-output-policy.v1.json")
     require("truth proven" in policy.get("always_forbidden_outputs", []), "policy forbids truth proven")
@@ -51,9 +52,21 @@ def main():
     router = load("api/agent-task-router.v1.json")
     require(router.get("canonical_router") == "/api/agent-first-contact.json", "router delegates to canonical router")
     routes = router.get("routes", {})
-    for route in ["what_is_this", "verify_v0_v5_agent_declared", "verify_v6_plus_strict_evidence", "legacy_archive_analysis"]:
+    for route in ["what_is_this", "verify_current_model", "physical_or_strict_evidence_verification", "legacy_archive_analysis"]:
         require(route in routes, f"router has {route}")
-    require(routes["verify_v0_v5_agent_declared"].get("strict_evidence_forbidden_for_level_determination") is True, "V0-V5 strict evidence forbidden")
+    current = routes["verify_current_model"]
+    require(current.get("legacy_builder_values") == ["V0", "V1", "V2", "V3", "V4", "V5"], "current route preserves V0-V5 compatibility values")
+    require(current.get("historical_only_labels") == ["V4+", "V6", "V7", "V8"], "current route marks retired labels historical-only")
+    require("/api/verification-procedures.v1.json" in current.get("read", []), "current route loads verification procedures")
+    physical = routes["physical_or_strict_evidence_verification"]
+    require(physical.get("status") == "current", "physical/strict evidence route is current")
+    require("V0-V5" in physical.get("public_submission_legacy_value_rule", ""), "physical route uses V0-V5 Builder compatibility")
+    require("verify_v0_v5_agent_declared" not in routes, "old V0-V5 route retired")
+    require("verify_v6_plus_strict_evidence" not in routes, "old V6+ route retired")
+    serialized_router = json.dumps(router, sort_keys=True)
+    require("record_chain_v0_v5_agent_declared_verification" not in serialized_router, "old zero-clone V0-V5 route name retired")
+    require("v6_plus_strict_evidence" not in serialized_router, "old V6+ replacement name retired")
+    require(router["verification_echo_redirect"]["replacement_decision"]["current_verification_record"] == "verify_current_model", "verification Echo redirect uses current verification route")
 
     wk = load(".well-known/trinity-accord.json")
     for key in ["agent_minimal_context", "agent_output_policy", "agent_task_router"]:
