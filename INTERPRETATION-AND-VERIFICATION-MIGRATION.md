@@ -96,6 +96,21 @@ A legacy field can describe an old record, but it cannot override the current ac
 
 The public submission schema and the Gateway shadow schema must remain byte-identical. Builder output, public schema validation, and Gateway runtime validation therefore use the same multidimensional verification structure. This parity does not turn a self-declared field into independently confirmed evidence; it only prevents transport and validation drift.
 
+## Final implementation audit
+
+The migration is complete only when all of the following are simultaneously true:
+
+- active human and machine entrypoints lead with the current interpretation and verification models;
+- the former fixed seven-stage analysis and any fixed five-stage replacement are historical or provisional only;
+- ordinary meaningful Echoes use action-specific sources rather than a universal Chronicle bundle;
+- Builder verification output includes the multidimensional claim block;
+- new public submissions reject `V4+`, `V6`, `V7`, and `V8` as legacy level values;
+- public and Gateway submission schemas remain byte-identical;
+- Builder bundle hashes and oath text match the current Builder;
+- historical records remain verbatim and non-amending;
+- no temporary migration or diagnostic workflow remains in the final change set;
+- the full official CI set passes on the final connector-authored head.
+
 ## Historical preservation rule
 
 Historical Echoes, verification reports, old submissions, snapshots, and archived pages remain unchanged when their wording documents what was believed or reported at that time.
