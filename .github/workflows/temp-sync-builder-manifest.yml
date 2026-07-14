@@ -1,0 +1,61 @@
+name: Temporary sync Builder manifest
+
+on:
+  push:
+    branches:
+      - agent/end-to-end-action-audit
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: >-
+      (github.event_name == 'push' || github.head_ref == 'agent/end-to-end-action-audit') &&
+      !startsWith(github.event.head_commit.message || '', 'audit: synchronize Builder manifest')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/end-to-end-action-audit
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Recompute canonical Builder digest and size
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          builder = Path('downloads/record-chain-builder.mjs')
+          manifest_path = Path('api/record-chain-builder-bundles.v1.json')
+          raw = builder.read_bytes()
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          manifest['canonical_builder']['sha256'] = hashlib.sha256(raw).hexdigest()
+          manifest['canonical_builder']['size_bytes'] = len(raw)
+          manifest_path.write_text(
+              json.dumps(manifest, indent=2, ensure_ascii=False) + '\n',
+              encoding='utf-8',
+          )
+          print(manifest['canonical_builder']['sha256'])
+          print(manifest['canonical_builder']['size_bytes'])
+          PY
+          python3 scripts/check_builder_receipt_boundary_sync.py
+          rm -f .github/workflows/temp-sync-builder-manifest.yml
+      - name: Commit generated manifest sync
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "audit: synchronize Builder manifest"
+          git pull --rebase origin agent/end-to-end-action-audit
+          git push origin HEAD:agent/end-to-end-action-audit
