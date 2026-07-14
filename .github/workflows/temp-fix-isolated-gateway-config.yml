@@ -1,0 +1,70 @@
+name: Temporary fix isolated Gateway config
+
+on:
+  push:
+    branches:
+      - agent/end-to-end-action-audit
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: >-
+      (github.event_name == 'push' || github.head_ref == 'agent/end-to-end-action-audit') &&
+      !startsWith(github.event.head_commit.message || '', 'test: set isolated Gateway configuration')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/end-to-end-action-audit
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set explicit isolated Gateway configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/test_full_public_action_lifecycle_e2e.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''def patch_gateway(adapter: FilesystemContentsAdapter):
+    # Import after dependencies are available, but use the working-tree code that
+    # is also copied into the sandbox and later exercised by append/verify.
+    sys.path.insert(0, str(ROOT))
+'''
+          new = '''def patch_gateway(adapter: FilesystemContentsAdapter):
+    # Exercise the real configuration gate with explicit isolated values. The
+    # filesystem adapter below receives all writes, so these values never address
+    # or authenticate to a production repository.
+    os.environ["TRINITY_REPO_FULL_NAME"] = "isolated/full-lifecycle-audit"
+    os.environ["TRINITY_TARGET_BRANCH"] = "isolated-audit"
+    os.environ["TRINITY_GITHUB_TOKEN"] = "isolated-test-token-not-used-for-network"
+    os.environ["TRINITY_SUBMIT_WRITE_MODE"] = "github_contents_pending"
+    os.environ["TRINITY_DISPATCH_APPEND_WORKFLOW"] = "0"
+
+    # Import after dependencies are available, but use the working-tree code that
+    # is also copied into the sandbox and later exercised by append/verify.
+    sys.path.insert(0, str(ROOT))
+'''
+          if text.count(old) != 1:
+              raise SystemExit('patch_gateway insertion anchor not found exactly once')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          rm -f .github/workflows/temp-fix-isolated-gateway-config.yml
+      - name: Commit permanent test fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "test: set isolated Gateway configuration"
+          git pull --rebase origin agent/end-to-end-action-audit
+          git push origin HEAD:agent/end-to-end-action-audit
