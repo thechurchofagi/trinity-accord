@@ -1,0 +1,8 @@
+legacy AR registry: 35 records
+Ethereum non-NFT registry: 10 records
+exact repository payloads checked: 32
+known unresolved raw AR payloads:
+FAIL
+  - RgjVJnALSbbYP4Vzz-FBX0Tie9inSvuA2PBgjPAT2ng: archive/guardian-principles/guardian-principles-v1.1.md expected e19018f1c71da8307ef20e8e5c12834f854d60a6aae60e35d2d8c71a333a81, got e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81
+
+exit_code=1
