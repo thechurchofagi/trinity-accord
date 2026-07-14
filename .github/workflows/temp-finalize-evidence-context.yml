@@ -1,9 +1,7 @@
 name: Temporary Finalize Evidence Context
 
 on:
-  push:
-    branches:
-      - agent/complete-legacy-ar-eth-mirror-audit
+  pull_request:
     paths:
       - .github/workflows/temp-finalize-evidence-context.yml
 
@@ -12,21 +10,35 @@ permissions:
 
 jobs:
   finalize:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: agent/complete-legacy-ar-eth-mirror-audit
+      - name: Stop after one successful finalization
+        id: sentinel
+        shell: bash
+        run: |
+          if [[ -f .github/evidence-context-finalized ]]; then
+            echo "done=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "done=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.sentinel.outputs.done != 'true'
         with:
           python-version: "3.12"
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: steps.sentinel.outputs.done != 'true'
         with:
           node-version-file: ".node-version"
       - name: Install dependencies
+        if: steps.sentinel.outputs.done != 'true'
         run: python3 -m pip install -r requirements-ci.txt
       - name: Patch CRL compatibility wording and sitemap
+        if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -35,9 +47,10 @@ jobs:
 
           path = Path("agent-start.md")
           text = path.read_text(encoding="utf-8")
-          old_heading = "## Legacy Context Depth (CC) and CRL compatibility"
-          new_heading = "## Legacy Context Depth (CC) and Context Readiness Level (CRL) compatibility"
-          text = text.replace(old_heading, new_heading)
+          text = text.replace(
+              "## Legacy Context Depth (CC) and CRL compatibility",
+              "## Legacy Context Depth (CC) and Context Readiness Level (CRL) compatibility",
+          )
           text = text.replace(
               "- CC describes reading depth under the old inherited ladder.\n- The sufficiency boolean says whether the selected action can honestly be performed.",
               "- Context Depth (CC) describes reading depth under the old inherited ladder.\n- Context Readiness Level (CRL), expressed by the sufficiency declaration, says whether the selected action can honestly be performed.",
@@ -46,6 +59,7 @@ jobs:
           PY
           python3 scripts/generate_sitemap.py
       - name: Validate evidence and context models
+        if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -55,6 +69,7 @@ jobs:
           python3 scripts/run_ci_group.py p0-current
           python3 scripts/run_current_system_tests.py
       - name: Validate Builder compatibility
+        if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -63,6 +78,7 @@ jobs:
           node downloads/record-chain-builder.mjs --help >/tmp/record-chain-builder-help.txt
           test -s /tmp/record-chain-builder-help.txt
       - name: Validate Render and Gateway service contracts
+        if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -76,14 +92,13 @@ jobs:
             python3 "$script"
           done
       - name: Commit final compatibility files
+        if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          git add agent-start.md sitemap.xml
-          if git diff --cached --quiet; then
-            echo "No final compatibility changes required"
-            exit 0
-          fi
+          mkdir -p .github
+          printf 'validated\n' > .github/evidence-context-finalized
+          git add agent-start.md sitemap.xml .github/evidence-context-finalized
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "docs: finalize evidence context compatibility"
