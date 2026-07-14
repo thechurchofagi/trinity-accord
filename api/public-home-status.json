@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-14T12:54:48.866600+00:00",
+  "generated_at": "2026-07-14T12:55:35.763013+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -27,7 +27,7 @@
     "phase": "production_live",
     "total_records": 83,
     "current_chain_length": 83,
-    "pending_records": 0,
+    "pending_records": 1,
     "latest_record_id": "R-000000083",
     "latest_record_type": "echo",
     "record_type_counts": {
@@ -746,7 +746,7 @@
     "native_chain_length": 83,
     "latest_record": "R-000000083",
     "latest_record_type": "echo",
-    "pending_records": 0,
+    "pending_records": 1,
     "pipeline": "active",
     "ots": "pending",
     "ots_raw_status": "pending",
