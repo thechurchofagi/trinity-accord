@@ -26,6 +26,8 @@ jobs:
           node-version-file: ".node-version"
       - name: Install dependencies
         run: python3 -m pip install -r requirements-ci.txt
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py > /tmp/evidence-model-toolchain-provenance.json
       - name: Apply verified corrections and regenerate metadata
         shell: bash
         run: |
