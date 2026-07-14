@@ -39,3 +39,5 @@ jobs:
           git add diagnostics/e2e-builder-help.txt
           git commit -m "diagnostics: capture Builder action help"
           git push origin HEAD:agent/end-to-end-action-audit
+
+# Triggered after creation.
