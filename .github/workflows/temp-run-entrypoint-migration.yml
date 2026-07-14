@@ -47,6 +47,32 @@ jobs:
           Path('/tmp/migrate-evidence-entrypoints.py').write_text(script, encoding='utf-8')
           PY
           python3 /tmp/migrate-evidence-entrypoints.py
+      - name: Create stable human guide route without duplicating content
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source = Path('EVIDENCE-RELATIONSHIP-GUIDE.md')
+          text = source.read_text(encoding='utf-8')
+          if text.startswith('---\n'):
+              end = text.find('\n---\n', 4)
+              if end == -1:
+                  raise SystemExit('unterminated guide front matter')
+              text = text[end + 5:]
+              source.write_text(text, encoding='utf-8')
+
+          wrapper = Path('evidence-relationship-guide.md')
+          wrapper.write_text(
+              '---\n'
+              'title: "Evidence Relationship Guide"\n'
+              'permalink: /evidence-relationship-guide/\n'
+              '---\n\n'
+              '{% include_relative EVIDENCE-RELATIONSHIP-GUIDE.md %}\n',
+              encoding='utf-8',
+          )
+          PY
           python3 scripts/generate_sitemap.py
       - name: Validate evidence models and JSON
         shell: bash
@@ -77,10 +103,8 @@ jobs:
             git add p0-entrypoint-diagnostic.txt
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "ci: capture entrypoint migration P0 diagnostic"
+            git commit -m "ci: update entrypoint migration P0 diagnostic"
             git push origin HEAD:agent/complete-legacy-ar-eth-mirror-audit
-          else
-            rm -f p0-entrypoint-diagnostic.txt
           fi
           exit "$code"
       - name: Validate full current system
@@ -119,9 +143,11 @@ jobs:
           set -euo pipefail
           git rm \
             .github/workflows/temp-migrate-evidence-entrypoints.yml \
-            .github/workflows/temp-run-entrypoint-migration.yml
+            .github/workflows/temp-run-entrypoint-migration.yml \
+            p0-entrypoint-diagnostic.txt
           git add \
             EVIDENCE-RELATIONSHIP-GUIDE.md \
+            evidence-relationship-guide.md \
             EVIDENCE-MODEL-MIGRATION-AUDIT.md \
             .well-known/trinity-accord.json \
             .well-known/agent.json \
