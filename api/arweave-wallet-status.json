@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.arweave-wallet-status.v1",
-  "generated_at": "2026-07-14T15:19:36Z",
+  "generated_at": "2026-07-14T15:22:34Z",
   "currency": "AR",
   "wallet": {
     "wallet_address": null,
@@ -8,16 +8,16 @@
     "public_address_allowed": false
   },
   "spending": {
-    "total_paid_uploads": 86,
-    "total_spent_ar": "0.387173712901",
-    "last_upload_cost_ar": "0.002613695543",
-    "last_upload_tx_id": "CWr_7svVf2ICWS7UdO9aP0tGWL94ItStA2wJ93U22Ak",
-    "last_upload_kind": "native_ots_bundle_archive",
-    "last_upload_at": "2026-07-14T15:09:59.553Z"
+    "total_paid_uploads": 87,
+    "total_spent_ar": "0.397540111986",
+    "last_upload_cost_ar": "0.010366399085",
+    "last_upload_tx_id": "oT4lWLBiD5_Qy7ySNQrh4CXZMFR0_OHYUi9Njkik1do",
+    "last_upload_kind": "record_chain_arweave_archive",
+    "last_upload_at": "2026-07-14T15:22:08.333Z"
   },
   "balance": {
     "balance_known": true,
-    "balance_ar": "15.165818421809",
+    "balance_ar": "15.163204726266",
     "low_balance_threshold_ar": "0.25",
     "low_balance": false,
     "needs_recharge": false,
