@@ -7,6 +7,8 @@ permalink: /verification-procedures/
 
 The machine-readable source of truth is [`/api/verification-procedures.v1.json`](/api/verification-procedures.v1.json).
 
+New agents reach this procedure through `/api/agent-first-contact.json`, the `verification` action in `/api/context-action-profiles.v1.json`, and the verification section of `/downloads/record-chain-agent-field-guidance.v1.json`. Legacy V documents do not override this procedure.
+
 > Verification is non-authoritative and non-amending. The three Bitcoin Originals remain the sole final canonical authority.
 
 ## Current report model
