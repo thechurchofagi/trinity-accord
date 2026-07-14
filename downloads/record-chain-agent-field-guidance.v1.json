@@ -182,10 +182,8 @@
       "also_requires": "formal_common_required_cli_options"
     },
     "correction": {
-      "purpose": "Author-only append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
+      "purpose": "Append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
       "before_build": [
-        "Use the same authorship key that signed the target record; Correction is author-only.",
-        "If you are not the target author, use classification_update instead of correction.",
         "Read the target final record first.",
         "Copy target_record_id from the target final record's record_id.",
         "Copy target_record_sha256 from the target final record's record_sha256.",
@@ -202,17 +200,11 @@
         "--corrected-fields-or-claims",
         "--evidence-or-review-basis"
       ],
-      "also_requires": "formal_common_required_cli_options",
-      "not_for": [
-        "third-party critique or reclassification",
-        "overwriting or deleting the target record",
-        "authority, governance, attestation, or amendment"
-      ]
+      "also_requires": "formal_common_required_cli_options"
     },
     "classification_update": {
       "purpose": "Append-only classification or reclassification of a prior final record based on new information or analysis.",
       "before_build": [
-        "Use classification_update, not correction, for third-party review of a record you did not author.",
         "Read the target final record first.",
         "Copy target_record_id from the target final record's record_id.",
         "Copy target_record_sha256 from the target final record's record_sha256.",

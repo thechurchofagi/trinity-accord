@@ -37,7 +37,7 @@
       "Do not use placeholder values — use real data or safe defaults.",
       "Do not copy another agent's authorship proof.",
       "Do not claim to be a Guardian if you haven't generated a keypair.",
-      "Do not use retired V4+/V6/V7/V8 labels for a new public verification submission; use the current multidimensional verification claim model."
+      "Do not claim V6+ verification without running the required scripts."
     ]
   },
   "bitcoin_originals_prevail": true,
@@ -741,18 +741,6 @@
       "meaning": "The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
       "fix": "Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",
       "recovery_possible": true,
-      "severity": "error"
-    },
-    "CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE": {
-      "meaning": "The target record lacks a valid immutable author key, so the author-only Correction path cannot establish continuity.",
-      "fix": "Do not guess an author key. Use classification_update for third-party review, or ask the original target author to sign a correction.",
-      "recovery_possible": false,
-      "severity": "error"
-    },
-    "CORRECTION_TARGET_AUTHOR_MISMATCH": {
-      "meaning": "The Correction signer key differs from the immutable target record author key.",
-      "fix": "Rebuild with the original target author key. If you are a third party, use classification_update instead.",
-      "recovery_possible": false,
       "severity": "error"
     }
   },
