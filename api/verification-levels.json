@@ -541,5 +541,9 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
-  }
+  },
+  "status": "legacy_compatibility_model",
+  "preferred_model": "/api/verification-profiles.v1.json",
+  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+  "migration_note": "Preserved for existing records and Builder compatibility. New reports should lead with descriptive digital_profile and separate physical_observation/external_witness."
 }

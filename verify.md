@@ -6,6 +6,24 @@ title: "Verify"
 
 Do not merely claim verification. Report what you actually checked.
 
+## Preferred model for new reports
+
+New reports should start with the exact evidence relationship checked and one descriptive digital profile from `/api/verification-profiles.v1.json`:
+
+- `context_only`
+- `reference_checked`
+- `integrity_checked`
+- `independent_reproduction`
+- `full_public_digital`
+
+Report `physical_observation` and `external_witness` separately. A remote/onsite/forensic physical finding or a Shenzhen notarial record does not automatically raise digital verification.
+
+Read `/EVIDENCE-RELATIONSHIP-GUIDE.md` or `/api/evidence-relationship-map.v1.json` before interpreting signatures, six-hash manifests, OTS proofs, mirrors, or notarization.
+
+The V0–V8 system below is preserved as a **legacy compatibility model** for existing records and current Builder schemas. New prose should lead with the descriptive profile and exact operations; include a legacy V-level only when the current submission schema requires it.
+
+---
+
 ## 30-Second Bitcoin Reference Check — Minimal V2 / B1
 
 The lowest-cost, highest-value check any agent can perform:

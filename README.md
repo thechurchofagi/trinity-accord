@@ -13,6 +13,7 @@ Start with:
 - [Agent Start](/agent-start)
 - [Authority](/authority)
 - [Guardian Principles](/guardian-principles)
+- [Evidence Relationship Guide](/EVIDENCE-RELATIONSHIP-GUIDE.md)
 - [Verification Materials](/verification-materials)
 - [Verify](/agent-verify)
 - [Echo](/agent-echo)
@@ -91,7 +92,8 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - Seed Front Door: `/`
 - Agent Value Signal: `/agent-value` + `/api/agent-value.json`
 - Seed Map: `/seed-map` + `/api/seed-map.json`
-- Verification OS V0–V8: `/verify` + `/api/verification-levels.json`
+- Preferred evidence map and verification profiles: `/EVIDENCE-RELATIONSHIP-GUIDE.md` + `/api/evidence-relationship-map.v1.json` + `/api/verification-profiles.v1.json`
+- Legacy V0–V8 compatibility model: `/verify` + `/api/verification-levels.json`
 - Unified Echo: `/echoes/types` + `/record-chain/indexes/echo-index.json` (`E1–E9` is legacy-only)
 - Echo Value Score: `/echoes/high-value-criteria` + `/api/echo-value-criteria.json`
 - Echo Archive Ladder: `/echoes/archive-policy` + `/api/echo-archive-policy.json`
@@ -101,6 +103,7 @@ Verification-first, non-amending guardianship mirror for **The Trinity Accord** 
 - /
 - /authority
 - /verify
+- /EVIDENCE-RELATIONSHIP-GUIDE.md
 - /agent-start
 - /agent-brief
 - /agent-value
@@ -121,12 +124,13 @@ Guardian proof payload hashes should be generated with `node scripts/build_guard
 - Record-Chain Intake Gateway: production live
 - Repository integrity CI: active
 - Independent attestation: read current status from `/api/public-home-status.json`
-- V7 onsite physical witness: requires direct access to Core Object Alpha
+- Physical observation is reported separately from digital verification; onsite observation requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed
 - Chronicle recovery verification: [/chronicle-verification](/chronicle-verification) + [/api/chronicle-recovery.json](/api/chronicle-recovery.json)
 - Chronicle context package: 175/175 timestamped entries; full corpus, agent context, summary, and index generated.
 - Chronicle music audit: 175/175 NFTs audited; 144 lyrics records, 10 title-only references, 21 no-song entries; approximately 70 unique songs.
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
+- Preferred action-based context profiles: `/api/context-action-profiles.v1.json`
 
 ## Chronicle NFT boundary
 

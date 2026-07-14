@@ -265,5 +265,8 @@
     "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
     "narrative_grounded_assessment_minimum": "CC-3",
     "v6_plus_minimum": "CC-3 plus strict reproducible evidence path"
-  }
+  },
+  "status": "legacy_compatibility_load_map",
+  "preferred_model": "/api/context-action-profiles.v1.json",
+  "preferred_rule": "Select the action first; actual loaded sources determine sufficiency. Do not require unrelated inherited materials for narrow tasks."
 }
