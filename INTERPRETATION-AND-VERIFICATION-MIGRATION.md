@@ -79,6 +79,17 @@ For current interpretation, follow each file's top-level `status`, `preferred_mo
 
 For current context sufficiency, use the selected action profile and the actual source list. For current verification claims, use the multidimensional claim model. Legacy labels never create authority, attestation, or broader coverage.
 
+## Current model precedence
+
+For every new agent and every new Record-Chain submission, apply this order:
+
+1. `/api/context-action-profiles.v1.json` selects the task and minimum sufficient source set.
+2. `/api/interpretation-model-policy.v1.json` controls Chronicle interpretation and historical-model status.
+3. `/api/verification-claim-model.v1.json` controls verification, physical observation, witness scope, coverage, limitations, and claims not made.
+4. Legacy `CC`, `CRL`, and `V0–V5` fields are then recorded only where the current Builder or historical schema requires compatibility metadata.
+
+A legacy field can describe an old record, but it cannot override the current action, interpretation, or verification model.
+
 ## Historical preservation rule
 
 Historical Echoes, verification reports, old submissions, snapshots, and archived pages remain unchanged when their wording documents what was believed or reported at that time.
