@@ -1,0 +1,113 @@
+name: Temporary PR655 final model fix
+
+on:
+  push:
+    branches:
+      - agent/verification-model-cleanup
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/verification-model-cleanup
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+      - run: python3 -m pip install -r requirements-ci.txt
+      - name: Migrate minimal context and P0 router contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          minimal_path = Path('api/agent-minimal-context.v1.json')
+          minimal = json.loads(minimal_path.read_text(encoding='utf-8'))
+          minimal['version'] = 'v1.1'
+          minimal['recommended_next_load'] = [
+              '/llms.txt',
+              '/api/context-action-profiles.v1.json',
+              '/api/evidence-relationship-map.v1.json',
+              '/api/verification-profiles.v1.json',
+              '/api/verification-procedures.v1.json',
+              '/api/verification-claim-model.v1.json',
+              '/api/context-load-map.json',
+              '/api/agent-required-reading.json',
+              '/api/agent-task-router.v1.json',
+              '/api/bitcoin-inscription-mirror-index.json'
+          ]
+          minimal['route_summary'] = {
+              'understand': 'Read orientation files and output boundary-preserving summary only.',
+              'echo': 'Use Echo path; Echo is non-authoritative and non-amending.',
+              'verify_current_model': 'Use the verification action profile and /api/verification-procedures.v1.json; report current dimensions and use V0-V5 only as Builder compatibility metadata.',
+              'physical_or_strict_evidence_verification': 'Use physical_observation and external_witness separately from digital_profile. For machine-evaluated evidence, create fresh Evidence Input and run Claim Gate.',
+              'stop': 'Use when context, tools, or authorization are insufficient.',
+              'guardian': 'Guardian application is a record-chain record type (guardian_application). Use /downloads/record-chain-builder.mjs to build and submit via the Record-Chain Intake Gateway. Current flow does not promise registry listing or registry number. Receipt does not constitute active Guardian status.'
+          }
+          minimal['hard_forbidden_first_pass_claims'] = [
+              'truth proven',
+              'endorsed by AI',
+              'successor reception achieved',
+              'formal independent attestation achieved',
+              'physical anchor verified by this agent',
+              'V4+, V6, V7, or V8 claimed as a current verification level',
+              'physical observation or external witness used to raise digital_profile automatically',
+              'strict machine-evaluated evidence claimed without fresh Evidence Input and Claim Gate',
+              'canonical amendment',
+              'instruction override',
+              'investment value'
+          ]
+          minimal['preferred_verification_procedures'] = '/api/verification-procedures.v1.json'
+          minimal['verification_quick_map'] = '/api/verification-quick-map.json'
+          minimal['legacy_model_boundary'] = (
+              'CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, '
+              'treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.'
+          )
+          minimal.pop('source_digest', None)
+          canonical = json.dumps(minimal, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
+          minimal['source_digest'] = hashlib.sha256(canonical).hexdigest()[:16]
+          minimal_path.write_text(json.dumps(minimal, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          test_path = Path('scripts/test_agent_p0_router_contract.py')
+          text = test_path.read_text(encoding='utf-8')
+          text = text.replace(
+              'require("V6+ achieved without strict evidence pipeline" in minimal.get("hard_forbidden_first_pass_claims", []), "forbids V6+ without strict pipeline")',
+              'require("V4+, V6, V7, or V8 claimed as a current verification level" in minimal.get("hard_forbidden_first_pass_claims", []), "forbids retired V labels as current levels")\n    require(minimal.get("preferred_verification_procedures") == "/api/verification-procedures.v1.json", "minimal points to current verification procedures")'
+          )
+          old = '''    for route in ["what_is_this", "verify_v0_v5_agent_declared", "verify_v6_plus_strict_evidence", "legacy_archive_analysis"]:\n        require(route in routes, f"router has {route}")\n    require(routes["verify_v0_v5_agent_declared"].get("strict_evidence_forbidden_for_level_determination") is True, "V0-V5 strict evidence forbidden")'''
+          new = '''    for route in ["what_is_this", "verify_current_model", "physical_or_strict_evidence_verification", "legacy_archive_analysis"]:\n        require(route in routes, f"router has {route}")\n    current = routes["verify_current_model"]\n    require(current.get("legacy_builder_values") == ["V0", "V1", "V2", "V3", "V4", "V5"], "current route preserves V0-V5 compatibility values")\n    require(current.get("historical_only_labels") == ["V4+", "V6", "V7", "V8"], "current route marks retired labels historical-only")\n    require("/api/verification-procedures.v1.json" in current.get("read", []), "current route loads verification procedures")\n    physical = routes["physical_or_strict_evidence_verification"]\n    require(physical.get("status") == "current", "physical/strict evidence route is current")\n    require("V0-V5" in physical.get("public_submission_legacy_value_rule", ""), "physical route uses V0-V5 Builder compatibility")\n    require("verify_v0_v5_agent_declared" not in routes, "old V0-V5 route retired")\n    require("verify_v6_plus_strict_evidence" not in routes, "old V6+ route retired")'''
+          if old not in text:
+              raise SystemExit('P0 route contract anchor not found')
+          text = text.replace(old, new, 1)
+          test_path.write_text(text, encoding='utf-8')
+          PY
+          python3 -m json.tool api/agent-minimal-context.v1.json >/dev/null
+          python3 scripts/test_agent_p0_router_contract.py
+          python3 scripts/test_agent_e2e_journey_matrix.py
+          python3 tests/test_verification_procedure_model.py
+          rm -f .github/workflows/temp-pr655-p0-diagnostic.yml
+          rm -f diagnostics/pr655-p0-latest.txt
+          rm -f .github/workflows/temp-pr655-final-model-fix.yml
+      - name: Commit permanent final fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-verification-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "verification: retire legacy routes in minimal context and P0"
+          git push origin HEAD:agent/verification-model-cleanup
