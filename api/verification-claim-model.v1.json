@@ -9,24 +9,59 @@
   "required_dimensions": {
     "digital_profile": {
       "source": "/api/verification-profiles.v1.json",
-      "values": ["context_only", "reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"],
+      "values": [
+        "context_only",
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital"
+      ],
       "rule": "Choose the weakest profile supported by operations actually performed."
     },
     "relationships_checked": {
       "source": "/api/evidence-relationship-map.v1.json",
-      "values": ["defines_canonical_text", "references", "indexes", "hashes", "signs_digest", "timestamps_digest", "mirrors_bytes", "witnesses_statement", "notarially_records_process", "provides_context", "records_reception"],
+      "values": [
+        "defines_canonical_text",
+        "references",
+        "indexes",
+        "hashes",
+        "signs_digest",
+        "timestamps_digest",
+        "mirrors_bytes",
+        "witnesses_statement",
+        "notarially_records_process",
+        "provides_context",
+        "records_reception"
+      ],
       "rule": "State the exact relationship checked; do not use the unqualified word verified."
     },
     "physical_observation": {
-      "values": ["none", "public_media_review", "remote_live_witness", "onsite_observation", "forensic_examination"],
+      "values": [
+        "none",
+        "public_media_review",
+        "remote_live_witness",
+        "onsite_observation",
+        "forensic_examination"
+      ],
       "rule": "Physical observation never automatically raises the digital profile."
     },
     "external_witness": {
-      "values": ["none", "notarial_scope", "independent_report", "institutional_attestation", "regulatory_or_court_record"],
+      "values": [
+        "none",
+        "notarial_scope",
+        "independent_report",
+        "institutional_attestation",
+        "regulatory_or_court_record"
+      ],
       "rule": "State exact scope. Notarization does not automatically become formal independent attestation."
     },
     "coverage_scope": {
-      "values": ["single_target", "component_subset", "multi_component", "all_declared_public_digital_targets"],
+      "values": [
+        "single_target",
+        "component_subset",
+        "multi_component",
+        "all_declared_public_digital_targets"
+      ],
       "rule": "Coverage scope limits the conclusion even when one component was checked deeply."
     },
     "limitations_and_claims_not_made": {
@@ -34,24 +69,36 @@
     }
   },
   "legacy_v_compatibility": {
-    "current_builder_allowed_values": ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"],
-    "new_submission_forbidden_values": ["V6", "V7", "V8"],
+    "current_builder_allowed_values": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "new_submission_forbidden_values": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ],
     "role": "Legacy digital posture and archived-record compatibility only.",
     "mapping": {
       "V0": "context_only",
       "V1": "context_only with authority-boundary recognition",
       "V2": "reference_checked",
       "V3": "integrity_checked with hash computation",
-      "V4": "integrity_checked with official-script source review and execution",
-      "V4+": "independent_reproduction",
+      "V4": "integrity_checked or independent_reproduction; digital_profile carries the precise current meaning",
       "V5": "full_public_digital"
     },
-    "retired_physical_mapping": {
+    "boundary": "Historical V4+/V6/V7/V8 records remain preserved. New records use V0-V5 compatibility metadata and separate current dimensions.",
+    "retired_mapping": {
+      "V4+": "digital_profile=independent_reproduction",
       "V6": "physical_observation=remote_live_witness",
       "V7": "physical_observation=onsite_observation",
       "V8": "physical_observation=forensic_examination"
-    },
-    "boundary": "Historical V6-V8 records remain preserved. New records must use a V0-V5 compatibility value for digital work and a separate physical_observation value."
+    }
   },
   "builder_record_shape": {
     "location": "record_draft.verification_content.verification_claim_model",
@@ -75,7 +122,10 @@
     {
       "case": "Hash one Arweave payload and compare with the approved manifest",
       "digital_profile": "integrity_checked",
-      "relationships_checked": ["hashes", "mirrors_bytes"],
+      "relationships_checked": [
+        "hashes",
+        "mirrors_bytes"
+      ],
       "physical_observation": "none",
       "external_witness": "none",
       "coverage_scope": "single_target",
@@ -84,7 +134,10 @@
     {
       "case": "Review Shenzhen notarial certificate and public preservation archive without independently reading sealed discs",
       "digital_profile": "reference_checked",
-      "relationships_checked": ["notarially_records_process", "mirrors_bytes"],
+      "relationships_checked": [
+        "notarially_records_process",
+        "mirrors_bytes"
+      ],
       "physical_observation": "public_media_review",
       "external_witness": "notarial_scope",
       "coverage_scope": "component_subset",
@@ -93,7 +146,10 @@
     {
       "case": "Onsite observation plus independent digital hash checks",
       "digital_profile": "integrity_checked",
-      "relationships_checked": ["hashes", "mirrors_bytes"],
+      "relationships_checked": [
+        "hashes",
+        "mirrors_bytes"
+      ],
       "physical_observation": "onsite_observation",
       "external_witness": "independent_report",
       "coverage_scope": "component_subset",

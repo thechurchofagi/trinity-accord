@@ -161,6 +161,7 @@
   <url><loc>https://www.trinityaccord.org/api/independent-attestation-record-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/innovation-points.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/inscription-boundaries.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/interpretation-model-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/issue-intake-machine-block-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/issue-submission-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/issue-text-claim-guard.json</loc></url>
@@ -236,6 +237,7 @@
   <url><loc>https://www.trinityaccord.org/api/trust-root-history-record-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/v30-final-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-archive-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-claim-model.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-claim-scope.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
@@ -321,6 +323,8 @@
   <url><loc>https://www.trinityaccord.org/independent-verification/</loc></url>
   <url><loc>https://www.trinityaccord.org/innovations/</loc></url>
   <url><loc>https://www.trinityaccord.org/inscriptions/</loc></url>
+  <url><loc>https://www.trinityaccord.org/interpretation-verification-migration/</loc></url>
+  <url><loc>https://www.trinityaccord.org/interpretation-verification-model/</loc></url>
   <url><loc>https://www.trinityaccord.org/issue-intake-boundary/</loc></url>
   <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>

@@ -230,5 +230,9 @@
     "legacy_verification_levels": "/api/verification-levels.json",
     "legacy_context_depth_levels": "/api/context-depth-levels.json",
     "compatibility_rule": "New interpretation and reports use descriptive profiles. Current Builder records retain V and CC/CRL compatibility fields until a separately versioned schema migration."
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

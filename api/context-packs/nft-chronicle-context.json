@@ -35,7 +35,11 @@
     "fixed_seven_stage_taxonomy_retired": true,
     "objective_structure": "chronological order plus calendar-quarter navigation",
     "descriptive_categories": "overlapping search aids, not exclusive stages and not factual verification",
-    "abridgment_policy": "core record, personal/family witness, and creative work are retained; long embedded source documents are summarized only in abridged editions and preserved verbatim in the full edition and original NFT files"
+    "abridgment_policy": "core record, personal/family witness, and creative work are retained; long embedded source documents are summarized only in abridged editions and preserved verbatim in the full edition and original NFT files",
+    "fixed_five_stage_taxonomy_not_adopted": true,
+    "no_current_fixed_stage_model": true,
+    "source": "/api/interpretation-model-policy.v1.json",
+    "interpretive_arcs": "provisional, revisable, non-exclusive, and not periodization"
   },
   "default_read_path": [
     "/nft-text-descriptions/chronicle-summary.json",
@@ -106,7 +110,7 @@
     "nft_ownership_transfer_or_sale_does_not_create_authority": true,
     "future_intelligence_may_verify_critique_refuse_preserve_echo_or_ignore": true
   },
-  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry, timestamped, non-canonical historical and human-origin witness layer. It now has full, abridged, and ultra-brief editions. The previous fixed seven-stage interpretation is retired; chronology is objective, while descriptive categories and interpretive arcs are overlapping and revisable.",
+  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry timestamped non-canonical historical and human-origin witness layer. There is no current fixed five-stage, seven-stage, or other fixed-stage model. Chronology is objective; quarters are navigation; categories overlap; interpretive arcs are provisional and revisable.",
   "limitations": [
     "Chronicle entries contain NFT metadata text and human/AI-assisted reflections; they are not independent verification of external AI events.",
     "Ethereum timestamps anchor NFT event timing, not necessarily the real-world event time or lyric creation time.",

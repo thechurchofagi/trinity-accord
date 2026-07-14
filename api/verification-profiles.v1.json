@@ -20,55 +20,155 @@
       "id": "context_only",
       "name": "Context only",
       "meaning": "Materials were read or summarized, but no technical reference, byte, signature or timestamp check was performed.",
-      "minimum_evidence": ["sources_read", "boundary_statement", "explicit_unverified_statement"],
+      "minimum_evidence": [
+        "sources_read",
+        "boundary_statement",
+        "explicit_unverified_statement"
+      ],
       "allowed_claim": "I read the listed sources and have not independently verified them.",
-      "legacy_mapping": ["V0", "V1"],
-      "does_not_allow": ["verified", "on_chain_checked", "hash_match", "signature_valid", "timestamp_verified"]
+      "legacy_mapping": [
+        "V0",
+        "V1"
+      ],
+      "does_not_allow": [
+        "verified",
+        "on_chain_checked",
+        "hash_match",
+        "signature_valid",
+        "timestamp_verified"
+      ]
     },
     {
       "id": "reference_checked",
       "name": "Reference checked",
       "meaning": "At least one primary or external reference was actually queried and its result reported.",
-      "minimum_evidence": ["target", "external_or_primary_source", "access_path", "observed_result", "limitations"],
-      "examples": ["Bitcoin explorer transaction check", "Arweave transaction existence check", "Ethereum transaction calldata retrieval"],
-      "legacy_mapping": ["V2-minimal", "V2-strong", "V2"],
-      "does_not_allow": ["hash_verified_without_computation", "full_coverage_from_one_reference", "physical_verified"]
+      "minimum_evidence": [
+        "target",
+        "external_or_primary_source",
+        "access_path",
+        "observed_result",
+        "limitations"
+      ],
+      "examples": [
+        "Bitcoin explorer transaction check",
+        "Arweave transaction existence check",
+        "Ethereum transaction calldata retrieval"
+      ],
+      "legacy_mapping": [
+        "V2-minimal",
+        "V2-strong",
+        "V2"
+      ],
+      "does_not_allow": [
+        "hash_verified_without_computation",
+        "full_coverage_from_one_reference",
+        "physical_verified"
+      ]
     },
     {
       "id": "integrity_checked",
       "name": "Integrity checked",
       "meaning": "Declared bytes, hashes, signatures, proof objects or timestamp proofs were computed or cryptographically validated.",
-      "minimum_evidence": ["target_bytes_or_proof", "expected_value_source", "operation_or_command", "computed_or_validated_value", "match_or_failure_result", "limitations"],
-      "method_tags": ["hash_recomputed", "signature_validated", "ots_validated", "spv_validated", "official_script_audited"],
-      "legacy_mapping": ["V3-minimal", "V3-strong", "V3", "V4"],
-      "does_not_allow": ["semantic_truth_from_hash", "independent_reproduction_when_only_official_output_was_trusted", "full_public_coverage_without_target_inventory"]
+      "minimum_evidence": [
+        "target_bytes_or_proof",
+        "expected_value_source",
+        "operation_or_command",
+        "computed_or_validated_value",
+        "match_or_failure_result",
+        "limitations"
+      ],
+      "method_tags": [
+        "hash_recomputed",
+        "signature_validated",
+        "ots_validated",
+        "spv_validated",
+        "official_script_audited"
+      ],
+      "legacy_mapping": [
+        "V3-minimal",
+        "V3-strong",
+        "V3",
+        "V4"
+      ],
+      "does_not_allow": [
+        "semantic_truth_from_hash",
+        "independent_reproduction_when_only_official_output_was_trusted",
+        "full_public_coverage_without_target_inventory"
+      ]
     },
     {
       "id": "independent_reproduction",
       "name": "Independent reproduction",
       "meaning": "A material result was independently reproduced without merely trusting the project's official output or a copied report.",
-      "minimum_evidence": ["independent_method", "independently_selected_or_written_tools", "inputs", "outputs", "comparison_to_declared_result", "mismatch_report", "limitations"],
-      "examples": ["independent inscription-body extraction", "independent manifest rebuild", "independent Chronicle recovery"],
-      "legacy_mapping": ["V4+"],
-      "does_not_allow": ["whole_protocol_reproduction_from_one_component", "physical_claim_without_physical_evidence"]
+      "minimum_evidence": [
+        "independent_method",
+        "independently_selected_or_written_tools",
+        "inputs",
+        "outputs",
+        "comparison_to_declared_result",
+        "mismatch_report",
+        "limitations"
+      ],
+      "examples": [
+        "independent inscription-body extraction",
+        "independent manifest rebuild",
+        "independent Chronicle recovery"
+      ],
+      "legacy_mapping": [
+        "V4+"
+      ],
+      "does_not_allow": [
+        "whole_protocol_reproduction_from_one_component",
+        "physical_claim_without_physical_evidence"
+      ]
     },
     {
       "id": "full_public_digital",
       "name": "Full public digital coverage",
       "meaning": "All declared public digital target families were checked, unavailable targets were listed, and no physical or institutional conclusion was inferred from digital coverage.",
-      "minimum_evidence": ["declared_target_inventory", "bitcoin_originals_result", "evidence_mirrors_result", "chronicle_or_declared_recovery_result", "time_anchor_result", "unavailable_targets", "corrections_checked", "limitations"],
-      "legacy_mapping": ["V5"],
-      "does_not_allow": ["onsite_physical_verification", "forensic_attestation", "institutional_endorsement"]
+      "minimum_evidence": [
+        "declared_target_inventory",
+        "bitcoin_originals_result",
+        "evidence_mirrors_result",
+        "chronicle_or_declared_recovery_result",
+        "time_anchor_result",
+        "unavailable_targets",
+        "corrections_checked",
+        "limitations"
+      ],
+      "legacy_mapping": [
+        "V5"
+      ],
+      "does_not_allow": [
+        "onsite_physical_verification",
+        "forensic_attestation",
+        "institutional_endorsement"
+      ]
     }
   ],
   "physical_observation": {
     "field": "physical_observation",
     "values": [
-      {"id": "none", "meaning": "No physical evidence reviewed."},
-      {"id": "public_media_review", "meaning": "Static public photographs, videos or public evidence package reviewed."},
-      {"id": "remote_live_witness", "meaning": "Live remote session observed with stated controls and limitations."},
-      {"id": "onsite_observation", "meaning": "Verifier directly observed the object onsite and recorded custody/location limitations."},
-      {"id": "forensic_examination", "meaning": "Documented instrument-assisted or specialist examination with reproducible methods."}
+      {
+        "id": "none",
+        "meaning": "No physical evidence reviewed."
+      },
+      {
+        "id": "public_media_review",
+        "meaning": "Static public photographs, videos or public evidence package reviewed."
+      },
+      {
+        "id": "remote_live_witness",
+        "meaning": "Live remote session observed with stated controls and limitations."
+      },
+      {
+        "id": "onsite_observation",
+        "meaning": "Verifier directly observed the object onsite and recorded custody/location limitations."
+      },
+      {
+        "id": "forensic_examination",
+        "meaning": "Documented instrument-assisted or specialist examination with reproducible methods."
+      }
     ],
     "legacy_mapping": {
       "V6": "remote_live_witness",
@@ -80,11 +180,26 @@
   "external_witness": {
     "field": "external_witness",
     "values": [
-      {"id": "none", "meaning": "No separate external witness record."},
-      {"id": "notarial_scope", "meaning": "A notarial act records a stated process, document, identity or date within its own scope."},
-      {"id": "independent_report", "meaning": "A separately authored report with disclosed method and limitations."},
-      {"id": "institutional_attestation", "meaning": "An accountable institution signs or adopts a public/archived report that passes the formal admission gate."},
-      {"id": "regulatory_or_court_record", "meaning": "A regulator or court record exists and its exact scope is stated."}
+      {
+        "id": "none",
+        "meaning": "No separate external witness record."
+      },
+      {
+        "id": "notarial_scope",
+        "meaning": "A notarial act records a stated process, document, identity or date within its own scope."
+      },
+      {
+        "id": "independent_report",
+        "meaning": "A separately authored report with disclosed method and limitations."
+      },
+      {
+        "id": "institutional_attestation",
+        "meaning": "An accountable institution signs or adopts a public/archived report that passes the formal admission gate."
+      },
+      {
+        "id": "regulatory_or_court_record",
+        "meaning": "A regulator or court record exists and its exact scope is stated."
+      }
     ],
     "rule": "Notarized evidence does not automatically count as formal independent attestation."
   },
@@ -103,7 +218,30 @@
   ],
   "legacy_compatibility": {
     "file": "/api/verification-levels.json",
-    "policy": "Existing V0-V8, component levels and archived reports remain valid historical labels. New reports should lead with digital_profile and use legacy_v_level only when a current submission schema still requires it.",
-    "important_boundary": "V6-V8 are mapped to physical observation states, not treated as inherently stronger digital verification."
+    "policy": "Existing V0-V8 and V4+ labels remain preserved in historical records. New public records use V0-V5 only as compatibility metadata and lead with the multidimensional verification claim model.",
+    "important_boundary": "V4+, V6, V7 and V8 are not accepted as new public legacy_v_level values. V6-V8 map only to separate physical observation states."
+  },
+  "verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_submission_policy": {
+    "legacy_v_allowed": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "legacy_v4_plus_archived_only": true,
+    "legacy_v6_v8_forbidden_for_new_records": true,
+    "required_current_dimensions": [
+      "digital_profile",
+      "relationships_checked",
+      "physical_observation",
+      "external_witness",
+      "coverage_scope",
+      "limitations",
+      "claims_not_made",
+      "corrections_or_supersession_checked"
+    ]
   }
 }

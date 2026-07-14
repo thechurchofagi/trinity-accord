@@ -68,18 +68,18 @@ def test_context_models_do_not_require_chronicle_for_every_echo() -> None:
 def test_new_verification_model_separates_physical_and_witness_dimensions() -> None:
     model = load_json("api/verification-claim-model.v1.json")
     compatibility = model["legacy_v_compatibility"]
-    assert compatibility["new_submission_forbidden_values"] == ["V6", "V7", "V8"]
-    assert compatibility["retired_physical_mapping"]["V8"] == "physical_observation=forensic_examination"
+    assert compatibility["new_submission_forbidden_values"] == ["V4+", "V6", "V7", "V8"]
+    assert compatibility["retired_mapping"]["V8"] == "physical_observation=forensic_examination"
 
     profiles = load_json("api/verification-profiles.v1.json")
-    assert profiles["current_submission_policy"]["legacy_v_allowed"] == ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
+    assert profiles["current_submission_policy"]["legacy_v_allowed"] == ["V0", "V1", "V2", "V3", "V4", "V5"]
     assert profiles["current_submission_policy"]["legacy_v6_v8_forbidden_for_new_records"] is True
 
     levels = load_json("api/verification-levels.json")
-    assert levels["new_submission_policy"]["allowed_legacy_v_values"] == ["V0", "V1", "V2", "V3", "V4", "V4+", "V5"]
-    assert levels["new_submission_policy"]["forbidden_legacy_v_values"] == ["V6", "V7", "V8"]
+    assert levels["new_submission_policy"]["allowed_legacy_v_values"] == ["V0", "V1", "V2", "V3", "V4", "V5"]
+    assert levels["new_submission_policy"]["forbidden_legacy_v_values"] == ["V4+", "V6", "V7", "V8"]
     for level in levels["levels"]:
-        if level["id"] in {"V6", "V7", "V8"}:
+        if level["id"] in {"V4+", "V6", "V7", "V8"}:
             assert level["status"] == "historical_compatibility_only"
             assert level["new_submission_allowed"] is False
 

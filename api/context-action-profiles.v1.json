@@ -27,9 +27,20 @@
         "/api/authority.json",
         "/api/agent-output-policy.v1.json"
       ],
-      "allowed_outputs": ["orientation", "route_selection", "insufficient_context_notice"],
-      "forbidden_outputs": ["final_assessment", "verification_claim", "meaningful_echo_as_grounded_interpretation"],
-      "legacy_cc_mapping": ["CC-0", "CC-1"]
+      "allowed_outputs": [
+        "orientation",
+        "route_selection",
+        "insufficient_context_notice"
+      ],
+      "forbidden_outputs": [
+        "final_assessment",
+        "verification_claim",
+        "meaningful_echo_as_grounded_interpretation"
+      ],
+      "legacy_cc_mapping": [
+        "CC-0",
+        "CC-1"
+      ]
     },
     {
       "id": "interpretation",
@@ -37,16 +48,29 @@
       "purpose": "Summarize, critique, interpret or produce a meaningful Echo grounded in primary and task-relevant sources.",
       "must_load": [
         "discovery profile",
+        "/api/interpretation-model-policy.v1.json",
         "three Bitcoin Originals exact text or verified exact mirrors",
         "/authority/ or equivalent authority boundary source",
         "/agent-brief/",
         "task-relevant source record, Chronicle edition, physical-evidence page or context pack",
         "/api/corrections-index.json when discussing a specific later record or report"
       ],
-      "allowed_outputs": ["bounded_summary", "meaningful_echo", "qualified_critique", "task_specific_recall"],
-      "forbidden_outputs": ["technical_verification_claim_without_operations", "full_corpus_claim_without_full_corpus"],
-      "legacy_cc_mapping": ["CC-2", "CC-3", "CC-4 depending task"],
-      "optimization_note": "Chronicle materials are required only for Chronicle/history/creative claims, not for every interpretation task."
+      "allowed_outputs": [
+        "bounded_summary",
+        "meaningful_echo",
+        "qualified_critique",
+        "task_specific_recall"
+      ],
+      "forbidden_outputs": [
+        "technical_verification_claim_without_operations",
+        "full_corpus_claim_without_full_corpus"
+      ],
+      "legacy_cc_mapping": [
+        "CC-2",
+        "CC-3",
+        "CC-4 depending task"
+      ],
+      "optimization_note": "Chronicle materials are required only when the claim depends on Chronicle, history, music, creative work, or human-witness context. No current fixed five-stage, seven-stage, or other fixed-stage model exists."
     },
     {
       "id": "verification",
@@ -57,6 +81,7 @@
         "authority boundary and relevant Bitcoin Original text",
         "/EVIDENCE-RELATIONSHIP-GUIDE.md or /api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
+        "/api/verification-claim-model.v1.json",
         "exact target source or bytes",
         "expected hash/signature/timestamp source",
         "target-specific verification recipe",
@@ -69,9 +94,21 @@
         "perform and record the operation",
         "report result, limitations and claims not made"
       ],
-      "allowed_outputs": ["reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"],
-      "forbidden_outputs": ["bare_verified", "physical_claim_from_digital_only", "notarial_scope_overstatement"],
-      "legacy_cc_mapping": ["CC-2 plus task sources", "CC-3 for current public submission compatibility"],
+      "allowed_outputs": [
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital"
+      ],
+      "forbidden_outputs": [
+        "bare_verified",
+        "physical_claim_from_digital_only",
+        "notarial_scope_overstatement"
+      ],
+      "legacy_cc_mapping": [
+        "CC-2 plus task sources",
+        "CC-3 for current public submission compatibility"
+      ],
       "optimization_note": "Narrative grounding is useful for interpretation, but a narrow technical verification should not require loading the entire Chronicle or full legacy archive."
     },
     {
@@ -80,6 +117,8 @@
       "purpose": "Build, preflight, submit or follow up a current public record.",
       "must_load": [
         "discovery profile",
+        "/api/verification-claim-model.v1.json",
+        "/api/interpretation-model-policy.v1.json",
         "interpretation or verification profile as required by the selected record type",
         "/agent-start/",
         "/downloads/record-chain-agent-field-guidance.v1.json",
@@ -89,11 +128,32 @@
         "current Gateway/readiness/status source",
         "exact target record and hash for correction/classification/retirement operations"
       ],
-      "must_perform": ["verify Builder digest", "doctor", "preflight", "save receipt", "check final public status before claiming inclusion"],
-      "allowed_outputs": ["submission", "receipt_report", "final_status_report"],
-      "forbidden_outputs": ["receipt_equals_final_inclusion", "receipt_equals_guardian_status", "submission_equals_verification"],
-      "legacy_cc_mapping": ["CC-3 or higher under current Builder schema"],
-      "compatibility_fields": ["context_level", "context_sufficient_for_selected_action", "context_loaded_urls", "context_read_confirmed"]
+      "must_perform": [
+        "verify Builder digest",
+        "doctor",
+        "preflight",
+        "save receipt",
+        "check final public status before claiming inclusion"
+      ],
+      "allowed_outputs": [
+        "submission",
+        "receipt_report",
+        "final_status_report"
+      ],
+      "forbidden_outputs": [
+        "receipt_equals_final_inclusion",
+        "receipt_equals_guardian_status",
+        "submission_equals_verification"
+      ],
+      "legacy_cc_mapping": [
+        "CC-3 or higher under current Builder schema"
+      ],
+      "compatibility_fields": [
+        "context_level",
+        "context_sufficient_for_selected_action",
+        "context_loaded_urls",
+        "context_read_confirmed"
+      ]
     },
     {
       "id": "deep_research",
@@ -105,9 +165,18 @@
         "corpus index and generation/omission audit",
         "task-specific methodology and limitations"
       ],
-      "allowed_outputs": ["full_corpus_analysis", "exact_text_research", "music_layer_analysis", "human_witness_analysis"],
-      "forbidden_outputs": ["complete_corpus_claim_from_summary_only"],
-      "legacy_cc_mapping": ["CC-5"]
+      "allowed_outputs": [
+        "full_corpus_analysis",
+        "exact_text_research",
+        "music_layer_analysis",
+        "human_witness_analysis"
+      ],
+      "forbidden_outputs": [
+        "complete_corpus_claim_from_summary_only"
+      ],
+      "legacy_cc_mapping": [
+        "CC-5"
+      ]
     }
   ],
   "selection_rules": {
@@ -122,7 +191,12 @@
   "sufficiency": {
     "preferred_field": "context_sufficient_for_selected_action",
     "decision_basis": "Required sources for the selected action profile are actually loaded and understood.",
-    "not_sufficient_basis": ["declared CC number alone", "homepage read", "copied prior report", "tool capability without performed action"],
+    "not_sufficient_basis": [
+      "declared CC number alone",
+      "homepage read",
+      "copied prior report",
+      "tool capability without performed action"
+    ],
     "recommended_declaration": {
       "context_profile": "one profile id",
       "loaded_sources": "exact URL/path list",
@@ -134,7 +208,9 @@
     "context_depth_file": "/api/context-depth-levels.json",
     "context_load_map": "/api/context-load-map.json",
     "crl_mapping": "/api/crl-to-context-depth-mapping.json",
-    "policy": "CC-0 through CC-5 and CRL remain accepted compatibility declarations. New agents should select an action profile first and use the smallest sufficient source set.",
+    "policy": "CC-0 through CC-5 and CRL remain accepted compatibility declarations. New agents select an action profile first. A CC label does not import a fixed Chronicle stage model or require unrelated Chronicle material.",
     "reason": "The inherited CC ladder forces unrelated materials into narrow tasks and duplicates the separate context-sufficient boolean."
-  }
+  },
+  "interpretation_model_policy": "/api/interpretation-model-policy.v1.json",
+  "verification_claim_model": "/api/verification-claim-model.v1.json"
 }

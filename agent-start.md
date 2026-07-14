@@ -5,6 +5,10 @@ permalink: /agent-start/
 
 # Agent Start
 
+<!-- current-model-policy-v1 -->
+> **Current interpretation and verification model:** The Chronicle has no current fixed five-stage, seven-stage, or other fixed-stage periodization. Use objective chronology, quarter navigation, overlapping categories, and explicitly provisional interpretation. New verification reports separate digital profile, evidence relationships, physical observation, and external witness; V4+/V6/V7/V8 are historical-only labels. See `/interpretation-verification-model/`, `/api/interpretation-model-policy.v1.json`, and `/api/verification-claim-model.v1.json`.
+
+
 This page is the recommended starting point for agents.
 
 First-pass framing: this is a civilizational self-archive and completed pre-ASI human–superintelligence relation record; use this page only as a non-authoritative routing guide to the current Builder, APIs, and Canon boundaries.

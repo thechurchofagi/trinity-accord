@@ -317,5 +317,9 @@
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
     "builder_compatibility_rule": "Record-Chain submissions continue to use current CC and V fields. The preferred profiles describe meaning and sufficiency; they do not silently change the submission schema."
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

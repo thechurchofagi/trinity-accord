@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "formal_common_required_cli_options": [
@@ -86,21 +86,31 @@
         "attestation"
       ],
       "before_build": [
-        "Describe the verification actions actually performed in body and reason fields.",
-        "Select only a verification level that is supported by evidence actually produced in the current work.",
-        "Do not claim V6 or higher unless the system explicitly supports reproducible evidence for that level.",
-        "Cite files, commands, test results, PRs, or review evidence when available.",
-        "Let Builder and downstream tooling compute generated hashes."
+        "Describe only verification actions actually performed in the current work.",
+        "Use V0-V5 only as legacy Builder compatibility metadata.",
+        "Select a digital_profile, exact evidence relationships, physical observation, external witness, coverage scope, limitations, claims not made, and corrections/supersession status.",
+        "V4+, V6, V7, and V8 are historical-only and must not be used for a new public submission.",
+        "Physical observation, notarization, or external witness never automatically raises digital verification or creates authority."
       ],
       "builder_command": "verification",
       "record_specific_required_cli_options": [
-        "--verification-level",
+        "--verification-level V0|V1|V2|V3|V4|V5",
+        "--digital-profile",
+        "--relationships-checked",
+        "--physical-observation",
+        "--external-witness",
+        "--coverage-scope",
+        "--limitations",
+        "--claims-not-made",
+        "--corrections-or-supersession-checked true|false",
         "--what-was-checked",
         "--verification-claim",
         "--fresh-actions"
       ],
       "public_verification_level_limit": "V0-V5 only",
-      "also_requires": "formal_common_required_cli_options"
+      "also_requires": "formal_common_required_cli_options",
+      "v6_v8_status": "historical_compatibility_only",
+      "current_claim_model": "/api/verification-claim-model.v1.json"
     },
     "guardian_application": {
       "purpose": "Application for Guardian status and stewardship commitment. The application record itself is not proof of active Guardian status.",
@@ -244,8 +254,8 @@
       "unclear_action": "BUILDER_USAGE_UNCLEAR"
     },
     "verification_level": {
-      "meaning": "Self-declared verification posture for verification records.",
-      "how_to_fill": "Use only a level supported by actions actually performed and evidence actually available. Do not claim unsupported V6+ reproducibility.",
+      "meaning": "Legacy V0-V5 compatibility metadata for a verification record; not the current headline model.",
+      "how_to_fill": "Use V0-V5 only and pair it with the complete verification_claim_model. Never use V4+, V6, V7, or V8 for a new public submission.",
       "unclear_action": "BUILDER_USAGE_UNCLEAR"
     },
     "guardian_public_key_sha256": {

@@ -69,7 +69,7 @@ The previous generated context divided the Chronicle into seven fixed stages. Th
 - broad substring matching inflated theme counts and made some themes appear nearly universal;
 - chronological proximity does not prove that entries belong to one exclusive historical phase.
 
-The corrected model separates:
+No fixed five-stage, seven-stage, or other fixed-stage model is current. The corrected model separates:
 
 - **objective chronology** — Ethereum NFT event timestamps;
 - **calendar navigation** — quarters, used only for locating entries;

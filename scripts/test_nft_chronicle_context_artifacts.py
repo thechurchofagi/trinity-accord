@@ -46,6 +46,8 @@ require("missing" not in methods, "timestamp methods must not contain missing")
 
 policy = idx.get("interpretation_policy", {})
 require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")
+require(policy.get("no_current_five_stage_model") is True, "no fixed five-stage replacement may be current")
+require(policy.get("fixed_stage_count") is None, "current fixed stage count must be null")
 require("seven" in policy.get("reason", "").lower(), "retirement reason must identify the former seven-stage scheme")
 require("character accounting" in policy.get("abridgment", ""), "abridgment policy must require character accounting")
 require(idx.get("calendar_period_counts"), "calendar period counts missing")
@@ -125,7 +127,7 @@ if ultra_path.exists():
     require("ultra-brief 175-entry timeline" in lower, "ultra-brief heading missing")
     data_rows = [line for line in ultra.splitlines() if line.startswith("| ")][1:]
     require(len(data_rows) == 175, f"ultra-brief timeline must have 175 rows, got {len(data_rows)}")
-    require("seven-stage narrative" not in lower, "ultra-brief edition must not reinstate the old seven-stage narrative")
+    require("fixed-stage periodization is used" not in lower, "ultra-brief edition must not reinstate a fixed-stage periodization")
 
 ctx_path = DIR / "chronicle-agent-context.md"
 if ctx_path.exists():
@@ -134,7 +136,7 @@ if ctx_path.exists():
     require("corrected agent context" in lower, "agent context correction heading missing")
     require("with ethereum timestamps: 175" in lower, "agent context must state 175 timestamped entries")
     require("without timestamps: 0" in lower, "agent context must state zero untimestamped entries")
-    require("correction to the former seven-stage narrative" in lower, "agent context must explain stage correction")
+    require("retired fixed-stage interpretations" in lower, "agent context must explain retirement of fixed-stage interpretations")
     require("overlapping interpretive arcs" in lower, "agent context must use overlapping arcs")
     require("abridgment audit" in lower, "agent context must expose the abridgment audit")
     require("## seven-stage narrative" not in lower, "agent context must not retain old seven-stage section")

@@ -118,9 +118,13 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "3604db9ada31c24a",
+  "source_digest": "877ce659dfb21640",
   "context_depth_reference": "/api/context-depth-levels.json",
   "preferred_context_model": "/api/context-action-profiles.v1.json",
   "preferred_verification_model": "/api/verification-profiles.v1.json",
-  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json"
+  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

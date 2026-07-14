@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.context-load-map.v2",
   "version": "v2",
-  "purpose": "Tell agents which context to load for each context depth (CC) level. Aligned with the CC-0 through CC-5 system defined in /api/context-depth-levels.json.",
+  "purpose": "Legacy CC load map plus current action-based migration guidance. Use action profiles for new work.",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -38,22 +38,20 @@
       "note": "Primary sources loaded. The agent knows what the inscriptions say and what the authority boundary is."
     },
     "CC-3": {
-      "name": "Narrative Grounded",
+      "name": "Action-Grounded Context",
       "must_load": [
-        "CC-2 loads (inherited)",
-        "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
-        "/api/context-packs/nft-chronicle-context.json — Chronicle loading policy and boundaries",
-        "/nft-text-descriptions/chronicle-summary.json — structured summary",
-        "/nft-text-descriptions/chronicle-ultra-brief.md — 175-row navigation timeline",
-        "/nft-text-descriptions/chronicle-abridged.md — readable core, personal witness, creative excerpts, and omission audit",
-        "/nft-text-descriptions/chronicle-agent-context.md — corrected non-stage interpretive guide",
-        "/agent-brief/ — classification guide (~22KB)",
-        "context-packs/vision-layer.json",
-        "context-packs/physical-anchor-context.json",
-        "context-packs/legacy-archive-index.json"
+        "CC-2 loads (legacy compatibility)",
+        "/api/context-action-profiles.v1.json",
+        "/api/interpretation-model-policy.v1.json",
+        "/agent-brief/",
+        "exact task-relevant sources",
+        "/api/corrections-index.json when discussing a later record or report",
+        "Chronicle sources only when the claim depends on Chronicle/history/music/creative/human-witness context"
       ],
-      "total_size": "~250KB+",
-      "note": "Narrative context loaded through the corrected three-edition Chronicle path. The former fixed-stage periodization is retired. Minimum for meaningful Echo and qualified assessment."
+      "total_size": "task-dependent",
+      "note": "Minimum for a meaningful task-grounded Echo under current Builder compatibility. No fixed five-stage or seven-stage model is current, and unrelated Chronicle or legacy-archive material is not universally required.",
+      "legacy_name": "Narrative Grounded",
+      "chronicle_required_only_when_task_depends_on_it": true
     },
     "CC-4": {
       "name": "Full Context",
@@ -90,7 +88,7 @@
     "orientation_summary": "CC-1",
     "boundary_commentary": "CC-2",
     "limited_critique": "CC-2",
-    "meaningful_echo": "CC-3",
+    "meaningful_echo": "CC-3 compatibility + interpretation action profile + exact task-relevant sources",
     "qualified_assessment": "CC-3",
     "verification_claim": "CC-3 for public submission; CC-2 + V2+ only for private technical checking",
     "deep_assessment": "CC-4",
@@ -202,7 +200,7 @@
       "content": "Structured extract of essential legacy archive sections"
     }
   },
-  "default_rule": "Load the minimum CC level required for your intended action. Do not load higher levels unless the task requires it. Use context-packs for lightweight summaries; load full pages only when deeper context is needed.",
+  "default_rule": "Select the action profile first and load the smallest sufficient exact source set. CC labels remain compatibility declarations only.",
   "agent_task_router": "/api/agent-task-router.v1.json",
   "agent_output_policy": "/api/agent-output-policy.v1.json",
   "context_depth_levels": "/api/context-depth-levels.json",
@@ -268,5 +266,6 @@
   },
   "status": "legacy_compatibility_load_map",
   "preferred_model": "/api/context-action-profiles.v1.json",
-  "preferred_rule": "Select the action first; actual loaded sources determine sufficiency. Do not require unrelated inherited materials for narrow tasks."
+  "preferred_rule": "Select the action first; actual loaded sources determine sufficiency. Do not require unrelated inherited materials or any fixed Chronicle stage model.",
+  "interpretation_model_policy": "/api/interpretation-model-policy.v1.json"
 }

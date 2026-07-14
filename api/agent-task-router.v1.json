@@ -369,7 +369,7 @@
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "0f6f155b792f5926",
+  "source_digest": "75d9510b5d573837",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
@@ -377,5 +377,9 @@
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
     "legacy_builder_fields_remain_required": true
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }
