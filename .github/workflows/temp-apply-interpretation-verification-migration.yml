@@ -1,0 +1,182 @@
+name: Temporary interpretation verification migration
+
+on:
+  push:
+    branches:
+      - agent/retire-fixed-stage-and-clarify-verification
+
+permissions:
+  contents: write
+
+concurrency:
+  group: temp-interpretation-verification-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/retire-fixed-stage-and-clarify-verification
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '20'
+
+      - name: Apply migration and regenerate Chronicle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_nft_chronicle_context.py
+          python3 scripts/temp_apply_interpretation_verification_migration.py
+          python3 scripts/chronicle_editions_v2.py
+
+      - name: Refresh generated metadata and test contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+
+          def canonical(data):
+              return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+
+          # Generated Chronicle test wording now reflects retirement of every fixed-stage default.
+          p = root / 'scripts/test_nft_chronicle_context_artifacts.py'
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('require("correction to the former seven-stage narrative" in lower, "agent context must explain stage correction")', 'require("retired fixed-stage interpretations" in lower, "agent context must explain retirement of fixed-stage interpretations")')
+          s = s.replace('require("seven-stage narrative" not in lower, "ultra-brief edition must not reinstate the old seven-stage narrative")', 'require("fixed-stage periodization is used" not in lower, "ultra-brief edition must not reinstate a fixed-stage periodization")')
+          if 'no_current_five_stage_model' not in s:
+              s = s.replace('require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")', 'require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")\nrequire(policy.get("no_current_five_stage_model") is True, "no fixed five-stage replacement may be current")\nrequire(policy.get("fixed_stage_count") is None, "current fixed stage count must be null")')
+          p.write_text(s, encoding='utf-8')
+
+          # Run the Builder behavior regression in the ordinary current-system suite.
+          p = root / 'scripts/run_current_system_tests.py'
+          s = p.read_text(encoding='utf-8')
+          anchor = '        "tests/test_interpretation_and_verification_migration.py",\n'
+          extra = '        "scripts/test_builder_multidimensional_verification.py",\n'
+          if extra not in s:
+              if anchor not in s:
+                  raise SystemExit('current-system runner migration anchor missing')
+              s = s.replace(anchor, anchor + extra, 1)
+          p.write_text(s, encoding='utf-8')
+
+          # Refresh canonical source_digest fields only in active files changed by this migration.
+          digest_paths = [
+              'api/agent-first-contact.json',
+              'api/agent-minimal-context.v1.json',
+              'api/agent-start.v2.json',
+              'api/agent-task-router.v1.json',
+              'api/links.json',
+              'api/verification-levels.json',
+              '.well-known/agent.json',
+              '.well-known/trinity-accord.json',
+          ]
+          for rel in digest_paths:
+              path = root / rel
+              data = json.loads(path.read_text(encoding='utf-8'))
+              if 'source_digest' not in data:
+                  continue
+              old = str(data['source_digest'])
+              payload = {k: v for k, v in data.items() if k != 'source_digest'}
+              digest = hashlib.sha256(canonical(payload)).hexdigest()
+              data['source_digest'] = digest[:len(old)]
+              path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # Refresh Builder bundle hash/size and active references, preserving historical records.
+          builder = root / 'downloads/record-chain-builder.mjs'
+          manifest_path = root / 'api/record-chain-builder-bundles.v1.json'
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          old_hash = manifest['canonical_builder']['sha256']
+          new_hash = hashlib.sha256(builder.read_bytes()).hexdigest()
+          manifest['canonical_builder']['sha256'] = new_hash
+          manifest['canonical_builder']['size_bytes'] = builder.stat().st_size
+          manifest['canonical_builder']['version'] = 'v2.1'
+          supports = manifest['canonical_builder'].setdefault('supports', [])
+          for item in ['multidimensional_verification_claims', 'action_profile_declaration']:
+              if item not in supports:
+                  supports.append(item)
+          manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          excluded = ('record-chain/', 'records/', 'archive/', 'legacy/', 'echoes/', 'reports/', 'submissions/', 'evidence/')
+          for path in root.rglob('*'):
+              if not path.is_file() or path.is_symlink():
+                  continue
+              rel = path.as_posix()
+              if rel.startswith(excluded) or rel == 'downloads/record-chain-builder.mjs':
+                  continue
+              try:
+                  value = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              if old_hash in value:
+                  path.write_text(value.replace(old_hash, new_hash), encoding='utf-8')
+          PY
+          python3 scripts/generate_sitemap.py
+
+      - name: Remove temporary migration machinery
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f scripts/temp_apply_interpretation_verification_migration.py
+          rm -f .github/workflows/temp-apply-interpretation-verification-migration.yml
+
+      - name: Run focused migration validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tests/test_interpretation_and_verification_migration.py
+          python3 scripts/test_builder_multidimensional_verification.py
+          python3 scripts/test_nft_chronicle_context_artifacts.py
+          python3 scripts/test_chronicle_site_integration.py
+          python3 scripts/test_builder_oath_readback_canonical_output.py
+          python3 scripts/check_builder_receipt_boundary_sync.py
+          python3 scripts/generate_sitemap.py --check
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          for rel in [
+              'api/interpretation-model-policy.v1.json',
+              'api/verification-claim-model.v1.json',
+              'api/context-action-profiles.v1.json',
+              'api/context-depth-levels.json',
+              'api/context-load-map.json',
+              'api/agent-required-reading.json',
+              'api/verification-profiles.v1.json',
+              'api/verification-levels.json',
+              'api/record-chain-submission-schema.v1.json',
+              'api/record-chain-oath-policy.v1.json',
+              'downloads/record-chain-agent-field-guidance.v1.json',
+          ]:
+              json.loads(Path(rel).read_text(encoding='utf-8'))
+          print('MIGRATION_JSON_OK')
+          PY
+
+      - name: Commit permanent migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-migration-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No migration changes to commit"
+            exit 0
+          fi
+          git commit -m "model: migrate interpretation and verification claims"
+          git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
