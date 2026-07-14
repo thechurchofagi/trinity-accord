@@ -37,9 +37,6 @@ jobs:
           import json
           from pathlib import Path
 
-          # Correct the one confirmed registry transcription error. The exact
-          # value is recorded by the legacy homepage for both AR and ETH and
-          # matches the repository bytes.
           index_path = Path("archive/legacy-pointers/index.json")
           index = json.loads(index_path.read_text(encoding="utf-8"))
           columns = index["arweave_columns"]
@@ -63,8 +60,6 @@ jobs:
               encoding="utf-8",
           )
 
-          # Preserve old Builder/schema terminology while making the new
-          # action-based model primary.
           agent_start = Path("agent-start.md")
           text = agent_start.read_text(encoding="utf-8")
           text = text.replace(
@@ -77,8 +72,6 @@ jobs:
           )
           agent_start.write_text(text, encoding="utf-8")
 
-          # Recompute metadata digests for every modified API that uses the
-          # repository's canonical source_digest convention.
           candidates = [
               Path("api/verification-levels.json"),
               Path("api/context-depth-levels.json"),
@@ -212,12 +205,10 @@ jobs:
           python3 -m pytest -q \
             tests/test_evidence_relationship_profiles.py \
             tests/test_legacy_pointer_coverage.py
-      - name: Validate P0 and full current system
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 scripts/run_ci_group.py p0-current
-          python3 scripts/run_current_system_tests.py
+      - name: Validate P0 current gate
+        run: python3 scripts/run_ci_group.py p0-current
+      - name: Validate full current system
+        run: python3 scripts/run_current_system_tests.py
       - name: Validate Builder compatibility
         shell: bash
         run: |
