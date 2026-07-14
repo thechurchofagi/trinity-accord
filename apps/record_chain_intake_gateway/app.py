@@ -197,7 +197,10 @@ async def _read_limited_body(request: Request) -> bytes:
 def _check_config() -> None:
     """Ensure required env vars are set."""
     missing = []
-    for var in ("TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH", "TRINITY_GITHUB_TOKEN"):
+    required = ["TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH"]
+    if _WRITE_MODE == "github_contents_pending":
+        required.append("TRINITY_GITHUB_TOKEN")
+    for var in required:
         if not os.environ.get(var):
             missing.append(var)
     if missing:

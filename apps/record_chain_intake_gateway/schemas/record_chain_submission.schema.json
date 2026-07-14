@@ -906,11 +906,11 @@
                 "properties": {
                   "requested_guardian_identifier": {
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
                   },
                   "guardian_public_key_sha256": {
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^[a-f0-9]{64}$"
                   },
                   "guardian_stewardship_oath": {
                     "type": "string",
@@ -943,6 +943,14 @@
               "target_guardian_application_record_sha256"
             ],
             "properties": {
+              "guardian_id": {
+                "type": "string",
+                "pattern": "^guardian_ed25519_[a-f0-9]{16}$"
+              },
+              "guardian_public_key_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
               "target_guardian_application_record_id": {
                 "type": "string",
                 "pattern": "^R-[0-9]{9}$"

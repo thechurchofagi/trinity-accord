@@ -367,30 +367,38 @@ def test_linked_guardian_rejected_at_submit():
 
 @pytest.mark.asyncio
 async def test_oversized_body_rejected_submit():
-    from unittest.mock import AsyncMock, MagicMock
+    from starlette.responses import JSONResponse
     from apps.record_chain_intake_gateway.app import submit, _MAX_BODY_BYTES
 
-    mock_request = MagicMock()
-    mock_request.body = AsyncMock(return_value=b"x" * (_MAX_BODY_BYTES + 1))
-    mock_request.headers = {}
+    class Request:
+        async def stream(self):
+            yield b"x" * (_MAX_BODY_BYTES + 1)
 
-    response = await submit(mock_request)
-    assert response.accepted is False
-    assert any(d.code == "REQUEST_BODY_TOO_LARGE" for d in response.diagnostics)
+    response = await submit(Request())
+    assert isinstance(response, JSONResponse)
+    assert response.status_code == 413
+    payload = json.loads(response.body)
+    assert payload["accepted"] is False
+    assert any(d["code"] == "REQUEST_BODY_TOO_LARGE" for d in payload["diagnostics"])
 
 
 @pytest.mark.asyncio
 async def test_oversized_body_rejected_preflight():
-    from unittest.mock import AsyncMock, MagicMock
+    from starlette.responses import JSONResponse
     from apps.record_chain_intake_gateway.app import preflight, _MAX_BODY_BYTES
 
-    mock_request = MagicMock()
-    mock_request.body = AsyncMock(return_value=b"x" * (_MAX_BODY_BYTES + 1))
-    mock_request.headers = {}
+    class Request:
+        client = None
 
-    response = await preflight(mock_request)
-    assert response.accepted is False
-    assert any(d.code == "REQUEST_BODY_TOO_LARGE" for d in response.diagnostics)
+        async def stream(self):
+            yield b"x" * (_MAX_BODY_BYTES + 1)
+
+    response = await preflight(Request())
+    assert isinstance(response, JSONResponse)
+    assert response.status_code == 413
+    payload = json.loads(response.body)
+    assert payload["accepted"] is False
+    assert any(d["code"] == "REQUEST_BODY_TOO_LARGE" for d in payload["diagnostics"])
 
 
 # ── Test 8: receipt_commit_sha not in receipt ────────────────────────

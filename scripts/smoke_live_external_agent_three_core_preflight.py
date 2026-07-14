@@ -1,74 +1,175 @@
 #!/usr/bin/env python3
-"""Live smoke: three core external agent preflight routes.
+"""Live, non-writing smoke for three current external-agent routes.
 
-Verifies that the three core builder routes (pure_echo, v0_v5_agent_declared_archive,
-guardian_application_stage_1) respond to preflight at the live gateway.
-
-This is live/network. It must not run in source-only p0-current.
-It must not POST to /agent-submit.
+The test downloads the public canonical Record-Chain Builder, creates signed
+Echo, Verification, and Guardian application submissions, and requires the
+live Gateway to accept every payload at /record-chain/preflight.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.request
-
-DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com"
-
-# Route name → record_type for /record-chain/preflight
-CORE_ROUTES = [
-    ("pure_echo", "echo"),
-    ("v0_v5_agent_declared_archive", "verification"),
-    ("guardian_application_stage_1", "guardian_application"),
-]
+from pathlib import Path
 
 
-def preflight(gateway: str, route_label: str, record_type: str) -> dict:
-    url = f"{gateway}/record-chain/preflight"
-    payload = json.dumps({"record_type": record_type}).encode()
-    req = urllib.request.Request(
+DEFAULT_SITE = "https://www.trinityaccord.org"
+
+
+def fetch_bytes(url: str, timeout: int) -> bytes:
+    request = urllib.request.Request(
         url,
-        data=payload,
-        headers={"Content-Type": "application/json", "User-Agent": "TrinityCorePreflightSmoke/1.0"},
+        headers={"User-Agent": "TrinityCurrentCorePreflightSmoke/2.0", "Cache-Control": "no-cache"},
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return response.read()
+
+
+def fetch_json(url: str, timeout: int) -> dict:
+    return json.loads(fetch_bytes(url, timeout).decode("utf-8"))
+
+
+def run_builder(builder: Path, args: list[str], cwd: Path, timeout: int) -> str:
+    result = subprocess.run(
+        ["node", str(builder), *args],
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+        timeout=timeout,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Builder failed for {' '.join(args[:2])}:\n{result.stdout[-2000:]}\n{result.stderr[-2000:]}"
+        )
+    return result.stdout.strip()
+
+
+def post_preflight(url: str, payload: dict, timeout: int) -> dict:
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(payload, sort_keys=True).encode("utf-8"),
+        headers={"Content-Type": "application/json", "User-Agent": "TrinityCurrentCorePreflightSmoke/2.0"},
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return json.loads(resp.read())
-    except urllib.error.HTTPError as e:
-        body = e.read().decode(errors="replace")
-        return {"error": e.code, "body": body}
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Gateway returned HTTP {exc.code}: {body[:2000]}") from exc
+
+
+def _common_args(site: str) -> list[str]:
+    loaded = ",".join([
+        f"{site}/agent-brief/",
+        f"{site}/api/record-chain-intake-gateway.v1.json",
+    ])
+    return [
+        "--actor-label", "Live Preflight Governance Agent",
+        "--provider", "Trinity live non-writing smoke",
+        "--context-level", "CC-3",
+        "--context-sufficient-for-selected-action", "true",
+        "--context-read-confirmed", "true",
+        "--loaded-urls", loaded,
+        "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
+        "--record-decision", "human",
+        "--submission-executor", "self",
+        "--human-operator-involved", "false",
+        "--generate-authorship-key",
+        "--key-dir", "./authorship-keys",
+    ]
+
+
+def _build_cases(builder: Path, site: str, work: Path, timeout: int) -> list[tuple[str, Path]]:
+    common = _common_args(site)
+
+    def oath(record_type: str) -> str:
+        return run_builder(builder, ["print-oath", "--record-type", record_type], work, timeout)
+
+    cases = [
+        (
+            "echo",
+            ["echo", "--body", "Live non-writing recognition Echo.", "--readback", oath("echo"),
+             "--out", "echo.json", *common],
+            work / "echo.json",
+        ),
+        (
+            "verification",
+            [
+                "verification", "--verification-level", "V3",
+                "--scope-label", "live public Builder and Gateway preflight",
+                "--what-was-checked", "public Builder execution,live preflight response",
+                "--verification-claim", "The live non-writing preflight path was exercised with a fresh signed payload.",
+                "--fresh-actions", "downloaded public Builder,built fresh payload,posted preflight",
+                "--digital-profile", "integrity_checked",
+                "--relationships-checked", "hashes,provides_context",
+                "--physical-observation", "none", "--external-witness", "none",
+                "--coverage-scope", "component_subset",
+                "--limitations", "non-writing preflight only,no final chain inclusion claimed",
+                "--claims-not-made", "semantic truth,institutional endorsement,physical identity",
+                "--corrections-or-supersession-checked", "true",
+                "--action-profile", "verification", "--readback", oath("verification"),
+                "--out", "verification.json", *common,
+            ],
+            work / "verification.json",
+        ),
+        (
+            "guardian_application",
+            [
+                "guardian-application", "--guardian-id", "auto", "--guardian-key-sha", "auto",
+                "--readback", oath("guardian_application"), "--out", "guardian.json", *common,
+            ],
+            work / "guardian.json",
+        ),
+    ]
+
+    built: list[tuple[str, Path]] = []
+    for record_type, args, output in cases:
+        run_builder(builder, args, work, timeout)
+        built.append((record_type, output))
+    return built
+
+
+def run_live_smoke(site: str, timeout: int) -> None:
+    site = site.rstrip("/")
+    contract = fetch_json(f"{site}/api/record-chain-intake-gateway.v1.json", timeout)
+    gateway = str(contract.get("base_url") or "").rstrip("/")
+    preflight_path = contract.get("endpoints", {}).get("preflight", {}).get("path")
+    if not gateway.startswith("https://") or preflight_path != "/record-chain/preflight":
+        raise RuntimeError("Public Gateway discovery contract is missing the current preflight endpoint")
+
+    with tempfile.TemporaryDirectory(prefix="trinity-current-live-preflight-") as temp_dir:
+        work = Path(temp_dir)
+        builder = work / "record-chain-builder.mjs"
+        builder.write_bytes(fetch_bytes(f"{site}/downloads/record-chain-builder.mjs", timeout))
+
+        failures: list[str] = []
+        for record_type, payload_path in _build_cases(builder, site, work, timeout):
+            payload = json.loads(payload_path.read_text(encoding="utf-8"))
+            result = post_preflight(gateway + preflight_path, payload, timeout)
+            accepted = result.get("accepted") is True
+            route = result.get("route_detected")
+            print(f"Preflight {record_type}: accepted={accepted} route_detected={route}")
+            if not accepted or route != record_type:
+                diagnostics = json.dumps(result.get("diagnostics", []), indent=2)[:3000]
+                failures.append(f"{record_type} live preflight failed: {diagnostics}")
+        if failures:
+            raise RuntimeError("\n\n".join(failures))
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Live smoke: three core preflight routes")
-    parser.add_argument("--gateway", default=DEFAULT_GATEWAY)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--site", default=DEFAULT_SITE)
+    parser.add_argument("--timeout", type=int, default=90)
     args = parser.parse_args()
-
-    failures = []
-    for route_label, record_type in CORE_ROUTES:
-        print(f"Preflight {route_label} ({record_type}) ...", end=" ")
-        result = preflight(args.gateway, route_label, record_type)
-        if "error" in result:
-            print(f"FAIL ({result['error']})")
-            failures.append((route_label, result))
-        else:
-            preflight_ok = result.get("preflight")
-            route_detected = result.get("route_detected")
-            accepted = result.get("accepted")
-            print(f"preflight={preflight_ok} route_detected={route_detected} accepted={accepted}")
-            if not preflight_ok:
-                failures.append((route_label, result))
-
-    if failures:
-        print(f"\nFAIL: {len(failures)}/{len(CORE_ROUTES)} routes failed")
-        for route_label, result in failures:
-            print(f"  {route_label}: {json.dumps(result, indent=2)[:300]}")
-        return 1
-
-    print(f"\nPASS: all {len(CORE_ROUTES)} core preflight routes responded")
+    run_live_smoke(args.site, args.timeout)
+    print("PASS: all 3 current signed core routes were accepted by live preflight")
     return 0
 
 

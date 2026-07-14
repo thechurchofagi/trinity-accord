@@ -5,8 +5,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "41e49dd7ad68ad4fc826713625b7f60553c264bd2017c69f00689c5ba614bd77",
-    "size_bytes": 174793,
+    "sha256": "33a492a5ea4bbe0a0a8c3f6d96e2467a4e9ae0c6338daef98236a300fec7744d",
+    "size_bytes": 177179,
     "supports": [
       "echo",
       "verification",
@@ -18,11 +18,8 @@
       "context_insufficient_notice",
       "preflight",
       "submit",
-      "ed25519_authorship_proof",
-      "multidimensional_verification_claims",
-      "action_profile_declaration"
-    ],
-    "version": "v2.1"
+      "ed25519_authorship_proof"
+    ]
   },
   "agent_field_guidance": {
     "schema": "trinityaccord.record-chain-agent-field-guidance.v1",

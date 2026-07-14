@@ -54,6 +54,17 @@ def test_guardian_retirement_updates_derived_guardian_state(monkeypatch, tmp_pat
             "authorship_verification_status": {"verified_by_append_before_record": True},
         },
     )
+
+    trc.build_indexes(derived_at="2026-06-09T00:00:00Z")
+    guardian_state = json.loads((trc.INDEXES / "guardian-state.json").read_text(encoding="utf-8"))
+    active_entries = [g for g in guardian_state["guardians"] if g.get("guardian_id") == "guardian-alpha"]
+    assert len(active_entries) == 1
+    # A bare application record is not automatically active; activation is a
+    # stricter derived state that also requires complete proof/oath evidence.
+    assert active_entries[0]["current_derived_status"] == "application_recorded_pending_activation"
+    assert active_entries[0]["activation"]["eligible"] is False
+    assert active_entries[0]["activation"]["blocking_reasons"]
+
     _write_json(
         trc.RECORDS / "R-000000002.json",
         {

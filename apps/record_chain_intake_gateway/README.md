@@ -4,13 +4,13 @@ A FastAPI microservice that validates, sanitizes, and persists record submission
 
 ## Purpose
 
-This gateway sits between agent clients and the Trinity record-chain store. It:
+This gateway sits between agent clients and the Trinity Record-Chain intake. It:
 
 - **Validates** incoming submissions against JSON schemas and security rules
 - **Rejects** forbidden chain fields, private keys, and placeholder tokens
 - **Enforces** context-completeness minimums per record type and verification version
-- **Persists** approved records as canonical JSON files in the target repo
-- **Returns** signed receipts with SHA-256 content hashes
+- **Persists** accepted submissions, intake-only receipts, and pending candidates in the target repo
+- **Returns** SHA-256-verifiable intake receipts; a receipt is not final chain inclusion or Guardian activation
 
 ## Endpoints
 
@@ -32,11 +32,11 @@ All configuration is via environment variables:
 |----------|----------|-------------|
 | `TRINITY_REPO_FULL_NAME` | Yes | Target repo (e.g. `org/repo`) |
 | `TRINITY_TARGET_BRANCH` | Yes | Branch to write to (e.g. `main`) |
-| `TRINITY_GITHUB_TOKEN` | Yes | GitHub PAT with Contents write access |
+| `TRINITY_GITHUB_TOKEN` | In `github_contents_pending` mode | GitHub token with Contents write access |
 | `TRINITY_GATEWAY_BASE_URL` | No | Base URL for the Trinity Gateway runtime |
 | `TRINITY_GATEWAY_RUNTIME_VERSION` | No | Expected runtime version string |
 | `TRINITY_MAX_SUBMISSION_BYTES` | No | Max request body size (default: 524288) |
-| `TRINITY_SUBMIT_WRITE_MODE` | No | `commit` (default) or `dry-run` |
+| `TRINITY_SUBMIT_WRITE_MODE` | No | `github_contents_pending` (default) or `dry_run` |
 
 ## Running locally
 

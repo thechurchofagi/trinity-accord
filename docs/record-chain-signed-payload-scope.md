@@ -35,6 +35,8 @@ These fields remain in the signed scope when present in the submitted draft. Exa
 - `authorization_context`
 - `context_readiness`
 - `non_authority_boundary_acknowledgement`
+- `declaration_and_acknowledgement`
+- `submission_oath_verification`
 
 Changing any participant-signed content must invalidate the signature.
 
@@ -69,18 +71,17 @@ These fields may appear in pending or final records, but they are not part of th
 - `related_records`
 - `immutability_policy`
 
-### Gateway-derived receipt / oath projection fields
+### Gateway-derived recovery field
 
-Gateway may materialize these fields from validated intake context after the builder has signed the draft. They are important public evidence, but legacy submissions may not have included them in the signed payload domain:
+Server normalization may materialize this field after the builder has signed the draft:
 
-- `declaration_and_acknowledgement`
-- `submission_oath_verification`
+- `created_at`
 
-Append verification may use a narrow recovery scope that strips exactly these Gateway-derived fields when the primary signed-payload verification fails. This must not hide changes to participant-authored content such as `echo_content`.
-
-### Final-record verification recovery field
-
-A final record may contain `created_at` from server normalization after signing. Final re-verification may strip `created_at` only after primary verification fails.
+Append or final-record verification may use a narrow recovery scope that strips
+only `created_at` when the primary signed-payload verification fails. It must not
+strip `submission_oath_verification`, `declaration_and_acknowledgement`, or any
+other participant-authored content. Current non-exempt submissions must include
+the oath/declaration fields in `record_draft` before authorship signing.
 
 ## Non-negotiable safety rules
 
@@ -94,6 +95,6 @@ A final record may contain `created_at` from server normalization after signing.
 
 The contract is guarded by tests:
 
-- `tests/test_gateway_authorship_recovery.py` verifies that Gateway-derived oath/declaration projections can be present after signing, while content tampering is still rejected.
+- `tests/test_gateway_authorship_recovery.py` verifies that a server-derived `created_at` can be present after signing, while oath or content tampering is rejected.
 - `tests/test_signed_payload_scope_contract.py` verifies that the documented recovery fields match the Gateway authorship constants.
 - `tests/test_record_chain_status_consistency.py` verifies that chain-tip, public status, record index, receipt-status, and final records agree after append.

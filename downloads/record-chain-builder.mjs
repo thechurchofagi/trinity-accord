@@ -603,6 +603,17 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
     }
 
     recordDraft.guardian_public_key_sha256 = pubSha;
+
+    // Retirement must name the same deterministic Guardian identity as the
+    // continuity key.  "auto" is a CLI convenience and must never survive in
+    // the signed record_draft sent to Gateway target binding.
+    const derivedGuardianId = guardianIdForPublicKeySha(pubSha);
+    const requestedId = String(recordDraft.guardian_id || "").trim();
+    if (!requestedId || isAutoGuardianId(requestedId)) {
+      recordDraft.guardian_id = derivedGuardianId;
+    } else if (requestedId !== derivedGuardianId) {
+      errorExit("--guardian-id must identify the Guardian bound to the loaded authorship key; use --guardian-id auto");
+    }
   }
 
   const linked = recordDraft.optional_linked_guardian_application_request;
@@ -905,6 +916,11 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "body", "--body");
     requireExplicit(opts, "targetGuardianApplicationRecordId", "--target-guardian-application-record-id");
     requireExplicit(opts, "targetGuardianApplicationRecordSha256", "--target-guardian-application-record-sha256");
+
+    const guardianId = String(opts.guardianId || "").trim();
+    if (!isAutoGuardianId(guardianId) && !/^guardian_ed25519_[0-9a-f]{16}$/.test(guardianId)) {
+      errorExit("--guardian-id must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>");
+    }
 
     // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
     const guardianKeySha = String(opts.guardianKeySha || "").trim();
@@ -1708,6 +1724,13 @@ function guardianApplicationActiveEligibilityDiagnostics(draft) {
   if (!/^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256 || ""))) {
     diagnostics.push("guardian_key_not_sha256");
   }
+  if (
+    /^guardian_ed25519_[0-9a-f]{16}$/.test(String(gc.requested_guardian_identifier || "")) &&
+    /^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256 || "")) &&
+    gc.requested_guardian_identifier !== guardianIdForPublicKeySha(gc.guardian_public_key_sha256)
+  ) {
+    diagnostics.push("guardian_id_key_mismatch");
+  }
   if (!["CC-3", "CC-4", "CC-5"].includes(String(ctx.declared_context_level || "").toUpperCase())) {
     diagnostics.push("context_level_below_active_minimum");
   }
@@ -1865,6 +1888,33 @@ function runDoctor(submission) {
         field: "record_draft",
         meaning: `Guardian retirement is missing required field(s): ${missing.join(", ")}`,
         fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, --body, --target-guardian-application-record-id, and --target-guardian-application-record-sha256.",
+      });
+    }
+
+    if (
+      draft.guardian_id &&
+      !/^guardian_ed25519_[0-9a-f]{16}$/.test(String(draft.guardian_id))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_ID",
+        field: "record_draft.guardian_id",
+        meaning: "guardian_id must be the deterministic Guardian identifier derived from the continuity key; the literal CLI value 'auto' is not a valid record value.",
+        fix: "Rebuild with the current Builder and --guardian-id auto so the Builder derives guardian_ed25519_<key-prefix> before signing.",
+      });
+    }
+
+    if (
+      /^guardian_ed25519_[0-9a-f]{16}$/.test(String(draft.guardian_id || "")) &&
+      /^[0-9a-f]{64}$/.test(String(draft.guardian_public_key_sha256 || "")) &&
+      draft.guardian_id !== guardianIdForPublicKeySha(draft.guardian_public_key_sha256)
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "GUARDIAN_ID_KEY_MISMATCH",
+        field: "record_draft.guardian_id",
+        meaning: "guardian_id does not match guardian_public_key_sha256.",
+        fix: "Use the original Guardian continuity key and rebuild with --guardian-id auto.",
       });
     }
 
