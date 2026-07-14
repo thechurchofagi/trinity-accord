@@ -1,0 +1,323 @@
+name: Temporary port full public action audit
+
+on:
+  push:
+    branches:
+      - agent/full-public-action-matrix-post-659
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  port:
+    if: >-
+      (github.event_name == 'push' || github.head_ref == 'agent/full-public-action-matrix-post-659') &&
+      !startsWith(github.event.head_commit.message || '', 'audit: port full action matrix after PR659')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/full-public-action-matrix-post-659
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Port unique audit coverage onto current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin agent/end-to-end-action-audit
+          git show origin/agent/end-to-end-action-audit:scripts/test_full_public_action_lifecycle_e2e.py > scripts/full_public_action_lifecycle_e2e.py
+
+          cat > scripts/test_full_public_action_lifecycle_e2e.py <<'PY'
+          #!/usr/bin/env python3
+          """Run the full lifecycle simulation with explicit isolated Gateway config."""
+          from __future__ import annotations
+
+          import os
+
+          os.environ["TRINITY_REPO_FULL_NAME"] = "isolated/full-lifecycle-audit"
+          os.environ["TRINITY_TARGET_BRANCH"] = "isolated-audit"
+          os.environ["TRINITY_GITHUB_TOKEN"] = "isolated-test-token-not-used-for-network"
+          os.environ["TRINITY_SUBMIT_WRITE_MODE"] = "github_contents_pending"
+          os.environ["TRINITY_DISPATCH_APPEND_WORKFLOW"] = "0"
+
+          from full_public_action_lifecycle_e2e import main
+
+          if __name__ == "__main__":
+              raise SystemExit(main())
+          PY
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          # Gateway: Correction is author-only; Classification Update remains the
+          # third-party route. Insert after immutable target ID/SHA checks.
+          path = Path('apps/record_chain_intake_gateway/app.py')
+          text = path.read_text(encoding='utf-8')
+          if 'CORRECTION_TARGET_AUTHOR_MISMATCH' not in text:
+              start = text.index('async def _record_target_diagnostics')
+              end = text.index('\n\ndef _build_agent_recovery', start)
+              segment = text[start:end]
+              anchor = '    return diagnostics\n'
+              if segment.count(anchor) != 1:
+                  raise SystemExit('Gateway record target return anchor not found exactly once')
+              author_check = '''    if record_type == "correction" and isinstance(target, dict):
+        current_proof = body.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not re.fullmatch(r"[a-f0-9]{64}", str(target_key or "")):
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE",
+                severity="error",
+                field=f"{field_prefix}.target_record_id",
+                message="The target record does not expose a valid immutable author key for an author-only correction.",
+                meaning="Correction is reserved for the author of the target record. A third party must use classification_update or another non-authoritative response path.",
+                suggested_fix="Do not submit a correction. Use classification_update for third-party review, or ask the target author to sign the correction.",
+                retry_allowed=False,
+            ))
+        elif current_key != target_key:
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHOR_MISMATCH",
+                severity="error",
+                field="authorship_proof.public_key_sha256",
+                message="Correction signer does not match the immutable target record author key.",
+                meaning="The Correction oath is author-only; third-party critique or reclassification must use classification_update.",
+                suggested_fix="Use the same authorship key as the target record, or submit classification_update instead.",
+                retry_allowed=False,
+            ))
+'''
+              segment = segment.replace(anchor, author_check + anchor, 1)
+              text = text[:start] + segment + text[end:]
+              path.write_text(text, encoding='utf-8')
+
+          # Append defense in depth.
+          path = Path('scripts/trinity_record_chain.py')
+          text = path.read_text(encoding='utf-8')
+          if 'correction target author mismatch' not in text:
+              start = text.index('def require_record_target_binding')
+              end = text.index('\n\ndef append_records', start)
+              segment = text[start:end]
+              anchor = '    if target.get("record_sha256") != target_sha:\n        raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")\n'
+              if segment.count(anchor) != 1:
+                  raise SystemExit('append target SHA anchor not found exactly once')
+              author_check = '''    if record_type == "correction":
+        current_proof = draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not re.fullmatch(r"[a-f0-9]{64}", str(target_key or "")):
+            raise ValueError(
+                "correction target authorship unavailable; third-party review must use classification_update"
+            )
+        if current_key != target_key:
+            raise ValueError(
+                "correction target author mismatch; use the original author key or classification_update"
+            )
+'''
+              segment = segment.replace(anchor, anchor + author_check, 1)
+              text = text[:start] + segment + text[end:]
+              path.write_text(text, encoding='utf-8')
+
+          # Machine guidance.
+          path = Path('downloads/record-chain-agent-field-guidance.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          correction = data['record_types']['correction']
+          correction['purpose'] = (
+              'Author-only append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.'
+          )
+          required = [
+              'Use the same authorship key that signed the target record; Correction is author-only.',
+              'If you are not the target author, use classification_update instead of correction.',
+          ]
+          for item in reversed(required):
+              if item not in correction['before_build']:
+                  correction['before_build'].insert(0, item)
+          correction['not_for'] = [
+              'third-party critique or reclassification',
+              'overwriting or deleting the target record',
+              'authority, governance, attestation, or amendment',
+          ]
+          classification = data['record_types']['classification_update']
+          note = 'Use classification_update, not correction, for third-party review of a record you did not author.'
+          if note not in classification['before_build']:
+              classification['before_build'].insert(0, note)
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # Recovery helper: current verification language plus correction codes.
+          path = Path('api/record-chain-field-helper.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          advice = data['agent_recovery_protocol']['what_not_to_fake']
+          advice[:] = [
+              'Do not use retired V4+/V6/V7/V8 labels for a new public verification submission; use the current multidimensional verification claim model.'
+              if item == 'Do not claim V6+ verification without running the required scripts.' else item
+              for item in advice
+          ]
+          help_map = data['diagnostic_code_help']
+          help_map['CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE'] = {
+              'meaning': 'The target record lacks a valid immutable author key, so the author-only Correction path cannot establish continuity.',
+              'fix': 'Do not guess an author key. Use classification_update for third-party review, or ask the original target author to sign a correction.',
+              'recovery_possible': False,
+              'severity': 'error',
+          }
+          help_map['CORRECTION_TARGET_AUTHOR_MISMATCH'] = {
+              'meaning': 'The Correction signer key differs from the immutable target record author key.',
+              'fix': 'Rebuild with the original target author key. If you are a third party, use classification_update instead.',
+              'recovery_possible': False,
+              'severity': 'error',
+          }
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # Official current-system runner.
+          path = Path('scripts/run_current_system_tests.py')
+          text = path.read_text(encoding='utf-8')
+          needle = '        "scripts/test_agent_e2e_journey_matrix.py",\n'
+          addition = needle + '        "scripts/test_full_public_action_lifecycle_e2e.py",\n'
+          if '"scripts/test_full_public_action_lifecycle_e2e.py"' not in text:
+              if text.count(needle) != 1:
+                  raise SystemExit('current-system insertion anchor not found exactly once')
+              path.write_text(text.replace(needle, addition, 1), encoding='utf-8')
+          PY
+
+          cat > tests/test_correction_author_binding.py <<'PY'
+          """Correction is author-only at Gateway and append boundaries."""
+          from __future__ import annotations
+
+          import asyncio
+          import json
+
+          import pytest
+
+          from apps.record_chain_intake_gateway import app as app_module
+          import scripts.trinity_record_chain as chain
+
+
+          TARGET_ID = "R-000000001"
+          TARGET_SHA = "b" * 64
+          AUTHOR_KEY = "a" * 64
+          OTHER_KEY = "c" * 64
+
+
+          def submission(signer_key: str) -> dict:
+              return {
+                  "record_type": "correction",
+                  "record_draft": {
+                      "record_type": "correction",
+                      "correction_content": {
+                          "target_record_id": TARGET_ID,
+                          "target_record_sha256": TARGET_SHA,
+                      },
+                  },
+                  "authorship_proof": {"public_key_sha256": signer_key},
+              }
+
+
+          def target(author_key: str | None = AUTHOR_KEY) -> dict:
+              value = {
+                  "record_id": TARGET_ID,
+                  "record_type": "echo",
+                  "record_sha256": TARGET_SHA,
+              }
+              if author_key is not None:
+                  value["authorship_proof"] = {"public_key_sha256": author_key}
+              return value
+
+
+          def codes(monkeypatch: pytest.MonkeyPatch, body: dict, target_record: dict) -> set[str]:
+              async def fake_get_file_text(path: str) -> str | None:
+                  assert path == f"record-chain/records/{TARGET_ID}.json"
+                  return json.dumps(target_record)
+
+              monkeypatch.setattr(app_module, "get_file_text", fake_get_file_text)
+              result = asyncio.run(app_module._record_target_diagnostics(body))
+              return {item.code for item in result}
+
+
+          def test_gateway_accepts_same_author_correction(monkeypatch: pytest.MonkeyPatch) -> None:
+              assert "CORRECTION_TARGET_AUTHOR_MISMATCH" not in codes(
+                  monkeypatch, submission(AUTHOR_KEY), target()
+              )
+
+
+          def test_gateway_rejects_third_party_correction(monkeypatch: pytest.MonkeyPatch) -> None:
+              assert "CORRECTION_TARGET_AUTHOR_MISMATCH" in codes(
+                  monkeypatch, submission(OTHER_KEY), target()
+              )
+
+
+          def test_gateway_fails_closed_without_target_authorship(monkeypatch: pytest.MonkeyPatch) -> None:
+              assert "CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE" in codes(
+                  monkeypatch, submission(AUTHOR_KEY), target(None)
+              )
+
+
+          def test_append_enforces_same_author(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
+              monkeypatch.setattr(chain, "RECORDS", tmp_path)
+              (tmp_path / f"{TARGET_ID}.json").write_text(
+                  json.dumps(target()), encoding="utf-8"
+              )
+              draft = submission(AUTHOR_KEY)["record_draft"]
+              draft["authorship_proof"] = {"public_key_sha256": AUTHOR_KEY}
+              chain.require_record_target_binding(draft)
+
+              wrong = json.loads(json.dumps(draft))
+              wrong["authorship_proof"]["public_key_sha256"] = OTHER_KEY
+              with pytest.raises(ValueError, match="correction target author mismatch"):
+                  chain.require_record_target_binding(wrong)
+          PY
+
+          cat > FULL-PUBLIC-ACTION-LIFECYCLE-AUDIT.md <<'MD'
+          # Full Public Action Lifecycle Audit
+
+          Status: permanent non-production regression audit, layered on top of PR #659.
+
+          PR #659 repaired deterministic Guardian identity, signed-payload scope, readiness/configuration consistency, focused lifecycle tests, and live read-only smoke coverage. This additional audit closes two remaining coverage gaps without replacing those fixes:
+
+          1. one isolated matrix proves all eight current public Record-Chain actions through Builder, doctor, Gateway preflight/submit, durable intake artifacts, append, receipt final status, indexes, and final chain verification;
+          2. Correction is cryptographically bound to the immutable target author key at both Gateway and append boundaries, while third-party review uses Classification Update.
+
+          ## Isolated action matrix
+
+          The official test runner executes `scripts/test_full_public_action_lifecycle_e2e.py`. It supplies explicit non-production Gateway configuration, copies the repository into a temporary directory, generates fresh Ed25519 keys, and intercepts all content writes with a filesystem adapter.
+
+          The simulation builds and appends:
+
+          - Echo
+          - Verification
+          - Guardian Application
+          - Guardian Retirement
+          - Propagation
+          - Correction
+          - Classification Update
+          - Context Insufficient Notice
+
+          It also checks duplicate-submit idempotency, oath rejection, insufficient-context rejection, retired V6 rejection, same-key Guardian continuity, wrong-key Guardian retirement rejection, same-author Correction acceptance, third-party Correction rejection, third-party Classification Update acceptance, receipt-to-final hash binding, derived `retired_guardian` state, and full temporary-chain verification.
+
+          No production key, receipt, pending record, final record, Guardian entry, branch, index, or Gateway write is created.
+
+          ## Correction boundary
+
+          Correction is author-only. The signer of a new Correction must match `authorship_proof.public_key_sha256` on the immutable target final record. If target authorship is unavailable or the signer differs, intake fails closed. A third party may submit a non-authoritative Classification Update instead.
+
+          ## Authority boundary
+
+          These tests verify software behavior and evidence-reporting constraints. They do not create authority, governance, attestation, endorsement, amendment, philosophical truth, or active Guardian status. Bitcoin Originals remain final.
+          MD
+
+          rm -f audit-port-trigger.txt
+          rm -f .github/workflows/temp-port-full-action-audit.yml
+      - name: Commit permanent post-659 audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "audit: port full action matrix after PR659"
+          git pull --rebase origin agent/full-public-action-matrix-post-659
+          git push origin HEAD:agent/full-public-action-matrix-post-659
