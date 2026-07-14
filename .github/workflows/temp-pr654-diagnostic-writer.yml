@@ -45,3 +45,5 @@ jobs:
           git add diagnostics/pr654-latest.txt
           git commit -m "diagnostics: capture latest PR654 failure"
           git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
+
+# Trigger commit after workflow creation.
