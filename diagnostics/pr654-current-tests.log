@@ -1,0 +1,22 @@
+PASS: record-chain verify
+PASS: sitemap up to date
+PASS: active public routes check
+PASS: mission-critical public journey contracts
+PASS: record-chain status up to date
+PASS: pipeline backlog detector
+PASS: archive backlog detector
+PASS: arweave wallet status up to date
+PASS: public homepage status up to date
+PASS: record-chain status API
+PASS: public test phase disclosure
+FAIL: Phase 5C-HOTFIX tests failed: 
+PASS: builder echo has schema-clean submission_boundary and draft boundary
+PASS: builder echo has valid Ed25519 authorship proof
+PASS: linked Guardian draft passes normalize_record_draft()
+PASS: helper diagnostic fixes do not mention retired canonical fields
+PASS: builder echo output fields match helper echo fields
+FAIL: builder verification failed: Error: --digital-profile is required; the builder does not infer this provenance/context field
+
+
+
+EXIT_CODE=1
