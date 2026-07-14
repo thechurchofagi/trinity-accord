@@ -70,13 +70,17 @@ jobs:
         shell: bash
         run: |
           set +e
-          python3 scripts/run_ci_group.py p0-current >/tmp/p0-entrypoint.log 2>&1
+          python3 scripts/run_ci_group.py p0-current >p0-entrypoint-diagnostic.txt 2>&1
           code=$?
           if [[ "$code" -ne 0 ]]; then
-            echo "P0_EXIT=$code"
-            grep -E -i -C 2 'FAIL|FAILED|ERROR|mismatch|missing|unexpected|drift|not found|does not|must ' /tmp/p0-entrypoint.log | tail -n 120 || true
+            printf '\nexit_code=%s\n' "$code" >> p0-entrypoint-diagnostic.txt
+            git add p0-entrypoint-diagnostic.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "ci: capture entrypoint migration P0 diagnostic"
+            git push origin HEAD:agent/complete-legacy-ar-eth-mirror-audit
           else
-            echo "P0_EXIT=0"
+            rm -f p0-entrypoint-diagnostic.txt
           fi
           exit "$code"
       - name: Validate full current system
