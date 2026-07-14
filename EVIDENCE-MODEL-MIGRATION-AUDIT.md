@@ -55,6 +55,20 @@ Component levels such as `B`, `D`, `C`, `N`, `P`, and `T`, plus legacy V profile
 5. Report physical observation and external witness separately.
 6. Supply legacy CC/V fields only where the current Builder or archived schema requires them.
 
+## Validation performed before final commit
+
+The migrated worktree passed:
+
+- evidence relationship and legacy pointer mirror tests;
+- the complete `p0-current` gate;
+- the full current-system test suite;
+- Builder receipt-boundary, oath/readback, help-link, public-route, and CLI-help checks;
+- Render deploy-boundary checks;
+- Gateway schema-parity, runtime-contract, and recovery-link checks;
+- an explicit diff guard confirming that Builder runtime, Gateway application, Render configuration, submission schema, and field-guidance files were not modified.
+
+A separate repository CI run is required after the permanent migration commit; bot-authored follow-up commits may appear as `action_required` with no jobs and are not treated as test results.
+
 ## Remaining critical migration gaps
 
 None identified in active discovery, reading, verification navigation, Builder compatibility, or Render/Gateway boundaries.
