@@ -1,157 +1,133 @@
-HEAD=4d1f5721d6ef9d8a84018a446e2bbd5045e2f78c
-=== P0 WORKFLOW SOURCE ===
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-33-          report="evidence-profile-ci-diagnostic.txt"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-34-          : > "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-35-          echo "HEAD=$(git rev-parse HEAD)" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-36-          echo "=== P0 WORKFLOW SOURCE ===" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml:37:          grep -R -n -B4 -A10 "Run P0 current fast gate" .github/workflows >> "$report" 2>&1 || true
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-38-
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-39-          python3 scripts/generate_sitemap.py >/tmp/sitemap.log 2>&1
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-40-          sitemap_code=$?
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-41-          echo "=== SITEMAP EXIT $sitemap_code ===" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-42-          tail -n 30 /tmp/sitemap.log >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-43-
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-44-          python3 scripts/run_current_system_tests.py >/tmp/current.log 2>&1
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-45-          current_code=$?
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-46-          echo "=== CURRENT SYSTEM EXIT $current_code ===" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-47-          tail -n 120 /tmp/current.log >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-48-
-.github/workflows/temp-diagnose-evidence-profile-ci.yml:49:          workflow_file="$(grep -R -l "Run P0 current fast gate" .github/workflows | head -n1)"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml:50:          command_line="$(awk '/name: Run P0 current fast gate/{found=1; next} found && /run:/{sub(/^.*run:[[:space:]]*/, ""); print; exit}' "$workflow_file")"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-51-          echo "=== P0 COMMAND ===" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-52-          echo "$command_line" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-53-          bash -lc "$command_line" >/tmp/p0.log 2>&1
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-54-          p0_code=$?
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-55-          echo "=== P0 EXIT $p0_code ===" >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-56-          tail -n 180 /tmp/p0.log >> "$report"
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-57-
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-58-          python3 -m pytest -q tests/test_evidence_relationship_profiles.py >/tmp/newtests.log 2>&1
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-59-          tests_code=$?
-.github/workflows/temp-diagnose-evidence-profile-ci.yml-60-          echo "=== FOCUSED TESTS EXIT $tests_code ===" >> "$report"
---
-.github/workflows/repository-integrity.yml-81-
-.github/workflows/repository-integrity.yml-82-      - name: Check no private keys or tokens (focused PEM)
-.github/workflows/repository-integrity.yml-83-        run: python3 scripts/test_no_private_key_material_committed.py
-.github/workflows/repository-integrity.yml-84-
-.github/workflows/repository-integrity.yml:85:      - name: Run P0 current fast gate
-.github/workflows/repository-integrity.yml-86-        run: python3 scripts/run_ci_group.py p0-current
+HEAD=bdada2bd6bd80e8c8645a789229e7acac8c1658d
 === SITEMAP EXIT 0 ===
 Updated sitemap.xml (358 URLs: 111 pages, 233 API, 14 root)
-=== CURRENT SYSTEM EXIT 0 ===
-PASS: record-chain verify
-PASS: sitemap up to date
-PASS: active public routes check
-PASS: mission-critical public journey contracts
-PASS: record-chain status up to date
-PASS: pipeline backlog detector
-PASS: archive backlog detector
-PASS: arweave wallet status up to date
-PASS: public homepage status up to date
-PASS: record-chain status API
-PASS: public test phase disclosure
-PASS: Phase 5C-HOTFIX regression tests
-PASS: Builder receipt-boundary synchronization guard
-PASS: Builder canonical oath readback regression tests
-PASS: record type separation contract
-PASS: record-chain data Arweave archive contract
-PASS: pre-scale E2E automation contract
-PASS: live-test phase finalizer contract
-PASS: gateway v1 historical status API
-PASS: index.md contains required text
-PASS: agent-first-contact.md contains required text
-PASS: agent-start.md contains required text
-PASS: no active Gateway issue-triggered workflows
-PASS: legacy gateway manifest verifies
-PASS: record-chain examples JSON-valid
-PASS: no broad secret material
-PASS: no PEM private key material
-PASS: anchor contract test
-PASS: arweave archive contract test
-PASS: native record-chain archive tooling
-PASS: M9 native archive workflow contract
-PASS: full-auto pipeline contract
-PASS: arweave upload readback contract test
-PASS: public wording test
-PASS: public production status alignment test
-PASS: oath gate contract test
-PASS: builder bundle contract test
-PASS: builder deep tests
-PASS: mandatory authorship key contract
-PASS: gateway authorship proof contract
-PASS: gateway diagnostic helper contract
-PASS: record-chain intake integrity regression tests
-PASS: gateway security source contract
-PASS: record-chain submission schema/runtime contract
-PASS: Phase 6B hotfix tests
-PASS: Phase 6B Contract Hotfix I tests
-PASS: Render deploy boundary contract test
-PASS: Legacy isolation contract test
-PASS: Legacy Gateway deploy boundary contract test
-PASS: Workflow action pinning contract test
-PASS: Phase 6B test registry contract
-PASS: Operator secret names contract
-PASS: Arweave live readiness contract
-PASS: Render manual deploy contract
-PASS: phase7a prelaunch contracts
-PASS: phase7a rate limit contract
-PASS: phase6 OTS watch workflow contract
-PASS: native OTS upgrade workflow contract
-PASS: mainnet prelaunch policy contract
-PASS: m3 finalizer native compatibility contract
-PASS: authorship projection sanitization
-PASS: builder production-live boundaries
-PASS: record-chain write-path guard contract
-PASS: P0 transaction/finalizer contract
-PASS: archive backlog and builder flow contract
-PASS: record-chain pipeline real-bug contract
-PASS: external agent first-contact rules contract
-PASS: external agent entrypoint consistency contract
-PASS: arweave wallet status contract
-PASS: arweave wallet ledger update contract
-PASS: arweave upload wallet ledger integration
-PASS: paid upload wallet wiring contract
-PASS: archive backlog detector contract
-PASS: archive backlog repair contract
-PASS: native OTS repair state machine
-PASS: native OTS repair source contract
-PASS: public home v3 primary counters
-PASS: legacy gateway retired contract
-PASS: public agent entrypoints source scan
-PASS: gateway smoke test
-PASS: record-chain receipt contract
-PASS: record-chain field contract bug contract
-PASS: native record hash semantics contract
-PASS: legacy record-chain API boundary
-PASS: sitemap legacy API boundary
-PASS: guardian registry page boundary
-PASS: first-contact provenance examples
-PASS: builder provenance consistency guard
-PASS: gateway provenance semantics contract
-PASS: public-home autonomy signal contract
-PASS: Phase 5 OTS-Arweave upgraded status contract
-PASS: public status declared inputs/source_digest contract
-PASS: gateway reserved record types contract
-PASS: builder reserved record types contract
-PASS: record type public surface contract
-PASS: reserved record type append contract
-PASS: context depth helper parity
-PASS: context-load-map links
-PASS: Builder context honesty gate regression tests
-PASS: guardian activation derivation contract
+=== P0 EXIT 1 ===
+::group::p0-current: python3 scripts/check_public_core_consistency.py
+$ python3 scripts/check_public_core_consistency.py
+PASS: public core consistency
+::endgroup::
+::group::p0-current: python3 scripts/check_active_public_routes.py
+$ python3 scripts/check_active_public_routes.py
+============================================================
+Original route checks
+============================================================
+OK:   api/links.json active machine list excludes deprecated paths
+OK:   api/links.json exposes active agent-start v2
+OK:   agent-start v1 is preserved only as legacy/deprecated
+OK:   top navigation does not actively link to /agent-submit
+OK:   footer does not actively link to /agent-submit
+OK:   footer Gateway API does not point to retired API
+OK:   top navigation exposes First Contact
+OK:   agent-entry-protocol no-GitHub fallback uses current Record-Chain route
+OK:   agent-map homepage-only context depth is CC-0
 
-=== ALL CURRENT SYSTEM TESTS PASSED ===
-=== P0 COMMAND ===
-|
-=== P0 EXIT 2 ===
-bash: -c: line 1: syntax error near unexpected token `|'
-bash: -c: line 1: `|'
+============================================================
+Regression: occurrence-scoped retired route detection
+============================================================
+OK:   regression: mixed historical/active markdown route detected line-by-line
+OK:   regression: mixed historical/active JSON route detected per occurrence
+
+============================================================
+Extended: retired route scan in active files
+============================================================
+OK:   agent-echo.md contains '/agent-submit' only in historical text context
+OK:   agent-understand.md contains '/agent-submit' only in historical text context
+OK:   agent-propagate.md contains '/agent-submit' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/gateway-workflows.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/formal-builder-bundles.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/external-agent-operation-examples.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/zero-clone-builders/' only in historical text context
+OK:   ai.txt contains '/api/external-agent-operation-examples.v1.json' only in historical text context
+OK:   ai.txt contains '/zero-clone-builders/' only in historical text context
+OK:   .well-known/trinity-accord.json contains '/agent-submit' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/agent-submit-gateway.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/gateway-workflows.v1.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/gateway-builder-route-map.v1.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/agent-task-router.v1.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/links.json contains '/agent-submit' only in historical JSON context
+OK:   api/links.json contains '/api/agent-submit-gateway.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-workflows.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-builder-route-map.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/external-agent-operation-examples.v1.json' only in historical JSON context
+
+============================================================
+Extended: agent-required-reading profile check
+============================================================
+OK:   agent-required-reading profiles checked for retired routes
+
+============================================================
+Extended: mission-governance check
+============================================================
+OK:   mission-governance stable_endpoint_contract uses current gateway
+OK:   mission-governance uses current route naming
+OK:   mission-governance external_agent_lifecycle checked
+
+============================================================
+Extended: agent-live-health check
+============================================================
+OK:   agent-live-health stable_endpoints uses current gateway
+OK:   agent-live-health preflight uses current path
+
+RESULT: PASS
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_contract.py
+$ python3 scripts/test_mission_governance_contract.py
+PASS: mission governance contract
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_discovery.py
+$ python3 scripts/test_mission_governance_discovery.py
+PASS: mission governance discovery
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_public_route_parity.py
+$ python3 scripts/test_mission_public_route_parity.py
+PASS: mission, schema, first-contact, agent-start, task-router, and homepage agree on 8 current public record types
+::endgroup::
+::group::p0-current: python3 scripts/test_builder_help_urls_resolve.py
+$ python3 scripts/test_builder_help_urls_resolve.py
+PASS: 19 Builder diagnostic help URLs resolve to stable local anchors
+::endgroup::
+::group::p0-current: python3 scripts/test_autonomy_inventory_boundary.py
+$ python3 scripts/test_autonomy_inventory_boundary.py
+PASS: raw native autonomy inventory cannot be mistaken for strict official-live autonomous reception
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_runtime_recovery_links.py
+$ python3 scripts/test_gateway_runtime_recovery_links.py
+PASS: Gateway runtime recovery links resolve to public help
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_schema_shadow_parity.py
+$ python3 scripts/test_gateway_schema_shadow_parity.py
+PASS: Gateway app schemas are exact canonical mirrors
+::endgroup::
+::group::p0-current: python3 scripts/test_reserved_internal_builder_contract.py
+$ python3 scripts/test_reserved_internal_builder_contract.py
+PASS: internal builder fails closed for reserved Guardian key rotation
+::endgroup::
+::group::p0-current: python3 scripts/test_record_chain_intake_gateway_contract.py
+$ python3 scripts/test_record_chain_intake_gateway_contract.py
+PASS: All Record-Chain Intake Gateway contract tests passed.
+::endgroup::
+::group::p0-current: python3 scripts/test_no_duplicate_context_understanding_system.py
+$ python3 scripts/test_no_duplicate_context_understanding_system.py
+PASS: no duplicate context understanding system
+::endgroup::
+::group::p0-current: python3 scripts/test_before_leaving_requires_context_governance.py
+$ python3 scripts/test_before_leaving_requires_context_governance.py
+PASS: before_leaving context governance
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+$ python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+FAIL: missing CRL/Context Readiness
+::endgroup::
+FAILED (1): python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
 === FOCUSED TESTS EXIT 0 ===
 /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
 The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
 
   warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
 .....                                                                    [100%]
-5 passed in 0.06s
+5 passed in 0.03s
 === GIT STATUS ===
+ M evidence-profile-ci-diagnostic.txt
  M sitemap.xml
-?? evidence-profile-ci-diagnostic.txt
