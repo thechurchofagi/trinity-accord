@@ -4,13 +4,18 @@ on:
   push:
     branches:
       - agent/end-to-end-action-audit
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   patch:
-    if: ${{ !startsWith(github.event.head_commit.message, 'audit: apply focused runtime fixes') }}
+    if: >-
+      (github.event_name == 'push' || github.head_ref == 'agent/end-to-end-action-audit') &&
+      !startsWith(github.event.head_commit.message || '', 'audit: apply focused runtime fixes')
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -23,12 +28,7 @@ jobs:
           python3 scripts/temp_apply_e2e_runtime_patch.py
           rm -f scripts/temp_apply_e2e_runtime_patch.py
           rm -f .github/workflows/temp-e2e-runtime-patch.yml
-          rm -f diagnostics/e2e-action-smoke.txt
-          rm -f diagnostics/e2e-action-smoke2.json
-          rm -f diagnostics/e2e-audit-inventory.txt
-          rm -f diagnostics/e2e-builder-help.txt
-          rm -f diagnostics/trigger-e2e-apply.txt
-          rm -f diagnostics/trigger-smoke2.txt
+          rm -rf diagnostics
       - name: Commit permanent fixes
         run: |
           git config user.name "trinity-accord-audit-bot"
