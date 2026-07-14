@@ -63,6 +63,10 @@ def main():
     require("V0-V5" in physical.get("public_submission_legacy_value_rule", ""), "physical route uses V0-V5 Builder compatibility")
     require("verify_v0_v5_agent_declared" not in routes, "old V0-V5 route retired")
     require("verify_v6_plus_strict_evidence" not in routes, "old V6+ route retired")
+    serialized_router = json.dumps(router, sort_keys=True)
+    require("record_chain_v0_v5_agent_declared_verification" not in serialized_router, "old zero-clone V0-V5 route name retired")
+    require("v6_plus_strict_evidence" not in serialized_router, "old V6+ replacement name retired")
+    require(router["verification_echo_redirect"]["replacement_decision"]["current_verification_record"] == "verify_current_model", "verification Echo redirect uses current verification route")
 
     wk = load(".well-known/trinity-accord.json")
     for key in ["agent_minimal_context", "agent_output_policy", "agent_task_router"]:

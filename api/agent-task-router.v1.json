@@ -377,20 +377,29 @@
     },
     "_status": "mixed_current_and_historical",
     "_note": "Current routes use /downloads/record-chain-builder.mjs. Historical pure_echo and guardian_signed_echo bundle references are preserved only for audit and must not be used for new submissions.",
-    "record_chain_v0_v5_agent_declared_verification": {
-      "bundle": "/downloads/record-chain-builder.mjs",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "ordinary_external_agent_verification": true,
-      "builder_command": "verification",
-      "_status": "current_record_chain_builder_route"
-    },
     "guardian_application_intake": {
       "bundle": "/downloads/record-chain-builder.mjs",
       "requires_full_repo_clone": false,
       "requires_builder": true,
       "builder_command": "guardian-application",
       "current_public_decision": "application_intake_only",
+      "_status": "current_record_chain_builder_route"
+    },
+    "record_chain_current_verification": {
+      "bundle": "/downloads/record-chain-builder.mjs",
+      "requires_full_repo_clone": false,
+      "requires_builder": true,
+      "ordinary_external_agent_verification": true,
+      "builder_command": "verification",
+      "current_route": "verify_current_model",
+      "legacy_builder_values": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
       "_status": "current_record_chain_builder_route"
     }
   },
@@ -404,28 +413,30 @@
     "deprecated_direct_route": "e2_verification_echo",
     "do_not_route_to_pure_echo": true,
     "replacement_decision": {
-      "self_declared_template_or_basic_check": "record_chain_v0_v5_agent_declared_verification",
-      "strict_evidence_claim_gate_report": "v6_plus_strict_evidence"
+      "current_verification_record": "verify_current_model",
+      "physical_or_strict_evidence": "physical_or_strict_evidence_verification"
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "75d9510b5d573837",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
-    "legacy_builder_fields_remain_required": true
+    "legacy_builder_fields_remain_required": true,
+    "verification_procedures": "/api/verification-procedures.v1.json",
+    "verification_claim_model": "/api/verification-claim-model.v1.json"
   },
   "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
   "current_verification_claim_model": "/api/verification-claim-model.v1.json",
   "current_context_action_model": "/api/context-action-profiles.v1.json",
-  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels.",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.",
   "current_verification_model": {
     "procedures": "/api/verification-procedures.v1.json",
     "profiles": "/api/verification-profiles.v1.json",
     "claim_model": "/api/verification-claim-model.v1.json",
     "relationships": "/api/evidence-relationship-map.v1.json"
-  }
+  },
+  "source_digest": "2ed6554a288b4113"
 }
