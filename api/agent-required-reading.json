@@ -47,7 +47,7 @@
         "/api/interpretation-model-policy.v1.json",
         "/agent-brief/",
         "exact task-relevant sources",
-        "/api/corrections-index.json when relevant"
+        "/api/corrections-index.json"
       ],
       "note": "Legacy CC-3 compatibility profile. New agents use interpretation action profile and task-relevant sources. No fixed Chronicle stage model is current.",
       "current_name": "action_grounded_context",
@@ -66,8 +66,12 @@
         "legacy_archive_claim": [
           "/api/context-packs/legacy-archive-essentials.json",
           "/api/context-packs/legacy-archive-index.json"
+        ],
+        "later_record_correction_retirement_or_supersession_claim": [
+          "/api/corrections-index.json"
         ]
-      }
+      },
+      "corrections_index_condition": "Required when discussing a later record, report, correction, retirement, or supersession status."
     },
     "evaluation": {
       "cc_level": "CC-4",
