@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - agent/retire-fixed-stage-and-clarify-verification
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -14,6 +18,7 @@ concurrency:
 
 jobs:
   migrate:
+    if: github.event_name == 'push' || github.head_ref == 'agent/retire-fixed-stage-and-clarify-verification'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout migration branch
@@ -56,7 +61,6 @@ jobs:
           def canonical(data):
               return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
 
-          # Generated Chronicle test wording now reflects retirement of every fixed-stage default.
           p = root / 'scripts/test_nft_chronicle_context_artifacts.py'
           s = p.read_text(encoding='utf-8')
           s = s.replace('require("correction to the former seven-stage narrative" in lower, "agent context must explain stage correction")', 'require("retired fixed-stage interpretations" in lower, "agent context must explain retirement of fixed-stage interpretations")')
@@ -65,7 +69,6 @@ jobs:
               s = s.replace('require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")', 'require(policy.get("fixed_stage_taxonomy_retired") is True, "fixed seven-stage taxonomy must be retired")\nrequire(policy.get("no_current_five_stage_model") is True, "no fixed five-stage replacement may be current")\nrequire(policy.get("fixed_stage_count") is None, "current fixed stage count must be null")')
           p.write_text(s, encoding='utf-8')
 
-          # Run the Builder behavior regression in the ordinary current-system suite.
           p = root / 'scripts/run_current_system_tests.py'
           s = p.read_text(encoding='utf-8')
           anchor = '        "tests/test_interpretation_and_verification_migration.py",\n'
@@ -76,7 +79,6 @@ jobs:
               s = s.replace(anchor, anchor + extra, 1)
           p.write_text(s, encoding='utf-8')
 
-          # Refresh canonical source_digest fields only in active files changed by this migration.
           digest_paths = [
               'api/agent-first-contact.json',
               'api/agent-minimal-context.v1.json',
@@ -98,7 +100,6 @@ jobs:
               data['source_digest'] = digest[:len(old)]
               path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
-          # Refresh Builder bundle hash/size and active references, preserving historical records.
           builder = root / 'downloads/record-chain-builder.mjs'
           manifest_path = root / 'api/record-chain-builder-bundles.v1.json'
           manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
