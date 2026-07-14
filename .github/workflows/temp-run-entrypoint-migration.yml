@@ -1,9 +1,7 @@
 name: Temporary Run Entrypoint Migration
 
 on:
-  push:
-    branches:
-      - agent/complete-legacy-ar-eth-mirror-audit
+  pull_request:
     paths:
       - .github/workflows/temp-run-entrypoint-migration.yml
 
@@ -12,6 +10,7 @@ permissions:
 
 jobs:
   run-migration:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
