@@ -44,3 +44,5 @@ jobs:
           git add diagnostics/pr655-p0-latest.txt
           git commit -m "diagnostics: capture follow-up PR655 P0 failure"
           git push origin HEAD:agent/verification-model-cleanup
+
+# Trigger commit after workflow creation.
