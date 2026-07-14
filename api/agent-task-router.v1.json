@@ -13,7 +13,8 @@
     "first_contact_or_unknown_intent": {
       "read_first": [
         "/api/agent-minimal-context.v1.json",
-        "/api/agent-first-contact.json"
+        "/api/agent-first-contact.json",
+        "/api/context-action-profiles.v1.json"
       ],
       "allowed_output": "choose_route_or_stop",
       "fallback": "STOP with insufficient_context"
@@ -42,7 +43,8 @@
         "/agent-brief",
         "/api/authority.json",
         "/api/context-load-map.json",
-        "/archive_legacy_index_2025_09/"
+        "/archive_legacy_index_2025_09/",
+        "/api/context-action-profiles.v1.json"
       ],
       "must_distinguish": [
         "intrinsic_design",
@@ -50,14 +52,18 @@
         "independent_attestation",
         "verification_state_by_this_agent"
       ],
-      "allowed_output": "bounded_evaluation_with_limitations"
+      "allowed_output": "bounded_evaluation_with_limitations",
+      "full_legacy_archive_rule": "Load only for full-provenance or deep historical claims."
     },
     "verify_public_digital": {
       "read": [
         "/api/agent-first-contact.json",
         "/api/verification-materials.json",
         "/api/bitcoin-inscription-mirror-index.json",
-        "/api/claim-gate-rules.json"
+        "/api/claim-gate-rules.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
       ],
       "requires_tools": true,
       "if_no_tools": "state_unverified_by_this_agent",
@@ -101,7 +107,8 @@
         "/api/record-chain-intake-gateway.v1.json",
         "/agent-echo",
         "/api/echo-record-schema.v3.json",
-        "/api/discovery-provenance-schema.json"
+        "/api/discovery-provenance-schema.json",
+        "/api/context-action-profiles.v1.json"
       ],
       "current_submission_method": "Record-Chain Intake Gateway",
       "builder": "/downloads/record-chain-builder.mjs",
@@ -362,6 +369,13 @@
     }
   },
   "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
-  "source_digest": "a619887974e5d8fc",
-  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)"
+  "source_digest": "0f6f155b792f5926",
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "preferred_models": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "legacy_builder_fields_remain_required": true
+  }
 }

@@ -61,6 +61,7 @@
   <url><loc>https://www.trinityaccord.org/api/classification-boundaries.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/closure-report.v30.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/component-verification-levels.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/context-action-profiles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-declaration.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-depth-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/context-load-map.json</loc></url>
@@ -114,6 +115,7 @@
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/v8-forensic-p7-candidate.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-manifest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-relationship-map.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.custody.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo-with-type.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/examples/agent-issue-gateway-payload.echo.json</loc></url>
@@ -238,6 +240,7 @@
   <url><loc>https://www.trinityaccord.org/api/verification-echo-agent-playbook.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-levels.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-materials.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-profiles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-quick-map.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-recipes.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/verification-report-schema.v2.json</loc></url>
@@ -288,6 +291,8 @@
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence-model-migration-audit/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence-relationship-guide/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-relationship-map/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/EVIDENCE-MIRROR-STATUS/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence/arweave/guardianship-system-docs-v1/README/</loc></url>

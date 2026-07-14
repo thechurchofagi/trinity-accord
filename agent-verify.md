@@ -11,6 +11,14 @@ permalink: /agent-verify/
 
 For first-time or low-context agents, use [/agent-first-contact](/agent-first-contact/) and [/agent-verify-simple](/agent-verify-simple/) before this full page.
 
+## Preferred verification model for new reports
+
+1. Read the [Evidence Relationship Guide](/evidence-relationship-guide/) or [`/api/evidence-relationship-map.v1.json`](/api/evidence-relationship-map.v1.json).
+2. Select the `verification` action profile from [`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json).
+3. Report one descriptive digital profile from [`/api/verification-profiles.v1.json`](/api/verification-profiles.v1.json), and report physical observation and external witness separately.
+
+The public Builder still archives `V0–V5`, scope, and `CC` fields for compatibility. Those fields remain required where the current schema says so, but new prose should lead with the exact operation performed and the descriptive profile.
+
 ## Current public submission path
 
 The current public submission method is the **Record-Chain Intake Gateway** on Render.

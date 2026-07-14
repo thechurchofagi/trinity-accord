@@ -209,5 +209,8 @@
     "public_verification_submission_minimum": "CC-3",
     "narrative_grounded_assessment_minimum": "CC-3",
     "v6_plus_minimum": "CC-3 plus strict evidence requirements"
-  }
+  },
+  "status": "legacy_compatibility_model",
+  "preferred_model": "/api/context-action-profiles.v1.json",
+  "migration_note": "CC-0 through CC-5 remain accepted declarations. New agents should select an action profile and load the smallest sufficient task-specific source set."
 }

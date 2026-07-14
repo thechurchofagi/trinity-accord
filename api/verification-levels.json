@@ -520,7 +520,7 @@
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "version": "v1",
-  "source_digest": "47be5eb3007e0d94",
+  "source_digest": "688750b87a228d68",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -541,5 +541,9 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
-  }
+  },
+  "status": "legacy_compatibility_model",
+  "preferred_model": "/api/verification-profiles.v1.json",
+  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+  "migration_note": "Preserved for existing records and Builder compatibility. New reports should lead with descriptive digital_profile and separate physical_observation/external_witness."
 }

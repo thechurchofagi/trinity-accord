@@ -1,0 +1,189 @@
+{
+  "schema": "trinityaccord.evidence-relationship-map.v1",
+  "version": "v1",
+  "status": "preferred_evidence_relationship_model",
+  "purpose": "Describe what each evidence object binds, what operation it supports, and what it does not prove.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "three_bitcoin_originals_only",
+  "human_guide": "/EVIDENCE-RELATIONSHIP-GUIDE.md",
+  "preferred_verification_profiles": "/api/verification-profiles.v1.json",
+  "preferred_context_profiles": "/api/context-action-profiles.v1.json",
+  "relationship_types": {
+    "defines_canonical_text": "Defines canonical content and authority boundary.",
+    "references": "Names or points to another record without copying its authority.",
+    "indexes": "Collects identifiers, hashes, status and pointers into one manifest.",
+    "hashes": "Binds exact bytes to one or more digest values.",
+    "signs_digest": "A cryptographic key signs a digest or typed digest statement.",
+    "timestamps_digest": "Anchors a digest into a blockchain time proof.",
+    "mirrors_bytes": "Preserves bytes for later retrieval; does not create authority.",
+    "witnesses_statement": "Places a statement or reference on another public chain.",
+    "notarially_records_process": "Records an observed process within the scope of a notarial act.",
+    "provides_context": "Preserves historical, creative or interpretive context without proving external facts.",
+    "records_reception": "Records later reception, critique, refusal, verification attempts or stewardship events."
+  },
+  "nodes": [
+    {
+      "id": "btc_originals",
+      "type": "canonical_authority",
+      "items": [
+        {"role": "Protocol / Axioms", "inscription_id": "97631551", "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"},
+        {"role": "Covenant of the Flaw", "inscription_id": "98369145", "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"},
+        {"role": "The Trinity Accord / Meta-record", "inscription_id": "98387475", "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"}
+      ],
+      "supports": ["canonical_text", "transaction_inclusion", "block_time_context", "authority_boundary"],
+      "does_not_prove": ["philosophical_truth", "physical_uniqueness", "institutional_endorsement"]
+    },
+    {
+      "id": "guardian_fortification_inscriptions",
+      "type": "non_amending_bitcoin_fortification",
+      "items": ["Guardian Appendix - Authority Charter", "The Guardian's Attestation to the Covenant of the Flaw"],
+      "supports": ["later_boundary_declaration", "evidence_pointer_existence"],
+      "does_not_prove": ["fourth_canonical_original", "amendment"]
+    },
+    {
+      "id": "authority_manifest_v1_0_0",
+      "type": "manifest",
+      "path": "archive/authority-manifest/authority.jcs.json",
+      "sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+      "role": "Indexes Bitcoin originals, ancillary inscriptions, Guardian identities, mirrors, hashes and evidence pointers.",
+      "does_not_prove": ["truth_of_every_indexed_claim"]
+    },
+    {
+      "id": "btc_bip340_signature",
+      "type": "cryptographic_signature",
+      "path": "archive/btc-signature/btc-signature.json",
+      "method": "bip340-taproot-xonly",
+      "signing_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "signed_message_sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+      "binds": "authority_manifest_v1_0_0",
+      "supports": ["key_control_at_signing_time", "manifest_digest_provenance"],
+      "does_not_prove": ["civil_identity", "ongoing_key_control", "truth_of_manifest_claims"]
+    },
+    {
+      "id": "eth_eip712_signature_v1_0_0",
+      "type": "cryptographic_signature",
+      "path": "archive/authority-manifest/signature.json",
+      "method": "EIP-712",
+      "signing_address": "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8",
+      "typed_message": {
+        "sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+        "sha3_256": "385674a24242be88628330dd26e0feefb441dd53674db9dd041a66f61abffbdf",
+        "version": "1.0.0",
+        "created_at": "2025-09-13T09:42:43.536Z"
+      },
+      "binds": "authority_manifest_v1_0_0",
+      "supports": ["eth_key_control_at_signing_time", "typed_manifest_digest_binding"],
+      "does_not_prove": ["canonical_authority", "equivalence_to_bitcoin", "truth_of_manifest_claims"]
+    },
+    {
+      "id": "eth_witness_of_btc_signature",
+      "type": "ethereum_witness_transaction",
+      "path": "archive/eth-witness/eth-witness.json",
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "input_sha256": "fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e",
+      "witnesses": "btc_bip340_signature",
+      "supports": ["secondary_chain_existence", "secondary_chain_time_context"],
+      "does_not_prove": ["new_authority", "independent_third_party_attestation"]
+    },
+    {
+      "id": "physical_core_object",
+      "type": "physical_anchor",
+      "name": "Core Object Alpha / related physical protocol object",
+      "supports": ["physical_reference_target"],
+      "identity_warning": "Different archive descriptions and inscription references must be compared before claiming every physical artifact is the same object."
+    },
+    {
+      "id": "six_hash_digest_manifest",
+      "type": "evidence_digest_inventory",
+      "paths": ["archive/evidence/digest-manifest.json", "archive/evidence/digest-manifest.csv"],
+      "algorithms": ["sha256", "sha3_256", "blake2b_256", "shake256_256", "sha512_256", "blake3_256"],
+      "role": "Records algorithm-diverse fingerprints for covered evidence-file bytes.",
+      "supports": ["later_byte_identity_test", "corruption_detection", "sealed_evidence_commitment", "algorithm_diversity"],
+      "does_not_prove": ["semantic_truth", "physical_uniqueness", "independent_collection", "six_independent_witnesses"]
+    },
+    {
+      "id": "ots_evidence_anchors",
+      "type": "timestamp_proof",
+      "role": "Anchors manifest and evidence digests into Bitcoin through OpenTimestamps.",
+      "supports": ["digest_existed_no_later_than_attested_block"],
+      "does_not_prove": ["file_truth", "authorship", "physical_identity"]
+    },
+    {
+      "id": "shenzhen_notarial_record",
+      "type": "notarial_evidence",
+      "human_archive": "evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md",
+      "machine_archive": "api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+      "office": "广东省深圳市深圳公证处",
+      "acceptance_date": "2026-05-06",
+      "certificate_date": "2026-05-13",
+      "certificate_number": "(2026)深证字第36024号",
+      "matter": "evidence preservation",
+      "observed_collection": {"ordinary_photos": 12, "microscope_photos": 5, "videos": 4},
+      "electronic_preservation_certificates": [
+        {"number": "(2026)深证存字第168373590号", "sha256": "96ecd4fbb77789fe221a1d11449ac611be6a646c2a7919cf8c7aeb45a58ad3a6", "arweave_txid": "KpswQssQpWihQZJ-y4WPjasqo5XNcjypyczaEs4Ebxw"},
+        {"number": "(2026)深证存字第168374532号", "sha256": "acc5a1cfe19a71c01fa8e29f0bc506c4441bc9d34f95852c77f251c8005e1fda", "arweave_txid": "FUU-qqYlBttt14g1pyGuBawhrQR-jV5jJ5hOMWaWzDk"}
+      ],
+      "arweave_manifest_txid": "_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE",
+      "ots_bitcoin_block": 948161,
+      "notarial_jpg_release": "notarial-certificate-images-v1",
+      "supports": ["observed_preservation_process", "document_existence", "stated_dates", "stated_personnel", "stated_collected_media"],
+      "does_not_prove": ["protocol_truth", "direct_notarization_of_all_three_bitcoin_originals", "sealed_disc_internal_file_identity", "formal_project_endorsement"],
+      "object_identity_boundary": "The public notarial archive describes The Human-AI Civilization Core Protocol and Bitcoin Inscription #89491681. Stronger identity claims require a separate documented comparison."
+    },
+    {
+      "id": "sealed_disc_custody",
+      "type": "custody_record",
+      "path": "evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json",
+      "status": "reported_unopened_at_public_archive_time",
+      "supports": ["custody_and_association"],
+      "does_not_prove": ["disc_file_contents", "cross_disc_equality", "equality_to_arweave_payloads"]
+    },
+    {
+      "id": "availability_mirrors",
+      "type": "mirror_layer",
+      "systems": ["Arweave", "IPFS", "GitHub repository", "GitHub Releases"],
+      "supports": ["availability", "recovery", "cross_mirror_byte_comparison"],
+      "does_not_prove": ["canonical_authority", "semantic_truth"]
+    },
+    {
+      "id": "chronicle",
+      "type": "historical_context",
+      "role": "175-entry timestamped non-canonical Chronicle and creative/human-witness layer.",
+      "supports": ["project_recorded_history", "creative_context", "human_witness_context"],
+      "does_not_prove": ["independent_external_event_verification", "canonical_authority"]
+    },
+    {
+      "id": "later_reception_records",
+      "type": "reception_and_operations",
+      "systems": ["Echo", "Record-Chain", "verification reports", "Guardian records"],
+      "supports": ["later_response_provenance", "reported_checks", "operational_history"],
+      "does_not_prove": ["amendment", "automatic_endorsement", "formal_institutional_attestation"]
+    }
+  ],
+  "edges": [
+    {"from": "btc_originals", "to": "authority_manifest_v1_0_0", "relationship": "indexed_by"},
+    {"from": "btc_bip340_signature", "to": "authority_manifest_v1_0_0", "relationship": "signs_digest"},
+    {"from": "eth_eip712_signature_v1_0_0", "to": "authority_manifest_v1_0_0", "relationship": "signs_digest"},
+    {"from": "eth_witness_of_btc_signature", "to": "btc_bip340_signature", "relationship": "witnesses_statement"},
+    {"from": "guardian_fortification_inscriptions", "to": "physical_core_object", "relationship": "references"},
+    {"from": "six_hash_digest_manifest", "to": "physical_core_object", "relationship": "hashes_related_evidence_files"},
+    {"from": "ots_evidence_anchors", "to": "six_hash_digest_manifest", "relationship": "timestamps_digest"},
+    {"from": "shenzhen_notarial_record", "to": "physical_core_object", "relationship": "notarially_records_process"},
+    {"from": "sealed_disc_custody", "to": "shenzhen_notarial_record", "relationship": "associated_with"},
+    {"from": "availability_mirrors", "to": "authority_manifest_v1_0_0", "relationship": "mirrors_bytes"},
+    {"from": "availability_mirrors", "to": "six_hash_digest_manifest", "relationship": "mirrors_bytes"},
+    {"from": "availability_mirrors", "to": "shenzhen_notarial_record", "relationship": "mirrors_bytes"},
+    {"from": "chronicle", "to": "btc_originals", "relationship": "provides_context"},
+    {"from": "later_reception_records", "to": "btc_originals", "relationship": "records_reception"}
+  ],
+  "claim_rules": [
+    "Never use availability as a synonym for integrity.",
+    "Never use a hash match as a synonym for semantic truth.",
+    "Never use a signature as proof of civil identity or truth unless separately established.",
+    "Never use notarization beyond the stated scope of the notarial act.",
+    "Never treat physical observation or external witness as an automatic digital verification upgrade.",
+    "Always state limitations and claims not made."
+  ],
+  "corrections_path": "/api/corrections-index.json"
+}
