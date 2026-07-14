@@ -1,5 +1,5 @@
 exit_status=1
-head_sha=65592eab89af33bf8afaa622b75268c14ebec86f
+head_sha=129577617a06cef8a50ab9f6a55695b97710446e
 ===== P0 OUTPUT TAIL =====
 ::group::p0-current: python3 scripts/check_public_core_consistency.py
 $ python3 scripts/check_public_core_consistency.py
