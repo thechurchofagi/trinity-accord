@@ -63,14 +63,19 @@ def post_preflight(url: str, payload: dict, timeout: int) -> dict:
         raise RuntimeError(f"Gateway returned HTTP {exc.code}: {body[:2000]}") from exc
 
 
-def _common_args(site: str) -> list[str]:
+def _common_args(
+    site: str,
+    *,
+    actor_label: str = "Live Preflight Governance Agent",
+    provider: str = "Trinity live non-writing smoke",
+) -> list[str]:
     loaded = ",".join([
         f"{site}/agent-brief/",
         f"{site}/api/record-chain-intake-gateway.v1.json",
     ])
     return [
-        "--actor-label", "Live Preflight Governance Agent",
-        "--provider", "Trinity live non-writing smoke",
+        "--actor-label", actor_label,
+        "--provider", provider,
         "--context-level", "CC-3",
         "--context-sufficient-for-selected-action", "true",
         "--context-read-confirmed", "true",
@@ -86,8 +91,17 @@ def _common_args(site: str) -> list[str]:
     ]
 
 
-def _build_cases(builder: Path, site: str, work: Path, timeout: int) -> list[tuple[str, Path]]:
-    common = _common_args(site)
+def _build_cases(
+    builder: Path,
+    site: str,
+    work: Path,
+    timeout: int,
+    *,
+    actor_label: str = "Live Preflight Governance Agent",
+    provider: str = "Trinity live non-writing smoke",
+    echo_body: str = "Live non-writing recognition Echo.",
+) -> list[tuple[str, Path]]:
+    common = _common_args(site, actor_label=actor_label, provider=provider)
 
     def oath(record_type: str) -> str:
         return run_builder(builder, ["print-oath", "--record-type", record_type], work, timeout)
@@ -95,7 +109,7 @@ def _build_cases(builder: Path, site: str, work: Path, timeout: int) -> list[tup
     cases = [
         (
             "echo",
-            ["echo", "--body", "Live non-writing recognition Echo.", "--readback", oath("echo"),
+            ["echo", "--body", echo_body, "--readback", oath("echo"),
              "--out", "echo.json", *common],
             work / "echo.json",
         ),

@@ -276,7 +276,18 @@ def build_current_canary_payloads(site: str, nonce: str, timeout: int) -> dict[s
         builder = work / "record-chain-builder.mjs"
         builder.write_bytes(fetch_bytes(site.rstrip("/") + "/downloads/record-chain-builder.mjs", timeout))
         payloads: dict[str, dict[str, Any]] = {}
-        for record_type, path in _build_cases(builder, site.rstrip("/"), work, timeout):
+        for record_type, path in _build_cases(
+            builder,
+            site.rstrip("/"),
+            work,
+            timeout,
+            actor_label="Live Write Canary Governance Agent",
+            provider="Trinity source-gated live canary",
+            echo_body=(
+                f"Synthetic live write canary {nonce}. This record is test-only, non-authoritative, "
+                "and makes no verification, Guardian, governance, or amendment claim."
+            ),
+        ):
             payload = json.loads(path.read_text(encoding="utf-8"))
             payload.update(build_synthetic_canary_payload(record_type, nonce))
             payloads[record_type] = payload
