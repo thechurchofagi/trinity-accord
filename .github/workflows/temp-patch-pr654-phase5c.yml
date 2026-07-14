@@ -1,0 +1,60 @@
+name: Temporary PR654 Phase5C patch
+on:
+  pull_request:
+    types: [synchronize]
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: github.head_ref == 'agent/retire-fixed-stage-and-clarify-verification'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/retire-fixed-stage-and-clarify-verification
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Patch current verification fixture
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/test_phase_5c_hotfix.py')
+          s = p.read_text(encoding='utf-8')
+          old = '''            "--verification-level", "V3",
+            "--scope-label", "V3-minimal",
+            "--what-was-checked", "read homepage,read agent-brief",
+            "--verification-claim", "Test verified current public route is executable up to local validation.",
+            "--fresh-actions", "read local discovery,ran builder",
+            "--context-level", "CC-2",'''
+          new = '''            "--verification-level", "V3",
+            "--scope-label", "legacy V3 compatibility",
+            "--what-was-checked", "read homepage,read agent-brief",
+            "--verification-claim", "Test verified current public route is executable up to local validation.",
+            "--fresh-actions", "read local discovery,ran builder",
+            "--digital-profile", "integrity_checked",
+            "--relationships-checked", "provides_context,hashes",
+            "--physical-observation", "none",
+            "--external-witness", "none",
+            "--coverage-scope", "component_subset",
+            "--limitations", "test fixture only,not full public coverage",
+            "--claims-not-made", "semantic truth,institutional endorsement,physical identity",
+            "--corrections-or-supersession-checked", "true",
+            "--action-profile", "verification",
+            "--context-level", "CC-2",'''
+          if s.count(old) != 1:
+              raise SystemExit(f'Phase5C anchor count={s.count(old)}')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+          rm -f .github/workflows/temp-patch-pr654-phase5c.yml
+          rm -f diagnostics/pr654-current-tests.log
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name trinity-accord-migration-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          git diff --cached --check
+          git commit -m 'test: migrate Phase 5C verification fixture'
+          git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
