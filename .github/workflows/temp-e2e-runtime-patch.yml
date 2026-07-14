@@ -15,7 +15,8 @@ jobs:
   patch:
     if: >-
       (github.event_name == 'push' || github.head_ref == 'agent/end-to-end-action-audit') &&
-      !startsWith(github.event.head_commit.message || '', 'audit: apply focused runtime fixes')
+      !startsWith(github.event.head_commit.message || '', 'audit: apply focused runtime fixes') &&
+      !startsWith(github.event.head_commit.message || '', 'diagnostics: focused runtime patch')
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -23,23 +24,33 @@ jobs:
           ref: agent/end-to-end-action-audit
           fetch-depth: 0
           persist-credentials: true
-      - name: Apply fixes and clean diagnostics
+      - name: Apply or capture exact failure
         shell: bash
         run: |
-          set -euxo pipefail
-          python3 scripts/temp_apply_e2e_runtime_patch.py
+          set +e
+          python3 scripts/temp_apply_e2e_runtime_patch.py > /tmp/focused-patch.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            git reset --hard HEAD
+            mkdir -p diagnostics
+            {
+              echo "exit_status=$status"
+              echo "head=$(git rev-parse HEAD)"
+              cat /tmp/focused-patch.log
+            } > diagnostics/focused-runtime-patch-error.txt
+            git config user.name "trinity-accord-audit-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add diagnostics/focused-runtime-patch-error.txt
+            git commit -m "diagnostics: focused runtime patch failure"
+            git push origin HEAD:agent/end-to-end-action-audit
+            exit 0
+          fi
           rm -f scripts/temp_apply_e2e_runtime_patch.py
           rm -f .github/workflows/temp-e2e-runtime-patch.yml
           rm -rf diagnostics
-      - name: Commit permanent fixes
-        shell: bash
-        run: |
-          set -euxo pipefail
           git config user.name "trinity-accord-audit-bot"
           git config user.email "actions@users.noreply.github.com"
-          git status --short
           git add -A
-          git diff --cached --stat
           git commit -m "audit: apply focused runtime fixes"
           git pull --rebase origin agent/end-to-end-action-audit
           git push origin HEAD:agent/end-to-end-action-audit
