@@ -66,11 +66,6 @@ permissions:
   contents: write
   actions: write
 
-concurrency:
-  group: main-write-lock
-  queue: max
-  cancel-in-progress: false
-
 env:
   SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
 
@@ -79,6 +74,13 @@ jobs:
     if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    concurrency:
+      group: main-write-lock
+      queue: max
+      cancel-in-progress: false
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      expected_sha: ${{ steps.commit.outputs.expected_sha }}
 
     steps:
       - name: Checkout main
@@ -146,6 +148,7 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "No generated homepage status changes."
+            printf 'expected_sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -154,6 +157,7 @@ jobs:
           for attempt in 1 2 3; do
             if git push origin HEAD:main; then
               printf '%s\n' "changed=true" >> "$GITHUB_OUTPUT"
+              printf 'expected_sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
 
@@ -179,9 +183,24 @@ jobs:
           echo "::error::Failed to push homepage status sync after regenerated retries."
           exit 1
 
+  # Deployment and live-readback waits must not hold main-write-lock. OTS and
+  # archive writers need that lock to make the just-published chain state
+  # deployable; keeping the lock here creates a cross-workflow deadlock.
+  deploy:
+    needs: sync
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout synchronized revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.sync.outputs.expected_sha }}
+
       - name: Check live homepage freshness before optional redeploy
         id: live_pre
-        if: ${{ steps.commit.outputs.changed != 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_live_check == 'true') }}
+        if: ${{ needs.sync.outputs.changed != 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_live_check == 'true') }}
         continue-on-error: true
         run: |
           set -euo pipefail
@@ -191,10 +210,10 @@ jobs:
       # Explicitly dispatch after generated changes: workflow-authenticated pushes do not reliably trigger downstream Pages workflows.
       - name: Dispatch Deploy Pages
         id: deploy_dispatch
-        if: ${{ steps.commit.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (steps.commit.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
+        if: ${{ needs.sync.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (needs.sync.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
         env:
           GH_TOKEN: ${{ github.token }}
-          COMMIT_CHANGED: ${{ steps.commit.outputs.changed }}
+          COMMIT_CHANGED: ${{ needs.sync.outputs.changed }}
           FORCE_DEPLOY: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true' }}
           LIVE_PRE_OUTCOME: ${{ steps.live_pre.outcome }}
         run: |
@@ -213,7 +232,7 @@ jobs:
 
           echo "Dispatching deploy-pages.yml for homepage status sync."
           echo "deploy_reason=${reason}"
-          deploy_ref="$(git rev-parse HEAD)"
+          deploy_ref="${{ needs.sync.outputs.expected_sha }}"
           echo "deploy_ref=${deploy_ref}"
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
 
@@ -235,7 +254,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "Post-dispatch freshness probe failed; retrying Deploy Pages once."
-          deploy_ref="$(git rev-parse HEAD)"
+          deploy_ref="${{ needs.sync.outputs.expected_sha }}"
           gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
 
       - name: Final live deployment contract check
