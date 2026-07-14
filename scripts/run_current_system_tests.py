@@ -104,6 +104,7 @@ def main() -> int:
         "scripts/test_no_stale_echo_taxonomy_names.py",
         "scripts/test_concurrent_preflight_swarm_contract.py",
         "scripts/test_agent_e2e_journey_matrix.py",
+        "scripts/test_full_public_action_lifecycle_e2e.py",
         "tests/test_interpretation_and_verification_migration.py",
         "tests/test_verification_procedure_model.py",
         "scripts/test_builder_multidimensional_verification.py",
