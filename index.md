@@ -842,10 +842,10 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">active</p>
+    <p class="status-number">attention</p>
     <p class="status-note">
-      Pipeline: active.<br>
-      Latest technical record: R-000000083.<br>
+      Pipeline: attention.<br>
+      Latest technical record: R-000000084.<br>
       OTS: pending since 2026-07-14T12:54:16Z (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
       Arweave: waiting-for-native-ots.<br>
       Full native chain length remains API-only.<br>
@@ -921,7 +921,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>d1b9796b9e690f0b</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>79cb48836482a02a</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
