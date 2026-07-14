@@ -12,6 +12,7 @@ import dataclasses
 import hashlib
 import json
 import sys
+import tempfile
 import time
 import uuid
 import urllib.error
@@ -19,17 +20,25 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+from smoke_live_external_agent_three_core_preflight import _build_cases, fetch_bytes
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = "https://www.trinityaccord.org"
 WRITE_GATE_VALUE = "I_UNDERSTAND_THIS_CREATES_A_LIVE_CANARY"
 
 ROUTE_FAMILIES = [
-    "pure_echo",
-    "guardian_signed_echo",
-    "v0_v5",
-    "e2",
-    "v6_plus",
+    "echo",
+    "verification",
+    "guardian_application",
 ]
+
+ROUTE_ALIASES = {
+    "pure_echo": "echo",
+    "v0_v5": "verification",
+    "e2": "verification",
+    "v6_plus": "verification",
+    "guardian_application_stage_1": "guardian_application",
+}
 
 
 @dataclasses.dataclass
@@ -246,6 +255,8 @@ def preflight(gateway_base: str, preflight_path: str, payload: dict[str, Any], t
     status, body = http_json("POST", gateway_base + preflight_path, payload, timeout)
     if status >= 400:
         return "failed", body
+    if body.get("accepted") is not True or body.get("preflight") is not True:
+        return "rejected", body
     return "passed", body
 
 
@@ -253,7 +264,23 @@ def submit_canary(gateway_base: str, submit_path: str, payload: dict[str, Any], 
     status, body = http_json("POST", gateway_base + submit_path, payload, timeout)
     if status >= 400:
         return "failed", body
+    if body.get("accepted") is not True or body.get("submitted") is not True:
+        return "rejected", body
     return "submitted", body
+
+
+def build_current_canary_payloads(site: str, nonce: str, timeout: int) -> dict[str, dict[str, Any]]:
+    """Build fresh signed current submissions with the public canonical Builder."""
+    with tempfile.TemporaryDirectory(prefix="trinity-live-canary-builder-") as temp_dir:
+        work = Path(temp_dir)
+        builder = work / "record-chain-builder.mjs"
+        builder.write_bytes(fetch_bytes(site.rstrip("/") + "/downloads/record-chain-builder.mjs", timeout))
+        payloads: dict[str, dict[str, Any]] = {}
+        for record_type, path in _build_cases(builder, site.rstrip("/"), work, timeout):
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            payload.update(build_synthetic_canary_payload(record_type, nonce))
+            payloads[record_type] = payload
+        return payloads
 
 
 def read_public_status(site: str, nonce: str, timeout: int) -> tuple[bool, str | None]:
@@ -316,9 +343,20 @@ def main() -> int:
     require_write_gate(args.mode, args.confirm_live_canary, policy)
 
     nonce = uuid.uuid4().hex[:12]
-    route_families = ROUTE_FAMILIES if args.mode == "preflight-only" else [args.route]
+    try:
+        all_payloads = build_current_canary_payloads(args.site, nonce, args.timeout)
+    except Exception as exc:
+        print(f"FAIL: current public Builder could not create signed canary payloads: {exc}")
+        return 1
 
-    payloads = {route: build_synthetic_canary_payload(route, nonce) for route in route_families}
+    if args.mode == "preflight-only":
+        payloads = all_payloads
+    else:
+        selected_route = ROUTE_ALIASES.get(args.route, args.route)
+        if selected_route not in all_payloads:
+            print(f"FAIL: unsupported current write-canary route: {args.route}")
+            return 1
+        payloads = {selected_route: all_payloads[selected_route]}
 
     # Validate payloads against policy
     for route, payload in payloads.items():
@@ -360,7 +398,8 @@ def main() -> int:
         next_step = "stop: preflight failed"
     elif args.mode in {"single-write-canary", "duplicate-canary"}:
         submission_attempted = True
-        payload = payloads[args.route]
+        selected_route = next(iter(payloads))
+        payload = payloads[selected_route]
         try:
             submission_result, submit_body = submit_canary(gateway_base, submit_path, payload, args.timeout)
             receipt_id = submit_body.get("receipt_id") or submit_body.get("gateway_receipt_id")
@@ -392,7 +431,7 @@ def main() -> int:
         mode=args.mode,
         nonce=nonce,
         route_chosen=args.route if args.mode != "preflight-only" else "all_preflight_routes",
-        builder_used="synthetic_fixture_payload_builder",
+        builder_used="public_canonical_record_chain_builder",
         payload_generated=True,
         preflight_attempted=True,
         preflight_result="passed" if not preflight_failures else json.dumps(preflight_failures, sort_keys=True),
