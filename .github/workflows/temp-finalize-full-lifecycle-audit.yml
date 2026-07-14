@@ -1,0 +1,58 @@
+name: Temporary finalize full lifecycle audit
+
+on:
+  push:
+    branches:
+      - agent/end-to-end-action-audit
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: >-
+      (github.event_name == 'push' || github.head_ref == 'agent/end-to-end-action-audit') &&
+      !startsWith(github.event.head_commit.message || '', 'audit: integrate full lifecycle regression')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/end-to-end-action-audit
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Integrate permanent lifecycle test and clean temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/run_current_system_tests.py')
+          text = path.read_text(encoding='utf-8')
+          needle = '        "scripts/test_agent_e2e_journey_matrix.py",\n'
+          addition = needle + '        "scripts/test_full_public_action_lifecycle_e2e.py",\n'
+          if '"scripts/test_full_public_action_lifecycle_e2e.py"' not in text:
+              if text.count(needle) != 1:
+                  raise SystemExit('mission-critical script insertion anchor not found exactly once')
+              text = text.replace(needle, addition, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+          rm -f .github/workflows/temp-full-lifecycle-e2e.yml
+          rm -f .github/workflows/temp-finalize-full-lifecycle-audit.yml
+          rm -f diagnostics/full-lifecycle-e2e-error.txt
+          rmdir diagnostics 2>/dev/null || true
+      - name: Commit permanent integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "audit: integrate full lifecycle regression"
+          git pull --rebase origin agent/end-to-end-action-audit
+          git push origin HEAD:agent/end-to-end-action-audit
