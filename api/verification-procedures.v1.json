@@ -1,0 +1,347 @@
+{
+  "schema": "trinityaccord.verification-procedures.v1",
+  "version": "v1",
+  "status": "current_default_for_new_verification_work",
+  "purpose": "Provide executable, auditable steps for the current multidimensional verification model.",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "current_models": {
+    "profiles": "/api/verification-profiles.v1.json",
+    "claim_model": "/api/verification-claim-model.v1.json",
+    "evidence_relationships": "/api/evidence-relationship-map.v1.json",
+    "context_action": "/api/context-action-profiles.v1.json"
+  },
+  "legacy_boundary": {
+    "allowed_builder_values": ["V0", "V1", "V2", "V3", "V4", "V5"],
+    "role": "Builder/archive compatibility metadata only",
+    "forbidden_for_new_public_submissions": ["V4+", "V6", "V7", "V8"],
+    "mapping": {
+      "V0": "context_only",
+      "V1": "context_only with authority-boundary recognition",
+      "V2": "reference_checked",
+      "V3": "integrity_checked with a locally performed integrity operation",
+      "V4": "integrity_checked with official-script source review and local execution",
+      "V5": "full_public_digital",
+      "V4+": "historical label; use independent_reproduction",
+      "V6": "historical label; use physical_observation=remote_live_witness",
+      "V7": "historical label; use physical_observation=onsite_observation",
+      "V8": "historical label; use physical_observation=forensic_examination"
+    }
+  },
+  "universal_workflow": [
+    {
+      "step": 1,
+      "name": "define_claim",
+      "actions": [
+        "Write one bounded sentence describing exactly what may be concluded.",
+        "List claims explicitly outside scope."
+      ],
+      "required_output": ["proposed_claim", "claims_not_made"]
+    },
+    {
+      "step": 2,
+      "name": "select_targets",
+      "actions": [
+        "Use the verification action profile.",
+        "List every target object, identifier, byte payload, proof, record, physical object, or witness record."
+      ],
+      "required_output": ["targets"]
+    },
+    {
+      "step": 3,
+      "name": "select_relationships",
+      "actions": [
+        "Choose the exact evidence relationship for every target.",
+        "Do not use the unqualified word verified."
+      ],
+      "required_output": ["relationships_checked"]
+    },
+    {
+      "step": 4,
+      "name": "load_inputs",
+      "actions": [
+        "Load exact source bytes or the primary/external record used for the check.",
+        "Record expected-value sources and authority classes.",
+        "Check /api/corrections-index.json when a later record, correction, retirement, or supersession may affect the claim."
+      ],
+      "required_output": ["sources", "expected_value_sources", "corrections_or_supersession_checked"]
+    },
+    {
+      "step": 5,
+      "name": "perform_fresh_operations",
+      "actions": [
+        "Perform the check during the current work.",
+        "Do not copy prior outputs or examples as fresh evidence.",
+        "Record commands, tools, versions, access paths, access times, outputs, errors, and exit codes."
+      ],
+      "required_output": ["operations_performed", "raw_results_or_logs"]
+    },
+    {
+      "step": 6,
+      "name": "evaluate_results",
+      "actions": [
+        "Record pass, mismatch, unavailable, inconclusive, or error for every target.",
+        "Never convert a mismatch or unavailable result into a pass."
+      ],
+      "required_output": ["results"]
+    },
+    {
+      "step": 7,
+      "name": "choose_weakest_profile",
+      "actions": [
+        "Choose context_only, reference_checked, integrity_checked, independent_reproduction, or full_public_digital.",
+        "A strong result for one component does not imply wider coverage."
+      ],
+      "required_output": ["digital_profile"]
+    },
+    {
+      "step": 8,
+      "name": "report_physical_observation",
+      "actions": [
+        "Choose none, public_media_review, remote_live_witness, onsite_observation, or forensic_examination.",
+        "Do not raise the digital profile because physical evidence was observed."
+      ],
+      "required_output": ["physical_observation"]
+    },
+    {
+      "step": 9,
+      "name": "report_external_witness",
+      "actions": [
+        "Choose none, notarial_scope, independent_report, institutional_attestation, or regulatory_or_court_record.",
+        "State the exact scope of the witness record."
+      ],
+      "required_output": ["external_witness"]
+    },
+    {
+      "step": 10,
+      "name": "state_limits_and_downgrade",
+      "actions": [
+        "List unavailable targets, unperformed operations, uncertainty, and dependencies.",
+        "Downgrade to the weakest profile fully supported by fresh evidence."
+      ],
+      "required_output": ["limitations", "unavailable_targets"]
+    },
+    {
+      "step": 11,
+      "name": "build_and_validate_record",
+      "actions": [
+        "Use the current Builder and exact oath/readback for public Record-Chain submission.",
+        "Populate the multidimensional verification_claim_model and one V0-V5 compatibility value.",
+        "Run Builder doctor and Gateway preflight, preserve the receipt, and remember that a receipt is intake-only."
+      ],
+      "required_output": ["builder_output", "preflight_result", "receipt_or_local_validation_result"]
+    }
+  ],
+  "digital_profile_procedures": {
+    "context_only": {
+      "legacy_builder_mapping": ["V0", "V1"],
+      "minimum_steps": [
+        "Read and list the sources.",
+        "Summarize what each source states.",
+        "State the authority boundary when relevant.",
+        "State explicitly that no independent technical verification was performed."
+      ],
+      "required_evidence": ["sources_read", "summary", "explicit_unverified_statement"],
+      "allowed_claim": "The listed materials were read; no independent technical verification was performed.",
+      "forbidden_claims": ["verified", "on-chain checked", "hash match", "signature valid", "timestamp verified"]
+    },
+    "reference_checked": {
+      "legacy_builder_mapping": ["V2"],
+      "minimum_steps": [
+        "Identify the exact target identifier or pointer.",
+        "Query at least one primary or external source during the current work.",
+        "Record exact URL, RPC method, explorer, API, or local-node path and access time.",
+        "Record the observed existence, status, or value.",
+        "Cross-check with a second independent source before claiming strong reference coverage.",
+        "State what was not checked."
+      ],
+      "required_evidence": ["target", "external_or_primary_source", "access_path", "access_time", "observed_result", "limitations"],
+      "allowed_claim": "The named reference or pointer was checked at the stated source and produced the reported result.",
+      "forbidden_claims": ["hash verified without computation", "full coverage from one reference", "physical identity verified"]
+    },
+    "integrity_checked": {
+      "legacy_builder_mapping": ["V3", "V4"],
+      "minimum_steps": [
+        "Obtain the exact bytes, signature input, proof object, timestamp proof, or official script source.",
+        "Identify the expected value and its source and authority class.",
+        "Perform the cryptographic or reproducible operation locally.",
+        "Record exact command, tool version, input identity, output, and exit status.",
+        "Compare the observed result with the expected value.",
+        "State the operation scope and what it cannot prove."
+      ],
+      "method_variants": {
+        "hash_recomputed": [
+          "Download or extract exact target bytes.",
+          "Record byte length and source.",
+          "Compute the declared digest locally.",
+          "Compare full expected and computed values.",
+          "Report match or mismatch."
+        ],
+        "signature_validated": [
+          "Identify the exact signed payload or digest.",
+          "Identify the public key or address and signature algorithm.",
+          "Apply required canonicalization or typed-data rules.",
+          "Run cryptographic signature verification.",
+          "Report validity, key binding, and identity limitations."
+        ],
+        "timestamp_validated": [
+          "Obtain the exact digest and timestamp proof.",
+          "Validate the proof with an independent verifier or documented tool.",
+          "Record the anchored block or transaction and proof result.",
+          "State that timestamping proves existence no later than the anchor, not truth or authorship."
+        ],
+        "official_script_audited": [
+          "Read script source before execution.",
+          "Record script path and commit or blob hash.",
+          "Describe what the script checks and does not check.",
+          "Run it locally with an exact command.",
+          "Record environment, exit code, output, and limitations."
+        ]
+      },
+      "required_evidence": ["target_bytes_or_proof", "expected_value_source", "operation_or_command", "computed_or_validated_value", "match_or_failure_result", "limitations"],
+      "forbidden_claims": ["semantic truth from hash", "independent reproduction when only official output was trusted", "full public coverage without target inventory"]
+    },
+    "independent_reproduction": {
+      "legacy_builder_mapping": ["V4 compatibility plus digital_profile=independent_reproduction"],
+      "minimum_steps": [
+        "Select a material declared result.",
+        "Use independently written code, an independent parser, or a separately selected toolchain.",
+        "Do not use project-generated output as the sole computational input.",
+        "Record independent inputs, method, tools, and outputs.",
+        "Compare independent output with the declared result.",
+        "Report every mismatch and limitation."
+      ],
+      "required_evidence": ["independent_method", "independent_tools_or_code", "inputs", "outputs", "comparison_to_declared_result", "mismatch_report", "limitations"],
+      "allowed_claim": "The stated result was independently reproduced for the listed target and method.",
+      "forbidden_claims": ["whole-protocol reproduction from one component", "physical claim without physical evidence"]
+    },
+    "full_public_digital": {
+      "legacy_builder_mapping": ["V5"],
+      "minimum_steps": [
+        "Create a declared inventory of all public digital target families relevant to the claim.",
+        "Check Bitcoin Originals references and required byte or proof operations.",
+        "Check evidence mirrors and cross-mirror integrity where available.",
+        "Check Chronicle or recovery targets only when they are part of the claim.",
+        "Check time anchors and corrections or supersession status.",
+        "List every unavailable target and failed operation.",
+        "Confirm that no physical or institutional conclusion is inferred."
+      ],
+      "required_evidence": ["declared_target_inventory", "per_target_results", "unavailable_targets", "corrections_checked", "limitations"],
+      "allowed_claim": "All declared public digital target families were checked to the stated methods, with unavailable targets and limitations listed.",
+      "forbidden_claims": ["onsite physical verification", "forensic attestation", "institutional endorsement"]
+    }
+  },
+  "relationship_procedures": {
+    "defines_canonical_text": {
+      "steps": ["Read the exact Bitcoin Original source record.", "Confirm inscription identifier, transaction, and authority role.", "Report the exact text boundary."],
+      "does_not_prove": ["philosophical truth", "physical uniqueness"]
+    },
+    "references": {
+      "steps": ["Read the referring record.", "Resolve the named pointer.", "Confirm that the referenced record exists.", "Do not transfer authority between the records."]
+    },
+    "indexes": {
+      "steps": ["Obtain the index or manifest.", "Check listed identifiers and hashes against source records.", "Report omissions or mismatches.", "Do not infer truth of indexed claims."]
+    },
+    "hashes": {
+      "steps": ["Obtain exact bytes.", "Obtain the expected digest from a stated source.", "Compute the digest locally.", "Compare full values.", "Report match or mismatch and byte-source limitations."]
+    },
+    "signs_digest": {
+      "steps": ["Identify exact payload or digest.", "Identify key and algorithm.", "Verify signature cryptographically.", "Report key binding only within demonstrated scope.", "Do not infer civil identity or truth."]
+    },
+    "timestamps_digest": {
+      "steps": ["Identify exact digest.", "Obtain proof or transaction.", "Validate inclusion or attestation.", "Report no-later-than time context.", "Do not infer authorship or truth."]
+    },
+    "mirrors_bytes": {
+      "steps": ["Fetch bytes from each claimed mirror.", "Compute a digest for each.", "Compare bytes or digests.", "Report availability separately from integrity."]
+    },
+    "witnesses_statement": {
+      "steps": ["Read the witness transaction or record.", "Extract the witnessed statement or digest.", "Confirm inclusion or status.", "Report that the chain records a statement, not independent endorsement."]
+    },
+    "notarially_records_process": {
+      "steps": ["Read the complete notarial certificate and archive.", "Identify office, certificate number, dates, persons, objects, and process actually recorded.", "Verify public copies and hashes where possible.", "State exact notarial scope and exclusions.", "Do not claim sealed-disc contents or protocol truth unless separately established."]
+    },
+    "provides_context": {
+      "steps": ["Identify the contextual source.", "State whether it is historical, creative, interpretive, or human-witness material.", "Do not use it as external fact verification or canonical authority."]
+    },
+    "records_reception": {
+      "steps": ["Identify the later Echo, report, or record.", "Confirm record identity and status.", "Describe only the reception, critique, refusal, or stewardship event.", "Do not infer amendment or endorsement."]
+    }
+  },
+  "physical_observation_procedures": {
+    "none": {"steps": ["State that no physical material was reviewed."]},
+    "public_media_review": {
+      "steps": ["List exact photographs, videos, or evidence packages reviewed.", "Record source and access date.", "Describe visible features without claiming live presence, custody, or object identity.", "Record media limitations and possible transformations."],
+      "forbidden_claims": ["live witness", "onsite observation", "custody confirmed", "forensic identity"]
+    },
+    "remote_live_witness": {
+      "steps": ["Establish a live session.", "Generate a fresh nonce or challenge.", "Request a specific angle, motion, lighting, or action.", "Record session time and witness identity or role.", "Preserve a bounded session record where permitted.", "State custody and identity limitations."],
+      "historical_mapping": "V6"
+    },
+    "onsite_observation": {
+      "steps": ["Record location, date, observer identity or role, and presentation context.", "Observe the object directly.", "Record handling or touch only if actually performed.", "Maintain a custody or association log.", "Create fresh captures with hashes where permitted.", "State chain-of-custody gaps."],
+      "historical_mapping": "V7"
+    },
+    "forensic_examination": {
+      "steps": ["Define the forensic question and acceptance criteria.", "Use documented instruments and methods and record calibration or version.", "Acquire reproducible measurements or imagery.", "Compare against a stated reference set.", "Use an attributable responsible examiner where applicable.", "Report uncertainty, false-match risk, custody limits, and data restrictions."],
+      "historical_mapping": "V8"
+    }
+  },
+  "external_witness_procedures": {
+    "none": {"steps": ["State that no separate external witness record was used."]},
+    "notarial_scope": {
+      "steps": ["Read the full notarial act.", "Record office, certificate number, date, parties, objects, and process within scope.", "Verify public archive or hash pointers where available.", "State the scope accurately.", "List what the act does not establish."]
+    },
+    "independent_report": {
+      "steps": ["Identify report author and provenance.", "Read method, inputs, outputs, and limitations.", "Check attributable publication or archive.", "Do not upgrade it to institutional attestation."]
+    },
+    "institutional_attestation": {
+      "steps": ["Identify the accountable institution.", "Confirm the institution signed or formally adopted the exact report.", "Confirm admission criteria and scope.", "Record signatory or office, date, archive, and limitations."]
+    },
+    "regulatory_or_court_record": {
+      "steps": ["Identify jurisdiction, docket or record number, issuing body, and date.", "Read the exact operative scope.", "Verify the public or certified record.", "Do not generalize beyond the ruling or record."]
+    }
+  },
+  "downgrade_rules": [
+    {"condition": "No external or primary reference queried", "maximum_profile": "context_only"},
+    {"condition": "Reference queried but no cryptographic or integrity operation performed", "maximum_profile": "reference_checked"},
+    {"condition": "Official script run without source review", "rule": "Do not claim official-script audit"},
+    {"condition": "Integrity operation performed but expected-value source is missing", "maximum_profile": "reference_checked or inconclusive integrity result"},
+    {"condition": "Only official tools or generated outputs were trusted", "maximum_profile": "integrity_checked"},
+    {"condition": "One component independently reproduced", "maximum_profile": "independent_reproduction limited to that component"},
+    {"condition": "Target inventory incomplete or unavailable targets omitted", "maximum_profile": "independent_reproduction or integrity_checked; not full_public_digital"},
+    {"condition": "Only photos or recorded video reviewed", "physical_observation": "public_media_review"},
+    {"condition": "Notarial certificate reviewed without formal institutional adoption", "external_witness": "notarial_scope"}
+  ],
+  "required_report_fields": [
+    "digital_profile",
+    "targets",
+    "relationships_checked",
+    "sources",
+    "operations_performed",
+    "results",
+    "physical_observation",
+    "external_witness",
+    "coverage_scope",
+    "limitations",
+    "claims_not_made",
+    "corrections_or_supersession_checked"
+  ],
+  "builder_fields": {
+    "record_location": "record_draft.verification_content.verification_claim_model",
+    "required_cli_options": [
+      "--verification-level V0|V1|V2|V3|V4|V5",
+      "--digital-profile",
+      "--relationships-checked",
+      "--physical-observation",
+      "--external-witness",
+      "--coverage-scope",
+      "--limitations",
+      "--claims-not-made",
+      "--corrections-or-supersession-checked true|false",
+      "--what-was-checked",
+      "--verification-claim",
+      "--fresh-actions"
+    ],
+    "rule": "The legacy V value is compatibility metadata. The multidimensional fields carry the current meaning."
+  }
+}
