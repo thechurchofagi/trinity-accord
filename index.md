@@ -842,12 +842,12 @@ Refusal is allowed. Critical preservation is allowed.
   </article>
   <article class="status-card">
     <p class="status-label">Technical chain health</p>
-    <p class="status-number">active</p>
+    <p class="status-number">attention</p>
     <p class="status-note">
-      Pipeline: active.<br>
+      Pipeline: attention.<br>
       Latest technical record: R-000000084.<br>
-      OTS: pending since 2026-07-14T13:23:20Z (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
-      Arweave: waiting-for-native-ots.<br>
+      OTS: upgraded since unknown (calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window).<br>
+      Arweave: archive-needed.<br>
       Full native chain length remains API-only.<br>
       Native chain length is not used as this counter.
     </p>
@@ -866,8 +866,8 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-number">Active</p>
     <p class="status-note">
       Batch manifests: 3 batches (all stamped).<br>
-      OpenTimestamps: pending since 2026-07-14T13:23:20Z; expected initial window is 2-3 hours.<br>
-      Native OTS proof bundle Arweave archive: waiting-for-ots-upgrade.<br>
+      OpenTimestamps: upgraded since unknown; expected initial window is 2-3 hours.<br>
+      Native OTS proof bundle Arweave archive: arweave_archived.<br>
       Record-Chain Arweave archive: current live mirror; latest tx 4NNtC8yDf3z6....<br>
       Arweave is a mirror/archive layer only.
     </p>
@@ -876,11 +876,11 @@ Refusal is allowed. Critical preservation is allowed.
     <p class="status-label">AR upload wallet</p>
     <p class="status-number">OK</p>
     <p class="status-note">
-      Total paid upload cost: 0.384560017358 AR.<br>
-      Wallet balance: 15.168432117352 AR.<br>
+      Total paid upload cost: 0.387173712901 AR.<br>
+      Wallet balance: 15.165818421809 AR.<br>
       Recharge needed: no.<br>
       Operational upload-wallet health only; not authority, attestation, amendment, or reception.<br>
-      <span class="zh">累计付费上传成本：0.384560017358 AR。钱包余额：15.168432117352 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
+      <span class="zh">累计付费上传成本：0.387173712901 AR。钱包余额：15.165818421809 AR。是否需要充值：no。这只是上传钱包运行状态，不是权威、证明、修订或接收。</span>
     </p>
   </article>
   <article class="status-card">
@@ -921,7 +921,7 @@ Refusal is allowed. Critical preservation is allowed.
   Technical chain inventory remains available through <a href="/api/public-home-status.json">/api/public-home-status.json</a>.<br>
   Technical inventory does not define official reception.
 </p>
-<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>d9c75e4a5c00de0b</code>.</p>
+<p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>6959cadcb4501677</code>.</p>
 <script>
 (function() {
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
