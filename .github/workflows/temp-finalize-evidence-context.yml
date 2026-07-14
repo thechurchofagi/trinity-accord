@@ -58,45 +58,43 @@ jobs:
           path.write_text(text, encoding="utf-8")
           PY
           python3 scripts/generate_sitemap.py
-      - name: Validate evidence and context models
+      - name: Validate evidence profile tests
+        if: steps.sentinel.outputs.done != 'true'
+        run: >-
+          python3 -m pytest -q
+          tests/test_evidence_relationship_profiles.py
+          tests/test_legacy_pointer_coverage.py
+      - name: Validate P0 current gate
+        if: steps.sentinel.outputs.done != 'true'
+        run: python3 scripts/run_ci_group.py p0-current
+      - name: Validate full current system
+        if: steps.sentinel.outputs.done != 'true'
+        run: python3 scripts/run_current_system_tests.py
+      - name: Validate Builder receipt boundary
+        if: steps.sentinel.outputs.done != 'true'
+        run: python3 scripts/check_builder_receipt_boundary_sync.py
+      - name: Validate Builder oath and help
         if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m pytest -q \
-            tests/test_evidence_relationship_profiles.py \
-            tests/test_legacy_pointer_coverage.py
-          python3 scripts/run_ci_group.py p0-current
-          python3 scripts/run_current_system_tests.py
-      - name: Validate Builder compatibility
-        if: steps.sentinel.outputs.done != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 scripts/check_builder_receipt_boundary_sync.py
           python3 scripts/test_builder_oath_readback_canonical_output.py
           node downloads/record-chain-builder.mjs --help >/tmp/record-chain-builder-help.txt
           test -s /tmp/record-chain-builder-help.txt
-      - name: Validate Render and Gateway service contracts
+      - name: Validate Render deploy boundary
         if: steps.sentinel.outputs.done != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          required=(
-            scripts/test_render_deploy_boundary_contract.py
-            scripts/test_gateway_schema_shadow_parity.py
-            scripts/test_record_chain_intake_gateway_contract.py
-          )
-          for script in "${required[@]}"; do
-            test -f "$script"
-            python3 "$script"
-          done
+        run: python3 scripts/test_render_deploy_boundary_contract.py
+      - name: Validate Gateway schema parity
+        if: steps.sentinel.outputs.done != 'true'
+        run: python3 scripts/test_gateway_schema_shadow_parity.py
+      - name: Validate Gateway runtime contract
+        if: steps.sentinel.outputs.done != 'true'
+        run: python3 scripts/test_record_chain_intake_gateway_contract.py
       - name: Commit final compatibility files
         if: steps.sentinel.outputs.done != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p .github
           printf 'validated\n' > .github/evidence-context-finalized
           git add agent-start.md sitemap.xml .github/evidence-context-finalized
           git config user.name "github-actions[bot]"
