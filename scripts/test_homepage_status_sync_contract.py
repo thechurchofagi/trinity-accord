@@ -135,8 +135,8 @@ def main() -> int:
     # Deploy conditions must not be weakened. Generated changes must be
     # part of the actual dispatch condition, not merely mentioned in logging.
     for marker in [
-        "if: ${{ steps.commit.outputs.changed == 'true' ||",
-        "steps.commit.outputs.changed == 'true'",
+        "if: ${{ needs.sync.outputs.changed == 'true' ||",
+        "needs.sync.outputs.changed == 'true'",
         "github.event.inputs.force_deploy == 'true'",
         "steps.live_pre.outcome == 'failure'",
     ]:
@@ -150,6 +150,30 @@ def main() -> int:
         "live_freshness_failed",
     ]:
         require(marker in home, f"homepage sync deploy reason logging missing marker: {marker}")
+
+    # The main writer lock must end with the sync job. Deployment verification
+    # can require OTS/archive writers, so holding main-write-lock while waiting
+    # for Pages would deadlock those prerequisite workflows.
+    require(
+        "sync:\n    if:" in home
+        and "concurrency:\n      group: main-write-lock" in home,
+        "homepage sync writer job must own main-write-lock",
+    )
+    require(
+        "deploy:\n    needs: sync" in home,
+        "homepage deployment must be a separate job after sync",
+    )
+    deploy_job = home.index("  deploy:\n")
+    live_wait = home.index("- name: Check live homepage freshness")
+    require(
+        live_wait > deploy_job,
+        "live deployment waits must run after the lock-owning sync job",
+    )
+    require(
+        "expected_sha: ${{ steps.commit.outputs.expected_sha }}" in home
+        and "ref: ${{ needs.sync.outputs.expected_sha }}" in home,
+        "deployment job must verify the exact synchronized revision",
+    )
 
     # Deploy workflow should verify committed artifacts, not generate a deployment-only state.
     for marker in [
