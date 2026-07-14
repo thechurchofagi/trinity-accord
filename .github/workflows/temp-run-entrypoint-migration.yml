@@ -66,12 +66,10 @@ jobs:
             api/verification-quick-map.json; do
             python3 -m json.tool "$file" >/dev/null
           done
-      - name: Validate P0 and full current system
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 scripts/run_ci_group.py p0-current
-          python3 scripts/run_current_system_tests.py
+      - name: Validate P0 current gate
+        run: python3 scripts/run_ci_group.py p0-current
+      - name: Validate full current system
+        run: python3 scripts/run_current_system_tests.py
       - name: Validate Builder compatibility
         shell: bash
         run: |
