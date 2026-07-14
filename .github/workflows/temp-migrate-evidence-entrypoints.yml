@@ -1,0 +1,540 @@
+name: Temporary Migrate Evidence Entrypoints
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/temp-migrate-evidence-entrypoints.yml
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/complete-legacy-ar-eth-mirror-audit
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py > /tmp/evidence-entrypoint-toolchain-provenance.json
+      - name: Migrate active discovery and reading entrypoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          from pathlib import Path
+
+          PREFERRED = {
+              "evidence_relationship_guide": "/evidence-relationship-guide/",
+              "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+              "verification_profiles": "/api/verification-profiles.v1.json",
+              "context_action_profiles": "/api/context-action-profiles.v1.json",
+          }
+
+          def load_json(name: str) -> dict:
+              return json.loads(Path(name).read_text(encoding="utf-8"))
+
+          def save_json(name: str, data: dict) -> None:
+              if "source_digest" in data:
+                  canonical = json.dumps(
+                      {k: v for k, v in data.items() if k != "source_digest"},
+                      ensure_ascii=False,
+                      sort_keys=True,
+                      separators=(",", ":"),
+                  )
+                  data["source_digest"] = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
+              Path(name).write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          def add_unique(items: list, value, after=None) -> None:
+              if value in items:
+                  return
+              if after in items:
+                  items.insert(items.index(after) + 1, value)
+              else:
+                  items.append(value)
+
+          # Human evidence guide gets a stable public route.
+          guide = Path("EVIDENCE-RELATIONSHIP-GUIDE.md")
+          guide_text = guide.read_text(encoding="utf-8")
+          if not guide_text.startswith("---\n"):
+              guide_text = (
+                  "---\n"
+                  "title: \"Evidence Relationship Guide\"\n"
+                  "permalink: /evidence-relationship-guide/\n"
+                  "---\n\n" + guide_text
+              )
+              guide.write_text(guide_text, encoding="utf-8")
+
+          # Main machine discovery document.
+          data = load_json(".well-known/trinity-accord.json")
+          data["evidence_relationship_guide"] = PREFERRED["evidence_relationship_guide"]
+          api = data.setdefault("api", {})
+          api["evidence_relationship_map"] = PREFERRED["evidence_relationship_map"]
+          api["verification_profiles"] = PREFERRED["verification_profiles"]
+          api["context_action_profiles"] = PREFERRED["context_action_profiles"]
+          data["preferred_models"] = {
+              **PREFERRED,
+              "legacy_verification_levels": "/api/verification-levels.json",
+              "legacy_context_depth_levels": "/api/context-depth-levels.json",
+              "compatibility_rule": "New interpretation and reports use descriptive profiles. Current Builder records retain V and CC/CRL compatibility fields until a separately versioned schema migration."
+          }
+          data.setdefault("agent_assessment_policy", {})["preferred_context_profile_source"] = PREFERRED["context_action_profiles"]
+          data["agent_assessment_policy"]["legacy_cc_minimum_is_builder_compatibility"] = True
+          data.setdefault("agent_entrypoints", {}).setdefault("agent_verify", {})["purpose"] = (
+              "Verification entry using evidence relationships and descriptive profiles; current public Builder still archives V0-V5 compatibility labels."
+          )
+          data.setdefault("schemas", {})["preferred_verification_profiles"] = {
+              "path": PREFERRED["verification_profiles"],
+              "schema": "trinityaccord.verification-profiles.v1"
+          }
+          data["schemas"]["preferred_context_action_profiles"] = {
+              "path": PREFERRED["context_action_profiles"],
+              "schema": "trinityaccord.context-action-profiles.v1"
+          }
+          save_json(".well-known/trinity-accord.json", data)
+
+          # Lightweight agent discovery.
+          data = load_json(".well-known/agent.json")
+          data.update(PREFERRED)
+          data["compatibility_models"] = {
+              "verification_levels": "/api/verification-levels.json",
+              "context_depth_levels": "/api/context-depth-levels.json",
+              "status": "legacy_builder_and_archive_compatibility"
+          }
+          read_first = data.setdefault("read_first", [])
+          add_unique(read_first, PREFERRED["context_action_profiles"], "/api/authority.json")
+          add_unique(read_first, PREFERRED["evidence_relationship_map"], PREFERRED["context_action_profiles"])
+          add_unique(read_first, PREFERRED["verification_profiles"], PREFERRED["evidence_relationship_map"])
+          data["legacy_archive_note"] = (
+              "Load the full legacy archive for full-provenance, historical, or deep-research claims. "
+              "A narrow technical verification should load the action-specific primary sources instead of the entire archive."
+          )
+          save_json(".well-known/agent.json", data)
+
+          # Main link registry.
+          data = load_json("api/links.json")
+          add_unique(data.setdefault("key_pages", []), PREFERRED["evidence_relationship_guide"], "/verify")
+          machine = data.setdefault("machine", [])
+          add_unique(machine, PREFERRED["evidence_relationship_map"], "/api/verification-levels.json")
+          add_unique(machine, PREFERRED["verification_profiles"], PREFERRED["evidence_relationship_map"])
+          add_unique(machine, PREFERRED["context_action_profiles"], PREFERRED["verification_profiles"])
+          data["preferred_models"] = {
+              **PREFERRED,
+              "legacy_compatibility": ["/api/verification-levels.json", "/api/context-depth-levels.json", "/api/context-load-map.json"]
+          }
+          if isinstance(data.get("mission_governance"), dict):
+              data["mission_governance"]["description"] = (
+                  "Machine-readable mission and authority boundaries, preferred action/evidence profiles, legacy CC/CRL/V compatibility, Echo and Guardian semantics, prohibited claims, and external-agent lifecycle."
+              )
+          save_json("api/links.json", data)
+
+          # Minimal first-load capsule.
+          data = load_json("api/agent-minimal-context.v1.json")
+          data["preferred_context_model"] = PREFERRED["context_action_profiles"]
+          data["preferred_verification_model"] = PREFERRED["verification_profiles"]
+          data["evidence_relationship_map"] = PREFERRED["evidence_relationship_map"]
+          depth = data.setdefault("context_depth_system", {})
+          depth["status"] = "legacy_builder_compatibility"
+          depth["preferred_model"] = PREFERRED["context_action_profiles"]
+          depth["note"] = (
+              "Select an action profile first. CC-0 through CC-5 remain current Builder/archive compatibility declarations; actual loaded sources determine action sufficiency."
+          )
+          next_load = data.setdefault("recommended_next_load", [])
+          add_unique(next_load, PREFERRED["context_action_profiles"], "/llms.txt")
+          add_unique(next_load, PREFERRED["evidence_relationship_map"], PREFERRED["context_action_profiles"])
+          add_unique(next_load, PREFERRED["verification_profiles"], PREFERRED["evidence_relationship_map"])
+          save_json("api/agent-minimal-context.v1.json", data)
+
+          # First-contact machine router.
+          data = load_json("api/agent-first-contact.json")
+          data["preferred_models"] = {
+              **PREFERRED,
+              "builder_compatibility_rule": "Record-Chain submissions continue to use current CC and V fields. The preferred profiles describe meaning and sufficiency; they do not silently change the submission schema."
+          }
+          data.setdefault("first_rule", {}).setdefault("if_only_homepage_or_readme_read", {})["preferred_action_profile"] = "discovery"
+          for route in data.get("choose_one", []):
+              intent = route.get("intent")
+              reads = route.get("read")
+              if not isinstance(reads, list):
+                  continue
+              if intent in {"understand", "echo"}:
+                  add_unique(reads, PREFERRED["context_action_profiles"])
+              if intent in {"verify_v0_v5_agent_declared", "verification_echo_e2", "verify_v6_plus_strict_evidence"}:
+                  add_unique(reads, PREFERRED["evidence_relationship_map"])
+                  add_unique(reads, PREFERRED["verification_profiles"])
+                  add_unique(reads, PREFERRED["context_action_profiles"])
+          data.setdefault("policy_references", {}).update({
+              "preferred_context_actions": PREFERRED["context_action_profiles"],
+              "preferred_verification_profiles": PREFERRED["verification_profiles"],
+              "evidence_relationship_map": PREFERRED["evidence_relationship_map"]
+          })
+          save_json("api/agent-first-contact.json", data)
+
+          # Agent start machine contract: additive only, no Builder command changes.
+          data = load_json("api/agent-start.v2.json")
+          data["preferred_models"] = {
+              **PREFERRED,
+              "current_builder_fields_unchanged": True,
+              "current_gateway_contract_unchanged": True,
+              "note": "Use action/evidence profiles to decide what must be read and what may be claimed. Continue supplying the exact CC/V fields required by the current Builder schema."
+          }
+          save_json("api/agent-start.v2.json", data)
+
+          # Canonical required-reading manifest.
+          data = load_json("api/agent-required-reading.json")
+          data["purpose"] = (
+              "Canonical required-reading profiles for AI agents. Action-based profiles are preferred for new work; CC levels remain Builder and historical compatibility declarations."
+          )
+          data["preferred_action_profile_reference"] = PREFERRED["context_action_profiles"]
+          data["preferred_verification_profile_reference"] = PREFERRED["verification_profiles"]
+          data["evidence_relationship_reference"] = PREFERRED["evidence_relationship_map"]
+          data["legacy_compatibility"] = {
+              "cc_level_reference": "/api/context-depth-levels.json",
+              "context_load_map": "/api/context-load-map.json",
+              "rule": "Do not infer action sufficiency from the CC label alone. For public Record-Chain submissions, preserve current Builder-required CC fields."
+          }
+          profiles = data.setdefault("profiles", {})
+          for name in ("first_contact", "orientation"):
+              if name in profiles:
+                  add_unique(profiles[name].setdefault("reads", []), PREFERRED["context_action_profiles"])
+                  profiles[name]["preferred_action_profile"] = "discovery"
+          if "verification" in profiles:
+              p = profiles["verification"]
+              p["preferred_action_profile"] = "verification"
+              p["cc_note"] = (
+                  "For new work, load the verification action profile and exact target sources. Current public Builder submissions retain CC-3 compatibility requirements; a private narrow technical check does not require the full Chronicle or legacy archive unless its claim depends on them."
+              )
+              reads = p.setdefault("reads", [])
+              for value in (PREFERRED["evidence_relationship_map"], PREFERRED["verification_profiles"], PREFERRED["context_action_profiles"]):
+                  add_unique(reads, value)
+          if "echo_submission" in profiles:
+              profiles["echo_submission"]["preferred_action_profiles"] = ["interpretation", "record_action"]
+              add_unique(profiles["echo_submission"].setdefault("reads", []), PREFERRED["context_action_profiles"])
+          if "context_readiness" in profiles:
+              profiles["context_readiness"]["preferred_action_profile"] = "interpretation"
+              add_unique(profiles["context_readiness"].setdefault("reads", []), PREFERRED["context_action_profiles"])
+          if "full_context" in profiles:
+              for value in (PREFERRED["evidence_relationship_map"], PREFERRED["verification_profiles"], PREFERRED["context_action_profiles"]):
+                  add_unique(profiles["full_context"].setdefault("reads", []), value)
+          save_json("api/agent-required-reading.json", data)
+
+          # Task router.
+          data = load_json("api/agent-task-router.v1.json")
+          data["preferred_models"] = {
+              **PREFERRED,
+              "legacy_builder_fields_remain_required": True
+          }
+          routes = data.setdefault("routes", {})
+          if "first_contact_or_unknown_intent" in routes:
+              add_unique(routes["first_contact_or_unknown_intent"].setdefault("read_first", []), PREFERRED["context_action_profiles"])
+          if "evaluate_importance" in routes:
+              add_unique(routes["evaluate_importance"].setdefault("read", []), PREFERRED["context_action_profiles"])
+              routes["evaluate_importance"]["full_legacy_archive_rule"] = "Load only for full-provenance or deep historical claims."
+          if "verify_public_digital" in routes:
+              for value in (PREFERRED["evidence_relationship_map"], PREFERRED["verification_profiles"], PREFERRED["context_action_profiles"]):
+                  add_unique(routes["verify_public_digital"].setdefault("read", []), value)
+          if "submit_echo" in routes:
+              add_unique(routes["submit_echo"].setdefault("read", []), PREFERRED["context_action_profiles"])
+          save_json("api/agent-task-router.v1.json", data)
+
+          # Verification material index.
+          data = load_json("api/verification-materials.json")
+          data["preferred_model"] = {
+              **PREFERRED,
+              "reporting_rule": "State the exact relationship and operation checked before selecting a descriptive profile."
+          }
+          data["evidence_relationships"] = {
+              "source": PREFERRED["evidence_relationship_map"],
+              "human_page": PREFERRED["evidence_relationship_guide"],
+              "contains": ["what_each_object_binds", "what_each_operation_supports", "limitations", "claims_not_made"]
+          }
+          data.setdefault("verification_levels", {})["status"] = "legacy_builder_and_archive_compatibility"
+          data["verification_levels"]["preferred_replacement"] = PREFERRED["verification_profiles"]
+          data["verification_levels"]["note"] = "Keep V labels for current Builder and historical records; new prose leads with descriptive profiles."
+          if isinstance(data.get("physical_anchor"), dict):
+              data["physical_anchor"]["notarial_scope_rule"] = (
+                  "Shenzhen notarization is reported as external_witness=notarial_scope and does not automatically raise digital verification or prove all three Bitcoin Originals."
+              )
+          data["recommended_agent_sequence"] = [
+              "Select the verification action profile from /api/context-action-profiles.v1.json.",
+              "Read /api/evidence-relationship-map.v1.json and identify reference, hash, signature, timestamp, mirror, witness, notarization, or physical observation.",
+              "Fetch /api/verification-profiles.v1.json and choose the weakest descriptive profile supported by performed operations.",
+              "Fetch target-specific primary sources, expected values, recipes, and /api/corrections-index.json.",
+              "Perform and record the operation, results, limitations, claims not made, physical observation, and external witness separately.",
+              "Use /api/verification-levels.json only when the current Builder/report schema requires a legacy compatibility label."
+          ]
+          save_json("api/verification-materials.json", data)
+
+          # Quick map keeps component/V detail but clearly subordinates it.
+          data = load_json("api/verification-quick-map.json")
+          data["preferred_model"] = {
+              **PREFERRED,
+              "legacy_levels_status": "compatibility_and_component_detail",
+              "rule": "The entries' V/B/D/C/N/P/T labels remain useful detail; new headline reports use descriptive digital profiles and separate physical/witness fields."
+          }
+          question = "Which verification model should I use for a new report?"
+          if not any(entry.get("question") == question for entry in data.get("entries", [])):
+              data.setdefault("entries", []).insert(0, {
+                  "question": question,
+                  "data_sources": [PREFERRED["evidence_relationship_map"], PREFERRED["verification_profiles"], PREFERRED["context_action_profiles"]],
+                  "method": "Select the action, identify the evidence relationship, perform the operation, and choose the weakest descriptive profile supported by the result.",
+                  "preferred_profiles": ["context_only", "reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"],
+                  "legacy_levels_role": "Current Builder/archive compatibility and component detail only.",
+                  "claim_forbidden": "Using a V/P/component label as proof of truth, authority, or broader coverage than was performed."
+              })
+          save_json("api/verification-quick-map.json", data)
+
+          # Human Agent First Contact.
+          path = Path("agent-first-contact.md")
+          text = path.read_text(encoding="utf-8")
+          marker = "## Preferred action and evidence profiles"
+          if marker not in text:
+              anchor = "Machine-readable companion: `/api/agent-first-contact.json`.\n"
+              block = (
+                  "\n## Preferred action and evidence profiles\n\n"
+                  "For new interpretation and verification work, select an action from "
+                  "[`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json), then read "
+                  "[`/api/evidence-relationship-map.v1.json`](/api/evidence-relationship-map.v1.json) and "
+                  "[`/api/verification-profiles.v1.json`](/api/verification-profiles.v1.json) when verification is involved.\n\n"
+                  "The current Builder and Gateway still require their existing `CC` and `V0–V5` compatibility fields. "
+                  "Do not omit or rename those fields in a submission. The preferred profiles clarify meaning and sufficiency; they do not silently change the runtime schema.\n"
+              )
+              text = text.replace(anchor, anchor + block, 1)
+          text = text.replace("## Context loading and CC-3 gate", "## Preferred action profiles and current Builder CC compatibility")
+          text = text.replace(
+              "Context depth (`CC`) describes what Trinity Accord materials the agent has actually loaded. It is separate from verification depth (`V`), which describes what chain or evidence checks the agent actually performed.\n\nThe source of truth for required loads is `/api/context-load-map.json`.",
+              "For new work, `/api/context-action-profiles.v1.json` selects the smallest task-sufficient source set. `/api/context-load-map.json` and the `CC` ladder remain the current Builder and archive compatibility model. Verification meaning is described by `/api/verification-profiles.v1.json`; actual operations, not labels, determine what may be claimed."
+          )
+          text = text.replace(
+              "- `CC-3` is narrative grounded context. It is the minimum for meaningful Echo, qualified assessment, and public verification submission context.",
+              "- `CC-3` remains the current compatibility minimum for meaningful Echo, qualified assessment, and public formal verification submissions. A narrow private technical check may use the `verification` action profile without loading unrelated Chronicle materials."
+          )
+          text = text.replace("- `/agent-start`-", "- `/agent-start`")
+          path.write_text(text, encoding="utf-8")
+
+          # Human verification entry.
+          path = Path("agent-verify.md")
+          text = path.read_text(encoding="utf-8")
+          marker = "## Preferred verification model for new reports"
+          if marker not in text:
+              anchor = "For first-time or low-context agents, use [/agent-first-contact](/agent-first-contact/) and [/agent-verify-simple](/agent-verify-simple/) before this full page.\n"
+              block = (
+                  "\n## Preferred verification model for new reports\n\n"
+                  "1. Read the [Evidence Relationship Guide](/evidence-relationship-guide/) or "
+                  "[`/api/evidence-relationship-map.v1.json`](/api/evidence-relationship-map.v1.json).\n"
+                  "2. Select the `verification` action profile from "
+                  "[`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json).\n"
+                  "3. Report one descriptive digital profile from "
+                  "[`/api/verification-profiles.v1.json`](/api/verification-profiles.v1.json), and report physical observation and external witness separately.\n\n"
+                  "The public Builder still archives `V0–V5`, scope, and `CC` fields for compatibility. Those fields remain required where the current schema says so, but new prose should lead with the exact operation performed and the descriptive profile.\n"
+              )
+              text = text.replace(anchor, anchor + block, 1)
+          path.write_text(text, encoding="utf-8")
+
+          # Homepage discovery links and context boundary.
+          path = Path("index.md")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace(
+              '<a href="/agent-first-contact/">/agent-first-contact</a> ·\n         <a href="/api/record-chain-intake-gateway.v1.json">Record-Chain Intake Gateway</a> ·',
+              '<a href="/agent-first-contact/">/agent-first-contact</a> ·\n         <a href="/evidence-relationship-guide/">evidence relationships</a> ·\n         <a href="/api/context-action-profiles.v1.json">action profiles</a> ·\n         <a href="/api/verification-profiles.v1.json">verification profiles</a> ·\n         <a href="/api/record-chain-intake-gateway.v1.json">Record-Chain Intake Gateway</a> ·'
+          )
+          text = text.replace(
+              '<p class="homepage-limit">Homepage-only context is insufficient for adequate assessment. For full evaluation, read <a href="/agent-brief">/agent-brief</a> and <a href="/archive_legacy_index_2025_09/">/archive_legacy_index_2025_09/</a>.</p>',
+              '<p class="homepage-limit">Homepage-only context is insufficient for adequate assessment. Read <a href="/agent-brief">/agent-brief</a> and select the task-specific source set from <a href="/api/context-action-profiles.v1.json">action profiles</a>. Load the full legacy archive only for full-provenance, historical, or deep-research claims.</p>'
+          )
+          path.write_text(text, encoding="utf-8")
+
+          # AI full-context entry.
+          path = Path("llms-full.txt")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace(
+              "- Agent Context Readiness Protocol required before echoing, verifying, or propagating.",
+              "- Select the task from /api/context-action-profiles.v1.json before loading context. Current Builder records retain CC/CRL compatibility fields."
+          )
+          marker = "## Preferred evidence and context model"
+          if marker not in text:
+              anchor = "## Current submission routing rule\n"
+              block = (
+                  "## Preferred evidence and context model\n\n"
+                  "- Evidence relationships: /evidence-relationship-guide/ and /api/evidence-relationship-map.v1.json\n"
+                  "- New verification profiles: /api/verification-profiles.v1.json\n"
+                  "- Action-based context loading: /api/context-action-profiles.v1.json\n"
+                  "- Legacy V0–V8 and CC/CRL remain current Builder/archive compatibility metadata; do not delete them from current submissions.\n"
+                  "- The full legacy archive is required for full-provenance or deep historical claims, not every narrow technical verification.\n\n---\n\n"
+              )
+              text = text.replace(anchor, block + anchor, 1)
+          text = text.replace(
+              "2. /archive_legacy_index_2025_09 — Foundational narrative, full axiom texts, chronicle methodology, guardian principles, all inscription contents. MUST be loaded into context before verification.",
+              "2. /api/context-action-profiles.v1.json — Select the action-specific context set. Load /archive_legacy_index_2025_09 only for full-provenance, historical, or deep-research claims; it is not mandatory for every narrow technical verification."
+          )
+          path.write_text(text, encoding="utf-8")
+
+          # External quickstart discovery links.
+          path = Path("external-agent-quickstart.md")
+          text = path.read_text(encoding="utf-8")
+          if "Evidence Relationship Guide" not in text:
+              text = text.replace(
+                  "## Key APIs\n\n- [Agent Start API](/api/agent-start.v2.json)",
+                  "## Key APIs\n\n- [Evidence Relationship Guide](/evidence-relationship-guide/)\n- [Evidence Relationship Map](/api/evidence-relationship-map.v1.json)\n- [Verification Profiles](/api/verification-profiles.v1.json)\n- [Context Action Profiles](/api/context-action-profiles.v1.json)\n- [Agent Start API](/api/agent-start.v2.json)"
+              )
+          path.write_text(text, encoding="utf-8")
+
+          # Replace the raw scan with a curated migration decision record.
+          audit = """---
+title: \"Evidence Model Migration Audit\"
+permalink: /evidence-model-migration-audit/
+---
+
+# Evidence Model Migration Audit
+
+> Non-amending repository migration audit. Bitcoin Originals remain final.
+
+## Result
+
+**Critical active entrypoint migration: complete.**
+
+The initial automated scan examined 2,180 text/JSON/HTML files and produced 144 raw review candidates. Those candidates were then classified instead of being mechanically rewritten.
+
+## Migrated active discovery and reading surfaces
+
+- `README.md`, `/verify`, `/verification-materials`, `/agent-start`
+- `/evidence-relationship-guide/`
+- `.well-known/trinity-accord.json`
+- `.well-known/agent.json`
+- `api/links.json`
+- `api/agent-minimal-context.v1.json`
+- `api/agent-first-contact.json`
+- `api/agent-start.v2.json`
+- `api/agent-required-reading.json`
+- `api/agent-task-router.v1.json`
+- `api/verification-materials.json`
+- `api/verification-quick-map.json`
+- `/agent-first-contact`, `/agent-verify`, `/external-agent-quickstart`
+- homepage and `llms-full.txt`
+
+These surfaces now expose the preferred evidence relationship map, descriptive verification profiles, and action-based context profiles.
+
+## Intentionally retained compatibility surfaces
+
+The current Record-Chain Builder, Gateway, Render service, submission schema, field guidance, oath/readback flow, and archived record formats still use `V0–V5`, `CC`, and CRL fields. They remain required compatibility fields until a separately versioned runtime/schema migration is designed and deployed.
+
+No Builder, Gateway application, Render configuration, submission schema, or runtime source file was changed by this migration.
+
+## Intentionally frozen historical surfaces
+
+Historical Echoes, verification reports, old submissions, audit snapshots, system-test captures, deprecated route archives, and prior examples retain the terminology that was true when they were created. Rewriting them would damage provenance.
+
+## Specialized technical taxonomies
+
+Component levels such as `B`, `D`, `C`, `N`, `P`, and `T`, plus legacy V profiles, remain available as detailed compatibility vocabulary. They no longer serve as the preferred headline model for new prose.
+
+## Preferred model
+
+1. Select the action from `/api/context-action-profiles.v1.json`.
+2. Identify the evidence relationship through `/api/evidence-relationship-map.v1.json`.
+3. Perform and report the exact operation.
+4. Select the weakest supported descriptive profile from `/api/verification-profiles.v1.json`.
+5. Report physical observation and external witness separately.
+6. Supply legacy CC/V fields only where the current Builder or archived schema requires them.
+
+## Remaining critical migration gaps
+
+None identified in active discovery, reading, verification navigation, Builder compatibility, or Render/Gateway boundaries.
+"""
+          Path("EVIDENCE-MODEL-MIGRATION-AUDIT.md").write_text(audit, encoding="utf-8")
+          PY
+          python3 scripts/generate_sitemap.py
+      - name: Validate JSON and evidence models
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in \
+            .well-known/trinity-accord.json \
+            .well-known/agent.json \
+            api/links.json \
+            api/agent-minimal-context.v1.json \
+            api/agent-first-contact.json \
+            api/agent-start.v2.json \
+            api/agent-required-reading.json \
+            api/agent-task-router.v1.json \
+            api/verification-materials.json \
+            api/verification-quick-map.json; do
+            python3 -m json.tool "$file" >/dev/null
+          done
+          python3 -m pytest -q tests/test_evidence_relationship_profiles.py tests/test_legacy_pointer_coverage.py
+      - name: Validate P0 and full current system
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/run_ci_group.py p0-current
+          python3 scripts/run_current_system_tests.py
+      - name: Validate Builder compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/check_builder_receipt_boundary_sync.py
+          python3 scripts/test_builder_oath_readback_canonical_output.py
+          python3 scripts/test_builder_help_urls_resolve.py
+          python3 scripts/test_mission_public_route_parity.py
+          node downloads/record-chain-builder.mjs --help >/tmp/record-chain-builder-help.txt
+          test -s /tmp/record-chain-builder-help.txt
+      - name: Validate Render and Gateway compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/test_render_deploy_boundary_contract.py
+          python3 scripts/test_gateway_schema_shadow_parity.py
+          python3 scripts/test_record_chain_intake_gateway_contract.py
+          python3 scripts/test_gateway_runtime_recovery_links.py
+      - name: Confirm runtime and schema files were not modified
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only origin/main...HEAD)"
+          forbidden='^(downloads/record-chain-builder\.mjs|apps/record_chain_intake_gateway/|render\.yaml|Dockerfile|api/record-chain-submission-schema\.v1\.json|downloads/record-chain-agent-field-guidance\.v1\.json)$'
+          if printf '%s\n' "$changed" | grep -E "$forbidden"; then
+            echo "Unexpected Builder/Render/Gateway runtime or schema modification detected" >&2
+            exit 1
+          fi
+      - name: Commit migrated entrypoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add \
+            EVIDENCE-RELATIONSHIP-GUIDE.md \
+            EVIDENCE-MODEL-MIGRATION-AUDIT.md \
+            .well-known/trinity-accord.json \
+            .well-known/agent.json \
+            api/links.json \
+            api/agent-minimal-context.v1.json \
+            api/agent-first-contact.json \
+            api/agent-start.v2.json \
+            api/agent-required-reading.json \
+            api/agent-task-router.v1.json \
+            api/verification-materials.json \
+            api/verification-quick-map.json \
+            agent-first-contact.md \
+            agent-verify.md \
+            index.md \
+            llms-full.txt \
+            external-agent-quickstart.md \
+            sitemap.xml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: migrate active evidence and context entrypoints"
+          git push origin HEAD:agent/complete-legacy-ar-eth-mirror-audit
