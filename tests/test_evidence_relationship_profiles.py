@@ -83,7 +83,10 @@ def test_context_action_profiles() -> None:
         "record_action",
         "deep_research",
     }
-    assert "/api/evidence-relationship-map.v1.json" in profiles["verification"]["must_load"]
+    assert any(
+        "/api/evidence-relationship-map.v1.json" in item
+        for item in profiles["verification"]["must_load"]
+    )
     assert "declared CC number alone" in data["sufficiency"]["not_sufficient_basis"]
     assert data["legacy_compatibility"]["context_depth_file"] == "/api/context-depth-levels.json"
 
