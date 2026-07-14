@@ -1,0 +1,41 @@
+name: Temporary builder action help capture
+
+on:
+  push:
+    branches:
+      - agent/end-to-end-action-audit
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    if: ${{ !startsWith(github.event.head_commit.message, 'diagnostics:') }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/end-to-end-action-audit
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: ".node-version"
+      - name: Capture Builder help and templates
+        shell: bash
+        run: |
+          set +e
+          mkdir -p diagnostics
+          {
+            node downloads/record-chain-builder.mjs help
+            for r in echo verification guardian_application guardian_retirement propagation correction classification_update context_insufficient_notice; do
+              echo
+              echo "===== TEMPLATE ${r} ====="
+              node downloads/record-chain-builder.mjs template --record-type "${r}"
+            done
+          } > diagnostics/e2e-builder-help.txt 2>&1
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add diagnostics/e2e-builder-help.txt
+          git commit -m "diagnostics: capture Builder action help"
+          git push origin HEAD:agent/end-to-end-action-audit
