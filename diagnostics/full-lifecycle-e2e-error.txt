@@ -1,0 +1,22 @@
+exit_status=1
+head=d016d750bba728ddb4ac66f9f4a4f2b53f31c8dd
+===== FULL LIFECYCLE E2E OUTPUT =====
+2026-07-14 12:13:21,465 INFO     rcg — Record-Chain Intake Gateway starting — write_mode=github_contents_pending, max_body=524288
+2026-07-14 12:13:21,575 INFO     httpx — HTTP Request: POST http://testserver/record-chain/preflight "HTTP/1.1 200 OK"
+2026-07-14 12:13:21,580 INFO     httpx — HTTP Request: POST http://testserver/record-chain/submit "HTTP/1.1 503 Service Unavailable"
+2026-07-14 12:13:21,580 INFO     rcg — Record-Chain Intake Gateway shutting down
+Traceback (most recent call last):
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_full_public_action_lifecycle_e2e.py", line 866, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_full_public_action_lifecycle_e2e.py", line 538, in main
+    echo_submit, echo_final = build_and_append(
+                              ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_full_public_action_lifecycle_e2e.py", line 405, in build_and_append
+    first = submit(client, submission)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_full_public_action_lifecycle_e2e.py", line 359, in submit
+    fail(f"submit HTTP {response.status_code}: {response.text}")
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_full_public_action_lifecycle_e2e.py", line 54, in fail
+    raise AssertionError(message)
+AssertionError: submit HTTP 503: {"detail":"Missing required config: TRINITY_REPO_FULL_NAME, TRINITY_TARGET_BRANCH, TRINITY_GITHUB_TOKEN"}
