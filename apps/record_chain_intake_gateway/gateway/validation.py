@@ -902,7 +902,7 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
             _PUBLIC_VERIFICATION_LEVELS = {"V0", "V1", "V2", "V3", "V4", "V5"}
             vlevel = str(content.get("verification_level", "")).strip().upper()
             if vlevel not in _PUBLIC_VERIFICATION_LEVELS:
-                missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "Public Record-Chain verification intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.")
+                missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "Public Record-Chain verification intake accepts V0-V5 only as legacy compatibility metadata. V4+, V6, V7, and V8 are historical-only; use digital_profile, physical_observation, and external_witness.")
     elif record_type == "guardian_application":
         content = draft.get("guardian_application_content")
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):

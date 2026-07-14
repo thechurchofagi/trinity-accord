@@ -185,6 +185,7 @@
       "purpose": "Append-only correction of a prior final record. It links to the original record and explains a concrete error, omission, or bounded claim that needs correction.",
       "before_build": [
         "Read the target final record first.",
+        "Confirm the current authorship key equals the target final record authorship_proof key.",
         "Copy target_record_id from the target final record's record_id.",
         "Copy target_record_sha256 from the target final record's record_sha256.",
         "Write a specific correction_reason; do not use vague text such as 'fix' or 'update'.",
@@ -200,7 +201,13 @@
         "--corrected-fields-or-claims",
         "--evidence-or-review-basis"
       ],
-      "also_requires": "formal_common_required_cli_options"
+      "also_requires": "formal_common_required_cli_options",
+      "not_for": [
+        "correcting a record authored by another Ed25519 key",
+        "third-party review; use classification_update"
+      ],
+      "author_binding_rule": "Correction is author-only; signer public_key_sha256 must equal the target author key.",
+      "third_party_route": "Use classification_update for third-party critique or reclassification."
     },
     "classification_update": {
       "purpose": "Append-only classification or reclassification of a prior final record based on new information or analysis.",
@@ -222,7 +229,8 @@
         "--classification-reason",
         "--evidence-or-review-basis"
       ],
-      "also_requires": "formal_common_required_cli_options"
+      "also_requires": "formal_common_required_cli_options",
+      "third_party_role": "Bounded third-party assessment; does not mutate the target record."
     },
     "context_insufficient_notice": {
       "purpose": "Notice that the agent lacks sufficient context to safely make a stronger Record-Chain submission.",

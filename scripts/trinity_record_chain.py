@@ -1104,6 +1104,15 @@ def require_record_target_binding(draft: dict[str, Any]) -> None:
         raise ValueError(f"{record_type} target record_id mismatch for {target_id}")
     if target.get("record_sha256") != target_sha:
         raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")
+    if record_type == "correction":
+        current_proof = draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not isinstance(target_key, str) or not _HEX64_RE.fullmatch(target_key):
+            raise ValueError(f"correction target {target_id} has no verifiable authorship key; use classification_update")
+        if current_key != target_key:
+            raise ValueError(f"correction signer key does not match target record author key for {target_id}")
 
 
 def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None, summary_json: str | None = None) -> None:

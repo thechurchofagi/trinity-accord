@@ -603,6 +603,14 @@ function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
     }
 
     recordDraft.guardian_public_key_sha256 = pubSha;
+
+    const derivedGuardianId = guardianIdForPublicKeySha(pubSha);
+    const requestedGuardianId = String(recordDraft.guardian_id || "").trim();
+    if (!requestedGuardianId || isAutoGuardianId(requestedGuardianId)) {
+      recordDraft.guardian_id = derivedGuardianId;
+    } else if (requestedGuardianId !== derivedGuardianId) {
+      errorExit("--guardian-id must equal guardian_ed25519_<first16-of-authorship-public-key-sha256>; use --guardian-id auto");
+    }
   }
 
   const linked = recordDraft.optional_linked_guardian_application_request;

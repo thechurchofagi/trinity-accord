@@ -599,6 +599,29 @@ async def _record_target_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
             suggested_fix="Copy record_sha256 exactly from the public final record.",
             retry_allowed=True,
         ))
+    if record_type == "correction" and isinstance(target, dict):
+        current_proof = body.get("authorship_proof") or body.get("proof") or draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not isinstance(target_key, str) or not re.fullmatch(r"[a-f0-9]{64}", target_key):
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE", severity="error",
+                field=f"{field_prefix}.target_record_id",
+                message=f"Target record {target_id} has no verifiable Ed25519 authorship key.",
+                meaning="Correction is author-only; unsigned legacy targets require classification_update.",
+                suggested_fix="Use classification_update, or use the original key for a current signed target.",
+                retry_allowed=False,
+            ))
+        elif current_key != target_key:
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHOR_MISMATCH", severity="error",
+                field="authorship_proof.public_key_sha256",
+                message=f"Correction signer does not match target record {target_id} author key.",
+                meaning="The correction oath applies only to a prior record authored by this signer.",
+                suggested_fix="Use the target author's key, or submit classification_update instead.",
+                retry_allowed=False,
+            ))
     return diagnostics
 
 
