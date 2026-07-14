@@ -1,8 +1,8 @@
 {
   "schema": "trinityaccord.agent-first-contact.v2",
   "status": "active_agent_router",
-  "version": "2.1.0",
-  "updated_at": "2026-06-16T08:00:00Z",
+  "version": "2.2.0",
+  "updated_at": "2026-07-14T00:00:00Z",
   "canonical_first_contact": true,
   "canonical_human_url": "/agent-first-contact/",
   "authority_boundary": {
@@ -120,19 +120,16 @@
       ]
     },
     {
-      "intent": "verify_v0_v5_agent_declared",
-      "action": "VERIFY_V0_V5",
+      "intent": "verify_current_model",
+      "action": "VERIFY_CURRENT_MODEL",
       "flow": [
-        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification and verification_level=V0-V5",
-        "read /agent-verify before selecting verification",
-        "do not submit V6+ through public Gateway",
-        "do not skip builder manifest verification",
-        "do not skip /downloads/record-chain-agent-field-guidance.v1.json",
-        "do not skip /api/record-chain-oath-policy.v1.json for formal oath gate semantics",
-        "do not skip /api/context-load-map.json for declared CC level",
-        "do not skip print-oath or exact --readback for formal verification records",
-        "do not skip builder doctor",
-        "do not skip receipt save or public status/index readback"
+        "select the verification action profile",
+        "read /api/verification-procedures.v1.json before choosing a claim",
+        "perform and record fresh operations",
+        "populate all multidimensional verification fields",
+        "use V0-V5 only as Builder compatibility metadata",
+        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification",
+        "do not skip Builder manifest verification, field guidance, exact oath/readback, doctor, receipt save, or public status readback"
       ],
       "read": [
         "/agent-verify",
@@ -145,7 +142,10 @@
         "/api/context-load-map.json",
         "/api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/context-action-profiles.v1.json",
+        "/api/verification-procedures.v1.json",
+        "/api/verification-claim-model.v1.json",
+        "/api/verification-quick-map.json"
       ]
     },
     {
@@ -167,25 +167,28 @@
       ]
     },
     {
-      "intent": "verify_v6_plus_strict_evidence",
-      "action": "DO_NOT_SUBMIT_V6_PLUS",
-      "status": "reserved_not_currently_enabled",
-      "note": "V6-V8 strict evidence is reserved for future/internal use. Current public intake accepts only V0-V5.",
+      "intent": "physical_or_strict_evidence_verification",
+      "action": "USE_CURRENT_DIMENSIONS_AND_STRICT_EVIDENCE_WHEN_REQUIRED",
+      "status": "current",
+      "note": "Do not request V6, V7 or V8 as new levels. Use physical_observation and external_witness dimensions, and use strict Evidence Input plus Claim Gate for machine-evaluated technical evidence.",
       "flow": [
-        "do not build a public Gateway submission for V6+",
-        "current public Gateway accepts only V0-V5",
-        "stop with VERIFICATION_LEVEL_NOT_ENABLED if V6+ is requested"
+        "read /api/verification-procedures.v1.json",
+        "choose physical_observation and external_witness independently from digital_profile",
+        "for machine-evaluated evidence create fresh Evidence Input",
+        "run Claim Gate and generated-report validation",
+        "use a V0-V5 Builder compatibility value for any public Record-Chain submission"
       ],
       "read": [
-        "/agent-verify",
-        "/api/protocol-verification-profiles.json",
-        "/api/claim-gate-rules.json",
-        "/api/evidence-input-schema.v1.json",
-        "/api/evidence-relationship-map.v1.json",
+        "/agent-verify/",
+        "/verification-procedures/",
+        "/api/verification-procedures.v1.json",
         "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/verification-claim-model.v1.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json"
       ],
-      "public_gateway_route_enabled": false
+      "public_gateway_route_enabled": true
     }
   ],
   "agent_field_guidance": {
@@ -321,5 +324,25 @@
   "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
   "current_verification_claim_model": "/api/verification-claim-model.v1.json",
   "current_context_action_model": "/api/context-action-profiles.v1.json",
-  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels.",
+  "current_verification_model": {
+    "procedures": "/api/verification-procedures.v1.json",
+    "profiles": "/api/verification-profiles.v1.json",
+    "claim_model": "/api/verification-claim-model.v1.json",
+    "relationships": "/api/evidence-relationship-map.v1.json",
+    "legacy_builder_values": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "historical_only_labels": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ]
+  }
 }
