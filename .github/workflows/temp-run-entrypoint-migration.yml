@@ -67,7 +67,18 @@ jobs:
             python3 -m json.tool "$file" >/dev/null
           done
       - name: Validate P0 current gate
-        run: python3 scripts/run_ci_group.py p0-current
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/run_ci_group.py p0-current >/tmp/p0-entrypoint.log 2>&1
+          code=$?
+          if [[ "$code" -ne 0 ]]; then
+            echo "P0_EXIT=$code"
+            grep -E -i -C 2 'FAIL|FAILED|ERROR|mismatch|missing|unexpected|drift|not found|does not|must ' /tmp/p0-entrypoint.log | tail -n 120 || true
+          else
+            echo "P0_EXIT=0"
+          fi
+          exit "$code"
       - name: Validate full current system
         run: python3 scripts/run_current_system_tests.py
       - name: Validate Builder compatibility
