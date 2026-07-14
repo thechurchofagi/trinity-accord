@@ -35,13 +35,16 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          import textwrap
 
           source = Path('.github/workflows/temp-migrate-evidence-entrypoints.yml').read_text(encoding='utf-8')
           marker = "          python3 - <<'PY'\n"
           start = source.index(marker) + len(marker)
           end = source.index("\n          PY", start)
-          script = textwrap.dedent(source[start:end])
+          raw_lines = source[start:end].splitlines()
+          script = "\n".join(
+              line[10:] if line.startswith("          ") else line
+              for line in raw_lines
+          ) + "\n"
           Path('/tmp/migrate-evidence-entrypoints.py').write_text(script, encoding='utf-8')
           PY
           python3 /tmp/migrate-evidence-entrypoints.py
