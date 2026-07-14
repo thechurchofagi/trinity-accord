@@ -72,10 +72,11 @@ jobs:
           python3 -m pip install -r requirements-ots.txt
           ots --help
 
-      - name: Run Native OTS upgrade workflow contract test
+      - name: Run Native OTS upgrade workflow contract tests
         run: |
           set -euo pipefail
           python3 scripts/test_native_ots_upgrade_workflow_contract.py
+          python3 scripts/test_native_ots_complete_staging_contract.py
 
       - name: Prepare Arweave JWK if available
         id: jwk
@@ -141,6 +142,8 @@ jobs:
             --path api/record-chain-native-ots-latest.json \
             --path record-chain/ots/native-ots-backlog.json \
             --path api/record-chain-native-ots-backlog.json \
+            --path record-chain/arweave-backlog.json \
+            --path api/record-chain-arweave-backlog.json \
             --path api/arweave-wallet-status.json \
             --glob 'record-chain/ots/native-anchors/*.anchor.json' \
             --volatile-key generated_at \
@@ -178,6 +181,8 @@ jobs:
               --path api/record-chain-native-ots-latest.json \
               --path record-chain/ots/native-ots-backlog.json \
               --path api/record-chain-native-ots-backlog.json \
+              --path record-chain/arweave-backlog.json \
+              --path api/record-chain-arweave-backlog.json \
               --path api/arweave-wallet-status.json \
               --glob 'record-chain/ots/native-anchors/*.anchor.json' \
               --volatile-key generated_at \
@@ -191,8 +196,10 @@ jobs:
               record-chain/ots/native-arweave-bundles/ \
               record-chain/ots/native-arweave-registry.json \
               record-chain/ots/native-ots-backlog.json \
+              record-chain/arweave-backlog.json \
               record-chain/arweave-wallet-ledger.json \
               api/arweave-wallet-status.json \
+              api/record-chain-arweave-backlog.json \
               api/record-chain-native-ots-arweave-registry.json \
               api/record-chain-native-ots-backlog.json \
               api/record-chain-native-ots-latest.json
