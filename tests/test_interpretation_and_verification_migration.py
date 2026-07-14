@@ -94,7 +94,7 @@ def test_builder_emits_multidimensional_verification_claim_model() -> None:
         "physical_observation",
         "external_witness",
         "coverage_scope",
-        "legacy_v_level_role: \"builder_compatibility_only\"",
+        'legacy_v_level_role: "builder_compatibility_only"',
         "--digital-profile",
         "--relationships-checked",
         "--physical-observation",
@@ -110,14 +110,15 @@ def test_active_guidance_explains_new_and_legacy_fields() -> None:
     verification = guidance["record_types"]["verification"]
     assert verification["public_verification_level_limit"] == "V0-V5 only"
     assert verification["v6_v8_status"] == "historical_compatibility_only"
-    required = set(verification["record_specific_required_cli_options"])
-    assert {
+    required_text = "\n".join(verification["record_specific_required_cli_options"])
+    for option in [
         "--digital-profile",
         "--relationships-checked",
         "--physical-observation",
         "--external-witness",
         "--coverage-scope",
-    }.issubset(required)
+    ]:
+        assert option in required_text
 
     first_contact = load_json("api/agent-first-contact.json")
     assert first_contact["current_interpretation_model"] == "/api/interpretation-model-policy.v1.json"
@@ -129,3 +130,24 @@ def test_human_migration_guide_exists() -> None:
     assert "no current fixed five-stage" in text.lower()
     assert "no current fixed five-stage, seven-stage" in text.lower()
     assert "retired for new submissions" in text.lower()
+
+
+def main() -> int:
+    tests = [
+        test_interpretation_policy_retires_all_fixed_stage_defaults,
+        test_chronicle_context_points_to_current_policy,
+        test_context_models_do_not_require_chronicle_for_every_echo,
+        test_new_verification_model_separates_physical_and_witness_dimensions,
+        test_builder_emits_multidimensional_verification_claim_model,
+        test_active_guidance_explains_new_and_legacy_fields,
+        test_human_migration_guide_exists,
+    ]
+    for test in tests:
+        test()
+        print(f"PASS: {test.__name__}")
+    print("INTERPRETATION_VERIFICATION_MIGRATION_OK")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
