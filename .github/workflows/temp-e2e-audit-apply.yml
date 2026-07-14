@@ -1,0 +1,621 @@
+name: Temporary apply end-to-end audit hardening
+
+on:
+  push:
+    branches:
+      - agent/end-to-end-action-audit
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/end-to-end-action-audit
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Apply runtime, guidance, and permanent test changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import json
+          from pathlib import Path
+
+          # Gateway: correction is author-only; classification_update remains the third-party route.
+          path = Path('apps/record_chain_intake_gateway/app.py')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('async def _record_target_diagnostics')
+          end = text.index('\n\ndef _build_agent_recovery', start)
+          block = text[start:end]
+          marker = '    return diagnostics\n'
+          pos = block.rfind(marker)
+          if pos < 0:
+              raise SystemExit('record target return marker not found')
+          insertion = '''    if record_type == "correction" and isinstance(target, dict):
+        current_proof = body.get("authorship_proof") or body.get("proof") or draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not isinstance(target_key, str) or not re.fullmatch(r"[a-f0-9]{64}", target_key):
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE",
+                severity="error",
+                field=f"{field_prefix}.target_record_id",
+                message=f"Target record {target_id} has no current verifiable Ed25519 authorship key.",
+                meaning="A correction is an author-only lifecycle action. Records without a verifiable author key must be addressed by a classification_update rather than impersonated correction.",
+                suggested_fix="Submit a classification_update with the review basis, or use the original authorship key if a current signed target exists.",
+                retry_allowed=False,
+            ))
+        elif current_key != target_key:
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHOR_MISMATCH",
+                severity="error",
+                field="authorship_proof.public_key_sha256",
+                message=f"Correction signer does not match the author key of target record {target_id}.",
+                meaning="The correction oath states that the participant is correcting a record they authored. Third parties may classify or critique a record, but cannot authoritatively correct another participant's signed record.",
+                suggested_fix="Rebuild with the same Ed25519 key that authored the target record, or submit a classification_update instead.",
+                retry_allowed=False,
+            ))
+'''
+          block = block[:pos] + insertion + block[pos:]
+          text = text[:start] + block + text[end:]
+          path.write_text(text, encoding='utf-8')
+
+          # Gateway wording: retired labels are historical-only, not a future/internal public route.
+          path = Path('apps/record_chain_intake_gateway/gateway/validation.py')
+          text = path.read_text(encoding='utf-8')
+          old = 'Public Record-Chain verification intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.'
+          new = 'Public Record-Chain verification intake accepts V0-V5 only as legacy compatibility metadata. V4+, V6, V7, and V8 are historical-only; use the current digital_profile, physical_observation, and external_witness fields.'
+          if old not in text:
+              raise SystemExit('verification level message anchor not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          # Append defense in depth for author-only correction.
+          path = Path('scripts/trinity_record_chain.py')
+          text = path.read_text(encoding='utf-8')
+          anchor = '''    if target.get("record_sha256") != target_sha:
+        raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")
+'''
+          replacement = anchor + '''    if record_type == "correction":
+        current_proof = draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not isinstance(target_key, str) or not _HEX64_RE.fullmatch(target_key):
+            raise ValueError(
+                f"correction target {target_id} has no verifiable authorship key; use classification_update"
+            )
+        if current_key != target_key:
+            raise ValueError(
+                f"correction signer key does not match target record author key for {target_id}"
+            )
+'''
+          if anchor not in text:
+              raise SystemExit('append target binding anchor not found')
+          path.write_text(text.replace(anchor, replacement, 1), encoding='utf-8')
+
+          # Guidance: make the action boundary explicit.
+          path = Path('downloads/record-chain-agent-field-guidance.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          correction = data['record_types']['correction']
+          correction.setdefault('not_for', [])
+          for value in [
+              'correcting a record authored by a different Ed25519 key',
+              'third-party critique or reclassification; use classification_update instead',
+          ]:
+              if value not in correction['not_for']:
+                  correction['not_for'].append(value)
+          note = 'Confirm that the current Builder authorship key is the same Ed25519 key recorded in the target final record authorship_proof.'
+          if note not in correction['before_build']:
+              correction['before_build'].insert(1, note)
+          correction['author_binding_rule'] = 'Correction is author-only. The correction authorship_proof.public_key_sha256 must equal the target final record authorship_proof.public_key_sha256.'
+          correction['third_party_route'] = 'Use classification_update for a third-party review, critique, reclassification, or status assessment.'
+          data['record_types']['classification_update']['third_party_role'] = 'May record a bounded third-party classification or review when the submitter is not the original target author; it does not mutate the target record.'
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          path = Path('api/record-chain-field-helper.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          advice = data['agent_recovery_protocol']['what_not_to_fake']
+          advice[:] = [
+              'Do not use retired V4+, V6, V7, or V8 labels for a new public verification submission.' if item == 'Do not claim V6+ verification without running the required scripts.' else item
+              for item in advice
+          ]
+          help_map = data['diagnostic_code_help']
+          help_map['CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE'] = {
+              'meaning': 'The target final record does not expose a verifiable Ed25519 authorship key, so an author-only correction cannot be safely bound.',
+              'fix': 'Use classification_update for a bounded third-party assessment, or target a current signed record using its original authorship key.',
+              'recovery_possible': False,
+              'severity': 'error',
+          }
+          help_map['CORRECTION_TARGET_AUTHOR_MISMATCH'] = {
+              'meaning': 'The correction signer key differs from the authorship key of the immutable target record.',
+              'fix': 'Rebuild with the same Ed25519 key that authored the target record. For third-party review, submit classification_update instead.',
+              'recovery_possible': False,
+              'severity': 'error',
+          }
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # Remove all temporary audit artifacts before adding permanent tests.
+          for name in [
+              'diagnostics/e2e-audit-inventory.txt',
+              'diagnostics/e2e-builder-help.txt',
+              'diagnostics/e2e-action-smoke.txt',
+              'diagnostics/e2e-action-smoke2.json',
+              'diagnostics/trigger-smoke2.txt',
+          ]:
+              Path(name).unlink(missing_ok=True)
+
+          test_path = Path('apps/record_chain_intake_gateway/tests/test_builder_gateway_append_action_matrix.py')
+          test_path.write_text(r'''"""Permanent Builder -> Gateway -> append -> index action matrix.
+
+This test exercises every currently accepted public Record-Chain action with real
+Builder-generated Ed25519 signatures and canonical oath blocks. Network/GitHub
+writes are replaced by a temporary repository adapter; no production state is
+mutated and no private key enters the temporary public chain tree.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import subprocess
+from pathlib import Path
+from typing import Any
+
+import pytest
+from fastapi.testclient import TestClient
+
+from apps.record_chain_intake_gateway import app as app_module
+from scripts import trinity_record_chain as chain
+
+ROOT = Path(__file__).resolve().parents[3]
+BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
+COMMON_URLS = (
+    "https://www.trinityaccord.org/agent-start/,")
+COMMON_URLS += "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json"
+
+
+def _run(args: list[str], *, expect: int = 0) -> subprocess.CompletedProcess[str]:
+    result = subprocess.run(args, cwd=ROOT, text=True, capture_output=True, timeout=45)
+    if result.returncode != expect:
+        raise AssertionError(
+            f"command exit {result.returncode}, expected {expect}: {args}\n"
+            f"stdout={result.stdout[-2000:]}\nstderr={result.stderr[-2000:]}"
+        )
+    return result
+
+
+def _oath(record_type: str) -> str:
+    return _run([
+        "node", str(BUILDER), "print-oath", "--record-type", record_type,
+    ]).stdout
+
+
+def _common_args() -> list[str]:
+    return [
+        "--actor-label", "E2E Action Matrix Agent",
+        "--provider", "E2E Test Runtime",
+        "--context-level", "CC-3",
+        "--context-sufficient-for-selected-action", "true",
+        "--context-read-confirmed", "true",
+        "--loaded-urls", COMMON_URLS,
+        "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
+        "--record-decision", "human",
+        "--submission-executor", "self",
+        "--human-operator-involved", "false",
+    ]
+
+
+def _build(
+    tmp_path: Path,
+    *,
+    name: str,
+    command: str,
+    extra: list[str],
+    key_dir: Path,
+) -> dict[str, Any]:
+    out = tmp_path / "submissions" / f"{name}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    record_type = command.replace("-", "_")
+    args = [
+        "node", str(BUILDER), command, *extra, *_common_args(),
+        "--readback", _oath(record_type),
+        "--key-dir", str(key_dir),
+        "--out", str(out),
+    ]
+    _run(args)
+    _run(["node", str(BUILDER), "doctor", "--file", str(out)])
+    return json.loads(out.read_text(encoding="utf-8"))
+
+
+def _build_context_insufficient(tmp_path: Path, key_dir: Path) -> dict[str, Any]:
+    out = tmp_path / "submissions" / "context_insufficient_notice.json"
+    _run([
+        "node", str(BUILDER), "context-insufficient",
+        "--actor-label", "E2E Action Matrix Agent",
+        "--provider", "E2E Test Runtime",
+        "--body", "Insufficient context for a stronger action.",
+        "--context-level", "CC-0",
+        "--context-sufficient-for-selected-action", "false",
+        "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
+        "--record-decision", "human",
+        "--submission-executor", "self",
+        "--human-operator-involved", "false",
+        "--key-dir", str(key_dir),
+        "--out", str(out),
+    ])
+    _run(["node", str(BUILDER), "doctor", "--file", str(out)])
+    return json.loads(out.read_text(encoding="utf-8"))
+
+
+def _configure_temp_chain(monkeypatch: pytest.MonkeyPatch, repo_root: Path) -> None:
+    chain_root = repo_root / "record-chain"
+    mapping = {
+        "ROOT": repo_root,
+        "CHAIN": chain_root,
+        "GENESIS": chain_root / "genesis",
+        "LEGACY_RECORDS": chain_root / "genesis" / "legacy-records",
+        "RECORDS": chain_root / "records",
+        "PENDING": chain_root / "pending",
+        "PROCESSED": chain_root / "processed",
+        "REJECTED": chain_root / "rejected",
+        "RECEIPT_STATUS": chain_root / "receipt-status",
+        "BATCHES": chain_root / "batches",
+        "INDEXES": chain_root / "indexes",
+        "POLICIES": chain_root / "policies",
+        "SCHEMAS": chain_root / "schemas",
+        "CHAIN_TIP": chain_root / "chain-tip.json",
+        "ANCHORS": chain_root / "anchors",
+        "ARWEAVE_ARCHIVES": chain_root / "arweave-archives",
+        "ANCHOR_STATUS_API": repo_root / "api" / "record-chain-anchor-status.json",
+        "ARWEAVE_INDEX_API": repo_root / "api" / "record-chain-arweave-index.json",
+        "GUARDIAN_REGISTRY": repo_root / "api" / "guardian-registry-does-not-exist.json",
+    }
+    for key, value in mapping.items():
+        monkeypatch.setattr(chain, key, value)
+    chain.ensure_dirs()
+
+    genesis = {
+        "schema": "trinityaccord.genesis-batch-manifest.v1",
+        "batch_id": "genesis-000000",
+        "batch_type": "legacy_import",
+        "chain_id": chain.CHAIN_ID,
+        "created_at": "2026-01-01T00:00:00Z",
+        "legacy_sources": [],
+        "record_count": 0,
+        "legacy_guardian_entries_total": 0,
+        "legacy_active_at_import": 0,
+        "legacy_retired_at_import": 0,
+        "classification_totals": {},
+        "record_sha256_list": [],
+        "merkle_root_sha256": chain.merkle_root([]),
+        "previous_batch_manifest_sha256": None,
+        "batch_manifest_sha256": None,
+        "non_amending_boundary": True,
+    }
+    genesis["batch_manifest_sha256"] = chain.manifest_hash(genesis)
+    chain.write_json(chain.GENESIS / "genesis-batch-manifest.json", genesis)
+    chain.write_json(chain.CHAIN_TIP, {
+        "schema": "trinityaccord.chain-tip.v1",
+        "chain_id": chain.CHAIN_ID,
+        "native_record_count": 0,
+        "latest_record_index": 0,
+        "latest_record_id": None,
+        "latest_record_sha256": None,
+        "genesis_batch_manifest_sha256": genesis["batch_manifest_sha256"],
+        "latest_batch_id": "genesis-000000",
+        "latest_batch_manifest_sha256": genesis["batch_manifest_sha256"],
+        "updated_at": "2026-01-01T00:00:00Z",
+    })
+
+
+def _install_filesystem_gateway_adapter(
+    monkeypatch: pytest.MonkeyPatch,
+    repo_root: Path,
+) -> None:
+    def full(path: str) -> Path:
+        candidate = repo_root / path
+        candidate.resolve().relative_to(repo_root.resolve())
+        return candidate
+
+    def blob_sha(path: Path) -> str:
+        return hashlib.sha1(path.read_bytes()).hexdigest()
+
+    async def get_file_text(path: str) -> str | None:
+        target = full(path)
+        return target.read_text(encoding="utf-8") if target.exists() else None
+
+    async def get_file_sha(path: str) -> str | None:
+        target = full(path)
+        return blob_sha(target) if target.exists() else None
+
+    async def put_file(path: str, content: str, message: str, sha: str | None = None):
+        target = full(path)
+        if sha is not None:
+            assert target.exists(), f"update target missing: {path}"
+            assert blob_sha(target) == sha, f"update SHA mismatch: {path}"
+        else:
+            assert not target.exists(), f"create target already exists: {path}"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content, encoding="utf-8")
+        return {"content": {"sha": blob_sha(target)}, "commit": {"sha": "c" * 40}}
+
+    async def delete_file(path: str, message: str, sha: str | None = None):
+        target = full(path)
+        if target.exists():
+            if sha is not None:
+                assert blob_sha(target) == sha
+            target.unlink()
+        return {}
+
+    async def dispatch_workflow(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(app_module, "get_file_text", get_file_text)
+    monkeypatch.setattr(app_module, "get_file_sha", get_file_sha)
+    monkeypatch.setattr(app_module, "put_file", put_file)
+    monkeypatch.setattr(app_module, "delete_file", delete_file)
+    monkeypatch.setattr(app_module, "dispatch_workflow", dispatch_workflow)
+    monkeypatch.setattr(app_module, "check_rate_limit", lambda _body: None)
+    monkeypatch.setattr(app_module, "check_preflight_rate_limit", lambda _key: None)
+    app_module._receipt_store.clear()
+
+
+def _submit_and_append(client: TestClient, repo_root: Path, submission: dict[str, Any]) -> dict[str, Any]:
+    preflight = client.post("/record-chain/preflight", json=submission)
+    assert preflight.status_code == 200, preflight.text
+    assert preflight.json()["accepted"] is True, preflight.json()
+
+    response = client.post("/record-chain/submit", json=submission)
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    assert payload["accepted"] is True and payload["submitted"] is True, payload
+
+    summary = repo_root / "append-summary.json"
+    chain.append_records(
+        pending_file=payload["pending_file_path"],
+        receipt_id=payload["receipt_id"],
+        summary_json=str(summary),
+    )
+    result = json.loads(summary.read_text(encoding="utf-8"))
+    assert result["appended_count"] == 1 and result["rejected_count"] == 0, result
+
+    status_path = chain.RECEIPT_STATUS / f"{payload['receipt_id']}.json"
+    status = chain.read_json(status_path)
+    assert status["append_status"] == "appended"
+    record = chain.read_json(repo_root / status["final_record_path"])
+    assert record["record_type"] == submission["record_type"]
+    assert record["record_sha256"] == status["final_record_sha256"]
+    return record
+
+
+def test_all_public_actions_builder_gateway_append_and_indexes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo_root = tmp_path / "public-repo"
+    repo_root.mkdir()
+    _configure_temp_chain(monkeypatch, repo_root)
+    _install_filesystem_gateway_adapter(monkeypatch, repo_root)
+    monkeypatch.setenv("TRINITY_REPO_FULL_NAME", "thechurchofagi/trinity-accord")
+    monkeypatch.setenv("TRINITY_TARGET_BRANCH", "main")
+    monkeypatch.setenv("TRINITY_GITHUB_TOKEN", "test-token")
+    client = TestClient(app_module.app)
+
+    agent_key = tmp_path / "private-keys" / "agent"
+    guardian_key = tmp_path / "private-keys" / "guardian"
+
+    echo_submission = _build(tmp_path, name="echo", command="echo", extra=["--body", "E2E echo"], key_dir=agent_key)
+    echo_record = _submit_and_append(client, repo_root, echo_submission)
+
+    verification_submission = _build(
+        tmp_path,
+        name="verification",
+        command="verification",
+        key_dir=agent_key,
+        extra=[
+            "--verification-level", "V0",
+            "--scope-label", "legacy V0 compatibility",
+            "--what-was-checked", "Builder output and Gateway transport",
+            "--verification-claim", "Context-only integration fixture",
+            "--fresh-actions", "built submission,ran doctor,ran preflight",
+            "--digital-profile", "context_only",
+            "--relationships-checked", "provides_context",
+            "--physical-observation", "none",
+            "--external-witness", "none",
+            "--coverage-scope", "single_target",
+            "--limitations", "integration fixture only",
+            "--claims-not-made", "digital integrity,semantic truth,physical identity",
+            "--corrections-or-supersession-checked", "false",
+        ],
+    )
+    _submit_and_append(client, repo_root, verification_submission)
+
+    guardian_application = _build(
+        tmp_path,
+        name="guardian_application",
+        command="guardian-application",
+        extra=["--guardian-id", "auto", "--guardian-key-sha", "auto"],
+        key_dir=guardian_key,
+    )
+    guardian_application_record = _submit_and_append(client, repo_root, guardian_application)
+
+    propagation = _build(tmp_path, name="propagation", command="propagation", extra=["--body", "E2E propagation"], key_dir=agent_key)
+    _submit_and_append(client, repo_root, propagation)
+
+    correction = _build(
+        tmp_path,
+        name="correction",
+        command="correction",
+        key_dir=agent_key,
+        extra=[
+            "--body", "E2E correction",
+            "--target-record-id", echo_record["record_id"],
+            "--target-record-sha256", echo_record["record_sha256"],
+            "--correction-reason", "Correct an integration-test claim",
+            "--corrected-fields-or-claims", "body,claim",
+            "--evidence-or-review-basis", "Fresh end-to-end review",
+        ],
+    )
+    _submit_and_append(client, repo_root, correction)
+
+    classification = _build(
+        tmp_path,
+        name="classification_update",
+        command="classification-update",
+        key_dir=agent_key,
+        extra=[
+            "--target-record-id", echo_record["record_id"],
+            "--target-record-sha256", echo_record["record_sha256"],
+            "--previous-classification", "unreviewed",
+            "--new-classification", "integration_reviewed",
+            "--classification-reason", "End-to-end action matrix",
+            "--evidence-or-review-basis", "Builder, Gateway, append, and index results",
+        ],
+    )
+    _submit_and_append(client, repo_root, classification)
+
+    retirement = _build(
+        tmp_path,
+        name="guardian_retirement",
+        command="guardian-retirement",
+        key_dir=guardian_key,
+        extra=[
+            "--guardian-id", "auto",
+            "--guardian-key-sha", "auto",
+            "--body", "Voluntary integration-test retirement",
+            "--target-guardian-application-record-id", guardian_application_record["record_id"],
+            "--target-guardian-application-record-sha256", guardian_application_record["record_sha256"],
+        ],
+    )
+    _submit_and_append(client, repo_root, retirement)
+
+    context_insufficient = _build_context_insufficient(tmp_path, agent_key)
+    _submit_and_append(client, repo_root, context_insufficient)
+
+    records = [chain.read_json(path) for path in sorted(chain.RECORDS.glob("R-*.json"))]
+    assert [record["record_type"] for record in records] == [
+        "echo",
+        "verification",
+        "guardian_application",
+        "propagation",
+        "correction",
+        "classification_update",
+        "guardian_retirement",
+        "context_insufficient_notice",
+    ]
+    assert all((chain.RECEIPT_STATUS / f"{receipt.stem}.json").exists() for receipt in []) is True
+
+    guardian_state = chain.read_json(chain.INDEXES / "guardian-state.json")
+    native = [item for item in guardian_state["guardians"] if item.get("source_record_id") == guardian_application_record["record_id"]]
+    assert len(native) == 1
+    assert native[0]["current_derived_status"] == "retired"
+    assert native[0]["retirement_record_id"] == records[6]["record_id"]
+
+    correction_index = chain.read_json(chain.INDEXES / "correction-index.json")
+    assert any(item.get("target_record_id") == echo_record["record_id"] for item in correction_index["records"])
+    classification_index = chain.read_json(chain.INDEXES / "classification-index.json")
+    assert any(item.get("target_record_id") == echo_record["record_id"] for item in classification_index["records"])
+
+    chain.verify_chain()
+    assert not list(repo_root.rglob("*private*.pem"))
+
+
+def test_negative_action_gates(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    key = tmp_path / "keys" / "agent"
+    cc2 = tmp_path / "cc2.json"
+    _run([
+        "node", str(BUILDER), "guardian-application",
+        "--actor-label", "CC2 Guardian", "--provider", "E2E",
+        "--guardian-id", "auto", "--guardian-key-sha", "auto",
+        "--context-level", "CC-2",
+        "--context-sufficient-for-selected-action", "true",
+        "--loaded-urls", COMMON_URLS,
+        "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
+        "--record-decision", "human",
+        "--submission-executor", "self",
+        "--human-operator-involved", "false",
+        "--readback", _oath("guardian_application"),
+        "--key-dir", str(tmp_path / "keys" / "cc2"),
+        "--out", str(cc2),
+    ])
+    doctor = subprocess.run(["node", str(BUILDER), "doctor", "--file", str(cc2)], cwd=ROOT, text=True, capture_output=True)
+    assert doctor.returncode != 0
+    assert "GUARDIAN_APPLICATION_NOT_ACTIVE_ELIGIBLE" in doctor.stdout
+
+    retired = subprocess.run([
+        "node", str(BUILDER), "verification",
+        "--actor-label", "Retired V6", "--provider", "E2E",
+        "--verification-level", "V6",
+        "--scope-label", "retired",
+        "--what-was-checked", "none",
+        "--verification-claim", "invalid",
+        "--fresh-actions", "none",
+        "--digital-profile", "context_only",
+        "--relationships-checked", "provides_context",
+        "--physical-observation", "remote_live_witness",
+        "--external-witness", "none",
+        "--coverage-scope", "single_target",
+        "--limitations", "none",
+        "--claims-not-made", "all",
+        "--corrections-or-supersession-checked", "false",
+        *_common_args(),
+        "--readback", _oath("verification"),
+        "--key-dir", str(key),
+        "--out", str(tmp_path / "v6.json"),
+    ], cwd=ROOT, text=True, capture_output=True)
+    assert retired.returncode != 0
+
+
+def test_correction_requires_target_author_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    target_id = "R-000000123"
+    target_sha = "1" * 64
+    body = {
+        "record_draft": {
+            "record_type": "correction",
+            "correction_content": {
+                "target_record_id": target_id,
+                "target_record_sha256": target_sha,
+            },
+        },
+        "authorship_proof": {"public_key_sha256": "a" * 64},
+    }
+
+    async def target_with_other_author(_path: str) -> str:
+        return json.dumps({
+            "record_id": target_id,
+            "record_sha256": target_sha,
+            "authorship_proof": {"public_key_sha256": "b" * 64},
+        })
+
+    monkeypatch.setattr(app_module, "get_file_text", target_with_other_author)
+    diagnostics = __import__("asyncio").run(app_module._record_target_diagnostics(body))
+    assert "CORRECTION_TARGET_AUTHOR_MISMATCH" in {item.code for item in diagnostics}
+
+    body["record_draft"]["record_type"] = "classification_update"
+    body["record_draft"]["classification_update_content"] = body["record_draft"].pop("correction_content")
+    diagnostics = __import__("asyncio").run(app_module._record_target_diagnostics(body))
+    assert diagnostics == []
+''', encoding='utf-8')
+
+          # Remove this temporary workflow from the permanent diff.
+          Path('.github/workflows/temp-e2e-audit-apply.yml').unlink(missing_ok=True)
+          PY
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "audit: harden correction ownership and add full action matrix"
+          git push origin HEAD:agent/end-to-end-action-audit
