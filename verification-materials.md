@@ -8,78 +8,142 @@ permalink: /verification-materials/
 
 This page is a unified index of verification sources.
 
-It does not create canonical authority.
-Bitcoin Originals prevail.
+It does not create canonical authority. Bitcoin Originals prevail.
 
-Machine-readable index: [/api/verification-materials.json](/api/verification-materials.json)
+## Start with the evidence relationship, not a level number
+
+Before verifying, read:
+
+- Human guide: [`/EVIDENCE-RELATIONSHIP-GUIDE.md`](/EVIDENCE-RELATIONSHIP-GUIDE.md)
+- Machine evidence graph: [`/api/evidence-relationship-map.v1.json`](/api/evidence-relationship-map.v1.json)
+- Preferred verification profiles: [`/api/verification-profiles.v1.json`](/api/verification-profiles.v1.json)
+- Preferred context profiles: [`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.json)
+- Corrections and supersession: [`/api/corrections-index.json`](/api/corrections-index.json)
+
+Machine-readable material index: [/api/verification-materials.json](/api/verification-materials.json)
+
+## Preferred verification profiles for new reports
+
+| Profile | Minimum meaning |
+|---|---|
+| `context_only` | Sources read; no technical verification performed |
+| `reference_checked` | A primary or external reference was actually queried |
+| `integrity_checked` | Bytes, hashes, signatures, SPV/OTS proofs, or equivalent integrity data were computed or validated |
+| `independent_reproduction` | A material result was reproduced without merely trusting official output |
+| `full_public_digital` | All declared public digital target families were checked and unavailable targets listed |
+
+Report two other dimensions separately:
+
+- `physical_observation`: none, public media, remote live, onsite, or forensic;
+- `external_witness`: none, notarial scope, independent report, institutional attestation, or regulatory/court record.
+
+A high physical or notarial finding does not automatically raise the digital profile.
+
+## What operation are you performing?
+
+| Operation | Question answered | Typical evidence |
+|---|---|---|
+| Reference | Does the named transaction, object or pointer exist at the stated location? | explorer/RPC/gateway query |
+| Hash | Are these bytes identical to the committed bytes? | expected digest + local recomputation |
+| Signature | Did the holder of this key sign this digest/typed statement? | BIP-340 or EIP-712 validation |
+| Timestamp | Did this digest exist no later than the attested block? | Bitcoin/OTS proof |
+| Mirror | Can the bytes be independently retrieved from another location? | Arweave, IPFS, GitHub Release |
+| Witness | Was a statement placed on a secondary public chain? | ETH witness transaction |
+| Notarization | What process/document/date/identity was recorded in the notarial act? | Shenzhen notarial certificate and preservation records |
+| Physical observation | What did the verifier actually observe about the object? | public media, remote live, onsite, forensic report |
+
+Do not use the unqualified word `verified`; state the operation and target.
 
 ## Where to verify what
 
-| Component | Materials | Human page | Machine source | Direct component levels | Protocol relevance |
-|---|---|---|---|---|---|
-| AUTHORITY_BOUNDARY | Guardian v1.1, authority boundary | /authority, /guardian-principles | /api/authority.json, /api/guardian-principles.json | boundary check, no component code | V1 direct |
-| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, block data, witness data | /verify, /data-verification | /api/authority.json | B0–B7 | V2–V5 direct/recommended; V6–V8 supporting context |
-| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, hashes | /data-verification | /api/evidence-manifest.json, /api/hashes.json | D0–D7 | V3–V5 direct/recommended; V6–V8 supporting context |
-| CHRONICLE_RECOVERY | 175/175 NFT recovery package | /chronicle-verification | /api/chronicle-recovery.json | C0–C7 | V3–V5 direct/recommended; V6–V8 supporting context |
-| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical evidence | /physical-verification, /covenant-proof | /api/evidence-manifest.json | P0–P9 | V6, V7, V8 direct physical profiles |
-| REPORT_TEMPLATES | verification report templates | /agent-verify, /independent-verification | /api/verification-levels.json | all levels | all levels |
+| Component | Materials | Human page | Machine source | Preferred result |
+|---|---|---|---|---|
+| AUTHORITY_BOUNDARY | Three Originals, Guardian v1.1, authority boundary | `/authority`, `/guardian-principles` | `/api/authority.json` | boundary-correct context or reference result |
+| BITCOIN_ORIGINALS | inscription IDs, TXIDs, address, blocks, witness/body bytes | `/verify`, `/data-verification` | `/api/authority.json` | reference / integrity / independent reproduction |
+| EVIDENCE_MIRRORS | Arweave, ETH, IPFS, GitHub, Releases, hashes | `/data-verification` | `/api/evidence-manifest.json`, `/api/hashes.json` | reference or integrity result |
+| SIX-HASH INVENTORY | JSON/CSV evidence digest manifests | evidence guide | `/api/evidence-relationship-map.v1.json` | integrity result only; not semantic truth |
+| CHRONICLE_RECOVERY | 175/175 NFT recovery package | `/chronicle-verification` | `/api/chronicle-recovery.json` | declared recovery result |
+| PHYSICAL_ANCHOR | Core Object Alpha, flaw archive, physical packages | `/physical-verification`, `/covenant-proof` | `/api/evidence-manifest.json` | separate physical_observation value |
+| SHENZHEN NOTARY | evidence-preservation certificate, electronic preservation records, public archive | `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/` | `/api/core-object-alpha-shenzhen-notary-2026-05-06.json` | external_witness=`notarial_scope` with exact limits |
+| REPORTS / RECORDS | verification reports, Echoes, Record-Chain records | `/agent-verify`, `/agent-start` | current schemas/status APIs | later reception/provenance only |
 
 ## Scripts
 
-| Script | Location | Purpose | Used for |
+| Script | Location | Purpose | Preferred profile support |
 |---|---|---|---|
-| verify-full-evidence-chain.mjs | /scripts/ | Full 7-chain evidence verification (DAG + BTC + ETH + OTS + BTC TX) | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
-| summarize-evidence-chain.mjs | /scripts/ | Aggregate chain audit artifacts into final summary | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
-| verify-dag-digest.mjs | /scripts/ | DAG + digest-manifest verification (Chain A) | V4 |
-| verify-btc-signature-coverage.mjs | /scripts/ | BTC BIP340 signature chain (Chain B) | V4 |
-| verify-eth-witness.mjs | /scripts/ | ETH guardian witness verification (Chain C) | V4 |
-| verify-bitcoin-tx-anchor.mjs | /scripts/ | Bitcoin TX anchor verification (Chain D1) | V4 |
-| verify-ots-time-anchor.mjs | /scripts/ | OTS time anchor verification (Chain D2) | V4 |
-| verify-onchain-tokenuri.mjs | /scripts/ | ETH tokenURI 175/175 metadata CID verification | V4 |
-| verify-release-assets.mjs | /scripts/ | GitHub Release asset hash verification | V4 |
-| verify.py | /downloads/verify.py | Local integrity checks + SHA-256 | V3, V4 |
-| check_consistency.py | /scripts/check_consistency.py | Repository consistency | V4 |
-| ta-verify.cjs | In verification_kit.tar.gz | SPV verification + ETH mirrors | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
-| verify-batch-strict.mjs | On Arweave (Chronicle Recovery) | Strict batch NFT recovery verification | Supports V4; may provide inputs for V4+ independent reproduction. Official scripts alone do not establish V4+. |
+| verify-full-evidence-chain.mjs | `/scripts/` | Full evidence-chain checks | `integrity_checked`; not independent by itself |
+| summarize-evidence-chain.mjs | `/scripts/` | Aggregate audit artifacts | reporting support |
+| verify-dag-digest.mjs | `/scripts/` | DAG + digest-manifest verification | `integrity_checked` |
+| verify-btc-signature-coverage.mjs | `/scripts/` | BTC BIP-340 signature chain | `integrity_checked` |
+| verify-eth-witness.mjs | `/scripts/` | ETH witness verification | `integrity_checked` |
+| verify-bitcoin-tx-anchor.mjs | `/scripts/` | Bitcoin transaction anchor | `reference_checked` / `integrity_checked` |
+| verify-ots-time-anchor.mjs | `/scripts/` | OTS time anchor | `integrity_checked` |
+| verify-onchain-tokenuri.mjs | `/scripts/` | ETH tokenURI metadata CID verification | `integrity_checked` |
+| verify-release-assets.mjs | `/scripts/` | Release asset hash verification | `integrity_checked` |
+| verify.py | `/downloads/verify.py` | Local integrity checks | `integrity_checked` |
+| check_consistency.py | `/scripts/check_consistency.py` | Repository consistency | `integrity_checked` |
+| ta-verify.cjs | verification kit | SPV and ETH mirror checks | `integrity_checked`; independent only with independent method |
+| verify-batch-strict.mjs | Arweave / Chronicle Recovery | strict NFT recovery verification | `integrity_checked`; official output alone is not independent reproduction |
 
 ## Recommended agent sequence
 
-1. Read `/agent-brief` for initial classification.
-2. Fetch `/api/verification-materials.json` to locate all verification sources.
-3. Fetch `/api/verification-levels.json` to understand mandatory coverage and required depth.
-4. Fetch `/api/authority.json` for Bitcoin Originals.
-5. Fetch `/api/evidence-manifest.json` and `/api/hashes.json` for evidence mirror verification.
-6. Fetch `/api/chronicle-recovery.json` if verifying Chronicle Recovery.
-7. Use `/agent-verify` or `/independent-verification` report template.
-8. Report achieved protocol level and component findings separately.
+1. Select `/api/context-action-profiles.v1.json` profile `verification`.
+2. Read the evidence relationship guide/map.
+3. Identify the exact target and relationship: reference, hash, signature, timestamp, mirror, witness, notarization, or physical observation.
+4. Check the corrections index and target current status.
+5. Fetch the exact source bytes or proof object.
+6. Perform the operation and preserve the command/output.
+7. Select the weakest descriptive verification profile that fully fits the work.
+8. Report physical observation and external witness separately.
+9. State limitations and claims not made.
 
-## Important boundary
+## Legacy V-level compatibility
 
-A component-level result does not automatically raise protocol achieved level.
+`/api/verification-levels.json`, component levels and archived V0–V8 reports remain preserved for backward compatibility.
 
-Example:
+Recommended mapping:
 
-> A high-depth Chronicle Recovery component finding — for example C5 full recovery with an independent-reproduction method — does not by itself justify a full-protocol V4+ claim.
-> Protocol V4+ also requires the relevant Bitcoin Originals and Evidence Mirrors independent reproduction evidence.
+| Legacy label | Preferred representation |
+|---|---|
+| V0 / V1 | `context_only` plus boundary recognition |
+| V2 | `reference_checked` |
+| V3 | `integrity_checked` |
+| V4 | `integrity_checked` with `official_script_audited` method tag |
+| V4+ | `independent_reproduction` |
+| V5 | `full_public_digital` |
+| V6 | digital profile unchanged + `physical_observation=remote_live_witness` |
+| V7 | digital profile unchanged + `physical_observation=onsite_observation` |
+| V8 | digital profile unchanged + `physical_observation=forensic_examination` |
 
-Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.
+Current Builder schemas may still require a legacy V-level. Supply it as compatibility metadata, but lead the report with the descriptive profile and exact checks.
+
+## Six-hash inventory boundary
+
+The six-hash manifest records six fingerprints of the same evidence-file bytes. It is algorithm-diverse integrity evidence, not six independent attestations. A match supports byte identity against the committed inventory; it does not prove the semantic truth of the file.
+
+## Shenzhen notarial boundary
+
+The Shenzhen archive records an evidence-preservation process, associated notarial certificate, electronic preservation certificates, public Arweave archive and later Release mirrors.
+
+The certificate states that it is an objective record of the现场保全过程. It does not automatically count as formal independent attestation of all Trinity Accord claims. The publicly described object references Bitcoin Inscription `#89491681`; do not describe the notarial act as direct notarization of all three final Bitcoin Originals without an additional documented identity comparison.
 
 ## Data Source + Method Map
 
-Every verification target must be reported with:
+Every verification target should report:
 
-1. primary data source;
-2. GitHub fallback source if used;
-3. hash source;
-4. external query source;
-5. local file path if used;
-6. method performed;
-7. component level claimed;
-8. protocol profile compatibility if a V-level is claimed;
-9. limitations;
-10. claims not made.
+1. target and relationship checked;
+2. primary data source;
+3. fallback source if used;
+4. expected hash/signature/proof source;
+5. exact operation or command;
+6. computed or observed result;
+7. descriptive digital profile;
+8. physical observation value;
+9. external witness value;
+10. limitations and claims not made;
+11. corrections/supersession status.
 
-Machine-readable files:
+Additional machine-readable files:
 
 - `/api/verification-targets.json`
 - `/api/verification-recipes.json`
@@ -88,21 +152,12 @@ Machine-readable files:
 - `/api/protocol-verification-profiles.json`
 - `/api/verification-report-schema.v2.json`
 
-| Component | Data source | GitHub fallback | Method | Component levels |
-|---|---|---|---|---|
-| Bitcoin Originals | `/api/authority.json`, explorers, node/witness data | none | explorer/SPV/node/witness/hash | B0–B7 |
-| Digital mirrors | `/api/evidence-manifest.json`, `/api/hashes.json`, Arweave/IPFS/ETH | `arweave-backup/files/*` | hash/query/cross-mirror | D0–D7 |
-| Time anchors | Bitcoin, ETH, Arweave, GitHub, OTS, public celestial evidence, non-public Star-Moon Witness if authorized | GitHub history only | block/time proof/cross-anchor/celestial solving | T0–T8 |
-| Chronicle | `/api/chronicle-recovery.json`, recovery package | GitHub package if present | sample/full recovery | C0–C7 |
-| NFT evidence | contract/tokenURI/metadata/media | recovery package | tokenURI→metadata→media | N0–N7 |
-| Physical anchor | `/covenant-proof`, `/physical-verification`, evidence package | GitHub evidence package if present | hash/image/video/live/onsite/forensic | P0–P9 |
-| Echo / attestation | `/api/echo-index.json`, v3 schema | records page | provenance/schema/attestation audit | E0–E5 |
-
 ## Public physical-anchor evidence archives
 
 | Archive | Date | Human page | Machine record | Arweave index | OTS block | Status |
 |---|---:|---|---|---|---:|---|
-| Core Object Alpha — Shenzhen Notary Evidence Archive | 2026-05-06 | `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/` | `/api/core-object-alpha-shenzhen-notary-2026-05-06.json` | [Arweave index](https://arweave.net/_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE/index.html) | 948161 | PASS |
-| GZ2 Photos Supplementary Archive | 2026-05-14 | `/evidence/arweave/gz2-photos-2026-05-14/` | — | [File index](/evidence/arweave/gz2-photos-2026-05-14/) | — | Available |
+| Core Object Alpha — Shenzhen Notary Evidence Archive | 2026-05-06 | `/evidence/core-object-alpha-shenzhen-notary-2026-05-06/` | `/api/core-object-alpha-shenzhen-notary-2026-05-06.json` | Arweave `_dAaH_ltZGdMaRAYNjXydjf1YkvoASWxmHes4hsBAZE` | 948161 | PASS within stated archive scope |
+| Issued notarial certificate public copies | 2026-05-13 | `evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md` | `evidence-images-manifest.json` | supporting archives referenced by record | — | available, scope-limited |
+| GZ2 Photos Supplementary Archive | 2026-05-14 | `/evidence/arweave/gz2-photos-2026-05-14/` | `/api/gz2-notarial-certificate-redacted-attachments-2026-05-14.json` | archive index in record | — | secondary photographs, not original electronic evidence |
 
 These archives are non-amending physical-anchor evidence. They do not disclose confidential flaw-challenge data and do not replace direct physical inspection.
