@@ -77,8 +77,15 @@ The permanent simulation also requires rejection of:
 1. Guardian Retirement previously accepted `--guardian-id auto` syntactically but did not derive the same Guardian identifier as Guardian Application, causing valid same-key retirement to fail Gateway preflight.
 2. Correction wording was author-only, but Gateway and append enforcement did not bind the correction signer to the target author key.
 3. Some recovery text still described V6+ as a current or future verification route instead of using the current multidimensional verification model.
+4. The Builder changed during the runtime fix, so the canonical Builder bundle digest and byte size had to be regenerated before release.
 
-These defects are now covered by the permanent full-lifecycle regression and focused runtime checks.
+These defects are now covered by the permanent full-lifecycle regression, the official current-system test runner, Builder manifest synchronization checks, and focused runtime checks.
+
+## Release consistency
+
+The canonical Builder manifest is regenerated from the exact Builder bytes. Repository Integrity verifies the Builder digest and size before running the rest of the system checks. The permanent lifecycle simulation is part of `scripts/run_current_system_tests.py`, so it runs in both Current Tests and Repository Integrity rather than remaining an optional one-off workflow.
+
+No temporary audit workflow, diagnostic output, test key, receipt, pending record, final record, or generated Guardian entry belongs in the final change set.
 
 ## Authority boundary
 
