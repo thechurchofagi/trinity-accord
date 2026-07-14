@@ -2265,7 +2265,7 @@ apps/record_chain_intake_gateway/tests/test_submit.py::TestSubmitResponse::test_
 apps/record_chain_intake_gateway/tests/test_submit.py::TestSubmitConfigGateOrdering::test_invalid_payload_returns_diagnostics_even_when_write_config_missing
 apps/record_chain_intake_gateway/tests/test_submit.py::TestSubmitConfigGateOrdering::test_valid_payload_missing_write_config_returns_503
 
-318 tests collected in 1.07s
+318 tests collected in 1.09s
 
 ===== ACTION/STATE TEST REFERENCES =====
 scripts/agent_verification_pipeline.py:391:        if rc == 0 and receipt_path.exists():
