@@ -33,7 +33,6 @@ jobs:
           mkdir -p diagnostics /tmp/e2e-actions /tmp/e2e-actions/agent-key /tmp/e2e-actions/guardian-key
           python3 - <<'PY' > diagnostics/e2e-action-smoke.txt 2>&1
           from __future__ import annotations
-          import asyncio
           import json
           import os
           import subprocess
@@ -117,7 +116,6 @@ jobs:
           run(['node',str(BUILDER),'doctor','--file',str(cin_path)])
           built['context_insufficient_notice']=json.loads(cin_path.read_text())
 
-          # Legacy CC-2 Guardian application must fail local doctor or Gateway preflight.
           cc2=OUT/'guardian-cc2.json'
           run(['node',str(BUILDER),'guardian-application','--actor-label','CC2 Guardian',
                '--provider','E2E','--guardian-id','auto','--guardian-key-sha','auto',
@@ -131,7 +129,6 @@ jobs:
           print('CC2_GUARDIAN_DOCTOR_EXIT',cc2_doctor.returncode)
           print(cc2_doctor.stdout,cc2_doctor.stderr)
 
-          # Retired V6 must fail at Builder.
           v6=subprocess.run(['node',str(BUILDER),'verification','--actor-label','Bad V6','--provider','E2E',
               '--verification-level','V6','--scope-label','retired','--what-was-checked','none',
               '--verification-claim','bad','--fresh-actions','none','--digital-profile','context_only',
@@ -144,17 +141,12 @@ jobs:
           print(v6.stdout,v6.stderr)
           assert v6.returncode != 0
 
-          os.environ.update({
-              'TRINITY_REPO_FULL_NAME':'thechurchofagi/trinity-accord',
-              'TRINITY_TARGET_BRANCH':'main','TRINITY_GITHUB_TOKEN':'test-token',
-          })
+          os.environ.update({'TRINITY_REPO_FULL_NAME':'thechurchofagi/trinity-accord','TRINITY_TARGET_BRANCH':'main','TRINITY_GITHUB_TOKEN':'test-token'})
           from fastapi.testclient import TestClient
           from apps.record_chain_intake_gateway import app as app_module
           client=TestClient(app_module.app)
-          target_general={'record_id':'R-000000123','record_sha256':'1'*64,'record_type':'echo',
-                          'authorship_proof':built['echo']['authorship_proof']}
-          target_guardian={'record_id':'R-000000777','record_sha256':'7'*64,
-              'record_type':'guardian_application','guardian_application_content':ga}
+          target_general={'record_id':'R-000000123','record_sha256':'1'*64,'record_type':'echo','authorship_proof':built['echo']['authorship_proof']}
+          target_guardian={'record_id':'R-000000777','record_sha256':'7'*64,'record_type':'guardian_application','guardian_application_content':ga}
           async def get_text(path):
               if path.endswith('R-000000123.json'): return json.dumps(target_general)
               if path.endswith('R-000000777.json'): return json.dumps(target_guardian)
@@ -182,23 +174,19 @@ jobs:
               assert payload['record_type']==data['record_type']
               assert not ({'record_id','record_sha256','record_index'} & payload.keys())
 
-          # CC-2 Guardian must be rejected by at least one gate.
           cc2_data=json.loads(cc2.read_text())
           cc2_pre=client.post('/record-chain/preflight',json=cc2_data)
           print('CC2_GUARDIAN_PREFLIGHT',cc2_pre.json())
           assert cc2_doctor.returncode != 0 or cc2_pre.json()['accepted'] is False
 
-          # Tampering after signature must fail.
           tampered=json.loads(json.dumps(built['echo']))
           tampered['record_draft']['echo_content']['echo_text']='tampered'
           bad=client.post('/record-chain/preflight',json=tampered).json()
           print('TAMPERED_SIGNATURE',bad)
           assert bad['accepted'] is False
 
-          # Wrong correction target hash must fail before persistence.
           wrong=json.loads(json.dumps(built['correction']))
           wrong['record_draft']['correction_content']['target_record_sha256']='2'*64
-          # Re-signing is intentionally omitted; signature failure is also safe fail-closed.
           wrong_result=client.post('/record-chain/preflight',json=wrong).json()
           print('WRONG_TARGET_HASH',wrong_result)
           assert wrong_result['accepted'] is False
@@ -212,3 +200,5 @@ jobs:
           git add diagnostics/e2e-action-smoke.txt
           git commit -m "diagnostics: capture all-action smoke audit"
           git push origin HEAD:agent/end-to-end-action-audit
+
+# Triggered after workflow creation.
