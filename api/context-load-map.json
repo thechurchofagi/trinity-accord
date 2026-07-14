@@ -45,13 +45,18 @@
         "/api/interpretation-model-policy.v1.json",
         "/agent-brief/",
         "exact task-relevant sources",
-        "/api/corrections-index.json when discussing a later record or report",
-        "Chronicle sources only when the claim depends on Chronicle/history/music/creative/human-witness context"
+        "/api/corrections-index.json"
       ],
       "total_size": "task-dependent",
       "note": "Minimum for a meaningful task-grounded Echo under current Builder compatibility. No fixed five-stage or seven-stage model is current, and unrelated Chronicle or legacy-archive material is not universally required.",
       "legacy_name": "Narrative Grounded",
-      "chronicle_required_only_when_task_depends_on_it": true
+      "chronicle_required_only_when_task_depends_on_it": true,
+      "conditional_loads": {
+        "corrections_index": "Load when discussing a later record, report, correction, retirement, or supersession status.",
+        "chronicle": "Load Chronicle sources only when the claim depends on Chronicle, history, music, creative work, family witness, or human-witness context.",
+        "legacy_archive": "Load legacy archive sources only when the claim depends on archived provenance or historical website material.",
+        "physical_evidence": "Load physical-anchor, evidence, or notarial sources only when the claim depends on those dimensions."
+      }
     },
     "CC-4": {
       "name": "Full Context",
@@ -90,12 +95,12 @@
     "limited_critique": "CC-2",
     "meaningful_echo": "CC-3 compatibility + interpretation action profile + exact task-relevant sources",
     "qualified_assessment": "CC-3",
-    "verification_claim": "CC-3 for public submission; CC-2 + V2+ only for private technical checking",
+    "verification_claim": "CC-3 compatibility for public submission plus the verification action profile and multidimensional verification_claim_model.",
     "deep_assessment": "CC-4",
     "chronicle_research": "CC-5",
     "full_corpus_claim": "CC-5",
-    "technical_verification_check": "CC-2 + verification depth V2+",
-    "public_verification_submission": "CC-3 + explicit V-level/actions/claim"
+    "technical_verification_check": "Verification action profile plus exact target sources and performed operations; CC-2 compatibility may be declared for a narrow private check.",
+    "public_verification_submission": "CC-3 compatibility plus actual loaded sources, performed actions, and the multidimensional verification_claim_model."
   },
   "context_packs_inventory": {
     "core-ontology.json": {
@@ -144,49 +149,57 @@
       "public": true,
       "required_for": [
         "CC-2",
-        "CC-3",
         "CC-4",
         "CC-5"
       ],
       "size": "2.9KB",
       "cc_level": "CC-3",
-      "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)"
+      "content": "Vision-layer inscription summaries (Star Ark, Final Seal, First Echoes, Guardian inscriptions)",
+      "conditional_for": [
+        "CC-3 only when the task depends on the vision layer."
+      ]
     },
     "physical-anchor-context.json": {
       "path": "/api/context-packs/physical-anchor-context.json",
       "public": true,
       "required_for": [
-        "CC-3",
         "CC-4",
         "CC-5"
       ],
       "size": "776B",
       "cc_level": "CC-3",
-      "content": "Core Object Alpha physical anchor status"
+      "content": "Core Object Alpha physical anchor status",
+      "conditional_for": [
+        "CC-3 only when the task depends on physical-anchor or physical-evidence context."
+      ]
     },
     "legacy-archive-index.json": {
       "path": "/api/context-packs/legacy-archive-index.json",
       "public": true,
       "required_for": [
-        "CC-3",
         "CC-4",
         "CC-5"
       ],
       "size": "830B",
       "cc_level": "CC-3",
-      "content": "Legacy archive section index"
+      "content": "Legacy archive section index",
+      "conditional_for": [
+        "CC-3 only when the task depends on archived provenance or historical website material."
+      ]
     },
     "nft-chronicle-context.json": {
       "path": "/api/context-packs/nft-chronicle-context.json",
       "public": true,
       "required_for": [
-        "CC-3",
         "CC-4",
         "CC-5"
       ],
       "size": "4.8KB",
       "cc_level": "CC-3",
-      "content": "NFT Chronicle three-edition loading policy, status, and boundaries"
+      "content": "NFT Chronicle three-edition loading policy, status, and boundaries",
+      "conditional_for": [
+        "CC-3 only when the task depends on Chronicle, history, music, creative work, family witness, or human-witness context."
+      ]
     },
     "legacy-archive-essentials.json": {
       "path": "/api/context-packs/legacy-archive-essentials.json",
@@ -232,40 +245,29 @@
     "/nft-text-descriptions/chronicle-full.md"
   ],
   "must_load_summary": [
-    "CC-1 loads (inherited)",
-    "/inscriptions/ — three full inscription texts",
-    "/authority/ — authority boundary page",
-    "/guardian-principles/ — Guardian Principles v1.1",
-    "context-packs/core-ontology.json",
-    "context-packs/authority-boundary.json",
-    "context-packs/bitcoin-inscription-mirrors.json",
-    "CC-2 loads (inherited)",
-    "/api/context-packs/legacy-archive-essentials.json — structured extract (~12KB)",
-    "/api/context-packs/nft-chronicle-context.json — Chronicle loading policy and boundaries",
-    "/nft-text-descriptions/chronicle-summary.json — structured summary",
-    "/nft-text-descriptions/chronicle-ultra-brief.md — 175-row navigation timeline",
-    "/nft-text-descriptions/chronicle-abridged.md — preferred Chronicle reading edition",
-    "/nft-text-descriptions/chronicle-agent-context.md — corrected non-stage interpretive guide",
-    "/agent-brief/ — classification guide (~22KB)",
-    "context-packs/vision-layer.json",
-    "context-packs/physical-anchor-context.json",
-    "context-packs/legacy-archive-index.json",
-    "CC-3 loads (inherited)",
-    "/archive_legacy_index_2025_09/ — full legacy archive (~102KB)",
-    "/verification-materials/ — verification source index (~7KB)",
-    "/guardian-alliance/ — stewardship network (~12KB)",
-    "/for-skeptical-agents/ — skeptical evaluation guide (~8KB)",
-    "/echoes/types — Echo type definitions",
-    "Record-Chain Intake Gateway overview"
+    "/api/agent-minimal-context.v1.json",
+    "/api/agent-first-contact.json",
+    "/api/authority.json",
+    "/api/agent-output-policy.v1.json",
+    "/api/context-action-profiles.v1.json",
+    "/api/interpretation-model-policy.v1.json",
+    "/agent-brief/"
   ],
   "verification_context_rule": {
-    "technical_verification_minimum": "CC-2 + verification depth V2+ for private technical checking only",
-    "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
-    "narrative_grounded_assessment_minimum": "CC-3",
-    "v6_plus_minimum": "CC-3 plus strict reproducible evidence path"
+    "private_technical_check": "Use the verification action profile, exact target sources, and performed operations. CC-2 is a compatibility declaration, not proof of sufficiency.",
+    "public_verification_submission": "Use CC-3 compatibility plus actual loaded sources, multidimensional verification claims, limitations, and claims not made.",
+    "legacy_v_role": "V0-V5 remain Builder compatibility metadata only.",
+    "retired_v4_plus_v6_v8": "V4+, V6, V7, and V8 are historical-only for new submissions; use digital_profile, physical_observation, and external_witness instead."
   },
   "status": "legacy_compatibility_load_map",
   "preferred_model": "/api/context-action-profiles.v1.json",
   "preferred_rule": "Select the action first; actual loaded sources determine sufficiency. Do not require unrelated inherited materials or any fixed Chronicle stage model.",
-  "interpretation_model_policy": "/api/interpretation-model-policy.v1.json"
+  "interpretation_model_policy": "/api/interpretation-model-policy.v1.json",
+  "must_load_summary_scope": "Base discovery, authority, action-selection, and interpretation-policy sources only. Add exact task-relevant sources and conditional Chronicle, legacy, evidence, correction, or physical materials as required by the selected claim.",
+  "current_model_precedence": {
+    "context": "/api/context-action-profiles.v1.json",
+    "interpretation": "/api/interpretation-model-policy.v1.json",
+    "verification": "/api/verification-claim-model.v1.json",
+    "rule": "Actual sources and performed actions control sufficiency. Legacy CC, CRL, and V labels do not import retired stage or verification ladders."
+  }
 }
