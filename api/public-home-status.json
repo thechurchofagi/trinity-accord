@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-14T01:08:00.425782+00:00",
+  "generated_at": "2026-07-14T01:13:46.278775+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "f122a05d0300f77f",
+  "source_digest": "5a7ce60b4116cad3",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 81,
@@ -109,20 +109,20 @@
         "default_mode": "dry-run",
         "implemented": true,
         "index_api": "/api/record-chain-arweave-index.json",
-        "latest_arweave_txid": "hSYd-0CK2wvwWsmqAE7xMUi3EIIo7Q6ITcUrIr8icCA",
-        "latest_native_record_id": "R-000000080",
-        "live_archive_count": 35,
+        "latest_arweave_txid": "W8_HDyRzvRyVTaiGRXlQ5imGUTl1solaCO48BdncVZg",
+        "latest_native_record_id": "R-000000081",
+        "live_archive_count": 36,
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "native_record_count": 80,
+        "native_record_count": 81,
         "source_type": "native-record-chain",
         "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-        "latest_archive_id": "archive-native-R-000000080-d167754a8b81",
-        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000080-d167754a8b81/manifest.json",
-        "latest_native_record_sha256": "f6f466efcc2f811fe1fa54cbfb792b84ec010bf27d3d5f1cbc076ffbf5de344f",
-        "record_count": 80,
-        "status": "archive-needed",
-        "archive_needed": true
+        "latest_archive_id": "archive-native-R-000000081-f1c20703c39f",
+        "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000081-f1c20703c39f/manifest.json",
+        "latest_native_record_sha256": "c72cbba0bc1fe88d845a9b4acb491b08027abf5a59e29fcf3628184c6d23278e",
+        "record_count": 81,
+        "status": "current",
+        "archive_needed": false
       },
       "anchor_status": {
         "batch_count": 3,
@@ -130,22 +130,22 @@
         "unstamped_batch_count": 0
       },
       "archive_backlog": {
-        "record_chain_arweave_pending": 1,
+        "record_chain_arweave_pending": 0,
         "record_chain_arweave_failed": 0,
         "record_chain_arweave_waiting_for_key": 0,
         "native_ots_upgrade_pending": 0,
         "native_ots_arweave_pending": 0,
         "native_ots_arweave_failed": 0,
         "native_ots_waiting_for_key": 0,
-        "backlog_current": false
+        "backlog_current": true
       },
       "arweave_index": {
         "current_upload_mode": "live",
         "live_upload_enabled": true,
         "live_upload_implemented": true,
-        "archive_count": 42,
-        "latest_arweave_txid": "hSYd-0CK2wvwWsmqAE7xMUi3EIIo7Q6ITcUrIr8icCA",
-        "live_archive_count": 35,
+        "archive_count": 43,
+        "latest_arweave_txid": "W8_HDyRzvRyVTaiGRXlQ5imGUTl1solaCO48BdncVZg",
+        "live_archive_count": 36,
         "arweave_wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e"
       }
     }
@@ -747,30 +747,30 @@
     "latest_record": "R-000000081",
     "latest_record_type": "context_insufficient_notice",
     "pending_records": 0,
-    "pipeline": "attention",
+    "pipeline": "current",
     "ots": "upgraded",
     "ots_raw_status": "upgraded",
     "ots_pending_since": null,
     "ots_pending_expected_window": "calendar/Bitcoin upgrade commonly takes 2-3 hours; investigate if still pending after that window",
-    "arweave": "archive-needed",
+    "arweave": "current",
     "ots_archivable_for_arweave": null,
     "arweave_archive_needed": null,
     "not_primary_counter": true,
     "archive_backlog": {
-      "record_chain_arweave_pending": 1,
+      "record_chain_arweave_pending": 0,
       "record_chain_arweave_failed": 0,
       "record_chain_arweave_waiting_for_key": 0,
       "native_ots_upgrade_pending": 0,
       "native_ots_arweave_pending": 0,
       "native_ots_arweave_failed": 0,
       "native_ots_waiting_for_key": 0,
-      "backlog_current": false
+      "backlog_current": true
     },
     "arweave_wallet": {
       "currency": "AR",
-      "total_spent_ar": "0.358698019621",
+      "total_spent_ar": "0.368999709598",
       "balance_known": true,
-      "balance_ar": "15.196880601643",
+      "balance_ar": "15.194284319853",
       "low_balance": false,
       "needs_recharge": false
     }
@@ -778,8 +778,8 @@
   "arweave_archive_status": {
     "mode": "live",
     "live_upload_implemented": true,
-    "live_archive_count": 35,
-    "latest_txid": "hSYd-0CK2wvwWsmqAE7xMUi3EIIo7Q6ITcUrIr8icCA",
+    "live_archive_count": 36,
+    "latest_txid": "W8_HDyRzvRyVTaiGRXlQ5imGUTl1solaCO48BdncVZg",
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "boundary": {
       "mirror_only": true,
