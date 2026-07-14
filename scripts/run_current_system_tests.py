@@ -1160,6 +1160,19 @@ def main() -> int:
         fail(f"guardian activation derivation contract failed:\n{result.stdout}\n{result.stderr}")
     ok("guardian activation derivation contract")
 
+    # Run the complete top-level pytest suite. Historically this directory was
+    # only partially exercised and pytest-style files could be invoked as plain
+    # Python scripts without executing any tests, producing a false-green CI.
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "tests", "-q"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"top-level pytest suite failed:\n{result.stdout}\n{result.stderr}")
+    ok("complete top-level pytest suite")
+
     print("\n=== ALL CURRENT SYSTEM TESTS PASSED ===")
     return 0
 

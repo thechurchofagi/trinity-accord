@@ -20,7 +20,7 @@ def test_current_profile_and_procedure_ids_match():
 
     profile_ids = {item["id"] for item in profiles["digital_profiles"]}
     procedure_ids = set(procedures["digital_profile_procedures"])
-    claim_ids = set(claim_model["digital_profile"]["allowed_values"])
+    claim_ids = set(claim_model["required_dimensions"]["digital_profile"]["values"])
 
     expected = {
         "context_only",
@@ -41,11 +41,11 @@ def test_current_physical_and_witness_values_match_claim_model():
 
     physical_profiles = {item["id"] for item in profiles["physical_observation"]["values"]}
     physical_procedures = set(procedures["physical_observation_procedures"])
-    physical_claim = set(claim_model["physical_observation"]["allowed_values"])
+    physical_claim = set(claim_model["required_dimensions"]["physical_observation"]["values"])
 
     witness_profiles = {item["id"] for item in profiles["external_witness"]["values"]}
     witness_procedures = set(procedures["external_witness_procedures"])
-    witness_claim = set(claim_model["external_witness"]["allowed_values"])
+    witness_claim = set(claim_model["required_dimensions"]["external_witness"]["values"])
 
     assert physical_profiles == physical_procedures == physical_claim
     assert witness_profiles == witness_procedures == witness_claim
@@ -133,3 +133,24 @@ def test_machine_procedures_define_executable_steps_and_downgrades():
     assert procedures["relationship_procedures"]["timestamps_digest"]["steps"]
     assert procedures["relationship_procedures"]["notarially_records_process"]["steps"]
     assert procedures["downgrade_rules"]
+
+
+def main() -> int:
+    tests = [
+        test_current_profile_and_procedure_ids_match,
+        test_current_physical_and_witness_values_match_claim_model,
+        test_new_submission_legacy_boundary_is_consistent,
+        test_active_human_entrypoints_use_current_model,
+        test_active_machine_navigation_does_not_offer_retired_v_as_current_level,
+        test_chronicle_materials_do_not_restore_fixed_stage_model,
+        test_machine_procedures_define_executable_steps_and_downgrades,
+    ]
+    for test in tests:
+        test()
+        print(f"PASS: {test.__name__}")
+    print("VERIFICATION_PROCEDURE_MODEL_OK")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

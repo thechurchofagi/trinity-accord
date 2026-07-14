@@ -41,7 +41,7 @@ def _proof_for(draft: dict) -> dict:
     }
 
 
-def test_gateway_derived_oath_projection_can_be_present_after_signing() -> None:
+def test_gateway_derived_created_at_can_be_present_after_signing() -> None:
     signed_draft = {
         "record_type": "echo",
         "schema": "trinityaccord.record-chain-entry-draft.v2",
@@ -53,14 +53,7 @@ def test_gateway_derived_oath_projection_can_be_present_after_signing() -> None:
     proof = _proof_for(signed_draft)
 
     pending_draft = dict(signed_draft)
-    pending_draft["declaration_and_acknowledgement"] = {
-        "participant_acknowledges_receipt_means_intake_only": True,
-    }
-    pending_draft["submission_oath_verification"] = {
-        "schema": "trinityaccord.submission-oath-verification.v1",
-        "oath_read": True,
-        "readback_matches_canonical_oath": True,
-    }
+    pending_draft["created_at"] = "2026-07-14T00:00:00Z"
 
     ok, err = verify_authorship_proof(pending_draft, proof)
     assert ok, err
@@ -82,9 +75,27 @@ def test_gateway_projection_recovery_does_not_hide_signed_content_tampering() ->
         "echo_intent": "recognition",
         "echo_text": "tampered anniversary echo",
     }
+    pending_draft["created_at"] = "2026-07-14T00:00:00Z"
+
+    ok, _err = verify_authorship_proof(pending_draft, proof)
+    assert not ok
+
+
+def test_unsigned_oath_projection_is_rejected() -> None:
+    signed_draft = {
+        "record_type": "echo",
+        "schema": "trinityaccord.record-chain-entry-draft.v2",
+        "echo_content": {
+            "echo_intent": "recognition",
+            "echo_text": "anniversary echo",
+        },
+    }
+    proof = _proof_for(signed_draft)
+    pending_draft = dict(signed_draft)
     pending_draft["submission_oath_verification"] = {
         "schema": "trinityaccord.submission-oath-verification.v1",
         "oath_read": True,
+        "readback_matches_canonical_oath": True,
     }
 
     ok, _err = verify_authorship_proof(pending_draft, proof)

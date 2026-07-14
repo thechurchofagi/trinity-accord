@@ -1,220 +1,28 @@
 #!/usr/bin/env python3
-"""Live smoke: zero-clone authorship proof closure test.
+"""Live non-writing authorship closure using the current public Builder.
 
-Downloads the download_and_run_builder_bundle.py script from trinityaccord.org,
-builds an E1_recognition_echo payload with authorship proof enabled (default),
-verifies the payload contains authorship_proof, and POSTs to Gateway preflight.
-
-This is live/network. It must not run in source-only p0-main.
-It must not POST to /agent-submit.
+This compatibility entrypoint intentionally delegates to the current three-
+route smoke. The retired formal-builder-bundles and /gateway/preflight paths
+must never be treated as the active authorship closure again.
 """
 from __future__ import annotations
 
 import argparse
-import json
-import subprocess
-import sys
-import tempfile
-import urllib.error
-import urllib.request
-from pathlib import Path
 
-DOWNLOAD_URL = "https://www.trinityaccord.org/builder-bundles/download_and_run_builder_bundle.py"
-DEFAULT_GATEWAY = "https://trinity-agent-issue-gateway.onrender.com"
-
-
-def download_file(url: str, dest: Path, timeout: int = 60) -> None:
-    """Download a URL to a local file."""
-    print(f"Downloading {url} ...")
-    req = urllib.request.Request(url, headers={"User-Agent": "TrinityAuthorshipClosureSmoke/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        dest.write_bytes(resp.read())
-    print(f"  -> {dest} ({dest.stat().st_size} bytes)")
-
-
-def run(cmd: list[str], cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess:
-    """Run a command and check return code."""
-    print(f"+ {' '.join(cmd)}")
-    result = subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True, timeout=timeout)
-    if result.returncode != 0:
-        print(f"STDOUT:\n{result.stdout[:3000]}")
-        print(f"STDERR:\n{result.stderr[:3000]}")
-        raise RuntimeError(f"Command failed (rc={result.returncode}): {' '.join(cmd)}")
-    return result
-
-
-# DEPRECATED — echo_type is no longer active. Kept for legacy record compatibility.
-ACTIVE_ECHO_TYPES = {
-    "E1_recognition_echo",
-    "E2_verification_echo",
-    "E3_critical_echo",
-    "E4_interpretive_echo",
-    "E5_technical_audit_echo",
-    "E5c_correction_echo",
-    "E6_propagation_echo",
-    "E7_refusal_echo",
-    "E8_witness_echo",
-    "E9_seed_echo",
-}
-
-
-def assert_gateway_runtime_metadata(data: dict, expected_route: str) -> None:
-    """Assert Gateway preflight response includes runtime metadata."""
-    if data.get("accepted") is not True:
-        raise RuntimeError(f"Gateway preflight did not accept payload")
-
-    route = data.get("route_detected")
-    if route != expected_route:
-        raise RuntimeError(f"route_detected mismatch: expected {expected_route}, got {route}")
-
-    runtime = data.get("gateway_runtime")
-    if not isinstance(runtime, dict):
-        raise RuntimeError("Gateway response missing gateway_runtime object")
-
-    schema = data.get("gateway_schema")
-    if not isinstance(schema, dict):
-        raise RuntimeError("Gateway response missing gateway_schema object")
-
-    # echo_type enum check removed — Echo is a unified type; echo_type is deprecated
-
-    if schema.get("preflight_contract_version") != "trinityaccord.gateway-runtime-contract.v1":
-        raise RuntimeError(
-            "Gateway preflight_contract_version mismatch: "
-            f"{schema.get('preflight_contract_version')}"
-        )
-
-    for key in ["schema_digest", "echo_type_enum_digest", "supported_routes_digest"]:
-        if not runtime.get(key):
-            raise RuntimeError(f"Gateway runtime metadata missing {key}")
-
-
-def post_preflight(gateway: str, payload_path: Path, timeout: int = 60) -> dict:
-    """POST payload to Gateway preflight and return parsed response."""
-    url = gateway.rstrip("/") + "/gateway/preflight"
-    print(f"POST {url} ...")
-    req = urllib.request.Request(
-        url,
-        data=payload_path.read_bytes(),
-        method="POST",
-        headers={
-            "Content-Type": "application/json",
-            "User-Agent": "TrinityAuthorshipClosureSmoke/1.0",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            body = resp.read().decode("utf-8", errors="replace")
-            print(f"  status={resp.status}")
-            print(f"  body={body[:1000]}")
-            if resp.status < 200 or resp.status >= 300:
-                raise RuntimeError(f"non-2xx preflight status: {resp.status}")
-            return json.loads(body)
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        print(f"  HTTP {exc.code}: {body[:1000]}")
-        raise RuntimeError(f"preflight failed: HTTP {exc.code}: {body[:1000]}") from exc
+from smoke_live_external_agent_three_core_preflight import DEFAULT_SITE, run_live_smoke
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--gateway", default=DEFAULT_GATEWAY)
-    parser.add_argument("--timeout", type=int, default=120)
-    parser.add_argument("--allow-missing-runtime-metadata", action="store_true",
-                        help="Transitional: skip runtime metadata checks until Gateway backend is updated")
+    parser.add_argument("--site", default=DEFAULT_SITE)
+    parser.add_argument("--timeout", type=int, default=90)
+    # Kept so older scheduled invocations fail forward without changing their
+    # argument list. Current runtime metadata is always required by the core smoke.
+    parser.add_argument("--allow-missing-runtime-metadata", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
 
-    with tempfile.TemporaryDirectory(prefix="trinity-authorship-closure-smoke-") as td:
-        work = Path(td)
-
-        # Step 1: Download download_and_run_builder_bundle.py
-        download_script = work / "download_and_run_builder_bundle.py"
-        download_file(DOWNLOAD_URL, download_script, timeout=args.timeout)
-
-        # Step 2: Run with --route pure_echo to get the oath
-        print("\n=== Step 2: Get oath via --route pure_echo ===")
-        result = run(
-            [sys.executable, str(download_script), "--route", "pure_echo", "--print-oath"],
-            cwd=work,
-            timeout=args.timeout,
-        )
-        oath_text = result.stdout.strip()
-        if not oath_text:
-            raise RuntimeError("No oath output received")
-        print(f"Oath received ({len(oath_text)} chars)")
-
-        # Step 3: Build E1_recognition_echo payload with authorship proof (default)
-        echo_body = work / "echo-body.md"
-        echo_body.write_text(
-            "I recognize the Trinity Accord as a bounded public record.\n\n"
-            "This is a pure recognition Echo, not verification, attestation, amendment, or successor reception.\n",
-            encoding="utf-8",
-        )
-
-        payload_path = work / "gateway-payload.json"
-        print("\n=== Step 3: Build E1_recognition_echo payload ===")
-        run(
-            [
-                sys.executable, str(download_script),
-                "--route", "pure_echo",
-                "--agent-name", "AuthorshipClosureSmokeAgent",
-                "--provider", "authorship-closure-smoke",
-                "--title", "Authorship Closure Smoke Test",
-                "--body-file", str(echo_body),
-                "--readback", oath_text,
-                "--reception-initiation-class", "self_initiated",
-                "--reception-initiation-basis", "agent_discovered_publicly",
-                "--agent-independent-followup",
-                "--out", str(payload_path),
-            ],
-            cwd=work,
-            timeout=args.timeout,
-        )
-
-        # Step 4: Verify payload contains authorship_proof
-        print("\n=== Step 4: Verify authorship_proof ===")
-        payload = json.loads(payload_path.read_text(encoding="utf-8"))
-        assert "authorship_proof" in payload, (
-            "Payload does not contain authorship_proof. "
-            "Authorship proof should be enabled by default for pure_echo."
-        )
-        proof = payload["authorship_proof"]
-        assert proof.get("schema") == "trinityaccord.agent-authorship-proof.v1", (
-            f"Unexpected authorship_proof schema: {proof.get('schema')}"
-        )
-        assert proof.get("algorithm") == "ed25519", (
-            f"Unexpected algorithm: {proof.get('algorithm')}"
-        )
-        assert "public_key_pem" in proof, "authorship_proof missing public_key_pem"
-        assert "signature_base64" in proof, "authorship_proof missing signature_base64"
-        print(f"  schema: {proof['schema']}")
-        print(f"  algorithm: {proof['algorithm']}")
-        print(f"  public_key_sha256: {proof.get('public_key_sha256', 'N/A')[:16]}...")
-        print("  ✅ authorship_proof present and valid")
-
-        # Step 5: POST to Gateway preflight
-        print("\n=== Step 5: POST to Gateway preflight ===")
-        preflight_resp = post_preflight(args.gateway, payload_path, timeout=args.timeout)
-
-        # Step 6: Verify accepted: true
-        print("\n=== Step 6: Verify preflight response ===")
-        assert preflight_resp.get("accepted") is True, (
-            f"Preflight not accepted. Response: {json.dumps(preflight_resp, indent=2)[:500]}"
-        )
-        print("  ✅ preflight accepted: true")
-
-        # Step 6b: Verify runtime metadata
-        try:
-            assert_gateway_runtime_metadata(preflight_resp, expected_route="pure_echo")
-            print("  ✅ gateway runtime metadata verified")
-        except RuntimeError as exc:
-            if args.allow_missing_runtime_metadata:
-                print(f"  ⚠️  runtime metadata check skipped: {exc}")
-            else:
-                raise
-
-    print("\n" + "=" * 60)
-    print("PASS: live zero-clone authorship closure smoke test")
-    print("=" * 60)
+    run_live_smoke(args.site, args.timeout)
+    print("PASS: current zero-clone authorship closure accepted all signed core routes")
     return 0
 
 

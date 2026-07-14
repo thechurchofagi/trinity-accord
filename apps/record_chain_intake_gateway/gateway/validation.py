@@ -907,11 +907,36 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
         content = draft.get("guardian_application_content")
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
             missing("MISSING_GUARDIAN_APPLICATION_CONTENT", "draft.guardian_application_content", "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath")
+        elif not re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", str(content.get("requested_guardian_identifier"))):
+            missing("INVALID_GUARDIAN_ID", "draft.guardian_application_content.requested_guardian_identifier", "Guardian identifier must be guardian_ed25519_<first16-of-public-key-sha256>")
+        if isinstance(content, dict) and not re.fullmatch(r"[a-f0-9]{64}", str(content.get("guardian_public_key_sha256", ""))):
+            missing("INVALID_GUARDIAN_PUBLIC_KEY_SHA", "draft.guardian_application_content.guardian_public_key_sha256", "Guardian public key SHA-256 must be 64 lowercase hex characters")
+        if isinstance(content, dict):
+            guardian_id = str(content.get("requested_guardian_identifier", ""))
+            guardian_key_sha = str(content.get("guardian_public_key_sha256", ""))
+            if (
+                re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", guardian_id)
+                and re.fullmatch(r"[a-f0-9]{64}", guardian_key_sha)
+                and guardian_id != f"guardian_ed25519_{guardian_key_sha[:16]}"
+            ):
+                missing("GUARDIAN_ID_KEY_MISMATCH", "draft.guardian_application_content.requested_guardian_identifier", "Guardian application identifier must match guardian_public_key_sha256")
     elif record_type == "guardian_retirement":
         payload = draft.get("payload") if isinstance(draft.get("payload"), dict) else {}
         for field in ("guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record"):
             if not (draft.get(field) or payload.get(field)):
                 missing("MISSING_GUARDIAN_RETIREMENT_FIELD", f"draft.{field}", f"Guardian retirement requires {field}")
+        guardian_id = draft.get("guardian_id") or payload.get("guardian_id")
+        guardian_key_sha = draft.get("guardian_public_key_sha256") or payload.get("guardian_public_key_sha256")
+        if guardian_id and not re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", str(guardian_id)):
+            missing("INVALID_GUARDIAN_ID", "draft.guardian_id", "Guardian retirement guardian_id must be guardian_ed25519_<first16-of-public-key-sha256>; 'auto' is only a Builder CLI input")
+        if guardian_key_sha and not re.fullmatch(r"[a-f0-9]{64}", str(guardian_key_sha)):
+            missing("INVALID_GUARDIAN_PUBLIC_KEY_SHA", "draft.guardian_public_key_sha256", "Guardian public key SHA-256 must be 64 lowercase hex characters")
+        if (
+            re.fullmatch(r"guardian_ed25519_[a-f0-9]{16}", str(guardian_id or ""))
+            and re.fullmatch(r"[a-f0-9]{64}", str(guardian_key_sha or ""))
+            and guardian_id != f"guardian_ed25519_{str(guardian_key_sha)[:16]}"
+        ):
+            missing("GUARDIAN_ID_KEY_MISMATCH", "draft.guardian_id", "Guardian retirement guardian_id must match guardian_public_key_sha256")
         # Target binding: require target_guardian_application_record_id and target_guardian_application_record_sha256
         target_id = draft.get("target_guardian_application_record_id") or payload.get("target_guardian_application_record_id")
         target_sha = draft.get("target_guardian_application_record_sha256") or payload.get("target_guardian_application_record_sha256")

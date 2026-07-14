@@ -279,7 +279,7 @@ def main() -> None:
     )
     assert_builder_command_fails(["guardian-retirement"], "--guardian-id is required")
     assert_builder_command_fails(
-        ["guardian-retirement", "--guardian-id", "guardian-test", "--guardian-key-sha", "bad", "--body", "test reason",
+        ["guardian-retirement", "--guardian-id", "guardian_ed25519_aaaaaaaaaaaaaaaa", "--guardian-key-sha", "bad", "--body", "test reason",
          "--target-guardian-application-record-id", "R-000000001",
          "--target-guardian-application-record-sha256", "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789"],
         "--guardian-key-sha must be a 64-character lowercase hex SHA-256",

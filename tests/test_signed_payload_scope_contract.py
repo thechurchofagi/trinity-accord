@@ -10,10 +10,7 @@ from gateway.authorship import GATEWAY_DERIVED_UNSIGNED_FIELDS, UNSIGNED_PROJECT
 
 
 def test_gateway_derived_unsigned_fields_are_narrow() -> None:
-    assert GATEWAY_DERIVED_UNSIGNED_FIELDS == {
-        "declaration_and_acknowledgement",
-        "submission_oath_verification",
-    }
+    assert GATEWAY_DERIVED_UNSIGNED_FIELDS == {"created_at"}
 
 
 def test_projection_fields_include_append_assigned_integrity_fields() -> None:
@@ -47,3 +44,4 @@ def test_signed_payload_scope_doc_names_recovery_fields() -> None:
         assert f"`{field}`" in doc
     for field in ("created_at", "authorship_proof", "proof"):
         assert f"`{field}`" in doc
+    assert "must include\nthe oath/declaration fields in `record_draft` before authorship signing" in doc

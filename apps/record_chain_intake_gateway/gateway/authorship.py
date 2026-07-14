@@ -50,12 +50,10 @@ UNSIGNED_PROJECTION_FIELDS = frozenset({
     "immutability_policy",
 })
 
-# Gateway intake can materialize durable, receipt-side verification projections
-# after the participant has signed the builder draft. These fields are important
-# public evidence and should remain in the final record, but they are not always
-# part of the signed payload domain for older builder submissions. Append must be
-# able to verify the original signed draft without treating these Gateway-derived
-# receipt projections as participant-signed material.
+# Server normalization can add a timestamp after the participant has signed the
+# builder draft.  Oath and declaration fields are deliberately excluded from
+# this recovery set: current submissions must carry and sign those fields in the
+# original record_draft.
 GATEWAY_DERIVED_UNSIGNED_FIELDS = frozenset({
     "created_at",
 })
@@ -76,10 +74,9 @@ def strip_unsigned_projection_fields(record_draft: dict[str, Any]) -> dict[str, 
 def strip_gateway_derived_unsigned_fields(record_draft: dict[str, Any]) -> dict[str, Any]:
     """Return a copy without Gateway-derived receipt verification projections.
 
-    These fields may be materialized during Gateway intake after authorship
-    signing. They remain valid public evidence, but legacy signed-payload
-    verification must be allowed to fall back to the original builder draft
-    domain when a pending file contains these projections.
+    These fields may be materialized by server normalization after authorship
+    signing. Verification may fall back to the original builder draft domain
+    only for this deliberately narrow set.
     """
     cleaned = dict(record_draft)
     for field in GATEWAY_DERIVED_UNSIGNED_FIELDS:

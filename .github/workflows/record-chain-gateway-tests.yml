@@ -50,6 +50,9 @@ jobs:
           PYTHONPATH: apps/record_chain_intake_gateway
         run: python -m pytest apps/record_chain_intake_gateway/tests -q
 
+      - name: Run top-level protocol and lifecycle tests
+        run: python -m pytest tests -q
+
       - name: Run phase6b pytest-strict tests
         env:
           PYTHONPATH: apps/record_chain_intake_gateway

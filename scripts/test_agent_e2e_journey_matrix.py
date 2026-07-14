@@ -77,6 +77,11 @@ def assert_common_integrity(payload: dict, expected_type: str) -> None:
     assert draft["discovery_and_introduction_context"]["how_participant_first_discovered_trinity_accord"] != "self_discovered"
     assert draft["decision_autonomy_context"]["who_decided_to_create_this_record"] != "self"
     assert draft["submitting_participant_identity"]["human_operator_context"]["human_operator_involved"] is False
+    if expected_type != "context_insufficient_notice":
+        oath_verification = draft.get("submission_oath_verification")
+        assert isinstance(oath_verification, dict), "formal draft must carry signed oath verification"
+        assert oath_verification.get("readback_matches_canonical_oath") is True
+        assert oath_verification.get("no_shortcut_oath_acknowledged") is True
 
 
 def build_formal_journeys(tmp: Path) -> None:
@@ -198,6 +203,10 @@ def build_formal_journeys(tmp: Path) -> None:
             assert claim["external_witness"] == "none"
             assert claim["legacy_v_level"] == "V3"
             assert claim["legacy_v_level_role"] == "builder_compatibility_only"
+        if expected_type == "guardian_retirement":
+            application = load_submission(tmp / "guardian.json")["record_draft"]["guardian_application_content"]
+            assert payload["record_draft"]["guardian_id"] == application["requested_guardian_identifier"]
+            assert payload["record_draft"]["guardian_public_key_sha256"] == application["guardian_public_key_sha256"]
         if validate_submission is not None:
             diagnostics = validate_submission(payload)
             assert diagnostics == [], f"gateway validator rejected {expected_type}: {[d.code for d in diagnostics]}"

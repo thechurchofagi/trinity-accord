@@ -1,131 +1,76 @@
 #!/usr/bin/env python3
-"""Live smoke for zero-clone formal builder bundle publication."""
+"""Live smoke for the active zero-clone Record-Chain Builder publication."""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
-import sys
+import subprocess
+import tempfile
 import urllib.request
+from pathlib import Path
 
-REQUIRED = [
-    "pure_echo",
-    "v0_v5_agent_declared_archive",
-    "guardian_application_stage_1",
-    "guardian_listing_stage_2",
-    "guardian_signed_echo",
-]
 
-LIVE_REQUIRED = {
-    "pure_echo": [
-        "scripts/build_agent_declared_echo_payload.py",
-        "scripts/guardian_reroute_guidance.py",
-        "scripts/oath_contracts.py",
-        "scripts/oath_readback_integrity.py",
-        "scripts/attach_agent_authorship_proof.mjs",
-        "scripts/build_agent_authorship_message.py",
-    ],
-    "v0_v5_agent_declared_archive": [
-        "scripts/build_agent_declared_archive_payload.py",
-        "scripts/attach_agent_authorship_proof.mjs",
-        "scripts/build_agent_authorship_message.py",
-    ],
-    "guardian_application_stage_1": [
-        "scripts/create_guardian_application.mjs",
-        "scripts/proof_canonical.mjs",
-    ],
-    "guardian_listing_stage_2": [
-        "scripts/build_guardian_listing_request_payload.py",
-        "scripts/archive_readiness_gate.py",
-        "scripts/attach_agent_authorship_proof.mjs",
-        "scripts/build_agent_authorship_message.py",
-    ],
-    "guardian_signed_echo": [
-        "scripts/build_guardian_echo_payload.py",
-        "scripts/build_agent_declared_echo_payload.py",
-        "scripts/attach_guardian_presence_proof.mjs",
-        "scripts/proof_canonical.mjs",
-        "api/guardian-registry.json",
-    ],
+REQUIRED_RECORD_TYPES = {
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "propagation",
+    "correction",
+    "classification_update",
+    "context_insufficient_notice",
 }
 
 
-def fetch_bytes(url: str) -> bytes:
-    req = urllib.request.Request(
+def fetch(url: str, timeout: int) -> bytes:
+    request = urllib.request.Request(
         url,
-        headers={
-            "User-Agent": "TrinityZeroCloneBundleSmoke/1.0",
-            "Cache-Control": "no-cache",
-            "Pragma": "no-cache",
-        },
+        headers={"User-Agent": "TrinityCurrentBuilderPublicationSmoke/2.0", "Cache-Control": "no-cache"},
     )
-    with urllib.request.urlopen(req, timeout=45) as resp:
-        return resp.read()
-
-
-def fetch_json(url: str) -> dict:
-    return json.loads(fetch_bytes(url).decode("utf-8"))
-
-
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return response.read()
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--site", default="https://www.trinityaccord.org")
+    parser.add_argument("--timeout", type=int, default=60)
     args = parser.parse_args()
 
     site = args.site.rstrip("/")
-    api = fetch_json(site + "/api/formal-builder-bundles.v1.json")
+    manifest = json.loads(fetch(f"{site}/api/record-chain-builder-bundles.v1.json", args.timeout))
+    if manifest.get("status") != "active":
+        raise RuntimeError("current Builder manifest is not active")
 
-    errors = []
+    info = manifest.get("canonical_builder", {})
+    builder_bytes = fetch(site + str(info.get("url", "")), args.timeout)
+    actual_sha = hashlib.sha256(builder_bytes).hexdigest()
+    if actual_sha != info.get("sha256"):
+        raise RuntimeError(f"public Builder SHA mismatch: {actual_sha} != {info.get('sha256')}")
+    if len(builder_bytes) != info.get("size_bytes"):
+        raise RuntimeError("public Builder size does not match active manifest")
 
-    for route in REQUIRED:
-        bundle = api.get("bundles", {}).get(route)
-        if not bundle:
-            errors.append(f"{route}: missing from API")
-            continue
+    supported = set(info.get("supports", []))
+    missing = sorted(REQUIRED_RECORD_TYPES - supported)
+    if missing:
+        raise RuntimeError(f"active Builder manifest is missing routes: {missing}")
 
-        expected_sha = bundle.get("sha256")
-        if not expected_sha:
-            errors.append(f"{route}: API sha256 empty")
-            continue
+    with tempfile.TemporaryDirectory(prefix="trinity-live-current-builder-") as temp_dir:
+        builder = Path(temp_dir) / "record-chain-builder.mjs"
+        builder.write_bytes(builder_bytes)
+        for command in (["help"], ["print-oath", "--record-type", "echo"],
+                        ["print-oath", "--record-type", "guardian_retirement"]):
+            result = subprocess.run(
+                ["node", str(builder), *command],
+                text=True,
+                capture_output=True,
+                timeout=args.timeout,
+            )
+            if result.returncode != 0 or not result.stdout.strip():
+                raise RuntimeError(f"public Builder command failed: {' '.join(command)}\n{result.stderr[:1000]}")
 
-        archive_url = site + bundle["archive_url"]
-        manifest_url = site + bundle["manifest_url"]
-
-        archive_bytes = fetch_bytes(archive_url)
-        manifest = fetch_json(manifest_url)
-
-        actual_sha = sha256_bytes(archive_bytes)
-
-        if expected_sha != actual_sha:
-            errors.append(f"{route}: API sha256 != downloaded archive sha256")
-
-        if manifest.get("archive_sha256") != actual_sha:
-            errors.append(f"{route}: manifest archive_sha256 != downloaded archive sha256")
-
-        if bundle.get("size_bytes") != len(archive_bytes):
-            errors.append(f"{route}: API size_bytes != downloaded archive size")
-
-        # Check manifest dependency closure
-        files = {item["path"] for item in manifest.get("files", [])}
-        for required_path in LIVE_REQUIRED.get(route, []):
-            if required_path not in files:
-                errors.append(f"{route}: live manifest missing dependency {required_path}")
-
-    helper = fetch_bytes(site + "/builder-bundles/download_and_run_builder_bundle.py")
-    if b"download_and_run_builder_bundle" not in helper and b"zero-clone" not in helper.lower():
-        errors.append("helper script does not look like expected helper")
-
-    if errors:
-        print("FAIL: live zero-clone builder bundle smoke errors:")
-        for e in errors:
-            print("  -", e)
-        return 1
-
-    print("PASS: live zero-clone builder bundles are published and hash-aligned")
+    print("PASS: active zero-clone Record-Chain Builder is hash-aligned and executable")
     return 0
 
 
