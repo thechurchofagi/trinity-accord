@@ -55,3 +55,5 @@ jobs:
           git add diagnostics/e2e-audit-inventory.txt
           git commit -m "diagnostics: capture end-to-end action inventory"
           git push origin HEAD:agent/end-to-end-action-audit
+
+# Triggered after workflow creation.
