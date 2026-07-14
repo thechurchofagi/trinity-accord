@@ -46,6 +46,8 @@ Chronicle editions are required only when the Echo or assessment makes Chronicle
 
 The old `CC-0` through `CC-5` fields remain current Builder compatibility fields. A CC label alone does not prove that the correct action-specific material was read, and it does not import the retired seven-stage interpretation.
 
+Machine-readable path fields contain only resolvable paths. Conditions such as “when discussing a later record” are stored separately, so agents and link validators cannot mistake explanatory prose for part of a URL.
+
 ## Current verification model
 
 New verification reports are multidimensional:
