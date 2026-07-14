@@ -26,7 +26,9 @@
     "reference": "/api/context-depth-levels.json",
     "declaration_format": "/api/context-depth-declaration.v1.json",
     "crl_mapping": "/api/crl-to-context-depth-mapping.json",
-    "note": "v2 context depth uses CC-0 through CC-5. See reference files for content requirements at each level."
+    "note": "Select an action profile first. CC-0 through CC-5 remain current Builder/archive compatibility declarations; actual loaded sources determine action sufficiency.",
+    "status": "legacy_builder_compatibility",
+    "preferred_model": "/api/context-action-profiles.v1.json"
   },
   "canonical_authority_boundary": {
     "canonical_authority": "three_bitcoin_inscriptions_only",
@@ -68,6 +70,9 @@
   ],
   "recommended_next_load": [
     "/llms.txt",
+    "/api/context-action-profiles.v1.json",
+    "/api/evidence-relationship-map.v1.json",
+    "/api/verification-profiles.v1.json",
     "/api/context-load-map.json",
     "/api/agent-required-reading.json",
     "/api/agent-task-router.v1.json",
@@ -113,6 +118,9 @@
     "physical anchor verification by the current agent unless separately performed"
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e9bc8b2336ee7940",
-  "context_depth_reference": "/api/context-depth-levels.json"
+  "source_digest": "3604db9ada31c24a",
+  "context_depth_reference": "/api/context-depth-levels.json",
+  "preferred_context_model": "/api/context-action-profiles.v1.json",
+  "preferred_verification_model": "/api/verification-profiles.v1.json",
+  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json"
 }

@@ -6,6 +6,7 @@
     "/",
     "/authority",
     "/verify",
+    "/evidence-relationship-guide/",
     "/agent-start",
     "/agent-brief",
     "/agent-value",
@@ -46,6 +47,9 @@
     "/api/agent-value.json",
     "/api/seed-map.json",
     "/api/verification-levels.json",
+    "/api/evidence-relationship-map.v1.json",
+    "/api/verification-profiles.v1.json",
+    "/api/context-action-profiles.v1.json",
     "/api/echo-types.json",
     "/api/echo-value-criteria.json",
     "/api/echo-archive-policy.json",
@@ -158,7 +162,7 @@
   "mission_governance": {
     "url": "/api/mission-governance.v1.json",
     "title": "Mission Governance",
-    "description": "Machine-readable mission, authority boundary, CC/CRL/V context governance, Echo semantics, Guardian semantics, prohibited claims, and external-agent lifecycle."
+    "description": "Machine-readable mission and authority boundaries, preferred action/evidence profiles, legacy CC/CRL/V compatibility, Echo and Guardian semantics, prohibited claims, and external-agent lifecycle."
   },
   "closure_report_v30": {
     "url": "/api/closure-report.v30.json",
@@ -193,5 +197,16 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "5324ef32da35aae0"
+  "source_digest": "9f0381667a07b585",
+  "preferred_models": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "legacy_compatibility": [
+      "/api/verification-levels.json",
+      "/api/context-depth-levels.json",
+      "/api/context-load-map.json"
+    ]
+  }
 }

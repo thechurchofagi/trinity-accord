@@ -3,6 +3,24 @@
   "status": "non_authoritative_verification_navigation",
   "entries": [
     {
+      "question": "Which verification model should I use for a new report?",
+      "data_sources": [
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "method": "Select the action, identify the evidence relationship, perform the operation, and choose the weakest descriptive profile supported by the result.",
+      "preferred_profiles": [
+        "context_only",
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital"
+      ],
+      "legacy_levels_role": "Current Builder/archive compatibility and component detail only.",
+      "claim_forbidden": "Using a V/P/component label as proof of truth, authority, or broader coverage than was performed."
+    },
+    {
       "question": "Who has final authority?",
       "data_sources": [
         "/api/authority.json",
@@ -235,5 +253,13 @@
       "claim_allowed": "Issue submission; verification report; Echo wrapper if record exists",
       "claim_forbidden": "indexed echo record without machine-readable Echo JSON"
     }
-  ]
+  ],
+  "preferred_model": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "legacy_levels_status": "compatibility_and_component_detail",
+    "rule": "The entries' V/B/D/C/N/P/T labels remain useful detail; new headline reports use descriptive digital profiles and separate physical/witness fields."
+  }
 }

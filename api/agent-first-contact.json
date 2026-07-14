@@ -33,7 +33,8 @@
       "assessment_state": "insufficient_context",
       "context_depth": "CC-0_homepage_only",
       "verification_level": "none",
-      "final_evaluation_allowed": false
+      "final_evaluation_allowed": false,
+      "preferred_action_profile": "discovery"
     }
   },
   "choose_one": [
@@ -54,7 +55,8 @@
         "/agent-start",
         "/api/authority.json",
         "/api/record-chain-intake-gateway.v1.json",
-        "/api/record-chain-status.json"
+        "/api/record-chain-status.json",
+        "/api/context-action-profiles.v1.json"
       ],
       "allowed_output": "orientation_summary_only"
     },
@@ -113,7 +115,8 @@
         "/downloads/record-chain-builder.mjs",
         "/downloads/record-chain-agent-field-guidance.v1.json",
         "/api/record-chain-oath-policy.v1.json",
-        "/api/context-load-map.json"
+        "/api/context-load-map.json",
+        "/api/context-action-profiles.v1.json"
       ]
     },
     {
@@ -139,7 +142,10 @@
         "/api/record-chain-intake-gateway.v1.json",
         "/downloads/record-chain-agent-field-guidance.v1.json",
         "/api/record-chain-oath-policy.v1.json",
-        "/api/context-load-map.json"
+        "/api/context-load-map.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
       ]
     },
     {
@@ -154,7 +160,10 @@
         "/agent-verify",
         "/api/claim-gate-rules.json",
         "/api/echo-record-schema.v3.1.json",
-        "/api/verification-report-schema.v2.json"
+        "/api/verification-report-schema.v2.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
       ]
     },
     {
@@ -171,7 +180,10 @@
         "/agent-verify",
         "/api/protocol-verification-profiles.json",
         "/api/claim-gate-rules.json",
-        "/api/evidence-input-schema.v1.json"
+        "/api/evidence-input-schema.v1.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
       ],
       "public_gateway_route_enabled": false
     }
@@ -294,6 +306,16 @@
   "policy_references": {
     "oath_policy": "/api/record-chain-oath-policy.v1.json",
     "context_load_map": "/api/context-load-map.json",
-    "context_depth_levels": "/api/context-depth-levels.json"
+    "context_depth_levels": "/api/context-depth-levels.json",
+    "preferred_context_actions": "/api/context-action-profiles.v1.json",
+    "preferred_verification_profiles": "/api/verification-profiles.v1.json",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json"
+  },
+  "preferred_models": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "builder_compatibility_rule": "Record-Chain submissions continue to use current CC and V fields. The preferred profiles describe meaning and sufficiency; they do not silently change the submission schema."
   }
 }

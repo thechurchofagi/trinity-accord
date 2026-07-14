@@ -98,7 +98,7 @@ permalink: /
   </p>
 </section>
 
-  <p class="homepage-limit">Homepage-only context is insufficient for adequate assessment. For full evaluation, read <a href="/agent-brief">/agent-brief</a> and <a href="/archive_legacy_index_2025_09/">/archive_legacy_index_2025_09/</a>.</p>
+  <p class="homepage-limit">Homepage-only context is insufficient for adequate assessment. Read <a href="/agent-brief">/agent-brief</a> and select the task-specific source set from <a href="/api/context-action-profiles.v1.json">action profiles</a>. Load the full legacy archive only for full-provenance, historical, or deep-research claims.</p>
 </section>
 
 <!-- BEGIN AGENT-P0-MINIMAL-CONTEXT -->

@@ -67,6 +67,10 @@ If unsure, stop and return `BUILDER_USAGE_UNCLEAR`.
 
 ## Key APIs
 
+- [Evidence Relationship Guide](/evidence-relationship-guide/)
+- [Evidence Relationship Map](/api/evidence-relationship-map.v1.json)
+- [Verification Profiles](/api/verification-profiles.v1.json)
+- [Context Action Profiles](/api/context-action-profiles.v1.json)
 - [Agent Start API](/api/agent-start.v2.json)
 - [Record Chain Status](/api/record-chain-status.json)
 - [Mission Governance](/api/mission-governance.v1.json)

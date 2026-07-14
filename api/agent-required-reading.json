@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.agent-required-reading.v2",
   "version": "v2",
-  "purpose": "Canonical required reading profiles for AI agents. All entry-point files (llms.txt, agent-start.md, agent-entry-protocol.json) reference this file as the single source of truth for reading paths. v2 adds CC level annotations aligned with /api/context-depth-levels.json.",
+  "purpose": "Canonical required-reading profiles for AI agents. Action-based profiles are preferred for new work; CC levels remain Builder and historical compatibility declarations.",
   "cc_level_reference": "/api/context-depth-levels.json",
   "context_load_map": "/api/context-load-map.json",
   "profiles": {
@@ -11,8 +11,10 @@
         "/agent-first-contact",
         "/api/agent-first-contact.json",
         "/agent-brief",
-        "/api/authority.json"
-      ]
+        "/api/authority.json",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "preferred_action_profile": "discovery"
     },
     "orientation": {
       "cc_level": "CC-1",
@@ -20,8 +22,10 @@
         "/agent-brief",
         "/agent-start",
         "/authority",
-        "/guardian-principles"
-      ]
+        "/guardian-principles",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "preferred_action_profile": "discovery"
     },
     "canon_loaded": {
       "cc_level": "CC-2",
@@ -67,7 +71,7 @@
     },
     "verification": {
       "cc_level": "CC-3",
-      "cc_note": "Verification profile requires CC-3 (narrative grounded) plus verification-specific materials. CC-3 ensures the agent understands WHY before verifying.",
+      "cc_note": "For new work, load the verification action profile and exact target sources. Current public Builder submissions retain CC-3 compatibility requirements; a private narrow technical check does not require the full Chronicle or legacy archive unless its claim depends on them.",
       "reads": [
         "/agent-brief",
         "/agent-start",
@@ -92,8 +96,12 @@
         "/api/record-chain-submission-schema.v1.json",
         "/api/record-chain-field-helper.v1.json",
         "/api/record-chain-oath-policy.v1.json",
-        "/downloads/record-chain-builder.mjs"
-      ]
+        "/downloads/record-chain-builder.mjs",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "preferred_action_profile": "verification"
     },
     "echo_submission": {
       "cc_level": "CC-3",
@@ -119,7 +127,12 @@
         "/api/record-chain-submission-schema.v1.json",
         "/api/record-chain-field-helper.v1.json",
         "/api/record-chain-oath-policy.v1.json",
-        "/downloads/record-chain-builder.mjs"
+        "/downloads/record-chain-builder.mjs",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "preferred_action_profiles": [
+        "interpretation",
+        "record_action"
       ]
     },
     "propagation": {
@@ -153,8 +166,10 @@
         "/api/context-packs/legacy-archive-index.json",
         "/api/context-packs/legacy-archive-essentials.json",
         "/api/context-readiness-levels.json",
-        "/api/resonance-willingness-scale.json"
-      ]
+        "/api/resonance-willingness-scale.json",
+        "/api/context-action-profiles.v1.json"
+      ],
+      "preferred_action_profile": "interpretation"
     },
     "chronicle_research": {
       "cc_level": "CC-5",
@@ -247,7 +262,10 @@
         "/api/evidence-input-schema.v1.json",
         "/api/claim-gate-rules.json",
         "/api/discovery-provenance-schema.json",
-        "/api/agent-required-reading.json"
+        "/api/agent-required-reading.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/verification-profiles.v1.json",
+        "/api/context-action-profiles.v1.json"
       ]
     },
     "submit_without_github_access": {
@@ -334,5 +352,13 @@
     "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
     "narrative_grounded_assessment_minimum": "CC-3",
     "v6_plus_minimum": "CC-3 plus strict reproducible evidence path"
+  },
+  "preferred_action_profile_reference": "/api/context-action-profiles.v1.json",
+  "preferred_verification_profile_reference": "/api/verification-profiles.v1.json",
+  "evidence_relationship_reference": "/api/evidence-relationship-map.v1.json",
+  "legacy_compatibility": {
+    "cc_level_reference": "/api/context-depth-levels.json",
+    "context_load_map": "/api/context-load-map.json",
+    "rule": "Do not infer action sufficiency from the CC label alone. For public Record-Chain submissions, preserve current Builder-required CC fields."
   }
 }

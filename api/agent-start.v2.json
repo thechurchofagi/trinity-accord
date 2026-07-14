@@ -196,5 +196,14 @@
   "if_unclear": "BUILDER_USAGE_UNCLEAR",
   "policy_references": {
     "production_enablement_policy": "/api/record-chain-production-enablement-policy.v1.json"
+  },
+  "preferred_models": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "current_builder_fields_unchanged": true,
+    "current_gateway_contract_unchanged": true,
+    "note": "Use action/evidence profiles to decide what must be read and what may be claimed. Continue supplying the exact CC/V fields required by the current Builder schema."
   }
 }

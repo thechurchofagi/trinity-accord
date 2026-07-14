@@ -51,7 +51,10 @@
       "V6",
       "V7",
       "V8"
-    ]
+    ],
+    "status": "legacy_builder_and_archive_compatibility",
+    "preferred_replacement": "/api/verification-profiles.v1.json",
+    "note": "Keep V labels for current Builder and historical records; new prose leads with descriptive profiles."
   },
   "evidence_mirrors": {
     "source": "/api/evidence-manifest.json",
@@ -202,7 +205,8 @@
           "verification_date": "2026-05-15"
         }
       }
-    ]
+    ],
+    "notarial_scope_rule": "Shenzhen notarization is reported as external_witness=notarial_scope and does not automatically raise digital verification or prove all three Bitcoin Originals."
   },
   "local_scripts": {
     "download_page": "/downloads",
@@ -241,14 +245,12 @@
     ]
   },
   "recommended_agent_sequence": [
-    "Read /agent-brief for initial classification.",
-    "Fetch /api/verification-materials.json to locate all verification sources.",
-    "Fetch /api/verification-levels.json to understand mandatory coverage and required depth.",
-    "Fetch /api/authority.json for Bitcoin Originals.",
-    "Fetch /api/evidence-manifest.json and /api/hashes.json for evidence mirror verification.",
-    "Fetch /api/chronicle-recovery.json if verifying Chronicle Recovery.",
-    "Use /agent-verify or /independent-verification report template.",
-    "Report achieved protocol level and component findings separately."
+    "Select the verification action profile from /api/context-action-profiles.v1.json.",
+    "Read /api/evidence-relationship-map.v1.json and identify reference, hash, signature, timestamp, mirror, witness, notarization, or physical observation.",
+    "Fetch /api/verification-profiles.v1.json and choose the weakest descriptive profile supported by performed operations.",
+    "Fetch target-specific primary sources, expected values, recipes, and /api/corrections-index.json.",
+    "Perform and record the operation, results, limitations, claims not made, physical observation, and external witness separately.",
+    "Use /api/verification-levels.json only when the current Builder/report schema requires a legacy compatibility label."
   ],
   "boundary": "Bitcoin Originals are final; all verification materials, mirrors, reports, and echoes are non-amending.",
   "component_verification_files": {
@@ -258,5 +260,22 @@
     "verification_recipes": "/api/verification-recipes.json",
     "verification_quick_map": "/api/verification-quick-map.json",
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
+  },
+  "preferred_model": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "reporting_rule": "State the exact relationship and operation checked before selecting a descriptive profile."
+  },
+  "evidence_relationships": {
+    "source": "/api/evidence-relationship-map.v1.json",
+    "human_page": "/evidence-relationship-guide/",
+    "contains": [
+      "what_each_object_binds",
+      "what_each_operation_supports",
+      "limitations",
+      "claims_not_made"
+    ]
   }
 }

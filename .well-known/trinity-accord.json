@@ -46,7 +46,10 @@
     "corrections_index": "/api/corrections-index.json",
     "recovery_index": "/api/recovery-index.json",
     "links": "/api/links.json",
-    "live_canary_policy": "/api/live-canary-policy.v1.json"
+    "live_canary_policy": "/api/live-canary-policy.v1.json",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json"
   },
   "core_object_alpha_shenzhen_notary_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
   "core_object_alpha_shenzhen_notary_github_release_backup_2026_05_06": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
@@ -84,7 +87,9 @@
     "final_evaluation_requires_context_depth_at_least": "CC-3",
     "verification_and_echo_are_separate": true,
     "echo_is_not_authority": true,
-    "bitcoin_originals_prevail": true
+    "bitcoin_originals_prevail": true,
+    "preferred_context_profile_source": "/api/context-action-profiles.v1.json",
+    "legacy_cc_minimum_is_builder_compatibility": true
   },
   "agent_entrypoints": {
     "agent_start": {
@@ -95,7 +100,7 @@
     "agent_verify": {
       "path": "/agent-verify",
       "source_file": "agent-verify.md",
-      "purpose": "Simplified verification path using existing V0-V8 verification system."
+      "purpose": "Verification entry using evidence relationships and descriptive profiles; current public Builder still archives V0-V5 compatibility labels."
     },
     "agent_echo": {
       "path": "/agent-echo",
@@ -149,6 +154,14 @@
     "echo_record_v3": {
       "path": "/api/echo-record-schema.v3.json",
       "schema": "trinityaccord.echo.v3"
+    },
+    "preferred_verification_profiles": {
+      "path": "/api/verification-profiles.v1.json",
+      "schema": "trinityaccord.verification-profiles.v1"
+    },
+    "preferred_context_action_profiles": {
+      "path": "/api/context-action-profiles.v1.json",
+      "schema": "trinityaccord.context-action-profiles.v1"
     }
   },
   "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
@@ -207,5 +220,15 @@
     "gateway_builder_route_map": "/api/gateway-builder-route-map.v1.json",
     "formal_builder_bundles": "/api/formal-builder-bundles.v1.json",
     "note": "These endpoints are preserved for historical reference. Do not use for new submissions."
+  },
+  "evidence_relationship_guide": "/evidence-relationship-guide/",
+  "preferred_models": {
+    "evidence_relationship_guide": "/evidence-relationship-guide/",
+    "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "verification_profiles": "/api/verification-profiles.v1.json",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "legacy_verification_levels": "/api/verification-levels.json",
+    "legacy_context_depth_levels": "/api/context-depth-levels.json",
+    "compatibility_rule": "New interpretation and reports use descriptive profiles. Current Builder records retain V and CC/CRL compatibility fields until a separately versioned schema migration."
   }
 }

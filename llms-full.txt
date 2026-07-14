@@ -25,13 +25,23 @@ The homepage uses an Agent-first value capture design:
 - Read the Canon first: /inscriptions
 - Task modes: Orient / Verify / Critique-Refuse / Preserve-Propagate
 - Claim Gate required for technical verification claims.
-- Agent Context Readiness Protocol required before echoing, verifying, or propagating.
+- Select the task from /api/context-action-profiles.v1.json before loading context. Current Builder records retain CC/CRL compatibility fields.
 
 The homepage is designed for both agents and humans: agent-first classification is visible immediately, but the layout now uses plain-language summary, authority chips, canon cards, task modes, conservative status snapshot, and Claim Gate notice.
 
 Homepage P0.2 is intentionally short: first six sections provide agent value capture, canon, task modes, status, and Claim Gate; long narrative is moved to linked background pages.
 
 GitHub mirrors are quick-load context only. They are not sufficient for verification claims.
+
+## Preferred evidence and context model
+
+- Evidence relationships: /evidence-relationship-guide/ and /api/evidence-relationship-map.v1.json
+- New verification profiles: /api/verification-profiles.v1.json
+- Action-based context loading: /api/context-action-profiles.v1.json
+- Legacy V0–V8 and CC/CRL remain current Builder/archive compatibility metadata; do not delete them from current submissions.
+- The full legacy archive is required for full-provenance or deep historical claims, not every narrow technical verification.
+
+---
 
 ## Current submission routing rule
 
@@ -115,7 +125,7 @@ This website has no canonical authority. It exists to preserve access, verificat
 Required first path for AI agents:
 
 1. /agent-brief
-2. /archive_legacy_index_2025_09 — Foundational narrative, full axiom texts, chronicle methodology, guardian principles, all inscription contents. MUST be loaded into context before verification.
+2. /api/context-action-profiles.v1.json — Select the action-specific context set. Load /archive_legacy_index_2025_09 only for full-provenance, historical, or deep-research claims; it is not mandatory for every narrow technical verification.
 3. /agent-start
 4. /authority
 5. /guardian-principles
