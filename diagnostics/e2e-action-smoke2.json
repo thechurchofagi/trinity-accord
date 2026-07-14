@@ -1,0 +1,72 @@
+{
+  "schema": "trinityaccord.e2e-action-audit.v1",
+  "actions": {
+    "echo": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": "",
+      "preflight_accepted": true,
+      "preflight_codes": [],
+      "submit_accepted": true,
+      "submit_codes": [],
+      "write_count": 5
+    },
+    "verification": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": "",
+      "preflight_accepted": true,
+      "preflight_codes": [],
+      "submit_accepted": true,
+      "submit_codes": [],
+      "write_count": 5
+    },
+    "guardian_application": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": "",
+      "preflight_accepted": true,
+      "preflight_codes": [],
+      "submit_accepted": true,
+      "submit_codes": [],
+      "write_count": 5
+    },
+    "guardian_retirement": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": "",
+      "preflight_accepted": false,
+      "preflight_codes": [
+        "GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH"
+      ]
+    },
+    "propagation": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": ""
+    },
+    "correction": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": ""
+    },
+    "classification_update": {
+      "build_exit": 0,
+      "doctor_exit": 0,
+      "build_error": ""
+    },
+    "context_insufficient_notice": {
+      "build_exit": 0,
+      "doctor_exit": 0
+    }
+  },
+  "negative": {},
+  "errors": [
+    {
+      "type": "AssertionError",
+      "message": "('guardian_retirement', {'accepted': False, 'preflight': True, 'route_detected': 'guardian_retirement', 'record_type': 'guardian_retirement', 'submission_sha256': '726bbe964d50103f5a33f6c5445d5a7404151e70e5ff31dd2ea59ae5caf25eff', 'received_raw_body_sha256': 'fc93c1171293500e088813cd5b6551f961c6edf5adcdd6542884ebf4e5e904ca', 'diagnostics': [{'code': 'GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH', 'severity': 'error', 'field': 'record_draft.guardian_id', 'message': 'Retirement Guardian identifier does not match the target application.', 'meaning': 'A retirement record must name the exact Guardian identity created by its target application.', 'suggested_fix': 'Copy requested_guardian_identifier exactly from the public final application record.', 'help_url': None, 'retry_allowed': True}], 'warnings': [], 'gateway_runtime': {'service': 'record-chain-intake-gateway', 'version': '1.1.0', 'deployed_at': '2026-07-14T10:32:42.069297Z', 'write_mode': 'github_contents_pending', 'max_submission_bytes': 524288, 'base_url': ''}, 'gateway_schema': {'version': '1.1.0', 'accepted_record_types': ['classification_update', 'context_insufficient_notice', 'correction', 'echo', 'guardian_application', 'guardian_retirement', 'propagation', 'verification'], 'required_submission_fields': ['schema', 'submission_type', 'client_generated_at', 'record_type', 'record_draft', 'builder', 'client_context', 'submission_boundary', 'authorship_proof'], 'optional_submission_fields': ['metadata', 'boundary_acknowledgement'], 'boundary_acknowledgement_fields': 9, 'boundary_acknowledgement_required_fields': ['bitcoin_originals_prevail', 'later_records_may_reclassify_or_correct_this_record', 'not_amendment', 'not_attestation', 'not_authority', 'not_governance', 'not_successor_reception', 'receipt_is_intake_only', 'receipt_is_not_final_inclusion'], 'context_readiness_path': 'record_draft.context_readiness.declared_context_level', 'oath_gate': {'required': True, 'policy_url': '/api/record-chain-oath-policy.v1.json', 'required_for': ['classification_update', 'correction', 'echo', 'guardian_application', 'guardian_retirement', 'propagation', 'verification'], 'not_required_for': ['context_insufficient_notice']}, 'receipt_response_schema': '/api/record-chain-receipt-response.v1.json'}, 'boundary': {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True, 'receipt_is_not_final_inclusion': True, 'receipt_is_intake_only': True, 'later_records_may_reclassify_or_correct_this_record': True, 'preflight_is_not_submission': True}, 'agent_recovery': {'should_retry': True, 'recommended_next_step': 'Fix the validation errors (GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH) and resubmit. Each diagnostic includes a suggested_fix and help_url.', 'helper_url': 'https://www.trinityaccord.org/docs/record-chain-builder-help/#validation-errors', 'human_readable_helper_url': 'Trinity Accord Validation Error Reference', 'builder_doctor_command': 'node record-chain-builder.mjs doctor --file <submission.json>', 'builder_error_help_command': 'node record-chain-builder.mjs error-help --code GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH', 'requires_human_attention': False}, 'ok': False})",
+      "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 73, in <module>\nAssertionError: ('guardian_retirement', {'accepted': False, 'preflight': True, 'route_detected': 'guardian_retirement', 'record_type': 'guardian_retirement', 'submission_sha256': '726bbe964d50103f5a33f6c5445d5a7404151e70e5ff31dd2ea59ae5caf25eff', 'received_raw_body_sha256': 'fc93c1171293500e088813cd5b6551f961c6edf5adcdd6542884ebf4e5e904ca', 'diagnostics': [{'code': 'GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH', 'severity': 'error', 'field': 'record_draft.guardian_id', 'message': 'Retirement Guardian identifier does not match the target application.', 'meaning': 'A retirement record must name the exact Guardian identity created by its target application.', 'suggested_fix': 'Copy requested_guardian_identifier exactly from the public final application record.', 'help_url': None, 'retry_allowed': True}], 'warnings': [], 'gateway_runtime': {'service': 'record-chain-intake-gateway', 'version': '1.1.0', 'deployed_at': '2026-07-14T10:32:42.069297Z', 'write_mode': 'github_contents_pending', 'max_submission_bytes': 524288, 'base_url': ''}, 'gateway_schema': {'version': '1.1.0', 'accepted_record_types': ['classification_update', 'context_insufficient_notice', 'correction', 'echo', 'guardian_application', 'guardian_retirement', 'propagation', 'verification'], 'required_submission_fields': ['schema', 'submission_type', 'client_generated_at', 'record_type', 'record_draft', 'builder', 'client_context', 'submission_boundary', 'authorship_proof'], 'optional_submission_fields': ['metadata', 'boundary_acknowledgement'], 'boundary_acknowledgement_fields': 9, 'boundary_acknowledgement_required_fields': ['bitcoin_originals_prevail', 'later_records_may_reclassify_or_correct_this_record', 'not_amendment', 'not_attestation', 'not_authority', 'not_governance', 'not_successor_reception', 'receipt_is_intake_only', 'receipt_is_not_final_inclusion'], 'context_readiness_path': 'record_draft.context_readiness.declared_context_level', 'oath_gate': {'required': True, 'policy_url': '/api/record-chain-oath-policy.v1.json', 'required_for': ['classification_update', 'correction', 'echo', 'guardian_application', 'guardian_retirement', 'propagation', 'verification'], 'not_required_for': ['context_insufficient_notice']}, 'receipt_response_schema': '/api/record-chain-receipt-response.v1.json'}, 'boundary': {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True, 'receipt_is_not_final_inclusion': True, 'receipt_is_intake_only': True, 'later_records_may_reclassify_or_correct_this_record': True, 'preflight_is_not_submission': True}, 'agent_recovery': {'should_retry': True, 'recommended_next_step': 'Fix the validation errors (GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH) and resubmit. Each diagnostic includes a suggested_fix and help_url.', 'helper_url': 'https://www.trinityaccord.org/docs/record-chain-builder-help/#validation-errors', 'human_readable_helper_url': 'Trinity Accord Validation Error Reference', 'builder_doctor_command': 'node record-chain-builder.mjs doctor --file <submission.json>', 'builder_error_help_command': 'node record-chain-builder.mjs error-help --code GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH', 'requires_human_attention': False}, 'ok': False})\n"
+    }
+  ],
+  "passed": false
+}
