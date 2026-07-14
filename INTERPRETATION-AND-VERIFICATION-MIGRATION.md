@@ -58,17 +58,26 @@ New verification reports are multidimensional:
 
 Machine source: `/api/verification-claim-model.v1.json`.
 
-## What happened to V6, V7, and V8
+## What happened to V4+, V6, V7, and V8
 
 They remain visible in historical records and the legacy verification document, but they are **retired for new submissions**.
 
-Their former meanings are now expressed separately:
+Their former meanings are now expressed in current dimensions:
 
+- former `V4+` → `digital_profile=independent_reproduction`;
 - former `V6` → `physical_observation=remote_live_witness`;
 - former `V7` → `physical_observation=onsite_observation`;
 - former `V8` → `physical_observation=forensic_examination`.
 
-A new verification submission still carries a legacy `V0–V5` compatibility value for the digital work performed. Physical observation and external witness no longer pretend to be higher rungs of the same digital ladder.
+A new verification submission carries a legacy `V0–V5` compatibility value for the digital work performed. Physical observation and external witness no longer pretend to be higher rungs of the same digital ladder.
+
+## How to read legacy model files
+
+`/api/context-depth-levels.json`, `/api/context-load-map.json`, and `/api/verification-levels.json` are compatibility documents. Historical descriptions inside an old CC or V object explain what that label meant when it was used; they do not override the current models.
+
+For current interpretation, follow each file's top-level `status`, `preferred_model`, `migration_note`, and `new_submission_policy` fields. For retired `V4+`, `V6`, `V7`, and `V8` objects, `status=historical_compatibility_only`, `new_submission_allowed=false`, and `current_replacement` control current use. Thus an old sentence describing `V8` as the highest formal profile is a preserved description of the retired ladder, not a current submission rule.
+
+For current context sufficiency, use the selected action profile and the actual source list. For current verification claims, use the multidimensional claim model. Legacy labels never create authority, attestation, or broader coverage.
 
 ## Historical preservation rule
 
