@@ -2,7 +2,7 @@
   "schema": "trinity-accord.claim-registry.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256",
-  "source_digest": "d12148f81ede82cf",
+  "source_digest": "97f0d37f08578746",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable registry mapping public claims to sources, evidence, digests, validators, limitations, and correction paths.",
@@ -327,14 +327,28 @@
         "CORRECTION-REVOCATION-POLICY.md",
         "RECOVERY.md",
         "llms.txt",
-        "ai.txt"
+        "ai.txt",
+        "EVIDENCE-RELATIONSHIP-GUIDE.md",
+        "verification-materials.md",
+        "evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md"
       ],
       "source_files": [
         "api/claim-registry.json",
-        "api/independent-attestation-index.json"
+        "api/independent-attestation-index.json",
+        "api/evidence-relationship-map.v1.json",
+        "api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "evidence/notarial-certificate-2026-05-13/证据保全公证完整档案.md"
       ],
-      "evidence_files": [],
-      "digest_or_hash_binding": [],
+      "evidence_files": [
+        "api/core-object-alpha-shenzhen-notary-2026-05-06.json",
+        "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json",
+        "evidence/notarial-certificate-2026-05-13/sealed-disc-custody-record.json"
+      ],
+      "digest_or_hash_binding": [
+        "evidence/notarial-certificate-2026-05-13/evidence-images-manifest.json:per_asset_sha256",
+        "api/core-object-alpha-shenzhen-notary-2026-05-06.json:arweave_manifest_txid",
+        "api/core-object-alpha-shenzhen-notary-2026-05-06.json:ots_bitcoin_block_948161"
+      ],
       "validators": [
         "scripts/validate_claim_registry.py",
         "scripts/validate_independent_attestation_index.py"
@@ -354,7 +368,8 @@
       "formal_attestation_gate_required": true,
       "corrections_path": "api/corrections-index.json",
       "current_status": "current",
-      "traceability_status": "complete"
+      "traceability_status": "complete",
+      "notes": "Actual Shenzhen evidence-preservation materials are archived. The public record identifies Guangdong Shenzhen Notary Office, acceptance on 2026-05-06, certificate (2026)深证字第36024号 dated 2026-05-13, and a scope-limited observed preservation process. The described object references Bitcoin Inscription #89491681; this is not direct notarization of all three final Bitcoin Originals. Sealed-disc contents were not publicly read or compared."
     },
     {
       "claim_id": "recovery_is_clean_room_executable",
