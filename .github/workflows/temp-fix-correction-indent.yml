@@ -1,0 +1,98 @@
+name: Temporary fix correction binding indentation
+
+on:
+  push:
+    branches:
+      - agent/full-public-action-matrix-post-659
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/full-public-action-matrix-post-659
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Repair exact blocks and validate syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/record_chain_intake_gateway/app.py')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('    if record_type == "correction" and isinstance(target, dict):')
+          end = text.index('    return diagnostics\n', start)
+          block = '''    if record_type == "correction" and isinstance(target, dict):
+        current_proof = body.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not re.fullmatch(r"[a-f0-9]{64}", str(target_key or "")):
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE",
+                severity="error",
+                field=f"{field_prefix}.target_record_id",
+                message="The target record does not expose a valid immutable author key for an author-only correction.",
+                meaning="Correction is reserved for the author of the target record. A third party must use classification_update or another non-authoritative response path.",
+                suggested_fix="Do not submit a correction. Use classification_update for third-party review, or ask the target author to sign the correction.",
+                retry_allowed=False,
+            ))
+        elif current_key != target_key:
+            diagnostics.append(Diagnostic(
+                code="CORRECTION_TARGET_AUTHOR_MISMATCH",
+                severity="error",
+                field="authorship_proof.public_key_sha256",
+                message="Correction signer does not match the immutable target record author key.",
+                meaning="The Correction oath is author-only; third-party critique or reclassification must use classification_update.",
+                suggested_fix="Use the same authorship key as the target record, or submit classification_update instead.",
+                retry_allowed=False,
+            ))
+'''
+          text = text[:start] + block + text[end:]
+          path.write_text(text, encoding='utf-8')
+
+          path = Path('scripts/trinity_record_chain.py')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('    if record_type == "correction":', text.index('def require_record_target_binding'))
+          end = text.index('\n\ndef append_records', start)
+          block = '''    if record_type == "correction":
+        current_proof = draft.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not re.fullmatch(r"[a-f0-9]{64}", str(target_key or "")):
+            raise ValueError(
+                "correction target authorship unavailable; third-party review must use classification_update"
+            )
+        if current_key != target_key:
+            raise ValueError(
+                "correction target author mismatch; use the original author key or classification_update"
+            )
+'''
+          text = text[:start] + block + text[end:]
+          path.write_text(text, encoding='utf-8')
+          PY
+          python3 -m py_compile apps/record_chain_intake_gateway/app.py scripts/trinity_record_chain.py tests/test_correction_author_binding.py scripts/test_full_public_action_lifecycle_e2e.py scripts/full_public_action_lifecycle_e2e.py
+          rm -f audit-port-trigger-2.txt audit-port-trigger-3.txt
+          rm -f .github/workflows/temp-fix-correction-indent.yml
+      - name: Commit repaired audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-accord-audit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "audit: repair correction binding blocks"
+          git pull --rebase origin agent/full-public-action-matrix-post-659
+          git push origin HEAD:agent/full-public-action-matrix-post-659
