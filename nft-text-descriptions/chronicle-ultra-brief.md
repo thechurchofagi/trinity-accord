@@ -8,7 +8,7 @@
 > Bitcoin Originals remain canonical authority.
 
 This is a navigation edition, not a substitute for the abridged or full text.
-The prior fixed seven-stage periodization is intentionally not used.
+No fixed five-stage, seven-stage, or other fixed-stage periodization is used.
 
 | # | Ethereum datetime | NFT title | Period | One-record digest | Creative / source indicators |
 |---|---|---|---|---|---|

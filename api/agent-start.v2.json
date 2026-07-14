@@ -205,5 +205,9 @@
     "current_builder_fields_unchanged": true,
     "current_gateway_contract_unchanged": true,
     "note": "Use action/evidence profiles to decide what must be read and what may be claimed. Continue supplying the exact CC/V fields required by the current Builder schema."
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

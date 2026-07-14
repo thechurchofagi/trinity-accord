@@ -21,9 +21,9 @@
 2. `chronicle-abridged.md` — readable core, personal witness, creative excerpts, and per-entry omission accounting.
 3. `chronicle-full.md` — every mirrored NFT text description verbatim.
 
-## Correction to the former seven-stage narrative
+## Retired fixed-stage interpretations
 
-The former seven-stage narrative is retired as a default interpretation. Its boundaries were fixed calendar buckets with narrative names, and its theme counts were produced by broad substring matching. That method made some categories appear more universal than the source text justified.
+The former seven-stage narrative is retired as a default interpretation. Its boundaries were fixed calendar buckets with narrative names, and its theme counts were produced by broad substring matching. No fixed five-stage or other fixed-stage model replaces it.
 
 The corrected model separates objective chronology, calendar navigation, overlapping descriptive categories, source-preserving editions, and explicitly provisional interpretation.
 

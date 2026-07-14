@@ -346,7 +346,11 @@
           "CHRONICLE_RECOVERY independent reproduction"
         ],
         "claim_label": "V4+ (strong three-domain independent reproduction)"
-      }
+      },
+      "status": "historical_compatibility_only",
+      "new_submission_allowed": false,
+      "current_replacement": "digital_profile=independent_reproduction",
+      "historical_preservation": "Preserve existing records verbatim; do not use this label for a new public submission."
     },
     {
       "id": "V5",
@@ -419,7 +423,11 @@
       "protocol_level_rule": "V6 requires P4 live remote physical witness with nonce/challenge. Recorded video alone is P3, not V6.",
       "overclaim_warning": "Do not claim V6 without live remote video session with nonce/challenge. Recorded video alone is not V6.",
       "recorded_video_only_insufficient": true,
-      "note": "V6 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared."
+      "note": "V6 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared.",
+      "status": "historical_compatibility_only",
+      "new_submission_allowed": false,
+      "current_replacement": "physical_observation=remote_live_witness",
+      "historical_preservation": "Preserve existing records verbatim; do not use this label for a new public submission."
     },
     {
       "id": "V7",
@@ -463,7 +471,11 @@
       "protocol_level_rule": "V7 requires P5 onsite physical witness. Remote video alone is not V7.",
       "overclaim_warning": "Do not claim V7 without onsite physical witness observation and custody log.",
       "remote_only_insufficient": true,
-      "note": "V7 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared."
+      "note": "V7 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared.",
+      "status": "historical_compatibility_only",
+      "new_submission_allowed": false,
+      "current_replacement": "physical_observation=onsite_observation",
+      "historical_preservation": "Preserve existing records verbatim; do not use this label for a new public submission."
     },
     {
       "id": "V8",
@@ -496,7 +508,11 @@
       "component_findings_allowed": true,
       "protocol_level_rule": "V8 is the highest formal protocol profile. It requires P7/P8/P9-level physical evidence. V8 is non-authoritative and does not amend the Bitcoin Originals.",
       "overclaim_warning": "Do not claim V8 without tool-assisted forensic analysis. V8 does not create canonical authority.",
-      "canonical_amendment_forbidden": true
+      "canonical_amendment_forbidden": true,
+      "status": "historical_compatibility_only",
+      "new_submission_allowed": false,
+      "current_replacement": "physical_observation=forensic_examination",
+      "historical_preservation": "Preserve existing records verbatim; do not use this label for a new public submission."
     }
   ],
   "overclaim_prevention": [
@@ -520,7 +536,7 @@
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "version": "v1",
-  "source_digest": "688750b87a228d68",
+  "source_digest": "10d00d62f01c73cc",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -545,5 +561,23 @@
   "status": "legacy_compatibility_model",
   "preferred_model": "/api/verification-profiles.v1.json",
   "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
-  "migration_note": "Preserved for existing records and Builder compatibility. New reports should lead with descriptive digital_profile and separate physical_observation/external_witness."
+  "migration_note": "Preserved for existing records. New reports and Builder records use /api/verification-claim-model.v1.json; V0-V5 are compatibility metadata only, while V4+/V6/V7/V8 are historical-only.",
+  "new_submission_policy": {
+    "preferred_model": "/api/verification-claim-model.v1.json",
+    "allowed_legacy_v_values": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "forbidden_legacy_v_values": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ],
+    "rule": "New records lead with digital_profile and separate relationships_checked, physical_observation and external_witness. The legacy V field is compatibility metadata only."
+  }
 }

@@ -152,16 +152,65 @@
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "self_declared_only": { "type": "boolean", "const": true },
-                "does_not_prove_subjective_understanding": { "type": "boolean", "const": true },
-                "false_claim_is_oath_violation": { "type": "boolean", "const": true },
-                "context_map": { "type": "string", "const": "/api/context-load-map.json" },
-                "not_authority": { "type": "boolean", "const": true },
-                "not_attestation": { "type": "boolean", "const": true },
-                "not_amendment": { "type": "boolean", "const": true },
-                "not_successor_reception": { "type": "boolean", "const": true },
-                "bitcoin_originals_prevail": { "type": "boolean", "const": true }
+                "self_declared_only": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "does_not_prove_subjective_understanding": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "false_claim_is_oath_violation": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "context_map": {
+                  "type": "string",
+                  "const": "/api/context-load-map.json"
+                },
+                "not_authority": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "not_attestation": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "not_amendment": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "not_successor_reception": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "bitcoin_originals_prevail": {
+                  "type": "boolean",
+                  "const": true
+                }
               }
+            },
+            "action_profile": {
+              "type": "string",
+              "enum": [
+                "discovery",
+                "interpretation",
+                "verification",
+                "record_action",
+                "deep_research"
+              ]
+            },
+            "action_profile_source": {
+              "type": "string",
+              "const": "/api/context-action-profiles.v1.json"
+            },
+            "interpretation_model_policy": {
+              "type": "string",
+              "const": "/api/interpretation-model-policy.v1.json"
+            },
+            "legacy_cc_level_role": {
+              "type": "string",
+              "const": "builder_compatibility_only"
             }
           }
         },
@@ -310,6 +359,117 @@
             },
             "bitcoin_originals_prevail": {
               "type": "boolean"
+            }
+          }
+        },
+        "verification_content": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "verification_level": {
+              "type": "string",
+              "enum": [
+                "V0",
+                "V1",
+                "V2",
+                "V3",
+                "V4",
+                "V5"
+              ]
+            },
+            "verification_claim_model": {
+              "type": "object",
+              "required": [
+                "schema",
+                "digital_profile",
+                "relationships_checked",
+                "physical_observation",
+                "external_witness",
+                "coverage_scope",
+                "limitations",
+                "claims_not_made",
+                "corrections_or_supersession_checked",
+                "legacy_v_level",
+                "legacy_v_level_role"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "schema": {
+                  "const": "trinityaccord.verification-claim-model.v1"
+                },
+                "digital_profile": {
+                  "enum": [
+                    "context_only",
+                    "reference_checked",
+                    "integrity_checked",
+                    "independent_reproduction",
+                    "full_public_digital"
+                  ]
+                },
+                "relationships_checked": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "physical_observation": {
+                  "enum": [
+                    "none",
+                    "public_media_review",
+                    "remote_live_witness",
+                    "onsite_observation",
+                    "forensic_examination"
+                  ]
+                },
+                "external_witness": {
+                  "enum": [
+                    "none",
+                    "notarial_scope",
+                    "independent_report",
+                    "institutional_attestation",
+                    "regulatory_or_court_record"
+                  ]
+                },
+                "coverage_scope": {
+                  "enum": [
+                    "single_target",
+                    "component_subset",
+                    "multi_component",
+                    "all_declared_public_digital_targets"
+                  ]
+                },
+                "limitations": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "claims_not_made": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "corrections_or_supersession_checked": {
+                  "type": "boolean"
+                },
+                "legacy_v_level": {
+                  "enum": [
+                    "V0",
+                    "V1",
+                    "V2",
+                    "V3",
+                    "V4",
+                    "V5"
+                  ]
+                },
+                "legacy_v_level_role": {
+                  "const": "builder_compatibility_only"
+                }
+              }
             }
           }
         }
@@ -685,7 +845,14 @@
                 "properties": {
                   "verification_level": {
                     "type": "string",
-                    "enum": ["V0", "V1", "V2", "V3", "V4", "V5"]
+                    "enum": [
+                      "V0",
+                      "V1",
+                      "V2",
+                      "V3",
+                      "V4",
+                      "V5"
+                    ]
                   },
                   "what_was_checked": {
                     "type": "array",

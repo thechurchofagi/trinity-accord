@@ -51,8 +51,12 @@
     "detected_embedded_source_characters": 1087619
   },
   "interpretation_policy": {
+    "fixed_stage_count": null,
     "fixed_stage_taxonomy_retired": true,
-    "reason": "The previous seven-stage scheme was imposed by date buckets and broad keyword matching; it was not authored by the NFTs and is not a verified historical periodization.",
+    "no_current_five_stage_model": true,
+    "no_current_seven_stage_model": true,
+    "source": "/api/interpretation-model-policy.v1.json",
+    "reason": "The previous seven-stage scheme was imposed by date buckets and broad keyword matching; it was not authored by the NFTs and is not a verified historical periodization. No fixed five-stage or other fixed-stage model replaces it.",
     "objective_ordering": "ascending Ethereum NFT event block timestamp",
     "calendar_periods": "quarter-based grouping for navigation only",
     "categories": "overlapping descriptive signals derived without long embedded documents; not exclusive stages and not factual verification",

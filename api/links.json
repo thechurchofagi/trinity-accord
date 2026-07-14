@@ -197,7 +197,7 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "9f0381667a07b585",
+  "source_digest": "ece6022b2a9a9835",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
@@ -208,5 +208,9 @@
       "/api/context-depth-levels.json",
       "/api/context-load-map.json"
     ]
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

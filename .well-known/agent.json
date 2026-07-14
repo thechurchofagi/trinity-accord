@@ -75,5 +75,9 @@
     "verification_levels": "/api/verification-levels.json",
     "context_depth_levels": "/api/context-depth-levels.json",
     "status": "legacy_builder_and_archive_compatibility"
-  }
+  },
+  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
+  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
+  "current_context_action_model": "/api/context-action-profiles.v1.json",
+  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
 }

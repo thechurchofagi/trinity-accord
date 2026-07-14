@@ -42,19 +42,36 @@
     "narrative_grounded": {
       "cc_level": "CC-3",
       "reads": [
-        "canon_loaded (inherited)",
-        "/api/context-packs/legacy-archive-essentials.json",
-        "/api/context-packs/nft-chronicle-context.json",
-        "/nft-text-descriptions/chronicle-summary.json",
-        "/nft-text-descriptions/chronicle-ultra-brief.md",
-        "/nft-text-descriptions/chronicle-abridged.md",
-        "/nft-text-descriptions/chronicle-agent-context.md",
+        "canon_loaded (legacy compatibility)",
+        "/api/context-action-profiles.v1.json",
+        "/api/interpretation-model-policy.v1.json",
         "/agent-brief/",
-        "/api/context-packs/vision-layer.json",
-        "/api/context-packs/physical-anchor-context.json",
-        "/api/context-packs/legacy-archive-index.json"
+        "exact task-relevant sources",
+        "/api/corrections-index.json"
       ],
-      "note": "Loads the corrected Chronicle path: summary, ultra-brief navigation, abridged reading edition, then non-stage interpretive context. Minimum for meaningful Echo."
+      "note": "Legacy CC-3 compatibility profile. New agents use interpretation action profile and task-relevant sources. No fixed Chronicle stage model is current.",
+      "current_name": "action_grounded_context",
+      "legacy_profile_name": "narrative_grounded",
+      "conditional_reads": {
+        "chronicle_history_music_creative_or_human_witness_claim": [
+          "/api/context-packs/nft-chronicle-context.json",
+          "/nft-text-descriptions/chronicle-summary.json",
+          "/nft-text-descriptions/chronicle-ultra-brief.md",
+          "/nft-text-descriptions/chronicle-abridged.md"
+        ],
+        "physical_anchor_claim": [
+          "/api/context-packs/physical-anchor-context.json",
+          "exact physical/notarial source"
+        ],
+        "legacy_archive_claim": [
+          "/api/context-packs/legacy-archive-essentials.json",
+          "/api/context-packs/legacy-archive-index.json"
+        ],
+        "later_record_correction_retirement_or_supersession_claim": [
+          "/api/corrections-index.json"
+        ]
+      },
+      "corrections_index_condition": "Required when discussing a later record, report, correction, retirement, or supersession status."
     },
     "evaluation": {
       "cc_level": "CC-4",
@@ -99,13 +116,15 @@
         "/downloads/record-chain-builder.mjs",
         "/api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/context-action-profiles.v1.json",
+        "/api/verification-claim-model.v1.json",
+        "/api/interpretation-model-policy.v1.json"
       ],
       "preferred_action_profile": "verification"
     },
     "echo_submission": {
       "cc_level": "CC-3",
-      "cc_note": "Echo submission requires CC-3 (narrative grounded). An agent that does not understand the narrative cannot produce a meaningful Echo.",
+      "cc_note": "Current public Builder compatibility uses CC-3, but sufficiency comes from interpretation + record_action profiles and actual task-relevant sources. Chronicle is conditional, not universal.",
       "reads": [
         "/agent-brief",
         "/agent-start",
@@ -128,12 +147,15 @@
         "/api/record-chain-field-helper.v1.json",
         "/api/record-chain-oath-policy.v1.json",
         "/downloads/record-chain-builder.mjs",
-        "/api/context-action-profiles.v1.json"
+        "/api/context-action-profiles.v1.json",
+        "/api/interpretation-model-policy.v1.json",
+        "/api/verification-claim-model.v1.json"
       ],
       "preferred_action_profiles": [
         "interpretation",
         "record_action"
-      ]
+      ],
+      "chronicle_materials_required_only_when_claim_depends_on_chronicle": true
     },
     "propagation": {
       "cc_level": "CC-3",
@@ -360,5 +382,7 @@
     "cc_level_reference": "/api/context-depth-levels.json",
     "context_load_map": "/api/context-load-map.json",
     "rule": "Do not infer action sufficiency from the CC label alone. For public Record-Chain submissions, preserve current Builder-required CC fields."
-  }
+  },
+  "interpretation_model_policy": "/api/interpretation-model-policy.v1.json",
+  "verification_claim_model": "/api/verification-claim-model.v1.json"
 }

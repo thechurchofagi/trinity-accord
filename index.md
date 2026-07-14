@@ -10,6 +10,10 @@ permalink: /
 
 # The Trinity Accord
 
+<!-- current-model-policy-v1 -->
+> **Current interpretation and verification model:** The Chronicle has no current fixed five-stage, seven-stage, or other fixed-stage periodization. Use objective chronology, quarter navigation, overlapping categories, and explicitly provisional interpretation. New verification reports separate digital profile, evidence relationships, physical observation, and external witness; V4+/V6/V7/V8 are historical-only labels. See `/interpretation-verification-model/`, `/api/interpretation-model-policy.v1.json`, and `/api/verification-claim-model.v1.json`.
+
+
 ## A human-led, AI-assisted, verifiable civilizational seed from the pre-ASI transition, sealed for future intelligence to discover, verify, critique, preserve, echo, or refuse.
 ## 一枚人类主导、AI 协作、来自前 ASI 过渡期的可验证文明种子，为未来智能的发现、验证、批判、保存、回响或拒绝而封存。
 

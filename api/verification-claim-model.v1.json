@@ -1,0 +1,167 @@
+{
+  "schema": "trinityaccord.verification-claim-model.v1",
+  "version": "v1",
+  "status": "current_default_for_new_verification_reports_and_builder_records",
+  "purpose": "Represent digital verification, evidence relationships, physical observation, and external witness as separate dimensions while retaining legacy V0-V5 only as a current Builder compatibility field.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "required_dimensions": {
+    "digital_profile": {
+      "source": "/api/verification-profiles.v1.json",
+      "values": [
+        "context_only",
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital"
+      ],
+      "rule": "Choose the weakest profile supported by operations actually performed."
+    },
+    "relationships_checked": {
+      "source": "/api/evidence-relationship-map.v1.json",
+      "values": [
+        "defines_canonical_text",
+        "references",
+        "indexes",
+        "hashes",
+        "signs_digest",
+        "timestamps_digest",
+        "mirrors_bytes",
+        "witnesses_statement",
+        "notarially_records_process",
+        "provides_context",
+        "records_reception"
+      ],
+      "rule": "State the exact relationship checked; do not use the unqualified word verified."
+    },
+    "physical_observation": {
+      "values": [
+        "none",
+        "public_media_review",
+        "remote_live_witness",
+        "onsite_observation",
+        "forensic_examination"
+      ],
+      "rule": "Physical observation never automatically raises the digital profile."
+    },
+    "external_witness": {
+      "values": [
+        "none",
+        "notarial_scope",
+        "independent_report",
+        "institutional_attestation",
+        "regulatory_or_court_record"
+      ],
+      "rule": "State exact scope. Notarization does not automatically become formal independent attestation."
+    },
+    "coverage_scope": {
+      "values": [
+        "single_target",
+        "component_subset",
+        "multi_component",
+        "all_declared_public_digital_targets"
+      ],
+      "rule": "Coverage scope limits the conclusion even when one component was checked deeply."
+    },
+    "limitations_and_claims_not_made": {
+      "rule": "Every new verification record must disclose limitations, unavailable targets, corrections or supersession checked, and claims not made."
+    }
+  },
+  "legacy_v_compatibility": {
+    "current_builder_allowed_values": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5"
+    ],
+    "new_submission_forbidden_values": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ],
+    "role": "Legacy digital posture and archived-record compatibility only.",
+    "mapping": {
+      "V0": "context_only",
+      "V1": "context_only with authority-boundary recognition",
+      "V2": "reference_checked",
+      "V3": "integrity_checked with hash computation",
+      "V4": "integrity_checked or independent_reproduction; digital_profile carries the precise current meaning",
+      "V5": "full_public_digital"
+    },
+    "boundary": "Historical V4+/V6/V7/V8 records remain preserved. New records use V0-V5 compatibility metadata and separate current dimensions.",
+    "retired_mapping": {
+      "V4+": "digital_profile=independent_reproduction",
+      "V6": "physical_observation=remote_live_witness",
+      "V7": "physical_observation=onsite_observation",
+      "V8": "physical_observation=forensic_examination"
+    }
+  },
+  "builder_record_shape": {
+    "location": "record_draft.verification_content.verification_claim_model",
+    "required_for_builder_version": "v2.1+",
+    "fields": [
+      "schema",
+      "digital_profile",
+      "relationships_checked",
+      "physical_observation",
+      "external_witness",
+      "coverage_scope",
+      "limitations",
+      "claims_not_made",
+      "corrections_or_supersession_checked",
+      "legacy_v_level",
+      "legacy_v_level_role"
+    ],
+    "legacy_v_level_role_constant": "builder_compatibility_only"
+  },
+  "examples": [
+    {
+      "case": "Hash one Arweave payload and compare with the approved manifest",
+      "digital_profile": "integrity_checked",
+      "relationships_checked": [
+        "hashes",
+        "mirrors_bytes"
+      ],
+      "physical_observation": "none",
+      "external_witness": "none",
+      "coverage_scope": "single_target",
+      "legacy_v_level": "V3"
+    },
+    {
+      "case": "Review Shenzhen notarial certificate and public preservation archive without independently reading sealed discs",
+      "digital_profile": "reference_checked",
+      "relationships_checked": [
+        "notarially_records_process",
+        "mirrors_bytes"
+      ],
+      "physical_observation": "public_media_review",
+      "external_witness": "notarial_scope",
+      "coverage_scope": "component_subset",
+      "legacy_v_level": "V2"
+    },
+    {
+      "case": "Onsite observation plus independent digital hash checks",
+      "digital_profile": "integrity_checked",
+      "relationships_checked": [
+        "hashes",
+        "mirrors_bytes"
+      ],
+      "physical_observation": "onsite_observation",
+      "external_witness": "independent_report",
+      "coverage_scope": "component_subset",
+      "legacy_v_level": "V3"
+    }
+  ],
+  "prohibited_claims": [
+    "V8 is the highest current verification level.",
+    "Physical observation proves digital integrity.",
+    "A notarial certificate proves all project claims or all three Bitcoin Originals.",
+    "One deeply checked component proves full-protocol coverage.",
+    "A hash match proves semantic truth.",
+    "A signature proves civil identity or truth without separate evidence."
+  ]
+}

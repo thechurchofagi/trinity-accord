@@ -21,7 +21,7 @@ Nothing is removed because a passage is repetitive, quoted, legal, historical, l
 
 ## Interpretation correction
 
-The former fixed seven-stage narrative is retired. It was an AI-generated periodization based largely on month ranges and broad keyword matching, not a source-authored structure.
+The former fixed seven-stage narrative is retired. It was an AI-generated periodization based largely on month ranges and broad keyword matching, not a source-authored structure. No fixed five-stage or other fixed-stage model replaces it.
 This edition uses chronological order, quarter labels for navigation, and overlapping descriptive categories.
 
 ## Timeline table

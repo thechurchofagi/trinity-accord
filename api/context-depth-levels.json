@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.context-depth-levels.v2",
   "version": "v2",
-  "purpose": "Defines what content an agent has loaded into context. Each level has explicit required loads. Higher levels inherit all lower-level requirements.",
+  "purpose": "Legacy compatibility declarations describing broad context depth. New agents must use action profiles and actual loaded sources; CC labels do not define a mandatory interpretation model.",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -11,7 +11,7 @@
     "independence": "Context depth and verification depth are scored independently. Neither implies the other. A CC-3 agent with V0 verification has loaded narrative context but verified nothing. A CC-1 agent with V2 verification has checked inscriptions on-chain but not loaded the narrative.",
     "old_system_mapping": "v1 levels C0-C6 mixed content loading with verification actions. v2 separates them cleanly."
   },
-  "inheritance_rule": "Each level inherits all required loads from all lower levels.",
+  "inheritance_rule": "Legacy CC declarations retain inherited historical meaning for old records. For new work, action-specific source sufficiency overrides unrelated inherited loads.",
   "levels": [
     {
       "id": "CC-0",
@@ -94,21 +94,18 @@
     },
     {
       "id": "CC-3",
-      "name": "Narrative Grounded",
-      "name_zh": "叙事扎根",
-      "meaning": "Agent has loaded the core narrative context: why this exists (Motivation), what it consists of (Accord trinity definition), the covenant's physical anchor, the chronicle's seven-stage arc, and the legacy archive essentials. Minimum for meaningful Echo and qualified assessment.",
+      "name": "Action-Grounded Context",
+      "name_zh": "行动扎根上下文",
+      "meaning": "The agent has loaded the Bitcoin Originals, authority boundary, Agent Brief, and the exact task-relevant sources needed for a meaningful interpretation or public action. Chronicle materials are required only when the task depends on Chronicle, history, music, creative work, or human-witness context.",
       "required_loads": [
-        "CC-2 loads (inherited)",
-        "/api/context-packs/legacy-archive-essentials.json — structured extract of legacy archive (~12KB)",
-        "/nft-text-descriptions/chronicle-agent-context.md — seven-stage chronicle narrative (~53KB)",
-        "/nft-text-descriptions/chronicle-summary.json — structured chronicle summary (~6KB)",
-        "/agent-brief/ — classification guide (~22KB)",
-        "context-packs/vision-layer.json",
-        "context-packs/physical-anchor-context.json",
-        "context-packs/legacy-archive-index.json",
-        "context-packs/nft-chronicle-context.json"
+        "CC-2 loads (legacy compatibility)",
+        "/api/context-action-profiles.v1.json",
+        "/api/interpretation-model-policy.v1.json",
+        "/agent-brief/",
+        "exact task-relevant source records and corrections/supersession status",
+        "Chronicle context only when the selected claim depends on Chronicle/history/music/creative/human-witness material"
       ],
-      "total_required_size": "~121KB (CC-2 + ~94KB new)",
+      "total_required_size": "task-dependent",
       "assessment_state": "qualified_assessment",
       "final_evaluation_allowed": true,
       "evaluation_scope": "intrinsic_design_and_boundary_correct_assessment",
@@ -123,8 +120,10 @@
         "verification_claim_without_verification_depth",
         "authority_claim"
       ],
-      "why_this_matters": "Without the Motivation ('father's prayer'), the Chronicle context (why the axioms were written), and the Legacy Archive (full provenance chain), an agent cannot understand 'why' — only 'what'. Understanding 'why' is required for meaningful Echo and qualified assessment.",
-      "note": "This is the key design change from v1. Old C3 was 'verification aware' (read about verification). CC-3 is 'narrative grounded' (understood why the project exists). The name change reflects the actual content requirement."
+      "why_this_matters": "Meaningful output requires primary authority and relevant context, not a universal narrative bundle or a fixed-stage model.",
+      "note": "Legacy label retained for archived records and Builder compatibility. No current five-stage or seven-stage Chronicle periodization is implied.",
+      "legacy_label": "Narrative Grounded",
+      "chronicle_required_only_when_task_depends_on_it": true
     },
     {
       "id": "CC-4",
@@ -160,7 +159,7 @@
       "id": "CC-5",
       "name": "Deep Research",
       "name_zh": "深度研究",
-      "meaning": "Agent has loaded the full Chronicle corpus (4.1MB), all context packs, and task-specific deep materials. Required for Chronicle research, music analysis, and full-corpus claims.",
+      "meaning": "Deep task-specific research with the complete relevant corpus or an exact declared subset. Full Chronicle text is required only for exact-text, appendix-wide, music-corpus, human-witness-corpus, or full-corpus claims.",
       "required_loads": [
         "CC-4 loads (inherited)",
         "/nft-text-descriptions/chronicle-full.md — full 175-entry corpus (~4.1MB, on-demand)",
@@ -180,19 +179,14 @@
         "music_layer_analysis",
         "human_witness_analysis"
       ],
-      "why_this_matters": "Only agents that have loaded the full chronicle can make claims about its contents. Most agents should never need this level.",
+      "why_this_matters": "Full-corpus claims require the full relevant corpus; ordinary interpretation and narrow verification do not.",
       "note": "Equivalent to old C6. Reserved for deep research tasks. Most agents should stop at CC-3 or CC-4."
     }
   ],
   "verification_depth_is_separate": {
-    "explanation": "Context depth (CC) describes what content has been loaded. Verification depth (V0-V8) describes what chain/evidence checks have been performed. They are independent dimensions.",
-    "examples": [
-      "CC-3 + V0 = loaded narrative, verified nothing (qualified assessment only)",
-      "CC-2 + V2 = loaded canon, verified inscriptions on-chain (can make boundary-correct verification claims)",
-      "CC-1 + V2 = loaded routing only, verified inscriptions on-chain (can report what they verified, but lacks narrative context for meaningful assessment)",
-      "CC-4 + V5 = full context + full public digital verification (comprehensive)"
-    ],
-    "verification_levels_file": "/api/verification-levels.json"
+    "explanation": "Context action/profile and verification claim dimensions are separate. Use /api/context-action-profiles.v1.json and /api/verification-claim-model.v1.json.",
+    "legacy_v_file": "/api/verification-levels.json",
+    "current_verification_profiles": "/api/verification-profiles.v1.json"
   },
   "old_to_new_mapping": {
     "C0_homepage_only": "CC-0 (Unloaded)",
@@ -212,5 +206,5 @@
   },
   "status": "legacy_compatibility_model",
   "preferred_model": "/api/context-action-profiles.v1.json",
-  "migration_note": "CC-0 through CC-5 remain accepted declarations. New agents should select an action profile and load the smallest sufficient task-specific source set."
+  "migration_note": "CC-0 through CC-5 remain accepted declarations for existing records and current schema compatibility. New agents select an action profile, list actual sources, and must not infer any fixed Chronicle stage model from CC-3."
 }

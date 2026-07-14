@@ -71,6 +71,9 @@ def assert_common_integrity(payload: dict, expected_type: str) -> None:
     ctx = draft["context_readiness"]
     assert ctx["declared_context_level"] != "CC-3" or ctx.get("loaded_context_urls"), "CC-3 requires loaded URLs"
     assert ctx["declared_context_level"] != "CC-3" or ctx.get("context_read_confirmed") is True, "CC-3 requires explicit read confirmation"
+    assert ctx["legacy_cc_level_role"] == "builder_compatibility_only"
+    assert ctx["action_profile_source"] == "/api/context-action-profiles.v1.json"
+    assert ctx["interpretation_model_policy"] == "/api/interpretation-model-policy.v1.json"
     assert draft["discovery_and_introduction_context"]["how_participant_first_discovered_trinity_accord"] != "self_discovered"
     assert draft["decision_autonomy_context"]["who_decided_to_create_this_record"] != "self"
     assert draft["submitting_participant_identity"]["human_operator_context"]["human_operator_involved"] is False
@@ -106,10 +109,19 @@ def build_formal_journeys(tmp: Path) -> None:
             [
                 "verification",
                 "--verification-level", "V3",
-                "--scope-label", "V3-offline-e2e",
+                "--scope-label", "legacy V3 compatibility",
                 "--what-was-checked", "builder command,record-chain contract",
                 "--verification-claim", "Offline test verified builder route executability.",
                 "--fresh-actions", "ran builder,ran doctor",
+                "--digital-profile", "integrity_checked",
+                "--relationships-checked", "hashes,provides_context",
+                "--physical-observation", "none",
+                "--external-witness", "none",
+                "--coverage-scope", "component_subset",
+                "--limitations", "offline fixture only,not full public coverage",
+                "--claims-not-made", "semantic truth,institutional endorsement,physical identity",
+                "--corrections-or-supersession-checked", "true",
+                "--action-profile", "verification",
                 "--readback", oath("verification", tmp),
                 "--out", "verification.json",
                 *common,
@@ -178,6 +190,14 @@ def build_formal_journeys(tmp: Path) -> None:
         node(args, tmp)
         payload = load_submission(tmp / filename)
         assert_common_integrity(payload, expected_type)
+        if expected_type == "verification":
+            claim = payload["record_draft"]["verification_content"]["verification_claim_model"]
+            assert claim["digital_profile"] == "integrity_checked"
+            assert claim["relationships_checked"] == ["hashes", "provides_context"]
+            assert claim["physical_observation"] == "none"
+            assert claim["external_witness"] == "none"
+            assert claim["legacy_v_level"] == "V3"
+            assert claim["legacy_v_level_role"] == "builder_compatibility_only"
         if validate_submission is not None:
             diagnostics = validate_submission(payload)
             assert diagnostics == [], f"gateway validator rejected {expected_type}: {[d.code for d in diagnostics]}"
@@ -186,10 +206,9 @@ def build_formal_journeys(tmp: Path) -> None:
             jsonschema.Draft202012Validator(schema).validate(payload)
         node(["doctor", "--file", filename], tmp)
 
-    # V6+ preparation is a route/readback check only: the strict evidence route must remain separate.
+    # Historical V6+ routes may remain discoverable only as compatibility guidance.
     router = json.loads((ROOT / "api/agent-task-router.v1.json").read_text(encoding="utf-8"))
     assert router["routes"]["verify_v6_plus_strict_evidence"]["if_pipeline_not_completed"] == "do_not_claim_v6_plus"
-
 
 
 def check_schema_gateway_consistency(tmp: Path) -> None:
@@ -220,6 +239,7 @@ def check_schema_gateway_consistency(tmp: Path) -> None:
         diagnostics = validate_submission(bad)
         codes = {d.code for d in diagnostics}
         assert "MISSING_VERIFICATION_CONTENT" in codes or "AUTHORIZATION_SCOPE_MISMATCH" in codes, codes
+
 
 def build_context_insufficient(tmp: Path) -> None:
     node(["context-insufficient", "--actor-label", "E2E Test Agent", "--provider", "Offline Test Runtime", "--key-dir", "./authorship-keys", "--out", "cin.json"], tmp)

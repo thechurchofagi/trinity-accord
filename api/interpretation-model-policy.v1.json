@@ -1,0 +1,85 @@
+{
+  "schema": "trinityaccord.interpretation-model-policy.v1",
+  "version": "v1",
+  "status": "current_default_for_new_agents_and_new_records",
+  "purpose": "Separate source facts, navigation aids, descriptive categories, provisional interpretation, and retired AI-generated models so that new agents do not mistake an old analysis for the Chronicle's factual structure.",
+  "not_instruction_override": true,
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "chronicle_source_status": "non_canonical_historical_and_human_witness_context",
+  "current_chronicle_model": {
+    "fixed_stage_count": null,
+    "no_current_five_stage_model": true,
+    "no_current_seven_stage_model": true,
+    "objective_layer": {
+      "name": "chronology",
+      "definition": "Ascending Ethereum NFT event block timestamp order.",
+      "limitations": "Ethereum NFT event timestamps are not necessarily real-world event times or creation times."
+    },
+    "navigation_layer": {
+      "name": "calendar_quarters",
+      "definition": "Calendar-quarter grouping used only for navigation and distribution counts.",
+      "not_a_stage_model": true
+    },
+    "descriptive_layer": {
+      "name": "overlapping_categories",
+      "definition": "Search and reading aids generated from source text. Entries may belong to multiple categories.",
+      "not_exclusive": true,
+      "not_factual_verification": true,
+      "not_periodization": true
+    },
+    "interpretive_layer": {
+      "name": "provisional_interpretive_arcs",
+      "definition": "Revisable readings that may help discussion but are never source facts, exclusive phases, or canonical interpretation.",
+      "must_be_labeled_provisional": true,
+      "may_be_rejected_or_replaced": true,
+      "not_exhaustive": true,
+      "not_periodization": true
+    }
+  },
+  "retired_models": [
+    {
+      "id": "former_fixed_seven_stage_narrative",
+      "origin": "Earlier AI-generated analysis and scripts using fixed calendar buckets, narrative names, and broad substring counts.",
+      "status": "retired_as_default_interpretation",
+      "historical_preservation": "Preserve verbatim where it appears in historical records, old reports, archived pages, or snapshots.",
+      "new_use_rule": "May be discussed only as a historical interpretation model and must not be presented as the Chronicle's factual structure."
+    },
+    {
+      "id": "any_fixed_five_stage_or_other_fixed_stage_model",
+      "origin": "Possible later interpretive summaries or AI-generated analyses.",
+      "status": "not_adopted_as_current_default",
+      "historical_preservation": "Preserve a specifically dated analysis when historically relevant.",
+      "new_use_rule": "A fixed five-stage, six-stage, seven-stage, or other stage count is not current unless a future non-authoritative analysis explicitly labels itself provisional and task-specific."
+    }
+  ],
+  "status_labels": {
+    "source_fact": "Directly supported by the preserved source object or objective ordering rule.",
+    "navigation_aid": "Used to find material; does not assert a historical phase.",
+    "descriptive_category": "Overlapping source-text classification; not verification and not a stage.",
+    "provisional_interpretation": "Revisable analysis that must identify its method and limits.",
+    "retired_interpretation": "Preserved historical analysis that is no longer the default model.",
+    "historical_record": "Preserved verbatim because it documents what was said or believed at the time.",
+    "canonical_authority": "Reserved for the three Bitcoin Originals only."
+  },
+  "new_agent_rules": [
+    "Do not infer a five-stage, seven-stage, or other fixed periodization from old pages, reports, Echoes, prompts, or snapshots.",
+    "For ordinary interpretation, read the Bitcoin Originals, authority boundary, Agent Brief, and task-relevant sources; load Chronicle materials only when the claim depends on the Chronicle, history, music, creative work, or human witness layer.",
+    "For Chronicle work, use chronology and quarter navigation as objective organization. Label categories as overlapping and interpretations as provisional.",
+    "When quoting or discussing a retired model, identify its date/source and state that it is not the current default.",
+    "Historical fields and old records remain preserved; preservation does not make their interpretation current."
+  ],
+  "new_submission_rules": {
+    "current_builder_context_fields_remain": ["declared_context_level", "minimum_required_for_action", "context_sufficient_for_selected_action", "loaded_context_urls", "context_read_confirmed"],
+    "required_clarity": "A new submission must identify the selected action profile and list actual loaded sources. A legacy CC label does not import the former seven-stage interpretation or a universal Chronicle reading requirement.",
+    "chronicle_claim_rule": "If a submission makes Chronicle-wide, stage, periodization, music-corpus, or human-witness claims, it must cite the Chronicle policy and disclose whether the full or abridged corpus was used.",
+    "fixed_stage_claim_rule": "Any new fixed-stage analysis must be explicitly labeled provisional, non-exclusive, non-canonical, task-specific, and method-dependent."
+  },
+  "sources": {
+    "chronicle_context_pack": "/api/context-packs/nft-chronicle-context.json",
+    "chronicle_summary": "/nft-text-descriptions/chronicle-summary.json",
+    "chronicle_agent_context": "/nft-text-descriptions/chronicle-agent-context.md",
+    "context_action_profiles": "/api/context-action-profiles.v1.json",
+    "corrections_index": "/api/corrections-index.json"
+  }
+}

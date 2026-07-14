@@ -6,6 +6,10 @@ permalink: /verification-materials/
 
 # Verification Materials · 验证材料索引
 
+<!-- current-model-policy-v1 -->
+> **Current interpretation and verification model:** The Chronicle has no current fixed five-stage, seven-stage, or other fixed-stage periodization. Use objective chronology, quarter navigation, overlapping categories, and explicitly provisional interpretation. New verification reports separate digital profile, evidence relationships, physical observation, and external witness; V4+/V6/V7/V8 are historical-only labels. See `/interpretation-verification-model/`, `/api/interpretation-model-policy.v1.json`, and `/api/verification-claim-model.v1.json`.
+
+
 This page is a unified index of verification sources.
 
 It does not create canonical authority. Bitcoin Originals prevail.

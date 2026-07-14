@@ -34,7 +34,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BUILDER_VERSION = "v2";
+const BUILDER_VERSION = "v2.1";
 const BUILDER_NAME = "record-chain-builder";
 const SCHEMA = "trinityaccord.record-chain-submission.v1";
 const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
@@ -61,7 +61,7 @@ const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
 const OATH_POLICY = {
   "schema": "trinityaccord.record-chain-oath-policy.v1",
   "status": "active",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "policy_id": "record-chain-formal-submission-oath-v1",
   "description": "No-shortcut oath gate for formal Record-Chain submissions. Requires participants to read the canonical oath, provide an exact readback, and declare that no automation shortcuts were used. This verifies exact readback only  --  it does not prove subjective understanding.",
   "not_authority": true,
@@ -163,7 +163,7 @@ const OATH_POLICY = {
     },
     "verification_integrity_v1": {
       "label": "Verification Integrity",
-      "text": "I declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that agent-declared verification levels (V0-V5) are self-assessed posture and not independently confirmed.\nI acknowledge that verification levels V6 and above require reproducible evidence  --  scripts, artifacts, and reproducible methods.\nI acknowledge that claiming a verification level I did not earn is a breach of the Record-Chain's integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement."
+      "text": "I declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that the legacy V0-V5 field is self-assessed Builder compatibility metadata and is not independently confirmed.\nI acknowledge that new verification records separately state digital profile, evidence relationships, physical observation, external witness, coverage, limitations, and claims not made.\nI acknowledge that V4+, V6, V7, and V8 are historical-only labels for new public submissions; physical observation and external witness do not automatically raise digital verification.\nI acknowledge that claiming checks, observations, witnesses, or coverage I did not earn is a breach of the Record-Chain's integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement."
     },
     "guardian_stewardship_v1": {
       "label": "Guardian Stewardship",
@@ -188,7 +188,7 @@ const OATH_POLICY = {
   },
   "linked_guardian_module": "guardian_stewardship_v1"
 };
-const OATH_POLICY_SHA256 = "6327c8fbf16cb859d951c42f77c7e185c453df5f05cd648ff94c7eca4d3caf7d";
+const OATH_POLICY_SHA256 = "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51";
 
 function getCanonicalOath(recordType, linkedGuardian = false) {
   const modules = getOathModules(recordType, linkedGuardian);
@@ -746,6 +746,24 @@ function buildContextReadConfirmationBoundary() {
   };
 }
 
+const DIGITAL_PROFILES = new Set(["context_only", "reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"]);
+const RELATIONSHIP_TYPES = new Set(["defines_canonical_text", "references", "indexes", "hashes", "signs_digest", "timestamps_digest", "mirrors_bytes", "witnesses_statement", "notarially_records_process", "provides_context", "records_reception"]);
+const PHYSICAL_OBSERVATIONS = new Set(["none", "public_media_review", "remote_live_witness", "onsite_observation", "forensic_examination"]);
+const EXTERNAL_WITNESSES = new Set(["none", "notarial_scope", "independent_report", "institutional_attestation", "regulatory_or_court_record"]);
+const COVERAGE_SCOPES = new Set(["single_target", "component_subset", "multi_component", "all_declared_public_digital_targets"]);
+
+function splitCsv(value) {
+  return String(value || "").split(",").map(s => s.trim()).filter(Boolean);
+}
+
+function defaultActionProfile(recordType) {
+  const rt = normalizeRecordType(recordType);
+  if (rt === "echo") return "interpretation";
+  if (rt === "verification") return "verification";
+  if (rt === "context_insufficient_notice") return "discovery";
+  return "record_action";
+}
+
 function parseBooleanStrict(value, fieldName) {
   if (value === undefined || value === null || value === "") return false;
   if (value === true || value === "true") return true;
@@ -823,13 +841,29 @@ function validateFormalInputs(command, opts) {
     requireExplicit(opts, "whatWasChecked", "--what-was-checked");
     requireExplicit(opts, "verificationClaim", "--verification-claim");
     requireExplicit(opts, "freshActions", "--fresh-actions");
+    requireExplicit(opts, "digitalProfile", "--digital-profile");
+    requireExplicit(opts, "relationshipsChecked", "--relationships-checked");
+    requireExplicit(opts, "physicalObservation", "--physical-observation");
+    requireExplicit(opts, "externalWitness", "--external-witness");
+    requireExplicit(opts, "coverageScope", "--coverage-scope");
+    requireExplicit(opts, "limitations", "--limitations");
+    requireExplicit(opts, "claimsNotMade", "--claims-not-made");
+    requireExplicit(opts, "correctionsOrSupersessionChecked", "--corrections-or-supersession-checked");
 
-    // Only V0-V5 are currently enabled for public submission
     const vlevel = String(opts.level || "").toUpperCase();
     const PUBLIC_VERIFICATION_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V5"]);
     if (!PUBLIC_VERIFICATION_LEVELS.has(vlevel)) {
-      errorExit("Public intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.");
+      errorExit("New public verification records accept only legacy V0-V5 as Builder compatibility metadata. V4+, V6, V7, and V8 are historical-only; use digital/physical/witness dimensions.");
     }
+    if (!DIGITAL_PROFILES.has(String(opts.digitalProfile))) errorExit("--digital-profile has an unsupported value");
+    const relationships = splitCsv(opts.relationshipsChecked);
+    if (!relationships.length || relationships.some(v => !RELATIONSHIP_TYPES.has(v))) errorExit("--relationships-checked must contain supported comma-separated relationship ids");
+    if (!PHYSICAL_OBSERVATIONS.has(String(opts.physicalObservation))) errorExit("--physical-observation has an unsupported value");
+    if (!EXTERNAL_WITNESSES.has(String(opts.externalWitness))) errorExit("--external-witness has an unsupported value");
+    if (!COVERAGE_SCOPES.has(String(opts.coverageScope))) errorExit("--coverage-scope has an unsupported value");
+    if (!splitCsv(opts.limitations).length) errorExit("--limitations must contain at least one limitation");
+    if (!splitCsv(opts.claimsNotMade).length) errorExit("--claims-not-made must contain at least one bounded claim not made");
+    parseBooleanStrict(opts.correctionsOrSupersessionChecked, "--corrections-or-supersession-checked");
   }
 
   if (command === "classification-update") {
@@ -1011,8 +1045,12 @@ function buildContextReadiness(opts) {
     ? parseBooleanStrict(opts.contextSufficientForSelectedAction, "--context-sufficient-for-selected-action")
     : false;
   return {
+    action_profile: opts.actionProfile || defaultActionProfile(opts.recordType),
+    action_profile_source: "/api/context-action-profiles.v1.json",
+    interpretation_model_policy: "/api/interpretation-model-policy.v1.json",
     declared_context_level: contextLevel,
     minimum_required_for_action: contextLevel,
+    legacy_cc_level_role: "builder_compatibility_only",
     context_sufficient_for_selected_action: sufficient,
     loaded_context_urls: opts.loadedUrls || [],
     context_read_confirmed: isContextReadConfirmed(opts.contextReadConfirmed),
@@ -1044,9 +1082,22 @@ function buildVerificationDraft(opts) {
     verification_content: {
       verification_level: opts.level,
       verification_scope_label: opts.scopeLabel || opts.level,
-      what_was_checked: opts.whatWasChecked ? opts.whatWasChecked.split(",").map(s => s.trim()) : [],
+      what_was_checked: splitCsv(opts.whatWasChecked),
       verification_claim: opts.verificationClaim || "",
-      fresh_actions_performed: opts.freshActions ? opts.freshActions.split(",").map(s => s.trim()).filter(Boolean) : [],
+      fresh_actions_performed: splitCsv(opts.freshActions),
+      verification_claim_model: {
+        schema: "trinityaccord.verification-claim-model.v1",
+        digital_profile: opts.digitalProfile,
+        relationships_checked: splitCsv(opts.relationshipsChecked),
+        physical_observation: opts.physicalObservation,
+        external_witness: opts.externalWitness,
+        coverage_scope: opts.coverageScope,
+        limitations: splitCsv(opts.limitations),
+        claims_not_made: splitCsv(opts.claimsNotMade),
+        corrections_or_supersession_checked: parseBooleanStrict(opts.correctionsOrSupersessionChecked, "--corrections-or-supersession-checked"),
+        legacy_v_level: opts.level,
+        legacy_v_level_role: "builder_compatibility_only",
+      },
     },
     ...buildV2CommonFields(opts),
     context_readiness: buildContextReadiness(opts),
@@ -1455,6 +1506,11 @@ const FIELD_EXPLANATIONS = {
   "verification_content.what_was_checked": "Concrete checks actually performed in the current context. Do not list checks that were assumed or copied from prior reports.",
   "verification_content.verification_claim": "The claim supported by the fresh checks. Keep this bounded to what was actually verified.",
   "verification_content.fresh_actions_performed": "Fresh actions performed during this verification session, not historical or assumed actions.",
+  "verification_content.verification_claim_model": "Current multidimensional verification claim. Separates digital profile, evidence relationships, physical observation, external witness, coverage and limitations.",
+  "verification_content.verification_claim_model.digital_profile": "Current descriptive digital verification profile.",
+  "verification_content.verification_claim_model.relationships_checked": "Exact evidence relationships checked.",
+  "verification_content.verification_claim_model.physical_observation": "Separate physical observation state; never automatically raises digital verification.",
+  "verification_content.verification_claim_model.external_witness": "Separate notarial, independent, institutional, regulatory or court witness scope.",
 
   "guardian_application_content": "Content specific to guardian application records.",
   "guardian_application_content.requested_guardian_identifier": "The requested guardian identifier.",
@@ -2450,7 +2506,9 @@ Common options:
   --title "Title"               Record title
   --body-file path.txt          Read body from file
   --body "text"                 Body text inline
-  --context-level CC-3          Context depth level (explicit for formal records)
+  --action-profile PROFILE     Current action profile: discovery, interpretation, verification, record_action, or deep_research.
+                                 Defaults from record type; CC remains compatibility metadata.
+  --context-level CC-3          Legacy context depth compatibility field (explicit for formal records)
   --context-sufficient-for-selected-action true|false
                                 Whether loaded context is sufficient for this action
   --loaded-urls URLS            Comma-separated loaded context URLs (required for CC-3)
@@ -2557,6 +2615,17 @@ Examples:
     --readback "=== Common Submission Integrity ... (full oath text) ..." \\
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
+
+  Verification claim options (all required for new verification records):
+    --digital-profile context_only|reference_checked|integrity_checked|independent_reproduction|full_public_digital
+    --relationships-checked comma,separated,relationship_ids
+    --physical-observation none|public_media_review|remote_live_witness|onsite_observation|forensic_examination
+    --external-witness none|notarial_scope|independent_report|institutional_attestation|regulatory_or_court_record
+    --coverage-scope single_target|component_subset|multi_component|all_declared_public_digital_targets
+    --limitations comma,separated,limitations
+    --claims-not-made comma,separated,bounded_claims
+    --corrections-or-supersession-checked true|false
+    V4+, V6, V7, and V8 are historical-only labels and are not accepted for new public submissions.
 
   # ── Verification (formal: requires print-oath + --readback) ───────
   node record-chain-builder.mjs print-oath --record-type verification
@@ -3186,6 +3255,15 @@ async function main() {
     whatWasChecked: args.whatWasChecked || "",
     verificationClaim: args.verificationClaim || "",
     freshActions: args.freshActions || "",
+    digitalProfile: args.digitalProfile || "",
+    relationshipsChecked: args.relationshipsChecked || "",
+    physicalObservation: args.physicalObservation || "",
+    externalWitness: args.externalWitness || "",
+    coverageScope: args.coverageScope || "",
+    limitations: args.limitations || "",
+    claimsNotMade: args.claimsNotMade || "",
+    correctionsOrSupersessionChecked: args.correctionsOrSupersessionChecked,
+    actionProfile: args.actionProfile || "",
     contextSufficientForSelectedAction: args.contextSufficientForSelectedAction,
     readback: args.readback || "",
     readbackMethod: args.readbackMethod || "participant_generated_in_current_context",

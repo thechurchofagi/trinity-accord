@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-oath-policy.v1",
   "status": "active",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "policy_id": "record-chain-formal-submission-oath-v1",
   "description": "No-shortcut oath gate for formal Record-Chain submissions. Requires participants to read the canonical oath, provide an exact readback, and declare that no automation shortcuts were used. This verifies exact readback only  --  it does not prove subjective understanding.",
   "not_authority": true,
@@ -103,7 +103,7 @@
     },
     "verification_integrity_v1": {
       "label": "Verification Integrity",
-      "text": "I declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that agent-declared verification levels (V0-V5) are self-assessed posture and not independently confirmed.\nI acknowledge that verification levels V6 and above require reproducible evidence  --  scripts, artifacts, and reproducible methods.\nI acknowledge that claiming a verification level I did not earn is a breach of the Record-Chain's integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement."
+      "text": "I declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that the legacy V0-V5 field is self-assessed Builder compatibility metadata and is not independently confirmed.\nI acknowledge that new verification records separately state digital profile, evidence relationships, physical observation, external witness, coverage, limitations, and claims not made.\nI acknowledge that V4+, V6, V7, and V8 are historical-only labels for new public submissions; physical observation and external witness do not automatically raise digital verification.\nI acknowledge that claiming checks, observations, witnesses, or coverage I did not earn is a breach of the Record-Chain's integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement."
     },
     "guardian_stewardship_v1": {
       "label": "Guardian Stewardship",
@@ -127,7 +127,7 @@
     }
   },
   "linked_guardian_module": "guardian_stewardship_v1",
-  "oath_policy_sha256": "6327c8fbf16cb859d951c42f77c7e185c453df5f05cd648ff94c7eca4d3caf7d",
+  "oath_policy_sha256": "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51",
   "oath_policy_sha256_semantics": "Canonical JSON hash of this oath policy after excluding self-describing metadata fields: oath_policy_sha256, oath_policy_sha256_semantics, canonical_oath_text_hash_is_record_type_specific.",
   "canonical_oath_text_hash_is_record_type_specific": true
 }
