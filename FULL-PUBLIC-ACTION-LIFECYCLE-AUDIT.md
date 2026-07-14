@@ -10,6 +10,8 @@ The permanent test is `scripts/test_full_public_action_lifecycle_e2e.py`.
 
 It copies the current repository into an isolated temporary directory, generates fresh Ed25519 keys, runs the real Node Builder and Builder doctor, exercises the real FastAPI Gateway with a filesystem-backed substitute for the GitHub Contents API, appends the resulting pending records with the real append-only chain implementation, reads durable receipt status, rebuilds derived indexes, and runs final chain verification.
 
+The isolated test explicitly supplies non-production repository, branch, and token-shaped configuration values so that the real Gateway configuration gate is exercised. All content operations are then intercepted by the filesystem adapter; no network write uses those values.
+
 The test never writes a production receipt, pending record, final record, Guardian state entry, key, or index.
 
 ## Successful action matrix
@@ -78,6 +80,7 @@ The permanent simulation also requires rejection of:
 2. Correction wording was author-only, but Gateway and append enforcement did not bind the correction signer to the target author key.
 3. Some recovery text still described V6+ as a current or future verification route instead of using the current multidimensional verification model.
 4. The Builder changed during the runtime fix, so the canonical Builder bundle digest and byte size had to be regenerated before release.
+5. The first official-suite integration exposed that the isolated Gateway test had relied on ambient configuration from its one-off workflow; the permanent test now sets explicit isolated configuration and still exercises the real readiness gate.
 
 These defects are now covered by the permanent full-lifecycle regression, the official current-system test runner, Builder manifest synchronization checks, and focused runtime checks.
 
