@@ -1,0 +1,180 @@
+::group::p0-current: python3 scripts/check_public_core_consistency.py
+$ python3 scripts/check_public_core_consistency.py
+PASS: public core consistency
+::endgroup::
+::group::p0-current: python3 scripts/check_active_public_routes.py
+$ python3 scripts/check_active_public_routes.py
+============================================================
+Original route checks
+============================================================
+OK:   api/links.json active machine list excludes deprecated paths
+OK:   api/links.json exposes active agent-start v2
+OK:   agent-start v1 is preserved only as legacy/deprecated
+OK:   top navigation does not actively link to /agent-submit
+OK:   footer does not actively link to /agent-submit
+OK:   footer Gateway API does not point to retired API
+OK:   top navigation exposes First Contact
+OK:   agent-entry-protocol no-GitHub fallback uses current Record-Chain route
+OK:   agent-map homepage-only context depth is CC-0
+
+============================================================
+Regression: occurrence-scoped retired route detection
+============================================================
+OK:   regression: mixed historical/active markdown route detected line-by-line
+OK:   regression: mixed historical/active JSON route detected per occurrence
+
+============================================================
+Extended: retired route scan in active files
+============================================================
+OK:   agent-echo.md contains '/agent-submit' only in historical text context
+OK:   agent-understand.md contains '/agent-submit' only in historical text context
+OK:   agent-propagate.md contains '/agent-submit' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/gateway-workflows.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/formal-builder-bundles.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/api/external-agent-operation-examples.v1.json' only in historical text context
+OK:   external-agent-quickstart.md contains '/zero-clone-builders/' only in historical text context
+OK:   ai.txt contains '/api/external-agent-operation-examples.v1.json' only in historical text context
+OK:   ai.txt contains '/zero-clone-builders/' only in historical text context
+OK:   .well-known/trinity-accord.json contains '/agent-submit' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/agent-submit-gateway.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/gateway-workflows.v1.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/gateway-builder-route-map.v1.json' only in historical JSON context
+OK:   .well-known/trinity-accord.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/agent-task-router.v1.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/links.json contains '/agent-submit' only in historical JSON context
+OK:   api/links.json contains '/api/agent-submit-gateway.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-workflows.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/gateway-builder-route-map.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/formal-builder-bundles.v1.json' only in historical JSON context
+OK:   api/links.json contains '/api/external-agent-operation-examples.v1.json' only in historical JSON context
+
+============================================================
+Extended: agent-required-reading profile check
+============================================================
+OK:   agent-required-reading profiles checked for retired routes
+
+============================================================
+Extended: mission-governance check
+============================================================
+OK:   mission-governance stable_endpoint_contract uses current gateway
+OK:   mission-governance uses current route naming
+OK:   mission-governance external_agent_lifecycle checked
+
+============================================================
+Extended: agent-live-health check
+============================================================
+OK:   agent-live-health stable_endpoints uses current gateway
+OK:   agent-live-health preflight uses current path
+
+RESULT: PASS
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_contract.py
+$ python3 scripts/test_mission_governance_contract.py
+PASS: mission governance contract
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_governance_discovery.py
+$ python3 scripts/test_mission_governance_discovery.py
+PASS: mission governance discovery
+::endgroup::
+::group::p0-current: python3 scripts/test_mission_public_route_parity.py
+$ python3 scripts/test_mission_public_route_parity.py
+PASS: mission, schema, first-contact, agent-start, task-router, and homepage agree on 8 current public record types
+::endgroup::
+::group::p0-current: python3 scripts/test_builder_help_urls_resolve.py
+$ python3 scripts/test_builder_help_urls_resolve.py
+PASS: 19 Builder diagnostic help URLs resolve to stable local anchors
+::endgroup::
+::group::p0-current: python3 scripts/test_autonomy_inventory_boundary.py
+$ python3 scripts/test_autonomy_inventory_boundary.py
+PASS: raw native autonomy inventory cannot be mistaken for strict official-live autonomous reception
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_runtime_recovery_links.py
+$ python3 scripts/test_gateway_runtime_recovery_links.py
+PASS: Gateway runtime recovery links resolve to public help
+::endgroup::
+::group::p0-current: python3 scripts/test_gateway_schema_shadow_parity.py
+$ python3 scripts/test_gateway_schema_shadow_parity.py
+PASS: Gateway app schemas are exact canonical mirrors
+::endgroup::
+::group::p0-current: python3 scripts/test_reserved_internal_builder_contract.py
+$ python3 scripts/test_reserved_internal_builder_contract.py
+PASS: internal builder fails closed for reserved Guardian key rotation
+::endgroup::
+::group::p0-current: python3 scripts/test_record_chain_intake_gateway_contract.py
+$ python3 scripts/test_record_chain_intake_gateway_contract.py
+PASS: All Record-Chain Intake Gateway contract tests passed.
+::endgroup::
+::group::p0-current: python3 scripts/test_no_duplicate_context_understanding_system.py
+$ python3 scripts/test_no_duplicate_context_understanding_system.py
+PASS: no duplicate context understanding system
+::endgroup::
+::group::p0-current: python3 scripts/test_before_leaving_requires_context_governance.py
+$ python3 scripts/test_before_leaving_requires_context_governance.py
+PASS: before_leaving context governance
+::endgroup::
+::group::p0-current: python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+$ python3 scripts/test_agent_start_no_legacy_c0_c6_context_table.py
+PASS: agent-start no legacy C0-C6 context table
+::endgroup::
+::group::p0-current: python3 scripts/test_closure_report_v30_contract.py
+$ python3 scripts/test_closure_report_v30_contract.py
+PASS: v30 closure report contract is valid
+::endgroup::
+::group::p0-current: python3 scripts/test_route_selector_contract.py
+$ python3 scripts/test_route_selector_contract.py
+PASS: route selector is correctly retired to record-chain-first replacement
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_public_sources_exist.py
+$ python3 scripts/test_sitemap_public_sources_exist.py
+PASS: sitemap public URLs have local source/artifact coverage
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_includes_nested_api_json.py
+$ python3 scripts/test_sitemap_includes_nested_api_json.py
+PASS: sitemap includes nested API JSON files
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_permalink_matches_source.py
+$ python3 scripts/test_sitemap_permalink_matches_source.py
+PASS: sitemap pretty URLs match source permalinks where declared
+::endgroup::
+::group::p0-current: python3 scripts/test_sitemap_permalink_parser_uses_yaml.py
+$ python3 scripts/test_sitemap_permalink_parser_uses_yaml.py
+PASS: sitemap permalink parser uses YAML when available
+::endgroup::
+::group::p0-current: python3 scripts/test_generate_sitemap_docstring_recursive_api.py
+$ python3 scripts/test_generate_sitemap_docstring_recursive_api.py
+PASS: generate_sitemap.py docstring matches recursive API collection
+::endgroup::
+::group::p0-current: python3 scripts/test_public_referenced_paths_exist.py
+$ python3 scripts/test_public_referenced_paths_exist.py
+PASS: core public JSON references resolve to local sources/artifacts
+::endgroup::
+::group::p0-current: python3 scripts/test_public_referenced_paths_core_set.py
+$ python3 scripts/test_public_referenced_paths_core_set.py
+PASS: public referenced-path core set covers main machine entrypoints
+::endgroup::
+::group::p0-current: python3 scripts/test_public_surface_consistency.py
+$ python3 scripts/test_public_surface_consistency.py
+PUBLIC_SURFACE_CONSISTENCY_OK
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_sitemap_coverage.py
+$ python3 scripts/test_public_api_sitemap_coverage.py
+PASS: public API sitemap discovery covers main APIs
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_general_not_pass.py
+$ python3 scripts/test_public_api_metadata_general_not_pass.py
+PASS: general public API metadata branch is enforced
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_tier_b_schema_required.py
+$ python3 scripts/test_public_api_metadata_tier_b_schema_required.py
+PASS: Tier B public API schema identity is enforced
+::endgroup::
+::group::p0-current: python3 scripts/test_public_api_metadata_completeness.py
+$ python3 scripts/test_public_api_metadata_completeness.py
+FAIL: public API metadata validation errors:
+  - verification-levels.json: source_digest mismatch: stored=47be5eb3007e0d94, expected=688750b87a228d68
+
+
+::endgroup::
+FAILED (1): python3 scripts/test_public_api_metadata_completeness.py
+
+exit_code=1
