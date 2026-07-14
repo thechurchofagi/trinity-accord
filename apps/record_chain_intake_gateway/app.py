@@ -602,6 +602,31 @@ async def _record_target_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
             suggested_fix="Copy record_sha256 exactly from the public final record.",
             retry_allowed=True,
         ))
+    if record_type == "correction" and isinstance(target, dict):
+        current_proof = body.get("authorship_proof")
+        target_proof = target.get("authorship_proof")
+        current_key = current_proof.get("public_key_sha256") if isinstance(current_proof, dict) else None
+        target_key = target_proof.get("public_key_sha256") if isinstance(target_proof, dict) else None
+        if not re.fullmatch(r"[a-f0-9]{64}", str(target_key or "")):
+  diagnostics.append(Diagnostic(
+      code="CORRECTION_TARGET_AUTHORSHIP_UNAVAILABLE",
+      severity="error",
+      field=f"{field_prefix}.target_record_id",
+      message="The target record does not expose a valid immutable author key for an author-only correction.",
+      meaning="Correction is reserved for the author of the target record. A third party must use classification_update or another non-authoritative response path.",
+      suggested_fix="Do not submit a correction. Use classification_update for third-party review, or ask the target author to sign the correction.",
+      retry_allowed=False,
+  ))
+        elif current_key != target_key:
+  diagnostics.append(Diagnostic(
+      code="CORRECTION_TARGET_AUTHOR_MISMATCH",
+      severity="error",
+      field="authorship_proof.public_key_sha256",
+      message="Correction signer does not match the immutable target record author key.",
+      meaning="The Correction oath is author-only; third-party critique or reclassification must use classification_update.",
+      suggested_fix="Use the same authorship key as the target record, or submit classification_update instead.",
+      retry_allowed=False,
+  ))
     return diagnostics
 
 
