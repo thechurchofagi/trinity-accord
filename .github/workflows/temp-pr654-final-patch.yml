@@ -1,0 +1,74 @@
+name: Temporary PR654 isolated final patch
+
+on:
+  push:
+    branches:
+      - agent/retire-fixed-stage-and-clarify-verification
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/retire-fixed-stage-and-clarify-verification
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Patch fixture and remove temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/test_phase_5c_hotfix.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''            "--verification-level", "V3",
+            "--scope-label", "V3-minimal",
+            "--what-was-checked", "read homepage,read agent-brief",
+            "--verification-claim", "Test verified current public route is executable up to local validation.",
+            "--fresh-actions", "read local discovery,ran builder",
+            "--context-level", "CC-2",
+            "--context-sufficient-for-selected-action", "true",'''
+          new = '''            "--verification-level", "V0",
+            "--scope-label", "legacy V0 compatibility",
+            "--what-was-checked", "builder invocation,generated record structure",
+            "--verification-claim", "The local Builder encoded the declared context-only test fixture.",
+            "--fresh-actions", "ran builder,read generated output",
+            "--digital-profile", "context_only",
+            "--relationships-checked", "provides_context",
+            "--physical-observation", "none",
+            "--external-witness", "none",
+            "--coverage-scope", "single_target",
+            "--limitations", "test fixture only,no external reference check,corrections not checked",
+            "--claims-not-made", "external reference validity,digital integrity,semantic truth,institutional endorsement,physical identity",
+            "--corrections-or-supersession-checked", "false",
+            "--action-profile", "verification",
+            "--context-level", "CC-3",
+            "--context-read-confirmed", "true",
+            "--context-sufficient-for-selected-action", "true",'''
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'expected one Phase5C fixture anchor, found {count}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          rm -f .github/workflows/temp-patch-pr654-phase5c.yml
+          rm -f .github/workflows/temp-pr654-apply-final-fix.yml
+          rm -f .github/workflows/temp-pr654-diagnostics.yml
+          rm -f .github/workflows/temp-pr654-write-diagnostic.yml
+          rm -f .github/workflows/temp-pr654-final-patch.yml
+          rm -f diagnostics/pr654-current-tests.log
+          rm -f diagnostics/pr654-current-tests.txt
+      - name: Commit permanent patch
+        shell: bash
+        run: |
+          git config user.name "trinity-accord-migration-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "test: migrate verification fixture and remove diagnostics"
+          git push origin HEAD:agent/retire-fixed-stage-and-clarify-verification
