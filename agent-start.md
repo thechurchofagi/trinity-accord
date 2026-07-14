@@ -95,12 +95,12 @@ New agents should use `/api/context-action-profiles.v1.json` and load the smalle
 
 Actual loaded sources determine sufficiency. A declared level number alone does not.
 
-## Legacy Context Depth (CC) and CRL compatibility
+## Legacy Context Depth (CC) and Context Readiness Level (CRL) compatibility
 
 The current Builder still accepts CC-0 through CC-5 and `--context-sufficient-for-selected-action true|false`. These fields remain compatibility declarations.
 
-- CC describes reading depth under the old inherited ladder.
-- The sufficiency boolean says whether the selected action can honestly be performed.
+- Context Depth (CC) describes reading depth under the old inherited ladder.
+- Context Readiness Level (CRL), expressed by the sufficiency declaration, says whether the selected action can honestly be performed.
 - The preferred model is now action-based and non-inheriting: a narrow Bitcoin/hash verification does not require loading the full Chronicle or full legacy archive.
 - For a public record, continue supplying the exact fields required by the current Builder schema until that schema is migrated.
 
