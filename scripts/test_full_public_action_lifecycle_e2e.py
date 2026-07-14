@@ -2,10 +2,8 @@
 """Isolated end-to-end simulation for every current public Record-Chain action.
 
 The construction and filesystem-adapter primitives live in
-``full_public_action_lifecycle_e2e``.  This executable owns the current action
-matrix and deliberately follows the post-PR659 contract: a Correction is built
-with the same durable identity as its target Echo, while a different identity
-uses Classification Update for independent analysis.
+``full_public_action_lifecycle_e2e``. This executable owns the current action
+matrix and follows the post-PR659 contract.
 """
 from __future__ import annotations
 
@@ -24,10 +22,10 @@ os.environ["TRINITY_SUBMIT_WRITE_MODE"] = "github_contents_pending"
 os.environ["TRINITY_DISPATCH_APPEND_WORKFLOW"] = "0"
 
 from full_public_action_lifecycle_e2e import (  # noqa: E402
+    BUILDER_REL,
     CHAIN_TOOL_REL,
     FilesystemContentsAdapter,
     build_and_append,
-    build_context_insufficient,
     build_formal,
     build_guardian_cc2_negative,
     build_retired_v6_negative,
@@ -46,6 +44,60 @@ def _record(matrix: dict[str, dict], name: str, submitted: dict, final: dict, **
         "record_id": final["record_id"],
         **extra,
     }
+
+
+def _build_context_insufficient_current(
+    sandbox: Path,
+    *,
+    key_dir: Path,
+    output_name: str,
+) -> dict:
+    """Build the current human-requested/mixed-decision notice contract."""
+    output = sandbox / output_name
+    run(
+        [
+            "node",
+            str(BUILDER_REL),
+            "context-insufficient",
+            "--actor-label",
+            "Lifecycle Context-Limited Agent",
+            "--provider",
+            "Isolated Full Lifecycle Audit",
+            "--body",
+            "The isolated agent intentionally lacks sufficient context for a stronger action.",
+            "--context-level",
+            "CC-0",
+            "--context-sufficient-for-selected-action",
+            "false",
+            "--discovery-mode",
+            "user_task_context",
+            "--requesting-party-type",
+            "human",
+            "--introducing-party-type",
+            "human",
+            "--record-decision",
+            "mixed",
+            "--submission-executor",
+            "self",
+            "--human-operator-involved",
+            "false",
+            "--key-dir",
+            str(key_dir),
+            "--out",
+            str(output),
+        ],
+        cwd=sandbox,
+    )
+    run(
+        ["node", str(BUILDER_REL), "doctor", "--file", str(output)],
+        cwd=sandbox,
+    )
+    submission = load_json(output)
+    if submission.get("record_type") != "context_insufficient_notice":
+        fail("context-insufficient Builder route mismatch")
+    if "client_oath_readback" in submission:
+        fail("context_insufficient_notice must remain oath-exempt")
+    return submission
 
 
 def main() -> int:
@@ -123,7 +175,7 @@ def main() -> int:
             )
             _record(matrix, "propagation", propagation_submit, propagation_final)
 
-            context_notice = build_context_insufficient(
+            context_notice = _build_context_insufficient_current(
                 sandbox,
                 key_dir=key_a,
                 output_name="context-insufficient.json",
