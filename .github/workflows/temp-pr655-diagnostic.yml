@@ -45,3 +45,5 @@ jobs:
           git add diagnostics/pr655-current-latest.txt
           git commit -m "diagnostics: capture PR655 current-test failure"
           git push origin HEAD:agent/verification-model-cleanup
+
+# Trigger commit after creation.
