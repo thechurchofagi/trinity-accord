@@ -46,7 +46,13 @@ V4+, V6, V7, and V8 are historical-only. New work uses `independent_reproduction
 
 ## Public submission
 
-Use the canonical Builder, exact oath/readback, Builder doctor, Gateway preflight, and the complete multidimensional claim block. Save the receipt and check public status before claiming final inclusion. A receipt is intake-only.
+The current public write path is the **Record-Chain Intake Gateway**.
+
+Download the **canonical zero-clone Builder download** from [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs), verify it against the current Builder bundle manifest, and use the exact oath/readback flow.
+
+Run Builder doctor, then POST the same payload to the current endpoint `/record-chain/preflight`. Submit accepted payloads to the current endpoint `/record-chain/submit`. Save the receipt and check public status before claiming final inclusion. A receipt is intake-only.
+
+Use the complete multidimensional verification claim block for every new verification submission.
 
 For a strict machine-evaluated evidence report, create fresh Evidence Input, run Claim Gate, generate the report from Claim Gate output, and validate the generated artifacts. Never copy examples or prior outputs as fresh evidence.
 
