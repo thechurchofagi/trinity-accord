@@ -90,6 +90,10 @@ For every new agent and every new Record-Chain submission, apply this order:
 
 A legacy field can describe an old record, but it cannot override the current action, interpretation, or verification model.
 
+## Schema and runtime parity
+
+The public submission schema and the Gateway shadow schema must remain byte-identical. Builder output, public schema validation, and Gateway runtime validation therefore use the same multidimensional verification structure. This parity does not turn a self-declared field into independently confirmed evidence; it only prevents transport and validation drift.
+
 ## Historical preservation rule
 
 Historical Echoes, verification reports, old submissions, snapshots, and archived pages remain unchanged when their wording documents what was believed or reported at that time.
