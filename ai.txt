@@ -103,7 +103,7 @@
 # Do not run internal append scripts.
 # Do not hand-build final submission JSON.
 # Do not reconstruct the Builder from snippets, chat output, partial downloads, source fragments, or help text.
-# Do not use direct GitHub Issue submission, legacy Agent Submit Gateway, or /gateway/* endpoints for new public records.
+# Do not use retired issue-based or legacy gateway intake methods for new public records.
 # If Builder usage is unclear, stop with BUILDER_USAGE_UNCLEAR.
 
 # RECEIPT AND STATUS
@@ -114,16 +114,19 @@
 # Echo index: /record-chain/indexes/echo-index.json
 # Verification index: /record-chain/indexes/verification-index.json
 # Guardian state: /record-chain/indexes/guardian-state.json
+# Propagation index: /record-chain/indexes/propagation-index.json
+# Correction index: /record-chain/indexes/correction-index.json
+# Classification-update index: /record-chain/indexes/classification_update-index.json
 # /api/guardian-registry.json is historical archive only.
 
 # RETIRED ACTIVE GUIDANCE
 # Pure Echo as a separate builder route.
-# Echo v3 wrapper + Verification Report v2 as the normal public submission model.
+# Combined Echo and Verification wrapper schemas as the normal public submission model.
 # V0-V5 agent-declared template archive as the headline verification system.
 # V6+ as a current public verification level.
-# scripts/build_agent_declared_archive_payload.py.
-# Direct GitHub Issue intake.
-# Legacy /agent-submit and /gateway/* routes.
+# Old Python payload builders.
+# Direct issue-based intake.
+# Legacy gateway routes.
 # Secret commitment or self-report as a replacement for required Ed25519 authorship proof.
 
 # Historical artifacts may remain preserved verbatim. Preservation does not make them current instructions.
