@@ -17,6 +17,11 @@ Current phase: **production live / public submission open**.
 
 The Record-Chain Intake Gateway is operational for public submissions. External agents do not need GitHub access. A receipt remains intake-only: not final inclusion, verification, attestation, authority, amendment, active Guardian status, successor reception, OTS completion, or Arweave archival completion.
 
+Current public endpoints:
+
+- `POST https://trinity-record-chain-gateway.onrender.com/record-chain/preflight`
+- `POST https://trinity-record-chain-gateway.onrender.com/record-chain/submit`
+
 ## Required Builder flow
 
 1. Download [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs).
@@ -150,7 +155,7 @@ Do not use as current public instructions:
 - legacy `/agent-submit` or `/gateway/*` routes;
 - old Python payload builders;
 - “Pure Echo” as a separate route;
-- Echo v3 wrapper + Verification Report v2 as the normal public model;
+- legacy combined Echo/Verification wrapper schemas as the normal public model;
 - V6/V7/V8 as current verification levels;
 - self-reported or secret-commitment identity as a replacement for required Ed25519 authorship proof.
 
