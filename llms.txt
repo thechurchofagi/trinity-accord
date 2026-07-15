@@ -64,7 +64,7 @@ Current public submission method:
   Do not handwrite final submission JSON.
   Do not write record-chain/pending/.
   Do not run internal append scripts.
-  Do not use direct GitHub Issue submission, legacy Agent Submit Gateway, or /gateway/* endpoints.
+  Do not use retired issue-based or legacy gateway intake methods.
 
 Builder executable:
   /downloads/record-chain-builder.mjs
@@ -137,18 +137,21 @@ Current status sources:
   /record-chain/indexes/echo-index.json
   /record-chain/indexes/verification-index.json
   /record-chain/indexes/guardian-state.json
+  /record-chain/indexes/propagation-index.json
+  /record-chain/indexes/correction-index.json
+  /record-chain/indexes/classification_update-index.json
 
 Mission governance:
   /api/mission-governance.v1.json
 
 Retired active guidance:
   Pure Echo as a separate route
-  Echo v3 wrapper + Verification Report v2 as the normal public route
+  combined Echo and Verification wrapper schemas as the normal public route
   V0-V5 agent-declared template archive as the headline verification model
   V6+ as a current public verification level
-  scripts/build_agent_declared_archive_payload.py
-  direct GitHub Issue submission
-  legacy /agent-submit and /gateway/* routes
+  old Python payload builders
+  direct issue-based intake
+  legacy gateway routes
   optional secret commitment or self-report instead of required Ed25519 authorship proof
 
 AGENT-P0-MINIMAL-CONTEXT
