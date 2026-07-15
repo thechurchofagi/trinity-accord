@@ -1,0 +1,139 @@
+name: Verify Pages Production Closure
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Pages
+    types:
+      - completed
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 1
+
+      - name: Resolve evidence pull request
+        id: context
+        env:
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
+          SOURCE_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+          SOURCE_RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+          pr=""
+          message="$(git log -1 --pretty=%B)"
+          if [[ "$message" =~ \(\#([0-9]+)\) ]]; then
+            pr="${BASH_REMATCH[1]}"
+          fi
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+          echo "source_branch=$SOURCE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "source_conclusion=$SOURCE_CONCLUSION" >> "$GITHUB_OUTPUT"
+          echo "source_run_id=$SOURCE_RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "source_run_url=$SOURCE_RUN_URL" >> "$GITHUB_OUTPUT"
+          echo "evidence_pr=${pr:-none}"
+
+      - name: Publish verification start evidence
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVIDENCE_PR: ${{ steps.context.outputs.pr }}
+          SOURCE_SHA: ${{ steps.context.outputs.source_sha }}
+          SOURCE_RUN_ID: ${{ steps.context.outputs.source_run_id }}
+          SOURCE_RUN_URL: ${{ steps.context.outputs.source_run_url }}
+        run: |
+          set -euo pipefail
+          body="Pages production verification started
+
+          source_deploy_run_id=${SOURCE_RUN_ID}
+          source_deploy_run_url=${SOURCE_RUN_URL}
+          deployed_sha=${SOURCE_SHA}
+          verification_run_id=${GITHUB_RUN_ID}
+          verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          printf '%s\n' "$body"
+          if [[ -n "$EVIDENCE_PR" ]]; then
+            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+          fi
+
+      - name: Verify deployed revision and live production
+        id: live
+        continue-on-error: true
+        env:
+          SOURCE_BRANCH: ${{ steps.context.outputs.source_branch }}
+          SOURCE_CONCLUSION: ${{ steps.context.outputs.source_conclusion }}
+          SOURCE_SHA: ${{ steps.context.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$SOURCE_BRANCH" != "main" ]]; then
+            echo "::error::Deploy Pages completed from non-main branch: $SOURCE_BRANCH"
+            exit 1
+          fi
+          if [[ "$SOURCE_CONCLUSION" != "success" ]]; then
+            echo "::error::Deploy Pages source run concluded: $SOURCE_CONCLUSION"
+            exit 1
+          fi
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+
+          for attempt in 1 2 3 4 5 6; do
+            echo "production verification attempt ${attempt}/6"
+            if python3 scripts/check_deployment_freshness.py \
+                --site "https://www.trinityaccord.org" \
+                --timeout 20; then
+              echo "PASS: production matches deployed revision, including all six reading pages"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "FAIL: production did not match the completed Deploy Pages revision"
+          exit 1
+
+      - name: Publish final production evidence
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVIDENCE_PR: ${{ steps.context.outputs.pr }}
+          SOURCE_SHA: ${{ steps.context.outputs.source_sha }}
+          SOURCE_BRANCH: ${{ steps.context.outputs.source_branch }}
+          SOURCE_CONCLUSION: ${{ steps.context.outputs.source_conclusion }}
+          SOURCE_RUN_ID: ${{ steps.context.outputs.source_run_id }}
+          SOURCE_RUN_URL: ${{ steps.context.outputs.source_run_url }}
+          LIVE_OUTCOME: ${{ steps.live.outcome }}
+        run: |
+          set -euo pipefail
+          overall="failure"
+          if [[ "$SOURCE_BRANCH" == "main" \
+             && "$SOURCE_CONCLUSION" == "success" \
+             && "$LIVE_OUTCOME" == "success" ]]; then
+            overall="success"
+          fi
+
+          body="Pages production closure: ${overall}
+
+          source_deploy_run_id=${SOURCE_RUN_ID}
+          source_deploy_run_url=${SOURCE_RUN_URL}
+          source_deploy_conclusion=${SOURCE_CONCLUSION}
+          deployed_sha=${SOURCE_SHA}
+          verification_run_id=${GITHUB_RUN_ID}
+          verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          six_page_static_contract=${LIVE_OUTCOME}
+          deployment_digest_contract=${LIVE_OUTCOME}"
+
+          printf '%s\n' "$body"
+          if [[ -n "$EVIDENCE_PR" ]]; then
+            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            echo "::warning::No merged PR number was found in the deployed commit message"
+          fi
+          test "$overall" = "success"
