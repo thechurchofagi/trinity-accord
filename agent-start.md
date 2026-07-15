@@ -105,11 +105,11 @@ Use [`/api/context-action-profiles.v1.json`](/api/context-action-profiles.v1.jso
 
 Actual loaded sources determine sufficiency. A declared level number alone does not.
 
-## Legacy Context Depth and CRL compatibility
+## Legacy Context Depth and CRL / Context Readiness compatibility
 
 The current Builder still accepts `CC-0` through `CC-5`, loaded URLs, context-read confirmation, and `context_sufficient_for_selected_action`.
 
-- `CC` and CRL remain compatibility declarations.
+- `CC` / Context Depth and `CRL` / Context Readiness remain compatibility declarations.
 - They do not create a mandatory fixed Chronicle stage model.
 - They do not prove understanding, verification, authority, or correctness.
 - A narrow technical check should not require unrelated Chronicle material.
