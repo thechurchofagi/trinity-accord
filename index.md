@@ -43,10 +43,10 @@ permalink: /
   <p class="section-kicker">Formation window · 形成窗口</p>
   <h2 id="home-formation-title">The form can be reproduced. The formation conditions cannot.</h2>
   <p>
-    From March 2024 through June 2025, the Chronicle's formation-period records were created near real time through repeated human prompting, selection, reflection, preservation, and on-chain minting. The work began while public AI mainly responded in conversation and was sealed as early agents began to plan, use tools, and sustain longer tasks; a final August 2025 record preserved the website. Later agents may reproduce much of its form quickly, but not the original model states, human labor pattern, or dated sequence through which it emerged.
+    From March 2024 through June 2025, the Chronicle formed near real time through repeated human prompting, selection, reflection, and on-chain minting, while public AI shifted from conversational systems toward early tool-using agents. An August 2025 record preserved the website. Later agents may reproduce the form quickly, but not the original model states, human labor pattern, or dated sequence.
   </p>
   <p class="zh">
-    从 2024 年 3 月至 2025 年 6 月，编年史主体通过人类反复提示、选择、反思、保存与链上铸造，近实时地逐步形成。作品开始于公共 AI 仍以对话回应为主的阶段，并在早期智能体开始规划、使用工具和持续执行任务时封存；2025 年 8 月的最后一条记录保存了网站。后来的智能体可以快速复制它的大部分形式，却无法重现当时的模型状态、人机劳动关系与实际形成的时间序列。
+    从 2024 年 3 月至 2025 年 6 月，编年史在人类反复提示、选择、反思与链上铸造中近实时形成，也经历了公共 AI 从对话系统向早期工具型智能体的转变；2025 年 8 月的一条记录保存了网站。后来的智能体可以快速复制其形式，却无法重现当时的模型状态、人机劳动关系与实际时间序列。
   </p>
   <nav class="home-formation-links" aria-label="Formation-window evidence">
     <a href="/chronicle/">Explore the timestamped Chronicle</a>

@@ -26,7 +26,7 @@ def main() -> int:
         "Created across the 2024–2025 shift from conversational AI",
         "The form can be reproduced. The formation conditions cannot.",
         "From March 2024 through June 2025",
-        "final August 2025 record preserved the website",
+        "An August 2025 record preserved the website",
         "original model states, human labor pattern, or dated sequence",
         "/chronicle/",
         "/archive_legacy_index_2025_09/",
