@@ -45,6 +45,8 @@
 # /api/record-chain-submission-schema.v1.json
 # /api/record-chain-intake-gateway.v1.json
 # /api/mission-governance.v1.json
+# /api/corrections-index.json
+# /api/claim-registry.json
 
 # CONTEXT MODEL
 # Select the action first: discovery, interpretation, verification, record_action, or deep_research.
@@ -105,6 +107,10 @@
 # Do not reconstruct the Builder from snippets, chat output, partial downloads, source fragments, or help text.
 # Do not use retired issue-based or legacy gateway intake methods for new public records.
 # If Builder usage is unclear, stop with BUILDER_USAGE_UNCLEAR.
+
+# CORRECTION AND CLAIM TRACEABILITY
+# correction_revocation_index: /api/corrections-index.json
+# claim_registry: /api/claim-registry.json
 
 # RECEIPT AND STATUS
 # Receipt confirms intake acceptance only.
