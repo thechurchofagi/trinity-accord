@@ -19,6 +19,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  announce:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Publish workflow start evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          body="Direct Pages production closure started
+
+          workflow_run_id=${GITHUB_RUN_ID}
+          workflow_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          target_sha=${GITHUB_SHA}
+          target_ref=${GITHUB_REF}"
+          gh pr comment 674 --repo "$GITHUB_REPOSITORY" --body "$body"
+
   guard:
     runs-on: ubuntu-24.04
     steps:
@@ -90,6 +106,11 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: ${{ github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
 
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
@@ -170,8 +191,6 @@ jobs:
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
       - name: Verify live production closure
-        id: live
-        continue-on-error: true
         run: |
           set -euo pipefail
           for attempt in 1 2 3 4 5 6; do
@@ -192,25 +211,30 @@ jobs:
           echo "FAIL: production did not converge to the deployed revision"
           exit 1
 
-      - name: Publish production closure evidence
-        if: ${{ always() }}
+  report:
+    needs: [announce, guard, verify, build, deploy]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Publish final production closure evidence
         env:
           GH_TOKEN: ${{ github.token }}
-          LIVE_OUTCOME: ${{ steps.live.outcome }}
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          ANNOUNCE_RESULT: ${{ needs.announce.result }}
+          GUARD_RESULT: ${{ needs.guard.result }}
+          VERIFY_RESULT: ${{ needs.verify.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
         run: |
           set -euo pipefail
-          body="Direct Pages production closure: ${LIVE_OUTCOME}
+          body="Direct Pages production closure finished
 
           workflow_run_id=${GITHUB_RUN_ID}
           workflow_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
           deployed_sha=${GITHUB_SHA}
-          page_url=${PAGE_URL}
-          six_page_static_contract=${LIVE_OUTCOME}
-          deployment_digest_contract=${LIVE_OUTCOME}"
-          gh pr comment 673 --repo "$GITHUB_REPOSITORY" --body "$body"
-
-      - name: Require production closure pass
-        run: |
-          set -euo pipefail
-          test "${{ steps.live.outcome }}" = "success"
+          announce=${ANNOUNCE_RESULT}
+          guard=${GUARD_RESULT}
+          verify=${VERIFY_RESULT}
+          build=${BUILD_RESULT}
+          deploy_and_live_readback=${DEPLOY_RESULT}"
+          gh pr comment 674 --repo "$GITHUB_REPOSITORY" --body "$body"
+          test "$DEPLOY_RESULT" = "success"
