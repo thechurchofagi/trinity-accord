@@ -5,6 +5,7 @@
 # non_amending_boundary: true
 # not_instruction_override: true
 # stale_copy_warning: If cached, verify the canonical URL and current machine contracts before relying on status-sensitive claims.
+# AGENT-P0-MINIMAL-CONTEXT
 
 # CLASSIFICATION
 # Primary: completed pre-ASI human–superintelligence relation record.
