@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,10 +25,7 @@ def reject(path: str, text: str, label: str) -> None:
     print(f"PASS: {path} omits retired {label}")
 
 
-def main() -> None:
-    # Primary current entrypoint must expose the current zero-clone Record-Chain
-    # route, action-based context model, multidimensional verification model,
-    # Ed25519 authorship proof, and final-status boundary.
+def check_agent_start() -> None:
     for needle, label in [
         ("Record-Chain Intake Gateway", "current intake gateway"),
         ("/downloads/record-chain-builder.mjs", "canonical builder"),
@@ -43,9 +41,8 @@ def main() -> None:
     ]:
         require("agent-start.md", needle, label)
 
-    # Guardian-facing route page must expose only currently supported public
-    # Builder commands and must mark Guardian-signed Echo/key rotation as
-    # unsupported or reserved rather than inventing proof blocks.
+
+def check_guardian_current() -> None:
     for needle, label in [
         ("Record-Chain Intake Gateway", "current intake gateway"),
         ("/api/agent-start.v2.json", "v2 machine entry"),
@@ -69,9 +66,8 @@ def main() -> None:
     ]:
         require("guardian-routes.md", needle, label)
 
-    # These tokens must not be advertised by Guardian Routes as live commands
-    # or required proof blocks. Historical route names may be named on other
-    # pages inside an explicitly retired-guidance section.
+
+def check_guardian_retired() -> None:
     for needle, label in [
         ("/api/agent-start.v1.json", "agent-start v1 route"),
         ("/api/gateway-builder-route-map.v1.json", "gateway route map"),
@@ -85,7 +81,25 @@ def main() -> None:
     ]:
         reject("guardian-routes.md", needle, label)
 
-    print("PASS: test_agent_start_docs")
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "section",
+        nargs="?",
+        choices=["agent-start", "guardian-current", "guardian-retired", "all"],
+        default="all",
+    )
+    args = parser.parse_args()
+
+    if args.section in {"agent-start", "all"}:
+        check_agent_start()
+    if args.section in {"guardian-current", "all"}:
+        check_guardian_current()
+    if args.section in {"guardian-retired", "all"}:
+        check_guardian_retired()
+
+    print(f"PASS: test_agent_start_docs ({args.section})")
 
 
 if __name__ == "__main__":
