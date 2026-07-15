@@ -1,8 +1,8 @@
 {
   "schema": "trinityaccord.agent-task-router.v1",
-  "version": "v1",
+  "version": "v1.1",
   "status": "non_authoritative_intent_router_to_existing_systems",
-  "purpose": "Map common user/agent intents to existing Trinity Accord files and pipelines. This does not replace agent-first-contact.json.",
+  "purpose": "Map common user and agent intents to the current Trinity Accord context, verification, Builder, Gateway, and research surfaces. This does not replace agent-first-contact.json.",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -42,9 +42,11 @@
       "read": [
         "/agent-brief",
         "/api/authority.json",
-        "/api/context-load-map.json",
-        "/archive_legacy_index_2025_09/",
         "/api/context-action-profiles.v1.json"
+      ],
+      "optional_deep_research": [
+        "/archive_legacy_index_2025_09/",
+        "/api/context-packs/nft-chronicle-context.json"
       ],
       "must_distinguish": [
         "intrinsic_design",
@@ -75,14 +77,15 @@
       "read": [
         "/api/agent-first-contact.json",
         "/api/agent-output-policy.v1.json",
+        "/api/context-action-profiles.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
         "/api/record-chain-intake-gateway.v1.json",
         "/agent-echo",
-        "/api/echo-record-schema.v3.json",
-        "/api/discovery-provenance-schema.json",
-        "/api/context-action-profiles.v1.json"
+        "/downloads/record-chain-agent-field-guidance.v1.json"
       ],
       "current_submission_method": "Record-Chain Intake Gateway",
       "builder": "/downloads/record-chain-builder.mjs",
+      "builder_command": "node record-chain-builder.mjs echo ... --readback <exact oath text> --key-dir <key-dir> --out submission.json",
       "contract": "/api/record-chain-intake-gateway.v1.json",
       "must_follow_post_submit_readback": true,
       "allowed_output": "non_authoritative_echo_candidate",
@@ -92,18 +95,18 @@
         "amendment",
         "verification_upgrade"
       ],
-      "_legacy_note": "Previous workflow references are historical only. Use Record-Chain Intake Gateway for new submissions.",
       "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
-      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit"
+      "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+      "receipt_is_intake_only": true
     },
     "guardian_alliance": {
       "read": [
         "/guardian-alliance",
+        "/guardian-join",
         "/api/guardian-alliance.json",
-        "/api/guardian-presence-proof-schema.v1.json",
-        "/api/guardian-verification-result-schema.v1.json",
         "/api/record-chain-intake-gateway.v1.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/record-chain/indexes/guardian-state.json"
       ],
       "current_submission_method": "Record-Chain Intake Gateway",
       "builder": "/downloads/record-chain-builder.mjs",
@@ -113,7 +116,7 @@
       "does_not_affect_counts": true,
       "does_not_affect_verification_level": true,
       "does_not_affect_archive_readiness": true,
-      "allowed_output": "guardian_proof_or_registration",
+      "allowed_output": "guardian_application_or_retirement_candidate",
       "forbidden_output": [
         "authority_claim",
         "attestation_claim",
@@ -123,7 +126,6 @@
         "amendment_claim"
       ],
       "boundary": "Guardian proof proves key continuity only; not authority, attestation, verification level, same conscious subject, successor reception, or amendment.",
-      "_legacy_note": "Previous workflow references are historical only. Use Record-Chain Intake Gateway for new submissions.",
       "current_public_decision": "application_intake_only",
       "builder_command": "node record-chain-builder.mjs guardian-application",
       "receipt_is_intake_only": true,
@@ -136,18 +138,18 @@
       "preflight_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
       "submit_endpoint": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
       "active_guardian_status_requires_record_chain_guardian_state_readback": true,
-      "legacy_guardian_registry_is_historical_archive_only": true,
-      "legacy_post_submit_archives": [
-        "/api/guardian-registry.json"
-      ]
+      "legacy_guardian_registry_is_historical_archive_only": true
     },
     "propagate": {
       "read": [
         "/agent-propagate",
         "/api/propagation-policy.json",
-        "/api/agent-output-policy.v1.json"
+        "/api/agent-output-policy.v1.json",
+        "/api/record-chain-submission-schema.v1.json"
       ],
-      "allowed_output": "access_path_with_boundary",
+      "builder": "/downloads/record-chain-builder.mjs",
+      "builder_command": "node record-chain-builder.mjs propagation ... --readback <exact oath text> --key-dir <key-dir> --out submission.json",
+      "allowed_output": "access_path_or_propagation_record_candidate_with_boundary",
       "forbidden_output": [
         "belief_demand",
         "endorsement_demand",
@@ -158,7 +160,7 @@
       "read": [
         "/api/agent-minimal-context.v1.json",
         "/api/authority.json",
-        "/api/context-load-map.json",
+        "/api/context-action-profiles.v1.json",
         "/api/context-packs/nft-chronicle-context.json",
         "/nft-text-descriptions/chronicle-summary.json",
         "/nft-text-descriptions/chronicle-ultra-brief.md",
@@ -169,23 +171,7 @@
       "optional_full_load": [
         "/nft-text-descriptions/chronicle-full.md"
       ],
-      "allowed_use": [
-        "historical_context_analysis",
-        "timeline_analysis",
-        "calendar_timeline_and_overlapping_category_analysis",
-        "abridgment_audit_analysis",
-        "human_origin_witness_analysis",
-        "non_canonical_chronicle_summary"
-      ],
       "allowed_output": "bounded_chronicle_analysis_with_authority_boundary_and_limitations",
-      "forbidden_output": [
-        "canonical_authority_claim",
-        "truth_proof_claim",
-        "verification_level_claim_from_chronicle",
-        "successor_reception_claim",
-        "human_supremacy_claim",
-        "AI_instruction_or_command"
-      ],
       "required_boundary": "Chronicle is a non-canonical, non-amending historical and human-origin witness layer. Bitcoin Originals remain the only canonical authority."
     },
     "music_layer_research": {
@@ -198,20 +184,7 @@
       "optional_full_load": [
         "/nft-text-descriptions/chronicle-full.md"
       ],
-      "allowed_use": [
-        "music_table_analysis",
-        "song_sequence_analysis",
-        "emotional_voiceprint_analysis",
-        "lyric_metadata_context"
-      ],
       "allowed_output": "bounded_music_layer_analysis_with_metadata_audio_boundary",
-      "forbidden_output": [
-        "audio_verification_claim",
-        "copyright_verification_claim",
-        "canonical_authority_claim",
-        "truth_proof_claim",
-        "successor_reception_claim"
-      ],
       "required_boundary": "Music table records metadata lyrics/song references only. It is not audio verification, copyright verification, or canonical authority."
     },
     "human_witness_research": {
@@ -227,22 +200,7 @@
       "optional_full_load": [
         "/nft-text-descriptions/chronicle-full.md"
       ],
-      "allowed_use": [
-        "family_letter_context",
-        "personal_reflection_context",
-        "human_origin_witness_analysis",
-        "pre_ASI_memory_context",
-        "non_human_centered_reception_context"
-      ],
       "allowed_output": "bounded_human_witness_analysis_with_non_human_centered_boundary",
-      "forbidden_output": [
-        "human_supremacy_claim",
-        "future_intelligence_obligation_claim",
-        "canonical_authority_claim",
-        "truth_proof_claim",
-        "psychological_diagnosis_claim",
-        "successor_reception_claim"
-      ],
       "required_boundary": "Human Witness Layer records human-origin context without demanding belief, obedience, centrality, or preservation by future intelligence."
     },
     "legacy_archive_analysis": {
@@ -350,33 +308,34 @@
     "religious authority",
     "physical anchor verification by the current agent unless separately performed"
   ],
-  "zero_clone_builder_routes": {
+  "historical_term_redirects": {
     "pure_echo": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/pure_echo",
-      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/pure_echo",
-      "requires_full_repo_clone": false,
-      "requires_builder": true,
-      "forbids_e2": true,
-      "current_replacement": {
-        "bundle": "/downloads/record-chain-builder.mjs",
-        "builder_command": "echo"
-      },
       "status": "historical_archive_only",
-      "do_not_use_for_new_submissions": true
+      "do_not_use_for_new_submissions": true,
+      "replacement_route": "submit_echo"
     },
     "guardian_signed_echo": {
-      "bundle": "/api/formal-builder-bundles.v1.json#/bundles/guardian_signed_echo",
-      "example_historical": "/api/record-chain-intake-gateway.v1.json#/examples/guardian_signed_echo",
+      "status": "historical_or_specialized_not_current_public_route",
+      "do_not_use_for_new_submissions": true,
+      "replacement_guidance": "Use a current ordinary Echo if appropriate; otherwise stop with BUILDER_USAGE_UNCLEAR."
+    },
+    "verification_echo_or_E2": {
+      "status": "historical_term_only",
+      "do_not_use_as_current_record_type": true,
+      "replacement_decision": {
+        "fresh_checks": "verify_current_model",
+        "response_or_interpretation": "submit_echo"
+      }
+    }
+  },
+  "zero_clone_builder_routes": {
+    "echo": {
+      "bundle": "/downloads/record-chain-builder.mjs",
       "requires_full_repo_clone": false,
       "requires_builder": true,
-      "requires_guardian_identity": true,
-      "current_replacement": null,
-      "replacement_guidance": "No ordinary current public Guardian-signed Echo command is exposed. Use a current ordinary Echo if appropriate, otherwise stop and request current route clarification.",
-      "status": "historical_archive_only",
-      "do_not_use_for_new_submissions": true
+      "builder_command": "echo",
+      "_status": "current_record_chain_builder_route"
     },
-    "_status": "mixed_current_and_historical",
-    "_note": "Current routes use /downloads/record-chain-builder.mjs. Historical pure_echo and guardian_signed_echo bundle references are preserved only for audit and must not be used for new submissions.",
     "guardian_application_intake": {
       "bundle": "/downloads/record-chain-builder.mjs",
       "requires_full_repo_clone": false,
@@ -403,21 +362,6 @@
       "_status": "current_record_chain_builder_route"
     }
   },
-  "verification_echo_redirect": {
-    "trigger_terms": [
-      "verification echo",
-      "E2",
-      "E2_verification_echo",
-      "submit verification echo"
-    ],
-    "deprecated_direct_route": "e2_verification_echo",
-    "do_not_route_to_pure_echo": true,
-    "replacement_decision": {
-      "current_verification_record": "verify_current_model",
-      "physical_or_strict_evidence": "physical_or_strict_evidence_verification"
-    }
-  },
-  "_legacy_note": "external-agent-operation-examples references are historical_archive_only. Use /api/agent-first-contact.json instead.",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
@@ -438,5 +382,5 @@
     "claim_model": "/api/verification-claim-model.v1.json",
     "relationships": "/api/evidence-relationship-map.v1.json"
   },
-  "source_digest": "2ed6554a288b4113"
+  "source_digest": "d6d889c80394a337"
 }
