@@ -1,0 +1,52 @@
+name: Pages Deploy PR Bridge
+
+on:
+  pull_request_target:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "deploy-recovery-trigger.md"
+
+permissions:
+  actions: write
+  contents: read
+  issues: write
+
+jobs:
+  dispatch-pages:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == github.repository_owner &&
+      startsWith(github.event.pull_request.head.ref, 'ops/pages-deploy-dispatch-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Resolve current main and dispatch Deploy Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+
+          target_sha="$(gh api "repos/${GITHUB_REPOSITORY}/commits/main" --jq .sha)"
+          started="Pages deploy bridge accepted this owner-controlled same-repository trigger.
+
+          bridge_run_id=${GITHUB_RUN_ID}
+          bridge_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          deployment_target_sha=${target_sha}"
+          gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$started"
+
+          gh workflow run deploy-pages.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f checkout_ref="$target_sha"
+
+          dispatched="Deploy Pages dispatched for exact main revision.
+
+          deployment_target_sha=${target_sha}
+          observer=.github/workflows/verify-pages-production.yml"
+          gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$dispatched"
