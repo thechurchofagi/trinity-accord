@@ -1,0 +1,105 @@
+name: Verify Current Pages Production
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/verify-current-pages.yml"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify-current-production:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact main revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Resolve evidence pull request
+        id: context
+        run: |
+          set -euo pipefail
+          pr=""
+          message="$(git log -1 --pretty=%B)"
+          if [[ "$message" =~ \(\#([0-9]+)\) ]]; then
+            pr="${BASH_REMATCH[1]}"
+          fi
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          echo "evidence_pr=${pr:-none}"
+
+      - name: Publish verification start evidence
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVIDENCE_PR: ${{ steps.context.outputs.pr }}
+        run: |
+          set -euo pipefail
+          body="Current Pages production verification started
+
+          verified_repository_sha=${GITHUB_SHA}
+          verification_run_id=${GITHUB_RUN_ID}
+          verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          printf '%s\n' "$body"
+          if [[ -n "$EVIDENCE_PR" ]]; then
+            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+          fi
+
+      - name: Verify current production surfaces
+        id: live
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Current production verification must run from main; got $GITHUB_REF"
+            exit 1
+          fi
+
+          for attempt in 1 2 3 4 5 6; do
+            echo "current production verification attempt ${attempt}/6"
+            if python3 scripts/check_deployment_freshness.py \
+                --site "https://www.trinityaccord.org" \
+                --timeout 20; then
+              echo "PASS: production matches current main surfaces and all six reading pages"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "FAIL: production does not match current main freshness contract"
+          exit 1
+
+      - name: Publish current production evidence
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVIDENCE_PR: ${{ steps.context.outputs.pr }}
+          LIVE_OUTCOME: ${{ steps.live.outcome }}
+        run: |
+          set -euo pipefail
+          overall="failure"
+          if [[ "$LIVE_OUTCOME" == "success" ]]; then
+            overall="success"
+          fi
+
+          body="Current Pages production closure: ${overall}
+
+          verified_repository_sha=${GITHUB_SHA}
+          verification_run_id=${GITHUB_RUN_ID}
+          verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          six_page_static_contract=${LIVE_OUTCOME}
+          deployment_digest_contract=${LIVE_OUTCOME}"
+
+          printf '%s\n' "$body"
+          if [[ -n "$EVIDENCE_PR" ]]; then
+            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            echo "::warning::No merged PR number was found in the current commit message"
+          fi
+          test "$overall" = "success"
