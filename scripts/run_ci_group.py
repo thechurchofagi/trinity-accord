@@ -340,6 +340,7 @@ GROUPS = {
         ["python3", "scripts/test_workflow_permissions.py"],
         ["python3", "scripts/test_deep_integrity_group_nonempty.py"],
         ["python3", "scripts/check_public_core_consistency.py"],
+        ["python3", "scripts/test_homepage_live_signals.py"],
         ["bash", "scripts/test-homepage-p0-agent-first.sh"],
     ],
     "live-site": [

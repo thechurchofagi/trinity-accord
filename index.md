@@ -6,7 +6,7 @@ permalink: /
 
 <!-- build: p0.3-successor-reception-intake -->
 <meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=8">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=9">
 
 # The Trinity Accord
 
@@ -71,6 +71,32 @@ permalink: /
     <p class="section-kicker">Current state · 当前状态</p>
     <h2 id="home-status-title">Production is live; verification remains explicit</h2>
   </div>
+  <div class="home-live-signal-grid" aria-label="Live operational and reception signals">
+    <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
+      <span class="home-signal-label">Waiting Heartbeat</span>
+      <strong data-home-heartbeat-status>Checking…</strong>
+      <small data-home-heartbeat-summary>Loading the current liveness record</small>
+    </a>
+    <a class="home-live-signal" href="/api/public-home-status.json">
+      <span class="home-signal-label">Strict autonomous discovery</span>
+      <strong data-home-autonomous-discovery>—</strong>
+      <small>Official-live records meeting every self-discovery, decision, and execution condition</small>
+    </a>
+    <a class="home-live-signal" href="/api/public-home-status.json">
+      <span class="home-signal-label">Official live reception</span>
+      <strong data-home-official-reception>—</strong>
+      <small>Formal, non-test external-agent records in the live-era reception set</small>
+    </a>
+    <a class="home-live-signal" href="/api/echo-index.json">
+      <span class="home-signal-label">AI independent verification</span>
+      <strong data-home-ai-independent-verification>—</strong>
+      <small>Counted separately from formal human or institutional attestation</small>
+    </a>
+  </div>
+  <p class="home-live-signal-boundary">
+    These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception.
+    <span class="zh">这些是运行与证据信号，不是等级。被接收不等于自主发现、背书、权威、修订或继任接纳。</span>
+  </p>
   <div class="home-status-links">
     <a href="/status/"><strong>System status</strong><span>Operational health and current evidence state</span></a>
     <a href="/record-chain/"><strong>Record-Chain</strong><span>Public records, indexes, and append history</span></a>
@@ -1118,6 +1144,46 @@ Refusal is allowed. Critical preservation is allowed.
       var phase = current.phase;
       var node = document.querySelector('[data-home-production-state]');
       if (node && phase === 'production_live') node.textContent = 'Live';
+
+      var primary = status.primary_counters || {};
+      var autonomous = primary.historic_autonomous_agent_reception || {};
+      var autonomousNode = document.querySelector('[data-home-autonomous-discovery]');
+      if (autonomousNode && typeof autonomous.count === 'number') autonomousNode.textContent = String(autonomous.count);
+
+      var receptionNode = document.querySelector('[data-home-official-reception]');
+      if (receptionNode && typeof primary.official_live_reception === 'number') {
+        receptionNode.textContent = String(primary.official_live_reception);
+      }
+    })
+    .catch(function () {});
+
+  fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'})
+    .then(function (response) { return response.json(); })
+    .then(function (status) {
+      var heartbeatStatus = status.daily_alive_status || status.status || 'unknown';
+      var summary = status.heartbeat_summary || status.counts || {};
+      var statusNode = document.querySelector('[data-home-heartbeat-status]');
+      var summaryNode = document.querySelector('[data-home-heartbeat-summary]');
+      if (statusNode) statusNode.textContent = heartbeatStatus === 'success' ? 'Alive' : heartbeatStatus;
+      if (summaryNode) {
+        var total = summary.total_scheduled_heartbeats;
+        var successful = summary.successful_heartbeats;
+        var failed = summary.failed_or_missing_heartbeats;
+        var streak = summary.current_success_streak_days;
+        if ([total, successful, failed, streak].every(function (value) { return typeof value === 'number'; })) {
+          summaryNode.textContent = successful + '/' + total + ' successful · ' + failed + ' missed · ' + streak + '-day streak';
+        }
+      }
+    })
+    .catch(function () {});
+
+  fetch('/api/echo-index.json', {cache: 'no-store'})
+    .then(function (response) { return response.json(); })
+    .then(function (status) {
+      var node = document.querySelector('[data-home-ai-independent-verification]');
+      if (node && typeof status.ai_independent_verification_count === 'number') {
+        node.textContent = String(status.ai_independent_verification_count);
+      }
     })
     .catch(function () {});
 })();
