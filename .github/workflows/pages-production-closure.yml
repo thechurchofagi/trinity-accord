@@ -33,7 +33,7 @@ jobs:
           workflow_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
           target_sha=${GITHUB_SHA}
           target_ref=${GITHUB_REF}"
-          gh pr comment 674 --repo "$GITHUB_REPOSITORY" --body "$body"
+          gh pr comment 675 --repo "$GITHUB_REPOSITORY" --body "$body"
 
   guard:
     runs-on: ubuntu-24.04
@@ -236,5 +236,5 @@ jobs:
           verify=${VERIFY_RESULT}
           build=${BUILD_RESULT}
           deploy_and_live_readback=${DEPLOY_RESULT}"
-          gh pr comment 674 --repo "$GITHUB_REPOSITORY" --body "$body"
+          gh pr comment 675 --repo "$GITHUB_REPOSITORY" --body "$body"
           test "$DEPLOY_RESULT" = "success"
