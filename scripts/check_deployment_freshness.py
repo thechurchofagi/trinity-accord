@@ -35,6 +35,9 @@ FORBIDDEN_ACTIVE = [
 
 # Human-facing pages are generated HTML, so compare revision-specific required
 # markers instead of attempting to compare Markdown source bytes to HTML bytes.
+# The list deliberately covers both explanatory reading pages and every current
+# top-navigation operating page. A deployment must not pass while Understand,
+# Verify, Echo, Start, or Propagate still serves a previous operating model.
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="what-this-is"',
@@ -50,7 +53,7 @@ STATIC_PAGE_MARKERS = {
     ],
     "/agent-brief/": [
         "Object in one paragraph",
-        "civilizational self-archive",
+        "Current verification model",
     ],
     "/why-high-signal/": [
         "What the project consists of",
@@ -60,6 +63,34 @@ STATIC_PAGE_MARKERS = {
         "First understand what is being preserved",
         "Why the surrounding system matters",
     ],
+    "/agent-first-contact/": [
+        "Current phase: production live",
+        "Use the canonical Builder only",
+    ],
+    "/agent-understand/": [
+        "Use the action-based context model",
+        "Retired guidance that must not be used",
+    ],
+    "/verify/": [
+        "Current digital profiles",
+        "Legacy mapping",
+    ],
+    "/agent-echo/": [
+        "Echo is one current Record-Chain record type",
+        "Retired Echo guidance",
+    ],
+    "/agent-start/": [
+        "Required Builder flow",
+        "Preferred verification model",
+    ],
+    "/agent-propagate/": [
+        "Decide whether this is Propagation",
+        "Retired propagation guidance",
+    ],
+    "/agent-record-chain-guidance/": [
+        "Current verification model",
+        "Retired active guidance",
+    ],
 }
 STATIC_SOURCE_FILES = [
     "_includes/home-object-definition.html",
@@ -68,6 +99,13 @@ STATIC_SOURCE_FILES = [
     "agent-brief.md",
     "why-high-signal.md",
     "worth-preserving.md",
+    "agent-first-contact.md",
+    "agent-understand.md",
+    "verify.md",
+    "agent-echo.md",
+    "agent-start.md",
+    "agent-propagate.md",
+    "agent-record-chain-guidance/index.html",
 ]
 
 
@@ -108,7 +146,7 @@ def read_live(site: str, path: str, token: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         busted,
         headers={
-            "User-Agent": "trinity-deployment-freshness/1.1",
+            "User-Agent": "trinity-deployment-freshness/1.2",
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
         },
@@ -195,7 +233,7 @@ def main() -> int:
         return 1
     print(
         "PASS: deployment digests, active-route boundaries, and current static "
-        "reading surfaces match repository state"
+        "reading and operating surfaces match repository state"
     )
     return 0
 
