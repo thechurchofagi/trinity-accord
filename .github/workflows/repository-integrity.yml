@@ -27,6 +27,9 @@ jobs:
           cache: "pip"
           cache-dependency-path: requirements-ci.txt
 
+      - name: Diagnose live production freshness
+        run: python3 scripts/check_deployment_freshness.py --site "https://www.trinityaccord.org" --timeout 20
+
       - name: Verify Builder receipt boundary fields are synchronized
         run: python3 scripts/check_builder_receipt_boundary_sync.py
 
