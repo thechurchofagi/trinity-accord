@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Contract test for centralized homepage status synchronization.
 
-This prevents the old scattered-update architecture from returning and keeps
-read-only historical audits outside the public-status trigger graph.
+This prevents the old scattered-update architecture from returning, keeps
+read-only historical audits outside the public-status trigger graph, and
+ensures ordinary source-page pushes cannot be mistaken for an already-fresh
+production deployment merely because generated status data is unchanged.
 """
 
 from __future__ import annotations
@@ -102,6 +104,7 @@ def main() -> int:
         "home: sync public homepage status",
         'gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main',
         "scripts/check_homepage_live_freshness.py",
+        '"_includes/**"',
     ]:
         require(marker in home, f"homepage sync workflow missing marker: {marker}")
 
@@ -132,21 +135,36 @@ def main() -> int:
             f"homepage sync must not listen to read-only historical workflow: {retired_name}",
         )
 
-    # Deploy conditions must not be weakened. Generated changes must be
-    # part of the actual dispatch condition, not merely mentioned in logging.
+    # Deploy conditions must not be weakened. Generated changes, ordinary source
+    # pushes, manual force deploys, and failed freshness probes must all be part
+    # of the actual dispatch condition, not merely mentioned in logging.
+    dispatch_line = next(
+        (line.strip() for line in home.splitlines() if line.strip().startswith("if: ${{") and "deploy_dispatch" not in line),
+        "",
+    )
     for marker in [
-        "if: ${{ needs.sync.outputs.changed == 'true' ||",
+        "github.event_name == 'push'",
         "needs.sync.outputs.changed == 'true'",
         "github.event.inputs.force_deploy == 'true'",
         "steps.live_pre.outcome == 'failure'",
     ]:
         require(marker in home, f"homepage sync deploy condition missing marker: {marker}")
 
+    require(
+        "if: ${{ github.event_name == 'push' || needs.sync.outputs.changed == 'true' ||" in home,
+        "homepage sync must dispatch Pages for every covered source push",
+    )
+    require(
+        "github.event_name != 'push'" in home,
+        "source pushes must not be short-circuited by a generated-status-only live precheck",
+    )
+
     # Deploy reason logging markers (observability, not behavior change).
     for marker in [
         "deploy_reason=",
         "generated_files_changed",
         "manual_force_deploy",
+        "source_push",
         "live_freshness_failed",
     ]:
         require(marker in home, f"homepage sync deploy reason logging missing marker: {marker}")
