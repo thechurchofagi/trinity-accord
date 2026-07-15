@@ -208,6 +208,13 @@
   color: #aeb5c8 !important;
 }
 
+.home-era-note {
+  margin-top: 1rem !important;
+  color: #d8c77f !important;
+  font-size: 0.9rem !important;
+  line-height: 1.65 !important;
+}
+
 .home-primary-actions {
   display: flex;
   flex-wrap: wrap;
@@ -307,6 +314,33 @@
   border-left: 3px solid var(--gold, #c9a84c);
   border-radius: 0 18px 18px 0;
   background: linear-gradient(90deg, rgba(201, 168, 76, 0.08), transparent);
+}
+
+.home-formation-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.home-formation-links a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.04);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.home-formation-boundary {
+  margin: 1rem 0 0 !important;
+  color: #8f98ae !important;
+  font-size: 0.78rem !important;
+  line-height: 1.6 !important;
 }
 
 .home-task-grid,
@@ -535,6 +569,7 @@
     font-size: clamp(1.72rem, 7.7vw, 2.05rem) !important;
     line-height: 1.16 !important;
     letter-spacing: -0.025em;
+    text-wrap: balance;
   }
 
   .home-lede,
@@ -558,6 +593,7 @@
     font-size: 0.83rem;
     line-height: 1.25;
     text-align: center;
+    text-wrap: balance;
   }
 
   .home-action-primary {
@@ -569,7 +605,10 @@
   }
 
   .home-proof-strip a {
+    align-items: center;
+    justify-content: center;
     gap: 0.05rem;
+    min-height: 78px;
     padding: 0.75rem 0.8rem;
     border-right: 0;
     border-bottom: 0;
@@ -585,10 +624,14 @@
 
   .home-proof-strip strong {
     font-size: 1.35rem;
+    line-height: 1.05;
+    text-align: center;
   }
 
   .home-proof-strip span {
     font-size: 0.72rem;
+    line-height: 1.35;
+    text-align: center;
   }
 
   .home-overview,
@@ -610,6 +653,7 @@
     margin-top: 0 !important;
     font-size: 1.35rem !important;
     line-height: 1.3 !important;
+    text-wrap: balance;
   }
 
   .home-layer-grid,
@@ -646,6 +690,7 @@
   .home-task-grid strong,
   .home-status-links strong {
     font-size: 0.94rem;
+    line-height: 1.3;
   }
 
   .home-live-signal-grid,
@@ -660,19 +705,53 @@
   }
 
   .home-signal-label {
+    display: flex;
+    min-height: 2.7em;
+    align-items: flex-start;
     font-size: 0.65rem;
     letter-spacing: 0.045em;
     line-height: 1.35;
   }
 
   .home-live-signal strong {
-    margin-bottom: 0.4rem;
+    margin: 0.5rem 0 0.4rem;
     font-size: 1.6rem;
+    line-height: 1.05;
   }
 
   .home-live-signal small {
+    margin-top: auto;
     font-size: 0.68rem;
     line-height: 1.4;
+  }
+
+  .home-task-grid a,
+  .home-status-links a {
+    min-height: 96px;
+    justify-content: center;
+  }
+
+  .home-formation-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .home-formation-links a {
+    min-height: 48px;
+    justify-content: center;
+    padding: 0.55rem 0.65rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .home-formation-boundary {
+    font-size: 0.72rem !important;
+    line-height: 1.5 !important;
   }
 
   .home-live-signal-boundary {
@@ -705,7 +784,8 @@
 @media (max-width: 340px) {
   .home-primary-actions,
   .home-live-signal-grid,
-  .home-status-links {
+  .home-status-links,
+  .home-formation-links {
     grid-template-columns: 1fr;
   }
 
