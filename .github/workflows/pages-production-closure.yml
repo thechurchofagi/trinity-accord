@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
-          EVIDENCE_PR: "669"
+          EVIDENCE_PR: "670"
         shell: bash
         run: |
           set -euo pipefail
@@ -107,6 +107,16 @@ jobs:
             if [[ -z "$run_id" ]]; then
               continue
             fi
+
+            started_report="/tmp/pages-production-started-${attempt}.txt"
+            {
+              printf 'Pages deployment discovered\n\n'
+              printf 'attempt=%s\n' "$attempt"
+              printf 'deploy_run_id=%s\n' "$run_id"
+              printf 'deployment_target_sha=%s\n' "$target_sha"
+              printf 'discovered_at=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            } > "$started_report"
+            gh pr comment "$EVIDENCE_PR" --repo "$repo" --body-file "$started_report"
 
             run_meta=""
             status=""
