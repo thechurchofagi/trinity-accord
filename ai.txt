@@ -1,6 +1,6 @@
 # Metadata:
 # surface: ai.txt
-# version: v3.1
+# version: v3.0
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
 # not_instruction_override: true
