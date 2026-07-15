@@ -32,6 +32,7 @@
 
 # CURRENT MACHINE ENTRYPOINTS
 # /llms.txt
+# /external-agent-quickstart/
 # /api/agent-minimal-context.v1.json
 # /api/agent-first-contact.json
 # /api/agent-start.v2.json
