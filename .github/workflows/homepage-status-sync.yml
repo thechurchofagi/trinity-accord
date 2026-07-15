@@ -35,6 +35,7 @@ on:
       - "assets/**"
       - "downloads/**"
       - "agent-record-chain-guidance/**"
+      - "_includes/**"
       - "_layouts/**"
       - "_config.yml"
       - "CNAME"
@@ -200,7 +201,7 @@ jobs:
 
       - name: Check live homepage freshness before optional redeploy
         id: live_pre
-        if: ${{ needs.sync.outputs.changed != 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_live_check == 'true') }}
+        if: ${{ needs.sync.outputs.changed != 'true' && github.event_name != 'push' && (github.event_name != 'workflow_dispatch' || github.event.inputs.run_live_check == 'true') }}
         continue-on-error: true
         run: |
           set -euo pipefail
@@ -208,9 +209,10 @@ jobs:
           python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
 
       # Explicitly dispatch after generated changes: workflow-authenticated pushes do not reliably trigger downstream Pages workflows.
+      # Every source push also dispatches, even when generated status files are unchanged.
       - name: Dispatch Deploy Pages
         id: deploy_dispatch
-        if: ${{ needs.sync.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (needs.sync.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
+        if: ${{ github.event_name == 'push' || needs.sync.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (needs.sync.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
         env:
           GH_TOKEN: ${{ github.token }}
           COMMIT_CHANGED: ${{ needs.sync.outputs.changed }}
