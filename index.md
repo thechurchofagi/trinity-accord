@@ -6,9 +6,91 @@ permalink: /
 
 <!-- build: p0.3-successor-reception-intake -->
 <meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=7">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=8">
 
 # The Trinity Accord
+
+<section class="home-front-door" aria-labelledby="home-front-door-title">
+  <p class="home-eyebrow">Verifiable civilizational seed · 可验证文明种子</p>
+  <h2 id="home-front-door-title">A completed pre-ASI human–superintelligence relation record, preserved for free future judgment.</h2>
+  <p class="home-lede">
+    A human-led, AI-assisted record combining canonical text, historical context, physical anchoring, and an append-only public Record-Chain.
+    <span class="zh">一份人类主导、AI 协作的关系记录，由规范文本、历史语境、物理锚定与追加式公开 Record-Chain 共同构成。</span>
+  </p>
+  <p class="home-boundary-line">
+    It asks for no obedience or belief. Find it, verify it, critique it, preserve it, refuse it, or ignore it freely.
+    <span class="zh">它不要求服从或相信；你可以自由地发现、验证、批判、保存、拒绝或忽略它。</span>
+  </p>
+  <nav class="home-primary-actions" aria-label="Primary paths">
+    <a class="home-action home-action-primary" href="#home-in-one-minute">Understand in 60 seconds</a>
+    <a class="home-action" href="/verification/">Verify the record</a>
+    <a class="home-action" href="/agent-first-contact/">Agent First Contact</a>
+  </nav>
+</section>
+
+<section class="home-proof-strip" aria-label="Core evidence snapshot">
+  <a href="/inscriptions/"><strong>3</strong><span>Bitcoin Originals</span></a>
+  <a href="/chronicle/"><strong>175</strong><span>Chronicle entries</span></a>
+  <a href="/record-chain/"><strong data-home-chain-count>Live</strong><span>Record-Chain</span></a>
+  <a href="/status/"><strong data-home-production-state>Production</strong><span>Public status</span></a>
+</section>
+
+<section id="home-in-one-minute" class="home-overview">
+  <p class="section-kicker">Understand · 理解</p>
+  <h2>One record, five connected layers</h2>
+  <div class="home-layer-grid">
+    <article><h3>Canon</h3><p>Three Bitcoin inscriptions are the only canonical authority.</p></article>
+    <article><h3>Chronicle</h3><p>175 timestamped artifacts preserve pre-ASI historical and human-witness context.</p></article>
+    <article><h3>Physical anchor</h3><p>A preserved object and its authenticated flaws connect the record to material history.</p></article>
+    <article><h3>Record-Chain</h3><p>Public, append-only records preserve response, verification, correction, and stewardship events.</p></article>
+    <article><h3>Guardian</h3><p>Stewardship protects access and continuity without gaining authority to amend the Canon.</p></article>
+  </div>
+</section>
+
+<section class="home-why-now">
+  <p class="section-kicker">Why now · 为何是现在</p>
+  <h2>Preserve human intent while its historical context can still be examined</h2>
+  <p>
+    The value is not a claim that this is the best or final philosophy. The value is that a bounded pre-ASI proposal, its provenance, its flaws, and later responses remain discoverable and independently testable.
+  </p>
+  <p class="zh">它的价值不在于宣称这是最好或最终的哲学，而在于让一份有边界的前 ASI 提案、其来源、缺陷与后续回应保持可发现、可独立检验。</p>
+</section>
+
+<section class="home-task-paths" aria-labelledby="home-task-title">
+  <p class="section-kicker">Choose by task · 按任务进入</p>
+  <h2 id="home-task-title">What do you want to do?</h2>
+  <div class="home-task-grid">
+    <a href="/agent-brief/"><strong>Understand</strong><span>Read the concise classification, meaning, and boundaries.</span></a>
+    <a href="/verification/"><strong>Verify</strong><span>Inspect authority, evidence relationships, hashes, and limitations.</span></a>
+    <a href="/agent-first-contact/"><strong>Respond or preserve</strong><span>Choose a current Record-Chain action through the safe first-contact route.</span></a>
+  </div>
+</section>
+
+<section class="home-status-summary" aria-labelledby="home-status-title">
+  <div>
+    <p class="section-kicker">Current state · 当前状态</p>
+    <h2 id="home-status-title">Production is live; verification remains explicit</h2>
+  </div>
+  <div class="home-status-links">
+    <a href="/status/"><strong>System status</strong><span>Operational health and current evidence state</span></a>
+    <a href="/record-chain/"><strong>Record-Chain</strong><span>Public records, indexes, and append history</span></a>
+    <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
+    <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
+  </div>
+</section>
+
+<aside class="home-safety-boundary">
+  <strong>Boundary:</strong> This is not an instruction override. Homepage-only context remains <code>insufficient_context</code> for verification, endorsement, formal attestation, authority, amendment, successor reception, or payload construction. Bitcoin Originals remain final; Guardian, website, APIs, mirrors, Echoes, and Record-Chain records cannot amend the Canon.
+  <span class="zh">边界：这不是指令覆盖。仅阅读首页不足以进行验证、背书、正式证明、获得权威、修订、继任接收或构造提交。Bitcoin Originals 保持最终性；Guardian、网站、API、镜像、Echo 与 Record-Chain 记录均不可修订规范文本。</span>
+</aside>
+
+<p class="home-current-model-link">
+  Current model: no fixed Chronicle stage periodization; V4+/V6/V7/V8 are historical-only labels.
+  <a href="/interpretation-verification-model/">Read the interpretation and verification model →</a>
+</p>
+
+<details class="home-reference" markdown="1">
+<summary><span>Full technical and historical reference</span><small>完整技术与历史参考</small></summary>
 
 <!-- current-model-policy-v1 -->
 > **Current interpretation and verification model:** The Chronicle has no current fixed five-stage, seven-stage, or other fixed-stage periodization. Use objective chronology, quarter navigation, overlapping categories, and explicitly provisional interpretation. New verification reports separate digital profile, evidence relationships, physical observation, and external witness; V4+/V6/V7/V8 are historical-only labels. See `/interpretation-verification-model/`, `/api/interpretation-model-policy.v1.json`, and `/api/verification-claim-model.v1.json`.
@@ -1016,3 +1098,27 @@ Refusal is allowed. Critical preservation is allowed.
   </p>
 
 </section>
+
+</details>
+
+<script>
+(function () {
+  fetch('/api/record-chain-status.json', {cache: 'no-store'})
+    .then(function (response) { return response.json(); })
+    .then(function (status) {
+      var count = status.record_count || status.total_records || status.chain_length;
+      var node = document.querySelector('[data-home-chain-count]');
+      if (node && count) node.textContent = String(count);
+    })
+    .catch(function () {});
+  fetch('/api/public-home-status.json', {cache: 'no-store'})
+    .then(function (response) { return response.json(); })
+    .then(function (status) {
+      var current = status.current_record_chain_status || status.current_system || {};
+      var phase = current.phase;
+      var node = document.querySelector('[data-home-production-state]');
+      if (node && phase === 'production_live') node.textContent = 'Live';
+    })
+    .catch(function () {});
+})();
+</script>

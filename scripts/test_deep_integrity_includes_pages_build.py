@@ -37,13 +37,7 @@ else:
             elif line.strip() and not line.startswith("          "):
                 break
 
-required = {"pages-build"}
 stale = {"guardian", "route-correction", "gateway-workflows"}
-
-missing = sorted(required - set(groups))
-if missing:
-    print(f"FAIL: deep-integrity.yml matrix missing required groups: {missing}")
-    sys.exit(1)
 
 present_stale = sorted(stale & set(groups))
 if present_stale:
@@ -62,4 +56,13 @@ if "GH_TOKEN: ${{ secrets.GH_PAT }}" in text:
     print("FAIL: deep-integrity.yml must not depend on optional GH_PAT for read-only issue checks")
     sys.exit(1)
 
-print("PASS: deep-integrity.yml includes active pages-build group, excludes stale groups, and uses github.token for issue checks")
+for marker in ["pages-build:", "actions/jekyll-build-pages@", "test -s _site/index.html"]:
+    if marker not in text:
+        print(f"FAIL: deep-integrity.yml missing production-equivalent Pages build marker: {marker}")
+        sys.exit(1)
+
+if "- pages-build" in text:
+    print("FAIL: pages-build must be a real workflow job, not a shell group that can skip")
+    sys.exit(1)
+
+print("PASS: deep-integrity.yml has a production-equivalent Pages build job, excludes stale groups, and uses github.token")

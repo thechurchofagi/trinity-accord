@@ -86,9 +86,10 @@ def main():
     require_contains(index, "reception", "status snapshot has reception")
     require_contains(index, "Physical anchor", "status snapshot mentions physical anchor")
     require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
-    require_contains(agent_brief, "MANDATORY CLAIM GATE RULE", "agent brief has mandatory Claim Gate rule")
-    require_contains(agent_brief, "Free-form protocol-level", "agent brief blocks free-form protocol claims")
-    require_contains(agent_brief, "submit only generated outputs", "agent brief requires generated outputs")
+    require_contains(agent_brief, "digital profile", "agent brief names the current digital verification dimension")
+    require_contains(agent_brief, "evidence relationships checked", "agent brief separates evidence relationships")
+    require_contains(agent_brief, "historical-only labels", "agent brief retires V4+/V6/V7/V8 for new work")
+    require_contains(agent_brief, "handwrite final submission JSON", "agent brief requires Builder-generated submissions")
 
     print("=== Ordering ===")
 
@@ -172,7 +173,7 @@ def main():
 
     llms = read("llms.txt")
     require_contains(llms, "completed pre-ASI", "llms.txt mentions P0.3 primary classification")
-    require_contains(llms, "Read the Canon", "llms.txt tells agents to read canon")
+    require_contains(llms, "/inscriptions", "llms.txt points agents to the canonical inscriptions")
 
     print("\n=== Summary ===")
     if errors:

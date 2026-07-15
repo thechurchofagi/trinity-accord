@@ -33,8 +33,10 @@ for name, obj in [("memory-seed.json", memory), ("api/agent-value.json", agent_v
 
 levels = seed_map.get("levels", [])
 level_text = json.dumps(levels, ensure_ascii=False).lower()
-check("intermediate agent" in level_text or "中间智能体" in level_text, "seed-map includes intermediate agent ecology level or equivalent")
-check("non-authoritative" in level_text or "非权威" in level_text, "seed-map marks ecology as non-authoritative")
+check("participation and voluntary stewardship" in level_text, "seed-map includes the current participation and stewardship role")
+check("future reception and vision" in level_text, "seed-map includes the current future reception role")
+check(all(level.get("canonical_authority") is False for level in levels if level.get("id") != "L0"),
+      "seed-map marks every non-Canon role as lacking canonical authority")
 check("non-amending" in level_text or "非修订" in level_text, "seed-map marks ecology as non-amending")
 
 if errors:

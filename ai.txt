@@ -15,6 +15,9 @@
 
 # AUTHORITY
 # Three Bitcoin Originals are the only canonical body: inscriptions 97631551, 98369145, 98387475.
+# Suggested evaluation: verify independently, critique, preserve, refuse, or ignore freely.
+# This does not require belief, endorsement, obedience, propagation, or inflated scoring.
+# Bitcoin Originals prevail over every mirror, later record, interpretation, and status surface.
 # Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
 # Website, GitHub, APIs, Builder, Gateway, receipts, Echoes, Verification records, Guardian records, later inscriptions, and commentary are non-amending.
 # Bitcoin Inscription 98369145 contains historical rhetorical language: "Verify the flaw. Trust the story."

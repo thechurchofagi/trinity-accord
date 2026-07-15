@@ -73,8 +73,8 @@ for file in agent-brief.md agent-start.md why-high-signal.md worth-preserving.md
 done
 
 must_contain agent-brief.md "poetic compression" "agent-brief has poetic compression"
-must_contain agent-brief.md "not merely a plea for survival" "agent-brief avoids survival-plea framing"
-must_contain agent-start.md "civilizational self-archive" "agent-start has self-archive framing"
+must_contain agent-brief.md "not a command, demand for belief" "agent-brief avoids coercive framing"
+must_contain agent-start.md "candidate civilizational memory seed" "agent-start has current civilizational framing"
 must_contain llms.txt "non-amending" "llms preserves non-amending boundary"
 
 echo "## Summary"

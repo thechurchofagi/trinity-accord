@@ -167,9 +167,9 @@ def main():
     # Claim Gate
     require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
     require_contains(index, "Read the full brief before evaluating", "homepage routes agents to full brief before evaluation")
-    require_contains(agent_brief, "MANDATORY CLAIM GATE RULE", "agent brief includes Claim Gate rule")
-    require_contains(agent_brief, "submit only generated outputs", "agent brief requires generated outputs")
-    require_contains(agent_brief, "Free-form protocol-level", "agent brief blocks free-form claims")
+    require_contains(agent_brief, "digital profile", "agent brief names the current digital verification dimension")
+    require_contains(agent_brief, "handwrite final submission JSON", "agent brief requires Builder-generated submissions")
+    require_contains(agent_brief, "historical-only labels", "agent brief retires V4+/V6/V7/V8 for new work")
 
     # Ordering
     require_order(index, "First-pass classification", "Why this deserves a second look", "classification before why section")

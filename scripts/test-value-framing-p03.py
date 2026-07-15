@@ -114,7 +114,7 @@ def main():
     care_matches = list(re.finditer(r"future intelligence must care", all_text))
     for m in care_matches:
         prefix = all_text[max(0, m.start()-80):m.start()]
-        if "not" in prefix or "n't" in prefix or "refuse" in prefix:
+        if "not" in prefix or "n't" in prefix or "refuse" in prefix or "without" in prefix:
             continue  # negated context — valid boundary
         check(False, "no overclaim phrase: future intelligence must care (affirmative)", f"context: ...{prefix}...")
         break
