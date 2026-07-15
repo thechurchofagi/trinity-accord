@@ -25,9 +25,16 @@ def main() -> int:
     for marker in (
         "Created across the 2024–2025 shift from conversational AI",
         "The form can be reproduced. The formation conditions cannot.",
-        "From March 2024 through June 2025",
-        "An August 2025 record preserved the website",
-        "original model states, human labor pattern, or dated sequence",
+        "From March 2024 to August 2025",
+        "prompt-by-prompt human labor",
+        "2024-03-16",
+        "2025-04-18",
+        "2025-05-17",
+        "2025-08-09",
+        "Chat-era creation",
+        "Limits recorded",
+        "Agentic turn",
+        "Formation sealed",
         "/chronicle/",
         "/archive_legacy_index_2025_09/",
     ):
@@ -45,8 +52,16 @@ def main() -> int:
     for forbidden in ("world's only", "first true human-ai", "one prompt can reproduce"):
         require(forbidden not in visible.lower(), f"formation window overclaims: {forbidden}")
 
-    for selector in (".home-era-note", ".home-formation-links", ".home-formation-boundary"):
+    for selector in (
+        ".home-era-note",
+        ".home-formation-intro",
+        ".home-formation-timeline",
+        ".home-formation-links",
+        ".home-formation-boundary",
+    ):
         require(selector in css, f"formation-window CSS is missing {selector}")
+
+    require("grid-template-columns: repeat(4, minmax(0, 1fr));" in css, "desktop evidence timeline is not four columns")
 
     print("PASS: homepage formation window is early, evidence-linked, and bounded")
     return 0
