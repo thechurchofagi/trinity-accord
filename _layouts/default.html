@@ -36,7 +36,7 @@
     "name": "The Trinity Accord",
     "alternateName": "三位一体协定",
     "url": "https://www.trinityaccord.org",
-    "description": "A completed pre-ASI human–superintelligence relation record: a bounded, non-commanding, human-origin memory artifact designed for future intelligence to discover, verify, critique, preserve, or ignore.",
+    "description": "A public, verifiable archive and completed pre-ASI human–superintelligence relation record whose fixed canonical core is three Bitcoin inscriptions, surrounded by non-amending context, evidence, verification, durability, access, and voluntary stewardship systems.",
     "inLanguage": ["en", "zh"],
     "about": {
       "@type": "Thing",
@@ -51,6 +51,11 @@
         "@type": "PropertyValue",
         "name": "primary_classification",
         "value": "completed pre-ASI human–superintelligence relation record"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "canonical_core",
+        "value": "three Bitcoin inscriptions only"
       },
       {
         "@type": "PropertyValue",
@@ -111,7 +116,14 @@
   </nav>
 
   <main id="main-content">
-    {{ content }}
+    {% if page.url == "/" %}
+      {% capture home_object_definition %}{% include home-object-definition.html %}{% endcapture %}
+      {% assign home_marker = '<section id="agent-priority-brief"' %}
+      {% capture home_replacement %}{{ home_object_definition }}{{ home_marker }}{% endcapture %}
+      {{ content | replace_first: home_marker, home_replacement }}
+    {% else %}
+      {{ content }}
+    {% endif %}
   </main>
 
   <footer>
