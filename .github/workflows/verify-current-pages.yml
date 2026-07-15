@@ -1,4 +1,5 @@
 name: Verify Current Pages Production
+# Bootstrap refresh: workflow already exists on main before this push.
 
 on:
   workflow_dispatch:
