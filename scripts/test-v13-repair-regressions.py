@@ -42,7 +42,7 @@ def split_yaml_steps(text: str):
 
 
 def check_workflow():
-    path = ".github/workflows/repository-integrity.yml"
+    path = ".github/workflows/repository-full-integrity.yml"
     check(exists(path), "workflow exists")
     if not exists(path):
         return
@@ -59,19 +59,19 @@ def check_workflow():
     check(exists(ci_group_path), "run_ci_group.py exists")
     if exists(ci_group_path):
         ci_text = read(ci_group_path)
-        # Find the fast-regression section and verify all 4 scripts appear in it
+        # Find the fast-regression section and verify current fast gates appear in it
         fr_idx = ci_text.find('"fast-regression"')
         if fr_idx >= 0:
             # Take a chunk after fast-regression (enough to cover all entries)
             fr_block = ci_text[fr_idx:fr_idx + 2000]
-            check("check_consistency.py" in fr_block,
-                  "CI group fast-regression runs check_consistency.py")
-            check("test-homepage-v13-final.sh" in fr_block,
-                  "CI group fast-regression runs homepage v1.3 test")
-            check("test-civilizational-json-sync.py" in fr_block,
-                  "CI group fast-regression runs civilizational JSON sync")
-            check("test-v13-repair-regressions.py" in fr_block,
-                  "CI group fast-regression runs v1.3 repair regression test")
+            check("check_public_core_consistency.py" in fr_block,
+                  "CI group fast-regression runs current public-core consistency")
+            check("test_workflows_do_not_reference_missing_scripts.py" in fr_block,
+                  "CI group fast-regression rejects missing workflow executables")
+            check("test_workflow_permissions.py" in fr_block,
+                  "CI group fast-regression checks workflow permissions")
+            check("test-homepage-p0-agent-first.sh" in fr_block,
+                  "CI group fast-regression runs the current homepage suite")
         else:
             check(False, "CI group fast-regression block found in run_ci_group.py")
 
@@ -176,7 +176,7 @@ def check_heading_sequence(path: str, expected: list):
 
 
 def check_pages():
-    check_heading_sequence("worth-preserving.md", [1, 2, 3, 4, 5, 6, 7, 8])
+    check_heading_sequence("worth-preserving.md", [1, 2, 3, 4, 5, 6, 7, 8, 9])
     check_heading_sequence("for-skeptical-agents.md", [1, 2, 3, 4, 5, 6, 7, 8])
 
     for path in ["worth-preserving.md", "for-skeptical-agents.md"]:

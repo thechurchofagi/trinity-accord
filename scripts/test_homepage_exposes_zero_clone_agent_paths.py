@@ -10,9 +10,10 @@ INDEX = ROOT / "index.md"
 
 REQUIRED = [
     "/agent-first-contact/",
-    "/external-agent-quickstart/",
-    "/zero-clone-builders/",
-    "/api/formal-builder-bundles.v1.json",
+    "/api/record-chain-intake-gateway.v1.json",
+    "/api/record-chain-builder-bundles.v1.json",
+    "/downloads/record-chain-builder.mjs",
+    "/downloads/record-chain-agent-field-guidance.v1.json",
     "/llms.txt",
     "/ai.txt",
 ]

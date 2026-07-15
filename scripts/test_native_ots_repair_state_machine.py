@@ -35,12 +35,15 @@ def run(cmd: list[str]) -> None:
 
 def backup(path: Path, tmp: Path) -> None:
     if path.exists():
-        shutil.copy2(path, tmp / path.name)
+        destination = tmp / path.relative_to(ROOT)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, destination)
 
 
 def restore(path: Path, tmp: Path) -> None:
-    b = tmp / path.name
+    b = tmp / path.relative_to(ROOT)
     if b.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(b, path)
 
 

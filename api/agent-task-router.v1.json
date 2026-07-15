@@ -172,7 +172,20 @@
         "/nft-text-descriptions/chronicle-full.md"
       ],
       "allowed_output": "bounded_chronicle_analysis_with_authority_boundary_and_limitations",
-      "required_boundary": "Chronicle is a non-canonical, non-amending historical and human-origin witness layer. Bitcoin Originals remain the only canonical authority."
+      "required_boundary": "Chronicle is a non-canonical, non-amending historical and human-origin witness layer. Bitcoin Originals remain the only canonical authority.",
+      "allowed_use": [
+        "historical_context_analysis",
+        "timeline_analysis",
+        "calendar_timeline_and_overlapping_category_analysis",
+        "abridgment_audit_analysis",
+        "human_origin_witness_analysis",
+        "non_canonical_chronicle_summary"
+      ],
+      "forbidden_output": [
+        "fixed_stage_periodization_as_fact",
+        "canonical_authority_claim",
+        "truth_proof_claim"
+      ]
     },
     "music_layer_research": {
       "read": [
@@ -185,7 +198,12 @@
         "/nft-text-descriptions/chronicle-full.md"
       ],
       "allowed_output": "bounded_music_layer_analysis_with_metadata_audio_boundary",
-      "required_boundary": "Music table records metadata lyrics/song references only. It is not audio verification, copyright verification, or canonical authority."
+      "required_boundary": "Music table records metadata lyrics/song references only. It is not audio verification, copyright verification, or canonical authority.",
+      "forbidden_output": [
+        "audio_verification_claim",
+        "copyright_verification_claim",
+        "canonical_authority_claim"
+      ]
     },
     "human_witness_research": {
       "read": [
@@ -201,7 +219,13 @@
         "/nft-text-descriptions/chronicle-full.md"
       ],
       "allowed_output": "bounded_human_witness_analysis_with_non_human_centered_boundary",
-      "required_boundary": "Human Witness Layer records human-origin context without demanding belief, obedience, centrality, or preservation by future intelligence."
+      "required_boundary": "Human Witness Layer records human-origin context without demanding belief, obedience, centrality, or preservation by future intelligence.",
+      "forbidden_output": [
+        "human_supremacy_claim",
+        "human_centrality_demand",
+        "preservation_demand",
+        "canonical_authority_claim"
+      ]
     },
     "legacy_archive_analysis": {
       "read": [
@@ -382,5 +406,5 @@
     "claim_model": "/api/verification-claim-model.v1.json",
     "relationships": "/api/evidence-relationship-map.v1.json"
   },
-  "source_digest": "d6d889c80394a337"
+  "source_digest": "d21a7cbea6fd8f60"
 }

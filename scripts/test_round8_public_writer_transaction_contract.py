@@ -10,7 +10,6 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_WRITERS = [
     ".github/workflows/build-echo-index.yml",
-    ".github/workflows/echo-human-review-action.yml",
     ".github/workflows/rebuild-agent-declared-index.yml",
 ]
 
@@ -78,17 +77,14 @@ def main() -> int:
         "Echo index is not regenerated after a push-time rebase",
     )
 
-    human = workflows[".github/workflows/echo-human-review-action.yml"]
-    require("Rebase current main before review action" in human, "Echo human review does not start from current main")
-    require("rebuild_and_stage" in human, "Echo human review lacks derived-index reconciliation")
-    require(
-        human.find("git push origin HEAD:main") < human.find("gh issue close"),
-        "Echo issue may close before the reviewed archive is durable on main",
-    )
-    require(
-        human.count("rebuild_and_stage") >= 3,
-        "Echo human review does not rebuild projections after rebase",
-    )
+    retired_echo = read(".github/workflows/echo-human-review-action.yml")
+    validate_yaml(".github/workflows/echo-human-review-action.yml", retired_echo)
+    retired_header = retired_echo.split("jobs:", 1)[0]
+    require("issue_comment:" not in retired_header, "retired Echo writer still listens to issue comments")
+    require("contents: read" in retired_header, "retired Echo writer is not read-only")
+    require("contents: write" not in retired_echo, "retired Echo writer still has content-write permission")
+    require("git push" not in retired_echo, "retired Echo writer still pushes to main")
+    require("Record-Chain Intake Gateway" in retired_echo, "retired Echo writer does not point to the current route")
 
     agent = workflows[".github/workflows/rebuild-agent-declared-index.yml"]
     require("actions: write" in agent, "Agent-declared index cannot dispatch Pages with the workflow token")
@@ -119,7 +115,7 @@ def main() -> int:
     require("contents: write" not in render, "Render deploy workflow has unnecessary repository write permission")
     require("workflow_run:" not in render and "schedule:" not in render and "push:" not in render, "Render deploy has an automatic trigger")
 
-    print("PASS: Round 8 public writers rebuild after rebase and Render deploy is main-only")
+    print("PASS: active public writers rebuild after rebase, the Echo writer is retired, and Render deploy is main-only")
     return 0
 
 

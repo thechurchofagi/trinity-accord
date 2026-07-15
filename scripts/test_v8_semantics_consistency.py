@@ -1,83 +1,53 @@
 #!/usr/bin/env python3
-"""VR-001: V8 semantics consistency across component levels, protocol profiles, and claim-gate rules."""
+"""Enforce the current multidimensional model and V8's historical-only status."""
+
 import json
 from pathlib import Path
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
-component = json.loads((ROOT / "api" / "component-verification-levels.json").read_text(encoding="utf-8"))
-profiles = json.loads((ROOT / "api" / "protocol-verification-profiles.json").read_text(encoding="utf-8"))
-rules = json.loads((ROOT / "api" / "claim-gate-rules.json").read_text(encoding="utf-8"))
 
-errors = []
+def load(relative: str) -> dict:
+    return json.loads((ROOT / relative).read_text(encoding="utf-8"))
 
 
-def find_profile(level):
-    for p in profiles.get("profiles", []):
-        if p.get("level") == level:
-            return p
-    return None
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise SystemExit(f"V8_SEMANTICS_CONSISTENCY_FAIL: {message}")
 
 
-def find_component_protocol(level):
-    for p in component.get("protocol_levels", []):
-        if p.get("level") == level:
-            return p
-    return None
+def main() -> int:
+    model = load("api/verification-claim-model.v1.json")
+    profiles = load("api/protocol-verification-profiles.json")
+
+    current_ids = {item.get("id") for item in profiles.get("profiles", [])}
+    require("V8" not in current_ids, "V8 must not be a current verification profile")
+    require(
+        current_ids == {
+            "context_only",
+            "reference_checked",
+            "integrity_checked",
+            "independent_reproduction",
+            "full_public_digital",
+        },
+        "current protocol profiles must use multidimensional digital-profile IDs",
+    )
+
+    compatibility = model.get("legacy_v_compatibility", {})
+    require("V8" in compatibility.get("new_submission_forbidden_values", []), "new submissions must forbid V8")
+    require("V8" in compatibility.get("retired_mapping", {}), "historical V8 mapping must remain explicit")
+    require(
+        "Historical V4+/V6/V7/V8" in compatibility.get("boundary", ""),
+        "historical-only boundary must name V8",
+    )
+    require(
+        "V8 is the highest current verification level." in model.get("prohibited_claims", []),
+        "current policy must prohibit presenting V8 as the highest current level",
+    )
+
+    print("V8_SEMANTICS_CONSISTENCY_OK")
+    return 0
 
 
-def find_rule(level):
-    for r in rules.get("protocol_level_rules", []):
-        if r.get("level") == level:
-            return r
-    return None
-
-
-v8_profile = find_profile("V8")
-v8_component = find_component_protocol("V8")
-v8_rule = find_rule("V8")
-
-if not v8_profile:
-    errors.append("protocol-verification-profiles.json missing V8 profile")
-if not v8_component:
-    errors.append("component-verification-levels.json missing V8 protocol level")
-if not v8_rule:
-    errors.append("claim-gate-rules.json missing V8 rule")
-
-if v8_profile and v8_rule:
-    profile_any = v8_profile.get("minimum_component_requirements_any", [])
-    rule_any = v8_rule.get("requires_one_of", [])
-
-    profile_mentions_t8 = "T8" in json.dumps(profile_any)
-    rule_mentions_t8 = "T8" in json.dumps(rule_any)
-
-    if profile_mentions_t8 != rule_mentions_t8:
-        errors.append(
-            "V8 T8 path mismatch: profile and claim-gate-rules disagree on whether T8 can be a V8 path"
-        )
-
-    profile_mentions_p7 = "P7" in json.dumps(profile_any) or "P7" in json.dumps(v8_profile.get("minimum_component_requirements", {}))
-    rule_mentions_p7 = "P7" in json.dumps(rule_any)
-
-    if profile_mentions_p7 != rule_mentions_p7:
-        errors.append(
-            "V8 P7 path mismatch: profile and claim-gate-rules disagree on physical P7 path"
-        )
-
-if v8_component:
-    name = v8_component.get("name", "").lower()
-    data_sources = json.dumps(v8_component.get("data_sources", []), ensure_ascii=False).lower()
-    method = v8_component.get("method", "").lower()
-
-    # For方案 A: V8 includes celestial path.
-    if "celestial" not in name and "celestial" not in data_sources and "celestial" not in method:
-        errors.append("component-verification-levels V8 does not mention celestial path while rules/profile allow T8")
-
-if errors:
-    print("V8_SEMANTICS_CONSISTENCY_FAIL")
-    for e in errors:
-        print("-", e)
-    sys.exit(1)
-
-print("V8_SEMANTICS_CONSISTENCY_OK")
+if __name__ == "__main__":
+    raise SystemExit(main())

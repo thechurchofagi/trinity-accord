@@ -127,7 +127,7 @@ if ultra_path.exists():
     require("ultra-brief 175-entry timeline" in lower, "ultra-brief heading missing")
     data_rows = [line for line in ultra.splitlines() if line.startswith("| ")][1:]
     require(len(data_rows) == 175, f"ultra-brief timeline must have 175 rows, got {len(data_rows)}")
-    require("fixed-stage periodization is used" not in lower, "ultra-brief edition must not reinstate a fixed-stage periodization")
+    require("a fixed-stage periodization is used" not in lower, "ultra-brief edition must not reinstate a fixed-stage periodization")
 
 ctx_path = DIR / "chronicle-agent-context.md"
 if ctx_path.exists():

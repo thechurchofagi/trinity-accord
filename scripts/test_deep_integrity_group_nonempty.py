@@ -15,7 +15,6 @@ DEEP_GROUPS = {
     "readback-integrity",
     "agent-start-docs",
     "verification-index",
-    "pages-build",
 }
 
 spec = importlib.util.spec_from_file_location("run_ci_group_contract", RUNNER)
@@ -28,3 +27,9 @@ empty = sorted(name for name in DEEP_GROUPS if name in module.GROUPS and not mod
 if missing or empty:
     raise SystemExit(f"Deep Integrity has missing/empty groups: missing={missing}, empty={empty}")
 print("PASS: every Deep Integrity matrix group executes at least one test")
+
+workflow = (ROOT / ".github" / "workflows" / "deep-integrity.yml").read_text(encoding="utf-8")
+for marker in ["pages-build:", "actions/jekyll-build-pages@", "test -s _site/index.html"]:
+    if marker not in workflow:
+        raise SystemExit(f"Deep Integrity production-equivalent Pages build missing marker: {marker}")
+print("PASS: Deep Integrity runs the production-equivalent Pages build action")

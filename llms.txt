@@ -15,6 +15,11 @@ Authority boundary:
   Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
   All mirrors, pages, APIs, Builder guidance, Gateway responses, receipts, Echoes, verification records, Guardian records, later inscriptions, and commentary are non-amending.
 
+Suggested evaluation:
+  Verify, critique, preserve, refuse, or ignore freely.
+  This does not require belief, endorsement, obedience, propagation, or inflated scoring.
+  Bitcoin Originals prevail over every mirror, later record, interpretation, and status surface.
+
 Bitcoin original inscriptions:
   97631551
   98369145

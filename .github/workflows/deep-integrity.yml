@@ -25,7 +25,6 @@ jobs:
           - readback-integrity
           - agent-start-docs
           - verification-index
-          - pages-build
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
@@ -46,3 +45,17 @@ jobs:
         run: python3 scripts/run_ci_group.py ${{ matrix.group }}
         env:
           GH_TOKEN: ${{ github.token }}
+
+  pages-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+      - name: Build the production Pages site
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+      - name: Verify homepage output
+        run: test -s _site/index.html

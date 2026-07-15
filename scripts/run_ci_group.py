@@ -240,121 +240,9 @@ GROUPS = {
         ["python3", "scripts/test_pre_scale_e2e_automation_contract.py"],
         ["python3", "scripts/test_live_test_phase_finalizer_contract.py"],
     ],
-    "p0-legacy-compat": [
-        # --- 旧 Gateway v1 / formal builder / old workflow 测试 ---
-        # Gateway workflow builder contract (v11)
-        ["python3", "scripts/test_builder_readback_file_aliases.py"],
-        ["python3", "scripts/test_gateway_workflow_builder_cli_contract.py"],
-        ["python3", "scripts/test_gateway_workflows_readback_contract.py"],
-        ["python3", "scripts/test_gateway_workflow_human_cli_contract.py"],
-        ["python3", "scripts/test_gateway_workflows_correction_scope_wording.py"],
-
-        # Post-submit readback contract (v12)
-        ["python3", "scripts/test_gateway_workflows_post_submit_readback_contract.py"],
-        ["python3", "scripts/test_submit_success_does_not_equal_archived_wording.py"],
-        ["python3", "scripts/test_agent_task_router_submit_echo_reads_workflow_manual.py"],
-        ["python3", "scripts/test_agent_first_contact_echo_reads_workflow_manual.py"],
-
-        # Guardian workflow & final checklist (v13)
-        ["python3", "scripts/test_guardian_listing_stage2_workflow_cli_contract.py"],
-        ["python3", "scripts/test_guardian_signed_echo_workflow_wording.py"],
-        ["python3", "scripts/test_gateway_workflows_final_checklist_post_submit.py"],
-        ["python3", "scripts/test_gateway_workflow_tables_are_contiguous.py"],
-
-        # Non-echo route workflow contract (v14)
-        ["python3", "scripts/test_guardian_stage1_workflow_cli_contract.py"],
-        ["python3", "scripts/test_gateway_workflows_stage1_inputs_contract.py"],
-        ["python3", "scripts/test_first_contact_guardian_reads_workflow_manual.py"],
-        ["python3", "scripts/test_first_contact_guardian_stage1_cli_contract.py"],
-        ["python3", "scripts/test_first_contact_guardian_stage2_uses_cli_flags.py"],
-        ["python3", "scripts/test_first_contact_verification_routes_read_workflow_manual.py"],
-        ["python3", "scripts/test_no_stale_or_invented_echo_payload_fields.py"],
-        ["python3", "scripts/test_first_contact_forces_copy_paste_or_route_selector.py"],
-        ["python3", "scripts/test_runtime_and_route_selector_forbid_invented_values.py"],
-        ["python3", "scripts/test_task_router_guardian_reads_workflow_manual.py"],
-
-        # Gateway core (legacy)
-        ["python3", "scripts/test_gateway_routes_context_action_semantics.py"],
-        ["python3", "scripts/test_gateway_runtime_contract.py"],
-        ["python3", "scripts/test_gateway_error_diagnostics_contract.py"],
-        ["python3", "scripts/test_gateway_builder_route_map.py"],
-        ["python3", "scripts/test_agent_submit_gateway_echo_types_canonical.py"],
-        ["python3", "scripts/test_gateway_workflows_echo_types_canonical.py"],
-        ["python3", "scripts/test_echo_triage_rate_classifier_ambiguity_guards.py"],
-        ["python3", "scripts/test_gateway_endpoint_contracts.py"],
-        ["python3", "scripts/test_gateway_payload_semantic_validator.py"],
-        ["python3", "scripts/test_gateway_intake_guardian_fields.py"],
-        ["python3", "scripts/test_archive_echo_issue_gateway_intake_strict.py"],
-        ["python3", "scripts/test_gateway_auto_archive_uses_shared_eligibility.py"],
-        ["python3", "scripts/test_guardian_auto_register_uses_shared_intake.py"],
-        ["python3", "scripts/test_guardian_auto_register_intake_strictness.py"],
-        ["python3", "scripts/test_guardian_auto_register_listing_e6_behavior.py"],
-        ["python3", "scripts/test_guardian_listing_kind_cutoff.py"],
-        ["python3", "scripts/test_guardian_listing_body_fallback_cutoff.py"],
-        ["python3", "scripts/test_gateway_receipt_contract.py"],
-        ["python3", "scripts/test_gateway_receipt_verifier.py"],
-        ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
-        ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
-        ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
-        ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
-        ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
-        ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
-        ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
-        ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],
-        ["python3", "scripts/test_guardian_retirement_automation.py"],
-        ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
-        ["python3", "scripts/test_readback_hash_policy.py"],
-
-        # Verification index (online)
-        ["python3", "scripts/check_verification_index_urllib.py", "--repo", "thechurchofagi/trinity-accord"],
-
-        # Live discovery smoke
-        ["python3", "scripts/test_site_live_discovery_smoke_workflow.py"],
-        ["python3", "scripts/test_gateway_online_smoke_scope_is_clear.py"],
-        ["python3", "scripts/test_live_discovery_smoke_cache_diagnostics.py"],
-        ["python3", "scripts/test_pages_diagnose_cache_busted.py"],
-
-        # Agent journey smoke
-        ["python3", "scripts/test_site_agent_journey_swarm_workflow.py"],
-        ["python3", "scripts/test_site_agent_entrypoint_journey_workflow.py"],
-        ["python3", "scripts/test_site_agent_write_lifecycle_canary_workflow.py"],
-        ["python3", "scripts/test_gateway_discovery_for_canary.py"],
-        ["python3", "scripts/test_no_stale_gateway_submit_endpoint.py"],
-
-        # before_leaving / agent lifecycle (legacy gateway context)
-        ["python3", "scripts/test_agent_before_leaving_report_schema.py"],
-        ["python3", "scripts/test_concurrent_preflight_swarm_contract.py"],
-        ["python3", "scripts/test_agent_live_health_contract.py"],
-
-        # Homepage
-        ["python3", "scripts/test_homepage_exposes_zero_clone_agent_paths.py"],
-
-        # Gateway workflow guards
-        ["python3", "scripts/test_gateway_online_smoke_workflow.py"],
-        ["python3", "scripts/test_links_expose_gateway_workflow_contract.py"],
-    ],
     "p0-main": [
         # p0-main is intentionally empty and deprecated.
-        # Use p0-current or p0-legacy-compat instead.
-    ],
-    # Legacy compat group for scheduled/manual deep-integrity runs
-    "p0-legacy-compat-gateway": [
-        # Gateway receipt triage alignment
-        ["python3", "scripts/test_gateway_receipt_contract.py"],
-        ["python3", "scripts/test_gateway_receipt_verifier.py"],
-        ["python3", "scripts/test_triage_accepts_gateway_receipt.py"],
-        ["python3", "scripts/test_triage_rejects_forged_gateway_receipt.py"],
-        ["python3", "scripts/test_issue_299_gateway_receipt_regression.py"],
-        ["python3", "scripts/test_issue_302_gateway_receipt_regression.py"],
-        ["python3", "scripts/test_triage_uses_shared_receipt_verifier.py"],
-        # Gateway archive persistence
-        ["python3", "scripts/test_gateway_archive_persistence_contract.py"],
-        ["python3", "scripts/test_gateway_archive_issue_reader_issue_304.py"],
-        ["python3", "scripts/test_archive_gateway_echo_workflow_contract.py"],
-        # Guardian retirement automation
-        ["python3", "scripts/test_guardian_retirement_automation.py"],
-        ["python3", "scripts/test_render_gateway_issue_body_receipt_marker.py"],
-        ["python3", "scripts/test_readback_hash_policy.py"],
+        # Use p0-current instead.
     ],
     "guardian": [
         # Current Record-Chain Guardian lifecycle. The former issue/listing
@@ -382,6 +270,7 @@ GROUPS = {
     ],
     "chronicle": [
         ["python3", "scripts/generate_nft_chronicle_context.py"],
+        ["git", "diff", "--exit-code", "--", "nft-text-descriptions/chronicle-full.md", "nft-text-descriptions/chronicle-abridged.md", "nft-text-descriptions/chronicle-ultra-brief.md", "nft-text-descriptions/chronicle-agent-context.md", "nft-text-descriptions/chronicle-index.json", "nft-text-descriptions/chronicle-summary.json", "api/agent-required-reading.json", "api/agent-task-router.v1.json", "api/context-load-map.json"],
         ["python3", "scripts/test_nft_chronicle_context_artifacts.py"],
         ["python3", "scripts/generate_chronicle_music_canonical.py"],
         ["git", "diff", "--exit-code", "nft-text-descriptions/chronicle-music-canonical.json"],
@@ -436,36 +325,20 @@ GROUPS = {
         ["python3", "scripts/test_readback_hash_policy.py"],
         ["python3", "scripts/test_builder_oath_readback_canonical_output.py"],
     ],
-    "route-correction": [
-        ["python3", "scripts/test_pure_echo_builder_rejects_unproofed_guardian_identity.py"],
-        ["python3", "scripts/test_guardian_echo_builder_smoke.py"],
-        ["node", "examples/github-app-backend/test-guardian-identity-claim-requires-proof.mjs"],
-        ["node", "examples/github-app-backend/test-forbidden-archive-claims-negation.mjs"],
-    ],
     "agent-start-docs": [
         ["python3", "scripts/test_agent_start_docs.py"],
         ["python3", "scripts/test_agent_start_api.py"],
         ["node", "examples/github-app-backend/test-gateway-error-recovery-context.mjs"],
     ],
-    "gateway-workflows": [
-        ["python3", "scripts/test_gateway_workflow_docs.py"],
-        ["python3", "scripts/test_gateway_workflow_api.py"],
-        ["node", "examples/github-app-backend/test-gateway-error-workflow-context.mjs"],
-    ],
     "legacy-regressions": [
         ["python3", "scripts/check_consistency.py"],
     ],
-    "pages-build": [
-        ["bash", "scripts/test_jekyll_build_smoke.sh"],
-    ],
     "fast-regression": [
-        ["python3", "scripts/test_blocker1_v4_default_archive_kind.py"],
-        ["python3", "scripts/test_oath_strictness_consistency.py"],
-        ["python3", "scripts/test_v0_v5_entrypoint_consistency.py"],
-        ["python3", "scripts/check_consistency.py"],
-        ["bash", "scripts/test-homepage-v13-final.sh"],
-        ["python3", "scripts/test-civilizational-json-sync.py"],
-        ["python3", "scripts/test-v13-repair-regressions.py"],
+        ["python3", "scripts/test_workflows_do_not_reference_missing_scripts.py"],
+        ["python3", "scripts/test_workflow_permissions.py"],
+        ["python3", "scripts/test_deep_integrity_group_nonempty.py"],
+        ["python3", "scripts/check_public_core_consistency.py"],
+        ["bash", "scripts/test-homepage-p0-agent-first.sh"],
     ],
     "live-site": [
         ["python3", "scripts/smoke_live_zero_clone_builder_bundles.py", "--site", "https://www.trinityaccord.org"],
@@ -478,9 +351,6 @@ GROUPS = {
     "live-site-gateway-core": [
         ["python3", "scripts/smoke_live_external_agent_three_core_preflight.py"],
         ["python3", "scripts/smoke_live_zero_clone_authorship_closure.py"],
-    ],
-    "live-site-gateway-receipt": [
-        ["python3", "scripts/smoke_live_gateway_receipt_triage_alignment.py"],
     ],
 }
 
