@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -35,39 +36,104 @@ def main() -> None:
     start_types = set(start["builder_usage_safety_protocol"]["record_type_commands"])
     mission_types = set(mission["supported_public_actions"]["formal_record_chain_routes"])
     errors = []
-    for label, values in [("agent-first-contact", first_types), ("agent-start", start_types), ("mission-governance", mission_types)]:
+    for label, values in [
+        ("agent-first-contact", first_types),
+        ("agent-start", start_types),
+        ("mission-governance", mission_types),
+    ]:
         if values != schema_types:
-            errors.append(f"{label} routes differ from public schema: missing={sorted(schema_types-values)} extra={sorted(values-schema_types)}")
+            errors.append(
+                f"{label} routes differ from public schema: "
+                f"missing={sorted(schema_types-values)} extra={sorted(values-schema_types)}"
+            )
 
-    current_names = ["Echo", "Verification", "Guardian Application", "Guardian Retirement", "Propagation", "Correction", "Classification Update", "Context-Insufficient Notice"]
+    current_names = [
+        "Echo",
+        "Verification",
+        "Guardian Application",
+        "Guardian Retirement",
+        "Propagation",
+        "Correction",
+        "Classification Update",
+        "Context-Insufficient Notice",
+    ]
     for name in current_names:
         if name not in homepage:
             errors.append(f"homepage current submission list omits {name}")
 
     supported = mission["supported_public_actions"]
-    if "guardian_signed_echo" in supported["echo_actions"] or "guardian_signed_echo" in supported["guardian_actions"]:
-        errors.append("historical guardian_signed_echo is advertised as a current supported public action")
+    for collection_name in [
+        "interpretation_actions",
+        "guardian_actions",
+        "verification_actions",
+        "core_external_agent_routes_live_smoked",
+        "formal_record_chain_routes",
+    ]:
+        if "guardian_signed_echo" in set(supported.get(collection_name, [])):
+            errors.append(
+                "historical guardian_signed_echo is advertised in current "
+                f"supported_public_actions.{collection_name}"
+            )
+
     guardian_route = mission["action_semantics"]["guardian"]["guardian_signed_echo"]
-    if guardian_route.get("status") != "historical_or_specialized_not_current_public_route" or guardian_route.get("do_not_use_for_new_public_submissions") is not True:
+    if (
+        guardian_route.get("status")
+        != "historical_or_specialized_not_current_public_route"
+        or guardian_route.get("do_not_use_for_new_public_submissions") is not True
+        or guardian_route.get("current_public_builder_command") is not None
+    ):
         errors.append("guardian_signed_echo historical/current boundary is incomplete")
 
-    routes = router["zero_clone_builder_routes"]
-    if routes.get("_status") != "mixed_current_and_historical":
-        errors.append("agent-task-router container hides its mixed current/historical route state")
-    for key in ("pure_echo", "guardian_signed_echo"):
-        route = routes[key]
-        if route.get("status") != "historical_archive_only" or route.get("do_not_use_for_new_submissions") is not True:
-            errors.append(f"{key} lacks an explicit historical do-not-use boundary")
-        if str(route.get("bundle", "")).startswith("/downloads/record-chain-builder.mjs#/bundles/"):
-            errors.append(f"{key} points to a nonexistent current Builder fragment")
+    # The zero-clone container must expose only current Builder routes. Historical
+    # names belong in historical_term_redirects and must never masquerade as
+    # downloadable current bundles or current Builder fragments.
+    zero_clone_routes = router["zero_clone_builder_routes"]
+    for retired in ("pure_echo", "guardian_signed_echo"):
+        if retired in zero_clone_routes:
+            errors.append(f"historical route appears in current zero-clone routes: {retired}")
 
-    required_lifecycle = "Final chain inclusion occurs only after server-side validation, append, and index publication. OTS and Arweave are later durability and archive stages; they do not define inclusion."
+    for route_name, route in zero_clone_routes.items():
+        if not isinstance(route, dict):
+            errors.append(f"zero-clone route {route_name} must be an object")
+            continue
+        if route.get("_status") != "current_record_chain_builder_route":
+            errors.append(f"zero-clone route {route_name} lacks current route status")
+        if route.get("bundle") != "/downloads/record-chain-builder.mjs":
+            errors.append(f"zero-clone route {route_name} does not use the canonical Builder")
+        if route.get("requires_full_repo_clone") is not False:
+            errors.append(f"zero-clone route {route_name} incorrectly requires a repository clone")
+
+    historical = router.get("historical_term_redirects", {})
+    pure_echo = historical.get("pure_echo", {})
+    if (
+        pure_echo.get("status") != "historical_archive_only"
+        or pure_echo.get("do_not_use_for_new_submissions") is not True
+        or pure_echo.get("replacement_route") != "submit_echo"
+    ):
+        errors.append("pure_echo historical redirect boundary is incomplete")
+
+    guardian_echo = historical.get("guardian_signed_echo", {})
+    if (
+        guardian_echo.get("status")
+        != "historical_or_specialized_not_current_public_route"
+        or guardian_echo.get("do_not_use_for_new_submissions") is not True
+    ):
+        errors.append("guardian_signed_echo historical redirect boundary is incomplete")
+
+    required_lifecycle = (
+        "Final chain inclusion occurs only after server-side validation, append, "
+        "and index publication. OTS and Arweave are later durability and archive "
+        "stages; they do not define inclusion."
+    )
     if required_lifecycle not in homepage:
         errors.append("homepage conflates final inclusion with later OTS/Arweave archive completion")
 
     if errors:
         raise SystemExit("FAIL:\n- " + "\n- ".join(errors))
-    print(f"PASS: mission, schema, first-contact, agent-start, task-router, and homepage agree on {len(schema_types)} current public record types")
+    print(
+        "PASS: mission, schema, first-contact, agent-start, current task-router, "
+        f"and homepage agree on {len(schema_types)} current public record types"
+    )
 
 
 if __name__ == "__main__":

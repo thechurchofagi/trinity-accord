@@ -11,11 +11,14 @@ NEW_API = [
     "/api/agent-task-router.v1.json",
 ]
 
+
 def read(rel):
     return (ROOT / rel).read_text(encoding="utf-8")
 
+
 def load(rel):
     return json.loads(read(rel))
+
 
 def require(cond, msg):
     if cond:
@@ -23,6 +26,7 @@ def require(cond, msg):
     else:
         print("FAIL:", msg)
         FAIL.append(msg)
+
 
 def main():
     for api_path in NEW_API:
@@ -63,10 +67,17 @@ def main():
     require("V0-V5" in physical.get("public_submission_legacy_value_rule", ""), "physical route uses V0-V5 Builder compatibility")
     require("verify_v0_v5_agent_declared" not in routes, "old V0-V5 route retired")
     require("verify_v6_plus_strict_evidence" not in routes, "old V6+ route retired")
-    serialized_router = json.dumps(router, sort_keys=True)
-    require("record_chain_v0_v5_agent_declared_verification" not in serialized_router, "old zero-clone V0-V5 route name retired")
-    require("v6_plus_strict_evidence" not in serialized_router, "old V6+ replacement name retired")
-    require(router["verification_echo_redirect"]["replacement_decision"]["current_verification_record"] == "verify_current_model", "verification Echo redirect uses current verification route")
+    serialized_routes = json.dumps(routes, sort_keys=True)
+    require("record_chain_v0_v5_agent_declared_verification" not in serialized_routes, "old zero-clone V0-V5 route name retired from active routes")
+    require("v6_plus_strict_evidence" not in serialized_routes, "old V6+ replacement name retired from active routes")
+
+    historical = router.get("historical_term_redirects", {})
+    e2_redirect = historical.get("verification_echo_or_E2", {})
+    require(e2_redirect.get("status") == "historical_term_only", "verification Echo/E2 is historical only")
+    require(e2_redirect.get("do_not_use_as_current_record_type") is True, "verification Echo/E2 cannot be used as a current record type")
+    replacement = e2_redirect.get("replacement_decision", {})
+    require(replacement.get("fresh_checks") == "verify_current_model", "verification Echo redirect uses current verification route")
+    require(replacement.get("response_or_interpretation") == "submit_echo", "verification Echo redirect uses current Echo route for responses")
 
     wk = load(".well-known/trinity-accord.json")
     for key in ["agent_minimal_context", "agent_output_policy", "agent_task_router"]:
@@ -104,6 +115,7 @@ def main():
         print(f"FAILED: {len(FAIL)} failures")
         sys.exit(1)
     print("ALL PASSED: P0 agent router contract")
+
 
 if __name__ == "__main__":
     main()

@@ -29,6 +29,11 @@ def load_json(path: str) -> dict[str, Any]:
 
 def main() -> None:
     agent_start = (ROOT / "agent-start.md").read_text(encoding="utf-8")
+    # Formatting must not change the semantic status contract. Normalize the
+    # lightweight Markdown emphasis used by the human page before checking the
+    # machine-stable production phrase and receipt boundary.
+    agent_start_semantic = agent_start.replace("**", "")
+
     record_status = load_json("api/record-chain-status.json")
     production_policy = load_json("api/record-chain-production-enablement-policy.v1.json")
     native_ots = load_json("api/record-chain-native-ots-latest.json")
@@ -37,23 +42,26 @@ def main() -> None:
     public_home = load_json("api/public-home-status.json")
 
     require(
-        "Current phase: production live / public submission open" in agent_start,
+        "Current phase: production live / public submission open" in agent_start_semantic,
         "agent-start.md must announce production live / public submission open",
     )
     for forbidden in [
         "Current phase: public test / stabilization",
         "still in test/stabilization",
         "Submissions during this phase may be treated as test data",
-        "\u6b63\u5f0f\u5f00\u653e\u524d\u91cd\u65b0\u5206\u7c7b",
+        "正式开放前重新分类",
     ]:
-        require(forbidden not in agent_start, f"agent-start.md contains retired test-phase wording: {forbidden}")
+        require(
+            forbidden not in agent_start_semantic,
+            f"agent-start.md contains retired test-phase wording: {forbidden}",
+        )
 
     require(
-        "receipt is still intake-only" in agent_start.lower(),
+        "receipt is still intake-only" in agent_start_semantic.lower(),
         "agent-start.md must preserve receipt-is-intake-only boundary",
     )
     require(
-        "External agents do not need GitHub access." in agent_start,
+        "External agents do not need GitHub access." in agent_start_semantic,
         "agent-start.md must preserve no-GitHub-access external submission statement",
     )
 

@@ -86,7 +86,11 @@ def assert_tip_helper_behavior() -> None:
         capture_output=True,
         text=True,
     )
-    require(result.returncode == 0, "current native OTS projection does not bind current chain tip")
+    helper_detail = (result.stderr or result.stdout or "no diagnostic output").strip()
+    require(
+        result.returncode == 0,
+        "current native OTS projection does not bind current chain tip: " + helper_detail,
+    )
 
     spec = importlib.util.spec_from_file_location("round8_tip_helper", helper_path)
     require(spec is not None and spec.loader is not None, "could not import native OTS tip helper")

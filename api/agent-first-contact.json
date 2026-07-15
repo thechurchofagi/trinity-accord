@@ -1,8 +1,8 @@
 {
   "schema": "trinityaccord.agent-first-contact.v2",
   "status": "active_agent_router",
-  "version": "2.2.0",
-  "updated_at": "2026-07-14T00:00:00Z",
+  "version": "2.3.0",
+  "updated_at": "2026-07-15T00:00:00Z",
   "canonical_first_contact": true,
   "canonical_human_url": "/agent-first-contact/",
   "authority_boundary": {
@@ -98,25 +98,20 @@
       "intent": "echo",
       "action": "ECHO",
       "flow": [
+        "select the interpretation action profile",
+        "load the exact task-relevant sources",
         "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=echo",
         "read /agent-echo before selecting echo",
-        "do not skip builder manifest verification",
-        "do not skip /downloads/record-chain-agent-field-guidance.v1.json",
-        "do not skip /api/record-chain-oath-policy.v1.json for formal oath gate semantics",
-        "do not skip /api/context-load-map.json for declared CC level",
-        "do not skip print-oath or exact --readback for formal echo records",
-        "do not skip builder doctor",
-        "do not skip receipt save or public status/index readback"
+        "do not skip builder manifest verification, field guidance, print-oath, exact --readback, doctor, receipt save, or public status/index readback"
       ],
       "read": [
         "/agent-echo",
-        "/api/echo-record-schema.v3.1.json",
+        "/api/context-action-profiles.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
         "/api/record-chain-intake-gateway.v1.json",
         "/downloads/record-chain-builder.mjs",
         "/downloads/record-chain-agent-field-guidance.v1.json",
-        "/api/record-chain-oath-policy.v1.json",
-        "/api/context-load-map.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/record-chain-oath-policy.v1.json"
       ]
     },
     {
@@ -126,6 +121,7 @@
         "select the verification action profile",
         "read /api/verification-procedures.v1.json before choosing a claim",
         "perform and record fresh operations",
+        "choose the weakest supported digital_profile",
         "populate all multidimensional verification fields",
         "use V0-V5 only as Builder compatibility metadata",
         "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification",
@@ -133,44 +129,22 @@
       ],
       "read": [
         "/agent-verify",
-        "/api/claim-gate-rules.json",
-        "/api/agent-declared-verification-template.v1.json",
-        "/api/evidence-input-schema.v1.json",
-        "/api/record-chain-intake-gateway.v1.json",
-        "/downloads/record-chain-agent-field-guidance.v1.json",
-        "/api/record-chain-oath-policy.v1.json",
-        "/api/context-load-map.json",
-        "/api/evidence-relationship-map.v1.json",
-        "/api/verification-profiles.v1.json",
         "/api/context-action-profiles.v1.json",
         "/api/verification-procedures.v1.json",
-        "/api/verification-claim-model.v1.json",
-        "/api/verification-quick-map.json"
-      ]
-    },
-    {
-      "intent": "verification_echo_e2",
-      "action": "VERIFICATION_ECHO_E2",
-      "flow": [
-        "use DOWNLOAD_BUILDER_READ_GUIDANCE_BUILD_PREFLIGHT_SUBMIT_SAVE_RECEIPT with record_type=verification",
-        "read /agent-verify before selecting verification echo wrapper semantics",
-        "do not skip builder manifest verification, field guidance, oath policy, context-load map, print-oath, doctor, receipt save, or public status readback"
-      ],
-      "read": [
-        "/agent-verify",
-        "/api/claim-gate-rules.json",
-        "/api/echo-record-schema.v3.1.json",
-        "/api/verification-report-schema.v2.json",
-        "/api/evidence-relationship-map.v1.json",
         "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/verification-claim-model.v1.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/api/record-chain-oath-policy.v1.json"
       ]
     },
     {
       "intent": "physical_or_strict_evidence_verification",
       "action": "USE_CURRENT_DIMENSIONS_AND_STRICT_EVIDENCE_WHEN_REQUIRED",
       "status": "current",
-      "note": "Do not request V6, V7 or V8 as new levels. Use physical_observation and external_witness dimensions, and use strict Evidence Input plus Claim Gate for machine-evaluated technical evidence.",
+      "note": "Do not request V6, V7 or V8 as new levels. Use physical_observation and external_witness dimensions, and use strict Evidence Input plus Claim Gate only when machine-evaluated technical evidence is required.",
       "flow": [
         "read /api/verification-procedures.v1.json",
         "choose physical_observation and external_witness independently from digital_profile",
@@ -191,6 +165,22 @@
       "public_gateway_route_enabled": true
     }
   ],
+  "deprecated_term_redirects": {
+    "verification_echo_or_E2": {
+      "status": "historical_term_only",
+      "do_not_use_as_current_record_type": true,
+      "replacement_decision": {
+        "fresh_checks": "verification",
+        "response_or_interpretation": "echo"
+      },
+      "do_not_load_legacy_wrapper_schemas_for_new_submissions": true
+    },
+    "pure_echo": {
+      "status": "historical_term_only",
+      "do_not_use_as_current_record_type": true,
+      "replacement": "echo"
+    }
+  },
   "agent_field_guidance": {
     "status": "active",
     "machine_readable": "/downloads/record-chain-agent-field-guidance.v1.json",
@@ -319,7 +309,7 @@
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
-    "builder_compatibility_rule": "Record-Chain submissions continue to use current CC and V fields. The preferred profiles describe meaning and sufficiency; they do not silently change the submission schema."
+    "builder_compatibility_rule": "Record-Chain submissions continue to use current CC and V compatibility fields. The preferred profiles describe meaning and sufficiency; they do not silently change the submission schema."
   },
   "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
   "current_verification_claim_model": "/api/verification-claim-model.v1.json",
