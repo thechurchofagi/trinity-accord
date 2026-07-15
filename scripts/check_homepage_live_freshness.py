@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Check that live homepage status surfaces match repository state.
+"""Check that live homepage and key public reading surfaces match repository state.
 
 This script verifies that the deployed site is not serving stale generated
-homepage/API status after bot-generated commits.
+homepage/API status or stale explanatory pages after source changes.
 
 Checks:
   1. live /api/public-home-status.json exactly matches repo copy
@@ -13,6 +13,8 @@ Checks:
   6. live /record-chain/indexes/record-index.json exactly matches repo copy
   7. live homepage generated block has the same Source data digest as repo index.md
   8. live homepage generated block mentions the repo latest_record_id
+  9. live homepage contains the current whole-project definition
+ 10. key reading pages contain current architecture/version markers
 """
 
 from __future__ import annotations
@@ -40,6 +42,45 @@ STATUS_SURFACES = [
     "/record-chain/chain-tip.json",
     "/record-chain/indexes/statistics.json",
     "/record-chain/indexes/record-index.json",
+]
+
+# These markers deliberately cover human-facing static pages that are not
+# represented by the generated homepage/API status digests. A Pages deployment
+# must publish all of them before the source revision is considered live.
+STATIC_PAGE_MARKERS = {
+    "/": [
+        'id="what-this-is"',
+        "A fixed record, with a verifiable preservation system around it",
+    ],
+    "/seed-map/": [
+        "This map explains the whole project by function.",
+        "Canon is fixed. Context may expand.",
+    ],
+    "/authority/": [
+        "What authority means here",
+        "Record-Chain",
+    ],
+    "/agent-brief/": [
+        "Object in one paragraph",
+        "civilizational self-archive",
+    ],
+    "/why-high-signal/": [
+        "What the project consists of",
+        "Verification and durability",
+    ],
+    "/worth-preserving/": [
+        "First understand what is being preserved",
+        "Why the surrounding system matters",
+    ],
+}
+
+STATIC_SOURCE_FILES = [
+    "_includes/home-object-definition.html",
+    "seed-map.md",
+    "authority.md",
+    "agent-brief.md",
+    "why-high-signal.md",
+    "worth-preserving.md",
 ]
 
 
@@ -75,7 +116,7 @@ def fetch(site: str, path: str, token: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         cache_busted_url(site, path, token),
         headers={
-            "User-Agent": "trinity-homepage-live-freshness/1.0",
+            "User-Agent": "trinity-homepage-live-freshness/1.1",
             "Cache-Control": "no-cache",
             "Pragma": "no-cache",
         },
@@ -109,7 +150,8 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_surface_bytes = {path: read_repo_bytes(path.lstrip("/")) for path in STATUS_SURFACES}
-    token_material = b"".join(repo_surface_bytes.values()) + read_repo_bytes("index.md")
+    static_source_bytes = [read_repo_bytes(path) for path in STATIC_SOURCE_FILES]
+    token_material = b"".join(repo_surface_bytes.values()) + b"".join(static_source_bytes) + read_repo_bytes("index.md")
     token = sha256(token_material)[:16]
 
     repo_index_text = read_repo_text("index.md")
@@ -124,7 +166,11 @@ def main() -> int:
 
         try:
             live_surface_bytes = {path: fetch(args.site, path, token, args.timeout) for path in STATUS_SURFACES}
-            live_home = fetch(args.site, "/", token, args.timeout).decode("utf-8", errors="replace")
+            live_static_text = {
+                path: fetch(args.site, path, token, args.timeout).decode("utf-8", errors="replace")
+                for path in STATIC_PAGE_MARKERS
+            }
+            live_home = live_static_text["/"]
         except Exception as exc:  # noqa: BLE001
             errors.append(f"failed to fetch live surfaces: {exc}")
             if attempt < args.retries:
@@ -162,8 +208,14 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             errors.append(f"could not parse repo public-home-status.json: {exc}")
 
+        for path, markers in STATIC_PAGE_MARKERS.items():
+            page = live_static_text[path]
+            for marker in markers:
+                if marker not in page:
+                    errors.append(f"live {path} missing current static marker: {marker!r}")
+
         if not errors:
-            print("PASS: live homepage status surfaces match repository state")
+            print("PASS: live homepage status and static reading surfaces match repository state")
             return 0
 
         print("Live freshness mismatch:")
@@ -173,7 +225,7 @@ def main() -> int:
         if attempt < args.retries:
             time.sleep(args.retry_sleep)
 
-    print("FAIL: live homepage status surfaces are stale or unavailable")
+    print("FAIL: live homepage/status or static reading surfaces are stale or unavailable")
     return 1
 
 
