@@ -15,12 +15,12 @@ permissions:
 
 concurrency:
   group: pages-production-closure
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   close-production:
     runs-on: ubuntu-24.04
-    timeout-minutes: 56
+    timeout-minutes: 40
 
     steps:
       - name: Checkout main
@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
-          EVIDENCE_PR: "668"
+          EVIDENCE_PR: "669"
         shell: bash
         run: |
           set -euo pipefail
@@ -54,8 +54,16 @@ jobs:
           successful_run_id=""
 
           for attempt in 1 2; do
-            created_after="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            printf '\nattempt_%s_dispatch_after=%s\n' "$attempt" "$created_after" >> "$details"
+            printf '\nattempt_%s_started_at=%s\n' "$attempt" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$details"
+
+            before_json="$(gh run list \
+              --repo "$repo" \
+              --workflow deploy-pages.yml \
+              --event workflow_dispatch \
+              --branch main \
+              --limit 50 \
+              --json databaseId \
+              | jq '[.[].databaseId]')"
 
             dispatch_rc=0
             if gh workflow run deploy-pages.yml \
@@ -68,37 +76,25 @@ jobs:
               dispatch_rc=$?
             fi
             printf 'attempt_%s_dispatch_rc=%s\n' "$attempt" "$dispatch_rc" >> "$details"
-
             if [[ "$dispatch_rc" -ne 0 ]]; then
               continue
             fi
 
             run_id=""
-            : > /tmp/pages-run-list.err
-            for discovery_try in $(seq 1 120); do
+            for discovery_try in $(seq 1 60); do
               run_json=""
               if run_json="$(gh run list \
                 --repo "$repo" \
                 --workflow deploy-pages.yml \
                 --event workflow_dispatch \
                 --branch main \
-                --limit 30 \
-                --json databaseId,headSha,createdAt,status,conclusion,url \
-                2>/tmp/pages-run-list.err)"; then
-                :
-              else
-                run_json=""
-              fi
-
-              if [[ -n "$run_json" ]]; then
-                candidate=""
-                if candidate="$(jq -r \
-                  --arg sha "$target_sha" \
-                  --arg after "$created_after" \
-                  '[.[] | select(.headSha == $sha and .createdAt >= $after)] | sort_by(.createdAt) | last | .databaseId // empty' \
-                  <<< "$run_json")"; then
-                  run_id="$candidate"
-                fi
+                --limit 50 \
+                --json databaseId,headSha,createdAt,status,conclusion,url)"; then
+                candidate="$(jq -r \
+                  --argjson before "$before_json" \
+                  '[.[] | . as $run | select(($before | index($run.databaseId)) == null)] | sort_by(.createdAt) | first | .databaseId // empty' \
+                  <<< "$run_json")"
+                run_id="$candidate"
               fi
 
               if [[ -n "$run_id" ]]; then
@@ -109,32 +105,18 @@ jobs:
 
             printf 'attempt_%s_run_id=%s\n' "$attempt" "${run_id:-not_found}" >> "$details"
             if [[ -z "$run_id" ]]; then
-              discovery_error=""
-              if [[ -f /tmp/pages-run-list.err ]]; then
-                discovery_error="$(tr '\n' ' ' < /tmp/pages-run-list.err)"
-              fi
-              printf 'attempt_%s_discovery_error=%s\n' "$attempt" "$discovery_error" >> "$details"
               continue
             fi
 
             run_meta=""
             status=""
             conclusion=""
-            for status_try in $(seq 1 180); do
+            for status_try in $(seq 1 120); do
               if run_meta="$(gh run view "$run_id" \
                 --repo "$repo" \
-                --json databaseId,headSha,status,conclusion,createdAt,updatedAt,url,workflowName,event \
-                2>/tmp/pages-run-view.err)"; then
-                if status="$(jq -r '.status // empty' <<< "$run_meta")"; then
-                  :
-                else
-                  status=""
-                fi
-                if conclusion="$(jq -r '.conclusion // empty' <<< "$run_meta")"; then
-                  :
-                else
-                  conclusion=""
-                fi
+                --json databaseId,headSha,status,conclusion,createdAt,updatedAt,url,workflowName,event)"; then
+                status="$(jq -r '.status // empty' <<< "$run_meta")"
+                conclusion="$(jq -r '.conclusion // empty' <<< "$run_meta")"
               fi
 
               if [[ "$status" == "completed" ]]; then
@@ -146,11 +128,12 @@ jobs:
             printf 'attempt_%s_run_meta=%s\n' "$attempt" "$run_meta" >> "$details"
             if [[ "$status" != "completed" || "$conclusion" != "success" ]]; then
               printf '\nattempt_%s_failed_log_tail:\n' "$attempt" >> "$details"
-              : > "/tmp/pages-failed-${attempt}.log"
-              if gh run view "$run_id" --repo "$repo" --log-failed > "/tmp/pages-failed-${attempt}.log" 2>&1; then
+              failed_log="/tmp/pages-failed-${attempt}.log"
+              : > "$failed_log"
+              if gh run view "$run_id" --repo "$repo" --log-failed > "$failed_log" 2>&1; then
                 :
               fi
-              tail -n 160 "/tmp/pages-failed-${attempt}.log" >> "$details"
+              tail -n 160 "$failed_log" >> "$details"
               continue
             fi
 
@@ -197,13 +180,9 @@ jobs:
             cat "$details"
           } > "$report"
 
-          commented="false"
-          if gh pr comment "$EVIDENCE_PR" --repo "$repo" --body-file "$report"; then
-            commented="true"
-          fi
-
-          printf 'evidence_comment_published=%s\n' "$commented"
+          gh pr comment "$EVIDENCE_PR" --repo "$repo" --body-file "$report"
           cat "$report"
 
-          [[ "$commented" == "true" ]]
-          [[ "$final_status" == "PASS" ]]
+          if [[ "$final_status" != "PASS" ]]; then
+            exit 1
+          fi
