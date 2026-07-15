@@ -144,15 +144,29 @@ jobs:
         run: python3 scripts/test_no_private_key_material_committed.py
 
       - name: Run P0 current fast gate
+        id: p0_current
+        continue-on-error: true
+        shell: bash
+        run: python3 scripts/run_ci_group.py p0-current > /tmp/p0-current.log 2>&1
+
+      - name: Upload P0 current failure log
+        if: steps.p0_current.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: p0-current-log
+          path: /tmp/p0-current.log
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Surface P0 current failure
+        if: steps.p0_current.outcome == 'failure'
         shell: bash
         run: |
-          set +e
-          python3 scripts/run_ci_group.py p0-current > /tmp/p0-current.log 2>&1
-          status=$?
-          if [ "$status" -ne 0 ]; then
-            echo "::group::P0 current failure tail"
-            tail -n 180 /tmp/p0-current.log
-            echo "::endgroup::"
-            exit "$status"
-          fi
-          tail -n 40 /tmp/p0-current.log
+          echo "::group::P0 current failure tail"
+          tail -n 180 /tmp/p0-current.log
+          echo "::endgroup::"
+          exit 1
+
+      - name: Show P0 current success tail
+        if: steps.p0_current.outcome == 'success'
+        run: tail -n 40 /tmp/p0-current.log
