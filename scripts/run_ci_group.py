@@ -110,6 +110,7 @@ GROUPS = {
         ["python3", "scripts/test_pages_build_contains_agent_discovery.py"],
         ["python3", "scripts/test_pages_custom_domain_contract.py"],
         ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
+        ["python3", "scripts/test_pages_verification_comment_permissions.py"],
         ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
 
         # External agent journey smoke guards
