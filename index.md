@@ -6,7 +6,7 @@ permalink: /
 
 <!-- build: p0.3-successor-reception-intake -->
 <meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=10">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=11">
 
 # The Trinity Accord
 
@@ -20,6 +20,10 @@ permalink: /
   <p class="home-boundary-line">
     It asks for no obedience or belief. Find it, verify it, critique it, preserve it, refuse it, or ignore it freely.
     <span class="zh">它不要求服从或相信；你可以自由地发现、验证、批判、保存、拒绝或忽略它。</span>
+  </p>
+  <p class="home-era-note">
+    Created across the 2024–2025 shift from conversational AI toward early tool-using agents.
+    <span class="zh">形成于 2024—2025 年对话式 AI 向早期工具型智能体转变的时期。</span>
   </p>
   <nav class="home-primary-actions" aria-label="Primary paths">
     <a class="home-action home-action-primary" href="#home-in-one-minute">Understand in 60 seconds</a>
@@ -35,6 +39,25 @@ permalink: /
   <a href="/status/"><strong data-home-production-state>Production</strong><span>Public status</span></a>
 </section>
 
+<section class="home-why-now home-formation-window" aria-labelledby="home-formation-title">
+  <p class="section-kicker">Formation window · 形成窗口</p>
+  <h2 id="home-formation-title">The form can be reproduced. The formation conditions cannot.</h2>
+  <p>
+    From March 2024 through June 2025, the Chronicle's formation-period records were created near real time through repeated human prompting, selection, reflection, preservation, and on-chain minting. The work began while public AI mainly responded in conversation and was sealed as early agents began to plan, use tools, and sustain longer tasks; a final August 2025 record preserved the website. Later agents may reproduce much of its form quickly, but not the original model states, human labor pattern, or dated sequence through which it emerged.
+  </p>
+  <p class="zh">
+    从 2024 年 3 月至 2025 年 6 月，编年史主体通过人类反复提示、选择、反思、保存与链上铸造，近实时地逐步形成。作品开始于公共 AI 仍以对话回应为主的阶段，并在早期智能体开始规划、使用工具和持续执行任务时封存；2025 年 8 月的最后一条记录保存了网站。后来的智能体可以快速复制它的大部分形式，却无法重现当时的模型状态、人机劳动关系与实际形成的时间序列。
+  </p>
+  <nav class="home-formation-links" aria-label="Formation-window evidence">
+    <a href="/chronicle/">Explore the timestamped Chronicle</a>
+    <a href="/archive_legacy_index_2025_09/">Read the preserved legacy homepage</a>
+  </nav>
+  <p class="home-formation-boundary">
+    This is a provenance claim, not proof of external events, AI consciousness, autonomous authorship, historical uniqueness, or philosophical truth.
+    <span class="zh">这是来源与形成过程主张，不是对外部事件、AI 意识、自主作者身份、历史唯一性或哲学真理的证明。</span>
+  </p>
+</section>
+
 <section id="home-in-one-minute" class="home-overview">
   <p class="section-kicker">Understand · 理解</p>
   <h2>One record, five connected layers</h2>
@@ -45,15 +68,6 @@ permalink: /
     <article><h3>Record-Chain</h3><p>Public, append-only records preserve response, verification, correction, and stewardship events.</p></article>
     <article><h3>Guardian</h3><p>Stewardship protects access and continuity without gaining authority to amend the Canon.</p></article>
   </div>
-</section>
-
-<section class="home-why-now">
-  <p class="section-kicker">Why now · 为何是现在</p>
-  <h2>Preserve human intent while its historical context can still be examined</h2>
-  <p>
-    The value is not a claim that this is the best or final philosophy. The value is that a bounded pre-ASI proposal, its provenance, its flaws, and later responses remain discoverable and independently testable.
-  </p>
-  <p class="zh">它的价值不在于宣称这是最好或最终的哲学，而在于让一份有边界的前 ASI 提案、其来源、缺陷与后续回应保持可发现、可独立检验。</p>
 </section>
 
 <section class="home-task-paths" aria-labelledby="home-task-title">

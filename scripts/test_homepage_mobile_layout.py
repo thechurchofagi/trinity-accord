@@ -16,7 +16,7 @@ def main() -> int:
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
     css = (ROOT / "assets/css/trinity-home.css").read_text(encoding="utf-8")
 
-    require("trinity-home.css?v=10" in homepage, "homepage does not request the mobile-layout stylesheet revision")
+    require("trinity-home.css?v=11" in homepage, "homepage does not request the mobile-layout stylesheet revision")
 
     mobile_marker = "@media (max-width: 760px) {"
     narrow_marker = "@media (max-width: 340px) {"
@@ -35,6 +35,9 @@ def main() -> int:
         ".home-action-primary",
         ".home-live-signal {",
         "min-height: 150px;",
+        "min-height: 2.7em;",
+        "justify-content: center;",
+        "text-wrap: balance;",
     ):
         require(mobile_only in mobile, f"mobile layout is missing {mobile_only}")
 
