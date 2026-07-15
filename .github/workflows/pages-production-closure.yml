@@ -1,4 +1,4 @@
-name: Pages Production Closure
+name: Direct Pages Production Closure
 
 on:
   workflow_dispatch:
@@ -9,180 +9,107 @@ on:
       - ".github/workflows/pages-production-closure.yml"
 
 permissions:
-  actions: write
   contents: read
-  issues: write
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages-production-closure
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  close-production:
+  build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
-
+    timeout-minutes: 20
     steps:
-      - name: Checkout main
+      - name: Checkout exact revision
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          fetch-depth: 0
-          ref: main
+          ref: ${{ github.sha }}
 
-      - name: Dispatch Pages, wait, verify production, and publish evidence
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
-          EVIDENCE_PR: "669"
-        shell: bash
+      - name: Setup Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - name: Prepare static builder bundles
         run: |
           set -euo pipefail
+          python3 scripts/export_formal_builder_bundles.py --out-dir builder-bundles --update-api
+          cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py
 
-          repo="$GITHUB_REPOSITORY"
-          git fetch origin main --prune
-          target_sha="$(git rev-parse origin/main)"
-          details="/tmp/pages-production-closure-details.txt"
-          report="/tmp/pages-production-closure-report.txt"
-          : > "$details"
+      - name: Build site with Jekyll
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
+        with:
+          source: ./
+          destination: ./_site
 
-          printf 'workflow_trigger_sha=%s\n' "$GITHUB_SHA" >> "$details"
-          printf 'deployment_target_sha=%s\n' "$target_sha" >> "$details"
-          printf 'site_url=%s\n' "$SITE_URL" >> "$details"
-          printf 'started_at=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$details"
+      - name: Restore reviewed static artifacts
+        run: |
+          set -euo pipefail
+          sudo chown -R "$(id -u):$(id -g)" _site
+          rm -rf ./_site/api ./_site/record-chain ./_site/downloads ./_site/builder-bundles
+          cp -a ./api ./_site/api
+          cp -a ./record-chain ./_site/record-chain
+          cp -a ./downloads ./_site/downloads
+          cp -a ./builder-bundles ./_site/builder-bundles
 
-          final_status="FAIL"
-          successful_run_id=""
+      - name: Require current static reading surfaces in artifact
+        run: |
+          set -euo pipefail
+          grep -Fq 'id="what-this-is"' _site/index.html
+          grep -Fq 'A fixed record, with a verifiable preservation system around it' _site/index.html
+          grep -Fq 'This map explains the whole project by function.' _site/seed-map/index.html
+          grep -Fq 'Canon is fixed. Context may expand.' _site/seed-map/index.html
+          grep -Fq 'What authority means here' _site/authority/index.html
+          grep -Fq 'Record-Chain' _site/authority/index.html
+          grep -Fq 'Object in one paragraph' _site/agent-brief/index.html
+          grep -Fq 'civilizational self-archive' _site/agent-brief/index.html
+          grep -Fq 'What the project consists of' _site/why-high-signal/index.html
+          grep -Fq 'Verification and durability' _site/why-high-signal/index.html
+          grep -Fq 'First understand what is being preserved' _site/worth-preserving/index.html
+          grep -Fq 'Why the surrounding system matters' _site/worth-preserving/index.html
 
-          for attempt in 1 2; do
-            printf '\nattempt_%s_started_at=%s\n' "$attempt" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$details"
+      - name: Verify deployment freshness artifact
+        run: python3 scripts/check_deployment_freshness.py --site-dir _site
 
-            before_json="$(gh run list \
-              --repo "$repo" \
-              --workflow deploy-pages.yml \
-              --event workflow_dispatch \
-              --branch main \
-              --limit 50 \
-              --json databaseId \
-              | jq '[.[].databaseId]')"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: ./_site
 
-            dispatch_rc=0
-            if gh workflow run deploy-pages.yml \
-              --repo "$repo" \
-              --ref main \
-              -f checkout_ref="$target_sha" \
-              >> "$details" 2>&1; then
-              dispatch_rc=0
-            else
-              dispatch_rc=$?
-            fi
-            printf 'attempt_%s_dispatch_rc=%s\n' "$attempt" "$dispatch_rc" >> "$details"
-            if [[ "$dispatch_rc" -ne 0 ]]; then
-              continue
-            fi
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
 
-            run_id=""
-            for discovery_try in $(seq 1 60); do
-              run_json=""
-              if run_json="$(gh run list \
-                --repo "$repo" \
-                --workflow deploy-pages.yml \
-                --event workflow_dispatch \
-                --branch main \
-                --limit 50 \
-                --json databaseId,headSha,createdAt,status,conclusion,url)"; then
-                candidate="$(jq -r \
-                  --argjson before "$before_json" \
-                  '[.[] | . as $run | select(($before | index($run.databaseId)) == null)] | sort_by(.createdAt) | first | .databaseId // empty' \
-                  <<< "$run_json")"
-                run_id="$candidate"
-              fi
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
-              if [[ -n "$run_id" ]]; then
-                break
-              fi
-              sleep 5
-            done
-
-            printf 'attempt_%s_run_id=%s\n' "$attempt" "${run_id:-not_found}" >> "$details"
-            if [[ -z "$run_id" ]]; then
-              continue
-            fi
-
-            run_meta=""
-            status=""
-            conclusion=""
-            for status_try in $(seq 1 120); do
-              if run_meta="$(gh run view "$run_id" \
-                --repo "$repo" \
-                --json databaseId,headSha,status,conclusion,createdAt,updatedAt,url,workflowName,event)"; then
-                status="$(jq -r '.status // empty' <<< "$run_meta")"
-                conclusion="$(jq -r '.conclusion // empty' <<< "$run_meta")"
-              fi
-
-              if [[ "$status" == "completed" ]]; then
-                break
-              fi
-              sleep 10
-            done
-
-            printf 'attempt_%s_run_meta=%s\n' "$attempt" "$run_meta" >> "$details"
-            if [[ "$status" != "completed" || "$conclusion" != "success" ]]; then
-              printf '\nattempt_%s_failed_log_tail:\n' "$attempt" >> "$details"
-              failed_log="/tmp/pages-failed-${attempt}.log"
-              : > "$failed_log"
-              if gh run view "$run_id" --repo "$repo" --log-failed > "$failed_log" 2>&1; then
-                :
-              fi
-              tail -n 160 "$failed_log" >> "$details"
-              continue
-            fi
-
-            live_rc=0
+      - name: Verify live production closure
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6; do
+            echo "production readback attempt ${attempt}/6"
             if python3 scripts/check_homepage_live_freshness.py \
-              --site "$SITE_URL" \
-              --timeout 20 \
-              --retries 5 \
-              --retry-sleep 30 \
-              > "/tmp/pages-live-${attempt}.log" 2>&1; then
-              live_rc=0
-            else
-              live_rc=$?
+                --site "https://www.trinityaccord.org" \
+                --timeout 20 \
+                --retries 1 \
+                --retry-sleep 1 \
+              && python3 scripts/check_deployment_freshness.py \
+                --site "https://www.trinityaccord.org" \
+                --timeout 20; then
+              echo "PASS: production serves current main static pages and deployment digests"
+              exit 0
             fi
-
-            deployment_rc=0
-            if python3 scripts/check_deployment_freshness.py \
-              --site "$SITE_URL" \
-              --timeout 20 \
-              > "/tmp/pages-deployment-${attempt}.log" 2>&1; then
-              deployment_rc=0
-            else
-              deployment_rc=$?
-            fi
-
-            printf 'attempt_%s_live_static_rc=%s\n' "$attempt" "$live_rc" >> "$details"
-            printf 'attempt_%s_deployment_digest_rc=%s\n' "$attempt" "$deployment_rc" >> "$details"
-            printf '\nattempt_%s_live_static_output:\n' "$attempt" >> "$details"
-            tail -n 240 "/tmp/pages-live-${attempt}.log" >> "$details"
-            printf '\nattempt_%s_deployment_digest_output:\n' "$attempt" >> "$details"
-            tail -n 240 "/tmp/pages-deployment-${attempt}.log" >> "$details"
-
-            if [[ "$live_rc" -eq 0 && "$deployment_rc" -eq 0 ]]; then
-              final_status="PASS"
-              successful_run_id="$run_id"
-              break
-            fi
+            sleep 30
           done
-
-          {
-            printf 'Pages production closure: %s\n\n' "$final_status"
-            printf 'successful_deploy_run_id=%s\n' "${successful_run_id:-none}"
-            printf 'completed_at=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            cat "$details"
-          } > "$report"
-
-          gh pr comment "$EVIDENCE_PR" --repo "$repo" --body-file "$report"
-          cat "$report"
-
-          if [[ "$final_status" != "PASS" ]]; then
-            exit 1
-          fi
+          echo "FAIL: production did not converge to the deployed revision"
+          exit 1
