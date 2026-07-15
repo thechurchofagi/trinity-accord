@@ -20,10 +20,6 @@ permissions:
   id-token: write
   issues: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   guard:
     runs-on: ubuntu-24.04
@@ -224,6 +220,9 @@ jobs:
     needs: build
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
       live_outcome: ${{ steps.live.outcome }}
