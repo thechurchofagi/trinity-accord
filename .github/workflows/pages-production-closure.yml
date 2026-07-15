@@ -20,7 +20,7 @@ concurrency:
 jobs:
   close-production:
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 56
 
     steps:
       - name: Checkout main
@@ -33,10 +33,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
-          EVIDENCE_PR: "667"
+          EVIDENCE_PR: "668"
         shell: bash
         run: |
-          set -uo pipefail
+          set -euo pipefail
 
           repo="$GITHUB_REPOSITORY"
           git fetch origin main --prune
