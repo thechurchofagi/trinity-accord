@@ -115,6 +115,7 @@
 # RECEIPT AND STATUS
 # Receipt confirms intake acceptance only.
 # Receipt is not final inclusion, verification, attestation, authority, amendment, active Guardian status, successor reception, OTS completion, or Arweave archival completion.
+# Receipt is not active Guardian status.
 # Receipt endpoint: https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>
 # Record-chain status: /api/record-chain-status.json
 # Echo index: /record-chain/indexes/echo-index.json
