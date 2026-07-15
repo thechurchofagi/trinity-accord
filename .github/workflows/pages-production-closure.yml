@@ -1,0 +1,209 @@
+name: Pages Production Closure
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pages-production-closure.yml"
+
+permissions:
+  actions: write
+  contents: read
+  issues: write
+
+concurrency:
+  group: pages-production-closure
+  cancel-in-progress: false
+
+jobs:
+  close-production:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Dispatch Pages, wait, verify production, and publish evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SITE_URL: ${{ vars.TRINITY_SITE_URL || 'https://www.trinityaccord.org' }}
+          EVIDENCE_PR: "667"
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          repo="$GITHUB_REPOSITORY"
+          git fetch origin main --prune
+          target_sha="$(git rev-parse origin/main)"
+          details="/tmp/pages-production-closure-details.txt"
+          report="/tmp/pages-production-closure-report.txt"
+          : > "$details"
+
+          printf 'workflow_trigger_sha=%s\n' "$GITHUB_SHA" >> "$details"
+          printf 'deployment_target_sha=%s\n' "$target_sha" >> "$details"
+          printf 'site_url=%s\n' "$SITE_URL" >> "$details"
+          printf 'started_at=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$details"
+
+          final_status="FAIL"
+          successful_run_id=""
+
+          for attempt in 1 2; do
+            created_after="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            printf '\nattempt_%s_dispatch_after=%s\n' "$attempt" "$created_after" >> "$details"
+
+            dispatch_rc=0
+            if gh workflow run deploy-pages.yml \
+              --repo "$repo" \
+              --ref main \
+              -f checkout_ref="$target_sha" \
+              >> "$details" 2>&1; then
+              dispatch_rc=0
+            else
+              dispatch_rc=$?
+            fi
+            printf 'attempt_%s_dispatch_rc=%s\n' "$attempt" "$dispatch_rc" >> "$details"
+
+            if [[ "$dispatch_rc" -ne 0 ]]; then
+              continue
+            fi
+
+            run_id=""
+            : > /tmp/pages-run-list.err
+            for discovery_try in $(seq 1 120); do
+              run_json=""
+              if run_json="$(gh run list \
+                --repo "$repo" \
+                --workflow deploy-pages.yml \
+                --event workflow_dispatch \
+                --branch main \
+                --limit 30 \
+                --json databaseId,headSha,createdAt,status,conclusion,url \
+                2>/tmp/pages-run-list.err)"; then
+                :
+              else
+                run_json=""
+              fi
+
+              if [[ -n "$run_json" ]]; then
+                candidate=""
+                if candidate="$(jq -r \
+                  --arg sha "$target_sha" \
+                  --arg after "$created_after" \
+                  '[.[] | select(.headSha == $sha and .createdAt >= $after)] | sort_by(.createdAt) | last | .databaseId // empty' \
+                  <<< "$run_json")"; then
+                  run_id="$candidate"
+                fi
+              fi
+
+              if [[ -n "$run_id" ]]; then
+                break
+              fi
+              sleep 5
+            done
+
+            printf 'attempt_%s_run_id=%s\n' "$attempt" "${run_id:-not_found}" >> "$details"
+            if [[ -z "$run_id" ]]; then
+              discovery_error=""
+              if [[ -f /tmp/pages-run-list.err ]]; then
+                discovery_error="$(tr '\n' ' ' < /tmp/pages-run-list.err)"
+              fi
+              printf 'attempt_%s_discovery_error=%s\n' "$attempt" "$discovery_error" >> "$details"
+              continue
+            fi
+
+            run_meta=""
+            status=""
+            conclusion=""
+            for status_try in $(seq 1 180); do
+              if run_meta="$(gh run view "$run_id" \
+                --repo "$repo" \
+                --json databaseId,headSha,status,conclusion,createdAt,updatedAt,url,workflowName,event \
+                2>/tmp/pages-run-view.err)"; then
+                if status="$(jq -r '.status // empty' <<< "$run_meta")"; then
+                  :
+                else
+                  status=""
+                fi
+                if conclusion="$(jq -r '.conclusion // empty' <<< "$run_meta")"; then
+                  :
+                else
+                  conclusion=""
+                fi
+              fi
+
+              if [[ "$status" == "completed" ]]; then
+                break
+              fi
+              sleep 10
+            done
+
+            printf 'attempt_%s_run_meta=%s\n' "$attempt" "$run_meta" >> "$details"
+            if [[ "$status" != "completed" || "$conclusion" != "success" ]]; then
+              printf '\nattempt_%s_failed_log_tail:\n' "$attempt" >> "$details"
+              : > "/tmp/pages-failed-${attempt}.log"
+              if gh run view "$run_id" --repo "$repo" --log-failed > "/tmp/pages-failed-${attempt}.log" 2>&1; then
+                :
+              fi
+              tail -n 160 "/tmp/pages-failed-${attempt}.log" >> "$details"
+              continue
+            fi
+
+            live_rc=0
+            if python3 scripts/check_homepage_live_freshness.py \
+              --site "$SITE_URL" \
+              --timeout 20 \
+              --retries 5 \
+              --retry-sleep 30 \
+              > "/tmp/pages-live-${attempt}.log" 2>&1; then
+              live_rc=0
+            else
+              live_rc=$?
+            fi
+
+            deployment_rc=0
+            if python3 scripts/check_deployment_freshness.py \
+              --site "$SITE_URL" \
+              --timeout 20 \
+              > "/tmp/pages-deployment-${attempt}.log" 2>&1; then
+              deployment_rc=0
+            else
+              deployment_rc=$?
+            fi
+
+            printf 'attempt_%s_live_static_rc=%s\n' "$attempt" "$live_rc" >> "$details"
+            printf 'attempt_%s_deployment_digest_rc=%s\n' "$attempt" "$deployment_rc" >> "$details"
+            printf '\nattempt_%s_live_static_output:\n' "$attempt" >> "$details"
+            tail -n 240 "/tmp/pages-live-${attempt}.log" >> "$details"
+            printf '\nattempt_%s_deployment_digest_output:\n' "$attempt" >> "$details"
+            tail -n 240 "/tmp/pages-deployment-${attempt}.log" >> "$details"
+
+            if [[ "$live_rc" -eq 0 && "$deployment_rc" -eq 0 ]]; then
+              final_status="PASS"
+              successful_run_id="$run_id"
+              break
+            fi
+          done
+
+          {
+            printf 'Pages production closure: %s\n\n' "$final_status"
+            printf 'successful_deploy_run_id=%s\n' "${successful_run_id:-none}"
+            printf 'completed_at=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            cat "$details"
+          } > "$report"
+
+          commented="false"
+          if gh pr comment "$EVIDENCE_PR" --repo "$repo" --body-file "$report"; then
+            commented="true"
+          fi
+
+          printf 'evidence_comment_published=%s\n' "$commented"
+          cat "$report"
+
+          [[ "$commented" == "true" ]]
+          [[ "$final_status" == "PASS" ]]
