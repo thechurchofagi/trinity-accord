@@ -144,4 +144,15 @@ jobs:
         run: python3 scripts/test_no_private_key_material_committed.py
 
       - name: Run P0 current fast gate
-        run: python3 scripts/run_ci_group.py p0-current
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/run_ci_group.py p0-current > /tmp/p0-current.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            echo "::group::P0 current failure tail"
+            tail -n 180 /tmp/p0-current.log
+            echo "::endgroup::"
+            exit "$status"
+          fi
+          tail -n 40 /tmp/p0-current.log
