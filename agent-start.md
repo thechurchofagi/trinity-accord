@@ -47,6 +47,10 @@ Current public endpoints:
 - Do not handwrite final submission JSON or server-assigned chain fields.
 - Do not clone the repository, request a GitHub PAT, write `record-chain/pending/`, or run internal append scripts for a public submission.
 
+## Provenance distinction
+
+**Human-requested is not the same as human-operated.** A human request, introduction, or authorization does not by itself mean a human executed the submission. When an agent performs the build, preflight, and submit operations itself, declare the actual executor and use `human_operator_involved=false` unless a human actually performed an operational step.
+
 ## Supported Builder record types
 
 | Type | Builder command |
