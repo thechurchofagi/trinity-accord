@@ -69,6 +69,9 @@ def main() -> None:
     ]:
         require("guardian-routes.md", needle, label)
 
+    # These tokens must not be advertised by Guardian Routes as live commands
+    # or required proof blocks. Historical route names may be named on other
+    # pages inside an explicitly retired-guidance section.
     for needle, label in [
         ("/api/agent-start.v1.json", "agent-start v1 route"),
         ("/api/gateway-builder-route-map.v1.json", "gateway route map"),
@@ -81,14 +84,6 @@ def main() -> None:
         ("retires, rotates, or reports", "rotation-through-retirement wording"),
     ]:
         reject("guardian-routes.md", needle, label)
-
-    for needle, label in [
-        ("/gateway/preflight", "Gateway v1 preflight"),
-        ("/agent-submit", "Gateway v1 submit"),
-        ("scripts/build_agent_declared_archive_payload.py", "legacy Python verification builder"),
-        ("Echo v3 wrapper + Verification Report v2", "legacy wrapper as active guidance"),
-    ]:
-        reject("agent-start.md", needle, label)
 
     print("PASS: test_agent_start_docs")
 
