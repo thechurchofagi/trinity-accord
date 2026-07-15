@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Active agent docs must expose only the current external-agent operating model."""
+"""Active human and machine entrypoints must expose only the current model."""
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -105,9 +106,11 @@ GLOBAL_FORBIDDEN_ACTIVE_ROUTES = [
 ]
 
 
-def main() -> int:
-    errors: list[str] = []
+def load_json(path: str) -> dict:
+    return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
+
+def check_human_surfaces(errors: list[str]) -> None:
     for rel_path, required in REQUIRED_BY_FILE.items():
         text = (ROOT / rel_path).read_text(encoding="utf-8")
         for needle in required:
@@ -126,13 +129,76 @@ def main() -> int:
                     f"{retired_route}"
                 )
 
+
+def check_machine_surfaces(errors: list[str]) -> None:
+    first = load_json("api/agent-first-contact.json")
+    choices = first.get("choose_one", [])
+    for item in choices:
+        if item.get("intent") == "verification_echo_e2" or item.get("action") == "VERIFICATION_ECHO_E2":
+            errors.append("api/agent-first-contact.json still exposes active E2 wrapper route")
+    active_first = json.dumps(choices, ensure_ascii=False)
+    for stale in [
+        "/api/echo-record-schema.v3.1.json",
+        "/api/verification-report-schema.v2.json",
+    ]:
+        if stale in active_first:
+            errors.append(f"api/agent-first-contact.json active route loads retired schema: {stale}")
+    redirects = first.get("deprecated_term_redirects", {})
+    e2 = redirects.get("verification_echo_or_E2", {})
+    if e2.get("do_not_use_as_current_record_type") is not True:
+        errors.append("api/agent-first-contact.json must retire E2 as a current record type")
+
+    router = load_json("api/agent-task-router.v1.json")
+    routes = router.get("routes", {})
+    for retired_route in ["verify_v0_v5_agent_declared", "verify_v6_plus_strict_evidence"]:
+        if retired_route in routes:
+            errors.append(f"api/agent-task-router.v1.json still exposes retired route: {retired_route}")
+    submit_echo = routes.get("submit_echo", {})
+    echo_reads = set(submit_echo.get("read", []))
+    for required in [
+        "/api/context-action-profiles.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
+    ]:
+        if required not in echo_reads:
+            errors.append(f"api/agent-task-router.v1.json submit_echo missing {required}")
+    for stale in [
+        "/api/echo-record-schema.v3.json",
+        "/api/echo-record-schema.v3.1.json",
+        "/api/verification-report-schema.v2.json",
+    ]:
+        if stale in echo_reads:
+            errors.append(f"api/agent-task-router.v1.json submit_echo loads retired schema: {stale}")
+    verify = routes.get("verify_current_model", {})
+    if verify.get("legacy_builder_values") != ["V0", "V1", "V2", "V3", "V4", "V5"]:
+        errors.append("api/agent-task-router.v1.json verification compatibility values drifted")
+    if verify.get("historical_only_labels") != ["V4+", "V6", "V7", "V8"]:
+        errors.append("api/agent-task-router.v1.json historical-only verification labels drifted")
+
+    mission = load_json("api/mission-governance.v1.json")
+    context = mission.get("context_governance", {})
+    if context.get("preferred_action_profiles") != "/api/context-action-profiles.v1.json":
+        errors.append("mission governance must use action profiles as the preferred context model")
+    verification = mission.get("action_semantics", {}).get("verification", {})
+    if verification.get("legacy_v_level_role") != "builder_compatibility_only":
+        errors.append("mission governance must mark V values as Builder compatibility only")
+    smoked = set(mission.get("supported_public_actions", {}).get("core_external_agent_routes_live_smoked", []))
+    if smoked != {"echo", "verification", "guardian_application_intake"}:
+        errors.append(f"mission governance current live-smoked routes drifted: {sorted(smoked)}")
+
+
+def main() -> int:
+    errors: list[str] = []
+    check_human_surfaces(errors)
+    check_machine_surfaces(errors)
+
     if errors:
-        print("FAIL: external-agent docs current-model clarity errors:")
+        print("FAIL: external-agent current-model clarity errors:")
         for error in errors:
             print("  -", error)
         return 1
 
-    print("PASS: active agent docs expose the current context, verification, and Record-Chain model")
+    print("PASS: human and machine entrypoints expose the current context, verification, and Record-Chain model")
     return 0
 
 
