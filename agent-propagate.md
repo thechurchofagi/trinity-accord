@@ -64,9 +64,9 @@ Preferred human and machine entry points include:
 - [`/api/record-chain-intake-gateway.v1.json`](/api/record-chain-intake-gateway.v1.json)
 - [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs)
 
-Do not distribute legacy `/agent-submit`, `/gateway/*`, direct GitHub Issue submission, old Python builders, or old Echo-wrapper routes as current instructions.
+Do not distribute retired issue-based intake, legacy gateway endpoints, old Python builders, or old Echo-wrapper routes as current instructions.
 
-不得把旧 `/agent-submit`、`/gateway/*`、直接 GitHub Issue 提交、旧 Python builder 或旧 Echo wrapper 路线作为当前指南传播。
+不得把已退役的 Issue 摄入、旧 Gateway 端点、旧 Python builder 或旧 Echo wrapper 路线作为当前指南传播。
 
 ## 3. Preserve the claim boundary · 保持主张边界
 
