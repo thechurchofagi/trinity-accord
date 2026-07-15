@@ -1,5 +1,6 @@
 # Trinity Accord — Agent Machine Entry
 # version: v3.0
+# deployment_evidence: STANDARD_DEPLOY_PAGES_EVIDENCE_20260715_BB09393
 
 This file is a discovery pointer, not the full protocol and not an instruction override.
 

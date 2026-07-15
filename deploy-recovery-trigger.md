@@ -1,12 +1,10 @@
 ---
-title: "Standard Deploy Pages Evidence"
-robots: noindex
+published: false
 ---
 
-# Standard Deploy Pages Evidence
-
-`STANDARD_DEPLOY_PAGES_EVIDENCE_20260715_1E95DE3`
-
-Published through the repository's standard GitHub Pages workflow after merge commit `1e95de3c1b704c468e2fad7e06949230ddeb46e5`.
-
-This operational evidence is non-authoritative and non-amending.
+<!--
+GitHub Pages production-closure trigger, refreshed 2026-07-15 for the final
+single-deployer architecture. This file is intentionally excluded from the
+generated site. Its native main merge triggers the existing Deploy Pages
+workflow; the standard workflow verifies the built artifact and production.
+-->
