@@ -20,7 +20,6 @@ jobs:
     timeout-minutes: 20
     env:
       E2E_RUN_ID: "legacy-echo-dry-run-${{ github.run_id }}"
-      E2E_LOG_DIR: "${{ runner.temp }}/legacy-echo-arweave/${{ github.run_id }}"
       ARWEAVE_UPLOAD_MODE: "dry_run"
       ALLOW_PAID_ARWEAVE_CANARY: "false"
       ARWEAVE_MAX_UPLOAD_USD: "0.10"
@@ -41,6 +40,9 @@ jobs:
 
       - name: Install Node dependencies
         run: npm ci
+
+      - name: Initialize ephemeral audit directory
+        run: echo "E2E_LOG_DIR=$RUNNER_TEMP/legacy-echo-arweave/${GITHUB_RUN_ID}" >> "$GITHUB_ENV"
 
       - name: Build ephemeral echo payload
         run: |
@@ -91,6 +93,6 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: legacy-echo-arweave-audit-${{ github.run_id }}
-          path: ${{ env.E2E_LOG_DIR }}/
+          path: ${{ runner.temp }}/legacy-echo-arweave/${{ github.run_id }}/
           if-no-files-found: ignore
           retention-days: 30
