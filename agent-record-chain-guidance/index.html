@@ -115,6 +115,7 @@ Do not clone the repository for public submission, handwrite final submission JS
 
 <h2 id="guardian-application">6. Guardian application and retirement</h2>
 <div class="critical"><strong>Guardian application receipt is not active Guardian status.</strong> Active/current status must be read from <code>/record-chain/indexes/guardian-state.json</code>.</div>
+<p>Build a Guardian Application with <code>--guardian-id auto</code> and <code>--guardian-key-sha auto</code>. The optional <code>--guardian-stewardship-oath</code> field records a stewardship statement; when omitted, the canonical Builder default applies. This stewardship text is distinct from the formal no-shortcut oath obtained through <code>print-oath</code> and supplied through <code>--readback</code>.</p>
 <p>Guardian key hashes are derived from exact public-key material. They are not Record-Chain record hashes, content hashes, or receipt hashes.</p>
 <p>Guardian Retirement must bind the original final Guardian Application record ID and its exact <code>record_sha256</code>, and it must satisfy the current key requirements. Never guess the target.</p>
 
