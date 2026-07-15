@@ -22,6 +22,7 @@ on:
       - "CNAME"
       - ".well-known/**"
       - "_layouts/**"
+      - "_includes/**"
       - "assets/**"
       - "agent-record-chain-guidance/**"
       - "bitcoin-inscription-mirrors/**"
@@ -37,6 +38,9 @@ on:
       - "nft-text-descriptions/**"
       - "propagate/**"
       - "record-chain-field-helper/**"
+      - "scripts/check_deployment_freshness.py"
+      - "scripts/smoke_live_discovery_contract.py"
+      - "scripts/report_pages_deployment.py"
       - "sitemap.xml"
       - "_config.yml"
       - ".github/workflows/deploy-pages.yml"
@@ -45,12 +49,13 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   verify:
@@ -338,6 +343,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-24.04
     needs: build
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -376,3 +383,58 @@ jobs:
 
       - name: Verify live deployment freshness surface
         run: python3 scripts/check_deployment_freshness.py --site "https://www.trinityaccord.org"
+
+  report:
+    if: ${{ always() }}
+    needs: [verify, build, deploy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout deployed revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.inputs.checkout_ref || github.sha }}
+          fetch-depth: 1
+
+      - name: Resolve merged pull request
+        id: pr
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref="${{ github.event.inputs.checkout_ref || github.sha }}"
+          message="$(git show -s --format=%B "${ref}")"
+          pr_number="$(printf '%s\n' "${message}" | sed -nE 's/^Merge pull request #([0-9]+).*/\1/p' | head -n1)"
+          echo "number=${pr_number}" >> "$GITHUB_OUTPUT"
+
+      - name: Post standard Pages deployment receipt
+        if: steps.pr.outputs.number != ''
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/report_pages_deployment.py \
+            --repo "${GITHUB_REPOSITORY}" \
+            --pr "${{ steps.pr.outputs.number }}" \
+            --run-id "${GITHUB_RUN_ID}" \
+            --run-number "${GITHUB_RUN_NUMBER}" \
+            --run-attempt "${GITHUB_RUN_ATTEMPT}" \
+            --sha "${{ github.event.inputs.checkout_ref || github.sha }}" \
+            --verify-result "${{ needs.verify.result }}" \
+            --build-result "${{ needs.build.result }}" \
+            --deploy-result "${{ needs.deploy.result }}" \
+            --deployment-url "${{ needs.deploy.outputs.page_url }}"
+
+      - name: Write deployment receipt summary
+        shell: bash
+        run: |
+          {
+            echo "## Standard Deploy Pages receipt"
+            echo
+            echo "- run_id: \`${GITHUB_RUN_ID}\`"
+            echo "- run_number: \`${GITHUB_RUN_NUMBER}\`"
+            echo "- run_attempt: \`${GITHUB_RUN_ATTEMPT}\`"
+            echo "- deployed_ref: \`${{ github.event.inputs.checkout_ref || github.sha }}\`"
+            echo "- verify: \`${{ needs.verify.result }}\`"
+            echo "- build: \`${{ needs.build.result }}\`"
+            echo "- deploy: \`${{ needs.deploy.result }}\`"
+            echo "- deployment_url: \`${{ needs.deploy.outputs.page_url }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
