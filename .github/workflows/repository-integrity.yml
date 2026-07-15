@@ -21,11 +21,17 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # This contract is stdlib-only. Run it before dependency setup so stale
-      # active guidance fails fast and its exact assertion remains visible in
-      # the short job log.
-      - name: Verify agent-start docs text contract
-        run: python3 scripts/test_agent_start_docs.py
+      # These contracts are stdlib-only. Run them before dependency setup so
+      # stale active guidance fails fast and the failing contract family is
+      # visible directly in the job step summary.
+      - name: Verify Agent Start current contract
+        run: python3 scripts/test_agent_start_docs.py agent-start
+
+      - name: Verify Guardian current-route contract
+        run: python3 scripts/test_agent_start_docs.py guardian-current
+
+      - name: Verify Guardian retired-route omissions
+        run: python3 scripts/test_agent_start_docs.py guardian-retired
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
