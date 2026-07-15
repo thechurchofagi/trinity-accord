@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          show-progress: false
 
       # These contracts are stdlib-only. Run them before dependency setup so
       # stale active guidance fails fast and the failing contract family is
