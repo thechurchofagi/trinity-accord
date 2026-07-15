@@ -110,6 +110,7 @@ GROUPS = {
         ["python3", "scripts/test_pages_build_contains_agent_discovery.py"],
         ["python3", "scripts/test_pages_custom_domain_contract.py"],
         ["python3", "scripts/test_deploy_pages_action_allowlist.py"],
+        ["python3", "scripts/test_pages_verification_comment_permissions.py"],
         ["python3", "scripts/test_deploy_pages_workflow_contract_is_static.py"],
 
         # External agent journey smoke guards
@@ -204,6 +205,7 @@ GROUPS = {
         # Phase 6C: operator secret names, Arweave live readiness, Render manual deploy
         ["python3", "scripts/test_operator_secret_names_contract.py"],
         ["python3", "scripts/test_arweave_live_readiness_contract.py"],
+        ["python3", "scripts/test_paid_echo_workflow_contract.py"],
         ["python3", "scripts/test_arweave_upload_contract.py"],
         ["python3", "scripts/test_arweave_upload_wallet_ledger_integration.py"],
         ["python3", "scripts/test_arweave_paid_upload_wallet_wiring.py"],

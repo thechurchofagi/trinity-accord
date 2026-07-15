@@ -11,7 +11,7 @@ on:
 
 permissions:
   contents: read
-  issues: write
+  pull-requests: write
 
 jobs:
   verify-current-production:
@@ -50,7 +50,9 @@ jobs:
           verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           printf '%s\n' "$body"
           if [[ -n "$EVIDENCE_PR" ]]; then
-            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+            if ! gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"; then
+              echo "::warning::Could not publish the verification-start PR comment"
+            fi
           fi
 
       - name: Verify current production surfaces
@@ -99,7 +101,9 @@ jobs:
 
           printf '%s\n' "$body"
           if [[ -n "$EVIDENCE_PR" ]]; then
-            gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"
+            if ! gh pr comment "$EVIDENCE_PR" --repo "$GITHUB_REPOSITORY" --body "$body"; then
+              echo "::warning::Could not publish the current-production PR comment"
+            fi
           else
             echo "::warning::No merged PR number was found in the current commit message"
           fi

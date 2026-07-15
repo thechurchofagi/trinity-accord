@@ -1,57 +1,34 @@
 #!/usr/bin/env python3
+"""Contract for the retired, read-only Echo Arweave cost audit."""
+
 from pathlib import Path
-import re
-import sys
 
 WORKFLOW = Path(".github/workflows/paid-echo-arweave-canary.yml")
 
-def fail(msg: str) -> None:
-    print(f"FAIL: {msg}", file=sys.stderr)
-    sys.exit(1)
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise SystemExit(f"FAIL: {message}")
+
 
 def main() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
+    header, jobs = text.split("jobs:", 1)
+    job_env = jobs.split("steps:", 1)[0]
 
-    if "name: Paid Echo Arweave Canary" not in text:
-        fail("workflow name changed or missing")
+    require("Paid Canary Retired" in text, "workflow does not declare retirement")
+    require("workflow_dispatch:" in header, "retired audit is not manual-only")
+    require("contents: read" in header, "retired audit is not read-only")
+    require("contents: write" not in text, "retired audit can write repository contents")
+    require("secrets.ARKEY" not in text, "retired audit can access the wallet secret")
+    require("git push" not in text, "retired audit retains a push path")
+    require('ARWEAVE_UPLOAD_MODE: "dry_run"' in text, "audit is not pinned to dry-run mode")
+    require('ALLOW_PAID_ARWEAVE_CANARY: "false"' in text, "paid canary is not disabled")
+    require("runner.temp" not in job_env, "job-level env uses unavailable runner context")
+    require("$RUNNER_TEMP/legacy-echo-arweave/" in text, "ephemeral audit directory is not initialized at runtime")
 
-    if 'EXPECTED_ARWEAVE_OWNER: "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s"' not in text:
-        fail("expected Arweave owner is missing or changed")
+    print("PASS: retired Echo Arweave audit is parse-safe, manual-only, and read-only")
 
-    if "ARWEAVE_MAX_UPLOAD_USD: ${{ github.event.inputs.max_upload_usd || '0.10' }}" not in text:
-        fail("max upload USD env is missing")
-
-    if 'ARWEAVE_SAFETY_MULTIPLIER: "1.20"' not in text:
-        fail("safety multiplier is missing")
-
-    if "ALLOW_PAID_ARWEAVE_CANARY" not in text:
-        fail("ALLOW_PAID_ARWEAVE_CANARY env is missing")
-
-    if "Guard first paid canary scope" not in text:
-        fail("paid canary scope guard is missing")
-
-    if 'github.event.inputs.record_type }}\" != \"echo\"' not in text:
-        fail("paid canary guard must reject non-echo record types")
-
-    # Ensure the workflow does not silently build only echo while accepting other record types.
-    # It may either offer only echo in choices or have the hard guard above.
-    record_type_block = re.search(
-        r"record_type:\n(?P<body>(?:        .+\n)+)",
-        text,
-    )
-    if not record_type_block:
-        fail("record_type workflow_dispatch input not found")
-
-    body = record_type_block.group("body")
-    non_echo_options = [
-        opt for opt in ("verification", "guardian_application")
-        if f"- {opt}" in body
-    ]
-
-    if non_echo_options and "Guard first paid canary scope" not in text:
-        fail(f"non-echo options present without hard guard: {non_echo_options}")
-
-    print("PASS: paid echo workflow contract")
 
 if __name__ == "__main__":
     main()
