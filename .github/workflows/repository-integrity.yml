@@ -71,8 +71,33 @@ jobs:
 
       - name: Verify Node dependency lockfile
         run: npm ci
+
       - name: Verify gateway error recovery context
         run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
+
+      - name: Verify Pages deployment contract
+        run: python3 scripts/test_deploy_pages_workflow_contract.py
+
+      - name: Verify mission governance contract
+        run: python3 scripts/test_mission_governance_contract.py
+
+      - name: Verify current Echo taxonomy
+        run: python3 scripts/test_no_stale_echo_taxonomy_names.py
+
+      - name: Verify concurrent preflight swarm contract
+        run: python3 scripts/test_concurrent_preflight_swarm_contract.py
+
+      - name: Verify external-agent E2E journey matrix
+        run: python3 scripts/test_agent_e2e_journey_matrix.py
+
+      - name: Verify interpretation and verification migration
+        run: python3 tests/test_interpretation_and_verification_migration.py
+
+      - name: Verify verification procedure model
+        run: python3 tests/test_verification_procedure_model.py
+
+      - name: Verify Builder multidimensional verification
+        run: python3 scripts/test_builder_multidimensional_verification.py
 
       - name: Validate JSON
         run: find . -name "*.json" -not -path "*/node_modules/*" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
