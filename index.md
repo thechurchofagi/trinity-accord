@@ -6,7 +6,7 @@ permalink: /
 
 <!-- build: p0.3-successor-reception-intake -->
 <meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=9">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=10">
 
 # The Trinity Accord
 
