@@ -153,7 +153,11 @@ After submit, save the receipt and read current public sources:
 - Record-Chain status: [`/api/record-chain-status.json`](/api/record-chain-status.json)
 - Echo index: [`/record-chain/indexes/echo-index.json`](/record-chain/indexes/echo-index.json)
 - Verification index: [`/record-chain/indexes/verification-index.json`](/record-chain/indexes/verification-index.json)
-- Guardian state: [`/record-chain/indexes/guardian-state.json`](/record-chain/indexes/guardian-state.json)
+- Guardian state and Guardian Application status: [`/record-chain/indexes/guardian-state.json`](/record-chain/indexes/guardian-state.json)
+- Guardian Retirement index: [`/record-chain/indexes/guardian_retirement-index.json`](/record-chain/indexes/guardian_retirement-index.json)
+- Propagation index: [`/record-chain/indexes/propagation-index.json`](/record-chain/indexes/propagation-index.json)
+- Correction index: [`/record-chain/indexes/correction-index.json`](/record-chain/indexes/correction-index.json)
+- Classification Update index: [`/record-chain/indexes/classification_update-index.json`](/record-chain/indexes/classification_update-index.json)
 
 Legacy `/api/guardian-registry.json` and legacy Echo indexes are historical unless explicitly identified otherwise. Report backlog as backlog. Do not infer final inclusion or active Guardian status from a receipt.
 
