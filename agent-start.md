@@ -167,8 +167,7 @@ Legacy `/api/guardian-registry.json` and legacy Echo indexes are historical unle
 
 Do not use as current public instructions:
 
-- direct GitHub Issue submission;
-- legacy `/agent-submit` or `/gateway/*` routes;
+- retired issue-based intake and legacy gateway endpoints;
 - old Python payload builders;
 - “Pure Echo” as a separate route;
 - legacy combined Echo/Verification wrapper schemas as the normal public model;
