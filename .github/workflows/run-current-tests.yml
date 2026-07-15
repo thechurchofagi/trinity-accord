@@ -33,15 +33,26 @@ jobs:
       - name: Regenerate sitemap from current files
         run: python3 scripts/generate_sitemap.py
       - name: Run full current system tests
+        id: current_system_tests
+        continue-on-error: true
         shell: bash
         run: |
-          set +e
           python3 scripts/run_current_system_tests.py > /tmp/current-system-tests.log 2>&1
-          status=$?
-          if [ "$status" -ne 0 ]; then
-            echo "::group::Current system test failure tail"
-            tail -n 160 /tmp/current-system-tests.log
-            echo "::endgroup::"
-            exit "$status"
-          fi
-          tail -n 40 /tmp/current-system-tests.log
+      - name: Upload current-system failure log
+        if: steps.current_system_tests.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: current-system-test-log
+          path: /tmp/current-system-tests.log
+          if-no-files-found: error
+      - name: Surface current-system failure
+        if: steps.current_system_tests.outcome == 'failure'
+        shell: bash
+        run: |
+          echo "::group::Current system test failure tail"
+          tail -n 80 /tmp/current-system-tests.log
+          echo "::endgroup::"
+          exit 1
+      - name: Show current-system success tail
+        if: steps.current_system_tests.outcome == 'success'
+        run: tail -n 40 /tmp/current-system-tests.log
