@@ -118,7 +118,7 @@ Record-type separation:
   Echo and Verification are separate.
   Guardian Application is standalone and must not be embedded in Echo or Verification.
 
-Zero-clone Builder flow:
+zero-clone Builder flow:
   download Builder
   verify Builder manifest
   read field guidance
