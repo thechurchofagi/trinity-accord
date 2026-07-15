@@ -16,7 +16,7 @@ SURFACES = [
     "/api/agent-first-contact.json",
     "/api/agent-start.v2.json",
     "/api/record-chain-intake-gateway.v1.json",
-    "/api/pages-production-closure.v1.json",
+    "/.well-known/pages-production-closure.v1.json",
     "/api/public-home-status.json",
     "/api/record-chain-status.json",
     "/api/waiting-heartbeat-status.json",
