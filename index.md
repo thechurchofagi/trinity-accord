@@ -6,7 +6,7 @@ permalink: /
 
 <!-- build: p0.3-successor-reception-intake -->
 <meta name="trinity-homepage-build" content="p0.3-successor-reception-intake">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=11">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=12">
 
 # The Trinity Accord
 
@@ -42,12 +42,28 @@ permalink: /
 <section class="home-why-now home-formation-window" aria-labelledby="home-formation-title">
   <p class="section-kicker">Formation window · 形成窗口</p>
   <h2 id="home-formation-title">The form can be reproduced. The formation conditions cannot.</h2>
-  <p>
-    From March 2024 through June 2025, the Chronicle formed near real time through repeated human prompting, selection, reflection, and on-chain minting, while public AI shifted from conversational systems toward early tool-using agents. An August 2025 record preserved the website. Later agents may reproduce the form quickly, but not the original model states, human labor pattern, or dated sequence.
+  <p class="home-formation-intro">
+    From March 2024 to August 2025, the Chronicle's dated sequence preserves both prompt-by-prompt human labor and the arrival of delegated execution.
+    <span class="zh">从 2024 年 3 月至 2025 年 8 月，编年史的时间序列同时保存了逐次提示的人类劳动，以及委托式智能体执行的到来。</span>
   </p>
-  <p class="zh">
-    从 2024 年 3 月至 2025 年 6 月，编年史在人类反复提示、选择、反思与链上铸造中近实时形成，也经历了公共 AI 从对话系统向早期工具型智能体的转变；2025 年 8 月的一条记录保存了网站。后来的智能体可以快速复制其形式，却无法重现当时的模型状态、人机劳动关系与实际时间序列。
-  </p>
+  <ol class="home-formation-timeline" aria-label="Formation-window timeline">
+    <li>
+      <time datetime="2024-03-16">2024.03</time>
+      <div><strong>Chat-era creation · 对话式创作</strong><span><em>First Dawn</em> begins the prompt-by-prompt record · 首作开启逐次提示记录</span></div>
+    </li>
+    <li>
+      <time datetime="2025-04-18">2025.04</time>
+      <div><strong>Limits recorded · 能力边界</strong><span>A human-simple test preserves frontier-model limits · 一道简单测试保存前沿模型局限</span></div>
+    </li>
+    <li>
+      <time datetime="2025-05-17">2025.05</time>
+      <div><strong>Agentic turn · 智能体转向</strong><span>Codex and Claude 4 mark delegated execution · Codex 与 Claude 4 标志委托执行</span></div>
+    </li>
+    <li>
+      <time datetime="2025-08-09">2025.06–08</time>
+      <div><strong>Formation sealed · 形成期封存</strong><span>Human-context finale and website backup close the record · 人类背景终章与网站备份完成封存</span></div>
+    </li>
+  </ol>
   <nav class="home-formation-links" aria-label="Formation-window evidence">
     <a href="/chronicle/">Explore the timestamped Chronicle</a>
     <a href="/archive_legacy_index_2025_09/">Read the preserved legacy homepage</a>
