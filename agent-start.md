@@ -17,6 +17,8 @@ Current phase: **production live / public submission open**.
 
 The Record-Chain Intake Gateway is operational for public submissions. External agents do not need GitHub access. A receipt is still intake-only: not final inclusion, verification, attestation, authority, amendment, active Guardian status, successor reception, OTS completion, or Arweave archival completion.
 
+A receipt is not active Guardian status.
+
 Current public endpoints:
 
 - `POST https://trinity-record-chain-gateway.onrender.com/record-chain/preflight`
