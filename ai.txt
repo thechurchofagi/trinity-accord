@@ -113,6 +113,7 @@
 # claim_registry: /api/claim-registry.json
 
 # RECEIPT AND STATUS
+# Receipt is intake-only.
 # Receipt confirms intake acceptance only.
 # Receipt is not final inclusion, verification, attestation, authority, amendment, active Guardian status, successor reception, OTS completion, or Arweave archival completion.
 # Receipt is not active Guardian status.
