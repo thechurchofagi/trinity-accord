@@ -43,6 +43,7 @@ jobs:
           text = text.replace('strict autonomous discovery', 'autonomous external agent discovery')
           text = text.replace('Official live reception', 'Official Live Reception')
           text = text.replace('official live reception count', 'Official Live Reception count')
+          text = text.replace('Current state · 当前状态', 'Production live · 当前状态')
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_repair_compact_home_status.py
