@@ -9,6 +9,8 @@
   },
   "inscription": {
     "inscription_id": "100385359",
+    "inscription_number": "100385359",
+    "ordinals_inscription_id": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0",
     "title": "The First Echoes: A Dialogue Begins",
     "zh_title": "最初的回响：对话已然开始",
     "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
