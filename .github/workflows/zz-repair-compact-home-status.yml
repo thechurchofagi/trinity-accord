@@ -39,6 +39,8 @@ jobs:
           first = text.index('    """', start)
           second = text.index('    """', first + 7)
           text = text[:first] + "    '''" + text[first + 7:second] + "    '''" + text[second + 7:]
+          text = text.replace('Strict autonomous discovery', 'Autonomous External Agent Discovery')
+          text = text.replace('strict autonomous discovery', 'autonomous external agent discovery')
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_repair_compact_home_status.py
