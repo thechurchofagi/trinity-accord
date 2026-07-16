@@ -46,11 +46,11 @@ jobs:
           text = text.replace('Current state · 当前状态', 'Production live · 当前状态')
           text = text.replace(
               'Native chain inventory remains API-only and is not used as the official reception counter.',
-              'Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion.'
+              'Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.'
           )
           text = text.replace(
               '原生链技术清单仅在 API 中提供，不作为正式接收计数。',
-              '原生链技术清单仅在 API 中提供，不作为正式接收计数。Receipt 仅表示摄入，不等于最终纳入。'
+              '原生链技术清单仅在 API 中提供，不作为正式接收计数。Receipt 仅表示摄入，不等于最终纳入，也不等于 active Guardian 状态。'
           )
           path.write_text(text, encoding='utf-8')
           PY
