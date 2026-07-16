@@ -12,6 +12,7 @@ python3 scripts/test-terminology-p031.py
 
 echo "Checking concise homepage source and value architecture..."
 
+# The homepage is discovery-only; detailed operating contracts are validated on task-specific pages.
 test -f index.md
 test -f technical-historical-reference.md
 grep -q "permalink: /" index.md
