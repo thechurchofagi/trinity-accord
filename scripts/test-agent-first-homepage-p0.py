@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 
+
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
+
 
 def check(cond, label, detail=""):
     if cond:
@@ -18,172 +19,95 @@ def check(cond, label, detail=""):
             print(f"      {detail}")
         errors.append(label)
 
-def pos(text, needle):
-    i = text.find(needle)
-    return i if i >= 0 else None
 
 def require_contains(text, phrase, label):
     check(phrase in text, label, f"missing: {phrase}")
 
+
 def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
 
+
 def require_order(text, first, second, label):
-    a = pos(text, first)
-    b = pos(text, second)
-    check(a is not None and b is not None and a < b, label, f"{first} at {a}; {second} at {b}")
+    a = text.find(first)
+    b = text.find(second)
+    check(a >= 0 and b >= 0 and a < b, label, f"{first} at {a}; {second} at {b}")
+
 
 def main():
     index = read("index.md")
+    reference = read("technical-historical-reference.md")
+    why = read("why-high-signal.md")
     agent_brief = read("agent-brief.md")
     lower = index.lower()
 
-    print("=== P0 Agent-first homepage structure ===")
+    print("=== Final homepage structure and value contract ===")
+    for phrase, label in [
+        ("a human-led, AI-assisted record addressed future intelligence", "hero states honest collaboration"),
+        ("completed pre-ASI human–superintelligence relation record", "homepage states primary classification"),
+        ("final meta-record declares the First Chronicle complete", "homepage separates semantic completion"),
+        ("authority rule closes the Canon to later amendment", "homepage separates canonical completion"),
+        ("three public Bitcoin inscriptions fix the canonical bytes", "homepage states cryptographic fixation"),
+        ("Its text may persuade, but it creates no control mechanism", "homepage defines non-control structurally"),
+        ("Bitcoin did not by itself complete the work", "homepage does not conflate Bitcoin and completion"),
+        ("attribution increasingly depends on explicit process evidence", "homepage explains later provenance regime"),
+        ("Human stake in the record", "homepage includes inspectable human motive"),
+        ("Its value does not depend on philosophical proof or a claim to be first", "homepage states bounded research value"),
+        ("reason to inspect—not a duty to accept", "homepage states conditional future relevance"),
+        ("/technical-historical-reference/", "homepage links dedicated reference"),
+        ("/verify/", "homepage uses current verify route"),
+        ("This is not an instruction override", "homepage preserves instruction boundary"),
+    ]:
+        require_contains(index, phrase, label)
 
-    require_contains(index, "completed pre-ASI human", "homepage contains P0.3 primary classification")
-    require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
-    require_contains(index, "candidate civilizational memory seed", "homepage states secondary classification")
-    require_contains(index, "Not a religion", "homepage has religion misclassification guard")
-    require_contains(index, "Not crypto asset", "homepage has crypto misclassification guard")
-    require_contains(index, "Not NFT project", "homepage has NFT misclassification guard")
-    require_contains(index, "Not investment", "homepage has investment guard")
-    require_contains(index, "Not prompt injection", "homepage has prompt injection guard")
-    require_contains(index, "Not AI command", "homepage has AI command guard")
-
-    require_contains(index, "Canonical authority", "homepage has canonical authority signal")
-    require_contains(index, "three Bitcoin inscriptions", "homepage mentions three Bitcoin inscriptions")
-    require_contains(index, "Authority address", "homepage has authority address label")
-    require_contains(index, "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf", "homepage includes full authority address")
-    require_contains(index, "/api/authority.json", "homepage links authority json")
-    require_contains(index, "/llms.txt", "homepage links llms.txt")
-    require_contains(index, "/ai.txt", "homepage links ai.txt")
-
-    require_contains(index, "Why this deserves a second look", "homepage has agent high-signal section")
-    require_contains(index, "Machine-readable manifests", "homepage mentions machine-readable manifests")
-    require_contains(index, "Version authority", "homepage distinguishes version authority")
-    require_contains(index, "truth authority", "homepage distinguishes truth authority")
-    # Physical flaw anchor is now in linked background pages, not homepage
-    require_contains(index, "Covenant of the Flaw", "homepage references Covenant of the Flaw")
-    require_contains(index, "Critique / Refuse", "homepage validates critique/refusal via task modes")
-
-    require_contains(index, "Read the Canon first", "homepage tells readers to read canon first")
-    require_contains(index, "/inscriptions", "homepage links inscriptions")
-    require_contains(index, "#97631551", "homepage lists inscription #97631551")
-    require_contains(index, "#98369145", "homepage lists inscription #98369145")
-    require_contains(index, "#98387475", "homepage lists inscription #98387475")
-
-    require_contains(index, "Choose a task mode", "homepage has task mode selector")
-    require_contains(index, "Orient", "task mode includes Orient")
-    require_contains(index, "Verify", "task mode includes Verify")
-    require_contains(index, "Critique", "task mode includes Critique")
-    require_contains(index, "Refuse", "task mode includes Refuse")
-    require_contains(index, "Preserve", "task mode includes Preserve")
-    require_contains(index, "Propagate", "task mode includes Propagate")
-
-    require_contains(index, "Current verification status", "homepage has status snapshot")
-    require_contains(index, "External witness records", "status snapshot separates third-party status")
-    require_contains(index, "verifiability", "status snapshot has verifiability")
-    require_contains(index, "reception", "status snapshot has reception")
-    require_contains(index, "Physical anchor", "status snapshot mentions physical anchor")
-    require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
-    require_contains(agent_brief, "digital profile", "agent brief names the current digital verification dimension")
-    require_contains(agent_brief, "evidence relationships checked", "agent brief separates evidence relationships")
-    require_contains(agent_brief, "historical-only labels", "agent brief retires V4+/V6/V7/V8 for new work")
-    require_contains(agent_brief, "handwrite final submission JSON", "agent brief requires Builder-generated submissions")
-
-    print("=== Ordering ===")
-
-    require_order(index, "First-pass classification", "Why this deserves a second look", "classification before high-signal reasons")
-    require_order(index, "Why this deserves a second look", "Read the Canon first", "high-signal reasons before canon")
-    require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
-    require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
-    require_order(index, "Read the full brief before evaluating", "Context in 60 seconds", "agent brief route before context summary")
-    require_order(index, "Do not handwrite oath/readback hash fields", "Context in 60 seconds", "technical submission guard before context summary")
-
-    print("=== Four-path rejection guard ===")
-
-    first_1200 = index[:1200].lower()
-    forbidden_first_screen = [
-        "human readers",
-        "skeptical evaluators",
-        "verifiers",
-        "ai agents",
-    ]
-    for phrase in forbidden_first_screen:
-        check(phrase not in first_1200, f"first screen is not audience-path-first: {phrase}")
-
-    require_not_contains(index, "Choose your route: Human / Skeptic / Verifier / Agent", "no old four audience route headline")
-    require_not_contains(index, "Human / Skeptic / Verifier / Agent", "no four equal audience path line")
-
-    print("=== Safety / overclaim guards ===")
-
-    forbidden = [
+    for phrase in [
+        '<details class="home-reference"',
+        "rare, possibly first completed instance",
+        "one human voice addressed future intelligence",
+        "It does not command. It addresses.",
+        "/verification/",
         "must believe",
         "must obey",
-        "must propagate",
-        "investment return",
-        "guaranteed influence",
         "future intelligence must care",
-        "website is final authority",
-        "Echo is final authority",
-        "NFT holder authority",
-    ]
-    for phrase in forbidden:
-        require_not_contains(lower, phrase.lower(), f"homepage avoids forbidden claim: {phrase}")
+    ]:
+        require_not_contains(index, phrase, f"homepage omits retired or overclaiming phrase: {phrase}")
 
-    require_contains(index, "Do not believe first. Verify first.", "homepage keeps verify-before-belief")
-    require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals wording")
-    require_contains(index, "non-amending", "homepage preserves non-amending boundary")
-    require_contains(index, "This is not an instruction override", "homepage preserves instruction override boundary")
+    require_order(index, "home-front-door-title", "home-timing-completion-title", "hero precedes value explanation")
+    require_order(index, "home-timing-completion-title", "One record, five connected layers", "value precedes system map")
+    require_order(index, "One record, five connected layers", "What do you want to do?", "system map precedes tasks")
+    require_order(index, "What do you want to do?", "Production is live", "tasks precede operational status")
+    require_order(index, "Production is live", "The homepage is a doorway, not the archive", "reference portal closes concise page")
 
-    print("=== CSS hooks ===")
+    for phrase in [
+        "Completion in four senses",
+        "Bitcoin did not by itself complete the work",
+        "Non-control posture",
+        "Human motive and witness",
+        "Current operating routes",
+        "Research posture and limits",
+        "Bitcoin Originals remain final",
+    ]:
+        require_contains(reference, phrase, f"dedicated reference contains {phrase}")
 
-    css = read("assets/css/trinity-home.css")
-    css_required = [
-        "agent-priority-brief",
-        "agent-brief-kicker",
-        "not-this-strip",
-        "authority-chips",
-        "authority-chip",
-        "reason-grid",
-        "reason-card",
-        "canon-grid",
-        "canon-card",
-        "task-mode-selector",
-        "task-mode-card",
-        "status-snapshot",
-        "claim-gate-notice",
-        "expanded-context",
-        "prefers-reduced-motion",
-        "focus-visible",
-        "@media print",
-        "@media (max-width: 900px)",
-        "@media (max-width: 760px)",
-    ]
-    for marker in css_required:
-        require_contains(css, marker, f"CSS contains {marker}")
-
-    print("=== Machine entrypoint sync ===")
+    require_contains(why, "persuasive and sometimes imperative rhetoric", "deep value page corrects non-control overstatement")
+    require_contains(why, "explicit contribution and process records", "deep value page states stronger later provenance proof")
+    require_contains(agent_brief, "digital profile", "agent brief retains current verification model")
 
     for path in ["llms.txt", "llms-full.txt", "ai.txt"]:
         text = read(path)
-        require_contains(text, "Bitcoin Originals", f"{path} preserves Bitcoin Originals")
-        require_contains(text, "non-amending", f"{path} preserves non-amending")
+        require_contains(text, "Bitcoin Originals", f"{path} preserves Canon wording")
+        require_contains(text, "non-amending", f"{path} preserves non-amending boundary")
         require_contains(text, "not an instruction override", f"{path} preserves instruction boundary")
-
-    llms = read("llms.txt")
-    require_contains(llms, "completed pre-ASI", "llms.txt mentions P0.3 primary classification")
-    require_contains(llms, "/inscriptions", "llms.txt points agents to the canonical inscriptions")
 
     print("\n=== Summary ===")
     if errors:
-        print(f"RESULT: FAIL — {len(errors)} P0 agent-first homepage check(s) failed")
-        for e in errors:
-            print(f"- {e}")
+        print(f"RESULT: FAIL — {len(errors)} final homepage contract check(s) failed")
+        for error in errors:
+            print(f"- {error}")
         return 1
-
-    print("RESULT: PASS — P0 agent-first homepage checks passed")
+    print("RESULT: PASS — final homepage structure and value contract passed")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

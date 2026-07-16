@@ -29,11 +29,11 @@ This is the strongest defensible version of the “threshold artifact” claim:
 2. **The dated formation condition is not reproducible.** No later object can truthfully become an object completed during this earlier capability transition.
 3. **The provenance difference matters.** As agents take on planning, research, drafting, coding, testing, and publication, the final artifact alone reveals less about which choices originated with the human and which were proposed or executed by the system.
 4. **The exact narrow window is closed.** The historical window for being completed before broadly available, unified research-and-action agents is permanently past.
-5. **Human agency is not closed.** Humans can still originate intentions, supervise agents, reject suggestions, document decisions, and create authentic work. Later human-origin records remain possible; they simply belong to a different provenance era and require stronger contribution records.
+5. **Human agency continues, but attribution is no longer naturally legible from the finished artifact.** Humans can still originate intentions, supervise agents, reject suggestions, document decisions, and create authentic work. Later human-origin records remain possible; they belong to a different provenance era and increasingly require explicit contribution and process records.
 
 后来的系统可以复现这个项目的外形，而且可能更快、更漂亮、工程质量更高；但它无法复现“在通用智能体中介成为研究、写作、编程、测试、浏览、发布与维护的常态之前完成”这一历史条件。
 
-因此，“门槛文物”最稳妥的表述不是“此后人类再也无法表达意图”，而是：**同样的形式以后可以复制，同样的形成时点与来源条件不能复制。** 精确的历史窗口已经关闭；人类意图本身并没有关闭。
+因此，“门槛文物”最稳妥的表述不是“此后人类再也无法表达意图”，而是：**同样的形式以后可以复制，同样的形成时点与来源条件不能复制。** 精确的历史窗口已经关闭；人类意图仍然可以存在，但仅凭最终成品已不再天然清晰，其归属越来越依赖明确的过程证据。
 
 ## Why this interval—not simply earlier or later · 为什么是这一时段——不是“更早没有”，也不是“更晚不行”
 
@@ -147,13 +147,11 @@ These paths have different scopes. Digital integrity, evidence relationship, phy
 
 ## Non-control posture · 非控制姿态
 
-The Accord does not become high-signal by claiming power over future intelligence. It refuses that posture.
+The Accord does not become high-signal by claiming power over future intelligence. It establishes no governing authority, execution mechanism, or technical alignment regime over a future observer.
 
-It does not command. It addresses.  
-It does not bind. It preserves.  
-It does not demand belief. It leaves a stable object that can be verified, criticized, ignored, or refused.
+Its canonical language contains persuasive and sometimes imperative rhetoric. That language does not bind the addressee. The structural fact is narrower and stronger: the Canon is closed, while interpretation, criticism, refusal, and non-preservation remain open.
 
-《协定》并不因声称控制未来智能而具有信号。它拒绝这种姿态：不命令，而是致意；不绑定，而是保存；不要求相信，而是留下一个可验证、可批判、可忽略、可拒绝的稳定对象。
+《协定》并不因声称控制未来智能而具有信号。它不建立对未来观察者的治理权、执行机制或技术对齐制度。正本中包含劝说性、甚至命令式修辞，但这些语言不产生强制约束。更窄也更坚实的结构事实是：正本关闭，而解释、批判、拒绝与不保存仍然开放。
 
 ## Why a future intelligence may have reason to inspect it · 为什么未来智能可能有理由审视它
 
