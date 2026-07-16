@@ -1,11 +1,11 @@
 {
   "schema": "trinityaccord.record-chain-arweave-backlog.v1",
-  "updated_at": "2026-07-16T06:00:57Z",
+  "updated_at": "2026-07-16T07:56:35Z",
   "items": [
     {
       "key": "976b458c60a6c55b529d1330f1a36064d56772b3d18904cb26d89db7c0cfdc01",
       "kind": "record_chain_arweave",
-      "archive_status": "waiting_for_ots_upgrade",
+      "archive_status": "pending_upload",
       "latest_record_id": "R-000000086",
       "latest_record_sha256": "1ee5ab7076d2bd0b16be5a831d96ab7a35e215e972258370e9802c16848833d2",
       "native_record_count": 86,
@@ -13,15 +13,15 @@
       "retry_count": 0,
       "last_attempt_at": null,
       "last_error": null,
-      "next_action": "wait_for_native_ots_upgrade"
+      "next_action": "upload_record_chain_archive"
     }
   ],
   "summary": {
-    "pending_upload_count": 0,
+    "pending_upload_count": 1,
     "failed_upload_count": 0,
     "readback_failed_count": 0,
     "waiting_for_key_count": 0,
-    "waiting_for_ots_upgrade_count": 1,
+    "waiting_for_ots_upgrade_count": 0,
     "archived_count": 0,
     "backlog_current": false
   },
