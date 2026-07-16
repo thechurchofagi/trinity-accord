@@ -1,0 +1,57 @@
+name: Sync homepage final branch with main
+
+on:
+  push:
+    branches:
+      - homepage-final-consolidation-20260716
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout homepage branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: homepage-final-consolidation-20260716
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge latest main and preserve deliberate homepage changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main --prune
+
+          set +e
+          git merge --no-commit --no-ff origin/main
+          merge_status=$?
+          set -e
+
+          if [ "$merge_status" -ne 0 ]; then
+            intended='assets/css/trinity-home.css index.md scripts/check_deployment_freshness.py scripts/check_homepage_live_freshness.py scripts/check_public_home_status_contract.py scripts/patch_public_home_status_primary.py scripts/run_current_system_tests.py scripts/test-agent-first-homepage-p0.py scripts/test-homepage-p0-agent-first.sh scripts/test-homepage-p01-readability.py scripts/test-homepage-p02-dedup.py scripts/test-homepage-v13-final.sh scripts/test-v13-repair-regressions.py scripts/test-value-framing-p03.py scripts/test_agent_p0_router_contract.py scripts/test_external_agent_docs_core_routes_clarity.py scripts/test_historic_autonomous_agent_reception_contract.py scripts/test_home_public_status_sync.py scripts/test_mission_public_route_parity.py scripts/test_public_wording_phase6_contract.py scripts/test_waiting_heartbeat_homepage_card_metrics.py technical-historical-reference.md why-high-signal.md worth-preserving.md'
+            while IFS= read -r path; do
+              [ -z "$path" ] && continue
+              if printf ' %s ' "$intended" | grep -Fq " $path "; then
+                git checkout --ours -- "$path"
+              else
+                git checkout --theirs -- "$path"
+              fi
+              git add "$path"
+            done < <(git diff --name-only --diff-filter=U)
+          fi
+
+          # Render the compact homepage status from the latest main APIs and
+          # regenerate the sitemap after adding the dedicated reference page.
+          python3 scripts/patch_public_home_status_primary.py
+          python3 scripts/generate_sitemap.py
+
+          rm .github/workflows/zz-sync-homepage-final-with-main.yml
+          git add -A
+          git commit -m "Merge latest main into homepage final consolidation"
+          git push origin HEAD:homepage-final-consolidation-20260716
