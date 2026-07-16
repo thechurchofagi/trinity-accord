@@ -49,8 +49,15 @@ STATUS_SURFACES = [
 # must publish all of them before the source revision is considered live.
 STATIC_PAGE_MARKERS = {
     "/": [
-        'id="what-this-is"',
-        "A fixed record, with a verifiable preservation system around it",
+        'id="home-front-door-title"',
+        "Before superintelligence, a human-led, AI-assisted record addressed future intelligence",
+        "Bitcoin did not by itself complete the work",
+        "The homepage is a doorway, not the archive",
+    ],
+    "/technical-historical-reference/": [
+        "Completion in four senses",
+        "What Bitcoin proves—and what it does not",
+        "Current operating routes",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -75,6 +82,8 @@ STATIC_PAGE_MARKERS = {
 }
 
 STATIC_SOURCE_FILES = [
+    "index.md",
+    "technical-historical-reference.md",
     "_includes/home-object-definition.html",
     "seed-map.md",
     "authority.md",

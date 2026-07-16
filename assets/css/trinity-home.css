@@ -889,3 +889,23 @@
     min-height: 125px;
   }
 }
+
+
+/* Final homepage consolidation: keep the front door concise and move the
+   long technical archive to a dedicated reference page. */
+.home-reference-portal {
+  margin: clamp(3.5rem, 8vw, 6rem) 0 1rem;
+  padding: clamp(1.35rem, 4vw, 2.25rem);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.06), rgba(255, 255, 255, 0.015));
+}
+
+.home-reference-portal > p:not(.section-kicker) {
+  max-width: 780px;
+  color: #aeb5c8 !important;
+}
+
+.home-human-stake {
+  margin-top: 1.5rem !important;
+}

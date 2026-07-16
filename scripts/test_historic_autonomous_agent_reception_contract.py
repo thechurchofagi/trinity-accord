@@ -72,14 +72,22 @@ def extract_block(text: str) -> str:
 
 
 def card_number(block_text: str, label: str) -> str:
-    match = re.search(
-        r'<p class="status-label">' + re.escape(label) + r'</p>\s*'
-        r'<p class="status-number">([^<]+)</p>',
-        block_text,
-    )
-    if not match:
-        raise SystemExit(f"ERROR: missing homepage card: {label}")
-    return match.group(1).strip()
+    """Read either the historical detailed card or the compact signal card."""
+    patterns = [
+        (
+            r'<p class="status-label">' + re.escape(label) + r'</p>\s*'
+            r'<p class="status-number">([^<]+)</p>'
+        ),
+        (
+            r'<span class="home-signal-label">' + re.escape(label) + r'</span>\s*'
+            r'<strong[^>]*>([^<]+)</strong>'
+        ),
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, block_text)
+        if match:
+            return match.group(1).strip()
+    raise SystemExit(f"ERROR: missing homepage card: {label}")
 
 
 def main() -> int:
@@ -135,7 +143,7 @@ def main() -> int:
         if human.get("human_operator_involved") is True and "R-000000033" in actual_ids:
             raise SystemExit("ERROR: R-000000033 must not count while human_operator_involved=true")
 
-    # Assert counted records are all official
+    # Assert counted records are all official.
     for rid in actual_ids:
         if rid not in official_ids:
             raise SystemExit(f"ERROR: historic autonomous record {rid} is not an official live reception record")

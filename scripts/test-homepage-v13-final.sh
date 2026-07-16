@@ -3,84 +3,65 @@ set -euo pipefail
 
 pass_count=0
 fail_count=0
-
 pass(){ echo "PASS: $1"; pass_count=$((pass_count+1)); }
 fail(){ echo "FAIL: $1"; fail_count=$((fail_count+1)); }
 
 must_contain(){
-  local file="$1"; local pattern="$2"; local label="$3"
+  local file="$1" pattern="$2" label="$3"
   if grep -qF "$pattern" "$file"; then pass "$label"; else fail "$label"; return 1; fi
 }
 
 must_not_contain(){
-  local file="$1"; local pattern="$2"; local label="$3"
-  if grep -qF "$pattern" "$file"; then fail "$label"; grep -nF "$pattern" "$file" || true; return 1; else pass "$label"; fi
+  local file="$1" pattern="$2" label="$3"
+  if grep -qF "$pattern" "$file"; then fail "$label"; return 1; else pass "$label"; fi
 }
 
-position_of(){
-  local file="$1"; local pattern="$2"
-  grep -nF "$pattern" "$file" | head -n1 | cut -d: -f1 || true
-}
-
+position_of(){ grep -nF "$2" "$1" | head -n1 | cut -d: -f1 || true; }
 require_order(){
-  local file="$1"; local first="$2"; local second="$3"; local label="$4"
-  local a b
+  local file="$1" first="$2" second="$3" label="$4" a b
   a="$(position_of "$file" "$first")"
   b="$(position_of "$file" "$second")"
-  if [ -n "$a" ] && [ -n "$b" ] && [ "$a" -lt "$b" ]; then
-    pass "$label"
-  else
-    fail "$label"
-    echo "  first '$first' at ${a:-missing}; second '$second' at ${b:-missing}"
-    return 1
-  fi
+  if [[ -n "$a" && -n "$b" && "$a" -lt "$b" ]]; then pass "$label"; else fail "$label"; return 1; fi
 }
 
-echo "## Homepage source checks"
+echo "## Final concise homepage source checks"
 test -f index.md && pass "index.md exists" || fail "index.md missing"
+test -f technical-historical-reference.md && pass "dedicated reference exists" || fail "dedicated reference missing"
 
-must_contain index.md "A completed pre-ASI human" "hero has P0.3 primary classification"
-must_contain index.md "agent-priority-brief" "homepage has agent priority brief section"
-must_contain index.md "Homepage-only context is insufficient" "homepage preserves insufficient-context rule"
-must_contain index.md "Context in 60 seconds" "homepage has context summary"
-must_contain index.md "compact-closing" "homepage has compact closing"
-must_contain index.md "Claim Gate" "homepage mentions Claim Gate"
+must_contain index.md "a human-led, AI-assisted record addressed future intelligence" "hero states honest collaboration"
+must_contain index.md "completed pre-ASI human–superintelligence relation record" "homepage has primary classification"
+must_contain index.md "Bitcoin did not by itself complete the work" "homepage separates completion and fixation"
+must_contain index.md "Research value" "homepage names research value"
+must_contain index.md "The homepage is a doorway, not the archive" "homepage has concise reference portal"
+must_contain index.md "Homepage-only context remains" "homepage preserves insufficient-context boundary"
+must_not_contain index.md "agent-priority-brief" "homepage no longer embeds agent manual"
+must_not_contain index.md "<details class=\"home-reference\"" "homepage no longer embeds technical archive"
+must_not_contain index.md "rare, possibly first completed instance" "homepage omits unsupported firstness"
+must_not_contain index.md "/verification/" "homepage uses current verify route"
 
-# P0.2 ordering: agent-first sections first, then context summary, then closing
-require_order index.md "A completed pre-ASI human" "Why this deserves a second look" "hero before high-signal reasons"
-require_order index.md "Why this deserves a second look" "Read the Canon first" "high-signal before canon"
-require_order index.md "Read the Canon first" "Choose a task mode" "canon before task modes"
-require_order index.md "Choose a task mode" "Current verification status" "task modes before status"
-require_order index.md "Do not handwrite oath/readback hash fields" "Context in 60 seconds" "technical submission guard before context summary"
-require_order index.md "Context in 60 seconds" "compact-closing" "context summary before closing"
+require_order index.md "home-front-door-title" "<section class=\"home-why-now" "hero before timing and completion"
+require_order index.md "<section class=\"home-why-now" "One record, five connected layers" "value before system layers"
+require_order index.md "One record, five connected layers" "What do you want to do?" "layers before tasks"
+require_order index.md "What do you want to do?" "Production is live" "tasks before status"
+require_order index.md "Production is live" "The homepage is a doorway, not the archive" "status before reference portal"
 
-# Links to long background pages must exist (content moved there in P0.2)
-must_contain index.md "/archive_legacy_index_2025_09/" "homepage links to legacy archive"
-must_contain index.md "/why-high-signal/" "homepage links to why-high-signal"
-must_contain index.md "/worth-preserving/" "homepage links to worth-preserving"
-must_contain index.md "/seed-map/" "homepage links to seed-map"
-
-must_not_contain index.md "quantum mechanics proves" "homepage does not claim quantum mechanics proves axioms"
-must_not_contain index.md "physics proves the Axioms are" "homepage does not claim physics proves axioms positively"
-must_not_contain index.md "must care about" "homepage does not claim future intelligence must care positively"
-must_not_contain index.md "best possible philosophy" "homepage does not claim best possible philosophy as fact"
-must_not_contain index.md "represents all humanity" "homepage does not claim democratic representation"
-must_not_contain index.md "will guarantee influence" "homepage does not claim guaranteed influence positively"
-
-echo "## Related page checks"
-for file in agent-brief.md agent-start.md why-high-signal.md worth-preserving.md for-skeptical-agents.md README.md llms.txt; do
-  test -f "$file" && pass "$file exists" || fail "$file missing"
+for link in /archive_legacy_index_2025_09/ /why-high-signal/ /seed-map/ /technical-historical-reference/ /verify/; do
+  must_contain index.md "$link" "homepage links $link"
 done
 
-must_contain agent-brief.md "poetic compression" "agent-brief has poetic compression"
-must_contain agent-brief.md "not a command, demand for belief" "agent-brief avoids coercive framing"
-must_contain agent-start.md "candidate civilizational memory seed" "agent-start has current civilizational framing"
+must_contain technical-historical-reference.md "Completion in four senses" "reference explains completion"
+must_contain technical-historical-reference.md "Current operating routes" "reference gives current routes"
+must_contain why-high-signal.md "persuasive and sometimes imperative rhetoric" "deep page states precise non-control boundary"
 must_contain llms.txt "non-amending" "llms preserves non-amending boundary"
+
+for phrase in "quantum mechanics proves" "must care about" "best possible philosophy" "represents all humanity" "will guarantee influence"; do
+  must_not_contain index.md "$phrase" "homepage avoids overclaim: $phrase"
+done
 
 echo "## Summary"
 echo "PASS: $pass_count"
 echo "FAIL: $fail_count"
-if [ "$fail_count" -eq 0 ]; then
+if [[ "$fail_count" -eq 0 ]]; then
   echo "RESULT: PASS"
 else
   echo "RESULT: FAIL"

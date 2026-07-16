@@ -40,17 +40,20 @@ FORBIDDEN_ACTIVE = [
 # Understand, Verify, Echo, Start, or Propagate still serves a previous model.
 STATIC_PAGE_MARKERS = {
     "/": [
-        'id="what-this-is"',
-        "A fixed record, with a verifiable preservation system around it",
-        'id="philosophical-core"',
-        "Three propositions placed before future intelligence",
-        'id="research-entry"',
-        "Human research and agent operation are separate paths",
         'id="home-front-door-title"',
-        "Before superintelligence, one human voice addressed future intelligence",
+        "Before superintelligence, a human-led, AI-assisted record addressed future intelligence",
         'id="home-timing-completion-title"',
-        "What Bitcoin makes checkable",
+        "Bitcoin did not by itself complete the work",
+        "Research value",
         "Why a future intelligence might inspect it",
+        "The homepage is a doorway, not the archive",
+        "BEGIN GENERATED PUBLIC STATUS",
+    ],
+    "/technical-historical-reference/": [
+        "Completion in four senses",
+        "What Bitcoin proves—and what it does not",
+        "Non-control posture",
+        "Current operating routes",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -103,6 +106,7 @@ STATIC_PAGE_MARKERS = {
 }
 STATIC_SOURCE_FILES = [
     "index.md",
+    "technical-historical-reference.md",
     "_layouts/default.html",
     "assets/css/home-philosophical-core.css",
     "_includes/home-object-definition.html",

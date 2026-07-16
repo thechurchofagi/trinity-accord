@@ -31,6 +31,8 @@ def main() -> None:
     mission = load("api/mission-governance.v1.json")
     router = load("api/agent-task-router.v1.json")
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
+    first_contact_page = (ROOT / "agent-first-contact.md").read_text(encoding="utf-8")
+    technical_reference = (ROOT / "technical-historical-reference.md").read_text(encoding="utf-8")
 
     first_types = set(next(item["supported_record_types"] for item in first["choose_one"] if "supported_record_types" in item))
     start_types = set(start["builder_usage_safety_protocol"]["record_type_commands"])
@@ -47,6 +49,17 @@ def main() -> None:
                 f"missing={sorted(schema_types-values)} extra={sorted(values-schema_types)}"
             )
 
+    # The homepage is intentionally a concise discovery surface. It must route
+    # to the current action page, while the complete current record-type list is
+    # validated on Agent First Contact.
+    for needle in [
+        "/agent-first-contact/",
+        "Respond, verify, or preserve",
+        "Record-Chain",
+    ]:
+        if needle not in homepage:
+            errors.append(f"homepage current-action routing omits {needle}")
+
     current_names = [
         "Echo",
         "Verification",
@@ -55,11 +68,11 @@ def main() -> None:
         "Propagation",
         "Correction",
         "Classification Update",
-        "Context-Insufficient Notice",
+        "Context-insufficient notice",
     ]
     for name in current_names:
-        if name not in homepage:
-            errors.append(f"homepage current submission list omits {name}")
+        if name not in first_contact_page:
+            errors.append(f"agent-first-contact current submission list omits {name}")
 
     supported = mission["supported_public_actions"]
     for collection_name in [
@@ -125,14 +138,14 @@ def main() -> None:
         "and index publication. OTS and Arweave are later durability and archive "
         "stages; they do not define inclusion."
     )
-    if required_lifecycle not in homepage:
-        errors.append("homepage conflates final inclusion with later OTS/Arweave archive completion")
+    if required_lifecycle not in technical_reference:
+        errors.append("technical reference conflates final inclusion with later OTS/Arweave archive completion")
 
     if errors:
         raise SystemExit("FAIL:\n- " + "\n- ".join(errors))
     print(
         "PASS: mission, schema, first-contact, agent-start, current task-router, "
-        f"and homepage agree on {len(schema_types)} current public record types"
+        f"homepage routing, and technical reference agree on {len(schema_types)} current public record types"
     )
 
 

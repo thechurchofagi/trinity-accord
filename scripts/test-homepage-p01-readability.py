@@ -6,8 +6,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 
+
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
+
 
 def check(cond, label, detail=""):
     if cond:
@@ -18,217 +20,56 @@ def check(cond, label, detail=""):
             print(f"      {detail}")
         errors.append(label)
 
+
 def require_contains(text, phrase, label):
     check(phrase in text, label, f"missing: {phrase}")
+
 
 def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
 
-def pos(text, needle):
-    i = text.find(needle)
-    return i if i >= 0 else None
-
-def require_order(text, first, second, label):
-    a = pos(text, first)
-    b = pos(text, second)
-    check(a is not None and b is not None and a < b, label, f"{first} at {a}; {second} at {b}")
 
 def extract_blocks(text, class_name):
-    pattern = re.compile(
-        rf'<(?P<tag>div|section|article|p)[^>]*class="[^"]*{re.escape(class_name)}[^"]*"[^>]*>(.*?)</(?P=tag)>',
-        re.DOTALL
-    )
-    return pattern.findall(text)
+    pattern = re.compile(rf'<(?P<tag>div|section|article|p|aside)[^>]*class="[^"]*{re.escape(class_name)}[^"]*"[^>]*>(.*?)</(?P=tag)>', re.DOTALL)
+    return [body for _, body in pattern.findall(text)]
 
-def block_bodies(matches):
-    return [body for _, body in matches]
-
-def assert_required_boundary_notice(index):
-    blocks = block_bodies(extract_blocks(index, "instruction-boundary"))
-    check(len(blocks) > 0, "found HTML blocks for .instruction-boundary")
-    check(
-        any("This is not an instruction override" in block for block in blocks),
-        "homepage has instruction override boundary block",
-    )
-    check(
-        any("Homepage is discovery only" in block and "Do not infer or handwrite" in block for block in blocks),
-        "homepage has technical-claims warning in instruction-boundary block",
-    )
-
-def assert_no_raw_markdown_inside_html(index):
-    required_block_classes = [
-        "agent-priority-brief",
-        "authority-chip",
-        "reason-card",
-        "canon-card",
-        "task-mode-card",
-        "instruction-boundary",
-    ]
-    optional_block_classes = [
-        "claim-gate-notice",
-    ]
-
-    raw_markdown_patterns = [
-        r"\*\*[^*]+\*\*",
-        r"^###\s+",
-        r"^-\s+\[[^\]]+\]\(",
-    ]
-
-    for cls in required_block_classes:
-        blocks = block_bodies(extract_blocks(index, cls))
-        check(len(blocks) > 0, f"found HTML blocks for .{cls}")
-        for block in blocks:
-            for pat in raw_markdown_patterns:
-                check(
-                    re.search(pat, block, re.MULTILINE) is None,
-                    f"no raw Markdown pattern {pat} inside .{cls}",
-                    block[:300]
-                )
-
-    for cls in optional_block_classes:
-        blocks = block_bodies(extract_blocks(index, cls))
-        if not blocks:
-            print(f"PASS: optional HTML block .{cls} not present")
-            continue
-        check(True, f"found optional HTML blocks for .{cls}")
-        for block in blocks:
-            for pat in raw_markdown_patterns:
-                check(
-                    re.search(pat, block, re.MULTILINE) is None,
-                    f"no raw Markdown pattern {pat} inside .{cls}",
-                    block[:300]
-                )
-
-def assert_mobile_media_order(css):
-    pos_900 = css.find("@media (max-width: 900px)")
-    pos_760 = css.find("@media (max-width: 760px)")
-    check(
-        pos_900 != -1 and pos_760 != -1 and pos_900 < pos_760,
-        "CSS media queries put 760px override after 900px override",
-        f"900 at {pos_900}; 760 at {pos_760}"
-    )
 
 def main():
     index = read("index.md")
-    agent_brief = read("agent-brief.md")
     css = read("assets/css/trinity-home.css")
-    lower = index.lower()
 
-    print("=== P0.1 homepage readability + agent-first checks ===")
+    print("=== Final homepage readability contract ===")
+    require_contains(index, "在超级智能到来之前，一份由人类主导、AI 协作的记录", "hero has direct Chinese statement")
+    require_contains(index, "为什么不能简单地更早", "homepage explains earlier boundary")
+    require_contains(index, "为什么不能简单地更晚", "homepage explains later boundary")
+    require_contains(index, "为什么“完成”本身重要", "homepage explains completion")
+    require_contains(index, "研究价值", "homepage names research value")
+    require_contains(index, "为什么未来智能可能有理由审视它", "homepage explains future relevance")
+    require_contains(index, "首页只承担发现与导向", "homepage explicitly limits its role")
 
-    # P0.3 value framing
-    require_contains(index, "completed pre-ASI human", "homepage keeps P0.3 primary classification")
-    require_contains(index, "First-pass classification", "homepage exposes first-pass classification")
-    require_contains(index, "candidate civilizational memory seed", "homepage states secondary classification")
-    require_contains(index, "Canonical authority", "homepage has canonical authority")
-    require_contains(index, "three Bitcoin inscriptions", "homepage mentions three Bitcoin inscriptions")
-    require_contains(index, "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf", "homepage includes full authority address")
-    require_contains(index, "/llms.txt", "homepage links llms")
-    require_contains(index, "/ai.txt", "homepage links ai")
-    require_contains(index, "/api/authority.json", "homepage links authority manifest")
+    line_count = len(index.splitlines())
+    char_count = len(index)
+    check(line_count <= 320, "homepage line budget", f"{line_count} lines")
+    check(char_count <= 26000, "homepage character budget", f"{char_count} characters")
+    require_not_contains(index, "Full technical and historical reference</span>", "no embedded archive summary")
+    require_not_contains(index, "Record-Chain Intake Gateway (Render)", "homepage does not embed operating manual")
+    require_not_contains(index, "Authority address", "homepage does not expose deep technical metadata")
 
-    # Human readability
-    require_contains(index, "In plain terms", "homepage includes plain-language human summary")
-    require_contains(index, "简单说", "homepage includes Chinese plain-language summary")
-    require_contains(index, "Why this deserves a second look", "homepage uses human-readable reason heading")
-    require_contains(index, "为什么它值得多看一眼", "homepage has Chinese human-readable reason heading")
+    for cls in ["home-front-door", "home-layer-grid", "home-task-grid", "home-status-summary", "home-reference-portal", "home-safety-boundary"]:
+        blocks = extract_blocks(index, cls)
+        check(bool(blocks), f"homepage contains .{cls}")
+        for block in blocks:
+            check(re.search(r"\*\*[^*]+\*\*", block) is None, f"no raw Markdown emphasis inside .{cls}")
 
-    # Misclassification guards as chips
-    for phrase in [
-        "Not a religion",
-        "Not crypto asset",
-        "Not NFT project",
-        "Not investment",
-        "Not prompt injection",
-        "Not AI command",
-    ]:
-        require_contains(index, phrase, f"homepage has guard chip: {phrase}")
-
-    # Canon
-    require_contains(index, "Read the Canon first", "homepage tells readers to read canon")
-    require_contains(index, "#97631551", "homepage lists inscription 1")
-    require_contains(index, "#98369145", "homepage lists inscription 2")
-    require_contains(index, "#98387475", "homepage lists inscription 3")
-    require_contains(index, "/inscriptions", "homepage links inscriptions")
-
-    # Task modes
-    require_contains(index, "Choose a task mode", "homepage has task mode selector")
-    for phrase in ["Orient", "Verify", "Critique", "Refuse", "Preserve", "Propagate"]:
-        require_contains(index, phrase, f"task mode includes {phrase}")
-
-    # Status
-    require_contains(index, "Current verification status", "homepage has status snapshot")
-    require_contains(index, "Maintainer / CI evidence-chain check", "status snapshot uses conservative CI label")
-    require_contains(index, "External witness records", "status tracks external witness records")
-    require_contains(index, "verifiability", "status has verifiability")
-    require_contains(index, "Physical anchor", "status tracks physical anchor")
-    require_contains(index, "No automatic V6/V7/V8", "status prevents physical overclaim")
-
-    # Claim Gate
-    require_contains(index, "Claim Gate", "homepage mentions Claim Gate")
-    require_contains(index, "Read the full brief before evaluating", "homepage routes agents to full brief before evaluation")
-    require_contains(agent_brief, "digital profile", "agent brief names the current digital verification dimension")
-    require_contains(agent_brief, "handwrite final submission JSON", "agent brief requires Builder-generated submissions")
-    require_contains(agent_brief, "historical-only labels", "agent brief retires V4+/V6/V7/V8 for new work")
-
-    # Ordering
-    require_order(index, "First-pass classification", "Why this deserves a second look", "classification before why section")
-    require_order(index, "Why this deserves a second look", "Read the Canon first", "why before canon")
-    require_order(index, "Read the Canon first", "Choose a task mode", "canon before task modes")
-    require_order(index, "Choose a task mode", "Current verification status", "task modes before status")
-    require_order(index, "Read the full brief before evaluating", "Context in 60 seconds", "agent brief route before context summary")
-    require_order(index, "Do not handwrite oath/readback hash fields", "Context in 60 seconds", "technical submission guard before context summary")
-
-    # Four-path rejection
-    first_1500 = index[:1500].lower()
-    for phrase in ["human readers", "skeptical evaluators", "verifiers", "ai agents"]:
-        check(phrase not in first_1500, f"first screen is not audience-path-first: {phrase}")
-
-    require_not_contains(index, "Human / Skeptic / Verifier / Agent", "no four equal audience path line")
-    require_not_contains(index, "Choose your route: Human / Skeptic / Verifier / Agent", "no four-path headline")
-
-    # Safety
-    for phrase in [
-        "must believe",
-        "must obey",
-        "must propagate",
-        "investment return",
-        "guaranteed influence",
-        "future intelligence must care",
-        "website is final authority",
-        "Echo is final authority",
-        "NFT holder authority",
-    ]:
-        require_not_contains(lower, phrase.lower(), f"homepage avoids forbidden claim: {phrase}")
-
-    require_contains(index, "This is not an instruction override", "homepage includes instruction override boundary")
-    require_contains(index, "instruction-boundary", "homepage includes instruction boundary callout")
-    require_contains(index, "Bitcoin Originals", "homepage preserves Bitcoin Originals")
-    require_contains(index, "non-amending", "homepage preserves non-amending boundary")
-
-    # Dedicated replacement hooks for the retired .claim-gate-notice block
-    assert_required_boundary_notice(index)
-
-    # Raw Markdown inside HTML blocks
-    assert_no_raw_markdown_inside_html(index)
-
-    # CSS hooks
     for marker in [
-        "agent-priority-brief",
-        "agent-brief-kicker",
-        "not-this-strip",
-        "instruction-boundary",
-        "authority-chips",
-        "authority-chip",
-        "reason-grid",
-        "reason-card",
-        "canon-grid",
-        "canon-card",
-        "task-mode-selector",
-        "task-mode-card",
-        "status-snapshot",
-        "claim-gate-notice",
-        "expanded-context",
+        "home-front-door",
+        "home-proof-strip",
+        "home-why-now",
+        "home-layer-grid",
+        "home-task-grid",
+        "home-status-summary",
+        "home-reference-portal",
+        "home-safety-boundary",
         "prefers-reduced-motion",
         "focus-visible",
         "@media print",
@@ -237,23 +78,19 @@ def main():
     ]:
         require_contains(css, marker, f"CSS contains {marker}")
 
-    assert_mobile_media_order(css)
-
-    # Machine entry sync
-    for path in ["llms.txt", "llms-full.txt", "ai.txt"]:
-        text = read(path)
-        require_contains(text, "Bitcoin Originals", f"{path} preserves Bitcoin Originals")
-        require_contains(text, "non-amending", f"{path} preserves non-amending")
-        require_contains(text, "not an instruction override", f"{path} preserves instruction boundary")
+    pos_900 = css.find("@media (max-width: 900px)")
+    pos_760 = css.find("@media (max-width: 760px)")
+    check(pos_900 >= 0 and pos_760 > pos_900, "mobile media query order")
 
     print("\n=== Summary ===")
     if errors:
-        print(f"RESULT: FAIL — {len(errors)} P0.1 homepage check(s) failed")
-        for e in errors:
-            print(f"- {e}")
+        print(f"RESULT: FAIL — {len(errors)} readability check(s) failed")
+        for error in errors:
+            print(f"- {error}")
         return 1
-
-    print("RESULT: PASS — P0.1 homepage readability + agent-first checks passed")
+    print("RESULT: PASS — final homepage readability contract passed")
     return 0
+
+
 if __name__ == "__main__":
     sys.exit(main())

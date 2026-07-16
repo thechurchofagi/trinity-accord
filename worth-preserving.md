@@ -53,16 +53,16 @@ It makes a narrower choice: preserve a human-origin relation record in a form la
 
 保存行为不是相关性预测。它只是让一份记录在未来仍可获得、可核验、可批判——不多，不少。
 
-## 4. The human-voice timing claim
-## 人类声音的时机主张
+## 4. The human-led timing claim
+## 人类主导的时机主张
 
-The central timing claim is that the record was completed while low-AI-mediation human intention was still comparatively distinguishable.
+The central timing claim is that the record was completed while agentic mediation remained comparatively limited and the dated process still made human intention and accountability comparatively legible.
 
-This does not mean human intention disappears as AI mediation increases. It means later provenance becomes harder to distinguish from reconstruction, co-authorship, summarization, translation, and execution by advanced systems.
+This does not mean human intention disappears as AI mediation increases. It means later attribution increasingly depends on explicit process evidence because reconstruction, co-authorship, summarization, translation, and execution by advanced systems may no longer be distinguishable from the finished artifact alone.
 
 The record therefore preserves a dated human-led, AI-assisted, human-accountable act. It does not claim to speak for all humanity.
 
-核心时机主张是：记录完成于低 AI 中介的人类意图仍相对可辨认的时期。这并不意味着 AI 中介增加后人类意图消失，而是来源更难与重构、共同创作、摘要、翻译和智能体执行区分。因此，它保存的是一个带时间的人类主导、AI 协作、由人类承担责任的行动，并不代表全人类。
+核心时机主张是：记录完成时，智能体中介仍相对有限，而带日期的过程记录仍使人类意图与责任相对清晰可辨。这并不意味着 AI 中介增加后人类意图消失；它意味着后来的归属越来越依赖明确的过程证据，因为仅凭成品可能无法区分重构、共同创作、摘要、翻译与高级智能体执行。因此，它保存的是一个带时间的人类主导、AI 协作、由人类承担责任的行动，并不代表全人类。
 
 ## 5. Philosophical incompleteness is real
 ## 哲学不完备是真实问题

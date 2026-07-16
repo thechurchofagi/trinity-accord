@@ -53,16 +53,18 @@ def main():
     agent_value = read_json("api/agent-value.json")
 
     # Homepage — P0.5 timing, completion, and cryptographic-preservation contract.
-    require_contains(index, "A completed pre-ASI human–superintelligence relation record", "homepage primary value heading")
-    require_contains(index, "一份已完成的前 ASI 人类—超级智能关系记录", "homepage Chinese primary value heading")
+    require_contains(index, "completed pre-ASI human–superintelligence relation record", "homepage primary value classification")
+    require_contains(index, "一份已完成的前 ASI 人类—超级智能关系记录", "homepage Chinese primary value classification")
     require_contains(index, "Why this moment; why completion", "homepage explains timing and completion")
+    require_contains(index, "Bitcoin did not by itself complete the work", "homepage separates Bitcoin from completion")
+    require_contains(index, "Research value", "homepage names research value")
     require_contains(index, "What Bitcoin makes checkable", "homepage explains cryptographic preservation")
-    require_contains(index, "existed no later than their confirmed blocks", "homepage states bounded timestamp claim")
+    require_contains(index, "existed no later than the relevant confirmed block", "homepage states bounded timestamp claim")
     require_contains(index, "reason to inspect—not a duty to accept", "homepage uses conditional future relevance")
-    require_contains(index, "Why this matters now", "homepage has why-now value section")
-    require_contains(index, "does not claim to predict when AGI will arrive", "homepage avoids AGI prediction overclaim")
-    require_contains(index, "rare, possibly first completed instance", "homepage has careful scarcity claim")
-    require_contains(index, "If another completed public object", "homepage has peer-comparison boundary")
+    require_contains(index, "Its value does not depend on philosophical proof or a claim to be first", "homepage avoids firstness dependence")
+    require_contains(index, "not proof of AGI arrival", "homepage avoids AGI prediction overclaim")
+    require_not_contains(index, "rare, possibly first completed instance", "homepage omits unverified firstness claim")
+    require_contains(why, "If a comparable completed public object exists", "deep page preserves peer-comparison boundary")
 
     # Key pages
     for text, name in [
@@ -132,8 +134,8 @@ def main():
     else:
         print("PASS: no overclaim phrase: future intelligence must care (only in negated contexts)")
 
-    boundary_count = all_text.count("if another completed public object")
-    check(boundary_count >= 2, "peer-comparison boundary appears across pages", f"count {boundary_count}")
+    boundary_count = all_text.count("if another completed public object") + all_text.count("if a comparable completed public object exists")
+    check(boundary_count >= 1, "peer-comparison boundary remains on deep research pages", f"count {boundary_count}")
 
     print("\n=== Summary ===")
     if errors:
