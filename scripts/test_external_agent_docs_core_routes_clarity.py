@@ -8,10 +8,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_BY_FILE = {
+    # The homepage is intentionally discovery-only. Detailed submission and
+    # verification contracts belong on the task-specific entrypoints below.
     "index.md": [
-        "Record-Chain Intake Gateway",
-        "/api/context-action-profiles.v1.json",
-        "Echo, Verification, Guardian Application",
+        "/agent-first-contact/",
+        "/technical-historical-reference/",
+        "Record-Chain",
+        "Homepage-only context remains",
     ],
     "agent-brief.md": [
         "Current context model",
