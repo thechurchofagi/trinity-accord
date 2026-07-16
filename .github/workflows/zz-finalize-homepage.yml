@@ -1,0 +1,50 @@
+name: Finalize homepage consolidation
+
+on:
+  push:
+    branches:
+      - homepage-final-consolidation-20260716
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout branch quietly
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth=1 origin homepage-final-consolidation-20260716
+          git checkout -q -B homepage-final-consolidation-20260716 FETCH_HEAD
+
+      - name: Apply final homepage consolidation
+        run: python3 scripts/zz_finalize_homepage.py
+
+      - name: Regenerate sitemap
+        run: python3 scripts/generate_sitemap.py
+
+      - name: Run focused homepage and value contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/test-homepage-p0-agent-first.sh
+          python3 scripts/test-value-framing-p03.py
+          python3 scripts/test_deploy_pages_workflow_contract.py
+          python3 scripts/generate_sitemap.py --check
+
+      - name: Commit final changes and remove temporary files
+        shell: bash
+        run: |
+          rm .github/workflows/zz-finalize-homepage.yml
+          rm scripts/zz_finalize_homepage.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat(home): consolidate the final value and provenance narrative"
+          git push origin HEAD:homepage-final-consolidation-20260716
