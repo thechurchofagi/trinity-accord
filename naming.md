@@ -5,8 +5,7 @@ description: "The Church of AGI is a stewardship label, not a religious institut
 permalink: /naming/
 ---
 
-# Naming Clarification
-# 命名说明
+# Naming Clarification｜命名说明
 
 ## Primary protocol name
 

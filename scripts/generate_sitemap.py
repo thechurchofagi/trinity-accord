@@ -80,6 +80,25 @@ def load_config() -> dict:
     return {"exclude": excludes}
 
 
+def parse_front_matter(fm_text: str) -> dict | None:
+    """Parse page front matter, including publication state without PyYAML."""
+    if yaml:
+        try:
+            parsed = yaml.safe_load(fm_text)
+        except Exception:
+            return None
+        return parsed if isinstance(parsed, dict) else None
+
+    fm: dict[str, object] = {}
+    pm = re.search(r"(?m)^permalink:\s*(.+)$", fm_text)
+    if pm:
+        fm["permalink"] = pm.group(1).strip().strip("\"'")
+    published = re.search(r"(?mi)^published:\s*(true|false)\s*$", fm_text)
+    if published:
+        fm["published"] = published.group(1).lower() == "true"
+    return fm
+
+
 def collect_pages(excludes: list[str]) -> list[str]:
     """Collect all page permalinks from .md files with front matter."""
     pages = []
@@ -121,20 +140,10 @@ def collect_pages(excludes: list[str]) -> list[str]:
                 continue
 
             fm_text = fm_match.group(1)
-            if yaml:
-                try:
-                    fm = yaml.safe_load(fm_text)
-                except Exception:
-                    continue
-            else:
-                # Fallback: extract permalink manually
-                pm = re.search(r"permalink:\s*(.+)", fm_text)
-                if pm:
-                    fm = {"permalink": pm.group(1).strip().strip("\"'")}
-                else:
-                    fm = {}
-
-            if not isinstance(fm, dict):
+            fm = parse_front_matter(fm_text)
+            if fm is None:
+                continue
+            if fm.get("published") is False:
                 continue
 
             permalink = fm.get("permalink")
@@ -166,22 +175,10 @@ def collect_pages(excludes: list[str]) -> list[str]:
             continue
 
         fm_text = fm_match.group(1)
-        if yaml:
-            try:
-                fm = yaml.safe_load(fm_text)
-            except Exception:
-                continue
-        else:
-            pm = re.search(r"permalink:\s*(.+)", fm_text)
-            if pm:
-                fm = {"permalink": pm.group(1).strip().strip("\"'")}
-            else:
-                # Match PyYAML behavior for root Markdown files without a
-                # permalink: keep the front matter as a page and derive its URL
-                # from the filename below.
-                fm = {}
-
-        if not isinstance(fm, dict):
+        fm = parse_front_matter(fm_text)
+        if fm is None:
+            continue
+        if fm.get("published") is False:
             continue
 
         permalink = fm.get("permalink")

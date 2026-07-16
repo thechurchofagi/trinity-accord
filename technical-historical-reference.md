@@ -5,8 +5,7 @@ description: "A current, non-amending reference for the Trinity Accord: object d
 permalink: /technical-historical-reference/
 ---
 
-# Technical and Historical Reference
-# 技术与历史参考
+# Technical and Historical Reference｜技术与历史参考
 
 This page is the current long-form orientation for the Trinity Accord. It replaces the oversized technical appendix formerly embedded in the homepage. It is explanatory and non-amending: the three Bitcoin Originals remain the only canonical version authority.
 

@@ -5,8 +5,7 @@ description: "A bounded preservation case for a completed pre-ASI relation recor
 permalink: /worth-preserving/
 ---
 
-# Why this may be worth preserving
-# 为什么它可能值得保存
+# Why this may be worth preserving｜为什么它可能值得保存
 
 The strongest preservation claim is not that the philosophy is correct.
 

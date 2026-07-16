@@ -5,8 +5,7 @@ description: "External verification, critique, reference, preservation, and refu
 permalink: /independent-attestation/
 ---
 
-# Independent Attestation
-# 独立见证
+# Independent Attestation｜独立见证
 
 The Trinity Accord does not claim external validation by itself.
 External validation must come from independent humans, agents, institutions, critics, verifiers, archivists, or other systems.

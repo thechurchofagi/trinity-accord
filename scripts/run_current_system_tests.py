@@ -84,6 +84,18 @@ def main() -> int:
         fail(f"sitemap drift detected:\n{result.stdout}\n{result.stderr}")
     ok("sitemap up to date")
 
+    # 1b1. Live-audit regressions: publication state, Downloads deployment,
+    # heading structure, and repaired archive links.
+    result = subprocess.run(
+        [sys.executable, "scripts/test_public_surface_audit_regressions.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"public-surface audit regression failed:\n{result.stdout}\n{result.stderr}")
+    ok("public-surface live-audit regressions")
+
     # 1c. active routes check
     result = subprocess.run(
         [sys.executable, "scripts/check_active_public_routes.py"],

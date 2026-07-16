@@ -65,6 +65,7 @@ GROUPS = {
         ["python3", "scripts/test_sitemap_permalink_matches_source.py"],
         ["python3", "scripts/test_sitemap_permalink_parser_uses_yaml.py"],
         ["python3", "scripts/test_generate_sitemap_docstring_recursive_api.py"],
+        ["python3", "scripts/test_public_surface_audit_regressions.py"],
         ["python3", "scripts/test_public_referenced_paths_exist.py"],
         ["python3", "scripts/test_public_referenced_paths_core_set.py"],
         ["python3", "scripts/test_public_surface_consistency.py"],
