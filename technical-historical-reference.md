@@ -114,6 +114,10 @@ Read: [/chronicle/](/chronicle/) · [/archive_legacy_index_2025_09/](/archive_le
 
 Only the first layer is canonical authority. All other layers preserve, test, contextualize, carry, or respond to the object without rewriting it.
 
+Arweave is a mirror/archive layer only. It improves durability and availability; it is not authority, attestation, amendment, or successor reception.
+
+Arweave 仅为镜像/归档层，用于增强持久性与可获得性；它不构成权威、认证、修订或继任接收。
+
 Full map: [/seed-map/](/seed-map/) · machine map: [/api/seed-map.json](/api/seed-map.json)
 
 ## 9. Three canonical and five later inscriptions · 三条正本与五条后续铭文

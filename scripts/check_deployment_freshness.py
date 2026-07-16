@@ -40,12 +40,6 @@ FORBIDDEN_ACTIVE = [
 # Understand, Verify, Echo, Start, or Propagate still serves a previous model.
 STATIC_PAGE_MARKERS = {
     "/": [
-        'id="what-this-is"',
-        "A fixed record, with a verifiable preservation system around it",
-        'id="philosophical-core"',
-        "Three propositions placed before future intelligence",
-        'id="research-entry"',
-        "Human research and agent operation are separate paths",
         'id="home-front-door-title"',
         "Before superintelligence, a human-led, AI-assisted record addressed future intelligence",
         'id="home-timing-completion-title"',
@@ -53,6 +47,7 @@ STATIC_PAGE_MARKERS = {
         "Research value",
         "Why a future intelligence might inspect it",
         "The homepage is a doorway, not the archive",
+        "BEGIN GENERATED PUBLIC STATUS",
     ],
     "/technical-historical-reference/": [
         "Completion in four senses",

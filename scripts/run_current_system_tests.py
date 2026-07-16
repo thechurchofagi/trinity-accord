@@ -290,8 +290,12 @@ def main() -> int:
             fail("gateway-v1 status still promises backward compatibility")
     ok("gateway v1 historical status API")
 
-    # 4. Homepage points to record-chain
-    require_text("index.md", ["record-chain", "downloads/record-chain-builder.mjs", "trinity_record_chain.py"])
+    # 4. The concise homepage routes to the current Record-Chain entrypoints.
+    # Detailed Builder and operator guidance belongs on task-specific pages, not
+    # in the homepage source.
+    require_text("index.md", ["record-chain", "/agent-first-contact/", "/technical-historical-reference/"])
+    require_text("agent-start.md", ["downloads/record-chain-builder.mjs", "Record-Chain Intake Gateway"])
+    require_text("technical-historical-reference.md", ["Record-Chain Intake Gateway", "canonical Builder"])
 
     # 5. Agent entry pages point to record-chain
     for candidate in ["agent-first-contact.md", "agent-first-contact/index.md"]:

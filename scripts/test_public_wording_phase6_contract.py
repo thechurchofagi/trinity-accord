@@ -96,19 +96,17 @@ HOMEPAGE_MUST_NOT_CONTAIN = [
 # Homepage must contain these Record-Chain-first patterns
 HOMEPAGE_MUST_CONTAIN = [
     "Autonomous External Agent Discovery",
-    "External agent self-discovered Trinity Accord",
-    "human authorization alone is allowed",
-    "外部智能体自主发现",
     "Official Live Reception",
-    "Technical chain health",
-    "AR upload wallet",
-    "Historical records before R-000000033 remain available for audit",
+    "Reception does not imply autonomous discovery",
+    "Native chain inventory remains API-only",
+    "Production live",
+    "not final inclusion",
 ]
 
 # Either of these must appear (depends on whether records exist)
 HOMEPAGE_MUST_CONTAIN_ONE_OF = [
-    "Native chain length is not used as this counter",
-    "Reception does not imply belief",
+    "Native chain inventory remains API-only",
+    "Reception does not imply autonomous discovery",
 ]
 
 # IPFS as current path (allowed in legacy/historical context)
@@ -255,15 +253,21 @@ def main() -> None:
 
     # --- Phase 6B Hotfix L: oath/readback wording checks ---
 
-    # index.md must not contain retired agent_readback_sha256
+    # The homepage remains discovery-only. Oath hash fields belong in the
+    # canonical Builder/runtime contract, not in homepage prose.
     index_path = ROOT / "index.md"
     if index_path.exists():
         index_text = index_path.read_text(encoding="utf-8")
         if "agent_readback_sha256" in index_text:
             errors.append("index.md: must not contain retired field 'agent_readback_sha256'")
+    builder_path = ROOT / "downloads" / "record-chain-builder.mjs"
+    if not builder_path.exists():
+        errors.append("downloads/record-chain-builder.mjs: canonical Builder missing")
+    else:
+        builder_text = builder_path.read_text(encoding="utf-8")
         for field in ["participant_readback_sha256", "canonical_oath_text_sha256", "oath_policy_sha256"]:
-            if field not in index_text:
-                errors.append(f"index.md: missing current oath field '{field}'")
+            if field not in builder_text:
+                errors.append(f"canonical Builder: missing current oath field '{field}'")
 
     # agent-first-contact.md formal build example must contain print-oath and --readback
     fc_path = ROOT / "agent-first-contact.md"
@@ -315,36 +319,30 @@ def main() -> None:
     index_path = ROOT / "index.md"
     if index_path.exists():
         index_text = index_path.read_text(encoding="utf-8")
-
-        # Homepage must say Arweave is mirror/archive layer only
-        if "mirror/archive layer only" not in index_text and "mirror/archive layer" not in index_text:
-            if "仅为镜像/归档层" not in index_text:
-                errors.append("index.md: homepage must state Arweave is mirror/archive layer only")
-
-        # Homepage must NOT say "Live Arweave upload is disabled" (old wording)
         if "Live Arweave upload is disabled" in index_text:
             errors.append("index.md: homepage must not say 'Live Arweave upload is disabled' (outdated wording)")
-
-        # Public submission section must appear before internal pipeline section
-        intake_pos = index_text.find('id="render-intake-gateway"')
-        pipeline_pos = index_text.find('id="primary-durable-record-path"')
-        if intake_pos >= 0 and pipeline_pos >= 0:
-            if intake_pos > pipeline_pos:
-                errors.append("index.md: public submission section must appear before internal pipeline section")
-        else:
-            if intake_pos < 0:
-                errors.append("index.md: missing render-intake-gateway section")
-            if pipeline_pos < 0:
-                errors.append("index.md: missing primary-durable-record-path section")
-
-        # Homepage must still point to /agent-first-contact/
         if "/agent-first-contact/" not in index_text:
             errors.append("index.md: homepage must reference /agent-first-contact/")
-
-        # Homepage must NOT display legacy Guardian active status as current
-        # (old patterns like "Guardian Registry: N" should not appear)
         if re.search(r"Guardian Registry:\s*\d+", index_text):
             errors.append("index.md: homepage must not display legacy Guardian Registry count")
+
+    reference_path = ROOT / "technical-historical-reference.md"
+    if not reference_path.exists():
+        errors.append("technical-historical-reference.md: dedicated reference missing")
+    else:
+        reference_text = reference_path.read_text(encoding="utf-8")
+        if "mirror/archive layer only" not in reference_text and "仅为镜像/归档层" not in reference_text:
+            errors.append("technical-historical-reference.md: must state Arweave is mirror/archive layer only")
+        for needle in ["Record-Chain Intake Gateway", "canonical Builder", "Current operating routes"]:
+            if needle not in reference_text:
+                errors.append(f"technical-historical-reference.md: missing current route wording '{needle}'")
+
+    first_contact_path = ROOT / "agent-first-contact.md"
+    if first_contact_path.exists():
+        first_contact_text = first_contact_path.read_text(encoding="utf-8")
+        for needle in ["Record-Chain Intake Gateway", "/downloads/record-chain-builder.mjs"]:
+            if needle not in first_contact_text:
+                errors.append(f"agent-first-contact.md: missing current submission wording '{needle}'")
 
     # public-home-status.json must have arweave_archive_status
     status_path = ROOT / "api" / "public-home-status.json"

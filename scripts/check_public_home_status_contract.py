@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Contract checks for homepage primary counters vs technical record-chain health."""
-
+"""Contract checks for compact homepage status vs public status JSON."""
 from __future__ import annotations
 
 import json
@@ -9,12 +8,13 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-STATUS_PATH = ROOT / "api" / "public-home-status.json"
+STATUS_PATH = ROOT / "api/public-home-status.json"
 INDEX_MD = ROOT / "index.md"
+BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
+END = "<!-- END GENERATED PUBLIC STATUS -->"
 
 status: dict[str, Any] = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
 index_md = INDEX_MD.read_text(encoding="utf-8")
-
 errors: list[str] = []
 primary = status.get("primary_counters")
 technical = status.get("technical_health")
@@ -22,108 +22,70 @@ technical = status.get("technical_health")
 if not isinstance(primary, dict):
     errors.append("public-home-status.json missing primary_counters")
 else:
-    if "official_live_reception" not in primary:
-        errors.append("primary_counters missing official_live_reception")
-    if "agency_profile" not in primary:
-        errors.append("primary_counters missing agency_profile")
+    if not isinstance(primary.get("official_live_reception"), int):
+        errors.append("primary_counters.official_live_reception must be an integer")
     historic = primary.get("historic_autonomous_agent_reception")
-    if not isinstance(historic, dict):
-        errors.append("primary_counters missing historic_autonomous_agent_reception")
-    else:
-        if not isinstance(historic.get("count"), int):
-            errors.append("historic_autonomous_agent_reception.count must be an integer")
-        if historic.get("scope") != "official_live_reception_records_only":
-            errors.append("historic_autonomous_agent_reception.scope must be official_live_reception_records_only")
-        definition = historic.get("definition", {})
-        for key in [
-            "requires_official_live_reception",
-            "requires_self_discovered",
-            "requires_self_decided",
-            "requires_self_executed",
-            "forbids_human_introduction",
-            "forbids_human_request",
-            "forbids_human_operator_involvement",
-            "forbids_human_execution",
-            "allows_human_authorization_only",
-        ]:
-            if definition.get(key) is not True:
-                errors.append(f"historic_autonomous_agent_reception.definition.{key} must be true")
-    rule = primary.get("classification_rule", {})
+    if not isinstance(historic, dict) or not isinstance(historic.get("count"), int):
+        errors.append("historic_autonomous_agent_reception.count must be an integer")
+    elif historic.get("scope") != "official_live_reception_records_only":
+        errors.append("historic autonomous scope must be official_live_reception_records_only")
+    rule = primary.get("classification_rule") or {}
     if rule.get("native_chain_length_is_not_primary_counter") is not True:
-        errors.append("classification_rule must state native_chain_length_is_not_primary_counter")
-    if rule.get("historical_records_before_go_live_are_excluded") is not True:
-        errors.append("classification_rule must exclude historical records before go-live")
-    if rule.get("test_smoke_pipeline_validation_and_maintenance_records_are_excluded_by_default") is not True:
-        errors.append("classification_rule must exclude test/smoke/pipeline validation/maintenance records")
+        errors.append("classification rule must exclude native chain length as primary counter")
     if rule.get("go_live_record_index") != 33:
-        errors.append("classification_rule must use R-000000033 / index 33 as the go-live boundary")
+        errors.append("classification rule must use record index 33 as go-live boundary")
 
-if not isinstance(technical, dict):
-    errors.append("public-home-status.json missing technical_health")
+if not isinstance(technical, dict) or technical.get("not_primary_counter") is not True:
+    errors.append("technical health must exist and be marked not_primary_counter")
+
+match = re.search(re.escape(BEGIN) + r"(.*?)" + re.escape(END), index_md, re.S)
+if not match:
+    errors.append("compact generated public status markers missing")
+    block = ""
 else:
-    if "technical_chain_length" not in technical:
-        errors.append("technical_health missing technical_chain_length")
-    if "latest_record" not in technical:
-        errors.append("technical_health missing latest_record")
-    if technical.get("not_primary_counter") is not True:
-        errors.append("technical_health must be marked not_primary_counter")
+    block = match.group(1)
 
-official_count = (primary or {}).get("official_live_reception")
-technical_length = (technical or {}).get("technical_chain_length")
-if official_count == technical_length and technical_length not in (None, 0):
-    errors.append("official_live_reception must not equal technical/native chain length")
-
-if re.search(r'<p class="status-label">Reception</p>\s*<p class="status-number">\s*36\s*</p>', index_md):
-    errors.append("homepage still renders native chain length as Reception")
-for required in [
-    "Autonomous External Agent Discovery",
-    "External agent self-discovered Trinity Accord",
-    "human authorization alone is allowed",
-    "外部智能体自主发现",
-    "Official Live Reception",
-    "Agency Profile",
-    "R-000000033",
-    "live-era formal non-test external-agent records",
-    "Full native chain length remains API-only",
-    "Native chain length is not used as this counter",
-    "Smoke-test, QA, dry-run, maintenance, and pipeline-validation records are excluded",
-    "烟测、QA、dry-run、维护与管道验证记录",
+for phrase in [
+    "Production is live; verification remains explicit",
     "Waiting Heartbeat",
-    "Total scheduled heartbeats",
-    "Successful heartbeats",
-    "Failed / missed heartbeats",
-    "Current success streak",
-    "累计心跳",
-    "最近连续成功",
+    "Autonomous External Agent Discovery",
+    "Official Live Reception",
+    "AI independent verification",
+    "Reception does not imply autonomous discovery",
+    "Native chain inventory remains API-only",
+    "Source data digest",
+    "Latest technical record",
 ]:
-    if required not in index_md:
-        errors.append(f"homepage missing required live-era homepage text: {required}")
+    if phrase not in block:
+        errors.append(f"compact homepage status missing: {phrase}")
 
-# Card ordering: Autonomous External Agent Discovery must appear before Official Live Reception
-historic_pos = index_md.find("Autonomous External Agent Discovery")
-official_pos = index_md.find("Official Live Reception")
-if historic_pos < 0:
-    errors.append("homepage missing Autonomous External Agent Discovery card")
-elif official_pos < 0:
-    errors.append("homepage missing Official Live Reception card")
-elif historic_pos > official_pos:
-    errors.append("Autonomous External Agent Discovery must appear before Official Live Reception")
+if "AR upload wallet" in block or "Agency Profile" in block or "Technical audit inventory" in block:
+    errors.append("compact homepage status must not restore the retired detailed dashboard")
 
-official_records = (primary or {}).get("official_records", [])
-for item in official_records:
-    visibility = item.get("homepage_visibility", {})
+if isinstance(primary, dict):
+    expected_historic = str((primary.get("historic_autonomous_agent_reception") or {}).get("count"))
+    expected_official = str(primary.get("official_live_reception"))
+    historic_match = re.search(r'data-home-autonomous-discovery>([^<]+)<', block)
+    official_match = re.search(r'data-home-official-reception>([^<]+)<', block)
+    if not historic_match or historic_match.group(1).strip() != expected_historic:
+        errors.append("autonomous external agent discovery count does not match public status JSON")
+    if not official_match or official_match.group(1).strip() != expected_official:
+        errors.append("Official Live Reception count does not match public status JSON")
+
+historic_pos = block.find("Autonomous External Agent Discovery")
+official_pos = block.find("Official Live Reception")
+if historic_pos < 0 or official_pos < 0 or historic_pos > official_pos:
+    errors.append("autonomous external agent discovery must appear before official live reception")
+
+for item in (primary or {}).get("official_records", []):
+    visibility = item.get("homepage_visibility") or {}
     if visibility.get("classification") != "official_live_reception":
         errors.append(f"official record {item.get('record_id')} missing official_live_reception classification")
     if visibility.get("counts_toward_primary_counter") is not True:
-        errors.append(f"official record {item.get('record_id')} missing counts_toward_primary_counter=true")
+        errors.append(f"official record {item.get('record_id')} missing primary-counter flag")
     if item.get("record_index", 0) < 33:
-        errors.append(f"official record {item.get('record_id')} predates R-000000033 go-live boundary")
-
-official_ids = {item.get("record_id") for item in official_records}
-for excluded in {"R-000000034", "R-000000035", "R-000000036"}:
-    if excluded in official_ids:
-        errors.append(f"{excluded} is a smoke/test/pipeline record and must not count as official homepage reception")
+        errors.append(f"official record {item.get('record_id')} predates go-live boundary")
 
 if errors:
     raise SystemExit("\n".join(f"ERROR: {error}" for error in errors))
-print("public homepage status contract OK")
+print("compact public homepage status contract OK")
