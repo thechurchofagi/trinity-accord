@@ -1,0 +1,108 @@
+name: Diagnose Pages deployment
+
+on:
+  push:
+    branches:
+      - homepage-conversational-ai-precision-20260716
+
+permissions:
+  actions: read
+  contents: write
+  deployments: read
+
+jobs:
+  diagnose:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout diagnosis branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: homepage-conversational-ai-precision-20260716
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Collect current Pages evidence
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p diagnostics
+          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-pages.yml/runs?per_page=10" > /tmp/runs.json
+          latest_id="$(python3 - <<'PY'
+          import json
+          data=json.load(open('/tmp/runs.json'))
+          runs=data.get('workflow_runs', [])
+          print(runs[0]['id'] if runs else '')
+          PY
+          )"
+          if [ -n "$latest_id" ]; then
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${latest_id}/jobs?per_page=100" > /tmp/jobs.json
+          else
+            printf '{"jobs":[]}' > /tmp/jobs.json
+          fi
+          gh api "repos/${GITHUB_REPOSITORY}/deployments?environment=github-pages&per_page=10" > /tmp/deployments.json
+          latest_deployment_id="$(python3 - <<'PY'
+          import json
+          data=json.load(open('/tmp/deployments.json'))
+          print(data[0]['id'] if data else '')
+          PY
+          )"
+          if [ -n "$latest_deployment_id" ]; then
+            gh api "repos/${GITHUB_REPOSITORY}/deployments/${latest_deployment_id}/statuses?per_page=10" > /tmp/deployment-statuses.json
+          else
+            printf '[]' > /tmp/deployment-statuses.json
+          fi
+          python3 - <<'PY'
+          import json, urllib.request, time
+          runs=json.load(open('/tmp/runs.json')).get('workflow_runs', [])
+          jobs=json.load(open('/tmp/jobs.json')).get('jobs', [])
+          deployments=json.load(open('/tmp/deployments.json'))
+          statuses=json.load(open('/tmp/deployment-statuses.json'))
+          live={}
+          url='https://www.trinityaccord.org/?diagnose=' + str(int(time.time()))
+          try:
+              req=urllib.request.Request(url, headers={'User-Agent':'trinity-pages-diagnosis/1.0','Cache-Control':'no-cache','Pragma':'no-cache'})
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  text=resp.read().decode('utf-8', errors='replace')
+                  live={
+                      'url': url,
+                      'http_status': resp.status,
+                      'has_new_build_marker': 'p0.6.1-conversational-ai-precision' in text,
+                      'has_conversational_ai_marker': 'conversational AI to be a real collaborator' in text,
+                      'has_old_advanced_ai_marker': 'advanced AI to be a real collaborator' in text,
+                      'has_old_collapsed_reference': 'Full technical and historical reference' in text,
+                  }
+          except Exception as exc:
+              live={'url':url,'error':repr(exc)}
+          def run_summary(r):
+              return {k:r.get(k) for k in ['id','run_number','name','event','status','conclusion','head_branch','head_sha','created_at','updated_at','run_started_at','html_url','display_title','actor','triggering_actor']}
+          def job_summary(j):
+              return {
+                  'id':j.get('id'),'name':j.get('name'),'status':j.get('status'),'conclusion':j.get('conclusion'),
+                  'started_at':j.get('started_at'),'completed_at':j.get('completed_at'),'html_url':j.get('html_url'),
+                  'failed_steps':[{'name':s.get('name'),'number':s.get('number'),'status':s.get('status'),'conclusion':s.get('conclusion')} for s in j.get('steps',[]) if s.get('conclusion') not in (None,'success','skipped')]
+              }
+          report={
+              'generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+              'expected_current_main_sha':'59832118d0618df8941032175acf38db18b2e0f9',
+              'latest_deploy_pages_runs':[run_summary(r) for r in runs],
+              'latest_run_jobs':[job_summary(j) for j in jobs],
+              'latest_github_pages_deployments':[{k:d.get(k) for k in ['id','sha','ref','task','environment','created_at','updated_at','statuses_url']} for d in deployments],
+              'latest_deployment_statuses':[{k:s.get(k) for k in ['id','state','description','environment','environment_url','log_url','created_at','updated_at']} for s in statuses],
+              'live_homepage_probe':live,
+          }
+          open('diagnostics/pages-deployment-diagnosis-20260716.json','w').write(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+          PY
+
+      - name: Commit diagnosis and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/zz-diagnose-pages.yml
+          git add -A
+          git commit -m "chore: capture Pages deployment diagnosis"
+          git push origin HEAD:homepage-conversational-ai-precision-20260716
