@@ -59,6 +59,7 @@ Public primary-source markers include:
 - OpenAI introduced [Codex](https://openai.com/index/introducing-codex/) on 2025-05-16 as a cloud software-engineering agent able to edit repositories, run tests, work in parallel, and propose pull requests.
 - OpenAI introduced the unified [ChatGPT agent](https://openai.com/index/introducing-chatgpt-agent/) on 2025-07-17, combining research and action through a browser, terminal, APIs, connectors, files, slides, and spreadsheets.
 - By 2026, Anthropic's [Claude Code](https://claude.com/product/claude-code) product page described end-to-end issue-to-PR workflows and dynamic execution across tens to hundreds of parallel subagents.
+- OpenAI's [GPT-5.6](https://openai.com/index/gpt-5-6/) release on 2026-07-09 described end-to-end knowledge work, stronger computer use from high-level direction, programmatic tool coordination, and an `ultra` mode that coordinates multiple agents across parallel workstreams. OpenAI also reported approximately 22-fold growth in internal agentic-token usage over the preceding six months. These are vendor-reported capability and adoption signals, not independent proof of AGI.
 
 These milestones do not establish AGI or autonomous personhood. They establish something narrower and sufficient for the provenance argument: **the density of AI mediation and delegated execution increased sharply during and immediately after the Accord's formation period.**
 
