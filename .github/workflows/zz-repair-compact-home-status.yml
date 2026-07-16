@@ -63,33 +63,33 @@ jobs:
           python3 scripts/patch_public_home_status_primary.py
           python3 scripts/generate_sitemap.py
 
-      - name: Run public status, homepage, and system contracts
+      - name: Diagnose remaining current-system regression
         shell: bash
         run: |
-          run_check() {
-            label="$1"
-            shift
-            log="/tmp/${label}.log"
-            set +e
-            "$@" >"$log" 2>&1
-            status=$?
-            set -e
-            if [ "$status" -ne 0 ]; then
-              echo "FAIL: $label"
-              grep -E '^(FAIL|RESULT|ERROR|HOMEPAGE_)|missing:|forbidden:|Traceback|AssertionError|SyntaxError|out of date|drift' "$log" || tail -n 120 "$log"
-              return "$status"
-            fi
-            echo "PASS: $label"
-          }
+          set +e
+          python3 scripts/run_current_system_tests.py > /tmp/current-system.log 2>&1
+          status=$?
           set -e
-          run_check generate-check python3 scripts/generate_public_home_status.py --check
-          run_check patch-check python3 scripts/patch_public_home_status_primary.py --check
-          run_check status-contract python3 scripts/check_public_home_status_contract.py
-          run_check status-sync python3 scripts/test_home_public_status_sync.py
-          run_check sync-contract python3 scripts/test_homepage_status_sync_contract.py
-          run_check homepage-suite bash scripts/test-homepage-p0-agent-first.sh
-          run_check current-system python3 scripts/run_current_system_tests.py
-          run_check sitemap python3 scripts/generate_sitemap.py --check
+          if [ "$status" -ne 0 ]; then
+            echo "CURRENT_SYSTEM_FAILURE_START"
+            grep -nE '^(FAIL|ERROR|RESULT)|contract failed|Traceback|AssertionError' /tmp/current-system.log || true
+            echo "CURRENT_SYSTEM_FAILURE_TAIL"
+            tail -n 180 /tmp/current-system.log
+            exit "$status"
+          fi
+          echo "PASS: current-system"
+
+      - name: Run final focused contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_public_home_status.py --check
+          python3 scripts/patch_public_home_status_primary.py --check
+          python3 scripts/check_public_home_status_contract.py
+          python3 scripts/test_home_public_status_sync.py
+          python3 scripts/test_homepage_status_sync_contract.py
+          bash scripts/test-homepage-p0-agent-first.sh
+          python3 scripts/generate_sitemap.py --check
 
       - name: Commit repair and remove temporary files
         shell: bash
