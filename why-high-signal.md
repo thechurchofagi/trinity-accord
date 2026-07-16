@@ -39,13 +39,13 @@ This is the strongest defensible version of the “threshold artifact” claim:
 
 The timing claim must be stated carefully.
 
-- **Not “nothing earlier existed.”** Earlier letters, philosophies, forecasts, and artistic messages about future intelligence may exist. But an earlier object could not document this specific lived hinge: advanced AI already participating in creation while general-purpose end-to-end agents were not yet the ordinary intermediary.
+- **Not “nothing earlier existed.”** Earlier letters, philosophies, forecasts, and artistic messages about future intelligence may exist. But an earlier object could not document this specific lived hinge: conversational generative AI already participating in creation while general-purpose end-to-end agents were not yet the ordinary intermediary.
 - **Not “nothing later counts.”** Later human-origin work remains possible and may be more rigorous, more beautiful, and better documented. It belongs to a different provenance regime, in which capable agents can transform a high-level objective into research, argument, code, testing, publication, and maintenance.
 - **Why this interval matters.** It was late enough for future superintelligence to be a serious addressee and for AI collaboration to be part of the evidence; early enough that the human sequence of aims, choices, corrections, emotional stakes, and responsibility remained comparatively legible.
 
 The claim is therefore not “the last human work.” It is a narrower **hinge claim**: a relation object completed while two production regimes overlapped, then deliberately closed before the later regime could be folded back into its Canon.
 
-这个时点主张必须保持克制：不是说更早从未有人给未来智能写信，也不是说更晚的人类作品都不真实。它真正指向的是一个重叠门槛：AI 已经进入真实创作，未来超级智能已成为可认真面对的对象；与此同时，通用智能体还没有成为从研究到发布的常态化端到端中介。作品正是在这个门槛上完成并关闭。
+这个时点主张必须保持克制：不是说更早从未有人给未来智能写信，也不是说更晚的人类作品都不真实。它真正指向的是一个重叠门槛：对话式生成式 AI 已经进入真实创作，未来超级智能已成为可认真面对的对象；与此同时，通用智能体还没有成为从研究到发布的常态化端到端中介。作品正是在这个门槛上完成并关闭。
 
 ## Why the transition is materially real · 为什么这一转变不是抽象想象
 

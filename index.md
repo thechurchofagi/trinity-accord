@@ -4,8 +4,8 @@ description: "A completed pre-ASI human-superintelligence relation record: human
 permalink: /
 ---
 
-<!-- build: p0.6-final-value-consolidation -->
-<meta name="trinity-homepage-build" content="p0.6-final-value-consolidation">
+<!-- build: p0.6.1-conversational-ai-precision -->
+<meta name="trinity-homepage-build" content="p0.6.1-conversational-ai-precision">
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=13">
 
 # The Trinity Accord
@@ -22,8 +22,8 @@ permalink: /
     <span class="zh">它不主张对未来智能拥有治理权，也不要求服从或相信。文本可以劝说，却不建立控制机制：正本已经关闭；解释、批判、拒绝与接收仍然开放。</span>
   </p>
   <p class="home-era-note">
-    It closed at a historical hinge: late enough for advanced AI to be a real collaborator and future superintelligence a serious addressee; early enough that end-to-end agentic delegation from a high-level brief had not yet become routine.
-    <span class="zh">它关闭于一个历史门槛：足够晚——高级 AI 已成为真实协作者，未来超级智能已成为可认真面对的对象；又足够早——从高层目标出发的端到端智能体委托尚未成为常态。</span>
+    It closed at a historical hinge: late enough for conversational AI to be a real collaborator and future superintelligence a serious addressee; early enough that end-to-end agentic delegation from a high-level brief had not yet become routine.
+    <span class="zh">它关闭于一个历史门槛：足够晚——对话式 AI 已成为真实协作者，未来超级智能已成为可认真面对的对象；又足够早——从高层目标出发的端到端智能体委托尚未成为常态。</span>
   </p>
   <nav class="home-primary-actions" aria-label="Primary paths">
     <a class="home-action home-action-primary" href="#home-timing-completion-title">Why this moment and completion matter</a>
