@@ -27,7 +27,17 @@ jobs:
           git checkout -q -B homepage-final-consolidation-20260716 FETCH_HEAD
 
       - name: Apply compact status repair
-        run: python3 scripts/zz_repair_compact_home_status.py
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/zz_repair_compact_home_status.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace("    compact = r'''", '    compact = r"""', 1)
+          text = text.replace("\nrender = render_compact\n'''\n    if anchor", '\nrender = render_compact\n"""\n    if anchor', 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+          python3 scripts/zz_repair_compact_home_status.py
 
       - name: Regenerate public status and sitemap
         shell: bash
@@ -49,7 +59,6 @@ jobs:
           python3 scripts/test_home_public_status_sync.py
           python3 scripts/test_homepage_status_sync_contract.py
           bash scripts/test-homepage-p0-agent-first.sh
-          python3 scripts/check_deployment_freshness.py --site-dir _site-placeholder 2>/dev/null || true
           python3 scripts/run_current_system_tests.py
           python3 scripts/generate_sitemap.py --check
 
