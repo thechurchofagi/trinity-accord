@@ -41,6 +41,8 @@ jobs:
           text = text[:first] + "    '''" + text[first + 7:second] + "    '''" + text[second + 7:]
           text = text.replace('Strict autonomous discovery', 'Autonomous External Agent Discovery')
           text = text.replace('strict autonomous discovery', 'autonomous external agent discovery')
+          text = text.replace('Official live reception', 'Official Live Reception')
+          text = text.replace('official live reception count', 'Official Live Reception count')
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_repair_compact_home_status.py
