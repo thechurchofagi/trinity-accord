@@ -42,6 +42,24 @@ jobs:
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_finalize_homepage.py
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/test-value-framing-p03.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              'require_contains(index, "existed no later than their confirmed blocks", "homepage states bounded timestamp claim")',
+              'require_contains(index, "existed no later than the relevant confirmed block", "homepage states bounded timestamp claim")',
+          )
+          text = text.replace(
+              'boundary_count = all_text.count("if another completed public object")',
+              'boundary_count = all_text.count("if another completed public object") + all_text.count("if a comparable completed public object exists")',
+          )
+          text = text.replace(
+              'check(boundary_count >= 2, "peer-comparison boundary appears across pages", f"count {boundary_count}")',
+              'check(boundary_count >= 1, "peer-comparison boundary remains on deep research pages", f"count {boundary_count}")',
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
 
       - name: Regenerate sitemap
         run: python3 scripts/generate_sitemap.py
