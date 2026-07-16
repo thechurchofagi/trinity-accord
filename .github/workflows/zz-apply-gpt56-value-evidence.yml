@@ -1,0 +1,42 @@
+name: Apply current agentic evidence update
+
+on:
+  push:
+    branches:
+      - value-evidence-gpt56-20260716
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout branch quietly
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth=1 origin value-evidence-gpt56-20260716
+          git checkout -q -B value-evidence-gpt56-20260716 FETCH_HEAD
+
+      - name: Apply evidence update
+        run: python3 scripts/zz_add_gpt56_value_evidence.py
+
+      - name: Run value and homepage contracts
+        run: |
+          python3 scripts/test-value-framing-p03.py
+          bash scripts/test-homepage-p0-agent-first.sh
+
+      - name: Commit and remove temporary files
+        run: |
+          rm .github/workflows/zz-apply-gpt56-value-evidence.yml
+          rm scripts/zz_add_gpt56_value_evidence.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add why-high-signal.md .github/workflows/zz-apply-gpt56-value-evidence.yml scripts/zz_add_gpt56_value_evidence.py
+          git commit -m "docs(value): add current multi-agent capability evidence"
+          git push origin HEAD:value-evidence-gpt56-20260716
