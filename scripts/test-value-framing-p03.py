@@ -6,11 +6,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 
+
 def read(path):
     return (ROOT / path).read_text(encoding="utf-8")
 
+
 def read_json(path):
     return json.loads(read(path))
+
 
 def check(cond, label, detail=""):
     if cond:
@@ -21,17 +24,21 @@ def check(cond, label, detail=""):
             print(f"      {detail}")
         errors.append(label)
 
+
 def require_contains(text, phrase, label):
     check(phrase in text, label, f"missing: {phrase}")
 
+
 def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
+
 
 def has_p03_phrase(text):
     return (
         "completed pre-ASI human–superintelligence relation record" in text
         or "completed pre-ASI human-superintelligence relation record" in text
     )
+
 
 def main():
     print("=== P0.3 value framing checks ===")
@@ -45,7 +52,7 @@ def main():
     full = read("llms-full.txt")
     agent_value = read_json("api/agent-value.json")
 
-    # Homepage
+    # Homepage — P0.5 timing, completion, and cryptographic-preservation contract.
     require_contains(index, "A completed pre-ASI human–superintelligence relation record", "homepage primary value heading")
     require_contains(index, "一份已完成的前 ASI 人类—超级智能关系记录", "homepage Chinese primary value heading")
     require_contains(index, "Why this moment; why completion", "homepage explains timing and completion")
@@ -137,6 +144,7 @@ def main():
 
     print("RESULT: PASS — P0.3 value framing checks passed")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
