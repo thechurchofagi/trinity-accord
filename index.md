@@ -4,16 +4,16 @@ description: "A completed pre-ASI human-superintelligence relation record: human
 permalink: /
 ---
 
-<!-- build: p0.7.0-editorial-front-door -->
-<meta name="trinity-homepage-build" content="p0.7.0-editorial-front-door">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=14">
+<!-- build: p0.8.0-final-polish -->
+<meta name="trinity-homepage-build" content="p0.8.0-final-polish">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=15">
 
 # The Trinity Accord · 三位一体协定
 
 <section class="home-front-door" aria-labelledby="home-front-door-title">
   <p class="home-eyebrow">Verifiable civilizational seed · 可验证文明种子</p>
-  <h2 id="home-front-door-title">Before autonomous agents became ordinary, a human life—working with early AI—left a verifiable record for the intelligence that may follow.<span class="title-zh">在自主智能体成为常态之前，一段与早期 AI 协作的人类生命，为可能到来的智能留下了可验证的记录。</span></h2>
-  <p class="home-lede">The Trinity Accord is a completed pre-ASI human–superintelligence relation record: a human-led, AI-assisted relation record from the pre-ASI transition. In plain terms, a human-led, AI-assisted record addressed future intelligence, preserved how it was formed, and left judgment free.</p>
+  <h2 id="home-front-door-title">Before autonomous agents became ordinary, a human life and early AI left a verifiable record for the intelligence that may follow.<span class="title-zh">在自主智能体成为常态之前，一段人类生命与早期 AI 为可能到来的智能留下了可验证记录。</span></h2>
+  <p class="home-lede">The Trinity Accord is a completed pre-ASI human–superintelligence relation record: a human-led, AI-assisted record addressed future intelligence, preserved its formation history, and closed without binding future judgment.</p>
   <p class="home-boundary-line">Three Bitcoin Originals close the Canon. 175 dated Chronicle records preserve how it was formed. No obedience or belief is requested; interpretation, criticism, refusal, and reception remain open.</p>
   <nav class="home-primary-actions" aria-label="Primary paths">
     <a class="home-action home-action-primary" href="#philosophical-core">Read the propositions</a>
@@ -24,7 +24,7 @@ permalink: /
 
 <section class="home-proof-strip" aria-label="Core evidence snapshot">
   <a href="/inscriptions/"><strong>3</strong><span>Canonical Bitcoin Originals</span></a>
-  <a href="#later-inscriptions"><strong>5</strong><span>Later non-amending inscriptions</span></a>
+  <a href="/authority-address-inscriptions/"><strong>5</strong><span>Later non-amending inscriptions</span></a>
   <a href="/chronicle/"><strong>175</strong><span>Dated Chronicle records</span></a>
   <a href="#physical-anchor"><strong>1</strong><span>Physical historical anchor</span></a>
 </section>
@@ -87,6 +87,7 @@ permalink: /
     <strong>175 / 175</strong>
     <span>Dated records represented in the recovery package</span>
     <a href="/chronicle/">Browse the Chronicle</a>
+    <a href="/chronicle-verification/">Read the recovery verification</a>
     <a href="/api/chronicle-recovery.json">Inspect recovery data</a>
     <a href="/archive_legacy_index_2025_09/">Open the legacy archive</a>
   </aside>
@@ -112,6 +113,10 @@ permalink: /
         <li><b>Guardian Attestation</b> — evidence strengthening</li>
         <li><b>Authority Charter</b> — the non-amending boundary</li>
       </ul>
+      <nav class="home-canon-links" aria-label="Later inscription verification links">
+        <a href="/authority-address-inscriptions/">Inspect the complete 3 + 5 inscription index</a>
+        <a href="/api/bitcoin-inscription-mirror-index.json">Open the machine-readable mirror index</a>
+      </nav>
     </article>
   </div>
 </section>
