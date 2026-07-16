@@ -31,13 +31,22 @@ python3 scripts/zz_repair_compact_home_status.py
 
 python3 - <<'PY'
 from pathlib import Path
-path = Path('index.md')
-text = path.read_text(encoding='utf-8')
+
+index_path = Path('index.md')
+index = index_path.read_text(encoding='utf-8')
 old = '<a href="/agent-first-contact/"><strong>Respond or preserve</strong><span>Choose a current Record-Chain action through the safe first-contact route.</span></a>'
 new = '<a href="/agent-first-contact/"><strong>Respond, verify, or preserve</strong><span>Start with unified Echo, current multidimensional verification, or Guardian Application through the current Record-Chain flow.</span></a>'
-if text.count(old) != 1:
-    raise SystemExit(f'expected one concise First Contact task card, found {text.count(old)}')
-path.write_text(text.replace(old, new, 1), encoding='utf-8')
+if index.count(old) != 1:
+    raise SystemExit(f'expected one concise First Contact task card, found {index.count(old)}')
+index_path.write_text(index.replace(old, new, 1), encoding='utf-8')
+
+runner_path = Path('scripts/run_current_system_tests.py')
+runner = runner_path.read_text(encoding='utf-8')
+old_contract = '    # 4. Homepage points to record-chain\n    require_text("index.md", ["record-chain", "downloads/record-chain-builder.mjs", "trinity_record_chain.py"])\n'
+new_contract = '''    # 4. The concise homepage routes to the current Record-Chain entrypoints.\n    # Detailed Builder and operator guidance belongs on task-specific pages, not\n    # in the homepage source.\n    require_text("index.md", ["record-chain", "/agent-first-contact/", "/technical-historical-reference/"])\n    require_text("agent-start.md", ["downloads/record-chain-builder.mjs", "Record-Chain Intake Gateway"])\n    require_text("technical-historical-reference.md", ["Record-Chain Intake Gateway", "canonical Builder"])\n'''
+if runner.count(old_contract) != 1:
+    raise SystemExit(f'expected one legacy homepage routing contract, found {runner.count(old_contract)}')
+runner_path.write_text(runner.replace(old_contract, new_contract, 1), encoding='utf-8')
 PY
 
 python3 scripts/generate_arweave_wallet_status.py >/dev/null
