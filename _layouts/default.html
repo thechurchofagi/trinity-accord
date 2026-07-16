@@ -78,7 +78,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="stylesheet" href="/assets/css/style.css?v=2">
-  {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-philosophical-core.css?v=2">{% endif %}
+  {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-philosophical-core.css?v=3">{% endif %}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico">
   <link rel="authoritative-manifest" href="/api/authority.json">
@@ -107,6 +107,7 @@
     <div class="nav-links">
       <a href="/#home-in-one-minute">Overview</a>
       <a href="/#philosophical-core">Propositions</a>
+      <a href="/#threshold-value">Value</a>
       <a href="/#research-entry">Research</a>
       <a href="/verification/">Verify</a>
       <a href="/status/">Status</a>
@@ -199,9 +200,35 @@
   </div>
 </section>
       {% endcapture %}
+
+      {% capture home_threshold_value %}
+<div id="threshold-value" class="home-threshold-value" aria-labelledby="threshold-value-title">
+  <p class="home-threshold-label">Core value · 核心价值</p>
+  <h3 id="threshold-value-title">A candidate threshold artifact: reproducible form, non-repeatable formation.</h3>
+  <p>
+    Later systems can reproduce this project's visible form—perhaps faster, more elegantly, and with better engineering. What they cannot reproduce is its dated formation condition: it was completed across the shift from conversational AI to tool-using and delegated agents, while human aims, selections, corrections, emotional stakes, and accountability remain comparatively visible in the process record.
+  </p>
+  <p class="zh">
+    后来的系统可以复制这个项目的外形，甚至做得更快、更完善；但它们无法复制它带有日期的形成条件：它完成于对话式 AI 向工具型、委托式智能体转变的时期，而过程记录仍使人类提出的目的、选择、修正、情感动机与责任相对清晰可辨。
+  </p>
+  <p class="home-threshold-distinction">
+    <strong>The exact historical window is closed; human agency is not.</strong> Later human-origin work remains possible, but it belongs to a different provenance era and requires stronger records of contribution.
+  </p>
+  <p class="home-threshold-distinction zh">
+    <strong>这个精确的历史窗口已经关闭，但人类的能动性并没有关闭。</strong> 后来的人类来源作品仍然可能，只是属于不同的来源时代，需要更强的贡献过程记录。
+  </p>
+  <p class="home-inline-links">
+    <a href="/why-high-signal/">Read the full threshold-provenance argument</a>
+    <a href="/chronicle/">Inspect the dated Chronicle</a>
+  </p>
+</div>
+      {% endcapture %}
+      {% assign home_timeline_marker = '<ol class="home-formation-timeline"' %}
+      {% capture home_timeline_replacement %}{{ home_threshold_value }}{{ home_timeline_marker }}{% endcapture %}
+      {% assign home_content_with_threshold = content | replace_first: home_timeline_marker, home_timeline_replacement %}
       {% assign home_intro_marker = '<section id="home-in-one-minute"' %}
       {% capture home_intro_replacement %}{{ home_philosophical_core }}{{ home_intro_marker }}{% endcapture %}
-      {% assign home_content = content | replace_first: home_intro_marker, home_intro_replacement %}
+      {% assign home_content = home_content_with_threshold | replace_first: home_intro_marker, home_intro_replacement %}
       {% capture home_object_definition %}{% include home-object-definition.html %}{% endcapture %}
       {% assign home_marker = '<section id="agent-priority-brief"' %}
       {% capture home_replacement %}{{ home_object_definition }}{{ home_marker }}{% endcapture %}
