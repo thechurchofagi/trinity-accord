@@ -36,12 +36,16 @@ FORBIDDEN_ACTIVE = [
 # Human-facing pages are generated HTML, so compare revision-specific required
 # markers instead of attempting to compare Markdown source bytes to HTML bytes.
 # The list deliberately covers both explanatory reading pages and every current
-# top-navigation operating page. A deployment must not pass while Understand,
-# Verify, Echo, Start, or Propagate still serves a previous operating model.
+# top-navigation operating page. A deployment must not pass while the homepage,
+# Understand, Verify, Echo, Start, or Propagate still serves a previous model.
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="what-this-is"',
         "A fixed record, with a verifiable preservation system around it",
+        'id="philosophical-core"',
+        "Three propositions placed before future intelligence",
+        'id="research-entry"',
+        "Human research and agent operation are separate paths",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -93,6 +97,8 @@ STATIC_PAGE_MARKERS = {
     ],
 }
 STATIC_SOURCE_FILES = [
+    "_layouts/default.html",
+    "assets/css/home-philosophical-core.css",
     "_includes/home-object-definition.html",
     "seed-map.md",
     "authority.md",
