@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - homepage-conversational-ai-precision-20260716
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -59,7 +62,6 @@ jobs:
           for filename, pairs in replacements.items():
               path = Path(filename)
               text = path.read_text(encoding="utf-8")
-              original = text
               for old, new in pairs:
                   count = text.count(old)
                   if count != 1:
