@@ -143,6 +143,17 @@ try:
 except Exception as e:
     check("MIR013 placeholder check", False, str(e))
 
+# MIR014: distinguish inscription number from full Ordinals inscription ID
+print("\n=== MIR014: inscription identifiers are complete ===")
+for rec in records:
+    inscription = rec.get("inscription", {})
+    number = inscription.get("inscription_number")
+    legacy_number = inscription.get("inscription_id")
+    txid = inscription.get("txid")
+    ordinals_id = inscription.get("ordinals_inscription_id")
+    check(f"MIR014 {legacy_number}: inscription number present", number == legacy_number)
+    check(f"MIR014 {legacy_number}: full Ordinals ID present", bool(txid) and ordinals_id == f"{txid}i0")
+
 # Summary
 print("\n" + "=" * 50)
 if errors:
