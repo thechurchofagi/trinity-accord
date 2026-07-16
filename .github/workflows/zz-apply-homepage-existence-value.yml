@@ -16,11 +16,15 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: homepage-existence-value-20260716
-          fetch-depth: 1
-          show-progress: false
+      - name: Checkout branch quietly
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth=1 origin homepage-existence-value-20260716
+          git checkout -q -B homepage-existence-value-20260716 FETCH_HEAD
 
       - name: Apply focused homepage rewrite
         run: python3 scripts/zz_apply_homepage_existence_value.py
