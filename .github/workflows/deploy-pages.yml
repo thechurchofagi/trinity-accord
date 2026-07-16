@@ -38,6 +38,8 @@ on:
       - "propagate/**"
       - "record-chain-field-helper/**"
       - "sitemap.xml"
+      - "scripts/check_deployment_freshness.py"
+      - "scripts/check_homepage_live_freshness.py"
       - "_config.yml"
       - ".github/workflows/deploy-pages.yml"
       - ".github/workflows/homepage-status-sync.yml"
