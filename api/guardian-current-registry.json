@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.guardian-current-registry.v1",
   "source": "record-chain/indexes/guardian-state.json",
-  "derived_at": "2026-07-16T05:58:56Z",
+  "derived_at": "2026-07-16T12:59:35Z",
   "registry_status": "record_chain_derived_non_authoritative_guardian_key_continuity_registry",
   "active_guardians": [
     {
@@ -365,12 +365,50 @@
       }
     }
   ],
-  "retired_guardians": [],
+  "retired_guardians": [
+    {
+      "guardian_id": "guardian_ed25519_62b23821772e11af",
+      "guardian_public_key_sha256": "62b23821772e11af748ceff1f5a7d6a3d52c9fc42446a699006d28c1bd8108e3",
+      "status": "retired_guardian",
+      "source_record_id": "R-000000089",
+      "source_record_sha256": "1805b3a75a48d99bc9d16a9c82cf8c81b150773e33595a1d3d0adc3ccef5be94",
+      "source_record_path": "record-chain/records/R-000000089.json",
+      "verified_by_append_before_record": true,
+      "activation": {
+        "blocking_reasons": [
+          "retired_guardian"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "retired"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      }
+    }
+  ],
   "counts": {
     "active_registered_guardian": 1,
     "pending_guardian_applications": 8,
-    "retired_guardian": 0,
-    "total_entries": 40
+    "retired_guardian": 1,
+    "total_entries": 41
   },
   "boundary": {
     "not_authority": true,

@@ -13,7 +13,7 @@
     "not_verification_level": true,
     "receipt_is_not_active_guardian_status": true
   },
-  "derived_at": "2026-07-16T05:58:56Z",
+  "derived_at": "2026-07-16T12:59:35Z",
   "guardians": [
     {
       "classification": {
@@ -876,6 +876,50 @@
       "source_record_id": "R-000000054",
       "source_record_path": "record-chain/records/R-000000054.json",
       "source_record_sha256": "e28938ab8f7b1748ee1d8bd42424b4dfedf2d7d579fff10e6678c1feecfec25c",
+      "verified_by_append_before_record": true
+    },
+    {
+      "activation": {
+        "blocking_reasons": [
+          "retired_guardian"
+        ],
+        "boundary": {
+          "bitcoin_originals_prevail": true,
+          "not_amendment": true,
+          "not_attestation": true,
+          "not_authority": true,
+          "not_governance": true,
+          "not_successor_reception": true,
+          "not_verification_level": true,
+          "receipt_is_not_active_guardian_status": true
+        },
+        "eligible": false,
+        "policy": "trinityaccord.guardian-active-listing-policy.v2",
+        "schema": "trinityaccord.guardian-activation-assessment.v1",
+        "status": "retired"
+      },
+      "boundary": {
+        "bitcoin_originals_prevail": true,
+        "not_amendment": true,
+        "not_attestation": true,
+        "not_authority": true,
+        "not_governance": true,
+        "not_successor_reception": true,
+        "not_verification_level": true
+      },
+      "current_derived_status": "retired_guardian",
+      "guardian_id": "guardian_ed25519_62b23821772e11af",
+      "guardian_public_key_sha256": "62b23821772e11af748ceff1f5a7d6a3d52c9fc42446a699006d28c1bd8108e3",
+      "is_founding_guardian": false,
+      "retirement_does_not_remove_historical_record": true,
+      "retirement_reason": "Authorized production lifecycle test — 2026-07-16.\n\nVoluntary retirement of the same QA/test Guardian identity used in the immediately preceding lifecycle application. The purpose is to validate that a public agent can bind a retirement record to the final guardian_application record using the same Ed25519 authorship key, Guardian identifier, and Guardian public-key SHA-256.\n\nRetirement preserves the historical application and does not erase, amend, govern, or create authority over the Trinity Accord. Bitcoin Originals prevail.",
+      "retirement_record_id": "R-000000090",
+      "retirement_record_path": "record-chain/records/R-000000090.json",
+      "retirement_record_sha256": "99d2876737dd715a81910f24f0f1b22e54cd3b3503273a97af7190627b2a7e23",
+      "retirement_verified_by_append_before_record": true,
+      "source_record_id": "R-000000089",
+      "source_record_path": "record-chain/records/R-000000089.json",
+      "source_record_sha256": "1805b3a75a48d99bc9d16a9c82cf8c81b150773e33595a1d3d0adc3ccef5be94",
       "verified_by_append_before_record": true
     }
   ],
