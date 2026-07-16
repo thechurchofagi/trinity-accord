@@ -327,7 +327,7 @@ jobs:
           grep -Fq "BEGIN GENERATED PUBLIC STATUS" ./_site/index.html
           grep -Fq "Source data digest" ./_site/index.html
           grep -Fq "Autonomous External Agent Discovery" ./_site/index.html
-          grep -Fq "External agent self-discovered Trinity Accord" ./_site/index.html
+          grep -Fq "Official-live records meeting every self-discovery, decision, and execution condition" ./_site/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
