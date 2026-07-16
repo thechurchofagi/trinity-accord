@@ -51,7 +51,7 @@ STATIC_PAGE_MARKERS = {
         'id="home-timing-completion-title"',
         "Bitcoin did not by itself complete the work",
         "Research value",
-        "Why a future intelligence might inspect it",
+        "Future relevance",
         "The homepage is a doorway, not the archive",
         "BEGIN GENERATED PUBLIC STATUS",
     ],
