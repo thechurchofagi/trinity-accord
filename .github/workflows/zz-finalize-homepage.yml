@@ -44,21 +44,31 @@ jobs:
           python3 scripts/zz_finalize_homepage.py
           python3 - <<'PY'
           from pathlib import Path
-          path = Path('scripts/test-value-framing-p03.py')
-          text = path.read_text(encoding='utf-8')
-          text = text.replace(
+
+          p03_path = Path('scripts/test-value-framing-p03.py')
+          p03 = p03_path.read_text(encoding='utf-8')
+          p03 = p03.replace(
               'require_contains(index, "existed no later than their confirmed blocks", "homepage states bounded timestamp claim")',
               'require_contains(index, "existed no later than the relevant confirmed block", "homepage states bounded timestamp claim")',
           )
-          text = text.replace(
+          p03 = p03.replace(
               'boundary_count = all_text.count("if another completed public object")',
               'boundary_count = all_text.count("if another completed public object") + all_text.count("if a comparable completed public object exists")',
           )
-          text = text.replace(
+          p03 = p03.replace(
               'check(boundary_count >= 2, "peer-comparison boundary appears across pages", f"count {boundary_count}")',
               'check(boundary_count >= 1, "peer-comparison boundary remains on deep research pages", f"count {boundary_count}")',
           )
-          path.write_text(text, encoding='utf-8')
+          p03_path.write_text(p03, encoding='utf-8')
+
+          index_path = Path('index.md')
+          index = index_path.read_text(encoding='utf-8')
+          anchor = '    <a href="/archive_legacy_index_2025_09/"><strong>Legacy homepage archive</strong><span>Preserved historical presentation and formation context</span></a>\n'
+          addition = anchor + '    <a href="/seed-map/"><strong>System map</strong><span>Canon, context, evidence, verification, access, and reception layers</span></a>\n'
+          if index.count(anchor) != 1:
+              raise SystemExit('expected one legacy reference portal link')
+          index = index.replace(anchor, addition, 1)
+          index_path.write_text(index, encoding='utf-8')
           PY
 
       - name: Regenerate sitemap
