@@ -53,8 +53,8 @@ It makes a narrower choice: preserve a human-origin relation record in a form la
 
 保存行为不是相关性预测。它只是让一份记录在未来仍可获得、可核验、可批判——不多，不少。
 
-## 4. The human-voice timing claim
-## 人类声音的时机主张
+## 4. The human-led timing claim
+## 人类主导的时机主张
 
 The central timing claim is that the record was completed while agentic mediation remained comparatively limited and the dated process still made human intention and accountability comparatively legible.
 
