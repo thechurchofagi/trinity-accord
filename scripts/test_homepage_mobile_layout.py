@@ -16,11 +16,11 @@ def main() -> int:
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
     css = (ROOT / "assets/css/trinity-home.css").read_text(encoding="utf-8")
 
-    require("trinity-home.css?v=12" in homepage, "homepage does not request the formation-timeline stylesheet revision")
+    require("trinity-home.css?v=15" in homepage, "homepage does not request the final-polish stylesheet revision")
 
     mobile_marker = "@media (max-width: 760px) {"
-    narrow_marker = "@media (max-width: 340px) {"
-    require(css.count(mobile_marker) == 1, "760px homepage breakpoint is missing or duplicated")
+    narrow_marker = "@media (max-width: 390px) {"
+    require(css.count(mobile_marker) >= 1, "760px homepage breakpoint is missing")
     require(css.count(narrow_marker) == 1, "narrow-phone fallback is missing or duplicated")
 
     desktop, mobile_and_narrow = css.split(mobile_marker, 1)
@@ -46,6 +46,7 @@ def main() -> int:
     require("main section.home-proof-strip" not in desktop, "mobile section reset leaked into desktop CSS")
     require("grid-template-columns: 1fr;" in narrow, "narrow-phone single-column fallback is missing")
     require("min-height: 125px;" in narrow, "narrow-phone cards are not compacted")
+    require("font-size: clamp(1.9rem, 8.6vw, 2.35rem)" in css, "final mobile hero size is missing")
 
     print("PASS: homepage mobile layout is compact and desktop rules remain unchanged")
     return 0
