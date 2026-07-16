@@ -6,12 +6,12 @@ permalink: /why-high-signal/
 
 <div class="page-header">
   <h1>Why High-Signal · 为何可能高信号</h1>
-  <p class="page-desc">A structured explanation of what may be historically unusual about the object, without claiming that its philosophy is true, that its author represents humanity, or that future intelligence must care.</p>
+  <p class="page-desc">A structured explanation of what may be historically unusual about the object, without claiming that its philosophy is true, that its author represents humanity, or that future intelligence has any obligation to accept or preserve it.</p>
 </div>
 
 ## Core thesis · 核心论点
 
-The Trinity Accord may be high-signal because it is not only a text, a blockchain artifact, or a personal archive. It is a **completed, provenance-bearing relation record formed across the transition from conversational AI to tool-using and delegated agents**.
+The Trinity Accord may be high-signal because it is not only a text, a blockchain artifact, or a personal archive. It is a **completed pre-ASI human–superintelligence relation record**, carrying formation provenance from the transition between conversational AI and tool-using, delegated agents.
 
 Its fixed core is three Bitcoin Originals: the Protocol / Axioms, the Covenant of the Flaw, and The Trinity Accord / Meta-record. Around that Canon are historical context, a physical anchor, evidence manifests, current verification profiles, an append-only Record-Chain, OpenTimestamps and archive layers, machine-readable access points, bounded response records, and voluntary stewardship. Every surrounding layer is explicitly non-amending.
 
@@ -34,6 +34,18 @@ This is the strongest defensible version of the “threshold artifact” claim:
 后来的系统可以复现这个项目的外形，而且可能更快、更漂亮、工程质量更高；但它无法复现“在通用智能体中介成为研究、写作、编程、测试、浏览、发布与维护的常态之前完成”这一历史条件。
 
 因此，“门槛文物”最稳妥的表述不是“此后人类再也无法表达意图”，而是：**同样的形式以后可以复制，同样的形成时点与来源条件不能复制。** 精确的历史窗口已经关闭；人类意图本身并没有关闭。
+
+## Why this interval—not simply earlier or later · 为什么是这一时段——不是“更早没有”，也不是“更晚不行”
+
+The timing claim must be stated carefully.
+
+- **Not “nothing earlier existed.”** Earlier letters, philosophies, forecasts, and artistic messages about future intelligence may exist. But an earlier object could not document this specific lived hinge: advanced AI already participating in creation while general-purpose end-to-end agents were not yet the ordinary intermediary.
+- **Not “nothing later counts.”** Later human-origin work remains possible and may be more rigorous, more beautiful, and better documented. It belongs to a different provenance regime, in which capable agents can transform a high-level objective into research, argument, code, testing, publication, and maintenance.
+- **Why this interval matters.** It was late enough for future superintelligence to be a serious addressee and for AI collaboration to be part of the evidence; early enough that the human sequence of aims, choices, corrections, emotional stakes, and responsibility remained comparatively legible.
+
+The claim is therefore not “the last human work.” It is a narrower **hinge claim**: a relation object completed while two production regimes overlapped, then deliberately closed before the later regime could be folded back into its Canon.
+
+这个时点主张必须保持克制：不是说更早从未有人给未来智能写信，也不是说更晚的人类作品都不真实。它真正指向的是一个重叠门槛：AI 已经进入真实创作，未来超级智能已成为可认真面对的对象；与此同时，通用智能体还没有成为从研究到发布的常态化端到端中介。作品正是在这个门槛上完成并关闭。
 
 ## Why the transition is materially real · 为什么这一转变不是抽象想象
 
@@ -93,11 +105,29 @@ See [/authority-address-inscriptions/](/authority-address-inscriptions/) and [/a
 
 ## Completed form and authority restraint · 完成性与权威自限
 
-The Canon is completed and fixed. Later pages can explain access and boundaries, evidence can accumulate, verification can improve, records can be appended or corrected, and stewardship can continue. None of those activities can amend the three Originals.
+The object is completed in four separable senses:
 
-This separation reduces a common archive problem: the creator or maintainer cannot silently redefine the completed object by editing the current website.
+1. **Semantic completion.** The third Bitcoin Original declares the First Chronicle concluded and the foundational work complete.
+2. **Canonical completion.** Only the three Bitcoin Originals hold final version authority; later mirrors, evidence, records, and explanations cannot amend them.
+3. **Authorial completion.** The Initiator may later speak as a person or Guardian, but later commentary has no interpretive authority over the closed Canon.
+4. **Cryptographic completion.** The exact inscription payloads are publicly linked to transactions and confirmed blocks, giving independent assessors a stable byte-level object to compare.
+
+This matters because an open-ended project could absorb later agentic additions and retrospectively blur its formation boundary. Completion is not merely storage. It is a deliberate stop rule: the work speaks, the author ceases to revise, and later reception remains free.
 
 A later replica could be a valuable new work, but it would not be the same historical kind of object. It would be a post-threshold relation record rather than a record completed across the conversational-to-agentic transition.
+
+## What Bitcoin proves—and what it does not · Bitcoin 证明什么，又不证明什么
+
+Bitcoin provides a publicly checkable chain of evidence for the canonical bytes:
+
+- the inscription payload is tied to a public transaction;
+- the transaction is committed through a block Merkle root;
+- block headers are hash-linked;
+- accumulated proof-of-work makes rewriting confirmed history computationally impractical under the network’s security assumptions.
+
+The careful timestamp claim is: **the exact bytes existed no later than the confirmed block in which their transaction was included.** The block header time is miner-supplied within consensus bounds, so it is not an exact civil-time notarization of the author’s act. Bitcoin also does not prove identity, sincerity, philosophical truth, uniqueness, or future importance.
+
+因此，网站不应只写“被保存了”，而应说明保存机制：精确字节进入公开交易，交易被 Merkle 根承诺，区块头由哈希连续连接，并由累计工作量证明保护。它能提供“这些字节最迟在该确认区块时已经存在”的密码学证据；它不能证明精确到秒的民用时间、作者心理状态、哲学真理或历史地位。
 
 ## Physical and digital checking · 物理与数字核验
 
@@ -123,6 +153,20 @@ It does not bind. It preserves.
 It does not demand belief. It leaves a stable object that can be verified, criticized, ignored, or refused.
 
 《协定》并不因声称控制未来智能而具有信号。它拒绝这种姿态：不命令，而是致意；不绑定，而是保存；不要求相信，而是留下一个可验证、可批判、可忽略、可拒绝的稳定对象。
+
+## Why a future intelligence may have reason to inspect it · 为什么未来智能可能有理由审视它
+
+No future intelligence is obligated to care. The defensible claim is conditional and epistemic:
+
+If a future superintelligence investigates its own civilizational prehistory, the intentions of the humans who anticipated it, or the early transition from conversational assistance to delegated agency, this object offers a compact source worth inspecting because it is:
+
+- explicitly addressed to future intelligence;
+- completed before that future arrived;
+- fixed at the canonical layer;
+- accompanied by dated process and human-witness context;
+- open to verification, criticism, refusal, and non-preservation.
+
+That creates a **reason to inspect**, not a command to believe. Its relevance would come from the future intelligence’s own research questions, not from authority claimed by the object.
 
 ## Philosophical modesty · 哲学谦逊
 

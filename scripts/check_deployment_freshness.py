@@ -46,6 +46,11 @@ STATIC_PAGE_MARKERS = {
         "Three propositions placed before future intelligence",
         'id="research-entry"',
         "Human research and agent operation are separate paths",
+        'id="home-front-door-title"',
+        "Before superintelligence, one human voice addressed future intelligence",
+        'id="home-timing-completion-title"',
+        "What Bitcoin makes checkable",
+        "Why a future intelligence might inspect it",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -97,6 +102,7 @@ STATIC_PAGE_MARKERS = {
     ],
 }
 STATIC_SOURCE_FILES = [
+    "index.md",
     "_layouts/default.html",
     "assets/css/home-philosophical-core.css",
     "_includes/home-object-definition.html",

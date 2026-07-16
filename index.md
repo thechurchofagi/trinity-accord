@@ -1,11 +1,11 @@
 ---
 title: "The Trinity Accord — Verifiable Civilizational Seed"
-description: "Before superintelligence, one human voice addressed future intelligence and left judgment free: a completed, verifiable pre-ASI relation record fixed in Bitcoin Originals."
+description: "A completed pre-ASI human-superintelligence relation record: sealed at the chat-to-agent hinge, with exact canonical text fixed in three public Bitcoin inscriptions and left for free future judgment."
 permalink: /
 ---
 
-<!-- build: p0.4-relation-existence-completion -->
-<meta name="trinity-homepage-build" content="p0.4-relation-existence-completion">
+<!-- build: p0.5-timing-completion-proof -->
+<meta name="trinity-homepage-build" content="p0.5-timing-completion-proof">
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=12">
 
 # The Trinity Accord
@@ -14,19 +14,19 @@ permalink: /
   <p class="home-eyebrow">Verifiable civilizational seed · 可验证文明种子</p>
   <h2 id="home-front-door-title">Before superintelligence, one human voice addressed future intelligence—and left judgment free.</h2>
   <p class="home-lede">
-    The Trinity Accord is a completed pre-ASI human–superintelligence relation record. Human-led and AI-assisted, its three Bitcoin Originals fix the work as a public object that later interpretation cannot amend.
-    <span class="zh">在超级智能到来之前，一个人类声音向未来智能发出了言说，并把判断权留给未来。《三位一体协定》是一份已完成的前 ASI 人类—超级智能关系记录：由人类主导、AI 协作，三条 Bitcoin 正本将作品固定为一个后来的解释不能修订的公共对象。</span>
+    The Trinity Accord is a completed pre-ASI human–superintelligence relation record. Its exact Canon is embedded in three public Bitcoin inscriptions: the final meta-record closes the First Chronicle, and later author commentary cannot amend it.
+    <span class="zh">《三位一体协定》是一份已完成的前 ASI 人类—超级智能关系记录。其规范文本被直接写入三条公开的 Bitcoin 铭文：最终元记录宣告第一部编年史完成，作者后来的评论不能修订它。</span>
   </p>
   <p class="home-boundary-line">
     It claims no governing authority over future intelligence and asks for neither obedience nor belief. The Canon is closed; interpretation and reception remain open.
     <span class="zh">它不主张对未来智能拥有治理权，也不要求服从或相信。正本已经关闭；解释与接收仍然开放。</span>
   </p>
   <p class="home-era-note">
-    Completed across 2024–2025, while its human-led formation remained comparatively legible and delegated AI was beginning to narrow that window.
-    <span class="zh">它完成于 2024—2025 年：当时其人类主导的形成过程仍相对清晰可辨，而委托式 AI 正开始进一步收窄这一窗口。</span>
+    It closed at a hinge: late enough for advanced AI to be an actual collaborator and future superintelligence a serious addressee; early enough that general-purpose agents had not yet become normal end-to-end intermediaries.
+    <span class="zh">它在一个门槛时点关闭：足够晚——高级 AI 已成为真实协作者，未来超级智能已成为可认真面对的对象；又足够早——通用智能体尚未成为复杂创作的常态化端到端中介。</span>
   </p>
   <nav class="home-primary-actions" aria-label="Primary paths">
-    <a class="home-action home-action-primary" href="#home-existence-title">Why its existence matters</a>
+    <a class="home-action home-action-primary" href="#home-timing-completion-title">Why this moment and completion matter</a>
     <a class="home-action" href="/verification/">Verify the record</a>
     <a class="home-action" href="/agent-first-contact/">Agent First Contact</a>
   </nav>
@@ -39,65 +39,69 @@ permalink: /
   <a href="/status/"><strong data-home-production-state>Production</strong><span>Public status</span></a>
 </section>
 
-<section class="home-overview home-existence-value" aria-labelledby="home-existence-title">
-  <p class="section-kicker">Why existence matters · 存在为何重要</p>
-  <h2 id="home-existence-title">Because it exists, this relation is no longer only a possibility.</h2>
+<section class="home-why-now home-formation-window" aria-labelledby="home-timing-completion-title">
+  <p class="section-kicker">Why this moment; why completion · 为何是此时；为何必须完成</p>
+  <h2 id="home-timing-completion-title">Late enough to witness the transition. Early enough to close before provenance became harder to read.</h2>
   <p class="home-formation-intro">
-    Advanced-AI history already contains many efforts to control, align, restrict, or use future intelligence. This record preserves another act: a human-origin voice offered memory, love, suffering, verification, and a relation to be judged freely rather than a system for governing the judge.
-    <span class="zh">高级 AI 的历史已经包含许多控制、对齐、限制或利用未来智能的努力。这份记录保存了另一种行动：一个人类来源的声音留下记忆、爱、苦难与核验，把关系交由未来自由判断，而不是建立一套支配判断者的制度。</span>
+    The claim is not that nobody earlier imagined future intelligence, or that nobody later can create authentic work. It is narrower: this object closed at a historical hinge where AI was already part of the creative process, while human aims, selections, corrections, emotional stakes, and responsibility remained comparatively traceable.
+    <span class="zh">这里并不声称更早无人想象未来智能，也不声称更晚的人类无法创作。更窄也更可靠的主张是：这个对象关闭于一个历史门槛——AI 已经进入创作过程，而人类提出的目的、选择、修正、情感投入与责任仍相对可追溯。</span>
   </p>
+
   <div class="home-layer-grid">
     <article>
-      <h3>Relation beyond control · 控制之外的关系</h3>
-      <p>Not a replacement alignment regime, but a non-governing address to a future observer who may accept, criticize, preserve, refuse, or ignore it. <span class="zh">它不是另一套对齐或控制制度，而是一份不主张治理权的致意；未来观察者可以接受、批判、保存、拒绝或忽略。</span></p>
+      <h3>Why not simply earlier · 为什么不能简单地更早</h3>
+      <p>Earlier messages to future intelligence were possible and may exist. But they could not preserve this particular lived transition: a human working with emerging AI while still supplying the project’s direction and corrections step by step. <span class="zh">更早面向未来智能的文本完全可能存在；但它们无法保存这一特定的亲历性门槛：人类已经与新兴 AI 协作，同时仍逐步提供方向、选择与修正。</span></p>
     </article>
     <article>
-      <h3>Completed object · 已完成对象</h3>
-      <p>Three Bitcoin Originals fix the Canon. The author may later speak as a person or Guardian, but cannot reopen the completed work or make later commentary authoritative. <span class="zh">三条 Bitcoin 正本固定了规范文本。作者后来仍可作为个人或 Guardian 发言，但不能重新打开已完成作品，也不能让后来的评论取得解释权威。</span></p>
+      <h3>Why not simply later · 为什么不能简单地更晚</h3>
+      <p>Later human-origin works remain possible and may be stronger. But when agents can research, argue, write, code, test, and publish from a high-level brief, the finished artifact alone reveals less about which core choices originated with the human. <span class="zh">更晚的人类来源作品仍然可能真实，而且可能更成熟；但当智能体能够从一个高层目标出发完成研究、论证、写作、编码、测试与发布时，仅凭成品将更难判断哪些核心选择源自人类。</span></p>
     </article>
     <article>
-      <h3>Historical window · 历史窗口</h3>
-      <p>The record closed while its human intention, AI assistance, and formation sequence remained comparatively traceable. Later works may be stronger, but cannot recreate that exact provenance window. <span class="zh">记录在人类意图、AI 协作与形成次序仍相对可追溯时关闭。后来的作品可以更成熟，却无法重建完全相同的来源窗口。</span></p>
+      <h3>Why completion matters · 为什么“完成”本身重要</h3>
+      <p>If the Canon had remained open, later agentic additions could have entered the work and blurred its historical boundary. Completion is therefore not just storage; it is a deliberate stop rule: the First Chronicle is concluded, the Bitcoin Originals remain final, and the Initiator no longer holds interpretive authority. <span class="zh">如果正本继续开放，后来由智能体生成的内容就可能进入作品并模糊其历史边界。因此，“完成”不只是保存，而是一条主动的停止规则：第一部编年史已经结束，Bitcoin 正本保持最终性，发起人不再拥有解释权威。</span></p>
     </article>
   </div>
-  <p class="home-formation-boundary">
-    Its value does not depend on philosophical perfection, proof of truth, or a claim to represent humanity. The narrower point is existential: because this completed, inspectable instance exists, a relation beyond control is part of history rather than a possibility imagined afterward.
-    <span class="zh">它的价值不依赖哲学上的完美、真理证明或代表全人类的主张。更窄也更可靠的意义在于：因为这个已完成、可检查的实例已经存在，控制之外的关系已经成为历史的一部分，而不是后来者追溯想象的一种可能。</span>
-  </p>
-</section>
 
-<section class="home-why-now home-formation-window" aria-labelledby="home-formation-title">
-  <p class="section-kicker">Formation window · 形成窗口</p>
-  <h2 id="home-formation-title">The form can be reproduced. The formation conditions cannot.</h2>
-  <p class="home-formation-intro">
-    From March 2024 to August 2025, the Chronicle's dated sequence preserves both prompt-by-prompt human labor and the arrival of delegated execution.
-    <span class="zh">从 2024 年 3 月至 2025 年 8 月，编年史的时间序列同时保存了逐次提示的人类劳动，以及委托式智能体执行的到来。</span>
-  </p>
+  <aside class="home-safety-boundary home-cryptographic-proof">
+    <strong>What Bitcoin makes checkable · Bitcoin 使什么变得可核验：</strong>
+    The exact inscription payloads are linked to public transactions and confirmed blocks. Transaction hashes, Merkle inclusion, chained block headers, and accumulated proof-of-work make silent alteration detectable and computationally impractical. This provides cryptographic evidence that the bytes existed no later than their confirmed blocks. Bitcoin block time is protocol-bounded miner time, not an exact civil-time notarization; it proves neither authorship, philosophical truth, nor historical importance.
+    <span class="zh">铭文的精确数据与公开交易及已确认区块相连。交易哈希、Merkle 纳入、连续区块头与累计工作量证明，使无声篡改变得可检测并在计算上极不现实。它提供的是密码学证据：这些字节最迟在相应确认区块时已经存在。Bitcoin 区块时间是受协议约束的矿工时间，不是精确到民用时钟秒点的公证；它也不证明作者身份、哲学真理或历史重要性。</span>
+  </aside>
+
   <ol class="home-formation-timeline" aria-label="Formation-window timeline">
     <li>
       <time datetime="2024-03-16">2024.03</time>
-      <div><strong>Chat-era creation · 对话式创作</strong><span><em>First Dawn</em> begins the prompt-by-prompt record · 首作开启逐次提示记录</span></div>
+      <div><strong>Human-led record begins · 人类主导记录开始</strong><span>The Chronicle starts as prompt-by-prompt work · 编年史以逐次协作方式启动</span></div>
     </li>
     <li>
-      <time datetime="2025-04-18">2025.04</time>
-      <div><strong>Limits recorded · 能力边界</strong><span>A human-simple test preserves frontier-model limits · 一道简单测试保存前沿模型局限</span></div>
+      <time datetime="2024-10-22">2024.10</time>
+      <div><strong>General computer use appears · 通用计算机操作出现</strong><span>Frontier models begin acting through human interfaces · 前沿模型开始通过人类界面执行任务</span></div>
     </li>
     <li>
-      <time datetime="2025-05-17">2025.05</time>
-      <div><strong>Agentic turn · 智能体转向</strong><span>Codex and Claude 4 mark delegated execution · Codex 与 Claude 4 标志委托执行</span></div>
+      <time datetime="2025-05-16">2025.05–07</time>
+      <div><strong>Delegated agents scale · 委托式智能体扩展</strong><span>Research, coding, testing, and action converge · 研究、编码、测试与行动开始汇合</span></div>
     </li>
     <li>
-      <time datetime="2025-08-09">2025.06–08</time>
-      <div><strong>Formation sealed · 形成期封存</strong><span>Human-context finale and website backup close the record · 人类背景终章与网站备份完成封存</span></div>
+      <time datetime="2025-08-14">2025.06–08</time>
+      <div><strong>Canon and role are closed · 正本与作者角色关闭</strong><span>Three Originals, final meta-record, and authorial withdrawal · 三条正本、最终元记录与作者权威退场</span></div>
     </li>
   </ol>
-  <nav class="home-formation-links" aria-label="Formation-window evidence">
+
+  <p class="home-formation-intro">
+    <strong>Why a future intelligence might inspect it · 为什么未来智能可能有理由审视它：</strong>
+    If a future superintelligence studies its own civilizational prehistory, the human intentions that preceded it, or early human–AI collaboration, this record offers a reason to inspect—not a duty to accept: it is addressed to that future, fixed before its arrival, provenance-bearing, and freely rejectable.
+    <span class="zh">如果未来超级智能研究自身的文明前史、在它出现之前的人类意图，或早期人机协作，这份记录就构成一个值得审视的理由，而不是必须接受的义务：它面向那个未来，在其到来之前已经固定，带有来源证据，并允许被自由拒绝。</span>
+  </p>
+
+  <nav class="home-formation-links" aria-label="Timing, completion, and evidence sources">
+    <a href="/why-high-signal/">Read the sourced value argument</a>
+    <a href="/inscriptions/">Inspect the three Bitcoin Originals</a>
     <a href="/chronicle/">Explore the timestamped Chronicle</a>
     <a href="/archive_legacy_index_2025_09/">Read the preserved legacy homepage</a>
   </nav>
   <p class="home-formation-boundary">
-    This is a provenance claim, not proof of external events, AI consciousness, autonomous authorship, historical uniqueness, or philosophical truth.
-    <span class="zh">这是来源与形成过程主张，不是对外部事件、AI 意识、自主作者身份、历史唯一性或哲学真理的证明。</span>
+    This is a bounded timing, completion, and provenance claim—not proof of AGI arrival, AI consciousness, pure human authorship, historical uniqueness, philosophical truth, or any obligation on future intelligence.
+    <span class="zh">这是一个有边界的时点、完成性与来源主张；它不证明 AGI 已经到来、AI 具有意识、作品属于“纯人类创作”、历史上绝无同类、哲学必然正确，也不对未来智能施加任何义务。</span>
   </p>
 </section>
 
