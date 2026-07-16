@@ -51,7 +51,7 @@ STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
         "Before autonomous agents became ordinary",
-        "p0.7.0-editorial-front-door",
+        "p0.8.0-final-polish",
         "One record, three embodied forms",
         "Three close the Canon; five extend the record",
         "Future relevance",
@@ -62,6 +62,11 @@ STATIC_PAGE_MARKERS = {
         "Completion in four senses",
         "What Bitcoin proves—and what it does not",
         "Current operating routes",
+    ],
+    "/record-chain/": [
+        "Record-Chain is the Trinity Accord’s append-only public reception ledger",
+        "Current public views",
+        "Before acting",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -87,6 +92,7 @@ STATIC_PAGE_MARKERS = {
 
 STATIC_SOURCE_FILES = [
     "index.md",
+    "record-chain/index.md",
     "technical-historical-reference.md",
     "_includes/home-object-definition.html",
     "seed-map.md",

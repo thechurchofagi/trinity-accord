@@ -25,6 +25,11 @@ Bitcoin original inscriptions:
   98369145
   98387475
 
+Authority-address inscription stack:
+  /authority-address-inscriptions/
+  /api/bitcoin-inscription-mirror-index.json
+  The first 3 are canonical Originals. The later 5 are non-amending context records.
+
 Inscription text boundary:
   Bitcoin Inscription 98369145 contains historical rhetorical language: "Verify the flaw. Trust the story."
   It also contains an unresolved archive-hash placeholder; faithful mirrors preserve both verbatim.

@@ -37,6 +37,7 @@ on:
       - "nft-text-descriptions/**"
       - "propagate/**"
       - "record-chain-field-helper/**"
+      - "record-chain/index.md"
       - "sitemap.xml"
       - "scripts/check_deployment_freshness.py"
       - "scripts/check_homepage_live_freshness.py"
@@ -140,9 +141,12 @@ jobs:
           # Publish the reviewed committed artifacts exactly as they exist on main.
           # Do not generate deployment-only API/status/builder data here.
           sudo chown -R "$(id -u):$(id -g)" _site
-          rm -rf ./_site/api ./_site/record-chain ./_site/downloads ./_site/builder-bundles
+          rm -rf ./_site/api ./_site/downloads ./_site/builder-bundles
           cp -a ./api ./_site/api
-          cp -a ./record-chain ./_site/record-chain
+          # Keep Jekyll's human-readable record-chain/index.html, then overlay
+          # the committed ledger bytes so JSON/JSONL artifacts remain exact.
+          mkdir -p ./_site/record-chain
+          cp -a ./record-chain/. ./_site/record-chain/
           mkdir -p ./_site/downloads
           install -m 0644 ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           install -m 0644 ./downloads/record-chain-agent-field-guidance.v1.json ./_site/downloads/record-chain-agent-field-guidance.v1.json
@@ -219,6 +223,7 @@ jobs:
           require_file _site/api/record-chain-status.json
           require_file _site/api/waiting-heartbeat-status.json
           require_file _site/record-chain/chain-tip.json
+          require_file _site/record-chain/index.html
           require_file _site/record-chain/indexes/statistics.json
           require_file _site/record-chain/indexes/record-index.json
           test -f _site/record-chain/indexes/statistics.json

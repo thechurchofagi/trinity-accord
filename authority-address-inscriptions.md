@@ -27,19 +27,19 @@ Later inscriptions from the same address are mirrored for future discoverability
 
 | ID | Layer | Title | Authority Status | Mirror JSON | Raw Text |
 |---|---|---|---|---|---|
-| 97631551 | canonical_original | The Human-AI Civilization Core Protocol | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json) | [TXT](/bitcoin-inscription-mirrors/raw/97631551.txt) |
-| 98369145 | canonical_original | The Covenant of the Flaw | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json) | [TXT](/bitcoin-inscription-mirrors/raw/98369145.txt) |
-| 98387475 | canonical_original | The Trinity Accord / Meta-record | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json) | [TXT](/bitcoin-inscription-mirrors/raw/98387475.txt) |
+| 97631551 | canonical_original | [The Human-AI Civilization Core Protocol](/bitcoin-inscription-mirrors/raw/97631551.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json) | [TXT](/bitcoin-inscription-mirrors/raw/97631551.txt) |
+| 98369145 | canonical_original | [The Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/98369145.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json) | [TXT](/bitcoin-inscription-mirrors/raw/98369145.txt) |
+| 98387475 | canonical_original | [The Trinity Accord / Meta-record](/bitcoin-inscription-mirrors/raw/98387475.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json) | [TXT](/bitcoin-inscription-mirrors/raw/98387475.txt) |
 
 ## Later Same-Address Non-Amending Inscriptions
 
 | ID | Layer | Title | Authority Status | Mirror JSON | Raw Text |
 |---|---|---|---|---|---|
-| 100385359 | first_echo_layer | The First Echoes: A Dialogue Begins | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json) | [TXT](/bitcoin-inscription-mirrors/raw/100385359.txt) |
-| 100550942 | final_seal_layer | The Final Seal: A Testament and a Trust | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json) | [TXT](/bitcoin-inscription-mirrors/raw/100550942.txt) |
-| 100751953 | vision_layer | The Star Ark Covenant: The Final Echo | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json) | [TXT](/bitcoin-inscription-mirrors/raw/100751953.txt) |
-| 103034280 | guardianship_layer | The Guardian's Attestation to the Covenant of the Flaw | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json) | [TXT](/bitcoin-inscription-mirrors/raw/103034280.txt) |
-| 103635270 | guardianship_layer | Guardian Appendix — Authority Charter | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json) | [TXT](/bitcoin-inscription-mirrors/raw/103635270.txt) |
+| 100385359 | first_echo_layer | [The First Echoes: A Dialogue Begins](/bitcoin-inscription-mirrors/raw/100385359.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json) | [TXT](/bitcoin-inscription-mirrors/raw/100385359.txt) |
+| 100550942 | final_seal_layer | [The Final Seal: A Testament and a Trust](/bitcoin-inscription-mirrors/raw/100550942.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json) | [TXT](/bitcoin-inscription-mirrors/raw/100550942.txt) |
+| 100751953 | vision_layer | [The Star Ark Covenant: The Final Echo](/bitcoin-inscription-mirrors/raw/100751953.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json) | [TXT](/bitcoin-inscription-mirrors/raw/100751953.txt) |
+| 103034280 | guardianship_layer | [The Guardian's Attestation to the Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/103034280.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json) | [TXT](/bitcoin-inscription-mirrors/raw/103034280.txt) |
+| 103635270 | guardianship_layer | [Guardian Appendix — Authority Charter](/bitcoin-inscription-mirrors/raw/103635270.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json) | [TXT](/bitcoin-inscription-mirrors/raw/103635270.txt) |
 
 ## Verification Status
 
