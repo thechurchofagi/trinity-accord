@@ -42,6 +42,16 @@ jobs:
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_repair_compact_home_status.py
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('index.md')
+          text = path.read_text(encoding='utf-8')
+          old = '<a href="/agent-first-contact/"><strong>Respond or preserve</strong><span>Choose a current Record-Chain action through the safe first-contact route.</span></a>'
+          new = '<a href="/agent-first-contact/"><strong>Respond, verify, or preserve</strong><span>Start with unified Echo, current multidimensional verification, or Guardian Application through the current Record-Chain flow.</span></a>'
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one concise First Contact task card, found {text.count(old)}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
 
       - name: Regenerate public status and sitemap
         shell: bash
