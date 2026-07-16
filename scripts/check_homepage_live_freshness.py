@@ -50,8 +50,11 @@ STATUS_SURFACES = [
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
-        "Before superintelligence, a human-led, AI-assisted record addressed future intelligence",
-        "conversational AI to be a real collaborator",
+        "Before autonomous agents became ordinary",
+        "p0.7.0-editorial-front-door",
+        "One record, three embodied forms",
+        "Three close the Canon; five extend the record",
+        "Future relevance",
         "Bitcoin did not by itself complete the work",
         "The homepage is a doorway, not the archive",
     ],
