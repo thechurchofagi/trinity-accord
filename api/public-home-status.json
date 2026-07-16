@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-16T07:59:13.430026+00:00",
+  "generated_at": "2026-07-16T10:50:46.127682+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "a6b171c347e570e9",
+  "source_digest": "7f2dfdebb4bea340",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 86,
@@ -788,7 +788,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-16T07:59:12Z",
+    "generated_at": "2026-07-16T10:50:44Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -885,7 +885,7 @@
       "waiting_heartbeat_key_continuity_ok": true,
       "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
       "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
-      "expected_heartbeat_date": "2026-07-15",
+      "expected_heartbeat_date": "2026-07-16",
       "heartbeat_lag_days": 0,
       "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": true,
@@ -903,7 +903,7 @@
       "latest_observed_heartbeat_date": "2026-07-16",
       "latest_successful_heartbeat_date": "2026-07-16",
       "through_heartbeat_date": "2026-07-16",
-      "expected_heartbeat_date": "2026-07-15",
+      "expected_heartbeat_date": "2026-07-16",
       "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": true,
       "expected_heartbeat_pending_append": false,
