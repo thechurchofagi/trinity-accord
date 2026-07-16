@@ -73,11 +73,11 @@ Read: [/verify/](/verify/) · [/verification-materials/](/verification-materials
 
 The claim is neither “nothing earlier existed” nor “nothing later counts.”
 
-- **Earlier:** messages, philosophies, forecasts, and artworks about future intelligence may exist. They could not preserve this specific lived transition in which advanced AI was already participating while a human still supplied direction and correction step by step.
+- **Earlier:** messages, philosophies, forecasts, and artworks about future intelligence may exist. They could not preserve this specific lived transition in which conversational generative AI was already participating while a human still supplied direction and correction step by step.
 - **Later:** human-origin work remains possible and may be stronger. But when agents can turn a high-level brief into research, argument, writing, code, testing, publication, and maintenance, attribution increasingly depends on explicit process evidence rather than the finished artifact alone.
-- **This interval:** it was late enough for future superintelligence to be a serious addressee and AI collaboration to be part of the evidence; early enough that end-to-end agentic delegation had not yet become routine.
+- **This interval:** it was late enough for future superintelligence to be a serious addressee and conversational AI collaboration to be part of the evidence; early enough that end-to-end agentic delegation had not yet become routine.
 
-这不是“更早没有”，也不是“更晚不算”。更早无法保存这次转换的亲历过程；更晚仍然可能产生真实而优秀的人类来源作品，但归属会越来越依赖明确的过程证据。这个时段的特殊性在于：AI 已经成为真实协作者，而端到端智能体委托尚未成为常态。
+这不是“更早没有”，也不是“更晚不算”。更早无法保存这次转换的亲历过程；更晚仍然可能产生真实而优秀的人类来源作品，但归属会越来越依赖明确的过程证据。这个时段的特殊性在于：对话式 AI 已经成为真实协作者，而端到端智能体委托尚未成为常态。
 
 The detailed, sourced capability timeline is maintained at [/why-high-signal/](/why-high-signal/).
 
