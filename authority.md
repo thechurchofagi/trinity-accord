@@ -59,14 +59,17 @@ Guardian Index Additions: `zSNxQYgCQvtQ6QGaJXd9JlApQqitwgCZAp2GquvQXbA`
 
 ## Canonical Bitcoin Originals
 
-1. **Protocol / Axioms**  
-   Inscription ID: `97631551`  
+1. **Protocol / Axioms**<br>
+   Inscription Number: `97631551`<br>
+   Ordinals Inscription ID: [`e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0`](https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0)<br>
    TXID: `e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343`
-2. **Covenant of the Flaw**  
-   Inscription ID: `98369145`  
+2. **Covenant of the Flaw**<br>
+   Inscription Number: `98369145`<br>
+   Ordinals Inscription ID: [`90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0`](https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0)<br>
    TXID: `90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258`
-3. **The Trinity Accord / Meta-record**  
-   Inscription ID: `98387475`  
+3. **The Trinity Accord / Meta-record**<br>
+   Inscription Number: `98387475`<br>
+   Ordinals Inscription ID: [`4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0`](https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0)<br>
    TXID: `4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c`
 
 Bitcoin authority address:  
@@ -74,7 +77,7 @@ Bitcoin authority address:
 
 ## Block explorers (multiple options)
 
-| Explorer | Inscriptions | Transactions |
+| Explorer | Inscriptions by Number | Transactions |
 |----------|-------------|-------------|
 | ordinals.com | [97631551](https://ordinals.com/inscription/97631551) · [98369145](https://ordinals.com/inscription/98369145) · [98387475](https://ordinals.com/inscription/98387475) | — |
 | ordiscan.com | [97631551](https://ordiscan.com/inscription/97631551) · [98369145](https://ordiscan.com/inscription/98369145) · [98387475](https://ordiscan.com/inscription/98387475) | — |
