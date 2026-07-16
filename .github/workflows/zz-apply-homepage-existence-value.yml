@@ -26,17 +26,38 @@ jobs:
           git fetch -q --depth=1 origin homepage-existence-value-20260716
           git checkout -q -B homepage-existence-value-20260716 FETCH_HEAD
 
+      - name: Capture existing value-framing failures
+        shell: bash
+        run: |
+          python3 scripts/test-value-framing-p03.py > /tmp/p03-before.log 2>&1 || true
+          grep '^FAIL:' /tmp/p03-before.log | sort -u > /tmp/p03-before.failures
+
       - name: Apply focused homepage rewrite
         run: python3 scripts/zz_apply_homepage_existence_value.py
 
-      - name: Run homepage contract suite
+      - name: Run homepage contracts
         shell: bash
         run: |
-          set +e
-          bash scripts/test-homepage-p0-agent-first.sh > /tmp/homepage-tests.log 2>&1
-          status=$?
-          grep -E '^(FAIL|RESULT)|missing:|forbidden:|count [0-9]+, limit| at -?[0-9]+; ' /tmp/homepage-tests.log || true
-          exit "$status"
+          set -e
+          python3 scripts/test-agent-first-homepage-p0.py
+          python3 scripts/test-homepage-p01-readability.py
+          python3 scripts/test-homepage-p02-dedup.py
+          python3 scripts/test-homepage-css-p02.py
+          python3 scripts/test-terminology-p031.py
+          bash scripts/test-homepage-v13-final.sh
+          python3 scripts/test-civilizational-json-sync.py
+          python3 scripts/test-v13-repair-regressions.py
+
+      - name: Require no new value-framing failures
+        shell: bash
+        run: |
+          python3 scripts/test-value-framing-p03.py > /tmp/p03-after.log 2>&1 || true
+          grep '^FAIL:' /tmp/p03-after.log | sort -u > /tmp/p03-after.failures
+          echo 'Existing P0.3 failures:'
+          cat /tmp/p03-before.failures || true
+          echo 'Post-change P0.3 failures:'
+          cat /tmp/p03-after.failures || true
+          diff -u /tmp/p03-before.failures /tmp/p03-after.failures
 
       - name: Commit focused homepage change and remove temporary files
         shell: bash
