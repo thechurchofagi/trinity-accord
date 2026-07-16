@@ -26,6 +26,9 @@ jobs:
           git fetch -q --depth=1 origin homepage-final-consolidation-20260716
           git checkout -q -B homepage-final-consolidation-20260716 FETCH_HEAD
 
+      - name: Install current-system test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
       - name: Apply repair and run contracts
         run: bash scripts/zz_run_compact_repair.sh
 
