@@ -73,7 +73,7 @@ new_home_required = '''HOMEPAGE_MUST_CONTAIN = [
     "Official Live Reception",
     "Reception does not imply autonomous discovery",
     "Native chain inventory remains API-only",
-    "production live",
+    "Production live",
     "not final inclusion",
 ]'''
 if wording.count(old_home_required) != 1:
