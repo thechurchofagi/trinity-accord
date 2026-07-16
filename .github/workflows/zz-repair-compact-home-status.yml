@@ -35,6 +35,10 @@ jobs:
           text = path.read_text(encoding='utf-8')
           text = text.replace("    compact = r'''", '    compact = r"""', 1)
           text = text.replace("\nrender = render_compact\n'''\n    if anchor", '\nrender = render_compact\n"""\n    if anchor', 1)
+          start = text.index('def render_compact(status: dict[str, Any])')
+          first = text.index('    """', start)
+          second = text.index('    """', first + 7)
+          text = text[:first] + "    '''" + text[first + 7:second] + "    '''" + text[second + 7:]
           path.write_text(text, encoding='utf-8')
           PY
           python3 scripts/zz_repair_compact_home_status.py
