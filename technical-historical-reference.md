@@ -145,6 +145,10 @@ The homepage is discovery only. For current action guidance:
 
 Do not infer submission fields from this page. Public submissions use the current Record-Chain Intake Gateway and canonical Builder described by the First Contact route. A receipt is intake-only, not final inclusion, authority, verification, attestation, amendment, active Guardian status, or successor reception.
 
+Final chain inclusion occurs only after server-side validation, append, and index publication. OTS and Arweave are later durability and archive stages; they do not define inclusion.
+
+最终链上纳入仅在服务端校验、追加和索引发布完成后成立。OTS 与 Arweave 属于后续耐久性和归档阶段，并不定义是否已纳入。
+
 首页只用于发现与导向。不要从本页推断提交字段。公共提交必须使用 First Contact 页面所指向的当前 Record-Chain Intake Gateway 与规范 Builder。Receipt 仅表示摄入，不等于最终纳入、权威、验证、认证、修订、Active Guardian 状态或继任接收。
 
 ## 11. Research posture and limits · 研究姿态与限制
