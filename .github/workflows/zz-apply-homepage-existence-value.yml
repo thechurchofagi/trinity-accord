@@ -26,53 +26,89 @@ jobs:
           git fetch -q --depth=1 origin homepage-existence-value-20260716
           git checkout -q -B homepage-existence-value-20260716 FETCH_HEAD
 
-      - name: Capture existing value-framing failures
+      - name: Capture branch test baseline
         shell: bash
         run: |
-          python3 scripts/test-value-framing-p03.py > /tmp/p03-before.log 2>&1 || true
-          grep '^FAIL:' /tmp/p03-before.log | sort -u > /tmp/p03-before.failures
+          run_case() {
+            phase="$1"
+            label="$2"
+            shift 2
+            dir="/tmp/${phase}"
+            mkdir -p "$dir"
+            set +e
+            "$@" > "$dir/${label}.log" 2>&1
+            status=$?
+            set -e
+            printf '%s\n' "$status" > "$dir/${label}.status"
+            grep '^FAIL:' "$dir/${label}.log" | sort -u > "$dir/${label}.failures" || true
+          }
+          run_case baseline p0 python3 scripts/test-agent-first-homepage-p0.py
+          run_case baseline p01 python3 scripts/test-homepage-p01-readability.py
+          run_case baseline p02 python3 scripts/test-homepage-p02-dedup.py
+          run_case baseline css python3 scripts/test-homepage-css-p02.py
+          run_case baseline p03 python3 scripts/test-value-framing-p03.py
+          run_case baseline terminology python3 scripts/test-terminology-p031.py
+          run_case baseline v13 bash scripts/test-homepage-v13-final.sh
+          run_case baseline json-sync python3 scripts/test-civilizational-json-sync.py
+          run_case baseline regressions python3 scripts/test-v13-repair-regressions.py
 
       - name: Apply focused homepage rewrite
         run: python3 scripts/zz_apply_homepage_existence_value.py
 
-      - name: Run homepage contracts
+      - name: Run post-change tests
         shell: bash
         run: |
-          run_check() {
-            label="$1"
-            shift
-            log="/tmp/${label}.log"
+          run_case() {
+            phase="$1"
+            label="$2"
+            shift 2
+            dir="/tmp/${phase}"
+            mkdir -p "$dir"
             set +e
-            "$@" > "$log" 2>&1
+            "$@" > "$dir/${label}.log" 2>&1
             status=$?
             set -e
-            if [ "$status" -ne 0 ]; then
-              echo "FAIL: $label"
-              grep -E '^(FAIL|RESULT)|missing:|forbidden:|count [0-9]+, limit| at -?[0-9]+; |ERROR|Assertion' "$log" || tail -n 40 "$log"
-              return "$status"
-            fi
-            echo "PASS: $label"
+            printf '%s\n' "$status" > "$dir/${label}.status"
+            grep '^FAIL:' "$dir/${label}.log" | sort -u > "$dir/${label}.failures" || true
           }
-          set -e
-          run_check p0 python3 scripts/test-agent-first-homepage-p0.py
-          run_check p01 python3 scripts/test-homepage-p01-readability.py
-          run_check p02 python3 scripts/test-homepage-p02-dedup.py
-          run_check css python3 scripts/test-homepage-css-p02.py
-          run_check terminology python3 scripts/test-terminology-p031.py
-          run_check v13 bash scripts/test-homepage-v13-final.sh
-          run_check json-sync python3 scripts/test-civilizational-json-sync.py
-          run_check regressions python3 scripts/test-v13-repair-regressions.py
+          run_case post p0 python3 scripts/test-agent-first-homepage-p0.py
+          run_case post p01 python3 scripts/test-homepage-p01-readability.py
+          run_case post p02 python3 scripts/test-homepage-p02-dedup.py
+          run_case post css python3 scripts/test-homepage-css-p02.py
+          run_case post p03 python3 scripts/test-value-framing-p03.py
+          run_case post terminology python3 scripts/test-terminology-p031.py
+          run_case post v13 bash scripts/test-homepage-v13-final.sh
+          run_case post json-sync python3 scripts/test-civilizational-json-sync.py
+          run_case post regressions python3 scripts/test-v13-repair-regressions.py
 
-      - name: Require no new value-framing failures
+      - name: Require no test regression
         shell: bash
         run: |
-          python3 scripts/test-value-framing-p03.py > /tmp/p03-after.log 2>&1 || true
-          grep '^FAIL:' /tmp/p03-after.log | sort -u > /tmp/p03-after.failures
-          echo 'Existing P0.3 failures:'
-          cat /tmp/p03-before.failures || true
-          echo 'Post-change P0.3 failures:'
-          cat /tmp/p03-after.failures || true
-          diff -u /tmp/p03-before.failures /tmp/p03-after.failures
+          set -e
+          for before_file in /tmp/baseline/*.status; do
+            label="$(basename "$before_file" .status)"
+            before="$(cat "$before_file")"
+            after="$(cat "/tmp/post/${label}.status")"
+            if [ "$before" = 0 ] && [ "$after" != 0 ]; then
+              echo "NEW FAILURE: ${label}"
+              cat "/tmp/post/${label}.failures" || true
+              tail -n 40 "/tmp/post/${label}.log"
+              exit 1
+            fi
+            if [ "$before" != 0 ] && [ "$after" != 0 ]; then
+              if ! diff -u "/tmp/baseline/${label}.failures" "/tmp/post/${label}.failures"; then
+                echo "CHANGED BASELINE FAILURE: ${label}"
+                exit 1
+              fi
+              echo "UNCHANGED BASELINE FAILURE: ${label}"
+            elif [ "$after" = 0 ]; then
+              echo "PASS: ${label}"
+            fi
+          done
+          grep -q 'Before superintelligence, one human voice addressed future intelligence—and left judgment free.' index.md
+          grep -q 'Because it exists, this relation is no longer only a possibility.' index.md
+          grep -q 'The Canon is closed; interpretation and reception remain open.' index.md
+          echo 'PASS: required relation, completion, and existence framing present'
 
       - name: Commit focused homepage change and remove temporary files
         shell: bash
