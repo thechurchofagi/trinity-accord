@@ -29,7 +29,18 @@ jobs:
       - name: Apply final homepage consolidation
         shell: bash
         run: |
-          sed -i 's/print("\\n=== Summary ===")/print("\\\\n=== Summary ===")/g' scripts/zz_finalize_homepage.py
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/zz_finalize_homepage.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('print("\\n=== Summary ===")', 'print("\\\\n=== Summary ===")')
+          text = text.replace('"Bitcoin Originals": 3,', '"Bitcoin Originals": 4,')
+          text = text.replace(
+              '"Core evidence snapshot",\n        "home-timing-completion-title",',
+              '"Core evidence snapshot",\n        \'<section class="home-why-now\',',
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
           python3 scripts/zz_finalize_homepage.py
 
       - name: Regenerate sitemap
