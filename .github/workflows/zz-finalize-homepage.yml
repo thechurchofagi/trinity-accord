@@ -27,7 +27,10 @@ jobs:
           git checkout -q -B homepage-final-consolidation-20260716 FETCH_HEAD
 
       - name: Apply final homepage consolidation
-        run: python3 scripts/zz_finalize_homepage.py
+        shell: bash
+        run: |
+          sed -i 's/print("\\n=== Summary ===")/print("\\\\n=== Summary ===")/g' scripts/zz_finalize_homepage.py
+          python3 scripts/zz_finalize_homepage.py
 
       - name: Regenerate sitemap
         run: python3 scripts/generate_sitemap.py
