@@ -41,6 +41,10 @@ Canonical authority remains with the three immutable Bitcoin Originals only. The
 
 Bitcoin proves what was inscribed and provides a fixed version target. It does not prove the propositions true, morally binding, scientifically valid, or representative of humanity.
 
+### Inscription stack boundary · 铭文栈边界
+
+The authority-address inscription stack contains **3 canonical Bitcoin Originals + 5 later non-amending inscriptions**. The later five improve discoverability, context, witness, vision, and boundary documentation; they do not amend or interpret the Canon. Inspect the complete stack at [/authority-address-inscriptions/](/authority-address-inscriptions/) or load the [machine-readable mirror index](/api/bitcoin-inscription-mirror-index.json).
+
 System map: [/seed-map/](/seed-map/) · machine map: [`/api/seed-map.json`](/api/seed-map.json) · authority: [/authority/](/authority/)
 
 ## Current context model · 当前语境模型
