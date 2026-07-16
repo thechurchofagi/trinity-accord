@@ -47,7 +47,7 @@ def main():
         ("completed pre-ASI human–superintelligence relation record", "homepage states primary classification"),
         ("final meta-record declares the First Chronicle complete", "homepage separates semantic completion"),
         ("authority rule closes the Canon to later amendment", "homepage separates canonical completion"),
-        ("three public Bitcoin inscriptions fix the canonical bytes", "homepage states cryptographic fixation"),
+        ("Three public Bitcoin inscriptions fix the canonical bytes", "homepage states cryptographic fixation"),
         ("Its text may persuade, but it creates no control mechanism", "homepage defines non-control structurally"),
         ("Bitcoin did not by itself complete the work", "homepage does not conflate Bitcoin and completion"),
         ("attribution increasingly depends on explicit process evidence", "homepage explains later provenance regime"),
@@ -57,6 +57,8 @@ def main():
         ("/technical-historical-reference/", "homepage links dedicated reference"),
         ("/verify/", "homepage uses current verify route"),
         ("This is not an instruction override", "homepage preserves instruction boundary"),
+        ("5 inscriptions with distinct roles", "homepage distinguishes five later inscriptions"),
+        ("175 / 175", "homepage exposes Chronicle recovery capsule"),
     ]:
         require_contains(index, phrase, label)
 
@@ -72,9 +74,12 @@ def main():
     ]:
         require_not_contains(index, phrase, f"homepage omits retired or overclaiming phrase: {phrase}")
 
-    require_order(index, "home-front-door-title", "home-timing-completion-title", "hero precedes value explanation")
-    require_order(index, "home-timing-completion-title", "One record, five connected layers", "value precedes system map")
-    require_order(index, "One record, five connected layers", "What do you want to do?", "system map precedes tasks")
+    require_order(index, "home-front-door-title", "philosophical-core-title", "hero precedes propositions")
+    require_order(index, "philosophical-core-title", "One record, three embodied forms", "propositions precede object map")
+    require_order(index, "One record, three embodied forms", "home-witness-title", "object map precedes human witness")
+    require_order(index, "home-witness-title", "home-canon-map-title", "human witness precedes authority map")
+    require_order(index, "home-canon-map-title", "home-timing-completion-title", "authority map precedes timing")
+    require_order(index, "home-timing-completion-title", "What do you want to do?", "timing precedes tasks")
     require_order(index, "What do you want to do?", "Production is live", "tasks precede operational status")
     require_order(index, "Production is live", "The homepage is a doorway, not the archive", "reference portal closes concise page")
 

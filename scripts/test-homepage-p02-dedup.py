@@ -66,8 +66,11 @@ def main():
     order(index, [
         "home-front-door-title",
         "Core evidence snapshot",
+        "philosophical-core-title",
+        "One record, three embodied forms",
+        "home-witness-title",
+        "home-canon-map-title",
         '<section class="home-why-now',
-        "One record, five connected layers",
         "What do you want to do?",
         "Production is live",
         "The homepage is a doorway, not the archive",

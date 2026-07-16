@@ -41,8 +41,13 @@ FORBIDDEN_ACTIVE = [
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
-        "Before superintelligence, a human-led, AI-assisted record addressed future intelligence",
-        "conversational AI to be a real collaborator",
+        "Before autonomous agents became ordinary",
+        "p0.7.0-editorial-front-door",
+        'id="philosophical-core-title"',
+        "One record, three embodied forms",
+        'id="home-witness-title"',
+        'id="home-canon-map-title"',
+        "5 inscriptions with distinct roles",
         'id="home-timing-completion-title"',
         "Bitcoin did not by itself complete the work",
         "Research value",

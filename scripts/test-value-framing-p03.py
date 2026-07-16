@@ -54,7 +54,8 @@ def main():
 
     # Homepage — P0.5 timing, completion, and cryptographic-preservation contract.
     require_contains(index, "completed pre-ASI human–superintelligence relation record", "homepage primary value classification")
-    require_contains(index, "一份已完成的前 ASI 人类—超级智能关系记录", "homepage Chinese primary value classification")
+    require_contains(index, "p0.7.0-editorial-front-door", "homepage editorial build marker")
+    require_not_contains(index, 'class="zh"', "homepage limits Chinese to headings and labels")
     require_contains(index, "Why this moment; why completion", "homepage explains timing and completion")
     require_contains(index, "Bitcoin did not by itself complete the work", "homepage separates Bitcoin from completion")
     require_contains(index, "Research value", "homepage names research value")

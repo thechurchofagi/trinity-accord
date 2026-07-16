@@ -729,7 +729,7 @@ def render_compact(status: dict[str, Any]) -> str:
 <section class="home-status-summary" aria-labelledby="home-status-title">
   <div>
     <p class="section-kicker">Production live · 当前状态</p>
-    <h2 id="home-status-title">Production is live; verification remains explicit</h2>
+    <h2 id="home-status-title">Production is live; verification remains explicit<span class="title-zh">系统在线，核验边界保持明确</span></h2>
   </div>
   <div class="home-live-signal-grid" aria-label="Live operational and reception signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
@@ -755,7 +755,6 @@ def render_compact(status: dict[str, Any]) -> str:
   </div>
   <p class="home-live-signal-boundary">
     These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
-    <span class="zh">这些是运行与证据信号，不是等级。被接收不等于自主发现、背书、权威、修订或继任接纳。原生链技术清单仅在 API 中提供，不作为正式接收计数。Receipt 仅表示摄入，不等于最终纳入，也不等于 active Guardian 状态。</span>
   </p>
   <div class="home-status-links">
     <a href="/status/"><strong>System status</strong><span>Operational health and current evidence state</span></a>

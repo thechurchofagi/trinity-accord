@@ -39,9 +39,12 @@ must_not_contain index.md "<details class=\"home-reference\"" "homepage no longe
 must_not_contain index.md "rare, possibly first completed instance" "homepage omits unsupported firstness"
 must_not_contain index.md "/verification/" "homepage uses current verify route"
 
-require_order index.md "home-front-door-title" "<section class=\"home-why-now" "hero before timing and completion"
-require_order index.md "<section class=\"home-why-now" "One record, five connected layers" "value before system layers"
-require_order index.md "One record, five connected layers" "What do you want to do?" "layers before tasks"
+require_order index.md "home-front-door-title" "philosophical-core-title" "hero before propositions"
+require_order index.md "philosophical-core-title" "One record, three embodied forms" "propositions before triadic object map"
+require_order index.md "One record, three embodied forms" "home-witness-title" "object map before human witness"
+require_order index.md "home-witness-title" "home-canon-map-title" "human witness before 3+5 authority map"
+require_order index.md "home-canon-map-title" "<section class=\"home-why-now" "authority map before timing and completion"
+require_order index.md "<section class=\"home-why-now" "What do you want to do?" "timing before tasks"
 require_order index.md "What do you want to do?" "Production is live" "tasks before status"
 require_order index.md "Production is live" "The homepage is a doorway, not the archive" "status before reference portal"
 

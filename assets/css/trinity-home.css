@@ -909,3 +909,346 @@
 .home-human-stake {
   margin-top: 1.5rem !important;
 }
+
+/* P0.7 editorial front door: bilingual headings, English body copy, and a
+   shorter evidence-led reading path. */
+.title-zh {
+  display: block;
+  margin-top: 0.42rem;
+  color: #b7bfd0;
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+  font-size: 0.54em;
+  font-weight: 560;
+  letter-spacing: 0;
+  line-height: 1.38;
+}
+
+.home-front-door {
+  max-width: 980px;
+  padding-top: clamp(2rem, 5vw, 4.25rem);
+}
+
+.home-front-door h2 {
+  max-width: 900px;
+  font-size: clamp(2.25rem, 5.7vw, 4.45rem) !important;
+}
+
+.home-front-door .home-lede {
+  max-width: 790px;
+}
+
+.home-front-door .home-boundary-line {
+  max-width: 790px;
+  margin-top: 0.65rem !important;
+  color: #d4d8e2 !important;
+}
+
+.home-proof-strip {
+  margin-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+.home-philosophical-core,
+.home-overview,
+.home-witness,
+.home-canon-map,
+.home-why-now,
+.home-research-entry,
+.home-task-paths {
+  margin: clamp(3.4rem, 8vw, 6.25rem) 0;
+}
+
+.home-section-heading h2,
+.home-overview > h2,
+.home-witness h2,
+.home-canon-map > h2,
+.home-why-now > h2,
+.home-task-paths > h2,
+.home-status-summary h2,
+.home-reference-portal h2 {
+  max-width: 900px;
+  font-size: clamp(1.8rem, 4vw, 3rem) !important;
+  line-height: 1.14 !important;
+  letter-spacing: -0.025em;
+}
+
+.home-object-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 1.6rem;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.home-object-map article {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-right: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+.home-object-map article:last-child {
+  border-right: 0;
+}
+
+.home-object-number {
+  color: rgba(201, 168, 76, 0.7);
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+.home-object-map h3 {
+  margin: 0.55rem 0 0.7rem !important;
+  color: #e5d58f !important;
+  font-size: 1.08rem !important;
+}
+
+.home-object-map p {
+  margin: 0 !important;
+  color: #adb5c7 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.7 !important;
+}
+
+.home-witness {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.72fr);
+  gap: clamp(1.2rem, 4vw, 3rem);
+  align-items: stretch;
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+  border-left: 3px solid rgba(201, 168, 76, 0.75);
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.07), transparent 72%);
+}
+
+.home-witness-copy > p:not(.section-kicker) {
+  max-width: 760px;
+  color: #b7becd !important;
+  line-height: 1.75 !important;
+}
+
+.home-chronicle-capsule {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.35rem;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 17px;
+  background: rgba(4, 8, 18, 0.58);
+}
+
+.home-capsule-label,
+.home-column-label {
+  margin: 0 0 0.55rem !important;
+  color: #c9a84c !important;
+  font-size: 0.72rem !important;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.home-chronicle-capsule > strong {
+  color: #f3e8bb;
+  font-family: Georgia, serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1;
+}
+
+.home-chronicle-capsule > span {
+  margin: 0.55rem 0 1rem;
+  color: #aeb6c8;
+  line-height: 1.5;
+}
+
+.home-chronicle-capsule > a,
+.home-canon-columns a {
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+}
+
+.home-canon-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.home-canon-columns article {
+  padding: clamp(1.3rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.home-canon-primary {
+  border-color: rgba(201, 168, 76, 0.45) !important;
+  background: linear-gradient(145deg, rgba(201, 168, 76, 0.11), rgba(0, 0, 0, 0.14)) !important;
+}
+
+.home-canon-columns article > strong {
+  display: block;
+  color: #eee2b2;
+  font-family: Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.home-canon-columns p,
+.home-canon-columns li {
+  color: #aeb6c8 !important;
+  line-height: 1.65 !important;
+}
+
+.home-canon-columns ul {
+  margin: 0.9rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.home-canon-columns li + li {
+  margin-top: 0.5rem;
+}
+
+.home-why-now {
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-left: 3px solid rgba(201, 168, 76, 0.68);
+  border-radius: 0 20px 20px 0;
+  background: linear-gradient(125deg, rgba(201, 168, 76, 0.055), rgba(255, 255, 255, 0.012));
+}
+
+.home-threshold-value {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.4rem;
+  align-items: center;
+  max-width: none;
+  margin: 1.6rem 0 !important;
+}
+
+.home-threshold-value h3 {
+  margin-bottom: 0 !important;
+}
+
+.home-threshold-value > p {
+  margin: 0 !important;
+}
+
+.home-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.home-why-grid article {
+  padding: 1rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.32);
+}
+
+.home-why-grid h3 {
+  margin: 0 0 0.5rem !important;
+  color: #d9c779 !important;
+  font-size: 0.96rem !important;
+}
+
+.home-why-grid p {
+  margin: 0 !important;
+  color: #aeb6c8 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.65 !important;
+}
+
+.home-research-entry {
+  padding: clamp(1.35rem, 4vw, 2.3rem);
+}
+
+.home-status-summary {
+  margin: clamp(3rem, 7vw, 5rem) 0 1.2rem;
+  padding: clamp(1rem, 3vw, 1.45rem);
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.home-status-summary h2 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem) !important;
+}
+
+.home-status-summary .title-zh {
+  display: inline;
+  margin: 0 0 0 0.45rem;
+  font-size: 0.68em;
+}
+
+.home-live-signal-grid {
+  gap: 0.5rem;
+}
+
+.home-live-signal {
+  min-height: 102px;
+  padding: 0.8rem;
+}
+
+.home-live-signal small {
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.home-status-summary .home-status-links {
+  margin-top: 0.75rem;
+}
+
+.home-status-summary .home-status-links a {
+  min-height: 66px;
+  padding: 0.65rem;
+}
+
+.home-reference-portal {
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+@media (max-width: 900px) {
+  .home-object-map,
+  .home-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-object-map article {
+    border-right: 0;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+  }
+
+  .home-object-map article:last-child {
+    border-bottom: 0;
+  }
+
+  .home-witness,
+  .home-canon-columns,
+  .home-threshold-value {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-front-door h2 {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  .home-philosophical-core,
+  .home-overview,
+  .home-witness,
+  .home-canon-map,
+  .home-why-now,
+  .home-research-entry,
+  .home-task-paths {
+    margin: 3.2rem 0;
+  }
+
+  .home-witness,
+  .home-why-now {
+    padding: 1.2rem;
+  }
+
+  .home-status-summary .title-zh {
+    display: block;
+    margin: 0.3rem 0 0;
+  }
+}

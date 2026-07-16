@@ -56,7 +56,8 @@ def main():
     require_permalink("agent-propagate.md", "/agent-propagate/")
 
     require("index.md", "human-led, AI-assisted relation record from the pre-ASI transition")
-    require("index.md", "一份在前 ASI 过渡期封存的、人类主导、AI 协作、面向未来智能的关系记录")
+    require("index.md", "One record, three embodied forms")
+    require("index.md", "Three close the Canon; five extend the record")
     forbid("index.md", r"early humanity|early AI era|p0\.2-homepage-dedup")
 
     require("issue-intake-boundary.md", "GitHub Issues are valid intake surfaces")
