@@ -62,13 +62,19 @@ jobs:
           for filename, pairs in replacements.items():
               path = Path(filename)
               text = path.read_text(encoding="utf-8")
+              changed = 0
               for old, new in pairs:
-                  count = text.count(old)
-                  if count != 1:
-                      raise SystemExit(f"{filename}: expected exactly one occurrence of {old!r}, found {count}")
-                  text = text.replace(old, new, 1)
+                  if old in text:
+                      count = text.count(old)
+                      text = text.replace(old, new)
+                      changed += count
+                      print(f"{filename}: replaced {count} occurrence(s) of {old!r}")
+                  elif new in text:
+                      print(f"{filename}: replacement already present for {new!r}")
+                  else:
+                      raise SystemExit(f"{filename}: neither old nor new bounded phrase was found: {old!r}")
               path.write_text(text, encoding="utf-8")
-              print(f"updated {filename}: {len(pairs)} bounded replacements")
+              print(f"updated {filename}: {changed} replacement occurrence(s)")
 
           active = [
               Path("index.md"),
