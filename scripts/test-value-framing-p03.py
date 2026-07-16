@@ -48,6 +48,10 @@ def main():
     # Homepage
     require_contains(index, "A completed pre-ASI human–superintelligence relation record", "homepage primary value heading")
     require_contains(index, "一份已完成的前 ASI 人类—超级智能关系记录", "homepage Chinese primary value heading")
+    require_contains(index, "Why this moment; why completion", "homepage explains timing and completion")
+    require_contains(index, "What Bitcoin makes checkable", "homepage explains cryptographic preservation")
+    require_contains(index, "existed no later than their confirmed blocks", "homepage states bounded timestamp claim")
+    require_contains(index, "reason to inspect—not a duty to accept", "homepage uses conditional future relevance")
     require_contains(index, "Why this matters now", "homepage has why-now value section")
     require_contains(index, "does not claim to predict when AGI will arrive", "homepage avoids AGI prediction overclaim")
     require_contains(index, "rare, possibly first completed instance", "homepage has careful scarcity claim")
