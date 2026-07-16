@@ -108,8 +108,15 @@ def main():
     for api_path in NEW_API:
         require(f"https://www.trinityaccord.org{api_path}" in sitemap, f"sitemap includes {api_path}")
 
-    for rel in ["README.md", "llms.txt", "ai.txt", "index.md"]:
+    # Machine-facing discovery surfaces carry the explicit P0 marker. The
+    # human homepage remains concise and routes agents to current entrypoints
+    # while warning that homepage-only context is insufficient.
+    for rel in ["README.md", "llms.txt", "ai.txt"]:
         require("AGENT-P0-MINIMAL-CONTEXT" in read(rel), f"{rel} marker")
+    homepage = read("index.md")
+    require("/agent-first-contact/" in homepage, "index.md routes to canonical first contact")
+    require("Homepage-only context remains" in homepage, "index.md states homepage-only context is insufficient")
+    require("/technical-historical-reference/" in homepage, "index.md routes to current technical reference")
 
     if FAIL:
         print(f"FAILED: {len(FAIL)} failures")
