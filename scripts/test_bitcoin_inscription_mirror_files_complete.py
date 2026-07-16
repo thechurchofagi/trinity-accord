@@ -36,6 +36,11 @@ for ins_id, (subdir, filename) in EXPECTED_FILES.items():
     # Check inscription_id
     if rec["inscription"]["inscription_id"] != ins_id:
         errors.append(f"{ins_id}: inscription_id mismatch")
+    if rec["inscription"].get("inscription_number") != ins_id:
+        errors.append(f"{ins_id}: inscription_number mismatch")
+    txid = rec["inscription"].get("txid")
+    if rec["inscription"].get("ordinals_inscription_id") != f"{txid}i0":
+        errors.append(f"{ins_id}: full Ordinals inscription ID missing or incorrect")
 
     # Check source_address
     if not rec["inscription"].get("source_address"):

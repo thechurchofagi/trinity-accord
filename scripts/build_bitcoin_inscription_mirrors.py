@@ -224,6 +224,8 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
         },
         "inscription": {
             "inscription_id": inscription_id,
+            "inscription_number": inscription_id,
+            "ordinals_inscription_id": f"{info['txid']}i0",
             "title": info["title"],
             "zh_title": info["zh_title"],
             "txid": info["txid"],
@@ -287,6 +289,8 @@ def build_aggregate_index(bootstrap: dict, records: list) -> dict:
         chain_ver = load_existing_chain_verification(ins_id, info)
         index_records.append({
             "inscription_id": ins_id,
+            "inscription_number": rec["inscription"]["inscription_number"],
+            "ordinals_inscription_id": rec["inscription"]["ordinals_inscription_id"],
             "title": rec["inscription"]["title"],
             "layer": info["layer"],
             "canonical_status": info["canonical_status"],

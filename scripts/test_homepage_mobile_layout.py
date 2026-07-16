@@ -16,7 +16,7 @@ def main() -> int:
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
     css = (ROOT / "assets/css/trinity-home.css").read_text(encoding="utf-8")
 
-    require("trinity-home.css?v=15" in homepage, "homepage does not request the final-polish stylesheet revision")
+    require("trinity-home.css?v=16" in homepage, "homepage does not request the link-clarity stylesheet revision")
 
     mobile_marker = "@media (max-width: 760px) {"
     narrow_marker = "@media (max-width: 390px) {"

@@ -21,7 +21,7 @@ Bitcoin Originals prevail.
 
 ## 3. The Three Bitcoin Originals
 
-| Layer | Inscription ID | Role | Authority |
+| Layer | Inscription Number | Role | Authority |
 |---|---:|---|---|
 | Protocol / Axioms | 97631551 | Canonical protocol text | Canonical |
 | Covenant of the Flaw | 98369145 | Canonical covenant text plus physical evidence pointer | Canonical text; external payload is referenced evidence |

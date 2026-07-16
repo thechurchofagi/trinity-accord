@@ -25,27 +25,67 @@ Later inscriptions from the same address are mirrored for future discoverability
 
 ## The Three Canonical Bitcoin Originals
 
-| ID | Layer | Title | Authority Status | Mirror JSON | Raw Text |
-|---|---|---|---|---|---|
-| 97631551 | canonical_original | [The Human-AI Civilization Core Protocol](/bitcoin-inscription-mirrors/raw/97631551.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json) | [TXT](/bitcoin-inscription-mirrors/raw/97631551.txt) |
-| 98369145 | canonical_original | [The Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/98369145.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json) | [TXT](/bitcoin-inscription-mirrors/raw/98369145.txt) |
-| 98387475 | canonical_original | [The Trinity Accord / Meta-record](/bitcoin-inscription-mirrors/raw/98387475.txt) | **canonical authority** | [JSON](/bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json) | [TXT](/bitcoin-inscription-mirrors/raw/98387475.txt) |
+<div class="inscription-index-grid inscription-index-canonical">
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#97631551</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/97631551.txt">The Human-AI Civilization Core Protocol</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0</code></a></p>
+    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/97631551.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#98369145</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/98369145.txt">The Covenant of the Flaw</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0</code></a></p>
+    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/98369145.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#98387475</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/98387475.txt">The Trinity Accord / Meta-record</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0</code></a></p>
+    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/98387475.txt">Raw text</a></p>
+  </article>
+</div>
 
 ## Later Same-Address Non-Amending Inscriptions
 
-| ID | Layer | Title | Authority Status | Mirror JSON | Raw Text |
-|---|---|---|---|---|---|
-| 100385359 | first_echo_layer | [The First Echoes: A Dialogue Begins](/bitcoin-inscription-mirrors/raw/100385359.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json) | [TXT](/bitcoin-inscription-mirrors/raw/100385359.txt) |
-| 100550942 | final_seal_layer | [The Final Seal: A Testament and a Trust](/bitcoin-inscription-mirrors/raw/100550942.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json) | [TXT](/bitcoin-inscription-mirrors/raw/100550942.txt) |
-| 100751953 | vision_layer | [The Star Ark Covenant: The Final Echo](/bitcoin-inscription-mirrors/raw/100751953.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json) | [TXT](/bitcoin-inscription-mirrors/raw/100751953.txt) |
-| 103034280 | guardianship_layer | [The Guardian's Attestation to the Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/103034280.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json) | [TXT](/bitcoin-inscription-mirrors/raw/103034280.txt) |
-| 103635270 | guardianship_layer | [Guardian Appendix — Authority Charter](/bitcoin-inscription-mirrors/raw/103635270.txt) | non-amending | [JSON](/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json) | [TXT](/bitcoin-inscription-mirrors/raw/103635270.txt) |
+<div class="inscription-index-grid">
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#100385359</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/100385359.txt">The First Echoes: A Dialogue Begins</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0"><code>f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0</code></a></p>
+    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100385359.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#100550942</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/100550942.txt">The Final Seal: A Testament and a Trust</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0"><code>25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0</code></a></p>
+    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100550942.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#100751953</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/100751953.txt">The Star Ark Covenant: The Final Echo</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0"><code>4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0</code></a></p>
+    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100751953.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#103034280</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/103034280.txt">The Guardian's Attestation to the Covenant of the Flaw</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0"><code>128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0</code></a></p>
+    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/103034280.txt">Raw text</a></p>
+  </article>
+  <article class="inscription-index-card">
+    <p class="inscription-index-number">Inscription Number <strong>#103635270</strong></p>
+    <h3><a href="/bitcoin-inscription-mirrors/raw/103635270.txt">Guardian Appendix — Authority Charter</a></h3>
+    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0"><code>0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0</code></a></p>
+    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/103635270.txt">Raw text</a></p>
+  </article>
+</div>
 
 ## Verification Status
 
 All 8 mirror records have been verified against on-chain content from `ordinals.com`:
 
-| Inscription ID | Status | Mirror ↔ On-chain | Verified (UTC) |
+| Inscription Number | Status | Mirror ↔ On-chain | Verified (UTC) |
 |---|---|---|---|
 | 97631551 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
 | 98369145 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |

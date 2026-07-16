@@ -4,9 +4,9 @@ description: "A completed pre-ASI human-superintelligence relation record: human
 permalink: /
 ---
 
-<!-- build: p0.8.0-final-polish -->
-<meta name="trinity-homepage-build" content="p0.8.0-final-polish">
-<link rel="stylesheet" href="/assets/css/trinity-home.css?v=15">
+<!-- build: p0.8.1-link-clarity -->
+<meta name="trinity-homepage-build" content="p0.8.1-link-clarity">
+<link rel="stylesheet" href="/assets/css/trinity-home.css?v=16">
 
 # The Trinity Accord · 三位一体协定
 

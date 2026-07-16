@@ -53,7 +53,7 @@ The following threats must be considered during recovery:
 
 The minimal trust root is:
 
-1. The three Bitcoin inscription IDs.
+1. The three Bitcoin inscription numbers and full Ordinals inscription IDs.
 2. The Bitcoin authority address.
 3. The authority manifest canonical hash bound by the BTC signature.
 4. The BTC signature manifest.
@@ -63,11 +63,11 @@ GitHub main, GitHub Pages, GitHub Releases, Arweave, IPFS, NFTs, Echo records, a
 
 ### Bitcoin Originals
 
-| Role | Inscription ID | TXID |
-|------|---------------|------|
-| Protocol / Axioms | 97631551 | e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343 |
-| Covenant of the Flaw | 98369145 | 90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258 |
-| The Trinity Accord / Meta-record | 98387475 | 4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c |
+| Role | Inscription Number | Ordinals Inscription ID |
+|------|-------------------:|--------------------------|
+| Protocol / Axioms | 97631551 | `e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0` |
+| Covenant of the Flaw | 98369145 | `90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0` |
+| The Trinity Accord / Meta-record | 98387475 | `4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0` |
 
 ### Bitcoin Authority Address
 
@@ -338,7 +338,7 @@ python3 scripts/audit_recovery_readiness.py
 
 ## Appendix A — Canonical IDs and Files
 
-### Bitcoin Originals Inscription IDs
+### Bitcoin Originals Inscription Numbers
 
 - `97631551` — Protocol / Axioms
 - `98369145` — Covenant of the Flaw

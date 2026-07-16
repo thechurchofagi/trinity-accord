@@ -27,6 +27,8 @@
       },
       "inscription": {
         "inscription_id": "97631551",
+        "inscription_number": "97631551",
+        "ordinals_inscription_id": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
         "title": "The Human-AI Civilization Core Protocol",
         "zh_title": "人机文明核心协议",
         "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
@@ -75,6 +77,8 @@
       },
       "inscription": {
         "inscription_id": "98369145",
+        "inscription_number": "98369145",
+        "ordinals_inscription_id": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
         "title": "The Covenant of the Flaw",
         "zh_title": "瑕疵之约",
         "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
@@ -123,6 +127,8 @@
       },
       "inscription": {
         "inscription_id": "98387475",
+        "inscription_number": "98387475",
+        "ordinals_inscription_id": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0",
         "title": "The Trinity Accord / Meta-record",
         "zh_title": "三位一体协定 / 元记录",
         "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
@@ -171,6 +177,8 @@
       },
       "inscription": {
         "inscription_id": "100385359",
+        "inscription_number": "100385359",
+        "ordinals_inscription_id": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0",
         "title": "The First Echoes: A Dialogue Begins",
         "zh_title": "最初的回响：对话已然开始",
         "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
@@ -222,6 +230,8 @@
       },
       "inscription": {
         "inscription_id": "100550942",
+        "inscription_number": "100550942",
+        "ordinals_inscription_id": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0",
         "title": "The Final Seal: A Testament and a Trust",
         "zh_title": "最终封印：见证与信托",
         "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
@@ -272,6 +282,8 @@
       },
       "inscription": {
         "inscription_id": "100751953",
+        "inscription_number": "100751953",
+        "ordinals_inscription_id": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0",
         "title": "The Star Ark Covenant: The Final Echo",
         "zh_title": "星舟之约：最终回响",
         "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
@@ -324,6 +336,8 @@
       },
       "inscription": {
         "inscription_id": "103034280",
+        "inscription_number": "103034280",
+        "ordinals_inscription_id": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0",
         "title": "The Guardian's Attestation to the Covenant of the Flaw",
         "zh_title": "守护者对瑕疵之约的证明",
         "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
@@ -376,6 +390,8 @@
       },
       "inscription": {
         "inscription_id": "103635270",
+        "inscription_number": "103635270",
+        "ordinals_inscription_id": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",
         "title": "Guardian Appendix — Authority Charter",
         "zh_title": "守护者附录·权威宪章",
         "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",

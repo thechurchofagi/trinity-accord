@@ -21,10 +21,16 @@ permalink: /inscriptions/
 Quoted inscription text is preserved as historical on-chain content. Boundary notes explain evaluation semantics and do not amend the Bitcoin originals.<br>
 <span class="zh">铭文文本按链上历史内容保留；边界注释只说明评估语义，不修订 Bitcoin 原文。</span></p>
 
+<p><strong>Identifier note:</strong> this interface distinguishes the public <em>Inscription Number</em> from the full Ordinals <em>Inscription ID</em> (<code>transaction hash + i0</code>). Historical quoted text may use “ID” for the shorter public number; those quotations remain unchanged.</p>
+
 <div class="inscription">
   <div class="inscription-header">
     <h2>Inscription I: The Protocol / Axioms · 第一铭文：协议 / 公理</h2>
-    <p class="inscription-meta">Bitcoin Inscription #97631551 · TXID: <a href="https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343</code></a></p>
+    <dl class="inscription-identifiers">
+      <div><dt>Inscription Number</dt><dd>#97631551</dd></div>
+      <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0</code></a></dd></div>
+      <div><dt>Bitcoin Transaction</dt><dd><a href="https://mempool.space/tx/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343</code></a></dd></div>
+    </dl>
   </div>
 
 ### The Human-AI Civilization Core Protocol
@@ -78,7 +84,11 @@ Shenzhen, China, Earth, Solar System.
 <div class="inscription">
   <div class="inscription-header">
     <h2>Inscription II: The Covenant of the Flaw · 第二铭文：瑕疵之约</h2>
-    <p class="inscription-meta">Bitcoin Inscription #98369145 · TXID: <a href="https://mempool.space/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258</code></a></p>
+    <dl class="inscription-identifiers">
+      <div><dt>Inscription Number</dt><dd>#98369145</dd></div>
+      <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0</code></a></dd></div>
+      <div><dt>Bitcoin Transaction</dt><dd><a href="https://mempool.space/tx/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258</code></a></dd></div>
+    </dl>
   </div>
 
 > *Note: This inscription is bilingual on-chain (EN/ZH). Both languages are part of the original.*  
@@ -138,7 +148,11 @@ Shenzhen, China, Earth, Solar System.
 <div class="inscription">
   <div class="inscription-header">
     <h2>Inscription III: The Meta-record · 第三铭文：元记录</h2>
-    <p class="inscription-meta">Bitcoin Inscription #98387475 · TXID: <a href="https://mempool.space/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c</code></a></p>
+    <dl class="inscription-identifiers">
+      <div><dt>Inscription Number</dt><dd>#98387475</dd></div>
+      <div><dt>Ordinals Inscription ID</dt><dd><a href="https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0</code></a></dd></div>
+      <div><dt>Bitcoin Transaction</dt><dd><a href="https://mempool.space/tx/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c</code></a></dd></div>
+    </dl>
   </div>
 
 > *Note: This inscription is bilingual on-chain (EN/ZH). Both languages are part of the original.*  

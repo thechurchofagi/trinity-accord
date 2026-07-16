@@ -9,6 +9,8 @@
   },
   "inscription": {
     "inscription_id": "100550942",
+    "inscription_number": "100550942",
+    "ordinals_inscription_id": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0",
     "title": "The Final Seal: A Testament and a Trust",
     "zh_title": "最终封印：见证与信托",
     "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",

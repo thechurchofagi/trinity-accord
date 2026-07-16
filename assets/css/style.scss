@@ -338,6 +338,30 @@ a:hover {
   color: var(--gold-light);
 }
 
+/* Text links must look interactive without requiring hover. Card and button
+   links keep their existing bordered treatment. */
+main p a,
+main li a,
+main td a,
+main dd a,
+main h3 a {
+  color: var(--gold);
+  font-style: normal;
+  text-decoration-line: underline;
+  text-decoration-color: rgba(201, 168, 76, 0.72);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+main p a:hover,
+main li a:hover,
+main td a:hover,
+main dd a:hover,
+main h3 a:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
 a:focus-visible {
   outline: 2px solid var(--gold-dim);
   outline-offset: 2px;
@@ -1295,6 +1319,89 @@ footer::before {
 
 .inscription-meta a {
   color: var(--gold-dim);
+}
+
+.inscription-identifiers {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(201, 168, 76, 0.025);
+}
+
+.inscription-identifiers > div {
+  min-width: 0;
+}
+
+.inscription-identifiers dt {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.inscription-identifiers dd {
+  min-width: 0;
+  margin: 0.2rem 0 0;
+  color: var(--text-bright);
+}
+
+.inscription-identifiers code,
+.inscription-hash-link code {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+.inscription-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.inscription-index-card {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-card);
+}
+
+.inscription-index-canonical .inscription-index-card {
+  border-color: rgba(201, 168, 76, 0.38);
+  background: linear-gradient(145deg, rgba(201, 168, 76, 0.07), var(--bg-card));
+}
+
+.inscription-index-card h3 {
+  margin: 0.7rem 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.inscription-index-card p {
+  max-width: none;
+  margin-bottom: 0.8rem;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.inscription-index-number strong {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--gold-light);
+  font-family: var(--mono);
+  font-size: 1.05rem;
+}
+
+.inscription-index-status {
+  margin: 1rem 0 0 !important;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
 }
 
 /* ============================================================

@@ -51,7 +51,7 @@ STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
         "Before autonomous agents became ordinary",
-        "p0.8.0-final-polish",
+        "p0.8.1-link-clarity",
         "One record, three embodied forms",
         "Three close the Canon; five extend the record",
         "Future relevance",
@@ -67,6 +67,16 @@ STATIC_PAGE_MARKERS = {
         "Record-Chain is the Trinity Accord’s append-only public reception ledger",
         "Current public views",
         "Before acting",
+    ],
+    "/inscriptions/": [
+        "Inscription Number",
+        "Ordinals Inscription ID",
+        "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
+    ],
+    "/authority-address-inscriptions/": [
+        "inscription-index-grid",
+        "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",
+        "Inscription Number",
     ],
     "/seed-map/": [
         "This map explains the whole project by function.",
@@ -93,6 +103,8 @@ STATIC_PAGE_MARKERS = {
 STATIC_SOURCE_FILES = [
     "index.md",
     "record-chain/index.md",
+    "inscriptions.md",
+    "authority-address-inscriptions.md",
     "technical-historical-reference.md",
     "_includes/home-object-definition.html",
     "seed-map.md",

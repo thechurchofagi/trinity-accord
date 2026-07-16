@@ -100,6 +100,7 @@ def main() -> int:
     # legacy material as historical-only.
     for script in [
         "scripts/test_deploy_pages_workflow_contract.py",
+        "scripts/test_inscription_identifier_link_clarity.py",
         "scripts/test_mission_governance_contract.py",
         "scripts/test_no_stale_echo_taxonomy_names.py",
         "scripts/test_concurrent_preflight_swarm_contract.py",
