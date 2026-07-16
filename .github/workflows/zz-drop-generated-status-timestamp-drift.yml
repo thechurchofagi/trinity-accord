@@ -1,0 +1,32 @@
+name: Drop generated status timestamp drift
+
+on:
+  push:
+    branches:
+      - homepage-final-consolidation-20260716
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: homepage-final-consolidation-20260716
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore generated API from current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main --prune
+          git checkout origin/main -- api/public-home-status.json
+          rm .github/workflows/zz-drop-generated-status-timestamp-drift.yml
+          git add -A
+          git commit -m "chore: keep generated status API identical to main"
+          git push origin HEAD:homepage-final-consolidation-20260716
