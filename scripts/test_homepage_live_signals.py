@@ -19,7 +19,7 @@ def main() -> int:
     heartbeat = json.loads((ROOT / "api/waiting-heartbeat-status.json").read_text(encoding="utf-8"))
     echo_index = json.loads((ROOT / "api/echo-index.json").read_text(encoding="utf-8"))
 
-    visible, reference = homepage.split('<details class="home-reference"', 1)
+    visible, runtime = homepage.split("<script>", 1)
     for marker in (
         "home-live-signal-grid",
         "data-home-heartbeat-status",
@@ -34,9 +34,9 @@ def main() -> int:
     require("/api/echo-index.json" in visible, "visible homepage does not link the AI verification source")
     require("Reception does not imply autonomous discovery" in visible, "reception/autonomy boundary is missing")
     require("not a hierarchy" in visible, "live counters can be mistaken for a hierarchy")
-    require("fetch('/api/waiting-heartbeat-status.json'" in reference, "heartbeat card has no live refresh")
-    require("fetch('/api/public-home-status.json'" in reference, "reception cards have no live refresh")
-    require("fetch('/api/echo-index.json'" in reference, "AI verification card has no live refresh")
+    require("fetch('/api/waiting-heartbeat-status.json'" in runtime, "heartbeat card has no live refresh")
+    require("fetch('/api/public-home-status.json'" in runtime, "reception cards have no live refresh")
+    require("fetch('/api/echo-index.json'" in runtime, "AI verification card has no live refresh")
 
     primary = public_status.get("primary_counters", {})
     autonomous = primary.get("historic_autonomous_agent_reception", {})
