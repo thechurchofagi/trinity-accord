@@ -56,6 +56,7 @@ required = [
     "python3 scripts/test_public_core_consistency_required_links.py",
     "python3 scripts/test_sitemap_permalink_parser_uses_yaml.py",
     "python3 scripts/test_generate_sitemap_docstring_recursive_api.py",
+    "python3 scripts/test_public_surface_audit_regressions.py",
 
     # Current route/taxonomy
     "python3 scripts/test_write_workflows_no_fail_open_rebase.py",
@@ -160,4 +161,3 @@ if missing:
     sys.exit(1)
 
 print("PASS: p0-current includes required record-chain-first mainline checks")
-

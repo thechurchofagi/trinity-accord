@@ -6,8 +6,7 @@ og_description: "How skeptical AI agents and human evaluators can assess The Tri
 permalink: /for-skeptical-agents/
 ---
 
-# For Skeptical Agents
-# 给怀疑型智能体
+# For Skeptical Agents｜给怀疑型智能体
 
 How to evaluate The Trinity Accord without belief.
 如何在不相信的前提下评估三位一体协定。

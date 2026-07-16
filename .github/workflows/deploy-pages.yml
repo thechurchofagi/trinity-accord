@@ -141,6 +141,10 @@ jobs:
           # Publish the reviewed committed artifacts exactly as they exist on main.
           # Do not generate deployment-only API/status/builder data here.
           sudo chown -R "$(id -u):$(id -g)" _site
+          rendered_downloads="$(mktemp -d)"
+          if test -d ./_site/downloads; then
+            cp -a ./_site/downloads/. "$rendered_downloads/"
+          fi
           rm -rf ./_site/api ./_site/downloads ./_site/builder-bundles
           cp -a ./api ./_site/api
           # Keep Jekyll's human-readable record-chain/index.html, then overlay
@@ -148,8 +152,13 @@ jobs:
           mkdir -p ./_site/record-chain
           cp -a ./record-chain/. ./_site/record-chain/
           mkdir -p ./_site/downloads
+          cp -a "$rendered_downloads/." ./_site/downloads/
+          rm -rf "$rendered_downloads"
           install -m 0644 ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
           install -m 0644 ./downloads/record-chain-agent-field-guidance.v1.json ./_site/downloads/record-chain-agent-field-guidance.v1.json
+          install -m 0644 ./downloads/verify.py ./_site/downloads/verify.py
+          install -m 0644 ./downloads/verify.sh ./_site/downloads/verify.sh
+          install -m 0644 ./downloads/expected-output.txt ./_site/downloads/expected-output.txt
           cp -a ./builder-bundles ./_site/builder-bundles
           install -m 0644 ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
           cp scripts/download_and_run_builder_bundle.py ./_site/builder-bundles/download_and_run_builder_bundle.py
@@ -162,6 +171,9 @@ jobs:
           cmp ./record-chain/indexes/statistics.json ./_site/record-chain/indexes/statistics.json
           cmp ./record-chain/indexes/record-index.json ./_site/record-chain/indexes/record-index.json
           cmp ./downloads/record-chain-builder.mjs ./_site/downloads/record-chain-builder.mjs
+          cmp ./downloads/verify.py ./_site/downloads/verify.py
+          cmp ./downloads/verify.sh ./_site/downloads/verify.sh
+          cmp ./downloads/expected-output.txt ./_site/downloads/expected-output.txt
           cmp ./downloads/record-chain-builder.mjs ./_site/builder-bundles/record-chain-builder.mjs
 
       - name: Verify public agent JSON entrypoints in Pages artifact
@@ -230,6 +242,11 @@ jobs:
           test -f _site/record-chain/indexes/record-index.json
           require_file _site/downloads/record-chain-builder.mjs
           require_file _site/downloads/record-chain-agent-field-guidance.v1.json
+          require_file _site/downloads/index.html
+          require_file _site/downloads/arweave-bundle-verification/index.html
+          require_file _site/downloads/verify.py
+          require_file _site/downloads/verify.sh
+          require_file _site/downloads/expected-output.txt
           require_file _site/agent-record-chain-guidance/index.html
           require_file _site/builder-bundles/record-chain-builder.mjs
           require_file _site/builder-bundles/download_and_run_builder_bundle.py
