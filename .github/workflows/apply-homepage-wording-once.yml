@@ -1,4 +1,5 @@
 name: Apply Homepage Wording Once
+# Reviewed trigger: merge this PR to execute the one-shot wording update on main.
 
 on:
   push:
