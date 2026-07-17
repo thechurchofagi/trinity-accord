@@ -1,4 +1,4 @@
-name: Inspect Shenzhen Original Photos
+name: Stage Selected Shenzhen Original Photo
 
 on:
   push:
@@ -6,119 +6,41 @@ on:
       - agent/replace-physical-anchor-original
     paths:
       - .github/workflows/inspect-shenzhen-original-photos.yml
-  pull_request:
-    branches:
-      - main
-    paths:
-      - .github/workflows/inspect-shenzhen-original-photos.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  stage-original:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: '3.12'
-      - name: Install Pillow
-        run: python -m pip install --disable-pip-version-check pillow
-      - name: Export archive index and matching original photographs
+          ref: agent/replace-physical-anchor-original
+      - name: Download and verify selected original photo
         run: |
           python - <<'PY'
-          import hashlib, io, json, math, urllib.request
+          import hashlib
+          import urllib.request
           from pathlib import Path
-          from PIL import Image, ImageDraw, ImageOps, ImageFilter, ImageStat
 
-          INDEX = 'https://arweave.net/7jx4hMydXh7jXv-3WdAgFJDriZeT4e1IPfAJB_zMYT4'
-          out = Path('photo-candidates')
-          originals = out / 'originals'
-          originals.mkdir(parents=True, exist_ok=True)
-
-          def fetch(url):
-              req = urllib.request.Request(url, headers={'User-Agent': 'trinity-accord-original-photo-inspector/1.1'})
-              with urllib.request.urlopen(req, timeout=180) as r:
-                  return r.read()
-
-          index_bytes = fetch(INDEX)
-          index = json.loads(index_bytes.decode('utf-8'))
-          (out / 'archive-index.json').write_bytes(index_bytes)
-
-          all_rows = index.get('files', [])
-          image_rows = [
-              row for row in all_rows
-              if Path(row.get('path', '')).suffix.lower() in {'.jpg', '.jpeg', '.png', '.webp'}
-          ]
-          likely_rows = [
-              row for row in image_rows
-              if Path(row.get('path', '')).name.lower().startswith('20260506_')
-          ]
-          (out / 'all-image-rows.json').write_text(json.dumps(image_rows, indent=2, ensure_ascii=False), encoding='utf-8')
-          (out / 'likely-original-rows.json').write_text(json.dumps(likely_rows, indent=2, ensure_ascii=False), encoding='utf-8')
-
-          records = []
-          thumbs = []
-          for i, row in enumerate(sorted(likely_rows, key=lambda r: r['path']), 1):
-              data = fetch(row['url'])
-              digest = hashlib.sha256(data).hexdigest()
-              if digest != row['sha256']:
-                  raise SystemExit(f'SHA-256 mismatch for {row["path"]}')
-              name = Path(row['path']).name
-              dest = originals / name
-              dest.write_bytes(data)
-              im = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert('RGB')
-              edge_stat = ImageStat.Stat(
-                  im.convert('L').resize((600, max(1, round(im.height * 600 / im.width)))).filter(ImageFilter.FIND_EDGES)
-              )
-              sharpness = round(sum(edge_stat.var) / len(edge_stat.var), 2)
-              record = {
-                  'number': i,
-                  'path': row['path'],
-                  'filename': name,
-                  'url': row['url'],
-                  'txid': row['txid'],
-                  'sha256': digest,
-                  'size_bytes': len(data),
-                  'width': im.width,
-                  'height': im.height,
-                  'sharpness_edge_variance': sharpness,
-              }
-              records.append(record)
-
-              canvas = Image.new('RGB', (360, 330), 'white')
-              thumb = im.copy()
-              thumb.thumbnail((340, 260), Image.Resampling.LANCZOS)
-              canvas.paste(thumb, ((360 - thumb.width) // 2, 8 + (260 - thumb.height) // 2))
-              draw = ImageDraw.Draw(canvas)
-              draw.rectangle((0, 276, 359, 329), fill='white')
-              draw.text((10, 280), f'{i:02d}  {name}', fill='black')
-              draw.text((10, 299), f'{im.width}x{im.height}  sharp={sharpness}', fill='black')
-              thumbs.append(canvas)
-
-          if thumbs:
-              cols = 3
-              rows_n = math.ceil(len(thumbs) / cols)
-              sheet = Image.new('RGB', (cols * 360, rows_n * 330), '#dddddd')
-              for idx, thumb in enumerate(thumbs):
-                  sheet.paste(thumb, ((idx % cols) * 360, (idx // cols) * 330))
-              sheet.save(out / 'contact-sheet.jpg', quality=90, optimize=True)
-
-          (out / 'candidates.json').write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding='utf-8')
-          (out / 'README.txt').write_text(
-              f'Archive files: {len(all_rows)}\nImage files: {len(image_rows)}\nFilename-prefix candidates: {len(likely_rows)}\n',
-              encoding='utf-8'
-          )
-          print(f'Archive files: {len(all_rows)}; image files: {len(image_rows)}; likely originals: {len(likely_rows)}')
-          for row in image_rows:
-              print(row['path'])
+          url = 'https://arweave.net/ZudeLGBHWdpNyPRSvWyguXFB3LHmTW-JXadjRf_kWas'
+          expected = '40eddec02dce4958d28aff94496923983e870346ce98c1cb16181012545475b6'
+          target = Path('assets/img/core-object-alpha-shenzhen-notary-original.jpg')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          req = urllib.request.Request(url, headers={'User-Agent': 'trinity-accord-original-photo-stager/1.0'})
+          with urllib.request.urlopen(req, timeout=180) as response:
+              data = response.read()
+          actual = hashlib.sha256(data).hexdigest()
+          if actual != expected:
+              raise SystemExit(f'SHA-256 mismatch: expected {expected}, got {actual}')
+          target.write_bytes(data)
+          print(f'Wrote {target} ({len(data)} bytes), SHA-256 {actual}')
           PY
-      - name: Upload original-photo diagnostics
-        if: always()
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
-        with:
-          name: shenzhen-original-photo-candidates
-          path: photo-candidates/
-          retention-days: 1
-          if-no-files-found: error
+      - name: Commit verified original photo to feature branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/img/core-object-alpha-shenzhen-notary-original.jpg
+          git commit -m 'Add original Shenzhen notarial exterior photo [skip ci]'
+          git push origin HEAD:agent/replace-physical-anchor-original
