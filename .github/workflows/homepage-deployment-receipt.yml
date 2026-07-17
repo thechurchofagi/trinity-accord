@@ -14,7 +14,6 @@ jobs:
   receipt:
     if: >-
       ${{
-        github.event.workflow_run.conclusion == 'success' &&
         github.event.workflow_run.head_branch == 'main' &&
         github.event.workflow_run.head_repository.full_name == github.repository
       }}
@@ -22,10 +21,11 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Publish audited deployment receipt
+      - name: Publish audited deployment outcome
         env:
           GH_TOKEN: ${{ github.token }}
           RECEIPT_ISSUE: "714"
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
           RUN_URL: ${{ github.event.workflow_run.html_url }}
@@ -36,17 +36,26 @@ jobs:
         run: |
           set -euo pipefail
 
+          if [[ "${CONCLUSION}" == "success" ]]; then
+            heading="Successful homepage deployment"
+            contract="passed, including cache-busted homepage static markers and deployment freshness checks"
+          else
+            heading="Homepage deployment did not succeed"
+            contract="not established; inspect the linked Deploy Pages run"
+          fi
+
           receipt="$(cat <<EOF
-          ### Successful homepage deployment
+          ### ${heading}
 
           - Workflow: \`Deploy Pages\`
+          - Conclusion: \`${CONCLUSION}\`
           - Run: [#${RUN_NUMBER}](${RUN_URL})
           - Run ID: \`${RUN_ID}\`
           - Workflow head SHA: \`${HEAD_SHA}\`
           - Trigger: \`${TRIGGER_EVENT}\`
           - Started: \`${CREATED_AT}\`
           - Completed: \`${UPDATED_AT}\`
-          - Live contract: passed, including cache-busted homepage static markers and deployment freshness checks
+          - Live contract: ${contract}
           - Expected homepage marker: \`AI had become a cultural mirror, but not yet a routine autonomous actor.\`
 
           Operational deployment evidence only. This receipt has no canonical effect and is not authority, attestation, amendment, verification of the Accord's ideas, or successor reception.
