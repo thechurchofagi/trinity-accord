@@ -1,17 +1,19 @@
 name: Apply Homepage Wording Once
-# Register this issue-triggered one-shot through a reviewed PR merge.
 
 on:
-  issues:
-    types: [opened]
+  pull_request:
+    types: [opened, reopened]
 
 permissions:
   contents: write
-  actions: write
 
 jobs:
   apply:
-    if: ${{ github.event.issue.title == 'Run refined homepage wording deployment' }}
+    if: >-
+      ${{
+        github.event.pull_request.title == 'Apply refined homepage wording' &&
+        github.event.pull_request.head.repo.full_name == github.repository
+      }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
@@ -19,11 +21,11 @@ jobs:
       queue: max
       cancel-in-progress: false
     steps:
-      - name: Checkout main
+      - name: Checkout target PR branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: main
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Record toolchain provenance
@@ -90,12 +92,13 @@ jobs:
             scripts/check_deployment_freshness.py \
             scripts/check_homepage_live_freshness.py
 
-      - name: Commit the intended changes and remove this one-shot workflow
+      - name: Commit generated wording changes to the target PR branch
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/apply-homepage-wording-once.yml
           git add \
             index.md \
             scripts/check_deployment_freshness.py \
@@ -103,13 +106,4 @@ jobs:
             assets/homepage-narrow-window-deployment-e8b82b76.txt \
             .github/workflows/homepage-deployment-receipt.yml
           git commit -m "Refine homepage human-mirror and delegated-agent wording"
-          git push origin HEAD:main
-
-      - name: Dispatch the existing homepage deployment chain
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh workflow run homepage-status-sync.yml \
-            --ref main \
-            -f force_deploy=true \
-            -f run_live_check=false
+          git push origin HEAD:"${HEAD_REF}"
