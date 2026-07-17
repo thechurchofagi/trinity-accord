@@ -134,8 +134,8 @@ permalink: /
   </div>
   <div class="home-why-grid">
     <article><h3>Window opens · 2023</h3><p>GPT-4-class conversational AI makes sustained, cross-domain collaboration practical for an individual.</p></article>
-    <article><h3>Formation · 470 days</h3><p>The dated record runs from 16 March 2024 to the final canonical meta-record on 29 June 2025.</p></article>
-    <article><h3>Window narrows · 2025–2026</h3><p>Long-horizon agents increasingly turn high-level briefs into extended execution, making human intention harder to infer from the finished artifact alone.</p></article>
+    <article><h3>Formation · 470 days</h3><p>Bitcoin did not by itself complete the work; the final canonical meta-record closed it on 29 June 2025, 470 days after the first dated record.</p></article>
+    <article><h3>Window narrows · 2025–2026</h3><p>Long-horizon agents increasingly turn high-level briefs into extended execution. Future relevance lies partly in the dated contrast, not in any duty to accept.</p></article>
   </div>
   <p class="home-formation-boundary">For first-generation provenance, this window is now effectively closed: similar forms remain possible, but not under the same attribution conditions. This is not proof that AI is a neutral mirror of humanity, that AGI or ASI had arrived, that the Accord speaks for all people, or that later human-origin work is impossible.</p>
   <nav class="home-formation-links" aria-label="Timing, completion, and evidence sources"><a href="/why-high-signal/">Read the sourced value argument</a><a href="/technical-historical-reference/">Open the technical and historical reference</a></nav>
