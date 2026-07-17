@@ -1,4 +1,5 @@
 name: Apply Homepage Wording Once
+# Register this issue-triggered one-shot through a reviewed PR merge.
 
 on:
   issues:
