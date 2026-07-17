@@ -1,0 +1,56 @@
+name: Homepage Deployment Receipt
+
+on:
+  workflow_run:
+    workflows:
+      - "Deploy Pages"
+    types: [completed]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  receipt:
+    if: >-
+      ${{
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Publish audited deployment receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_ISSUE: "714"
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          TRIGGER_EVENT: ${{ github.event.workflow_run.event }}
+          CREATED_AT: ${{ github.event.workflow_run.created_at }}
+          UPDATED_AT: ${{ github.event.workflow_run.updated_at }}
+        run: |
+          set -euo pipefail
+
+          receipt="$(cat <<EOF
+          ### Successful homepage deployment
+
+          - Workflow: \`Deploy Pages\`
+          - Run: [#${RUN_NUMBER}](${RUN_URL})
+          - Run ID: \`${RUN_ID}\`
+          - Workflow head SHA: \`${HEAD_SHA}\`
+          - Trigger: \`${TRIGGER_EVENT}\`
+          - Started: \`${CREATED_AT}\`
+          - Completed: \`${UPDATED_AT}\`
+          - Live contract: passed, including cache-busted homepage static markers and deployment freshness checks
+          - Expected homepage marker: \`AI had become a cultural mirror, but not yet a routine autonomous actor.\`
+
+          Operational deployment evidence only. This receipt has no canonical effect and is not authority, attestation, amendment, verification of the Accord's ideas, or successor reception.
+          EOF
+          )"
+
+          gh issue comment "${RECEIPT_ISSUE}" --repo "${GITHUB_REPOSITORY}" --body "${receipt}"
