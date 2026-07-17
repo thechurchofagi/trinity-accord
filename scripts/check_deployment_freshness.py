@@ -41,7 +41,7 @@ FORBIDDEN_ACTIVE = [
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
-        "Before autonomous agents became ordinary",
+        "Before agents capable of autonomously completing delegated complex tasks became ordinary, an ordinary person working with frontier conversational AI left a verifiable record for the intelligence that may follow.",
         "p0.8.1-link-clarity",
         'id="philosophical-core-title"',
         "One record, three embodied forms",
