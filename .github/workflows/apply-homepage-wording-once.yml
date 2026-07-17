@@ -68,7 +68,6 @@ jobs:
                   (old_en, new_en),
                   ("deployment_probe_revision=3", "deployment_probe_revision=4"),
               ],
-              Path(".github/workflows/homepage-deployment-receipt.yml"): [(old_en, new_en)],
           }
 
           for path, pairs in replacements.items():
@@ -103,7 +102,6 @@ jobs:
             index.md \
             scripts/check_deployment_freshness.py \
             scripts/check_homepage_live_freshness.py \
-            assets/homepage-narrow-window-deployment-e8b82b76.txt \
-            .github/workflows/homepage-deployment-receipt.yml
+            assets/homepage-narrow-window-deployment-e8b82b76.txt
           git commit -m "Refine homepage human-mirror and delegated-agent wording"
           git push origin HEAD:"${HEAD_REF}"
