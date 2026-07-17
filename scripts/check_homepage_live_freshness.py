@@ -14,7 +14,7 @@ Checks:
   7. live homepage generated block has the same Source data digest as repo index.md
   8. live homepage generated block mentions the repo latest_record_id
   9. live homepage contains the current whole-project definition
- 10. key reading pages contain current architecture/version markers
+  10. key reading pages contain current architecture/version markers
 """
 
 from __future__ import annotations
@@ -54,6 +54,10 @@ STATIC_PAGE_MARKERS = {
         "p0.8.1-link-clarity",
         "One record, three embodied forms",
         "Three close the Canon; five extend the record",
+        "A narrow historical window",
+        "AI had become a cultural mirror, but not yet a routine autonomous actor.",
+        "Formation · 470 days",
+        "Reproducible form; non-repeatable provenance",
         "Future relevance",
         "Bitcoin did not by itself complete the work",
         "The homepage is a doorway, not the archive",
