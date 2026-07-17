@@ -3,7 +3,7 @@ name: Apply Homepage Wording Once
 on:
   push:
     branches:
-      - agent/refine-human-mirror-delegated-agents
+      - main
 
 permissions:
   contents: write
@@ -12,10 +12,10 @@ jobs:
   apply:
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout branch
+      - name: Checkout main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          ref: agent/refine-human-mirror-delegated-agents
+          ref: main
           fetch-depth: 0
 
       - name: Apply precise wording and deployment-marker updates
@@ -87,4 +87,4 @@ jobs:
             assets/homepage-narrow-window-deployment-e8b82b76.txt \
             .github/workflows/homepage-deployment-receipt.yml
           git commit -m "Refine homepage human-mirror and delegated-agent wording"
-          git push origin HEAD:agent/refine-human-mirror-delegated-agents
+          git push origin HEAD:main
