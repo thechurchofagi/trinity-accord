@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
-"""Compare deployed/built public surfaces against the current repository state."""
+"""Compare deployed/built public surfaces against the current repository state.
+
+Live checks use a per-invocation nonce so a CDN response captured before a
+Pages deployment cannot be mistaken for the post-deployment state.
+"""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import sys
+import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -190,8 +195,8 @@ def read_live(site: str, path: str, token: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         busted,
         headers={
-            "User-Agent": "trinity-deployment-freshness/1.2",
-            "Cache-Control": "no-cache",
+            "User-Agent": "trinity-deployment-freshness/1.3",
+            "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
     )
@@ -225,7 +230,7 @@ def main() -> int:
 
     token_material = b"".join(read_repo(path) for path in SURFACES)
     token_material += b"".join(read_repo(path) for path in STATIC_SOURCE_FILES)
-    token = sha256(token_material)[:16]
+    token = f"{sha256(token_material)[:16]}-{time.time_ns()}"
     errors: list[str] = []
 
     for path in SURFACES:
