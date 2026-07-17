@@ -18,6 +18,9 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "deploy-pages.yml"
+HOMEPAGE_SOURCE = ROOT / "index.md"
+DEPLOYMENT_FRESHNESS = ROOT / "scripts" / "check_deployment_freshness.py"
+HOMEPAGE_FRESHNESS = ROOT / "scripts" / "check_homepage_live_freshness.py"
 
 REQUIRED_TEXT = [
     "actions/checkout",
@@ -191,6 +194,23 @@ def main() -> int:
     for action in uses_lines:
         if "@" not in action:
             errors.append(f"action use is not version-pinned: {action}")
+
+    homepage_text = HOMEPAGE_SOURCE.read_text(encoding="utf-8")
+    build_match = re.search(
+        r'<meta name="trinity-homepage-build" content="([^"]+)">',
+        homepage_text,
+    )
+    if not build_match:
+        errors.append("index.md must declare the current trinity-homepage-build marker")
+    else:
+        current_build_marker = build_match.group(1)
+        for checker in (DEPLOYMENT_FRESHNESS, HOMEPAGE_FRESHNESS):
+            checker_text = checker.read_text(encoding="utf-8")
+            if current_build_marker not in checker_text:
+                errors.append(
+                    f"{checker.relative_to(ROOT)} does not require current homepage build marker "
+                    f"{current_build_marker!r}"
+                )
 
     if errors:
         print("FAIL: deploy-pages workflow contract errors:")
