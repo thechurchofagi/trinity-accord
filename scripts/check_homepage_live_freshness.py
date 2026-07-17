@@ -53,7 +53,7 @@ STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
         "Before agents capable of autonomously completing delegated complex tasks became ordinary, an ordinary person working with frontier conversational AI left a verifiable record for the intelligence that may follow.",
-        "p0.8.1-link-clarity",
+        "p0.8.2-link-affordance",
         "One record, three embodied forms",
         "Three close the Canon; five extend the record",
         "A narrow historical window",
