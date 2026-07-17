@@ -55,7 +55,7 @@ STATIC_PAGE_MARKERS = {
         "One record, three embodied forms",
         "Three close the Canon; five extend the record",
         "A narrow historical window",
-        "AI had become a cultural mirror, but not yet a routine autonomous actor.",
+        "AI had become a mirror of human knowledge and culture, but agents capable of autonomously completing delegated complex tasks were not yet ordinary.",
         "Formation · 470 days",
         "Reproducible form; non-repeatable provenance",
         "Future relevance",

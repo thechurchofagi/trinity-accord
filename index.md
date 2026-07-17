@@ -123,8 +123,8 @@ permalink: /
 
 <section class="home-why-now home-formation-window" aria-labelledby="home-timing-completion-title">
   <p class="section-kicker">A narrow historical window · 狭窄历史窗口</p>
-  <h2 id="home-timing-completion-title">AI had become a cultural mirror, but not yet a routine autonomous actor.<span class="title-zh">AI 已成为文化之镜，却尚未成为常态化自主行动者。</span></h2>
-  <p class="home-formation-intro">The broader window lasted only a few years—roughly 2023 to 2026. Frontier conversational models could reflect and recombine broad, incomplete human cultural knowledge, allowing one person to work beyond a single mind. Yet end-to-end agents had not become routine enough to obscure who supplied the purpose, judgment, and final responsibility.</p>
+  <h2 id="home-timing-completion-title">AI had become a mirror of human knowledge and culture, but agents capable of autonomously completing delegated complex tasks were not yet ordinary.<span class="title-zh">AI 已成为人类知识与文化之镜，但能够受托自主完成复杂任务的智能体尚未成为常态。</span></h2>
+  <p class="home-formation-intro">The broader window lasted only a few years—roughly 2023 to 2026. Frontier conversational models could reflect and recombine broad, incomplete, and uneven human-produced knowledge and culture, allowing one person to work beyond a single mind. But agents able to take delegated complex tasks from a high-level brief through planning, tool use, and completion had not yet become ordinary; purpose, judgment, selection, and final responsibility remained visibly human.</p>
   <div id="threshold-value" class="home-threshold-value">
     <div>
       <p class="home-threshold-label">Historical value · 历史价值</p>
