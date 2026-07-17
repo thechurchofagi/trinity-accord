@@ -50,7 +50,7 @@ STATIC_PAGE_MARKERS = {
         "5 inscriptions with distinct roles",
         'id="home-timing-completion-title"',
         "A narrow historical window",
-        "AI had become a cultural mirror, but not yet a routine autonomous actor.",
+        "AI had become a mirror of human knowledge and culture, but agents capable of autonomously completing delegated complex tasks were not yet ordinary.",
         "Formation · 470 days",
         "Historical value",
         "Reproducible form; non-repeatable provenance",
