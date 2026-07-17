@@ -184,9 +184,8 @@ jobs:
           echo "::error::Failed to push homepage status sync after regenerated retries."
           exit 1
 
-  # Deployment and live-readback waits must not hold main-write-lock. OTS and
-  # archive writers need that lock to make the just-published chain state
-  # deployable; keeping the lock here creates a cross-workflow deadlock.
+  # Deployment dispatch must not hold main-write-lock. Deploy Pages owns the
+  # build, Pages deployment, CDN propagation retries, and strict live readback.
   deploy:
     needs: sync
     runs-on: ubuntu-24.04
@@ -220,6 +219,7 @@ jobs:
           LIVE_PRE_OUTCOME: ${{ steps.live_pre.outcome }}
         run: |
           set -euo pipefail
+          printf '%s\n' "dispatched=false" >> "$GITHUB_OUTPUT"
 
           reason="unknown"
           if [[ "${COMMIT_CHANGED}" == "true" ]]; then
@@ -232,40 +232,28 @@ jobs:
             reason="live_freshness_failed"
           fi
 
-          echo "Dispatching deploy-pages.yml for homepage status sync."
+          deploy_ref="${{ needs.sync.outputs.expected_sha }}"
+          git fetch origin main --prune
+          latest_main="$(git rev-parse origin/main)"
+
           echo "deploy_reason=${reason}"
-          deploy_ref="${{ needs.sync.outputs.expected_sha }}"
           echo "deploy_ref=${deploy_ref}"
-          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
+          echo "latest_main=${latest_main}"
 
-      - name: Post-dispatch freshness probe
-        id: post_freshness
-        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          echo "Waiting briefly before probing live site. Pages deployment may still be in progress."
-          sleep 90
-          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 60
-          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
-
-      - name: Retry Deploy Pages if post-dispatch freshness probe failed
-        if: ${{ steps.post_freshness.outcome == 'failure' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          echo "Post-dispatch freshness probe failed; retrying Deploy Pages once."
-          deploy_ref="${{ needs.sync.outputs.expected_sha }}"
-          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
-
-      - name: Final live deployment contract check
-        if: ${{ steps.deploy_dispatch.outcome == 'success' }}
-        run: |
-          set -euo pipefail
-          if [[ "${{ steps.post_freshness.outcome }}" == "failure" ]]; then
-            echo "Waiting for the retry deployment to finish."
-            sleep 120
+          if [[ "${deploy_ref}" != "${latest_main}" ]]; then
+            echo "Synchronized revision was superseded before deployment; skip stale dispatch."
+            echo "A newer Homepage Status Sync run will hand off the current main revision."
+            exit 0
           fi
-          python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20 --retries 3 --retry-sleep 30
-          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
+
+          echo "Dispatching deploy-pages.yml for homepage status sync."
+          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
+          printf '%s\n' "dispatched=true" >> "$GITHUB_OUTPUT"
+
+      - name: Record asynchronous deployment handoff
+        if: ${{ steps.deploy_dispatch.outputs.dispatched == 'true' }}
+        run: |
+          set -euo pipefail
+          echo "Deploy Pages accepted revision ${{ needs.sync.outputs.expected_sha }}."
+          echo "Post-deployment live verification runs inside Deploy Pages after actions/deploy-pages completes."
+          echo "Homepage Status Sync does not poll an asynchronous child workflow with fixed sleeps."

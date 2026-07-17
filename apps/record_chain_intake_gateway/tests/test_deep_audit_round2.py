@@ -82,10 +82,15 @@ def test_public_guidance_and_workflow_contracts_are_current() -> None:
 
     deploy = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
     assert "\n  push:\n" in deploy
+    assert "Smoke live public discovery contract" in deploy
+    assert "Verify live deployment freshness surface" in deploy
 
     homepage = (ROOT / ".github/workflows/homepage-status-sync.yml").read_text(encoding="utf-8")
     assert "check_deployment_freshness.py" in homepage
-    assert "Final live deployment contract check" in homepage
+    assert "Record asynchronous deployment handoff" in homepage
+    assert "Final live deployment contract check" not in homepage
+    assert "Post-dispatch freshness probe" not in homepage
+    assert 'latest_main="$(git rev-parse origin/main)"' in homepage
     assert "Waiting Heartbeat Submit" in homepage
 
     app_source = (ROOT / "apps/record_chain_intake_gateway/app.py").read_text(encoding="utf-8")
