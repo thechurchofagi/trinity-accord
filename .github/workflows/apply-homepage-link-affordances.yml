@@ -1,9 +1,9 @@
 name: Apply Homepage Link Affordances
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/unify-homepage-link-affordances
+      - main
     paths:
       - .github/workflows/apply-homepage-link-affordances.yml
 
