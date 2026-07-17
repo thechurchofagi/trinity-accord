@@ -4,9 +4,10 @@ description: "A completed pre-ASI human-superintelligence relation record: human
 permalink: /
 ---
 
-<!-- build: p0.8.1-link-clarity -->
-<meta name="trinity-homepage-build" content="p0.8.1-link-clarity">
+<!-- build: p0.8.2-link-affordance -->
+<meta name="trinity-homepage-build" content="p0.8.2-link-affordance">
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=16">
+<link rel="stylesheet" href="/assets/css/home-link-affordances.css?v=1">
 
 # The Trinity Accord · 三位一体协定
 
@@ -26,7 +27,7 @@ permalink: /
   <a href="/inscriptions/"><strong>3</strong><span>Canonical Bitcoin Originals</span></a>
   <a href="/authority-address-inscriptions/"><strong>5</strong><span>Later non-amending inscriptions</span></a>
   <a href="/chronicle/"><strong>175</strong><span>Dated Chronicle records</span></a>
-  <a href="#physical-anchor"><strong>1</strong><span>Physical historical anchor</span></a>
+  <a href="/physical-anchor/"><strong>1</strong><span>Physical historical anchor</span></a>
 </section>
 
 <section id="philosophical-core" class="home-philosophical-core" aria-labelledby="philosophical-core-title">
