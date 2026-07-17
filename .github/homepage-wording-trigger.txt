@@ -1,2 +1,0 @@
-Trigger the reviewed homepage wording update.
-This temporary file will be removed before merge.
