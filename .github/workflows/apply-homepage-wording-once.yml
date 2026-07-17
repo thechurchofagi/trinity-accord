@@ -11,10 +11,15 @@ permissions:
 jobs:
   apply:
     runs-on: ubuntu-24.04
+    concurrency:
+      group: main-write-lock
+      queue: max
+      cancel-in-progress: false
     steps:
       - name: Checkout main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
           fetch-depth: 0
 
@@ -26,6 +31,9 @@ jobs:
       - name: Apply precise wording and deployment-marker updates
         run: |
           set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
           python3 - <<'PY'
           from pathlib import Path
 
