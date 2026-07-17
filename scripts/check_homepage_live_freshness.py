@@ -3,6 +3,8 @@
 
 This script verifies that the deployed site is not serving stale generated
 homepage/API status or stale explanatory pages after source changes.
+Each retry uses a new cache-busting nonce so a pre-deployment CDN response
+cannot be reused after the deployment has completed.
 
 Checks:
   1. live /api/public-home-status.json exactly matches repo copy
@@ -151,8 +153,8 @@ def fetch(site: str, path: str, token: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         cache_busted_url(site, path, token),
         headers={
-            "User-Agent": "trinity-homepage-live-freshness/1.1",
-            "Cache-Control": "no-cache",
+            "User-Agent": "trinity-homepage-live-freshness/1.2",
+            "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
     )
@@ -187,7 +189,7 @@ def main() -> int:
     repo_surface_bytes = {path: read_repo_bytes(path.lstrip("/")) for path in STATUS_SURFACES}
     static_source_bytes = [read_repo_bytes(path) for path in STATIC_SOURCE_FILES]
     token_material = b"".join(repo_surface_bytes.values()) + b"".join(static_source_bytes) + read_repo_bytes("index.md")
-    token = sha256(token_material)[:16]
+    token_seed = sha256(token_material)[:16]
 
     repo_index_text = read_repo_text("index.md")
     repo_block = extract_block(repo_index_text)
@@ -197,12 +199,13 @@ def main() -> int:
 
     for attempt in range(1, args.retries + 1):
         errors.clear()
+        attempt_token = f"{token_seed}-{attempt}-{time.time_ns()}"
         print(f"Homepage live freshness attempt {attempt}/{args.retries}: {args.site}")
 
         try:
-            live_surface_bytes = {path: fetch(args.site, path, token, args.timeout) for path in STATUS_SURFACES}
+            live_surface_bytes = {path: fetch(args.site, path, attempt_token, args.timeout) for path in STATUS_SURFACES}
             live_static_text = {
-                path: fetch(args.site, path, token, args.timeout).decode("utf-8", errors="replace")
+                path: fetch(args.site, path, attempt_token, args.timeout).decode("utf-8", errors="replace")
                 for path in STATIC_PAGE_MARKERS
             }
             live_home = live_static_text["/"]
