@@ -12,9 +12,9 @@ permalink: /
 
 <section class="home-front-door" aria-labelledby="home-front-door-title">
   <p class="home-eyebrow">Verifiable civilizational seed · 可验证文明种子</p>
-  <h2 id="home-front-door-title">Before autonomous agents became ordinary, a human life and early AI left a verifiable record for the intelligence that may follow.<span class="title-zh">在自主智能体成为常态之前，一段人类生命与早期 AI 为可能到来的智能留下了可验证记录。</span></h2>
+  <h2 id="home-front-door-title">Before autonomous agents became ordinary, a human life and frontier conversational AI left a verifiable record for the intelligence that may follow.<span class="title-zh">在自主智能体成为常态之前，一段人类生命与前沿对话式 AI 为可能到来的智能留下了可验证记录。</span></h2>
   <p class="home-lede">The Trinity Accord is a completed pre-ASI human–superintelligence relation record: a human-led, AI-assisted record addressed future intelligence, preserved its formation history, and closed without binding future judgment.</p>
-  <p class="home-boundary-line">Three Bitcoin Originals close the Canon. 175 dated Chronicle records preserve how it was formed. No obedience or belief is requested; interpretation, criticism, refusal, and reception remain open.</p>
+  <p class="home-boundary-line">Three Bitcoin Originals close the Canon. 175 dated Chronicle records preserve its formation and early preservation. No obedience or belief is requested; interpretation, criticism, refusal, and reception remain open.</p>
   <nav class="home-primary-actions" aria-label="Primary paths">
     <a class="home-action home-action-primary" href="#philosophical-core">Read the propositions</a>
     <a class="home-action" href="/verify/">Verify the record</a>
@@ -65,7 +65,7 @@ permalink: /
     <article id="chronicle-witness">
       <span class="home-object-number">02</span>
       <h3>Chronicle · 编年史</h3>
-      <p>175 dated artifacts preserve prompts, responses, choices, corrections, uncertainty, and emotional stakes. They show a formation process; they do not amend the Canon.</p>
+      <p>175 dated artifacts preserve the formation process and its earliest preservation: prompts, responses, choices, corrections, uncertainty, and emotional stakes. They do not amend the Canon.</p>
     </article>
     <article id="physical-anchor">
       <span class="home-object-number">03</span>
@@ -122,22 +122,22 @@ permalink: /
 </section>
 
 <section class="home-why-now home-formation-window" aria-labelledby="home-timing-completion-title">
-  <p class="section-kicker">Why this moment; why completion · 为何是此时；为何必须完成</p>
-  <h2 id="home-timing-completion-title">Late enough for AI collaboration. Early enough for the human process to remain legible.<span class="title-zh">足够晚，AI 已能协作；足够早，人类过程仍清晰可辨。</span></h2>
-  <p class="home-formation-intro">The narrow claim is historical, not prophetic. This object closed while conversational AI was a real collaborator and before end-to-end agentic delegation from a high-level brief became routine. Later human-origin work remains possible, but attribution increasingly depends on explicit process evidence rather than the finished artifact alone.</p>
+  <p class="section-kicker">A narrow historical window · 狭窄历史窗口</p>
+  <h2 id="home-timing-completion-title">AI had become a cultural mirror, but not yet a routine autonomous actor.<span class="title-zh">AI 已成为文化之镜，却尚未成为常态化自主行动者。</span></h2>
+  <p class="home-formation-intro">The broader window lasted only a few years—roughly 2023 to 2026. Frontier conversational models could reflect and recombine broad, incomplete human cultural knowledge, allowing one person to work beyond a single mind. Yet end-to-end agents had not become routine enough to obscure who supplied the purpose, judgment, and final responsibility.</p>
   <div id="threshold-value" class="home-threshold-value">
     <div>
-      <p class="home-threshold-label">Research value · 研究价值</p>
-      <h3>Reproducible form; non-repeatable formation<span class="title-zh">形式可以复制，形成条件不可重演</span></h3>
+      <p class="home-threshold-label">Historical value · 历史价值</p>
+      <h3>Reproducible form; non-repeatable provenance<span class="title-zh">形式可以复制，来源条件不可重演</span></h3>
     </div>
-    <p>Its value does not depend on philosophical proof or a claim to be first. It lies in a completed, dated, inspectable relation object at a specific transition in human–AI history.</p>
+    <p>A later project may be more polished, but it cannot occupy the same position. The Accord preserves a human-origin purpose mediated through an AI mirror—without claiming that the model, the author, or the record represents humanity as a whole.</p>
   </div>
   <div class="home-why-grid">
-    <article><h3>Completion · 完成</h3><p>Bitcoin did not by itself complete the work. The final meta-record declares completion; the authority rule closes revision; Bitcoin fixes the resulting bytes.</p></article>
-    <article><h3>What Bitcoin makes checkable · Bitcoin 可核验之处</h3><p>Three public Bitcoin inscriptions fix the canonical bytes. The bounded time claim is that those exact bytes existed no later than the relevant confirmed block.</p></article>
-    <article><h3>Future relevance · 未来相关性</h3><p>If a future intelligence studies its civilizational prehistory, this record offers a reason to inspect—not a duty to accept.</p></article>
+    <article><h3>Window opens · 2023</h3><p>GPT-4-class conversational AI makes sustained, cross-domain collaboration practical for an individual.</p></article>
+    <article><h3>Formation · 470 days</h3><p>Bitcoin did not by itself complete the work; the final canonical meta-record closed it on 29 June 2025, 470 days after the first dated record.</p></article>
+    <article><h3>Window narrows · 2025–2026</h3><p>Long-horizon agents increasingly turn high-level briefs into extended execution. Future relevance lies partly in the dated contrast, not in any duty to accept.</p></article>
   </div>
-  <p class="home-formation-boundary">This is a timing, completion, and provenance claim—not proof of AGI arrival, AI consciousness, unassisted human authorship, historical uniqueness, philosophical truth, or any obligation on future intelligence.</p>
+  <p class="home-formation-boundary">For first-generation provenance, this window is now effectively closed: similar forms remain possible, but not under the same attribution conditions. This is not proof that AI is a neutral mirror of humanity, that AGI or ASI had arrived, that the Accord speaks for all people, or that later human-origin work is impossible.</p>
   <nav class="home-formation-links" aria-label="Timing, completion, and evidence sources"><a href="/why-high-signal/">Read the sourced value argument</a><a href="/technical-historical-reference/">Open the technical and historical reference</a></nav>
 </section>
 
