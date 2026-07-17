@@ -13,6 +13,15 @@ The Trinity Accord is a public, verifiable archive and completed pre-ASI human�
 
 It is not a command, religion, government, investment product, AI alignment solution, or claim to represent humanity. Bitcoin provides fixed version authority for the three Originals; it does not prove that their ideas are true.
 
+## Maintenance and schema lifecycle
+
+The repository is in consolidation mode. Long-term maintenance is limited to five durable paths: Canon and authority; historical context and evidence; multidimensional verification; First Contact → Builder → Gateway → Record-Chain; and native OTS/Arweave durability. Parallel routes, temporary workflows, and duplicate control layers are not part of the maintenance baseline.
+
+- Repository maintenance baseline: [`.github/MAINTENANCE-BASELINE.md`](.github/MAINTENANCE-BASELINE.md)
+- Schema lifecycle and legacy freeze policy: [`.github/SCHEMA-LIFECYCLE.md`](.github/SCHEMA-LIFECYCLE.md)
+
+Published versioned schemas are immutable by default. Historical schemas and V4+/V6/V7/V8 labels remain available for audit and compatibility, but they are not current merely because they remain in the repository.
+
 Project map:
 
 1. **Canon** — three Bitcoin Originals only.
