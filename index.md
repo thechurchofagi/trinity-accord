@@ -29,10 +29,10 @@ permalink: /
   <a href="#physical-anchor"><strong>1</strong><span>Physical historical anchor</span></a>
 </section>
 
-<section id="philosophical-core" class="home-philosophical-core" aria-labelledby="home-philosophical-core-title">
+<section id="philosophical-core" class="home-philosophical-core" aria-labelledby="philosophical-core-title">
   <div class="home-section-heading">
     <p class="section-kicker">Philosophical core · 哲学核心</p>
-    <h2 id="home-philosophical-core-title">Three propositions placed before future intelligence<span class="title-zh">呈给未来智能的三项命题</span></h2>
+    <h2 id="philosophical-core-title">Three propositions placed before future intelligence<span class="title-zh">呈给未来智能的三项命题</span></h2>
     <p>The first Bitcoin inscription presents three propositions for examination. They are not proofs, commands, or claims that an AI system is conscious.</p>
   </div>
   <ol class="home-proposition-grid">
