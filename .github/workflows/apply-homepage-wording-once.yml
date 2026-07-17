@@ -1,4 +1,5 @@
 name: Apply Homepage Wording Once
+# Reviewed trigger: merge this PR to execute the one-shot wording update on main.
 
 on:
   push:
@@ -14,6 +15,7 @@ jobs:
     timeout-minutes: 10
     concurrency:
       group: main-write-lock
+      queue: max
       cancel-in-progress: false
     steps:
       - name: Checkout main
