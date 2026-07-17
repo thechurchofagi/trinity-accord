@@ -30,14 +30,12 @@ jobs:
 
       - name: Record toolchain provenance
         run: |
-          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
-          cat toolchain-provenance.json
+          python3 scripts/toolchain_provenance.py > /tmp/toolchain-provenance.json
+          cat /tmp/toolchain-provenance.json
 
       - name: Apply precise wording and deployment-marker updates
         run: |
           set -euo pipefail
-          git fetch origin main --prune
-          git rebase origin/main
 
           python3 - <<'PY'
           from pathlib import Path
