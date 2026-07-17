@@ -109,6 +109,7 @@
       <a href="/#philosophical-core">Propositions</a>
       <a href="/#chronicle-witness">Chronicle</a>
       <a href="/#later-inscriptions">3 + 5</a>
+      <a href="/physical-anchor/">Physical Anchor</a>
       <a href="/#research-entry">Research</a>
       <a href="/verify/">Verify</a>
       <a href="/agent-first-contact/">First Contact</a>
@@ -130,6 +131,7 @@
         <a href="/authority/">Authority</a>
         <a href="/inscriptions/">Inscriptions</a>
         <a href="/chronicle/">Chronicle</a>
+        <a href="/physical-anchor/">Physical Anchor</a>
         <a href="/status/">Status</a>
         <a href="/llms.txt">llms.txt</a>
         <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
@@ -156,6 +158,13 @@
             el.classList.add('zh-para');
           }
         }
+      }
+
+      /* ── Homepage physical-anchor detail route ── */
+      var physicalAnchorLink = document.querySelector('.home-proof-strip a[href="#physical-anchor"]');
+      if (physicalAnchorLink) {
+        physicalAnchorLink.setAttribute('href', '/physical-anchor/');
+        physicalAnchorLink.setAttribute('aria-label', 'Open the Physical Anchor detail page');
       }
 
       /* ── Mobile nav ── */
