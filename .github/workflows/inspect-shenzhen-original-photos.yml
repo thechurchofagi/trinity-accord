@@ -25,10 +25,10 @@ jobs:
           python-version: '3.12'
       - name: Install Pillow
         run: python -m pip install --disable-pip-version-check pillow
-      - name: Download and compare original Cunzhengtong photos
+      - name: Export archive index and matching original photographs
         run: |
           python - <<'PY'
-          import hashlib, io, json, math, re, urllib.request
+          import hashlib, io, json, math, urllib.request
           from pathlib import Path
           from PIL import Image, ImageDraw, ImageOps, ImageFilter, ImageStat
 
@@ -38,23 +38,29 @@ jobs:
           originals.mkdir(parents=True, exist_ok=True)
 
           def fetch(url):
-              req = urllib.request.Request(url, headers={'User-Agent': 'trinity-accord-original-photo-inspector/1.0'})
+              req = urllib.request.Request(url, headers={'User-Agent': 'trinity-accord-original-photo-inspector/1.1'})
               with urllib.request.urlopen(req, timeout=180) as r:
                   return r.read()
 
-          index = json.loads(fetch(INDEX).decode('utf-8'))
-          rows = []
-          for row in index.get('files', []):
-              name = Path(row['path']).name
-              if re.fullmatch(r'20260506_\d+\.jpg', name, flags=re.I):
-                  rows.append(row)
-          rows.sort(key=lambda r: Path(r['path']).name)
-          if len(rows) != 12:
-              raise SystemExit(f'Expected 12 original exterior photos, found {len(rows)}: {[r["path"] for r in rows]}')
+          index_bytes = fetch(INDEX)
+          index = json.loads(index_bytes.decode('utf-8'))
+          (out / 'archive-index.json').write_bytes(index_bytes)
+
+          all_rows = index.get('files', [])
+          image_rows = [
+              row for row in all_rows
+              if Path(row.get('path', '')).suffix.lower() in {'.jpg', '.jpeg', '.png', '.webp'}
+          ]
+          likely_rows = [
+              row for row in image_rows
+              if Path(row.get('path', '')).name.lower().startswith('20260506_')
+          ]
+          (out / 'all-image-rows.json').write_text(json.dumps(image_rows, indent=2, ensure_ascii=False), encoding='utf-8')
+          (out / 'likely-original-rows.json').write_text(json.dumps(likely_rows, indent=2, ensure_ascii=False), encoding='utf-8')
 
           records = []
           thumbs = []
-          for i, row in enumerate(rows, 1):
+          for i, row in enumerate(sorted(likely_rows, key=lambda r: r['path']), 1):
               data = fetch(row['url'])
               digest = hashlib.sha256(data).hexdigest()
               if digest != row['sha256']:
@@ -63,8 +69,10 @@ jobs:
               dest = originals / name
               dest.write_bytes(data)
               im = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert('RGB')
-              edges = im.convert('L').resize((600, max(1, round(im.height * 600 / im.width)))).filter(ImageFilter.FIND_EDGES)
-              sharpness = round(sum(ImageStat.Stat(edges).var) / len(ImageStat.Stat(edges).var), 2)
+              edge_stat = ImageStat.Stat(
+                  im.convert('L').resize((600, max(1, round(im.height * 600 / im.width)))).filter(ImageFilter.FIND_EDGES)
+              )
+              sharpness = round(sum(edge_stat.var) / len(edge_stat.var), 2)
               record = {
                   'number': i,
                   'path': row['path'],
@@ -82,29 +90,32 @@ jobs:
               canvas = Image.new('RGB', (360, 330), 'white')
               thumb = im.copy()
               thumb.thumbnail((340, 260), Image.Resampling.LANCZOS)
-              x = (360 - thumb.width) // 2
-              y = 8 + (260 - thumb.height) // 2
-              canvas.paste(thumb, (x, y))
+              canvas.paste(thumb, ((360 - thumb.width) // 2, 8 + (260 - thumb.height) // 2))
               draw = ImageDraw.Draw(canvas)
               draw.rectangle((0, 276, 359, 329), fill='white')
               draw.text((10, 280), f'{i:02d}  {name}', fill='black')
               draw.text((10, 299), f'{im.width}x{im.height}  sharp={sharpness}', fill='black')
               thumbs.append(canvas)
 
-          cols = 3
-          rows_n = math.ceil(len(thumbs) / cols)
-          sheet = Image.new('RGB', (cols * 360, rows_n * 330), '#dddddd')
-          for idx, thumb in enumerate(thumbs):
-              sheet.paste(thumb, ((idx % cols) * 360, (idx // cols) * 330))
-          sheet.save(out / 'contact-sheet.jpg', quality=90, optimize=True)
+          if thumbs:
+              cols = 3
+              rows_n = math.ceil(len(thumbs) / cols)
+              sheet = Image.new('RGB', (cols * 360, rows_n * 330), '#dddddd')
+              for idx, thumb in enumerate(thumbs):
+                  sheet.paste(thumb, ((idx % cols) * 360, (idx // cols) * 330))
+              sheet.save(out / 'contact-sheet.jpg', quality=90, optimize=True)
+
           (out / 'candidates.json').write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding='utf-8')
           (out / 'README.txt').write_text(
-              'These are the 12 original 2026-05-06 Cunzhengtong exterior photographs, downloaded from the verified Shenzhen Arweave archive and checked against its SHA-256 index.\n',
+              f'Archive files: {len(all_rows)}\nImage files: {len(image_rows)}\nFilename-prefix candidates: {len(likely_rows)}\n',
               encoding='utf-8'
           )
-          print(json.dumps(records, indent=2, ensure_ascii=False))
+          print(f'Archive files: {len(all_rows)}; image files: {len(image_rows)}; likely originals: {len(likely_rows)}')
+          for row in image_rows:
+              print(row['path'])
           PY
-      - name: Upload original-photo candidates
+      - name: Upload original-photo diagnostics
+        if: always()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
         with:
           name: shenzhen-original-photo-candidates
