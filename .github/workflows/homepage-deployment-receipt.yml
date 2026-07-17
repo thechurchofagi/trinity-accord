@@ -56,7 +56,7 @@ jobs:
           - Started: \`${CREATED_AT}\`
           - Completed: \`${UPDATED_AT}\`
           - Live contract: ${contract}
-          - Expected homepage marker: \`AI had become a cultural mirror, but not yet a routine autonomous actor.\`
+          - Expected homepage marker: \`AI had become a mirror of human knowledge and culture, but agents capable of autonomously completing delegated complex tasks were not yet ordinary.\`
 
           Operational deployment evidence only. This receipt has no canonical effect and is not authority, attestation, amendment, verification of the Accord's ideas, or successor reception.
           EOF
