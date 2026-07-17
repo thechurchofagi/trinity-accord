@@ -1,0 +1,10 @@
+Trinity Accord homepage deployment proof
+homepage_change=narrow_human_intent_window
+source_merge_commit=e8b82b76d03a32f92a158ebeb0ae10d4ef104eb0
+expected_marker_1=A narrow historical window
+expected_marker_2=AI had become a cultural mirror, but not yet a routine autonomous actor.
+expected_marker_3=Formation · 470 days
+expected_marker_4=Reproducible form; non-repeatable provenance
+language_policy=english_primary_with_concise_chinese_headings
+authority_boundary=non_authoritative_deployment_evidence_only
+canonical_effect=none
