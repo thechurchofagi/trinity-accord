@@ -1,0 +1,110 @@
+name: Apply Live Deployment Deep Audit
+
+on:
+  push:
+    branches:
+      - deep-audit-live-deployment-contract
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: deep-audit-live-deployment-contract
+          fetch-depth: 0
+
+      - name: Apply audited deployment fixes
+        run: python3 scripts/apply_live_deployment_audit.py
+
+      - name: Install test dependencies
+        run: python3 -m pip install -q -r requirements-ci.txt
+
+      - name: Compile deployment checkers
+        run: |
+          python3 -m py_compile \
+            scripts/public_machine_deployment_contract.py \
+            scripts/smoke_live_discovery_contract.py \
+            scripts/smoke_live_discovery_contract_v2.py \
+            scripts/check_deployment_freshness.py \
+            scripts/check_deployment_freshness_v2.py
+
+      - name: Run focused deployment contract tests
+        run: python3 -m pytest tests/test_live_deployment_contract.py -q --tb=short
+
+      - name: Build local exact mirror fixture
+        run: |
+          python3 - <<'PY'
+          import shutil
+          import sys
+          from pathlib import Path
+
+          root = Path.cwd()
+          sys.path.insert(0, str(root / "scripts"))
+          import public_machine_deployment_contract as contract
+          import check_deployment_freshness as freshness
+
+          site = Path("/tmp/trinity-live-audit-site")
+          if site.exists():
+              shutil.rmtree(site)
+          paths = set(contract.DEPLOYMENT_BYTE_SURFACES)
+          paths.update(contract.SMOKE_JSON_SURFACES)
+          paths.update(contract.SMOKE_TEXT_SURFACES)
+          for path in paths:
+              src = root / path.lstrip("/")
+              dst = site / path.lstrip("/")
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(src, dst)
+
+          mirror = site / "builder-bundles/record-chain-builder.mjs"
+          mirror.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copyfile(root / "downloads/record-chain-builder.mjs", mirror)
+
+          for route, markers in freshness.STATIC_PAGE_MARKERS.items():
+              target = site / ("index.html" if route == "/" else f"{route.strip('/')}/index.html")
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text("\n".join(markers), encoding="utf-8")
+          PY
+
+      - name: Run strict local live-smoke simulation
+        run: |
+          python3 -m http.server 8765 --directory /tmp/trinity-live-audit-site >/tmp/trinity-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          sleep 2
+          python3 scripts/smoke_live_discovery_contract_v2.py \
+            --site http://127.0.0.1:8765 --strict-digest --timeout 5
+          python3 scripts/check_deployment_freshness_v2.py \
+            --site-dir /tmp/trinity-live-audit-site
+
+      - name: Run complete current-system suite
+        run: |
+          set +e
+          python3 scripts/run_current_system_tests.py > /tmp/live-deployment-audit.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            grep -n -E "FAIL:|FAILED|AssertionError|Traceback|E   " /tmp/live-deployment-audit.log | tail -n 60 || true
+            tail -n 120 /tmp/live-deployment-audit.log
+          else
+            tail -n 30 /tmp/live-deployment-audit.log
+          fi
+          exit "$status"
+
+      - name: Remove one-shot audit machinery
+        run: |
+          rm scripts/apply_live_deployment_audit.py
+          rm .github/workflows/apply-live-deployment-audit.yml
+
+      - name: Commit validated fixes
+        run: |
+          git config user.name "trinity-live-deployment-audit-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Fix live deployment contract drift and cache verification"
+          git push origin HEAD:deep-audit-live-deployment-contract
