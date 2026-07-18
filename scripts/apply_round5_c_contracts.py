@@ -1,16 +1,86 @@
 #!/usr/bin/env python3
+"""Apply small source-contract edits that are awkward to stage through Contents API."""
 from pathlib import Path
-import base64,io,tarfile
-ROOT=Path(__file__).resolve().parents[1]
-PAYLOAD="""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"""
-raw=base64.b64decode(PAYLOAD)
-with tarfile.open(fileobj=io.BytesIO(raw),mode="r:gz") as tf:
-    for member in tf.getmembers():
-        target=(ROOT/member.name).resolve()
-        if ROOT.resolve() not in target.parents:
-            raise SystemExit(f"unsafe path: {member.name}")
-        if not member.isfile():
-            raise SystemExit(f"unexpected member type: {member.name}")
-        target.parent.mkdir(parents=True,exist_ok=True)
-        target.write_bytes(tf.extractfile(member).read())
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def replace_once(text: str, old: str, new: str, label: str) -> str:
+    if old not in text:
+        raise RuntimeError(f"{label}: target missing")
+    return text.replace(old, new, 1)
+
+
+public_path = ROOT / "scripts/public_machine_deployment_contract.py"
+public = public_path.read_text(encoding="utf-8")
+if '"/api/agent-live-health.v1.json"' not in public:
+    public = replace_once(
+        public,
+        '    "/.well-known/pages-production-closure.v1.json",\n',
+        '    "/.well-known/pages-production-closure.v1.json",\n'
+        '    "/api/agent-live-health.v1.json",\n'
+        '    "/api/formal-builder-bundles.v1.json",\n'
+        '    "/builder-bundles/download_and_run_builder_bundle.py",\n'
+        '    "/builder-bundles/trinity-guardian-full-registration-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-guardian-full-registration-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-guardian-retirement-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-guardian-retirement-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",\n'
+        '    "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",\n'
+        '    "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",\n',
+        "deployment byte surfaces",
+    )
+    public_path.write_text(public, encoding="utf-8")
+
+home_path = ROOT / "scripts/test_homepage_status_sync_contract.py"
+home = home_path.read_text(encoding="utf-8")
+if '"scripts/check_deployment_freshness_v2.py"' not in home:
+    home = replace_once(
+        home,
+        '        "scripts/check_homepage_live_freshness.py",\n',
+        '        "scripts/check_homepage_live_freshness.py",\n'
+        '        "scripts/check_deployment_freshness_v2.py",\n'
+        '        "Equivalent generated state already reached main",\n'
+        '        "retrying the existing rebased commit without rewriting it",\n',
+        "homepage freshness markers",
+    )
+if '"Build Record Chain Batch"' not in home:
+    home = replace_once(
+        home,
+        '        "Waiting Heartbeat Status Sync",\n',
+        '        "Waiting Heartbeat Status Sync",\n'
+        '        "Build Record Chain Batch",\n'
+        '        "Stamp Record Chain Batches with OpenTimestamps",\n'
+        '        "Waiting Heartbeat Arweave Capsule",\n'
+        '        "Rebuild Agent-Declared Verification Index",\n',
+        "writer workflow coverage",
+    )
+if '        "github.event_name == \'workflow_run\'",\n' not in home:
+    home = replace_once(
+        home,
+        '        "steps.live_pre.outcome == \'failure\'",\n',
+        '        "steps.live_pre.outcome == \'failure\'",\n'
+        '        "github.event_name == \'workflow_run\'",\n',
+        "workflow-run deploy condition marker",
+    )
+old_condition = "if: ${{ github.event_name == 'push' || needs.sync.outputs.changed == 'true' ||"
+new_condition = "if: ${{ github.event_name == 'push' || github.event_name == 'workflow_run' || needs.sync.outputs.changed == 'true' ||"
+if old_condition in home:
+    home = home.replace(old_condition, new_condition, 1)
+if '        "upstream_workflow_completed",\n' not in home:
+    home = replace_once(
+        home,
+        '        "live_freshness_failed",\n',
+        '        "live_freshness_failed",\n        "upstream_workflow_completed",\n',
+        "workflow-run deploy reason",
+    )
+home_path.write_text(home, encoding="utf-8")
+
 print("ROUND5_C_CONTRACTS_APPLIED")
