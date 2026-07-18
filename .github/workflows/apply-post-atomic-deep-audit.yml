@@ -1,0 +1,68 @@
+name: Apply Post-Atomic Deep Audit
+
+on:
+  push:
+    branches:
+      - fix/post-atomic-deep-audit-final2
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/post-atomic-deep-audit-final2
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Apply audited fixes
+        run: python scripts/apply_post_atomic_deep_audit.py
+
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-ci.txt
+
+      - name: Run focused regression suite
+        env:
+          PYTHONPATH: apps/record_chain_intake_gateway
+        run: |
+          python -m pytest \
+            apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
+            tests/test_external_agent_journey_swarm_contract.py \
+            -q
+
+      - name: Run current-system suite
+        run: python scripts/run_current_system_tests.py
+
+      - name: Remove one-shot audit machinery
+        run: |
+          rm scripts/apply_post_atomic_deep_audit.py
+          rm .github/workflows/apply-post-atomic-deep-audit.yml
+
+      - name: Commit validated fixes
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-deep-audit-bot"
+          git config user.email "actions@github.com"
+          git add \
+            apps/record_chain_intake_gateway/app.py \
+            apps/record_chain_intake_gateway/gateway/github_atomic.py \
+            apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
+            scripts/smoke_external_agent_journey_swarm.py \
+            tests/test_external_agent_journey_swarm_contract.py \
+            api/record-chain-receipt-response.v1.json \
+            scripts/apply_post_atomic_deep_audit.py \
+            .github/workflows/apply-post-atomic-deep-audit.yml
+          git commit -m "Fix post-atomic recovery, idempotency, and live-smoke gaps"
+          git push origin HEAD:fix/post-atomic-deep-audit-final2
