@@ -31,7 +31,12 @@ jobs:
       - name: Apply audited alignment changes
         run: |
           python3 scripts/apply_machine_entry_builder_alignment.py
-          python3 scripts/apply_machine_entry_docs_core.py
+          python3 scripts/apply_machine_entry_first_contact.py
+          python3 scripts/apply_machine_entry_agent_start_doc.py
+          python3 scripts/apply_quickstart_scope_fix.py
+          python3 scripts/apply_quickstart_verification_flags.py
+          python3 scripts/apply_quickstart_context_minimums.py
+          python3 scripts/apply_machine_discovery_text_alignment.py
           python3 scripts/apply_llms_full_drift_fixes.py
           python3 scripts/apply_machine_contract_alignment.py
           python3 scripts/apply_machine_reading_router_alignment.py
@@ -68,6 +73,12 @@ jobs:
         run: |
           rm scripts/apply_machine_entry_builder_alignment.py
           rm scripts/apply_machine_entry_docs_core.py
+          rm scripts/apply_machine_entry_first_contact.py
+          rm scripts/apply_machine_entry_agent_start_doc.py
+          rm scripts/apply_quickstart_scope_fix.py
+          rm scripts/apply_quickstart_verification_flags.py
+          rm scripts/apply_quickstart_context_minimums.py
+          rm scripts/apply_machine_discovery_text_alignment.py
           rm scripts/apply_llms_full_drift_fixes.py
           rm scripts/apply_machine_contract_alignment.py
           rm scripts/apply_machine_reading_router_alignment.py
