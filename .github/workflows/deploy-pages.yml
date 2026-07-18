@@ -356,7 +356,7 @@ jobs:
           grep -Fq "Official-live records meeting every self-discovery, decision, and execution condition" ./_site/index.html
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa02 # v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: ./_site
 
