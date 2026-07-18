@@ -7,6 +7,11 @@
   "current_start": "/api/agent-start.v2.json",
   "current_builder": "/downloads/record-chain-builder.mjs",
   "current_gateway_contract": "/api/record-chain-intake-gateway.v1.json",
+  "p0_agent_context_router": {
+    "path": "/api/agent-minimal-context.v1.json",
+    "does_not_replace_canonical_router": true,
+    "canonical_router": "/api/agent-first-contact.json"
+  },
   "historical_scope": [
     "legacy fixed reading sequence",
     "legacy issue intake",
