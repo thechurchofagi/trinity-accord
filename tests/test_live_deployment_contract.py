@@ -31,10 +31,7 @@ def test_current_links_and_well_known_pass_shared_semantics() -> None:
 
 
 def test_live_entrypoint_semantics_pass_on_repository_sources() -> None:
-    objects = {
-        path: load(path)
-        for path in contract.SMOKE_JSON_SURFACES
-    }
+    objects = {path: load(path) for path in contract.SMOKE_JSON_SURFACES}
     texts = {
         path: (ROOT / path.lstrip("/")).read_text(encoding="utf-8")
         for path in contract.SMOKE_TEXT_SURFACES
@@ -106,5 +103,5 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     )
     assert "scripts/smoke_live_discovery_contract_v2.py" in workflow
     assert "scripts/check_deployment_freshness_v2.py" in workflow
-    assert '"scripts/smoke_live_discovery_contract_v2.py"' in workflow
-    assert '"scripts/public_machine_deployment_contract.py"' in workflow
+    assert '"scripts/**"' in workflow
+    assert "scripts/public_machine_deployment_contract.py" in workflow
