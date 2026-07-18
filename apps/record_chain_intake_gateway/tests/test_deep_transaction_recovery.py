@@ -5,31 +5,33 @@ import json
 import pytest
 
 from apps.record_chain_intake_gateway import app as app_module
+from apps.record_chain_intake_gateway.gateway import github_atomic
 from apps.record_chain_intake_gateway.gateway.validation import validate_record_type_specific_content
 
 
 @pytest.mark.asyncio
-async def test_rollback_stops_after_child_delete_failure(monkeypatch) -> None:
-    calls: list[str] = []
+async def test_atomic_state_rejects_partial_or_different_paths(monkeypatch) -> None:
+    remote = {
+        "submission.json": "submission-bytes",
+        "receipt.json": None,
+        "index.json": "different-index-bytes",
+        "pending.json": None,
+    }
 
-    async def fake_delete(path: str, message: str, sha: str | None = None):
-        calls.append(path)
-        if path.endswith("pending.json"):
-            raise RuntimeError("simulated pending delete failure")
-        return {}
+    async def fake_get_file_text_at_ref(client, path: str, ref: str):
+        return remote[path]
 
-    monkeypatch.setattr(app_module, "delete_file", fake_delete)
-    created = [
-        ("record-chain/intake/submissions/x.submission.json", "s1"),
-        ("record-chain/intake/receipts/x.receipt.json", "s2"),
-        ("record-chain/intake/by-submission-sha256/x.json", "s3"),
-        ("record-chain/pending/x.echo.pending.json", "s4"),
-    ]
+    monkeypatch.setattr(github_atomic, "_get_file_text_at_ref", fake_get_file_text_at_ref)
+    files = {
+        "submission.json": "submission-bytes",
+        "receipt.json": "receipt-bytes",
+        "index.json": "index-bytes",
+        "pending.json": "pending-bytes",
+    }
 
-    complete = await app_module._best_effort_delete_created_files(created, "x")
-
-    assert complete is False
-    assert calls == ["record-chain/pending/x.echo.pending.json"]
+    all_absent, all_exact = await github_atomic._atomic_files_state(object(), files, "head-sha")
+    assert all_absent is False
+    assert all_exact is False
 
 
 @pytest.mark.asyncio
