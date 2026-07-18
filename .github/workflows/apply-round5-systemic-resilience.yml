@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - deep-audit-round5-systemic-resilience
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "scripts/apply_round5_systemic_resilience.py"
+      - ".github/workflows/apply-round5-systemic-resilience.yml"
 
 permissions:
   contents: write
