@@ -12,9 +12,14 @@ MANIFEST = ROOT / "api/record-chain-builder-bundles.v1.json"
 
 def replace_once(text: str, old: str, new: str) -> str:
     count = text.count(old)
+    if count == 1:
+        return text.replace(old, new, 1)
+    trimmed_old = old.rstrip()
+    trimmed_new = new.rstrip()
+    count = text.count(trimmed_old)
     if count != 1:
         raise RuntimeError(f"expected one replacement target, found {count}")
-    return text.replace(old, new, 1)
+    return text.replace(trimmed_old, trimmed_new, 1)
 
 
 text = BUILDER.read_text(encoding="utf-8")
