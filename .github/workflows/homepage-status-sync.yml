@@ -41,6 +41,8 @@ on:
       - "CNAME"
       - ".github/workflows/deploy-pages.yml"
       - ".github/workflows/homepage-status-sync.yml"
+      - "scripts/check_deployment_freshness_v2.py"
+      - "scripts/public_machine_deployment_contract.py"
 
   schedule:
     # Central hourly sync. Do not add homepage status writes back into business workflows.
@@ -61,6 +63,10 @@ on:
       - "Echo human review action"
       - "Waiting Heartbeat Status Sync"
       - "Waiting Heartbeat Submit"
+      - "Build Record Chain Batch"
+      - "Stamp Record Chain Batches with OpenTimestamps"
+      - "Waiting Heartbeat Arweave Capsule"
+      - "Rebuild Agent-Declared Verification Index"
     types: [completed]
 
 permissions:
@@ -176,7 +182,17 @@ jobs:
               api/public-home-status.json \
               index.md \
               sitemap.xml
-            git commit --amend --no-edit
+
+            if git diff --cached --quiet; then
+              if [[ "$(git rev-parse HEAD)" == "$(git rev-parse origin/main)" ]]; then
+                echo "Equivalent generated state already reached main; no retry push is required."
+                printf 'expected_sha=%s\n' "$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              echo "No regenerated delta; retrying the existing rebased commit without rewriting it."
+            else
+              git commit --amend --no-edit
+            fi
 
             sleep $((attempt * 5))
           done
@@ -205,13 +221,13 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/check_homepage_live_freshness.py --site "$SITE_URL" --timeout 20
-          python3 scripts/check_deployment_freshness.py --site "$SITE_URL" --timeout 20
+          python3 scripts/check_deployment_freshness_v2.py --site "$SITE_URL" --timeout 20
 
       # Explicitly dispatch after generated changes: workflow-authenticated pushes do not reliably trigger downstream Pages workflows.
       # Every source push also dispatches, even when generated status files are unchanged.
       - name: Dispatch Deploy Pages
         id: deploy_dispatch
-        if: ${{ github.event_name == 'push' || needs.sync.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (needs.sync.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_run' || needs.sync.outputs.changed == 'true' || (github.event_name == 'workflow_dispatch' && github.event.inputs.force_deploy == 'true') || (needs.sync.outputs.changed != 'true' && steps.live_pre.outcome == 'failure') }}
         env:
           GH_TOKEN: ${{ github.token }}
           COMMIT_CHANGED: ${{ needs.sync.outputs.changed }}
@@ -228,6 +244,8 @@ jobs:
             reason="manual_force_deploy"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             reason="source_push"
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            reason="upstream_workflow_completed"
           elif [[ "${LIVE_PRE_OUTCOME}" == "failure" ]]; then
             reason="live_freshness_failed"
           fi
