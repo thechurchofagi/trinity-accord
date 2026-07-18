@@ -42,7 +42,7 @@ jobs:
           provenance="source receipt unavailable"
           artifact_name="pages-source-receipt-${RUN_ID}"
           artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/artifacts" \
-            --jq ".artifacts[] | select(.name == \"${artifact_name}\") | .id" | head -n 1 || true)"
+            --jq "first(.artifacts[] | select(.name == \"${artifact_name}\") | .id) // \"\"")"
 
           if [[ -n "${artifact_id}" ]]; then
             tmpdir="$(mktemp -d)"
