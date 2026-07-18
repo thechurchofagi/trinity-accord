@@ -81,6 +81,9 @@ if '        "upstream_workflow_completed",\n' not in home:
         '        "live_freshness_failed",\n        "upstream_workflow_completed",\n',
         "workflow-run deploy reason",
     )
+home = home.replace('        "Verify public home status has no drift",\n', '        "Verify public source state",\n')
+home = home.replace('        "cmp ./api/public-home-status.json ./_site/api/public-home-status.json",\n', '        "cmp api/public-home-status.json _site/api/public-home-status.json",\n')
+home = home.replace('        "cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json",\n', '        "cmp api/record-chain-status.json _site/api/record-chain-status.json",\n')
 home_path.write_text(home, encoding="utf-8")
 
 print("ROUND5_C_CONTRACTS_APPLIED")
