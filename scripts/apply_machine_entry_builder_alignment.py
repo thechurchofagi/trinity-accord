@@ -32,10 +32,22 @@ addition = r'\1' + "\n" + "    --digital-profile integrity_checked \\\n    --rel
 text, count = re.subn(pattern, addition, text, count=1)
 if count != 1:
     raise RuntimeError(f"verification help injection count={count}")
-section = text.index("# ── Context-insufficient")
-needle = '    --provider "Example Runtime" ' + "\\" + "\n"
-pos = text.index(needle, section) + len(needle)
-text = text[:pos] + '    --body "Insufficient context for a stronger record" ' + "\\" + "\n" + text[pos:]
+lines = text.splitlines(keepends=True)
+section_seen = False
+inserted = False
+for index, line in enumerate(lines):
+    if "# ── Context-insufficient" in line:
+        section_seen = True
+        continue
+    if section_seen and '--provider "Example Runtime"' in line:
+        newline = "\r\n" if line.endswith("\r\n") else "\n"
+        continuation = "\\" if "\\" in line else ""
+        lines.insert(index + 1, f'    --body "Insufficient context for a stronger record" {continuation}{newline}')
+        inserted = True
+        break
+if not inserted:
+    raise RuntimeError("context-insufficient provider line not found")
+text = "".join(lines)
 BUILDER.write_text(text, encoding="utf-8")
 
 manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
