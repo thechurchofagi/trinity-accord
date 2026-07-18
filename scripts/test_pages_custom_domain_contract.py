@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pages custom domain contract must be explicit and preserved in source."""
+"""Pages custom-domain identity and live verification must be explicit."""
 import sys
 from pathlib import Path
 
@@ -23,17 +23,18 @@ else:
     for phrase in [
         "_site/CNAME",
         "www.trinityaccord.org",
-        "Smoke live public discovery contract",
+        "Verify live machine contract after edge propagation",
         "--strict-digest",
-        "smoke_live_discovery_contract.py",
+        "smoke_live_discovery_contract_v2.py",
+        "check_deployment_freshness_v2.py",
     ]:
         if phrase not in text:
             errors.append(f"deploy-pages.yml missing custom-domain/live-smoke phrase: {phrase}")
 
 if errors:
     print("FAIL: Pages custom domain contract errors:")
-    for e in errors:
-        print("  -", e)
+    for error in errors:
+        print("  -", error)
     sys.exit(1)
 
-print("PASS: Pages custom domain contract is explicit")
+print("PASS: Pages custom-domain identity and v2 live verification are explicit")
