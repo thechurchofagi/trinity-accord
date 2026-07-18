@@ -40,6 +40,7 @@ jobs:
           python3 scripts/apply_llms_full_drift_fixes.py
           python3 scripts/apply_machine_contract_alignment.py
           python3 scripts/apply_machine_reading_router_alignment.py
+          python3 scripts/apply_external_quickstart_contract_alignment.py
           python3 scripts/apply_machine_discovery_alignment.py
           python3 scripts/apply_context_insufficient_e2e_alignment.py
 
@@ -95,6 +96,7 @@ jobs:
           rm scripts/apply_llms_full_drift_fixes.py
           rm scripts/apply_machine_contract_alignment.py
           rm scripts/apply_machine_reading_router_alignment.py
+          rm scripts/apply_external_quickstart_contract_alignment.py
           rm scripts/apply_machine_discovery_alignment.py
           rm scripts/apply_context_insufficient_e2e_alignment.py
           rm .github/workflows/apply-machine-entry-alignment-audit.yml
