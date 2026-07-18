@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   apply-and-validate:
@@ -21,14 +23,17 @@ jobs:
           fetch-depth: 0
 
       - name: Apply audited deployment fixes
+        id: apply
         run: |
           python3 scripts/apply_live_contract_set_fix.py
           python3 scripts/apply_live_deployment_audit.py
 
       - name: Install test dependencies
+        id: deps
         run: python3 -m pip install -q -r requirements-ci.txt
 
       - name: Compile deployment checkers
+        id: compile
         run: |
           python3 -m py_compile \
             scripts/public_machine_deployment_contract.py \
@@ -38,9 +43,11 @@ jobs:
             scripts/check_deployment_freshness_v2.py
 
       - name: Run focused deployment contract tests
+        id: focused
         run: python3 -m pytest tests/test_live_deployment_contract.py -q --tb=short
 
       - name: Build local exact mirror fixture
+        id: fixture
         run: |
           python3 - <<'PY'
           import shutil
@@ -75,6 +82,7 @@ jobs:
           PY
 
       - name: Run strict local live-smoke simulation
+        id: local_smoke
         run: |
           python3 -m http.server 8765 --directory /tmp/trinity-live-audit-site >/tmp/trinity-http.log 2>&1 &
           server_pid=$!
@@ -86,6 +94,7 @@ jobs:
             --site-dir /tmp/trinity-live-audit-site
 
       - name: Run complete current-system suite
+        id: current
         run: |
           set +e
           python3 scripts/run_current_system_tests.py > /tmp/live-deployment-audit.log 2>&1
@@ -97,6 +106,20 @@ jobs:
             tail -n 30 /tmp/live-deployment-audit.log
           fi
           exit "$status"
+
+      - name: Report audit failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPLY: ${{ steps.apply.outcome }}
+          DEPS: ${{ steps.deps.outcome }}
+          COMPILE: ${{ steps.compile.outcome }}
+          FOCUSED: ${{ steps.focused.outcome }}
+          FIXTURE: ${{ steps.fixture.outcome }}
+          LOCAL_SMOKE: ${{ steps.local_smoke.outcome }}
+          CURRENT: ${{ steps.current.outcome }}
+        run: |
+          gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit one-shot failed. Step outcomes: apply=${APPLY}, deps=${DEPS}, compile=${COMPILE}, focused=${FOCUSED}, fixture=${FIXTURE}, local_smoke=${LOCAL_SMOKE}, current=${CURRENT}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
       - name: Remove one-shot audit machinery
         run: |
