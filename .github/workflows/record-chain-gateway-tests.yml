@@ -8,9 +8,34 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
+  apply-final-test-migration:
+    if: ${{ github.event_name == 'pull_request' && github.head_ref == 'fix/atomic-intake-materialization' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Migrate remaining tests
+        run: |
+          if grep -q 'app_module.AtomicCreateConflict' apps/record_chain_intake_gateway/tests/test_idempotency_index.py; then
+            echo "Remaining test migration already applied."
+            exit 0
+          fi
+          python3 scripts/migrate_atomic_gateway_remaining_tests.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_retired_endpoints.py
+          git commit -m "test: finish atomic Gateway test migration"
+          git push origin HEAD:${{ github.head_ref }}
+
   gateway-tests:
     runs-on: ubuntu-24.04
     steps:
