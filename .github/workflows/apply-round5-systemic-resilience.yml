@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      - "scripts/apply_round5_systemic_resilience.py"
+      - "scripts/apply_round5_*.py"
       - ".github/workflows/apply-round5-systemic-resilience.yml"
 
 permissions:
@@ -27,7 +27,13 @@ jobs:
           fetch-depth: 0
 
       - name: Apply non-workflow fixes
-        run: python3 scripts/apply_round5_systemic_resilience.py
+        run: |
+          set -euo pipefail
+          python3 scripts/apply_round5_a_public.py
+          python3 scripts/apply_round5_b_helpers.py
+          python3 scripts/apply_round5_c_contracts.py
+          python3 scripts/apply_round5_d_tests.py
+          python3 scripts/apply_round5_e_runner.py
 
       - name: Install test dependencies
         run: python3 -m pip install -q -r requirements-ci.txt
@@ -44,8 +50,14 @@ jobs:
           python3 scripts/test_round5_systemic_resilience.py
           python3 -m pytest tests/test_round5_systemic_resilience.py tests/test_live_deployment_contract.py -q --tb=short
 
-      - name: Remove applicator
-        run: rm scripts/apply_round5_systemic_resilience.py
+      - name: Remove applicators
+        run: |
+          rm -f scripts/apply_round5_systemic_resilience.py
+          rm -f scripts/apply_round5_a_public.py
+          rm -f scripts/apply_round5_b_helpers.py
+          rm -f scripts/apply_round5_c_contracts.py
+          rm -f scripts/apply_round5_d_tests.py
+          rm -f scripts/apply_round5_e_runner.py
 
       - name: Commit validated non-workflow fixes
         run: |
