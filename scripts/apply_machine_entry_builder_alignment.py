@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,11 +16,10 @@ def replace_once(text: str, old: str, new: str) -> str:
     if count == 1:
         return text.replace(old, new, 1)
     trimmed_old = old.rstrip()
-    trimmed_new = new.rstrip()
     count = text.count(trimmed_old)
     if count != 1:
         raise RuntimeError(f"expected one replacement target, found {count}")
-    return text.replace(trimmed_old, trimmed_new, 1)
+    return text.replace(trimmed_old, new.rstrip(), 1)
 
 
 text = BUILDER.read_text(encoding="utf-8")
@@ -37,57 +37,33 @@ text = replace_once(
 )
 text = replace_once(
     text,
-    '''function validateFormalInputs(command, opts) {
-  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
-''',
-    '''function validateFormalInputs(command, opts) {
-  if (command === "context-insufficient") {
-    requireExplicit(opts, "body", "--body or --body-file");
-    return;
-  }
-  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
-''',
+    'function validateFormalInputs(command, opts) {\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;',
+    'function validateFormalInputs(command, opts) {\n  if (command === "context-insufficient") {\n    requireExplicit(opts, "body", "--body or --body-file");\n    return;\n  }\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;',
 )
 text = replace_once(
     text,
-    '''  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
-    errorExit("--loaded-urls is required when declaring --context-level CC-3");
-  }
-''',
-    '''  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
-    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");
-  }
-''',
+    '  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3");\n  }',
+    '  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");\n  }',
 )
-text = replace_once(
-    text,
-    '''    --fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\
-    --context-level CC-3 \\
-''',
-    '''    --fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\
-    --digital-profile integrity_checked \\
-    --relationships-checked hashes,indexes \\
-    --physical-observation none \\
-    --external-witness none \\
-    --coverage-scope component_subset \\
-    --limitations "No physical observation,No external witness" \\
-    --claims-not-made "No authority claim,No attestation claim" \\
-    --corrections-or-supersession-checked true \\
-    --context-level CC-3 \\
-''',
+pattern = r'(?m)^(\s+--fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\\\)$'
+addition = (
+    r'\1' + "\n"
+    "    --digital-profile integrity_checked \\\n"
+    "    --relationships-checked hashes,indexes \\\n"
+    "    --physical-observation none \\\n"
+    "    --external-witness none \\\n"
+    "    --coverage-scope component_subset \\\n"
+    "    --limitations \"No physical observation,No external witness\" \\\n"
+    "    --claims-not-made \"No authority claim,No attestation claim\" \\\n"
+    "    --corrections-or-supersession-checked true \\\n"
 )
-text = replace_once(
-    text,
-    '''  node record-chain-builder.mjs context-insufficient \\
-    --actor-label "Example Agent" \\
-    --provider "Example Runtime" \\
-    --key-dir''',
-    '''  node record-chain-builder.mjs context-insufficient \\
-    --actor-label "Example Agent" \\
-    --provider "Example Runtime" \\
-    --body "Insufficient context for a stronger record" \\
-    --key-dir''',
-)
+text, count = re.subn(pattern, addition, text, count=1)
+if count != 1:
+    raise RuntimeError(f"verification help injection count={count}")
+pattern = r'(?ms)(node record-chain-builder\.mjs context-insufficient \\\\n\s+--actor-label "Example Agent" \\\\n\s+--provider "Example Runtime" \\\\n)'
+text, count = re.subn(pattern, r'\1    --body "Insufficient context for a stronger record" \\\n', text, count=1)
+if count != 1:
+    raise RuntimeError(f"context-insufficient help injection count={count}")
 BUILDER.write_text(text, encoding="utf-8")
 
 manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
