@@ -48,7 +48,7 @@ jobs:
             tests/test_external_agent_journey_swarm_contract.py \
             -q --tb=short > /tmp/post-atomic-focused.log 2>&1
           status=$?
-          cat /tmp/post-atomic-focused.log
+          if [ "$status" -ne 0 ]; then cat /tmp/post-atomic-focused.log; else tail -n 2 /tmp/post-atomic-focused.log; fi
           exit "$status"
 
       - name: Run current-system suite
@@ -56,7 +56,7 @@ jobs:
           set +e
           python3 scripts/run_current_system_tests.py > /tmp/post-atomic-current.log 2>&1
           status=$?
-          tail -n 200 /tmp/post-atomic-current.log
+          tail -n 30 /tmp/post-atomic-current.log
           exit "$status"
 
       - name: Remove one-shot audit machinery
