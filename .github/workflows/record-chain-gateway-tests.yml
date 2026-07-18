@@ -8,35 +8,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply-atomic-fixture-migration:
-    if: ${{ github.event_name == 'pull_request' && github.head_ref == 'fix/atomic-intake-materialization' }}
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 1
-          show-progress: false
-
-      - name: Migrate fixture and environment contract
-        run: |
-          if grep -q 'patch("app.create_files_atomic", atomic_mock)' apps/record_chain_intake_gateway/tests/conftest.py; then
-            echo "Atomic fixture migration already applied."
-            exit 0
-          fi
-          python3 scripts/migrate_atomic_gateway_test_fixture.py
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            apps/record_chain_intake_gateway/tests/conftest.py \
-            apps/record_chain_intake_gateway/gateway/github_atomic.py \
-            apps/record_chain_intake_gateway/app.py
-          git commit -m "test: migrate shared fixture to atomic persistence"
-          git push origin HEAD:${{ github.head_ref }}
-
   gateway-tests:
     runs-on: ubuntu-24.04
     steps:
