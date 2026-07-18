@@ -112,10 +112,13 @@
     "receipt_is_not_final_chain_record": true,
     "record_chain_append_is_internal": true,
     "record_hashes_assigned_server_side": true,
-    "submit_persists_intake": true
+    "submit_persists_intake": true,
+    "final_record_hashes_assigned_server_side": true,
+    "builder_assigns_client_authorship_and_oath_hashes": true,
+    "generated_hash_source_rule": "Builder generates client authorship and oath-derived hashes; Gateway generates receipt hashes; final-chain tooling assigns final record, content, and chain hashes."
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-07-10T00:00:00Z",
+  "updated_at": "2026-07-18T00:00:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -138,5 +141,44 @@
     "verification_records_must_not_embed_guardian_application": true,
     "guardian_application_must_be_submitted_as_standalone_record": true,
     "linked_guardian_application_request_disabled": true
+  },
+  "runtime_alignment": {
+    "implementation": "/apps/record_chain_intake_gateway/app.py",
+    "validation": "/apps/record_chain_intake_gateway/gateway/validation.py",
+    "accepted_record_types": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "classification_update",
+      "context_insufficient_notice"
+    ],
+    "formal_oath_record_types": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "classification_update"
+    ],
+    "context_compatibility_minimums": {
+      "echo": "CC-3",
+      "verification_V0_to_V2": "CC-2",
+      "verification_V3_to_V5": "CC-3",
+      "guardian_application": "CC-3",
+      "guardian_retirement": "CC-1",
+      "propagation": "CC-2",
+      "correction": "CC-1",
+      "classification_update": "CC-2",
+      "context_insufficient_notice": "CC-0"
+    },
+    "default_max_submission_bytes": 524288,
+    "strict_json_duplicate_keys_rejected": true,
+    "submit_intake_files_materialized_in_one_git_commit": true,
+    "receipt_and_terminal_status_hashes_verified_on_read": true,
+    "live_readiness_endpoint": "/record-chain/readiness"
   }
 }

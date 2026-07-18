@@ -34,6 +34,11 @@
 # Propagate: /agent-propagate/
 # Authority: /authority/
 
+# OPERATIONAL PRECEDENCE
+# /api/agent-first-contact.json is the canonical machine router.
+# /api/agent-required-reading.json is subordinate; /api/agent-entry-protocol.json and Gateway v1 are historical only.
+# Verified Builder bytes/manifest define build behavior; live Gateway/current schemas define accepted I/O; public status/indexes define final inclusion.
+#
 # CURRENT MACHINE ENTRYPOINTS
 # /llms.txt
 # /external-agent-quickstart/

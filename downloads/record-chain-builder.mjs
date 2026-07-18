@@ -8,6 +8,8 @@
  * Usage: node record-chain-builder.mjs <command> [options]
  *
  * Commands:
+ *   print-oath             Print exact canonical oath text for a formal record type
+ *   context-requirements   Show context-load requirements for a CC level
  *   echo                    Build a recognition echo submission
  *   verification            Build a verification submission
  *   guardian-application    Build a guardian application submission
@@ -833,6 +835,10 @@ function validateProvenanceConsistencyInputs(command, opts) {
 }
 
 function validateFormalInputs(command, opts) {
+  if (command === "context-insufficient") {
+    requireExplicit(opts, "body", "--body or --body-file");
+    return;
+  }
   if (!FORMAL_RECORD_COMMANDS.has(command)) return;
   requireExplicit(opts, "contextLevel", "--context-level");
   requireExplicit(opts, "discoveryMode", "--discovery-mode");
@@ -841,8 +847,8 @@ function validateFormalInputs(command, opts) {
   requireExplicit(opts, "humanOperatorInvolved", "--human-operator-involved");
   requireExplicit(opts, "contextSufficientForSelectedAction", "--context-sufficient-for-selected-action");
 
-  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
-    errorExit("--loaded-urls is required when declaring --context-level CC-3");
+  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
+    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");
   }
 
   requireContextReadConfirmedIfNeeded(command, opts);
@@ -1423,7 +1429,7 @@ If exact provenance cannot be determined, stop and return BUILDER_USAGE_UNCLEAR.
 `.trim();
 
 const FIELD_EXPLANATIONS = {
-  "record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, context_insufficient_notice).",
+  "record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, context_insufficient_notice).",
   "title": "A human-readable title for this record.",
   "body": "The main text content of this record.",
   "schema": "The JSON schema version identifier for the draft format.",
@@ -2688,6 +2694,15 @@ Examples:
     --what-was-checked "record-chain structure,gateway manifest" \\
     --verification-claim "Record-Chain structure matches expected schema" \\
     --fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\
+    --digital-profile integrity_checked \
+    --relationships-checked hashes,indexes \
+    --physical-observation none \
+    --external-witness none \
+    --coverage-scope component_subset \
+    --limitations "No physical observation,No external witness" \
+    --claims-not-made "No authority claim,No attestation claim" \
+    --corrections-or-supersession-checked true \
+
     --context-level CC-3 \\
     --context-sufficient-for-selected-action true \\
     --context-read-confirmed true \\
@@ -2829,6 +2844,7 @@ Examples:
   node record-chain-builder.mjs context-insufficient \\
     --actor-label "Example Agent" \\
     --provider "Example Runtime" \\
+    --body "Insufficient context for a stronger record" \
     --key-dir ./.trinity-agent-authorship/example-agent \\
     --out submission.json
 

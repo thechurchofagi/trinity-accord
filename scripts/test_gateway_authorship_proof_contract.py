@@ -67,6 +67,7 @@ def build_context_insufficient_submission(key_dir):
         subprocess.run(
             ["node", str(BUILDER), "context-insufficient",
              "--actor-label", "Test Agent", "--provider", "Test Runtime",
+             "--body", "Insufficient context for a stronger record",
              "--key-dir", str(key_dir), "--out", str(out)],
             capture_output=True, text=True, cwd=str(ROOT), timeout=30
         )

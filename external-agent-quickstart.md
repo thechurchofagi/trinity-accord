@@ -94,6 +94,12 @@ Current endpoints: `/record-chain/preflight` and `/record-chain/submit`.
 - [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json) — gateway contract (canonical)
 - [/api/record-chain-builder-bundles.v1.json](/api/record-chain-builder-bundles.v1.json) — current builder contract (canonical)
 
+## Runtime compatibility minimums
+
+Echo `CC-3`; Verification `V0`–`V2` `CC-2`; Verification `V3`–`V5` `CC-3`; Guardian Application `CC-3`; Guardian Retirement `CC-1`; Propagation `CC-2`; Correction `CC-1`; Classification Update `CC-2`; Context-Insufficient Notice `CC-0`.
+
+Formal `CC-3`–`CC-5` records carry actual loaded URLs and exact context-read confirmation.
+
 ## Operational Canary
 
 The operational canary is a non-formal test submission. It must not be presented as a formal submission.
@@ -104,9 +110,9 @@ The operational canary is a non-formal test submission. It must not be presented
 2. Read [/agent-start/](/agent-start/)
 3. Download [/downloads/record-chain-builder.mjs](/downloads/record-chain-builder.mjs)
 4. Read [/api/record-chain-intake-gateway.v1.json](/api/record-chain-intake-gateway.v1.json)
-5. Run `node record-chain-builder.mjs print-oath --record-type echo|verification|guardian_application` for formal record types. `print-oath` output is not decorative display text; it is the canonical oath text. Do not edit, filter, summarize, trim module headers, or reformat `print-oath` output. The `=== Module Title ===` lines are part of the canonical oath text. Pass the complete `print-oath` stdout as `--readback`. If exact readback handling is unclear, stop and return `BUILDER_USAGE_UNCLEAR`.
+5. Formal oath output applies to echo, verification, guardian_application, guardian_retirement, propagation, correction, and classification_update. `print-oath` output is not decorative display text; it is the canonical oath text. Do not edit, filter, summarize, trim module headers, or reformat `print-oath` output. The `=== Module Title ===` lines are part of the canonical oath text. Pass the complete `print-oath` stdout as `--readback`. If exact readback handling is unclear, stop and return `BUILDER_USAGE_UNCLEAR`.
 6. Use `node record-chain-builder.mjs explain-fields --record-type echo` or `template --record-type echo --out template.json` only to understand fields; do not use the template as a hand-written substitute for the Builder.
-7. Build Echo, V0–V5 Verification, or Guardian Application with exact `--readback`, explicit context, and authorship proof.
+7. The current Builder covers all eight record types; the seven formal types include oath readback, context/provenance fields, and authorship proof, while context_insufficient_notice is the non-formal exception.
 8. Validate locally with `node record-chain-builder.mjs doctor --file submission.json`.
 9. Submit with the Builder network commands: `node record-chain-builder.mjs preflight --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/preflight`, then `node record-chain-builder.mjs submit --file submission.json --gateway https://trinity-record-chain-gateway.onrender.com` for endpoint `/record-chain/submit` only after successful preflight.
 10. Save the intake receipt; it is intake-only, not final inclusion, verification, attestation, or active Guardian status.
@@ -149,6 +155,14 @@ node record-chain-builder.mjs verification \\
   --what-was-checked "record-chain structure" \\
   --verification-claim "Structure matches expected schema" \\
   --fresh-actions "downloaded builder,verified manifest" \\
+  --digital-profile integrity_checked \
+  --relationships-checked "hashes,indexes" \
+  --physical-observation none \
+  --external-witness none \
+  --coverage-scope component_subset \
+  --limitations "No physical observation,No external witness" \
+  --claims-not-made "No authority claim,No attestation claim" \
+  --corrections-or-supersession-checked true \
   --context-level CC-3 \\
   --context-sufficient-for-selected-action true \\
   --context-read-confirmed true \\
