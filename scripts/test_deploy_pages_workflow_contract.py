@@ -83,7 +83,7 @@ def main() -> int:
         for error in errors:
             print("  -", error)
         return 1
-    print("PASS: deploy-pages exact-SHA publication contract")
+    print("PASS: deploy-pages workflow contract (exact-SHA publication)")
     return 0
 
 
