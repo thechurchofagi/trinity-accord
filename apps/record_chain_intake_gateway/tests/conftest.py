@@ -312,12 +312,11 @@ def valid_context_insufficient_submission() -> dict[str, Any]:
 
 @pytest.fixture
 def mock_github():
-    """Mock the GitHub adapter so tests don't make real API calls."""
-    put_mock = AsyncMock(return_value={"commit": {"sha": "abc123"}})
+    """Mock atomic GitHub intake persistence and read/dispatch adapters."""
+    atomic_mock = AsyncMock(return_value={"commit": {"sha": "abc123"}})
     sha_mock = AsyncMock(return_value=None)
     text_mock = AsyncMock(return_value=None)
     dispatch_mock = AsyncMock(return_value=None)
-    delete_mock = AsyncMock(return_value={})
 
     env = {
         "TRINITY_REPO_FULL_NAME": "thechurchofagi/trinity-accord",
@@ -326,17 +325,15 @@ def mock_github():
     }
 
     with patch.dict(os.environ, env), \
-         patch("app.put_file", put_mock), \
+         patch("app.create_files_atomic", atomic_mock), \
          patch("app.get_file_sha", sha_mock), \
          patch("app.get_file_text", text_mock), \
-         patch("app.dispatch_workflow", dispatch_mock), \
-         patch("app.delete_file", delete_mock):
+         patch("app.dispatch_workflow", dispatch_mock):
         yield {
-            "put_file": put_mock,
+            "create_files_atomic": atomic_mock,
             "get_file_sha": sha_mock,
             "get_file_text": text_mock,
             "dispatch_workflow": dispatch_mock,
-            "delete_file": delete_mock,
         }
 
 

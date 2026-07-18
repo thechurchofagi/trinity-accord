@@ -48,6 +48,7 @@ jobs:
         run: python scripts/run_current_system_tests.py
 
       - name: Run gateway unit tests
+        id: gateway_unit_tests
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
         shell: bash
@@ -64,7 +65,7 @@ jobs:
           tail -n 40 /tmp/gateway-unit-tests.log
 
       - name: Upload gateway unit test log
-        if: always()
+        if: ${{ always() && steps.gateway_unit_tests.outcome != 'skipped' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: gateway-unit-test-log

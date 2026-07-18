@@ -26,6 +26,7 @@ def read(path: str) -> str:
 
 def main() -> None:
     app = read("apps/record_chain_intake_gateway/app.py")
+    atomic = read("apps/record_chain_intake_gateway/gateway/github_atomic.py")
     workflow = read(".github/workflows/record-chain-append.yml")
     authorship = read("apps/record_chain_intake_gateway/gateway/authorship.py")
     chain = read("scripts/trinity_record_chain.py")
@@ -33,6 +34,7 @@ def main() -> None:
 
     for label, text in [
         ("app.py", app),
+        ("github_atomic.py", atomic),
         ("trinity_record_chain.py", chain),
         ("finalize_mainnet_prelaunch_record_from_submission.py", finalizer),
     ]:
@@ -47,13 +49,41 @@ def main() -> None:
         "record-chain-append.yml must not trigger on record-chain/pending/** push",
     )
 
-    # P0-A: Gateway must write idempotency index before pending.
-    idx_idemp = app.find('f"intake: idempotency index')
-    idx_pending = app.find('f"intake: pending')
-    require(idx_idemp != -1, "app.py missing idempotency index write")
-    require(idx_pending != -1, "app.py missing pending write")
-    require(idx_idemp < idx_pending, "Gateway must write idempotency index before pending")
-    require("pending LAST" in app, "app.py must document pending as LAST append-eligibility marker")
+    # P0-A: the complete intake transaction must become visible atomically.
+    for needle in [
+        "create_files_atomic(",
+        "pending_written=True",
+        "pending_committed_at=pending_committed_at",
+        "intake_submission_path: submission_content",
+        "receipt_path: receipt_content",
+        "idempotency_path: canonical_dumps(idempotency_index_data)",
+        "pending_file_path: pending_content",
+        'f"intake: materialize {receipt_id} ({record_type})"',
+    ]:
+        require(needle in app, f"app.py missing atomic intake contract text: {needle}")
+
+    require("Write 1: intake submission" not in app,
+            "app.py must not expose the retired multi-commit intake sequence")
+    require("put_file_confirmed(" not in app,
+            "app.py must not use per-file Contents API writes for intake")
+
+    for needle in [
+        "/git/blobs",
+        "/git/trees",
+        "/git/commits",
+        "/git/refs/",
+        '"force": False',
+        "AtomicCreateConflict",
+        "exact_after_error",
+    ]:
+        require(needle in atomic, f"github_atomic.py missing atomic commit contract text: {needle}")
+
+    idx_create_commit = atomic.find("new_commit_response = await client.post")
+    idx_advance_ref = atomic.find("update_response = await client.patch")
+    require(idx_create_commit != -1, "github_atomic.py must create one Git commit")
+    require(idx_advance_ref != -1, "github_atomic.py must advance the branch ref")
+    require(idx_create_commit < idx_advance_ref,
+            "Git commit must be created before the single branch-ref update")
 
     # P0-A: append must require durable binding before authorship verification.
     idx_binding = chain.find("require_gateway_pending_durable_intake_binding(path)")

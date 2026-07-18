@@ -31,11 +31,19 @@ def main() -> int:
     require(first_contact.get("zero_clone_formal_builder_policy", {}).get("do_not_handwrite_formal_payload") is True,
             "agent-first-contact must forbid handwritten formal payloads")
 
-    for relative in ["index.md", "agent-start.md", "llms.txt", "external-agent-quickstart.md"]:
+    for relative in ["agent-start.md", "llms.txt", "external-agent-quickstart.md"]:
         text = (ROOT / relative).read_text(encoding="utf-8").lower()
         require("handwrite" in text and ("submission" in text or "payload" in text),
                 f"{relative} must warn against handwritten submissions")
         require("agent_readback_sha256" not in text, f"{relative} contains retired agent_readback_sha256")
+
+    homepage = (ROOT / "index.md").read_text(encoding="utf-8").lower()
+    require("homepage-only context remains" in homepage and "payload construction" in homepage,
+            "index.md must fail closed for homepage-only payload construction")
+    require("/agent-first-contact/" in homepage,
+            "index.md must route operating agents to Agent First Contact")
+    require("agent_readback_sha256" not in homepage,
+            "index.md contains retired agent_readback_sha256")
 
     print("READBACK_HASH_POLICY_OK")
     return 0

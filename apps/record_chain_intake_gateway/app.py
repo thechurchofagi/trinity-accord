@@ -23,7 +23,8 @@ from apps.record_chain_intake_gateway.gateway.authorship import (
     strip_unsigned_projection_fields,
 )
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, parse_json_strict, sha256_canonical_json
-from apps.record_chain_intake_gateway.gateway.github_adapter import delete_file, dispatch_workflow, get_file_sha, get_file_text, put_file
+from apps.record_chain_intake_gateway.gateway.github_atomic import AtomicCreateConflict, create_files_atomic
+from apps.record_chain_intake_gateway.gateway.github_adapter import dispatch_workflow, get_file_sha, get_file_text
 from apps.record_chain_intake_gateway.gateway.models import (
     AgentRecovery,
     Diagnostic,
@@ -717,53 +718,6 @@ def _normalize_public_v2_draft_for_pending(draft: dict[str, Any]) -> dict[str, A
     return normalized
 
 
-async def put_file_confirmed(
-    path: str,
-    content: str,
-    message: str,
-    sha: str | None = None,
-) -> dict[str, Any]:
-    """Write through the injectable app-level adapter and reconcile ambiguity."""
-    try:
-        return await put_file(path, content, message, sha=sha)
-    except Exception:
-        remote_text = await get_file_text(path)
-        if remote_text != content:
-            raise
-        remote_sha = await get_file_sha(path)
-        if not remote_sha:
-            raise RuntimeError(f"GitHub write for {path} appears durable but has no readable blob SHA")
-        logger.warning("Reconciled ambiguous GitHub write for %s after transport/API error", path)
-        return {
-            "content": {"sha": remote_sha},
-            "commit": {"sha": None},
-            "reconciled_after_error": True,
-        }
-
-
-async def _best_effort_delete_created_files(created_files: list[tuple[str, str]], receipt_id: str) -> bool:
-    """Roll back created files without deleting dependencies after a child failure.
-
-    Files are recorded in dependency order and removed in reverse. If deleting a
-    later artifact fails (for example the pending marker), stop immediately so
-    its receipt, idempotency index, and stored submission remain available for
-    reconciliation instead of creating a dangling append-eligible artifact.
-    """
-    for path, sha in reversed(created_files):
-        try:
-            await delete_file(path, f"rollback failed intake {receipt_id}: delete {path}", sha=sha)
-            logger.info("Rolled back created intake file %s for %s", path, receipt_id)
-        except Exception as cleanup_exc:
-            logger.error(
-                "Failed to roll back %s for %s; preserving earlier dependencies: %s",
-                path,
-                receipt_id,
-                cleanup_exc,
-            )
-            return False
-    return True
-
-
 # ---------------------------------------------------------------------------
 # BLOCKER 1 helpers: Idempotency index fail-closed
 # ---------------------------------------------------------------------------
@@ -1383,21 +1337,16 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
     receipt_content = canonical_dumps(receipt_data)
 
-    # --- persist to GitHub ---
-    # Safe order:
-    #   1. submission
-    #   2. receipt
-    #   3. idempotency index
-    #   4. pending LAST
-    #
-    # The pending file is the append-eligibility marker. It must not be visible
-    # until durable intake state exists and is globally idempotent.
+    # --- atomically persist the complete intake transaction ---
+    # The pending append-eligibility marker and every durable dependency become
+    # visible in the same branch state; no partial transaction is published.
     commit_sha: str | None = None
-    created_files_for_rollback: list[tuple[str, str]] = []
     append_status = "pending"
     warnings: list[str] = []
 
     if _WRITE_MODE == "github_contents_pending":
+        # Read-only duplicate/legacy checks are safe before the atomic commit.
+        # No intake artifact is exposed by these checks.
         try:
             existing_match = await _find_existing_matching_receipt(
                 candidate_receipt_paths=[receipt_path, legacy_receipt_path],
@@ -1424,29 +1373,14 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                     warnings=["Duplicate submission: existing immutable receipt returned; no files were updated."],
                     boundary=_build_submit_boundary(body),
                     created_pending_records=[
-                        p for p in [existing_receipt.get("pending_file_path", "")]
-                        if isinstance(p, str) and p
+                        value
+                        for value in [existing_receipt.get("pending_file_path", "")]
+                        if isinstance(value, str) and value
                     ],
                 )
 
-            existing_sub_sha = await get_file_sha(intake_submission_path)
-            existing_pending_sha = await get_file_sha(pending_file_path)
             legacy_sub_sha = await get_file_sha(legacy_intake_submission_path)
             legacy_pending_sha = await get_file_sha(legacy_pending_file_path)
-
-            if existing_sub_sha is not None or existing_pending_sha is not None:
-                raise HTTPException(
-                    status_code=409,
-                    detail={
-                        "code": "INTAKE_ARTIFACT_PATH_CONFLICT",
-                        "message": "Submission or pending path already exists without a matching immutable receipt. Refusing to overwrite.",
-                        "submission_path_exists": existing_sub_sha is not None,
-                        "pending_path_exists": existing_pending_sha is not None,
-                        "submission_path": intake_submission_path,
-                        "pending_file_path": pending_file_path,
-                    },
-                )
-
             if legacy_sub_sha is not None or legacy_pending_sha is not None:
                 raise HTTPException(
                     status_code=409,
@@ -1459,219 +1393,135 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                         "legacy_pending_file_path": legacy_pending_file_path,
                     },
                 )
-
-            # Write 1: intake submission (create only)
-            result1 = await put_file_confirmed(
-                intake_submission_path,
-                submission_content,
-                f"intake: submission {receipt_id}",
-                sha=None,
-            )
-            if result1.get("content", {}).get("sha"):
-                created_files_for_rollback.append((intake_submission_path, result1["content"]["sha"]))
-            logger.info("Wrote submission %s", intake_submission_path)
-
-            # Write 2: receipt (create only)
-            # The receipt must exist before pending becomes visible to append workers.
-            result_receipt = await put_file_confirmed(
-                receipt_path,
-                receipt_content,
-                f"intake: receipt {receipt_id}",
-                sha=None,
-            )
-            if result_receipt.get("content", {}).get("sha"):
-                created_files_for_rollback.append((receipt_path, result_receipt["content"]["sha"]))
-            logger.info("Wrote receipt %s", receipt_path)
-
-            commit_sha = result_receipt.get("commit", {}).get("sha")
-
-            # Write 3: global idempotency index (create only, fail-closed)
-            idempotency_path = _idempotency_index_path(original_submission_sha256)
-            idempotency_index_data = _build_idempotency_index_data(
-                submission_sha256=original_submission_sha256,
-                stored_submission_sha256=stored_submission_sha256,
-                receipt_id=receipt_id,
-                receipt_path=receipt_path,
-                pending_file_path=pending_file_path,
-                intake_submission_path=intake_submission_path,
-                record_type=record_type,
-                now=now,
-            )
-
-            try:
-                result_idx = await put_file_confirmed(
-                    idempotency_path,
-                    canonical_dumps(idempotency_index_data),
-                    f"intake: idempotency index {original_submission_sha256[:16]}",
-                    sha=None,
-                )
-                if result_idx.get("content", {}).get("sha"):
-                    created_files_for_rollback.append((idempotency_path, result_idx["content"]["sha"]))
-                logger.info("Wrote idempotency index %s", idempotency_path)
-
-            except Exception as idemp_exc:
-                logger.warning(
-                    "Idempotency index write failed for %s: %s",
-                    original_submission_sha256[:16],
-                    idemp_exc,
-                )
-
-                existing_idx: dict[str, Any] | None = None
-                try:
-                    existing_idx = await _read_idempotency_index(original_submission_sha256)
-                except Exception as read_exc:
-                    logger.warning(
-                        "Could not read existing idempotency index for %s after write failure: %s",
-                        original_submission_sha256[:16],
-                        read_exc,
-                    )
-
-                if existing_idx is not None:
-                    exact_same_transaction = all((
-                        existing_idx.get("submission_sha256") == original_submission_sha256,
-                        existing_idx.get("stored_submission_sha256") == stored_submission_sha256,
-                        existing_idx.get("receipt_id") == receipt_id,
-                        existing_idx.get("receipt_path") == receipt_path,
-                        existing_idx.get("pending_file_path") == pending_file_path,
-                        existing_idx.get("intake_submission_path") == intake_submission_path,
-                    ))
-                    if exact_same_transaction:
-                        if existing_idx.get("pending_written") is True:
-                            return await _submit_response_from_idempotency_index(
-                                index=existing_idx,
-                                record_type=record_type,
-                                submission_sha256=original_submission_sha256,
-                                received_raw_body_sha256=received_raw_body_sha256,
-                                body=body,
-                            )
-                        existing_sha = await get_file_sha(idempotency_path)
-                        if not existing_sha:
-                            raise RuntimeError("Matching idempotency index exists but its blob SHA is unreadable")
-                        result_idx = {"content": {"sha": existing_sha}, "commit": {"sha": None}}
-                        logger.info("Recovered matching idempotency index %s after ambiguous write", idempotency_path)
-                    else:
-                        await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
-                        try:
-                            return await _submit_response_from_idempotency_index(
-                                index=existing_idx,
-                                record_type=record_type,
-                                submission_sha256=original_submission_sha256,
-                                received_raw_body_sha256=received_raw_body_sha256,
-                                body=body,
-                            )
-                        except HTTPException:
-                            raise
-                        except Exception as response_exc:
-                            logger.error(
-                                "Concurrent idempotency state could not be converted into response for %s: %s",
-                                original_submission_sha256[:16],
-                                response_exc,
-                            )
-                            return SubmitResponse(
-                                accepted=False,
-                                submitted=False,
-                                record_type=record_type,
-                                submission_sha256=original_submission_sha256,
-                                received_raw_body_sha256=received_raw_body_sha256,
-                                diagnostics=[Diagnostic(
-                                    code="IDEMPOTENCY_INDEX_CONFLICT",
-                                    severity="error",
-                                    field="record-chain/intake/by-submission-sha256",
-                                    message="A different durable transaction already owns this submission hash.",
-                                    meaning="The gateway refused to overwrite or roll back another intake transaction.",
-                                    suggested_fix="Retry the exact same submission later or ask an operator to inspect the durable index.",
-                                    retry_allowed=True,
-                                )],
-                                boundary=_build_submit_boundary(body),
-                            )
-                else:
-                    await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
-                    return SubmitResponse(
-                        accepted=False,
-                        submitted=False,
-                        record_type=record_type,
-                        submission_sha256=original_submission_sha256,
-                        received_raw_body_sha256=received_raw_body_sha256,
-                        diagnostics=[Diagnostic(
-                            code="IDEMPOTENCY_INDEX_PERSIST_FAILED",
-                            severity="error",
-                            field="record-chain/intake/by-submission-sha256",
-                            message=f"Persisted intake artifacts were rolled back because idempotency index creation failed: {idemp_exc}",
-                            meaning="The gateway must not accept an intake without its global duplicate-submission index.",
-                            suggested_fix="Retry the same submission later; if the original request succeeded concurrently, the gateway will return the existing receipt.",
-                            retry_allowed=True,
-                        )],
-                        boundary=_build_submit_boundary(body),
-                    )
-
-            # Write 4: pending file (create only) — LAST.
-            # This file is the append-eligibility marker. It must not exist until
-            # submission, receipt, and idempotency index are durable.
-            result_pending = await put_file_confirmed(
-                pending_file_path,
-                pending_content,
-                f"intake: pending {receipt_id} ({record_type})",
-                sha=None,
-            )
-            if result_pending.get("content", {}).get("sha"):
-                created_files_for_rollback.append((pending_file_path, result_pending["content"]["sha"]))
-            logger.info("Wrote pending %s", pending_file_path)
-
-            # Update idempotency index: mark pending_written=true
-            idempotency_index_data["transaction_state"] = "pending_written"
-            idempotency_index_data["pending_written"] = True
-            idempotency_index_data["pending_committed_at"] = now.isoformat().replace("+00:00", "Z")
-            try:
-                result_idx_update = await put_file_confirmed(
-                    idempotency_path,
-                    canonical_dumps(idempotency_index_data),
-                    f"intake: idempotency index update {original_submission_sha256[:16]}",
-                    sha=result_idx.get("content", {}).get("sha"),
-                )
-                logger.info("Updated idempotency index with pending_written")
-            except Exception as finalize_exc:
-                raise RuntimeError(
-                    "Pending file was written but the idempotency index could not be finalized"
-                ) from finalize_exc
-
-            if _DISPATCH_APPEND_WORKFLOW:
-                try:
-                    await dispatch_workflow(
-                        _APPEND_WORKFLOW,
-                        inputs={
-                            "receipt_id": receipt_id,
-                            "pending_file_path": pending_file_path,
-                        },
-                    )
-                    append_status = "queued"
-                    logger.info("Dispatched append workflow %s for %s", _APPEND_WORKFLOW, receipt_id)
-                except Exception as dispatch_exc:
-                    append_status = "pending_dispatch_failed"
-                    warning = (
-                        f"Append workflow dispatch failed after durable intake writes: {dispatch_exc}. "
-                        "The record remains pending and can be picked up by push/scheduled/manual append."
-                    )
-                    warnings.append(warning)
-                    logger.warning("Append dispatch failed for %s: %s", receipt_id, dispatch_exc)
-
         except HTTPException:
             raise
-        except Exception as exc:
-            logger.error("Failed to persist %s: %s", receipt_id, exc)
-            await _best_effort_delete_created_files(created_files_for_rollback, receipt_id)
+        except Exception as lookup_exc:
+            logger.error("Pre-commit duplicate check failed for %s: %s", receipt_id, lookup_exc)
             return SubmitResponse(
                 accepted=False,
                 submitted=False,
                 record_type=record_type,
-                submission_sha256=submission_sha256,
+                submission_sha256=original_submission_sha256,
+                received_raw_body_sha256=received_raw_body_sha256,
+                diagnostics=[Diagnostic(
+                    code="INTAKE_PRECOMMIT_LOOKUP_FAILED",
+                    severity="error",
+                    field="record-chain/intake",
+                    message=f"Pre-commit duplicate-state lookup failed: {lookup_exc}",
+                    meaning="The Gateway failed closed before creating any intake artifact.",
+                    suggested_fix="Retry the exact same submission later.",
+                    retry_allowed=True,
+                )],
+                boundary=_build_submit_boundary(body),
+            )
+
+        # Submission, receipt, finalized idempotency index, and pending marker
+        # become visible in one branch-ref update. The strict verifier can no
+        # longer observe an idempotency index before its pending transaction is
+        # fully materialized.
+        idempotency_path = _idempotency_index_path(original_submission_sha256)
+        pending_committed_at = now.isoformat().replace("+00:00", "Z")
+        idempotency_index_data = _build_idempotency_index_data(
+            submission_sha256=original_submission_sha256,
+            stored_submission_sha256=stored_submission_sha256,
+            receipt_id=receipt_id,
+            receipt_path=receipt_path,
+            pending_file_path=pending_file_path,
+            intake_submission_path=intake_submission_path,
+            record_type=record_type,
+            now=now,
+            pending_written=True,
+            pending_committed_at=pending_committed_at,
+        )
+        atomic_files = {
+            intake_submission_path: submission_content,
+            receipt_path: receipt_content,
+            idempotency_path: canonical_dumps(idempotency_index_data),
+            pending_file_path: pending_content,
+        }
+
+        try:
+            atomic_result = await create_files_atomic(
+                atomic_files,
+                f"intake: materialize {receipt_id} ({record_type})",
+            )
+            commit_sha = atomic_result.get("commit", {}).get("sha")
+            logger.info("Atomically materialized intake transaction %s", receipt_id)
+        except AtomicCreateConflict as exc:
+            logger.warning("Atomic intake conflict for %s: %s", receipt_id, exc)
+            existing_index = await _read_idempotency_index(original_submission_sha256)
+            if existing_index is not None:
+                try:
+                    return await _submit_response_from_idempotency_index(
+                        index=existing_index,
+                        record_type=record_type,
+                        submission_sha256=original_submission_sha256,
+                        received_raw_body_sha256=received_raw_body_sha256,
+                        body=body,
+                    )
+                except HTTPException:
+                    raise
+                except Exception as response_exc:
+                    logger.error(
+                        "Concurrent atomic intake could not be resolved for %s: %s",
+                        original_submission_sha256[:16],
+                        response_exc,
+                    )
+            return SubmitResponse(
+                accepted=False,
+                submitted=False,
+                record_type=record_type,
+                submission_sha256=original_submission_sha256,
+                received_raw_body_sha256=received_raw_body_sha256,
+                diagnostics=[Diagnostic(
+                    code="INTAKE_ATOMIC_PATH_CONFLICT",
+                    severity="error",
+                    field="record-chain/intake",
+                    message=f"Atomic intake paths conflict with existing repository state: {exc}",
+                    meaning="The Gateway refused to expose or overwrite a partial intake transaction.",
+                    suggested_fix="Retry the exact same submission later or ask an operator to inspect the durable intake paths.",
+                    retry_allowed=True,
+                )],
+                boundary=_build_submit_boundary(body),
+            )
+        except Exception as exc:
+            logger.error("Atomic persistence failed for %s: %s", receipt_id, exc)
+            return SubmitResponse(
+                accepted=False,
+                submitted=False,
+                record_type=record_type,
+                submission_sha256=original_submission_sha256,
                 received_raw_body_sha256=received_raw_body_sha256,
                 diagnostics=[Diagnostic(
                     code="PERSIST_FAILED",
                     severity="error",
-                    message=f"Persist failed: {exc}",
+                    message=f"Atomic persist failed: {exc}",
+                    meaning="No intake artifact is accepted unless submission, receipt, finalized idempotency index, and pending marker become visible together.",
+                    suggested_fix="Retry the exact same submission later.",
+                    retry_allowed=True,
                 )],
                 boundary=_build_submit_boundary(body),
             )
+
+        if _DISPATCH_APPEND_WORKFLOW:
+            try:
+                await dispatch_workflow(
+                    _APPEND_WORKFLOW,
+                    inputs={
+                        "receipt_id": receipt_id,
+                        "pending_file_path": pending_file_path,
+                    },
+                )
+                append_status = "queued"
+                logger.info("Dispatched append workflow %s for %s", _APPEND_WORKFLOW, receipt_id)
+            except Exception as dispatch_exc:
+                append_status = "pending_dispatch_failed"
+                warning = (
+                    f"Append workflow dispatch failed after durable atomic intake: {dispatch_exc}. "
+                    "The record remains pending and can be picked up by push/scheduled/manual append."
+                )
+                warnings.append(warning)
+                logger.warning("Append dispatch failed for %s: %s", receipt_id, dispatch_exc)
     else:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
         append_status = "dry_run"
