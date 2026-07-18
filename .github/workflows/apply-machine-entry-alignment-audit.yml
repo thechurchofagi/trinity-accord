@@ -41,6 +41,7 @@ jobs:
           python3 scripts/apply_machine_contract_alignment.py
           python3 scripts/apply_machine_reading_router_alignment.py
           python3 scripts/apply_machine_discovery_alignment.py
+          python3 scripts/apply_context_insufficient_e2e_alignment.py
 
       - name: Install test dependencies
         run: python3 -m pip install -q -r requirements-ci.txt
@@ -85,6 +86,7 @@ jobs:
           rm scripts/apply_machine_contract_alignment.py
           rm scripts/apply_machine_reading_router_alignment.py
           rm scripts/apply_machine_discovery_alignment.py
+          rm scripts/apply_context_insufficient_e2e_alignment.py
           rm .github/workflows/apply-machine-entry-alignment-audit.yml
 
       - name: Commit validated alignment
