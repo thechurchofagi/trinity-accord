@@ -25,19 +25,18 @@ jobs:
         with:
           ref: deep-audit-round5-systemic-resilience
           fetch-depth: 0
-
-      - name: Apply non-workflow fixes
-        run: |
-          set -euo pipefail
-          python3 scripts/apply_round5_a_public.py
-          python3 scripts/apply_round5_b_helpers.py
-          python3 scripts/apply_round5_c_contracts.py
-          python3 scripts/apply_round5_d_tests.py
-          python3 scripts/apply_round5_e_runner.py
-
+      - name: Apply public-surface fixes
+        run: python3 scripts/apply_round5_a_public.py
+      - name: Apply helper fixes
+        run: python3 scripts/apply_round5_b_helpers.py
+      - name: Apply contract fixes
+        run: python3 scripts/apply_round5_c_contracts.py
+      - name: Apply regression tests
+        run: python3 scripts/apply_round5_d_tests.py
+      - name: Apply current-suite wiring
+        run: python3 scripts/apply_round5_e_runner.py
       - name: Install test dependencies
         run: python3 -m pip install -q -r requirements-ci.txt
-
       - name: Run focused round-five validation
         run: |
           set -euo pipefail
@@ -49,7 +48,6 @@ jobs:
           python3 scripts/test_homepage_status_sync_contract.py
           python3 scripts/test_round5_systemic_resilience.py
           python3 -m pytest tests/test_round5_systemic_resilience.py tests/test_live_deployment_contract.py -q --tb=short
-
       - name: Remove applicators
         run: |
           rm -f scripts/apply_round5_systemic_resilience.py
@@ -58,7 +56,6 @@ jobs:
           rm -f scripts/apply_round5_c_contracts.py
           rm -f scripts/apply_round5_d_tests.py
           rm -f scripts/apply_round5_e_runner.py
-
       - name: Commit validated non-workflow fixes
         run: |
           set -euo pipefail
