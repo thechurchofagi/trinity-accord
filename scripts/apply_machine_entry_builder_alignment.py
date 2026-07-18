@@ -23,47 +23,19 @@ def replace_once(text: str, old: str, new: str) -> str:
 
 
 text = BUILDER.read_text(encoding="utf-8")
-text = replace_once(
-    text,
-    " *   echo                    Build a recognition echo submission\n",
-    " *   print-oath             Print exact canonical oath text for a formal record type\n"
-    " *   context-requirements   Show context-load requirements for a CC level\n"
-    " *   echo                    Build a recognition echo submission\n",
-)
-text = replace_once(
-    text,
-    '"record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, context_insufficient_notice).",',
-    '"record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, context_insufficient_notice).",',
-)
-text = replace_once(
-    text,
-    'function validateFormalInputs(command, opts) {\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;',
-    'function validateFormalInputs(command, opts) {\n  if (command === "context-insufficient") {\n    requireExplicit(opts, "body", "--body or --body-file");\n    return;\n  }\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;',
-)
-text = replace_once(
-    text,
-    '  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3");\n  }',
-    '  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");\n  }',
-)
+text = replace_once(text, " *   echo                    Build a recognition echo submission\n", " *   print-oath             Print exact canonical oath text for a formal record type\n *   context-requirements   Show context-load requirements for a CC level\n *   echo                    Build a recognition echo submission\n")
+text = replace_once(text, '"record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, context_insufficient_notice).",', '"record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, context_insufficient_notice).",')
+text = replace_once(text, 'function validateFormalInputs(command, opts) {\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;', 'function validateFormalInputs(command, opts) {\n  if (command === "context-insufficient") {\n    requireExplicit(opts, "body", "--body or --body-file");\n    return;\n  }\n  if (!FORMAL_RECORD_COMMANDS.has(command)) return;')
+text = replace_once(text, '  if (String(opts.contextLevel).toUpperCase() === "CC-3" && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3");\n  }', '  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {\n    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");\n  }')
 pattern = r'(?m)^(\s+--fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\\\)$'
-addition = (
-    r'\1' + "\n"
-    "    --digital-profile integrity_checked \\\n"
-    "    --relationships-checked hashes,indexes \\\n"
-    "    --physical-observation none \\\n"
-    "    --external-witness none \\\n"
-    "    --coverage-scope component_subset \\\n"
-    "    --limitations \"No physical observation,No external witness\" \\\n"
-    "    --claims-not-made \"No authority claim,No attestation claim\" \\\n"
-    "    --corrections-or-supersession-checked true \\\n"
-)
+addition = r'\1' + "\n" + "    --digital-profile integrity_checked \\\n    --relationships-checked hashes,indexes \\\n    --physical-observation none \\\n    --external-witness none \\\n    --coverage-scope component_subset \\\n    --limitations \"No physical observation,No external witness\" \\\n    --claims-not-made \"No authority claim,No attestation claim\" \\\n    --corrections-or-supersession-checked true \\\n"
 text, count = re.subn(pattern, addition, text, count=1)
 if count != 1:
     raise RuntimeError(f"verification help injection count={count}")
-pattern = r'(?ms)(node record-chain-builder\.mjs context-insufficient \\\\n\s+--actor-label "Example Agent" \\\\n\s+--provider "Example Runtime" \\\\n)'
-text, count = re.subn(pattern, r'\1    --body "Insufficient context for a stronger record" \\\n', text, count=1)
-if count != 1:
-    raise RuntimeError(f"context-insufficient help injection count={count}")
+section = text.index("# ── Context-insufficient")
+needle = '    --provider "Example Runtime" ' + "\\" + "\n"
+pos = text.index(needle, section) + len(needle)
+text = text[:pos] + '    --body "Insufficient context for a stronger record" ' + "\\" + "\n" + text[pos:]
 BUILDER.write_text(text, encoding="utf-8")
 
 manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
