@@ -19,4 +19,17 @@ if text.count(old) != 1:
     raise RuntimeError(f"builder bundle context-insufficient target count={text.count(old)}")
 path.write_text(text.replace(old, new, 1), encoding="utf-8")
 
+path = ROOT / "scripts/test_mandatory_authorship_key_contract.py"
+text = path.read_text(encoding="utf-8")
+old = '            "--provider", "Test Runtime",\n            "--out", str(Path(td) / "out.json"),'
+new = '            "--provider", "Test Runtime",\n            "--body", "Insufficient context for a stronger record",\n            "--out", str(Path(td) / "out.json"),'
+if text.count(old) != 1:
+    raise RuntimeError(f"mandatory-key no-keydir target count={text.count(old)}")
+text = text.replace(old, new, 1)
+old = '            "--provider", "Test Runtime",\n            "--key-dir", str(key_dir),\n            "--out", str(out),'
+new = '            "--provider", "Test Runtime",\n            "--body", "Insufficient context for a stronger record",\n            "--key-dir", str(key_dir),\n            "--out", str(out),'
+if text.count(old) != 1:
+    raise RuntimeError(f"mandatory-key proof target count={text.count(old)}")
+path.write_text(text.replace(old, new, 1), encoding="utf-8")
+
 print("CONTEXT_INSUFFICIENT_FIXTURES_ALIGNED")
