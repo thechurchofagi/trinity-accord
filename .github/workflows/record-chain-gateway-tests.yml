@@ -51,6 +51,10 @@ jobs:
           status=$?
           cat /tmp/atomic-fix.log
           if [ "$status" -ne 0 ]; then
+            echo "--- generated adapter lines 185-205 ---"
+            nl -ba apps/record_chain_intake_gateway/gateway/github_adapter.py | sed -n '185,205p'
+            echo "--- visible whitespace ---"
+            sed -n '185,205l' apps/record_chain_intake_gateway/gateway/github_adapter.py
             exit "$status"
           fi
           git config user.name "github-actions[bot]"
