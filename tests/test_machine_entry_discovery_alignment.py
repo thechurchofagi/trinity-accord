@@ -74,5 +74,6 @@ def test_sitemap_exposes_current_entry_surfaces() -> None:
 
 def test_first_contact_typo_and_receipt_placeholder_are_fixed() -> None:
     text = (ROOT / "agent-first-contact.md").read_text(encoding="utf-8")
-    assert "REFLIGHT" not in text
+    assert "### 6. REFLIGHT" not in text
+    assert "### 6. PREFLIGHT" in text
     assert "/record-chain/receipt/<receipt_id>" in text
