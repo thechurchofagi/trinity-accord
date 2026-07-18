@@ -263,7 +263,7 @@ class TestNewAtomicSubmission:
         dispatch = AsyncMock()
         monkeypatch.setattr(app_module, "create_files_atomic", atomic)
         monkeypatch.setattr(app_module, "get_file_text", read)
-        monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(side_effect=lambda path: "pending-sha" if "pending/" in path else None))
+        monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(side_effect=lambda path: "pending-sha" if path == index["pending_file_path"] else None))
         monkeypatch.setattr(app_module, "dispatch_workflow", dispatch)
         monkeypatch.setattr(app_module, "check_rate_limit", lambda body: None)
 
