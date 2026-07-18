@@ -21,7 +21,9 @@ jobs:
           fetch-depth: 0
 
       - name: Apply audited deployment fixes
-        run: python3 scripts/apply_live_deployment_audit.py
+        run: |
+          python3 scripts/apply_live_contract_set_fix.py
+          python3 scripts/apply_live_deployment_audit.py
 
       - name: Install test dependencies
         run: python3 -m pip install -q -r requirements-ci.txt
@@ -98,6 +100,7 @@ jobs:
 
       - name: Remove one-shot audit machinery
         run: |
+          rm scripts/apply_live_contract_set_fix.py
           rm scripts/apply_live_deployment_audit.py
           rm .github/workflows/apply-live-deployment-audit.yml
 
