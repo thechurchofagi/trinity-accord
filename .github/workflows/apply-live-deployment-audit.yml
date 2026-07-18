@@ -10,6 +10,10 @@ permissions:
   issues: write
   pull-requests: write
 
+concurrency:
+  group: live-deployment-deep-audit-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   apply-and-validate:
     if: ${{ github.actor != 'github-actions[bot]' }}
@@ -113,7 +117,7 @@ jobs:
           fi
           exit "$status"
 
-      - name: Report audit failure
+      - name: Report validation failure
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
@@ -125,7 +129,7 @@ jobs:
           LOCAL_SMOKE: ${{ steps.local_smoke.outcome }}
           CURRENT: ${{ steps.current.outcome }}
         run: |
-          gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit one-shot failed. Step outcomes: apply=${APPLY}, deps=${DEPS}, compile=${COMPILE}, focused=${FOCUSED}, fixture=${FIXTURE}, local_smoke=${LOCAL_SMOKE}, current=${CURRENT}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit validation failed. Step outcomes: apply=${APPLY}, deps=${DEPS}, compile=${COMPILE}, focused=${FOCUSED}, fixture=${FIXTURE}, local_smoke=${LOCAL_SMOKE}, current=${CURRENT}. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
       - name: Remove one-shot audit machinery
         run: |
@@ -134,9 +138,26 @@ jobs:
           rm .github/workflows/apply-live-deployment-audit.yml
 
       - name: Commit validated fixes
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          set +e
           git config user.name "trinity-live-deployment-audit-bot"
           git config user.email "actions@github.com"
           git add -A
-          git commit -m "Fix live deployment contract drift and cache verification"
-          git push origin HEAD:deep-audit-live-deployment-contract
+          git status --short
+          git commit -m "Fix live deployment contract drift and cache verification" >/tmp/audit-commit.log 2>&1
+          commit_status=$?
+          cat /tmp/audit-commit.log
+          if [ "$commit_status" -ne 0 ]; then
+            gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit could not create the validated commit. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}. Commit log: $(tail -n 20 /tmp/audit-commit.log | tr '\n' ' ')"
+            exit "$commit_status"
+          fi
+
+          git push origin HEAD:deep-audit-live-deployment-contract >/tmp/audit-push.log 2>&1
+          push_status=$?
+          cat /tmp/audit-push.log
+          if [ "$push_status" -ne 0 ]; then
+            gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit created the validated commit but could not push it. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}. Push log: $(tail -n 20 /tmp/audit-push.log | tr '\n' ' ')"
+            exit "$push_status"
+          fi
