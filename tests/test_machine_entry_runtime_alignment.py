@@ -48,7 +48,7 @@ def test_gateway_routes_and_base_url_match() -> None:
     for route in ("/healthz", "/record-chain/readiness", "/record-chain/preflight", "/record-chain/submit", "/record-chain/receipt/{receipt_id}"):
         assert route in app
     assert base in builder
-    assert contract["gateway_base_url"] == base
+    assert contract["base_url"] == base
 
 def test_verification_examples_include_runtime_required_flags() -> None:
     builder = (ROOT / "downloads/record-chain-builder.mjs").read_text(encoding="utf-8")
