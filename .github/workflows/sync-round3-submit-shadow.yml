@@ -1,0 +1,36 @@
+name: Sync Round 3 Submit Shadow
+
+on:
+  push:
+    branches:
+      - fix/deep-audit-round3-20260718
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-commit:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: fix/deep-audit-round3-20260718
+          show-progress: false
+      - name: Synchronize schema and remove one-shot workflow
+        run: |
+          cp api/record-chain-submit-response.v1.json \
+            apps/record_chain_intake_gateway/schemas/submit_response.schema.json
+          rm .github/workflows/sync-round3-submit-shadow.yml
+      - name: Verify exact parity
+        run: cmp api/record-chain-submit-response.v1.json apps/record_chain_intake_gateway/schemas/submit_response.schema.json
+      - name: Commit synchronized schema
+        run: |
+          git config user.name "trinity-deep-audit-bot"
+          git config user.email "actions@github.com"
+          git add \
+            api/record-chain-submit-response.v1.json \
+            apps/record_chain_intake_gateway/schemas/submit_response.schema.json \
+            .github/workflows/sync-round3-submit-shadow.yml
+          git commit -m "Synchronize submit response shadow schema"
+          git push origin HEAD:fix/deep-audit-round3-20260718
