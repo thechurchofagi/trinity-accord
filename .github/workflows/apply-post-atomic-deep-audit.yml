@@ -4,13 +4,16 @@ on:
   push:
     branches:
       - fix/post-atomic-deep-audit-final2
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   apply-and-validate:
-    if: ${{ github.actor != 'github-actions[bot]' }}
+    if: ${{ github.actor != 'github-actions[bot]' && github.head_ref == 'fix/post-atomic-deep-audit-final2' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
