@@ -1,0 +1,38 @@
+name: Deep Audit Round 5 Snapshot
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**"
+      - ".github/workflows/deep-audit-round5-snapshot.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  export-snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout audited revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+      - name: Build deterministic audit snapshot
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > AUDIT_HEAD_SHA.txt
+          git ls-files -z | tar --null -T - -czf trinity-audit-snapshot.tar.gz
+          sha256sum trinity-audit-snapshot.tar.gz > trinity-audit-snapshot.tar.gz.sha256
+      - name: Upload audit snapshot
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: deep-audit-round5-snapshot
+          path: |
+            AUDIT_HEAD_SHA.txt
+            trinity-audit-snapshot.tar.gz
+            trinity-audit-snapshot.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 7
