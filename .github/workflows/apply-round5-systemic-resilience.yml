@@ -1,0 +1,51 @@
+name: Apply Round 5 Systemic Resilience
+
+on:
+  push:
+    branches:
+      - deep-audit-round5-systemic-resilience
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: deep-audit-round5-systemic-resilience
+          fetch-depth: 0
+
+      - name: Apply non-workflow fixes
+        run: python3 scripts/apply_round5_systemic_resilience.py
+
+      - name: Install test dependencies
+        run: python3 -m pip install -q -r requirements-ci.txt
+
+      - name: Run focused round-five validation
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_sitemap.py --check
+          python3 scripts/verify_retired_builder_bundle_archive.py
+          python3 scripts/test_first_contact_forces_copy_paste_or_route_selector.py
+          python3 scripts/test_external_agent_copy_paste_examples_contract.py
+          python3 scripts/test_deploy_pages_workflow_contract.py
+          python3 scripts/test_homepage_status_sync_contract.py
+          python3 scripts/test_round5_systemic_resilience.py
+          python3 -m pytest tests/test_round5_systemic_resilience.py tests/test_live_deployment_contract.py -q --tb=short
+
+      - name: Remove applicator
+        run: rm scripts/apply_round5_systemic_resilience.py
+
+      - name: Commit validated non-workflow fixes
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-round5-audit-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Fix systemic publication and retired-route resilience"
+          git push origin HEAD:deep-audit-round5-systemic-resilience
