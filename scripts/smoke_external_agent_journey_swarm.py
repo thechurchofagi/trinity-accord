@@ -176,6 +176,48 @@ def normalized_path_set(values: Any) -> set[str]:
     }
 
 
+def result_object(
+    fetched: dict[tuple[str, bool], FetchResult],
+    path: str,
+    cache_bust: bool,
+    errors: list[str],
+) -> dict[str, Any]:
+    result = fetched.get((path, cache_bust))
+    label = f"{path}{' cache-busted' if cache_bust else ' canonical'}"
+    if result is None:
+        errors.append(f"{label}: internal fetch result missing")
+        return {}
+    if result.error or result.status == 0 or result.status >= 400:
+        return {}
+    if not isinstance(result.data, dict):
+        errors.append(f"{label}: JSON root must be an object")
+        return {}
+    return result.data
+
+
+def canonical_cache_split_errors(
+    fetched: dict[tuple[str, bool], FetchResult],
+) -> list[str]:
+    errors: list[str] = []
+    for path in CORE_DISCOVERY_PATHS:
+        canonical = fetched.get((path, False))
+        busted = fetched.get((path, True))
+        if canonical is None or busted is None:
+            continue
+        if canonical.error or busted.error:
+            continue
+        if canonical.status == 0 or busted.status == 0:
+            continue
+        if canonical.status >= 400 or busted.status >= 400:
+            continue
+        if canonical.digest != busted.digest:
+            errors.append(
+                f"{path} canonical/cache-busted content split: "
+                f"{canonical.digest!r} vs {busted.digest!r}"
+            )
+    return errors
+
+
 def repo_links_digest() -> str | None:
     path = ROOT / "api" / "links.json"
     if not path.exists():
@@ -297,15 +339,16 @@ def validate_agent(
                 continue
             digests[label] = result.digest
 
-    links = fetched.get(("/api/links.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    links_busted = fetched.get(("/api/links.json", True), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    well_known = fetched.get(("/.well-known/trinity-accord.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    first_contact = fetched.get(("/api/agent-first-contact.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    task_router = fetched.get(("/api/agent-task-router.v1.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    output_policy = fetched.get(("/api/agent-output-policy.v1.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    agent_start = fetched.get(("/api/agent-start.v2.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    gateway = fetched.get(("/api/record-chain-intake-gateway.v1.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
-    builder = fetched.get(("/api/record-chain-builder-bundles.v1.json", False), FetchResult("", "", 0, "", {}, {}, [])).data or {}
+    errors.extend(canonical_cache_split_errors(fetched))
+    links = result_object(fetched, "/api/links.json", False, errors)
+    links_busted = result_object(fetched, "/api/links.json", True, errors)
+    well_known = result_object(fetched, "/.well-known/trinity-accord.json", False, errors)
+    first_contact = result_object(fetched, "/api/agent-first-contact.json", False, errors)
+    task_router = result_object(fetched, "/api/agent-task-router.v1.json", False, errors)
+    output_policy = result_object(fetched, "/api/agent-output-policy.v1.json", False, errors)
+    agent_start = result_object(fetched, "/api/agent-start.v2.json", False, errors)
+    gateway = result_object(fetched, "/api/record-chain-intake-gateway.v1.json", False, errors)
+    builder = result_object(fetched, "/api/record-chain-builder-bundles.v1.json", False, errors)
 
     repo_digest = repo_links_digest()
     if repo_digest:
@@ -434,24 +477,34 @@ def main() -> int:
 
     all_results: list[AgentResult] = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as pool:
-        futures = []
+        futures: dict[concurrent.futures.Future[AgentResult], tuple[int, str]] = {}
         for round_id in range(args.rounds):
             for agent_id in range(args.agents):
                 route_family = route_names[agent_id % len(route_names)]
                 global_agent_id = round_id * args.agents + agent_id
-                futures.append(
-                    pool.submit(
-                        validate_agent,
-                        global_agent_id,
-                        route_family,
-                        args.site,
-                        args.timeout,
-                        cache_token,
-                    )
+                future = pool.submit(
+                    validate_agent,
+                    global_agent_id,
+                    route_family,
+                    args.site,
+                    args.timeout,
+                    cache_token,
                 )
+                futures[future] = (global_agent_id, route_family)
 
         for future in concurrent.futures.as_completed(futures):
-            all_results.append(future.result())
+            global_agent_id, route_family = futures[future]
+            try:
+                all_results.append(future.result())
+            except Exception as exc:
+                all_results.append(AgentResult(
+                    global_agent_id,
+                    route_family,
+                    False,
+                    [f"unhandled validator exception: {type(exc).__name__}: {exc}"],
+                    {},
+                    [],
+                ))
 
     all_results.sort(key=lambda item: item.agent_id)
     failures = [result for result in all_results if not result.ok]

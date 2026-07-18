@@ -56,6 +56,7 @@ def _receipt_for(index: dict) -> dict:
         "receipt_path": index["receipt_path"],
         "pending_file_path": index["pending_file_path"],
         "intake_submission_path": index["intake_submission_path"],
+        "record_type": index["record_type"],
     }
     receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
     return receipt
@@ -319,4 +320,102 @@ class TestSameDayReceiptFallback:
         resp = client.post("/record-chain/submit", json=signed_echo_submission)
         assert resp.status_code == 409
         atomic.assert_not_awaited()
+        dispatch.assert_not_awaited()
+
+
+class TestTerminalDuplicateResolution:
+    def test_finalized_duplicate_returns_original_receipt_without_pending_marker(
+        self, signed_echo_submission, monkeypatch
+    ):
+        index = _index_for(signed_echo_submission)
+        receipt = _receipt_for(index)
+        final_path = "record-chain/records/R-000000123.json"
+        status_path = f"record-chain/receipt-status/{index['receipt_id']}.json"
+        status = {
+            "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+            "receipt_id": index["receipt_id"],
+            "pending_file_path": index["pending_file_path"],
+            "append_status": "appended",
+            "final_record_id": "R-000000123",
+            "final_record_path": final_path,
+            "final_record_sha256": "c" * 64,
+            "rejection_path": None,
+            "rejection_code": None,
+            "updated_at": "2026-01-01T00:01:00Z",
+        }
+
+        async def read(path: str):
+            if "by-submission-sha256" in path:
+                return json.dumps(index)
+            if path == index["receipt_path"]:
+                return json.dumps(receipt)
+            if path == status_path:
+                return json.dumps(status)
+            if path == final_path:
+                return json.dumps({
+                    "record_id": "R-000000123",
+                    "record_sha256": "c" * 64,
+                })
+            return None
+
+        atomic, rate, dispatch = _patch_no_write(monkeypatch)
+        monkeypatch.setattr(app_module, "get_file_text", read)
+        monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(return_value=None))
+
+        data = client.post("/record-chain/submit", json=signed_echo_submission).json()
+        assert data["accepted"] is True
+        assert data["append_status"] == "appended"
+        assert data["created_pending_records"] == []
+        atomic.assert_not_awaited()
+        rate.assert_not_called()
+        dispatch.assert_not_awaited()
+
+    def test_duplicate_rejects_valid_but_unrelated_receipt_binding(
+        self, signed_echo_submission, monkeypatch
+    ):
+        index = _index_for(signed_echo_submission)
+        receipt = _receipt_for(index)
+        receipt["pending_file_path"] = "record-chain/pending/other.pending.json"
+        receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
+
+        async def read(path: str):
+            if "by-submission-sha256" in path:
+                return json.dumps(index)
+            if path == index["receipt_path"]:
+                return json.dumps(receipt)
+            return None
+
+        atomic, rate, dispatch = _patch_no_write(monkeypatch)
+        monkeypatch.setattr(app_module, "get_file_text", read)
+        monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(return_value="pending-sha"))
+
+        data = client.post("/record-chain/submit", json=signed_echo_submission).json()
+        assert data["accepted"] is False
+        assert "IDEMPOTENCY_INDEX_LOOKUP_FAILED" in {d["code"] for d in data["diagnostics"]}
+        atomic.assert_not_awaited()
+        rate.assert_not_called()
+        dispatch.assert_not_awaited()
+
+    def test_missing_pending_without_terminal_status_remains_fail_closed(
+        self, signed_echo_submission, monkeypatch
+    ):
+        index = _index_for(signed_echo_submission)
+        receipt = _receipt_for(index)
+
+        async def read(path: str):
+            if "by-submission-sha256" in path:
+                return json.dumps(index)
+            if path == index["receipt_path"]:
+                return json.dumps(receipt)
+            return None
+
+        atomic, rate, dispatch = _patch_no_write(monkeypatch)
+        monkeypatch.setattr(app_module, "get_file_text", read)
+        monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(return_value=None))
+
+        data = client.post("/record-chain/submit", json=signed_echo_submission).json()
+        assert data["accepted"] is False
+        assert "INTAKE_TRANSACTION_NOT_MATERIALIZED" in {d["code"] for d in data["diagnostics"]}
+        atomic.assert_not_awaited()
+        rate.assert_not_called()
         dispatch.assert_not_awaited()

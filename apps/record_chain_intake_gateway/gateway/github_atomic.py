@@ -104,6 +104,66 @@ async def _atomic_files_state(
     )
 
 
+async def _read_ref_head(
+    client: httpx.AsyncClient,
+    ref_url: str,
+    branch: str,
+) -> str:
+    response = await client.get(ref_url, headers=_headers())
+    if response.status_code != 200:
+        raise RuntimeError(
+            f"GitHub API error {response.status_code} reading branch {branch}"
+        )
+    head_sha = response.json().get("object", {}).get("sha")
+    if not head_sha:
+        raise RuntimeError(f"GitHub branch {branch} has no commit SHA")
+    return str(head_sha)
+
+
+async def _commit_reachable_from_head(
+    client: httpx.AsyncClient,
+    commit_sha: str,
+    head_sha: str,
+) -> bool:
+    """Return whether ``commit_sha`` is the branch head or one of its ancestors."""
+    if commit_sha == head_sha:
+        return True
+    response = await client.get(
+        f"{_GITHUB_API}/repos/{_repo()}/compare/{commit_sha}...{head_sha}",
+        headers=_headers(),
+    )
+    if response.status_code != 200:
+        raise RuntimeError(
+            f"GitHub API error {response.status_code} comparing {commit_sha}...{head_sha}"
+        )
+    return response.json().get("status") in {"ahead", "identical"}
+
+
+async def _reconcile_atomic_write(
+    client: httpx.AsyncClient,
+    files: dict[str, str],
+    branch: str,
+    ref_url: str,
+    new_commit_sha: str,
+) -> tuple[str | None, str]:
+    """Reconcile a possibly successful ref update against the current branch.
+
+    A push-triggered append may consume the pending file immediately after the
+    intake commit lands. Exact live-tree readback alone would then misclassify a
+    durable transaction as failed. Commit ancestry is authoritative for our
+    exact commit; exact tree state remains a safe fallback for an equivalent
+    concurrent writer.
+    """
+    observed_head = await _read_ref_head(client, ref_url, branch)
+    if await _commit_reachable_from_head(client, new_commit_sha, observed_head):
+        return "commit_reachable", observed_head
+
+    _, all_exact = await _atomic_files_state(client, files, observed_head)
+    if all_exact:
+        return "equivalent_tree", observed_head
+    return None, observed_head
+
+
 async def create_files_atomic(
     files: dict[str, str],
     message: str,
@@ -128,14 +188,7 @@ async def create_files_atomic(
 
     async with httpx.AsyncClient(timeout=30) as client:
         for attempt in range(1, max_attempts + 1):
-            ref_response = await client.get(ref_url, headers=_headers())
-            if ref_response.status_code != 200:
-                raise RuntimeError(
-                    f"GitHub API error {ref_response.status_code} reading branch {branch}"
-                )
-            head_sha = ref_response.json().get("object", {}).get("sha")
-            if not head_sha:
-                raise RuntimeError(f"GitHub branch {branch} has no commit SHA")
+            head_sha = await _read_ref_head(client, ref_url, branch)
 
             all_absent, all_exact = await _atomic_files_state(
                 client,
@@ -228,29 +281,76 @@ async def create_files_atomic(
                     headers=_headers(),
                     json={"sha": new_commit_sha, "force": False},
                 )
-            except Exception:
-                _, exact_after_error = await _atomic_files_state(
-                    client,
-                    files,
-                    branch,
-                )
-                if exact_after_error:
-                    logger.warning(
-                        "Reconciled ambiguous atomic ref update for %s",
+            except Exception as update_exc:
+                try:
+                    reconciliation, observed_head = await _reconcile_atomic_write(
+                        client,
+                        files,
+                        branch,
+                        ref_url,
                         new_commit_sha,
+                    )
+                except Exception as reconcile_exc:
+                    logger.warning(
+                        "Could not reconcile ambiguous atomic ref update for %s: %s",
+                        new_commit_sha,
+                        reconcile_exc,
+                    )
+                    raise update_exc from reconcile_exc
+                if reconciliation:
+                    logger.warning(
+                        "Reconciled ambiguous atomic ref update for %s via %s at %s",
+                        new_commit_sha,
+                        reconciliation,
+                        observed_head,
                     )
                     return {
                         "commit": {"sha": new_commit_sha},
                         "atomic": True,
                         "reconciled_after_error": True,
+                        "reconciliation": reconciliation,
+                        "observed_head_sha": observed_head,
                     }
-                raise
+                raise update_exc
 
             if update_response.status_code == 200:
+                updated_sha = update_response.json().get("object", {}).get("sha")
+                if updated_sha and updated_sha != new_commit_sha:
+                    raise RuntimeError(
+                        "GitHub ref update returned a different commit SHA: "
+                        f"expected {new_commit_sha}, got {updated_sha}"
+                    )
                 return {
                     "commit": {"sha": new_commit_sha},
                     "atomic": True,
                     "reconciled_existing": False,
+                }
+
+            reconciliation: str | None = None
+            observed_head: str | None = None
+            try:
+                reconciliation, observed_head = await _reconcile_atomic_write(
+                    client,
+                    files,
+                    branch,
+                    ref_url,
+                    new_commit_sha,
+                )
+            except Exception as reconcile_exc:
+                logger.warning(
+                    "Could not reconcile GitHub ref response %s for %s: %s",
+                    update_response.status_code,
+                    new_commit_sha,
+                    reconcile_exc,
+                )
+
+            if reconciliation:
+                return {
+                    "commit": {"sha": new_commit_sha},
+                    "atomic": True,
+                    "reconciled_after_error": True,
+                    "reconciliation": reconciliation,
+                    "observed_head_sha": observed_head,
                 }
 
             if update_response.status_code in (409, 422) and attempt < max_attempts:
@@ -261,17 +361,6 @@ async def create_files_atomic(
                 )
                 continue
 
-            _, exact_after_response = await _atomic_files_state(
-                client,
-                files,
-                branch,
-            )
-            if exact_after_response:
-                return {
-                    "commit": {"sha": new_commit_sha},
-                    "atomic": True,
-                    "reconciled_after_error": True,
-                }
             raise RuntimeError(
                 f"GitHub API error {update_response.status_code} advancing branch"
             )

@@ -776,6 +776,9 @@ async def _submit_response_from_idempotency_index(
     received_raw_body_sha256: str,
     body: dict[str, Any],
 ) -> SubmitResponse:
+    if index.get("submission_sha256") != submission_sha256:
+        raise RuntimeError("Idempotency index does not bind the requested submission hash")
+
     receipt_path = index.get("receipt_path", "")
     if not isinstance(receipt_path, str) or not receipt_path:
         raise RuntimeError("Idempotency index is missing receipt_path")
@@ -784,12 +787,11 @@ async def _submit_response_from_idempotency_index(
     if not receipt_text:
         raise RuntimeError(f"Idempotency receipt is missing: {receipt_path}")
 
-    receipt_data: dict[str, Any] = json.loads(receipt_text)
-    if not isinstance(receipt_data, dict):
+    receipt_data_raw = json.loads(receipt_text)
+    if not isinstance(receipt_data_raw, dict):
         raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
+    receipt_data: dict[str, Any] = receipt_data_raw
 
-    # Verify receipt hash integrity
-    # Fail-closed: receipt MUST have receipt_sha256
     if not receipt_data.get("receipt_sha256"):
         raise HTTPException(
             status_code=500,
@@ -816,14 +818,35 @@ async def _submit_response_from_idempotency_index(
     )
     if not receipt_id:
         raise RuntimeError(f"Idempotency receipt has no receipt id: {receipt_path}")
-
-    if index.get("receipt_id") and index.get("receipt_id") != receipt_id:
+    if index.get("receipt_id") != receipt_id:
         raise RuntimeError(
             f"Idempotency receipt_id mismatch: index={index.get('receipt_id')} receipt={receipt_id}"
         )
 
-    # --- Materialization gate: confirm pending file exists ---
-    # Only enforce when fields are present (backward compat with pre-gate indexes)
+    expected_bindings = {
+        "submission_sha256": submission_sha256,
+        "stored_submission_sha256": index.get("stored_submission_sha256"),
+        "receipt_path": receipt_path,
+        "pending_file_path": index.get("pending_file_path"),
+        "intake_submission_path": index.get("intake_submission_path"),
+        "record_type": index.get("record_type", record_type),
+    }
+    for field, expected in expected_bindings.items():
+        if not isinstance(expected, str) or not expected:
+            raise RuntimeError(f"Idempotency index is missing {field}")
+        actual = receipt_data.get(field)
+        if actual != expected:
+            raise RuntimeError(
+                f"Idempotency receipt binding mismatch for {field}: "
+                f"index={expected!r} receipt={actual!r}"
+            )
+
+    original_hash = receipt_data.get("original_submission_sha256")
+    if original_hash not in (None, "", submission_sha256):
+        raise RuntimeError(
+            "Idempotency receipt original_submission_sha256 does not bind the requested submission"
+        )
+
     has_materialization_fields = "pending_written" in index or "transaction_state" in index
     if has_materialization_fields:
         if index.get("pending_written") is not True:
@@ -834,13 +857,42 @@ async def _submit_response_from_idempotency_index(
             raise RuntimeError(
                 f"Idempotency index is not materialized: transaction_state={index.get('transaction_state')!r}"
             )
+        committed_at = index.get("pending_committed_at")
+        if not isinstance(committed_at, str) or not committed_at:
+            raise RuntimeError(
+                "Idempotency index is not materialized: pending_committed_at is missing"
+            )
+
     pending_path = index.get("pending_file_path")
     if not isinstance(pending_path, str) or not pending_path:
         raise RuntimeError("Idempotency index missing pending_file_path")
-    if has_materialization_fields:
-        pending_sha = await get_file_sha(pending_path)
-        if pending_sha is None:
-            raise RuntimeError(f"Idempotency pending file is missing: {pending_path}")
+
+    pending_sha = await get_file_sha(pending_path) if has_materialization_fields else None
+    terminal_status: dict[str, Any] | None = None
+    if has_materialization_fields and pending_sha is None:
+        terminal_status = await _read_receipt_final_status(receipt_id)
+        if terminal_status is None:
+            raise RuntimeError(
+                f"Idempotency pending file is missing and no terminal receipt status exists: {pending_path}"
+            )
+        if terminal_status.get("pending_file_path") != pending_path:
+            raise RuntimeError(
+                "Terminal receipt status does not bind the idempotency pending file: "
+                f"index={pending_path!r} status={terminal_status.get('pending_file_path')!r}"
+            )
+
+    if terminal_status is not None:
+        append_status = str(terminal_status["append_status"])
+        warnings = [
+            f"Duplicate submission: original immutable receipt returned; transaction is already {append_status}."
+        ]
+        created_pending_records: list[str] = []
+    else:
+        append_status = "duplicate_existing_submission_returned"
+        warnings = [
+            "Duplicate submission: existing idempotency index found; original receipt returned."
+        ]
+        created_pending_records = [pending_path]
 
     return SubmitResponse(
         accepted=True,
@@ -849,19 +901,16 @@ async def _submit_response_from_idempotency_index(
         record_type=index.get("record_type", record_type),
         submission_sha256=submission_sha256,
         received_raw_body_sha256=received_raw_body_sha256,
-        pending_file_path=index.get("pending_file_path", ""),
+        pending_file_path=pending_path,
         intake_submission_path=index.get("intake_submission_path", ""),
         receipt_path=receipt_path,
         server_created_at=receipt_data.get("accepted_at", index.get("created_at", "")),
-        append_status="duplicate_existing_submission_returned",
+        append_status=append_status,
         receipt=receipt_data,
         diagnostics=[],
-        warnings=["Duplicate submission: existing idempotency index found; original receipt returned."],
+        warnings=warnings,
         boundary=_build_submit_boundary(body),
-        created_pending_records=[
-            p for p in [index.get("pending_file_path", "")]
-            if isinstance(p, str) and p
-        ],
+        created_pending_records=created_pending_records,
     )
 
 
@@ -1645,16 +1694,20 @@ async def _build_receipt_envelope(
     receipt_path: str,
     envelope_warnings: list[str | dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Build a receipt envelope with immutable receipt and final status.
-
-    The receipt object is immutable — warnings live in the envelope, not inside
-    the receipt body, so receipt_hash_verified remains correct.
-    """
+    """Build a receipt envelope without overstating unverifiable final status."""
+    warnings: list[str | dict[str, Any]] = list(envelope_warnings or [])
+    final_status_error: Exception | None = None
     try:
         final_status_data = await _read_receipt_final_status(receipt_id)
     except Exception as exc:
-        logger.warning("Failed to read receipt-status for %s: %s", receipt_id, exc)
+        logger.warning("Failed to verify receipt-status for %s: %s", receipt_id, exc)
         final_status_data = None
+        final_status_error = exc
+        warnings.append({
+            "code": "RECEIPT_FINAL_STATUS_UNAVAILABLE",
+            "message": "The immutable receipt is valid, but final append status could not be verified.",
+            "retryable": True,
+        })
 
     if final_status_data:
         append_status = final_status_data.get("append_status", "unknown")
@@ -1664,16 +1717,39 @@ async def _build_receipt_envelope(
         rejection_code = final_status_data.get("rejection_code")
         updated_at = final_status_data.get("updated_at")
     else:
-        # No sidecar exists — check if receipt has pending file path
-        pending_path = receipt.get("pending_file_path")
-        append_status = "pending" if pending_path else "unknown"
         final_record_id = None
         final_record_sha256 = None
         rejection_path = None
         rejection_code = None
         updated_at = None
+        pending_path = receipt.get("pending_file_path")
+        if final_status_error is not None:
+            append_status = "unknown"
+        elif isinstance(pending_path, str) and pending_path:
+            try:
+                pending_sha = await get_file_sha(pending_path)
+            except Exception as exc:
+                append_status = "unknown"
+                warnings.append({
+                    "code": "RECEIPT_PENDING_STATUS_UNAVAILABLE",
+                    "message": f"Could not verify whether the pending marker still exists: {exc}",
+                    "retryable": True,
+                })
+            else:
+                if pending_sha is not None:
+                    append_status = "pending"
+                else:
+                    append_status = "unknown"
+                    warnings.append({
+                        "code": "RECEIPT_TERMINAL_STATUS_MISSING",
+                        "message": "Neither the pending marker nor a verified terminal receipt-status sidecar is visible.",
+                        "retryable": True,
+                    })
+        else:
+            append_status = "unknown"
 
     result: dict[str, Any] = {
+        "found": True,
         "receipt": receipt,
         "receipt_id": receipt_id,
         "receipt_path": receipt_path,
@@ -1687,8 +1763,8 @@ async def _build_receipt_envelope(
             "updated_at": updated_at,
         },
     }
-    if envelope_warnings:
-        result["envelope_warnings"] = envelope_warnings
+    if warnings:
+        result["envelope_warnings"] = warnings
     return result
 
 

@@ -13,6 +13,8 @@ from scripts.smoke_external_agent_journey_swarm import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
+from scripts.smoke_external_agent_journey_swarm import FetchResult, canonical_cache_split_errors
+
 
 def _first_contact() -> dict:
     return json.loads((ROOT / "api/agent-first-contact.json").read_text(encoding="utf-8"))
@@ -49,3 +51,31 @@ def test_route_path_comparison_ignores_trailing_slash_only() -> None:
     assert normalize_route_path("/agent-verify/") == "/agent-verify"
     assert normalize_route_path("/verification-procedures/") == "/verification-procedures"
     assert normalize_route_path("/") == "/"
+
+
+
+def test_swarm_detects_cache_split_for_any_core_contract() -> None:
+    fetched = {
+        ("/api/agent-first-contact.json", False): FetchResult(
+            "/api/agent-first-contact.json", "canonical", 200, "aaa", {}, {}, []
+        ),
+        ("/api/agent-first-contact.json", True): FetchResult(
+            "/api/agent-first-contact.json", "busted", 200, "bbb", {}, {}, []
+        ),
+    }
+    errors = canonical_cache_split_errors(fetched)
+    assert errors == [
+        "/api/agent-first-contact.json canonical/cache-busted content split: 'aaa' vs 'bbb'"
+    ]
+
+
+def test_swarm_ignores_parity_when_one_fetch_failed() -> None:
+    fetched = {
+        ("/api/agent-first-contact.json", False): FetchResult(
+            "/api/agent-first-contact.json", "canonical", 200, "aaa", {}, {}, []
+        ),
+        ("/api/agent-first-contact.json", True): FetchResult(
+            "/api/agent-first-contact.json", "busted", 0, "", None, {}, [], error="timeout"
+        ),
+    }
+    assert canonical_cache_split_errors(fetched) == []
