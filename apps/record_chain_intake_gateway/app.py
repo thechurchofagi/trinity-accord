@@ -1337,17 +1337,10 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
     receipt_content = canonical_dumps(receipt_data)
 
-    # --- persist to GitHub ---
-    # Safe order:
-    #   1. submission
-    #   2. receipt
-    #   3. idempotency index
-    #   4. pending LAST
-    #
-    # The pending file is the append-eligibility marker. It must not be visible
-    # until durable intake state exists and is globally idempotent.
+    # --- atomically persist the complete intake transaction ---
+    # The pending append-eligibility marker and every durable dependency become
+    # visible in the same branch state; no partial transaction is published.
     commit_sha: str | None = None
-    created_files_for_rollback: list[tuple[str, str]] = []
     append_status = "pending"
     warnings: list[str] = []
 

@@ -25,16 +25,16 @@ class AtomicCreateConflict(RuntimeError):
 
 
 def _repo() -> str:
-    value = os.getenv("TRINITY_GITHUB_REPO", "thechurchofagi/trinity-accord").strip()
+    value = os.getenv("TRINITY_REPO_FULL_NAME", "").strip()
     if not value or "/" not in value:
-        raise RuntimeError("TRINITY_GITHUB_REPO must be in owner/repo form")
+        raise RuntimeError("TRINITY_REPO_FULL_NAME must be in owner/repo form")
     return value
 
 
 def _branch() -> str:
-    value = os.getenv("TRINITY_GITHUB_TARGET_BRANCH", "main").strip()
+    value = os.getenv("TRINITY_TARGET_BRANCH", "main").strip()
     if not value:
-        raise RuntimeError("TRINITY_GITHUB_TARGET_BRANCH must not be empty")
+        raise RuntimeError("TRINITY_TARGET_BRANCH must not be empty")
     return value
 
 
