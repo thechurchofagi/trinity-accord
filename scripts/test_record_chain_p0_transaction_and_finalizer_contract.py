@@ -74,7 +74,9 @@ def main() -> None:
         "/git/refs/",
         '"force": False',
         "AtomicCreateConflict",
-        "exact_after_error",
+        "_reconcile_atomic_write(",
+        "_commit_reachable_from_head(",
+        '"equivalent_tree"',
     ]:
         require(needle in atomic, f"github_atomic.py missing atomic commit contract text: {needle}")
 

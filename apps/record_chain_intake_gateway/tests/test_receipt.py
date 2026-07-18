@@ -143,3 +143,41 @@ class TestGetReceipt:
         assert resp.status_code == 400
         body = resp.json()
         assert body["detail"]["code"] == "INVALID_RECEIPT_ID_FORMAT"
+
+
+    def test_success_envelope_declares_found_true(self, client: TestClient) -> None:
+        receipt = self._make_receipt()
+
+        async def read(path: str):
+            if path.startswith("record-chain/intake/receipts/"):
+                return json.dumps(receipt)
+            return None
+
+        with patch("apps.record_chain_intake_gateway.app.get_file_text", new=AsyncMock(side_effect=read)):
+            resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
+        assert resp.status_code == 200
+        assert resp.json()["found"] is True
+
+    def test_invalid_final_status_is_unknown_not_pending(self, client: TestClient) -> None:
+        receipt = self._make_receipt()
+        receipt["pending_file_path"] = "record-chain/pending/rcg-20260613-abcdef123456.echo.pending.json"
+        from apps.record_chain_intake_gateway.gateway.receipts import compute_receipt_sha256
+        receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
+
+        async def read(path: str):
+            if path.startswith("record-chain/intake/receipts/"):
+                return json.dumps(receipt)
+            if path.startswith("record-chain/receipt-status/"):
+                return json.dumps({"schema": "wrong"})
+            return None
+
+        with patch("apps.record_chain_intake_gateway.app.get_file_text", new=AsyncMock(side_effect=read)):
+            resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
+        assert resp.status_code == 200
+        body = resp.json()
+        assert body["final_status"]["append_status"] == "unknown"
+        assert any(
+            warning.get("code") == "RECEIPT_FINAL_STATUS_UNAVAILABLE"
+            for warning in body.get("envelope_warnings", [])
+            if isinstance(warning, dict)
+        )

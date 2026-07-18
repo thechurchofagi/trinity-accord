@@ -163,3 +163,62 @@ async def test_receipt_final_status_fails_closed_on_forged_hash(monkeypatch) -> 
     monkeypatch.setattr(app_module, "get_file_text", fake_get_file_text)
     with pytest.raises(RuntimeError, match="final record binding mismatch"):
         await app_module._read_receipt_final_status(receipt_id)
+
+
+class _FakeResponse:
+    def __init__(self, status_code: int, payload: dict):
+        self.status_code = status_code
+        self._payload = payload
+
+    def json(self) -> dict:
+        return self._payload
+
+
+class _ReconcileClient:
+    def __init__(self, compare_status: str):
+        self.compare_status = compare_status
+
+    async def get(self, url: str, **kwargs):
+        if "/git/ref/" in url:
+            return _FakeResponse(200, {"object": {"sha": "current-head"}})
+        if "/compare/" in url:
+            return _FakeResponse(200, {"status": self.compare_status})
+        raise AssertionError(url)
+
+
+@pytest.mark.asyncio
+async def test_atomic_reconciliation_accepts_commit_ancestry_after_pending_consumed(monkeypatch) -> None:
+    client = _ReconcileClient("ahead")
+
+    async def must_not_read_live_files(*args, **kwargs):
+        raise AssertionError("ancestry should reconcile before live-tree readback")
+
+    monkeypatch.setattr(github_atomic, "_atomic_files_state", must_not_read_live_files)
+    reconciliation, head = await github_atomic._reconcile_atomic_write(
+        client,
+        {"pending.json": "content"},
+        "main",
+        "https://api.github.com/repos/test/repo/git/ref/heads/main",
+        "intake-commit",
+    )
+    assert reconciliation == "commit_reachable"
+    assert head == "current-head"
+
+
+@pytest.mark.asyncio
+async def test_atomic_reconciliation_accepts_equivalent_concurrent_tree(monkeypatch) -> None:
+    client = _ReconcileClient("diverged")
+
+    async def exact_state(*args, **kwargs):
+        return False, True
+
+    monkeypatch.setattr(github_atomic, "_atomic_files_state", exact_state)
+    reconciliation, head = await github_atomic._reconcile_atomic_write(
+        client,
+        {"pending.json": "content"},
+        "main",
+        "https://api.github.com/repos/test/repo/git/ref/heads/main",
+        "intake-commit",
+    )
+    assert reconciliation == "equivalent_tree"
+    assert head == "current-head"
