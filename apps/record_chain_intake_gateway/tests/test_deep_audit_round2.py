@@ -94,5 +94,12 @@ def test_public_guidance_and_workflow_contracts_are_current() -> None:
     assert "Waiting Heartbeat Submit" in homepage
 
     app_source = (ROOT / "apps/record_chain_intake_gateway/app.py").read_text(encoding="utf-8")
-    assert "put_file_confirmed" in app_source
+    atomic_source = (ROOT / "apps/record_chain_intake_gateway/gateway/github_atomic.py").read_text(encoding="utf-8")
+    assert "create_files_atomic" in app_source
+    assert "pending_written=True" in app_source
+    assert "intake: materialize" in app_source
+    assert "Write 1: intake submission" not in app_source
+    assert "/git/trees" in atomic_source
+    assert "/git/commits" in atomic_source
+    assert '"force": False' in atomic_source
     assert "pending_written (non-fatal)" not in app_source
