@@ -10,7 +10,6 @@ from fastapi.testclient import TestClient
 
 import app as app_module
 from gateway.canonical import sha256_canonical_json
-from gateway.github_atomic import AtomicCreateConflict
 from gateway.receipts import compute_receipt_sha256
 
 os.environ.setdefault("TRINITY_REPO_FULL_NAME", "test/repo")
@@ -260,7 +259,7 @@ class TestNewAtomicSubmission:
                 return json.dumps(receipt)
             return None
 
-        atomic = AsyncMock(side_effect=AtomicCreateConflict("concurrent winner"))
+        atomic = AsyncMock(side_effect=app_module.AtomicCreateConflict("concurrent winner"))
         dispatch = AsyncMock()
         monkeypatch.setattr(app_module, "create_files_atomic", atomic)
         monkeypatch.setattr(app_module, "get_file_text", read)

@@ -28,4 +28,4 @@ class TestRetiredEndpoints:
         """Retired endpoints should not write anything."""
         client.post("/gateway/preflight", json={"test": True})
         client.post("/agent-submit", json={"test": True})
-        mock_github["put_file"].assert_not_called()
+        mock_github["create_files_atomic"].assert_not_awaited()
