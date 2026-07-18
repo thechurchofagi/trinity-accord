@@ -76,8 +76,6 @@ CURRENT_KEY_PAGES = frozenset(
 
 RETIRED_ACTIVE_PATHS = frozenset(
     {
-        "/agent-submit",
-        "/gateway/preflight",
         "/api/agent-entry-protocol.json",
         "/api/agent-start.v1.json",
         "/api/agent-submit-gateway.json",
@@ -102,7 +100,6 @@ RETIRED_ROUTE_INTENTS = frozenset(
     }
 )
 
-# The smoke checks canonical and cache-busted forms for these high-value files.
 SMOKE_JSON_SURFACES = (
     "/api/links.json",
     "/.well-known/trinity-accord.json",
@@ -117,8 +114,6 @@ SMOKE_JSON_SURFACES = (
 )
 SMOKE_TEXT_SURFACES = ("/llms.txt", "/ai.txt")
 
-# Deployment freshness performs exact byte comparison for the complete current
-# operating contract, not merely a small marker subset.
 DEPLOYMENT_BYTE_SURFACES = (
     "/llms.txt",
     "/llms-full.txt",
