@@ -70,7 +70,17 @@ jobs:
           grep -q -- "--body or --body-file" /tmp/context-insufficient.log
 
       - name: Run complete current-system suite
-        run: python3 scripts/run_current_system_tests.py
+        run: |
+          set +e
+          python3 scripts/run_current_system_tests.py > /tmp/machine-alignment-current.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            grep -n -E "FAIL:|FAILED|AssertionError|Traceback|E   " /tmp/machine-alignment-current.log | tail -n 40 || true
+            tail -n 80 /tmp/machine-alignment-current.log
+          else
+            tail -n 20 /tmp/machine-alignment-current.log
+          fi
+          exit "$status"
 
       - name: Remove one-shot audit machinery
         run: |
