@@ -1,6 +1,6 @@
 {
   "anchored_file_sha256": "7a1833236a8aa22b9522df2bb4ec5ed163197646d0df59a75814140a2cec74fc",
-  "bitcoin_pending": true,
+  "bitcoin_pending": false,
   "bitcoin_verified": false,
   "chain_id": "trinity-accord-public-reception-ledger",
   "created_at": "2026-07-18T05:40:48Z",
@@ -14,7 +14,7 @@
   "latest_record_sha256": "a9a6cd819110ea5e97bcafe20d36708125ef988ef3bea756fe04e6b6e3900a11",
   "legacy_main_chain_jsonl_is_not_source": true,
   "native_record_count": 92,
-  "ots_status": "pending",
+  "ots_status": "upgraded",
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000092",
@@ -26,5 +26,7 @@
   "schema": "trinityaccord.native-record-chain-ots-latest.v1",
   "semantics": "Latest native OTS anchor for the native Record-Chain head commitment snapshot.",
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
-  "updated_at": "2026-07-18T05:40:48Z"
+  "updated_at": "2026-07-18T08:27:43Z",
+  "bitcoin_attestation_embedded": true,
+  "strict_bitcoin_verified": false
 }
