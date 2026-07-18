@@ -15,11 +15,15 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && github.head_ref == 'fix/atomic-intake-materialization' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 1
-          show-progress: false
+      - name: Quiet checkout
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          git init -q
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth=1 origin "${HEAD_REF}"
+          git checkout -q -B "${HEAD_REF}" FETCH_HEAD
 
       - name: Apply prepared root-cause patch
         run: |
@@ -42,7 +46,13 @@ jobs:
               raise SystemExit('could not locate readback policy patch instructions')
           Path('/tmp/apply_atomic_fix.py').write_text(code.replace(fragile, robust, 1), encoding='utf-8')
           PY
-          python3 /tmp/apply_atomic_fix.py
+          set +e
+          python3 /tmp/apply_atomic_fix.py > /tmp/atomic-fix.log 2>&1
+          status=$?
+          cat /tmp/atomic-fix.log
+          if [ "$status" -ne 0 ]; then
+            exit "$status"
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
