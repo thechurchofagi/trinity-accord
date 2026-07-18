@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - fix/deep-audit-round3-20260718
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
