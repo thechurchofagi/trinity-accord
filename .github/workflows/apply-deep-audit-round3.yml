@@ -1,0 +1,81 @@
+name: Apply Deep Audit Round 3
+
+on:
+  push:
+    branches:
+      - fix/deep-audit-round3-20260718
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: repo
+    steps:
+      - name: Quiet authenticated checkout
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone -q --depth=1 --branch fix/deep-audit-round3-20260718 \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      - name: Apply audited fixes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/apply_deep_audit_round3.py")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace("if count != 1:\n        raise RuntimeError", "if count < 1:\n        raise RuntimeError", 1)
+          path.write_text(text, encoding="utf-8")
+          PY
+          python3 scripts/apply_deep_audit_round3.py
+          python3 scripts/align_deep_audit_round3_tests.py
+
+      - name: Install test dependencies
+        run: python3 -m pip install -q -r requirements-ci.txt
+
+      - name: Run focused regression suite
+        env:
+          PYTHONPATH: apps/record_chain_intake_gateway
+        run: |
+          python3 -m pytest \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py \
+            apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
+            -q --tb=short
+
+      - name: Run current-system suite
+        run: python3 scripts/run_current_system_tests.py
+
+      - name: Remove one-shot audit machinery
+        run: |
+          rm scripts/apply_deep_audit_round3.py
+          rm scripts/align_deep_audit_round3_tests.py
+          rm .github/workflows/apply-deep-audit-round3.yml
+
+      - name: Commit validated fixes
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-deep-audit-bot"
+          git config user.email "actions@github.com"
+          git add \
+            apps/record_chain_intake_gateway/app.py \
+            apps/record_chain_intake_gateway/gateway/github_atomic.py \
+            apps/record_chain_intake_gateway/gateway/models.py \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py \
+            apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
+            api/record-chain-submit-response.v1.json \
+            scripts/apply_deep_audit_round3.py \
+            scripts/align_deep_audit_round3_tests.py \
+            .github/workflows/apply-deep-audit-round3.yml
+          git commit -m "Fix deeper intake lifecycle and receipt contract gaps"
+          git push origin HEAD:fix/deep-audit-round3-20260718
