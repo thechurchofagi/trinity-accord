@@ -22,6 +22,12 @@ jobs:
           ref: deep-audit-live-deployment-contract
           fetch-depth: 0
 
+      - name: Publish audit run identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment 740 --repo "$GITHUB_REPOSITORY" --body "Live deployment deep-audit one-shot started. Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
       - name: Apply audited deployment fixes
         id: apply
         run: |
