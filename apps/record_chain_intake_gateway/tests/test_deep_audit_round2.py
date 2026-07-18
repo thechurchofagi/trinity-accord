@@ -25,10 +25,10 @@ def test_strict_json_rejects_non_finite_numbers_and_duplicate_keys() -> None:
 def test_non_retryable_diagnostic_stops_automatic_retry() -> None:
     recovery = _build_agent_recovery([
         Diagnostic(
-  code="GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH",
-  severity="error",
-  message="wrong key",
-  retry_allowed=False,
+            code="GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH",
+            severity="error",
+            message="wrong key",
+            retry_allowed=False,
         )
     ])
     assert recovery.should_retry is False
@@ -82,11 +82,14 @@ def test_public_guidance_and_workflow_contracts_are_current() -> None:
 
     deploy = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
     assert "\n  push:\n" in deploy
-    assert "Smoke live public discovery contract" in deploy
-    assert "Verify live deployment freshness surface" in deploy
+    assert "Verify live machine contract after edge propagation" in deploy
+    assert "smoke_live_discovery_contract_v2.py" in deploy
+    assert "check_deployment_freshness_v2.py" in deploy
+    assert "Confirm immutable verify/build handoff" in deploy
+    assert "Confirm immutable build/deploy handoff" in deploy
 
     homepage = (ROOT / ".github/workflows/homepage-status-sync.yml").read_text(encoding="utf-8")
-    assert "check_deployment_freshness.py" in homepage
+    assert "check_deployment_freshness_v2.py" in homepage
     assert "Record asynchronous deployment handoff" in homepage
     assert "Final live deployment contract check" not in homepage
     assert "Post-dispatch freshness probe" not in homepage
