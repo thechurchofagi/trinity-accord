@@ -8,42 +8,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  apply-atomic-fix:
-    if: ${{ github.event_name == 'pull_request' && github.head_ref == 'fix/atomic-intake-materialization' }}
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Quiet checkout
-        env:
-          GH_TOKEN: ${{ github.token }}
-          HEAD_REF: ${{ github.head_ref }}
-        run: |
-          git init -q
-          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git fetch -q --depth=1 origin "${HEAD_REF}"
-          git checkout -q -B "${HEAD_REF}" FETCH_HEAD
-
-      - name: Apply deterministic root-cause fix
-        run: |
-          if grep -q "gateway.github_atomic import AtomicCreateConflict" apps/record_chain_intake_gateway/app.py; then
-            echo "Atomic fix already applied."
-            exit 0
-          fi
-          python3 scripts/apply_atomic_intake_fix.py
-          python3 scripts/test_readback_hash_policy.py
-          python3 scripts/trinity_record_chain.py verify
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            apps/record_chain_intake_gateway/app.py \
-            apps/record_chain_intake_gateway/gateway/github_atomic.py \
-            apps/record_chain_intake_gateway/tests/test_deep_audit_round2.py \
-            scripts/test_readback_hash_policy.py
-          git commit -m "fix: materialize intake artifacts atomically [atomic-fix-applied]"
-          git push origin HEAD:${{ github.head_ref }}
-
   gateway-tests:
     runs-on: ubuntu-24.04
     steps:
@@ -81,6 +48,7 @@ jobs:
         run: python scripts/run_current_system_tests.py
 
       - name: Run gateway unit tests
+        id: gateway_unit_tests
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
         shell: bash
@@ -97,7 +65,7 @@ jobs:
           tail -n 40 /tmp/gateway-unit-tests.log
 
       - name: Upload gateway unit test log
-        if: always()
+        if: ${{ always() && steps.gateway_unit_tests.outcome != 'skipped' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: gateway-unit-test-log
