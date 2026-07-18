@@ -67,6 +67,8 @@ def main() -> None:
     require("put_file_confirmed(" not in app,
             "app.py must not use per-file Contents API writes for intake")
 
+    # Ambiguous GitHub responses must be reconciled by commit ancestry first,
+    # with exact-tree parity retained for an equivalent concurrent writer.
     for needle in [
         "/git/blobs",
         "/git/trees",
