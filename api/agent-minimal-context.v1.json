@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.agent-minimal-context.v1",
-  "version": "v1.1",
+  "version": "v1.2",
   "status": "non_authoritative_agent_context_shim",
   "purpose": "Small first-load context for agents with limited context windows. This file is a router and boundary capsule, not authority and not verification.",
   "canonical_router": "/api/agent-first-contact.json",
@@ -70,12 +70,8 @@
   ],
   "recommended_next_load": [
     "/llms.txt",
+    "/api/agent-start.v2.json",
     "/api/context-action-profiles.v1.json",
-    "/api/evidence-relationship-map.v1.json",
-    "/api/verification-profiles.v1.json",
-    "/api/verification-procedures.v1.json",
-    "/api/verification-claim-model.v1.json",
-    "/api/context-load-map.json",
     "/api/agent-required-reading.json",
     "/api/agent-task-router.v1.json",
     "/api/bitcoin-inscription-mirror-index.json"
@@ -132,5 +128,18 @@
   "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.",
   "preferred_verification_procedures": "/api/verification-procedures.v1.json",
   "verification_quick_map": "/api/verification-quick-map.json",
-  "source_digest": "1a723b4624908e81"
+  "source_digest": "a5c9a2b0f95f72de",
+  "reading_manifest": "/api/agent-required-reading.json",
+  "canonical_required_reading_is_subordinate_to_router": true,
+  "runtime_context_minimums": {
+    "echo": "CC-3",
+    "verification_V0_to_V2": "CC-2",
+    "verification_V3_to_V5": "CC-3",
+    "guardian_application": "CC-3",
+    "guardian_retirement": "CC-1",
+    "propagation": "CC-2",
+    "correction": "CC-1",
+    "classification_update": "CC-2",
+    "context_insufficient_notice": "CC-0"
+  }
 }

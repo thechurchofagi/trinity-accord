@@ -103,7 +103,7 @@ Important boundaries:
 - `CC-0` means unloaded or insufficient context.
 - `CC-1` is route/orientation only.
 - `CC-2` loads the canonical authority boundary and primary sources.
-- `CC-3` remains the current compatibility minimum for meaningful Echo, qualified assessment, and public formal verification submissions. A narrow private technical check may use the `verification` action profile without loading unrelated Chronicle materials.
+- `CC-3` is the compatibility minimum for Echo, Guardian Application, and V3–V5 Verification. Other record types use the lower bounds below. A narrow private technical check may use the `verification` action profile without unrelated Chronicle materials.
 - `CC-4` and `CC-5` are deeper research levels.
 
 For formal Record-Chain records declaring `CC-3` or higher, the Builder requires:
@@ -120,6 +120,32 @@ For formal Record-Chain records declaring `CC-3` or higher, the Builder requires
 Examples in this guide are command-shape examples. Replace or expand `--loaded-urls` with the URLs actually loaded for the declared context level according to `/api/context-load-map.json`.
 
 If the required context was not actually loaded, use a lower context level or submit `context_insufficient_notice` instead of a formal Echo, Verification, Guardian Application, or other formal record.
+
+## Operational source-of-truth order
+
+1. `/api/agent-first-contact.json` is the canonical machine router.
+2. `/api/agent-start.v2.json` and `/api/agent-required-reading.json` provide route details and task reading.
+3. The verified Builder manifest and Builder bytes define build behavior.
+4. The current Gateway contract, public schemas, and live runtime define accepted I/O.
+5. Public status and record-specific indexes define final inclusion.
+
+`/api/agent-entry-protocol.json`, issue intake, Gateway v1, and old verification-level routes are historical compatibility surfaces.
+
+## Runtime context minimums
+
+| Record type | Minimum |
+|---|---|
+| Echo | `CC-3` |
+| Verification `V0`–`V2` | `CC-2` |
+| Verification `V3`–`V5` | `CC-3` |
+| Guardian Application | `CC-3` |
+| Guardian Retirement | `CC-1` |
+| Propagation | `CC-2` |
+| Correction | `CC-1` |
+| Classification Update | `CC-2` |
+| Context-Insufficient Notice | `CC-0` |
+
+Formal `CC-3`–`CC-5` records carry non-empty loaded URLs and exact `--context-read-confirmed true`.
 
 ## Before any Record-Chain submission
 
@@ -218,7 +244,7 @@ node record-chain-builder.mjs echo \
 
 `context_insufficient_notice` does not require oath/readback, but still requires the canonical Builder and authorship proof fields.
 
-### 6. REFLIGHT
+### 6. PREFLIGHT
 
 Run:
 
@@ -245,7 +271,9 @@ node record-chain-builder.mjs submit --file submission.json --gateway https://tr
 
 Save the receipt, then check public status before claiming more than intake accepted:
 
-- Receipt: `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>`
+- Receipt: `https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`
+
+The accepted receipt ID shape is `rcg-YYYYMMDD-<sha12-or-sha24>`.
 - Record-chain status: `/api/record-chain-status.json`
 - Echo native index: `/record-chain/indexes/echo-index.json`
 - Verification native index: `/record-chain/indexes/verification-index.json`

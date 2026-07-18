@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "formal_common_required_cli_options": [
@@ -383,5 +383,40 @@
     "profiles": "/api/verification-profiles.v1.json",
     "claim_model": "/api/verification-claim-model.v1.json",
     "relationships": "/api/evidence-relationship-map.v1.json"
+  },
+  "runtime_alignment": {
+    "builder": "/downloads/record-chain-builder.mjs",
+    "gateway_contract": "/api/record-chain-intake-gateway.v1.json",
+    "accepted_record_types": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "classification_update",
+      "context_insufficient_notice"
+    ],
+    "formal_oath_record_types": [
+      "echo",
+      "verification",
+      "guardian_application",
+      "guardian_retirement",
+      "propagation",
+      "correction",
+      "classification_update"
+    ],
+    "context_compatibility_minimums": {
+      "echo": "CC-3",
+      "verification_V0_to_V2": "CC-2",
+      "verification_V3_to_V5": "CC-3",
+      "guardian_application": "CC-3",
+      "guardian_retirement": "CC-1",
+      "propagation": "CC-2",
+      "correction": "CC-1",
+      "classification_update": "CC-2",
+      "context_insufficient_notice": "CC-0"
+    },
+    "context_insufficient_notice_requires_non_empty_reason": true
   }
 }

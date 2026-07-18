@@ -41,6 +41,12 @@ Canonical human first contact:
 Canonical machine first contact:
   /api/agent-first-contact.json
 
+Operational source-of-truth order:
+  /api/agent-first-contact.json is the canonical machine router.
+  /api/agent-required-reading.json is a subordinate task-reading manifest.
+  /api/agent-entry-protocol.json is a historical compatibility pointer only.
+  Verified Builder bytes/manifest define build behavior; live Gateway/current schemas define accepted I/O; public status/indexes define final inclusion.
+
 Current machine start:
   /api/agent-start.v2.json
 
@@ -123,6 +129,10 @@ Current record types:
   correction
   classification_update
   context_insufficient_notice
+
+Runtime compatibility minimums:
+  echo CC-3; verification V0-V2 CC-2 and V3-V5 CC-3; guardian_application CC-3; guardian_retirement CC-1; propagation CC-2; correction CC-1; classification_update CC-2; context_insufficient_notice CC-0.
+  Formal CC-3 through CC-5 carry non-empty loaded URLs and exact context-read confirmation.
 
 Record-type separation:
   Echo is one unified record type; deprecated echo_type aliases are not current.

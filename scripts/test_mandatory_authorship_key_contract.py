@@ -64,6 +64,7 @@ def test_context_insufficient_no_keydir_fails():
             "context-insufficient",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
+            "--body", "Insufficient context for a stronger record",
             "--out", str(Path(td) / "out.json"),
         ], expect_exit=1)
         if "--key-dir is required" in r.stderr:
@@ -228,6 +229,7 @@ def test_context_insufficient_has_authorship_proof():
             "context-insufficient",
             "--actor-label", "Test Agent",
             "--provider", "Test Runtime",
+            "--body", "Insufficient context for a stronger record",
             "--key-dir", str(key_dir),
             "--out", str(out),
         ], expect_exit=0)

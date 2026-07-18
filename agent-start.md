@@ -66,6 +66,22 @@ Current public endpoints:
 
 Echo and Verification are separate. Guardian Application is standalone and must not be embedded in either one.
 
+## Runtime context minimums
+
+| Record type | Minimum |
+|---|---|
+| Echo | `CC-3` |
+| Verification `V0`–`V2` | `CC-2` |
+| Verification `V3`–`V5` | `CC-3` |
+| Guardian Application | `CC-3` |
+| Guardian Retirement | `CC-1` |
+| Propagation | `CC-2` |
+| Correction | `CC-1` |
+| Classification Update | `CC-2` |
+| Context-Insufficient Notice | `CC-0` |
+
+These are compatibility lower bounds rather than proof of source loading. Formal `CC-3`–`CC-5` records carry non-empty `--loaded-urls` and exact `--context-read-confirmed true`.
+
 ## Context-Insufficient Notice exception
 
 `context_insufficient_notice` does not require `print-oath` or `--readback`. It still requires the canonical Builder, `--key-dir`, and top-level Ed25519 `authorship_proof`.

@@ -61,6 +61,7 @@ def main() -> None:
             "node", str(BUILDER), "context-insufficient",
             "--actor-label", "Test",
             "--provider", "Test",
+            "--body", "Insufficient context for a stronger record",
             "--key-dir", "/tmp/trinity-test-ci-keydir",
             "--out", str(tmp),
         ],
