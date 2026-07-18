@@ -104,6 +104,9 @@ def main() -> int:
         "home: sync public homepage status",
         'gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main',
         "scripts/check_homepage_live_freshness.py",
+        "scripts/check_deployment_freshness_v2.py",
+        "Equivalent generated state already reached main",
+        "retrying the existing rebased commit without rewriting it",
         '"_includes/**"',
     ]:
         require(marker in home, f"homepage sync workflow missing marker: {marker}")
@@ -121,6 +124,10 @@ def main() -> int:
         "Arweave wallet status update",
         "Echo human review action",
         "Waiting Heartbeat Status Sync",
+        "Build Record Chain Batch",
+        "Stamp Record Chain Batches with OpenTimestamps",
+        "Waiting Heartbeat Arweave Capsule",
+        "Rebuild Agent-Declared Verification Index",
     ]:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
 
@@ -147,11 +154,12 @@ def main() -> int:
         "needs.sync.outputs.changed == 'true'",
         "github.event.inputs.force_deploy == 'true'",
         "steps.live_pre.outcome == 'failure'",
+        "github.event_name == 'workflow_run'",
     ]:
         require(marker in home, f"homepage sync deploy condition missing marker: {marker}")
 
     require(
-        "if: ${{ github.event_name == 'push' || needs.sync.outputs.changed == 'true' ||" in home,
+        "if: ${{ github.event_name == 'push' || github.event_name == 'workflow_run' || needs.sync.outputs.changed == 'true' ||" in home,
         "homepage sync must dispatch Pages for every covered source push",
     )
     require(
@@ -166,6 +174,7 @@ def main() -> int:
         "manual_force_deploy",
         "source_push",
         "live_freshness_failed",
+        "upstream_workflow_completed",
     ]:
         require(marker in home, f"homepage sync deploy reason logging missing marker: {marker}")
 
@@ -195,13 +204,13 @@ def main() -> int:
 
     # Deploy workflow should verify committed artifacts, not generate a deployment-only state.
     for marker in [
-        "Verify public home status has no drift",
+        "Verify public source state",
         "generate_record_chain_status.py --check",
         "check_public_home_status_contract.py",
         "test_historic_autonomous_agent_reception_contract.py",
         "test_home_public_status_sync.py",
-        "cmp ./api/public-home-status.json ./_site/api/public-home-status.json",
-        "cmp ./api/record-chain-status.json ./_site/api/record-chain-status.json",
+        "cmp api/public-home-status.json _site/api/public-home-status.json",
+        "cmp api/record-chain-status.json _site/api/record-chain-status.json",
     ]:
         require(marker in deploy, f"deploy-pages.yml missing marker: {marker}")
 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title and page.title != "" %}{% if page.title contains "Trinity Accord" %}{{ page.title }}{% else %}{{ page.title }} — The Trinity Accord{% endif %}{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  {% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
   <!-- Open Graph -->
