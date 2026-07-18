@@ -164,6 +164,18 @@ async def _reconcile_atomic_write(
     return None, observed_head
 
 
+def _authoritative_reconciled_commit_sha(
+    reconciliation: str,
+    observed_head: str,
+    new_commit_sha: str,
+) -> str:
+    if reconciliation == "commit_reachable":
+        return new_commit_sha
+    if reconciliation == "equivalent_tree":
+        return observed_head
+    raise ValueError(f"Unknown atomic reconciliation mode: {reconciliation}")
+
+
 async def create_files_atomic(
     files: dict[str, str],
     message: str,
@@ -173,8 +185,8 @@ async def create_files_atomic(
     """Create several UTF-8 files in one fast-forward Git commit.
 
     Existing paths are never overwritten. Branch races are retried. If the
-    ref-update response is ambiguous, exact readback determines whether the
-    transaction committed before an error was observed.
+    ref-update response is ambiguous, commit ancestry is authoritative and exact
+    tree parity is a fallback for an equivalent concurrent writer.
     """
     if not files:
         raise ValueError("create_files_atomic requires at least one file")
@@ -304,8 +316,12 @@ async def create_files_atomic(
                         reconciliation,
                         observed_head,
                     )
+                    committed_sha = _authoritative_reconciled_commit_sha(
+                        reconciliation, observed_head, new_commit_sha
+                    )
                     return {
-                        "commit": {"sha": new_commit_sha},
+                        "commit": {"sha": committed_sha},
+                        "attempted_commit_sha": new_commit_sha,
                         "atomic": True,
                         "reconciled_after_error": True,
                         "reconciliation": reconciliation,
@@ -315,16 +331,42 @@ async def create_files_atomic(
 
             if update_response.status_code == 200:
                 updated_sha = update_response.json().get("object", {}).get("sha")
-                if updated_sha and updated_sha != new_commit_sha:
-                    raise RuntimeError(
-                        "GitHub ref update returned a different commit SHA: "
-                        f"expected {new_commit_sha}, got {updated_sha}"
+                if updated_sha == new_commit_sha:
+                    return {
+                        "commit": {"sha": new_commit_sha},
+                        "atomic": True,
+                        "reconciled_existing": False,
+                    }
+                try:
+                    reconciliation, observed_head = await _reconcile_atomic_write(
+                        client,
+                        files,
+                        branch,
+                        ref_url,
+                        new_commit_sha,
                     )
-                return {
-                    "commit": {"sha": new_commit_sha},
-                    "atomic": True,
-                    "reconciled_existing": False,
-                }
+                except Exception as reconcile_exc:
+                    raise RuntimeError(
+                        "GitHub ref update returned 200 without the expected commit SHA "
+                        "and branch reconciliation failed"
+                    ) from reconcile_exc
+                if reconciliation:
+                    committed_sha = _authoritative_reconciled_commit_sha(
+                        reconciliation, observed_head, new_commit_sha
+                    )
+                    return {
+                        "commit": {"sha": committed_sha},
+                        "attempted_commit_sha": new_commit_sha,
+                        "atomic": True,
+                        "reconciled_after_response": True,
+                        "reconciliation": reconciliation,
+                        "observed_head_sha": observed_head,
+                        "response_commit_sha": updated_sha,
+                    }
+                raise RuntimeError(
+                    "GitHub ref update returned 200 without proving the intended commit durable: "
+                    f"expected {new_commit_sha}, got {updated_sha!r}"
+                )
 
             reconciliation: str | None = None
             observed_head: str | None = None
@@ -345,8 +387,12 @@ async def create_files_atomic(
                 )
 
             if reconciliation:
+                committed_sha = _authoritative_reconciled_commit_sha(
+                    reconciliation, observed_head, new_commit_sha
+                )
                 return {
-                    "commit": {"sha": new_commit_sha},
+                    "commit": {"sha": committed_sha},
+                    "attempted_commit_sha": new_commit_sha,
                     "atomic": True,
                     "reconciled_after_error": True,
                     "reconciliation": reconciliation,

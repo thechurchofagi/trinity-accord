@@ -152,6 +152,7 @@ class SubmitResponse(BaseModel):
 
     accepted: bool
     submitted: bool = False
+    duplicate: bool = False
     receipt_id: str = ""
     record_type: str = ""
     submission_sha256: str = ""

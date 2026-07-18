@@ -111,6 +111,7 @@
       "required": [
         "accepted",
         "submitted",
+        "duplicate",
         "receipt_id",
         "record_type",
         "submission_sha256",
@@ -193,6 +194,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "duplicate": {
+          "const": false
         }
       },
       "additionalProperties": true
@@ -260,6 +264,7 @@
       "required": [
         "accepted",
         "submitted",
+        "duplicate",
         "received_raw_body_sha256",
         "diagnostics"
       ],
@@ -319,6 +324,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "duplicate": {
+          "const": false
         }
       },
       "additionalProperties": true
@@ -395,6 +403,9 @@
     },
     "created_pending_records": {
       "type": "array"
+    },
+    "duplicate": {
+      "type": "boolean"
     }
   }
 }

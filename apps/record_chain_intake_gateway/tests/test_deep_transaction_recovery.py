@@ -112,6 +112,8 @@ async def test_receipt_final_status_verifies_final_record_binding(monkeypatch) -
     receipt_id = "rcg-20260712-" + "a" * 24
     status_path = f"record-chain/receipt-status/{receipt_id}.json"
     final_path = "record-chain/records/R-000000001.json"
+    final_record = {"record_id": "R-000000001", "record_type": "echo"}
+    final_record["record_sha256"] = app_module._record_chain_record_sha256(final_record)
     status = {
         "schema": "trinityaccord.record-chain-receipt-final-status.v1",
         "receipt_id": receipt_id,
@@ -119,7 +121,7 @@ async def test_receipt_final_status_verifies_final_record_binding(monkeypatch) -
         "append_status": "appended",
         "final_record_id": "R-000000001",
         "final_record_path": final_path,
-        "final_record_sha256": "a" * 64,
+        "final_record_sha256": final_record["record_sha256"],
         "rejection_path": None,
         "rejection_code": None,
     }
@@ -128,7 +130,7 @@ async def test_receipt_final_status_verifies_final_record_binding(monkeypatch) -
         if path == status_path:
             return json.dumps(status)
         if path == final_path:
-            return json.dumps({"record_id": "R-000000001", "record_sha256": "a" * 64})
+            return json.dumps(final_record)
         return None
 
     monkeypatch.setattr(app_module, "get_file_text", fake_get_file_text)
@@ -141,6 +143,8 @@ async def test_receipt_final_status_fails_closed_on_forged_hash(monkeypatch) -> 
     receipt_id = "rcg-20260712-" + "a" * 24
     status_path = f"record-chain/receipt-status/{receipt_id}.json"
     final_path = "record-chain/records/R-000000001.json"
+    final_record = {"record_id": "R-000000001", "record_type": "echo"}
+    final_record["record_sha256"] = app_module._record_chain_record_sha256(final_record)
     status = {
         "schema": "trinityaccord.record-chain-receipt-final-status.v1",
         "receipt_id": receipt_id,
@@ -148,7 +152,7 @@ async def test_receipt_final_status_fails_closed_on_forged_hash(monkeypatch) -> 
         "append_status": "appended",
         "final_record_id": "R-000000001",
         "final_record_path": final_path,
-        "final_record_sha256": "a" * 64,
+        "final_record_sha256": final_record["record_sha256"],
         "rejection_path": None,
         "rejection_code": None,
     }
@@ -157,11 +161,13 @@ async def test_receipt_final_status_fails_closed_on_forged_hash(monkeypatch) -> 
         if path == status_path:
             return json.dumps(status)
         if path == final_path:
-            return json.dumps({"record_id": "R-000000001", "record_sha256": "b" * 64})
+            forged = dict(final_record)
+            forged["record_type"] = "verification"
+            return json.dumps(forged)
         return None
 
     monkeypatch.setattr(app_module, "get_file_text", fake_get_file_text)
-    with pytest.raises(RuntimeError, match="final record binding mismatch"):
+    with pytest.raises(RuntimeError, match="hash recomputation failed"):
         await app_module._read_receipt_final_status(receipt_id)
 
 
