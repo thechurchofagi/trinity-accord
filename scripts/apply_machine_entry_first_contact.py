@@ -4,7 +4,7 @@ from pathlib import Path
 path = Path(__file__).resolve().parents[1] / "agent-first-contact.md"
 text = path.read_text(encoding="utf-8")
 text = text.replace("### 6. REFLIGHT", "### 6. PREFLIGHT")
-text = text.replace("`https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>`", "`https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`")
+text = text.replace("`https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<sha12-or-sha24>`", "`https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/<receipt_id>`\n\nThe accepted receipt ID shape is `rcg-YYYYMMDD-<sha12-or-sha24>`.")
 text = text.replace("- `CC-3` remains the current compatibility minimum for meaningful Echo, qualified assessment, and public formal verification submissions. A narrow private technical check may use the `verification` action profile without loading unrelated Chronicle materials.", "- `CC-3` is the compatibility minimum for Echo, Guardian Application, and V3–V5 Verification. Other record types use the lower bounds below. A narrow private technical check may use the `verification` action profile without unrelated Chronicle materials.")
 anchor = "## Before any Record-Chain submission\n"
 block = '''## Operational source-of-truth order
