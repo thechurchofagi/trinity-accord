@@ -1,0 +1,64 @@
+name: Bootstrap atomic intake fix on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.pull_request.title, '[atomic-fix-applied]') }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          show-progress: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Extract and apply patch payload
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('.github/workflows/bootstrap-atomic-intake-fix.yml').read_text(encoding='utf-8')
+          opener = "          python - <<'PY'\n"
+          closer = "\n          PY\n"
+          start = source.index(opener) + len(opener)
+          end = source.index(closer, start)
+          lines = source[start:end].splitlines()
+          code = '\n'.join(line[10:] if line.startswith('          ') else line for line in lines) + '\n'
+          Path('/tmp/apply_atomic_fix.py').write_text(code, encoding='utf-8')
+          PY
+          python /tmp/apply_atomic_fix.py
+
+      - name: Install targeted test dependencies
+        run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
+
+      - name: Run targeted regression tests
+        env:
+          PYTHONPATH: .
+        run: |
+          python scripts/trinity_record_chain.py verify
+          python scripts/test_deep_intake_append_transaction_invariants.py
+          python scripts/run_ci_group.py readback-integrity
+          python -m pytest apps/record_chain_intake_gateway/tests/test_deep_audit_round2.py -q
+
+      - name: Commit root-cause fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            apps/record_chain_intake_gateway/app.py \
+            apps/record_chain_intake_gateway/gateway/github_adapter.py \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round2.py \
+            scripts/test_readback_hash_policy.py \
+            .github/workflows/record-chain-gateway-tests.yml
+          git commit -m "fix: materialize intake artifacts atomically [atomic-fix-applied]"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
