@@ -330,6 +330,8 @@ class TestTerminalDuplicateResolution:
         index = _index_for(signed_echo_submission)
         receipt = _receipt_for(index)
         final_path = "record-chain/records/R-000000123.json"
+        final_record = {"record_id": "R-000000123", "record_type": "echo"}
+        final_record["record_sha256"] = app_module._record_chain_record_sha256(final_record)
         status_path = f"record-chain/receipt-status/{index['receipt_id']}.json"
         status = {
             "schema": "trinityaccord.record-chain-receipt-final-status.v1",
@@ -338,7 +340,7 @@ class TestTerminalDuplicateResolution:
             "append_status": "appended",
             "final_record_id": "R-000000123",
             "final_record_path": final_path,
-            "final_record_sha256": "c" * 64,
+            "final_record_sha256": final_record["record_sha256"],
             "rejection_path": None,
             "rejection_code": None,
             "updated_at": "2026-01-01T00:01:00Z",
@@ -352,10 +354,7 @@ class TestTerminalDuplicateResolution:
             if path == status_path:
                 return json.dumps(status)
             if path == final_path:
-                return json.dumps({
-                    "record_id": "R-000000123",
-                    "record_sha256": "c" * 64,
-                })
+                return json.dumps(final_record)
             return None
 
         atomic, rate, dispatch = _patch_no_write(monkeypatch)

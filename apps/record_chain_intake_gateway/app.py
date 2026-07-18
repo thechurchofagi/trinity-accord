@@ -72,8 +72,10 @@ _APPEND_WORKFLOW = os.environ.get("TRINITY_APPEND_WORKFLOW_FILE", "record-chain-
 _DISPATCH_APPEND_WORKFLOW = os.environ.get("TRINITY_DISPATCH_APPEND_WORKFLOW", "1").strip().lower() not in {"0", "false", "no", "off"}
 _GATEWAY_BASE_URL = os.environ.get("TRINITY_GATEWAY_BASE_URL", "")
 
-# In-memory receipt store (ephemeral; resets on restart)
+# In-memory receipt store (ephemeral; resets on restart). Dry-run receipts
+# remain readable only in this process and are explicitly marked non-durable.
 _receipt_store: dict[str, dict[str, Any]] = {}
+_ephemeral_receipt_ids: set[str] = set()
 
 # Gateway schema info — must reflect actual validation rules.
 # authorship_proof is REQUIRED for all formal record types (not optional).
@@ -320,7 +322,10 @@ async def _load_json_text_or_none(path_text: str) -> dict[str, Any] | None:
     text = await get_file_text(path_text)
     if text is None:
         return None
-    return json.loads(text)
+    data = parse_json_strict(text)
+    if not isinstance(data, dict):
+        raise RuntimeError(f"Repository JSON artifact is not an object: {path_text}")
+    return data
 
 
 def _existing_receipt_matches_current(
@@ -330,11 +335,27 @@ def _existing_receipt_matches_current(
     stored_submission_sha256: str,
     receipt_path: str,
 ) -> bool:
+    receipt_ok, _ = verify_receipt_sha256(existing_receipt)
+    filename = receipt_path.rsplit("/", 1)[-1]
+    suffix = ".receipt.json"
+    if not receipt_ok or not filename.endswith(suffix):
+        return False
+    receipt_id = filename[:-len(suffix)]
+    record_type = existing_receipt.get("record_type")
+    if not isinstance(record_type, str) or not record_type:
+        return False
+    expected_intake_path = receipt_path.replace(
+        "/intake/receipts/", "/intake/submissions/", 1
+    ).replace(suffix, ".submission.json")
+    expected_pending_path = f"record-chain/pending/{receipt_id}.{record_type}.pending.json"
     return (
-        existing_receipt.get("submission_sha256") == submission_sha256
+        (existing_receipt.get("server_receipt_id") or existing_receipt.get("receipt_id")) == receipt_id
+        and existing_receipt.get("submission_sha256") == submission_sha256
+        and existing_receipt.get("original_submission_sha256", submission_sha256) == submission_sha256
         and existing_receipt.get("stored_submission_sha256") == stored_submission_sha256
         and existing_receipt.get("receipt_path") == receipt_path
-        and isinstance(existing_receipt.get("intake_submission_path"), str)
+        and existing_receipt.get("intake_submission_path") == expected_intake_path
+        and existing_receipt.get("pending_file_path") == expected_pending_path
     )
 
 
@@ -762,7 +783,9 @@ async def _read_idempotency_index(submission_sha256: str) -> dict[str, Any] | No
     text = await get_file_text(path)
     if text is None:
         return None
-    data = json.loads(text)
+    data = parse_json_strict(text)
+    if not isinstance(data, dict):
+        raise RuntimeError(f"Idempotency index is not a JSON object at {path}")
     if data.get("submission_sha256") != submission_sha256:
         raise RuntimeError(f"Idempotency index hash mismatch at {path}")
     return data
@@ -787,7 +810,7 @@ async def _submit_response_from_idempotency_index(
     if not receipt_text:
         raise RuntimeError(f"Idempotency receipt is missing: {receipt_path}")
 
-    receipt_data_raw = json.loads(receipt_text)
+    receipt_data_raw = parse_json_strict(receipt_text)
     if not isinstance(receipt_data_raw, dict):
         raise RuntimeError(f"Idempotency receipt is not a JSON object: {receipt_path}")
     receipt_data: dict[str, Any] = receipt_data_raw
@@ -897,6 +920,7 @@ async def _submit_response_from_idempotency_index(
     return SubmitResponse(
         accepted=True,
         submitted=True,
+        duplicate=True,
         receipt_id=receipt_id,
         record_type=index.get("record_type", record_type),
         submission_sha256=submission_sha256,
@@ -1351,8 +1375,8 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
     legacy_receipt_path = f"record-chain/intake/receipts/{date_prefix}/{legacy_receipt_id_local}.receipt.json"
     legacy_pending_file_path = f"record-chain/pending/{legacy_receipt_id_local}.{record_type}.pending.json"
 
-    # Track all created pending file paths
-    created_pending_records: list[str] = [pending_file_path]
+    # Track only pending files that actually became durable.
+    created_pending_records: list[str] = []
 
     # Extract oath verification summary for receipt (no raw readback)
     oath_summary = _extract_oath_verification_summary(draft)
@@ -1407,6 +1431,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 return SubmitResponse(
                     accepted=True,
                     submitted=True,
+                    duplicate=True,
                     receipt_id=existing_receipt.get("server_receipt_id") or existing_receipt.get("receipt_id") or receipt_id,
                     record_type=record_type,
                     submission_sha256=submission_sha256,
@@ -1495,10 +1520,35 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 f"intake: materialize {receipt_id} ({record_type})",
             )
             commit_sha = atomic_result.get("commit", {}).get("sha")
+            created_pending_records = [pending_file_path]
             logger.info("Atomically materialized intake transaction %s", receipt_id)
         except AtomicCreateConflict as exc:
             logger.warning("Atomic intake conflict for %s: %s", receipt_id, exc)
-            existing_index = await _read_idempotency_index(original_submission_sha256)
+            try:
+                existing_index = await _read_idempotency_index(original_submission_sha256)
+            except Exception as lookup_exc:
+                logger.error(
+                    "Atomic conflict idempotency lookup failed for %s: %s",
+                    original_submission_sha256[:16],
+                    lookup_exc,
+                )
+                return SubmitResponse(
+                    accepted=False,
+                    submitted=False,
+                    record_type=record_type,
+                    submission_sha256=original_submission_sha256,
+                    received_raw_body_sha256=received_raw_body_sha256,
+                    diagnostics=[Diagnostic(
+                        code="INTAKE_ATOMIC_CONFLICT_LOOKUP_FAILED",
+                        severity="error",
+                        field="record-chain/intake/by-submission-sha256",
+                        message=f"Atomic path conflict occurred and the winning idempotency state could not be read: {lookup_exc}",
+                        meaning="The gateway failed closed instead of guessing whether the concurrent intake succeeded.",
+                        suggested_fix="Retry the exact same submission later without rebuilding or re-signing it.",
+                        retry_allowed=True,
+                    )],
+                    boundary=_build_submit_boundary(body),
+                )
             if existing_index is not None:
                 try:
                     return await _submit_response_from_idempotency_index(
@@ -1575,8 +1625,13 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
         logger.info("Dry-run mode — skipping persist for %s", receipt_id)
         append_status = "dry_run"
 
-    # --- store receipt in memory (NOT mutated — same bytes as persisted) ---
+    # Cache durable receipts and preserve immediate dry-run readback without
+    # presenting the latter as durable repository intake.
     _receipt_store[receipt_id] = receipt_data
+    if _WRITE_MODE == "github_contents_pending":
+        _ephemeral_receipt_ids.discard(receipt_id)
+    else:
+        _ephemeral_receipt_ids.add(receipt_id)
 
     return SubmitResponse(
         accepted=True,
@@ -1635,13 +1690,21 @@ def _receipt_path_from_id(receipt_id: str) -> str:
     return f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
 
 
+def _record_chain_record_sha256(record: dict[str, Any]) -> str:
+    """Recompute the canonical Record-Chain record hash (newline included)."""
+    material = dict(record)
+    material.pop("record_sha256", None)
+    canonical_with_newline = canonical_dumps(material) + "\n"
+    return hashlib.sha256(canonical_with_newline.encode("utf-8")).hexdigest()
+
+
 async def _read_receipt_final_status(receipt_id: str) -> dict[str, Any] | None:
     """Read and verify the final append/reject status sidecar for a receipt."""
     path = f"record-chain/receipt-status/{receipt_id}.json"
     text = await get_file_text(path)
     if text is None:
         return None
-    status = json.loads(text)
+    status = parse_json_strict(text)
     if not isinstance(status, dict):
         raise RuntimeError(f"receipt-status is not an object at {path}")
     if status.get("schema") != "trinityaccord.record-chain-receipt-final-status.v1":
@@ -1649,8 +1712,9 @@ async def _read_receipt_final_status(receipt_id: str) -> dict[str, Any] | None:
     if status.get("receipt_id") != receipt_id:
         raise RuntimeError(f"receipt-status receipt_id mismatch at {path}")
     pending_path = status.get("pending_file_path")
-    if not isinstance(pending_path, str) or not pending_path.startswith("record-chain/pending/"):
-        raise RuntimeError(f"receipt-status pending_file_path invalid at {path}")
+    pending_pattern = rf"record-chain/pending/{re.escape(receipt_id)}\.[a-z_]+\.pending\.json"
+    if not isinstance(pending_path, str) or not re.fullmatch(pending_pattern, pending_path):
+        raise RuntimeError(f"receipt-status pending_file_path invalid or receipt-mismatched at {path}")
 
     append_status = status.get("append_status")
     if append_status == "appended":
@@ -1666,19 +1730,27 @@ async def _read_receipt_final_status(receipt_id: str) -> dict[str, Any] | None:
         final_text = await get_file_text(expected_path)
         if final_text is None:
             raise RuntimeError(f"receipt-status final record missing at {expected_path}")
-        final_record = json.loads(final_text)
+        final_record = parse_json_strict(final_text)
+        if not isinstance(final_record, dict):
+            raise RuntimeError(f"receipt-status final record is not an object at {expected_path}")
         if final_record.get("record_id") != final_id or final_record.get("record_sha256") != final_sha:
             raise RuntimeError(f"receipt-status final record binding mismatch at {path}")
+        if _record_chain_record_sha256(final_record) != final_sha:
+            raise RuntimeError(f"receipt-status final record hash recomputation failed at {path}")
         if status.get("rejection_path") is not None or status.get("rejection_code") is not None:
             raise RuntimeError(f"receipt-status appended/rejection fields conflict at {path}")
     elif append_status == "rejected":
         rejection_path = status.get("rejection_path")
-        if not isinstance(rejection_path, str) or not rejection_path.startswith("record-chain/rejected/"):
-            raise RuntimeError(f"receipt-status rejection_path invalid at {path}")
+        pending_name = pending_path.rsplit("/", 1)[-1]
+        expected_rejection_path = f"record-chain/rejected/{pending_name[:-5]}.rejection.json"
+        if rejection_path != expected_rejection_path:
+            raise RuntimeError(f"receipt-status rejection_path invalid or pending-mismatched at {path}")
         rejection_text = await get_file_text(rejection_path)
         if rejection_text is None:
             raise RuntimeError(f"receipt-status rejection metadata missing at {rejection_path}")
-        rejection = json.loads(rejection_text)
+        rejection = parse_json_strict(rejection_text)
+        if not isinstance(rejection, dict):
+            raise RuntimeError(f"receipt-status rejection metadata is not an object at {rejection_path}")
         if rejection.get("source_pending") != pending_path.rsplit("/", 1)[-1]:
             raise RuntimeError(f"receipt-status rejection source binding mismatch at {path}")
         if any(status.get(field) is not None for field in ("final_record_id", "final_record_path", "final_record_sha256")):
@@ -1782,7 +1854,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
     try:
         text = await get_file_text(receipt_path)
         if text is not None:
-            receipt = json.loads(text)
+            receipt = parse_json_strict(text)
             # Fail-closed: receipt MUST have receipt_sha256
             if not receipt.get("receipt_sha256"):
                 raise HTTPException(
@@ -1807,6 +1879,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                     },
                 )
             _receipt_store[receipt_id] = receipt  # update cache
+            _ephemeral_receipt_ids.discard(receipt_id)
             return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
     except HTTPException:
         # Re-raise HTTPExceptions (integrity errors) — do not swallow
@@ -1830,6 +1903,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
         hash_ok, hash_err = verify_receipt_sha256(cached)
         if not hash_ok:
             _receipt_store.pop(receipt_id, None)  # evict corrupt cache
+            _ephemeral_receipt_ids.discard(receipt_id)
             raise HTTPException(
                 status_code=500,
                 detail={
@@ -1838,16 +1912,35 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                     "receipt_id": receipt_id,
                 },
             )
+        envelope_warnings: list[dict[str, Any]] = []
+        if receipt_id in _ephemeral_receipt_ids:
+            envelope_warnings.append({
+                "code": "RECEIPT_NON_DURABLE_DRY_RUN",
+                "message": "This hash-verified receipt exists only in process memory because the submission used dry-run mode; it is not durable intake.",
+                "receipt_path": receipt_path,
+                "retryable": False,
+            })
         if backend_error is None:
-            return await _build_receipt_envelope(cached, receipt_id, receipt_path)
-        # Backend errored but we have verified cache — return cache with warning
+            return await _build_receipt_envelope(
+                cached,
+                receipt_id,
+                receipt_path,
+                envelope_warnings=envelope_warnings or None,
+            )
+        # Backend errored but we have verified cache — return cache with warning.
         # Don't mutate the receipt; put warnings in the envelope instead.
-        envelope_warnings = [{
+        envelope_warnings.append({
             "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
+            "message": "Durable receipt storage could not be read; a hash-verified in-memory cache entry was returned.",
             "receipt_path": receipt_path,
             "retryable": True,
-        }]
-        return await _build_receipt_envelope(cached, receipt_id, receipt_path, envelope_warnings=envelope_warnings)
+        })
+        return await _build_receipt_envelope(
+            cached,
+            receipt_id,
+            receipt_path,
+            envelope_warnings=envelope_warnings,
+        )
 
     # No cache, no durable — determine error type
     if backend_error is not None:
@@ -1862,14 +1955,18 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
             },
         )
 
-    raise HTTPException(
+    return JSONResponse(
         status_code=404,
-        detail={
-            "code": "RECEIPT_NOT_FOUND",
-            "message": f"Receipt '{receipt_id}' not found",
-            "receipt_id": receipt_id,
-            "receipt_path": receipt_path,
-            "retryable": False,
+        content={
+            "found": False,
+            "diagnostics": [{
+                "code": "RECEIPT_NOT_FOUND",
+                "severity": "error",
+                "message": f"Receipt '{receipt_id}' not found",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "retry_allowed": False,
+            }],
         },
     )
 

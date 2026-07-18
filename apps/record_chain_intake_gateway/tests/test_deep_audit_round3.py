@@ -153,7 +153,14 @@ def test_dry_run_does_not_claim_or_cache_durable_artifacts(
     assert data["append_status"] == "dry_run"
     assert data["duplicate"] is False
     assert data["created_pending_records"] == []
-    assert data["receipt_id"] not in app_module._receipt_store
+    assert data["receipt_id"] in app_module._receipt_store
+    retrieved = client.get(f"/record-chain/receipt/{data['receipt_id']}")
+    assert retrieved.status_code == 200
+    assert any(
+        warning.get("code") == "RECEIPT_NON_DURABLE_DRY_RUN"
+        for warning in retrieved.json().get("envelope_warnings", [])
+        if isinstance(warning, dict)
+    )
 
 
 @pytest.mark.asyncio
@@ -206,6 +213,7 @@ def test_submit_schema_success_and_failure_are_disjoint() -> None:
         receipt_path="record-chain/intake/receipts/example.json",
         server_created_at="2026-07-18T00:00:00Z",
         append_status="queued",
+        receipt={},
         diagnostics=[],
         warnings=[],
         boundary={

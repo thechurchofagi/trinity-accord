@@ -135,8 +135,9 @@ class TestGetReceipt:
             resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert resp.status_code == 404
         body = resp.json()
-        assert body["detail"]["code"] == "RECEIPT_NOT_FOUND"
-        assert body["detail"]["retryable"] is False
+        assert body["found"] is False
+        assert body["diagnostics"][0]["code"] == "RECEIPT_NOT_FOUND"
+        assert body["diagnostics"][0]["retry_allowed"] is False
 
     def test_invalid_receipt_id_returns_400(self, client: TestClient) -> None:
         resp = client.get("/record-chain/receipt/invalid-format")
