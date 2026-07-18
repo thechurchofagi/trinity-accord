@@ -77,6 +77,7 @@ jobs:
             apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
             apps/record_chain_intake_gateway/tests/test_receipt.py \
             scripts/smoke_external_agent_journey_swarm.py \
+            scripts/test_record_chain_p0_transaction_and_finalizer_contract.py \
             tests/test_external_agent_journey_swarm_contract.py \
             api/record-chain-receipt-response.v1.json \
             scripts/apply_post_atomic_deep_audit.py \
