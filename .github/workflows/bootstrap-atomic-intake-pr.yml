@@ -34,6 +34,16 @@ jobs:
           end = source.index(closer, start)
           lines = source[start:end].splitlines()
           code = '\n'.join(line[10:] if line.startswith('          ') else line for line in lines) + '\n'
+          fragile = "assert old_policy in policy, 'readback policy marker missing'\npolicy = policy.replace(old_policy, new_policy, 1)"
+          robust = """if old_policy in policy:
+    policy = policy.replace(old_policy, new_policy, 1)
+else:
+    policy_start = policy.index('    for relative in [')
+    policy_end = policy.index('    print(\"READBACK_HASH_POLICY_OK\")', policy_start)
+    policy = policy[:policy_start] + new_policy + '\\n' + policy[policy_end:]"""
+          if fragile not in code:
+              raise SystemExit('could not locate readback policy patch instructions')
+          code = code.replace(fragile, robust, 1)
           Path('/tmp/apply_atomic_fix.py').write_text(code, encoding='utf-8')
           PY
           set +e
