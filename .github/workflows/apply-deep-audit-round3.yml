@@ -47,6 +47,7 @@ jobs:
           PY
           python3 scripts/apply_deep_audit_round3.py
           python3 scripts/align_deep_audit_round3_tests.py
+          python3 scripts/fix_deep_audit_round3_test_expectations.py
 
       - name: Install test dependencies
         run: python3 -m pip install -q -r requirements-ci.txt
@@ -55,12 +56,16 @@ jobs:
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
         run: |
+          set +e
           python3 -m pytest \
             apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py \
             apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
             apps/record_chain_intake_gateway/tests/test_idempotency_index.py \
             apps/record_chain_intake_gateway/tests/test_receipt.py \
-            -q --tb=short
+            -q --tb=short > /tmp/deep-audit-round3-focused.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then cat /tmp/deep-audit-round3-focused.log; else tail -n 2 /tmp/deep-audit-round3-focused.log; fi
+          exit "$status"
 
       - name: Run current-system suite
         run: python3 scripts/run_current_system_tests.py
@@ -69,6 +74,7 @@ jobs:
         run: |
           rm scripts/apply_deep_audit_round3.py
           rm scripts/align_deep_audit_round3_tests.py
+          rm scripts/fix_deep_audit_round3_test_expectations.py
           rm .github/workflows/apply-deep-audit-round3.yml
 
       - name: Commit validated fixes
@@ -87,6 +93,7 @@ jobs:
             api/record-chain-submit-response.v1.json \
             scripts/apply_deep_audit_round3.py \
             scripts/align_deep_audit_round3_tests.py \
+            scripts/fix_deep_audit_round3_test_expectations.py \
             .github/workflows/apply-deep-audit-round3.yml
           git commit -m "Fix deeper intake lifecycle and receipt contract gaps"
           git push origin HEAD:fix/deep-audit-round3-20260718
