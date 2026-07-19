@@ -97,8 +97,33 @@ jobs:
             tests/test_chronicle_required_ci_coverage.py
           git commit -m "Fix Chronicle generated-artifact drift"
 
-      - name: Validate Chronicle group
-        run: python3 scripts/run_ci_group.py chronicle
+      - name: Re-run Chronicle context generator
+        run: python3 scripts/generate_nft_chronicle_context.py
+
+      - name: Verify Chronicle context files are clean
+        run: |
+          git diff --exit-code -- \
+            nft-text-descriptions/chronicle-full.md \
+            nft-text-descriptions/chronicle-abridged.md \
+            nft-text-descriptions/chronicle-ultra-brief.md \
+            nft-text-descriptions/chronicle-agent-context.md \
+            nft-text-descriptions/chronicle-index.json \
+            nft-text-descriptions/chronicle-summary.json \
+            api/agent-required-reading.json \
+            api/agent-task-router.v1.json \
+            api/context-load-map.json
+
+      - name: Validate Chronicle context artifacts
+        run: python3 scripts/test_nft_chronicle_context_artifacts.py
+
+      - name: Re-run Chronicle music generator
+        run: python3 scripts/generate_chronicle_music_canonical.py
+
+      - name: Verify Chronicle music file is clean
+        run: git diff --exit-code -- nft-text-descriptions/chronicle-music-canonical.json
+
+      - name: Validate Chronicle site integration
+        run: python3 scripts/test_chronicle_site_integration.py
 
       - name: Validate required-CI coverage guard
         run: python3 -m pytest tests/test_chronicle_required_ci_coverage.py -q
