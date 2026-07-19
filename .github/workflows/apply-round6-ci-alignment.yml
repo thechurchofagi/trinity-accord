@@ -1,0 +1,50 @@
+name: Apply Round 6 CI Alignment
+
+on:
+  push:
+    branches:
+      - deep-audit-round6-ci-code-alignment
+    paths:
+      - "scripts/apply_round6_ci_alignment.py"
+      - ".github/workflows/apply-round6-ci-alignment.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: deep-audit-round6-ci-code-alignment
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Apply alignment edits
+        run: python3 scripts/apply_round6_ci_alignment.py
+      - name: Install validation dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Validate focused contracts
+        run: |
+          python3 scripts/test_ci_code_alignment.py
+          python3 scripts/validate_json_strict.py
+          python3 scripts/test_deploy_pages_workflow_contract.py
+          python3 scripts/test_record_chain_write_path_guard_contract.py
+          python3 scripts/test_deep_integrity_includes_pages_build.py
+      - name: Remove one-shot applicator
+        run: |
+          rm -f scripts/apply_round6_ci_alignment.py
+          rm -f .github/workflows/apply-round6-ci-alignment.yml
+      - name: Commit validated alignment edits
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-round6-audit-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Align CI workflows with code and deployed runtimes"
+          git push origin HEAD:deep-audit-round6-ci-code-alignment
