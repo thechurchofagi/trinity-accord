@@ -15,7 +15,7 @@ services:
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
-        value: "3.12"
+        value: "3.11"
       - key: TRINITY_REPO_FULL_NAME
         value: thechurchofagi/trinity-accord
       - key: TRINITY_TARGET_BRANCH
