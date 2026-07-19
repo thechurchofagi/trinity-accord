@@ -1,17 +1,26 @@
 from __future__ import annotations
 
-import sys
+import importlib.util
 from pathlib import Path
+from types import ModuleType
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-import test_ci_code_alignment as alignment  # noqa: E402
-import validate_json_strict as strict_json  # noqa: E402
+
+def load_script(module_name: str, filename: str) -> ModuleType:
+    spec = importlib.util.spec_from_file_location(module_name, SCRIPTS / filename)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load {filename}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+alignment = load_script("trinity_ci_alignment_contract", "test_ci_code_alignment.py")
+strict_json = load_script("trinity_strict_json_validator", "validate_json_strict.py")
 
 
 def test_strict_json_rejects_duplicate_object_keys() -> None:
