@@ -83,9 +83,9 @@ def main() -> int:
         errors.append("helper should validate required args before fetching bundles")
 
     gate_pos = text.find("if not args.allow_historical_retired_bundle")
-    download_pos = text.find("download_file(")
+    download_pos = text.find("download_file(archive_url, archive_path)")
     if gate_pos < 0 or download_pos < 0 or gate_pos > download_pos:
-        errors.append("historical opt-in gate must execute before bundle download")
+        errors.append("historical opt-in gate must execute before bundle retrieval")
 
     if errors:
         print("FAIL: test_download_helper_covers_all_routes:")
