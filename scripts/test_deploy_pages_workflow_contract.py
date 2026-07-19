@@ -39,6 +39,10 @@ def main() -> int:
         "source_sha: ${{ steps.source.outputs.source_sha }}",
         "ref: ${{ needs.verify.outputs.source_sha }}",
         "ref: ${{ needs.build.outputs.source_sha }}",
+        "Resolve immutable current-main source revision",
+        "git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main",
+        'if [[ "${source_sha}" != "${main_sha}" ]]',
+        "Refusing to publish ${source_sha}; current main is ${main_sha}",
         "Confirm immutable verify/build handoff",
         "Confirm immutable build/deploy handoff",
         "trinity-pages-source-receipt.v1",
@@ -83,7 +87,7 @@ def main() -> int:
         for error in errors:
             print("  -", error)
         return 1
-    print("PASS: deploy-pages workflow contract (exact-SHA publication)")
+    print("PASS: deploy-pages workflow contract (current-main exact-SHA publication)")
     return 0
 
 
