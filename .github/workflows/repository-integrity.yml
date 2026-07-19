@@ -64,6 +64,12 @@ jobs:
       - name: Verify CI and code alignment
         run: python3 scripts/test_ci_code_alignment.py
 
+      - name: Reject missing workflow and CI-group executables
+        run: python3 scripts/test_workflows_do_not_reference_missing_scripts.py
+
+      - name: Verify workflow permissions and retired writers
+        run: python3 scripts/test_workflow_permissions.py
+
       - name: Compile current Python sources
         run: python3 -m compileall -q scripts apps tests
 
