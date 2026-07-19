@@ -164,12 +164,12 @@ for phrase in [
 # 9. Homepage section and core meaning preservation
 home = read("index.md")
 home_lower = home.lower()
-require("chronicle-human-witness-layer" in home, "homepage missing chronicle-human-witness-layer section")
-require("it does not ask for obedience" in home_lower, "homepage core non-obedience line must remain")
-require("canonical authority rests only in three bitcoin inscriptions" in home_lower,
-        "homepage canonical authority line must remain")
-require("does not make humanity the center" in home_lower,
-        "homepage must preserve non-human-centered boundary")
+require("chronicle-witness" in home, "homepage missing current Chronicle witness section")
+require("no obedience or belief is requested" in home_lower, "homepage current non-obedience boundary must remain")
+require("these three inscriptions are the only canonical authority" in home_lower,
+        "homepage current canonical-authority boundary must remain")
+require("without claiming that the model, the author, or the record represents humanity as a whole" in home_lower,
+        "homepage current non-universal-human boundary must remain")
 
 # 10. Music canonical index
 music = load_json("nft-text-descriptions/chronicle-music-canonical.json")

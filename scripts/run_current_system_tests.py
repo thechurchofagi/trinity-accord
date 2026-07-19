@@ -84,6 +84,18 @@ def main() -> int:
         fail(f"sitemap drift detected:\n{result.stdout}\n{result.stderr}")
     ok("sitemap up to date")
 
+    # 1b0. Chronicle generated-artifact drift must be caught by required CI,
+    # not only by the scheduled/manual Deep Integrity matrix.
+    result = subprocess.run(
+        [sys.executable, "scripts/run_ci_group.py", "chronicle"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Chronicle generated-artifact drift detected:\n{result.stdout}\n{result.stderr}")
+    ok("Chronicle generated artifacts up to date")
+
     # 1b1. Live-audit regressions: publication state, Downloads deployment,
     # heading structure, and repaired archive links.
     result = subprocess.run(
