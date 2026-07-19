@@ -22,34 +22,28 @@ jobs:
         with:
           ref: fix/chronicle-generated-drift-20260719-v4
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
-
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version-file: ".node-version"
           cache: "npm"
-
       - name: Install locked test dependencies
         run: |
           python3 -m pip install -r requirements-ci.txt
           npm ci
-
       - name: Regenerate Chronicle outputs
         run: |
           set -euo pipefail
           python3 scripts/generate_nft_chronicle_context.py
           python3 scripts/generate_chronicle_music_canonical.py
-
       - name: Make Chronicle drift a required current-system check
         run: |
           python3 - <<'PY'
           from pathlib import Path
-
           runner = Path("scripts/run_current_system_tests.py")
           text = runner.read_text(encoding="utf-8")
           marker = '    ok("sitemap up to date")\n'
@@ -70,67 +64,49 @@ jobs:
           if "Chronicle generated artifacts up to date" not in text:
               if marker not in text:
                   raise SystemExit("runner insertion marker not found")
-              text = text.replace(marker, marker + block, 1)
-              runner.write_text(text, encoding="utf-8")
-
-          test = Path("tests/test_chronicle_required_ci_coverage.py")
-          test.write_text(
-              '''from pathlib import Path\n\n\ndef test_required_current_ci_runs_chronicle_drift_group() -> None:\n    root = Path(__file__).resolve().parents[1]\n    runner = (root / "scripts/run_current_system_tests.py").read_text(encoding="utf-8")\n    assert '[sys.executable, "scripts/run_ci_group.py", "chronicle"]' in runner\n    workflow = (root / ".github/workflows/run-current-tests.yml").read_text(encoding="utf-8")\n    assert "python3 scripts/run_current_system_tests.py" in workflow\n''',
-              encoding="utf-8",
-          )
+              runner.write_text(text.replace(marker, marker + block, 1), encoding="utf-8")
+          Path("tests/test_chronicle_required_ci_coverage.py").write_text(
+              '''from pathlib import Path\n\n\ndef test_required_current_ci_runs_chronicle_drift_group() -> None:\n    root = Path(__file__).resolve().parents[1]\n    runner = (root / "scripts/run_current_system_tests.py").read_text(encoding="utf-8")\n    assert '[sys.executable, "scripts/run_ci_group.py", "chronicle"]' in runner\n    workflow = (root / ".github/workflows/run-current-tests.yml").read_text(encoding="utf-8")\n    assert "python3 scripts/run_current_system_tests.py" in workflow\n''', encoding="utf-8")
           PY
-
       - name: Create local validation checkpoint
         run: |
           set -euo pipefail
           git config user.name "trinity-regression-repair-bot"
           git config user.email "actions@github.com"
-          git add \
-            nft-text-descriptions/chronicle-full.md \
-            nft-text-descriptions/chronicle-abridged.md \
-            nft-text-descriptions/chronicle-ultra-brief.md \
-            nft-text-descriptions/chronicle-agent-context.md \
-            nft-text-descriptions/chronicle-index.json \
-            nft-text-descriptions/chronicle-summary.json \
-            nft-text-descriptions/chronicle-music-canonical.json \
-            scripts/run_current_system_tests.py \
-            tests/test_chronicle_required_ci_coverage.py
+          git add nft-text-descriptions/chronicle-full.md nft-text-descriptions/chronicle-abridged.md nft-text-descriptions/chronicle-ultra-brief.md nft-text-descriptions/chronicle-agent-context.md nft-text-descriptions/chronicle-index.json nft-text-descriptions/chronicle-summary.json nft-text-descriptions/chronicle-music-canonical.json scripts/run_current_system_tests.py tests/test_chronicle_required_ci_coverage.py
           git commit -m "Fix Chronicle generated-artifact drift"
-
       - name: Re-run Chronicle context generator
         run: python3 scripts/generate_nft_chronicle_context.py
-
       - name: Verify Chronicle context files are clean
         run: |
-          git diff --exit-code -- \
-            nft-text-descriptions/chronicle-full.md \
-            nft-text-descriptions/chronicle-abridged.md \
-            nft-text-descriptions/chronicle-ultra-brief.md \
-            nft-text-descriptions/chronicle-agent-context.md \
-            nft-text-descriptions/chronicle-index.json \
-            nft-text-descriptions/chronicle-summary.json \
-            api/agent-required-reading.json \
-            api/agent-task-router.v1.json \
-            api/context-load-map.json
-
+          git diff --exit-code -- nft-text-descriptions/chronicle-full.md nft-text-descriptions/chronicle-abridged.md nft-text-descriptions/chronicle-ultra-brief.md nft-text-descriptions/chronicle-agent-context.md nft-text-descriptions/chronicle-index.json nft-text-descriptions/chronicle-summary.json api/agent-required-reading.json api/agent-task-router.v1.json api/context-load-map.json
       - name: Validate Chronicle context artifacts
         run: python3 scripts/test_nft_chronicle_context_artifacts.py
-
       - name: Re-run Chronicle music generator
         run: python3 scripts/generate_chronicle_music_canonical.py
-
       - name: Verify Chronicle music file is clean
         run: git diff --exit-code -- nft-text-descriptions/chronicle-music-canonical.json
-
-      - name: Validate Chronicle site integration
-        run: python3 scripts/test_chronicle_site_integration.py
-
+      - name: Capture Chronicle site integration result
+        id: chronicle_site
+        continue-on-error: true
+        run: python3 scripts/test_chronicle_site_integration.py > /tmp/chronicle-site-integration.log 2>&1
+      - name: Upload Chronicle site integration log
+        if: steps.chronicle_site.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: chronicle-site-integration-log
+          path: /tmp/chronicle-site-integration.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Surface Chronicle site integration failure
+        if: steps.chronicle_site.outcome == 'failure'
+        run: |
+          cat /tmp/chronicle-site-integration.log
+          exit 1
       - name: Validate required-CI coverage guard
         run: python3 -m pytest tests/test_chronicle_required_ci_coverage.py -q
-
       - name: Validate complete current system
         run: python3 scripts/run_current_system_tests.py
-
       - name: Remove temporary workflow and publish repair
         run: |
           set -euo pipefail
