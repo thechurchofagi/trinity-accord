@@ -88,7 +88,6 @@
     ]
   },
   "route_map_url": "/api/gateway-builder-route-map.v1.json",
-  "schema": "trinityaccord.gateway-workflows.v1",
   "universal_rules": [
     "choose_route_first",
     "use_matching_builder",
@@ -98,7 +97,6 @@
     "run_gateway_preflight",
     "submit_only_after_preflight_accepts"
   ],
-  "version": "1.0.0",
   "workflows": {
     "e2_verification_echo": {
       "copyable_example": "/api/external-agent-operation-examples.v1.json#/examples/e2_verification_echo",
