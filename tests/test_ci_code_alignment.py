@@ -39,9 +39,12 @@ def test_strict_json_accepts_normal_json() -> None:
     }
 
 
-def test_requirement_parser_rejects_duplicate_dependency(tmp_path: Path) -> None:
+def test_requirement_parser_rejects_duplicate_dependency(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     path = tmp_path / "requirements.txt"
     path.write_text("example==1.0\nexample==1.0\n", encoding="utf-8")
+    monkeypatch.setattr(alignment, "ROOT", tmp_path)
     with pytest.raises(ValueError, match="duplicates dependency"):
         alignment.parse_requirements(path)
 
