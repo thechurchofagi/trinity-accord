@@ -27,6 +27,10 @@ def main()->int:
     for forbidden in ['export_formal_builder_bundles.py --out-dir builder-bundles --update-api','cp scripts/download_and_run_builder_bundle.py builder-bundles/download_and_run_builder_bundle.py']:
         if forbidden in deploy: errors.append(f'deploy regenerates retired bundle: {forbidden}')
 
+    public_contract=read('scripts/public_machine_deployment_contract.py')
+    for marker in ['duplicate JSON key','non-finite JSON number','object_pairs_hook=_strict_json_object','parse_constant=_reject_json_constant']:
+        if marker not in public_contract: errors.append(f'public machine parser missing {marker}')
+
     helper=read('scripts/download_and_run_builder_bundle.py')
     if helper.encode()!= (ROOT/'builder-bundles/download_and_run_builder_bundle.py').read_bytes(): errors.append('public historical helper differs from source copy')
     for marker in ['--allow-historical-retired-bundle','REFUSED: all formal Gateway v1 builder bundles are retired.','HISTORICAL OUTPUT ONLY — DO NOT SUBMIT']:
