@@ -1,77 +1,140 @@
 #!/usr/bin/env python3
-"""Test: Python CI dependencies must be pinned via approved requirements files."""
-from pathlib import Path
+"""Verify Python dependency files, workflow installs, and production runtime parity."""
+from __future__ import annotations
+
 import re
 import sys
+from pathlib import Path
+from typing import Iterable
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-REQ = ROOT / "requirements-ci.txt"
-REQ_OTS = ROOT / "requirements-ots.txt"
 WF_DIR = ROOT / ".github" / "workflows"
+REQUIREMENT_FILES = (
+    ROOT / "requirements-ci.txt",
+    ROOT / "requirements-ots.txt",
+    ROOT / "apps/record_chain_intake_gateway/requirements.txt",
+)
+errors: list[str] = []
 
-errors = []
 
-
-def requirements_file_is_pinned(path: Path) -> bool:
-    if not path.exists():
-        errors.append(f"{path.name} missing")
-        return False
-    ok = True
-    for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+def parse_requirements(path: Path) -> dict[str, str]:
+    result: dict[str, str] = {}
+    if not path.is_file():
+        errors.append(f"{path.relative_to(ROOT)} missing")
+        return result
+    for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
-        if not re.match(r"^[A-Za-z0-9_.-]+(\[[A-Za-z0-9_,.-]+\])?==[0-9]", line):
-            errors.append(f"{path.name}:{lineno}: dependency is not pinned with ==: {line}")
-            ok = False
-    return ok
+        match = re.fullmatch(
+            r"([A-Za-z0-9_.-]+)(?:\[[A-Za-z0-9_,.-]+\])?==([^\s]+)", line
+        )
+        if not match:
+            errors.append(
+                f"{path.relative_to(ROOT)}:{lineno}: dependency is not pinned with ==: {line}"
+            )
+            continue
+        package = match.group(1).lower()
+        if package in result:
+            errors.append(f"{path.relative_to(ROOT)}:{lineno}: duplicate dependency {package}")
+            continue
+        result[package] = match.group(2)
+    return result
 
 
-requirements_file_is_pinned(REQ)
-requirements_file_is_pinned(REQ_OTS)
+def requirement_refs(text: str) -> Iterable[str]:
+    yield from re.findall(r"(?:^|\s)-r\s+([A-Za-z0-9_./-]+\.txt)", text)
+    yield from re.findall(r"(?:^|\s)--requirement(?:=|\s+)([A-Za-z0-9_./-]+\.txt)", text)
 
-if REQ.exists():
-    req_text = REQ.read_text(encoding="utf-8")
-    for required in ["jsonschema==", "opentimestamps-client=="]:
-        if required not in req_text:
-            errors.append(f"requirements-ci.txt missing pinned {required}")
 
-if REQ_OTS.exists():
-    ots_text = REQ_OTS.read_text(encoding="utf-8")
-    if "opentimestamps-client==" not in ots_text:
-        errors.append("requirements-ots.txt missing pinned opentimestamps-client==")
+parsed = {path: parse_requirements(path) for path in REQUIREMENT_FILES}
+ci = parsed[ROOT / "requirements-ci.txt"]
+gateway = parsed[ROOT / "apps/record_chain_intake_gateway/requirements.txt"]
 
-APPROVED_REQUIREMENTS = ["requirements-ci.txt", "requirements-ots.txt"]
-LEGACY_OTS_WORKFLOWS = {"record-chain-ots-stamp.yml", "record-chain-ots-upgrade.yml"}
+for required in ("jsonschema", "opentimestamps-client", "pytest", "cryptography"):
+    if required not in ci:
+        errors.append(f"requirements-ci.txt missing pinned {required}")
 
-for path in WF_DIR.glob("*.yml"):
+for package in sorted(set(ci) & set(gateway)):
+    if ci[package] != gateway[package]:
+        errors.append(
+            f"shared package version drift for {package}: "
+            f"requirements-ci={ci[package]} gateway={gateway[package]}"
+        )
+
+referenced: set[Path] = set()
+for path in sorted(WF_DIR.glob("*.yml")):
     text = path.read_text(encoding="utf-8")
-
     if "pip install --upgrade pip" in text or "python3 -m pip install --upgrade pip" in text:
         errors.append(f"{path.name}: unpinned pip upgrade")
+    for ref in requirement_refs(text):
+        req_path = (ROOT / ref).resolve()
+        referenced.add(req_path)
+        if not req_path.is_file():
+            errors.append(f"{path.name}: references missing requirements file {ref}")
+        elif req_path not in parsed:
+            parsed[req_path] = parse_requirements(req_path)
 
     for line in text.splitlines():
         stripped = line.strip()
-        if "pip install" not in stripped:
+        if "pip install" not in stripped or stripped.startswith("#"):
             continue
-        if any(f"-r {name}" in stripped for name in APPROVED_REQUIREMENTS):
-            continue
-        if re.search(r"\b[a-zA-Z0-9_.-]+==[0-9]", stripped):
-            continue
-        if stripped.startswith("#"):
-            continue
-        if path.name in LEGACY_OTS_WORKFLOWS and stripped in {"- run: pip install opentimestamps-client", "- run: python -m pip install opentimestamps-client", "- run: python3 -m pip install opentimestamps-client"}:
-            # These legacy OTS workflows predate the shared requirements file.
-            # Their dependency is still tracked by requirements-ots.txt above; keep
-            # this narrow exception until those legacy workflows are retired or safely
-            # rewritten in a dedicated write-workflow hardening PR.
-            continue
-        errors.append(f"{path.name}: unpinned pip install line: {stripped}")
+        refs = list(requirement_refs(stripped))
+        remainder = stripped
+        for ref in refs:
+            remainder = re.sub(
+                rf"(?:-r\s+|--requirement(?:=|\s+)){re.escape(ref)}", "", remainder
+            )
+        remainder = re.sub(r"^(?:run:\s*)?(?:python3?|pip3?)\s+-m\s+pip\s+install\s*", "", remainder)
+        remainder = re.sub(r"^(?:run:\s*)?pip3?\s+install\s*", "", remainder)
+        tokens = [token for token in remainder.split() if not token.startswith("-") and token not in {"&&", "\\"}]
+        for token in tokens:
+            if token.endswith(".txt") or token.startswith("$"):
+                continue
+            if "==" not in token:
+                errors.append(f"{path.name}: unpinned pip install token {token!r}: {stripped}")
+
+for required_path in REQUIREMENT_FILES:
+    if required_path.resolve() not in referenced and required_path.name != "requirements-ots.txt":
+        errors.append(f"{required_path.relative_to(ROOT)} is not exercised by any workflow")
+
+try:
+    render = yaml.safe_load((ROOT / "render.yaml").read_text(encoding="utf-8"))
+    services = render.get("services", []) if isinstance(render, dict) else []
+    gateway_service = next(
+        (
+            service
+            for service in services
+            if isinstance(service, dict) and service.get("name") == "trinity-record-chain-gateway"
+        ),
+        None,
+    )
+    if gateway_service is None:
+        errors.append("render.yaml missing trinity-record-chain-gateway")
+    else:
+        build = str(gateway_service.get("buildCommand", ""))
+        if "-r apps/record_chain_intake_gateway/requirements.txt" not in build:
+            errors.append("Gateway Render build does not use its committed requirements file")
+        env = {
+            item.get("key"): item.get("value")
+            for item in gateway_service.get("envVars", [])
+            if isinstance(item, dict)
+        }
+        production_python = env.get("PYTHON_VERSION")
+        gateway_ci = (WF_DIR / "record-chain-gateway-tests.yml").read_text(encoding="utf-8")
+        if not production_python or f'python-version: "{production_python}"' not in gateway_ci:
+            errors.append(
+                f"Gateway CI does not exercise production Python {production_python!r}"
+            )
+except (OSError, yaml.YAMLError, AttributeError) as exc:
+    errors.append(f"cannot validate Gateway Python runtime: {exc}")
 
 if errors:
-    print("FAIL: Python dependency pinning violations:")
-    for e in errors:
-        print("  -", e)
+    print("FAIL: Python dependency/runtime pinning violations:")
+    for error in errors:
+        print(f"  - {error}")
     sys.exit(1)
 
 print("PYTHON_DEPENDENCY_PINNING_OK")
