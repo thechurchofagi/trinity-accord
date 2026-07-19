@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test that download_and_run_builder_bundle.py covers all routes and is safe."""
+"""Check that the retired zero-clone bundle helper is complete and fail-closed."""
 from __future__ import annotations
 
 import sys
@@ -17,16 +17,20 @@ def main() -> int:
     text = helper.read_text(encoding="utf-8")
     errors = []
 
-    # All routes must be present
     required = [
+        "Historical Gateway v1 bundle runner retained for forensic reproduction only",
         "pure_echo",
         "v0_v5_agent_declared_archive",
         "guardian_application_stage_1",
         "guardian_listing_stage_2",
         "guardian_signed_echo",
+        "guardian_full_registration",
+        "guardian_retirement",
         "verify_sha256",
         "extract_bundle",
         "Refusing unsafe tar path",
+        "Refusing unsafe tar member type",
+        'filter="data"',
         "has no sha256 recorded",
         "READBACK_TARGETS",
         "build_guardian_stage1",
@@ -34,62 +38,61 @@ def main() -> int:
         '"--out", args.out',
         "build_guardian_signed_echo",
         "--guardian-key-prefix",
-        "/record-chain/preflight",
-        "/record-chain/submit",
+        "--allow-historical-retired-bundle",
+        "all formal Gateway v1 builder bundles are retired",
+        "Generated payloads must not be submitted to the current Gateway",
+        "/api/agent-first-contact.json",
+        "/downloads/record-chain-builder.mjs",
+        "/api/record-chain-builder-bundles.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
     ]
-    for r in required:
-        if r not in text:
-            errors.append(f"missing required string: {r}")
+    for marker in required:
+        if marker not in text:
+            errors.append(f"missing required string: {marker}")
 
-    # Forbidden
-    forbidden = ["/gateway/submit"]
-    for f in forbidden:
-        if f in text:
-            errors.append(f"forbidden string present: {f}")
+    for active_submit_path in [
+        "/gateway/submit",
+        "/record-chain/submit",
+        "/record-chain/preflight",
+    ]:
+        if active_submit_path in text:
+            errors.append(
+                f"retired helper must not advertise a current submission endpoint: {active_submit_path}"
+            )
 
-    # Guardian Stage 1 must use node for .mjs
     if '"node", str(extract_dir / entrypoint)' not in text and "'node', str(extract_dir / entrypoint)" not in text:
         errors.append("Guardian Stage 1 must use node to run .mjs builder")
-
-    # Guardian Stage 1 must pass --out
     if '"--out", args.out' not in text and "'--out', args.out" not in text:
         errors.append("Guardian Stage 1 must pass --out args.out")
-
-    # Must protect against unsafe tar paths
     if "resolved_target" not in text or "Refusing unsafe tar path" not in text:
         errors.append("helper must protect against unsafe tar paths")
-
-    # Must fail closed when API sha256 is empty
     if "has no sha256 recorded" not in text:
         errors.append("helper must fail closed when API sha256 is empty")
-
-    # Must use --readback (not --readback-file) for v0_v5 and guardian stage 1
     if '"--readback", readback' not in text and "'--readback', readback" not in text:
-        errors.append("helper must pass --readback with file content for v0_v5 and guardian stage 1")
-
-    # Must have route-specific readback targets
+        errors.append("helper must pass --readback with file content for archived routes")
     if "READBACK_TARGETS" not in text:
-        errors.append("helper must have route-specific READBACK_TARGETS")
-
-    # Must validate required args before download
+        errors.append("helper must retain route-specific historical readback targets")
     if "require_args" not in text:
         errors.append("helper must validate required args before download")
 
-    # Must validate args before fetching/downloading bundles
-    # Check that require_args is *called* before fetch_json is called (not just defined)
-    # Find the first call to require_args (not the def line)
     require_call_pos = text.find("require_args(args,")
-    fetch_call_pos = text.find("fetch_json(bundles_url)") or text.find("fetch_json(site")
+    fetch_call_pos = text.find("fetch_json(bundles_url)")
+    if fetch_call_pos < 0:
+        fetch_call_pos = text.find("fetch_json(site")
     if require_call_pos > 0 and fetch_call_pos > 0 and require_call_pos > fetch_call_pos:
-        errors.append("helper should validate required args before fetching/downloading bundles")
+        errors.append("helper should validate required args before fetching bundles")
+
+    gate_pos = text.find("if not args.allow_historical_retired_bundle")
+    download_pos = text.find("download_file(archive_url, archive_path)")
+    if gate_pos < 0 or download_pos < 0 or gate_pos > download_pos:
+        errors.append("historical opt-in gate must execute before bundle retrieval")
 
     if errors:
         print("FAIL: test_download_helper_covers_all_routes:")
-        for e in errors:
-            print("  -", e)
+        for error in errors:
+            print("  -", error)
         return 1
-
-    print("PASS: test_download_helper_covers_all_routes")
+    print("PASS: retired bundle helper is complete, gated, and current-route safe")
     return 0
 
 

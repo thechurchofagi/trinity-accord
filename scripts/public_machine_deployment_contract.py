@@ -148,6 +148,23 @@ DEPLOYMENT_BYTE_SURFACES = (
     "/api/record-chain-status.json",
     "/api/waiting-heartbeat-status.json",
     "/.well-known/pages-production-closure.v1.json",
+    "/api/agent-live-health.v1.json",
+    "/api/formal-builder-bundles.v1.json",
+    "/builder-bundles/download_and_run_builder_bundle.py",
+    "/builder-bundles/trinity-guardian-full-registration-bundle.manifest.json",
+    "/builder-bundles/trinity-guardian-full-registration-bundle.tar.gz",
+    "/builder-bundles/trinity-guardian-retirement-bundle.manifest.json",
+    "/builder-bundles/trinity-guardian-retirement-bundle.tar.gz",
+    "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.manifest.json",
+    "/builder-bundles/trinity-guardian-signed-echo-builder-bundle.tar.gz",
+    "/builder-bundles/trinity-guardian-stage1-builder-bundle.manifest.json",
+    "/builder-bundles/trinity-guardian-stage1-builder-bundle.tar.gz",
+    "/builder-bundles/trinity-guardian-stage2-builder-bundle.manifest.json",
+    "/builder-bundles/trinity-guardian-stage2-builder-bundle.tar.gz",
+    "/builder-bundles/trinity-pure-echo-builder-bundle.manifest.json",
+    "/builder-bundles/trinity-pure-echo-builder-bundle.tar.gz",
+    "/builder-bundles/trinity-v0v5-builder-bundle.manifest.json",
+    "/builder-bundles/trinity-v0v5-builder-bundle.tar.gz",
     "/record-chain/chain-tip.json",
     "/record-chain/indexes/statistics.json",
     "/record-chain/indexes/record-index.json",
@@ -175,11 +192,28 @@ def repo_bytes(path: str) -> bytes:
     return repo_file(path).read_bytes()
 
 
+def _strict_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key!r}")
+        result[key] = value
+    return result
+
+
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"non-finite JSON number: {value}")
+
+
 def json_object_from_bytes(data: bytes, label: str) -> dict[str, Any]:
     try:
-        value = json.loads(data.decode("utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise ValueError(f"{label} is not valid UTF-8 JSON: {exc}") from exc
+        value = json.loads(
+            data.decode("utf-8"),
+            object_pairs_hook=_strict_json_object,
+            parse_constant=_reject_json_constant,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"{label} is not strict UTF-8 JSON: {exc}") from exc
     if not isinstance(value, dict):
         raise ValueError(f"{label} JSON root must be an object, got {type(value).__name__}")
     return value

@@ -31,10 +31,7 @@ def test_current_links_and_well_known_pass_shared_semantics() -> None:
 
 
 def test_live_entrypoint_semantics_pass_on_repository_sources() -> None:
-    objects = {
-        path: load(path)
-        for path in contract.SMOKE_JSON_SURFACES
-    }
+    objects = {path: load(path) for path in contract.SMOKE_JSON_SURFACES}
     texts = {
         path: (ROOT / path.lstrip("/")).read_text(encoding="utf-8")
         for path in contract.SMOKE_TEXT_SURFACES
@@ -78,6 +75,15 @@ def test_json_root_must_be_an_object() -> None:
         contract.json_object_from_bytes(b"[]", "test surface")
 
 
+@pytest.mark.parametrize(
+    "raw",
+    [b'{"x": 1, "x": 2}', b'{"x": NaN}', b'{"x": Infinity}'],
+)
+def test_public_machine_json_must_be_strict(raw: bytes) -> None:
+    with pytest.raises(ValueError, match="strict UTF-8 JSON"):
+        contract.json_object_from_bytes(raw, "test surface")
+
+
 def test_source_digest_is_bound_to_content() -> None:
     links = load("/api/links.json")
     errors: list[str] = []
@@ -106,5 +112,4 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     )
     assert "scripts/smoke_live_discovery_contract_v2.py" in workflow
     assert "scripts/check_deployment_freshness_v2.py" in workflow
-    assert '"scripts/smoke_live_discovery_contract_v2.py"' in workflow
-    assert '"scripts/public_machine_deployment_contract.py"' in workflow
+    assert '"scripts/**"' in workflow

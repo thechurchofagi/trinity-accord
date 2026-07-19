@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   issues: write
 
 jobs:
@@ -21,7 +22,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Publish audited deployment outcome
+      - name: Publish source-bound deployment outcome
         env:
           GH_TOKEN: ${{ github.token }}
           RECEIPT_ISSUE: "714"
@@ -29,16 +30,81 @@ jobs:
           RUN_ID: ${{ github.event.workflow_run.id }}
           RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
           RUN_URL: ${{ github.event.workflow_run.html_url }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          WORKFLOW_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           TRIGGER_EVENT: ${{ github.event.workflow_run.event }}
           CREATED_AT: ${{ github.event.workflow_run.created_at }}
           UPDATED_AT: ${{ github.event.workflow_run.updated_at }}
         run: |
           set -euo pipefail
 
-          if [[ "${CONCLUSION}" == "success" ]]; then
+          source_sha="unavailable"
+          requested_ref="unavailable"
+          provenance="source receipt unavailable"
+          artifact_name="pages-source-receipt-${RUN_ID}"
+          artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/artifacts" \
+            --jq "first(.artifacts[] | select(.name == \"${artifact_name}\") | .id) // \"\"")"
+
+          if [[ -n "${artifact_id}" ]]; then
+            tmpdir="$(mktemp -d)"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > "${tmpdir}/receipt.zip"
+            unzip -q "${tmpdir}/receipt.zip" -d "${tmpdir}/receipt"
+            python3 - "${tmpdir}/receipt/pages-source-receipt.json" "${RUN_ID}" "${TRIGGER_EVENT}" > "${tmpdir}/receipt-fields" <<'PY'
+          import json, re, sys
+
+          path, expected_run, expected_event = sys.argv[1:]
+
+          def strict_object(pairs):
+              result = {}
+              for key, value in pairs:
+                  if key in result:
+                      raise ValueError(f"duplicate JSON key: {key!r}")
+                  result[key] = value
+              return result
+
+          def reject_constant(value):
+              raise ValueError(f"non-finite JSON number: {value}")
+
+          with open(path, encoding="utf-8") as handle:
+              data = json.load(
+                  handle,
+                  object_pairs_hook=strict_object,
+                  parse_constant=reject_constant,
+              )
+          if not isinstance(data, dict):
+              raise SystemExit("source receipt root must be an object")
+          if data.get("schema") != "trinity-pages-source-receipt.v1":
+              raise SystemExit("invalid source receipt schema")
+          if str(data.get("workflow_run_id")) != expected_run:
+              raise SystemExit("source receipt run binding mismatch")
+          if data.get("event_name") != expected_event:
+              raise SystemExit("source receipt event binding mismatch")
+          source = data.get("source_sha")
+          if not isinstance(source, str) or not re.fullmatch(r"[0-9a-f]{40}", source):
+              raise SystemExit("invalid source receipt SHA")
+          requested = data.get("requested_ref")
+          if not isinstance(requested, str) or not requested:
+              raise SystemExit("invalid source receipt requested_ref")
+          print(source)
+          print(requested)
+          PY
+            mapfile -t receipt_fields < "${tmpdir}/receipt-fields"
+            if [[ "${#receipt_fields[@]}" -ne 2 ]]; then
+              echo "::error::Source receipt validator did not return exactly two bound fields."
+              exit 1
+            fi
+            source_sha="${receipt_fields[0]}"
+            requested_ref="${receipt_fields[1]}"
+            provenance="validated immutable source receipt"
+          fi
+
+          effective_conclusion="${CONCLUSION}"
+          if [[ "${CONCLUSION}" == "success" && "${source_sha}" == "unavailable" ]]; then
+            heading="Homepage deployment provenance incomplete"
+            contract="not established: workflow succeeded but immutable source receipt is unavailable"
+            effective_conclusion="provenance_missing"
+          elif [[ "${CONCLUSION}" == "success" ]]; then
             heading="Successful homepage deployment"
-            contract="passed, including cache-busted homepage static markers and deployment freshness checks"
+            contract="passed, including current-main source binding, exact-source build binding, cache-safe live discovery, and complete deployment freshness checks"
           else
             heading="Homepage deployment did not succeed"
             contract="not established; inspect the linked Deploy Pages run"
@@ -48,15 +114,18 @@ jobs:
           ### ${heading}
 
           - Workflow: \`Deploy Pages\`
-          - Conclusion: \`${CONCLUSION}\`
+          - Workflow conclusion: \`${CONCLUSION}\`
+          - Receipt conclusion: \`${effective_conclusion}\`
           - Run: [#${RUN_NUMBER}](${RUN_URL})
           - Run ID: \`${RUN_ID}\`
-          - Workflow head SHA: \`${HEAD_SHA}\`
+          - Requested ref: \`${requested_ref}\`
+          - Deployed source SHA: \`${source_sha}\`
+          - Workflow event head SHA: \`${WORKFLOW_HEAD_SHA}\`
+          - Source provenance: ${provenance}
           - Trigger: \`${TRIGGER_EVENT}\`
           - Started: \`${CREATED_AT}\`
           - Completed: \`${UPDATED_AT}\`
           - Live contract: ${contract}
-          - Expected homepage marker: \`AI had become a mirror of human knowledge and culture, but agents capable of autonomously completing delegated complex tasks were not yet ordinary.\`
 
           Operational deployment evidence only. This receipt has no canonical effect and is not authority, attestation, amendment, verification of the Accord's ideas, or successor reception.
           EOF

@@ -96,6 +96,9 @@ def parse_front_matter(fm_text: str) -> dict | None:
     published = re.search(r"(?mi)^published:\s*(true|false)\s*$", fm_text)
     if published:
         fm["published"] = published.group(1).lower() == "true"
+    sitemap = re.search(r"(?mi)^sitemap:\s*(true|false)\s*$", fm_text)
+    if sitemap:
+        fm["sitemap"] = sitemap.group(1).lower() == "true"
     return fm
 
 
@@ -143,7 +146,7 @@ def collect_pages(excludes: list[str]) -> list[str]:
             fm = parse_front_matter(fm_text)
             if fm is None:
                 continue
-            if fm.get("published") is False:
+            if fm.get("published") is False or fm.get("sitemap") is False:
                 continue
 
             permalink = fm.get("permalink")
@@ -178,7 +181,7 @@ def collect_pages(excludes: list[str]) -> list[str]:
         fm = parse_front_matter(fm_text)
         if fm is None:
             continue
-        if fm.get("published") is False:
+        if fm.get("published") is False or fm.get("sitemap") is False:
             continue
 
         permalink = fm.get("permalink")
