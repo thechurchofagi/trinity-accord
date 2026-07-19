@@ -54,10 +54,14 @@ def main()->int:
         if marker not in home: errors.append(f'homepage sync missing {marker}')
 
     receipt=read('.github/workflows/homepage-deployment-receipt.yml')
-    for marker in ['actions: read','pages-source-receipt-${RUN_ID}','Deployed source SHA','Workflow event head SHA','provenance_missing']:
+    for marker in ['actions: read','pages-source-receipt-${RUN_ID}','Deployed source SHA','Workflow event head SHA','provenance_missing','duplicate JSON key','source receipt event binding mismatch','receipt-fields','${#receipt_fields[@]}']:
         if marker not in receipt: errors.append(f'deployment receipt missing {marker}')
+    if 'readarray -t receipt_fields < <(' in receipt: errors.append('deployment receipt still hides validator status in process substitution')
     if 'Expected homepage marker' in receipt: errors.append('deployment receipt still hardcodes mutable marker')
 
+    archive_source=read('scripts/verify_retired_builder_bundle_archive.py')
+    for marker in ['duplicate JSON key','non-finite JSON number','duplicate declared file','duplicate tar member name','manifest_url must stay under /builder-bundles/']:
+        if marker not in archive_source: errors.append(f'archive verifier missing {marker}')
     archive=subprocess.run([sys.executable,'scripts/verify_retired_builder_bundle_archive.py'],cwd=ROOT,capture_output=True,text=True)
     if archive.returncode: errors.append(archive.stdout+archive.stderr)
     if errors:
