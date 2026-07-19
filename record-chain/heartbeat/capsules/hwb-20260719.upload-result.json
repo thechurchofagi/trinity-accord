@@ -1,14 +1,14 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
   "heartbeat_id": "hwb-20260719",
-  "status": "readback_data_empty",
+  "status": "uploaded",
   "attempted_at": "2026-07-19T06:24:56.817Z",
   "arweave_txid": "OBYABczOcxmq0haBaOz_gZ1jy5De_T2vpHBJe-5HCZA",
   "payload_sha256": "16cb0b03686b9c42d1f0d3b5ba9dae5583ee9ff177e3d86fb7a18118a82ff76e",
   "data_sha256": "16cb0b03686b9c42d1f0d3b5ba9dae5583ee9ff177e3d86fb7a18118a82ff76e",
-  "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "hash_match": false,
-  "retryable": true,
+  "readback_sha256": "16cb0b03686b9c42d1f0d3b5ba9dae5583ee9ff177e3d86fb7a18118a82ff76e",
+  "hash_match": true,
+  "retryable": false,
   "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
   "wallet_balance_before_available": true,
   "wallet_balance_before_winston": "15074540327905",
@@ -35,6 +35,9 @@
     "arweave_archive_is_not_successor_reception": true,
     "bitcoin_originals_prevail": true
   },
-  "last_readback_error": "readback_data_empty",
-  "readback_attempted_at": "2026-07-19T06:24:56.817Z"
+  "last_readback_error": null,
+  "readback_attempted_at": "2026-07-19T06:24:56.817Z",
+  "verified_at": "2026-07-19T06:27:49.882Z",
+  "readback_attempts": 9,
+  "next_action": "no_op"
 }
