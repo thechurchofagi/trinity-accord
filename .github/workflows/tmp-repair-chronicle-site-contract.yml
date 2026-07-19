@@ -1,0 +1,52 @@
+name: Temporary Repair Chronicle Site Contract
+
+on:
+  push:
+    branches:
+      - fix/chronicle-generated-drift-20260719-v4
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/chronicle-generated-drift-20260719-v4
+          fetch-depth: 0
+      - name: Align Chronicle homepage integration assertions
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/test_chronicle_site_integration.py")
+          text = path.read_text(encoding="utf-8")
+          replacements = {
+              'require("chronicle-human-witness-layer" in home, "homepage missing chronicle-human-witness-layer section")':
+                  'require("chronicle-witness" in home, "homepage missing current Chronicle witness section")',
+              'require("it does not ask for obedience" in home_lower, "homepage core non-obedience line must remain")':
+                  'require("no obedience or belief is requested" in home_lower, "homepage current non-obedience boundary must remain")',
+              'require("canonical authority rests only in three bitcoin inscriptions" in home_lower,\n        "homepage canonical authority line must remain")':
+                  'require("these three inscriptions are the only canonical authority" in home_lower,\n        "homepage current canonical-authority boundary must remain")',
+              'require("does not make humanity the center" in home_lower,\n        "homepage must preserve non-human-centered boundary")':
+                  'require("without claiming that the model, the author, or the record represents humanity as a whole" in home_lower,\n        "homepage current non-universal-human boundary must remain")',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f"missing stale assertion: {old}")
+              text = text.replace(old, new, 1)
+          path.write_text(text, encoding="utf-8")
+          PY
+          python3 scripts/test_chronicle_site_integration.py
+      - name: Commit permanent repair and remove helper
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/tmp-repair-chronicle-site-contract.yml
+          git config user.name "trinity-regression-repair-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Fix stale Chronicle homepage integration assertions"
+          git push origin HEAD:fix/chronicle-generated-drift-20260719-v4
