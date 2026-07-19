@@ -51,13 +51,32 @@ jobs:
           cat /tmp/node-runtime-alignment.log
           exit 1
       - name: Remove one-shot files and commit
+        id: commit
         if: steps.align.outcome == 'success'
+        continue-on-error: true
         run: |
-          set -euo pipefail
-          rm -f scripts/apply_round6_node_runtime_alignment.py
-          rm -f .github/workflows/apply-round6-node-runtime-alignment.yml
-          git config user.name "trinity-round6-audit-bot"
-          git config user.email "actions@github.com"
-          git add -A
-          git commit -m "Align all workflow Node runtimes with .node-version"
-          git push origin HEAD:deep-audit-round6-ci-code-alignment
+          set -o pipefail
+          {
+            set -euo pipefail
+            rm -f scripts/apply_round6_node_runtime_alignment.py
+            rm -f .github/workflows/apply-round6-node-runtime-alignment.yml
+            git config user.name "trinity-round6-audit-bot"
+            git config user.email "actions@github.com"
+            git status --short
+            git add -A
+            git commit -m "Align all workflow Node runtimes with .node-version"
+            git push origin HEAD:deep-audit-round6-ci-code-alignment
+          } 2>&1 | tee /tmp/node-runtime-commit.log
+      - name: Upload commit diagnostics
+        if: steps.commit.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: node-runtime-commit-log
+          path: /tmp/node-runtime-commit.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Surface commit failure
+        if: steps.commit.outcome == 'failure'
+        run: |
+          cat /tmp/node-runtime-commit.log
+          exit 1
