@@ -26,7 +26,7 @@ jobs:
           - agent-start-docs
           - verification-index
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -36,10 +36,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: "20"
+          node-version-file: ".node-version"
+          cache: "npm"
 
-      - name: Install Python test dependencies
-        run: python3 -m pip install -r requirements-ci.txt
+      - name: Install locked test dependencies
+        run: |
+          python3 -m pip install -r requirements-ci.txt
+          npm ci
 
       - name: Run CI group
         run: python3 scripts/run_ci_group.py ${{ matrix.group }}
@@ -50,7 +53,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
       - name: Build the production Pages site
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697

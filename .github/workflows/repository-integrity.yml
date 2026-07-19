@@ -15,9 +15,9 @@ permissions:
 jobs:
   current-system-integrity:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           show-progress: false
@@ -61,6 +61,18 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
+      - name: Verify CI and code alignment
+        run: python3 scripts/test_ci_code_alignment.py
+
+      - name: Reject missing workflow and CI-group executables
+        run: python3 scripts/test_workflows_do_not_reference_missing_scripts.py
+
+      - name: Verify workflow permissions and retired writers
+        run: python3 scripts/test_workflow_permissions.py
+
+      - name: Compile current Python sources
+        run: python3 -m compileall -q scripts apps tests
+
       - name: Verify agent-start API contract
         run: python3 scripts/test_agent_start_api.py
 
@@ -69,8 +81,13 @@ jobs:
           node-version-file: ".node-version"
           cache: "npm"
 
-      - name: Verify Node dependency lockfile
+      - name: Verify root Node dependency lockfile
         run: npm ci
+
+      - name: Verify retired Node service dependency lockfile
+        run: |
+          npm ci --ignore-scripts --prefix examples/github-app-backend
+          node --check examples/github-app-backend/server.js
 
       - name: Verify gateway error recovery context
         run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
@@ -99,14 +116,14 @@ jobs:
       - name: Verify Builder multidimensional verification
         run: python3 scripts/test_builder_multidimensional_verification.py
 
-      - name: Validate JSON
-        run: find . -name "*.json" -not -path "*/node_modules/*" -print0 | xargs -0 -n1 python3 -m json.tool > /dev/null
+      - name: Validate strict repository JSON
+        run: python3 scripts/validate_json_strict.py
 
       - name: Verify record-chain
         run: python3 scripts/trinity_record_chain.py verify
 
-      - name: Regenerate sitemap from current files
-        run: python3 scripts/generate_sitemap.py
+      - name: Verify sitemap has no committed drift
+        run: python3 scripts/generate_sitemap.py --check
 
       - name: Run current system tests
         shell: bash
@@ -121,9 +138,6 @@ jobs:
             exit "$status"
           fi
           tail -n 40 /tmp/current-system-tests.log
-
-      - name: Verify sitemap has no drift
-        run: python3 scripts/generate_sitemap.py --check
 
       - name: Verify public home status contracts
         run: |
