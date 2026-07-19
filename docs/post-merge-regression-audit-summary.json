@@ -1,0 +1,12 @@
+{
+  "schema": "trinityaccord.post-merge-regression-audit.v1",
+  "date": "2026-07-19",
+  "scope": [
+    "recent CI and runtime alignment changes",
+    "archive writer to write-path guard handoff",
+    "all GitHub Actions workflow YAML parsing",
+    "Node runtime source consistency"
+  ],
+  "confirmed_regression": "workflow_run.head_sha was treated as the commit created by Archive backlog repair, although it is the revision that started the workflow",
+  "resolution": "Archive backlog repair validates its exact single output commit immediately before push; the downstream guard no longer audits the workflow-run start revision as output"
+}
