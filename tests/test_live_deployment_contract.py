@@ -75,6 +75,15 @@ def test_json_root_must_be_an_object() -> None:
         contract.json_object_from_bytes(b"[]", "test surface")
 
 
+@pytest.mark.parametrize(
+    "raw",
+    [b'{"x": 1, "x": 2}', b'{"x": NaN}', b'{"x": Infinity}'],
+)
+def test_public_machine_json_must_be_strict(raw: bytes) -> None:
+    with pytest.raises(ValueError, match="strict UTF-8 JSON"):
+        contract.json_object_from_bytes(raw, "test surface")
+
+
 def test_source_digest_is_bound_to_content() -> None:
     links = load("/api/links.json")
     errors: list[str] = []
