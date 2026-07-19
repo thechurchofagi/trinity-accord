@@ -1,0 +1,42 @@
+name: Apply Round 6 Node Runtime Alignment
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/apply_round6_node_runtime_alignment.py"
+      - ".github/workflows/apply-round6-node-runtime-alignment.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: deep-audit-round6-ci-code-alignment
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Align and validate Node runtime declarations
+        run: |
+          python3 scripts/apply_round6_node_runtime_alignment.py
+          python3 scripts/test_node_dependency_pinning.py
+          python3 scripts/test_action_pinning.py
+          python3 scripts/test_workflows_do_not_reference_missing_scripts.py
+      - name: Remove one-shot files and commit
+        run: |
+          set -euo pipefail
+          rm -f scripts/apply_round6_node_runtime_alignment.py
+          rm -f .github/workflows/apply-round6-node-runtime-alignment.yml
+          git config user.name "trinity-round6-audit-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Align all workflow Node runtimes with .node-version"
+          git push origin HEAD:deep-audit-round6-ci-code-alignment
