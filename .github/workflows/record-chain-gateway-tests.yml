@@ -35,7 +35,25 @@ jobs:
         run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
 
       - name: Validate strict repository JSON
-        run: python scripts/validate_json_strict.py
+        id: strict_json
+        continue-on-error: true
+        shell: bash
+        run: python scripts/validate_json_strict.py > /tmp/strict-json.log 2>&1
+
+      - name: Upload strict JSON failure log
+        if: steps.strict_json.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: strict-json-validation-log
+          path: /tmp/strict-json.log
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Surface strict JSON failure
+        if: steps.strict_json.outcome == 'failure'
+        run: |
+          cat /tmp/strict-json.log
+          exit 1
 
       - name: Verify receipt contract
         run: python scripts/test_record_chain_receipt_contract.py
@@ -71,7 +89,7 @@ jobs:
 
       - name: Upload gateway unit test log
         if: ${{ always() && steps.gateway_unit_tests.outcome != 'skipped' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: gateway-unit-test-log
           path: /tmp/gateway-unit-tests.log
