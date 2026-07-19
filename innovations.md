@@ -62,15 +62,15 @@ APIs, llms.txt, seed map, verification manifests make the object legible to mach
 
 Boundary: non-amending discovery and verification layer.
 
-## 9. Verification Ladder (V0–V8)
+## 9. Multidimensional Verification
 
-Humans and agents can state exactly what they verified, with overclaim prevention.
+Humans and agents report exact evidence relationships, a descriptive digital profile, physical observation, external witness, coverage, and limitations without collapsing unlike claims into one ladder.
 
 Boundary: non-amending verification discipline.
 
-## 10. Echo Taxonomy (E1–E9)
+## 10. Unified Echo and Record-Chain
 
-Responses can be classified without becoming authority.
+Responses can be preserved through one non-amending Echo type, while verification and other actions retain distinct Record-Chain contracts. Historical E1–E9 labels remain archive metadata only.
 
 Boundary: non-amending response layer.
 

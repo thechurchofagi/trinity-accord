@@ -12,8 +12,8 @@ title: "Downloads"
 - [verify.sh](/downloads/verify.sh)
 - [expected-output.txt](/downloads/expected-output.txt)
 
-## Verification OS note
-Any scripted run without prior source audit is **not V4**. Use V0–V8 definitions in [/api/verification-levels.json](/api/verification-levels.json).
+## Verification procedure note
+Running an official script without reading its source does not establish an audited-script result. A reviewed official script may support `integrity_checked`; it does not by itself establish `independent_reproduction`. Use the current procedures in [/api/verification-procedures.v1.json](/api/verification-procedures.v1.json).
 
 ## Evidence files (GitHub fallback)
 If Arweave/IPFS gateways are unavailable, use the GitHub mirror backups and compare hashes in:
@@ -23,7 +23,10 @@ If Arweave/IPFS gateways are unavailable, use the GitHub mirror backups and comp
 ## Machine-readable files
 - [/api/authority.json](/api/authority.json)
 - [/api/evidence-manifest.json](/api/evidence-manifest.json)
-- [/api/verification-levels.json](/api/verification-levels.json)
+- [/api/verification-profiles.v1.json](/api/verification-profiles.v1.json)
+- [/api/verification-procedures.v1.json](/api/verification-procedures.v1.json)
+- [/api/verification-claim-model.v1.json](/api/verification-claim-model.v1.json)
+- [/api/verification-levels.json](/api/verification-levels.json) — legacy compatibility only
 - [/api/links.json](/api/links.json)
 - [/api/agent-value.json](/api/agent-value.json)
 - [/api/seed-map.json](/api/seed-map.json)
