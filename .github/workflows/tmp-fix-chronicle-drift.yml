@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - fix/chronicle-generated-drift-20260719-v4
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -39,25 +42,24 @@ jobs:
           runner = Path("scripts/run_current_system_tests.py")
           text = runner.read_text(encoding="utf-8")
           marker = '    ok("sitemap up to date")\n'
-          block = '''
-
-              # 1b0. Chronicle generated-artifact drift must be caught by required CI,
-              # not only by the scheduled/manual Deep Integrity matrix.
-              result = subprocess.run(
-                  [sys.executable, "scripts/run_ci_group.py", "chronicle"],
-                  cwd=ROOT,
-                  capture_output=True,
-                  text=True,
-              )
-              if result.returncode != 0:
-                  fail(f"Chronicle generated-artifact drift detected:\n{result.stdout}\n{result.stderr}")
-              ok("Chronicle generated artifacts up to date")
-          '''
-          block = "\n".join(line[4:] if line.startswith("    ") else line for line in block.splitlines())
+          block = (
+              '\n'
+              '    # 1b0. Chronicle generated-artifact drift must be caught by required CI,\n'
+              '    # not only by the scheduled/manual Deep Integrity matrix.\n'
+              '    result = subprocess.run(\n'
+              '        [sys.executable, "scripts/run_ci_group.py", "chronicle"],\n'
+              '        cwd=ROOT,\n'
+              '        capture_output=True,\n'
+              '        text=True,\n'
+              '    )\n'
+              '    if result.returncode != 0:\n'
+              '        fail(f"Chronicle generated-artifact drift detected:\\n{result.stdout}\\n{result.stderr}")\n'
+              '    ok("Chronicle generated artifacts up to date")\n'
+          )
           if "Chronicle generated artifacts up to date" not in text:
               if marker not in text:
                   raise SystemExit("runner insertion marker not found")
-              text = text.replace(marker, marker + block + "\n", 1)
+              text = text.replace(marker, marker + block, 1)
               runner.write_text(text, encoding="utf-8")
 
           test = Path("tests/test_chronicle_required_ci_coverage.py")
