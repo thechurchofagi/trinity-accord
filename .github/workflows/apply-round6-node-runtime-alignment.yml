@@ -25,12 +25,31 @@ jobs:
         with:
           python-version: "3.12"
       - name: Align and validate Node runtime declarations
+        id: align
+        continue-on-error: true
         run: |
-          python3 scripts/apply_round6_node_runtime_alignment.py
-          python3 scripts/test_node_dependency_pinning.py
-          python3 scripts/test_action_pinning.py
-          python3 scripts/test_workflows_do_not_reference_missing_scripts.py
+          set -o pipefail
+          {
+            python3 scripts/apply_round6_node_runtime_alignment.py
+            python3 scripts/test_node_dependency_pinning.py
+            python3 scripts/test_action_pinning.py
+            python3 scripts/test_workflows_do_not_reference_missing_scripts.py
+          } 2>&1 | tee /tmp/node-runtime-alignment.log
+      - name: Upload alignment diagnostics
+        if: steps.align.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: node-runtime-alignment-log
+          path: /tmp/node-runtime-alignment.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Surface alignment failure
+        if: steps.align.outcome == 'failure'
+        run: |
+          cat /tmp/node-runtime-alignment.log
+          exit 1
       - name: Remove one-shot files and commit
+        if: steps.align.outcome == 'success'
         run: |
           set -euo pipefail
           rm -f scripts/apply_round6_node_runtime_alignment.py
