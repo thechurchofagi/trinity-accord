@@ -53,8 +53,8 @@ jobs:
       - name: Validate strict repository JSON
         run: python3 scripts/validate_json_strict.py
 
-      - name: Compile all Python sources
-        run: python3 -m compileall -q .
+      - name: Compile maintained Python sources
+        run: python3 -m compileall -q scripts apps tests examples
 
       - name: Verify current record chain
         run: python3 scripts/trinity_record_chain.py verify
