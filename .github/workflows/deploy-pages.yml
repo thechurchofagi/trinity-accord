@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       checkout_ref:
-        description: "Git ref to publish; resolved once to an immutable commit before verify/build/deploy"
+        description: "Git ref to publish; it must resolve to the current main revision"
         required: false
         default: ""
         type: string
@@ -72,7 +72,7 @@ jobs:
           ref: ${{ github.event.inputs.checkout_ref || github.sha }}
           fetch-depth: 1
 
-      - name: Resolve immutable source revision
+      - name: Resolve immutable current-main source revision
         id: source
         env:
           REQUESTED_REF: ${{ github.event.inputs.checkout_ref || github.sha }}
@@ -80,10 +80,17 @@ jobs:
           set -euo pipefail
           source_sha="$(git rev-parse HEAD)"
           git cat-file -e "${source_sha}^{commit}"
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          main_sha="$(git rev-parse refs/remotes/origin/main)"
+          if [[ "${source_sha}" != "${main_sha}" ]]; then
+            echo "::error::Refusing to publish ${source_sha}; current main is ${main_sha}."
+            exit 1
+          fi
           printf 'source_sha=%s\n' "${source_sha}" >> "$GITHUB_OUTPUT"
           printf 'requested_ref=%s\n' "${REQUESTED_REF}" >> "$GITHUB_OUTPUT"
           echo "requested_ref=${REQUESTED_REF}"
           echo "immutable_source_sha=${source_sha}"
+          echo "current_main_sha=${main_sha}"
 
       - name: Setup Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
