@@ -87,9 +87,18 @@ for path in sorted(WF_DIR.glob("*.yml")):
             remainder = re.sub(
                 rf"(?:-r\s+|--requirement(?:=|\s+)){re.escape(ref)}", "", remainder
             )
-        remainder = re.sub(r"^(?:run:\s*)?(?:python3?|pip3?)\s+-m\s+pip\s+install\s*", "", remainder)
-        remainder = re.sub(r"^(?:run:\s*)?pip3?\s+install\s*", "", remainder)
-        tokens = [token for token in remainder.split() if not token.startswith("-") and token not in {"&&", "\\"}]
+        workflow_prefix = r"^(?:-\s+)?(?:run:\s*)?"
+        remainder = re.sub(
+            workflow_prefix + r"(?:python3?|pip3?)\s+-m\s+pip\s+install\s*",
+            "",
+            remainder,
+        )
+        remainder = re.sub(workflow_prefix + r"pip3?\s+install\s*", "", remainder)
+        tokens = [
+            token
+            for token in remainder.split()
+            if not token.startswith("-") and token not in {"&&", "\\"}
+        ]
         for token in tokens:
             if token.endswith(".txt") or token.startswith("$"):
                 continue
