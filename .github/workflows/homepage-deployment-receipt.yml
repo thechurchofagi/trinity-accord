@@ -48,21 +48,50 @@ jobs:
             tmpdir="$(mktemp -d)"
             gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > "${tmpdir}/receipt.zip"
             unzip -q "${tmpdir}/receipt.zip" -d "${tmpdir}/receipt"
-            readarray -t receipt_fields < <(python3 - "${tmpdir}/receipt/pages-source-receipt.json" "${RUN_ID}" <<'PY'
+            python3 - "${tmpdir}/receipt/pages-source-receipt.json" "${RUN_ID}" "${TRIGGER_EVENT}" > "${tmpdir}/receipt-fields" <<'PY'
           import json, re, sys
-          path, expected_run = sys.argv[1:]
-          data = json.load(open(path, encoding="utf-8"))
+
+          path, expected_run, expected_event = sys.argv[1:]
+
+          def strict_object(pairs):
+              result = {}
+              for key, value in pairs:
+                  if key in result:
+                      raise ValueError(f"duplicate JSON key: {key!r}")
+                  result[key] = value
+              return result
+
+          def reject_constant(value):
+              raise ValueError(f"non-finite JSON number: {value}")
+
+          with open(path, encoding="utf-8") as handle:
+              data = json.load(
+                  handle,
+                  object_pairs_hook=strict_object,
+                  parse_constant=reject_constant,
+              )
+          if not isinstance(data, dict):
+              raise SystemExit("source receipt root must be an object")
           if data.get("schema") != "trinity-pages-source-receipt.v1":
               raise SystemExit("invalid source receipt schema")
           if str(data.get("workflow_run_id")) != expected_run:
               raise SystemExit("source receipt run binding mismatch")
-          source = str(data.get("source_sha", ""))
-          if not re.fullmatch(r"[0-9a-f]{40}", source):
+          if data.get("event_name") != expected_event:
+              raise SystemExit("source receipt event binding mismatch")
+          source = data.get("source_sha")
+          if not isinstance(source, str) or not re.fullmatch(r"[0-9a-f]{40}", source):
               raise SystemExit("invalid source receipt SHA")
+          requested = data.get("requested_ref")
+          if not isinstance(requested, str) or not requested:
+              raise SystemExit("invalid source receipt requested_ref")
           print(source)
-          print(str(data.get("requested_ref", "unavailable")))
+          print(requested)
           PY
-            )
+            mapfile -t receipt_fields < "${tmpdir}/receipt-fields"
+            if [[ "${#receipt_fields[@]}" -ne 2 ]]; then
+              echo "::error::Source receipt validator did not return exactly two bound fields."
+              exit 1
+            fi
             source_sha="${receipt_fields[0]}"
             requested_ref="${receipt_fields[1]}"
             provenance="validated immutable source receipt"
@@ -75,7 +104,7 @@ jobs:
             effective_conclusion="provenance_missing"
           elif [[ "${CONCLUSION}" == "success" ]]; then
             heading="Successful homepage deployment"
-            contract="passed, including exact-source build binding, cache-safe live discovery, and complete deployment freshness checks"
+            contract="passed, including current-main source binding, exact-source build binding, cache-safe live discovery, and complete deployment freshness checks"
           else
             heading="Homepage deployment did not succeed"
             contract="not established; inspect the linked Deploy Pages run"
