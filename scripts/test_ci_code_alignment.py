@@ -80,7 +80,10 @@ def parse_requirements(path: Path) -> dict[str, str]:
         match = re.fullmatch(r"([A-Za-z0-9_.-]+)(?:\[[A-Za-z0-9_,.-]+\])?==([^\s]+)", line)
         if not match:
             raise ValueError(f"{path.relative_to(ROOT)}:{lineno} is not an exact pin: {line}")
-        result[match.group(1).lower()] = match.group(2)
+        package = match.group(1).lower()
+        if package in result:
+            raise ValueError(f"{path.relative_to(ROOT)}:{lineno} duplicates dependency {package}")
+        result[package] = match.group(2)
     return result
 
 
@@ -97,7 +100,7 @@ def main() -> int:
         texts[name] = path.read_text(encoding="utf-8")
         try:
             docs[name] = load_yaml(path)
-        except ValueError as exc:
+        except (ValueError, yaml.YAMLError) as exc:
             errors.append(str(exc))
 
     for name in sorted(CI_WORKFLOWS):
@@ -126,7 +129,11 @@ def main() -> int:
             if "scripts/generate_sitemap.py" in line and "--check" not in line:
                 errors.append(f"{name}: mutates sitemap before checking committed drift: {line.strip()}")
 
-    for name in ("repository-integrity.yml", "repository-full-integrity.yml", "record-chain-gateway-tests.yml"):
+    for name in (
+        "repository-integrity.yml",
+        "repository-full-integrity.yml",
+        "record-chain-gateway-tests.yml",
+    ):
         text = texts.get(name, "")
         if "scripts/validate_json_strict.py" not in text:
             errors.append(f"{name}: does not use strict JSON validation")
@@ -136,6 +143,8 @@ def main() -> int:
     repository_integrity = texts.get("repository-integrity.yml", "")
     for marker in (
         "scripts/test_ci_code_alignment.py",
+        "scripts/test_workflows_do_not_reference_missing_scripts.py",
+        "scripts/test_workflow_permissions.py",
         "python3 -m compileall",
         "npm ci --ignore-scripts --prefix examples/github-app-backend",
     ):
@@ -226,21 +235,12 @@ def main() -> int:
         for marker in (
             "github.event.workflow_run.conclusion == 'success'",
             "github.event.workflow_run.head_branch == 'main'",
+            "github.event.workflow_run.head_repository.full_name == github.repository",
         ):
             if marker not in guard_text:
                 errors.append(f"record-chain-write-path-guard.yml: missing workflow_run boundary {marker}")
     except (OSError, ValueError, yaml.YAMLError) as exc:
         errors.append(f"write-path guard alignment check failed: {exc}")
-
-    group = read("scripts/run_ci_group.py")
-    for command in (
-        "scripts/test_ci_code_alignment.py",
-        "scripts/validate_json_strict.py",
-        "scripts/test_workflows_do_not_reference_missing_scripts.py",
-        "scripts/test_workflow_permissions.py",
-    ):
-        if command not in group:
-            errors.append(f"p0-current does not register {command}")
 
     if errors:
         print("FAIL: CI/code alignment errors:")
