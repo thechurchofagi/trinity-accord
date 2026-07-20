@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-index.v1",
-  "generated_at": "2026-07-20T06:30:46Z",
+  "generated_at": "2026-07-20T06:38:46Z",
   "records": [
     {
       "heartbeat_id": "hwb-20260618",
@@ -2188,6 +2188,48 @@
       "readback_attempts": 9,
       "next_action": "no_op",
       "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260719.upload-result.json"
+    },
+    {
+      "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
+      "heartbeat_id": "hwb-20260720",
+      "status": "uploaded",
+      "attempted_at": "2026-07-20T06:38:46.546Z",
+      "arweave_txid": "mfFjS3PScDEHglhbjuCER7XBBggl5SqJpLmAoMgidJo",
+      "payload_sha256": "4db44103b0917a8d503610a1b3c6a227c2179ebe2f8b51dc70ff742fc932e851",
+      "data_sha256": "4db44103b0917a8d503610a1b3c6a227c2179ebe2f8b51dc70ff742fc932e851",
+      "readback_sha256": "4db44103b0917a8d503610a1b3c6a227c2179ebe2f8b51dc70ff742fc932e851",
+      "hash_match": true,
+      "retryable": false,
+      "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
+      "wallet_balance_before_available": true,
+      "wallet_balance_before_winston": "15055629477474",
+      "wallet_balance_before_ar": "15.055629477474",
+      "wallet_balance_after_available": true,
+      "wallet_balance_after_reason": null,
+      "wallet_balance_after_winston": "15052939596760",
+      "wallet_balance_after_ar": "15.052939596760",
+      "upload_cost_winston": "2689880714",
+      "upload_cost_ar": "0.002689880714",
+      "tags": {
+        "Content-Type": "application/json",
+        "App-Name": "Trinity-Accord",
+        "Archive-Type": "waiting-heartbeat-capsule",
+        "Heartbeat-ID": "hwb-20260720",
+        "Data-SHA256": "4db44103b0917a8d503610a1b3c6a227c2179ebe2f8b51dc70ff742fc932e851",
+        "Boundary": "mirror-not-authority"
+      },
+      "boundary": {
+        "arweave_archive_is_mirror_only": true,
+        "arweave_archive_is_not_authority": true,
+        "arweave_archive_is_not_attestation": true,
+        "arweave_archive_is_not_amendment": true,
+        "arweave_archive_is_not_successor_reception": true,
+        "bitcoin_originals_prevail": true
+      },
+      "verified_at": "2026-07-20T06:38:46.546Z",
+      "actual_delta_winston": "2689880714",
+      "actual_delta_ar": "0.002689880714",
+      "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260720.upload-result.json"
     }
   ]
 }
