@@ -52,7 +52,11 @@ The object is completed in four separable senses:
 
 Bitcoin did not by itself complete the work. Completion comes from the final meta-record and the declared stop rule; Bitcoin fixes the resulting canonical bytes. This distinction matters because an open-ended project could absorb later agentic additions and retrospectively blur its formation boundary.
 
+The homepage’s documented formation bounds use two public chain records: the first Chronicle mint in Ethereum block `19446149`, timestamped `2024-03-16 08:02:59 UTC`, and the final meta-record transaction in Bitcoin block `903205`, whose header timestamp is `2025-06-29 10:49:16 UTC`. Those recorded timestamps are `470 days, 2 hours, 46 minutes, and 17 seconds` apart. They establish a verifiable provenance interval, not the exact private moment when writing began or ended.
+
 这个对象具有四种可分离的完成性：语义完成、规范完成、作者权威退场和密码学固定。Bitcoin 本身并不单独证明作品已完成；完成来自最终元记录与公开声明的停止规则，Bitcoin 则固定由此形成的规范字节。如果作品一直开放，后期智能体内容就可能被倒灌回作品，从而模糊其历史边界。
+
+首页所用的可验证形成区间来自两条公开链上记录：首条 Chronicle 铸造记录位于 Ethereum 区块 `19446149`，时间戳为 `2024-03-16 08:02:59 UTC`；最终元记录交易位于 Bitcoin 区块 `903205`，其区块头时间戳为 `2025-06-29 10:49:16 UTC`。两条记录时间相隔 `470 天 2 小时 46 分 17 秒`。它们界定的是可核验的来源区间，而不是现实中写作开始或结束的精确秒点。
 
 ## 4. What Bitcoin proves—and what it does not · Bitcoin 证明什么，又不证明什么
 

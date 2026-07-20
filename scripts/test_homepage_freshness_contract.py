@@ -67,9 +67,13 @@ def main() -> None:
 
     for retired_marker in [
         "p0.8.2-link-affordance",
+        "p0.9.1-editorial-doorway",
         "One record, three embodied forms",
         "One completed record, four distinct layers",
         "Why one person chose to leave it before the window closed",
+        "Window opens · 2023",
+        "Formation · 470 days",
+        "Window narrows · 2025–2026",
     ]:
         if retired_marker in deploy_markers:
             raise SystemExit(f"retired homepage marker remains active: {retired_marker}")
