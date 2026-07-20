@@ -111,9 +111,12 @@ jobs:
           --enable-paid-upload
 
       - name: Commit repaired backlog metadata to main
+        env:
+          GATEWAY_ACTORS: ${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}
         run: |
           set -euo pipefail
 
+          commit_message="archive: repair backlog and wallet status metadata"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -158,13 +161,37 @@ jobs:
             done < <(git diff --cached --name-only)
           }
 
+          validate_exact_archive_commit() {
+            local origin_main base ahead_count subject
+            origin_main="$(git rev-parse origin/main)"
+            ahead_count="$(git rev-list --count "${origin_main}..HEAD")"
+            subject="$(git log -1 --pretty=format:%s HEAD)"
+
+            if [[ "$ahead_count" != "1" ]]; then
+              echo "::error::Archive repair must push exactly one commit; found ${ahead_count}."
+              return 1
+            fi
+            if [[ "$subject" != "$commit_message" ]]; then
+              echo "::error::Unexpected archive repair commit message: ${subject}"
+              return 1
+            fi
+
+            base="$(git rev-parse HEAD~1)"
+            python3 scripts/check_record_chain_write_path_guard.py \
+              --mode push \
+              --base "$base" \
+              --head HEAD \
+              --github-actor "github-actions[bot]" \
+              --gateway-actors "$GATEWAY_ACTORS"
+          }
+
           regenerate_and_stage
           if git diff --cached --quiet; then
             echo "No archive backlog changes to commit."
             exit 0
           fi
 
-          git commit -m "archive: repair backlog and wallet status metadata"
+          git commit -m "$commit_message"
 
           for attempt in 1 2 3; do
             git fetch origin main --prune
@@ -173,9 +200,22 @@ jobs:
             # Main may have advanced while an OTS/Arweave operation was running.
             # Recompute derived backlog and wallet views against the rebased tree.
             regenerate_and_stage
+            origin_main="$(git rev-parse origin/main)"
+            head_sha="$(git rev-parse HEAD)"
+            head_subject="$(git log -1 --pretty=format:%s HEAD)"
+
             if ! git diff --cached --quiet; then
-              git commit --amend --no-edit
+              if [[ "$head_sha" != "$origin_main" && "$head_subject" == "$commit_message" ]]; then
+                git commit --amend --no-edit
+              else
+                git commit -m "$commit_message"
+              fi
+            elif [[ "$head_sha" == "$origin_main" ]]; then
+              echo "Equivalent archive backlog state already reached main; no push is required."
+              exit 0
             fi
+
+            validate_exact_archive_commit
 
             if git push origin HEAD:main; then
               exit 0
