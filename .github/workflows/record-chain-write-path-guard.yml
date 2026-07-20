@@ -2,6 +2,9 @@ name: Record Chain Write Path Guard
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Archive backlog repair"]
+    types: [completed]
   pull_request:
     branches: [main]
     paths: &protected_paths
@@ -11,7 +14,6 @@ on:
       - "index.md"
       - "sitemap.xml"
       - ".github/workflows/record-chain-*.yml"
-      - ".github/workflows/archive-backlog-repair.yml"
       - ".github/workflows/homepage-status-sync.yml"
       - ".github/workflows/deploy-pages.yml"
       - "scripts/check_homepage_live_freshness.py"
@@ -33,12 +35,17 @@ concurrency:
 
 jobs:
   guard:
+    if: >-
+      ${{ github.event_name != 'workflow_run' ||
+          (github.event.workflow_run.conclusion == 'success' &&
+           github.event.workflow_run.head_branch == 'main' &&
+           github.event.workflow_run.head_repository.full_name == github.repository) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || github.sha }}
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.event_name == 'workflow_dispatch' && 'main' || github.sha }}
           fetch-depth: 0
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
@@ -75,5 +82,18 @@ jobs:
             --mode push \
             --base "$BASE" \
             --head "$HEAD" \
+            --github-actor "$ACTOR" \
+            --gateway-actors "${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}"
+
+      - name: Check exact commit produced by archive repair
+        if: github.event_name == 'workflow_run'
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.workflow_run.head_sha }}"
+          BASE="$(git rev-parse HEAD~1)"
+          ACTOR="$(git log -1 --pretty=format:'%an' HEAD)"
+          python3 scripts/check_record_chain_write_path_guard.py \
+            --mode push \
+            --base "$BASE" \
+            --head HEAD \
             --github-actor "$ACTOR" \
             --gateway-actors "${{ vars.RECORD_CHAIN_GATEWAY_ACTORS }}"
