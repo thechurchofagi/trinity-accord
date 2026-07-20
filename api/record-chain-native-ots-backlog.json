@@ -1,26 +1,9 @@
 {
   "schema": "trinityaccord.native-ots-backlog.v1",
-  "updated_at": "2026-07-20T06:30:20Z",
-  "items": [
-    {
-      "key": "d89ddb32f69d520b2f5d036a1d26d0060b917e64d234e2f3c2877353d202eefb",
-      "kind": "native_ots_bundle",
-      "record_index": 94,
-      "archive_status": "waiting_for_upgrade",
-      "anchored_file_sha256": "58c1732c12b5fc070d903a3739dcc20641380a9191d905d73aa42554e9d17563",
-      "ots_status": "pending",
-      "anchor_file": "record-chain/ots/native-anchors/native-record-94-R-000000094-1157082e330a8dc3-58c1732c12b5fc07.anchor.json",
-      "bundle_file": null,
-      "bundle_sha256": null,
-      "tx_id": null,
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "last_error": null,
-      "next_action": "wait_for_ots_upgrade"
-    }
-  ],
+  "updated_at": "2026-07-20T08:40:18Z",
+  "items": [],
   "summary": {
-    "waiting_for_upgrade_count": 1,
+    "waiting_for_upgrade_count": 0,
     "upgrade_due_count": 0,
     "upgrade_failed_count": 0,
     "pending_upload_count": 0,
@@ -28,17 +11,17 @@
     "readback_failed_count": 0,
     "waiting_for_key_count": 0,
     "archived_count": 0,
-    "open_item_count": 1,
-    "first_open_record_index": 94,
-    "backlog_current": false,
+    "open_item_count": 0,
+    "first_open_record_index": null,
+    "backlog_current": true,
     "scan_scope": "all_native_anchors",
     "native_anchor_count": 62,
-    "native_anchor_pending_count": 1,
-    "native_anchor_upgraded_count": 61,
+    "native_anchor_pending_count": 0,
+    "native_anchor_upgraded_count": 62,
     "native_anchor_verified_count": 0,
-    "native_anchor_upgraded_or_verified_count": 61,
-    "upgrade_completed_prefix_record_index": 93,
-    "arweave_archive_completed_prefix_record_index": 93
+    "native_anchor_upgraded_or_verified_count": 62,
+    "upgrade_completed_prefix_record_index": 94,
+    "arweave_archive_completed_prefix_record_index": 94
   },
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
