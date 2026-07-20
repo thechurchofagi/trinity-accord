@@ -9,20 +9,20 @@
       "default_mode": "dry-run",
       "implemented": true,
       "index_api": "/api/record-chain-arweave-index.json",
-      "latest_arweave_txid": "iprNtrEJjsVMBpHBgZ6mxtQXCUG6mKxRD-1ydJP-BKg",
-      "latest_native_record_id": "R-000000093",
-      "live_archive_count": 44,
+      "latest_arweave_txid": "6cAaD_gmWqUCfk8DhifEVNoaIIsf_A3kXTbb4YnjDrg",
+      "latest_native_record_id": "R-000000094",
+      "live_archive_count": 45,
       "live_upload_enabled": true,
       "live_upload_implemented": true,
-      "native_record_count": 93,
+      "native_record_count": 94,
       "source_type": "native-record-chain",
       "workflow": "/.github/workflows/record-chain-arweave-archive.yml",
-      "latest_archive_id": "archive-native-R-000000093-df0c403ba513",
-      "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000093-df0c403ba513/manifest.json",
-      "latest_native_record_sha256": "17627fa94aad0922874844057af0c33780e294f6516b30755ff3cfa78f622b1b",
-      "record_count": 93,
-      "status": "archive-needed",
-      "archive_needed": true
+      "latest_archive_id": "archive-native-R-000000094-99724ac0e284",
+      "latest_manifest_path": "record-chain/arweave-archives/archive-native-R-000000094-99724ac0e284/manifest.json",
+      "latest_native_record_sha256": "1157082e330a8dc36d0856a2f05e5cff2a63cc9bb03ecad934057c0efe0d28ee",
+      "record_count": 94,
+      "status": "current",
+      "archive_needed": false
     },
     "batch_manifests": {
       "automated_workflow": "/.github/workflows/record-chain-anchor.yml",
@@ -146,15 +146,15 @@
     "legacy_heavy_ci_retired": true
   },
   "post_m9_status": {
-    "m9_archive_status": "backlog",
-    "m9_arweave_txid": "iprNtrEJjsVMBpHBgZ6mxtQXCUG6mKxRD-1ydJP-BKg",
+    "m9_archive_status": "pass",
+    "m9_arweave_txid": "6cAaD_gmWqUCfk8DhifEVNoaIIsf_A3kXTbb4YnjDrg",
     "m9_latest_record_id": "R-000000094",
     "m9_native_record_count": 94,
     "m9_ots_status": "current-upgraded-timestamp-proof",
-    "m9_status": "backlog",
+    "m9_status": "pass",
     "m9_latest_record_sha256": "1157082e330a8dc36d0856a2f05e5cff2a63cc9bb03ecad934057c0efe0d28ee",
-    "m9_arweave_archive_id": "archive-native-R-000000093-df0c403ba513",
-    "m9_arweave_manifest_path": "record-chain/arweave-archives/archive-native-R-000000093-df0c403ba513/manifest.json"
+    "m9_arweave_archive_id": "archive-native-R-000000094-99724ac0e284",
+    "m9_arweave_manifest_path": "record-chain/arweave-archives/archive-native-R-000000094-99724ac0e284/manifest.json"
   },
   "public_phase": {
     "bitcoin_originals_prevail": true,
@@ -324,29 +324,29 @@
       "strict_bitcoin_verified": false
     },
     "arweave_head": {
-      "latest_record_id": "R-000000093",
-      "latest_record_sha256": "17627fa94aad0922874844057af0c33780e294f6516b30755ff3cfa78f622b1b",
-      "native_record_count": 93,
-      "archive_id": "archive-native-R-000000093-df0c403ba513",
-      "arweave_txid": "iprNtrEJjsVMBpHBgZ6mxtQXCUG6mKxRD-1ydJP-BKg"
+      "latest_record_id": "R-000000094",
+      "latest_record_sha256": "1157082e330a8dc36d0856a2f05e5cff2a63cc9bb03ecad934057c0efe0d28ee",
+      "native_record_count": 94,
+      "archive_id": "archive-native-R-000000094-99724ac0e284",
+      "arweave_txid": "6cAaD_gmWqUCfk8DhifEVNoaIIsf_A3kXTbb4YnjDrg"
     },
     "ots_matches_chain": true,
     "ots_archivable_for_arweave": true,
-    "arweave_matches_ots": false,
-    "arweave_matches_chain": false,
+    "arweave_matches_ots": true,
+    "arweave_matches_chain": true,
     "ots_anchor_needed": false,
-    "arweave_archive_needed": true,
-    "pipeline_current": false
+    "arweave_archive_needed": false,
+    "pipeline_current": true
   },
   "archive_backlog": {
-    "record_chain_arweave_pending": 1,
+    "record_chain_arweave_pending": 0,
     "record_chain_arweave_failed": 0,
     "record_chain_arweave_waiting_for_key": 0,
     "native_ots_upgrade_pending": 0,
     "native_ots_arweave_pending": 0,
     "native_ots_arweave_failed": 0,
     "native_ots_waiting_for_key": 0,
-    "backlog_current": false
+    "backlog_current": true
   },
   "hash_semantics": {
     "content_sha256": "legacy canonical content hash retained for compatibility",
