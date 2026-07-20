@@ -21,15 +21,45 @@ CI_WORKFLOWS = {
     "record-chain-gateway-tests.yml",
     "record-chain-write-path-guard.yml",
 }
-NODE_WORKFLOWS = {
-    "repository-integrity.yml",
-    "repository-full-integrity.yml",
-    "deep-integrity.yml",
-    "run-current-tests.yml",
-    "record-chain-gateway-tests.yml",
-    "deploy-pages.yml",
-}
 NO_MUTATING_SITEMAP_WORKFLOWS = CI_WORKFLOWS | {"deploy-pages.yml"}
+ARCHIVE_REPAIR_WORKFLOW = "archive-backlog-repair.yml"
+
+
+class UniqueKeyLoader(yaml.SafeLoader):
+    """PyYAML loader that rejects duplicate mapping keys."""
+
+
+def construct_unique_mapping(
+    loader: UniqueKeyLoader, node: yaml.nodes.MappingNode, deep: bool = False
+) -> dict[Any, Any]:
+    loader.flatten_mapping(node)
+    result: dict[Any, Any] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            duplicate = key in result
+        except TypeError as exc:
+            raise yaml.constructor.ConstructorError(
+                "while constructing a mapping",
+                node.start_mark,
+                f"found unhashable key {key!r}",
+                key_node.start_mark,
+            ) from exc
+        if duplicate:
+            raise yaml.constructor.ConstructorError(
+                "while constructing a mapping",
+                node.start_mark,
+                f"found duplicate key {key!r}",
+                key_node.start_mark,
+            )
+        result[key] = loader.construct_object(value_node, deep=deep)
+    return result
+
+
+UniqueKeyLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    construct_unique_mapping,
+)
 
 
 def read(path: str) -> str:
@@ -37,7 +67,7 @@ def read(path: str) -> str:
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
-    value = yaml.safe_load(path.read_text(encoding="utf-8"))
+    value = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
     if not isinstance(value, dict):
         raise ValueError(f"{path.relative_to(ROOT)} YAML root must be a mapping")
     return value
@@ -92,16 +122,21 @@ def main() -> int:
     texts: dict[str, str] = {}
     docs: dict[str, dict[str, Any]] = {}
 
-    for name in sorted(CI_WORKFLOWS | {"deploy-pages.yml"}):
-        path = WORKFLOWS / name
-        if not path.is_file():
-            errors.append(f"missing workflow {name}")
-            continue
+    workflow_paths = sorted(WORKFLOWS.glob("*.yml"))
+    if not workflow_paths:
+        errors.append("no GitHub Actions workflows found")
+
+    for path in workflow_paths:
+        name = path.name
         texts[name] = path.read_text(encoding="utf-8")
         try:
             docs[name] = load_yaml(path)
         except (ValueError, yaml.YAMLError) as exc:
-            errors.append(str(exc))
+            errors.append(f"{path.relative_to(ROOT)}: {exc}")
+
+    for name in sorted(CI_WORKFLOWS | {"deploy-pages.yml", ARCHIVE_REPAIR_WORKFLOW}):
+        if name not in texts:
+            errors.append(f"missing workflow {name}")
 
     for name in sorted(CI_WORKFLOWS):
         text = texts.get(name, "")
@@ -114,8 +149,7 @@ def main() -> int:
         if "timeout-minutes:" not in text:
             errors.append(f"{name}: CI jobs have no explicit timeout")
 
-    for name in sorted(NODE_WORKFLOWS):
-        text = texts.get(name) or (WORKFLOWS / name).read_text(encoding="utf-8")
+    for name, text in sorted(texts.items()):
         if "actions/setup-node@" not in text:
             continue
         if "node-version-file:" not in text or ".node-version" not in text:
@@ -124,7 +158,7 @@ def main() -> int:
             errors.append(f"{name}: hard-coded Node major competes with .node-version")
 
     for name in sorted(NO_MUTATING_SITEMAP_WORKFLOWS):
-        text = texts.get(name) or (WORKFLOWS / name).read_text(encoding="utf-8")
+        text = texts.get(name, "")
         for line in text.splitlines():
             if "scripts/generate_sitemap.py" in line and "--check" not in line:
                 errors.append(f"{name}: mutates sitemap before checking committed drift: {line.strip()}")
@@ -229,16 +263,36 @@ def main() -> int:
             errors.append(
                 "record-chain-write-path-guard.yml: push and pull_request protected path sets differ"
             )
+        if ".github/workflows/archive-backlog-repair.yml" not in pr_paths:
+            errors.append(
+                "record-chain-write-path-guard.yml: archive backlog writer workflow is not protected"
+            )
+
         guard_text = texts.get("record-chain-write-path-guard.yml", "")
-        if "github.event.workflow_run.head_sha" not in guard_text:
-            errors.append("record-chain-write-path-guard.yml: workflow_run does not audit its exact head SHA")
+        if "workflow_run:" in guard_text or "github.event.workflow_run.head_sha" in guard_text:
+            errors.append(
+                "record-chain-write-path-guard.yml: must not treat workflow_run.head_sha as a writer output commit"
+            )
+
+        archive_text = texts.get(ARCHIVE_REPAIR_WORKFLOW, "")
         for marker in (
-            "github.event.workflow_run.conclusion == 'success'",
-            "github.event.workflow_run.head_branch == 'main'",
-            "github.event.workflow_run.head_repository.full_name == github.repository",
+            "validate_exact_archive_commit",
+            "git rev-list --count",
+            "scripts/check_record_chain_write_path_guard.py",
+            '--github-actor "github-actions[bot]"',
+            'git push origin HEAD:main',
+            "Equivalent archive backlog state already reached main",
         ):
-            if marker not in guard_text:
-                errors.append(f"record-chain-write-path-guard.yml: missing workflow_run boundary {marker}")
+            if marker not in archive_text:
+                errors.append(f"{ARCHIVE_REPAIR_WORKFLOW}: missing exact-commit guard marker {marker}")
+
+        push_index = archive_text.find("git push origin HEAD:main")
+        function_index = archive_text.find("validate_exact_archive_commit()")
+        call_index = archive_text.rfind("validate_exact_archive_commit", 0, push_index)
+        if push_index < 0 or function_index < 0 or call_index <= function_index:
+            errors.append(
+                f"{ARCHIVE_REPAIR_WORKFLOW}: exact archive commit is not validated immediately before push"
+            )
     except (OSError, ValueError, yaml.YAMLError) as exc:
         errors.append(f"write-path guard alignment check failed: {exc}")
 
@@ -249,8 +303,8 @@ def main() -> int:
         return 1
 
     print(
-        f"PASS: {len(CI_WORKFLOWS)} CI workflows align with runtime versions, locked dependencies, "
-        "strict data validation, non-mutating drift checks, and exact workflow inputs"
+        f"PASS: {len(texts)} workflows parse strictly and align with runtime versions, locked dependencies, "
+        "strict data validation, non-mutating drift checks, and exact writer commit inputs"
     )
     return 0
 
