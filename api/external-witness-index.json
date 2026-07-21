@@ -4,9 +4,26 @@
   "purpose": "Track external witness records as evidence provenance, not as project endorsement or highest status.",
   "does_not_create_authority": true,
   "does_not_rank_above_reception": true,
-  "records": [],
+  "records": [
+    {
+      "id": "2026-05-13-shenzhen-notary-core-object-alpha",
+      "type": "notarial_record",
+      "source": "中华人民共和国广东省深圳市深圳公证处",
+      "date": "2026-05-13",
+      "summary": "Notarial certificate (2026)深证字第36024号 records the supervised evidence-preservation process performed on 6 May 2026 for the material object associated with Core Object Alpha, including photographed exterior evidence, microscope photographs, recorded video, and preserved digital files.",
+      "url_or_archive": "/physical-anchor/",
+      "hash_if_available": null,
+      "boundary_preserved": true,
+      "verification_level_if_any": "external_witness=notarial_scope; evidence-preservation and witnessed-procedure scope only",
+      "limitations": [
+        "The notarial certificate is an objective record of the specified evidence-preservation process; it does not certify the Accord's philosophical propositions.",
+        "It does not establish advanced forensic identity, confidential flaw-challenge completion, or multi-party forensic attestation.",
+        "It does not create canonical authority, amend the Bitcoin Originals, or establish successor reception."
+      ]
+    }
+  ],
   "counts": {
-    "notarial_record": 0,
+    "notarial_record": 1,
     "institutional_record": 0,
     "audit_report": 0,
     "regulatory_or_court_record": 0
