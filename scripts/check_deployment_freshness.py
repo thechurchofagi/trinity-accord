@@ -67,7 +67,14 @@ STATIC_PAGE_MARKERS = {
         'id="research-entry-title"',
         "Understand, verify, or respond within clear boundaries",
         "The homepage is a doorway, not the archive",
+        "External Witness Record",
+        "Bounded external evidence-provenance records",
         "BEGIN GENERATED PUBLIC STATUS",
+    ],
+    "/status/": [
+        "External witness records",
+        "Current external witness record count",
+        "外部见证记录属于证据来源与过程见证",
     ],
     "/technical-historical-reference/": [
         "Completion in four senses",
@@ -141,6 +148,7 @@ STATIC_PAGE_MARKERS = {
 }
 STATIC_SOURCE_FILES = [
     "index.md",
+    "status.md",
     "record-chain/index.md",
     "inscriptions.md",
     "authority-address-inscriptions.md",
