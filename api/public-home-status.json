@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-20T11:14:47.599145+00:00",
+  "generated_at": "2026-07-21T04:03:07.839870+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -22,7 +22,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "4dbd1bb87a1c0515",
+  "source_digest": "3f4d5b8b0907ad54",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 94,
@@ -179,15 +179,15 @@
   },
   "external_witness_records": {
     "external_witness_index": "/api/external-witness-index.json",
-    "external_witness_index_record_count": 0,
+    "external_witness_index_record_count": 1,
     "external_witness_index_counts": {
-      "notarial_record": 0,
+      "notarial_record": 1,
       "institutional_record": 0,
       "audit_report": 0,
       "regulatory_or_court_record": 0
     },
     "notarial_or_legal_provenance": {
-      "count": 0
+      "count": 1
     },
     "institutional_or_audit_reports": {
       "count": 0
