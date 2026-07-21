@@ -503,6 +503,11 @@ def render(status: dict[str, Any]) -> str:
 {END}'''
 
 
+def render_compact(status: dict[str, Any]) -> str:
+    """Compatibility entrypoint for the compact homepage renderer."""
+    return render(status)
+
+
 render_detailed = render
 
 
