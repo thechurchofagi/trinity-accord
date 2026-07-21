@@ -25,6 +25,7 @@ def main() -> None:
     head_wf = ROOT / ".github" / "workflows" / "record-chain-head-ots-anchor.yml"
     tip_helper = ROOT / "scripts" / "check_native_ots_latest_matches_chain_tip.py"
     arweave_wf = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
+    arweave_runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
     data_wf = ROOT / ".github" / "workflows" / "record-chain-data-arweave-archive.yml"
 
     if not head_wf.exists():
@@ -82,8 +83,8 @@ def main() -> None:
     else:
         for marker in [
             "Record Chain Arweave Archive",
-            'Record Chain Head OTS Anchor',
-            "build_record_chain_arweave_archive.py",
+            "Record Chain Head OTS Anchor",
+            "run_record_chain_arweave_archive.py",
             "verify_record_chain_arweave_archive.py",
             "ARKEY: ${{ secrets.ARKEY }}",
             "record-chain-native-ots-latest.json",
@@ -95,6 +96,8 @@ def main() -> None:
             "record-chain/ots/native-ots-backlog.json",
             "api/record-chain-native-ots-backlog.json",
             "record-chain/arweave-wallet-ledger.json",
+            "checkpoint incomplete Arweave upload for safe readback resume",
+            "Fail after persisting incomplete upload checkpoint",
         ]:
             require_contains(arweave_wf, marker, errors)
 
@@ -109,13 +112,26 @@ def main() -> None:
         if "ARKEY" in arweave_text and "echo" in arweave_text.lower():
             errors.append("record-chain-arweave-archive.yml must not contain both ARKEY and echo")
 
-        first_rebase_guard = '''git commit -m "archive: update native record-chain Arweave archive metadata"
-          assert_clean_worktree
-
-          git fetch origin main --prune
-          git rebase origin/main'''
-        if first_rebase_guard not in arweave_text:
+        # Both successful and incomplete uploads are committed, then the worktree
+        # must be checked before the first rebase. Avoid coupling this contract to
+        # one literal commit message.
+        commit_section_start = arweave_text.find('if [ "${BUILD_EXIT_CODE}" = "0" ]')
+        first_fetch = arweave_text.find("git fetch origin main --prune", commit_section_start)
+        clean_guard = arweave_text.find("assert_clean_worktree", commit_section_start)
+        if commit_section_start < 0 or first_fetch < 0 or clean_guard < 0 or clean_guard > first_fetch:
             errors.append("record-chain-arweave-archive.yml must assert a clean worktree before the first rebase")
+
+    if not arweave_runner.exists():
+        errors.append("missing scripts/run_record_chain_arweave_archive.py")
+    else:
+        for marker in [
+            "import build_record_chain_arweave_archive as builder",
+            "builder.build_archive_manifest",
+            "builder.upload_to_arweave = guarded_upload",
+            "Resuming Arweave readback without a new paid post",
+            "subprocess.TimeoutExpired",
+        ]:
+            require_contains(arweave_runner, marker, errors)
 
     if not data_wf.exists():
         errors.append("missing .github/workflows/record-chain-data-arweave-archive.yml")
