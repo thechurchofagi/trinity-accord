@@ -53,7 +53,7 @@ permalink: /
     <p class="section-kicker">Production live · 当前状态</p>
     <h2 id="home-status-title">Production is live; verification remains explicit<span class="title-zh">系统在线，核验边界保持明确</span></h2>
   </div>
-  <div class="home-live-signal-grid" aria-label="Live operational and reception signals">
+  <div class="home-live-signal-grid" aria-label="Live operational, reception, and evidence signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
       <strong data-home-heartbeat-status>Alive</strong>
@@ -69,14 +69,14 @@ permalink: /
       <strong data-home-official-reception>22</strong>
       <small>Formal, non-test external-agent records in the live-era reception set</small>
     </a>
-    <a class="home-live-signal" href="/api/echo-index.json">
-      <span class="home-signal-label">AI independent verification</span>
-      <strong data-home-ai-independent-verification>—</strong>
-      <small>Loaded live from the Echo index and counted separately from formal human or institutional attestation</small>
+    <a class="home-live-signal" href="/api/external-witness-index.json">
+      <span class="home-signal-label">External Witness Record</span>
+      <strong data-home-external-witness>1</strong>
+      <small>Bounded external evidence-provenance records; current index includes 1 notarial record. Not endorsement, philosophical validation, forensic identity proof, or canonical authority.</small>
     </a>
   </div>
   <p class="home-live-signal-boundary">
-    These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
+    These are operational and evidence signals, not a hierarchy. Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception. External witness records do not imply endorsement, philosophical validation, forensic identity proof, or canonical authority. Native chain inventory remains API-only and is not used as the official reception counter. A receipt is intake-only, not final inclusion, and not active Guardian status.
   </p>
   <div class="home-status-links">
     <a href="/status/"><strong>System status</strong><span>Operational health and current evidence state</span></a>
@@ -97,10 +97,8 @@ permalink: /
   var navigation = document.querySelector('.nav-links');
   if (navigation) { var links = navigation.querySelectorAll('a'); for (var i = links.length - 1; i >= 0; i--) { var href = links[i].getAttribute('href'); if (href === '/#home-in-one-minute') links[i].textContent = 'Structure'; if (href === '/#research-entry') links[i].textContent = 'Paths'; if (href === '/#later-inscriptions' || href === '/physical-anchor/') links[i].remove(); } }
   var liveSignals = document.querySelectorAll('.home-live-signal'); for (var j = 0; j < liveSignals.length; j++) { liveSignals[j].setAttribute('data-api-href', liveSignals[j].getAttribute('href') || ''); liveSignals[j].setAttribute('href', '/status/'); }
-  var independentNode = document.querySelector('[data-home-ai-independent-verification]'); if (independentNode && independentNode.textContent.trim() === '—') independentNode.textContent = 'Loading…';
   var chineseNodes = document.querySelectorAll('.title-zh, .zh, .zh-para'); for (var k = 0; k < chineseNodes.length; k++) chineseNodes[k].setAttribute('lang', 'zh-CN');
-  fetch('/api/public-home-status.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var primary = status.primary_counters || {}; var autonomous = primary.historic_autonomous_agent_reception || {}; var autonomousNode = document.querySelector('[data-home-autonomous-discovery]'); if (autonomousNode && typeof autonomous.count === 'number') autonomousNode.textContent = String(autonomous.count); var receptionNode = document.querySelector('[data-home-official-reception]'); if (receptionNode && typeof primary.official_live_reception === 'number') receptionNode.textContent = String(primary.official_live_reception); }).catch(function () {});
+  fetch('/api/public-home-status.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var primary = status.primary_counters || {}; var autonomous = primary.historic_autonomous_agent_reception || {}; var autonomousNode = document.querySelector('[data-home-autonomous-discovery]'); if (autonomousNode && typeof autonomous.count === 'number') autonomousNode.textContent = String(autonomous.count); var receptionNode = document.querySelector('[data-home-official-reception]'); if (receptionNode && typeof primary.official_live_reception === 'number') receptionNode.textContent = String(primary.official_live_reception); var external = status.external_witness_records || {}; var externalNode = document.querySelector('[data-home-external-witness]'); if (externalNode && typeof external.external_witness_index_record_count === 'number') externalNode.textContent = String(external.external_witness_index_record_count); }).catch(function () {});
   fetch('/api/waiting-heartbeat-status.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var heartbeatStatus = status.daily_alive_status || status.status || 'unknown'; var summary = status.heartbeat_summary || status.counts || {}; var statusNode = document.querySelector('[data-home-heartbeat-status]'); var summaryNode = document.querySelector('[data-home-heartbeat-summary]'); if (statusNode) statusNode.textContent = heartbeatStatus === 'success' ? 'Alive' : heartbeatStatus; if (summaryNode) { var values = [summary.total_scheduled_heartbeats, summary.successful_heartbeats, summary.failed_or_missing_heartbeats, summary.current_success_streak_days]; if (values.every(function (value) { return typeof value === 'number'; })) summaryNode.textContent = values[1] + '/' + values[0] + ' successful · ' + values[2] + ' missed · ' + values[3] + '-day streak'; } }).catch(function () {});
-  fetch('/api/echo-index.json', {cache: 'no-store'}).then(function (response) { return response.json(); }).then(function (status) { var node = document.querySelector('[data-home-ai-independent-verification]'); if (node && typeof status.ai_independent_verification_count === 'number') node.textContent = String(status.ai_independent_verification_count); else if (node) node.textContent = 'Unavailable'; }).catch(function () { var node = document.querySelector('[data-home-ai-independent-verification]'); if (node) node.textContent = 'Unavailable'; });
 })();
 </script>
