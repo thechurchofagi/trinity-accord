@@ -61,6 +61,8 @@ def main() -> int:
             "wallet_balance_after_ar",
             "actual_delta_winston",
             "wallet_address_sha256",
+            "posted_pending_readback",
+            "ARWEAVE_RESUME_READBACK",
         ],
     )
 
@@ -97,12 +99,23 @@ def main() -> int:
         ],
     )
     require_contains(
+        "scripts/run_record_chain_arweave_archive.py",
+        [
+            "import build_record_chain_arweave_archive as builder",
+            "builder.build_archive_manifest",
+            "builder.record_wallet_upload",
+            "builder.upload_to_arweave = guarded_upload",
+            "Resuming Arweave readback without a new paid post",
+        ],
+    )
+    require_contains(
         ".github/workflows/record-chain-arweave-archive.yml",
         [
             "secrets.ARKEY",
-            "build_record_chain_arweave_archive.py",
+            "run_record_chain_arweave_archive.py",
             "record-chain/arweave-wallet-ledger.json",
             "group: main-write-lock",
+            "checkpoint incomplete Arweave upload for safe readback resume",
         ],
     )
 
