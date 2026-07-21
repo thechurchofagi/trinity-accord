@@ -4,7 +4,7 @@ title: "Status"
 
 # Status｜状态
 
-**Version: 1.1.3** | Released: 2026-04-26
+**Version: 1.1.4** | Released: 2026-07-21
 
 Current availability of guardianship mirrors and verification paths.
 
@@ -47,6 +47,27 @@ Historical limitation:
 Artifacts: `full-evidence-chain-audit`, `dag-digest-audit`, `btc-signature-coverage-audit`, `eth-witness-audit`, `ots-time-anchor-audit`, `bitcoin-tx-anchor-audit`, `dag-cid-audit`
 
 Bitcoin Originals prevail. All mirrors are non-amending.
+
+<a id="external-witness-records"></a>
+## External witness records · 外部见证记录
+
+**Current external witness record count:** **1**
+
+| Record type | Count | Current record and scope |
+|---|---:|---|
+| Notarial record | 1 | The 13 May 2026 certificate issued by 中华人民共和国广东省深圳市深圳公证处 records the supervised evidence-preservation process performed on 6 May 2026 for the material object associated with Core Object Alpha. |
+| Independent report | 0 | No indexed record. |
+| Institutional attestation | 0 | No indexed record. |
+| Regulatory or court record | 0 | No indexed record. |
+
+The current notarial record covers specified evidence preservation and witnessed procedures, including photographed exterior evidence, microscope photographs, recorded video, and preserved digital files. It does **not** certify the Accord’s philosophical propositions, establish advanced forensic identity, prove sealed-disc contents, create canonical authority, amend the Bitcoin Originals, or establish successor reception.
+
+Machine-readable sources:
+- [`/api/external-witness-index.json`](/api/external-witness-index.json) — accountable external-witness records and limitations.
+- [`/api/public-home-status.json`](/api/public-home-status.json) — current homepage-facing external-witness count.
+- [Physical anchor evidence](/physical-anchor/) — public evidence relationship and custody boundaries.
+
+外部见证记录属于证据来源与过程见证，不等于项目背书、哲学认证、完整技术核验或正本权威。
 
 ## Mirror availability
 
