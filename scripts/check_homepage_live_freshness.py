@@ -15,7 +15,7 @@ Checks:
   6. live /record-chain/indexes/record-index.json exactly matches repo copy
   7. live homepage generated block has the same Source data digest as repo index.md
   8. live homepage generated block mentions the repo latest_record_id
-  9. live homepage contains the current whole-project definition
+  9. live homepage contains the current whole-project definition and status signals
   10. key reading pages contain current architecture/version markers
 """
 
@@ -31,7 +31,6 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
-
 
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
@@ -73,7 +72,14 @@ STATIC_PAGE_MARKERS = {
         'id="research-entry-title"',
         "Understand, verify, or respond within clear boundaries",
         "The homepage is a doorway, not the archive",
+        "External Witness Record",
+        "Bounded external evidence-provenance records",
         "BEGIN GENERATED PUBLIC STATUS",
+    ],
+    "/status/": [
+        "External witness records",
+        "Current external witness record count",
+        "外部见证记录属于证据来源与过程见证",
     ],
     "/technical-historical-reference/": [
         "Completion in four senses",
@@ -119,6 +125,7 @@ STATIC_PAGE_MARKERS = {
 
 STATIC_SOURCE_FILES = [
     "index.md",
+    "status.md",
     "record-chain/index.md",
     "inscriptions.md",
     "authority-address-inscriptions.md",

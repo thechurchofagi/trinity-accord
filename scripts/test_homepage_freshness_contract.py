@@ -22,6 +22,7 @@ def forbid(text: str, needle: str, label: str) -> None:
 
 def main() -> None:
     index = (ROOT / "index.md").read_text(encoding="utf-8")
+    status_page = (ROOT / "status.md").read_text(encoding="utf-8")
     home = (ROOT / ".github/workflows/homepage-status-sync.yml").read_text(encoding="utf-8")
     deploy = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
     patcher = (ROOT / "scripts/patch_public_home_status_primary.py").read_text(encoding="utf-8")
@@ -45,8 +46,10 @@ def main() -> None:
         "pipeline_current",
         "ots_archivable_for_arweave",
         "arweave_archive_needed",
+        "External Witness Record",
+        "external_witness_index_record_count",
     ]:
-        require(patcher, needle, "homepage technical health patcher")
+        require(patcher, needle, "homepage technical health/status patcher")
 
     for needle in [
         "native_ots_archivable_for_arweave",
@@ -64,6 +67,29 @@ def main() -> None:
 
     for marker in deploy_markers:
         require(index, marker, "current homepage deployment marker")
+
+    for needle in [
+        "External Witness Record",
+        "data-home-external-witness",
+        "/api/external-witness-index.json",
+        "External witness records do not imply endorsement",
+    ]:
+        require(index, needle, "current external witness homepage signal")
+
+    for needle in [
+        "External witness records",
+        "Current external witness record count",
+        "外部见证记录属于证据来源与过程见证",
+    ]:
+        require(status_page, needle, "external witness status section")
+
+    for retired in [
+        "AI independent verification",
+        "data-home-ai-independent-verification",
+        "Loaded live from the Echo index",
+        "fetch('/api/echo-index.json'",
+    ]:
+        forbid(index, retired, "retired fourth homepage signal")
 
     for retired_marker in [
         "p0.8.2-link-affordance",
