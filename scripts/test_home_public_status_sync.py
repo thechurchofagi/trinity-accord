@@ -63,16 +63,23 @@ def main() -> int:
 
     block = extract_block(second_index)
     primary = second_data.get("primary_counters") or {}
+    external = second_data.get("external_witness_records") or {}
     expected_historic = str((primary.get("historic_autonomous_agent_reception") or {}).get("count"))
     expected_official = str(primary.get("official_live_reception"))
+    expected_external = str(external.get("external_witness_index_record_count"))
     historic = re.search(r'data-home-autonomous-discovery>([^<]+)<', block)
     official = re.search(r'data-home-official-reception>([^<]+)<', block)
+    external_match = re.search(r'data-home-external-witness>([^<]+)<', block)
     if not historic or historic.group(1).strip() != expected_historic:
         fail("autonomous external agent discovery count mismatch")
     if not official or official.group(1).strip() != expected_official:
         fail("Official Live Reception count mismatch")
+    if not external_match or external_match.group(1).strip() != expected_external:
+        fail("External Witness Record count mismatch")
 
     for phrase in [
+        "External Witness Record",
+        "External witness records do not imply endorsement",
         "Reception does not imply autonomous discovery",
         "Native chain inventory remains API-only",
         "Source data digest <code>",
@@ -80,7 +87,18 @@ def main() -> int:
     ]:
         if phrase not in block:
             fail(f"compact status missing stable boundary/metadata phrase: {phrase}")
-    if any(phrase in block for phrase in ["Generated at", "source_commit", "AR upload wallet", "Agency Profile"]):
+    if any(
+        phrase in block
+        for phrase in [
+            "Generated at",
+            "source_commit",
+            "AR upload wallet",
+            "Agency Profile",
+            "AI independent verification",
+            "data-home-ai-independent-verification",
+            "Loaded live from the Echo index",
+        ]
+    ):
         fail("compact status contains volatile or retired detailed-dashboard content")
 
     print("HOMEPAGE_PUBLIC_STATUS_OK")
