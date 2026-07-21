@@ -91,7 +91,7 @@ def main() -> None:
             "refusing live Arweave upload without native OTS",
             "record-chain/arweave-archives/",
             "api/record-chain-arweave-index.json",
-            "record-chain/arweave/backlog.json".replace("arweave/", "arweave-"),
+            "record-chain/arweave-backlog.json",
             "api/record-chain-arweave-backlog.json",
             "record-chain/ots/native-ots-backlog.json",
             "api/record-chain-native-ots-backlog.json",
