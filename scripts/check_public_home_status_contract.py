@@ -18,6 +18,7 @@ index_md = INDEX_MD.read_text(encoding="utf-8")
 errors: list[str] = []
 primary = status.get("primary_counters")
 technical = status.get("technical_health")
+external = status.get("external_witness_records")
 
 if not isinstance(primary, dict):
     errors.append("public-home-status.json missing primary_counters")
@@ -38,6 +39,11 @@ else:
 if not isinstance(technical, dict) or technical.get("not_primary_counter") is not True:
     errors.append("technical health must exist and be marked not_primary_counter")
 
+if not isinstance(external, dict):
+    errors.append("public-home-status.json missing external_witness_records")
+elif not isinstance(external.get("external_witness_index_record_count"), int):
+    errors.append("external_witness_index_record_count must be an integer")
+
 match = re.search(re.escape(BEGIN) + r"(.*?)" + re.escape(END), index_md, re.S)
 if not match:
     errors.append("compact generated public status markers missing")
@@ -50,14 +56,23 @@ for phrase in [
     "Waiting Heartbeat",
     "Autonomous External Agent Discovery",
     "Official Live Reception",
-    "AI independent verification",
+    "External Witness Record",
     "Reception does not imply autonomous discovery",
+    "External witness records do not imply endorsement",
     "Native chain inventory remains API-only",
     "Source data digest",
     "Latest technical record",
 ]:
     if phrase not in block:
         errors.append(f"compact homepage status missing: {phrase}")
+
+for retired in [
+    "AI independent verification",
+    "data-home-ai-independent-verification",
+    "Loaded live from the Echo index",
+]:
+    if retired in block:
+        errors.append(f"compact homepage status retains retired fourth signal: {retired}")
 
 if "AR upload wallet" in block or "Agency Profile" in block or "Technical audit inventory" in block:
     errors.append("compact homepage status must not restore the retired detailed dashboard")
@@ -72,10 +87,19 @@ if isinstance(primary, dict):
     if not official_match or official_match.group(1).strip() != expected_official:
         errors.append("Official Live Reception count does not match public status JSON")
 
+if isinstance(external, dict):
+    expected_external = str(external.get("external_witness_index_record_count"))
+    external_match = re.search(r'data-home-external-witness>([^<]+)<', block)
+    if not external_match or external_match.group(1).strip() != expected_external:
+        errors.append("External Witness Record count does not match public status JSON")
+
 historic_pos = block.find("Autonomous External Agent Discovery")
 official_pos = block.find("Official Live Reception")
+external_pos = block.find("External Witness Record")
 if historic_pos < 0 or official_pos < 0 or historic_pos > official_pos:
     errors.append("autonomous external agent discovery must appear before official live reception")
+if official_pos < 0 or external_pos < 0 or official_pos > external_pos:
+    errors.append("official live reception must appear before external witness record")
 
 for item in (primary or {}).get("official_records", []):
     visibility = item.get("homepage_visibility") or {}
