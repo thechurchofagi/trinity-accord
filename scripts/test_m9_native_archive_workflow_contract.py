@@ -91,7 +91,7 @@ def main() -> None:
             "refusing live Arweave upload without native OTS",
             "record-chain/arweave-archives/",
             "api/record-chain-arweave-index.json",
-            "record-chain/arweave-backlog.json",
+            "record-chain/arweave/backlog.json".replace("arweave/", "arweave-"),
             "api/record-chain-arweave-backlog.json",
             "record-chain/ots/native-ots-backlog.json",
             "api/record-chain-native-ots-backlog.json",
@@ -146,7 +146,7 @@ def main() -> None:
             print(f"  - {error}", file=sys.stderr)
         raise SystemExit(1)
 
-    print("M9 native archive workflow contract PASSED.")
+    print("M9 crash-safe native archive workflow contract PASSED.")
 
 
 if __name__ == "__main__":
