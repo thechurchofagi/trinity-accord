@@ -116,7 +116,16 @@ def main() -> int:
         "explicit live Native OTS route missing",
     )
 
-    for needle in ["posted_pending_readback", "readback_failed", "retryable", "fs.writeFileSync(outPath"]:
+    for needle in [
+        "posted_pending_readback",
+        "readback_failed",
+        "retryable",
+        "function writeResult",
+        "fs.writeFileSync",
+        "outPath",
+        "ARWEAVE_POST_CHECKPOINT",
+        "ARWEAVE_RESUME_READBACK",
+    ]:
         require(needle in uploader, f"uploader missing durable result marker {needle}")
 
     for needle in ["archive_status", "waiting_for_key", "upload_failed", "readback_failed", "hash_match", "refresh_archive_backlog"]:

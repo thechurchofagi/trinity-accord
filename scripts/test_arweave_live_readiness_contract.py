@@ -58,6 +58,22 @@ def main() -> int:
         else:
             ok("current archive builder is bound to the native Record-Chain")
 
+    runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
+    if not runner.exists():
+        errors.append("scripts/run_record_chain_arweave_archive.py missing")
+    else:
+        text = runner.read_text(encoding="utf-8")
+        for marker in [
+            "import build_record_chain_arweave_archive as builder",
+            "builder.build_archive_manifest",
+            "builder.upload_to_arweave = guarded_upload",
+            "Resuming Arweave readback without a new paid post",
+        ]:
+            if marker not in text:
+                errors.append(f"current native archive runner missing: {marker}")
+        if not any(error.startswith("current native archive runner missing") for error in errors):
+            ok("current crash-safe runner invokes the authoritative native builder")
+
     current_workflow = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
     if not current_workflow.exists():
         errors.append("current native archive workflow missing")
@@ -71,8 +87,10 @@ def main() -> int:
             errors.append("current native archive workflow lacks write serialization")
         else:
             ok("current native archive workflow is serialized with main-write-lock")
-        if "build_record_chain_arweave_archive.py" not in text:
-            errors.append("current native archive workflow does not invoke the native builder")
+        if "run_record_chain_arweave_archive.py" not in text:
+            errors.append("current native archive workflow does not invoke the crash-safe native runner")
+        else:
+            ok("current native archive workflow invokes the crash-safe native runner")
 
     retired_paths = {
         "legacy data archive": ROOT / ".github/workflows/record-chain-data-arweave-archive.yml",

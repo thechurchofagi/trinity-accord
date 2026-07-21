@@ -36,6 +36,11 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || (github.event_name == 'workflow_run' && 'live' || 'dry-run') }}
+      ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
+      ARWEAVE_HTTP_TIMEOUT_MS: "30000"
+      ARWEAVE_READBACK_MAX_RETRIES: "30"
+      ARWEAVE_READBACK_DELAY_MS: "10000"
+      ARWEAVE_READBACK_MAX_SECONDS: "420"
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
@@ -145,14 +150,22 @@ jobs:
           PY
 
       - name: Build Arweave archive manifest
+        id: build
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
         env:
           ARKEY: ${{ secrets.ARKEY }}
-          ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
-        run: python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+        run: |
+          set +e
+          python scripts/run_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+          build_exit_code=$?
+          set -e
+          printf 'exit_code=%s\n' "${build_exit_code}" >> "$GITHUB_OUTPUT"
+          printf 'Arweave archive builder exit code: %s\n' "${build_exit_code}"
+          # Failure metadata must be committed before the job is reported failed.
+          exit 0
 
       - name: Verify Arweave archive metadata
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
+        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code == '0'
         run: |
           if [ "${ARWEAVE_UPLOAD_MODE}" = "live" ]; then
             python scripts/verify_record_chain_arweave_archive.py
@@ -161,11 +174,14 @@ jobs:
           fi
 
       - name: Verify record chain
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
+        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code == '0'
         run: python scripts/trinity_record_chain.py verify
 
       - name: Commit Arweave archive metadata
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
+        env:
+          ARKEY: ${{ secrets.ARKEY }}
+          BUILD_EXIT_CODE: ${{ steps.build.outputs.exit_code }}
         run: |
           set -euo pipefail
 
@@ -181,7 +197,11 @@ jobs:
           }
 
           rebuild_archive_outputs() {
-            python scripts/build_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+            if [ "${BUILD_EXIT_CODE}" != "0" ]; then
+              printf '%s\n' "Preserving failed/partial Arweave transaction checkpoint; refusing a second paid upload during push retry."
+              return 0
+            fi
+            python scripts/run_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
             verify_archive_outputs
             python scripts/trinity_record_chain.py verify
           }
@@ -213,7 +233,11 @@ jobs:
             exit 0
           fi
 
-          git commit -m "archive: update native record-chain Arweave archive metadata"
+          if [ "${BUILD_EXIT_CODE}" = "0" ]; then
+            git commit -m "archive: update native record-chain Arweave archive metadata"
+          else
+            git commit -m "archive: checkpoint incomplete Arweave upload for safe readback resume"
+          fi
           assert_clean_worktree
 
           git fetch origin main --prune
@@ -226,7 +250,7 @@ jobs:
               exit 0
             fi
 
-            printf '%s\n' "Push rejected; remote main advanced. Rebasing and regenerating archive metadata. Attempt ${attempt}."
+            printf '%s\n' "Push rejected; remote main advanced. Rebasing archive metadata. Attempt ${attempt}."
             git fetch origin main --prune
             git rebase origin/main
 
@@ -238,9 +262,14 @@ jobs:
             fi
 
             assert_clean_worktree
-
             sleep $((attempt * 5))
           done
 
           printf '%s\n' "::error::Failed to push Arweave archive metadata after retries."
           exit 1
+
+      - name: Fail after persisting incomplete upload checkpoint
+        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code != '0'
+        run: |
+          printf '%s\n' "::error::Arweave archive is not verified yet. Any posted transaction checkpoint was persisted for readback-only resume."
+          exit "${{ steps.build.outputs.exit_code }}"

@@ -27,6 +27,8 @@ def main() -> int:
         "scripts/verify_record_chain_data_arweave_registry.py",
         "scripts/restore_record_chain_from_data_arweave_bundle.py",
         "scripts/test_legacy_arweave_retirement_behavior.py",
+        "scripts/build_record_chain_arweave_archive.py",
+        "scripts/run_record_chain_arweave_archive.py",
         ".github/workflows/record-chain-data-arweave-archive.yml",
         ".github/workflows/record-chain-arweave-archive.yml",
     ]
@@ -103,9 +105,18 @@ def main() -> int:
         "contents: write",
         "group: main-write-lock",
         "secrets.ARKEY",
-        "build_record_chain_arweave_archive.py",
+        "run_record_chain_arweave_archive.py",
     ]:
         require(marker in current_workflow, f"current native archive route missing: {marker}")
+
+    current_runner = (ROOT / "scripts/run_record_chain_arweave_archive.py").read_text(encoding="utf-8")
+    for marker in [
+        "import build_record_chain_arweave_archive as builder",
+        "builder.build_archive_manifest",
+        "builder.upload_to_arweave = guarded_upload",
+        "Resuming Arweave readback without a new paid post",
+    ]:
+        require(marker in current_runner, f"current native archive runner missing: {marker}")
 
     home_sync = (ROOT / ".github/workflows/homepage-status-sync.yml").read_text(encoding="utf-8")
     require('      - "Record Chain Arweave Archive"' in home_sync, "homepage sync must listen to current native archive")

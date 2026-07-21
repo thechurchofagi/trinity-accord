@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Contract test for current Arweave upload/readback result handling.
 
-The native workflow invokes the native archive builder; that builder invokes
-the generic uploader and wallet-ledger recorder. The uploader must emit
-cryptographic readback evidence. The frozen legacy data-registry updater is
+The native workflow invokes the crash-safe archive runner; that runner wraps the
+native archive builder and generic uploader. A paid transaction must be
+checkpointed before readback, and retries must resume that exact transaction
+instead of posting a duplicate. The frozen legacy data-registry updater is
 retired and must reject live updates.
 """
 from __future__ import annotations
@@ -63,9 +64,13 @@ def main() -> int:
         "posted_pending_readback",
         "readback_failed",
         "retryable",
+        "ARWEAVE_POST_CHECKPOINT",
+        "ARWEAVE_RESUME_READBACK",
+        "ARWEAVE_READBACK_MAX_SECONDS",
+        "Refusing to resume transaction",
     ]:
         require(needle in uploader, f"arweave_upload_payload.mjs missing: {needle}")
-    ok("generic uploader contains readback verification and repair states")
+    ok("generic uploader checkpoints paid posts and supports bounded readback-only resume")
 
     for field in REQUIRED_FIELDS:
         require(
@@ -105,24 +110,43 @@ def main() -> int:
         'upload_result.get("hash_match") is True',
         'upload_result.get("result") == "uploaded"',
         '"scripts/record_arweave_upload_result.py"',
-        'load_native_chain_sources',
+        "load_native_chain_sources",
         'CHAIN_ID = "trinity-accord-public-reception-ledger"',
     ]:
         require(marker in builder, f"current native archive builder missing: {marker}")
     ok("native builder wires generic uploader, readback result, and wallet accounting")
 
+    runner_path = ROOT / "scripts/run_record_chain_arweave_archive.py"
+    require(runner_path.exists(), "crash-safe native archive runner missing")
+    runner = runner_path.read_text(encoding="utf-8")
+    for marker in [
+        "subprocess.TimeoutExpired",
+        "builder.upload_to_arweave = guarded_upload",
+        'partial["result"] = "readback_failed"',
+        '"retry_readback"',
+        "_find_incomplete_current_archive",
+        "Resuming Arweave readback without a new paid post",
+        "payload sha256 does not match",
+    ]:
+        require(marker in runner, f"crash-safe native archive runner missing: {marker}")
+    ok("native runner persists timeout checkpoints and resumes only the matching tx/payload")
+
     current_workflow_path = ROOT / ".github/workflows/record-chain-arweave-archive.yml"
     require(current_workflow_path.exists(), "current native archive workflow missing")
     current_workflow = current_workflow_path.read_text(encoding="utf-8")
     for marker in [
-        "build_record_chain_arweave_archive.py",
+        "run_record_chain_arweave_archive.py",
         "verify_record_chain_arweave_archive.py",
         "secrets.ARKEY",
         "group: main-write-lock",
         "ARWEAVE_UPLOAD_TIMEOUT_SECONDS",
+        "ARWEAVE_READBACK_MAX_SECONDS",
+        "checkpoint incomplete Arweave upload",
+        "Fail after persisting incomplete upload checkpoint",
+        "refusing a second paid upload during push retry",
     ]:
         require(marker in current_workflow, f"current native archive workflow missing: {marker}")
-    ok("current native workflow invokes the verified native builder under serialized write control")
+    ok("current native workflow persists repair state before reporting upload failure")
 
     retired_path = ROOT / "scripts/update_record_chain_data_arweave_registry.py"
     require(retired_path.exists(), "retired legacy registry updater missing")

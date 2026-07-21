@@ -197,6 +197,7 @@ def test_workflow_retirement() -> None:
     phase5 = (ROOT / ".github/workflows/phase5-ots-arweave-paid-upload.yml").read_text(encoding="utf-8")
     echo = (ROOT / ".github/workflows/paid-echo-arweave-canary.yml").read_text(encoding="utf-8")
     current = (ROOT / ".github/workflows/record-chain-arweave-archive.yml").read_text(encoding="utf-8")
+    runner = (ROOT / "scripts/run_record_chain_arweave_archive.py").read_text(encoding="utf-8")
 
     for name, text in (("legacy data", data), ("phase5", phase5), ("echo", echo)):
         require("contents: write" not in text, f"{name} retired workflow retains write permission")
@@ -210,7 +211,12 @@ def test_workflow_retirement() -> None:
     require("- production" not in echo, "echo workflow retains production choice")
     require("ALLOW_PAID_ARWEAVE_CANARY: \"true\"" not in echo, "echo workflow enables paid upload")
     require("secrets.ARKEY" in current and "contents: write" in current, "current native archive route must remain explicit")
-    require("build_record_chain_arweave_archive.py" in current, "current native archive builder missing")
+    require("run_record_chain_arweave_archive.py" in current, "current crash-safe native archive runner missing")
+    require(
+        "import build_record_chain_arweave_archive as builder" in runner
+        and "builder.build_archive_manifest" in runner,
+        "current native archive runner is not wired to the authoritative builder",
+    )
 
 
 def main() -> int:
