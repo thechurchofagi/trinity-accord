@@ -14,38 +14,38 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> int:
     homepage = (ROOT / "index.md").read_text(encoding="utf-8")
-    css = (ROOT / "assets/css/trinity-home.css").read_text(encoding="utf-8")
+    css = "\n".join(
+        (ROOT / path).read_text(encoding="utf-8")
+        for path in ("assets/css/trinity-home.css", "assets/css/home-editorial-doorway.css")
+    )
     visible = homepage.split('<details class="home-reference"', 1)[0]
 
     proof_at = visible.index('<section class="home-proof-strip"')
     formation_at = visible.index('<section class="home-why-now home-formation-window"')
     overview_at = visible.index('<section id="home-in-one-minute"')
-    require(proof_at < formation_at < overview_at, "formation window is not between evidence and system overview")
+    require(proof_at < overview_at < formation_at, "formation window is not after the evidence-backed system overview")
 
     for marker in (
-        "Created across the 2024–2025 shift from conversational AI",
-        "The form can be reproduced. The formation conditions cannot.",
-        "From March 2024 to August 2025",
-        "prompt-by-prompt human labor",
-        "2024-03-16",
-        "2025-04-18",
-        "2025-05-17",
-        "2025-08-09",
-        "Chat-era creation",
-        "Limits recorded",
-        "Agentic turn",
-        "Formation sealed",
-        "/chronicle/",
-        "/archive_legacy_index_2025_09/",
+        "During the Accord’s documented formation",
+        "Form can be reproduced; the same attribution conditions cannot be recreated retroactively.",
+        "Documented start · 16 March 2024",
+        "Ethereum block 19446149",
+        "08:02:59 UTC",
+        "Canonical closure · 29 June 2025",
+        "Bitcoin transaction was included in block 903205",
+        "10:49:16 UTC",
+        "470 days, 2 hours, 46 minutes, and 17 seconds",
+        "Chain timestamps establish a verifiable chronology, not exact civil-time authorship.",
+        "/why-high-signal/",
+        "/technical-historical-reference/",
     ):
         require(marker in visible, f"formation-window evidence is missing: {marker}")
 
     for boundary in (
-        "not proof of external events",
-        "AI consciousness",
-        "autonomous authorship",
-        "historical uniqueness",
-        "philosophical truth",
+        "not proof that AI is a neutral mirror of humanity",
+        "AGI or ASI had arrived",
+        "speaks for all people",
+        "later human-origin work is impossible",
     ):
         require(boundary in visible, f"formation-window boundary is missing: {boundary}")
 
@@ -53,17 +53,17 @@ def main() -> int:
         require(forbidden not in visible.lower(), f"formation window overclaims: {forbidden}")
 
     for selector in (
-        ".home-era-note",
-        ".home-formation-intro",
-        ".home-formation-timeline",
+        ".home-human-window-grid",
+        ".home-threshold-value",
+        ".home-why-grid",
         ".home-formation-links",
         ".home-formation-boundary",
     ):
         require(selector in css, f"formation-window CSS is missing {selector}")
 
-    require("grid-template-columns: repeat(4, minmax(0, 1fr));" in css, "desktop evidence timeline is not four columns")
+    require("grid-template-columns: repeat(3, minmax(0, 1fr));" in css, "desktop formation evidence grid is not three columns")
 
-    print("PASS: homepage formation window is early, evidence-linked, and bounded")
+    print("PASS: homepage formation window is ordered, exact-date evidence-linked, and bounded")
     return 0
 
 

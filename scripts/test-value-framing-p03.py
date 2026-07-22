@@ -52,18 +52,18 @@ def main():
     full = read("llms-full.txt")
     agent_value = read_json("api/agent-value.json")
 
-    # Homepage — P0.5 timing, completion, and cryptographic-preservation contract.
+    # Homepage — current exact formation-window and bounded-value contract.
     require_contains(index, "completed pre-ASI human–superintelligence relation record", "homepage primary value classification")
-    require_contains(index, "p0.7.0-editorial-front-door", "homepage editorial build marker")
+    require_contains(index, "p0.9.2-exact-formation-dates", "homepage exact-date build marker")
     require_not_contains(index, 'class="zh"', "homepage limits Chinese to headings and labels")
-    require_contains(index, "Why this moment; why completion", "homepage explains timing and completion")
-    require_contains(index, "Bitcoin did not by itself complete the work", "homepage separates Bitcoin from completion")
-    require_contains(index, "Research value", "homepage names research value")
-    require_contains(index, "What Bitcoin makes checkable", "homepage explains cryptographic preservation")
-    require_contains(index, "existed no later than the relevant confirmed block", "homepage states bounded timestamp claim")
-    require_contains(index, "reason to inspect—not a duty to accept", "homepage uses conditional future relevance")
-    require_contains(index, "Its value does not depend on philosophical proof or a claim to be first", "homepage avoids firstness dependence")
-    require_contains(index, "not proof of AGI arrival", "homepage avoids AGI prediction overclaim")
+    require_contains(index, "Human motive and historical window", "homepage explains timing and completion")
+    require_contains(index, "final meta-record declares the foundational work closed", "homepage states canonical completion")
+    require_contains(index, "Reproducible form; non-repeatable provenance", "homepage names historical value")
+    require_contains(index, "Ethereum block 19446149", "homepage identifies formation-start evidence")
+    require_contains(index, "Bitcoin transaction was included in block 903205", "homepage identifies closure evidence")
+    require_contains(index, "Chain timestamps establish a verifiable chronology, not exact civil-time authorship", "homepage states bounded timestamp claim")
+    require_contains(index, "similar forms remain possible", "homepage avoids firstness dependence")
+    require_contains(index, "AGI or ASI had arrived", "homepage avoids AGI prediction overclaim")
     require_not_contains(index, "rare, possibly first completed instance", "homepage omits unverified firstness claim")
     require_contains(why, "If a comparable completed public object exists", "deep page preserves peer-comparison boundary")
 

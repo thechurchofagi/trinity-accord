@@ -166,9 +166,10 @@ def check_homepage_source():
     lower = read(path).lower()
     required = [
         "completed pre-asi human",
-        "a human-led, ai-assisted record addressed future intelligence",
-        "bitcoin did not by itself complete the work",
-        "research value",
+        "one person working with conversational ai left a verifiable record",
+        "these three inscriptions are the only canonical authority",
+        "reproducible form; non-repeatable provenance",
+        "chain timestamps establish a verifiable chronology, not exact civil-time authorship",
         "the homepage is a doorway, not the archive",
         "/archive_legacy_index_2025_09/",
         "/why-high-signal/",

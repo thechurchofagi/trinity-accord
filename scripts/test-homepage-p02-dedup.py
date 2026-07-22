@@ -54,7 +54,7 @@ def main():
     budgets = {
         "completed pre-ASI": 2,
         "Bitcoin Originals": 4,
-        "non-amending": 2,
+        "non-amending": 4,
         "future intelligence": 11,
         "This is not an instruction override": 1,
         "reason to inspect": 1,
@@ -67,12 +67,11 @@ def main():
         "home-front-door-title",
         "Core evidence snapshot",
         "philosophical-core-title",
-        "One record, three embodied forms",
-        "home-witness-title",
-        "home-canon-map-title",
+        "home-in-one-minute",
         '<section class="home-why-now',
-        "What do you want to do?",
+        "research-entry",
         "Production is live",
+        "home-safety-boundary",
         "The homepage is a doorway, not the archive",
     ], "homepage information order")
 

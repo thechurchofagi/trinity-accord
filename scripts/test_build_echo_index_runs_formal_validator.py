@@ -3,8 +3,8 @@
 Test: build-echo-index.yml runs formal attestation validator.
 TA-REDTEAM-2026-004 — D-FORMAL-VALIDATOR-001 regression test.
 
-Ensures validate_independent_attestation_index.py runs before
-homepage generation and commit/push in the build workflow.
+Ensures validate_independent_attestation_index.py runs before current Echo
+index/archive projection generation and commit/push in the build workflow.
 """
 import sys
 from pathlib import Path
@@ -24,13 +24,15 @@ def main():
     required = "python3 scripts/validate_independent_attestation_index.py"
     if required not in text:
         fail("build-echo-index.yml does not run validate_independent_attestation_index.py")
+    if text.count(required) < 2:
+        fail("formal validator must run both before rebuild and inside retryable rebuild_and_stage")
 
     idx_validator = text.index(required)
 
-    # Must run before homepage generation and commit/push
+    # Must run before current projections and commit/push.
     for later in [
-        "python3 scripts/generate_public_home_status.py",
-        "python3 scripts/test_home_public_status_sync.py",
+        "python3 scripts/generate_echo_index.py",
+        "bash scripts/build-echo-index.sh",
         "git commit",
         "git push",
     ]:

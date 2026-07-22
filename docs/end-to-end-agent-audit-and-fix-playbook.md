@@ -465,7 +465,7 @@ python3 scripts/test_echo_triage_level_specific_requirements.py
 python3 scripts/test_echo_triage_independence_negation.py
 python3 scripts/test_echo_archive_toctou_digest.py
 python3 scripts/test_echo_screened_digest_trusted_comment_source.py
-python3 scripts/test_echo_untrusted_content_marking.py
+python3 scripts/run_ci_group.py echo-archive
 python3 scripts/test_agent_declared_echo_archive_pipeline.py
 python3 scripts/test_pure_echo_not_verifiability.py
 ```

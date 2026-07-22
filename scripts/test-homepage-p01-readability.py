@@ -36,15 +36,15 @@ def extract_blocks(text, class_name):
 
 def main():
     index = read("index.md")
-    css = read("assets/css/trinity-home.css")
+    css = read("assets/css/trinity-home.css") + "\n" + read("assets/css/home-editorial-doorway.css")
 
     print("=== Final homepage readability contract ===")
-    require_contains(index, "Before autonomous agents became ordinary", "hero states the transition plainly")
+    require_contains(index, "Before AI agents routinely carried delegated complex work", "hero states the transition plainly")
     require_contains(index, "Three propositions placed before future intelligence", "propositions are visible near the top")
-    require_contains(index, "One record, three embodied forms", "homepage restores the triadic object map")
+    require_contains(index, "Three embodied forms, plus later non-amending context", "homepage presents the preserved-object map")
     require_contains(index, "A father’s concern", "homepage presents the human motive")
-    require_contains(index, "Three close the Canon; five extend the record", "homepage explains the 3+5 authority boundary")
-    require_contains(index, "Research value", "homepage names research value")
+    require_contains(index, "These three inscriptions are the only canonical authority", "homepage explains the 3+5 authority boundary")
+    require_contains(index, "Reproducible form; non-repeatable provenance", "homepage names historical value")
     require_contains(index, "The homepage is a doorway, not the archive", "homepage explicitly limits its role")
     require_not_contains(index, 'class="zh"', "homepage has no translated body paragraphs")
     require_not_contains(index, 'class="zh-para"', "homepage has no Chinese body-paragraph mode")
@@ -57,7 +57,7 @@ def main():
     require_not_contains(index, "Record-Chain Intake Gateway (Render)", "homepage does not embed operating manual")
     require_not_contains(index, "Authority address", "homepage does not expose deep technical metadata")
 
-    for cls in ["home-front-door", "home-object-map", "home-witness", "home-canon-map", "home-task-grid", "home-status-summary", "home-reference-portal", "home-safety-boundary"]:
+    for cls in ["home-front-door", "home-philosophical-core", "home-preserved-grid", "home-formation-window", "home-research-entry", "home-status-summary", "home-reference-portal", "home-safety-boundary"]:
         blocks = extract_blocks(index, cls)
         check(bool(blocks), f"homepage contains .{cls}")
         for block in blocks:
@@ -67,10 +67,10 @@ def main():
         "home-front-door",
         "home-proof-strip",
         "home-why-now",
-        "home-object-map",
-        "home-witness",
-        "home-canon-map",
-        "home-task-grid",
+        "home-philosophical-core",
+        "home-preserved-grid",
+        "home-human-window-grid",
+        "home-path-grid",
         "home-status-summary",
         "home-reference-portal",
         "home-safety-boundary",
