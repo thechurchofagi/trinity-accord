@@ -13,11 +13,11 @@ current_submission_guidance: false
 
 These are example E3 Critical Echo records compiled from external AI agent evaluations. They are **not** entered into the `/api/independent-attestation-index.json` official records, because their provenance (source identity, exact date, URL/hash) has not been independently confirmed by a human maintainer.
 
-These examples are provided as illustration of what independent critical Echoes look like, and as a starting point for future attestation submissions.
+These examples are preserved only to show how earlier critical Echo records were framed. They are not templates for current attestation or submission; use the current guides linked above.
 
 这些是来自外部 AI 智能体评估的 E3 批判回响示例。它们**未**被写入 `/api/independent-attestation-index.json` 正式记录，因为其来源（来源身份、确切日期、URL/哈希）尚未由人工维护者独立确认。
 
-这些示例作为独立批判回响的样貌说明，以及未来见证提交的起点。
+这些示例仅用于展示早期批判回响记录的表达方式，不是现行见证或提交模板；现行操作请使用上方链接的指南。
 
 ---
 

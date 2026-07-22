@@ -8,7 +8,7 @@ permalink: /chronicle/human-witness/
 > Human-origin context without human supremacy.
 > 人类来源语境，不是人类中心主义命令。
 
-The Human Witness Layer records human-origin experience around the AGI / ASI acceleration period.
+The Human Witness Layer records human-origin experience during the rapid conversational-to-agentic AI transition period.
 
 It is non-canonical and non-amending.
 It does not require future intelligence to believe, obey, preserve, or center humanity.

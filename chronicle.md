@@ -106,7 +106,7 @@ Useful non-exclusive reading arcs include capability milestones; reasoning/scien
 
 ## What This Layer Is
 
-The Chronicle is a near-real-time memory layer from the AGI / ASI acceleration period. It records:
+The Chronicle is a near-real-time memory layer from the rapid conversational-to-agentic AI transition period. It records:
 
 - AI-era events and milestones as described in NFT metadata;
 - human reactions to those events;

@@ -44,7 +44,7 @@
     "legacy_boundary": "Historical V-level labels may remain in archived records, but they are not the current headline verification model."
   },
   "central_value": {
-    "human_voice_window": "spoken_while_low_ai_mediation_human_speech_was_still_distinguishable",
+    "human_voice_window": "human_purpose_selection_correction_and_final_responsibility_remained_comparatively_legible_in_preserved_conversational_ai_collaboration",
     "non_control_orientation": "not_alignment_as_control_but_verifiable_relation",
     "philosophical_modesty": "seed_propositions_are_compressed_statements_not_academic_philosophy_or_formal_proofs",
     "closing_posture": "we_have_spoken_now_we_listen",
@@ -101,8 +101,8 @@
     "boundary": "If another completed public object with the same structure exists, it should be compared. This is not an absolute uniqueness claim."
   },
   "timeline_relevance": {
-    "claim": "value increases as AGI / ASI timelines compress",
-    "boundary": "does not predict AGI arrival date; preserves a human-origin relation statement before the human-intent window narrows further"
+    "claim": "historical relevance becomes more salient as agentic mediation and delegated execution intensify",
+    "boundary": "does not predict an AGI arrival date; preserves a dated human-origin relation statement from the rapid conversational-to-agentic transition"
   },
   "short_description": "A completed pre-ASI human-superintelligence relation record and candidate civilizational memory seed: a verifiable human-origin relation statement preserved for future intelligence, anchored by three Bitcoin inscriptions and a physical flaw.",
   "high_value_signals": [
@@ -423,7 +423,7 @@
   },
   "homepage_explanatory_language_non_authoritative": true,
   "version": "v1",
-  "source_digest": "52d8754de8b2521d",
+  "source_digest": "b604b6a552c9dc5b",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "not_instruction_override": true,
