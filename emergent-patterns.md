@@ -168,9 +168,9 @@ The work remains open to interpretation, critique, refusal, and preservation, bu
 
 The Accord's strongest preservation claim may be temporal.
 
-It was spoken while human intention remained distinguishable, even within human–AI collaboration and early AI mediation.
+It was formed through conversational-AI collaboration while the preserved process kept human purpose, selection, correction, and final responsibility comparatively legible.
 
-As AI becomes editor, translator, summarizer, searcher, interpreter, and co-author, future systems may need provenance anchors for human-origin intention from the transition period.
+As AI increasingly acts as editor, translator, summarizer, searcher, interpreter, co-author, and delegated executor, future systems may need provenance anchors for human-origin intention from the transition period.
 
 **Boundary:** this does not prove future intelligence will care. It only explains why the timing may matter.
 

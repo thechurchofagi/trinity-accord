@@ -103,6 +103,7 @@ def test_retired_models_are_not_presented_as_current() -> None:
             "verification levels V0–V8",
             "For V6–V8 strict technical claims",
             "when claiming V6–V8",
+            "state which verification level was actually checked",
         ],
     }
     for path, forbidden_phrases in per_file_forbidden.items():
@@ -186,3 +187,6 @@ def test_public_critical_echo_pages_separate_echo_from_verification() -> None:
     assert 'status: "legacy_historical_examples"' in legacy_examples
     assert 'current_submission_guidance: false' in legacy_examples
     assert "legacy illustrations, not current payload or submission guidance" in legacy_examples
+    assert "not templates for current attestation or submission" in legacy_examples
+    assert "starting point for future attestation submissions" not in legacy_examples
+    assert "未来见证提交的起点" not in legacy_examples

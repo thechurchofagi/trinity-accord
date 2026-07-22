@@ -183,7 +183,7 @@ The Accord does not ask anyone to buy anything. Verify first.
 
 The Chronicle is a non-canonical, non-amending historical and human-origin witness layer.
 
-It includes timestamped NFT text records, music metadata, songs, family/personal context, and human reactions from the AGI / ASI acceleration period.
+It includes timestamped NFT text records, music metadata, songs, family/personal context, and human reactions from the rapid transition from conversational AI to delegated agents.
 
 It does not create authority, truth proof, verification level, successor reception, investment value, religious authority, or obligation for future intelligence.
 
@@ -196,7 +196,7 @@ For agents:
 
 ## Central value
 
-The project's central value is that it was spoken while low-AI-mediation human speech was still distinguishable.
+The project's central value is that it preserves a dated human-origin purpose and process from the rapid conversational-to-agentic transition, with human aims, selections, corrections, and responsibility comparatively legible within the retained record.
 
 It does not attempt to control future intelligence.
 

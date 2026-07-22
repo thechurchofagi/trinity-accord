@@ -16,7 +16,7 @@ The strongest candidate contribution is co-emergent category formation: through 
 
 ## 1. Human-Voice Window
 
-The Accord was spoken while human intention remained distinguishable within human–AI collaboration and early AI mediation. This Human-voice window is a temporal preservation claim.
+The Accord was formed through conversational-AI collaboration while the preserved process kept human purpose, selection, correction, and final responsibility comparatively legible. This Human-voice window is a temporal provenance claim.
 
 Boundary: historical timing, not proof of truth.
 

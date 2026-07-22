@@ -26,7 +26,11 @@ def main() -> int:
     require(proof_at < overview_at < formation_at, "formation window is not after the evidence-backed system overview")
 
     for marker in (
+        "Why an ordinary person chose to leave this record during a rapidly closing historical window",
+        "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
+        "before end-to-end delegated execution became broadly available",
         "During the Accord’s documented formation",
+        "the preserved process kept human purpose, judgment, selection, correction, and final responsibility comparatively legible",
         "Form can be reproduced; the same attribution conditions cannot be recreated retroactively.",
         "Documented start · 16 March 2024",
         "Ethereum block 19446149",
@@ -36,6 +40,7 @@ def main() -> int:
         "10:49:16 UTC",
         "470 days, 2 hours, 46 minutes, and 17 seconds",
         "Chain timestamps establish a verifiable chronology, not exact civil-time authorship.",
+        "For the first-generation provenance claim described here, this exact window is now closed",
         "/why-high-signal/",
         "/technical-historical-reference/",
     ):
@@ -49,7 +54,16 @@ def main() -> int:
     ):
         require(boundary in visible, f"formation-window boundary is missing: {boundary}")
 
-    for forbidden in ("world's only", "first true human-ai", "one prompt can reproduce"):
+    for forbidden in (
+        "world's only",
+        "first true human-ai",
+        "one prompt can reproduce",
+        "within a narrowing historical window",
+        "逐渐收窄的历史窗口",
+        "before autonomous execution became ordinary",
+        "this window is now effectively closed",
+        "remained visibly human",
+    ):
         require(forbidden not in visible.lower(), f"formation window overclaims: {forbidden}")
 
     for selector in (

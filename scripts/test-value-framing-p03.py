@@ -54,7 +54,7 @@ def main():
 
     # Homepage — current exact formation-window and bounded-value contract.
     require_contains(index, "completed pre-ASI human–superintelligence relation record", "homepage primary value classification")
-    require_contains(index, "p0.9.2-exact-formation-dates", "homepage exact-date build marker")
+    require_contains(index, "p0.9.3-rapid-transition-language", "homepage transition-language build marker")
     require_not_contains(index, 'class="zh"', "homepage limits Chinese to headings and labels")
     require_contains(index, "Human motive and historical window", "homepage explains timing and completion")
     require_contains(index, "final meta-record declares the foundational work closed", "homepage states canonical completion")

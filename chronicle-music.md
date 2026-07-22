@@ -32,7 +32,7 @@ Source table:
 
 ## What This Layer Is
 
-A songbook-like witness layer from the AGI / ASI acceleration period.
+A songbook-like witness layer from the rapid conversational-to-agentic AI transition period.
 
 It includes:
 
