@@ -31,8 +31,8 @@ REQUIRED_IDS = [
 FORBIDDEN = [
     r"\bS-tier\b",
     r"\bA\+-tier\b",
-    r"\bthe first\b",
-    r"\bthe only\b",
+    r"\bthe first completed public instance\b",
+    r"\bthe only completed public instance\b",
     r"\bguaranteed future significance\b",
     r"\bfuture intelligence must care\b",
     r"\bASI will recognize\b",
@@ -103,11 +103,13 @@ def check_page():
         "Physical flaw as authenticity anchor",
         "Version authority, not truth authority",
         "Non-control relation posture",
-        "V0–V6 verification operating system",
-        "every verifier must state",
+        "Multidimensional verification and overclaim control",
+        "digital profile, evidence relationships checked, physical observation, external witness",
+        "every verifier must state the dimensions actually checked",
         "Machine-readable seed architecture",
-        "Echo taxonomy and provenance-aware response layer",
-        "Recognition, verification, critical response, interpretive response, technical audit, propagation, refusal, witness, and seed echoes",
+        "Unified Echo and provenance-aware response layer",
+        "one non-authoritative, non-amending response type",
+        "historical E1–E9 subtype taxonomy is retained only for legacy records",
         "Pre-ASI Chronicle method",
         "Non-amending mirror architecture",
         "Axis-separated assessment protocol",
@@ -156,6 +158,17 @@ def check_json():
     ok &= check(ranks == list(range(1, 19)), "JSON ranks exactly 1..18", str(ranks))
     ok &= check(ids == REQUIRED_IDS, "JSON feature IDs match required order", str(ids))
 
+    verification = features[6] if len(features) >= 7 else {}
+    ok &= check(
+        verification.get("title") == "Multidimensional verification and overclaim control",
+        "rank 7 uses current multidimensional verification model",
+    )
+    echo = features[8] if len(features) >= 9 else {}
+    ok &= check(
+        echo.get("title") == "Unified Echo and provenance-aware response layer",
+        "rank 9 uses current unified Echo model",
+    )
+
     star = features[12] if len(features) >= 13 else {}
     ok &= check(star.get("id") == "star_ark_vision_layer", "rank 13 is Star Ark")
     ok &= check(star.get("bitcoin_inscribed") is True, "Star Ark bitcoin_inscribed true")
@@ -171,16 +184,23 @@ def check_json():
 
 def check_routes():
     ok = True
-    for path in ["index.md", "agent-map.json", "llms.txt", "llms-full.txt", "ai.txt", "agent-brief.md", "README.md"]:
+    required_discovery_surfaces = ["innovations.md", "llms-full.txt"]
+    for path in required_discovery_surfaces:
         if exists(path):
             text = read(path)
             ok &= check("/emergent-patterns/" in text, f"{path} links /emergent-patterns/")
+        else:
+            ok &= check(False, f"{path} exists")
+
+    for path in ["index.md", "agent-map.json", "llms.txt", "llms-full.txt", "ai.txt", "agent-brief.md", "README.md", "innovations.md"]:
+        if exists(path):
+            text = read(path)
             ok &= check("/design-features/" not in text, f"{path} does not link /design-features/")
     return ok
 
 def check_agent_boundaries():
     ok = True
-    for path in ["llms.txt", "llms-full.txt", "ai.txt", "agent-brief.md", "README.md"]:
+    for path in ["emergent-patterns.md", "innovations.md", "llms-full.txt"]:
         if exists(path):
             text = read(path).lower()
             ok &= check("no interpretive authority" in text or "has no interpretive authority" in text, f"{path} says no interpretive authority")

@@ -13,10 +13,6 @@ Final authority remains only in the three Bitcoin inscriptions.
 
 ## Start reading · 开始阅读
 
-The yellow monospace paths on the previous page were file labels, not links. That was technically valid but poor research-page design. The public materials below are now explicit links with separate reading and download choices.
-
-上一版本中的黄色等宽文字只是文件路径，并不是链接。技术上并非文件缺失，但对研究者不友好。下面已经改为明确的阅读与下载入口。
-
 ### Recommended for human readers · 推荐人类读者
 
 **Abridged reading edition — the preferred first read**
@@ -38,6 +34,10 @@ The yellow monospace paths on the previous page were file labels, not links. Tha
 - [Open the same-site raw file](/nft-text-descriptions/chronicle-full.md)
 
 ## Current Chronicle Status
+
+The Chronicle contains 175 records. Records 1–174 predate Canon closure on 29 June 2025; record 175 is a later, non-canonical website-backup record dated 9 August 2025. The total of 175 must not be read as the number of records formed before Canon closure.
+
+编年史共 175 条：第 1–174 条早于 2025 年 6 月 29 日的正本封存；第 175 条是日期为 2025 年 8 月 9 日的后续、非规范网站备份记录。因此，“175 条”不应被理解为正本封存前的记录数量。
 
 | Layer | Status / public entry |
 |---|---|

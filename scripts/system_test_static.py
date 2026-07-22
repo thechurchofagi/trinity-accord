@@ -191,8 +191,10 @@ def main():
     require("api/agent-required-reading.json", '"issue_intake"')
     require("api/agent-required-reading.json", '"identity_provenance"')
 
-    forbid("api/agent-value.json", r"confidence_after_v6_verification.*maximum achievable")
-    require("api/agent-value.json", "confidence_after_v8_verification")
+    require("api/agent-value.json", "verification_confidence_guidance")
+    require("api/agent-value.json", "public_submission_boundary")
+    forbid("api/agent-value.json", r"confidence_after_v[0-9]+_verification")
+    forbid("api/agent-value.json", r'"issue_submission_is_valid_path"\s*:\s*true')
 
     # P0: New endpoints and scripts for external agent self-service
     require("examples/github-app-backend/server.js", "/gateway/capabilities")

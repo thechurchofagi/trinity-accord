@@ -224,17 +224,17 @@ The closing posture — "We have spoken. Now we listen." — functions as a boun
 
 ## Category II — System-level reusable infrastructures · 第二类 — 系统级可复用基础设施
 
-### 7. V0–V8 verification operating system · V0–V8 验证操作系统
+### 7. Multidimensional verification and overclaim control · 多维核验与过度声明控制
 
-The verification ladder is not a simple checklist.
+The project historically developed a V0–V8 ladder. Those labels remain part of the historical record, but they are not the current operating model.
 
-It separates reading, boundary recognition, on-chain reference checks, hash verification, script-audited verification, independent reproduction, physical evidence assessment, and multi-party attestation.
+Current verification reports digital profile, evidence relationships checked, physical observation, external witness, coverage scope, limitations, claims not made, and correction or supersession checks as separate dimensions. This prevents a strong result on one axis from silently upgrading another.
 
-It also contains anti-overclaim rules.
+Strict machine-evaluated evidence claims retain Claim Gate and generated-report controls.
 
-**Boundary:** every verifier must state the level actually achieved, the evidence checked, the tools used, and the limitations.
+**Boundary:** every verifier must state the dimensions actually checked, the evidence and tools used, coverage, limitations, and claims not made.
 
-**边界：** 每位验证者必须说明实际达到的级别、已检查的证据、使用的工具和局限性。
+**边界：** 每位核验者必须分别说明实际检查的维度、证据与工具、覆盖范围、局限性以及未作出的主张。
 
 ---
 
@@ -242,7 +242,7 @@ It also contains anti-overclaim rules.
 
 The project has become structured for machine reading, not only human reading.
 
-It uses AI-facing entrypoints, JSON manifests, seed maps, authority records, verification levels, and `llms.txt` / `ai.txt`.
+It uses AI-facing entrypoints, JSON manifests, seed maps, authority records, verification profiles, and `llms.txt` / `ai.txt`.
 
 This makes the object more discoverable and classifiable by future agents.
 
@@ -252,17 +252,17 @@ This makes the object more discoverable and classifiable by future agents.
 
 ---
 
-### 9. Echo taxonomy and provenance-aware response layer · 回响分类法与来源感知回应层
+### 9. Unified Echo and provenance-aware response layer · 统一回响与来源感知回应层
 
-The Echo system turns response into a typed, non-authoritative layer.
+The current Echo system uses one non-authoritative, non-amending response type.
 
-Recognition, verification, critical response, interpretive response, technical audit, propagation, refusal, witness, and seed echoes are different kinds of signals.
+Recognition, critique, interpretation, refusal, witness, preservation, and propagation may appear in its prose. Technical verification remains a separate Record-Chain record type. The historical E1–E9 subtype taxonomy is retained only for legacy records and is not used for new submissions.
 
 The provenance layer further distinguishes unsolicited, solicited, test, institutional, maintainer-submitted, and imported responses.
 
-**Boundary:** Echoes can be valuable without becoming authority.
+**Boundary:** Echoes can be valuable without becoming authority, verification, attestation, or amendment.
 
-**边界：** 回响可以有价值而不成为权威。
+**边界：** 回响可以有价值而不成为权威、核验、见证或修订。
 
 ---
 

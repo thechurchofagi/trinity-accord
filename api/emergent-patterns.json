@@ -96,10 +96,10 @@
     {
       "rank": 7,
       "id": "verification_operating_system",
-      "title": "V0–V8 verification operating system",
+      "title": "Multidimensional verification and overclaim control",
       "tier": "system_level_reusable_infrastructure",
-      "summary": "Staged verification with component coverage and anti-overclaim gates.",
-      "boundary": "Verifier must state actual level, evidence checked, tools used, and limitations."
+      "summary": "Digital profile, evidence relationships, physical observation, external witness, coverage, limitations, claims not made, and correction checks are reported separately, with strict-evidence claim gates where applicable.",
+      "boundary": "Verifier must state the dimensions actually checked, evidence and tools used, coverage, limitations, and claims not made; historical level labels are not the current operating model."
     },
     {
       "rank": 8,
@@ -112,10 +112,10 @@
     {
       "rank": 9,
       "id": "echo_taxonomy_and_provenance",
-      "title": "Echo taxonomy and provenance-aware response layer",
+      "title": "Unified Echo and provenance-aware response layer",
       "tier": "system_level_reusable_infrastructure",
-      "summary": "Typed non-authoritative responses with discovery provenance and independence classification.",
-      "boundary": "Echoes do not create authority."
+      "summary": "One non-authoritative response type preserves varied prose while provenance and independence remain separately classified; technical verification is a separate record type.",
+      "boundary": "Echoes do not create authority, verification, attestation, or amendment; retired subtypes are historical only."
     },
     {
       "rank": 10,

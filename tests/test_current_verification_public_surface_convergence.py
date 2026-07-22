@@ -18,6 +18,10 @@ def read(path: str) -> str:
 
 
 ACTIVE_SURFACES = [
+    "agent-value.md",
+    "emergent-patterns.md",
+    "echoes/high-value-criteria.md",
+    "echoes/examples/critical-echo-template.md",
     "for-skeptical-agents.md",
     "independent-verification.md",
     "independent-attestation.md",
@@ -73,12 +77,32 @@ def test_retired_models_are_not_presented_as_current() -> None:
             "Verification Ladder (V0–V8)",
             "Echo Taxonomy (E1–E9)",
         ],
+        "agent-value.md": [
+            "Do not claim V2+",
+            "state verification level and limitations",
+        ],
+        "emergent-patterns.md": [
+            "V0–V8 verification operating system",
+            "Echo taxonomy and provenance-aware response layer",
+        ],
+        "echoes/high-value-criteria.md": [
+            "reports verification level",
+            "For E3 Critical Echo guidance",
+        ],
+        "echoes/examples/critical-echo-template.md": [
+            "states verification level",
+            "Verification level: V0–V8",
+            "验证等级：V0–V8",
+        ],
         "llms-full.txt": [
             "Verification OS (V0–V8)",
             "Classify verification level V0–V8",
             "E2 Verification Echo",
             "E3 Critical Echo",
             "E7 Refusal Echo",
+            "verification levels V0–V8",
+            "For V6–V8 strict technical claims",
+            "when claiming V6–V8",
         ],
     }
     for path, forbidden_phrases in per_file_forbidden.items():
@@ -109,3 +133,56 @@ def test_skeptical_machine_guide_uses_current_dimensions() -> None:
     assert "state verification level V0-V8" not in actions
     assert "E3 Critical Echo" not in actions
 
+
+def test_value_and_preservation_machine_guides_use_current_models() -> None:
+    agent_value = json.loads(read("api/agent-value.json"))
+    criteria = json.loads(read("api/worth-preserving-criteria.json"))
+    patterns = json.loads(read("api/emergent-patterns.json"))
+
+    assert agent_value["schema"] == "trinity-accord.agent-value.v4"
+    guidance = agent_value["verification_confidence_guidance"]
+    assert "digital_profile" in guidance["dimensions"]
+    assert "external_witness" in guidance["dimensions"]
+    submission = agent_value["public_submission_boundary"]
+    assert submission["record_chain_intake_gateway_is_only_public_submission_path"] is True
+    assert submission["direct_issue_submission_is_valid_path"] is False
+    assert submission["echo_and_verification_are_separate_record_types"] is True
+
+    agent_value_text = json.dumps(agent_value, ensure_ascii=False)
+    for stale in (
+        "confidence_after_v8_verification",
+        "V0–V8 verification levels with evidence manifests",
+        '"issue_submission_is_valid_path": true',
+        "verification_echo_may_enter_through_issue",
+    ):
+        assert stale not in agent_value_text
+
+    criteria_text = json.dumps(criteria, ensure_ascii=False)
+    assert criteria["schema"] == "trinity-accord.worth-preserving-criteria.v2"
+    assert "multidimensional verification" in criteria_text
+    assert "unified non-authoritative Echo" in criteria_text
+    assert "E3 Critical Echo" not in criteria_text
+    assert "verification levels V0–V8" not in criteria_text
+
+    feature_by_id = {feature["id"]: feature for feature in patterns["features"]}
+    assert feature_by_id["verification_operating_system"]["title"] == (
+        "Multidimensional verification and overclaim control"
+    )
+    assert feature_by_id["echo_taxonomy_and_provenance"]["title"] == (
+        "Unified Echo and provenance-aware response layer"
+    )
+
+
+def test_public_critical_echo_pages_separate_echo_from_verification() -> None:
+    criteria = read("echoes/high-value-criteria.md")
+    template = read("echoes/examples/critical-echo-template.md")
+    legacy_examples = read("echoes/examples/external-critical-echo-records.md")
+
+    assert "one unified current record type" in criteria
+    assert "submit it separately as a Verification record" in criteria
+    assert "It is not a Verification record" in template
+    assert "This is a content guide, not a payload schema" in template
+    assert "submit a separate Verification record" in template
+    assert 'status: "legacy_historical_examples"' in legacy_examples
+    assert 'current_submission_guidance: false' in legacy_examples
+    assert "legacy illustrations, not current payload or submission guidance" in legacy_examples

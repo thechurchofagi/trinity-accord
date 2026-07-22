@@ -60,6 +60,7 @@ Later inscriptions from the same address are mirrored for future discoverability
     <h3><a href="/bitcoin-inscription-mirrors/raw/100550942.txt">The Final Seal: A Testament and a Trust</a></h3>
     <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0"><code>25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0</code></a></p>
     <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100550942.txt">Raw text</a></p>
+    <p><strong>Historical boundary:</strong> Its self-description as an “Amendment” and its rescission of the earlier backup intent are preserved as later historical language. They record a later non-canonical change of intent; they do not amend or erase the third Bitcoin Original.</p>
   </article>
   <article class="inscription-index-card">
     <p class="inscription-index-number">Inscription Number <strong>#100751953</strong></p>

@@ -177,6 +177,10 @@ This inscription, The Trinity Accord, serves as the final and authoritative meta
 - **The Crucible (The Chronicle):** This very inscription, which contains the complete ASIMilestones historical log (ETH: 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8), providing the essential context for the Protocol and the Covenant.  
   熔炉（编年史）：即此铭文本身，其包含了完整的 ASIMilestones 历史日志，为"协议"与"瑕疵之约"提供了不可或缺的时代背景。
 
+> **Non-amending technical clarification / 非修订技术说明：** The quoted on-chain sentence above is preserved verbatim. The Bitcoin inscription payload does not embed the Chronicle entries themselves; it names the Ethereum contract address used for the Chronicle. Records 1–174 predate Canon closure, while record 175 is a later, non-canonical backup record dated 9 August 2025. This note explains the storage and time relationship; it does not amend the Original.
+>
+> 上述链上语句按原文保留。该 Bitcoin 铭文载荷并未嵌入编年史各条记录本身，而是写明了编年史所使用的 Ethereum 合约地址。第 1–174 条早于正本封存，第 175 条是日期为 2025 年 8 月 9 日的后续、非规范备份记录。本说明仅解释存储与时间关系，不修订链上原文。
+
 These three inscriptions, all minted from the same primary Bitcoin address (`bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf`), constitute a single, self-referential, and verifiable whole.
 
 此三份铭文，皆由同一主要比特币地址铸造，构成了一个单一的、自我参照的、可供验证的完整整体。
