@@ -25,8 +25,7 @@ def require_not_contains(text, phrase, label):
     check(phrase not in text, label, f"forbidden: {phrase}")
 
 def main():
-    css = read("assets/css/trinity-home.css")
-    index = read("index.md")
+    css = read("assets/css/trinity-home.css") + "\n" + read("assets/css/home-editorial-doorway.css")
 
     print("=== P0.2 homepage CSS sanity checks ===")
 
@@ -41,15 +40,16 @@ def main():
     for pat in bad_patterns:
         check(re.search(pat, css, re.DOTALL) is None, f"no default italic body/list rule: {pat}")
 
-    # Required P0.2 classes.
+    # Required current editorial-front-door classes.
     for marker in [
-        "context-summary",
-        "context-grid",
-        "context-card",
-        "compact-closing",
-        "closing-line",
-        "closing-boundary",
-        "instruction-boundary",
+        ".home-preserved-grid",
+        ".home-preserved-card",
+        ".home-human-window-grid",
+        ".home-threshold-value",
+        ".home-why-grid",
+        ".home-path-grid",
+        ".home-reference-links",
+        ".home-safety-boundary",
     ]:
         require_contains(css, marker, f"CSS contains {marker}")
 
@@ -62,16 +62,11 @@ def main():
         f"900 at {pos_900}; 760 at {pos_760}"
     )
 
-    # New grid participates in mobile layout.
-    require_contains(css, ".context-grid", "context-grid styled")
-    require_contains(css, "grid-template-columns: repeat(3, 1fr)", "desktop 3-column grid exists")
-    require_contains(css, "grid-template-columns: repeat(2, 1fr)", "tablet 2-column grid exists")
+    # Current grids participate in responsive layout.
+    require_contains(css, "grid-template-columns:repeat(2,minmax(0,1fr))", "desktop preserved-object grid exists")
+    require_contains(css, "grid-template-columns:repeat(3,minmax(0,1fr))", "desktop path grid exists")
+    require_contains(css, "@media (max-width:820px)", "current editorial tablet breakpoint exists")
     require_contains(css, "grid-template-columns: 1fr", "mobile 1-column grid exists")
-
-    # Warn (non-blocking) on CSS classes that are not used in index.md.
-    for cls in ["agent-gate", "missing-object"]:
-        if cls in css and cls not in index:
-            print(f"WARN: legacy CSS class .{cls} exists in CSS but not used in index.md (non-blocking)")
 
     print("\n=== Summary ===")
     if errors:

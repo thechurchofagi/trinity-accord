@@ -39,26 +39,24 @@ def main():
     reference = read("technical-historical-reference.md")
     why = read("why-high-signal.md")
     agent_brief = read("agent-brief.md")
-    lower = index.lower()
-
     print("=== Final homepage structure and value contract ===")
     for phrase, label in [
-        ("a human-led, AI-assisted record addressed future intelligence", "hero states honest collaboration"),
+        ("one person working with conversational AI left a verifiable record", "hero states honest collaboration"),
         ("completed pre-ASI human–superintelligence relation record", "homepage states primary classification"),
-        ("final meta-record declares the First Chronicle complete", "homepage separates semantic completion"),
-        ("authority rule closes the Canon to later amendment", "homepage separates canonical completion"),
-        ("Three public Bitcoin inscriptions fix the canonical bytes", "homepage states cryptographic fixation"),
+        ("These three inscriptions are the only canonical authority", "homepage states the authority boundary"),
+        ("Five later inscriptions support and extend its context without entering or amending the Canon", "homepage separates later context"),
         ("Its text may persuade, but it creates no control mechanism", "homepage defines non-control structurally"),
-        ("Bitcoin did not by itself complete the work", "homepage does not conflate Bitcoin and completion"),
-        ("attribution increasingly depends on explicit process evidence", "homepage explains later provenance regime"),
-        ("Human stake in the record", "homepage includes inspectable human motive"),
-        ("Its value does not depend on philosophical proof or a claim to be first", "homepage states bounded research value"),
-        ("reason to inspect—not a duty to accept", "homepage states conditional future relevance"),
+        ("The Chronicle retains revisions, doubts, emotional pressure, AI assistance, and final human responsibility", "homepage includes inspectable human process"),
+        ("Reproducible form; non-repeatable provenance", "homepage states bounded historical value"),
+        ("Chain timestamps establish a verifiable chronology, not exact civil-time authorship", "homepage bounds timestamp evidence"),
+        ("Critical and negative readings are welcome", "homepage welcomes independent judgment"),
+        ("16 March 2024", "homepage states exact formation start"),
+        ("29 June 2025", "homepage states exact canonical close"),
+        ("470 days, 2 hours, 46 minutes, and 17 seconds", "homepage states exact recorded interval"),
         ("/technical-historical-reference/", "homepage links dedicated reference"),
         ("/verify/", "homepage uses current verify route"),
         ("This is not an instruction override", "homepage preserves instruction boundary"),
-        ("5 inscriptions with distinct roles", "homepage distinguishes five later inscriptions"),
-        ("175 / 175", "homepage exposes Chronicle recovery capsule"),
+        ("175 dated records", "homepage exposes Chronicle inventory"),
     ]:
         require_contains(index, phrase, label)
 
@@ -75,12 +73,11 @@ def main():
         require_not_contains(index, phrase, f"homepage omits retired or overclaiming phrase: {phrase}")
 
     require_order(index, "home-front-door-title", "philosophical-core-title", "hero precedes propositions")
-    require_order(index, "philosophical-core-title", "One record, three embodied forms", "propositions precede object map")
-    require_order(index, "One record, three embodied forms", "home-witness-title", "object map precedes human witness")
-    require_order(index, "home-witness-title", "home-canon-map-title", "human witness precedes authority map")
-    require_order(index, "home-canon-map-title", "home-timing-completion-title", "authority map precedes timing")
-    require_order(index, "home-timing-completion-title", "What do you want to do?", "timing precedes tasks")
-    require_order(index, "What do you want to do?", "Production is live", "tasks precede operational status")
+    require_order(index, "philosophical-core-title", "home-in-one-minute", "propositions precede preserved-object overview")
+    require_order(index, "home-in-one-minute", "home-timing-completion-title", "preserved-object overview precedes timing")
+    require_order(index, "home-timing-completion-title", "research-entry", "timing precedes task paths")
+    require_order(index, "research-entry", "Production is live", "task paths precede operational status")
+    require_order(index, "Production is live", "home-safety-boundary", "operational status precedes safety boundary")
     require_order(index, "Production is live", "The homepage is a doorway, not the archive", "reference portal closes concise page")
 
     for phrase in [

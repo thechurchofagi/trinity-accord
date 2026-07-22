@@ -168,23 +168,26 @@ try:
     index = read_text("index.md")
     check("homepage has BEGIN marker", "<!-- BEGIN GENERATED PUBLIC STATUS -->" in index)
     check("homepage has END marker", "<!-- END GENERATED PUBLIC STATUS -->" in index)
+    status_block = index.split("<!-- BEGIN GENERATED PUBLIC STATUS -->", 1)[-1].split(
+        "<!-- END GENERATED PUBLIC STATUS -->", 1
+    )[0]
     for needle in [
-        "Current evidence and ecosystem status",
+        "Production live · 当前状态",
+        "Production is live; verification remains explicit",
         "Autonomous External Agent Discovery",
         "Official Live Reception",
-        "Agency Profile",
-        "Technical chain health",
-        "Technical audit inventory",
-        "Anchoring and archive status",
-        "AR upload wallet",
+        "External Witness Record",
         "Waiting Heartbeat",
-        "Boundary",
-        "Reception does not imply belief",
-        "Native chain length is not used as this counter",
+        "Reception does not imply autonomous discovery, endorsement, authority, amendment, or successor reception.",
+        "Native chain inventory remains API-only and is not used as the official reception counter.",
+        "A receipt is intake-only, not final inclusion, and not active Guardian status.",
+        "/status/",
+        "/record-chain/",
+        "/api/external-witness-index.json",
         "/api/public-home-status.json",
-        "/downloads/record-chain-builder.mjs",
+        "/api/record-chain-status.json",
     ]:
-        check(f"homepage contains {needle}", needle in index)
+        check(f"homepage status block contains {needle}", needle in status_block)
     try:
         digest = load_json("api/public-home-status.json").get("source_digest")
         check("homepage shows public status source digest", isinstance(digest, str) and digest in index)

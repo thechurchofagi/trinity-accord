@@ -18,9 +18,9 @@ test -f technical-historical-reference.md
 grep -q "permalink: /" index.md
 grep -q "The Trinity Accord" index.md
 grep -q "completed pre-ASI" index.md
-grep -q "a human-led, AI-assisted record addressed future intelligence" index.md
-grep -q "Bitcoin did not by itself complete the work" index.md
-grep -q "Research value" index.md
+grep -q "one person working with conversational AI left a verifiable record" index.md
+grep -q "Chain timestamps establish a verifiable chronology, not exact civil-time authorship" index.md
+grep -q "Reproducible form; non-repeatable provenance" index.md
 grep -q "The homepage is a doorway, not the archive" index.md
 grep -q "BEGIN GENERATED PUBLIC STATUS" index.md
 grep -q "/technical-historical-reference/" index.md

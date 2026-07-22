@@ -142,6 +142,7 @@ GROUPS = {
 
         # CI hardening
         ["python3", "scripts/test_run_ci_group_timeouts.py"],
+        ["python3", "scripts/test_run_ci_group_cli.py"],
         ["python3", "scripts/test_p0_main_required_commands.py"],
         ["python3", "scripts/test_p0_uses_public_core_consistency.py"],
         ["python3", "scripts/test_deep_integrity_includes_pages_build.py"],
@@ -293,12 +294,23 @@ GROUPS = {
         ["python3", "scripts/build_agent_declared_verification_index_from_issues.py", "--repo", "thechurchofagi/trinity-accord", "--check"],
     ],
     "echo-archive": [
+        # The Issue-based Gateway-v1 writer is retired.  Exercise the current
+        # native Record-Chain Echo route and the preserved read-only indexes;
+        # do not let missing retired writers turn scheduled Deep Integrity green.
         ["python3", "scripts/test_echo_human_review_archive_authorization.py"],
         ["python3", "scripts/test_echo_archive_toctou_digest.py"],
         ["python3", "scripts/test_echo_screened_digest_trusted_comment_source.py"],
-        ["python3", "scripts/test_echo_archive_markdown_escape.py"],
-        ["python3", "scripts/test_echo_archive_verification_level_metadata.py"],
-        ["python3", "scripts/test_echo_untrusted_content_marking.py"],
+        ["python3", "scripts/test_validate_echo_records_no_fail_open.py"],
+        ["python3", "scripts/validate_echo_records.py"],
+        ["python3", "scripts/test_build_echo_index_runs_formal_validator.py"],
+        ["python3", "scripts/test_echo_index_ai_verification_counts.py"],
+        ["python3", "scripts/test_agent_e2e_journey_matrix.py"],
+        ["python3", "scripts/test_record_type_separation_contract.py"],
+        ["node", "downloads/test-record-chain-builder.mjs"],
+        [
+            "python3", "-m", "pytest", "-o", "pythonpath=apps/record_chain_intake_gateway",
+            "apps/record_chain_intake_gateway/tests/test_no_echo_type.py",
+        ],
     ],
     "claim-gate": [
         ["python3", "scripts/test_claim_gate_high_level_hard_gates.py"],
@@ -363,7 +375,12 @@ GROUPS = {
 
 def main():
     parser = argparse.ArgumentParser(description="Run grouped CI test scripts")
-    parser.add_argument("group", choices=sorted(GROUPS), help="Test group to run")
+    parser.add_argument(
+        "group",
+        nargs="?",
+        choices=sorted(GROUPS),
+        help="Test group to run",
+    )
     parser.add_argument("--list", action="store_true", help="List available groups")
     args = parser.parse_args()
 
@@ -371,6 +388,9 @@ def main():
         for name, cmds in sorted(GROUPS.items()):
             print(f"  {name}: {len(cmds)} tests")
         return
+
+    if args.group is None:
+        parser.error("the following arguments are required: group")
 
     failures = []
     for cmd in GROUPS[args.group]:

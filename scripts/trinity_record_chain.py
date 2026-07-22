@@ -89,6 +89,28 @@ FORMAL_RECORD_TYPES = {
     "context_insufficient_notice",
 }
 
+# Native records currently present in the append-only chain use the original
+# final-entry identifier or the current signed-draft identifier.  A hash-valid
+# object from another schema is not a record in this chain.
+ALLOWED_NATIVE_RECORD_SCHEMAS = frozenset({
+    "trinityaccord.record-chain-entry.v1",
+    "trinityaccord.record-chain-entry-draft.v2",
+})
+
+# record-chain-entry.v1 is a published, frozen compatibility schema.  Keep its
+# historical enum independent from the mutable set accepted by current write
+# paths so that `init` cannot silently rewrite the published v1 contract.
+FROZEN_RECORD_CHAIN_ENTRY_V1_FORMAL_TYPES = frozenset({
+    "classification_update",
+    "correction",
+    "echo",
+    "guardian_application",
+    "guardian_key_rotation",
+    "guardian_retirement",
+    "propagation",
+    "verification",
+})
+
 RESERVED_RECORD_TYPES = {
     "guardian_key_rotation",
 }
@@ -129,6 +151,25 @@ def require_not_reserved_record_type(record: dict[str, Any]) -> None:
         raise ValueError(
             f"record_type={rtype} is reserved and cannot be appended until the old-key/new-key transition proof protocol is implemented"
         )
+
+
+def require_native_record_domain(record: dict[str, Any]) -> None:
+    """Bind an append candidate or final record to this chain's semantic domain."""
+    schema = record.get("schema")
+    if schema not in ALLOWED_NATIVE_RECORD_SCHEMAS:
+        allowed = ", ".join(sorted(ALLOWED_NATIVE_RECORD_SCHEMAS))
+        raise ValueError(
+            f"schema={schema!r} is not an allowed native Record-Chain schema; expected one of: {allowed}"
+        )
+
+    chain_id = record.get("chain_id")
+    if chain_id != CHAIN_ID:
+        raise ValueError(f"chain_id={chain_id!r} does not match {CHAIN_ID!r}")
+
+    require_not_reserved_record_type(record)
+    rtype = record.get("record_type")
+    if rtype not in FORMAL_RECORD_TYPES:
+        raise ValueError(f"record_type={rtype!r} is not an allowed native Record-Chain record type")
 
 
 BOUNDARY = {
@@ -875,13 +916,13 @@ def normalize_record_draft(draft: dict[str, Any]) -> dict[str, Any]:
         draft["boundary_acknowledgement"] = BOUNDARY
     if not draft.get("record_type"):
         raise ValueError("record_type is required")
+    require_native_record_domain(draft)
     if not draft.get("actor_identity"):
         raise ValueError("actor_identity is required")
     if not draft.get("context_readiness"):
         raise ValueError("context_readiness is required")
     require_boundary(draft)
     require_authorship(draft)
-    require_not_reserved_record_type(draft)
 
     # verify_pending_record_authorship is called by append_records on the
     # raw draft before normalization, so we don't re-verify here.
@@ -1588,9 +1629,13 @@ def verify_native_records() -> list[str]:
     previous = None
     for expected, p in enumerate(records, start=1):
         obj = read_json(p)
+        expected_record_id = record_id(expected)
+        expected_filename = f"{expected_record_id}.json"
+        if p.name != expected_filename:
+            errors.append(f"{p}: filename expected {expected_filename}")
         if obj.get("record_index") != expected:
             errors.append(f"{p}: record_index expected {expected}")
-        if obj.get("record_id") != record_id(expected):
+        if obj.get("record_id") != expected_record_id:
             errors.append(f"{p}: record_id mismatch")
         if obj.get("previous_record_sha256") != previous:
             errors.append(f"{p}: previous_record_sha256 mismatch")
@@ -1601,6 +1646,10 @@ def verify_native_records() -> list[str]:
         # Verify content_sha256_v2 if present (new records)
         if "content_sha256_v2" in obj and obj.get("content_sha256_v2") != content_hash_v2(obj):
             errors.append(f"{p}: content_sha256_v2 mismatch")
+        try:
+            require_native_record_domain(obj)
+        except Exception as exc:
+            errors.append(f"{p}: {exc}")
         try:
             require_boundary(obj)
             require_authorship(obj)
@@ -2467,7 +2516,7 @@ def init_policies() -> None:
         "required": ["schema", "chain_id", "record_type"],
         "allOf": [
             {
-                "if": {"properties": {"record_type": {"enum": sorted(FORMAL_RECORD_TYPES)}}},
+                "if": {"properties": {"record_type": {"enum": sorted(FROZEN_RECORD_CHAIN_ENTRY_V1_FORMAL_TYPES)}}},
                 "then": {
                     "required": [
                         "schema", "chain_id", "record_type", "actor_identity",
