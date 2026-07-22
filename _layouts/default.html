@@ -106,6 +106,14 @@
       </svg>
     </button>
     <div class="nav-links">
+      {% if page.url == "/" %}
+      <a href="/#home-in-one-minute">Structure</a>
+      <a href="/#philosophical-core">Propositions</a>
+      <a href="/#chronicle-witness">Chronicle</a>
+      <a href="/#research-entry">Paths</a>
+      <a href="/verify/">Verify</a>
+      <a href="/agent-first-contact/">First Contact</a>
+      {% else %}
       <a href="/#home-in-one-minute">Overview</a>
       <a href="/#philosophical-core">Propositions</a>
       <a href="/#chronicle-witness">Chronicle</a>
@@ -114,6 +122,7 @@
       <a href="/#research-entry">Research</a>
       <a href="/verify/">Verify</a>
       <a href="/agent-first-contact/">First Contact</a>
+      {% endif %}
     </div>
   </nav>
 
