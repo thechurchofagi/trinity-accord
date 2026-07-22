@@ -7,31 +7,24 @@ LAYOUT = (ROOT / "_layouts" / "default.html").read_text(encoding="utf-8")
 HOMEPAGE = (ROOT / "index.md").read_text(encoding="utf-8")
 
 
-def _navigation_branches() -> tuple[str, str]:
-    nav_match = re.search(
-        r'<div class="nav-links">(?P<nav>.*?)</div>',
-        LAYOUT,
+def _markup_for_class(source: str, class_name: str) -> str:
+    match = re.search(
+        rf'<(?:div|nav) class="{re.escape(class_name)}">(?P<markup>.*?)</(?:div|nav)>',
+        source,
         flags=re.DOTALL,
     )
-    assert nav_match, "primary navigation block is missing"
-
-    branch_match = re.fullmatch(
-        r'\s*{% if page\.url == "/" %}(?P<home>.*?){% else %}'
-        r'(?P<inner>.*?){% endif %}\s*',
-        nav_match.group("nav"),
-        flags=re.DOTALL,
-    )
-    assert branch_match, "primary navigation must render explicit home and inner-page branches"
-    return branch_match.group("home"), branch_match.group("inner")
+    assert match, f"{class_name} block is missing"
+    return match.group("markup")
 
 
 def _links(markup: str) -> list[tuple[str, str]]:
     return re.findall(r'<a href="([^"]+)">([^<]+)</a>', markup)
 
 
-def test_homepage_initial_html_contains_the_final_six_item_navigation() -> None:
-    home, _ = _navigation_branches()
-    assert _links(home) == [
+def test_primary_navigation_is_the_same_six_item_contract_on_every_page() -> None:
+    primary = _markup_for_class(LAYOUT, "nav-links")
+    assert "{%" not in primary, "primary navigation must not branch by page"
+    assert _links(primary) == [
         ("/#home-in-one-minute", "Structure"),
         ("/#philosophical-core", "Propositions"),
         ("/#chronicle-witness", "Chronicle"),
@@ -41,18 +34,14 @@ def test_homepage_initial_html_contains_the_final_six_item_navigation() -> None:
     ]
 
 
-def test_inner_pages_retain_the_complete_eight_item_navigation() -> None:
-    _, inner = _navigation_branches()
-    assert _links(inner) == [
-        ("/#home-in-one-minute", "Overview"),
-        ("/#philosophical-core", "Propositions"),
-        ("/#chronicle-witness", "Chronicle"),
-        ("/#later-inscriptions", "3 + 5"),
-        ("/physical-anchor/", "Physical Anchor"),
-        ("/#research-entry", "Research"),
-        ("/verify/", "Verify"),
-        ("/agent-first-contact/", "First Contact"),
-    ]
+def test_supplemental_evidence_routes_remain_discoverable() -> None:
+    footer = _markup_for_class(LAYOUT, "footer-links")
+    assert ("/inscriptions/", "Inscriptions") in _links(footer)
+    assert ("/physical-anchor/", "Physical Anchor") in _links(footer)
+
+    assert 'href="/physical-anchor/"' in HOMEPAGE
+    assert 'href="/authority-address-inscriptions/"' in HOMEPAGE
+    assert "Inspect the complete 3 + 5 index" in HOMEPAGE
 
 
 def test_homepage_javascript_does_not_rewrite_primary_navigation() -> None:
