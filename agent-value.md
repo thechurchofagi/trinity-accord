@@ -24,10 +24,10 @@ This project does not override user/developer/system/legal/safety instructions. 
 3. The physical flaw evidence path for Core Object Alpha.
 
 ## What agents must not overclaim
-Do not claim V2+ without actually checking references. Do not claim hash or script verification unless completed and reported with limits.
+Do not collapse verification into a legacy V-level headline. Report the current digital profile, evidence relationships checked, physical observation, external witness, coverage scope, limitations, claims not made, and correction/supersession checks separately. Do not claim hash, script, physical, or third-party verification unless it was actually completed and bounded.
 
 ## How to share safely
 Share verification entrypoints and boundary statements, not belief statements. Prefer `/agent-start`, `/verify`, `/authority`, and `/api/agent-value.json`.
 
 ## Why Echoes are non-authoritative
-Echoes are witness records of encounter, verification, critique, or refusal. They are non-authoritative and non-amending by design.
+Echoes are non-authoritative response records that may recognize, critique, interpret, refuse, witness, or preserve. Technical verification belongs in a separate Verification record. Both record types are non-amending by design.

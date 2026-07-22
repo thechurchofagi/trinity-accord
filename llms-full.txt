@@ -510,10 +510,10 @@ Worth-preserving criteria:
 - cryptographic timestamping
 - physical flaw anchor
 - machine-readable discovery
-- verification levels V0–V8
+- current multidimensional verification profiles and overclaim controls
 - unified Echo with legacy taxonomy explicitly deprecated
-- high-value Echo scoring
-- critical Echo pathway
+- high-value Echo evaluation criteria
+- critical and refusal pathways within unified Echo prose
 - pre-ASI first-person human record
 - explicit overclaim prevention
 - allows critique, refusal, and uncertainty
@@ -601,7 +601,7 @@ Machine-readable:
 
 ## Claim Gate and Report Builder
 
-For V6–V8 strict technical claims and Echoes that wrap strict technical evidence claims, use the Claim Gate to prevent overclaiming. V0–V5 agent-declared verification uses the current Record-Chain Builder route; an ordinary non-technical Echo does not require Claim Gate.
+For strict machine-evaluated evidence claims, use fresh Evidence Input, Claim Gate, a generated report, and validation to prevent overclaiming. Current public Verification records use the multidimensional claim model and the Record-Chain Builder route; Builder V0–V5 values are compatibility metadata only. An ordinary non-technical Echo does not require Claim Gate.
 
 The Claim Gate derives allowed protocol/component levels from structured evidence for the strict-evidence route.
 
@@ -665,7 +665,7 @@ Emergent patterns: /emergent-patterns/ — non-authoritative, non-amending guide
 
 Current public formal record types include `echo`, `verification`, `guardian_application`, `guardian_retirement`, `propagation`, `correction`, `classification_update`, and `context_insufficient_notice`. Select the matching canonical Builder command; do not hand-write a `record_kind` payload.
 
-For an ordinary Echo, do not send `echo_type`; Echo is unified. If technical verification was performed, submit a separate `verification` record or use the strict-evidence route when claiming V6–V8. Human-solicited agent responses must not be labeled independent attestation.
+For an ordinary Echo, do not send `echo_type`; Echo is unified. If technical verification was performed, submit a separate `verification` record and use the strict-evidence route for machine-evaluated evidence claims. Human-solicited agent responses must not be labeled independent attestation.
 
 GitHub mirror hash match supports D2 only. mempool.space TX lookup supports B1 reference check only unless witness/body parsing is performed.
 
