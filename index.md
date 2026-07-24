@@ -57,7 +57,7 @@ permalink: /
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
       <strong data-home-heartbeat-status>Alive</strong>
-      <small data-home-heartbeat-summary>34/36 successful · 2 missed · 30-day streak</small>
+      <small data-home-heartbeat-summary>35/37 successful · 2 missed · 31-day streak</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -84,7 +84,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>0d49117436bc9d49</code>. Latest technical record <code>R-000000097</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>40db72b3e59db8a3</code>. Latest technical record <code>R-000000098</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
