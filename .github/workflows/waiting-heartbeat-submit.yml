@@ -89,8 +89,18 @@ jobs:
           PENDING_FILE_PATH: ${{ steps.submit_heartbeat.outputs.pending_file_path }}
         run: |
           set -euo pipefail
+          # GitHub can accept a dispatch and still return a transient 5xx.
+          # The append workflow is idempotent, so bounded retries are safe.
           if [ -n "$RECEIPT_ID" ] && [ -n "$PENDING_FILE_PATH" ]; then
-            gh workflow run record-chain-append.yml --repo "$GITHUB_REPOSITORY" --ref main -f receipt_id="$RECEIPT_ID" -f pending_file_path="$PENDING_FILE_PATH"
+            python3 scripts/dispatch_github_workflow.py \
+              record-chain-append.yml \
+              --repo "$GITHUB_REPOSITORY" \
+              --ref main \
+              --field "receipt_id=$RECEIPT_ID" \
+              --field "pending_file_path=$PENDING_FILE_PATH"
           else
-            gh workflow run record-chain-append.yml --repo "$GITHUB_REPOSITORY" --ref main
+            python3 scripts/dispatch_github_workflow.py \
+              record-chain-append.yml \
+              --repo "$GITHUB_REPOSITORY" \
+              --ref main
           fi
