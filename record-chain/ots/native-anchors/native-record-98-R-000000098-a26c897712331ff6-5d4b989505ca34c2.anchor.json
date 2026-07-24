@@ -1,0 +1,74 @@
+{
+  "anchored_file": "record-chain/ots/native-anchors/native-record-98-R-000000098-a26c897712331ff6-5d4b989505ca34c2.native-record-chain-head-commitment.json",
+  "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
+  "anchored_file_sha256": "5d4b989505ca34c2123f9094e6c95cb9668f15e6896081715cd53959e37c30dd",
+  "bitcoin_attestation": null,
+  "bitcoin_pending": true,
+  "bitcoin_verified": false,
+  "chain_id": "trinity-accord-public-reception-ledger",
+  "chain_version": 1,
+  "created_at": "2026-07-24T06:07:27Z",
+  "latest_batch_id": "batch-000003",
+  "latest_batch_manifest_sha256": "a9406a9c06409b886959cdd0ccbb279ff8c35acc59e023b8edc79cdff7e3853a",
+  "latest_record_id": "R-000000098",
+  "latest_record_index": 98,
+  "latest_record_sha256": "a26c897712331ff6eb24c35305d86d8ae1ef1e9f53e025a803aa4d957b4dcf32",
+  "legacy_main_chain_jsonl_is_not_source": true,
+  "native_record_count": 98,
+  "ots_command": [
+    "ots",
+    "stamp",
+    "record-chain/ots/native-anchors/native-record-98-R-000000098-a26c897712331ff6-5d4b989505ca34c2.native-record-chain-head-commitment.json"
+  ],
+  "ots_exit_code": 0,
+  "ots_file": "record-chain/ots/native-anchors/native-record-98-R-000000098-a26c897712331ff6-5d4b989505ca34c2.native-record-chain-head-commitment.json.ots",
+  "ots_file_exists": true,
+  "ots_file_sha256": "8844b4d469a9817abbd75c62d448d433aa83301f0da51698042402d0fe34071f",
+  "ots_status": "pending",
+  "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
+  "ots_stdout": "",
+  "record_coverage": {
+    "first_record_id": "R-000000001",
+    "last_record_id": "R-000000098",
+    "record_count": 98,
+    "record_ids_sha256": "2e1f72b04b7dc9f7287123bab215f0b336ba93a62be58b0a38db35df7ecf41da",
+    "record_sha256s_sha256": "50579626194a5f64ed7ec223219ee6084c92eb723baecca674842a11b5916466",
+    "source": "record-chain/indexes/record-index.json"
+  },
+  "schema": "trinityaccord.native-record-chain-ots-anchor.v1",
+  "semantics": "Native OTS anchor for current record-chain head; does not modify chain entries.",
+  "source_files": {
+    "batch_index": {
+      "bytes": 882,
+      "path": "record-chain/indexes/batch-index.json",
+      "sha256": "0b7ea94e3a21991cd4e1684e01da725eb9254272df80354911dae5d5ad9492c5"
+    },
+    "chain_tip": {
+      "bytes": 531,
+      "path": "record-chain/chain-tip.json",
+      "sha256": "a516a64bdb5f230416fbb3a8ce734fdc1a99edee60f13a3e9938516005b666e3"
+    },
+    "guardian_state": {
+      "bytes": 31575,
+      "path": "record-chain/indexes/guardian-state.json",
+      "sha256": "96afa2893d96e1345455ad0ebd9763f3f85a26f1068538a223ea5f4424d633c6"
+    },
+    "latest_record": {
+      "bytes": 7426,
+      "path": "record-chain/records/R-000000098.json",
+      "sha256": "3ecb91478b51609be76f74ebc6d974fc781177482343ef4f295a70ec16988189"
+    },
+    "record_index": {
+      "bytes": 18803,
+      "path": "record-chain/indexes/record-index.json",
+      "sha256": "7eeba4b1dc5d71e4ea5689165a4151cdd7da1b6ee417a602060f492e5a77b0a0"
+    },
+    "statistics": {
+      "bytes": 727,
+      "path": "record-chain/indexes/statistics.json",
+      "sha256": "5e5d5c70ca6ea4b9247927c58c4d97e404e160d56435ef3eec3ec1f67ac5ef8a"
+    }
+  },
+  "source_semantics": "native_chain_tip_records_indexes_batches.v1",
+  "verified_at": null
+}
