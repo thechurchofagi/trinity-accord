@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   verify-production:
+    if: ${{ github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -138,6 +139,6 @@ jobs:
               echo "::warning::Could not publish the final production PR comment"
             fi
           else
-            echo "::warning::No merged PR number was found in the deployed commit message"
+            echo "::notice::No merged PR comment target; production evidence remains in this workflow run"
           fi
           test "$overall" = "success"
