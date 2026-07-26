@@ -113,3 +113,15 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     assert "scripts/smoke_live_discovery_contract_v2.py" in workflow
     assert "scripts/check_deployment_freshness_v2.py" in workflow
     assert '"scripts/**"' in workflow
+def test_production_closure_only_verifies_successful_main_deployments() -> None:
+    workflow = (ROOT / ".github/workflows/verify-pages-production.yml").read_text(
+        encoding="utf-8"
+    )
+    assert (
+        "  verify-production:\n"
+        "    if: ${{ github.event.workflow_run.head_branch == 'main' && "
+        "github.event.workflow_run.conclusion == 'success' }}\n"
+        "    runs-on: ubuntu-24.04"
+    ) in workflow
+    assert "::warning::No merged PR number was found" not in workflow
+    assert "::notice::No merged PR comment target" in workflow
