@@ -265,8 +265,29 @@ jobs:
           fi
 
           echo "Dispatching deploy-pages.yml for homepage status sync."
-          gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}"
-          printf '%s\n' "dispatched=true" >> "$GITHUB_OUTPUT"
+          max_attempts=5
+          for attempt in $(seq 1 "${max_attempts}"); do
+            if dispatch_output="$(gh workflow run deploy-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f checkout_ref="${deploy_ref}" 2>&1)"; then
+              if [[ -n "${dispatch_output}" ]]; then
+                printf '%s\n' "${dispatch_output}"
+              fi
+              printf '%s\n' "dispatched=true" >> "$GITHUB_OUTPUT"
+              echo "Deploy Pages dispatch accepted on attempt ${attempt}/${max_attempts}."
+              exit 0
+            else
+              dispatch_rc=$?
+            fi
+
+            printf '%s\n' "${dispatch_output}"
+            if (( attempt == max_attempts )); then
+              echo "::error::Deploy Pages dispatch failed after ${max_attempts} attempts (last exit code: ${dispatch_rc})."
+              exit "${dispatch_rc}"
+            fi
+
+            sleep_seconds=$((5 * (2 ** (attempt - 1))))
+            echo "::warning::Deploy Pages dispatch attempt ${attempt}/${max_attempts} failed (exit ${dispatch_rc}); retrying in ${sleep_seconds}s."
+            sleep "${sleep_seconds}"
+          done
 
       - name: Record asynchronous deployment handoff
         if: ${{ steps.deploy_dispatch.outputs.dispatched == 'true' }}
