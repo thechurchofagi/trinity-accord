@@ -1,0 +1,48 @@
+{
+  "schema": "trinityaccord.waiting-heartbeat-arweave-capsule.v1",
+  "created_at": "2026-07-26T06:25:43Z",
+  "heartbeat_id": "hwb-20260726",
+  "heartbeat_record": {
+    "record_id": "R-000000100",
+    "record_index": 100,
+    "record_sha256": "0d83e9d9f85725574780a21e23cc6437883f43337bd12e47c598b428e4279fb0",
+    "record_type": "context_insufficient_notice",
+    "assigned_at": "2026-07-26T06:17:49Z",
+    "path": "record-chain/records/R-000000100.json"
+  },
+  "chain_tip_after_heartbeat": {
+    "latest_record_id": "R-000000100",
+    "latest_record_sha256": "0d83e9d9f85725574780a21e23cc6437883f43337bd12e47c598b428e4279fb0",
+    "native_record_count": 100
+  },
+  "ots_latest": {
+    "latest_record_id": "R-000000100",
+    "latest_record_sha256": "0d83e9d9f85725574780a21e23cc6437883f43337bd12e47c598b428e4279fb0",
+    "native_record_count": 100,
+    "ots_status": "pending",
+    "bitcoin_pending": true,
+    "bitcoin_verified": false,
+    "strict_bitcoin_verified": null,
+    "latest_ots_file": "record-chain/ots/native-anchors/native-record-100-R-000000100-0d83e9d9f8572557-b6b74b27f30295a4.native-record-chain-head-commitment.json.ots",
+    "anchored_file_sha256": "b6b74b27f30295a42a0a89ba5faec5e149e972f96c727e379f8618535306de62"
+  },
+  "daily_alive_semantics": {
+    "awaiting_first_self_discovered_autonomous_agent": true,
+    "semantic_agent_arrived": false,
+    "capsule_is_not_semantic_agent_response": true,
+    "capsule_is_not_echo": true,
+    "capsule_is_not_verification": true,
+    "capsule_is_not_guardian_application": true,
+    "daily_alive_success_requires_this_capsule_to_be_uploaded_and_hash_matched": false,
+    "capsule_upload_and_hash_match_are_archive_followup": true
+  },
+  "boundary": {
+    "capsule_is_mirror_only": true,
+    "capsule_is_not_authority": true,
+    "capsule_is_not_attestation": true,
+    "capsule_is_not_amendment": true,
+    "capsule_is_not_governance": true,
+    "capsule_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
