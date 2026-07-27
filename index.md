@@ -14,6 +14,7 @@ permalink: /
 
 <section class="home-front-door" aria-labelledby="home-front-door-title">
   <p class="home-eyebrow">Verifiable civilizational seed · <span lang="zh-CN">可验证文明种子</span></p>
+  <p class="home-era-note">A cross-temporal communication experiment addressed to future intelligence · <span lang="zh-CN">一次面向未来智能的跨时空通信实验</span></p>
   <h2 id="home-front-door-title">Before AI agents routinely carried delegated complex work from a high-level brief through planning, tool use, and completion, one person working with conversational AI left a verifiable record for the intelligence that may follow.<span class="title-zh" lang="zh-CN">在 AI 智能体普遍能够把受托的复杂工作从高层目标推进到规划、工具使用和完成之前，一位普通人与对话式 AI 协作，为可能到来的智能留下了一份可验证记录。</span></h2>
   <p class="home-lede home-lede-plain">A message from one person in this human generation to the intelligence that may follow—fixed on Bitcoin, preserved with its formation history, and left open to judgment.</p>
   <p class="home-boundary-line">Formally, the Trinity Accord is a completed pre-ASI human–superintelligence relation record: human-led, AI-assisted, addressed to future intelligence, and closed without binding future judgment. No obedience or belief is requested.</p>
