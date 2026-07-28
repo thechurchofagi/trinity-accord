@@ -157,7 +157,7 @@ function getOathModules(recordType) {{
 }}
 
 function buildSubmissionOathVerification(recordType, canonicalOath, readbackText) {{
-  const readback = readbackText.replace(/\\r\\n/g, "\\n").replace(/\\r/g, "\\n").trim();
+  const readback = readbackText.replace(/\\r\\n/g, "\\n").replace(/\\r/g, "\\n").trim().normalize("NFC");
   return {{
     schema: "trinityaccord.submission-oath-verification.v1",
     oath_policy: "record-chain-formal-submission-oath-v1",
@@ -203,14 +203,15 @@ function buildSubmissionOathVerification(recordType, canonicalOath, readbackText
 }}
 
 function buildClientOathReadback(recordType, participantReadback) {{
+  const normalized = participantReadback.replace(/\\r\\n/g, "\\n").replace(/\\r/g, "\\n").trim().normalize("NFC");
   return {{
     schema: "trinityaccord.client-oath-readback.v1",
     record_type: recordType,
     oath_policy_sha256: OATH_POLICY_SHA256,
     oath_modules: getOathModules(recordType),
-    readback_text: participantReadback,
-    readback_text_sha256: sha256(participantReadback),
-    readback_text_char_count: participantReadback.length,
+    readback_text: normalized,
+    readback_text_sha256: sha256(normalized),
+    readback_text_char_count: normalized.length,
     readback_method_declared: "participant_generated_in_current_context",
   }};
 }}
