@@ -1794,10 +1794,36 @@
         "ots_proof_bundle_arweave_archive_is_not_amendment": true,
         "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
       }
+    },
+    {
+      "anchored_file": "record-chain/ots/native-anchors/native-record-102-R-000000102-a2b802c47c7f4424-bf00bef7c6436dd6.native-record-chain-head-commitment.json",
+      "anchored_file_sha256": "bf00bef7c6436dd60462819d4ae022ca75ddd68156f5d875e31227cff205258d",
+      "anchor_file": "record-chain/ots/native-anchors/native-record-102-R-000000102-a2b802c47c7f4424-bf00bef7c6436dd6.anchor.json",
+      "ots_file": "record-chain/ots/native-anchors/native-record-102-R-000000102-a2b802c47c7f4424-bf00bef7c6436dd6.native-record-chain-head-commitment.json.ots",
+      "ots_file_sha256": "c62afe274d4aded59cd06e0dab71270643f161b777f6fec91cf0662c67d0413a",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-102-R-000000102-a2b802c47c7f4424-bf00bef7c6436dd6.anchor.upgraded.arweave-bundle.json",
+      "bundle_sha256": "965196c97baea686f04310f1f64209fbd0a46196ebfe22d0547b20412c672bf6",
+      "ots_status": "upgraded",
+      "bitcoin_attestation_embedded": true,
+      "bitcoin_verified": false,
+      "strict_bitcoin_verified": false,
+      "tx_id": "fqGtdB47AHxy2RkRdcuNydH_pCdq2ocoSeyNOCb20VA",
+      "gateway_url": "https://arweave.net/fqGtdB47AHxy2RkRdcuNydH_pCdq2ocoSeyNOCb20VA",
+      "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+      "archive_status": "arweave_archived",
+      "uploaded_at": "2026-07-28T11:01:48Z",
+      "registered_at": "2026-07-28T11:01:48Z",
+      "boundary": {
+        "ots_proof_bundle_arweave_archive_is_mirror_only": true,
+        "ots_proof_bundle_arweave_archive_is_not_authority": true,
+        "ots_proof_bundle_arweave_archive_is_not_attestation": true,
+        "ots_proof_bundle_arweave_archive_is_not_amendment": true,
+        "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
+      }
     }
   ],
   "created_at": "2026-06-09T00:00:00Z",
-  "updated_at": "2026-07-27T08:59:26Z",
+  "updated_at": "2026-07-28T11:01:48Z",
   "boundary": {
     "native_ots_proof_bundle_arweave_archive_is_mirror_only": true,
     "native_ots_proof_bundle_arweave_archive_is_not_authority": true,
