@@ -7,6 +7,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from patch_public_home_status_primary import effective_autonomous_arrival_state
 from waiting_heartbeat_capsule_integrity import (
     capsule_claims_verified,
     verified_capsule_binding_errors,
@@ -46,6 +47,26 @@ def expected_heartbeat_date(now: datetime | None = None) -> date:
         microsecond=0,
     ) + timedelta(minutes=HEARTBEAT_FINAL_RETRY_GRACE_MINUTES)
     return now.date() if now >= cutoff else now.date() - timedelta(days=1)
+
+
+def last_required_heartbeat_date(
+    arrival_state: dict[str, Any],
+    default_expected_date: date,
+) -> date:
+    """Stop the daily waiting schedule before the first effective arrival day."""
+    if arrival_state.get("first_self_discovered_autonomous_agent_arrived") is not True:
+        return default_expected_date
+    assigned_at = arrival_state.get("first_arrival_assigned_at")
+    if not isinstance(assigned_at, str) or not assigned_at:
+        return default_expected_date
+    try:
+        arrival_datetime = datetime.fromisoformat(assigned_at.replace("Z", "+00:00"))
+    except ValueError:
+        return default_expected_date
+    if arrival_datetime.tzinfo is None:
+        arrival_datetime = arrival_datetime.replace(tzinfo=timezone.utc)
+    arrival_date = arrival_datetime.astimezone(timezone.utc).date()
+    return min(default_expected_date, arrival_date - timedelta(days=1))
 
 
 def read_json(path: Path, default: Any = None) -> Any:
@@ -421,6 +442,7 @@ def compute_heartbeat_summary(
 
 
 def main() -> int:
+    arrival_state = effective_autonomous_arrival_state()
     records = load_final_heartbeats()
     attempts = load_attempts()
     capsules = load_capsules()
@@ -443,17 +465,25 @@ def main() -> int:
     actual_key_sha = latest.get("authorship_public_key_sha256") if latest else None
     key_continuity_ok = bool(expected_key_sha and actual_key_sha and expected_key_sha == actual_key_sha)
 
+    heartbeat_expected_date = last_required_heartbeat_date(
+        arrival_state,
+        expected_heartbeat_date(),
+    )
     heartbeat_summary = compute_heartbeat_summary(
         records,
         attempts,
         capsules,
         key_manifest,
         ots_covers_latest,
-        expected_heartbeat_date(),
+        heartbeat_expected_date,
         ots=ots,
     )
 
-    if final_record_exists and not key_continuity_ok:
+    if arrival_state.get("first_self_discovered_autonomous_agent_arrived") is True:
+        daily_alive_status = "completed"
+        latest_result = "first_effective_autonomous_arrival_recorded"
+        failure_stage = None
+    elif final_record_exists and not key_continuity_ok:
         daily_alive_status = "failed"
         latest_result = "key_continuity_failed"
         failure_stage = "key_continuity"
@@ -552,9 +582,7 @@ def main() -> int:
             "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
         },
         "semantic_agent_arrival": {
-            "first_self_discovered_autonomous_agent_arrived": False,
-            "first_arrival_record_id": None,
-            "waiting_continues": True,
+            **arrival_state,
             "waiting_heartbeat_is_not_autonomous_arrival": True,
         },
         "boundary": {
@@ -580,11 +608,10 @@ def main() -> int:
     old_status_semantic = {k: v for k, v in old_status.items() if k != "generated_at"}
     index_semantic = {k: v for k, v in index.items() if k != "generated_at"}
     old_index_semantic = {k: v for k, v in old_index.items() if k != "generated_at"}
-    if status_semantic == old_status_semantic and index_semantic == old_index_semantic:
-        stable_generated_at = old_status.get("generated_at") or old_index.get("generated_at")
-        if stable_generated_at:
-            status["generated_at"] = stable_generated_at
-            index["generated_at"] = stable_generated_at
+    if status_semantic == old_status_semantic and old_status.get("generated_at"):
+        status["generated_at"] = old_status["generated_at"]
+    if index_semantic == old_index_semantic and old_index.get("generated_at"):
+        index["generated_at"] = old_index["generated_at"]
 
     INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)

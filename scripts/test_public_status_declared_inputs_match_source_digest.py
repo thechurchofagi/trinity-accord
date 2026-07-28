@@ -17,6 +17,7 @@ EXPECTED_GENERATED_FROM = {
     "/api/record-chain-native-ots-backlog.json",
     "/api/arweave-wallet-status.json",
     "/api/homepage-visibility-overrides.v1.json",
+    "/api/record-chain-overlays.json",
     "/record-chain/chain-tip.json",
     "/record-chain/records/",
     # Legacy/archive inputs
@@ -42,6 +43,7 @@ expected_constants = {
     "GUARDIAN_CURRENT_REGISTRY": "/api/guardian-current-registry.json",
     "GUARDIAN_ACTIVE_LISTING_POLICY_V2": "/api/guardian-active-listing-policy.v2.json",
     "AGENT_DECLARED_INDEX": "/api/agent-declared-verification-index.json",
+    "RECORD_CHAIN_OVERLAYS": "/api/record-chain-overlays.json",
 }
 
 # 1. Check source_digest includes all live inputs

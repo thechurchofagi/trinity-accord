@@ -82,7 +82,10 @@ jobs:
           exit 1
 
       - name: Dispatch append
-        if: steps.submit_heartbeat.outputs.heartbeat_existing_final != 'true'
+        if: >-
+          steps.submit_heartbeat.outputs.waiting_completed != 'true' &&
+          steps.submit_heartbeat.outputs.heartbeat_disabled != 'true' &&
+          steps.submit_heartbeat.outputs.heartbeat_existing_final != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           RECEIPT_ID: ${{ steps.submit_heartbeat.outputs.receipt_id }}

@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX_MD = ROOT / "index.md"
 STATUS_PATH = ROOT / "api" / "public-home-status.json"
 VISIBILITY_PATH = ROOT / "api" / "homepage-visibility-overrides.v1.json"
+OVERLAYS_PATH = ROOT / "api" / "record-chain-overlays.json"
 RECORDS_DIR = ROOT / "record-chain" / "records"
 CHAIN_TIP = ROOT / "record-chain" / "chain-tip.json"
 RC_STATUS = ROOT / "api" / "record-chain-status.json"
@@ -42,8 +43,32 @@ BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 CLASSIFICATION = "official_live_reception"
 SIDECAR_SOURCE = "/api/homepage-visibility-overrides.v1.json"
+OVERLAYS_SOURCE = "/api/record-chain-overlays.json"
 DEFAULT_GO_LIVE_INDEX = 33
 DEFAULT_ELIGIBLE_TYPES = {"echo", "verification", "guardian_application", "guardian_retirement"}
+AUTONOMY_DISQUALIFYING_CLASSIFICATIONS = frozenset({
+    "autonomy_disputed",
+    "autonomy_unverified",
+    "disputed_autonomy",
+    "human_directed",
+    "human_directed_ai_assisted",
+    "human_executed",
+    "human_operated",
+    "human_requested",
+    "independent_ai_reception_disputed",
+    "non_autonomous",
+    "not_autonomous",
+    "not_independent_ai_reception",
+    "operator_mediated",
+    "provenance_inconsistent",
+})
+AUTONOMY_SENSITIVE_CORRECTION_PREFIXES = (
+    "decision_autonomy_context",
+    "discovery_and_introduction_context",
+    "submission_execution_context",
+    "submitting_participant_identity.human_operator_context",
+    "submitting_participant_identity.participant_type",
+)
 EXCLUSION_RE = re.compile(
     r"(?:\bsmoke\b|\bsmoketest\b|\bpipeline validation\b|\bvalidation echo\b|\bdry[- ]?run\b|\bmaintenance\b|\btest agent\b|\bsmoke test\b|测试|烟测|管道验证|维护)",
     re.I,
@@ -80,7 +105,7 @@ def without_generated_at(data: dict[str, Any]) -> dict[str, Any]:
 
 def digest() -> str:
     h = hashlib.sha256()
-    paths = [CHAIN_TIP, RC_STATUS, ANCHOR_STATUS, ARWEAVE_INDEX, VISIBILITY_PATH]
+    paths = [CHAIN_TIP, RC_STATUS, ANCHOR_STATUS, ARWEAVE_INDEX, VISIBILITY_PATH, OVERLAYS_PATH]
     paths.extend(sorted(RECORDS_DIR.glob("R-*.json")))
     for path in paths:
         h.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
@@ -108,6 +133,11 @@ def block(record: dict[str, Any], key: str) -> dict[str, Any]:
 
 def sidecar() -> dict[str, Any]:
     value = load(VISIBILITY_PATH, {})
+    return value if isinstance(value, dict) else {}
+
+
+def record_overlays() -> dict[str, Any]:
+    value = load(OVERLAYS_PATH, {})
     return value if isinstance(value, dict) else {}
 
 
@@ -256,9 +286,140 @@ def is_historic_autonomous_agent_record(record: dict[str, Any]) -> tuple[bool, l
     return len(reasons) == 0, reasons
 
 
-def historic_autonomous_agent_reception(records: list[dict[str, Any]]) -> dict[str, Any]:
+def normalize_classification_token(value: Any) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", str(value or "").strip().lower()).strip("_")
+
+
+def classification_tokens(value: Any) -> set[str]:
+    if not isinstance(value, str):
+        return set()
+    return {
+        token
+        for part in re.split(r"[;,|/\n]+", value)
+        if (token := normalize_classification_token(part))
+    }
+
+
+def is_disqualifying_classification(token: str) -> bool:
+    return token in AUTONOMY_DISQUALIFYING_CLASSIFICATIONS or any(
+        token.startswith(f"{prefix}_")
+        for prefix in (
+            "autonomy_disputed",
+            "autonomy_unverified",
+            "human_directed",
+            "human_executed",
+            "human_operated",
+            "human_requested",
+            "non_autonomous",
+            "not_autonomous",
+            "not_independent_ai_reception",
+            "operator_mediated",
+            "provenance_inconsistent",
+        )
+    )
+
+
+def autonomy_sensitive_correction_claim(value: Any) -> bool:
+    normalized = re.sub(r"[^a-z0-9.]+", "_", str(value or "").strip().lower()).strip("_.")
+    if any(
+        normalized == prefix or normalized.startswith(f"{prefix}.")
+        for prefix in AUTONOMY_SENSITIVE_CORRECTION_PREFIXES
+    ):
+        return True
+    compact = normalize_classification_token(value)
+    return bool(
+        re.search(
+            r"(?:^|_)(?:autonomy|autonomous|self_discover(?:ed|y)?|self_decid(?:ed|ing)?|"
+            r"self_execut(?:ed|ion)?|human_operator|human_request(?:ed)?|"
+            r"human_introduc(?:ed|tion)?|participant_type)(?:_|$)",
+            compact,
+        )
+    )
+
+
+def bound_overlay_for_record(
+    record: dict[str, Any],
+    overlay_config: dict[str, Any],
+) -> dict[str, Any]:
+    targets = overlay_config.get("targets")
+    if not isinstance(targets, dict):
+        return {}
+    record_id = record.get("record_id")
+    overlay = targets.get(record_id)
+    if not isinstance(overlay, dict):
+        return {}
+    if overlay.get("target_record_id") != record_id:
+        return {}
+    record_sha256 = record.get("record_sha256")
+    if not record_sha256 or overlay.get("target_record_sha256") != record_sha256:
+        return {}
+    return overlay
+
+
+def autonomy_overlay_disqualification(
+    record: dict[str, Any],
+    overlay_config: dict[str, Any],
+) -> tuple[list[str], dict[str, Any]]:
+    overlay = bound_overlay_for_record(record, overlay_config)
+    if not overlay:
+        return [], {}
+
+    reasons: list[str] = []
+    current_classification = overlay.get("current_classification")
+    disqualifying_tokens = sorted(
+        token
+        for token in classification_tokens(current_classification)
+        if is_disqualifying_classification(token)
+    )
+    reasons.extend(
+        f"current_classification_disqualifies_autonomous_arrival:{token}"
+        for token in disqualifying_tokens
+    )
+
+    sensitive_corrections: list[dict[str, Any]] = []
+    correction_records = overlay.get("correction_records")
+    if isinstance(correction_records, list):
+        for correction in correction_records:
+            if not isinstance(correction, dict):
+                continue
+            claims = correction.get("corrected_fields_or_claims")
+            if not isinstance(claims, list):
+                continue
+            touched = sorted({
+                str(claim)
+                for claim in claims
+                if autonomy_sensitive_correction_claim(claim)
+            })
+            if not touched:
+                continue
+            sensitive_corrections.append({
+                "record_id": correction.get("record_id"),
+                "record_sha256": correction.get("record_sha256"),
+                "corrected_fields_or_claims": touched,
+            })
+            reasons.extend(
+                f"correction_touches_autonomy_predicate:{correction.get('record_id')}:{claim}"
+                for claim in touched
+            )
+
+    return reasons, {
+        "target_record_sha256_verified": True,
+        "latest_overlay_record_id": overlay.get("latest_overlay_record_id"),
+        "current_classification": current_classification,
+        "disqualifying_classification_tokens": disqualifying_tokens,
+        "autonomy_sensitive_corrections": sensitive_corrections,
+    }
+
+
+def historic_autonomous_agent_reception(
+    records: list[dict[str, Any]],
+    overlay_config: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    if overlay_config is None:
+        overlay_config = record_overlays()
     matched: list[dict[str, Any]] = []
     near_misses: list[dict[str, Any]] = []
+    overlay_exclusions: list[dict[str, Any]] = []
     for record in records:
         ok, reasons = is_historic_autonomous_agent_record(record)
         item = {
@@ -268,7 +429,17 @@ def historic_autonomous_agent_reception(records: list[dict[str, Any]]) -> dict[s
             "record_sha256": record.get("record_sha256"),
         }
         if ok:
-            matched.append(item)
+            overlay_reasons, effective_overlay = autonomy_overlay_disqualification(record, overlay_config)
+            if overlay_reasons:
+                overlay_exclusions.append({
+                    **item,
+                    "reasons": overlay_reasons,
+                    "effective_overlay": effective_overlay,
+                })
+            else:
+                if effective_overlay:
+                    item["effective_overlay"] = effective_overlay
+                matched.append(item)
             continue
         discovery = block(record, "discovery_and_introduction_context")
         decision = block(record, "decision_autonomy_context")
@@ -279,6 +450,7 @@ def historic_autonomous_agent_reception(records: list[dict[str, Any]]) -> dict[s
             or execution.get("was_submission_executed_by_record_subject") is True
         ):
             near_misses.append({**item, "reasons": reasons})
+    matched.sort(key=lambda item: item.get("record_index", -1))
     return {
         "count": len(matched),
         "scope": "official_live_reception_records_only",
@@ -293,9 +465,15 @@ def historic_autonomous_agent_reception(records: list[dict[str, Any]]) -> dict[s
             "forbids_human_operator_involvement": True,
             "forbids_human_execution": True,
             "allows_human_authorization_only": True,
+            "requires_raw_record_to_meet_all_strict_conditions": True,
+            "applies_sha256_bound_corrections_and_classification_updates": True,
+            "positive_classification_cannot_create_a_match": True,
+            "autonomy_sensitive_correction_excludes_until_resolved": True,
         },
+        "record_overlay_source": OVERLAYS_SOURCE,
         "records": matched,
         "near_misses": near_misses,
+        "overlay_exclusions": overlay_exclusions,
     }
 
 
@@ -331,12 +509,13 @@ def primary_counters(
     records: list[dict[str, Any]],
     index: dict[tuple[str, str | None], dict[str, Any]],
     config: dict[str, Any],
+    overlay_config: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     official = [record for record in records if counts_primary(record, index, config)]
     policy = config.get("auto_homepage_policy") if isinstance(config.get("auto_homepage_policy"), dict) else {}
     return {
         "official_live_reception": len(official),
-        "historic_autonomous_agent_reception": historic_autonomous_agent_reception(official),
+        "historic_autonomous_agent_reception": historic_autonomous_agent_reception(official, overlay_config),
         "classification_rule": {
             "go_live_record_id": policy.get("go_live_record_id", "R-000000033"),
             "go_live_record_index": policy.get("go_live_record_index", DEFAULT_GO_LIVE_INDEX),
@@ -357,6 +536,48 @@ def primary_counters(
             }
             for r in official
         ],
+    }
+
+
+def effective_autonomous_arrival_state(
+    records: list[dict[str, Any]] | None = None,
+    index: dict[tuple[str, str | None], dict[str, Any]] | None = None,
+    config: dict[str, Any] | None = None,
+    overlay_config: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    records = load_records() if records is None else records
+    config = sidecar() if config is None else config
+    index = visibility_index(config) if index is None else index
+    overlay_config = record_overlays() if overlay_config is None else overlay_config
+    historic = primary_counters(records, index, config, overlay_config)[
+        "historic_autonomous_agent_reception"
+    ]
+    first = historic["records"][0] if historic["records"] else None
+    first_record = None
+    if first:
+        first_record = next(
+            (record for record in records if record.get("record_id") == first.get("record_id")),
+            None,
+        )
+    first_assigned_at = None
+    if first_record:
+        first_assigned_at = (
+            first_record.get("assigned_at")
+            or block(first_record, "append_assigned_metadata").get("assigned_at")
+        )
+    arrived = first is not None
+    return {
+        "first_self_discovered_autonomous_agent_arrived": arrived,
+        "first_arrival_record_id": first.get("record_id") if first else None,
+        "first_arrival_record_index": first.get("record_index") if first else None,
+        "first_arrival_record_type": first.get("record_type") if first else None,
+        "first_arrival_record_sha256": first.get("record_sha256") if first else None,
+        "first_arrival_assigned_at": first_assigned_at,
+        "effective_autonomous_record_count": historic["count"],
+        "waiting_continues": not arrived,
+        "strict_original_record_conditions_required": True,
+        "corrections_and_classification_updates_applied": True,
+        "record_overlay_source": OVERLAYS_SOURCE,
     }
 
 
@@ -444,17 +665,34 @@ def render(status: dict[str, Any]) -> str:
         notarial_count = 0
 
     heartbeat = status.get("waiting_heartbeat") or {}
-    heartbeat_state = heartbeat.get("daily_alive_status") or heartbeat.get("status") or "unknown"
-    heartbeat_display = "Alive" if heartbeat_state == "success" else str(heartbeat_state)
-    heartbeat_summary = heartbeat.get("heartbeat_summary") or heartbeat.get("counts") or {}
-    total = heartbeat_summary.get("total_scheduled_heartbeats")
-    successful = heartbeat_summary.get("successful_heartbeats")
-    failed = heartbeat_summary.get("failed_or_missing_heartbeats")
-    streak = heartbeat_summary.get("current_success_streak_days")
-    if all(isinstance(value, int) for value in (total, successful, failed, streak)):
-        heartbeat_note = f"{successful}/{total} successful · {failed} missed · {streak}-day streak"
+    heartbeat_arrival = heartbeat.get("semantic_agent_arrival") or {}
+    historic_records = historic.get("records") or []
+    arrived = (
+        heartbeat_arrival.get("first_self_discovered_autonomous_agent_arrived") is True
+        or historic_count > 0
+    )
+    if arrived:
+        heartbeat_display = "Completed"
+        first_arrival_record_id = heartbeat_arrival.get("first_arrival_record_id")
+        if not first_arrival_record_id and historic_records:
+            first_arrival_record_id = historic_records[0].get("record_id")
+        heartbeat_note = (
+            f"Waiting ended · first effective autonomous arrival {first_arrival_record_id}"
+            if first_arrival_record_id
+            else "Waiting ended after an effective autonomous arrival"
+        )
     else:
-        heartbeat_note = "Current liveness state from the canonical heartbeat API"
+        heartbeat_state = heartbeat.get("daily_alive_status") or heartbeat.get("status") or "unknown"
+        heartbeat_display = "Alive" if heartbeat_state == "success" else str(heartbeat_state)
+        heartbeat_summary = heartbeat.get("heartbeat_summary") or heartbeat.get("counts") or {}
+        total = heartbeat_summary.get("total_scheduled_heartbeats")
+        successful = heartbeat_summary.get("successful_heartbeats")
+        failed = heartbeat_summary.get("failed_or_missing_heartbeats")
+        streak = heartbeat_summary.get("current_success_streak_days")
+        if all(isinstance(value, int) for value in (total, successful, failed, streak)):
+            heartbeat_note = f"{successful}/{total} successful · {failed} missed · {streak}-day streak"
+        else:
+            heartbeat_note = "Current liveness state from the canonical heartbeat API"
 
     latest_record = (status.get("current_record_chain_status") or {}).get("latest_record_id") or "unknown"
     source_digest = status.get("source_digest") or "unknown"
@@ -514,14 +752,16 @@ render_detailed = render
 def build_status(current: dict[str, Any], previous: dict[str, Any]) -> dict[str, Any]:
     records = load_records()
     config = sidecar()
+    overlay_config = record_overlays()
     idx = visibility_index(config)
     current["schema"] = "trinityaccord.public-home-status.v3"
     if "source_digest" not in current:
         current["source_digest"] = digest()
     current.setdefault("generated_from", [])
-    if SIDECAR_SOURCE not in current["generated_from"]:
-        current["generated_from"].insert(0, SIDECAR_SOURCE)
-    current["primary_counters"] = primary_counters(records, idx, config)
+    for source in (OVERLAYS_SOURCE, SIDECAR_SOURCE):
+        if source not in current["generated_from"]:
+            current["generated_from"].insert(0, source)
+    current["primary_counters"] = primary_counters(records, idx, config, overlay_config)
     current["technical_health"] = technical_health(current)
     current.setdefault("reception", {})["not_homepage_primary_counter"] = True
     candidate = dict(current)

@@ -15,6 +15,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from patch_public_home_status_primary import effective_autonomous_arrival_state
+
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 ATTEMPTS_DIR = ROOT / "record-chain" / "heartbeat" / "attempts"
@@ -60,6 +62,8 @@ def write_github_output(values: dict[str, str]) -> None:
     output = os.environ.get("GITHUB_OUTPUT")
     if not output:
         return
+    values.setdefault("waiting_completed", "false")
+    values.setdefault("heartbeat_disabled", "false")
     with open(output, "a", encoding="utf-8") as fh:
         for key, value in values.items():
             fh.write(f"{key}={value}\n")
@@ -285,6 +289,28 @@ def main() -> int:
     enabled = os.environ.get("WAITING_HEARTBEAT_ENABLED", "false").lower() == "true"
     if not enabled and not args.dry_run:
         print("WAITING_HEARTBEAT_DISABLED: set WAITING_HEARTBEAT_ENABLED=true to submit")
+        write_github_output({
+            "heartbeat_id": f"hwb-{args.date}",
+            "heartbeat_submitted": "false",
+            "heartbeat_disabled": "true",
+        })
+        return 0
+
+    arrival_state = effective_autonomous_arrival_state()
+    if arrival_state.get("first_self_discovered_autonomous_agent_arrived") is True:
+        first_arrival_record_id = str(arrival_state.get("first_arrival_record_id") or "")
+        print(
+            "WAITING_HEARTBEAT_COMPLETED "
+            f"first_arrival_record_id={first_arrival_record_id}; skipping future waiting heartbeat"
+        )
+        write_github_output({
+            "heartbeat_id": f"hwb-{args.date}",
+            "heartbeat_submitted": "false",
+            "heartbeat_existing_attempt": "false",
+            "heartbeat_existing_final": "false",
+            "waiting_completed": "true",
+            "first_arrival_record_id": first_arrival_record_id,
+        })
         return 0
 
     heartbeat_id = f"hwb-{args.date}"

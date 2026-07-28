@@ -26,6 +26,9 @@ def main() -> int:
         "missed",
         "-day streak",
         "/api/waiting-heartbeat-status.json",
+        "first_self_discovered_autonomous_agent_arrived",
+        "first effective autonomous arrival",
+        "Completed",
     ]:
         require(marker in index, f"index.md missing compact Waiting Heartbeat marker: {marker}")
 
@@ -42,6 +45,8 @@ def main() -> int:
         'heartbeat_summary.get("failed_or_missing_heartbeats")',
         'heartbeat_summary.get("current_success_streak_days")',
         'heartbeat_note = f"{successful}/{total} successful · {failed} missed · {streak}-day streak"',
+        'heartbeat_arrival.get("first_self_discovered_autonomous_agent_arrived") is True',
+        'heartbeat_display = "Completed"',
         "data-home-heartbeat-summary",
     ]:
         require(marker in patcher, f"compact patcher missing Waiting Heartbeat marker: {marker}")

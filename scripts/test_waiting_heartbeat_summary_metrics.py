@@ -4,6 +4,8 @@ from __future__ import annotations
 import importlib.util
 import hashlib
 import json
+import os
+import sys
 import tempfile
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -46,6 +48,10 @@ def load_capsule_builder_module():
     return load_module(CAPSULE_BUILDER, "build_waiting_heartbeat_arweave_capsule")
 
 
+def load_submit_module():
+    return load_module(SUBMIT_SCRIPT, "submit_waiting_heartbeat")
+
+
 def test_current_status_contract() -> None:
     status = json.loads(STATUS.read_text(encoding="utf-8"))
     public = json.loads(PUBLIC.read_text(encoding="utf-8"))
@@ -86,6 +92,32 @@ def test_current_status_contract() -> None:
     public_summary = public_hb.get("heartbeat_summary") or {}
     require(public_summary == summary, "public-home-status waiting_heartbeat.heartbeat_summary must mirror canonical status")
 
+    arrival = status.get("semantic_agent_arrival") or {}
+    public_arrival = public_hb.get("semantic_agent_arrival") or {}
+    autonomous_count = (
+        (public.get("primary_counters") or {})
+        .get("historic_autonomous_agent_reception", {})
+        .get("count")
+    )
+    require(isinstance(autonomous_count, int), "public autonomous arrival counter must be an integer")
+    require(
+        arrival.get("first_self_discovered_autonomous_agent_arrived") is (autonomous_count > 0),
+        "Waiting Heartbeat arrival state must be derived from the effective autonomous counter",
+    )
+    require(
+        arrival.get("effective_autonomous_record_count") == autonomous_count,
+        "Waiting Heartbeat effective autonomous count must mirror the public counter",
+    )
+    require(
+        arrival.get("waiting_continues") is (autonomous_count == 0),
+        "waiting_continues must be the inverse of effective autonomous arrival",
+    )
+    require(
+        arrival.get("corrections_and_classification_updates_applied") is True,
+        "Waiting Heartbeat arrival state must apply correction/classification overlays",
+    )
+    require(public_arrival == arrival, "public-home-status must mirror canonical semantic_agent_arrival")
+
     for key in ["not_reception_counter", "not_authority", "not_attestation", "not_amendment"]:
         require(summary.get(key) is True, f"heartbeat_summary.{key} must be true")
 
@@ -99,6 +131,103 @@ def test_expected_heartbeat_date_respects_schedule_grace_window() -> None:
     require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 9, 17, tzinfo=timezone.utc)) == date(2026, 6, 23), "final retry time must still expect the previous UTC date")
     require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 46, tzinfo=timezone.utc)) == date(2026, 6, 23), "inside final retry grace must expect the previous UTC date")
     require(generator.expected_heartbeat_date(datetime(2026, 6, 24, 10, 47, tzinfo=timezone.utc)) == date(2026, 6, 24), "only final retry plus grace may mature the current UTC date")
+
+
+def test_arrival_completion_stops_future_waiting_schedule() -> None:
+    generator = load_generator_module()
+    default = date(2026, 7, 30)
+    waiting = {
+        "first_self_discovered_autonomous_agent_arrived": False,
+        "first_arrival_assigned_at": None,
+    }
+    completed = {
+        "first_self_discovered_autonomous_agent_arrived": True,
+        "first_arrival_assigned_at": "2026-07-28T00:30:00Z",
+    }
+    require(
+        generator.last_required_heartbeat_date(waiting, default) == default,
+        "an open wait must retain the current heartbeat schedule",
+    )
+    require(
+        generator.last_required_heartbeat_date(completed, default) == date(2026, 7, 27),
+        "a completed wait must stop scheduled heartbeats before the arrival day",
+    )
+
+    with tempfile.TemporaryDirectory(prefix="waiting-heartbeat-completed-status-") as tmp_value:
+        tmp = Path(tmp_value)
+        generator.ROOT = tmp
+        generator.STATUS_PATH = tmp / "waiting-heartbeat-status.json"
+        generator.INDEX_PATH = tmp / "index.json"
+        generator.effective_autonomous_arrival_state = lambda: {
+            **completed,
+            "first_arrival_record_id": "R-999999999",
+            "effective_autonomous_record_count": 1,
+            "waiting_continues": False,
+        }
+        generator.load_final_heartbeats = lambda: []
+        generator.load_attempts = lambda: []
+        generator.load_capsules = lambda: []
+        generator.require_verified_capsule_bindings = lambda _capsules: None
+        generator.read_json = lambda _path, default=None: default if default is not None else {}
+        generator.expected_heartbeat_date = lambda _now=None: default
+        require(generator.main() == 0, "completed Waiting Heartbeat status generation must succeed")
+        completed_status = json.loads(generator.STATUS_PATH.read_text(encoding="utf-8"))
+        require(completed_status.get("daily_alive_status") == "completed", "arrival must set daily_alive_status=completed")
+        require(
+            completed_status.get("latest_result") == "first_effective_autonomous_arrival_recorded",
+            "arrival must expose a completion result",
+        )
+        require(
+            (completed_status.get("semantic_agent_arrival") or {}).get("waiting_continues") is False,
+            "completed status must not claim that waiting continues",
+        )
+
+    submit_text = SUBMIT_SCRIPT.read_text(encoding="utf-8")
+    workflow_text = WORKFLOW.read_text(encoding="utf-8")
+    for marker in [
+        "effective_autonomous_arrival_state",
+        "WAITING_HEARTBEAT_COMPLETED",
+        '"waiting_completed": "true"',
+        "skipping future waiting heartbeat",
+    ]:
+        require(marker in submit_text, f"submit script missing arrival-completion guard: {marker}")
+    require(
+        "steps.submit_heartbeat.outputs.waiting_completed != 'true'" in workflow_text,
+        "submit workflow must not dispatch append after Waiting Heartbeat completion",
+    )
+
+    submit = load_submit_module()
+    with tempfile.TemporaryDirectory(prefix="waiting-heartbeat-completed-") as tmp_value:
+        tmp = Path(tmp_value)
+        output_path = tmp / "github-output.txt"
+        attempts_path = tmp / "attempts"
+        old_argv = sys.argv
+        old_enabled = os.environ.get("WAITING_HEARTBEAT_ENABLED")
+        old_output = os.environ.get("GITHUB_OUTPUT")
+        try:
+            sys.argv = [str(SUBMIT_SCRIPT), "--date", "20260729"]
+            os.environ["WAITING_HEARTBEAT_ENABLED"] = "true"
+            os.environ["GITHUB_OUTPUT"] = str(output_path)
+            submit.ATTEMPTS_DIR = attempts_path
+            submit.effective_autonomous_arrival_state = lambda: {
+                "first_self_discovered_autonomous_agent_arrived": True,
+                "first_arrival_record_id": "R-999999999",
+            }
+            require(submit.main() == 0, "completed Waiting Heartbeat submit guard must exit successfully")
+            require(not attempts_path.exists(), "completed Waiting Heartbeat must not create an attempt directory")
+            outputs = output_path.read_text(encoding="utf-8")
+            require("waiting_completed=true" in outputs, "completed submit guard must expose waiting_completed output")
+            require("first_arrival_record_id=R-999999999" in outputs, "completed submit guard must expose first arrival record")
+        finally:
+            sys.argv = old_argv
+            if old_enabled is None:
+                os.environ.pop("WAITING_HEARTBEAT_ENABLED", None)
+            else:
+                os.environ["WAITING_HEARTBEAT_ENABLED"] = old_enabled
+            if old_output is None:
+                os.environ.pop("GITHUB_OUTPUT", None)
+            else:
+                os.environ["GITHUB_OUTPUT"] = old_output
 
 
 def verified_record() -> dict[str, object]:
@@ -492,6 +621,7 @@ def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirr
 def main() -> int:
     test_current_status_contract()
     test_expected_heartbeat_date_respects_schedule_grace_window()
+    test_arrival_completion_stops_future_waiting_schedule()
     test_summary_extends_to_expected_date_when_latest_observed_is_stale()
     test_current_expected_record_is_alive_while_arweave_capsule_is_pending()
     test_historical_record_stays_successful_without_verified_capsule()
