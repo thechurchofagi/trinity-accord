@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/_apply_pr767_late_review_fixes.py", line 471, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/_apply_pr767_late_review_fixes.py", line 463, in main
+    patch_injector()
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/_apply_pr767_late_review_fixes.py", line 219, in patch_injector
+    text = replace_once(
+           ^^^^^^^^^^^^^
+  File "/home/runner/work/trinity-accord/trinity-accord/scripts/_apply_pr767_late_review_fixes.py", line 20, in replace_once
+    raise RuntimeError(f"{label}: expected exactly one match, found {count}")
+RuntimeError: normalize injected signed readback: expected exactly one match, found 0
