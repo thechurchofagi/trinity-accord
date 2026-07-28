@@ -22,13 +22,13 @@ Full read-only red-team audit covering data origins, GitHub mirrors, Ethereum at
 
 | File | Description |
 |------|-------------|
-| [audit_report_eth_path2.json](evidence/redteam-audit-2026-05-08/audit_report_eth_path2.json) | Full audit report (JSON) |
-| [ans104_extraction_report.json](evidence/redteam-audit-2026-05-08/ans104_extraction_report.json) | ANS-104 bundle extraction |
-| [trinity_full_redteam_audit.py](scripts/redteam-audit/trinity_full_redteam_audit.py) | Audit script |
+| [audit_report_eth_path2.json](/evidence/redteam-audit-2026-05-08/audit_report_eth_path2.json) | Full audit report (JSON) |
+| [ans104_extraction_report.json](/evidence/redteam-audit-2026-05-08/ans104_extraction_report.json) | ANS-104 bundle extraction |
+| [trinity_full_redteam_audit.py](https://github.com/thechurchofagi/trinity-accord/blob/main/scripts/redteam-audit/trinity_full_redteam_audit.py) | Audit script |
 
 ## Evidence
 
-- [Evidence README](evidence/redteam-audit-2026-05-08/)
+- [Evidence README](/evidence/redteam-audit-2026-05-08/)
 
 ---
 
