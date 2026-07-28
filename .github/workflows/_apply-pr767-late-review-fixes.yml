@@ -221,7 +221,6 @@ jobs:
         if: success()
         run: |
           rm scripts/_apply_pr767_late_review_fixes.py
-          rm .github/workflows/_apply-pr767-late-review-fixes.yml
           rm -f scripts/_apply_pr767_late_review_failure.log
           rm -f scripts/_apply_pr767_late_review_test_failure.log
 
