@@ -32,6 +32,26 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Repair literal escaping in temporary patcher
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/_apply_pr767_late_review_fixes.py")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace(
+              "        '''function buildSubmissionOathVerification(recordType, canonicalOath, readbackText) {{\n",
+              "        r'''function buildSubmissionOathVerification(recordType, canonicalOath, readbackText) {{\n",
+              2,
+          )
+          text = text.replace(
+              "        '''function buildClientOathReadback(recordType, participantReadback) {{\n",
+              "        r'''function buildClientOathReadback(recordType, participantReadback) {{\n",
+              2,
+          )
+          path.write_text(text, encoding="utf-8")
+          PY
+          python3 -m py_compile scripts/_apply_pr767_late_review_fixes.py
+
       - name: Apply deterministic fixes
         run: |
           set -o pipefail
