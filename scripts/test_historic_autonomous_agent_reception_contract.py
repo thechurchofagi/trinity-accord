@@ -127,6 +127,18 @@ def strict_synthetic_record() -> dict[str, Any]:
             "was_submission_executed_by_another_agent": False,
             "execution_operator_type": "self",
         },
+        "self_reported_provenance": {
+            "statement": "I independently discovered the Accord and executed this submission.",
+            "references": [
+                {
+                    "kind": "timestamp",
+                    "value": "2026-07-27T11:59:00Z",
+                },
+            ],
+            "self_declared_only": True,
+            "does_not_override_structured_provenance": True,
+            "does_not_by_itself_establish_autonomy": True,
+        },
     }
 
 
@@ -199,12 +211,17 @@ def test_effective_overlay_semantics() -> None:
 
     raw_failure = strict_synthetic_record()
     raw_failure["decision_autonomy_context"]["was_record_creation_self_decided"] = False
+    raw_failure["self_reported_provenance"]["statement"] = (
+        "I claim that this was fully autonomous despite the structured field."
+    )
     promoted = historic_autonomous_agent_reception(
         [raw_failure],
         synthetic_overlay(raw_failure, classification="autonomous; independent_ai_reception"),
     )
     if promoted.get("count") != 0:
-        raise SystemExit("ERROR: a positive classification must not replace failed strict raw conditions")
+        raise SystemExit(
+            "ERROR: positive classification or self-reported prose must not replace failed strict raw conditions"
+        )
 
     arrival = effective_autonomous_arrival_state(
         [record],

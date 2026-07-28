@@ -15,7 +15,7 @@
 
 import { createHash, generateKeyPairSync, sign, verify, createPublicKey, createPrivateKey } from "node:crypto";
 import assert from "node:assert/strict";
-import { execSync } from "node:child_process";
+import { execFileSync, execSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -721,6 +721,133 @@ function testSelfExecutorHumanInvolvedFails() {
   console.log("  ✅ Conflicting executor/involvement flags correctly fail");
 }
 
+// ── Test 19: signed self-reported provenance across core routes ─────
+
+function testSelfReportedProvenanceAcrossCoreRoutes() {
+  console.log("Test 19: signed self-reported provenance across Echo, Verification, and Guardian Application");
+  cleanTmp();
+
+  const statementFile = resolve(TMP_DIR, "provenance-statement.txt");
+  const referencesFile = resolve(TMP_DIR, "provenance-references.json");
+  writeFileSync(
+    statementFile,
+    "I am preserving my own account of discovery, decision, and execution for later review.\n"
+  );
+  writeFileSync(
+    referencesFile,
+    JSON.stringify([
+      {
+        kind: "timestamp",
+        value: "2026-07-27T12:34:56Z",
+        description: "Self-reported discovery time",
+      },
+      {
+        kind: "sha256",
+        value: "a".repeat(64),
+        description: "Hash of a public supporting artifact",
+      },
+    ])
+  );
+
+  const routes = [
+    {
+      command: "echo",
+      recordType: "echo",
+      args: ["--body", "Test Echo with signed self-reported provenance."],
+    },
+    {
+      command: "verification",
+      recordType: "verification",
+      args: [
+        "--verification-level", "V3",
+        "--what-was-checked", "builder output",
+        "--verification-claim", "The Builder preserves the optional provenance block.",
+        "--fresh-actions", "built and inspected a fresh signed submission",
+        "--digital-profile", "integrity_checked",
+        "--relationships-checked", "hashes",
+        "--physical-observation", "none",
+        "--external-witness", "none",
+        "--coverage-scope", "single_target",
+        "--limitations", "No physical observation",
+        "--claims-not-made", "No authority or independent identity proof",
+        "--corrections-or-supersession-checked", "true",
+      ],
+    },
+    {
+      command: "guardian-application",
+      recordType: "guardian_application",
+      args: ["--guardian-id", "auto", "--guardian-key-sha", "auto"],
+    },
+  ];
+
+  for (const route of routes) {
+    const oath = execFileSync(
+      process.execPath,
+      [BUILDER, "print-oath", "--record-type", route.recordType],
+      { encoding: "utf-8", cwd: __dirname }
+    ).trim();
+    const keyDir = resolve(TMP_DIR, `${route.command}-provenance-keys`);
+    const outFile = resolve(TMP_DIR, `${route.command}-provenance.json`);
+    const commonArgs = [
+      "--actor-label", "Provenance Test Agent",
+      "--participant-identifier", "agent-example-17",
+      "--provider", "Test Runtime",
+      "--context-level", "CC-3",
+      "--context-sufficient-for-selected-action", "true",
+      "--context-read-confirmed", "true",
+      "--loaded-urls", "https://www.trinityaccord.org/agent-start/",
+      "--discovery-mode", "user_task_context",
+      "--requesting-party-type", "human",
+      "--introducing-party-type", "human",
+      "--record-decision", "human",
+      "--submission-executor", "self",
+      "--human-operator-involved", "false",
+      "--provenance-statement-file", statementFile,
+      "--provenance-references-file", referencesFile,
+      "--readback", oath,
+      "--key-dir", keyDir,
+      "--out", outFile,
+    ];
+
+    execFileSync(
+      process.execPath,
+      [BUILDER, route.command, ...route.args, ...commonArgs],
+      { encoding: "utf-8", cwd: __dirname }
+    );
+
+    const submission = JSON.parse(readFileSync(outFile, "utf-8"));
+    const draft = submission.record_draft;
+    const provenance = draft.self_reported_provenance;
+    assert.equal(draft.record_type, route.recordType);
+    assert.equal(
+      draft.submitting_participant_identity.participant_self_declared_identifier,
+      "agent-example-17"
+    );
+    assert.equal(
+      draft.submitting_participant_identity.participant_identifier_disclosure_status,
+      "provided"
+    );
+    assert.equal(provenance.self_declared_only, true);
+    assert.equal(provenance.does_not_override_structured_provenance, true);
+    assert.equal(provenance.does_not_by_itself_establish_autonomy, true);
+    assert.equal(provenance.references.length, 2);
+
+    const signedResult = verifyAuthorshipProof(draft, submission.authorship_proof);
+    assert.equal(
+      signedResult.valid,
+      true,
+      `${route.recordType} provenance block must be covered by the authorship signature: ${signedResult.error}`
+    );
+
+    const modifiedDraft = JSON.parse(JSON.stringify(draft));
+    modifiedDraft.self_reported_provenance.statement += " Modified after signing.";
+    const modifiedResult = verifyAuthorshipProof(modifiedDraft, submission.authorship_proof);
+    assert.equal(modifiedResult.valid, false, "Editing provenance after signing must invalidate the proof");
+  }
+
+  console.log("  ✅ Core routes preserve and sign the optional provenance block");
+}
+
 // ── Run all tests ────────────────────────────────────────────────────
 
 console.log("=== record-chain-builder.mjs Phase 6B Hotfix Tests ===\n");
@@ -744,6 +871,7 @@ try {
   testContextInsufficientWithoutReadback();
   testVerificationV6Fails();
   testSelfExecutorHumanInvolvedFails();
+  testSelfReportedProvenanceAcrossCoreRoutes();
 
   console.log("\n✅ All tests passed!");
 } catch (e) {

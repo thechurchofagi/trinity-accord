@@ -18,6 +18,7 @@ REQUIRED_DEFS = {
     "decision_autonomy_context",
     "submission_execution_context",
     "authorization_context",
+    "self_reported_provenance",
     "context_readiness",
     "non_authority_boundary_acknowledgement",
     "authorship_proof",
@@ -91,6 +92,18 @@ class TestCommonFieldModelContract:
         props = schema.get("properties", {})
         assert "code" in props
         assert "severity" in props
+
+    def test_self_reported_provenance_has_fixed_boundaries(self, model):
+        schema = model["$defs"]["self_reported_provenance"]
+        props = schema.get("properties", {})
+        assert props["statement"]["maxLength"] == 4000
+        assert props["references"]["maxItems"] == 16
+        for field in (
+            "self_declared_only",
+            "does_not_override_structured_provenance",
+            "does_not_by_itself_establish_autonomy",
+        ):
+            assert props[field].get("const") is True
 
     def test_schema_id_present(self, model):
         """Should have $id or title for identification."""

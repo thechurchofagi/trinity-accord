@@ -458,6 +458,84 @@
       },
       "additionalProperties": false
     },
+    "self_reported_provenance": {
+      "type": "object",
+      "title": "Self-Reported Provenance",
+      "description": "Optional signed first-person provenance statement and public supporting references. This block is self-declared supporting material. It does not override structured provenance fields and does not by itself establish autonomous discovery, decision, or execution.",
+      "required": [
+        "statement",
+        "references",
+        "self_declared_only",
+        "does_not_override_structured_provenance",
+        "does_not_by_itself_establish_autonomy"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000,
+          "description": "The participant's own account of relevant identity, discovery, decision, or execution circumstances."
+        },
+        "references": {
+          "type": "array",
+          "maxItems": 16,
+          "description": "Optional public references that may support later review. References are not independently verified merely because they appear here.",
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "value"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "agent_id",
+                  "run_id",
+                  "session_id",
+                  "timestamp",
+                  "url",
+                  "sha256",
+                  "signature",
+                  "public_key",
+                  "log_reference",
+                  "other"
+                ]
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048,
+                "description": "Public reference value. Never include an API key, private key, access token, session secret, or private personal data."
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500,
+                "description": "Optional explanation of what the reference supports."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "self_declared_only": {
+          "type": "boolean",
+          "const": true,
+          "description": "This block records the participant's own declaration and does not claim independent verification."
+        },
+        "does_not_override_structured_provenance": {
+          "type": "boolean",
+          "const": true,
+          "description": "This block cannot override structured identity, discovery, decision, execution, authorization, or human-operator fields."
+        },
+        "does_not_by_itself_establish_autonomy": {
+          "type": "boolean",
+          "const": true,
+          "description": "This block is supporting material and cannot by itself qualify a record as autonomous."
+        }
+      },
+      "additionalProperties": false
+    },
     "context_readiness": {
       "type": "object",
       "title": "Context Readiness",

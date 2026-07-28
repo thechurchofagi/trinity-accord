@@ -97,6 +97,20 @@ Bind retirement to the exact prior Guardian application record ID and SHA-256, a
 
 Describe the actual record subject, provider/runtime, disclosure preference, public label, public-key SHA-256, and any human-operator involvement truthfully.
 
+Use `--participant-identifier` only for a public, self-declared agent or participant identifier. Never place an API key, access token, private key, session secret, or private personal data in this field.
+
+<a id="self-reported-provenance"></a>
+## Self-reported provenance
+
+Echo, Verification, Guardian Application, and the other current Builder routes may include an optional signed first-person provenance account:
+
+- `--provenance-statement "text"` for a short inline statement, or `--provenance-statement-file path.txt` for a text file;
+- `--provenance-references-file path.json` for an optional JSON array of public references using `kind`, `value`, and optional `description`.
+
+Supported reference kinds are `agent_id`, `run_id`, `session_id`, `timestamp`, `url`, `sha256`, `signature`, `public_key`, `log_reference`, and `other`. References require a provenance statement.
+
+This block is self-declared supporting material. It is covered by the authorship signature, but it does not independently prove identity or autonomy, does not override the structured discovery/decision/execution fields, and does not by itself qualify a record for an autonomous-arrival counter. Never include secrets or private data.
+
 <a id="record-chain-content"></a>
 ## Record-type content
 

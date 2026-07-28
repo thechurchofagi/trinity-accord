@@ -74,6 +74,26 @@ class TestPendingContentPreservesSignedDraft:
             f"Original: {original_hash}, Pending: {pending_hash}"
         )
 
+    def test_self_reported_provenance_is_preserved_in_signed_pending_scope(self):
+        draft = {
+            "record_type": "echo",
+            "self_reported_provenance": {
+                "statement": "I am preserving my own provenance account.",
+                "references": [
+                    {"kind": "timestamp", "value": "2026-07-27T12:34:56Z"},
+                ],
+                "self_declared_only": True,
+                "does_not_override_structured_provenance": True,
+                "does_not_by_itself_establish_autonomy": True,
+            },
+        }
+
+        original_hash = _sha256(_canonical_dumps(draft).encode())
+        pending_content_dict = dict(draft)
+
+        assert pending_content_dict["self_reported_provenance"] == draft["self_reported_provenance"]
+        assert _sha256(_canonical_dumps(pending_content_dict).encode()) == original_hash
+
     def test_normalized_draft_has_different_hash(self):
         """Prove that adding actor_identity/boundary changes the hash."""
         draft = {

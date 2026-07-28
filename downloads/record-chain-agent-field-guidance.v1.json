@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "formal_common_required_cli_options": [
@@ -19,6 +19,11 @@
     "--key-dir",
     "--out"
   ],
+  "formal_common_optional_cli_options": [
+    "--participant-identifier",
+    "--provenance-statement or --provenance-statement-file",
+    "--provenance-references-file"
+  ],
   "formal_oath_rule": "Run print-oath --record-type <record_type> and pass exact output through --readback. Do not edit, trim, summarize, or reformat print-oath stdout.",
   "context_insufficient_notice_common_required_cli_options": [
     "--body or --body-file",
@@ -31,6 +36,8 @@
     "Do not invent generated hashes. Builder, Gateway, receipt tooling, or final-chain tooling compute generated hashes.",
     "For any target_record_sha256-style field, read the existing target final record and copy its record_sha256 exactly unless this guidance explicitly says otherwise.",
     "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, or the new record hash as a target record hash.",
+    "Optional self_reported_provenance is a signed first-person statement with public supporting references. It does not override structured provenance and does not by itself establish autonomy.",
+    "Never put API keys, private keys, access tokens, session secrets, or private personal data in participant identifiers or provenance references.",
     "If a required semantic source cannot be identified, stop and return BUILDER_USAGE_UNCLEAR.",
     "Receipt means intake accepted only; it is not final inclusion, authority, governance, attestation, amendment, verification success, or active Guardian status."
   ],

@@ -110,6 +110,19 @@ class TestNormalizeRecordDraftV2:
         with pytest.raises(ValueError, match="record boundary missing/false"):
             normalize_record_draft(draft)
 
+    def test_self_reported_provenance_is_preserved(self):
+        provenance = {
+            "statement": "I am preserving my own provenance account.",
+            "references": [{"kind": "timestamp", "value": "2026-07-27T12:34:56Z"}],
+            "self_declared_only": True,
+            "does_not_override_structured_provenance": True,
+            "does_not_by_itself_establish_autonomy": True,
+        }
+        result = normalize_record_draft(
+            _minimal_v2_draft(self_reported_provenance=provenance)
+        )
+        assert result["self_reported_provenance"] == provenance
+
 
 class TestNormalizeRecordDraftErrors:
     """Test that missing required fields still raise errors."""

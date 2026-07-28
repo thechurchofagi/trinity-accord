@@ -5,8 +5,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "dba8e3b309f72715028e33cc6549a11302eacb3fd0f1f54116c5a40e10763feb",
-    "size_bytes": 177944,
+    "sha256": "f3733b83018f435325ecaaa4b84920ed4f7a7645ddda3ea57eab4c8a73e17f92",
+    "size_bytes": 188385,
     "supports": [
       "echo",
       "verification",
@@ -18,7 +18,8 @@
       "context_insufficient_notice",
       "preflight",
       "submit",
-      "ed25519_authorship_proof"
+      "ed25519_authorship_proof",
+      "self_reported_provenance"
     ]
   },
   "agent_field_guidance": {

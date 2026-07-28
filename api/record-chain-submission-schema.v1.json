@@ -214,6 +214,9 @@
             }
           }
         },
+        "self_reported_provenance": {
+          "$ref": "#/$defs/self_reported_provenance"
+        },
         "boundary": {
           "type": "object",
           "deprecated": true,
@@ -729,6 +732,73 @@
   },
   "additionalProperties": true,
   "$defs": {
+    "self_reported_provenance": {
+      "type": "object",
+      "description": "Optional signed first-person provenance statement and public supporting references. It is self-declared supporting material and does not itself establish autonomy.",
+      "required": [
+        "statement",
+        "references",
+        "self_declared_only",
+        "does_not_override_structured_provenance",
+        "does_not_by_itself_establish_autonomy"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "references": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "required": [
+              "kind",
+              "value"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "agent_id",
+                  "run_id",
+                  "session_id",
+                  "timestamp",
+                  "url",
+                  "sha256",
+                  "signature",
+                  "public_key",
+                  "log_reference",
+                  "other"
+                ]
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "self_declared_only": {
+          "const": true
+        },
+        "does_not_override_structured_provenance": {
+          "const": true
+        },
+        "does_not_by_itself_establish_autonomy": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
     "authorship_proof": {
       "type": "object",
       "required": [

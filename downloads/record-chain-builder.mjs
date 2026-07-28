@@ -36,7 +36,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BUILDER_VERSION = "v2.1";
+const BUILDER_VERSION = "v2.2";
 const BUILDER_NAME = "record-chain-builder";
 const SCHEMA = "trinityaccord.record-chain-submission.v1";
 const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
@@ -46,6 +46,23 @@ const AUTHORSHIP_PRIVATE_KEY_FILENAME = "authorship-private.pem";
 const AUTHORSHIP_PUBLIC_KEY_FILENAME = "authorship-public.pem";
 const AUTHORSHIP_CUSTODY_WARNING_FILENAME = "AUTHORSHIP_KEY_CUSTODY_WARNING.txt";
 const AUTHORSHIP_PUBLIC_SUMMARY_FILENAME = "authorship-public-summary.json";
+const SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH = 4000;
+const SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT = 16;
+const SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH = 2048;
+const SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH = 500;
+const PARTICIPANT_IDENTIFIER_MAX_LENGTH = 256;
+const SELF_REPORTED_PROVENANCE_REFERENCE_KINDS = new Set([
+  "agent_id",
+  "run_id",
+  "session_id",
+  "timestamp",
+  "url",
+  "sha256",
+  "signature",
+  "public_key",
+  "log_reference",
+  "other",
+]);
 
 const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
   "echo",
@@ -769,6 +786,134 @@ function splitCsv(value) {
   return String(value || "").split(",").map(s => s.trim()).filter(Boolean);
 }
 
+function unicodeLength(value) {
+  return [...String(value)].length;
+}
+
+function parseProvenanceReferencesFile(filePath) {
+  if (!filePath) return [];
+  if (filePath === true) {
+    errorExit("--provenance-references-file requires a JSON file path");
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(readFileSync(resolve(filePath), "utf-8"));
+  } catch (err) {
+    errorExit(`--provenance-references-file must contain valid JSON: ${err.message}`);
+  }
+  if (!Array.isArray(parsed)) {
+    errorExit("--provenance-references-file must contain a JSON array");
+  }
+  return parsed;
+}
+
+function validateProvenanceReference(reference, index) {
+  const path = `self_reported_provenance.references[${index}]`;
+  if (!reference || typeof reference !== "object" || Array.isArray(reference)) {
+    errorExit(`${path} must be a JSON object`);
+  }
+
+  const allowedKeys = new Set(["kind", "value", "description"]);
+  const unknownKeys = Object.keys(reference).filter(key => !allowedKeys.has(key));
+  if (unknownKeys.length) {
+    errorExit(`${path} contains unsupported field(s): ${unknownKeys.join(", ")}`);
+  }
+
+  const kind = typeof reference.kind === "string" ? reference.kind.trim() : "";
+  if (!SELF_REPORTED_PROVENANCE_REFERENCE_KINDS.has(kind)) {
+    errorExit(
+      `${path}.kind must be one of: ${[...SELF_REPORTED_PROVENANCE_REFERENCE_KINDS].join(", ")}`
+    );
+  }
+
+  const value = typeof reference.value === "string" ? reference.value.trim() : "";
+  if (!value) {
+    errorExit(`${path}.value must be a non-empty string`);
+  }
+  if (unicodeLength(value) > SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH) {
+    errorExit(
+      `${path}.value must not exceed ${SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH} characters`
+    );
+  }
+  if (kind === "sha256" && !/^[0-9a-f]{64}$/.test(value)) {
+    errorExit(`${path}.value must be a 64-character lowercase hexadecimal SHA-256`);
+  }
+  if (
+    kind === "timestamp" &&
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)
+  ) {
+    errorExit(`${path}.value must be an ISO-8601 timestamp with a timezone`);
+  }
+  if (kind === "url") {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(value);
+    } catch {
+      errorExit(`${path}.value must be a valid http or https URL`);
+    }
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+      errorExit(`${path}.value must use http or https`);
+    }
+  }
+
+  let description;
+  if (reference.description !== undefined && reference.description !== null) {
+    if (typeof reference.description !== "string") {
+      errorExit(`${path}.description must be a string when provided`);
+    }
+    description = reference.description.trim();
+    if (!description) {
+      errorExit(`${path}.description must not be empty when provided`);
+    }
+    if (unicodeLength(description) > SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH) {
+      errorExit(
+        `${path}.description must not exceed ${SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH} characters`
+      );
+    }
+  }
+
+  return {
+    kind,
+    value,
+    ...(description ? { description } : {}),
+  };
+}
+
+function buildSelfReportedProvenance(opts) {
+  const statement = typeof opts.provenanceStatement === "string"
+    ? opts.provenanceStatement.trim()
+    : "";
+  const references = Array.isArray(opts.provenanceReferences)
+    ? opts.provenanceReferences
+    : [];
+
+  if (!statement && references.length === 0 && !opts.provenanceRequested) return null;
+  if (!statement) {
+    errorExit(
+      "--provenance-statement or --provenance-statement-file is required when provenance references are supplied"
+    );
+  }
+  if (unicodeLength(statement) > SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH) {
+    errorExit(
+      `--provenance-statement must not exceed ${SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH} characters`
+    );
+  }
+  if (references.length > SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT) {
+    errorExit(
+      `--provenance-references-file must not contain more than ${SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT} references`
+    );
+  }
+
+  return {
+    statement,
+    references: references.map(validateProvenanceReference),
+    self_declared_only: true,
+    does_not_override_structured_provenance: true,
+    does_not_by_itself_establish_autonomy: true,
+  };
+}
+
 function defaultActionProfile(recordType) {
   const rt = normalizeRecordType(recordType);
   if (rt === "echo") return "interpretation";
@@ -964,6 +1109,13 @@ function validateFormalInputs(command, opts) {
 
 function buildV2CommonFields(opts) {
   const humanInvolved = parseBooleanStrict(opts.humanOperatorInvolved, "--human-operator-involved");
+  const participantIdentifier = typeof opts.participantIdentifier === "string"
+    ? opts.participantIdentifier.trim()
+    : "";
+  if (unicodeLength(participantIdentifier) > PARTICIPANT_IDENTIFIER_MAX_LENGTH) {
+    errorExit(`--participant-identifier must not exceed ${PARTICIPANT_IDENTIFIER_MAX_LENGTH} characters`);
+  }
+  const selfReportedProvenance = buildSelfReportedProvenance(opts);
 
   const requestingPartyType = opts.requestingPartyType || "none";
   const introducingPartyType = opts.introducingPartyType || "none";
@@ -982,13 +1134,13 @@ function buildV2CommonFields(opts) {
   const execHuman = submissionExecutor === "human_operator";
   const execAgent = submissionExecutor === "another_agent";
 
-  return {
+  const commonFields = {
     submitting_participant_identity: {
       participant_type: "agent",
       participant_public_display_label: opts.actorLabel || "Unknown Agent",
-      participant_self_declared_identifier: "",
-      participant_identifier_disclosure_status: "not_available",
-      participant_identity_disclosure_preference: "key_continuity_only",
+      participant_self_declared_identifier: participantIdentifier,
+      participant_identifier_disclosure_status: participantIdentifier ? "provided" : "not_available",
+      participant_identity_disclosure_preference: participantIdentifier ? "public_agent_id" : "key_continuity_only",
       participant_provider_or_platform: opts.provider || "Unknown Runtime",
       participant_model_or_runtime: opts.provider || "Unknown Runtime",
       participant_public_key_sha256: "",
@@ -1059,6 +1211,11 @@ function buildV2CommonFields(opts) {
       later_records_may_reclassify_or_correct_this_record: true,
     },
   };
+
+  if (selfReportedProvenance) {
+    commonFields.self_reported_provenance = selfReportedProvenance;
+  }
+  return commonFields;
 }
 
 function buildContextReadiness(opts) {
@@ -1422,6 +1579,11 @@ If the agent independently found the Accord and independently chose to create th
   --submission-executor self
   --human-operator-involved false
 
+Optional self_reported_provenance preserves a signed first-person account and
+supporting references. It is self-declared supporting material: it does not
+override the structured discovery/decision/execution fields and does not by
+itself establish autonomy.
+
 Smoke tests, QA checks, maintenance probes, and pipeline validations should identify themselves as tests/validation in the record body or reason fields.
 They should not be represented as fully autonomous reception.
 
@@ -1497,6 +1659,16 @@ const FIELD_EXPLANATIONS = {
   "authorization_context.authorization_limitations": "Any limitations on the authorization.",
   "authorization_context.authorization_evidence_description": "Description of authorization evidence.",
 
+  "self_reported_provenance": "Optional signed first-person provenance statement and supporting references. It is self-declared material, not independent proof.",
+  "self_reported_provenance.statement": "The participant's own account of relevant identity, discovery, decision, or execution circumstances.",
+  "self_reported_provenance.references": "Optional structured references such as an agent ID, run ID, timestamp, URL, SHA-256, signature, public key, or log reference.",
+  "self_reported_provenance.references.kind": "Reference type: agent_id, run_id, session_id, timestamp, url, sha256, signature, public_key, log_reference, or other.",
+  "self_reported_provenance.references.value": "The public reference value. Never include API keys, private keys, access tokens, or private data.",
+  "self_reported_provenance.references.description": "Optional short explanation of what the reference supports.",
+  "self_reported_provenance.self_declared_only": "Always true. The block records the participant's own statement and does not claim independent verification.",
+  "self_reported_provenance.does_not_override_structured_provenance": "Always true. Free text and references cannot override structured discovery, decision, execution, or human-operator fields.",
+  "self_reported_provenance.does_not_by_itself_establish_autonomy": "Always true. This optional block is supporting material and cannot by itself qualify a record as autonomous.",
+
   "non_authority_boundary_acknowledgement": "Acknowledgements that this submission is not an authority claim.",
   "non_authority_boundary_acknowledgement.not_authority": "Acknowledges this is not an authority claim.",
   "non_authority_boundary_acknowledgement.not_governance": "Acknowledges this is not a governance action.",
@@ -1555,19 +1727,24 @@ const FIELD_EXPLANATIONS = {
 };
 
 const RECORD_TYPE_FIELDS = {
-  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
-  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
-  "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "target_guardian_application_record_id", "target_guardian_application_record_sha256", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
-  propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
-  correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
-  "classification-update": ["schema", "record_type", "classification_update_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
-  "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "target_guardian_application_record_id", "target_guardian_application_record_sha256", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "classification-update": ["schema", "record_type", "classification_update_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
 };
 
 // ── Error code help map ──────────────────────────────────────────────
 
 const ERROR_HELP_MAP = {
+  INVALID_SELF_REPORTED_PROVENANCE: {
+    meaning: "The optional self_reported_provenance block is malformed or weakens a required provenance boundary.",
+    fix: "Rebuild with --provenance-statement or --provenance-statement-file. If references are supplied, use a JSON array with kind, value, and optional description. Do not edit the signed draft afterward.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#self-reported-provenance",
+  },
   MISSING_CONTEXT_READINESS: {
     meaning: "The record draft is missing the required 'context_readiness' object.",
     fix: "Add a 'context_readiness' object with 'declared_context_level', 'minimum_required_for_action', 'context_sufficient_for_selected_action', 'loaded_context_urls', and 'context_readiness_notes' fields. Use the 'repair' command to auto-fix.",
@@ -2483,6 +2660,20 @@ function generateTemplate(recordType) {
     authorization_evidence_description: "",
   };
 
+  draft.self_reported_provenance = {
+    statement: "__helper_note: Optional first-person account of identity, discovery, decision, or execution provenance",
+    references: [
+      {
+        kind: "other",
+        value: "__helper_note: Optional public reference value",
+        description: "__helper_note: What this reference supports",
+      },
+    ],
+    self_declared_only: true,
+    does_not_override_structured_provenance: true,
+    does_not_by_itself_establish_autonomy: true,
+  };
+
   draft.non_authority_boundary_acknowledgement = {
     not_authority: true,
     not_governance: true,
@@ -2558,10 +2749,22 @@ Reserved future type:
 
 Common options:
   --actor-label "Name"          Agent name
+  --participant-identifier "ID" Optional public self-declared participant or agent identifier
   --provider "Runtime"          Agent runtime/provider
   --title "Title"               Record title
   --body-file path.txt          Read body from file
   --body "text"                 Body text inline
+  --provenance-statement "text" Optional first-person account of identity, discovery,
+                                decision, and execution provenance
+  --provenance-statement-file path.txt
+                                Read the optional provenance statement from a text file
+  --provenance-references-file path.json
+                                Optional JSON array of supporting references. Each item uses
+                                kind, value, and optional description. Supported kinds:
+                                agent_id, run_id, session_id, timestamp, url, sha256,
+                                signature, public_key, log_reference, other.
+                                References require a provenance statement.
+                                Never include API keys, private keys, tokens, or private data.
   --action-profile PROFILE     Current action profile: discovery, interpretation, verification, record_action, or deep_research.
                                  Defaults from record type; CC remains compatibility metadata.
   --context-level CC-3          Legacy context depth compatibility field (explicit for formal records)
@@ -3303,11 +3506,39 @@ async function main() {
     body = readFileSync(resolve(args.bodyFile), "utf-8").trim();
   }
 
+  if (args.participantIdentifier === true) {
+    errorExit("--participant-identifier requires a value");
+  }
+  if (args.provenanceStatement === true) {
+    errorExit("--provenance-statement requires a value");
+  }
+  if (args.provenanceStatementFile === true) {
+    errorExit("--provenance-statement-file requires a text file path");
+  }
+  if (args.provenanceStatement && args.provenanceStatementFile) {
+    errorExit("Use either --provenance-statement or --provenance-statement-file, not both");
+  }
+
+  let provenanceStatement = args.provenanceStatement || "";
+  if (args.provenanceStatementFile) {
+    provenanceStatement = readFileSync(resolve(args.provenanceStatementFile), "utf-8").trim();
+  }
+  const provenanceReferences = parseProvenanceReferencesFile(args.provenanceReferencesFile);
+  const provenanceRequested = (
+    Object.prototype.hasOwnProperty.call(args, "provenanceStatement") ||
+    Object.prototype.hasOwnProperty.call(args, "provenanceStatementFile") ||
+    Object.prototype.hasOwnProperty.call(args, "provenanceReferencesFile")
+  );
+
   const opts = {
     actorLabel: args.actorLabel || "Unknown Agent",
+    participantIdentifier: args.participantIdentifier || "",
     provider: args.provider || "Unknown Runtime",
     title: args.title || "",
     body,
+    provenanceStatement,
+    provenanceReferences,
+    provenanceRequested,
     recordType: cmd,
     contextLevel: args.contextLevel || "",
     contextReadConfirmed: args.contextReadConfirmed,

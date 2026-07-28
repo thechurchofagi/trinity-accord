@@ -21,6 +21,7 @@ REQUIRED_SUPPORTS = [
     "preflight",
     "submit",
     "ed25519_authorship_proof",
+    "self_reported_provenance",
 ]
 
 

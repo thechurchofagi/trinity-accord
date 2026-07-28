@@ -25,6 +25,7 @@ EXPECTED_DIAGNOSTIC_CODES = {
     "FINAL_CHAIN_FIELD_FORBIDDEN",
     "GUARDIAN_REQUEST_ONLY_ALLOWED_FROM_ECHO_OR_VERIFICATION",
     "HUMAN_PRIVATE_NAME_NOT_ALLOWED",
+    "INVALID_SELF_REPORTED_PROVENANCE",
     "LINKED_GUARDIAN_REQUEST_INCOMPLETE",
     "MISSING_AUTHORIZATION_CONTEXT",
     "MISSING_AUTHORSHIP_PROOF",
@@ -89,6 +90,17 @@ class TestFieldHelperContract:
     def test_record_type_presets_has_verification(self, helper):
         rtp = helper["record_type_presets"]
         assert "verification" in rtp
+
+    def test_core_routes_expose_optional_self_reported_provenance(self, helper):
+        presets = helper["record_type_presets"]
+        for record_type in ("echo", "verification", "guardian_application"):
+            assert "self_reported_provenance" in presets[record_type]["optional_blocks"]
+
+    def test_self_reported_provenance_fields_are_documented(self, helper):
+        fields = {entry["field"] for entry in helper["field_groups"]}
+        assert "self_reported_provenance.statement" in fields
+        assert "self_reported_provenance.references[].kind" in fields
+        assert "self_reported_provenance.references[].value" in fields
 
     def test_diagnostic_code_help_is_dict(self, helper):
         dch = helper["diagnostic_code_help"]

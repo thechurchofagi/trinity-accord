@@ -162,6 +162,47 @@ _REQUIRED_IDENTITY_FIELDS: frozenset[str] = frozenset({
 })
 
 # ---------------------------------------------------------------------------
+# Optional signed self-reported provenance block.
+# ---------------------------------------------------------------------------
+_SELF_REPORTED_PROVENANCE_FIELDS: frozenset[str] = frozenset({
+    "statement",
+    "references",
+    "self_declared_only",
+    "does_not_override_structured_provenance",
+    "does_not_by_itself_establish_autonomy",
+})
+
+_SELF_REPORTED_PROVENANCE_BOUNDARIES: frozenset[str] = frozenset({
+    "self_declared_only",
+    "does_not_override_structured_provenance",
+    "does_not_by_itself_establish_autonomy",
+})
+
+_SELF_REPORTED_PROVENANCE_REFERENCE_FIELDS: frozenset[str] = frozenset({
+    "kind",
+    "value",
+    "description",
+})
+
+_SELF_REPORTED_PROVENANCE_REFERENCE_KINDS: frozenset[str] = frozenset({
+    "agent_id",
+    "run_id",
+    "session_id",
+    "timestamp",
+    "url",
+    "sha256",
+    "signature",
+    "public_key",
+    "log_reference",
+    "other",
+})
+
+_SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH = 4000
+_SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT = 16
+_SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH = 2048
+_SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH = 500
+
+# ---------------------------------------------------------------------------
 # Forbidden chain fields — the gateway (or downstream record-chain writer)
 # assigns these; submitters must NOT include them.
 # ---------------------------------------------------------------------------
@@ -458,6 +499,145 @@ def validate_provenance_semantics(draft: dict[str, Any]) -> list[Diagnostic]:
                 suggested_fix="Rebuild with the current Builder.",
                 retry_allowed=True,
             ))
+
+    return diagnostics
+
+
+def validate_self_reported_provenance(draft: dict[str, Any]) -> list[Diagnostic]:
+    """Validate the optional signed first-person provenance support block.
+
+    The block is deliberately evidence-adjacent, not a proof or classification
+    field.  These checks validate shape and fixed boundaries only; they do not
+    infer truth from prose or promote a record into an autonomy counter.
+    """
+    diagnostics: list[Diagnostic] = []
+    if "self_reported_provenance" not in draft:
+        return diagnostics
+
+    provenance = draft.get("self_reported_provenance")
+
+    def invalid(field: str, message: str, suggested_fix: str) -> None:
+        diagnostics.append(_make_diagnostic(
+            code="INVALID_SELF_REPORTED_PROVENANCE",
+            severity="error",
+            field=f"record_draft.self_reported_provenance{field}",
+            message=message,
+            meaning=(
+                "Self-reported provenance is optional signed supporting material. "
+                "It cannot override structured provenance or establish autonomy by itself."
+            ),
+            suggested_fix=suggested_fix,
+            retry_allowed=True,
+        ))
+
+    if not isinstance(provenance, dict):
+        invalid("", "self_reported_provenance must be a JSON object.", "Remove the field or rebuild it with the current Builder.")
+        return diagnostics
+
+    unknown_fields = sorted(set(provenance) - _SELF_REPORTED_PROVENANCE_FIELDS)
+    if unknown_fields:
+        invalid(
+            "",
+            f"self_reported_provenance contains unsupported field(s): {', '.join(unknown_fields)}.",
+            "Keep only statement, references, and the three fixed boundary fields.",
+        )
+
+    statement = provenance.get("statement")
+    if not isinstance(statement, str) or not statement.strip():
+        invalid(
+            ".statement",
+            "self_reported_provenance.statement must be a non-empty string.",
+            "Provide a concise first-person provenance statement or omit the entire optional block.",
+        )
+    elif len(statement) > _SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH:
+        invalid(
+            ".statement",
+            f"self_reported_provenance.statement exceeds {_SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH} characters.",
+            f"Shorten the statement to at most {_SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH} characters.",
+        )
+
+    for boundary in sorted(_SELF_REPORTED_PROVENANCE_BOUNDARIES):
+        if provenance.get(boundary) is not True:
+            invalid(
+                f".{boundary}",
+                f"self_reported_provenance.{boundary} must be boolean true.",
+                "Rebuild with the current Builder; self-reported material cannot weaken its fixed boundaries.",
+            )
+
+    references = provenance.get("references")
+    if not isinstance(references, list):
+        invalid(
+            ".references",
+            "self_reported_provenance.references must be a JSON array.",
+            "Use an empty array when there are no supporting references.",
+        )
+        return diagnostics
+    if len(references) > _SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT:
+        invalid(
+            ".references",
+            f"self_reported_provenance.references exceeds {_SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT} items.",
+            f"Keep at most {_SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT} relevant public references.",
+        )
+
+    timestamp_pattern = re.compile(
+        r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+    )
+    for index, reference in enumerate(references):
+        field = f".references[{index}]"
+        if not isinstance(reference, dict):
+            invalid(field, "Each provenance reference must be a JSON object.", "Use kind, value, and optional description.")
+            continue
+
+        unknown_reference_fields = sorted(set(reference) - _SELF_REPORTED_PROVENANCE_REFERENCE_FIELDS)
+        if unknown_reference_fields:
+            invalid(
+                field,
+                f"Provenance reference contains unsupported field(s): {', '.join(unknown_reference_fields)}.",
+                "Keep only kind, value, and optional description.",
+            )
+
+        kind = reference.get("kind")
+        if kind not in _SELF_REPORTED_PROVENANCE_REFERENCE_KINDS:
+            invalid(
+                f"{field}.kind",
+                f"Unsupported provenance reference kind {kind!r}.",
+                f"Use one of: {', '.join(sorted(_SELF_REPORTED_PROVENANCE_REFERENCE_KINDS))}.",
+            )
+
+        value = reference.get("value")
+        if not isinstance(value, str) or not value.strip():
+            invalid(f"{field}.value", "Provenance reference value must be a non-empty string.", "Provide a public reference value.")
+        elif len(value) > _SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH:
+            invalid(
+                f"{field}.value",
+                f"Provenance reference value exceeds {_SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH} characters.",
+                "Shorten the public reference value.",
+            )
+        elif kind == "sha256" and not re.fullmatch(r"[0-9a-f]{64}", value):
+            invalid(f"{field}.value", "A sha256 reference must be 64 lowercase hexadecimal characters.", "Provide the exact lowercase SHA-256.")
+        elif kind == "url" and not re.fullmatch(r"https?://[^\s]+", value):
+            invalid(f"{field}.value", "A url reference must use a valid http or https URL.", "Provide a public http or https URL.")
+        elif kind == "timestamp" and not timestamp_pattern.fullmatch(value):
+            invalid(
+                f"{field}.value",
+                "A timestamp reference must be an ISO-8601 timestamp with a timezone.",
+                "Use a value such as 2026-07-27T12:34:56Z.",
+            )
+
+        description = reference.get("description")
+        if description is not None:
+            if not isinstance(description, str) or not description.strip():
+                invalid(
+                    f"{field}.description",
+                    "Provenance reference description must be a non-empty string when provided.",
+                    "Remove the description or explain briefly what the reference supports.",
+                )
+            elif len(description) > _SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH:
+                invalid(
+                    f"{field}.description",
+                    f"Provenance reference description exceeds {_SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH} characters.",
+                    "Shorten the reference description.",
+                )
 
     return diagnostics
 
@@ -1545,6 +1725,7 @@ def validate_submission(submission: dict[str, Any]) -> list[Diagnostic]:
     # --- provenance semantics ---
     if isinstance(draft, dict):
         diagnostics.extend(validate_provenance_semantics(draft))
+        diagnostics.extend(validate_self_reported_provenance(draft))
 
     # --- human name privacy ---
     if isinstance(draft, dict):
