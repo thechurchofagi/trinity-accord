@@ -12,6 +12,7 @@ on:
     branches:
       - main
     paths:
+      - "**"
       - "api/**"
       - "apps/record_chain_intake_gateway/**"
       - "*.md"
@@ -51,7 +52,6 @@ on:
       - ".github/workflows/homepage-status-sync.yml"
       - ".github/workflows/waiting-heartbeat-status-sync.yml"
       - ".github/workflows/homepage-deployment-receipt.yml"
-
 permissions:
   contents: read
   pages: write
