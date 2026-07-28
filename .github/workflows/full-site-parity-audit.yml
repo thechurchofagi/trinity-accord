@@ -1,0 +1,314 @@
+name: Full Site Parity Audit
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: 3dcd2b754adb52d4ff2c4dc13bbd60e9383cc188
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Confirm audited revision is still current main
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "3dcd2b754adb52d4ff2c4dc13bbd60e9383cc188"
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "3dcd2b754adb52d4ff2c4dc13bbd60e9383cc188"
+
+      - name: Wait for repaired page to reach production
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            body="$(curl -fsSL -H 'Cache-Control: no-cache, no-store' "https://www.trinityaccord.org/downloads/redteam-audit-2026-05-08/?deployment_wait=${GITHUB_RUN_ID}-${attempt}" || true)"
+            if grep -Fq 'href="/evidence/redteam-audit-2026-05-08/audit_report_eth_path2.json"' <<<"$body" \
+              && grep -Fq 'href="https://github.com/thechurchofagi/trinity-accord/blob/main/scripts/redteam-audit/trinity_full_redteam_audit.py"' <<<"$body"; then
+              echo "Repaired page is live."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo '::error::Repaired page did not reach production within the audit window.'
+          exit 1
+
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+
+      - name: Build with the production Jekyll action
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Restore reviewed committed machine artifacts exactly as production does
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo chown -R "$(id -u):$(id -g)" _site
+          rendered_downloads="$(mktemp -d)"
+          if test -d _site/downloads; then
+            cp -a _site/downloads/. "$rendered_downloads/"
+          fi
+          rm -rf _site/api _site/downloads _site/builder-bundles
+          cp -a api _site/api
+          mkdir -p _site/record-chain _site/downloads
+          cp -a record-chain/. _site/record-chain/
+          cp -a "$rendered_downloads/." _site/downloads/
+          rm -rf "$rendered_downloads"
+          cp -a downloads/. _site/downloads/
+          cp -a builder-bundles _site/builder-bundles
+          install -m 0644 downloads/record-chain-builder.mjs _site/builder-bundles/record-chain-builder.mjs
+
+      - name: Compare every public page and textual/code artifact with production
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import concurrent.futures
+          import hashlib
+          import html.parser
+          import json
+          import sys
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          ROOT = Path('_site')
+          SITE = 'https://www.trinityaccord.org'
+          TOKEN = f"full-parity-{time.time_ns()}"
+          TEXT_EXTENSIONS = {
+              '.html', '.json', '.xml', '.txt', '.js', '.mjs', '.css', '.csv',
+              '.svg', '.webmanifest', '.map', '.jsonld', '.cff'
+          }
+          MAX_TEXT_BYTES = 8 * 1024 * 1024
+          EXCLUDED_NAMES = {'CNAME', '.nojekyll'}
+          TRANSIENT_HTTP = {429, 500, 502, 503, 504}
+
+          def sha(data: bytes) -> str:
+              return hashlib.sha256(data).hexdigest()
+
+          def public_path_for(rel: str) -> str:
+              if rel == 'index.html':
+                  return '/'
+              if rel.endswith('/index.html'):
+                  return '/' + rel[:-len('index.html')]
+              return '/' + rel
+
+          def url_for(rel: str) -> str:
+              path = public_path_for(rel)
+              encoded_path = urllib.parse.quote(path, safe="/%:@-._~!$&'()*+,;=")
+              parsed = urllib.parse.urlsplit(SITE + encoded_path)
+              query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+              query.append(('full_site_parity', TOKEN))
+              return urllib.parse.urlunsplit(
+                  (parsed.scheme, parsed.netloc, parsed.path, urllib.parse.urlencode(query), '')
+              )
+
+          def fetch(rel: str) -> tuple[str, bytes, int, str]:
+              url = url_for(rel)
+              last_exc: Exception | None = None
+              for attempt in range(1, 6):
+                  req = urllib.request.Request(url, headers={
+                      'User-Agent': 'TrinityFullSiteParityAudit/1.2',
+                      'Cache-Control': 'no-cache, no-store, max-age=0',
+                      'Pragma': 'no-cache',
+                  })
+                  try:
+                      with urllib.request.urlopen(req, timeout=60) as resp:
+                          return rel, resp.read(), resp.status, resp.geturl()
+                  except urllib.error.HTTPError as exc:
+                      last_exc = exc
+                      if exc.code not in TRANSIENT_HTTP or attempt == 5:
+                          raise
+                  except (TimeoutError, urllib.error.URLError) as exc:
+                      last_exc = exc
+                      if attempt == 5:
+                          raise
+                  time.sleep(attempt * 1.5)
+              assert last_exc is not None
+              raise last_exc
+
+          def xml_semantic(data: bytes, *, normalize_atom_updated: bool = False):
+              root = ET.fromstring(data)
+              def walk(node):
+                  text = (node.text or '').strip()
+                  if normalize_atom_updated and node.tag == '{http://www.w3.org/2005/Atom}updated':
+                      text = '__BUILD_TIMESTAMP__'
+                  return (
+                      node.tag,
+                      tuple(sorted(node.attrib.items())),
+                      text,
+                      tuple(walk(child) for child in list(node)),
+                  )
+              return walk(root)
+
+          candidates: list[str] = []
+          html_files: list[str] = []
+          skipped_large: list[str] = []
+          for path in sorted(ROOT.rglob('*')):
+              if not path.is_file():
+                  continue
+              rel = path.relative_to(ROOT).as_posix()
+              if path.name in EXCLUDED_NAMES:
+                  continue
+              if path.suffix.lower() not in TEXT_EXTENSIONS:
+                  continue
+              if path.stat().st_size > MAX_TEXT_BYTES:
+                  skipped_large.append(rel)
+                  continue
+              candidates.append(rel)
+              if path.suffix.lower() == '.html':
+                  html_files.append(rel)
+
+          errors: list[str] = []
+          normalized_build_differences: list[str] = []
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+              future_map = {pool.submit(fetch, rel): rel for rel in candidates}
+              for future in concurrent.futures.as_completed(future_map):
+                  rel = future_map[future]
+                  try:
+                      got_rel, body, status, final_url = future.result()
+                      if status != 200:
+                          errors.append(f'{rel}: HTTP {status} final={final_url}')
+                          continue
+                      expected = (ROOT / got_rel).read_bytes()
+                      if body == expected:
+                          continue
+                      if got_rel == 'feed.xml':
+                          try:
+                              if xml_semantic(expected, normalize_atom_updated=True) == xml_semantic(
+                                  body, normalize_atom_updated=True
+                              ):
+                                  normalized_build_differences.append(
+                                      'feed.xml differs only in Jekyll Atom updated build timestamp'
+                                  )
+                                  continue
+                          except Exception:
+                              pass
+                      errors.append(
+                          f'{rel}: byte mismatch expected={sha(expected)} actual={sha(body)} '
+                          f'expected_bytes={len(expected)} actual_bytes={len(body)} final={final_url}'
+                      )
+                  except Exception as exc:
+                      errors.append(f'{rel}: fetch failed: {type(exc).__name__}: {exc}')
+
+          class LinkParser(html.parser.HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.links: list[str] = []
+              def handle_starttag(self, tag, attrs):
+                  data = dict(attrs)
+                  for key in ('href', 'src'):
+                      value = data.get(key)
+                      if value:
+                          self.links.append(value)
+
+          def built_target_for_path(path: str) -> list[Path]:
+              decoded = urllib.parse.unquote(path)
+              if decoded == '/':
+                  return [ROOT / 'index.html']
+              rel = decoded.lstrip('/')
+              out = [ROOT / rel]
+              if decoded.endswith('/'):
+                  out.append(ROOT / rel / 'index.html')
+              elif not Path(rel).suffix:
+                  out.append(ROOT / rel / 'index.html')
+                  out.append(ROOT / (rel + '.html'))
+              return out
+
+          broken_internal: set[str] = set()
+          linked_public_paths: set[str] = set()
+          for rel in html_files:
+              text = (ROOT / rel).read_text(encoding='utf-8', errors='replace')
+              parser = LinkParser()
+              parser.feed(text)
+              base_path = public_path_for(rel)
+              for raw in parser.links:
+                  raw = raw.strip()
+                  if not raw or raw.startswith(('#', 'mailto:', 'tel:', 'javascript:', 'data:')):
+                      continue
+                  absolute = urllib.parse.urljoin(SITE + base_path, raw)
+                  parsed = urllib.parse.urlsplit(absolute)
+                  if parsed.netloc not in {'www.trinityaccord.org', 'trinityaccord.org'}:
+                      continue
+                  path = parsed.path or '/'
+                  linked_public_paths.add(path)
+                  if not any(target.is_file() for target in built_target_for_path(path)):
+                      broken_internal.add(f'{rel} -> {raw} ({path})')
+
+          errors.extend(f'broken built internal link: {item}' for item in sorted(broken_internal))
+
+          sitemap_path = ROOT / 'sitemap.xml'
+          if not sitemap_path.is_file():
+              errors.append('sitemap.xml missing from built artifact')
+              sitemap_urls: list[str] = []
+          else:
+              try:
+                  tree = ET.fromstring(sitemap_path.read_bytes())
+                  sitemap_urls = [
+                      (node.text or '').strip()
+                      for node in tree.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
+                      if (node.text or '').strip()
+                  ]
+              except Exception as exc:
+                  errors.append(f'sitemap.xml parse failed: {exc}')
+                  sitemap_urls = []
+
+          built_public_paths = {public_path_for(rel) for rel in candidates}
+          sitemap_paths = {
+              urllib.parse.unquote(urllib.parse.urlsplit(url).path or '/')
+              for url in sitemap_urls
+              if urllib.parse.urlsplit(url).netloc in {'www.trinityaccord.org', 'trinityaccord.org'}
+          }
+          missing_from_build = sorted(path for path in sitemap_paths if path not in built_public_paths)
+          errors.extend(f'sitemap URL absent from built public inventory: {path}' for path in missing_from_build)
+
+          report = {
+              'audited_main_sha': '3dcd2b754adb52d4ff2c4dc13bbd60e9383cc188',
+              'textual_code_artifacts_compared': len(candidates),
+              'html_pages_compared': len(html_files),
+              'linked_public_paths_checked_against_build': len(linked_public_paths),
+              'sitemap_urls': len(sitemap_urls),
+              'oversized_textual_files_skipped': skipped_large,
+              'normalized_build_differences': normalized_build_differences,
+              'errors': errors,
+          }
+          Path('full-site-parity-report.json').write_text(
+              json.dumps(report, indent=2, ensure_ascii=False, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(report, indent=2, ensure_ascii=False))
+
+          if errors:
+              print(f'FAIL: {len(errors)} parity/link errors detected', file=sys.stderr)
+              for error in errors:
+                  print(f'  - {error}', file=sys.stderr)
+              sys.exit(1)
+          print('PASS: every built HTML page and eligible public textual/code artifact matches production; only explicitly normalized build timestamps may differ; internal links and sitemap inventory are consistent')
+          PY
+
+      - name: Upload full-site parity report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: full-site-parity-report
+          path: full-site-parity-report.json
+          if-no-files-found: warn
+          retention-days: 30
