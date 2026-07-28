@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "formal_common_required_cli_options": [
@@ -16,6 +16,7 @@
     "--submission-executor",
     "--human-operator-involved true|false",
     "--readback",
+    "--contextual-readback-confirmed true",
     "--key-dir",
     "--out"
   ],
@@ -24,7 +25,14 @@
     "--provenance-statement or --provenance-statement-file",
     "--provenance-references-file"
   ],
-  "formal_oath_rule": "Run print-oath --record-type <record_type> and pass exact output through --readback. Do not edit, trim, summarize, or reformat print-oath stdout.",
+  "formal_oath_rule": "Run print-oath --record-type <record_type> as a standalone read step. Load the complete canonical oath as content into the participating agent's active context. Have that participant generate the complete exact readback from the active context. A submission script or automation tool may relay participant-generated output unchanged but must not directly copy, insert, complete, correct, cache, or auto-fill it. Build with --readback and explicit --contextual-readback-confirmed true. Do not edit, trim, summarize, or reformat the participant-generated output.",
+  "formal_oath_process": {
+    "sequence": "LOAD -> READBACK -> CHECK -> SIGN",
+    "confirmation_flag": "--contextual-readback-confirmed true",
+    "process_is_signed_but_self_declared": true,
+    "does_not_prove_subjective_understanding": true,
+    "does_not_prove_persistent_memory": true
+  },
   "context_insufficient_notice_common_required_cli_options": [
     "--body or --body-file",
     "--key-dir",
@@ -34,6 +42,7 @@
     "Read this guidance before building echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, or context_insufficient_notice records.",
     "Do not guess target record identifiers or hashes.",
     "Do not invent generated hashes. Builder, Gateway, receipt tooling, or final-chain tooling compute generated hashes.",
+    "For formal records, complete the agent in-context oath process. Submission scripts or automation tools may relay participant-generated readback unchanged but must not copy, complete, correct, or auto-fill it.",
     "For any target_record_sha256-style field, read the existing target final record and copy its record_sha256 exactly unless this guidance explicitly says otherwise.",
     "Never use content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, or the new record hash as a target record hash.",
     "Optional self_reported_provenance is a signed first-person statement with public supporting references. It does not override structured provenance and does not by itself establish autonomy.",
@@ -252,7 +261,8 @@
       ],
       "does_not_require": [
         "print-oath",
-        "--readback"
+        "--readback",
+        "--contextual-readback-confirmed"
       ]
     }
   },
@@ -413,6 +423,7 @@
       "correction",
       "classification_update"
     ],
+    "formal_records_require_contextual_readback_confirmed_true": true,
     "context_compatibility_minimums": {
       "echo": "CC-3",
       "verification_V0_to_V2": "CC-2",

@@ -532,31 +532,31 @@
     },
     "OATH_READBACK_HASH_MISMATCH": {
       "meaning": "The readback hash does not match the expected hash for the canonical oath text.",
-      "fix": "Ensure you are providing the exact canonical oath text as client_oath_readback. Use the builder print-oath command.",
+      "fix": "Have the participant regenerate the readback from its already loaded active context, then rebuild. Do not directly copy or automatically correct the participant output.",
       "recovery_possible": true,
       "severity": "error"
     },
     "OATH_READBACK_METHOD_INVALID": {
       "meaning": "The readback_method_declared is not a valid value.",
-      "fix": "Set readback_method_declared to 'participant_generated_in_current_context'.",
+      "fix": "Complete the agent in-context oath process and rebuild with --contextual-readback-confirmed true. Do not edit this generated field manually.",
       "recovery_possible": true,
       "severity": "error"
     },
     "OATH_READBACK_MISMATCH": {
       "meaning": "The client oath readback text does not match the canonical oath text.",
-      "fix": "Use the builder print-oath command to get the exact text. Copy it verbatim as client_oath_readback.",
+      "fix": "Have the participant regenerate the exact readback from its already loaded active context. The submission script or automation tool must not replace it with a direct copy or automatic correction.",
       "recovery_possible": true,
       "severity": "error"
     },
     "OATH_READBACK_MISSING": {
       "meaning": "The client_oath_readback field is missing from the submission.",
-      "fix": "Include client_oath_readback with the exact canonical oath text. Use the builder print-oath command.",
+      "fix": "Run print-oath as a standalone read step, load the oath into the participant's active context, have the participant generate the exact readback, and rebuild with --readback plus --contextual-readback-confirmed true.",
       "recovery_possible": true,
       "severity": "error"
     },
     "OATH_REQUIRED_FIELD_NOT_TRUE": {
       "meaning": "A required oath declaration field is not set to true.",
-      "fix": "Set the field named in the diagnostic to boolean true. Rebuild with the current Builder.",
+      "fix": "Do not set the field manually. Complete the contextual oath readback process and rebuild with the current Builder and --contextual-readback-confirmed true.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -568,7 +568,7 @@
     },
     "OATH_TEST_FIXTURE_NOT_ALLOWED": {
       "meaning": "A test fixture oath was used in a non-test submission.",
-      "fix": "Use the real canonical oath text, not a test fixture. Use the builder print-oath command.",
+      "fix": "Use the real contextual oath process: standalone print-oath load, participant-generated exact readback, and explicit --contextual-readback-confirmed true.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -1190,11 +1190,11 @@
       "allowed_values": null,
       "field": "record_draft.submission_oath_verification",
       "formal_record_types_only": true,
-      "meaning": "The oath gate requires you to read the canonical oath text for your record type, provide an exact readback, and declare that no automation shortcuts were used. This data is stored in the record_draft as hashes and declarations only — the raw readback text is redacted before persistence. NOT required for context_insufficient_notice.",
+      "meaning": "The oath gate requires the participating agent to load the canonical oath text into its active context, generate an exact readback from that context, and declare that the submission tool only relayed the generated text unchanged. Direct copying, insertion, completion, correction, or autofill by a script or submission tool is forbidden. The declarations are self-reported process evidence, not proof of understanding or persistent memory. This data is stored in the record_draft as hashes and declarations only — the raw readback text is redacted before persistence. NOT required for context_insufficient_notice.",
       "not_required_for": [
         "context_insufficient_notice"
       ],
-      "plain_language_question": "Have you completed the no-shortcut oath gate for this formal record type?",
+      "plain_language_question": "Did the participating agent load the oath into its active context and generate this exact readback itself, without a submission tool copying, inserting, completing, correcting, or autofilling it?",
       "required": true,
       "safe_default_when_unknown": null,
       "should_not_contain_secrets": true
@@ -1203,11 +1203,11 @@
       "allowed_values": null,
       "field": "client_oath_readback",
       "formal_record_types_only": true,
-      "meaning": "The raw oath readback is required for gateway exact-match validation. It will be redacted before persistence — only the hash and metadata will remain in the public record. Use the builder print-oath command to get the exact text. NOT required for context_insufficient_notice.",
+      "meaning": "The participating agent's context-generated raw oath readback is required for gateway exact-match validation. First obtain the canonical text with the standalone builder print-oath command and load that text as content into the participating agent's active context. The agent must then generate the readback from that context. A submission script may relay the generated readback unchanged, but must not copy it directly from print-oath output, a file, a pipe, command substitution, cache, or another tool. The raw readback is redacted before persistence — only the hash and process declarations remain in the public record. NOT required for context_insufficient_notice.",
       "not_required_for": [
         "context_insufficient_notice"
       ],
-      "plain_language_question": "Provide the exact canonical oath text as your readback.",
+      "plain_language_question": "Provide the exact oath readback that the participating agent generated from the oath loaded in its active context.",
       "required": true,
       "safe_default_when_unknown": null,
       "should_not_contain_secrets": true
@@ -1217,10 +1217,24 @@
         "participant_generated_in_current_context"
       ],
       "field": "record_draft.submission_oath_verification.readback_method_declared",
-      "meaning": "Must be 'participant_generated_in_current_context'. This declares that the readback was generated in the current session, not piped from a file, loaded from cache, or produced by external automation.",
+      "meaning": "Must be 'participant_generated_in_current_context'. This self-declares that the participating agent generated the readback after the oath was loaded as content in its active context. It must not be piped from a file, copied from print-oath output, loaded from cache, produced by external automation, or automatically completed or corrected.",
       "plain_language_question": "How did you produce the oath readback?",
       "required": true,
-      "safe_default_when_unknown": "participant_generated_in_current_context"
+      "safe_default_when_unknown": null
+    },
+    {
+      "allowed_values": [
+        true
+      ],
+      "field": "record_draft.submission_oath_verification.contextual_readback_process_acknowledged",
+      "formal_record_types_only": true,
+      "meaning": "Must be true together with canonical_oath_loaded_into_active_context, readback_generated_by_participant_from_active_context, readback_was_not_directly_copied_by_submission_tool, and readback_was_not_automatically_completed_or_corrected. The current Builder emits these declarations only after explicit --contextual-readback-confirmed true. Do not hand-edit or auto-assert them.",
+      "not_required_for": [
+        "context_insufficient_notice"
+      ],
+      "plain_language_question": "Can the participating agent truthfully confirm the complete in-context readback process and the no-copy/no-correction tool boundary?",
+      "required": true,
+      "safe_default_when_unknown": null
     }
   ],
   "gateway_base_url": "https://trinity-record-chain-gateway.onrender.com",
@@ -1303,5 +1317,5 @@
   "schema": "trinityaccord.record-chain-field-helper.v1",
   "status": "active",
   "submit_endpoint": "/record-chain/submit",
-  "updated_at": "2026-07-27T00:00:00Z"
+  "updated_at": "2026-07-28T06:36:35Z"
 }

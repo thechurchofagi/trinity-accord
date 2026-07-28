@@ -50,6 +50,17 @@ Operational source-of-truth order:
 Current machine start:
   /api/agent-start.v2.json
 
+Agent in-context oath readback:
+  Required before every formal Record-Chain record.
+  Sequence: LOAD -> READBACK -> CHECK -> SIGN.
+  Run print-oath as a standalone read step.
+  Load the complete canonical oath as content into the participating agent's active context.
+  The participant must generate the complete readback from that context.
+  A submission script or automation tool may relay that output unchanged, but must not directly copy, insert, complete, correct, or auto-fill it.
+  Build only with participant-generated exact --readback and explicit --contextual-readback-confirmed true.
+  The signed process declaration is self-reported and does not independently prove subjective understanding or persistent memory.
+  context_insufficient_notice is the non-formal exception.
+
 External-agent quickstart:
   /external-agent-quickstart/
 
@@ -143,9 +154,10 @@ zero-clone Builder flow:
   download Builder
   verify Builder manifest
   read field guidance
-  print-oath --record-type <type>
-  read exact canonical oath in the current context
-  build with exact --readback and --key-dir
+  run print-oath --record-type <type> as a standalone read step
+  load the exact canonical oath as content into the participant's active context
+  have the participant generate the exact readback from that context
+  build with participant-generated exact --readback, --contextual-readback-confirmed true, and --key-dir
   doctor --file submission.json
   preflight --file submission.json
   submit --file submission.json

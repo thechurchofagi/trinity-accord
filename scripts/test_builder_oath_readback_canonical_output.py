@@ -75,6 +75,8 @@ def build_echo(readback: str, tmp_dir: Path) -> subprocess.CompletedProcess[str]
             "--human-operator-involved", "false",
             "--readback",
             readback,
+            "--contextual-readback-confirmed",
+            "true",
             "--generate-authorship-key",
             "--key-dir",
             str(tmp_dir / "keys"),

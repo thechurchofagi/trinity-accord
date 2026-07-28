@@ -221,9 +221,16 @@ def _build_oath_for_record_type(record_type: str, draft: dict[str, Any]) -> tupl
         "readback_was_not_summary_or_paraphrase": True,
         "readback_was_not_generated_by_external_automation": True,
         "readback_was_not_auto_filled_by_builder": True,
+        "canonical_oath_loaded_into_active_context": True,
+        "readback_generated_by_participant_from_active_context": True,
+        "readback_was_not_directly_copied_by_submission_tool": True,
+        "readback_was_not_automatically_completed_or_corrected": True,
+        "contextual_readback_process_acknowledged": True,
         "no_shortcut_oath_acknowledged": True,
         "oath_does_not_prove_subjective_understanding": True,
         "oath_verifies_exact_readback_only": True,
+        "contextual_readback_process_is_self_declared": True,
+        "contextual_readback_does_not_prove_persistent_memory": True,
     }
     return canonical_text, verification
 

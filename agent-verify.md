@@ -48,7 +48,7 @@ V4+, V6, V7, and V8 are historical-only. New work uses `independent_reproduction
 
 The current public write path is the **Record-Chain Intake Gateway**.
 
-Download the **canonical zero-clone Builder download** from [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs), verify it against the current Builder bundle manifest, and use the exact oath/readback flow.
+Download the **canonical zero-clone Builder download** from [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs), verify it against the current Builder bundle manifest, and use the agent in-context oath/readback flow: standalone oath load, participant-generated exact readback, and explicit `--contextual-readback-confirmed true`. Submission scripts or automation tools may relay that output unchanged but must not copy, complete, correct, or auto-fill it.
 
 Run Builder doctor, then POST the same payload to the current endpoint `/record-chain/preflight`. Submit accepted payloads to the current endpoint `/record-chain/submit`. Save the receipt and check public status before claiming final inclusion. A receipt is intake-only.
 

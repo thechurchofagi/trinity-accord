@@ -107,6 +107,8 @@ def assert_builder_command_fails(args: list[str], expected_text: str) -> None:
             "false",
             "--readback",
             "not-used-because-validation-should-fail-before-oath",
+            "--contextual-readback-confirmed",
+            "true",
             "--key-dir",
             str(Path(tmp) / "keys"),
             "--out",

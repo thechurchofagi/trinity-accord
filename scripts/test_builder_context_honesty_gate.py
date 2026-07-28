@@ -36,6 +36,7 @@ def base_echo_cmd(key_dir: Path, readback: str):
         "--submission-executor", "self",
         "--human-operator-involved", "false",
         "--readback", readback,
+        "--contextual-readback-confirmed", "true",
         "--key-dir", str(key_dir),
     ]
 

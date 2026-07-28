@@ -103,8 +103,9 @@ def main() -> None:
                 "--discovery-mode", "user_task_context",
                 "--record-decision", "human",
                 "--submission-executor", "self",
-            "--human-operator-involved", "false",
+                "--human-operator-involved", "false",
                 "--readback", canonical_oath,
+                "--contextual-readback-confirmed", "true",
                 "--generate-authorship-key",
                 "--key-dir", str(tmp_key),
                 "--out", str(tmp_echo),
@@ -127,6 +128,8 @@ def main() -> None:
                 errors.append("echo: missing submission_oath_verification")
             elif oath.get("readback_was_not_auto_filled_by_builder") is not True:
                 errors.append("echo: readback_was_not_auto_filled_by_builder not true")
+            elif oath.get("contextual_readback_process_acknowledged") is not True:
+                errors.append("echo: contextual_readback_process_acknowledged not true")
             tmp_echo.unlink()
 
     # Test 8: Embedded oath policy SHA256 matches api/record-chain-oath-policy.v1.json

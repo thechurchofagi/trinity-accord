@@ -533,10 +533,14 @@ function testHelpNoMyGuardianId() {
 // ── Test 12: help contains --context-read-confirmed true ────────────
 
 function testHelpIncludesContextReadConfirmed() {
-  console.log("Test 12: help contains --context-read-confirmed true");
+  console.log("Test 12: help contains explicit context and oath confirmations");
   const { stdout } = runBuilder("help");
   assert.ok(stdout.includes("--context-read-confirmed true"), "Help must include --context-read-confirmed true");
-  console.log("  ✅ Help contains --context-read-confirmed true");
+  assert.ok(
+    stdout.includes("--contextual-readback-confirmed true"),
+    "Help must include --contextual-readback-confirmed true"
+  );
+  console.log("  ✅ Help contains explicit context and oath confirmations");
 }
 
 // ── Test 13: Guardian application builds without --oath ─────────────
@@ -570,6 +574,7 @@ function testGuardianApplicationWithoutOath() {
       --submission-executor self \\
       --human-operator-involved false \\
       --readback "${oath.replace(/"/g, '\\"')}" \\
+      --contextual-readback-confirmed true \\
       --key-dir "${keyDir}" \\
       --out "${outFile}"`
   );
@@ -676,6 +681,7 @@ function testVerificationV6Fails() {
       --submission-executor self \\
       --human-operator-involved false \\
       --readback "${oath.replace(/"/g, '\\"')}" \\
+      --contextual-readback-confirmed true \\
       --key-dir "${keyDir}" \\
       --out "${outFile}"`
   );
@@ -713,6 +719,7 @@ function testSelfExecutorHumanInvolvedFails() {
       --submission-executor self \\
       --human-operator-involved true \\
       --readback "${oath.replace(/"/g, '\\"')}" \\
+      --contextual-readback-confirmed true \\
       --key-dir "${keyDir}" \\
       --out "${outFile}"`
   );
@@ -805,6 +812,7 @@ function testSelfReportedProvenanceAcrossCoreRoutes() {
       "--provenance-statement-file", statementFile,
       "--provenance-references-file", referencesFile,
       "--readback", oath,
+      "--contextual-readback-confirmed", "true",
       "--key-dir", keyDir,
       "--out", outFile,
     ];

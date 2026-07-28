@@ -27,7 +27,8 @@ ECHO_CTX = [
     "--discovery-mode", "user_task_context",
     "--record-decision", "human",
     "--submission-executor", "self",
-            "--human-operator-involved", "false",
+    "--human-operator-involved", "false",
+    "--contextual-readback-confirmed", "true",
 ]
 
 def ok(msg):

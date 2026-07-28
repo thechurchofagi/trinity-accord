@@ -39,6 +39,7 @@ def main():
             "--context-sufficient-for-selected-action", "true",
             "--loaded-urls", "https://www.trinityaccord.org/agent-start/",
             "--readback", "dummy",
+            "--contextual-readback-confirmed", "true",
             "--key-dir", str(Path(td) / "keys"),
             "--out", str(Path(td) / "submission.json"),
         ]

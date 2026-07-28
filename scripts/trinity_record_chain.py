@@ -123,6 +123,28 @@ FORMAL_OATH_REQUIRED_TYPES = frozenset(
     if rtype not in OATH_EXEMPT_TYPES and rtype not in AUTHORSHIP_EXEMPT_TYPES
 )
 
+CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS = (
+    "canonical_oath_loaded_into_active_context",
+    "readback_generated_by_participant_from_active_context",
+    "readback_was_not_directly_copied_by_submission_tool",
+    "readback_was_not_automatically_completed_or_corrected",
+    "contextual_readback_process_acknowledged",
+    "contextual_readback_process_is_self_declared",
+    "contextual_readback_does_not_prove_persistent_memory",
+)
+
+
+def oath_policy_requires_contextual_readback(oath: dict[str, Any]) -> bool:
+    """Return true for oath policy v1.2.0+ without breaking old final records."""
+    version = str(oath.get("oath_policy_version") or "")
+    try:
+        numeric_parts = [int(part) for part in version.split(".")]
+    except ValueError:
+        return False
+    numeric = tuple((numeric_parts + [0, 0, 0])[:3])
+    return numeric >= (1, 2, 0)
+
+
 # Historical compatibility exceptions for records that predate stricter
 # verification rules (9-field boundary, signature re-verification, CIN
 # authorship). These exceptions apply ONLY to records with record_index <=
@@ -303,6 +325,11 @@ def _guardian_activation_assessment(
             if oath.get(field) is not True:
                 reasons.append("oath_readback_not_verified")
                 break
+        if oath_policy_requires_contextual_readback(oath):
+            for field in CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS:
+                if oath.get(field) is not True:
+                    reasons.append("contextual_oath_readback_not_verified")
+                    break
 
     ctx = _as_dict(record.get("context_readiness"))
     declared_cc = _parse_cc_level(ctx.get("declared_context_level"))
@@ -1561,6 +1588,8 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             "not_successor_reception", "receipt_is_not_final_inclusion",
             "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
         ]
+        if oath_policy_requires_contextual_readback(oath):
+            required_bools.extend(CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS)
 
         # Historical records may predate the new oath fields
         rid = obj.get("record_id")

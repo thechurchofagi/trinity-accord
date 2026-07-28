@@ -33,7 +33,21 @@ REQUIRED_BUILDER_CONTEXT_ARGS = [
     "--discovery-mode", "user_task_context",
     "--record-decision", "human",
     "--submission-executor", "self",
-            "--human-operator-involved", "false",
+    "--human-operator-involved", "false",
+    "--contextual-readback-confirmed", "true",
+]
+
+CONTEXTUAL_READBACK_DECLARATIONS = [
+    "canonical_oath_loaded_into_active_context",
+    "readback_generated_by_participant_from_active_context",
+    "readback_was_not_directly_copied_by_submission_tool",
+    "readback_was_not_automatically_completed_or_corrected",
+    "contextual_readback_process_acknowledged",
+]
+
+CONTEXTUAL_READBACK_BOUNDARIES = [
+    "contextual_readback_process_is_self_declared",
+    "contextual_readback_does_not_prove_persistent_memory",
 ]
 
 REQUIRED_VERIFICATION_CONTENT_ARGS = [
@@ -71,11 +85,17 @@ def main() -> None:
             errors.append("no_shortcut_policy.required_declarations is empty")
         if len(nsp.get("required_declarations", [])) < 10:
             errors.append(f"no_shortcut_policy.required_declarations has {len(nsp.get('required_declarations', []))} items, expected 10+")
+        for field in CONTEXTUAL_READBACK_DECLARATIONS:
+            if field not in nsp.get("required_declarations", []):
+                errors.append(f"no_shortcut_policy.required_declarations missing {field}")
         boundary = nsp.get("boundary", {})
         if not boundary.get("oath_does_not_prove_subjective_understanding"):
             errors.append("no_shortcut_policy.boundary.oath_does_not_prove_subjective_understanding missing or not true")
         if not boundary.get("oath_verifies_exact_readback_only"):
             errors.append("no_shortcut_policy.boundary.oath_verifies_exact_readback_only missing or not true")
+        for field in CONTEXTUAL_READBACK_BOUNDARIES:
+            if boundary.get(field) is not True:
+                errors.append(f"no_shortcut_policy.boundary.{field} missing or not true")
 
     # Test 4: Policy has all 8 modules
     modules = policy.get("modules", {})
@@ -158,6 +178,10 @@ def main() -> None:
         draft_props = schema.get("properties", {}).get("record_draft", {}).get("properties", {})
         if "submission_oath_verification" not in draft_props:
             errors.append("record_draft.properties missing submission_oath_verification")
+        oath_props = draft_props.get("submission_oath_verification", {}).get("properties", {})
+        for field in CONTEXTUAL_READBACK_DECLARATIONS + CONTEXTUAL_READBACK_BOUNDARIES:
+            if field not in oath_props:
+                errors.append(f"submission_oath_verification schema missing {field}")
         top_props = schema.get("properties", {})
         if "client_oath_readback" not in top_props:
             errors.append("top-level properties missing client_oath_readback")
@@ -257,10 +281,42 @@ def main() -> None:
             # oath must declare not auto-filled
             if oath.get("readback_was_not_auto_filled_by_builder") is not True:
                 errors.append("readback_was_not_auto_filled_by_builder is not true")
+            for field in CONTEXTUAL_READBACK_DECLARATIONS + CONTEXTUAL_READBACK_BOUNDARIES:
+                if oath.get(field) is not True:
+                    errors.append(f"{field} is not true")
             # oath modules should match record type
             expected_mods = ["common_submission_integrity_v1", "echo_integrity_v1"]
             if oath.get("oath_modules") != expected_mods:
                 errors.append(f"oath_modules mismatch: {oath.get('oath_modules')} != {expected_mods}")
+
+            # The exact readback alone is insufficient: formal actions also require
+            # an explicit confirmation of the in-context generation process.
+            args_without_contextual_confirmation = []
+            skip_next = False
+            for index, value in enumerate(REQUIRED_BUILDER_CONTEXT_ARGS):
+                if skip_next:
+                    skip_next = False
+                    continue
+                if value == "--contextual-readback-confirmed":
+                    skip_next = True
+                    continue
+                args_without_contextual_confirmation.append(value)
+            no_confirmation = subprocess.run(
+                ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
+                 "--body", "test", "--context-level", "CC-3",
+                 *args_without_contextual_confirmation,
+                 "--readback", canonical,
+                 "--key-dir", "/tmp/test-oath-key",
+                 "--out", "/tmp/test-missing-contextual-confirmation.json"],
+                capture_output=True, text=True, timeout=10,
+            )
+            if no_confirmation.returncode == 0:
+                errors.append("echo build without --contextual-readback-confirmed true should fail")
+            elif "--contextual-readback-confirmed true" not in (no_confirmation.stderr + no_confirmation.stdout):
+                errors.append(
+                    "missing contextual-readback confirmation error should mention "
+                    "--contextual-readback-confirmed true"
+                )
 
     # Test 17: Builder does not contain function that sets readback_text = canonicalOath
     if BUILDER.exists():
@@ -364,6 +420,7 @@ def main() -> None:
         result = subprocess.run(
             ["node", str(BUILDER), "echo", "--actor-label", "test", "--provider", "test",
              "--body", "test", "--context-level", "CC-3",
+             *REQUIRED_BUILDER_CONTEXT_ARGS,
              "--readback", plain_oath,
              "--generate-authorship-key", "--key-dir", "/tmp/test-plain-echo-key",
              "--out", "/tmp/test-plain-echo.json"],
@@ -372,7 +429,10 @@ def main() -> None:
         if result.returncode == 0:
             data = json.loads(Path("/tmp/test-plain-echo.json").read_text())
             guardian_req = data.get("record_draft", {}).get("optional_linked_guardian_application_request", {})
-            if guardian_req.get("does_participant_request_guardian_application_with_this_record") is not False:
+            if (
+                guardian_req
+                and guardian_req.get("does_participant_request_guardian_application_with_this_record") is not False
+            ):
                 errors.append("plain echo: does_participant_request_guardian_application_with_this_record should be false")
             oath = data.get("record_draft", {}).get("submission_oath_verification", {})
             if "guardian_stewardship_v1" in oath.get("oath_modules", []):
@@ -443,6 +503,20 @@ def main() -> None:
                     diags24 = _validate("echo", sub24, sub24["record_draft"])
                     if not any(d.code == "OATH_REQUIRED_HASH_MISSING" for d in diags24):
                         errors.append("test 24: missing participant_readback_sha256 should produce OATH_REQUIRED_HASH_MISSING")
+
+                    # Every new in-context process declaration and boundary is required.
+                    for field_name in CONTEXTUAL_READBACK_DECLARATIONS + CONTEXTUAL_READBACK_BOUNDARIES:
+                        mutated = copy.deepcopy(valid_submission)
+                        mutated["record_draft"]["submission_oath_verification"][field_name] = False
+                        diagnostics = _validate("echo", mutated, mutated["record_draft"])
+                        if not any(
+                            d.code == "OATH_REQUIRED_FIELD_NOT_TRUE"
+                            and d.field == f"record_draft.submission_oath_verification.{field_name}"
+                            for d in diagnostics
+                        ):
+                            errors.append(
+                                f"false {field_name} should produce OATH_REQUIRED_FIELD_NOT_TRUE"
+                            )
 
     # Test 25: JS/Python NFC canonicalization consistency
     # Use a test vector with precomposed (NFC) and decomposed (NFD) forms

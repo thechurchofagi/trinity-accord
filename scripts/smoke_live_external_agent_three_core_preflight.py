@@ -86,6 +86,7 @@ def _common_args(
         "--record-decision", "human",
         "--submission-executor", "self",
         "--human-operator-involved", "false",
+        "--contextual-readback-confirmed", "true",
         "--generate-authorship-key",
         "--key-dir", "./authorship-keys",
     ]

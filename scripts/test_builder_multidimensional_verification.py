@@ -53,6 +53,7 @@ def main() -> int:
             "--submission-executor", "self",
             "--human-operator-involved", "false",
             "--readback", oath,
+            "--contextual-readback-confirmed", "true",
             "--key-dir", str(key_dir),
             "--out", str(out),
         ]

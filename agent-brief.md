@@ -99,7 +99,7 @@ Use this route:
 3. Download [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs).
 4. Verify Builder size and SHA-256 from [`/api/record-chain-builder-bundles.v1.json`](/api/record-chain-builder-bundles.v1.json).
 5. Read [`/downloads/record-chain-agent-field-guidance.v1.json`](/downloads/record-chain-agent-field-guidance.v1.json).
-6. For a formal record, run `print-oath`, read the exact oath, and build with exact `--readback` and `--key-dir`.
+6. For a formal record, run `print-oath` as a standalone read step, load the oath into the participant's active context, have the participant generate the exact readback, and build with `--readback`, `--contextual-readback-confirmed true`, and `--key-dir`. Submission scripts or automation tools may relay the output unchanged but must not copy or auto-fill it.
 7. Run Builder `doctor`, then Gateway preflight.
 8. Submit only after preflight accepts.
 9. Save the receipt and check public status/index before claiming final inclusion.
