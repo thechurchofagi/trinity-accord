@@ -87,75 +87,86 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+
           pages_path = Path(".github/workflows/deploy-pages.yml")
           pages = pages_path.read_text(encoding="utf-8")
-          bare = '''  push:
-            branches:
-              - main
-          permissions:
-          '''.replace("          ", "")
-          expanded = '''  push:
-            branches:
-              - main
-            paths:
-              - "**"
-              - "api/**"
-              - "apps/record_chain_intake_gateway/**"
-              - "*.md"
-              - "*.json"
-              - "*.xml"
-              - "llms.txt"
-              - "llms-full.txt"
-              - "ai.txt"
-              - "CNAME"
-              - ".well-known/**"
-              - "_layouts/**"
-              - "_includes/**"
-              - "assets/**"
-              - "agent-record-chain-guidance/**"
-              - "bitcoin-inscription-mirrors/**"
-              - "builder-bundles/**"
-              - "context-ready/**"
-              - "docs/**"
-              - "downloads/**"
-              - "echoes/**"
-              - "evidence/**"
-              - "first-contact/**"
-              - "gateway-workflows/**"
-              - "identity/**"
-              - "nft-text-descriptions/**"
-              - "propagate/**"
-              - "record-chain-field-helper/**"
-              - "record-chain/index.md"
-              - "sitemap.xml"
-              - "scripts/**"
-              - "render.yaml"
-              - "tests/test_live_deployment_contract.py"
-              - "tests/test_round5_systemic_resilience.py"
-              - "_config.yml"
-              - ".github/workflows/deploy-pages.yml"
-              - ".github/workflows/render-manual-deploy.yml"
-              - ".github/workflows/homepage-status-sync.yml"
-              - ".github/workflows/waiting-heartbeat-status-sync.yml"
-              - ".github/workflows/homepage-deployment-receipt.yml"
-          permissions:
-          '''.replace("          ", "")
+          bare = "\n".join([
+              "  push:",
+              "    branches:",
+              "      - main",
+              "permissions:",
+              "",
+          ])
+          path_entries = [
+              "**",
+              "api/**",
+              "apps/record_chain_intake_gateway/**",
+              "*.md",
+              "*.json",
+              "*.xml",
+              "llms.txt",
+              "llms-full.txt",
+              "ai.txt",
+              "CNAME",
+              ".well-known/**",
+              "_layouts/**",
+              "_includes/**",
+              "assets/**",
+              "agent-record-chain-guidance/**",
+              "bitcoin-inscription-mirrors/**",
+              "builder-bundles/**",
+              "context-ready/**",
+              "docs/**",
+              "downloads/**",
+              "echoes/**",
+              "evidence/**",
+              "first-contact/**",
+              "gateway-workflows/**",
+              "identity/**",
+              "nft-text-descriptions/**",
+              "propagate/**",
+              "record-chain-field-helper/**",
+              "record-chain/index.md",
+              "sitemap.xml",
+              "scripts/**",
+              "render.yaml",
+              "tests/test_live_deployment_contract.py",
+              "tests/test_round5_systemic_resilience.py",
+              "_config.yml",
+              ".github/workflows/deploy-pages.yml",
+              ".github/workflows/render-manual-deploy.yml",
+              ".github/workflows/homepage-status-sync.yml",
+              ".github/workflows/waiting-heartbeat-status-sync.yml",
+              ".github/workflows/homepage-deployment-receipt.yml",
+          ]
+          expanded_lines = [
+              "  push:",
+              "    branches:",
+              "      - main",
+              "    paths:",
+              *[f'      - "{entry}"' for entry in path_entries],
+              "permissions:",
+              "",
+          ]
+          expanded = "\n".join(expanded_lines)
           if pages.count(bare) != 1:
               raise SystemExit("unexpected post-patch Pages trigger shape")
           pages_path.write_text(pages.replace(bare, expanded, 1), encoding="utf-8")
 
           test_path = Path("scripts/test_contextual_oath_review_regressions.py")
           test = test_path.read_text(encoding="utf-8")
-          old = '''    require(
-                  "paths:" not in push_block,
-                  "every main successor must trigger Pages so a stale-source abort cannot strand Gateway ahead",
-              )
-          '''.replace("          ", "")
-          new = '''    require(
-                  '      - "**"' in push_block,
-                  "every main successor must trigger Pages so a stale-source abort cannot strand Gateway ahead",
-              )
-          '''.replace("          ", "")
+          old = (
+              "    require(\n"
+              "        \"paths:\" not in push_block,\n"
+              "        \"every main successor must trigger Pages so a stale-source abort cannot strand Gateway ahead\",\n"
+              "    )\n"
+          )
+          new = (
+              "    require(\n"
+              "        '      - \"**\"' in push_block,\n"
+              "        \"every main successor must trigger Pages so a stale-source abort cannot strand Gateway ahead\",\n"
+              "    )\n"
+          )
           if test.count(old) != 1:
               raise SystemExit("unexpected Pages regression assertion shape")
           test_path.write_text(test.replace(old, new, 1), encoding="utf-8")
@@ -165,12 +176,14 @@ jobs:
         if: failure()
         run: |
           set -euo pipefail
-          cp /tmp/pr767-patch.log scripts/_apply_pr767_late_review_failure.log
-          git config user.name "Trinity Agent"
-          git config user.email "agent@trinityaccord.org"
-          git add scripts/_apply_pr767_late_review_failure.log
-          git commit -m "chore: capture late review patch failure" || true
-          git push origin HEAD:fix/pr767-late-review-20260728
+          if test -f /tmp/pr767-patch.log; then
+            cp /tmp/pr767-patch.log scripts/_apply_pr767_late_review_failure.log
+            git config user.name "Trinity Agent"
+            git config user.email "agent@trinityaccord.org"
+            git add scripts/_apply_pr767_late_review_failure.log
+            git commit -m "chore: capture late review patch failure" || true
+            git push origin HEAD:fix/pr767-late-review-20260728
+          fi
 
       - name: Install test dependencies
         if: success()
@@ -195,12 +208,14 @@ jobs:
         if: failure()
         run: |
           set -euo pipefail
-          cp /tmp/pr767-tests.log scripts/_apply_pr767_late_review_test_failure.log
-          git config user.name "Trinity Agent"
-          git config user.email "agent@trinityaccord.org"
-          git add scripts/_apply_pr767_late_review_test_failure.log
-          git commit -m "chore: capture late review test failure" || true
-          git push origin HEAD:fix/pr767-late-review-20260728
+          if test -f /tmp/pr767-tests.log; then
+            cp /tmp/pr767-tests.log scripts/_apply_pr767_late_review_test_failure.log
+            git config user.name "Trinity Agent"
+            git config user.email "agent@trinityaccord.org"
+            git add scripts/_apply_pr767_late_review_test_failure.log
+            git commit -m "chore: capture late review test failure" || true
+            git push origin HEAD:fix/pr767-late-review-20260728
+          fi
 
       - name: Remove temporary patch machinery
         if: success()
