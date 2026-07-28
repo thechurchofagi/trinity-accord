@@ -91,6 +91,7 @@ def main() -> None:
         validate_submission,
         validate_submission_oath,
         redact_transient_oath_readback,
+        compute_oath_policy_sha256,
         _OATH_REQUIRED_RECORD_TYPES,
     )
 
@@ -164,9 +165,7 @@ def main() -> None:
     import hashlib
     wrong_readback = "This is not the canonical oath text"
     policy = json.loads((ROOT / "api" / "record-chain-oath-policy.v1.json").read_text())
-    # Hash full policy JSON (same as gateway validation.py)
-    policy_json = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    policy_sha = hashlib.sha256(policy_json.encode("utf-8")).hexdigest()
+    policy_sha = compute_oath_policy_sha256(policy)
 
     # Build canonical oath for echo
     modules_obj = policy.get("modules", {})
@@ -184,6 +183,9 @@ def main() -> None:
 
     oath_block = {
         "schema": "trinityaccord.submission-oath-verification.v1",
+        "oath_policy": policy["policy_id"],
+        "oath_policy_schema": policy["schema"],
+        "oath_policy_version": policy["version"],
         "oath_policy_sha256": policy_sha,
         "oath_modules": expected_modules,
         "canonical_oath_text_sha256": canonical_hash,
@@ -214,6 +216,7 @@ def main() -> None:
         "oath_modules": expected_modules,
         "readback_text": wrong_readback,
         "readback_text_sha256": wrong_hash,
+        "readback_text_char_count": len(wrong_readback),
         "readback_method_declared": "participant_generated_in_current_context",
     }
     diags = validate_submission(_make_echo_submission(oath_block, client_oath))
@@ -235,6 +238,7 @@ def main() -> None:
         "oath_modules": expected_modules,
         "readback_text": canonical_text,
         "readback_text_sha256": canonical_hash,
+        "readback_text_char_count": len(canonical_text),
         "readback_method_declared": "participant_generated_in_current_context",
     }
     submission_with_oath = _make_echo_submission(oath_block, client_oath_full)

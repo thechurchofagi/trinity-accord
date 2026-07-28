@@ -29,6 +29,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -76,6 +77,7 @@ ARWEAVE_ARCHIVES = CHAIN / "arweave-archives"
 ANCHOR_STATUS_API = ROOT / "api" / "record-chain-anchor-status.json"
 ARWEAVE_INDEX_API = ROOT / "api" / "record-chain-arweave-index.json"
 GUARDIAN_REGISTRY = ROOT / "api" / "guardian-registry.json"
+OATH_POLICY_PATH = ROOT / "api" / "record-chain-oath-policy.v1.json"
 CHAIN_ID = "trinity-accord-public-reception-ledger"
 
 FORMAL_RECORD_TYPES = {
@@ -133,16 +135,218 @@ CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS = (
     "contextual_readback_does_not_prove_persistent_memory",
 )
 
+LEGACY_OATH_REQUIRED_DECLARATIONS = (
+    "oath_read",
+    "participant_readback_provided",
+    "readback_matches_canonical_oath",
+    "readback_was_not_piped_from_file",
+    "readback_was_not_generated_by_script",
+    "readback_was_not_loaded_from_cache",
+    "readback_was_not_summary_or_paraphrase",
+    "readback_was_not_generated_by_external_automation",
+    "readback_was_not_auto_filled_by_builder",
+    "no_shortcut_oath_acknowledged",
+)
+LEGACY_OATH_REQUIRED_BOUNDARIES = (
+    "oath_does_not_prove_subjective_understanding",
+    "oath_verifies_exact_readback_only",
+)
 
-def oath_policy_requires_contextual_readback(oath: dict[str, Any]) -> bool:
-    """Return true for oath policy v1.2.0+ without breaking old final records."""
+# The v1.2 contextual-readback policy was activated after R-000000102 was
+# already immutable. Compatibility is therefore bound to an existing record's
+# append-assigned identity, never to a participant-controlled version string.
+CONTEXTUAL_READBACK_ACTIVATION_RECORD_INDEX = 103
+
+CURRENT_OATH_POLICY = json.loads(OATH_POLICY_PATH.read_text(encoding="utf-8"))
+CURRENT_OATH_POLICY_ID = str(CURRENT_OATH_POLICY["policy_id"])
+CURRENT_OATH_POLICY_SCHEMA = str(CURRENT_OATH_POLICY["schema"])
+CURRENT_OATH_POLICY_VERSION = str(CURRENT_OATH_POLICY["version"])
+CURRENT_OATH_POLICY_SHA256 = str(CURRENT_OATH_POLICY["oath_policy_sha256"])
+_OATH_POLICY_HASH_METADATA_KEYS = {
+    "oath_policy_sha256",
+    "oath_policy_sha256_semantics",
+    "canonical_oath_text_hash_is_record_type_specific",
+}
+_CURRENT_OATH_POLICY_CORE = {
+    key: value
+    for key, value in CURRENT_OATH_POLICY.items()
+    if key not in _OATH_POLICY_HASH_METADATA_KEYS
+}
+_COMPUTED_CURRENT_OATH_POLICY_SHA256 = hashlib.sha256(
+    json.dumps(
+        _CURRENT_OATH_POLICY_CORE,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+).hexdigest()
+if CURRENT_OATH_POLICY_SHA256 != _COMPUTED_CURRENT_OATH_POLICY_SHA256:
+    raise RuntimeError(
+        "api/record-chain-oath-policy.v1.json oath_policy_sha256 metadata "
+        "does not match its canonical policy core"
+    )
+
+_CURRENT_NO_SHORTCUT_POLICY = CURRENT_OATH_POLICY.get("no_shortcut_policy")
+if not isinstance(_CURRENT_NO_SHORTCUT_POLICY, dict):
+    raise RuntimeError("current oath policy has no valid no_shortcut_policy")
+_CURRENT_REQUIRED_DECLARATIONS = _CURRENT_NO_SHORTCUT_POLICY.get(
+    "required_declarations"
+)
+_CURRENT_REQUIRED_BOUNDARIES = _CURRENT_NO_SHORTCUT_POLICY.get("boundary")
+if (
+    CURRENT_OATH_POLICY.get("status") != "active"
+    or not isinstance(_CURRENT_REQUIRED_DECLARATIONS, list)
+    or not _CURRENT_REQUIRED_DECLARATIONS
+    or not all(
+        isinstance(field, str) and field
+        for field in _CURRENT_REQUIRED_DECLARATIONS
+    )
+    or len(set(_CURRENT_REQUIRED_DECLARATIONS))
+    != len(_CURRENT_REQUIRED_DECLARATIONS)
+    or not isinstance(_CURRENT_REQUIRED_BOUNDARIES, dict)
+    or not _CURRENT_REQUIRED_BOUNDARIES
+    or not all(
+        isinstance(field, str) and field and expected is True
+        for field, expected in _CURRENT_REQUIRED_BOUNDARIES.items()
+    )
+):
+    raise RuntimeError("current oath policy has an invalid active declaration contract")
+CURRENT_OATH_REQUIRED_TRUE_FIELDS = tuple(
+    dict.fromkeys(
+        [
+            *_CURRENT_REQUIRED_DECLARATIONS,
+            *_CURRENT_REQUIRED_BOUNDARIES.keys(),
+        ]
+    )
+)
+
+# Exact policy identities observed in each immutable pre-v1.2 record range.
+# Binding the hash to its append-assigned range prevents a historical record
+# from being rewritten to use some *other* old-but-known policy identity.
+HISTORICAL_OATH_POLICY_BY_RECORD_RANGE = (
+    (1, 32, "1.0.0", "7ecc6908c9ac147d8d6d493f750c94d6117929e7dff2d18bcbc4c70527886ea4"),
+    (33, 43, "1.0.0", "9356e8c0955d7f17814dff1a93300cb271acfa21cfe39da63a7b5201364cb820"),
+    (44, 82, "1.0.0", "6327c8fbf16cb859d951c42f77c7e185c453df5f05cd648ff94c7eca4d3caf7d"),
+    (83, 102, "1.1.0", "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51"),
+)
+
+
+def _record_index_from_identity(record: dict[str, Any]) -> int | None:
+    """Return a consistent append-assigned record index, otherwise ``None``."""
+    index = record.get("record_index")
+    rid = record.get("record_id")
+    if isinstance(index, bool) or not isinstance(index, int) or index < 1:
+        return None
+    if not isinstance(rid, str) or not re.fullmatch(r"R-[0-9]{9}", rid):
+        return None
+    if int(rid.removeprefix("R-")) != index:
+        return None
+    return index
+
+
+def record_requires_contextual_readback(record: dict[str, Any]) -> bool:
+    """Fail closed unless the record is provably from the pre-v1.2 history."""
+    index = _record_index_from_identity(record)
+    return index is None or index >= CONTEXTUAL_READBACK_ACTIVATION_RECORD_INDEX
+
+
+def _oath_policy_identity_is_valid(
+    record: dict[str, Any],
+    oath: dict[str, Any],
+) -> bool:
     version = str(oath.get("oath_policy_version") or "")
-    try:
-        numeric_parts = [int(part) for part in version.split(".")]
-    except ValueError:
+    policy_hash = str(oath.get("oath_policy_sha256") or "")
+    if record_requires_contextual_readback(record):
+        return (
+            oath.get("oath_policy") == CURRENT_OATH_POLICY_ID
+            and oath.get("oath_policy_schema") == CURRENT_OATH_POLICY_SCHEMA
+            and version == CURRENT_OATH_POLICY_VERSION
+            and policy_hash == CURRENT_OATH_POLICY_SHA256
+        )
+    index = _record_index_from_identity(record)
+    if index is None:
         return False
-    numeric = tuple((numeric_parts + [0, 0, 0])[:3])
-    return numeric >= (1, 2, 0)
+    for first, last, expected_version, expected_hash in (
+        HISTORICAL_OATH_POLICY_BY_RECORD_RANGE
+    ):
+        if first <= index <= last:
+            return version == expected_version and policy_hash == expected_hash
+    return False
+
+
+def _current_oath_modules_for_record(
+    record: dict[str, Any],
+    record_type: str,
+) -> list[str]:
+    """Return exact current modules, including a truthfully linked Guardian request."""
+    modules = list(
+        CURRENT_OATH_POLICY.get("record_type_modules", {}).get(record_type, [])
+    )
+    linked = record.get("optional_linked_guardian_application_request")
+    linked_module = CURRENT_OATH_POLICY.get("linked_guardian_module")
+    if (
+        isinstance(linked, dict)
+        and linked.get(
+            "does_participant_request_guardian_application_with_this_record"
+        )
+        is True
+        and isinstance(linked_module, str)
+        and linked_module
+        and linked_module not in modules
+    ):
+        modules.append(linked_module)
+    return modules
+
+
+def _required_oath_true_fields_for_record(
+    record: dict[str, Any],
+) -> tuple[str, ...]:
+    """Return the exact declaration set applicable to this immutable identity."""
+    if record_requires_contextual_readback(record):
+        return CURRENT_OATH_REQUIRED_TRUE_FIELDS
+    return tuple(
+        dict.fromkeys(
+            [
+                *LEGACY_OATH_REQUIRED_DECLARATIONS,
+                *LEGACY_OATH_REQUIRED_BOUNDARIES,
+            ]
+        )
+    )
+
+
+def _current_canonical_oath(
+    record: dict[str, Any],
+    record_type: str,
+) -> tuple[str, str] | None:
+    """Return current canonical oath text and SHA-256, or fail closed."""
+    modules_obj = CURRENT_OATH_POLICY.get("modules")
+    canonicalization = CURRENT_OATH_POLICY.get("canonicalization")
+    if not isinstance(modules_obj, dict) or not isinstance(canonicalization, dict):
+        return None
+    joiner = canonicalization.get("module_joiner")
+    if not isinstance(joiner, str):
+        return None
+
+    parts: list[str] = []
+    for module_id in _current_oath_modules_for_record(record, record_type):
+        module = modules_obj.get(module_id)
+        if not isinstance(module, dict):
+            return None
+        label = module.get("label")
+        text = module.get("text")
+        if not isinstance(label, str) or not label or not isinstance(text, str):
+            return None
+        normalized_text = unicodedata.normalize(
+            "NFC",
+            text.replace("\r\n", "\n").replace("\r", "\n").strip(),
+        )
+        parts.append(f"=== {label} ({module_id}) ===\n\n{normalized_text}")
+
+    if not parts:
+        return None
+    canonical = unicodedata.normalize("NFC", joiner.join(parts).strip())
+    return canonical, hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 # Historical compatibility exceptions for records that predate stricter
@@ -311,25 +515,57 @@ def _guardian_activation_assessment(
     if not oath:
         reasons.append("missing_submission_oath_verification")
     else:
+        requires_contextual = record_requires_contextual_readback(record)
         modules = oath.get("oath_modules")
         if not isinstance(modules, list) or "guardian_stewardship_v1" not in modules:
             reasons.append("missing_guardian_stewardship_oath_module")
-        for field in (
-            "oath_read",
-            "participant_readback_provided",
-            "readback_matches_canonical_oath",
-            "no_shortcut_oath_acknowledged",
-            "oath_does_not_prove_subjective_understanding",
-            "oath_verifies_exact_readback_only",
+        if (
+            requires_contextual
+            and modules
+            != _current_oath_modules_for_record(record, "guardian_application")
         ):
+            reasons.append("contextual_oath_modules_invalid")
+        for field in _required_oath_true_fields_for_record(record):
             if oath.get(field) is not True:
-                reasons.append("oath_readback_not_verified")
+                reasons.append(
+                    "contextual_oath_readback_not_verified"
+                    if requires_contextual
+                    else "oath_readback_not_verified"
+                )
                 break
-        if oath_policy_requires_contextual_readback(oath):
-            for field in CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS:
-                if oath.get(field) is not True:
-                    reasons.append("contextual_oath_readback_not_verified")
-                    break
+        if not _oath_policy_identity_is_valid(record, oath):
+            reasons.append(
+                "contextual_oath_policy_not_current"
+                if requires_contextual
+                else "historical_oath_policy_unrecognized"
+            )
+        canonical_hash = oath.get("canonical_oath_text_sha256")
+        participant_hash = oath.get("participant_readback_sha256")
+        if (
+            not isinstance(canonical_hash, str)
+            or not _HEX64_RE.fullmatch(canonical_hash)
+            or not isinstance(participant_hash, str)
+            or not _HEX64_RE.fullmatch(participant_hash)
+            or canonical_hash != participant_hash
+        ):
+            reasons.append(
+                "contextual_oath_readback_not_verified"
+                if requires_contextual
+                else "oath_readback_not_verified"
+            )
+        if requires_contextual:
+            if oath.get("readback_method_declared") != "participant_generated_in_current_context":
+                reasons.append("contextual_oath_readback_not_verified")
+            expected_canonical = _current_canonical_oath(
+                record,
+                "guardian_application",
+            )
+            if (
+                expected_canonical is None
+                or canonical_hash != expected_canonical[1]
+                or participant_hash != expected_canonical[1]
+            ):
+                reasons.append("contextual_oath_readback_not_verified")
 
     ctx = _as_dict(record.get("context_readiness"))
     declared_cc = _parse_cc_level(ctx.get("declared_context_level"))
@@ -1174,6 +1410,28 @@ def require_record_target_binding(draft: dict[str, Any]) -> None:
         raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")
 
 
+def require_pending_oath_is_appendable(
+    draft: dict[str, Any],
+    *,
+    next_index: int,
+    source_path: Path,
+) -> None:
+    """Apply final-record oath rules before any append mutation begins."""
+    prospective = dict(draft)
+    prospective["record_index"] = next_index
+    prospective["record_id"] = record_id(next_index)
+    oath_errors: list[str] = []
+    _verify_oath_in_record(
+        prospective,
+        str(source_path.relative_to(ROOT)),
+        oath_errors,
+    )
+    if oath_errors:
+        raise ValueError(
+            "pending oath verification failed: " + "; ".join(oath_errors)
+        )
+
+
 def append_records(all_records: bool = False, allow_rejections: bool = False, pending_file: str | None = None, receipt_id: str | None = None, summary_json: str | None = None) -> None:
     ensure_dirs()
     if not (GENESIS / "genesis-batch-manifest.json").exists():
@@ -1243,6 +1501,12 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 verify_pending_record_authorship(signed_scope_draft)
                 draft = normalize_record_draft(signed_scope_draft)
                 require_record_target_binding(draft)
+                next_index = int(tip.get("latest_record_index") or 0) + 1
+                require_pending_oath_is_appendable(
+                    draft,
+                    next_index=next_index,
+                    source_path=path,
+                )
 
                 # --- A-066: Duplicate signed payload guard ---
                 # If an existing native record has the same signed_payload_sha256 and
@@ -1283,7 +1547,6 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                         "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
                     }
 
-                next_index = int(tip.get("latest_record_index") or 0) + 1
                 draft["record_index"] = next_index
                 draft["record_id"] = record_id(next_index)
                 draft["assigned_at"] = utc_now()
@@ -1588,8 +1851,16 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             "not_successor_reception", "receipt_is_not_final_inclusion",
             "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
         ]
-        if oath_policy_requires_contextual_readback(oath):
-            required_bools.extend(CONTEXTUAL_READBACK_REQUIRED_DECLARATIONS)
+        requires_contextual = record_requires_contextual_readback(obj)
+        if not _oath_policy_identity_is_valid(obj, oath):
+            if requires_contextual:
+                errors.append(
+                    f"{path}: oath policy must equal current "
+                    f"{CURRENT_OATH_POLICY_VERSION}/{CURRENT_OATH_POLICY_SHA256}"
+                )
+            else:
+                errors.append(f"{path}: historical oath policy identity is not recognized")
+        required_bools.extend(_required_oath_true_fields_for_record(obj))
 
         # Historical records may predate the new oath fields
         rid = obj.get("record_id")
@@ -1609,7 +1880,7 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
                 if naba.get(field) is True:
                     naba_validated.add(field)
 
-        for field in required_bools:
+        for field in dict.fromkeys(required_bools):
             if oath.get(field) is not True:
                 # Skip new oath fields for historical records
                 if compat and compat.get("allowed_skip_oath_new_fields") and field in historical_new_oath_fields:
@@ -1622,16 +1893,57 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
         # --- Phase 6B: strengthened oath hash verification ---
         # All formal records with submission_oath_verification must have
         # valid 64-hex-sha256 hash fields.
-        _HEX64 = re.compile(r"^[0-9a-f]{64}$")
         for hash_field in ("oath_policy_sha256", "canonical_oath_text_sha256", "participant_readback_sha256"):
             val = oath.get(hash_field)
-            if not val or not _HEX64.match(str(val)):
+            if not isinstance(val, str) or not _HEX64_RE.fullmatch(val):
                 errors.append(f"{path}: oath.{hash_field} missing or not 64-hex sha256")
 
         # oath_modules must be non-empty
         modules = oath.get("oath_modules")
         if not isinstance(modules, list) or len(modules) == 0:
             errors.append(f"{path}: oath.oath_modules missing or empty")
+        elif requires_contextual:
+            expected_modules = _current_oath_modules_for_record(obj, record_type)
+            if modules != expected_modules:
+                errors.append(
+                    f"{path}: oath.oath_modules does not match current policy for {record_type}"
+                )
+
+        if requires_contextual:
+            if oath.get("readback_method_declared") != "participant_generated_in_current_context":
+                errors.append(
+                    f"{path}: oath.readback_method_declared must be "
+                    "participant_generated_in_current_context"
+                )
+            expected_canonical = _current_canonical_oath(
+                obj,
+                record_type,
+            )
+            if expected_canonical is None:
+                errors.append(
+                    f"{path}: current policy cannot produce a canonical oath for {record_type}"
+                )
+            elif oath.get("canonical_oath_text_sha256") != expected_canonical[1]:
+                errors.append(
+                    f"{path}: oath canonical text hash does not match current policy "
+                    f"for {record_type}"
+                )
+            if (
+                expected_canonical is None
+                or oath.get("participant_readback_sha256")
+                != expected_canonical[1]
+            ):
+                errors.append(
+                    f"{path}: oath participant readback hash must equal the current "
+                    f"canonical oath hash for {record_type}"
+                )
+        elif oath.get("canonical_oath_text_sha256") != oath.get(
+            "participant_readback_sha256"
+        ):
+            errors.append(
+                f"{path}: historical oath participant readback hash must equal "
+                "its canonical oath hash"
+            )
 
         # Linked guardian_application must include guardian_stewardship_v1
         if record_type == "guardian_application":

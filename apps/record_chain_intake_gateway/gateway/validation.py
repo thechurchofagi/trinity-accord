@@ -6,8 +6,14 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import re
+import threading
+import time
 import unicodedata
+import urllib.error
+import urllib.parse
+import urllib.request
 from typing import Any
 
 from .models import Diagnostic
@@ -57,6 +63,199 @@ def compute_oath_policy_sha256(policy: dict[str, Any]) -> str:
         allow_nan=False,
     )
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+PUBLISHED_OATH_POLICY_URL = (
+    "https://www.trinityaccord.org/api/record-chain-oath-policy.v1.json"
+)
+OATH_POLICY_VERSION_PATTERN = re.compile(
+    r"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
+)
+ROLLING_PREDECESSOR_POLICY_IDENTITIES: dict[str, str] = {
+    # Exact policy shipped by the public v1.1 Builder immediately before v1.2.
+    "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51": "1.1.0",
+}
+MAX_PUBLISHED_OATH_POLICY_BYTES = 1_000_000
+PUBLISHED_OATH_POLICY_SUCCESS_TTL_SECONDS = 5.0
+PUBLISHED_OATH_POLICY_FAILURE_TTL_SECONDS = 30.0
+_published_policy_cache_lock = threading.Lock()
+_published_policy_cache: dict[str, Any] = {
+    "url": None,
+    "expires_at": 0.0,
+    "policy": None,
+    "error": None,
+}
+
+
+def parse_oath_policy_version(value: Any) -> tuple[int, int, int] | None:
+    """Parse the strict numeric policy version used for rollout ordering."""
+    if not isinstance(value, str):
+        return None
+    match = OATH_POLICY_VERSION_PATTERN.fullmatch(value)
+    if match is None:
+        return None
+    return tuple(int(part) for part in match.groups())
+
+
+def _fetch_published_oath_policy(configured: str) -> dict[str, Any]:
+    """Fetch one bounded policy response from the configured public endpoint."""
+    request = urllib.request.Request(
+        configured,
+        headers={
+            "Accept": "application/json",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "User-Agent": "TrinityGatewayPolicyTransition/1.0",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=3) as response:
+        final_url = response.geturl()
+        configured_url = urllib.parse.urlsplit(configured)
+        resolved_url = urllib.parse.urlsplit(final_url)
+        if (
+            resolved_url.scheme != "https"
+            or resolved_url.hostname != configured_url.hostname
+        ):
+            raise ValueError("published oath policy redirect changed scheme or host")
+        raw_bytes = response.read(MAX_PUBLISHED_OATH_POLICY_BYTES + 1)
+    if len(raw_bytes) > MAX_PUBLISHED_OATH_POLICY_BYTES:
+        raise ValueError("published oath policy response is too large")
+    raw = raw_bytes.decode("utf-8")
+    policy = json.loads(raw)
+    if not isinstance(policy, dict):
+        raise ValueError("published oath policy must be a JSON object")
+    return policy
+
+
+def _reset_published_oath_policy_cache_for_tests() -> None:
+    """Clear rollout cache state for deterministic isolated tests."""
+    with _published_policy_cache_lock:
+        _published_policy_cache.update(
+            {
+                "url": None,
+                "expires_at": 0.0,
+                "policy": None,
+                "error": None,
+            }
+        )
+
+
+def load_published_oath_policy() -> dict[str, Any]:
+    """Load the policy currently published beside the public Builder.
+
+    A newly deployed Gateway may temporarily be ahead of GitHub Pages. During
+    that bounded interval, the public Builder still emits the previously
+    published policy. The Gateway may accept that policy only while this
+    authoritative public endpoint still publishes the exact same hash.
+
+    Known-predecessor input is public and attacker-controlled, so the Gateway
+    must not perform an unbounded blocking fetch for every request. A
+    single-flight cache limits successful staleness to five seconds and caches
+    failures longer to prevent an upstream outage from amplifying into request
+    latency.
+    """
+    configured = os.environ.get(
+        "TRINITY_PUBLIC_OATH_POLICY_URL",
+        PUBLISHED_OATH_POLICY_URL,
+    ).strip()
+    if not configured.startswith("https://"):
+        raise ValueError("published oath policy URL must use https")
+
+    now = time.monotonic()
+    with _published_policy_cache_lock:
+        if (
+            _published_policy_cache["url"] == configured
+            and now < float(_published_policy_cache["expires_at"])
+        ):
+            cached_policy = _published_policy_cache["policy"]
+            if isinstance(cached_policy, dict):
+                return cached_policy
+            raise ValueError(
+                "published oath policy is temporarily unavailable "
+                f"({_published_policy_cache['error'] or 'cached failure'})"
+            )
+
+        try:
+            policy = _fetch_published_oath_policy(configured)
+        except Exception as exc:
+            _published_policy_cache.update(
+                {
+                    "url": configured,
+                    "expires_at": time.monotonic()
+                    + PUBLISHED_OATH_POLICY_FAILURE_TTL_SECONDS,
+                    "policy": None,
+                    "error": type(exc).__name__,
+                }
+            )
+            raise
+
+        _published_policy_cache.update(
+            {
+                "url": configured,
+                "expires_at": time.monotonic()
+                + PUBLISHED_OATH_POLICY_SUCCESS_TTL_SECONDS,
+                "policy": policy,
+                "error": None,
+            }
+        )
+        return policy
+
+
+def resolve_submission_oath_policy(
+    submitted_policy_hash: str,
+    current_policy: dict[str, Any],
+) -> tuple[dict[str, Any] | None, str]:
+    """Resolve current or bounded rolling policy; otherwise fail closed."""
+    current_hash = compute_oath_policy_sha256(current_policy)
+    current_version = parse_oath_policy_version(current_policy.get("version"))
+    if current_policy.get("oath_policy_sha256") != current_hash:
+        return None, "current_policy_hash_metadata_mismatch"
+    if current_policy.get("status") != "active" or current_version is None:
+        return None, "current_policy_metadata_invalid"
+    if submitted_policy_hash == current_hash:
+        return current_policy, "current"
+
+    expected_predecessor_version = ROLLING_PREDECESSOR_POLICY_IDENTITIES.get(
+        submitted_policy_hash
+    )
+    if expected_predecessor_version is None:
+        return None, "not_current_or_known_predecessor"
+
+    try:
+        published = load_published_oath_policy()
+        published_hash = compute_oath_policy_sha256(published)
+    except (
+        OSError,
+        UnicodeError,
+        ValueError,
+        json.JSONDecodeError,
+        urllib.error.URLError,
+    ) as exc:
+        logger.warning(
+            "Could not load published oath policy for rolling compatibility: %s",
+            type(exc).__name__,
+        )
+        return None, "published_policy_unavailable"
+
+    metadata_hash = published.get("oath_policy_sha256")
+    published_version = parse_oath_policy_version(published.get("version"))
+    if metadata_hash != published_hash:
+        return None, "published_policy_hash_metadata_mismatch"
+    if published_hash != submitted_policy_hash or published_hash == current_hash:
+        return None, "not_current_or_published"
+    if published_version is None or current_version is None:
+        return None, "published_policy_version_invalid"
+    if published.get("version") != expected_predecessor_version:
+        return None, "published_policy_predecessor_identity_mismatch"
+    if published_version >= current_version:
+        return None, "published_policy_not_older"
+    if (
+        published.get("schema") == current_policy.get("schema")
+        and published.get("policy_id") == current_policy.get("policy_id")
+        and published.get("status") == "active"
+    ):
+        return published, "rolling_published"
+    return None, "not_current_or_published"
 
 
 # ---------------------------------------------------------------------------
@@ -1783,26 +1982,29 @@ _OATH_REQUIRED_RECORD_TYPES: frozenset[str] = frozenset({
     "propagation", "correction", "classification_update",
 })
 
-_OATH_NO_SHORTCUT_FIELDS: frozenset[str] = frozenset({
-    "oath_read", "participant_readback_provided", "readback_matches_canonical_oath",
-    "readback_was_not_piped_from_file", "readback_was_not_generated_by_script",
-    "readback_was_not_loaded_from_cache", "readback_was_not_summary_or_paraphrase",
-    "readback_was_not_generated_by_external_automation",
-    "readback_was_not_auto_filled_by_builder",
-    "canonical_oath_loaded_into_active_context",
-    "readback_generated_by_participant_from_active_context",
-    "readback_was_not_directly_copied_by_submission_tool",
-    "readback_was_not_automatically_completed_or_corrected",
-    "contextual_readback_process_acknowledged",
-    "no_shortcut_oath_acknowledged",
-})
-
-_OATH_BOUNDARY_FIELDS: frozenset[str] = frozenset({
-    "contextual_readback_process_is_self_declared",
-    "contextual_readback_does_not_prove_persistent_memory",
-    "oath_does_not_prove_subjective_understanding",
-    "oath_verifies_exact_readback_only",
-})
+def oath_policy_required_true_fields(
+    policy: dict[str, Any],
+) -> tuple[tuple[str, ...], tuple[str, ...]] | None:
+    """Return declarations and boundaries defined by the selected exact policy."""
+    no_shortcut = policy.get("no_shortcut_policy")
+    if not isinstance(no_shortcut, dict):
+        return None
+    declarations = no_shortcut.get("required_declarations")
+    boundary = no_shortcut.get("boundary")
+    if (
+        not isinstance(declarations, list)
+        or not declarations
+        or not all(isinstance(field, str) and field for field in declarations)
+        or len(set(declarations)) != len(declarations)
+        or not isinstance(boundary, dict)
+        or not boundary
+        or not all(
+            isinstance(field, str) and field and expected is True
+            for field, expected in boundary.items()
+        )
+    ):
+        return None
+    return tuple(declarations), tuple(boundary)
 
 
 def validate_submission_oath(
@@ -1859,7 +2061,6 @@ def validate_submission_oath(
     # Load local oath policy
     import hashlib
     import json as _json
-    import os
     policy_path = os.path.join(
         os.path.dirname(__file__), "..", "..", "..", "api", "record-chain-oath-policy.v1.json"
     )
@@ -1877,9 +2078,6 @@ def validate_submission_oath(
         ))
         return diagnostics
 
-    # Compute local policy hash over the stable policy-core domain.
-    local_policy_sha256 = compute_oath_policy_sha256(local_policy)
-
     # Require and validate hash fields (must exist and be 64 hex)
     import re as _re
     _HEX64 = _re.compile(r"^[0-9a-f]{64}$")
@@ -1896,19 +2094,67 @@ def validate_submission_oath(
         ))
         return diagnostics
 
-    # Compare policy hash
-    if submitted_policy_hash != local_policy_sha256:
+    validation_policy, policy_resolution = resolve_submission_oath_policy(
+        submitted_policy_hash,
+        local_policy,
+    )
+    if validation_policy is None:
         diagnostics.append(_make_diagnostic(
             code="OATH_POLICY_HASH_MISMATCH",
             severity="error",
             field="record_draft.submission_oath_verification.oath_policy_sha256",
-            message=f"Oath policy hash mismatch: submitted {submitted_policy_hash[:16]}... != local {local_policy_sha256[:16]}...",
-            meaning="The embedded oath policy hash does not match the gateway's current policy.",
-            suggested_fix="Rebuild with the latest builder to pick up the current oath policy.",
+            message=(
+                f"Oath policy hash is neither current nor the exact policy still "
+                f"published with the public Builder ({policy_resolution})"
+            ),
+            meaning=(
+                "A formal submission must use the Gateway's current oath policy. "
+                "During a coordinated rolling deployment only, it may use the exact "
+                "policy still published beside the public Builder."
+            ),
+            suggested_fix="Reload the public site and rebuild with its currently published Builder.",
         ))
+        return diagnostics
+
+    expected_policy_id = validation_policy.get("policy_id")
+    expected_policy_schema = validation_policy.get("schema")
+    expected_policy_version = validation_policy.get("version")
+    metadata_checks = (
+        ("oath_policy", expected_policy_id),
+        ("oath_policy_schema", expected_policy_schema),
+        ("oath_policy_version", expected_policy_version),
+    )
+    for field_name, expected in metadata_checks:
+        if oath_verification.get(field_name) != expected:
+            diagnostics.append(_make_diagnostic(
+                code="OATH_POLICY_METADATA_MISMATCH",
+                severity="error",
+                field=f"record_draft.submission_oath_verification.{field_name}",
+                message=(
+                    f"{field_name} mismatch: got "
+                    f"{oath_verification.get(field_name)!r}, expected {expected!r}"
+                ),
+                meaning="Signed oath policy metadata must match the policy selected by its hash.",
+                suggested_fix="Rebuild with the current public Builder; do not hand-edit oath metadata.",
+            ))
+
+    required_true_fields = oath_policy_required_true_fields(validation_policy)
+    if required_true_fields is None:
+        diagnostics.append(_make_diagnostic(
+            code="OATH_POLICY_LOAD_ERROR",
+            severity="error",
+            field=None,
+            message="Selected oath policy has an invalid no-shortcut declaration contract",
+            meaning="The exact selected oath policy must define valid required declarations and boundaries.",
+            suggested_fix="Retry after the Gateway and public Builder policy are repaired.",
+        ))
+        return diagnostics
+    required_declarations, required_boundaries = required_true_fields
 
     # Determine expected modules
-    expected_modules = list(local_policy.get("record_type_modules", {}).get(record_type, []))
+    expected_modules = list(
+        validation_policy.get("record_type_modules", {}).get(record_type, [])
+    )
     linked = draft.get("optional_linked_guardian_application_request")
     if isinstance(linked, dict) and linked.get("does_participant_request_guardian_application_with_this_record") is True:
         if "guardian_stewardship_v1" not in expected_modules:
@@ -1926,15 +2172,38 @@ def validate_submission_oath(
             suggested_fix=f"Use modules: {expected_modules}",
         ))
 
+    client_metadata_checks = (
+        ("record_type", record_type),
+        ("oath_policy_sha256", submitted_policy_hash),
+        ("oath_modules", expected_modules),
+        ("readback_method_declared", "participant_generated_in_current_context"),
+    )
+    for field_name, expected in client_metadata_checks:
+        if client_oath.get(field_name) != expected:
+            diagnostics.append(_make_diagnostic(
+                code="CLIENT_OATH_METADATA_MISMATCH",
+                severity="error",
+                field=f"client_oath_readback.{field_name}",
+                message=(
+                    f"client_oath_readback.{field_name} does not match the signed "
+                    "submission oath metadata"
+                ),
+                meaning="The transient readback envelope must bind to the signed oath and record type.",
+                suggested_fix="Rebuild with the current public Builder; do not hand-edit client_oath_readback.",
+            ))
+
     # Build canonical oath text and verify hash
-    modules_obj = local_policy.get("modules", {})
+    modules_obj = validation_policy.get("modules", {})
     canonical_parts = []
     for mod_id in expected_modules:
         mod = modules_obj.get(mod_id)
         if mod:
             canonical_parts.append(f"=== {mod['label']} ({mod_id}) ===\n\n{unicodedata.normalize('NFC', normalize_oath_text(mod['text']))}")
 
-    joiner = local_policy.get("canonicalization", {}).get("module_joiner", "\n\n---\n\n")
+    joiner = validation_policy.get("canonicalization", {}).get(
+        "module_joiner",
+        "\n\n---\n\n",
+    )
     canonical_text = joiner.join(canonical_parts).strip()
     canonical_hash = hashlib.sha256(canonical_text.encode("utf-8")).hexdigest()
 
@@ -1962,6 +2231,25 @@ def validate_submission_oath(
     readback_text = client_oath.get("readback_text", "")
     normalized_readback = unicodedata.normalize("NFC", normalize_oath_text(readback_text))
     readback_hash = sha256_text(normalized_readback)
+
+    if client_oath.get("readback_text_sha256") != readback_hash:
+        diagnostics.append(_make_diagnostic(
+            code="CLIENT_OATH_READBACK_HASH_MISMATCH",
+            severity="error",
+            field="client_oath_readback.readback_text_sha256",
+            message="client_oath_readback.readback_text_sha256 does not match readback_text",
+            meaning="The transient readback envelope hash must cover the exact supplied text.",
+            suggested_fix="Rebuild with the current public Builder; do not edit the readback envelope.",
+        ))
+    if client_oath.get("readback_text_char_count") != len(normalized_readback):
+        diagnostics.append(_make_diagnostic(
+            code="CLIENT_OATH_READBACK_LENGTH_MISMATCH",
+            severity="error",
+            field="client_oath_readback.readback_text_char_count",
+            message="client_oath_readback.readback_text_char_count is incorrect",
+            meaning="The transient readback envelope length must match the normalized supplied text.",
+            suggested_fix="Rebuild with the current public Builder.",
+        ))
 
     if normalized_readback != canonical_text:
         diagnostics.append(_make_diagnostic(
@@ -2007,7 +2295,7 @@ def validate_submission_oath(
         ))
 
     # Check all no-shortcut declarations are true
-    for field_name in _OATH_NO_SHORTCUT_FIELDS:
+    for field_name in required_declarations:
         if oath_verification.get(field_name) is not True:
             diagnostics.append(_make_diagnostic(
                 code="OATH_REQUIRED_FIELD_NOT_TRUE",
@@ -2023,7 +2311,7 @@ def validate_submission_oath(
             ))
 
     # Check boundary booleans
-    for field_name in _OATH_BOUNDARY_FIELDS:
+    for field_name in required_boundaries:
         if oath_verification.get(field_name) is not True:
             diagnostics.append(_make_diagnostic(
                 code="OATH_REQUIRED_FIELD_NOT_TRUE",

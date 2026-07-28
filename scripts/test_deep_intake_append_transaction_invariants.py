@@ -178,6 +178,7 @@ def test_post_mutation_io_failure_is_never_recorded_as_rejection() -> None:
             "verify_pending_record_authorship",
             "sanitize_pending_record_for_append",
             "normalize_record_draft",
+            "require_pending_oath_is_appendable",
             "verify_native_records",
             "build_indexes",
         ]:
@@ -187,6 +188,7 @@ def test_post_mutation_io_failure_is_never_recorded_as_rejection() -> None:
         mod.verify_pending_record_authorship = lambda draft: None
         mod.sanitize_pending_record_for_append = lambda draft: dict(draft)
         mod.normalize_record_draft = lambda draft: dict(draft)
+        mod.require_pending_oath_is_appendable = lambda *args, **kwargs: None
         mod.verify_native_records = lambda: []
         mod.build_indexes = lambda *args, **kwargs: None
 

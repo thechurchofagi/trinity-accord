@@ -28,6 +28,8 @@ def invoke(
     request_result: Any | Callable[..., Any],
     *,
     deploy: bool = True,
+    commit_id: str = "",
+    wait: bool = False,
 ) -> tuple[int, str, str, int]:
     module = load_module()
     request_calls = 0
@@ -42,6 +44,7 @@ def invoke(
         return request_result
 
     module.request = fake_request
+    module.time.sleep = lambda _seconds: None
     old_argv = sys.argv
     old_render = os.environ.get("RENDER")
     stdout = io.StringIO()
@@ -51,6 +54,16 @@ def invoke(
         sys.argv = [str(MODULE_PATH), "--service", "example-service"]
         if deploy:
             sys.argv.append("--deploy")
+        if commit_id:
+            sys.argv += ["--commit-id", commit_id]
+        if wait:
+            sys.argv += [
+                "--wait",
+                "--wait-timeout",
+                "5",
+                "--poll-seconds",
+                "0",
+            ]
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
             try:
                 code = module.main()
@@ -87,6 +100,7 @@ def main() -> int:
         "name": "example-service",
         "suspended": "not_suspended",
         "suspenders": [],
+        "autoDeploy": "no",
     }
     code, _stdout, stderr, calls = invoke(active, {})
     require(code == 1 and calls == 1, "missing deploy ID must fail after one POST")
@@ -97,11 +111,91 @@ def main() -> int:
     require(not stderr, "confirmed deploy should not write stderr")
     require("deploy_id=dep-confirmed" in stdout, "confirmed deploy ID must be reported")
 
+    exact_commit = "a" * 40
+    observed_calls: list[tuple[str, str, dict[str, Any]]] = []
+
+    def exact_live(path: str, _token: str, method: str = "GET", body: dict | None = None):
+        observed_calls.append((path, method, dict(body or {})))
+        if method == "POST":
+            return {
+                "id": "dep-exact",
+                "status": "build_in_progress",
+                "commit": {"id": exact_commit},
+            }
+        return {
+            "id": "dep-exact",
+            "status": "live",
+            "commit": {"id": exact_commit},
+        }
+
+    code, stdout, stderr, calls = invoke(
+        active,
+        exact_live,
+        commit_id=exact_commit,
+        wait=True,
+    )
+    require(code == 0 and calls == 2, "exact deploy must POST once and poll until live")
+    require(not stderr, "exact live deploy should not write stderr")
+    require(
+        observed_calls[0][2].get("commitId") == exact_commit,
+        "Render POST must bind the exact commitId",
+    )
+    require(
+        f"RENDER_DEPLOY_LIVE service=example-service deploy_id=dep-exact commit_id={exact_commit}"
+        in stdout,
+        "exact live commit proof must be reported",
+    )
+
+    wrong_commit = "b" * 40
+
+    def mismatched_live(path: str, _token: str, method: str = "GET", body: dict | None = None):
+        return {
+            "id": "dep-wrong",
+            "status": "live",
+            "commit": {"id": wrong_commit},
+        }
+
+    code, _stdout, stderr, _calls = invoke(
+        active,
+        mismatched_live,
+        commit_id=exact_commit,
+        wait=True,
+    )
+    require(code == 1, "commit mismatch must fail closed")
+    require(
+        "commit" in stderr.lower()
+        and ("mismatch" in stderr.lower() or "unexpected" in stderr.lower()),
+        "commit mismatch must be explicit",
+    )
+
+    auto_deploying = dict(active, autoDeploy="yes")
+    code, _stdout, stderr, calls = invoke(
+        auto_deploying,
+        {},
+        commit_id=exact_commit,
+        wait=True,
+    )
+    require(
+        code == 1 and calls == 0 and "autodeploy" in stderr.lower(),
+        "exact deploy must refuse actual Render autodeploy drift before POST",
+    )
+
+    code, _stdout, stderr, calls = invoke(
+        active,
+        {},
+        commit_id="A" * 40,
+        wait=True,
+    )
+    require(
+        code == 1 and calls == 0 and "lowercase" in stderr.lower(),
+        "non-lowercase commit IDs must be rejected before POST",
+    )
+
     code, stdout, stderr, calls = invoke(suspended, {}, deploy=False)
     require(code == 0 and calls == 0 and not stderr, "dry-run should disclose suspended service without attempting a deploy")
     require("dry_run" in stdout.lower(), "dry-run result must be explicit")
 
-    print("PASS: Render helper fails closed on suspended or unconfirmed deploys")
+    print("PASS: Render helper proves the exact commit reaches live")
     return 0
 
 

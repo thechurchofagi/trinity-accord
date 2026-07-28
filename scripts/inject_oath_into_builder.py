@@ -13,6 +13,49 @@ BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 OATH_POLICY = ROOT / "api" / "record-chain-oath-policy.v1.json"
 
 
+def verify_existing_builder_runtime(builder_text: str, policy: dict) -> list[str]:
+    """Return fail-closed errors for an existing Builder helper implementation."""
+    errors: list[str] = []
+    required_markers = [
+        "contextualReadbackConfirmed",
+        "--contextual-readback-confirmed true",
+        "participant_generated_in_current_context",
+        "canonical_oath_loaded_into_active_context",
+        "readback_generated_by_participant_from_active_context",
+        "readback_was_not_directly_copied_by_submission_tool",
+        "readback_was_not_automatically_completed_or_corrected",
+        "contextual_readback_process_acknowledged",
+        "contextual_readback_process_is_self_declared",
+        "contextual_readback_does_not_prove_persistent_memory",
+        "function buildSubmissionOathVerification",
+        "function buildClientOathReadback",
+        "submission.client_oath_readback = buildClientOathReadback",
+        "normalizedReadback !== normalizedCanonical",
+        '.normalize("NFC")',
+        "readback_text: normalized",
+        "readback_text_sha256: sha256(normalized)",
+        "readback_text_char_count: normalized.length",
+    ]
+    for declaration in policy.get("no_shortcut_policy", {}).get(
+        "required_declarations",
+        [],
+    ):
+        if isinstance(declaration, str):
+            required_markers.append(declaration)
+    for marker in dict.fromkeys(required_markers):
+        if marker not in builder_text:
+            errors.append(f"existing Builder runtime missing required marker: {marker}")
+
+    if re.search(
+        r"(?:let|const)\s+readback\s*=\s*(?:opts\.readback\s*\|\|\s*)?canonicalOath",
+        builder_text,
+    ):
+        errors.append("existing Builder still auto-fills readback from canonicalOath")
+    if re.search(r"readback_text\s*:\s*canonical\w*", builder_text):
+        errors.append("existing Builder still copies canonical oath into readback_text")
+    return errors
+
+
 def main() -> None:
     if not BUILDER.exists():
         print("ERROR: builder not found", file=sys.stderr)
@@ -45,12 +88,12 @@ def main() -> None:
         allow_nan=False,
     )
     policy_sha256 = hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
-    if policy.get("oath_policy_sha256") != policy_sha256:
+    policy_needs_write = policy.get("oath_policy_sha256") != policy_sha256
+    if policy_needs_write:
         policy["oath_policy_sha256"] = policy_sha256
-        OATH_POLICY.write_text(
-            json.dumps(policy, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
-            encoding="utf-8",
-        )
+    serialized_policy = (
+        json.dumps(policy, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
+    )
 
     # Synchronize an existing embedded policy without touching the surrounding
     # hand-maintained Builder implementation.
@@ -68,6 +111,18 @@ def main() -> None:
         if count != 1:
             print("ERROR: could not replace existing embedded oath policy", file=sys.stderr)
             sys.exit(1)
+        runtime_errors = verify_existing_builder_runtime(builder_text, policy)
+        if runtime_errors:
+            print(
+                "ERROR: refusing policy-only synchronization because the existing "
+                "Builder helper runtime is incompatible:",
+                file=sys.stderr,
+            )
+            for error in runtime_errors:
+                print(f"  - {error}", file=sys.stderr)
+            sys.exit(1)
+        if policy_needs_write:
+            OATH_POLICY.write_text(serialized_policy, encoding="utf-8")
         BUILDER.write_text(builder_text, encoding="utf-8")
         print(f"OK: synchronized oath policy and builder hash {policy_sha256}")
         return
@@ -265,6 +320,14 @@ function buildClientOathReadback(recordType, participantReadback) {{
     else:
         print("WARN: could not find build pipeline insertion point")
 
+    runtime_errors = verify_existing_builder_runtime(builder_text, policy)
+    if runtime_errors:
+        print("ERROR: generated Builder runtime failed oath compatibility checks:", file=sys.stderr)
+        for error in runtime_errors:
+            print(f"  - {error}", file=sys.stderr)
+        sys.exit(1)
+    if policy_needs_write:
+        OATH_POLICY.write_text(serialized_policy, encoding="utf-8")
     BUILDER.write_text(builder_text, encoding="utf-8")
     print(f"OK: builder updated. SHA256: {hashlib.sha256(builder_text.encode()).hexdigest()[:16]}...")
 

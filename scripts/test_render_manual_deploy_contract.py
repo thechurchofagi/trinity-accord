@@ -8,6 +8,7 @@ production-facing artifacts or Release assets.
 """
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -63,6 +64,15 @@ def main() -> int:
             errors.append("render_manual_deploy.py does not require a confirmed deploy ID")
         else:
             ok("render_manual_deploy.py requires a confirmed deploy ID")
+        for marker in [
+            "--commit-id",
+            "--wait",
+            "commitId",
+            "RENDER_DEPLOY_LIVE",
+            "wait_for_deploy",
+        ]:
+            if marker not in text:
+                errors.append(f"render_manual_deploy.py missing exact-live proof marker: {marker}")
 
     run_contract(
         ROOT / "scripts/test_render_manual_deploy_behavior.py",
@@ -91,9 +101,20 @@ def main() -> int:
             "Authorize production deployment actor and ref",
             "ref: main",
             "contents: read",
+            "--commit-id",
+            "--wait",
         ]:
             if marker not in text:
                 errors.append(f"render-manual-deploy.yml missing main-only secret boundary: {marker}")
+        timeout_match = re.search(
+            r"(?m)^\s{4}timeout-minutes:\s*([0-9]+)\s*$",
+            text,
+        )
+        if timeout_match is None or int(timeout_match.group(1)) < 20:
+            errors.append(
+                "render-manual-deploy.yml job timeout must leave at least "
+                "20 minutes for the helper's 15-minute live wait"
+            )
 
     render_yaml = ROOT / "render.yaml"
     if render_yaml.exists():

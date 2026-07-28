@@ -673,6 +673,17 @@ def main() -> int:
         fail(f"Phase 6B test registry contract failed: {result.stderr}\n{result.stdout}")
     ok("Phase 6B test registry contract")
 
+    # Contextual oath post-merge review regressions
+    result = subprocess.run(
+        [sys.executable, "scripts/test_contextual_oath_review_regressions.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"Contextual oath review regressions failed: {result.stderr}\n{result.stdout}")
+    ok("Contextual oath review regression contract")
+
     # Phase 6C: Operator secret names contract
     result = subprocess.run(
         [sys.executable, "scripts/test_operator_secret_names_contract.py"],

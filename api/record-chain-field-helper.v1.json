@@ -117,6 +117,24 @@
       "recovery_possible": true,
       "severity": "error"
     },
+    "CLIENT_OATH_METADATA_MISMATCH": {
+      "meaning": "The transient client_oath_readback envelope is not bound to the signed record type, oath policy hash, oath modules, or contextual readback method.",
+      "fix": "Rebuild with the current public Builder and supply the participant-generated contextual readback. Do not hand-edit client_oath_readback metadata.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "CLIENT_OATH_READBACK_HASH_MISMATCH": {
+      "meaning": "client_oath_readback.readback_text_sha256 does not hash the exact normalized readback_text supplied in the same transient envelope.",
+      "fix": "Rebuild with the current public Builder from the participant-generated readback. Do not edit the readback text or its hash after building.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "CLIENT_OATH_READBACK_LENGTH_MISMATCH": {
+      "meaning": "client_oath_readback.readback_text_char_count does not equal the normalized readback_text character count.",
+      "fix": "Rebuild with the current public Builder from the participant-generated readback. Do not edit the readback text or character count after building.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
     "CLIENT_SUPPLIED_UNSIGNED_PROJECTION_FIELD": {
       "meaning": "The submission draft contains a server-derived or append-assigned field that clients must not supply.",
       "fix": "Remove the field named in the diagnostic, then rebuild and sign the submission with the latest Builder. Do not include server_append_metadata, server_normalization, append_assigned_metadata, record hashes, record_id, chain_id, or similar server fields.",
@@ -386,7 +404,7 @@
     },
     "MISSING_CLIENT_OATH_READBACK": {
       "meaning": "The client_oath_readback field is missing but required for this record type.",
-      "fix": "Use the builder print-oath command to get the exact canonical oath text, then include it as client_oath_readback.",
+      "fix": "Run print-oath as a standalone read step, load the canonical oath into the participating agent's active context, have that participant generate the exact readback, and rebuild with --readback plus --contextual-readback-confirmed true. The submission tool may relay that output unchanged but must not copy or auto-fill it.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -496,7 +514,7 @@
     },
     "MISSING_SUBMISSION_OATH": {
       "meaning": "The submission_oath_verification block is missing from record_draft.",
-      "fix": "Include submission_oath_verification with oath_text_hash, readback_hash, readback_method_declared, and no_shortcut_declaration. Rebuild with the current Builder.",
+      "fix": "Complete the contextual oath process and rebuild with the current public Builder. Do not hand-edit or synthesize submission_oath_verification.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -508,7 +526,7 @@
     },
     "OATH_CANONICAL_HASH_MISMATCH": {
       "meaning": "The oath_text_hash in submission_oath_verification does not match the canonical oath hash for this record type.",
-      "fix": "Use the builder print-oath command to get the correct canonical oath text and regenerate the hash.",
+      "fix": "Reload the current public Builder, repeat the standalone oath load and participant-generated contextual readback, then rebuild. Do not compute or edit the hash manually.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -521,6 +539,12 @@
     "OATH_POLICY_HASH_MISMATCH": {
       "meaning": "The oath policy hash does not match the current active policy.",
       "fix": "Regenerate the oath using the current Builder to get the correct policy hash.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "OATH_POLICY_METADATA_MISMATCH": {
+      "meaning": "The signed oath policy identifier, schema, or version does not match the exact policy selected by oath_policy_sha256.",
+      "fix": "Reload the public Builder, regenerate the contextual oath readback, and rebuild the signed submission. Do not hand-edit oath policy metadata.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -1317,5 +1341,5 @@
   "schema": "trinityaccord.record-chain-field-helper.v1",
   "status": "active",
   "submit_endpoint": "/record-chain/submit",
-  "updated_at": "2026-07-28T06:36:35Z"
+  "updated_at": "2026-07-28T09:53:29Z"
 }

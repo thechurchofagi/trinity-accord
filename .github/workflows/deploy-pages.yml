@@ -13,6 +13,7 @@ on:
       - main
     paths:
       - "api/**"
+      - "apps/record_chain_intake_gateway/**"
       - "*.md"
       - "*.json"
       - "*.xml"
@@ -41,10 +42,12 @@ on:
       - "record-chain/index.md"
       - "sitemap.xml"
       - "scripts/**"
+      - "render.yaml"
       - "tests/test_live_deployment_contract.py"
       - "tests/test_round5_systemic_resilience.py"
       - "_config.yml"
       - ".github/workflows/deploy-pages.yml"
+      - ".github/workflows/render-manual-deploy.yml"
       - ".github/workflows/homepage-status-sync.yml"
       - ".github/workflows/waiting-heartbeat-status-sync.yml"
       - ".github/workflows/homepage-deployment-receipt.yml"
@@ -124,8 +127,79 @@ jobs:
           python3 scripts/test_no_secret_material_committed.py
           python3 scripts/test_no_private_key_material_committed.py
 
-  build:
+  deploy-gateway-before-pages:
     needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      required: ${{ steps.scope.outputs.required }}
+    steps:
+      - name: Checkout immutable verified source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.verify.outputs.source_sha }}
+          fetch-depth: 0
+
+      - name: Confirm source is still current main
+        env:
+          SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
+
+      - name: Detect Gateway or Builder rollout
+        id: scope
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          required=true
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            required=false
+            if [[ -z "$BEFORE_SHA" || "$BEFORE_SHA" =~ ^0+$ ]]; then
+              required=true
+            else
+              git cat-file -e "${BEFORE_SHA}^{commit}"
+              changed="$(git diff --name-only "$BEFORE_SHA" "$SOURCE_SHA")"
+              printf '%s\n' "$changed"
+              if grep -Eq \
+                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_manual_deploy\.py)$' \
+                <<<"$changed"; then
+                required=true
+              fi
+            fi
+          fi
+          echo "required=$required" >> "$GITHUB_OUTPUT"
+          echo "gateway_rollout_required=$required"
+
+      - name: Setup Python
+        if: steps.scope.outputs.required == 'true'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Deploy exact Gateway source and wait for live
+        if: steps.scope.outputs.required == 'true'
+        env:
+          RENDER: ${{ secrets.RENDER }}
+          SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          python3 scripts/render_manual_deploy.py \
+            --service trinity-record-chain-gateway \
+            --deploy \
+            --commit-id "$SOURCE_SHA" \
+            --wait \
+            --wait-timeout 900 \
+            --poll-seconds 10
+
+  build:
+    needs:
+      - verify
+      - deploy-gateway-before-pages
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     outputs:
@@ -238,6 +312,14 @@ jobs:
 
       - name: Confirm immutable build/deploy handoff
         run: test "$(git rev-parse HEAD)" = "${{ needs.build.outputs.source_sha }}"
+
+      - name: Refuse stale source if main moved after verification
+        env:
+          SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
 
       - name: Deploy to GitHub Pages
         id: deployment

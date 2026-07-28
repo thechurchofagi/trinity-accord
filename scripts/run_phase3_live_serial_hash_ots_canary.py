@@ -242,6 +242,13 @@ def main() -> int:
     parser.add_argument("--log-dir", default=None)
     parser.add_argument("--timeout", type=int, default=30)
     parser.add_argument("--poll-seconds", type=int, default=120)
+    parser.add_argument(
+        "--readback-bundle",
+        help=(
+            "Participant-generated contextual oath readback bundle required by all "
+            "live formal preflight/write canaries."
+        ),
+    )
     parser.add_argument("--precheck-only", action="store_true")
     parser.add_argument("--enable-live-writes", action="store_true")
     parser.add_argument("--confirm-live-canary", default="")
@@ -292,25 +299,38 @@ def main() -> int:
     run_cmd([sys.executable, "scripts/test_ots_arweave_registry.py"])
 
     # Live preflight-only checks.
+    three_core_cmd = [
+        sys.executable,
+        "scripts/smoke_live_external_agent_three_core_preflight.py",
+        "--site",
+        args.site,
+        "--timeout",
+        str(args.timeout),
+    ]
+    if args.readback_bundle:
+        three_core_cmd += ["--readback-bundle", args.readback_bundle]
     run_cmd(
-        [sys.executable, "scripts/smoke_live_external_agent_three_core_preflight.py"],
+        three_core_cmd,
         stdout_file=log_dir / "01-three-core-preflight.stdout.log",
         stderr_file=log_dir / "01-three-core-preflight.stderr.log",
     )
 
+    lifecycle_preflight_cmd = [
+        sys.executable,
+        "scripts/smoke_external_agent_write_lifecycle_canary.py",
+        "--site",
+        args.site,
+        "--gateway",
+        args.gateway,
+        "--mode",
+        "preflight-only",
+        "--timeout",
+        str(args.timeout),
+    ]
+    if args.readback_bundle:
+        lifecycle_preflight_cmd += ["--readback-bundle", args.readback_bundle]
     run_cmd(
-        [
-            sys.executable,
-            "scripts/smoke_external_agent_write_lifecycle_canary.py",
-            "--site",
-            args.site,
-            "--gateway",
-            args.gateway,
-            "--mode",
-            "preflight-only",
-            "--timeout",
-            str(args.timeout),
-        ],
+        lifecycle_preflight_cmd,
         stdout_file=log_dir / "02-lifecycle-preflight.stdout.log",
         stderr_file=log_dir / "02-lifecycle-preflight.stderr.log",
     )
@@ -348,25 +368,28 @@ def main() -> int:
             stdout_path = item_dir / "lifecycle.stdout.log"
             stderr_path = item_dir / "lifecycle.stderr.log"
 
+            lifecycle_write_cmd = [
+                sys.executable,
+                "scripts/smoke_external_agent_write_lifecycle_canary.py",
+                "--site",
+                args.site,
+                "--gateway",
+                args.gateway,
+                "--mode",
+                "single-write-canary",
+                "--route",
+                route,
+                "--confirm-live-canary",
+                args.confirm_live_canary,
+                "--timeout",
+                str(args.timeout),
+                "--poll-seconds",
+                str(args.poll_seconds),
+            ]
+            if args.readback_bundle:
+                lifecycle_write_cmd += ["--readback-bundle", args.readback_bundle]
             result = run_cmd(
-                [
-                    sys.executable,
-                    "scripts/smoke_external_agent_write_lifecycle_canary.py",
-                    "--site",
-                    args.site,
-                    "--gateway",
-                    args.gateway,
-                    "--mode",
-                    "single-write-canary",
-                    "--route",
-                    route,
-                    "--confirm-live-canary",
-                    args.confirm_live_canary,
-                    "--timeout",
-                    str(args.timeout),
-                    "--poll-seconds",
-                    str(args.poll_seconds),
-                ],
+                lifecycle_write_cmd,
                 stdout_file=stdout_path,
                 stderr_file=stderr_path,
             )
