@@ -13,6 +13,8 @@ Inputs (primary, by precedence):
   4. api/record-chain-status.json (fallback/metadata)
   5. api/record-chain-anchor-status.json
   6. api/record-chain-arweave-index.json
+  7. api/homepage-visibility-overrides.v1.json
+  8. api/record-chain-overlays.json (corrections and classification updates)
 
 Guardian activation inputs:
   - api/guardian-state.json
@@ -53,6 +55,7 @@ from patch_public_home_status_primary import (
     technical_health as patcher_technical_health,
     render as patcher_render,
     load_records as patcher_load_records,
+    record_overlays as patcher_record_overlays,
     sidecar as patcher_sidecar,
     visibility_index as patcher_visibility_index,
     build_status as patcher_build_status,
@@ -75,6 +78,7 @@ RECORD_CHAIN_ARWEAVE_BACKLOG = ROOT / "api" / "record-chain-arweave-backlog.json
 RECORD_CHAIN_NATIVE_OTS_BACKLOG = ROOT / "api" / "record-chain-native-ots-backlog.json"
 ARWEAVE_WALLET_STATUS = ROOT / "api" / "arweave-wallet-status.json"
 HOMEPAGE_VISIBILITY = ROOT / "api" / "homepage-visibility-overrides.v1.json"
+RECORD_CHAIN_OVERLAYS = ROOT / "api" / "record-chain-overlays.json"
 
 # Legacy inputs (for legacy_archive_snapshot only)
 ECHO_INDEX = ROOT / "api" / "echo-index.json"
@@ -154,6 +158,7 @@ def source_digest() -> str:
         RECORD_CHAIN_NATIVE_OTS_BACKLOG,
         ARWEAVE_WALLET_STATUS,
         HOMEPAGE_VISIBILITY,
+        RECORD_CHAIN_OVERLAYS,
 
         # Declared legacy/archive inputs used by generated_from/docstring.
         ECHO_INDEX,
@@ -532,6 +537,7 @@ def compute_status() -> dict[str, Any]:
         "/api/record-chain-native-ots-backlog.json",
         "/api/arweave-wallet-status.json",
         "/api/homepage-visibility-overrides.v1.json",
+        "/api/record-chain-overlays.json",
         "/record-chain/chain-tip.json",
         "/record-chain/records/",
         "/api/echo-index.json",
@@ -557,12 +563,18 @@ def compute_status() -> dict[str, Any]:
     # Use patcher's enrichment for canonical primary_counters and technical_health
     patcher_records = patcher_load_records()
     patcher_config = patcher_sidecar()
+    patcher_overlays = patcher_record_overlays()
     patcher_idx = patcher_visibility_index(patcher_config)
     raw_status_for_patcher = {
         "current_record_chain_status": current_status,
         "technical_health": {"archive_backlog": current_status.get("anchoring", {}).get("archive_backlog", {})},
     }
-    enriched_primary = patcher_primary_counters(patcher_records, patcher_idx, patcher_config)
+    enriched_primary = patcher_primary_counters(
+        patcher_records,
+        patcher_idx,
+        patcher_config,
+        patcher_overlays,
+    )
     enriched_tech = patcher_technical_health(raw_status_for_patcher)
 
     arweave_mode = arweave_index.get("current_upload_mode", "dry-run")

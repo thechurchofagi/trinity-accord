@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-27T11:24:50.730939+00:00",
+  "generated_at": "2026-07-28T01:31:55.374453+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -9,6 +9,7 @@
     "/api/record-chain-native-ots-backlog.json",
     "/api/arweave-wallet-status.json",
     "/api/homepage-visibility-overrides.v1.json",
+    "/api/record-chain-overlays.json",
     "/record-chain/chain-tip.json",
     "/record-chain/records/",
     "/api/echo-index.json",
@@ -22,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "28856ac3b7458d94",
+  "source_digest": "6d0efe343db1d901",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 101,
@@ -219,8 +220,13 @@
         "forbids_human_request": true,
         "forbids_human_operator_involvement": true,
         "forbids_human_execution": true,
-        "allows_human_authorization_only": true
+        "allows_human_authorization_only": true,
+        "requires_raw_record_to_meet_all_strict_conditions": true,
+        "applies_sha256_bound_corrections_and_classification_updates": true,
+        "positive_classification_cannot_create_a_match": true,
+        "autonomy_sensitive_correction_excludes_until_resolved": true
       },
+      "record_overlay_source": "/api/record-chain-overlays.json",
       "records": [],
       "near_misses": [
         {
@@ -535,7 +541,8 @@
             "requesting_party_type is not none"
           ]
         }
-      ]
+      ],
+      "overlay_exclusions": []
     },
     "classification_rule": {
       "go_live_record_id": "R-000000033",
@@ -900,7 +907,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-27T11:24:49Z",
+    "generated_at": "2026-07-28T01:24:21Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -1055,7 +1062,15 @@
     "semantic_agent_arrival": {
       "first_self_discovered_autonomous_agent_arrived": false,
       "first_arrival_record_id": null,
+      "first_arrival_record_index": null,
+      "first_arrival_record_type": null,
+      "first_arrival_record_sha256": null,
+      "first_arrival_assigned_at": null,
+      "effective_autonomous_record_count": 0,
       "waiting_continues": true,
+      "strict_original_record_conditions_required": true,
+      "corrections_and_classification_updates_applied": true,
+      "record_overlay_source": "/api/record-chain-overlays.json",
       "waiting_heartbeat_is_not_autonomous_arrival": true
     },
     "boundary": {
