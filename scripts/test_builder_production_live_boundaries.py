@@ -94,6 +94,8 @@ def main() -> None:
                 "false",
                 "--readback",
                 oath,
+                "--contextual-readback-confirmed",
+                "true",
                 "--key-dir",
                 str(key_dir),
                 "--out",

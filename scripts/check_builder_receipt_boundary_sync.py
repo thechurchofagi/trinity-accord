@@ -154,6 +154,8 @@ def check_builder_generated_submission() -> None:
                 "false",
                 "--readback",
                 oath_result.stdout,
+                "--contextual-readback-confirmed",
+                "true",
                 "--generate-authorship-key",
                 "--key-dir",
                 str(key_dir),

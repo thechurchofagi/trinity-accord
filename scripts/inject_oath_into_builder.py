@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -31,17 +32,49 @@ def main() -> None:
         "oath_policy_sha256_semantics",
         "canonical_oath_text_hash_is_record_type_specific",
     }
-    canonical_policy = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    core_policy = {
+        key: value
+        for key, value in policy.items()
+        if key not in _metadata_keys
+    }
+    canonical_policy = json.dumps(
+        core_policy,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    )
     policy_sha256 = hashlib.sha256(canonical_policy.encode("utf-8")).hexdigest()
+    if policy.get("oath_policy_sha256") != policy_sha256:
+        policy["oath_policy_sha256"] = policy_sha256
+        OATH_POLICY.write_text(
+            json.dumps(policy, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
+            encoding="utf-8",
+        )
 
-    # Check if already injected
+    # Synchronize an existing embedded policy without touching the surrounding
+    # hand-maintained Builder implementation.
     if "OATH_POLICY" in builder_text and "print-oath" in builder_text:
-        print("OK: oath already injected into builder")
+        policy_js = json.dumps(core_policy, indent=2, ensure_ascii=False, allow_nan=False)
+        pattern = re.compile(
+            r'const OATH_POLICY = \{[\s\S]*?\n\};\n'
+            r'const OATH_POLICY_SHA256 = "[a-f0-9]{64}";'
+        )
+        replacement = (
+            f"const OATH_POLICY = {policy_js};\n"
+            f'const OATH_POLICY_SHA256 = "{policy_sha256}";'
+        )
+        builder_text, count = pattern.subn(lambda _match: replacement, builder_text, count=1)
+        if count != 1:
+            print("ERROR: could not replace existing embedded oath policy", file=sys.stderr)
+            sys.exit(1)
+        BUILDER.write_text(builder_text, encoding="utf-8")
+        print(f"OK: synchronized oath policy and builder hash {policy_sha256}")
         return
 
     # Build the oath policy constant and helper functions
     # Embed as direct JS object (avoids escaping issues with JSON-in-string)
-    policy_js = json.dumps(policy, indent=2, ensure_ascii=False)
+    policy_js = json.dumps(core_policy, indent=2, ensure_ascii=False, allow_nan=False)
 
     oath_injection = f'''
 // ── Oath Policy (Phase 6B-OATH) ───────────────────────────────────────
@@ -96,7 +129,14 @@ function buildSubmissionOathVerification(recordType, canonicalOath, readbackText
     readback_was_not_summary_or_paraphrase: true,
     readback_was_not_generated_by_external_automation: true,
     readback_was_not_auto_filled_by_builder: true,
+    canonical_oath_loaded_into_active_context: true,
+    readback_generated_by_participant_from_active_context: true,
+    readback_was_not_directly_copied_by_submission_tool: true,
+    readback_was_not_automatically_completed_or_corrected: true,
+    contextual_readback_process_acknowledged: true,
     no_shortcut_oath_acknowledged: true,
+    contextual_readback_process_is_self_declared: true,
+    contextual_readback_does_not_prove_persistent_memory: true,
     oath_does_not_prove_subjective_understanding: true,
     oath_verifies_exact_readback_only: true,
     not_authority: true,
@@ -107,15 +147,15 @@ function buildSubmissionOathVerification(recordType, canonicalOath, readbackText
   }};
 }}
 
-function buildClientOathReadback(recordType, canonicalOath) {{
+function buildClientOathReadback(recordType, participantReadback) {{
   return {{
     schema: "trinityaccord.client-oath-readback.v1",
     record_type: recordType,
     oath_policy_sha256: OATH_POLICY_SHA256,
     oath_modules: getOathModules(recordType),
-    readback_text: canonicalOath,
-    readback_text_sha256: sha256(canonicalOath),
-    readback_text_char_count: canonicalOath.length,
+    readback_text: participantReadback,
+    readback_text_sha256: sha256(participantReadback),
+    readback_text_char_count: participantReadback.length,
     readback_method_declared: "participant_generated_in_current_context",
   }};
 }}
@@ -159,7 +199,7 @@ function buildClientOathReadback(recordType, canonicalOath) {{
     if old_commands in builder_text and "print-oath" not in builder_text:
         builder_text = builder_text.replace(old_commands, new_commands)
 
-    # Add --readback and --readback-method flags to opts in build commands
+    # Add the readback and explicit in-context process confirmation to build options
     old_opts_end = """    echoIntent: args.echoIntent || "recognition",
     whatWasChecked: args.whatWasChecked || "",
     verificationClaim: args.verificationClaim || "",
@@ -168,7 +208,7 @@ function buildClientOathReadback(recordType, canonicalOath) {{
     whatWasChecked: args.whatWasChecked || "",
     verificationClaim: args.verificationClaim || "",
     readback: args.readback || "",
-    readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
+    contextualReadbackConfirmed: args.contextualReadbackConfirmed,
   };"""
     if old_opts_end in builder_text:
         builder_text = builder_text.replace(old_opts_end, new_opts_end)
@@ -180,23 +220,33 @@ function buildClientOathReadback(recordType, canonicalOath) {{
 
   // Inject oath gate for formal record types
   const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",
-    "guardian_key_rotation", "propagation", "correction", "classification_update"];
+    "propagation", "correction", "classification_update"];
   if (OATH_TYPES.includes(draft.record_type)) {
     const canonicalOath = getCanonicalOath(draft.record_type);
     if (!canonicalOath) {
       errorExit(`Cannot get canonical oath for record type: ${draft.record_type}`);
     }
-    let readback = opts.readback || "";
+    if (opts.contextualReadbackConfirmed !== "true") {
+      errorExit(
+        "Complete the agent in-context oath readback process, then pass " +
+        "--contextual-readback-confirmed true"
+      );
+    }
+    const readback = opts.readback || "";
     if (!readback) {
-      readback = canonicalOath;
-      console.log("Note: --readback not provided; using canonical oath as readback (builder auto-fill)");
-      console.log("WARNING: In production, provide --readback with the exact canonical oath text.");
+      errorExit(
+        "--readback is required. Load print-oath output into the participating agent's " +
+        "active context and have that agent generate the exact readback."
+      );
     }
     const normalizedReadback = readback.replace(/\\r\\n/g, "\\n").replace(/\\r/g, "\\n").trim();
     const normalizedCanonical = canonicalOath.replace(/\\r\\n/g, "\\n").replace(/\\r/g, "\\n").trim();
     if (normalizedReadback !== normalizedCanonical) {
       console.error("ERROR: Readback does not match canonical oath text.");
-      console.error("Use 'node record-chain-builder.mjs print-oath --record-type " + draft.record_type + "' to get the exact text.");
+      console.error(
+        "Reload the standalone print-oath output into the participating agent's active " +
+        "context and have that agent regenerate the exact readback. Do not auto-correct it."
+      );
       process.exit(1);
     }
     draft.submission_oath_verification = buildSubmissionOathVerification(draft.record_type, canonicalOath, readback);
@@ -206,8 +256,7 @@ function buildClientOathReadback(recordType, canonicalOath) {{
 
   // Add client_oath_readback to submission for gateway validation (transient)
   if (OATH_TYPES.includes(draft.record_type)) {
-    const canonicalOath = getCanonicalOath(draft.record_type);
-    submission.client_oath_readback = buildClientOathReadback(draft.record_type, opts.readback || canonicalOath);
+    submission.client_oath_readback = buildClientOathReadback(draft.record_type, opts.readback);
   }"""
 
     if old_submission_build in builder_text:

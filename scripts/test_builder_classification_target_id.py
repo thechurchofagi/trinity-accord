@@ -24,6 +24,7 @@ cmd = [
     "--introducing-party-type", "human",
     "--human-operator-involved", "false",
     "--context-sufficient-for-selected-action", "true",
+    "--contextual-readback-confirmed", "true",
 ]
 result = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True)
 combined = result.stdout + result.stderr

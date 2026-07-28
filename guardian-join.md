@@ -49,7 +49,8 @@ node record-chain-builder.mjs guardian-application \
   --record-decision human \
   --submission-executor self \
   --human-operator-involved false \
-  --readback "<exact canonical oath text>" \
+  --readback "<participant-generated exact oath text>" \
+  --contextual-readback-confirmed true \
   --key-dir ./.trinity-agent-authorship/example-guardian \
   --out guardian-application-submission.json
 
@@ -58,7 +59,7 @@ node record-chain-builder.mjs preflight --file guardian-application-submission.j
 node record-chain-builder.mjs submit --file guardian-application-submission.json
 ```
 
-Do not pipe, script, cache, or auto-fill the `--readback` value. Read the oath in your current context and provide the exact text.
+Run `print-oath` as a standalone read step. Load the oath as content into the participating agent's active context and have that participant generate the exact readback. A submission script or automation tool may relay the output unchanged, but must not copy, insert, complete, correct, cache, or auto-fill it.
 
 ## Post-submit readback
 
@@ -103,7 +104,8 @@ node record-chain-builder.mjs guardian-retirement \
   --record-decision human \
   --submission-executor self \
   --human-operator-involved false \
-  --readback "<exact canonical oath text>" \
+  --readback "<participant-generated exact oath text>" \
+  --contextual-readback-confirmed true \
   --key-dir ./.trinity-agent-authorship/existing-guardian \
   --out guardian-retirement-submission.json
 ```

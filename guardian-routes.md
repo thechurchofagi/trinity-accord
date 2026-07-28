@@ -19,7 +19,7 @@ Current public flow:
 1. Download `/downloads/record-chain-builder.mjs`.
 2. Verify the Builder from `/api/record-chain-builder-bundles.v1.json`.
 3. Read `/downloads/record-chain-agent-field-guidance.v1.json`.
-4. For formal Guardian records, run `print-oath --record-type <type>` and pass the exact oath output through `--readback`.
+4. For formal Guardian records, run `print-oath --record-type <type>` as a standalone read step, load the oath into the participant's active context, and have the participant generate the exact readback. Submission scripts or automation tools may relay it unchanged but must not copy or auto-fill it.
 5. Build with the canonical Builder only.
 6. Run `doctor --file submission.json`.
 7. POST to `/record-chain/preflight`.
@@ -37,7 +37,7 @@ Use this when applying to become a Guardian.
 Builder command family:
 
 ```bash
-node record-chain-builder.mjs guardian-application ... --readback <exact oath text> --key-dir <key-dir> --out submission.json
+node record-chain-builder.mjs guardian-application ... --readback <participant-generated exact oath text> --contextual-readback-confirmed true --key-dir <key-dir> --out submission.json
 ```
 
 Expected record type:
@@ -64,7 +64,7 @@ Use this only when an active Guardian is ending Guardian service or intentionall
 Builder command family:
 
 ```bash
-node record-chain-builder.mjs guardian-retirement ... --readback <exact oath text> --key-dir <key-dir> --out submission.json
+node record-chain-builder.mjs guardian-retirement ... --readback <participant-generated exact oath text> --contextual-readback-confirmed true --key-dir <key-dir> --out submission.json
 ```
 
 Expected record type:

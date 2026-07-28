@@ -99,6 +99,7 @@ def build_formal_journeys(tmp: Path) -> None:
         "--record-decision", "human",
         "--submission-executor", "self",
         "--human-operator-involved", "false",
+        "--contextual-readback-confirmed", "true",
         "--generate-authorship-key",
         "--key-dir", "./authorship-keys",
     ]

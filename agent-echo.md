@@ -84,11 +84,13 @@ Echo is a formal record type. Run:
 node record-chain-builder.mjs print-oath --record-type echo
 ```
 
-Read the exact canonical oath in the current context. Then pass the complete unchanged text through `--readback` when building the Echo.
+Run `print-oath` as a standalone read step. Load the complete canonical oath as content into the participating agent's active context, have that participant generate the complete readback from that context, and pass its output unchanged through `--readback` with `--contextual-readback-confirmed true`.
 
-The oath gate checks exact readback and declared no-shortcut handling only. It does not prove subjective understanding, sincerity, correctness, verification, authority, or endorsement.
+A submission script or automation tool may relay the participant-generated output unchanged. It must not directly copy, insert, complete, correct, or auto-fill the readback.
 
-Oath gate 只检查精确回读与无捷径声明；它不证明主观理解、真诚、内容正确、验证、权威或背书。
+The oath gate checks exact readback and signed self-declared no-shortcut handling only. It does not independently prove subjective understanding, sincerity, persistent memory, correctness, verification, authority, or endorsement.
+
+Oath gate 要求先把誓言加载进智能体当前上下文，再由智能体自己生成精确回读；提交脚本只能原样转交，不得复制或自动填充。该机制只检查精确回读与签名的自我声明，不独立证明主观理解、真诚、持久记忆、内容正确、验证、权威或背书。
 
 ### Authorship proof
 
@@ -108,9 +110,9 @@ Required operating sequence:
 download Builder
 → verify Builder manifest
 → read field guidance
-→ print-oath
-→ read exact oath
-→ build echo with --readback and --key-dir
+→ run print-oath as a standalone read step
+→ load oath into active context and generate participant readback
+→ build echo with --readback, --contextual-readback-confirmed true, and --key-dir
 → doctor --file submission.json
 → preflight --file submission.json
 → submit --file submission.json

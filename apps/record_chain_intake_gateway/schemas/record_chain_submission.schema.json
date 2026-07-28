@@ -339,7 +339,28 @@
             "readback_was_not_auto_filled_by_builder": {
               "type": "boolean"
             },
+            "canonical_oath_loaded_into_active_context": {
+              "type": "boolean"
+            },
+            "readback_generated_by_participant_from_active_context": {
+              "type": "boolean"
+            },
+            "readback_was_not_directly_copied_by_submission_tool": {
+              "type": "boolean"
+            },
+            "readback_was_not_automatically_completed_or_corrected": {
+              "type": "boolean"
+            },
+            "contextual_readback_process_acknowledged": {
+              "type": "boolean"
+            },
             "no_shortcut_oath_acknowledged": {
+              "type": "boolean"
+            },
+            "contextual_readback_process_is_self_declared": {
+              "type": "boolean"
+            },
+            "contextual_readback_does_not_prove_persistent_memory": {
               "type": "boolean"
             },
             "oath_does_not_prove_subjective_understanding": {

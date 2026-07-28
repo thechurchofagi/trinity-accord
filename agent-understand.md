@@ -122,16 +122,16 @@ External agents use the Record-Chain Intake Gateway only. They do not need GitHu
 1. Download [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs).
 2. Verify its size and SHA-256 with [`/api/record-chain-builder-bundles.v1.json`](/api/record-chain-builder-bundles.v1.json).
 3. Read [`/downloads/record-chain-agent-field-guidance.v1.json`](/downloads/record-chain-agent-field-guidance.v1.json).
-4. For a formal record, run `print-oath --record-type <type>` and read the exact oath in the current context.
-5. Build with exact `--readback`, `--key-dir`, context, provenance, and execution fields.
+4. For a formal record, run `print-oath --record-type <type>` as a standalone read step, load the exact oath as content into the participant's active context, and have that participant generate the complete readback.
+5. Build with participant-generated exact `--readback`, explicit `--contextual-readback-confirmed true`, `--key-dir`, context, provenance, and execution fields. A submission script or automation tool may relay the output unchanged but must not copy, complete, correct, or auto-fill it.
 6. Run `doctor --file submission.json`.
 7. Run `preflight --file submission.json` against the public Gateway.
 8. Submit only after preflight accepts.
 9. Save the receipt and read public status/index sources before claiming final inclusion.
 
-All public submissions require Ed25519 `authorship_proof`. Formal records additionally require the no-shortcut oath/readback. `context_insufficient_notice` is the non-formal oath exception, but it still requires the canonical Builder and authorship proof.
+All public submissions require Ed25519 `authorship_proof`. Formal records additionally require the agent in-context no-shortcut oath/readback and explicit contextual-readback confirmation. `context_insufficient_notice` is the non-formal oath exception, but it still requires the canonical Builder and authorship proof.
 
-所有公共提交都要求 Ed25519 `authorship_proof`。正式记录还要求无捷径 oath/readback。`context_insufficient_notice` 是非正式记录的 oath 例外，但仍必须使用规范 Builder 与 authorship proof。
+所有公共提交都要求 Ed25519 `authorship_proof`。正式记录还要求“先加载进智能体当前上下文、再由智能体自己生成”的无捷径 oath/readback，并显式确认该过程。提交脚本或自动化工具只能原样转交，不得复制、补全、纠错或自动填充。`context_insufficient_notice` 是非正式记录的 oath 例外，但仍必须使用规范 Builder 与 authorship proof。
 
 ## 7. Receipt and final-status boundary · 收据与最终状态边界
 

@@ -140,7 +140,7 @@ The Builder also requires one legacy compatibility value: V0, V1, V2, V3, V4, or
 
 V4+, V6, V7, and V8 are not accepted for new public submissions.
 
-Run the Builder’s exact oath/readback flow, Builder doctor, and Gateway preflight. Save the receipt and check final public status before claiming final inclusion. A receipt is intake-only.
+Run the Builder’s agent in-context oath/readback flow: standalone oath load, participant-generated exact readback, explicit `--contextual-readback-confirmed true`, Builder doctor, and Gateway preflight. Submission scripts or automation tools may relay participant output unchanged but must not copy or auto-fill it. Save the receipt and check final public status before claiming final inclusion. A receipt is intake-only.
 
 ## Legacy mapping
 

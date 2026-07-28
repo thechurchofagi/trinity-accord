@@ -18,6 +18,7 @@ REQUIRED_TESTS = [
     # Phase 6B
     "scripts/test_phase6b_hotfix.py",
     "scripts/test_phase_6b_hotfix_contract.py",
+    "scripts/test_contextual_oath_readback_contract.py",
     "scripts/test_render_deploy_boundary_contract.py",
     "scripts/test_legacy_isolation_contract.py",
     "scripts/test_public_wording_phase6_contract.py",

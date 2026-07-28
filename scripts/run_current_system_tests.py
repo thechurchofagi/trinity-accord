@@ -497,6 +497,17 @@ def main() -> int:
         fail(f"oath gate contract test failed: {result.stderr}\n{result.stdout}")
     ok("oath gate contract test")
 
+    # Agent in-context oath readback contract
+    result = subprocess.run(
+        [sys.executable, "scripts/test_contextual_oath_readback_contract.py"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"contextual oath readback contract test failed: {result.stderr}\n{result.stdout}")
+    ok("contextual oath readback contract test")
+
     # Builder bundle contract test
     result = subprocess.run(
         [sys.executable, "scripts/test_record_chain_builder_bundle_contract.py"],
