@@ -65,7 +65,7 @@ jobs:
           git config user.name "Trinity Agent"
           git config user.email "agent@trinityaccord.org"
           git add scripts/_apply_pr767_late_review_failure.log
-          git commit -m "chore: capture late review patch failure"
+          git commit -m "chore: capture late review patch failure" || true
           git push origin HEAD:fix/pr767-late-review-20260728
 
       - name: Install test dependencies
@@ -78,12 +78,25 @@ jobs:
       - name: Run focused regressions
         if: success()
         run: |
+          set -o pipefail
+          {
+            python3 scripts/test_contextual_oath_review_regressions.py
+            python3 scripts/test_deploy_pages_workflow_contract.py
+            python3 scripts/test_record_chain_intake_gateway_contract.py
+            python3 scripts/test_deep_intake_append_transaction_invariants.py
+            python3 scripts/trinity_record_chain.py verify
+          } 2>&1 | tee /tmp/pr767-tests.log
+
+      - name: Persist test failure diagnostics
+        if: failure()
+        run: |
           set -euo pipefail
-          python3 scripts/test_contextual_oath_review_regressions.py
-          python3 scripts/test_deploy_pages_workflow_contract.py
-          python3 scripts/test_record_chain_intake_gateway_contract.py
-          python3 scripts/test_deep_intake_append_transaction_invariants.py
-          python3 scripts/trinity_record_chain.py verify
+          cp /tmp/pr767-tests.log scripts/_apply_pr767_late_review_test_failure.log
+          git config user.name "Trinity Agent"
+          git config user.email "agent@trinityaccord.org"
+          git add scripts/_apply_pr767_late_review_test_failure.log
+          git commit -m "chore: capture late review test failure" || true
+          git push origin HEAD:fix/pr767-late-review-20260728
 
       - name: Remove temporary patch machinery
         if: success()
@@ -91,6 +104,7 @@ jobs:
           rm scripts/_apply_pr767_late_review_fixes.py
           rm .github/workflows/_apply-pr767-late-review-fixes.yml
           rm -f scripts/_apply_pr767_late_review_failure.log
+          rm -f scripts/_apply_pr767_late_review_test_failure.log
 
       - name: Commit and push verified fixes
         if: success()
