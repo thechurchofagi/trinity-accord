@@ -217,14 +217,18 @@ jobs:
             git push origin HEAD:fix/pr767-late-review-20260728
           fi
 
-      - name: Remove temporary patch machinery
+      - name: Stage verified workflow blobs and remove temporary patch machinery
         if: success()
         run: |
+          cp .github/workflows/deploy-pages.yml scripts/_verified_deploy_pages.yml
+          cp .github/workflows/site-agent-write-lifecycle-canary.yml scripts/_verified_site_agent_write_lifecycle_canary.yml
+          git checkout -- .github/workflows/deploy-pages.yml
+          git checkout -- .github/workflows/site-agent-write-lifecycle-canary.yml
           rm scripts/_apply_pr767_late_review_fixes.py
           rm -f scripts/_apply_pr767_late_review_failure.log
           rm -f scripts/_apply_pr767_late_review_test_failure.log
 
-      - name: Commit and push verified fixes
+      - name: Commit and push verified non-workflow fixes
         if: success()
         run: |
           set -euo pipefail
