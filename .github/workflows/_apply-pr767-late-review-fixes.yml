@@ -57,6 +57,32 @@ jobs:
           set -o pipefail
           python3 scripts/_apply_pr767_late_review_fixes.py 2>&1 | tee /tmp/pr767-patch.log
 
+      - name: Correct predecessor regression fixture sequencing
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/test_contextual_oath_review_regressions.py")
+          text = path.read_text(encoding="utf-8")
+          mutation = '    downgraded_oath["oath_policy_version"] = "not-a-version"\n'
+          position = text.index(mutation)
+          snapshot = "    gateway_admitted_predecessor = copy.deepcopy(downgraded)\n\n"
+          text = text[:position] + snapshot + text[position:]
+          activation_start = text.index(
+              "    activation = chain._guardian_activation_assessment(",
+              position + len(snapshot),
+          )
+          activation_end = text.index(
+              "\n\n    current = copy.deepcopy(downgraded)",
+              activation_start,
+          )
+          activation = text[activation_start:activation_end].replace(
+              "downgraded",
+              "gateway_admitted_predecessor",
+          )
+          text = text[:activation_start] + activation + text[activation_end:]
+          path.write_text(text, encoding="utf-8")
+          PY
+
       - name: Persist patch failure diagnostics
         if: failure()
         run: |
