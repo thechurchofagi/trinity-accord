@@ -1,11 +1,15 @@
-Traceback (most recent call last):
-  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_contextual_oath_review_regressions.py", line 734, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_contextual_oath_review_regressions.py", line 727, in main
-    test()
-  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_contextual_oath_review_regressions.py", line 122, in test_policy_downgrade_is_bound_to_immutable_history
-    require(
-  File "/home/runner/work/trinity-accord/trinity-accord/scripts/test_contextual_oath_review_regressions.py", line 38, in require
-    raise AssertionError(message)
-AssertionError: exact Gateway-admitted predecessor must not be reclassified as a contextual downgrade: {'schema': 'trinityaccord.guardian-activation-assessment.v1', 'policy': 'trinityaccord.guardian-active-listing-policy.v2', 'eligible': False, 'status': 'blocked', 'blocking_reasons': ['contextual_oath_readback_not_verified', 'contextual_oath_policy_not_current'], 'boundary': {'not_authority': True, 'not_governance': True, 'not_attestation': True, 'not_verification_level': True, 'not_successor_reception': True, 'not_amendment': True, 'bitcoin_originals_prevail': True, 'receipt_is_not_active_guardian_status': True}}
+PASS: test_policy_downgrade_is_bound_to_immutable_history
+PASS: test_gateway_rolling_policy_is_exact_and_bounded
+PASS: test_gateway_published_policy_fetch_is_single_flight_cached
+PASS: test_smokes_only_relay_participant_bundle
+PASS: test_injector_refuses_policy_only_upgrade
+PASS: test_pages_deploy_orders_gateway_before_public_builder
+PASS: test_gateway_validation_does_not_block_async_event_loop
+PASS: test_public_recovery_guidance_preserves_contextual_authorship
+PASS: all contextual-oath post-merge review regressions are closed
+FAIL: deploy-pages workflow contract errors:
+  - missing required publication marker: "apps/record_chain_intake_gateway/**"
+  - missing required publication marker: "render.yaml"
+  - missing required publication marker: ".github/workflows/render-manual-deploy.yml"
+  - missing required publication marker: ".github/workflows/homepage-deployment-receipt.yml"
+  - missing required publication marker: "scripts/**"
