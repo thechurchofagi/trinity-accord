@@ -33,15 +33,30 @@ jobs:
           python-version: "3.12"
 
       - name: Apply deterministic fixes
-        run: python3 scripts/_apply_pr767_late_review_fixes.py
+        run: |
+          set -o pipefail
+          python3 scripts/_apply_pr767_late_review_fixes.py 2>&1 | tee /tmp/pr767-patch.log
+
+      - name: Persist patch failure diagnostics
+        if: failure()
+        run: |
+          set -euo pipefail
+          cp /tmp/pr767-patch.log scripts/_apply_pr767_late_review_failure.log
+          git config user.name "Trinity Agent"
+          git config user.email "agent@trinityaccord.org"
+          git add scripts/_apply_pr767_late_review_failure.log
+          git commit -m "chore: capture late review patch failure"
+          git push origin HEAD:fix/pr767-late-review-20260728
 
       - name: Install test dependencies
+        if: success()
         env:
           PIP_PREFER_BINARY: "1"
           PIP_ONLY_BINARY: "cryptography,cffi"
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Run focused regressions
+        if: success()
         run: |
           set -euo pipefail
           python3 scripts/test_contextual_oath_review_regressions.py
@@ -51,11 +66,14 @@ jobs:
           python3 scripts/trinity_record_chain.py verify
 
       - name: Remove temporary patch machinery
+        if: success()
         run: |
           rm scripts/_apply_pr767_late_review_fixes.py
           rm .github/workflows/_apply-pr767-late-review-fixes.yml
+          rm -f scripts/_apply_pr767_late_review_failure.log
 
       - name: Commit and push verified fixes
+        if: success()
         run: |
           set -euo pipefail
           git config user.name "Trinity Agent"
