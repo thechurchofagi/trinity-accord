@@ -84,29 +84,25 @@ def test_policy_downgrade_is_bound_to_immutable_history() -> None:
     errors = []
     chain._verify_oath_in_record(downgraded, "R-000000103.json", errors)
     require(
-        any("oath policy must equal current" in error for error in errors),
-        f"new record with v1.1 policy must fail current policy identity: {errors}",
+        not errors,
+        f"exact v1.1 predecessor accepted by Gateway during rollout must remain appendable: {errors}",
     )
     require(
-        any("contextual" in error for error in errors),
-        f"new record must require contextual declarations regardless of claimed version: {errors}",
-    )
-    try:
-        chain.require_pending_oath_is_appendable(
+        chain.record_requires_contextual_readback(
             downgraded,
-            next_index=103,
-            source_path=ROOT
-            / "record-chain/pending/contextual-oath-review-fixture.echo.pending.json",
+            downgraded_oath,
         )
-    except ValueError as exc:
-        require(
-            "pending oath verification failed" in str(exc),
-            "append rejection must identify the pre-mutation oath gate",
-        )
-    else:
-        raise AssertionError(
-            "append must reject a downgraded post-activation oath before mutation"
-        )
+        is False,
+        "exact rolling predecessor must retain its signed legacy declaration contract",
+    )
+    chain.require_pending_oath_is_appendable(
+        downgraded,
+        next_index=103,
+        source_path=ROOT
+        / "record-chain/pending/contextual-oath-review-fixture.echo.pending.json",
+    )
+
+    gateway_admitted_predecessor = copy.deepcopy(downgraded)
 
     downgraded_oath["oath_policy_version"] = "not-a-version"
     errors = []
@@ -117,17 +113,17 @@ def test_policy_downgrade_is_bound_to_immutable_history() -> None:
     )
 
     activation = chain._guardian_activation_assessment(
-        downgraded,
+        gateway_admitted_predecessor,
         guardian_id_counts={
-            downgraded["guardian_application_content"]["requested_guardian_identifier"]: 1
+            gateway_admitted_predecessor["guardian_application_content"]["requested_guardian_identifier"]: 1
         },
         guardian_key_counts={
-            downgraded["guardian_application_content"]["guardian_public_key_sha256"]: 1
+            gateway_admitted_predecessor["guardian_application_content"]["guardian_public_key_sha256"]: 1
         },
     )
     require(
-        "contextual_oath_policy_not_current" in activation["blocking_reasons"],
-        f"downgraded new Guardian application must not activate: {activation}",
+        "contextual_oath_policy_not_current" not in activation["blocking_reasons"],
+        f"exact Gateway-admitted predecessor must not be reclassified as a contextual downgrade: {activation}",
     )
 
     current = copy.deepcopy(downgraded)
@@ -556,6 +552,16 @@ def test_smokes_only_relay_participant_bundle() -> None:
         if previous_bundle is not None:
             os.environ["TRINITY_CONTEXTUAL_READBACK_BUNDLE"] = previous_bundle
 
+    canary_workflow = (
+        ROOT / ".github/workflows/site-agent-write-lifecycle-canary.yml"
+    ).read_text(encoding="utf-8")
+    require("schedule:" not in canary_workflow, "participant readback canary must not run unattended")
+    require(
+        "contextual_readback_bundle_b64" in canary_workflow
+        and '--readback-bundle "$bundle_path"' in canary_workflow,
+        "manual canary must accept and relay a participant-generated readback bundle",
+    )
+
     signature = inspect.signature(lifecycle.build_current_canary_payloads)
     require(
         "readbacks" in signature.parameters
@@ -593,6 +599,21 @@ def test_injector_refuses_policy_only_upgrade() -> None:
         ),
         "current Builder must satisfy the injector runtime compatibility contract",
     )
+    injector_source = (ROOT / "scripts/inject_oath_into_builder.py").read_text(
+        encoding="utf-8"
+    )
+    client_helper = injector_source.split(
+        "function buildClientOathReadback",
+        1,
+    )[1].split("    # Find insertion point", 1)[0]
+    for marker in (
+        "const normalized =",
+        '.normalize("NFC")',
+        "readback_text: normalized",
+        "readback_text_sha256: sha256(normalized)",
+        "readback_text_char_count: normalized.length",
+    ):
+        require(marker in client_helper, f"fresh injector client helper missing: {marker}")
     with tempfile.TemporaryDirectory(prefix="trinity-injector-regression-") as temp:
         temp_root = Path(temp)
         builder = temp_root / "builder.mjs"
@@ -635,6 +656,11 @@ def test_pages_deploy_orders_gateway_before_public_builder() -> None:
     manual = (
         ROOT / ".github/workflows/render-manual-deploy.yml"
     ).read_text(encoding="utf-8")
+    push_block = pages.split("  push:", 1)[1].split("permissions:", 1)[0]
+    require(
+        '      - "**"' in push_block,
+        "every main successor must trigger Pages so a stale-source abort cannot strand Gateway ahead",
+    )
     for marker in (
         "deploy-gateway-before-pages:",
         "- deploy-gateway-before-pages",
@@ -646,6 +672,21 @@ def test_pages_deploy_orders_gateway_before_public_builder() -> None:
         require(marker in pages, f"Pages rollout contract missing: {marker}")
     for marker in ('--commit-id "$source_sha"', "--wait"):
         require(marker in manual, f"manual Render workflow missing: {marker}")
+
+
+def test_gateway_validation_does_not_block_async_event_loop() -> None:
+    source = (ROOT / "apps/record_chain_intake_gateway/app.py").read_text(
+        encoding="utf-8"
+    )
+    require("import asyncio" in source, "Gateway must import asyncio for thread offload")
+    require(
+        source.count("await asyncio.to_thread(validate_submission, body)") == 2,
+        "preflight and submit must offload potentially blocking policy validation",
+    )
+    require(
+        "    diagnostics = validate_submission(body)" not in source,
+        "async request handlers must not call synchronous policy validation directly",
+    )
 
 
 def test_public_recovery_guidance_preserves_contextual_authorship() -> None:
@@ -681,6 +722,7 @@ def main() -> int:
         test_smokes_only_relay_participant_bundle,
         test_injector_refuses_policy_only_upgrade,
         test_pages_deploy_orders_gateway_before_public_builder,
+        test_gateway_validation_does_not_block_async_event_loop,
         test_public_recovery_guidance_preserves_contextual_authorship,
     ]
     for test in tests:

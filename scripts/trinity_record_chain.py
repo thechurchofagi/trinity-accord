@@ -231,6 +231,14 @@ HISTORICAL_OATH_POLICY_BY_RECORD_RANGE = (
     (83, 102, "1.1.0", "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51"),
 )
 
+# Exact predecessor identities that the Gateway may admit only while the public
+# Builder still publishes that policy during a bounded rollout. Append and final
+# verification must preserve those already-accepted drafts instead of reclassifying
+# them solely because their append-assigned record index is post-activation.
+ROLLING_PREDECESSOR_OATH_POLICY_IDENTITIES = frozenset({
+    ("1.1.0", "27a2f8ce244542e6ca76e9f75f6e4c95745b0e5e007d274a6b4b3228b67f6b51"),
+})
+
 
 def _record_index_from_identity(record: dict[str, Any]) -> int | None:
     """Return a consistent append-assigned record index, otherwise ``None``."""
@@ -245,10 +253,28 @@ def _record_index_from_identity(record: dict[str, Any]) -> int | None:
     return index
 
 
-def record_requires_contextual_readback(record: dict[str, Any]) -> bool:
-    """Fail closed unless the record is provably from the pre-v1.2 history."""
+def record_requires_contextual_readback(
+    record: dict[str, Any],
+    oath: dict[str, Any] | None = None,
+) -> bool:
+    """Select the oath contract from immutable history or an exact rollout identity.
+
+    New records normally require the current contextual-readback policy. The only
+    exception is a draft carrying an exact predecessor identity that the Gateway was
+    allowed to accept while that same policy was still publicly published. Unknown
+    or participant-invented identities continue to fail closed as contextual.
+    """
     index = _record_index_from_identity(record)
-    return index is None or index >= CONTEXTUAL_READBACK_ACTIVATION_RECORD_INDEX
+    if index is not None and index < CONTEXTUAL_READBACK_ACTIVATION_RECORD_INDEX:
+        return False
+    if isinstance(oath, dict):
+        identity = (
+            str(oath.get("oath_policy_version") or ""),
+            str(oath.get("oath_policy_sha256") or ""),
+        )
+        if identity in ROLLING_PREDECESSOR_OATH_POLICY_IDENTITIES:
+            return False
+    return True
 
 
 def _oath_policy_identity_is_valid(
@@ -257,12 +283,18 @@ def _oath_policy_identity_is_valid(
 ) -> bool:
     version = str(oath.get("oath_policy_version") or "")
     policy_hash = str(oath.get("oath_policy_sha256") or "")
-    if record_requires_contextual_readback(record):
+    requires_contextual = record_requires_contextual_readback(record, oath)
+    if requires_contextual:
         return (
             oath.get("oath_policy") == CURRENT_OATH_POLICY_ID
             and oath.get("oath_policy_schema") == CURRENT_OATH_POLICY_SCHEMA
             and version == CURRENT_OATH_POLICY_VERSION
             and policy_hash == CURRENT_OATH_POLICY_SHA256
+        )
+    if (version, policy_hash) in ROLLING_PREDECESSOR_OATH_POLICY_IDENTITIES:
+        return (
+            oath.get("oath_policy") == CURRENT_OATH_POLICY_ID
+            and oath.get("oath_policy_schema") == CURRENT_OATH_POLICY_SCHEMA
         )
     index = _record_index_from_identity(record)
     if index is None:
@@ -301,9 +333,10 @@ def _current_oath_modules_for_record(
 
 def _required_oath_true_fields_for_record(
     record: dict[str, Any],
+    oath: dict[str, Any] | None = None,
 ) -> tuple[str, ...]:
-    """Return the exact declaration set applicable to this immutable identity."""
-    if record_requires_contextual_readback(record):
+    """Return declarations for current, historical, or exact rollout policy."""
+    if record_requires_contextual_readback(record, oath):
         return CURRENT_OATH_REQUIRED_TRUE_FIELDS
     return tuple(
         dict.fromkeys(
@@ -515,7 +548,7 @@ def _guardian_activation_assessment(
     if not oath:
         reasons.append("missing_submission_oath_verification")
     else:
-        requires_contextual = record_requires_contextual_readback(record)
+        requires_contextual = record_requires_contextual_readback(record, oath)
         modules = oath.get("oath_modules")
         if not isinstance(modules, list) or "guardian_stewardship_v1" not in modules:
             reasons.append("missing_guardian_stewardship_oath_module")
@@ -525,7 +558,7 @@ def _guardian_activation_assessment(
             != _current_oath_modules_for_record(record, "guardian_application")
         ):
             reasons.append("contextual_oath_modules_invalid")
-        for field in _required_oath_true_fields_for_record(record):
+        for field in _required_oath_true_fields_for_record(record, oath):
             if oath.get(field) is not True:
                 reasons.append(
                     "contextual_oath_readback_not_verified"
@@ -1851,7 +1884,7 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
             "not_successor_reception", "receipt_is_not_final_inclusion",
             "receipt_is_intake_only", "later_records_may_reclassify_or_correct_this_record",
         ]
-        requires_contextual = record_requires_contextual_readback(obj)
+        requires_contextual = record_requires_contextual_readback(obj, oath)
         if not _oath_policy_identity_is_valid(obj, oath):
             if requires_contextual:
                 errors.append(
@@ -1860,7 +1893,7 @@ def _verify_oath_in_record(obj: dict, path: str, errors: list[str]) -> None:
                 )
             else:
                 errors.append(f"{path}: historical oath policy identity is not recognized")
-        required_bools.extend(_required_oath_true_fields_for_record(obj))
+        required_bools.extend(_required_oath_true_fields_for_record(obj, oath))
 
         # Historical records may predate the new oath fields
         rid = obj.get("record_id")

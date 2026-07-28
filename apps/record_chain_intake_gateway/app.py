@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import logging
@@ -1078,7 +1079,7 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
         )
 
     # validate_submission now returns list[Diagnostic] directly
-    diagnostics = validate_submission(body)
+    diagnostics = await asyncio.to_thread(validate_submission, body)
     diagnostics.extend(_client_projection_diagnostics(body))
     if not diagnostics:
         diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
@@ -1159,7 +1160,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
         )
 
     # --- validate (now returns list[Diagnostic] directly) ---
-    diagnostics = validate_submission(body)
+    diagnostics = await asyncio.to_thread(validate_submission, body)
     diagnostics.extend(_client_projection_diagnostics(body))
     if not diagnostics:
         diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
