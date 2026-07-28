@@ -10,13 +10,24 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from typing import Any
 
 RENDER_API = "https://api.render.com/v1"
 LEGACY_SERVICE_NAME = "trinity-agent-issue-gateway"
+DEPLOY_SUCCESS_STATUSES = frozenset({"live"})
+DEPLOY_FAILURE_STATUSES = frozenset({
+    "build_failed",
+    "update_failed",
+    "pre_deploy_failed",
+    "canceled",
+    "deactivated",
+})
+_COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
 def fail(msg: str) -> None:
@@ -84,6 +95,11 @@ def service_is_suspended(service: dict) -> bool:
     return state not in (None, False, "", "not_suspended")
 
 
+def service_auto_deploy_is_disabled(service: dict) -> bool:
+    """Return whether Render's actual service state disables autodeploys."""
+    return service.get("autoDeploy") in ("no", False)
+
+
 def deploy_id_from_response(result: Any) -> str | None:
     if not isinstance(result, dict):
         return None
@@ -98,11 +114,84 @@ def deploy_id_from_response(result: Any) -> str | None:
     return None
 
 
+def deploy_object(result: Any) -> dict[str, Any]:
+    if not isinstance(result, dict):
+        return {}
+    nested = result.get("deploy")
+    return nested if isinstance(nested, dict) else result
+
+
+def deploy_commit_id(result: Any) -> str | None:
+    deploy = deploy_object(result)
+    commit = deploy.get("commit")
+    if isinstance(commit, dict):
+        value = commit.get("id") or commit.get("sha")
+        if isinstance(value, str) and value:
+            return value
+    for key in ("commitId", "commit_id"):
+        value = deploy.get(key)
+        if isinstance(value, str) and value:
+            return value
+    return None
+
+
+def deploy_status(result: Any) -> str:
+    value = deploy_object(result).get("status")
+    return str(value or "").strip().lower()
+
+
+def wait_for_deploy(
+    *,
+    service_id: str,
+    deploy_id: str,
+    token: str,
+    expected_commit_id: str,
+    timeout_seconds: int,
+    poll_seconds: float,
+) -> dict[str, Any]:
+    deadline = time.monotonic() + timeout_seconds
+    last_status = ""
+    while True:
+        result = request(f"/services/{service_id}/deploys/{deploy_id}", token)
+        status = deploy_status(result)
+        observed_commit = deploy_commit_id(result)
+        if observed_commit and observed_commit != expected_commit_id:
+            fail(
+                f"Render deploy {deploy_id} commit mismatch: "
+                f"expected {expected_commit_id}, got {observed_commit}"
+            )
+        if status != last_status:
+            print(
+                f"RENDER_DEPLOY_STATUS deploy_id={deploy_id} "
+                f"status={status or 'unknown'}"
+            )
+            last_status = status
+        if status in DEPLOY_SUCCESS_STATUSES:
+            if observed_commit != expected_commit_id:
+                fail(
+                    f"Render deploy {deploy_id} is live without proving commit "
+                    f"{expected_commit_id}"
+                )
+            return deploy_object(result)
+        if status in DEPLOY_FAILURE_STATUSES:
+            fail(f"Render deploy {deploy_id} ended with status={status}")
+        if time.monotonic() >= deadline:
+            fail(
+                f"Render deploy {deploy_id} did not become live within "
+                f"{timeout_seconds} seconds (last_status={status or 'unknown'})"
+            )
+        time.sleep(max(0.0, poll_seconds))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--service", default="trinity-record-chain-gateway")
     parser.add_argument("--deploy", action="store_true")
     parser.add_argument("--allow-legacy", action="store_true")
+    parser.add_argument("--commit-id", default="")
+    parser.add_argument("--wait", action="store_true")
+    parser.add_argument("--wait-timeout", type=int, default=900)
+    parser.add_argument("--poll-seconds", type=float, default=10.0)
     args = parser.parse_args()
 
     token = os.environ.get("RENDER", "").strip()
@@ -111,6 +200,15 @@ def main() -> int:
 
     if args.service == LEGACY_SERVICE_NAME and not args.allow_legacy:
         fail("Refusing to deploy legacy gateway without --allow-legacy")
+    commit_id = args.commit_id.strip()
+    if commit_id and not _COMMIT_RE.fullmatch(commit_id):
+        fail("--commit-id must be a full 40-character lowercase Git commit SHA")
+    if args.wait and not commit_id:
+        fail("--wait requires --commit-id so the live source can be proven exactly")
+    if args.wait_timeout < 1:
+        fail("--wait-timeout must be at least 1 second")
+    if args.poll_seconds < 0:
+        fail("--poll-seconds must be non-negative")
 
     svc = find_service(token, args.service)
     sid = svc.get("id")
@@ -126,7 +224,8 @@ def main() -> int:
     )
 
     if not args.deploy:
-        print("DRY_RUN: no deploy triggered")
+        suffix = f" commit_id={commit_id}" if commit_id else ""
+        print(f"DRY_RUN: no deploy triggered{suffix}")
         return 0
 
     if suspended:
@@ -135,13 +234,44 @@ def main() -> int:
             f"Render service is suspended (state={suspension_state}, suspenders={actor}); "
             "no deployment was created. Resume the service intentionally before deploying."
         )
+    if commit_id and not service_auto_deploy_is_disabled(svc):
+        fail(
+            f"Refusing exact-commit deploy for {args.service}: Render reports "
+            "autodeploys are enabled or unconfirmed"
+        )
 
-    result = request(f"/services/{sid}/deploys", token, method="POST", body={"clearCache": "do_not_clear"})
+    body = {"clearCache": "do_not_clear"}
+    if commit_id:
+        body["commitId"] = commit_id
+    result = request(f"/services/{sid}/deploys", token, method="POST", body=body)
     deploy_id = deploy_id_from_response(result)
     if not deploy_id:
         fail("Render accepted the deploy request without returning a deploy ID; deployment is unconfirmed")
 
-    print(f"RENDER_DEPLOY_TRIGGERED service={args.service} deploy_id={deploy_id}")
+    observed_commit = deploy_commit_id(result)
+    if observed_commit and commit_id and observed_commit != commit_id:
+        fail(
+            f"Render created deploy {deploy_id} for unexpected commit "
+            f"{observed_commit}; expected {commit_id}"
+        )
+    commit_suffix = f" commit_id={commit_id}" if commit_id else ""
+    print(
+        f"RENDER_DEPLOY_TRIGGERED service={args.service} "
+        f"deploy_id={deploy_id}{commit_suffix}"
+    )
+    if args.wait:
+        wait_for_deploy(
+            service_id=str(sid),
+            deploy_id=deploy_id,
+            token=token,
+            expected_commit_id=commit_id,
+            timeout_seconds=args.wait_timeout,
+            poll_seconds=args.poll_seconds,
+        )
+        print(
+            f"RENDER_DEPLOY_LIVE service={args.service} deploy_id={deploy_id} "
+            f"commit_id={commit_id}"
+        )
     return 0
 
 

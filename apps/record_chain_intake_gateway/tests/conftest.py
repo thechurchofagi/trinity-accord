@@ -158,7 +158,13 @@ def _make_valid_submission() -> dict[str, Any]:
         },
         "authorship_proof": proof,
         "client_oath_readback": {
+            "record_type": "echo",
+            "oath_policy_sha256": oath_verification["oath_policy_sha256"],
+            "oath_modules": list(oath_verification["oath_modules"]),
+            "readback_method_declared": oath_verification["readback_method_declared"],
             "readback_text": readback_text,
+            "readback_text_sha256": oath_verification["participant_readback_sha256"],
+            "readback_text_char_count": len(readback_text),
         },
     }
 
@@ -176,7 +182,6 @@ def _build_oath_for_record_type(record_type: str, draft: dict[str, Any]) -> tupl
     policy_path = root / "api" / "record-chain-oath-policy.v1.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
 
-    policy_json = json.dumps(policy, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     # Compute policy-core hash (excluding self-describing metadata keys)
     _METADATA_KEYS = {
         "oath_policy_sha256",
@@ -206,7 +211,9 @@ def _build_oath_for_record_type(record_type: str, draft: dict[str, Any]) -> tupl
     readback_hash = sha256_text(unicodedata.normalize("NFC", normalize_oath_text(canonical_text)))
 
     verification = {
-        "oath_policy": "/api/record-chain-oath-policy.v1.json",
+        "oath_policy": policy["policy_id"],
+        "oath_policy_schema": policy["schema"],
+        "oath_policy_version": policy["version"],
         "oath_policy_sha256": policy_sha256,
         "oath_modules": modules,
         "canonical_oath_text_sha256": canonical_hash,

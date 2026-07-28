@@ -42,7 +42,9 @@ jobs:
     # Production secrets and deployment must therefore be accepted only for main.
     if: ${{ github.ref == 'refs/heads/main' && (github.actor == 'thechurchofagi' || github.actor == 'github-actions[bot]') }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    # The helper can wait up to 15 minutes for Render to reach `live`; leave
+    # enough job time for checkout, service discovery, and final evidence.
+    timeout-minutes: 20
     steps:
       - name: Checkout current main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -72,7 +74,8 @@ jobs:
           RENDER: ${{ secrets.RENDER }}
         run: |
           set -euo pipefail
-          args=(--service "$INPUT_SERVICE")
+          source_sha="$(git rev-parse HEAD)"
+          args=(--service "$INPUT_SERVICE" --commit-id "$source_sha" --wait)
           if [ "$INPUT_DEPLOY" = "true" ]; then
             args+=(--deploy)
           fi

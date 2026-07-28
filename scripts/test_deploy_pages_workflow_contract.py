@@ -27,11 +27,21 @@ def main() -> int:
             errors.append(f"permissions.{key} must be {expected}")
 
     jobs = data.get("jobs", {})
-    for job in ("verify", "build", "deploy"):
+    for job in ("verify", "deploy-gateway-before-pages", "build", "deploy"):
         if job not in jobs:
             errors.append(f"missing jobs.{job}")
-    if jobs.get("build", {}).get("needs") != "verify":
-        errors.append("build must depend on verify")
+    if jobs.get("deploy-gateway-before-pages", {}).get("needs") != "verify":
+        errors.append("Gateway rollout must depend on verify")
+    build_needs = jobs.get("build", {}).get("needs", [])
+    if isinstance(build_needs, str):
+        build_needs = [build_needs]
+    if not isinstance(build_needs, list) or set(build_needs) != {
+        "verify",
+        "deploy-gateway-before-pages",
+    }:
+        errors.append(
+            "build must depend on verify and deploy-gateway-before-pages"
+        )
     if jobs.get("deploy", {}).get("needs") != "build":
         errors.append("deploy must depend on build")
 
@@ -40,10 +50,14 @@ def main() -> int:
         "ref: ${{ needs.verify.outputs.source_sha }}",
         "ref: ${{ needs.build.outputs.source_sha }}",
         "Resolve immutable current-main source revision",
+        '"apps/record_chain_intake_gateway/**"',
+        '"render.yaml"',
+        '".github/workflows/render-manual-deploy.yml"',
         "git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main",
         'if [[ "${source_sha}" != "${main_sha}" ]]',
         "Refusing to publish ${source_sha}; current main is ${main_sha}",
         "Confirm immutable verify/build handoff",
+        "required=true",
         "Confirm immutable build/deploy handoff",
         "trinity-pages-source-receipt.v1",
         "pages-source-receipt-${{ github.run_id }}",

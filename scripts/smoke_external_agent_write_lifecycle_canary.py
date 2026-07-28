@@ -20,7 +20,12 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from smoke_live_external_agent_three_core_preflight import _build_cases, fetch_bytes
+from contextual_readback_bundle import ReadbackBundleError, load_contextual_readbacks
+from smoke_live_external_agent_three_core_preflight import (
+    CORE_RECORD_TYPES,
+    _build_cases,
+    fetch_bytes,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = "https://www.trinityaccord.org"
@@ -269,7 +274,13 @@ def submit_canary(gateway_base: str, submit_path: str, payload: dict[str, Any], 
     return "submitted", body
 
 
-def build_current_canary_payloads(site: str, nonce: str, timeout: int) -> dict[str, dict[str, Any]]:
+def build_current_canary_payloads(
+    site: str,
+    nonce: str,
+    timeout: int,
+    *,
+    readbacks: dict[str, str],
+) -> dict[str, dict[str, Any]]:
     """Build fresh signed current submissions with the public canonical Builder."""
     with tempfile.TemporaryDirectory(prefix="trinity-live-canary-builder-") as temp_dir:
         work = Path(temp_dir)
@@ -281,6 +292,7 @@ def build_current_canary_payloads(site: str, nonce: str, timeout: int) -> dict[s
             site.rstrip("/"),
             work,
             timeout,
+            readbacks=readbacks,
             actor_label="Live Write Canary Governance Agent",
             provider="Trinity source-gated live canary",
             echo_body=(
@@ -323,6 +335,14 @@ def main() -> int:
                         help="Required exact phrase for write modes")
     parser.add_argument("--timeout", type=int, default=30)
     parser.add_argument("--poll-seconds", type=int, default=180)
+    parser.add_argument(
+        "--readback-bundle",
+        help=(
+            "Participant-generated contextual oath readback bundle. Required for "
+            "preflight and write modes; may also be set with "
+            "TRINITY_CONTEXTUAL_READBACK_BUNDLE."
+        ),
+    )
     args = parser.parse_args()
 
     # Load canary policy from public site
@@ -353,9 +373,20 @@ def main() -> int:
     # Gate writes by policy + confirmation
     require_write_gate(args.mode, args.confirm_live_canary, policy)
 
+    try:
+        readbacks = load_contextual_readbacks(args.readback_bundle, CORE_RECORD_TYPES)
+    except ReadbackBundleError as exc:
+        print(f"FAIL: {exc}")
+        return 2
+
     nonce = uuid.uuid4().hex[:12]
     try:
-        all_payloads = build_current_canary_payloads(args.site, nonce, args.timeout)
+        all_payloads = build_current_canary_payloads(
+            args.site,
+            nonce,
+            args.timeout,
+            readbacks=readbacks,
+        )
     except Exception as exc:
         print(f"FAIL: current public Builder could not create signed canary payloads: {exc}")
         return 1

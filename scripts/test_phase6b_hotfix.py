@@ -155,14 +155,33 @@ def _make_echo_draft(index: int = 1) -> dict:
         "submission_oath_verification": {
             "oath_read": True,
             "participant_readback_provided": True,
-            "oath_policy_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "oath_policy": mod.CURRENT_OATH_POLICY_ID,
+            "oath_policy_schema": mod.CURRENT_OATH_POLICY_SCHEMA,
+            "oath_policy_version": mod.CURRENT_OATH_POLICY_VERSION,
+            "oath_policy_sha256": mod.CURRENT_OATH_POLICY_SHA256,
             "canonical_oath_text_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
             "participant_readback_sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+            "readback_method_declared": "participant_generated_in_current_context",
             "readback_matches_canonical_oath": True,
+            "readback_was_not_piped_from_file": True,
+            "readback_was_not_generated_by_script": True,
+            "readback_was_not_loaded_from_cache": True,
+            "readback_was_not_summary_or_paraphrase": True,
+            "readback_was_not_generated_by_external_automation": True,
+            "readback_was_not_auto_filled_by_builder": True,
+            "canonical_oath_loaded_into_active_context": True,
+            "readback_generated_by_participant_from_active_context": True,
+            "readback_was_not_directly_copied_by_submission_tool": True,
+            "readback_was_not_automatically_completed_or_corrected": True,
+            "contextual_readback_process_acknowledged": True,
+            "contextual_readback_process_is_self_declared": True,
+            "contextual_readback_does_not_prove_persistent_memory": True,
             "no_shortcut_oath_acknowledged": True,
             "oath_does_not_prove_subjective_understanding": True,
             "oath_verifies_exact_readback_only": True,
-            "oath_modules": [{"module_id": "general_acknowledgement_v1", "acknowledged": True}],
+            "oath_modules": list(
+                mod.CURRENT_OATH_POLICY["record_type_modules"]["echo"]
+            ),
             "bitcoin_originals_prevail": True,
             "not_authority": True,
             "not_governance": True,
@@ -174,6 +193,14 @@ def _make_echo_draft(index: int = 1) -> dict:
             "later_records_may_reclassify_or_correct_this_record": True,
         },
     }
+    expected_canonical = mod._current_canonical_oath(draft, "echo")
+    assert expected_canonical is not None
+    draft["submission_oath_verification"][
+        "canonical_oath_text_sha256"
+    ] = expected_canonical[1]
+    draft["submission_oath_verification"][
+        "participant_readback_sha256"
+    ] = expected_canonical[1]
     return _attach_valid_authorship_proof(draft)
 
 
@@ -244,6 +271,10 @@ def _setup_chain() -> Path:
     mod.ANCHOR_STATUS_API = tmp / "api" / "record-chain-anchor-status.json"
     mod.ARWEAVE_INDEX_API = tmp / "api" / "record-chain-arweave-index.json"
     mod.GUARDIAN_REGISTRY = tmp / "api" / "guardian-registry.json"
+    # This is a fresh chain created under the current policy, so contextual
+    # readback enforcement begins with its first record. Production keeps the
+    # immutable activation boundary at R-000000103.
+    mod.CONTEXTUAL_READBACK_ACTIVATION_RECORD_INDEX = 1
     mod.ensure_dirs()
     # Minimal genesis
     genesis_manifest = {
