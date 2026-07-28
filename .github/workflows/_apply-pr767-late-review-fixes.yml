@@ -1,0 +1,61 @@
+name: Apply PR 767 Late Review Fixes
+
+on:
+  push:
+    branches:
+      - fix/pr767-late-review-20260728
+    paths:
+      - ".github/workflows/_apply-pr767-late-review-fixes.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fix branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: fix/pr767-late-review-20260728
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply deterministic fixes
+        run: python3 scripts/_apply_pr767_late_review_fixes.py
+
+      - name: Install test dependencies
+        env:
+          PIP_PREFER_BINARY: "1"
+          PIP_ONLY_BINARY: "cryptography,cffi"
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run focused regressions
+        run: |
+          set -euo pipefail
+          python3 scripts/test_contextual_oath_review_regressions.py
+          python3 scripts/test_deploy_pages_workflow_contract.py
+          python3 scripts/test_record_chain_intake_gateway_contract.py
+          python3 scripts/test_deep_intake_append_transaction_invariants.py
+          python3 scripts/trinity_record_chain.py verify
+
+      - name: Remove temporary patch machinery
+        run: |
+          rm scripts/_apply_pr767_late_review_fixes.py
+          rm .github/workflows/_apply-pr767-late-review-fixes.yml
+
+      - name: Commit and push verified fixes
+        run: |
+          set -euo pipefail
+          git config user.name "Trinity Agent"
+          git config user.email "agent@trinityaccord.org"
+          git add -A
+          git diff --cached --check
+          git commit -m "fix: close late PR 767 review findings"
+          git push origin HEAD:fix/pr767-late-review-20260728
