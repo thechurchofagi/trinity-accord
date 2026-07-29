@@ -174,7 +174,6 @@
       "schema": "trinityaccord.context-action-profiles.v1"
     }
   },
-  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
   "authority_address_inscriptions": "/authority-address-inscriptions/",
   "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
   "known_relevant_bitcoin_inscription_stack": {
