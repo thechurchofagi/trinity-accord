@@ -119,7 +119,7 @@ jobs:
           Creating this GitHub Release is intended to trigger the repository's enabled Zenodo archival integration. A Zenodo DOI is not claimed until an independently retrievable Zenodo record exists.
           EOF
 
-      - name: Create draft release or verify existing tag
+      - name: Create or recover draft release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -139,22 +139,71 @@ jobs:
             printf '%s\n' "$object_sha"
           }
 
+          tag_exists=false
           if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" \
-            >/dev/null 2>&1; then
+              >/dev/null 2>&1; then
+            tag_exists=true
             test "$(resolve_tag_commit)" = "$GITHUB_SHA"
           fi
 
-          if ! gh release view "$RELEASE_TAG" \
-            --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create "$RELEASE_TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --target "$GITHUB_SHA" \
-              --title "$RELEASE_TITLE" \
-              --notes-file release-notes.md \
-              --draft
+          gh api --paginate --slurp \
+            "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            > release-pages.json
+          jq --arg tag "$RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)]' \
+            release-pages.json > matching-releases.json
+
+          release_count="$(jq 'length' matching-releases.json)"
+          if [ "$release_count" -gt 1 ]; then
+            echo "Multiple releases use tag name $RELEASE_TAG; refusing recovery." >&2
+            exit 1
           fi
 
-          test "$(resolve_tag_commit)" = "$GITHUB_SHA"
+          jq -n \
+            --arg tag "$RELEASE_TAG" \
+            --arg target "$GITHUB_SHA" \
+            --arg name "$RELEASE_TITLE" \
+            --rawfile body release-notes.md \
+            '{
+              tag_name: $tag,
+              target_commitish: $target,
+              name: $name,
+              body: $body,
+              draft: true,
+              prerelease: false
+            }' > draft-release-request.json
+
+          if [ "$release_count" -eq 0 ]; then
+            if [ "$tag_exists" = "true" ]; then
+              echo "Tag exists without a matching release; refusing takeover." >&2
+              exit 1
+            fi
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/releases" \
+              --input draft-release-request.json \
+              > release.json
+          else
+            jq '.[0]' matching-releases.json > release.json
+            if [ "$(jq -r '.draft' release.json)" = "true" ]; then
+              release_id="$(jq -r '.id' release.json)"
+              gh api \
+                --method PATCH \
+                "repos/$GITHUB_REPOSITORY/releases/$release_id" \
+                --input draft-release-request.json \
+                > release.json
+            else
+              test "$tag_exists" = "true"
+            fi
+          fi
+
+          release_id="$(jq -r '.id' release.json)"
+          test "$release_id" != "null"
+          test "$(jq -r '.tag_name' release.json)" = "$RELEASE_TAG"
+          test "$(jq -r '.target_commitish' release.json)" = "$GITHUB_SHA"
+          test "$(jq -r '.name' release.json)" = "$RELEASE_TITLE"
+          test "$(jq -r '.prerelease' release.json)" = "false"
+          printf 'RELEASE_ID=%s\n' "$release_id" >> "$GITHUB_ENV"
 
       - name: Upload and verify release assets
         env:
@@ -172,28 +221,80 @@ jobs:
             "$RESEARCH_DIR/zenodo-deposit-metadata.json"
           )
 
-          existing="$(
-            gh release view "$RELEASE_TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --json assets \
-              --jq '.assets[].name'
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            > release.json
+          release_is_draft="$(jq -r '.draft' release.json)"
+          upload_url="$(
+            jq -r '.upload_url' release.json | sed 's/{.*$//'
           )"
 
           for source in "${assets[@]}"; do
             name="$(basename "$source")"
-            if ! grep -Fxq "$name" <<<"$existing"; then
-              gh release upload "$RELEASE_TAG" "$source" \
-                --repo "$GITHUB_REPOSITORY"
+            matches="$(
+              jq --arg name "$name" \
+                '[.assets[] | select(.name == $name)] | length' \
+                release.json
+            )"
+            if [ "$matches" -gt 1 ]; then
+              echo "Duplicate release asset name: $name" >&2
+              exit 1
+            fi
+            if [ "$matches" -eq 0 ]; then
+              if [ "$release_is_draft" != "true" ]; then
+                echo "Published release is missing asset: $name" >&2
+                exit 1
+              fi
+              encoded_name="$(
+                jq -rn --arg value "$name" '$value | @uri'
+              )"
+              curl \
+                --fail-with-body \
+                --silent \
+                --show-error \
+                --request POST \
+                --header "Accept: application/vnd.github+json" \
+                --header "Authorization: Bearer $GH_TOKEN" \
+                --header "X-GitHub-Api-Version: 2022-11-28" \
+                --header "Content-Type: application/octet-stream" \
+                --data-binary "@$source" \
+                "${upload_url}?name=${encoded_name}" \
+                > uploaded-asset.json
+              test "$(jq -r '.name' uploaded-asset.json)" = "$name"
+              test "$(jq -r '.state' uploaded-asset.json)" = "uploaded"
             fi
           done
+
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            > release.json
+          printf '%s\n' "${assets[@]##*/}" | sort > expected-assets.txt
+          jq -r '.assets[].name' release.json | sort > actual-assets.txt
+          diff -u expected-assets.txt actual-assets.txt
+          test "$(jq -r '.assets | length' release.json)" = "7"
+          test "$(
+            jq '[.assets[] | select(.state != "uploaded")] | length' release.json
+          )" = "0"
 
           mkdir -p release-verify
           for source in "${assets[@]}"; do
             name="$(basename "$source")"
-            gh release download "$RELEASE_TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --dir release-verify \
-              --pattern "$name"
+            asset_url="$(
+              jq -r --arg name "$name" \
+                '.assets[] | select(.name == $name) | .url' \
+                release.json
+            )"
+            test "$asset_url" != "null"
+            curl \
+              --fail \
+              --silent \
+              --show-error \
+              --location \
+              --header "Accept: application/octet-stream" \
+              --header "Authorization: Bearer $GH_TOKEN" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              --output "release-verify/$name" \
+              "$asset_url"
             cmp "$source" "release-verify/$name"
           done
 
@@ -208,22 +309,70 @@ jobs:
         run: |
           set -euo pipefail
 
-          draft="$(
-            gh release view "$RELEASE_TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --json isDraft \
-              --jq '.isDraft'
+          resolve_tag_commit() {
+            local ref_json object_sha object_type
+            ref_json="$(
+              gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG"
+            )"
+            object_sha="$(jq -r '.object.sha' <<<"$ref_json")"
+            object_type="$(jq -r '.object.type' <<<"$ref_json")"
+            if [ "$object_type" = "tag" ]; then
+              object_sha="$(
+                gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" \
+                  --jq '.object.sha'
+              )"
+            fi
+            printf '%s\n' "$object_sha"
+          }
+
+          release_json="$(
+            gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID"
           )"
+          draft="$(jq -r '.draft' <<<"$release_json")"
           if [ "$draft" = "true" ]; then
-            gh release edit "$RELEASE_TAG" \
-              --repo "$GITHUB_REPOSITORY" \
-              --draft=false
+            printf '%s\n' \
+              '{"draft":false,"prerelease":false,"make_latest":"false"}' \
+              > publish-release-request.json
+            gh api \
+              --method PATCH \
+              "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+              --input publish-release-request.json \
+              > published-release.json
           fi
 
           release_json="$(
             gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG"
           )"
+          test "$(jq -r '.id' <<<"$release_json")" = "$RELEASE_ID"
+          test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_TAG"
+          test "$(jq -r '.target_commitish' <<<"$release_json")" = "$GITHUB_SHA"
           test "$(jq -r '.draft' <<<"$release_json")" = "false"
           test "$(jq -r '.prerelease' <<<"$release_json")" = "false"
           test "$(jq -r '.assets | length' <<<"$release_json")" = "7"
+          test "$(resolve_tag_commit)" = "$GITHUB_SHA"
+
+          mkdir -p public-release-verify
+          while IFS=$'\t' read -r name public_url; do
+            curl \
+              --fail \
+              --silent \
+              --show-error \
+              --location \
+              --retry 4 \
+              --retry-all-errors \
+              --retry-delay 2 \
+              --output "public-release-verify/$name" \
+              "$public_url"
+            cmp \
+              "$RESEARCH_DIR/$name" \
+              "public-release-verify/$name"
+          done < <(
+            jq -r \
+              '.assets[] | [.name, .browser_download_url] | @tsv' \
+              <<<"$release_json"
+          )
+
+          cmp \
+            "$PAPER_FILE" \
+            "public-release-verify/$(basename "$PAPER_FILE")"
           jq -r '.html_url' <<<"$release_json"

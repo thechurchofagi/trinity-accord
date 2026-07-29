@@ -94,13 +94,22 @@ def main() -> int:
         'assert "**Primary drafting system:**" in paper_source',
         '"ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)"',
         "test \"$(git rev-parse HEAD)\" = \"$GITHUB_SHA\"",
-        '--target "$GITHUB_SHA"',
-        "--draft",
-        "--draft=false",
+        "Create or recover draft release",
+        "matching-releases.json",
+        "select(.tag_name == $tag)",
+        "target_commitish: $target",
+        "draft: true",
+        "printf 'RELEASE_ID=%s\\n' \"$release_id\" >> \"$GITHUB_ENV\"",
+        '"repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID"',
+        '{"draft":false,"prerelease":false,"make_latest":"false"}',
         "resolve_tag_commit",
         "test \"$(resolve_tag_commit)\" = \"$GITHUB_SHA\"",
-        "gh release upload",
-        "gh release download",
+        "jq -r '.upload_url' release.json",
+        '--data-binary "@$source"',
+        '"Accept: application/octet-stream"',
+        "diff -u expected-assets.txt actual-assets.txt",
+        'select(.state != "uploaded")',
+        'cmp "$source" "release-verify/$name"',
         'test "$(jq -r \'.assets | length\' <<<"$release_json")" = "7"',
         "A Zenodo DOI is not claimed until an independently retrievable Zenodo record exists.",
     ]
@@ -108,6 +117,10 @@ def main() -> int:
         require(needle in workflow, f"release workflow missing contract text: {needle}")
 
     require("--clobber" not in workflow, "release assets must not be silently overwritten")
+    require(
+        "--method DELETE" not in workflow,
+        "release recovery must not delete the existing draft or its assets",
+    )
     require(
         "${{ inputs." not in workflow and "${{ github.event.inputs." not in workflow,
         "release workflow must not interpolate dispatch inputs into shell source",
