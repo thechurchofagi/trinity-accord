@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-07-29T06:48:00.192Z",
+  "run_id": "native-ots-20260729T064757Z",
+  "record_type": "native_ots_proof_bundle",
+  "payload_file": "record-chain/ots/native-arweave-bundles/native-record-103-R-000000103-88a0b1dd0991949f-90ca5762dc5b34aa.anchor.upgraded.arweave-bundle.json",
+  "payload_bytes": 72850,
+  "payload_sha256": "dd73251d14a79404c56c2354e47e37f2f98fc800e86389b991ae25fa330bb67f",
+  "gateway_url": "https://arweave.net",
+  "wallet_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+  "expected_owner": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+  "old_owner_not_used": "8Y8GRimuESN_u8tJihCd5nywb-X-lJ_2vWqFAfHeQIE",
+  "balance_before_available": true,
+  "balance_before_reason": null,
+  "balance_before_winston": "14865055084682",
+  "balance_before_ar": "14.865055084682",
+  "ar_usd_price": 1.74,
+  "ar_usd_price_source": "https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd",
+  "ar_usd_price_overridden": false,
+  "estimated_upload_cost_winston": "2760079907",
+  "estimated_upload_cost_source": "arweave.transactions.getPrice",
+  "estimated_upload_cost_overridden": false,
+  "estimated_upload_cost_ar": "0.002760079907",
+  "estimated_upload_cost_usd": 0.00480254,
+  "safety_multiplier": 1.2,
+  "estimated_upload_cost_usd_with_buffer": 0.00576305,
+  "configured_max_upload_usd": 0.1,
+  "effective_max_upload_usd": 0.1,
+  "mode": "production",
+  "allow_paid": true,
+  "decision": "ALLOW",
+  "reason": "under_cap",
+  "extra_tags": [
+    {
+      "name": "Trinity-Artifact-Type",
+      "value": "Native-OTS-Proof-Bundle"
+    },
+    {
+      "name": "Trinity-Boundary",
+      "value": "mirror-only-not-authority-not-attestation-not-amendment"
+    }
+  ]
+}
