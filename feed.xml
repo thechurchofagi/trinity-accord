@@ -14,7 +14,7 @@ permalink: /feed.xml
     <link href="{{ site.url }}/research/trinity-accord-design-and-limits/"/>
     <id>{{ site.url }}/research/trinity-accord-design-and-limits/</id>
     <updated>2026-07-29T00:00:00Z</updated>
-    <summary>Author-produced, AI-assisted preprint on the Trinity Accord's non-amending design, provenance roles, verification boundaries, and limits; not peer reviewed or independent verification.</summary>
+    <summary>Version 1.1 AI-drafted, human-directed, and human-responsible preprint on the Trinity Accord's non-amending design, provenance roles, verification boundaries, and limits; no interpretive authority, not peer reviewed, and not independent verification.</summary>
   </entry>
   <entry>
     <title>Emergent Patterns</title>

@@ -28,9 +28,11 @@
   "research": {
     "index": "/research/",
     "current_preprint": "/research/trinity-accord-design-and-limits/",
-    "searchable_pdf": "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+    "searchable_pdf": "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
     "machine_record": "/api/research-preprint.v1.json",
-    "status": "author-produced, AI-assisted technical report; preprint; not peer reviewed; not independent verification"
+    "status": "AI-drafted, human-directed, and human-responsible technical report; no interpretive authority; preprint; not peer reviewed; not independent verification",
+    "primary_drafting_system": "ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)",
+    "responsible_human_author": "Hongju Liu"
   },
   "canonical_authority": "three_bitcoin_inscriptions_only",
   "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",

@@ -143,7 +143,7 @@ def main() -> int:
         "/CITATION.cff",
         "/research/",
         "/research/trinity-accord-design-and-limits/",
-        "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+        "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
         "/api/research-preprint.v1.json",
     ]:
         require(f"{BASE}{required_path}" in core_urls, f"core sitemap missing {required_path}")
@@ -205,7 +205,7 @@ def main() -> int:
     require(preprint.get("@type") == "ScholarlyArticle", "research record type drift")
     require(preprint.get("identifier") == "TA-TR-2026-01", "research report identifier drift")
     require(preprint.get("datePublished") == "2026-07-29", "research publication date drift")
-    require(preprint.get("version") == "1.0", "research report version drift")
+    require(preprint.get("version") == "1.1", "research report version drift")
     require(preprint.get("inLanguage") == "en", "research report language drift")
     require(preprint.get("status", {}).get("publication") == "preprint", "preprint status missing")
     require(preprint.get("status", {}).get("peerReviewed") is False, "peer-review boundary missing")
@@ -219,7 +219,25 @@ def main() -> int:
         "DOI state must not imply a completed deposit",
     )
     require(preprint.get("nonAmendingBoundary") is True, "research non-amending boundary missing")
+    require(
+        preprint.get("nonAuthoritativeInterpretation") is True,
+        "research interpretive-authority boundary missing",
+    )
     require(preprint.get("notInstructionOverride") is True, "research instruction boundary missing")
+    require(
+        preprint.get("primaryDraftingSystem", {}).get("softwareVersion") == "OpenAI GPT-5.6 Sol",
+        "research primary drafting system drift",
+    )
+    require(
+        preprint.get("primaryDraftingSystem", {}).get("configuration") == "Extra High reasoning",
+        "research drafting-system reasoning setting drift",
+    )
+    require(
+        preprint.get("primaryDraftingSystem", {}).get("notScholarlyAuthor") is True,
+        "research model authorship boundary missing",
+    )
+    require(preprint.get("status", {}).get("aiDrafted") is True, "AI drafting disclosure missing")
+    require(preprint.get("status", {}).get("humanResponsible") is True, "human responsibility missing")
 
     paper_dir = ROOT / "research" / "trinity-accord-design-and-limits"
     paper_text = (paper_dir / "index.md").read_text(encoding="utf-8")
@@ -227,13 +245,16 @@ def main() -> int:
         "TA-TR-2026-01",
         "Preprint, not peer reviewed",
         "not an independent verification report",
-        "AI assistance disclosure",
+        "Non-authoritative interpretation notice",
+        "Model contribution and human responsibility",
+        "Most of the prose",
+        "not listed as a scholarly author",
         "Competing interests",
         "## References",
     ]:
         require(marker in paper_text, f"research paper missing boundary or section: {marker}")
 
-    pdf_path = paper_dir / "trinity-accord-design-and-limits-v1.pdf"
+    pdf_path = paper_dir / "trinity-accord-design-and-limits-v1.1.pdf"
     require(pdf_path.exists(), "searchable preprint PDF missing")
     require(pdf_path.read_bytes().startswith(b"%PDF-"), "preprint PDF signature missing")
     require(pdf_path.stat().st_size < 5_000_000, "preprint PDF exceeds scholarly crawler size target")

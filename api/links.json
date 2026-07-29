@@ -6,7 +6,7 @@
     "/",
     "/research/",
     "/research/trinity-accord-design-and-limits/",
-    "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+    "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
     "/agent-start/",
     "/external-agent-quickstart/",
     "/agent-first-contact/",
@@ -176,7 +176,7 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "a5fc7235bf28a691",
+  "source_digest": "db14b77fe96af0a7",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",

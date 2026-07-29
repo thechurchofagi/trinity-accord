@@ -13,17 +13,19 @@ This page collects bounded research outputs about the Trinity Accord. Research p
 ### Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents
 
 **The Trinity Accord Case Study**<br>
-Hongju Liu (刘烘炬) · Technical Report TA-TR-2026-01 · Version 1.0 · 29 July 2026
+Primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)<br>
+Responsible human author and project initiator: Hongju Liu (刘烘炬) · Technical Report TA-TR-2026-01 · Version 1.1 · 29 July 2026
 
 An artifact-centered design case examining canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and discoverability. The report presents an inspectable architecture and a reusable design pattern while stating its negative results and conflicts of interest.
 
 - [Read the HTML full text](/research/trinity-accord-design-and-limits/)
-- [Download the searchable PDF](/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf)
+- [Download the current searchable PDF](/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf)
+- [Open the preserved version 1.0 PDF](/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf)
 - [Read machine-readable metadata](/api/research-preprint.v1.json)
 - [Download BibTeX](/research/trinity-accord-design-and-limits/citation.bib)
 - [Inspect repository-deposit metadata](/research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json)
 
-**Status:** author-produced, AI-assisted preprint; not peer reviewed; not an independent verification report.
+**Status:** AI-drafted, human-directed, and human-responsible preprint; no interpretive authority; not peer reviewed; not an independent verification report.
 
 ## Citation boundary
 

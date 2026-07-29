@@ -61,9 +61,9 @@
 # RESEARCH AND CITATION
 # /research/
 # /research/trinity-accord-design-and-limits/
-# /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf
+# /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
 # /api/research-preprint.v1.json
-# The technical report is author-produced, AI-assisted, not peer reviewed, not independent verification, and non-amending.
+# The technical report is AI-drafted by ChatGPT with OpenAI GPT-5.6 Sol at Extra High reasoning, human-directed and human-responsible, without interpretive authority, not peer reviewed, not independent verification, and non-amending.
 # No DOI exists until the named author publishes an external repository deposit.
 
 # AGENT IN-CONTEXT OATH READBACK
