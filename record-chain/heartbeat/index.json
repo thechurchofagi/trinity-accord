@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-index.v1",
-  "generated_at": "2026-07-29T06:24:02Z",
+  "generated_at": "2026-07-29T06:30:22Z",
   "records": [
     {
       "heartbeat_id": "hwb-20260618",
@@ -2869,14 +2869,14 @@
     {
       "schema": "trinityaccord.waiting-heartbeat-arweave-upload-result.v1",
       "heartbeat_id": "hwb-20260729",
-      "status": "readback_data_empty",
+      "status": "uploaded",
       "attempted_at": "2026-07-29T06:24:02.139Z",
       "arweave_txid": "yHBnoPifx-sNTml-PX9zeV9jTUi6_1Take1uj9547Uc",
       "payload_sha256": "119b438f2fb8284fbccd868e7794c249e654998c386b36c24bd9c3fb457f8065",
       "data_sha256": "119b438f2fb8284fbccd868e7794c249e654998c386b36c24bd9c3fb457f8065",
-      "readback_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "hash_match": false,
-      "retryable": true,
+      "readback_sha256": "119b438f2fb8284fbccd868e7794c249e654998c386b36c24bd9c3fb457f8065",
+      "hash_match": true,
+      "retryable": false,
       "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
       "wallet_balance_before_available": true,
       "wallet_balance_before_winston": "14867815164589",
@@ -2903,8 +2903,11 @@
         "arweave_archive_is_not_successor_reception": true,
         "bitcoin_originals_prevail": true
       },
-      "last_readback_error": "readback_data_empty",
+      "last_readback_error": null,
       "readback_attempted_at": "2026-07-29T06:24:02.139Z",
+      "verified_at": "2026-07-29T06:30:22.623Z",
+      "readback_attempts": 17,
+      "next_action": "no_op",
       "upload_result_path": "record-chain/heartbeat/capsules/hwb-20260729.upload-result.json"
     }
   ]
