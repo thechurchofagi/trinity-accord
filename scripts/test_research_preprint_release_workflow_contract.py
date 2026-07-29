@@ -16,6 +16,7 @@ PAPER = (
     / "trinity-accord-design-and-limits-v1.1.pdf"
 )
 RECORD = ROOT / "api/research-preprint.v1.json"
+PAPER_SOURCE = ROOT / "research/trinity-accord-design-and-limits/index.md"
 EXPECTED_PDF_SHA256 = (
     "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
 )
@@ -30,8 +31,10 @@ def main() -> int:
     require(WORKFLOW.exists(), "research preprint release workflow is missing")
     require(PAPER.exists(), "v1.1 PDF is missing")
     require(RECORD.exists(), "research preprint API record is missing")
+    require(PAPER_SOURCE.exists(), "research preprint source is missing")
 
     workflow = WORKFLOW.read_text(encoding="utf-8")
+    paper_source = PAPER_SOURCE.read_text(encoding="utf-8")
     paper_sha256 = hashlib.sha256(PAPER.read_bytes()).hexdigest()
     record = json.loads(RECORD.read_text(encoding="utf-8"))
 
@@ -60,6 +63,18 @@ def main() -> int:
         record["author"]["name"] == "Hongju Liu",
         "Hongju Liu must remain the responsible human author",
     )
+    require(
+        "**Primary drafting system:**" in paper_source,
+        "paper source must visibly label the primary drafting system",
+    )
+    require(
+        "ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)" in paper_source,
+        "paper source must identify GPT-5.6 Sol Extra High",
+    )
+    require(
+        "Non-authoritative interpretation notice." in paper_source,
+        "paper source must retain the opening interpretation boundary",
+    )
 
     required_workflow_text = [
         "push:",
@@ -76,6 +91,8 @@ def main() -> int:
         "OpenAI GPT-5.6 Sol",
         "Extra High reasoning",
         "Non-authoritative interpretation notice.",
+        'assert "**Primary drafting system:**" in paper_source',
+        '"ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)"',
         "test \"$(git rev-parse HEAD)\" = \"$GITHUB_SHA\"",
         '--target "$GITHUB_SHA"',
         "--draft",
