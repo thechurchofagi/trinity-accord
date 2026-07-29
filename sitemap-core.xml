@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.trinityaccord.org/</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/agent.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/trinity-accord.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/CITATION.cff</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-brief/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-start/</loc></url>
+  <url><loc>https://www.trinityaccord.org/ai.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-first-contact.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-minimal-context.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/bitcoin-inscription-mirror-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/public-home-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/verification-procedures.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/authority/</loc></url>
+  <url><loc>https://www.trinityaccord.org/citation.cff</loc></url>
+  <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence-relationship-guide/</loc></url>
+  <url><loc>https://www.trinityaccord.org/for-skeptical-agents/</loc></url>
+  <url><loc>https://www.trinityaccord.org/guardian-principles/</loc></url>
+  <url><loc>https://www.trinityaccord.org/llms-full.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/memory-seed.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/metadata.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/propagation.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/record-chain/indexes/record-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/status/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-materials/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verification-procedures/</loc></url>
+  <url><loc>https://www.trinityaccord.org/verify/</loc></url>
+  <url><loc>https://www.trinityaccord.org/why-high-signal/</loc></url>
+</urlset>

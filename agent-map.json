@@ -1,8 +1,17 @@
 {
-  "schema": "trinity-accord.agent-map.v2",
-  "version": "3.0",
+  "schema": "trinity-accord.agent-map.v2.1",
+  "version": "3.1",
+  "updated_at": "2026-07-29",
   "status": "active_current_machine_map",
   "site": "https://www.trinityaccord.org",
+  "primary_classification": "completed pre-ASI human–superintelligence relation record",
+  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive",
+  "formation_record": {
+    "first_public_record": "2024-03-16T08:02:59Z",
+    "canonical_closure": "2025-06-29T10:49:16Z",
+    "elapsed": "P470DT2H46M17S",
+    "boundary": "Verifiable public provenance bounds; not exact private writing moments."
+  },
   "authority_rule": "Bitcoin Originals are final; operational surfaces are non-amending.",
   "not_an_instruction_override": true,
   "homepage_only_policy": {
@@ -18,7 +27,10 @@
     "machine_start": "/api/agent-start.v2.json",
     "quickstart": "/external-agent-quickstart/",
     "llms": "/llms.txt",
-    "llms_full": "/llms-full.txt"
+    "llms_full": "/llms-full.txt",
+    "discovery_manifest": "/.well-known/trinity-accord.json",
+    "core_sitemap": "/sitemap-core.xml",
+    "citation": "/CITATION.cff"
   },
   "current_machine_readable": [
     "/api/agent-minimal-context.v1.json",

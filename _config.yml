@@ -6,6 +6,7 @@ include:
   - .well-known
   - ai.txt
   - citation.cff
+  - CITATION.cff
   - builder-bundles
   - "builder-bundles/*.py"
 

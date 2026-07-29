@@ -124,6 +124,7 @@ def main() -> int:
     # legacy material as historical-only.
     for script in [
         "scripts/test_deploy_pages_workflow_contract.py",
+        "scripts/test_discovery_visibility_contract.py",
         "scripts/test_first_contact_forces_copy_paste_or_route_selector.py",
         "scripts/test_external_agent_copy_paste_examples_contract.py",
         "scripts/verify_retired_builder_bundle_archive.py",

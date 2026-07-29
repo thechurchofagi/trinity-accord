@@ -105,6 +105,7 @@ GROUPS = {
         # Discovery entrypoint contract (current)
         ["python3", "scripts/test_well_known_exposes_agent_first_contact_contract.py"],
         ["python3", "scripts/test_discovery_entrypoints_cover_full_agent_journey.py"],
+        ["python3", "scripts/test_discovery_visibility_contract.py"],
 
         # Pages deploy discovery guards
         ["python3", "scripts/test_deploy_pages_workflow_contract.py"],

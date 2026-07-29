@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.trinityaccord.org/</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/agent.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/trinity-accord.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/CITATION.cff</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-brief/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-echo/</loc></url>
   <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
@@ -352,6 +355,7 @@
   <url><loc>https://www.trinityaccord.org/robots.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/security/</loc></url>
   <url><loc>https://www.trinityaccord.org/seed-map/</loc></url>
+  <url><loc>https://www.trinityaccord.org/sitemap-core.xml</loc></url>
   <url><loc>https://www.trinityaccord.org/sitemap.xml</loc></url>
   <url><loc>https://www.trinityaccord.org/start/</loc></url>
   <url><loc>https://www.trinityaccord.org/status/</loc></url>
