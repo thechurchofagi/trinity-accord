@@ -23,6 +23,19 @@ function fail(message, extra = {}) {
   throw err;
 }
 
+function takeValue(argv, index, key) {
+  const current = argv[index];
+  const prefix = `${key}=`;
+  if (current.startsWith(prefix)) {
+    return { value: current.slice(prefix.length), nextIndex: index };
+  }
+  const value = argv[index + 1];
+  if (value == null) {
+    fail(`Missing value for ${key}`);
+  }
+  return { value, nextIndex: index + 1 };
+}
+
 function parseArgs(argv) {
   const args = {
     txId: null,
@@ -38,45 +51,53 @@ function parseArgs(argv) {
       .map((s) => s.trim())
       .filter(Boolean),
     timeoutSeconds: Number(process.env.ARWEAVE_READBACK_TIMEOUT_SECONDS || 900),
-    retrySeconds: Number(process.env.ARWEAVE_READBACK_RETRY_SECONDS || 15)
+    retrySeconds: Number(process.env.ARWEAVE_READBACK_RETRY_SECONDS || 15),
+    requestTimeoutSeconds: Number(
+      process.env.ARWEAVE_READBACK_REQUEST_TIMEOUT_SECONDS || 30
+    )
   };
 
   for (let i = 0; i < argv.length; i++) {
     const key = argv[i];
-    const next = argv[i + 1];
 
-    if (key === "--tx-id") {
-      args.txId = next;
-      i++;
-    } else if (key === "--expected-file") {
-      args.expectedFile = next;
-      i++;
-    } else if (key === "--expected-sha256") {
-      args.expectedSha256 = next;
-      i++;
-    } else if (key === "--record-type") {
-      args.recordType = next;
-      i++;
-    } else if (key === "--run-id") {
-      args.runId = next;
-      i++;
-    } else if (key === "--log-dir") {
-      args.logDir = next;
-      i++;
-    } else if (key === "--gateway") {
-      args.gateways.push(next);
-      i++;
-    } else if (key === "--timeout-seconds") {
-      args.timeoutSeconds = Number(next);
-      i++;
-    } else if (key === "--retry-seconds") {
-      args.retrySeconds = Number(next);
-      i++;
-    } else if (key === "--help" || key === "-h") {
+    if (key === "--help" || key === "-h") {
       printHelpAndExit();
-    } else {
-      fail(`Unknown argument: ${key}`);
     }
+
+    const handlers = [
+      ["--tx-id", "txId"],
+      ["--expected-file", "expectedFile"],
+      ["--expected-sha256", "expectedSha256"],
+      ["--record-type", "recordType"],
+      ["--run-id", "runId"],
+      ["--log-dir", "logDir"],
+      ["--timeout-seconds", "timeoutSeconds"],
+      ["--retry-seconds", "retrySeconds"],
+      ["--request-timeout-seconds", "requestTimeoutSeconds"]
+    ];
+
+    let handled = false;
+    for (const [option, property] of handlers) {
+      if (key === option || key.startsWith(`${option}=`)) {
+        const parsed = takeValue(argv, i, option);
+        args[property] = property.endsWith("Seconds")
+          ? Number(parsed.value)
+          : parsed.value;
+        i = parsed.nextIndex;
+        handled = true;
+        break;
+      }
+    }
+    if (handled) continue;
+
+    if (key === "--gateway" || key.startsWith("--gateway=")) {
+      const parsed = takeValue(argv, i, "--gateway");
+      args.gateways.push(parsed.value);
+      i = parsed.nextIndex;
+      continue;
+    }
+
+    fail(`Unknown argument: ${key}`);
   }
 
   if (!args.txId) fail("Missing --tx-id");
@@ -89,19 +110,21 @@ function parseArgs(argv) {
   if (!/^[a-zA-Z0-9_-]{20,}$/.test(args.txId)) {
     fail("Invalid Arweave tx id format", { txId: args.txId });
   }
-
   if (!/^[a-f0-9]{64}$/i.test(args.expectedSha256)) {
     fail("Expected SHA256 must be 64 hex characters");
   }
 
-  if (!Number.isFinite(args.timeoutSeconds) || args.timeoutSeconds <= 0) {
-    fail("timeoutSeconds must be positive");
+  for (const [name, value] of [
+    ["timeoutSeconds", args.timeoutSeconds],
+    ["retrySeconds", args.retrySeconds],
+    ["requestTimeoutSeconds", args.requestTimeoutSeconds]
+  ]) {
+    if (!Number.isFinite(value) || value <= 0) {
+      fail(`${name} must be positive`);
+    }
   }
 
-  if (!Number.isFinite(args.retrySeconds) || args.retrySeconds <= 0) {
-    fail("retrySeconds must be positive");
-  }
-
+  args.gateways = [...new Set(args.gateways.map((s) => s.replace(/\/$/, "")))];
   if (args.gateways.length === 0) {
     fail("At least one readback gateway is required");
   }
@@ -119,6 +142,10 @@ Usage:
     --record-type echo \\
     --run-id "$E2E_RUN_ID" \\
     --log-dir "$E2E_LOG_DIR"
+
+Notes:
+  --option=value is accepted for values that may begin with "-", including
+  valid base64url Arweave transaction IDs.
 `);
   process.exit(0);
 }
@@ -132,33 +159,43 @@ function buildTxUrl(gateway, txId) {
   return `${gateway.replace(/\/$/, "")}/${txId}`;
 }
 
-async function fetchBytes(url) {
+async function fetchBytes(url, timeoutSeconds) {
   const started = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutSeconds * 1000);
 
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": "trinity-accord-e2e-arweave-readback/1.0",
-      Accept: "*/*"
-    }
-  });
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: {
+        "User-Agent": "trinity-accord-e2e-arweave-readback/1.1",
+        Accept: "*/*",
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache"
+      }
+    });
 
-  const arrayBuffer = await response.arrayBuffer();
-  const bytes = Buffer.from(arrayBuffer);
+    const arrayBuffer = await response.arrayBuffer();
+    const bytes = Buffer.from(arrayBuffer);
 
-  return {
-    url,
-    status: response.status,
-    ok: response.ok,
-    duration_ms: Date.now() - started,
-    content_type: response.headers.get("content-type"),
-    cache_control: response.headers.get("cache-control"),
-    etag: response.headers.get("etag"),
-    last_modified: response.headers.get("last-modified"),
-    bytes
-  };
+    return {
+      url,
+      status: response.status,
+      ok: response.ok,
+      duration_ms: Date.now() - started,
+      content_type: response.headers.get("content-type"),
+      cache_control: response.headers.get("cache-control"),
+      etag: response.headers.get("etag"),
+      last_modified: response.headers.get("last-modified"),
+      bytes
+    };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
-function printStart(args, expectedBytes, expectedSha256) {
+function printStart(args, expectedBytes) {
   console.log("[ARWEAVE READBACK VERIFY]");
   console.log(`run_id: ${args.runId}`);
   console.log(`record_type: ${args.recordType}`);
@@ -168,10 +205,11 @@ function printStart(args, expectedBytes, expectedSha256) {
     console.log(`  - ${buildTxUrl(gateway, args.txId)}`);
   }
   console.log(`expected_file: ${args.expectedFile}`);
-  console.log(`expected_bytes: ${expectedBytes}`);
-  console.log(`expected_sha256: ${expectedSha256}`);
+  console.log(`expected_bytes: ${expectedBytes.length}`);
+  console.log(`expected_sha256: ${args.expectedSha256}`);
   console.log(`timeout_seconds: ${args.timeoutSeconds}`);
   console.log(`retry_seconds: ${args.retrySeconds}`);
+  console.log(`request_timeout_seconds: ${args.requestTimeoutSeconds}`);
 }
 
 function printAttempt(attempt) {
@@ -184,6 +222,7 @@ function printAttempt(attempt) {
   console.log(`content_type: ${attempt.content_type || "null"}`);
   console.log(`downloaded_bytes: ${attempt.downloaded_bytes}`);
   console.log(`downloaded_sha256: ${attempt.downloaded_sha256 || "null"}`);
+  console.log(`provisional_mismatch: ${attempt.provisional_mismatch === true}`);
 }
 
 function printResult(result) {
@@ -202,6 +241,13 @@ function printResult(result) {
   }
 }
 
+function resultPath(args) {
+  return path.join(
+    args.logDir,
+    `11b-arweave-readback-verify.${args.recordType}.json`
+  );
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const expectedBytes = await fs.readFile(args.expectedFile);
@@ -215,48 +261,55 @@ async function main() {
     });
   }
 
-  printStart(args, expectedBytes.length, args.expectedSha256);
+  printStart(args, expectedBytes);
 
   const started = Date.now();
   const deadline = started + args.timeoutSeconds * 1000;
   const attempts = [];
   let attemptNumber = 0;
   let lastFailure = null;
+  let lastMismatch = null;
 
   while (Date.now() < deadline) {
     for (const gateway of args.gateways) {
+      if (Date.now() >= deadline) break;
+
       attemptNumber++;
       const gatewayUrl = buildTxUrl(gateway, args.txId);
-
       let fetched;
 
       try {
-        fetched = await fetchBytes(gatewayUrl);
+        fetched = await fetchBytes(gatewayUrl, args.requestTimeoutSeconds);
       } catch (error) {
         const attempt = {
           timestamp: nowIso(),
           tx_id: args.txId,
           gateway_url: gatewayUrl,
           attempt: attemptNumber,
-          status: "fetch_error",
+          status: error?.name === "AbortError" ? "request_timeout" : "fetch_error",
           duration_ms: null,
           content_type: null,
           downloaded_bytes: 0,
           downloaded_sha256: null,
-          error: error.message
+          provisional_mismatch: false,
+          error: error?.message || String(error)
         };
         attempts.push(attempt);
         printAttempt(attempt);
         lastFailure = {
-          reason: "gateway_error",
-          error: error.message,
+          reason: attempt.status,
+          error: attempt.error,
           gateway_url: gatewayUrl
         };
         continue;
       }
 
-      const downloadedSha =
-        fetched.bytes.length > 0 ? sha256(fetched.bytes) : null;
+      const downloadedSha = fetched.bytes.length > 0 ? sha256(fetched.bytes) : null;
+      const bytesMatch = fetched.bytes.length === expectedBytes.length;
+      const hashMatch = downloadedSha === args.expectedSha256;
+      const provisionalMismatch = Boolean(
+        fetched.ok && fetched.bytes.length > 0 && !(bytesMatch && hashMatch)
+      );
 
       const attempt = {
         timestamp: nowIso(),
@@ -270,48 +323,13 @@ async function main() {
         etag: fetched.etag,
         last_modified: fetched.last_modified,
         downloaded_bytes: fetched.bytes.length,
-        downloaded_sha256: downloadedSha
+        downloaded_sha256: downloadedSha,
+        provisional_mismatch: provisionalMismatch
       };
-
       attempts.push(attempt);
       printAttempt(attempt);
 
-      if (fetched.ok && fetched.bytes.length > 0) {
-        const bytesMatch = fetched.bytes.length === expectedBytes.length;
-        const hashMatch = downloadedSha === args.expectedSha256;
-
-        if (bytesMatch && hashMatch) {
-          const result = {
-            run_id: args.runId,
-            record_type: args.recordType,
-            tx_id: args.txId,
-            gateway_url: gatewayUrl,
-            expected_file: args.expectedFile,
-            expected_bytes: expectedBytes.length,
-            downloaded_bytes: fetched.bytes.length,
-            expected_sha256: args.expectedSha256,
-            downloaded_sha256: downloadedSha,
-            hash_match: true,
-            byte_for_byte_match: true,
-            bytes_match: true,
-            attempts: attempts.length,
-            duration_ms: Date.now() - started,
-            verified_at: nowIso(),
-            result: "pass",
-            attempts_log: attempts
-          };
-
-          printResult(result);
-          await writeJson(
-            path.join(
-              args.logDir,
-              `11b-arweave-readback-verify.${args.recordType}.json`
-            ),
-            result
-          );
-          return;
-        }
-
+      if (fetched.ok && fetched.bytes.length > 0 && bytesMatch && hashMatch) {
         const result = {
           run_id: args.runId,
           record_type: args.recordType,
@@ -322,33 +340,44 @@ async function main() {
           downloaded_bytes: fetched.bytes.length,
           expected_sha256: args.expectedSha256,
           downloaded_sha256: downloadedSha,
-          hash_match: hashMatch,
-          byte_for_byte_match: false,
-          bytes_match: bytesMatch,
+          hash_match: true,
+          byte_for_byte_match: true,
+          bytes_match: true,
           attempts: attempts.length,
           duration_ms: Date.now() - started,
           verified_at: nowIso(),
-          result: "fail",
-          severity: "P0",
-          reason: hashMatch ? "byte_length_mismatch" : "hash_mismatch",
-          action: "stop_paid_uploads_and_open_bug",
+          result: "pass",
           attempts_log: attempts
         };
-
         printResult(result);
-        await writeJson(
-          path.join(
-            args.logDir,
-            `11b-arweave-readback-verify.${args.recordType}.json`
-          ),
-          result
-        );
-        process.exit(2);
+        await writeJson(resultPath(args), result);
+        return;
       }
 
-      if (![202, 404, 502, 503, 504].includes(fetched.status)) {
+      if (provisionalMismatch) {
+        // Gateways can temporarily return a 2xx JSON placeholder, empty body, or
+        // propagation response before raw transaction data becomes available.
+        // A single non-matching 2xx response is therefore not proof of corruption.
+        lastMismatch = {
+          reason: hashMatch ? "byte_length_mismatch" : "hash_mismatch",
+          status: fetched.status,
+          gateway_url: gatewayUrl,
+          downloaded_bytes: fetched.bytes.length,
+          downloaded_sha256: downloadedSha
+        };
+        lastFailure = {
+          reason: "provisional_content_mismatch",
+          ...lastMismatch
+        };
+      } else if (![200, 202, 404, 502, 503, 504].includes(fetched.status)) {
         lastFailure = {
           reason: "unexpected_status",
+          status: fetched.status,
+          gateway_url: gatewayUrl
+        };
+      } else if (fetched.ok && fetched.bytes.length === 0) {
+        lastFailure = {
+          reason: "empty_success_response",
           status: fetched.status,
           gateway_url: gatewayUrl
         };
@@ -356,20 +385,21 @@ async function main() {
     }
 
     if (Date.now() < deadline) {
-      await sleep(args.retrySeconds * 1000);
+      await sleep(Math.min(args.retrySeconds * 1000, deadline - Date.now()));
     }
   }
 
+  const persistentMismatch = lastMismatch !== null;
   const result = {
     run_id: args.runId,
     record_type: args.recordType,
     tx_id: args.txId,
-    gateway_url: null,
+    gateway_url: lastMismatch?.gateway_url || null,
     expected_file: args.expectedFile,
     expected_bytes: expectedBytes.length,
-    downloaded_bytes: null,
+    downloaded_bytes: lastMismatch?.downloaded_bytes ?? null,
     expected_sha256: args.expectedSha256,
-    downloaded_sha256: null,
+    downloaded_sha256: lastMismatch?.downloaded_sha256 ?? null,
     hash_match: false,
     byte_for_byte_match: false,
     bytes_match: false,
@@ -378,22 +408,14 @@ async function main() {
     verified_at: nowIso(),
     result: "fail",
     severity: "P0",
-    reason: "timeout_or_unavailable",
+    reason: persistentMismatch ? "persistent_content_mismatch" : "timeout_or_unavailable",
     last_failure: lastFailure,
     action: "stop_paid_uploads_and_open_bug",
     attempts_log: attempts
   };
 
   printResult(result);
-
-  await writeJson(
-    path.join(
-      args.logDir,
-      `11b-arweave-readback-verify.${args.recordType}.json`
-    ),
-    result
-  );
-
+  await writeJson(resultPath(args), result);
   process.exit(2);
 }
 

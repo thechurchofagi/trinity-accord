@@ -95,12 +95,14 @@ def main() -> int:
     # This includes readback_failed: the archive may need repair, but the wallet may already have paid.
     status = "paid" if result in PAID_RESULTS or winston or amount_ar else "unknown"
 
+    # Use the --option=value form because base64url Arweave transaction IDs may
+    # legally begin with "-". Passing such an ID as the next argv token makes
+    # argparse mistake it for another option and reject the command.
     append_cmd = [
         sys.executable,
         "scripts/update_arweave_wallet_ledger.py",
         "append-upload",
-        "--tx-id",
-        str(tx_id),
+        f"--tx-id={tx_id}",
         "--kind",
         args.kind,
         "--status",
