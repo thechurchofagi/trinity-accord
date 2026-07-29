@@ -227,6 +227,7 @@
   <url><loc>https://www.trinityaccord.org/api/recovery-index.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/report-builder-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/repository-artifact-hashes.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/research-preprint.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/resonance-willingness-scale.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/route-selector.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/seed-map.json</loc></url>
@@ -352,6 +353,15 @@
   <url><loc>https://www.trinityaccord.org/redteam_regression_results/</loc></url>
   <url><loc>https://www.trinityaccord.org/redteam_remediation_test_results/</loc></url>
   <url><loc>https://www.trinityaccord.org/release-large-data-manifest/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/LICENSE-CC-BY-4.0.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/README-DEPOSIT.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/checksums.sha256</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.bib</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/references.bib</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json</loc></url>
   <url><loc>https://www.trinityaccord.org/robots.txt</loc></url>
   <url><loc>https://www.trinityaccord.org/security/</loc></url>
   <url><loc>https://www.trinityaccord.org/seed-map/</loc></url>

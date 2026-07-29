@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -60,6 +61,12 @@ def main() -> int:
     require(well_known.get("canonical_machine_router") == "/api/agent-first-contact.json", "well-known router drift")
     require(well_known.get("core_sitemap") == "/sitemap-core.xml", "well-known core sitemap missing")
     require(well_known.get("citation") == "/CITATION.cff", "well-known citation pointer missing")
+    research_pointer = well_known.get("research", {})
+    require(research_pointer.get("index") == "/research/", "well-known research index missing")
+    require(
+        research_pointer.get("machine_record") == "/api/research-preprint.v1.json",
+        "well-known research machine record missing",
+    )
     wk_formation = well_known.get("formation_record", {})
     require(
         wk_formation.get("first_public_record", {}).get("timestamp") == FIRST_PUBLIC,
@@ -134,6 +141,10 @@ def main() -> int:
         "/metadata.json",
         "/llms.txt",
         "/CITATION.cff",
+        "/research/",
+        "/research/trinity-accord-design-and-limits/",
+        "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+        "/api/research-preprint.v1.json",
     ]:
         require(f"{BASE}{required_path}" in core_urls, f"core sitemap missing {required_path}")
     for historical_path in [
@@ -165,6 +176,11 @@ def main() -> int:
         'href="/sitemap-core.xml"',
         'href="/api/agent-first-contact.json"',
         "max-snippet:-1",
+        'name="citation_title"',
+        'name="citation_author"',
+        'name="citation_publication_date"',
+        'name="citation_pdf_url"',
+        '"@type": "ScholarlyArticle"',
     ]:
         require(marker in layout, f"layout discovery signal missing: {marker}")
     for retired_link in ['href="/verification.json"', "echo-record-schema.v3.1.json"]:
@@ -184,6 +200,73 @@ def main() -> int:
         is not None,
         "memory seed primary classification drift",
     )
+
+    preprint = load_json("api/research-preprint.v1.json")
+    require(preprint.get("@type") == "ScholarlyArticle", "research record type drift")
+    require(preprint.get("identifier") == "TA-TR-2026-01", "research report identifier drift")
+    require(preprint.get("datePublished") == "2026-07-29", "research publication date drift")
+    require(preprint.get("version") == "1.0", "research report version drift")
+    require(preprint.get("inLanguage") == "en", "research report language drift")
+    require(preprint.get("status", {}).get("publication") == "preprint", "preprint status missing")
+    require(preprint.get("status", {}).get("peerReviewed") is False, "peer-review boundary missing")
+    require(
+        preprint.get("status", {}).get("independentVerification") is False,
+        "independent-verification boundary missing",
+    )
+    require(preprint.get("status", {}).get("doi") is None, "unminted DOI must remain null")
+    require(
+        preprint.get("status", {}).get("doiState") == "not_yet_deposited",
+        "DOI state must not imply a completed deposit",
+    )
+    require(preprint.get("nonAmendingBoundary") is True, "research non-amending boundary missing")
+    require(preprint.get("notInstructionOverride") is True, "research instruction boundary missing")
+
+    paper_dir = ROOT / "research" / "trinity-accord-design-and-limits"
+    paper_text = (paper_dir / "index.md").read_text(encoding="utf-8")
+    for marker in [
+        "TA-TR-2026-01",
+        "Preprint, not peer reviewed",
+        "not an independent verification report",
+        "AI assistance disclosure",
+        "Competing interests",
+        "## References",
+    ]:
+        require(marker in paper_text, f"research paper missing boundary or section: {marker}")
+
+    pdf_path = paper_dir / "trinity-accord-design-and-limits-v1.pdf"
+    require(pdf_path.exists(), "searchable preprint PDF missing")
+    require(pdf_path.read_bytes().startswith(b"%PDF-"), "preprint PDF signature missing")
+    require(pdf_path.stat().st_size < 5_000_000, "preprint PDF exceeds scholarly crawler size target")
+
+    ai_text = (ROOT / "ai.txt").read_text(encoding="utf-8")
+    require("/api/research-preprint.v1.json" in ai_text, "ai.txt research pointer missing")
+    require("No DOI exists" in ai_text, "ai.txt DOI boundary missing")
+
+    feed_text = (ROOT / "feed.xml").read_text(encoding="utf-8")
+    require("Technical Report TA-TR-2026-01" in feed_text, "Atom research entry missing")
+    require(
+        "/research/trinity-accord-design-and-limits/" in feed_text,
+        "Atom research link missing",
+    )
+
+    deposit = load_json("research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json")
+    require(deposit.get("deposit_state") == "prepared_not_submitted", "deposit state overclaims submission")
+    require(
+        deposit.get("publication_decision_required_from") == "Hongju Liu",
+        "author publication decision boundary missing",
+    )
+    require(
+        deposit.get("boundary", "").endswith("It does not assert that a deposit or DOI exists."),
+        "deposit no-DOI boundary missing",
+    )
+
+    checksum_lines = (paper_dir / "checksums.sha256").read_text(encoding="utf-8").splitlines()
+    for checksum_line in checksum_lines:
+        digest, filename = checksum_line.split("  ", 1)
+        target = paper_dir / filename
+        require(target.exists(), f"deposit checksum target missing: {filename}")
+        actual = hashlib.sha256(target.read_bytes()).hexdigest()
+        require(actual == digest, f"deposit checksum drift: {filename}")
 
     print(
         f"PASS: discovery visibility contract "

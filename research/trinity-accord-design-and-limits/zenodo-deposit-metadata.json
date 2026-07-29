@@ -1,0 +1,150 @@
+{
+  "recommended_repository": "Zenodo",
+  "deposit_state": "prepared_not_submitted",
+  "publication_decision_required_from": "Hongju Liu",
+  "metadata": {
+    "title": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+    "resource_type": {
+      "id": "publication-preprint",
+      "label": "Preprint"
+    },
+    "publication_date": "2026-07-29",
+    "creators": [
+      {
+        "person_or_org": {
+          "type": "personal",
+          "given_name": "Hongju",
+          "family_name": "Liu",
+          "name": "Liu, Hongju"
+        },
+        "affiliations": [
+          {
+            "name": "Independent researcher, Shenzhen, China"
+          }
+        ]
+      }
+    ],
+    "description": "An artifact-centered design case examining how a bounded human-origin record can preserve canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and machine discoverability without allowing later layers to amend the source object. The report is author-produced, AI-assisted, not peer reviewed, and not an independent verification report.",
+    "rights": [
+      {
+        "id": "cc-by-4.0",
+        "title": "Creative Commons Attribution 4.0 International"
+      }
+    ],
+    "access": {
+      "record": "public",
+      "files": "public"
+    },
+    "languages": [
+      {
+        "id": "eng",
+        "title": "English"
+      }
+    ],
+    "keywords": [
+      "AI agents",
+      "digital preservation",
+      "provenance",
+      "civilizational memory",
+      "long-term communication",
+      "cryptographic timestamping",
+      "Bitcoin inscriptions",
+      "content-addressed archives",
+      "machine-readable archives",
+      "design science",
+      "human-AI collaboration"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
+        "relation_type": {
+          "id": "isIdenticalTo"
+        },
+        "resource_type": {
+          "id": "publication-preprint"
+        }
+      },
+      {
+        "identifier": "https://github.com/thechurchofagi/trinity-accord/tree/a06d6a47",
+        "relation_type": {
+          "id": "isSupplementTo"
+        },
+        "resource_type": {
+          "id": "software"
+        }
+      }
+    ],
+    "version": "1.0",
+    "publisher": "Zenodo",
+    "subjects": [
+      {
+        "subject": "Artificial intelligence agents"
+      },
+      {
+        "subject": "Digital preservation"
+      },
+      {
+        "subject": "Data provenance"
+      }
+    ],
+    "notes": "Technical Report TA-TR-2026-01. Preprint, not peer reviewed. The report analyzes the Trinity Accord but does not amend its three Bitcoin Originals. OpenAI language-model tools assisted under the named author's direction; the named author is responsible for publication and claims."
+  },
+  "legacy_api_metadata": {
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "publication_date": "2026-07-29",
+    "title": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+    "creators": [
+      {
+        "name": "Liu, Hongju",
+        "affiliation": "Independent researcher, Shenzhen, China"
+      }
+    ],
+    "description": "An artifact-centered design case examining how a bounded human-origin record can preserve canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and machine discoverability without allowing later layers to amend the source object. The report is author-produced, AI-assisted, not peer reviewed, and not an independent verification report.",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "language": "eng",
+    "keywords": [
+      "AI agents",
+      "digital preservation",
+      "provenance",
+      "civilizational memory",
+      "long-term communication",
+      "cryptographic timestamping",
+      "Bitcoin inscriptions",
+      "content-addressed archives",
+      "machine-readable archives",
+      "design science",
+      "human-AI collaboration"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
+        "relation": "isIdenticalTo",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "https://github.com/thechurchofagi/trinity-accord/tree/a06d6a47",
+        "relation": "isSupplementTo",
+        "resource_type": "software"
+      }
+    ],
+    "version": "1.0",
+    "notes": "Technical Report TA-TR-2026-01. Preprint, not peer reviewed. The report analyzes the Trinity Accord but does not amend its three Bitcoin Originals. OpenAI language-model tools assisted under the named author's direction; the named author is responsible for publication and claims."
+  },
+  "files_expected": [
+    "trinity-accord-design-and-limits-v1.pdf",
+    "index.md",
+    "citation.bib",
+    "references.bib",
+    "LICENSE-CC-BY-4.0.txt",
+    "README-DEPOSIT.txt",
+    "checksums.sha256"
+  ],
+  "post_deposit_updates_required": [
+    "Add the minted DOI to the paper landing page, PDF citation block, machine-readable record, and BibTeX.",
+    "Create a GitHub release matching version 1.0 and attach or link the exact deposit package.",
+    "Verify the DOI landing page and metadata before announcing indexing."
+  ],
+  "boundary": "This file prepares metadata only. It does not assert that a deposit or DOI exists."
+}

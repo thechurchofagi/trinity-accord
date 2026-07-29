@@ -4,6 +4,9 @@
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "key_pages": [
     "/",
+    "/research/",
+    "/research/trinity-accord-design-and-limits/",
+    "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
     "/agent-start/",
     "/external-agent-quickstart/",
     "/agent-first-contact/",
@@ -46,6 +49,7 @@
     }
   ],
   "machine": [
+    "/api/research-preprint.v1.json",
     "/api/agent-minimal-context.v1.json",
     "/api/agent-first-contact.json",
     "/api/agent-start.v2.json",
@@ -172,7 +176,7 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "4f76298547cf0ef9",
+  "source_digest": "a5fc7235bf28a691",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",

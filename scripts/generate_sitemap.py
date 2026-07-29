@@ -50,6 +50,13 @@ ROOT_SPECIAL_FILES = [
     "sitemap.xml",
     ".well-known/agent.json",
     ".well-known/trinity-accord.json",
+    "research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+    "research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json",
+    "research/trinity-accord-design-and-limits/citation.bib",
+    "research/trinity-accord-design-and-limits/references.bib",
+    "research/trinity-accord-design-and-limits/LICENSE-CC-BY-4.0.txt",
+    "research/trinity-accord-design-and-limits/README-DEPOSIT.txt",
+    "research/trinity-accord-design-and-limits/checksums.sha256",
 ]
 
 # Root-level JSON files to include
@@ -79,6 +86,9 @@ CORE_PATHS = [
     "/guardian-principles/",
     "/emergent-patterns/",
     "/status/",
+    "/research/",
+    "/research/trinity-accord-design-and-limits/",
+    "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
     "/llms.txt",
     "/llms-full.txt",
     "/ai.txt",
@@ -97,6 +107,7 @@ CORE_PATHS = [
     "/api/verification-procedures.v1.json",
     "/api/record-chain-status.json",
     "/api/public-home-status.json",
+    "/api/research-preprint.v1.json",
     "/api/bitcoin-inscription-mirror-index.json",
     "/record-chain/indexes/record-index.json",
 ]

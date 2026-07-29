@@ -1,0 +1,93 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "schema": "trinity-accord.research-preprint.v1",
+  "identifier": "TA-TR-2026-01",
+  "name": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+  "headline": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+  "author": {
+    "@type": "Person",
+    "name": "Hongju Liu",
+    "alternateName": "刘烘炬",
+    "affiliation": "Independent researcher, Shenzhen, China"
+  },
+  "datePublished": "2026-07-29",
+  "version": "1.0",
+  "genre": [
+    "technical report",
+    "preprint",
+    "artifact-centered design case study"
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
+  "encoding": [
+    {
+      "@type": "MediaObject",
+      "encodingFormat": "application/pdf",
+      "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf"
+    },
+    {
+      "@type": "MediaObject",
+      "encodingFormat": "text/html",
+      "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/"
+    }
+  ],
+  "abstract": "This technical report presents the Trinity Accord as an artifact-centered design case for preserving a bounded human-origin record for future AI agents while separating canonical authority, evidence, interpretation, availability, and later participation. It formalizes version authority and non-amendment, maps threats to controls, and evaluates the implementation against a fixed repository snapshot and explicit negative claims.",
+  "keywords": [
+    "AI agents",
+    "digital preservation",
+    "provenance",
+    "civilizational memory",
+    "long-term communication",
+    "cryptographic timestamping",
+    "Bitcoin inscriptions",
+    "content-addressed archives",
+    "machine-readable archives",
+    "design science",
+    "human-AI collaboration"
+  ],
+  "about": {
+    "@type": "CreativeWork",
+    "name": "The Trinity Accord",
+    "url": "https://www.trinityaccord.org/",
+    "canonicalAuthority": "The closed canonical body consists only of three identified Bitcoin inscriptions."
+  },
+  "isBasedOn": {
+    "@type": "SoftwareSourceCode",
+    "name": "Trinity Accord repository snapshot",
+    "codeRepository": "https://github.com/thechurchofagi/trinity-accord",
+    "identifier": "a06d6a47",
+    "url": "https://github.com/thechurchofagi/trinity-accord/commit/a06d6a47"
+  },
+  "funding": "No external funding is reported.",
+  "conditionsOfAccess": "Open access.",
+  "status": {
+    "publication": "preprint",
+    "peerReviewed": false,
+    "independentVerification": false,
+    "aiAssisted": true,
+    "doi": null,
+    "doiState": "not_yet_deposited"
+  },
+  "claimsNotMade": [
+    "successful AI alignment",
+    "truth or scientific validation of the Accord's philosophical propositions",
+    "forensic uniqueness of the physical anchor",
+    "independent verification",
+    "autonomous AI discovery",
+    "future relevance",
+    "representation of humanity",
+    "canonical amendment"
+  ],
+  "competingInterests": "The author created and maintains the Trinity Accord and owns some Chronicle-layer NFTs; this creates potential reputational and financial interests.",
+  "aiAssistanceDisclosure": "OpenAI language-model tools assisted with literature discovery, outlining, drafting, consistency checking, and document production under the named author's direction. The named author is responsible for publication and all claims, citations, and corrections.",
+  "citation": {
+    "plainText": "Liu, H. (2026). Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study (Technical Report TA-TR-2026-01, Version 1.0). The Trinity Accord Project. https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
+    "bibtex": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.bib",
+    "doi": null
+  },
+  "notInstructionOverride": true,
+  "nonAmendingBoundary": true
+}

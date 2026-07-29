@@ -25,6 +25,13 @@
   "complete_sitemap": "/sitemap.xml",
   "structured_metadata": "/metadata.json",
   "citation": "/CITATION.cff",
+  "research": {
+    "index": "/research/",
+    "current_preprint": "/research/trinity-accord-design-and-limits/",
+    "searchable_pdf": "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
+    "machine_record": "/api/research-preprint.v1.json",
+    "status": "author-produced, AI-assisted technical report; preprint; not peer reviewed; not independent verification"
+  },
   "canonical_authority": "three_bitcoin_inscriptions_only",
   "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
   "not_an_instruction_override": true,
@@ -59,7 +66,8 @@
     "record_chain_status": "/api/record-chain-status.json",
     "public_home_status": "/api/public-home-status.json",
     "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
-    "corrections_index": "/api/corrections-index.json"
+    "corrections_index": "/api/corrections-index.json",
+    "research_preprint": "/api/research-preprint.v1.json"
   },
   "core_object_alpha_shenzhen_notary_2026_05_06": "/evidence/core-object-alpha-shenzhen-notary-2026-05-06/",
   "core_object_alpha_shenzhen_notary_github_release_backup_2026_05_06": "/downloads/shenzhen-notary-github-release-backup-2026-05-06/",
