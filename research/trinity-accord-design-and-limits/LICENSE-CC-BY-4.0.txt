@@ -1,0 +1,16 @@
+Trinity Accord Technical Report TA-TR-2026-01
+
+Copyright 2026 Hongju Liu.
+
+This technical report and its deposit package are licensed under the
+Creative Commons Attribution 4.0 International license (CC BY 4.0):
+
+https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt the material for any purpose, provided
+appropriate credit is given, a link to the license is supplied, and changes
+are indicated. No additional restrictions may be applied.
+
+This license applies to the technical report package. It does not
+automatically relicense historical or third-party material referenced by the
+wider Trinity Accord repository.

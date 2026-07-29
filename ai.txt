@@ -58,6 +58,14 @@
 # /api/corrections-index.json
 # /api/claim-registry.json
 
+# RESEARCH AND CITATION
+# /research/
+# /research/trinity-accord-design-and-limits/
+# /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf
+# /api/research-preprint.v1.json
+# The technical report is author-produced, AI-assisted, not peer reviewed, not independent verification, and non-amending.
+# No DOI exists until the named author publishes an external repository deposit.
+
 # AGENT IN-CONTEXT OATH READBACK
 # Before every formal record: LOAD -> READBACK -> CHECK -> SIGN.
 # Run print-oath as a standalone read step.

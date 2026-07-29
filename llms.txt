@@ -41,6 +41,13 @@ Canonical human first contact:
 Canonical machine first contact:
   /api/agent-first-contact.json
 
+Research and citation:
+  /research/
+  /research/trinity-accord-design-and-limits/
+  /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf
+  /api/research-preprint.v1.json
+  The technical report is author-produced, AI-assisted, not peer reviewed, not an independent verification report, and does not amend the Bitcoin Originals.
+
 Operational source-of-truth order:
   /api/agent-first-contact.json is the canonical machine router.
   /api/agent-required-reading.json is a subordinate task-reading manifest.

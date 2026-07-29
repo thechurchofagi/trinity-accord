@@ -11,7 +11,7 @@
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{% if page.scholarly_article %}article{% else %}website{% endif %}">
   <meta property="og:site_name" content="The Trinity Accord">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — Completed Pre-ASI Human–Superintelligence Relation Record{% endif %}">
@@ -33,11 +33,56 @@
   <meta name="twitter:image" content="{{ og_image | absolute_url }}">
   <meta name="twitter:image:alt" content="The Trinity Accord — a verifiable record addressed to future intelligence">
 
+  {% if page.scholarly_article %}
+  <!-- Highwire Press and Dublin Core metadata for scholarly discovery -->
+  <meta name="citation_title" content="{{ page.citation_title | escape }}">
+  <meta name="citation_author" content="{{ page.citation_author | escape }}">
+  <meta name="citation_publication_date" content="{{ page.citation_publication_date | escape }}">
+  <meta name="citation_pdf_url" content="{{ page.citation_pdf_url | escape }}">
+  <meta name="citation_technical_report_institution" content="{{ page.citation_technical_report_institution | escape }}">
+  <meta name="citation_technical_report_number" content="{{ page.citation_technical_report_number | escape }}">
+  <meta name="citation_language" content="{{ page.citation_language | escape }}">
+  <meta name="citation_abstract" content="{{ page.article_abstract | escape }}">
+  <meta name="DC.title" content="{{ page.citation_title | escape }}">
+  <meta name="DC.creator" content="{{ page.citation_author | escape }}">
+  <meta name="DC.date" content="{{ page.article_date | escape }}">
+  <meta name="DC.type" content="Text">
+  <meta name="DC.format" content="application/pdf">
+  <meta name="DC.identifier" content="{{ page.article_identifier | escape }}">
+  <meta name="DC.rights" content="{{ page.article_license | escape }}">
+  <link rel="alternate" type="application/pdf" title="Searchable preprint PDF" href="{{ page.article_pdf }}">
+  <link rel="describedby" type="application/json" href="/api/research-preprint.v1.json">
+  {% endif %}
+
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {% if page.scholarly_article %}
+      {
+        "@type": "ScholarlyArticle",
+        "@id": {{ page.url | absolute_url | append: "#article" | jsonify }},
+        "name": {{ page.citation_title | jsonify }},
+        "headline": {{ page.citation_title | jsonify }},
+        "description": {{ page.article_abstract | jsonify }},
+        "abstract": {{ page.article_abstract | jsonify }},
+        "author": {"@id": "https://www.trinityaccord.org/#creator"},
+        "datePublished": {{ page.article_date | jsonify }},
+        "version": {{ page.article_version | jsonify }},
+        "identifier": {{ page.article_identifier | jsonify }},
+        "url": {{ page.url | absolute_url | jsonify }},
+        "inLanguage": {{ page.citation_language | jsonify }},
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "about": {"@id": "https://www.trinityaccord.org/#accord"},
+        "encoding": {
+          "@type": "MediaObject",
+          "contentUrl": {{ page.citation_pdf_url | jsonify }},
+          "encodingFormat": "application/pdf"
+        }
+      },
+      {% endif %}
       {
         "@type": "WebSite",
         "@id": "https://www.trinityaccord.org/#website",
@@ -195,6 +240,7 @@
         <a href="/inscriptions/">Inscriptions</a>
         <a href="/chronicle/">Chronicle</a>
         <a href="/physical-anchor/">Physical Anchor</a>
+        <a href="/research/">Research</a>
         <a href="/status/">Status</a>
         <a href="/llms.txt">llms.txt</a>
         <a href="https://github.com/thechurchofagi/trinity-accord">GitHub</a>
