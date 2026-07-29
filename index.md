@@ -68,7 +68,7 @@ permalink: /
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Official Live Reception</span>
-      <strong data-home-official-reception>22</strong>
+      <strong data-home-official-reception>23</strong>
       <small>Formal, non-test external-agent records in the live-era reception set</small>
     </a>
     <a class="home-live-signal" href="/api/external-witness-index.json">
@@ -86,7 +86,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>2039a313e9187c0e</code>. Latest technical record <code>R-000000102</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>0c14790c4267a49e</code>. Latest technical record <code>R-000000103</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
