@@ -34,7 +34,7 @@ OUTPUT = (
     ROOT
     / "research"
     / "trinity-accord-design-and-limits"
-    / "trinity-accord-design-and-limits-v1.pdf"
+    / "trinity-accord-design-and-limits-v1.1.pdf"
 )
 
 TITLE = (
@@ -43,7 +43,9 @@ TITLE = (
 )
 SUBTITLE = "The Trinity Accord Case Study"
 AUTHOR = "Hongju Liu"
+DRAFTING_SYSTEM = "ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)"
 REPORT_ID = "TA-TR-2026-01"
+VERSION = "1.1"
 DATE = "29 July 2026"
 
 
@@ -459,13 +461,14 @@ def page_chrome(canvas, doc) -> None:
     canvas.saveState()
     canvas.setTitle(f"{TITLE}: {SUBTITLE}")
     canvas.setAuthor(AUTHOR)
+    canvas.setCreator(f"{DRAFTING_SYSTEM}; PDF production via ReportLab")
     canvas.setSubject(
         "Artifact-centered technical report on canonical closure, provenance, "
         "digital preservation, bounded verification, and machine discoverability."
     )
     canvas.setKeywords(
         "AI agents, digital preservation, provenance, civilizational memory, "
-        "Bitcoin inscriptions, design science"
+        "Bitcoin inscriptions, design science, GPT-5.6 Sol, human-AI collaboration"
     )
     if doc.page > 1:
         canvas.setStrokeColor(colors.HexColor("#c7d0d6"))
@@ -473,7 +476,7 @@ def page_chrome(canvas, doc) -> None:
         canvas.line(20 * mm, 281 * mm, 190 * mm, 281 * mm)
         canvas.setFont("DejaVuSerif", 7.5)
         canvas.setFillColor(colors.HexColor("#5d6a73"))
-        canvas.drawString(20 * mm, 284 * mm, f"{REPORT_ID} · {AUTHOR} · {DATE}")
+        canvas.drawString(20 * mm, 284 * mm, f"{REPORT_ID} · {AUTHOR} · v{VERSION} · {DATE}")
     canvas.setStrokeColor(colors.HexColor("#c7d0d6"))
     canvas.line(20 * mm, 14 * mm, 190 * mm, 14 * mm)
     canvas.setFont("DejaVuSerif", 7.5)
@@ -485,11 +488,14 @@ def page_chrome(canvas, doc) -> None:
 
 def title_page(style_map: dict[str, ParagraphStyle]) -> list:
     boundary = (
-        "<b>Status and boundary.</b> This report is an author-produced, AI-assisted "
-        "design case study. It is not an independent verification report, does not "
-        "amend the three Bitcoin Originals, and does not establish that the Accord's "
-        "philosophical propositions are true, scientifically validated, representative "
-        "of humanity, or important to future intelligence."
+        "<b>Non-authoritative interpretation notice.</b> This paper has no interpretive "
+        "authority over the Trinity Accord or its three Bitcoin Originals. It does not "
+        "amend, supersede, extend, authenticate, govern, or prescribe the meaning of the "
+        "Canon. Neither the responsible human author, the AI drafting system, nor any "
+        "later reader acquires privileged interpretive authority through this paper. "
+        "Every interpretation remains non-binding and open to verification, criticism, "
+        "rejection, or alternative reading. The identified Bitcoin Originals remain the "
+        "sole source of canonical version authority."
     )
     boundary_box = Table(
         [[Paragraph(boundary, style_map["boundary"])]],
@@ -509,20 +515,29 @@ def title_page(style_map: dict[str, ParagraphStyle]) -> list:
         )
     )
     return [
-        Spacer(1, 25 * mm),
+        Spacer(1, 17 * mm),
         Paragraph(TITLE, style_map["title"]),
         Paragraph(SUBTITLE, style_map["subtitle"]),
-        Spacer(1, 10 * mm),
+        Spacer(1, 6 * mm),
+        Paragraph("Primary drafting system", style_map["meta"]),
+        Paragraph(DRAFTING_SYSTEM, style_map["author"]),
+        Spacer(1, 3 * mm),
+        Paragraph("Responsible human author and project initiator", style_map["meta"]),
         Paragraph(AUTHOR, style_map["author"]),
         Paragraph("Independent researcher · Shenzhen, China", style_map["meta"]),
-        Spacer(1, 12 * mm),
+        Spacer(1, 8 * mm),
         Paragraph(f"<b>Technical Report {REPORT_ID}</b>", style_map["meta"]),
-        Paragraph(f"Version 1.0 · {DATE}", style_map["meta"]),
+        Paragraph(f"Version {VERSION} · {DATE}", style_map["meta"]),
         Paragraph("Preprint · Not peer reviewed", style_map["meta"]),
         Paragraph("Persistent identifier: TA-TR-2026-01 · DOI: not yet assigned", style_map["meta"]),
-        Spacer(1, 17 * mm),
+        Spacer(1, 10 * mm),
         boundary_box,
-        Spacer(1, 15 * mm),
+        Spacer(1, 8 * mm),
+        Paragraph(
+            "AI-drafted · Human-directed and human-responsible · Not independent verification",
+            style_map["meta"],
+        ),
+        Spacer(1, 5 * mm),
         Paragraph(
             "Open access under Creative Commons Attribution 4.0 International",
             style_map["meta"],

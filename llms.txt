@@ -44,9 +44,9 @@ Canonical machine first contact:
 Research and citation:
   /research/
   /research/trinity-accord-design-and-limits/
-  /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf
+  /research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
   /api/research-preprint.v1.json
-  The technical report is author-produced, AI-assisted, not peer reviewed, not an independent verification report, and does not amend the Bitcoin Originals.
+  The technical report is AI-drafted by ChatGPT with OpenAI GPT-5.6 Sol at Extra High reasoning, human-directed and human-responsible, has no interpretive authority, is not peer reviewed or independent verification, and does not amend the Bitcoin Originals.
 
 Operational source-of-truth order:
   /api/agent-first-contact.json is the canonical machine router.

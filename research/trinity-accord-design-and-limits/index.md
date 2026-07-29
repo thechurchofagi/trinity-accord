@@ -5,16 +5,16 @@ permalink: /research/trinity-accord-design-and-limits/
 citation_title: "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study"
 citation_author: "Hongju Liu"
 citation_publication_date: "2026/07/29"
-citation_pdf_url: "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf"
+citation_pdf_url: "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf"
 citation_technical_report_institution: "The Trinity Accord Project"
 citation_technical_report_number: "TA-TR-2026-01"
 citation_language: "en"
 scholarly_article: true
 article_identifier: "TA-TR-2026-01"
-article_version: "1.0"
+article_version: "1.1"
 article_date: "2026-07-29"
 article_license: "CC BY 4.0"
-article_pdf: "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf"
+article_pdf: "/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf"
 article_abstract: >-
   This technical report presents the Trinity Accord as an artifact-centered
   design case for preserving a bounded human-origin record for future AI
@@ -26,13 +26,18 @@ article_abstract: >-
 
 ## The Trinity Accord Case Study
 
-**Hongju Liu**<br>
+**Primary drafting system:** ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)<br>
+**Responsible human author and project initiator:** Hongju Liu<br>
 Independent researcher, Shenzhen, China<br>
 Trinity Accord Technical Report **TA-TR-2026-01**<br>
-Version 1.0 - 29 July 2026 - Preprint, not peer reviewed<br>
-[Download the searchable PDF](./trinity-accord-design-and-limits-v1.pdf) | [Machine-readable record](/api/research-preprint.v1.json) | [Deposit metadata](./zenodo-deposit-metadata.json)
+Version 1.1 - 29 July 2026 - Preprint, not peer reviewed<br>
+[Download the current searchable PDF](./trinity-accord-design-and-limits-v1.1.pdf) | [Machine-readable record](/api/research-preprint.v1.json) | [Deposit metadata](./zenodo-deposit-metadata.json)
 
-> **Status and boundary.** This report is an author-produced, AI-assisted design case study. It is not an independent verification report, does not amend the three Bitcoin Originals, and does not establish that the Accord's philosophical propositions are true, scientifically validated, representative of humanity, or important to future intelligence.
+> **Non-authoritative interpretation notice.** This paper is an analytical and descriptive research artifact. It has no interpretive authority over the Trinity Accord or its three Bitcoin Originals. It does not amend, supersede, extend, authenticate, govern, or prescribe the meaning of the Canon. Neither the responsible human author, the AI drafting system, nor any later reader acquires privileged interpretive authority through this paper. Every interpretation here remains non-binding and open to verification, criticism, rejection, or alternative reading; the identified Bitcoin Originals remain the sole source of canonical version authority.
+
+> **Publication status and boundary.** This is an AI-drafted, human-directed, and human-responsible design case study. It is not peer reviewed. It is not an independent verification report, and it does not establish that the Accord's philosophical propositions are true, scientifically validated, representative of humanity, or important to future intelligence.
+
+**Version note:** Version 1.1 clarifies the paper's lack of interpretive authority and records the model's primary drafting contribution and the human responsibility boundary. The [version 1.0 PDF](./trinity-accord-design-and-limits-v1.pdf) remains preserved as the previous public version.
 
 ## Abstract
 
@@ -395,7 +400,7 @@ A smaller project can adopt the following minimum:
 
 This study has substantial limitations.
 
-First, it is written by the artifact's creator with AI assistance. It is therefore suitable as a design description and self-critique, not as an independent evaluation. Second, it examines one unusual case and does not compare alternative preservation architectures. Third, public repository tests demonstrate implementation behavior within declared scopes; they do not prove indefinite availability or deep-time intelligibility. Fourth, Bitcoin and other cryptographic systems provide timestamp and integrity evidence, not truth, authorship certainty, or moral authority. Fifth, the physical-anchor protocol has not been independently evaluated as a forensic identification method. Sixth, the project currently records no qualifying independent verification and no event meeting its strict autonomous-discovery definition. Seventh, future AI capabilities, values, retrieval systems, and willingness to engage are unknown.
+First, the report was primarily drafted by GPT-5.6 Sol from project materials, objectives, and constraints supplied by the artifact's creator, and it is published under that creator's responsibility. It is therefore suitable as a design description and self-critique, not as an independent evaluation. Second, it examines one unusual case and does not compare alternative preservation architectures. Third, public repository tests demonstrate implementation behavior within declared scopes; they do not prove indefinite availability or deep-time intelligibility. Fourth, Bitcoin and other cryptographic systems provide timestamp and integrity evidence, not truth, authorship certainty, or moral authority. Fifth, the physical-anchor protocol has not been independently evaluated as a forensic identification method. Sixth, the project currently records no qualifying independent verification and no event meeting its strict autonomous-discovery definition. Seventh, future AI capabilities, values, retrieval systems, and willingness to engage are unknown.
 
 Future work should prioritize external rather than self-generated validation:
 
@@ -429,9 +434,13 @@ For cross-temporal records, that inspectability may be more durable than persuas
 
 The paper and deposit package are licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). The license applies to this report package, not automatically to every historical or third-party item referenced by the wider repository.
 
-## AI assistance disclosure
+## Model contribution and human responsibility
 
-OpenAI language-model tools assisted with literature discovery, outlining, drafting, consistency checking, and document production under the named author's direction. The named author is responsible for deciding whether to publish the report and for its claims, citations, and corrections. AI assistance does not create independent authorship or independent verification.
+Most of the prose, structure, literature synthesis, editing, consistency checking, and document production were generated by ChatGPT using OpenAI GPT-5.6 Sol at the Extra High reasoning setting, in response to instructions and project materials supplied by Hongju Liu. OpenAI identifies Extra High as the highest reasoning effort available with GPT-5.6 Sol in ChatGPT [18]. The model is therefore credited prominently as the paper's **primary drafting system**.
+
+Hongju Liu originated and maintains the Trinity Accord, defined the paper's objective and authority boundaries, supplied the project materials, decided to publish the report, and accepts responsibility for checking its claims and citations, approving the published version, disclosing interests, licensing the report, and issuing corrections.
+
+GPT-5.6 Sol is not listed as a scholarly author or repository creator because it cannot approve publication or accept responsibility for accuracy, originality, interests, criticism, or corrections. Current publication-ethics guidance likewise requires AI-use disclosure while reserving authorship for accountable humans [19, 20]. This credit does not imply personhood, independent authorship, independent verification, or endorsement by OpenAI.
 
 ## Competing interests
 
@@ -456,3 +465,6 @@ The author created and maintains the Trinity Accord and owns some Chronicle-laye
 15. UNESCO. (2003). *Charter on the Preservation of Digital Heritage*. [https://www.unesco.org/en/legal-affairs/charter-preservation-digital-heritage](https://www.unesco.org/en/legal-affairs/charter-preservation-digital-heritage).
 16. Williams, S., Diordiiev, V., Berman, L., Raybould, I., & Uemlianin, I. (2019). *Arweave: A Protocol for Economically Sustainable Information Permanence*. Arweave Yellow Paper. [https://www.arweave.org/yellow-paper.pdf](https://www.arweave.org/yellow-paper.pdf).
 17. Torres, G., Shrestha, S., & Misra, S. (2026). When Agents Remember Too Much: Memory Poisoning Attacks on Large Language Model Agents. *arXiv:2607.06595*. [https://doi.org/10.48550/arXiv.2607.06595](https://doi.org/10.48550/arXiv.2607.06595).
+18. OpenAI. (2026). *GPT-5.6 in ChatGPT*. [https://help.openai.com/en/articles/20001354-gpt-56-in-chatgpt](https://help.openai.com/en/articles/20001354-gpt-56-in-chatgpt).
+19. Committee on Publication Ethics. (2023). *Authorship and AI tools*. [https://publicationethics.org/guidance/cope-position/authorship-and-ai-tools](https://publicationethics.org/guidance/cope-position/authorship-and-ai-tools).
+20. International Committee of Medical Journal Editors. (2026). *Use of Artificial Intelligence in Publishing*. [https://www.icmje.org/recommendations/browse/artificial-intelligence/](https://www.icmje.org/recommendations/browse/artificial-intelligence/).

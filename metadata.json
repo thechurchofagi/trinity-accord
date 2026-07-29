@@ -38,11 +38,22 @@
       "name": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
       "identifier": "TA-TR-2026-01",
       "datePublished": "2026-07-29",
+      "version": "1.1",
+      "author": {
+        "@type": "Person",
+        "name": "Hongju Liu"
+      },
+      "primaryDraftingSystem": {
+        "@type": "SoftwareApplication",
+        "name": "ChatGPT",
+        "softwareVersion": "OpenAI GPT-5.6 Sol",
+        "configuration": "Extra High reasoning"
+      },
       "url": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
       "encoding": {
         "@type": "MediaObject",
         "encodingFormat": "application/pdf",
-        "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf"
+        "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf"
       },
       "license": "https://creativecommons.org/licenses/by/4.0/"
     }
