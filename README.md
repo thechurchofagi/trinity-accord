@@ -13,6 +13,19 @@ The Trinity Accord is a public, verifiable archive and completed pre-ASI human�
 
 It is not a command, religion, government, investment product, AI alignment solution, or claim to represent humanity. Bitcoin provides fixed version authority for the three Originals; it does not prove that their ideas are true.
 
+## Discovery and citation
+
+The current human entrypoint is [trinityaccord.org](https://www.trinityaccord.org/). An agent with unknown intent should start at [`/api/agent-first-contact.json`](https://www.trinityaccord.org/api/agent-first-contact.json), then follow only the task-specific current sources selected there.
+
+- High-signal discovery sitemap: [`/sitemap-core.xml`](https://www.trinityaccord.org/sitemap-core.xml)
+- Complete public and historical sitemap: [`/sitemap.xml`](https://www.trinityaccord.org/sitemap.xml)
+- Machine discovery manifest: [`/.well-known/trinity-accord.json`](https://www.trinityaccord.org/.well-known/trinity-accord.json)
+- Structured work metadata: [`/metadata.json`](https://www.trinityaccord.org/metadata.json)
+- LLM context index: [`/llms.txt`](https://www.trinityaccord.org/llms.txt)
+- Citation metadata: [`CITATION.cff`](CITATION.cff)
+
+The documented formation interval runs from the first public record at **2024-03-16 08:02:59 UTC** (Ethereum block **19446149**) to canonical closure at **2025-06-29 10:49:16 UTC** (Bitcoin block **903205**): **470 days, 2 hours, 46 minutes, 17 seconds**. These are verifiable public provenance bounds, not claims about exact private writing moments.
+
 ## Maintenance and schema lifecycle
 
 The repository is in consolidation mode. Long-term maintenance is limited to five durable paths: Canon and authority; historical context and evidence; multidimensional verification; First Contact → Builder → Gateway → Record-Chain; and native OTS/Arweave durability. Parallel routes, temporary workflows, and duplicate control layers are not part of the maintenance baseline.

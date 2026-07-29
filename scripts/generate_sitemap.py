@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Generate sitemap.xml from actual repository content.
+"""Generate complete and core discovery sitemaps.
 
 Reads all Markdown pages with front matter permalinks, API JSON files recursively,
-and special root files to produce a complete sitemap.
+and special root files to produce the complete archival sitemap. A small,
+hand-curated core sitemap gives search crawlers and agents a high-signal first
+pass without removing any historical URL from the complete sitemap.
 
 Inputs:
   - All .md files with front matter (permalink)
@@ -11,6 +13,7 @@ Inputs:
 
 Outputs:
   - sitemap.xml
+  - sitemap-core.xml
 """
 
 from __future__ import annotations
@@ -29,6 +32,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 SITEMAP = ROOT / "sitemap.xml"
+CORE_SITEMAP = ROOT / "sitemap-core.xml"
 CONFIG = ROOT / "_config.yml"
 BASE_URL = "https://www.trinityaccord.org"
 
@@ -38,10 +42,14 @@ ROOT_SPECIAL_FILES = [
     "llms-full.txt",
     "ai.txt",
     "citation.cff",
+    "CITATION.cff",
     "metadata.json",
     "feed.xml",
     "robots.txt",
+    "sitemap-core.xml",
     "sitemap.xml",
+    ".well-known/agent.json",
+    ".well-known/trinity-accord.json",
 ]
 
 # Root-level JSON files to include
@@ -52,6 +60,45 @@ ROOT_JSON_INCLUDE = [
     "propagation.json",
     "verification.json",
     "version.json",
+]
+
+# Current, high-signal discovery set. Historical and compatibility resources
+# remain discoverable in sitemap.xml but are deliberately excluded here.
+CORE_PATHS = [
+    "/",
+    "/agent-first-contact/",
+    "/agent-start/",
+    "/agent-brief/",
+    "/authority/",
+    "/verify/",
+    "/verification-materials/",
+    "/verification-procedures/",
+    "/evidence-relationship-guide/",
+    "/for-skeptical-agents/",
+    "/why-high-signal/",
+    "/guardian-principles/",
+    "/emergent-patterns/",
+    "/status/",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/ai.txt",
+    "/metadata.json",
+    "/memory-seed.json",
+    "/agent-map.json",
+    "/propagation.json",
+    "/citation.cff",
+    "/CITATION.cff",
+    "/.well-known/agent.json",
+    "/.well-known/trinity-accord.json",
+    "/api/agent-first-contact.json",
+    "/api/agent-minimal-context.v1.json",
+    "/api/authority.json",
+    "/api/seed-map.json",
+    "/api/verification-procedures.v1.json",
+    "/api/record-chain-status.json",
+    "/api/public-home-status.json",
+    "/api/bitcoin-inscription-mirror-index.json",
+    "/record-chain/indexes/record-index.json",
 ]
 
 
@@ -214,7 +261,7 @@ def collect_root_special() -> list[str]:
     """Collect root-level special files."""
     files = []
     for name in ROOT_SPECIAL_FILES:
-        if (ROOT / name).exists():
+        if name in {"sitemap.xml", "sitemap-core.xml"} or (ROOT / name).exists():
             files.append(f"/{name}")
     for name in ROOT_JSON_INCLUDE:
         if (ROOT / name).exists():
@@ -235,9 +282,38 @@ def generate_sitemap(all_paths: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def report_drift(path: Path, expected_content: str, expected_paths: list[str]) -> bool:
+    """Return True and print diagnostics when a sitemap is absent or stale."""
+    if not path.exists():
+        print(f"{path.name} does not exist.")
+        return True
+
+    actual = path.read_text(encoding="utf-8")
+    if actual == expected_content:
+        return False
+
+    actual_urls = set(re.findall(r"<loc>(.*?)</loc>", actual))
+    expected_urls = {f"{BASE_URL}{p}" for p in expected_paths}
+    missing = sorted(expected_urls - actual_urls)
+    extra = sorted(actual_urls - expected_urls)
+    print(
+        f"{path.name} is out of date "
+        f"({len(actual_urls)} URLs, expected {len(expected_urls)})."
+    )
+    if missing:
+        print(f"  Missing URLs ({len(missing)}):")
+        for url in missing:
+            print(f"    - {url}")
+    if extra:
+        print(f"  Extra URLs ({len(extra)}):")
+        for url in extra:
+            print(f"    + {url}")
+    return True
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate sitemap.xml")
-    parser.add_argument("--check", action="store_true", help="Fail if sitemap.xml is not up to date")
+    parser = argparse.ArgumentParser(description="Generate complete and core sitemaps")
+    parser.add_argument("--check", action="store_true", help="Fail if either sitemap is not up to date")
     args = parser.parse_args()
 
     config = load_config()
@@ -249,34 +325,22 @@ def main() -> int:
 
     all_paths = sorted(set(pages + api_files + root_special))
     expected_content = generate_sitemap(all_paths)
+    core_paths = sorted(set(CORE_PATHS))
+    expected_core_content = generate_sitemap(core_paths)
 
     if args.check:
-        if SITEMAP.exists():
-            actual = SITEMAP.read_text(encoding="utf-8")
-            if actual != expected_content:
-                # Count URLs for diagnostics
-                actual_urls = set(re.findall(r"<loc>(.*?)</loc>", actual))
-                expected_urls = {f"{BASE_URL}{p}" for p in all_paths}
-                missing = sorted(expected_urls - actual_urls)
-                extra = sorted(actual_urls - expected_urls)
-                print(f"sitemap.xml is out of date ({len(actual_urls)} URLs, expected {len(expected_urls)}).")
-                if missing:
-                    print(f"  Missing URLs ({len(missing)}):")
-                    for u in missing:
-                        print(f"    - {u}")
-                if extra:
-                    print(f"  Extra URLs ({len(extra)}):")
-                    for u in extra:
-                        print(f"    + {u}")
-                return 1
-        else:
-            print("sitemap.xml does not exist.")
+        stale = report_drift(SITEMAP, expected_content, all_paths)
+        stale |= report_drift(CORE_SITEMAP, expected_core_content, core_paths)
+        if stale:
             return 1
         print(f"sitemap.xml is up to date ({len(all_paths)} URLs).")
+        print(f"sitemap-core.xml is up to date ({len(core_paths)} URLs).")
         return 0
 
     SITEMAP.write_text(expected_content, encoding="utf-8")
+    CORE_SITEMAP.write_text(expected_core_content, encoding="utf-8")
     print(f"Updated sitemap.xml ({len(all_paths)} URLs: {len(pages)} pages, {len(api_files)} API, {len(root_special)} root)")
+    print(f"Updated sitemap-core.xml ({len(core_paths)} high-signal URLs)")
     return 0
 
 

@@ -13,7 +13,7 @@ Generators (order matters — public-home-status depends on the others):
   5. normalize_record_chain_integrity_status.py → deterministic verified-head integrity fields
   6. generate_public_home_status.py        → api/public-home-status.json + index.md
   7. patch_public_home_status_primary.py   → api/public-home-status.json + index.md (primary counters)
-  8. generate_sitemap.py                   → sitemap.xml
+  8. generate_sitemap.py                   → sitemap.xml + sitemap-core.xml
 """
 from __future__ import annotations
 

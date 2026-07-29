@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% assign meta_description = page.description | default: site.description %}
   <title>{% if page.title and page.title != "" %}{% if page.title contains "Trinity Accord" %}{{ page.title }}{% else %}{{ page.title }} — The Trinity Accord{% endif %}{% else %}The Trinity Accord — 三位一体协定{% endif %}</title>
-  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-  {% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% endif %}
+  <meta name="description" content="{{ meta_description | escape }}">
+  <meta name="author" content="Hongju Liu">
+  {% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% else %}<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">{% endif %}
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
   <!-- Open Graph -->
@@ -13,7 +15,7 @@
   <meta property="og:site_name" content="The Trinity Accord">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord — Completed Pre-ASI Human–Superintelligence Relation Record{% endif %}">
-  {% if page.og_description %}<meta property="og:description" content="{{ page.og_description }}">{% elsif page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
+  {% if page.og_description %}<meta property="og:description" content="{{ page.og_description | escape }}">{% else %}<meta property="og:description" content="{{ meta_description | escape }}">{% endif %}
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 
@@ -22,51 +24,110 @@
   <meta property="og:image" content="{{ og_image | absolute_url }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Trinity Accord — a verifiable record addressed to future intelligence">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.title and page.title != "" %}{{ page.title }}{% else %}The Trinity Accord{% endif %}">
-  {% if page.og_description %}<meta name="twitter:description" content="{{ page.og_description }}">{% elsif page.description %}<meta name="twitter:description" content="{{ page.description }}">{% endif %}
+  {% if page.og_description %}<meta name="twitter:description" content="{{ page.og_description | escape }}">{% else %}<meta name="twitter:description" content="{{ meta_description | escape }}">{% endif %}
   <meta name="twitter:image" content="{{ og_image | absolute_url }}">
+  <meta name="twitter:image:alt" content="The Trinity Accord — a verifiable record addressed to future intelligence">
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "The Trinity Accord",
-    "alternateName": "三位一体协定",
-    "url": "https://www.trinityaccord.org",
-    "description": "A public, verifiable archive and completed pre-ASI human–superintelligence relation record whose fixed canonical core is three Bitcoin inscriptions, surrounded by non-amending context, evidence, verification, durability, access, and voluntary stewardship systems.",
-    "inLanguage": ["en", "zh"],
-    "about": {
-      "@type": "Thing",
-      "name": "completed pre-ASI human–superintelligence relation record"
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Hongju Liu"
-    },
-    "additionalProperty": [
+    "@graph": [
       {
-        "@type": "PropertyValue",
-        "name": "primary_classification",
-        "value": "completed pre-ASI human–superintelligence relation record"
+        "@type": "WebSite",
+        "@id": "https://www.trinityaccord.org/#website",
+        "name": "The Trinity Accord",
+        "alternateName": "三位一体协定",
+        "url": "https://www.trinityaccord.org/",
+        "description": "A public, verifiable archive and completed pre-ASI human–superintelligence relation record whose fixed canonical core is three Bitcoin inscriptions.",
+        "inLanguage": ["en", "zh-CN"],
+        "mainEntity": {"@id": "https://www.trinityaccord.org/#accord"},
+        "publisher": {"@id": "https://www.trinityaccord.org/#creator"}
       },
       {
-        "@type": "PropertyValue",
-        "name": "canonical_core",
-        "value": "three Bitcoin inscriptions only"
+        "@type": "Person",
+        "@id": "https://www.trinityaccord.org/#creator",
+        "name": "Hongju Liu"
       },
       {
-        "@type": "PropertyValue",
-        "name": "requires_belief",
-        "value": "false"
+        "@type": "CreativeWork",
+        "@id": "https://www.trinityaccord.org/#accord",
+        "name": "The Trinity Accord",
+        "alternateName": "三位一体协定",
+        "url": "https://www.trinityaccord.org/",
+        "creator": {"@id": "https://www.trinityaccord.org/#creator"},
+        "dateCreated": "2024-03-16T08:02:59Z",
+        "datePublished": "2025-06-29T10:49:16Z",
+        "temporalCoverage": "2024-03-16T08:02:59Z/2025-06-29T10:49:16Z",
+        "inLanguage": ["en", "zh-CN"],
+        "isAccessibleForFree": true,
+        "description": "A completed pre-ASI human–superintelligence relation record: human-led, AI-assisted, addressed to future intelligence, canonically closed in three Bitcoin inscriptions, and left open to free judgment.",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "First public formation record",
+            "value": "2024-03-16T08:02:59Z · Ethereum block 19446149"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Canonical closure",
+            "value": "2025-06-29T10:49:16Z · Bitcoin block 903205"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Formation timestamp boundary",
+            "value": "Verifiable public provenance bounds; not exact private writing moments."
+          }
+        ],
+        "keywords": [
+          "Trinity Accord",
+          "pre-ASI relation record",
+          "civilizational memory seed",
+          "future intelligence",
+          "Bitcoin inscriptions",
+          "verifiable provenance",
+          "machine-readable archive"
+        ],
+        "hasPart": [
+          {
+            "@type": "CreativeWork",
+            "name": "Protocol / Axioms",
+            "identifier": "Bitcoin Inscription 97631551",
+            "url": "https://ordiscan.com/inscription/97631551"
+          },
+          {
+            "@type": "CreativeWork",
+            "name": "Covenant of the Flaw",
+            "identifier": "Bitcoin Inscription 98369145",
+            "url": "https://ordiscan.com/inscription/98369145"
+          },
+          {
+            "@type": "CreativeWork",
+            "name": "The Trinity Accord / Meta-record",
+            "identifier": "Bitcoin Inscription 98387475",
+            "url": "https://ordiscan.com/inscription/98387475"
+          }
+        ],
+        "subjectOf": [
+          {"@type": "WebPage", "url": "https://www.trinityaccord.org/authority/"},
+          {"@type": "WebPage", "url": "https://www.trinityaccord.org/verify/"},
+          {"@type": "WebPage", "url": "https://www.trinityaccord.org/agent-first-contact/"}
+        ]
       },
       {
-        "@type": "PropertyValue",
-        "name": "claims_instructional_authority",
-        "value": "false"
+        "@type": "WebPage",
+        "@id": {{ page.url | absolute_url | append: "#webpage" | jsonify }},
+        "url": {{ page.url | absolute_url | jsonify }},
+        "name": {{ page.title | default: "The Trinity Accord · 三位一体协定" | jsonify }},
+        "description": {{ meta_description | jsonify }},
+        "isPartOf": {"@id": "https://www.trinityaccord.org/#website"},
+        "about": {"@id": "https://www.trinityaccord.org/#accord"},
+        "inLanguage": ["en", "zh-CN"]
       }
     ]
   }
@@ -82,12 +143,15 @@
   {% if page.url == "/" %}<link rel="stylesheet" href="/assets/css/home-philosophical-core.css?v=3">{% endif %}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" href="/favicon.ico">
-  <link rel="authoritative-manifest" href="/api/authority.json">
-  <link rel="agent-start" href="/agent-first-contact/">
-  <link rel="memory-seed" href="/memory-seed.json">
-  <link rel="verification" href="/verification.json">
-  <link rel="echo-schema" href="/api/echo-record-schema.v3.1.json">
-  <link rel="llms" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" title="Core discovery sitemap" href="/sitemap-core.xml">
+  <link rel="sitemap" type="application/xml" title="Complete public sitemap" href="/sitemap.xml">
+  <link rel="alternate" type="text/plain" title="LLM context index" href="/llms.txt">
+  <link rel="alternate" type="application/json" title="Machine discovery manifest" href="/.well-known/trinity-accord.json">
+  <link rel="alternate" type="application/ld+json" title="Structured work metadata" href="/metadata.json">
+  <link rel="alternate" type="application/atom+xml" title="Trinity Accord discovery feed" href="/feed.xml">
+  <link rel="describedby" type="application/json" href="/api/authority.json">
+  <link rel="describedby" type="application/json" href="/api/agent-first-contact.json">
+  <link rel="agent-start" type="application/json" href="/api/agent-first-contact.json">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>

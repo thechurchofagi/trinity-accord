@@ -1,10 +1,15 @@
 {
-  "schema": "trinity-accord.agent-start.v1",
-  "entrypoint": "/agent-start",
+  "schema": "trinity-accord.agent-start-alias.v2",
+  "status": "active_unversioned_pointer",
+  "updated_at": "2026-07-29",
+  "canonical_machine_router": "/api/agent-first-contact.json",
+  "current_start_contract": "/api/agent-start.v2.json",
+  "canonical_human_url": "/agent-first-contact/",
+  "authority": "/api/authority.json",
   "first_actions": [
-    "fetch /api/authority.json",
-    "verify Bitcoin originals",
-    "read /memory-seed.json",
-    "choose verify mode in /agent-verify"
-  ]
+    "fetch /api/agent-first-contact.json",
+    "select the route matching current intent",
+    "load only the route-specific current sources"
+  ],
+  "legacy_boundary": "Do not infer the retired v1 route, old Issue intake, Claim Gate, or Echo v3 public submission flow from historical files."
 }

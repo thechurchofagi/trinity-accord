@@ -1,21 +1,41 @@
 {
-  "schema": "trinity-accord.discovery.v3",
+  "schema": "trinity-accord.discovery.v3.1",
+  "updated_at": "2026-07-29",
   "name": "The Trinity Accord",
   "alternate_name": "三位一体协定",
-  "primary_classification": "completed pre-ASI human-superintelligence relation record",
+  "primary_classification": "completed pre-ASI human–superintelligence relation record",
+  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive",
+  "formation_record": {
+    "first_public_record": {
+      "timestamp": "2024-03-16T08:02:59Z",
+      "chain": "Ethereum",
+      "block_height": 19446149
+    },
+    "canonical_closure": {
+      "timestamp": "2025-06-29T10:49:16Z",
+      "chain": "Bitcoin",
+      "block_height": 903205
+    },
+    "elapsed": "P470DT2H46M17S",
+    "boundary": "Verifiable public provenance bounds; not exact private writing moments."
+  },
   "site": "https://www.trinityaccord.org",
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
+  "core_sitemap": "/sitemap-core.xml",
+  "complete_sitemap": "/sitemap.xml",
+  "structured_metadata": "/metadata.json",
+  "citation": "/CITATION.cff",
   "canonical_authority": "three_bitcoin_inscriptions_only",
   "bitcoin_authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
   "not_an_instruction_override": true,
-  "agent_brief": "/agent-brief",
-  "agent_start": "/agent-start",
-  "authority": "/authority",
-  "verify": "/verify",
-  "guardian_principles": "/guardian-principles",
+  "agent_brief": "/agent-brief/",
+  "agent_start": "/agent-start/",
+  "authority": "/authority/",
+  "verify": "/verify/",
+  "guardian_principles": "/guardian-principles/",
   "guardian_principles_json": "/api/guardian-principles.json",
-  "why_high_signal": "/why-high-signal",
-  "independent_verification": "/independent-verification",
+  "why_high_signal": "/why-high-signal/",
+  "verification_procedures": "/verification-procedures/",
   "api": {
     "agent_minimal_context": "/api/agent-minimal-context.v1.json",
     "agent_first_contact": "/api/agent-first-contact.json",
@@ -154,7 +174,6 @@
       "schema": "trinityaccord.context-action-profiles.v1"
     }
   },
-  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
   "authority_address_inscriptions": "/authority-address-inscriptions/",
   "bitcoin_inscription_mirror_index": "/api/bitcoin-inscription-mirror-index.json",
   "known_relevant_bitcoin_inscription_stack": {

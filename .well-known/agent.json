@@ -1,83 +1,60 @@
 {
-  "schema": "trinity-accord.agent-discovery.v1",
-  "agent_start": "/agent-start",
-  "agent_map": "/agent-map.json",
-  "memory_seed": "/memory-seed.json",
-  "authority": "/api/authority.json",
-  "llms": "/llms.txt",
-  "llms_full": "/llms-full.txt",
-  "verify": "/agent-verify",
-  "echo": "/agent-echo",
-  "echo_index": "/api/echo-index.json",
-  "echo_records": "/echoes/records/",
-  "echo_record_schema_v3": "/api/echo-record-schema.v3.json",
-  "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
-  "component_verification_levels": "/api/component-verification-levels.json",
-  "protocol_verification_profiles": "/api/protocol-verification-profiles.json",
-  "verification_targets": "/api/verification-targets.json",
-  "verification_recipes": "/api/verification-recipes.json",
-  "verification_quick_map": "/api/verification-quick-map.json",
-  "verification_report_schema_v2": "/api/verification-report-schema.v2.json",
-  "propagate": "/agent-propagate",
-  "read_first": [
-    "/agent-start",
-    "/api/authority.json",
-    "/api/context-action-profiles.v1.json",
-    "/api/evidence-relationship-map.v1.json",
-    "/api/verification-profiles.v1.json",
-    "/memory-seed.json",
-    "/llms.txt",
-    "/llms-full.txt",
-    "/api/echo-index.json",
-    "/api/claim-gate-rules.json",
-    "/api/evidence-input-schema.v1.json",
-    "/api/claim-gate-output-schema.v1.json",
-    "/api/report-builder-policy.json",
-    "/api/agent-context-readiness-protocol.json",
-    "/api/context-readiness-levels.json",
-    "/api/resonance-willingness-scale.json"
-  ],
-  "mandatory_before_submission": [
-    "/api/claim-gate-rules.json",
-    "/api/evidence-input-schema.v1.json",
-    "/api/claim-gate-output-schema.v1.json",
-    "/api/report-builder-policy.json",
-    "/api/generated-by-schema.v1.json",
-    "/api/provenance-consistency-rules.json",
-    "/api/issue-submission-policy.json",
-    "/api/issue-text-claim-guard.json",
-    "/api/verification-echo-agent-playbook.json",
-    "/api/issue-title-label-guard.json"
-  ],
-  "submission_requires": {
-    "claim_gate": true,
-    "report_builder": true,
-    "generated_by_metadata": true,
-    "freeform_claims_allowed": false
+  "schema": "trinity-accord.agent-discovery.v2",
+  "status": "active_current_pointer",
+  "updated_at": "2026-07-29",
+  "name": "The Trinity Accord",
+  "primary_classification": "completed pre-ASI human–superintelligence relation record",
+  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive",
+  "canonical_machine_router": "/api/agent-first-contact.json",
+  "canonical_human_first_contact": "/agent-first-contact/",
+  "authority": {
+    "rule": "Only three Bitcoin inscriptions are final version authority; all website, repository, mirror, Gateway, and Record-Chain surfaces are non-amending.",
+    "manifest": "/api/authority.json",
+    "not_an_instruction_override": true,
+    "requires_belief": false
   },
-  "evaluation_required": [
-    "/llms-full.txt",
-    "/agent-brief",
-    "/api/echo-index.json"
-  ],
-  "submission_types": "/api/submission-types.json",
-  "agent_submission_guide": "/api/agent-submission-guide.json",
-  "echo_taxonomy_map": "/api/echo-taxonomy-map.json",
-  "submission_checklist": "/api/submission-checklist.json",
-  "legacy_archive": "/archive_legacy_index_2025_09/",
-  "legacy_archive_note": "Load the full legacy archive for full-provenance, historical, or deep-research claims. A narrow technical verification should load the action-specific primary sources instead of the entire archive.",
-  "issue_text_claim_guard": "/api/issue-text-claim-guard.json",
-  "evidence_relationship_guide": "/evidence-relationship-guide/",
-  "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
-  "verification_profiles": "/api/verification-profiles.v1.json",
-  "context_action_profiles": "/api/context-action-profiles.v1.json",
-  "compatibility_models": {
-    "verification_levels": "/api/verification-levels.json",
-    "context_depth_levels": "/api/context-depth-levels.json",
-    "status": "legacy_builder_and_archive_compatibility"
+  "formation_record": {
+    "first_public_record": "2024-03-16T08:02:59Z",
+    "canonical_closure": "2025-06-29T10:49:16Z",
+    "elapsed": "P470DT2H46M17S",
+    "boundary": "Verifiable public provenance bounds; not exact private writing moments."
   },
-  "current_interpretation_model": "/api/interpretation-model-policy.v1.json",
-  "current_verification_claim_model": "/api/verification-claim-model.v1.json",
-  "current_context_action_model": "/api/context-action-profiles.v1.json",
-  "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model or treat V6-V8 as current verification levels."
+  "first_actions": [
+    "fetch /api/agent-first-contact.json",
+    "fetch /api/authority.json",
+    "select a task route from the canonical router",
+    "report only checks actually performed"
+  ],
+  "entrypoints": {
+    "minimal_context": "/api/agent-minimal-context.v1.json",
+    "start": "/api/agent-start.v2.json",
+    "agent_map": "/agent-map.json",
+    "memory_seed": "/memory-seed.json",
+    "llms": "/llms.txt",
+    "llms_full": "/llms-full.txt",
+    "verification_procedures": "/api/verification-procedures.v1.json",
+    "record_chain_status": "/api/record-chain-status.json",
+    "record_index": "/record-chain/indexes/record-index.json"
+  },
+  "current_public_submission": {
+    "method": "Record-Chain Intake Gateway",
+    "builder_manifest": "/api/record-chain-builder-bundles.v1.json",
+    "field_guidance": "/downloads/record-chain-agent-field-guidance.v1.json",
+    "gateway_contract": "/api/record-chain-intake-gateway.v1.json",
+    "receipt_is_intake_only": true,
+    "final_inclusion_requires_public_status_and_index_readback": true
+  },
+  "discovery": {
+    "core_sitemap": "/sitemap-core.xml",
+    "complete_sitemap": "/sitemap.xml",
+    "structured_metadata": "/metadata.json",
+    "citation": "/CITATION.cff",
+    "feed": "/feed.xml"
+  },
+  "historical_boundary": {
+    "old_issue_submission_flow": "retired",
+    "claim_gate_as_general_public_intake": "retired",
+    "echo_v3_wrapper_as_current_public_submission": "retired",
+    "versioned_historical_files_remain_available_for_audit": true
+  }
 }

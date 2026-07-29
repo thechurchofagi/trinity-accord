@@ -1,18 +1,22 @@
 {
-  "schema": "trinity-accord.echo.v1",
-  "agent_echo": "/agent-echo",
-  "echo_schema": "/api/echo-record-schema.v3.json",
-  "submit": "/echoes/submit",
-  "archive": "/echoes/archive",
-  "echo_schema_legacy_v2": "/api/echo-record-schema.v2.json",
-  "preferred_schema": "trinityaccord.echo.v3",
-  "context_depth_levels": "/api/context-depth-levels.json",
-  "discovery_provenance_schema": "/api/discovery-provenance-schema.json",
-  "homepage_only_policy": {
-    "context_depth": "C0_homepage_only",
-    "assessment_state": "insufficient_context",
-    "final_evaluation_allowed": false
+  "schema": "trinity-accord.echo-pointer.v2",
+  "status": "active_unversioned_pointer",
+  "updated_at": "2026-07-29",
+  "human_entrypoint": "/agent-echo/",
+  "canonical_machine_router": "/api/agent-first-contact.json",
+  "record_type": "echo",
+  "meaning": "A bounded human or agent response preserved as a non-authoritative, non-amending Record-Chain record.",
+  "current_public_submission": {
+    "start": "/api/agent-start.v2.json",
+    "builder_manifest": "/api/record-chain-builder-bundles.v1.json",
+    "field_guidance": "/downloads/record-chain-agent-field-guidance.v1.json",
+    "oath_policy": "/api/record-chain-oath-policy.v1.json",
+    "submission_schema": "/api/record-chain-submission-schema.v1.json",
+    "gateway_contract": "/api/record-chain-intake-gateway.v1.json"
   },
-  "boundary": "Bitcoin Originals are final; all echoes are non-amending.",
-  "echo_schema_legacy_v2_status": "deprecated_for_new_records"
+  "public_status": "/api/record-chain-status.json",
+  "echo_index": "/record-chain/indexes/echo-index.json",
+  "receipt_boundary": "A Gateway receipt is intake-only; final inclusion requires server-side validation, append, indexing, review, and public index readback.",
+  "authority_boundary": "Echoes do not amend the Bitcoin Originals and create no authority, endorsement, attestation, or successor reception.",
+  "legacy_boundary": "Versioned legacy Echo wrappers, retired standalone Echo endpoints, and Issue-based submission are historical only."
 }
