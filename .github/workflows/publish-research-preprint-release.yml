@@ -1,0 +1,228 @@
+name: Publish Research Preprint Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-research-preprint-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-research-preprint-release-v1-1
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+
+    env:
+      RELEASE_TAG: ta-tr-2026-01-v1.1
+      RELEASE_TITLE: Trinity Accord Research Preprint v1.1 (TA-TR-2026-01)
+      RESEARCH_DIR: research/trinity-accord-design-and-limits
+      PAPER_FILE: research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
+      PAPER_SHA256: 2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2
+
+    steps:
+      - name: Checkout immutable release source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize release writer
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|"github-actions[bot]")
+              echo "Authorized release actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized release actor: $ACTOR" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Verify immutable preprint source
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          printf '%s  %s\n' "$PAPER_SHA256" "$PAPER_FILE" | sha256sum -c -
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path.cwd()
+          record = json.loads(
+              (root / "api/research-preprint.v1.json").read_text(encoding="utf-8")
+          )
+          assert record["version"] == "1.1"
+          assert record["nonAuthoritativeInterpretation"] is True
+          assert record["primaryDraftingSystem"]["softwareVersion"] == "OpenAI GPT-5.6 Sol"
+          assert record["primaryDraftingSystem"]["configuration"] == "Extra High reasoning"
+          assert record["primaryDraftingSystem"]["notScholarlyAuthor"] is True
+          assert record["author"]["name"] == "Hongju Liu"
+          assert record["status"]["peerReviewed"] is False
+          assert record["status"]["doi"] is None
+
+          paper_source = (
+              root / "research/trinity-accord-design-and-limits/index.md"
+          ).read_text(encoding="utf-8")
+          assert "Non-authoritative interpretation notice." in paper_source
+          assert (
+              "Primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol "
+              "(Extra High reasoning)"
+          ) in paper_source
+          PY
+
+      - name: Prepare release notes and assets
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<'EOF'
+          # Trinity Accord Research Preprint v1.1
+
+          This release archives the repository state containing:
+
+          **Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study**
+
+          Technical Report TA-TR-2026-01, Version 1.1
+
+          - Primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)
+          - Responsible human author and project initiator: Hongju Liu
+          - Status: author-produced, AI-drafted preprint; not peer reviewed and not independently verified
+          - License for the paper: CC BY 4.0
+
+          ## Interpretive boundary
+
+          The paper is an analytical and descriptive research artifact. It has no interpretive authority over the Trinity Accord or its three Bitcoin Originals. It does not amend, supersede, extend, authenticate, govern, or prescribe the meaning of the Canon.
+
+          ## Integrity
+
+          PDF SHA-256:
+
+          `2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2`
+
+          Creating this GitHub Release is intended to trigger the repository's enabled Zenodo archival integration. A Zenodo DOI is not claimed until an independently retrievable Zenodo record exists.
+          EOF
+
+      - name: Create draft release or verify existing tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          resolve_tag_commit() {
+            local ref_json object_sha object_type
+            ref_json="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG")"
+            object_sha="$(jq -r '.object.sha' <<<"$ref_json")"
+            object_type="$(jq -r '.object.type' <<<"$ref_json")"
+            if [ "$object_type" = "tag" ]; then
+              object_sha="$(
+                gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" \
+                  --jq '.object.sha'
+              )"
+            fi
+            printf '%s\n' "$object_sha"
+          }
+
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" \
+            >/dev/null 2>&1; then
+            test "$(resolve_tag_commit)" = "$GITHUB_SHA"
+          fi
+
+          if ! gh release view "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-notes.md \
+              --draft
+          fi
+
+          test "$(resolve_tag_commit)" = "$GITHUB_SHA"
+
+      - name: Upload and verify release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          assets=(
+            "$PAPER_FILE"
+            "$RESEARCH_DIR/README-DEPOSIT.txt"
+            "$RESEARCH_DIR/checksums.sha256"
+            "$RESEARCH_DIR/citation.bib"
+            "$RESEARCH_DIR/references.bib"
+            "$RESEARCH_DIR/LICENSE-CC-BY-4.0.txt"
+            "$RESEARCH_DIR/zenodo-deposit-metadata.json"
+          )
+
+          existing="$(
+            gh release view "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --json assets \
+              --jq '.assets[].name'
+          )"
+
+          for source in "${assets[@]}"; do
+            name="$(basename "$source")"
+            if ! grep -Fxq "$name" <<<"$existing"; then
+              gh release upload "$RELEASE_TAG" "$source" \
+                --repo "$GITHUB_REPOSITORY"
+            fi
+          done
+
+          mkdir -p release-verify
+          for source in "${assets[@]}"; do
+            name="$(basename "$source")"
+            gh release download "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --dir release-verify \
+              --pattern "$name"
+            cmp "$source" "release-verify/$name"
+          done
+
+          printf '%s  %s\n' \
+            "$PAPER_SHA256" \
+            "release-verify/$(basename "$PAPER_FILE")" \
+            | sha256sum -c -
+
+      - name: Publish release and verify public state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          draft="$(
+            gh release view "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --json isDraft \
+              --jq '.isDraft'
+          )"
+          if [ "$draft" = "true" ]; then
+            gh release edit "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --draft=false
+          fi
+
+          release_json="$(
+            gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG"
+          )"
+          test "$(jq -r '.draft' <<<"$release_json")" = "false"
+          test "$(jq -r '.prerelease' <<<"$release_json")" = "false"
+          test "$(jq -r '.assets | length' <<<"$release_json")" = "7"
+          jq -r '.html_url' <<<"$release_json"
