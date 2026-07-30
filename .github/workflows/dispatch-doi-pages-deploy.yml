@@ -75,35 +75,15 @@ jobs:
 
           run_id=""
           for attempt in $(seq 1 30); do
-            runs_json="$(gh run list \
+            gh run list \
               --repo "$GITHUB_REPOSITORY" \
               --workflow deploy-pages.yml \
               --event workflow_dispatch \
               --branch main \
               --limit 30 \
-              --json databaseId,headSha,status,conclusion,createdAt,url)"
-            run_id="$(RUNS_JSON="$runs_json" SOURCE_SHA="$SOURCE_SHA" MARKER_EPOCH="$marker_epoch" python3 - <<'PY'
-import datetime as dt
-import json
-import os
-
-runs = json.loads(os.environ["RUNS_JSON"])
-source_sha = os.environ["SOURCE_SHA"]
-marker = int(os.environ["MARKER_EPOCH"]) - 60
-candidates = []
-for run in runs:
-    if run.get("headSha") != source_sha:
-        continue
-    created = run.get("createdAt") or ""
-    try:
-        timestamp = int(dt.datetime.fromisoformat(created.replace("Z", "+00:00")).timestamp())
-    except ValueError:
-        continue
-    if timestamp >= marker:
-        candidates.append((timestamp, int(run["databaseId"])))
-print(max(candidates)[1] if candidates else "")
-PY
-)"
+              --json databaseId,headSha,status,conclusion,createdAt,url \
+              > "$RUNNER_TEMP/deploy-pages-runs.json"
+            run_id="$(python3 -c 'import datetime as d,json,sys; runs=json.load(open(sys.argv[1],encoding="utf-8")); source=sys.argv[2]; marker=int(sys.argv[3])-60; candidates=[(int(d.datetime.fromisoformat(r["createdAt"].replace("Z","+00:00")).timestamp()),int(r["databaseId"])) for r in runs if r.get("headSha")==source and r.get("createdAt")]; candidates=[item for item in candidates if item[0]>=marker]; print(max(candidates)[1] if candidates else "")' "$RUNNER_TEMP/deploy-pages-runs.json" "$SOURCE_SHA" "$marker_epoch")"
             if [ -n "$run_id" ]; then
               break
             fi
@@ -127,20 +107,13 @@ PY
             research="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/?${cache}-${attempt}" || true)"
             paper="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/?${cache}-${attempt}" || true)"
             api="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/api/research-preprint.v1.json?${cache}-${attempt}" || true)"
+            printf '%s' "$api" > "$RUNNER_TEMP/research-preprint-live.json"
 
             if grep -Fq "$doi" <<<"$ai" \
               && grep -Fq "$record" <<<"$ai" \
               && grep -Fq "$doi" <<<"$research" \
               && grep -Fq "$doi" <<<"$paper" \
-              && API_JSON="$api" DOI="$doi" python3 - <<'PY'
-import json
-import os
-record = json.loads(os.environ["API_JSON"])
-doi = os.environ["DOI"]
-assert record["status"]["doi"] == doi
-assert record["status"]["doiState"] == "published"
-assert record["citation"]["doi"] == doi
-PY
+              && python3 -c 'import json,sys; record=json.load(open(sys.argv[1],encoding="utf-8")); doi=sys.argv[2]; assert record["status"]["doi"]==doi; assert record["status"]["doiState"]=="published"; assert record["citation"]["doi"]==doi' "$RUNNER_TEMP/research-preprint-live.json" "$doi"
             then
               echo "PUBLISHED_DOI_PAGES_OK doi=$doi source=${{ steps.source.outputs.source_sha }}"
               exit 0
