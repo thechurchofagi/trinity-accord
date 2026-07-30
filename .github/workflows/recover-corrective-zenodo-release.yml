@@ -11,6 +11,7 @@ on:
 permissions:
   actions: write
   contents: read
+  issues: write
 
 concurrency:
   group: recover-corrective-zenodo-release-controller
@@ -25,13 +26,50 @@ jobs:
     env:
       TARGET_WORKFLOW: publish-corrective-zenodo-preprint-release.yml
       RELEASE_TAG: ta-tr-2026-01-v1.1-zenodo
+      AUDIT_ISSUE: "786"
 
     steps:
+      - name: Announce recovery controller
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          post_comment() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
+
+          controller_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          printf -v comment_body '%s\n\n- Controller run: %s\n- Controller attempt: `%s`\n- Source commit: `%s`\n- Target workflow: `%s`\n- Target Release tag: `%s`' \
+            '### Recovery controller started' \
+            "$controller_url" \
+            "$GITHUB_RUN_ATTEMPT" \
+            "$GITHUB_SHA" \
+            "$TARGET_WORKFLOW" \
+            "$RELEASE_TAG"
+          post_comment "$comment_body"
+
       - name: Cancel superseded target runs
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+
+          post_comment() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
 
           endpoint="repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/runs?per_page=100"
 
@@ -72,8 +110,19 @@ jobs:
           ' target-runs.json > active-runs.tsv
 
           if [ -s active-runs.tsv ]; then
-            echo "Cancelling superseded target workflow runs:"
-            cat active-runs.tsv
+            active_markdown="$(
+              awk -F '\t' '{printf "- `%s` — %s — %s\\n", $1, $2, $3}' \
+                active-runs.tsv
+            )"
+            printf -v comment_body '%s\n\n%s' \
+              '### Superseded target runs found' \
+              "$active_markdown"
+            post_comment "$comment_body"
+          else
+            printf -v comment_body '%s\n\n%s' \
+              '### Superseded target runs' \
+              'No queued or in-progress target runs were found.'
+            post_comment "$comment_body"
           fi
 
           while IFS=$'\t' read -r run_id status run_url; do
@@ -111,6 +160,10 @@ jobs:
             )] | length' target-runs.json
           )"
           test "$remaining" = "0"
+          printf -v comment_body '%s\n\n%s' \
+            '### Superseded target runs stopped' \
+            "All older queued or in-progress runs of \`$TARGET_WORKFLOW\` are now stopped."
+          post_comment "$comment_body"
 
       - name: Dispatch clean recovery run
         id: dispatch
@@ -118,6 +171,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+
+          post_comment() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
 
           endpoint="repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/runs?per_page=100"
           gh api "$endpoint" > before-runs.json
@@ -153,8 +216,12 @@ jobs:
 
           test -n "$recovery_run_id"
           printf 'recovery_run_id=%s\n' "$recovery_run_id" >> "$GITHUB_OUTPUT"
-          echo "Dispatched target recovery run:"
-          echo "https://github.com/$GITHUB_REPOSITORY/actions/runs/$recovery_run_id"
+          recovery_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$recovery_run_id"
+          printf -v comment_body '%s\n\n- Target run ID: `%s`\n- Target run: %s' \
+            '### Clean target recovery dispatched' \
+            "$recovery_run_id" \
+            "$recovery_url"
+          post_comment "$comment_body"
 
       - name: Wait for recovery and surface failure
         env:
@@ -163,6 +230,16 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$RECOVERY_RUN_ID"
+
+          post_comment() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
 
           conclusion=""
           for attempt in $(seq 1 240); do
@@ -179,34 +256,76 @@ jobs:
           done
 
           test "$(jq -r '.status' recovery-run.json)" = "completed"
+          recovery_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$RECOVERY_RUN_ID"
+
           if [ "$conclusion" != "success" ]; then
             gh api \
               "repos/$GITHUB_REPOSITORY/actions/runs/$RECOVERY_RUN_ID/jobs?per_page=100" \
               > recovery-jobs.json
-            echo "Failed target job steps:"
             jq -r '
               .jobs[]
               | select(.conclusion != "success")
-              | "JOB: \(.name) status=\(.status) conclusion=\(.conclusion)\n"
+              | "- Job: **\(.name)** — status=\(.status), conclusion=\(.conclusion)\n"
                 + (
                     [.steps[] | select(.conclusion == "failure")
-                      | "  STEP: \(.number) \(.name)"]
+                      | "  - Failed step \(.number): \(.name)"]
                     | join("\n")
                   )
-            ' recovery-jobs.json
+            ' recovery-jobs.json > failure-summary.md
+            failure_summary="$(cat failure-summary.md)"
+            printf -v comment_body '%s\n\n- Target run: %s\n- Conclusion: `%s`\n\n%s' \
+              '### Target recovery failed' \
+              "$recovery_url" \
+              "$conclusion" \
+              "$failure_summary"
+            post_comment "$comment_body"
             exit 1
           fi
 
-      - name: Verify public release tag
+          printf -v comment_body '%s\n\n- Target run: %s\n- Conclusion: `success`' \
+            '### Target recovery completed' \
+            "$recovery_url"
+          post_comment "$comment_body"
+
+      - name: Verify public release tag and close audit
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+
+          post_comment() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
+
           gh api \
             "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
             > release.json
           test "$(jq -r '.draft' release.json)" = "false"
           test "$(jq -r '.prerelease' release.json)" = "false"
           test "$(jq -r '.assets | length' release.json)" = "8"
-          echo "Corrective release verified:"
-          jq -r '.html_url' release.json
+
+          release_url="$(jq -r '.html_url' release.json)"
+          asset_names="$(
+            jq -r '.assets[].name | "- `" + . + "`"' release.json
+          )"
+          printf -v comment_body '%s\n\n- Release: %s\n- Tag: `%s`\n- Draft: `false`\n- Prerelease: `false`\n- Asset count: `8`\n\n#### Assets\n%s' \
+            '### Corrective Release verified' \
+            "$release_url" \
+            "$RELEASE_TAG" \
+            "$asset_names"
+          post_comment "$comment_body"
+
+          jq -n '{state: "closed", state_reason: "completed"}' > close-issue.json
+          gh api \
+            --method PATCH \
+            "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE" \
+            --input close-issue.json \
+            >/dev/null
+
+          echo "Corrective release verified: $release_url"
