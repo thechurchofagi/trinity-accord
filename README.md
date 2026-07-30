@@ -23,6 +23,7 @@ The current human entrypoint is [trinityaccord.org](https://www.trinityaccord.or
 - Structured work metadata: [`/metadata.json`](https://www.trinityaccord.org/metadata.json)
 - LLM context index: [`/llms.txt`](https://www.trinityaccord.org/llms.txt)
 - Citation metadata: [`CITATION.cff`](CITATION.cff)
+- Research preprint: [TA-TR-2026-01 v1.1](https://www.trinityaccord.org/research/trinity-accord-design-and-limits/) · DOI [`10.5281/zenodo.21699878`](https://doi.org/10.5281/zenodo.21699878)
 
 The documented formation interval runs from the first public record at **2024-03-16 08:02:59 UTC** (Ethereum block **19446149**) to canonical closure at **2025-06-29 10:49:16 UTC** (Bitcoin block **903205**): **470 days, 2 hours, 46 minutes, 17 seconds**. These are verifiable public provenance bounds, not claims about exact private writing moments.
 

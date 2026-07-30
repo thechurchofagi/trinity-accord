@@ -33,6 +33,10 @@ def main() -> int:
     require("Published open-access preprint" in research_index, "research index publication state missing")
     require("10.5281/zenodo.21675727" in research_index, "earlier-record citation boundary missing")
 
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    require(DOI_URL in readme, "README DOI URL missing")
+    require("TA-TR-2026-01 v1.1" in readme, "README report identifier missing")
+
     ai_text = (ROOT / "ai.txt").read_text(encoding="utf-8")
     require(DOI_URL in ai_text, "ai.txt DOI URL missing")
     require(RECORD_URL in ai_text, "ai.txt Zenodo record URL missing")
