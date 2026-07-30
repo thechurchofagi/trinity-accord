@@ -213,10 +213,10 @@ def main() -> int:
         preprint.get("status", {}).get("independentVerification") is False,
         "independent-verification boundary missing",
     )
-    require(preprint.get("status", {}).get("doi") is None, "unminted DOI must remain null")
+    require(preprint.get("status", {}).get("doi") == "10.5281/zenodo.21699878", "published DOI drift")
     require(
-        preprint.get("status", {}).get("doiState") == "not_yet_deposited",
-        "DOI state must not imply a completed deposit",
+        preprint.get("status", {}).get("doiState") == "published",
+        "published DOI state drift",
     )
     require(preprint.get("nonAmendingBoundary") is True, "research non-amending boundary missing")
     require(
@@ -261,7 +261,8 @@ def main() -> int:
 
     ai_text = (ROOT / "ai.txt").read_text(encoding="utf-8")
     require("/api/research-preprint.v1.json" in ai_text, "ai.txt research pointer missing")
-    require("No DOI exists" in ai_text, "ai.txt DOI boundary missing")
+    require("https://doi.org/10.5281/zenodo.21699878" in ai_text, "ai.txt DOI URL missing")
+    require("https://zenodo.org/records/21699878" in ai_text, "ai.txt Zenodo record URL missing")
 
     feed_text = (ROOT / "feed.xml").read_text(encoding="utf-8")
     require("Technical Report TA-TR-2026-01" in feed_text, "Atom research entry missing")

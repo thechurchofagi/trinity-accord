@@ -33,6 +33,7 @@ DEFAULT_DATE = "29 July 2026"
 PRIMARY_CATEGORY = "cs.DL"
 CROSS_LISTS = ["cs.CY"]
 LICENSE = "CC BY 4.0"
+DEFAULT_DOI = "10.5281/zenodo.21699878"
 
 TABLE_COLUMN_WIDTHS = [
     [0.08, 0.16, 0.30, 0.30],
@@ -392,7 +393,7 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--version", default=DEFAULT_VERSION)
     parser.add_argument("--date", default=DEFAULT_DATE)
-    parser.add_argument("--doi")
+    parser.add_argument("--doi", default=DEFAULT_DOI)
     args = parser.parse_args()
 
     for executable in ["pandoc", "pdflatex", "pdffonts", "pdfinfo", "pdftotext"]:

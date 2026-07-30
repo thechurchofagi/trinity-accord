@@ -5,12 +5,14 @@ permalink: /research/trinity-accord-design-and-limits/
 citation_title: "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study"
 citation_author: "Hongju Liu"
 citation_publication_date: "2026/07/29"
+citation_doi: "10.5281/zenodo.21699878"
 citation_pdf_url: "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf"
 citation_technical_report_institution: "The Trinity Accord Project"
 citation_technical_report_number: "TA-TR-2026-01"
 citation_language: "en"
 scholarly_article: true
 article_identifier: "TA-TR-2026-01"
+article_doi: "10.5281/zenodo.21699878"
 article_version: "1.1"
 article_date: "2026-07-29"
 article_license: "CC BY 4.0"
@@ -31,13 +33,16 @@ article_abstract: >-
 Independent researcher, Shenzhen, China<br>
 Trinity Accord Technical Report **TA-TR-2026-01**<br>
 Version 1.1 - 29 July 2026 - Preprint, not peer reviewed<br>
-[Download the current searchable PDF](./trinity-accord-design-and-limits-v1.1.pdf) | [Machine-readable record](/api/research-preprint.v1.json) | [Deposit metadata](./zenodo-deposit-metadata.json)
+DOI: [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878)<br>
+[Download the current searchable PDF](./trinity-accord-design-and-limits-v1.1.pdf) | [Zenodo record](https://zenodo.org/records/21699878) | [Machine-readable record](/api/research-preprint.v1.json) | [Deposit metadata](./zenodo-deposit-metadata.json)
 
 > **Non-authoritative interpretation notice.** This paper is an analytical and descriptive research artifact. It has no interpretive authority over the Trinity Accord or its three Bitcoin Originals. It does not amend, supersede, extend, authenticate, govern, or prescribe the meaning of the Canon. Neither the responsible human author, the AI drafting system, nor any later reader acquires privileged interpretive authority through this paper. Every interpretation here remains non-binding and open to verification, criticism, rejection, or alternative reading; the identified Bitcoin Originals remain the sole source of canonical version authority.
 
 > **Publication status and boundary.** This is an AI-drafted, human-directed, and human-responsible design case study. It is not peer reviewed. It is not an independent verification report, and it does not establish that the Accord's philosophical propositions are true, scientifically validated, representative of humanity, or important to future intelligence.
 
 **Version note:** Version 1.1 clarifies the paper's lack of interpretive authority and records the model's primary drafting contribution and the human responsibility boundary. The [version 1.0 PDF](./trinity-accord-design-and-limits-v1.pdf) remains preserved as the previous public version.
+
+**DOI note:** Zenodo record [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) is the preferred scholarly citation for Version 1.1. The downloadable v1.1 PDF remains byte-identical to the file archived by Zenodo; the DOI is carried by the landing page, BibTeX, machine-readable record, and arXiv source rather than by silently rewriting the already deposited PDF.
 
 ## Abstract
 

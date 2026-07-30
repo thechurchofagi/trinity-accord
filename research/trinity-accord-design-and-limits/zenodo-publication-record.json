@@ -1,0 +1,25 @@
+{
+  "schema": "trinity-accord.zenodo-publication.v1",
+  "publication_state": "published",
+  "publication_date": "2026-07-30",
+  "resource_type": "publication-preprint",
+  "title": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+  "creator": "Liu, Hongju",
+  "version": "1.1",
+  "technical_report": "TA-TR-2026-01",
+  "doi": "10.5281/zenodo.21699878",
+  "doi_url": "https://doi.org/10.5281/zenodo.21699878",
+  "zenodo_record_id": 21699878,
+  "zenodo_record_url": "https://zenodo.org/records/21699878",
+  "github_release_tag": "ta-tr-2026-01-v1.1-zenodo",
+  "github_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/ta-tr-2026-01-v1.1-zenodo",
+  "archived_pdf": "trinity-accord-design-and-limits-v1.1.pdf",
+  "archived_pdf_sha256": "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2",
+  "related_earlier_record": {
+    "doi": "10.5281/zenodo.21675727",
+    "relationship": "earlier project-level metadata record",
+    "preferred_for_this_paper": false
+  },
+  "preferred_citation_record": true,
+  "non_amending_boundary": true
+}

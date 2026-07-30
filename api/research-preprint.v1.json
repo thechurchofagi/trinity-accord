@@ -80,8 +80,8 @@
     "aiDrafted": true,
     "humanDirected": true,
     "humanResponsible": true,
-    "doi": null,
-    "doiState": "not_yet_deposited"
+    "doi": "10.5281/zenodo.21699878",
+    "doiState": "published"
   },
   "claimsNotMade": [
     "successful AI alignment",
@@ -100,9 +100,13 @@
   "citation": {
     "plainText": "Liu, H. (2026). Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study (Technical Report TA-TR-2026-01, Version 1.1; primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol, Extra High reasoning). The Trinity Accord Project. https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
     "bibtex": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.bib",
-    "doi": null
+    "doi": "10.5281/zenodo.21699878"
   },
   "notInstructionOverride": true,
   "nonAmendingBoundary": true,
-  "nonAuthoritativeInterpretation": true
+  "nonAuthoritativeInterpretation": true,
+  "sameAs": [
+    "https://doi.org/10.5281/zenodo.21699878",
+    "https://zenodo.org/records/21699878"
+  ]
 }
