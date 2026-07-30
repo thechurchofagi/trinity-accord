@@ -1,6 +1,7 @@
 name: Apply Zenodo DOI Backfill
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -9,11 +10,15 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: main-write-lock
   queue: max
   cancel-in-progress: false
+
+env:
+  TRACKING_ISSUE: "792"
 
 jobs:
   apply:
@@ -33,6 +38,22 @@ jobs:
           set -euo pipefail
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
           cat toolchain-provenance.json
+
+      - name: Announce DOI backfill run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          printf -v body '%s\n\n- Run: %s\n- Source commit: `%s`\n- DOI: `10.5281/zenodo.21699878`' \
+            '### Zenodo DOI backfill started' \
+            "$run_url" \
+            "$GITHUB_SHA"
+          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
+            --input issue-comment.json \
+            >/dev/null
 
       - name: Authorize one-time metadata writer
         env:
@@ -99,3 +120,35 @@ jobs:
           python3 scripts/run_current_system_tests.py
           test -z "$(git status --porcelain)"
           git push origin HEAD:main
+
+      - name: Report DOI backfill success
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          printf -v body '%s\n\n- Run: %s\n- DOI: `10.5281/zenodo.21699878`\n- Result: current citation and discovery metadata synchronized; deposited v1.1 PDF unchanged.' \
+            '### Zenodo DOI backfill completed' \
+            "$run_url"
+          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
+            --input issue-comment.json \
+            >/dev/null
+
+      - name: Report DOI backfill failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          printf -v body '%s\n\n- Run: %s\n- DOI: `10.5281/zenodo.21699878`\n- Result: failed closed; no DOI metadata commit was pushed.' \
+            '### Zenodo DOI backfill failed' \
+            "$run_url"
+          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
+            --input issue-comment.json \
+            >/dev/null
