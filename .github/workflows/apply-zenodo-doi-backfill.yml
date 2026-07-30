@@ -11,8 +11,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: apply-zenodo-doi-backfill-20260730
-  cancel-in-progress: true
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
 
 jobs:
   apply:
@@ -48,10 +49,15 @@ jobs:
               ;;
           esac
 
+      - name: Rebase before DOI update
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
       - name: Apply DOI backfill
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           rm scripts/test_research_preprint_doi_sync.py
           python3 scripts/apply_zenodo_doi_backfill.py
 
@@ -75,7 +81,7 @@ jobs:
           python3 scripts/run_ci_group.py p0-current
           python3 scripts/run_current_system_tests.py
 
-      - name: Commit DOI metadata and remove bootstrap automation
+      - name: Commit, rebase, revalidate, and push DOI metadata
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -85,4 +91,11 @@ jobs:
           git add -A
           git diff --cached --check
           git commit -m "research: publish Zenodo DOI metadata"
+
+          git fetch origin main --prune
+          git rebase origin/main
+          python3 scripts/test_research_preprint_doi_sync.py
+          python3 scripts/run_ci_group.py p0-current
+          python3 scripts/run_current_system_tests.py
+          test -z "$(git status --porcelain)"
           git push origin HEAD:main
