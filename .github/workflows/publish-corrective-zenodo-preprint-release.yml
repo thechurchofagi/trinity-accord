@@ -19,6 +19,7 @@ jobs:
   publish:
     if: github.repository == 'thechurchofagi/trinity-accord'
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
 
     env:
       ARCHIVE_BRANCH: archive/ta-tr-2026-01-v1.1-zenodo
@@ -57,7 +58,7 @@ jobs:
               ;;
           esac
 
-      - name: Verify immutable paper and metadata source
+      - name: Verify immutable paper and build Zenodo metadata
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
@@ -67,42 +68,14 @@ jobs:
           import json
           from pathlib import Path
 
-          source = json.loads(Path(
-              "research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json"
-          ).read_text(encoding="utf-8"))
-          metadata = source["legacy_api_metadata"]
-
-          assert metadata["upload_type"] == "publication"
-          assert metadata["publication_type"] == "preprint"
-          assert metadata["publication_date"] == "2026-07-29"
-          assert metadata["version"] == "1.1"
-          assert metadata["title"] == (
-              "Designing a Verifiable, Non-Amending Civilizational Memory "
-              "Record for Future AI Agents: The Trinity Accord Case Study"
-          )
-          assert metadata["creators"] == [{
-              "name": "Liu, Hongju",
-              "affiliation": "Independent researcher, Shenzhen, China",
-          }]
-          assert metadata["access_right"] == "open"
-          assert metadata["license"] == "cc-by-4.0"
-          assert source["deposit_state"] == "prepared_not_submitted"
-          PY
-
-      - name: Build release-root Zenodo metadata
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
           source_path = Path(
               "research/trinity-accord-design-and-limits/"
               "zenodo-deposit-metadata.json"
           )
           source = json.loads(source_path.read_text(encoding="utf-8"))
-          metadata = dict(source["legacy_api_metadata"])
+          assert source["deposit_state"] == "prepared_not_submitted"
 
+          metadata = dict(source["legacy_api_metadata"])
           allowed = {
               "access_right",
               "creators",
@@ -121,6 +94,18 @@ jobs:
           assert set(metadata) <= allowed
           assert metadata["upload_type"] == "publication"
           assert metadata["publication_type"] == "preprint"
+          assert metadata["publication_date"] == "2026-07-29"
+          assert metadata["version"] == "1.1"
+          assert metadata["title"] == (
+              "Designing a Verifiable, Non-Amending Civilizational Memory "
+              "Record for Future AI Agents: The Trinity Accord Case Study"
+          )
+          assert metadata["creators"] == [{
+              "name": "Liu, Hongju",
+              "affiliation": "Independent researcher, Shenzhen, China",
+          }]
+          assert metadata["access_right"] == "open"
+          assert metadata["license"] == "cc-by-4.0"
 
           Path(".zenodo.json").write_text(
               json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
@@ -135,81 +120,41 @@ jobs:
           test "$(jq -r '.creators | length' .zenodo.json)" = "1"
           test "$(jq -r '.creators[0].name' .zenodo.json)" = "Liu, Hongju"
 
-      - name: Create or verify dedicated archive snapshot
+      - name: Recover or create dedicated archive snapshot
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-
-          resolve_ref_commit() {
-            local ref_json object_sha object_type
-            ref_json="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/$1")"
-            object_sha="$(jq -r '.object.sha' <<<"$ref_json")"
-            object_type="$(jq -r '.object.type' <<<"$ref_json")"
-            if [ "$object_type" = "tag" ]; then
-              object_sha="$(
-                gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" \
-                  --jq '.object.sha'
-              )"
-            fi
-            printf '%s\n' "$object_sha"
-          }
-
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" \
-              >/dev/null 2>&1; then
-            archive_sha="$(resolve_ref_commit "tags/$RELEASE_TAG")"
-            echo "Corrective release tag already exists at $archive_sha"
-            printf 'ARCHIVE_SHA=%s\n' "$archive_sha" >> "$GITHUB_ENV"
-            exit 0
-          fi
-
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$ARCHIVE_BRANCH" \
-              >/dev/null 2>&1; then
-            archive_sha="$(resolve_ref_commit "heads/$ARCHIVE_BRANCH")"
-            echo "Archive branch already exists at $archive_sha"
-            printf 'ARCHIVE_SHA=%s\n' "$archive_sha" >> "$GITHUB_ENV"
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout --detach "$GITHUB_SHA"
-          git add .zenodo.json
 
-          export GIT_AUTHOR_DATE="2026-07-30T06:39:00Z"
-          export GIT_COMMITTER_DATE="2026-07-30T06:39:00Z"
-          git commit \
-            -m "archive: attach preprint metadata for Zenodo release"
+          if git ls-remote --exit-code --heads origin \
+              "refs/heads/$ARCHIVE_BRANCH" >/dev/null 2>&1; then
+            git fetch --no-tags origin \
+              "refs/heads/$ARCHIVE_BRANCH:refs/remotes/origin/$ARCHIVE_BRANCH"
+            archive_sha="$(git rev-parse "refs/remotes/origin/$ARCHIVE_BRANCH")"
+            git show "$archive_sha:.zenodo.json" > archive-zenodo.json
+            cmp .zenodo.json archive-zenodo.json
+            git show "$archive_sha:CITATION.cff" \
+              | grep -F 'title: "The Trinity Accord"' >/dev/null
+            echo "Recovered archive snapshot: $archive_sha"
+          else
+            git checkout --detach "$GITHUB_SHA"
+            git add .zenodo.json
+            export GIT_AUTHOR_DATE="2026-07-30T06:39:00Z"
+            export GIT_COMMITTER_DATE="2026-07-30T06:39:00Z"
+            git commit \
+              -m "archive: attach preprint metadata for Zenodo release"
+            archive_sha="$(git rev-parse HEAD)"
+            git push origin "$archive_sha:refs/heads/$ARCHIVE_BRANCH"
+            git fetch --no-tags origin \
+              "refs/heads/$ARCHIVE_BRANCH:refs/remotes/origin/$ARCHIVE_BRANCH"
+            test "$(git rev-parse "refs/remotes/origin/$ARCHIVE_BRANCH")" = \
+              "$archive_sha"
+          fi
 
-          archive_sha="$(git rev-parse HEAD)"
-          git push origin "$archive_sha:refs/heads/$ARCHIVE_BRANCH"
-          test "$(resolve_ref_commit "heads/$ARCHIVE_BRANCH")" = "$archive_sha"
+          test -n "$archive_sha"
           printf 'ARCHIVE_SHA=%s\n' "$archive_sha" >> "$GITHUB_ENV"
-
-      - name: Verify archive snapshot contents
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          test -n "$ARCHIVE_SHA"
-
-          metadata="$(
-            gh api \
-              -H "Accept: application/vnd.github.raw+json" \
-              "repos/$GITHUB_REPOSITORY/contents/.zenodo.json?ref=$ARCHIVE_SHA"
-          )"
-          jq -e '.upload_type == "publication"' <<<"$metadata" >/dev/null
-          jq -e '.publication_type == "preprint"' <<<"$metadata" >/dev/null
-          jq -e '.version == "1.1"' <<<"$metadata" >/dev/null
-          jq -e '.creators == [{"name":"Liu, Hongju","affiliation":"Independent researcher, Shenzhen, China"}]' \
-            <<<"$metadata" >/dev/null
-
-          citation="$(
-            gh api \
-              -H "Accept: application/vnd.github.raw+json" \
-              "repos/$GITHUB_REPOSITORY/contents/CITATION.cff?ref=$ARCHIVE_SHA"
-          )"
-          grep -F 'title: "The Trinity Accord"' <<<"$citation" >/dev/null
 
       - name: Prepare release notes
         run: |
@@ -217,7 +162,7 @@ jobs:
           cat > release-notes.md <<'EOF'
           # Trinity Accord Research Preprint v1.1
 
-          This corrective GitHub Release exists so the enabled Zenodo/GitHub
+          This corrective GitHub Release ensures that the enabled Zenodo/GitHub
           integration reads publication-level metadata for the preprint rather
           than the repository's project-level `CITATION.cff`.
 
@@ -236,10 +181,9 @@ jobs:
           - Independent verification: none
 
           The release tag points to a dedicated archive snapshot whose repository
-          root contains `.zenodo.json`. Under Zenodo's GitHub integration rules,
-          `.zenodo.json` takes precedence over `CITATION.cff`; therefore this
-          release is described as the paper rather than as the wider Trinity
-          Accord dataset.
+          root contains `.zenodo.json`. Zenodo gives this file precedence over
+          `CITATION.cff`, so the archived object is described as the paper rather
+          than as the wider Trinity Accord dataset.
 
           PDF SHA-256:
 
@@ -249,7 +193,7 @@ jobs:
           Originals, Record-Chain semantics, evidence, or the public paper.
           EOF
 
-      - name: Create or recover draft corrective release
+      - name: Recover or create draft release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -270,7 +214,7 @@ jobs:
 
           jq -n \
             --arg tag "$RELEASE_TAG" \
-            --arg target "$ARCHIVE_SHA" \
+            --arg target "$ARCHIVE_BRANCH" \
             --arg name "$RELEASE_TITLE" \
             --rawfile body release-notes.md \
             '{
@@ -373,6 +317,9 @@ jobs:
           jq -r '.assets[].name' release.json | sort > actual-assets.txt
           diff -u expected-assets.txt actual-assets.txt
           test "$(jq -r '.assets | length' release.json)" = "8"
+          test "$(
+            jq '[.assets[] | select(.state != "uploaded")] | length' release.json
+          )" = "0"
 
           mkdir -p release-verify
           for source in "${assets[@]}"; do
@@ -429,11 +376,9 @@ jobs:
           test "$(jq -r '.prerelease' <<<"$release_json")" = "false"
           test "$(jq -r '.assets | length' <<<"$release_json")" = "8"
 
-          tag_sha="$(
-            gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" \
-              --jq '.object.sha'
-          )"
-          test "$tag_sha" = "$ARCHIVE_SHA"
+          git fetch --force origin \
+            "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          test "$(git rev-list -n 1 "$RELEASE_TAG")" = "$ARCHIVE_SHA"
 
           echo "Corrective release published:"
           jq -r '.html_url' <<<"$release_json"
