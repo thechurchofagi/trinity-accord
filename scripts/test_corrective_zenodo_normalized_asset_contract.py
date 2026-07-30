@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Contract for GitHub-normalized Zenodo Release asset names."""
+"""Contract for GitHub-normalized Zenodo Release asset names.
+
+GitHub's Release upload service was observed to store `.zenodo.json` as
+`default.zenodo.json`; the archive tag itself must still retain `.zenodo.json`.
+"""
 from __future__ import annotations
 
 from pathlib import Path
