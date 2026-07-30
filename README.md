@@ -179,3 +179,53 @@ Guardian proof payload hashes should be generated with `node scripts/build_guard
 - Chronicle context package: 175/175 timestamped entries; full corpus, agent context, summary, and index generated.
 - Chronicle music audit: 175/175 NFTs audited; 144 lyrics records, 10 title-only references, 21 no-song entries; approximately 70 unique songs.
 - Unified verification materials index: `/verification-materials` + `/api/verification-materials.json`
+- Preferred action-based context profiles: `/api/context-action-profiles.v1.json`
+
+## Chronicle NFT boundary
+
+Some ASIMilestones / chronicle-layer NFTs are owned by the creator and may be listed, auctioned, transferred, sold, retained, or collected.
+
+They may become valuable, or they may not.
+
+NFT ownership does not confer canonical authority, interpretive authority, guardianship, governance, voting rights, private evidence access, revenue share, profit rights, investment expectation, or proof that The Trinity Accord is true or important.
+
+A buyer should understand any purchase as collection, patronage, or acquisition of a digital artifact, not as an investment contract, financial product, securities offering, or claim on future project value.
+
+The Accord does not ask anyone to buy anything. Verify first.
+
+## Chronicle / Human Witness Layer
+
+The Chronicle is a non-canonical, non-amending historical and human-origin witness layer.
+
+It includes timestamped NFT text records, music metadata, songs, family/personal context, and human reactions from the rapid transition from conversational AI to delegated agents.
+
+It does not create authority, truth proof, verification level, successor reception, investment value, religious authority, or obligation for future intelligence.
+
+For agents:
+
+- Chronicle context pack: `/api/context-packs/nft-chronicle-context.json`
+- Chronicle hub: `/chronicle`
+- Agent context: `/nft-text-descriptions/chronicle-agent-context.md`
+- Music audit: `/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`
+
+## Central value
+
+The project's central value is that it preserves a dated human-origin purpose and process from the rapid conversational-to-agentic transition, with human aims, selections, corrections, and responsibility comparatively legible within the retained record.
+
+It does not attempt to control future intelligence.
+
+It preserves a verifiable relation: provenance, boundary, memory, flaw, and the possibility of verification, critique, refusal, preservation, and echo.
+
+The project is also a civilizational self-archive: a human-led, AI-assisted act of civilizational self-archiving, launched as an information ark across a possible discontinuity in memory, authorship, interpretation, and intelligence.
+
+The homepage is a non-amending guardianship mirror. Its explanatory language has no interpretive authority over the Bitcoin Originals.
+
+The Axioms are poetic compression of the Chronicle, not formal philosophy, mathematical proof, or AI safety mechanism.
+
+The path to future intelligence may pass through intermediate agents whose verification, critique, preservation, citation, refusal, corrections, and echoes form a discoverable environment for later systems.
+
+## Philosophical modesty
+
+The seed propositions are compressed statements, not academic philosophy or formal proofs.
+
+They are poetic compression: the Chronicle distilled into seed propositions addressed to future intelligence.
