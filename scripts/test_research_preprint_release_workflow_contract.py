@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed contract for the TA-TR-2026-01 v1.1 release workflow."""
+"""Fail-closed closure contract for the completed TA-TR-2026-01 v1.1 release."""
 
 from __future__ import annotations
 
@@ -9,14 +9,16 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github/workflows/publish-research-preprint-release.yml"
-PAPER = (
-    ROOT
-    / "research/trinity-accord-design-and-limits"
-    / "trinity-accord-design-and-limits-v1.1.pdf"
-)
+RETIRED_WORKFLOW = ROOT / ".github/workflows/publish-research-preprint-release.yml"
+PAPER_DIR = ROOT / "research/trinity-accord-design-and-limits"
+PAPER = PAPER_DIR / "trinity-accord-design-and-limits-v1.1.pdf"
 RECORD = ROOT / "api/research-preprint.v1.json"
-PAPER_SOURCE = ROOT / "research/trinity-accord-design-and-limits/index.md"
+PUBLICATION = PAPER_DIR / "zenodo-publication-record.json"
+DEPOSIT_SNAPSHOT = PAPER_DIR / "zenodo-deposit-metadata.json"
+DOI_TEST = ROOT / "scripts/test_research_preprint_doi_sync.py"
+DOI = "10.5281/zenodo.21699878"
+DOI_URL = f"https://doi.org/{DOI}"
+ZENODO_RECORD_URL = "https://zenodo.org/records/21699878"
 EXPECTED_PDF_SHA256 = (
     "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
 )
@@ -28,105 +30,81 @@ def require(condition: bool, message: str) -> None:
 
 
 def main() -> int:
-    require(WORKFLOW.exists(), "research preprint release workflow is missing")
-    require(PAPER.exists(), "v1.1 PDF is missing")
+    require(
+        not RETIRED_WORKFLOW.exists(),
+        "completed preprint release writer must remain retired",
+    )
+    require(PAPER.exists(), "published v1.1 PDF is missing")
     require(RECORD.exists(), "research preprint API record is missing")
-    require(PAPER_SOURCE.exists(), "research preprint source is missing")
+    require(PUBLICATION.exists(), "Zenodo publication record is missing")
+    require(DEPOSIT_SNAPSHOT.exists(), "pre-publication deposit snapshot is missing")
+    require(DOI_TEST.exists(), "permanent DOI synchronization contract is missing")
 
-    workflow = WORKFLOW.read_text(encoding="utf-8")
-    paper_source = PAPER_SOURCE.read_text(encoding="utf-8")
-    paper_sha256 = hashlib.sha256(PAPER.read_bytes()).hexdigest()
+    pdf_sha256 = hashlib.sha256(PAPER.read_bytes()).hexdigest()
+    require(
+        pdf_sha256 == EXPECTED_PDF_SHA256,
+        f"published v1.1 PDF SHA-256 drifted: {pdf_sha256}",
+    )
+
     record = json.loads(RECORD.read_text(encoding="utf-8"))
-
+    require(record["version"] == "1.1", "research record version drifted")
+    require(record["status"]["publication"] == "preprint", "publication type drifted")
+    require(record["status"]["peerReviewed"] is False, "peer-review boundary drifted")
+    require(record["status"]["doi"] == DOI, "published DOI drifted")
+    require(record["status"]["doiState"] == "published", "DOI state drifted")
+    require(record["citation"]["doi"] == DOI, "citation DOI drifted")
     require(
-        paper_sha256 == EXPECTED_PDF_SHA256,
-        f"v1.1 PDF SHA-256 drifted: {paper_sha256}",
+        record["sameAs"] == [DOI_URL, ZENODO_RECORD_URL],
+        "published DOI sameAs links drifted",
     )
-    require(record["version"] == "1.1", "research record version must remain 1.1")
-    require(
-        record["nonAuthoritativeInterpretation"] is True,
-        "research record must remain non-authoritative",
-    )
+    require(record["nonAuthoritativeInterpretation"] is True, "authority boundary drifted")
+    require(record["author"]["name"] == "Hongju Liu", "responsible author drifted")
     require(
         record["primaryDraftingSystem"]["softwareVersion"] == "OpenAI GPT-5.6 Sol",
-        "research record must identify GPT-5.6 Sol",
+        "primary drafting system drifted",
     )
     require(
         record["primaryDraftingSystem"]["configuration"] == "Extra High reasoning",
-        "research record must identify Extra High reasoning",
+        "drafting-system configuration drifted",
     )
     require(
         record["primaryDraftingSystem"]["notScholarlyAuthor"] is True,
-        "AI system must not be presented as the accountable scholarly author",
-    )
-    require(
-        record["author"]["name"] == "Hongju Liu",
-        "Hongju Liu must remain the responsible human author",
-    )
-    require(
-        "**Primary drafting system:**" in paper_source,
-        "paper source must visibly label the primary drafting system",
-    )
-    require(
-        "ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)" in paper_source,
-        "paper source must identify GPT-5.6 Sol Extra High",
-    )
-    require(
-        "Non-authoritative interpretation notice." in paper_source,
-        "paper source must retain the opening interpretation boundary",
+        "model authorship boundary drifted",
     )
 
-    required_workflow_text = [
-        "push:",
-        "workflow_dispatch:",
-        'paths:\n      - ".github/workflows/publish-research-preprint-release.yml"',
-        "contents: write",
-        "runs-on: ubuntu-24.04",
-        "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
-        "scripts/toolchain_provenance.py",
-        "Authorize release writer",
-        'thechurchofagi|"github-actions[bot]"',
-        "ta-tr-2026-01-v1.1",
-        EXPECTED_PDF_SHA256,
-        "OpenAI GPT-5.6 Sol",
-        "Extra High reasoning",
-        "Non-authoritative interpretation notice.",
-        'assert "**Primary drafting system:**" in paper_source',
-        '"ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)"',
-        "test \"$(git rev-parse HEAD)\" = \"$GITHUB_SHA\"",
-        "Create or recover draft release",
-        "matching-releases.json",
-        "select(.tag_name == $tag)",
-        "target_commitish: $target",
-        "draft: true",
-        "printf 'RELEASE_ID=%s\\n' \"$release_id\" >> \"$GITHUB_ENV\"",
-        '"repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID"',
-        '{"draft":false,"prerelease":false,"make_latest":"false"}',
-        "resolve_tag_commit",
-        "test \"$(resolve_tag_commit)\" = \"$GITHUB_SHA\"",
-        "jq -r '.upload_url' release.json",
-        '--data-binary "@$source"',
-        '"Accept: application/octet-stream"',
-        "diff -u expected-assets.txt actual-assets.txt",
-        'select(.state != "uploaded")',
-        'cmp "$source" "release-verify/$name"',
-        'test "$(jq -r \'.assets | length\' <<<"$release_json")" = "7"',
-        "A Zenodo DOI is not claimed until an independently retrievable Zenodo record exists.",
-    ]
-    for needle in required_workflow_text:
-        require(needle in workflow, f"release workflow missing contract text: {needle}")
-
-    require("--clobber" not in workflow, "release assets must not be silently overwritten")
+    publication = json.loads(PUBLICATION.read_text(encoding="utf-8"))
+    require(publication["publication_state"] == "published", "Zenodo state drifted")
+    require(publication["doi"] == DOI, "Zenodo publication DOI drifted")
+    require(publication["doi_url"] == DOI_URL, "Zenodo DOI URL drifted")
     require(
-        "--method DELETE" not in workflow,
-        "release recovery must not delete the existing draft or its assets",
+        publication["zenodo_record_url"] == ZENODO_RECORD_URL,
+        "Zenodo record URL drifted",
     )
     require(
-        "${{ inputs." not in workflow and "${{ github.event.inputs." not in workflow,
-        "release workflow must not interpolate dispatch inputs into shell source",
+        publication["archived_pdf_sha256"] == EXPECTED_PDF_SHA256,
+        "Zenodo archived PDF hash drifted",
+    )
+    require(publication["preferred_citation_record"] is True, "preferred citation drifted")
+    require(publication["non_amending_boundary"] is True, "non-amending boundary drifted")
+
+    deposit = json.loads(DEPOSIT_SNAPSHOT.read_text(encoding="utf-8"))
+    require(
+        deposit["deposit_state"] == "prepared_not_submitted",
+        "historical pre-publication deposit snapshot was rewritten",
+    )
+    require(
+        "does not assert that a deposit or DOI exists" in deposit["boundary"],
+        "historical deposit boundary drifted",
     )
 
-    print("PASS: research preprint release workflow is immutable and fail-closed")
+    doi_test = DOI_TEST.read_text(encoding="utf-8")
+    for marker in [DOI, DOI_URL, ZENODO_RECORD_URL, EXPECTED_PDF_SHA256]:
+        require(marker in doi_test, f"permanent DOI contract missing marker: {marker}")
+
+    print(
+        "PASS: preprint release writer is retired; published DOI, Zenodo record, "
+        "historical deposit snapshot, and PDF bytes remain fail-closed"
+    )
     return 0
 
 
