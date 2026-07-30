@@ -84,8 +84,8 @@ jobs:
         run: |
           set -euo pipefail
           run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- Root source file: `.zenodo.json`\n- GitHub-normalized Release asset name: `zenodo.json`\n- Release tag: `%s`' \
-            '### Normalized Release asset recovery started' \
+          printf -v body '%s\n\n- Run: %s\n- Root source file: `.zenodo.json`\n- GitHub-normalized Release asset name: `default.zenodo.json`\n- Release tag: `%s`' \
+            '### Default dotfile Release asset recovery started' \
             "$run_url" \
             "$RELEASE_TAG"
           jq -n --arg body "$body" '{body: $body}' > issue-comment.json
@@ -149,7 +149,7 @@ jobs:
             "references.bib"
             "LICENSE-CC-BY-4.0.txt"
             "zenodo-deposit-metadata.json"
-            "zenodo.json"
+            "default.zenodo.json"
           )
           test "${#sources[@]}" = "${#names[@]}"
           test "${#sources[@]}" = "8"
@@ -193,7 +193,7 @@ jobs:
               if [ "$http_code" != "201" ]; then
                 response="$(cat upload-response.json)"
                 printf -v body '%s\n\n- Local source: `%s`\n- Release asset: `%s`\n- HTTP status: `%s`\n\n```json\n%s\n```' \
-                  '### Normalized Release asset upload failed' \
+                  '### Default dotfile Release asset upload failed' \
                   "$source" \
                   "$name" \
                   "$http_code" \
@@ -286,7 +286,7 @@ jobs:
           asset_names="$(
             jq -r '.[].name | "- `" + . + "`"' release-assets.json
           )"
-          printf -v body '%s\n\n- Release: %s\n- Release ID: `%s`\n- Tag: `%s`\n- Archive commit: `%s`\n- Asset count: `8`\n- Root metadata file in tag: `.zenodo.json`\n- Normalized Release asset: `zenodo.json`\n\n#### Assets\n%s' \
+          printf -v body '%s\n\n- Release: %s\n- Release ID: `%s`\n- Tag: `%s`\n- Archive commit: `%s`\n- Asset count: `8`\n- Root metadata file in tag: `.zenodo.json`\n- GitHub dotfile Release asset: `default.zenodo.json`\n\n#### Assets\n%s' \
             '### Corrective GitHub Release verified and published' \
             "$release_url" \
             "$RELEASE_ID" \
