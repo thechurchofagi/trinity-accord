@@ -83,11 +83,22 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf arxiv-package
-          python3 scripts/build_arxiv_research_preprint.py \
-            --output-dir arxiv-package \
-            --version 1.1 \
-            --date '29 July 2026' \
-            --doi '10.5281/zenodo.21699878'
+          if python3 scripts/build_arxiv_research_preprint.py \
+              --output-dir arxiv-package \
+              --version 1.1 \
+              --date '29 July 2026' \
+              --doi '10.5281/zenodo.21699878' \
+              > arxiv-build-output.log 2>&1; then
+            cat arxiv-build-output.log
+          else
+            status=$?
+            cat arxiv-build-output.log
+            if test -f arxiv-package/main.log; then
+              echo '--- main.log failure tail ---'
+              tail -n 240 arxiv-package/main.log
+            fi
+            exit "$status"
+          fi
 
       - name: Verify package contents and metadata
         env:
