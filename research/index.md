@@ -14,19 +14,22 @@ This page collects bounded research outputs about the Trinity Accord. Research p
 
 **The Trinity Accord Case Study**<br>
 Primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)<br>
-Responsible human author and project initiator: Hongju Liu (刘烘炬) · Technical Report TA-TR-2026-01 · Version 1.1 · 29 July 2026
+Responsible human author and project initiator: Hongju Liu (刘烘炬) · Technical Report TA-TR-2026-01 · Version 1.1 · 29 July 2026<br>
+Published Zenodo DOI: [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878)
 
 An artifact-centered design case examining canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and discoverability. The report presents an inspectable architecture and a reusable design pattern while stating its negative results and conflicts of interest.
 
 - [Read the HTML full text](/research/trinity-accord-design-and-limits/)
+- [Open the published Zenodo record](https://zenodo.org/records/21699878)
 - [Download the current searchable PDF](/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf)
 - [Open the preserved version 1.0 PDF](/research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf)
 - [Read machine-readable metadata](/api/research-preprint.v1.json)
 - [Download BibTeX](/research/trinity-accord-design-and-limits/citation.bib)
-- [Inspect repository-deposit metadata](/research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json)
+- [Inspect the published Zenodo record metadata](/research/trinity-accord-design-and-limits/zenodo-publication-record.json)
+- [Inspect the preserved pre-publication deposit metadata](/research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json)
 
-**Status:** AI-drafted, human-directed, and human-responsible preprint; no interpretive authority; not peer reviewed; not an independent verification report.
+**Status:** Published open-access preprint; AI-drafted, human-directed, and human-responsible; no interpretive authority; not peer reviewed; not an independent verification report.
 
 ## Citation boundary
 
-Citing the report does not endorse the Trinity Accord. The report's CC BY 4.0 license applies to the report package, not automatically to all historical or third-party material elsewhere in the archive. Until a repository DOI is minted, cite the stable report number and canonical URL. Once a DOI exists, this page and the machine-readable record can be updated without changing the paper's claims or the Accord's Canon.
+Citing the report does not endorse the Trinity Accord. The report's CC BY 4.0 license applies to the report package, not automatically to all historical or third-party material elsewhere in the archive. For Version 1.1, use DOI [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) as the preferred scholarly citation. The earlier DOI `10.5281/zenodo.21675727` describes an earlier project-level metadata record and is not the preferred citation for this paper. DOI metadata and discovery links do not change the paper's claims or the Accord's Canon.
