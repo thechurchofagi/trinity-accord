@@ -2,11 +2,9 @@ name: Apply Zenodo DOI Backfill
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/apply-zenodo-doi-backfill.yml"
+  issues:
+    types:
+      - opened
 
 permissions:
   contents: write
@@ -19,10 +17,21 @@ concurrency:
 
 env:
   TRACKING_ISSUE: "792"
+  TRIGGER_TITLE: "Run Zenodo DOI Backfill 10.5281/zenodo.21699878"
 
 jobs:
   apply:
-    if: github.repository == 'thechurchofagi/trinity-accord'
+    if: >-
+      ${{
+        github.repository == 'thechurchofagi/trinity-accord' &&
+        (
+          github.event_name == 'workflow_dispatch' ||
+          (
+            github.event_name == 'issues' &&
+            github.event.issue.title == 'Run Zenodo DOI Backfill 10.5281/zenodo.21699878'
+          )
+        )
+      }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
 
@@ -30,7 +39,7 @@ jobs:
       - name: Checkout immutable bootstrap source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          ref: ${{ github.sha }}
+          ref: main
           fetch-depth: 0
 
       - name: Record toolchain provenance
@@ -45,10 +54,11 @@ jobs:
         run: |
           set -euo pipefail
           run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- Source commit: `%s`\n- DOI: `10.5281/zenodo.21699878`' \
+          printf -v body '%s\n\n- Run: %s\n- Source commit: `%s`\n- Event: `%s`\n- DOI: `10.5281/zenodo.21699878`' \
             '### Zenodo DOI backfill started' \
             "$run_url" \
-            "$GITHUB_SHA"
+            "$GITHUB_SHA" \
+            "$GITHUB_EVENT_NAME"
           jq -n --arg body "$body" '{body: $body}' > issue-comment.json
           gh api --method POST \
             "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
@@ -136,6 +146,15 @@ jobs:
             "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
             --input issue-comment.json \
             >/dev/null
+
+          if [ "$GITHUB_EVENT_NAME" = "issues" ]; then
+            trigger_issue="$(jq -r '.issue.number' "$GITHUB_EVENT_PATH")"
+            jq -n '{state: "closed", state_reason: "completed"}' > close-trigger.json
+            gh api --method PATCH \
+              "repos/$GITHUB_REPOSITORY/issues/$trigger_issue" \
+              --input close-trigger.json \
+              >/dev/null
+          fi
 
       - name: Report DOI backfill failure
         if: failure()
