@@ -5,6 +5,9 @@ on:
   issues:
     types:
       - opened
+  pull_request:
+    types:
+      - opened
 
 permissions:
   contents: write
@@ -29,6 +32,10 @@ jobs:
           (
             github.event_name == 'issues' &&
             github.event.issue.title == 'Run Zenodo DOI Backfill 10.5281/zenodo.21699878'
+          ) ||
+          (
+            github.event_name == 'pull_request' &&
+            github.event.pull_request.title == 'Run Zenodo DOI Backfill 10.5281/zenodo.21699878'
           )
         )
       }}
