@@ -1,0 +1,3 @@
+One-time pull-request-open signal for the reviewed Zenodo DOI metadata backfill.
+DOI: 10.5281/zenodo.21699878
+This file is not intended to merge and carries no publication metadata.
