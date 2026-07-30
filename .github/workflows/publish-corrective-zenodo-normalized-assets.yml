@@ -1,0 +1,310 @@
+name: Publish Corrective Zenodo Normalized Assets
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-corrective-zenodo-normalized-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: publish-corrective-zenodo-normalized-assets-v1
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    env:
+      ARCHIVE_BRANCH: archive/ta-tr-2026-01-v1.1-zenodo
+      ARCHIVE_SHA: e4d23486a576783976857f925d23d8c8e7131c11
+      RELEASE_TAG: ta-tr-2026-01-v1.1-zenodo
+      RESEARCH_DIR: research/trinity-accord-design-and-limits
+      PAPER_FILE: research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
+      PAPER_SHA256: 2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2
+      METADATA_SOURCE: research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json
+      AUDIT_ISSUE: "786"
+
+    steps:
+      - name: Checkout immutable source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Verify paper and archive snapshot
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          printf '%s  %s\n' "$PAPER_SHA256" "$PAPER_FILE" | sha256sum -c -
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = json.loads(Path(
+              "research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json"
+          ).read_text(encoding="utf-8"))
+          metadata = source["legacy_api_metadata"]
+          assert metadata["upload_type"] == "publication"
+          assert metadata["publication_type"] == "preprint"
+          assert metadata["version"] == "1.1"
+          assert metadata["creators"] == [{
+              "name": "Liu, Hongju",
+              "affiliation": "Independent researcher, Shenzhen, China",
+          }]
+          Path(".zenodo.json").write_text(
+              json.dumps(metadata, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+          git fetch --no-tags origin \
+            "refs/heads/$ARCHIVE_BRANCH:refs/remotes/origin/$ARCHIVE_BRANCH"
+          test "$(git rev-parse "refs/remotes/origin/$ARCHIVE_BRANCH")" = "$ARCHIVE_SHA"
+          git show "$ARCHIVE_SHA:.zenodo.json" > archive-zenodo.json
+          cmp .zenodo.json archive-zenodo.json
+
+      - name: Announce normalized-name recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          printf -v body '%s\n\n- Run: %s\n- Root source file: `.zenodo.json`\n- GitHub-normalized Release asset name: `zenodo.json`\n- Release tag: `%s`' \
+            '### Normalized Release asset recovery started' \
+            "$run_url" \
+            "$RELEASE_TAG"
+          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+          gh api \
+            --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+            --input issue-comment.json \
+            >/dev/null
+
+      - name: Recover exact draft Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --paginate --slurp \
+            "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            > release-pages.json
+          jq --arg tag "$RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)]' \
+            release-pages.json > matching-releases.json
+          test "$(jq 'length' matching-releases.json)" = "1"
+          jq '.[0]' matching-releases.json > release.json
+
+          release_id="$(jq -r '.id' release.json)"
+          test "$release_id" != "null"
+          test "$(jq -r '.tag_name' release.json)" = "$RELEASE_TAG"
+          test "$(jq -r '.prerelease' release.json)" = "false"
+          printf 'RELEASE_ID=%s\n' "$release_id" >> "$GITHUB_ENV"
+
+      - name: Verify normalized eight-asset mapping
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          post_failure() {
+            local body="$1"
+            jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+            gh api \
+              --method POST \
+              "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+              --input issue-comment.json \
+              >/dev/null
+          }
+
+          sources=(
+            "$PAPER_FILE"
+            "$RESEARCH_DIR/README-DEPOSIT.txt"
+            "$RESEARCH_DIR/checksums.sha256"
+            "$RESEARCH_DIR/citation.bib"
+            "$RESEARCH_DIR/references.bib"
+            "$RESEARCH_DIR/LICENSE-CC-BY-4.0.txt"
+            "$METADATA_SOURCE"
+            ".zenodo.json"
+          )
+          names=(
+            "trinity-accord-design-and-limits-v1.1.pdf"
+            "README-DEPOSIT.txt"
+            "checksums.sha256"
+            "citation.bib"
+            "references.bib"
+            "LICENSE-CC-BY-4.0.txt"
+            "zenodo-deposit-metadata.json"
+            "zenodo.json"
+          )
+          test "${#sources[@]}" = "${#names[@]}"
+          test "${#sources[@]}" = "8"
+
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            > release.json
+          upload_url="$(jq -r '.upload_url' release.json | sed 's/{.*$//')"
+
+          for index in "${!sources[@]}"; do
+            source="${sources[$index]}"
+            name="${names[$index]}"
+
+            gh api --paginate --slurp \
+              "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?per_page=100" \
+              > asset-pages.json
+            jq '[.[][]]' asset-pages.json > release-assets.json
+            matches="$(
+              jq --arg name "$name" \
+                '[.[] | select(.name == $name)] | length' \
+                release-assets.json
+            )"
+            test "$matches" -le 1
+
+            if [ "$matches" -eq 0 ]; then
+              encoded_name="$(jq -rn --arg value "$name" '$value | @uri')"
+              http_code="$(
+                curl \
+                  --silent \
+                  --show-error \
+                  --request POST \
+                  --header "Accept: application/vnd.github+json" \
+                  --header "Authorization: Bearer $GH_TOKEN" \
+                  --header "X-GitHub-Api-Version: 2022-11-28" \
+                  --header "Content-Type: application/octet-stream" \
+                  --data-binary "@$source" \
+                  --output upload-response.json \
+                  --write-out '%{http_code}' \
+                  "${upload_url}?name=${encoded_name}"
+              )"
+              if [ "$http_code" != "201" ]; then
+                response="$(cat upload-response.json)"
+                printf -v body '%s\n\n- Local source: `%s`\n- Release asset: `%s`\n- HTTP status: `%s`\n\n```json\n%s\n```' \
+                  '### Normalized Release asset upload failed' \
+                  "$source" \
+                  "$name" \
+                  "$http_code" \
+                  "$response"
+                post_failure "$body"
+                exit 1
+              fi
+              test "$(jq -r '.name' upload-response.json)" = "$name"
+              test "$(jq -r '.state' upload-response.json)" = "uploaded"
+            fi
+          done
+
+          gh api --paginate --slurp \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?per_page=100" \
+            > asset-pages.json
+          jq '[.[][]]' asset-pages.json > release-assets.json
+          printf '%s\n' "${names[@]}" | sort > expected-assets.txt
+          jq -r '.[].name' release-assets.json | sort > actual-assets.txt
+          diff -u expected-assets.txt actual-assets.txt
+          test "$(jq 'length' release-assets.json)" = "8"
+          test "$(jq '[.[] | select(.state != "uploaded")] | length' release-assets.json)" = "0"
+
+          mkdir -p release-verify
+          for index in "${!sources[@]}"; do
+            source="${sources[$index]}"
+            name="${names[$index]}"
+            asset_url="$(
+              jq -r --arg name "$name" \
+                '.[] | select(.name == $name) | .url' \
+                release-assets.json
+            )"
+            test -n "$asset_url"
+            curl \
+              --fail \
+              --silent \
+              --show-error \
+              --location \
+              --retry 4 \
+              --retry-all-errors \
+              --retry-delay 2 \
+              --header "Accept: application/octet-stream" \
+              --header "Authorization: Bearer $GH_TOKEN" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              --output "release-verify/$name" \
+              "$asset_url"
+            cmp "$source" "release-verify/$name"
+          done
+
+          printf '%s  %s\n' \
+            "$PAPER_SHA256" \
+            "release-verify/trinity-accord-design-and-limits-v1.1.pdf" \
+            | sha256sum -c -
+
+      - name: Publish and verify Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            > release.json
+          if [ "$(jq -r '.draft' release.json)" = "true" ]; then
+            jq -n '{draft: false, prerelease: false, make_latest: "false"}' \
+              > publish-request.json
+            gh api \
+              --method PATCH \
+              "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+              --input publish-request.json \
+              > published-release.json
+          fi
+
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
+            > release.json
+          test "$(jq -r '.id' release.json)" = "$RELEASE_ID"
+          test "$(jq -r '.draft' release.json)" = "false"
+          test "$(jq -r '.prerelease' release.json)" = "false"
+
+          git fetch --force origin \
+            "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          test "$(git rev-list -n 1 "$RELEASE_TAG")" = "$ARCHIVE_SHA"
+
+          gh api --paginate --slurp \
+            "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?per_page=100" \
+            > asset-pages.json
+          jq '[.[][]]' asset-pages.json > release-assets.json
+          test "$(jq 'length' release-assets.json)" = "8"
+
+          release_url="$(jq -r '.html_url' release.json)"
+          asset_names="$(
+            jq -r '.[].name | "- `" + . + "`"' release-assets.json
+          )"
+          printf -v body '%s\n\n- Release: %s\n- Release ID: `%s`\n- Tag: `%s`\n- Archive commit: `%s`\n- Asset count: `8`\n- Root metadata file in tag: `.zenodo.json`\n- Normalized Release asset: `zenodo.json`\n\n#### Assets\n%s' \
+            '### Corrective GitHub Release verified and published' \
+            "$release_url" \
+            "$RELEASE_ID" \
+            "$RELEASE_TAG" \
+            "$ARCHIVE_SHA" \
+            "$asset_names"
+          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
+          gh api \
+            --method POST \
+            "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE/comments" \
+            --input issue-comment.json \
+            >/dev/null
+
+          jq -n '{state: "closed", state_reason: "completed"}' > close-issue.json
+          gh api \
+            --method PATCH \
+            "repos/$GITHUB_REPOSITORY/issues/$AUDIT_ISSUE" \
+            --input close-issue.json \
+            >/dev/null
+
+          echo "Corrective release published: $release_url"
