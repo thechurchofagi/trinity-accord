@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Contract for GitHub-normalized Zenodo Release asset names.
 
-GitHub's Release upload service was observed to store `.zenodo.json` as
-`default.zenodo.json`; the archive tag itself must still retain `.zenodo.json`.
+GitHub first stored `.zenodo.json` as `default.zenodo.json`; a recovery attempt
+also uploaded `zenodo.json`. Both aliases must be byte-identical to the archive
+root `.zenodo.json` before the draft Release can be published.
 """
 from __future__ import annotations
 
@@ -35,9 +36,10 @@ def main() -> int:
         "RELEASE_TAG: ta-tr-2026-01-v1.1-zenodo",
         '".zenodo.json"',
         '"default.zenodo.json"',
-        'test "${#sources[@]}" = "8"',
+        '"zenodo.json"',
+        'test "${#sources[@]}" = "9"',
         "releases/$RELEASE_ID/assets?per_page=100",
-        'test "$(jq \'length\' release-assets.json)" = "8"',
+        'test "$(jq \'length\' release-assets.json)" = "9"',
         'cmp "$source" "release-verify/$name"',
         'make_latest: "false"',
         'AUDIT_ISSUE: "786"',
@@ -58,7 +60,7 @@ def main() -> int:
     present = [marker for marker in forbidden if marker in text]
     require(not present, f"workflow contains forbidden patterns: {present}")
 
-    print("CORRECTIVE_ZENODO_DEFAULT_DOTFILE_ASSET_CONTRACT_OK")
+    print("CORRECTIVE_ZENODO_NINE_ASSET_ALIAS_CONTRACT_OK")
     return 0
 
 

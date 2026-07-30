@@ -84,8 +84,8 @@ jobs:
         run: |
           set -euo pipefail
           run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- Root source file: `.zenodo.json`\n- GitHub-normalized Release asset name: `default.zenodo.json`\n- Release tag: `%s`' \
-            '### Default dotfile Release asset recovery started' \
+          printf -v body '%s\n\n- Run: %s\n- Root source file: `.zenodo.json`\n- Existing Release aliases: `default.zenodo.json`, `zenodo.json`\n- Release tag: `%s`' \
+            '### Existing dotfile Release aliases verification started' \
             "$run_url" \
             "$RELEASE_TAG"
           jq -n --arg body "$body" '{body: $body}' > issue-comment.json
@@ -115,7 +115,7 @@ jobs:
           test "$(jq -r '.prerelease' release.json)" = "false"
           printf 'RELEASE_ID=%s\n' "$release_id" >> "$GITHUB_ENV"
 
-      - name: Verify normalized eight-asset mapping
+      - name: Verify normalized nine-asset mapping
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -140,6 +140,7 @@ jobs:
             "$RESEARCH_DIR/LICENSE-CC-BY-4.0.txt"
             "$METADATA_SOURCE"
             ".zenodo.json"
+            ".zenodo.json"
           )
           names=(
             "trinity-accord-design-and-limits-v1.1.pdf"
@@ -150,9 +151,10 @@ jobs:
             "LICENSE-CC-BY-4.0.txt"
             "zenodo-deposit-metadata.json"
             "default.zenodo.json"
+            "zenodo.json"
           )
           test "${#sources[@]}" = "${#names[@]}"
-          test "${#sources[@]}" = "8"
+          test "${#sources[@]}" = "9"
 
           gh api \
             "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
@@ -193,7 +195,7 @@ jobs:
               if [ "$http_code" != "201" ]; then
                 response="$(cat upload-response.json)"
                 printf -v body '%s\n\n- Local source: `%s`\n- Release asset: `%s`\n- HTTP status: `%s`\n\n```json\n%s\n```' \
-                  '### Default dotfile Release asset upload failed' \
+                  '### Release asset alias upload failed' \
                   "$source" \
                   "$name" \
                   "$http_code" \
@@ -213,7 +215,7 @@ jobs:
           printf '%s\n' "${names[@]}" | sort > expected-assets.txt
           jq -r '.[].name' release-assets.json | sort > actual-assets.txt
           diff -u expected-assets.txt actual-assets.txt
-          test "$(jq 'length' release-assets.json)" = "8"
+          test "$(jq 'length' release-assets.json)" = "9"
           test "$(jq '[.[] | select(.state != "uploaded")] | length' release-assets.json)" = "0"
 
           mkdir -p release-verify
@@ -280,13 +282,13 @@ jobs:
             "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID/assets?per_page=100" \
             > asset-pages.json
           jq '[.[][]]' asset-pages.json > release-assets.json
-          test "$(jq 'length' release-assets.json)" = "8"
+          test "$(jq 'length' release-assets.json)" = "9"
 
           release_url="$(jq -r '.html_url' release.json)"
           asset_names="$(
             jq -r '.[].name | "- `" + . + "`"' release-assets.json
           )"
-          printf -v body '%s\n\n- Release: %s\n- Release ID: `%s`\n- Tag: `%s`\n- Archive commit: `%s`\n- Asset count: `8`\n- Root metadata file in tag: `.zenodo.json`\n- GitHub dotfile Release asset: `default.zenodo.json`\n\n#### Assets\n%s' \
+          printf -v body '%s\n\n- Release: %s\n- Release ID: `%s`\n- Tag: `%s`\n- Archive commit: `%s`\n- Asset count: `9`\n- Root metadata file in tag: `.zenodo.json`\n- Verified equivalent Release aliases: `default.zenodo.json`, `zenodo.json`\n\n#### Assets\n%s' \
             '### Corrective GitHub Release verified and published' \
             "$release_url" \
             "$RELEASE_ID" \
