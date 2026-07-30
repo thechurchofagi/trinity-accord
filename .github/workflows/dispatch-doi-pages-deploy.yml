@@ -1,0 +1,154 @@
+name: Dispatch DOI Pages Deployment
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: doi-pages-dispatch-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    if: >-
+      ${{
+        github.repository == 'thechurchofagi/trinity-accord' &&
+        github.event.pull_request.title == 'Deploy Published DOI Pages 10.5281/zenodo.21699878'
+      }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout immutable current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify authorized actor and current main
+        id: source
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|"github-actions[bot]")
+              ;;
+            *)
+              echo "Unauthorized Pages dispatch actor: $ACTOR" >&2
+              exit 1
+              ;;
+          esac
+
+          git fetch origin main --prune
+          source_sha="$(git rev-parse HEAD)"
+          remote_sha="$(git rev-parse origin/main)"
+          test "$source_sha" = "$remote_sha"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "Immutable Pages source: $source_sha"
+
+      - name: Record tool versions
+        run: |
+          set -euo pipefail
+          git --version
+          gh --version
+          python3 --version
+          curl --version | head -n 1
+
+      - name: Dispatch and wait for Deploy Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          marker_epoch="$(date -u +%s)"
+          gh workflow run deploy-pages.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref main \
+            -f checkout_ref="$SOURCE_SHA"
+
+          run_id=""
+          for attempt in $(seq 1 30); do
+            runs_json="$(gh run list \
+              --repo "$GITHUB_REPOSITORY" \
+              --workflow deploy-pages.yml \
+              --event workflow_dispatch \
+              --branch main \
+              --limit 30 \
+              --json databaseId,headSha,status,conclusion,createdAt,url)"
+            run_id="$(RUNS_JSON="$runs_json" SOURCE_SHA="$SOURCE_SHA" MARKER_EPOCH="$marker_epoch" python3 - <<'PY'
+import datetime as dt
+import json
+import os
+
+runs = json.loads(os.environ["RUNS_JSON"])
+source_sha = os.environ["SOURCE_SHA"]
+marker = int(os.environ["MARKER_EPOCH"]) - 60
+candidates = []
+for run in runs:
+    if run.get("headSha") != source_sha:
+        continue
+    created = run.get("createdAt") or ""
+    try:
+        timestamp = int(dt.datetime.fromisoformat(created.replace("Z", "+00:00")).timestamp())
+    except ValueError:
+        continue
+    if timestamp >= marker:
+        candidates.append((timestamp, int(run["databaseId"])))
+print(max(candidates)[1] if candidates else "")
+PY
+)"
+            if [ -n "$run_id" ]; then
+              break
+            fi
+            echo "Waiting for dispatched Deploy Pages run (${attempt}/30)."
+            sleep 5
+          done
+
+          test -n "$run_id"
+          echo "Deploy Pages run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$run_id"
+          gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
+
+      - name: Verify DOI is live
+        run: |
+          set -euo pipefail
+          doi='10.5281/zenodo.21699878'
+          record='https://zenodo.org/records/21699878'
+          cache="doi-pages-${GITHUB_RUN_ID}-$(date +%s)"
+
+          for attempt in $(seq 1 12); do
+            ai="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/ai.txt?${cache}-${attempt}" || true)"
+            research="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/?${cache}-${attempt}" || true)"
+            paper="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/?${cache}-${attempt}" || true)"
+            api="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/api/research-preprint.v1.json?${cache}-${attempt}" || true)"
+
+            if grep -Fq "$doi" <<<"$ai" \
+              && grep -Fq "$record" <<<"$ai" \
+              && grep -Fq "$doi" <<<"$research" \
+              && grep -Fq "$doi" <<<"$paper" \
+              && API_JSON="$api" DOI="$doi" python3 - <<'PY'
+import json
+import os
+record = json.loads(os.environ["API_JSON"])
+doi = os.environ["DOI"]
+assert record["status"]["doi"] == doi
+assert record["status"]["doiState"] == "published"
+assert record["citation"]["doi"] == doi
+PY
+            then
+              echo "PUBLISHED_DOI_PAGES_OK doi=$doi source=${{ steps.source.outputs.source_sha }}"
+              exit 0
+            fi
+
+            echo "Waiting for DOI edge propagation (${attempt}/12)."
+            sleep 20
+          done
+
+          echo "Published DOI is not visible on all required live surfaces." >&2
+          exit 1
