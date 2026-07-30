@@ -34,6 +34,35 @@ jobs:
           set -euo pipefail
 
           endpoint="repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/runs?per_page=100"
+
+          cancel_or_verify_completed() {
+            local run_id="$1"
+            local action="$2"
+            local output status
+
+            if output="$(
+              gh api \
+                --method POST \
+                "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/$action" \
+                2>&1
+            )"; then
+              return 0
+            fi
+
+            gh api \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" \
+              > cancel-state.json
+            status="$(jq -r '.status' cancel-state.json)"
+            if [ "$status" = "completed" ]; then
+              echo "Run $run_id completed before $action was applied."
+              return 0
+            fi
+
+            echo "$output" >&2
+            echo "Run $run_id remains $status after failed $action request." >&2
+            return 1
+          }
+
           gh api "$endpoint" > target-runs.json
           jq -r '
             .workflow_runs[]
@@ -50,10 +79,7 @@ jobs:
           while IFS=$'\t' read -r run_id status run_url; do
             [ -n "$run_id" ] || continue
             echo "Cancel $run_id ($status): $run_url"
-            gh api \
-              --method POST \
-              "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/cancel" \
-              >/dev/null || true
+            cancel_or_verify_completed "$run_id" cancel
           done < active-runs.tsv
 
           for attempt in $(seq 1 20); do
@@ -72,10 +98,7 @@ jobs:
               while read -r run_id; do
                 [ -n "$run_id" ] || continue
                 echo "Force-cancel stale run $run_id"
-                gh api \
-                  --method POST \
-                  "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/force-cancel" \
-                  >/dev/null || true
+                cancel_or_verify_completed "$run_id" force-cancel
               done < still-active.txt
             fi
             sleep 3
