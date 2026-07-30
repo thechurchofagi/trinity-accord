@@ -33,9 +33,9 @@ def main() -> int:
         'test "$state" = "uploaded"',
         'test "$(jq \'length\' release-assets.json)" = "8"',
         'cmp "$source" "release-verify/$name"',
-        '"make_latest: \\"false\\""'.replace('"', ''),
-        "AUDIT_ISSUE: \"786\"",
-        "state_reason: \"completed\"",
+        'make_latest: "false"',
+        'AUDIT_ISSUE: "786"',
+        'state_reason: "completed"',
     ]
     missing = [marker for marker in required if marker not in text]
     require(not missing, f"workflow is missing required markers: {missing}")
