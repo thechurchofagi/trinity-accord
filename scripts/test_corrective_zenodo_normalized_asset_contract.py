@@ -30,7 +30,7 @@ def main() -> int:
         "ARCHIVE_SHA: e4d23486a576783976857f925d23d8c8e7131c11",
         "RELEASE_TAG: ta-tr-2026-01-v1.1-zenodo",
         '".zenodo.json"',
-        '"zenodo.json"',
+        '"default.zenodo.json"',
         'test "${#sources[@]}" = "8"',
         "releases/$RELEASE_ID/assets?per_page=100",
         'test "$(jq \'length\' release-assets.json)" = "8"',
@@ -54,7 +54,7 @@ def main() -> int:
     present = [marker for marker in forbidden if marker in text]
     require(not present, f"workflow contains forbidden patterns: {present}")
 
-    print("CORRECTIVE_ZENODO_NORMALIZED_ASSET_CONTRACT_OK")
+    print("CORRECTIVE_ZENODO_DEFAULT_DOTFILE_ASSET_CONTRACT_OK")
     return 0
 
 
