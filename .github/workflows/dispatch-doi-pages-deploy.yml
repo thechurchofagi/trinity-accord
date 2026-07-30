@@ -103,10 +103,10 @@ jobs:
           cache="doi-pages-${GITHUB_RUN_ID}-$(date +%s)"
 
           for attempt in $(seq 1 12); do
-            ai="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/ai.txt?${cache}-${attempt}" || true)"
-            research="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/?${cache}-${attempt}" || true)"
-            paper="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/?${cache}-${attempt}" || true)"
-            api="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/api/research-preprint.v1.json?${cache}-${attempt}" || true)"
+            if ai="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/ai.txt?${cache}-${attempt}")"; then :; else ai=""; fi
+            if research="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/?${cache}-${attempt}")"; then :; else research=""; fi
+            if paper="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/?${cache}-${attempt}")"; then :; else paper=""; fi
+            if api="$(curl -fsSL --retry 2 "https://www.trinityaccord.org/api/research-preprint.v1.json?${cache}-${attempt}")"; then :; else api=""; fi
             printf '%s' "$api" > "$RUNNER_TEMP/research-preprint-live.json"
 
             if grep -Fq "$doi" <<<"$ai" \
