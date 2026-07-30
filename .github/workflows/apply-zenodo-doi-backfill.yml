@@ -1,0 +1,80 @@
+name: Apply Zenodo DOI Backfill
+
+on:
+  push:
+    branches:
+      - fix/zenodo-doi-backfill-20260730
+    paths:
+      - ".github/workflows/apply-zenodo-doi-backfill.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-zenodo-doi-backfill-20260730
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout DOI backfill branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: fix/zenodo-doi-backfill-20260730
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Authorize one-time metadata writer
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|"github-actions[bot]")
+              echo "Authorized DOI metadata actor: $ACTOR"
+              ;;
+            *)
+              echo "Unauthorized DOI metadata actor: $ACTOR" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Apply DOI backfill
+        run: |
+          set -euo pipefail
+          python3 scripts/apply_zenodo_doi_backfill.py
+
+      - name: Validate DOI synchronization
+        run: |
+          set -euo pipefail
+          python3 scripts/test_research_preprint_doi_sync.py
+          python3 scripts/test_arxiv_research_preprint_builder.py
+          python3 -m json.tool api/research-preprint.v1.json >/dev/null
+          python3 -m json.tool \
+            research/trinity-accord-design-and-limits/zenodo-publication-record.json \
+            >/dev/null
+          (
+            cd research/trinity-accord-design-and-limits
+            sha256sum -c checksums.sha256
+          )
+
+      - name: Commit DOI metadata and remove bootstrap automation
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm scripts/apply_zenodo_doi_backfill.py
+          rm .github/workflows/apply-zenodo-doi-backfill.yml
+          git add -A
+          git diff --cached --check
+          git commit -m "research: publish Zenodo DOI metadata"
+          git push origin HEAD:fix/zenodo-doi-backfill-20260730
