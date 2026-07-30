@@ -27,6 +27,12 @@ def main() -> int:
     require(DOI_URL in landing and RECORD_URL in landing, "landing-page DOI links missing")
     require("byte-identical" in landing, "deposited-PDF immutability note missing")
 
+    research_index = (ROOT / "research" / "index.md").read_text(encoding="utf-8")
+    require(DOI_URL in research_index, "research index DOI URL missing")
+    require(RECORD_URL in research_index, "research index Zenodo record URL missing")
+    require("Published open-access preprint" in research_index, "research index publication state missing")
+    require("10.5281/zenodo.21675727" in research_index, "earlier-record citation boundary missing")
+
     ai_text = (ROOT / "ai.txt").read_text(encoding="utf-8")
     require(DOI_URL in ai_text, "ai.txt DOI URL missing")
     require(RECORD_URL in ai_text, "ai.txt Zenodo record URL missing")
