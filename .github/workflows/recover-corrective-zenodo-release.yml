@@ -46,13 +46,14 @@ jobs:
           }
 
           controller_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          post_comment "### Recovery controller started
-
-- Controller run: $controller_url
-- Controller attempt: $GITHUB_RUN_ATTEMPT
-- Source commit: \`$GITHUB_SHA\`
-- Target workflow: \`$TARGET_WORKFLOW\`
-- Target Release tag: \`$RELEASE_TAG\`"
+          printf -v comment_body '%s\n\n- Controller run: %s\n- Controller attempt: `%s`\n- Source commit: `%s`\n- Target workflow: `%s`\n- Target Release tag: `%s`' \
+            '### Recovery controller started' \
+            "$controller_url" \
+            "$GITHUB_RUN_ATTEMPT" \
+            "$GITHUB_SHA" \
+            "$TARGET_WORKFLOW" \
+            "$RELEASE_TAG"
+          post_comment "$comment_body"
 
       - name: Cancel superseded target runs
         env:
@@ -110,16 +111,18 @@ jobs:
 
           if [ -s active-runs.tsv ]; then
             active_markdown="$(
-              awk -F '\t' '{printf "- `%s` — %s — %s\n", $1, $2, $3}' \
+              awk -F '\t' '{printf "- `%s` — %s — %s\\n", $1, $2, $3}' \
                 active-runs.tsv
             )"
-            post_comment "### Superseded target runs found
-
-$active_markdown"
+            printf -v comment_body '%s\n\n%s' \
+              '### Superseded target runs found' \
+              "$active_markdown"
+            post_comment "$comment_body"
           else
-            post_comment "### Superseded target runs
-
-No queued or in-progress target runs were found."
+            printf -v comment_body '%s\n\n%s' \
+              '### Superseded target runs' \
+              'No queued or in-progress target runs were found.'
+            post_comment "$comment_body"
           fi
 
           while IFS=$'\t' read -r run_id status run_url; do
@@ -157,9 +160,10 @@ No queued or in-progress target runs were found."
             )] | length' target-runs.json
           )"
           test "$remaining" = "0"
-          post_comment "### Superseded target runs stopped
-
-All older queued or in-progress runs of \`$TARGET_WORKFLOW\` are now stopped."
+          printf -v comment_body '%s\n\n%s' \
+            '### Superseded target runs stopped' \
+            "All older queued or in-progress runs of \`$TARGET_WORKFLOW\` are now stopped."
+          post_comment "$comment_body"
 
       - name: Dispatch clean recovery run
         id: dispatch
@@ -213,10 +217,11 @@ All older queued or in-progress runs of \`$TARGET_WORKFLOW\` are now stopped."
           test -n "$recovery_run_id"
           printf 'recovery_run_id=%s\n' "$recovery_run_id" >> "$GITHUB_OUTPUT"
           recovery_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$recovery_run_id"
-          post_comment "### Clean target recovery dispatched
-
-- Target run ID: \`$recovery_run_id\`
-- Target run: $recovery_url"
+          printf -v comment_body '%s\n\n- Target run ID: `%s`\n- Target run: %s' \
+            '### Clean target recovery dispatched' \
+            "$recovery_run_id" \
+            "$recovery_url"
+          post_comment "$comment_body"
 
       - name: Wait for recovery and surface failure
         env:
@@ -268,19 +273,19 @@ All older queued or in-progress runs of \`$TARGET_WORKFLOW\` are now stopped."
                   )
             ' recovery-jobs.json > failure-summary.md
             failure_summary="$(cat failure-summary.md)"
-            post_comment "### Target recovery failed
-
-- Target run: $recovery_url
-- Conclusion: \`$conclusion\`
-
-$failure_summary"
+            printf -v comment_body '%s\n\n- Target run: %s\n- Conclusion: `%s`\n\n%s' \
+              '### Target recovery failed' \
+              "$recovery_url" \
+              "$conclusion" \
+              "$failure_summary"
+            post_comment "$comment_body"
             exit 1
           fi
 
-          post_comment "### Target recovery completed
-
-- Target run: $recovery_url
-- Conclusion: \`success\`"
+          printf -v comment_body '%s\n\n- Target run: %s\n- Conclusion: `success`' \
+            '### Target recovery completed' \
+            "$recovery_url"
+          post_comment "$comment_body"
 
       - name: Verify public release tag and close audit
         env:
@@ -309,16 +314,12 @@ $failure_summary"
           asset_names="$(
             jq -r '.assets[].name | "- `" + . + "`"' release.json
           )"
-          post_comment "### Corrective Release verified
-
-- Release: $release_url
-- Tag: \`$RELEASE_TAG\`
-- Draft: \`false\`
-- Prerelease: \`false\`
-- Asset count: \`8\`
-
-#### Assets
-$asset_names"
+          printf -v comment_body '%s\n\n- Release: %s\n- Tag: `%s`\n- Draft: `false`\n- Prerelease: `false`\n- Asset count: `8`\n\n#### Assets\n%s' \
+            '### Corrective Release verified' \
+            "$release_url" \
+            "$RELEASE_TAG" \
+            "$asset_names"
+          post_comment "$comment_body"
 
           jq -n '{state: "closed", state_reason: "completed"}' > close-issue.json
           gh api \
