@@ -69,6 +69,17 @@ jobs:
       - name: Apply DOI backfill
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("scripts/apply_zenodo_doi_backfill.py")
+          text = path.read_text(encoding="utf-8")
+          old = '    require("doi         = {" + DOI + "}," in bib, "BibTeX DOI missing")'
+          new = '    require(DOI in bib and "doi         =" in bib, "BibTeX DOI missing")'
+          if text.count(old) != 1:
+              raise SystemExit("FAIL: BibTeX assertion source contract drifted")
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          PY
           rm scripts/test_research_preprint_doi_sync.py
           python3 scripts/apply_zenodo_doi_backfill.py
 
