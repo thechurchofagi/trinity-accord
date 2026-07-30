@@ -52,6 +52,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          rm scripts/test_research_preprint_doi_sync.py
           python3 scripts/apply_zenodo_doi_backfill.py
 
       - name: Validate DOI synchronization
