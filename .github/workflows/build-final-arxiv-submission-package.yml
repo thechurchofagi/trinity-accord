@@ -115,8 +115,7 @@ jobs:
           test "$(tar -tzf arxiv-package/trinity-accord-arxiv-source.tar.gz)" = 'main.tex'
           grep -Fq '10.5281/zenodo.21699878' arxiv-package/main.tex
           pdftotext arxiv-package/main.pdf arxiv-package/main.txt
-          grep -Fq '10.5281/zenodo.21699878' arxiv-package/main.txt
-          grep -Fq 'Designing a Verifiable, Non-Amending Civilizational Memory Record' arxiv-package/main.txt
+          python3 -c 'from pathlib import Path; text=" ".join(Path("arxiv-package/main.txt").read_text(encoding="utf-8").split()); assert "10.5281/zenodo.21699878" in text, "compiled PDF DOI missing"; assert "Designing a Verifiable, Non-Amending Civilizational Memory Record" in text, "compiled PDF title missing"'
 
           python3 -c 'import json,sys; p=json.load(open(sys.argv[1],encoding="utf-8")); assert p["submission_state"]=="prepared_not_submitted"; assert p["doi"]=="10.5281/zenodo.21699878"; assert p["version"]=="1.1"; assert p["primary_category"]=="cs.DL"; assert p["cross_lists"]==["cs.CY"]; assert p["report_number"]=="TA-TR-2026-01"; assert p["authors"].startswith("Hongju Liu")' arxiv-package/submission-metadata.json
 
