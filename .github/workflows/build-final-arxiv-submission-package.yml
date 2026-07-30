@@ -1,0 +1,158 @@
+name: Build Final arXiv Submission Package
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: read
+
+concurrency:
+  group: final-arxiv-package-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: >-
+      ${{
+        github.repository == 'thechurchofagi/trinity-accord' &&
+        github.event.pull_request.title == 'Build Final arXiv Package 10.5281/zenodo.21699878'
+      }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout immutable current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify authorized actor and current main
+        id: source
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          case "$ACTOR" in
+            thechurchofagi|"github-actions[bot]")
+              ;;
+            *)
+              echo "Unauthorized arXiv package actor: $ACTOR" >&2
+              exit 1
+              ;;
+          esac
+
+          git fetch origin main --prune
+          source_sha="$(git rev-parse HEAD)"
+          remote_sha="$(git rev-parse origin/main)"
+          test "$source_sha" = "$remote_sha"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "Immutable arXiv source: $source_sha"
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > toolchain-provenance.json
+          cat toolchain-provenance.json
+
+      - name: Install bounded document toolchain
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            pandoc \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended
+          pandoc --version | head -n 1
+          pdflatex --version | head -n 1
+          pdfinfo -v 2>&1 | head -n 1
+
+      - name: Validate builder and published DOI contracts
+        run: |
+          set -euo pipefail
+          python3 scripts/test_research_preprint_doi_sync.py
+          python3 scripts/test_arxiv_research_preprint_builder.py
+
+      - name: Build deterministic arXiv package
+        run: |
+          set -euo pipefail
+          rm -rf arxiv-package
+          python3 scripts/build_arxiv_research_preprint.py \
+            --output-dir arxiv-package \
+            --version 1.1 \
+            --date '29 July 2026' \
+            --doi '10.5281/zenodo.21699878'
+
+      - name: Verify package contents and metadata
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          test -s arxiv-package/main.tex
+          test -s arxiv-package/main.pdf
+          test -s arxiv-package/trinity-accord-arxiv-source.tar.gz
+          test -s arxiv-package/submission-metadata.json
+
+          test "$(tar -tzf arxiv-package/trinity-accord-arxiv-source.tar.gz)" = 'main.tex'
+          grep -Fq '10.5281/zenodo.21699878' arxiv-package/main.tex
+          pdftotext arxiv-package/main.pdf arxiv-package/main.txt
+          grep -Fq '10.5281/zenodo.21699878' arxiv-package/main.txt
+          grep -Fq 'Designing a Verifiable, Non-Amending Civilizational Memory Record' arxiv-package/main.txt
+
+          python3 -c 'import json,sys; p=json.load(open(sys.argv[1],encoding="utf-8")); assert p["submission_state"]=="prepared_not_submitted"; assert p["doi"]=="10.5281/zenodo.21699878"; assert p["version"]=="1.1"; assert p["primary_category"]=="cs.DL"; assert p["cross_lists"]==["cs.CY"]; assert p["report_number"]=="TA-TR-2026-01"; assert p["authors"].startswith("Hongju Liu")' arxiv-package/submission-metadata.json
+
+          rm arxiv-package/main.txt
+          (
+            cd arxiv-package
+            sha256sum \
+              main.tex \
+              main.pdf \
+              trinity-accord-arxiv-source.tar.gz \
+              submission-metadata.json \
+              > SHA256SUMS
+          )
+          sha256sum -c arxiv-package/SHA256SUMS
+
+          printf '%s\n' \
+            'Trinity Accord arXiv submission package' \
+            '========================================' \
+            '' \
+            'Technical report: TA-TR-2026-01' \
+            'Version: 1.1' \
+            'DOI: 10.5281/zenodo.21699878' \
+            'Primary arXiv category: cs.DL' \
+            'Cross-list: cs.CY' \
+            "Immutable repository source: ${SOURCE_SHA}" \
+            '' \
+            'Upload trinity-accord-arxiv-source.tar.gz to arXiv.' \
+            'main.pdf is the locally compiled verification copy.' \
+            'submission-metadata.json contains the bounded submission fields.' \
+            'SHA256SUMS covers every submission artifact.' \
+            > arxiv-package/README.txt
+
+      - name: Upload verified package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: trinity-accord-arxiv-v1.1-doi-21699878
+          path: |
+            arxiv-package/README.txt
+            arxiv-package/SHA256SUMS
+            arxiv-package/main.tex
+            arxiv-package/main.pdf
+            arxiv-package/submission-metadata.json
+            arxiv-package/trinity-accord-arxiv-source.tar.gz
+            toolchain-provenance.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Record successful completion
+        run: |
+          set -euo pipefail
+          echo 'ARXIV_PACKAGE_OK doi=10.5281/zenodo.21699878 version=1.1'
+          echo 'Submission state remains prepared_not_submitted.'
