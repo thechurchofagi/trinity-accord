@@ -63,12 +63,14 @@ jobs:
           set -euo pipefail
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y \
+            lmodern \
             pandoc \
             poppler-utils \
             texlive-fonts-recommended \
             texlive-latex-base \
             texlive-latex-extra \
             texlive-latex-recommended
+          kpsewhich lmodern.sty
           pandoc --version | head -n 1
           pdflatex --version | head -n 1
           pdfinfo -v 2>&1 | head -n 1
