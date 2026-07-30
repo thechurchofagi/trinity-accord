@@ -88,7 +88,7 @@ jobs:
           git fetch origin main --prune
           git rebase origin/main
 
-      - name: Apply DOI backfill
+      - name: Apply DOI and discovery backfill
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -102,13 +102,74 @@ jobs:
               raise SystemExit("FAIL: BibTeX assertion source contract drifted")
           path.write_text(text.replace(old, new, 1), encoding="utf-8")
           PY
+
           rm scripts/test_research_preprint_doi_sync.py
           python3 scripts/apply_zenodo_doi_backfill.py
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          doi = "10.5281/zenodo.21699878"
+          doi_url = f"https://doi.org/{doi}"
+          record_url = "https://zenodo.org/records/21699878"
+
+          def replace_once(path: Path, old: str, new: str) -> None:
+              text = path.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(
+                      f"FAIL: {path} expected one discovery migration, found {count}"
+                  )
+              path.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+          replace_once(
+              Path("ai.txt"),
+              "# No DOI exists until the named author publishes an external repository deposit.",
+              f"# DOI: {doi_url} (Zenodo record: {record_url}; preferred citation for TA-TR-2026-01 v1.1).",
+          )
+
+          contract = Path("scripts/test_discovery_visibility_contract.py")
+          replace_once(
+              contract,
+              '    require(preprint.get("status", {}).get("doi") is None, "unminted DOI must remain null")',
+              f'    require(preprint.get("status", {{}}).get("doi") == "{doi}", "published DOI drift")',
+          )
+          replace_once(
+              contract,
+              '    require(\n'
+              '        preprint.get("status", {}).get("doiState") == "not_yet_deposited",\n'
+              '        "DOI state must not imply a completed deposit",\n'
+              '    )',
+              '    require(\n'
+              '        preprint.get("status", {}).get("doiState") == "published",\n'
+              '        "published DOI state drift",\n'
+              '    )',
+          )
+          replace_once(
+              contract,
+              '    require("No DOI exists" in ai_text, "ai.txt DOI boundary missing")',
+              f'    require("{doi_url}" in ai_text, "ai.txt DOI URL missing")\n'
+              f'    require("{record_url}" in ai_text, "ai.txt Zenodo record URL missing")',
+          )
+
+          sync_test = Path("scripts/test_research_preprint_doi_sync.py")
+          replace_once(
+              sync_test,
+              '    require("byte-identical" in landing, "deposited-PDF immutability note missing")\n\n'
+              '    record = json.loads((ROOT / "api/research-preprint.v1.json").read_text(encoding="utf-8"))',
+              '    require("byte-identical" in landing, "deposited-PDF immutability note missing")\n\n'
+              '    ai_text = (ROOT / "ai.txt").read_text(encoding="utf-8")\n'
+              '    require(DOI_URL in ai_text, "ai.txt DOI URL missing")\n'
+              '    require(RECORD_URL in ai_text, "ai.txt Zenodo record URL missing")\n\n'
+              '    record = json.loads((ROOT / "api/research-preprint.v1.json").read_text(encoding="utf-8"))',
+          )
+          PY
 
       - name: Validate DOI synchronization
         run: |
           set -euo pipefail
           python3 scripts/test_research_preprint_doi_sync.py
+          python3 scripts/test_discovery_visibility_contract.py
           python3 scripts/test_arxiv_research_preprint_builder.py
           python3 -m json.tool api/research-preprint.v1.json >/dev/null
           python3 -m json.tool \
@@ -139,6 +200,7 @@ jobs:
           git fetch origin main --prune
           git rebase origin/main
           python3 scripts/test_research_preprint_doi_sync.py
+          python3 scripts/test_discovery_visibility_contract.py
           python3 scripts/run_ci_group.py p0-current
           python3 scripts/run_current_system_tests.py
           test -z "$(git status --porcelain)"
