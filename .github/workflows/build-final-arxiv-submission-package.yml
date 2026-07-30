@@ -129,8 +129,8 @@ jobs:
               trinity-accord-arxiv-source.tar.gz \
               submission-metadata.json \
               > SHA256SUMS
+            sha256sum -c SHA256SUMS
           )
-          sha256sum -c arxiv-package/SHA256SUMS
 
           printf '%s\n' \
             'Trinity Accord arXiv submission package' \
