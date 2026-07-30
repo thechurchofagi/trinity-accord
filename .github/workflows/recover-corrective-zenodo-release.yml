@@ -1,0 +1,212 @@
+name: Recover Corrective Zenodo Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/recover-corrective-zenodo-release.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: recover-corrective-zenodo-release-controller
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+
+    env:
+      TARGET_WORKFLOW: publish-corrective-zenodo-preprint-release.yml
+      RELEASE_TAG: ta-tr-2026-01-v1.1-zenodo
+
+    steps:
+      - name: Cancel superseded target runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          endpoint="repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/runs?per_page=100"
+
+          cancel_or_verify_completed() {
+            local run_id="$1"
+            local action="$2"
+            local output status
+
+            if output="$(
+              gh api \
+                --method POST \
+                "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/$action" \
+                2>&1
+            )"; then
+              return 0
+            fi
+
+            gh api \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" \
+              > cancel-state.json
+            status="$(jq -r '.status' cancel-state.json)"
+            if [ "$status" = "completed" ]; then
+              echo "Run $run_id completed before $action was applied."
+              return 0
+            fi
+
+            echo "$output" >&2
+            echo "Run $run_id remains $status after failed $action request." >&2
+            return 1
+          }
+
+          gh api "$endpoint" > target-runs.json
+          jq -r '
+            .workflow_runs[]
+            | select(.status == "queued" or .status == "in_progress")
+            | [.id, .status, .html_url]
+            | @tsv
+          ' target-runs.json > active-runs.tsv
+
+          if [ -s active-runs.tsv ]; then
+            echo "Cancelling superseded target workflow runs:"
+            cat active-runs.tsv
+          fi
+
+          while IFS=$'\t' read -r run_id status run_url; do
+            [ -n "$run_id" ] || continue
+            echo "Cancel $run_id ($status): $run_url"
+            cancel_or_verify_completed "$run_id" cancel
+          done < active-runs.tsv
+
+          for attempt in $(seq 1 20); do
+            gh api "$endpoint" > target-runs.json
+            jq -r '
+              .workflow_runs[]
+              | select(.status == "queued" or .status == "in_progress")
+              | .id
+            ' target-runs.json > still-active.txt
+            if [ ! -s still-active.txt ]; then
+              echo "All superseded target runs are stopped."
+              break
+            fi
+
+            if [ "$attempt" -eq 8 ]; then
+              while read -r run_id; do
+                [ -n "$run_id" ] || continue
+                echo "Force-cancel stale run $run_id"
+                cancel_or_verify_completed "$run_id" force-cancel
+              done < still-active.txt
+            fi
+            sleep 3
+          done
+
+          gh api "$endpoint" > target-runs.json
+          remaining="$(
+            jq '[.workflow_runs[] | select(
+              .status == "queued" or .status == "in_progress"
+            )] | length' target-runs.json
+          )"
+          test "$remaining" = "0"
+
+      - name: Dispatch clean recovery run
+        id: dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          endpoint="repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/runs?per_page=100"
+          gh api "$endpoint" > before-runs.json
+          previous_max="$(jq '[.workflow_runs[].id] | max // 0' before-runs.json)"
+
+          gh api \
+            --method POST \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/$TARGET_WORKFLOW/dispatches" \
+            -f ref=main \
+            >/dev/null
+
+          recovery_run_id=""
+          for attempt in $(seq 1 30); do
+            gh api "$endpoint" > after-runs.json
+            recovery_run_id="$(
+              jq -r --argjson previous "$previous_max" '
+                [
+                  .workflow_runs[]
+                  | select(.id > $previous)
+                  | select(.event == "workflow_dispatch")
+                  | select(.head_branch == "main")
+                ]
+                | sort_by(.created_at)
+                | last
+                | .id // empty
+              ' after-runs.json
+            )"
+            if [ -n "$recovery_run_id" ]; then
+              break
+            fi
+            sleep 2
+          done
+
+          test -n "$recovery_run_id"
+          printf 'recovery_run_id=%s\n' "$recovery_run_id" >> "$GITHUB_OUTPUT"
+          echo "Dispatched target recovery run:"
+          echo "https://github.com/$GITHUB_REPOSITORY/actions/runs/$recovery_run_id"
+
+      - name: Wait for recovery and surface failure
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECOVERY_RUN_ID: ${{ steps.dispatch.outputs.recovery_run_id }}
+        run: |
+          set -euo pipefail
+          test -n "$RECOVERY_RUN_ID"
+
+          conclusion=""
+          for attempt in $(seq 1 240); do
+            gh api \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$RECOVERY_RUN_ID" \
+              > recovery-run.json
+            status="$(jq -r '.status' recovery-run.json)"
+            conclusion="$(jq -r '.conclusion // empty' recovery-run.json)"
+            echo "Target run status=$status conclusion=${conclusion:-pending}"
+            if [ "$status" = "completed" ]; then
+              break
+            fi
+            sleep 5
+          done
+
+          test "$(jq -r '.status' recovery-run.json)" = "completed"
+          if [ "$conclusion" != "success" ]; then
+            gh api \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$RECOVERY_RUN_ID/jobs?per_page=100" \
+              > recovery-jobs.json
+            echo "Failed target job steps:"
+            jq -r '
+              .jobs[]
+              | select(.conclusion != "success")
+              | "JOB: \(.name) status=\(.status) conclusion=\(.conclusion)\n"
+                + (
+                    [.steps[] | select(.conclusion == "failure")
+                      | "  STEP: \(.number) \(.name)"]
+                    | join("\n")
+                  )
+            ' recovery-jobs.json
+            exit 1
+          fi
+
+      - name: Verify public release tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api \
+            "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
+            > release.json
+          test "$(jq -r '.draft' release.json)" = "false"
+          test "$(jq -r '.prerelease' release.json)" = "false"
+          test "$(jq -r '.assets | length' release.json)" = "8"
+          echo "Corrective release verified:"
+          jq -r '.html_url' release.json
