@@ -22,7 +22,10 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> int:
     require(WORKFLOW.exists(), "corrective Zenodo workflow is missing")
-    require(not (ROOT / ".zenodo.json").exists(), "paper metadata must not replace project metadata on main")
+    require(
+        not (ROOT / ".zenodo.json").exists(),
+        "paper metadata must not replace project metadata on main",
+    )
 
     text = WORKFLOW.read_text(encoding="utf-8")
     required = [
@@ -38,8 +41,8 @@ def main() -> int:
         '"$METADATA_SOURCE"',
         '".zenodo.json"',
         '"make_latest":"false"',
-        'test "$(jq -r \' .assets | length\' release.json)" = "8"'.replace("\' ", "\'"),
-        'test "$(jq -r \' .assets | length\' <<<"$release_json")" = "8"'.replace("\' ", "\'"),
+        "test \"$(jq -r '.assets | length' release.json)\" = \"8\"",
+        "test \"$(jq -r '.assets | length' <<<\"$release_json\")\" = \"8\"",
     ]
     missing = [marker for marker in required if marker not in text]
     require(not missing, f"workflow is missing required safety markers: {missing}")
@@ -57,15 +60,22 @@ def main() -> int:
 
     metadata_source = json.loads(METADATA.read_text(encoding="utf-8"))
     metadata = metadata_source["legacy_api_metadata"]
-    require(metadata_source["deposit_state"] == "prepared_not_submitted", "source state drifted")
+    require(
+        metadata_source["deposit_state"] == "prepared_not_submitted",
+        "source state drifted",
+    )
     require(metadata["upload_type"] == "publication", "upload_type must be publication")
     require(metadata["publication_type"] == "preprint", "publication_type must be preprint")
     require(metadata["publication_date"] == "2026-07-29", "publication date drifted")
     require(metadata["version"] == "1.1", "version drifted")
-    require(metadata["creators"] == [{
-        "name": "Liu, Hongju",
-        "affiliation": "Independent researcher, Shenzhen, China",
-    }], "creator metadata drifted")
+    require(
+        metadata["creators"]
+        == [{
+            "name": "Liu, Hongju",
+            "affiliation": "Independent researcher, Shenzhen, China",
+        }],
+        "creator metadata drifted",
+    )
     require(metadata["license"] == "cc-by-4.0", "license drifted")
     require(metadata["access_right"] == "open", "access must remain open")
 
