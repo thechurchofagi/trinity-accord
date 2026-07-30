@@ -2,25 +2,18 @@ name: Apply Zenodo DOI Backfill
 
 on:
   workflow_dispatch:
-  issues:
-    types:
-      - opened
   pull_request:
     types:
       - opened
+      - reopened
 
 permissions:
   contents: write
-  issues: write
 
 concurrency:
   group: main-write-lock
   queue: max
   cancel-in-progress: false
-
-env:
-  TRACKING_ISSUE: "792"
-  TRIGGER_TITLE: "Run Zenodo DOI Backfill 10.5281/zenodo.21699878"
 
 jobs:
   apply:
@@ -29,10 +22,6 @@ jobs:
         github.repository == 'thechurchofagi/trinity-accord' &&
         (
           github.event_name == 'workflow_dispatch' ||
-          (
-            github.event_name == 'issues' &&
-            github.event.issue.title == 'Run Zenodo DOI Backfill 10.5281/zenodo.21699878'
-          ) ||
           (
             github.event_name == 'pull_request' &&
             github.event.pull_request.title == 'Run Zenodo DOI Backfill 10.5281/zenodo.21699878'
@@ -43,7 +32,7 @@ jobs:
     timeout-minutes: 45
 
     steps:
-      - name: Checkout immutable bootstrap source
+      - name: Checkout reviewed main source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: main
@@ -54,23 +43,7 @@ jobs:
           set -euo pipefail
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
           cat toolchain-provenance.json
-
-      - name: Announce DOI backfill run
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- Source commit: `%s`\n- Event: `%s`\n- DOI: `10.5281/zenodo.21699878`' \
-            '### Zenodo DOI backfill started' \
-            "$run_url" \
-            "$GITHUB_SHA" \
-            "$GITHUB_EVENT_NAME"
-          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
-          gh api --method POST \
-            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
-            --input issue-comment.json \
-            >/dev/null
+          echo "DOI_BACKFILL_RUN=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
       - name: Authorize one-time metadata writer
         env:
@@ -138,43 +111,8 @@ jobs:
           test -z "$(git status --porcelain)"
           git push origin HEAD:main
 
-      - name: Report DOI backfill success
-        if: success()
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Record successful completion
         run: |
           set -euo pipefail
-          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- DOI: `10.5281/zenodo.21699878`\n- Result: current citation and discovery metadata synchronized; deposited v1.1 PDF unchanged.' \
-            '### Zenodo DOI backfill completed' \
-            "$run_url"
-          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
-          gh api --method POST \
-            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
-            --input issue-comment.json \
-            >/dev/null
-
-          if [ "$GITHUB_EVENT_NAME" = "issues" ]; then
-            trigger_issue="$(jq -r '.issue.number' "$GITHUB_EVENT_PATH")"
-            jq -n '{state: "closed", state_reason: "completed"}' > close-trigger.json
-            gh api --method PATCH \
-              "repos/$GITHUB_REPOSITORY/issues/$trigger_issue" \
-              --input close-trigger.json \
-              >/dev/null
-          fi
-
-      - name: Report DOI backfill failure
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          printf -v body '%s\n\n- Run: %s\n- DOI: `10.5281/zenodo.21699878`\n- Result: failed closed; no DOI metadata commit was pushed.' \
-            '### Zenodo DOI backfill failed' \
-            "$run_url"
-          jq -n --arg body "$body" '{body: $body}' > issue-comment.json
-          gh api --method POST \
-            "repos/$GITHUB_REPOSITORY/issues/$TRACKING_ISSUE/comments" \
-            --input issue-comment.json \
-            >/dev/null
+          echo "ZENODO_DOI_BACKFILL_OK doi=10.5281/zenodo.21699878"
+          echo "Deposited v1.1 PDF remained byte-identical."
