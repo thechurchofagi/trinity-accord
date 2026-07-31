@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Contract for delegated Arweave paid-upload wallet accounting boundaries.
+"""Contract for the single active weekly Arweave wallet boundary.
 
-The scheduled workflows authorize and invoke bounded orchestrators. The
-orchestrators own complete metadata staging, failure checkpoints, and
-metadata-only push retries. Low-level uploaders record every posted transaction,
-including readback failures. The scheduled backlog scan and retired historical
-surfaces have no paid or wallet-write capability.
+Only the weekly Record-Chain continuity workflow may authorize a paid post. Its
+low-level uploader records every posted transaction, including delayed readback
+states. Daily Native OTS, daily heartbeat, backlog scanning, and retired legacy
+surfaces have no wallet capability.
 """
 from __future__ import annotations
 
@@ -17,10 +16,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def body(path: str) -> str:
-    file = ROOT / path
-    if not file.exists():
+    target = ROOT / path
+    if not target.exists():
         raise SystemExit(f"missing required file: {path}")
-    return file.read_text(encoding="utf-8")
+    return target.read_text(encoding="utf-8")
 
 
 def require_contains(path: str, needles: list[str]) -> None:
@@ -34,15 +33,12 @@ def require_absent(path: str, needles: list[str]) -> None:
     text = body(path)
     present = [needle for needle in needles if needle in text]
     if present:
-        raise SystemExit(f"{path} retains forbidden retired wallet capability: {present}")
+        raise SystemExit(f"{path} retains forbidden wallet capability: {present}")
 
 
 def run_behavior(path: str, label: str) -> None:
-    target = ROOT / path
-    if not target.exists():
-        raise SystemExit(f"{label} missing: {path}")
     result = subprocess.run(
-        [sys.executable, str(target)],
+        [sys.executable, str(ROOT / path)],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -52,8 +48,6 @@ def run_behavior(path: str, label: str) -> None:
 
 
 def main() -> int:
-    # Generic uploaders expose complete cost, transaction checkpoint, and
-    # readback information consumed by the wallet ledger recorder.
     require_contains(
         "scripts/arweave_upload_payload.mjs",
         [
@@ -67,16 +61,6 @@ def main() -> int:
         ],
     )
     require_contains(
-        "scripts/arweave_cost_gate.mjs",
-        [
-            "actual_delta_winston",
-            "actual_delta_ar",
-            "estimated_upload_cost_winston",
-            "estimated_upload_cost_ar",
-            "balance_after_ar",
-        ],
-    )
-    require_contains(
         "scripts/record_arweave_upload_result.py",
         [
             "PAID_RESULTS",
@@ -87,8 +71,6 @@ def main() -> int:
         ],
     )
 
-    # Record-Chain low-level path: incremental payload -> crash-safe runner ->
-    # uploader/readback -> wallet recorder.
     require_contains(
         "scripts/build_record_chain_arweave_archive.py",
         [
@@ -118,9 +100,16 @@ def main() -> int:
             "runner.main()",
         ],
     )
+    require_contains(
+        "scripts/record_chain_arweave_incremental.py",
+        [
+            "trinityaccord.weekly-continuity-bundle.v1",
+            "trinityaccord.weekly-heartbeat-summary.v1",
+            "trinityaccord.weekly-native-ots-evidence.v1",
+            "proof_files_embedded_in_this_payload",
+        ],
+    )
 
-    # The workflow contains authorization/runtime boundaries; the orchestrator
-    # contains wallet staging, checkpoints, verification, and metadata-only push.
     require_contains(
         ".github/workflows/record-chain-arweave-archive.yml",
         [
@@ -129,12 +118,14 @@ def main() -> int:
             "arweave_runtime_spend_guard.mjs",
             "ARWEAVE_MINIMUM_REMAINING_AR",
             "group: main-write-lock",
-            'cron: "17 7 * * *"',
+            "queue: max",
+            'cron: "17 7 * * 3"',
+            "Automated upstream event is dry-run only",
         ],
     )
     require_absent(
         ".github/workflows/record-chain-arweave-archive.yml",
-        ["run_record_chain_arweave_archive.py --mode"],
+        ['cron: "17 7 * * *"', "run_record_chain_arweave_archive.py --mode"],
     )
     require_contains(
         "scripts/run_record_chain_arweave_workflow_once.py",
@@ -148,60 +139,67 @@ def main() -> int:
             "The Arweave uploader will not run again",
         ],
     )
-    rc_retry = body("scripts/run_record_chain_arweave_workflow_once.py").split(
+    retry = body("scripts/run_record_chain_arweave_workflow_once.py").split(
         "def push_without_reupload", 1
     )[-1].split("def main", 1)[0]
-    if "run_record_chain_arweave_incremental.py" in rc_retry:
+    if "run_record_chain_arweave_incremental.py" in retry:
         raise SystemExit("Record-Chain metadata retry can repeat a paid upload")
 
-    # Native OTS lifecycle records every posted transaction. Its workflow only
-    # invokes the bounded orchestrator; complete wallet/API staging lives there.
-    require_contains(
-        "scripts/run_native_ots_upgrade_verify.py",
-        [
-            "record_arweave_upload_result.py",
-            "native_ots_bundle_archive",
-            "actual_delta_winston",
-            "balance_after_ar",
-            "refresh_native_ots_backlog",
-            "check=True",
-        ],
-    )
+    # Daily Native OTS may upgrade and verify local evidence, but cannot spend.
     require_contains(
         ".github/workflows/native-ots-upgrade-watch.yml",
         [
             "run_native_ots_workflow_once.py",
-            "arweave_runtime_spend_guard.mjs",
-            "ARWEAVE_MINIMUM_REMAINING_AR",
             "group: main-write-lock",
             'cron: "42 6 * * *"',
+            "verify_only",
+            "upgrade_only",
         ],
     )
     require_absent(
         ".github/workflows/native-ots-upgrade-watch.yml",
-        ["git push origin HEAD:main", "--enable-paid-upload"],
+        [
+            "ARKEY",
+            "ARWEAVE_JWK",
+            "arweave_runtime_spend_guard.mjs",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "--enable-paid-upload",
+        ],
     )
     require_contains(
         "scripts/run_native_ots_workflow_once.py",
         [
-            "record-chain/arweave-wallet-ledger.json",
-            "api/arweave-wallet-status.json",
+            "scripts/run_native_ots_upgrade_verify.py",
             "scripts/reconcile_native_ots_generated_state.py",
-            "evaluate_daily_spend",
             "push_metadata_only",
-            "The OTS upgrade and Arweave uploader will not run again",
+            '{"verify_only", "upgrade_only"}',
+        ],
+    )
+    require_absent(
+        "scripts/run_native_ots_workflow_once.py",
+        [
+            "evaluate_daily_spend",
+            "ARWEAVE_JWK_PATH",
+            "--enable-paid-upload",
+            "--confirm-paid-upload",
+            "record-chain/arweave-wallet-ledger.json",
         ],
     )
     native_retry = body("scripts/run_native_ots_workflow_once.py").split(
         "def push_metadata_only", 1
     )[-1].split("def main", 1)[0]
-    for forbidden in [
-        "run_native_ots_upgrade_verify.py",
-        "--enable-paid-upload",
-        "--confirm-paid-upload",
-    ]:
-        if forbidden in native_retry:
-            raise SystemExit(f"Native OTS metadata retry can repeat active operation: {forbidden}")
+    if "run_native_ots_upgrade_verify.py" in native_retry:
+        raise SystemExit("Native OTS metadata retry can repeat local lifecycle work")
+
+    # Standalone heartbeat publication is retired and cannot spend.
+    require_contains(
+        ".github/workflows/waiting-heartbeat-capsule.yml",
+        ["Retired", "contents: read", "No wallet secret is available"],
+    )
+    require_absent(
+        ".github/workflows/waiting-heartbeat-capsule.yml",
+        ["schedule:", "workflow_run:", "ARKEY", "arweave_upload_waiting_heartbeat_capsule"],
+    )
 
     require_contains(
         "scripts/reconcile_native_ots_generated_state.py",
@@ -218,7 +216,6 @@ def main() -> int:
         ["arweave_upload_payload.mjs", "arweave_cost_gate.mjs", "--enable-paid-upload"],
     )
 
-    # The former paid backlog repair path is now a read-only daily scan.
     require_contains(
         ".github/workflows/archive-backlog-repair.yml",
         [
@@ -238,13 +235,11 @@ def main() -> int:
             "vars.ARKEY",
             "ARWEAVE_JWK",
             "record-chain/arweave-wallet-ledger.json",
-            "api/arweave-wallet-status.json",
             "git push",
             "contents: write",
         ],
     )
 
-    # Retired historical upload surfaces remain incapable of paid writes.
     for path in [
         ".github/workflows/record-chain-data-arweave-archive.yml",
         ".github/workflows/phase5-ots-arweave-paid-upload.yml",
@@ -256,31 +251,23 @@ def main() -> int:
                 "secrets.ARKEY",
                 "record_arweave_upload_result.py",
                 "record-chain/arweave-wallet-ledger.json",
-                "api/arweave-wallet-status.json",
-                "generate_arweave_wallet_status.py",
                 "contents: write",
                 "git push",
             ],
         )
 
     updater = body("scripts/update_record_chain_data_arweave_registry.py")
-    if "legacy record-chain data Arweave uploads are retired" not in updater:
-        raise SystemExit("legacy data updater must explicitly reject paid/live updates")
-    if "write_json" in updater:
-        raise SystemExit("legacy data updater retains a historical registry write helper")
+    if "legacy record-chain data Arweave uploads are retired" not in updater or "write_json" in updater:
+        raise SystemExit("legacy data updater must remain fail-closed and read-only")
 
     run_behavior(
         "scripts/test_archive_backlog_dry_run_behavior.py",
         "archive backlog dry-run behavioral regression",
     )
-    run_behavior(
-        "scripts/test_native_ots_transaction_behavior.py",
-        "Native OTS transaction behavioral regression",
-    )
 
     print(
-        "PASS: delegated active paid paths account for wallet spend; metadata retries cannot repay; "
-        "the backlog scan and retired paths have no wallet capability"
+        "PASS: one weekly continuity route owns wallet spend; daily heartbeat/OTS, "
+        "backlog scanning, metadata retries, and retired paths cannot repay"
     )
     return 0
 

@@ -102,7 +102,7 @@ def test_archive_workflow_delegates_safe_metadata_only_retry():
     )
 
 
-def test_native_ots_workflow_delegates_safe_metadata_only_retry():
+def test_native_ots_workflow_delegates_safe_no_cost_metadata_retry():
     workflow_path = WORKFLOWS / "native-ots-upgrade-watch.yml"
     workflow = workflow_path.read_text(encoding="utf-8")
     orchestrator_path = ROOT / "scripts" / "run_native_ots_workflow_once.py"
@@ -112,9 +112,23 @@ def test_native_ots_workflow_delegates_safe_metadata_only_retry():
         "group: main-write-lock",
         "queue: max",
         "run_native_ots_workflow_once.py",
-        "arweave_runtime_spend_guard.mjs",
+        'cron: "42 6 * * *"',
+        "verify_only",
+        "upgrade_only",
     ]:
         assert marker in workflow, f"{workflow_path}: missing delegated Native OTS safety marker {marker}"
+
+    for forbidden in [
+        "ARKEY",
+        "ARWEAVE_JWK",
+        "arweave_runtime_spend_guard.mjs",
+        "ARWEAVE_MINIMUM_REMAINING_AR",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+    ]:
+        assert forbidden not in workflow, (
+            f"{workflow_path}: daily no-cost Native OTS workflow retains paid capability {forbidden}"
+        )
 
     for marker in [
         "push_metadata_only",
@@ -124,9 +138,20 @@ def test_native_ots_workflow_delegates_safe_metadata_only_retry():
         'run("git", "fetch", "origin", "main", "--prune")',
         'run("git", "rebase", "origin/main"',
         'run("git", "push", "origin", "HEAD:main"',
-        "The OTS upgrade and Arweave uploader will not run again",
+        "assert_clean_tracked_worktree",
     ]:
         assert marker in orchestrator, f"{orchestrator_path}: missing Native OTS retry safety piece {marker}"
+
+    for forbidden in [
+        "evaluate_daily_spend",
+        "ARWEAVE_JWK_PATH",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+        "record-chain/arweave-wallet-ledger.json",
+    ]:
+        assert forbidden not in orchestrator, (
+            f"{orchestrator_path}: no-cost Native OTS orchestrator retains paid capability {forbidden}"
+        )
 
     retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
     for forbidden in [
@@ -201,7 +226,7 @@ if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_auto_sitemap_workflow_is_retired()
     test_archive_workflow_delegates_safe_metadata_only_retry()
-    test_native_ots_workflow_delegates_safe_metadata_only_retry()
+    test_native_ots_workflow_delegates_safe_no_cost_metadata_retry()
     test_append_workflow_allows_internal_actions_dispatch()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()

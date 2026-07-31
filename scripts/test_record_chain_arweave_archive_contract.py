@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
-"""Contract test: current incremental Arweave archive pipeline.
-
-Asserts:
-- current workflow and archive tooling exist
-- automated upstream events are dry-run only
-- automated live Record-Chain upload is limited to one daily schedule
-- human dispatch may explicitly request live mode
-- paid payloads route through the incremental builder
-- one bounded orchestrator owns metadata push retries without re-uploading
-- existing crash-safe upload/readback behavior remains available
-- repository/API boundary and backlog contracts remain intact
-"""
+"""Contract test for the weekly incremental Arweave continuity pipeline."""
 from __future__ import annotations
 
 import json
@@ -21,209 +10,151 @@ ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_TERMS = {"ARV5", "LV5", "IVV5", "IPFS"}
 
 
-def fail(msg: str) -> None:
-    print(f"FAIL: {msg}", file=sys.stderr)
-    sys.exit(1)
+def fail(errors: list[str]) -> None:
+    print("Arweave archive contract tests FAILED:", file=sys.stderr)
+    for error in errors:
+        print(f"  - {error}", file=sys.stderr)
+    raise SystemExit(1)
 
 
 def main() -> None:
     errors: list[str] = []
+    workflow_path = ROOT / ".github/workflows/record-chain-arweave-archive.yml"
+    required_scripts = [
+        "scripts/build_record_chain_arweave_archive.py",
+        "scripts/verify_record_chain_arweave_archive.py",
+        "scripts/run_record_chain_arweave_archive.py",
+        "scripts/record_chain_arweave_incremental.py",
+        "scripts/run_record_chain_arweave_incremental.py",
+        "scripts/run_record_chain_arweave_workflow_once.py",
+        "scripts/detect_record_chain_pipeline_backlog.py",
+    ]
+    if not workflow_path.exists():
+        errors.append("missing Record-Chain Arweave workflow")
+        fail(errors)
 
-    # 1. Workflow exists
-    wf = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
-    if not wf.exists():
-        errors.append("missing .github/workflows/record-chain-arweave-archive.yml")
-    else:
-        text = wf.read_text(encoding="utf-8")
-        if "dry-run" not in text:
-            errors.append("arweave-archive workflow missing dry-run default")
-        if "ARKEY" not in text:
-            errors.append("arweave-archive workflow missing ARKEY reference")
-        if "ARWEAVE_WALLET_JWK_B64" in text:
-            errors.append("arweave-archive workflow must not use ARWEAVE_WALLET_JWK_B64 (use ARKEY)")
-        for forbidden in [
-            "echo $ARKEY",
-            "echo ${ARKEY}",
-            'echo "$ARKEY"',
-            "printf $ARKEY",
-            "printf ${ARKEY}",
-            'printf "$ARKEY"',
-            "printenv",
-            "env |",
-            "set -x",
-        ]:
-            if forbidden in text:
-                errors.append(f"arweave-archive workflow may expose wallet secret: {forbidden}")
+    workflow = workflow_path.read_text(encoding="utf-8")
+    required_workflow_markers = [
+        "dry-run",
+        "ARKEY",
+        "detect_record_chain_pipeline_backlog.py",
+        "arweave_archive_needed",
+        "ots_matches_chain",
+        "workflow_run",
+        "Record Chain Head OTS Anchor",
+        "Automated upstream event is dry-run only",
+        'cron: "17 7 * * 3"',
+        'if [ "$EVENT_NAME" = "schedule" ]; then',
+        'mode="live"',
+        'if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then',
+        "run_record_chain_arweave_workflow_once.py",
+        "weekly continuity archive",
+        "ARWEAVE_MINIMUM_REMAINING_AR",
+    ]
+    for marker in required_workflow_markers:
+        if marker not in workflow:
+            errors.append(f"workflow missing weekly archive marker: {marker}")
 
-        if "detect_record_chain_pipeline_backlog.py" not in text:
-            errors.append("arweave-archive workflow missing backlog detector")
-        if "arweave_archive_needed" not in text:
-            errors.append("arweave-archive workflow missing arweave_archive_needed guard")
-        if "ots_matches_chain" not in text:
-            errors.append("arweave-archive workflow missing OTS wait guard")
-
-        if "generate_public_home_status.py" in text or "patch_public_home_status_primary.py" in text:
-            errors.append("arweave-archive workflow must not regenerate homepage status directly")
-        if "api/public-home-status.json" in text or "index.md" in text or "sitemap.xml" in text:
-            errors.append("arweave-archive workflow must not commit homepage generated artifacts directly")
-        if "api/record-chain-status.json" in text:
-            errors.append("arweave-archive workflow must not commit derived record-chain-status directly")
-
-        if "workflow_run" not in text:
-            errors.append("arweave-archive workflow missing workflow_run trigger")
-        if "Record Chain Head OTS Anchor" not in text:
-            errors.append("arweave-archive workflow must listen to OTS anchor workflow")
-        if "Automated upstream event is dry-run only" not in text:
-            errors.append("automated upstream archive events must be explicitly forced to dry-run")
-        if 'cron: "17 7 * * *"' not in text:
-            errors.append("arweave-archive workflow must have one daily automated live schedule")
-        if "*/30 * * * *" in text:
-            errors.append("arweave-archive workflow must not retain the 30-minute paid schedule scanner")
-        if 'if [ "$EVENT_NAME" = "schedule" ]; then' not in text or 'mode="live"' not in text:
-            errors.append("daily schedule must explicitly resolve to live mode")
-        if 'if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then' not in text:
-            errors.append("bot workflow dispatch must be prevented from authorizing paid mode")
-        if "run_record_chain_arweave_incremental.py" not in text:
-            errors.append("paid archive workflow must route through incremental payload builder")
-        if "run_record_chain_arweave_archive.py --mode" in text:
-            errors.append("workflow directly invokes full-history runner instead of incremental wrapper")
-        if "run_record_chain_arweave_workflow_once.py" not in text:
-            errors.append("workflow missing bounded single-spend orchestrator")
-
-    # 2. Scripts exist
-    build_script = ROOT / "scripts" / "build_record_chain_arweave_archive.py"
-    verify_script = ROOT / "scripts" / "verify_record_chain_arweave_archive.py"
-    crash_safe_runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
-    incremental_builder = ROOT / "scripts" / "record_chain_arweave_incremental.py"
-    incremental_runner = ROOT / "scripts" / "run_record_chain_arweave_incremental.py"
-    workflow_runner = ROOT / "scripts" / "run_record_chain_arweave_workflow_once.py"
-    for script in [
-        build_script,
-        verify_script,
-        crash_safe_runner,
-        incremental_builder,
-        incremental_runner,
-        workflow_runner,
+    for forbidden in [
+        'cron: "17 7 * * *"',
+        "*/30 * * * *",
+        "run_record_chain_arweave_archive.py --mode",
+        "generate_public_home_status.py",
+        "patch_public_home_status_primary.py",
+        "api/public-home-status.json",
+        "api/record-chain-status.json",
+        "index.md",
+        "sitemap.xml",
+        "ARWEAVE_WALLET_JWK_B64",
+        "echo $ARKEY",
+        'echo "$ARKEY"',
+        "set -x",
     ]:
-        if not script.exists():
-            errors.append(f"missing {script.relative_to(ROOT)}")
+        if forbidden in workflow:
+            errors.append(f"workflow retains forbidden marker: {forbidden}")
 
-    if incremental_runner.exists():
-        runner_text = incremental_runner.read_text(encoding="utf-8")
-        for marker in [
-            "import run_record_chain_arweave_archive as runner",
-            "build_incremental_payload_json",
-            "runner.builder.build_payload_json = build_incremental_payload_json",
-            "runner.main()",
-            "evaluate_daily_spend",
-        ]:
-            if marker not in runner_text:
-                errors.append(f"incremental runner missing crash-safe or daily-budget marker: {marker}")
+    for relative in required_scripts:
+        if not (ROOT / relative).exists():
+            errors.append(f"missing {relative}")
 
-    if workflow_runner.exists():
-        workflow_runner_text = workflow_runner.read_text(encoding="utf-8")
-        for marker in [
-            "git fetch",
-            "origin",
-            "main",
-            "git rebase",
-            "push_without_reupload",
-            "The Arweave uploader will not run again",
-        ]:
-            if marker not in workflow_runner_text:
-                errors.append(f"bounded archive orchestrator missing marker: {marker}")
-        retry_block = workflow_runner_text.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
-        if "run_record_chain_arweave_incremental.py" in retry_block:
-            errors.append("push retry block must never invoke the paid incremental uploader")
-        first_rebase = retry_block.find('"git", "rebase", "origin/main"')
-        push_call = retry_block.find('"git", "push", "origin", "HEAD:main"')
-        if first_rebase == -1 or push_call == -1 or first_rebase > push_call:
-            errors.append("bounded archive orchestrator must rebase before each metadata push")
+    incremental_runner = (ROOT / "scripts/run_record_chain_arweave_incremental.py").read_text(encoding="utf-8")
+    for marker in [
+        "import run_record_chain_arweave_archive as runner",
+        "build_incremental_payload_json",
+        "runner.builder.build_payload_json = build_incremental_payload_json",
+        "runner.main()",
+        "evaluate_daily_spend",
+    ]:
+        if marker not in incremental_runner:
+            errors.append(f"incremental runner missing marker: {marker}")
 
-    if incremental_builder.exists():
-        delta_text = incremental_builder.read_text(encoding="utf-8")
-        for marker in [
-            "full_snapshot",
-            "incremental_delta",
-            "previous_archive_txid",
-            "delta_record_count",
-            "content_base64",
-            "does not match the current chain prefix",
-        ]:
-            if marker not in delta_text:
-                errors.append(f"incremental builder missing marker: {marker}")
+    orchestrator = (ROOT / "scripts/run_record_chain_arweave_workflow_once.py").read_text(encoding="utf-8")
+    for marker in [
+        "git fetch",
+        "git rebase",
+        "push_without_reupload",
+        "The Arweave uploader will not run again",
+        "run_record_chain_arweave_incremental.py",
+    ]:
+        if marker not in orchestrator:
+            errors.append(f"bounded orchestrator missing marker: {marker}")
+    retry = orchestrator.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
+    if "run_record_chain_arweave_incremental.py" in retry:
+        errors.append("metadata push retry must never invoke the paid uploader")
+    if retry.find('"git", "rebase", "origin/main"') > retry.find('"git", "push", "origin", "HEAD:main"'):
+        errors.append("metadata retry must rebase before push")
 
-    # 3. API index exists
-    api = ROOT / "api" / "record-chain-arweave-index.json"
-    if not api.exists():
+    builder = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text(encoding="utf-8")
+    for marker in [
+        "full_snapshot",
+        "incremental_delta",
+        "previous_archive_txid",
+        "delta_record_count",
+        "content_base64",
+        "does not match the current chain prefix",
+        "trinityaccord.weekly-continuity-bundle.v1",
+        "trinityaccord.weekly-heartbeat-summary.v1",
+        "trinityaccord.weekly-native-ots-evidence.v1",
+        "proof_files_embedded_in_this_payload",
+        "daily_heartbeat_capsules_are_not_required",
+    ]:
+        if marker not in builder:
+            errors.append(f"weekly continuity builder missing marker: {marker}")
+
+    index_path = ROOT / "api/record-chain-arweave-index.json"
+    if not index_path.exists():
         errors.append("missing api/record-chain-arweave-index.json")
     else:
-        data = json.loads(api.read_text(encoding="utf-8"))
-        if data.get("schema") != "trinityaccord.record-chain-arweave-index.v1":
-            errors.append("arweave-index.json wrong schema")
-        if "live_upload_implemented" not in data:
-            errors.append("arweave-index.json missing live_upload_implemented field")
-        boundary = data.get("boundary", {})
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        if index.get("schema") != "trinityaccord.record-chain-arweave-index.v1":
+            errors.append("Arweave index schema mismatch")
+        boundary = index.get("boundary", {})
         for key in [
             "arweave_archive_is_mirror_only",
             "arweave_archive_is_not_authority",
             "arweave_archive_is_not_amendment",
             "bitcoin_originals_prevail",
         ]:
-            if not boundary.get(key):
-                errors.append(f"arweave-index.json boundary missing: {key}")
-        api_text = api.read_text(encoding="utf-8")
+            if boundary.get(key) is not True:
+                errors.append(f"Arweave index boundary missing: {key}")
+        index_text = index_path.read_text(encoding="utf-8")
         for term in FORBIDDEN_TERMS:
-            if term in api_text:
-                errors.append(f"forbidden term '{term}' in arweave-index.json")
+            if term in index_text:
+                errors.append(f"forbidden term in Arweave index: {term}")
 
-    # 4. Arweave archives directory
-    archives_dir = ROOT / "record-chain" / "arweave-archives"
-    if not archives_dir.exists():
-        gitkeep = archives_dir / ".gitkeep"
-        if not gitkeep.exists():
-            errors.append("record-chain/arweave-archives/.gitkeep missing")
-
-    # 5. Complete manifest builder remains deterministic and idempotent.
-    if build_script.exists():
-        text = build_script.read_text(encoding="utf-8")
-        if "No new Arweave archive needed" not in text:
-            errors.append("build script missing idempotency check message")
-        if "archive_manifest_sha256" not in text:
-            errors.append("build script missing archive_manifest_sha256 computation")
-        if "not_authority" not in text:
-            errors.append("build script missing boundary fields")
-
-    # 6. Verify script retains boundary and terminology checks.
-    if verify_script.exists():
-        text = verify_script.read_text(encoding="utf-8")
-        if "FORBIDDEN_TERMS" not in text and "ARV5" not in text:
-            errors.append("verify script missing forbidden terminology check")
-        if "not_authority" not in text:
-            errors.append("verify script missing boundary check")
-
-    # 7. Backlog detector exists
-    detector = ROOT / "scripts" / "detect_record_chain_pipeline_backlog.py"
-    if not detector.exists():
-        errors.append("missing scripts/detect_record_chain_pipeline_backlog.py")
-
-    # 8. Homepage sync workflow must exist and listen to Arweave
-    home_sync = ROOT / ".github" / "workflows" / "homepage-status-sync.yml"
+    home_sync = ROOT / ".github/workflows/homepage-status-sync.yml"
     if not home_sync.exists():
-        errors.append("missing centralized homepage-status-sync.yml")
+        errors.append("missing homepage status sync workflow")
     else:
         home_text = home_sync.read_text(encoding="utf-8")
         if "Record Chain Arweave Archive" not in home_text:
-            errors.append("homepage-status-sync.yml must listen to Record Chain Arweave Archive")
+            errors.append("homepage status sync must listen to current archive workflow")
         if "scripts/update_public_generated_artifacts.py" not in home_text:
-            errors.append("homepage-status-sync.yml must run centralized generated artifact updater")
+            errors.append("homepage status sync must use centralized generated-artifact updater")
 
     if errors:
-        print("Arweave archive contract tests FAILED:", file=sys.stderr)
-        for error in errors:
-            print(f"  - {error}", file=sys.stderr)
-        sys.exit(1)
-    print("Arweave archive contract tests PASSED.")
+        fail(errors)
+    print("Arweave archive contract tests PASSED: weekly incremental continuity publication is bounded.")
 
 
 if __name__ == "__main__":

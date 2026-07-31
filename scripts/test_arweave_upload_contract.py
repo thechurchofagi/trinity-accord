@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Contract test for current Arweave upload/readback result handling.
-
-The paid native workflow invokes one bounded orchestration layer. That layer
-invokes the incremental wrapper exactly once, independently verifies the
-result, checkpoints incomplete readback state, and retries only metadata
-rebase/push operations. A posted transaction must be resumed by tx/payload
-identity instead of posting a duplicate. The frozen legacy data-registry
-updater remains retired and must reject live updates.
-"""
+"""Contract for crash-safe, weekly Arweave continuity publication."""
 from __future__ import annotations
 
 import sys
@@ -15,36 +7,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-REQUIRED_FIELDS = [
-    "schema",
-    "txid",
-    "uploaded_at",
-    "data_sha256",
-    "payload_sha256",
-    "readback_sha256",
-    "hash_match",
-    "wallet_address_sha256",
-    "tags",
-    "boundary",
-]
-
-BOUNDARY_FIELDS = {
-    "arweave_archive_is_mirror_only": True,
-    "arweave_archive_is_not_authority": True,
-    "arweave_archive_is_not_attestation": True,
-    "arweave_archive_is_not_amendment": True,
-    "arweave_archive_is_not_successor_reception": True,
-    "bitcoin_originals_prevail": True,
-}
-
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}", file=sys.stderr)
     raise SystemExit(1)
-
-
-def ok(message: str) -> None:
-    print(f"PASS: {message}")
 
 
 def require(condition: bool, message: str) -> None:
@@ -52,195 +18,206 @@ def require(condition: bool, message: str) -> None:
         fail(message)
 
 
+def read(path: str) -> str:
+    target = ROOT / path
+    require(target.exists(), f"missing {path}")
+    return target.read_text(encoding="utf-8")
+
+
+def markers(text: str, required: list[str], label: str) -> None:
+    for marker in required:
+        require(marker in text, f"{label} missing: {marker}")
+
+
 def main() -> int:
-    uploader_path = ROOT / "scripts/arweave_upload_payload.mjs"
-    require(uploader_path.exists(), "scripts/arweave_upload_payload.mjs not found")
-    uploader = uploader_path.read_text(encoding="utf-8")
-
-    for needle in [
-        "readback_sha256",
-        "hash_match",
-        "ARWEAVE_READBACK",
-        "getData",
-        "posted_pending_readback",
-        "readback_failed",
-        "retryable",
-        "ARWEAVE_POST_CHECKPOINT",
-        "ARWEAVE_RESUME_READBACK",
-        "ARWEAVE_READBACK_MAX_SECONDS",
-        "Refusing to resume transaction",
-    ]:
-        require(needle in uploader, f"arweave_upload_payload.mjs missing: {needle}")
-    ok("generic uploader checkpoints paid posts and supports bounded readback-only resume")
-
-    for field in REQUIRED_FIELDS:
-        require(
-            f'"{field}"' in uploader
-            or f"'{field}'" in uploader
-            or f"{field}:" in uploader
-            or f"{field} :" in uploader,
-            f"arweave_upload_payload.mjs result missing field: {field}",
-        )
-    ok("generic uploader emits required result fields")
-
-    for field in BOUNDARY_FIELDS:
-        require(field in uploader, f"arweave_upload_payload.mjs boundary missing: {field}")
-    ok("generic uploader carries immutable-authority boundaries")
-
-    recorder_path = ROOT / "scripts/record_arweave_upload_result.py"
-    require(recorder_path.exists(), "current wallet-ledger recorder missing")
-    recorder = recorder_path.read_text(encoding="utf-8")
-    for marker in [
-        'pick(data, "tx_id", "txid", "arweave_tx_id")',
-        '"uploaded"',
-        '"readback_failed"',
-        '"posted_pending_readback"',
-        "update_arweave_wallet_ledger.py",
-        '"append-upload"',
-    ]:
-        require(marker in recorder, f"current Arweave result recorder missing: {marker}")
-    ok("current upload result recorder accounts for posted/readback-failed transactions")
-
-    builder_path = ROOT / "scripts/build_record_chain_arweave_archive.py"
-    require(builder_path.exists(), "current native archive builder missing")
-    builder = builder_path.read_text(encoding="utf-8")
-    for marker in [
-        'uploader = ROOT / "scripts" / "arweave_upload_payload.mjs"',
-        'result_path = archive_dir / "upload-result.json"',
-        'return read_json(result_path)',
-        'upload_result.get("hash_match") is True',
-        'upload_result.get("result") == "uploaded"',
-        '"scripts/record_arweave_upload_result.py"',
-        "load_native_chain_sources",
-        'CHAIN_ID = "trinity-accord-public-reception-ledger"',
-    ]:
-        require(marker in builder, f"current native archive builder missing: {marker}")
-    ok("native builder wires generic uploader, readback result, and wallet accounting")
-
-    runner_path = ROOT / "scripts/run_record_chain_arweave_archive.py"
-    require(runner_path.exists(), "crash-safe native archive runner missing")
-    runner = runner_path.read_text(encoding="utf-8")
-    for marker in [
-        "subprocess.TimeoutExpired",
-        "builder.upload_to_arweave = guarded_upload",
-        'partial["result"] = "readback_failed"',
-        '"retry_readback"',
-        "_find_incomplete_current_archive",
-        "Resuming Arweave readback without a new paid post",
-        "payload sha256 does not match",
-    ]:
-        require(marker in runner, f"crash-safe native archive runner missing: {marker}")
-    ok("native runner persists timeout checkpoints and resumes only the matching tx/payload")
-
-    incremental_builder_path = ROOT / "scripts/record_chain_arweave_incremental.py"
-    require(incremental_builder_path.exists(), "incremental native payload builder missing")
-    incremental_builder = incremental_builder_path.read_text(encoding="utf-8")
-    for marker in [
-        "full_snapshot",
-        "incremental_delta",
-        "previous_archive_txid",
-        "delta_record_count",
-        "content_base64",
-        "does not match the current chain prefix",
-    ]:
-        require(marker in incremental_builder, f"incremental native payload builder missing: {marker}")
-    ok("incremental builder uploads newly appended records and binds the exact previous prefix")
-
-    incremental_runner_path = ROOT / "scripts/run_record_chain_arweave_incremental.py"
-    require(incremental_runner_path.exists(), "incremental archive wrapper missing")
-    incremental_runner = incremental_runner_path.read_text(encoding="utf-8")
-    for marker in [
-        "import run_record_chain_arweave_archive as runner",
-        "build_incremental_payload_json",
-        "runner.builder.build_payload_json = build_incremental_payload_json",
-        "runner.main()",
-        "evaluate_daily_spend",
-        "readback-only resume",
-    ]:
-        require(marker in incremental_runner, f"incremental archive wrapper missing: {marker}")
-    ok("incremental wrapper preserves crash-safe readback while blocking additional paid posts")
-
-    current_workflow_path = ROOT / ".github/workflows/record-chain-arweave-archive.yml"
-    require(current_workflow_path.exists(), "current native archive workflow missing")
-    current_workflow = current_workflow_path.read_text(encoding="utf-8")
-    for marker in [
-        "run_record_chain_arweave_workflow_once.py",
-        "run_record_chain_arweave_incremental.py",
-        "secrets.ARKEY",
-        "group: main-write-lock",
-        "ARWEAVE_UPLOAD_TIMEOUT_SECONDS",
-        "ARWEAVE_READBACK_MAX_SECONDS",
-        "arweave_runtime_spend_guard.mjs",
-        'cron: "17 7 * * *"',
-        "Automated upstream event is dry-run only",
-        "detect_record_chain_pipeline_backlog.py",
-        "ots_archivable_for_arweave",
-    ]:
-        require(marker in current_workflow, f"current native archive workflow missing: {marker}")
-    require(
-        "run_record_chain_arweave_archive.py --mode" not in current_workflow,
-        "workflow must not bypass the incremental wrapper with the full-history entrypoint",
+    uploader = read("scripts/arweave_upload_payload.mjs")
+    markers(
+        uploader,
+        [
+            "readback_sha256",
+            "hash_match",
+            "ARWEAVE_READBACK",
+            "getData",
+            "posted_pending_readback",
+            "readback_failed",
+            "retryable",
+            "ARWEAVE_POST_CHECKPOINT",
+            "ARWEAVE_RESUME_READBACK",
+            "ARWEAVE_READBACK_MAX_SECONDS",
+            "Refusing to resume transaction",
+            "payload_sha256",
+            "wallet_address_sha256",
+            "arweave_archive_is_mirror_only",
+            "bitcoin_originals_prevail",
+        ],
+        "generic uploader",
     )
 
-    workflow_runner_path = ROOT / "scripts/run_record_chain_arweave_workflow_once.py"
-    require(workflow_runner_path.exists(), "bounded native archive orchestrator missing")
-    workflow_runner = workflow_runner_path.read_text(encoding="utf-8")
-    for marker in [
-        "verify_record_chain_arweave_archive.py",
-        "trinity_record_chain.py",
-        "--allow-stale-live-chain-tip",
-        "checkpoint incomplete Arweave upload for safe readback resume",
-        "Fail after persisting incomplete upload checkpoint",
-        "push_without_reupload",
-        "The Arweave uploader will not run again",
-        "assert_clean_tracked_worktree",
-    ]:
-        require(marker in workflow_runner, f"bounded native archive orchestrator missing: {marker}")
-    retry_block = workflow_runner.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
-    require(
-        "run_record_chain_arweave_incremental.py" not in retry_block,
-        "metadata push retries must never invoke the paid incremental uploader",
+    recorder = read("scripts/record_arweave_upload_result.py")
+    markers(
+        recorder,
+        [
+            'pick(data, "tx_id", "txid", "arweave_tx_id")',
+            '"uploaded"',
+            '"readback_failed"',
+            '"posted_pending_readback"',
+            "update_arweave_wallet_ledger.py",
+            '"append-upload"',
+        ],
+        "wallet-ledger recorder",
     )
-    ok("current native workflow delegates one paid attempt, independent verification, and metadata-only retry")
 
-    runtime_guard_path = ROOT / "scripts/arweave_runtime_spend_guard.mjs"
-    require(runtime_guard_path.exists(), "Arweave runtime spend guard missing")
-    runtime_guard = runtime_guard_path.read_text(encoding="utf-8")
-    for marker in [
-        "Daily paid Arweave upload limit reached",
-        "ARWEAVE_MINIMUM_REMAINING_AR",
-        "balance - reward < reserve",
-        "!allowCanaryTags",
-        "Canary-Record",
-    ]:
-        require(marker in runtime_guard, f"Arweave runtime spend guard missing: {marker}")
-    ok("runtime post boundary enforces daily budget, reserve, and production metadata")
-
-    retired_path = ROOT / "scripts/update_record_chain_data_arweave_registry.py"
-    require(retired_path.exists(), "retired legacy registry updater missing")
-    retired = retired_path.read_text(encoding="utf-8")
-    require(
-        "legacy record-chain data Arweave uploads are retired" in retired,
-        "legacy registry updater must reject live updates",
+    builder = read("scripts/build_record_chain_arweave_archive.py")
+    markers(
+        builder,
+        [
+            'uploader = ROOT / "scripts" / "arweave_upload_payload.mjs"',
+            'result_path = archive_dir / "upload-result.json"',
+            'return read_json(result_path)',
+            'upload_result.get("hash_match") is True',
+            'upload_result.get("result") == "uploaded"',
+            '"scripts/record_arweave_upload_result.py"',
+            "load_native_chain_sources",
+            'CHAIN_ID = "trinity-accord-public-reception-ledger"',
+        ],
+        "native archive builder",
     )
-    require("would_write_registry" in retired, "legacy registry updater must disclose read-only preview")
-    require("hash_match is not True" not in retired, "retired updater must not retain a dormant live-mode branch")
-    require("write_json" not in retired, "retired updater must have no registry write helper")
-    ok("legacy data registry updater is fail-closed and read-only")
 
-    verifier_path = ROOT / "scripts/verify_record_chain_data_arweave_registry.py"
-    verifier = verifier_path.read_text(encoding="utf-8")
-    for marker in [
-        "arweave_hash_match",
-        "arweave_payload_sha256",
-        "arweave_readback_sha256",
-        "bundle_raw_file_sha256",
-        "verify_bundle",
-    ]:
-        require(marker in verifier, f"historical evidence verifier missing: {marker}")
-    ok("historical registry verifies readback evidence against local bundle bytes")
+    runner = read("scripts/run_record_chain_arweave_archive.py")
+    markers(
+        runner,
+        [
+            "subprocess.TimeoutExpired",
+            "builder.upload_to_arweave = guarded_upload",
+            'partial["result"] = "readback_failed"',
+            '"retry_readback"',
+            "_find_incomplete_current_archive",
+            "Resuming Arweave readback without a new paid post",
+            "payload sha256 does not match",
+        ],
+        "crash-safe runner",
+    )
 
-    print("\nAll Arweave upload/readback contract tests passed.")
+    incremental = read("scripts/record_chain_arweave_incremental.py")
+    markers(
+        incremental,
+        [
+            "full_snapshot",
+            "incremental_delta",
+            "previous_archive_txid",
+            "delta_record_count",
+            "content_base64",
+            "does not match the current chain prefix",
+            "trinityaccord.weekly-continuity-bundle.v1",
+            "trinityaccord.weekly-heartbeat-summary.v1",
+            "trinityaccord.weekly-native-ots-evidence.v1",
+            "proof_files_embedded_in_this_payload",
+        ],
+        "weekly incremental builder",
+    )
+
+    incremental_runner = read("scripts/run_record_chain_arweave_incremental.py")
+    markers(
+        incremental_runner,
+        [
+            "import run_record_chain_arweave_archive as runner",
+            "build_incremental_payload_json",
+            "runner.builder.build_payload_json = build_incremental_payload_json",
+            "runner.main()",
+            "evaluate_daily_spend",
+            "readback-only resume",
+        ],
+        "incremental wrapper",
+    )
+
+    workflow = read(".github/workflows/record-chain-arweave-archive.yml")
+    markers(
+        workflow,
+        [
+            "run_record_chain_arweave_workflow_once.py",
+            "secrets.ARKEY",
+            "group: main-write-lock",
+            "ARWEAVE_UPLOAD_TIMEOUT_SECONDS",
+            "ARWEAVE_READBACK_MAX_SECONDS",
+            "arweave_runtime_spend_guard.mjs",
+            'cron: "17 7 * * 3"',
+            "Automated upstream event is dry-run only",
+            "detect_record_chain_pipeline_backlog.py",
+            "ots_archivable_for_arweave",
+            "weekly continuity archive",
+        ],
+        "weekly native archive workflow",
+    )
+    require('cron: "17 7 * * *"' not in workflow, "daily paid archive schedule must be retired")
+    require(
+        "run_record_chain_arweave_archive.py --mode" not in workflow,
+        "workflow must not bypass the incremental wrapper",
+    )
+
+    orchestrator = read("scripts/run_record_chain_arweave_workflow_once.py")
+    markers(
+        orchestrator,
+        [
+            "verify_record_chain_arweave_archive.py",
+            "trinity_record_chain.py",
+            "--allow-stale-live-chain-tip",
+            "checkpoint incomplete Arweave upload for safe readback resume",
+            "Fail after persisting incomplete upload checkpoint",
+            "push_without_reupload",
+            "The Arweave uploader will not run again",
+            "assert_clean_tracked_worktree",
+        ],
+        "bounded archive orchestrator",
+    )
+    retry = orchestrator.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
+    require(
+        "run_record_chain_arweave_incremental.py" not in retry,
+        "metadata push retry must never repeat the paid upload",
+    )
+
+    runtime_guard = read("scripts/arweave_runtime_spend_guard.mjs")
+    markers(
+        runtime_guard,
+        [
+            "Daily paid Arweave upload limit reached",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "balance - reward < reserve",
+            "!allowCanaryTags",
+            "Canary-Record",
+        ],
+        "runtime spend guard",
+    )
+
+    retired_heartbeat = read(".github/workflows/waiting-heartbeat-capsule.yml")
+    require("schedule:" not in retired_heartbeat, "standalone heartbeat upload must not be scheduled")
+    require("ARKEY" not in retired_heartbeat, "retired heartbeat workflow must have no wallet capability")
+
+    daily_native_ots = read(".github/workflows/native-ots-upgrade-watch.yml")
+    for forbidden in ["ARKEY", "ARWEAVE_JWK", "--enable-paid-upload", "arweave_runtime_spend_guard.mjs"]:
+        require(forbidden not in daily_native_ots, f"daily Native OTS must be no-cost: {forbidden}")
+
+    retired_registry = read("scripts/update_record_chain_data_arweave_registry.py")
+    require(
+        "legacy record-chain data Arweave uploads are retired" in retired_registry,
+        "legacy data registry updater must reject live writes",
+    )
+    require("would_write_registry" in retired_registry, "legacy updater must disclose read-only preview")
+    require("write_json" not in retired_registry, "legacy updater must have no write helper")
+
+    historical_verifier = read("scripts/verify_record_chain_data_arweave_registry.py")
+    markers(
+        historical_verifier,
+        [
+            "arweave_hash_match",
+            "arweave_payload_sha256",
+            "arweave_readback_sha256",
+            "bundle_raw_file_sha256",
+            "verify_bundle",
+        ],
+        "historical evidence verifier",
+    )
+
+    print("All weekly Arweave continuity upload/readback contract tests passed.")
     return 0
 
 

@@ -1,6 +1,8 @@
 name: Record Chain Arweave Archive
-# Paid uploads are daily or explicitly human-dispatched. Upstream workflow events
-# are dry-run only. Automated upstream event is dry-run only.
+# Paid uploads are weekly or explicitly human-dispatched. Upstream workflow
+# events are dry-run only. The weekly incremental payload carries all records
+# since the prior verified archive, the heartbeat period summary, and the latest
+# mature Native OTS proof needed to verify the covered chain head.
 # The bounded orchestrator delegates the one initial build to
 # scripts/run_record_chain_arweave_incremental.py and never invokes it again
 # during rebase or push retry.
@@ -22,8 +24,10 @@ on:
           - dry-run
           - live
   schedule:
-    # At most one automated paid Record-Chain archive attempt per UTC day.
-    - cron: "17 7 * * *"
+    # One automated paid continuity archive attempt per UTC week. Wednesday is
+    # late enough for the previous week's final heartbeat OTS proof to mature;
+    # if it has not matured, the no-cost backlog gate defers to the next week.
+    - cron: "17 7 * * 3"
 
 permissions:
   contents: write
@@ -119,7 +123,7 @@ jobs:
             "${{ steps.backlog.outputs.ots_matches_chain }}" \
             "${{ steps.backlog.outputs.ots_archivable_for_arweave }}"
 
-      - name: Run one bounded incremental archive attempt
+      - name: Run one bounded weekly continuity archive attempt
         if: >-
           steps.backlog.outputs.arweave_archive_needed == 'true' &&
           steps.backlog.outputs.ots_matches_chain == 'true' &&

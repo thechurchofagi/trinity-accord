@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Run one Native OTS lifecycle attempt and never repeat a paid post on push retry."""
+"""Run one Native OTS lifecycle attempt without any paid Arweave post.
+
+Daily Native OTS work upgrades or verifies the local proof and commits generated
+metadata. Paid publication is owned exclusively by the weekly Record-Chain
+continuity archive, which embeds the latest mature proof in its single payload.
+"""
 from __future__ import annotations
 
 import os
@@ -8,20 +13,12 @@ import sys
 import time
 from pathlib import Path
 
-from arweave_daily_spend_guard import evaluate_daily_spend
-
 ROOT = Path(__file__).resolve().parents[1]
-CONFIRM = "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
 STAGE_PATHS = [
     "record-chain/ots/native-anchors/",
-    "record-chain/ots/native-arweave-bundles/",
-    "record-chain/ots/native-arweave-registry.json",
     "record-chain/ots/native-ots-backlog.json",
     "record-chain/arweave-backlog.json",
-    "record-chain/arweave-wallet-ledger.json",
-    "api/arweave-wallet-status.json",
     "api/record-chain-arweave-backlog.json",
-    "api/record-chain-native-ots-arweave-registry.json",
     "api/record-chain-native-ots-backlog.json",
     "api/record-chain-native-ots-latest.json",
 ]
@@ -60,8 +57,6 @@ def reconcile_and_stage() -> None:
         "record-chain/arweave-backlog.json",
         "--path",
         "api/record-chain-arweave-backlog.json",
-        "--path",
-        "api/arweave-wallet-status.json",
         "--glob",
         "record-chain/ots/native-anchors/*.anchor.json",
         "--volatile-key",
@@ -96,7 +91,7 @@ def push_metadata_only(commit_message: str) -> None:
         rebased = run("git", "rebase", "origin/main", check=False)
         if rebased.returncode != 0:
             run("git", "rebase", "--abort", check=False)
-            raise SystemExit("Native OTS metadata rebase failed; refusing to repeat any paid upload")
+            raise SystemExit("Native OTS metadata rebase failed")
         reconcile_and_stage()
         if cached_changes():
             subject = run("git", "log", "-1", "--pretty=format:%s").stdout.strip()
@@ -107,10 +102,7 @@ def push_metadata_only(commit_message: str) -> None:
         pushed = run("git", "push", "origin", "HEAD:main", check=False)
         if pushed.returncode == 0:
             return
-        print(
-            f"Push rejected on attempt {attempt}; retrying metadata rebase only. "
-            "The OTS upgrade and Arweave uploader will not run again."
-        )
+        print(f"Push rejected on attempt {attempt}; retrying metadata-only rebase.")
         time.sleep(attempt * 5)
     raise SystemExit("failed to push Native OTS metadata after retries")
 
@@ -118,8 +110,8 @@ def push_metadata_only(commit_message: str) -> None:
 def main() -> int:
     mode = os.environ.get("NATIVE_OTS_MODE", "verify_only").strip()
     run_id = os.environ.get("NATIVE_OTS_RUN_ID", "native-ots-bounded")
-    if mode not in {"verify_only", "auto"}:
-        raise SystemExit(f"invalid NATIVE_OTS_MODE: {mode}")
+    if mode not in {"verify_only", "upgrade_only"}:
+        raise SystemExit(f"invalid no-cost NATIVE_OTS_MODE: {mode}")
 
     command = [
         "python3",
@@ -129,27 +121,6 @@ def main() -> int:
     ]
     if mode == "verify_only":
         command.append("--verify-only")
-    else:
-        decision = evaluate_daily_spend("native_ots_bundle_archive")
-        if not decision.allowed:
-            print(
-                "Native OTS paid upload deferred: "
-                f"{decision.reason} {decision.paid_count}/{decision.daily_limit} "
-                f"for UTC date {decision.utc_date}."
-            )
-            return 0
-        jwk_path = os.environ.get("ARWEAVE_JWK_PATH", "").strip()
-        if not jwk_path:
-            raise SystemExit("NATIVE_OTS_MODE=auto requires ARWEAVE_JWK_PATH")
-        command.extend(
-            [
-                "--enable-paid-upload",
-                "--confirm-paid-upload",
-                CONFIRM,
-                "--jwk-path",
-                jwk_path,
-            ]
-        )
 
     lifecycle = run(*command, check=False)
     reconcile_and_stage()
@@ -164,11 +135,9 @@ def main() -> int:
         result = str(json.loads(summary.read_text(encoding="utf-8")).get("result") or "failed")
 
     if lifecycle.returncode != 0:
-        commit_message = "archive: checkpoint incomplete native OTS upload"
-    elif result in {"verified", "verified_archived", "already_verified_archived"}:
-        commit_message = "chore: archive verified native OTS proof bundle"
-    elif result == "upgraded_archived":
-        commit_message = "chore: archive upgraded native OTS proof bundle"
+        commit_message = "chore: checkpoint incomplete native OTS lifecycle"
+    elif result in {"verified", "already_verified"}:
+        commit_message = "chore: verify native OTS proof"
     else:
         commit_message = "chore: sync upgraded native OTS anchor and registry"
 

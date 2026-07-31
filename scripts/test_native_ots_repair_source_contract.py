@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Source contract for Native OTS backlog repair after paid-scan retirement."""
+"""Source contract for Native OTS repair under weekly paid publication.
+
+Historical and current Native OTS repair primitives remain available, but the
+daily scheduled lifecycle may only upgrade/verify local proofs. Wallet access
+and paid publication belong exclusively to the weekly Record-Chain continuity
+archive, which embeds the latest mature proof files.
+"""
 from __future__ import annotations
 
 import sys
@@ -62,8 +68,9 @@ def main() -> int:
         ],
     )
 
-    # Explicit operator repair primitives still support historical anchors and
-    # keep current-latest state from being rewound by a historical repair.
+    # Explicit operator repair primitives still support historical anchors. The
+    # low-level runner may retain optional paid code for deliberate operator use,
+    # but no automatic workflow is allowed to wire that capability.
     require_all(
         "scripts/process_archive_backlog.py",
         [
@@ -86,13 +93,12 @@ def main() -> int:
             "Historical repair must not rewind or pollute",
             "--anchor-file",
             "--all-backlog",
-            "upload_native_ots_bundle_to_arweave",
-            "record_arweave_upload_result.py",
+            "ots_upgrade_and_verify",
+            "strict_bitcoin_verified",
         ],
     )
 
-    # Scheduled Native OTS lifecycle is daily and bounded. The orchestrator owns
-    # daily quota, complete staging, and metadata-only push retries.
+    # Scheduled Native OTS lifecycle is daily, bounded, and strictly no-cost.
     require_all(
         ".github/workflows/native-ots-upgrade-watch.yml",
         [
@@ -100,23 +106,51 @@ def main() -> int:
             "ots --help",
             'cron: "42 6 * * *"',
             "run_native_ots_workflow_once.py",
-            "arweave_runtime_spend_guard.mjs",
-            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "verify_only",
+            "upgrade_only",
             "group: main-write-lock",
+            "queue: max",
         ],
     )
+    require_none(
+        ".github/workflows/native-ots-upgrade-watch.yml",
+        [
+            "ARKEY",
+            "ARWEAVE_JWK",
+            "arweave_runtime_spend_guard.mjs",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "--enable-paid-upload",
+            "--confirm-paid-upload",
+            "actions/setup-node",
+        ],
+    )
+
     require_all(
         "scripts/run_native_ots_workflow_once.py",
         [
-            "evaluate_daily_spend",
-            'evaluate_daily_spend("native_ots_bundle_archive")',
+            '{"verify_only", "upgrade_only"}',
             "run_native_ots_upgrade_verify.py",
             "record-chain/ots/native-anchors/",
+            "api/record-chain-native-ots-latest.json",
+            "scripts/reconcile_native_ots_generated_state.py",
+            "scripts/restore_json_if_only_volatile_changes.py",
+            "push_metadata_only",
+            "assert_clean_tracked_worktree",
+        ],
+    )
+    require_none(
+        "scripts/run_native_ots_workflow_once.py",
+        [
+            "evaluate_daily_spend",
+            "native_ots_bundle_archive",
+            "record-chain/arweave-wallet-ledger.json",
             "record-chain/ots/native-arweave-bundles/",
             "record-chain/ots/native-arweave-registry.json",
             "api/record-chain-native-ots-arweave-registry.json",
-            "push_metadata_only",
-            "The OTS upgrade and Arweave uploader will not run again",
+            "ARWEAVE_JWK_PATH",
+            "--enable-paid-upload",
+            "--confirm-paid-upload",
+            "arweave_cost_gate.mjs",
         ],
     )
     retry = read("scripts/run_native_ots_workflow_once.py").split(
@@ -127,11 +161,38 @@ def main() -> int:
         "--enable-paid-upload",
         "--confirm-paid-upload",
     ]:
-        require(forbidden not in retry, f"Native OTS metadata retry can repeat active repair: {forbidden}")
+        require(
+            forbidden not in retry,
+            f"Native OTS metadata retry can repeat active lifecycle: {forbidden}",
+        )
 
-    # The former scheduled paid-repair workflow is now only a visibility scan;
-    # it intentionally does not install OTS, load keys, stage proof directories,
-    # or mutate the repository.
+    # Weekly continuity publication embeds the mature proof bytes and is the
+    # only automatic paid route.
+    require_all(
+        ".github/workflows/record-chain-arweave-archive.yml",
+        [
+            'cron: "17 7 * * 3"',
+            "ARKEY",
+            "arweave_runtime_spend_guard.mjs",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "Automated upstream event is dry-run only",
+            "run_record_chain_arweave_workflow_once.py",
+        ],
+    )
+    require_all(
+        "scripts/record_chain_arweave_incremental.py",
+        [
+            "trinityaccord.weekly-continuity-bundle.v1",
+            "trinityaccord.weekly-native-ots-evidence.v1",
+            'latest.get("latest_anchor_file")',
+            'latest.get("latest_anchored_file")',
+            'latest.get("latest_ots_file")',
+            "proof_files_embedded_in_this_payload",
+            "content_base64",
+        ],
+    )
+
+    # Former scheduled paid-repair workflow remains only a visibility scan.
     require_all(
         ".github/workflows/archive-backlog-repair.yml",
         [
@@ -146,10 +207,8 @@ def main() -> int:
         [
             "requirements-ots.txt",
             "ots --help",
-            "record-chain/ots/native-anchors/",
             "record-chain/ots/native-arweave-bundles/",
             "record-chain/ots/native-arweave-registry.json",
-            "api/record-chain-native-ots-arweave-registry.json",
             "--mode live",
             "--enable-paid-upload",
             "ARKEY",
@@ -180,7 +239,10 @@ def main() -> int:
         ],
     )
 
-    print("PASS: Native OTS repair remains available only through bounded active paths; scheduled backlog scan is read-only")
+    print(
+        "PASS: Native OTS repair remains available; daily lifecycle is no-cost "
+        "and weekly continuity archival owns paid proof publication"
+    )
     return 0
 
 

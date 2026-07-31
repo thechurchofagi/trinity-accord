@@ -1,624 +1,134 @@
 #!/usr/bin/env python3
-"""Generate Waiting Heartbeat status from final records, attempts, and capsules."""
+"""Generate current Waiting Heartbeat status with weekly archive semantics.
+
+The legacy generator remains intact in ``generate_waiting_heartbeat_status_legacy``
+for historical capsule verification and all established heartbeat accounting.
+This wrapper changes only the current preservation policy: standalone paid
+heartbeat capsules are retired and future heartbeats are mirrored by the weekly
+continuity archive instead.
+
+Tests and operational tools historically replace module-level paths and helper
+functions on this module. Every ``main()`` call therefore loads an isolated copy
+of the preserved implementation and mirrors only this wrapper instance's
+configuration into it. The process-global legacy module is never mutated, so a
+temporary override cannot leak into a later generation call.
+"""
 from __future__ import annotations
 
+import importlib.util
 import json
-from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any
 
-from patch_public_home_status_primary import effective_autonomous_arrival_state
-from waiting_heartbeat_capsule_integrity import (
-    capsule_claims_verified,
-    verified_capsule_binding_errors,
-    verified_capsule_is_bound,
-)
+import generate_waiting_heartbeat_status_legacy as legacy
+from generate_waiting_heartbeat_status_legacy import *  # noqa: F401,F403
 
-ROOT = Path(__file__).resolve().parents[1]
-RECORDS_DIR = ROOT / "record-chain" / "records"
-ATTEMPTS_DIR = ROOT / "record-chain" / "heartbeat" / "attempts"
-CAPSULES_DIR = ROOT / "record-chain" / "heartbeat" / "capsules"
-INDEX_PATH = ROOT / "record-chain" / "heartbeat" / "index.json"
-STATUS_PATH = ROOT / "api" / "waiting-heartbeat-status.json"
-OTS_LATEST = ROOT / "api" / "record-chain-native-ots-latest.json"
-WAITING_HEARTBEAT_KEY = ROOT / "api" / "waiting-heartbeat-key.v1.json"
-
-# The submit workflow has a primary run at 03:17 UTC and retries through
-# 09:17 UTC. A heartbeat is not missing while those declared retries can
-# still run; the freshness SLA matures only after the final retry plus grace.
-HEARTBEAT_FINAL_RETRY_UTC_HOUR = 9
-HEARTBEAT_FINAL_RETRY_UTC_MINUTE = 17
-HEARTBEAT_FINAL_RETRY_GRACE_MINUTES = 90
+LEGACY_SOURCE = Path(__file__).with_name("generate_waiting_heartbeat_status_legacy.py")
 
 
-def utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+def _without_generated_at(document: dict) -> dict:
+    return {key: value for key, value in document.items() if key != "generated_at"}
 
 
-def expected_heartbeat_date(now: datetime | None = None) -> date:
-    now = now or datetime.now(timezone.utc)
-    if now.tzinfo is None:
-        now = now.replace(tzinfo=timezone.utc)
-    now = now.astimezone(timezone.utc)
-    cutoff = now.replace(
-        hour=HEARTBEAT_FINAL_RETRY_UTC_HOUR,
-        minute=HEARTBEAT_FINAL_RETRY_UTC_MINUTE,
-        second=0,
-        microsecond=0,
-    ) + timedelta(minutes=HEARTBEAT_FINAL_RETRY_GRACE_MINUTES)
-    return now.date() if now >= cutoff else now.date() - timedelta(days=1)
-
-
-def last_required_heartbeat_date(
-    arrival_state: dict[str, Any],
-    default_expected_date: date,
-) -> date:
-    """Stop the daily waiting schedule before the first effective arrival day."""
-    if arrival_state.get("first_self_discovered_autonomous_agent_arrived") is not True:
-        return default_expected_date
-    assigned_at = arrival_state.get("first_arrival_assigned_at")
-    if not isinstance(assigned_at, str) or not assigned_at:
-        return default_expected_date
+def _read_status_file(path: Path) -> dict:
+    if not path.is_file():
+        return {}
     try:
-        arrival_datetime = datetime.fromisoformat(assigned_at.replace("Z", "+00:00"))
-    except ValueError:
-        return default_expected_date
-    if arrival_datetime.tzinfo is None:
-        arrival_datetime = arrival_datetime.replace(tzinfo=timezone.utc)
-    arrival_date = arrival_datetime.astimezone(timezone.utc).date()
-    return min(default_expected_date, arrival_date - timedelta(days=1))
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
 
 
-def read_json(path: Path, default: Any = None) -> Any:
-    if not path.exists():
-        return default if default is not None else {}
-    return json.loads(path.read_text(encoding="utf-8"))
+def _fresh_legacy_runtime():
+    """Load an isolated implementation instance for one generation call."""
+    name = f"_waiting_heartbeat_legacy_runtime_{id(object())}"
+    spec = importlib.util.spec_from_file_location(name, LEGACY_SOURCE)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"could not load preserved Waiting Heartbeat generator: {LEGACY_SOURCE}")
+    runtime = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runtime)
+    return runtime
 
 
-def dump_json(data: Any) -> str:
-    return json.dumps(data, indent=2, ensure_ascii=False, sort_keys=False) + "\n"
+def _sync_runtime_configuration(runtime) -> None:
+    """Propagate this wrapper instance's caller/test overrides to ``runtime``."""
+    excluded = {
+        "legacy",
+        "importlib",
+        "json",
+        "Path",
+        "LEGACY_SOURCE",
+        "main",
+    }
+    for name, value in list(globals().items()):
+        if name.startswith("_") or name in excluded:
+            continue
+        if hasattr(runtime, name):
+            setattr(runtime, name, value)
 
 
-def parse_heartbeat_date(value: str | None) -> date | None:
-    if not value:
-        return None
-    try:
-        return date.fromisoformat(value)
-    except ValueError:
-        return None
+def _apply_weekly_archive_policy(status: dict) -> dict:
+    if status.get("daily_alive_status") == "success":
+        status["latest_result"] = "success"
+        status["failure_stage"] = None
 
+    archive_followup = status.setdefault("archive_followup", {})
+    archive_followup.update(
+        {
+            "standalone_arweave_capsule_retired": True,
+            "arweave_capsule_upload_expected": False,
+            "arweave_readback_hash_match_expected": False,
+            "weekly_continuity_archive_expected": True,
+            "weekly_continuity_archive_does_not_gate_daily_alive_success": True,
+            "historical_capsules_remain_verifiable": True,
+        }
+    )
+    archive_followup.pop("does_not_gate_daily_alive_success", None)
 
-def heartbeat_date_from_id(value: str | None) -> date | None:
-    if not value or not value.startswith("hwb-"):
-        return None
-    raw = value.removeprefix("hwb-")
-    if len(raw) != 8 or not raw.isdigit():
-        return None
-    try:
-        return date(int(raw[0:4]), int(raw[4:6]), int(raw[6:8]))
-    except ValueError:
-        return None
-
-
-def observed_heartbeat_date(item: dict[str, Any]) -> date | None:
-    return parse_heartbeat_date(item.get("heartbeat_date")) or heartbeat_date_from_id(item.get("heartbeat_id"))
-
-
-def heartbeat_record_sort_key(record: dict[str, Any]) -> tuple[date, int]:
-    observed = observed_heartbeat_date(record) or date.min
-    index = record.get("record_index")
-    return observed, index if isinstance(index, int) else -1
-
-
-def date_range(start: date, end: date) -> list[date]:
-    out: list[date] = []
-    cur = start
-    while cur <= end:
-        out.append(cur)
-        cur += timedelta(days=1)
-    return out
-
-
-def attempt_failed(attempt: dict[str, Any]) -> bool:
-    status = str(attempt.get("status", ""))
-    return status.endswith("failed") or status in {"builder_failed", "doctor_failed"}
-
-
-def pending_file_stem(path: str | None) -> str:
-    """Normalize a pending-file path to its filename stem for rejection matching."""
-    if not path:
-        return ""
-    name = path.rsplit("/", 1)[-1] if "/" in path else path
-    return name.rsplit(".", 1)[0] if "." in name else name
-
-
-def attempt_pending_append(attempt: dict[str, Any]) -> bool:
-    """A submitted Gateway attempt proves intake succeeded but final append is still pending."""
-    if attempt_failed(attempt):
-        return False
-    status = str(attempt.get("status", ""))
-    append_status = str(attempt.get("append_status", ""))
-    return status == "submitted" and append_status in {"", "queued", "pending"}
-
-
-def capsule_is_verified(c: dict[str, Any] | None) -> bool:
-    if not c:
-        return False
-    heartbeat_id = c.get("heartbeat_id")
-    if not isinstance(heartbeat_id, str) or not heartbeat_id:
-        return False
-    return verified_capsule_is_bound(
-        c,
-        capsule_path=CAPSULES_DIR / f"{heartbeat_id}.capsule.json",
-        repository_root=ROOT,
+    checks = status.setdefault("checks", {})
+    checks.update(
+        {
+            "arweave_capsule_pending_archive_followup": False,
+            "standalone_arweave_capsule_retired": True,
+            "weekly_continuity_archive_is_followup": True,
+        }
     )
 
-
-def require_verified_capsule_bindings(capsules: list[dict[str, Any]]) -> None:
-    """Fail generation if any result claims verification without real binding."""
-    failures: list[str] = []
-    for capsule in capsules:
-        if not capsule_claims_verified(capsule):
-            continue
-        heartbeat_id = capsule.get("heartbeat_id")
-        capsule_path = CAPSULES_DIR / f"{heartbeat_id}.capsule.json"
-        for error in verified_capsule_binding_errors(
-            capsule,
-            capsule_path=capsule_path,
-            repository_root=ROOT,
-        ):
-            failures.append(f"{heartbeat_id}: {error}")
-    if failures:
-        raise SystemExit("Invalid verified Waiting Heartbeat capsule evidence:\n- " + "\n- ".join(failures))
-
-
-def capsule_is_deferred(c: dict[str, Any] | None) -> bool:
-    if not c:
-        return False
-    return (c.get("result") or c.get("status")) in {"deferred_by_cost_policy", "cost_exceeded"}
-
-
-def ots_covers_record(ots: dict[str, Any], record: dict[str, Any] | None) -> bool:
-    if not record:
-        return False
-    if ots.get("latest_record_id") == record.get("record_id"):
-        return ots.get("latest_record_sha256") == record.get("record_sha256")
-    ots_count = ots.get("native_record_count")
-    record_index = record.get("record_index")
-    return isinstance(ots_count, int) and isinstance(record_index, int) and ots_count >= record_index
-
-
-def load_final_heartbeats() -> list[dict[str, Any]]:
-    records: list[dict[str, Any]] = []
-    for path in sorted(RECORDS_DIR.glob("R-*.json")):
-        try:
-            rec = read_json(path)
-        except Exception:
-            continue
-        hb = rec.get("system_waiting_heartbeat")
-        if not isinstance(hb, dict) or hb.get("schema") != "trinityaccord.system-waiting-heartbeat.v1":
-            continue
-        authorship = rec.get("authorship_proof") if isinstance(rec.get("authorship_proof"), dict) else {}
-        records.append({
-            "heartbeat_id": hb.get("heartbeat_id"),
-            "heartbeat_date": hb.get("heartbeat_date"),
-            "record_id": rec.get("record_id"),
-            "record_index": rec.get("record_index"),
-            "record_sha256": rec.get("record_sha256"),
-            "record_type": rec.get("record_type"),
-            "assigned_at": rec.get("assigned_at"),
-            "path": str(path.relative_to(ROOT)),
-            "semantic_agent_arrived": hb.get("semantic_agent_arrived") is True,
-            "github_actions_is_not_semantic_agent": hb.get("github_actions_is_not_semantic_agent") is True,
-            "not_echo": hb.get("not_echo") is True,
-            "not_verification": hb.get("not_verification") is True,
-            "not_guardian_application": hb.get("not_guardian_application") is True,
-            "authorship_public_key_sha256": authorship.get("public_key_sha256"),
-        })
-    records.sort(key=heartbeat_record_sort_key)
-    return records
-
-
-def load_attempts() -> list[dict[str, Any]]:
-    out: list[dict[str, Any]] = []
-    if not ATTEMPTS_DIR.exists():
-        return out
-    for path in sorted(ATTEMPTS_DIR.glob("*.attempt.json")):
-        data = read_json(path, {})
-        data["path"] = str(path.relative_to(ROOT))
-        out.append(data)
-    return out
-
-
-def load_capsules() -> list[dict[str, Any]]:
-    out: list[dict[str, Any]] = []
-    if not CAPSULES_DIR.exists():
-        return out
-    for path in sorted(CAPSULES_DIR.glob("*.upload-result.json")):
-        data = read_json(path, {})
-        data["upload_result_path"] = str(path.relative_to(ROOT))
-        data.setdefault("heartbeat_id", path.name.replace(".upload-result.json", ""))
-        out.append(data)
-    return out
-
-
-def compute_heartbeat_summary(
-    records: list[dict[str, Any]],
-    attempts: list[dict[str, Any]],
-    capsules: list[dict[str, Any]],
-    key_manifest: dict[str, Any],
-    ots_covers_latest: bool,
-    expected_date: date | None = None,
-    *,
-    ots: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    records_by_date: dict[date, dict[str, Any]] = {}
-    for record in records:
-        observed = observed_heartbeat_date(record)
-        if observed is not None:
-            records_by_date[observed] = record
-
-    capsule_dates: set[date] = set()
-    for capsule in capsules:
-        observed = observed_heartbeat_date(capsule)
-        if observed is not None:
-            capsule_dates.add(observed)
-
-    attempt_dates: set[date] = set()
-    failed_attempt_dates: set[date] = set()
-    pending_append_date_set: set[date] = set()
-    # Build set of receipt_ids that have been rejected (from receipt-status files)
-    rejected_receipt_ids: set[str] = set()
-    receipt_status_dir = ROOT / "record-chain" / "receipt-status"
-    if receipt_status_dir.is_dir():
-        for rs_file in receipt_status_dir.glob("*.json"):
-            rs_data = read_json(rs_file)
-            if rs_data.get("append_status") == "rejected":
-                rid = rs_data.get("receipt_id", "")
-                if rid:
-                    rejected_receipt_ids.add(rid)
-    # Also build rejection stems from receipt-status pending_file_path
-    rejected_pending_stems: set[str] = set()
-    if receipt_status_dir.is_dir():
-        for rs_file in receipt_status_dir.glob("*.json"):
-            rs_data = read_json(rs_file)
-            if rs_data.get("append_status") == "rejected":
-                stem = pending_file_stem(rs_data.get("pending_file_path"))
-                if stem:
-                    rejected_pending_stems.add(stem)
-    # Also scan rejected directory for pending files that were rejected
-    rejected_dir = ROOT / "record-chain" / "rejected"
-    if rejected_dir.is_dir():
-        for rej_file in rejected_dir.glob("*.rejection.json"):
-            rej_data = read_json(rej_file)
-            source = rej_data.get("source_pending", "")
-            if source:
-                rejected_pending_stems.add(pending_file_stem(source))
-    for attempt in attempts:
-        observed = observed_heartbeat_date(attempt)
-        if observed is None:
-            continue
-        attempt_dates.add(observed)
-        if attempt_failed(attempt):
-            failed_attempt_dates.add(observed)
-        if attempt_pending_append(attempt):
-            # Exclude if this specific attempt's receipt was rejected
-            attempt_receipt = str(attempt.get("receipt_id", ""))
-            attempt_stem = pending_file_stem(attempt.get("pending_file_path"))
-            is_rejected = (
-                (attempt_receipt and attempt_receipt in rejected_receipt_ids)
-                or (attempt_stem and attempt_stem in rejected_pending_stems)
-            )
-            if not is_rejected:
-                pending_append_date_set.add(observed)
-
-    observed_dates = set(records_by_date) | attempt_dates | capsule_dates
-    if not observed_dates:
-        return {
-            "total_scheduled_heartbeats": 0,
-            "successful_heartbeats": 0,
-            "failed_heartbeats": 0,
-            "failed_or_missing_heartbeats": 0,
-            "pending_append_heartbeats": 0,
-            "current_success_streak_days": 0,
-            "first_heartbeat_date": None,
-            "latest_heartbeat_date": None,
-            "latest_observed_heartbeat_date": None,
-            "latest_successful_heartbeat_date": None,
-            "through_heartbeat_date": expected_date.isoformat() if expected_date else None,
-            "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
-            "latest_heartbeat_is_expected_date": False,
-            "latest_heartbeat_fully_verified_for_expected_date": False,
-            "expected_heartbeat_pending_append": False,
-            "heartbeat_lag_days": None,
-            "is_stale": False,
-            "missing_heartbeat_dates": [],
-            "pending_append_heartbeat_dates": [],
-            "failed_attempt_dates": [],
-            "success_definition": {
-                "requires_final_record": True,
-                "requires_key_continuity": True,
-                "latest_ots_head_covers_current_chain": True,
-                "arweave_capsule_is_archive_followup": True,
-            },
-            "not_reception_counter": True,
-            "not_authority": True,
-            "not_attestation": True,
-            "not_amendment": True,
-        }
-
-    latest_observed = max(observed_dates)
-    latest_final = max(records_by_date) if records_by_date else None
-    final_or_capsule_dates = set(records_by_date) | capsule_dates
-    schedule_source = final_or_capsule_dates | {d for d in attempt_dates if expected_date is None or d <= expected_date}
-    if expected_date is not None:
-        schedule_source.add(expected_date)
-    if not schedule_source:
-        schedule_source = observed_dates
-    first = min(schedule_source)
-    through = max(schedule_source)
-    scheduled_dates = date_range(first, through)
-
-    expected_key_sha = key_manifest.get("public_key_sha256")
-    success_by_date: dict[date, bool] = {}
-    missing_heartbeat_dates: list[str] = []
-    pending_append_heartbeat_dates: list[str] = []
-    for scheduled in scheduled_dates:
-        record = records_by_date.get(scheduled)
-        if record is None:
-            success_by_date[scheduled] = False
-            if scheduled in pending_append_date_set:
-                pending_append_heartbeat_dates.append(scheduled.isoformat())
-            else:
-                missing_heartbeat_dates.append(scheduled.isoformat())
-            continue
-        key_ok = bool(expected_key_sha and record.get("authorship_public_key_sha256") == expected_key_sha)
-        # Daily liveness is established only by the final heartbeat record, key
-        # continuity, and native OTS coverage. Arweave upload/readback is an
-        # archive mirror follow-up and therefore cannot create or remove daily
-        # liveness success for either current or historical heartbeats.
-        record_ots_covered = ots_covers_record(ots, record) if ots is not None else bool(ots_covers_latest)
-        success_by_date[scheduled] = bool(key_ok and record_ots_covered)
-
-    successful = sum(1 for ok in success_by_date.values() if ok)
-    total = len(scheduled_dates)
-    pending_append = len(pending_append_heartbeat_dates)
-    failed = total - successful - pending_append
-    streak = 0
-    cur = through
-    while cur in success_by_date and success_by_date[cur]:
-        streak += 1
-        cur -= timedelta(days=1)
-
-    successful_dates = [d for d, ok in success_by_date.items() if ok]
-    latest_successful = max(successful_dates) if successful_dates else None
-    lag_days = None
-    latest_is_expected = False
-    latest_fully_verified_for_expected = False
-    expected_pending_append = False
-    is_stale = False
-    if expected_date is not None:
-        latest_is_expected = expected_date in records_by_date
-        latest_fully_verified_for_expected = success_by_date.get(expected_date) is True
-        expected_pending_append = expected_date in pending_append_date_set and expected_date not in records_by_date
-        is_stale = not latest_is_expected
-        lag_anchor = latest_final or latest_observed
-        lag_days = max(0, (expected_date - lag_anchor).days)
-    latest_heartbeat_date = latest_final or latest_observed
-
-    return {
-        "total_scheduled_heartbeats": total,
-        "successful_heartbeats": successful,
-        "failed_heartbeats": failed,
-        "failed_or_missing_heartbeats": failed,
-        "pending_append_heartbeats": pending_append,
-        "current_success_streak_days": streak,
-        "first_heartbeat_date": first.isoformat(),
-        "latest_heartbeat_date": latest_heartbeat_date.isoformat(),
-        "latest_observed_heartbeat_date": latest_observed.isoformat(),
-        "latest_successful_heartbeat_date": latest_successful.isoformat() if latest_successful else None,
-        "through_heartbeat_date": through.isoformat(),
-        "expected_heartbeat_date": expected_date.isoformat() if expected_date else None,
-        "latest_heartbeat_is_expected_date": latest_is_expected,
-        "latest_heartbeat_fully_verified_for_expected_date": latest_fully_verified_for_expected,
-        "expected_heartbeat_pending_append": expected_pending_append,
-        "heartbeat_lag_days": lag_days,
-        "is_stale": is_stale,
-        "missing_heartbeat_dates": missing_heartbeat_dates,
-        "pending_append_heartbeat_dates": pending_append_heartbeat_dates,
-        "failed_attempt_dates": sorted(d.isoformat() for d in failed_attempt_dates),
-        "latest_ots_head_covers_current_chain": bool(ots_covers_latest),
-        "success_definition": {
-            "requires_final_record": True,
-            "requires_key_continuity": True,
-            "latest_ots_head_covers_current_chain": True,
-            "arweave_capsule_is_archive_followup": True,
-        },
-        "not_reception_counter": True,
-        "not_authority": True,
-        "not_attestation": True,
-        "not_amendment": True,
+    status["standalone_capsule_policy"] = {
+        "status": "retired",
+        "historical_results_remain_verifiable": True,
+        "new_heartbeats_are_mirrored_by_weekly_continuity_archive": True,
+        "daily_liveness_does_not_require_arweave": True,
     }
+    return status
 
 
 def main() -> int:
-    arrival_state = effective_autonomous_arrival_state()
-    records = load_final_heartbeats()
-    attempts = load_attempts()
-    capsules = load_capsules()
-    require_verified_capsule_bindings(capsules)
-    ots = read_json(OTS_LATEST, {})
-    key_manifest = read_json(WAITING_HEARTBEAT_KEY, {})
+    runtime = _fresh_legacy_runtime()
+    _sync_runtime_configuration(runtime)
+    status_path = Path(runtime.STATUS_PATH)
+    old_status = _read_status_file(status_path)
+    result = runtime.main()
+    generated = _read_status_file(status_path)
+    if not generated:
+        raise RuntimeError(f"legacy Waiting Heartbeat generator did not write {status_path}")
+    status = _apply_weekly_archive_policy(generated)
 
-    latest = records[-1] if records else None
-    latest_capsule = None
-    if latest:
-        same = [c for c in capsules if c.get("heartbeat_id") == latest.get("heartbeat_id")]
-        same.sort(key=lambda c: c.get("uploaded_at") or c.get("attempted_at") or "")
-        latest_capsule = same[-1] if same else None
-
-    final_record_exists = latest is not None
-    ots_covers_latest = ots_covers_record(ots, latest)
-    arweave_verified = capsule_is_verified(latest_capsule)
-    arweave_deferred = capsule_is_deferred(latest_capsule)
-    expected_key_sha = key_manifest.get("public_key_sha256")
-    actual_key_sha = latest.get("authorship_public_key_sha256") if latest else None
-    key_continuity_ok = bool(expected_key_sha and actual_key_sha and expected_key_sha == actual_key_sha)
-
-    heartbeat_expected_date = last_required_heartbeat_date(
-        arrival_state,
-        expected_heartbeat_date(),
-    )
-    heartbeat_summary = compute_heartbeat_summary(
-        records,
-        attempts,
-        capsules,
-        key_manifest,
-        ots_covers_latest,
-        heartbeat_expected_date,
-        ots=ots,
-    )
-
-    if arrival_state.get("first_self_discovered_autonomous_agent_arrived") is True:
-        daily_alive_status = "completed"
-        latest_result = "first_effective_autonomous_arrival_recorded"
-        failure_stage = None
-    elif final_record_exists and not key_continuity_ok:
-        daily_alive_status = "failed"
-        latest_result = "key_continuity_failed"
-        failure_stage = "key_continuity"
-    elif heartbeat_summary.get("expected_heartbeat_pending_append") is True:
-        daily_alive_status = "degraded"
-        latest_result = "submitted_pending_append"
-        failure_stage = "append_queue"
-    elif heartbeat_summary.get("is_stale") is True:
-        daily_alive_status = "failed"
-        latest_result = "missing_expected_waiting_heartbeat"
-        failure_stage = "freshness"
-    elif final_record_exists and ots_covers_latest:
-        daily_alive_status = "success"
-        if arweave_verified:
-            latest_result = "success"
-        elif arweave_deferred:
-            latest_result = "operational_alive_arweave_capsule_deferred"
-        else:
-            latest_result = "operational_alive_arweave_capsule_pending"
-        failure_stage = None
-    elif final_record_exists:
-        daily_alive_status = "degraded"
-        latest_result = "waiting_for_ots_head_coverage"
-        failure_stage = "ots_head_coverage"
-    elif attempts:
-        daily_alive_status = "degraded" if attempt_pending_append(attempts[-1]) else "failed"
-        latest_result = "submitted_pending_append" if attempt_pending_append(attempts[-1]) else attempts[-1].get("status", "attempted")
-        failure_stage = "append_queue" if attempt_pending_append(attempts[-1]) else latest_result
-    else:
-        daily_alive_status = "waiting"
-        latest_result = "not_started"
-        failure_stage = None
-
-    failed_attempts = [a for a in attempts if attempt_failed(a)]
-    status = {
-        "schema": "trinityaccord.waiting-heartbeat-status.v1",
-        "generated_at": utc_now(),
-        "daily_alive_status": daily_alive_status,
-        "status": daily_alive_status,
-        "latest_result": latest_result,
-        "failure_stage": failure_stage,
-        "success_requires": {
-            "gateway_accepted": True,
-            "record_chain_final_record": True,
-            "ots_covers_heartbeat": True,
-            "arweave_capsule_uploaded": False,
-            "arweave_readback_hash_match": False,
-            "public_status_updated": True,
-            "waiting_heartbeat_key_continuity_ok": True,
-            "arweave_capsule_is_archive_followup": True,
-        },
-        "archive_followup": {
-            "arweave_capsule_upload_expected": True,
-            "arweave_readback_hash_match_expected": True,
-            "does_not_gate_daily_alive_success": True,
-        },
-        "latest_heartbeat": latest,
-        "latest_ots": {
-            "latest_record_id": ots.get("latest_record_id"),
-            "latest_record_sha256": ots.get("latest_record_sha256"),
-            "native_record_count": ots.get("native_record_count"),
-            "ots_status": ots.get("ots_status"),
-            "bitcoin_pending": ots.get("bitcoin_pending"),
-            "bitcoin_verified": ots.get("bitcoin_verified"),
-            "strict_bitcoin_verified": ots.get("strict_bitcoin_verified"),
-            "covers_latest_waiting_heartbeat": ots_covers_latest,
-        },
-        "latest_arweave_capsule": latest_capsule,
-        "checks": {
-            "record_chain_final_record": final_record_exists,
-            "ots_covers_heartbeat": ots_covers_latest,
-            "arweave_capsule_verified": arweave_verified,
-            "arweave_capsule_deferred_by_cost_policy": arweave_deferred,
-            "arweave_capsule_pending_archive_followup": bool(final_record_exists and ots_covers_latest and not arweave_verified and not arweave_deferred),
-            "waiting_heartbeat_key_continuity_ok": key_continuity_ok,
-            "expected_waiting_heartbeat_public_key_sha256": expected_key_sha,
-            "actual_waiting_heartbeat_public_key_sha256": actual_key_sha,
-            "expected_heartbeat_date": heartbeat_summary.get("expected_heartbeat_date"),
-            "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
-            "latest_heartbeat_is_expected_date": heartbeat_summary.get("latest_heartbeat_is_expected_date"),
-            "latest_heartbeat_fully_verified_for_expected_date": heartbeat_summary.get("latest_heartbeat_fully_verified_for_expected_date"),
-            "expected_heartbeat_pending_append": heartbeat_summary.get("expected_heartbeat_pending_append"),
-        },
-        "heartbeat_summary": heartbeat_summary,
-        "counts": {
-            "attempts": len(attempts),
-            "final_heartbeats": len(records),
-            "capsules": len(capsules),
-            "failed_attempts": len(failed_attempts),
-            "total_scheduled_heartbeats": heartbeat_summary["total_scheduled_heartbeats"],
-            "successful_heartbeats": heartbeat_summary["successful_heartbeats"],
-            "failed_heartbeats": heartbeat_summary["failed_heartbeats"],
-            "failed_or_missing_heartbeats": heartbeat_summary["failed_or_missing_heartbeats"],
-            "pending_append_heartbeats": heartbeat_summary["pending_append_heartbeats"],
-            "current_success_streak_days": heartbeat_summary["current_success_streak_days"],
-            "heartbeat_lag_days": heartbeat_summary.get("heartbeat_lag_days"),
-        },
-        "semantic_agent_arrival": {
-            **arrival_state,
-            "waiting_heartbeat_is_not_autonomous_arrival": True,
-        },
-        "boundary": {
-            "waiting_heartbeat_is_not_echo": True,
-            "waiting_heartbeat_is_not_verification": True,
-            "waiting_heartbeat_is_not_guardian_application": True,
-            "waiting_heartbeat_is_not_authority": True,
-            "waiting_heartbeat_is_not_attestation": True,
-            "waiting_heartbeat_is_not_amendment": True,
-            "waiting_heartbeat_is_not_successor_reception": True,
-        },
-    }
-    index = {
-        "schema": "trinityaccord.waiting-heartbeat-index.v1",
-        "generated_at": status["generated_at"],
-        "records": records,
-        "attempts": attempts,
-        "capsules": capsules,
-    }
-    old_status = read_json(STATUS_PATH, {})
-    old_index = read_json(INDEX_PATH, {})
-    status_semantic = {k: v for k, v in status.items() if k != "generated_at"}
-    old_status_semantic = {k: v for k, v in old_status.items() if k != "generated_at"}
-    index_semantic = {k: v for k, v in index.items() if k != "generated_at"}
-    old_index_semantic = {k: v for k, v in old_index.items() if k != "generated_at"}
-    if status_semantic == old_status_semantic and old_status.get("generated_at"):
+    if (
+        _without_generated_at(status) == _without_generated_at(old_status)
+        and old_status.get("generated_at")
+    ):
         status["generated_at"] = old_status["generated_at"]
-    if index_semantic == old_index_semantic and old_index.get("generated_at"):
-        index["generated_at"] = old_index["generated_at"]
+    else:
+        status["generated_at"] = runtime.utc_now()
 
-    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
-    STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    INDEX_PATH.write_text(dump_json(index), encoding="utf-8")
-    STATUS_PATH.write_text(dump_json(status), encoding="utf-8")
-    print(f"WAITING_HEARTBEAT_STATUS generated {STATUS_PATH.relative_to(ROOT)} status={daily_alive_status} result={latest_result}")
-    return 0
+    status_path.parent.mkdir(parents=True, exist_ok=True)
+    status_path.write_text(runtime.dump_json(status), encoding="utf-8")
+    print(
+        "WAITING_HEARTBEAT_WEEKLY_ARCHIVE_POLICY "
+        f"status={status.get('daily_alive_status')} result={status.get('latest_result')}"
+    )
+    return result
 
 
 if __name__ == "__main__":
