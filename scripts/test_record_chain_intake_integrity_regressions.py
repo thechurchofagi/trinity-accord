@@ -37,9 +37,7 @@ def test_security_helpers() -> None:
         "-----BEGIN PGP PRIVATE KEY BLOCK-----\nabc",
         "-----BEGIN AGE ENCRYPTED FILE-----\nabc",
         "sk-ant-api03-abcdefghijklmnopqrstuvwxyz1234567890",
-        # Slack token pattern tested via regex match, not literal sample
     ]
-    # Verify Slack token regex matches
     import re
     slack_pat = re.compile(r"\bxox(?:a|b|p|o|s|r)-[A-Za-z0-9-]{20,}\b")
     if not slack_pat.search("xoxb-test-1234-test-5678-test-abcd"):
@@ -191,20 +189,43 @@ def test_rate_limit_policy_honesty() -> None:
     policy_path = ROOT / "api" / "gateway-rate-limit-policy.v1.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     impl = policy.get("implementation_status") or {}
+    cooldown = (policy.get("policy") or {}).get("global_acceptance_cooldown") or {}
+    secondary = (policy.get("policy") or {}).get("secondary_submit_attempt_limits") or {}
 
-    if impl.get("rate_limit_implementation") != "single_process_in_memory_sliding_window":
-        fail("rate-limit policy must disclose single_process_in_memory_sliding_window")
+    if impl.get("rate_limit_implementation") != "protected ASGI entrypoint plus existing core Gateway limiter":
+        fail("rate-limit policy must disclose the layered protected Gateway implementation")
     if impl.get("multi_instance_safe") is not False:
         fail("rate-limit policy must disclose multi_instance_safe=false")
-    if impl.get("durable_across_restart") is not False:
-        fail("rate-limit policy must disclose durable_across_restart=false")
+    if impl.get("durable_across_restart") is not True:
+        fail("durable commit-derived acceptance state must disclose durable_across_restart=true")
+    if impl.get("durable_acceptance_state") != "latest immutable intake materialization commit on the target branch":
+        fail("policy must disclose the durable acceptance-state source")
+
+    if cooldown.get("minimum_seconds") != 3600 or cooldown.get("maximum_seconds") != 7200:
+        fail("policy must disclose the randomized 60–120 minute acceptance interval")
+    if cooldown.get("first_gate") != "before request-body read and expensive validation":
+        fail("policy must disclose the entrance gate")
+    if "immediately before" not in str(cooldown.get("second_gate")):
+        fail("policy must disclose the final pre-persistence gate")
+
+    if secondary.get("implementation") != "single_process_in_memory_sliding_window":
+        fail("policy must still honestly disclose the process-local secondary attempt limiter")
+    if secondary.get("global_submit_limit_per_hour") != 100:
+        fail("secondary global attempt limit mismatch")
+    if secondary.get("participant_submit_limit_per_hour") != 10:
+        fail("secondary participant attempt limit mismatch")
 
     test_text = (ROOT / "scripts" / "test_phase7a_rate_limit_contract.py").read_text(encoding="utf-8")
-    for marker in ["rate_limit_implementation", "multi_instance_safe", "durable_across_restart"]:
+    for marker in [
+        "global_acceptance_cooldown",
+        "secondary_submit_attempt_limits",
+        "durable_acceptance_state",
+        "multi_instance_safe",
+    ]:
         if marker not in test_text:
             fail(f"rate-limit contract test missing marker {marker}")
 
-    ok("rate-limit policy honesty")
+    ok("layered rate-limit policy honesty")
 
 
 def main() -> int:
