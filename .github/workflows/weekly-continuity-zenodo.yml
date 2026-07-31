@@ -20,7 +20,13 @@ concurrency:
 
 jobs:
   deposit:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    # Automated upstream workflow events are normally dry-run. DOI publication
+    # follows only the scheduled weekly paid archive window. An operator may
+    # also dispatch this workflow explicitly for reconciliation.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'schedule')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
@@ -49,6 +55,7 @@ jobs:
         run: python3 scripts/build_weekly_continuity_deposit.py
 
       - name: Commit preservation package before external publication
+        if: steps.build.outputs.deposit_available == 'true'
         env:
           DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
         run: |
@@ -79,6 +86,7 @@ jobs:
 
       - name: Resolve Zenodo publication availability
         id: zenodo
+        if: steps.build.outputs.deposit_available == 'true'
         run: |
           set -euo pipefail
           if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
@@ -91,7 +99,9 @@ jobs:
 
       - name: Publish independent Zenodo dataset version
         id: publish
-        if: steps.zenodo.outputs.configured == 'true'
+        if: >-
+          steps.build.outputs.deposit_available == 'true' &&
+          steps.zenodo.outputs.configured == 'true'
         env:
           DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
         run: >-
@@ -100,7 +110,9 @@ jobs:
           --api-base "$ZENODO_API_BASE"
 
       - name: Commit Zenodo DOI state
-        if: steps.zenodo.outputs.configured == 'true'
+        if: >-
+          steps.build.outputs.deposit_available == 'true' &&
+          steps.zenodo.outputs.configured == 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -127,7 +139,7 @@ jobs:
           exit 1
 
       - name: Upload weekly continuity package as workflow artifact
-        if: always()
+        if: always() && steps.build.outputs.deposit_available == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: weekly-continuity-${{ steps.build.outputs.archive_id }}
@@ -138,6 +150,7 @@ jobs:
       - name: Deposit summary
         if: always()
         run: |
+          printf 'deposit_available=%s\n' "${{ steps.build.outputs.deposit_available }}"
           printf 'archive_id=%s\n' "${{ steps.build.outputs.archive_id }}"
           printf 'deposit_dir=%s\n' "${{ steps.build.outputs.deposit_dir }}"
           printf 'zenodo_configured=%s\n' "${{ steps.zenodo.outputs.configured }}"
