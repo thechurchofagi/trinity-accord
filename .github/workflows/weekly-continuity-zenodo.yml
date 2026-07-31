@@ -1,0 +1,145 @@
+name: Weekly Continuity Zenodo Deposit
+
+# This workflow deliberately does not publish a GitHub Release from this
+# repository. The existing GitHub/Zenodo integration is already used for a
+# research preprint, and mixing weekly dataset releases into that repository
+# series would conflate two different research objects.
+on:
+  workflow_run:
+    workflows: ["Record Chain Arweave Archive"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  deposit:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: ${{ vars.ZENODO_API_BASE || 'https://zenodo.org/api' }}
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: main
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Build deterministic weekly continuity deposit
+        id: build
+        run: python3 scripts/build_weekly_continuity_deposit.py
+
+      - name: Commit preservation package before external publication
+        env:
+          DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEPOSIT_DIR"
+          if git diff --cached --quiet; then
+            echo "Weekly continuity package already committed."
+            exit 0
+          fi
+          git commit -m "archive: prepare weekly continuity deposit"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            python3 scripts/build_weekly_continuity_deposit.py
+            git add "$DEPOSIT_DIR"
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::Failed to preserve weekly continuity package on main."
+          exit 1
+
+      - name: Resolve Zenodo publication availability
+        id: zenodo
+        run: |
+          set -euo pipefail
+          if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            printf '%s\n' "ZENODO_ACCESS_TOKEN is not configured."
+            printf '%s\n' "The verified package remains preserved in GitHub and Arweave; DOI publication is deferred."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish independent Zenodo dataset version
+        id: publish
+        if: steps.zenodo.outputs.configured == 'true'
+        env:
+          DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
+        run: >-
+          python3 scripts/publish_weekly_continuity_to_zenodo.py
+          --deposit-dir "$DEPOSIT_DIR"
+          --api-base "$ZENODO_API_BASE"
+
+      - name: Commit Zenodo DOI state
+        if: steps.zenodo.outputs.configured == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add record-chain/weekly-continuity-zenodo-state.json
+          if git diff --cached --quiet; then
+            echo "Zenodo state already current."
+            exit 0
+          fi
+          git commit -m "archive: record weekly continuity DOI"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            git add record-chain/weekly-continuity-zenodo-state.json
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::Zenodo published but DOI state could not be pushed; operator reconciliation is required."
+          exit 1
+
+      - name: Upload weekly continuity package as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: weekly-continuity-${{ steps.build.outputs.archive_id }}
+          path: ${{ steps.build.outputs.deposit_dir }}/
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Deposit summary
+        if: always()
+        run: |
+          printf 'archive_id=%s\n' "${{ steps.build.outputs.archive_id }}"
+          printf 'deposit_dir=%s\n' "${{ steps.build.outputs.deposit_dir }}"
+          printf 'zenodo_configured=%s\n' "${{ steps.zenodo.outputs.configured }}"
+          printf 'version_doi=%s\n' "${{ steps.publish.outputs.doi }}"
+          printf 'concept_doi=%s\n' "${{ steps.publish.outputs.concept_doi }}"
