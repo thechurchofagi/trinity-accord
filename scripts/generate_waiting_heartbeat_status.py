@@ -6,10 +6,16 @@ for historical capsule verification and all established heartbeat accounting.
 This wrapper changes only the current preservation policy: standalone paid
 heartbeat capsules are retired and future heartbeats are mirrored by the weekly
 continuity archive instead.
+
+Tests and operational tools historically replace module-level paths and helper
+functions on this module. Before invoking the preserved implementation, this
+wrapper mirrors every public override into the legacy module so that temporary
+roots, deterministic clocks, loaders, and output paths keep their old behavior.
 """
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import generate_waiting_heartbeat_status_legacy as legacy
 from generate_waiting_heartbeat_status_legacy import *  # noqa: F401,F403
@@ -17,6 +23,31 @@ from generate_waiting_heartbeat_status_legacy import *  # noqa: F401,F403
 
 def _without_generated_at(document: dict) -> dict:
     return {key: value for key, value in document.items() if key != "generated_at"}
+
+
+def _read_status_file(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def _sync_legacy_configuration() -> None:
+    """Propagate caller/test overrides to the preserved implementation."""
+    excluded = {
+        "legacy",
+        "json",
+        "Path",
+        "main",
+    }
+    for name, value in list(globals().items()):
+        if name.startswith("_") or name in excluded:
+            continue
+        if hasattr(legacy, name):
+            setattr(legacy, name, value)
 
 
 def _apply_weekly_archive_policy(status: dict) -> dict:
@@ -56,9 +87,13 @@ def _apply_weekly_archive_policy(status: dict) -> dict:
 
 
 def main() -> int:
-    old_status = legacy.read_json(legacy.STATUS_PATH, {})
+    _sync_legacy_configuration()
+    status_path = Path(legacy.STATUS_PATH)
+    old_status = _read_status_file(status_path)
     result = legacy.main()
-    generated = legacy.read_json(legacy.STATUS_PATH, {})
+    generated = _read_status_file(status_path)
+    if not generated:
+        raise RuntimeError(f"legacy Waiting Heartbeat generator did not write {status_path}")
     status = _apply_weekly_archive_policy(generated)
 
     if (
@@ -69,7 +104,8 @@ def main() -> int:
     else:
         status["generated_at"] = legacy.utc_now()
 
-    legacy.STATUS_PATH.write_text(legacy.dump_json(status), encoding="utf-8")
+    status_path.parent.mkdir(parents=True, exist_ok=True)
+    status_path.write_text(legacy.dump_json(status), encoding="utf-8")
     print(
         "WAITING_HEARTBEAT_WEEKLY_ARCHIVE_POLICY "
         f"status={status.get('daily_alive_status')} result={status.get('latest_result')}"
