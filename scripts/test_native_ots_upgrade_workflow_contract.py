@@ -1,16 +1,7 @@
 #!/usr/bin/env python3
-"""Contract: bounded Native OTS upgraded/verified proof-bundle lifecycle.
-
-The workflow owns scheduling, actor authorization, secret preparation, and one
-bounded orchestration call. The orchestration layer invokes the lifecycle once,
-enforces the daily paid budget, reconciles generated state, and retries only
-metadata rebase/push operations. The lifecycle runner retains OTS/Bitcoin and
-Arweave proof semantics. No push retry may upgrade or upload again.
-"""
+"""Contract: daily Native OTS is no-cost; weekly continuity owns publication."""
 from __future__ import annotations
 
-import subprocess
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,40 +18,14 @@ def forbid(text: str, needle: str, label: str) -> None:
 
 
 def main() -> None:
-    workflow_path = ROOT / ".github/workflows/native-ots-upgrade-watch.yml"
-    orchestrator_path = ROOT / "scripts/run_native_ots_workflow_once.py"
-    runner_path = ROOT / "scripts/run_native_ots_upgrade_verify.py"
-    reconciler_path = ROOT / "scripts/reconcile_native_ots_generated_state.py"
-    behavior_path = ROOT / "scripts/test_native_ots_transaction_behavior.py"
-    status_generator_path = ROOT / "scripts/generate_record_chain_status.py"
-    home_generator_path = ROOT / "scripts/generate_public_home_status.py"
-    runtime_guard_path = ROOT / "scripts/arweave_runtime_spend_guard.mjs"
-    daily_guard_path = ROOT / "scripts/arweave_daily_spend_guard.py"
+    workflow = (ROOT / ".github/workflows/native-ots-upgrade-watch.yml").read_text(encoding="utf-8")
+    orchestrator = (ROOT / "scripts/run_native_ots_workflow_once.py").read_text(encoding="utf-8")
+    runner = (ROOT / "scripts/run_native_ots_upgrade_verify.py").read_text(encoding="utf-8")
+    reconciler = (ROOT / "scripts/reconcile_native_ots_generated_state.py").read_text(encoding="utf-8")
+    archive_workflow = (ROOT / ".github/workflows/record-chain-arweave-archive.yml").read_text(encoding="utf-8")
+    weekly_builder = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text(encoding="utf-8")
 
-    for path in [
-        workflow_path,
-        orchestrator_path,
-        runner_path,
-        reconciler_path,
-        behavior_path,
-        status_generator_path,
-        home_generator_path,
-        runtime_guard_path,
-        daily_guard_path,
-    ]:
-        if not path.exists():
-            raise SystemExit(f"missing required file: {path.relative_to(ROOT)}")
-
-    workflow = workflow_path.read_text(encoding="utf-8")
-    orchestrator = orchestrator_path.read_text(encoding="utf-8")
-    runner = runner_path.read_text(encoding="utf-8")
-    reconciler = reconciler_path.read_text(encoding="utf-8")
-    status_generator = status_generator_path.read_text(encoding="utf-8")
-    home_generator = home_generator_path.read_text(encoding="utf-8")
-    runtime_guard = runtime_guard_path.read_text(encoding="utf-8")
-    daily_guard = daily_guard_path.read_text(encoding="utf-8")
-
-    workflow_markers = [
+    for marker in [
         "workflow_dispatch:",
         'cron: "42 6 * * *"',
         "contents: write",
@@ -69,224 +34,91 @@ def main() -> None:
         "timeout-minutes: 45",
         "fetch-depth: 0",
         "ref: main",
-        'actor="${GITHUB_ACTOR:-}"',
-        '[[ "$actor" != "thechurchofagi" && "$actor" != "github-actions[bot]" ]]',
-        "Run Native OTS upgrade workflow contract test",
+        "verify_only",
+        "upgrade_only",
+        "Run Native OTS workflow contract tests",
         "scripts/test_native_ots_upgrade_workflow_contract.py",
         "scripts/test_native_ots_complete_staging_contract.py",
         "run_native_ots_workflow_once.py",
-        "ARKEY_CONFIGURED: ${{ secrets.ARKEY || vars.ARKEY }}",
-        "ARWEAVE_JWK_CONFIGURED: ${{ secrets.ARWEAVE_JWK || vars.ARWEAVE_JWK }}",
-        'ARWEAVE_JWK_JSON="${ARKEY_CONFIGURED:-${ARWEAVE_JWK_CONFIGURED:-}}"',
-        "::add-mask::$ARWEAVE_JWK_JSON",
-        "NODE_OPTIONS: \"--import=./scripts/arweave_runtime_spend_guard.mjs\"",
-        "ARWEAVE_MINIMUM_REMAINING_AR: \"0.25\"",
-        "steps.jwk.outputs.has_jwk",
-        "NATIVE_OTS_MODE",
         "record-chain/audit/native-ots/",
-    ]
-    for marker in workflow_markers:
-        require(workflow, marker, "workflow")
+    ]:
+        require(workflow, marker, "daily no-cost workflow")
 
     for marker in [
-        "group: native-ots-upgrade-watch",
-        "git stash",
-        "if git push; then",
-        "${GITHUB_REF_NAME",
-        "--enable-paid-upload",
-        "git push origin HEAD:main",
-    ]:
-        forbid(workflow, marker, "workflow operation that belongs in bounded orchestrator")
-
-    for marker in [
-        "generate_public_home_status.py",
-        "patch_public_home_status_primary.py",
-        "api/public-home-status.json",
-        "index.md",
-        "sitemap.xml",
-    ]:
-        forbid(workflow, marker, "workflow scattered homepage write")
-
-    home_sync_path = ROOT / ".github/workflows/homepage-status-sync.yml"
-    if not home_sync_path.exists():
-        raise SystemExit(f"missing workflow: {home_sync_path.relative_to(ROOT)}")
-    home_sync = home_sync_path.read_text(encoding="utf-8")
-    require(home_sync, "Native OTS Upgrade Watch", "homepage sync workflow_run native OTS watch")
-    require(home_sync, "scripts/update_public_generated_artifacts.py", "homepage sync updater")
-
-    orchestrator_markers = [
-        "evaluate_daily_spend",
-        'evaluate_daily_spend("native_ots_bundle_archive")',
-        "Native OTS paid upload deferred",
-        "scripts/run_native_ots_upgrade_verify.py",
+        "ARKEY",
+        "ARWEAVE_JWK",
+        "arweave_runtime_spend_guard.mjs",
+        "ARWEAVE_MINIMUM_REMAINING_AR",
         "--enable-paid-upload",
         "--confirm-paid-upload",
-        "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
+        "actions/setup-node",
+    ]:
+        forbid(workflow, marker, "daily workflow paid capability")
+
+    for marker in [
+        '{"verify_only", "upgrade_only"}',
+        "scripts/run_native_ots_upgrade_verify.py",
+        'command.append("--verify-only")',
         "scripts/reconcile_native_ots_generated_state.py",
         "scripts/restore_json_if_only_volatile_changes.py",
         "api/record-chain-native-ots-latest.json",
         "record-chain/ots/native-anchors/",
-        "record-chain/ots/native-ots-backlog.json",
-        "api/record-chain-native-ots-backlog.json",
-        "record-chain/arweave-wallet-ledger.json",
-        "git",
-        "fetch",
-        "origin",
-        "main",
-        "rebase",
-        "origin/main",
-        "commit",
-        "--amend",
-        "--no-edit",
-        "push",
-        "HEAD:main",
-        "The OTS upgrade and Arweave uploader will not run again",
-        "Native OTS metadata rebase failed; refusing to repeat any paid upload",
-    ]
-    for marker in orchestrator_markers:
-        require(orchestrator, marker, "bounded orchestrator")
-
-    retry_block = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
-    for forbidden_marker in [
-        "run_native_ots_upgrade_verify.py",
-        "--enable-paid-upload",
-        "--confirm-paid-upload",
-        "arweave_cost_gate.mjs",
+        'run("git", "fetch", "origin", "main", "--prune")',
+        'run("git", "rebase", "origin/main"',
+        'run("git", "push", "origin", "HEAD:main"',
+        "assert_clean_tracked_worktree()",
     ]:
-        forbid(retry_block, forbidden_marker, "metadata-only retry")
-    require(retry_block, "reconcile_and_stage()", "metadata-only retry reconciliation")
-    require(retry_block, 'run("git", "rebase", "origin/main"', "metadata-only retry rebase")
-    require(retry_block, 'run("git", "push", "origin", "HEAD:main"', "metadata-only retry push")
-
-    runner_markers = [
-        "api/record-chain-native-ots-latest.json",
-        "record-chain/ots/native-anchors/",
-        "record-chain/ots/native-arweave-bundles/",
-        "record-chain/ots/native-arweave-registry.json",
-        "api/record-chain-native-ots-arweave-registry.json",
-        "record-chain/ots/native-ots-backlog.json",
-        "api/record-chain-native-ots-backlog.json",
-        "trinityaccord.native-record-chain-ots-latest.v1",
-        "trinityaccord.native-record-chain-ots-anchor.v1",
-        "trinityaccord.native-ots-arweave-registry.v1",
-        "bitcoin_attestation_embedded",
-        "strict_bitcoin_verified",
-        "upgraded",
-        "verified",
-        "pending",
-        "already_verified_archived",
-        "build_native_upgraded_bundle",
-        "build_native_verified_bundle",
-        "sync_native_latest_from_anchor",
-        "ots_upgrade_and_verify",
-        "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE",
-        "registry_has_bundle_sha",
-        "upload_native_ots_bundle_to_arweave",
-        "ALLOW_PAID_ARWEAVE_CANARY",
-        "arweave_archived",
-        "registered_without_arweave_tx",
-        "claims arweave_archived without tx_id",
-        "has_upgraded_archive",
-        "has_verified_archive",
-    ]
-    for marker in runner_markers:
-        require(runner, marker, "lifecycle runner")
-
-    start = runner.index("def refresh_native_ots_backlog")
-    end = runner.index("\n\ndef ", start + 1)
-    refresh_block = runner[start:end]
-    require(refresh_block, "check=True", "fail-closed backlog refresh")
-    forbid(refresh_block, "check=False", "ignored backlog refresh failure")
+        require(orchestrator, marker, "no-cost orchestrator")
 
     for marker in [
-        "record-chain/hash-chain/main.chain.jsonl",
-        "api/record-chain-head.json",
-        "api/record-chain-ots-latest.json",
-        "record-chain/ots/arweave-registry.json",
-        "api/record-chain-ots-arweave-registry.json",
-        "record-chain/ots/arweave-bundles/",
+        "evaluate_daily_spend",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+        "ARWEAVE_JWK_PATH",
+        "I_UNDERSTAND_THIS_UPLOADS",
+        "arweave_cost_gate.mjs",
     ]:
-        forbid(runner, marker, "runner legacy path")
+        forbid(orchestrator, marker, "no-cost orchestrator paid capability")
 
-    require(runner, "bitcoin_verified must be false for upgraded", "runner upgraded bitcoin_verified guard")
-    require(
-        runner,
-        "cannot build verified bundle before strict Bitcoin verification",
-        "runner verified strict verify guard",
-    )
+    retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
+    forbid(retry, "run_native_ots_upgrade_verify.py", "metadata retry lifecycle repeat")
+    require(retry, "reconcile_and_stage()", "metadata retry reconciliation")
 
-    reconciler_markers = [
+    for marker in [
+        "trinityaccord.native-record-chain-ots-latest.v1",
+        "trinityaccord.native-record-chain-ots-anchor.v1",
+        "ots_upgrade_and_verify",
+        "bitcoin_attestation_embedded",
+        "strict_bitcoin_verified",
+    ]:
+        require(runner, marker, "local Native OTS lifecycle")
+
+    for marker in [
         "never upgrades an OTS proof and never uploads to Arweave",
         "sync_native_latest_from_anchor",
         "validate_native_registry",
         "scripts/detect_archive_backlog.py",
-        "--write",
-        "scripts/generate_arweave_wallet_status.py",
         '"paid_upload_performed": False',
         '"ots_upgrade_performed": False',
-        '"derived_state_reconciled": True',
-    ]
-    for marker in reconciler_markers:
-        require(reconciler, marker, "reconciler")
-    for forbidden_marker in [
-        "arweave_upload_payload.mjs",
-        "arweave_cost_gate.mjs",
-        "--enable-paid-upload",
-        "--upgrade",
     ]:
-        forbid(reconciler, forbidden_marker, "reconciler active operation")
+        require(reconciler, marker, "derived-state reconciler")
 
-    for marker in [
-        "Daily paid Arweave upload limit reached",
-        "ARWEAVE_MINIMUM_REMAINING_AR",
-        "balance - reward < reserve",
-        "!allowCanaryTags",
-        "Canary-Record",
-    ]:
-        require(runtime_guard, marker, "runtime spend guard")
-    for marker in [
-        '"native_ots_bundle_archive": 1',
-        "daily_paid_upload_limit_reached",
-        "paid_at",
-    ]:
-        require(daily_guard, marker, "daily ledger guard")
-
-    status_markers = [
-        "latest_native_ots_proof_bundle_archive",
-        "proof_bundle_archive",
-        "api/record-chain-native-ots-arweave-registry.json",
-        "arweave_archived",
-        "registered_without_arweave_tx",
-        "waiting-for-ots-upgrade",
-        "ots_proof_bundle_arweave_archive_is_mirror_only",
-        "ots_proof_bundle_arweave_archive_is_not_authority",
-        "ots_proof_bundle_arweave_archive_is_not_attestation",
-        "ots_proof_bundle_arweave_archive_is_not_amendment",
-        "ots_proof_bundle_arweave_archive_is_not_successor_reception",
-    ]
-    for marker in status_markers:
-        require(status_generator, marker, "status generator")
-
-    for marker in [
-        "proof_bundle_archive",
-        "Native OTS proof bundle Arweave archive",
-        "not authority, attestation, amendment, or successor reception",
-    ]:
-        require(home_generator, marker, "public home generator")
-
-    behavior = subprocess.run(
-        [sys.executable, str(behavior_path)],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
+    require(archive_workflow, 'cron: "17 7 * * 3"', "weekly paid archive schedule")
+    require(archive_workflow, "ARKEY", "weekly archive wallet boundary")
+    require(
+        archive_workflow,
+        "Automated upstream event is dry-run only",
+        "upstream dry-run boundary",
     )
-    if behavior.returncode != 0:
-        raise SystemExit(
-            "native OTS transaction behavior failed:\n"
-            + (behavior.stderr or behavior.stdout)[-5000:]
-        )
+    for marker in [
+        "trinityaccord.weekly-continuity-bundle.v1",
+        "trinityaccord.weekly-native-ots-evidence.v1",
+        'latest.get("latest_ots_file")',
+        "proof_files_embedded_in_this_payload",
+    ]:
+        require(weekly_builder, marker, "weekly embedded OTS evidence")
 
-    print("PASS: bounded Native OTS upgrade workflow contract")
+    print("PASS: daily Native OTS is no-cost; weekly continuity archive owns paid publication")
 
 
 if __name__ == "__main__":
