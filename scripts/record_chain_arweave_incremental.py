@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
-"""Incremental payload builder for native Record-Chain Arweave archives.
+"""Incremental payload builder for weekly native Record-Chain archives.
 
 Archive manifests continue to describe and verify the complete native chain
-snapshot, preserving existing repository integrity semantics. The paid Arweave
-payload, however, contains only records added after the latest successfully
-archived snapshot, plus an immutable link to that previous transaction.
+snapshot. The paid payload contains only records added after the latest
+successfully archived snapshot, plus an immutable link to that previous
+transaction. It also carries a compact Waiting Heartbeat period summary and the
+latest mature Native OTS proof files covering the current chain head.
 
 The first archive remains a complete snapshot. Every later archive is a delta,
 so ``base snapshot + ordered deltas`` reconstructs the complete chain without
-re-uploading all historical record bytes for every new head.
+re-uploading historical record bytes.
 """
 from __future__ import annotations
 
 import base64
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
 import build_record_chain_arweave_archive as builder
+
+OTS_LATEST = builder.ROOT / "api" / "record-chain-native-ots-latest.json"
 
 
 def record_ordinal(record_id: object) -> int | None:
@@ -57,6 +61,19 @@ def _latest_archived_snapshot(exclude_archive_id: str) -> dict[str, Any] | None:
     return {"manifest": manifest, "manifest_path": manifest_path}
 
 
+def _encoded_file(relative_path: str) -> dict[str, Any]:
+    path = builder.ROOT / relative_path
+    if not path.is_file():
+        raise SystemExit(f"weekly continuity artifact missing: {path}")
+    raw = path.read_bytes()
+    return {
+        "path": relative_path,
+        "sha256": builder.sha256_bytes(raw),
+        "bytes": len(raw),
+        "content_base64": base64.b64encode(raw).decode("ascii"),
+    }
+
+
 def _record_payload(record_ref: dict[str, Any]) -> dict[str, Any]:
     rec_path = builder.ROOT / str(record_ref.get("path") or "")
     if not rec_path.exists():
@@ -78,6 +95,102 @@ def _record_payload(record_ref: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _heartbeat_summary(selected: list[dict[str, Any]]) -> dict[str, Any]:
+    entries: list[dict[str, Any]] = []
+    observed: set[date] = set()
+    for record_ref in selected:
+        path = builder.ROOT / str(record_ref.get("path") or "")
+        record = builder.read_json(path)
+        heartbeat = record.get("system_waiting_heartbeat")
+        if not isinstance(heartbeat, dict):
+            continue
+        heartbeat_id = heartbeat.get("heartbeat_id")
+        heartbeat_date = heartbeat.get("heartbeat_date")
+        parsed: date | None = None
+        if isinstance(heartbeat_date, str):
+            try:
+                parsed = date.fromisoformat(heartbeat_date)
+            except ValueError:
+                parsed = None
+        if parsed is not None:
+            observed.add(parsed)
+        entries.append(
+            {
+                "heartbeat_id": heartbeat_id,
+                "heartbeat_date": heartbeat_date,
+                "record_id": record_ref.get("record_id"),
+                "record_sha256": record_ref.get("record_sha256"),
+                "record_path": record_ref.get("path"),
+                "semantic_agent_arrived": heartbeat.get("semantic_agent_arrived") is True,
+                "not_echo": heartbeat.get("not_echo") is True,
+                "not_verification": heartbeat.get("not_verification") is True,
+                "not_guardian_application": heartbeat.get("not_guardian_application") is True,
+            }
+        )
+
+    missing: list[str] = []
+    period_start = min(observed) if observed else None
+    period_end = max(observed) if observed else None
+    if period_start is not None and period_end is not None:
+        current = period_start
+        while current <= period_end:
+            if current not in observed:
+                missing.append(current.isoformat())
+            current += timedelta(days=1)
+
+    return {
+        "schema": "trinityaccord.weekly-heartbeat-summary.v1",
+        "period_start": period_start.isoformat() if period_start else None,
+        "period_end": period_end.isoformat() if period_end else None,
+        "expected_days_within_observed_span": (
+            (period_end - period_start).days + 1
+            if period_start is not None and period_end is not None
+            else 0
+        ),
+        "present_days": len(observed),
+        "missing_days": missing,
+        "heartbeat_count": len(entries),
+        "heartbeats": entries,
+        "summary_is_non_authoritative_index": True,
+        "native_record_files_remain_source": True,
+    }
+
+
+def _latest_native_ots(
+    *,
+    current_count: int,
+    current_latest_id: str,
+    current_latest_sha: str,
+) -> dict[str, Any]:
+    if not OTS_LATEST.is_file():
+        raise SystemExit("weekly continuity payload requires api/record-chain-native-ots-latest.json")
+    latest = builder.read_json(OTS_LATEST)
+    if (
+        latest.get("native_record_count") != current_count
+        or latest.get("latest_record_id") != current_latest_id
+        or latest.get("latest_record_sha256") != current_latest_sha
+    ):
+        raise SystemExit("latest Native OTS metadata does not cover the current chain head")
+    if latest.get("ots_status") not in {"upgraded", "verified"}:
+        raise SystemExit("latest Native OTS proof is not mature enough for weekly continuity archival")
+
+    artifact_paths = [
+        latest.get("latest_anchor_file"),
+        latest.get("latest_anchored_file"),
+        latest.get("latest_ots_file"),
+    ]
+    if not all(isinstance(path, str) and path for path in artifact_paths):
+        raise SystemExit("latest Native OTS metadata is missing required proof paths")
+
+    return {
+        "schema": "trinityaccord.weekly-native-ots-evidence.v1",
+        "metadata": latest,
+        "artifacts": [_encoded_file(path) for path in artifact_paths],
+        "covers_current_chain_head": True,
+        "proof_files_embedded_in_this_payload": True,
+    }
+
+
 def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) -> Path:
     archive_id = str(manifest.get("archive_id") or "")
     current_native = manifest.get("source", {}).get("native_chain", {})
@@ -90,6 +203,8 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
         raise SystemExit("incremental Arweave payload requires native_record_count >= 1")
     if record_ordinal(current_latest_id) != current_count:
         raise SystemExit("incremental Arweave payload latest_record_id/count mismatch")
+    if not isinstance(current_latest_sha, str) or not current_latest_sha:
+        raise SystemExit("incremental Arweave payload requires latest_record_sha256")
     if not isinstance(all_records, list) or len(all_records) != current_count:
         raise SystemExit("incremental Arweave payload requires a complete manifest record index")
 
@@ -119,7 +234,7 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
                 "latest archived snapshot does not match the current chain prefix; refusing to attach a delta to a divergent base"
             )
 
-    selected = []
+    selected: list[dict[str, Any]] = []
     expected_next = previous_count + 1
     for record_ref in all_records:
         ordinal = record_ordinal(record_ref.get("record_id"))
@@ -151,20 +266,29 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
     for batch in manifest.get("included_batches", []):
         last_index = batch.get("last_record_index")
         if not isinstance(last_index, int) or last_index >= previous_count + 1:
-            overlapping_batches.append({
-                "batch_id": batch.get("batch_id"),
-                "batch_manifest_sha256": batch.get("batch_manifest_sha256"),
-                "first_record_index": batch.get("first_record_index"),
-                "last_record_index": batch.get("last_record_index"),
-            })
+            overlapping_batches.append(
+                {
+                    "batch_id": batch.get("batch_id"),
+                    "batch_manifest_sha256": batch.get("batch_manifest_sha256"),
+                    "first_record_index": batch.get("first_record_index"),
+                    "last_record_index": batch.get("last_record_index"),
+                }
+            )
 
     mode = "full_snapshot" if previous_manifest is None else "incremental_delta"
+    heartbeat_summary = _heartbeat_summary(selected)
+    native_ots = _latest_native_ots(
+        current_count=current_count,
+        current_latest_id=current_latest_id,
+        current_latest_sha=current_latest_sha,
+    )
     payload = {
         "schema": "trinityaccord.record-chain-arweave-delta.v1",
         "archive_id": archive_id,
         "created_at": manifest.get("created_at"),
         "chain_id": builder.CHAIN_ID,
         "archive_mode": mode,
+        "archive_cadence": "weekly",
         "coverage": {
             "previous_native_record_count": previous_count,
             "first_record_id": first_id,
@@ -174,7 +298,9 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
             "current_latest_record_id": current_latest_id,
             "current_latest_record_sha256": current_latest_sha,
         },
-        "previous_archive": None if previous_manifest is None else {
+        "previous_archive": None
+        if previous_manifest is None
+        else {
             "archive_id": previous_manifest.get("archive_id"),
             "manifest_path": str(previous_path.relative_to(builder.ROOT)) if previous_path else None,
             "archive_manifest_sha256": previous_manifest_sha,
@@ -185,6 +311,13 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
         },
         "included_batches": overlapping_batches,
         "included_records": [_record_payload(record_ref) for record_ref in selected],
+        "continuity_bundle": {
+            "schema": "trinityaccord.weekly-continuity-bundle.v1",
+            "heartbeat_summary": heartbeat_summary,
+            "latest_native_ots": native_ots,
+            "daily_heartbeat_capsules_are_not_required": True,
+            "single_paid_payload_covers_records_heartbeats_and_ots": True,
+        },
         "source": manifest.get("source", {}),
         "reconstruction": {
             "rule": "Start with the earliest full_snapshot payload, then apply incremental_delta payloads in ascending record order.",
@@ -212,6 +345,15 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
         "last_record_id": last_id,
         "delta_record_count": len(selected),
         "current_native_record_count": current_count,
+    }
+    manifest["weekly_continuity"] = {
+        "heartbeat_count": heartbeat_summary["heartbeat_count"],
+        "heartbeat_period_start": heartbeat_summary["period_start"],
+        "heartbeat_period_end": heartbeat_summary["period_end"],
+        "missing_heartbeat_days": heartbeat_summary["missing_days"],
+        "native_ots_record_id": current_latest_id,
+        "native_ots_record_sha256": current_latest_sha,
+        "native_ots_embedded": True,
     }
 
     payload_path = archive_dir / "payload.json"
