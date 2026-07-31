@@ -171,7 +171,18 @@ def main() -> int:
         head.count("check_native_ots_latest_matches_chain_tip.py") >= 2,
         "native head OTS workflow does not revalidate after rebase",
     )
-    require("Dispatching Record Chain Arweave Archive in live mode" in head, "native OTS archive dispatch missing")
+    require(
+        "Dispatching Record Chain Arweave Archive in dry-run mode" in head,
+        "native OTS dry-run archive scan dispatch missing",
+    )
+    require(
+        "-f upload_mode=dry-run" in head,
+        "native OTS automation must dispatch only a dry-run archive scan",
+    )
+    require(
+        "-f upload_mode=live" not in head,
+        "native OTS automation must not directly authorize paid archival",
+    )
 
     auto = contents[".github/workflows/record-chain-auto-finalize.yml"]
     require("without rerunning finalization" in auto, "auto-finalize retry may repeat a finalization side effect")
@@ -188,7 +199,7 @@ def main() -> int:
     )
 
     assert_tip_helper_behavior()
-    print("PASS: Round 8 main-writer transactions are main-bound, serialized, and revalidated")
+    print("PASS: Round 8 main-writer transactions are main-bound, serialized, revalidated, and cannot trigger per-head paid archival")
     return 0
 
 
