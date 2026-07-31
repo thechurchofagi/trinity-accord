@@ -66,6 +66,12 @@ jobs:
           npm ci
           ots --help
 
+      - name: Run Native OTS upgrade workflow contract test
+        run: |
+          python3 scripts/test_native_ots_upgrade_workflow_contract.py
+          python3 scripts/test_native_ots_complete_staging_contract.py
+          python3 tests/test_arweave_cost_boundaries.py
+
       - name: Prepare Arweave JWK if available
         id: jwk
         env:
