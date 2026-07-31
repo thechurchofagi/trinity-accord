@@ -63,3 +63,11 @@ def test_zenodo_publisher_is_independent_and_token_safe():
     assert "actions/publish" in publisher
     assert "trinityaccord.weekly-continuity-deposit.v1" in builder
     assert '"upload_type": "dataset"' in builder
+
+
+def test_feature_branch_has_no_temporary_patch_or_ci_write_boundary():
+    assert not (ROOT / ".github/workflows/apply-heartbeat-retirement-contract-once.yml").exists()
+    assert not (ROOT / "scripts/patch_waiting_heartbeat_retirement_contract_once.py").exists()
+    current_tests = read(".github/workflows/run-current-tests.yml")
+    assert "permissions:\n  contents: read" in current_tests
+    assert "Apply and self-remove PR 825" not in current_tests
