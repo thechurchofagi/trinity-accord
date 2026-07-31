@@ -8,6 +8,8 @@ import sys
 import time
 from pathlib import Path
 
+from arweave_daily_spend_guard import evaluate_daily_spend
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIRM = "I_UNDERSTAND_THIS_UPLOADS_THE_VERIFIED_OTS_PROOF_BUNDLE_TO_ARWEAVE"
 STAGE_PATHS = [
@@ -120,6 +122,14 @@ def main() -> int:
     if mode == "verify_only":
         command.append("--verify-only")
     else:
+        decision = evaluate_daily_spend("native_ots_bundle_archive")
+        if not decision.allowed:
+            print(
+                "Native OTS paid upload deferred: "
+                f"{decision.reason} {decision.paid_count}/{decision.daily_limit} "
+                f"for UTC date {decision.utc_date}."
+            )
+            return 0
         jwk_path = os.environ.get("ARWEAVE_JWK_PATH", "").strip()
         if not jwk_path:
             raise SystemExit("NATIVE_OTS_MODE=auto requires ARWEAVE_JWK_PATH")
