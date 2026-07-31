@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Run one Record-Chain Arweave archive attempt and never re-upload on push retry."""
+"""Run one Record-Chain Arweave archive attempt and never re-upload on push retry.
+
+The retry sequence is the programmatic equivalent of ``git fetch origin main
+--prune`` followed by ``git rebase origin/main`` and a metadata-only push. The
+paid incremental builder is invoked once before this retry loop and never from
+inside it.
+"""
 from __future__ import annotations
 
 import os
