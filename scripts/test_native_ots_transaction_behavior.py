@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Behavioral regression for the Native OTS write transaction."""
+"""Behavioral regression for the bounded Native OTS write transaction."""
 from __future__ import annotations
 
 import importlib.util
@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 RECONCILER = SCRIPTS / "reconcile_native_ots_generated_state.py"
 WORKFLOW = ROOT / ".github/workflows/native-ots-upgrade-watch.yml"
+ORCHESTRATOR = SCRIPTS / "run_native_ots_workflow_once.py"
 RUNNER = SCRIPTS / "run_native_ots_upgrade_verify.py"
 
 
@@ -51,8 +52,10 @@ def test_reconciler_is_derived_only() -> None:
 
     def fake_run(command, **kwargs):
         calls.append(("run", tuple(command), kwargs))
+
         class Result:
             returncode = 0
+
         return Result()
 
     module.sync_native_latest_from_anchor = sync
@@ -75,41 +78,62 @@ def test_reconciler_is_derived_only() -> None:
 
 
 def test_workflow_transaction_boundary() -> None:
-    text = WORKFLOW.read_text(encoding="utf-8")
-    required = [
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    orchestrator = ORCHESTRATOR.read_text(encoding="utf-8")
+
+    workflow_required = [
         "group: main-write-lock",
         "queue: max",
         "fetch-depth: 0",
         "ref: main",
         'actor="${GITHUB_ACTOR:-}"',
-        "reconcile_and_stage",
-        "scripts/reconcile_native_ots_generated_state.py",
-        "record-chain/ots/native-ots-backlog.json",
-        "api/record-chain-native-ots-backlog.json",
-        "git rebase origin/main",
-        "git commit --amend --no-edit",
-        "git push origin HEAD:main",
-        "done < <(git diff --cached --name-only)",
-        "git diff --cached --check",
-        "--untracked-files=no",
-        "never upgrade or upload again here",
+        "run_native_ots_workflow_once.py",
+        "Run Native OTS upgrade workflow contract test",
+        "arweave_runtime_spend_guard.mjs",
+        "ARWEAVE_MINIMUM_REMAINING_AR",
     ]
-    for marker in required:
-        require(marker in text, f"workflow missing transaction marker: {marker}")
+    for marker in workflow_required:
+        require(marker in workflow, f"workflow missing transaction marker: {marker}")
 
-    forbidden = [
+    workflow_forbidden = [
         "group: native-ots-upgrade-watch",
         "git stash",
         "if git push; then",
         "${GITHUB_REF_NAME",
+        "git push origin HEAD:main",
+        "--enable-paid-upload",
     ]
-    for marker in forbidden:
-        require(marker not in text, f"workflow retains unsafe marker: {marker}")
+    for marker in workflow_forbidden:
+        require(marker not in workflow, f"workflow retains unsafe/inlined marker: {marker}")
 
-    rebase = text.index("git rebase origin/main")
-    reconcile_after = text.index("reconcile_and_stage", rebase)
-    push = text.index("git push origin HEAD:main", reconcile_after)
-    require(rebase < reconcile_after < push, "workflow must reconcile after rebase and before push")
+    orchestrator_required = [
+        "reconcile_and_stage",
+        "scripts/reconcile_native_ots_generated_state.py",
+        "record-chain/ots/native-ots-backlog.json",
+        "api/record-chain-native-ots-backlog.json",
+        'run("git", "rebase", "origin/main"',
+        'run("git", "commit", "--amend", "--no-edit")',
+        'run("git", "push", "origin", "HEAD:main"',
+        'run("git", "diff", "--cached", "--check")',
+        'run("git", "status", "--porcelain", "--untracked-files=no")',
+        "The OTS upgrade and Arweave uploader will not run again",
+        "evaluate_daily_spend",
+    ]
+    for marker in orchestrator_required:
+        require(marker in orchestrator, f"orchestrator missing transaction marker: {marker}")
+
+    retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
+    for marker in [
+        "run_native_ots_upgrade_verify.py",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+    ]:
+        require(marker not in retry, f"metadata retry can repeat active operation: {marker}")
+
+    rebase = retry.index('run("git", "rebase", "origin/main"')
+    reconcile_after = retry.index("reconcile_and_stage()", rebase)
+    push = retry.index('run("git", "push", "origin", "HEAD:main"', reconcile_after)
+    require(rebase < reconcile_after < push, "orchestrator must reconcile after rebase and before push")
 
 
 def test_backlog_refresh_fails_closed() -> None:
