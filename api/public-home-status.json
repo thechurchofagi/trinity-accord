@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-07-31T11:02:27.678311+00:00",
+  "generated_at": "2026-07-31T14:31:22.276370+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "7eb803de2c060431",
+  "source_digest": "9dab5a5a96e393d4",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 106,
@@ -935,7 +935,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-07-31T11:02:26Z",
+    "generated_at": "2026-07-31T14:31:20Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -951,9 +951,12 @@
       "arweave_capsule_is_archive_followup": true
     },
     "archive_followup": {
-      "arweave_capsule_upload_expected": true,
-      "arweave_readback_hash_match_expected": true,
-      "does_not_gate_daily_alive_success": true
+      "arweave_capsule_upload_expected": false,
+      "arweave_readback_hash_match_expected": false,
+      "standalone_arweave_capsule_retired": true,
+      "weekly_continuity_archive_expected": true,
+      "weekly_continuity_archive_does_not_gate_daily_alive_success": true,
+      "historical_capsules_remain_verifiable": true
     },
     "latest_heartbeat": {
       "heartbeat_id": "hwb-20260731",
@@ -1036,7 +1039,9 @@
       "heartbeat_lag_days": 0,
       "latest_heartbeat_is_expected_date": true,
       "latest_heartbeat_fully_verified_for_expected_date": true,
-      "expected_heartbeat_pending_append": false
+      "expected_heartbeat_pending_append": false,
+      "standalone_arweave_capsule_retired": true,
+      "weekly_continuity_archive_is_followup": true
     },
     "heartbeat_summary": {
       "total_scheduled_heartbeats": 44,
@@ -1109,6 +1114,12 @@
       "waiting_heartbeat_is_not_attestation": true,
       "waiting_heartbeat_is_not_amendment": true,
       "waiting_heartbeat_is_not_successor_reception": true
+    },
+    "standalone_capsule_policy": {
+      "status": "retired",
+      "historical_results_remain_verifiable": true,
+      "new_heartbeats_are_mirrored_by_weekly_continuity_archive": true,
+      "daily_liveness_does_not_require_arweave": true
     },
     "snapshot_only": true,
     "canonical_status_api": "/api/waiting-heartbeat-status.json"
