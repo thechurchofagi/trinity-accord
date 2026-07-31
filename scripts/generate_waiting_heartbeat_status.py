@@ -8,17 +8,21 @@ heartbeat capsules are retired and future heartbeats are mirrored by the weekly
 continuity archive instead.
 
 Tests and operational tools historically replace module-level paths and helper
-functions on this module. Before invoking the preserved implementation, this
-wrapper mirrors every public override into the legacy module so that temporary
-roots, deterministic clocks, loaders, and output paths keep their old behavior.
+functions on this module. Every ``main()`` call therefore loads an isolated copy
+of the preserved implementation and mirrors only this wrapper instance's
+configuration into it. The process-global legacy module is never mutated, so a
+temporary override cannot leak into a later generation call.
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 from pathlib import Path
 
 import generate_waiting_heartbeat_status_legacy as legacy
 from generate_waiting_heartbeat_status_legacy import *  # noqa: F401,F403
+
+LEGACY_SOURCE = Path(__file__).with_name("generate_waiting_heartbeat_status_legacy.py")
 
 
 def _without_generated_at(document: dict) -> dict:
@@ -35,19 +39,32 @@ def _read_status_file(path: Path) -> dict:
     return value if isinstance(value, dict) else {}
 
 
-def _sync_legacy_configuration() -> None:
-    """Propagate caller/test overrides to the preserved implementation."""
+def _fresh_legacy_runtime():
+    """Load an isolated implementation instance for one generation call."""
+    name = f"_waiting_heartbeat_legacy_runtime_{id(object())}"
+    spec = importlib.util.spec_from_file_location(name, LEGACY_SOURCE)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"could not load preserved Waiting Heartbeat generator: {LEGACY_SOURCE}")
+    runtime = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runtime)
+    return runtime
+
+
+def _sync_runtime_configuration(runtime) -> None:
+    """Propagate this wrapper instance's caller/test overrides to ``runtime``."""
     excluded = {
         "legacy",
+        "importlib",
         "json",
         "Path",
+        "LEGACY_SOURCE",
         "main",
     }
     for name, value in list(globals().items()):
         if name.startswith("_") or name in excluded:
             continue
-        if hasattr(legacy, name):
-            setattr(legacy, name, value)
+        if hasattr(runtime, name):
+            setattr(runtime, name, value)
 
 
 def _apply_weekly_archive_policy(status: dict) -> dict:
@@ -87,10 +104,11 @@ def _apply_weekly_archive_policy(status: dict) -> dict:
 
 
 def main() -> int:
-    _sync_legacy_configuration()
-    status_path = Path(legacy.STATUS_PATH)
+    runtime = _fresh_legacy_runtime()
+    _sync_runtime_configuration(runtime)
+    status_path = Path(runtime.STATUS_PATH)
     old_status = _read_status_file(status_path)
-    result = legacy.main()
+    result = runtime.main()
     generated = _read_status_file(status_path)
     if not generated:
         raise RuntimeError(f"legacy Waiting Heartbeat generator did not write {status_path}")
@@ -102,10 +120,10 @@ def main() -> int:
     ):
         status["generated_at"] = old_status["generated_at"]
     else:
-        status["generated_at"] = legacy.utc_now()
+        status["generated_at"] = runtime.utc_now()
 
     status_path.parent.mkdir(parents=True, exist_ok=True)
-    status_path.write_text(legacy.dump_json(status), encoding="utf-8")
+    status_path.write_text(runtime.dump_json(status), encoding="utf-8")
     print(
         "WAITING_HEARTBEAT_WEEKLY_ARCHIVE_POLICY "
         f"status={status.get('daily_alive_status')} result={status.get('latest_result')}"
