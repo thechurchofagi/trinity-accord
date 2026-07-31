@@ -28,6 +28,8 @@ def main() -> None:
     arweave_runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
     incremental_runner = ROOT / "scripts" / "run_record_chain_arweave_incremental.py"
     incremental_builder = ROOT / "scripts" / "record_chain_arweave_incremental.py"
+    workflow_runner = ROOT / "scripts" / "run_record_chain_arweave_workflow_once.py"
+    runtime_guard = ROOT / "scripts" / "arweave_runtime_spend_guard.mjs"
     data_wf = ROOT / ".github" / "workflows" / "record-chain-data-arweave-archive.yml"
 
     if not head_wf.exists():
@@ -87,21 +89,17 @@ def main() -> None:
             "Record Chain Arweave Archive",
             "Record Chain Head OTS Anchor",
             "run_record_chain_arweave_incremental.py",
-            "verify_record_chain_arweave_archive.py",
-            "ARKEY: ${{ secrets.ARKEY }}",
-            "record-chain-native-ots-latest.json",
-            "refusing live Arweave upload without native OTS",
-            "record-chain/arweave-archives/",
-            "api/record-chain-arweave-index.json",
-            "record-chain/arweave-backlog.json",
-            "api/record-chain-arweave-backlog.json",
-            "record-chain/ots/native-ots-backlog.json",
-            "api/record-chain-native-ots-backlog.json",
-            "record-chain/arweave-wallet-ledger.json",
-            "checkpoint incomplete Arweave upload for safe readback resume",
-            "Fail after persisting incomplete upload checkpoint",
+            "run_record_chain_arweave_workflow_once.py",
+            "detect_record_chain_pipeline_backlog.py",
+            "arweave_archive_needed",
+            "ots_matches_chain",
+            "ots_archivable_for_arweave",
+            "ARKEY",
+            "arweave_runtime_spend_guard.mjs",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
             'cron: "17 7 * * *"',
             "Automated upstream event is dry-run only",
+            'if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then',
         ]:
             require_contains(arweave_wf, marker, errors)
 
@@ -111,18 +109,44 @@ def main() -> None:
             "record-chain-arweave-data-registry.json",
             "*/30 * * * *",
             "run_record_chain_arweave_archive.py --mode",
+            "echo $ARKEY",
         ]:
             require_not_contains(arweave_wf, forbidden, errors)
 
-        arweave_text = arweave_wf.read_text(encoding="utf-8")
-        if "ARKEY" in arweave_text and "echo $ARKEY" in arweave_text:
-            errors.append("record-chain-arweave-archive.yml must not echo ARKEY")
+    if not workflow_runner.exists():
+        errors.append("missing scripts/run_record_chain_arweave_workflow_once.py")
+    else:
+        for marker in [
+            "verify_record_chain_arweave_archive.py",
+            "trinity_record_chain.py",
+            "--allow-stale-live-chain-tip",
+            "record-chain/arweave-archives/",
+            "api/record-chain-arweave-index.json",
+            "record-chain/arweave-backlog.json",
+            "api/record-chain-arweave-backlog.json",
+            "record-chain/ots/native-ots-backlog.json",
+            "api/record-chain-native-ots-backlog.json",
+            "record-chain/arweave-wallet-ledger.json",
+            "checkpoint incomplete Arweave upload for safe readback resume",
+            "Fail after persisting incomplete upload checkpoint",
+            "assert_clean_tracked_worktree",
+            "push_without_reupload",
+            "The Arweave uploader will not run again",
+        ]:
+            require_contains(workflow_runner, marker, errors)
 
-        commit_section_start = arweave_text.find('if [ "${BUILD_EXIT_CODE}" = "0" ]')
-        first_fetch = arweave_text.find("git fetch origin main --prune", commit_section_start)
-        clean_guard = arweave_text.find("assert_clean_worktree", commit_section_start)
-        if commit_section_start < 0 or first_fetch < 0 or clean_guard < 0 or clean_guard > first_fetch:
-            errors.append("record-chain-arweave-archive.yml must assert a clean worktree before the first rebase")
+        runner_text = workflow_runner.read_text(encoding="utf-8")
+        retry_block = runner_text.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
+        if "run_record_chain_arweave_incremental.py" in retry_block:
+            errors.append("bounded archive retry block must not invoke a paid upload")
+        clean_index = retry_block.find("assert_clean_tracked_worktree()")
+        fetch_index = retry_block.find('run("git", "fetch", "origin", "main", "--prune")')
+        rebase_index = retry_block.find('run("git", "rebase", "origin/main"')
+        push_index = retry_block.find('run("git", "push", "origin", "HEAD:main"')
+        if min(clean_index, fetch_index, rebase_index, push_index) < 0:
+            errors.append("bounded archive retry block is missing clean/fetch/rebase/push sequencing")
+        elif not (clean_index < fetch_index < rebase_index < push_index):
+            errors.append("bounded archive retry block must check clean state, fetch, rebase, then push")
 
     if not arweave_runner.exists():
         errors.append("missing scripts/run_record_chain_arweave_archive.py")
@@ -144,6 +168,7 @@ def main() -> None:
             "build_incremental_payload_json",
             "runner.builder.build_payload_json = build_incremental_payload_json",
             "runner.main()",
+            "evaluate_daily_spend",
         ]:
             require_contains(incremental_runner, marker, errors)
 
@@ -156,8 +181,21 @@ def main() -> None:
             "previous_archive_txid",
             "delta_record_count",
             "content_base64",
+            "does not match the current chain prefix",
         ]:
             require_contains(incremental_builder, marker, errors)
+
+    if not runtime_guard.exists():
+        errors.append("missing scripts/arweave_runtime_spend_guard.mjs")
+    else:
+        for marker in [
+            "Daily paid Arweave upload limit reached",
+            "ARWEAVE_MINIMUM_REMAINING_AR",
+            "balance - reward < reserve",
+            "Canary-Record",
+            "!allowCanaryTags",
+        ]:
+            require_contains(runtime_guard, marker, errors)
 
     if not data_wf.exists():
         errors.append("missing .github/workflows/record-chain-data-arweave-archive.yml")

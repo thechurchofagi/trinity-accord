@@ -265,7 +265,7 @@ def main() -> int:
             )
         if ".github/workflows/archive-backlog-repair.yml" not in pr_paths:
             errors.append(
-                "record-chain-write-path-guard.yml: archive backlog writer workflow is not protected"
+                "record-chain-write-path-guard.yml: archive backlog workflow is not protected"
             )
 
         guard_text = texts.get("record-chain-write-path-guard.yml", "")
@@ -275,24 +275,54 @@ def main() -> int:
             )
 
         archive_text = texts.get(ARCHIVE_REPAIR_WORKFLOW, "")
-        for marker in (
-            "validate_exact_archive_commit",
-            "git rev-list --count",
-            "scripts/check_record_chain_write_path_guard.py",
-            '--github-actor "github-actions[bot]"',
-            'git push origin HEAD:main',
-            "Equivalent archive backlog state already reached main",
-        ):
-            if marker not in archive_text:
-                errors.append(f"{ARCHIVE_REPAIR_WORKFLOW}: missing exact-commit guard marker {marker}")
+        archive_doc = docs.get(ARCHIVE_REPAIR_WORKFLOW, {})
+        permissions = archive_doc.get("permissions", {}) if isinstance(archive_doc, dict) else {}
+        read_only_scan = (
+            isinstance(permissions, dict)
+            and permissions.get("contents") == "read"
+            and "contents: write" not in archive_text
+            and "git push" not in archive_text
+            and "git commit" not in archive_text
+        )
 
-        push_index = archive_text.find("git push origin HEAD:main")
-        function_index = archive_text.find("validate_exact_archive_commit()")
-        call_index = archive_text.rfind("validate_exact_archive_commit", 0, push_index)
-        if push_index < 0 or function_index < 0 or call_index <= function_index:
-            errors.append(
-                f"{ARCHIVE_REPAIR_WORKFLOW}: exact archive commit is not validated immediately before push"
-            )
+        if read_only_scan:
+            for forbidden in (
+                "--mode live",
+                "--enable-paid-upload",
+                "secrets.ARKEY",
+                "vars.ARKEY",
+                "ARWEAVE_JWK",
+                "ALLOW_PAID_ARWEAVE_CANARY",
+            ):
+                if forbidden in archive_text:
+                    errors.append(
+                        f"{ARCHIVE_REPAIR_WORKFLOW}: read-only backlog scan retains paid or secret capability {forbidden}"
+                    )
+            if "--mode dry-run" not in archive_text:
+                errors.append(
+                    f"{ARCHIVE_REPAIR_WORKFLOW}: read-only backlog scan does not prove dry-run mode"
+                )
+        else:
+            for marker in (
+                "validate_exact_archive_commit",
+                "git rev-list --count",
+                "scripts/check_record_chain_write_path_guard.py",
+                '--github-actor "github-actions[bot]"',
+                "git push origin HEAD:main",
+                "Equivalent archive backlog state already reached main",
+            ):
+                if marker not in archive_text:
+                    errors.append(
+                        f"{ARCHIVE_REPAIR_WORKFLOW}: missing exact-commit guard marker {marker}"
+                    )
+
+            push_index = archive_text.find("git push origin HEAD:main")
+            function_index = archive_text.find("validate_exact_archive_commit()")
+            call_index = archive_text.rfind("validate_exact_archive_commit", 0, push_index)
+            if push_index < 0 or function_index < 0 or call_index <= function_index:
+                errors.append(
+                    f"{ARCHIVE_REPAIR_WORKFLOW}: exact archive commit is not validated immediately before push"
+                )
     except (OSError, ValueError, yaml.YAMLError) as exc:
         errors.append(f"write-path guard alignment check failed: {exc}")
 
@@ -304,7 +334,7 @@ def main() -> int:
 
     print(
         f"PASS: {len(texts)} workflows parse strictly and align with runtime versions, locked dependencies, "
-        "strict data validation, non-mutating drift checks, and exact writer commit inputs"
+        "strict data validation, non-mutating drift checks, and read-only scans or exact writer commit inputs"
     )
     return 0
 

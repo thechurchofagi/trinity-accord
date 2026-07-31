@@ -61,18 +61,82 @@ def test_auto_sitemap_workflow_is_retired():
     )
 
 
-def test_archive_workflow_rebuilds_after_rebase():
-    path = WORKFLOWS / "record-chain-arweave-archive.yml"
-    text = path.read_text(encoding="utf-8")
+def test_archive_workflow_delegates_safe_metadata_only_retry():
+    workflow_path = WORKFLOWS / "record-chain-arweave-archive.yml"
+    workflow = workflow_path.read_text(encoding="utf-8")
+    orchestrator_path = ROOT / "scripts" / "run_record_chain_arweave_workflow_once.py"
+    orchestrator = orchestrator_path.read_text(encoding="utf-8")
 
-    required = [
-        "rebuild_archive_outputs()",
-        "stage_archive_metadata()",
-        "git commit --amend --no-edit",
-        "git status --porcelain",
-    ]
-    missing = [item for item in required if item not in text]
-    assert not missing, f"{path}: missing archive retry safety pieces: {missing}"
+    for marker in [
+        "group: main-write-lock",
+        "queue: max",
+        "run_record_chain_arweave_workflow_once.py",
+        "run_record_chain_arweave_incremental.py",
+        "arweave_runtime_spend_guard.mjs",
+    ]:
+        assert marker in workflow, f"{workflow_path}: missing delegated archive safety marker {marker}"
+
+    for marker in [
+        "push_without_reupload",
+        "stage_metadata",
+        'run("git", "commit", "--amend", "--no-edit")',
+        'run("git", "status", "--porcelain", "--untracked-files=no")',
+        'run("git", "fetch", "origin", "main", "--prune")',
+        'run("git", "rebase", "origin/main"',
+        'run("git", "push", "origin", "HEAD:main"',
+        "The Arweave uploader will not run again",
+        "verify_record_chain_arweave_archive.py",
+    ]:
+        assert marker in orchestrator, f"{orchestrator_path}: missing archive retry safety piece {marker}"
+
+    retry = orchestrator.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
+    assert "run_record_chain_arweave_incremental.py" not in retry, (
+        f"{orchestrator_path}: metadata retry must never repeat the paid incremental uploader"
+    )
+    clean = retry.find("assert_clean_tracked_worktree()")
+    fetch = retry.find('run("git", "fetch", "origin", "main", "--prune")')
+    rebase = retry.find('run("git", "rebase", "origin/main"')
+    push = retry.find('run("git", "push", "origin", "HEAD:main"')
+    assert min(clean, fetch, rebase, push) >= 0 and clean < fetch < rebase < push, (
+        f"{orchestrator_path}: retry must check clean state, fetch, rebase, then push"
+    )
+
+
+def test_native_ots_workflow_delegates_safe_metadata_only_retry():
+    workflow_path = WORKFLOWS / "native-ots-upgrade-watch.yml"
+    workflow = workflow_path.read_text(encoding="utf-8")
+    orchestrator_path = ROOT / "scripts" / "run_native_ots_workflow_once.py"
+    orchestrator = orchestrator_path.read_text(encoding="utf-8")
+
+    for marker in [
+        "group: main-write-lock",
+        "queue: max",
+        "run_native_ots_workflow_once.py",
+        "arweave_runtime_spend_guard.mjs",
+    ]:
+        assert marker in workflow, f"{workflow_path}: missing delegated Native OTS safety marker {marker}"
+
+    for marker in [
+        "push_metadata_only",
+        "reconcile_and_stage",
+        'run("git", "commit", "--amend", "--no-edit")',
+        'run("git", "status", "--porcelain", "--untracked-files=no")',
+        'run("git", "fetch", "origin", "main", "--prune")',
+        'run("git", "rebase", "origin/main"',
+        'run("git", "push", "origin", "HEAD:main"',
+        "The OTS upgrade and Arweave uploader will not run again",
+    ]:
+        assert marker in orchestrator, f"{orchestrator_path}: missing Native OTS retry safety piece {marker}"
+
+    retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
+    for forbidden in [
+        "run_native_ots_upgrade_verify.py",
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+    ]:
+        assert forbidden not in retry, (
+            f"{orchestrator_path}: metadata retry may repeat active operation {forbidden}"
+        )
 
 
 def test_append_workflow_allows_internal_actions_dispatch():
@@ -136,7 +200,9 @@ def test_agent_declared_index_rebuild_has_token_for_all_github_calls():
 if __name__ == "__main__":
     test_main_writers_use_shared_lock_and_safe_rebase()
     test_auto_sitemap_workflow_is_retired()
-    test_archive_workflow_rebuilds_after_rebase()
+    test_archive_workflow_delegates_safe_metadata_only_retry()
+    test_native_ots_workflow_delegates_safe_metadata_only_retry()
+    test_append_workflow_allows_internal_actions_dispatch()
     test_record_chain_index_writers_stage_overlay_mirror()
     test_write_path_guard_classifies_overlay_as_generated()
     test_agent_declared_index_rebuild_has_token_for_all_github_calls()

@@ -1,8 +1,9 @@
 name: Record Chain Arweave Archive
-# Native record-chain archive workflow.
-# Live upload requires ARKEY secret.
-# Automated upstream events are dry-run only; one daily schedule may upload live.
-# Human workflow_dispatch may explicitly request live mode.
+# Paid uploads are daily or explicitly human-dispatched. Upstream workflow events
+# are dry-run only. Automated upstream event is dry-run only.
+# The bounded orchestrator delegates the one initial build to
+# scripts/run_record_chain_arweave_incremental.py and never invokes it again
+# during rebase or push retry.
 
 on:
   workflow_run:
@@ -21,285 +22,116 @@ on:
           - dry-run
           - live
   schedule:
-    # At most one automated paid Record-Chain archive attempt per day.
+    # At most one automated paid Record-Chain archive attempt per UTC day.
     - cron: "17 7 * * *"
+
+permissions:
+  contents: write
 
 concurrency:
   group: main-write-lock
   queue: max
   cancel-in-progress: false
 
-permissions:
-  contents: write
-
 jobs:
   archive:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
-    env:
-      ARWEAVE_UPLOAD_MODE: "dry-run"
-      REQUESTED_ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || 'dry-run' }}
-      ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
-      ARWEAVE_HTTP_TIMEOUT_MS: "30000"
-      ARWEAVE_READBACK_MAX_RETRIES: "30"
-      ARWEAVE_READBACK_DELAY_MS: "10000"
-      ARWEAVE_READBACK_MAX_SECONDS: "420"
+    timeout-minutes: 35
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+          ref: main
 
       - name: Record toolchain provenance
         run: |
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version-file: ".node-version"
 
-      - name: Install Node dependencies
-        run: npm ci
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -r requirements-ci.txt
+          npm ci
 
-      - name: Install Python dependencies
-        run: python3 -m pip install -r requirements-ci.txt
-
-      - name: Rebase before Arweave scan
+      - name: Rebase before backlog scan
         run: |
           set -euo pipefail
           git fetch origin main --prune
           git rebase origin/main
 
-      - name: Detect Arweave backlog
+      - name: Detect Record-Chain archive backlog
         id: backlog
         run: |
           python3 scripts/detect_record_chain_pipeline_backlog.py --github-output > /tmp/pipeline-backlog.env
           cat /tmp/pipeline-backlog.env >> "$GITHUB_OUTPUT"
           cat /tmp/pipeline-backlog.env
 
-      - name: Resolve Arweave upload mode
+      - name: Resolve upload mode
         id: mode
         env:
           EVENT_NAME: ${{ github.event_name }}
           EVENT_ACTOR: ${{ github.actor }}
+          REQUESTED_MODE: ${{ github.event.inputs.upload_mode || 'dry-run' }}
         run: |
           set -euo pipefail
           mode="dry-run"
-
           if [ "$EVENT_NAME" = "schedule" ]; then
             mode="live"
           elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then
-              printf '%s\n' "Bot dispatch cannot authorize a paid upload; forcing dry-run."
+              printf '%s\n' "Bot workflow dispatch cannot authorize paid mode; forcing dry-run."
             else
-              mode="$REQUESTED_ARWEAVE_UPLOAD_MODE"
+              mode="$REQUESTED_MODE"
             fi
           else
             printf '%s\n' "Automated upstream event is dry-run only."
           fi
-
           case "$mode" in
             dry-run|live) ;;
-            *)
-              printf '%s\n' "::error::Invalid resolved Arweave upload mode: $mode"
-              exit 1
-              ;;
+            *) echo "Invalid upload mode: $mode" >&2; exit 1 ;;
           esac
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "Resolved Arweave mode: $mode"
 
-          printf 'ARWEAVE_UPLOAD_MODE=%s\n' "$mode" >> "$GITHUB_ENV"
-          printf 'ARWEAVE_UPLOAD_MODE=%s\n' "$mode" >> "$GITHUB_OUTPUT"
-          printf 'Resolved ARWEAVE_UPLOAD_MODE=%s event=%s actor=%s\n' "$mode" "$EVENT_NAME" "$EVENT_ACTOR"
-
-      - name: Wait for native OTS
-        if: steps.backlog.outputs.ots_matches_chain != 'true' || steps.backlog.outputs.ots_archivable_for_arweave != 'true'
+      - name: Wait for matching archivable Native OTS
+        if: >-
+          steps.backlog.outputs.arweave_archive_needed == 'true' &&
+          (steps.backlog.outputs.ots_matches_chain != 'true' ||
+           steps.backlog.outputs.ots_archivable_for_arweave != 'true')
         run: |
-          printf '%s\n' "Native OTS is not archivable for Arweave yet; waiting for OTS upgrade/verification."
-          printf 'chain=%s ots=%s ots_matches=%s archivable=%s\n' "${{ steps.backlog.outputs.chain_latest_record_id }}" "${{ steps.backlog.outputs.ots_latest_record_id }}" "${{ steps.backlog.outputs.ots_matches_chain }}" "${{ steps.backlog.outputs.ots_archivable_for_arweave }}"
+          printf '%s\n' "Native OTS is not yet archivable for the current chain head; no paid upload will run."
+          printf 'chain=%s ots=%s ots_matches=%s archivable=%s\n' \
+            "${{ steps.backlog.outputs.chain_latest_record_id }}" \
+            "${{ steps.backlog.outputs.ots_latest_record_id }}" \
+            "${{ steps.backlog.outputs.ots_matches_chain }}" \
+            "${{ steps.backlog.outputs.ots_archivable_for_arweave }}"
 
-      - name: Verify native OTS latest before archive
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
-        run: |
-          python3 - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          mode = os.environ.get("ARWEAVE_UPLOAD_MODE", "dry-run")
-          tip = json.loads(Path("record-chain/chain-tip.json").read_text())
-          ots_path = Path("api/record-chain-native-ots-latest.json")
-
-          if not ots_path.exists():
-              msg = "api/record-chain-native-ots-latest.json missing"
-              if mode == "live":
-                  raise SystemExit(msg + "; refusing live Arweave upload without native OTS")
-              print("WARN:", msg, "- dry-run may continue")
-              raise SystemExit(0)
-
-          ots = json.loads(ots_path.read_text())
-          mismatches = []
-          for key in ["latest_record_id", "latest_record_sha256", "native_record_count"]:
-              if ots.get(key) != tip.get(key):
-                  mismatches.append(key)
-          if ots.get("legacy_main_chain_jsonl_is_not_source") is not True:
-              mismatches.append("legacy_main_chain_jsonl_is_not_source")
-
-          if mismatches:
-              msg = f"native OTS latest does not match chain-tip: {mismatches}"
-              if mode == "live":
-                  raise SystemExit(msg + "; refusing live Arweave upload")
-              print("WARN:", msg, "- dry-run may continue")
-          else:
-              print("Native OTS latest matches current chain-tip.")
-
-          archivable = (
-              ots.get("ots_status") == "verified"
-              and ots.get("bitcoin_verified") is True
-              and ots.get("strict_bitcoin_verified") is True
-          ) or (
-              ots.get("ots_status") == "upgraded"
-              and ots.get("bitcoin_attestation_embedded") is True
-              and ots.get("bitcoin_pending") is False
-          )
-
-          if not archivable:
-              msg = (
-                  "native OTS latest is not archivable: requires either "
-                  "verified+bitcoin_verified=true+strict_bitcoin_verified=true or "
-                  "upgraded+bitcoin_attestation_embedded=true+bitcoin_pending=false"
-              )
-              if mode == "live":
-                  raise SystemExit(msg + "; refusing live Arweave upload")
-              print("WARN:", msg, "- dry-run may continue")
-          else:
-              print("Native OTS latest is archivable for Arweave mirror/archive.")
-          PY
-
-      - name: Build incremental Arweave archive manifest
-        id: build
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
+      - name: Run one bounded incremental archive attempt
+        if: >-
+          steps.backlog.outputs.arweave_archive_needed == 'true' &&
+          steps.backlog.outputs.ots_matches_chain == 'true' &&
+          steps.backlog.outputs.ots_archivable_for_arweave == 'true'
         env:
-          ARKEY: ${{ secrets.ARKEY }}
-        run: |
-          set +e
-          python scripts/run_record_chain_arweave_incremental.py --mode "${ARWEAVE_UPLOAD_MODE}"
-          build_exit_code=$?
-          set -e
-          printf 'exit_code=%s\n' "${build_exit_code}" >> "$GITHUB_OUTPUT"
-          printf 'Arweave incremental archive builder exit code: %s\n' "${build_exit_code}"
-          # Failure metadata must be committed before the job is reported failed.
-          exit 0
-
-      - name: Verify Arweave archive metadata
-        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code == '0'
-        run: |
-          if [ "${ARWEAVE_UPLOAD_MODE}" = "live" ]; then
-            python scripts/verify_record_chain_arweave_archive.py
-          else
-            python scripts/verify_record_chain_arweave_archive.py --allow-stale-live-chain-tip
-          fi
-
-      - name: Verify record chain
-        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code == '0'
-        run: python scripts/trinity_record_chain.py verify
-
-      - name: Commit Arweave archive metadata
-        if: steps.backlog.outputs.arweave_archive_needed == 'true'
-        env:
-          ARKEY: ${{ secrets.ARKEY }}
-          BUILD_EXIT_CODE: ${{ steps.build.outputs.exit_code }}
-        run: |
-          set -euo pipefail
-
-          git config user.name "trinity-record-chain-bot"
-          git config user.email "actions@github.com"
-
-          verify_archive_outputs() {
-            if [ "${ARWEAVE_UPLOAD_MODE}" = "live" ]; then
-              python scripts/verify_record_chain_arweave_archive.py
-            else
-              python scripts/verify_record_chain_arweave_archive.py --allow-stale-live-chain-tip
-            fi
-          }
-
-          rebuild_archive_outputs() {
-            if [ "${BUILD_EXIT_CODE}" != "0" ]; then
-              printf '%s\n' "Preserving failed/partial Arweave transaction checkpoint; refusing a second paid upload during push retry."
-              return 0
-            fi
-            python scripts/run_record_chain_arweave_incremental.py --mode "${ARWEAVE_UPLOAD_MODE}"
-            verify_archive_outputs
-            python scripts/trinity_record_chain.py verify
-          }
-
-          stage_archive_metadata() {
-            git status --short
-            git add \
-              record-chain/arweave-archives/ \
-              api/record-chain-arweave-index.json \
-              record-chain/arweave-backlog.json \
-              api/record-chain-arweave-backlog.json \
-              record-chain/ots/native-ots-backlog.json \
-              api/record-chain-native-ots-backlog.json \
-              record-chain/arweave-wallet-ledger.json
-          }
-
-          assert_clean_worktree() {
-            if [ -n "$(git status --porcelain)" ]; then
-              printf '%s\n' "Worktree dirty after archive metadata commit/amend; generated files were not fully staged."
-              git status --short
-              exit 1
-            fi
-          }
-
-          stage_archive_metadata
-
-          if git diff --cached --quiet; then
-            printf '%s\n' "No Arweave archive metadata changes to commit."
-            exit 0
-          fi
-
-          if [ "${BUILD_EXIT_CODE}" = "0" ]; then
-            git commit -m "archive: update native record-chain Arweave archive metadata"
-          else
-            git commit -m "archive: checkpoint incomplete Arweave upload for safe readback resume"
-          fi
-          assert_clean_worktree
-
-          git fetch origin main --prune
-          git rebase origin/main
-          assert_clean_worktree
-
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              printf '%s\n' "Push succeeded."
-              exit 0
-            fi
-
-            printf '%s\n' "Push rejected; remote main advanced. Rebasing archive metadata. Attempt ${attempt}."
-            git fetch origin main --prune
-            git rebase origin/main
-
-            rebuild_archive_outputs
-            stage_archive_metadata
-
-            if ! git diff --cached --quiet; then
-              git commit --amend --no-edit
-            fi
-
-            assert_clean_worktree
-            sleep $((attempt * 5))
-          done
-
-          printf '%s\n' "::error::Failed to push Arweave archive metadata after retries."
-          exit 1
-
-      - name: Fail after persisting incomplete upload checkpoint
-        if: steps.backlog.outputs.arweave_archive_needed == 'true' && steps.build.outputs.exit_code != '0'
-        run: |
-          printf '%s\n' "::error::Arweave archive is not verified yet. Any posted transaction checkpoint was persisted for readback-only resume."
-          exit "${{ steps.build.outputs.exit_code }}"
+          ARWEAVE_UPLOAD_MODE: ${{ steps.mode.outputs.mode }}
+          ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: "--import=./scripts/arweave_runtime_spend_guard.mjs"
+          ARWEAVE_MINIMUM_REMAINING_AR: "0.25"
+          ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
+          ARWEAVE_HTTP_TIMEOUT_MS: "30000"
+          ARWEAVE_READBACK_MAX_RETRIES: "30"
+          ARWEAVE_READBACK_DELAY_MS: "10000"
+          ARWEAVE_READBACK_MAX_SECONDS: "420"
+        run: python3 scripts/run_record_chain_arweave_workflow_once.py

@@ -53,4 +53,30 @@ protection.cooldown_seconds_for_commit = keyed_cooldown_seconds
 # forces an uncached read immediately before any durable write.
 protection._COOLDOWN_CACHE_SECONDS = 30.0
 
+# A successful GitHub API response that contains no materialization commit must
+# not be interpreted as "no cooldown" in an established deployment. This closes
+# the rare path-filter/history-window fail-open case. A genuinely new empty
+# deployment can opt in explicitly after an operator verifies that history is
+# actually empty.
+_original_latest_intake_commit = protection.IntakeProtectionMiddleware._latest_intake_commit
+
+
+async def _latest_intake_commit_fail_closed(self, *, force: bool):
+    latest = await _original_latest_intake_commit(self, force=force)
+    allow_empty = os.environ.get("TRINITY_ALLOW_EMPTY_INTAKE_HISTORY", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+    if latest is None and not allow_empty:
+        raise RuntimeError(
+            "durable intake history was not found; refusing to fail open. "
+            "Set TRINITY_ALLOW_EMPTY_INTAKE_HISTORY=true only for a verified new empty deployment"
+        )
+    return latest
+
+
+protection.IntakeProtectionMiddleware._latest_intake_commit = _latest_intake_commit_fail_closed
+
 app = protection.app

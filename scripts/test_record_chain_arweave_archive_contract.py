@@ -7,6 +7,7 @@ Asserts:
 - automated live Record-Chain upload is limited to one daily schedule
 - human dispatch may explicitly request live mode
 - paid payloads route through the incremental builder
+- one bounded orchestrator owns metadata push retries without re-uploading
 - existing crash-safe upload/readback behavior remains available
 - repository/API boundary and backlog contracts remain intact
 """
@@ -86,13 +87,8 @@ def main() -> None:
             errors.append("paid archive workflow must route through incremental payload builder")
         if "run_record_chain_arweave_archive.py --mode" in text:
             errors.append("workflow directly invokes full-history runner instead of incremental wrapper")
-
-        if "git fetch origin main --prune" not in text or "git rebase origin/main" not in text:
-            errors.append("arweave-archive workflow must fetch origin main and rebase origin/main before push retry")
-        first_rebase = text.find("git rebase origin/main")
-        push_loop = text.find("for attempt in 1 2 3")
-        if first_rebase == -1 or push_loop == -1 or first_rebase > push_loop:
-            errors.append("arweave-archive workflow must rebase before entering push retry loop")
+        if "run_record_chain_arweave_workflow_once.py" not in text:
+            errors.append("workflow missing bounded single-spend orchestrator")
 
     # 2. Scripts exist
     build_script = ROOT / "scripts" / "build_record_chain_arweave_archive.py"
@@ -100,7 +96,15 @@ def main() -> None:
     crash_safe_runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
     incremental_builder = ROOT / "scripts" / "record_chain_arweave_incremental.py"
     incremental_runner = ROOT / "scripts" / "run_record_chain_arweave_incremental.py"
-    for script in [build_script, verify_script, crash_safe_runner, incremental_builder, incremental_runner]:
+    workflow_runner = ROOT / "scripts" / "run_record_chain_arweave_workflow_once.py"
+    for script in [
+        build_script,
+        verify_script,
+        crash_safe_runner,
+        incremental_builder,
+        incremental_runner,
+        workflow_runner,
+    ]:
         if not script.exists():
             errors.append(f"missing {script.relative_to(ROOT)}")
 
@@ -111,9 +115,30 @@ def main() -> None:
             "build_incremental_payload_json",
             "runner.builder.build_payload_json = build_incremental_payload_json",
             "runner.main()",
+            "evaluate_daily_spend",
         ]:
             if marker not in runner_text:
-                errors.append(f"incremental runner missing crash-safe delegation marker: {marker}")
+                errors.append(f"incremental runner missing crash-safe or daily-budget marker: {marker}")
+
+    if workflow_runner.exists():
+        workflow_runner_text = workflow_runner.read_text(encoding="utf-8")
+        for marker in [
+            "git fetch",
+            "origin",
+            "main",
+            "git rebase",
+            "push_without_reupload",
+            "The Arweave uploader will not run again",
+        ]:
+            if marker not in workflow_runner_text:
+                errors.append(f"bounded archive orchestrator missing marker: {marker}")
+        retry_block = workflow_runner_text.split("def push_without_reupload", 1)[-1].split("def main", 1)[0]
+        if "run_record_chain_arweave_incremental.py" in retry_block:
+            errors.append("push retry block must never invoke the paid incremental uploader")
+        first_rebase = retry_block.find('"git", "rebase", "origin/main"')
+        push_call = retry_block.find('"git", "push", "origin", "HEAD:main"')
+        if first_rebase == -1 or push_call == -1 or first_rebase > push_call:
+            errors.append("bounded archive orchestrator must rebase before each metadata push")
 
     if incremental_builder.exists():
         delta_text = incremental_builder.read_text(encoding="utf-8")
@@ -123,6 +148,7 @@ def main() -> None:
             "previous_archive_txid",
             "delta_record_count",
             "content_base64",
+            "does not match the current chain prefix",
         ]:
             if marker not in delta_text:
                 errors.append(f"incremental builder missing marker: {marker}")
