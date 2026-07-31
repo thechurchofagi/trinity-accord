@@ -8,8 +8,10 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -37,6 +39,15 @@ FORBIDDEN_ACTIVE = [
     "/api/gateway-builder-route-map.v1.json",
     "/api/gateway-workflows.v1.json",
 ]
+
+# A Pages deployment can be correct while one CDN edge briefly resets a TCP
+# connection during propagation. Retry each individual live read so a single
+# transient edge failure does not invalidate an otherwise exact deployment.
+# Content, digest, and marker validation remain unchanged after a response is
+# obtained.
+LIVE_READ_ATTEMPTS = 4
+LIVE_READ_BACKOFF_SECONDS = 1.0
+RETRYABLE_HTTP_STATUS = {408, 425, 429, 500, 502, 503, 504}
 
 # Human-facing pages are generated HTML, so compare revision-specific required
 # markers instead of attempting to compare Markdown source bytes to HTML bytes.
@@ -209,13 +220,35 @@ def read_live(site: str, path: str, token: str, timeout: int) -> bytes:
     req = urllib.request.Request(
         busted,
         headers={
-            "User-Agent": "trinity-deployment-freshness/1.3",
+            "User-Agent": "trinity-deployment-freshness/1.4",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
         },
     )
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read()
+
+    for attempt in range(1, LIVE_READ_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code not in RETRYABLE_HTTP_STATUS or attempt == LIVE_READ_ATTEMPTS:
+                raise
+            exc.close()
+            detail = f"HTTP {exc.code} {exc.reason}"
+        except (OSError, http.client.HTTPException) as exc:
+            if attempt == LIVE_READ_ATTEMPTS:
+                raise
+            detail = repr(exc)
+
+        delay = LIVE_READ_BACKOFF_SECONDS * (2 ** (attempt - 1))
+        print(
+            f"{path}: transient live read failure on attempt "
+            f"{attempt}/{LIVE_READ_ATTEMPTS}: {detail}; retrying in {delay:.1f}s",
+            file=sys.stderr,
+        )
+        time.sleep(delay)
+
+    raise AssertionError("live read retry loop exhausted without returning or raising")
 
 
 def check_forbidden(path: str, text: str, errors: list[str]) -> None:
