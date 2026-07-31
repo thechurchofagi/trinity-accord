@@ -86,7 +86,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>46f2ecea39ffdf33</code>. Latest technical record <code>R-000000106</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>6d2b21f37f9634e7</code>. Latest technical record <code>R-000000106</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
