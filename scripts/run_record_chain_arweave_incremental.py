@@ -27,24 +27,31 @@ def _requested_mode(argv: list[str]) -> str:
 
 def main() -> int:
     if _requested_mode(sys.argv[1:]) == "live":
-        decision = evaluate_daily_spend("record_chain_arweave_archive")
-        if not decision.allowed:
-            print(
-                json.dumps(
-                    {
-                        "result": "not_uploaded",
-                        "reason": decision.reason,
-                        "kind": decision.kind,
-                        "utc_date": decision.utc_date,
-                        "paid_count": decision.paid_count,
-                        "daily_limit": decision.daily_limit,
-                    },
-                    sort_keys=True,
+        # A posted transaction whose readback is incomplete is resumed by the
+        # crash-safe runner without creating a second transaction. Daily spend
+        # limits must block only a new paid post, never this no-cost recovery.
+        readback_resume = runner._find_incomplete_current_archive() is not None
+        if not readback_resume:
+            decision = evaluate_daily_spend("record_chain_arweave_archive")
+            if not decision.allowed:
+                print(
+                    json.dumps(
+                        {
+                            "result": "not_uploaded",
+                            "reason": decision.reason,
+                            "kind": decision.kind,
+                            "utc_date": decision.utc_date,
+                            "paid_count": decision.paid_count,
+                            "daily_limit": decision.daily_limit,
+                        },
+                        sort_keys=True,
+                    )
                 )
-            )
-            # Distinct non-zero result: callers must preserve existing metadata
-            # and must never reinterpret this as permission to post another tx.
-            return 75
+                # Distinct non-zero result: callers must preserve existing metadata
+                # and must never reinterpret this as permission to post another tx.
+                return 75
+        else:
+            print("Daily spend gate bypassed for readback-only resume of an existing Arweave transaction.")
     return runner.main()
 
 
