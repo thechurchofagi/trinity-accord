@@ -69,26 +69,46 @@ def test_scheduled_backlog_job_has_no_paid_path() -> None:
     assert "contents: read" in workflow
 
 
-def test_record_chain_workflow_uses_single_spend_orchestrator() -> None:
+def test_record_chain_workflow_uses_single_spend_orchestrator_weekly() -> None:
     workflow = (ROOT / ".github/workflows/record-chain-arweave-archive.yml").read_text()
     orchestrator = (ROOT / "scripts/run_record_chain_arweave_workflow_once.py").read_text()
+    assert 'cron: "17 7 * * 3"' in workflow
+    assert 'cron: "17 7 * * *"' not in workflow
     assert "run_record_chain_arweave_workflow_once.py" in workflow
     assert "arweave_runtime_spend_guard.mjs" in workflow
     assert "The Arweave uploader will not run again" in orchestrator
     assert orchestrator.count("run_record_chain_arweave_incremental.py") == 2
-    # One branch is dry-run and one is the initial live attempt; the push retry
-    # function itself contains no uploader invocation.
     retry = orchestrator.split("def push_without_reupload", 1)[1].split("def main", 1)[0]
     assert "run_record_chain_arweave_incremental.py" not in retry
 
 
-def test_native_ots_workflow_uses_single_spend_orchestrator() -> None:
+def test_native_ots_daily_workflow_has_no_paid_path() -> None:
     workflow = (ROOT / ".github/workflows/native-ots-upgrade-watch.yml").read_text()
     orchestrator = (ROOT / "scripts/run_native_ots_workflow_once.py").read_text()
+    weekly_builder = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text()
     assert "run_native_ots_workflow_once.py" in workflow
-    assert "arweave_runtime_spend_guard.mjs" in workflow
+    assert "upgrade_only" in workflow
+    for forbidden in [
+        "ARKEY",
+        "ARWEAVE_JWK",
+        "arweave_runtime_spend_guard.mjs",
+        "--enable-paid-upload",
+    ]:
+        assert forbidden not in workflow
+    for forbidden in ["evaluate_daily_spend", "--enable-paid-upload", "ARWEAVE_JWK_PATH"]:
+        assert forbidden not in orchestrator
     retry = orchestrator.split("def push_metadata_only", 1)[1].split("def main", 1)[0]
     assert "run_native_ots_upgrade_verify.py" not in retry
+    assert "trinityaccord.weekly-native-ots-evidence.v1" in weekly_builder
+
+
+def test_standalone_heartbeat_workflow_has_no_paid_path() -> None:
+    workflow = (ROOT / ".github/workflows/waiting-heartbeat-capsule.yml").read_text()
+    assert "schedule:" not in workflow
+    assert "workflow_run:" not in workflow
+    assert "ARKEY" not in workflow
+    assert "arweave_upload_waiting_heartbeat_capsule" not in workflow
+    assert "contents: read" in workflow
 
 
 def test_runtime_guard_enforces_reserve_daily_limit_and_non_canary_metadata() -> None:
@@ -106,7 +126,10 @@ def test_cooldown_missing_history_fails_closed() -> None:
     assert "refusing to fail open" in source
 
 
-def test_incremental_delta_checks_prefix_sha() -> None:
+def test_incremental_delta_checks_prefix_sha_and_embeds_continuity() -> None:
     source = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text()
     assert "does not match the current chain prefix" in source
     assert 'prefix_ref.get("record_sha256") != previous_latest_sha' in source
+    assert "trinityaccord.weekly-continuity-bundle.v1" in source
+    assert "trinityaccord.weekly-heartbeat-summary.v1" in source
+    assert "trinityaccord.weekly-native-ots-evidence.v1" in source
