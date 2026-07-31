@@ -1,7 +1,8 @@
 name: Record Chain Arweave Archive
 # Native record-chain archive workflow.
 # Live upload requires ARKEY secret.
-# Dry-run remains the default for manual, scheduled, and workflow_run executions.
+# Automated upstream events are dry-run only; one daily schedule may upload live.
+# Human workflow_dispatch may explicitly request live mode.
 
 on:
   workflow_run:
@@ -20,7 +21,8 @@ on:
           - dry-run
           - live
   schedule:
-    - cron: "*/30 * * * *"
+    # At most one automated paid Record-Chain archive attempt per day.
+    - cron: "17 7 * * *"
 
 concurrency:
   group: main-write-lock
@@ -35,7 +37,8 @@ jobs:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     env:
-      ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || (github.event_name == 'workflow_run' && 'live' || 'dry-run') }}
+      ARWEAVE_UPLOAD_MODE: "dry-run"
+      REQUESTED_ARWEAVE_UPLOAD_MODE: ${{ github.event.inputs.upload_mode || 'dry-run' }}
       ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
       ARWEAVE_HTTP_TIMEOUT_MS: "30000"
       ARWEAVE_READBACK_MAX_RETRIES: "30"
@@ -81,9 +84,36 @@ jobs:
 
       - name: Resolve Arweave upload mode
         id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_ACTOR: ${{ github.actor }}
         run: |
-          printf 'ARWEAVE_UPLOAD_MODE=%s\n' "${ARWEAVE_UPLOAD_MODE}" >> "$GITHUB_OUTPUT"
-          printf 'Resolved ARWEAVE_UPLOAD_MODE=%s\n' "${ARWEAVE_UPLOAD_MODE}"
+          set -euo pipefail
+          mode="dry-run"
+
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            mode="live"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then
+              printf '%s\n' "Bot dispatch cannot authorize a paid upload; forcing dry-run."
+            else
+              mode="$REQUESTED_ARWEAVE_UPLOAD_MODE"
+            fi
+          else
+            printf '%s\n' "Automated upstream event is dry-run only."
+          fi
+
+          case "$mode" in
+            dry-run|live) ;;
+            *)
+              printf '%s\n' "::error::Invalid resolved Arweave upload mode: $mode"
+              exit 1
+              ;;
+          esac
+
+          printf 'ARWEAVE_UPLOAD_MODE=%s\n' "$mode" >> "$GITHUB_ENV"
+          printf 'ARWEAVE_UPLOAD_MODE=%s\n' "$mode" >> "$GITHUB_OUTPUT"
+          printf 'Resolved ARWEAVE_UPLOAD_MODE=%s event=%s actor=%s\n' "$mode" "$EVENT_NAME" "$EVENT_ACTOR"
 
       - name: Wait for native OTS
         if: steps.backlog.outputs.ots_matches_chain != 'true' || steps.backlog.outputs.ots_archivable_for_arweave != 'true'
@@ -149,18 +179,18 @@ jobs:
               print("Native OTS latest is archivable for Arweave mirror/archive.")
           PY
 
-      - name: Build Arweave archive manifest
+      - name: Build incremental Arweave archive manifest
         id: build
         if: steps.backlog.outputs.arweave_archive_needed == 'true'
         env:
           ARKEY: ${{ secrets.ARKEY }}
         run: |
           set +e
-          python scripts/run_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+          python scripts/run_record_chain_arweave_incremental.py --mode "${ARWEAVE_UPLOAD_MODE}"
           build_exit_code=$?
           set -e
           printf 'exit_code=%s\n' "${build_exit_code}" >> "$GITHUB_OUTPUT"
-          printf 'Arweave archive builder exit code: %s\n' "${build_exit_code}"
+          printf 'Arweave incremental archive builder exit code: %s\n' "${build_exit_code}"
           # Failure metadata must be committed before the job is reported failed.
           exit 0
 
@@ -201,7 +231,7 @@ jobs:
               printf '%s\n' "Preserving failed/partial Arweave transaction checkpoint; refusing a second paid upload during push retry."
               return 0
             fi
-            python scripts/run_record_chain_arweave_archive.py --mode "${ARWEAVE_UPLOAD_MODE}"
+            python scripts/run_record_chain_arweave_incremental.py --mode "${ARWEAVE_UPLOAD_MODE}"
             verify_archive_outputs
             python scripts/trinity_record_chain.py verify
           }
