@@ -1,0 +1,77 @@
+name: One-Time Render Gateway Deploy
+
+# Temporary, self-path-limited deployment bridge.
+# It runs only when this exact workflow file is first merged to main. After a
+# successful deployment it must be removed by a follow-up PR, preserving the
+# repository's long-term workflow_dispatch-only Render deployment boundary.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/render-gateway-deploy-once.yml"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: one-time-render-gateway-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.repository == 'thechurchofagi/trinity-accord' && github.ref == 'refs/heads/main' && (github.actor == 'thechurchofagi' || github.actor == 'github-actions[bot]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Deploy exact main commit to Render
+        id: deploy
+        continue-on-error: true
+        env:
+          RENDER: ${{ secrets.RENDER }}
+        run: |
+          set -euo pipefail
+          source_sha="$(git rev-parse HEAD)"
+          printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
+          python scripts/render_manual_deploy.py \
+            --service trinity-record-chain-gateway \
+            --commit-id "$source_sha" \
+            --wait \
+            --deploy 2>&1 | tee "$RUNNER_TEMP/render-gateway-deploy.log"
+          grep -q "RENDER_DEPLOY_LIVE" "$RUNNER_TEMP/render-gateway-deploy.log"
+
+      - name: Record successful deployment on security PR
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.deploy.outputs.source_sha }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh pr comment 819 --repo "$GITHUB_REPOSITORY" --body "Render Gateway deployment: **LIVE**\n\n- exact deployed commit: \`$SOURCE_SHA\`\n- service: \`trinity-record-chain-gateway\`\n- workflow evidence: $RUN_URL\n\nThe helper reached \`RENDER_DEPLOY_LIVE\` after waiting for the exact commit."
+
+      - name: Record failed deployment on security PR
+        if: steps.deploy.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.deploy.outputs.source_sha }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh pr comment 819 --repo "$GITHUB_REPOSITORY" --body "Render Gateway deployment: **FAILED OR UNCONFIRMED**\n\n- attempted commit: \`${SOURCE_SHA:-unknown}\`\n- service: \`trinity-record-chain-gateway\`\n- workflow evidence: $RUN_URL\n\nNo live-deployment claim should be made from this run."
+
+      - name: Fail if deployment was not confirmed live
+        if: steps.deploy.outcome != 'success'
+        run: exit 1
