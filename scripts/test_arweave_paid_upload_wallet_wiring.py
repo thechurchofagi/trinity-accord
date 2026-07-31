@@ -2,11 +2,12 @@
 """Contract for Arweave paid-upload wallet accounting boundaries.
 
 Active native upload paths must account for posted transactions, including
-readback failures. Retired historical/Phase-5 paths must not access wallets,
-write the wallet ledger, or regenerate public wallet status. Archive backlog
-preview mode must remain strictly read-only. Native OTS post-rebase wallet
-status may be generated through the derived-only reconciler rather than being
-inlined in the workflow YAML.
+readback failures. The Record-Chain workflow now enters through an incremental
+payload wrapper, which delegates signing, transaction checkpointing, readback,
+and wallet accounting to the existing crash-safe native runner. Retired
+historical/Phase-5 paths must not access wallets, write the wallet ledger, or
+regenerate public wallet status. Archive backlog preview mode must remain
+strictly read-only.
 """
 from __future__ import annotations
 
@@ -109,13 +110,28 @@ def main() -> int:
         ],
     )
     require_contains(
+        "scripts/run_record_chain_arweave_incremental.py",
+        [
+            "import run_record_chain_arweave_archive as runner",
+            "build_incremental_payload_json",
+            "runner.builder.build_payload_json = build_incremental_payload_json",
+            "runner.main()",
+        ],
+    )
+    require_contains(
         ".github/workflows/record-chain-arweave-archive.yml",
         [
             "secrets.ARKEY",
-            "run_record_chain_arweave_archive.py",
+            "run_record_chain_arweave_incremental.py",
             "record-chain/arweave-wallet-ledger.json",
             "group: main-write-lock",
             "checkpoint incomplete Arweave upload for safe readback resume",
+        ],
+    )
+    require_absent(
+        ".github/workflows/record-chain-arweave-archive.yml",
+        [
+            "run_record_chain_arweave_archive.py --mode",
         ],
     )
 
@@ -140,6 +156,7 @@ def main() -> int:
             "scripts/reconcile_native_ots_generated_state.py",
             "group: main-write-lock",
             "git push origin HEAD:main",
+            'cron: "42 6 * * *"',
         ],
     )
     require_contains(
@@ -209,7 +226,7 @@ def main() -> int:
     )
 
     print(
-        "PASS: active paid paths account for wallet spend; retired paths have no wallet capability; "
+        "PASS: incremental active paid paths account for wallet spend; retired paths have no wallet capability; "
         "backlog dry-run is read-only; Native OTS derived wallet state is reconciled safely"
     )
     return 0

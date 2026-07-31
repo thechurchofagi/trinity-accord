@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Arweave live-readiness and retired-path contract.
 
-The current native archive route must remain live-capable and exact-pinned.
-Legacy hash-chain/Phase-5 canaries must remain read-only and unable to access
-wallet secrets or report repository writes.
+The current native archive route must remain live-capable, incremental,
+crash-safe, and exact-pinned. Legacy hash-chain/Phase-5 canaries must remain
+read-only and unable to access wallet secrets or report repository writes.
 """
 from __future__ import annotations
 
@@ -74,6 +74,22 @@ def main() -> int:
         if not any(error.startswith("current native archive runner missing") for error in errors):
             ok("current crash-safe runner invokes the authoritative native builder")
 
+    incremental = ROOT / "scripts" / "run_record_chain_arweave_incremental.py"
+    if not incremental.exists():
+        errors.append("scripts/run_record_chain_arweave_incremental.py missing")
+    else:
+        text = incremental.read_text(encoding="utf-8")
+        for marker in [
+            "import run_record_chain_arweave_archive as runner",
+            "build_incremental_payload_json",
+            "runner.builder.build_payload_json = build_incremental_payload_json",
+            "runner.main()",
+        ]:
+            if marker not in text:
+                errors.append(f"incremental live wrapper missing: {marker}")
+        if not any(error.startswith("incremental live wrapper missing") for error in errors):
+            ok("incremental wrapper delegates signing, posting, checkpointing, and readback to the crash-safe runner")
+
     current_workflow = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
     if not current_workflow.exists():
         errors.append("current native archive workflow missing")
@@ -87,10 +103,16 @@ def main() -> int:
             errors.append("current native archive workflow lacks write serialization")
         else:
             ok("current native archive workflow is serialized with main-write-lock")
-        if "run_record_chain_arweave_archive.py" not in text:
-            errors.append("current native archive workflow does not invoke the crash-safe native runner")
+        if "run_record_chain_arweave_incremental.py" not in text:
+            errors.append("current native archive workflow does not invoke the incremental crash-safe wrapper")
+        elif "run_record_chain_arweave_archive.py --mode" in text:
+            errors.append("current native archive workflow bypasses the incremental wrapper")
         else:
-            ok("current native archive workflow invokes the crash-safe native runner")
+            ok("current native archive workflow invokes the incremental crash-safe wrapper")
+        if 'cron: "17 7 * * *"' not in text or "Automated upstream event is dry-run only" not in text:
+            errors.append("current native archive workflow lacks daily-live/upstream-dry-run cost boundary")
+        else:
+            ok("current native archive workflow limits automated paid archive attempts to one daily schedule")
 
     retired_paths = {
         "legacy data archive": ROOT / ".github/workflows/record-chain-data-arweave-archive.yml",
@@ -167,7 +189,7 @@ def main() -> int:
             print(f"  - {error}")
         return 1
 
-    print("\nPASS: current native Arweave path is live-ready; legacy paid paths are retired")
+    print("\nPASS: current incremental native Arweave path is live-ready; legacy paid paths are retired")
     return 0
 
 

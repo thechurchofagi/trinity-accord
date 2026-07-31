@@ -2,8 +2,8 @@ name: Native OTS Upgrade Watch
 
 on:
   schedule:
-    # Run hourly at minute 42 UTC.
-    - cron: "42 * * * *"
+    # Run once daily before the Record-Chain incremental archive window.
+    - cron: "42 6 * * *"
   workflow_dispatch:
     inputs:
       mode:

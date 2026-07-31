@@ -92,12 +92,10 @@ def main() -> int:
 
     formal_window_open = readiness.get("formal_window_open") is True
     if formal_window_open:
-        # Formal window is open — validate open-window contract
         require(readiness.get("status") == "formal_window_open", "readiness status must be formal_window_open when window is open")
         require(readiness.get("founding_guardian_application_formal_window_open") is True, "founding guardian formal window must be true")
         require(readiness.get("must_not_submit_formal_application_yet") is False, "must_not_submit_formal_application_yet must be false when window is open")
     else:
-        # Formal window not yet open — validate blocked contract, independent of overall production status.
         require(readiness.get("status") in ("prelaunch_blocked", "formal_window_blocked"), "readiness status must be blocked when window is closed")
         require(readiness.get("founding_guardian_application_formal_window_open") is False, "founding guardian formal window must be false")
         require(readiness.get("must_not_submit_formal_application_yet") is True, "must_not_submit_formal_application_yet must be true when window is closed")
@@ -120,24 +118,51 @@ def main() -> int:
 
     require(rate.get("schema") == "trinityaccord.gateway-rate-limit-policy.v1", "rate policy schema mismatch")
     policy = rate.get("policy", {})
-    require(policy.get("global_submit_limit_per_hour") == 100, "global_submit_limit_per_hour must be 100")
-    require(policy.get("participant_submit_limit_per_hour") == 10, "participant_submit_limit_per_hour must be 10")
+
+    cooldown = policy.get("global_acceptance_cooldown", {})
+    require(cooldown.get("minimum_seconds") == 3600, "global cooldown minimum must be 3600 seconds")
+    require(cooldown.get("maximum_seconds") == 7200, "global cooldown maximum must be 7200 seconds")
+    require(cooldown.get("randomized") is True, "global cooldown must be randomized")
+    require(cooldown.get("exact_reopening_time_disclosed") is False, "exact reopening time must not be disclosed")
+    require(cooldown.get("reopening_time_not_computable_from_public_repository_state") is True,
+            "public repository state must not reveal the reopening time")
+
+    secondary = policy.get("secondary_submit_attempt_limits", {})
+    require(secondary.get("global_submit_limit_per_hour") == 100,
+            "secondary global_submit_limit_per_hour must be 100")
+    require(secondary.get("participant_submit_limit_per_hour") == 10,
+            "secondary participant_submit_limit_per_hour must be 10")
+
+    content_limits = policy.get("content_limits", {})
+    require(content_limits.get("request_max_bytes") == 98304, "request limit must be 96 KiB")
+    require(content_limits.get("persistent_record_draft_max_bytes") == 49152,
+            "record draft limit must be 48 KiB")
+    require(content_limits.get("text_field_max_characters") == 4000,
+            "text field limit must be 4000 characters")
+
     rate_types = set(policy.get("applies_to_record_types", []))
     for rt in ["echo", "verification", "guardian_application"]:
         require(rt in rate_types, f"rate limit must apply to {rt}")
 
     limited = rate.get("response_when_limited", {})
-    require(limited.get("http_status") == 429, "rate limit http_status must be 429")
-    require(limited.get("diagnostic_code") == "RATE_LIMIT_EXCEEDED", "rate limit diagnostic code mismatch")
+    require(limited.get("cooldown_http_status") == 429, "cooldown http_status must be 429")
+    require(limited.get("content_http_status") == 413, "content http_status must be 413")
+    require(limited.get("semantic_content_http_status") == 422, "semantic content http_status must be 422")
+    require(limited.get("accepted") is False, "limited response accepted must be false")
+    require(limited.get("cost_explanation_required") is True, "limited response must explain cost")
+    require(limited.get("project_purpose_explanation_required") is True,
+            "limited response must explain project purpose")
 
     impl = rate.get("implementation_status", {})
     require(impl.get("server_side_enforcement_required_before_formal_window") is True, "rate enforcement must be required before formal window")
-    # Enforcement may be true (enforced) or false (not yet enforced); this contract requires it to remain required.
+    require(impl.get("server_side_enforcement_verified") is True, "server-side enforcement must be verified")
+    require(impl.get("durable_across_restart") is True, "acceptance cooldown must survive restart")
+    require(impl.get("multi_instance_safe") is False, "single-process final gate must disclose multi-instance limitation")
 
     entry_count = head.get("entry_count", 0)
     require(entry_count >= 1, "main chain expects at least genesis entry")
 
-    print("PASS: Phase 7A prelaunch contracts with production successor phase")
+    print("PASS: Phase 7A prelaunch contracts with layered production resource protection")
     return 0
 
 

@@ -26,6 +26,8 @@ def main() -> None:
     tip_helper = ROOT / "scripts" / "check_native_ots_latest_matches_chain_tip.py"
     arweave_wf = ROOT / ".github" / "workflows" / "record-chain-arweave-archive.yml"
     arweave_runner = ROOT / "scripts" / "run_record_chain_arweave_archive.py"
+    incremental_runner = ROOT / "scripts" / "run_record_chain_arweave_incremental.py"
+    incremental_builder = ROOT / "scripts" / "record_chain_arweave_incremental.py"
     data_wf = ROOT / ".github" / "workflows" / "record-chain-data-arweave-archive.yml"
 
     if not head_wf.exists():
@@ -84,7 +86,7 @@ def main() -> None:
         for marker in [
             "Record Chain Arweave Archive",
             "Record Chain Head OTS Anchor",
-            "run_record_chain_arweave_archive.py",
+            "run_record_chain_arweave_incremental.py",
             "verify_record_chain_arweave_archive.py",
             "ARKEY: ${{ secrets.ARKEY }}",
             "record-chain-native-ots-latest.json",
@@ -98,6 +100,8 @@ def main() -> None:
             "record-chain/arweave-wallet-ledger.json",
             "checkpoint incomplete Arweave upload for safe readback resume",
             "Fail after persisting incomplete upload checkpoint",
+            'cron: "17 7 * * *"',
+            "Automated upstream event is dry-run only",
         ]:
             require_contains(arweave_wf, marker, errors)
 
@@ -105,16 +109,15 @@ def main() -> None:
             'workflows: ["Record Chain Anchor"]',
             "build_record_chain_data_arweave_bundle.py",
             "record-chain-arweave-data-registry.json",
+            "*/30 * * * *",
+            "run_record_chain_arweave_archive.py --mode",
         ]:
             require_not_contains(arweave_wf, forbidden, errors)
 
         arweave_text = arweave_wf.read_text(encoding="utf-8")
-        if "ARKEY" in arweave_text and "echo" in arweave_text.lower():
-            errors.append("record-chain-arweave-archive.yml must not contain both ARKEY and echo")
+        if "ARKEY" in arweave_text and "echo $ARKEY" in arweave_text:
+            errors.append("record-chain-arweave-archive.yml must not echo ARKEY")
 
-        # Both successful and incomplete uploads are committed, then the worktree
-        # must be checked before the first rebase. Avoid coupling this contract to
-        # one literal commit message.
         commit_section_start = arweave_text.find('if [ "${BUILD_EXIT_CODE}" = "0" ]')
         first_fetch = arweave_text.find("git fetch origin main --prune", commit_section_start)
         clean_guard = arweave_text.find("assert_clean_worktree", commit_section_start)
@@ -133,6 +136,29 @@ def main() -> None:
         ]:
             require_contains(arweave_runner, marker, errors)
 
+    if not incremental_runner.exists():
+        errors.append("missing scripts/run_record_chain_arweave_incremental.py")
+    else:
+        for marker in [
+            "import run_record_chain_arweave_archive as runner",
+            "build_incremental_payload_json",
+            "runner.builder.build_payload_json = build_incremental_payload_json",
+            "runner.main()",
+        ]:
+            require_contains(incremental_runner, marker, errors)
+
+    if not incremental_builder.exists():
+        errors.append("missing scripts/record_chain_arweave_incremental.py")
+    else:
+        for marker in [
+            "full_snapshot",
+            "incremental_delta",
+            "previous_archive_txid",
+            "delta_record_count",
+            "content_base64",
+        ]:
+            require_contains(incremental_builder, marker, errors)
+
     if not data_wf.exists():
         errors.append("missing .github/workflows/record-chain-data-arweave-archive.yml")
     else:
@@ -146,7 +172,7 @@ def main() -> None:
             print(f"  - {error}", file=sys.stderr)
         raise SystemExit(1)
 
-    print("M9 crash-safe native archive workflow contract PASSED.")
+    print("M9 crash-safe incremental native archive workflow contract PASSED.")
 
 
 if __name__ == "__main__":

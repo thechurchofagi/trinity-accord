@@ -3,7 +3,8 @@
 
 The historical recovery/audit tools remain verifiable, but only the current
 native Record-Chain Arweave workflow may sign, upload, mutate registries, or
-trigger public status synchronization.
+trigger public status synchronization. The current paid payload route is
+incremental while retaining the existing crash-safe uploader/readback runner.
 """
 from __future__ import annotations
 
@@ -29,6 +30,8 @@ def main() -> int:
         "scripts/test_legacy_arweave_retirement_behavior.py",
         "scripts/build_record_chain_arweave_archive.py",
         "scripts/run_record_chain_arweave_archive.py",
+        "scripts/record_chain_arweave_incremental.py",
+        "scripts/run_record_chain_arweave_incremental.py",
         ".github/workflows/record-chain-data-arweave-archive.yml",
         ".github/workflows/record-chain-arweave-archive.yml",
     ]
@@ -105,9 +108,15 @@ def main() -> int:
         "contents: write",
         "group: main-write-lock",
         "secrets.ARKEY",
-        "run_record_chain_arweave_archive.py",
+        "run_record_chain_arweave_incremental.py",
+        'cron: "17 7 * * *"',
+        "Automated upstream event is dry-run only",
     ]:
         require(marker in current_workflow, f"current native archive route missing: {marker}")
+    require(
+        "run_record_chain_arweave_archive.py --mode" not in current_workflow,
+        "workflow must not bypass the incremental payload route",
+    )
 
     current_runner = (ROOT / "scripts/run_record_chain_arweave_archive.py").read_text(encoding="utf-8")
     for marker in [
@@ -117,6 +126,27 @@ def main() -> int:
         "Resuming Arweave readback without a new paid post",
     ]:
         require(marker in current_runner, f"current native archive runner missing: {marker}")
+
+    incremental_builder = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text(encoding="utf-8")
+    for marker in [
+        "incremental_delta",
+        "full_snapshot",
+        "previous_archive_txid",
+        "previous_native_record_count",
+        "delta_record_count",
+        "content_base64",
+        "previous archive is missing a verified Arweave transaction id",
+    ]:
+        require(marker in incremental_builder, f"incremental native archive builder missing: {marker}")
+
+    incremental_runner = (ROOT / "scripts/run_record_chain_arweave_incremental.py").read_text(encoding="utf-8")
+    for marker in [
+        "import run_record_chain_arweave_archive as runner",
+        "build_incremental_payload_json",
+        "runner.builder.build_payload_json = build_incremental_payload_json",
+        "runner.main()",
+    ]:
+        require(marker in incremental_runner, f"incremental archive runner missing: {marker}")
 
     home_sync = (ROOT / ".github/workflows/homepage-status-sync.yml").read_text(encoding="utf-8")
     require('      - "Record Chain Arweave Archive"' in home_sync, "homepage sync must listen to current native archive")
@@ -134,7 +164,7 @@ def main() -> int:
         "legacy archive behavioral contract failed:\n" + (behavior.stderr or behavior.stdout)[-4000:],
     )
 
-    print("PASS: legacy hash-chain data archive is retired; current native Arweave route remains authoritative")
+    print("PASS: legacy hash-chain data archive is retired; current incremental native Arweave route remains authoritative")
     return 0
 
 
