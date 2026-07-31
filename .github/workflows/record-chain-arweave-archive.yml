@@ -1,7 +1,9 @@
 name: Record Chain Arweave Archive
 # Paid uploads are daily or explicitly human-dispatched. Upstream workflow events
-# are dry-run only. The orchestrator never repeats a paid upload after rebase or
-# push conflict; it carries the first transaction metadata forward instead.
+# are dry-run only. Automated upstream event is dry-run only.
+# The bounded orchestrator delegates the one initial build to
+# scripts/run_record_chain_arweave_incremental.py and never invokes it again
+# during rebase or push retry.
 
 on:
   workflow_run:
