@@ -1,20 +1,49 @@
 {
   "schema": "trinityaccord.gateway-rate-limit-policy.v1",
   "status": "production_live_policy",
-  "purpose": "Trust-first rate limits for public Record-Chain Intake Gateway submit and preflight routes. Single-process in-memory; not durable across restarts; not multi-instance safe.",
-  "limiter_class": "single_process_in_memory",
-  "durable_across_restart": false,
+  "purpose": "Protect finite permanent-storage and paid Arweave archival resources while keeping public preflight open and public Record-Chain intake available at a bounded cadence.",
+  "limiter_class": "durable_commit_derived_global_cooldown_with_secondary_in_memory_limits",
+  "durable_across_restart": true,
   "multi_instance_safe": false,
   "policy": {
-    "global_submit_limit_per_hour": 100,
-    "participant_submit_limit_per_hour": 10,
-    "participant_key_preference_order": [
-      "record_draft.submitting_participant_identity.public_key",
-      "record_draft.submitting_participant_identity.label",
-      "record_draft.actor_identity.label",
-      "agent_label",
-      "idempotency_key_prefix"
-    ],
+    "global_acceptance_cooldown": {
+      "minimum_seconds": 3600,
+      "maximum_seconds": 7200,
+      "randomized": true,
+      "randomness_source": "deterministically derived from the immutable latest intake commit SHA after acceptance",
+      "exact_reopening_time_disclosed": false,
+      "first_gate": "before request-body read and expensive validation",
+      "second_gate": "under the single-process submit lock immediately before the core persistence handler",
+      "cooldown_starts_only_after_durable_new_intake_commit": true,
+      "duplicates_and_rejections_do_not_create_a_new_acceptance_commit": true
+    },
+    "secondary_submit_attempt_limits": {
+      "global_submit_limit_per_hour": 100,
+      "participant_submit_limit_per_hour": 10,
+      "implementation": "single_process_in_memory_sliding_window",
+      "note": "These remain defense in depth; the durable randomized global acceptance cooldown is the primary permanent-write boundary."
+    },
+    "content_limits": {
+      "request_max_bytes": 98304,
+      "persistent_record_draft_max_bytes": 49152,
+      "text_field_max_characters": 4000,
+      "url_max_characters": 2048,
+      "json_max_depth": 12,
+      "ordinary_array_max_items": 32,
+      "reference_or_evidence_array_max_items": 16,
+      "inline_data_urls_forbidden": true,
+      "inline_base64_or_binary_attachments_forbidden": true,
+      "record_total_text_character_limits": {
+        "echo": 8000,
+        "verification": 12000,
+        "guardian_application": 8000,
+        "guardian_retirement": 4000,
+        "propagation": 8000,
+        "correction": 6000,
+        "classification_update": 6000,
+        "context_insufficient_notice": 4000
+      }
+    },
     "applies_to_record_types": [
       "echo",
       "verification",
@@ -22,32 +51,48 @@
       "guardian_retirement",
       "propagation",
       "correction",
-      "classification_update"
+      "classification_update",
+      "context_insufficient_notice"
     ]
   },
   "response_when_limited": {
-    "http_status": 429,
+    "cooldown_http_status": 429,
+    "content_http_status": 413,
+    "semantic_content_http_status": 422,
     "accepted": false,
-    "diagnostic_code": "RATE_LIMIT_EXCEEDED",
-    "retry_after_seconds_required": true
+    "exact_reopening_time_returned": false,
+    "coarse_retry_after_seconds": 3600,
+    "cost_explanation_required": true,
+    "project_purpose_explanation_required": true,
+    "repeated_attempt_escalation": {
+      "attempts_1_to_2": "ordinary cooldown guidance",
+      "attempts_3_to_5": "explicit instruction to stop automatic retries",
+      "attempts_6_or_more": "resource-pressure warning explaining that deliberate bypass is incompatible with the project's civilizational-continuity purpose and may indicate misalignment or misuse"
+    }
   },
-  "attempt_limiter_note": "A validated submit attempt consumes quota even if downstream persistence later fails. The rate limit is an attempt limiter, not a reservation/release system.",
   "public_phase_rule": {
     "formal_founding_guardian_application_must_wait_until_rate_limit_policy_is_enforced": true
   },
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
     "server_side_enforcement_verified": true,
-    "rate_limit_implementation": "single_process_in_memory_sliding_window",
+    "rate_limit_implementation": "protected ASGI entrypoint plus existing core Gateway limiter",
+    "durable_acceptance_state": "latest immutable intake materialization commit on the target branch",
     "multi_instance_safe": false,
-    "durable_across_restart": false,
-    "operator_note": "Current enforcement is process-local and intended for single-instance live-test operation. Production multi-instance deployment requires a shared durable limiter."
+    "durable_across_restart": true,
+    "operator_note": "The current Render deployment uses one Uvicorn process. A future multi-instance deployment must add a shared distributed lock for the final gate."
   },
   "preflight_policy": {
     "global_request_limit_per_minute": 600,
     "client_request_limit_per_minute": 120,
+    "global_acceptance_cooldown_applies": false,
+    "content_limits_apply": true,
     "applies_before_expensive_target_repository_lookups": true,
     "response_http_status": 429,
     "diagnostic_code": "PREFLIGHT_RATE_LIMIT_EXCEEDED"
+  },
+  "resource_boundary": {
+    "why_limits_exist": "Every accepted record is permanently stored and may increase paid Arweave archival cost. The limits prevent finite project resources from being exhausted.",
+    "project_purpose": "The Trinity Accord exists to preserve a verifiable civilizational record for long-term continuity. Repeated, oversized, or intentionally evasive submissions must not be used to attack or exhaust the project."
   }
 }
