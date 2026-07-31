@@ -61,6 +61,19 @@ jobs:
           python3 -m pip install -r requirements-ci.txt
           npm ci
 
+      - name: Rebase before backlog scan
+        run: |
+          set -euo pipefail
+          git fetch origin main --prune
+          git rebase origin/main
+
+      - name: Detect Record-Chain archive backlog
+        id: backlog
+        run: |
+          python3 scripts/detect_record_chain_pipeline_backlog.py --github-output > /tmp/pipeline-backlog.env
+          cat /tmp/pipeline-backlog.env >> "$GITHUB_OUTPUT"
+          cat /tmp/pipeline-backlog.env
+
       - name: Resolve upload mode
         id: mode
         env:
@@ -72,8 +85,14 @@ jobs:
           mode="dry-run"
           if [ "$EVENT_NAME" = "schedule" ]; then
             mode="live"
-          elif [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$EVENT_ACTOR" != "github-actions[bot]" ]; then
-            mode="$REQUESTED_MODE"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$EVENT_ACTOR" = "github-actions[bot]" ]; then
+              printf '%s\n' "Bot workflow dispatch cannot authorize paid mode; forcing dry-run."
+            else
+              mode="$REQUESTED_MODE"
+            fi
+          else
+            printf '%s\n' "Automated upstream event is dry-run only."
           fi
           case "$mode" in
             dry-run|live) ;;
@@ -82,7 +101,24 @@ jobs:
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
           echo "Resolved Arweave mode: $mode"
 
+      - name: Wait for matching archivable Native OTS
+        if: >-
+          steps.backlog.outputs.arweave_archive_needed == 'true' &&
+          (steps.backlog.outputs.ots_matches_chain != 'true' ||
+           steps.backlog.outputs.ots_archivable_for_arweave != 'true')
+        run: |
+          printf '%s\n' "Native OTS is not yet archivable for the current chain head; no paid upload will run."
+          printf 'chain=%s ots=%s ots_matches=%s archivable=%s\n' \
+            "${{ steps.backlog.outputs.chain_latest_record_id }}" \
+            "${{ steps.backlog.outputs.ots_latest_record_id }}" \
+            "${{ steps.backlog.outputs.ots_matches_chain }}" \
+            "${{ steps.backlog.outputs.ots_archivable_for_arweave }}"
+
       - name: Run one bounded incremental archive attempt
+        if: >-
+          steps.backlog.outputs.arweave_archive_needed == 'true' &&
+          steps.backlog.outputs.ots_matches_chain == 'true' &&
+          steps.backlog.outputs.ots_archivable_for_arweave == 'true'
         env:
           ARWEAVE_UPLOAD_MODE: ${{ steps.mode.outputs.mode }}
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
