@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-07-31T16:52:00+08:00 — protected intake cooldown, content limits, and cost boundary
+# deploy-trigger: 2026-07-31T17:38:00+08:00 — secret-keyed intake cooldown, content limits, and cost boundary
 services:
   # Legacy Issue Gateway v1 — retired-only compatibility surface.
   - type: web_service
@@ -30,7 +30,7 @@ services:
     plan: starter
     autoDeploy: false
     buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
-    startCommand: uvicorn apps.record_chain_intake_gateway.protected_app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
@@ -40,6 +40,8 @@ services:
       - key: TRINITY_TARGET_BRANCH
         value: main
       - key: TRINITY_GITHUB_TOKEN
+        sync: false
+      - key: TRINITY_COOLDOWN_SECRET
         sync: false
       - key: TRINITY_GATEWAY_BASE_URL
         value: https://trinity-record-chain-gateway.onrender.com
