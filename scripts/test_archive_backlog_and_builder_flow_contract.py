@@ -203,24 +203,55 @@ def assert_bad_classification_doctor_fails() -> None:
         )
 
 
+def assert_backlog_workflow_boundary(workflow: str) -> None:
+    """Accept either a guarded writer or the safer retired read-only scanner."""
+    read_only = (
+        "contents: read" in workflow
+        and "contents: write" not in workflow
+        and "git push" not in workflow
+        and "git commit" not in workflow
+    )
+    if read_only:
+        for marker in [
+            "--mode dry-run",
+            "This scheduled workflow never uploads to Arweave",
+            "Paid repair requires an explicit human dispatch",
+        ]:
+            require(marker in workflow, f"read-only backlog scan missing boundary marker: {marker}")
+        for forbidden in [
+            "--mode live",
+            "--enable-paid-upload",
+            "secrets.ARKEY",
+            "vars.ARKEY",
+            "ARWEAVE_JWK",
+            "git add",
+            "record-chain/arweave-archives/",
+            "api/record-chain-arweave-index.json",
+        ]:
+            require(forbidden not in workflow, f"read-only backlog scan retains paid/write marker: {forbidden}")
+        return
+
+    require(
+        "record-chain/arweave-archives/" in workflow,
+        "archive backlog writer must git add record-chain/arweave-archives/",
+    )
+    require(
+        "api/record-chain-arweave-index.json" in workflow,
+        "archive backlog writer must git add api/record-chain-arweave-index.json",
+    )
+    require(
+        "Failed to push archive backlog repair metadata after retries" in workflow,
+        "archive backlog writer must use push retry/rebase for repaired metadata",
+    )
+
+
 def main() -> None:
     workflow = read(".github/workflows/archive-backlog-repair.yml")
     builder_text = read("downloads/record-chain-builder.mjs")
     manifest = json.loads(read("api/record-chain-builder-bundles.v1.json"))
     builder_bytes = (ROOT / "downloads" / "record-chain-builder.mjs").read_bytes()
 
-    require(
-        "record-chain/arweave-archives/" in workflow,
-        "archive-backlog-repair.yml must git add record-chain/arweave-archives/",
-    )
-    require(
-        "api/record-chain-arweave-index.json" in workflow,
-        "archive-backlog-repair.yml must git add api/record-chain-arweave-index.json",
-    )
-    require(
-        "Failed to push archive backlog repair metadata after retries" in workflow,
-        "archive-backlog-repair.yml must use push retry/rebase for repaired metadata",
-    )
+    assert_backlog_workflow_boundary(workflow)
 
     require(
         "const rt = normalizeRecordType(recordType)" in builder_text,
@@ -245,7 +276,6 @@ def main() -> None:
     ]:
         assert_template(record_type)
 
-    # Guardian semantic template assertions (hyphen and underscore forms)
     assert_guardian_template(
         "guardian-application",
         "guardian_application",
@@ -269,7 +299,6 @@ def main() -> None:
 
     assert_bad_classification_doctor_fails()
 
-    # Patch 5: Negative tests for Builder build fail-fast
     assert_builder_command_fails(["guardian-application"], "--guardian-id is required")
     assert_builder_command_fails(
         ["guardian-application", "--guardian-id", "auto"],
@@ -289,7 +318,6 @@ def main() -> None:
     assert_builder_command_fails(["propagation"], "--body is required")
     assert_builder_command_fails(["correction"], "--body is required")
 
-    # Patch 6: Negative tests for Builder doctor content validation
     assert_doctor_fails_for_draft(
         "guardian_retirement",
         {
