@@ -84,6 +84,8 @@ jobs:
         env:
           ARWEAVE_UPLOAD_MODE: ${{ steps.mode.outputs.mode }}
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+          NODE_OPTIONS: "--import=./scripts/arweave_runtime_spend_guard.mjs"
+          ARWEAVE_MINIMUM_REMAINING_AR: "0.25"
           ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
           ARWEAVE_HTTP_TIMEOUT_MS: "30000"
           ARWEAVE_READBACK_MAX_RETRIES: "30"
