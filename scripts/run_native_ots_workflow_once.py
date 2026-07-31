@@ -83,7 +83,14 @@ def cached_changes() -> bool:
     return run("git", "diff", "--cached", "--quiet", check=False).returncode != 0
 
 
+def assert_clean_tracked_worktree() -> None:
+    status = run("git", "status", "--porcelain", "--untracked-files=no").stdout.strip()
+    if status:
+        raise SystemExit(f"tracked Native OTS worktree is dirty before metadata rebase/push:\n{status}")
+
+
 def push_metadata_only(commit_message: str) -> None:
+    assert_clean_tracked_worktree()
     for attempt in range(1, 4):
         run("git", "fetch", "origin", "main", "--prune")
         rebased = run("git", "rebase", "origin/main", check=False)
@@ -96,6 +103,7 @@ def push_metadata_only(commit_message: str) -> None:
             if subject != commit_message:
                 raise SystemExit(f"unexpected Native OTS commit during retry: {subject}")
             run("git", "commit", "--amend", "--no-edit")
+        assert_clean_tracked_worktree()
         pushed = run("git", "push", "origin", "HEAD:main", check=False)
         if pushed.returncode == 0:
             return
@@ -167,6 +175,7 @@ def main() -> int:
     run("git", "config", "user.name", "github-actions[bot]")
     run("git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
     run("git", "commit", "-m", commit_message)
+    assert_clean_tracked_worktree()
     push_metadata_only(commit_message)
     return lifecycle.returncode
 
