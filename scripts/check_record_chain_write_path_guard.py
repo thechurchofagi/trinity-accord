@@ -72,6 +72,7 @@ MAINTENANCE_OVERRIDE_PREFIX = "record-chain/maintenance-overrides/"
 MAINTENANCE_OVERRIDE_TOKEN = "RECORD_CHAIN_MAINTENANCE_OVERRIDE_OK"
 
 APPROVED_GATEWAY_PREFIXES = (
+    "intake: materialize ",
     "intake: submission ",
     "intake: pending ",
     "intake: receipt ",
