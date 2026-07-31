@@ -1,173 +1,27 @@
-name: Waiting Heartbeat Arweave Capsule
+name: Waiting Heartbeat Arweave Capsule (Retired)
 
+# Daily Waiting Heartbeat records remain in the native Record-Chain and continue
+# through the local Native OTS lifecycle. Standalone paid Arweave capsules are
+# retired: weekly Record-Chain continuity bundles now carry heartbeat records,
+# a compact heartbeat summary, and the latest mature Native OTS proof together.
 on:
-  workflow_run:
-    workflows: ["Record Chain Head OTS Anchor"]
-    types: [completed]
   workflow_dispatch:
-  schedule:
-    - cron: "27 * * * *"
-
-concurrency:
-  group: main-write-lock
-  queue: max
-  cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: waiting-heartbeat-capsule-retired
+  cancel-in-progress: true
 
 jobs:
-  capsule:
-    if: ${{ (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') && (github.event_name == 'workflow_dispatch' || vars.WAITING_HEARTBEAT_ARWEAVE_CAPSULE_ENABLED == 'true') }}
+  explain:
     runs-on: ubuntu-24.04
-    env:
-      ARKEY: ${{ secrets.ARKEY }}
-      WAITING_HEARTBEAT_ARWEAVE_MAX_COST_AR: ${{ vars.WAITING_HEARTBEAT_ARWEAVE_MAX_COST_AR || '0.01' }}
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
-
-      - name: Record toolchain provenance
+      - name: Explain retired paid path
         run: |
-          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
-          cat "$RUNNER_TEMP/toolchain-provenance.json"
-
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        with:
-          python-version: "3.11"
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version-file: ".node-version"
-
-      - name: Install dependencies
-        run: |
-          python3 -m pip install -r requirements-ci.txt
-          npm ci
-
-      - name: Rebase onto latest main
-        run: |
-          set -euo pipefail
-          git fetch origin main --prune
-          git rebase origin/main
-
-      - name: Generate waiting heartbeat status
-        run: python3 scripts/generate_waiting_heartbeat_status.py
-
-      - name: Capsule OTS coverage preflight
-        id: capsule_preflight
-        run: |
-          set -euo pipefail
-          python3 scripts/build_waiting_heartbeat_arweave_capsule.py
-
-      - name: Upload capsule
-        id: upload
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true'
-        run: |
-          set +e
-          node scripts/arweave_upload_waiting_heartbeat_capsule.mjs --payload "${{ steps.capsule_preflight.outputs.capsule_path }}" --heartbeat-id "${{ steps.capsule_preflight.outputs.heartbeat_id }}" --out "${{ steps.capsule_preflight.outputs.upload_result_path }}"
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Repair pending capsule readback
-        id: repair
-        if: steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
-        run: |
-          set +e
-          node scripts/repair_waiting_heartbeat_arweave_capsule_readback.mjs --payload "${{ steps.capsule_preflight.outputs.capsule_path }}" --heartbeat-id "${{ steps.capsule_preflight.outputs.heartbeat_id }}" --upload-result "${{ steps.capsule_preflight.outputs.upload_result_path }}"
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Regenerate status and public artifacts
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true' || steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
-        run: |
-          python3 scripts/generate_waiting_heartbeat_status.py
-          python3 scripts/update_public_generated_artifacts.py
-          python3 scripts/generate_public_home_status.py --check
-          python3 scripts/trinity_record_chain.py verify
-
-      - name: Commit capsule metadata
-        if: steps.capsule_preflight.outputs.capsule_upload_needed == 'true' || steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true'
-        run: |
-          set -euo pipefail
-
-          git config user.name "trinity-waiting-heartbeat-bot"
-          git config user.email "actions@github.com"
-
-          regenerate_status_artifacts() {
-            python3 scripts/generate_waiting_heartbeat_status.py
-            python3 scripts/update_public_generated_artifacts.py
-            python3 scripts/generate_public_home_status.py --check
-            python3 scripts/trinity_record_chain.py verify
-          }
-
-          stage_capsule_metadata() {
-            git status --short
-            git add -A record-chain/heartbeat api/waiting-heartbeat-status.json api/record-chain-status.json api/record-chain-overlays.json api/public-home-status.json index.md sitemap.xml
-          }
-
-          stage_capsule_metadata
-
-          if git diff --cached --quiet; then
-            echo "No generated capsule metadata changes to commit."
-            exit 0
-          fi
-
-          git commit -m "heartbeat: archive waiting heartbeat capsule"
-
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Worktree dirty after commit; generated files were not fully staged."
-            git status --short
-            exit 1
-          fi
-
-          for attempt in 1 2 3; do
-            if git push origin HEAD:main; then
-              echo "Push succeeded."
-              exit 0
-            fi
-
-            echo "Push rejected; remote main advanced. Rebasing and regenerating. Attempt ${attempt}."
-            git fetch origin main --prune
-            git rebase origin/main
-
-            regenerate_status_artifacts
-            stage_capsule_metadata
-
-            if ! git diff --cached --quiet; then
-              git commit --amend --no-edit
-            fi
-
-            if [ -n "$(git status --porcelain)" ]; then
-              echo "Worktree dirty after amend."
-              git status --short
-              exit 1
-            fi
-          done
-
-          echo "Failed to push after retries."
-          exit 1
-
-      - name: Fail on preserved upload or repair error
-        if: ${{ (steps.capsule_preflight.outputs.capsule_upload_needed == 'true' && steps.upload.outputs.exit_code != '0') || (steps.capsule_preflight.outputs.capsule_readback_repair_needed == 'true' && steps.repair.outputs.exit_code != '0') }}
-        run: |
-          echo "::error::Capsule upload or repair exited nonzero after generated metadata was preserved."
-          echo "upload_exit=${{ steps.upload.outputs.exit_code }} repair_exit=${{ steps.repair.outputs.exit_code }}"
-          exit 1
-
-      - name: Fail on non-retryable capsule state
-        if: steps.capsule_preflight.outputs.capsule_hard_failure == 'true'
-        run: |
-          echo "::error::Waiting heartbeat capsule has a non-retryable Arweave state."
-          echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
-          echo "reason=${{ steps.capsule_preflight.outputs.capsule_skip_reason }}"
-          exit 1
-
-      - name: Capsule waiting summary
-        if: steps.capsule_preflight.outputs.capsule_upload_needed != 'true' && steps.capsule_preflight.outputs.capsule_readback_repair_needed != 'true' && steps.capsule_preflight.outputs.capsule_hard_failure != 'true'
-        run: |
-          echo "Capsule upload skipped."
-          echo "status=${{ steps.capsule_preflight.outputs.capsule_status }}"
-          echo "reason=${{ steps.capsule_preflight.outputs.capsule_skip_reason }}"
+          printf '%s\n' "Standalone Waiting Heartbeat Arweave uploads are retired."
+          printf '%s\n' "Daily heartbeats remain native Record-Chain records with local OTS coverage."
+          printf '%s\n' "Their durable off-platform mirror is the weekly continuity bundle."
+          printf '%s\n' "No wallet secret is available to this workflow and no paid upload can occur."
