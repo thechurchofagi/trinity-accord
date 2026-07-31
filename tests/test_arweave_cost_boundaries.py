@@ -1,0 +1,112 @@
+from __future__ import annotations
+
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+from scripts.arweave_daily_spend_guard import evaluate_daily_spend
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_daily_spend_guard_blocks_second_same_kind(tmp_path: Path) -> None:
+    ledger = tmp_path / "ledger.json"
+    ledger.write_text(
+        json.dumps(
+            {
+                "entries": [
+                    {
+                        "kind": "record_chain_arweave_archive",
+                        "status": "paid",
+                        "paid_at": "2026-07-31T01:02:03Z",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    decision = evaluate_daily_spend(
+        "record_chain_arweave_archive",
+        ledger_path=ledger,
+        now=datetime(2026, 7, 31, 12, 0, tzinfo=timezone.utc),
+    )
+    assert decision.allowed is False
+    assert decision.reason == "daily_paid_upload_limit_reached"
+    assert decision.paid_count == 1
+    assert decision.daily_limit == 1
+
+
+def test_daily_spend_guard_keeps_kinds_independent(tmp_path: Path) -> None:
+    ledger = tmp_path / "ledger.json"
+    ledger.write_text(
+        json.dumps(
+            {
+                "entries": [
+                    {
+                        "kind": "record_chain_arweave_archive",
+                        "status": "paid",
+                        "paid_at": "2026-07-31T01:02:03Z",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    decision = evaluate_daily_spend(
+        "native_ots_bundle_archive",
+        ledger_path=ledger,
+        now=datetime(2026, 7, 31, 12, 0, tzinfo=timezone.utc),
+    )
+    assert decision.allowed is True
+
+
+def test_scheduled_backlog_job_has_no_paid_path() -> None:
+    workflow = (ROOT / ".github/workflows/archive-backlog-repair.yml").read_text()
+    assert 'cron: "17 * * * *"' not in workflow
+    assert 'cron: "47 8 * * *"' in workflow
+    assert "--mode live" not in workflow
+    assert "enable-paid-upload" not in workflow
+    assert "contents: read" in workflow
+
+
+def test_record_chain_workflow_uses_single_spend_orchestrator() -> None:
+    workflow = (ROOT / ".github/workflows/record-chain-arweave-archive.yml").read_text()
+    orchestrator = (ROOT / "scripts/run_record_chain_arweave_workflow_once.py").read_text()
+    assert "run_record_chain_arweave_workflow_once.py" in workflow
+    assert "arweave_runtime_spend_guard.mjs" in workflow
+    assert "The Arweave uploader will not run again" in orchestrator
+    assert orchestrator.count("run_record_chain_arweave_incremental.py") == 2
+    # One branch is dry-run and one is the initial live attempt; the push retry
+    # function itself contains no uploader invocation.
+    retry = orchestrator.split("def push_without_reupload", 1)[1].split("def main", 1)[0]
+    assert "run_record_chain_arweave_incremental.py" not in retry
+
+
+def test_native_ots_workflow_uses_single_spend_orchestrator() -> None:
+    workflow = (ROOT / ".github/workflows/native-ots-upgrade-watch.yml").read_text()
+    orchestrator = (ROOT / "scripts/run_native_ots_workflow_once.py").read_text()
+    assert "run_native_ots_workflow_once.py" in workflow
+    assert "arweave_runtime_spend_guard.mjs" in workflow
+    retry = orchestrator.split("def push_metadata_only", 1)[1].split("def main", 1)[0]
+    assert "run_native_ots_upgrade_verify.py" not in retry
+
+
+def test_runtime_guard_enforces_reserve_daily_limit_and_non_canary_metadata() -> None:
+    source = (ROOT / "scripts/arweave_runtime_spend_guard.mjs").read_text()
+    assert 'DEFAULT_RESERVE_AR = "0.25"' in source
+    assert "Daily paid Arweave upload limit reached" in source
+    assert "balance - reward < reserve" in source
+    assert "if (" in source and "Canary-Record" in source
+    assert "!allowCanaryTags" in source
+
+
+def test_cooldown_missing_history_fails_closed() -> None:
+    source = (ROOT / "apps/record_chain_intake_gateway/secure_entrypoint.py").read_text()
+    assert "TRINITY_ALLOW_EMPTY_INTAKE_HISTORY" in source
+    assert "refusing to fail open" in source
+
+
+def test_incremental_delta_checks_prefix_sha() -> None:
+    source = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text()
+    assert "does not match the current chain prefix" in source
+    assert 'prefix_ref.get("record_sha256") != previous_latest_sha' in source
