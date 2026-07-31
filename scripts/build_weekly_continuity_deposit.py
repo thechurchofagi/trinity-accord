@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +36,7 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def latest_verified_archive() -> tuple[Path, dict[str, Any]]:
+def latest_verified_archive() -> tuple[Path, dict[str, Any]] | None:
     candidates: list[tuple[int, str, Path, dict[str, Any]]] = []
     for path in ARCHIVES.glob("*/manifest.json"):
         try:
@@ -55,7 +56,7 @@ def latest_verified_archive() -> tuple[Path, dict[str, Any]]:
             continue
         candidates.append((count, str(manifest.get("created_at") or ""), path, manifest))
     if not candidates:
-        raise SystemExit("no verified live Record-Chain Arweave archive is available")
+        return None
     _count, _created, path, manifest = sorted(candidates, key=lambda item: (item[0], item[1]))[-1]
     return path, manifest
 
@@ -72,8 +73,21 @@ def github_output(name: str, value: str) -> None:
             handle.write(f"{name}={value}\n")
 
 
-def build() -> Path:
-    manifest_path, manifest = latest_verified_archive()
+def defer(reason: str) -> None:
+    github_output("deposit_available", "false")
+    github_output("archive_id", "")
+    github_output("deposit_dir", "")
+    github_output("deposit_changed", "false")
+    print(f"Weekly continuity DOI deposit deferred: {reason}")
+
+
+def build() -> Path | None:
+    latest = latest_verified_archive()
+    if latest is None:
+        defer("no verified live Record-Chain Arweave archive is available")
+        return None
+
+    manifest_path, manifest = latest
     archive_dir = manifest_path.parent
     payload_path = archive_dir / "payload.json"
     if not payload_path.is_file():
@@ -81,8 +95,12 @@ def build() -> Path:
 
     payload = read_json(payload_path)
     continuity = payload.get("continuity_bundle")
-    if not isinstance(continuity, dict) or continuity.get("schema") != "trinityaccord.weekly-continuity-bundle.v1":
-        raise SystemExit("latest verified archive is not a weekly continuity bundle")
+    if (
+        not isinstance(continuity, dict)
+        or continuity.get("schema") != "trinityaccord.weekly-continuity-bundle.v1"
+    ):
+        defer("the latest verified archive predates the weekly continuity format")
+        return None
 
     archive_id = str(manifest.get("archive_id") or archive_dir.name)
     target = DEPOSITS / archive_id
@@ -132,12 +150,13 @@ def build() -> Path:
             },
         ],
         "notes": (
-            f"Archive {archive_id}; records {native.get('latest_record_id')}; "
+            f"Archive {archive_id}; records through {native.get('latest_record_id')}; "
             f"Arweave transaction {arweave.get('txid') or arweave.get('tx_id')}; "
             f"heartbeat span {heartbeat.get('period_start')} through {heartbeat.get('period_end')}."
         ),
     }
-    write_json(target / "zenodo-metadata.json", metadata)
+    metadata_path = target / "zenodo-metadata.json"
+    write_json(metadata_path, metadata)
 
     readme = target / "README.txt"
     readme.write_text(
@@ -156,7 +175,7 @@ def build() -> Path:
         encoding="utf-8",
     )
 
-    checksum_paths = [target_payload, target_manifest, target / "zenodo-metadata.json", readme]
+    checksum_paths = [target_payload, target_manifest, metadata_path, readme]
     checksums = target / "checksums.sha256"
     checksums.write_text(
         "".join(f"{sha256(path)}  {path.name}\n" for path in checksum_paths),
@@ -170,7 +189,7 @@ def build() -> Path:
         "source_payload": str(payload_path.relative_to(ROOT)),
         "files": [
             {"name": path.name, "bytes": path.stat().st_size, "sha256": sha256(path)}
-            for path in [target_payload, target_manifest, target / "zenodo-metadata.json", readme, checksums]
+            for path in [target_payload, target_manifest, metadata_path, readme, checksums]
         ],
         "boundary": {
             "deposit_is_mirror_only": True,
@@ -183,6 +202,7 @@ def build() -> Path:
     }
     write_json(target / "deposit-manifest.json", package_manifest)
 
+    github_output("deposit_available", "true")
     github_output("archive_id", archive_id)
     github_output("deposit_dir", str(target.relative_to(ROOT)))
     github_output("deposit_changed", "true")
@@ -195,9 +215,16 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     target = build()
+    if target is None:
+        return 0
     if args.check:
-        status = os.system(f"git diff --exit-code -- {target.relative_to(ROOT)} >/dev/null")
-        if status != 0:
+        result = subprocess.run(
+            ["git", "diff", "--exit-code", "--", str(target.relative_to(ROOT))],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            check=False,
+        )
+        if result.returncode != 0:
             raise SystemExit("weekly continuity deposit is not reproducible")
     return 0
 
