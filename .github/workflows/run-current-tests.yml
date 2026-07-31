@@ -56,3 +56,55 @@ jobs:
       - name: Show current-system success tail
         if: steps.current_system_tests.outcome == 'success'
         run: tail -n 40 /tmp/current-system-tests.log
+
+  verify-zenodo-credential-once:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.ref == 'ops/zenodo-check-final2-20260731' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+    steps:
+      - name: Validate configured Zenodo token with read-only request
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
+            echo "ZENODO_SECRET_NOT_CONFIGURED"
+            exit 10
+          fi
+          response_file="$(mktemp)"
+          http_code="$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --header "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            --header 'Accept: application/json' \
+            'https://zenodo.org/api/deposit/depositions?page=1&size=1')"
+          case "$http_code" in
+            200)
+              python3 - "$response_file" <<'PY'
+import json
+import sys
+from pathlib import Path
+value = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+if not isinstance(value, list):
+    raise SystemExit("ZENODO_RESPONSE_INVALID")
+print("ZENODO_CREDENTIAL_OK")
+print(f"ZENODO_DEPOSITIONS_VISIBLE={len(value)}")
+PY
+              ;;
+            401)
+              echo "ZENODO_AUTHENTICATION_FAILED"
+              exit 11
+              ;;
+            403)
+              echo "ZENODO_PERMISSION_DENIED"
+              exit 12
+              ;;
+            *)
+              echo "ZENODO_UNEXPECTED_HTTP_STATUS=${http_code}"
+              exit 13
+              ;;
+          esac
