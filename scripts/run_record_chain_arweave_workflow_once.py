@@ -4,7 +4,9 @@
 The retry sequence is the programmatic equivalent of ``git fetch origin main
 --prune`` followed by ``git rebase origin/main`` and a metadata-only push. The
 paid incremental builder is invoked once before this retry loop and never from
-inside it.
+inside it. Every successful archive is independently verified before commit;
+after rebase, the same immutable transaction is verified with stale-tip
+allowance rather than rebuilding or paying again.
 """
 from __future__ import annotations
 
@@ -45,6 +47,14 @@ def run(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
     return result
 
 
+def verify_archive(*, allow_stale_tip: bool) -> None:
+    command = ["python3", "scripts/verify_record_chain_arweave_archive.py"]
+    if allow_stale_tip:
+        command.append("--allow-stale-live-chain-tip")
+    run(*command)
+    run("python3", "scripts/trinity_record_chain.py", "verify")
+
+
 def stage_metadata() -> None:
     run("python3", "scripts/detect_archive_backlog.py", "--write")
     if (ROOT / "scripts/generate_arweave_wallet_status.py").exists():
@@ -57,6 +67,12 @@ def cached_changes() -> bool:
     return run("git", "diff", "--cached", "--quiet", check=False).returncode != 0
 
 
+def assert_clean_tracked_worktree() -> None:
+    status = run("git", "status", "--porcelain", "--untracked-files=no").stdout.strip()
+    if status:
+        raise SystemExit(f"tracked worktree is dirty before metadata rebase/push:\n{status}")
+
+
 def amend_derived_metadata(commit_message: str) -> None:
     stage_metadata()
     if cached_changes():
@@ -64,9 +80,12 @@ def amend_derived_metadata(commit_message: str) -> None:
         if subject != commit_message:
             raise SystemExit(f"unexpected archive commit during retry: {subject}")
         run("git", "commit", "--amend", "--no-edit")
+    verify_archive(allow_stale_tip=True)
+    assert_clean_tracked_worktree()
 
 
 def push_without_reupload(commit_message: str) -> None:
+    assert_clean_tracked_worktree()
     for attempt in range(1, 4):
         run("git", "fetch", "origin", "main", "--prune")
         result = run("git", "rebase", "origin/main", check=False)
@@ -110,6 +129,9 @@ def main() -> int:
         print("Daily Record-Chain paid-upload budget already used; deferring without mutation.")
         return 0
 
+    if build.returncode == 0:
+        verify_archive(allow_stale_tip=False)
+
     stage_metadata()
     if not cached_changes():
         if build.returncode == 0:
@@ -125,10 +147,15 @@ def main() -> int:
     run("git", "config", "user.name", "trinity-record-chain-bot")
     run("git", "config", "user.email", "actions@github.com")
     run("git", "commit", "-m", commit_message)
+    assert_clean_tracked_worktree()
     push_without_reupload(commit_message)
 
     if build.returncode != 0:
-        print("Incomplete upload checkpoint was persisted; reporting the original failure.", file=sys.stderr)
+        print(
+            "Fail after persisting incomplete upload checkpoint: "
+            "the original Arweave upload/readback error remains unresolved.",
+            file=sys.stderr,
+        )
         return build.returncode
     return 0
 
