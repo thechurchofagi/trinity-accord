@@ -66,16 +66,18 @@ def test_echo_total_text_limit_is_enforced():
 
 
 def test_verification_has_larger_but_bounded_total_limit():
-    body = _submission("verification", "x" * 4000)
+    body = _submission("verification", "x" * 3900)
     body["record_draft"]["verification_content"] = {
-        "finding": "a" * 4000,
-        "method": "b" * 4000,
-        "limitations": "c" * 3990,
+        "finding": "a" * 3900,
+        "method": "b" * 3900,
+        "limitations": "c" * 3900,
     }
     diagnostics = validate_resource_limits(body)
     assert not any(item["code"] == "RECORD_TOTAL_TEXT_TOO_LONG" for item in diagnostics)
 
-    body["record_draft"]["verification_content"]["limitations"] += "z" * 100
+    # Add another individually bounded field so only the aggregate 12,000-char
+    # verification budget is crossed.
+    body["record_draft"]["verification_content"]["additional_context"] = "z" * 400
     diagnostics = validate_resource_limits(body)
     assert any(item["code"] == "RECORD_TOTAL_TEXT_TOO_LONG" for item in diagnostics)
 
