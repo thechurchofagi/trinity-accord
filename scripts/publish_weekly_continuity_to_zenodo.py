@@ -75,14 +75,13 @@ class ZenodoClient:
     ) -> dict[str, Any]:
         if url.startswith("/"):
             url = self.api_base + url
-        separator = "&" if "?" in url else "?"
-        url = f"{url}{separator}access_token={urllib.parse.quote(self.token)}"
         body = data
         if payload is not None:
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         headers = {
             "User-Agent": "trinity-weekly-continuity/1.0",
             "Accept": "application/json",
+            "Authorization": f"Bearer {self.token}",
         }
         if body is not None:
             headers["Content-Type"] = content_type
