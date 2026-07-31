@@ -156,6 +156,7 @@ def test_real_cli_dry_run_preserves_backlog_bytes() -> None:
 
 
 def test_live_mode_is_explicit_and_routed() -> None:
+    """Manual processor live mode remains explicit for operator-only repair."""
     module = load_module()
     calls: list[object] = []
     module.run_detector_write = lambda: calls.append("detector")
@@ -188,32 +189,40 @@ def test_live_mode_is_explicit_and_routed() -> None:
     require(calls == ["detector", ("native", 2, True)], f"wrong native live routing: {calls}")
 
 
-def test_workflow_transaction_boundary() -> None:
+def test_scheduled_workflow_is_strictly_read_only() -> None:
     text = (ROOT / ".github/workflows/archive-backlog-repair.yml").read_text(encoding="utf-8")
     for marker in [
-        "timeout-minutes: 35",
+        "timeout-minutes: 15",
         "ref: main",
+        "contents: read",
         "--kind record_chain_arweave",
         "--kind native_ots_bundle",
-        "--mode live",
-        "set -euo pipefail",
-        "git push origin HEAD:main",
-        "regenerate_and_stage",
-        "git rebase origin/main",
-        "git commit --amend --no-edit",
-        "done < <(git diff --cached --name-only)",
+        "--mode dry-run",
+        "This scheduled workflow never uploads to Arweave",
+        "Paid repair requires an explicit human dispatch",
     ]:
-        require(marker in text, f"backlog workflow missing transaction marker: {marker}")
-    require("${GITHUB_REF_NAME:-main}" not in text, "write workflow may still push to dispatch branch")
-    require("if git diff --quiet" not in text, "workflow still ignores untracked evidence before staging")
+        require(marker in text, f"read-only backlog workflow missing marker: {marker}")
+    for forbidden in [
+        "--mode live",
+        "--enable-paid-upload",
+        "secrets.ARKEY",
+        "vars.ARKEY",
+        "ARWEAVE_JWK",
+        "contents: write",
+        "git push",
+        "git commit",
+        "git add",
+        "regenerate_and_stage",
+    ]:
+        require(forbidden not in text, f"scheduled backlog scan retains paid/write capability: {forbidden}")
 
 
 def main() -> int:
     test_synthetic_dry_run_never_routes_to_mutators()
     test_real_cli_dry_run_preserves_backlog_bytes()
     test_live_mode_is_explicit_and_routed()
-    test_workflow_transaction_boundary()
-    print("PASS: archive backlog dry-run is read-only and live repair is explicit/serialized")
+    test_scheduled_workflow_is_strictly_read_only()
+    print("PASS: archive backlog dry-run is read-only; live repair remains explicit and unscheduled")
     return 0
 
 
