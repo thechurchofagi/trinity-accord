@@ -11,7 +11,7 @@ services:
     plan: starter
     autoDeploy: false
     buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
-    startCommand: uvicorn apps.record_chain_intake_gateway.app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn apps.record_chain_intake_gateway.protected_app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
@@ -27,7 +27,19 @@ services:
       - key: TRINITY_GATEWAY_RUNTIME_VERSION
         value: v1
       - key: TRINITY_MAX_SUBMISSION_BYTES
-        value: "524288"
+        value: "98304"
+      - key: TRINITY_RECORD_DRAFT_MAX_BYTES
+        value: "49152"
+      - key: TRINITY_MAX_TEXT_FIELD_CHARS
+        value: "4000"
+      - key: TRINITY_MAX_URL_CHARS
+        value: "2048"
+      - key: TRINITY_MAX_JSON_DEPTH
+        value: "12"
+      - key: TRINITY_MAX_ARRAY_ITEMS
+        value: "32"
+      - key: TRINITY_MAX_REFERENCE_ITEMS
+        value: "16"
       - key: TRINITY_SUBMIT_WRITE_MODE
         value: github_contents_pending
       - key: TRINITY_APPEND_WORKFLOW_FILE
