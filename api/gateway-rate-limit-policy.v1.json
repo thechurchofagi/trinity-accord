@@ -2,7 +2,7 @@
   "schema": "trinityaccord.gateway-rate-limit-policy.v1",
   "status": "production_live_policy",
   "purpose": "Protect finite permanent-storage and paid Arweave archival resources while keeping public preflight open and public Record-Chain intake available at a bounded cadence.",
-  "limiter_class": "durable_commit_derived_global_cooldown_with_secondary_in_memory_limits",
+  "limiter_class": "durable_secret_keyed_commit_cooldown_with_secondary_in_memory_limits",
   "durable_across_restart": true,
   "multi_instance_safe": false,
   "policy": {
@@ -10,7 +10,8 @@
       "minimum_seconds": 3600,
       "maximum_seconds": 7200,
       "randomized": true,
-      "randomness_source": "deterministically derived from the immutable latest intake commit SHA after acceptance",
+      "randomness_source": "HMAC-SHA256 of the immutable latest intake commit SHA using a server-only cooldown secret",
+      "reopening_time_not_computable_from_public_repository_state": true,
       "exact_reopening_time_disclosed": false,
       "first_gate": "before request-body read and expensive validation",
       "second_gate": "under the single-process submit lock immediately before the core persistence handler",
@@ -76,8 +77,9 @@
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
     "server_side_enforcement_verified": true,
-    "rate_limit_implementation": "protected ASGI entrypoint plus existing core Gateway limiter",
+    "rate_limit_implementation": "secret-keyed protected ASGI entrypoint plus existing core Gateway limiter",
     "durable_acceptance_state": "latest immutable intake materialization commit on the target branch",
+    "cooldown_secret_source": "TRINITY_COOLDOWN_SECRET with TRINITY_GITHUB_TOKEN as fail-safe rollout fallback",
     "multi_instance_safe": false,
     "durable_across_restart": true,
     "operator_note": "The current Render deployment uses one Uvicorn process. A future multi-instance deployment must add a shared distributed lock for the final gate."
