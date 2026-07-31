@@ -106,6 +106,18 @@ def build_incremental_payload_json(manifest: dict[str, Any], archive_dir: Path) 
             raise SystemExit(
                 "latest archived snapshot is not behind the current chain; refusing an empty or backwards delta"
             )
+        previous_latest_id = previous_native.get("latest_record_id")
+        previous_latest_sha = previous_native.get("latest_record_sha256")
+        if not isinstance(previous_latest_id, str) or not isinstance(previous_latest_sha, str):
+            raise SystemExit("latest archived snapshot is missing its immutable prefix identity")
+        prefix_ref = all_records[previous_count - 1]
+        if (
+            prefix_ref.get("record_id") != previous_latest_id
+            or prefix_ref.get("record_sha256") != previous_latest_sha
+        ):
+            raise SystemExit(
+                "latest archived snapshot does not match the current chain prefix; refusing to attach a delta to a divergent base"
+            )
 
     selected = []
     expected_next = previous_count + 1
