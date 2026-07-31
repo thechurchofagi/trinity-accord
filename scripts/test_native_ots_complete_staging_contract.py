@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github/workflows/native-ots-upgrade-watch.yml"
+ORCHESTRATOR = ROOT / "scripts/run_native_ots_workflow_once.py"
 DETECTOR = ROOT / "scripts/detect_archive_backlog.py"
 
 
@@ -15,7 +15,7 @@ def require(text: str, needle: str, label: str) -> None:
 
 
 def main() -> None:
-    workflow = WORKFLOW.read_text(encoding="utf-8")
+    orchestrator = ORCHESTRATOR.read_text(encoding="utf-8")
     detector = DETECTOR.read_text(encoding="utf-8")
 
     # detect_archive_backlog.py --write updates both the Record-Chain archive
@@ -26,13 +26,9 @@ def main() -> None:
         "four-output backlog write contract",
     )
 
-    reconcile_start = workflow.index("          reconcile_and_stage() {")
-    reconcile_end = workflow.index("\n          }\n\n          reconcile_and_stage", reconcile_start)
-    reconcile = workflow[reconcile_start:reconcile_end]
-
-    git_add_start = reconcile.index("            git add \\")
-    git_add_end = reconcile.index("\n\n            while IFS=", git_add_start)
-    git_add = reconcile[git_add_start:git_add_end]
+    reconcile_start = orchestrator.index("def reconcile_and_stage()")
+    reconcile_end = orchestrator.index("\n\ndef cached_changes", reconcile_start)
+    reconcile = orchestrator[reconcile_start:reconcile_end]
 
     generated_backlogs = [
         "record-chain/ots/native-ots-backlog.json",
@@ -41,19 +37,33 @@ def main() -> None:
         "api/record-chain-arweave-backlog.json",
     ]
     for path in generated_backlogs:
-        require(git_add, path, "complete generated backlog git add")
+        require(reconcile, path, "complete generated backlog staging")
 
-    # Both volatile-only restoration passes must know about the Record-Chain
-    # backlog files too; otherwise timestamp-only drift can trip the dirty-tree guard.
+    require(
+        reconcile,
+        "scripts/restore_json_if_only_volatile_changes.py",
+        "volatile-only restoration",
+    )
     for path in [
         "record-chain/arweave-backlog.json",
         "api/record-chain-arweave-backlog.json",
     ]:
-        count = workflow.count(f"--path {path}")
-        if count != 2:
-            raise SystemExit(f"expected two volatile restore entries for {path}, found {count}")
+        require(reconcile, path, "Record-Chain backlog volatile restoration")
 
-    require(workflow, "git status --porcelain --untracked-files=no", "tracked dirty-tree guard")
+    require(orchestrator, '"git", "add", *STAGE_PATHS', "single complete staging list")
+    require(orchestrator, '"git", "diff", "--cached", "--check"', "staged diff validation")
+    require(
+        orchestrator,
+        '"git", "status", "--porcelain", "--untracked-files=no"',
+        "tracked dirty-tree guard",
+    )
+    require(orchestrator, "assert_clean_tracked_worktree()", "clean guard invocation")
+
+    retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
+    require(retry, "reconcile_and_stage()", "post-rebase generated-state reconciliation")
+    if "run_native_ots_upgrade_verify.py" in retry or "--enable-paid-upload" in retry:
+        raise SystemExit("metadata push retry must never repeat an OTS upgrade or paid upload")
+
     print("PASS: Native OTS complete generated-state staging contract")
 
 
