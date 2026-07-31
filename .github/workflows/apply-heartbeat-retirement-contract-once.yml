@@ -1,11 +1,10 @@
 name: Apply Heartbeat Retirement Contract Once
 
 on:
-  push:
+  pull_request:
+    types: [synchronize, opened, reopened]
     branches:
-      - feat/weekly-continuity-archive-zenodo
-    paths:
-      - .github/workflows/apply-heartbeat-retirement-contract-once.yml
+      - main
 
 permissions:
   contents: write
@@ -16,11 +15,14 @@ concurrency:
 
 jobs:
   apply:
-    if: ${{ github.repository == 'thechurchofagi/trinity-accord' }}
+    if: >-
+      github.repository == 'thechurchofagi/trinity-accord' &&
+      github.event.pull_request.number == 825 &&
+      github.event.pull_request.head.ref == 'feat/weekly-continuity-archive-zenodo'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Checkout feature branch
+      - name: Checkout exact feature branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
