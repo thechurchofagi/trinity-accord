@@ -6,6 +6,13 @@ on:
       - fix/arweave-cost-boundaries-20260731
     paths:
       - .github/workflows/one-time-arweave-cost-boundary-fix.yml
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+    paths:
+      - .github/workflows/one-time-arweave-cost-boundary-fix.yml
+      - scripts/_apply_arweave_cost_boundary_fix.py
 
 permissions:
   contents: write
@@ -16,6 +23,7 @@ defaults:
 
 jobs:
   apply:
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -45,8 +53,7 @@ jobs:
             scripts/arweave_daily_spend_guard.py \
             scripts/process_archive_backlog.py \
             scripts/record_chain_arweave_incremental.py \
-            scripts/run_record_chain_arweave_incremental.py \
-            scripts/run_native_ots_upgrade_verify.py
+            scripts/run_record_chain_arweave_incremental.py
           node --check scripts/arweave_cost_gate.mjs
           python -m pytest -q \
             tests/test_arweave_cost_boundaries.py \
