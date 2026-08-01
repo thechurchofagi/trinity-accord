@@ -11,15 +11,19 @@ on:
 
 concurrency:
   group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
   publish-annexes:
     if: >-
-      github.actor == 'thechurchofagi' &&
       (
-        github.event_name == 'workflow_dispatch' ||
+        github.event_name == 'push' &&
         startsWith(github.event.head_commit.message, 'archive: publish Trinity external binary annexes')
+      ) ||
+      (
+        github.event_name == 'workflow_dispatch' &&
+        github.actor == 'thechurchofagi'
       )
     runs-on: ubuntu-24.04
     timeout-minutes: 360
@@ -65,7 +69,9 @@ jobs:
         run: |
           set -euo pipefail
           echo "authorization-precheck" > "$RUNNER_TEMP/annex-publication-stage.txt"
-          test "$GITHUB_ACTOR" = "thechurchofagi"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            test "$GITHUB_ACTOR" = "thechurchofagi"
+          fi
           test -n "$ZENODO_ACCESS_TOKEN"
           python3 - <<'PY'
           import json
