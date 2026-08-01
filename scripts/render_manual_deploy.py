@@ -78,7 +78,14 @@ def _http_error_detail(exc: urllib.error.HTTPError) -> str:
     return json.dumps(payload, ensure_ascii=False)[:300]
 
 
-def request(path: str, token: str, method: str = "GET", body: dict | None = None) -> Any:
+def request(
+    path: str,
+    token: str,
+    method: str = "GET",
+    body: dict | None = None,
+    *,
+    allow_not_found: bool = False,
+) -> Any:
     data = None
     headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
     if body is not None:
@@ -91,6 +98,8 @@ def request(path: str, token: str, method: str = "GET", body: dict | None = None
             raw = resp.read().decode("utf-8")
             return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as exc:
+        if exc.code == 404 and allow_not_found:
+            return None
         detail = _http_error_detail(exc)
         suffix = f": {detail}" if detail else ""
         fail(f"Render API HTTP {exc.code}{suffix}")
@@ -175,7 +184,7 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
 
     for key, expected in EXPECTED_GATEWAY_ENV.items():
         path = _env_var_path(service_id, key)
-        current = env_var_value(request(path, token))
+        current = env_var_value(request(path, token, allow_not_found=True))
         if current != expected:
             request(path, token, method="PUT", body={"value": expected})
             print(f"RENDER_CONFIG_UPDATED env={key}")

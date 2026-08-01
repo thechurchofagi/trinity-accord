@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import io
 import importlib.util
+import urllib.error
 from pathlib import Path
 from typing import Any
 
@@ -42,7 +44,14 @@ def test_reconcile_updates_and_reads_back_start_command_and_limits(monkeypatch):
     env = {key: "stale" for key in module.EXPECTED_GATEWAY_ENV}
     calls: list[tuple[str, str, dict[str, Any]]] = []
 
-    def fake_request(path: str, _token: str, method: str = "GET", body=None):
+    def fake_request(
+        path: str,
+        _token: str,
+        method: str = "GET",
+        body=None,
+        *,
+        allow_not_found: bool = False,
+    ):
         nonlocal current_command
         calls.append((path, method, dict(body or {})))
         if path == "/services/srv-gateway" and method == "PATCH":
@@ -65,6 +74,66 @@ def test_reconcile_updates_and_reads_back_start_command_and_limits(monkeypatch):
     assert sum(method == "PUT" for _path, method, _body in calls) == len(
         module.EXPECTED_GATEWAY_ENV
     )
+
+
+def test_reconcile_creates_missing_environment_limits(monkeypatch):
+    module = load_module()
+    service = _service(module, module.EXPECTED_GATEWAY_START_COMMAND)
+    env: dict[str, str] = {}
+    missing_reads: list[str] = []
+
+    def fake_request(
+        path: str,
+        _token: str,
+        method: str = "GET",
+        body=None,
+        *,
+        allow_not_found: bool = False,
+    ):
+        if path == "/services/srv-gateway":
+            return service
+        key = path.rsplit("/", 1)[-1]
+        if method == "PUT":
+            env[key] = body["value"]
+            return {"key": key, "value": env[key]}
+        if key not in env:
+            assert allow_not_found is True
+            missing_reads.append(key)
+            return None
+        return {"key": key, "value": env[key]}
+
+    monkeypatch.setattr(module, "request", fake_request)
+    module.reconcile_gateway_config(service, "render-token")
+
+    assert set(missing_reads) == set(module.EXPECTED_GATEWAY_ENV)
+    assert env == module.EXPECTED_GATEWAY_ENV
+
+
+def test_request_can_treat_only_an_expected_404_as_missing(monkeypatch):
+    module = load_module()
+
+    def missing(*_args, **_kwargs):
+        raise urllib.error.HTTPError(
+            "https://api.render.com/v1/services/srv/env-vars/NEW_LIMIT",
+            404,
+            "Not Found",
+            {},
+            io.BytesIO(b'{"message":"not found: NEW_LIMIT"}'),
+        )
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", missing)
+
+    assert (
+        module.request(
+            "/services/srv/env-vars/NEW_LIMIT",
+            "render-token",
+            allow_not_found=True,
+        )
+        is None
+    )
+    with pytest.raises(SystemExit) as exc_info:
+        module.request("/services/srv/env-vars/NEW_LIMIT", "render-token")
+    assert exc_info.value.code == 1
 
 
 def test_public_attestation_requires_runtime_marker_and_oversize_413(monkeypatch):
