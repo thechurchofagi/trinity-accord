@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.repository-preservation-publication-retry.v1",
+  "authorized_by": "thechurchofagi",
+  "authorized_at": "2026-08-01T19:42:00+08:00",
+  "retry_requested_at": "2026-08-01T20:12:00+08:00",
+  "authorization": "publish_first_repository_preservation_doi",
+  "publication_confirmation": "PUBLISH_TRINITY_REPOSITORY_CAPSULE_V1",
+  "rights_boundary_source": "preservation/publication-authorization-v1.json",
+  "rights_boundary_ack": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "access_right": "other-closed",
+  "target_commit": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+  "reason": "repository_variable_missing_but_committed_owner_authorization_is_exact",
+  "scope": {
+    "core_git_tracked_tree_only": true,
+    "external_large_binary_annex_embedded": false
+  }
+}
