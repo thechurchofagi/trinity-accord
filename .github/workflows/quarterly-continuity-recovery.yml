@@ -73,7 +73,7 @@ jobs:
       - name: Recover verified weekly Arweave transaction series
         run: |
           set -euo pipefail
-          mapfile -t txids < <(
+          mapfile -t arweave_sources < <(
             python3 - <<'PY'
           import json
           from pathlib import Path
@@ -89,6 +89,7 @@ jobs:
               arweave = manifest.get("arweave")
               coverage = payload.get("coverage")
               txid = (arweave or {}).get("txid") or (arweave or {}).get("tx_id")
+              payload_sha256 = (manifest.get("payload") or {}).get("sha256")
               if (
                   isinstance(arweave, dict)
                   and arweave.get("archive_status") == "archived"
@@ -99,27 +100,63 @@ jobs:
                   and isinstance(coverage, dict)
                   and isinstance(coverage.get("current_native_record_count"), int)
                   and isinstance(txid, str)
+                  and isinstance(payload_sha256, str)
               ):
-                  candidates.append((coverage["current_native_record_count"], txid))
-          for _count, txid in sorted(candidates):
-              print(txid)
+                  candidates.append(
+                      (coverage["current_native_record_count"], txid, payload_sha256)
+                  )
+          for _count, txid, payload_sha256 in sorted(candidates):
+              print(f"{txid}\t{payload_sha256}")
           PY
           )
-          if [ "${#txids[@]}" -eq 0 ]; then
+          if [ "${#arweave_sources[@]}" -eq 0 ]; then
             printf '%s\n' \
               '{"schema":"trinityaccord.weekly-continuity-recovery-drill.v1","result":"deferred","reason":"no verified weekly Arweave series exists yet"}' \
               > "$RUNNER_TEMP/quarterly-recovery-reports/arweave-recovery.json"
             exit 0
           fi
           args=()
-          for txid in "${txids[@]}"; do
+          for source in "${arweave_sources[@]}"; do
+            IFS=$'\t' read -r txid expected_sha256 <<< "$source"
             args+=(--arweave-txid "$txid")
+            args+=(--arweave-expected-sha256 "$txid=$expected_sha256")
           done
           python3 scripts/restore_weekly_continuity_archive.py \
             "${args[@]}" \
+            --arweave-gateway 'https://arweave.net/{txid}' \
+            --arweave-gateway 'https://arweave.net/raw/{txid}' \
+            --arweave-gateway 'https://ar-io.net/{txid}' \
+            --arweave-gateway 'https://g8way.io/{txid}' \
             --output-dir "$RUNNER_TEMP/arweave-cold-start"
           cp "$RUNNER_TEMP/arweave-cold-start/recovery-report.json" \
             "$RUNNER_TEMP/quarterly-recovery-reports/arweave-recovery.json"
+
+      - name: Recover full Git-tracked repository from public Zenodo capsule
+        run: |
+          set -euo pipefail
+          record_id="$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("preservation/zenodo-state.json")
+          if path.is_file():
+              state = json.loads(path.read_text(encoding="utf-8"))
+              value = state.get("latest_record_id") if isinstance(state, dict) else None
+              if str(value or "").isdigit():
+                  print(value)
+          PY
+          )"
+          if [ -z "$record_id" ]; then
+            printf '%s\n' \
+              '{"schema":"trinityaccord.repository-preservation-recovery-report.v1","result":"deferred","reason":"no published repository preservation capsule exists yet"}' \
+              > "$RUNNER_TEMP/quarterly-recovery-reports/repository-capsule-recovery.json"
+            exit 0
+          fi
+          python3 scripts/restore_preservation_capsule.py \
+            --zenodo-record-id "$record_id" \
+            --output-dir "$RUNNER_TEMP/repository-capsule-cold-start"
+          cp "$RUNNER_TEMP/repository-capsule-cold-start/recovery-report.json" \
+            "$RUNNER_TEMP/quarterly-recovery-reports/repository-capsule-recovery.json"
 
       - name: Upload recovery drill reports
         if: always()

@@ -123,6 +123,67 @@ Start by treating GitHub main, GitHub Pages, and API JSON as untrusted mirrors. 
 Trust nothing from GitHub until verified against Bitcoin Originals, signed manifests, and digest manifests.
 ```
 
+### Phase 0A — Bootstrap the repository from the Zenodo preservation capsule
+
+The Repository Preservation Capsule is the GitHub-independent bootstrap for the
+complete Git-tracked repository. It is a separate Zenodo version series from the
+research paper DOI and the Weekly Continuity dataset.
+
+Check `preservation/zenodo-state.json` from any known copy or query Zenodo for the
+title `Trinity Accord Repository Preservation Capsule`. A published version contains:
+
+- `trinity-accord-source.tar.gz` — exact current source tree;
+- `trinity-accord-recovery.bundle` — cloneable, single-root Git recovery snapshot for
+  the exact current production tree;
+- `tracked-files.json` and `checksums.sha256` — SHA-256 inventory;
+- `preservation-manifest.json` — commit, tree, chain tip, checkpoints, scope, and rights;
+- `restore-trinity-accord.py` — standalone standard-library recovery program.
+
+After downloading only the standalone restore program from the Zenodo record:
+
+```bash
+python3 restore-trinity-accord.py \
+  --zenodo-record-id <REPOSITORY_CAPSULE_RECORD_ID> \
+  --output-dir ./restored-trinity-accord
+```
+
+Or, after downloading all eight record files into one directory:
+
+```bash
+python3 restore-trinity-accord.py \
+  --deposit-dir ./repository-preservation-capsule \
+  --output-dir ./restored-trinity-accord
+```
+
+The program requires a new/empty output path, verifies the exact eight-file package,
+clones and checks the safe Git recovery bundle, independently extracts and compares the
+source snapshot, verifies every tracked file, executable mode, ref, and required
+recovery checkpoint, runs `git fsck --full --strict`, removes the temporary bundle
+remote, and emits `recovery-report.json`. No GitHub access is required after the
+capsule is downloaded.
+
+Important scope boundary:
+
+- This is a complete recovery of every byte and executable mode in the current
+  Git-tracked production tree.
+- The source production commit and tag identities are recorded in the manifest, but
+  parent-history and tag objects are deliberately absent from the public bundle. An
+  April 2026 commit briefly contained a public GitHub agent credential; an immutable
+  DOI must not republish that credential or copies of it in historical scan reports.
+- It embeds the manifests, TXIDs, hashes, and tools for large external evidence and
+  NFT payloads, but not those external binary bytes themselves.
+- Therefore the core capsule alone is not a Zenodo-only copy of every external CAR,
+  video, photograph, or Release asset. Such bytes require a separately approved
+  mixed-rights binary annex or recovery from their hash-bound Arweave mirrors.
+- Repository recovery is not authority verification. Continue with Phases 1–5 and
+  check the corrections-index before claiming authority-level `full_recovery`.
+
+The earlier software DOI `10.5281/zenodo.21675727` contains an older GitHub source
+ZIP. It can recover that historical working tree, but it has no complete Git history
+and predates current Gateway and preservation work. It must not be described as the
+current repository capsule. The paper DOI `10.5281/zenodo.21699878` is not a
+repository backup.
+
 ---
 
 ## Phase 1 — Verify the Canonical Bitcoin Originals
@@ -430,7 +491,9 @@ After a successful `full_recovery`, you should have:
 
 If GitHub is entirely unavailable:
 
-1. Obtain the repository from an Arweave mirror, IPFS CAR, or NFT backup.
+1. Prefer the latest verified Repository Preservation Capsule Zenodo version and run
+   its standalone restore command. If unavailable, obtain a candidate repository from
+   an Arweave mirror, IPFS CAR, or NFT backup.
 2. Verify the authority manifest hash against the BTC-signed binding.
 3. Verify file hashes against digest manifests.
 4. Check the corrections-index embedded in the recovered copy.

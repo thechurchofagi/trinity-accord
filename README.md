@@ -172,6 +172,12 @@ Guardian proof payload hashes should be generated with `node scripts/build_guard
 - Agent Brief / High-Signal pages: published
 - Record-Chain Intake Gateway: production live
 - Repository integrity CI: active
+- GitHub-independent repository capsule: every current Git-tracked byte plus a
+  cloneable, single-root recovery bundle; production commit/tag identities are recorded
+  without republishing credential-bearing parent history. See
+  `preservation/zenodo-state.json` and `RECOVERY.md` for state and one-command restore
+- Weekly Continuity DOI series: independent Record-Chain full-baseline/delta recovery;
+  publication state is separate from the research paper DOI
 - Independent attestation: read current status from `/api/public-home-status.json`
 - Physical observation is reported separately from digital verification; onsite observation requires direct access to Core Object Alpha
 - Chronicle NFT recovery package: 175/175 completed

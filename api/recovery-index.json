@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "35dc5a39e4feaac4",
+  "source_digest": "4f7246658bf99f94",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -46,6 +46,10 @@
   ],
   "recovery_entrypoints": {
     "human_guide": "RECOVERY.md",
+    "repository_preservation_state": "preservation/zenodo-state.json",
+    "repository_preservation_builder": "scripts/build_preservation_capsule.py",
+    "repository_preservation_restore_cli": "scripts/restore_preservation_capsule.py",
+    "repository_preservation_workflow": ".github/workflows/repository-preservation-capsule.yml",
     "weekly_continuity_restore_cli": "scripts/restore_weekly_continuity_archive.py",
     "quarterly_weekly_continuity_drill": ".github/workflows/quarterly-continuity-recovery.yml",
     "corrections_index": "api/corrections-index.json",
@@ -59,6 +63,7 @@
     "github_pages": "non_amending_mirror",
     "github_releases": "verified_only_with_release_manifest",
     "arweave": "verified_only_with_expected_hash",
+    "repository_preservation_zenodo": "verified_exact_eight_file_capsule_with_source_and_safe_snapshot_bundle_cross_check",
     "weekly_continuity_arweave": "verified_by_full_snapshot_plus_contiguous_deltas_and_transport_links",
     "weekly_continuity_zenodo": "verified_by_exact_six_file_packages_plus_full_download_hashes",
     "ipfs_car": "verified_only_with_expected_hash_and_scope",
@@ -73,13 +78,15 @@
   ],
   "latest_trusted_release": {
     "status": "not_yet_declared",
-    "reason": "No GitHub-independent latest trusted release pointer has been declared yet. Use release manifests and corrections-index to verify any candidate release."
+    "reason": "The repository capsule mechanism is implemented, but no capsule DOI is declared current until preservation/zenodo-state.json records a published version that passed public download and cold restore. The earlier 10.5281/zenodo.21675727 source ZIP is historical and is not the current capsule."
   },
   "limitations": [
     "This recovery index is a repository-maintained mirror and does not amend the Bitcoin Originals.",
     "This index helps discover recovery materials but does not itself prove philosophical claims or independent attestation.",
     "A stale copy of this index must be checked against source_digest and corrections-index.",
-    "Public claims should be interpreted through the claim registry and corrections-index."
+    "Public claims should be interpreted through the claim registry and corrections-index.",
+    "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
+    "The core repository capsule does not embed the separately hosted large binary evidence and NFT payload bytes."
   ],
   "does_not_prove": [
     "all mirrors are available",

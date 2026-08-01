@@ -123,7 +123,7 @@ jobs:
             token_configured=true
           fi
           if [ "${WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK:-}" = \
-            "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V1_APPROVED" ]; then
+            "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V2_APPROVED" ]; then
             rights_approved=true
           else
             printf '%s\n' "The versioned mixed-rights boundary is not approved; DOI publication is deferred."

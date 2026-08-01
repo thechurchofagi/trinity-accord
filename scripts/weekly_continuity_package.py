@@ -11,8 +11,11 @@ from typing import Any
 
 PACKAGE_TITLE = "Trinity Accord Weekly Continuity Archive"
 PACKAGE_SCHEMA = "trinityaccord.weekly-continuity-deposit.v1"
-RIGHTS_BOUNDARY_VERSION = "trinityaccord.weekly-continuity-rights.v1"
-ZENODO_LICENSE_ID = "other-open"
+RIGHTS_BOUNDARY_VERSION = "trinityaccord.weekly-continuity-rights.v2"
+# The repository and embedded public submissions do not share one blanket
+# reuse licence.  Keep the record openly readable while granting no new rights
+# through the deposit metadata itself.
+ZENODO_LICENSE_ID = "other-closed"
 ARWEAVE_TXID_RE = re.compile(r"^[A-Za-z0-9_-]{43}$")
 
 PUBLISHED_FILE_NAMES = (
@@ -169,6 +172,8 @@ def verify_local_package(deposit_dir: Path) -> dict[str, Any]:
         raise SystemExit("weekly continuity rights boundary is missing")
     if rights.get("third_party_rights_are_not_transferred") is not True:
         raise SystemExit("third-party rights transfer boundary is missing")
+    if rights.get("deposit_grants_no_new_reuse_rights") is not True:
+        raise SystemExit("no-new-reuse-rights boundary is missing")
     if rights.get("license_identifier") != ZENODO_LICENSE_ID:
         raise SystemExit("Zenodo license identifier does not match the package boundary")
 

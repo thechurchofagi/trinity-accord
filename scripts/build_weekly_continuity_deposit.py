@@ -163,9 +163,9 @@ def build() -> Path | None:
             f"Archive {archive_id}; records through {native.get('latest_record_id')}; "
             f"Arweave transaction {arweave.get('txid') or arweave.get('tx_id')}; "
             f"heartbeat span {heartbeat.get('period_start')} through {heartbeat.get('period_end')}. "
-            "Rights boundary: project-authored packaging metadata is made available for "
-            "open preservation and research reuse with attribution. Embedded Record-Chain "
-            "entries remain subject to their respective submitters' rights; inclusion does "
+            "Rights boundary: the record is publicly readable for preservation and research, "
+            "but the deposit grants no blanket reuse licence. Project-authored and embedded "
+            "Record-Chain materials remain subject to their respective rights; inclusion does "
             "not transfer copyright or grant rights the archive publisher does not possess."
         ),
     }
@@ -188,11 +188,11 @@ def build() -> Path | None:
         "preservation mirror only. The Bitcoin Originals prevail.\n"
         "\nRights and reuse boundary\n"
         "-------------------------\n"
-        "Project-authored packaging metadata is made available for open preservation\n"
-        "and research reuse with attribution. Embedded Record-Chain entries remain\n"
-        "subject to their respective submitters' rights. Inclusion in this public\n"
-        "mirror does not transfer copyright or grant rights the archive publisher\n"
-        "does not possess. Public availability is not a claim of ownership.\n",
+        "This record is publicly readable for preservation and research, but this\n"
+        "deposit grants no blanket reuse licence. Project-authored and embedded\n"
+        "Record-Chain materials remain subject to their respective rights. Inclusion\n"
+        "in this public mirror does not transfer copyright or grant rights the archive\n"
+        "publisher does not possess. Public availability is not a claim of ownership.\n",
         encoding="utf-8",
     )
 
@@ -223,8 +223,8 @@ def build() -> Path | None:
         "rights_boundary": {
             "schema": RIGHTS_BOUNDARY_VERSION,
             "license_identifier": ZENODO_LICENSE_ID,
-            "package_metadata_open_for_preservation_and_research_reuse": True,
-            "attribution_requested": True,
+            "publicly_readable_for_preservation_and_research": True,
+            "deposit_grants_no_new_reuse_rights": True,
             "embedded_record_chain_entries_retain_their_respective_rights": True,
             "third_party_rights_are_not_transferred": True,
             "publisher_grants_no_rights_it_does_not_possess": True,

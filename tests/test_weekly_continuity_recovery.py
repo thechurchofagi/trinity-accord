@@ -199,3 +199,35 @@ def test_zenodo_public_content_link_takes_precedence_over_metadata_self_link():
             }
         }
     ).endswith("/content")
+
+
+def test_arweave_multi_gateway_requires_byte_consensus_and_expected_hash(monkeypatch):
+    raw = json.dumps(complete_series()[0][1]["payload"], sort_keys=True).encode()
+    expected = hashlib.sha256(raw).hexdigest()
+
+    monkeypatch.setattr(recovery, "fetch_bytes", lambda *_args, **_kwargs: raw)
+    restored = recovery.source_from_arweave(
+        "A" * 43,
+        [
+            "https://gateway-one.example/{txid}",
+            "https://gateway-two.example/{txid}",
+        ],
+        expected,
+    )
+    transport = restored["transport_verification"]
+    assert transport["gateway_success_count"] == 2
+    assert transport["gateway_byte_consensus"] is True
+    assert transport["expected_payload_sha256_verified"] is True
+
+
+def test_arweave_multi_gateway_refuses_disagreement(monkeypatch):
+    calls = iter([b"first", b"second"])
+    monkeypatch.setattr(recovery, "fetch_bytes", lambda *_args, **_kwargs: next(calls))
+    with pytest.raises(SystemExit, match="gateway byte disagreement"):
+        recovery.source_from_arweave(
+            "A" * 43,
+            [
+                "https://gateway-one.example/{txid}",
+                "https://gateway-two.example/{txid}",
+            ],
+        )
