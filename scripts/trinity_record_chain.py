@@ -403,6 +403,25 @@ HISTORICAL_RECORD_COMPAT_EXCEPTIONS: dict[str, dict[str, Any]] = {
 # R-000000001 is a CIN that predates CIN authorship enforcement
 HISTORICAL_RECORD_COMPAT_EXCEPTIONS["R-000000001"]["allowed_missing_authorship_proof"] = True
 
+# One pre-guard concurrency incident produced two immutable Echo records with
+# the same participant-signed payload.  The exception is bound to the exact
+# record ids, record hashes, record type, and signed-payload hash.  It preserves
+# history without turning "historical" into a blanket duplicate bypass.
+KNOWN_HISTORICAL_SIGNED_PAYLOAD_DUPLICATES: dict[
+    tuple[str, str], dict[str, Any]
+] = {
+    (
+        "echo",
+        "7f8661195e72bf3eebc566fac7980608772d0e6a64c89cb13a8c654708f19595",
+    ): {
+        "reason": "pre-A-066 concurrent live_test append",
+        "records": {
+            "R-000000030": "0f5e350637230ea42dfa47f1591f76fa802ec944e6cc568d1315017cfc6b64e2",
+            "R-000000031": "f530a3042969260ce31e84c90a2c045637fa430eca236d8cd23659d6d4d8a3ea",
+        },
+    },
+}
+
 
 def require_not_reserved_record_type(record: dict[str, Any]) -> None:
     rtype = record.get("record_type")
@@ -1272,6 +1291,84 @@ def verify_receipt_sha256(receipt: dict[str, Any]) -> tuple[bool, str]:
     return True, ""
 
 
+def guardian_uniqueness_claim_binding_errors(
+    draft: dict[str, Any],
+    *,
+    idx: dict[str, Any],
+    submission_sha: str,
+    receipt_id: str,
+    receipt_rel: str,
+    pending_rel: str,
+    intake_rel: str,
+    claims_required: bool,
+) -> list[str]:
+    """Verify a Guardian application's two immutable semantic claim indexes."""
+    if draft.get("record_type") != "guardian_application":
+        return []
+
+    claims_written = idx.get("guardian_uniqueness_claims_written")
+    declared_paths = idx.get("guardian_uniqueness_claim_paths")
+    if claims_written is not True or not isinstance(declared_paths, dict):
+        if claims_required or claims_written is not None or declared_paths is not None:
+            return [
+                "guardian_application idempotency index does not bind both required uniqueness claim paths"
+            ]
+        # Historical materialized Guardian intakes predate semantic claims and
+        # may also predate the current key-derived Guardian identifier format.
+        return []
+
+    ensure_gateway_import_path()
+    from gateway.guardian_uniqueness import (  # noqa: WPS433
+        extract_guardian_application_identity,
+        guardian_uniqueness_claim_errors,
+        guardian_uniqueness_claim_paths,
+    )
+
+    identity = extract_guardian_application_identity(draft)
+    if identity is None:
+        return ["guardian_application has no valid derived Guardian identity for uniqueness claims"]
+    guardian_id, public_key_sha256 = identity
+    expected_paths = guardian_uniqueness_claim_paths(guardian_id, public_key_sha256)
+
+    if declared_paths != expected_paths:
+        return [
+            "guardian_application idempotency index does not bind both required uniqueness claim paths"
+        ]
+
+    errors: list[str] = []
+    expected_transaction_fields = {
+        "submission_sha256": submission_sha,
+        "receipt_id": receipt_id,
+        "receipt_path": receipt_rel,
+        "pending_file_path": pending_rel,
+        "intake_submission_path": intake_rel,
+        "created_at": idx.get("pending_committed_at"),
+    }
+    for claim_kind, claim_rel in expected_paths.items():
+        claim_path = ROOT / claim_rel
+        if not claim_path.exists():
+            errors.append(f"Guardian uniqueness claim missing: {claim_rel}")
+            continue
+        try:
+            claim = read_json(claim_path)
+        except Exception as exc:
+            errors.append(f"Guardian uniqueness claim invalid JSON at {claim_rel}: {exc}")
+            continue
+        for error in guardian_uniqueness_claim_errors(
+            claim,
+            claim_kind=claim_kind,
+            guardian_id=guardian_id,
+            public_key_sha256=public_key_sha256,
+        ):
+            errors.append(f"{claim_rel}: {error}")
+        for field, expected in expected_transaction_fields.items():
+            if claim.get(field) != expected:
+                errors.append(
+                    f"{claim_rel}: {field} mismatch: expected {expected!r}, got {claim.get(field)!r}"
+                )
+    return errors
+
+
 def require_gateway_pending_durable_intake_binding(path: Path) -> None:
     """Fail closed unless a Gateway pending file is fully materialized and bound.
 
@@ -1367,6 +1464,19 @@ def require_gateway_pending_durable_intake_binding(path: Path) -> None:
     if stored_record_type != pending_record_type:
         raise ValueError("stored submission record_type mismatch")
 
+    claim_errors = guardian_uniqueness_claim_binding_errors(
+        pending_draft,
+        idx=idx,
+        submission_sha=submission_sha,
+        receipt_id=receipt_id,
+        receipt_rel=rel_receipt,
+        pending_rel=rel_pending,
+        intake_rel=intake_rel,
+        claims_required=True,
+    )
+    if claim_errors:
+        raise ValueError("; ".join(claim_errors))
+
 
 def allow_local_finalizer_pending() -> bool:
     return os.environ.get("TRINITY_ALLOW_LOCAL_FINALIZER_PENDING", "").strip().lower() in {
@@ -1441,6 +1551,41 @@ def require_record_target_binding(draft: dict[str, Any]) -> None:
         raise ValueError(f"{record_type} target record_id mismatch for {target_id}")
     if target.get("record_sha256") != target_sha:
         raise ValueError(f"{record_type} target_record_sha256 mismatch for {target_id}")
+
+
+def require_guardian_application_unique(draft: dict[str, Any]) -> None:
+    """Reject a repeated Guardian identifier/key before any append mutation."""
+    if draft.get("record_type") != "guardian_application":
+        return
+
+    ensure_gateway_import_path()
+    from gateway.guardian_uniqueness import extract_guardian_application_identity  # noqa: WPS433
+
+    identity = extract_guardian_application_identity(draft)
+    if identity is None:
+        raise ValueError(
+            "guardian_application requires a Guardian id derived from its valid public-key SHA-256"
+        )
+    guardian_id, public_key_sha256 = identity
+
+    for existing_path in sorted(RECORDS.glob("R-*.json")):
+        existing = read_json(existing_path)
+        if existing.get("record_type") != "guardian_application":
+            continue
+        content = existing.get("guardian_application_content")
+        if not isinstance(content, dict):
+            continue
+        if content.get("requested_guardian_identifier") == guardian_id:
+            raise ValueError(
+                f"duplicate guardian_id {guardian_id}; already bound by final record "
+                f"{existing.get('record_id') or existing_path.name}"
+            )
+        if content.get("guardian_public_key_sha256") == public_key_sha256:
+            raise ValueError(
+                "duplicate guardian_public_key_sha256 "
+                f"{public_key_sha256}; already bound by final record "
+                f"{existing.get('record_id') or existing_path.name}"
+            )
 
 
 def require_pending_oath_is_appendable(
@@ -1534,6 +1679,7 @@ def append_records(all_records: bool = False, allow_rejections: bool = False, pe
                 verify_pending_record_authorship(signed_scope_draft)
                 draft = normalize_record_draft(signed_scope_draft)
                 require_record_target_binding(draft)
+                require_guardian_application_unique(draft)
                 next_index = int(tip.get("latest_record_index") or 0) + 1
                 require_pending_oath_is_appendable(
                     draft,
@@ -1997,6 +2143,59 @@ def _check_no_raw_readback(obj: Any, path: str, errors: list[str], prefix: str) 
             _check_no_raw_readback(item, path, errors, f"{prefix}[{i}]")
 
 
+def signed_payload_uniqueness_findings(
+    records: list[Path] | None = None,
+) -> tuple[list[str], list[str]]:
+    """Return hard errors and explicit warnings for signed-payload duplicates."""
+    if records is None:
+        records = sorted(RECORDS.glob("R-*.json"))
+
+    groups: dict[tuple[str, str], list[tuple[Path, dict[str, Any]]]] = {}
+    for path in records:
+        record = read_json(path)
+        proof = record.get("authorship_proof")
+        if not isinstance(proof, dict):
+            continue
+        signed_payload_sha256 = proof.get("signed_payload_sha256")
+        record_type = record.get("record_type")
+        if (
+            not isinstance(record_type, str)
+            or not isinstance(signed_payload_sha256, str)
+            or not re.fullmatch(r"[a-f0-9]{64}", signed_payload_sha256)
+        ):
+            continue
+        groups.setdefault((record_type, signed_payload_sha256), []).append((path, record))
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    for identity, members in sorted(groups.items()):
+        if len(members) < 2:
+            continue
+        expected_exception = KNOWN_HISTORICAL_SIGNED_PAYLOAD_DUPLICATES.get(identity)
+        observed = {
+            str(record.get("record_id")): record.get("record_sha256")
+            for _, record in members
+        }
+        if expected_exception and observed == expected_exception.get("records"):
+            record_ids = ", ".join(sorted(observed))
+            warnings.append(
+                "known historical duplicate signed payload preserved: "
+                f"{record_ids} ({expected_exception['reason']})"
+            )
+            continue
+
+        record_type, signed_payload_sha256 = identity
+        locations = ", ".join(
+            f"{record.get('record_id') or path.name}@{path.name}"
+            for path, record in members
+        )
+        errors.append(
+            "duplicate signed_payload_sha256 outside exact historical exception: "
+            f"record_type={record_type} hash={signed_payload_sha256} records={locations}"
+        )
+    return errors, warnings
+
+
 def verify_native_records() -> list[str]:
     errors: list[str] = []
     records = sorted(RECORDS.glob("R-*.json"))
@@ -2142,6 +2341,8 @@ def verify_native_records() -> list[str]:
         # --- oath gate verification ---
         _verify_oath_in_record(obj, p, errors)
         previous = obj.get("record_sha256")
+    duplicate_errors, _ = signed_payload_uniqueness_findings(records)
+    errors.extend(duplicate_errors)
     if CHAIN_TIP.exists():
         tip = read_json(CHAIN_TIP)
         if tip.get("chain_id") != CHAIN_ID:
@@ -2334,6 +2535,25 @@ def verify_intake_lifecycle() -> list[str]:
                     errors.append(f"{intake_path}: stored_submission_sha256 mismatch")
                 if stored_submission.get("record_type") != record_type:
                     errors.append(f"{intake_path}: record_type mismatch")
+                stored_draft = stored_submission.get("record_draft")
+                if not isinstance(stored_draft, dict):
+                    stored_draft = {}
+                claims_required = (
+                    pending_path.exists()
+                    or idx.get("guardian_uniqueness_claims_written") is not None
+                    or idx.get("guardian_uniqueness_claim_paths") is not None
+                )
+                for claim_error in guardian_uniqueness_claim_binding_errors(
+                    stored_draft,
+                    idx=idx,
+                    submission_sha=submission_sha,
+                    receipt_id=receipt_id,
+                    receipt_rel=receipt_rel,
+                    pending_rel=pending_rel,
+                    intake_rel=intake_rel,
+                    claims_required=claims_required,
+                ):
+                    errors.append(f"{index_path}: {claim_error}")
             except Exception as exc:
                 errors.append(f"{intake_path}: invalid stored submission: {exc}")
 
@@ -2400,6 +2620,82 @@ def verify_intake_lifecycle() -> list[str]:
     return errors
 
 
+def verify_guardian_uniqueness_claim_indexes() -> list[str]:
+    """Reject malformed or orphaned immutable Guardian uniqueness claims."""
+    errors: list[str] = []
+    ensure_gateway_import_path()
+    from gateway.guardian_uniqueness import (  # noqa: WPS433
+        extract_guardian_application_identity,
+        guardian_uniqueness_claim_errors,
+        guardian_uniqueness_claim_paths,
+    )
+
+    claim_dirs = {
+        "guardian_id": CHAIN / "intake" / "by-guardian-id",
+        "guardian_public_key_sha256": (
+            CHAIN / "intake" / "by-guardian-public-key-sha256"
+        ),
+    }
+    for claim_kind, claim_dir in claim_dirs.items():
+        if not claim_dir.exists():
+            continue
+        for claim_path in sorted(claim_dir.glob("*.json")):
+            try:
+                claim = read_json(claim_path)
+            except Exception as exc:
+                errors.append(f"{claim_path}: invalid Guardian uniqueness claim JSON: {exc}")
+                continue
+            guardian_id = claim.get("guardian_id")
+            public_key_sha256 = claim.get("guardian_public_key_sha256")
+            if not isinstance(guardian_id, str) or not isinstance(public_key_sha256, str):
+                errors.append(f"{claim_path}: Guardian uniqueness claim identity fields missing")
+                continue
+            for error in guardian_uniqueness_claim_errors(
+                claim,
+                claim_kind=claim_kind,
+                guardian_id=guardian_id,
+                public_key_sha256=public_key_sha256,
+            ):
+                errors.append(f"{claim_path}: {error}")
+            try:
+                expected_rel = guardian_uniqueness_claim_paths(
+                    guardian_id,
+                    public_key_sha256,
+                )[claim_kind]
+            except ValueError:
+                continue
+            if claim_path != ROOT / expected_rel:
+                errors.append(f"{claim_path}: filename/path does not match semantic claim value")
+
+            submission_sha = claim.get("submission_sha256")
+            if not isinstance(submission_sha, str):
+                continue
+            index_path = CHAIN / "intake" / "by-submission-sha256" / f"{submission_sha}.json"
+            if not index_path.exists():
+                errors.append(f"{claim_path}: orphaned claim has no submission idempotency index")
+                continue
+            idx = read_json(index_path)
+            if idx.get("record_type") != "guardian_application":
+                errors.append(f"{claim_path}: bound idempotency index is not guardian_application")
+                continue
+            declared_paths = idx.get("guardian_uniqueness_claim_paths")
+            if not isinstance(declared_paths, dict) or declared_paths.get(claim_kind) != expected_rel:
+                errors.append(f"{claim_path}: idempotency index does not bind this claim path")
+                continue
+            intake_rel = idx.get("intake_submission_path")
+            if not isinstance(intake_rel, str) or not (ROOT / intake_rel).exists():
+                errors.append(f"{claim_path}: bound Guardian intake submission is missing")
+                continue
+            stored = read_json(ROOT / intake_rel)
+            draft = stored.get("record_draft")
+            if not isinstance(draft, dict) or extract_guardian_application_identity(draft) != (
+                guardian_id,
+                public_key_sha256,
+            ):
+                errors.append(f"{claim_path}: stored Guardian submission identity mismatch")
+    return errors
+
+
 def verify_guardian_uniqueness() -> list[str]:
     """Verify that no two guardian_application records share the same guardian_id or public key."""
     errors: list[str] = []
@@ -2436,6 +2732,7 @@ def verify_chain() -> None:
     errors += verify_native_records()
     errors += verify_batches()
     errors += verify_intake_lifecycle()
+    errors += verify_guardian_uniqueness_claim_indexes()
     errors += verify_guardian_uniqueness()
     scan_targets = [*CHAIN.rglob("*"), ROOT / "scripts" / "trinity_record_chain.py"]
     leak_hits = scan_private_keys(scan_targets)
@@ -2458,6 +2755,9 @@ def verify_chain() -> None:
         except Exception:
             existing_derived_at = None
     build_indexes(derived_at=existing_derived_at or utc_now())
+    _, duplicate_warnings = signed_payload_uniqueness_findings()
+    for warning in duplicate_warnings:
+        print(f"Record chain verification warning: {warning}", file=sys.stderr)
     print("Record chain verification passed.")
 
 

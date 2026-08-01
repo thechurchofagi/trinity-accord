@@ -26,6 +26,13 @@ from apps.record_chain_intake_gateway.gateway.authorship import (
 from apps.record_chain_intake_gateway.gateway.canonical import canonical_dumps, parse_json_strict, sha256_canonical_json
 from apps.record_chain_intake_gateway.gateway.github_atomic import AtomicCreateConflict, create_files_atomic
 from apps.record_chain_intake_gateway.gateway.github_adapter import dispatch_workflow, get_file_sha, get_file_text
+from apps.record_chain_intake_gateway.gateway.guardian_uniqueness import (
+    GUARDIAN_STATE_PATH,
+    build_guardian_uniqueness_claim,
+    extract_guardian_application_identity,
+    guardian_uniqueness_claim_errors,
+    guardian_uniqueness_claim_paths,
+)
 from apps.record_chain_intake_gateway.gateway.models import (
     AgentRecovery,
     Diagnostic,
@@ -413,6 +420,191 @@ def _diagnostics_from_errors(errors: list[str | Diagnostic]) -> list[Diagnostic]
     return diagnostics
 
 
+async def _guardian_application_uniqueness_diagnostics(
+    body: dict[str, Any],
+    *,
+    allow_same_submission_claim: bool,
+) -> list[Diagnostic]:
+    """Fail closed when a Guardian identifier or continuity key is claimed.
+
+    Existing final applications are read from the Record-Chain-derived Guardian
+    state.  New pending applications additionally hold two immutable semantic
+    claim paths.  The paths close the race between concurrent, differently
+    signed envelopes that share the same Guardian identity.
+
+    Preflight may treat an exact existing semantic claim as an idempotent retry.
+    Submit calls this helper only after submission-hash idempotency lookup; an
+    exact claim without its idempotency index is therefore inconsistent state.
+    """
+    draft = extract_record_draft(body)
+    if not isinstance(draft, dict):
+        return []
+    identity = extract_guardian_application_identity(draft)
+    if identity is None:
+        return []
+
+    guardian_id, public_key_sha256 = identity
+    submission_sha256 = sha256_canonical_json(body)
+    claim_paths = guardian_uniqueness_claim_paths(guardian_id, public_key_sha256)
+    lookup_paths = [GUARDIAN_STATE_PATH, *claim_paths.values()]
+
+    try:
+        guardian_state, *claim_values = await asyncio.gather(
+            *(_load_json_text_or_none(path) for path in lookup_paths)
+        )
+    except Exception as exc:
+        logger.warning(
+            "Guardian application uniqueness lookup failed for %s: %s",
+            guardian_id,
+            exc,
+        )
+        return [Diagnostic(
+            code="GUARDIAN_APPLICATION_UNIQUENESS_LOOKUP_FAILED",
+            severity="error",
+            field="record_draft.guardian_application_content",
+            message=f"Could not safely check Guardian application uniqueness: {exc}",
+            meaning=(
+                "Guardian application intake must fail closed when final or pending "
+                "identity claims cannot be read."
+            ),
+            suggested_fix="Retry the exact same signed submission later.",
+            retry_allowed=True,
+        )]
+
+    if (
+        not isinstance(guardian_state, dict)
+        or guardian_state.get("schema") != "trinityaccord.derived-guardian-state.v1"
+        or not isinstance(guardian_state.get("guardians"), list)
+    ):
+        return [Diagnostic(
+            code="GUARDIAN_APPLICATION_UNIQUENESS_LOOKUP_FAILED",
+            severity="error",
+            field=GUARDIAN_STATE_PATH,
+            message="Current Record-Chain Guardian state is missing or invalid.",
+            meaning="The Gateway cannot safely decide whether this Guardian identity already has an application.",
+            suggested_fix="Retry the exact same signed submission after Guardian state is restored.",
+            retry_allowed=True,
+        )]
+
+    claim_by_kind = dict(zip(claim_paths, claim_values, strict=True))
+    exact_claim_kinds: set[str] = set()
+    diagnostics: list[Diagnostic] = []
+
+    for claim_kind, claim in claim_by_kind.items():
+        if claim is None:
+            continue
+        errors = guardian_uniqueness_claim_errors(
+            claim,
+            claim_kind=claim_kind,
+            guardian_id=guardian_id,
+            public_key_sha256=public_key_sha256,
+        )
+        if errors:
+            diagnostics.append(Diagnostic(
+                code="GUARDIAN_APPLICATION_CLAIM_STATE_INCONSISTENT",
+                severity="error",
+                field=claim_paths[claim_kind],
+                message="Existing Guardian uniqueness claim is invalid: " + "; ".join(errors),
+                meaning="The Gateway failed closed instead of trusting a malformed semantic claim.",
+                suggested_fix="Retry later or ask an operator to inspect the immutable Guardian claim index.",
+                retry_allowed=True,
+            ))
+            continue
+
+        if claim.get("submission_sha256") == submission_sha256:
+            exact_claim_kinds.add(claim_kind)
+            continue
+
+        if claim_kind == "guardian_id":
+            diagnostics.append(Diagnostic(
+                code="GUARDIAN_APPLICATION_DUPLICATE_ID",
+                severity="error",
+                field="record_draft.guardian_application_content.requested_guardian_identifier",
+                message=f"Guardian identifier {guardian_id} already has an application claim.",
+                meaning="A Guardian identifier can be bound to only one immutable application history.",
+                suggested_fix="Do not create another application for this Guardian identity; read its current Guardian state instead.",
+                retry_allowed=False,
+            ))
+        else:
+            diagnostics.append(Diagnostic(
+                code="GUARDIAN_APPLICATION_DUPLICATE_PUBLIC_KEY",
+                severity="error",
+                field="record_draft.guardian_application_content.guardian_public_key_sha256",
+                message="This Guardian continuity public key already has an application claim.",
+                meaning="A Guardian continuity key can be bound to only one immutable application history.",
+                suggested_fix="Reuse the original application receipt/state; use Guardian retirement for an existing identity.",
+                retry_allowed=False,
+            ))
+
+    if diagnostics:
+        return diagnostics
+
+    all_exact = exact_claim_kinds == set(claim_paths)
+    if exact_claim_kinds and not all_exact:
+        return [Diagnostic(
+            code="GUARDIAN_APPLICATION_CLAIM_STATE_INCONSISTENT",
+            severity="error",
+            field="record-chain/intake",
+            message="Only one of the two required Guardian uniqueness claims exists for this submission.",
+            meaning="Guardian identifier and public-key claims must be materialized atomically.",
+            suggested_fix="Retry later or ask an operator to inspect the immutable Guardian claim indexes.",
+            retry_allowed=True,
+        )]
+    if all_exact and not allow_same_submission_claim:
+        return [Diagnostic(
+            code="GUARDIAN_APPLICATION_CLAIM_STATE_INCONSISTENT",
+            severity="error",
+            field="record-chain/intake/by-submission-sha256",
+            message="Guardian uniqueness claims exist, but the matching submission idempotency index was not resolved.",
+            meaning="The Gateway refused to create a second intake transaction for the same semantic claim.",
+            suggested_fix="Retry the exact same signed submission later or ask an operator to repair its idempotency binding.",
+            retry_allowed=True,
+        )]
+
+    state_matches = [
+        item
+        for item in guardian_state["guardians"]
+        if isinstance(item, dict)
+        and (
+            item.get("guardian_id") == guardian_id
+            or item.get("guardian_public_key_sha256") == public_key_sha256
+        )
+    ]
+    if state_matches and not (allow_same_submission_claim and all_exact):
+        source_ids = sorted({
+            str(item.get("source_record_id"))
+            for item in state_matches
+            if item.get("source_record_id")
+        })
+        source_note = f" Existing final record(s): {', '.join(source_ids)}." if source_ids else ""
+        id_collision = any(item.get("guardian_id") == guardian_id for item in state_matches)
+        key_collision = any(
+            item.get("guardian_public_key_sha256") == public_key_sha256
+            for item in state_matches
+        )
+        if id_collision:
+            diagnostics.append(Diagnostic(
+                code="GUARDIAN_APPLICATION_DUPLICATE_ID",
+                severity="error",
+                field="record_draft.guardian_application_content.requested_guardian_identifier",
+                message=f"Guardian identifier {guardian_id} already has a final application.{source_note}",
+                meaning="Retirement does not erase the original Guardian application or free its identifier for reuse.",
+                suggested_fix="Read current Guardian state; do not submit another application for this identifier.",
+                retry_allowed=False,
+            ))
+        if key_collision:
+            diagnostics.append(Diagnostic(
+                code="GUARDIAN_APPLICATION_DUPLICATE_PUBLIC_KEY",
+                severity="error",
+                field="record_draft.guardian_application_content.guardian_public_key_sha256",
+                message=f"This Guardian continuity public key already has a final application.{source_note}",
+                meaning="Retirement does not erase the original Guardian application or free its key for reuse.",
+                suggested_fix="Read current Guardian state; do not submit another application with this key.",
+                retry_allowed=False,
+            ))
+    return diagnostics
+
+
 async def _guardian_retirement_target_diagnostics(body: dict[str, Any]) -> list[Diagnostic]:
     """Verify a Guardian retirement against its immutable application record.
 
@@ -760,8 +952,9 @@ def _build_idempotency_index_data(
     now: datetime,
     pending_written: bool = False,
     pending_committed_at: str | None = None,
+    guardian_claim_paths: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    return {
+    data = {
         "schema": "trinityaccord.record-chain-intake-idempotency.v1",
         "submission_sha256": submission_sha256,
         "stored_submission_sha256": stored_submission_sha256,
@@ -777,6 +970,10 @@ def _build_idempotency_index_data(
         "pending_written": pending_written,
         "pending_committed_at": pending_committed_at,
     }
+    if guardian_claim_paths:
+        data["guardian_uniqueness_claims_written"] = True
+        data["guardian_uniqueness_claim_paths"] = dict(guardian_claim_paths)
+    return data
 
 
 async def _read_idempotency_index(submission_sha256: str) -> dict[str, Any] | None:
@@ -1085,6 +1282,11 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
         diagnostics.extend(await _guardian_retirement_target_diagnostics(body))
     if not diagnostics:
         diagnostics.extend(await _record_target_diagnostics(body))
+    if not diagnostics:
+        diagnostics.extend(await _guardian_application_uniqueness_diagnostics(
+            body,
+            allow_same_submission_claim=True,
+        ))
 
     # Authorship verification is performed inside validate_submission().
     # Do not run a second verifier here; duplicate verifiers can produce conflicting diagnostics.
@@ -1115,7 +1317,7 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
 
 
 # ---------------------------------------------------------------------------
-# Submit — validate + persist (triple file write + optional linked Guardian)
+# Submit — validate + atomically persist intake and semantic claim files
 # ---------------------------------------------------------------------------
 
 @app.post("/record-chain/submit", response_model=SubmitResponse)
@@ -1292,6 +1494,24 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 )],
                 boundary=_build_submit_boundary(body),
             )
+
+    # Submission-hash idempotency has already had the first opportunity to
+    # resolve an exact retry.  Now enforce Guardian semantic uniqueness before
+    # rate limiting or creating any intake artifact.
+    guardian_uniqueness_diagnostics = await _guardian_application_uniqueness_diagnostics(
+        body,
+        allow_same_submission_claim=False,
+    )
+    if guardian_uniqueness_diagnostics:
+        return SubmitResponse(
+            accepted=False,
+            submitted=False,
+            record_type=record_type,
+            submission_sha256=original_submission_sha256,
+            received_raw_body_sha256=received_raw_body_sha256,
+            diagnostics=guardian_uniqueness_diagnostics,
+            boundary=_build_submit_boundary(body),
+        )
 
     # --- rate limit check (only on submit, not preflight) ---
     rate_limit_result = check_rate_limit(body)
@@ -1490,12 +1710,16 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                 boundary=_build_submit_boundary(body),
             )
 
-        # Submission, receipt, finalized idempotency index, and pending marker
-        # become visible in one branch-ref update. The strict verifier can no
-        # longer observe an idempotency index before its pending transaction is
-        # fully materialized.
+        # Submission, receipt, finalized idempotency index, pending marker, and
+        # any Guardian semantic claims become visible in one branch-ref update.
+        # The strict verifier can no longer observe an intake index or semantic
+        # claim before its complete pending transaction is materialized.
         idempotency_path = _idempotency_index_path(original_submission_sha256)
         pending_committed_at = now.isoformat().replace("+00:00", "Z")
+        guardian_identity = extract_guardian_application_identity(draft)
+        guardian_claim_paths: dict[str, str] = {}
+        if guardian_identity is not None:
+            guardian_claim_paths = guardian_uniqueness_claim_paths(*guardian_identity)
         idempotency_index_data = _build_idempotency_index_data(
             submission_sha256=original_submission_sha256,
             stored_submission_sha256=stored_submission_sha256,
@@ -1507,6 +1731,7 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             now=now,
             pending_written=True,
             pending_committed_at=pending_committed_at,
+            guardian_claim_paths=guardian_claim_paths,
         )
         atomic_files = {
             intake_submission_path: submission_content,
@@ -1514,6 +1739,21 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
             idempotency_path: canonical_dumps(idempotency_index_data),
             pending_file_path: pending_content,
         }
+        if guardian_identity is not None:
+            guardian_id, public_key_sha256 = guardian_identity
+            for claim_kind, claim_path in guardian_claim_paths.items():
+                claim = build_guardian_uniqueness_claim(
+                    claim_kind=claim_kind,
+                    guardian_id=guardian_id,
+                    public_key_sha256=public_key_sha256,
+                    submission_sha256=original_submission_sha256,
+                    receipt_id=receipt_id,
+                    receipt_path=receipt_path,
+                    pending_file_path=pending_file_path,
+                    intake_submission_path=intake_submission_path,
+                    created_at=pending_committed_at,
+                )
+                atomic_files[claim_path] = canonical_dumps(claim)
 
         try:
             atomic_result = await create_files_atomic(
@@ -1567,6 +1807,20 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
                         original_submission_sha256[:16],
                         response_exc,
                     )
+            semantic_conflicts = await _guardian_application_uniqueness_diagnostics(
+                body,
+                allow_same_submission_claim=False,
+            )
+            if semantic_conflicts:
+                return SubmitResponse(
+                    accepted=False,
+                    submitted=False,
+                    record_type=record_type,
+                    submission_sha256=original_submission_sha256,
+                    received_raw_body_sha256=received_raw_body_sha256,
+                    diagnostics=semantic_conflicts,
+                    boundary=_build_submit_boundary(body),
+                )
             return SubmitResponse(
                 accepted=False,
                 submitted=False,

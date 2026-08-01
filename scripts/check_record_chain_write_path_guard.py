@@ -13,6 +13,8 @@ INTAKE_IMMUTABLE_PREFIXES = (
     "record-chain/intake/submissions/",
     "record-chain/intake/receipts/",
     "record-chain/intake/by-submission-sha256/",
+    "record-chain/intake/by-guardian-id/",
+    "record-chain/intake/by-guardian-public-key-sha256/",
 )
 
 PENDING_PREFIXES = (

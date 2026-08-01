@@ -128,6 +128,8 @@ def main() -> None:
         "record-chain/processed/",
         "record-chain/rejected/",
         "record-chain/pending/",
+        "record-chain/intake/by-guardian-id/",
+        "record-chain/intake/by-guardian-public-key-sha256/",
         "record-chain/chain-tip.json",
         "record-chain/hash-chain/main.chain.jsonl",
         "api/record-chain-head.json",

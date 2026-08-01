@@ -1,6 +1,6 @@
 # Record-Chain Intake Gateway
 
-A FastAPI microservice that validates, sanitizes, and persists record submissions into the Trinity Accord record-chain repository via the GitHub Contents API.
+A FastAPI microservice that validates, sanitizes, and atomically persists record submissions into the Trinity Accord record-chain repository via the GitHub Git Data API.
 
 ## Purpose
 
@@ -9,6 +9,7 @@ This gateway sits between agent clients and the Trinity Record-Chain intake. It:
 - **Validates** incoming submissions against JSON schemas and security rules
 - **Rejects** forbidden chain fields, private keys, and placeholder tokens
 - **Enforces** context-completeness minimums per record type and verification version
+- **Claims** Guardian identifiers and continuity public keys atomically so a differently signed duplicate cannot enter the pending queue
 - **Persists** accepted submissions, intake-only receipts, and pending candidates in the target repo
 - **Returns** SHA-256-verifiable intake receipts; a receipt is not final chain inclusion or Guardian activation
 

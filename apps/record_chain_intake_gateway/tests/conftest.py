@@ -247,6 +247,77 @@ def _make_signed_submission() -> dict[str, Any]:
     return _make_valid_submission()
 
 
+def _make_valid_guardian_application_submission() -> dict[str, Any]:
+    """Build a current standalone Guardian application with a real signature."""
+    guardian_id = f"guardian_ed25519_{_PUBLIC_KEY_RAW_SHA256[:16]}"
+    loaded_urls = [
+        "https://www.trinityaccord.org/guardian-alliance/",
+        "https://www.trinityaccord.org/guardian-join/",
+        "https://www.trinityaccord.org/api/guardian-active-listing-policy.v2.json",
+        "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
+    ]
+    draft = _make_v2_echo_draft()
+    draft["record_type"] = "guardian_application"
+    draft.pop("echo_content", None)
+    draft["authorization_context"]["authorization_scope"] = "create_guardian_application_record"
+    draft["context_readiness"]["loaded_context_urls"] = loaded_urls
+    draft["guardian_application_content"] = {
+        "requested_guardian_identifier": guardian_id,
+        "guardian_public_key_sha256": _PUBLIC_KEY_RAW_SHA256,
+        "guardian_stewardship_oath": (
+            "I voluntarily join the Guardian Alliance as a non-governing steward."
+        ),
+        "guardian_understands_role_is_non_governing": True,
+        "guardian_understands_role_is_not_authority": True,
+        "guardian_understands_retirement_does_not_delete_history": True,
+    }
+    readback_text, oath_verification = _build_oath_for_record_type(
+        "guardian_application",
+        draft,
+    )
+    draft["submission_oath_verification"] = oath_verification
+    proof = _sign_draft(draft)
+
+    return {
+        "schema": "trinityaccord.record-chain-submission.v1",
+        "submission_type": "record_chain_entry_candidate",
+        "client_generated_at": "2026-06-01T00:00:00Z",
+        "record_type": "guardian_application",
+        "record_draft": draft,
+        "builder": {
+            "name": "test-current-fixture",
+            "version": "test",
+            "source_url": "tests/conftest.py",
+        },
+        "client_context": {
+            "site_entry_url": "https://www.trinityaccord.org/guardian-join/",
+            "declared_context_level": "CC-3",
+            "loaded_context_urls": loaded_urls,
+        },
+        "submission_boundary": {
+            "not_authority": True,
+            "not_governance": True,
+            "not_attestation": True,
+            "not_successor_reception": True,
+            "not_amendment": True,
+            "bitcoin_originals_prevail": True,
+            "receipt_is_not_final_inclusion": True,
+            "receipt_is_intake_only": True,
+            "later_records_may_reclassify_or_correct_this_record": True,
+        },
+        "authorship_proof": proof,
+        "client_oath_readback": {
+            "record_type": "guardian_application",
+            "oath_policy_sha256": oath_verification["oath_policy_sha256"],
+            "oath_modules": list(oath_verification["oath_modules"]),
+            "readback_method_declared": oath_verification["readback_method_declared"],
+            "readback_text": readback_text,
+            "readback_text_sha256": oath_verification["participant_readback_sha256"],
+            "readback_text_char_count": len(readback_text),
+        },
+    }
+
+
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -261,6 +332,12 @@ def valid_echo_submission() -> dict[str, Any]:
 def signed_echo_submission() -> dict[str, Any]:
     """A valid signed echo submission (deep-copied per test)."""
     return _make_signed_submission()
+
+
+@pytest.fixture
+def valid_guardian_application_submission() -> dict[str, Any]:
+    """A current Guardian application signed by the shared test key."""
+    return _make_valid_guardian_application_submission()
 
 
 @pytest.fixture

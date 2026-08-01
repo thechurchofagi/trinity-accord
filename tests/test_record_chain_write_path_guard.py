@@ -24,3 +24,12 @@ def test_idempotency_index_is_gateway_intake():
 def test_idempotency_index_is_protected():
     path = "record-chain/intake/by-submission-sha256/" + "a" * 64 + ".json"
     assert "gateway_intake" in guard.protected_categories([path])
+
+
+def test_guardian_semantic_uniqueness_indexes_are_protected_gateway_intake():
+    paths = [
+        "record-chain/intake/by-guardian-id/guardian_ed25519_" + "a" * 16 + ".json",
+        "record-chain/intake/by-guardian-public-key-sha256/" + "a" * 64 + ".json",
+    ]
+    assert {guard.category(path) for path in paths} == {"gateway_intake"}
+    assert guard.protected_categories(paths) == {"gateway_intake"}

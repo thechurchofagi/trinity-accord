@@ -53,6 +53,11 @@ def test_governance_entity_builder_gateway_and_retirement_lifecycle(monkeypatch,
     async def get_file_text(path: str) -> str | None:
         if path == f"record-chain/records/{target_id}.json":
             return json.dumps(final_application)
+        if path == "record-chain/indexes/guardian-state.json":
+            return json.dumps({
+                "schema": "trinityaccord.derived-guardian-state.v1",
+                "guardians": [],
+            })
         return None
 
     async def no_existing_idempotency(_submission_sha256: str):

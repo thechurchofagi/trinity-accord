@@ -274,14 +274,16 @@ A registry number is not authority, not governance, not attestation, not a verif
 2. Recompute `guardian_id` from public key.
 3. Recompute signed payload hash.
 4. Check required boundary fields.
-5. Look up `guardian_id` in `/api/guardian-current-registry.json` (current) or `/api/guardian-registry.json` (legacy).
+5. Look up `guardian_id` in `/api/guardian-current-registry.json` or `/record-chain/indexes/guardian-state.json` for current status. Never use the legacy registry as a current-status source.
 6. Return structured status.
 
-Automated verification:
+Current Record-Chain verification after cloning the repository:
 
 ```bash
-python3 scripts/verify_guardian_status.py --payload payload.json --registry api/guardian-current-registry.json
+python3 scripts/trinity_record_chain.py verify
 ```
+
+Then read `/api/guardian-current-registry.json` or `/record-chain/indexes/guardian-state.json` for the Guardian's current derived status. `/api/guardian-registry.json` remains historical archive only.
 
 ## Guardian status values
 
