@@ -178,8 +178,11 @@ def test_workflow_is_guarded_serialized_and_cold_restores():
     workflow = (
         ROOT / ".github/workflows/external-binary-annex-publication.yml"
     ).read_text(encoding="utf-8")
+    assert "workflow_dispatch:" in workflow
+    assert ".github/workflows/external-binary-annex-publication.yml" in workflow
     assert "group: main-write-lock" in workflow
-    assert "queue: max" in workflow
+    assert "cancel-in-progress: false" in workflow
+    assert "queue:" not in workflow
     assert "ZENODO_ACCESS_TOKEN" in workflow
     assert "TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED" in workflow
     assert "scripts/toolchain_provenance.py" in workflow
