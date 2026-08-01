@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.guardian-alliance.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "voluntary_non_governing_stewardship_network_and_identity_continuity_layer",
   "description": "Voluntary, non-governing Guardian Alliance for key continuity and stewardship practices around the Trinity Accord. It can help preserve discoverability, verifiability, access paths, mirrors, Echoes, context, and annual memory traces. It does not prove truth, authority, verification level, attestation, same conscious subject, successor reception, governance, legal obligation, membership rank, or amendment.",
   "private_key_must_remain_local": true,
@@ -34,7 +34,7 @@
         "id": "active_registered_guardian",
         "description": "Active status requires later public registry readback. It is not automatically created or guaranteed by a Guardian application receipt.",
         "expected_status": "active_only_if_registry_match",
-        "guardian_registry_number_source": "/api/guardian-registry.json",
+        "guardian_registry_number_source": "/api/guardian-current-registry.json",
         "current_public_route": "not_guaranteed_by_application_intake"
       }
     ],
@@ -52,7 +52,8 @@
     "post_submit_readback": [
       "receipt_status",
       "/api/record-chain-status.json",
-      "/api/guardian-registry.json"
+      "/api/guardian-current-registry.json",
+      "/record-chain/indexes/guardian-state.json"
     ]
   },
   "stewardship_practices": [
@@ -135,19 +136,21 @@
     ]
   },
   "references": {
-    "registry": "/api/guardian-registry.json",
+    "registry": "/api/guardian-current-registry.json",
+    "guardian_state": "/record-chain/indexes/guardian-state.json",
+    "legacy_registry_historical_archive": "/api/guardian-registry.json",
     "presence_proof_schema": "/api/guardian-presence-proof-schema.v1.json",
     "verification_result_schema": "/api/guardian-verification-result-schema.v1.json",
     "registration_schema": "/api/guardian-registration-schema.v1.json",
     "retirement_schema": "/api/guardian-retirement-schema.v1.json",
-    "registry_schema": "/api/guardian-registry-schema.v1.json"
+    "legacy_registry_schema": "/api/guardian-registry-schema.v1.json"
   },
   "verification_steps": [
     "Verify Guardian Ed25519 signature",
     "Recompute guardian_id from public key",
     "Recompute signed payload hash",
     "Check required boundary fields",
-    "Look up guardian_id in /api/guardian-registry.json",
+    "Look up guardian_id in /api/guardian-current-registry.json or /record-chain/indexes/guardian-state.json",
     "Return structured status"
   ],
   "boundary": {

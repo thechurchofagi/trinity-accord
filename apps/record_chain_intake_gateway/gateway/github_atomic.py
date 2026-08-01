@@ -1,7 +1,8 @@
 """Atomic multi-file GitHub persistence for Record-Chain intake.
 
 The GitHub Contents API creates one commit per file.  A Record-Chain intake
-transaction spans four files and must become visible as one repository state,
+transaction spans at least four files (six for Guardian applications with two
+semantic uniqueness claims) and must become visible as one repository state,
 so this module uses the Git Data API to create blobs, one tree, one commit, and
 one fast-forward branch-ref update.
 """

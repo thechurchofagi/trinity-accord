@@ -17,7 +17,7 @@
       "response_content_type": "application/json"
     },
     "preflight": {
-      "description": "Validates a submission without persisting it. Returns diagnostics, warnings, and route detection. Guardian retirement preflight also verifies the immutable target application record id, record SHA-256, Guardian key, and Guardian identifier. Use before submit to catch errors cheaply.",
+      "description": "Validates a submission without persisting it. Returns diagnostics, warnings, and route detection. Guardian application preflight checks final and pending identifier/public-key uniqueness. Guardian retirement preflight also verifies the immutable target application record id, record SHA-256, Guardian key, and Guardian identifier. Use before submit to catch errors cheaply.",
       "method": "POST",
       "path": "/record-chain/preflight",
       "request_content_type": "application/json",
@@ -108,6 +108,9 @@
   "server_side_pipeline": {
     "description": "The gateway owns the full pipeline: preflight validates, submit persists to intake, internal workers append to the canonical Record-Chain, and hashes are assigned server-side. A receipt confirms intake acceptance but does not guarantee final chain position.",
     "preflight_validates_only": true,
+    "guardian_application_preflight_checks_final_and_pending_uniqueness": true,
+    "guardian_application_submit_claims_identifier_and_public_key_atomically": true,
+    "guardian_application_finalizer_rechecks_uniqueness_before_chain_mutation": true,
     "guardian_retirement_preflight_binds_final_application": true,
     "receipt_is_not_final_chain_record": true,
     "record_chain_append_is_internal": true,
@@ -118,7 +121,7 @@
     "generated_hash_source_rule": "Builder generates client authorship and oath-derived hashes; Gateway generates receipt hashes; final-chain tooling assigns final record, content, and chain hashes."
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-07-18T00:00:00Z",
+  "updated_at": "2026-07-31T00:00:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -178,6 +181,7 @@
     "default_max_submission_bytes": 524288,
     "strict_json_duplicate_keys_rejected": true,
     "submit_intake_files_materialized_in_one_git_commit": true,
+    "guardian_semantic_uniqueness_claims_share_intake_atomic_commit": true,
     "receipt_and_terminal_status_hashes_verified_on_read": true,
     "live_readiness_endpoint": "/record-chain/readiness"
   }
