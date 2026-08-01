@@ -65,7 +65,8 @@ def test_zenodo_publisher_is_independent_and_token_safe():
     assert "PUBLISHED_FILE_NAMES" in publisher
     assert '"zenodo-metadata.json"' in package_contract
     assert "verify_remote_files" in publisher
-    assert "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V1_APPROVED" in publisher
+    assert "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V2_APPROVED" in publisher
+    assert 'ZENODO_LICENSE_ID = "other-closed"' in package_contract
     assert "WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK" in workflow
     assert "publication_enabled" in workflow
     assert "restore_weekly_continuity_archive.py" in workflow
@@ -78,6 +79,10 @@ def test_quarterly_remote_recovery_drill_covers_both_independent_mirrors():
     assert 'cron: "17 8 1 1,4,7,10 *"' in workflow
     assert "--zenodo-record-id" in workflow
     assert "--arweave-txid" in workflow
+    assert "--arweave-expected-sha256" in workflow
+    assert "https://arweave.net/raw/{txid}" in workflow
+    assert "https://ar-io.net/{txid}" in workflow
+    assert "https://g8way.io/{txid}" in workflow
     assert "restore_weekly_continuity_archive.py" in workflow
     assert "contents: read" in workflow
     assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" in workflow

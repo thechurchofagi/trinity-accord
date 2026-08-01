@@ -1,0 +1,28 @@
+{
+  "schema": "trinityaccord.repository-preservation-zenodo-state.v1",
+  "publication_status": "not_yet_published",
+  "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
+  "latest_capsule_id": null,
+  "latest_git_commit_sha": null,
+  "latest_git_tree_oid": null,
+  "latest_record_id": null,
+  "latest_doi": null,
+  "latest_doi_url": null,
+  "concept_record_id": null,
+  "concept_doi": null,
+  "latest_package_identity_sha256": null,
+  "versions": [],
+  "api_base": "https://zenodo.org/api",
+  "github_required_for_repository_recovery": false,
+  "external_large_binary_annex_embedded": false,
+  "earlier_software_snapshot": {
+    "doi": "10.5281/zenodo.21675727",
+    "record_id": 21675727,
+    "scope": "older GitHub source ZIP only",
+    "limitations": [
+      "Does not contain full Git history.",
+      "Predates the protected Gateway and repository preservation capsule implementation.",
+      "Does not represent the current production repository state."
+    ]
+  }
+}

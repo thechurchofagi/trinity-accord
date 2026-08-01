@@ -30,12 +30,41 @@ Arweave archive is a mirror/backup layer for the record-chain.
 - Does **not** upload to Arweave.
 - No wallet secret required.
 
-### Live (Phase 6B, not yet implemented)
+### Live (implemented)
 
 - Requires `ARWEAVE_WALLET_JWK_B64` GitHub secret.
-- Uploads archive manifest and selected files to Arweave.
-- Returns TXID.
-- Verifies TXID availability through Arweave gateway.
+- Runs on the weekly Wednesday `07:17 UTC` continuity window, and pays only
+  when a mature Native OTS proof and new Record-Chain data are available.
+- The first Weekly Continuity archive is a self-contained `full_snapshot`;
+  later versions are contiguous `incremental_delta` payloads.
+- Uploads the deterministic payload, records its TXID, downloads the bytes
+  again, and requires the readback SHA-256 to match before marking it archived.
+- Enforces all of these non-bypassable limits: one paid upload of each class
+  per UTC day, 8 MiB maximum payload, 0.05 AR maximum single reward, 0.50 AR
+  maximum rolling 30-day spend, and at least 0.25 AR wallet reserve.
+- Environment variables may make these limits stricter, but may not loosen
+  the hard ceilings.
+
+The public archive index currently records historical daily archives as well
+as the newer weekly policy. Historical entries remain evidence of prior live
+uploads; they do not re-enable daily paid uploads.
+
+## Recovery access paths
+
+An Arweave TXID and expected SHA-256 identify the payload. A gateway URL is
+only an access path and is never treated as the identity of the archive.
+
+Quarterly Weekly Continuity recovery attempts and cross-checks:
+
+- `https://arweave.net/{txid}`;
+- `https://arweave.net/raw/{txid}`;
+- `https://ar-io.net/{txid}`;
+- `https://g8way.io/{txid}`.
+
+Successful gateways must return byte-identical content, and the consensus
+bytes must equal the repository-preserved expected SHA-256. One operator or
+one URL being unavailable therefore does not by itself make the archive
+unrecoverable. A disagreement is a hard failure, not a majority vote.
 
 ## Idempotency
 

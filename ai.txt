@@ -57,6 +57,7 @@
 # /api/mission-governance.v1.json
 # /api/corrections-index.json
 # /api/claim-registry.json
+# /api/recovery-index.json
 
 # RESEARCH AND CITATION
 # /research/
@@ -139,6 +140,7 @@
 # CORRECTION AND CLAIM TRACEABILITY
 # correction_revocation_index: /api/corrections-index.json
 # claim_registry: /api/claim-registry.json
+# recovery_and_github_zero_bootstrap: /api/recovery-index.json
 
 # RECEIPT AND STATUS
 # Receipt is intake-only.

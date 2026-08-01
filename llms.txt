@@ -201,6 +201,11 @@ Correction and claim traceability:
   correction_revocation_index: /api/corrections-index.json
   claim_registry: /api/claim-registry.json
 
+Recovery and GitHub-zero bootstrap:
+  /api/recovery-index.json
+  The repository preservation DOI state and standalone restore path are indexed there.
+  Recovery mirrors are non-amending; Bitcoin Originals remain authoritative.
+
 Mission governance:
   /api/mission-governance.v1.json
 

@@ -125,6 +125,38 @@ for a full repository recovery claim.
 
 ---
 
+### Drill G — GitHub-Zero Repository Capsule Recovery
+
+**Scenario:** Assume the repository, all branches, GitHub Pages, Releases, Actions
+artifacts, and maintainer account are unavailable. Recover the complete current
+Git-tracked production tree only from a public Zenodo preservation capsule.
+
+**Automated cadence:** `.github/workflows/quarterly-continuity-recovery.yml` reads the
+latest published capsule record from `preservation/zenodo-state.json`, downloads all
+eight files from Zenodo into a fresh runner directory, and runs the standalone restorer.
+The quarterly capsule build workflow separately proves that the newly built local
+capsule can cold-start without network access after download.
+
+**Steps:**
+1. Download `restore-trinity-accord.py` from the latest capsule record.
+2. Run it with `--zenodo-record-id` and a new output directory.
+3. Confirm `repository_recovery_status: full_current_git_tracked_tree`,
+   `github_required: false`, the source production commit identity, and the exact
+   production tree identity in `recovery-report.json`.
+4. Confirm `git fsck --full --strict`, source-snapshot comparison, all tracked-file
+   SHA-256/mode checks, the single recovery ref, and all recovery checkpoints passed.
+5. Continue with authority, BTC signature, digest-manifest, and corrections-index
+   verification. Do not promote repository recovery alone to authority-level recovery.
+6. If no capsule DOI exists yet, record the drill as `deferred`, not as a pass.
+
+**Expected result:** Every current Git-tracked byte and executable mode is restored
+without GitHub. Production parent history and tag objects are intentionally excluded
+from the public DOI to avoid republishing historical credentials; their identities are
+manifest metadata. External large binary payloads remain a separately declared scope
+and must not be reported as Zenodo-only recovered unless a verified annex exists.
+
+---
+
 ## Drill Report Template
 
 After each drill, produce a report:
@@ -134,7 +166,7 @@ After each drill, produce a report:
 
 - **Date:** YYYY-MM-DD
 - **Commit:** <commit hash>
-- **Scenario:** Drill A / B / C / D / E
+- **Scenario:** Drill A / B / C / D / E / F / G
 - **Recovery status:** full_recovery / partial_recovery / failed_recovery
 
 ## Materials Used

@@ -77,6 +77,7 @@
     "/api/record-chain-server-receipt.v1.json",
     "/api/record-chain-status.json",
     "/api/public-home-status.json",
+    "/api/recovery-index.json",
     "/record-chain/indexes/echo-index.json",
     "/record-chain/indexes/verification-index.json",
     "/record-chain/indexes/guardian-state.json",
@@ -176,7 +177,7 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "db14b77fe96af0a7",
+  "source_digest": "1bc0de0010a8066a",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",

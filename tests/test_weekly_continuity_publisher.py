@@ -95,6 +95,7 @@ def make_package(tmp_path: Path, archive_id: str = "archive-test") -> Path:
                 "schema": package.RIGHTS_BOUNDARY_VERSION,
                 "license_identifier": package.ZENODO_LICENSE_ID,
                 "third_party_rights_are_not_transferred": True,
+                "deposit_grants_no_new_reuse_rights": True,
             },
         },
     )

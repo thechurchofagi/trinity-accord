@@ -37,7 +37,7 @@ from weekly_continuity_package import (
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STATE = ROOT / "record-chain" / "weekly-continuity-zenodo-state.json"
 DEFAULT_API = "https://zenodo.org/api"
-RIGHTS_ACKNOWLEDGEMENT = "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V1_APPROVED"
+RIGHTS_ACKNOWLEDGEMENT = "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V2_APPROVED"
 
 
 def read_json(path: Path) -> dict[str, Any]:

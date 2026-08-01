@@ -25,7 +25,12 @@ from weekly_continuity_package import PUBLISHED_FILE_NAMES, verify_local_package
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_ARWEAVE_GATEWAY = "https://arweave.net"
+DEFAULT_ARWEAVE_GATEWAYS = (
+    "https://arweave.net/{txid}",
+    "https://arweave.net/raw/{txid}",
+    "https://ar-io.net/{txid}",
+    "https://g8way.io/{txid}",
+)
 DEFAULT_ZENODO_API = "https://zenodo.org/api"
 TXID_RE = re.compile(r"^[A-Za-z0-9_-]{43}$")
 RECORD_ID_RE = re.compile(r"^R-([0-9]{9})$")
@@ -101,17 +106,74 @@ def source_from_deposit(deposit_dir: Path) -> dict[str, Any]:
     }
 
 
-def source_from_arweave(txid: str, gateway: str) -> dict[str, Any]:
+def arweave_gateway_url(template: str, txid: str) -> str:
+    if "{txid}" in template:
+        return template.replace("{txid}", txid)
+    return f"{template.rstrip('/')}/{txid}"
+
+
+def source_from_arweave(
+    txid: str,
+    gateways: list[str] | tuple[str, ...],
+    expected_sha256: str | None = None,
+) -> dict[str, Any]:
     if TXID_RE.fullmatch(txid) is None:
         raise SystemExit(f"invalid Arweave transaction id: {txid}")
-    raw = fetch_bytes(f"{gateway.rstrip('/')}/{txid}", f"Arweave {txid}")
+    if expected_sha256 is not None and not re.fullmatch(r"[0-9a-f]{64}", expected_sha256):
+        raise SystemExit(f"invalid expected Arweave SHA-256 for {txid}")
+    successful: list[dict[str, Any]] = []
+    failures: list[str] = []
+    seen_urls: set[str] = set()
+    for gateway in gateways:
+        url = arweave_gateway_url(gateway, txid)
+        if url in seen_urls:
+            continue
+        seen_urls.add(url)
+        try:
+            candidate = fetch_bytes(url, f"Arweave {txid} via {url}")
+        except SystemExit as exc:
+            failures.append(f"{url}: {exc}")
+            continue
+        successful.append(
+            {
+                "url": url,
+                "raw": candidate,
+                "sha256": hashlib.sha256(candidate).hexdigest(),
+                "bytes": len(candidate),
+            }
+        )
+    if not successful:
+        raise SystemExit(
+            f"all Arweave access paths failed for {txid}: " + "; ".join(failures)
+        )
+    observed_hashes = {item["sha256"] for item in successful}
+    if len(observed_hashes) != 1:
+        identities = ", ".join(
+            f"{item['url']}={item['sha256']}" for item in successful
+        )
+        raise SystemExit(f"Arweave gateway byte disagreement for {txid}: {identities}")
+    raw = successful[0]["raw"]
+    observed_sha256 = successful[0]["sha256"]
+    if expected_sha256 is not None and observed_sha256 != expected_sha256:
+        raise SystemExit(
+            f"Arweave payload SHA-256 mismatch for {txid}: "
+            f"expected {expected_sha256}, got {observed_sha256}"
+        )
     return {
         "label": f"arweave:{txid}",
         "payload": strict_json_bytes(raw, f"Arweave {txid}"),
-        "payload_sha256": hashlib.sha256(raw).hexdigest(),
+        "payload_sha256": observed_sha256,
         "package_identity_sha256": None,
         "txid": txid,
         "source_type": "arweave_readback",
+        "transport_verification": {
+            "gateway_urls_attempted": sorted(seen_urls),
+            "gateway_urls_verified": [item["url"] for item in successful],
+            "gateway_success_count": len(successful),
+            "gateway_byte_consensus": True,
+            "expected_payload_sha256": expected_sha256,
+            "expected_payload_sha256_verified": expected_sha256 is not None,
+        },
     }
 
 
@@ -373,6 +435,7 @@ def recover(sources: list[dict[str, Any]], output_dir: Path) -> dict[str, Any]:
                 "payload_sha256": source["payload_sha256"],
                 "package_identity_sha256": source.get("package_identity_sha256"),
                 "arweave_txid": source.get("txid"),
+                "transport_verification": source.get("transport_verification"),
                 "current_native_record_count": current_count,
             }
         )
@@ -421,7 +484,21 @@ def main() -> int:
     parser.add_argument("--payload-file", action="append", default=[])
     parser.add_argument("--arweave-txid", action="append", default=[])
     parser.add_argument("--zenodo-record-id", action="append", default=[])
-    parser.add_argument("--arweave-gateway", default=DEFAULT_ARWEAVE_GATEWAY)
+    parser.add_argument(
+        "--arweave-gateway",
+        action="append",
+        default=[],
+        help=(
+            "Repeatable Arweave URL or URL template containing {txid}. "
+            "Defaults to four access paths across three gateway operators."
+        ),
+    )
+    parser.add_argument(
+        "--arweave-expected-sha256",
+        action="append",
+        default=[],
+        metavar="TXID=SHA256",
+    )
     parser.add_argument("--zenodo-api", default=DEFAULT_ZENODO_API)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--expected-latest-record-id", default="")
@@ -430,8 +507,27 @@ def main() -> int:
     sources: list[dict[str, Any]] = []
     sources.extend(source_from_deposit(Path(value).resolve()) for value in args.deposit_dir)
     sources.extend(source_from_payload(Path(value).resolve()) for value in args.payload_file)
+    expected_by_txid: dict[str, str] = {}
+    for value in args.arweave_expected_sha256:
+        try:
+            txid, expected = value.split("=", 1)
+        except ValueError as exc:
+            raise SystemExit("--arweave-expected-sha256 must be TXID=SHA256") from exc
+        if txid in expected_by_txid:
+            raise SystemExit(f"duplicate expected Arweave SHA-256 for {txid}")
+        if TXID_RE.fullmatch(txid) is None or re.fullmatch(r"[0-9a-f]{64}", expected) is None:
+            raise SystemExit(f"invalid --arweave-expected-sha256 value: {value}")
+        expected_by_txid[txid] = expected
+    unknown_expected = set(expected_by_txid) - set(args.arweave_txid)
+    if unknown_expected:
+        raise SystemExit(
+            "expected Arweave SHA-256 supplied for unknown TXID(s): "
+            + ", ".join(sorted(unknown_expected))
+        )
+    gateways = args.arweave_gateway or list(DEFAULT_ARWEAVE_GATEWAYS)
     sources.extend(
-        source_from_arweave(txid, args.arweave_gateway) for txid in args.arweave_txid
+        source_from_arweave(txid, gateways, expected_by_txid.get(txid))
+        for txid in args.arweave_txid
     )
     sources.extend(
         source_from_zenodo_record(record_id, args.zenodo_api)
