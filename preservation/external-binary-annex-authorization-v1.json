@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.external-binary-annex-publication-authorization.v1",
+  "authorized_by": "thechurchofagi",
+  "authorized_at": "2026-08-01T21:45:00+08:00",
+  "authorization": "publish_all_necessary_external_binary_annexes",
+  "publication_confirmation": "PUBLISH_TRINITY_EXTERNAL_BINARY_ANNEXES_V1",
+  "rights_boundary_ack": "TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED",
+  "core_repository_preservation_doi": "10.5281/zenodo.21739344",
+  "scope": {
+    "all_custom_assets_from_named_valid_releases": true,
+    "evidence_annex": true,
+    "chronicle_nft_media_annex": true,
+    "already_public_release_bytes_only": true,
+    "deprecated_failed_nft_attempts": false,
+    "github_generated_source_archives": false,
+    "publicly_readable_for_preservation": true,
+    "deposit_grants_no_new_reuse_rights": true
+  },
+  "user_authorization_text": "你把该做的都做了吧？你觉得该做的都做了，反正用程序做也简单。你这个写程序写得又快又好。这不是什么那个，反正容量也有，对不对？DOI 的容量是足够的，是不是？既然有容量，就把它全部做了呗。"
+}

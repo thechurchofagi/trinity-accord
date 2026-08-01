@@ -1,0 +1,13 @@
+{
+  "schema": "trinityaccord.external-binary-annex-zenodo-state.v1",
+  "publication_status": "not_yet_published",
+  "core_repository_preservation_doi": "10.5281/zenodo.21739344",
+  "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
+  "annexes": {
+    "evidence": null,
+    "nft": null
+  },
+  "all_named_release_assets_embedded": false,
+  "deprecated_failed_nft_attempts_embedded": false,
+  "external_binary_payload_recovery_requires_github": true
+}

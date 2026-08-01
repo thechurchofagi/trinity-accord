@@ -1,0 +1,13 @@
+{
+  "schema": "trinityaccord.external-binary-annex-publication-trigger.v1",
+  "authorized_by": "thechurchofagi",
+  "requested_at": "2026-08-01T21:45:00+08:00",
+  "operation": "publish_evidence_and_nft_binary_annexes",
+  "publication_confirmation": "PUBLISH_TRINITY_EXTERNAL_BINARY_ANNEXES_V1",
+  "rights_boundary_ack": "TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED",
+  "expected_core_doi": "10.5281/zenodo.21739344",
+  "expected_annex_types": [
+    "evidence",
+    "nft"
+  ]
+}
