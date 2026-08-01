@@ -53,6 +53,7 @@ def test_zenodo_publisher_is_independent_and_token_safe():
     workflow = read(".github/workflows/weekly-continuity-zenodo.yml")
     publisher = read("scripts/publish_weekly_continuity_to_zenodo.py")
     builder = read("scripts/build_weekly_continuity_deposit.py")
+    package_contract = read("scripts/weekly_continuity_package.py")
     assert "ZENODO_ACCESS_TOKEN" in workflow
     assert "GitHub Release" in workflow
     assert "gh release" not in workflow
@@ -61,8 +62,25 @@ def test_zenodo_publisher_is_independent_and_token_safe():
     assert "access_token=" not in publisher
     assert "actions/newversion" in publisher
     assert "actions/publish" in publisher
+    assert "PUBLISHED_FILE_NAMES" in publisher
+    assert '"zenodo-metadata.json"' in package_contract
+    assert "verify_remote_files" in publisher
+    assert "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V1_APPROVED" in publisher
+    assert "WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK" in workflow
+    assert "publication_enabled" in workflow
+    assert "restore_weekly_continuity_archive.py" in workflow
     assert "trinityaccord.weekly-continuity-deposit.v1" in builder
     assert '"upload_type": "dataset"' in builder
+
+
+def test_quarterly_remote_recovery_drill_covers_both_independent_mirrors():
+    workflow = read(".github/workflows/quarterly-continuity-recovery.yml")
+    assert 'cron: "17 8 1 1,4,7,10 *"' in workflow
+    assert "--zenodo-record-id" in workflow
+    assert "--arweave-txid" in workflow
+    assert "restore_weekly_continuity_archive.py" in workflow
+    assert "contents: read" in workflow
+    assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" in workflow
 
 
 def test_feature_branch_has_no_temporary_patch_or_ci_write_boundary():

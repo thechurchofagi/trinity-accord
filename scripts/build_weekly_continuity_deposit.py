@@ -16,6 +16,15 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from weekly_continuity_package import (
+    CHECKSUM_TARGET_NAMES,
+    MANIFEST_HASHED_NAMES,
+    PACKAGE_TITLE,
+    RIGHTS_BOUNDARY_VERSION,
+    ZENODO_LICENSE_ID,
+    verify_local_package,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVES = ROOT / "record-chain" / "arweave-archives"
 DEPOSITS = ROOT / "record-chain" / "weekly-continuity-deposits"
@@ -116,7 +125,7 @@ def build() -> Path | None:
     heartbeat = continuity.get("heartbeat_summary", {})
     metadata = {
         "upload_type": "dataset",
-        "title": "Trinity Accord Weekly Continuity Archive",
+        "title": PACKAGE_TITLE,
         "creators": [{"name": "Liu, Hongju"}],
         "description": (
             "A versioned, non-authoritative preservation mirror of the Trinity Accord "
@@ -127,6 +136,7 @@ def build() -> Path | None:
             "attestation, amendment, or successor reception."
         ),
         "access_right": "open",
+        "license": ZENODO_LICENSE_ID,
         "publication_date": str(manifest.get("created_at") or "")[:10],
         "version": archive_id,
         "keywords": [
@@ -152,7 +162,11 @@ def build() -> Path | None:
         "notes": (
             f"Archive {archive_id}; records through {native.get('latest_record_id')}; "
             f"Arweave transaction {arweave.get('txid') or arweave.get('tx_id')}; "
-            f"heartbeat span {heartbeat.get('period_start')} through {heartbeat.get('period_end')}."
+            f"heartbeat span {heartbeat.get('period_start')} through {heartbeat.get('period_end')}. "
+            "Rights boundary: project-authored packaging metadata is made available for "
+            "open preservation and research reuse with attribution. Embedded Record-Chain "
+            "entries remain subject to their respective submitters' rights; inclusion does "
+            "not transfer copyright or grant rights the archive publisher does not possess."
         ),
     }
     metadata_path = target / "zenodo-metadata.json"
@@ -171,11 +185,18 @@ def build() -> Path | None:
         f"Missing heartbeat days within observed span: {heartbeat.get('missing_days')}\n\n"
         "The JSON bundle contains the new native Record-Chain records, a compact\n"
         "heartbeat index, and the latest mature Native OTS evidence. This is a\n"
-        "preservation mirror only. The Bitcoin Originals prevail.\n",
+        "preservation mirror only. The Bitcoin Originals prevail.\n"
+        "\nRights and reuse boundary\n"
+        "-------------------------\n"
+        "Project-authored packaging metadata is made available for open preservation\n"
+        "and research reuse with attribution. Embedded Record-Chain entries remain\n"
+        "subject to their respective submitters' rights. Inclusion in this public\n"
+        "mirror does not transfer copyright or grant rights the archive publisher\n"
+        "does not possess. Public availability is not a claim of ownership.\n",
         encoding="utf-8",
     )
 
-    checksum_paths = [target_payload, target_manifest, metadata_path, readme]
+    checksum_paths = [target / name for name in CHECKSUM_TARGET_NAMES]
     checksums = target / "checksums.sha256"
     checksums.write_text(
         "".join(f"{sha256(path)}  {path.name}\n" for path in checksum_paths),
@@ -189,8 +210,26 @@ def build() -> Path | None:
         "source_payload": str(payload_path.relative_to(ROOT)),
         "files": [
             {"name": path.name, "bytes": path.stat().st_size, "sha256": sha256(path)}
-            for path in [target_payload, target_manifest, metadata_path, readme, checksums]
+            for path in [target / name for name in MANIFEST_HASHED_NAMES]
         ],
+        "published_file_names": [
+            "weekly-continuity-bundle.json",
+            "archive-manifest.json",
+            "deposit-manifest.json",
+            "checksums.sha256",
+            "README.txt",
+            "zenodo-metadata.json",
+        ],
+        "rights_boundary": {
+            "schema": RIGHTS_BOUNDARY_VERSION,
+            "license_identifier": ZENODO_LICENSE_ID,
+            "package_metadata_open_for_preservation_and_research_reuse": True,
+            "attribution_requested": True,
+            "embedded_record_chain_entries_retain_their_respective_rights": True,
+            "third_party_rights_are_not_transferred": True,
+            "publisher_grants_no_rights_it_does_not_possess": True,
+            "public_availability_is_not_ownership": True,
+        },
         "boundary": {
             "deposit_is_mirror_only": True,
             "deposit_is_not_authority": True,
@@ -201,12 +240,16 @@ def build() -> Path | None:
         },
     }
     write_json(target / "deposit-manifest.json", package_manifest)
+    verified = verify_local_package(target)
 
     github_output("deposit_available", "true")
     github_output("archive_id", archive_id)
     github_output("deposit_dir", str(target.relative_to(ROOT)))
     github_output("deposit_changed", "true")
-    print(target.relative_to(ROOT))
+    print(
+        f"{target.relative_to(ROOT)} "
+        f"package_identity_sha256={verified['package_identity_sha256']}"
+    )
     return target
 
 

@@ -133,6 +133,9 @@ jobs:
           ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
           NODE_OPTIONS: "--import=./scripts/arweave_runtime_spend_guard.mjs"
           ARWEAVE_MINIMUM_REMAINING_AR: "0.25"
+          ARWEAVE_MAX_PAYLOAD_BYTES: "8388608"
+          ARWEAVE_MAX_TRANSACTION_REWARD_AR: "0.05"
+          ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: "0.50"
           ARWEAVE_UPLOAD_TIMEOUT_SECONDS: "600"
           ARWEAVE_HTTP_TIMEOUT_MS: "30000"
           ARWEAVE_READBACK_MAX_RETRIES: "30"

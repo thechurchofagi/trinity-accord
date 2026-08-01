@@ -101,6 +101,30 @@ Recommended schedule: January, April, July, October — first week of the month.
 
 ---
 
+### Drill F — Weekly Continuity Cold Start
+
+**Scenario:** Assume GitHub source files are unavailable. Rebuild the native Record-Chain
+independently from the published Weekly Continuity mirror series.
+
+**Automated cadence:** `.github/workflows/quarterly-continuity-recovery.yml` runs on the
+first day of January, April, July, and October. It separately downloads every known
+Zenodo version and every verified weekly Arweave transaction into fresh directories.
+
+**Steps:**
+1. Obtain all versions beginning with the first weekly `full_snapshot`.
+2. Run `scripts/restore_weekly_continuity_archive.py` once for the Zenodo record IDs.
+3. Run it independently for the Arweave transaction IDs.
+4. Confirm both reports contain `result: pass`, a contiguous native record count, and
+   the same latest record ID and SHA-256.
+5. Preserve the reports as workflow artifacts for 365 days.
+6. If no first weekly baseline exists yet, record the drill as `deferred`, not as a pass.
+
+**Expected result:** `full_recovery` within the Weekly Continuity native Record-Chain
+scope. This does not replace the Bitcoin authority and corrections-index checks required
+for a full repository recovery claim.
+
+---
+
 ## Drill Report Template
 
 After each drill, produce a report:

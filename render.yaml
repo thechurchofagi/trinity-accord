@@ -46,7 +46,7 @@ services:
       - key: TRINITY_GATEWAY_BASE_URL
         value: https://trinity-record-chain-gateway.onrender.com
       - key: TRINITY_GATEWAY_RUNTIME_VERSION
-        value: v1
+        value: 1.2.0-protected
       - key: TRINITY_MAX_SUBMISSION_BYTES
         value: "98304"
       - key: TRINITY_RECORD_DRAFT_MAX_BYTES

@@ -146,7 +146,8 @@
     "linked_guardian_application_request_disabled": true
   },
   "runtime_alignment": {
-    "implementation": "/apps/record_chain_intake_gateway/app.py",
+    "implementation": "/apps/record_chain_intake_gateway/secure_entrypoint.py",
+    "core_implementation": "/apps/record_chain_intake_gateway/app.py",
     "validation": "/apps/record_chain_intake_gateway/gateway/validation.py",
     "accepted_record_types": [
       "echo",
@@ -178,7 +179,10 @@
       "classification_update": "CC-2",
       "context_insufficient_notice": "CC-0"
     },
-    "default_max_submission_bytes": 524288,
+    "default_max_submission_bytes": 98304,
+    "default_max_persistent_record_draft_bytes": 49152,
+    "default_max_text_field_characters": 4000,
+    "readiness_must_attest_protection_layer_active": true,
     "strict_json_duplicate_keys_rejected": true,
     "submit_intake_files_materialized_in_one_git_commit": true,
     "guardian_semantic_uniqueness_claims_share_intake_atomic_commit": true,

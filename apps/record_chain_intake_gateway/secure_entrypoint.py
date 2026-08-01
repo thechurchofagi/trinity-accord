@@ -16,6 +16,7 @@ import hmac
 import os
 
 from apps.record_chain_intake_gateway import protected_app as protection
+from apps.record_chain_intake_gateway.gateway import runtime
 
 
 def _server_cooldown_secret() -> bytes:
@@ -78,5 +79,10 @@ async def _latest_intake_commit_fail_closed(self, *, force: bool):
 
 
 protection.IntakeProtectionMiddleware._latest_intake_commit = _latest_intake_commit_fail_closed
+
+# This marker is process-local and is set only by this module.  Readiness can
+# therefore distinguish a genuinely wrapped runtime from a Render service that
+# merely deployed the correct source commit with a stale core-app start command.
+runtime.mark_protection_layer_active()
 
 app = protection.app

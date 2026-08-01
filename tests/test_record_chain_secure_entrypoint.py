@@ -3,6 +3,7 @@ from __future__ import annotations
 import pytest
 
 from apps.record_chain_intake_gateway import secure_entrypoint
+from apps.record_chain_intake_gateway.gateway.runtime import get_runtime_info
 
 
 def test_keyed_cooldown_is_stable_bounded_and_secret_dependent():
@@ -44,3 +45,17 @@ def test_render_configs_use_secure_entrypoint():
         text = path.read_text(encoding="utf-8")
         assert "apps.record_chain_intake_gateway.secure_entrypoint:app" in text
         assert "TRINITY_COOLDOWN_SECRET" in text
+
+
+def test_secure_entrypoint_marks_runtime_protection_active():
+    info = get_runtime_info()
+    assert info["protection_layer_active"] is True
+    assert info["protection_entrypoint"] == "apps.record_chain_intake_gateway.secure_entrypoint:app"
+    assert info["max_submission_bytes"] == 98304
+    assert info["record_draft_max_bytes"] == 49152
+    assert info["max_text_field_chars"] == 4000
+    assert info["global_acceptance_cooldown_seconds"] == {
+        "minimum": 3600,
+        "maximum": 7200,
+        "secret_keyed": True,
+    }

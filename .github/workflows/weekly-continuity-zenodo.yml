@@ -32,6 +32,7 @@ jobs:
     env:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: ${{ vars.ZENODO_API_BASE || 'https://zenodo.org/api' }}
+      WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK: ${{ vars.WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK }}
     steps:
       - name: Checkout current main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -53,6 +54,30 @@ jobs:
       - name: Build deterministic weekly continuity deposit
         id: build
         run: python3 scripts/build_weekly_continuity_deposit.py
+
+      - name: Prove package series can cold-start restore
+        if: steps.build.outputs.deposit_available == 'true'
+        env:
+          DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
+        run: |
+          set -euo pipefail
+          recovery_args=()
+          while IFS= read -r directory; do
+            recovery_args+=(--deposit-dir "$directory")
+          done < <(
+            find record-chain/weekly-continuity-deposits \
+              -mindepth 1 -maxdepth 1 -type d -print | sort
+          )
+          test "${#recovery_args[@]}" -gt 0
+          expected_latest_record_id="$(
+            python3 -c \
+              'import json,sys; print(json.load(open(sys.argv[1]))["coverage"]["current_latest_record_id"])' \
+              "$DEPOSIT_DIR/weekly-continuity-bundle.json"
+          )"
+          python3 scripts/restore_weekly_continuity_archive.py \
+            "${recovery_args[@]}" \
+            --output-dir "$RUNNER_TEMP/weekly-continuity-restore" \
+            --expected-latest-record-id "$expected_latest_record_id"
 
       - name: Commit preservation package before external publication
         if: steps.build.outputs.deposit_available == 'true'
@@ -89,30 +114,45 @@ jobs:
         if: steps.build.outputs.deposit_available == 'true'
         run: |
           set -euo pipefail
+          token_configured=false
+          rights_approved=false
           if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
-            echo "configured=false" >> "$GITHUB_OUTPUT"
             printf '%s\n' "ZENODO_ACCESS_TOKEN is not configured."
             printf '%s\n' "The verified package remains preserved in GitHub and Arweave; DOI publication is deferred."
           else
-            echo "configured=true" >> "$GITHUB_OUTPUT"
+            token_configured=true
+          fi
+          if [ "${WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK:-}" = \
+            "TRINITY_WEEKLY_CONTINUITY_RIGHTS_V1_APPROVED" ]; then
+            rights_approved=true
+          else
+            printf '%s\n' "The versioned mixed-rights boundary is not approved; DOI publication is deferred."
+          fi
+          echo "token_configured=$token_configured" >> "$GITHUB_OUTPUT"
+          echo "rights_approved=$rights_approved" >> "$GITHUB_OUTPUT"
+          if [ "$token_configured" = true ] && [ "$rights_approved" = true ]; then
+            echo "publication_enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publication_enabled=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Publish independent Zenodo dataset version
         id: publish
         if: >-
           steps.build.outputs.deposit_available == 'true' &&
-          steps.zenodo.outputs.configured == 'true'
+          steps.zenodo.outputs.publication_enabled == 'true'
         env:
           DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
         run: >-
           python3 scripts/publish_weekly_continuity_to_zenodo.py
           --deposit-dir "$DEPOSIT_DIR"
           --api-base "$ZENODO_API_BASE"
+          --rights-boundary-ack "$WEEKLY_CONTINUITY_ZENODO_RIGHTS_ACK"
 
       - name: Commit Zenodo DOI state
         if: >-
           steps.build.outputs.deposit_available == 'true' &&
-          steps.zenodo.outputs.configured == 'true'
+          steps.zenodo.outputs.publication_enabled == 'true'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -147,12 +187,23 @@ jobs:
           retention-days: 90
           if-no-files-found: error
 
+      - name: Upload cold-start recovery report
+        if: always() && steps.build.outputs.deposit_available == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: weekly-continuity-recovery-${{ steps.build.outputs.archive_id }}
+          path: ${{ runner.temp }}/weekly-continuity-restore/recovery-report.json
+          retention-days: 90
+          if-no-files-found: error
+
       - name: Deposit summary
         if: always()
         run: |
           printf 'deposit_available=%s\n' "${{ steps.build.outputs.deposit_available }}"
           printf 'archive_id=%s\n' "${{ steps.build.outputs.archive_id }}"
           printf 'deposit_dir=%s\n' "${{ steps.build.outputs.deposit_dir }}"
-          printf 'zenodo_configured=%s\n' "${{ steps.zenodo.outputs.configured }}"
+          printf 'zenodo_token_configured=%s\n' "${{ steps.zenodo.outputs.token_configured }}"
+          printf 'zenodo_rights_approved=%s\n' "${{ steps.zenodo.outputs.rights_approved }}"
+          printf 'zenodo_publication_enabled=%s\n' "${{ steps.zenodo.outputs.publication_enabled }}"
           printf 'version_doi=%s\n' "${{ steps.publish.outputs.doi }}"
           printf 'concept_doi=%s\n' "${{ steps.publish.outputs.concept_doi }}"
