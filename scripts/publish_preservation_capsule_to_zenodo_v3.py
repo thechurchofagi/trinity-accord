@@ -17,7 +17,6 @@ recorded as ``published``.
 """
 from __future__ import annotations
 
-import hashlib
 import sys
 import time
 import urllib.parse
@@ -137,23 +136,28 @@ def upload_files(
                 observed_md5 = response_checksum.split(":", 1)[-1].lower()
                 if observed_md5 != local[name]["md5"]:
                     raise SystemExit(f"Zenodo upload response checksum mismatch: {name}")
-        raw = client.request_bytes(url)
-        if len(raw) != local[name]["bytes"]:
-            raise SystemExit(f"Zenodo upload bucket size mismatch: {name}")
-        if hashlib.sha256(raw).hexdigest() != local[name]["sha256"]:
-            raise SystemExit(f"Zenodo upload bucket SHA-256 mismatch: {name}")
+        download_verified_bytes(
+            client,
+            [url],
+            expected_size=int(local[name]["bytes"]),
+            expected_sha256=str(local[name]["sha256"]),
+            name=name,
+            attempts=5,
+        )
 
     current = draft
     for attempt in range(1, 16):
         current = publisher.refresh(client, current)
         files = current.get("files")
-        names = {
-            publisher.remote_name(item)
-            for item in files
+        names = (
+            {
+                publisher.remote_name(item)
+                for item in files
+                if isinstance(item, dict) and publisher.remote_name(item)
+            }
             if isinstance(files, list)
-            for item in files
-            if isinstance(item, dict) and publisher.remote_name(item)
-        } if isinstance(files, list) else set()
+            else set()
+        )
         if names == set(publisher.PUBLISHED_FILE_NAMES):
             return
         if attempt < 15:
@@ -177,6 +181,14 @@ def verify_remote_files(
         return local
 
     if not publisher.is_published(current):
+        for attempt in range(1, 6):
+            if attempt > 1:
+                time.sleep(float(min(attempt, 3)))
+            current = publisher.refresh(client, current)
+            remote = remote_map(current)
+            errors = metadata_errors(remote, local)
+            if not errors:
+                return local
         print(
             "Zenodo draft metadata is lagging exact authenticated bucket bytes: "
             + " | ".join(errors),
