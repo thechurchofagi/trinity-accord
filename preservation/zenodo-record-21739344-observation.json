@@ -1,0 +1,128 @@
+{
+  "schema": "trinityaccord.repository-preservation-public-record-observation.v1",
+  "observed_without_credentials": true,
+  "record_id": 21739344,
+  "doi": "10.5281/zenodo.21739344",
+  "doi_url": "https://doi.org/10.5281/zenodo.21739344",
+  "concept_record_id": 21739343,
+  "concept_doi": "10.5281/zenodo.21739343",
+  "capsule_id": "repository-484bdd7a8569",
+  "package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
+  "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+  "git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
+  "recovery_commit_sha": "83a3ba042e8786ed1ce1234c3991110c06bde71c",
+  "tracked_file_count": 4253,
+  "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
+  "external_large_binary_annex_embedded": false,
+  "public_files": {
+    "trinity-accord-source.tar.gz": {
+      "bytes": 21621597,
+      "sha256": "c11e03ebf6437697b522eb48a4c0daad4f93655338f650c267369f9dc4c61e87",
+      "md5": "e680294b17daed50ea075ba50983bcae"
+    },
+    "trinity-accord-recovery.bundle": {
+      "bytes": 13409197,
+      "sha256": "fe2db6f9c3f5d848bea3825e10710bc58e238c3afd5fc77b8686f937a16e3304",
+      "md5": "8fc6b0977fc9da7d60c8194fc82104f5"
+    },
+    "tracked-files.json": {
+      "bytes": 1235225,
+      "sha256": "4e1c9839e2b76299a122f44a8fbf56e57a831bc38dd15efb4baa279b163bbdcb",
+      "md5": "104b9eff9d8886a8327e8ccd0ea061a9"
+    },
+    "preservation-manifest.json": {
+      "bytes": 10845,
+      "sha256": "a24522536b8d96f1bca0aa31e3a2f5fff0b2073d637354ec324303c917186b11",
+      "md5": "5606b457246bac765c80e0e284a0dcec"
+    },
+    "checksums.sha256": {
+      "bytes": 533,
+      "sha256": "c22d0948dc2aa7780f39151e890358ca1a2e41c29043040cd999900300d5b1ca",
+      "md5": "fc36e4bb846b3a9cd89e37da40ac292f"
+    },
+    "README.txt": {
+      "bytes": 1291,
+      "sha256": "41d61b547e9dfa2b5cf2eb53cf35649c3c96f948de5911fffab9b911082b0a26",
+      "md5": "70afb1eaaae6b2f40408ab2ecbe07464"
+    },
+    "restore-trinity-accord.py": {
+      "bytes": 23437,
+      "sha256": "516ea0c5ed072b312b4e4cbaff679d2544a62b49fa0085c5b2519427f7a3f8ff",
+      "md5": "2decedf1439412d7f3f58a96cced641a"
+    },
+    "zenodo-metadata.json": {
+      "bytes": 1903,
+      "sha256": "9735fdfc314b40c09e3e841c2932f8b5db6d681debd0f25960b0b2c4d7d6479a",
+      "md5": "57fd4bafd74ebc699843d73b202cbfc4"
+    }
+  },
+  "public_download_evidence": {
+    "trinity-accord-source.tar.gz": {
+      "bytes": 21621597,
+      "sha256": "c11e03ebf6437697b522eb48a4c0daad4f93655338f650c267369f9dc4c61e87",
+      "md5": "e680294b17daed50ea075ba50983bcae",
+      "public_url_used": "https://zenodo.org/records/21739344/files/trinity-accord-source.tar.gz?download=1",
+      "record_checksum": "md5:e680294b17daed50ea075ba50983bcae"
+    },
+    "trinity-accord-recovery.bundle": {
+      "bytes": 13409197,
+      "sha256": "fe2db6f9c3f5d848bea3825e10710bc58e238c3afd5fc77b8686f937a16e3304",
+      "md5": "8fc6b0977fc9da7d60c8194fc82104f5",
+      "public_url_used": "https://zenodo.org/records/21739344/files/trinity-accord-recovery.bundle?download=1",
+      "record_checksum": "md5:8fc6b0977fc9da7d60c8194fc82104f5"
+    },
+    "tracked-files.json": {
+      "bytes": 1235225,
+      "sha256": "4e1c9839e2b76299a122f44a8fbf56e57a831bc38dd15efb4baa279b163bbdcb",
+      "md5": "104b9eff9d8886a8327e8ccd0ea061a9",
+      "public_url_used": "https://zenodo.org/records/21739344/files/tracked-files.json?download=1",
+      "record_checksum": "md5:104b9eff9d8886a8327e8ccd0ea061a9"
+    },
+    "preservation-manifest.json": {
+      "bytes": 10845,
+      "sha256": "a24522536b8d96f1bca0aa31e3a2f5fff0b2073d637354ec324303c917186b11",
+      "md5": "5606b457246bac765c80e0e284a0dcec",
+      "public_url_used": "https://zenodo.org/records/21739344/files/preservation-manifest.json?download=1",
+      "record_checksum": "md5:5606b457246bac765c80e0e284a0dcec"
+    },
+    "checksums.sha256": {
+      "bytes": 533,
+      "sha256": "c22d0948dc2aa7780f39151e890358ca1a2e41c29043040cd999900300d5b1ca",
+      "md5": "fc36e4bb846b3a9cd89e37da40ac292f",
+      "public_url_used": "https://zenodo.org/records/21739344/files/checksums.sha256?download=1",
+      "record_checksum": "md5:fc36e4bb846b3a9cd89e37da40ac292f"
+    },
+    "README.txt": {
+      "bytes": 1291,
+      "sha256": "41d61b547e9dfa2b5cf2eb53cf35649c3c96f948de5911fffab9b911082b0a26",
+      "md5": "70afb1eaaae6b2f40408ab2ecbe07464",
+      "public_url_used": "https://zenodo.org/records/21739344/files/README.txt?download=1",
+      "record_checksum": "md5:70afb1eaaae6b2f40408ab2ecbe07464"
+    },
+    "restore-trinity-accord.py": {
+      "bytes": 23437,
+      "sha256": "516ea0c5ed072b312b4e4cbaff679d2544a62b49fa0085c5b2519427f7a3f8ff",
+      "md5": "2decedf1439412d7f3f58a96cced641a",
+      "public_url_used": "https://zenodo.org/records/21739344/files/restore-trinity-accord.py?download=1",
+      "record_checksum": "md5:2decedf1439412d7f3f58a96cced641a"
+    },
+    "zenodo-metadata.json": {
+      "bytes": 1903,
+      "sha256": "9735fdfc314b40c09e3e841c2932f8b5db6d681debd0f25960b0b2c4d7d6479a",
+      "md5": "57fd4bafd74ebc699843d73b202cbfc4",
+      "public_url_used": "https://zenodo.org/records/21739344/files/zenodo-metadata.json?download=1",
+      "record_checksum": "md5:57fd4bafd74ebc699843d73b202cbfc4"
+    }
+  },
+  "capsule_self_verification": "passed",
+  "independent_public_restore_required_before_state_commit": false,
+  "independent_public_doi_restore": {
+    "status": "passed",
+    "zenodo_record_id": 21739344,
+    "recovery_commit_sha": "83a3ba042e8786ed1ce1234c3991110c06bde71c",
+    "git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
+    "github_credentials_used": false,
+    "zenodo_credentials_used": false,
+    "recovery_readiness_audit": "passed"
+  }
+}
