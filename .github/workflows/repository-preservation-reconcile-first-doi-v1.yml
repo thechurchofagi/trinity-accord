@@ -224,12 +224,15 @@ jobs:
           if test -f "$RUNNER_TEMP/publication-stage.txt"; then
             stage="$(cat "$RUNNER_TEMP/publication-stage.txt")"
           fi
-          git restore --staged preservation/zenodo-state.json 2>/dev/null || true
-          git restore preservation/zenodo-state.json 2>/dev/null || true
+          if ! git diff --cached --quiet -- preservation/zenodo-state.json; then
+            git restore --staged preservation/zenodo-state.json
+          fi
+          if ! git diff --quiet -- preservation/zenodo-state.json; then
+            git restore preservation/zenodo-state.json
+          fi
           python3 - <<'PY'
           import json
           import os
-          import subprocess
           from datetime import datetime, timezone
           from pathlib import Path
 
