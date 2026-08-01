@@ -67,5 +67,15 @@
   ],
   "api_base": "https://zenodo.org/api",
   "github_required_for_repository_recovery": false,
-  "external_large_binary_annex_embedded": false
+  "external_large_binary_annex_embedded": false,
+  "earlier_software_snapshot": {
+    "doi": "10.5281/zenodo.21675727",
+    "record_id": 21675727,
+    "scope": "older GitHub source ZIP only",
+    "limitations": [
+      "Does not contain full Git history.",
+      "Predates the protected Gateway and repository preservation capsule implementation.",
+      "Does not represent the current production repository state."
+    ]
+  }
 }

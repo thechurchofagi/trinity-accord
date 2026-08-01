@@ -242,11 +242,16 @@ def test_capsule_workflow_is_manual_for_publication_and_quarterly_for_validation
     assert package.ZENODO_LICENSE_ID == "other-closed"
 
 
-def test_initial_state_does_not_overclaim_an_unpublished_doi():
+def test_published_state_records_verified_repository_doi_and_prior_snapshot():
     state = json.loads((ROOT / "preservation/zenodo-state.json").read_text())
-    assert state["publication_status"] == "not_yet_published"
-    assert state["latest_doi"] is None
+    assert state["publication_status"] == "published"
+    assert state["latest_record_id"] == 21739344
+    assert state["latest_doi"] == "10.5281/zenodo.21739344"
+    assert state["concept_doi"] == "10.5281/zenodo.21739343"
+    assert state["latest_git_commit_sha"] == "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e"
+    assert state["latest_git_tree_oid"] == "47aa1f8b77f6f0c77237906b53929c08b665060f"
     assert state["earlier_software_snapshot"]["doi"] == "10.5281/zenodo.21675727"
+    assert state["github_required_for_repository_recovery"] is False
     assert state["external_large_binary_annex_embedded"] is False
 
 
