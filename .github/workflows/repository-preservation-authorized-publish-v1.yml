@@ -86,12 +86,14 @@ jobs:
       - name: Refuse a second first-publication run
         run: |
           set -euo pipefail
-          git show "$TARGET_COMMIT:preservation/zenodo-state.json" > "$RUNNER_TEMP/target-zenodo-state.json"
+          git show "${TARGET_COMMIT}:preservation/zenodo-state.json" > "$RUNNER_TEMP/target-zenodo-state.json"
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
 
-          state = json.loads(Path("$RUNNER_TEMP/target-zenodo-state.json").read_text(encoding="utf-8"))
+          state_path = Path(os.environ["RUNNER_TEMP"]) / "target-zenodo-state.json"
+          state = json.loads(state_path.read_text(encoding="utf-8"))
           if state.get("publication_status") != "not_yet_published":
               raise SystemExit("repository preservation DOI is already published")
           if state.get("latest_record_id") is not None or state.get("latest_doi") is not None:
