@@ -1,12 +1,12 @@
 {
   "schema": "trinityaccord.repository-preservation-publication-attempt.v1",
   "status": "failed",
-  "stage": "authorization-precheck",
+  "stage": "zenodo-publish-or-reconcile",
   "target_commit": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
-  "workflow_run_id": "30699104258",
+  "workflow_run_id": "30699284721",
   "workflow_run_attempt": "1",
-  "trigger_commit": "493fa2b3f3333bbebe58de64924dfb8ba256d665",
+  "trigger_commit": "85fcce94c3d88342a477055e3f35822580ba128a",
   "actor": "thechurchofagi",
-  "failed_at": "2026-08-01T12:08:59.083716Z",
+  "failed_at": "2026-08-01T12:15:25.213279Z",
   "publication_status_after_failure": "not_verified"
 }
