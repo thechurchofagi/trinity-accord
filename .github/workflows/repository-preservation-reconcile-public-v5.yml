@@ -38,6 +38,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Record reconciliation toolchain provenance
+        run: |
+          set -euo pipefail
+          echo "toolchain-provenance-public-v5" > "$RUNNER_TEMP/publication-stage.txt"
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/public-v5-toolchain-provenance.json"
+          cat "$RUNNER_TEMP/public-v5-toolchain-provenance.json"
+
       - name: Validate exact owner authorization and read-only V5 contract
         id: precheck
         run: |
@@ -267,6 +274,7 @@ jobs:
           path: |
             ${{ runner.temp }}/public-zenodo-capsule/
             ${{ runner.temp }}/public-doi-restore/recovery-report.json
+            ${{ runner.temp }}/public-v5-toolchain-provenance.json
             preservation/zenodo-record-21739344-observation.json
           retention-days: 365
           if-no-files-found: warn
