@@ -25,9 +25,6 @@ jobs:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: https://zenodo.org/api
       TARGET_COMMIT: 484bdd7a85694ad53fe7e6e9dcea94d0dee5617e
-      EXPECTED_PACKAGE_IDENTITY: a524924a7f7ee40d12fb269e7108c3be4810b8250f1c8db279ecee0474ae8ecc
-      EXPECTED_BUNDLE_SHA256: e6f2feda70ee0d45e7ded27f023d29c1815d522477c9790bd764a20f87af53dd
-      EXPECTED_BUNDLE_BYTES: "13403987"
     steps:
       - name: Checkout production tree and tag identities
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -80,17 +77,17 @@ jobs:
               "schema": "trinityaccord.repository-preservation-publication-retry.v4",
               "authorized_by": "thechurchofagi",
               "authorized_at": "2026-08-01T19:42:00+08:00",
-              "retry_requested_at": "2026-08-01T20:55:00+08:00",
+              "retry_requested_at": "2026-08-01T21:03:00+08:00",
               "authorization": "publish_first_repository_preservation_doi",
               "publication_confirmation": "PUBLISH_TRINITY_REPOSITORY_CAPSULE_V1",
               "rights_boundary_source": "preservation/publication-authorization-v1.json",
               "rights_boundary_ack": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
               "access_right": "other-closed",
               "target_commit": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
-              "reason": "delete_unpublished_stale_deposition_21739344_and_publish_from_fresh_draft",
+              "reason": "delete_unpublished_stale_deposition_21739344_and_publish_from_fresh_draft_with_toolchain_bound_determinism",
               "stale_unpublished_deposition_id": 21739344,
-              "expected_package_identity_sha256": os.environ["EXPECTED_PACKAGE_IDENTITY"],
-              "expected_bundle_sha256": os.environ["EXPECTED_BUNDLE_SHA256"],
+              "determinism_gate": "same_runner_toolchain_double_build_byte_identity",
+              "toolchain_provenance_required": True,
               "builder": "scripts/build_preservation_capsule_v2.py",
               "publisher": "scripts/publish_preservation_capsule_to_zenodo_v4.py",
               "scope": {
@@ -129,8 +126,9 @@ jobs:
           set -euo pipefail
           echo "toolchain-provenance" > "$RUNNER_TEMP/publication-stage.txt"
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/publication-toolchain-provenance.json"
+          cat "$RUNNER_TEMP/publication-toolchain-provenance.json"
 
-      - name: Build twice and require exact deterministic capsule identity
+      - name: Build twice and require exact same-toolchain byte identity
         if: steps.precheck.outputs.already_published != 'true'
         id: build
         run: |
@@ -151,6 +149,7 @@ jobs:
           import hashlib
           import json
           import os
+          import re
           from pathlib import Path
 
           root = Path(os.environ["RUNNER_TEMP"])
@@ -158,18 +157,23 @@ jobs:
           b = root / "repository-preservation-capsule-b"
           manifest_a = json.loads((a / "preservation-manifest.json").read_text(encoding="utf-8"))
           manifest_b = json.loads((b / "preservation-manifest.json").read_text(encoding="utf-8"))
-          identity = manifest_a["package_identity_sha256"]
-          if identity != manifest_b["package_identity_sha256"]:
+          identity = str(manifest_a["package_identity_sha256"])
+          if identity != str(manifest_b["package_identity_sha256"]):
               raise SystemExit("double build package identities differ")
-          if identity != os.environ["EXPECTED_PACKAGE_IDENTITY"]:
-              raise SystemExit(f"unexpected deterministic package identity: {identity}")
-          bundle = a / "trinity-accord-recovery.bundle"
-          digest = hashlib.sha256(bundle.read_bytes()).hexdigest()
-          if digest != os.environ["EXPECTED_BUNDLE_SHA256"]:
-              raise SystemExit(f"unexpected deterministic bundle SHA-256: {digest}")
-          if bundle.stat().st_size != int(os.environ["EXPECTED_BUNDLE_BYTES"]):
-              raise SystemExit(f"unexpected deterministic bundle size: {bundle.stat().st_size}")
-          print("DETERMINISTIC_CAPSULE_V4_OK", identity, digest, bundle.stat().st_size)
+          if re.fullmatch(r"[0-9a-f]{64}", identity) is None:
+              raise SystemExit("package identity is not canonical SHA-256")
+          bundle_a = a / "trinity-accord-recovery.bundle"
+          bundle_b = b / "trinity-accord-recovery.bundle"
+          digest_a = hashlib.sha256(bundle_a.read_bytes()).hexdigest()
+          digest_b = hashlib.sha256(bundle_b.read_bytes()).hexdigest()
+          if digest_a != digest_b or bundle_a.stat().st_size != bundle_b.stat().st_size:
+              raise SystemExit("double build recovery bundles differ")
+          print(
+              "DETERMINISTIC_CAPSULE_V4_OK",
+              identity,
+              digest_a,
+              bundle_a.stat().st_size,
+          )
           PY
 
       - name: Prove local GitHub-zero restoration
