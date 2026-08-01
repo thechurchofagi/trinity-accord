@@ -1,0 +1,19 @@
+{
+  "schema": "trinityaccord.repository-preservation-public-record-reconciliation.v1",
+  "authorized_by": "thechurchofagi",
+  "authorized_at": "2026-08-01T19:42:00+08:00",
+  "reconciliation_requested_at": "2026-08-01T21:22:00+08:00",
+  "operation": "public_record_self_proof_only",
+  "zenodo_write_allowed": false,
+  "record_id": 21739344,
+  "expected_capsule_id": "repository-484bdd7a8569",
+  "expected_source_commit": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+  "expected_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
+  "expected_recovery_commit": "83a3ba042e8786ed1ce1234c3991110c06bde71c",
+  "expected_tracked_file_count": 4253,
+  "acceptance_rule": "record_own_eight_files_hashes_rights_and_public_restore_must_pass",
+  "scope": {
+    "core_git_tracked_tree_only": true,
+    "external_large_binary_annex_embedded": false
+  }
+}
