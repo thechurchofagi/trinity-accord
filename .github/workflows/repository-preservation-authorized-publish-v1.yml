@@ -8,7 +8,7 @@ on:
       - preservation/publication-authorization-v1.json
 
 concurrency:
-  group: repository-preservation-authorized-publish-v1
+  group: main-write-lock
   cancel-in-progress: false
 
 jobs:
