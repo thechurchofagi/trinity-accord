@@ -15,7 +15,7 @@ jobs:
   publish-and-prove:
     if: >-
       github.actor == 'thechurchofagi' &&
-      github.event.head_commit.message == 'archive: authorize first repository preservation DOI publication'
+      startsWith(github.event.head_commit.message, 'archive: authorize first repository preservation DOI publication')
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     permissions:
@@ -24,6 +24,7 @@ jobs:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: https://zenodo.org/api
       PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: ${{ vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK }}
+      TARGET_COMMIT: ${{ github.event.before }}
     steps:
       - name: Checkout current production tree and tag identities
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -44,8 +45,12 @@ jobs:
           test "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" = \
             "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
           test -n "$ZENODO_ACCESS_TOKEN"
+          test -n "$TARGET_COMMIT"
+          git cat-file -e "$TARGET_COMMIT^{commit}"
           python3 - <<'PY'
           import json
+          import os
+          import subprocess
           from pathlib import Path
 
           path = Path("preservation/publication-authorization-v1.json")
@@ -65,16 +70,28 @@ jobs:
           }
           if value != expected:
               raise SystemExit("publication authorization file is not the exact approved contract")
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", os.environ["TARGET_COMMIT"], os.environ["GITHUB_SHA"]],
+              text=True,
+          ).splitlines()
+          allowed = {
+              ".github/workflows/repository-preservation-authorized-publish-v1.yml",
+              "preservation/publication-authorization-v1.json",
+          }
+          if set(changed) != allowed or len(changed) != len(allowed):
+              raise SystemExit(f"authorization merge changed an unexpected path set: {changed}")
           PY
 
       - name: Refuse a second first-publication run
         run: |
           set -euo pipefail
+          git show "$TARGET_COMMIT:preservation/zenodo-state.json" > "$RUNNER_TEMP/target-zenodo-state.json"
           python3 - <<'PY'
           import json
           from pathlib import Path
 
-          state = json.loads(Path("preservation/zenodo-state.json").read_text(encoding="utf-8"))
+          state = json.loads(Path("$RUNNER_TEMP/target-zenodo-state.json").read_text(encoding="utf-8"))
           if state.get("publication_status") != "not_yet_published":
               raise SystemExit("repository preservation DOI is already published")
           if state.get("latest_record_id") is not None or state.get("latest_doi") is not None:
@@ -87,13 +104,13 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/publication-toolchain-provenance.json"
           cat "$RUNNER_TEMP/publication-toolchain-provenance.json"
 
-      - name: Build GitHub-independent repository capsule
+      - name: Build GitHub-independent repository capsule from pre-authorization tree
         id: build
         run: |
           set -euo pipefail
           python3 scripts/build_preservation_capsule.py \
             --repository-root . \
-            --commit HEAD \
+            --commit "$TARGET_COMMIT" \
             --output-dir "$RUNNER_TEMP/repository-preservation-capsule"
 
       - name: Simulate GitHub-zero one-command restore
