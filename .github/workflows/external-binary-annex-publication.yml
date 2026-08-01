@@ -1,22 +1,26 @@
 name: Publish External Binary Annexes
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - preservation/external-binary-annex-publication-trigger.json
+      - .github/workflows/external-binary-annex-publication.yml
 
 concurrency:
   group: main-write-lock
-  queue: max
   cancel-in-progress: false
 
 jobs:
   publish-annexes:
     if: >-
       github.actor == 'thechurchofagi' &&
-      startsWith(github.event.head_commit.message, 'archive: publish Trinity external binary annexes')
+      (
+        github.event_name == 'workflow_dispatch' ||
+        startsWith(github.event.head_commit.message, 'archive: publish Trinity external binary annexes')
+      )
     runs-on: ubuntu-24.04
     timeout-minutes: 360
     permissions:
