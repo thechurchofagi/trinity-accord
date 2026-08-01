@@ -117,12 +117,13 @@ def test_standalone_heartbeat_workflow_has_no_paid_path() -> None:
 
 def test_runtime_guard_enforces_reserve_daily_limit_and_non_canary_metadata() -> None:
     source = (ROOT / "scripts/arweave_runtime_spend_guard.mjs").read_text()
-    assert 'DEFAULT_RESERVE_AR = "0.25"' in source
+    helpers = (ROOT / "scripts/arweave_spend_budget_helpers.mjs").read_text()
+    assert 'DEFAULT_RESERVE_AR = "0.25"' in helpers
     assert "Daily paid Arweave upload limit reached" in source
     assert "balance - reward < reserve" in source
-    assert 'DEFAULT_MAX_TRANSACTION_REWARD_AR = "0.05"' in source
-    assert 'DEFAULT_ROLLING_30_DAY_SPEND_AR = "0.50"' in source
-    assert "DEFAULT_MAX_PAYLOAD_BYTES = 8 * 1024 * 1024" in source
+    assert 'DEFAULT_MAX_TRANSACTION_REWARD_AR = "0.05"' in helpers
+    assert 'DEFAULT_ROLLING_30_DAY_SPEND_AR = "0.50"' in helpers
+    assert "DEFAULT_MAX_PAYLOAD_BYTES = 8 * 1024 * 1024" in helpers
     assert "rollingPaid + reward > rollingLimit" in source
     assert "payloadBytes > limit" in source
     assert "reward > maxReward" in source

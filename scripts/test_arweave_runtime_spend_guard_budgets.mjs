@@ -10,7 +10,7 @@ import {
   payloadByteLength,
   paidToday,
   rollingPaidWinston,
-} from "./arweave_runtime_spend_guard.mjs";
+} from "./arweave_spend_budget_helpers.mjs";
 
 
 assert.equal(decimalArToWinston("0.05"), 50_000_000_000n);
