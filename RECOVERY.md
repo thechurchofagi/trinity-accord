@@ -216,8 +216,50 @@ Arweave verified recovery requires expected hash. Availability-only response is 
 Related scripts/workflows:
 - `scripts/backup-nft-arweave-mirror.mjs`
 - `download-arweave` workflow
+- `scripts/restore_weekly_continuity_archive.py`
+- `quarterly-continuity-recovery` workflow
 
-**Current state:** Arweave mirror verification exists in scripts/workflows, but full third-party Arweave restore command is not yet a single CLI. Use expected hashes from digest manifests to verify Arweave content.
+For the native Record-Chain Weekly Continuity series, use the cold-start CLI. The first
+weekly version must be a complete `full_snapshot`; later versions must be contiguous
+`incremental_delta` payloads. Repeat the source option in chronological series order;
+the verifier sorts by native record count and rejects missing baselines, gaps, divergent
+chain tips, broken Arweave transaction links, malformed OTS evidence, and byte/hash
+mismatches.
+
+From repository-preserved six-file deposit packages:
+
+```bash
+python3 scripts/restore_weekly_continuity_archive.py \
+  --deposit-dir record-chain/weekly-continuity-deposits/<BASE_ARCHIVE_ID> \
+  --deposit-dir record-chain/weekly-continuity-deposits/<DELTA_ARCHIVE_ID> \
+  --output-dir /tmp/trinity-weekly-continuity-restore
+```
+
+From public Zenodo record versions:
+
+```bash
+python3 scripts/restore_weekly_continuity_archive.py \
+  --zenodo-record-id <BASE_RECORD_ID> \
+  --zenodo-record-id <DELTA_RECORD_ID> \
+  --output-dir /tmp/trinity-weekly-continuity-restore
+```
+
+From public Arweave transactions:
+
+```bash
+python3 scripts/restore_weekly_continuity_archive.py \
+  --arweave-txid <BASE_TRANSACTION_ID> \
+  --arweave-txid <DELTA_TRANSACTION_ID> \
+  --output-dir /tmp/trinity-weekly-continuity-restore
+```
+
+The output directory must be new or empty. The command never writes into the repository
+and emits `recovery-report.json`. Its `full_recovery` result is scoped to the native
+Record-Chain bytes and embedded Weekly Continuity evidence; Phases 1–5 and the
+corrections-index are still required for a full authority-level recovery claim.
+
+Other historical Arweave mirror classes still require their expected hashes from digest
+manifests; do not generalize the Weekly Continuity CLI result to unrelated payloads.
 
 ---
 

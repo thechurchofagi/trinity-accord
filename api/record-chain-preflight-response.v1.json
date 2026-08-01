@@ -172,6 +172,21 @@
         "max_submission_bytes": {
           "type": "integer"
         },
+        "record_draft_max_bytes": {
+          "type": "integer"
+        },
+        "max_text_field_chars": {
+          "type": "integer"
+        },
+        "protection_layer_active": {
+          "type": "boolean"
+        },
+        "protection_entrypoint": {
+          "type": "string"
+        },
+        "global_acceptance_cooldown_seconds": {
+          "type": ["object", "null"]
+        },
         "base_url": {
           "type": "string"
         }

@@ -109,6 +109,20 @@ def _write_mature_ots(root: Path, count: int, module, monkeypatch) -> None:
     monkeypatch.setattr(module, "OTS_LATEST", latest_path)
 
 
+def _write_verified_weekly_archive(module, directory: Path, manifest: dict) -> None:
+    module.builder.write_json(directory / "manifest.json", manifest)
+    module.builder.write_json(
+        directory / "payload.json",
+        {
+            "schema": "trinityaccord.record-chain-arweave-delta.v1",
+            "archive_cadence": "weekly",
+            "continuity_bundle": {
+                "schema": "trinityaccord.weekly-continuity-bundle.v1"
+            },
+        },
+    )
+
+
 def test_first_payload_is_full_snapshot(tmp_path, monkeypatch):
     module = _load_module()
     archives = tmp_path / "record-chain" / "arweave-archives"
@@ -158,7 +172,7 @@ def test_later_payload_contains_only_new_records_and_links_previous_tx(tmp_path,
             },
         }
     )
-    module.builder.write_json(previous_dir / "manifest.json", previous)
+    _write_verified_weekly_archive(module, previous_dir, previous)
 
     current = _manifest(tmp_path, 4, "archive-current")
     _write_mature_ots(tmp_path, 4, module, monkeypatch)
@@ -222,7 +236,7 @@ def test_empty_or_backwards_delta_is_refused(tmp_path, monkeypatch):
             },
         }
     )
-    module.builder.write_json(previous_dir / "manifest.json", previous)
+    _write_verified_weekly_archive(module, previous_dir, previous)
 
     current = _manifest(tmp_path, 3, "archive-current")
     current_dir = archives / "archive-current"
@@ -234,3 +248,51 @@ def test_empty_or_backwards_delta_is_refused(tmp_path, monkeypatch):
         assert "not behind" in str(exc)
     else:
         raise AssertionError("expected an empty/backwards delta to be refused")
+
+
+def test_legacy_daily_archive_does_not_prevent_first_weekly_full_snapshot(
+    tmp_path, monkeypatch
+):
+    module = _load_module()
+    archives = tmp_path / "record-chain" / "arweave-archives"
+    archives.mkdir(parents=True)
+    monkeypatch.setattr(module.builder, "ROOT", tmp_path)
+    monkeypatch.setattr(module.builder, "ARCHIVES", archives)
+
+    legacy_dir = archives / "legacy-daily-archive"
+    legacy_dir.mkdir()
+    legacy = _manifest(tmp_path, 2, "legacy-daily-archive")
+    legacy.update(
+        {
+            "mode": "live",
+            "archive_manifest_sha256": "legacy-manifest-sha",
+            "arweave": {
+                "archive_status": "archived",
+                "verified": True,
+                "hash_match": True,
+                "txid": "L" * 43,
+            },
+        }
+    )
+    module.builder.write_json(legacy_dir / "manifest.json", legacy)
+    module.builder.write_json(
+        legacy_dir / "payload.json",
+        {"schema": "trinityaccord.record-chain-arweave-archive.v1"},
+    )
+
+    current = _manifest(tmp_path, 4, "first-weekly")
+    _write_mature_ots(tmp_path, 4, module, monkeypatch)
+    current_dir = archives / "first-weekly"
+    current_dir.mkdir()
+    payload = json.loads(
+        module.build_incremental_payload_json(current, current_dir).read_text()
+    )
+
+    assert payload["archive_mode"] == "full_snapshot"
+    assert payload["previous_archive"] is None
+    assert [item["record_id"] for item in payload["included_records"]] == [
+        "R-000000001",
+        "R-000000002",
+        "R-000000003",
+        "R-000000004",
+    ]

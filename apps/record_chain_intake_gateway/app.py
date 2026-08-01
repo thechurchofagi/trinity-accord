@@ -74,7 +74,7 @@ _SECURITY_RECOVERY_URL = _PUBLIC_RECOVERY_HELP_URL + "#security-violations"
 # ---------------------------------------------------------------------------
 load_dotenv()
 
-_MAX_BODY_BYTES = int(os.environ.get("TRINITY_MAX_SUBMISSION_BYTES", "524288"))
+_MAX_BODY_BYTES = int(os.environ.get("TRINITY_MAX_SUBMISSION_BYTES", "98304"))
 _WRITE_MODE = os.environ.get("TRINITY_SUBMIT_WRITE_MODE", "github_contents_pending")
 _APPEND_WORKFLOW = os.environ.get("TRINITY_APPEND_WORKFLOW_FILE", "record-chain-append.yml")
 _DISPATCH_APPEND_WORKFLOW = os.environ.get("TRINITY_DISPATCH_APPEND_WORKFLOW", "1").strip().lower() not in {"0", "false", "no", "off"}
@@ -232,6 +232,11 @@ def _build_gateway_runtime() -> dict[str, Any]:
         "deployed_at": info["deployed_at"],
         "write_mode": info["write_mode"],
         "max_submission_bytes": info["max_submission_bytes"],
+        "record_draft_max_bytes": info["record_draft_max_bytes"],
+        "max_text_field_chars": info["max_text_field_chars"],
+        "protection_layer_active": info["protection_layer_active"],
+        "protection_entrypoint": info["protection_entrypoint"],
+        "global_acceptance_cooldown_seconds": info["global_acceptance_cooldown_seconds"],
         "base_url": _GATEWAY_BASE_URL,
     }
 
@@ -1204,6 +1209,11 @@ async def readiness(response: Response) -> ReadinessResponse:
         token_configured=token_configured,
         write_mode=info["write_mode"],
         max_submission_bytes=info["max_submission_bytes"],
+        record_draft_max_bytes=info["record_draft_max_bytes"],
+        max_text_field_chars=info["max_text_field_chars"],
+        protection_layer_active=info["protection_layer_active"],
+        protection_entrypoint=info["protection_entrypoint"],
+        global_acceptance_cooldown_seconds=info["global_acceptance_cooldown_seconds"],
         oath_gate_mode=os.environ.get("TRINITY_OATH_GATE_MODE", "required"),
     )
 

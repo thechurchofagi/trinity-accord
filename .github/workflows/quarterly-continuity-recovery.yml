@@ -1,0 +1,131 @@
+name: Quarterly Weekly Continuity Recovery Drill
+
+on:
+  schedule:
+    - cron: "17 8 1 1,4,7,10 *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quarterly-weekly-continuity-recovery
+  cancel-in-progress: false
+
+jobs:
+  cold-start:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 1
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Create report directory
+        run: mkdir -p "$RUNNER_TEMP/quarterly-recovery-reports"
+
+      - name: Recover published Zenodo version series
+        run: |
+          set -euo pipefail
+          mapfile -t record_ids < <(
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          state_path = Path("record-chain/weekly-continuity-zenodo-state.json")
+          if state_path.is_file():
+              state = json.loads(state_path.read_text(encoding="utf-8"))
+              versions = state.get("versions") if isinstance(state, dict) else []
+              if isinstance(versions, list):
+                  ordered = sorted(
+                      (item for item in versions if isinstance(item, dict)),
+                      key=lambda item: int(item.get("deposition_id") or 0),
+                  )
+                  for item in ordered:
+                      record_id = str(item.get("record_id") or "")
+                      if record_id.isdigit():
+                          print(record_id)
+          PY
+          )
+          if [ "${#record_ids[@]}" -eq 0 ]; then
+            printf '%s\n' \
+              '{"schema":"trinityaccord.weekly-continuity-recovery-drill.v1","result":"deferred","reason":"no published Zenodo version series exists yet"}' \
+              > "$RUNNER_TEMP/quarterly-recovery-reports/zenodo-recovery.json"
+            exit 0
+          fi
+          args=()
+          for record_id in "${record_ids[@]}"; do
+            args+=(--zenodo-record-id "$record_id")
+          done
+          python3 scripts/restore_weekly_continuity_archive.py \
+            "${args[@]}" \
+            --output-dir "$RUNNER_TEMP/zenodo-cold-start"
+          cp "$RUNNER_TEMP/zenodo-cold-start/recovery-report.json" \
+            "$RUNNER_TEMP/quarterly-recovery-reports/zenodo-recovery.json"
+
+      - name: Recover verified weekly Arweave transaction series
+        run: |
+          set -euo pipefail
+          mapfile -t txids < <(
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          candidates = []
+          for manifest_path in Path("record-chain/arweave-archives").glob("*/manifest.json"):
+              payload_path = manifest_path.parent / "payload.json"
+              try:
+                  manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                  payload = json.loads(payload_path.read_text(encoding="utf-8"))
+              except (OSError, json.JSONDecodeError):
+                  continue
+              arweave = manifest.get("arweave")
+              coverage = payload.get("coverage")
+              txid = (arweave or {}).get("txid") or (arweave or {}).get("tx_id")
+              if (
+                  isinstance(arweave, dict)
+                  and arweave.get("archive_status") == "archived"
+                  and arweave.get("verified") is True
+                  and arweave.get("hash_match") is True
+                  and payload.get("schema") == "trinityaccord.record-chain-arweave-delta.v1"
+                  and payload.get("archive_cadence") == "weekly"
+                  and isinstance(coverage, dict)
+                  and isinstance(coverage.get("current_native_record_count"), int)
+                  and isinstance(txid, str)
+              ):
+                  candidates.append((coverage["current_native_record_count"], txid))
+          for _count, txid in sorted(candidates):
+              print(txid)
+          PY
+          )
+          if [ "${#txids[@]}" -eq 0 ]; then
+            printf '%s\n' \
+              '{"schema":"trinityaccord.weekly-continuity-recovery-drill.v1","result":"deferred","reason":"no verified weekly Arweave series exists yet"}' \
+              > "$RUNNER_TEMP/quarterly-recovery-reports/arweave-recovery.json"
+            exit 0
+          fi
+          args=()
+          for txid in "${txids[@]}"; do
+            args+=(--arweave-txid "$txid")
+          done
+          python3 scripts/restore_weekly_continuity_archive.py \
+            "${args[@]}" \
+            --output-dir "$RUNNER_TEMP/arweave-cold-start"
+          cp "$RUNNER_TEMP/arweave-cold-start/recovery-report.json" \
+            "$RUNNER_TEMP/quarterly-recovery-reports/arweave-recovery.json"
+
+      - name: Upload recovery drill reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quarterly-weekly-continuity-recovery-${{ github.run_id }}
+          path: ${{ runner.temp }}/quarterly-recovery-reports/
+          retention-days: 365
+          if-no-files-found: error

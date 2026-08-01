@@ -35,6 +35,7 @@ def _latest_archived_snapshot(exclude_archive_id: str) -> dict[str, Any] | None:
     for manifest_path in builder.ARCHIVES.glob("*/manifest.json"):
         try:
             manifest = builder.read_json(manifest_path)
+            payload = builder.read_json(manifest_path.parent / "payload.json")
         except Exception:
             continue
         if manifest.get("archive_id") == exclude_archive_id:
@@ -46,6 +47,11 @@ def _latest_archived_snapshot(exclude_archive_id: str) -> dict[str, Any] | None:
             or arweave.get("verified") is not True
             or arweave.get("hash_match") is not True
             or not (arweave.get("txid") or arweave.get("tx_id"))
+            or payload.get("schema") != "trinityaccord.record-chain-arweave-delta.v1"
+            or payload.get("archive_cadence") != "weekly"
+            or not isinstance(payload.get("continuity_bundle"), dict)
+            or payload["continuity_bundle"].get("schema")
+            != "trinityaccord.weekly-continuity-bundle.v1"
         ):
             continue
         native = manifest.get("source", {}).get("native_chain", {})

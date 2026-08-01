@@ -4,23 +4,22 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import Arweave from "arweave";
-
-const WINSTON_PER_AR = 1_000_000_000_000n;
-const DEFAULT_RESERVE_AR = "0.25";
+import {
+  DEFAULT_MAX_TRANSACTION_REWARD_AR,
+  DEFAULT_ROLLING_30_DAY_SPEND_AR,
+  boundedArBudget,
+  dailyLimit,
+  maxPayloadBytes,
+  minimumReserveWinston,
+  paidToday,
+  payloadByteLength,
+  rollingPaidWinston,
+} from "./arweave_spend_budget_helpers.mjs";
 
 function envTrue(name) {
   return ["1", "true", "yes", "on"].includes(
     String(process.env[name] || "").trim().toLowerCase()
   );
-}
-
-function decimalArToWinston(value) {
-  const text = String(value).trim();
-  if (!/^\d+(?:\.\d{1,12})?$/.test(text)) {
-    throw new Error(`Invalid AR reserve value: ${text}`);
-  }
-  const [whole, fraction = ""] = text.split(".");
-  return BigInt(whole) * WINSTON_PER_AR + BigInt(fraction.padEnd(12, "0"));
 }
 
 function argValue(name) {
@@ -49,18 +48,7 @@ function paidKind() {
   return null;
 }
 
-function dailyLimit(kind) {
-  const name = kind === "record_chain_arweave_archive"
-    ? "ARWEAVE_DAILY_RECORD_CHAIN_UPLOAD_LIMIT"
-    : "ARWEAVE_DAILY_NATIVE_OTS_UPLOAD_LIMIT";
-  const value = Number(process.env[name] || "1");
-  if (!Number.isInteger(value) || value < 0 || value > 4) {
-    throw new Error(`Unsafe ${name}: ${process.env[name]}`);
-  }
-  return value;
-}
-
-function paidToday(kind) {
+function walletLedger() {
   const ledgerPath = process.env.ARWEAVE_WALLET_LEDGER_PATH || path.resolve(
     "record-chain/arweave-wallet-ledger.json"
   );
@@ -73,14 +61,7 @@ function paidToday(kind) {
   if (!Array.isArray(ledger.entries)) {
     throw new Error("Arweave wallet ledger entries are unavailable");
   }
-  const today = new Date().toISOString().slice(0, 10);
-  return ledger.entries.filter((entry) =>
-    entry &&
-    entry.status === "paid" &&
-    entry.kind === kind &&
-    typeof entry.paid_at === "string" &&
-    entry.paid_at.slice(0, 10) === today
-  ).length;
+  return ledger;
 }
 
 const allowCanaryTags = envTrue("ARWEAVE_CANARY_RECORD") || Boolean(process.env.E2E_RUN_ID);
@@ -90,6 +71,17 @@ Arweave.init = function guardedInit(config) {
   const instance = originalInit(config);
   const originalCreateTransaction = instance.createTransaction.bind(instance);
   instance.createTransaction = async (...args) => {
+    const kind = paidKind();
+    if (kind) {
+      const attributes = args[0] && typeof args[0] === "object" ? args[0] : {};
+      const payloadBytes = payloadByteLength(attributes.data);
+      const limit = maxPayloadBytes();
+      if (payloadBytes > limit) {
+        throw new Error(
+          `Arweave payload size gate blocked ${kind}: payload_bytes=${payloadBytes} limit=${limit}`
+        );
+      }
+    }
     const transaction = await originalCreateTransaction(...args);
     const originalAddTag = transaction.addTag.bind(transaction);
     transaction.addTag = (name, value) => {
@@ -108,8 +100,9 @@ Arweave.init = function guardedInit(config) {
   instance.transactions.post = async (transaction) => {
     const kind = paidKind();
     if (kind) {
+      const ledger = walletLedger();
       const limit = dailyLimit(kind);
-      const count = paidToday(kind);
+      const count = paidToday(kind, ledger);
       if (count >= limit) {
         throw new Error(
           `Daily paid Arweave upload limit reached for ${kind}: ${count}/${limit}`
@@ -121,9 +114,28 @@ Arweave.init = function guardedInit(config) {
       const address = await instance.wallets.ownerToAddress(owner);
       const balance = BigInt(await instance.wallets.getBalance(address));
       const reward = BigInt(String(transaction.reward || "0"));
-      const reserve = decimalArToWinston(
-        process.env.ARWEAVE_MINIMUM_REMAINING_AR || DEFAULT_RESERVE_AR
+      const maxReward = boundedArBudget(
+        "ARWEAVE_MAX_TRANSACTION_REWARD_AR",
+        DEFAULT_MAX_TRANSACTION_REWARD_AR
       );
+      if (reward < 1n || reward > maxReward) {
+        throw new Error(
+          `Arweave transaction reward gate blocked ${kind}: reward=${reward} max_reward=${maxReward}`
+        );
+      }
+      const rollingPaid = rollingPaidWinston(ledger);
+      const rollingLimit = boundedArBudget(
+        "ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR",
+        DEFAULT_ROLLING_30_DAY_SPEND_AR
+      );
+      if (rollingPaid + reward > rollingLimit) {
+        throw new Error(
+          `Arweave rolling 30-day spend gate blocked ${kind}: ` +
+          `paid=${rollingPaid} reward=${reward} limit=${rollingLimit}`
+        );
+      }
+      // The helper fails closed if ARWEAVE_MINIMUM_REMAINING_AR is below 0.25.
+      const reserve = minimumReserveWinston();
       if (balance - reward < reserve) {
         throw new Error(
           `Arweave reserve balance gate blocked ${kind}: balance=${balance} reward=${reward} reserve=${reserve}`
@@ -131,6 +143,8 @@ Arweave.init = function guardedInit(config) {
       }
       console.log(
         `[ARWEAVE RUNTIME SPEND GUARD] kind=${kind} paid_today=${count}/${limit} ` +
+        `payload_limit_bytes=${maxPayloadBytes()} reward=${reward}/${maxReward} ` +
+        `rolling_30_day_after=${rollingPaid + reward}/${rollingLimit} ` +
         `remaining_after_reward=${balance - reward} reserve=${reserve}`
       );
     }

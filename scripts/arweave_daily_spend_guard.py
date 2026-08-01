@@ -40,7 +40,7 @@ def _daily_limit(kind: str) -> int:
         value = int(raw)
     except ValueError as exc:
         raise RuntimeError(f"invalid daily Arweave limit for {kind}: {raw!r}") from exc
-    if value < 0 or value > 4:
+    if value < 0 or value > _DEFAULT_LIMITS[kind]:
         raise RuntimeError(f"unsafe daily Arweave limit for {kind}: {value}")
     return value
 

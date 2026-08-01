@@ -78,6 +78,9 @@ jobs:
           args=(--service "$INPUT_SERVICE" --commit-id "$source_sha" --wait)
           if [ "$INPUT_DEPLOY" = "true" ]; then
             args+=(--deploy)
+            if [ "$INPUT_SERVICE" = "trinity-record-chain-gateway" ]; then
+              args+=(--reconcile-config)
+            fi
           fi
           if [ "$INPUT_ALLOW_LEGACY" = "true" ] && \
              [ "$INPUT_LEGACY_CONFIRM" = "RETIRED-LEGACY-EMERGENCY" ]; then

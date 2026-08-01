@@ -14,11 +14,35 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from typing import Any
 
 RENDER_API = "https://api.render.com/v1"
+GATEWAY_SERVICE_NAME = "trinity-record-chain-gateway"
 LEGACY_SERVICE_NAME = "trinity-agent-issue-gateway"
+GATEWAY_PUBLIC_BASE_URL = "https://trinity-record-chain-gateway.onrender.com"
+EXPECTED_GATEWAY_START_COMMAND = (
+    "uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app "
+    "--host 0.0.0.0 --port $PORT"
+)
+EXPECTED_GATEWAY_ENV = {
+    "TRINITY_GATEWAY_RUNTIME_VERSION": "1.2.0-protected",
+    "TRINITY_MAX_SUBMISSION_BYTES": "98304",
+    "TRINITY_RECORD_DRAFT_MAX_BYTES": "49152",
+    "TRINITY_MAX_TEXT_FIELD_CHARS": "4000",
+    "TRINITY_MAX_URL_CHARS": "2048",
+    "TRINITY_MAX_JSON_DEPTH": "12",
+    "TRINITY_MAX_ARRAY_ITEMS": "32",
+    "TRINITY_MAX_REFERENCE_ITEMS": "16",
+}
+EXPECTED_GATEWAY_READINESS = {
+    "max_submission_bytes": 98304,
+    "record_draft_max_bytes": 49152,
+    "max_text_field_chars": 4000,
+    "protection_layer_active": True,
+    "protection_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
+}
 DEPLOY_SUCCESS_STATUSES = frozenset({"live"})
 DEPLOY_FAILURE_STATUSES = frozenset({
     "build_failed",
@@ -98,6 +122,168 @@ def service_is_suspended(service: dict) -> bool:
 def service_auto_deploy_is_disabled(service: dict) -> bool:
     """Return whether Render's actual service state disables autodeploys."""
     return service.get("autoDeploy") in ("no", False)
+
+
+def service_start_command(service: dict[str, Any]) -> str:
+    details = service.get("serviceDetails")
+    if not isinstance(details, dict):
+        return ""
+    env_details = details.get("envSpecificDetails")
+    if not isinstance(env_details, dict):
+        return ""
+    return str(env_details.get("startCommand") or "")
+
+
+def env_var_value(result: Any) -> str | None:
+    """Return one Render env-var value without ever logging the response."""
+    if not isinstance(result, dict):
+        return None
+    candidate = result.get("envVar")
+    if not isinstance(candidate, dict):
+        candidate = result
+    value = candidate.get("value") if isinstance(candidate, dict) else None
+    return value if isinstance(value, str) else None
+
+
+def _env_var_path(service_id: str, key: str) -> str:
+    return (
+        f"/services/{urllib.parse.quote(service_id, safe='')}/env-vars/"
+        f"{urllib.parse.quote(key, safe='')}"
+    )
+
+
+def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, Any]:
+    """Update and then attest the non-secret production protection settings."""
+    service_id = str(service.get("id") or "")
+    if not service_id:
+        fail("Render service id missing during configuration reconciliation")
+
+    if service_start_command(service) != EXPECTED_GATEWAY_START_COMMAND:
+        request(
+            f"/services/{service_id}",
+            token,
+            method="PATCH",
+            body={
+                "serviceDetails": {
+                    "envSpecificDetails": {
+                        "startCommand": EXPECTED_GATEWAY_START_COMMAND,
+                    }
+                }
+            },
+        )
+        print("RENDER_CONFIG_UPDATED field=startCommand")
+
+    for key, expected in EXPECTED_GATEWAY_ENV.items():
+        path = _env_var_path(service_id, key)
+        current = env_var_value(request(path, token))
+        if current != expected:
+            request(path, token, method="PUT", body={"value": expected})
+            print(f"RENDER_CONFIG_UPDATED env={key}")
+
+    refreshed = request(f"/services/{service_id}", token)
+    if not isinstance(refreshed, dict):
+        fail("Render service readback did not return an object")
+    if service_start_command(refreshed) != EXPECTED_GATEWAY_START_COMMAND:
+        fail("Render startCommand readback does not match the secure entrypoint")
+    for key, expected in EXPECTED_GATEWAY_ENV.items():
+        observed = env_var_value(request(_env_var_path(service_id, key), token))
+        if observed != expected:
+            fail(f"Render environment readback mismatch for {key}")
+
+    print(
+        "RENDER_CONFIG_ATTESTED secure_entrypoint=true "
+        "request_max_bytes=98304 record_draft_max_bytes=49152 text_field_max_chars=4000"
+    )
+    return refreshed
+
+
+def _public_json(
+    url: str,
+    *,
+    method: str = "GET",
+    data: bytes | None = None,
+) -> tuple[int, dict[str, Any]]:
+    headers = {
+        "Accept": "application/json",
+        "Cache-Control": "no-cache, no-store, max-age=0",
+        "Pragma": "no-cache",
+        "User-Agent": "trinity-render-protection-attestation/1.0",
+    }
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    request_obj = urllib.request.Request(url, data=data, method=method, headers=headers)
+    try:
+        with urllib.request.urlopen(request_obj, timeout=20) as response:
+            status = int(response.status)
+            raw = response.read()
+    except urllib.error.HTTPError as exc:
+        status = int(exc.code)
+        raw = exc.read()
+    try:
+        payload = json.loads(raw.decode("utf-8")) if raw else {}
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"public Gateway returned non-JSON HTTP {status}") from exc
+    if not isinstance(payload, dict):
+        raise RuntimeError(f"public Gateway returned a non-object HTTP {status} payload")
+    return status, payload
+
+
+def _verify_public_gateway_protection_once(base_url: str) -> None:
+    nonce = str(time.time_ns())
+    status, readiness = _public_json(
+        f"{base_url.rstrip('/')}/record-chain/readiness?protection_attestation={nonce}"
+    )
+    if status != 200:
+        raise RuntimeError(f"Gateway readiness returned HTTP {status}")
+    if readiness.get("ok") is not True or readiness.get("submit_ready") is not True:
+        raise RuntimeError("Gateway readiness is not submit-ready")
+    for key, expected in EXPECTED_GATEWAY_READINESS.items():
+        if readiness.get(key) != expected:
+            raise RuntimeError(
+                f"Gateway readiness mismatch for {key}: "
+                f"expected {expected!r}, got {readiness.get(key)!r}"
+            )
+    cooldown = readiness.get("global_acceptance_cooldown_seconds")
+    if cooldown != {"minimum": 3600, "maximum": 7200, "secret_keyed": True}:
+        raise RuntimeError("Gateway readiness does not attest the secret-keyed 60-120 minute cooldown")
+
+    oversized = b"{" + (b"x" * 99_999)
+    status, payload = _public_json(
+        f"{base_url.rstrip('/')}/record-chain/preflight",
+        method="POST",
+        data=oversized,
+    )
+    diagnostics = payload.get("diagnostics")
+    code = diagnostics[0].get("code") if isinstance(diagnostics, list) and diagnostics else None
+    if status != 413 or code != "REQUEST_BODY_TOO_LARGE":
+        raise RuntimeError(
+            f"100000-byte preflight was not rejected by the protection layer: "
+            f"HTTP {status}, diagnostic={code!r}"
+        )
+
+
+def verify_public_gateway_protection(
+    base_url: str = GATEWAY_PUBLIC_BASE_URL,
+    *,
+    attempts: int = 12,
+    delay_seconds: float = 5.0,
+) -> None:
+    last_error = ""
+    for attempt in range(1, attempts + 1):
+        try:
+            _verify_public_gateway_protection_once(base_url)
+        except Exception as exc:
+            last_error = str(exc)
+            if attempt < attempts:
+                print(f"GATEWAY_PROTECTION_WAIT attempt={attempt}/{attempts} error={last_error}")
+                time.sleep(max(0.0, delay_seconds))
+                continue
+            fail(f"public Gateway protection attestation failed: {last_error}")
+        print(
+            "GATEWAY_PROTECTION_ATTESTED protection_layer_active=true "
+            "request_max_bytes=98304 oversized_preflight_http=413 submit_called=false"
+        )
+        return
 
 
 def deploy_id_from_response(result: Any) -> str | None:
@@ -188,6 +374,7 @@ def main() -> int:
     parser.add_argument("--service", default="trinity-record-chain-gateway")
     parser.add_argument("--deploy", action="store_true")
     parser.add_argument("--allow-legacy", action="store_true")
+    parser.add_argument("--reconcile-config", action="store_true")
     parser.add_argument("--commit-id", default="")
     parser.add_argument("--wait", action="store_true")
     parser.add_argument("--wait-timeout", type=int, default=900)
@@ -209,6 +396,10 @@ def main() -> int:
         fail("--wait-timeout must be at least 1 second")
     if args.poll_seconds < 0:
         fail("--poll-seconds must be non-negative")
+    if args.reconcile_config and not args.deploy:
+        fail("--reconcile-config requires --deploy")
+    if args.reconcile_config and args.service != GATEWAY_SERVICE_NAME:
+        fail("--reconcile-config is restricted to the production Record-Chain Gateway")
 
     svc = find_service(token, args.service)
     sid = svc.get("id")
@@ -239,6 +430,13 @@ def main() -> int:
             f"Refusing exact-commit deploy for {args.service}: Render reports "
             "autodeploys are enabled or unconfirmed"
         )
+    if args.service == GATEWAY_SERVICE_NAME and not args.reconcile_config:
+        fail(
+            "Production Gateway deploys require --reconcile-config so a stale "
+            "Render startCommand or resource limit cannot survive a green deployment"
+        )
+    if args.reconcile_config:
+        svc = reconcile_gateway_config(svc, token)
 
     body = {"clearCache": "do_not_clear"}
     if commit_id:
@@ -272,6 +470,8 @@ def main() -> int:
             f"RENDER_DEPLOY_LIVE service={args.service} deploy_id={deploy_id} "
             f"commit_id={commit_id}"
         )
+        if args.service == GATEWAY_SERVICE_NAME:
+            verify_public_gateway_protection()
     return 0
 
 

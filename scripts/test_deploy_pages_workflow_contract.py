@@ -66,6 +66,7 @@ def main() -> int:
         "python3 scripts/check_deployment_freshness_v2.py --site-dir _site",
         "python3 scripts/smoke_live_discovery_contract_v2.py",
         "python3 scripts/check_deployment_freshness_v2.py --site",
+        "--reconcile-config",
         "cmp builder-bundles/download_and_run_builder_bundle.py _site/builder-bundles/download_and_run_builder_bundle.py",
         "cp -a builder-bundles _site/builder-bundles",
         "cp -a record-chain/. _site/record-chain/",

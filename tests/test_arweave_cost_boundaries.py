@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+import subprocess
 
+import pytest
+
+from scripts import arweave_daily_spend_guard as spend_guard
 from scripts.arweave_daily_spend_guard import evaluate_daily_spend
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -113,11 +117,43 @@ def test_standalone_heartbeat_workflow_has_no_paid_path() -> None:
 
 def test_runtime_guard_enforces_reserve_daily_limit_and_non_canary_metadata() -> None:
     source = (ROOT / "scripts/arweave_runtime_spend_guard.mjs").read_text()
-    assert 'DEFAULT_RESERVE_AR = "0.25"' in source
+    helpers = (ROOT / "scripts/arweave_spend_budget_helpers.mjs").read_text()
+    assert 'DEFAULT_RESERVE_AR = "0.25"' in helpers
     assert "Daily paid Arweave upload limit reached" in source
     assert "balance - reward < reserve" in source
+    assert 'DEFAULT_MAX_TRANSACTION_REWARD_AR = "0.05"' in helpers
+    assert 'DEFAULT_ROLLING_30_DAY_SPEND_AR = "0.50"' in helpers
+    assert "DEFAULT_MAX_PAYLOAD_BYTES = 8 * 1024 * 1024" in helpers
+    assert "rollingPaid + reward > rollingLimit" in source
+    assert "payloadBytes > limit" in source
+    assert "reward > maxReward" in source
     assert "if (" in source and "Canary-Record" in source
     assert "!allowCanaryTags" in source
+
+
+def test_weekly_workflow_pins_paid_arweave_budget_limits() -> None:
+    workflow = (ROOT / ".github/workflows/record-chain-arweave-archive.yml").read_text()
+    assert 'ARWEAVE_MAX_PAYLOAD_BYTES: "8388608"' in workflow
+    assert 'ARWEAVE_MAX_TRANSACTION_REWARD_AR: "0.05"' in workflow
+    assert 'ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: "0.50"' in workflow
+
+
+def test_runtime_budget_helpers_execute() -> None:
+    result = subprocess.run(
+        ["node", "scripts/test_arweave_runtime_spend_guard_budgets.mjs"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    assert "PASS:" in result.stdout
+
+
+def test_daily_paid_limit_cannot_be_raised_above_one(monkeypatch) -> None:
+    monkeypatch.setenv("ARWEAVE_DAILY_RECORD_CHAIN_UPLOAD_LIMIT", "2")
+    with pytest.raises(RuntimeError, match="unsafe daily Arweave limit"):
+        spend_guard._daily_limit("record_chain_arweave_archive")
 
 
 def test_cooldown_missing_history_fails_closed() -> None:

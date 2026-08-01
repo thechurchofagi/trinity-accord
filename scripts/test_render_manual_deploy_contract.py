@@ -70,6 +70,10 @@ def main() -> int:
             "commitId",
             "RENDER_DEPLOY_LIVE",
             "wait_for_deploy",
+            "--reconcile-config",
+            "EXPECTED_GATEWAY_START_COMMAND",
+            "GATEWAY_PROTECTION_ATTESTED",
+            "REQUEST_BODY_TOO_LARGE",
         ]:
             if marker not in text:
                 errors.append(f"render_manual_deploy.py missing exact-live proof marker: {marker}")
@@ -103,6 +107,7 @@ def main() -> int:
             "contents: read",
             "--commit-id",
             "--wait",
+            "--reconcile-config",
         ]:
             if marker not in text:
                 errors.append(f"render-manual-deploy.yml missing main-only secret boundary: {marker}")

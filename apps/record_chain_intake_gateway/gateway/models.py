@@ -90,6 +90,11 @@ class ReadinessResponse(BaseModel):
     token_configured: bool
     write_mode: str
     max_submission_bytes: int
+    record_draft_max_bytes: int
+    max_text_field_chars: int
+    protection_layer_active: bool
+    protection_entrypoint: str
+    global_acceptance_cooldown_seconds: dict[str, Any] | None = None
     oath_gate_mode: str = Field("required", description="Oath gate enforcement mode: required | warn | disabled")
 
 
