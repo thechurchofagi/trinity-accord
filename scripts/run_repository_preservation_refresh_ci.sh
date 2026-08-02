@@ -103,7 +103,12 @@ if [[ "$local_source" != "$source_sha" ]]; then
   exit 1
 fi
 
-python3 scripts/publish_preservation_capsule_to_zenodo.py \
+# Zenodo draft objects can expose public download links that legitimately return
+# 404 before publication. The V3 compatibility publisher reads unpublished
+# bytes back from the authenticated upload bucket, verifies exact SHA-256, and
+# still requires converged public metadata and public DOI-only recovery after
+# publication. It reuses any matching prepared draft on retry.
+python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
   --capsule-dir "$capsule" \
   --state preservation/repository-preservation-state-v2.json \
   --api-base "$ZENODO_API_BASE" \
