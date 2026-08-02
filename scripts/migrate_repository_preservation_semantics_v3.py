@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Migrate repository preservation from moving-main wording to exact baseline semantics.
+"""Migrate repository preservation to exact publication-baseline semantics.
 
 The migration is intentionally idempotent. It reauthorizes sequence 3 only from the
 fully consumed sequence-2 state. Prepared or consumed sequence-3 states are left
@@ -45,19 +45,26 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
         encoding="utf-8",
     )
 
 
-def replace_exact(path: Path, old: str, new: str) -> None:
+def replace_required(path: Path, old: str, new: str, *, count: int = -1) -> None:
+    """Apply one idempotent required replacement.
+
+    `new` being present means a prior run already completed that migration. Otherwise
+    the exact current source anchor must be present; silent skips are forbidden.
+    """
     text = path.read_text(encoding="utf-8")
     if new in text:
         return
     if old not in text:
-        raise SystemExit(f"semantic migration anchor missing in {path}: {old[:80]!r}")
-    path.write_text(text.replace(old, new), encoding="utf-8")
+        raise SystemExit(f"semantic migration anchor missing in {path}: {old[:120]!r}")
+    replaced = text.replace(old, new, count)
+    path.write_text(replaced, encoding="utf-8")
 
 
 def canonical_index_digest(value: dict[str, Any]) -> str:
@@ -161,7 +168,9 @@ def migrate_json_state() -> None:
     )
     if not isinstance(repository, dict):
         raise SystemExit("recovery index repository preservation state is missing")
-    repository["coverage_status"] = "exact_published_baseline_semantic_refresh_authorized"
+    repository["coverage_status"] = (
+        "exact_published_baseline_semantic_refresh_authorized"
+    )
     repository["live_main_equivalence_claimed"] = False
     index["publication_refresh"] = {
         "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
@@ -176,7 +185,7 @@ def migrate_json_state() -> None:
 
 
 def migrate_recovery_guide() -> None:
-    replace_exact(
+    replace_required(
         RECOVERY,
         "Check `preservation/zenodo-state.json` from any known copy or query Zenodo for the\n"
         "title `Trinity Accord Repository Preservation Capsule`. A published version contains:",
@@ -185,7 +194,7 @@ def migrate_recovery_guide() -> None:
         "The older `preservation/zenodo-state.json` is retained only as historical v1\n"
         "compatibility. A published version contains:",
     )
-    replace_exact(
+    replace_required(
         RECOVERY,
         "  the exact current production tree;",
         "  the exact declared publication-baseline tree;",
@@ -193,47 +202,44 @@ def migrate_recovery_guide() -> None:
 
 
 def migrate_builder() -> None:
-    replace_exact(
+    replace_required(
         BUILD,
-        "recovery bundle for the exact current production tree, allowing every current "
-        "Git-tracked byte to be restored without GitHub.",
-        "recovery bundle for the exact immutable publication-baseline tree, allowing every "
-        "Git-tracked byte in that baseline to be restored without GitHub.",
+        '            "recovery bundle for the exact current production tree, allowing every current "\n'
+        '            "Git-tracked byte to be restored without GitHub. Production parent history and "',
+        '            "recovery bundle for the exact immutable publication-baseline tree, allowing every "\n'
+        '            "Git-tracked byte in that baseline to be restored without GitHub. Production parent history and "',
     )
-    replace_exact(
+    replace_required(
         BUILD,
-        '"This core capsule embeds every Git-tracked byte. Large external evidence and\\n"',
-        '"This core capsule embeds every Git-tracked byte in the declared publication\\n"\n'
-        '        "baseline. Large external evidence and NFT payload bytes are not duplicated\\n"',
+        '        "This core capsule embeds every Git-tracked byte. Large external evidence and\\n"\n'
+        '        "NFT payload bytes are not duplicated here; their TXIDs, hashes, manifests, and\\n"',
+        '        "This core capsule embeds every Git-tracked byte in the declared publication\\n"\n'
+        '        "baseline. Large external evidence and NFT payload bytes are not duplicated\\n"\n'
+        '        "here; their TXIDs, hashes, manifests, and\\n"',
     )
-    replace_exact(
-        BUILD,
-        '"NFT payload bytes are not duplicated here; their TXIDs, hashes, manifests, and\\n"\n'
-        '        "recovery tools are embedded in the repository. A separate mixed-rights binary\\n"',
-        '"here; their TXIDs, hashes, manifests, and recovery tools are embedded in the\\n"\n'
-        '        "repository. A separate mixed-rights binary\\n"',
-    )
-    replace_exact(
+    replace_required(
         BUILD,
         "The exact current tree is preserved through a synthetic root ",
         "The exact declared publication-baseline tree is preserved through a synthetic root ",
     )
-    replace_exact(
+    replace_required(
         BUILD,
-        '"exact_current_production_tree_embedded": True,',
-        '"exact_publication_baseline_tree_embedded": True,\n'
+        '            "exact_current_production_tree_embedded": True,',
+        '            "exact_publication_baseline_tree_embedded": True,\n'
         '            "live_main_equivalence_claimed": False,',
     )
-    replace_exact(
+    replace_required(
         BUILD,
-        '"zenodo_only_restores_complete_git_tracked_repository": True,',
-        '"zenodo_only_restores_complete_git_tracked_repository": True,\n'
+        '            "zenodo_only_restores_complete_git_tracked_repository": True,',
+        '            "zenodo_only_restores_complete_git_tracked_repository": True,\n'
         '            "coverage_scope": "exact_immutable_publication_baseline",',
     )
 
 
 def migrate_verifiers() -> None:
-    old = '''    if (
+    replace_required(
+        VERIFY,
+        '''    if (
         scope.get("github_required_for_repository_recovery") is not False
         or scope.get("git_tracked_repository_embedded") is not True
         or scope.get("main_history_and_tags_embedded") is not False
@@ -242,8 +248,8 @@ def migrate_verifiers() -> None:
         or scope.get("external_large_binary_annex_embedded") is not False
     ):
         raise SystemExit("preservation capsule recovery scope is inconsistent")
-'''
-    new = '''    baseline_tree = scope.get("exact_publication_baseline_tree_embedded")
+''',
+        '''    baseline_tree = scope.get("exact_publication_baseline_tree_embedded")
     legacy_current_tree = scope.get("exact_current_production_tree_embedded")
     if (
         scope.get("github_required_for_repository_recovery") is not False
@@ -256,14 +262,14 @@ def migrate_verifiers() -> None:
         raise SystemExit("preservation capsule recovery scope is inconsistent")
     if baseline_tree is True and scope.get("live_main_equivalence_claimed") is not False:
         raise SystemExit("publication-baseline capsule overclaims live-main equivalence")
-'''
-    replace_exact(VERIFY, old, new)
-
-    replace_exact(
+''',
+    )
+    replace_required(
         RESTORE,
         '''    scope = manifest.get("scope")
     if not isinstance(scope, dict) or scope.get("github_required_for_repository_recovery") is not False:
         raise SystemExit("capsule does not declare GitHub-independent repository recovery")
+    return manifest, tracked
 ''',
         '''    scope = manifest.get("scope")
     if not isinstance(scope, dict) or scope.get("github_required_for_repository_recovery") is not False:
@@ -274,39 +280,45 @@ def migrate_verifiers() -> None:
         raise SystemExit("capsule does not declare an exact recoverable tree")
     if baseline_tree is True and scope.get("live_main_equivalence_claimed") is not False:
         raise SystemExit("publication-baseline capsule overclaims live-main equivalence")
+    return manifest, tracked
 ''',
     )
-    replace_exact(
+    replace_required(
         RESTORE,
-        '"repository_recovery_status": "full_current_git_tracked_tree",',
-        '"repository_recovery_status": "full_exact_publication_baseline",',
+        '            "repository_recovery_status": "full_current_git_tracked_tree",',
+        '            "repository_recovery_status": "full_exact_publication_baseline",',
     )
-    replace_exact(
+    replace_required(
         RESTORE,
-        '"The capsule restores every byte and executable mode in the current Git-tracked production tree.",',
-        '"The capsule restores every byte and executable mode in the exact immutable Git-tracked publication baseline named by its manifest.",',
+        '                "The capsule restores every byte and executable mode in the current Git-tracked production tree.",',
+        '                "The capsule restores every byte and executable mode in the exact immutable Git-tracked publication baseline named by its manifest.",',
     )
-    replace_exact(
+    replace_required(
         RESTORE,
-        '"capsule_is_a_non_authoritative_mirror": True,',
-        '"capsule_is_a_non_authoritative_mirror": True,\n'
+        '                "capsule_is_a_non_authoritative_mirror": True,',
+        '                "capsule_is_a_non_authoritative_mirror": True,\n'
         '                "live_main_equivalence_claimed": False,',
     )
 
 
 def migrate_refresh_contract() -> None:
-    replace_exact(
+    replace_required(
         REFRESH,
         'EXPECTED_PREVIOUS_DOI = "10.5281/zenodo.21739344"',
         f'EXPECTED_PREVIOUS_DOI = "{PREVIOUS_DOI}"',
     )
-    replace_exact(
+    replace_required(
         REFRESH,
-        'auth.get("sequence") != 2',
-        'auth.get("sequence") != 3',
+        'EXPECTED_CONFIRMATION = "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2"',
+        'EXPECTED_CONFIRMATION = "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V3"',
     )
-    replace_exact(REFRESH, '"sequence": 2,', '"sequence": 3,')
-    replace_exact(
+    replace_required(
+        REFRESH,
+        'auth.get("schema") != AUTH_SCHEMA or auth.get("sequence") != 2',
+        'auth.get("schema") != AUTH_SCHEMA or auth.get("sequence") != 3',
+    )
+    replace_required(REFRESH, '"sequence": 2,', '"sequence": 3,')
+    replace_required(
         REFRESH,
         '''            "previous_verified_version": {
                 "doi": EXPECTED_PREVIOUS_DOI,
@@ -319,28 +331,47 @@ def migrate_refresh_contract() -> None:
                 "git_commit_sha": "{PREVIOUS_SOURCE_SHA}",
             }},''',
     )
+    replace_required(
+        REFRESH,
+        '        "NFT binary annex DOI records together preserve the current Git-tracked repository "\n'
+        '        "and every custom asset for the declared published baseline commit; this does not "',
+        '        "NFT binary annex DOI records together preserve the exact Git-tracked publication "\n'
+        '        "baseline named by the core manifest and every custom asset; this does not "',
+    )
+    replace_required(
+        REFRESH,
+        'repository["coverage_status"] = "historical_snapshot_refresh_prepared"',
+        'repository["coverage_status"] = "publication_baseline_refresh_prepared"',
+    )
 
 
 def migrate_tests() -> None:
-    replace_exact(
+    replace_required(
         CAPSULE_TEST,
-        'assert entrypoints["repository_preservation_state"] == "preservation/zenodo-state.json"',
-        'assert entrypoints["repository_preservation_state"] == (\n'
+        '    assert entrypoints["repository_preservation_state"] == "preservation/zenodo-state.json"',
+        '    assert entrypoints["repository_preservation_state"] == (\n'
         '        "preservation/repository-preservation-state-v2.json"\n'
         '    )\n'
         '    assert entrypoints["repository_preservation_legacy_state"] == (\n'
         '        "preservation/zenodo-state.json"\n'
         '    )',
     )
-    replace_exact(
-        REFRESH_TEST,
-        'assert auth["sequence"] == 2',
-        'assert auth["sequence"] == 3',
+    replace_required(
+        CAPSULE_TEST,
+        '        "together preserve the current Git-tracked repository and every custom asset"\n'
+        '        in item',
+        '        "preserve the exact Git-tracked publication baseline named by the core manifest"\n'
+        '        in item',
     )
-    replace_exact(
+    replace_required(
         REFRESH_TEST,
-        '"PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2"',
-        '"PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V3"',
+        '    assert auth["sequence"] == 2',
+        '    assert auth["sequence"] == 3',
+    )
+    replace_required(
+        REFRESH_TEST,
+        '        "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2"',
+        '        "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V3"',
     )
 
 
