@@ -292,3 +292,21 @@ def test_recovery_index_routes_to_complete_repository_and_annex_recovery():
         in item
         for item in index["limitations"]
     )
+
+
+def test_capsule_build_is_byte_reproducible(tmp_path):
+    repo, commit = make_repository(tmp_path)
+    capsule_a = tmp_path / "capsule-a"
+    capsule_b = tmp_path / "capsule-b"
+    builder.build(repo, capsule_a, commit)
+    builder.build(repo, capsule_b, commit)
+
+    assert package.verify_local_package(capsule_a)["package_identity_sha256"] == (
+        package.verify_local_package(capsule_b)["package_identity_sha256"]
+    )
+    assert sorted(path.name for path in capsule_a.iterdir()) == sorted(
+        path.name for path in capsule_b.iterdir()
+    )
+    for path_a in capsule_a.iterdir():
+        path_b = capsule_b / path_a.name
+        assert path_a.read_bytes() == path_b.read_bytes(), path_a.name
