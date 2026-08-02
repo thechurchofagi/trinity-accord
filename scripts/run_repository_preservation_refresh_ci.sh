@@ -36,6 +36,7 @@ fi
 
 if [[ "$status" == "pending" ]]; then
   base_commit="$(git rev-parse HEAD)"
+  python3 scripts/migrate_repository_preservation_baseline_contract.py
   python3 scripts/repository_preservation_refresh.py prepare \
     --base-commit "$base_commit"
   git add \
@@ -44,7 +45,8 @@ if [[ "$status" == "pending" ]]; then
     preservation/EXTERNAL-BINARY-ANNEX.md \
     preservation/repository-preservation-refresh-authorization.json \
     preservation/repository-preservation-refresh-prepared.json \
-    preservation/repository-preservation-state-v2.json
+    preservation/repository-preservation-state-v2.json \
+    tests/test_preservation_capsule.py
   git commit -m "archive: prepare repository preservation refresh v2"
   git push origin HEAD:main
   source_sha="$(git rev-parse HEAD)"
