@@ -108,6 +108,7 @@ def test_capsule_build_and_github_zero_restore(tmp_path, monkeypatch):
     assert report["github_required"] is False
     assert report["production_parent_history_embedded"] is False
     assert report["production_tag_identity_count"] == 0
+    assert verified["manifest"]["scope"]["production_tag_identities_recorded"] is False
     assert report["git_tag_count_verified"] == 0
     assert (output / "repository/README.md").read_text() == "tiny preservation fixture\n"
     assert stat.S_IMODE((output / "repository/bin/preservation-smoke").stat().st_mode) & 0o111
@@ -340,3 +341,53 @@ def test_capsule_identity_is_independent_of_later_refs(tmp_path):
     for path_before in capsule_before.iterdir():
         path_after = capsule_after / path_before.name
         assert path_before.read_bytes() == path_after.read_bytes(), path_before.name
+
+
+def test_capsule_identity_is_independent_of_clone_depth(tmp_path):
+    repo, frozen_commit = make_repository(tmp_path)
+    capsule_full = tmp_path / "capsule-full"
+    builder.build(repo, capsule_full, frozen_commit)
+
+    shallow = tmp_path / "shallow-repository"
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "--no-tags",
+            "--branch",
+            "main",
+            repo.resolve().as_uri(),
+            str(shallow),
+        ],
+        check=True,
+        capture_output=True,
+    )
+    assert subprocess.run(
+        ["git", "rev-parse", "--is-shallow-repository"],
+        cwd=shallow,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip() == "true"
+    assert subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=shallow,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip() == frozen_commit
+
+    capsule_shallow = tmp_path / "capsule-shallow"
+    builder.build(shallow, capsule_shallow, frozen_commit)
+
+    verified_full = package.verify_local_package(capsule_full)
+    verified_shallow = package.verify_local_package(capsule_shallow)
+    assert verified_full["package_identity_sha256"] == verified_shallow["package_identity_sha256"]
+    assert sorted(path.name for path in capsule_full.iterdir()) == sorted(
+        path.name for path in capsule_shallow.iterdir()
+    )
+    for path_full in capsule_full.iterdir():
+        path_shallow = capsule_shallow / path_full.name
+        assert path_full.read_bytes() == path_shallow.read_bytes(), path_full.name
