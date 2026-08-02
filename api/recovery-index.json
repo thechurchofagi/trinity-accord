@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "c4f45be8999d08ed",
+  "source_digest": "e097542fd1194850",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -85,16 +85,20 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21739344",
-      "record_id": 21739344,
-      "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
-      "git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
-      "package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
-      "github_required_for_recovery": false,
+      "doi": "10.5281/zenodo.21755655",
+      "record_id": 21755655,
       "concept_doi": "10.5281/zenodo.21739343",
-      "coverage_status": "historical_snapshot_refresh_prepared",
+      "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
+      "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
+      "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
+      "github_required_for_recovery": false,
+      "github_required_for_discovery": false,
+      "public_metadata_verification": "passed",
+      "public_cold_restore": "passed",
+      "coverage_status": "exact_published_baseline",
       "live_main_equivalence_claimed": false,
-      "recovery_catalog": "preservation/recovery-catalog.json"
+      "recovery_catalog": "preservation/recovery-catalog.json",
+      "current_state": "preservation/repository-preservation-state-v2.json"
     },
     "external_binary_annexes": {
       "evidence": {
@@ -139,9 +143,11 @@
   "publication_refresh": {
     "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
     "sequence": 2,
-    "status": "prepared_for_new_core_version",
-    "authorized_base_commit_sha": "e82e7aa8336890af065191334e3c05ccd9c1e0cf",
-    "core_concept_doi": "10.5281/zenodo.21739343",
+    "status": "published_and_publicly_restored",
+    "source_baseline_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
+    "doi": "10.5281/zenodo.21755655",
+    "record_id": 21755655,
+    "concept_doi": "10.5281/zenodo.21739343",
     "external_annex_dois": {
       "evidence": "10.5281/zenodo.21753937",
       "nft": "10.5281/zenodo.21754229"

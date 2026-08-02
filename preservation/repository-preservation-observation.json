@@ -1,0 +1,82 @@
+{
+  "schema": "trinityaccord.repository-preservation-public-observation.v2",
+  "publication_status": "published_and_publicly_restored",
+  "observed_without_github_credentials": true,
+  "observed_without_zenodo_credentials": true,
+  "record_id": 21755655,
+  "doi": "10.5281/zenodo.21755655",
+  "doi_url": "https://doi.org/10.5281/zenodo.21755655",
+  "concept_doi": "10.5281/zenodo.21739343",
+  "capsule_id": "repository-5368fd1ecce2",
+  "source_baseline_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
+  "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
+  "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
+  "self_describing_recovery_catalog": "preservation/recovery-catalog.json",
+  "external_binary_annexes": {
+    "evidence": {
+      "doi": "10.5281/zenodo.21753937",
+      "record_id": 21753937,
+      "annex_id": "external-evidence-annex-v4",
+      "restore_program_name": "restore-trinity-annex.py"
+    },
+    "nft": {
+      "doi": "10.5281/zenodo.21754229",
+      "record_id": 21754229,
+      "annex_id": "chronicle-nft-media-annex-v4",
+      "restore_program_name": "restore-trinity-annex.py"
+    }
+  },
+  "public_download_verification": "passed",
+  "public_metadata_verification": "passed",
+  "public_cold_restore": "passed",
+  "public_cold_restore_report": {
+    "schema": "trinityaccord.repository-preservation-recovery-report.v1",
+    "result": "pass",
+    "repository_recovery_status": "full_current_git_tracked_tree",
+    "authority_level_recovery_status": "not_claimed",
+    "capsule_id": "repository-5368fd1ecce2",
+    "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
+    "source": "zenodo:21755655",
+    "source_git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
+    "recovery_git_commit_sha": "50728238ada6d3fa3788d81f30ee2d605fe62527",
+    "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
+    "tracked_file_count": 4311,
+    "git_snapshot_bundle_verified": true,
+    "production_parent_history_embedded": false,
+    "production_tags_embedded": false,
+    "production_tag_identity_count": 23,
+    "git_ref_count_verified": 1,
+    "git_tag_count_verified": 0,
+    "source_snapshot_independently_verified": true,
+    "recovery_checkpoints_verified": 9,
+    "github_required": false,
+    "network_required_after_capsule_download": false,
+    "external_large_binary_annex_embedded": false,
+    "limitations": [
+      "The capsule restores every byte and executable mode in the current Git-tracked production tree.",
+      "Production parent history and tag objects are excluded from the public bundle to avoid republishing historical credentials; original commit and tag identities remain in the manifest.",
+      "Large external Release/Arweave/NFT payloads are referenced by verified manifests but are not embedded in this core repository capsule.",
+      "Repository recovery does not itself prove authority, attestation, governance, amendment, or successor reception."
+    ],
+    "boundary": {
+      "bitcoin_originals_prevail": true,
+      "recovery_does_not_amend_canonical_material": true,
+      "capsule_is_a_non_authoritative_mirror": true
+    }
+  },
+  "public_metadata_report": {
+    "schema": "trinityaccord.repository-preservation-public-metadata-report.v1",
+    "status": "passed",
+    "record_id": 21755655,
+    "doi": "10.5281/zenodo.21755655",
+    "concept_doi": "10.5281/zenodo.21739343",
+    "capsule_id": "repository-5368fd1ecce2",
+    "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
+    "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
+    "public_file_set_verification": "passed",
+    "public_file_metadata_verification": "passed",
+    "public_rights_verification": "passed",
+    "observed_without_zenodo_credentials": true
+  },
+  "live_main_equivalence_claimed": false
+}
