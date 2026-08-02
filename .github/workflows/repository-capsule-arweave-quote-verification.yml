@@ -1,0 +1,197 @@
+name: Repository Capsule Arweave Quote Verification
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/repository-capsule-arweave-quote-verification.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-capsule-arweave-quote-verification-20260802
+  cancel-in-progress: false
+
+jobs:
+  rebuild-and-quote:
+    if: github.head_ref == 'ops/repository-capsule-arweave-preflight-final-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      EXPECTED_MAIN: 204aa8c94568343e9f9aafe4650e8a0ccef38e28
+      EXPECTED_PACKAGE_IDENTITY: b87fe7287c8b8f42ca0766e50ea559b4ce087f91fa5d8695ad903bc8dc4af247
+      EXPECTED_TRANSPORT_SHA256: e60204f8a5ca7330559d9dabb4b4950774a24189f099d0cd1bdeeec251700a75
+      EXPECTED_TRANSPORT_BYTES: '36362240'
+      ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+    steps:
+      - name: Checkout exact freeze candidate
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies and require exact main
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${EXPECTED_MAIN}"
+          test -z "$(git status --porcelain)"
+          npm ci
+
+      - name: Rebuild exact capsule and deterministic transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "${EXPECTED_MAIN}" \
+            --output-dir "$RUNNER_TEMP/capsule"
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import sys
+          import tarfile
+          from pathlib import Path
+
+          sys.path.insert(0, 'scripts')
+          from preservation_capsule import verify_local_package
+
+          source = Path('${{ runner.temp }}/capsule')
+          verified = verify_local_package(source)
+          expected_identity = '${{ env.EXPECTED_PACKAGE_IDENTITY }}'
+          if verified['package_identity_sha256'] != expected_identity:
+              raise SystemExit(
+                  f"package identity mismatch: {verified['package_identity_sha256']} != {expected_identity}"
+              )
+
+          output = Path('${{ runner.temp }}/trinity-accord-repository-capsule-204aa8c94568.tar')
+          with tarfile.open(output, 'w', format=tarfile.GNU_FORMAT) as archive:
+              for path in sorted(source.iterdir(), key=lambda item: item.name):
+                  if not path.is_file():
+                      continue
+                  info = archive.gettarinfo(str(path), arcname=path.name)
+                  info.mtime = 0
+                  info.uid = 0
+                  info.gid = 0
+                  info.uname = ''
+                  info.gname = ''
+                  with path.open('rb') as handle:
+                      archive.addfile(info, handle)
+
+          raw = output.read_bytes()
+          digest = hashlib.sha256(raw).hexdigest()
+          expected_digest = '${{ env.EXPECTED_TRANSPORT_SHA256 }}'
+          expected_bytes = int('${{ env.EXPECTED_TRANSPORT_BYTES }}')
+          if digest != expected_digest:
+              raise SystemExit(f'transport SHA-256 mismatch: {digest} != {expected_digest}')
+          if len(raw) != expected_bytes:
+              raise SystemExit(f'transport byte count mismatch: {len(raw)} != {expected_bytes}')
+
+          result = {
+              'schema': 'trinityaccord.repository-capsule-arweave-quote-input.v1',
+              'source_commit': '${{ env.EXPECTED_MAIN }}',
+              'capsule_id': verified['capsule_id'],
+              'git_tree_oid': verified['git_tree_oid'],
+              'recovery_commit_sha': verified['manifest']['git']['recovery_commit_sha'],
+              'tracked_file_count': verified['tracked_file_count'],
+              'package_identity_sha256': verified['package_identity_sha256'],
+              'transport_filename': output.name,
+              'transport_bytes': len(raw),
+              'transport_sha256': digest,
+          }
+          Path('${{ runner.temp }}/quote-input.json').write_text(
+              json.dumps(result, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(result, indent=2, sort_keys=True))
+          PY
+
+      - name: Query live Arweave reward and wallet reserve without signing or posting
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ARKEY}"
+          cat > "$GITHUB_WORKSPACE/quote-repository-capsule.mjs" <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import Arweave from 'arweave';
+
+          const rawKey = process.env.ARKEY.trim();
+          const jwk = rawKey.startsWith('{')
+            ? JSON.parse(rawKey)
+            : JSON.parse(Buffer.from(rawKey, 'base64').toString('utf8'));
+          const data = fs.readFileSync(process.env.TRANSPORT_PATH);
+          const arweave = Arweave.init({
+            host: 'arweave.net',
+            port: 443,
+            protocol: 'https',
+            timeout: 60000,
+            logging: false,
+          });
+          const address = await arweave.wallets.jwkToAddress(jwk);
+          const balance = BigInt(await arweave.wallets.getBalance(address));
+          const tx = await arweave.createTransaction({ data }, jwk);
+          const reward = BigInt(tx.reward);
+          const hardMax = 300000000000n;
+          const reserve = 250000000000n;
+          const toAr = (value) =>
+            `${value / 1000000000000n}.${(value % 1000000000000n)
+              .toString()
+              .padStart(12, '0')}`;
+
+          if (reward > hardMax) {
+            throw new Error(`reward ${reward} exceeds 0.30 AR cap`);
+          }
+          if (balance - reward < reserve) {
+            throw new Error(`remaining balance ${balance - reward} falls below 0.25 AR reserve`);
+          }
+
+          const result = {
+            schema: 'trinityaccord.repository-capsule-arweave-quote.v1',
+            payload_bytes: data.length,
+            payload_sha256: crypto.createHash('sha256').update(data).digest('hex'),
+            reward_winston: reward.toString(),
+            reward_ar: toAr(reward),
+            wallet_address_sha256: crypto.createHash('sha256').update(address).digest('hex'),
+            balance_before_winston: balance.toString(),
+            balance_before_ar: toAr(balance),
+            estimated_remaining_winston: (balance - reward).toString(),
+            estimated_remaining_ar: toAr(balance - reward),
+            hard_cap_ar: '0.300000000000',
+            minimum_remaining_ar: '0.250000000000',
+            transaction_created_for_quote_only: true,
+            transaction_signed: false,
+            transaction_posted: false,
+          };
+          fs.writeFileSync(process.env.QUOTE_PATH, JSON.stringify(result, null, 2) + '\n');
+          console.log(JSON.stringify(result, null, 2));
+          JS
+          TRANSPORT_PATH="$RUNNER_TEMP/trinity-accord-repository-capsule-204aa8c94568.tar" \
+          QUOTE_PATH="$RUNNER_TEMP/arweave-quote.json" \
+          node "$GITHUB_WORKSPACE/quote-repository-capsule.mjs"
+          rm -f "$GITHUB_WORKSPACE/quote-repository-capsule.mjs"
+
+      - name: Upload exact quote evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repository-capsule-arweave-quote-verification
+          path: |
+            ${{ runner.temp }}/quote-input.json
+            ${{ runner.temp }}/arweave-quote.json
+          retention-days: 365
+          if-no-files-found: warn
