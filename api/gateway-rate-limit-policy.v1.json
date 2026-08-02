@@ -2,7 +2,7 @@
   "schema": "trinityaccord.gateway-rate-limit-policy.v1",
   "status": "production_live_policy",
   "purpose": "Protect finite permanent-storage and paid Arweave archival resources while keeping public preflight open and public Record-Chain intake available at a bounded cadence.",
-  "limiter_class": "durable_secret_keyed_commit_cooldown_with_secondary_in_memory_limits",
+  "limiter_class": "durable_secret_keyed_commit_cooldown_with_secondary_bounded_in_memory_limits",
   "durable_across_restart": true,
   "multi_instance_safe": false,
   "policy": {
@@ -22,6 +22,9 @@
       "global_submit_limit_per_hour": 100,
       "participant_submit_limit_per_hour": 10,
       "implementation": "single_process_in_memory_sliding_window",
+      "maximum_tracked_participant_keys": 10000,
+      "expired_participant_keys_removed": true,
+      "least_recently_seen_eviction_at_capacity": true,
       "note": "These remain defense in depth; the durable randomized global acceptance cooldown is the primary permanent-write boundary."
     },
     "content_limits": {
@@ -77,10 +80,14 @@
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
     "server_side_enforcement_verified": true,
-    "rate_limit_implementation": "protected ASGI entrypoint plus existing core Gateway limiter",
+    "rate_limit_implementation": "protected ASGI entrypoint plus bounded core Gateway limiter",
     "secure_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
+    "production_readiness_path": "/readyz",
+    "production_readiness_exists_only_on_secure_entrypoint": true,
     "durable_acceptance_state": "latest immutable intake materialization commit on the target branch",
     "cooldown_secret_source": "TRINITY_COOLDOWN_SECRET with TRINITY_GITHUB_TOKEN as fail-safe rollout fallback",
+    "blocked_client_guidance_maximum_keys": 10000,
+    "blocked_client_guidance_compaction_target": 8000,
     "multi_instance_safe": false,
     "durable_across_restart": true,
     "operator_note": "The current Render deployment uses one Uvicorn process. A future multi-instance deployment must add a shared distributed lock for the final gate."
@@ -88,6 +95,9 @@
   "preflight_policy": {
     "global_request_limit_per_minute": 600,
     "client_request_limit_per_minute": 120,
+    "maximum_tracked_client_keys": 20000,
+    "expired_client_keys_removed": true,
+    "least_recently_seen_eviction_at_capacity": true,
     "global_acceptance_cooldown_applies": false,
     "content_limits_apply": true,
     "applies_before_expensive_target_repository_lookups": true,
