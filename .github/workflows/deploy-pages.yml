@@ -181,7 +181,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Deploy exact protected Gateway source and wait for live
+      - name: Deploy exact Gateway source and wait for live
         if: steps.scope.outputs.required == 'true'
         env:
           RENDER: ${{ secrets.RENDER }}
