@@ -80,8 +80,8 @@
   "implementation_status": {
     "server_side_enforcement_required_before_formal_window": true,
     "server_side_enforcement_verified": true,
-    "rate_limit_implementation": "protected ASGI entrypoint plus bounded core Gateway limiter",
-    "secure_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
+    "rate_limit_implementation": "protected ASGI entrypoint plus existing core Gateway limiter",
+    "secure_entrypoint": "apps/record_chain_intake_gateway.secure_entrypoint:app",
     "production_readiness_path": "/readyz",
     "production_readiness_exists_only_on_secure_entrypoint": true,
     "durable_acceptance_state": "latest immutable intake materialization commit on the target branch",
