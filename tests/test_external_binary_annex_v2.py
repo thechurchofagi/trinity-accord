@@ -237,15 +237,22 @@ def test_obsolete_irreversible_repository_publish_workflows_are_inactive():
 
 
 def test_recovery_index_declares_the_published_core_repository_doi():
-    state = json.loads(
+    current = json.loads(
+        (
+            ROOT / "preservation/repository-preservation-state-v2.json"
+        ).read_text(encoding="utf-8")
+    )
+    legacy_state = json.loads(
         (ROOT / "preservation/zenodo-state.json").read_text(encoding="utf-8")
     )
     index = json.loads((ROOT / "api/recovery-index.json").read_text(encoding="utf-8"))
-    assert state["publication_status"] == "published"
-    assert state["latest_doi"] == "10.5281/zenodo.21739344"
+    assert current["publication_status"] == "published_and_publicly_restored"
+    assert current["latest_doi"] == "10.5281/zenodo.21755655"
+    assert legacy_state["publication_status"] == "published"
+    assert legacy_state["latest_doi"] == "10.5281/zenodo.21739344"
     latest = index["latest_trusted_release"]
-    assert latest["status"] != "not_yet_declared"
+    assert latest["status"] == "published_and_publicly_restored"
     repository = latest["repository_preservation"]
-    assert repository["doi"] == state["latest_doi"]
-    assert repository["git_commit_sha"] == state["latest_git_commit_sha"]
+    assert repository["doi"] == current["latest_doi"]
+    assert repository["git_commit_sha"] == current["latest_git_commit_sha"]
     assert repository["github_required_for_recovery"] is False
