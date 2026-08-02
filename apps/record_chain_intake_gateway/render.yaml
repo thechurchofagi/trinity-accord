@@ -12,7 +12,9 @@ services:
     autoDeploy: false
     buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
     startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /healthz
+    # /readyz exists only when the secure production entrypoint is imported.
+    # A stale start command that loads the core app therefore fails deployment.
+    healthCheckPath: /readyz
     envVars:
       - key: PYTHON_VERSION
         value: "3.11"
@@ -27,7 +29,7 @@ services:
       - key: TRINITY_GATEWAY_BASE_URL
         value: https://trinity-record-chain-gateway.onrender.com
       - key: TRINITY_GATEWAY_RUNTIME_VERSION
-        value: 1.2.0-protected
+        value: 1.2.1-protected
       - key: TRINITY_MAX_SUBMISSION_BYTES
         value: "98304"
       - key: TRINITY_RECORD_DRAFT_MAX_BYTES

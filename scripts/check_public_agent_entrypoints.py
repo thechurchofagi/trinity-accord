@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
-"""Scan public agent JSON entrypoints for retired gateway references.
+"""Scan public agent entrypoints for retired gateway references.
 
-Checks the core public agent entrypoint JSON files that agents actually
-use for discovery and submission routing.  These files must point to the
-current Record-Chain Intake Gateway, not the retired Issue Gateway.
-
-Other JSON files in api/ may contain historical references to old routes
-(documentation, legacy status, audit reports) — those are scanned by the
-broader grep/CI contract tests, not this entrypoint scanner.
+Current discovery and submission surfaces must point to the protected
+Record-Chain Intake Gateway. Historical files may retain old routes only when
+they declare their retired status and current replacement before those routes.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
 from typing import Any
 
-# Core entrypoint files that MUST NOT reference old gateway paths in active context.
-# These are the files agents discover and use for routing.
+# Public JSON surfaces that agents may discover or that have previously been
+# presented as a production route. They must either be current and clean or
+# explicitly fail closed as historical archive material.
 CORE_ENTRYPOINTS: frozenset[str] = frozenset({
     "gateway-config.json",
     "external-agent-quickstart.json",
@@ -28,6 +24,7 @@ CORE_ENTRYPOINTS: frozenset[str] = frozenset({
     "agent-first-contact.json",
     "agent-start.v2.json",
     "links.json",
+    "agent-gateway-production-profile.json",
 })
 
 FORBIDDEN = [
@@ -44,11 +41,15 @@ REQUIRED_HISTORICAL_FIELDS = [
     "replacement",
 ]
 
-# Keys whose values are allowed to contain forbidden strings
-# (retirement/legacy metadata sections)
+# Keys whose values are allowed to contain forbidden strings because the key
+# itself makes the retirement boundary machine-readable.
 ALLOWED_CONTEXT_KEYS: frozenset[str] = frozenset({
     "retired_gateway_v1",
     "retired_replacement",
+    "retired_runtime",
+    "retired_backend",
+    "retirement_reason",
+    "historical_profile",
     "legacy_prerequisites_retired",
     "legacy_registry_is_historical_archive_only",
     "legacy_warning",
@@ -59,6 +60,19 @@ ALLOWED_CONTEXT_KEYS: frozenset[str] = frozenset({
     "legacy_machine",
     "deprecated_for_new_records",
 })
+
+# Human-readable active pages may state that an exact old route is retired.
+# The retirement must be explicit on the same line; a bare executable path is
+# never accepted merely because another paragraph elsewhere says "legacy".
+RETIREMENT_LINE_MARKERS = (
+    "retired",
+    "historical",
+    "legacy",
+    "do not use",
+    "must not use",
+    "not use for new",
+    "no longer active",
+)
 
 errors: list[str] = []
 
@@ -85,7 +99,7 @@ def is_historical(data: Any) -> bool:
         and data.get("status") == "historical_archive_only"
         and data.get("do_not_use_for_new_public_submissions") is True
         and isinstance(data.get("replacement"), str)
-        and data.get("replacement")
+        and bool(data.get("replacement"))
     )
 
 
@@ -96,7 +110,7 @@ def first_forbidden_index(text: str) -> int | None:
 
 
 def _find_forbidden_in_active_contexts(obj: Any, path: str = "") -> list[str]:
-    """Recursively find forbidden strings outside allowed retirement contexts."""
+    """Recursively find forbidden strings outside explicit retirement contexts."""
     issues: list[str] = []
     if isinstance(obj, dict):
         for key, value in obj.items():
@@ -110,23 +124,21 @@ def _find_forbidden_in_active_contexts(obj: Any, path: str = "") -> list[str]:
             else:
                 issues.extend(_find_forbidden_in_active_contexts(value, current_path))
     elif isinstance(obj, list):
-        for i, item in enumerate(obj):
+        for index, item in enumerate(obj):
             if isinstance(item, str):
                 for token in FORBIDDEN:
                     if token in item:
-                        issues.append(f"{path}[{i}]: contains '{token}'")
+                        issues.append(f"{path}[{index}]: contains '{token}'")
             else:
-                issues.extend(_find_forbidden_in_active_contexts(item, f"{path}[{i}]"))
+                issues.extend(_find_forbidden_in_active_contexts(item, f"{path}[{index}]"))
     return issues
 
 
 def check_file(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
-    hits = [token for token in FORBIDDEN if token in text]
-    if not hits:
+    if not any(token in text for token in FORBIDDEN):
         return
 
-    # Only strictly check core entrypoint files
     if path.name not in CORE_ENTRYPOINTS:
         return
 
@@ -137,7 +149,8 @@ def check_file(path: Path) -> None:
         return
 
     if is_historical(data):
-        # Fail-closed ordering: historical status must appear before old executable paths.
+        # Fail-closed ordering: historical status must appear before any old
+        # executable route or service name.
         status_idx = text.find('"status"')
         forbidden_idx = first_forbidden_index(text)
         if forbidden_idx is not None and (status_idx < 0 or status_idx > forbidden_idx):
@@ -149,7 +162,6 @@ def check_file(path: Path) -> None:
                 errors.append(f"{path}: historical JSON missing top-level {field}")
         return
 
-    # Non-historical core entrypoint: check for forbidden strings in active contexts
     active_issues = _find_forbidden_in_active_contexts(data)
     if active_issues:
         errors.append(
@@ -158,8 +170,6 @@ def check_file(path: Path) -> None:
         )
 
 
-# Active public surface files that must not contain retired gateway references.
-# These are Markdown/txt/html files that agents and humans read for current routing.
 ACTIVE_PUBLIC_SURFACES: list[str] = [
     "index.md",
     "agent-first-contact.md",
@@ -176,32 +186,30 @@ ACTIVE_PUBLIC_SURFACES: list[str] = [
     "api/record-chain-field-helper.v1.json",
 ]
 
-# Warnings (non-fatal) for active surfaces — these are known issues tracked
-# in later PR batches. PR-01 establishes the scan; later PRs fix the content.
-surface_warnings: list[str] = []
-
 
 def check_active_surface(path: Path) -> None:
-    """Check that an active public surface file does not contain retired gateway refs.
+    """Reject bare retired routes on active pages.
 
-    For PR-01, surface issues are warnings (non-fatal). They become errors once
-    the corresponding PR batch (PR-05) fixes the content.
+    An exact old route may appear only in a same-line, explicit retirement or
+    prohibition statement. This preserves historical warnings without letting a
+    current executable instruction hide behind a remote legacy disclaimer.
     """
     if not path.exists():
         return
-    text = path.read_text(encoding="utf-8")
-    hits = [token for token in FORBIDDEN if token in text]
-    if not hits:
-        return
-    for token in FORBIDDEN:
-        if token in text:
-            surface_warnings.append(
-                f"WARNING: {path}: active public surface contains retired gateway reference '{token}'"
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        lower = line.lower()
+        for token in FORBIDDEN:
+            if token not in line:
+                continue
+            if any(marker in lower for marker in RETIREMENT_LINE_MARKERS):
+                continue
+            errors.append(
+                f"{path}:{line_number}: active public surface contains bare retired gateway reference '{token}'"
             )
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Check public agent JSON entrypoints")
+    parser = argparse.ArgumentParser(description="Check public agent entrypoints")
     parser.add_argument("paths", nargs="+", help="Directories or files to scan")
     args = parser.parse_args()
 
@@ -212,21 +220,17 @@ def main() -> int:
     for path in files:
         check_file(path)
 
-    # Also scan active public surfaces
     root = Path.cwd()
     for surface in ACTIVE_PUBLIC_SURFACES:
         check_active_surface(root / surface)
 
     if errors:
-        raise SystemExit("\n".join(f"ERROR: {e}" for e in errors))
+        raise SystemExit("\n".join(f"ERROR: {error}" for error in errors))
 
-    # Print surface warnings (non-fatal for PR-01, will become errors after PR-05)
-    for warning in surface_warnings:
-        print(warning, file=sys.stderr)
-
-    print(f"public agent entrypoints OK ({len(files)} JSON files + {len(ACTIVE_PUBLIC_SURFACES)} active surfaces checked)")
-    if surface_warnings:
-        print(f"  ({len(surface_warnings)} surface warnings — tracked for later PR batches)", file=sys.stderr)
+    print(
+        f"public agent entrypoints OK ({len(files)} JSON files + "
+        f"{len(ACTIVE_PUBLIC_SURFACES)} active surfaces checked)"
+    )
     return 0
 
 
