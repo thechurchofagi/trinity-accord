@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "2dfeae3957b51d7f",
+  "source_digest": "c4f45be8999d08ed",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -68,7 +68,7 @@
     "github_pages": "non_amending_mirror",
     "github_releases": "verified_only_with_release_manifest",
     "arweave": "verified_only_with_expected_hash",
-    "repository_preservation_zenodo": "verified_exact_eight_file_capsule_publication_baseline_with_embedded_stable_recovery_catalog_source_safe_snapshot_cross_check_and_public_doi_only_restore",
+    "repository_preservation_zenodo": "verified exact eight-file publication-baseline capsule with embedded stable recovery catalog, source/safe-snapshot cross-check and public DOI-only restore",
     "external_binary_annex_zenodo": "verified complete paginated release-asset packages with public metadata, byte readback and unauthenticated DOI-only cold restoration",
     "weekly_continuity_arweave": "verified_by_full_snapshot_plus_contiguous_deltas_and_transport_links",
     "weekly_continuity_zenodo": "verified_by_exact_six_file_packages_plus_full_download_hashes",
@@ -92,7 +92,7 @@
       "package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
       "github_required_for_recovery": false,
       "concept_doi": "10.5281/zenodo.21739343",
-      "coverage_status": "historical_snapshot_refresh_reauthorized",
+      "coverage_status": "historical_snapshot_refresh_prepared",
       "live_main_equivalence_claimed": false,
       "recovery_catalog": "preservation/recovery-catalog.json"
     },
@@ -139,7 +139,8 @@
   "publication_refresh": {
     "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
     "sequence": 2,
-    "status": "reauthorized_after_draft_safe_readback_fix",
+    "status": "prepared_for_new_core_version",
+    "authorized_base_commit_sha": "e82e7aa8336890af065191334e3c05ccd9c1e0cf",
     "core_concept_doi": "10.5281/zenodo.21739343",
     "external_annex_dois": {
       "evidence": "10.5281/zenodo.21753937",

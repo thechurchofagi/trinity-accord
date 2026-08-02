@@ -268,9 +268,12 @@ def test_recovery_index_routes_to_complete_repository_and_annex_recovery():
     assert entrypoints["external_binary_annex_restore_cli"] == (
         "scripts/restore_external_binary_annex.py"
     )
-    assert "exact_eight_file_capsule" in index["mirror_classes"][
+    repository_mirror = index["mirror_classes"][
         "repository_preservation_zenodo"
     ]
+    assert "publication-baseline" in repository_mirror
+    assert "stable recovery catalog" in repository_mirror
+    assert "public DOI-only restore" in repository_mirror
     trusted = index["latest_trusted_release"]
     assert trusted["status"] == "published_and_publicly_restored"
     annexes = trusted["external_binary_annexes"]

@@ -1,0 +1,8 @@
+{
+  "schema": "trinityaccord.repository-preservation-refresh-prepared.v1",
+  "sequence": 2,
+  "status": "prepared",
+  "base_commit_sha": "e82e7aa8336890af065191334e3c05ccd9c1e0cf",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "recovery_catalog": "preservation/recovery-catalog.json"
+}
