@@ -15,51 +15,29 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Read final V4 run and public Zenodo records
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          REPOSITORY: ${{ github.repository }}
+      - name: Read immutable V4 public package identities
         run: |
           set -euo pipefail
           python3 - <<'PY'
           import json
-          import os
           import urllib.parse
           import urllib.request
 
-          def get(url, headers=None):
-              request = urllib.request.Request(url, headers=headers or {})
-              with urllib.request.urlopen(request, timeout=60) as response:
+          HEADERS = {
+              "Accept": "application/json",
+              "User-Agent": "trinity-annex-immutable-package-diagnosis/1.0",
+          }
+
+          def get_json(url):
+              request = urllib.request.Request(url, headers=HEADERS)
+              with urllib.request.urlopen(request, timeout=120) as response:
                   return json.loads(response.read().decode("utf-8"))
 
-          repo = os.environ["REPOSITORY"]
-          github_headers = {
-              "Accept": "application/vnd.github+json",
-              "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
-              "X-GitHub-Api-Version": "2022-11-28",
-              "User-Agent": "trinity-annex-run-diagnosis/4.1",
-          }
-          runs = get(
-              f"https://api.github.com/repos/{repo}/actions/workflows/"
-              "external-binary-annex-publication-v4.yml/runs?branch=main&per_page=10",
-              github_headers,
-          ).get("workflow_runs", [])
-          print("V4_RUNS_BEGIN")
-          for run in runs:
-              print(json.dumps({
-                  key: run.get(key)
-                  for key in (
-                      "id", "run_number", "run_attempt", "status", "conclusion",
-                      "head_sha", "created_at", "updated_at", "html_url",
-                      "check_suite_id"
-                  )
-              }, sort_keys=True))
-          print("V4_RUNS_END")
+          def get_text(url):
+              request = urllib.request.Request(url, headers=HEADERS)
+              with urllib.request.urlopen(request, timeout=120) as response:
+                  return response.read().decode("utf-8")
 
-          public_headers = {
-              "Accept": "application/json",
-              "User-Agent": "trinity-annex-public-record-diagnosis/2.0",
-          }
           for version in (
               "external-evidence-annex-v4",
               "chronicle-nft-media-annex-v4",
@@ -68,28 +46,41 @@ jobs:
               search_url = "https://zenodo.org/api/records?" + urllib.parse.urlencode(
                   {"q": query, "size": 10, "sort": "newest"}
               )
-              hits = get(search_url, public_headers).get("hits", {}).get("hits", [])
-              print(f"ZENODO_{version}_BEGIN")
-              print(json.dumps({"count": len(hits)}))
+              hits = get_json(search_url).get("hits", {}).get("hits", [])
+              print("PUBLIC_VERSION " + json.dumps({"version": version, "count": len(hits)}))
               for record in hits:
-                  metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
-                  files = record.get("files")
+                  record_id = int(record["id"])
+                  direct = get_json(f"https://zenodo.org/api/records/{record_id}")
+                  files = direct.get("files")
+                  file_map = {}
                   if isinstance(files, dict):
                       entries = files.get("entries")
-                      file_count = len(entries) if isinstance(entries, (dict, list)) else None
+                      if isinstance(entries, dict):
+                          file_map = entries
+                      elif isinstance(entries, list):
+                          file_map = {str(item.get("key") or item.get("filename")): item for item in entries if isinstance(item, dict)}
                   elif isinstance(files, list):
-                      file_count = len(files)
-                  else:
-                      file_count = None
-                  print(json.dumps({
-                      "id": record.get("id"),
-                      "doi": record.get("doi") or record.get("pids", {}).get("doi"),
-                      "conceptrecid": record.get("conceptrecid") or record.get("parent", {}).get("id"),
-                      "version": metadata.get("version") or record.get("version"),
-                      "title": metadata.get("title") or record.get("title"),
-                      "file_count": file_count,
-                      "related_identifiers": metadata.get("related_identifiers") or record.get("related_identifiers"),
-                      "license": metadata.get("license") or record.get("license"),
-                  }, ensure_ascii=False, sort_keys=True))
-              print(f"ZENODO_{version}_END")
+                      file_map = {str(item.get("key") or item.get("filename")): item for item in files if isinstance(item, dict)}
+
+                  def file_url(name):
+                      item = file_map[name]
+                      links = item.get("links") if isinstance(item.get("links"), dict) else {}
+                      return str(links.get("self") or links.get("content") or links.get("download"))
+
+                  manifest = get_json(file_url("annex-manifest.json"))
+                  checksums = get_text(file_url("checksums.sha256"))
+                  print("PUBLIC_PACKAGE " + json.dumps({
+                      "record_id": record_id,
+                      "doi": direct.get("doi") or direct.get("pids", {}).get("doi"),
+                      "conceptrecid": direct.get("conceptrecid") or direct.get("parent", {}).get("id"),
+                      "annex_id": manifest.get("annex_id"),
+                      "source_commit_sha": manifest.get("source_commit_sha"),
+                      "package_identity_sha256": manifest.get("package_identity_sha256"),
+                      "asset_count": manifest.get("asset_count"),
+                      "payload_bytes": manifest.get("payload_bytes"),
+                      "manifest_bytes": int(file_map["annex-manifest.json"].get("size") or file_map["annex-manifest.json"].get("filesize") or -1),
+                      "payload_tar_bytes": int(file_map["payload.tar"].get("size") or file_map["payload.tar"].get("filesize") or -1),
+                      "file_names": sorted(file_map),
+                      "checksums": checksums.splitlines(),
+                  }, sort_keys=True))
           PY
