@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "8fd75e327287eca4",
+  "source_digest": "34e6c25b548be4f8",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -121,7 +121,6 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
-    "The core repository DOI is published and independently restorable; separately hosted large binary evidence and NFT payload bytes remain pending until the V2 annex state records complete paginated inventory, public metadata verification, and DOI-only cold restoration.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the current Git-tracked repository and every custom asset from the named valid releases."
   ],
   "does_not_prove": [
