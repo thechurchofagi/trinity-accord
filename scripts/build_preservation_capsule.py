@@ -223,6 +223,40 @@ def tracked_file_inventory(root: Path, commit: str, tree_oid: str) -> dict[str, 
     }
 
 
+
+def materialize_commit_tree_repository(
+    source: Path,
+    target: Path,
+    tree_oid: str,
+    tracked: dict[str, Any],
+) -> None:
+    """Create a clean history-free repository containing only the frozen tree.
+
+    Building from a bare clone leaks source-repository storage state, including
+    shallow-clone boundaries and pack layout, into the recovery bundle bytes.
+    Materializing the exact tracked blobs into a new repository makes the
+    published bundle a pure function of the frozen tree and controlled commit
+    metadata.
+    """
+    run(["git", "init", "-b", "main", str(target)])
+    git_text(target, "config", "core.filemode", "true")
+    blobs = batch_blob_bytes(
+        source, (item["git_blob_oid"] for item in tracked["files"])
+    )
+    for item in tracked["files"]:
+        destination = target / item["path"]
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(blobs[item["git_blob_oid"]])
+        destination.chmod(0o755 if item["mode"] == "100755" else 0o644)
+    git_text(target, "add", "-A")
+    rebuilt_tree = git_text(target, "write-tree")
+    if rebuilt_tree != tree_oid:
+        raise SystemExit(
+            "clean recovery repository tree mismatch: "
+            f"expected {tree_oid}, observed {rebuilt_tree}"
+        )
+
+
 def delete_all_refs_and_set_main(bare: Path, commit: str) -> None:
     refs = git_text(bare, "for-each-ref", "--format=%(refname)")
     for ref in refs.splitlines():
@@ -535,14 +569,16 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
 
     with tempfile.TemporaryDirectory(prefix="trinity-preservation-build-") as temp_name:
         temp = Path(temp_name)
-        bare = temp / "repository.git"
-        run(["git", "clone", "--bare", "--no-local", str(root), str(bare)])
-        recovery_commit = create_recovery_snapshot_commit(
-            bare, tree_oid, commit, commit_epoch
+        recovery_repo = temp / "repository"
+        materialize_commit_tree_repository(
+            root, recovery_repo, tree_oid, tracked
         )
-        delete_all_refs_and_set_main(bare, recovery_commit)
-        secret_scan = scan_recovery_snapshot_for_secrets(bare)
-        references = reference_inventory(bare)
+        recovery_commit = create_recovery_snapshot_commit(
+            recovery_repo, tree_oid, commit, commit_epoch
+        )
+        delete_all_refs_and_set_main(recovery_repo, recovery_commit)
+        secret_scan = scan_recovery_snapshot_for_secrets(recovery_repo)
+        references = reference_inventory(recovery_repo)
         if references != [{"ref": "refs/heads/main", "object_oid": recovery_commit}]:
             raise SystemExit("recovery bundle contains an unexpected ref")
         bundle = output_dir / "trinity-accord-recovery.bundle"
@@ -551,7 +587,7 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         # preservation package identity includes the bundle bytes, so force a
         # single deterministic pack worker and disable bitmap reuse.
         git_text(
-            bare,
+            recovery_repo,
             "-c",
             "pack.threads=1",
             "-c",
@@ -566,7 +602,7 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             str(bundle),
             "refs/heads/main",
         )
-        git_text(bare, "bundle", "verify", str(bundle))
+        git_text(recovery_repo, "bundle", "verify", str(bundle))
 
     create_source_archive(root, commit, output_dir / "trinity-accord-source.tar.gz")
     write_json(output_dir / "tracked-files.json", tracked)
@@ -711,7 +747,7 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "live_main_equivalence_claimed": False,
             "cloneable_single_root_recovery_bundle_embedded": True,
             "production_commit_identity_recorded": True,
-            "production_tag_identities_recorded": True,
+            "production_tag_identities_recorded": False,
             "source_snapshot_embedded": True,
             "github_required_for_repository_recovery": False,
             "network_required_after_capsule_download": False,
