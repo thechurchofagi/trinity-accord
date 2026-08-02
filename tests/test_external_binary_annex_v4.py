@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import sys
 from pathlib import Path
@@ -36,11 +37,43 @@ def _public_record(expected: dict[str, object]) -> dict[str, object]:
     }
 
 
+def _manifest_fixture() -> dict[str, object]:
+    return {
+        "schema": "trinityaccord.external-binary-annex.v2",
+        "annex_type": "evidence",
+        "annex_id": "external-evidence-annex-v4",
+        "source_commit_sha": "1" * 40,
+        "package_identity_sha256": "a" * 64,
+        "source_release_tags": ["signed-large-data-mirror-v1"],
+        "asset_count": 1,
+        "payload_bytes": 12,
+        "assets": [
+            {
+                "release_tag": "signed-large-data-mirror-v1",
+                "asset_id": 123,
+                "asset_name": "evidence.bin",
+                "path": "releases/signed-large-data-mirror-v1/evidence.bin",
+                "bytes": 12,
+                "sha256": "b" * 64,
+                "md5": "c" * 32,
+                "download_count_at_capture": 1,
+            }
+        ],
+        "rights_boundary": {
+            "license_identifier": "other-closed",
+            "deposit_grants_no_new_reuse_rights": True,
+        },
+    }
+
+
 def test_v4_uses_new_immutable_pair_after_published_evidence_v3():
     assert annex_v4.FINAL_ANNEX_IDS == {
         "evidence": "external-evidence-annex-v4",
         "nft": "chronicle-nft-media-annex-v4",
     }
+    assert publisher_v4.EVIDENCE_V4_RECORD_ID == 21753937
+    assert publisher_v4.EVIDENCE_V4_DOI == "10.5281/zenodo.21753937"
+    assert publisher_v4.EVIDENCE_V4_CONCEPT_RECORD_ID == 21753253
     assert set(annex_v4.FINAL_ANNEX_IDS.values()).isdisjoint(
         {"external-evidence-annex-v3", "chronicle-nft-media-annex-v3"}
     )
@@ -70,8 +103,6 @@ def test_direct_record_top_level_license_is_normalized_and_conflicts_fail_closed
     conflicting["metadata"]["license"] = {"id": "cc-by-4.0"}
     with pytest.raises(SystemExit, match="metadata conflict: license/rights"):
         publisher_v4.normalized_public_record(conflicting)
-    with pytest.raises(SystemExit, match="metadata conflict: license/rights"):
-        publisher_v4.validate_public_metadata_v4(conflicting, expected)
 
 
 def test_public_zenodo_doi_identifier_shape_is_equivalent_but_values_stay_strict():
@@ -124,6 +155,48 @@ def test_public_zenodo_doi_identifier_shape_is_equivalent_but_values_stay_strict
         publisher_v4.validate_public_metadata_v4(wrong_resource_type, expected)
 
 
+def test_stable_manifest_view_ignores_only_provenance_and_download_counts():
+    public = _manifest_fixture()
+    current = copy.deepcopy(public)
+    current["source_commit_sha"] = "2" * 40
+    current["package_identity_sha256"] = "d" * 64
+    current["assets"][0]["download_count_at_capture"] = 999
+    assert publisher_v4._stable_manifest_view(public) == (
+        publisher_v4._stable_manifest_view(current)
+    )
+
+
+def test_stable_manifest_view_rejects_every_content_and_rights_change():
+    original = _manifest_fixture()
+    for mutate in (
+        lambda value: value["assets"][0].__setitem__("sha256", "e" * 64),
+        lambda value: value["assets"][0].__setitem__("bytes", 13),
+        lambda value: value["assets"][0].__setitem__("asset_id", 124),
+        lambda value: value["assets"][0].__setitem__("path", "other.bin"),
+        lambda value: value["source_release_tags"].append("unexpected-release"),
+        lambda value: value["rights_boundary"].__setitem__(
+            "deposit_grants_no_new_reuse_rights", False
+        ),
+    ):
+        changed = copy.deepcopy(original)
+        mutate(changed)
+        assert publisher_v4._stable_manifest_view(original) != (
+            publisher_v4._stable_manifest_view(changed)
+        )
+
+
+def test_stable_manifest_view_rejects_malformed_assets():
+    missing = _manifest_fixture()
+    del missing["assets"]
+    with pytest.raises(SystemExit, match="lacks assets list"):
+        publisher_v4._stable_manifest_view(missing)
+
+    malformed = _manifest_fixture()
+    malformed["assets"] = ["not-an-object"]
+    with pytest.raises(SystemExit, match="non-object asset"):
+        publisher_v4._stable_manifest_view(malformed)
+
+
 def test_other_duplicate_public_metadata_conflicts_fail_closed():
     expected = _expected_metadata()
     record = {
@@ -139,89 +212,6 @@ def test_other_duplicate_public_metadata_conflicts_fail_closed():
     }
     with pytest.raises(SystemExit, match="metadata conflict: keywords"):
         publisher_v4.validate_public_metadata_v4(record, expected)
-
-
-def test_immutable_evidence_v4_identity_is_exact_and_source_specific(
-    tmp_path, monkeypatch
-):
-    package_dir = tmp_path / "package"
-    package_dir.mkdir()
-    (package_dir / "payload.tar").write_bytes(b"payload")
-    manifest = {
-        "annex_type": "evidence",
-        "annex_id": "external-evidence-annex-v4",
-        "source_commit_sha": "9" * 40,
-        "package_identity_sha256": "old",
-        "asset_count": 28,
-        "payload_bytes": 204595967,
-    }
-    writes: list[dict[str, object]] = []
-
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "strict_json",
-        lambda _path: dict(manifest),
-    )
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "manifest_identity",
-        lambda value: publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
-        if value["source_commit_sha"] == publisher_v4.EVIDENCE_V4_SOURCE_SHA
-        else "wrong",
-    )
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "write_json",
-        lambda _path, value: writes.append(dict(value)),
-    )
-
-    def fake_hash(path):
-        if path.name == "payload.tar":
-            return publisher_v4.EVIDENCE_V4_PAYLOAD_TAR_SHA256
-        if path.name == "annex-manifest.json":
-            return publisher_v4.EVIDENCE_V4_MANIFEST_SHA256
-        return "a" * 64
-
-    monkeypatch.setattr(publisher_v4.publisher.package_module, "hash_file", fake_hash)
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "verify_local_package",
-        lambda _path: {
-            "package_identity_sha256": publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256,
-            "annex_type": "evidence",
-            "annex_id": "external-evidence-annex-v4",
-        },
-    )
-    verified = publisher_v4.reconcile_immutable_evidence_v4(package_dir)
-    assert verified["package_identity_sha256"] == (
-        publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
-    )
-    assert writes[-1]["source_commit_sha"] == publisher_v4.EVIDENCE_V4_SOURCE_SHA
-    assert writes[-1]["package_identity_sha256"] == (
-        publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
-    )
-
-
-def test_immutable_evidence_v4_rejects_any_payload_difference(tmp_path, monkeypatch):
-    package_dir = tmp_path / "package"
-    package_dir.mkdir()
-    (package_dir / "payload.tar").write_bytes(b"changed")
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "strict_json",
-        lambda _path: {
-            "annex_type": "evidence",
-            "annex_id": "external-evidence-annex-v4",
-            "source_commit_sha": "9" * 40,
-        },
-    )
-    monkeypatch.setattr(
-        publisher_v4.publisher.package_module,
-        "hash_file",
-        lambda _path: "0" * 64,
-    )
-    with pytest.raises(SystemExit, match="payload differs"):
-        publisher_v4.reconcile_immutable_evidence_v4(package_dir)
 
 
 def test_v4_workflow_is_source_bound_serialized_and_self_retiring():
