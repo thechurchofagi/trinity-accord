@@ -26,8 +26,9 @@ EXPECTED_GATEWAY_START_COMMAND = (
     "uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app "
     "--host 0.0.0.0 --port $PORT"
 )
+EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/readyz"
 EXPECTED_GATEWAY_ENV = {
-    "TRINITY_GATEWAY_RUNTIME_VERSION": "1.2.0-protected",
+    "TRINITY_GATEWAY_RUNTIME_VERSION": "1.2.1-protected",
     "TRINITY_MAX_SUBMISSION_BYTES": "98304",
     "TRINITY_RECORD_DRAFT_MAX_BYTES": "49152",
     "TRINITY_MAX_TEXT_FIELD_CHARS": "4000",
@@ -143,6 +144,19 @@ def service_start_command(service: dict[str, Any]) -> str:
     return str(env_details.get("startCommand") or "")
 
 
+def service_health_check_path(service: dict[str, Any]) -> str:
+    """Return the web-service health path across current and legacy API shapes."""
+    value = service.get("healthCheckPath")
+    if isinstance(value, str):
+        return value
+    details = service.get("serviceDetails")
+    if isinstance(details, dict):
+        value = details.get("healthCheckPath")
+        if isinstance(value, str):
+            return value
+    return ""
+
+
 def env_var_value(result: Any) -> str | None:
     """Return one Render env-var value without ever logging the response."""
     if not isinstance(result, dict):
@@ -182,6 +196,16 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
         )
         print("RENDER_CONFIG_UPDATED field=startCommand")
 
+    if service_health_check_path(service) != EXPECTED_GATEWAY_HEALTH_CHECK_PATH:
+        # healthCheckPath is a web-service field in Render's Update Service API.
+        request(
+            f"/services/{service_id}",
+            token,
+            method="PATCH",
+            body={"healthCheckPath": EXPECTED_GATEWAY_HEALTH_CHECK_PATH},
+        )
+        print("RENDER_CONFIG_UPDATED field=healthCheckPath")
+
     for key, expected in EXPECTED_GATEWAY_ENV.items():
         path = _env_var_path(service_id, key)
         current = env_var_value(request(path, token, allow_not_found=True))
@@ -194,14 +218,17 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
         fail("Render service readback did not return an object")
     if service_start_command(refreshed) != EXPECTED_GATEWAY_START_COMMAND:
         fail("Render startCommand readback does not match the secure entrypoint")
+    if service_health_check_path(refreshed) != EXPECTED_GATEWAY_HEALTH_CHECK_PATH:
+        fail("Render healthCheckPath readback does not match the protected readiness endpoint")
     for key, expected in EXPECTED_GATEWAY_ENV.items():
         observed = env_var_value(request(_env_var_path(service_id, key), token))
         if observed != expected:
             fail(f"Render environment readback mismatch for {key}")
 
     print(
-        "RENDER_CONFIG_ATTESTED secure_entrypoint=true "
-        "request_max_bytes=98304 record_draft_max_bytes=49152 text_field_max_chars=4000"
+        "RENDER_CONFIG_ATTESTED secure_entrypoint=true health_check_path=/readyz "
+        "runtime_version=1.2.1-protected request_max_bytes=98304 "
+        "record_draft_max_bytes=49152 text_field_max_chars=4000"
     )
     return refreshed
 
@@ -239,6 +266,19 @@ def _public_json(
 
 def _verify_public_gateway_protection_once(base_url: str) -> None:
     nonce = str(time.time_ns())
+
+    protected_status, protected = _public_json(
+        f"{base_url.rstrip('/')}/readyz?protection_attestation={nonce}"
+    )
+    if protected_status != 200 or protected.get("ok") is not True:
+        raise RuntimeError(f"protected readiness returned HTTP {protected_status}")
+    if protected.get("version") != EXPECTED_GATEWAY_ENV["TRINITY_GATEWAY_RUNTIME_VERSION"]:
+        raise RuntimeError("protected readiness runtime version does not match deployed config")
+    if protected.get("protection_layer_active") is not True:
+        raise RuntimeError("protected readiness does not attest the protection layer")
+    if protected.get("protection_entrypoint") != "apps.record_chain_intake_gateway.secure_entrypoint:app":
+        raise RuntimeError("protected readiness does not attest the secure entrypoint")
+
     status, readiness = _public_json(
         f"{base_url.rstrip('/')}/record-chain/readiness?protection_attestation={nonce}"
     )
@@ -290,6 +330,7 @@ def verify_public_gateway_protection(
             fail(f"public Gateway protection attestation failed: {last_error}")
         print(
             "GATEWAY_PROTECTION_ATTESTED protection_layer_active=true "
+            "protected_readiness_http=200 runtime_version=1.2.1-protected "
             "request_max_bytes=98304 oversized_preflight_http=413 submit_called=false"
         )
         return
@@ -442,7 +483,7 @@ def main() -> int:
     if args.service == GATEWAY_SERVICE_NAME and not args.reconcile_config:
         fail(
             "Production Gateway deploys require --reconcile-config so a stale "
-            "Render startCommand or resource limit cannot survive a green deployment"
+            "Render startCommand, healthCheckPath, or resource limit cannot survive a green deployment"
         )
     if args.reconcile_config:
         svc = reconcile_gateway_config(svc, token)
