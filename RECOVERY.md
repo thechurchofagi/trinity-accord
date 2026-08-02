@@ -9,6 +9,18 @@ permalink: /recovery/
 
 **Scope:** Recovery of repository-maintained state. This guide does not prove philosophical claims, investment value, religious authority, or independent attestation.
 
+<!-- BEGIN REPOSITORY PRESERVATION BASELINE RULE -->
+**Published-baseline rule:** A repository capsule restores the exact Git-tracked
+publication baseline named by its manifest. It is not a live mirror and must not be
+described as byte-identical to a later moving GitHub `main` without an explicit
+freshness comparison.
+
+**Stable recovery catalog:** `preservation/recovery-catalog.json` is embedded in the
+core source tree. It identifies the core concept DOI and both external-annex version
+DOIs, so complete DOI discovery does not depend on GitHub, maintainer memory, or a
+post-publication state commit.
+<!-- END REPOSITORY PRESERVATION BASELINE RULE -->
+
 **Claim registry:** Before reporting recovered public claims, check `api/claim-registry.json` for source/evidence/limitations/corrections path. Notarized evidence does not by itself count as formal independent attestation. Scarcity/firstness language is bounded framing, not proof of absolute firstness.
 
 ---
@@ -126,13 +138,13 @@ Trust nothing from GitHub until verified against Bitcoin Originals, signed manif
 ### Phase 0A — Bootstrap the repository from the Zenodo preservation capsule
 
 The Repository Preservation Capsule is the GitHub-independent bootstrap for the
-complete Git-tracked repository. It is a separate Zenodo version series from the
+exact published Git-tracked repository baseline identified by its manifest. It is a separate Zenodo version series from the
 research paper DOI and the Weekly Continuity dataset.
 
 Check `preservation/zenodo-state.json` from any known copy or query Zenodo for the
 title `Trinity Accord Repository Preservation Capsule`. A published version contains:
 
-- `trinity-accord-source.tar.gz` — exact current source tree;
+- `trinity-accord-source.tar.gz` — exact source tree for the declared publication baseline;
 - `trinity-accord-recovery.bundle` — cloneable, single-root Git recovery snapshot for
   the exact current production tree;
 - `tracked-files.json` and `checksums.sha256` — SHA-256 inventory;
@@ -164,8 +176,9 @@ capsule is downloaded.
 
 Important scope boundary:
 
-- This is a complete recovery of every byte and executable mode in the current
-  Git-tracked production tree.
+- This is a complete recovery of every byte and executable mode in the capsule's
+  declared Git-tracked publication baseline. Compare its source commit with any later
+  GitHub `main` before calling it current.
 - The source production commit and tag identities are recorded in the manifest, but
   parent-history and tag objects are deliberately absent from the public bundle. An
   April 2026 commit briefly contained a public GitHub agent credential; an immutable

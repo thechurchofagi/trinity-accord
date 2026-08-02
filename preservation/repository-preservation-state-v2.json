@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.repository-preservation-zenodo-state.v2",
-  "publication_status": "refresh_authorized",
+  "publication_status": "prepared_for_publication",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
   "core_concept_doi": "10.5281/zenodo.21739343",
   "previous_verified_version": {
@@ -17,5 +17,6 @@
   "github_required_for_discovery": false,
   "github_required_for_repository_recovery": false,
   "external_large_binary_annex_embedded": false,
-  "versions": []
+  "versions": [],
+  "prepared_base_commit_sha": "78231506fb62bad1652e3afc7796b2168c1ac7fc"
 }

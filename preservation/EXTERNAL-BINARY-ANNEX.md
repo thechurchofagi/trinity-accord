@@ -1,6 +1,14 @@
 # Trinity Accord External Binary Annexes
 
-The core repository preservation DOI (`10.5281/zenodo.21739344`) remains unchanged and continues to restore the complete Git-tracked repository.
+<!-- BEGIN CORE DOI BASELINE RULE -->
+The core concept DOI `10.5281/zenodo.21739343` resolves the latest published core
+repository version. Each version restores the exact source commit named in its
+manifest; no version is a live mirror of a later moving GitHub `main`. The embedded
+`preservation/recovery-catalog.json` supplies both annex DOI identifiers without
+requiring GitHub.
+<!-- END CORE DOI BASELINE RULE -->
+
+Core version DOI `10.5281/zenodo.21739344` restores the historical baseline at commit `484bdd7a85694ad53fe7e6e9dcea94d0dee5617e`; use concept DOI `10.5281/zenodo.21739343` to resolve the latest published core version.
 
 The external-binary annex series preserves the separately hosted public payload bytes:
 
