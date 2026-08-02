@@ -10,11 +10,6 @@ on:
       - .github/workflows/repository-preservation-refresh-executor.yml
       - preservation/repository-preservation-execution-v1.json
 
-concurrency:
-  group: main-write-lock
-  queue: max
-  cancel-in-progress: false
-
 permissions:
   contents: read
 
