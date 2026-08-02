@@ -218,7 +218,8 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         assert "external_binary_annex_v3.py" in workflow
         assert "publish_external_binary_annexes_to_zenodo_v3.py" in workflow
         assert "external_annex_publication_precheck.py" in workflow
-        assert "refs/remotes/origin/main" in workflow
+        assert "git fetch origin main --prune" in workflow
+        assert "git rebase origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
         assert "steps.precheck.outputs.required == 'false'" in workflow
         assert ".github/workflows/external-binary-annex-publication.yml" in workflow
