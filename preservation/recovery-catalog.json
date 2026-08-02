@@ -8,7 +8,19 @@
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
     "previous_verified_version_doi": "10.5281/zenodo.21755655",
     "restore_program_name": "restore-trinity-accord.py",
-    "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main."
+    "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main.",
+    "verified_arweave_mirror": {
+      "record": "preservation/repository-capsule-arweave-mirror-81b151245d70.json",
+      "txid": "42UQsjG7gcUs5mFu9ZcwN6sYbskR533q_SpnFpaSxKs",
+      "capsule_id": "repository-81b151245d70",
+      "source_git_commit_sha": "81b151245d70f6b775418de60f7b8a1366f28944",
+      "git_tree_oid": "c63cb393713f9824970bab80b07c214dc79e561a",
+      "package_identity_sha256": "ab3e0c54dce4b51330060e88133399553442f091d6f98adf06b8439e27be00c2",
+      "payload_bytes": 36925440,
+      "payload_sha256": "132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14",
+      "public_readback": "passed",
+      "scope": "Exact non-authoritative repository preservation capsule mirror; external evidence and Chronicle NFT annex payloads remain separately mirrored and referenced."
+    }
   },
   "external_binary_annexes": {
     "evidence": {
@@ -25,7 +37,7 @@
     }
   },
   "recovery_order": [
-    "Resolve and restore the latest core repository version from concept DOI 10.5281/zenodo.21739343.",
+    "Resolve and restore the latest core repository version from concept DOI 10.5281/zenodo.21739343, or retrieve the exact verified Arweave repository capsule mirror identified in core_repository.verified_arweave_mirror.",
     "Verify the recovered preservation manifest and tracked-file inventory.",
     "Restore evidence annex DOI 10.5281/zenodo.21753937.",
     "Restore Chronicle NFT annex DOI 10.5281/zenodo.21754229.",
