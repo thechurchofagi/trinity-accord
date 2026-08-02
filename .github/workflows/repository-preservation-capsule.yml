@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - .github/workflows/repository-preservation-capsule.yml
-      - .github/workflows/repository-preservation-refresh.yml
+      - scripts/run_repository_preservation_refresh_ci.sh
       - preservation/repository-preservation-refresh-authorization.json
   schedule:
     - cron: "17 9 1 1,4,7,10 *"
@@ -30,10 +30,46 @@ concurrency:
 jobs:
   refresh-published-recovery:
     if: github.event_name == 'push'
-    uses: ./.github/workflows/repository-preservation-refresh.yml
+    concurrency:
+      group: main-write-lock
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
     permissions:
       contents: write
-    secrets: inherit
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: ${{ vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK }}
+    steps:
+      - name: Checkout repository with full source history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Execute transactional repository preservation refresh
+        run: bash scripts/run_repository_preservation_refresh_ci.sh
+
+      - name: Upload repository preservation refresh proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repository-preservation-refresh-proof
+          path: |
+            ${{ runner.temp }}/local-restored-repository/recovery-report.json
+            ${{ runner.temp }}/public-restored-repository/recovery-report.json
+            ${{ runner.temp }}/public-metadata-report.json
+            ${{ runner.temp }}/toolchain-provenance.json
+          retention-days: 365
+          if-no-files-found: warn
 
   build-and-cold-restore:
     if: github.event_name != 'push'

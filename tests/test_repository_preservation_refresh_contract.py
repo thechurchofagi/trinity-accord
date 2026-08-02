@@ -13,6 +13,7 @@ STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 OBSERVATION = ROOT / "preservation/repository-preservation-observation.json"
 WORKFLOW = ROOT / ".github/workflows/repository-preservation-refresh.yml"
 CONTROLLER = ROOT / ".github/workflows/repository-preservation-capsule.yml"
+RUNNER = ROOT / "scripts/run_repository_preservation_refresh_ci.sh"
 SCRIPT = ROOT / "scripts/repository_preservation_refresh.py"
 
 
@@ -59,9 +60,9 @@ def test_refresh_authorization_is_exact_and_non_amending():
     assert auth["non_amending_boundary"] is True
 
 
-def test_refresh_workflow_uses_one_exact_source_baseline_and_public_proofs():
+def test_manual_refresh_workflow_retains_safe_exact_source_publication_path():
     text = WORKFLOW.read_text(encoding="utf-8")
-    assert "workflow_call:" in text
+    assert "workflow_dispatch:" in text
     assert "group: main-write-lock" in text
     assert "queue: max" in text
     assert "repository-preservation-refresh-authorization.json" in text
@@ -77,16 +78,33 @@ def test_refresh_workflow_uses_one_exact_source_baseline_and_public_proofs():
     assert "ZENODO_ACCESS_TOKEN" in text
 
 
-def test_existing_preservation_controller_calls_refresh_on_main_push():
+def test_existing_preservation_controller_runs_inline_refresh_on_main_push():
     text = CONTROLLER.read_text(encoding="utf-8")
     assert "push:" in text
     assert "refresh-published-recovery:" in text
     assert "if: github.event_name == 'push'" in text
-    assert "uses: ./.github/workflows/repository-preservation-refresh.yml" in text
+    assert "group: main-write-lock" in text
+    assert "queue: max" in text
     assert "contents: write" in text
-    assert "secrets: inherit" in text
+    assert "bash scripts/run_repository_preservation_refresh_ci.sh" in text
     assert "if: github.event_name != 'push'" in text
     assert "cancel-in-progress: false" in text
+    assert "uses: ./.github/workflows/repository-preservation-refresh.yml" not in text
+
+
+def test_transaction_runner_is_strict_idempotent_and_publicly_verified():
+    subprocess.run(["bash", "-n", str(RUNNER)], cwd=ROOT, check=True)
+    text = RUNNER.read_text(encoding="utf-8")
+    assert "set -euo pipefail" in text
+    assert 'if [[ "$status" == "consumed" ]]' in text
+    assert "archive: prepare repository preservation refresh v2" in text
+    assert "--commit \"$source_sha\"" in text
+    assert "--state preservation/repository-preservation-state-v2.json" in text
+    assert "--zenodo-record-id \"$record_id\"" in text
+    assert "repository_preservation_refresh.py verify-public" in text
+    assert "repository_preservation_refresh.py seal" in text
+    assert "archive: record refreshed repository preservation DOI" in text
+    assert "git rebase origin/main" in text
 
 
 def test_current_state_never_claims_live_main_equivalence():
