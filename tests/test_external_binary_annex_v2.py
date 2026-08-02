@@ -12,8 +12,10 @@ SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
+import external_annex_publication_precheck as publication_precheck  # noqa: E402
 import external_binary_annex as legacy  # noqa: E402
 import external_binary_annex_v2 as v2  # noqa: E402
+import external_binary_annex_v3 as v3  # noqa: E402
 import publish_external_binary_annexes_to_zenodo_v2 as publisher_v2  # noqa: E402
 import restore_external_binary_annex as restore  # noqa: E402
 
@@ -76,14 +78,25 @@ def test_release_asset_pagination_rejects_duplicates():
         )
 
 
-def test_v2_annex_ids_do_not_reuse_a_possible_immutable_v1_record():
+def test_v2_and_final_v3_use_distinct_immutable_versions():
+    v2.V2_ANNEX_IDS = {
+        "evidence": "external-evidence-annex-v2",
+        "nft": "chronicle-nft-media-annex-v2",
+    }
     v2.activate_v2_specs()
     assert legacy.ANNEX_SPECS["evidence"]["annex_id"] == "external-evidence-annex-v2"
     assert legacy.ANNEX_SPECS["nft"]["annex_id"] == "chronicle-nft-media-annex-v2"
 
+    v3.activate_final_specs()
+    assert legacy.ANNEX_SPECS["evidence"]["annex_id"] == "external-evidence-annex-v3"
+    assert legacy.ANNEX_SPECS["nft"]["annex_id"] == "chronicle-nft-media-annex-v3"
+    assert set(v3.FINAL_ANNEX_IDS.values()).isdisjoint(
+        {"external-evidence-annex-v2", "chronicle-nft-media-annex-v2"}
+    )
+
 
 def test_original_scope_and_rights_boundaries_remain_intact():
-    v2.activate_v2_specs()
+    v3.activate_final_specs()
     assert legacy.ANNEX_SPECS["evidence"]["release_tags"] == [
         "signed-large-data-mirror-v1",
         "notarial-certificate-images-v1",
@@ -104,7 +117,7 @@ def test_original_scope_and_rights_boundaries_remain_intact():
 
 
 def test_public_metadata_verification_covers_legacy_and_current_shapes():
-    v2.activate_v2_specs()
+    v3.activate_final_specs()
     expected = legacy.metadata_for(legacy.ANNEX_SPECS["evidence"], "2026-08-02")
 
     legacy_observed = dict(expected)
@@ -119,10 +132,7 @@ def test_public_metadata_verification_covers_legacy_and_current_shapes():
         {"person_or_org": {"name": "Liu, Hongju", "type": "personal"}}
     ]
     current_observed["related_identifiers"] = [
-        {
-            **item,
-            "relation": {"id": item["relation"].lower()},
-        }
+        {**item, "relation": {"id": item["relation"].lower()}}
         for item in expected["related_identifiers"]
     ]
     publisher_v2.validate_public_metadata(
@@ -179,6 +189,21 @@ def test_safe_restore_paths_remain_fail_closed():
             restore.safe_member(value)
 
 
+def test_completion_helper_recognizes_only_final_state(tmp_path):
+    state_path = tmp_path / "state.json"
+    state_path.write_text(
+        json.dumps({"publication_status": publication_precheck.COMPLETE}),
+        encoding="utf-8",
+    )
+    assert publication_precheck.COMPLETE == "published_and_publicly_restored"
+    assert publication_precheck.is_complete(state_path) is True
+    state_path.write_text(
+        json.dumps({"publication_status": "published_pending_public_cold_restore"}),
+        encoding="utf-8",
+    )
+    assert publication_precheck.is_complete(state_path) is False
+
+
 def test_one_time_publication_workflow_is_source_bound_or_already_retired():
     workflow_path = ROOT / ".github/workflows/external-binary-annex-publication.yml"
     state = json.loads(
@@ -190,14 +215,17 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         workflow = workflow_path.read_text(encoding="utf-8")
         assert "ref: ${{ github.sha }}" in workflow
         assert "TRINITY_PUBLICATION_SOURCE_SHA: ${{ github.sha }}" in workflow
-        assert "external_binary_annex_v2.py" in workflow
-        assert "publish_external_binary_annexes_to_zenodo_v2.py" in workflow
+        assert "external_binary_annex_v3.py" in workflow
+        assert "publish_external_binary_annexes_to_zenodo_v3.py" in workflow
+        assert "external_annex_publication_precheck.py" in workflow
+        assert "git fetch origin main --prune" in workflow
+        assert "git rebase origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
-        assert "required=false" in workflow
-        assert "published_and_publicly_restored" in workflow
-        assert "git rm .github/workflows/external-binary-annex-publication.yml" in workflow
+        assert "steps.precheck.outputs.required == 'false'" in workflow
+        assert ".github/workflows/external-binary-annex-publication.yml" in workflow
+        assert 'git rm "$path"' in workflow
     else:
-        assert state["publication_status"] == "published_and_publicly_restored"
+        assert state["publication_status"] == publication_precheck.COMPLETE
         assert state["release_asset_pagination_complete"] is True
         assert state["public_metadata_verification"] == "passed"
 
