@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Inspect NFT backup manifest archive
+      - name: Inspect NFT backup manifest coverage
         env:
           GITHUB_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
@@ -26,9 +26,6 @@ jobs:
             --header "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/$REPOSITORY/releases/assets/$ASSET_ID" \
             --output "$RUNNER_TEMP/nft-cars-manifest.tar.gz"
-          echo "NFT_MANIFEST_ARCHIVE_LIST_BEGIN"
-          tar -tzf "$RUNNER_TEMP/nft-cars-manifest.tar.gz"
-          echo "NFT_MANIFEST_ARCHIVE_LIST_END"
           mkdir "$RUNNER_TEMP/manifest"
           tar -xzf "$RUNNER_TEMP/nft-cars-manifest.tar.gz" \
             -C "$RUNNER_TEMP/manifest"
@@ -37,32 +34,39 @@ jobs:
           import os
           from pathlib import Path
 
-          root = Path(os.environ["RUNNER_TEMP"]) / "manifest"
-          for path in sorted(root.rglob("*")):
-              if not path.is_file():
-                  continue
-              print(f"NFT_MANIFEST_FILE {path.relative_to(root)} bytes={path.stat().st_size}")
-              if path.suffix.lower() == ".json":
-                  value = json.loads(path.read_text(encoding="utf-8"))
-                  summary = {"type": type(value).__name__}
-                  if isinstance(value, list):
-                      summary["length"] = len(value)
-                      summary["first"] = value[0] if value else None
-                      summary["last"] = value[-1] if value else None
-                  elif isinstance(value, dict):
-                      summary["keys"] = sorted(value)[:30]
-                      for key in (
-                          "count", "total", "total_count", "asset_count",
-                          "token_count", "entries", "tokens", "items", "files"
-                      ):
-                          item = value.get(key)
-                          if isinstance(item, (list, dict)):
-                              summary[key + "_length"] = len(item)
-                          elif item is not None:
-                              summary[key] = item
-                  print("NFT_MANIFEST_JSON " + json.dumps(summary, ensure_ascii=False, sort_keys=True))
-              elif path.stat().st_size <= 100000:
-                  print("NFT_MANIFEST_TEXT_BEGIN " + str(path.relative_to(root)))
-                  print(path.read_text(encoding="utf-8", errors="replace")[:100000])
-                  print("NFT_MANIFEST_TEXT_END " + str(path.relative_to(root)))
+          value = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "manifest/manifest.json")
+              .read_text(encoding="utf-8")
+          )
+          summary = {}
+          for key in (
+              "contracts", "downloaded", "failed", "files", "nfts",
+              "timestamp", "total_txids"
+          ):
+              item = value.get(key)
+              if isinstance(item, (list, dict)):
+                  summary[key + "_type"] = type(item).__name__
+                  summary[key + "_length"] = len(item)
+                  if isinstance(item, list):
+                      summary[key + "_first"] = item[0] if item else None
+                      summary[key + "_last"] = item[-1] if item else None
+                  else:
+                      summary[key + "_keys"] = sorted(item)[:20]
+              else:
+                  summary[key] = item
+          files = value.get("files")
+          if isinstance(files, list):
+              names = []
+              for item in files:
+                  if isinstance(item, dict):
+                      names.append(
+                          item.get("path") or item.get("name") or item.get("file")
+                      )
+                  else:
+                      names.append(item)
+              summary["file_name_sample_first"] = names[:10]
+              summary["file_name_sample_last"] = names[-10:]
+          print("NFT_BACKUP_MANIFEST_COVERAGE " + json.dumps(
+              summary, ensure_ascii=False, sort_keys=True
+          ))
           PY
