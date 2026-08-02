@@ -15,6 +15,61 @@ import publish_external_binary_annexes_to_zenodo_v2 as publisher  # noqa: E402
 _original_validate_public_metadata = publisher.validate_public_metadata
 
 
+def _canonical_related_identifier(identifier: Any, scheme: Any = "") -> str:
+    """Normalize only representation-equivalent DOI identifiers.
+
+    Zenodo stores a depositor DOI URL as a bare DOI plus ``scheme=doi`` in its
+    public record. Non-DOI URLs remain exact strings so unrelated identifiers
+    cannot become equivalent accidentally.
+    """
+    value = str(identifier or "").strip()
+    lowered = value.lower()
+    for prefix in (
+        "https://doi.org/",
+        "http://doi.org/",
+        "https://dx.doi.org/",
+        "http://dx.doi.org/",
+        "doi:",
+    ):
+        if lowered.startswith(prefix):
+            value = value[len(prefix) :]
+            lowered = value.lower()
+            break
+    scheme_id = publisher._relation_id(scheme)
+    if scheme_id == "doi" or lowered.startswith("10."):
+        return "doi:" + lowered
+    return value
+
+
+def _related_pairs_v4(value: Any) -> set[tuple[str, str, str]]:
+    """Return canonical identifier/relation/resource triples for Zenodo shapes."""
+    result: set[tuple[str, str, str]] = set()
+    if not isinstance(value, list):
+        return result
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        identifier = _canonical_related_identifier(
+            item.get("identifier"), item.get("scheme")
+        )
+        relation_value = (
+            item.get("relation")
+            if item.get("relation") not in (None, "")
+            else item.get("relation_type")
+        )
+        relation = publisher._relation_id(relation_value)
+        resource_type = publisher._relation_id(item.get("resource_type"))
+        if identifier and relation:
+            result.add((identifier, relation, resource_type))
+    return result
+
+
+# Public validation and duplicate-field conflict checks must use the same exact
+# canonicalization rules. This changes representation handling only; it does not
+# weaken relation or resource-type validation.
+publisher._related_pairs = _related_pairs_v4
+
+
 def _canonical_duplicate_value(key: str, value: Any) -> Any:
     """Canonicalize equivalent legacy/current Zenodo field representations."""
     if key == "license":
