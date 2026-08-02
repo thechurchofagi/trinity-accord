@@ -1,11 +1,7 @@
 name: Repository Preservation Refresh
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - preservation/repository-preservation-refresh-authorization.json
+  workflow_call:
   workflow_dispatch:
 
 concurrency:

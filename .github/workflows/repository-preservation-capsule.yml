@@ -1,6 +1,13 @@
 name: Repository Preservation Capsule
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/repository-preservation-capsule.yml
+      - .github/workflows/repository-preservation-refresh.yml
+      - preservation/repository-preservation-refresh-authorization.json
   schedule:
     - cron: "17 9 1 1,4,7,10 *"
   workflow_dispatch:
@@ -21,7 +28,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  refresh-published-recovery:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/repository-preservation-refresh.yml
+    permissions:
+      contents: write
+    secrets: inherit
+
   build-and-cold-restore:
+    if: github.event_name != 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     permissions:
