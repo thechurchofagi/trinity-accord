@@ -12,6 +12,7 @@ SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
+import external_annex_publication_precheck as publication_precheck  # noqa: E402
 import external_binary_annex as legacy  # noqa: E402
 import external_binary_annex_v2 as v2  # noqa: E402
 import external_binary_annex_v3 as v3  # noqa: E402
@@ -188,6 +189,21 @@ def test_safe_restore_paths_remain_fail_closed():
             restore.safe_member(value)
 
 
+def test_completion_helper_recognizes_only_final_state(tmp_path):
+    state_path = tmp_path / "state.json"
+    state_path.write_text(
+        json.dumps({"publication_status": publication_precheck.COMPLETE}),
+        encoding="utf-8",
+    )
+    assert publication_precheck.COMPLETE == "published_and_publicly_restored"
+    assert publication_precheck.is_complete(state_path) is True
+    state_path.write_text(
+        json.dumps({"publication_status": "published_pending_public_cold_restore"}),
+        encoding="utf-8",
+    )
+    assert publication_precheck.is_complete(state_path) is False
+
+
 def test_one_time_publication_workflow_is_source_bound_or_already_retired():
     workflow_path = ROOT / ".github/workflows/external-binary-annex-publication.yml"
     state = json.loads(
@@ -205,10 +221,9 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         assert "refs/remotes/origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
         assert "steps.precheck.outputs.required == 'false'" in workflow
-        assert "published_and_publicly_restored" in workflow
         assert "git rm .github/workflows/external-binary-annex-publication.yml" in workflow
     else:
-        assert state["publication_status"] == "published_and_publicly_restored"
+        assert state["publication_status"] == publication_precheck.COMPLETE
         assert state["release_asset_pagination_complete"] is True
         assert state["public_metadata_verification"] == "passed"
 
