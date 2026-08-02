@@ -130,6 +130,18 @@ jobs:
         if: steps.precheck.outputs.required == 'true'
         run: python3 -m pip install -r requirements-ci.txt
 
+      - name: Record publication toolchain provenance
+        if: steps.precheck.outputs.required == 'true'
+        run: |
+          set -euo pipefail
+          echo "toolchain-provenance" > "$RUNNER_TEMP/annex-publication-stage.txt"
+          python3 scripts/toolchain_provenance.py > \
+            "$RUNNER_TEMP/external-annex-v2-toolchain-provenance.json"
+          git --version
+          curl --version
+          python3 --version
+          df -h
+
       - name: Verify the exact source before any Zenodo write
         if: steps.precheck.outputs.required == 'true'
         run: |
@@ -310,6 +322,7 @@ jobs:
         with:
           name: external-binary-annex-v2-publication-evidence
           path: |
+            ${{ runner.temp }}/external-annex-v2-toolchain-provenance.json
             ${{ runner.temp }}/evidence-public-recovery-report.json
             ${{ runner.temp }}/nft-public-recovery-report.json
             ${{ runner.temp }}/trinity-evidence-annex-v2/annex-manifest.json
