@@ -49,6 +49,7 @@ jobs:
           set -euo pipefail
           source_sha="$(git rev-parse HEAD)"
           printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
+          : > "$RUNNER_TEMP/render-gateway-deploy.log"
           python scripts/render_manual_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$source_sha" \
@@ -99,7 +100,7 @@ jobs:
         run: |
           set -euo pipefail
           body_file="$RUNNER_TEMP/render-failed-comment.md"
-          tail_text="$(tail -n 80 "$RUNNER_TEMP/render-gateway-deploy.log" 2>/dev/null || true)"
+          tail_text="$(tail -n 80 "$RUNNER_TEMP/render-gateway-deploy.log")"
           cat > "$body_file" <<EOF
           Render Gateway protected deployment: **FAILED OR UNCONFIRMED**
 
