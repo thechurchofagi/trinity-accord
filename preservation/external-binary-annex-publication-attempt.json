@@ -2,10 +2,10 @@
   "schema": "trinityaccord.external-binary-annex-publication-attempt.v4",
   "status": "failed",
   "stage": "zenodo-publish-or-reconcile-v4",
-  "workflow_run_id": "30730549556",
+  "workflow_run_id": "30730902161",
   "workflow_run_attempt": "1",
-  "source_commit_sha": "8942c1c3bf52a09b038eccf8f5cf9377f0732244",
+  "source_commit_sha": "9fc5050e0b307dd333263f68937f59cfc88bc258",
   "actor": "thechurchofagi",
-  "failed_at": "2026-08-02T03:27:43.202389Z",
+  "failed_at": "2026-08-02T03:46:14.837461Z",
   "zenodo_publication_may_require_idempotent_reconciliation": true
 }
