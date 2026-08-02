@@ -80,10 +80,35 @@ _APPEND_WORKFLOW = os.environ.get("TRINITY_APPEND_WORKFLOW_FILE", "record-chain-
 _DISPATCH_APPEND_WORKFLOW = os.environ.get("TRINITY_DISPATCH_APPEND_WORKFLOW", "1").strip().lower() not in {"0", "false", "no", "off"}
 _GATEWAY_BASE_URL = os.environ.get("TRINITY_GATEWAY_BASE_URL", "")
 
-# In-memory receipt store (ephemeral; resets on restart). Dry-run receipts
-# remain readable only in this process and are explicitly marked non-durable.
+# In-memory receipt store (ephemeral; resets on restart). Durable receipts
+# remain authoritative in Git; this cache is bounded so a long-lived process
+# cannot retain every historical receipt forever. Dry-run receipts remain
+# explicitly non-durable and may be evicted at the same bounded capacity.
+_MAX_RECEIPT_CACHE_ENTRIES = max(
+    1, int(os.environ.get("TRINITY_RECEIPT_CACHE_MAX_ENTRIES", "512"))
+)
 _receipt_store: dict[str, dict[str, Any]] = {}
 _ephemeral_receipt_ids: set[str] = set()
+
+
+def _cache_receipt(
+    receipt_id: str,
+    receipt: dict[str, Any],
+    *,
+    ephemeral: bool,
+) -> None:
+    """Insert or refresh one receipt and evict the oldest cache entries."""
+    _receipt_store.pop(receipt_id, None)
+    _receipt_store[receipt_id] = receipt
+    if ephemeral:
+        _ephemeral_receipt_ids.add(receipt_id)
+    else:
+        _ephemeral_receipt_ids.discard(receipt_id)
+
+    while len(_receipt_store) > _MAX_RECEIPT_CACHE_ENTRIES:
+        oldest_receipt_id = next(iter(_receipt_store))
+        _receipt_store.pop(oldest_receipt_id, None)
+        _ephemeral_receipt_ids.discard(oldest_receipt_id)
 
 # Gateway schema info — must reflect actual validation rules.
 # authorship_proof is REQUIRED for all formal record types (not optional).
@@ -134,7 +159,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Record-Chain Intake Gateway",
-    version="1.0.0",
+    version="1.1.0",
     lifespan=lifespan,
 )
 
@@ -205,8 +230,61 @@ async def _read_limited_body(request: Request) -> bytes:
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _protection_layer_required() -> bool:
+    """Return whether this runtime must reject an unwrapped core application."""
+    return os.environ.get("TRINITY_ENFORCE_PROTECTION_LAYER", "").strip().lower() in {
+        "1", "true", "yes", "on"
+    }
+
+
+def _protection_layer_ready() -> bool:
+    info = get_runtime_info()
+    return bool(not _protection_layer_required() or info["protection_layer_active"])
+
+
+def _protection_unavailable_payload(*, preflight: bool) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "accepted": False,
+        "submitted": False,
+        "preflight": preflight,
+        "diagnostic_code": "PROTECTION_LAYER_INACTIVE",
+        "diagnostics": [{
+            "code": "PROTECTION_LAYER_INACTIVE",
+            "severity": "error",
+            "field": None,
+            "message": "The production protection layer is required but is not active.",
+            "meaning": (
+                "The core Gateway refuses public validation and persistence when the "
+                "secure ASGI wrapper has not been loaded."
+            ),
+            "suggested_fix": "Retry later after the protected production entrypoint is restored.",
+            "retry_allowed": True,
+        }],
+        "boundary": {
+            "not_authority": True,
+            "not_attestation": True,
+            "not_amendment": True,
+        },
+        "gateway_runtime": _build_gateway_runtime(),
+        "gateway_schema": _GATEWAY_SCHEMA,
+    }
+    return payload
+
+
 def _check_config() -> None:
-    """Ensure required env vars are set."""
+    """Ensure required env vars and the production wrapper are active."""
+    if not _protection_layer_ready():
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "PROTECTION_LAYER_INACTIVE",
+                "message": (
+                    "The production protection layer is required but is not active; "
+                    "refusing a public write."
+                ),
+            },
+        )
+
     missing = []
     required = ["TRINITY_REPO_FULL_NAME", "TRINITY_TARGET_BRANCH"]
     if _WRITE_MODE == "github_contents_pending":
@@ -234,7 +312,9 @@ def _build_gateway_runtime() -> dict[str, Any]:
         "max_submission_bytes": info["max_submission_bytes"],
         "record_draft_max_bytes": info["record_draft_max_bytes"],
         "max_text_field_chars": info["max_text_field_chars"],
+        "receipt_cache_max_entries": _MAX_RECEIPT_CACHE_ENTRIES,
         "protection_layer_active": info["protection_layer_active"],
+        "protection_required": _protection_layer_required(),
         "protection_entrypoint": info["protection_entrypoint"],
         "global_acceptance_cooldown_seconds": info["global_acceptance_cooldown_seconds"],
         "base_url": _GATEWAY_BASE_URL,
@@ -1171,13 +1251,24 @@ def _request_body_too_large_payload(size: int, *, preflight: bool) -> dict[str, 
 # ---------------------------------------------------------------------------
 
 @app.get("/healthz")
-async def healthz() -> dict[str, Any]:
-    return {"ok": True, "service": "record-chain-intake-gateway"}
+async def healthz(response: Response) -> dict[str, Any]:
+    info = get_runtime_info()
+    ready = _protection_layer_ready()
+    if not ready:
+        response.status_code = 503
+    return {
+        "ok": ready,
+        "service": info["service"],
+        "version": info["version"],
+        "protection_required": _protection_layer_required(),
+        "protection_layer_active": info["protection_layer_active"],
+        "protection_entrypoint": info["protection_entrypoint"],
+    }
 
 
 @app.head("/healthz")
 async def healthz_head() -> Response:
-    return Response(status_code=200)
+    return Response(status_code=200 if _protection_layer_ready() else 503)
 
 
 @app.get("/record-chain/readiness", response_model=ReadinessResponse)
@@ -1187,12 +1278,20 @@ async def readiness(response: Response) -> ReadinessResponse:
     repo_configured = bool(os.environ.get("TRINITY_REPO_FULL_NAME"))
     branch_configured = bool(os.environ.get("TRINITY_TARGET_BRANCH"))
     token_configured = bool(os.environ.get("TRINITY_GITHUB_TOKEN"))
+    cooldown_secret_configured = bool(
+        os.environ.get("TRINITY_COOLDOWN_SECRET", "").strip()
+        or os.environ.get("TRINITY_GITHUB_TOKEN", "").strip()
+    )
+    protection_required = _protection_layer_required()
+    protection_ready = _protection_layer_ready()
 
     write_requires_github = info["write_mode"] == "github_contents_pending"
-    submit_ready = (
-        repo_configured
+    submit_ready = bool(
+        protection_ready
+        and repo_configured
         and branch_configured
         and (token_configured if write_requires_github else True)
+        and (cooldown_secret_configured if protection_required else True)
     )
 
     if not submit_ready:
@@ -1200,17 +1299,19 @@ async def readiness(response: Response) -> ReadinessResponse:
 
     return ReadinessResponse(
         ok=submit_ready,
-        preflight_ready=True,
+        preflight_ready=protection_ready,
         submit_ready=submit_ready,
         service=info["service"],
         version=info["version"],
         repo_configured=repo_configured,
         branch_configured=branch_configured,
         token_configured=token_configured,
+        cooldown_secret_configured=cooldown_secret_configured,
         write_mode=info["write_mode"],
         max_submission_bytes=info["max_submission_bytes"],
         record_draft_max_bytes=info["record_draft_max_bytes"],
         max_text_field_chars=info["max_text_field_chars"],
+        protection_required=protection_required,
         protection_layer_active=info["protection_layer_active"],
         protection_entrypoint=info["protection_entrypoint"],
         global_acceptance_cooldown_seconds=info["global_acceptance_cooldown_seconds"],
@@ -1224,6 +1325,12 @@ async def readiness(response: Response) -> ReadinessResponse:
 
 @app.post("/record-chain/preflight", response_model=PreflightResponse)
 async def preflight(request: Request) -> PreflightResponse | JSONResponse:
+    if not _protection_layer_ready():
+        return JSONResponse(
+            status_code=503,
+            content=_protection_unavailable_payload(preflight=True),
+        )
+
     client_key = request.client.host if request.client else "unknown"
     preflight_limit = check_preflight_rate_limit(client_key)
     if preflight_limit is not None:
@@ -1332,6 +1439,12 @@ async def preflight(request: Request) -> PreflightResponse | JSONResponse:
 
 @app.post("/record-chain/submit", response_model=SubmitResponse)
 async def submit(request: Request) -> SubmitResponse | JSONResponse:
+    if not _protection_layer_ready():
+        return JSONResponse(
+            status_code=503,
+            content=_protection_unavailable_payload(preflight=False),
+        )
+
     # Part G: streaming body-size limit
     try:
         raw_body = await _read_limited_body(request)
@@ -1892,11 +2005,11 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
     # Cache durable receipts and preserve immediate dry-run readback without
     # presenting the latter as durable repository intake.
-    _receipt_store[receipt_id] = receipt_data
-    if _WRITE_MODE == "github_contents_pending":
-        _ephemeral_receipt_ids.discard(receipt_id)
-    else:
-        _ephemeral_receipt_ids.add(receipt_id)
+    _cache_receipt(
+        receipt_id,
+        receipt_data,
+        ephemeral=_WRITE_MODE != "github_contents_pending",
+    )
 
     return SubmitResponse(
         accepted=True,
@@ -2143,8 +2256,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                         "receipt_path": receipt_path,
                     },
                 )
-            _receipt_store[receipt_id] = receipt  # update cache
-            _ephemeral_receipt_ids.discard(receipt_id)
+            _cache_receipt(receipt_id, receipt, ephemeral=False)
             return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
     except HTTPException:
         # Re-raise HTTPExceptions (integrity errors) — do not swallow

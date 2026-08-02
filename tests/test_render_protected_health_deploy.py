@@ -120,6 +120,7 @@ def test_live_attestation_checks_healthz_readyz_readiness_and_oversize(monkeypat
             return 200, {
                 "ok": True,
                 "version": "1.2.1-protected",
+                "protection_required": True,
                 "protection_layer_active": True,
                 "protection_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
             }
@@ -164,6 +165,9 @@ def test_all_permanent_deployment_paths_use_protected_gateway_wrapper() -> None:
 
     assert '_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})' in secure
     assert "healthCheckPath: /healthz" in render
+    assert "TRINITY_ENFORCE_PROTECTION_LAYER" in render
+    base_helper = (ROOT / "scripts/render_manual_deploy.py").read_text(encoding="utf-8")
+    assert 'EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/healthz"' in base_helper
     assert "workflow_dispatch:" in manual
     assert "python scripts/render_protected_deploy.py" in manual
     assert "python3 scripts/render_protected_deploy.py" in pages

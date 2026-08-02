@@ -11,7 +11,7 @@
   },
   "endpoints": {
     "health": {
-      "description": "Liveness probe. Returns 200 when the gateway process is running.",
+      "description": "Protected production health/readiness probe. Returns 200 only when the secure protection entrypoint is active and required repository, credential, and cooldown configuration is present; otherwise returns 503.",
       "method": "GET",
       "path": "/healthz",
       "response_content_type": "application/json"
@@ -26,7 +26,7 @@
       "response_schema": "/api/record-chain-preflight-response.v1.json"
     },
     "readiness": {
-      "description": "Readiness probe. Returns 200 when the gateway can accept submissions, 503 otherwise.",
+      "description": "Detailed readiness probe. Returns 200 only when the protection layer is active and the gateway can accept submissions, 503 otherwise.",
       "method": "GET",
       "path": "/record-chain/readiness",
       "response_content_type": "application/json"
@@ -57,6 +57,12 @@
       "request_schema": "/api/record-chain-submission-schema.v1.json",
       "response_content_type": "application/json",
       "response_schema": "/api/record-chain-submit-response.v1.json"
+    },
+    "protected_readiness": {
+      "description": "Auxiliary protected readiness probe using the same fail-closed checks as /healthz.",
+      "method": "GET",
+      "path": "/readyz",
+      "response_content_type": "application/json"
     }
   },
   "public_phase": {
@@ -121,7 +127,7 @@
     "generated_hash_source_rule": "Builder generates client authorship and oath-derived hashes; Gateway generates receipt hashes; final-chain tooling assigns final record, content, and chain hashes."
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-07-31T00:00:00Z",
+  "updated_at": "2026-08-02T14:22:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -187,6 +193,10 @@
     "submit_intake_files_materialized_in_one_git_commit": true,
     "guardian_semantic_uniqueness_claims_share_intake_atomic_commit": true,
     "receipt_and_terminal_status_hashes_verified_on_read": true,
-    "live_readiness_endpoint": "/record-chain/readiness"
+    "live_readiness_endpoint": "/record-chain/readiness",
+    "production_enforcement_env": "TRINITY_ENFORCE_PROTECTION_LAYER=1",
+    "core_app_fails_closed_when_protection_required": true,
+    "healthz_and_readyz_require_active_protection": true,
+    "preflight_and_submit_fail_closed_without_required_protection": true
   }
 }

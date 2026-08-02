@@ -26,9 +26,11 @@ EXPECTED_GATEWAY_START_COMMAND = (
     "uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app "
     "--host 0.0.0.0 --port $PORT"
 )
-EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/readyz"
+EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/healthz"
 EXPECTED_GATEWAY_ENV = {
     "TRINITY_GATEWAY_RUNTIME_VERSION": "1.2.1-protected",
+    "TRINITY_ENFORCE_PROTECTION_LAYER": "1",
+    "TRINITY_RECEIPT_CACHE_MAX_ENTRIES": "512",
     "TRINITY_MAX_SUBMISSION_BYTES": "98304",
     "TRINITY_RECORD_DRAFT_MAX_BYTES": "49152",
     "TRINITY_MAX_TEXT_FIELD_CHARS": "4000",
@@ -41,6 +43,7 @@ EXPECTED_GATEWAY_READINESS = {
     "max_submission_bytes": 98304,
     "record_draft_max_bytes": 49152,
     "max_text_field_chars": 4000,
+    "protection_required": True,
     "protection_layer_active": True,
     "protection_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
 }
@@ -196,15 +199,12 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
         )
         print("RENDER_CONFIG_UPDATED field=startCommand")
 
-    if service_health_check_path(service) != EXPECTED_GATEWAY_HEALTH_CHECK_PATH:
-        # healthCheckPath is a web-service field in Render's Update Service API.
-        request(
-            f"/services/{service_id}",
-            token,
-            method="PATCH",
-            body={"healthCheckPath": EXPECTED_GATEWAY_HEALTH_CHECK_PATH},
+    observed_health_path = service_health_check_path(service)
+    if observed_health_path != EXPECTED_GATEWAY_HEALTH_CHECK_PATH:
+        fail(
+            "Render healthCheckPath must remain the protected /healthz route; "
+            f"observed {observed_health_path or 'missing'}"
         )
-        print("RENDER_CONFIG_UPDATED field=healthCheckPath")
 
     for key, expected in EXPECTED_GATEWAY_ENV.items():
         path = _env_var_path(service_id, key)
@@ -226,7 +226,8 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
             fail(f"Render environment readback mismatch for {key}")
 
     print(
-        "RENDER_CONFIG_ATTESTED secure_entrypoint=true health_check_path=/readyz "
+        "RENDER_CONFIG_ATTESTED secure_entrypoint=true health_check_path=/healthz "
+        "auxiliary_ready_path=/readyz "
         "runtime_version=1.2.1-protected request_max_bytes=98304 "
         "record_draft_max_bytes=49152 text_field_max_chars=4000"
     )
@@ -267,17 +268,20 @@ def _public_json(
 def _verify_public_gateway_protection_once(base_url: str) -> None:
     nonce = str(time.time_ns())
 
-    protected_status, protected = _public_json(
-        f"{base_url.rstrip('/')}/readyz?protection_attestation={nonce}"
-    )
-    if protected_status != 200 or protected.get("ok") is not True:
-        raise RuntimeError(f"protected readiness returned HTTP {protected_status}")
-    if protected.get("version") != EXPECTED_GATEWAY_ENV["TRINITY_GATEWAY_RUNTIME_VERSION"]:
-        raise RuntimeError("protected readiness runtime version does not match deployed config")
-    if protected.get("protection_layer_active") is not True:
-        raise RuntimeError("protected readiness does not attest the protection layer")
-    if protected.get("protection_entrypoint") != "apps.record_chain_intake_gateway.secure_entrypoint:app":
-        raise RuntimeError("protected readiness does not attest the secure entrypoint")
+    for route in ("/healthz", "/readyz"):
+        protected_status, protected = _public_json(
+            f"{base_url.rstrip('/')}{route}?protection_attestation={nonce}"
+        )
+        if protected_status != 200 or protected.get("ok") is not True:
+            raise RuntimeError(f"protected {route} returned HTTP {protected_status}")
+        if protected.get("version") != EXPECTED_GATEWAY_ENV["TRINITY_GATEWAY_RUNTIME_VERSION"]:
+            raise RuntimeError(f"protected {route} runtime version does not match deployed config")
+        if protected.get("protection_required") is not True:
+            raise RuntimeError(f"protected {route} does not attest required protection")
+        if protected.get("protection_layer_active") is not True:
+            raise RuntimeError(f"protected {route} does not attest the protection layer")
+        if protected.get("protection_entrypoint") != "apps.record_chain_intake_gateway.secure_entrypoint:app":
+            raise RuntimeError(f"protected {route} does not attest the secure entrypoint")
 
     status, readiness = _public_json(
         f"{base_url.rstrip('/')}/record-chain/readiness?protection_attestation={nonce}"

@@ -116,6 +116,8 @@ def _validate_protected_route(
     expected_version = base.EXPECTED_GATEWAY_ENV["TRINITY_GATEWAY_RUNTIME_VERSION"]
     if payload.get("version") != expected_version:
         raise RuntimeError(f"protected {route} runtime version does not match deployed config")
+    if payload.get("protection_required") is not True:
+        raise RuntimeError(f"protected {route} does not attest required protection")
     if payload.get("protection_layer_active") is not True:
         raise RuntimeError(f"protected {route} does not attest the protection layer")
     if (
