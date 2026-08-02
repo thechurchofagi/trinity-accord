@@ -3,10 +3,13 @@
   "anchored_file_semantics": "stable native record-chain head commitment; generated_at excluded",
   "anchored_file_sha256": "5bd2a3f62fddbf8c6f61c044e50265bb0f101641ed2648b1c53a8b863b5246fe",
   "bitcoin_attestation": null,
+  "bitcoin_attestation_embedded": false,
   "bitcoin_pending": true,
   "bitcoin_verified": false,
+  "calendar_attested": true,
   "chain_id": "trinity-accord-public-reception-ledger",
   "chain_version": 1,
+  "checked_at": "2026-08-02T08:58:29Z",
   "created_at": "2026-08-02T08:43:53Z",
   "latest_batch_id": "batch-000004",
   "latest_batch_manifest_sha256": "b570d5062840eaf0375bcd852f6139c2389e4f97ef4bd6d16c86b1a497dcd69c",
@@ -24,9 +27,29 @@
   "ots_file": "record-chain/ots/native-anchors/native-record-109-R-000000109-9a66d5bac30bc7de-5bd2a3f62fddbf8c.native-record-chain-head-commitment.json.ots",
   "ots_file_exists": true,
   "ots_file_sha256": "56e72445613240fd8f027a31fcf65ed8dfd49ba1b9e1f83dc30aa59a1fdb80ef",
+  "ots_info_command": [
+    "ots",
+    "info",
+    "record-chain/ots/native-anchors/native-record-109-R-000000109-9a66d5bac30bc7de-5bd2a3f62fddbf8c.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_info_exit_code": 0,
+  "ots_info_stderr": "",
+  "ots_info_stdout": "File sha256 hash: 5bd2a3f62fddbf8c6f61c044e50265bb0f101641ed2648b1c53a8b863b5246fe\nTimestamp:\nappend 396d49f1cbb05da08ab55d984139a412\nsha256\n -> append 1ad14eb9e9e6be6c61624a0e4239789e\n    sha256\n    prepend 374dc7a957f63f11a89b5e3d973293b3954bc3b01c42cadc3484963eb631bd4a\n    sha256\n    prepend 6a6f0349\n    append 524b587b6c8a531a\n    verify PendingAttestation('https://finney.calendar.eternitywall.com')\n -> append 2b9fc3a353dc4f91b2a9a92959f9725b\n    sha256\n    prepend 62170ef5e111a7965551ba994f4e2ab047406a23723b226b84842c9ea0cf75f6\n    sha256\n    append a51283f5900da43ee804b366ff080e460fb228214f9a1fd8d30047f72202b005\n    sha256\n    prepend 6a6f0349\n    append b9ee96eee18cf3c3\n    verify PendingAttestation('https://btc.calendar.catallaxy.com')\n -> append b509021a68546628\n    sha256\n    append 64efeb20552545dbe0f71d7ff353ddce\n    sha256\n    append cdf687d551bc18989f709ce2f10353e8112a4f288c5de34337a4df95f86b2cb2\n    sha256\n    append 7e58be56cfd8e2fa8b8fa3a9bb538f83e66b9926addbf09dcf189cb5288dc5b2\n    sha256\n    prepend 6a6f0349\n    append 93966d3aa4bb74b4\n    verify PendingAttestation('https://alice.btc.calendar.opentimestamps.org')\n -> append b55aed460cb8cb25\n    sha256\n    append 195adc8576d5f1b23fa50ef8c12c1967\n    sha256\n    append 0bd18b6563a363770c32f1ec95772fae1bdf617d704df85d4fd4bf8817028278\n    sha256\n    prepend 6a6f0349\n    append 13baa60d4c5c7570\n    verify PendingAttestation('https://bob.btc.calendar.opentimestamps.org')\n\n",
   "ots_status": "pending",
   "ots_stderr": "Submitting to remote calendar https://a.pool.opentimestamps.org\nSubmitting to remote calendar https://b.pool.opentimestamps.org\nSubmitting to remote calendar https://a.pool.eternitywall.com\nSubmitting to remote calendar https://ots.btc.catallaxy.com\n",
   "ots_stdout": "",
+  "ots_upgrade_command": [
+    "ots",
+    "upgrade",
+    "record-chain/ots/native-anchors/native-record-109-R-000000109-9a66d5bac30bc7de-5bd2a3f62fddbf8c.native-record-chain-head-commitment.json.ots"
+  ],
+  "ots_upgrade_exit_code": 1,
+  "ots_upgrade_stderr": "Calendar https://finney.calendar.eternitywall.com: Pending confirmation in Bitcoin blockchain\nCalendar https://btc.calendar.catallaxy.com: Pending confirmation in Bitcoin blockchain\nCalendar https://alice.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nCalendar https://bob.btc.calendar.opentimestamps.org: Pending confirmation in Bitcoin blockchain\nFailed! Timestamp not complete\n",
+  "ots_upgrade_stdout": "",
+  "ots_verify_command": null,
+  "ots_verify_exit_code": null,
+  "ots_verify_stderr": null,
+  "ots_verify_stdout": null,
   "record_coverage": {
     "first_record_id": "R-000000001",
     "last_record_id": "R-000000109",
@@ -70,5 +93,7 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "no_bitcoin_node",
   "verified_at": null
 }
