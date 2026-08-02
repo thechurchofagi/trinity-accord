@@ -3,7 +3,8 @@
 
 This repair is idempotent. It patches the refresh implementation once, removes the
 legacy moving-main wording, deduplicates the exact publication-baseline limitation,
-and recomputes the recovery-index canonical digest.
+updates tests that still pin sequence-2 wording, and recomputes the recovery-index
+canonical digest.
 """
 from __future__ import annotations
 
@@ -16,6 +17,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 REFRESH = ROOT / "scripts/repository_preservation_refresh.py"
 INDEX = ROOT / "api/recovery-index.json"
+FINAL_STATE_TEST = ROOT / "tests/test_external_binary_annex_final_state.py"
+ANNEX_V2_TEST = ROOT / "tests/test_external_binary_annex_v2.py"
+CAPSULE_TEST = ROOT / "tests/test_preservation_capsule.py"
+SEMANTICS_TEST = ROOT / "tests/test_repository_preservation_semantics_v3.py"
+SEMANTICS_EXEC_TEST = (
+    ROOT / "tests/test_repository_preservation_semantics_v3_execution.py"
+)
 
 LEGACY_TREE_LIMITATION = (
     "The core repository capsule embeds every current Git-tracked byte but "
@@ -117,6 +125,67 @@ NEW_VALIDATION = '''        if index.get("source_digest") != canonical_index_dig
             raise SystemExit("recovery index limitations are stale or duplicated")
 '''
 
+OLD_FINAL_STATE_ASSERTION = '''    assert any(
+        "together preserve the current Git-tracked repository and every custom asset"
+        in item
+        for item in limitations
+    )
+'''
+NEW_FINAL_STATE_ASSERTION = '''    assert len(limitations) == len(set(limitations))
+    assert not any("every current Git-tracked byte" in item for item in limitations)
+    assert sum(
+        "preserve the exact Git-tracked publication baseline named by the core manifest"
+        in item
+        for item in limitations
+    ) == 1
+'''
+
+OLD_CURRENT_DOI_ASSERTION = (
+    '    assert current["latest_doi"] == "10.5281/zenodo.21755655"\n'
+)
+NEW_CURRENT_DOI_ASSERTION = (
+    '    assert current["latest_doi"] == "10.5281/zenodo.21755827"\n'
+)
+
+OLD_RECOVERY_STATUS_ASSERTION = (
+    '    assert report["repository_recovery_status"] == '
+    '"full_current_git_tracked_tree"\n'
+)
+NEW_RECOVERY_STATUS_ASSERTION = (
+    '    assert report["repository_recovery_status"] == '
+    '"full_exact_publication_baseline"\n'
+)
+
+OLD_HISTORICAL_ASSERTION = '    assert "historical v1 compatibility" in recovery\n'
+NEW_HISTORICAL_ASSERTION = (
+    '    assert "historical v1" in recovery\n'
+    '    assert "compatibility" in recovery\n'
+)
+
+OLD_EXECUTION_SETUP = '''    module = load_module()
+    module.ROOT = tmp_path
+    for name, relative in PATHS.items():
+        setattr(module, name, tmp_path / relative)
+
+    assert module.main() == 0
+'''
+NEW_EXECUTION_SETUP = '''    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\\n",
+        encoding="utf-8",
+    )
+
+    module = load_module()
+    module.ROOT = tmp_path
+    for name, relative in PATHS.items():
+        setattr(module, name, tmp_path / relative)
+
+    assert module.main() == 0
+'''
+
 
 def read_json(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -156,6 +225,12 @@ def replace_required(text: str, old: str, new: str, *, expected_count: int) -> s
     return text.replace(old, new)
 
 
+def patch_file(path: Path, old: str, new: str, *, expected_count: int = 1) -> None:
+    text = path.read_text(encoding="utf-8")
+    updated = replace_required(text, old, new, expected_count=expected_count)
+    path.write_text(updated, encoding="utf-8")
+
+
 def normalize_values(value: object) -> list[str]:
     if not isinstance(value, list):
         raise SystemExit("recovery index limitations are invalid")
@@ -185,6 +260,16 @@ def main() -> int:
     source = replace_required(source, OLD_VALIDATION, NEW_VALIDATION, expected_count=1)
     compile(source, str(REFRESH), "exec")
     REFRESH.write_text(source, encoding="utf-8")
+
+    patch_file(FINAL_STATE_TEST, OLD_FINAL_STATE_ASSERTION, NEW_FINAL_STATE_ASSERTION)
+    patch_file(ANNEX_V2_TEST, OLD_CURRENT_DOI_ASSERTION, NEW_CURRENT_DOI_ASSERTION)
+    patch_file(
+        CAPSULE_TEST,
+        OLD_RECOVERY_STATUS_ASSERTION,
+        NEW_RECOVERY_STATUS_ASSERTION,
+    )
+    patch_file(SEMANTICS_TEST, OLD_HISTORICAL_ASSERTION, NEW_HISTORICAL_ASSERTION)
+    patch_file(SEMANTICS_EXEC_TEST, OLD_EXECUTION_SETUP, NEW_EXECUTION_SETUP)
 
     index = read_json(INDEX)
     index["limitations"] = normalize_values(index.get("limitations"))
