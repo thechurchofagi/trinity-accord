@@ -2,7 +2,11 @@
 """Publish final immutable V4 annexes with normalized Zenodo metadata views."""
 from __future__ import annotations
 
+import argparse
 import copy
+import json
+import os
+from pathlib import Path
 from typing import Any
 
 import external_binary_annex_v2 as builder_implementation
@@ -16,12 +20,7 @@ _original_validate_public_metadata = publisher.validate_public_metadata
 
 
 def _canonical_related_identifier(identifier: Any, scheme: Any = "") -> str:
-    """Normalize only representation-equivalent DOI identifiers.
-
-    Zenodo stores a depositor DOI URL as a bare DOI plus ``scheme=doi`` in its
-    public record. Non-DOI URLs remain exact strings so unrelated identifiers
-    cannot become equivalent accidentally.
-    """
+    """Normalize only representation-equivalent DOI identifiers."""
     value = str(identifier or "").strip()
     lowered = value.lower()
     for prefix in (
@@ -64,14 +63,10 @@ def _related_pairs_v4(value: Any) -> set[tuple[str, str, str]]:
     return result
 
 
-# Public validation and duplicate-field conflict checks must use the same exact
-# canonicalization rules. This changes representation handling only; it does not
-# weaken relation or resource-type validation.
 publisher._related_pairs = _related_pairs_v4
 
 
 def _canonical_duplicate_value(key: str, value: Any) -> Any:
-    """Canonicalize equivalent legacy/current Zenodo field representations."""
     if key == "license":
         return publisher._license_ids({"license": value})
     if key == "rights":
@@ -90,21 +85,12 @@ def _canonical_duplicate_value(key: str, value: Any) -> Any:
 def _reject_conflicting_duplicate_fields(
     record: dict[str, Any], metadata: dict[str, Any]
 ) -> None:
-    """Reject contradictory top-level and nested public metadata representations."""
     top_license_ids = publisher._license_ids(
-        {
-            "license": record.get("license"),
-            "rights": record.get("rights"),
-        }
+        {"license": record.get("license"), "rights": record.get("rights")}
     )
     metadata_license_ids = publisher._license_ids(metadata)
-    if (
-        top_license_ids
-        and metadata_license_ids
-        and top_license_ids != metadata_license_ids
-    ):
+    if top_license_ids and metadata_license_ids and top_license_ids != metadata_license_ids:
         raise SystemExit("Zenodo public metadata conflict: license/rights")
-
     for key in (
         "creators",
         "related_identifiers",
@@ -125,15 +111,7 @@ def _reject_conflicting_duplicate_fields(
 
 
 def normalized_public_record(record: dict[str, Any]) -> dict[str, Any]:
-    """Merge non-conflicting direct-record fields into the metadata validation view.
-
-    Zenodo's direct ``/api/records/{id}`` response can expose fields such as the
-    custom license at top level while search/deposition responses and the
-    uploaded metadata file expose them below ``metadata``. Equivalent legacy and
-    current representations are accepted. Contradictory duplicate values are
-    rejected before any missing value is copied, so a top-level public value can
-    never be hidden by a matching nested value.
-    """
+    """Merge only non-conflicting direct-record fields into metadata."""
     normalized = copy.deepcopy(record)
     metadata_value = normalized.get("metadata")
     metadata = dict(metadata_value) if isinstance(metadata_value, dict) else {}
@@ -167,8 +145,88 @@ publisher.validate_public_metadata = validate_public_metadata_v4
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--evidence-package-dir", required=True)
+    parser.add_argument("--nft-package-dir", required=True)
+    parser.add_argument(
+        "--state", default="preservation/external-binary-annex-state.json"
+    )
+    parser.add_argument(
+        "--api-base",
+        default=os.environ.get("ZENODO_API_BASE", publisher.DEFAULT_API),
+    )
+    parser.add_argument(
+        "--rights-boundary-ack",
+        default=os.environ.get("EXTERNAL_BINARY_ANNEX_RIGHTS_ACK", ""),
+    )
+    parser.add_argument(
+        "--source-commit",
+        default=os.environ.get("TRINITY_PUBLICATION_SOURCE_SHA", ""),
+    )
+    parser.add_argument(
+        "--evidence-source-commit",
+        default=os.environ.get("TRINITY_EVIDENCE_V4_SOURCE_SHA", ""),
+    )
+    args = parser.parse_args()
+    if args.rights_boundary_ack != publisher.RIGHTS_ACKNOWLEDGEMENT:
+        raise SystemExit(
+            "external binary annex publication requires the exact rights acknowledgement"
+        )
+
+    workflow_source = builder_implementation._valid_commit_sha(args.source_commit)
+    evidence_source = builder_implementation._valid_commit_sha(
+        args.evidence_source_commit
+    )
     builder_implementation.V2_ANNEX_IDS = dict(FINAL_ANNEX_IDS)
-    return publisher.main()
+    builder_implementation.activate_v2_specs()
+
+    token = os.environ.get("ZENODO_ACCESS_TOKEN", "").strip()
+    client = publisher.ZenodoClient(token, args.api_base)
+    evidence = publisher.publish_one_v2(
+        client,
+        token,
+        Path(args.evidence_package_dir).resolve(),
+        args.api_base,
+    )
+    nft = publisher.publish_one_v2(
+        client,
+        token,
+        Path(args.nft_package_dir).resolve(),
+        args.api_base,
+    )
+    expected_sources = {"evidence": evidence_source, "nft": workflow_source}
+    for annex_type, entry in (("evidence", evidence), ("nft", nft)):
+        if entry["source_commit_sha"] != expected_sources[annex_type]:
+            raise SystemExit(f"annex source commit mismatch: {annex_type}")
+
+    state = {
+        "schema": publisher.package_module.STATE_SCHEMA,
+        "publication_status": "published_pending_public_cold_restore",
+        "source_commit_sha": workflow_source,
+        "publication_workflow_source_commit_sha": workflow_source,
+        "annex_source_commits": expected_sources,
+        "core_repository_preservation_doi": "10.5281/zenodo.21739344",
+        "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
+        "annexes": {"evidence": evidence, "nft": nft},
+        "all_named_release_assets_embedded": True,
+        "release_asset_pagination_complete": True,
+        "public_metadata_verification": "passed",
+        "deprecated_failed_nft_attempts_embedded": False,
+        "external_binary_payload_recovery_requires_github": False,
+    }
+    state_path = (publisher.ROOT / args.state).resolve()
+    if publisher.ROOT not in state_path.parents:
+        raise SystemExit("annex state path must remain inside the repository")
+    publisher.package_module.write_json(state_path, state)
+    output = os.environ.get("GITHUB_OUTPUT")
+    if output:
+        with open(output, "a", encoding="utf-8") as handle:
+            handle.write(f"evidence_record_id={evidence['record_id']}\n")
+            handle.write(f"evidence_doi={evidence['doi']}\n")
+            handle.write(f"nft_record_id={nft['record_id']}\n")
+            handle.write(f"nft_doi={nft['doi']}\n")
+    print(json.dumps(state, ensure_ascii=False, indent=2))
+    return 0
 
 
 if __name__ == "__main__":
