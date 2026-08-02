@@ -205,6 +205,7 @@ def main() -> int:
             and (
                 "does not embed the separately hosted large binary" in item
                 or "separately published evidence and Chronicle NFT" in item
+                or "remain pending until the V2 annex state" in item
             )
         )
     ]
