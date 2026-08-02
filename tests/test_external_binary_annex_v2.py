@@ -201,9 +201,10 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         assert "TRINITY_PUBLICATION_SOURCE_SHA: ${{ github.sha }}" in workflow
         assert "external_binary_annex_v3.py" in workflow
         assert "publish_external_binary_annexes_to_zenodo_v3.py" in workflow
+        assert "external_annex_publication_precheck.py" in workflow
         assert "refs/remotes/origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
-        assert "required=false" in workflow
+        assert "steps.precheck.outputs.required == 'false'" in workflow
         assert "published_and_publicly_restored" in workflow
         assert "git rm .github/workflows/external-binary-annex-publication.yml" in workflow
     else:
