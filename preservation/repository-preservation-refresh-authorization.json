@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
+  "sequence": 2,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_purpose": "Publish a new self-describing core repository preservation version that closes the GitHub-zero recovery discovery gap.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_core_version_doi": "10.5281/zenodo.21739344",
+  "external_annex_dois": {
+    "evidence": "10.5281/zenodo.21753937",
+    "nft": "10.5281/zenodo.21754229"
+  },
+  "rights_boundary_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "publication_confirmation": "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2",
+  "live_main_equivalence_claimed": false,
+  "non_amending_boundary": true
+}

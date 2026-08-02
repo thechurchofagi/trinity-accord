@@ -1,0 +1,228 @@
+name: Repository Preservation Refresh
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - preservation/repository-preservation-refresh-authorization.json
+  workflow_dispatch:
+
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  publish-and-prove:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: ${{ vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK }}
+    steps:
+      - name: Checkout repository with full source history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Configure authenticated state writer
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Enforce authorization and prepare immutable source baseline
+        id: prepare
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          test "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" = \
+            "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
+          python3 scripts/repository_preservation_refresh.py validate
+          status="$(python3 - <<'PY'
+          import json
+          print(json.load(open('preservation/repository-preservation-refresh-authorization.json'))['status'])
+          PY
+          )"
+          if [ "$status" = "consumed" ]; then
+            echo "already_done=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git fetch origin main --prune
+          git checkout -B main origin/main
+          status="$(python3 - <<'PY'
+          import json
+          print(json.load(open('preservation/repository-preservation-refresh-authorization.json'))['status'])
+          PY
+          )"
+          if [ "$status" = "pending" ]; then
+            base_commit="$(git rev-parse HEAD)"
+            python3 scripts/repository_preservation_refresh.py prepare \
+              --base-commit "$base_commit"
+            git add \
+              RECOVERY.md \
+              api/recovery-index.json \
+              preservation/EXTERNAL-BINARY-ANNEX.md \
+              preservation/repository-preservation-refresh-authorization.json \
+              preservation/repository-preservation-refresh-prepared.json \
+              preservation/repository-preservation-state-v2.json
+            git commit -m "archive: prepare repository preservation refresh v2"
+            git push origin HEAD:main
+            source_sha="$(git rev-parse HEAD)"
+          elif [ "$status" = "prepared" ]; then
+            source_sha="$(git log origin/main --format='%H' --fixed-strings \
+              --grep='archive: prepare repository preservation refresh v2' -1)"
+            test -n "$source_sha"
+          else
+            echo "::error::Unexpected refresh authorization status: $status"
+            exit 1
+          fi
+          git cat-file -e "$source_sha^{commit}"
+          test "$(git show "$source_sha:preservation/repository-preservation-refresh-authorization.json" | \
+            python3 -c 'import json,sys; print(json.load(sys.stdin)["status"])')" = "prepared"
+          echo "already_done=false" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Validate prepared recovery contracts
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/repository_preservation_refresh.py validate
+          python3 scripts/audit_recovery_readiness.py
+
+      - name: Build exact publication-baseline capsule
+        if: steps.prepare.outputs.already_done != 'true'
+        id: build
+        run: |
+          set -euo pipefail
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "${{ steps.prepare.outputs.source_sha }}" \
+            --output-dir "$RUNNER_TEMP/repository-preservation-refresh"
+
+      - name: Prove local GitHub-zero recovery before publication
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          capsule="$RUNNER_TEMP/repository-preservation-refresh"
+          bootstrap="$RUNNER_TEMP/local-bootstrap"
+          mkdir -p "$bootstrap"
+          cp "$capsule/restore-trinity-accord.py" "$bootstrap/restore-trinity-accord.py"
+          cd "$bootstrap"
+          python3 restore-trinity-accord.py \
+            --deposit-dir "$capsule" \
+            --output-dir "$RUNNER_TEMP/local-restored-repository"
+          test "$(python3 - <<'PY'
+          import json
+          print(json.load(open('${{ runner.temp }}/local-restored-repository/recovery-report.json'))['source_git_commit_sha'])
+          PY
+          )" = "${{ steps.prepare.outputs.source_sha }}"
+
+      - name: Publish or reconcile new core Zenodo version
+        if: steps.prepare.outputs.already_done != 'true'
+        id: publish
+        run: |
+          set -euo pipefail
+          python3 scripts/publish_preservation_capsule_to_zenodo.py \
+            --capsule-dir "$RUNNER_TEMP/repository-preservation-refresh" \
+            --state preservation/repository-preservation-state-v2.json \
+            --api-base "$ZENODO_API_BASE" \
+            --rights-boundary-ack "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK"
+
+      - name: Prove public DOI-only recovery from fresh bootstrap
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          capsule="$RUNNER_TEMP/repository-preservation-refresh"
+          bootstrap="$RUNNER_TEMP/public-bootstrap"
+          mkdir -p "$bootstrap"
+          cp "$capsule/restore-trinity-accord.py" "$bootstrap/restore-trinity-accord.py"
+          cd "$bootstrap"
+          python3 restore-trinity-accord.py \
+            --zenodo-record-id "${{ steps.publish.outputs.record_id }}" \
+            --output-dir "$RUNNER_TEMP/public-restored-repository"
+          test "$(python3 - <<'PY'
+          import json
+          print(json.load(open('${{ runner.temp }}/public-restored-repository/recovery-report.json'))['source_git_commit_sha'])
+          PY
+          )" = "${{ steps.prepare.outputs.source_sha }}"
+
+      - name: Verify unauthenticated public metadata and file inventory
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/repository_preservation_refresh.py verify-public \
+            --record-id "${{ steps.publish.outputs.record_id }}" \
+            --capsule-dir "$RUNNER_TEMP/repository-preservation-refresh" \
+            --output "$RUNNER_TEMP/public-metadata-report.json"
+
+      - name: Seal final recovery state
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/repository_preservation_refresh.py seal \
+            --source-commit "${{ steps.prepare.outputs.source_sha }}" \
+            --recovery-report "$RUNNER_TEMP/public-restored-repository/recovery-report.json" \
+            --metadata-report "$RUNNER_TEMP/public-metadata-report.json"
+
+      - name: Commit publicly proven state
+        if: steps.prepare.outputs.already_done != 'true'
+        run: |
+          set -euo pipefail
+          git add \
+            api/recovery-index.json \
+            preservation/repository-preservation-refresh-authorization.json \
+            preservation/repository-preservation-refresh-prepared.json \
+            preservation/repository-preservation-state-v2.json \
+            preservation/repository-preservation-observation.json
+          git commit -m "archive: record refreshed repository preservation DOI"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            git add \
+              api/recovery-index.json \
+              preservation/repository-preservation-refresh-authorization.json \
+              preservation/repository-preservation-refresh-prepared.json \
+              preservation/repository-preservation-state-v2.json \
+              preservation/repository-preservation-observation.json
+            if ! git diff --cached --quiet; then
+              git commit --amend --no-edit
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::Zenodo publication succeeded but final verified state could not be pushed."
+          exit 1
+
+      - name: Upload recovery proof reports
+        if: always() && steps.prepare.outputs.already_done != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: repository-preservation-refresh-proof
+          path: |
+            ${{ runner.temp }}/local-restored-repository/recovery-report.json
+            ${{ runner.temp }}/public-restored-repository/recovery-report.json
+            ${{ runner.temp }}/public-metadata-report.json
+            ${{ runner.temp }}/toolchain-provenance.json
+          retention-days: 365
+          if-no-files-found: error
