@@ -39,10 +39,24 @@ def canonical_digest(value: dict[str, Any]) -> str:
     ).hexdigest()[:16]
 
 
+def valid_commit(value: Any, label: str) -> str:
+    normalized = str(value or "").strip().lower()
+    if len(normalized) != 40 or any(
+        ch not in "0123456789abcdef" for ch in normalized
+    ):
+        raise SystemExit(f"{label} must be an exact 40-character Git SHA-1")
+    return normalized
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--state", default="preservation/external-binary-annex-state.json")
-    parser.add_argument("--observation", default="preservation/external-binary-annex-observation.json")
+    parser.add_argument(
+        "--state", default="preservation/external-binary-annex-state.json"
+    )
+    parser.add_argument(
+        "--observation",
+        default="preservation/external-binary-annex-observation.json",
+    )
     parser.add_argument("--recovery-index", default="api/recovery-index.json")
     parser.add_argument("--repository-state", default="preservation/zenodo-state.json")
     parser.add_argument("--evidence-report", required=True)
@@ -50,10 +64,7 @@ def main() -> int:
     parser.add_argument("--source-commit", required=True)
     args = parser.parse_args()
 
-    source_commit = args.source_commit.strip().lower()
-    if len(source_commit) != 40 or any(ch not in "0123456789abcdef" for ch in source_commit):
-        raise SystemExit("source commit must be an exact 40-character Git SHA-1")
-
+    source_commit = valid_commit(args.source_commit, "source commit")
     state_path = ROOT / args.state
     observation_path = ROOT / args.observation
     index_path = ROOT / args.recovery_index
@@ -71,6 +82,28 @@ def main() -> int:
         raise SystemExit("annex state is not at a sealable publication stage")
     if state.get("source_commit_sha") != source_commit:
         raise SystemExit("annex state source commit mismatch")
+    workflow_source = valid_commit(
+        state.get("publication_workflow_source_commit_sha", state.get("source_commit_sha")),
+        "publication workflow source commit",
+    )
+    if workflow_source != source_commit:
+        raise SystemExit("publication workflow source commit mismatch")
+
+    raw_annex_sources = state.get("annex_source_commits")
+    if not isinstance(raw_annex_sources, dict):
+        raw_annex_sources = {
+            "evidence": source_commit,
+            "nft": source_commit,
+        }
+    annex_sources = {
+        annex_type: valid_commit(
+            raw_annex_sources.get(annex_type),
+            f"{annex_type} annex source commit",
+        )
+        for annex_type in ("evidence", "nft")
+    }
+    state["publication_workflow_source_commit_sha"] = workflow_source
+    state["annex_source_commits"] = annex_sources
 
     reports = {
         "evidence": read_object(Path(args.evidence_report)),
@@ -86,7 +119,7 @@ def main() -> int:
             raise SystemExit(f"public restore asset count mismatch: {annex_type}")
         if int(report.get("payload_bytes") or -1) != int(entry["payload_bytes"]):
             raise SystemExit(f"public restore payload byte mismatch: {annex_type}")
-        if entry.get("source_commit_sha") != source_commit:
+        if entry.get("source_commit_sha") != annex_sources[annex_type]:
             raise SystemExit(f"annex source commit mismatch: {annex_type}")
         if entry.get("public_metadata_verification") != "passed":
             raise SystemExit(f"public metadata verification missing: {annex_type}")
@@ -101,8 +134,10 @@ def main() -> int:
     write_object(state_path, state)
 
     observation = {
-        "schema": "trinityaccord.external-binary-annex-public-observation.v2",
+        "schema": "trinityaccord.external-binary-annex-public-observation.v3",
         "source_commit_sha": source_commit,
+        "publication_workflow_source_commit_sha": workflow_source,
+        "annex_source_commits": annex_sources,
         "observed_without_github_credentials": True,
         "observed_without_zenodo_credentials": True,
         "core_repository_preservation_doi": repository_state["latest_doi"],
@@ -135,7 +170,9 @@ def main() -> int:
             "record_id": repository_state["latest_record_id"],
             "git_commit_sha": repository_state["latest_git_commit_sha"],
             "git_tree_oid": repository_state["latest_git_tree_oid"],
-            "package_identity_sha256": repository_state["latest_package_identity_sha256"],
+            "package_identity_sha256": repository_state[
+                "latest_package_identity_sha256"
+            ],
             "github_required_for_recovery": False,
         },
         "external_binary_annexes": {
@@ -143,10 +180,13 @@ def main() -> int:
                 "doi": entry["doi"],
                 "record_id": entry["record_id"],
                 "annex_id": entry["annex_id"],
+                "source_commit_sha": entry["source_commit_sha"],
                 "asset_count": entry["asset_count"],
                 "payload_bytes": entry["payload_bytes"],
                 "package_identity_sha256": entry["package_identity_sha256"],
-                "public_metadata_verification": entry["public_metadata_verification"],
+                "public_metadata_verification": entry[
+                    "public_metadata_verification"
+                ],
                 "public_cold_restore": entry["public_cold_restore"],
             }
             for annex_type, entry in state["annexes"].items()

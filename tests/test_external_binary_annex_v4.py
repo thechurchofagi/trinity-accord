@@ -141,6 +141,89 @@ def test_other_duplicate_public_metadata_conflicts_fail_closed():
         publisher_v4.validate_public_metadata_v4(record, expected)
 
 
+def test_immutable_evidence_v4_identity_is_exact_and_source_specific(
+    tmp_path, monkeypatch
+):
+    package_dir = tmp_path / "package"
+    package_dir.mkdir()
+    (package_dir / "payload.tar").write_bytes(b"payload")
+    manifest = {
+        "annex_type": "evidence",
+        "annex_id": "external-evidence-annex-v4",
+        "source_commit_sha": "9" * 40,
+        "package_identity_sha256": "old",
+        "asset_count": 28,
+        "payload_bytes": 204595967,
+    }
+    writes: list[dict[str, object]] = []
+
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "strict_json",
+        lambda _path: dict(manifest),
+    )
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "manifest_identity",
+        lambda value: publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
+        if value["source_commit_sha"] == publisher_v4.EVIDENCE_V4_SOURCE_SHA
+        else "wrong",
+    )
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "write_json",
+        lambda _path, value: writes.append(dict(value)),
+    )
+
+    def fake_hash(path):
+        if path.name == "payload.tar":
+            return publisher_v4.EVIDENCE_V4_PAYLOAD_TAR_SHA256
+        if path.name == "annex-manifest.json":
+            return publisher_v4.EVIDENCE_V4_MANIFEST_SHA256
+        return "a" * 64
+
+    monkeypatch.setattr(publisher_v4.publisher.package_module, "hash_file", fake_hash)
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "verify_local_package",
+        lambda _path: {
+            "package_identity_sha256": publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256,
+            "annex_type": "evidence",
+            "annex_id": "external-evidence-annex-v4",
+        },
+    )
+    verified = publisher_v4.reconcile_immutable_evidence_v4(package_dir)
+    assert verified["package_identity_sha256"] == (
+        publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
+    )
+    assert writes[-1]["source_commit_sha"] == publisher_v4.EVIDENCE_V4_SOURCE_SHA
+    assert writes[-1]["package_identity_sha256"] == (
+        publisher_v4.EVIDENCE_V4_PACKAGE_IDENTITY_SHA256
+    )
+
+
+def test_immutable_evidence_v4_rejects_any_payload_difference(tmp_path, monkeypatch):
+    package_dir = tmp_path / "package"
+    package_dir.mkdir()
+    (package_dir / "payload.tar").write_bytes(b"changed")
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "strict_json",
+        lambda _path: {
+            "annex_type": "evidence",
+            "annex_id": "external-evidence-annex-v4",
+            "source_commit_sha": "9" * 40,
+        },
+    )
+    monkeypatch.setattr(
+        publisher_v4.publisher.package_module,
+        "hash_file",
+        lambda _path: "0" * 64,
+    )
+    with pytest.raises(SystemExit, match="payload differs"):
+        publisher_v4.reconcile_immutable_evidence_v4(package_dir)
+
+
 def test_v4_workflow_is_source_bound_serialized_and_self_retiring():
     workflow_path = ROOT / ".github/workflows/external-binary-annex-publication-v4.yml"
     state = json.loads(
@@ -168,3 +251,13 @@ def test_v4_workflow_is_source_bound_serialized_and_self_retiring():
     assert ".github/workflows/external-binary-annex-publication-v4.yml" in text
     assert "preservation/external-binary-annex-publication-trigger.json" in text
     assert 'git rm "$path"' in text
+
+
+def test_sealer_preserves_annex_specific_source_commits():
+    text = (ROOT / "scripts/seal_external_binary_annex_publication.py").read_text(
+        encoding="utf-8"
+    )
+    assert "publication_workflow_source_commit_sha" in text
+    assert "annex_source_commits" in text
+    assert 'annex_sources[annex_type]' in text
+    assert 'entry["source_commit_sha"]' in text
