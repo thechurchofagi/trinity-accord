@@ -32,7 +32,7 @@ jobs:
               "Accept": "application/vnd.github+json",
               "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
               "X-GitHub-Api-Version": "2022-11-28",
-              "User-Agent": "trinity-annex-run-diagnosis/2.0",
+              "User-Agent": "trinity-annex-run-diagnosis/3.0",
           }
 
           def get(url):
@@ -40,65 +40,74 @@ jobs:
               with urllib.request.urlopen(request, timeout=60) as response:
                   return json.loads(response.read().decode("utf-8"))
 
-          runs_value = get(
-              f"https://api.github.com/repos/{repo}/actions/workflows/"
-              "external-binary-annex-publication.yml/runs?branch=main&per_page=20"
-          )
-          runs = runs_value.get("workflow_runs") if isinstance(runs_value, dict) else None
-          if not isinstance(runs, list):
-              raise SystemExit("workflow run response did not contain a list")
           print("ANNEX_RUN_DIAGNOSIS_BEGIN")
-          for run in runs:
-              summary = {
-                  "id": run.get("id"),
-                  "run_number": run.get("run_number"),
-                  "run_attempt": run.get("run_attempt"),
-                  "event": run.get("event"),
-                  "status": run.get("status"),
-                  "conclusion": run.get("conclusion"),
-                  "head_sha": run.get("head_sha"),
-                  "created_at": run.get("created_at"),
-                  "run_started_at": run.get("run_started_at"),
-                  "updated_at": run.get("updated_at"),
-                  "html_url": run.get("html_url"),
-                  "check_suite_id": run.get("check_suite_id"),
-                  "path": run.get("path"),
-                  "display_title": run.get("display_title"),
-              }
-              print(json.dumps(summary, sort_keys=True))
-              suite_id = run.get("check_suite_id")
-              if not suite_id:
-                  continue
+          for workflow_name in (
+              "external-binary-annex-publication-v4.yml",
+              "external-binary-annex-publication.yml",
+          ):
               try:
-                  check_value = get(
-                      f"https://api.github.com/repos/{repo}/check-suites/{suite_id}/check-runs?per_page=100"
+                  runs_value = get(
+                      f"https://api.github.com/repos/{repo}/actions/workflows/"
+                      f"{workflow_name}/runs?branch=main&per_page=20"
                   )
               except urllib.error.HTTPError as exc:
-                  print(json.dumps({"check_suite_error": exc.code, "run_id": run.get("id")}))
+                  print(json.dumps({"workflow": workflow_name, "workflow_error": exc.code}))
                   continue
-              check_runs = check_value.get("check_runs") if isinstance(check_value, dict) else None
-              if not isinstance(check_runs, list):
-                  continue
-              for check in check_runs:
-                  check_summary = {
-                      "run_id": run.get("id"),
-                      "check_run_id": check.get("id"),
-                      "name": check.get("name"),
-                      "status": check.get("status"),
-                      "conclusion": check.get("conclusion"),
-                      "output": check.get("output"),
+              runs = runs_value.get("workflow_runs") if isinstance(runs_value, dict) else None
+              if not isinstance(runs, list):
+                  raise SystemExit("workflow run response did not contain a list")
+              for run in runs:
+                  summary = {
+                      "workflow": workflow_name,
+                      "id": run.get("id"),
+                      "run_number": run.get("run_number"),
+                      "run_attempt": run.get("run_attempt"),
+                      "event": run.get("event"),
+                      "status": run.get("status"),
+                      "conclusion": run.get("conclusion"),
+                      "head_sha": run.get("head_sha"),
+                      "created_at": run.get("created_at"),
+                      "run_started_at": run.get("run_started_at"),
+                      "updated_at": run.get("updated_at"),
+                      "html_url": run.get("html_url"),
+                      "check_suite_id": run.get("check_suite_id"),
+                      "path": run.get("path"),
+                      "display_title": run.get("display_title"),
                   }
-                  print("CHECK_RUN " + json.dumps(check_summary, sort_keys=True))
-                  check_id = check.get("id")
-                  if not check_id:
+                  print(json.dumps(summary, sort_keys=True))
+                  suite_id = run.get("check_suite_id")
+                  if not suite_id:
                       continue
                   try:
-                      annotations = get(
-                          f"https://api.github.com/repos/{repo}/check-runs/{check_id}/annotations?per_page=100"
+                      check_value = get(
+                          f"https://api.github.com/repos/{repo}/check-suites/{suite_id}/check-runs?per_page=100"
                       )
                   except urllib.error.HTTPError as exc:
-                      print(json.dumps({"annotation_error": exc.code, "check_run_id": check_id}))
+                      print(json.dumps({"check_suite_error": exc.code, "run_id": run.get("id")}))
                       continue
-                  print("ANNOTATIONS " + json.dumps(annotations, sort_keys=True))
+                  check_runs = check_value.get("check_runs") if isinstance(check_value, dict) else None
+                  if not isinstance(check_runs, list):
+                      continue
+                  for check in check_runs:
+                      check_summary = {
+                          "run_id": run.get("id"),
+                          "check_run_id": check.get("id"),
+                          "name": check.get("name"),
+                          "status": check.get("status"),
+                          "conclusion": check.get("conclusion"),
+                          "output": check.get("output"),
+                      }
+                      print("CHECK_RUN " + json.dumps(check_summary, sort_keys=True))
+                      check_id = check.get("id")
+                      if not check_id:
+                          continue
+                      try:
+                          annotations = get(
+                              f"https://api.github.com/repos/{repo}/check-runs/{check_id}/annotations?per_page=100"
+                          )
+                      except urllib.error.HTTPError as exc:
+                          print(json.dumps({"annotation_error": exc.code, "check_run_id": check_id}))
+                          continue
+                      print("ANNOTATIONS " + json.dumps(annotations, sort_keys=True))
           print("ANNEX_RUN_DIAGNOSIS_END")
           PY
