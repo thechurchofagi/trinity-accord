@@ -102,7 +102,7 @@ def test_capsule_build_and_github_zero_restore(tmp_path, monkeypatch):
     bootstrap.mkdir()
     monkeypatch.chdir(bootstrap)
     report = recovery.restore(capsule, output, "test:capsule")
-    assert report["repository_recovery_status"] == "full_current_git_tracked_tree"
+    assert report["repository_recovery_status"] == "full_exact_publication_baseline"
     assert report["source_git_commit_sha"] == commit
     assert report["recovery_git_commit_sha"] != commit
     assert report["github_required"] is False

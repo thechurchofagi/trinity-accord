@@ -77,11 +77,13 @@ def test_recovery_index_has_no_stale_pending_claim_and_valid_digest():
     limitations = index["limitations"]
     assert not any("remain pending" in item.lower() for item in limitations)
     assert not any("V2 annex state" in item for item in limitations)
-    assert any(
-        "together preserve the current Git-tracked repository and every custom asset"
+    assert len(limitations) == len(set(limitations))
+    assert not any("every current Git-tracked byte" in item for item in limitations)
+    assert sum(
+        "preserve the exact Git-tracked publication baseline named by the core manifest"
         in item
         for item in limitations
-    )
+    ) == 1
     assert index["source_digest"] == canonical_digest(index)
 
 

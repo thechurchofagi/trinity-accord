@@ -217,6 +217,24 @@ def patch_annex_guide() -> None:
     ANNEX_GUIDE.write_text(text, encoding="utf-8")
 
 
+def baseline_tree_limitation() -> str:
+    return (
+        "The core repository capsule embeds every Git-tracked byte in the exact "
+        "publication baseline named by its manifest, while deliberately excluding "
+        "production parent-history and tag objects so historical credentials are not "
+        "republished; source commit/tag identities remain manifest metadata."
+    )
+
+
+def baseline_tree_limitation() -> str:
+    return (
+        "The core repository capsule embeds every Git-tracked byte in the exact "
+        "publication baseline named by its manifest, while deliberately excluding "
+        "production parent-history and tag objects so historical credentials are not "
+        "republished; source commit/tag identities remain manifest metadata."
+    )
+
+
 def qualified_limitation() -> str:
     return (
         "The core repository capsule and the separately published evidence and Chronicle "
@@ -224,6 +242,62 @@ def qualified_limitation() -> str:
         "baseline named by the core manifest and every custom asset; this does not "
         "assert byte equality with a later moving GitHub main."
     )
+
+
+def normalize_limitations(value: object) -> list[str]:
+    if not isinstance(value, list):
+        raise SystemExit("recovery index limitations are invalid")
+    normalized: list[str] = []
+    for item in value:
+        if not isinstance(item, str):
+            raise SystemExit("recovery index limitation is not a string")
+        if item == (
+            "The core repository capsule embeds every current Git-tracked byte but "
+            "deliberately excludes production parent-history and tag objects so historical "
+            "credentials are not republished; source commit/tag identities remain manifest "
+            "metadata."
+        ):
+            item = baseline_tree_limitation()
+        if (
+            "together preserve the current Git-tracked repository" in item
+            or item == qualified_limitation()
+        ):
+            continue
+        if item not in normalized:
+            normalized.append(item)
+    tree = baseline_tree_limitation()
+    if tree not in normalized:
+        normalized.append(tree)
+    normalized.append(qualified_limitation())
+    return normalized
+
+
+def normalize_limitations(value: object) -> list[str]:
+    if not isinstance(value, list):
+        raise SystemExit("recovery index limitations are invalid")
+    normalized: list[str] = []
+    for item in value:
+        if not isinstance(item, str):
+            raise SystemExit("recovery index limitation is not a string")
+        if item == (
+            "The core repository capsule embeds every current Git-tracked byte but "
+            "deliberately excludes production parent-history and tag objects so historical "
+            "credentials are not republished; source commit/tag identities remain manifest "
+            "metadata."
+        ):
+            item = baseline_tree_limitation()
+        if (
+            "together preserve the current Git-tracked repository" in item
+            or item == qualified_limitation()
+        ):
+            continue
+        if item not in normalized:
+            normalized.append(item)
+    tree = baseline_tree_limitation()
+    if tree not in normalized:
+        normalized.append(tree)
+    normalized.append(qualified_limitation())
+    return normalized
 
 
 def prepare_index(base_commit: str) -> None:
@@ -265,16 +339,7 @@ def prepare_index(base_commit: str) -> None:
     limitations = index.setdefault("limitations", [])
     if not isinstance(limitations, list):
         raise SystemExit("recovery index limitations are invalid")
-    limitations = [
-        item
-        for item in limitations
-        if not (
-            isinstance(item, str)
-            and "together preserve the current Git-tracked repository" in item
-        )
-    ]
-    limitations.append(qualified_limitation())
-    index["limitations"] = limitations
+    index["limitations"] = normalize_limitations(limitations)
     index["source_digest"] = canonical_index_digest(index)
     write_json(INDEX_PATH, index)
 
@@ -570,16 +635,7 @@ def seal(source_commit: str, recovery_report_path: Path, metadata_report_path: P
         "external_annex_dois": EXPECTED_ANNEX_DOIS,
     }
     limitations = index.setdefault("limitations", [])
-    limitations = [
-        item
-        for item in limitations
-        if not (
-            isinstance(item, str)
-            and "together preserve the current Git-tracked repository" in item
-        )
-    ]
-    limitations.append(qualified_limitation())
-    index["limitations"] = limitations
+    index["limitations"] = normalize_limitations(limitations)
     index["source_digest"] = canonical_index_digest(index)
     write_json(INDEX_PATH, index)
 
@@ -632,6 +688,12 @@ def validate() -> None:
             raise SystemExit("recovery index does not expose the current v2 state")
         if index.get("source_digest") != canonical_index_digest(index):
             raise SystemExit("recovery index source digest mismatch")
+        limitations = index.get("limitations")
+        if limitations != normalize_limitations(limitations):
+            raise SystemExit("recovery index limitations are stale or duplicated")
+        limitations = index.get("limitations")
+        if limitations != normalize_limitations(limitations):
+            raise SystemExit("recovery index limitations are stale or duplicated")
     if auth["status"] == "consumed":
         if state.get("publication_status") != "published_and_publicly_restored":
             raise SystemExit("consumed refresh lacks final published state")
