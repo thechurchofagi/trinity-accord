@@ -3,7 +3,10 @@
 
 V3 intentionally uses new version identifiers so a prior run that crossed the
 immutable Zenodo publication boundary cannot collide with a later source-bound
-package after verifier or restore-program changes.
+package after verifier or restore-program changes. The NFT package also records
+that the historical 175-item mirror Release currently exposes zero custom
+assets and accepts recovery bytes only from the separately manifest-proven,
+content-complete 175-NFT backup Release.
 """
 from __future__ import annotations
 
