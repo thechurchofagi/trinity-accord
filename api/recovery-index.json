@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "4f7246658bf99f94",
+  "source_digest": "7112ad93865fda87",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -50,6 +50,8 @@
     "repository_preservation_builder": "scripts/build_preservation_capsule.py",
     "repository_preservation_restore_cli": "scripts/restore_preservation_capsule.py",
     "repository_preservation_workflow": ".github/workflows/repository-preservation-capsule.yml",
+    "external_binary_annex_state": "preservation/external-binary-annex-state.json",
+    "external_binary_annex_restore_cli": "scripts/restore_external_binary_annex.py",
     "weekly_continuity_restore_cli": "scripts/restore_weekly_continuity_archive.py",
     "quarterly_weekly_continuity_drill": ".github/workflows/quarterly-continuity-recovery.yml",
     "corrections_index": "api/corrections-index.json",
@@ -64,6 +66,7 @@
     "github_releases": "verified_only_with_release_manifest",
     "arweave": "verified_only_with_expected_hash",
     "repository_preservation_zenodo": "verified_exact_eight_file_capsule_with_source_and_safe_snapshot_bundle_cross_check",
+    "external_binary_annex_zenodo": "publication_pending_complete_paginated_release_asset_verification_and_public_doi_only_restore",
     "weekly_continuity_arweave": "verified_by_full_snapshot_plus_contiguous_deltas_and_transport_links",
     "weekly_continuity_zenodo": "verified_by_exact_six_file_packages_plus_full_download_hashes",
     "ipfs_car": "verified_only_with_expected_hash_and_scope",
@@ -77,8 +80,21 @@
     "failed_recovery"
   ],
   "latest_trusted_release": {
-    "status": "not_yet_declared",
-    "reason": "The repository capsule mechanism is implemented, but no capsule DOI is declared current until preservation/zenodo-state.json records a published version that passed public download and cold restore. The earlier 10.5281/zenodo.21675727 source ZIP is historical and is not the current capsule."
+    "status": "repository_published_external_annex_pending",
+    "repository_preservation": {
+      "doi": "10.5281/zenodo.21739344",
+      "record_id": 21739344,
+      "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+      "git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
+      "package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
+      "github_required_for_recovery": false,
+      "public_doi_only_cold_restore": "passed"
+    },
+    "external_binary_annexes": {
+      "status": "not_yet_published",
+      "state": "preservation/external-binary-annex-state.json",
+      "required_acceptance": "complete paginated release asset inventory, exact public bytes and metadata, and unauthenticated DOI-only cold restoration"
+    }
   },
   "limitations": [
     "This recovery index is a repository-maintained mirror and does not amend the Bitcoin Originals.",
@@ -86,7 +102,7 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
-    "The core repository capsule does not embed the separately hosted large binary evidence and NFT payload bytes."
+    "The core repository DOI is published and independently restorable; separately hosted large binary evidence and NFT payload bytes remain pending until the V2 annex state records complete paginated inventory, public metadata verification, and DOI-only cold restoration."
   ],
   "does_not_prove": [
     "all mirrors are available",
