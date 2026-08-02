@@ -1,0 +1,94 @@
+name: Index-Driven Tree Materialization Repair
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/index-driven-tree-materialization-repair.yml
+      - scripts/build_preservation_capsule.py
+      - tests/test_preservation_capsule.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: index-driven-tree-materialization-repair-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply-and-test:
+    if: github.head_ref == 'fix/index-driven-tree-materialization-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repair branch with full history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/index-driven-tree-materialization-20260802
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Apply exact index-driven tree repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          builder = Path('scripts/build_preservation_capsule.py')
+          text = builder.read_text(encoding='utf-8')
+          old = '''def materialize_commit_tree_repository(\n    source: Path,\n    target: Path,\n    tree_oid: str,\n    tracked: dict[str, Any],\n) -> None:\n    """Create a clean history-free repository containing only the frozen tree.\n\n    Building from a bare clone leaks source-repository storage state, including\n    shallow-clone boundaries and pack layout, into the recovery bundle bytes.\n    Materializing the exact tracked blobs into a new repository makes the\n    published bundle a pure function of the frozen tree and controlled commit\n    metadata.\n    """\n    run(["git", "init", "-b", "main", str(target)])\n    git_text(target, "config", "core.filemode", "true")\n    blobs = batch_blob_bytes(\n        source, (item["git_blob_oid"] for item in tracked["files"])\n    )\n    for item in tracked["files"]:\n        destination = target / item["path"]\n        destination.parent.mkdir(parents=True, exist_ok=True)\n        destination.write_bytes(blobs[item["git_blob_oid"]])\n        destination.chmod(0o755 if item["mode"] == "100755" else 0o644)\n    git_text(target, "add", "-A")\n    rebuilt_tree = git_text(target, "write-tree")\n    if rebuilt_tree != tree_oid:\n        raise SystemExit(\n            "clean recovery repository tree mismatch: "\n            f"expected {tree_oid}, observed {rebuilt_tree}"\n        )\n'''
+          new = '''def materialize_commit_tree_repository(\n    source: Path,\n    target: Path,\n    tree_oid: str,\n    tracked: dict[str, Any],\n) -> None:\n    """Create a clean history-free repository containing only the frozen tree.\n\n    The frozen tree is reconstructed directly in the Git index from its exact\n    modes, blob OIDs, and paths.  This deliberately avoids a worktree and\n    ``git add`` so repository ignore rules, filesystem permissions, checkout\n    filters, and clone depth cannot alter the published recovery object graph.\n    """\n    run(["git", "init", "-b", "main", str(target)])\n    blobs = batch_blob_bytes(\n        source, (item["git_blob_oid"] for item in tracked["files"])\n    )\n    for item in tracked["files"]:\n        expected_oid = item["git_blob_oid"]\n        observed_oid = run(\n            ["git", "hash-object", "-w", "--stdin"],\n            cwd=target,\n            input_bytes=blobs[expected_oid],\n        ).decode("ascii").strip()\n        if observed_oid != expected_oid:\n            raise SystemExit(\n                "clean recovery blob identity mismatch: "\n                f"{item['path']}: expected {expected_oid}, observed {observed_oid}"\n            )\n        git_text(\n            target,\n            "update-index",\n            "--add",\n            "--cacheinfo",\n            item["mode"],\n            expected_oid,\n            item["path"],\n        )\n    rebuilt_tree = git_text(target, "write-tree")\n    if rebuilt_tree != tree_oid:\n        raise SystemExit(\n            "clean recovery repository tree mismatch: "\n            f"expected {tree_oid}, observed {rebuilt_tree}"\n        )\n'''
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one materialization function, found {text.count(old)}')
+          builder.write_text(text.replace(old, new), encoding='utf-8')
+
+          tests = Path('tests/test_preservation_capsule.py')
+          test_text = tests.read_text(encoding='utf-8')
+          marker = 'def test_capsule_materialization_preserves_tracked_ignored_files'
+          if marker not in test_text:
+              test_text += '''\n\ndef test_capsule_materialization_preserves_tracked_ignored_files(tmp_path):\n    repo, _ = make_repository(tmp_path)\n    write(repo / ".gitignore", b"tracked-ignored.bin\\n")\n    write(repo / "tracked-ignored.bin", b"tracked despite ignore rules\\n")\n    subprocess.run(["git", "add", ".gitignore"], cwd=repo, check=True)\n    subprocess.run(\n        ["git", "add", "-f", "tracked-ignored.bin"],\n        cwd=repo,\n        check=True,\n    )\n    subprocess.run(\n        ["git", "commit", "-m", "track an ignored file"],\n        cwd=repo,\n        check=True,\n        capture_output=True,\n    )\n    frozen_commit = subprocess.run(\n        ["git", "rev-parse", "HEAD"],\n        cwd=repo,\n        check=True,\n        capture_output=True,\n        text=True,\n    ).stdout.strip()\n    expected_tree = subprocess.run(\n        ["git", "rev-parse", "HEAD^{tree}"],\n        cwd=repo,\n        check=True,\n        capture_output=True,\n        text=True,\n    ).stdout.strip()\n\n    capsule = tmp_path / "capsule-ignored-tracked"\n    builder.build(repo, capsule, frozen_commit)\n    verified = package.verify_local_package(capsule)\n    assert verified["git_tree_oid"] == expected_tree\n    inventory = verified["inventory"]\n    tracked_entry = next(\n        item for item in inventory["files"] if item["path"] == "tracked-ignored.bin"\n    )\n    assert tracked_entry["mode"] == "100644"\n    assert tracked_entry["bytes"] == len(b"tracked despite ignore rules\\n")\n\n    restored = tmp_path / "restored-ignored-tracked"\n    subprocess.run(\n        [\n            sys.executable,\n            str(capsule / "restore-trinity-accord.py"),\n            "--deposit-dir",\n            str(capsule),\n            "--output-dir",\n            str(restored),\n        ],\n        check=True,\n        capture_output=True,\n        text=True,\n    )\n    restored_repo = restored / "repository"\n    assert subprocess.run(\n        ["git", "rev-parse", "HEAD^{tree}"],\n        cwd=restored_repo,\n        check=True,\n        capture_output=True,\n        text=True,\n    ).stdout.strip() == expected_tree\n    assert (restored_repo / "tracked-ignored.bin").read_bytes() == (\n        b"tracked despite ignore rules\\n"\n    )\n'''
+          tests.write_text(test_text, encoding='utf-8')
+          PY
+
+      - name: Run focused preservation suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m pytest tests/test_preservation_capsule.py -q
+
+      - name: Build the real current repository twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          current="$(git rev-parse HEAD)"
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "$current" \
+            --output-dir "$RUNNER_TEMP/real-capsule-a"
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "$current" \
+            --output-dir "$RUNNER_TEMP/real-capsule-b"
+          diff -qr "$RUNNER_TEMP/real-capsule-a" "$RUNNER_TEMP/real-capsule-b"
+
+      - name: Commit verified repair to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- scripts/build_preservation_capsule.py tests/test_preservation_capsule.py; then
+            echo 'Repair already applied.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/build_preservation_capsule.py tests/test_preservation_capsule.py
+          git commit -m 'fix: rebuild frozen tree directly from Git index entries'
+          git push origin HEAD:fix/index-driven-tree-materialization-20260802
