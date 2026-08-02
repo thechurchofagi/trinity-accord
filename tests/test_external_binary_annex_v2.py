@@ -14,6 +14,7 @@ if str(SCRIPTS) not in sys.path:
 
 import external_binary_annex as legacy  # noqa: E402
 import external_binary_annex_v2 as v2  # noqa: E402
+import external_binary_annex_v3 as v3  # noqa: E402
 import publish_external_binary_annexes_to_zenodo_v2 as publisher_v2  # noqa: E402
 import restore_external_binary_annex as restore  # noqa: E402
 
@@ -76,14 +77,25 @@ def test_release_asset_pagination_rejects_duplicates():
         )
 
 
-def test_v2_annex_ids_do_not_reuse_a_possible_immutable_v1_record():
+def test_v2_and_final_v3_use_distinct_immutable_versions():
+    v2.V2_ANNEX_IDS = {
+        "evidence": "external-evidence-annex-v2",
+        "nft": "chronicle-nft-media-annex-v2",
+    }
     v2.activate_v2_specs()
     assert legacy.ANNEX_SPECS["evidence"]["annex_id"] == "external-evidence-annex-v2"
     assert legacy.ANNEX_SPECS["nft"]["annex_id"] == "chronicle-nft-media-annex-v2"
 
+    v3.activate_final_specs()
+    assert legacy.ANNEX_SPECS["evidence"]["annex_id"] == "external-evidence-annex-v3"
+    assert legacy.ANNEX_SPECS["nft"]["annex_id"] == "chronicle-nft-media-annex-v3"
+    assert set(v3.FINAL_ANNEX_IDS.values()).isdisjoint(
+        {"external-evidence-annex-v2", "chronicle-nft-media-annex-v2"}
+    )
+
 
 def test_original_scope_and_rights_boundaries_remain_intact():
-    v2.activate_v2_specs()
+    v3.activate_final_specs()
     assert legacy.ANNEX_SPECS["evidence"]["release_tags"] == [
         "signed-large-data-mirror-v1",
         "notarial-certificate-images-v1",
@@ -104,7 +116,7 @@ def test_original_scope_and_rights_boundaries_remain_intact():
 
 
 def test_public_metadata_verification_covers_legacy_and_current_shapes():
-    v2.activate_v2_specs()
+    v3.activate_final_specs()
     expected = legacy.metadata_for(legacy.ANNEX_SPECS["evidence"], "2026-08-02")
 
     legacy_observed = dict(expected)
@@ -119,10 +131,7 @@ def test_public_metadata_verification_covers_legacy_and_current_shapes():
         {"person_or_org": {"name": "Liu, Hongju", "type": "personal"}}
     ]
     current_observed["related_identifiers"] = [
-        {
-            **item,
-            "relation": {"id": item["relation"].lower()},
-        }
+        {**item, "relation": {"id": item["relation"].lower()}}
         for item in expected["related_identifiers"]
     ]
     publisher_v2.validate_public_metadata(
@@ -190,8 +199,9 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         workflow = workflow_path.read_text(encoding="utf-8")
         assert "ref: ${{ github.sha }}" in workflow
         assert "TRINITY_PUBLICATION_SOURCE_SHA: ${{ github.sha }}" in workflow
-        assert "external_binary_annex_v2.py" in workflow
-        assert "publish_external_binary_annexes_to_zenodo_v2.py" in workflow
+        assert "external_binary_annex_v3.py" in workflow
+        assert "publish_external_binary_annexes_to_zenodo_v3.py" in workflow
+        assert "refs/remotes/origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
         assert "required=false" in workflow
         assert "published_and_publicly_restored" in workflow
