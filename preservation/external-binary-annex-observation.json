@@ -1,14 +1,18 @@
 {
-  "schema": "trinityaccord.external-binary-annex-zenodo-state.v1",
-  "publication_status": "published_and_publicly_restored",
+  "schema": "trinityaccord.external-binary-annex-public-observation.v3",
   "source_commit_sha": "5d8b5b460bb7afc8a59b6b8d00cf972c4286dff7",
   "publication_workflow_source_commit_sha": "5d8b5b460bb7afc8a59b6b8d00cf972c4286dff7",
   "annex_source_commits": {
     "evidence": "8942c1c3bf52a09b038eccf8f5cf9377f0732244",
     "nft": "5d8b5b460bb7afc8a59b6b8d00cf972c4286dff7"
   },
+  "observed_without_github_credentials": true,
+  "observed_without_zenodo_credentials": true,
   "core_repository_preservation_doi": "10.5281/zenodo.21739344",
-  "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
+  "core_repository_git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+  "publication_status": "published_and_publicly_restored",
+  "release_asset_pagination_complete": true,
+  "public_metadata_verification": "passed",
   "annexes": {
     "evidence": {
       "status": "published",
@@ -137,10 +141,5 @@
         "bitcoin_originals_remain_authoritative": true
       }
     }
-  },
-  "all_named_release_assets_embedded": true,
-  "release_asset_pagination_complete": true,
-  "public_metadata_verification": "passed",
-  "deprecated_failed_nft_attempts_embedded": false,
-  "external_binary_payload_recovery_requires_github": false
+  }
 }

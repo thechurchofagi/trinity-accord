@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "7112ad93865fda87",
+  "source_digest": "8fd75e327287eca4",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -58,7 +58,8 @@
     "authority_api": "api/authority.json",
     "evidence_manifest": "api/evidence-manifest.json",
     "hashes": "api/hashes.json",
-    "claim_registry": "api/claim-registry.json"
+    "claim_registry": "api/claim-registry.json",
+    "external_binary_annex_observation": "preservation/external-binary-annex-observation.json"
   },
   "mirror_classes": {
     "github_main": "discovery_only_until_verified",
@@ -66,7 +67,7 @@
     "github_releases": "verified_only_with_release_manifest",
     "arweave": "verified_only_with_expected_hash",
     "repository_preservation_zenodo": "verified_exact_eight_file_capsule_with_source_and_safe_snapshot_bundle_cross_check",
-    "external_binary_annex_zenodo": "publication_pending_complete_paginated_release_asset_verification_and_public_doi_only_restore",
+    "external_binary_annex_zenodo": "verified complete paginated release-asset packages with public metadata, byte readback and unauthenticated DOI-only cold restoration",
     "weekly_continuity_arweave": "verified_by_full_snapshot_plus_contiguous_deltas_and_transport_links",
     "weekly_continuity_zenodo": "verified_by_exact_six_file_packages_plus_full_download_hashes",
     "ipfs_car": "verified_only_with_expected_hash_and_scope",
@@ -80,20 +81,38 @@
     "failed_recovery"
   ],
   "latest_trusted_release": {
-    "status": "repository_published_external_annex_pending",
+    "status": "published_and_publicly_restored",
     "repository_preservation": {
       "doi": "10.5281/zenodo.21739344",
       "record_id": 21739344,
       "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
       "git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
       "package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
-      "github_required_for_recovery": false,
-      "public_doi_only_cold_restore": "passed"
+      "github_required_for_recovery": false
     },
     "external_binary_annexes": {
-      "status": "not_yet_published",
-      "state": "preservation/external-binary-annex-state.json",
-      "required_acceptance": "complete paginated release asset inventory, exact public bytes and metadata, and unauthenticated DOI-only cold restoration"
+      "evidence": {
+        "doi": "10.5281/zenodo.21753937",
+        "record_id": 21753937,
+        "annex_id": "external-evidence-annex-v4",
+        "source_commit_sha": "8942c1c3bf52a09b038eccf8f5cf9377f0732244",
+        "asset_count": 28,
+        "payload_bytes": 204595967,
+        "package_identity_sha256": "830eaa1b2ee8a0c6c961cf2ab5f369147a59c9df0b05304102da17b897d44bbf",
+        "public_metadata_verification": "passed",
+        "public_cold_restore": "passed"
+      },
+      "nft": {
+        "doi": "10.5281/zenodo.21754229",
+        "record_id": 21754229,
+        "annex_id": "chronicle-nft-media-annex-v4",
+        "source_commit_sha": "5d8b5b460bb7afc8a59b6b8d00cf972c4286dff7",
+        "asset_count": 10,
+        "payload_bytes": 862714954,
+        "package_identity_sha256": "dd53f5ec93c610185795802efb7fd8167863b2a95f5d82280e406fc51f696dbf",
+        "public_metadata_verification": "passed",
+        "public_cold_restore": "passed"
+      }
     }
   },
   "limitations": [
@@ -102,7 +121,8 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
-    "The core repository DOI is published and independently restorable; separately hosted large binary evidence and NFT payload bytes remain pending until the V2 annex state records complete paginated inventory, public metadata verification, and DOI-only cold restoration."
+    "The core repository DOI is published and independently restorable; separately hosted large binary evidence and NFT payload bytes remain pending until the V2 annex state records complete paginated inventory, public metadata verification, and DOI-only cold restoration.",
+    "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the current Git-tracked repository and every custom asset from the named valid releases."
   ],
   "does_not_prove": [
     "all mirrors are available",
