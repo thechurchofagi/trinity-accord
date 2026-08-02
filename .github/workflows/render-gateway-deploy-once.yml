@@ -50,17 +50,20 @@ jobs:
           source_sha="$(git rev-parse HEAD)"
           printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
           : > "$RUNNER_TEMP/render-gateway-deploy.log"
+          python scripts/reconcile_render_health_path.py 2>&1 \
+            | tee -a "$RUNNER_TEMP/render-gateway-deploy.log"
           python scripts/render_manual_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$source_sha" \
             --wait \
             --deploy \
-            --reconcile-config 2>&1 | tee "$RUNNER_TEMP/render-gateway-deploy.log"
+            --reconcile-config 2>&1 | tee -a "$RUNNER_TEMP/render-gateway-deploy.log"
+          grep -q "RENDER_HEALTH_PATH_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "RENDER_CONFIG_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "health_check_path=/readyz" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "RENDER_DEPLOY_LIVE" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "GATEWAY_PROTECTION_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
-          grep -E "^(RENDER_CONFIG_ATTESTED|RENDER_DEPLOY_LIVE|GATEWAY_PROTECTION_ATTESTED)" \
+          grep -E "^(RENDER_HEALTH_PATH_ATTESTED|RENDER_CONFIG_ATTESTED|RENDER_DEPLOY_LIVE|GATEWAY_PROTECTION_ATTESTED)" \
             "$RUNNER_TEMP/render-gateway-deploy.log" > "$RUNNER_TEMP/render-gateway-evidence.txt"
 
       - name: Publish successful deployment evidence
