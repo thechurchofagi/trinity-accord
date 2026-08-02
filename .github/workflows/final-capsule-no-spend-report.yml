@@ -1,0 +1,318 @@
+name: Final Capsule No-Spend Report
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/final-capsule-no-spend-report.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: final-capsule-no-spend-report-20260802
+  cancel-in-progress: false
+
+jobs:
+  verify-build-restore-and-quote:
+    if: github.head_ref == 'ops/final-capsule-no-spend-report-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      FROZEN_COMMIT: 885483ba9fb6879af96c2d1af54cb86364912dae
+      CONFIGURED_CAP_WINSTON: '300000000000'
+      MINIMUM_RESERVE_WINSTON: '250000000000'
+      ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+    steps:
+      - name: Checkout exact frozen commit with full history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: 885483ba9fb6879af96c2d1af54cb86364912dae
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Require exact clean source and install locked dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${FROZEN_COMMIT}"
+          test -z "$(git status --porcelain)"
+          npm ci
+
+      - name: Build two full-history capsules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "${FROZEN_COMMIT}" \
+            --output-dir "$RUNNER_TEMP/capsule-full-a"
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "${FROZEN_COMMIT}" \
+            --output-dir "$RUNNER_TEMP/capsule-full-b"
+
+      - name: Build a true depth-one capsule for the same commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git branch final-freeze-depth-one "${FROZEN_COMMIT}"
+          git clone \
+            --depth 1 \
+            --no-tags \
+            --branch final-freeze-depth-one \
+            "file://${GITHUB_WORKSPACE}" \
+            "$RUNNER_TEMP/shallow-repository"
+          test "$(git -C "$RUNNER_TEMP/shallow-repository" rev-parse HEAD)" = "${FROZEN_COMMIT}"
+          test "$(git -C "$RUNNER_TEMP/shallow-repository" rev-parse --is-shallow-repository)" = "true"
+          python3 "$RUNNER_TEMP/shallow-repository/scripts/build_preservation_capsule.py" \
+            --repository-root "$RUNNER_TEMP/shallow-repository" \
+            --commit "${FROZEN_COMMIT}" \
+            --output-dir "$RUNNER_TEMP/capsule-shallow"
+
+      - name: Require three-way package and byte identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+
+          sys.path.insert(0, 'scripts')
+          from preservation_capsule import verify_local_package
+
+          roots = {
+              'full_a': Path('${{ runner.temp }}/capsule-full-a'),
+              'full_b': Path('${{ runner.temp }}/capsule-full-b'),
+              'shallow': Path('${{ runner.temp }}/capsule-shallow'),
+          }
+          verified = {name: verify_local_package(path) for name, path in roots.items()}
+          identities = {item['package_identity_sha256'] for item in verified.values()}
+          if len(identities) != 1:
+              raise SystemExit(f'package identities differ: {sorted(identities)}')
+
+          names = sorted(path.name for path in roots['full_a'].iterdir() if path.is_file())
+          if len(names) != 8:
+              raise SystemExit(f'expected 8 published files, observed {len(names)}: {names}')
+          for root in roots.values():
+              observed = sorted(path.name for path in root.iterdir() if path.is_file())
+              if observed != names:
+                  raise SystemExit(f'published file set differs: {observed}')
+
+          files = []
+          for filename in names:
+              payloads = {name: (root / filename).read_bytes() for name, root in roots.items()}
+              if len(set(payloads.values())) != 1:
+                  raise SystemExit(f'published bytes differ: {filename}')
+              modes = {name: (root / filename).stat().st_mode & 0o777 for name, root in roots.items()}
+              if len(set(modes.values())) != 1:
+                  raise SystemExit(f'published modes differ: {filename}: {modes}')
+              raw = payloads['full_a']
+              files.append({
+                  'name': filename,
+                  'bytes': len(raw),
+                  'sha256': hashlib.sha256(raw).hexdigest(),
+                  'mode': format(modes['full_a'], '04o'),
+              })
+
+          reference = verified['full_a']
+          manifest = reference['manifest']
+          if manifest['git']['production_tag_identity_count'] != 0:
+              raise SystemExit('mutable live tag identities leaked into capsule')
+          if manifest['scope']['production_tag_identities_recorded'] is not False:
+              raise SystemExit('manifest incorrectly claims live tag identities are recorded')
+
+          summary = {
+              'schema': 'trinityaccord.final-repository-capsule-build-report.v1',
+              'source_commit': '${{ env.FROZEN_COMMIT }}',
+              'capsule_id': reference['capsule_id'],
+              'package_identity_sha256': reference['package_identity_sha256'],
+              'git_tree_oid': reference['git_tree_oid'],
+              'recovery_commit_sha': manifest['git']['recovery_commit_sha'],
+              'tracked_file_count': reference['tracked_file_count'],
+              'published_file_count': len(files),
+              'published_file_bytes_total': sum(item['bytes'] for item in files),
+              'full_builds_byte_identical': True,
+              'full_and_depth_one_builds_byte_identical': True,
+              'mutable_live_tag_identities_included': False,
+              'published_files': files,
+          }
+          Path('${{ runner.temp }}/capsule-build-report.json').write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+      - name: Perform standalone GitHub-zero cold restore
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/bootstrap"
+          cp "$RUNNER_TEMP/capsule-full-a/restore-trinity-accord.py" \
+            "$RUNNER_TEMP/bootstrap/restore-trinity-accord.py"
+          cd "$RUNNER_TEMP/bootstrap"
+          python3 restore-trinity-accord.py \
+            --deposit-dir "$RUNNER_TEMP/capsule-full-a" \
+            --output-dir "$RUNNER_TEMP/restored"
+          test "$(git -C "$RUNNER_TEMP/restored/repository" rev-parse HEAD)" = \
+            "$(jq -r '.recovery_commit_sha' "$RUNNER_TEMP/capsule-build-report.json")"
+          test "$(git -C "$RUNNER_TEMP/restored/repository" rev-parse 'HEAD^{tree}')" = \
+            "$(jq -r '.git_tree_oid' "$RUNNER_TEMP/capsule-build-report.json")"
+          test -z "$(git -C "$RUNNER_TEMP/restored/repository" status --porcelain)"
+          python3 "$RUNNER_TEMP/restored/repository/scripts/audit_recovery_readiness.py"
+
+      - name: Create and verify deterministic Arweave transport tar
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import tarfile
+          from pathlib import Path
+
+          source = Path('${{ runner.temp }}/capsule-full-a')
+          build = json.loads(Path('${{ runner.temp }}/capsule-build-report.json').read_text())
+          output = Path('${{ runner.temp }}') / f"trinity-accord-repository-capsule-{build['source_commit'][:12]}.tar"
+          with tarfile.open(output, 'w', format=tarfile.GNU_FORMAT) as archive:
+              for path in sorted(source.iterdir(), key=lambda item: item.name):
+                  if not path.is_file():
+                      continue
+                  info = archive.gettarinfo(str(path), arcname=path.name)
+                  info.mtime = 0
+                  info.uid = 0
+                  info.gid = 0
+                  info.uname = ''
+                  info.gname = ''
+                  with path.open('rb') as handle:
+                      archive.addfile(info, handle)
+          raw = output.read_bytes()
+          transport = {
+              'schema': 'trinityaccord.repository-capsule-arweave-transport.v1',
+              'source_commit': build['source_commit'],
+              'git_tree_oid': build['git_tree_oid'],
+              'recovery_commit_sha': build['recovery_commit_sha'],
+              'capsule_id': build['capsule_id'],
+              'package_identity_sha256': build['package_identity_sha256'],
+              'filename': output.name,
+              'bytes': len(raw),
+              'sha256': hashlib.sha256(raw).hexdigest(),
+              'format': 'deterministic-uncompressed-gnu-tar',
+              'contents': [item['name'] for item in build['published_files']],
+          }
+          Path('${{ runner.temp }}/transport-report.json').write_text(
+              json.dumps(transport, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          Path('${{ runner.temp }}/transport-path.txt').write_text(str(output) + '\n')
+          print(json.dumps(transport, indent=2, sort_keys=True))
+          PY
+          mkdir -p "$RUNNER_TEMP/transport-extract"
+          tar -xf "$(cat "$RUNNER_TEMP/transport-path.txt")" -C "$RUNNER_TEMP/transport-extract"
+          diff -qr "$RUNNER_TEMP/capsule-full-a" "$RUNNER_TEMP/transport-extract"
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from preservation_capsule import verify_local_package
+          verify_local_package(Path('${{ runner.temp }}/transport-extract'))
+          print('TRANSPORT_EXTRACT_PACKAGE_VERIFIED')
+          PY
+
+      - name: Read live AR price and wallet balance without creating or signing a transaction
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ARKEY}"
+          cat > "$GITHUB_WORKSPACE/final-capsule-no-spend-report.mjs" <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import Arweave from 'arweave';
+
+          const rawKey = process.env.ARKEY.trim();
+          const jwk = rawKey.startsWith('{')
+            ? JSON.parse(rawKey)
+            : JSON.parse(Buffer.from(rawKey, 'base64').toString('utf8'));
+          const transportPath = fs.readFileSync(process.env.TRANSPORT_PATH_FILE, 'utf8').trim();
+          const data = fs.readFileSync(transportPath);
+          const arweave = Arweave.init({
+            host: 'arweave.net',
+            port: 443,
+            protocol: 'https',
+            timeout: 60000,
+            logging: false,
+          });
+          const address = await arweave.wallets.jwkToAddress(jwk);
+          const balance = BigInt(await arweave.wallets.getBalance(address));
+          const reward = BigInt(await arweave.transactions.getPrice(data.length));
+          const cap = BigInt(process.env.CONFIGURED_CAP_WINSTON);
+          const reserve = BigInt(process.env.MINIMUM_RESERVE_WINSTON);
+          const remaining = balance - reward;
+          const toAr = (value) => {
+            const negative = value < 0n;
+            const absolute = negative ? -value : value;
+            const rendered = `${absolute / 1000000000000n}.${(absolute % 1000000000000n)
+              .toString().padStart(12, '0')}`;
+            return negative ? `-${rendered}` : rendered;
+          };
+          const report = {
+            schema: 'trinityaccord.final-repository-capsule-arweave-no-spend-report.v1',
+            observed_at: new Date().toISOString(),
+            payload_bytes: data.length,
+            payload_sha256: crypto.createHash('sha256').update(data).digest('hex'),
+            reward_winston: reward.toString(),
+            reward_ar: toAr(reward),
+            configured_cap_winston: cap.toString(),
+            configured_cap_ar: toAr(cap),
+            amount_above_cap_winston: (reward > cap ? reward - cap : 0n).toString(),
+            amount_above_cap_ar: toAr(reward > cap ? reward - cap : 0n),
+            within_configured_cap: reward <= cap,
+            wallet_address_sha256: crypto.createHash('sha256').update(address).digest('hex'),
+            balance_before_winston: balance.toString(),
+            balance_before_ar: toAr(balance),
+            estimated_remaining_winston: remaining.toString(),
+            estimated_remaining_ar: toAr(remaining),
+            minimum_reserve_winston: reserve.toString(),
+            minimum_reserve_ar: toAr(reserve),
+            reserve_satisfied_after_upload: remaining >= reserve,
+            network_price_method: 'arweave.transactions.getPrice(payload_bytes)',
+            transaction_object_created: false,
+            transaction_signed: false,
+            transaction_posted: false,
+            ar_spent: '0.000000000000',
+          };
+          fs.writeFileSync(process.env.REPORT_PATH, JSON.stringify(report, null, 2) + '\n');
+          console.log(JSON.stringify(report, null, 2));
+          JS
+          TRANSPORT_PATH_FILE="$RUNNER_TEMP/transport-path.txt" \
+          REPORT_PATH="$RUNNER_TEMP/arweave-no-spend-report.json" \
+          node "$GITHUB_WORKSPACE/final-capsule-no-spend-report.mjs"
+          rm -f "$GITHUB_WORKSPACE/final-capsule-no-spend-report.mjs"
+
+      - name: Upload complete no-spend evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: final-repository-capsule-no-spend-evidence
+          path: |
+            ${{ runner.temp }}/capsule-full-a/
+            ${{ runner.temp }}/capsule-build-report.json
+            ${{ runner.temp }}/restored/recovery-report.json
+            ${{ runner.temp }}/transport-report.json
+            ${{ runner.temp }}/arweave-no-spend-report.json
+          retention-days: 365
+          if-no-files-found: error
