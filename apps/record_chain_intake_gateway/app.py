@@ -80,10 +80,35 @@ _APPEND_WORKFLOW = os.environ.get("TRINITY_APPEND_WORKFLOW_FILE", "record-chain-
 _DISPATCH_APPEND_WORKFLOW = os.environ.get("TRINITY_DISPATCH_APPEND_WORKFLOW", "1").strip().lower() not in {"0", "false", "no", "off"}
 _GATEWAY_BASE_URL = os.environ.get("TRINITY_GATEWAY_BASE_URL", "")
 
-# In-memory receipt store (ephemeral; resets on restart). Dry-run receipts
-# remain readable only in this process and are explicitly marked non-durable.
+# In-memory receipt store (ephemeral; resets on restart). Durable receipts
+# remain authoritative in Git; this cache is bounded so a long-lived process
+# cannot retain every historical receipt forever. Dry-run receipts remain
+# explicitly non-durable and may be evicted at the same bounded capacity.
+_MAX_RECEIPT_CACHE_ENTRIES = max(
+    1, int(os.environ.get("TRINITY_RECEIPT_CACHE_MAX_ENTRIES", "512"))
+)
 _receipt_store: dict[str, dict[str, Any]] = {}
 _ephemeral_receipt_ids: set[str] = set()
+
+
+def _cache_receipt(
+    receipt_id: str,
+    receipt: dict[str, Any],
+    *,
+    ephemeral: bool,
+) -> None:
+    """Insert or refresh one receipt and evict the oldest cache entries."""
+    _receipt_store.pop(receipt_id, None)
+    _receipt_store[receipt_id] = receipt
+    if ephemeral:
+        _ephemeral_receipt_ids.add(receipt_id)
+    else:
+        _ephemeral_receipt_ids.discard(receipt_id)
+
+    while len(_receipt_store) > _MAX_RECEIPT_CACHE_ENTRIES:
+        oldest_receipt_id = next(iter(_receipt_store))
+        _receipt_store.pop(oldest_receipt_id, None)
+        _ephemeral_receipt_ids.discard(oldest_receipt_id)
 
 # Gateway schema info — must reflect actual validation rules.
 # authorship_proof is REQUIRED for all formal record types (not optional).
@@ -287,6 +312,7 @@ def _build_gateway_runtime() -> dict[str, Any]:
         "max_submission_bytes": info["max_submission_bytes"],
         "record_draft_max_bytes": info["record_draft_max_bytes"],
         "max_text_field_chars": info["max_text_field_chars"],
+        "receipt_cache_max_entries": _MAX_RECEIPT_CACHE_ENTRIES,
         "protection_layer_active": info["protection_layer_active"],
         "protection_required": _protection_layer_required(),
         "protection_entrypoint": info["protection_entrypoint"],
@@ -1979,11 +2005,11 @@ async def submit(request: Request) -> SubmitResponse | JSONResponse:
 
     # Cache durable receipts and preserve immediate dry-run readback without
     # presenting the latter as durable repository intake.
-    _receipt_store[receipt_id] = receipt_data
-    if _WRITE_MODE == "github_contents_pending":
-        _ephemeral_receipt_ids.discard(receipt_id)
-    else:
-        _ephemeral_receipt_ids.add(receipt_id)
+    _cache_receipt(
+        receipt_id,
+        receipt_data,
+        ephemeral=_WRITE_MODE != "github_contents_pending",
+    )
 
     return SubmitResponse(
         accepted=True,
@@ -2230,8 +2256,7 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                         "receipt_path": receipt_path,
                     },
                 )
-            _receipt_store[receipt_id] = receipt  # update cache
-            _ephemeral_receipt_ids.discard(receipt_id)
+            _cache_receipt(receipt_id, receipt, ephemeral=False)
             return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
     except HTTPException:
         # Re-raise HTTPExceptions (integrity errors) — do not swallow

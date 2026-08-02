@@ -86,6 +86,40 @@ def test_secure_entrypoint_satisfies_required_protection_contract() -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
 
+def test_receipt_cache_is_bounded_and_cleans_ephemeral_index() -> None:
+    result = _run_isolated(
+        """
+        from apps.record_chain_intake_gateway import app as gateway
+
+        gateway._receipt_store.clear()
+        gateway._ephemeral_receipt_ids.clear()
+        maximum = gateway._MAX_RECEIPT_CACHE_ENTRIES
+        for index in range(maximum + 25):
+            receipt_id = f'rcg-test-{index:04d}'
+            gateway._cache_receipt(
+                receipt_id,
+                {'server_receipt_id': receipt_id},
+                ephemeral=True,
+            )
+        assert len(gateway._receipt_store) == maximum
+        assert len(gateway._ephemeral_receipt_ids) == maximum
+        assert 'rcg-test-0000' not in gateway._receipt_store
+        assert 'rcg-test-0000' not in gateway._ephemeral_receipt_ids
+
+        newest = f'rcg-test-{maximum + 24:04d}'
+        gateway._cache_receipt(
+            newest,
+            {'server_receipt_id': newest, 'durable': True},
+            ephemeral=False,
+        )
+        assert newest in gateway._receipt_store
+        assert newest not in gateway._ephemeral_receipt_ids
+        assert len(gateway._receipt_store) == maximum
+        """
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
 def test_machine_contract_describes_layered_fail_closed_health() -> None:
     import json
 

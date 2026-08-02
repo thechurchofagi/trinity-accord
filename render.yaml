@@ -52,6 +52,8 @@ services:
         value: 1.2.1-protected
       - key: TRINITY_ENFORCE_PROTECTION_LAYER
         value: "1"
+      - key: TRINITY_RECEIPT_CACHE_MAX_ENTRIES
+        value: "512"
       - key: TRINITY_MAX_SUBMISSION_BYTES
         value: "98304"
       - key: TRINITY_RECORD_DRAFT_MAX_BYTES
