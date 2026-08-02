@@ -13,6 +13,7 @@ on:
       - scripts/publish_external_binary_annexes_to_zenodo_v2.py
       - scripts/restore_external_binary_annex.py
       - tests/test_external_binary_annex_v2.py
+      - tests/test_external_annex_workflow_contexts.py
 
 concurrency:
   group: main-write-lock
@@ -35,8 +36,6 @@ jobs:
     permissions:
       contents: write
     env:
-      EVIDENCE_PACKAGE_DIR: ${{ runner.temp }}/trinity-evidence-annex-v3
-      NFT_PACKAGE_DIR: ${{ runner.temp }}/trinity-nft-annex-v3
       TRINITY_PUBLICATION_SOURCE_SHA: ${{ github.sha }}
       EXTERNAL_BINARY_ANNEX_RIGHTS_ACK: TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
@@ -48,6 +47,14 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
           ref: ${{ github.sha }}
+
+      - name: Initialize runner-local package paths
+        run: |
+          set -euo pipefail
+          printf 'EVIDENCE_PACKAGE_DIR=%s\n' \
+            "$RUNNER_TEMP/trinity-evidence-annex-v3" >> "$GITHUB_ENV"
+          printf 'NFT_PACKAGE_DIR=%s\n' \
+            "$RUNNER_TEMP/trinity-nft-annex-v3" >> "$GITHUB_ENV"
 
       - name: Resolve current main state and publication requirement
         id: precheck
@@ -129,6 +136,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$TRINITY_PUBLICATION_SOURCE_SHA"
           python3 -m pytest -q \
             tests/test_external_binary_annex_v2.py \
+            tests/test_external_annex_workflow_contexts.py \
             tests/test_preservation_capsule.py
           python3 scripts/trinity_record_chain.py verify
           python3 scripts/run_current_system_tests.py
