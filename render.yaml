@@ -1,4 +1,4 @@
-# deploy-trigger: 2026-08-02T21:45:00+08:00 — protect the existing Render /healthz route and attest /readyz separately
+# deploy-trigger: 2026-08-02T22:45:00+08:00 — enforce fail-closed protection, bounded receipt cache, and layered health attestation
 services:
   # Legacy Issue Gateway v1 — retired-only compatibility surface.
   - type: web_service
