@@ -170,6 +170,7 @@ class ProtectedProductionApp:
                 "service": info["service"],
                 "version": info["version"],
                 "write_mode": info["write_mode"],
+                "protection_required": True,
                 "protection_layer_active": info["protection_layer_active"],
                 "protection_entrypoint": info["protection_entrypoint"],
                 "repo_configured": repo_configured,

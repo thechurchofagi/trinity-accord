@@ -88,10 +88,12 @@ class ReadinessResponse(BaseModel):
     repo_configured: bool
     branch_configured: bool
     token_configured: bool
+    cooldown_secret_configured: bool = False
     write_mode: str
     max_submission_bytes: int
     record_draft_max_bytes: int
     max_text_field_chars: int
+    protection_required: bool = False
     protection_layer_active: bool
     protection_entrypoint: str
     global_acceptance_cooldown_seconds: dict[str, Any] | None = None

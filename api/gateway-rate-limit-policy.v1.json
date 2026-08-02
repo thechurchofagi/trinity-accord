@@ -93,7 +93,10 @@
     "blocked_client_guidance_compaction_target": 8000,
     "multi_instance_safe": false,
     "durable_across_restart": true,
-    "operator_note": "The current Render deployment uses one Uvicorn process. A future multi-instance deployment must add a shared distributed lock for the final gate."
+    "operator_note": "The current Render deployment uses one Uvicorn process. A future multi-instance deployment must add a shared distributed lock for the final gate.",
+    "production_enforcement_env": "TRINITY_ENFORCE_PROTECTION_LAYER=1",
+    "core_app_fails_closed_when_protection_required": true,
+    "preflight_and_submit_fail_closed_without_required_protection": true
   },
   "preflight_policy": {
     "global_request_limit_per_minute": 600,
