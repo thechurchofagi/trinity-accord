@@ -107,7 +107,7 @@ def test_capsule_build_and_github_zero_restore(tmp_path, monkeypatch):
     assert report["recovery_git_commit_sha"] != commit
     assert report["github_required"] is False
     assert report["production_parent_history_embedded"] is False
-    assert report["production_tag_identity_count"] == 1
+    assert report["production_tag_identity_count"] == 0
     assert report["git_tag_count_verified"] == 0
     assert (output / "repository/README.md").read_text() == "tiny preservation fixture\n"
     assert stat.S_IMODE((output / "repository/bin/preservation-smoke").stat().st_mode) & 0o111
@@ -310,3 +310,33 @@ def test_capsule_build_is_byte_reproducible(tmp_path):
     for path_a in capsule_a.iterdir():
         path_b = capsule_b / path_a.name
         assert path_a.read_bytes() == path_b.read_bytes(), path_a.name
+
+
+def test_capsule_identity_is_independent_of_later_refs(tmp_path):
+    repo, frozen_commit = make_repository(tmp_path)
+    capsule_before = tmp_path / "capsule-before"
+    builder.build(repo, capsule_before, frozen_commit)
+
+    subprocess.run(["git", "switch", "-c", "later-unrelated-branch"], cwd=repo, check=True)
+    write(repo / "later-unrelated.txt", b"must not affect frozen capsule\n")
+    subprocess.run(["git", "add", "later-unrelated.txt"], cwd=repo, check=True)
+    subprocess.run(
+        ["git", "commit", "-m", "later unrelated ref state"],
+        cwd=repo,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(["git", "tag", "later-unrelated-tag"], cwd=repo, check=True)
+    subprocess.run(["git", "tag", "later-tag-on-frozen-commit", frozen_commit], cwd=repo, check=True)
+
+    capsule_after = tmp_path / "capsule-after"
+    builder.build(repo, capsule_after, frozen_commit)
+
+    verified_before = package.verify_local_package(capsule_before)
+    verified_after = package.verify_local_package(capsule_after)
+    assert verified_before["package_identity_sha256"] == verified_after["package_identity_sha256"]
+    assert verified_before["manifest"]["git"]["production_tag_identity_count"] == 0
+    assert verified_after["manifest"]["git"]["production_tag_identity_count"] == 0
+    for path_before in capsule_before.iterdir():
+        path_after = capsule_after / path_before.name
+        assert path_before.read_bytes() == path_after.read_bytes(), path_before.name

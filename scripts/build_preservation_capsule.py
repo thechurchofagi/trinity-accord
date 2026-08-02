@@ -532,7 +532,6 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
     commit_epoch = int(git_text(root, "show", "-s", "--format=%ct", commit))
     capsule_id = f"repository-{commit[:12]}"
     tracked = tracked_file_inventory(root, commit, tree_oid)
-    production_tags = production_tag_identity_inventory(root)
 
     with tempfile.TemporaryDirectory(prefix="trinity-preservation-build-") as temp_name:
         temp = Path(temp_name)
@@ -557,10 +556,15 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "pack.threads=1",
             "-c",
             "pack.useBitmaps=false",
+            "-c",
+            "pack.reuseDeltas=false",
+            "-c",
+            "pack.reuseObjects=false",
             "bundle",
             "create",
+            "--version=2",
             str(bundle),
-            "--all",
+            "refs/heads/main",
         )
         git_text(bare, "bundle", "verify", str(bundle))
 
@@ -578,8 +582,9 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "public repository. It contains an exact source snapshot plus a cloneable Git "
             "recovery bundle for the exact immutable publication-baseline tree, allowing every "
             "Git-tracked byte in that baseline to be restored without GitHub. Production parent history and "
-            "tag objects are deliberately excluded from the public bundle so historical "
-            "credentials are not republished; their identities remain in the manifest. Large "
+            "tag objects and live tag refs are deliberately excluded from the public bundle "
+            "and package identity so historical credentials are not republished and later "
+            "mutable refs cannot alter a frozen capsule. Large "
             "externally hosted evidence and NFT payloads remain hash-bound references and "
             "require a separately approved binary annex. The Bitcoin Originals remain "
             "authoritative."
@@ -637,7 +642,8 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         "required after the capsule files have been obtained. The Git source tree,\n"
         "source archive, and cloneable single-root recovery bundle are independently\n"
         "cross-checked. The production commit and tag identities are recorded in the\n"
-        "manifest, but historical parent and tag objects are not publicly embedded.\n\n"
+        "manifest, but historical parent objects, tag objects, and mutable live tag\n"
+        "refs are not publicly embedded or included in the package identity.\n\n"
         "Scope boundary\n"
         "--------------\n"
         "This core capsule embeds every Git-tracked byte in the declared publication\n"
@@ -669,12 +675,16 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "bundle_refs": references,
             "production_parent_history_embedded": False,
             "production_tags_embedded": False,
-            "production_tag_identity_count": len(production_tags),
-            "production_tag_identities": production_tags,
+            "production_tag_identity_count": 0,
+            "production_tag_identities": [],
+            "production_tag_identity_policy": (
+                "Live Git tag refs are mutable outside the frozen source tree and are "
+                "therefore deliberately excluded from the commit-bound capsule identity."
+            ),
             "history_exclusion_reason": (
                 "An immutable public DOI must not republish historical credential-bearing "
                 "objects. The exact declared publication-baseline tree is preserved through a synthetic root "
-                "recovery commit; original commit and tag identities remain metadata."
+                "recovery commit; mutable live tag refs are deliberately outside the commit-bound identity."
             ),
         },
         "tracked_files": {
