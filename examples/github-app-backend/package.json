@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Example GitHub App backend for Trinity Accord Agent Issue Gateway. Example only; do not commit secrets.",
+  "description": "Retired example GitHub App backend retained as a compatibility tombstone; do not use for current submissions and do not commit secrets.",
   "scripts": {
     "start": "node server.js",
-    "test:dry": "DRY_RUN=true node server.js --self-test"
+    "test:dry": "node test-retired-tombstone.mjs"
   },
   "dependencies": {
     "@octokit/app": "15.1.6",
