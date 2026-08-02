@@ -72,7 +72,7 @@
           "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
         }
       },
-      "strict_bitcoin_verified": null,
+      "strict_bitcoin_verified": false,
       "checked_at": null,
       "upgraded_at": null,
       "strict_bitcoin_verified_at": null
@@ -320,8 +320,8 @@
       "ots_status": "pending",
       "bitcoin_pending": true,
       "bitcoin_verified": false,
-      "bitcoin_attestation_embedded": null,
-      "strict_bitcoin_verified": null
+      "bitcoin_attestation_embedded": false,
+      "strict_bitcoin_verified": false
     },
     "arweave_head": {
       "latest_record_id": "R-000000106",
@@ -342,11 +342,11 @@
     "record_chain_arweave_pending": 0,
     "record_chain_arweave_failed": 0,
     "record_chain_arweave_waiting_for_key": 0,
-    "native_ots_upgrade_pending": 0,
+    "native_ots_upgrade_pending": 1,
     "native_ots_arweave_pending": 0,
     "native_ots_arweave_failed": 0,
     "native_ots_waiting_for_key": 0,
-    "backlog_current": true
+    "backlog_current": false
   },
   "hash_semantics": {
     "content_sha256": "legacy canonical content hash retained for compatibility",
