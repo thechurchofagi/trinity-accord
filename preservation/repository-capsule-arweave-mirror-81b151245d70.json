@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.repository-capsule-arweave-mirror.v1",
+  "status": "uploaded_and_publicly_verified",
+  "non_amending_boundary": true,
+  "canonical_authority": "Bitcoin Originals only",
+  "purpose": "GitHub- and Zenodo-independent byte mirror for the exact repository preservation capsule identified below.",
+  "capsule": {
+    "capsule_id": "repository-81b151245d70",
+    "source_git_commit_sha": "81b151245d70f6b775418de60f7b8a1366f28944",
+    "git_tree_oid": "c63cb393713f9824970bab80b07c214dc79e561a",
+    "recovery_commit_sha": "247f254229de1d148f299a2cbfacf7102950d5df",
+    "tracked_file_count": 4330,
+    "published_file_count": 8,
+    "package_identity_sha256": "ab3e0c54dce4b51330060e88133399553442f091d6f98adf06b8439e27be00c2",
+    "repository_recovery_status": "full_exact_publication_baseline",
+    "live_main_equivalence_claimed": false
+  },
+  "transport": {
+    "filename": "trinity-accord-repository-capsule-81b151245d70.tar",
+    "format": "deterministic-uncompressed-gnu-tar",
+    "bytes": 36925440,
+    "sha256": "132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14",
+    "content_type": "application/x-tar"
+  },
+  "arweave": {
+    "txid": "42UQsjG7gcUs5mFu9ZcwN6sYbskR533q_SpnFpaSxKs",
+    "owner_address": "r1EdzCQ9E7CaAOEywI5netR6EcSopNOa08oi2Coz68s",
+    "block_height": 1971626,
+    "block_timestamp": 1785670136,
+    "block_timestamp_utc": "2026-08-02T11:28:56Z",
+    "transaction_reward_winston": "371306286502",
+    "transaction_reward_ar": "0.371306286502",
+    "balance_before_winston": "14807737759630",
+    "observed_balance_after_winston": "14436431473128",
+    "minimum_remaining_winston": "250000000000"
+  },
+  "verification": {
+    "upload_workflow_run_id": 30745783860,
+    "upload_result_artifact_id": 8832934931,
+    "public_verification_workflow_run_id": 30745652637,
+    "public_verification_artifact_id": 8832945016,
+    "graphql_tag_lookup": "passed",
+    "required_tags_verified": true,
+    "primary_gateway": "https://arweave.net",
+    "primary_gateway_readback": "passed",
+    "primary_gateway_readback_attempts": 1,
+    "readback_bytes": 36925440,
+    "readback_sha256": "132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14",
+    "alternate_gateway": "https://g8way.io",
+    "alternate_gateway_readback": "temporarily_unavailable_non_blocking"
+  },
+  "boundaries": {
+    "capsule_is_a_non_authoritative_mirror": true,
+    "recovery_does_not_amend_canonical_material": true,
+    "bitcoin_originals_prevail": true,
+    "does_not_replace_zenodo_version_history": true,
+    "does_not_embed_external_evidence_or_nft_annex_payloads": true
+  }
+}
