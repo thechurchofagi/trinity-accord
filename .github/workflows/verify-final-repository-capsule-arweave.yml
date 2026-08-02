@@ -1,0 +1,176 @@
+name: Verify Final Repository Capsule Arweave Mirror
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/verify-final-repository-capsule-arweave.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-final-repository-capsule-arweave-mirror
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      EXPECTED_CAPSULE_ID: repository-81b151245d70
+      EXPECTED_SOURCE_COMMIT: 81b151245d70f6b775418de60f7b8a1366f28944
+      EXPECTED_GIT_TREE_OID: c63cb393713f9824970bab80b07c214dc79e561a
+      EXPECTED_PACKAGE_IDENTITY_SHA256: ab3e0c54dce4b51330060e88133399553442f091d6f98adf06b8439e27be00c2
+      EXPECTED_PAYLOAD_BYTES: "36925440"
+      EXPECTED_PAYLOAD_SHA256: 132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14
+
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22.22.1"
+
+      - name: Locate transaction and verify exact bytes
+        env:
+          RESULT_PATH: ${{ runner.temp }}/arweave-public-verification.json
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/verify-arweave.mjs" <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+
+          const expected = {
+            capsuleId: process.env.EXPECTED_CAPSULE_ID,
+            sourceCommit: process.env.EXPECTED_SOURCE_COMMIT,
+            gitTreeOid: process.env.EXPECTED_GIT_TREE_OID,
+            packageIdentity: process.env.EXPECTED_PACKAGE_IDENTITY_SHA256,
+            payloadBytes: Number(process.env.EXPECTED_PAYLOAD_BYTES),
+            payloadSha256: process.env.EXPECTED_PAYLOAD_SHA256,
+          };
+
+          const query = `query($tags: [TagFilter!]) {
+            transactions(first: 10, tags: $tags, sort: HEIGHT_DESC) {
+              edges {
+                node {
+                  id
+                  owner { address }
+                  block { height timestamp }
+                  tags { name value }
+                }
+              }
+            }
+          }`;
+          const tags = [
+            { name: 'App-Name', values: ['Trinity-Accord'] },
+            { name: 'Artifact-Type', values: ['Repository-Preservation-Capsule'] },
+            { name: 'Package-Identity-SHA256', values: [expected.packageIdentity] },
+            { name: 'Payload-SHA256', values: [expected.payloadSha256] },
+          ];
+
+          async function graphql() {
+            const response = await fetch('https://arweave.net/graphql', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ query, variables: { tags } }),
+            });
+            if (!response.ok) throw new Error(`GraphQL HTTP ${response.status}`);
+            const body = await response.json();
+            if (body.errors) throw new Error(JSON.stringify(body.errors));
+            return body?.data?.transactions?.edges || [];
+          }
+
+          async function locate(attempts = 120) {
+            let last = 'not found';
+            for (let i = 1; i <= attempts; i += 1) {
+              try {
+                const edges = await graphql();
+                if (edges.length > 0) return { node: edges[0].node, attempts: i };
+                last = 'transaction not indexed yet';
+              } catch (error) {
+                last = error.message;
+              }
+              console.log(`locate attempt ${i}/${attempts}: ${last}`);
+              await new Promise((resolve) => setTimeout(resolve, 10000));
+            }
+            throw new Error(`transaction not located: ${last}`);
+          }
+
+          async function readback(txid, gateway, attempts) {
+            let last = 'not attempted';
+            for (let i = 1; i <= attempts; i += 1) {
+              try {
+                const response = await fetch(`${gateway}/${txid}`, { redirect: 'follow' });
+                if (response.ok) {
+                  const bytes = Buffer.from(await response.arrayBuffer());
+                  const sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+                  if (bytes.length === expected.payloadBytes && sha256 === expected.payloadSha256) {
+                    return { verified: true, gateway, attempts: i, bytes: bytes.length, sha256 };
+                  }
+                  last = `mismatch bytes=${bytes.length} sha256=${sha256}`;
+                } else {
+                  last = `HTTP ${response.status}`;
+                }
+              } catch (error) {
+                last = error.message;
+              }
+              console.log(`readback ${gateway} attempt ${i}/${attempts}: ${last}`);
+              await new Promise((resolve) => setTimeout(resolve, 10000));
+            }
+            throw new Error(`readback failed via ${gateway}: ${last}`);
+          }
+
+          const located = await locate();
+          const tagMap = Object.fromEntries(located.node.tags.map(({ name, value }) => [name, value]));
+          const requiredTags = {
+            'Capsule-ID': expected.capsuleId,
+            'Source-Git-Commit': expected.sourceCommit,
+            'Git-Tree-OID': expected.gitTreeOid,
+            'Package-Identity-SHA256': expected.packageIdentity,
+            'Payload-SHA256': expected.payloadSha256,
+            'Payload-Bytes': String(expected.payloadBytes),
+            'Non-Amending': 'true',
+          };
+          for (const [name, value] of Object.entries(requiredTags)) {
+            if (tagMap[name] !== value) throw new Error(`tag mismatch ${name}: ${tagMap[name]} != ${value}`);
+          }
+
+          const primary = await readback(located.node.id, 'https://arweave.net', 90);
+          let alternate;
+          try {
+            alternate = await readback(located.node.id, 'https://g8way.io', 30);
+          } catch (error) {
+            alternate = { verified: false, gateway: 'https://g8way.io', error: error.message };
+          }
+
+          const result = {
+            schema: 'trinityaccord.repository-capsule-arweave-public-verification.v1',
+            result: 'pass',
+            txid: located.node.id,
+            owner_address: located.node.owner.address,
+            block: located.node.block,
+            locate_attempts: located.attempts,
+            capsule_id: expected.capsuleId,
+            source_commit: expected.sourceCommit,
+            git_tree_oid: expected.gitTreeOid,
+            package_identity_sha256: expected.packageIdentity,
+            payload_bytes: expected.payloadBytes,
+            payload_sha256: expected.payloadSha256,
+            primary_readback: primary,
+            alternate_readback: alternate,
+            tags: tagMap,
+          };
+          fs.writeFileSync(process.env.RESULT_PATH, JSON.stringify(result, null, 2) + '\n');
+          console.log(JSON.stringify(result, null, 2));
+          JS
+          node "$RUNNER_TEMP/verify-arweave.mjs"
+
+      - name: Upload public verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: final-repository-capsule-arweave-public-verification
+          path: ${{ runner.temp }}/arweave-public-verification.json
+          if-no-files-found: warn
+          retention-days: 90
