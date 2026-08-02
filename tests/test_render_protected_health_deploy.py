@@ -149,12 +149,15 @@ def test_live_attestation_checks_healthz_readyz_readiness_and_oversize(monkeypat
     ]
 
 
-def test_secure_entrypoint_and_permanent_manual_workflow_publish_layered_health_contract() -> None:
+def test_all_permanent_deployment_paths_use_protected_gateway_wrapper() -> None:
     secure = (ROOT / "apps/record_chain_intake_gateway/secure_entrypoint.py").read_text(
         encoding="utf-8"
     )
     render = (ROOT / "render.yaml").read_text(encoding="utf-8")
     manual = (ROOT / ".github/workflows/render-manual-deploy.yml").read_text(
+        encoding="utf-8"
+    )
+    pages = (ROOT / ".github/workflows/deploy-pages.yml").read_text(
         encoding="utf-8"
     )
     one_time = ROOT / ".github/workflows/render-gateway-deploy-once.yml"
@@ -163,4 +166,7 @@ def test_secure_entrypoint_and_permanent_manual_workflow_publish_layered_health_
     assert "healthCheckPath: /healthz" in render
     assert "workflow_dispatch:" in manual
     assert "python scripts/render_protected_deploy.py" in manual
+    assert "python3 scripts/render_protected_deploy.py" in pages
+    assert "scripts/render_(manual|protected)_deploy\\.py" in pages
+    assert "python3 scripts/render_manual_deploy.py" not in pages
     assert not one_time.exists(), "temporary exact-main deployment bridge must be removed after LIVE evidence"
