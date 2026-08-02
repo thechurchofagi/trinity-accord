@@ -35,6 +35,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
       - name: Configure authenticated state writer
         run: |
           set -euo pipefail
@@ -216,5 +222,6 @@ jobs:
             ${{ runner.temp }}/local-restored-repository/recovery-report.json
             ${{ runner.temp }}/public-restored-repository/recovery-report.json
             ${{ runner.temp }}/public-metadata-report.json
+            ${{ runner.temp }}/toolchain-provenance.json
           retention-days: 365
           if-no-files-found: error
