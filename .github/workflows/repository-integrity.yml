@@ -213,6 +213,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Record publication toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/workflow-toolchain-provenance.json"
+          cat "$RUNNER_TEMP/workflow-toolchain-provenance.json"
+
       - name: Execute repository preservation refresh after integrity success
         run: bash scripts/run_repository_preservation_refresh_ci.sh
 
@@ -226,5 +232,6 @@ jobs:
             ${{ runner.temp }}/public-restored-repository/recovery-report.json
             ${{ runner.temp }}/public-metadata-report.json
             ${{ runner.temp }}/toolchain-provenance.json
+            ${{ runner.temp }}/workflow-toolchain-provenance.json
           retention-days: 365
           if-no-files-found: warn
