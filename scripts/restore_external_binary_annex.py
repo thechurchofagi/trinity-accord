@@ -12,7 +12,7 @@ import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Iterable
 
 PUBLISHED_FILE_NAMES = (
     "payload.tar",
@@ -85,7 +85,7 @@ def zenodo_record(record_id: int) -> dict[str, Any]:
         f"https://zenodo.org/api/records/{record_id}",
         headers={
             "Accept": "application/json",
-            "User-Agent": "trinity-external-binary-annex-restore/1.0",
+            "User-Agent": "trinity-external-binary-annex-restore/2.0",
         },
     )
     try:
@@ -99,30 +99,54 @@ def zenodo_record(record_id: int) -> dict[str, Any]:
     return value
 
 
+def _file_items(record: dict[str, Any]) -> Iterable[tuple[str, dict[str, Any]]]:
+    raw = record.get("files")
+    if isinstance(raw, list):
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            yield str(item.get("key") or item.get("filename") or ""), item
+        return
+    if isinstance(raw, dict):
+        entries = raw.get("entries")
+        if isinstance(entries, dict):
+            for key, item in entries.items():
+                if isinstance(item, dict):
+                    yield str(key), item
+            return
+        if isinstance(entries, list):
+            for item in entries:
+                if isinstance(item, dict):
+                    yield str(item.get("key") or item.get("filename") or ""), item
+            return
+    raise SystemExit("Zenodo public record has no supported files collection")
+
+
 def public_files(record: dict[str, Any]) -> dict[str, str]:
-    files = record.get("files")
-    if not isinstance(files, list):
-        raise SystemExit("Zenodo public record has no files list")
     result: dict[str, str] = {}
-    for item in files:
-        if not isinstance(item, dict):
-            continue
-        name = str(item.get("key") or item.get("filename") or "")
+    for fallback, item in _file_items(record):
+        name = str(item.get("key") or item.get("filename") or fallback)
         links = item.get("links")
         url = ""
         if isinstance(links, dict):
-            url = str(links.get("self") or links.get("content") or links.get("download") or "")
-        if name and url:
-            result[name] = url
+            url = str(links.get("content") or links.get("download") or links.get("self") or "")
+        if not name or not url:
+            continue
+        if name in result:
+            raise SystemExit(f"duplicate Zenodo annex public file: {name}")
+        result[name] = url
     return result
 
 
 def acquire_from_zenodo(record_id: int, destination: Path) -> None:
     record = zenodo_record(record_id)
     remote = public_files(record)
-    missing = sorted(set(PUBLISHED_FILE_NAMES) - set(remote))
-    if missing:
-        raise SystemExit(f"Zenodo annex record is missing files: {missing}")
+    expected = set(PUBLISHED_FILE_NAMES)
+    if set(remote) != expected:
+        raise SystemExit(
+            "Zenodo annex record file set mismatch: "
+            f"missing={sorted(expected-set(remote))} unexpected={sorted(set(remote)-expected)}"
+        )
     for name in PUBLISHED_FILE_NAMES:
         download(remote[name], destination / name)
 

@@ -7,6 +7,9 @@ on:
       - main
     paths:
       - .github/workflows/external-binary-annex-publication.yml
+      - scripts/publish_external_binary_annexes_to_zenodo_v2.py
+      - scripts/restore_external_binary_annex.py
+      - tests/test_external_binary_annex_v2.py
 
 concurrency:
   group: main-write-lock

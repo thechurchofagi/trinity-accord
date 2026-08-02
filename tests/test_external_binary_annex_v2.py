@@ -103,17 +103,72 @@ def test_original_scope_and_rights_boundaries_remain_intact():
         assert "grants no new reuse rights" in metadata["notes"]
 
 
-def test_public_metadata_verification_covers_rights_and_relations():
+def test_public_metadata_verification_covers_legacy_and_current_shapes():
     v2.activate_v2_specs()
     expected = legacy.metadata_for(legacy.ANNEX_SPECS["evidence"], "2026-08-02")
-    observed = dict(expected)
-    observed["license"] = {"id": "other-closed"}
-    publisher_v2.validate_public_metadata({"metadata": observed}, expected)
 
-    bad = json.loads(json.dumps(observed))
-    bad["license"] = {"id": "cc-by-4.0"}
+    legacy_observed = dict(expected)
+    legacy_observed["license"] = {"id": "other-closed"}
+    publisher_v2.validate_public_metadata({"metadata": legacy_observed}, expected)
+
+    current_observed = dict(expected)
+    current_observed.pop("access_right")
+    current_observed.pop("license")
+    current_observed["rights"] = [{"id": "other-closed"}]
+    current_observed["creators"] = [
+        {"person_or_org": {"name": "Liu, Hongju", "type": "personal"}}
+    ]
+    current_observed["related_identifiers"] = [
+        {
+            **item,
+            "relation": {"id": item["relation"].lower()},
+        }
+        for item in expected["related_identifiers"]
+    ]
+    publisher_v2.validate_public_metadata(
+        {
+            "access": {"record": "public", "files": "public", "status": "open"},
+            "metadata": current_observed,
+        },
+        expected,
+    )
+
+    bad = json.loads(json.dumps(current_observed))
+    bad["rights"] = [{"id": "cc-by-4.0"}]
     with pytest.raises(SystemExit, match="license"):
-        publisher_v2.validate_public_metadata({"metadata": bad}, expected)
+        publisher_v2.validate_public_metadata(
+            {"access": {"status": "open"}, "metadata": bad}, expected
+        )
+
+
+def test_current_zenodo_file_entries_and_pid_shapes_are_supported():
+    record = {
+        "id": "123",
+        "pids": {"doi": {"identifier": "10.5281/zenodo.123"}},
+        "parent": {
+            "id": "122",
+            "pids": {"doi": {"identifier": "10.5281/zenodo.122"}},
+        },
+        "files": {
+            "entries": {
+                name: {
+                    "key": name,
+                    "size": 1,
+                    "checksum": {"md5": "0" * 32},
+                    "links": {"content": f"https://example.invalid/{name}"},
+                }
+                for name in legacy.PUBLISHED_FILE_NAMES
+            }
+        },
+    }
+    assert set(publisher_v2._public_file_items(record)) == set(
+        legacy.PUBLISHED_FILE_NAMES
+    )
+    assert publisher_v2._record_doi(record) == "10.5281/zenodo.123"
+    assert publisher_v2._concept_doi(record) == "10.5281/zenodo.122"
+    assert publisher_v2._concept_record_id(record) == 122
+    restored = restore.public_files(record)
+    assert set(restored) == set(legacy.PUBLISHED_FILE_NAMES)
 
 
 def test_safe_restore_paths_remain_fail_closed():
