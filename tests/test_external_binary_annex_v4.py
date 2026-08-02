@@ -4,6 +4,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
@@ -29,7 +31,7 @@ def test_v4_uses_new_immutable_pair_after_published_evidence_v3():
     )
 
 
-def test_direct_record_top_level_license_is_normalized_without_overwrite():
+def test_direct_record_top_level_license_is_normalized_and_conflicts_fail_closed():
     expected = _expected_metadata()
     record = {
         "access": {"record": "public", "files": "public", "status": "open"},
@@ -45,10 +47,33 @@ def test_direct_record_top_level_license_is_normalized_without_overwrite():
     assert normalized["metadata"]["license"] == {"id": "other-closed"}
     publisher_v4.validate_public_metadata_v4(record, expected)
 
+    equivalent_duplicate = json.loads(json.dumps(record))
+    equivalent_duplicate["metadata"]["license"] = "other-closed"
+    publisher_v4.validate_public_metadata_v4(equivalent_duplicate, expected)
+
     conflicting = json.loads(json.dumps(record))
     conflicting["metadata"]["license"] = {"id": "cc-by-4.0"}
-    normalized_conflict = publisher_v4.normalized_public_record(conflicting)
-    assert normalized_conflict["metadata"]["license"] == {"id": "cc-by-4.0"}
+    with pytest.raises(SystemExit, match="metadata conflict: license/rights"):
+        publisher_v4.normalized_public_record(conflicting)
+    with pytest.raises(SystemExit, match="metadata conflict: license/rights"):
+        publisher_v4.validate_public_metadata_v4(conflicting, expected)
+
+
+def test_other_duplicate_public_metadata_conflicts_fail_closed():
+    expected = _expected_metadata()
+    record = {
+        "access": {"record": "public", "files": "public", "status": "open"},
+        "license": {"id": "other-closed"},
+        "keywords": ["conflicting keyword"],
+        "metadata": {
+            key: value
+            for key, value in expected.items()
+            if key not in {"license", "access_right"}
+        }
+        | {"access_right": "open"},
+    }
+    with pytest.raises(SystemExit, match="metadata conflict: keywords"):
+        publisher_v4.validate_public_metadata_v4(record, expected)
 
 
 def test_v4_workflow_is_source_bound_serialized_and_self_retiring():
