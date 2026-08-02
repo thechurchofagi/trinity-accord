@@ -11,6 +11,8 @@ on:
 
 permissions:
   contents: read
+  issues: write
+  pull-requests: write
 
 concurrency:
   group: one-time-protected-render-gateway-deploy
@@ -39,11 +41,14 @@ jobs:
           python-version: "3.12"
 
       - name: Deploy exact main commit and reconcile protected health configuration
+        id: deploy
+        continue-on-error: true
         env:
           RENDER: ${{ secrets.RENDER }}
         run: |
           set -euo pipefail
           source_sha="$(git rev-parse HEAD)"
+          printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
           python scripts/render_manual_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$source_sha" \
@@ -54,3 +59,65 @@ jobs:
           grep -q "health_check_path=/readyz" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "RENDER_DEPLOY_LIVE" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "GATEWAY_PROTECTION_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
+          grep -E "^(RENDER_CONFIG_ATTESTED|RENDER_DEPLOY_LIVE|GATEWAY_PROTECTION_ATTESTED)" \
+            "$RUNNER_TEMP/render-gateway-deploy.log" > "$RUNNER_TEMP/render-gateway-evidence.txt"
+
+      - name: Publish successful deployment evidence
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.deploy.outputs.source_sha }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          evidence="$(cat "$RUNNER_TEMP/render-gateway-evidence.txt")"
+          body_file="$RUNNER_TEMP/render-live-comment.md"
+          cat > "$body_file" <<EOF
+          Render Gateway protected deployment: **LIVE**
+
+          - exact deployed commit: \`$SOURCE_SHA\`
+          - service: \`trinity-record-chain-gateway\`
+          - workflow evidence: $RUN_URL
+
+          Verified markers:
+
+          \`\`\`text
+          $evidence
+          \`\`\`
+
+          The workflow reconciled and read back the secure start command, \`healthCheckPath=/readyz\`, and runtime \`1.2.1-protected\`; waited for the exact commit to become Render LIVE; then verified protected \`/readyz\`, detailed readiness, and an oversized preflight rejection without submitting a record.
+          EOF
+          sed -i 's/^          //' "$body_file"
+          gh pr comment 887 --repo "$GITHUB_REPOSITORY" --body-file "$body_file"
+
+      - name: Publish failed or unconfirmed deployment evidence
+        if: steps.deploy.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.deploy.outputs.source_sha }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          body_file="$RUNNER_TEMP/render-failed-comment.md"
+          tail_text="$(tail -n 80 "$RUNNER_TEMP/render-gateway-deploy.log" 2>/dev/null || true)"
+          cat > "$body_file" <<EOF
+          Render Gateway protected deployment: **FAILED OR UNCONFIRMED**
+
+          - attempted commit: \`${SOURCE_SHA:-unknown}\`
+          - service: \`trinity-record-chain-gateway\`
+          - workflow evidence: $RUN_URL
+
+          Sanitized failure tail:
+
+          \`\`\`text
+          $tail_text
+          \`\`\`
+
+          No live-deployment claim should be made from this run.
+          EOF
+          sed -i 's/^          //' "$body_file"
+          gh pr comment 887 --repo "$GITHUB_REPOSITORY" --body-file "$body_file"
+
+      - name: Fail if deployment was not confirmed live
+        if: steps.deploy.outcome != 'success'
+        run: exit 1
