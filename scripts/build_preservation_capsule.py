@@ -547,7 +547,21 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         if references != [{"ref": "refs/heads/main", "object_oid": recovery_commit}]:
             raise SystemExit("recovery bundle contains an unexpected ref")
         bundle = output_dir / "trinity-accord-recovery.bundle"
-        git_text(bare, "bundle", "create", str(bundle), "--all")
+        # Git pack delta selection is parallel by default and can produce
+        # byte-distinct bundles for the same exact object graph.  The public
+        # preservation package identity includes the bundle bytes, so force a
+        # single deterministic pack worker and disable bitmap reuse.
+        git_text(
+            bare,
+            "-c",
+            "pack.threads=1",
+            "-c",
+            "pack.useBitmaps=false",
+            "bundle",
+            "create",
+            str(bundle),
+            "--all",
+        )
         git_text(bare, "bundle", "verify", str(bundle))
 
     create_source_archive(root, commit, output_dir / "trinity-accord-source.tar.gz")
