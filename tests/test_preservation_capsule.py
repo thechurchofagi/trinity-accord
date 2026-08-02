@@ -255,14 +255,32 @@ def test_published_state_records_verified_repository_doi_and_prior_snapshot():
     assert state["external_large_binary_annex_embedded"] is False
 
 
-def test_recovery_index_routes_to_capsule_without_claiming_external_annex():
+def test_recovery_index_routes_to_complete_repository_and_annex_recovery():
     index = json.loads((ROOT / "api/recovery-index.json").read_text())
     entrypoints = index["recovery_entrypoints"]
     assert entrypoints["repository_preservation_state"] == "preservation/zenodo-state.json"
     assert entrypoints["repository_preservation_restore_cli"].endswith(
         "restore_preservation_capsule.py"
     )
+    assert entrypoints["external_binary_annex_state"] == (
+        "preservation/external-binary-annex-state.json"
+    )
+    assert entrypoints["external_binary_annex_restore_cli"] == (
+        "scripts/restore_external_binary_annex.py"
+    )
     assert "exact_eight_file_capsule" in index["mirror_classes"][
         "repository_preservation_zenodo"
     ]
-    assert "large binary" in index["limitations"][-1]
+    trusted = index["latest_trusted_release"]
+    assert trusted["status"] == "published_and_publicly_restored"
+    annexes = trusted["external_binary_annexes"]
+    assert annexes["evidence"]["doi"] == "10.5281/zenodo.21753937"
+    assert annexes["evidence"]["public_cold_restore"] == "passed"
+    assert annexes["nft"]["doi"] == "10.5281/zenodo.21754229"
+    assert annexes["nft"]["public_cold_restore"] == "passed"
+    assert not any("remain pending" in item.lower() for item in index["limitations"])
+    assert any(
+        "together preserve the current Git-tracked repository and every custom asset"
+        in item
+        for item in index["limitations"]
+    )
