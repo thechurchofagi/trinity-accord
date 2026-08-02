@@ -1,40 +1,56 @@
 {
-  "schema": "trinityaccord.agent-gateway-production-profile.v1",
-  "version": "1.0.0",
-  "status": "recommended_production_profile",
-  "recommended_backend": "github_app_backend",
-  "runtime_options": [
-    "node_express_server",
-    "vercel_function",
-    "netlify_function",
-    "self_hosted_server"
-  ],
-  "not_recommended_for_production": [
-    "personal_pat",
-    "anonymous_repository_dispatch",
-    "public_unauthenticated_github_api_write",
-    "hardcoded_token_in_repository",
-    "cloudflare_worker_transitional_example_archived"
-  ],
-  "github_app_permissions": {
-    "repository_permissions": {
-      "metadata": "read",
-      "issues": "write"
+  "schema": "trinityaccord.gateway-v1-production-profile-archive.v1",
+  "version": "1.1.0",
+  "status": "historical_archive_only",
+  "do_not_use_for_new_public_submissions": true,
+  "replacement": "/api/record-chain-intake-gateway.v1.json",
+  "retired_runtime": "trinity-agent-issue-gateway",
+  "retired_backend": "github_app_backend",
+  "retirement_reason": "The Issue-writing Gateway v1 was superseded by the protected Record-Chain Intake Gateway. This file is retained only to document the former production profile and must not be interpreted as a current recommendation.",
+  "historical_profile": {
+    "former_status": "recommended_production_profile",
+    "former_recommended_backend": "github_app_backend",
+    "runtime_options": [
+      "node_express_server",
+      "vercel_function",
+      "netlify_function",
+      "self_hosted_server"
+    ],
+    "not_recommended_for_production": [
+      "personal_pat",
+      "anonymous_repository_dispatch",
+      "public_unauthenticated_github_api_write",
+      "hardcoded_token_in_repository",
+      "cloudflare_worker_transitional_example_archived"
+    ],
+    "github_app_permissions": {
+      "repository_permissions": {
+        "metadata": "read",
+        "issues": "write"
+      },
+      "account_permissions": {},
+      "webhook_required": false
     },
-    "account_permissions": {},
-    "webhook_required": false
+    "former_required_backend_secrets": [
+      "GITHUB_APP_ID",
+      "GITHUB_INSTALLATION_ID",
+      "GITHUB_PRIVATE_KEY",
+      "GITHUB_REPO"
+    ],
+    "former_issue_labels": [
+      "agent-gateway-intake",
+      "needs-triage"
+    ]
   },
-  "required_backend_secrets": [
-    "GITHUB_APP_ID",
-    "GITHUB_INSTALLATION_ID",
-    "GITHUB_PRIVATE_KEY",
-    "GITHUB_REPO"
-  ],
-  "issue_labels": [
-    "agent-gateway-intake",
-    "needs-triage"
-  ],
-  "security_requirements": [
+  "current_public_submission": {
+    "contract": "/api/record-chain-intake-gateway.v1.json",
+    "builder": "/downloads/record-chain-builder.mjs",
+    "preflight": "https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+    "submit": "https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+    "external_agents_do_not_need_github": true,
+    "external_agents_must_not_open_github_issues_for_submission": true
+  },
+  "security_requirements_preserved_as_history": [
     "validate_payload_schema",
     "require_boundary_acknowledgement",
     "reject_secret_patterns",
@@ -51,6 +67,7 @@
     "gateway_is_not_verification": true,
     "gateway_does_not_raise_verification_level": true,
     "gateway_does_not_bypass_claim_gate": true,
-    "gateway_does_not_bypass_validator": true
+    "gateway_does_not_bypass_validator": true,
+    "bitcoin_originals_prevail": true
   }
 }
