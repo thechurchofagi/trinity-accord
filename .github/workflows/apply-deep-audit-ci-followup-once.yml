@@ -1,0 +1,47 @@
+name: Apply Deep Audit CI Follow-up Once
+
+on:
+  push:
+    branches:
+      - agent/deep-audit-protection-fail-closed-20260802
+    paths:
+      - ".github/workflows/apply-deep-audit-ci-followup-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: agent/deep-audit-protection-fail-closed-20260802
+          fetch-depth: 0
+
+      - name: Apply deterministic reviewed follow-up
+        run: |
+          set -euo pipefail
+          python3 scripts/apply_deep_audit_ci_followup_once.py
+          python3 -m py_compile tests/test_render_protected_health_deploy.py
+
+      - name: Remove one-time patch machinery
+        run: |
+          rm -f scripts/apply_deep_audit_ci_followup_once.py
+          rm -f .github/workflows/apply-deep-audit-ci-followup-once.yml
+
+      - name: Commit reviewed follow-up
+        run: |
+          set -euo pipefail
+          git config user.name "trinity-deep-audit-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No follow-up changes were produced."
+            exit 1
+          fi
+          git commit -m "test: align protection hardening contracts"
+          git push origin HEAD:agent/deep-audit-protection-fail-closed-20260802
