@@ -11,59 +11,64 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
-      - name: Inspect public Zenodo V3 annex metadata
+      - name: Checkout current main validation code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Replay public Evidence V3 metadata validation
         run: |
           set -euo pipefail
           python3 - <<'PY'
           import json
-          import urllib.parse
+          import sys
           import urllib.request
+          from pathlib import Path
 
-          queries = [
-              'metadata.title:"Trinity Accord External Evidence Binary Annex"',
-              'metadata.version:"external-evidence-annex-v3"',
-              'metadata.title:"Trinity Accord Chronicle NFT Media Binary Annex"',
-              'metadata.version:"chronicle-nft-media-annex-v3"',
-          ]
+          sys.path.insert(0, str(Path.cwd() / "scripts"))
+          import publish_external_binary_annexes_to_zenodo_v2 as publisher
+
+          record_id = 21753254
           headers = {
               "Accept": "application/json",
-              "User-Agent": "trinity-public-zenodo-diagnosis/1.0",
+              "User-Agent": "trinity-public-metadata-replay/1.0",
           }
-          for query in queries:
-              url = "https://zenodo.org/api/records?" + urllib.parse.urlencode(
-                  {"q": query, "size": 20, "sort": "mostrecent"}
-              )
-              request = urllib.request.Request(url, headers=headers)
-              with urllib.request.urlopen(request, timeout=120) as response:
-                  value = json.loads(response.read().decode("utf-8"))
-              hits = (value.get("hits") or {}).get("hits") if isinstance(value, dict) else None
-              if not isinstance(hits, list):
-                  hits = []
-              print("ZENODO_QUERY " + json.dumps({
-                  "query": query,
-                  "hit_count": len(hits),
-              }, sort_keys=True))
-              for record in hits:
-                  metadata = record.get("metadata") if isinstance(record, dict) else None
-                  if not isinstance(metadata, dict):
-                      metadata = {}
-                  print("ZENODO_RECORD " + json.dumps({
-                      "id": record.get("id"),
-                      "created": record.get("created"),
-                      "updated": record.get("updated"),
-                      "pids": record.get("pids"),
-                      "parent": record.get("parent"),
-                      "access": record.get("access"),
-                      "title": metadata.get("title"),
-                      "version": metadata.get("version"),
-                      "publication_date": metadata.get("publication_date"),
-                      "license": metadata.get("license"),
-                      "rights": metadata.get("rights"),
-                      "creators": metadata.get("creators"),
-                      "related_identifiers": metadata.get("related_identifiers"),
-                      "notes": metadata.get("notes"),
-                      "files": record.get("files"),
-                  }, ensure_ascii=False, sort_keys=True))
+          with urllib.request.urlopen(
+              urllib.request.Request(
+                  f"https://zenodo.org/api/records/{record_id}", headers=headers
+              ),
+              timeout=120,
+          ) as response:
+              record = json.loads(response.read().decode("utf-8"))
+          with urllib.request.urlopen(
+              urllib.request.Request(
+                  f"https://zenodo.org/api/records/{record_id}/files/zenodo-metadata.json/content",
+                  headers=headers,
+              ),
+              timeout=120,
+          ) as response:
+              expected = json.loads(response.read().decode("utf-8"))
+
+          observed = record.get("metadata") or {}
+          print("DIRECT_RECORD " + json.dumps(record, ensure_ascii=False, sort_keys=True))
+          print("EXPECTED_METADATA " + json.dumps(expected, ensure_ascii=False, sort_keys=True))
+          print("LICENSE_REPLAY " + json.dumps({
+              "expected_license": expected.get("license"),
+              "observed_license": observed.get("license"),
+              "observed_rights": observed.get("rights"),
+              "record_license": record.get("license"),
+              "record_rights": record.get("rights"),
+              "license_ids_from_metadata": sorted(publisher._license_ids(observed)),
+              "access_right": observed.get("access_right"),
+              "record_access_right": record.get("access_right"),
+              "record_access": record.get("access"),
+          }, ensure_ascii=False, sort_keys=True))
+          try:
+              publisher.validate_public_metadata(record, expected)
+          except SystemExit as exc:
+              print("VALIDATION_RESULT failure=" + str(exc))
+          else:
+              print("VALIDATION_RESULT passed")
           PY
