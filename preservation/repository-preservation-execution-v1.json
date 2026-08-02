@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.repository-preservation-execution.v1",
+  "status": "execute_once",
+  "authorized_by": "thechurchofagi",
+  "target_branch": "main",
+  "source_policy": "Build only from protected main after current repository integrity succeeds.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "external_annex_dois": {
+    "evidence": "10.5281/zenodo.21753937",
+    "nft": "10.5281/zenodo.21754229"
+  },
+  "rights_boundary_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "expected_pull_request_title": "archive: execute repository preservation refresh",
+  "expected_pull_request_head": "agent/execute-repository-preservation-refresh-20260802",
+  "merge_into_main": false,
+  "non_amending_boundary": true
+}
