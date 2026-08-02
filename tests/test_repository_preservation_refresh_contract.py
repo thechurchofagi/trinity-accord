@@ -12,6 +12,7 @@ CATALOG = ROOT / "preservation/recovery-catalog.json"
 STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 OBSERVATION = ROOT / "preservation/repository-preservation-observation.json"
 WORKFLOW = ROOT / ".github/workflows/repository-preservation-refresh.yml"
+CONTROLLER = ROOT / ".github/workflows/repository-preservation-capsule.yml"
 SCRIPT = ROOT / "scripts/repository_preservation_refresh.py"
 
 
@@ -60,7 +61,9 @@ def test_refresh_authorization_is_exact_and_non_amending():
 
 def test_refresh_workflow_uses_one_exact_source_baseline_and_public_proofs():
     text = WORKFLOW.read_text(encoding="utf-8")
+    assert "workflow_call:" in text
     assert "group: main-write-lock" in text
+    assert "queue: max" in text
     assert "repository-preservation-refresh-authorization.json" in text
     assert "archive: prepare repository preservation refresh v2" in text
     assert "--commit \"${{ steps.prepare.outputs.source_sha }}\"" in text
@@ -72,6 +75,18 @@ def test_refresh_workflow_uses_one_exact_source_baseline_and_public_proofs():
     assert "archive: record refreshed repository preservation DOI" in text
     assert "PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" in text
     assert "ZENODO_ACCESS_TOKEN" in text
+
+
+def test_existing_preservation_controller_calls_refresh_on_main_push():
+    text = CONTROLLER.read_text(encoding="utf-8")
+    assert "push:" in text
+    assert "refresh-published-recovery:" in text
+    assert "if: github.event_name == 'push'" in text
+    assert "uses: ./.github/workflows/repository-preservation-refresh.yml" in text
+    assert "contents: write" in text
+    assert "secrets: inherit" in text
+    assert "if: github.event_name != 'push'" in text
+    assert "cancel-in-progress: false" in text
 
 
 def test_current_state_never_claims_live_main_equivalence():
