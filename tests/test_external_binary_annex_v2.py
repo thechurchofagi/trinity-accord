@@ -221,7 +221,8 @@ def test_one_time_publication_workflow_is_source_bound_or_already_retired():
         assert "refs/remotes/origin/main" in workflow
         assert "seal_external_binary_annex_publication.py" in workflow
         assert "steps.precheck.outputs.required == 'false'" in workflow
-        assert "git rm .github/workflows/external-binary-annex-publication.yml" in workflow
+        assert ".github/workflows/external-binary-annex-publication.yml" in workflow
+        assert 'git rm "$path"' in workflow
     else:
         assert state["publication_status"] == publication_precheck.COMPLETE
         assert state["release_asset_pagination_complete"] is True
