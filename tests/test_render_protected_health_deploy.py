@@ -166,7 +166,8 @@ def test_all_permanent_deployment_paths_use_protected_gateway_wrapper() -> None:
     assert '_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})' in secure
     assert "healthCheckPath: /healthz" in render
     assert "TRINITY_ENFORCE_PROTECTION_LAYER" in render
-    assert module.base.EXPECTED_GATEWAY_HEALTH_CHECK_PATH == "/healthz"
+    base_helper = (ROOT / "scripts/render_manual_deploy.py").read_text(encoding="utf-8")
+    assert 'EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/healthz"' in base_helper
     assert "workflow_dispatch:" in manual
     assert "python scripts/render_protected_deploy.py" in manual
     assert "python3 scripts/render_protected_deploy.py" in pages
