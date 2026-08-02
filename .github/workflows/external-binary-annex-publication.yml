@@ -42,7 +42,7 @@ jobs:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
 
     steps:
-      - name: Checkout the exact triggering source
+      - name: Checkout exact triggering source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
@@ -56,9 +56,8 @@ jobs:
           echo "source-and-authorization-precheck-v3" > "$RUNNER_TEMP/annex-publication-stage.txt"
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           test "$TRINITY_PUBLICATION_SOURCE_SHA" = "$GITHUB_SHA"
-          git fetch --no-tags --prune origin \
-            +refs/heads/main:refs/remotes/origin/main
-          git show refs/remotes/origin/main:preservation/external-binary-annex-state.json \
+          git fetch origin main --prune
+          git show origin/main:preservation/external-binary-annex-state.json \
             > "$RUNNER_TEMP/current-main-external-annex-state.json"
           python3 scripts/external_annex_publication_precheck.py \
             --current-state "$RUNNER_TEMP/current-main-external-annex-state.json" \
@@ -73,7 +72,7 @@ jobs:
         if: steps.precheck.outputs.required == 'false'
         run: |
           set -euo pipefail
-          git checkout --detach refs/remotes/origin/main
+          git checkout --detach origin/main
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for path in \
@@ -88,7 +87,15 @@ jobs:
             exit 0
           fi
           git commit -m "chore: retire completed annex publication entrypoint"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          exit 1
 
       - name: Set up Python
         if: steps.precheck.outputs.required == 'true'
@@ -222,9 +229,8 @@ jobs:
         run: |
           set -euo pipefail
           echo "commit-published-annex-v3-state" > "$RUNNER_TEMP/annex-publication-stage.txt"
-          git fetch --no-tags --prune origin \
-            +refs/heads/main:refs/remotes/origin/main
-          git checkout --detach refs/remotes/origin/main
+          git fetch origin main --prune
+          git checkout --detach origin/main
           cp "$RUNNER_TEMP/final-external-binary-annex-state.json" \
             preservation/external-binary-annex-state.json
           cp "$RUNNER_TEMP/final-external-binary-annex-observation.json" \
@@ -253,9 +259,8 @@ jobs:
             if git push origin HEAD:main; then
               exit 0
             fi
-            git fetch --no-tags --prune origin \
-              +refs/heads/main:refs/remotes/origin/main
-            git rebase refs/remotes/origin/main
+            git fetch origin main --prune
+            git rebase origin/main
             cp "$RUNNER_TEMP/final-external-binary-annex-state.json" \
               preservation/external-binary-annex-state.json
             cp "$RUNNER_TEMP/final-external-binary-annex-observation.json" \
@@ -279,16 +284,15 @@ jobs:
         if: failure() && steps.precheck.outputs.required == 'true'
         run: |
           set -euo pipefail
-          git fetch --no-tags --prune origin \
-            +refs/heads/main:refs/remotes/origin/main
-          git show refs/remotes/origin/main:preservation/external-binary-annex-state.json \
+          git fetch origin main --prune
+          git show origin/main:preservation/external-binary-annex-state.json \
             > "$RUNNER_TEMP/latest-main-external-annex-state.json"
           if python3 scripts/external_annex_publication_precheck.py \
             --current-state "$RUNNER_TEMP/latest-main-external-annex-state.json" \
             --complete-only; then
             exit 0
           fi
-          git checkout --detach refs/remotes/origin/main
+          git checkout --detach origin/main
           python3 - <<'PY'
           import json
           import os
@@ -327,9 +331,8 @@ jobs:
             if git push origin HEAD:main; then
               exit 0
             fi
-            git fetch --no-tags --prune origin \
-              +refs/heads/main:refs/remotes/origin/main
-            git rebase refs/remotes/origin/main
+            git fetch origin main --prune
+            git rebase origin/main
             sleep $((attempt * 5))
           done
           exit 1
