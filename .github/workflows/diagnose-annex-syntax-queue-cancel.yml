@@ -1,0 +1,25 @@
+name: Diagnose Annex Syntax Queue Cancel
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/diagnose-annex-syntax-queue-cancel.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: diagnose-annex-syntax-queue-cancel
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: >-
+      (
+        github.event_name == 'pull_request'
+      )
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - run: echo DIAG_QUEUE_CANCEL_OK
