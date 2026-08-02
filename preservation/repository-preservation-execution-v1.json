@@ -1,9 +1,11 @@
 {
   "schema": "trinityaccord.repository-preservation-execution.v1",
   "status": "execute_once",
+  "execution_attempt": 4,
   "authorized_by": "thechurchofagi",
   "target_branch": "main",
   "source_policy": "Build only from protected main after current repository integrity succeeds.",
+  "required_main_commit": "e82e7aa8336890af065191334e3c05ccd9c1e0cf",
   "core_concept_doi": "10.5281/zenodo.21739343",
   "external_annex_dois": {
     "evidence": "10.5281/zenodo.21753937",
