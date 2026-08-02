@@ -9,17 +9,16 @@ from apps.record_chain_intake_gateway.gateway import rate_limit
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_render_healthcheck_exists_only_on_secure_entrypoint() -> None:
+def test_render_healthcheck_is_intercepted_by_secure_entrypoint() -> None:
     secure = (ROOT / "apps/record_chain_intake_gateway/secure_entrypoint.py").read_text(
         encoding="utf-8"
     )
-    core = (ROOT / "apps/record_chain_intake_gateway/app.py").read_text(encoding="utf-8")
     render = (ROOT / "render.yaml").read_text(encoding="utf-8")
 
-    assert 'scope.get("path") == "/readyz"' in secure
+    assert '_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})' in secure
     assert "class ProtectedProductionApp" in secure
-    assert "/readyz" not in core
-    assert "healthCheckPath: /readyz" in render
+    assert "scope.get(\"path\") in _PROTECTED_HEALTH_PATHS" in secure
+    assert "healthCheckPath: /healthz" in render
     assert (
         "startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app"
         in render

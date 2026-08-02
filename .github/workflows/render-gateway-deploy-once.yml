@@ -1,7 +1,7 @@
 name: One-Time Protected Render Gateway Deploy
 
 # Temporary, self-path-limited deployment bridge. It runs only when this exact
-# workflow file is first merged to main and must be removed after LIVE evidence.
+# workflow file is changed on main and must be removed after LIVE evidence.
 on:
   push:
     branches:
@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Deploy exact main commit and reconcile protected health configuration
+      - name: Deploy exact main commit through protected health routes
         id: deploy
         continue-on-error: true
         env:
@@ -50,20 +50,18 @@ jobs:
           source_sha="$(git rev-parse HEAD)"
           printf 'source_sha=%s\n' "$source_sha" >> "$GITHUB_OUTPUT"
           : > "$RUNNER_TEMP/render-gateway-deploy.log"
-          python scripts/reconcile_render_health_path.py 2>&1 \
-            | tee -a "$RUNNER_TEMP/render-gateway-deploy.log"
-          python scripts/render_manual_deploy.py \
+          python scripts/render_protected_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$source_sha" \
             --wait \
             --deploy \
-            --reconcile-config 2>&1 | tee -a "$RUNNER_TEMP/render-gateway-deploy.log"
-          grep -q "RENDER_HEALTH_PATH_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
+            --reconcile-config 2>&1 | tee "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "RENDER_CONFIG_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
-          grep -q "health_check_path=/readyz" "$RUNNER_TEMP/render-gateway-deploy.log"
+          grep -q "health_check_path=/healthz" "$RUNNER_TEMP/render-gateway-deploy.log"
+          grep -q "auxiliary_ready_path=/readyz" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "RENDER_DEPLOY_LIVE" "$RUNNER_TEMP/render-gateway-deploy.log"
           grep -q "GATEWAY_PROTECTION_ATTESTED" "$RUNNER_TEMP/render-gateway-deploy.log"
-          grep -E "^(RENDER_HEALTH_PATH_ATTESTED|RENDER_CONFIG_ATTESTED|RENDER_DEPLOY_LIVE|GATEWAY_PROTECTION_ATTESTED)" \
+          grep -E "^(RENDER_CONFIG_ATTESTED|RENDER_DEPLOY_LIVE|GATEWAY_PROTECTION_ATTESTED)" \
             "$RUNNER_TEMP/render-gateway-deploy.log" > "$RUNNER_TEMP/render-gateway-evidence.txt"
 
       - name: Publish successful deployment evidence
@@ -89,7 +87,7 @@ jobs:
           $evidence
           \`\`\`
 
-          The workflow reconciled and read back the secure start command, \`healthCheckPath=/readyz\`, and runtime \`1.2.1-protected\`; waited for the exact commit to become Render LIVE; then verified protected \`/readyz\`, detailed readiness, and an oversized preflight rejection without submitting a record.
+          The workflow read back the secure start command, the existing Render \`healthCheckPath=/healthz\`, and runtime \`1.2.1-protected\`; waited for the exact commit to become Render LIVE; then verified that both \`/healthz\` and \`/readyz\` attest the protected entrypoint, detailed readiness is submit-ready, and an oversized preflight is rejected without submitting a record.
           EOF
           sed -i 's/^          //' "$body_file"
           gh pr comment 887 --repo "$GITHUB_REPOSITORY" --body-file "$body_file"
