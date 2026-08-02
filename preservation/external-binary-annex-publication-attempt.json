@@ -1,11 +1,11 @@
 {
-  "schema": "trinityaccord.external-binary-annex-publication-attempt.v3",
+  "schema": "trinityaccord.external-binary-annex-publication-attempt.v4",
   "status": "failed",
-  "stage": "zenodo-publish-or-reconcile-v3",
-  "workflow_run_id": "30727421876",
+  "stage": "zenodo-publish-or-reconcile-v4",
+  "workflow_run_id": "30730549556",
   "workflow_run_attempt": "1",
-  "source_commit_sha": "b1b139ecc83e061b0922e2c1732ebd32937a561c",
+  "source_commit_sha": "8942c1c3bf52a09b038eccf8f5cf9377f0732244",
   "actor": "thechurchofagi",
-  "failed_at": "2026-08-02T01:40:58.542225Z",
+  "failed_at": "2026-08-02T03:27:43.202389Z",
   "zenodo_publication_may_require_idempotent_reconciliation": true
 }
