@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  oath-read:
+  verification-contract-read:
     if: github.event_name == 'pull_request' && github.head_ref == 'ops/formal-preservation-verification-20260802'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -33,12 +33,13 @@ jobs:
           test "$(wc -c < record-chain-builder.mjs | tr -d ' ')" = "195854"
           echo "6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378  record-chain-builder.mjs" | sha256sum -c -
 
-      - name: Standalone formal Verification oath read
+      - name: Read exact Verification field contract
         shell: bash
         run: |
           set -euo pipefail
-          node record-chain-builder.mjs print-oath --record-type verification > oath.txt
-          echo "OATH_SHA256=$(sha256sum oath.txt | awk '{print $1}')"
-          echo "===== BEGIN COMPLETE VERIFICATION OATH ====="
-          cat oath.txt
-          echo "===== END COMPLETE VERIFICATION OATH ====="
+          echo "===== BEGIN VERIFICATION EXPLAIN FIELDS ====="
+          node record-chain-builder.mjs explain-fields --record-type verification
+          echo "===== END VERIFICATION EXPLAIN FIELDS ====="
+          echo "===== BEGIN VERIFICATION HELP ====="
+          node record-chain-builder.mjs verification --help
+          echo "===== END VERIFICATION HELP ====="
