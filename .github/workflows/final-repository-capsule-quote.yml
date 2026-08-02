@@ -1,4 +1,4 @@
-name: Final Repository Capsule Balance Report
+name: Full Versus Shallow Capsule Diagnosis
 
 on:
   pull_request:
@@ -11,193 +11,153 @@ permissions:
   contents: read
 
 concurrency:
-  group: final-repository-capsule-balance-report-20260802
+  group: full-versus-shallow-capsule-diagnosis-20260802
   cancel-in-progress: false
 
 jobs:
-  exact-quote-and-balance:
+  compare-clone-depths:
     if: github.head_ref == 'ops/final-repository-capsule-quote-20260802'
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       FROZEN_COMMIT: 64760a8da3b154da3fb438d3086f79c9818656bb
-      EXPECTED_PACKAGE_IDENTITY: e7880ef2aba832946faba065d9a01052d1a6ed923d61f103bcb7aa9b7fb3e079
-      EXPECTED_TRANSPORT_SHA256: 87fa27191bbe2bcabb6f0e7b69cd36a34f432ffd7937154367541dad6ad7bb80
-      EXPECTED_TRANSPORT_BYTES: '36362240'
-      CONFIGURED_CAP_WINSTON: '300000000000'
-      MINIMUM_RESERVE_WINSTON: '250000000000'
-      ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
     steps:
-      - name: Checkout exact frozen commit
+      - name: Checkout full exact repository history
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: 64760a8da3b154da3fb438d3086f79c9818656bb
-          fetch-depth: 1
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
 
-      - name: Set up Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Install locked dependencies and require clean exact source
+      - name: Require exact full source and build
         shell: bash
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${FROZEN_COMMIT}"
           test -z "$(git status --porcelain)"
-          npm ci
-
-      - name: Rebuild and verify the exact known capsule transport
-        shell: bash
-        run: |
-          set -euo pipefail
           python3 scripts/build_preservation_capsule.py \
             --repository-root . \
             --commit "${FROZEN_COMMIT}" \
-            --output-dir "$RUNNER_TEMP/capsule"
-          python3 - <<'PY'
-          import hashlib
-          import json
-          import sys
-          import tarfile
-          from pathlib import Path
+            --output-dir "$RUNNER_TEMP/capsule-full"
 
-          sys.path.insert(0, 'scripts')
-          from preservation_capsule import verify_local_package
-
-          source = Path('${{ runner.temp }}/capsule')
-          verified = verify_local_package(source)
-          expected_identity = '${{ env.EXPECTED_PACKAGE_IDENTITY }}'
-          if verified['package_identity_sha256'] != expected_identity:
-              raise SystemExit(
-                  f"package identity mismatch: {verified['package_identity_sha256']} != {expected_identity}"
-              )
-
-          output = Path('${{ runner.temp }}/trinity-accord-repository-capsule-64760a8da3b1.tar')
-          with tarfile.open(output, 'w', format=tarfile.GNU_FORMAT) as archive:
-              for path in sorted(source.iterdir(), key=lambda item: item.name):
-                  if not path.is_file():
-                      continue
-                  info = archive.gettarinfo(str(path), arcname=path.name)
-                  info.mtime = 0
-                  info.uid = 0
-                  info.gid = 0
-                  info.uname = ''
-                  info.gname = ''
-                  with path.open('rb') as handle:
-                      archive.addfile(info, handle)
-
-          raw = output.read_bytes()
-          digest = hashlib.sha256(raw).hexdigest()
-          expected_digest = '${{ env.EXPECTED_TRANSPORT_SHA256 }}'
-          expected_bytes = int('${{ env.EXPECTED_TRANSPORT_BYTES }}')
-          if digest != expected_digest:
-              raise SystemExit(f'transport digest mismatch: {digest} != {expected_digest}')
-          if len(raw) != expected_bytes:
-              raise SystemExit(f'transport size mismatch: {len(raw)} != {expected_bytes}')
-
-          result = {
-              'schema': 'trinityaccord.repository-capsule-exact-quote-input.v1',
-              'source_commit': '${{ env.FROZEN_COMMIT }}',
-              'capsule_id': verified['capsule_id'],
-              'git_tree_oid': verified['git_tree_oid'],
-              'recovery_commit_sha': verified['manifest']['git']['recovery_commit_sha'],
-              'tracked_file_count': verified['tracked_file_count'],
-              'package_identity_sha256': verified['package_identity_sha256'],
-              'transport_filename': output.name,
-              'transport_bytes': len(raw),
-              'transport_sha256': digest,
-          }
-          Path('${{ runner.temp }}/exact-quote-input.json').write_text(
-              json.dumps(result, indent=2, sort_keys=True) + '\n',
-              encoding='utf-8',
-          )
-          print(json.dumps(result, indent=2, sort_keys=True))
-          PY
-
-      - name: Read live network price and wallet balance without creating, signing, or posting a transaction
+      - name: Create a true depth-one clone of the same exact commit and build
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${ARKEY}"
-          cat > "$GITHUB_WORKSPACE/report-final-repository-capsule-balance.mjs" <<'JS'
-          import fs from 'node:fs';
-          import crypto from 'node:crypto';
-          import Arweave from 'arweave';
+          shallow="$RUNNER_TEMP/shallow-repository"
+          git init "$shallow"
+          git -C "$shallow" remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git -C "$shallow" fetch --depth=1 --no-tags origin "${FROZEN_COMMIT}"
+          git -C "$shallow" checkout --detach FETCH_HEAD
+          test "$(git -C "$shallow" rev-parse HEAD)" = "${FROZEN_COMMIT}"
+          test "$(git -C "$shallow" rev-parse --is-shallow-repository)" = "true"
+          cp scripts/build_preservation_capsule.py "$shallow/scripts/build_preservation_capsule.py"
+          cp scripts/preservation_capsule.py "$shallow/scripts/preservation_capsule.py"
+          python3 "$shallow/scripts/build_preservation_capsule.py" \
+            --repository-root "$shallow" \
+            --commit "${FROZEN_COMMIT}" \
+            --output-dir "$RUNNER_TEMP/capsule-shallow"
 
-          const rawKey = process.env.ARKEY.trim();
-          const jwk = rawKey.startsWith('{')
-            ? JSON.parse(rawKey)
-            : JSON.parse(Buffer.from(rawKey, 'base64').toString('utf8'));
-          const data = fs.readFileSync(process.env.TRANSPORT_PATH);
-          const arweave = Arweave.init({
-            host: 'arweave.net',
-            port: 443,
-            protocol: 'https',
-            timeout: 60000,
-            logging: false,
-          });
-          const address = await arweave.wallets.jwkToAddress(jwk);
-          const balance = BigInt(await arweave.wallets.getBalance(address));
-          const reward = BigInt(await arweave.transactions.getPrice(data.length));
-          const cap = BigInt(process.env.CONFIGURED_CAP_WINSTON);
-          const reserve = BigInt(process.env.MINIMUM_RESERVE_WINSTON);
-          const remaining = balance - reward;
+      - name: Emit exact per-file and structural differences
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import difflib
+          import hashlib
+          import json
+          from pathlib import Path
 
-          const toAr = (value) => {
-            const negative = value < 0n;
-            const absolute = negative ? -value : value;
-            const rendered = `${absolute / 1000000000000n}.${(absolute % 1000000000000n)
-              .toString().padStart(12, '0')}`;
-            return negative ? `-${rendered}` : rendered;
-          };
+          full = Path('${{ runner.temp }}/capsule-full')
+          shallow = Path('${{ runner.temp }}/capsule-shallow')
+          names = sorted(
+              {path.name for path in full.iterdir() if path.is_file()}
+              | {path.name for path in shallow.iterdir() if path.is_file()}
+          )
+          report = {
+              'schema': 'trinityaccord.full-versus-shallow-capsule-diagnosis.v1',
+              'source_commit': '${{ env.FROZEN_COMMIT }}',
+              'files': [],
+              'differing_files': [],
+          }
+          for name in names:
+              full_raw = (full / name).read_bytes() if (full / name).exists() else None
+              shallow_raw = (shallow / name).read_bytes() if (shallow / name).exists() else None
+              item = {
+                  'name': name,
+                  'full_bytes': len(full_raw) if full_raw is not None else None,
+                  'shallow_bytes': len(shallow_raw) if shallow_raw is not None else None,
+                  'full_sha256': hashlib.sha256(full_raw).hexdigest() if full_raw is not None else None,
+                  'shallow_sha256': hashlib.sha256(shallow_raw).hexdigest() if shallow_raw is not None else None,
+                  'byte_identical': full_raw == shallow_raw,
+              }
+              if full_raw != shallow_raw:
+                  report['differing_files'].append(name)
+                  if name.endswith('.json') and full_raw is not None and shallow_raw is not None:
+                      try:
+                          a = json.dumps(json.loads(full_raw), indent=2, sort_keys=True, ensure_ascii=False).splitlines()
+                          b = json.dumps(json.loads(shallow_raw), indent=2, sort_keys=True, ensure_ascii=False).splitlines()
+                          item['normalized_json_diff'] = list(
+                              difflib.unified_diff(a, b, fromfile=f'full/{name}', tofile=f'shallow/{name}', lineterm='')
+                          )[:500]
+                      except Exception as exc:
+                          item['json_diff_error'] = str(exc)
+                  elif name.endswith(('.txt', '.sha256', '.py')) and full_raw is not None and shallow_raw is not None:
+                      try:
+                          a = full_raw.decode('utf-8').splitlines()
+                          b = shallow_raw.decode('utf-8').splitlines()
+                          item['text_diff'] = list(
+                              difflib.unified_diff(a, b, fromfile=f'full/{name}', tofile=f'shallow/{name}', lineterm='')
+                          )[:500]
+                      except Exception as exc:
+                          item['text_diff_error'] = str(exc)
+              report['files'].append(item)
+          report['all_files_byte_identical'] = not report['differing_files']
+          Path('${{ runner.temp }}/full-versus-shallow-diff.json').write_text(
+              json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False))
+          PY
 
-          const report = {
-            schema: 'trinityaccord.repository-capsule-arweave-balance-report.v1',
-            observed_at: new Date().toISOString(),
-            payload_bytes: data.length,
-            payload_sha256: crypto.createHash('sha256').update(data).digest('hex'),
-            reward_winston: reward.toString(),
-            reward_ar: toAr(reward),
-            configured_cap_winston: cap.toString(),
-            configured_cap_ar: toAr(cap),
-            amount_above_cap_winston: (reward > cap ? reward - cap : 0n).toString(),
-            amount_above_cap_ar: toAr(reward > cap ? reward - cap : 0n),
-            within_configured_cap: reward <= cap,
-            wallet_address_sha256: crypto.createHash('sha256').update(address).digest('hex'),
-            balance_before_winston: balance.toString(),
-            balance_before_ar: toAr(balance),
-            estimated_remaining_winston: remaining.toString(),
-            estimated_remaining_ar: toAr(remaining),
-            minimum_reserve_winston: reserve.toString(),
-            minimum_reserve_ar: toAr(reserve),
-            reserve_satisfied_after_upload: remaining >= reserve,
-            network_price_method: 'arweave.transactions.getPrice(payload_bytes)',
-            transaction_object_created: false,
-            transaction_signed: false,
-            transaction_posted: false,
-            ar_spent: '0.000000000000',
-          };
-          fs.writeFileSync(process.env.REPORT_PATH, JSON.stringify(report, null, 2) + '\n');
-          console.log(JSON.stringify(report, null, 2));
-          JS
-          TRANSPORT_PATH="$RUNNER_TEMP/trinity-accord-repository-capsule-64760a8da3b1.tar" \
-          REPORT_PATH="$RUNNER_TEMP/arweave-balance-report.json" \
-          node "$GITHUB_WORKSPACE/report-final-repository-capsule-balance.mjs"
-          rm -f "$GITHUB_WORKSPACE/report-final-repository-capsule-balance.mjs"
+      - name: Compare semantic bundle identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          for side in full shallow; do
+            bundle="$RUNNER_TEMP/capsule-${side}/trinity-accord-recovery.bundle"
+            target="$RUNNER_TEMP/${side}.git"
+            git init --bare "$target" >/dev/null
+            git -C "$target" fetch "$bundle" refs/heads/main:refs/heads/main >/dev/null
+            git -C "$target" rev-parse refs/heads/main > "$RUNNER_TEMP/${side}-recovery-commit.txt"
+            git -C "$target" rev-parse 'refs/heads/main^{tree}' > "$RUNNER_TEMP/${side}-tree.txt"
+            git -C "$target" fsck --full > "$RUNNER_TEMP/${side}-fsck.txt"
+          done
+          diff -u "$RUNNER_TEMP/full-recovery-commit.txt" "$RUNNER_TEMP/shallow-recovery-commit.txt" || true
+          diff -u "$RUNNER_TEMP/full-tree.txt" "$RUNNER_TEMP/shallow-tree.txt" || true
 
-      - name: Upload no-spend quote and balance evidence
+      - name: Upload diagnostic evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: final-repository-capsule-balance-report
+          name: full-versus-shallow-capsule-diagnosis
           path: |
-            ${{ runner.temp }}/exact-quote-input.json
-            ${{ runner.temp }}/arweave-balance-report.json
-          retention-days: 90
-          if-no-files-found: error
+            ${{ runner.temp }}/capsule-full/
+            ${{ runner.temp }}/capsule-shallow/
+            ${{ runner.temp }}/full-versus-shallow-diff.json
+            ${{ runner.temp }}/*-recovery-commit.txt
+            ${{ runner.temp }}/*-tree.txt
+            ${{ runner.temp }}/*-fsck.txt
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Fail on clone-depth-dependent bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e '.all_files_byte_identical == true' "$RUNNER_TEMP/full-versus-shallow-diff.json" >/dev/null
