@@ -49,13 +49,13 @@ def test_refresh_authorization_is_exact_and_non_amending():
     assert auth["schema"] == (
         "trinityaccord.repository-preservation-refresh-authorization.v1"
     )
-    assert auth["sequence"] == 2
+    assert auth["sequence"] == 3
     assert auth["authorized_by"] == "thechurchofagi"
     assert auth["rights_boundary_acknowledgement"] == (
         "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
     )
     assert auth["publication_confirmation"] == (
-        "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2"
+        "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V3"
     )
     assert auth["live_main_equivalence_claimed"] is False
     assert auth["non_amending_boundary"] is True

@@ -1,138 +1,21 @@
 {
   "schema": "trinityaccord.repository-preservation-zenodo-state.v2",
-  "publication_status": "published_and_publicly_restored",
+  "publication_status": "semantic_refresh_authorized",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
-  "latest_capsule_id": "repository-5368fd1ecce2",
-  "latest_git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-  "latest_git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
-  "latest_record_id": 21755655,
-  "latest_doi": "10.5281/zenodo.21755655",
-  "latest_doi_url": "https://doi.org/10.5281/zenodo.21755655",
-  "concept_record_id": "21739343",
-  "concept_doi": "10.5281/zenodo.21739343",
-  "latest_package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
-  "versions": [
-    {
-      "capsule_id": "repository-5368fd1ecce2",
-      "deposition_id": 21755655,
-      "record_id": 21755655,
-      "doi": "10.5281/zenodo.21755655",
-      "doi_url": "https://doi.org/10.5281/zenodo.21755655",
-      "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-      "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
-      "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
-      "files": {
-        "trinity-accord-source.tar.gz": {
-          "bytes": 21702964,
-          "sha256": "17e1242eb1836097772b87a4488fb313df42fe8da29e7fec46e66be7a723f432",
-          "md5": "e4627b35ae8fbfd05a1ab24a6a1648de"
-        },
-        "trinity-accord-recovery.bundle": {
-          "bytes": 13509450,
-          "sha256": "ca5e41949a2b361d7fd11b773549f91c8fdd8640eb0e99068fbb4b181907c170",
-          "md5": "639f1b96e0575f4a9f821dee407a128e"
-        },
-        "tracked-files.json": {
-          "bytes": 1251456,
-          "sha256": "0cb58ea36eacfe3df80888cdaeb915e357677de612e096101640d7ad53976e32",
-          "md5": "5be0ae5f3744dbbc1da0f5c0e5425e01"
-        },
-        "preservation-manifest.json": {
-          "bytes": 10845,
-          "sha256": "cb7f04c26eec8cddc89592c168cf8e21cd1971a3bca56e5278353fac5002cb3b",
-          "md5": "18929509f865208b9e58e595d531d5ff"
-        },
-        "checksums.sha256": {
-          "bytes": 533,
-          "sha256": "bbd39bd527fe1b0bb45d7d56bc2dfe61af421de22d54e60cee8207b3ec43400b",
-          "md5": "30201e23abb6a5374b8f16bc816ecfc0"
-        },
-        "README.txt": {
-          "bytes": 1291,
-          "sha256": "a76ce5396f22029ad4b8f6da60ae4bba30bd7c05c441263e60a10f7bb7f0bcc0",
-          "md5": "e662ec54f3ab1355b7b7c3af9bd76e2b"
-        },
-        "restore-trinity-accord.py": {
-          "bytes": 23437,
-          "sha256": "516ea0c5ed072b312b4e4cbaff679d2544a62b49fa0085c5b2519427f7a3f8ff",
-          "md5": "2decedf1439412d7f3f58a96cced641a"
-        },
-        "zenodo-metadata.json": {
-          "bytes": 1903,
-          "sha256": "9e49e5d8c2116add9055e7e161005f9bf1cd0f85bac6bba2b6699d9f315a056a",
-          "md5": "85690fd6383510f3c100f72be0a9dfa3"
-        }
-      }
-    }
-  ],
-  "api_base": "https://zenodo.org/api",
-  "github_required_for_repository_recovery": false,
-  "external_large_binary_annex_embedded": false,
-  "source_baseline_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
   "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_verified_version": {
+    "doi": "10.5281/zenodo.21755655",
+    "record_id": 21755655,
+    "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b"
+  },
   "self_describing_recovery_catalog": "preservation/recovery-catalog.json",
   "external_binary_annexes": {
     "evidence": "10.5281/zenodo.21753937",
     "nft": "10.5281/zenodo.21754229"
   },
-  "public_download_verification": "passed",
-  "public_metadata_verification": "passed",
-  "public_cold_restore": "passed",
-  "public_cold_restore_report": {
-    "schema": "trinityaccord.repository-preservation-recovery-report.v1",
-    "result": "pass",
-    "repository_recovery_status": "full_current_git_tracked_tree",
-    "authority_level_recovery_status": "not_claimed",
-    "capsule_id": "repository-5368fd1ecce2",
-    "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
-    "source": "zenodo:21755655",
-    "source_git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-    "recovery_git_commit_sha": "50728238ada6d3fa3788d81f30ee2d605fe62527",
-    "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
-    "tracked_file_count": 4311,
-    "git_snapshot_bundle_verified": true,
-    "production_parent_history_embedded": false,
-    "production_tags_embedded": false,
-    "production_tag_identity_count": 23,
-    "git_ref_count_verified": 1,
-    "git_tag_count_verified": 0,
-    "source_snapshot_independently_verified": true,
-    "recovery_checkpoints_verified": 9,
-    "github_required": false,
-    "network_required_after_capsule_download": false,
-    "external_large_binary_annex_embedded": false,
-    "limitations": [
-      "The capsule restores every byte and executable mode in the current Git-tracked production tree.",
-      "Production parent history and tag objects are excluded from the public bundle to avoid republishing historical credentials; original commit and tag identities remain in the manifest.",
-      "Large external Release/Arweave/NFT payloads are referenced by verified manifests but are not embedded in this core repository capsule.",
-      "Repository recovery does not itself prove authority, attestation, governance, amendment, or successor reception."
-    ],
-    "boundary": {
-      "bitcoin_originals_prevail": true,
-      "recovery_does_not_amend_canonical_material": true,
-      "capsule_is_a_non_authoritative_mirror": true
-    }
-  },
-  "public_metadata_report": {
-    "schema": "trinityaccord.repository-preservation-public-metadata-report.v1",
-    "status": "passed",
-    "record_id": 21755655,
-    "doi": "10.5281/zenodo.21755655",
-    "concept_doi": "10.5281/zenodo.21739343",
-    "capsule_id": "repository-5368fd1ecce2",
-    "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-    "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
-    "public_file_set_verification": "passed",
-    "public_file_metadata_verification": "passed",
-    "public_rights_verification": "passed",
-    "observed_without_zenodo_credentials": true
-  },
-  "github_required_for_discovery": false,
   "live_main_equivalence_claimed": false,
-  "coverage_scope": "exact Git-tracked publication baseline named by latest_git_commit_sha",
-  "previous_verified_version": {
-    "doi": "10.5281/zenodo.21739344",
-    "record_id": 21739344,
-    "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e"
-  }
+  "github_required_for_discovery": false,
+  "github_required_for_repository_recovery": false,
+  "external_large_binary_annex_embedded": false,
+  "versions": []
 }

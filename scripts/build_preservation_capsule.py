@@ -562,8 +562,8 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         "description": (
             "A versioned, non-authoritative preservation capsule for the Trinity Accord "
             "public repository. It contains an exact source snapshot plus a cloneable Git "
-            "recovery bundle for the exact current production tree, allowing every current "
-            "Git-tracked byte to be restored without GitHub. Production parent history and "
+            "recovery bundle for the exact immutable publication-baseline tree, allowing every "
+            "Git-tracked byte in that baseline to be restored without GitHub. Production parent history and "
             "tag objects are deliberately excluded from the public bundle so historical "
             "credentials are not republished; their identities remain in the manifest. Large "
             "externally hosted evidence and NFT payloads remain hash-bound references and "
@@ -626,8 +626,9 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         "manifest, but historical parent and tag objects are not publicly embedded.\n\n"
         "Scope boundary\n"
         "--------------\n"
-        "This core capsule embeds every Git-tracked byte. Large external evidence and\n"
-        "NFT payload bytes are not duplicated here; their TXIDs, hashes, manifests, and\n"
+        "This core capsule embeds every Git-tracked byte in the declared publication\n"
+        "baseline. Large external evidence and NFT payload bytes are not duplicated\n"
+        "here; their TXIDs, hashes, manifests, and\n"
         "recovery tools are embedded in the repository. A separate mixed-rights binary\n"
         "annex requires explicit approval. No blanket reuse licence is granted.\n",
         encoding="utf-8",
@@ -658,7 +659,7 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "production_tag_identities": production_tags,
             "history_exclusion_reason": (
                 "An immutable public DOI must not republish historical credential-bearing "
-                "objects. The exact current tree is preserved through a synthetic root "
+                "objects. The exact declared publication-baseline tree is preserved through a synthetic root "
                 "recovery commit; original commit and tag identities remain metadata."
             ),
         },
@@ -682,7 +683,8 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
         "scope": {
             "git_tracked_repository_embedded": True,
             "main_history_and_tags_embedded": False,
-            "exact_current_production_tree_embedded": True,
+            "exact_publication_baseline_tree_embedded": True,
+            "live_main_equivalence_claimed": False,
             "cloneable_single_root_recovery_bundle_embedded": True,
             "production_commit_identity_recorded": True,
             "production_tag_identities_recorded": True,
@@ -691,6 +693,7 @@ def build(root: Path, output_dir: Path, commitish: str) -> Path:
             "network_required_after_capsule_download": False,
             "external_large_binary_annex_embedded": False,
             "zenodo_only_restores_complete_git_tracked_repository": True,
+            "coverage_scope": "exact_immutable_publication_baseline",
             "zenodo_only_restores_all_external_large_payload_bytes": False,
         },
         "rights_boundary": {

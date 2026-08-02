@@ -243,15 +243,19 @@ def verify_local_package(capsule_dir: Path) -> dict[str, Any]:
     scope = manifest.get("scope")
     if not isinstance(scope, dict):
         raise SystemExit("preservation capsule scope is missing")
+    baseline_tree = scope.get("exact_publication_baseline_tree_embedded")
+    legacy_current_tree = scope.get("exact_current_production_tree_embedded")
     if (
         scope.get("github_required_for_repository_recovery") is not False
         or scope.get("git_tracked_repository_embedded") is not True
         or scope.get("main_history_and_tags_embedded") is not False
-        or scope.get("exact_current_production_tree_embedded") is not True
+        or (baseline_tree is not True and legacy_current_tree is not True)
         or scope.get("cloneable_single_root_recovery_bundle_embedded") is not True
         or scope.get("external_large_binary_annex_embedded") is not False
     ):
         raise SystemExit("preservation capsule recovery scope is inconsistent")
+    if baseline_tree is True and scope.get("live_main_equivalence_claimed") is not False:
+        raise SystemExit("publication-baseline capsule overclaims live-main equivalence")
 
     metadata = strict_json(capsule_dir / "zenodo-metadata.json")
     if (

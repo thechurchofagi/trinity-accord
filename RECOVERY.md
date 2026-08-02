@@ -141,12 +141,14 @@ The Repository Preservation Capsule is the GitHub-independent bootstrap for the
 exact published Git-tracked repository baseline identified by its manifest. It is a separate Zenodo version series from the
 research paper DOI and the Weekly Continuity dataset.
 
-Check `preservation/zenodo-state.json` from any known copy or query Zenodo for the
-title `Trinity Accord Repository Preservation Capsule`. A published version contains:
+Use `preservation/repository-preservation-state-v2.json` as the current machine
+state and `preservation/recovery-catalog.json` as the stable DOI discovery entrypoint.
+The older `preservation/zenodo-state.json` is retained only as historical v1
+compatibility. A published version contains:
 
 - `trinity-accord-source.tar.gz` — exact source tree for the declared publication baseline;
 - `trinity-accord-recovery.bundle` — cloneable, single-root Git recovery snapshot for
-  the exact current production tree;
+  the exact declared publication-baseline tree;
 - `tracked-files.json` and `checksums.sha256` — SHA-256 inventory;
 - `preservation-manifest.json` — commit, tree, chain tip, checkpoints, scope, and rights;
 - `restore-trinity-accord.py` — standalone standard-library recovery program.

@@ -34,13 +34,13 @@ AUTH_SCHEMA = "trinityaccord.repository-preservation-refresh-authorization.v1"
 CATALOG_SCHEMA = "trinityaccord.repository-recovery-catalog.v1"
 STATE_SCHEMA = "trinityaccord.repository-preservation-zenodo-state.v2"
 EXPECTED_CONCEPT_DOI = "10.5281/zenodo.21739343"
-EXPECTED_PREVIOUS_DOI = "10.5281/zenodo.21739344"
+EXPECTED_PREVIOUS_DOI = "10.5281/zenodo.21755655"
 EXPECTED_ANNEX_DOIS = {
     "evidence": "10.5281/zenodo.21753937",
     "nft": "10.5281/zenodo.21754229",
 }
 EXPECTED_RIGHTS_ACK = "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
-EXPECTED_CONFIRMATION = "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V2"
+EXPECTED_CONFIRMATION = "PUBLISH_TRINITY_REPOSITORY_CAPSULE_REFRESH_V3"
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 DOI_RE = re.compile(r"^10\.5281/zenodo\.([0-9]+)$")
 
@@ -139,7 +139,7 @@ def validate_catalog() -> dict[str, Any]:
 
 def validate_authorization() -> dict[str, Any]:
     auth = strict_json(AUTH_PATH)
-    if auth.get("schema") != AUTH_SCHEMA or auth.get("sequence") != 2:
+    if auth.get("schema") != AUTH_SCHEMA or auth.get("sequence") != 3:
         raise SystemExit("unsupported repository preservation refresh authorization")
     if auth.get("authorized_by") != "thechurchofagi":
         raise SystemExit("repository preservation refresh is not owner-authorized")
@@ -220,8 +220,8 @@ def patch_annex_guide() -> None:
 def qualified_limitation() -> str:
     return (
         "The core repository capsule and the separately published evidence and Chronicle "
-        "NFT binary annex DOI records together preserve the current Git-tracked repository "
-        "and every custom asset for the declared published baseline commit; this does not "
+        "NFT binary annex DOI records together preserve the exact Git-tracked publication "
+        "baseline named by the core manifest and every custom asset; this does not "
         "assert byte equality with a later moving GitHub main."
     )
 
@@ -251,12 +251,12 @@ def prepare_index(base_commit: str) -> None:
     if not isinstance(repository, dict):
         raise SystemExit("recovery index repository preservation entry is invalid")
     repository["concept_doi"] = EXPECTED_CONCEPT_DOI
-    repository["coverage_status"] = "historical_snapshot_refresh_prepared"
+    repository["coverage_status"] = "publication_baseline_refresh_prepared"
     repository["live_main_equivalence_claimed"] = False
     repository["recovery_catalog"] = "preservation/recovery-catalog.json"
     index["publication_refresh"] = {
         "schema": AUTH_SCHEMA,
-        "sequence": 2,
+        "sequence": 3,
         "status": "prepared_for_new_core_version",
         "authorized_base_commit_sha": base_commit,
         "core_concept_doi": EXPECTED_CONCEPT_DOI,
@@ -311,7 +311,7 @@ def prepare(base_commit: str) -> None:
         PREPARED_PATH,
         {
             "schema": "trinityaccord.repository-preservation-refresh-prepared.v1",
-            "sequence": 2,
+            "sequence": 3,
             "status": "prepared",
             "base_commit_sha": base_commit,
             "core_concept_doi": EXPECTED_CONCEPT_DOI,
@@ -500,8 +500,8 @@ def seal(source_commit: str, recovery_report_path: Path, metadata_report_path: P
             ),
             "previous_verified_version": {
                 "doi": EXPECTED_PREVIOUS_DOI,
-                "record_id": 21739344,
-                "git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
+                "record_id": 21755655,
+                "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
             },
         }
     )
@@ -561,7 +561,7 @@ def seal(source_commit: str, recovery_report_path: Path, metadata_report_path: P
     }
     index["publication_refresh"] = {
         "schema": AUTH_SCHEMA,
-        "sequence": 2,
+        "sequence": 3,
         "status": "published_and_publicly_restored",
         "source_baseline_commit_sha": source_commit,
         "doi": state["latest_doi"],

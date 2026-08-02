@@ -6,9 +6,9 @@
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
-    "previous_verified_version_doi": "10.5281/zenodo.21739344",
+    "previous_verified_version_doi": "10.5281/zenodo.21755655",
     "restore_program_name": "restore-trinity-accord.py",
-    "coverage_rule": "Each version restores the exact Git-tracked publication baseline named in its manifest; it does not claim byte equality with a later moving GitHub main."
+    "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main."
   },
   "external_binary_annexes": {
     "evidence": {

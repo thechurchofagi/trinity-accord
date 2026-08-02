@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "e097542fd1194850",
+  "source_digest": "12eaeaca0a27f161",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -46,7 +46,7 @@
   ],
   "recovery_entrypoints": {
     "human_guide": "RECOVERY.md",
-    "repository_preservation_state": "preservation/zenodo-state.json",
+    "repository_preservation_state": "preservation/repository-preservation-state-v2.json",
     "repository_preservation_builder": "scripts/build_preservation_capsule.py",
     "repository_preservation_restore_cli": "scripts/restore_preservation_capsule.py",
     "repository_preservation_workflow": ".github/workflows/repository-preservation-capsule.yml",
@@ -61,7 +61,8 @@
     "claim_registry": "api/claim-registry.json",
     "external_binary_annex_observation": "preservation/external-binary-annex-observation.json",
     "repository_preservation_catalog": "preservation/recovery-catalog.json",
-    "repository_preservation_current_state": "preservation/repository-preservation-state-v2.json"
+    "repository_preservation_current_state": "preservation/repository-preservation-state-v2.json",
+    "repository_preservation_legacy_state": "preservation/zenodo-state.json"
   },
   "mirror_classes": {
     "github_main": "discovery_only_until_verified",
@@ -95,7 +96,7 @@
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
       "public_cold_restore": "passed",
-      "coverage_status": "exact_published_baseline",
+      "coverage_status": "exact_published_baseline_semantic_refresh_authorized",
       "live_main_equivalence_claimed": false,
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
@@ -142,12 +143,10 @@
   ],
   "publication_refresh": {
     "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
-    "sequence": 2,
-    "status": "published_and_publicly_restored",
-    "source_baseline_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-    "doi": "10.5281/zenodo.21755655",
-    "record_id": 21755655,
-    "concept_doi": "10.5281/zenodo.21739343",
+    "sequence": 3,
+    "status": "semantic_refresh_authorized",
+    "previous_verified_version_doi": "10.5281/zenodo.21755655",
+    "core_concept_doi": "10.5281/zenodo.21739343",
     "external_annex_dois": {
       "evidence": "10.5281/zenodo.21753937",
       "nft": "10.5281/zenodo.21754229"

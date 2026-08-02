@@ -207,6 +207,12 @@ def verify_capsule(capsule_dir: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     scope = manifest.get("scope")
     if not isinstance(scope, dict) or scope.get("github_required_for_repository_recovery") is not False:
         raise SystemExit("capsule does not declare GitHub-independent repository recovery")
+    baseline_tree = scope.get("exact_publication_baseline_tree_embedded")
+    legacy_current_tree = scope.get("exact_current_production_tree_embedded")
+    if baseline_tree is not True and legacy_current_tree is not True:
+        raise SystemExit("capsule does not declare an exact recoverable tree")
+    if baseline_tree is True and scope.get("live_main_equivalence_claimed") is not False:
+        raise SystemExit("publication-baseline capsule overclaims live-main equivalence")
     return manifest, tracked
 
 
@@ -468,7 +474,7 @@ def restore(capsule_dir: Path, output_dir: Path, source_label: str) -> dict[str,
         report = {
             "schema": "trinityaccord.repository-preservation-recovery-report.v1",
             "result": "pass",
-            "repository_recovery_status": "full_current_git_tracked_tree",
+            "repository_recovery_status": "full_exact_publication_baseline",
             "authority_level_recovery_status": "not_claimed",
             "capsule_id": manifest.get("capsule_id"),
             "package_identity_sha256": manifest.get("package_identity_sha256"),
@@ -491,7 +497,7 @@ def restore(capsule_dir: Path, output_dir: Path, source_label: str) -> dict[str,
             "network_required_after_capsule_download": False,
             "external_large_binary_annex_embedded": False,
             "limitations": [
-                "The capsule restores every byte and executable mode in the current Git-tracked production tree.",
+                "The capsule restores every byte and executable mode in the exact immutable Git-tracked publication baseline named by its manifest.",
                 "Production parent history and tag objects are excluded from the public bundle to avoid republishing historical credentials; original commit and tag identities remain in the manifest.",
                 "Large external Release/Arweave/NFT payloads are referenced by verified manifests but are not embedded in this core repository capsule.",
                 "Repository recovery does not itself prove authority, attestation, governance, amendment, or successor reception.",
@@ -500,6 +506,7 @@ def restore(capsule_dir: Path, output_dir: Path, source_label: str) -> dict[str,
                 "bitcoin_originals_prevail": True,
                 "recovery_does_not_amend_canonical_material": True,
                 "capsule_is_a_non_authoritative_mirror": True,
+                "live_main_equivalence_claimed": False,
             },
         }
         (partial / "recovery-report.json").write_text(

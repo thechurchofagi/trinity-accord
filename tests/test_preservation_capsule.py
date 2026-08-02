@@ -258,7 +258,12 @@ def test_published_state_records_verified_repository_doi_and_prior_snapshot():
 def test_recovery_index_routes_to_complete_repository_and_annex_recovery():
     index = json.loads((ROOT / "api/recovery-index.json").read_text())
     entrypoints = index["recovery_entrypoints"]
-    assert entrypoints["repository_preservation_state"] == "preservation/zenodo-state.json"
+    assert entrypoints["repository_preservation_state"] == (
+        "preservation/repository-preservation-state-v2.json"
+    )
+    assert entrypoints["repository_preservation_legacy_state"] == (
+        "preservation/zenodo-state.json"
+    )
     assert entrypoints["repository_preservation_restore_cli"].endswith(
         "restore_preservation_capsule.py"
     )
@@ -283,7 +288,7 @@ def test_recovery_index_routes_to_complete_repository_and_annex_recovery():
     assert annexes["nft"]["public_cold_restore"] == "passed"
     assert not any("remain pending" in item.lower() for item in index["limitations"])
     assert any(
-        "together preserve the current Git-tracked repository and every custom asset"
+        "preserve the exact Git-tracked publication baseline named by the core manifest"
         in item
         for item in index["limitations"]
     )
