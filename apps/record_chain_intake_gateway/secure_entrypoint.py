@@ -9,9 +9,12 @@ A dedicated ``TRINITY_COOLDOWN_SECRET`` is preferred. The already-required
 ``TRINITY_GITHUB_TOKEN`` is a fail-safe fallback so an existing production
 service fails closed rather than silently losing the cooldown during rollout.
 
-The production-only ``/readyz`` endpoint is registered by this module, not by
-the unprotected core app. Render therefore fails health checks if its start
-command ever drifts back to the core FastAPI application.
+Both ``/healthz`` and ``/readyz`` are intercepted by this production wrapper and
+run the same strict configuration/protection check. Render currently probes
+``/healthz``; ``/readyz`` remains the explicit machine-facing protected
+readiness route. The deployment helper separately reads back the secure Uvicorn
+start command, so an unprotected core-app command cannot be accepted as a valid
+production deployment.
 """
 from __future__ import annotations
 
@@ -28,6 +31,7 @@ from apps.record_chain_intake_gateway.gateway import runtime
 
 _MAX_BLOCKED_CLIENT_KEYS = 10_000
 _BLOCKED_CLIENT_TARGET = 8_000
+_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})
 
 
 def _server_cooldown_secret() -> bytes:
@@ -136,7 +140,7 @@ runtime.mark_protection_layer_active()
 
 
 class ProtectedProductionApp:
-    """ASGI wrapper exposing a readiness route that only this entrypoint owns."""
+    """ASGI wrapper exposing fail-closed production health/readiness routes."""
 
     def __init__(self, app: Any) -> None:
         self.app = app
@@ -178,7 +182,7 @@ class ProtectedProductionApp:
     async def __call__(self, scope, receive, send) -> None:
         if (
             scope.get("type") == "http"
-            and scope.get("path") == "/readyz"
+            and scope.get("path") in _PROTECTED_HEALTH_PATHS
             and str(scope.get("method") or "").upper() in {"GET", "HEAD"}
         ):
             status, payload = self._readiness_payload()
