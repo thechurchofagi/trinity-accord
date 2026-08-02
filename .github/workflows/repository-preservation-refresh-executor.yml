@@ -47,14 +47,14 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/executor-toolchain-provenance.json"
           cat "$RUNNER_TEMP/executor-toolchain-provenance.json"
 
-      - name: Execute exact-source repository preservation refresh
-        run: bash scripts/run_repository_preservation_refresh_ci.sh
+      - name: Execute final publication-baseline semantic refresh
+        run: bash scripts/run_repository_preservation_semantics_v3_ci.sh
 
       - name: Upload complete refresh proof
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: repository-preservation-refresh-proof-executor
+          name: repository-preservation-refresh-proof-executor-v3
           path: |
             ${{ runner.temp }}/local-restored-repository/recovery-report.json
             ${{ runner.temp }}/public-restored-repository/recovery-report.json
