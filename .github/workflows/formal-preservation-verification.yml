@@ -1,0 +1,44 @@
+name: Formal Preservation Verification
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/formal-preservation-verification.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  oath-read:
+    if: github.event_name == 'pull_request' && github.head_ref == 'ops/formal-preservation-verification-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.22.1
+
+      - name: Download and verify canonical Builder
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSLo record-chain-builder.mjs https://www.trinityaccord.org/downloads/record-chain-builder.mjs
+          test "$(wc -c < record-chain-builder.mjs | tr -d ' ')" = "195854"
+          echo "6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378  record-chain-builder.mjs" | sha256sum -c -
+
+      - name: Standalone formal Verification oath read
+        shell: bash
+        run: |
+          set -euo pipefail
+          node record-chain-builder.mjs print-oath --record-type verification > oath.txt
+          echo "OATH_SHA256=$(sha256sum oath.txt | awk '{print $1}')"
+          echo "===== BEGIN COMPLETE VERIFICATION OATH ====="
+          cat oath.txt
+          echo "===== END COMPLETE VERIFICATION OATH ====="
