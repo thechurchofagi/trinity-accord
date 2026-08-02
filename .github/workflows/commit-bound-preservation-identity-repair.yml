@@ -1,0 +1,109 @@
+name: Commit-Bound Preservation Identity Repair
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/commit-bound-preservation-identity-repair.yml
+      - scripts/build_preservation_capsule.py
+      - tests/test_preservation_capsule.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: commit-bound-preservation-identity-repair-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply-and-test:
+    if: github.head_ref == 'fix/commit-bound-preservation-identity-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout repair branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/commit-bound-preservation-identity-20260802
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Apply commit-bound identity repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/build_preservation_capsule.py')
+          text = path.read_text(encoding='utf-8')
+
+          old = '    production_tags = production_tag_identity_inventory(root)\n'
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one production-tags assignment, found {text.count(old)}')
+          text = text.replace(old, '')
+
+          old_bundle = '''        git_text(\n            bare,\n            "-c",\n            "pack.threads=1",\n            "-c",\n            "pack.useBitmaps=false",\n            "bundle",\n            "create",\n            str(bundle),\n            "--all",\n        )\n'''
+          new_bundle = '''        git_text(\n            bare,\n            "-c",\n            "pack.threads=1",\n            "-c",\n            "pack.useBitmaps=false",\n            "-c",\n            "pack.reuseDeltas=false",\n            "-c",\n            "pack.reuseObjects=false",\n            "bundle",\n            "create",\n            "--version=2",\n            str(bundle),\n            "refs/heads/main",\n        )\n'''
+          if text.count(old_bundle) != 1:
+              raise SystemExit(f'expected one deterministic bundle block, found {text.count(old_bundle)}')
+          text = text.replace(old_bundle, new_bundle)
+
+          old_manifest = '''            "production_tag_identity_count": len(production_tags),\n            "production_tag_identities": production_tags,\n'''
+          new_manifest = '''            "production_tag_identity_count": 0,\n            "production_tag_identities": [],\n            "production_tag_identity_policy": (\n                "Live Git tag refs are mutable outside the frozen source tree and are "\n                "therefore deliberately excluded from the commit-bound capsule identity."\n            ),\n'''
+          if text.count(old_manifest) != 1:
+              raise SystemExit(f'expected one tag manifest block, found {text.count(old_manifest)}')
+          text = text.replace(old_manifest, new_manifest)
+
+          text = text.replace(
+              '"tag objects are deliberately excluded from the public bundle so historical "\n            "credentials are not republished; their identities remain in the manifest. Large "',
+              '"tag objects and live tag refs are deliberately excluded from the public bundle "\n            "and package identity so historical credentials are not republished and later "\n            "mutable refs cannot alter a frozen capsule. Large "',
+          )
+          text = text.replace(
+              '"manifest, but historical parent and tag objects are not publicly embedded.\\n\\n"',
+              '"manifest, but historical parent objects, tag objects, and mutable live tag\\n"\n        "refs are not publicly embedded or included in the package identity.\\n\\n"',
+          )
+          text = text.replace(
+              '"objects. The exact declared publication-baseline tree is preserved through a synthetic root "\n                "recovery commit; original commit and tag identities remain metadata."',
+              '"objects. The exact declared publication-baseline tree is preserved through a synthetic root "\n                "recovery commit; mutable live tag refs are deliberately outside the commit-bound identity."',
+          )
+          path.write_text(text, encoding='utf-8')
+
+          tests = Path('tests/test_preservation_capsule.py')
+          test_text = tests.read_text(encoding='utf-8')
+          test_text = test_text.replace(
+              '    assert report["production_tag_identity_count"] == 1\n',
+              '    assert report["production_tag_identity_count"] == 0\n',
+          )
+          marker = 'def test_capsule_identity_is_independent_of_later_refs'
+          if marker not in test_text:
+              test_text += '''\n\ndef test_capsule_identity_is_independent_of_later_refs(tmp_path):\n    repo, frozen_commit = make_repository(tmp_path)\n    capsule_before = tmp_path / "capsule-before"\n    builder.build(repo, capsule_before, frozen_commit)\n\n    subprocess.run(["git", "switch", "-c", "later-unrelated-branch"], cwd=repo, check=True)\n    write(repo / "later-unrelated.txt", b"must not affect frozen capsule\\n")\n    subprocess.run(["git", "add", "later-unrelated.txt"], cwd=repo, check=True)\n    subprocess.run(\n        ["git", "commit", "-m", "later unrelated ref state"],\n        cwd=repo,\n        check=True,\n        capture_output=True,\n    )\n    subprocess.run(["git", "tag", "later-unrelated-tag"], cwd=repo, check=True)\n    subprocess.run(["git", "tag", "later-tag-on-frozen-commit", frozen_commit], cwd=repo, check=True)\n\n    capsule_after = tmp_path / "capsule-after"\n    builder.build(repo, capsule_after, frozen_commit)\n\n    verified_before = package.verify_local_package(capsule_before)\n    verified_after = package.verify_local_package(capsule_after)\n    assert verified_before["package_identity_sha256"] == verified_after["package_identity_sha256"]\n    assert verified_before["manifest"]["git"]["production_tag_identity_count"] == 0\n    assert verified_after["manifest"]["git"]["production_tag_identity_count"] == 0\n    for path_before in capsule_before.iterdir():\n        path_after = capsule_after / path_before.name\n        assert path_before.read_bytes() == path_after.read_bytes(), path_before.name\n'''
+          tests.write_text(test_text, encoding='utf-8')
+          PY
+
+      - name: Run focused preservation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m pytest tests/test_preservation_capsule.py -q
+
+      - name: Commit exact repair to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- scripts/build_preservation_capsule.py tests/test_preservation_capsule.py; then
+            echo 'Repair already applied.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/build_preservation_capsule.py tests/test_preservation_capsule.py
+          git commit -m 'fix: bind preservation capsule identity to frozen commit'
+          git push origin HEAD:fix/commit-bound-preservation-identity-20260802
