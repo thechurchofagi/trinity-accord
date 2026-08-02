@@ -1,0 +1,78 @@
+name: Deterministic Preservation Bundle Repair
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deterministic-preservation-bundle-repair.yml
+      - scripts/build_preservation_capsule.py
+      - tests/test_preservation_capsule.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deterministic-preservation-bundle-repair-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply-and-test:
+    if: github.head_ref == 'fix/deterministic-preservation-bundle-20260802'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repair branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/deterministic-preservation-bundle-20260802
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Apply exact deterministic-pack repair and regression test
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          builder = Path("scripts/build_preservation_capsule.py")
+          text = builder.read_text(encoding="utf-8")
+          old = '''        git_text(bare, "bundle", "create", str(bundle), "--all")\n'''
+          new = '''        # Git pack delta selection is parallel by default and can produce\n        # byte-distinct bundles for the same exact object graph.  The public\n        # preservation package identity includes the bundle bytes, so force a\n        # single deterministic pack worker and disable bitmap reuse.\n        git_text(\n            bare,\n            "-c",\n            "pack.threads=1",\n            "-c",\n            "pack.useBitmaps=false",\n            "bundle",\n            "create",\n            str(bundle),\n            "--all",\n        )\n'''
+          if text.count(old) != 1:
+              raise SystemExit(f"expected exactly one bundle-create target, found {text.count(old)}")
+          builder.write_text(text.replace(old, new), encoding="utf-8")
+
+          tests = Path("tests/test_preservation_capsule.py")
+          test_text = tests.read_text(encoding="utf-8")
+          marker = "def test_capsule_build_is_byte_reproducible"
+          if marker not in test_text:
+              test_text += '''\n\ndef test_capsule_build_is_byte_reproducible(tmp_path):\n    repo, commit = make_repository(tmp_path)\n    capsule_a = tmp_path / "capsule-a"\n    capsule_b = tmp_path / "capsule-b"\n    builder.build(repo, capsule_a, commit)\n    builder.build(repo, capsule_b, commit)\n\n    assert package.verify_local_package(capsule_a)["package_identity_sha256"] == (\n        package.verify_local_package(capsule_b)["package_identity_sha256"]\n    )\n    assert sorted(path.name for path in capsule_a.iterdir()) == sorted(\n        path.name for path in capsule_b.iterdir()\n    )\n    for path_a in capsule_a.iterdir():\n        path_b = capsule_b / path_a.name\n        assert path_a.read_bytes() == path_b.read_bytes(), path_a.name\n'''
+              tests.write_text(test_text, encoding="utf-8")
+          PY
+
+      - name: Run focused reproducibility and recovery tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m pytest tests/test_preservation_capsule.py -q
+
+      - name: Commit repair to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- scripts/build_preservation_capsule.py tests/test_preservation_capsule.py; then
+            echo "Repair already applied."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/build_preservation_capsule.py tests/test_preservation_capsule.py
+          git commit -m "fix: make preservation recovery bundle reproducible"
+          git push origin HEAD:fix/deterministic-preservation-bundle-20260802
