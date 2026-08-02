@@ -1,0 +1,330 @@
+name: Upload Final Repository Capsule to Arweave Once
+
+on:
+  push:
+    branches:
+      - agent/upload-final-repository-capsule-arweave-20260802
+    paths:
+      - .github/workflows/upload-final-repository-capsule-arweave-once.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: final-repository-capsule-arweave-upload-once
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      FROZEN_COMMIT: 81b151245d70f6b775418de60f7b8a1366f28944
+      EXPECTED_CAPSULE_ID: repository-81b151245d70
+      EXPECTED_GIT_TREE_OID: c63cb393713f9824970bab80b07c214dc79e561a
+      EXPECTED_RECOVERY_COMMIT: 247f254229de1d148f299a2cbfacf7102950d5df
+      EXPECTED_PACKAGE_IDENTITY_SHA256: ab3e0c54dce4b51330060e88133399553442f091d6f98adf06b8439e27be00c2
+      EXPECTED_TRANSPORT_BYTES: "36925440"
+      EXPECTED_TRANSPORT_SHA256: 132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14
+      MAX_REWARD_WINSTON: "400000000000"
+      MIN_REMAINING_WINSTON: "250000000000"
+      ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
+
+    steps:
+      - name: Checkout exact frozen source commit
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ env.FROZEN_COMMIT }}
+          fetch-depth: 0
+          fetch-tags: false
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Build and verify the exact frozen capsule
+        run: |
+          set -euo pipefail
+          test -n "$ARKEY"
+          test "$(git rev-parse HEAD)" = "$FROZEN_COMMIT"
+          test -z "$(git status --porcelain)"
+
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "$FROZEN_COMMIT" \
+            --output-dir "$RUNNER_TEMP/capsule"
+
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from pathlib import Path
+
+          sys.path.insert(0, "scripts")
+          from preservation_capsule import verify_local_package
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "capsule"
+          result = verify_local_package(root)
+          manifest = result["manifest"]
+          checks = {
+              "capsule_id": (result["capsule_id"], os.environ["EXPECTED_CAPSULE_ID"]),
+              "source_commit": (manifest["git"]["source_commit_sha"], os.environ["FROZEN_COMMIT"]),
+              "git_tree_oid": (result["git_tree_oid"], os.environ["EXPECTED_GIT_TREE_OID"]),
+              "recovery_commit": (manifest["git"]["recovery_commit_sha"], os.environ["EXPECTED_RECOVERY_COMMIT"]),
+              "package_identity": (result["package_identity_sha256"], os.environ["EXPECTED_PACKAGE_IDENTITY_SHA256"]),
+              "tracked_file_count": (str(result["tracked_file_count"]), "4330"),
+          }
+          for name, (observed, expected) in checks.items():
+              if str(observed) != expected:
+                  raise SystemExit(f"{name} mismatch: observed={observed} expected={expected}")
+          files = sorted(path.name for path in root.iterdir() if path.is_file())
+          if len(files) != 8:
+              raise SystemExit(f"expected 8 capsule files, observed {len(files)}: {files}")
+          print(json.dumps({"result": "pass", **{k: v[0] for k, v in checks.items()}, "files": files}, indent=2))
+          PY
+
+      - name: Create and verify deterministic Arweave transport payload
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import os
+          import tarfile
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_TEMP"]) / "capsule"
+          output = Path(os.environ["RUNNER_TEMP"]) / "trinity-accord-repository-capsule-81b151245d70.tar"
+          with tarfile.open(output, "w", format=tarfile.GNU_FORMAT) as archive:
+              for path in sorted(source.iterdir(), key=lambda item: item.name):
+                  if not path.is_file():
+                      continue
+                  info = archive.gettarinfo(str(path), arcname=path.name)
+                  info.mtime = 0
+                  info.uid = 0
+                  info.gid = 0
+                  info.uname = ""
+                  info.gname = ""
+                  with path.open("rb") as handle:
+                      archive.addfile(info, handle)
+          raw = output.read_bytes()
+          observed_size = len(raw)
+          observed_sha = hashlib.sha256(raw).hexdigest()
+          expected_size = int(os.environ["EXPECTED_TRANSPORT_BYTES"])
+          expected_sha = os.environ["EXPECTED_TRANSPORT_SHA256"]
+          if observed_size != expected_size:
+              raise SystemExit(f"transport size mismatch: {observed_size} != {expected_size}")
+          if observed_sha != expected_sha:
+              raise SystemExit(f"transport sha256 mismatch: {observed_sha} != {expected_sha}")
+          Path(os.environ["RUNNER_TEMP"], "transport-path.txt").write_text(str(output) + "\n", encoding="utf-8")
+          print(f"payload={output.name} bytes={observed_size} sha256={observed_sha}")
+          PY
+
+          mkdir -p "$RUNNER_TEMP/transport-extract"
+          tar -xf "$(cat "$RUNNER_TEMP/transport-path.txt")" -C "$RUNNER_TEMP/transport-extract"
+          diff -qr "$RUNNER_TEMP/capsule" "$RUNNER_TEMP/transport-extract"
+          python3 - <<'PY'
+          import os
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          from preservation_capsule import verify_local_package
+          result = verify_local_package(Path(os.environ["RUNNER_TEMP"]) / "transport-extract")
+          if result["package_identity_sha256"] != os.environ["EXPECTED_PACKAGE_IDENTITY_SHA256"]:
+              raise SystemExit("extracted package identity mismatch")
+          print("TRANSPORT_PACKAGE_REVERIFY_OK")
+          PY
+
+      - name: Quote, idempotency-check, sign, and upload once
+        env:
+          TRANSPORT_PATH_FILE: ${{ runner.temp }}/transport-path.txt
+          RESULT_PATH: ${{ runner.temp }}/arweave-upload-result.json
+        run: |
+          set -euo pipefail
+          cat > "$GITHUB_WORKSPACE/upload-final-capsule.mjs" <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import Arweave from 'arweave';
+
+          const rawKey = (process.env.ARKEY || '').trim();
+          if (!rawKey) throw new Error('ARKEY secret or variable is unavailable');
+          let jwk;
+          try {
+            jwk = JSON.parse(rawKey);
+          } catch {
+            jwk = JSON.parse(Buffer.from(rawKey, 'base64').toString('utf8'));
+          }
+
+          const payloadPath = fs.readFileSync(process.env.TRANSPORT_PATH_FILE, 'utf8').trim();
+          const data = fs.readFileSync(payloadPath);
+          const payloadSha = crypto.createHash('sha256').update(data).digest('hex');
+          if (data.length !== Number(process.env.EXPECTED_TRANSPORT_BYTES)) throw new Error('payload byte count changed');
+          if (payloadSha !== process.env.EXPECTED_TRANSPORT_SHA256) throw new Error('payload sha256 changed');
+
+          const arweave = Arweave.init({
+            host: 'arweave.net',
+            port: 443,
+            protocol: 'https',
+            timeout: 60000,
+            logging: false,
+          });
+          const address = await arweave.wallets.jwkToAddress(jwk);
+          const maxReward = BigInt(process.env.MAX_REWARD_WINSTON);
+          const minimumRemaining = BigInt(process.env.MIN_REMAINING_WINSTON);
+
+          const tagFilters = [
+            { name: 'App-Name', values: ['Trinity-Accord'] },
+            { name: 'Artifact-Type', values: ['Repository-Preservation-Capsule'] },
+            { name: 'Package-Identity-SHA256', values: [process.env.EXPECTED_PACKAGE_IDENTITY_SHA256] },
+            { name: 'Payload-SHA256', values: [payloadSha] },
+          ];
+          const query = `query($tags: [TagFilter!]) {
+            transactions(first: 10, tags: $tags) {
+              edges { node { id owner { address } tags { name value } } }
+            }
+          }`;
+          const graph = await arweave.api.post('graphql', { query, variables: { tags: tagFilters } });
+          const existing = graph?.data?.data?.transactions?.edges || [];
+
+          async function readback(txid, gateway, attempts = 90) {
+            let last = 'not attempted';
+            for (let i = 1; i <= attempts; i += 1) {
+              try {
+                const response = await fetch(`${gateway}/${txid}`, { redirect: 'follow' });
+                if (response.ok) {
+                  const bytes = Buffer.from(await response.arrayBuffer());
+                  const sha = crypto.createHash('sha256').update(bytes).digest('hex');
+                  if (bytes.length === data.length && sha === payloadSha) {
+                    return { gateway, attempts: i, bytes: bytes.length, sha256: sha };
+                  }
+                  last = `content mismatch bytes=${bytes.length} sha256=${sha}`;
+                } else {
+                  last = `HTTP ${response.status}`;
+                }
+              } catch (error) {
+                last = error.message;
+              }
+              await new Promise((resolve) => setTimeout(resolve, 10000));
+            }
+            throw new Error(`readback failed via ${gateway}: ${last}`);
+          }
+
+          if (existing.length > 0) {
+            const txid = existing[0].node.id;
+            const primary = await readback(txid, 'https://arweave.net');
+            const result = {
+              result: 'already_present_exact_payload',
+              txid,
+              payload_bytes: data.length,
+              payload_sha256: payloadSha,
+              package_identity_sha256: process.env.EXPECTED_PACKAGE_IDENTITY_SHA256,
+              primary_readback: primary,
+              transaction_created: false,
+              transaction_signed: false,
+              ar_spent_this_run: '0.000000000000',
+            };
+            fs.writeFileSync(process.env.RESULT_PATH, JSON.stringify(result, null, 2) + '\n');
+            console.log(JSON.stringify(result, null, 2));
+            process.exit(0);
+          }
+
+          const balanceBefore = BigInt(await arweave.wallets.getBalance(address));
+          const quotedReward = BigInt(await arweave.transactions.getPrice(data.length));
+          if (quotedReward > maxReward) {
+            throw new Error(`quoted reward exceeds authorized cap: ${quotedReward} > ${maxReward}`);
+          }
+          if (balanceBefore - quotedReward < minimumRemaining) {
+            throw new Error('quoted upload would violate minimum remaining wallet balance');
+          }
+
+          const transaction = await arweave.createTransaction({ data }, jwk);
+          const transactionReward = BigInt(transaction.reward);
+          if (transactionReward > maxReward) {
+            throw new Error(`transaction reward exceeds authorized cap: ${transactionReward} > ${maxReward}`);
+          }
+          if (balanceBefore - transactionReward < minimumRemaining) {
+            throw new Error('signed upload would violate minimum remaining wallet balance');
+          }
+
+          const tags = {
+            'App-Name': 'Trinity-Accord',
+            'Artifact-Type': 'Repository-Preservation-Capsule',
+            'Capsule-ID': process.env.EXPECTED_CAPSULE_ID,
+            'Source-Git-Commit': process.env.FROZEN_COMMIT,
+            'Git-Tree-OID': process.env.EXPECTED_GIT_TREE_OID,
+            'Recovery-Commit-SHA': process.env.EXPECTED_RECOVERY_COMMIT,
+            'Package-Identity-SHA256': process.env.EXPECTED_PACKAGE_IDENTITY_SHA256,
+            'Payload-SHA256': payloadSha,
+            'Payload-Bytes': String(data.length),
+            'Content-Type': 'application/x-tar',
+            'Canonical-Authority': 'Bitcoin-Originals-only',
+            'Non-Amending': 'true',
+            'Repository-Recovery-Status': 'full_exact_publication_baseline',
+          };
+          for (const [name, value] of Object.entries(tags)) transaction.addTag(name, value);
+
+          await arweave.transactions.sign(transaction, jwk);
+          const uploader = await arweave.transactions.getUploader(transaction);
+          while (!uploader.isComplete) {
+            await uploader.uploadChunk();
+            console.log(`upload ${uploader.pctComplete}% chunks ${uploader.uploadedChunks}/${uploader.totalChunks}`);
+          }
+
+          const primary = await readback(transaction.id, 'https://arweave.net');
+          let alternate = null;
+          try {
+            alternate = await readback(transaction.id, 'https://g8way.io', 30);
+          } catch (error) {
+            alternate = { gateway: 'https://g8way.io', verified: false, error: error.message };
+          }
+          const balanceAfterObserved = BigInt(await arweave.wallets.getBalance(address));
+          const result = {
+            result: 'uploaded_and_primary_readback_verified',
+            txid: transaction.id,
+            payload_bytes: data.length,
+            payload_sha256: payloadSha,
+            capsule_id: process.env.EXPECTED_CAPSULE_ID,
+            source_commit: process.env.FROZEN_COMMIT,
+            git_tree_oid: process.env.EXPECTED_GIT_TREE_OID,
+            recovery_commit_sha: process.env.EXPECTED_RECOVERY_COMMIT,
+            package_identity_sha256: process.env.EXPECTED_PACKAGE_IDENTITY_SHA256,
+            quoted_reward_winston: quotedReward.toString(),
+            transaction_reward_winston: transactionReward.toString(),
+            transaction_reward_ar: arweave.ar.winstonToAr(transactionReward.toString()),
+            balance_before_winston: balanceBefore.toString(),
+            estimated_remaining_winston: (balanceBefore - transactionReward).toString(),
+            observed_balance_after_winston: balanceAfterObserved.toString(),
+            minimum_remaining_winston: minimumRemaining.toString(),
+            primary_readback: primary,
+            alternate_readback: alternate,
+            transaction_signed: true,
+            transaction_uploaded: true,
+          };
+          fs.writeFileSync(process.env.RESULT_PATH, JSON.stringify(result, null, 2) + '\n');
+          console.log(JSON.stringify(result, null, 2));
+          JS
+
+          node "$GITHUB_WORKSPACE/upload-final-capsule.mjs"
+          rm -f "$GITHUB_WORKSPACE/upload-final-capsule.mjs"
+
+      - name: Upload execution evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: final-repository-capsule-arweave-upload-evidence
+          path: |
+            ${{ runner.temp }}/capsule/
+            ${{ runner.temp }}/trinity-accord-repository-capsule-81b151245d70.tar
+            ${{ runner.temp }}/arweave-upload-result.json
+          if-no-files-found: warn
+          retention-days: 90
