@@ -79,7 +79,6 @@ jobs:
           if [ "$INPUT_DEPLOY" = "true" ]; then
             args+=(--deploy)
             if [ "$INPUT_SERVICE" = "trinity-record-chain-gateway" ]; then
-              python scripts/reconcile_render_health_path.py
               args+=(--reconcile-config)
             fi
           fi
@@ -87,4 +86,8 @@ jobs:
              [ "$INPUT_LEGACY_CONFIRM" = "RETIRED-LEGACY-EMERGENCY" ]; then
             args+=(--allow-legacy)
           fi
-          python scripts/render_manual_deploy.py "${args[@]}"
+          if [ "$INPUT_SERVICE" = "trinity-record-chain-gateway" ]; then
+            python scripts/render_protected_deploy.py "${args[@]}"
+          else
+            python scripts/render_manual_deploy.py "${args[@]}"
+          fi
