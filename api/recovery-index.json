@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "cec7c0ab0e4e63ab",
+  "source_digest": "24ac474041482be8",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -131,8 +131,7 @@
     "This index helps discover recovery materials but does not itself prove philosophical claims or independent attestation.",
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
-    "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
-    "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main.",
+    "The core repository capsule embeds every Git-tracked byte in the exact publication baseline named by its manifest, while deliberately excluding production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
   "does_not_prove": [

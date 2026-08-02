@@ -247,7 +247,7 @@ def test_recovery_index_declares_the_published_core_repository_doi():
     )
     index = json.loads((ROOT / "api/recovery-index.json").read_text(encoding="utf-8"))
     assert current["publication_status"] == "published_and_publicly_restored"
-    assert current["latest_doi"] == "10.5281/zenodo.21755655"
+    assert current["latest_doi"] == "10.5281/zenodo.21755827"
     assert legacy_state["publication_status"] == "published"
     assert legacy_state["latest_doi"] == "10.5281/zenodo.21739344"
     latest = index["latest_trusted_release"]

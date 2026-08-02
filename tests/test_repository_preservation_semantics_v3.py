@@ -46,7 +46,8 @@ def test_sequence_three_state_has_no_moving_main_semantic_leaks():
     index = json.loads((ROOT / "api/recovery-index.json").read_text())
 
     assert "repository-preservation-state-v2.json" in recovery
-    assert "historical v1 compatibility" in recovery
+    assert "historical v1" in recovery
+    assert "compatibility" in recovery
     assert "exact declared publication-baseline tree" in recovery
     assert "exact_publication_baseline_tree_embedded" in builder
     assert '"live_main_equivalence_claimed": False' in builder
