@@ -79,6 +79,7 @@ jobs:
           if [ "$INPUT_DEPLOY" = "true" ]; then
             args+=(--deploy)
             if [ "$INPUT_SERVICE" = "trinity-record-chain-gateway" ]; then
+              python scripts/reconcile_render_health_path.py
               args+=(--reconcile-config)
             fi
           fi
