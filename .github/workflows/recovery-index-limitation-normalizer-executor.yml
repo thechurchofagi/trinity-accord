@@ -1,0 +1,61 @@
+name: Recovery Index Limitation Normalizer Executor
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - .github/workflows/recovery-index-limitation-normalizer-executor.yml
+      - scripts/fix_recovery_index_limitations.py
+
+permissions:
+  contents: read
+
+jobs:
+  execute-authorized-normalization:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == 'thechurchofagi' &&
+      github.event.pull_request.head.ref == 'agent/fix-recovery-index-limitation-dedup-20260802' &&
+      github.event.pull_request.title == 'fix: normalize recovery-index limitations'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout exact pull-request branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: agent/fix-recovery-index-limitation-dedup-20260802
+
+      - name: Execute normalization twice and verify idempotence
+        run: |
+          set -euo pipefail
+          python3 scripts/fix_recovery_index_limitations.py
+          python3 scripts/fix_recovery_index_limitations.py
+          python3 -m py_compile \
+            scripts/fix_recovery_index_limitations.py \
+            scripts/repository_preservation_refresh.py
+
+      - name: Commit normalized machine state and contracts
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            api/recovery-index.json \
+            scripts/repository_preservation_refresh.py \
+            tests/test_external_binary_annex_final_state.py \
+            tests/test_external_binary_annex_v2.py \
+            tests/test_preservation_capsule.py \
+            tests/test_repository_preservation_semantics_v3.py \
+            tests/test_repository_preservation_semantics_v3_execution.py
+          if git diff --cached --quiet; then
+            echo "Recovery index normalization is already applied."
+            exit 0
+          fi
+          git commit -m "fix: apply recovery index normalization"
+          git push origin HEAD:agent/fix-recovery-index-limitation-dedup-20260802
