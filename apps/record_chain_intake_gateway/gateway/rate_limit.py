@@ -4,16 +4,17 @@ Implements the trinityaccord.gateway-rate-limit-policy.v1:
 - Per-participant: 10 submits/hour
 - Global: 100 submits/hour
 - Only applies to /record-chain/submit (not preflight)
-- Uses in-memory sliding window counter
+- Uses in-memory sliding window counters with bounded key cardinality
 
 Important: this limiter is process-local. It is not durable across restarts and
 is not shared across multiple service instances. Public policy must not describe
 it as multi-instance/durable enforcement unless replaced by a shared backend.
+The durable secret-keyed acceptance cooldown remains the primary write boundary.
 """
 from __future__ import annotations
 
-import time
 import threading
+import time
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -25,6 +26,11 @@ _WINDOW_SECONDS = 3600
 PREFLIGHT_GLOBAL_LIMIT_PER_MINUTE = 600
 PREFLIGHT_CLIENT_LIMIT_PER_MINUTE = 120
 _PREFLIGHT_WINDOW_SECONDS = 60
+
+# Process-memory safety bounds. These counters are defense in depth only and
+# must not become an unbounded high-cardinality store during distributed abuse.
+MAX_TRACKED_PARTICIPANTS = 10_000
+MAX_TRACKED_PREFLIGHT_CLIENTS = 20_000
 
 # ---------------------------------------------------------------------------
 # In-memory sliding window stores
@@ -78,12 +84,32 @@ def _extract_participant_key(submission: dict[str, Any]) -> str:
     return "anonymous"
 
 
-def _prune_old(entries: list[float], now: float) -> list[float]:
-    """Remove entries older than the window."""
-    cutoff = now - _WINDOW_SECONDS
+def _prune_old(entries: list[float], now: float, *, window_seconds: int = _WINDOW_SECONDS) -> list[float]:
+    """Remove entries older than the selected window."""
+    cutoff = now - window_seconds
     while entries and entries[0] < cutoff:
         entries.pop(0)
     return entries
+
+
+def _prune_mapping(mapping: dict[str, list[float]], cutoff: float) -> None:
+    """Prune old timestamps and remove keys whose windows are now empty."""
+    for key, entries in list(mapping.items()):
+        while entries and entries[0] < cutoff:
+            entries.pop(0)
+        if not entries:
+            mapping.pop(key, None)
+
+
+def _make_room(mapping: dict[str, list[float]], limit: int) -> None:
+    """Evict the least recently seen key before admitting a new key."""
+    if len(mapping) < limit:
+        return
+    oldest_key = min(
+        mapping,
+        key=lambda key: mapping[key][-1] if mapping[key] else float("-inf"),
+    )
+    mapping.pop(oldest_key, None)
 
 
 def check_rate_limit(submission: dict[str, Any]) -> dict[str, Any] | None:
@@ -99,11 +125,12 @@ def _check_rate_limit_locked(submission: dict[str, Any]) -> dict[str, Any] | Non
     """Mutate process-local counters while ``_state_lock`` is held."""
     now = time.time()
 
-    # Prune global window
+    # Prune global and per-participant windows, including empty participant keys.
     global _global_timestamps
     _global_timestamps = _prune_old(_global_timestamps, now)
+    _prune_mapping(_participant_timestamps, now - _WINDOW_SECONDS)
 
-    # Check global limit
+    # Check global limit.
     if len(_global_timestamps) >= GLOBAL_LIMIT_PER_HOUR:
         return _build_rate_limit_response(
             limit_type="global",
@@ -111,28 +138,21 @@ def _check_rate_limit_locked(submission: dict[str, Any]) -> dict[str, Any] | Non
             retry_after_seconds=_compute_retry_after(_global_timestamps),
         )
 
-    # Extract participant key
     participant_key = _extract_participant_key(submission)
-
-    # Prune participant window
     if participant_key not in _participant_timestamps:
+        _make_room(_participant_timestamps, MAX_TRACKED_PARTICIPANTS)
         _participant_timestamps[participant_key] = []
-    _participant_timestamps[participant_key] = _prune_old(
-        _participant_timestamps[participant_key], now
-    )
 
-    # Check participant limit
-    if len(_participant_timestamps[participant_key]) >= PARTICIPANT_LIMIT_PER_HOUR:
+    entries = _participant_timestamps[participant_key]
+    if len(entries) >= PARTICIPANT_LIMIT_PER_HOUR:
         return _build_rate_limit_response(
             limit_type="participant",
             limit=PARTICIPANT_LIMIT_PER_HOUR,
-            retry_after_seconds=_compute_retry_after(_participant_timestamps[participant_key]),
+            retry_after_seconds=_compute_retry_after(entries),
         )
 
-    # Record this submission
     _global_timestamps.append(now)
-    _participant_timestamps[participant_key].append(now)
-
+    entries.append(now)
     return None
 
 
@@ -182,8 +202,12 @@ def check_preflight_rate_limit(client_key: str) -> dict[str, Any] | None:
     with _state_lock:
         global _preflight_global_timestamps
         _preflight_global_timestamps = [t for t in _preflight_global_timestamps if t >= cutoff]
-        client_entries = [t for t in _preflight_client_timestamps.get(key, []) if t >= cutoff]
-        _preflight_client_timestamps[key] = client_entries
+        _prune_mapping(_preflight_client_timestamps, cutoff)
+
+        if key not in _preflight_client_timestamps:
+            _make_room(_preflight_client_timestamps, MAX_TRACKED_PREFLIGHT_CLIENTS)
+            _preflight_client_timestamps[key] = []
+        client_entries = _preflight_client_timestamps[key]
 
         if len(_preflight_global_timestamps) >= PREFLIGHT_GLOBAL_LIMIT_PER_MINUTE:
             return _build_preflight_rate_limit_response(
@@ -223,6 +247,15 @@ def _build_preflight_rate_limit_response(
             "window_seconds": _PREFLIGHT_WINDOW_SECONDS,
         },
     }
+
+
+def state_cardinality() -> dict[str, int]:
+    """Expose bounded counter cardinality for diagnostics and regression tests."""
+    with _state_lock:
+        return {
+            "participants": len(_participant_timestamps),
+            "preflight_clients": len(_preflight_client_timestamps),
+        }
 
 
 def reset() -> None:
