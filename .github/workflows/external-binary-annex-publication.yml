@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/external-binary-annex-publication.yml
+      - scripts/external_annex_publication_precheck.py
       - scripts/external_binary_annex_v3.py
       - scripts/publish_external_binary_annexes_to_zenodo_v3.py
       - scripts/publish_external_binary_annexes_to_zenodo_v2.py
@@ -48,84 +49,25 @@ jobs:
           fetch-tags: true
           ref: ${{ github.sha }}
 
-      - name: Resolve current main state and one-time publication requirement
+      - name: Resolve current main state and publication requirement
         id: precheck
         run: |
           set -euo pipefail
           echo "source-and-authorization-precheck-v3" > "$RUNNER_TEMP/annex-publication-stage.txt"
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           test "$TRINITY_PUBLICATION_SOURCE_SHA" = "$GITHUB_SHA"
-          test -n "$ZENODO_ACCESS_TOKEN"
           git fetch --no-tags --prune origin \
             +refs/heads/main:refs/remotes/origin/main
           git show refs/remotes/origin/main:preservation/external-binary-annex-state.json \
             > "$RUNNER_TEMP/current-main-external-annex-state.json"
-          python3 - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          output = Path(os.environ["GITHUB_OUTPUT"])
-          current_state = json.loads(
-              (Path(os.environ["RUNNER_TEMP"]) / "current-main-external-annex-state.json")
-              .read_text(encoding="utf-8")
-          )
-          if current_state.get("publication_status") == "published_and_publicly_restored":
-              with output.open("a", encoding="utf-8") as handle:
-                  handle.write("required=false\n")
-              raise SystemExit(0)
-
-          authorization = json.loads(
-              Path("preservation/external-binary-annex-authorization-v1.json").read_text(
-                  encoding="utf-8"
-              )
-          )
-          expected_authorization = {
-              "schema": "trinityaccord.external-binary-annex-publication-authorization.v1",
-              "authorized_by": "thechurchofagi",
-              "authorized_at": "2026-08-01T21:45:00+08:00",
-              "authorization": "publish_all_necessary_external_binary_annexes",
-              "publication_confirmation": "PUBLISH_TRINITY_EXTERNAL_BINARY_ANNEXES_V1",
-              "rights_boundary_ack": "TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED",
-              "core_repository_preservation_doi": "10.5281/zenodo.21739344",
-              "scope": {
-                  "all_custom_assets_from_named_valid_releases": True,
-                  "evidence_annex": True,
-                  "chronicle_nft_media_annex": True,
-                  "already_public_release_bytes_only": True,
-                  "deprecated_failed_nft_attempts": False,
-                  "github_generated_source_archives": False,
-                  "publicly_readable_for_preservation": True,
-                  "deposit_grants_no_new_reuse_rights": True,
-              },
-              "user_authorization_text": (
-                  "你把该做的都做了吧？你觉得该做的都做了，反正用程序做也简单。"
-                  "你这个写程序写得又快又好。这不是什么那个，反正容量也有，对不对？"
-                  "DOI 的容量是足够的，是不是？既然有容量，就把它全部做了呗。"
-              ),
-          }
-          if authorization != expected_authorization:
-              raise SystemExit("external-binary annex owner authorization changed")
-
-          trigger = json.loads(
-              Path("preservation/external-binary-annex-publication-trigger.json").read_text(
-                  encoding="utf-8"
-              )
-          )
-          if trigger != {
-              "schema": "trinityaccord.external-binary-annex-publication-trigger.v1",
-              "authorized_by": "thechurchofagi",
-              "operation": "publish_evidence_and_nft_binary_annexes",
-              "requested_at": "2026-08-01T21:45:00+08:00",
-              "publication_confirmation": "PUBLISH_TRINITY_EXTERNAL_BINARY_ANNEXES_V1",
-              "expected_core_doi": "10.5281/zenodo.21739344",
-              "rights_boundary_ack": "TRINITY_EXTERNAL_BINARY_ANNEX_RIGHTS_V1_APPROVED",
-              "expected_annex_types": ["evidence", "nft"],
-          }:
-              raise SystemExit("external-binary annex publication trigger changed")
-          with output.open("a", encoding="utf-8") as handle:
-              handle.write("required=true\n")
-          PY
+          python3 scripts/external_annex_publication_precheck.py \
+            --current-state "$RUNNER_TEMP/current-main-external-annex-state.json" \
+            --authorization preservation/external-binary-annex-authorization-v1.json \
+            --trigger preservation/external-binary-annex-publication-trigger.json \
+            --github-output "$GITHUB_OUTPUT"
+          if grep -qx 'required=true' "$GITHUB_OUTPUT"; then
+            test -n "$ZENODO_ACCESS_TOKEN"
+          fi
 
       - name: Retire stale write entrypoint when current main is already complete
         if: steps.precheck.outputs.required == 'false'
@@ -134,20 +76,15 @@ jobs:
           git checkout --detach refs/remotes/origin/main
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          changed=false
-          if test -f .github/workflows/external-binary-annex-publication.yml; then
-            git rm .github/workflows/external-binary-annex-publication.yml
-            changed=true
-          fi
-          if test -f preservation/external-binary-annex-publication-trigger.json; then
-            git rm preservation/external-binary-annex-publication-trigger.json
-            changed=true
-          fi
-          if test -f preservation/external-binary-annex-publication-attempt.json; then
-            git rm preservation/external-binary-annex-publication-attempt.json
-            changed=true
-          fi
-          if test "$changed" = false; then
+          for path in \
+            .github/workflows/external-binary-annex-publication.yml \
+            preservation/external-binary-annex-publication-trigger.json \
+            preservation/external-binary-annex-publication-attempt.json; do
+            if test -f "$path"; then
+              git rm "$path"
+            fi
+          done
+          if git diff --cached --quiet; then
             exit 0
           fi
           git commit -m "chore: retire completed annex publication entrypoint"
@@ -177,7 +114,7 @@ jobs:
           python3 --version
           df -h
 
-      - name: Verify the exact source before any Zenodo write
+      - name: Verify exact source before any Zenodo write
         if: steps.precheck.outputs.required == 'true'
         run: |
           set -euo pipefail
@@ -274,22 +211,42 @@ jobs:
             --evidence-report "$RUNNER_TEMP/evidence-public-recovery-report.json" \
             --nft-report "$RUNNER_TEMP/nft-public-recovery-report.json" \
             --source-commit "$TRINITY_PUBLICATION_SOURCE_SHA"
+          cp preservation/external-binary-annex-state.json \
+            "$RUNNER_TEMP/final-external-binary-annex-state.json"
+          cp preservation/external-binary-annex-observation.json \
+            "$RUNNER_TEMP/final-external-binary-annex-observation.json"
+          cp api/recovery-index.json "$RUNNER_TEMP/final-recovery-index.json"
 
-      - name: Commit verified state and retire the one-time write entrypoint
+      - name: Commit verified state and retire one-time write entrypoint
         if: steps.precheck.outputs.required == 'true'
         run: |
           set -euo pipefail
           echo "commit-published-annex-v3-state" > "$RUNNER_TEMP/annex-publication-stage.txt"
+          git fetch --no-tags --prune origin \
+            +refs/heads/main:refs/remotes/origin/main
+          git checkout --detach refs/remotes/origin/main
+          cp "$RUNNER_TEMP/final-external-binary-annex-state.json" \
+            preservation/external-binary-annex-state.json
+          cp "$RUNNER_TEMP/final-external-binary-annex-observation.json" \
+            preservation/external-binary-annex-observation.json
+          cp "$RUNNER_TEMP/final-recovery-index.json" api/recovery-index.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             preservation/external-binary-annex-state.json \
             preservation/external-binary-annex-observation.json \
             api/recovery-index.json
-          git rm .github/workflows/external-binary-annex-publication.yml
-          git rm preservation/external-binary-annex-publication-trigger.json
-          if test -f preservation/external-binary-annex-publication-attempt.json; then
-            git rm preservation/external-binary-annex-publication-attempt.json
+          for path in \
+            .github/workflows/external-binary-annex-publication.yml \
+            preservation/external-binary-annex-publication-trigger.json \
+            preservation/external-binary-annex-publication-attempt.json; do
+            if test -f "$path"; then
+              git rm "$path"
+            fi
+          done
+          if git diff --cached --quiet; then
+            echo "::error::Verified publication produced no repository state change."
+            exit 1
           fi
           git commit -m "archive: record complete publicly restored binary annex V3 DOIs"
           for attempt in 1 2 3; do
@@ -299,15 +256,26 @@ jobs:
             git fetch --no-tags --prune origin \
               +refs/heads/main:refs/remotes/origin/main
             git rebase refs/remotes/origin/main
+            cp "$RUNNER_TEMP/final-external-binary-annex-state.json" \
+              preservation/external-binary-annex-state.json
+            cp "$RUNNER_TEMP/final-external-binary-annex-observation.json" \
+              preservation/external-binary-annex-observation.json
+            cp "$RUNNER_TEMP/final-recovery-index.json" api/recovery-index.json
+            git add \
+              preservation/external-binary-annex-state.json \
+              preservation/external-binary-annex-observation.json \
+              api/recovery-index.json
             if test -f preservation/external-binary-annex-publication-attempt.json; then
               git rm preservation/external-binary-annex-publication-attempt.json
+            fi
+            if ! git diff --cached --quiet; then
               git commit --amend --no-edit
             fi
             sleep $((attempt * 5))
           done
           exit 1
 
-      - name: Record visible publication failure unless current main is already complete
+      - name: Record visible failure only when current main is incomplete
         if: failure() && steps.precheck.outputs.required == 'true'
         run: |
           set -euo pipefail
@@ -315,23 +283,12 @@ jobs:
             +refs/heads/main:refs/remotes/origin/main
           git show refs/remotes/origin/main:preservation/external-binary-annex-state.json \
             > "$RUNNER_TEMP/latest-main-external-annex-state.json"
-          python3 - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          state = json.loads(
-              (Path(os.environ["RUNNER_TEMP"]) / "latest-main-external-annex-state.json")
-              .read_text(encoding="utf-8")
-          )
-          if state.get("publication_status") == "published_and_publicly_restored":
-              raise SystemExit(75)
-          PY
-          status=$?
-          if test "$status" = 75; then
+          if python3 scripts/external_annex_publication_precheck.py \
+            --current-state "$RUNNER_TEMP/latest-main-external-annex-state.json" \
+            --complete-only; then
             exit 0
           fi
-          git reset --hard "$TRINITY_PUBLICATION_SOURCE_SHA"
+          git checkout --detach refs/remotes/origin/main
           python3 - <<'PY'
           import json
           import os
