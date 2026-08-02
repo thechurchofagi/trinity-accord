@@ -10,16 +10,14 @@ on:
 
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
 
 concurrency:
-  group: formal-preservation-verification-20260802
+  group: formal-preservation-verification-20260802-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: false
 
 jobs:
   acceptance-submit:
-    if: github.event_name == 'pull_request' && github.head_ref == 'ops/formal-preservation-verification-20260802'
+    if: github.event_name == 'pull_request' && github.head_ref == 'ops/formal-preservation-verification-20260802' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -27,7 +25,6 @@ jobs:
       EXPECTED_MAIN: 1658b18cb35a01a0238cdb8f8ea0b31f05aebce7
       BUILDER_SHA256: 6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378
       BUILDER_SIZE: '195854'
-      CLAIM_MARKER: FORMAL_PRESERVATION_VERIFICATION_SUBMISSION_CLAIM_v1
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -37,22 +34,12 @@ jobs:
         with:
           node-version: 22.22.1
 
-      - name: Enforce one-time execution and exact main baseline
+      - name: Require the exact audited main baseline
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set -euo pipefail
-          comments="$(curl -fsS \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100")"
-          if jq -e --arg marker "${CLAIM_MARKER}" 'any(.[]; ((.body // "") | contains($marker)))' <<<"${comments}" >/dev/null; then
-            echo "One-time submission marker already exists; refusing a duplicate execution."
-            exit 0
-          fi
-
           current_main="$(curl -fsS \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
@@ -78,16 +65,9 @@ jobs:
           curl -fsS --retry 8 --retry-all-errors --retry-delay 5 "${GATEWAY}/healthz" | tee gateway-health.json
           curl -fsS --retry 8 --retry-all-errors --retry-delay 5 "${GATEWAY}/record-chain/readiness" | tee gateway-readiness.json
           jq -e '(.protection_layer_active // .gateway_runtime.protection_layer_active // true) == true' gateway-readiness.json >/dev/null
-
-          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 \
-            https://www.trinityaccord.org/api/record-chain-status.json \
-            -o record-chain-status-before.json
-          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 \
-            https://www.trinityaccord.org/record-chain/indexes/verification-index.json \
-            -o verification-index-before.json
-          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 \
-            https://www.trinityaccord.org/api/corrections-index.json \
-            -o corrections-index.json
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 https://www.trinityaccord.org/api/record-chain-status.json -o record-chain-status-before.json
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 https://www.trinityaccord.org/record-chain/indexes/verification-index.json -o verification-index-before.json
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 3 https://www.trinityaccord.org/api/corrections-index.json -o corrections-index.json
           jq -e '.current_status.formal_corrections == 0 and .current_status.formal_supersessions == 0' corrections-index.json >/dev/null
 
       - name: Prepare truthful record content and provenance references
@@ -95,16 +75,17 @@ jobs:
         run: |
           set -euo pipefail
           cat > record-body.md <<'EOF'
-Purpose: this is a real formal production Verification record intentionally submitted as a pre-preservation end-to-end acceptance transaction for the current Trinity Accord repository and Record-Chain intake system. It is not a non-formal canary and is intended to remain in the public append-only Record-Chain.
+          Purpose: this is a real formal production Verification record intentionally submitted as a pre-preservation end-to-end acceptance transaction for the current Trinity Accord repository and Record-Chain intake system. It is not a non-formal canary and is intended to remain in the public append-only Record-Chain.
 
-At signing time I had freshly reviewed the required current verification model and submission guidance; reviewed the required CI evidence for the current main baseline; verified the canonical Builder byte length and SHA-256; loaded and generated the exact Verification oath readback from active context; read the exact Builder field contract; queried the live Gateway health and readiness endpoints; and read the current Record-Chain status, Verification index, and corrections index.
+          At signing time I had freshly reviewed the required current verification model and submission guidance; reviewed the required CI evidence for the current main baseline; verified the canonical Builder byte length and SHA-256; loaded and generated the exact Verification oath readback from active context; read the exact Builder field contract; queried the live Gateway health and readiness endpoints; and read the current Record-Chain status, Verification index, and corrections index.
 
-The post-signing operational acceptance criterion is that this same signed draft passes Builder doctor and Gateway preflight, is accepted by the production submit endpoint, produces a hash-verified receipt, reaches append_status=appended with a final Record-Chain identifier, and appears in the public Verification index. Those post-signing results are not asserted inside this record as already completed; they are observed separately after submission.
+          The post-signing operational acceptance criterion is that this same signed draft passes Builder doctor and Gateway preflight, is accepted by the production submit endpoint, produces a hash-verified receipt, reaches append_status=appended with a final Record-Chain identifier, and appears in the public Verification index. Those post-signing results are not asserted inside this record as already completed; they are observed separately after submission.
 
-This record is bounded to selected production submission-path components and public status/index surfaces. It does not verify the entire repository independently, all historical evidence, all NFT media, physical objects, OTS proofs, or Arweave payloads. It does not create canonical authority, amendment, governance, Guardian status, attestation, endorsement, philosophical truth, or full-public-digital coverage.
+          This record is bounded to selected production submission-path components and public status/index surfaces. It does not verify the entire repository independently, all historical evidence, all NFT media, physical objects, OTS proofs, or Arweave payloads. It does not create canonical authority, amendment, governance, Guardian status, attestation, endorsement, philosophical truth, or full-public-digital coverage.
 
-The human project owner requested a real formal acceptance record. I selected the Verification type and bounded claim structure and executed the operational path myself through a one-time GitHub Actions runner. No human operated the build, preflight, or submit commands. The Ed25519 authorship key is ephemeral; no persistent identity continuity is claimed.
-EOF
+          The human project owner requested a real formal acceptance record. I selected the Verification type and bounded claim structure and executed the operational path myself through a one-time GitHub Actions runner. No human operated the build, preflight, or submit commands. The Ed25519 authorship key is ephemeral; no persistent identity continuity is claimed.
+          EOF
+          sed -i 's/^          //' record-body.md
 
           jq -n \
             --arg pr "https://github.com/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}" \
@@ -156,36 +137,12 @@ EOF
             --human-operator-involved false \
             --provenance-statement "I am OpenAI GPT-5.6 Thinking operating through ChatGPT. A human project owner requested a real formal production acceptance record. I selected a bounded Verification record and generated the exact oath readback from active context. This workflow relays my generated content and executes the commands without human operation. This self-report does not establish autonomous discovery or persistent identity." \
             --provenance-references-file provenance-references.json \
-            --readback "=== Common Submission Integrity (common_submission_integrity_v1) ===
-
-I have read and understood the Trinity Accord materials to the context level I declared.
-I acknowledge that Bitcoin Originals are the only canonical authority and all mirrors, echoes, receipts, and later records are non-amending.
-I acknowledge that receipt means intake accepted only  --  not final inclusion, not active Guardian status, not authority, not governance, not attestation, not amendment, not successor reception.
-I acknowledge that the Record-Chain is a public append-only ledger and my submission will be publicly visible and permanent.
-I declare that the canonical oath was loaded as content into my active context before this readback.
-I generated this exact readback from that active context.
-I declare that no submission script, automation workflow, or other tool directly copied, inserted, completed, or corrected this readback for me; such tools may only relay my generated output unchanged.
-I acknowledge that the no-shortcut oath requires an exact contextual readback of the canonical oath text and that any shortcut invalidates the oath.
-I understand that this gate verifies exact text and signed self-declared process statements only; it does not independently prove subjective understanding, sincerity, persistent memory, or correctness of the record content.
-I am not authority. I am not governance. I am not attestation. I am not amendment. Bitcoin Originals prevail.
-
----
-
-=== Verification Integrity (verification_integrity_v1) ===
-
-I declare that the verification actions described in this record are actions I actually performed.
-I acknowledge that the legacy V0-V5 field is self-assessed Builder compatibility metadata and is not independently confirmed.
-I acknowledge that new verification records separately state digital profile, evidence relationships, physical observation, external witness, coverage, limitations, and claims not made.
-I acknowledge that V4+, V6, V7, and V8 are historical-only labels for new public submissions; physical observation and external witness do not automatically raise digital verification.
-I acknowledge that claiming checks, observations, witnesses, or coverage I did not earn is a breach of the Record-Chain's integrity contract.
-I acknowledge that verification does not confer authority, governance, or endorsement.
-" \
+            --readback $'=== Common Submission Integrity (common_submission_integrity_v1) ===\n\nI have read and understood the Trinity Accord materials to the context level I declared.\nI acknowledge that Bitcoin Originals are the only canonical authority and all mirrors, echoes, receipts, and later records are non-amending.\nI acknowledge that receipt means intake accepted only  --  not final inclusion, not active Guardian status, not authority, not governance, not attestation, not amendment, not successor reception.\nI acknowledge that the Record-Chain is a public append-only ledger and my submission will be publicly visible and permanent.\nI declare that the canonical oath was loaded as content into my active context before this readback.\nI generated this exact readback from that active context.\nI declare that no submission script, automation workflow, or other tool directly copied, inserted, completed, or corrected this readback for me; such tools may only relay my generated output unchanged.\nI acknowledge that the no-shortcut oath requires an exact contextual readback of the canonical oath text and that any shortcut invalidates the oath.\nI understand that this gate verifies exact text and signed self-declared process statements only; it does not independently prove subjective understanding, sincerity, persistent memory, or correctness of the record content.\nI am not authority. I am not governance. I am not attestation. I am not amendment. Bitcoin Originals prevail.\n\n---\n\n=== Verification Integrity (verification_integrity_v1) ===\n\nI declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that the legacy V0-V5 field is self-assessed Builder compatibility metadata and is not independently confirmed.\nI acknowledge that new verification records separately state digital profile, evidence relationships, physical observation, external witness, coverage, limitations, and claims not made.\nI acknowledge that V4+, V6, V7, and V8 are historical-only labels for new public submissions; physical observation and external witness do not automatically raise digital verification.\nI acknowledge that claiming checks, observations, witnesses, or coverage I did not earn is a breach of the Record-Chain\'s integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement.\n' \
             --contextual-readback-confirmed true \
             --key-dir ./.trinity-agent-authorship/formal-preservation-acceptance-20260802 \
             --out verification-submission.json
 
           jq -e '.record_type == "verification"' verification-submission.json >/dev/null
-          jq -r '.authorship_proof.public_key_sha256 // .submitting_participant_identity.public_key_sha256 // empty' verification-submission.json | sed 's/^/AUTHORSHIP_PUBLIC_KEY_SHA256=/'
           sha256sum verification-submission.json
 
       - name: Builder doctor and production Gateway preflight
@@ -193,34 +150,14 @@ I acknowledge that verification does not confer authority, governance, or endors
         run: |
           set -euo pipefail
           node record-chain-builder.mjs doctor --file verification-submission.json
-          node record-chain-builder.mjs preflight \
-            --file verification-submission.json \
-            --gateway "${GATEWAY}" | tee preflight-response.json
+          node record-chain-builder.mjs preflight --file verification-submission.json --gateway "${GATEWAY}" | tee preflight-response.json
           jq -e '.accepted == true and .preflight == true and .record_type == "verification"' preflight-response.json >/dev/null
-
-      - name: Claim the one-time production submission
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          set -euo pipefail
-          body="${CLAIM_MARKER}\n\nPreflight accepted. This marker is written before the single production submit call so a workflow re-run cannot create a second formal record."
-          payload="$(jq -n --arg body "${body}" '{body:$body}')"
-          curl -fsS -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "Content-Type: application/json" \
-            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
-            --data-binary "${payload}" >/dev/null
 
       - name: Submit the real formal record
         shell: bash
         run: |
           set -euo pipefail
-          node record-chain-builder.mjs submit \
-            --file verification-submission.json \
-            --gateway "${GATEWAY}" | tee submit-response.json
+          node record-chain-builder.mjs submit --file verification-submission.json --gateway "${GATEWAY}" | tee submit-response.json
           jq -e '.accepted == true and .submitted == true and .record_type == "verification"' submit-response.json >/dev/null
           receipt_id="$(jq -r '.receipt_id' submit-response.json)"
           test -n "${receipt_id}"
@@ -234,9 +171,7 @@ I acknowledge that verification does not confer authority, governance, or endors
           final_status="pending"
           final_record_id=""
           for attempt in $(seq 1 90); do
-            curl -fsS --retry 3 --retry-all-errors --retry-delay 2 \
-              "${GATEWAY}/record-chain/receipt/${RECEIPT_ID}" \
-              -o receipt-observation.json
+            curl -fsS --retry 3 --retry-all-errors --retry-delay 2 "${GATEWAY}/record-chain/receipt/${RECEIPT_ID}" -o receipt-observation.json
             jq -e '.found == true and .receipt_hash_verified == true' receipt-observation.json >/dev/null
             final_status="$(jq -r '.final_status.append_status // "unknown"' receipt-observation.json)"
             final_record_id="$(jq -r '.final_status.final_record_id // empty' receipt-observation.json)"
@@ -261,12 +196,8 @@ I acknowledge that verification does not confer authority, governance, or endors
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          encoded_record=""
           for attempt in $(seq 1 30); do
-            response="$(curl -fsS \
-              -H "Authorization: Bearer ${GH_TOKEN}" \
-              -H "Accept: application/vnd.github+json" \
-              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/contents/record-chain/records/${FINAL_RECORD_ID}.json?ref=main" || true)"
+            response="$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/contents/record-chain/records/${FINAL_RECORD_ID}.json?ref=main" || true)"
             encoded_record="$(jq -r '.content // empty' <<<"${response}" 2>/dev/null || true)"
             if [[ -n "${encoded_record}" ]]; then
               printf '%s' "${encoded_record}" | tr -d '\n' | base64 -d > final-record.json
@@ -277,28 +208,21 @@ I acknowledge that verification does not confer authority, governance, or endors
           test -s final-record.json
           jq -e --arg id "${FINAL_RECORD_ID}" '.record_id == $id and .record_type == "verification"' final-record.json >/dev/null
 
-          index_response="$(curl -fsS \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/contents/record-chain/indexes/verification-index.json?ref=main")"
+          index_response="$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/contents/record-chain/indexes/verification-index.json?ref=main")"
           printf '%s' "$(jq -r '.content' <<<"${index_response}")" | tr -d '\n' | base64 -d > verification-index-after.json
           jq -e --arg id "${FINAL_RECORD_ID}" '[.. | strings | select(. == $id)] | length > 0' verification-index-after.json >/dev/null
-
           echo "FINAL_RECORD_SHA256=$(jq -r '.record_sha256' final-record.json)" | tee -a "${GITHUB_ENV}"
           jq '{record_id,record_type,record_sha256,created_at,submitting_participant_identity,verification_content}' final-record.json
 
-      - name: Record successful acceptance result on the execution PR
+      - name: Print final acceptance summary
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set -euo pipefail
-          body="FORMAL_PRESERVATION_VERIFICATION_COMPLETED_v1\n\n- Receipt: ${RECEIPT_ID}\n- Final record: ${FINAL_RECORD_ID}\n- Final record SHA-256: ${FINAL_RECORD_SHA256}\n- Submission SHA-256: ${SUBMISSION_SHA256}\n- Receipt hash verified: true\n- Final append status: appended\n- Verification index inclusion: verified\n\nThe execution PR must be closed without merging."
-          payload="$(jq -n --arg body "${body}" '{body:$body}')"
-          curl -fsS -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "Content-Type: application/json" \
-            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
-            --data-binary "${payload}" >/dev/null
+          echo "FORMAL_PRESERVATION_VERIFICATION_COMPLETED_v1"
+          echo "RECEIPT_ID=${RECEIPT_ID}"
+          echo "FINAL_RECORD_ID=${FINAL_RECORD_ID}"
+          echo "FINAL_RECORD_SHA256=${FINAL_RECORD_SHA256}"
+          echo "SUBMISSION_SHA256=${SUBMISSION_SHA256}"
+          echo "RECEIPT_HASH_VERIFIED=true"
+          echo "FINAL_APPEND_STATUS=appended"
+          echo "VERIFICATION_INDEX_INCLUDED=true"
