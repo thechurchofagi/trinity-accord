@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "0f20e1fb16a6b5d9",
+  "source_digest": "cec7c0ab0e4e63ab",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -86,17 +86,17 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21755655",
-      "record_id": 21755655,
+      "doi": "10.5281/zenodo.21755827",
+      "record_id": 21755827,
       "concept_doi": "10.5281/zenodo.21739343",
-      "git_commit_sha": "5368fd1ecce2ee2f5a4160d6b7892e8c28314a4b",
-      "git_tree_oid": "2d68f3a1eb16aebe7d6a76c6a3bbf832efec6d99",
-      "package_identity_sha256": "fb1c01a8f7978275b1d54cde1c7cc3de898dc4a89bbd89c16827c021c4785852",
+      "git_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
+      "git_tree_oid": "3769e20732a826f66cb772aefa1e37f434566738",
+      "package_identity_sha256": "b45e3fd5aaafe30c435e754499ea40baa7500a36cb33f5e08dd6c0fd3d94ff17",
       "github_required_for_recovery": false,
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
       "public_cold_restore": "passed",
-      "coverage_status": "publication_baseline_refresh_prepared",
+      "coverage_status": "exact_published_baseline",
       "live_main_equivalence_claimed": false,
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
@@ -132,6 +132,7 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every current Git-tracked byte but deliberately excludes production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
+    "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
   "does_not_prove": [
@@ -144,9 +145,11 @@
   "publication_refresh": {
     "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
     "sequence": 3,
-    "status": "prepared_for_new_core_version",
-    "authorized_base_commit_sha": "71b248810616c59ca6190a04e6e1d13739864d2f",
-    "core_concept_doi": "10.5281/zenodo.21739343",
+    "status": "published_and_publicly_restored",
+    "source_baseline_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
+    "doi": "10.5281/zenodo.21755827",
+    "record_id": 21755827,
+    "concept_doi": "10.5281/zenodo.21739343",
     "external_annex_dois": {
       "evidence": "10.5281/zenodo.21753937",
       "nft": "10.5281/zenodo.21754229"

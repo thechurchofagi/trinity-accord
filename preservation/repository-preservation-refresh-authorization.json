@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
   "sequence": 3,
-  "status": "prepared",
+  "status": "consumed",
   "authorized_by": "thechurchofagi",
   "authorized_purpose": "Publish a final self-describing core repository version whose metadata, manifest, recovery report and discovery entrypoints consistently describe an exact immutable publication baseline rather than a moving GitHub main.",
   "previous_core_version_doi": "10.5281/zenodo.21755655",
@@ -14,5 +14,9 @@
   "rights_boundary_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
   "non_amending_boundary": true,
   "live_main_equivalence_claimed": false,
-  "prepared_base_commit_sha": "71b248810616c59ca6190a04e6e1d13739864d2f"
+  "prepared_base_commit_sha": "71b248810616c59ca6190a04e6e1d13739864d2f",
+  "published_source_baseline_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
+  "published_record_id": 21755827,
+  "published_doi": "10.5281/zenodo.21755827",
+  "published_package_identity_sha256": "b45e3fd5aaafe30c435e754499ea40baa7500a36cb33f5e08dd6c0fd3d94ff17"
 }
