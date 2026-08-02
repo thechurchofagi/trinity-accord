@@ -232,23 +232,36 @@ def materialize_commit_tree_repository(
 ) -> None:
     """Create a clean history-free repository containing only the frozen tree.
 
-    Building from a bare clone leaks source-repository storage state, including
-    shallow-clone boundaries and pack layout, into the recovery bundle bytes.
-    Materializing the exact tracked blobs into a new repository makes the
-    published bundle a pure function of the frozen tree and controlled commit
-    metadata.
+    The frozen tree is reconstructed directly in the Git index from its exact
+    modes, blob OIDs, and paths. This deliberately avoids a worktree and
+    ``git add`` so repository ignore rules, filesystem permissions, checkout
+    filters, and clone depth cannot alter the published recovery object graph.
     """
     run(["git", "init", "-b", "main", str(target)])
-    git_text(target, "config", "core.filemode", "true")
     blobs = batch_blob_bytes(
         source, (item["git_blob_oid"] for item in tracked["files"])
     )
     for item in tracked["files"]:
-        destination = target / item["path"]
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes(blobs[item["git_blob_oid"]])
-        destination.chmod(0o755 if item["mode"] == "100755" else 0o644)
-    git_text(target, "add", "-A")
+        expected_oid = item["git_blob_oid"]
+        observed_oid = run(
+            ["git", "hash-object", "-w", "--stdin"],
+            cwd=target,
+            input_bytes=blobs[expected_oid],
+        ).decode("ascii").strip()
+        if observed_oid != expected_oid:
+            raise SystemExit(
+                "clean recovery blob identity mismatch: "
+                f"{item['path']}: expected {expected_oid}, observed {observed_oid}"
+            )
+        git_text(
+            target,
+            "update-index",
+            "--add",
+            "--cacheinfo",
+            item["mode"],
+            expected_oid,
+            item["path"],
+        )
     rebuilt_tree = git_text(target, "write-tree")
     if rebuilt_tree != tree_oid:
         raise SystemExit(
