@@ -21,6 +21,21 @@ def _expected_metadata() -> dict[str, object]:
     return legacy.metadata_for(legacy.ANNEX_SPECS["evidence"], "2026-08-02")
 
 
+def _public_record(expected: dict[str, object]) -> dict[str, object]:
+    return {
+        "access": {"record": "public", "files": "public", "status": "open"},
+        "metadata": {
+            key: value
+            for key, value in expected.items()
+            if key not in {"license", "access_right"}
+        }
+        | {
+            "access_right": "open",
+            "license": {"id": "other-closed"},
+        },
+    }
+
+
 def test_v4_uses_new_immutable_pair_after_published_evidence_v3():
     assert annex_v4.FINAL_ANNEX_IDS == {
         "evidence": "external-evidence-annex-v4",
@@ -57,6 +72,56 @@ def test_direct_record_top_level_license_is_normalized_and_conflicts_fail_closed
         publisher_v4.normalized_public_record(conflicting)
     with pytest.raises(SystemExit, match="metadata conflict: license/rights"):
         publisher_v4.validate_public_metadata_v4(conflicting, expected)
+
+
+def test_public_zenodo_doi_identifier_shape_is_equivalent_but_values_stay_strict():
+    expected = _expected_metadata()
+    record = _public_record(expected)
+    record["metadata"]["related_identifiers"] = [
+        {
+            "identifier": "10.5281/zenodo.21739344",
+            "relation": "isSupplementTo",
+            "resource_type": "software",
+            "scheme": "doi",
+        },
+        {
+            "identifier": "https://github.com/thechurchofagi/trinity-accord",
+            "relation": "isDerivedFrom",
+            "resource_type": "other",
+            "scheme": "url",
+        },
+        {
+            "identifier": "https://www.trinityaccord.org",
+            "relation": "isDocumentedBy",
+            "resource_type": "other",
+            "scheme": "url",
+        },
+    ]
+    publisher_v4.validate_public_metadata_v4(record, expected)
+
+    current_shape = json.loads(json.dumps(record))
+    current_shape["metadata"]["related_identifiers"][0]["relation_type"] = {
+        "id": "is-supplement-to"
+    }
+    del current_shape["metadata"]["related_identifiers"][0]["relation"]
+    current_shape["metadata"]["related_identifiers"][0]["resource_type"] = {
+        "id": "software"
+    }
+    publisher_v4.validate_public_metadata_v4(current_shape, expected)
+
+    wrong_doi = json.loads(json.dumps(record))
+    wrong_doi["metadata"]["related_identifiers"][0]["identifier"] = (
+        "10.5281/zenodo.99999999"
+    )
+    with pytest.raises(SystemExit, match="metadata mismatch: related_identifiers"):
+        publisher_v4.validate_public_metadata_v4(wrong_doi, expected)
+
+    wrong_resource_type = json.loads(json.dumps(record))
+    wrong_resource_type["metadata"]["related_identifiers"][0]["resource_type"] = (
+        "publication"
+    )
+    with pytest.raises(SystemExit, match="metadata mismatch: related_identifiers"):
+        publisher_v4.validate_public_metadata_v4(wrong_resource_type, expected)
 
 
 def test_other_duplicate_public_metadata_conflicts_fail_closed():
