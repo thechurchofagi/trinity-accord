@@ -36,6 +36,7 @@ fi
 
 if [[ "$status" == "pending" ]]; then
   base_commit="$(git rev-parse HEAD)"
+  python3 scripts/migrate_repository_preservation_baseline_contract.py
   python3 scripts/repository_preservation_refresh.py prepare \
     --base-commit "$base_commit"
   git add \
@@ -44,7 +45,8 @@ if [[ "$status" == "pending" ]]; then
     preservation/EXTERNAL-BINARY-ANNEX.md \
     preservation/repository-preservation-refresh-authorization.json \
     preservation/repository-preservation-refresh-prepared.json \
-    preservation/repository-preservation-state-v2.json
+    preservation/repository-preservation-state-v2.json \
+    tests/test_preservation_capsule.py
   git commit -m "archive: prepare repository preservation refresh v2"
   git push origin HEAD:main
   source_sha="$(git rev-parse HEAD)"
@@ -103,7 +105,12 @@ if [[ "$local_source" != "$source_sha" ]]; then
   exit 1
 fi
 
-python3 scripts/publish_preservation_capsule_to_zenodo.py \
+# Zenodo draft objects can expose public download links that legitimately return
+# 404 before publication. The V3 compatibility publisher reads unpublished
+# bytes back from the authenticated upload bucket, verifies exact SHA-256, and
+# still requires converged public metadata and public DOI-only recovery after
+# publication. It reuses any matching prepared draft on retry.
+python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
   --capsule-dir "$capsule" \
   --state preservation/repository-preservation-state-v2.json \
   --api-base "$ZENODO_API_BASE" \
