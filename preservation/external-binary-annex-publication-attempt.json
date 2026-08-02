@@ -1,11 +1,11 @@
 {
   "schema": "trinityaccord.external-binary-annex-publication-attempt.v3",
   "status": "failed",
-  "stage": "build-nft-annex-v3",
-  "workflow_run_id": "30727084906",
+  "stage": "zenodo-publish-or-reconcile-v3",
+  "workflow_run_id": "30727421876",
   "workflow_run_attempt": "1",
-  "source_commit_sha": "dbeae9fbbc2117006c70912fdcdb284b09088c3e",
+  "source_commit_sha": "b1b139ecc83e061b0922e2c1732ebd32937a561c",
   "actor": "thechurchofagi",
-  "failed_at": "2026-08-02T01:29:03.868903Z",
-  "zenodo_publication_may_require_idempotent_reconciliation": false
+  "failed_at": "2026-08-02T01:40:58.542225Z",
+  "zenodo_publication_may_require_idempotent_reconciliation": true
 }
