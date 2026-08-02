@@ -226,15 +226,6 @@ def baseline_tree_limitation() -> str:
     )
 
 
-def baseline_tree_limitation() -> str:
-    return (
-        "The core repository capsule embeds every Git-tracked byte in the exact "
-        "publication baseline named by its manifest, while deliberately excluding "
-        "production parent-history and tag objects so historical credentials are not "
-        "republished; source commit/tag identities remain manifest metadata."
-    )
-
-
 def qualified_limitation() -> str:
     return (
         "The core repository capsule and the separately published evidence and Chronicle "
@@ -242,34 +233,6 @@ def qualified_limitation() -> str:
         "baseline named by the core manifest and every custom asset; this does not "
         "assert byte equality with a later moving GitHub main."
     )
-
-
-def normalize_limitations(value: object) -> list[str]:
-    if not isinstance(value, list):
-        raise SystemExit("recovery index limitations are invalid")
-    normalized: list[str] = []
-    for item in value:
-        if not isinstance(item, str):
-            raise SystemExit("recovery index limitation is not a string")
-        if item == (
-            "The core repository capsule embeds every current Git-tracked byte but "
-            "deliberately excludes production parent-history and tag objects so historical "
-            "credentials are not republished; source commit/tag identities remain manifest "
-            "metadata."
-        ):
-            item = baseline_tree_limitation()
-        if (
-            "together preserve the current Git-tracked repository" in item
-            or item == qualified_limitation()
-        ):
-            continue
-        if item not in normalized:
-            normalized.append(item)
-    tree = baseline_tree_limitation()
-    if tree not in normalized:
-        normalized.append(tree)
-    normalized.append(qualified_limitation())
-    return normalized
 
 
 def normalize_limitations(value: object) -> list[str]:
