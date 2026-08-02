@@ -1,0 +1,31 @@
+name: Diagnose Annex Actionlint
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/diagnose-annex-actionlint.yml
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout current main workflow
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          sparse-checkout: |
+            .github/workflows/external-binary-annex-publication.yml
+          sparse-checkout-cone-mode: false
+      - name: Install actionlint
+        run: |
+          set -euo pipefail
+          go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
+      - name: Lint production annex workflow
+        run: |
+          set -euo pipefail
+          "$(go env GOPATH)/bin/actionlint" -verbose \
+            .github/workflows/external-binary-annex-publication.yml
