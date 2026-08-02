@@ -13,6 +13,7 @@ STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 OBSERVATION = ROOT / "preservation/repository-preservation-observation.json"
 WORKFLOW = ROOT / ".github/workflows/repository-preservation-refresh.yml"
 CONTROLLER = ROOT / ".github/workflows/repository-preservation-capsule.yml"
+INTEGRITY = ROOT / ".github/workflows/repository-integrity.yml"
 RUNNER = ROOT / "scripts/run_repository_preservation_refresh_ci.sh"
 SCRIPT = ROOT / "scripts/repository_preservation_refresh.py"
 
@@ -90,6 +91,20 @@ def test_existing_preservation_controller_runs_inline_refresh_on_main_push():
     assert "if: github.event_name != 'push'" in text
     assert "cancel-in-progress: false" in text
     assert "uses: ./.github/workflows/repository-preservation-refresh.yml" not in text
+
+
+def test_repository_integrity_runs_refresh_only_after_full_main_gate():
+    text = INTEGRITY.read_text(encoding="utf-8")
+    assert "cancel-in-progress: false" in text
+    assert "refresh-repository-preservation-doi:" in text
+    assert "needs: current-system-integrity" in text
+    assert "github.event_name == 'push'" in text
+    assert "github.ref == 'refs/heads/main'" in text
+    assert "group: main-write-lock" in text
+    assert "queue: max" in text
+    assert "contents: write" in text
+    assert "bash scripts/run_repository_preservation_refresh_ci.sh" in text
+    assert "repository-preservation-refresh-proof-integrity" in text
 
 
 def test_transaction_runner_is_strict_idempotent_and_publicly_verified():
