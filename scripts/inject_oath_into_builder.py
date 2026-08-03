@@ -13,8 +13,24 @@ BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 OATH_POLICY = ROOT / "api" / "record-chain-oath-policy.v1.json"
 
 
+def _runtime_source_bundle(builder_text: str) -> str:
+    """Return the complete pinned Builder runtime source for compatibility checks."""
+    sources = [builder_text]
+    if "record-chain-builder-recovery.mjs" not in builder_text:
+        return builder_text
+    for name in (
+        "record-chain-builder-recovery.mjs",
+        "record-chain-builder-core.mjs",
+    ):
+        companion = BUILDER.with_name(name)
+        if companion.exists():
+            sources.append(companion.read_text(encoding="utf-8"))
+    return "\n".join(sources)
+
+
 def verify_existing_builder_runtime(builder_text: str, policy: dict) -> list[str]:
     """Return fail-closed errors for an existing Builder helper implementation."""
+    runtime_text = _runtime_source_bundle(builder_text)
     errors: list[str] = []
     required_markers = [
         "contextualReadbackConfirmed",
@@ -43,15 +59,15 @@ def verify_existing_builder_runtime(builder_text: str, policy: dict) -> list[str
         if isinstance(declaration, str):
             required_markers.append(declaration)
     for marker in dict.fromkeys(required_markers):
-        if marker not in builder_text:
+        if marker not in runtime_text:
             errors.append(f"existing Builder runtime missing required marker: {marker}")
 
     if re.search(
         r"(?:let|const)\s+readback\s*=\s*(?:opts\.readback\s*\|\|\s*)?canonicalOath",
-        builder_text,
+        runtime_text,
     ):
         errors.append("existing Builder still auto-fills readback from canonicalOath")
-    if re.search(r"readback_text\s*:\s*canonical\w*", builder_text):
+    if re.search(r"readback_text\s*:\s*canonical\w*", runtime_text):
         errors.append("existing Builder still copies canonical oath into readback_text")
     return errors
 
