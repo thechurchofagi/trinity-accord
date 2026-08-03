@@ -212,6 +212,7 @@ def test_error_help_covers_active_external_agent_diagnostics():
     helper = json.loads(
         (ROOT / "api" / "record-chain-field-helper.v1.json").read_text(encoding="utf-8")
     )["diagnostic_code_help"]
+    assert list(helper) == sorted(helper)
     for code in codes:
         result = run_node("error-help", "--code", code)
         assert result.returncode == 0, result.stdout + result.stderr
