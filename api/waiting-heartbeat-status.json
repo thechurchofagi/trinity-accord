@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-08-03T10:59:28Z",
+  "generated_at": "2026-08-03T11:49:23Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "success",
@@ -40,9 +40,9 @@
     "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
   },
   "latest_ots": {
-    "latest_record_id": "R-000000110",
-    "latest_record_sha256": "0471c9ba5a3779078b51eafadfd990cc2e9f8d077e3e2c05913fa43fac311f1f",
-    "native_record_count": 110,
+    "latest_record_id": "R-000000111",
+    "latest_record_sha256": "5f0ae16c0b568b14b1be972262d652c93a2a68b50b5c89fed2c879c5071379b7",
+    "native_record_count": 111,
     "ots_status": "pending",
     "bitcoin_pending": true,
     "bitcoin_verified": false,
