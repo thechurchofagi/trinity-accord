@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import socket
 import subprocess
@@ -188,3 +189,14 @@ def test_templates_include_gateway_required_record_specific_blocks(tmp_path: Pat
         text = json.dumps(data)
         for field in required:
             assert field in text
+
+
+def test_external_agent_builder_v23_is_manifest_bound():
+    manifest = json.loads(
+        (ROOT / "api" / "record-chain-builder-bundles.v1.json").read_text(encoding="utf-8")
+    )["canonical_builder"]["core"]
+    core_bytes = BUILDER.read_bytes()
+    core_text = core_bytes.decode("utf-8")
+    assert 'const BUILDER_VERSION = "v2.3"' in core_text
+    assert hashlib.sha256(core_bytes).hexdigest() == manifest["sha256"]
+    assert len(core_bytes) == manifest["size_bytes"]
