@@ -28,28 +28,82 @@ def deploy(deploy_id: str, commit: str, created: str, status: str = "build_in_pr
     }
 
 
-def test_exact_deploy_candidates_bind_commit_and_time():
-    module = load_module()
-    expected = "a" * 40
-    records = [
-        deploy("dep-old", expected, "2026-08-03T14:00:00Z"),
-        deploy("dep-wrong", "b" * 40, "2026-08-03T14:16:40Z"),
-        deploy("dep-right", expected, "2026-08-03T14:16:40Z"),
-    ]
-    matches = module.exact_deploy_candidates(
+def exact_matches(module, records, expected: str):
+    return module.exact_deploy_candidates(
         records,
         expected_commit_id=expected,
         not_before_epoch=module.parse_utc_epoch(
             "2026-08-03T14:16:36Z", label="test"
         ),
     )
+
+
+def test_exact_deploy_candidates_bind_commit_time_and_recoverable_status():
+    module = load_module()
+    expected = "a" * 40
+    records = [
+        deploy("dep-old", expected, "2026-08-03T14:00:00Z"),
+        deploy("dep-wrong", "b" * 40, "2026-08-03T14:16:40Z"),
+        deploy("dep-terminal", expected, "2026-08-03T14:16:41Z", "deactivated"),
+        deploy("dep-right", expected, "2026-08-03T14:16:42Z"),
+    ]
+    matches = exact_matches(module, records, expected)
     assert [module.deploy_id_from_response(item) for item in matches] == ["dep-right"]
+
+
+@pytest.mark.parametrize(
+    "status",
+    ["created", "build_in_progress", "pre_deploy_in_progress", "update_in_progress", "live"],
+)
+def test_active_or_live_exact_deploy_is_recoverable(status: str):
+    module = load_module()
+    expected = "b" * 40
+    matches = exact_matches(
+        module,
+        [deploy("dep-active", expected, "2026-08-03T14:16:40Z", status)],
+        expected,
+    )
+    assert [module.deploy_id_from_response(item) for item in matches] == ["dep-active"]
+
+
+@pytest.mark.parametrize(
+    "status",
+    ["deactivated", "build_failed", "update_failed", "pre_deploy_failed", "canceled"],
+)
+def test_terminal_exact_deploy_is_not_recoverable(status: str):
+    module = load_module()
+    expected = "c" * 40
+    assert exact_matches(
+        module,
+        [deploy("dep-terminal", expected, "2026-08-03T14:16:40Z", status)],
+        expected,
+    ) == []
+
+
+def test_terminal_and_active_candidates_recover_only_active():
+    module = load_module()
+    expected = "d" * 40
+    matches = exact_matches(
+        module,
+        [
+            deploy("dep-terminal", expected, "2026-08-03T14:16:40Z", "deactivated"),
+            deploy("dep-active", expected, "2026-08-03T14:16:41Z", "build_in_progress"),
+        ],
+        expected,
+    )
+    assert [module.deploy_id_from_response(item) for item in matches] == ["dep-active"]
 
 
 def test_recover_unique_deploy_id_polls_until_visible(monkeypatch):
     module = load_module()
-    expected = "c" * 40
-    responses = [[], [deploy("dep-recovered", expected, "2026-08-03T14:16:40Z")]]
+    expected = "e" * 40
+    responses = [
+        [deploy("dep-old-terminal", expected, "2026-08-03T14:16:37Z", "deactivated")],
+        [
+            deploy("dep-old-terminal", expected, "2026-08-03T14:16:37Z", "deactivated"),
+            deploy("dep-recovered", expected, "2026-08-03T14:16:40Z"),
+        ],
+    ]
     monkeypatch.setattr(module, "list_recent_deploys", lambda *_args: responses.pop(0))
     monkeypatch.setattr(module.time, "sleep", lambda _seconds: None)
     ticks = iter([0.0, 0.0, 0.1])
@@ -66,12 +120,37 @@ def test_recover_unique_deploy_id_polls_until_visible(monkeypatch):
     assert recovered == "dep-recovered"
 
 
-def test_recovery_fails_closed_on_multiple_matches(monkeypatch):
+def test_optional_recovery_ignores_terminal_candidate_and_allows_fresh_post(monkeypatch):
     module = load_module()
-    expected = "d" * 40
+    expected = "f" * 40
+    monkeypatch.setattr(
+        module,
+        "list_recent_deploys",
+        lambda *_args: [
+            deploy("dep-deactivated", expected, "2026-08-03T14:16:40Z", "deactivated")
+        ],
+    )
+    ticks = iter([0.0, 1.0])
+    monkeypatch.setattr(module.time, "monotonic", lambda: next(ticks))
+    monkeypatch.setattr(module.time, "sleep", lambda _seconds: None)
+    assert module.recover_unique_deploy_id(
+        service_id="srv-test",
+        token="token",
+        expected_commit_id=expected,
+        not_before_epoch=module.parse_utc_epoch("2026-08-03T14:16:36Z", label="test"),
+        timeout_seconds=0.5,
+        poll_seconds=0.0,
+        require_match=False,
+    ) is None
+
+
+def test_recovery_fails_closed_on_multiple_active_matches(monkeypatch):
+    module = load_module()
+    expected = "1" * 40
     records = [
         deploy("dep-one", expected, "2026-08-03T14:16:40Z"),
-        deploy("dep-two", expected, "2026-08-03T14:16:41Z"),
+        deploy("dep-two", expected, "2026-08-03T14:16:41Z", "live"),
+        deploy("dep-terminal", expected, "2026-08-03T14:16:42Z", "deactivated"),
     ]
     monkeypatch.setattr(module, "list_recent_deploys", lambda *_args: records)
     monkeypatch.setattr(module.time, "monotonic", lambda: 0.0)
@@ -96,7 +175,7 @@ def test_recovery_returns_none_when_optional_window_has_no_match(monkeypatch):
     assert module.recover_unique_deploy_id(
         service_id="srv-test",
         token="token",
-        expected_commit_id="e" * 40,
+        expected_commit_id="2" * 40,
         not_before_epoch=0.0,
         timeout_seconds=0.5,
         poll_seconds=0.0,
@@ -110,7 +189,7 @@ def test_wait_for_deploy_rejects_wrong_commit(monkeypatch):
         module,
         "request",
         lambda *_args, **_kwargs: deploy(
-            "dep-wrong", "f" * 40, "2026-08-03T14:16:40Z", status="live"
+            "dep-wrong", "3" * 40, "2026-08-03T14:16:40Z", status="live"
         ),
     )
     with pytest.raises(SystemExit):
@@ -118,7 +197,7 @@ def test_wait_for_deploy_rejects_wrong_commit(monkeypatch):
             service_id="srv-test",
             deploy_id="dep-wrong",
             token="token",
-            expected_commit_id="a" * 40,
+            expected_commit_id="4" * 40,
             timeout_seconds=1,
             poll_seconds=0,
         )
