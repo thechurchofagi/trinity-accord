@@ -166,10 +166,17 @@ def test_dry_run_does_not_claim_or_cache_durable_artifacts(
 @pytest.mark.asyncio
 async def test_duplicate_response_sets_discriminator_and_validates_schema(monkeypatch) -> None:
     submission_sha = "a" * 64
-    stored_sha = "c" * 64
+    stored_submission = {
+        "schema": "trinityaccord.record-chain-submission.v2",
+        "submission_type": "record_chain_entry",
+        "record_type": "echo",
+        "record_draft": {"record_type": "echo", "message": "test"},
+    }
+    stored_sha = app_module.sha256_canonical_json(stored_submission)
     receipt_id = "rcg-20260718-" + submission_sha[:24]
     receipt = _receipt(receipt_id, submission_sha, stored_sha)
     index = {
+        "schema": "trinityaccord.record-chain-intake-idempotency.v1",
         "submission_sha256": submission_sha,
         "stored_submission_sha256": stored_sha,
         "receipt_id": receipt_id,
@@ -179,11 +186,26 @@ async def test_duplicate_response_sets_discriminator_and_validates_schema(monkey
         "record_type": "echo",
         "created_at": "2026-07-18T00:00:00Z",
         "transaction_state": "pending_written",
+        "idempotency_written": True,
+        "receipt_written": True,
         "pending_written": True,
         "pending_committed_at": "2026-07-18T00:00:00Z",
     }
-    monkeypatch.setattr(app_module, "get_file_text", AsyncMock(return_value=json.dumps(receipt)))
-    monkeypatch.setattr(app_module, "get_file_sha", AsyncMock(return_value="pending-sha"))
+
+    async def read(path: str):
+        if path == receipt["receipt_path"]:
+            return json.dumps(receipt)
+        if path == receipt["intake_submission_path"]:
+            return json.dumps(stored_submission)
+        return None
+
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    file_text_mock = AsyncMock(side_effect=read)
+    file_sha_mock = AsyncMock(return_value="pending-sha")
+    monkeypatch.setattr(app_module, "get_file_text", file_text_mock)
+    monkeypatch.setattr(app_module, "get_file_sha", file_sha_mock)
+    monkeypatch.setattr(secure_entrypoint, "get_file_text", file_text_mock)
 
     result = await app_module._submit_response_from_idempotency_index(
         index=index,

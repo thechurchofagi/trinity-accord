@@ -295,6 +295,41 @@ def test_read_only_recovery_returns_404_without_idempotency_index(monkeypatch):
     assert payload["diagnostic_code"] == "SUBMISSION_NOT_MATERIALIZED"
 
 
+def test_protected_receipt_route_passes_verified_envelope_bindings(monkeypatch):
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    _clear_secure_read_state(secure_entrypoint)
+    submission_sha256 = hashlib.sha256(b"{}").hexdigest()
+    _, receipt, receipt_path, submission_path, stored_text = _receipt_fixture(
+        submission_sha256
+    )
+    mapping = {
+        receipt_path: json.dumps(receipt, separators=(",", ":"), sort_keys=True),
+        submission_path: stored_text,
+    }
+
+    async def fake_get_file_text(path: str):
+        return mapping.get(path)
+
+    monkeypatch.setattr(secure_entrypoint, "get_file_text", fake_get_file_text)
+    monkeypatch.setattr(
+        secure_entrypoint.core_gateway,
+        "get_file_text",
+        fake_get_file_text,
+    )
+    status, payload = asyncio.run(
+        secure_entrypoint.ProtectedProductionApp._receipt_payload(
+            receipt["server_receipt_id"]
+        )
+    )
+    assert status == 200
+    assert payload["found"] is True
+    assert payload["receipt_hash_verified"] is True
+    assert payload["receipt_url_binding_verified"] is True
+    assert payload["stored_submission_hash_verified"] is True
+    assert payload["receipt"]["server_receipt_id"] == receipt["server_receipt_id"]
+
+
 def test_receipt_route_rejects_valid_hash_at_wrong_url(monkeypatch):
     from apps.record_chain_intake_gateway import secure_entrypoint
 
