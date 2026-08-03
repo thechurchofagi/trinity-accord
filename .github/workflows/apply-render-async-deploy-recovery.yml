@@ -53,7 +53,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pytest -q tests/test_render_async_deploy_recovery.py
+          PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q tests/test_render_async_deploy_recovery.py
           python scripts/test_render_manual_deploy_behavior.py
           python scripts/test_render_manual_deploy_contract.py
 
@@ -62,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/run_current_system_tests.py
-          pytest -q tests
+          PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q tests
 
       - name: Commit product-only result
         shell: bash
