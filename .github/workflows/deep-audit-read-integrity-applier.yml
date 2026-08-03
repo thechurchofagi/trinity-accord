@@ -16,8 +16,7 @@ jobs:
   apply:
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository &&
-      github.head_ref == 'agent/deep-audit-read-integrity-20260803' &&
-      github.event.pull_request.head.sha == '7dbf5385c5b81a25a41a2e4c573d3a2ece9f4fe9'
+      github.head_ref == 'agent/deep-audit-read-integrity-20260803'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
