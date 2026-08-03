@@ -22,6 +22,7 @@ concurrency:
 env:
   TARGET_SHA: 1983a870ead78c349228528675fc316176af1f6d
   TARGET_PR: "906"
+  ACCEPTED_REQUEST_NOT_BEFORE: "2026-08-03T14:16:36Z"
 
 jobs:
   deploy:
@@ -47,7 +48,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Deploy exact product commit to protected Render Gateway
+      - name: Recover or deploy exact product commit to protected Render Gateway
         id: deploy
         continue-on-error: true
         env:
@@ -59,6 +60,8 @@ jobs:
           python scripts/render_protected_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$TARGET_SHA" \
+            --recover-existing-since "$ACCEPTED_REQUEST_NOT_BEFORE" \
+            --deploy-id-recovery-timeout 60 \
             --wait \
             --deploy \
             --reconcile-config 2>&1 | tee "$log"
@@ -79,7 +82,7 @@ jobs:
           set -euo pipefail
           if [ "$OUTCOME" = "success" ]; then
             status="LIVE"
-            claim="The protected deploy helper reached RENDER_DEPLOY_LIVE for the exact reviewed product commit."
+            claim="The protected deploy helper recovered or created one uniquely attributable deploy and reached RENDER_DEPLOY_LIVE for the exact reviewed product commit."
           else
             status="FAILED OR UNCONFIRMED"
             claim="No production deployment claim should be made from this run."
@@ -89,6 +92,7 @@ jobs:
           Render Gateway deployment: **$status**
 
           - exact product commit: \`$TARGET_SHA\`
+          - accepted-request lower bound: \`$ACCEPTED_REQUEST_NOT_BEFORE\`
           - service: \`trinity-record-chain-gateway\`
           - Render deploy ID: \`${DEPLOY_ID:-not-reported}\`
           - workflow evidence: $RUN_URL
