@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-builder-bundles.v1",
   "status": "active",
-  "updated_at": "2026-08-03T04:22:00Z",
+  "updated_at": "2026-08-03T04:36:00Z",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
