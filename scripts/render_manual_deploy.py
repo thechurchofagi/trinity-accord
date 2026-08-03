@@ -56,6 +56,16 @@ DEPLOY_FAILURE_STATUSES = frozenset({
     "canceled",
     "deactivated",
 })
+# Render's documented lifecycle states that still represent an existing deploy
+# worth reusing. Terminal failures must never block a fresh retry or be reused
+# as if they could still become live.
+DEPLOY_RECOVERABLE_STATUSES = frozenset({
+    "created",
+    "build_in_progress",
+    "pre_deploy_in_progress",
+    "update_in_progress",
+    "live",
+})
 _COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -427,18 +437,25 @@ def exact_deploy_candidates(
     not_before_epoch: float,
     clock_skew_seconds: float = 5.0,
 ) -> list[dict[str, Any]]:
-    """Return uniquely attributable deploys for one exact commit/time window."""
+    """Return nonterminal/live deploys for one exact commit/time window.
+
+    Historical terminal records such as ``deactivated`` or ``build_failed`` are
+    evidence of previous attempts, not reusable deployments. They are ignored so
+    an optional pre-create recovery can safely fall through to one fresh POST.
+    """
     threshold = not_before_epoch - max(0.0, clock_skew_seconds)
     candidates: list[dict[str, Any]] = []
     for record in records:
         deploy_id = deploy_id_from_response(record)
         commit_id = deploy_commit_id(record)
         created_at = deploy_created_at_epoch(record)
+        status = deploy_status(record)
         if (
             deploy_id
             and commit_id == expected_commit_id
             and created_at is not None
             and created_at >= threshold
+            and status in DEPLOY_RECOVERABLE_STATUSES
         ):
             candidates.append(record)
     candidates.sort(key=lambda item: str(deploy_id_from_response(item) or ""))
