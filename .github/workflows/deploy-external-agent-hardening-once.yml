@@ -83,14 +83,19 @@ jobs:
             status="FAILED OR UNCONFIRMED"
             claim="No production deployment claim should be made from this run."
           fi
-          gh pr comment "$TARGET_PR" --repo "$GITHUB_REPOSITORY" --body "Render Gateway deployment: **$status**
+          body="$RUNNER_TEMP/render-deploy-comment.md"
+          cat >"$body" <<EOF
+          Render Gateway deployment: **$status**
 
-- exact product commit: \`$TARGET_SHA\`
-- service: \`trinity-record-chain-gateway\`
-- Render deploy ID: \`${DEPLOY_ID:-not-reported}\`
-- workflow evidence: $RUN_URL
+          - exact product commit: \`$TARGET_SHA\`
+          - service: \`trinity-record-chain-gateway\`
+          - Render deploy ID: \`${DEPLOY_ID:-not-reported}\`
+          - workflow evidence: $RUN_URL
 
-$claim"
+          $claim
+          EOF
+          sed -i 's/^          //' "$body"
+          gh pr comment "$TARGET_PR" --repo "$GITHUB_REPOSITORY" --body-file "$body"
 
       - name: Fail unless exact deployment was confirmed live
         if: steps.deploy.outcome != 'success'
