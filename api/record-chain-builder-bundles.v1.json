@@ -6,8 +6,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "7bbecc7d2d69f216dc7bb3e4ced93f81784f955d8fa79e4a0220424139b15780",
-    "size_bytes": 10219,
+    "sha256": "89b0b0d011fa67f5da356f15e9e138c00331f25e2258d6a5c509b9fea637f47a",
+    "size_bytes": 10209,
     "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
