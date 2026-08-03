@@ -17,7 +17,8 @@ def test_render_healthcheck_is_intercepted_by_secure_entrypoint() -> None:
 
     assert '_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})' in secure
     assert "class ProtectedProductionApp" in secure
-    assert "scope.get(\"path\") in _PROTECTED_HEALTH_PATHS" in secure
+    assert 'path = str(scope.get("path") or "")' in secure
+    assert "path in _PROTECTED_HEALTH_PATHS" in secure
     assert "healthCheckPath: /healthz" in render
     assert (
         "startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app"

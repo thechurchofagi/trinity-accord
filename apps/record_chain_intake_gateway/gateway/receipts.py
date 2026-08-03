@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .canonical import sha256_canonical_json
+from .runtime import get_runtime_info
 
 RECEIPT_HASH_PREFIX_LEN = 24
 LEGACY_RECEIPT_HASH_PREFIX_LEN = 12
@@ -68,54 +69,26 @@ def make_receipt(
     receipt_path: str = "",
     file_path: str | None = None,
     now: datetime | None = None,
-    gateway_version: str = "1.0.0",
+    gateway_version: str | None = None,
     oath_verification_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a receipt dict for a persisted submission.
 
     The receipt is immutable once created — callers must NOT mutate it after
-    :func:`sha256_canonical_json` has been computed.  Any runtime-only metadata
+    :func:`sha256_canonical_json` has been computed. Any runtime-only metadata
     (e.g. ``commit_sha``) should be returned at the response envelope level,
     not inside the receipt body.
 
-    Parameters
-    ----------
-    submission:
-        The original submission object.
-    submission_sha256:
-        SHA-256 hex digest of the canonical submission (pre-redaction).
-    original_submission_sha256:
-        SHA-256 of the original (pre-redaction) canonical submission.
-        Defaults to ``submission_sha256`` when empty.
-    stored_submission_sha256:
-        SHA-256 of the redacted (persisted) canonical submission.
-        Defaults to ``submission_sha256`` when empty.
-    record_type:
-        The resolved record type.
-    received_raw_body_sha256:
-        SHA-256 hex of the raw request body bytes.
-    intake_submission_path:
-        Repo path of the intake submission file.
-    pending_file_path:
-        Repo path of the pending file.
-    receipt_path:
-        Repo path of the receipt file.
-    file_path:
-        Legacy path in the repo where the record was written (if committed).
-    now:
-        Timestamp override (defaults to UTC now).
-    gateway_version:
-        Version string of this gateway service.
-    oath_verification_summary:
-        Summary of oath verification results (excludes raw readback).
+    ``gateway_version`` defaults to the deployed runtime version. Callers may
+    still supply an explicit value for deterministic fixtures and migrations.
     """
     if now is None:
         now = datetime.now(timezone.utc)
-
-    receipt_id = make_receipt_id(submission_sha256, now)
+    if gateway_version is None:
+        gateway_version = str(get_runtime_info()["version"])
 
     receipt: dict[str, Any] = {
-        "server_receipt_id": receipt_id,
+        "server_receipt_id": make_receipt_id(submission_sha256, now),
         "service": "record-chain-intake-gateway",
         "gateway_version": gateway_version,
         "record_type": record_type,

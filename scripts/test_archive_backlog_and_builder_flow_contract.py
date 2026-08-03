@@ -31,6 +31,36 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
+def read_verified_builder_runtime(manifest: dict) -> str:
+    """Read the complete manifest-pinned Builder runtime for source checks."""
+    canonical = manifest["canonical_builder"]
+    layers = [
+        (ROOT / "downloads" / "record-chain-builder.mjs", canonical),
+        (
+            ROOT / "downloads" / "record-chain-builder-recovery.mjs",
+            canonical["recovery_wrapper"],
+        ),
+        (
+            ROOT / "downloads" / "record-chain-builder-core.mjs",
+            canonical["core"],
+        ),
+    ]
+    texts: list[str] = []
+    for path, contract in layers:
+        require(path.exists(), f"missing Builder layer: {path.name}")
+        raw = path.read_bytes()
+        require(
+            hashlib.sha256(raw).hexdigest() == contract["sha256"],
+            f"Builder layer manifest sha256 is stale: {path.name}",
+        )
+        require(
+            len(raw) == contract["size_bytes"],
+            f"Builder layer manifest size_bytes is stale: {path.name}",
+        )
+        texts.append(raw.decode("utf-8"))
+    return "\n".join(texts)
+
+
 def assert_template(record_type: str) -> dict:
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "template.json"
@@ -247,9 +277,8 @@ def assert_backlog_workflow_boundary(workflow: str) -> None:
 
 def main() -> None:
     workflow = read(".github/workflows/archive-backlog-repair.yml")
-    builder_text = read("downloads/record-chain-builder.mjs")
     manifest = json.loads(read("api/record-chain-builder-bundles.v1.json"))
-    builder_bytes = (ROOT / "downloads" / "record-chain-builder.mjs").read_bytes()
+    builder_text = read_verified_builder_runtime(manifest)
 
     assert_backlog_workflow_boundary(workflow)
 
@@ -351,14 +380,6 @@ def main() -> None:
     )
 
     canonical = manifest["canonical_builder"]
-    require(
-        canonical["sha256"] == hashlib.sha256(builder_bytes).hexdigest(),
-        "record-chain-builder-bundles.v1.json canonical_builder.sha256 is stale",
-    )
-    require(
-        canonical["size_bytes"] == len(builder_bytes),
-        "record-chain-builder-bundles.v1.json canonical_builder.size_bytes is stale",
-    )
     require(
         "classification_update" in canonical.get("supports", []),
         "canonical builder manifest must declare classification_update support",

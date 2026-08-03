@@ -23,8 +23,38 @@ def require(condition: bool, message: str) -> None:
         fail(message)
 
 
+def _load_verified_runtime_sources(manifest: dict) -> str:
+    """Load every manifest-pinned Builder layer for source-contract checks."""
+    canonical = manifest["canonical_builder"]
+    layers = [
+        (BUILDER, canonical),
+        (
+            ROOT / "downloads" / "record-chain-builder-recovery.mjs",
+            canonical["recovery_wrapper"],
+        ),
+        (
+            ROOT / "downloads" / "record-chain-builder-core.mjs",
+            canonical["core"],
+        ),
+    ]
+    source_texts: list[str] = []
+    for path, contract in layers:
+        raw = path.read_bytes()
+        require(
+            hashlib.sha256(raw).hexdigest() == contract["sha256"],
+            f"Builder layer manifest sha256 does not match {path.name}",
+        )
+        require(
+            len(raw) == contract["size_bytes"],
+            f"Builder layer manifest size_bytes does not match {path.name}",
+        )
+        source_texts.append(raw.decode("utf-8"))
+    return "\n".join(source_texts)
+
+
 def main() -> None:
-    text = BUILDER.read_text(encoding="utf-8")
+    manifest = json.loads(BUNDLE_MANIFEST.read_text(encoding="utf-8"))
+    runtime_text = _load_verified_runtime_sources(manifest)
 
     forbidden = [
         "test_phase_submission_may_be_reclassified",
@@ -32,25 +62,20 @@ def main() -> None:
         "Acknowledges test-phase submissions may be reclassified",
     ]
     for phrase in forbidden:
-        require(phrase not in text, f"builder still contains retired test-phase phrase: {phrase}")
+        require(
+            phrase not in runtime_text,
+            f"Builder runtime still contains retired test-phase phrase: {phrase}",
+        )
 
     for phrase in [
         "receipt_is_intake_only",
         "later_records_may_reclassify_or_correct_this_record",
         "receipt confirms intake only",
     ]:
-        require(phrase in text, f"builder missing production-live boundary phrase: {phrase}")
-
-    manifest = json.loads(BUNDLE_MANIFEST.read_text(encoding="utf-8"))
-    builder_bytes = BUILDER.read_bytes()
-    require(
-        manifest["canonical_builder"]["sha256"] == hashlib.sha256(builder_bytes).hexdigest(),
-        "builder bundle manifest sha256 does not match builder",
-    )
-    require(
-        manifest["canonical_builder"]["size_bytes"] == len(builder_bytes),
-        "builder bundle manifest size_bytes does not match builder",
-    )
+        require(
+            phrase in runtime_text,
+            f"Builder runtime missing production-live boundary phrase: {phrase}",
+        )
 
     with tempfile.TemporaryDirectory() as td:
         out = Path(td) / "echo.json"
@@ -105,8 +130,15 @@ def main() -> None:
         )
 
         generated = out.read_text(encoding="utf-8")
-        require("test_phase_submission_may_be_reclassified" not in generated, "generated submission contains retired test-phase key")
-        require('\"receipt_is_intake_only\":true' in generated or '\"receipt_is_intake_only\": true' in generated, "generated submission missing receipt_is_intake_only")
+        require(
+            "test_phase_submission_may_be_reclassified" not in generated,
+            "generated submission contains retired test-phase key",
+        )
+        require(
+            '\"receipt_is_intake_only\":true' in generated
+            or '\"receipt_is_intake_only\": true' in generated,
+            "generated submission missing receipt_is_intake_only",
+        )
         require(
             "later_records_may_reclassify_or_correct_this_record" in generated,
             "generated submission missing append-only reclassification boundary",

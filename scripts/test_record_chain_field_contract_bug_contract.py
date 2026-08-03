@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -27,6 +28,36 @@ def read(path: str) -> str:
 
 def load_json(path: str) -> dict:
     return json.loads(read(path))
+
+
+def read_verified_builder_runtime() -> str:
+    manifest = load_json("api/record-chain-builder-bundles.v1.json")
+    canonical = manifest["canonical_builder"]
+    layers = [
+        (ROOT / "downloads" / "record-chain-builder.mjs", canonical),
+        (
+            ROOT / "downloads" / "record-chain-builder-recovery.mjs",
+            canonical["recovery_wrapper"],
+        ),
+        (
+            ROOT / "downloads" / "record-chain-builder-core.mjs",
+            canonical["core"],
+        ),
+    ]
+    texts: list[str] = []
+    for path, contract in layers:
+        require(path.exists(), f"missing Builder layer: {path.name}")
+        raw = path.read_bytes()
+        require(
+            hashlib.sha256(raw).hexdigest() == contract["sha256"],
+            f"Builder layer manifest sha256 is stale: {path.name}",
+        )
+        require(
+            len(raw) == contract["size_bytes"],
+            f"Builder layer manifest size_bytes is stale: {path.name}",
+        )
+        texts.append(raw.decode("utf-8"))
+    return "\n".join(texts)
 
 
 def literal_frozenset(source: str, assignment_name: str) -> set[str]:
@@ -60,7 +91,7 @@ def main() -> None:
     authorship = read("apps/record_chain_intake_gateway/gateway/authorship.py")
     validation = read("apps/record_chain_intake_gateway/gateway/validation.py")
     models = read("apps/record_chain_intake_gateway/gateway/models.py")
-    builder = read("downloads/record-chain-builder.mjs")
+    builder = read_verified_builder_runtime()
     submission_schema = load_json("api/record-chain-submission-schema.v1.json")
     submit_schema = load_json("api/record-chain-submit-response.v1.json")
 

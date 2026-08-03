@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
+
+import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -9,8 +12,37 @@ HELP = ROOT / "docs" / "record-chain-builder-help.md"
 EXPECTED_BASE = "https://www.trinityaccord.org/docs/record-chain-builder-help/#"
 
 
+def verified_builder_runtime() -> str:
+    manifest = json.loads(
+        (ROOT / "api" / "record-chain-builder-bundles.v1.json").read_text(encoding="utf-8")
+    )
+    canonical = manifest["canonical_builder"]
+    layers = [
+        (BUILDER, canonical),
+        (
+            ROOT / "downloads" / "record-chain-builder-recovery.mjs",
+            canonical["recovery_wrapper"],
+        ),
+        (
+            ROOT / "downloads" / "record-chain-builder-core.mjs",
+            canonical["core"],
+        ),
+    ]
+    texts: list[str] = []
+    for path, contract in layers:
+        raw = path.read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == contract["sha256"], (
+            f"Builder layer manifest sha256 is stale: {path.name}"
+        )
+        assert len(raw) == contract["size_bytes"], (
+            f"Builder layer manifest size_bytes is stale: {path.name}"
+        )
+        texts.append(raw.decode("utf-8"))
+    return "\n".join(texts)
+
+
 def main() -> None:
-    text = BUILDER.read_text(encoding="utf-8")
+    text = verified_builder_runtime()
     urls = sorted(set(re.findall(r'help_url:\s*"([^"]+)"', text)))
     assert urls, "Builder exposes no diagnostic help URLs"
     help_text = HELP.read_text(encoding="utf-8")
