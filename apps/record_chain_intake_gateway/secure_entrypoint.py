@@ -811,6 +811,8 @@ class ProtectedProductionApp:
                 receipt,
                 receipt_id,
                 receipt_path,
+                receipt_url_binding_verified=True,
+                stored_submission_hash_verified=durable,
                 envelope_warnings=(
                     [{
                         "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
@@ -825,8 +827,6 @@ class ProtectedProductionApp:
                     else None
                 ),
             )
-            envelope["receipt_url_binding_verified"] = True
-            envelope["stored_submission_hash_verified"] = durable
             return 200, envelope
         except RecoveryBackendUnavailable as exc:
             return _receipt_error(
