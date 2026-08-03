@@ -1,0 +1,510 @@
+name: Apply submit recovery and receipt provenance once
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/apply-submit-recovery-receipt-provenance-once.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-submit-recovery-receipt-provenance-${{ github.event.pull_request.head.sha }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.head_ref == 'agent/fix-submit-recovery-receipt-provenance-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.1'
+
+      - name: Install focused test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Apply exact audited patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          from pathlib import Path
+
+          ROOT = Path('.')
+
+          def replace_exact(path: str, old: str, new: str) -> None:
+              file_path = ROOT / path
+              text = file_path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected exactly one match, found {count}')
+              file_path.write_text(text.replace(old, new), encoding='utf-8')
+
+          # 1. Persist the actual deployed Gateway runtime version in new receipts.
+          replace_exact(
+              'apps/record_chain_intake_gateway/app.py',
+              '''        receipt_path=receipt_path,\n        now=now,\n        oath_verification_summary=oath_summary,\n''',
+              '''        receipt_path=receipt_path,\n        gateway_version=get_runtime_info()["version"],\n        now=now,\n        oath_verification_summary=oath_summary,\n''',
+          )
+
+          # 2. Preserve the server-owned fact that Gateway verified authorship before pending persistence.
+          replace_exact(
+              'apps/record_chain_intake_gateway/app.py',
+              '''    pending_content_dict = strip_unsigned_projection_fields(draft)\n    if authorship_verified and proof:\n        pending_content_dict["authorship_proof"] = proof\n''',
+              '''    pending_content_dict = strip_unsigned_projection_fields(draft)\n    if authorship_verified:\n        pending_content_dict["authorship_verification_status"] = {\n            "signed_payload_scope": "pre_append_record_draft",\n            "verified_by_gateway_before_pending": True,\n            "verified_by_append_before_record": False,\n            "final_record_contains_append_assigned_fields_not_in_signed_payload": True,\n        }\n    if authorship_verified and proof:\n        pending_content_dict["authorship_proof"] = proof\n''',
+          )
+
+          # 3. Permit only an explicitly marked exact retry whose immutable idempotency index already exists
+          #    to bypass the public cooldown. New submissions carrying the header remain blocked.
+          replace_exact(
+              'apps/record_chain_intake_gateway/protected_app.py',
+              '''from apps.record_chain_intake_gateway.app import app as core_app\n''',
+              '''from apps.record_chain_intake_gateway import app as core_gateway\nfrom apps.record_chain_intake_gateway.gateway.canonical import sha256_canonical_json\nfrom apps.record_chain_intake_gateway.gateway.github_adapter import get_file_sha\n\ncore_app = core_gateway.app\n''',
+          )
+          replace_exact(
+              'apps/record_chain_intake_gateway/protected_app.py',
+              '''_INTAKE_COMMIT_PREFIX = "intake: materialize "\n_COOLDOWN_CACHE_SECONDS = 3.0\n''',
+              '''_INTAKE_COMMIT_PREFIX = "intake: materialize "\n_EXACT_RETRY_HEADER = "x-trinity-exact-retry"\n_COOLDOWN_CACHE_SECONDS = 3.0\n''',
+          )
+          replace_exact(
+              'apps/record_chain_intake_gateway/protected_app.py',
+              '''    @staticmethod\n    def _internal_header_valid(headers: dict[str, str]) -> bool:\n        configured = os.environ.get("TRINITY_INTERNAL_INTAKE_TOKEN", "").strip()\n        supplied = headers.get("x-trinity-internal-intake", "").strip()\n        return bool(configured and supplied and hmac.compare_digest(configured, supplied))\n\n    async def _read_body(self, receive: ASGIReceive) -> tuple[bytes, bool]:\n''',
+              '''    @staticmethod\n    def _internal_header_valid(headers: dict[str, str]) -> bool:\n        configured = os.environ.get("TRINITY_INTERNAL_INTAKE_TOKEN", "").strip()\n        supplied = headers.get("x-trinity-internal-intake", "").strip()\n        return bool(configured and supplied and hmac.compare_digest(configured, supplied))\n\n    @staticmethod\n    def _exact_retry_requested(headers: dict[str, str]) -> bool:\n        return headers.get(_EXACT_RETRY_HEADER, "").strip() == "1"\n\n    async def _materialized_exact_retry(self, body: dict[str, Any]) -> bool:\n        submission_sha256 = sha256_canonical_json(body)\n        index_path = (\n            "record-chain/intake/by-submission-sha256/"\n            f"{submission_sha256}.json"\n        )\n        return await get_file_sha(index_path) is not None\n\n    async def _read_body(self, receive: ASGIReceive) -> tuple[bytes, bool]:\n''',
+          )
+          replace_exact(
+              'apps/record_chain_intake_gateway/protected_app.py',
+              '''        # Entrance gate: reject during the durable cooldown before reading or\n        # validating the body. A valid internal token may bypass only after the\n        # parsed record type is checked below.\n        if is_submit and not self._internal_header_valid(headers):\n            if await self._reject_if_blocked(scope, headers, send, force=False):\n                return\n\n        body, too_large = await self._read_body(receive)\n''',
+              '''        # Normal public submissions are rejected before body parsing during the\n        # durable cooldown. One Builder recovery retry may defer this entrance\n        # check, but the final gate permits it only when the exact submission's\n        # immutable idempotency index already exists.\n        exact_retry_requested = is_submit and self._exact_retry_requested(headers)\n        if (\n            is_submit\n            and not self._internal_header_valid(headers)\n            and not exact_retry_requested\n        ):\n            if await self._reject_if_blocked(scope, headers, send, force=False):\n                return\n\n        body, too_large = await self._read_body(receive)\n''',
+          )
+          replace_exact(
+              'apps/record_chain_intake_gateway/protected_app.py',
+              '''        async with self._submit_lock:\n            if await self._reject_if_blocked(scope, headers, send, force=True):\n                return\n            await self.app(scope, self._replay_receive(body), send)\n            # The core handler has either failed without writing, returned a\n''',
+              '''        async with self._submit_lock:\n            materialized_exact_retry = False\n            if exact_retry_requested:\n                try:\n                    materialized_exact_retry = await self._materialized_exact_retry(parsed)\n                except Exception as exc:\n                    logger.warning("Exact-retry idempotency lookup failed closed: %s", exc)\n                    await self._send_json(\n                        send,\n                        503,\n                        {\n                            "accepted": False,\n                            "submitted": False,\n                            "diagnostic_code": "EXACT_RETRY_STATE_UNAVAILABLE",\n                            "diagnostics": [{\n                                "code": "EXACT_RETRY_STATE_UNAVAILABLE",\n                                "severity": "error",\n                                "field": "submit",\n                                "message": "The Gateway could not verify whether this is an already-materialized exact retry.",\n                                "meaning": "Exact retries fail closed unless the immutable submission idempotency index can be read.",\n                                "suggested_fix": "Retry the exact same signed submission later; do not rebuild or mutate it.",\n                                "retry_allowed": True,\n                            }],\n                        },\n                    )\n                    return\n\n            if not materialized_exact_retry:\n                if await self._reject_if_blocked(scope, headers, send, force=True):\n                    return\n            else:\n                logger.info("Allowing exact materialized submission retry through cooldown")\n\n            await self.app(scope, self._replay_receive(body), send)\n            # The core handler has either failed without writing, returned a\n''',
+          )
+
+          # 4. Builder recovers ambiguous proxy/transport outcomes by first reading the deterministic
+          #    durable receipt and then making at most one marked exact retry.
+          replace_exact(
+              'downloads/record-chain-builder.mjs',
+              '''async function postJson(url, body) {\n  const resp = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(body),\n  });\n  const text = await resp.text();\n  let data;\n  try { data = JSON.parse(text); } catch { data = text; }\n  return { status: resp.status, data };\n}\n''',
+              '''async function postJson(url, body, extraHeaders = {}) {\n  const resp = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json", ...extraHeaders },\n    body: JSON.stringify(body),\n  });\n  const text = await resp.text();\n  let data;\n  try { data = JSON.parse(text); } catch { data = text; }\n  return { status: resp.status, data };\n}\n\nasync function getJson(url) {\n  const resp = await fetch(url, { headers: { "Accept": "application/json" } });\n  const text = await resp.text();\n  let data;\n  try { data = JSON.parse(text); } catch { data = text; }\n  return { status: resp.status, data };\n}\n\nfunction ambiguousSubmitRetryDelayMs() {\n  const raw = process.env.TRINITY_SUBMIT_AMBIGUOUS_RETRY_DELAY_MS ?? "750";\n  const parsed = Number.parseInt(raw, 10);\n  return Number.isFinite(parsed) && parsed >= 0 ? Math.min(parsed, 10_000) : 750;\n}\n\nfunction receiptDateCandidates() {\n  const now = new Date();\n  return [0, -1].map((offsetDays) => {\n    const date = new Date(now.getTime() + offsetDays * 86_400_000);\n    return date.toISOString().slice(0, 10).replaceAll("-", "");\n  });\n}\n\nasync function recoverDurableReceipt(gateway, body) {\n  const submissionSha256 = sha256(canonicalBytes(body));\n  const receiptIds = receiptDateCandidates().map(\n    (datePart) => `rcg-${datePart}-${submissionSha256.slice(0, 24)}`\n  );\n  const base = gateway.replace(/\\/+$/, "");\n  const delayMs = ambiguousSubmitRetryDelayMs();\n\n  for (let attempt = 0; attempt < 3; attempt += 1) {\n    for (const receiptId of receiptIds) {\n      try {\n        const result = await getJson(`${base}/record-chain/receipt/${receiptId}`);\n        const receipt = result.data && typeof result.data === "object"\n          ? result.data.receipt\n          : null;\n        if (\n          result.status === 200\n          && receipt\n          && receipt.submission_sha256 === submissionSha256\n          && (receipt.server_receipt_id === receiptId || receipt.receipt_id === receiptId)\n        ) {\n          return {\n            accepted: true,\n            submitted: true,\n            duplicate: true,\n            recovered_after_ambiguous_submit: true,\n            receipt_id: receiptId,\n            record_type: receipt.record_type || "",\n            submission_sha256: submissionSha256,\n            append_status: result.data.final_status?.append_status || "recovered_existing_receipt",\n            receipt,\n            warnings: [\n              "The initial submit result was ambiguous; the Builder recovered the immutable hash-verified receipt without creating another intake transaction."\n            ],\n          };\n        }\n      } catch {\n        // A receipt read may race repository visibility or a transient proxy fault.\n      }\n    }\n    if (attempt < 2 && delayMs > 0) {\n      await new Promise((resolve) => setTimeout(resolve, delayMs));\n    }\n  }\n  return null;\n}\n\nasync function postSubmitJsonWithRecovery(gateway, body) {\n  const base = gateway.replace(/\\/+$/, "");\n  const url = `${base}/record-chain/submit`;\n  let first;\n  try {\n    first = await postJson(url, body);\n  } catch (error) {\n    first = { status: 0, data: null, transportError: String(error?.message || error) };\n  }\n\n  if (first.status !== 0 && first.status < 500) return first;\n\n  const reason = first.status === 0\n    ? `transport error: ${first.transportError}`\n    : `HTTP ${first.status}`;\n  console.error(\n    `Submit result is ambiguous (${reason}). Checking the deterministic durable receipt before one exact recovery retry.`\n  );\n\n  const recovered = await recoverDurableReceipt(base, body);\n  if (recovered) return { status: 200, data: recovered };\n\n  const delayMs = ambiguousSubmitRetryDelayMs();\n  if (delayMs > 0) await new Promise((resolve) => setTimeout(resolve, delayMs));\n  try {\n    return await postJson(url, body, { "X-Trinity-Exact-Retry": "1" });\n  } catch (error) {\n    return {\n      status: 0,\n      data: {\n        accepted: false,\n        submitted: false,\n        diagnostics: [{\n          code: "SUBMIT_RESULT_AMBIGUOUS",\n          severity: "error",\n          message: `The initial submit result was ambiguous and the one exact recovery retry also failed: ${String(error?.message || error)}`,\n          suggested_fix: "Retry the exact same signed submission later. Do not rebuild, re-sign, or mutate it.",\n          retry_allowed: true,\n        }],\n      },\n    };\n  }\n}\n''',
+          )
+          replace_exact(
+              'downloads/record-chain-builder.mjs',
+              '''    const { status, data } = await postJson(`${gw}/record-chain/submit`, body);\n''',
+              '''    const { status, data } = await postSubmitJsonWithRecovery(gw, body);\n''',
+          )
+
+          # Keep future manifest syncs aware of the recovery capability.
+          replace_exact(
+              'scripts/update_record_chain_builder_manifest.py',
+              '''    "submit",\n    "ed25519_authorship_proof",\n''',
+              '''    "submit",\n    "ambiguous_submit_recovery",\n    "ed25519_authorship_proof",\n''',
+          )
+
+          contract_path = ROOT / 'api/record-chain-intake-gateway.v1.json'
+          contract = json.loads(contract_path.read_text(encoding='utf-8'))
+          contract['updated_at'] = '2026-08-03T01:20:00Z'
+          contract['server_side_pipeline']['ambiguous_submit_recovery'] = {
+              'builder_checks_deterministic_receipt_first': True,
+              'builder_maximum_exact_submit_retries': 1,
+              'exact_retry_header': 'X-Trinity-Exact-Retry: 1',
+              'cooldown_bypass_requires_existing_submission_idempotency_index': True,
+              'new_submissions_cannot_bypass_cooldown_with_retry_header': True,
+              'same_signed_submission_bytes_required': True,
+          }
+          contract['runtime_alignment']['gateway_authorship_verification_status_persisted_before_pending'] = True
+          contract['runtime_alignment']['receipt_gateway_version_uses_deployed_runtime'] = True
+          contract_path.write_text(
+              json.dumps(contract, indent=2, ensure_ascii=False, allow_nan=False) + '\n',
+              encoding='utf-8',
+          )
+
+          test_path = ROOT / 'tests/test_record_chain_submit_recovery.py'
+          test_path.write_text(r'''from __future__ import annotations
+
+import asyncio
+import hashlib
+import json
+import os
+import subprocess
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from unittest.mock import AsyncMock
+
+from starlette.requests import Request
+
+ROOT = Path(__file__).resolve().parents[1]
+BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
+
+
+def _request(payload: dict) -> Request:
+    raw = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+    delivered = False
+
+    async def receive():
+        nonlocal delivered
+        if not delivered:
+            delivered = True
+            return {"type": "http.request", "body": raw, "more_body": False}
+        return {"type": "http.disconnect"}
+
+    return Request(
+        {
+            "type": "http",
+            "method": "POST",
+            "path": "/record-chain/submit",
+            "headers": [(b"content-type", b"application/json")],
+            "client": ("127.0.0.1", 12345),
+        },
+        receive,
+    )
+
+
+def test_gateway_receipt_version_and_authorship_stage_are_persisted(monkeypatch):
+    from apps.record_chain_intake_gateway import app as gateway
+
+    body = {
+        "record_type": "verification",
+        "record_draft": {"record_type": "verification"},
+        "authorship_proof": {"schema": "test-proof"},
+    }
+    receipt_kwargs = {}
+    atomic_files = {}
+
+    monkeypatch.setattr(gateway, "_protection_layer_ready", lambda: True)
+    monkeypatch.setattr(gateway, "_check_config", lambda: None)
+    monkeypatch.setattr(gateway, "validate_submission", lambda value: [])
+    monkeypatch.setattr(gateway, "detect_route", lambda value: "verification")
+    monkeypatch.setattr(gateway, "check_rate_limit", lambda value: None)
+    monkeypatch.setattr(gateway, "redact_transient_oath_readback", lambda value: value)
+    monkeypatch.setattr(gateway, "extract_guardian_application_identity", lambda value: None)
+    monkeypatch.setattr(gateway, "_has_linked_guardian_request", lambda value: False)
+    monkeypatch.setattr(gateway, "_WRITE_MODE", "github_contents_pending")
+    monkeypatch.setattr(gateway, "_DISPATCH_APPEND_WORKFLOW", True)
+    monkeypatch.setattr(gateway, "_cache_receipt", lambda *args, **kwargs: None)
+    monkeypatch.setattr(gateway, "get_runtime_info", lambda: {"version": "9.9.9-test"})
+
+    async def none_index(*args, **kwargs):
+        return None
+
+    async def no_diagnostics(*args, **kwargs):
+        return []
+
+    async def no_file(*args, **kwargs):
+        return None
+
+    async def capture_atomic(files, message):
+        atomic_files.update(files)
+        return {"commit": {"sha": "a" * 40}}
+
+    async def no_dispatch(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(gateway, "_read_idempotency_index", none_index)
+    monkeypatch.setattr(gateway, "_guardian_retirement_target_diagnostics", no_diagnostics)
+    monkeypatch.setattr(gateway, "_record_target_diagnostics", no_diagnostics)
+    monkeypatch.setattr(gateway, "_guardian_application_uniqueness_diagnostics", no_diagnostics)
+    monkeypatch.setattr(gateway, "_find_existing_matching_receipt", none_index)
+    monkeypatch.setattr(gateway, "get_file_sha", no_file)
+    monkeypatch.setattr(gateway, "create_files_atomic", capture_atomic)
+    monkeypatch.setattr(gateway, "dispatch_workflow", no_dispatch)
+
+    def fake_receipt(**kwargs):
+        receipt_kwargs.update(kwargs)
+        receipt_id = gateway.make_receipt_id(kwargs["submission_sha256"], kwargs["now"])
+        accepted_at = kwargs["now"].isoformat().replace("+00:00", "Z")
+        return {
+            "server_receipt_id": receipt_id,
+            "service": "record-chain-intake-gateway",
+            "gateway_version": kwargs["gateway_version"],
+            "record_type": kwargs["record_type"],
+            "submission_sha256": kwargs["submission_sha256"],
+            "original_submission_sha256": kwargs["original_submission_sha256"],
+            "stored_submission_sha256": kwargs["stored_submission_sha256"],
+            "received_raw_body_sha256": kwargs["received_raw_body_sha256"],
+            "accepted_at": accepted_at,
+            "intake_submission_path": kwargs["intake_submission_path"],
+            "pending_file_path": kwargs["pending_file_path"],
+            "receipt_path": kwargs["receipt_path"],
+            "raw_readback_redacted": True,
+            "receipt_is_not_final_chain_record": True,
+            "receipt_sha256": "0" * 64,
+        }
+
+    monkeypatch.setattr(gateway, "make_receipt", fake_receipt)
+
+    response = asyncio.run(gateway.submit(_request(body)))
+    assert response.accepted is True
+    assert receipt_kwargs["gateway_version"] == "9.9.9-test"
+
+    pending_paths = [path for path in atomic_files if path.endswith(".pending.json")]
+    assert len(pending_paths) == 1
+    pending = json.loads(atomic_files[pending_paths[0]])
+    assert pending["authorship_verification_status"] == {
+        "signed_payload_scope": "pre_append_record_draft",
+        "verified_by_gateway_before_pending": True,
+        "verified_by_append_before_record": False,
+        "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
+    }
+    assert pending["authorship_proof"] == body["authorship_proof"]
+
+
+def _run_middleware(monkeypatch, *, materialized: bool):
+    from apps.record_chain_intake_gateway import protected_app
+
+    app_called = []
+    sent = []
+
+    async def downstream(scope, receive, send):
+        app_called.append(True)
+        await send({"type": "http.response.start", "status": 200, "headers": []})
+        await send({"type": "http.response.body", "body": b"{}", "more_body": False})
+
+    middleware = protected_app.IntakeProtectionMiddleware(downstream)
+    monkeypatch.setattr(
+        middleware,
+        "_materialized_exact_retry",
+        AsyncMock(return_value=materialized),
+    )
+    reject = AsyncMock(return_value=True)
+    monkeypatch.setattr(middleware, "_reject_if_blocked", reject)
+
+    body = b"{}"
+    delivered = False
+
+    async def receive():
+        nonlocal delivered
+        if not delivered:
+            delivered = True
+            return {"type": "http.request", "body": body, "more_body": False}
+        return {"type": "http.disconnect"}
+
+    async def send(message):
+        sent.append(message)
+
+    scope = {
+        "type": "http",
+        "method": "POST",
+        "path": "/record-chain/submit",
+        "headers": [
+            (b"content-type", b"application/json"),
+            (b"x-trinity-exact-retry", b"1"),
+        ],
+        "client": ("127.0.0.1", 12345),
+    }
+    asyncio.run(middleware(scope, receive, send))
+    return app_called, reject, sent
+
+
+def test_materialized_exact_retry_bypasses_cooldown(monkeypatch):
+    app_called, reject, _ = _run_middleware(monkeypatch, materialized=True)
+    assert app_called == [True]
+    reject.assert_not_awaited()
+
+
+def test_unmaterialized_retry_header_does_not_bypass_cooldown(monkeypatch):
+    app_called, reject, _ = _run_middleware(monkeypatch, materialized=False)
+    assert app_called == []
+    reject.assert_awaited_once()
+
+
+class _ServerState:
+    def __init__(self, *, receipt_visible: bool, second_submit_success: bool):
+        self.receipt_visible = receipt_visible
+        self.second_submit_success = second_submit_success
+        self.posts = 0
+        self.gets = 0
+        self.retry_header = None
+        self.submission_sha256 = hashlib.sha256(b"{}").hexdigest()
+
+
+def _builder_server(state: _ServerState):
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, fmt, *args):
+            return
+
+        def _write(self, status: int, payload, content_type="application/json"):
+            raw = payload if isinstance(payload, bytes) else json.dumps(payload).encode("utf-8")
+            self.send_response(status)
+            self.send_header("content-type", content_type)
+            self.send_header("content-length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+
+        def do_GET(self):
+            state.gets += 1
+            receipt_id = self.path.rsplit("/", 1)[-1]
+            if state.receipt_visible:
+                self._write(200, {
+                    "found": True,
+                    "receipt_id": receipt_id,
+                    "receipt": {
+                        "server_receipt_id": receipt_id,
+                        "submission_sha256": state.submission_sha256,
+                        "record_type": "verification",
+                    },
+                    "final_status": {"append_status": "appended"},
+                })
+            else:
+                self._write(404, {"found": False})
+
+        def do_POST(self):
+            state.posts += 1
+            if state.posts == 1:
+                self._write(502, b"<html>bad gateway</html>", "text/html")
+                return
+            state.retry_header = self.headers.get("X-Trinity-Exact-Retry")
+            if state.second_submit_success:
+                self._write(200, {
+                    "accepted": True,
+                    "submitted": True,
+                    "duplicate": True,
+                    "receipt_id": "rcg-20260803-" + state.submission_sha256[:24],
+                    "submission_sha256": state.submission_sha256,
+                })
+            else:
+                self._write(503, {"accepted": False, "submitted": False})
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    return server, thread
+
+
+def _run_builder(tmp_path: Path, state: _ServerState):
+    server, thread = _builder_server(state)
+    submission = tmp_path / "submission.json"
+    submission.write_text("{}", encoding="utf-8")
+    env = os.environ.copy()
+    env["TRINITY_SUBMIT_AMBIGUOUS_RETRY_DELAY_MS"] = "0"
+    try:
+        result = subprocess.run(
+            [
+                "node",
+                str(BUILDER),
+                "submit",
+                "--file",
+                str(submission),
+                "--gateway",
+                f"http://127.0.0.1:{server.server_port}",
+            ],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+            timeout=20,
+            check=False,
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+    return result
+
+
+def test_builder_recovers_visible_receipt_without_second_submit(tmp_path):
+    state = _ServerState(receipt_visible=True, second_submit_success=False)
+    result = _run_builder(tmp_path, state)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert state.posts == 1
+    assert state.gets >= 1
+    assert "recovered_after_ambiguous_submit" in result.stdout
+
+
+def test_builder_marks_only_one_exact_recovery_retry(tmp_path):
+    state = _ServerState(receipt_visible=False, second_submit_success=True)
+    result = _run_builder(tmp_path, state)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert state.posts == 2
+    assert state.retry_header == "1"
+
+
+def test_builder_does_not_retry_non_ambiguous_client_error(tmp_path):
+    class Handler(BaseHTTPRequestHandler):
+        posts = 0
+
+        def log_message(self, fmt, *args):
+            return
+
+        def do_POST(self):
+            type(self).posts += 1
+            raw = b'{"accepted":false,"submitted":false}'
+            self.send_response(400)
+            self.send_header("content-type", "application/json")
+            self.send_header("content-length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    submission = tmp_path / "submission.json"
+    submission.write_text("{}", encoding="utf-8")
+    try:
+        result = subprocess.run(
+            ["node", str(BUILDER), "submit", "--file", str(submission), "--gateway", f"http://127.0.0.1:{server.server_port}"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            timeout=20,
+            check=False,
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+    assert result.returncode == 1
+    assert Handler.posts == 1
+''', encoding='utf-8')
+          PY
+
+          python3 scripts/update_record_chain_builder_manifest.py
+          git diff --check
+
+      - name: Run focused regressions
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q tests/test_record_chain_submit_recovery.py
+          node scripts/test_record_chain_builder.mjs
+          python3 scripts/trinity_record_chain.py verify
+
+      - name: Commit final patch and remove one-time workflow
+        shell: bash
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          rm .github/workflows/apply-submit-recovery-receipt-provenance-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/record_chain_intake_gateway/app.py \
+                  apps/record_chain_intake_gateway/protected_app.py \
+                  downloads/record-chain-builder.mjs \
+                  scripts/update_record_chain_builder_manifest.py \
+                  api/record-chain-builder-bundles.v1.json \
+                  api/record-chain-intake-gateway.v1.json \
+                  tests/test_record_chain_submit_recovery.py \
+                  .github/workflows/apply-submit-recovery-receipt-provenance-once.yml
+          git commit -m "fix: recover ambiguous submits and preserve receipt provenance"
+          git push origin HEAD:"${HEAD_BRANCH}"
