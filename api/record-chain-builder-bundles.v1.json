@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-builder-bundles.v1",
   "status": "active",
-  "updated_at": "2026-08-03T13:37:16Z",
+  "updated_at": "2026-08-03T13:53:25Z",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
@@ -11,7 +11,7 @@
     "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
-      "sha256": "6eccd69b6bf5ae9800145f8e3f3491a563c2a56a6860c8c40ddbbdddbb4137da",
+      "sha256": "4b8844072925da5ae343a2ea715d03407379e7ec414af652129a0cee922183ec",
       "size_bytes": 11853,
       "read_only_recovery": true,
       "maximum_submit_posts": 1,
@@ -23,8 +23,8 @@
     },
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
-      "sha256": "bfef921cfece2495328b52b9d27306336a60a39a6f3fc3de103a5bba03eb34e6",
-      "size_bytes": 206950,
+      "sha256": "269bdd593455b73fa4bb39e24b6805a07abc2e783eeb388ea84e87d15dcf42bc",
+      "size_bytes": 208440,
       "repository_local_companion": true,
       "automatically_fetched_when_companion_missing": true,
       "must_match_sha256_and_size_before_execution": true,

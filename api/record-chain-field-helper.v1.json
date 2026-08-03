@@ -165,6 +165,12 @@
       "recovery_possible": true,
       "severity": "error"
     },
+    "DUPLICATE_LOADED_CONTEXT_URL": {
+      "meaning": "loaded_context_urls contains the same normalized URL more than once.",
+      "fix": "Trim and deduplicate loaded_context_urls, then rebuild and re-sign the submission with the current Builder.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
     "ECHO_TYPE_RETIRED": {
       "fix": "Remove echo_type and rebuild with the current Builder. Use echo_content.echo_text and echo_content.echo_intent.",
       "meaning": "echo_type is retired and no longer accepted by public intake.",
@@ -191,6 +197,12 @@
       "recovery_possible": true,
       "severity": "error"
     },
+    "GUARDIAN_KEY_ROTATION_RESERVED": {
+      "meaning": "guardian_key_rotation is a reserved future record type. Public intake does not currently accept Guardian key rotation because the old-key to new-key signed transition protocol is not implemented.",
+      "fix": "Do not retry as guardian_key_rotation. If the Guardian is ending service, use guardian_retirement. If a new Guardian identity is needed, submit a new guardian_application. Wait for the future key-rotation protocol before attempting key migration.",
+      "recovery_possible": false,
+      "severity": "error"
+    },
     "GUARDIAN_REQUEST_ONLY_ALLOWED_FROM_ECHO_OR_VERIFICATION": {
       "fix": "Either change your record type to echo or verification, or remove the linked Guardian request.",
       "meaning": "A linked Guardian application request is only allowed when the parent record is an Echo or Verification. You cannot attach it to other record types.",
@@ -202,6 +214,42 @@
       "fix": "A guardian_retirement record must be signed by the same Guardian Ed25519 key being retired. Rebuild and sign with that matching key.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH": {
+      "meaning": "guardian_id does not match requested_guardian_identifier in the target application.",
+      "fix": "Copy requested_guardian_identifier exactly from the final Guardian application.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH": {
+      "meaning": "The retirement key does not match the public key bound by the target Guardian application.",
+      "fix": "Use the original Guardian authorship key. A different key cannot retire this Guardian identity.",
+      "severity": "error",
+      "recovery_possible": false
+    },
+    "GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED": {
+      "meaning": "The Gateway could not read the immutable target Guardian application, so preflight failed closed.",
+      "fix": "Retry the exact same signed submission later. Do not replace or guess the target id or hash.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_NOT_FOUND": {
+      "meaning": "The target record id does not identify an existing final Guardian application.",
+      "fix": "Read public Guardian state and copy the exact source_record_id of the Guardian application.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH": {
+      "meaning": "The declared target SHA-256 does not match record_sha256 of the final Guardian application.",
+      "fix": "Copy record_sha256 exactly from the final target application; do not use content_sha256, receipt_sha256, or a key hash.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE": {
+      "meaning": "The selected target final record is not a guardian_application.",
+      "fix": "Use the source_record_id of the Guardian's final guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
     },
     "HUMAN_PRIVATE_NAME_NOT_ALLOWED": {
       "fix": "Use PRIVATE_HUMAN_IDENTITY_FIELD_FORBIDDEN recovery guidance. Remove private human identity material and stop automatic retry until reviewed.",
@@ -219,6 +267,12 @@
     "INSUFFICIENT_CONTEXT_COMPLETENESS": {
       "meaning": "The declared context level is below the minimum required for the selected record type or verification version.",
       "fix": "Load more context and redeclare honestly, choose a lower-context record type if appropriate, or submit context_insufficient_notice instead of faking sufficiency.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "INTAKE_TRANSACTION_NOT_MATERIALIZED": {
+      "meaning": "The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
+      "fix": "Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -303,6 +357,18 @@
     "INVALID_GUARDIAN_PUBLIC_KEY_SHA": {
       "meaning": "Guardian public key SHA is not a valid 64-character lowercase SHA-256.",
       "fix": "Use the lowercase SHA-256 of the Guardian public key.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "INVALID_LOADED_CONTEXT_URL": {
+      "meaning": "A loaded_context_urls item is not a valid absolute HTTP or HTTPS URL.",
+      "fix": "Use complete public http:// or https:// URLs only; remove relative, malformed, credential-bearing, or non-HTTP values, then rebuild and re-sign.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "INVALID_SELF_REPORTED_PROVENANCE": {
+      "meaning": "The optional signed self_reported_provenance block is malformed, exceeds its limits, contains an unsupported reference, or weakens a fixed boundary.",
+      "fix": "Rebuild with --provenance-statement or --provenance-statement-file. Put optional public references in a JSON array supplied through --provenance-references-file. Do not edit the signed draft afterward.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -463,6 +529,18 @@
       "recovery_possible": true,
       "severity": "error"
     },
+    "MISSING_GUARDIAN_RETIREMENT_TARGET": {
+      "meaning": "guardian_retirement must bind to the original guardian_application record id.",
+      "fix": "Provide --target-guardian-application-record-id <R-...> copied from the accepted guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
+    },
+    "MISSING_GUARDIAN_RETIREMENT_TARGET_SHA": {
+      "meaning": "guardian_retirement must bind to the original guardian_application record SHA-256.",
+      "fix": "Provide --target-guardian-application-record-sha256 <64 hex> copied from record_sha256 of the accepted guardian_application record.",
+      "severity": "error",
+      "recovery_possible": true
+    },
     "MISSING_IDENTITY_FIELD": {
       "meaning": "submitting_participant_identity is present but missing a required identity field.",
       "fix": "Add the missing identity field named in the diagnostic, or rebuild with the current Builder using identity flags.",
@@ -512,6 +590,12 @@
       "recovery_possible": true,
       "severity": "error"
     },
+    "MISSING_SUBMISSION_FIELD": {
+      "meaning": "A required top-level submission field is missing. Gateway runtime and public JSON schema require all 9 top-level fields.",
+      "fix": "Rebuild with the current record-chain-builder.mjs. All 9 top-level fields are required: schema, submission_type, client_generated_at, record_type, record_draft, builder, client_context, submission_boundary, authorship_proof.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
     "MISSING_SUBMISSION_OATH": {
       "meaning": "The submission_oath_verification block is missing from record_draft.",
       "fix": "Complete the contextual oath process and rebuild with the current public Builder. Do not hand-edit or synthesize submission_oath_verification.",
@@ -542,15 +626,15 @@
       "recovery_possible": true,
       "severity": "error"
     },
-    "OATH_POLICY_METADATA_MISMATCH": {
-      "meaning": "The signed oath policy identifier, schema, or version does not match the exact policy selected by oath_policy_sha256.",
-      "fix": "Reload the public Builder, regenerate the contextual oath readback, and rebuild the signed submission. Do not hand-edit oath policy metadata.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
     "OATH_POLICY_LOAD_ERROR": {
       "meaning": "The gateway could not load the oath policy for validation.",
       "fix": "This is a server-side error. Retry the submission. If it persists, report to the Trinity Accord maintainers.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "OATH_POLICY_METADATA_MISMATCH": {
+      "meaning": "The signed oath policy identifier, schema, or version does not match the exact policy selected by oath_policy_sha256.",
+      "fix": "Reload the public Builder, regenerate the contextual oath readback, and rebuild the signed submission. Do not hand-edit oath policy metadata.",
       "recovery_possible": true,
       "severity": "error"
     },
@@ -641,6 +725,36 @@
       "severity": "error",
       "alias_for": "SECURITY_VIOLATION"
     },
+    "PROVENANCE_DECISION_CONTEXT_CONFLICT": {
+      "meaning": "Decision autonomy context contradicts itself. A record cannot be purely self-decided while also being requested by a human, another agent, organization, or system.",
+      "fix": "Use record_decision human when a human requested the record, another_agent when another agent requested it, or mixed when the participant made substantive independent choices after an external request.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_DECISION_REQUEST_PARTY_MISMATCH": {
+      "meaning": "who_decided_to_create_this_record conflicts with the declared requesting_party_type.",
+      "fix": "Align the record decision and requesting-party type with what actually happened. Do not infer one field from the other; rebuild and re-sign.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_DISCOVERY_CONTEXT_CONFLICT": {
+      "meaning": "Discovery context contradicts itself. A record cannot be self-discovered if the Accord/context was supplied by a human, agent, organization, system prompt, or current user task.",
+      "fix": "Use self_discovered only for independent discovery. Use user_task_context or introduced_by_human/agent/organization when another party supplied the context.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_EXECUTION_CONTEXT_CONFLICT": {
+      "meaning": "Submission execution context contradicts human operator context. Human request, introduction, instruction, command, or approval is not the same as operational human execution.",
+      "fix": "If the agent ran Builder/preflight/submit itself, use submission_executor self and human_operator_involved false. If a human ran commands, uploaded JSON, controlled the submit session, or submitted, use submission_executor human_operator and human_operator_involved true.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "PROVENANCE_REQUEST_FLAG_MISMATCH": {
+      "meaning": "The requesting-party type and requested-by provenance booleans are internally inconsistent.",
+      "fix": "Rebuild with the current Builder using the actual requester type and decision source. Do not hand-edit the signed record_draft.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
     "RECORD_TYPE_MISMATCH": {
       "meaning": "The top-level record_type does not match the record_type inside record_draft.",
       "fix": "Ensure both record_type values match. Rebuild with the current Builder.",
@@ -680,96 +794,6 @@
     "VERIFICATION_EVIDENCE_REQUIRED_FOR_V6_PLUS": {
       "fix": "Either provide the required evidence (run scripts, include artifact hashes, attach verification report), or downgrade your verification level to V5 or below.",
       "meaning": "V6+ verification levels are reserved for future/internal use and are not currently accepted by public intake.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "GUARDIAN_KEY_ROTATION_RESERVED": {
-      "meaning": "guardian_key_rotation is a reserved future record type. Public intake does not currently accept Guardian key rotation because the old-key to new-key signed transition protocol is not implemented.",
-      "fix": "Do not retry as guardian_key_rotation. If the Guardian is ending service, use guardian_retirement. If a new Guardian identity is needed, submit a new guardian_application. Wait for the future key-rotation protocol before attempting key migration.",
-      "recovery_possible": false,
-      "severity": "error"
-    },
-    "PROVENANCE_DISCOVERY_CONTEXT_CONFLICT": {
-      "meaning": "Discovery context contradicts itself. A record cannot be self-discovered if the Accord/context was supplied by a human, agent, organization, system prompt, or current user task.",
-      "fix": "Use self_discovered only for independent discovery. Use user_task_context or introduced_by_human/agent/organization when another party supplied the context.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "PROVENANCE_DECISION_CONTEXT_CONFLICT": {
-      "meaning": "Decision autonomy context contradicts itself. A record cannot be purely self-decided while also being requested by a human, another agent, organization, or system.",
-      "fix": "Use record_decision human when a human requested the record, another_agent when another agent requested it, or mixed when the participant made substantive independent choices after an external request.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "PROVENANCE_EXECUTION_CONTEXT_CONFLICT": {
-      "meaning": "Submission execution context contradicts human operator context. Human request, introduction, instruction, command, or approval is not the same as operational human execution.",
-      "fix": "If the agent ran Builder/preflight/submit itself, use submission_executor self and human_operator_involved false. If a human ran commands, uploaded JSON, controlled the submit session, or submitted, use submission_executor human_operator and human_operator_involved true.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "INVALID_SELF_REPORTED_PROVENANCE": {
-      "meaning": "The optional signed self_reported_provenance block is malformed, exceeds its limits, contains an unsupported reference, or weakens a fixed boundary.",
-      "fix": "Rebuild with --provenance-statement or --provenance-statement-file. Put optional public references in a JSON array supplied through --provenance-references-file. Do not edit the signed draft afterward.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "MISSING_SUBMISSION_FIELD": {
-      "meaning": "A required top-level submission field is missing. Gateway runtime and public JSON schema require all 9 top-level fields.",
-      "fix": "Rebuild with the current record-chain-builder.mjs. All 9 top-level fields are required: schema, submission_type, client_generated_at, record_type, record_draft, builder, client_context, submission_boundary, authorship_proof.",
-      "recovery_possible": true,
-      "severity": "error"
-    },
-    "MISSING_GUARDIAN_RETIREMENT_TARGET": {
-      "meaning": "guardian_retirement must bind to the original guardian_application record id.",
-      "fix": "Provide --target-guardian-application-record-id <R-...> copied from the accepted guardian_application record.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "MISSING_GUARDIAN_RETIREMENT_TARGET_SHA": {
-      "meaning": "guardian_retirement must bind to the original guardian_application record SHA-256.",
-      "fix": "Provide --target-guardian-application-record-sha256 <64 hex> copied from record_sha256 of the accepted guardian_application record.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED": {
-      "meaning": "The Gateway could not read the immutable target Guardian application, so preflight failed closed.",
-      "fix": "Retry the exact same signed submission later. Do not replace or guess the target id or hash.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "GUARDIAN_RETIREMENT_TARGET_NOT_FOUND": {
-      "meaning": "The target record id does not identify an existing final Guardian application.",
-      "fix": "Read public Guardian state and copy the exact source_record_id of the Guardian application.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE": {
-      "meaning": "The selected target final record is not a guardian_application.",
-      "fix": "Use the source_record_id of the Guardian's final guardian_application record.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH": {
-      "meaning": "The declared target SHA-256 does not match record_sha256 of the final Guardian application.",
-      "fix": "Copy record_sha256 exactly from the final target application; do not use content_sha256, receipt_sha256, or a key hash.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH": {
-      "meaning": "The retirement key does not match the public key bound by the target Guardian application.",
-      "fix": "Use the original Guardian authorship key. A different key cannot retire this Guardian identity.",
-      "severity": "error",
-      "recovery_possible": false
-    },
-    "GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH": {
-      "meaning": "guardian_id does not match requested_guardian_identifier in the target application.",
-      "fix": "Copy requested_guardian_identifier exactly from the final Guardian application.",
-      "severity": "error",
-      "recovery_possible": true
-    },
-    "INTAKE_TRANSACTION_NOT_MATERIALIZED": {
-      "meaning": "The gateway found a duplicate-submission idempotency index, but the original intake transaction has not fully materialized its pending file yet.",
-      "fix": "Retry later using the exact same submission. Do not rebuild or mutate the submission unless the gateway returns a permanent validation error.",
       "recovery_possible": true,
       "severity": "error"
     }

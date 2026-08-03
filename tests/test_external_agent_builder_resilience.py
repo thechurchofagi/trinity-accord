@@ -200,3 +200,26 @@ def test_external_agent_builder_v23_is_manifest_bound():
     assert 'const BUILDER_VERSION = "v2.3"' in core_text
     assert hashlib.sha256(core_bytes).hexdigest() == manifest["sha256"]
     assert len(core_bytes) == manifest["size_bytes"]
+
+
+def test_error_help_covers_active_external_agent_diagnostics():
+    codes = [
+        "DUPLICATE_LOADED_CONTEXT_URL",
+        "INVALID_LOADED_CONTEXT_URL",
+        "PROVENANCE_DECISION_REQUEST_PARTY_MISMATCH",
+        "PROVENANCE_REQUEST_FLAG_MISMATCH",
+    ]
+    helper = json.loads(
+        (ROOT / "api" / "record-chain-field-helper.v1.json").read_text(encoding="utf-8")
+    )["diagnostic_code_help"]
+    for code in codes:
+        result = run_node("error-help", "--code", code)
+        assert result.returncode == 0, result.stdout + result.stderr
+        assert f"Error Code: {code}" in result.stdout
+        assert "Meaning:" in result.stdout
+        assert "Fix:" in result.stdout
+        assert "Help URL:" in result.stdout
+        assert helper[code]["severity"] == "error"
+        assert helper[code]["recovery_possible"] is True
+        assert helper[code]["meaning"]
+        assert helper[code]["fix"]

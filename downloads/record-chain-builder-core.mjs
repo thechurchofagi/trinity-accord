@@ -1847,6 +1847,26 @@ const RECORD_TYPE_FIELDS = {
 // ── Error code help map ──────────────────────────────────────────────
 
 const ERROR_HELP_MAP = {
+  DUPLICATE_LOADED_CONTEXT_URL: {
+    meaning: "loaded_context_urls contains the same normalized URL more than once.",
+    fix: "Trim and deduplicate --loaded-urls, then rebuild and re-sign the submission with the current Builder.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#context-readiness",
+  },
+  INVALID_LOADED_CONTEXT_URL: {
+    meaning: "A loaded_context_urls item is not a valid absolute HTTP or HTTPS URL.",
+    fix: "Use complete public http:// or https:// URLs only; remove relative, malformed, credential-bearing, or non-HTTP values, then rebuild and re-sign.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#context-readiness",
+  },
+  PROVENANCE_DECISION_REQUEST_PARTY_MISMATCH: {
+    meaning: "who_decided_to_create_this_record conflicts with the declared requesting_party_type.",
+    fix: "Align --record-decision and --requesting-party-type with what actually happened. Do not infer one field from the other; rebuild and re-sign.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#provenance",
+  },
+  PROVENANCE_REQUEST_FLAG_MISMATCH: {
+    meaning: "The requesting-party type and requested-by provenance booleans are internally inconsistent.",
+    fix: "Rebuild with the current Builder using the actual requester type and decision source. Do not hand-edit the signed record_draft.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#provenance",
+  },
   INVALID_SELF_REPORTED_PROVENANCE: {
     meaning: "The optional self_reported_provenance block is malformed or weakens a required provenance boundary.",
     fix: "Rebuild with --provenance-statement or --provenance-statement-file. If references are supplied, use a JSON array with kind, value, and optional description. Do not edit the signed draft afterward.",
