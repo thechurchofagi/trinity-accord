@@ -73,3 +73,5 @@ jobs:
                   scripts/apply_submit_recovery_patch_once.py
           git commit -m "fix: recover ambiguous submits and preserve receipt provenance"
           git push origin HEAD:agent/fix-submit-recovery-receipt-provenance-20260803
+
+# Existing workflow touch: trigger the one-time branch push execution.
