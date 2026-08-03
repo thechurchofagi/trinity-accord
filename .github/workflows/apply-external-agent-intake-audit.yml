@@ -1,0 +1,140 @@
+name: Apply External-Agent Intake Audit
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-verify:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'agent/deep-audit-external-agent-intake-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout exact PR head branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Confirm immutable execution boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          test "$(git branch --show-current)" = "agent/deep-audit-external-agent-intake-20260803"
+          test "$(git rev-parse origin/main)" = "685e14bc0d8d47d0a6999842bfbdf776b81f7544"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.22.1'
+
+      - name: Install test dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r apps/record_chain_intake_gateway/requirements.txt
+          python -m pip install -r requirements-ci.txt
+          python -m pip install jsonschema==4.23.0
+
+      - name: Apply fail-closed external-agent patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/apply_external_agent_intake_audit.py')
+          text = path.read_text(encoding='utf-8')
+          old = "    '''// ── HTTP helpers ──────────────────────────────────────────────\n\nasync function postJson"
+          new = "    '''async function postJson"
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'HTTP helper executor anchor expected once, found {count}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+          python .github/apply_external_agent_intake_audit.py
+          python .github/apply_external_agent_compatibility.py
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          path = Path('api/record-chain-builder-bundles.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          data['updated_at'] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Syntax and manifest verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile apps/record_chain_intake_gateway/gateway/validation.py
+          node --check downloads/record-chain-builder.mjs
+          node --check downloads/record-chain-builder-recovery.mjs
+          node --check downloads/record-chain-builder-core.mjs
+          python -m json.tool api/record-chain-builder-bundles.v1.json >/dev/null
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          m = json.loads(Path('api/record-chain-builder-bundles.v1.json').read_text())['canonical_builder']
+          checks = [
+              ('downloads/record-chain-builder.mjs', m['sha256'], m['size_bytes']),
+              ('downloads/record-chain-builder-recovery.mjs', m['recovery_wrapper']['sha256'], m['recovery_wrapper']['size_bytes']),
+              ('downloads/record-chain-builder-core.mjs', m['core']['sha256'], m['core']['size_bytes']),
+          ]
+          for raw, expected_hash, expected_size in checks:
+              data = Path(raw).read_bytes()
+              assert hashlib.sha256(data).hexdigest() == expected_hash, raw
+              assert len(data) == expected_size, raw
+          print('PASS: three-layer Builder hashes and sizes')
+          PY
+
+      - name: Run focused external-agent regression matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH="apps/record_chain_intake_gateway:." pytest -q \
+            tests/test_external_agent_builder_resilience.py \
+            apps/record_chain_intake_gateway/tests/test_external_agent_validation_contract.py
+
+      - name: Run complete Gateway suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH="apps/record_chain_intake_gateway:." pytest -q apps/record_chain_intake_gateway/tests
+
+      - name: Run complete repository pytest suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH="apps/record_chain_intake_gateway:." pytest -q tests
+
+      - name: Remove one-shot executor and commit only product changes
+        shell: bash
+        env:
+          BRANCH: agent/deep-audit-external-agent-intake-20260803
+        run: |
+          set -euo pipefail
+          rm -f .github/apply_external_agent_intake_audit.py
+          rm -f .github/apply_external_agent_compatibility.py
+          rm -f .github/workflows/apply-external-agent-intake-audit.yml
+          git config user.name "Trinity Audit Bot"
+          git config user.email "audit-bot@users.noreply.github.com"
+          git add -A
+          test -z "$(git diff --cached --name-only | grep -E '^\.github/(apply_external_agent_intake_audit\.py|apply_external_agent_compatibility\.py|workflows/apply-external-agent-intake-audit\.yml)$' || true)"
+          git commit -m "fix: harden external-agent intake journeys"
+          git push origin "HEAD:${BRANCH}"
