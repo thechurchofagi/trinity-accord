@@ -237,7 +237,7 @@ jobs:
           if-no-files-found: warn
 
   apply-pr894-submit-recovery:
-    if: github.event_name == 'pull_request' && github.head_ref == 'ops/pr894-integrity-executor'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     permissions:
