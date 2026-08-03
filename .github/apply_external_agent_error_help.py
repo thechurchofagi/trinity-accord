@@ -119,7 +119,7 @@ agent_test += '''\n\ndef test_error_help_covers_active_external_agent_diagnostic
         assert f"Error Code: {code}" in result.stdout
         assert "Meaning:" in result.stdout
         assert "Fix:" in result.stdout
-        assert "Help:" in result.stdout
+        assert "Help URL:" in result.stdout
 '''
 AGENT_TEST.write_text(agent_test, encoding="utf-8")
 
