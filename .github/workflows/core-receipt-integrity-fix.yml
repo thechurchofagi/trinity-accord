@@ -30,8 +30,10 @@ jobs:
       - name: Apply deterministic patch
         run: |
           set -euo pipefail
+          python3 .github/core-receipt-hmac-fix.py
           python3 .github/core-receipt-integrity-fix.py
           python3 .github/core-receipt-test-fixtures-fix.py
+          rm -f .github/core-receipt-hmac-fix.py
           rm -f .github/core-receipt-integrity-fix.py
           rm -f .github/core-receipt-test-fixtures-fix.py
           rm -f .github/workflows/core-receipt-integrity-fix.yml
@@ -57,6 +59,7 @@ jobs:
           HEAD_BRANCH: ${{ github.head_ref }}
         run: |
           set -euo pipefail
+          test ! -e .github/core-receipt-hmac-fix.py
           test ! -e .github/core-receipt-integrity-fix.py
           test ! -e .github/core-receipt-test-fixtures-fix.py
           test ! -e .github/workflows/core-receipt-integrity-fix.yml
