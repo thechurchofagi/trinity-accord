@@ -14,7 +14,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.head.ref == 'fix/render-async-deploy-id-recovery-20260803'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
@@ -25,7 +25,23 @@ jobs:
           python-version: '3.12'
       - name: Install test dependencies
         run: python -m pip install -r requirements-ci.txt
-      - name: Diagnose exact mutating command
+      - name: Locate direct source writers
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== filename references ==='
+          grep -R -n --exclude-dir=.git \
+            'test_repository_preservation_semantics_v3_execution.py' \
+            scripts tests .github || true
+          echo '=== fixture source references ==='
+          grep -R -n --exclude-dir=.git \
+            'legacy_auth\["sequence"\] = 2' \
+            scripts tests .github || true
+          echo '=== migration invocations ==='
+          grep -R -n --exclude-dir=.git \
+            'migrate_repository_preservation_semantics_v3' \
+            scripts tests .github || true
+      - name: Isolate pytest mutation
         shell: bash
         run: |
           set -euo pipefail
@@ -33,20 +49,11 @@ jobs:
           baseline="$(sha256sum "$target" | cut -d' ' -f1)"
           echo "BASELINE_SHA=$baseline"
 
-          python scripts/run_current_system_tests.py
-          after_current="$(sha256sum "$target" | cut -d' ' -f1)"
-          echo "AFTER_CURRENT_SYSTEM_SHA=$after_current"
-          if [ "$after_current" != "$baseline" ]; then
-            echo "MUTATED_BY=run_current_system_tests.py"
-            git diff -- "$target"
-            exit 11
-          fi
-
           PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q "$target"
           after_target="$(sha256sum "$target" | cut -d' ' -f1)"
           echo "AFTER_TARGET_TEST_SHA=$after_target"
           if [ "$after_target" != "$baseline" ]; then
-            echo "MUTATED_BY=targeted_pytest"
+            echo "MUTATED_BY=targeted_preservation_test"
             git diff -- "$target"
             exit 12
           fi
@@ -55,9 +62,9 @@ jobs:
           after_full="$(sha256sum "$target" | cut -d' ' -f1)"
           echo "AFTER_FULL_PYTEST_SHA=$after_full"
           if [ "$after_full" != "$baseline" ]; then
-            echo "MUTATED_BY=full_pytest"
+            echo "MUTATED_BY=another_top_level_test"
             git diff -- "$target"
             exit 13
           fi
 
-          echo "NO_TEST_COMMAND_MUTATED_TARGET"
+          echo "PYTEST_DOES_NOT_MUTATE_TARGET"
