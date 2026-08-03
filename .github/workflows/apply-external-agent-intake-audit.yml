@@ -81,18 +81,8 @@ jobs:
           core = manifest['canonical_builder']['core']
           recovery_test = Path('tests/test_record_chain_submit_recovery.py')
           text = recovery_test.read_text(encoding='utf-8')
-          text, sha_count = re.subn(
-              r'CORE_SHA256 = "[0-9a-f]{64}"',
-              f'CORE_SHA256 = "{core["sha256"]}"',
-              text,
-              count=1,
-          )
-          text, size_count = re.subn(
-              r'CORE_SIZE_BYTES = [0-9]+',
-              f'CORE_SIZE_BYTES = {core["size_bytes"]}',
-              text,
-              count=1,
-          )
+          text, sha_count = re.subn(r'CORE_SHA256 = "[0-9a-f]{64}"', f'CORE_SHA256 = "{core["sha256"]}"', text, count=1)
+          text, size_count = re.subn(r'CORE_SIZE_BYTES = [0-9]+', f'CORE_SIZE_BYTES = {core["size_bytes"]}', text, count=1)
           if sha_count != 1 or size_count != 1:
               raise SystemExit(f'Builder core test pin update failed: sha={sha_count}, size={size_count}')
           recovery_test.write_text(text, encoding='utf-8')
@@ -163,6 +153,9 @@ jobs:
           git config user.name "Trinity Audit Bot"
           git config user.email "audit-bot@users.noreply.github.com"
           git add -A
-          test -z "$(git diff --cached --name-only | grep -E '^\.github/(apply_external_agent_intake_audit\.py|apply_external_agent_compatibility\.py|workflows/apply-external-agent-intake-audit\.yml)$' || true)"
+          test -z "$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^\.github/(apply_external_agent_intake_audit\.py|apply_external_agent_compatibility\.py|workflows/apply-external-agent-intake-audit\.yml)$' || true)"
+          test ! -e .github/apply_external_agent_intake_audit.py
+          test ! -e .github/apply_external_agent_compatibility.py
+          test ! -e .github/workflows/apply-external-agent-intake-audit.yml
           git commit -m "fix: harden external-agent intake journeys"
           git push origin "HEAD:${BRANCH}"
