@@ -1,0 +1,97 @@
+name: Deploy External-Agent Hardening Once
+
+# Temporary, self-path-limited bridge for the already-reviewed production
+# commit below. It can run only when this exact workflow file reaches main and
+# must be removed immediately after a confirmed live deployment.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-external-agent-hardening-once.yml"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: deploy-external-agent-hardening-once
+  cancel-in-progress: false
+
+env:
+  TARGET_SHA: 1983a870ead78c349228528675fc316176af1f6d
+  TARGET_PR: "906"
+
+jobs:
+  deploy:
+    if: ${{ github.repository == 'thechurchofagi/trinity-accord' && github.ref == 'refs/heads/main' && (github.actor == 'thechurchofagi' || github.actor == 'github-actions[bot]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Verify exact reviewed target remains in main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$TARGET_SHA" HEAD
+          test "$(git show -s --format=%s "$TARGET_SHA")" = "fix: harden external-agent intake journeys"
+          echo "Deploying reviewed product commit: $TARGET_SHA"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Deploy exact product commit to protected Render Gateway
+        id: deploy
+        continue-on-error: true
+        env:
+          RENDER: ${{ secrets.RENDER }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          log="$RUNNER_TEMP/render-protected-deploy.log"
+          python scripts/render_protected_deploy.py \
+            --service trinity-record-chain-gateway \
+            --commit-id "$TARGET_SHA" \
+            --wait \
+            --deploy \
+            --reconcile-config 2>&1 | tee "$log"
+          grep -q "RENDER_DEPLOY_LIVE" "$log"
+          deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1 || true)"
+          printf 'deploy_id=%s\n' "$deploy_id" >> "$GITHUB_OUTPUT"
+
+      - name: Record deployment evidence on PR 906
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUTCOME: ${{ steps.deploy.outcome }}
+          DEPLOY_ID: ${{ steps.deploy.outputs.deploy_id }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$OUTCOME" = "success" ]; then
+            status="LIVE"
+            claim="The protected deploy helper reached RENDER_DEPLOY_LIVE for the exact reviewed product commit."
+          else
+            status="FAILED OR UNCONFIRMED"
+            claim="No production deployment claim should be made from this run."
+          fi
+          gh pr comment "$TARGET_PR" --repo "$GITHUB_REPOSITORY" --body "Render Gateway deployment: **$status**
+
+- exact product commit: \`$TARGET_SHA\`
+- service: \`trinity-record-chain-gateway\`
+- Render deploy ID: \`${DEPLOY_ID:-not-reported}\`
+- workflow evidence: $RUN_URL
+
+$claim"
+
+      - name: Fail unless exact deployment was confirmed live
+        if: steps.deploy.outcome != 'success'
+        run: exit 1
