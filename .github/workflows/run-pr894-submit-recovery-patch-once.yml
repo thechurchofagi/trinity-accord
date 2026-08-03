@@ -50,8 +50,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git branch --show-current)" = "agent/fix-submit-recovery-receipt-provenance-20260803"
-          test "$(git rev-parse HEAD)" = "0cd663a46eb46d263c920c6590deaf7a15b5d93e"
+          test "$(git rev-parse HEAD)" = "610550bba63f3ec3c1e06c60644ab0a0929dd6a6"
           python3 scripts/apply_submit_recovery_patch_once.py
+          python3 scripts/apply_submit_recovery_followup_once.py
           python3 scripts/update_record_chain_builder_manifest.py
           git diff --check
 
@@ -70,6 +71,7 @@ jobs:
           rm -f .github/workflows/apply-submit-recovery-receipt-provenance-once.yml
           rm -f .github/workflows/run-submit-recovery-patch-once.yml
           rm -f scripts/apply_submit_recovery_patch_once.py
+          rm -f scripts/apply_submit_recovery_followup_once.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/record_chain_intake_gateway/app.py \
@@ -81,7 +83,8 @@ jobs:
                   tests/test_record_chain_submit_recovery.py \
                   .github/workflows/apply-submit-recovery-receipt-provenance-once.yml \
                   .github/workflows/run-submit-recovery-patch-once.yml \
-                  scripts/apply_submit_recovery_patch_once.py
+                  scripts/apply_submit_recovery_patch_once.py \
+                  scripts/apply_submit_recovery_followup_once.py
           git commit -m "fix: recover ambiguous submits and preserve receipt provenance"
           git push origin HEAD:agent/fix-submit-recovery-receipt-provenance-20260803
 
@@ -102,4 +105,4 @@ jobs:
 - Focused + Gateway + Record-Chain tests: \`${TEST_OUTCOME}\`
 - Final branch commit/push: \`${COMMIT_OUTCOME}\`
 
-The executor was locked to target head \`0cd663a46eb46d263c920c6590deaf7a15b5d93e\`. A head mismatch fails closed and prevents duplicate patching."
+The executor was locked to target head \`610550bba63f3ec3c1e06c60644ab0a0929dd6a6\`. A head mismatch fails closed and prevents duplicate patching."
