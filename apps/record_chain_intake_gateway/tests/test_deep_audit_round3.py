@@ -254,6 +254,8 @@ def test_cache_fallback_warning_matches_public_schema(client: TestClient, monkey
         if warning["code"] == "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE"
     )
     assert cache_warning["message"]
+    assert payload["receipt_url_binding_verified"] is True
+    assert payload["stored_submission_hash_verified"] is False
     Draft202012Validator(_load_schema("record-chain-receipt-response.v1.json")).validate(payload)
 
 

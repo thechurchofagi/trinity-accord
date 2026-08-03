@@ -1,39 +1,31 @@
 """Production entrypoint for the protected Record-Chain Gateway.
 
-The public repository must not make the exact reopening time computable from a
-public commit SHA. This entrypoint replaces the unkeyed test/reference interval
-function with HMAC-SHA256 keyed by a server-only secret before exposing the ASGI
-application.
-
-A dedicated ``TRINITY_COOLDOWN_SECRET`` is preferred. The already-required
-``TRINITY_GITHUB_TOKEN`` is a fail-safe fallback so an existing production
-service fails closed rather than silently losing the cooldown during rollout.
-
-Both ``/healthz`` and ``/readyz`` are intercepted by this production wrapper and
-run the same strict configuration/protection check. Render currently probes
-``/healthz``; ``/readyz`` remains the explicit machine-facing protected
-readiness route. The deployment helper separately reads back the secure Uvicorn
-start command, so an unprotected core-app command cannot be accepted as a valid
-production deployment.
-
-The wrapper also exposes a read-only ambiguity-recovery endpoint keyed by the
-canonical submission SHA-256. It verifies the immutable idempotency index and
-receipt hash before returning an existing receipt. It never submits, retries,
-or bypasses the durable intake cooldown.
+This module installs the secret-keyed durable intake cooldown, preserves the
+Gateway-owned authorship verification projection, and exposes hardened
+read-only receipt/recovery routes. Read-only routes are rate limited, bounded,
+cache-aware, and fail closed without misreporting transient repository outages
+as immutable-state corruption.
 """
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import hmac
 import json
 import os
 import re
 import time
+import threading
+from collections import deque
+from dataclasses import dataclass
 from typing import Any
 
 from apps.record_chain_intake_gateway import app as core_gateway
 from apps.record_chain_intake_gateway.gateway import runtime
-from apps.record_chain_intake_gateway.gateway.canonical import parse_json_strict
+from apps.record_chain_intake_gateway.gateway.canonical import (
+    parse_json_strict,
+    sha256_canonical_json,
+)
 from apps.record_chain_intake_gateway.gateway.github_adapter import get_file_text
 from apps.record_chain_intake_gateway.gateway.receipts import verify_receipt_sha256
 
@@ -67,10 +59,63 @@ _PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})
 _SUBMISSION_RECOVERY_RE = re.compile(
     r"^/record-chain/recovery/submission/(?P<submission_sha256>[0-9a-f]{64})$"
 )
+_RECEIPT_ROUTE_RE = re.compile(
+    r"^/record-chain/receipt/(?P<receipt_id>"
+    r"rcg-[0-9]{8}-[0-9a-f]{12}(?:[0-9a-f]{12})?)$"
+)
 _RECEIPT_ID_RE = re.compile(
     r"^rcg-(?P<year>[0-9]{4})(?P<month>[0-9]{2})(?P<day>[0-9]{2})-"
     r"(?P<digest>[0-9a-f]{12}(?:[0-9a-f]{12})?)$"
 )
+
+_READ_GLOBAL_LIMIT_PER_MINUTE = max(
+    1, int(os.environ.get("TRINITY_READ_ROUTE_GLOBAL_LIMIT_PER_MINUTE", "600"))
+)
+_READ_CLIENT_LIMIT_PER_MINUTE = max(
+    1, int(os.environ.get("TRINITY_READ_ROUTE_CLIENT_LIMIT_PER_MINUTE", "120"))
+)
+_READ_WINDOW_SECONDS = 60.0
+_READ_MAX_TRACKED_CLIENTS = max(
+    100, int(os.environ.get("TRINITY_READ_ROUTE_MAX_TRACKED_CLIENTS", "20000"))
+)
+_RECOVERY_MAX_CONCURRENCY = max(
+    1, int(os.environ.get("TRINITY_RECOVERY_MAX_CONCURRENCY", "8"))
+)
+_RECOVERY_CACHE_MAX_ENTRIES = max(
+    16, int(os.environ.get("TRINITY_RECOVERY_CACHE_MAX_ENTRIES", "2048"))
+)
+_RECOVERY_POSITIVE_TTL_SECONDS = max(
+    0.0, float(os.environ.get("TRINITY_RECOVERY_POSITIVE_TTL_SECONDS", "30"))
+)
+_RECOVERY_NEGATIVE_TTL_SECONDS = max(
+    0.0, float(os.environ.get("TRINITY_RECOVERY_NEGATIVE_TTL_SECONDS", "1"))
+)
+
+_read_state_lock = threading.Lock()
+_recovery_active = 0
+_read_global_attempts: deque[float] = deque()
+_read_attempts_by_client: dict[str, deque[float]] = {}
+_recovery_cache: dict[str, tuple[float, int, dict[str, Any]]] = {}
+
+
+class RecoveryBackendUnavailable(RuntimeError):
+    """The durable repository could not be read reliably."""
+
+
+class RecoveryStateInconsistent(RuntimeError):
+    """Durable artifacts were readable but failed immutable binding checks."""
+
+
+@dataclass(frozen=True)
+class VerifiedIntakeArtifacts:
+    index: dict[str, Any]
+    receipt: dict[str, Any]
+    receipt_id: str
+    receipt_path: str
+    intake_submission_path: str
+    pending_file_path: str
+    record_type: str
+    stored_submission_sha256: str
 
 
 def _server_cooldown_secret() -> bytes:
@@ -101,16 +146,13 @@ def keyed_cooldown_seconds(commit_sha: str, *, secret: bytes | None = None) -> i
 
 
 # Patch the module global resolved by IntakeProtectionMiddleware._cooldown_state.
-# The production app therefore never uses the public unkeyed reference helper.
 protection.cooldown_seconds_for_commit = keyed_cooldown_seconds
 
-# Reduce GitHub API pressure during a blocked-request flood. The final gate still
+# Reduce GitHub API pressure during blocked-request floods. The final gate still
 # forces an uncached read immediately before any durable write.
 protection._COOLDOWN_CACHE_SECONDS = 30.0
 
-# Bound the process-local client guidance map. The durable acceptance state is
-# still the immutable intake commit; this map is only for progressively clearer
-# rejection guidance and must never become an unbounded high-cardinality store.
+# Bound the process-local blocked-client guidance map.
 _original_blocked_attempt_count = protection.IntakeProtectionMiddleware._blocked_attempt_count
 
 
@@ -146,11 +188,7 @@ def _bounded_blocked_attempt_count(self, client_key: str) -> int:
 
 protection.IntakeProtectionMiddleware._blocked_attempt_count = _bounded_blocked_attempt_count
 
-# A successful GitHub API response that contains no materialization commit must
-# not be interpreted as "no cooldown" in an established deployment. This closes
-# the rare path-filter/history-window fail-open case. A genuinely new empty
-# deployment can opt in explicitly after an operator verifies that history is
-# actually empty.
+# Do not interpret an empty path-filter result as a genuinely empty deployment.
 _original_latest_intake_commit = protection.IntakeProtectionMiddleware._latest_intake_commit
 
 
@@ -172,10 +210,181 @@ async def _latest_intake_commit_fail_closed(self, *, force: bool):
 
 protection.IntakeProtectionMiddleware._latest_intake_commit = _latest_intake_commit_fail_closed
 
-# This marker is process-local and is set only by this module. Readiness can
-# therefore distinguish a genuinely wrapped runtime from a Render service that
-# merely deployed the correct source commit with a stale core-app start command.
+# This marker is process-local and is set only by this secure module.
 runtime.mark_protection_layer_active()
+
+
+def _parse_object(text: str, *, label: str) -> dict[str, Any]:
+    parsed = parse_json_strict(text)
+    if not isinstance(parsed, dict):
+        raise RecoveryStateInconsistent(f"{label} is not a JSON object")
+    return parsed
+
+
+async def _read_text(path: str, *, label: str) -> str | None:
+    try:
+        return await get_file_text(path)
+    except Exception as exc:
+        raise RecoveryBackendUnavailable(f"{label} could not be read") from exc
+
+
+def _canonical_receipt_paths(receipt_id: str, record_type: str) -> tuple[str, str, str]:
+    match = _RECEIPT_ID_RE.fullmatch(receipt_id)
+    if match is None:
+        raise RecoveryStateInconsistent("invalid receipt_id")
+    year = match.group("year")
+    month = match.group("month")
+    receipt_path = (
+        f"record-chain/intake/receipts/{year}/{month}/{receipt_id}.receipt.json"
+    )
+    submission_path = (
+        f"record-chain/intake/submissions/{year}/{month}/{receipt_id}.submission.json"
+    )
+    pending_path = f"record-chain/pending/{receipt_id}.{record_type}.pending.json"
+    return receipt_path, submission_path, pending_path
+
+
+async def _verify_intake_artifacts(
+    *,
+    index: dict[str, Any],
+    submission_sha256: str,
+    expected_record_type: str | None = None,
+) -> VerifiedIntakeArtifacts:
+    if index.get("schema") != "trinityaccord.record-chain-intake-idempotency.v1":
+        raise RecoveryStateInconsistent("unexpected idempotency schema")
+    if index.get("submission_sha256") != submission_sha256:
+        raise RecoveryStateInconsistent("idempotency submission hash mismatch")
+    if index.get("idempotency_written") is not True:
+        raise RecoveryStateInconsistent("idempotency index is not committed")
+    if index.get("receipt_written") is not True:
+        raise RecoveryStateInconsistent("receipt is not marked written")
+
+    receipt_id = index.get("receipt_id")
+    record_type = index.get("record_type")
+    if not isinstance(receipt_id, str):
+        raise RecoveryStateInconsistent("missing receipt_id")
+    if not isinstance(record_type, str) or not re.fullmatch(r"[a-z_]+", record_type):
+        raise RecoveryStateInconsistent("invalid record_type")
+    if expected_record_type and record_type != expected_record_type:
+        raise RecoveryStateInconsistent("record type does not match the submitted route")
+
+    expected_receipt_path, expected_submission_path, expected_pending_path = (
+        _canonical_receipt_paths(receipt_id, record_type)
+    )
+    receipt_path = index.get("receipt_path")
+    intake_submission_path = index.get("intake_submission_path")
+    pending_file_path = index.get("pending_file_path")
+    if receipt_path != expected_receipt_path:
+        raise RecoveryStateInconsistent("receipt path is not canonically bound to receipt_id")
+    if intake_submission_path != expected_submission_path:
+        raise RecoveryStateInconsistent("submission path is not canonically bound to receipt_id")
+    if pending_file_path != expected_pending_path:
+        raise RecoveryStateInconsistent(
+            "pending path is not canonically bound to receipt_id and record_type"
+        )
+
+    receipt_text = await _read_text(receipt_path, label="receipt")
+    if receipt_text is None:
+        raise RecoveryStateInconsistent("receipt path is absent")
+    receipt = _parse_object(receipt_text, label="receipt")
+    receipt_ok, receipt_error = verify_receipt_sha256(receipt)
+    if not receipt_ok:
+        raise RecoveryStateInconsistent(receipt_error)
+
+    expected_receipt_bindings = {
+        "server_receipt_id": receipt_id,
+        "receipt_path": receipt_path,
+        "intake_submission_path": intake_submission_path,
+        "pending_file_path": pending_file_path,
+        "submission_sha256": submission_sha256,
+        "record_type": record_type,
+    }
+    for field, expected in expected_receipt_bindings.items():
+        actual = receipt.get(field)
+        if actual != expected:
+            raise RecoveryStateInconsistent(
+                f"receipt binding mismatch for {field}: expected {expected!r}, got {actual!r}"
+            )
+    original_submission_sha256 = receipt.get("original_submission_sha256")
+    if original_submission_sha256 not in (None, "", submission_sha256):
+        raise RecoveryStateInconsistent(
+            "receipt original_submission_sha256 does not bind the requested submission"
+        )
+
+    stored_submission_sha256 = index.get("stored_submission_sha256")
+    if (
+        not isinstance(stored_submission_sha256, str)
+        or not re.fullmatch(r"[0-9a-f]{64}", stored_submission_sha256)
+    ):
+        raise RecoveryStateInconsistent("invalid stored_submission_sha256 in index")
+    if receipt.get("stored_submission_sha256") != stored_submission_sha256:
+        raise RecoveryStateInconsistent("stored submission hash mismatch between index and receipt")
+
+    submission_text = await _read_text(
+        intake_submission_path,
+        label="stored submission",
+    )
+    if submission_text is None:
+        raise RecoveryStateInconsistent("stored submission path is absent")
+    stored_submission = _parse_object(submission_text, label="stored submission")
+    actual_stored_sha256 = sha256_canonical_json(stored_submission)
+    if actual_stored_sha256 != stored_submission_sha256:
+        raise RecoveryStateInconsistent(
+            "stored submission bytes do not match stored_submission_sha256"
+        )
+
+    return VerifiedIntakeArtifacts(
+        index=index,
+        receipt=receipt,
+        receipt_id=receipt_id,
+        receipt_path=receipt_path,
+        intake_submission_path=intake_submission_path,
+        pending_file_path=pending_file_path,
+        record_type=record_type,
+        stored_submission_sha256=stored_submission_sha256,
+    )
+
+
+# Harden the duplicate-submit path as well as the dedicated recovery route.
+_original_submit_response_from_idempotency_index = (
+    core_gateway._submit_response_from_idempotency_index
+)
+
+
+async def _verified_submit_response_from_idempotency_index(
+    *,
+    index: dict[str, Any],
+    record_type: str,
+    submission_sha256: str,
+    received_raw_body_sha256: str,
+    body: dict[str, Any],
+):
+    await _verify_intake_artifacts(
+        index=index,
+        submission_sha256=submission_sha256,
+        expected_record_type=record_type,
+    )
+    return await _original_submit_response_from_idempotency_index(
+        index=index,
+        record_type=record_type,
+        submission_sha256=submission_sha256,
+        received_raw_body_sha256=received_raw_body_sha256,
+        body=body,
+    )
+
+
+core_gateway._submit_response_from_idempotency_index = (
+    _verified_submit_response_from_idempotency_index
+)
+
+
+def _boundary() -> dict[str, bool]:
+    return {
+        "read_only_recovery": True,
+        "does_not_create_submission": True,
+        "does_not_retry_submission": True,
+        "does_not_bypass_cooldown": True,
+    }
 
 
 def _recovery_error(
@@ -192,8 +401,31 @@ def _recovery_error(
         "submission_sha256": submission_sha256,
         "diagnostic_code": code,
         "message": message,
+        "boundary": _boundary(),
+    }
+
+
+def _receipt_error(
+    *,
+    status: int,
+    code: str,
+    message: str,
+    receipt_id: str,
+) -> tuple[int, dict[str, Any]]:
+    diagnostic = {
+        "code": code,
+        "severity": "error",
+        "message": message,
+    }
+    return status, {
+        "found": False,
+        "receipt_hash_verified": False,
+        "receipt_id": receipt_id,
+        "diagnostic_code": code,
+        "message": message,
+        "diagnostics": [diagnostic],
         "boundary": {
-            "read_only_recovery": True,
+            "read_only_receipt_lookup": True,
             "does_not_create_submission": True,
             "does_not_retry_submission": True,
             "does_not_bypass_cooldown": True,
@@ -201,15 +433,113 @@ def _recovery_error(
     }
 
 
-def _parse_object(text: str, *, label: str) -> dict[str, Any]:
-    parsed = parse_json_strict(text)
-    if not isinstance(parsed, dict):
-        raise ValueError(f"{label} is not a JSON object")
-    return parsed
+def _request_headers(scope: dict[str, Any]) -> dict[str, str]:
+    return protection.IntakeProtectionMiddleware._headers(scope)
+
+
+def _client_key(scope: dict[str, Any], headers: dict[str, str]) -> str:
+    return protection.IntakeProtectionMiddleware._client_key(scope, headers)
+
+
+def _prune_read_state(now: float) -> None:
+    cutoff = now - _READ_WINDOW_SECONDS
+    while _read_global_attempts and _read_global_attempts[0] < cutoff:
+        _read_global_attempts.popleft()
+    for key, attempts in list(_read_attempts_by_client.items()):
+        while attempts and attempts[0] < cutoff:
+            attempts.popleft()
+        if not attempts:
+            _read_attempts_by_client.pop(key, None)
+
+
+def _allow_read_route(client_key: str) -> tuple[bool, int]:
+    now = time.monotonic()
+    with _read_state_lock:
+        _prune_read_state(now)
+        attempts = _read_attempts_by_client.get(client_key)
+        if attempts is None:
+            if len(_read_attempts_by_client) >= _READ_MAX_TRACKED_CLIENTS:
+                oldest_key = min(
+                    _read_attempts_by_client,
+                    key=lambda key: (
+                        _read_attempts_by_client[key][-1]
+                        if _read_attempts_by_client[key]
+                        else float("-inf")
+                    ),
+                )
+                _read_attempts_by_client.pop(oldest_key, None)
+            attempts = deque()
+            _read_attempts_by_client[client_key] = attempts
+
+        if len(_read_global_attempts) >= _READ_GLOBAL_LIMIT_PER_MINUTE:
+            retry_after = max(
+                int(_read_global_attempts[0] + _READ_WINDOW_SECONDS - now),
+                1,
+            )
+            return False, retry_after
+        if len(attempts) >= _READ_CLIENT_LIMIT_PER_MINUTE:
+            retry_after = max(int(attempts[0] + _READ_WINDOW_SECONDS - now), 1)
+            return False, retry_after
+
+        _read_global_attempts.append(now)
+        attempts.append(now)
+        return True, 0
+
+
+def _cache_get(submission_sha256: str) -> tuple[int, dict[str, Any]] | None:
+    with _read_state_lock:
+        item = _recovery_cache.get(submission_sha256)
+        if item is None:
+            return None
+        expires_at, status, payload = item
+        if time.monotonic() >= expires_at:
+            _recovery_cache.pop(submission_sha256, None)
+            return None
+        return status, payload
+
+
+def _cache_put(
+    submission_sha256: str,
+    *,
+    status: int,
+    payload: dict[str, Any],
+) -> None:
+    ttl = (
+        _RECOVERY_POSITIVE_TTL_SECONDS
+        if status == 200
+        else _RECOVERY_NEGATIVE_TTL_SECONDS
+    )
+    if ttl <= 0 or status not in {200, 404}:
+        return
+    with _read_state_lock:
+        _recovery_cache.pop(submission_sha256, None)
+        _recovery_cache[submission_sha256] = (
+            time.monotonic() + ttl,
+            status,
+            payload,
+        )
+        while len(_recovery_cache) > _RECOVERY_CACHE_MAX_ENTRIES:
+            oldest_key = next(iter(_recovery_cache))
+            _recovery_cache.pop(oldest_key, None)
+
+
+def _try_acquire_recovery_slot() -> bool:
+    global _recovery_active
+    with _read_state_lock:
+        if _recovery_active >= _RECOVERY_MAX_CONCURRENCY:
+            return False
+        _recovery_active += 1
+        return True
+
+
+def _release_recovery_slot() -> None:
+    global _recovery_active
+    with _read_state_lock:
+        _recovery_active = max(_recovery_active - 1, 0)
 
 
 class ProtectedProductionApp:
-    """ASGI wrapper exposing fail-closed production and recovery routes."""
+    """ASGI wrapper exposing fail-closed production and read-only routes."""
 
     def __init__(self, app: Any) -> None:
         self.app = app
@@ -246,6 +576,12 @@ class ProtectedProductionApp:
                 "branch_configured": branch_configured,
                 "token_configured": token_configured,
                 "cooldown_secret_configured": cooldown_secret_configured,
+                "read_route_limits": {
+                    "global_per_minute": _READ_GLOBAL_LIMIT_PER_MINUTE,
+                    "client_per_minute": _READ_CLIENT_LIMIT_PER_MINUTE,
+                    "recovery_max_concurrency": _RECOVERY_MAX_CONCURRENCY,
+                    "recovery_cache_max_entries": _RECOVERY_CACHE_MAX_ENTRIES,
+                },
             },
         )
 
@@ -253,121 +589,288 @@ class ProtectedProductionApp:
     async def _submission_recovery_payload(
         submission_sha256: str,
     ) -> tuple[int, dict[str, Any]]:
+        cached = _cache_get(submission_sha256)
+        if cached is not None:
+            return cached
+
         index_path = (
             "record-chain/intake/by-submission-sha256/"
             f"{submission_sha256}.json"
         )
-        try:
-            index_text = await get_file_text(index_path)
-        except Exception:
+        if not _try_acquire_recovery_slot():
             return _recovery_error(
                 status=503,
-                code="RECOVERY_STATE_UNAVAILABLE",
-                message="The immutable intake index could not be read.",
-                submission_sha256=submission_sha256,
-            )
-        if index_text is None:
-            return _recovery_error(
-                status=404,
-                code="SUBMISSION_NOT_MATERIALIZED",
-                message="No immutable intake transaction exists for this submission SHA-256.",
-                submission_sha256=submission_sha256,
-            )
-
-        try:
-            index = _parse_object(index_text, label="idempotency index")
-            if index.get("schema") != "trinityaccord.record-chain-intake-idempotency.v1":
-                raise ValueError("unexpected idempotency schema")
-            if index.get("submission_sha256") != submission_sha256:
-                raise ValueError("idempotency submission hash mismatch")
-            if index.get("idempotency_written") is not True:
-                raise ValueError("idempotency index is not committed")
-            if index.get("receipt_written") is not True:
-                raise ValueError("receipt is not marked written")
-
-            receipt_id = index.get("receipt_id")
-            if not isinstance(receipt_id, str):
-                raise ValueError("missing receipt_id")
-            receipt_match = _RECEIPT_ID_RE.fullmatch(receipt_id)
-            if receipt_match is None:
-                raise ValueError("invalid receipt_id")
-
-            expected_receipt_path = (
-                "record-chain/intake/receipts/"
-                f"{receipt_match.group('year')}/{receipt_match.group('month')}/"
-                f"{receipt_id}.receipt.json"
-            )
-            receipt_path = index.get("receipt_path")
-            if receipt_path != expected_receipt_path:
-                raise ValueError("receipt path is not canonically bound to receipt_id")
-
-            receipt_text = await get_file_text(receipt_path)
-            if receipt_text is None:
-                raise ValueError("receipt path is absent")
-            receipt = _parse_object(receipt_text, label="receipt")
-            receipt_ok, receipt_error = verify_receipt_sha256(receipt)
-            if not receipt_ok:
-                raise ValueError(receipt_error)
-            if receipt.get("server_receipt_id") != receipt_id:
-                raise ValueError("receipt id mismatch")
-            if receipt.get("receipt_path") != receipt_path:
-                raise ValueError("receipt path mismatch")
-            if receipt.get("submission_sha256") != submission_sha256:
-                raise ValueError("receipt submission hash mismatch")
-            if receipt.get("stored_submission_sha256") != index.get("stored_submission_sha256"):
-                raise ValueError("stored submission hash mismatch")
-            if receipt.get("record_type") != index.get("record_type"):
-                raise ValueError("record type mismatch")
-
-            final_status_path = f"record-chain/receipt-status/{receipt_id}.json"
-            final_status_text = await get_file_text(final_status_path)
-            final_status: dict[str, Any] | None = None
-            if final_status_text is not None:
-                final_status = _parse_object(final_status_text, label="final status")
-                if final_status.get("receipt_id") != receipt_id:
-                    raise ValueError("final status receipt id mismatch")
-                if (
-                    final_status.get("pending_file_path")
-                    and final_status.get("pending_file_path") != index.get("pending_file_path")
-                ):
-                    raise ValueError("final status pending path mismatch")
-
-            return 200, {
-                "found": True,
-                "recovery_verified": True,
-                "receipt_hash_verified": True,
-                "submission_sha256": submission_sha256,
-                "receipt_id": receipt_id,
-                "record_type": receipt.get("record_type"),
-                "receipt": receipt,
-                "final_status": final_status,
-                "boundary": {
-                    "read_only_recovery": True,
-                    "does_not_create_submission": True,
-                    "does_not_retry_submission": True,
-                    "does_not_bypass_cooldown": True,
-                },
-            }
-        except Exception:
-            return _recovery_error(
-                status=409,
-                code="RECOVERY_STATE_INCONSISTENT",
+                code="RECOVERY_CAPACITY_EXHAUSTED",
                 message=(
-                    "An intake index exists, but its immutable receipt bindings "
-                    "could not be verified. Recovery failed closed."
+                    "Read-only recovery capacity is temporarily exhausted; "
+                    "retry later without resubmitting."
                 ),
                 submission_sha256=submission_sha256,
             )
+        try:
+            cached = _cache_get(submission_sha256)
+            if cached is not None:
+                return cached
+            index_text = await _read_text(index_path, label="immutable intake index")
+            if index_text is None:
+                result = _recovery_error(
+                    status=404,
+                    code="SUBMISSION_NOT_MATERIALIZED",
+                    message=(
+                        "No immutable intake transaction exists for this "
+                        "submission SHA-256."
+                    ),
+                    submission_sha256=submission_sha256,
+                )
+                _cache_put(
+                    submission_sha256,
+                    status=result[0],
+                    payload=result[1],
+                )
+                return result
+
+            try:
+                index = _parse_object(index_text, label="idempotency index")
+                artifacts = await _verify_intake_artifacts(
+                    index=index,
+                    submission_sha256=submission_sha256,
+                )
+                final_status_path = (
+                    f"record-chain/receipt-status/{artifacts.receipt_id}.json"
+                )
+                final_status_text = await _read_text(
+                    final_status_path,
+                    label="final receipt status",
+                )
+                final_status: dict[str, Any] | None = None
+                if final_status_text is not None:
+                    final_status = _parse_object(
+                        final_status_text,
+                        label="final status",
+                    )
+                    if final_status.get("receipt_id") != artifacts.receipt_id:
+                        raise RecoveryStateInconsistent(
+                            "final status receipt id mismatch"
+                        )
+                    if (
+                        final_status.get("pending_file_path")
+                        != artifacts.pending_file_path
+                    ):
+                        raise RecoveryStateInconsistent(
+                            "final status pending path mismatch"
+                        )
+
+                result = (
+                    200,
+                    {
+                        "found": True,
+                        "recovery_verified": True,
+                        "receipt_hash_verified": True,
+                        "stored_submission_hash_verified": True,
+                        "idempotency_index_binding_verified": True,
+                        "submission_sha256": submission_sha256,
+                        "receipt_id": artifacts.receipt_id,
+                        "record_type": artifacts.record_type,
+                        "receipt": artifacts.receipt,
+                        "final_status": final_status,
+                        "boundary": _boundary(),
+                    },
+                )
+                _cache_put(
+                    submission_sha256,
+                    status=result[0],
+                    payload=result[1],
+                )
+                return result
+            except RecoveryBackendUnavailable:
+                raise
+            except RecoveryStateInconsistent as exc:
+                return _recovery_error(
+                    status=409,
+                    code="RECOVERY_STATE_INCONSISTENT",
+                    message=(
+                        "An intake index exists, but its immutable submission, "
+                        "receipt, or path bindings could not be verified: "
+                        f"{exc}"
+                    ),
+                    submission_sha256=submission_sha256,
+                )
+        finally:
+            _release_recovery_slot()
 
     @staticmethod
-    async def _send_json(send, *, status: int, payload: dict[str, Any], head: bool) -> None:
-        raw = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    async def _receipt_payload(receipt_id: str) -> tuple[int, dict[str, Any]]:
+        match = _RECEIPT_ID_RE.fullmatch(receipt_id)
+        if match is None:
+            return _receipt_error(
+                status=400,
+                code="INVALID_RECEIPT_ID",
+                message="Receipt ID format is invalid.",
+                receipt_id=receipt_id,
+            )
+        receipt_path = (
+            "record-chain/intake/receipts/"
+            f"{match.group('year')}/{match.group('month')}/"
+            f"{receipt_id}.receipt.json"
+        )
+        durable = False
+        backend_error: RecoveryBackendUnavailable | None = None
+        receipt: dict[str, Any] | None = None
+        try:
+            receipt_text = await _read_text(receipt_path, label="receipt")
+            if receipt_text is not None:
+                receipt = _parse_object(receipt_text, label="receipt")
+                durable = True
+        except RecoveryBackendUnavailable as exc:
+            backend_error = exc
+
+        if receipt is None:
+            cached = core_gateway._receipt_store.get(receipt_id)
+            if cached is None:
+                if backend_error is not None:
+                    return _receipt_error(
+                        status=503,
+                        code="RECEIPT_BACKEND_UNAVAILABLE",
+                        message=str(backend_error),
+                        receipt_id=receipt_id,
+                    )
+                return _receipt_error(
+                    status=404,
+                    code="RECEIPT_NOT_FOUND",
+                    message="No durable or process-local receipt exists.",
+                    receipt_id=receipt_id,
+                )
+            receipt = cached
+
+        try:
+            ok, error = verify_receipt_sha256(receipt)
+            if not ok:
+                raise RecoveryStateInconsistent(error)
+            if receipt.get("server_receipt_id") != receipt_id:
+                raise RecoveryStateInconsistent(
+                    "receipt server_receipt_id does not match the requested URL"
+                )
+            if receipt.get("receipt_path") != receipt_path:
+                raise RecoveryStateInconsistent(
+                    "receipt_path does not match the canonical requested URL"
+                )
+
+            record_type = receipt.get("record_type")
+            if not isinstance(record_type, str):
+                raise RecoveryStateInconsistent("receipt record_type is invalid")
+            expected_receipt, expected_submission, expected_pending = (
+                _canonical_receipt_paths(receipt_id, record_type)
+            )
+            if expected_receipt != receipt_path:
+                raise RecoveryStateInconsistent("receipt canonical path mismatch")
+            if receipt.get("intake_submission_path") != expected_submission:
+                raise RecoveryStateInconsistent(
+                    "receipt intake_submission_path is not canonical"
+                )
+            if receipt.get("pending_file_path") != expected_pending:
+                raise RecoveryStateInconsistent(
+                    "receipt pending_file_path is not canonical"
+                )
+
+            stored_hash = receipt.get("stored_submission_sha256")
+            if (
+                not isinstance(stored_hash, str)
+                or not re.fullmatch(r"[0-9a-f]{64}", stored_hash)
+            ):
+                raise RecoveryStateInconsistent(
+                    "receipt stored_submission_sha256 is invalid"
+                )
+
+            if durable:
+                stored_text = await _read_text(
+                    expected_submission,
+                    label="stored submission",
+                )
+                if stored_text is None:
+                    raise RecoveryStateInconsistent(
+                        "receipt-bound stored submission is absent"
+                    )
+                stored_submission = _parse_object(
+                    stored_text,
+                    label="stored submission",
+                )
+                if sha256_canonical_json(stored_submission) != stored_hash:
+                    raise RecoveryStateInconsistent(
+                        "receipt-bound stored submission hash is invalid"
+                    )
+
+            core_gateway._cache_receipt(
+                receipt_id,
+                receipt,
+                ephemeral=(
+                    not durable
+                    and receipt_id in core_gateway._ephemeral_receipt_ids
+                ),
+            )
+            envelope = await core_gateway._build_receipt_envelope(
+                receipt,
+                receipt_id,
+                receipt_path,
+                envelope_warnings=(
+                    [{
+                        "code": "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE",
+                        "message": (
+                            "Durable receipt storage could not be read; a "
+                            "hash-verified, URL-bound in-memory cache entry was returned."
+                        ),
+                        "receipt_path": receipt_path,
+                        "retryable": True,
+                    }]
+                    if backend_error is not None
+                    else None
+                ),
+            )
+            envelope["receipt_url_binding_verified"] = True
+            envelope["stored_submission_hash_verified"] = durable
+            return 200, envelope
+        except RecoveryBackendUnavailable as exc:
+            return _receipt_error(
+                status=503,
+                code="RECEIPT_BACKEND_UNAVAILABLE",
+                message=str(exc),
+                receipt_id=receipt_id,
+            )
+        except RecoveryStateInconsistent as exc:
+            return _receipt_error(
+                status=409,
+                code="RECEIPT_STATE_INCONSISTENT",
+                message=str(exc),
+                receipt_id=receipt_id,
+            )
+
+    @staticmethod
+    async def _send_json(
+        send,
+        *,
+        status: int,
+        payload: dict[str, Any],
+        head: bool,
+        retry_after: int | None = None,
+    ) -> None:
+        raw = json.dumps(
+            payload,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
         headers = [
             (b"content-type", b"application/json; charset=utf-8"),
             (b"content-length", str(len(raw)).encode("ascii")),
             (b"cache-control", b"no-store"),
         ]
-        await send({"type": "http.response.start", "status": status, "headers": headers})
+        if retry_after is not None:
+            headers.append((b"retry-after", str(retry_after).encode("ascii")))
+        await send(
+            {
+                "type": "http.response.start",
+                "status": status,
+                "headers": headers,
+            }
+        )
         await send(
             {
                 "type": "http.response.body",
@@ -391,10 +894,57 @@ class ProtectedProductionApp:
                 return
 
             recovery_match = _SUBMISSION_RECOVERY_RE.fullmatch(path)
-            if recovery_match and method in {"GET", "HEAD"}:
-                status, payload = await self._submission_recovery_payload(
-                    recovery_match.group("submission_sha256")
+            receipt_match = _RECEIPT_ROUTE_RE.fullmatch(path)
+            if (
+                method in {"GET", "HEAD"}
+                and (recovery_match is not None or receipt_match is not None)
+            ):
+                headers = _request_headers(scope)
+                allowed, retry_after = _allow_read_route(
+                    _client_key(scope, headers)
                 )
+                if not allowed:
+                    payload = {
+                        "found": False,
+                        "diagnostic_code": "READ_ROUTE_RATE_LIMIT_EXCEEDED",
+                        "message": (
+                            "Public read verification is temporarily rate "
+                            "limited to protect repository-backed availability."
+                        ),
+                        "retry_after_seconds": retry_after,
+                        "boundary": {
+                            "read_only": True,
+                            "does_not_create_submission": True,
+                            "does_not_bypass_cooldown": True,
+                        },
+                    }
+                    await self._send_json(
+                        send,
+                        status=429,
+                        payload=payload,
+                        head=method == "HEAD",
+                        retry_after=retry_after,
+                    )
+                    return
+
+                if recovery_match is not None:
+                    try:
+                        status, payload = await self._submission_recovery_payload(
+                            recovery_match.group("submission_sha256")
+                        )
+                    except RecoveryBackendUnavailable as exc:
+                        status, payload = _recovery_error(
+                            status=503,
+                            code="RECOVERY_STATE_UNAVAILABLE",
+                            message=str(exc),
+                            submission_sha256=recovery_match.group(
+                                "submission_sha256"
+                            ),
+                        )
+                else:
+                    status, payload = await self._receipt_payload(
+                        receipt_match.group("receipt_id")
+                    )
                 await self._send_json(
                     send,
                     status=status,

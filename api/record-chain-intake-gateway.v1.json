@@ -32,7 +32,7 @@
       "response_content_type": "application/json"
     },
     "receipt": {
-      "description": "Retrieves the receipt for a previously submitted intake record by its receipt_id.",
+      "description": "Retrieves a previously submitted intake receipt by receipt_id. The service verifies the receipt hash, URL/receipt-id binding, canonical receipt/submission/pending paths, and the SHA-256 of the actual stored submission bytes before reporting durable verification.",
       "method": "GET",
       "path": "/record-chain/receipt/{receipt_id}",
       "path_parameters": {
@@ -47,10 +47,15 @@
         }
       },
       "response_content_type": "application/json",
-      "response_schema": "/api/record-chain-receipt-response.v1.json"
+      "response_schema": "/api/record-chain-receipt-response.v1.json",
+      "success_requirements": {
+        "receipt_hash_verified": true,
+        "receipt_url_binding_verified": true,
+        "stored_submission_hash_verified": true
+      }
     },
     "submit_recovery": {
-      "description": "Read-only recovery for an ambiguous submit result. It verifies the immutable submission idempotency index, canonical receipt path, receipt SHA-256, submission SHA-256, record type, and optional final status. It never creates or retries a submission and never bypasses the durable cooldown.",
+      "description": "Read-only recovery for an ambiguous submit result. It verifies the immutable submission idempotency index, canonical receipt/submission/pending paths, receipt SHA-256, submission SHA-256, record type, and the SHA-256 of the actual stored submission bytes. It is independently rate limited, concurrency bounded, cache aware, never creates or retries a submission, and never bypasses the durable cooldown.",
       "method": "GET",
       "path": "/record-chain/recovery/submission/{submission_sha256}",
       "path_parameters": {
@@ -64,13 +69,14 @@
       "success_requirements": {
         "recovery_verified": true,
         "receipt_hash_verified": true,
-        "receipt_submission_sha256_matches_path": true,
+        "stored_submission_hash_verified": true,
         "idempotency_index_binding_verified": true
       },
       "boundary": {
         "read_only": true,
         "no_second_post": true,
-        "does_not_bypass_cooldown": true
+        "does_not_bypass_cooldown": true,
+        "backend_outage_is_not_reported_as_immutable_corruption": true
       }
     },
     "submit": {
@@ -152,13 +158,15 @@
     "ambiguous_submit_recovery": {
       "read_only": true,
       "builder_issues_at_most_one_submit_post": true,
-      "builder_polls_verified_recovery_after_transport_5xx_or_429": true,
-      "recovery_requires_immutable_idempotency_and_receipt_hash_verification": true,
+      "builder_polls_verified_recovery_after_transport_or_5xx": true,
+      "builder_uses_one_recovery_probe_after_429": true,
+      "recovery_requires_immutable_idempotency_receipt_and_stored_submission_hash_verification": true,
+      "recovery_requests_have_bounded_timeout": true,
       "does_not_bypass_cooldown": true
     }
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-08-03T02:00:00Z",
+  "updated_at": "2026-08-03T04:05:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -231,6 +239,11 @@
     "preflight_and_submit_fail_closed_without_required_protection": true,
     "receipt_gateway_version_uses_deployed_runtime": true,
     "gateway_authorship_verification_status_persisted_before_pending": true,
-    "read_only_submit_recovery_endpoint": "/record-chain/recovery/submission/{submission_sha256}"
+    "read_only_submit_recovery_endpoint": "/record-chain/recovery/submission/{submission_sha256}",
+    "read_only_routes_have_per_client_and_global_limits": true,
+    "read_only_recovery_has_bounded_concurrency_and_cache": true,
+    "receipt_url_and_canonical_path_binding_verified": true,
+    "stored_submission_bytes_verified_on_duplicate_receipt_and_recovery": true,
+    "backend_unavailability_distinguished_from_immutable_inconsistency": true
   }
 }

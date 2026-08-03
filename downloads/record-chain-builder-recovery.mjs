@@ -61,9 +61,15 @@ function submissionSha256FromBody(body) {
   return sha256Bytes(Buffer.from(canonicalJson(parsed), "utf8"));
 }
 
+function isSha256(value) {
+  return typeof value === "string" && /^[0-9a-f]{64}$/.test(value);
+}
+
 function verifiedReceiptPayload(data, expectedSubmissionSha256) {
   if (!data || typeof data !== "object") return null;
   if (data.recovery_verified !== true || data.receipt_hash_verified !== true) return null;
+  if (data.stored_submission_hash_verified !== true) return null;
+  if (data.idempotency_index_binding_verified !== true) return null;
   if (data.submission_sha256 !== expectedSubmissionSha256) return null;
 
   const receipt = data.receipt;
@@ -72,7 +78,13 @@ function verifiedReceiptPayload(data, expectedSubmissionSha256) {
   if (typeof receiptId !== "string" || !receiptId) return null;
   if (receipt.server_receipt_id !== receiptId) return null;
   if (receipt.submission_sha256 !== expectedSubmissionSha256) return null;
-  if (typeof receipt.receipt_sha256 !== "string") return null;
+  if (
+    receipt.original_submission_sha256 !== undefined
+    && receipt.original_submission_sha256 !== ""
+    && receipt.original_submission_sha256 !== expectedSubmissionSha256
+  ) return null;
+  if (!isSha256(receipt.stored_submission_sha256)) return null;
+  if (!isSha256(receipt.receipt_sha256)) return null;
 
   const receiptMaterial = { ...receipt };
   delete receiptMaterial.receipt_sha256;
@@ -94,7 +106,7 @@ function verifiedReceiptPayload(data, expectedSubmissionSha256) {
     receipt,
     final_status: data.final_status || null,
     warnings: [
-      "The original submit result was ambiguous. The Builder recovered a hash-verified durable receipt through a read-only endpoint and did not issue a second write request."
+      "The original submit result was ambiguous. The Builder recovered a hash-verified durable receipt and stored submission through a read-only endpoint and did not issue a second write request."
     ],
   };
 }
@@ -115,18 +127,33 @@ function recoveryDelayMs() {
   return Number.isFinite(parsed) ? Math.min(Math.max(parsed, 0), 10_000) : 750;
 }
 
+function recoveryFetchTimeoutMs() {
+  const parsed = Number.parseInt(
+    process.env.TRINITY_SUBMIT_RECOVERY_FETCH_TIMEOUT_MS || "5000",
+    10
+  );
+  return Number.isFinite(parsed) ? Math.min(Math.max(parsed, 250), 30_000) : 5000;
+}
+
 async function sleep(ms) {
   if (ms > 0) await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function recoverSubmission(submitUrl, submissionSha256) {
+function timeoutSignal(milliseconds) {
+  if (typeof AbortSignal?.timeout === "function") {
+    return AbortSignal.timeout(milliseconds);
+  }
+  return undefined;
+}
+
+async function recoverSubmission(submitUrl, submissionSha256, { attempts }) {
   const recoveryUrl = new URL(submitUrl);
   recoveryUrl.pathname = `/record-chain/recovery/submission/${submissionSha256}`;
   recoveryUrl.search = "";
   recoveryUrl.hash = "";
 
-  const attempts = recoveryAttempts();
   const delayMs = recoveryDelayMs();
+  const fetchTimeoutMs = recoveryFetchTimeoutMs();
   for (let attempt = 0; attempt < attempts; attempt += 1) {
     try {
       const response = await nativeFetch(recoveryUrl, {
@@ -134,12 +161,16 @@ async function recoverSubmission(submitUrl, submissionSha256) {
         headers: {
           "Accept": "application/json",
           "Cache-Control": "no-cache",
+          "X-Trinity-Recovery-Client": "canonical-builder",
         },
+        signal: timeoutSignal(fetchTimeoutMs),
       });
       if (response.status === 200) {
         const data = await response.json();
         const recovered = verifiedReceiptPayload(data, submissionSha256);
         if (recovered) return recovered;
+      } else if (response.status === 429) {
+        return null;
       } else if (response.status !== 404 && response.status < 500) {
         return null;
       }
@@ -173,6 +204,17 @@ function isSubmitRequest(input, init) {
   }
 }
 
+function recoveredResponse(recovered) {
+  return new Response(JSON.stringify(recovered), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Trinity-Submit-Recovered": "read-only",
+    },
+  });
+}
+
 globalThis.fetch = async function trinityAccordRecoveringFetch(input, init = {}) {
   if (!isSubmitRequest(input, init)) {
     return nativeFetch(input, init);
@@ -192,37 +234,35 @@ globalThis.fetch = async function trinityAccordRecoveringFetch(input, init = {})
     originalResponse = await nativeFetch(input, init);
   } catch (error) {
     if (submissionSha256) {
-      const recovered = await recoverSubmission(submitUrl, submissionSha256);
-      if (recovered) {
-        return new Response(JSON.stringify(recovered), {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "Cache-Control": "no-store",
-            "X-Trinity-Submit-Recovered": "read-only",
-          },
-        });
-      }
+      const recovered = await recoverSubmission(
+        submitUrl,
+        submissionSha256,
+        { attempts: recoveryAttempts() }
+      );
+      if (recovered) return recoveredResponse(recovered);
     }
     throw error;
   }
 
-  if (
-    submissionSha256
-    && (originalResponse.status >= 500 || originalResponse.status === 429)
-  ) {
-    const recovered = await recoverSubmission(submitUrl, submissionSha256);
-    if (recovered) {
-      return new Response(JSON.stringify(recovered), {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Cache-Control": "no-store",
-          "X-Trinity-Submit-Recovered": "read-only",
-        },
-      });
-    }
+  if (submissionSha256 && originalResponse.status >= 500) {
+    const recovered = await recoverSubmission(
+      submitUrl,
+      submissionSha256,
+      { attempts: recoveryAttempts() }
+    );
+    if (recovered) return recoveredResponse(recovered);
+  } else if (submissionSha256 && originalResponse.status === 429) {
+    // A 429 proves this invocation did not enter the write path. One read-only
+    // lookup is enough to recover a receipt from an earlier ambiguous attempt;
+    // repeated polling would only amplify repository reads during cooldown.
+    const recovered = await recoverSubmission(
+      submitUrl,
+      submissionSha256,
+      { attempts: 1 }
+    );
+    if (recovered) return recoveredResponse(recovered);
   }
+
   return originalResponse;
 };
 
@@ -271,6 +311,7 @@ async function downloadVerifiedCore() {
     try {
       const response = await nativeFetch(url, {
         headers: { "Accept": "text/javascript, application/javascript" },
+        signal: timeoutSignal(recoveryFetchTimeoutMs()),
       });
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
