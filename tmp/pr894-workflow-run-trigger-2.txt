@@ -1,0 +1,1 @@
+Second one-time CI completion trigger with explicit executor outcome reporting for PR #894.
