@@ -33,6 +33,11 @@ const BUILDER_CONTRACT = Object.freeze({
   ]),
 });
 
+const PRESERVED_CORE_IMPLEMENTATION_ASSERTIONS = Object.freeze([
+  "privateKey: writtenPrivKey",
+  "sign(null, payload, keyPair.privateKey)",
+]);
+
 const CORE_NFC_CONTRACT = Object.freeze([
   OATH_POLICY.policy_id.normalize("NFC"),
   OATH_POLICY.schema.normalize("NFC"),
