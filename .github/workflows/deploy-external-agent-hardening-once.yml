@@ -63,7 +63,8 @@ jobs:
             --deploy \
             --reconcile-config 2>&1 | tee "$log"
           grep -q "RENDER_DEPLOY_LIVE" "$log"
-          deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1 || true)"
+          deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1)"
+          test -n "$deploy_id"
           printf 'deploy_id=%s\n' "$deploy_id" >> "$GITHUB_OUTPUT"
 
       - name: Record deployment evidence on PR 906
