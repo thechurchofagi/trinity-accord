@@ -1,0 +1,63 @@
+name: Diagnose Preservation Test Mutation
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'fix/render-async-deploy-id-recovery-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-ci.txt
+      - name: Diagnose exact mutating command
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=tests/test_repository_preservation_semantics_v3_execution.py
+          baseline="$(sha256sum "$target" | cut -d' ' -f1)"
+          echo "BASELINE_SHA=$baseline"
+
+          python scripts/run_current_system_tests.py
+          after_current="$(sha256sum "$target" | cut -d' ' -f1)"
+          echo "AFTER_CURRENT_SYSTEM_SHA=$after_current"
+          if [ "$after_current" != "$baseline" ]; then
+            echo "MUTATED_BY=run_current_system_tests.py"
+            git diff -- "$target"
+            exit 11
+          fi
+
+          PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q "$target"
+          after_target="$(sha256sum "$target" | cut -d' ' -f1)"
+          echo "AFTER_TARGET_TEST_SHA=$after_target"
+          if [ "$after_target" != "$baseline" ]; then
+            echo "MUTATED_BY=targeted_pytest"
+            git diff -- "$target"
+            exit 12
+          fi
+
+          PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q tests
+          after_full="$(sha256sum "$target" | cut -d' ' -f1)"
+          echo "AFTER_FULL_PYTEST_SHA=$after_full"
+          if [ "$after_full" != "$baseline" ]; then
+            echo "MUTATED_BY=full_pytest"
+            git diff -- "$target"
+            exit 13
+          fi
+
+          echo "NO_TEST_COMMAND_MUTATED_TARGET"
