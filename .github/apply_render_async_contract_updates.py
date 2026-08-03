@@ -34,7 +34,14 @@ old = '''    code, _stdout, stderr, calls = invoke(active, {})
     require(code == 1 and calls == 1, "missing deploy ID must fail after one POST")
     require("without returning a deploy id" in stderr.lower(), "missing deploy ID failure must be explicit")
 '''
-new = '''    code, _stdout, stderr, calls = invoke(active, {})
+new = '''    def accepted_without_id(path: str, _token: str, method: str = "GET", body: dict | None = None):
+        if method == "POST":
+            return {}
+        if path.endswith("/deploys?limit=20"):
+            return []
+        return {}
+
+    code, _stdout, stderr, calls = invoke(active, accepted_without_id)
     require(
         code == 1 and calls == 2,
         "missing deploy ID without an exact recoverable candidate must fail after POST and one list read",
