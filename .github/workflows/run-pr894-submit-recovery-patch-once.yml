@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
 
 concurrency:
   group: run-pr894-submit-recovery-patch-once
@@ -19,7 +21,7 @@ jobs:
     if: >-
       github.repository == 'thechurchofagi/trinity-accord' &&
       github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.head_branch == 'ops/trigger-pr894-workflow-run'
+      github.event.workflow_run.head_branch == 'ops/trigger-pr894-workflow-run-2'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
@@ -44,6 +46,7 @@ jobs:
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Apply exact audited patch
+        id: apply_patch
         run: |
           set -euo pipefail
           test "$(git branch --show-current)" = "agent/fix-submit-recovery-receipt-provenance-20260803"
@@ -53,6 +56,7 @@ jobs:
           git diff --check
 
       - name: Run focused and existing regressions
+        id: regressions
         run: |
           set -euo pipefail
           python3 -m pytest -q tests/test_record_chain_submit_recovery.py
@@ -60,6 +64,7 @@ jobs:
           python3 scripts/trinity_record_chain.py verify
 
       - name: Commit final PR patch
+        id: commit_patch
         run: |
           set -euo pipefail
           rm -f .github/workflows/apply-submit-recovery-receipt-provenance-once.yml
@@ -79,3 +84,22 @@ jobs:
                   scripts/apply_submit_recovery_patch_once.py
           git commit -m "fix: recover ambiguous submits and preserve receipt provenance"
           git push origin HEAD:agent/fix-submit-recovery-receipt-provenance-20260803
+
+      - name: Publish executor result
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPLY_OUTCOME: ${{ steps.apply_patch.outcome }}
+          TEST_OUTCOME: ${{ steps.regressions.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit_patch.outcome }}
+        run: |
+          set -euo pipefail
+          gh pr comment 894 --repo "$GITHUB_REPOSITORY" --body "## PR #894 one-time executor result
+
+- Workflow run: \`${GITHUB_RUN_ID}\`
+- Triggering integrity run: \`${{ github.event.workflow_run.id }}\`
+- Exact patch: \`${APPLY_OUTCOME}\`
+- Focused + Gateway + Record-Chain tests: \`${TEST_OUTCOME}\`
+- Final branch commit/push: \`${COMMIT_OUTCOME}\`
+
+The executor was locked to target head \`0cd663a46eb46d263c920c6590deaf7a15b5d93e\`. A head mismatch fails closed and prevents duplicate patching."
