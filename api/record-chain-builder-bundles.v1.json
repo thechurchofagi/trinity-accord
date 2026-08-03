@@ -6,8 +6,8 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "34bec0e7b034fcf585fd533a2b9959922e5cf2d70fd81d843922a2c3ae728f31",
-    "size_bytes": 10325,
+    "sha256": "1ca854fa485267fab97b32258b0da60980c699e477f3b35e54826b46ea68f7ce",
+    "size_bytes": 11220,
     "architecture": "verified_bootstrap_wrapper_v1",
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
