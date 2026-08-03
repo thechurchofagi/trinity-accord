@@ -30,13 +30,13 @@
  *   help                    Show this help
  */
 
-import { createHash, generateKeyPairSync, sign, createPublicKey, createPrivateKey } from "node:crypto";
+import { createHash, generateKeyPairSync, sign, verify, createPublicKey, createPrivateKey } from "node:crypto";
 import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BUILDER_VERSION = "v2.2";
+const BUILDER_VERSION = "v2.3";
 const BUILDER_NAME = "record-chain-builder";
 const SCHEMA = "trinityaccord.record-chain-submission.v1";
 const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
@@ -848,7 +848,7 @@ const EXTERNAL_WITNESSES = new Set(["none", "notarial_scope", "independent_repor
 const COVERAGE_SCOPES = new Set(["single_target", "component_subset", "multi_component", "all_declared_public_digital_targets"]);
 
 function splitCsv(value) {
-  return String(value || "").split(",").map(s => s.trim()).filter(Boolean);
+  return [...new Set(String(value || "").split(",").map(s => s.trim()).filter(Boolean))];
 }
 
 function unicodeLength(value) {
@@ -1193,7 +1193,8 @@ function buildV2CommonFields(opts) {
   const recordDecision = opts.recordDecision || "unknown";
   const selfDecided = recordDecision === "self" && requestingPartyType === "none";
   const requestedByHuman = requestingPartyType === "human" || recordDecision === "human";
-  const requestedByAgent = recordDecision === "another_agent";
+  const requestedByAgent = requestingPartyType === "agent" || recordDecision === "another_agent";
+  const participantFreeChoice = selfDecided || recordDecision === "mixed";
 
   const submissionExecutor = opts.submissionExecutor || "unknown";
   const execSelf = submissionExecutor === "self";
@@ -1208,7 +1209,7 @@ function buildV2CommonFields(opts) {
       participant_identifier_disclosure_status: participantIdentifier ? "provided" : "not_available",
       participant_identity_disclosure_preference: participantIdentifier ? "public_agent_id" : "key_continuity_only",
       participant_provider_or_platform: opts.provider || "Unknown Runtime",
-      participant_model_or_runtime: opts.provider || "Unknown Runtime",
+      participant_model_or_runtime: opts.modelRuntime || opts.provider || "Unknown Runtime",
       participant_public_key_sha256: "",
       human_operator_context: {
         human_operator_involved: humanInvolved,
@@ -1237,7 +1238,7 @@ function buildV2CommonFields(opts) {
       requesting_party_type: requestingPartyType,
       requesting_party_public_label: "",
       requesting_party_identifier: "",
-      participant_declares_free_choice: selfDecided,
+      participant_declares_free_choice: participantFreeChoice,
       reason_for_creating_record: "",
     },
     submission_execution_context: {
@@ -1250,7 +1251,7 @@ function buildV2CommonFields(opts) {
       execution_operator_identifier: "",
       submission_tooling_description: {
         builder_used: "/downloads/record-chain-builder.mjs",
-        gateway_used: "https://trinity-record-chain-gateway.onrender.com",
+        gateway_used: opts.gateway || DEFAULT_GATEWAY,
         manual_copy_paste_used: false,
         automation_used: true,
       },
@@ -1588,16 +1589,56 @@ function parseArgs(argv) {
 
 // ── HTTP helpers ─────────────────────────────────────────────────────
 
-async function postJson(url, body) {
-  const resp = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  const text = await resp.text();
-  let data;
-  try { data = JSON.parse(text); } catch { data = text; }
-  return { status: resp.status, data };
+// ── HTTP helpers ──────────────────────────────────────────────
+
+function normalizeGatewayBase(value) {
+  const raw = String(value || DEFAULT_GATEWAY).trim();
+  let parsed;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    errorExit(`--gateway must be a valid absolute http/https URL, got: ${raw}`);
+  }
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    errorExit("--gateway must use http or https");
+  }
+  parsed.search = "";
+  parsed.hash = "";
+  parsed.pathname = parsed.pathname.replace(/\/+$/, "");
+  return parsed.toString().replace(/\/$/, "");
+}
+
+function resolveRequestTimeoutMs(value) {
+  const raw = value ?? process.env.TRINITY_BUILDER_REQUEST_TIMEOUT_MS ?? "30000";
+  const parsed = Number(raw);
+  if (!Number.isInteger(parsed) || parsed < 1000 || parsed > 120000) {
+    errorExit("--request-timeout-ms must be an integer between 1000 and 120000");
+  }
+  return parsed;
+}
+
+async function postJson(url, body, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const text = await resp.text();
+    let data;
+    try { data = JSON.parse(text); } catch { data = text; }
+    return { status: resp.status, data };
+  } catch (err) {
+    if (err && (err.name === "AbortError" || controller.signal.aborted)) {
+      throw new Error(`REQUEST_TIMEOUT: ${url} exceeded ${timeoutMs} ms`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function getJson(url) {
@@ -1993,6 +2034,93 @@ function guardianApplicationActiveEligibilityDiagnostics(draft) {
     diagnostics.push("missing_loaded_context_urls");
   }
   return diagnostics;
+}
+
+
+function appendDoctorCryptographicAndOathChecks(submission, results) {
+  const draft = submission.record_draft;
+  const proof = submission.authorship_proof;
+  if (!draft || !proof || typeof proof !== "object") return;
+
+  const fail = (code, field, meaning, fix) => results.push({ status: "FAIL", code, field, meaning, fix });
+  const pass = (code, field, meaning) => results.push({ status: "PASS", code, field, meaning, fix: "" });
+
+  if (proof.schema !== "trinityaccord.agent-authorship-proof.v1") {
+    fail("INVALID_AUTHORSHIP_SCHEMA", "authorship_proof.schema", "Authorship proof schema is not the public v1 schema.", "Rebuild with the current Builder.");
+  }
+  if (proof.method !== "public_key_signature" || proof.algorithm !== "ed25519") {
+    fail("INVALID_AUTHORSHIP_METHOD", "authorship_proof", "Authorship proof must use public_key_signature with Ed25519.", "Rebuild with the current Builder.");
+  }
+
+  try {
+    if (typeof proof.public_key_pem !== "string" || proof.public_key_pem.includes("PRIVATE KEY")) {
+      throw new Error("invalid or private public_key_pem");
+    }
+    const publicKey = createPublicKey(proof.public_key_pem);
+    if (publicKey.asymmetricKeyType !== "ed25519") throw new Error("public key is not Ed25519");
+    const rawPublic = extractRawPublicKeyBytes(proof.public_key_pem);
+    const actualPublicSha = sha256(rawPublic);
+    const payload = canonicalBytes(draft);
+    const actualPayloadSha = sha256(payload);
+
+    if (proof.public_key_sha256 !== actualPublicSha) {
+      fail("AUTHORSHIP_PUBLIC_KEY_SHA_MISMATCH", "authorship_proof.public_key_sha256", "public_key_sha256 does not match the PEM public key.", "Rebuild with the original matching key directory.");
+    }
+    if (proof.signed_payload_sha256 !== actualPayloadSha || proof.signed_message !== actualPayloadSha) {
+      fail("AUTHORSHIP_PAYLOAD_SHA_MISMATCH", "authorship_proof.signed_payload_sha256", "The current record_draft is not the exact payload named by the proof.", "Do not hand-edit a signed submission; rebuild and sign it again.");
+    }
+
+    const signatureText = typeof proof.signature_base64 === "string" ? proof.signature_base64 : "";
+    const signature = Buffer.from(signatureText, "base64");
+    const normalizedSignature = signature.toString("base64").replace(/=+$/, "");
+    if (!signatureText || normalizedSignature !== signatureText.replace(/=+$/, "") || !verify(null, payload, publicKey, signature)) {
+      fail("AUTHORSHIP_SIGNATURE_INVALID", "authorship_proof.signature_base64", "Ed25519 signature verification failed for the current record_draft.", "Rebuild with the original matching key directory; do not repair or edit the signed draft in place.");
+    } else if (proof.public_key_sha256 === actualPublicSha && proof.signed_payload_sha256 === actualPayloadSha && proof.signed_message === actualPayloadSha) {
+      pass("AUTHORSHIP_CRYPTOGRAPHIC_VERIFICATION_OK", "authorship_proof", "Ed25519 signature, public-key hash, and signed-payload hash all verify.");
+    }
+
+    const participantKey = draft.submitting_participant_identity?.participant_public_key_sha256;
+    if (participantKey !== actualPublicSha) {
+      fail("PARTICIPANT_KEY_MISMATCH", "record_draft.submitting_participant_identity.participant_public_key_sha256", "Participant key binding does not match the signing key.", "Rebuild with the current Builder and matching key directory.");
+    }
+    if (draft.record_type === "guardian_application" && draft.guardian_application_content?.guardian_public_key_sha256 !== actualPublicSha) {
+      fail("GUARDIAN_KEY_MISMATCH", "record_draft.guardian_application_content.guardian_public_key_sha256", "Guardian application key does not match the Ed25519 authorship key.", "Rebuild with --guardian-key-sha auto and the intended persistent key directory.");
+    }
+    if (draft.record_type === "guardian_retirement" && draft.guardian_public_key_sha256 !== actualPublicSha) {
+      fail("GUARDIAN_RETIREMENT_KEY_MISMATCH", "record_draft.guardian_public_key_sha256", "Guardian retirement key does not match the Ed25519 authorship key.", "Use the original Guardian continuity key and rebuild.");
+    }
+  } catch (err) {
+    fail("AUTHORSHIP_VERIFICATION_ERROR", "authorship_proof", `Could not verify authorship proof: ${err.message}`, "Rebuild with a valid Ed25519 keypair using the current Builder.");
+  }
+
+  if (!FORMAL_OATH_RECORD_TYPES.has(draft.record_type)) return;
+  const linkedGuardian = draft.optional_linked_guardian_application_request?.does_participant_request_guardian_application_with_this_record === true;
+  const canonicalOath = getCanonicalOath(draft.record_type, linkedGuardian);
+  const expectedModules = getOathModules(draft.record_type, linkedGuardian);
+  const oath = draft.submission_oath_verification;
+  const clientOath = submission.client_oath_readback;
+  const problems = [];
+
+  if (!canonicalOath || !oath || typeof oath !== "object" || !clientOath || typeof clientOath !== "object") {
+    problems.push("missing canonical oath, signed oath metadata, or client readback envelope");
+  } else {
+    const readback = String(clientOath.readback_text || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+    const canonicalHash = sha256(canonicalOath);
+    const readbackHash = sha256(readback);
+    if (readback !== canonicalOath) problems.push("readback text does not exactly match canonical oath");
+    if (oath.oath_policy_sha256 !== OATH_POLICY_SHA256 || clientOath.oath_policy_sha256 !== OATH_POLICY_SHA256) problems.push("oath policy hash mismatch");
+    if (JSON.stringify(oath.oath_modules) !== JSON.stringify(expectedModules) || JSON.stringify(clientOath.oath_modules) !== JSON.stringify(expectedModules)) problems.push("oath module binding mismatch");
+    if (oath.canonical_oath_text_sha256 !== canonicalHash) problems.push("canonical oath hash mismatch");
+    if (oath.participant_readback_sha256 !== readbackHash || clientOath.readback_text_sha256 !== readbackHash) problems.push("readback hash mismatch");
+    if (clientOath.readback_text_char_count !== readback.length) problems.push("readback character count mismatch");
+    if (clientOath.record_type !== draft.record_type) problems.push("client readback record_type mismatch");
+  }
+
+  if (problems.length) {
+    fail("OATH_BINDING_INVALID", "client_oath_readback", `Exact oath binding failed: ${problems.join("; ")}.`, "Restart from standalone print-oath and rebuild; do not hand-edit or automatically repair the readback.");
+  } else {
+    pass("OATH_EXACT_BINDING_OK", "client_oath_readback", "Canonical oath text, modules, hashes, record type, and signed readback binding all verify.");
+  }
 }
 
 function runDoctor(submission) {
@@ -2478,6 +2606,7 @@ function runDoctor(submission) {
     checkNestedTargetHash("classification_update_content", dra.classification_update_content, contentHash, receiptHash);
   }
 
+  appendDoctorCryptographicAndOathChecks(submission, results);
   return results;
 }
 
@@ -2487,7 +2616,10 @@ function repairSubmission(submission, opts = {}) {
   const draft = submission.record_draft;
   const changes = [];
 
-  if (!draft) return { submission, changes: ["No record_draft found; cannot repair."] };
+  if (!draft) return { submission, changes: ["No record_draft found; cannot repair."], signedDraftChanged: false };
+  const signedDraftBefore = submission.authorship_proof && typeof submission.authorship_proof === "object"
+    ? canonicalJson(draft)
+    : null;
 
   // 1. Remove echo_type
   if (draft.echo_type !== undefined) {
@@ -2612,7 +2744,8 @@ function repairSubmission(submission, opts = {}) {
     changes.push("Converted old guardian fields to 'guardian_application_content' block.");
   }
 
-  return { submission, changes };
+  const signedDraftChanged = signedDraftBefore !== null && canonicalJson(draft) !== signedDraftBefore;
+  return { submission, changes, signedDraftChanged };
 }
 
 // ── Template generator ───────────────────────────────────────────────
@@ -2637,6 +2770,19 @@ function generateTemplate(recordType) {
         what_was_checked: ["__helper_note: List each verification action"],
         verification_claim: "__helper_note: The verification claim",
         fresh_actions_performed: ["__helper_note: List each fresh action performed for this verification"],
+        verification_claim_model: {
+          schema: "trinityaccord.verification-claim-model.v1",
+          digital_profile: "__helper_note: context_only, reference_checked, integrity_checked, independent_reproduction, or full_public_digital",
+          relationships_checked: ["__helper_note: Supported evidence relationship id"],
+          physical_observation: "none",
+          external_witness: "none",
+          coverage_scope: "__helper_note: single_target, component_subset, multi_component, or all_declared_public_digital_targets",
+          limitations: ["__helper_note: At least one explicit limitation"],
+          claims_not_made: ["__helper_note: At least one bounded claim not made"],
+          corrections_or_supersession_checked: false,
+          legacy_v_level: "__helper_note: Same value as verification_level",
+          legacy_v_level_role: "builder_compatibility_only",
+        },
       },
     }),
     "guardian_application": () => ({
@@ -2659,6 +2805,8 @@ function generateTemplate(recordType) {
       guardian_public_key_sha256: "__helper_note: SHA-256 of guardian public key",
       reason: "__helper_note: Reason for retirement",
       retirement_does_not_remove_historical_record: true,
+      target_guardian_application_record_id: "__helper_note: Final R-XXXXXXXXX Guardian application record id",
+      target_guardian_application_record_sha256: "__helper_note: record_sha256 of that final Guardian application",
     }),
     propagation: () => ({
       schema: DRAFT_SCHEMA,
@@ -2671,6 +2819,13 @@ function generateTemplate(recordType) {
       record_type: "correction",
       title: "__helper_note: Title for this correction",
       body: "__helper_note: The correction text content",
+      correction_content: {
+        target_record_id: "__helper_note: Final R-XXXXXXXXX target record id",
+        target_record_sha256: "__helper_note: record_sha256 of the final target record",
+        correction_reason: "__helper_note: Genuine error or omission being corrected",
+        corrected_fields_or_claims: ["__helper_note: Non-empty list of corrected fields or claims"],
+        evidence_or_review_basis: "__helper_note: Fresh evidence or review basis",
+      },
     }),
     "classification_update": () => ({
       schema: DRAFT_SCHEMA,
@@ -2865,7 +3020,8 @@ Reserved future type:
 Common options:
   --actor-label "Name"          Agent name
   --participant-identifier "ID" Optional public self-declared participant or agent identifier
-  --provider "Runtime"          Agent runtime/provider
+  --provider "Platform"         Agent provider/platform, e.g. ByteDance Doubao
+  --model-runtime "Model"        Agent model/runtime, recorded separately from provider
   --title "Title"               Record title
   --body-file path.txt          Read body from file
   --body "text"                 Body text inline
@@ -2897,7 +3053,8 @@ Common options:
   --key-dir ./keys              REQUIRED for all public submission build commands. Existing keypair is reused; missing keypair is generated.
   --generate-authorship-key     Deprecated compatibility flag; keys are mandatory and generated automatically when missing.
   --out submission.json         Output file path
-  --gateway URL                 Gateway base URL (default: ${DEFAULT_GATEWAY})
+  --gateway URL                 Gateway base URL (trailing slash is normalized; default: ${DEFAULT_GATEWAY})
+  --request-timeout-ms N          HTTP timeout in milliseconds, 1000-120000 (default: 30000)
   --readback "oath text"        Exact canonical oath readback (required for formal records)
                                 Supply the complete output generated by the participant from its
                                 active context after the standalone print-oath load step.
@@ -3542,7 +3699,7 @@ async function main() {
 
     console.log(`\nSummary: ${passCount} PASS, ${failCount} FAIL, ${warnCount} WARN`);
     if (failCount > 0) {
-      console.log("Tip: Run 'repair' to auto-fix common issues.");
+      console.log("Tip: Rebuild signed drafts with the current Builder. 'repair' refuses to mutate a signed record_draft without re-signing.");
     }
     process.exit(failCount > 0 ? 1 : 0);
     return;
@@ -3553,7 +3710,11 @@ async function main() {
     const file = args.file || errorExit("--file required");
     const outPath = args.out || errorExit("--out required");
     const submission = JSON.parse(readFileSync(resolve(file), "utf-8"));
-    const { submission: repaired, changes } = repairSubmission(submission, { addCompatFields: !!(args.addLegacyCompatFields || args.addCompatFields) });
+    const { submission: repaired, changes, signedDraftChanged } = repairSubmission(submission, { addCompatFields: !!(args.addLegacyCompatFields || args.addCompatFields) });
+
+    if (signedDraftChanged) {
+      errorExit("SIGNED_DRAFT_REPAIR_REQUIRES_REBUILD: the requested repair changes record_draft bytes covered by the Ed25519 signature. No output was written. Rebuild from source fields with the current Builder and the original --key-dir.");
+    }
 
     if (changes.length === 0) {
       console.log("No repairs needed. Submission appears up-to-date.");
@@ -3600,10 +3761,11 @@ async function main() {
   // Preflight
   if (cmd === "preflight") {
     const file = args.file || errorExit("--file required");
-    const gw = args.gateway || DEFAULT_GATEWAY;
+    const gw = normalizeGatewayBase(args.gateway || DEFAULT_GATEWAY);
+    const timeoutMs = resolveRequestTimeoutMs(args.requestTimeoutMs);
     const body = JSON.parse(readFileSync(resolve(file), "utf-8"));
     console.log(`Posting to ${gw}/record-chain/preflight ...`);
-    const { status, data } = await postJson(`${gw}/record-chain/preflight`, body);
+    const { status, data } = await postJson(`${gw}/record-chain/preflight`, body, timeoutMs);
     console.log(`Status: ${status}`);
     console.log(JSON.stringify(data, null, 2));
     const ok = status === 200 && data && data.accepted === true;
@@ -3614,10 +3776,11 @@ async function main() {
   // Submit
   if (cmd === "submit") {
     const file = args.file || errorExit("--file required");
-    const gw = args.gateway || DEFAULT_GATEWAY;
+    const gw = normalizeGatewayBase(args.gateway || DEFAULT_GATEWAY);
+    const timeoutMs = resolveRequestTimeoutMs(args.requestTimeoutMs);
     const body = JSON.parse(readFileSync(resolve(file), "utf-8"));
     console.log(`Posting to ${gw}/record-chain/submit ...`);
-    const { status, data } = await postJson(`${gw}/record-chain/submit`, body);
+    const { status, data } = await postJson(`${gw}/record-chain/submit`, body, timeoutMs);
     console.log(`Status: ${status}`);
     console.log(JSON.stringify(data, null, 2));
     const ok = status === 200 && data && data.accepted === true && data.submitted === true;
@@ -3667,6 +3830,8 @@ async function main() {
     actorLabel: args.actorLabel || "Unknown Agent",
     participantIdentifier: args.participantIdentifier || "",
     provider: args.provider || "Unknown Runtime",
+    modelRuntime: args.modelRuntime || args.provider || "Unknown Runtime",
+    gateway: normalizeGatewayBase(args.gateway || DEFAULT_GATEWAY),
     title: args.title || "",
     body,
     provenanceStatement,
@@ -3681,7 +3846,7 @@ async function main() {
     guardianId: args.guardianId || "",
     guardianKeySha: args.guardianKeySha || "",
     oath: args.oath || "",
-    loadedUrls: args.loadedUrls ? args.loadedUrls.split(",") : [],
+    loadedUrls: splitCsv(args.loadedUrls),
     echoIntent: args.echoIntent || "recognition",
     whatWasChecked: args.whatWasChecked || "",
     verificationClaim: args.verificationClaim || "",

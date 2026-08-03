@@ -1,17 +1,17 @@
 {
   "schema": "trinityaccord.record-chain-builder-bundles.v1",
   "status": "active",
-  "updated_at": "2026-08-03T04:36:00Z",
+  "updated_at": "2026-08-03T13:37:16Z",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "75611c53b47c1d23ecc39b64b375de9de2b5ce660e88e021a6c31eadfefdd263",
-    "size_bytes": 11093,
+    "sha256": "60c277b1805c1870cef735356f9f53e0922e4dec22100ff29349c983cf46510c",
+    "size_bytes": 11095,
     "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
-      "sha256": "190dde5c1d7f9469fb2880eb617c6218ddd654725bd64246f9e2807df1c738e1",
+      "sha256": "6eccd69b6bf5ae9800145f8e3f3491a563c2a56a6860c8c40ddbbdddbb4137da",
       "size_bytes": 11853,
       "read_only_recovery": true,
       "maximum_submit_posts": 1,
@@ -23,12 +23,16 @@
     },
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
-      "sha256": "6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378",
-      "size_bytes": 195854,
+      "sha256": "bfef921cfece2495328b52b9d27306336a60a39a6f3fc3de103a5bba03eb34e6",
+      "size_bytes": 206950,
       "repository_local_companion": true,
       "automatically_fetched_when_companion_missing": true,
       "must_match_sha256_and_size_before_execution": true,
-      "preserved_from_builder_version": "v2.2"
+      "preserved_from_builder_version": "v2.3",
+      "local_doctor_cryptographically_verifies_authorship": true,
+      "signed_draft_repair_fails_closed": true,
+      "request_timeout_bounded": true,
+      "gateway_url_normalized": true
     },
     "supports": [
       "echo",
