@@ -10,7 +10,7 @@ Verifies:
 6. generate_guardian_current_registry.py --check passes
 7. Public current registry has non-authority and receipt-not-active boundaries
 8. Builder supports --guardian-id auto
-9. Builder manifest hash/size matches Builder
+9. Every manifest-pinned Builder layer has matching hash/size
 10. git diff has no derived Guardian index drift after verify
 """
 from __future__ import annotations
@@ -37,9 +37,39 @@ def run(cmd: list[str]) -> None:
     subprocess.check_call(cmd, cwd=ROOT)
 
 
+def read_verified_builder_runtime(bundle: dict) -> str:
+    canonical = bundle["canonical_builder"]
+    layers = [
+        (ROOT / "downloads" / "record-chain-builder.mjs", canonical),
+        (
+            ROOT / "downloads" / "record-chain-builder-recovery.mjs",
+            canonical["recovery_wrapper"],
+        ),
+        (
+            ROOT / "downloads" / "record-chain-builder-core.mjs",
+            canonical["core"],
+        ),
+    ]
+    texts: list[str] = []
+    for path, contract in layers:
+        require(path.exists(), f"missing Builder layer: {path.name}")
+        raw = path.read_bytes()
+        require(
+            hashlib.sha256(raw).hexdigest() == contract["sha256"],
+            f"Builder layer sha256 drift: {path.name}",
+        )
+        require(
+            len(raw) == contract["size_bytes"],
+            f"Builder layer size drift: {path.name}",
+        )
+        texts.append(raw.decode("utf-8"))
+    return "\n".join(texts)
+
+
 def main() -> int:
     source = (ROOT / "scripts" / "trinity_record_chain.py").read_text(encoding="utf-8")
-    builder = (ROOT / "downloads" / "record-chain-builder.mjs").read_text(encoding="utf-8")
+    bundle = read_json("api/record-chain-builder-bundles.v1.json")
+    builder = read_verified_builder_runtime(bundle)
 
     # 1. Activation helper exists
     require("_guardian_activation_assessment" in source, "missing guardian activation helper")
@@ -50,21 +80,9 @@ def main() -> int:
     # 3. Pending status preserved
     require("application_recorded_pending_activation" in source, "pending activation status must remain")
 
-    # 8. Builder supports guardian-id auto
+    # 8. Builder supports guardian-id auto across the pinned layered runtime.
     require("guardianIdForPublicKeySha" in builder, "builder must derive guardian_id from public key")
     require("isAutoGuardianId" in builder, "builder must support guardian-id auto")
-
-    # 9. Builder manifest matches
-    bundle = read_json("api/record-chain-builder-bundles.v1.json")
-    builder_path = ROOT / "downloads" / "record-chain-builder.mjs"
-    require(
-        bundle["canonical_builder"]["sha256"] == hashlib.sha256(builder_path.read_bytes()).hexdigest(),
-        "builder bundle sha256 drift",
-    )
-    require(
-        bundle["canonical_builder"]["size_bytes"] == builder_path.stat().st_size,
-        "builder bundle size drift",
-    )
 
     # 10. Verify and check index drift
     run([sys.executable, "scripts/trinity_record_chain.py", "verify"])
