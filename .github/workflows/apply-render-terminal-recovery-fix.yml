@@ -56,12 +56,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          before="$(git status --porcelain)"
-          test -z "$before"
+          before="$RUNNER_TEMP/worktree-before.txt"
+          after="$RUNNER_TEMP/worktree-after.txt"
+          git status --porcelain=v1 >"$before"
           python scripts/run_current_system_tests.py
           PYTHONPATH=".:apps/record_chain_intake_gateway" pytest -q tests
-          after="$(git status --porcelain)"
-          test -z "$after"
+          git status --porcelain=v1 >"$after"
+          if ! cmp -s "$before" "$after"; then
+            echo "Test execution changed the expected product worktree:" >&2
+            diff -u "$before" "$after" >&2
+            git diff -- >&2
+            exit 1
+          fi
 
       - name: Commit product-only result
         shell: bash
