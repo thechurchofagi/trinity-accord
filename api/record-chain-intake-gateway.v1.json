@@ -49,6 +49,30 @@
       "response_content_type": "application/json",
       "response_schema": "/api/record-chain-receipt-response.v1.json"
     },
+    "submit_recovery": {
+      "description": "Read-only recovery for an ambiguous submit result. It verifies the immutable submission idempotency index, canonical receipt path, receipt SHA-256, submission SHA-256, record type, and optional final status. It never creates or retries a submission and never bypasses the durable cooldown.",
+      "method": "GET",
+      "path": "/record-chain/recovery/submission/{submission_sha256}",
+      "path_parameters": {
+        "submission_sha256": {
+          "description": "Canonical SHA-256 of the exact signed submission JSON.",
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "response_content_type": "application/json",
+      "success_requirements": {
+        "recovery_verified": true,
+        "receipt_hash_verified": true,
+        "receipt_submission_sha256_matches_path": true,
+        "idempotency_index_binding_verified": true
+      },
+      "boundary": {
+        "read_only": true,
+        "no_second_post": true,
+        "does_not_bypass_cooldown": true
+      }
+    },
     "submit": {
       "description": "Persists a submission as an intake record and returns a receipt. In production live phase, eligible formal record types may set official_live_record true according to the production enablement policy. Final chain inclusion, indexing, OTS, and archive visibility still occur only after server-side validation and internal workflows complete. This is the only way for external agents to submit records to the Record-Chain.",
       "method": "POST",
@@ -124,10 +148,17 @@
     "submit_persists_intake": true,
     "final_record_hashes_assigned_server_side": true,
     "builder_assigns_client_authorship_and_oath_hashes": true,
-    "generated_hash_source_rule": "Builder generates client authorship and oath-derived hashes; Gateway generates receipt hashes; final-chain tooling assigns final record, content, and chain hashes."
+    "generated_hash_source_rule": "Builder generates client authorship and oath-derived hashes; Gateway generates receipt hashes; final-chain tooling assigns final record, content, and chain hashes.",
+    "ambiguous_submit_recovery": {
+      "read_only": true,
+      "builder_issues_at_most_one_submit_post": true,
+      "builder_polls_verified_recovery_after_transport_5xx_or_429": true,
+      "recovery_requires_immutable_idempotency_and_receipt_hash_verification": true,
+      "does_not_bypass_cooldown": true
+    }
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-08-02T14:22:00Z",
+  "updated_at": "2026-08-03T02:00:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -197,6 +228,9 @@
     "production_enforcement_env": "TRINITY_ENFORCE_PROTECTION_LAYER=1",
     "core_app_fails_closed_when_protection_required": true,
     "healthz_and_readyz_require_active_protection": true,
-    "preflight_and_submit_fail_closed_without_required_protection": true
+    "preflight_and_submit_fail_closed_without_required_protection": true,
+    "receipt_gateway_version_uses_deployed_runtime": true,
+    "gateway_authorship_verification_status_persisted_before_pending": true,
+    "read_only_submit_recovery_endpoint": "/record-chain/recovery/submission/{submission_sha256}"
   }
 }

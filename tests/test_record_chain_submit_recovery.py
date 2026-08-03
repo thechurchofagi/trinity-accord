@@ -1,0 +1,314 @@
+from __future__ import annotations
+
+import asyncio
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import threading
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+import pytest
+
+from apps.record_chain_intake_gateway.gateway.receipts import (
+    compute_receipt_sha256,
+    make_receipt,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
+BUILDER_CORE = ROOT / "downloads" / "record-chain-builder-core.mjs"
+CORE_SHA256 = "6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378"
+CORE_SIZE_BYTES = 195854
+
+
+def _receipt_fixture(submission_sha256: str) -> tuple[dict, dict, str]:
+    receipt_id = f"rcg-20260803-{submission_sha256[:24]}"
+    receipt_path = (
+        "record-chain/intake/receipts/2026/08/"
+        f"{receipt_id}.receipt.json"
+    )
+    pending_path = f"record-chain/pending/{receipt_id}.verification.pending.json"
+    receipt = make_receipt(
+        submission={},
+        submission_sha256=submission_sha256,
+        original_submission_sha256=submission_sha256,
+        stored_submission_sha256=submission_sha256,
+        record_type="verification",
+        received_raw_body_sha256="a" * 64,
+        intake_submission_path=(
+            "record-chain/intake/submissions/2026/08/"
+            f"{receipt_id}.submission.json"
+        ),
+        pending_file_path=pending_path,
+        receipt_path=receipt_path,
+        now=datetime(2026, 8, 3, tzinfo=timezone.utc),
+        gateway_version="1.2.1-protected",
+    )
+    index = {
+        "schema": "trinityaccord.record-chain-intake-idempotency.v1",
+        "submission_sha256": submission_sha256,
+        "stored_submission_sha256": submission_sha256,
+        "record_type": "verification",
+        "receipt_id": receipt_id,
+        "receipt_path": receipt_path,
+        "pending_file_path": pending_path,
+        "idempotency_written": True,
+        "receipt_written": True,
+    }
+    return index, receipt, receipt_path
+
+
+def test_receipt_defaults_to_deployed_runtime_version(monkeypatch):
+    from apps.record_chain_intake_gateway.gateway import receipts
+
+    monkeypatch.setattr(
+        receipts,
+        "get_runtime_info",
+        lambda: {"version": "9.9.9-runtime-test"},
+    )
+    receipt = receipts.make_receipt(
+        submission={},
+        submission_sha256="b" * 64,
+        record_type="verification",
+        now=datetime(2026, 8, 3, tzinfo=timezone.utc),
+    )
+    assert receipt["gateway_version"] == "9.9.9-runtime-test"
+    assert receipt["receipt_sha256"] == compute_receipt_sha256(receipt)
+
+
+def test_gateway_projection_preserves_pre_pending_authorship_fact():
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    projected = secure_entrypoint._gateway_verified_pending_projection(
+        {
+            "record_type": "verification",
+            "authorship_verification_status": {
+                "verified_by_gateway_before_pending": False,
+            },
+        }
+    )
+    assert projected["authorship_verification_status"] == {
+        "signed_payload_scope": "pre_append_record_draft",
+        "verified_by_gateway_before_pending": True,
+        "verified_by_append_before_record": False,
+        "final_record_contains_append_assigned_fields_not_in_signed_payload": True,
+    }
+
+
+def test_read_only_recovery_verifies_index_and_receipt(monkeypatch):
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    submission_sha256 = hashlib.sha256(b"{}").hexdigest()
+    index, receipt, receipt_path = _receipt_fixture(submission_sha256)
+    final_status = {
+        "schema": "trinityaccord.record-chain-receipt-final-status.v1",
+        "receipt_id": index["receipt_id"],
+        "pending_file_path": index["pending_file_path"],
+        "append_status": "appended",
+        "final_record_id": "R-000000109",
+    }
+    mapping = {
+        (
+            "record-chain/intake/by-submission-sha256/"
+            f"{submission_sha256}.json"
+        ): json.dumps(index, separators=(",", ":"), sort_keys=True),
+        receipt_path: json.dumps(receipt, separators=(",", ":"), sort_keys=True),
+        f"record-chain/receipt-status/{index['receipt_id']}.json": json.dumps(
+            final_status,
+            separators=(",", ":"),
+            sort_keys=True,
+        ),
+    }
+
+    async def fake_get_file_text(path: str):
+        return mapping.get(path)
+
+    monkeypatch.setattr(secure_entrypoint, "get_file_text", fake_get_file_text)
+    status, payload = asyncio.run(
+        secure_entrypoint.ProtectedProductionApp._submission_recovery_payload(
+            submission_sha256
+        )
+    )
+    assert status == 200
+    assert payload["recovery_verified"] is True
+    assert payload["receipt_hash_verified"] is True
+    assert payload["receipt_id"] == index["receipt_id"]
+    assert payload["receipt"]["receipt_sha256"] == receipt["receipt_sha256"]
+    assert payload["boundary"]["does_not_retry_submission"] is True
+    assert payload["boundary"]["does_not_bypass_cooldown"] is True
+
+
+def test_read_only_recovery_fails_closed_on_receipt_hash_mismatch(monkeypatch):
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    submission_sha256 = hashlib.sha256(b"{}").hexdigest()
+    index, receipt, receipt_path = _receipt_fixture(submission_sha256)
+    receipt["record_type"] = "echo"
+    mapping = {
+        (
+            "record-chain/intake/by-submission-sha256/"
+            f"{submission_sha256}.json"
+        ): json.dumps(index),
+        receipt_path: json.dumps(receipt),
+    }
+
+    async def fake_get_file_text(path: str):
+        return mapping.get(path)
+
+    monkeypatch.setattr(secure_entrypoint, "get_file_text", fake_get_file_text)
+    status, payload = asyncio.run(
+        secure_entrypoint.ProtectedProductionApp._submission_recovery_payload(
+            submission_sha256
+        )
+    )
+    assert status == 409
+    assert payload["recovery_verified"] is False
+    assert payload["diagnostic_code"] == "RECOVERY_STATE_INCONSISTENT"
+
+
+def test_read_only_recovery_returns_404_without_idempotency_index(monkeypatch):
+    from apps.record_chain_intake_gateway import secure_entrypoint
+
+    async def fake_get_file_text(path: str):
+        return None
+
+    monkeypatch.setattr(secure_entrypoint, "get_file_text", fake_get_file_text)
+    status, payload = asyncio.run(
+        secure_entrypoint.ProtectedProductionApp._submission_recovery_payload(
+            "c" * 64
+        )
+    )
+    assert status == 404
+    assert payload["diagnostic_code"] == "SUBMISSION_NOT_MATERIALIZED"
+
+
+def test_builder_core_is_preserved_byte_for_byte():
+    core = BUILDER_CORE.read_bytes()
+    assert len(core) == CORE_SIZE_BYTES
+    assert hashlib.sha256(core).hexdigest() == CORE_SHA256
+
+
+class _RecoveryServerState:
+    def __init__(self, *, submit_status: int, recovery_mode: str):
+        self.submit_status = submit_status
+        self.recovery_mode = recovery_mode
+        self.posts = 0
+        self.gets = 0
+        self.submission_sha256 = hashlib.sha256(b"{}").hexdigest()
+        self.index, self.receipt, _ = _receipt_fixture(self.submission_sha256)
+
+
+def _start_recovery_server(state: _RecoveryServerState):
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, fmt, *args):
+            return
+
+        def _write(self, status: int, payload, content_type: str = "application/json"):
+            raw = payload if isinstance(payload, bytes) else json.dumps(payload).encode("utf-8")
+            self.send_response(status)
+            self.send_header("content-type", content_type)
+            self.send_header("content-length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+
+        def do_POST(self):
+            state.posts += 1
+            if state.submit_status == 502:
+                self._write(502, b"<html>bad gateway</html>", "text/html")
+            else:
+                self._write(
+                    state.submit_status,
+                    {"accepted": False, "submitted": False},
+                )
+
+        def do_GET(self):
+            state.gets += 1
+            if state.recovery_mode == "missing":
+                self._write(404, {"found": False})
+                return
+            receipt = dict(state.receipt)
+            if state.recovery_mode == "bad_hash":
+                receipt["record_type"] = "echo"
+            self._write(
+                200,
+                {
+                    "found": True,
+                    "recovery_verified": True,
+                    "receipt_hash_verified": True,
+                    "submission_sha256": state.submission_sha256,
+                    "receipt_id": state.index["receipt_id"],
+                    "record_type": "verification",
+                    "receipt": receipt,
+                    "final_status": {"append_status": "appended"},
+                },
+            )
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    return server, thread
+
+
+def _run_builder(tmp_path: Path, state: _RecoveryServerState):
+    if shutil.which("node") is None:
+        pytest.skip("node is not available")
+    submission = tmp_path / "submission.json"
+    submission.write_text("{}", encoding="utf-8")
+    server, thread = _start_recovery_server(state)
+    env = os.environ.copy()
+    env["TRINITY_SUBMIT_RECOVERY_ATTEMPTS"] = "1"
+    env["TRINITY_SUBMIT_RECOVERY_DELAY_MS"] = "0"
+    try:
+        result = subprocess.run(
+            [
+                "node",
+                str(BUILDER),
+                "submit",
+                "--file",
+                str(submission),
+                "--gateway",
+                f"http://127.0.0.1:{server.server_port}",
+            ],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            capture_output=True,
+            timeout=30,
+            check=False,
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+    return result
+
+
+def test_builder_recovers_502_with_one_post_and_verified_read(tmp_path):
+    state = _RecoveryServerState(submit_status=502, recovery_mode="valid")
+    result = _run_builder(tmp_path, state)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert state.posts == 1
+    assert state.gets == 1
+    assert "recovered_after_ambiguous_submit" in result.stdout
+    assert "recovery_was_read_only" in result.stdout
+
+
+def test_builder_does_not_retry_or_recover_nonambiguous_400(tmp_path):
+    state = _RecoveryServerState(submit_status=400, recovery_mode="valid")
+    result = _run_builder(tmp_path, state)
+    assert result.returncode == 1
+    assert state.posts == 1
+    assert state.gets == 0
+
+
+def test_builder_rejects_unverified_recovery_receipt(tmp_path):
+    state = _RecoveryServerState(submit_status=502, recovery_mode="bad_hash")
+    result = _run_builder(tmp_path, state)
+    assert result.returncode == 1
+    assert state.posts == 1
+    assert state.gets == 1

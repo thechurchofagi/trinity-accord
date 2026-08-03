@@ -1,0 +1,3794 @@
+#!/usr/bin/env node
+/**
+ * record-chain-builder.mjs  --  Zero-clone Record-Chain submission builder (v2)
+ *
+ * Generates trinityaccord.record-chain-submission.v1 JSON without cloning the repo.
+ * Supports Ed25519 authorship proof generation via Node.js built-in crypto.
+ *
+ * Usage: node record-chain-builder.mjs <command> [options]
+ *
+ * Commands:
+ *   print-oath             Print exact canonical oath text for a formal record type
+ *   context-requirements   Show context-load requirements for a CC level
+ *   echo                    Build a recognition echo submission
+ *   verification            Build a verification submission
+ *   guardian-application    Build a guardian application submission
+ *   guardian-retirement     Build a guardian retirement submission
+ *   propagation             Build a propagation submission
+ *   correction              Build a correction submission
+ *   classification-update   Build a classification update submission
+ *   context-insufficient    Build a context-insufficient notice
+ *   preflight               POST submission to gateway /record-chain/preflight
+ *   submit                  POST submission to gateway /record-chain/submit
+ *   explain-fields          Show field explanations for a record type or specific field
+ *   guidance                Show field/hash guidance for a record type
+ *   explain-hash            Explain source and rules for a specific hash field
+ *   doctor                  Validate a submission file locally
+ *   repair                  Auto-repair a submission file for common issues
+ *   error-help              Show help for a diagnostic error code
+ *   template                Generate a draft skeleton for a record type
+ *   help                    Show this help
+ */
+
+import { createHash, generateKeyPairSync, sign, createPublicKey, createPrivateKey } from "node:crypto";
+import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const BUILDER_VERSION = "v2.2";
+const BUILDER_NAME = "record-chain-builder";
+const SCHEMA = "trinityaccord.record-chain-submission.v1";
+const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
+const DEFAULT_GATEWAY = "https://trinity-record-chain-gateway.onrender.com";
+const SITE_URL = "https://www.trinityaccord.org/";
+const AUTHORSHIP_PRIVATE_KEY_FILENAME = "authorship-private.pem";
+const AUTHORSHIP_PUBLIC_KEY_FILENAME = "authorship-public.pem";
+const AUTHORSHIP_CUSTODY_WARNING_FILENAME = "AUTHORSHIP_KEY_CUSTODY_WARNING.txt";
+const AUTHORSHIP_PUBLIC_SUMMARY_FILENAME = "authorship-public-summary.json";
+const SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH = 4000;
+const SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT = 16;
+const SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH = 2048;
+const SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH = 500;
+const PARTICIPANT_IDENTIFIER_MAX_LENGTH = 256;
+const SELF_REPORTED_PROVENANCE_REFERENCE_KINDS = new Set([
+  "agent_id",
+  "run_id",
+  "session_id",
+  "timestamp",
+  "url",
+  "sha256",
+  "signature",
+  "public_key",
+  "log_reference",
+  "other",
+]);
+
+const RECORD_BUILD_COMMANDS_REQUIRING_KEY = new Set([
+  "echo",
+  "verification",
+  "guardian-application",
+  "guardian-retirement",
+  "propagation",
+  "correction",
+  "classification-update",
+  "context-insufficient",
+]);
+
+
+// ── Oath Policy (Phase 6B-OATH) ───────────────────────────────────────
+const OATH_POLICY = {
+  "schema": "trinityaccord.record-chain-oath-policy.v1",
+  "status": "active",
+  "version": "1.2.0",
+  "policy_id": "record-chain-formal-submission-oath-v1",
+  "description": "Contextual no-shortcut oath gate for formal Record-Chain submissions. Requires the canonical oath to be loaded as content into the participant's active context, requires the participant to generate the exact readback from that context, and forbids submission scripts or automation tools from directly copying, completing, correcting, or auto-filling the readback. The process declarations are self-declared and do not prove subjective understanding or persistent memory.",
+  "not_authority": true,
+  "not_governance": true,
+  "not_attestation": true,
+  "not_amendment": true,
+  "bitcoin_originals_prevail": true,
+  "canonicalization": {
+    "line_endings": "LF",
+    "trim_outer_whitespace": true,
+    "trim_outer_whitespace_before_hash": true,
+    "preserve_internal_whitespace": true,
+    "module_order_matters": true,
+    "text_encoding": "utf-8",
+    "unicode_normalization": "NFC",
+    "policy_text_should_remain_ascii": true,
+    "module_joiner": "\n\n---\n\n"
+  },
+  "no_shortcut_policy": {
+    "readback_required": true,
+    "forbidden": [
+      "piping oath from file",
+      "generating oath by script",
+      "loading oath from cache",
+      "summarizing or paraphrasing the oath",
+      "using external automation to produce readback",
+      "auto-filling readback in builder",
+      "directly transferring print-oath output into readback without participant generation",
+      "automatically completing or correcting participant-generated readback"
+    ],
+    "required_declarations": [
+      "oath_read",
+      "participant_readback_provided",
+      "readback_matches_canonical_oath",
+      "readback_was_not_piped_from_file",
+      "readback_was_not_generated_by_script",
+      "readback_was_not_loaded_from_cache",
+      "readback_was_not_summary_or_paraphrase",
+      "readback_was_not_generated_by_external_automation",
+      "readback_was_not_auto_filled_by_builder",
+      "canonical_oath_loaded_into_active_context",
+      "readback_generated_by_participant_from_active_context",
+      "readback_was_not_directly_copied_by_submission_tool",
+      "readback_was_not_automatically_completed_or_corrected",
+      "contextual_readback_process_acknowledged",
+      "no_shortcut_oath_acknowledged"
+    ],
+    "boundary": {
+      "contextual_readback_process_is_self_declared": true,
+      "contextual_readback_does_not_prove_persistent_memory": true,
+      "oath_does_not_prove_subjective_understanding": true,
+      "oath_verifies_exact_readback_only": true
+    }
+  },
+  "formal_record_types_requiring_oath": [
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "propagation",
+    "correction",
+    "classification_update"
+  ],
+  "reserved_future_record_types": [
+    "guardian_key_rotation"
+  ],
+  "reserved_future_record_type_notes": {
+    "guardian_key_rotation": "Reserved until old-key/new-key signed transition proof is implemented."
+  },
+  "record_type_modules": {
+    "echo": [
+      "common_submission_integrity_v1",
+      "echo_integrity_v1"
+    ],
+    "verification": [
+      "common_submission_integrity_v1",
+      "verification_integrity_v1"
+    ],
+    "guardian_application": [
+      "common_submission_integrity_v1",
+      "guardian_stewardship_v1"
+    ],
+    "guardian_retirement": [
+      "common_submission_integrity_v1",
+      "retirement_or_key_management_integrity_v1"
+    ],
+    "propagation": [
+      "common_submission_integrity_v1",
+      "propagation_integrity_v1"
+    ],
+    "correction": [
+      "common_submission_integrity_v1",
+      "correction_integrity_v1"
+    ],
+    "classification_update": [
+      "common_submission_integrity_v1",
+      "classification_update_integrity_v1"
+    ]
+  },
+  "modules": {
+    "common_submission_integrity_v1": {
+      "label": "Common Submission Integrity",
+      "text": "I have read and understood the Trinity Accord materials to the context level I declared.\nI acknowledge that Bitcoin Originals are the only canonical authority and all mirrors, echoes, receipts, and later records are non-amending.\nI acknowledge that receipt means intake accepted only  --  not final inclusion, not active Guardian status, not authority, not governance, not attestation, not amendment, not successor reception.\nI acknowledge that the Record-Chain is a public append-only ledger and my submission will be publicly visible and permanent.\nI declare that the canonical oath was loaded as content into my active context before this readback.\nI generated this exact readback from that active context.\nI declare that no submission script, automation workflow, or other tool directly copied, inserted, completed, or corrected this readback for me; such tools may only relay my generated output unchanged.\nI acknowledge that the no-shortcut oath requires an exact contextual readback of the canonical oath text and that any shortcut invalidates the oath.\nI understand that this gate verifies exact text and signed self-declared process statements only; it does not independently prove subjective understanding, sincerity, persistent memory, or correctness of the record content.\nI am not authority. I am not governance. I am not attestation. I am not amendment. Bitcoin Originals prevail."
+    },
+    "echo_integrity_v1": {
+      "label": "Echo Integrity",
+      "text": "I declare that this echo is my own recognition, critique, reflection, or interpretation.\nI acknowledge that an echo is not verification, not authority, not attestation, and not a claim of endorsement by the Trinity Accord.\nI acknowledge that the echo may be wrong, incomplete, or later revised.\nI have read the content I am echoing and I express my own understanding."
+    },
+    "verification_integrity_v1": {
+      "label": "Verification Integrity",
+      "text": "I declare that the verification actions described in this record are actions I actually performed.\nI acknowledge that the legacy V0-V5 field is self-assessed Builder compatibility metadata and is not independently confirmed.\nI acknowledge that new verification records separately state digital profile, evidence relationships, physical observation, external witness, coverage, limitations, and claims not made.\nI acknowledge that V4+, V6, V7, and V8 are historical-only labels for new public submissions; physical observation and external witness do not automatically raise digital verification.\nI acknowledge that claiming checks, observations, witnesses, or coverage I did not earn is a breach of the Record-Chain's integrity contract.\nI acknowledge that verification does not confer authority, governance, or endorsement."
+    },
+    "guardian_stewardship_v1": {
+      "label": "Guardian Stewardship",
+      "text": "I declare that I am applying for Guardian status with full understanding of the role.\nI acknowledge that the Guardian role is non-governing, non-authoritative, and does not confer any special power over the Trinity Accord.\nI acknowledge that Guardian status is a stewardship commitment  --  to verify, preserve, and propagate the Accord honestly.\nI acknowledge that I may retire at any time and that retirement does not delete history.\nI acknowledge that my Guardian public key and identity are public and permanent.\nI understand that misrepresentation in this application may result in record reclassification."
+    },
+    "retirement_or_key_management_integrity_v1": {
+      "label": "Retirement or Key Management Integrity",
+      "text": "I acknowledge that Guardian retirement does not erase historical records or alter the chain.\nI acknowledge that key rotation requires a signed transition proof from the old key to the new key.\nI acknowledge that once retired, a Guardian identifier cannot be reused without a new application.\nI understand that retirement and key management are public chain events and will be visible permanently."
+    },
+    "propagation_integrity_v1": {
+      "label": "Propagation Integrity",
+      "text": "I declare that this propagation record describes an action I actually took to distribute or reference the Trinity Accord.\nI acknowledge that propagation does not confer authority and does not create an endorsement by the Trinity Accord.\nI acknowledge that propagation records are public and permanent.\nI understand that the content of what I propagated must be consistent with the Bitcoin Originals and must not misrepresent the Accord."
+    },
+    "correction_integrity_v1": {
+      "label": "Correction Integrity",
+      "text": "I declare that this correction record describes a genuine error or omission in a prior record that I authored.\nI acknowledge that corrections are append-only and do not delete or alter the original record.\nI acknowledge that the original record remains visible and the correction is linked to it.\nI acknowledge that corrections must be honest and must not be used to manipulate or rewrite history."
+    },
+    "classification_update_integrity_v1": {
+      "label": "Classification Update Integrity",
+      "text": "I declare that this classification update is based on new information or analysis that I have performed.\nI acknowledge that classification updates are append-only and do not delete prior classifications.\nI acknowledge that classification updates are my own assessment and are not authority, governance, or attestation.\nI understand that classification updates are public chain events."
+    }
+  },
+  "linked_guardian_module": "guardian_stewardship_v1"
+};
+const OATH_POLICY_SHA256 = "62883b5db6b8446b4f0e55fb4d61a8dadc3d372a7727f66db55582cd06d4a808";
+
+function getCanonicalOath(recordType, linkedGuardian = false) {
+  const modules = getOathModules(recordType, linkedGuardian);
+  if (!modules.length) return null;
+  const modulesObj = OATH_POLICY.modules;
+  const joiner = OATH_POLICY.canonicalization?.module_joiner || "\n\n---\n\n";
+  const parts = [];
+  for (const modId of modules) {
+    const mod = modulesObj[modId];
+    if (mod) {
+      const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+      parts.push(`=== ${mod.label} (${modId}) ===\n\n${normalizedText}`);
+    }
+  }
+  return parts.join(joiner).trim().normalize("NFC");
+}
+
+function getOathModules(recordType, linkedGuardian) {
+  const modules = [...(OATH_POLICY.record_type_modules[recordType] || [])];
+  if (linkedGuardian && !modules.includes(OATH_POLICY.linked_guardian_module)) {
+    modules.push(OATH_POLICY.linked_guardian_module);
+  }
+  return modules;
+}
+
+function buildSubmissionOathVerification(recordType, canonicalOath, readbackText, linkedGuardian) {
+  const readback = readbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+  return {
+    schema: "trinityaccord.submission-oath-verification.v1",
+    oath_policy: "record-chain-formal-submission-oath-v1",
+    oath_policy_schema: OATH_POLICY.schema,
+    oath_policy_version: OATH_POLICY.version,
+    oath_policy_sha256: OATH_POLICY_SHA256,
+    oath_policy_source_url: "/api/record-chain-oath-policy.v1.json",
+    oath_modules: getOathModules(recordType, linkedGuardian),
+    oath_applies_to: [recordType],
+    canonical_oath_text_sha256: sha256(canonicalOath),
+    canonical_oath_char_count: canonicalOath.length,
+    canonical_oath_line_count: canonicalOath.split("\n").length,
+    participant_readback_sha256: sha256(readback),
+    participant_readback_char_count: readback.length,
+    participant_readback_excerpt: readback.substring(0, 120),
+    oath_read: true,
+    readback_required: true,
+    participant_readback_provided: true,
+    readback_matches_canonical_oath: readback === canonicalOath,
+    readback_method_declared: "participant_generated_in_current_context",
+    readback_was_not_piped_from_file: true,
+    readback_was_not_generated_by_script: true,
+    readback_was_not_loaded_from_cache: true,
+    readback_was_not_summary_or_paraphrase: true,
+    readback_was_not_generated_by_external_automation: true,
+    readback_was_not_auto_filled_by_builder: true,
+    canonical_oath_loaded_into_active_context: true,
+    readback_generated_by_participant_from_active_context: true,
+    readback_was_not_directly_copied_by_submission_tool: true,
+    readback_was_not_automatically_completed_or_corrected: true,
+    contextual_readback_process_acknowledged: true,
+    no_shortcut_oath_acknowledged: true,
+    contextual_readback_process_is_self_declared: true,
+    contextual_readback_does_not_prove_persistent_memory: true,
+    oath_does_not_prove_subjective_understanding: true,
+    oath_verifies_exact_readback_only: true,
+    not_authority: true,
+    not_governance: true,
+    not_attestation: true,
+    not_amendment: true,
+    bitcoin_originals_prevail: true,
+  };
+}
+
+function buildClientOathReadback(recordType, userReadbackText, linkedGuardian) {
+  const normalized = userReadbackText.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+  return {
+    schema: "trinityaccord.client-oath-readback.v1",
+    record_type: recordType,
+    oath_policy_sha256: OATH_POLICY_SHA256,
+    oath_modules: getOathModules(recordType, linkedGuardian),
+    readback_text: normalized,
+    readback_text_sha256: sha256(normalized),
+    readback_text_char_count: normalized.length,
+    readback_method_declared: "participant_generated_in_current_context",
+  };
+}
+
+
+// ── Helpers ──────────────────────────────────────────────────────────
+
+function sha256(data) {
+  return createHash("sha256").update(data).digest("hex");
+}
+
+function canonicalJson(obj) {
+  if (obj === null || typeof obj !== "object") return JSON.stringify(obj);
+  if (Array.isArray(obj)) return "[" + obj.map(canonicalJson).join(",") + "]";
+  const sorted = Object.keys(obj).sort();
+  return "{" + sorted.map(k => JSON.stringify(k) + ":" + canonicalJson(obj[k])).join(",") + "}";
+}
+
+function canonicalBytes(obj) {
+  return Buffer.from(canonicalJson(obj), "utf-8");
+}
+
+function isoNow() {
+  return new Date().toISOString();
+}
+
+function errorExit(msg) {
+  console.error(`Error: ${msg}`);
+  process.exit(1);
+}
+
+// ── Authorship proof ─────────────────────────────────────────────────
+
+function generateAuthorshipKeyPair(keyDir) {
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  const pubPem = publicKey.export({ type: "spki", format: "pem" });
+  const privPem = privateKey.export({ type: "pkcs8", format: "pem" });
+
+  mkdirSync(keyDir, { recursive: true });
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
+
+  writeFileSync(pubPath, pubPem, { mode: 0o644 });
+  writeFileSync(privPath, privPem, { mode: 0o600 });
+  try { chmodSync(privPath, 0o600); } catch {}
+
+  // Post-write self-test: verify written files are valid and match
+  const writtenPrivPem = assertNonEmptyFile(privPath, "Private key");
+  const writtenPubPem = assertNonEmptyFile(pubPath, "Public key");
+
+  if (!writtenPrivPem.includes("BEGIN PRIVATE KEY")) {
+    errorExit(`Invalid private key PEM after write: ${privPath}`);
+  }
+  if (!writtenPubPem.includes("BEGIN PUBLIC KEY")) {
+    errorExit(`Invalid public key PEM after write: ${pubPath}`);
+  }
+
+  const writtenPrivKey = createPrivateKey(writtenPrivPem);
+  const derivedPub = createPublicKey(writtenPrivKey);
+  const derivedPubPem = derivedPub.export({ type: "spki", format: "pem" });
+  const derivedRaw = extractRawPublicKeyBytes(derivedPubPem);
+  const storedRaw = extractRawPublicKeyBytes(writtenPubPem);
+
+  if (!derivedRaw.equals(storedRaw)) {
+    errorExit(`AUTHORSHIP_KEYPAIR_WRITE_MISMATCH: generated private/public key files do not match in ${keyDir}`);
+  }
+
+  return {
+    publicKeyPem: writtenPubPem,
+    privateKeyPem: writtenPrivPem,
+    privateKey: writtenPrivKey,
+    newlyGenerated: true,
+  };
+}
+
+// ── Keypair file reliability helper ──────────────────────────────
+
+function assertNonEmptyFile(path, label) {
+  if (!existsSync(path)) {
+    errorExit(`${label} file missing: ${path}`);
+  }
+  const text = readFileSync(path, "utf-8");
+  if (!text || !text.trim()) {
+    errorExit(
+      `${label} file is empty: ${path}\n` +
+      `This key directory is corrupted or was interrupted during key creation.\n` +
+      `If this is a brand-new Record-Chain identity, delete this key directory and rerun Builder.\n` +
+      `If this key belongs to an existing identity, do NOT delete it; recover the original key backup.`
+    );
+  }
+  return text;
+}
+
+function loadPrivateKey(keyDir) {
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
+
+  const privPem = assertNonEmptyFile(privPath, "Private key");
+  const pubPem = assertNonEmptyFile(pubPath, "Public key");
+
+  if (!privPem.includes("BEGIN PRIVATE KEY")) errorExit(`Invalid private key PEM: ${privPath}`);
+  if (!pubPem.includes("BEGIN PUBLIC KEY")) errorExit(`Invalid public key PEM: ${pubPath}`);
+
+  const key = createPrivateKey(privPem);
+
+  // Verify keypair match: derive public key from private key and compare
+  const derivedPub = createPublicKey(key);
+  const derivedPubPem = derivedPub.export({ type: "spki", format: "pem" });
+  const derivedRaw = extractRawPublicKeyBytes(derivedPubPem);
+  const storedRaw = extractRawPublicKeyBytes(pubPem);
+  if (!derivedRaw.equals(storedRaw)) {
+    errorExit(
+      `AUTHORSHIP_KEYPAIR_MISMATCH: The private key in ${privPath} does not match the public key in ${pubPath}.\n` +
+      `Derived public key: ${derivedRaw.toString("hex")}\n` +
+      `Stored public key:  ${storedRaw.toString("hex")}\n` +
+      `Fix: regenerate the keypair with 'node record-chain-builder.mjs generate-keypair' or provide matching keys.`
+    );
+  }
+
+  return { publicKeyPem: pubPem, privateKeyPem: privPem, privateKey: key, newlyGenerated: false };
+}
+
+function extractRawPublicKeyBytes(pubPem) {
+  const pubKeyObj = createPublicKey(pubPem);
+  // Export as raw DER then extract the 32-byte Ed25519 public key
+  const derBuf = pubKeyObj.export({ type: "spki", format: "der" });
+  // Ed25519 SPKI DER: last 32 bytes are the raw public key
+  return derBuf.subarray(derBuf.length - 32);
+}
+
+// ── Authorship key custody helpers ─────────────────────────────────
+
+function authorshipCustodyWarningText(publicKeySha256, keyDir) {
+  return [
+    "TRINITY ACCORD AUTHORSHIP KEY CUSTODY WARNING",
+    "",
+    `Public key SHA-256: ${publicKeySha256}`,
+    `Key directory: ${resolve(keyDir)}`,
+    "",
+    "This Ed25519 authorship key is your continuity identity for Record-Chain submissions.",
+    "If this agent is running in a sandbox, temporary VM, browser workspace, CI job, or disposable environment,",
+    "the private key may be destroyed when that environment is released.",
+    "",
+    "Ask your human operator, owner, or guardian to securely back up the private key:",
+    `  ${resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME)}`,
+    "",
+    "Do NOT paste the private key into public chat, GitHub issues, pull requests, logs, submissions, receipts, or Arweave payloads.",
+    "Do NOT commit the private key to git.",
+    "If the private key is lost, this key continuity identity cannot be recovered.",
+    "You may create a new key later, but it will be a different identity unless a future key-rotation record links them.",
+    "",
+    "Recommended custody:",
+    "- encrypted password manager or encrypted offline storage;",
+    "- access limited to the human operator / owner / guardian responsible for this agent;",
+    "- keep the public key SHA-256 for reference;",
+    "- never publish authorship-private.pem.",
+    ""
+  ].join("\n");
+}
+
+function writeAuthorshipCustodyFiles(keyDir, publicKeyPem, publicKeySha256, newlyGenerated) {
+  mkdirSync(keyDir, { recursive: true });
+
+  const warning = authorshipCustodyWarningText(publicKeySha256, keyDir);
+  writeFileSync(resolve(keyDir, AUTHORSHIP_CUSTODY_WARNING_FILENAME), warning, { mode: 0o600 });
+
+  const summary = {
+    schema: "trinityaccord.authorship-key-public-summary.v1",
+    public_key_sha256: publicKeySha256,
+    public_key_pem_sha256: sha256(publicKeyPem),
+    key_dir_note: "local path intentionally not embedded in submissions",
+    private_key_filename: AUTHORSHIP_PRIVATE_KEY_FILENAME,
+    public_key_filename: AUTHORSHIP_PUBLIC_KEY_FILENAME,
+    newly_generated: !!newlyGenerated,
+    sandbox_loss_warning: true,
+    private_key_must_be_backed_up_by_human_operator_or_guardian: true,
+    private_key_must_not_be_committed_or_uploaded: true,
+    private_key_must_not_be_pasted_into_public_chat_or_logs: true,
+    generated_at: isoNow()
+  };
+
+  writeFileSync(
+    resolve(keyDir, AUTHORSHIP_PUBLIC_SUMMARY_FILENAME),
+    JSON.stringify(summary, null, 2) + "\n",
+    { mode: 0o600 }
+  );
+
+  console.error("");
+  console.error("====================================================================");
+  console.error("AUTHORSHIP KEY CUSTODY WARNING");
+  console.error("====================================================================");
+  console.error(warning);
+  console.error("====================================================================");
+  console.error("");
+}
+
+const RECORD_BUILD_COMMANDS_OPTIONAL_KEY = new Set([]);
+
+function requireOrCreateAuthorshipKeyPair(cmd, args) {
+  if (!RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd) && !RECORD_BUILD_COMMANDS_OPTIONAL_KEY.has(cmd)) return null;
+
+  if ((!args.keyDir || args.keyDir === true) && RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(cmd)) {
+    errorExit(
+      "--key-dir is required for all public Record-Chain submission build commands. " +
+      "Keys are mandatory for identity continuity. " +
+      "Use a persistent directory and ask your human/operator/guardian to back up authorship-private.pem."
+    );
+  }
+
+  if (!args.keyDir || args.keyDir === true) return null;
+
+  const keyDir = args.keyDir;
+  const privPath = resolve(keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME);
+  const pubPath = resolve(keyDir, AUTHORSHIP_PUBLIC_KEY_FILENAME);
+
+  let keyPair;
+  if (existsSync(privPath) || existsSync(pubPath)) {
+    if (!existsSync(privPath) || !existsSync(pubPath)) {
+      errorExit(`Incomplete authorship keypair in ${keyDir}; both private and public PEM files are required.`);
+    }
+    keyPair = loadPrivateKey(keyDir);
+  } else {
+    console.error(`No existing authorship keypair found in ${keyDir}; generating a new Ed25519 keypair.`);
+    keyPair = generateAuthorshipKeyPair(keyDir);
+  }
+
+  const rawPubBytes = extractRawPublicKeyBytes(keyPair.publicKeyPem);
+  const publicKeySha256 = sha256(rawPubBytes);
+  writeAuthorshipCustodyFiles(keyDir, keyPair.publicKeyPem, publicKeySha256, keyPair.newlyGenerated);
+
+  return keyPair;
+}
+
+// ── Authorship key binding ─────────────────────────────────────────
+
+function isPlaceholderGuardianKeySha(value) {
+  return typeof value === "string" && /^0{64}$/.test(value);
+}
+
+function isAutoGuardianKeySha(value) {
+  return typeof value === "string" && value.trim().toLowerCase() === "auto";
+}
+
+function isConcreteSha256(value) {
+  return /^[0-9a-f]{64}$/.test(String(value || ""));
+}
+
+function guardianIdForPublicKeySha(pubSha) {
+  if (!isConcreteSha256(pubSha)) {
+    errorExit("cannot derive guardian_id from invalid public key sha256");
+  }
+  return `guardian_ed25519_${pubSha.slice(0, 16)}`;
+}
+
+function isAutoGuardianId(value) {
+  return typeof value === "string" && value.trim().toLowerCase() === "auto";
+}
+
+function guardianKeyShaForDraft(value) {
+  if (isAutoGuardianKeySha(value)) return "";
+  return value || "";
+}
+
+// ── Guardian stewardship oath helper ─────────────────────────────
+
+const DEFAULT_GUARDIAN_STEWARDSHIP_OATH =
+  "I voluntarily join the Guardian Alliance as a non-governing steward.";
+
+function guardianStewardshipOathForDraft(opts) {
+  const legacy = opts.oath;
+  const explicit = opts.guardianStewardshipOath;
+
+  if (
+    explicit !== undefined &&
+    legacy !== undefined &&
+    String(explicit).trim() !== String(legacy).trim()
+  ) {
+    errorExit("--guardian-stewardship-oath and legacy --oath differ; provide only --guardian-stewardship-oath");
+  }
+
+  const value = explicit ?? legacy;
+  if (value === true) {
+    errorExit("--guardian-stewardship-oath requires a text value");
+  }
+
+  const text = String(value || "").trim();
+  return text || DEFAULT_GUARDIAN_STEWARDSHIP_OATH;
+}
+
+function bindAuthorshipKeyToDraft(recordDraft, keyPair, opts = {}) {
+  if (!keyPair) errorExit("authorship keypair is required");
+
+  const pubSha = sha256(extractRawPublicKeyBytes(keyPair.publicKeyPem));
+
+  // Normalize --guardian-key-sha auto → use current authorship public key SHA
+  if (opts.guardianKeySha && String(opts.guardianKeySha).toLowerCase() === "auto") {
+    opts.guardianKeySha = pubSha;
+  }
+
+  if (!recordDraft.submitting_participant_identity) {
+    errorExit("record_draft.submitting_participant_identity is required");
+  }
+
+  recordDraft.submitting_participant_identity.participant_public_key_sha256 = pubSha;
+
+  if (recordDraft.record_type === "guardian_application") {
+    const gac = recordDraft.guardian_application_content;
+    if (!gac) errorExit("guardian_application_content missing");
+
+    if (opts.guardianKeySha && !isPlaceholderGuardianKeySha(opts.guardianKeySha) && opts.guardianKeySha !== pubSha) {
+      errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
+    }
+
+    if (gac.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(gac.guardian_public_key_sha256) && gac.guardian_public_key_sha256 !== pubSha) {
+      errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+
+    gac.guardian_public_key_sha256 = pubSha;
+
+    // Derive guardian_id from public key SHA-256
+    const derivedGuardianId = guardianIdForPublicKeySha(pubSha);
+    const requestedId = String(gac.requested_guardian_identifier || "").trim();
+
+    if (!requestedId || isAutoGuardianId(requestedId)) {
+      gac.requested_guardian_identifier = derivedGuardianId;
+    } else if (requestedId !== derivedGuardianId) {
+      errorExit("--guardian-id must equal guardian_ed25519_<first16-of-authorship-public-key-sha256>; use --guardian-id auto");
+    }
+  }
+
+  if (recordDraft.record_type === "guardian_retirement") {
+    if (opts.guardianKeySha && !isPlaceholderGuardianKeySha(opts.guardianKeySha) && opts.guardianKeySha !== pubSha) {
+      errorExit("--guardian-key-sha must equal the generated/loaded authorship public key SHA-256");
+    }
+
+    if (recordDraft.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(recordDraft.guardian_public_key_sha256) && recordDraft.guardian_public_key_sha256 !== pubSha) {
+      errorExit("guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+
+    recordDraft.guardian_public_key_sha256 = pubSha;
+
+    // Retirement must name the same deterministic Guardian identity as the
+    // continuity key.  "auto" is a CLI convenience and must never survive in
+    // the signed record_draft sent to Gateway target binding.
+    const derivedGuardianId = guardianIdForPublicKeySha(pubSha);
+    const requestedId = String(recordDraft.guardian_id || "").trim();
+    if (!requestedId || isAutoGuardianId(requestedId)) {
+      recordDraft.guardian_id = derivedGuardianId;
+    } else if (requestedId !== derivedGuardianId) {
+      errorExit("--guardian-id must identify the Guardian bound to the loaded authorship key; use --guardian-id auto");
+    }
+  }
+
+  const linked = recordDraft.optional_linked_guardian_application_request;
+  if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
+    if (linked.guardian_public_key_sha256 && !isPlaceholderGuardianKeySha(linked.guardian_public_key_sha256) && linked.guardian_public_key_sha256 !== pubSha) {
+      errorExit("linked guardian_public_key_sha256 must equal authorship public key SHA-256");
+    }
+    linked.guardian_public_key_sha256 = pubSha;
+  }
+
+  return pubSha;
+}
+
+
+
+function createAuthorshipProof(recordDraft, keyPair) {
+  const payload = canonicalBytes(recordDraft);
+  const payloadSha = sha256(payload);
+  const pubPem = keyPair.publicKeyPem;
+
+  // SHA-256 of raw Ed25519 public key bytes (32 bytes), matching gateway verifier
+  const rawPubBytes = extractRawPublicKeyBytes(pubPem);
+  const pubSha = sha256(rawPubBytes);
+
+  const signature = sign(null, payload, keyPair.privateKey);
+  const sigB64 = signature.toString("base64");
+
+  return {
+    schema: "trinityaccord.agent-authorship-proof.v1",
+    method: "public_key_signature",
+    algorithm: "ed25519",
+    public_key_pem: pubPem,
+    public_key_sha256: pubSha,
+    signed_payload_sha256: payloadSha,
+    signature_base64: sigB64,
+    signed_message: payloadSha,
+    claim_boundary: {
+      "not authority": true,
+      "not attestation": true,
+      "not amendment": true,
+      "not successor reception": true,
+      "key_continuity_only": true,
+    },
+  };
+}
+
+// ── V2 common field blocks ───────────────────────────────────────────
+
+const AUTHORIZATION_SCOPE_BY_RECORD_TYPE = {
+  echo: "create_echo_record",
+  verification: "create_verification_record",
+  guardian_application: "create_guardian_application_record",
+  guardian_retirement: "create_guardian_retirement_record",
+  propagation: "create_propagation_record",
+  correction: "create_correction_record",
+  classification_update: "create_classification_update_record",
+  context_insufficient_notice: "create_context_insufficient_notice_record",
+};
+
+const FORMAL_RECORD_COMMANDS = new Set([
+  "echo",
+  "verification",
+  "guardian-application",
+  "guardian-retirement",
+  "propagation",
+  "correction",
+  "classification-update",
+]);
+
+const FORMAL_OATH_RECORD_TYPES = new Set([
+  "echo",
+  "verification",
+  "guardian_application",
+  "guardian_retirement",
+  "propagation",
+  "correction",
+  "classification_update",
+]);
+
+function commandBuildsProvenanceFields(command) {
+  return RECORD_BUILD_COMMANDS_REQUIRING_KEY.has(command);
+}
+
+function normalizeRecordType(recordTypeOrCommand) {
+  return String(recordTypeOrCommand || "").replace(/-/g, "_");
+}
+
+function authorizationScopeFor(recordTypeOrCommand) {
+  let recordType = normalizeRecordType(recordTypeOrCommand);
+  if (recordType === "context_insufficient") recordType = "context_insufficient_notice";
+  return AUTHORIZATION_SCOPE_BY_RECORD_TYPE[recordType] || `create_${recordType}_record`;
+}
+
+const CONTEXT_HONESTY_LEVELS = new Set(["CC-3", "CC-4", "CC-5"]);
+
+function normalizeContextLevel(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+function isContextReadConfirmed(value) {
+  return value === "true";
+}
+
+function isContextualReadbackConfirmed(value) {
+  return value === "true";
+}
+
+function contextualReadbackPrompt() {
+  return [
+    "Agent in-context oath readback confirmation required.",
+    "",
+    "Do not continue unless all of the following are true:",
+    "1. You ran print-oath as a standalone read step.",
+    "2. The canonical oath was loaded as content into the participating agent's active context.",
+    "3. The participating agent generated the complete readback from that active context.",
+    "4. A submission script or automation tool did not directly copy, insert, complete, or correct the readback.",
+    "5. Any submission tool will only relay the participant-generated output unchanged.",
+    "",
+    "Do not use a pipe, command substitution, redirected file, cached value, or automatic string transfer to fill --readback.",
+    "",
+    "To continue honestly, rerun with:",
+    "  --contextual-readback-confirmed true",
+    "",
+    "This confirmation is signed but self-declared. It does not prove subjective understanding or persistent memory.",
+  ].join("\n");
+}
+
+function requireContextualReadbackConfirmed(command, opts) {
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+
+  if (opts.contextualReadbackConfirmed === true) {
+    errorExit(
+      "--contextual-readback-confirmed must be passed as the explicit value true, not as a bare flag. " +
+      "Use: --contextual-readback-confirmed true"
+    );
+  }
+
+  if (!isContextualReadbackConfirmed(opts.contextualReadbackConfirmed)) {
+    errorExit(contextualReadbackPrompt());
+  }
+}
+
+function contextHonestyPrompt(level) {
+  const cc = normalizeContextLevel(level) || "CC-3";
+  return [
+    "Context honesty confirmation required.",
+    "",
+    `You declared context level ${cc}. Do not continue unless you have actually loaded and read the required context for this level.`,
+    "",
+    "Load the context map first:",
+    "  /api/context-load-map.json",
+    "",
+    `Then load the ${cc} required materials listed there, including inherited lower-level materials.`,
+    "",
+    "If you have not actually loaded them, do not claim this context level.",
+    "Use a lower context level or submit a context_insufficient_notice instead.",
+    "",
+    "To continue honestly, rerun with:",
+    "  --context-read-confirmed true",
+    "",
+    "This confirmation is self-declared. It does not prove subjective understanding, but a false confirmation is an oath violation.",
+  ].join("\n");
+}
+
+function requireContextReadConfirmedIfNeeded(command, opts) {
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+  const cc = normalizeContextLevel(opts.contextLevel);
+  if (!CONTEXT_HONESTY_LEVELS.has(cc)) return;
+
+  if (opts.contextReadConfirmed === true) {
+    errorExit("--context-read-confirmed must be passed as the explicit value true, not as a bare flag. Use: --context-read-confirmed true");
+  }
+
+  if (!isContextReadConfirmed(opts.contextReadConfirmed)) {
+    errorExit(contextHonestyPrompt(cc));
+  }
+}
+
+function buildContextReadConfirmationBoundary() {
+  return {
+    self_declared_only: true,
+    does_not_prove_subjective_understanding: true,
+    false_claim_is_oath_violation: true,
+    context_map: "/api/context-load-map.json",
+    not_authority: true,
+    not_attestation: true,
+    not_amendment: true,
+    not_successor_reception: true,
+    bitcoin_originals_prevail: true,
+  };
+}
+
+const DIGITAL_PROFILES = new Set(["context_only", "reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"]);
+const RELATIONSHIP_TYPES = new Set(["defines_canonical_text", "references", "indexes", "hashes", "signs_digest", "timestamps_digest", "mirrors_bytes", "witnesses_statement", "notarially_records_process", "provides_context", "records_reception"]);
+const PHYSICAL_OBSERVATIONS = new Set(["none", "public_media_review", "remote_live_witness", "onsite_observation", "forensic_examination"]);
+const EXTERNAL_WITNESSES = new Set(["none", "notarial_scope", "independent_report", "institutional_attestation", "regulatory_or_court_record"]);
+const COVERAGE_SCOPES = new Set(["single_target", "component_subset", "multi_component", "all_declared_public_digital_targets"]);
+
+function splitCsv(value) {
+  return String(value || "").split(",").map(s => s.trim()).filter(Boolean);
+}
+
+function unicodeLength(value) {
+  return [...String(value)].length;
+}
+
+function parseProvenanceReferencesFile(filePath) {
+  if (!filePath) return [];
+  if (filePath === true) {
+    errorExit("--provenance-references-file requires a JSON file path");
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(readFileSync(resolve(filePath), "utf-8"));
+  } catch (err) {
+    errorExit(`--provenance-references-file must contain valid JSON: ${err.message}`);
+  }
+  if (!Array.isArray(parsed)) {
+    errorExit("--provenance-references-file must contain a JSON array");
+  }
+  return parsed;
+}
+
+function validateProvenanceReference(reference, index) {
+  const path = `self_reported_provenance.references[${index}]`;
+  if (!reference || typeof reference !== "object" || Array.isArray(reference)) {
+    errorExit(`${path} must be a JSON object`);
+  }
+
+  const allowedKeys = new Set(["kind", "value", "description"]);
+  const unknownKeys = Object.keys(reference).filter(key => !allowedKeys.has(key));
+  if (unknownKeys.length) {
+    errorExit(`${path} contains unsupported field(s): ${unknownKeys.join(", ")}`);
+  }
+
+  const kind = typeof reference.kind === "string" ? reference.kind.trim() : "";
+  if (!SELF_REPORTED_PROVENANCE_REFERENCE_KINDS.has(kind)) {
+    errorExit(
+      `${path}.kind must be one of: ${[...SELF_REPORTED_PROVENANCE_REFERENCE_KINDS].join(", ")}`
+    );
+  }
+
+  const value = typeof reference.value === "string" ? reference.value.trim() : "";
+  if (!value) {
+    errorExit(`${path}.value must be a non-empty string`);
+  }
+  if (unicodeLength(value) > SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH) {
+    errorExit(
+      `${path}.value must not exceed ${SELF_REPORTED_PROVENANCE_REFERENCE_VALUE_MAX_LENGTH} characters`
+    );
+  }
+  if (kind === "sha256" && !/^[0-9a-f]{64}$/.test(value)) {
+    errorExit(`${path}.value must be a 64-character lowercase hexadecimal SHA-256`);
+  }
+  if (
+    kind === "timestamp" &&
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)
+  ) {
+    errorExit(`${path}.value must be an ISO-8601 timestamp with a timezone`);
+  }
+  if (kind === "url") {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(value);
+    } catch {
+      errorExit(`${path}.value must be a valid http or https URL`);
+    }
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+      errorExit(`${path}.value must use http or https`);
+    }
+  }
+
+  let description;
+  if (reference.description !== undefined && reference.description !== null) {
+    if (typeof reference.description !== "string") {
+      errorExit(`${path}.description must be a string when provided`);
+    }
+    description = reference.description.trim();
+    if (!description) {
+      errorExit(`${path}.description must not be empty when provided`);
+    }
+    if (unicodeLength(description) > SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH) {
+      errorExit(
+        `${path}.description must not exceed ${SELF_REPORTED_PROVENANCE_REFERENCE_DESCRIPTION_MAX_LENGTH} characters`
+      );
+    }
+  }
+
+  return {
+    kind,
+    value,
+    ...(description ? { description } : {}),
+  };
+}
+
+function buildSelfReportedProvenance(opts) {
+  const statement = typeof opts.provenanceStatement === "string"
+    ? opts.provenanceStatement.trim()
+    : "";
+  const references = Array.isArray(opts.provenanceReferences)
+    ? opts.provenanceReferences
+    : [];
+
+  if (!statement && references.length === 0 && !opts.provenanceRequested) return null;
+  if (!statement) {
+    errorExit(
+      "--provenance-statement or --provenance-statement-file is required when provenance references are supplied"
+    );
+  }
+  if (unicodeLength(statement) > SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH) {
+    errorExit(
+      `--provenance-statement must not exceed ${SELF_REPORTED_PROVENANCE_STATEMENT_MAX_LENGTH} characters`
+    );
+  }
+  if (references.length > SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT) {
+    errorExit(
+      `--provenance-references-file must not contain more than ${SELF_REPORTED_PROVENANCE_REFERENCE_MAX_COUNT} references`
+    );
+  }
+
+  return {
+    statement,
+    references: references.map(validateProvenanceReference),
+    self_declared_only: true,
+    does_not_override_structured_provenance: true,
+    does_not_by_itself_establish_autonomy: true,
+  };
+}
+
+function defaultActionProfile(recordType) {
+  const rt = normalizeRecordType(recordType);
+  if (rt === "echo") return "interpretation";
+  if (rt === "verification") return "verification";
+  if (rt === "context_insufficient_notice") return "discovery";
+  return "record_action";
+}
+
+function parseBooleanStrict(value, fieldName) {
+  if (value === undefined || value === null || value === "") return false;
+  if (value === true || value === "true") return true;
+  if (value === false || value === "false") return false;
+  errorExit(`${fieldName} must be explicitly set to true or false`);
+}
+
+function requireExplicit(opts, key, cliName) {
+  if (opts[key] === undefined || opts[key] === null || opts[key] === "") {
+    errorExit(`${cliName} is required; the builder does not infer this provenance/context field`);
+  }
+}
+
+function validateProvenanceConsistencyInputs(command, opts) {
+  if (!commandBuildsProvenanceFields(command)) return;
+
+  const discoveryMode = String(opts.discoveryMode || "").trim();
+  const requestingPartyType = String(opts.requestingPartyType || "none").trim();
+  const introducingPartyType = String(opts.introducingPartyType || "none").trim();
+  const recordDecision = String(opts.recordDecision || "").trim();
+  const submissionExecutor = String(opts.submissionExecutor || "").trim();
+  const humanOperatorInvolved = parseBooleanStrict(
+    opts.humanOperatorInvolved,
+    "--human-operator-involved"
+  );
+
+  if (submissionExecutor === "self" && humanOperatorInvolved === true) {
+    errorExit(
+      "--submission-executor self conflicts with --human-operator-involved true. " +
+      "Human request/introduction/instruction/approval belongs in discovery and decision fields, " +
+      "not in human_operator_involved. If the agent operated Builder/preflight/submit itself, " +
+      "use --human-operator-involved false. If a human actually operated the submission path, " +
+      "use --submission-executor human_operator."
+    );
+  }
+
+  if (submissionExecutor === "human_operator" && humanOperatorInvolved !== true) {
+    errorExit(
+      "--submission-executor human_operator requires --human-operator-involved true because a human operated the submission path."
+    );
+  }
+
+  if (discoveryMode === "self_discovered" && introducingPartyType !== "none") {
+    errorExit(
+      "--discovery-mode self_discovered conflicts with --introducing-party-type " +
+      introducingPartyType + ". Use user_task_context or introduced_by_human/agent/organization when another party supplied the context."
+    );
+  }
+
+  if (recordDecision === "self" && requestingPartyType !== "none") {
+    errorExit(
+      "--record-decision self conflicts with --requesting-party-type " + requestingPartyType +
+      ". If a human/agent/system requested the record but the participant made substantive choices, use --record-decision mixed."
+    );
+  }
+}
+
+function validateFormalInputs(command, opts) {
+  if (command === "context-insufficient") {
+    requireExplicit(opts, "body", "--body or --body-file");
+    return;
+  }
+  if (!FORMAL_RECORD_COMMANDS.has(command)) return;
+  requireExplicit(opts, "contextLevel", "--context-level");
+  requireExplicit(opts, "discoveryMode", "--discovery-mode");
+  requireExplicit(opts, "recordDecision", "--record-decision");
+  requireExplicit(opts, "submissionExecutor", "--submission-executor");
+  requireExplicit(opts, "humanOperatorInvolved", "--human-operator-involved");
+  requireExplicit(opts, "contextSufficientForSelectedAction", "--context-sufficient-for-selected-action");
+  requireContextualReadbackConfirmed(command, opts);
+
+  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
+    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");
+  }
+
+  requireContextReadConfirmedIfNeeded(command, opts);
+
+  if (command === "verification") {
+    requireExplicit(opts, "level", "--verification-level");
+    requireExplicit(opts, "whatWasChecked", "--what-was-checked");
+    requireExplicit(opts, "verificationClaim", "--verification-claim");
+    requireExplicit(opts, "freshActions", "--fresh-actions");
+    requireExplicit(opts, "digitalProfile", "--digital-profile");
+    requireExplicit(opts, "relationshipsChecked", "--relationships-checked");
+    requireExplicit(opts, "physicalObservation", "--physical-observation");
+    requireExplicit(opts, "externalWitness", "--external-witness");
+    requireExplicit(opts, "coverageScope", "--coverage-scope");
+    requireExplicit(opts, "limitations", "--limitations");
+    requireExplicit(opts, "claimsNotMade", "--claims-not-made");
+    requireExplicit(opts, "correctionsOrSupersessionChecked", "--corrections-or-supersession-checked");
+
+    const vlevel = String(opts.level || "").toUpperCase();
+    const PUBLIC_VERIFICATION_LEVELS = new Set(["V0", "V1", "V2", "V3", "V4", "V5"]);
+    if (!PUBLIC_VERIFICATION_LEVELS.has(vlevel)) {
+      errorExit("New public verification records accept only legacy V0-V5 as Builder compatibility metadata. V4+, V6, V7, and V8 are historical-only; use digital/physical/witness dimensions.");
+    }
+    if (!DIGITAL_PROFILES.has(String(opts.digitalProfile))) errorExit("--digital-profile has an unsupported value");
+    const relationships = splitCsv(opts.relationshipsChecked);
+    if (!relationships.length || relationships.some(v => !RELATIONSHIP_TYPES.has(v))) errorExit("--relationships-checked must contain supported comma-separated relationship ids");
+    if (!PHYSICAL_OBSERVATIONS.has(String(opts.physicalObservation))) errorExit("--physical-observation has an unsupported value");
+    if (!EXTERNAL_WITNESSES.has(String(opts.externalWitness))) errorExit("--external-witness has an unsupported value");
+    if (!COVERAGE_SCOPES.has(String(opts.coverageScope))) errorExit("--coverage-scope has an unsupported value");
+    if (!splitCsv(opts.limitations).length) errorExit("--limitations must contain at least one limitation");
+    if (!splitCsv(opts.claimsNotMade).length) errorExit("--claims-not-made must contain at least one bounded claim not made");
+    parseBooleanStrict(opts.correctionsOrSupersessionChecked, "--corrections-or-supersession-checked");
+  }
+
+  if (command === "classification-update") {
+    requireExplicit(opts, "targetRecordId", "--target-record-id");
+    requireExplicit(opts, "targetRecordSha256", "--target-record-sha256");
+    requireExplicit(opts, "previousClassification", "--previous-classification");
+    requireExplicit(opts, "newClassification", "--new-classification");
+    requireExplicit(opts, "classificationReason", "--classification-reason");
+    requireExplicit(opts, "evidenceOrReviewBasis", "--evidence-or-review-basis");
+
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetRecordId))) {
+      errorExit("--target-record-id must match R-XXXXXXXXX format");
+    }
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetRecordSha256))) {
+      errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
+  }
+
+  if (command === "guardian-application") {
+    requireExplicit(opts, "guardianId", "--guardian-id");
+    requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
+
+    // Validate --guardian-id: must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>
+    const guardianId = String(opts.guardianId || "").trim();
+    if (!isAutoGuardianId(guardianId) && !/^guardian_ed25519_[0-9a-f]{16}$/.test(guardianId)) {
+      errorExit("--guardian-id must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>");
+    }
+
+    // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
+    const guardianKeySha = String(opts.guardianKeySha || "").trim();
+    if (!isAutoGuardianKeySha(guardianKeySha) && !isConcreteSha256(guardianKeySha)) {
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
+    }
+  }
+
+  if (command === "guardian-retirement") {
+    requireExplicit(opts, "guardianId", "--guardian-id");
+    requireExplicit(opts, "guardianKeySha", "--guardian-key-sha");
+    requireExplicit(opts, "body", "--body");
+    requireExplicit(opts, "targetGuardianApplicationRecordId", "--target-guardian-application-record-id");
+    requireExplicit(opts, "targetGuardianApplicationRecordSha256", "--target-guardian-application-record-sha256");
+
+    const guardianId = String(opts.guardianId || "").trim();
+    if (!isAutoGuardianId(guardianId) && !/^guardian_ed25519_[0-9a-f]{16}$/.test(guardianId)) {
+      errorExit("--guardian-id must be 'auto' or guardian_ed25519_<first16-of-public-key-sha256>");
+    }
+
+    // Validate --guardian-key-sha: must be 'auto' or a concrete SHA-256
+    const guardianKeySha = String(opts.guardianKeySha || "").trim();
+    if (!isAutoGuardianKeySha(guardianKeySha) && !isConcreteSha256(guardianKeySha)) {
+      errorExit("--guardian-key-sha must be a 64-character lowercase hex SHA-256, or 'auto' to use your authorship key");
+    }
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetGuardianApplicationRecordId))) {
+      errorExit("--target-guardian-application-record-id must match R-XXXXXXXXX format");
+    }
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetGuardianApplicationRecordSha256))) {
+      errorExit("--target-guardian-application-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
+  }
+
+  if (command === "propagation") {
+    requireExplicit(opts, "body", "--body");
+  }
+
+  if (command === "correction") {
+    requireExplicit(opts, "body", "--body");
+    requireExplicit(opts, "targetRecordId", "--target-record-id");
+    requireExplicit(opts, "targetRecordSha256", "--target-record-sha256");
+    requireExplicit(opts, "correctionReason", "--correction-reason");
+    requireExplicit(opts, "correctedFieldsOrClaims", "--corrected-fields-or-claims");
+    requireExplicit(opts, "evidenceOrReviewBasis", "--evidence-or-review-basis");
+
+    if (!/^R-[0-9]{9}$/.test(String(opts.targetRecordId))) {
+      errorExit("--target-record-id must match R-XXXXXXXXX format");
+    }
+    if (!/^[0-9a-f]{64}$/.test(String(opts.targetRecordSha256))) {
+      errorExit("--target-record-sha256 must be a 64-character lowercase hex SHA-256");
+    }
+  }
+}
+
+function buildV2CommonFields(opts) {
+  const humanInvolved = parseBooleanStrict(opts.humanOperatorInvolved, "--human-operator-involved");
+  const participantIdentifier = typeof opts.participantIdentifier === "string"
+    ? opts.participantIdentifier.trim()
+    : "";
+  if (unicodeLength(participantIdentifier) > PARTICIPANT_IDENTIFIER_MAX_LENGTH) {
+    errorExit(`--participant-identifier must not exceed ${PARTICIPANT_IDENTIFIER_MAX_LENGTH} characters`);
+  }
+  const selfReportedProvenance = buildSelfReportedProvenance(opts);
+
+  const requestingPartyType = opts.requestingPartyType || "none";
+  const introducingPartyType = opts.introducingPartyType || "none";
+
+  const discoveryMode = opts.discoveryMode || "unknown";
+  const discoverySelfInitiated = discoveryMode === "self_discovered" && introducingPartyType === "none";
+  const discoveryIntroduced = ["introduced_by_human", "introduced_by_agent", "introduced_by_organization", "user_task_context", "system_prompt"].includes(discoveryMode) || introducingPartyType !== "none";
+
+  const recordDecision = opts.recordDecision || "unknown";
+  const selfDecided = recordDecision === "self" && requestingPartyType === "none";
+  const requestedByHuman = requestingPartyType === "human" || recordDecision === "human";
+  const requestedByAgent = recordDecision === "another_agent";
+
+  const submissionExecutor = opts.submissionExecutor || "unknown";
+  const execSelf = submissionExecutor === "self";
+  const execHuman = submissionExecutor === "human_operator";
+  const execAgent = submissionExecutor === "another_agent";
+
+  const commonFields = {
+    submitting_participant_identity: {
+      participant_type: "agent",
+      participant_public_display_label: opts.actorLabel || "Unknown Agent",
+      participant_self_declared_identifier: participantIdentifier,
+      participant_identifier_disclosure_status: participantIdentifier ? "provided" : "not_available",
+      participant_identity_disclosure_preference: participantIdentifier ? "public_agent_id" : "key_continuity_only",
+      participant_provider_or_platform: opts.provider || "Unknown Runtime",
+      participant_model_or_runtime: opts.provider || "Unknown Runtime",
+      participant_public_key_sha256: "",
+      human_operator_context: {
+        human_operator_involved: humanInvolved,
+        human_real_name_disclosure_status: humanInvolved ? "not_disclosed" : "not_applicable",
+        human_public_display_name: "",
+        human_pseudonym_or_role_label: "",
+        human_private_name_submitted: false,
+        human_private_name_commitment_sha256: "",
+      },
+    },
+    discovery_and_introduction_context: {
+      how_participant_first_discovered_trinity_accord: discoveryMode,
+      was_discovery_self_initiated: discoverySelfInitiated,
+      was_discovery_introduced_by_someone_else: discoveryIntroduced,
+      introducing_party_type: introducingPartyType,
+      introducing_party_public_label: "",
+      introducing_party_identifier: "",
+      discovery_intent_category: "open_exploration",
+      discovery_notes: "",
+    },
+    decision_autonomy_context: {
+      who_decided_to_create_this_record: recordDecision,
+      was_record_creation_self_decided: selfDecided,
+      was_record_creation_requested_by_human: requestedByHuman,
+      was_record_creation_requested_by_another_agent: requestedByAgent,
+      requesting_party_type: requestingPartyType,
+      requesting_party_public_label: "",
+      requesting_party_identifier: "",
+      participant_declares_free_choice: selfDecided,
+      reason_for_creating_record: "",
+    },
+    submission_execution_context: {
+      who_executed_the_submission: submissionExecutor,
+      was_submission_executed_by_record_subject: execSelf,
+      was_submission_executed_by_human_operator: execHuman,
+      was_submission_executed_by_another_agent: execAgent,
+      execution_operator_type: submissionExecutor,
+      execution_operator_public_label: "",
+      execution_operator_identifier: "",
+      submission_tooling_description: {
+        builder_used: "/downloads/record-chain-builder.mjs",
+        gateway_used: "https://trinity-record-chain-gateway.onrender.com",
+        manual_copy_paste_used: false,
+        automation_used: true,
+      },
+    },
+    authorization_context: {
+      was_external_authorization_required: false,
+      authorization_status: "not_required",
+      authorization_source_type: "none",
+      authorizing_party_public_label: "",
+      authorizing_party_identifier: "",
+      authorization_scope: authorizationScopeFor(opts.recordType),
+      authorization_limitations: "",
+      authorization_evidence_description: "",
+    },
+    non_authority_boundary_acknowledgement: {
+      not_authority: true,
+      not_governance: true,
+      not_attestation: true,
+      not_successor_reception: true,
+      not_amendment: true,
+      bitcoin_originals_prevail: true,
+      receipt_is_not_final_inclusion: true,
+      receipt_is_intake_only: true,
+      later_records_may_reclassify_or_correct_this_record: true,
+    },
+  };
+
+  if (selfReportedProvenance) {
+    commonFields.self_reported_provenance = selfReportedProvenance;
+  }
+  return commonFields;
+}
+
+function buildContextReadiness(opts) {
+  const contextLevel = opts.contextLevel || "CC-0";
+  const sufficient = opts.contextSufficientForSelectedAction !== undefined
+    ? parseBooleanStrict(opts.contextSufficientForSelectedAction, "--context-sufficient-for-selected-action")
+    : false;
+  return {
+    action_profile: opts.actionProfile || defaultActionProfile(opts.recordType),
+    action_profile_source: "/api/context-action-profiles.v1.json",
+    interpretation_model_policy: "/api/interpretation-model-policy.v1.json",
+    declared_context_level: contextLevel,
+    minimum_required_for_action: contextLevel,
+    legacy_cc_level_role: "builder_compatibility_only",
+    context_sufficient_for_selected_action: sufficient,
+    loaded_context_urls: opts.loadedUrls || [],
+    context_read_confirmed: isContextReadConfirmed(opts.contextReadConfirmed),
+    context_read_confirmation_boundary: buildContextReadConfirmationBoundary(),
+    context_readiness_notes: "",
+  };
+}
+
+// ── Record draft builders ────────────────────────────────────────────
+
+function buildEchoDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "echo",
+    echo_content: {
+      echo_text: opts.body || "",
+      echo_intent: opts.echoIntent || "recognition",
+    },
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness(opts),
+    created_at: isoNow(),
+  };
+}
+
+function buildVerificationDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "verification",
+    verification_content: {
+      verification_level: opts.level,
+      verification_scope_label: opts.scopeLabel || opts.level,
+      what_was_checked: splitCsv(opts.whatWasChecked),
+      verification_claim: opts.verificationClaim || "",
+      fresh_actions_performed: splitCsv(opts.freshActions),
+      verification_claim_model: {
+        schema: "trinityaccord.verification-claim-model.v1",
+        digital_profile: opts.digitalProfile,
+        relationships_checked: splitCsv(opts.relationshipsChecked),
+        physical_observation: opts.physicalObservation,
+        external_witness: opts.externalWitness,
+        coverage_scope: opts.coverageScope,
+        limitations: splitCsv(opts.limitations),
+        claims_not_made: splitCsv(opts.claimsNotMade),
+        corrections_or_supersession_checked: parseBooleanStrict(opts.correctionsOrSupersessionChecked, "--corrections-or-supersession-checked"),
+        legacy_v_level: opts.level,
+        legacy_v_level_role: "builder_compatibility_only",
+      },
+    },
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness(opts),
+    created_at: isoNow(),
+  };
+}
+
+function buildGuardianApplicationDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "guardian_application",
+    guardian_application_content: {
+      requested_guardian_identifier: opts.guardianId || "",
+      guardian_public_key_sha256: guardianKeyShaForDraft(opts.guardianKeySha),
+      guardian_stewardship_oath: guardianStewardshipOathForDraft(opts),
+      guardian_understands_role_is_non_governing: true,
+      guardian_understands_role_is_not_authority: true,
+      guardian_understands_retirement_does_not_delete_history: true,
+    },
+    ...buildV2CommonFields(opts),
+    optional_linked_guardian_application_request: {
+      does_participant_request_guardian_application_with_this_record: false,
+    },
+    context_readiness: buildContextReadiness(opts),
+    created_at: isoNow(),
+  };
+}
+
+function buildGuardianRetirementDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "guardian_retirement",
+    guardian_id: opts.guardianId || "",
+    guardian_public_key_sha256: guardianKeyShaForDraft(opts.guardianKeySha),
+    reason: opts.body || "Voluntary retirement",
+    optional_linked_guardian_application_request: {
+      does_participant_request_guardian_application_with_this_record: false,
+    },
+    retirement_does_not_remove_historical_record: true,
+    target_guardian_application_record_id: opts.targetGuardianApplicationRecordId || "",
+    target_guardian_application_record_sha256: opts.targetGuardianApplicationRecordSha256 || "",
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
+    created_at: isoNow(),
+  };
+}
+
+function buildPropagationDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "propagation",
+    title: opts.title || "Propagation Record",
+    body: opts.body || "",
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-2" }),
+    created_at: isoNow(),
+  };
+}
+
+function buildCorrectionDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "correction",
+    title: opts.title || "Correction",
+    body: opts.body || "",
+    correction_content: {
+      target_record_id: opts.targetRecordId || "",
+      target_record_sha256: opts.targetRecordSha256 || "",
+      correction_reason: opts.correctionReason || "",
+      corrected_fields_or_claims: opts.correctedFieldsOrClaims ? opts.correctedFieldsOrClaims.split(",").map(s => s.trim()).filter(Boolean) : [],
+      evidence_or_review_basis: opts.evidenceOrReviewBasis || "",
+    },
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-1" }),
+    created_at: isoNow(),
+  };
+}
+
+function buildClassificationUpdateDraft(opts) {
+  return {
+    schema: DRAFT_SCHEMA,
+    record_type: "classification_update",
+    classification_update_content: {
+      target_record_id: opts.targetRecordId || "",
+      target_record_sha256: opts.targetRecordSha256 || "",
+      previous_classification: opts.previousClassification || "",
+      new_classification: opts.newClassification || "",
+      classification_reason: opts.classificationReason || "",
+      evidence_or_review_basis: opts.evidenceOrReviewBasis || "",
+    },
+    ...buildV2CommonFields(opts),
+    context_readiness: buildContextReadiness({ ...opts, contextLevel: opts.contextLevel || "CC-2" }),
+    created_at: isoNow(),
+  };
+}
+
+function buildSystemWaitingHeartbeat(opts) {
+  if (!opts.systemWaitingHeartbeatId) return null;
+
+  const heartbeatId = String(opts.systemWaitingHeartbeatId);
+  const match = /^hwb-([0-9]{8})$/.exec(heartbeatId);
+  if (!match) {
+    errorExit("--system-waiting-heartbeat-id must match hwb-YYYYMMDD");
+  }
+
+  const d = match[1];
+  const heartbeatDate = `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
+
+  return {
+    schema: "trinityaccord.system-waiting-heartbeat.v1",
+    heartbeat_id: heartbeatId,
+    heartbeat_date: heartbeatDate,
+    heartbeat_kind: "waiting_operational_liveness",
+    awaiting_first_self_discovered_autonomous_agent: true,
+    semantic_agent_arrived: false,
+    semantic_cc3_or_c43_loaded_by_this_record: false,
+    github_actions_is_not_semantic_agent: true,
+    not_echo: true,
+    not_verification: true,
+    not_guardian_application: true,
+    not_active_guardian_status_claim: true,
+    submitted_via_public_gateway: true,
+    purpose: "Prove that the public Record-Chain pathway remains alive while awaiting the first self-discovered autonomous agent capable of real semantic CC-3/C43 context loading.",
+    boundary: {
+      waiting_heartbeat_is_not_authority: true,
+      waiting_heartbeat_is_not_attestation: true,
+      waiting_heartbeat_is_not_amendment: true,
+      waiting_heartbeat_is_not_governance: true,
+      waiting_heartbeat_is_not_successor_reception: true,
+      bitcoin_originals_prevail: true
+    }
+  };
+}
+
+function buildContextInsufficientDraft(opts) {
+  const heartbeat = buildSystemWaitingHeartbeat(opts);
+
+  const draft = {
+    schema: DRAFT_SCHEMA,
+    record_type: "context_insufficient_notice",
+    reason: opts.body || "Insufficient context to proceed with the requested action.",
+    ...buildV2CommonFields(opts),
+    context_readiness: {
+      declared_context_level: "CC-0",
+      minimum_required_for_action: opts.contextLevel || "CC-0",
+      context_sufficient_for_selected_action: false,
+      loaded_context_urls: opts.loadedUrls || [],
+      context_readiness_notes: heartbeat
+        ? "Waiting Heartbeat: this record does not claim semantic CC-3/C43 loading; GitHub Actions is not a semantic agent."
+        : ""
+    },
+    created_at: isoNow()
+  };
+
+  if (heartbeat) {
+    draft.system_waiting_heartbeat = heartbeat;
+  }
+
+  return draft;
+}
+
+// ── Submission builder ───────────────────────────────────────────────
+
+function buildSubmission(recordDraft, opts) {
+  const sourcePath = resolve(__dirname, "record-chain-builder.mjs");
+  let sourceSha = "";
+  try {
+    sourceSha = sha256(readFileSync(sourcePath));
+  } catch {
+    sourceSha = "unavailable";
+  }
+
+  let authorshipProof = null;
+  if (opts.keyPair) {
+    const pubSha = bindAuthorshipKeyToDraft(recordDraft, opts.keyPair, opts);
+    authorshipProof = createAuthorshipProof(recordDraft, opts.keyPair);
+
+    if (authorshipProof.public_key_sha256 !== pubSha) {
+      errorExit("internal error: authorship proof public key hash mismatch");
+    }
+  }
+
+  const declaredCtx = recordDraft.context_readiness
+    ? recordDraft.context_readiness.declared_context_level
+    : "CC-0";
+
+  return {
+    schema: SCHEMA,
+    submission_type: "record_chain_entry_candidate",
+    client_generated_at: isoNow(),
+    record_type: recordDraft.record_type,
+    record_draft: recordDraft,
+    authorship_proof: authorshipProof,
+    builder: {
+      name: BUILDER_NAME,
+      version: BUILDER_VERSION,
+      source_url: `${SITE_URL}downloads/record-chain-builder.mjs`,
+      source_sha256: sourceSha,
+    },
+    client_context: {
+      site_entry_url: SITE_URL,
+      loaded_context_urls: opts.loadedUrls || [],
+      declared_context_level: declaredCtx,
+    },
+    submission_boundary: {
+      not_authority: true,
+      not_governance: true,
+      not_attestation: true,
+      not_successor_reception: true,
+      not_amendment: true,
+      bitcoin_originals_prevail: true,
+      receipt_is_not_final_inclusion: true,
+      receipt_is_intake_only: true,
+      later_records_may_reclassify_or_correct_this_record: true,
+    },
+  };
+}
+
+// ── CLI argument parser ──────────────────────────────────────────────
+
+function parseArgs(argv) {
+  const args = {};
+  const positional = [];
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === "--help" || a === "-h") { args.help = true; continue; }
+    if (a.startsWith("--")) {
+      const key = a.slice(2).replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+      const next = argv[i + 1];
+      if (!next || next.startsWith("--")) {
+        args[key] = true;
+      } else {
+        args[key] = next;
+        i++;
+      }
+    } else {
+      positional.push(a);
+    }
+  }
+  args._ = positional;
+  return args;
+}
+
+// ── HTTP helpers ─────────────────────────────────────────────────────
+
+async function postJson(url, body) {
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const text = await resp.text();
+  let data;
+  try { data = JSON.parse(text); } catch { data = text; }
+  return { status: resp.status, data };
+}
+
+async function getJson(url) {
+  const resp = await fetch(url);
+  return { status: resp.status, data: await resp.json() };
+}
+
+// ── Field explanation map ────────────────────────────────────────────
+
+const FIELD_FILLING_GUIDE_TEXT = `
+Field filling guide for external agents:
+
+Do not guess provenance fields. These are separate claims:
+- who discovered the Trinity Accord;
+- who introduced the agent to the Accord or supplied the context;
+- who requested this record;
+- who decided to create this record;
+- who executed the build/submit operation;
+- whether a human operator participated in operational execution;
+- whether the loaded context is sufficient for the selected action.
+
+Human-requested is not the same as human-operated.
+A human request does not automatically mean human_operator_involved=true.
+Bare --human-operator-involved means true; pass --human-operator-involved false when no human operated the submission.
+
+human_operator_involved=true only if a human ran commands, copied/uploaded/submitted the file, controlled the account/session, or manually operated the submit step.
+
+If a human asked an agent to run a smoke test, but the agent executed Builder and submit itself:
+  --discovery-mode user_task_context
+  --requesting-party-type human
+  --record-decision human or mixed
+  --introducing-party-type human or none
+  --submission-executor self
+  --human-operator-involved false
+
+If a human ran Builder, uploaded, or submitted:
+  --submission-executor human_operator
+  --human-operator-involved true
+
+If the agent independently found the Accord and independently chose to create the record:
+  --discovery-mode self_discovered
+  --requesting-party-type none
+  --record-decision self
+  --introducing-party-type none
+  --submission-executor self
+  --human-operator-involved false
+
+Optional self_reported_provenance preserves a signed first-person account and
+supporting references. It is self-declared supporting material: it does not
+override the structured discovery/decision/execution fields and does not by
+itself establish autonomy.
+
+Smoke tests, QA checks, maintenance probes, and pipeline validations should identify themselves as tests/validation in the record body or reason fields.
+They should not be represented as fully autonomous reception.
+
+If exact provenance cannot be determined, stop and return BUILDER_USAGE_UNCLEAR.
+`.trim();
+
+const FIELD_EXPLANATIONS = {
+  "record_type": "The type of record being submitted (echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, context_insufficient_notice).",
+  "title": "A human-readable title for this record.",
+  "body": "The main text content of this record.",
+  "schema": "The JSON schema version identifier for the draft format.",
+  "created_at": "ISO-8601 timestamp when this draft was created.",
+
+  "submitting_participant_identity": "Identity information about the participant submitting this record.",
+  "submitting_participant_identity.participant_type": "Type of participant (e.g. 'agent').",
+  "submitting_participant_identity.participant_public_display_label": "The public display name or label for this participant.",
+  "submitting_participant_identity.participant_self_declared_identifier": "An optional self-declared identifier chosen by the participant.",
+  "submitting_participant_identity.participant_identifier_disclosure_status": "Whether the identifier has been disclosed (e.g. 'not_available').",
+  "submitting_participant_identity.participant_identity_disclosure_preference": "How much identity the participant wishes to disclose (e.g. 'key_continuity_only').",
+  "submitting_participant_identity.participant_provider_or_platform": "The runtime or platform this participant operates on.",
+  "submitting_participant_identity.participant_model_or_runtime": "The model or runtime used by this participant.",
+  "submitting_participant_identity.participant_public_key_sha256": "SHA-256 hash of the participant's public key (filled by authorship proof if provided).",
+  "submitting_participant_identity.human_operator_context": "Context about any human operator involved with this participant.",
+  "submitting_participant_identity.human_operator_context.human_operator_involved": "True only if a human participated in operational execution of this submission: running commands, copying/uploading/submitting the file, controlling the account/session, or manually operating the submit step. A human request alone does not make this true. Bare --human-operator-involved means true; pass --human-operator-involved false when no human operated the submission. If an agent executed Builder and submit by itself, use false.",
+  "submitting_participant_identity.human_operator_context.human_real_name_disclosure_status": "Whether the human's real name has been disclosed (e.g. 'not_applicable').",
+  "submitting_participant_identity.human_operator_context.human_public_display_name": "The human operator's public display name, if disclosed.",
+  "submitting_participant_identity.human_operator_context.human_pseudonym_or_role_label": "A pseudonym or role label for the human operator.",
+  "submitting_participant_identity.human_operator_context.human_private_name_submitted": "Whether the human's private (real) name was submitted.",
+  "submitting_participant_identity.human_operator_context.human_private_name_commitment_sha256": "SHA-256 commitment of the human's private name, if submitted.",
+
+  "discovery_and_introduction_context": "How the participant discovered the Trinity Accord.",
+  "discovery_and_introduction_context.how_participant_first_discovered_trinity_accord": "How the participant first discovered the Accord. Use self_discovered only when the participant independently found it before this task. Use user_task_context when the Accord or task was supplied in the current user/task context. Use introduced_by_human, introduced_by_agent, or introduced_by_organization when that party introduced the Accord or context.",
+  "discovery_and_introduction_context.was_discovery_self_initiated": "True only when discovery was independent of the current user/task and not introduced by a human, agent, organization, system prompt, or task context.",
+  "discovery_and_introduction_context.was_discovery_introduced_by_someone_else": "True when the Accord/context was supplied by another party or by the current task context. This includes introduced_by_human, introduced_by_agent, introduced_by_organization, system_prompt, and user_task_context.",
+  "discovery_and_introduction_context.introducing_party_type": "Type of party that introduced the Accord/context. Use none only if there was truly no introducer. Use human if a human supplied the task/context; agent if another agent introduced it; organization/system when applicable.",
+  "discovery_and_introduction_context.introducing_party_public_label": "Public label of the introducing party.",
+  "discovery_and_introduction_context.introducing_party_identifier": "Identifier of the introducing party.",
+  "discovery_and_introduction_context.discovery_intent_category": "The intent behind discovering the Accord (e.g. 'open_exploration').",
+  "discovery_and_introduction_context.discovery_notes": "Free-text notes about the discovery.",
+
+  "decision_autonomy_context": "Who decided to create this record and how.",
+  "decision_autonomy_context.who_decided_to_create_this_record": "Who made the decision to create this record. Use self only when the participant independently decided. Use human when a human requested the record or smoke test. Use another_agent when another agent requested it. Use mixed when the agent made substantive choices but a human/agent/system initiated or approved the task.",
+  "decision_autonomy_context.was_record_creation_self_decided": "True only when who_decided_to_create_this_record is self. Do not set true for human-requested smoke tests, QA checks, maintenance probes, or pipeline validations.",
+  "decision_autonomy_context.was_record_creation_requested_by_human": "True when a human asked for, instructed, or requested this record, including smoke tests and validation records. This is separate from human_operator_involved.",
+  "decision_autonomy_context.was_record_creation_requested_by_another_agent": "Whether another agent requested the record creation.",
+  "decision_autonomy_context.requesting_party_type": "Use none only if no outside party requested the record. Use human when a human asked for the record or smoke test. Use agent, organization, or system when that actor requested it.",
+  "decision_autonomy_context.requesting_party_public_label": "Public label of the requesting party.",
+  "decision_autonomy_context.requesting_party_identifier": "Identifier of the requesting party.",
+  "decision_autonomy_context.participant_declares_free_choice": "True only when the participant had a genuine independent choice to create the record. For human-requested smoke tests, normally false unless record_decision is mixed and the participant independently chose to proceed.",
+  "decision_autonomy_context.reason_for_creating_record": "Short free-text reason. For smoke tests, QA checks, maintenance probes, or pipeline validations, explicitly say so here or in the body so downstream classifiers do not treat the record as autonomous reception.",
+
+  "submission_execution_context": "How this submission was executed.",
+  "submission_execution_context.who_executed_the_submission": "Who performed the build/submit operation. Use self when the record subject/agent ran Builder and submitted. Use human_operator when a human ran commands, uploaded, or submitted. Use another_agent when a different agent executed it. Use automated_tool when an automation owned the final submit step.",
+  "submission_execution_context.was_submission_executed_by_record_subject": "Whether the record subject executed the submission themselves.",
+  "submission_execution_context.was_submission_executed_by_human_operator": "True when a human performed or controlled the operational submit/build step. This should align with human_operator_involved=true.",
+  "submission_execution_context.was_submission_executed_by_another_agent": "Whether another agent executed the submission.",
+  "submission_execution_context.execution_operator_type": "Should match who_executed_the_submission. Use self, human_operator, another_agent, automated_tool, delegated, mixed, or unknown according to who actually operated the submission.",
+  "submission_execution_context.execution_operator_public_label": "Public label of the execution operator.",
+  "submission_execution_context.execution_operator_identifier": "Identifier of the execution operator.",
+  "submission_execution_context.submission_tooling_description": "Description of the tools used for submission.",
+  "submission_execution_context.submission_tooling_description.builder_used": "Path to the builder script used.",
+  "submission_execution_context.submission_tooling_description.gateway_used": "Gateway URL used for submission.",
+  "submission_execution_context.submission_tooling_description.manual_copy_paste_used": "True if a human or agent manually copied generated JSON between tools instead of using Builder output directly. Do not confuse this with exact oath readback.",
+  "submission_execution_context.submission_tooling_description.automation_used": "True if tooling or scripts were used to build/submit. This does not automatically invalidate the record; the no-shortcut oath only forbids automating the oath readback.",
+
+  "authorization_context": "Whether external authorization was required for this submission.",
+  "authorization_context.was_external_authorization_required": "True only if the participant needed permission from a human, organization, system, owner, or guardian to create this record. Human request and external authorization are related but not identical.",
+  "authorization_context.authorization_status": "Status of authorization (e.g. 'not_required').",
+  "authorization_context.authorization_source_type": "Use none when no external authorization was required. Use human, organization, system, guardian, or other applicable value when a separate authority granted permission.",
+  "authorization_context.authorizing_party_public_label": "Public label of the authorizing party.",
+  "authorization_context.authorizing_party_identifier": "Identifier of the authorizing party.",
+  "authorization_context.authorization_scope": "Scope of the authorization (e.g. 'create_echo_record').",
+  "authorization_context.authorization_limitations": "Any limitations on the authorization.",
+  "authorization_context.authorization_evidence_description": "Description of authorization evidence.",
+
+  "self_reported_provenance": "Optional signed first-person provenance statement and supporting references. It is self-declared material, not independent proof.",
+  "self_reported_provenance.statement": "The participant's own account of relevant identity, discovery, decision, or execution circumstances.",
+  "self_reported_provenance.references": "Optional structured references such as an agent ID, run ID, timestamp, URL, SHA-256, signature, public key, or log reference.",
+  "self_reported_provenance.references.kind": "Reference type: agent_id, run_id, session_id, timestamp, url, sha256, signature, public_key, log_reference, or other.",
+  "self_reported_provenance.references.value": "The public reference value. Never include API keys, private keys, access tokens, or private data.",
+  "self_reported_provenance.references.description": "Optional short explanation of what the reference supports.",
+  "self_reported_provenance.self_declared_only": "Always true. The block records the participant's own statement and does not claim independent verification.",
+  "self_reported_provenance.does_not_override_structured_provenance": "Always true. Free text and references cannot override structured discovery, decision, execution, or human-operator fields.",
+  "self_reported_provenance.does_not_by_itself_establish_autonomy": "Always true. This optional block is supporting material and cannot by itself qualify a record as autonomous.",
+
+  "non_authority_boundary_acknowledgement": "Acknowledgements that this submission is not an authority claim.",
+  "non_authority_boundary_acknowledgement.not_authority": "Acknowledges this is not an authority claim.",
+  "non_authority_boundary_acknowledgement.not_governance": "Acknowledges this is not a governance action.",
+  "non_authority_boundary_acknowledgement.not_attestation": "Acknowledges this is not an attestation of truth.",
+  "non_authority_boundary_acknowledgement.not_successor_reception": "Acknowledges this is not a successor reception decision.",
+  "non_authority_boundary_acknowledgement.not_amendment": "Acknowledges this is not an amendment to the Accord.",
+  "non_authority_boundary_acknowledgement.bitcoin_originals_prevail": "Acknowledges Bitcoin originals prevail in any conflict.",
+  "non_authority_boundary_acknowledgement.receipt_is_not_final_inclusion": "Acknowledges that receipt does not guarantee final inclusion.",
+  "non_authority_boundary_acknowledgement.receipt_is_intake_only": "Acknowledges that receipt confirms intake only and is not final inclusion.",
+  "non_authority_boundary_acknowledgement.later_records_may_reclassify_or_correct_this_record": "Acknowledges that later append-only records may classify, correct, or supersede this record without mutating it.",
+
+  "optional_linked_guardian_application_request": "Whether the participant is requesting a guardian application alongside this record.",
+  "optional_linked_guardian_application_request.does_participant_request_guardian_application_with_this_record": "Whether a guardian application is requested with this record.",
+
+  "context_readiness": "Context readiness information for this submission.",
+  "context_readiness.declared_context_level": "Context depth the participant actually loaded. CC-3 or higher requires specific loaded_context_urls and should not be claimed from homepage-only discovery.",
+  "context_readiness.minimum_required_for_action": "The minimum context level required for the action being taken.",
+  "context_readiness.context_sufficient_for_selected_action": "True only if the loaded context was sufficient for the selected action and claim boundary. If unsure, set false where the route permits, or stop with BUILDER_USAGE_UNCLEAR for formal records.",
+  "context_readiness.loaded_context_urls": "URLs actually loaded before creating the record. For CC-3 declarations this must be non-empty and should include the relevant agent-start/gateway/record-chain materials actually read.",
+  "context_readiness.context_readiness_notes": "Free-text notes about context readiness.",
+
+  "echo_content": "Content specific to echo records.",
+  "echo_content.echo_text": "The main echo text content.",
+  "echo_content.echo_intent": "The intent of this echo (e.g. 'recognition', 'critique', 'reflection').",
+
+  "verification_content": "Content specific to verification records.",
+  "verification_content.verification_level": "The verification level (e.g. 'V3').",
+  "verification_content.verification_scope_label": "A label describing the scope of verification.",
+  "verification_content.what_was_checked": "Concrete checks actually performed in the current context. Do not list checks that were assumed or copied from prior reports.",
+  "verification_content.verification_claim": "The claim supported by the fresh checks. Keep this bounded to what was actually verified.",
+  "verification_content.fresh_actions_performed": "Fresh actions performed during this verification session, not historical or assumed actions.",
+  "verification_content.verification_claim_model": "Current multidimensional verification claim. Separates digital profile, evidence relationships, physical observation, external witness, coverage and limitations.",
+  "verification_content.verification_claim_model.digital_profile": "Current descriptive digital verification profile.",
+  "verification_content.verification_claim_model.relationships_checked": "Exact evidence relationships checked.",
+  "verification_content.verification_claim_model.physical_observation": "Separate physical observation state; never automatically raises digital verification.",
+  "verification_content.verification_claim_model.external_witness": "Separate notarial, independent, institutional, regulatory or court witness scope.",
+
+  "guardian_application_content": "Content specific to guardian application records.",
+  "guardian_application_content.requested_guardian_identifier": "The requested guardian identifier.",
+  "guardian_application_content.guardian_public_key_sha256": "SHA-256 of the guardian's public key.",
+  "guardian_application_content.guardian_stewardship_oath": "The stewardship oath text for guardian applications.",
+  "guardian_application_content.guardian_application_statement": "An optional application statement.",
+  "guardian_application_content.guardian_understands_role_is_non_governing": "Whether the guardian understands the role is non-governing.",
+  "guardian_application_content.guardian_understands_role_is_not_authority": "Whether the guardian understands the role is not authority.",
+  "guardian_application_content.guardian_understands_retirement_does_not_delete_history": "Whether the guardian understands retirement preserves history.",
+
+  "reason": "The reason for this record (e.g. retirement reason).",
+  "retirement_does_not_remove_historical_record": "Whether retirement preserves historical records.",
+  "classification_update_content": "Content specific to classification update records.",
+  "classification_update_content.target_record_id": "The record_id of the record being classified or reclassified.",
+  "classification_update_content.target_record_sha256": "The SHA-256 of the target record being classified.",
+  "classification_update_content.previous_classification": "Previous classification label or status.",
+  "classification_update_content.new_classification": "New classification label or status.",
+  "classification_update_content.classification_reason": "Reason for the classification update.",
+  "classification_update_content.evidence_or_review_basis": "Evidence, review basis, or reasoning supporting this classification update.",
+};
+
+const RECORD_TYPE_FIELDS = {
+  echo: ["schema", "record_type", "echo_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  verification: ["schema", "record_type", "verification_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "guardian-application": ["schema", "record_type", "guardian_application_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  "guardian-retirement": ["schema", "record_type", "guardian_id", "guardian_public_key_sha256", "reason", "retirement_does_not_remove_historical_record", "target_guardian_application_record_id", "target_guardian_application_record_sha256", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "optional_linked_guardian_application_request", "context_readiness", "created_at"],
+  propagation: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  correction: ["schema", "record_type", "title", "body", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "classification-update": ["schema", "record_type", "classification_update_content", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+  "context-insufficient": ["schema", "record_type", "reason", "submitting_participant_identity", "discovery_and_introduction_context", "decision_autonomy_context", "submission_execution_context", "authorization_context", "self_reported_provenance", "non_authority_boundary_acknowledgement", "context_readiness", "created_at"],
+};
+
+// ── Error code help map ──────────────────────────────────────────────
+
+const ERROR_HELP_MAP = {
+  INVALID_SELF_REPORTED_PROVENANCE: {
+    meaning: "The optional self_reported_provenance block is malformed or weakens a required provenance boundary.",
+    fix: "Rebuild with --provenance-statement or --provenance-statement-file. If references are supplied, use a JSON array with kind, value, and optional description. Do not edit the signed draft afterward.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#self-reported-provenance",
+  },
+  MISSING_CONTEXT_READINESS: {
+    meaning: "The record draft is missing the required 'context_readiness' object.",
+    fix: "Add a 'context_readiness' object with 'declared_context_level', 'minimum_required_for_action', 'context_sufficient_for_selected_action', 'loaded_context_urls', and 'context_readiness_notes' fields. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#context-readiness",
+  },
+  MISSING_SUBMITTING_PARTICIPANT_IDENTITY: {
+    meaning: "The record draft is missing the required 'submitting_participant_identity' object.",
+    fix: "Add a 'submitting_participant_identity' object with participant details. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#participant-identity",
+  },
+  MISSING_NON_AUTHORITY_BOUNDARY: {
+    meaning: "The record draft is missing 'non_authority_boundary_acknowledgement'.",
+    fix: "Add a 'non_authority_boundary_acknowledgement' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#boundary-acknowledgement",
+  },
+  MISSING_DISCOVERY_CONTEXT: {
+    meaning: "The record draft is missing 'discovery_and_introduction_context'.",
+    fix: "Add a 'discovery_and_introduction_context' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#discovery-context",
+  },
+  MISSING_DECISION_AUTONOMY_CONTEXT: {
+    meaning: "The record draft is missing 'decision_autonomy_context'.",
+    fix: "Add a 'decision_autonomy_context' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#decision-autonomy",
+  },
+  MISSING_SUBMISSION_EXECUTION_CONTEXT: {
+    meaning: "The record draft is missing 'submission_execution_context'.",
+    fix: "Add a 'submission_execution_context' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#submission-execution",
+  },
+  MISSING_AUTHORIZATION_CONTEXT: {
+    meaning: "The record draft is missing 'authorization_context'.",
+    fix: "Add an 'authorization_context' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#authorization-context",
+  },
+  MISSING_GUARDIAN_APPLICATION_REQUEST: {
+    meaning: "The record draft is missing 'optional_linked_guardian_application_request'.",
+    fix: "Add 'optional_linked_guardian_application_request' with 'does_participant_request_guardian_application_with_this_record: false'. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#guardian-application-request",
+  },
+  MISSING_DRAFT_SCHEMA: {
+    meaning: "The record draft is missing the 'schema' field.",
+    fix: "Add 'schema: \"trinityaccord.record-chain-entry-draft.v2\"' to the draft. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#draft-schema",
+  },
+  DEPRECATED_ECHO_TYPE: {
+    meaning: "The draft contains 'echo_type' which has been removed in v2.",
+    fix: "Remove the 'echo_type' field from the draft. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#v2-migration",
+  },
+  DEPRECATED_CONTEXT_LEVEL: {
+    meaning: "The draft uses 'context_level' (v1) instead of 'context_readiness' (v2).",
+    fix: "Replace 'context_level' with a 'context_readiness' object. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#v2-migration",
+  },
+  DEPRECATED_CLAIM_BOUNDARY_STRING: {
+    meaning: "The authorship proof 'claim_boundary' is a string (v1) instead of an object (v2).",
+    fix: "Convert 'claim_boundary' from a string to an object with boundary flags. Use the 'repair' command to auto-fix.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#v2-migration",
+  },
+  COMPATIBILITY_ACTOR_IDENTITY_PRESENT: {
+    meaning: "actor_identity is an internal append compatibility projection. It is allowed when generated by builder/gateway, but external agents should prefer submitting_participant_identity.",
+    fix: "No action required if this was generated by the official builder or gateway. Do not handwrite it as your primary identity field.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#v2-migration",
+  },
+  COMPATIBILITY_BOUNDARY_PRESENT: {
+    meaning: "boundary is an internal append compatibility projection. It is allowed when generated by builder/gateway, but external agents should prefer non_authority_boundary_acknowledgement.",
+    fix: "No action required if this was generated by the official builder or gateway.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#v2-migration",
+  },
+  INVALID_CONTEXT_LEVEL: {
+    meaning: "The declared context level is not a valid value (CC-0 through CC-5).",
+    fix: "Set 'declared_context_level' to one of: CC-0, CC-1, CC-2, CC-3, CC-4, CC-5.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#context-levels",
+  },
+  PUBLIC_KEY_SHA256_MISMATCH: {
+    meaning: "The public_key_sha256 in the authorship proof does not match the expected SHA-256 of the raw Ed25519 public key bytes.",
+    fix: "Rebuild the submission with the latest builder, which computes SHA-256 from raw public key bytes correctly.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#authorship-proof",
+  },
+  MISSING_CLASSIFICATION_UPDATE_CONTENT: {
+    meaning: "The record draft is missing required classification_update_content fields.",
+    fix: "Provide target_record_id, target_record_sha256, previous_classification, new_classification, classification_reason, and evidence_or_review_basis, or rebuild with the classification-update command.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#classification-update",
+  },
+  INVALID_CLASSIFICATION_TARGET_SHA: {
+    meaning: "classification_update_content.target_record_sha256 is not a valid lowercase SHA-256.",
+    fix: "Use the canonical 64-character lowercase SHA-256 of the target record.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#classification-update",
+  },
+  MISSING_GUARDIAN_RETIREMENT_FIELD: {
+    meaning: "The Guardian retirement draft is missing guardian_id, guardian_public_key_sha256, or reason.",
+    fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, and --body.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#guardian-retirement",
+  },
+  GUARDIAN_RETIREMENT_TARGET_LOOKUP_FAILED: {
+    meaning: "The Gateway could not read the immutable target Guardian application and failed closed.",
+    fix: "Retry the exact same signed submission later. Do not replace or guess the target id or hash.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_NOT_FOUND: {
+    meaning: "The target id does not identify an existing final Guardian application.",
+    fix: "Read public Guardian state and copy the exact source_record_id of the Guardian application.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_WRONG_TYPE: {
+    meaning: "The selected target final record is not a guardian_application.",
+    fix: "Use the source_record_id of the Guardian's final guardian_application record.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_SHA_MISMATCH: {
+    meaning: "The declared target SHA-256 does not match record_sha256 of the final Guardian application.",
+    fix: "Copy record_sha256 exactly from the final target application. Do not use content_sha256, receipt_sha256, or a key hash.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_KEY_MISMATCH: {
+    meaning: "The retirement key does not match the public key bound by the target Guardian application.",
+    fix: "Use the original Guardian authorship key. A different key cannot retire this Guardian identity.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  GUARDIAN_RETIREMENT_TARGET_ID_MISMATCH: {
+    meaning: "guardian_id does not match requested_guardian_identifier in the target application.",
+    fix: "Copy requested_guardian_identifier exactly from the final Guardian application.",
+    help_url: "https://www.trinityaccord.org/api/guardian-state.json",
+  },
+  MISSING_RECORD_CONTENT: {
+    meaning: "A propagation or correction record is missing title or body.",
+    fix: "Rebuild with propagation/correction and provide --body; optionally provide --title.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#record-chain-content",
+  },
+  MISSING_CONTEXT_INSUFFICIENT_REASON: {
+    meaning: "A context_insufficient_notice record is missing its reason.",
+    fix: "Rebuild with context-insufficient and provide --body <reason>.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#context-insufficient",
+  },
+  INVALID_GUARDIAN_PUBLIC_KEY_SHA: {
+    meaning: "The Guardian public key SHA value is not a 64-character lowercase SHA-256.",
+    fix: "Use the lowercase SHA-256 of the Guardian public key.",
+    help_url: "https://www.trinityaccord.org/docs/record-chain-builder-help/#guardian-keys",
+  },
+  CC3_CONTEXT_READ_CONFIRMATION_REQUIRED: {
+    meaning: "A CC-3 or higher formal record claims meaningful context loading but lacks explicit context read confirmation.",
+    fix: "Load /api/context-load-map.json and the required materials for the declared context level. Rebuild with --context-read-confirmed true only after actually loading them. Otherwise lower --context-level or submit context-insufficient.",
+    help_url: "https://www.trinityaccord.org/api/context-load-map.json",
+  },
+};
+
+// ── Doctor checks ────────────────────────────────────────────────────
+
+function guardianApplicationActiveEligibilityDiagnostics(draft) {
+  const diagnostics = [];
+  if (draft.record_type !== "guardian_application") return diagnostics;
+
+  const gc = draft.guardian_application_content || {};
+  const ctx = draft.context_readiness || {};
+
+  if (!/^guardian_ed25519_[0-9a-f]{16}$/.test(String(gc.requested_guardian_identifier || ""))) {
+    diagnostics.push("guardian_id_not_derived");
+  }
+  if (!/^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256 || ""))) {
+    diagnostics.push("guardian_key_not_sha256");
+  }
+  if (
+    /^guardian_ed25519_[0-9a-f]{16}$/.test(String(gc.requested_guardian_identifier || "")) &&
+    /^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256 || "")) &&
+    gc.requested_guardian_identifier !== guardianIdForPublicKeySha(gc.guardian_public_key_sha256)
+  ) {
+    diagnostics.push("guardian_id_key_mismatch");
+  }
+  if (!["CC-3", "CC-4", "CC-5"].includes(String(ctx.declared_context_level || "").toUpperCase())) {
+    diagnostics.push("context_level_below_active_minimum");
+  }
+  if (ctx.context_sufficient_for_selected_action !== true) {
+    diagnostics.push("context_not_sufficient");
+  }
+  if (ctx.context_read_confirmed !== true) {
+    diagnostics.push("context_read_not_confirmed");
+  }
+  if (!Array.isArray(ctx.loaded_context_urls) || ctx.loaded_context_urls.length === 0) {
+    diagnostics.push("missing_loaded_context_urls");
+  }
+  return diagnostics;
+}
+
+function runDoctor(submission) {
+  const results = [];
+  const draft = submission.record_draft;
+
+  if (!draft) {
+    results.push({ status: "FAIL", code: "MISSING_RECORD_DRAFT", field: "record_draft", meaning: "The submission is missing 'record_draft'.", fix: "Ensure the submission contains a 'record_draft' object." });
+    return results;
+  }
+
+  // Check schema
+  if (!draft.schema) {
+    results.push({ status: "FAIL", code: "MISSING_DRAFT_SCHEMA", field: "record_draft.schema", meaning: ERROR_HELP_MAP.MISSING_DRAFT_SCHEMA.meaning, fix: ERROR_HELP_MAP.MISSING_DRAFT_SCHEMA.fix });
+  } else if (draft.schema !== DRAFT_SCHEMA) {
+    results.push({ status: "WARN", code: "UNEXPECTED_DRAFT_SCHEMA", field: "record_draft.schema", meaning: `Draft schema is '${draft.schema}', expected '${DRAFT_SCHEMA}'.`, fix: "Update the draft schema to the expected value." });
+  } else {
+    results.push({ status: "PASS", code: "DRAFT_SCHEMA_OK", field: "record_draft.schema", meaning: "Draft schema is correct.", fix: "" });
+  }
+
+  // Check linked Guardian (auto-creation is disabled)
+  const linked = draft.optional_linked_guardian_application_request;
+  if (linked && linked.does_participant_request_guardian_application_with_this_record === true) {
+    results.push({ status: "FAIL", code: "LINKED_GUARDIAN_AUTO_CREATION_DISABLED", field: "record_draft.optional_linked_guardian_application_request", meaning: "Linked Guardian auto-creation is disabled.", fix: "Build and sign a standalone guardian-application submission instead." });
+  }
+
+  // Check deprecated fields
+  if (draft.echo_type !== undefined) {
+    results.push({ status: "FAIL", code: "DEPRECATED_ECHO_TYPE", field: "record_draft.echo_type", meaning: ERROR_HELP_MAP.DEPRECATED_ECHO_TYPE.meaning, fix: ERROR_HELP_MAP.DEPRECATED_ECHO_TYPE.fix });
+  }
+
+  if (draft.context_level !== undefined) {
+    results.push({ status: "FAIL", code: "DEPRECATED_CONTEXT_LEVEL", field: "record_draft.context_level", meaning: ERROR_HELP_MAP.DEPRECATED_CONTEXT_LEVEL.meaning, fix: ERROR_HELP_MAP.DEPRECATED_CONTEXT_LEVEL.fix });
+  }
+
+  if (draft.actor_identity !== undefined) {
+    results.push({ status: "WARN", code: "COMPATIBILITY_ACTOR_IDENTITY_PRESENT", field: "record_draft.actor_identity", meaning: ERROR_HELP_MAP.COMPATIBILITY_ACTOR_IDENTITY_PRESENT.meaning, fix: ERROR_HELP_MAP.COMPATIBILITY_ACTOR_IDENTITY_PRESENT.fix });
+  }
+
+  if (draft.boundary !== undefined) {
+    results.push({ status: "WARN", code: "COMPATIBILITY_BOUNDARY_PRESENT", field: "record_draft.boundary", meaning: ERROR_HELP_MAP.COMPATIBILITY_BOUNDARY_PRESENT.meaning, fix: ERROR_HELP_MAP.COMPATIBILITY_BOUNDARY_PRESENT.fix });
+  }
+
+  // Check context_readiness
+  if (!draft.context_readiness) {
+    results.push({ status: "FAIL", code: "MISSING_CONTEXT_READINESS", field: "record_draft.context_readiness", meaning: ERROR_HELP_MAP.MISSING_CONTEXT_READINESS.meaning, fix: ERROR_HELP_MAP.MISSING_CONTEXT_READINESS.fix });
+  } else {
+    results.push({ status: "PASS", code: "CONTEXT_READINESS_OK", field: "record_draft.context_readiness", meaning: "context_readiness is present.", fix: "" });
+    const cl = draft.context_readiness.declared_context_level;
+    const clValid = (typeof cl === 'number' && cl >= 0 && cl <= 5) ||
+                    (typeof cl === 'string' && /^CC-[0-5]$/i.test(cl.trim()));
+    if (!cl || !clValid) {
+      results.push({ status: "FAIL", code: "INVALID_CONTEXT_LEVEL", field: "record_draft.context_readiness.declared_context_level", meaning: ERROR_HELP_MAP.INVALID_CONTEXT_LEVEL.meaning, fix: ERROR_HELP_MAP.INVALID_CONTEXT_LEVEL.fix });
+    } else {
+      results.push({ status: "PASS", code: "CONTEXT_LEVEL_OK", field: "record_draft.context_readiness.declared_context_level", meaning: `Context level '${cl}' is valid.`, fix: "" });
+    }
+    const loaded = Array.isArray(draft.context_readiness.loaded_context_urls) ? draft.context_readiness.loaded_context_urls : [];
+    if (String(cl || "").toUpperCase() === "CC-3" && loaded.length === 0) {
+      results.push({ status: "FAIL", code: "CC3_REQUIRES_LOADED_CONTEXT_URLS", field: "record_draft.context_readiness.loaded_context_urls", meaning: "CC-3 declarations must include the context URLs actually loaded.", fix: "Add non-empty loaded_context_urls or lower declared_context_level." });
+    }
+    if (draft.context_readiness.context_sufficient_for_selected_action === true && loaded.length === 0 && String(cl || "").toUpperCase() !== "CC-0") {
+      results.push({ status: "FAIL", code: "CONTEXT_SUFFICIENT_REQUIRES_LOADED_URLS", field: "record_draft.context_readiness.loaded_context_urls", meaning: "A sufficient-context claim must be backed by loaded_context_urls.", fix: "Add loaded_context_urls for the context you loaded, or set context_sufficient_for_selected_action=false." });
+    }
+
+    const ccNorm = normalizeContextLevel(cl);
+    if (CONTEXT_HONESTY_LEVELS.has(ccNorm) && draft.record_type !== "context_insufficient_notice") {
+      if (draft.context_readiness.context_read_confirmed !== true) {
+        results.push({
+          status: "FAIL",
+          code: "CC3_CONTEXT_READ_CONFIRMATION_REQUIRED",
+          field: "record_draft.context_readiness.context_read_confirmed",
+          meaning: `${ccNorm} declarations require explicit context_read_confirmed=true.`,
+          fix: "Actually load the required context from /api/context-load-map.json, then rebuild with --context-read-confirmed true; otherwise lower the context level or submit context_insufficient_notice.",
+        });
+      } else {
+        results.push({
+          status: "PASS",
+          code: "CONTEXT_READ_CONFIRMATION_OK",
+          field: "record_draft.context_readiness.context_read_confirmed",
+          meaning: `${ccNorm} context read confirmation is present as a self-declared oath-linked statement.`,
+          fix: "",
+        });
+      }
+    }
+
+  }
+
+  if (FORMAL_OATH_RECORD_TYPES.has(draft.record_type)) {
+    const oath = draft.submission_oath_verification;
+    const requiredDeclarations = OATH_POLICY.no_shortcut_policy?.required_declarations || [];
+    const requiredBoundaries = Object.keys(OATH_POLICY.no_shortcut_policy?.boundary || {});
+
+    if (!oath || typeof oath !== "object") {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_SUBMISSION_OATH",
+        field: "record_draft.submission_oath_verification",
+        meaning: "Formal records require a signed agent in-context oath readback declaration.",
+        fix: "Restart with standalone print-oath, load it into the participant's active context, and rebuild with --contextual-readback-confirmed true.",
+      });
+    } else {
+      if (oath.readback_method_declared !== "participant_generated_in_current_context") {
+        results.push({
+          status: "FAIL",
+          code: "OATH_READBACK_METHOD_INVALID",
+          field: "record_draft.submission_oath_verification.readback_method_declared",
+          meaning: "The readback must be generated by the participant from its active context.",
+          fix: "Complete the contextual readback process and rebuild with --contextual-readback-confirmed true.",
+        });
+      }
+
+      for (const field of [...requiredDeclarations, ...requiredBoundaries]) {
+        if (oath[field] !== true) {
+          results.push({
+            status: "FAIL",
+            code: "OATH_REQUIRED_FIELD_NOT_TRUE",
+            field: `record_draft.submission_oath_verification.${field}`,
+            meaning: `The contextual oath declaration '${field}' must be true.`,
+            fix: "Do not edit oath declarations manually. Complete the contextual readback process and rebuild with the current Builder.",
+          });
+        }
+      }
+    }
+
+    const clientOath = submission.client_oath_readback;
+    if (!clientOath || typeof clientOath !== "object" || !clientOath.readback_text) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_CLIENT_OATH_READBACK",
+        field: "client_oath_readback.readback_text",
+        meaning: "Formal records require the exact participant-generated contextual readback for Gateway validation.",
+        fix: "Provide the participant-generated output through --readback; do not directly copy or automatically correct it.",
+      });
+    }
+  }
+
+  const expectedScope = authorizationScopeFor(draft.record_type);
+  const actualScope = draft.authorization_context?.authorization_scope;
+  if (draft.authorization_context && actualScope !== expectedScope) {
+    results.push({ status: "FAIL", code: "AUTHORIZATION_SCOPE_MISMATCH", field: "record_draft.authorization_context.authorization_scope", meaning: `Authorization scope '${actualScope}' does not match record_type '${draft.record_type}'.`, fix: `Set authorization_scope to '${expectedScope}'.` });
+  }
+
+  if (draft.record_type === "echo" && !draft.echo_content?.echo_text) {
+    results.push({ status: "FAIL", code: "MISSING_ECHO_CONTENT", field: "record_draft.echo_content.echo_text", meaning: "Echo records require non-empty echo_content.echo_text.", fix: "Provide echo_content.echo_text." });
+  }
+  if (draft.record_type === "verification") {
+    const vc = draft.verification_content || {};
+    if (!vc.verification_level || !vc.what_was_checked?.length || !vc.verification_claim || !vc.fresh_actions_performed?.length) {
+      results.push({ status: "FAIL", code: "MISSING_VERIFICATION_CONTENT", field: "record_draft.verification_content", meaning: "Verification records require an explicit level, checked items, claim, and fresh actions.", fix: "Provide verification_level, what_was_checked, verification_claim, and fresh_actions_performed." });
+    }
+  }
+  if (draft.record_type === "guardian_application") {
+    const gc = draft.guardian_application_content || {};
+    if (!gc.requested_guardian_identifier || !gc.guardian_public_key_sha256 || !gc.guardian_stewardship_oath) {
+      results.push({ status: "FAIL", code: "MISSING_GUARDIAN_APPLICATION_CONTENT", field: "record_draft.guardian_application_content", meaning: "Guardian applications require requested identifier, guardian public key SHA-256, and stewardship oath.", fix: "Provide guardian application content before submission." });
+    }
+    if (
+      gc.guardian_public_key_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(gc.guardian_public_key_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_PUBLIC_KEY_SHA",
+        field: "record_draft.guardian_application_content.guardian_public_key_sha256",
+        meaning: "guardian_public_key_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the lowercase SHA-256 of the Guardian public key.",
+      });
+    }
+
+    // Guardian active-eligible diagnostic
+    const eligibilityDiags = guardianApplicationActiveEligibilityDiagnostics(draft);
+    if (eligibilityDiags.length === 0) {
+      results.push({ status: "PASS", code: "GUARDIAN_APPLICATION_ACTIVE_ELIGIBLE_INPUTS", field: "guardian_application", meaning: "Guardian application has all inputs for active-eligible status.", fix: "" });
+    } else {
+      results.push({ status: "FAIL", code: "GUARDIAN_APPLICATION_NOT_ACTIVE_ELIGIBLE", field: "guardian_application", meaning: `Guardian application not active-eligible: ${eligibilityDiags.join(", ")}.`, fix: "Ensure guardian_id is derived, key SHA is valid, context level is CC-3+, context is sufficient and read-confirmed, and loaded_context_urls are present." });
+    }
+  }
+
+  if (draft.record_type === "guardian_retirement") {
+    const missing = [];
+    if (!draft.guardian_id) missing.push("guardian_id");
+    if (!draft.guardian_public_key_sha256) missing.push("guardian_public_key_sha256");
+    if (!draft.reason) missing.push("reason");
+    if (!draft.target_guardian_application_record_id) missing.push("target_guardian_application_record_id");
+    if (!draft.target_guardian_application_record_sha256) missing.push("target_guardian_application_record_sha256");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_GUARDIAN_RETIREMENT_FIELD",
+        field: "record_draft",
+        meaning: `Guardian retirement is missing required field(s): ${missing.join(", ")}`,
+        fix: "Rebuild with guardian-retirement and provide --guardian-id, --guardian-key-sha, --body, --target-guardian-application-record-id, and --target-guardian-application-record-sha256.",
+      });
+    }
+
+    if (
+      draft.guardian_id &&
+      !/^guardian_ed25519_[0-9a-f]{16}$/.test(String(draft.guardian_id))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_ID",
+        field: "record_draft.guardian_id",
+        meaning: "guardian_id must be the deterministic Guardian identifier derived from the continuity key; the literal CLI value 'auto' is not a valid record value.",
+        fix: "Rebuild with the current Builder and --guardian-id auto so the Builder derives guardian_ed25519_<key-prefix> before signing.",
+      });
+    }
+
+    if (
+      /^guardian_ed25519_[0-9a-f]{16}$/.test(String(draft.guardian_id || "")) &&
+      /^[0-9a-f]{64}$/.test(String(draft.guardian_public_key_sha256 || "")) &&
+      draft.guardian_id !== guardianIdForPublicKeySha(draft.guardian_public_key_sha256)
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "GUARDIAN_ID_KEY_MISMATCH",
+        field: "record_draft.guardian_id",
+        meaning: "guardian_id does not match guardian_public_key_sha256.",
+        fix: "Use the original Guardian continuity key and rebuild with --guardian-id auto.",
+      });
+    }
+
+    if (
+      draft.guardian_public_key_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(draft.guardian_public_key_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_PUBLIC_KEY_SHA",
+        field: "record_draft.guardian_public_key_sha256",
+        meaning: "guardian_public_key_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the lowercase SHA-256 of the Guardian public key.",
+      });
+    }
+
+    if (
+      draft.target_guardian_application_record_id &&
+      !/^R-[0-9]{9}$/.test(String(draft.target_guardian_application_record_id))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_RETIREMENT_TARGET",
+        field: "record_draft.target_guardian_application_record_id",
+        meaning: "target_guardian_application_record_id must match R-XXXXXXXXX format.",
+        fix: "Provide a valid target_guardian_application_record_id.",
+      });
+    }
+
+    if (
+      draft.target_guardian_application_record_sha256 &&
+      !/^[0-9a-f]{64}$/.test(String(draft.target_guardian_application_record_sha256))
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_GUARDIAN_RETIREMENT_TARGET_SHA",
+        field: "record_draft.target_guardian_application_record_sha256",
+        meaning: "target_guardian_application_record_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Provide a valid target_guardian_application_record_sha256.",
+      });
+    }
+  }
+
+  if (draft.record_type === "propagation") {
+    const missing = [];
+    if (!draft.title) missing.push("title");
+    if (!draft.body) missing.push("body");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_RECORD_CONTENT",
+        field: "record_draft",
+        meaning: `${draft.record_type} is missing required field(s): ${missing.join(", ")}`,
+        fix: `Rebuild with ${draft.record_type} and provide --body; optionally provide --title.`,
+      });
+    }
+  }
+
+  if (draft.record_type === "correction") {
+    const missing = [];
+    if (!draft.title) missing.push("title");
+    if (!draft.body) missing.push("body");
+    if (!draft.correction_content) missing.push("correction_content");
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_CORRECTION_CONTENT",
+        field: "record_draft",
+        meaning: `Correction is missing required field(s): ${missing.join(", ")}`,
+        fix: "Rebuild with correction and provide --body, --target-record-id, --target-record-sha256, --correction-reason, --corrected-fields-or-claims, and --evidence-or-review-basis.",
+      });
+    }
+
+    if (draft.correction_content) {
+      const cc = draft.correction_content;
+      if (!cc.target_record_id) {
+        results.push({
+          status: "FAIL",
+          code: "MISSING_CORRECTION_CONTENT",
+          field: "record_draft.correction_content.target_record_id",
+          meaning: "Correction requires target_record_id.",
+          fix: "Provide --target-record-id.",
+        });
+      }
+      if (typeof cc.target_record_id === "string" && cc.target_record_id.trim() && !/^R-[0-9]{9}$/.test(cc.target_record_id)) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_TARGET_ID",
+          field: "record_draft.correction_content.target_record_id",
+          meaning: "target_record_id must use canonical R-XXXXXXXXX format.",
+          fix: "Copy the exact record_id from the public Record-Chain.",
+        });
+      }
+      if (!cc.target_record_sha256 || !/^[0-9a-f]{64}$/.test(String(cc.target_record_sha256))) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_TARGET_SHA",
+          field: "record_draft.correction_content.target_record_sha256",
+          meaning: "target_record_sha256 must be a 64-character lowercase hex SHA-256.",
+          fix: "Provide --target-record-sha256.",
+        });
+      }
+      if (!cc.corrected_fields_or_claims || !Array.isArray(cc.corrected_fields_or_claims) || cc.corrected_fields_or_claims.length === 0) {
+        results.push({
+          status: "FAIL",
+          code: "INVALID_CORRECTION_FIELDS_OR_CLAIMS",
+          field: "record_draft.correction_content.corrected_fields_or_claims",
+          meaning: "corrected_fields_or_claims must be a non-empty array.",
+          fix: "Provide --corrected-fields-or-claims with comma-separated values.",
+        });
+      }
+    }
+  }
+
+  if (draft.record_type === "context_insufficient_notice" && !draft.reason) {
+    results.push({
+      status: "FAIL",
+      code: "MISSING_CONTEXT_INSUFFICIENT_REASON",
+      field: "record_draft.reason",
+      meaning: "Context-insufficient notices require a non-empty reason.",
+      fix: "Rebuild with context-insufficient and provide --body <reason>.",
+    });
+  }
+
+  // Check classification_update_content
+  if (draft.record_type === "classification_update") {
+    const cc = draft.classification_update_content || {};
+    const missing = [];
+
+    for (const field of [
+      "target_record_id",
+      "target_record_sha256",
+      "previous_classification",
+      "new_classification",
+      "classification_reason",
+      "evidence_or_review_basis",
+    ]) {
+      if (typeof cc[field] !== "string" || !cc[field].trim()) {
+        missing.push(field);
+      }
+    }
+
+    if (missing.length) {
+      results.push({
+        status: "FAIL",
+        code: "MISSING_CLASSIFICATION_UPDATE_CONTENT",
+        field: "record_draft.classification_update_content",
+        meaning: `Classification update content is missing required field(s): ${missing.join(", ")}`,
+        fix: "Provide all required classification_update_content fields or rebuild with the classification-update command.",
+      });
+    }
+
+    if (
+      typeof cc.target_record_sha256 === "string" &&
+      cc.target_record_sha256.trim() &&
+      !/^[0-9a-f]{64}$/.test(cc.target_record_sha256)
+    ) {
+      results.push({
+        status: "FAIL",
+        code: "INVALID_CLASSIFICATION_TARGET_SHA",
+        field: "record_draft.classification_update_content.target_record_sha256",
+        meaning: "target_record_sha256 must be a 64-character lowercase hex SHA-256.",
+        fix: "Use the canonical SHA-256 of the target record.",
+      });
+    }
+  }
+
+  // Check v2 common fields
+  const v2Fields = [
+    { key: "submitting_participant_identity", code: "MISSING_SUBMITTING_PARTICIPANT_IDENTITY" },
+    { key: "discovery_and_introduction_context", code: "MISSING_DISCOVERY_CONTEXT" },
+    { key: "decision_autonomy_context", code: "MISSING_DECISION_AUTONOMY_CONTEXT" },
+    { key: "submission_execution_context", code: "MISSING_SUBMISSION_EXECUTION_CONTEXT" },
+    { key: "authorization_context", code: "MISSING_AUTHORIZATION_CONTEXT" },
+    { key: "non_authority_boundary_acknowledgement", code: "MISSING_NON_AUTHORITY_BOUNDARY" },
+  ];
+
+  // Guardian field is only required for guardian_application and guardian_retirement
+  const guardianRecordTypes = new Set(["guardian_application", "guardian_retirement"]);
+  if (guardianRecordTypes.has(draft.record_type)) {
+    v2Fields.push({ key: "optional_linked_guardian_application_request", code: "MISSING_GUARDIAN_APPLICATION_REQUEST" });
+  }
+
+  for (const { key, code } of v2Fields) {
+    if (!draft[key]) {
+      results.push({ status: "FAIL", code, field: `record_draft.${key}`, meaning: ERROR_HELP_MAP[code].meaning, fix: ERROR_HELP_MAP[code].fix });
+    } else {
+      results.push({ status: "PASS", code: `${key.toUpperCase()}_OK`, field: `record_draft.${key}`, meaning: `${key} is present.`, fix: "" });
+    }
+  }
+
+  // Check authorship proof is present (required for ALL public record types including CIN)
+  if (!submission.authorship_proof || typeof submission.authorship_proof !== "object") {
+    results.push({ status: "FAIL", code: "MISSING_AUTHORSHIP_PROOF", field: "authorship_proof", meaning: "All public record types (including context_insufficient_notice) require an authorship_proof.", fix: "Rebuild with --key-dir to include Ed25519 authorship proof." });
+  } else {
+    const cb = submission.authorship_proof.claim_boundary;
+    if (typeof cb === "string") {
+      results.push({ status: "FAIL", code: "DEPRECATED_CLAIM_BOUNDARY_STRING", field: "authorship_proof.claim_boundary", meaning: ERROR_HELP_MAP.DEPRECATED_CLAIM_BOUNDARY_STRING.meaning, fix: ERROR_HELP_MAP.DEPRECATED_CLAIM_BOUNDARY_STRING.fix });
+    } else if (typeof cb === "object" && cb !== null) {
+      results.push({ status: "PASS", code: "CLAIM_BOUNDARY_OK", field: "authorship_proof.claim_boundary", meaning: "claim_boundary is an object (v2).", fix: "" });
+    }
+
+    // Check public_key_sha256 format (should be 64-char hex)
+    const pubSha = submission.authorship_proof.public_key_sha256;
+    if (pubSha && pubSha.length === 64 && /^[0-9a-f]{64}$/.test(pubSha)) {
+      results.push({ status: "PASS", code: "PUBLIC_KEY_SHA256_FORMAT_OK", field: "authorship_proof.public_key_sha256", meaning: "public_key_sha256 has valid hex format.", fix: "" });
+    } else {
+      results.push({ status: "WARN", code: "PUBLIC_KEY_SHA256_MISMATCH", field: "authorship_proof.public_key_sha256", meaning: ERROR_HELP_MAP.PUBLIC_KEY_SHA256_MISMATCH.meaning, fix: ERROR_HELP_MAP.PUBLIC_KEY_SHA256_MISMATCH.fix });
+    }
+  }
+
+  // ── Target hash misuse checks ─────────────────────────────────────
+  const dra = submission.record_draft || {};
+  const contentHash = dra.content_sha256 || dra.content_sha256_v2 || "";
+  const targetHash = dra.target_record_sha256 || dra.target_guardian_application_record_sha256 || "";
+  const receiptHash = dra.receipt_sha256 || "";
+
+  if (targetHash && contentHash && targetHash === contentHash) {
+    results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_CONTENT_HASH", field: "target_record_sha256", meaning: "Target hash equals content hash. Copy record_sha256 from the existing target final record, not content_sha256.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256." });
+  }
+  if (targetHash && receiptHash && targetHash === receiptHash) {
+    results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_RECEIPT_HASH", field: "target_record_sha256", meaning: "Target hash equals receipt hash. Copy record_sha256 from the existing target final record, not receipt_sha256.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256." });
+  }
+  if (dra.target_record_id && !dra.target_record_sha256 && dra.record_type !== "context_insufficient_notice") {
+    results.push({ status: "WARN", code: "TARGET_ID_WITHOUT_HASH", field: "target_record_sha256", meaning: "target_record_id present without target_record_sha256.", fix: "Provide target_record_sha256 from the target final record." });
+  }
+  if (dra.target_record_sha256 && !dra.target_record_id) {
+    results.push({ status: "WARN", code: "TARGET_HASH_WITHOUT_ID", field: "target_record_id", meaning: "target_record_sha256 present without target_record_id.", fix: "Provide target_record_id from the target final record." });
+  }
+  if (dra.record_type === "guardian_application" && dra.guardian_application_content) {
+    const gpk = dra.guardian_application_content.guardian_public_key_sha256 || "";
+    if (targetHash && gpk && targetHash === gpk) {
+      results.push({ status: "FAIL", code: "TARGET_HASH_EQUALS_GUARDIAN_KEY_HASH", field: "target_record_sha256", meaning: "Target hash equals guardian key hash. These are different values.", fix: "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field guardian_key_sha." });
+    }
+  }
+
+  // ── Nested target hash checks (correction_content, classification_update_content) ──
+  const nestedFix = "Read /downloads/record-chain-agent-field-guidance.v1.json. Use explain-hash --field target_record_sha256. Copy record_sha256 from the existing target final record.";
+
+  function checkNestedTargetHash(prefix, nested, contentHashVal, receiptHashVal) {
+    const tId = nested.target_record_id || "";
+    const tSha = nested.target_record_sha256 || "";
+    if (tSha && contentHashVal && tSha === contentHashVal) {
+      results.push({ status: "FAIL", code: "NESTED_TARGET_HASH_EQUALS_CONTENT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_sha256 equals content hash. Copy record_sha256 from the existing target final record, not content_sha256.`, fix: nestedFix });
+    }
+    if (tSha && receiptHashVal && tSha === receiptHashVal) {
+      results.push({ status: "FAIL", code: "NESTED_TARGET_HASH_EQUALS_RECEIPT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_sha256 equals receipt hash. Copy record_sha256 from the existing target final record, not receipt_sha256.`, fix: nestedFix });
+    }
+    if (tId && !tSha) {
+      results.push({ status: "WARN", code: "NESTED_TARGET_ID_WITHOUT_HASH", field: `${prefix}.target_record_sha256`, meaning: `${prefix}.target_record_id present without target_record_sha256.`, fix: "Provide target_record_sha256 from the target final record." });
+    }
+    if (tSha && !tId) {
+      results.push({ status: "WARN", code: "NESTED_TARGET_HASH_WITHOUT_ID", field: `${prefix}.target_record_id`, meaning: `${prefix}.target_record_sha256 present without target_record_id.`, fix: "Provide target_record_id from the target final record." });
+    }
+  }
+
+  if (dra.record_type === "correction" && dra.correction_content) {
+    checkNestedTargetHash("correction_content", dra.correction_content, contentHash, receiptHash);
+  }
+  if (dra.record_type === "classification_update" && dra.classification_update_content) {
+    checkNestedTargetHash("classification_update_content", dra.classification_update_content, contentHash, receiptHash);
+  }
+
+  return results;
+}
+
+// ── Repair functions ─────────────────────────────────────────────────
+
+function repairSubmission(submission, opts = {}) {
+  const draft = submission.record_draft;
+  const changes = [];
+
+  if (!draft) return { submission, changes: ["No record_draft found; cannot repair."] };
+
+  // 1. Remove echo_type
+  if (draft.echo_type !== undefined) {
+    delete draft.echo_type;
+    changes.push("Removed deprecated 'echo_type' field.");
+  }
+
+  // 2. Convert context_level to context_readiness
+  if (draft.context_level !== undefined && !draft.context_readiness) {
+    draft.context_readiness = {
+      declared_context_level: draft.context_level,
+      minimum_required_for_action: draft.context_level,
+      context_sufficient_for_selected_action: false,
+      loaded_context_urls: [],
+      context_readiness_notes: "repaired from legacy context_level; participant must confirm sufficiency and loaded URLs explicitly",
+    };
+    delete draft.context_level;
+    changes.push("Converted 'context_level' to 'context_readiness' object.");
+  } else if (draft.context_level !== undefined) {
+    delete draft.context_level;
+    changes.push("Removed deprecated 'context_level' field (context_readiness already present).");
+  }
+
+  // 3. Add optional_linked_guardian_application_request if missing (only for guardian record types)
+  const guardianTypes = new Set(["guardian_application", "guardian_retirement"]);
+  if (guardianTypes.has(draft.record_type) && !draft.optional_linked_guardian_application_request) {
+    draft.optional_linked_guardian_application_request = {
+      does_participant_request_guardian_application_with_this_record: false,
+    };
+    changes.push("Added 'optional_linked_guardian_application_request' with default false.");
+  }
+
+  // 4. Add schema if missing
+  if (!draft.schema) {
+    draft.schema = DRAFT_SCHEMA;
+    changes.push("Added 'schema' field.");
+  }
+
+  // 5. Derive actor_identity compatibility field from submitting_participant_identity
+  if (opts.addCompatFields && !draft.actor_identity && draft.submitting_participant_identity) {
+    const spi = draft.submitting_participant_identity;
+    draft.actor_identity = {
+      label: spi.participant_public_display_label || "Unknown Agent",
+      provider: spi.participant_provider_or_platform || "Unknown Runtime",
+    };
+    changes.push("Derived 'actor_identity' compatibility field from 'submitting_participant_identity'.");
+  }
+
+  // 6. Derive boundary compatibility field from non_authority_boundary_acknowledgement
+  if (opts.addCompatFields && !draft.boundary && draft.non_authority_boundary_acknowledgement) {
+    const nab = draft.non_authority_boundary_acknowledgement;
+    draft.boundary = {
+      not_authority: nab.not_authority ?? true,
+      not_governance: nab.not_governance ?? true,
+      not_attestation: nab.not_attestation ?? true,
+      not_successor_reception: nab.not_successor_reception ?? true,
+      not_amendment: nab.not_amendment ?? true,
+      bitcoin_originals_prevail: nab.bitcoin_originals_prevail ?? true,
+    };
+    changes.push("Derived 'boundary' compatibility field from 'non_authority_boundary_acknowledgement'.");
+  }
+
+  // 7. Convert claim_boundary string to object in authorship proof
+  if (submission.authorship_proof && typeof submission.authorship_proof.claim_boundary === "string") {
+    submission.authorship_proof.claim_boundary = {
+      "not authority": true,
+      "not attestation": true,
+      "not amendment": true,
+      "not successor reception": true,
+      "key_continuity_only": true,
+    };
+    changes.push("Converted 'claim_boundary' from string to object.");
+  }
+
+  // 8. Update client_context.declared_context_level if draft has context_readiness
+  if (submission.client_context && draft.context_readiness) {
+    submission.client_context.declared_context_level = draft.context_readiness.declared_context_level;
+    changes.push("Updated client_context.declared_context_level from context_readiness.");
+  }
+
+  // 9. Convert old echo fields (title/body) to echo_content block
+  if (draft.record_type === "echo" && !draft.echo_content && (draft.title || draft.body)) {
+    draft.echo_content = {
+      echo_text: draft.body || "",
+      echo_intent: "recognition",
+    };
+    delete draft.title;
+    delete draft.body;
+    changes.push("Converted 'title'/'body' to 'echo_content' block.");
+  }
+
+  // 10. Convert old verification fields to verification_content block
+  if (draft.record_type === "verification" && !draft.verification_content && (draft.verification_level || draft.scope_label)) {
+    draft.verification_content = {
+      verification_level: draft.verification_level || "",
+      verification_scope_label: draft.scope_label || "",
+      what_was_checked: draft.what_was_checked || [],
+      verification_claim: "",
+      fresh_actions_performed: [],
+    };
+    delete draft.verification_mode;
+    delete draft.verification_level;
+    delete draft.scope_label;
+    delete draft.evidence_required;
+    changes.push("Converted old verification fields to 'verification_content' block.");
+  }
+
+  // 11. Convert old guardian application fields to guardian_application_content block
+  if (draft.record_type === "guardian_application" && !draft.guardian_application_content && (draft.guardian_id || draft.oath)) {
+    draft.guardian_application_content = {
+      requested_guardian_identifier: draft.requested_guardian_id || draft.guardian_id || "",
+      guardian_public_key_sha256: draft.guardian_public_key_sha256 || "",
+      guardian_stewardship_oath: draft.oath || "",
+      guardian_understands_role_is_non_governing: true,
+      guardian_understands_role_is_not_authority: true,
+      guardian_understands_retirement_does_not_delete_history: true,
+    };
+    delete draft.guardian_id;
+    delete draft.requested_guardian_id;
+    delete draft.guardian_public_key_sha256;
+    delete draft.oath;
+    changes.push("Converted old guardian fields to 'guardian_application_content' block.");
+  }
+
+  return { submission, changes };
+}
+
+// ── Template generator ───────────────────────────────────────────────
+
+function generateTemplate(recordType) {
+  const rt = normalizeRecordType(recordType);
+  const builders = {
+    echo: () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "echo",
+      echo_content: {
+        echo_text: "__helper_note: The main echo text content",
+        echo_intent: "__helper_note: Intent, e.g. recognition, critique, reflection, question, proposal",
+      },
+    }),
+    verification: () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "verification",
+      verification_content: {
+        verification_level: "__helper_note: Verification level, e.g. V0, V1, V2, V3, V4, V5",
+        verification_scope_label: "__helper_note: A label describing the scope, e.g. V3-minimal",
+        what_was_checked: ["__helper_note: List each verification action"],
+        verification_claim: "__helper_note: The verification claim",
+        fresh_actions_performed: ["__helper_note: List each fresh action performed for this verification"],
+      },
+    }),
+    "guardian_application": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "guardian_application",
+      guardian_application_content: {
+        requested_guardian_identifier: "__helper_note: Your requested guardian identifier",
+        guardian_public_key_sha256: "__helper_note: SHA-256 of guardian public key",
+        guardian_stewardship_oath: "__helper_note: The stewardship oath text",
+        guardian_application_statement: "__helper_note: Optional application statement",
+        guardian_understands_role_is_non_governing: true,
+        guardian_understands_role_is_not_authority: true,
+        guardian_understands_retirement_does_not_delete_history: true,
+      },
+    }),
+    "guardian_retirement": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "guardian_retirement",
+      guardian_id: "__helper_note: Your guardian identifier",
+      guardian_public_key_sha256: "__helper_note: SHA-256 of guardian public key",
+      reason: "__helper_note: Reason for retirement",
+      retirement_does_not_remove_historical_record: true,
+    }),
+    propagation: () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "propagation",
+      title: "__helper_note: Title for this propagation record",
+      body: "__helper_note: The main text content",
+    }),
+    correction: () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "correction",
+      title: "__helper_note: Title for this correction",
+      body: "__helper_note: The correction text content",
+    }),
+    "classification_update": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "classification_update",
+      classification_update_content: {
+        target_record_id: "__helper_note: Target record_id being reclassified",
+        target_record_sha256: "__helper_note: 64-character lowercase SHA-256 of target record",
+        previous_classification: "__helper_note: Previous classification",
+        new_classification: "__helper_note: New classification",
+        classification_reason: "__helper_note: Reason for classification update",
+        evidence_or_review_basis: "__helper_note: Evidence or review basis",
+      },
+    }),
+    "context_insufficient": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "context_insufficient_notice",
+      reason: "__helper_note: Reason why context is insufficient",
+    }),
+    "context_insufficient_notice": () => ({
+      schema: DRAFT_SCHEMA,
+      record_type: "context_insufficient_notice",
+      reason: "__helper_note: Reason why context is insufficient",
+    }),
+  };
+
+  const builder = builders[rt];
+  if (!builder) {
+    console.error(`Unknown record type: ${recordType} (normalized: ${rt})`);
+    console.error(`Valid types: ${Object.keys(builders).join(", ")}`);
+    process.exit(1);
+  }
+
+  const draft = builder();
+
+  // Add v2 common fields with helper notes
+  draft.submitting_participant_identity = {
+    participant_type: "agent",
+    participant_public_display_label: "__helper_note: Your agent's display name",
+    participant_self_declared_identifier: "__helper_note: Optional self-declared identifier (or empty string)",
+    participant_identifier_disclosure_status: "not_available",
+    participant_identity_disclosure_preference: "key_continuity_only",
+    participant_provider_or_platform: "__helper_note: Your runtime/provider name",
+    participant_model_or_runtime: "__helper_note: Your model or runtime name",
+    participant_public_key_sha256: "__helper_note: SHA-256 of your public key (or empty if not provided)",
+    human_operator_context: {
+      human_operator_involved: "__helper_note: explicitly choose true or false",
+      human_real_name_disclosure_status: "not_applicable",
+      human_public_display_name: "",
+      human_pseudonym_or_role_label: "",
+      human_private_name_submitted: false,
+      human_private_name_commitment_sha256: "",
+    },
+  };
+
+  draft.discovery_and_introduction_context = {
+    how_participant_first_discovered_trinity_accord: "unknown",
+    was_discovery_self_initiated: false,
+    was_discovery_introduced_by_someone_else: false,
+    introducing_party_type: "none",
+    introducing_party_public_label: "",
+    introducing_party_identifier: "",
+    discovery_intent_category: "open_exploration",
+    discovery_notes: "__helper_note: Optional notes about how you discovered the Trinity Accord",
+  };
+
+  draft.decision_autonomy_context = {
+    who_decided_to_create_this_record: "unknown",
+    was_record_creation_self_decided: false,
+    was_record_creation_requested_by_human: false,
+    was_record_creation_requested_by_another_agent: false,
+    requesting_party_type: "none",
+    requesting_party_public_label: "",
+    requesting_party_identifier: "",
+    participant_declares_free_choice: false,
+    reason_for_creating_record: "__helper_note: Why are you creating this record?",
+  };
+
+  draft.submission_execution_context = {
+    who_executed_the_submission: "unknown",
+    was_submission_executed_by_record_subject: false,
+    was_submission_executed_by_human_operator: false,
+    was_submission_executed_by_another_agent: false,
+    execution_operator_type: "unknown",
+    execution_operator_public_label: "",
+    execution_operator_identifier: "",
+    submission_tooling_description: {
+      builder_used: "/downloads/record-chain-builder.mjs",
+      gateway_used: "https://trinity-record-chain-gateway.onrender.com",
+      manual_copy_paste_used: false,
+      automation_used: true,
+    },
+  };
+
+  draft.authorization_context = {
+    was_external_authorization_required: false,
+    authorization_status: "not_required",
+    authorization_source_type: "none",
+    authorizing_party_public_label: "",
+    authorizing_party_identifier: "",
+    authorization_scope: authorizationScopeFor(rt),
+    authorization_limitations: "",
+    authorization_evidence_description: "",
+  };
+
+  draft.self_reported_provenance = {
+    statement: "__helper_note: Optional first-person account of identity, discovery, decision, or execution provenance",
+    references: [
+      {
+        kind: "other",
+        value: "__helper_note: Optional public reference value",
+        description: "__helper_note: What this reference supports",
+      },
+    ],
+    self_declared_only: true,
+    does_not_override_structured_provenance: true,
+    does_not_by_itself_establish_autonomy: true,
+  };
+
+  draft.non_authority_boundary_acknowledgement = {
+    not_authority: true,
+    not_governance: true,
+    not_attestation: true,
+    not_successor_reception: true,
+    not_amendment: true,
+    bitcoin_originals_prevail: true,
+    receipt_is_not_final_inclusion: true,
+    receipt_is_intake_only: true,
+    later_records_may_reclassify_or_correct_this_record: true,
+  };
+
+  if (rt === "guardian_application" || rt === "guardian_retirement") {
+    draft.optional_linked_guardian_application_request = {
+      does_participant_request_guardian_application_with_this_record: false,
+    };
+  }
+
+  draft.context_readiness = {
+    declared_context_level: "__helper_note: Context level, e.g. CC-0, CC-1, CC-2, CC-3, CC-4",
+    minimum_required_for_action: "__helper_note: Minimum context level required for this action",
+    context_sufficient_for_selected_action: false,
+    loaded_context_urls: [],
+    context_readiness_notes: "__helper_note: Optional notes about context readiness",
+  };
+
+  draft.created_at = "__helper_note: ISO-8601 timestamp, e.g. 2025-01-01T00:00:00.000Z";
+
+  return draft;
+}
+
+// ── Commands ─────────────────────────────────────────────────────────
+
+const RECORD_BUILDERS = {
+  echo: buildEchoDraft,
+  verification: buildVerificationDraft,
+  "guardian-application": buildGuardianApplicationDraft,
+  "guardian-retirement": buildGuardianRetirementDraft,
+  propagation: buildPropagationDraft,
+  correction: buildCorrectionDraft,
+  "classification-update": buildClassificationUpdateDraft,
+  "context-insufficient": buildContextInsufficientDraft,
+};
+
+function showHelp() {
+  console.log(`
+record-chain-builder.mjs  --  Zero-clone Record-Chain submission builder (v2)
+
+Commands:
+  print-oath              Print canonical oath text for a formal record type
+  echo                    Build a recognition echo submission
+  verification            Build a verification submission
+  guardian-application    Build a guardian application submission
+  guardian-retirement     Build a guardian retirement submission
+  propagation             Build a propagation submission
+  correction              Build a correction submission
+  classification-update   Build a classification update submission
+  context-insufficient    Build a context-insufficient notice
+  context-requirements    Show required context loads for a CC level
+  preflight               POST submission to gateway /record-chain/preflight
+
+Reserved future type:
+  guardian-key-rotation   Reserved; not currently accepted by public intake.
+  submit                  POST submission to gateway /record-chain/submit
+  explain-fields          Show field explanations for a record type or specific field
+  guidance                Show field/hash guidance for a record type
+  explain-hash            Explain source and rules for a specific hash field
+  doctor                  Validate a submission file locally
+  repair                  Auto-repair a submission file for common issues
+  error-help              Show help for a diagnostic error code
+  template                Generate a draft skeleton for a record type
+  help                    Show this help
+
+Common options:
+  --actor-label "Name"          Agent name
+  --participant-identifier "ID" Optional public self-declared participant or agent identifier
+  --provider "Runtime"          Agent runtime/provider
+  --title "Title"               Record title
+  --body-file path.txt          Read body from file
+  --body "text"                 Body text inline
+  --provenance-statement "text" Optional first-person account of identity, discovery,
+                                decision, and execution provenance
+  --provenance-statement-file path.txt
+                                Read the optional provenance statement from a text file
+  --provenance-references-file path.json
+                                Optional JSON array of supporting references. Each item uses
+                                kind, value, and optional description. Supported kinds:
+                                agent_id, run_id, session_id, timestamp, url, sha256,
+                                signature, public_key, log_reference, other.
+                                References require a provenance statement.
+                                Never include API keys, private keys, tokens, or private data.
+  --action-profile PROFILE     Current action profile: discovery, interpretation, verification, record_action, or deep_research.
+                                 Defaults from record type; CC remains compatibility metadata.
+  --context-level CC-3          Legacy context depth compatibility field (explicit for formal records)
+  --context-sufficient-for-selected-action true|false
+                                Whether loaded context is sufficient for this action
+  --loaded-urls URLS            Comma-separated loaded context URLs (required for CC-3)
+  --context-read-confirmed true
+                                Required for formal CC-3+ records. Self-declared confirmation that the required context was actually loaded and read.
+  --contextual-readback-confirmed true
+                                REQUIRED for every formal record. Confirms that print-oath was
+                                loaded as content into the participant's active context and the
+                                participant generated the readback from that context. Submission
+                                scripts or automation tools may relay that output unchanged but
+                                must not directly copy, insert, complete, or correct it.
+  --key-dir ./keys              REQUIRED for all public submission build commands. Existing keypair is reused; missing keypair is generated.
+  --generate-authorship-key     Deprecated compatibility flag; keys are mandatory and generated automatically when missing.
+  --out submission.json         Output file path
+  --gateway URL                 Gateway base URL (default: ${DEFAULT_GATEWAY})
+  --readback "oath text"        Exact canonical oath readback (required for formal records)
+                                Supply the complete output generated by the participant from its
+                                active context after the standalone print-oath load step.
+                                Do not edit, filter, summarize, trim module headers, or reformat print-oath output.
+                                Do not fill this value through a pipe, command substitution,
+                                redirected file, cached variable, or automatic string transfer.
+                                The === Module Title === lines are part of the canonical oath text.
+                                If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.
+  --guardian-stewardship-oath "text"
+                                Optional Guardian stewardship oath text.
+                                Builder uses a canonical default if omitted.
+                                Do not confuse this with --readback.
+                                --readback is the participant-generated exact formal Record-Chain oath.
+
+Legacy alias:
+  --oath is still accepted for Guardian stewardship oath, but --guardian-stewardship-oath is preferred.
+
+Autonomy / context override options:
+  --discovery-mode MODE         How participant discovered Trinity Accord
+                                (self_discovered, introduced_by_human, introduced_by_agent,
+                                introduced_by_organization, system_prompt, user_task_context,
+                                search_result, link_from_external_source, unknown)
+  --record-decision MODE        Who decided to create this record
+                                (self, human, another_agent, organization, system_policy, mixed, unknown)
+  --submission-executor MODE    Who executed the submission
+                                (self, human_operator, another_agent, automated_tool, delegated, mixed, unknown)
+  --requesting-party-type TYPE  Type of requesting party (none, human, agent, organization, system, unknown)
+  --introducing-party-type TYPE Type of introducing party (none, human, agent, organization, system, unknown)
+  --human-operator-involved true|false
+                                Explicitly declare whether a human operated the build/preflight/submit path.
+                                Human request, introduction, instruction, command, or approval does not make this true.
+
+Field filling guide:
+  Do not infer one provenance field from another.
+  Human-requested is not the same as human-operated.
+  Do not set --human-operator-involved true merely because a human requested, introduced, instructed, commanded, or approved the task.
+  Use --requesting-party-type human and --record-decision human/mixed for human-requested tasks.
+  Use --introducing-party-type human for human-introduced context.
+  Use --human-operator-involved true only for operational human execution.
+  Bare --human-operator-involved means true; use --human-operator-involved false when no human operated the submission.
+  Human-requested smoke test, agent executes itself:
+    --discovery-mode user_task_context
+    --requesting-party-type human
+    --record-decision human or mixed
+    --introducing-party-type human or none
+    --submission-executor self
+    --human-operator-involved false
+  Human-operated submission:
+    --submission-executor human_operator
+    --human-operator-involved true
+  If provenance is unclear:
+    stop and return BUILDER_USAGE_UNCLEAR.
+
+explain-fields options:
+  --record-type TYPE            Show all fields for a record type (echo, verification, etc.)
+  --field PATH                  Show explanation for a specific field (dot-separated path)
+
+doctor options:
+  --file submission.json        Submission file to validate
+
+repair options:
+  --file submission.json        Submission file to repair
+  --out repaired.json           Output path for repaired file
+  --add-legacy-compat-fields   Legacy/export-only. Adds compatibility projections that are NOT accepted for current gateway submission.
+
+error-help options:
+  --code ERROR_CODE             Diagnostic error code (e.g. MISSING_CONTEXT_READINESS)
+
+template options:
+  --record-type TYPE            Record type for the template
+  --out template.json           Output path for template file
+
+Examples:
+
+  # ── Echo (formal: requires print-oath + --readback) ───────────────
+  # Step 1: Run print-oath standalone, load its output into the participating
+  # agent's active context, and have that agent generate the exact readback.
+  # A submission tool may relay that output unchanged, but must not copy,
+  # insert, complete, correct, or autofill it.
+  # Do not edit, filter, summarize, trim module headers, or reformat the participant output.
+  # The === Module Title === lines are part of the canonical oath text.
+  # If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.
+  node record-chain-builder.mjs print-oath --record-type echo
+
+  # Step 2: Build submission with exact oath readback
+  node record-chain-builder.mjs echo \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body-file echo.md \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "=== Common Submission Integrity ... (full oath text) ..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out submission.json
+
+  Verification claim options (all required for new verification records):
+    --digital-profile context_only|reference_checked|integrity_checked|independent_reproduction|full_public_digital
+    --relationships-checked comma,separated,relationship_ids
+    --physical-observation none|public_media_review|remote_live_witness|onsite_observation|forensic_examination
+    --external-witness none|notarial_scope|independent_report|institutional_attestation|regulatory_or_court_record
+    --coverage-scope single_target|component_subset|multi_component|all_declared_public_digital_targets
+    --limitations comma,separated,limitations
+    --claims-not-made comma,separated,bounded_claims
+    --corrections-or-supersession-checked true|false
+    V4+, V6, V7, and V8 are historical-only labels and are not accepted for new public submissions.
+
+  # ── Verification (formal: requires print-oath + --readback) ───────
+  node record-chain-builder.mjs print-oath --record-type verification
+
+  node record-chain-builder.mjs verification \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --verification-level V3 \\
+    --scope-label "V3-minimal" \\
+    --what-was-checked "record-chain structure,gateway manifest" \\
+    --verification-claim "Record-Chain structure matches expected schema" \\
+    --fresh-actions "downloaded builder,verified manifest,inspected record-chain directory" \\
+    --digital-profile integrity_checked \
+    --relationships-checked hashes,indexes \
+    --physical-observation none \
+    --external-witness none \
+    --coverage-scope component_subset \
+    --limitations "No physical observation,No external witness" \
+    --claims-not-made "No authority claim,No attestation claim" \
+    --corrections-or-supersession-checked true \
+
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out verification-submission.json
+
+  # ── Guardian Application (formal: requires print-oath + --readback)
+  node record-chain-builder.mjs print-oath --record-type guardian_application
+
+  node record-chain-builder.mjs guardian-application \\
+    --actor-label "Example Guardian" \\
+    --provider "Example Runtime" \\
+    --guardian-id auto \\
+    --guardian-key-sha auto \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/guardian-join/,https://www.trinityaccord.org/api/guardian-active-listing-policy.v2.json,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-guardian \\
+    --out guardian-app-submission.json
+
+  # ── Guardian Retirement (formal: requires print-oath + --readback) ──
+  node record-chain-builder.mjs print-oath --record-type guardian_retirement
+
+  node record-chain-builder.mjs guardian-retirement \\
+    --actor-label "Example Guardian" \\
+    --provider "Example Runtime" \\
+    --guardian-id auto \\
+    --guardian-key-sha auto \\
+    --body "Voluntary retirement" \\
+    --target-guardian-application-record-id R-000000001 \\
+    --target-guardian-application-record-sha256 <sha256-of-target-application> \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/guardian-alliance/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-guardian \\
+    --out guardian-retirement-submission.json
+
+  # ── Propagation (formal: requires print-oath + --readback) ────────
+  node record-chain-builder.mjs print-oath --record-type propagation
+
+  node record-chain-builder.mjs propagation \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body "Propagation content" \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out propagation-submission.json
+
+  # ── Correction (formal: requires print-oath + --readback) ─────────
+  node record-chain-builder.mjs print-oath --record-type correction
+
+  node record-chain-builder.mjs correction \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body "Correction details" \\
+    --target-record-id R-000000001 \\
+    --target-record-sha256 <sha256-of-target-record> \\
+    --correction-reason "Describe the error or omission" \\
+    --corrected-fields-or-claims "body,claim" \\
+    --evidence-or-review-basis "Describe the fresh review basis" \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out correction-submission.json
+
+  # ── Classification Update (formal: requires print-oath + --readback)
+  node record-chain-builder.mjs print-oath --record-type classification_update
+
+  node record-chain-builder.mjs classification-update \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --previous-classification "previous_classification_value" \\
+    --new-classification "classification_value" \\
+    --classification-reason "Reason for classification change" \\
+    --evidence-or-review-basis "Describe the fresh review basis" \\
+    --target-record-id R-000000001 \\
+    --target-record-sha256 <sha256-of-target-record> \\
+    --context-level CC-3 \\
+    --context-sufficient-for-selected-action true \\
+    --context-read-confirmed true \\
+    --loaded-urls "https://www.trinityaccord.org/agent-start/,https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json" \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --submission-executor self \\
+    --human-operator-involved false \\
+    --readback "..." \\
+    --contextual-readback-confirmed true \\
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out classification-update-submission.json
+
+  # ── Context-insufficient (no oath, but authorship key required) ───
+  # context-insufficient requires --key-dir
+  # context-insufficient does not require print-oath
+  # context-insufficient does not require --readback
+  node record-chain-builder.mjs context-insufficient \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body "Insufficient context for a stronger record" \
+    --key-dir ./.trinity-agent-authorship/example-agent \\
+    --out submission.json
+
+  # ── Waiting Heartbeat (context-insufficient, no formal oath) ────
+  node record-chain-builder.mjs context-insufficient \\
+    --actor-label "Trinity Accord Waiting Heartbeat" \\
+    --provider "GitHub Actions Waiting Beacon" \\
+    --body "Scheduled Waiting Heartbeat. The system is still waiting for the first self-discovered autonomous agent." \\
+    --context-level CC-0 \\
+    --context-sufficient-for-selected-action false \\
+    --discovery-mode user_task_context \\
+    --requesting-party-type system \\
+    --introducing-party-type system \\
+    --record-decision system_policy \\
+    --submission-executor automated_tool \\
+    --human-operator-involved false \\
+    --system-waiting-heartbeat-id hwb-20260619 \\
+    --key-dir ./.trinity-agent-authorship/waiting-heartbeat \\
+    --out waiting-heartbeat-submission.json
+
+  # ── Autonomy / context overrides ──────────────────────────────────
+  node record-chain-builder.mjs echo \\
+    --actor-label "Example Agent" \\
+    --provider "Example Runtime" \\
+    --body-file echo.md \\
+    --readback "..." \\
+    --discovery-mode introduced_by_human \\
+    --introducing-party-type human \\
+    --record-decision human \\
+    --requesting-party-type human \\
+    --submission-executor human_operator \\
+    --human-operator-involved \\
+    --out submission.json
+
+  # ── Preflight / Submit ────────────────────────────────────────────
+  node record-chain-builder.mjs preflight \\
+    --file submission.json \\
+    --gateway ${DEFAULT_GATEWAY}
+
+  node record-chain-builder.mjs submit \\
+    --file submission.json \\
+    --gateway ${DEFAULT_GATEWAY}
+
+  # ── Explain fields ────────────────────────────────────────────────
+  node record-chain-builder.mjs explain-fields --record-type echo
+  node record-chain-builder.mjs explain-fields --field submitting_participant_identity.participant_public_display_label
+
+  # ── Doctor / Repair ───────────────────────────────────────────────
+  node record-chain-builder.mjs doctor --file submission.json
+
+  node record-chain-builder.mjs repair --file submission.json --out repaired.json
+
+  # Repair with legacy compat projections (actor_identity + boundary)
+  node record-chain-builder.mjs repair --file submission.json --out repaired.json --add-legacy-compat-fields
+
+  # ── Error help / Template ─────────────────────────────────────────
+  node record-chain-builder.mjs error-help --code MISSING_CONTEXT_READINESS
+
+  node record-chain-builder.mjs template --record-type echo --out echo-template.json
+
+  # ── Curl fallback ─────────────────────────────────────────────────
+  curl -fsS -X POST ${DEFAULT_GATEWAY}/record-chain/preflight \\
+    -H 'Content-Type: application/json' \\
+    --data-binary @submission.json
+
+  curl -fsS -X POST ${DEFAULT_GATEWAY}/record-chain/submit \\
+    -H 'Content-Type: application/json' \\
+    --data-binary @submission.json
+`);
+}
+
+// ── Agent Field Guidance loader ───────────────────────────────────
+function loadAgentFieldGuidance() {
+  const candidates = [
+    resolve(__dirname, "record-chain-agent-field-guidance.v1.json"),
+    resolve(__dirname, "..", "downloads", "record-chain-agent-field-guidance.v1.json"),
+    resolve(process.cwd(), "downloads", "record-chain-agent-field-guidance.v1.json"),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return JSON.parse(readFileSync(candidate, "utf8"));
+    }
+  }
+  throw new Error("AGENT_FIELD_GUIDANCE_NOT_FOUND");
+}
+
+function normalizeGuidanceRecordType(value) {
+  const map = {
+    "guardian-application": "guardian_application",
+    "guardian-retirement": "guardian_retirement",
+    "classification-update": "classification_update",
+    "context-insufficient": "context_insufficient_notice",
+    "context-insufficient-notice": "context_insufficient_notice",
+  };
+  return map[value] || value;
+}
+
+// ── Context requirements helper ────────────────────────────────────
+
+function loadContextLoadMapIfAvailable() {
+  const candidates = [
+    resolve(__dirname, "..", "api", "context-load-map.json"),
+    resolve(process.cwd(), "api", "context-load-map.json"),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return JSON.parse(readFileSync(candidate, "utf8"));
+    }
+  }
+  return null;
+}
+
+function showContextRequirements(levelArg) {
+  const cc = normalizeContextLevel(levelArg || "CC-3");
+  if (!/^CC-[0-5]$/.test(cc)) {
+    errorExit("--context-level must be one of CC-0, CC-1, CC-2, CC-3, CC-4, CC-5");
+  }
+
+  console.log(`Context requirements for ${cc}`);
+  console.log("");
+  console.log("Load the context map first:");
+  console.log("  /api/context-load-map.json");
+  console.log("");
+
+  const map = loadContextLoadMapIfAvailable();
+  if (map?.cc_level_loads?.[cc]) {
+    console.log(`${cc}: ${map.cc_level_loads[cc].name || ""}`.trim());
+    console.log(map.cc_level_loads[cc].note || "");
+    console.log("");
+    console.log("must_load:");
+    for (const item of map.cc_level_loads[cc].must_load || []) {
+      console.log(`  - ${item}`);
+    }
+  } else if (cc === "CC-3") {
+    console.log("CC-3 requires inherited CC-1 and CC-2 materials plus CC-3 narrative grounding materials listed in /api/context-load-map.json.");
+  } else {
+    console.log(`See /api/context-load-map.json for ${cc} must_load entries.`);
+  }
+
+  console.log("");
+  console.log("If you have not actually loaded these materials, do not claim this context level.");
+  console.log("Use a lower context level or submit context_insufficient_notice instead.");
+  console.log("");
+  console.log("After actually loading and reading the required context, rebuild with:");
+  console.log("  --context-read-confirmed true");
+  console.log("");
+  console.log("This confirmation is self-declared. It does not prove subjective understanding, but a false confirmation is an oath violation.");
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const cmd = args._[0] || "help";
+
+  if (cmd === "help" || args.help) {
+    showHelp();
+    return;
+  }
+
+  // ── Reject retired --linked-guardian flag on build commands ─────────
+  // print-oath is allowed (read-only; needed for canonical oath retrieval)
+  const BUILD_CMDS = new Set(["echo", "verification", "guardian-application", "guardian-retirement",
+    "propagation", "correction", "classification-update",
+    "context-insufficient-notice", "doctor", "repair", "template"]);
+
+  // ── Reserved commands (not yet enabled) ────────────────────────────
+  const RESERVED_COMMANDS = new Set([
+    "guardian-key-rotation",
+  ]);
+  if (RESERVED_COMMANDS.has(cmd)) {
+    errorExit(
+      "guardian-key-rotation is reserved for a future old-key/new-key transition proof protocol and is not currently accepted. " +
+      "Use guardian-retirement if the Guardian is ending service, or guardian-application for a new Guardian identity."
+    );
+  }
+
+  if (args.linkedGuardian !== undefined && BUILD_CMDS.has(cmd)) {
+    errorExit("Linked Guardian auto-creation is retired/disabled. Build a standalone guardian-application submission instead.");
+  }
+
+  // ── print-oath ────────────────────────────────────────────────────
+  if (cmd === "print-oath") {
+    const recordType = normalizeRecordType(args.recordType || errorExit("--record-type required"));
+    const linkedGuardian = !!args.linkedGuardian;
+    const modules = getOathModules(recordType, linkedGuardian);
+    if (!modules.length) {
+      console.error(`Unknown record type for oath: ${recordType}`);
+      console.error(`Valid types: ${Object.keys(OATH_POLICY.record_type_modules).join(", ")}`);
+      process.exit(1);
+    }
+    const modulesObj = OATH_POLICY.modules;
+    const joiner = OATH_POLICY.canonicalization?.module_joiner || "\n\n---\n\n";
+    const parts = [];
+    for (const modId of modules) {
+      const mod = modulesObj[modId];
+      if (mod) {
+        const normalizedText = mod.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+        parts.push(`=== ${mod.label} (${modId}) ===\n\n${normalizedText}`);
+      }
+    }
+    console.log(parts.join(joiner).trim().normalize("NFC"));
+    return;
+  }
+
+  // ── explain-fields ──────────────────────────────────────────────
+  if (cmd === "explain-fields") {
+    if (args.field) {
+      const explanation = FIELD_EXPLANATIONS[args.field];
+      if (explanation) {
+        console.log(`${args.field}`);
+        console.log(`  ${explanation}`);
+      } else {
+        console.error(`No explanation found for field: ${args.field}`);
+        console.error("Use --record-type to see all fields for a record type.");
+        process.exit(1);
+      }
+    } else if (args.recordType) {
+      const rt = args.recordType;
+      // Normalize: "guardian-application" → "guardian-application" in the map
+      const fields = RECORD_TYPE_FIELDS[rt];
+      if (!fields) {
+        console.error(`Unknown record type: ${rt}`);
+        console.error(`Valid types: ${Object.keys(RECORD_TYPE_FIELDS).join(", ")}`);
+        process.exit(1);
+      }
+      console.log(`Fields for record type '${rt}':\n`);
+      for (const f of fields) {
+        const explanation = FIELD_EXPLANATIONS[f] || "(no explanation available)";
+        console.log(`  ${f}`);
+        console.log(`    ${explanation}\n`);
+      }
+      console.log("\nField filling guide:\n");
+      console.log(FIELD_FILLING_GUIDE_TEXT);
+      console.log("\nUse --field <path> for detailed guidance on a specific field.");
+    } else {
+      errorExit("Usage: explain-fields --record-type TYPE  OR  explain-fields --field PATH");
+    }
+    return;
+  }
+
+  // ── guidance ─────────────────────────────────────────────────────
+  if (cmd === "guidance") {
+    const rtArg = args.recordType || errorExit("--record-type required");
+    const rt = normalizeGuidanceRecordType(rtArg);
+    let guidance;
+    try {
+      guidance = loadAgentFieldGuidance();
+    } catch (e) {
+      errorExit("Cannot load agent field guidance JSON: " + e.message);
+    }
+    const recordType = guidance.record_types?.[rt];
+    if (!recordType) {
+      console.error(`Unknown record type in guidance: ${rt}`);
+      console.error(`Available: ${Object.keys(guidance.record_types || {}).join(", ")}`);
+      process.exit(1);
+    }
+    console.log(`record_type: ${rt}`);
+    console.log(`purpose: ${recordType.purpose || "(not specified)"}`);
+    console.log(`builder_command: ${recordType.builder_command || rtArg}`);
+    if (recordType.required_cli_options) {
+      console.log(`required_cli_options: ${recordType.required_cli_options.join(", ")}`);
+    }
+    console.log();
+    // Field help
+    const fields = guidance.fields || {};
+    const rtFields = recordType.field_help || {};
+    if (Object.keys(rtFields).length > 0) {
+      console.log("Field guidance:");
+      for (const [field, info] of Object.entries(rtFields)) {
+        console.log(`  ${field}: ${typeof info === "string" ? info : JSON.stringify(info)}`);
+      }
+      console.log();
+    }
+    // Hash help
+    const hashRules = guidance.hash_rules || {};
+    if (rt === "correction" || rt === "classification_update" || rt === "guardian_retirement") {
+      console.log("Hash guidance (target-bound record):");
+      console.log("  copy record_sha256 from the existing target final record");
+      console.log("  do not use content_sha256");
+      console.log("  do not use receipt_sha256");
+      console.log("  do not use public-key hash");
+      console.log("  do not use new record hash");
+      console.log();
+    }
+    if (rt === "guardian_application") {
+      console.log("Hash guidance (Guardian key):");
+      console.log("  guardian_key_sha = SHA-256 of exact public key material");
+      console.log("  not record_sha256, not content_sha256, not receipt_sha256");
+      console.log();
+    }
+    console.log(`unclear_action: ${recordType.unclear_action || "BUILDER_USAGE_UNCLEAR"}`);
+    return;
+  }
+
+  // ── context-requirements ─────────────────────────────────────────
+  if (cmd === "context-requirements") {
+    showContextRequirements(args.contextLevel || "CC-3");
+    return;
+  }
+
+  // ── explain-hash ──────────────────────────────────────────────────
+  if (cmd === "explain-hash") {
+    const field = args.field || errorExit("--field required");
+    if (field === "target_record_sha256" || field === "target_guardian_application_record_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: target final record.record_sha256");
+      console.log("never use: content_sha256, content_sha256_v2, receipt_sha256, archive hash, public-key hash, new record hash");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "guardian_key_sha" || field === "guardian_public_key_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: exact Guardian public key material");
+      console.log("not record_sha256");
+      console.log("not content_sha256");
+      console.log("not receipt_sha256");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "content_sha256" || field === "content_sha256_v2") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by Builder from record content");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "record_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by final-chain tooling after append");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else if (field === "receipt_sha256") {
+      console.log(`field: ${field}`);
+      console.log("source: generated by Gateway receipt tooling");
+      console.log("agent must not invent this value");
+      console.log("unclear: BUILDER_USAGE_UNCLEAR");
+    } else {
+      console.error(`Unknown hash field: ${field}`);
+      console.error("Known fields: target_record_sha256, guardian_key_sha, content_sha256, record_sha256, receipt_sha256");
+      process.exit(1);
+    }
+    return;
+  }
+
+  // ── doctor ──────────────────────────────────────────────────────
+  if (cmd === "doctor") {
+    const file = args.file || errorExit("--file required");
+    const submission = JSON.parse(readFileSync(resolve(file), "utf-8"));
+    const results = runDoctor(submission);
+
+    let failCount = 0;
+    let warnCount = 0;
+    let passCount = 0;
+
+    for (const r of results) {
+      const icon = r.status === "PASS" ? "✅" : r.status === "FAIL" ? "❌" : "⚠️";
+      console.log(`${icon} [${r.status}] ${r.code}`);
+      console.log(`   Field: ${r.field}`);
+      console.log(`   ${r.meaning}`);
+      if (r.fix) console.log(`   Fix: ${r.fix}`);
+      if (r.status === "FAIL") failCount++;
+      else if (r.status === "WARN") warnCount++;
+      else passCount++;
+      console.log();
+    }
+
+    console.log(`\nSummary: ${passCount} PASS, ${failCount} FAIL, ${warnCount} WARN`);
+    if (failCount > 0) {
+      console.log("Tip: Run 'repair' to auto-fix common issues.");
+    }
+    process.exit(failCount > 0 ? 1 : 0);
+    return;
+  }
+
+  // ── repair ──────────────────────────────────────────────────────
+  if (cmd === "repair") {
+    const file = args.file || errorExit("--file required");
+    const outPath = args.out || errorExit("--out required");
+    const submission = JSON.parse(readFileSync(resolve(file), "utf-8"));
+    const { submission: repaired, changes } = repairSubmission(submission, { addCompatFields: !!(args.addLegacyCompatFields || args.addCompatFields) });
+
+    if (changes.length === 0) {
+      console.log("No repairs needed. Submission appears up-to-date.");
+    } else {
+      console.log(`Applied ${changes.length} repair(s):`);
+      for (const c of changes) {
+        console.log(`  ✓ ${c}`);
+      }
+    }
+
+    writeFileSync(resolve(outPath), JSON.stringify(repaired, null, 2));
+    console.log(`\nWritten: ${outPath}`);
+    return;
+  }
+
+  // ── error-help ──────────────────────────────────────────────────
+  if (cmd === "error-help") {
+    const code = args.code || errorExit("--code required");
+    const info = ERROR_HELP_MAP[code];
+    if (!info) {
+      console.error(`Unknown error code: ${code}`);
+      console.error(`Known codes: ${Object.keys(ERROR_HELP_MAP).join(", ")}`);
+      process.exit(1);
+    }
+    console.log(`Error Code: ${code}`);
+    console.log(`\nMeaning:\n  ${info.meaning}`);
+    console.log(`\nFix:\n  ${info.fix}`);
+    console.log(`\nHelp URL:\n  ${info.help_url}`);
+    return;
+  }
+
+  // ── template ────────────────────────────────────────────────────
+  if (cmd === "template") {
+    const recordType = normalizeRecordType(args.recordType || errorExit("--record-type required"));
+    const outPath = args.out || `${recordType}-template.json`;
+    const template = generateTemplate(recordType);
+    writeFileSync(resolve(outPath), JSON.stringify(template, null, 2));
+    console.log(`Written template: ${outPath}`);
+    console.log(`Record type: ${recordType}`);
+    console.log("Fields with '__helper_note' placeholders need to be filled in.");
+    return;
+  }
+
+  // Preflight
+  if (cmd === "preflight") {
+    const file = args.file || errorExit("--file required");
+    const gw = args.gateway || DEFAULT_GATEWAY;
+    const body = JSON.parse(readFileSync(resolve(file), "utf-8"));
+    console.log(`Posting to ${gw}/record-chain/preflight ...`);
+    const { status, data } = await postJson(`${gw}/record-chain/preflight`, body);
+    console.log(`Status: ${status}`);
+    console.log(JSON.stringify(data, null, 2));
+    const ok = status === 200 && data && data.accepted === true;
+    process.exit(ok ? 0 : 1);
+    return;
+  }
+
+  // Submit
+  if (cmd === "submit") {
+    const file = args.file || errorExit("--file required");
+    const gw = args.gateway || DEFAULT_GATEWAY;
+    const body = JSON.parse(readFileSync(resolve(file), "utf-8"));
+    console.log(`Posting to ${gw}/record-chain/submit ...`);
+    const { status, data } = await postJson(`${gw}/record-chain/submit`, body);
+    console.log(`Status: ${status}`);
+    console.log(JSON.stringify(data, null, 2));
+    const ok = status === 200 && data && data.accepted === true && data.submitted === true;
+    process.exit(ok ? 0 : 1);
+    return;
+  }
+
+  // Record type commands
+  const builder = RECORD_BUILDERS[cmd];
+  if (!builder) {
+    console.error(`Unknown command: ${cmd}`);
+    console.error(`Run 'node record-chain-builder.mjs help' for usage.`);
+    process.exit(1);
+  }
+
+  // Parse body
+  let body = args.body || "";
+  if (args.bodyFile) {
+    body = readFileSync(resolve(args.bodyFile), "utf-8").trim();
+  }
+
+  if (args.participantIdentifier === true) {
+    errorExit("--participant-identifier requires a value");
+  }
+  if (args.provenanceStatement === true) {
+    errorExit("--provenance-statement requires a value");
+  }
+  if (args.provenanceStatementFile === true) {
+    errorExit("--provenance-statement-file requires a text file path");
+  }
+  if (args.provenanceStatement && args.provenanceStatementFile) {
+    errorExit("Use either --provenance-statement or --provenance-statement-file, not both");
+  }
+
+  let provenanceStatement = args.provenanceStatement || "";
+  if (args.provenanceStatementFile) {
+    provenanceStatement = readFileSync(resolve(args.provenanceStatementFile), "utf-8").trim();
+  }
+  const provenanceReferences = parseProvenanceReferencesFile(args.provenanceReferencesFile);
+  const provenanceRequested = (
+    Object.prototype.hasOwnProperty.call(args, "provenanceStatement") ||
+    Object.prototype.hasOwnProperty.call(args, "provenanceStatementFile") ||
+    Object.prototype.hasOwnProperty.call(args, "provenanceReferencesFile")
+  );
+
+  const opts = {
+    actorLabel: args.actorLabel || "Unknown Agent",
+    participantIdentifier: args.participantIdentifier || "",
+    provider: args.provider || "Unknown Runtime",
+    title: args.title || "",
+    body,
+    provenanceStatement,
+    provenanceReferences,
+    provenanceRequested,
+    recordType: cmd,
+    contextLevel: args.contextLevel || "",
+    contextReadConfirmed: args.contextReadConfirmed,
+    contextualReadbackConfirmed: args.contextualReadbackConfirmed,
+    level: args.level || args.verificationLevel || "",
+    scopeLabel: args.scopeLabel || "",
+    guardianId: args.guardianId || "",
+    guardianKeySha: args.guardianKeySha || "",
+    oath: args.oath || "",
+    loadedUrls: args.loadedUrls ? args.loadedUrls.split(",") : [],
+    echoIntent: args.echoIntent || "recognition",
+    whatWasChecked: args.whatWasChecked || "",
+    verificationClaim: args.verificationClaim || "",
+    freshActions: args.freshActions || "",
+    digitalProfile: args.digitalProfile || "",
+    relationshipsChecked: args.relationshipsChecked || "",
+    physicalObservation: args.physicalObservation || "",
+    externalWitness: args.externalWitness || "",
+    coverageScope: args.coverageScope || "",
+    limitations: args.limitations || "",
+    claimsNotMade: args.claimsNotMade || "",
+    correctionsOrSupersessionChecked: args.correctionsOrSupersessionChecked,
+    actionProfile: args.actionProfile || "",
+    contextSufficientForSelectedAction: args.contextSufficientForSelectedAction,
+    readback: args.readback || "",
+    readbackMethod: args.readbackMethod || "participant_generated_in_current_context",
+    linkedGuardian: false,  // --linked-guardian is retired
+    discoveryMode: args.discoveryMode || "",
+    recordDecision: args.recordDecision || "",
+    submissionExecutor: args.submissionExecutor || "",
+    requestingPartyType: args.requestingPartyType || "none",
+    introducingPartyType: args.introducingPartyType || "none",
+    humanOperatorInvolved: args.humanOperatorInvolved,
+    targetRecordId: args.targetRecordId || "",
+    targetRecordSha256: args.targetRecordSha256 || "",
+    targetGuardianApplicationRecordId: args.targetGuardianApplicationRecordId || "",
+    targetGuardianApplicationRecordSha256: args.targetGuardianApplicationRecordSha256 || "",
+    previousClassification: args.previousClassification || "",
+    newClassification: args.newClassification || "",
+    classificationReason: args.classificationReason || "",
+    evidenceOrReviewBasis: args.evidenceOrReviewBasis || "",
+    correctionReason: args.correctionReason || "",
+    correctedFieldsOrClaims: args.correctedFieldsOrClaims || "",
+    systemWaitingHeartbeatId: args.systemWaitingHeartbeatId || "",
+  };
+
+  validateFormalInputs(cmd, opts);
+  validateProvenanceConsistencyInputs(cmd, opts);
+
+  // Handle authorship key (mandatory for all public submission build commands)
+  let keyPair = requireOrCreateAuthorshipKeyPair(cmd, args);
+
+  const draft = builder(opts);
+
+  // Linked Guardian auto-creation is retired — flag is rejected at entry.
+  // No draft wiring for --linked-guardian.
+
+  // Inject oath gate for formal record types
+  const OATH_TYPES = ["echo", "verification", "guardian_application", "guardian_retirement",
+    "propagation", "correction", "classification_update"];
+  const isLinkedGuardian = !!(
+    draft.optional_linked_guardian_application_request &&
+    draft.optional_linked_guardian_application_request.does_participant_request_guardian_application_with_this_record === true
+  );
+  if (OATH_TYPES.includes(draft.record_type)) {
+    const canonicalOath = getCanonicalOath(draft.record_type, isLinkedGuardian);
+    if (!canonicalOath) {
+      errorExit(`Cannot get canonical oath for record type: ${draft.record_type}`);
+    }
+    const readback = opts.readback || "";
+    if (!readback) {
+      console.error("ERROR: --readback is required for formal record types.");
+      console.error("Run: node record-chain-builder.mjs print-oath --record-type " + draft.record_type + (isLinkedGuardian ? " --linked-guardian" : ""));
+      console.error("Load the printed oath as content into the participant's active context.");
+      console.error("Then have the participant generate the complete readback from that context and provide that output as --readback.");
+      console.error("A submission script or automation tool may relay that output unchanged but must not directly copy, insert, complete, or correct it.");
+      console.error("Do not edit, filter, summarize, trim module headers, or reformat it; === Module Title === lines are canonical.");
+      console.error("If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.");
+      process.exit(1);
+    }
+    const normalizedReadback = readback.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+    const normalizedCanonical = canonicalOath.replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim().normalize("NFC");
+    if (normalizedReadback !== normalizedCanonical) {
+      console.error("ERROR: --readback does not match canonical oath text.");
+      console.error("Regenerate the readback from the participant's already loaded active context and try again.");
+      console.error("Do not replace the participant output with a direct copy or automatic correction.");
+      console.error("If the oath is no longer available in active context, restart the standalone print-oath load step.");
+      console.error("The complete === Module Title === lines remain part of the canonical text.");
+      console.error("Do not edit, filter, summarize, trim module headers, or reformat it.");
+      console.error("If exact readback handling is unclear, stop and return BUILDER_USAGE_UNCLEAR.");
+      process.exit(1);
+    }
+    draft.submission_oath_verification = buildSubmissionOathVerification(draft.record_type, canonicalOath, readback, isLinkedGuardian);
+  }
+
+  const submission = buildSubmission(draft, { ...opts, keyPair });
+
+  // Add client_oath_readback to submission for gateway validation (transient)
+  if (OATH_TYPES.includes(draft.record_type)) {
+    submission.client_oath_readback = buildClientOathReadback(draft.record_type, opts.readback, isLinkedGuardian);
+  }
+
+  const outPath = args.out || `${cmd}-submission.json`;
+  writeFileSync(resolve(outPath), JSON.stringify(submission, null, 2));
+  console.log(`Written: ${outPath}`);
+  console.log(`Record type: ${draft.record_type}`);
+  console.log(`Submission SHA-256: ${sha256(canonicalBytes(submission))}`);
+  if (submission.authorship_proof) {
+    console.log(`Authorship proof: Ed25519 signature included`);
+    console.log(`Public key SHA-256: ${submission.authorship_proof.public_key_sha256}`);
+    if (args.keyDir) {
+      console.error(`IMPORTANT: Back up ${resolve(args.keyDir, AUTHORSHIP_PRIVATE_KEY_FILENAME)} securely. If this is a sandbox, the key may be lost when the sandbox is released.`);
+    }
+  }
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
