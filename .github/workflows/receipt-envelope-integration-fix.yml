@@ -1,0 +1,67 @@
+name: Apply Receipt Envelope Integration Fix
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: receipt-envelope-integration-fix-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'fix/receipt-envelope-integration-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Apply deterministic integration fix
+        run: |
+          set -euo pipefail
+          python3 .github/receipt-envelope-integration-fix.py
+          rm -f .github/receipt-envelope-integration-fix.py
+          rm -f .github/workflows/receipt-envelope-integration-fix.yml
+          python3 -m py_compile \
+            apps/record_chain_intake_gateway/secure_entrypoint.py \
+            tests/test_record_chain_submit_recovery.py
+
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
+
+      - name: Run receipt integration and full Gateway tests
+        env:
+          PYTHONPATH: apps/record_chain_intake_gateway
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q \
+            tests/test_record_chain_submit_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py
+          python3 -m pytest -q apps/record_chain_intake_gateway/tests
+
+      - name: Commit final code only
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          test ! -e .github/receipt-envelope-integration-fix.py
+          test ! -e .github/workflows/receipt-envelope-integration-fix.yml
+          git config user.name 'trinity-deep-audit-bot'
+          git config user.email 'actions@github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'fix: bind protected receipt envelope verification flags'
+          test -z "$(git status --porcelain)"
+          git push origin "HEAD:${HEAD_BRANCH}"
