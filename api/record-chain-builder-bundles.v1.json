@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-builder-bundles.v1",
   "status": "active",
-  "updated_at": "2026-08-03T02:00:00Z",
+  "updated_at": "2026-08-03T04:05:00Z",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
@@ -11,11 +11,15 @@
     "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
-      "sha256": "f9d390221c6edef3c252ce00077e940f6c2d12638dec6ee7ab9e545816111c4d",
-      "size_bytes": 10355,
+      "sha256": "190dde5c1d7f9469fb2880eb617c6218ddd654725bd64246f9e2807df1c738e1",
+      "size_bytes": 11853,
       "read_only_recovery": true,
       "maximum_submit_posts": 1,
-      "must_match_sha256_and_size_before_distribution": true
+      "must_match_sha256_and_size_before_distribution": true,
+      "stored_submission_hash_verified": true,
+      "idempotency_index_binding_verified": true,
+      "http_429_recovery_attempts": 1,
+      "request_timeout_bounded": true
     },
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
