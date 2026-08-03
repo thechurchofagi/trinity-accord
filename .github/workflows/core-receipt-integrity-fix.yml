@@ -31,7 +31,9 @@ jobs:
         run: |
           set -euo pipefail
           python3 .github/core-receipt-integrity-fix.py
+          python3 .github/core-receipt-test-fixtures-fix.py
           rm -f .github/core-receipt-integrity-fix.py
+          rm -f .github/core-receipt-test-fixtures-fix.py
           rm -f .github/workflows/core-receipt-integrity-fix.yml
           python3 -m py_compile apps/record_chain_intake_gateway/app.py
 
@@ -44,6 +46,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m pytest \
+            apps/record_chain_intake_gateway/tests/test_receipt.py \
             apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py \
             tests/test_record_chain_submit_recovery.py \
             -q
@@ -55,6 +58,7 @@ jobs:
         run: |
           set -euo pipefail
           test ! -e .github/core-receipt-integrity-fix.py
+          test ! -e .github/core-receipt-test-fixtures-fix.py
           test ! -e .github/workflows/core-receipt-integrity-fix.yml
           git config user.name 'trinity-deep-audit-bot'
           git config user.email 'actions@github.com'
