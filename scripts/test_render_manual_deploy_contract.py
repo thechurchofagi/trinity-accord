@@ -60,15 +60,24 @@ def main() -> int:
             errors.append("render_manual_deploy.py does not fail closed for suspended services")
         else:
             ok("render_manual_deploy.py fails closed for suspended services")
-        if "deploy_id_from_response" not in text or "deployment is unconfirmed" not in text:
-            errors.append("render_manual_deploy.py does not require a confirmed deploy ID")
+        if (
+            "deploy_id_from_response" not in text
+            or "recover_unique_deploy_id" not in text
+            or "no unique exact-commit" not in text
+        ):
+            errors.append(
+                "render_manual_deploy.py does not require a confirmed or uniquely recovered deploy ID"
+            )
         else:
-            ok("render_manual_deploy.py requires a confirmed deploy ID")
+            ok("render_manual_deploy.py requires a confirmed or uniquely recovered deploy ID")
         for marker in [
             "--commit-id",
             "--wait",
             "commitId",
             "RENDER_DEPLOY_LIVE",
+            "RENDER_DEPLOY_ID_RECOVERED",
+            "recover_unique_deploy_id",
+            "--recover-existing-since",
             "wait_for_deploy",
             "--reconcile-config",
             "EXPECTED_GATEWAY_START_COMMAND",
