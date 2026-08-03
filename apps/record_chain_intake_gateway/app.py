@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import hmac
 import json
 import logging
 import os
@@ -2068,6 +2069,163 @@ def _receipt_path_from_id(receipt_id: str) -> str:
     return f"record-chain/intake/receipts/{dt.year:04d}/{dt.month:02d}/{receipt_id}.receipt.json"
 
 
+def _verify_receipt_route_binding(
+    receipt: dict[str, Any],
+    *,
+    receipt_id: str,
+    receipt_path: str,
+) -> None:
+    """Bind a receipt body to the requested core-app route and canonical paths."""
+    if not isinstance(receipt, dict):
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_NOT_OBJECT",
+                "message": "Receipt JSON root is not an object.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    if receipt.get("server_receipt_id") != receipt_id:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_ID_BINDING_INVALID",
+                "message": "Receipt server_receipt_id does not match the requested receipt ID.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    if receipt.get("receipt_path") != receipt_path:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_PATH_BINDING_INVALID",
+                "message": "Receipt receipt_path does not match its canonical durable path.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    record_type = receipt.get("record_type")
+    if not isinstance(record_type, str) or record_type not in ALLOWED_RECORD_TYPES:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_RECORD_TYPE_INVALID",
+                "message": "Receipt record_type is not an accepted formal record type.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    match = re.fullmatch(r"rcg-(\d{4})(\d{2})\d{2}-[a-f0-9]{12}(?:[a-f0-9]{12})?", receipt_id)
+    if match is None:
+        raise HTTPException(status_code=500, detail={"code": "RECEIPT_ID_BINDING_INVALID"})
+    date_prefix = f"{match.group(1)}/{match.group(2)}"
+    expected_submission_path = (
+        f"record-chain/intake/submissions/{date_prefix}/{receipt_id}.submission.json"
+    )
+    expected_pending_path = f"record-chain/pending/{receipt_id}.{record_type}.pending.json"
+    if receipt.get("intake_submission_path") != expected_submission_path:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_SUBMISSION_PATH_BINDING_INVALID",
+                "message": "Receipt intake_submission_path is not canonically bound.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    if receipt.get("pending_file_path") != expected_pending_path:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_PENDING_PATH_BINDING_INVALID",
+                "message": "Receipt pending_file_path is not canonically bound.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+
+
+async def _verify_receipt_stored_submission(
+    receipt: dict[str, Any],
+    *,
+    receipt_id: str,
+    receipt_path: str,
+) -> None:
+    """Re-read and canonical-hash the persisted submission referenced by a receipt."""
+    submission_path = receipt.get("intake_submission_path")
+    expected_sha256 = receipt.get("stored_submission_sha256")
+    if not isinstance(submission_path, str) or not submission_path:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_PATH_MISSING",
+                "message": "Receipt does not identify a persisted submission path.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    if not isinstance(expected_sha256, str) or not re.fullmatch(r"[a-f0-9]{64}", expected_sha256):
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_HASH_INVALID",
+                "message": "Receipt stored_submission_sha256 is missing or invalid.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+            },
+        )
+    submission_text = await get_file_text(submission_path)
+    if submission_text is None:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_MISSING",
+                "message": "Receipt points to a persisted submission that is not visible.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "submission_path": submission_path,
+            },
+        )
+    try:
+        stored_submission = parse_json_strict(submission_text)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_INVALID_JSON",
+                "message": f"Persisted submission is not strict JSON: {exc}",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "submission_path": submission_path,
+            },
+        ) from exc
+    if not isinstance(stored_submission, dict):
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_NOT_OBJECT",
+                "message": "Persisted submission JSON root is not an object.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "submission_path": submission_path,
+            },
+        )
+    actual_sha256 = sha256_canonical_json(stored_submission)
+    if not hmac.compare_digest(actual_sha256, expected_sha256):
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "code": "RECEIPT_STORED_SUBMISSION_HASH_MISMATCH",
+                "message": "Persisted submission canonical SHA-256 does not match the immutable receipt.",
+                "receipt_id": receipt_id,
+                "receipt_path": receipt_path,
+                "submission_path": submission_path,
+            },
+        )
+
+
 def _record_chain_record_sha256(record: dict[str, Any]) -> str:
     """Recompute the canonical Record-Chain record hash (newline included)."""
     material = dict(record)
@@ -2142,6 +2300,9 @@ async def _build_receipt_envelope(
     receipt: dict[str, Any],
     receipt_id: str,
     receipt_path: str,
+    *,
+    receipt_url_binding_verified: bool,
+    stored_submission_hash_verified: bool,
     envelope_warnings: list[str | dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Build a receipt envelope without overstating unverifiable final status."""
@@ -2204,6 +2365,8 @@ async def _build_receipt_envelope(
         "receipt_id": receipt_id,
         "receipt_path": receipt_path,
         "receipt_hash_verified": True,
+        "receipt_url_binding_verified": receipt_url_binding_verified,
+        "stored_submission_hash_verified": stored_submission_hash_verified,
         "final_status": {
             "append_status": append_status,
             "final_record_id": final_record_id,
@@ -2256,8 +2419,24 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                         "receipt_path": receipt_path,
                     },
                 )
+            _verify_receipt_route_binding(
+                receipt,
+                receipt_id=receipt_id,
+                receipt_path=receipt_path,
+            )
+            await _verify_receipt_stored_submission(
+                receipt,
+                receipt_id=receipt_id,
+                receipt_path=receipt_path,
+            )
             _cache_receipt(receipt_id, receipt, ephemeral=False)
-            return await _build_receipt_envelope(receipt, receipt_id, receipt_path)
+            return await _build_receipt_envelope(
+                receipt,
+                receipt_id,
+                receipt_path,
+                receipt_url_binding_verified=True,
+                stored_submission_hash_verified=True,
+            )
     except HTTPException:
         # Re-raise HTTPExceptions (integrity errors) — do not swallow
         raise
@@ -2289,6 +2468,11 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                     "receipt_id": receipt_id,
                 },
             )
+        _verify_receipt_route_binding(
+            cached,
+            receipt_id=receipt_id,
+            receipt_path=receipt_path,
+        )
         envelope_warnings: list[dict[str, Any]] = []
         if receipt_id in _ephemeral_receipt_ids:
             envelope_warnings.append({
@@ -2298,10 +2482,19 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
                 "retryable": False,
             })
         if backend_error is None:
+            if receipt_id not in _ephemeral_receipt_ids:
+                envelope_warnings.append({
+                    "code": "RECEIPT_DURABLE_ARTIFACT_NOT_VISIBLE_RETURNED_MEMORY_CACHE",
+                    "message": "The durable receipt artifact was not visible; a route-bound, hash-verified memory cache entry was returned without stored-submission verification.",
+                    "receipt_path": receipt_path,
+                    "retryable": True,
+                })
             return await _build_receipt_envelope(
                 cached,
                 receipt_id,
                 receipt_path,
+                receipt_url_binding_verified=True,
+                stored_submission_hash_verified=False,
                 envelope_warnings=envelope_warnings or None,
             )
         # Backend errored but we have verified cache — return cache with warning.
@@ -2316,6 +2509,8 @@ async def get_receipt(receipt_id: str) -> dict[str, Any]:
             cached,
             receipt_id,
             receipt_path,
+            receipt_url_binding_verified=True,
+            stored_submission_hash_verified=False,
             envelope_warnings=envelope_warnings,
         )
 

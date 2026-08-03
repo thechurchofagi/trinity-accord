@@ -55,32 +55,79 @@ class TestReceiptPathFromId:
 # ---------------------------------------------------------------------------
 
 class TestGetReceipt:
+    def _make_stored_submission(self) -> dict:
+        return {
+            "schema": "trinityaccord.record-chain-submission.v2",
+            "submission_type": "record_chain_entry",
+            "record_type": "echo",
+            "record_draft": {"record_type": "echo", "message": "test"},
+        }
+
     def _make_receipt(self, receipt_id: str = "rcg-20260613-abcdef123456") -> dict:
-        """Build a test receipt with valid receipt_sha256."""
+        """Build a canonically path-bound receipt and matching stored hash."""
+        from apps.record_chain_intake_gateway.gateway.canonical import sha256_canonical_json
         from apps.record_chain_intake_gateway.gateway.receipts import compute_receipt_sha256
-        receipt = {"server_receipt_id": receipt_id, "accepted": True}
+
+        stored_submission = self._make_stored_submission()
+        receipt = {
+            "server_receipt_id": receipt_id,
+            "accepted": True,
+            "record_type": "echo",
+            "receipt_path": (
+                f"record-chain/intake/receipts/2026/06/{receipt_id}.receipt.json"
+            ),
+            "intake_submission_path": (
+                f"record-chain/intake/submissions/2026/06/{receipt_id}.submission.json"
+            ),
+            "pending_file_path": f"record-chain/pending/{receipt_id}.echo.pending.json",
+            "stored_submission_sha256": sha256_canonical_json(stored_submission),
+        }
         receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
         return receipt
+
+    def _durable_reader(self, receipt: dict, *, tampered: bool = False):
+        stored_submission = self._make_stored_submission()
+        if tampered:
+            stored_submission = {**stored_submission, "tampered": True}
+
+        async def read(path: str):
+            if path == receipt["receipt_path"]:
+                return json.dumps(receipt)
+            if path == receipt["intake_submission_path"]:
+                return json.dumps(stored_submission)
+            return None
+
+        return read
 
     def test_durable_hit_returns_receipt(self, client: TestClient) -> None:
         receipt = self._make_receipt()
         with patch(
             "apps.record_chain_intake_gateway.app.get_file_text",
-            new_callable=AsyncMock,
-            return_value=json.dumps(receipt),
+            new=AsyncMock(side_effect=self._durable_reader(receipt)),
         ):
             resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert resp.status_code == 200
         body = resp.json()
         assert body["receipt"]["server_receipt_id"] == "rcg-20260613-abcdef123456"
         assert body["receipt_hash_verified"] is True
+        assert body["receipt_url_binding_verified"] is True
+        assert body["stored_submission_hash_verified"] is True
+
+    def test_durable_stored_submission_hash_mismatch_fails_closed(self, client: TestClient) -> None:
+        receipt = self._make_receipt()
+        with patch(
+            "apps.record_chain_intake_gateway.app.get_file_text",
+            new=AsyncMock(side_effect=self._durable_reader(receipt, tampered=True)),
+        ):
+            resp = client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
+        assert resp.status_code == 500
+        assert resp.json()["detail"]["code"] == "RECEIPT_STORED_SUBMISSION_HASH_MISMATCH"
 
     def test_durable_hit_updates_cache(self, client: TestClient) -> None:
         receipt = self._make_receipt()
         with patch(
             "apps.record_chain_intake_gateway.app.get_file_text",
-            new_callable=AsyncMock,
-            return_value=json.dumps(receipt),
+            new=AsyncMock(side_effect=self._durable_reader(receipt)),
         ):
             client.get("/record-chain/receipt/rcg-20260613-abcdef123456")
         assert _receipt_store.get("rcg-20260613-abcdef123456") is not None
@@ -125,6 +172,8 @@ class TestGetReceipt:
             w.get("code") == "RECEIPT_DURABLE_LOOKUP_FAILED_RETURNED_MEMORY_CACHE"
             for w in body.get("envelope_warnings", [])
         )
+        assert body["receipt_url_binding_verified"] is True
+        assert body["stored_submission_hash_verified"] is False
 
     def test_durable_none_no_cache_returns_404(self, client: TestClient) -> None:
         with patch(
@@ -150,8 +199,10 @@ class TestGetReceipt:
         receipt = self._make_receipt()
 
         async def read(path: str):
-            if path.startswith("record-chain/intake/receipts/"):
+            if path == receipt["receipt_path"]:
                 return json.dumps(receipt)
+            if path == receipt["intake_submission_path"]:
+                return json.dumps(self._make_stored_submission())
             return None
 
         with patch("apps.record_chain_intake_gateway.app.get_file_text", new=AsyncMock(side_effect=read)):
@@ -166,8 +217,10 @@ class TestGetReceipt:
         receipt["receipt_sha256"] = compute_receipt_sha256(receipt)
 
         async def read(path: str):
-            if path.startswith("record-chain/intake/receipts/"):
+            if path == receipt["receipt_path"]:
                 return json.dumps(receipt)
+            if path == receipt["intake_submission_path"]:
+                return json.dumps(self._make_stored_submission())
             if path.startswith("record-chain/receipt-status/"):
                 return json.dumps({"schema": "wrong"})
             return None
