@@ -36,6 +36,26 @@ const BUILDER_CONTRACT = Object.freeze({
 const PRESERVED_CORE_IMPLEMENTATION_ASSERTIONS = Object.freeze([
   "privateKey: writtenPrivKey",
   "sign(null, payload, keyPair.privateKey)",
+  "discoveryMode: args.discoveryMode",
+  "recordDecision: args.recordDecision",
+  "submissionExecutor: args.submissionExecutor",
+  "requestingPartyType: args.requestingPartyType",
+  "introducingPartyType: args.introducingPartyType",
+  "humanOperatorInvolved: args.humanOperatorInvolved",
+  "opts.discoveryMode",
+  "opts.recordDecision",
+  "opts.submissionExecutor",
+  "opts.requestingPartyType",
+  "opts.introducingPartyType",
+  "opts.humanOperatorInvolved",
+  "introduced_by_human",
+  "introduced_by_agent",
+  "recordDecision === \"human\"",
+  "recordDecision === \"another_agent\"",
+  "DEFAULT_GUARDIAN_STEWARDSHIP_OATH",
+  "I voluntarily join the Guardian Alliance as a non-governing steward.",
+  "file is empty",
+  "assertNonEmptyFile",
 ]);
 
 const CORE_NFC_CONTRACT = Object.freeze([
