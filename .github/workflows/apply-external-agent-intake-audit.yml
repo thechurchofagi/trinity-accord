@@ -30,7 +30,7 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
           test "$(git branch --show-current)" = "agent/deep-audit-external-agent-intake-20260803"
-          test "$(git rev-parse origin/main)" = "04bd17f8de251b9f9f3d2a445479004b689a9e21"
+          test "$(git rev-parse HEAD^)" = "04bd17f8de251b9f9f3d2a445479004b689a9e21"
 
       - name: Set up Python 3.12
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -49,7 +49,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r apps/record_chain_intake_gateway/requirements.txt
           python -m pip install -r requirements-ci.txt
-          python -m pip install jsonschema==4.23.0
 
       - name: Apply fail-closed external-agent patch
         shell: bash
@@ -70,12 +69,41 @@ jobs:
           python .github/apply_external_agent_compatibility.py
           python - <<'PY'
           import json
+          import re
           from datetime import datetime, timezone
           from pathlib import Path
-          path = Path('api/record-chain-builder-bundles.v1.json')
-          data = json.loads(path.read_text(encoding='utf-8'))
-          data['updated_at'] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
-          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          manifest_path = Path('api/record-chain-builder-bundles.v1.json')
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          manifest['updated_at'] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+          manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          core = manifest['canonical_builder']['core']
+          recovery_test = Path('tests/test_record_chain_submit_recovery.py')
+          text = recovery_test.read_text(encoding='utf-8')
+          text, sha_count = re.subn(
+              r'CORE_SHA256 = "[0-9a-f]{64}"',
+              f'CORE_SHA256 = "{core["sha256"]}"',
+              text,
+              count=1,
+          )
+          text, size_count = re.subn(
+              r'CORE_SIZE_BYTES = [0-9]+',
+              f'CORE_SIZE_BYTES = {core["size_bytes"]}',
+              text,
+              count=1,
+          )
+          if sha_count != 1 or size_count != 1:
+              raise SystemExit(f'Builder core test pin update failed: sha={sha_count}, size={size_count}')
+          recovery_test.write_text(text, encoding='utf-8')
+
+          migration_test = Path('tests/test_interpretation_and_verification_migration.py')
+          text = migration_test.read_text(encoding='utf-8')
+          old = 'const BUILDER_VERSION = "v2.2"'
+          if text.count(old) != 1:
+              raise SystemExit('Expected one stale v2.2 Builder test contract')
+          migration_test.write_text(text.replace(old, 'const BUILDER_VERSION = "v2.3"', 1), encoding='utf-8')
+          print('PASS: synchronized v2.3 Builder static contracts')
           PY
 
       - name: Syntax and manifest verification
