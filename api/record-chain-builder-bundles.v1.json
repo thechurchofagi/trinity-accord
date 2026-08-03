@@ -6,9 +6,17 @@
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "1ca854fa485267fab97b32258b0da60980c699e477f3b35e54826b46ea68f7ce",
-    "size_bytes": 11220,
-    "architecture": "verified_bootstrap_wrapper_v1",
+    "sha256": "a5b78f4e83ce6bbde45f53b251f663a0b2b9515b632bbe85a35a355f62b42568",
+    "size_bytes": 10575,
+    "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
+    "recovery_wrapper": {
+      "url": "/downloads/record-chain-builder-recovery.mjs",
+      "sha256": "f9d390221c6edef3c252ce00077e940f6c2d12638dec6ee7ab9e545816111c4d",
+      "size_bytes": 10355,
+      "read_only_recovery": true,
+      "maximum_submit_posts": 1,
+      "must_match_sha256_and_size_before_distribution": true
+    },
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
       "sha256": "6b81d5e855d73db9e9b20dd756ac97ab72a55352589d06c16837779fdf3d0378",
@@ -80,12 +88,14 @@
       "name": "canonical_public_site_manifest_verified",
       "url": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
       "verify_with": "canonical_builder.sha256_and_size_bytes",
+      "recovery_wrapper_acquisition": "repository_local_manifest_pinned",
       "core_acquisition": "automatic_and_pinned"
     },
     {
       "name": "github_raw_manifest_verified_fallback",
       "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
       "verify_with": "canonical_builder.sha256_and_size_bytes",
+      "recovery_wrapper_acquisition": "repository_local_manifest_pinned",
       "core_acquisition": "automatic_and_pinned"
     }
   ]
