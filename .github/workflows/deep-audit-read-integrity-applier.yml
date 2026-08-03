@@ -1,0 +1,94 @@
+name: Apply Deep Audit Read Integrity Patch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deep-audit-read-integrity-applier-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'agent/deep-audit-read-integrity-20260803' &&
+      github.event.pull_request.head.sha == '7dbf5385c5b81a25a41a2e4c573d3a2ece9f4fe9'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact patch branch head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Reconstruct reviewed patch
+        run: |
+          set -euo pipefail
+          cat .github/deep-audit-patch/part-*.b64 | base64 --decode > "$RUNNER_TEMP/deep-audit-patch.tar.gz"
+          printf '%s  %s\n' \
+            '370e51677e617153b334bb05a58ae6c1d9f4db1b08ab0610d3f76c16a38964ce' \
+            "$RUNNER_TEMP/deep-audit-patch.tar.gz" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/deep-audit-patch.tar.gz" -C .
+          rm -rf .github/deep-audit-patch
+          rm -f .github/workflows/deep-audit-read-integrity-applier.yml
+
+      - name: Validate reconstructed source
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            apps/record_chain_intake_gateway/secure_entrypoint.py \
+            tests/test_record_chain_submit_recovery.py
+          node --check downloads/record-chain-builder-recovery.mjs
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          manifest = json.loads(Path('api/record-chain-builder-bundles.v1.json').read_text())
+          recovery = Path('downloads/record-chain-builder-recovery.mjs').read_bytes()
+          declared = manifest['canonical_builder']['recovery_wrapper']
+          assert declared['sha256'] == hashlib.sha256(recovery).hexdigest()
+          assert declared['size_bytes'] == len(recovery)
+          for path in (
+              'api/record-chain-intake-gateway.v1.json',
+              'api/record-chain-receipt-response.v1.json',
+          ):
+              json.loads(Path(path).read_text())
+          PY
+
+      - name: Install targeted test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run deep-audit regression tests
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q \
+            tests/test_record_chain_submit_recovery.py \
+            tests/test_audit_hardening_20260802.py \
+            tests/test_machine_entry_runtime_alignment.py \
+            tests/test_record_chain_builder_layers.py
+
+      - name: Commit only final reviewed files
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          test ! -e .github/deep-audit-patch
+          test ! -e .github/workflows/deep-audit-read-integrity-applier.yml
+          git config user.name 'trinity-deep-audit-bot'
+          git config user.email 'actions@github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'fix: harden receipt and ambiguous-submit read integrity'
+          if [ -n "$(git status --porcelain)" ]; then
+            echo '::error::Worktree is not clean after final patch commit.'
+            git status --short
+            exit 1
+          fi
+          git push origin "HEAD:${HEAD_BRANCH}"
