@@ -162,14 +162,7 @@ NEW_HISTORICAL_ASSERTION = (
     '    assert "compatibility" in recovery\n'
 )
 
-OLD_EXECUTION_SETUP = '''    module = load_module()
-    module.ROOT = tmp_path
-    for name, relative in PATHS.items():
-        setattr(module, name, tmp_path / relative)
-
-    assert module.main() == 0
-'''
-NEW_EXECUTION_SETUP = '''    auth_path = tmp_path / PATHS["AUTH"]
+EXECUTION_AUTH_SETUP = '''    auth_path = tmp_path / PATHS["AUTH"]
     legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
     legacy_auth["sequence"] = 2
     legacy_auth["status"] = "consumed"
@@ -178,7 +171,9 @@ NEW_EXECUTION_SETUP = '''    auth_path = tmp_path / PATHS["AUTH"]
         encoding="utf-8",
     )
 
-    module = load_module()
+'''
+
+EXECUTION_MODULE_SETUP = '''    module = load_module()
     module.ROOT = tmp_path
     for name, relative in PATHS.items():
         setattr(module, name, tmp_path / relative)
@@ -231,6 +226,29 @@ def patch_file(path: Path, old: str, new: str, *, expected_count: int = 1) -> No
     path.write_text(updated, encoding="utf-8")
 
 
+def normalize_execution_setup(text: str) -> str:
+    """Keep exactly one legacy authorization fixture before module execution.
+
+    The old generic replacement was not idempotent because its old anchor was a
+    suffix of the replacement. Each invocation therefore nested another fixture
+    into the already-patched test source. Normalize structurally instead: remove
+    every exact fixture copy, require one module-execution anchor, then insert one
+    fixture immediately before it.
+    """
+    without_duplicates = text.replace(EXECUTION_AUTH_SETUP, "")
+    observed = without_duplicates.count(EXECUTION_MODULE_SETUP)
+    if observed != 1:
+        raise SystemExit(
+            "preservation execution-test module anchor count mismatch: "
+            f"expected=1 observed={observed}"
+        )
+    return without_duplicates.replace(
+        EXECUTION_MODULE_SETUP,
+        EXECUTION_AUTH_SETUP + EXECUTION_MODULE_SETUP,
+        1,
+    )
+
+
 def normalize_values(value: object) -> list[str]:
     if not isinstance(value, list):
         raise SystemExit("recovery index limitations are invalid")
@@ -269,7 +287,16 @@ def main() -> int:
         NEW_RECOVERY_STATUS_ASSERTION,
     )
     patch_file(SEMANTICS_TEST, OLD_HISTORICAL_ASSERTION, NEW_HISTORICAL_ASSERTION)
-    patch_file(SEMANTICS_EXEC_TEST, OLD_EXECUTION_SETUP, NEW_EXECUTION_SETUP)
+
+    execution_source = SEMANTICS_EXEC_TEST.read_text(encoding="utf-8")
+    normalized_execution = normalize_execution_setup(execution_source)
+    compile(normalized_execution, str(SEMANTICS_EXEC_TEST), "exec")
+    SEMANTICS_EXEC_TEST.write_text(normalized_execution, encoding="utf-8")
+    verified_execution = SEMANTICS_EXEC_TEST.read_text(encoding="utf-8")
+    if verified_execution != normalize_execution_setup(verified_execution):
+        raise SystemExit("preservation execution-test repair is not idempotent")
+    if verified_execution.count(EXECUTION_AUTH_SETUP) != 1:
+        raise SystemExit("preservation execution-test fixture was not deduplicated")
 
     index = read_json(INDEX)
     index["limitations"] = normalize_values(index.get("limitations"))
