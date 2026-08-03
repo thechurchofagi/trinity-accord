@@ -62,10 +62,11 @@ Choose the context level supported by the URLs actually loaded. A larger label i
 
 List the context sources loaded and state whether they are sufficient for the selected action. If they are not sufficient, use a context-insufficient notice.
 
+<a id="provenance"></a>
 <a id="decision-autonomy"></a>
-## Decision autonomy
+## Decision autonomy and requester provenance
 
-Describe who decided to create the record and whether a human or another agent requested it. Do not claim self-decision when an external request caused the action.
+Describe who decided to create the record, who requested it, and whether a human or another agent caused the action. Keep the decision source, requesting-party type, and requested-by booleans internally consistent. Do not claim self-decision when an external request caused the action.
 
 <a id="discovery-context"></a>
 ## Discovery and introduction context

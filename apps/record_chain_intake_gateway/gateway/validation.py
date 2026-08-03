@@ -631,6 +631,32 @@ def validate_provenance_semantics(draft: dict[str, Any]) -> list[Diagnostic]:
                 retry_allowed=True,
             ))
 
+        expected_request_flag = {
+            "human": ("was_record_creation_requested_by_human", requested_by_human),
+            "agent": ("was_record_creation_requested_by_another_agent", requested_by_agent),
+        }.get(requesting_party)
+        if expected_request_flag is not None and expected_request_flag[1] is not True:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_REQUEST_FLAG_MISMATCH",
+                severity="error",
+                field=f"record_draft.decision_autonomy_context.{expected_request_flag[0]}",
+                message=f"requesting_party_type={requesting_party!r} requires {expected_request_flag[0]}=true.",
+                meaning="The structured request party and request booleans must describe the same event.",
+                suggested_fix="Rebuild with the current Builder and explicit provenance options.",
+                retry_allowed=True,
+            ))
+        expected_party = {"human": "human", "another_agent": "agent", "system_policy": "system"}.get(who_decided)
+        if expected_party is not None and requesting_party != expected_party:
+            diagnostics.append(_make_diagnostic(
+                code="PROVENANCE_DECISION_REQUEST_PARTY_MISMATCH",
+                severity="error",
+                field="record_draft.decision_autonomy_context.requesting_party_type",
+                message=f"who_decided_to_create_this_record={who_decided!r} requires requesting_party_type={expected_party!r}.",
+                meaning="Decision and request-party projections must not contradict each other.",
+                suggested_fix="Use mixed when an external party initiated the task but the participant made substantive independent choices; otherwise align the exact party type.",
+                retry_allowed=True,
+            ))
+
     if isinstance(execution, dict) and isinstance(human_operator_context, dict):
         executor = execution.get("who_executed_the_submission")
         human_involved = human_operator_context.get("human_operator_involved")
@@ -1282,6 +1308,39 @@ def validate_record_type_specific_content(record_type: str, draft: dict[str, Any
             vlevel = str(content.get("verification_level", "")).strip().upper()
             if vlevel not in _PUBLIC_VERIFICATION_LEVELS:
                 missing("VERIFICATION_LEVEL_NOT_ENABLED", "draft.verification_content.verification_level", "Public Record-Chain verification intake currently accepts only V0-V5. V6+ strict evidence is reserved for a future/internal route.")
+
+            claim_model = content.get("verification_claim_model")
+            digital_profiles = {"context_only", "reference_checked", "integrity_checked", "independent_reproduction", "full_public_digital"}
+            relationships = {"defines_canonical_text", "references", "indexes", "hashes", "signs_digest", "timestamps_digest", "mirrors_bytes", "witnesses_statement", "notarially_records_process", "provides_context", "records_reception"}
+            physical_states = {"none", "public_media_review", "remote_live_witness", "onsite_observation", "forensic_examination"}
+            witness_states = {"none", "notarial_scope", "independent_report", "institutional_attestation", "regulatory_or_court_record"}
+            coverage_states = {"single_target", "component_subset", "multi_component", "all_declared_public_digital_targets"}
+            if not isinstance(claim_model, dict):
+                missing("MISSING_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model", "New verification records require the multidimensional verification_claim_model")
+            else:
+                if claim_model.get("schema") != "trinityaccord.verification-claim-model.v1":
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.schema", "verification_claim_model.schema must be trinityaccord.verification-claim-model.v1")
+                if claim_model.get("digital_profile") not in digital_profiles:
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.digital_profile", "Unsupported digital_profile")
+                checked = claim_model.get("relationships_checked")
+                if not isinstance(checked, list) or not checked or any(item not in relationships for item in checked):
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.relationships_checked", "relationships_checked must be a non-empty list of supported relationship ids")
+                if claim_model.get("physical_observation") not in physical_states:
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.physical_observation", "Unsupported physical_observation")
+                if claim_model.get("external_witness") not in witness_states:
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.external_witness", "Unsupported external_witness")
+                if claim_model.get("coverage_scope") not in coverage_states:
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.coverage_scope", "Unsupported coverage_scope")
+                for list_field in ("limitations", "claims_not_made"):
+                    values = claim_model.get(list_field)
+                    if not isinstance(values, list) or not values or any(not isinstance(item, str) or not item.strip() for item in values):
+                        missing("INVALID_VERIFICATION_CLAIM_MODEL", f"draft.verification_content.verification_claim_model.{list_field}", f"{list_field} must be a non-empty list of non-empty strings")
+                if not isinstance(claim_model.get("corrections_or_supersession_checked"), bool):
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.corrections_or_supersession_checked", "corrections_or_supersession_checked must be boolean")
+                if str(claim_model.get("legacy_v_level", "")).strip().upper() != vlevel:
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.legacy_v_level", "legacy_v_level must match verification_level")
+                if claim_model.get("legacy_v_level_role") != "builder_compatibility_only":
+                    missing("INVALID_VERIFICATION_CLAIM_MODEL", "draft.verification_content.verification_claim_model.legacy_v_level_role", "legacy_v_level_role must be builder_compatibility_only")
     elif record_type == "guardian_application":
         content = draft.get("guardian_application_content")
         if not isinstance(content, dict) or not content.get("requested_guardian_identifier") or not content.get("guardian_public_key_sha256") or not content.get("guardian_stewardship_oath"):
@@ -1530,6 +1589,31 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
 
     context_readiness = draft.get("context_readiness") if isinstance(draft.get("context_readiness"), dict) else {}
     loaded_urls = context_readiness.get("loaded_context_urls") if isinstance(context_readiness, dict) else None
+    if isinstance(loaded_urls, list):
+        normalized_urls: list[str] = []
+        for index, value in enumerate(loaded_urls):
+            valid = isinstance(value, str) and value == value.strip() and bool(value)
+            parsed = urllib.parse.urlsplit(value) if valid else None
+            if not valid or parsed is None or parsed.scheme not in {"http", "https"} or not parsed.netloc or any(ch.isspace() for ch in value):
+                diagnostics.append(_make_diagnostic(
+                    code="INVALID_LOADED_CONTEXT_URL",
+                    severity="error",
+                    field=f"draft.context_readiness.loaded_context_urls[{index}]",
+                    message="Each loaded_context_urls item must be a trimmed absolute http/https URL.",
+                    meaning="Context provenance must identify the actual public resource without hidden whitespace or ambiguous relative paths.",
+                    suggested_fix="Trim the URL and provide its complete http:// or https:// address.",
+                ))
+                continue
+            normalized_urls.append(value)
+        if len(normalized_urls) != len(set(normalized_urls)):
+            diagnostics.append(_make_diagnostic(
+                code="DUPLICATE_LOADED_CONTEXT_URL",
+                severity="error",
+                field="draft.context_readiness.loaded_context_urls",
+                message="loaded_context_urls must not contain duplicate URLs.",
+                meaning="Repeated values do not establish additional context and make provenance ambiguous.",
+                suggested_fix="Remove duplicate URLs and rebuild with the current Builder.",
+            ))
     if cc_level >= 3 and (not isinstance(loaded_urls, list) or len(loaded_urls) == 0):
         diagnostics.append(_make_diagnostic(
             code="CC3_REQUIRES_LOADED_CONTEXT_URLS",

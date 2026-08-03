@@ -59,6 +59,60 @@ def test_migration_executes_twice_idempotently_on_current_consumed_state(tmp_pat
         encoding="utf-8",
     )
 
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    auth_path = tmp_path / PATHS["AUTH"]
+    legacy_auth = json.loads(auth_path.read_text(encoding="utf-8"))
+    legacy_auth["sequence"] = 2
+    legacy_auth["status"] = "consumed"
+    auth_path.write_text(
+        json.dumps(legacy_auth, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     module = load_module()
     module.ROOT = tmp_path
     for name, relative in PATHS.items():

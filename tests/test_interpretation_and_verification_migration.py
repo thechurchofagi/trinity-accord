@@ -87,7 +87,7 @@ def test_new_verification_model_separates_physical_and_witness_dimensions() -> N
 def test_builder_emits_multidimensional_verification_claim_model() -> None:
     builder = (ROOT / "downloads/record-chain-builder.mjs").read_text(encoding="utf-8")
     required_fragments = [
-        'const BUILDER_VERSION = "v2.2"',
+        'const BUILDER_VERSION = "v2.3"',
         "verification_claim_model",
         "digital_profile",
         "relationships_checked",

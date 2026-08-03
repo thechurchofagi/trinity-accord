@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Public contract entrypoint for the Trinity Accord Record-Chain Builder.
- * The recovery/bootstrap layer and the byte-preserved v2.2 core are loaded
+ * The recovery/bootstrap layer and the integrity-pinned v2.3 core are loaded
  * only after this immutable oath and verification surface is declared.
  */
 
@@ -9,7 +9,7 @@ const OATH_POLICY = {"schema":"trinityaccord.record-chain-oath-policy.v1","statu
 const OATH_POLICY_SHA256 = "62883b5db6b8446b4f0e55fb4d61a8dadc3d372a7727f66db55582cd06d4a808";
 
 const BUILDER_CONTRACT = Object.freeze({
-  source_declaration: 'const BUILDER_VERSION = "v2.2"',
+  source_declaration: 'const BUILDER_VERSION = "v2.3"',
   command: "print-oath",
   verification_claim_model: Object.freeze({
     digital_profile: true,
