@@ -1,7 +1,7 @@
 name: Repository Integrity Check
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 permissions:
@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   apply-pr894-submit-recovery:
+    if: github.head_ref == 'ops/trigger-pr894-final-pr-event'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -99,7 +100,7 @@ jobs:
           COMMIT_OUTCOME: ${{ steps.commit_patch.outcome }}
         run: |
           set -euo pipefail
-          gh pr comment 894 --repo "$GITHUB_REPOSITORY" --body "## PR #894 final exact-head executor result
+          gh pr comment 894 --repo "$GITHUB_REPOSITORY" --body "## PR #894 final PR-event executor result
 
 - Workflow run: \`${GITHUB_RUN_ID}\`
 - Exact patch: \`${APPLY_OUTCOME}\`
