@@ -31,11 +31,14 @@ jobs:
         run: |
           set -euo pipefail
           python3 .github/receipt-envelope-integration-fix.py
+          python3 .github/receipt-test-order-monkeypatch-fix.py
           rm -f .github/receipt-envelope-integration-fix.py
+          rm -f .github/receipt-test-order-monkeypatch-fix.py
           rm -f .github/workflows/receipt-envelope-integration-fix.yml
           python3 -m py_compile \
             apps/record_chain_intake_gateway/secure_entrypoint.py \
-            tests/test_record_chain_submit_recovery.py
+            tests/test_record_chain_submit_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py
 
       - name: Install test dependencies
         run: python3 -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
@@ -57,6 +60,7 @@ jobs:
         run: |
           set -euo pipefail
           test ! -e .github/receipt-envelope-integration-fix.py
+          test ! -e .github/receipt-test-order-monkeypatch-fix.py
           test ! -e .github/workflows/receipt-envelope-integration-fix.yml
           git config user.name 'trinity-deep-audit-bot'
           git config user.email 'actions@github.com'
