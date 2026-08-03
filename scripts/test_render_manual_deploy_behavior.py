@@ -56,6 +56,7 @@ def invoke(
             sys.argv.append("--deploy")
         if commit_id:
             sys.argv += ["--commit-id", commit_id]
+        sys.argv += ["--deploy-id-recovery-timeout", "0"]
         if wait:
             sys.argv += [
                 "--wait",
@@ -102,9 +103,22 @@ def main() -> int:
         "suspenders": [],
         "autoDeploy": "no",
     }
-    code, _stdout, stderr, calls = invoke(active, {})
-    require(code == 1 and calls == 1, "missing deploy ID must fail after one POST")
-    require("without returning a deploy id" in stderr.lower(), "missing deploy ID failure must be explicit")
+    def accepted_without_id(path: str, _token: str, method: str = "GET", body: dict | None = None):
+        if method == "POST":
+            return {}
+        if path.endswith("/deploys?limit=20"):
+            return []
+        return {}
+
+    code, _stdout, stderr, calls = invoke(active, accepted_without_id)
+    require(
+        code == 1 and calls == 2,
+        "missing deploy ID without an exact recoverable candidate must fail after POST and one list read",
+    )
+    require(
+        "no unique exact-commit deploy" in stderr.lower(),
+        "missing deploy ID recovery failure must be explicit",
+    )
 
     code, stdout, stderr, calls = invoke(active, {"deploy": {"id": "dep-confirmed"}})
     require(code == 0 and calls == 1, "confirmed deploy response must succeed")
