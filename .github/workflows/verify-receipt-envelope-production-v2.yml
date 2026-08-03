@@ -1,0 +1,44 @@
+name: Verify Receipt Envelope Production V2
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  actions: read
+  issues: read
+
+concurrency:
+  group: verify-receipt-envelope-production-v2
+  cancel-in-progress: false
+
+jobs:
+  verify-production-readonly-v2:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'ops/verify-receipt-envelope-production-20260803'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout validation branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Bind validation to exact production main
+        env:
+          EXPECTED_MAIN_SHA: 685e14bc0d8d47d0a6999842bfbdf776b81f7544
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          actual_main_sha="$(git rev-parse refs/remotes/origin/main)"
+          echo "expected_main_sha=${EXPECTED_MAIN_SHA}"
+          echo "actual_main_sha=${actual_main_sha}"
+          test "${actual_main_sha}" = "${EXPECTED_MAIN_SHA}"
+
+      - name: Run exact-deploy GET-only production verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/verify_receipt_envelope_production_v2.py
