@@ -67,9 +67,8 @@ jobs:
             --deploy \
             --reconcile-config 2>&1 | tee "$log"
           helper_status=${PIPESTATUS[0]}
+          deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1)"
           set -e
-
-          deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1 || true)"
           if [ -n "$deploy_id" ]; then
             printf 'deploy_id=%s\n' "$deploy_id" >> "$GITHUB_OUTPUT"
           fi
