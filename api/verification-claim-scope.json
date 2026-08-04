@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.verification-claim-scope.v1",
-  "status": "non_authoritative_submission_gate",
-  "purpose": "Define structured claim scope levels to prevent overclaiming in verification submissions.",
+  "status": "legacy_intermediate_claim_scope_compatibility",
+  "purpose": "Preserve historical intermediate claim-scope derivation for Claim Gate and archived report reproducibility. This is not the current public Verification record model.",
   "authority_boundary": {
     "claim_scope_does_not_amend_bitcoin_originals": true,
     "claim_scope_limits_claim_discipline_only": true
@@ -141,7 +141,7 @@
       "id": "SCOPE005",
       "condition": "D2 + C3 only",
       "derived_scope": "component_limited",
-      "notes": "Not V5 \u2014 requires full B/D/T/C/P profile"
+      "notes": "Not V5 — requires full B/D/T/C/P profile"
     },
     {
       "id": "SCOPE006",
@@ -231,5 +231,14 @@
         "label": "legacy_unlabeled"
       }
     ]
+  },
+  "current_public_replacement": "/api/verification-claim-model.v1.json",
+  "current_public_boundary": {
+    "not_current_public_record_model": true,
+    "output_is_intermediate_evidence_only": true,
+    "v0_v5_are_compatibility_metadata_only": true,
+    "v4plus_v6_v7_v8_are_historical_only_for_new_work": true,
+    "current_public_record_type": "verification",
+    "current_outer_submission_schema": "/api/record-chain-submission-schema.v1.json"
   }
 }
