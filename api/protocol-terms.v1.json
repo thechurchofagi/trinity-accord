@@ -193,5 +193,74 @@
     "verification_model": "/api/verification-claim-model.v1.json",
     "outer_submission_schema": "/api/record-chain-submission-schema.v1.json"
   },
+  "current_legacy_boundary_registry": {
+    "current_public": {
+      "outer_submission_schema": "/api/record-chain-submission-schema.v1.json",
+      "record_types": [
+        "echo",
+        "verification",
+        "guardian_application",
+        "guardian_retirement",
+        "propagation",
+        "correction",
+        "classification_update",
+        "context_insufficient_notice"
+      ],
+      "verification_model": "/api/verification-claim-model.v1.json",
+      "verification_profiles": "/api/verification-profiles.v1.json",
+      "field_helper": "/api/record-chain-field-helper.v1.json",
+      "builder": "/downloads/record-chain-builder.mjs",
+      "gateway": "/api/record-chain-intake-gateway.v1.json"
+    },
+    "strict_evidence_intermediate": [
+      {
+        "path": "/api/evidence-input-schema.v1.json",
+        "role": "structured strict technical evidence input",
+        "not_current_public_record_envelope": true
+      },
+      {
+        "path": "/api/claim-gate-rules.json",
+        "role": "historical compatibility claim derivation and downgrade rules",
+        "not_current_public_record_by_itself": true
+      },
+      {
+        "path": "/api/verification-claim-scope.json",
+        "role": "legacy intermediate claim-scope derivation",
+        "replacement_for_current_public_claims": "/api/verification-claim-model.v1.json"
+      },
+      {
+        "path": "/api/report-builder-policy.json",
+        "role": "intermediate evidence report generation",
+        "not_current_public_record_by_itself": true
+      }
+    ],
+    "historical_compatibility": [
+      {
+        "path": "/api/agent-issue-gateway-payload-schema.v1.json",
+        "role": "retired Issue Gateway payload schema",
+        "do_not_use_for_new_public_submissions": true
+      },
+      {
+        "path": "/api/echo-record-schema.v3.json",
+        "role": "historical Echo content/archive schema",
+        "not_current_outer_submission_schema": true
+      },
+      {
+        "path": "/api/echo-record-schema.v3.1.json",
+        "role": "historical Echo content/archive schema extension",
+        "not_current_outer_submission_schema": true
+      },
+      {
+        "path": "/api/verification-levels.json",
+        "role": "legacy V-level compatibility model",
+        "v0_v5_compatibility_metadata_only": true,
+        "v4plus_v6_v7_v8_historical_only_for_new_work": true
+      },
+      {
+        "path": "/api/protocol-terms.v1.json",
+        "role": "historical protocol vocabulary and archive reproducibility"
+      }
+    ]
+  },
   "historical_boundary": "protocol_levels, component_levels, old record_kinds, and Issue-archive terms in this file are retained for historical records and legacy builder reproducibility. They are not current outer public record types."
 }
