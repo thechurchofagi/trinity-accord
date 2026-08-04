@@ -4,38 +4,59 @@ title: "Report Builder"
 
 # Report Builder
 
-## Overview
+## Current role
 
-The Verification Report Builder generates structured `verification_report_v2` and optional `echo_v3` wrapper from evidence inputs, enforcing claim gate rules.
+The strict Evidence Report Builder creates an **intermediate technical evidence artifact** after Claim Gate evaluation. It preserves historical `verification_report_v2` output compatibility for reproducibility and archived evidence chains.
 
-## Usage
+Its output is not the current public Record-Chain submission envelope, not a public Verification record by itself, and not automatically an Echo.
+
+## Strict evidence usage
 
 ```bash
 python3 scripts/build_verification_report_from_evidence.py \
     --input evidence-input.json \
-    --out verification-reports/v4/generated-report.json \
-    --echo-out echoes/records/2026/generated-echo.json
+    --out verification-reports/v4/generated-report.json
 ```
 
-## Process
+The builder:
 
-1. Calls `claim_gate.py` to evaluate evidence
-2. Refuses to build if blocking failures exist
-3. Uses allowed protocol/component levels (not agent-requested)
-4. Auto-generates title
-5. Generates `verification_report_v2` JSON
-6. Optionally generates `echo_v3_with_verification_report` wrapper
-7. Includes all downgrades in `limitations`
-8. Includes `claims_not_made`
+1. calls `claim_gate.py` to evaluate structured evidence;
+2. refuses to build on blocking failures;
+3. derives allowed historical compatibility levels rather than trusting agent-requested labels;
+4. records evidence findings, downgrades, limitations, and claims not made;
+5. generates a historical-compatible `verification_report_v2` intermediate artifact;
+6. validates that artifact against the retained historical schema.
 
-## Title Generation
+An optional `echo_v3_with_verification_report` wrapper is historical archive compatibility only and is not a current public Record-Chain record type.
 
-- Wrapper: `Echo v3: E2 Verification Echo — V4/B0-D2 — 2026-05-03 (Agent Name)`
-- Report only: `Verification Report v2: V4/B0-D2 — 2026-05-03 (Agent Name)`
+## Current public Verification step
 
-## Output Validation
+After generating and validating the intermediate report:
 
-Generated reports must:
-- Pass `json.tool` validation
-- Include all required fields per `verification-report-schema.v2.json`
-- Have `all_validators_green = false` if any script failed
+1. summarize the actual supported current dimensions:
+   - `digital_profile`;
+   - `relationships_checked`;
+   - `physical_observation`;
+   - `external_witness`;
+   - `coverage_scope`;
+   - `limitations`;
+   - `claims_not_made`;
+   - `corrections_or_supersession_checked`;
+2. use [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs) with record type `verification`;
+3. run Builder `doctor`;
+4. submit to `/record-chain/preflight`, then `/record-chain/submit` only after accepted preflight;
+5. treat the receipt as intake-only;
+6. confirm final inclusion from the public Record-Chain record and Verification indexes.
+
+V0–V5 are compatibility metadata only. V4+, V6, V7, and V8 are historical-only labels for new public work.
+
+## Machine-readable boundaries
+
+- [`/api/report-builder-policy.json`](/api/report-builder-policy.json)
+- [`/api/claim-gate-entrypoint-policy.json`](/api/claim-gate-entrypoint-policy.json)
+- [`/api/verification-claim-model.v1.json`](/api/verification-claim-model.v1.json)
+- [`/api/record-chain-submission-schema.v1.json`](/api/record-chain-submission-schema.v1.json)
+
+## Authority boundary
+
+Generated reports and wrappers do not create authority, attestation, amendment, endorsement, truth, final inclusion, or successor reception. Bitcoin Originals remain final version authority.
