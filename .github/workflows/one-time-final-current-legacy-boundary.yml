@@ -1,0 +1,234 @@
+name: One-time final current legacy boundary
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-final-current-legacy-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.head_ref == 'audit/final-current-legacy-boundary'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Apply bounded current and legacy metadata
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          from pathlib import Path
+
+          def load(path: str) -> tuple[Path, dict]:
+              p = Path(path)
+              return p, json.loads(p.read_text(encoding='utf-8'))
+
+          def write(p: Path, data: dict) -> None:
+              if 'source_digest' in data:
+                  old = str(data['source_digest'])
+                  payload = {k: v for k, v in data.items() if k != 'source_digest'}
+                  canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+                  full = hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+                  data['source_digest'] = full if len(old) == 64 else full[:16]
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          # Current full-context routing.
+          p, data = load('api/agent-required-reading.json')
+          full = data['profiles']['full_context']
+          full['reads'] = [
+              '/llms-full.txt',
+              '/agent-brief',
+              '/agent-start',
+              '/authority',
+              '/guardian-principles',
+              '/verify',
+              '/verification-materials',
+              '/independent-verification',
+              '/for-skeptical-agents',
+              '/echoes/types',
+              '/api/verification-profiles.v1.json',
+              '/api/verification-claim-model.v1.json',
+              '/api/evidence-relationship-map.v1.json',
+              '/api/context-action-profiles.v1.json',
+              '/api/record-chain-submission-schema.v1.json',
+              '/api/record-chain-field-helper.v1.json',
+              '/api/record-chain-intake-gateway.v1.json',
+              '/api/discovery-provenance-schema.json',
+              '/api/agent-required-reading.json',
+          ]
+          full['strict_evidence_optional'] = [
+              '/api/evidence-input-schema.v1.json',
+              '/api/claim-gate-rules.json',
+              '/api/report-builder-policy.json',
+          ]
+          full['historical_optional'] = [
+              '/api/verification-levels.json',
+              '/api/component-verification-levels.json',
+              '/api/protocol-verification-profiles.json',
+              '/api/echo-record-schema.v3.json',
+              '/api/echo-record-schema.v3.1.json',
+          ]
+          full['note'] = (
+              'Current full context uses the multidimensional verification and Record-Chain models. '
+              'Strict evidence inputs are conditional. Legacy V-level and Echo v3 schemas are historical compatibility only.'
+          )
+          write(p, data)
+
+          # Current core machine endpoint list.
+          p = Path('llms-full.txt')
+          text = p.read_text(encoding='utf-8')
+          old = '''- https://www.trinityaccord.org/api/verification-levels.json
+- https://www.trinityaccord.org/api/mission-governance.v1.json
+- https://www.trinityaccord.org/api/echo-value-criteria.json
+- https://www.trinityaccord.org/api/echo-archive-policy.json
+- https://www.trinityaccord.org/api/echo-record-schema.v3.1.json
+- https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json'''
+          new = '''- https://www.trinityaccord.org/api/verification-profiles.v1.json
+- https://www.trinityaccord.org/api/verification-claim-model.v1.json
+- https://www.trinityaccord.org/api/mission-governance.v1.json
+- https://www.trinityaccord.org/api/echo-value-criteria.json
+- https://www.trinityaccord.org/api/echo-archive-policy.json
+- https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json
+- https://www.trinityaccord.org/api/record-chain-field-helper.v1.json'''
+          if old not in text:
+              raise SystemExit('unexpected llms-full core endpoint block')
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          # Chronicle verification: retain historical component notation without presenting V4+ as current.
+          p = Path('chronicle-verification.md')
+          text = p.read_text(encoding='utf-8')
+          start = text.index('**Chronicle Recovery verification alone does not by itself justify a full-protocol V4+ claim.**')
+          end_marker = 'Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.\n```'
+          end = text.index(end_marker, start) + len(end_marker)
+          replacement = '''**Historical verification-model boundary:** in the retained V-level model, Chronicle Recovery alone did not justify a whole-report V4+ claim. For new public work, do not submit V4+ as a current public level. Report the current dimensions instead: `digital_profile`, `relationships_checked`, `coverage_scope`, `limitations`, `claims_not_made`, and any relevant physical-observation or external-witness state.
+
+C-level Chronicle notation may still be used as historical/component compatibility metadata. A Chronicle-only check must remain explicitly component-limited and must not imply whole-project verification or independent attestation.'''
+          text = text[:start] + replacement + text[end:]
+          text = text.replace(
+              'A verifier may perform sample recovery:',
+              'For historical/component compatibility, a verifier may describe sample recovery with C-level notation:',
+              1,
+          )
+          p.write_text(text, encoding='utf-8')
+
+          # Legacy intermediate claim-scope model.
+          p, data = load('api/verification-claim-scope.json')
+          data['status'] = 'legacy_intermediate_claim_scope_compatibility'
+          data['purpose'] = (
+              'Preserve historical intermediate claim-scope derivation for Claim Gate and archived report reproducibility. '
+              'This is not the current public Verification record model.'
+          )
+          data['current_public_replacement'] = '/api/verification-claim-model.v1.json'
+          data['current_public_boundary'] = {
+              'not_current_public_record_model': True,
+              'output_is_intermediate_evidence_only': True,
+              'v0_v5_are_compatibility_metadata_only': True,
+              'v4plus_v6_v7_v8_are_historical_only_for_new_work': True,
+              'current_public_record_type': 'verification',
+              'current_outer_submission_schema': '/api/record-chain-submission-schema.v1.json',
+          }
+          write(p, data)
+
+          # Evidence Input remains active only as a strict intermediate schema.
+          p, data = load('api/evidence-input-schema.v1.json')
+          data['title'] = 'Trinity Accord Evidence Input Schema v1 — Strict Intermediate Evidence'
+          data['description'] = (
+              'Schema for structured strict technical evidence supplied to Claim Gate. '
+              'It produces intermediate evidence artifacts, not a current public Record-Chain submission.'
+          )
+          data['x-trinityaccord-current-boundary'] = {
+              'status': 'active_strict_evidence_intermediate_schema',
+              'not_current_public_record_envelope': True,
+              'current_public_record_type': 'verification',
+              'current_outer_submission_schema': '/api/record-chain-submission-schema.v1.json',
+              'historical_requested_record_kind_values_retained_for_report_builder_compatibility': True,
+          }
+          data['properties']['requested_record_kind']['description'] = (
+              'Historical intermediate output selector used by Claim Gate/report-builder compatibility. '
+              'It is not a current public Record-Chain record_type.'
+          )
+          write(p, data)
+
+          # Explicit historical boundaries for superseded public schemas.
+          for path, kind in [
+              ('api/agent-issue-gateway-payload-schema.v1.json', 'retired_issue_gateway_payload_schema'),
+              ('api/echo-record-schema.v3.json', 'historical_echo_content_schema'),
+              ('api/echo-record-schema.v3.1.json', 'historical_echo_content_schema_extension'),
+          ]:
+              p, data = load(path)
+              data['x-trinityaccord-current-boundary'] = {
+                  'status': 'historical_compatibility_only',
+                  'historical_kind': kind,
+                  'current_outer_submission_schema': '/api/record-chain-submission-schema.v1.json',
+                  'do_not_use_as_current_public_outer_record': True,
+                  'current_public_record_types': [
+                      'echo', 'verification', 'guardian_application', 'guardian_retirement',
+                      'propagation', 'correction', 'classification_update', 'context_insufficient_notice',
+                  ],
+              }
+              write(p, data)
+
+          # Historical protocol vocabulary used by old bundles and archive records.
+          p, data = load('api/protocol-terms.v1.json')
+          data['status'] = 'historical_compatibility_vocabulary'
+          data['current_public_record_types'] = [
+              'echo',
+              'verification',
+              'guardian_application',
+              'guardian_retirement',
+              'propagation',
+              'correction',
+              'classification_update',
+              'context_insufficient_notice',
+          ]
+          data['current_public_replacements'] = {
+              'record_types': '/api/submission-types.json',
+              'verification_model': '/api/verification-claim-model.v1.json',
+              'outer_submission_schema': '/api/record-chain-submission-schema.v1.json',
+          }
+          data['historical_boundary'] = (
+              'protocol_levels, component_levels, old record_kinds, and Issue-archive terms in this file are retained '
+              'for historical records and legacy builder reproducibility. They are not current outer public record types.'
+          )
+          write(p, data)
+          PY
+
+      - name: Validate final boundary contracts
+        run: |
+          python3 scripts/validate_json_strict.py
+          python3 -m unittest tests/test_current_public_guidance_alignment.py tests/test_final_current_legacy_boundary.py
+          python3 scripts/test_public_api_metadata_completeness.py
+          python3 scripts/test_interpretation_and_verification_migration.py
+
+      - name: Remove one-time workflow and commit
+        run: |
+          rm -f .github/workflows/one-time-final-current-legacy-boundary.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add api/agent-required-reading.json llms-full.txt chronicle-verification.md \
+            api/verification-claim-scope.json api/evidence-input-schema.v1.json \
+            api/agent-issue-gateway-payload-schema.v1.json api/echo-record-schema.v3.json \
+            api/echo-record-schema.v3.1.json api/protocol-terms.v1.json \
+            .github/workflows/one-time-final-current-legacy-boundary.yml
+          git commit -m 'fix: finalize current and historical schema boundaries'
+          git push origin HEAD:${{ github.head_ref }}
