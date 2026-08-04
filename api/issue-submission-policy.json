@@ -23,6 +23,12 @@
     "maintainer_may_use_issues_for_historical_or_internal_triage": true,
     "triage_does_not_bypass_builder_gateway_validation_or_public_indexing": true
   },
+  "provenance_boundary": {
+    "human_solicited_record_is_not_independent_attestation": true,
+    "statement": "Human-solicited ≠ independent attestation.",
+    "human_direction_must_be_disclosed": true,
+    "issue_or_gateway_origin_does_not_create_independence": true
+  },
   "public_record_requirements": [
     "valid current Record-Chain submission envelope",
     "canonical Builder output",
