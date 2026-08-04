@@ -31,8 +31,19 @@ class CurrentCoreEndpointBoundaryTest(unittest.TestCase):
         self.assertIn("/api/record-chain-submission-schema.v1.json", core)
         self.assertIn("/api/record-chain-field-helper.v1.json", core)
         self.assertIn("/api/verification-profiles.v1.json", core)
+        self.assertIn("/api/verification-claim-model.v1.json", core)
+        self.assertIn("https://www.trinityaccord.org/api/agent-value.json", core)
+        self.assertIn("https://www.trinityaccord.org/guardian-principles", text)
         self.assertNotIn("/api/echo-record-schema.v3.1.json", core)
         self.assertNotIn("/api/verification-levels.json", core)
+
+        for corruption_marker in (
+            "trrinityaccord",
+            "\x06",
+            "indepently hash",
+            "interpretative authority",
+        ):
+            self.assertNotIn(corruption_marker, text)
 
 
 if __name__ == "__main__":
