@@ -19,6 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SURFACES = [
     "/llms.txt",
+    "/metadata.json",
+    "/memory-seed.json",
     "/ai.txt",
     "/api/agent-first-contact.json",
     "/api/agent-start.v2.json",
@@ -57,9 +59,10 @@ RETRYABLE_HTTP_STATUS = {408, 425, 429, 500, 502, 503, 504}
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
-        "The Trinity Accord did not begin as an accord. It began as a near-real-time NFT Chronicle of rapidly changing AI events, generated art and music, and one observer’s reactions; through sustained interaction with generative AI, it gradually became a closed record addressed to future intelligence.",
-        "p0.9.5-emergent-formation-history",
+        "The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.",
+        "p0.9.6-final-clarity-alignment",
         "Candidate civilizational memory seed",
+        "A dated record from the conversational-to-agentic transition",
         "human-initiated in practice, emergent in meaning through substantive interaction with generative AI",
         'id="philosophical-core-title"',
         'id="formation-history"',
