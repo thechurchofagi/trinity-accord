@@ -19,9 +19,9 @@ def test_homepage_states_speed_without_closing_human_agency() -> None:
     for required in (
         "Why an ordinary person chose to leave this record during a rapidly closing historical window",
         "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
-        "before end-to-end delegated execution became broadly available",
-        "the preserved process kept human purpose, judgment, selection, correction, and final responsibility comparatively legible",
-        "For the first-generation provenance claim described here, this exact window is now closed",
+        "before unified personal agents made delegation from a high-level goal through completion routine",
+        "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",
+        "For the bounded provenance claim described here, this exact dated formation interval is now closed",
         "later human-origin work is impossible",
     ):
         assert required in home
@@ -30,6 +30,9 @@ def test_homepage_states_speed_without_closing_human_agency() -> None:
         "within a narrowing historical window",
         "逐渐收窄的历史窗口",
         "before autonomous execution became ordinary",
+        "before end-to-end delegated execution became broadly available",
+        "the preserved process kept human purpose, judgment, selection, correction, and final responsibility comparatively legible",
+        "For the first-generation provenance claim described here, this exact window is now closed",
         "this window is now effectively closed",
         "remained visibly human",
     ):
