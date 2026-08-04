@@ -48,7 +48,7 @@ REQUIRED_FORMATION_TOKENS = [
     "human-initiated",
     "emerg",
     "generative AI",
-    "human responsibility",
+    "responsib",
 ]
 
 
