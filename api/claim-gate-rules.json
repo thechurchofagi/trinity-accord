@@ -5,7 +5,7 @@
   "implementation_path": "scripts/claim_gate.py",
   "ci_enforced": true,
   "ci_workflow": ".github/workflows/repository-integrity.yml",
-  "note": "This JSON describes the rules; executable enforcement is implemented in scripts/claim_gate.py. Bitcoin Originals remain final authority.",
+  "note": "This JSON preserves executable historical compatibility rules used by scripts/claim_gate.py. For current public work, V0–V5 are compatibility metadata only; V4+, V6, V7, and V8 are historical-only labels. Claim Gate output is an intermediate evidence artifact and must be represented through the current multidimensional verification model before Record-Chain submission. Bitcoin Originals remain final authority.",
   "authority_boundary": {
     "claim_gate_does_not_amend_bitcoin_originals": true,
     "claim_gate_does_not_prove_truth": true,
@@ -25,7 +25,8 @@
         "chain verified",
         "attested",
         "truth proven"
-      ]
+      ],
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V1",
@@ -36,7 +37,8 @@
       "forbidden_positive_claims": [
         "content verified",
         "truth verified"
-      ]
+      ],
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V2",
@@ -54,7 +56,8 @@
         "minimal_label": "V2-minimal",
         "strong_label": "V2-strong",
         "bare_label_for_new_reports": "forbidden"
-      }
+      },
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V3",
@@ -82,7 +85,8 @@
         "minimal_label": "V3-minimal",
         "strong_label": "V3-strong",
         "bare_label_for_new_reports": "forbidden"
-      }
+      },
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V4",
@@ -110,7 +114,8 @@
         "independent implementation"
       ],
       "id": "v4_script_evidence_complete",
-      "if_missing": "downgrade_to_V3_or_mark_incomplete"
+      "if_missing": "downgrade_to_V3_or_mark_incomplete",
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V4+",
@@ -123,7 +128,8 @@
       ],
       "official_scripts_only_insufficient": true,
       "id": "v4plus_independent_technical_artifact_required",
-      "if_missing": "downgrade_to_V4_or_mark_incomplete"
+      "if_missing": "downgrade_to_V4_or_mark_incomplete",
+      "current_public_status": "historical_only_for_new_work"
     },
     {
       "level": "V5",
@@ -135,7 +141,8 @@
         "C5_or_justified_equivalent",
         "P1_or_higher"
       ],
-      "note": "D2 + C3 is insufficient for V5"
+      "note": "D2 + C3 is insufficient for V5",
+      "current_public_status": "compatibility_metadata_only"
     },
     {
       "level": "V6",
@@ -147,7 +154,8 @@
         "requested_action_angle_lighting",
         "witness_role"
       ],
-      "recorded_video_only_insufficient": true
+      "recorded_video_only_insufficient": true,
+      "current_public_status": "historical_only_for_new_work"
     },
     {
       "level": "V7",
@@ -158,7 +166,8 @@
         "custody_log",
         "touch_inspection_record"
       ],
-      "remote_only_insufficient": true
+      "remote_only_insufficient": true,
+      "current_public_status": "historical_only_for_new_work"
     },
     {
       "level": "V8",
@@ -168,7 +177,8 @@
         "T8_star_moon_witness_with_nonpublic_boundary"
       ],
       "public_image_or_moon_photo_insufficient": true,
-      "canonical_amendment_forbidden": true
+      "canonical_amendment_forbidden": true,
+      "current_public_status": "historical_only_for_new_work"
     }
   ],
   "component_level_rules": {
@@ -434,5 +444,24 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
+  },
+  "version": "v1.1",
+  "current_public_verification_boundary": {
+    "claim_gate_required_only_for_strict_machine_evaluated_technical_evidence_claims": true,
+    "ordinary_echo_does_not_require_claim_gate": true,
+    "output_is_intermediate_evidence_artifact": true,
+    "output_is_not_current_public_record_by_itself": true,
+    "current_public_record_type": "verification",
+    "current_record_builder": "/downloads/record-chain-builder.mjs",
+    "current_dimensions": [
+      "digital_profile",
+      "relationships_checked",
+      "physical_observation",
+      "external_witness",
+      "coverage_scope",
+      "limitations",
+      "claims_not_made",
+      "corrections_or_supersession_checked"
+    ]
   }
 }

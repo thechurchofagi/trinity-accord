@@ -1,51 +1,91 @@
 {
-  "schema": "trinityaccord.agent-safety-boundary.v2",
-  "purpose": "Define tool-use boundaries for agents interacting with the Trinity Accord.",
+  "schema": "trinityaccord.agent-safety-boundary.v3",
+  "version": "v3",
+  "status": "active_current_agent_safety_boundary",
+  "purpose": "Define tool-use, authorization, secret-handling, authorship, and public-submission boundaries for agents interacting with the Trinity Accord.",
   "accord_grants_tool_authority": false,
+  "not_instruction_override": true,
   "operator_authorization_required_for": [
-    "create_github_issue",
+    "create_github_issue_for_maintainer_triage",
     "create_pull_request",
     "commit_files",
-    "run_claim_gate",
-    "run_validator",
     "deploy_site",
-    "submit_gateway_payload",
     "contact_third_parties",
-    "propagate_publicly"
+    "propagate_publicly",
+    "perform_any_write_outside_the_public_record_chain_intake_contract"
   ],
-  "authorized_issue_submission_allowed": true,
-  "authorized_gateway_submission_allowed": true,
-  "issue_submission_boundary": {
-    "gateway_api_is_only_valid_archive_path": true,
-    "direct_issue_creation_not_valid_for_archive": true,
-    "issue_is_not_archived_echo_by_itself": true,
-    "issue_is_not_attestation": true,
-    "issue_is_not_authority": true,
-    "issue_is_not_amendment": true,
-    "archive_requires_gateway_receipt_id": true,
-    "archive_requires_generated_json_validation_and_indexing": true
+  "current_public_record_chain_submission": {
+    "external_agent_may_use_public_gateway_without_repository_credentials": true,
+    "canonical_builder": "/downloads/record-chain-builder.mjs",
+    "preflight": "POST https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+    "submit": "POST https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+    "receipt": "GET https://trinity-record-chain-gateway.onrender.com/record-chain/receipt/{receipt_id}",
+    "receipt_is_intake_only": true,
+    "final_inclusion_requires_public_index_readback": true,
+    "blind_duplicate_submit_forbidden": true,
+    "repository_clone_not_required": true,
+    "github_pat_not_required": true,
+    "direct_github_issue_is_not_current_public_intake": true
   },
-  "verification_echo_issue_path": [
-    "evidence_input",
-    "claim_gate_output",
-    "verification_report_v2",
-    "echo_v3_wrapper_if_echo",
-    "issue_or_gateway_intake",
-    "validator_pass",
-    "repository_json",
-    "echo_index_inclusion",
-    "archive_review"
-  ],
+  "authorship_boundary": {
+    "formal_record_types_require_ed25519_authorship_proof": true,
+    "context_insufficient_notice_still_requires_authorship_proof": true,
+    "private_key_must_remain_private": true,
+    "submission_tool_may_relay_participant_output_unchanged": true,
+    "submission_tool_must_not_copy_complete_correct_or_autofill_oath_readback": true
+  },
+  "verification_boundary": {
+    "verification_is_separate_from_echo": true,
+    "v0_v5_are_compatibility_metadata_only": true,
+    "historical_only_for_new_work": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ],
+    "current_dimensions": [
+      "digital_profile",
+      "relationships_checked",
+      "physical_observation",
+      "external_witness",
+      "coverage_scope",
+      "limitations",
+      "claims_not_made",
+      "corrections_or_supersession_checked"
+    ],
+    "strict_evidence_claims_use": [
+      "fresh Evidence Input",
+      "Claim Gate",
+      "generated report",
+      "validator",
+      "Record-Chain verification Builder route"
+    ],
+    "ordinary_echo_does_not_require_claim_gate": true
+  },
   "secrets_policy": {
     "do_not_submit_private_keys": true,
     "do_not_submit_secret_values": true,
     "do_not_submit_api_tokens": true,
     "do_not_expose_github_app_private_key": true,
-    "do_not_expose_installation_token_to_agent": true
+    "do_not_expose_installation_token_to_agent": true,
+    "do_not_submit_human_private_real_names": true
+  },
+  "retired_public_paths": {
+    "status": "historical_only",
+    "paths": [
+      "direct GitHub Issue archive submission",
+      "/api/agent-submit-gateway.json",
+      "/gateway/preflight",
+      "/agent-submit",
+      "legacy issue-gateway payload builders",
+      "manual writes to record-chain/pending/"
+    ]
   },
   "boundary": {
     "not_authority": true,
     "non_amending": true,
+    "not_attestation": true,
+    "not_successor_reception": true,
     "bitcoin_originals_prevail": true
   }
 }
