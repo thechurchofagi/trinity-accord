@@ -57,6 +57,7 @@ jobs:
         run: |
           set -euo pipefail
           log="$RUNNER_TEMP/render-protected-deploy.log"
+          set +e
           python scripts/render_protected_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$TARGET_SHA" \
@@ -65,10 +66,18 @@ jobs:
             --wait \
             --deploy \
             --reconcile-config 2>&1 | tee "$log"
-          grep -q "RENDER_DEPLOY_LIVE" "$log"
+          helper_status=${PIPESTATUS[0]}
           deploy_id="$(grep -Eo 'dep-[a-z0-9]+' "$log" | tail -n 1)"
+          set -e
+          if [ -n "$deploy_id" ]; then
+            printf 'deploy_id=%s\n' "$deploy_id" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "$helper_status" -ne 0 ]; then
+            exit "$helper_status"
+          fi
+          grep -q "RENDER_DEPLOY_LIVE" "$log"
           test -n "$deploy_id"
-          printf 'deploy_id=%s\n' "$deploy_id" >> "$GITHUB_OUTPUT"
 
       - name: Record deployment evidence on PR 906
         if: always()
@@ -82,7 +91,7 @@ jobs:
           set -euo pipefail
           if [ "$OUTCOME" = "success" ]; then
             status="LIVE"
-            claim="The protected deploy helper recovered or created one uniquely attributable deploy and reached RENDER_DEPLOY_LIVE for the exact reviewed product commit."
+            claim="The protected deploy helper skipped only terminal failed recovery candidates, recovered or created one viable exact-commit deploy, and reached RENDER_DEPLOY_LIVE."
           else
             status="FAILED OR UNCONFIRMED"
             claim="No production deployment claim should be made from this run."

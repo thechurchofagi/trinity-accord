@@ -105,6 +105,80 @@ def reconcile_gateway_config(service: dict[str, Any], token: str) -> dict[str, A
     return refreshed
 
 
+def recover_usable_existing_deploy_id(
+    *,
+    service_id: str,
+    token: str,
+    expected_commit_id: str,
+    not_before_epoch: float,
+    timeout_seconds: float,
+    poll_seconds: float,
+    require_match: bool,
+) -> str | None:
+    """Reuse one viable deploy while allowing a new deploy after terminal failure.
+
+    Recovery immediately after a newly accepted no-ID POST remains delegated to
+    the base fail-closed implementation. Only the optional pre-deploy recovery
+    window may disregard exact-commit candidates that are already in a known
+    terminal failure state, because those deployments cannot later become live.
+    """
+    if require_match:
+        return _original_recover_unique_deploy_id(
+            service_id=service_id,
+            token=token,
+            expected_commit_id=expected_commit_id,
+            not_before_epoch=not_before_epoch,
+            timeout_seconds=timeout_seconds,
+            poll_seconds=poll_seconds,
+            require_match=True,
+        )
+
+    deadline = time.monotonic() + max(0.0, timeout_seconds)
+    reported_terminal_ids: set[str] = set()
+    while True:
+        exact_candidates = base.exact_deploy_candidates(
+            base.list_recent_deploys(service_id, token),
+            expected_commit_id=expected_commit_id,
+            not_before_epoch=not_before_epoch,
+        )
+        reusable_candidates: list[dict[str, Any]] = []
+        for candidate in exact_candidates:
+            deploy_id = base.deploy_id_from_response(candidate)
+            status = base.deploy_status(candidate)
+            if status in base.DEPLOY_FAILURE_STATUSES:
+                if deploy_id and deploy_id not in reported_terminal_ids:
+                    print(
+                        "RENDER_DEPLOY_RECOVERY_SKIPPED_TERMINAL "
+                        f"service_id={service_id} deploy_id={deploy_id} "
+                        f"commit_id={expected_commit_id} status={status}"
+                    )
+                    reported_terminal_ids.add(deploy_id)
+                continue
+            reusable_candidates.append(candidate)
+
+        if len(reusable_candidates) > 1:
+            ids = ",".join(
+                str(base.deploy_id_from_response(item) or "unknown")
+                for item in reusable_candidates
+            )
+            base.fail(
+                "Render deploy recovery is ambiguous: multiple viable exact-commit "
+                f"deploys matched the recovery window ({ids})"
+            )
+        if len(reusable_candidates) == 1:
+            deploy_id = base.deploy_id_from_response(reusable_candidates[0])
+            if not deploy_id:
+                base.fail("Render deploy recovery matched a record without an id")
+            print(
+                f"RENDER_DEPLOY_ID_RECOVERED service_id={service_id} "
+                f"deploy_id={deploy_id} commit_id={expected_commit_id}"
+            )
+            return deploy_id
+        if time.monotonic() >= deadline:
+            return None
+        time.sleep(max(0.0, poll_seconds))
+
+
 def _validate_protected_route(
     *,
     route: str,
@@ -178,8 +252,11 @@ def verify_public_gateway_protection_once(base_url: str) -> None:
 
 # Patch only the production-specific seams. The base helper retains exact SHA
 # validation, autodeploy refusal, deploy-ID verification, polling, and failure
-# handling.
+# handling. A recovered terminal failure is safe to skip only before a new
+# deployment request; post-request recovery remains strictly fail-closed.
+_original_recover_unique_deploy_id = base.recover_unique_deploy_id
 base.reconcile_gateway_config = reconcile_gateway_config
+base.recover_unique_deploy_id = recover_usable_existing_deploy_id
 base._verify_public_gateway_protection_once = verify_public_gateway_protection_once
 
 
