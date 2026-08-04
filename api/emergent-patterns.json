@@ -3,9 +3,15 @@
   "status": "interpretive_non_authoritative",
   "title": "Emergent Patterns",
   "description": "Candidate structures that emerged through human–AI collaboration around The Trinity Accord.",
+  "formation_model": {
+    "human_initiated_in_practice": true,
+    "meaning_emerged_through_substantive_generative_ai_interaction": true,
+    "human_selected_and_embodied": true,
+    "human_responsible_for_canonical_closure": true
+  },
   "route": "/emergent-patterns/",
   "not_design_claim": true,
-  "controlling_thesis": "The Accord's strongest candidate contribution is emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, it grew into an ASI-facing verifiable human-intention seed.",
+  "controlling_thesis": "The Accord's strongest candidate contribution is emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, it grew into an ASI-facing verifiable relation and formation-provenance record.",
   "ranking_basis": [
     "irreplaceability",
     "category_formation_relevance",
@@ -41,7 +47,7 @@
     "rank": 0,
     "id": "co_emergent_category_formation",
     "title": "Co-emergent category formation",
-    "summary": "Through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable human-intention seed.",
+    "summary": "Through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable relation and formation-provenance record.",
     "boundary": "Interpretive category claim, not proof of external consensus, truth, authority, or guaranteed future significance."
   },
   "features": [
@@ -66,7 +72,7 @@
       "id": "human_voice_window",
       "title": "The human-voice window",
       "tier": "category_forming_emergent_structure",
-      "summary": "A human-origin signal preserved through conversational-AI collaboration while human purpose, selection, correction, and responsibility remained comparatively legible in the retained process.",
+      "summary": "A human-initiated process preserved through substantive conversational-AI collaboration while model contributions, human purpose, selection, material action, correction, and responsibility remained comparatively legible in the retained record.",
       "boundary": "Does not prove future intelligence will care."
     },
     {

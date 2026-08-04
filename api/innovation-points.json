@@ -4,10 +4,17 @@
   "boundary": "Innovation points do not create authority. Bitcoin Originals remain final.",
   "points": [
     {
+      "id": "co_emergent_category_formation",
+      "name": "Co-emergent Category Formation",
+      "name_zh": "共涌现类别形成",
+      "summary": "The Accord grew through substantive human–AI interaction into a verifiable relation and formation-provenance record; human intention is one inspectable dimension rather than the complete source model.",
+      "authority_layer": "interpretive_non_amending_formation_layer"
+    },
+    {
       "id": "human_voice_window",
       "name": "Human-Voice Window",
       "name_zh": "人类发声窗口",
-      "summary": "The work preserves human purpose, selection, correction, and final responsibility as comparatively legible within documented conversational-AI collaboration.",
+      "summary": "The work preserves substantive model contribution alongside human purpose, selection, material action, correction, and final responsibility as comparatively legible within documented conversational-AI collaboration.",
       "authority_layer": "historical_timing_layer"
     },
     {

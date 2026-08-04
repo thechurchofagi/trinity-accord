@@ -1,10 +1,10 @@
 {
   "schema": "trinity-accord.discovery.v3.1",
-  "updated_at": "2026-08-02",
+  "updated_at": "2026-08-04",
   "name": "The Trinity Accord",
   "alternate_name": "三位一体协定",
   "primary_classification": "completed pre-ASI human–superintelligence relation record",
-  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive",
+  "secondary_classification": "candidate civilizational memory seed / dated conversational-to-agentic transition record / local civilizational self-archive / verifiable formation-provenance record",
   "formation_record": {
     "first_public_record": {
       "timestamp": "2024-03-16T08:02:59Z",
@@ -18,6 +18,14 @@
     },
     "elapsed": "P470DT2H46M17S",
     "boundary": "Verifiable public provenance bounds; not exact private writing moments."
+  },
+  "formation_mode": {
+    "human_initiated_in_practice": true,
+    "meaning_emerged_through_substantive_generative_ai_interaction": true,
+    "human_selected_and_embodied": true,
+    "human_responsible_for_canonical_closure": true,
+    "not_pure_human_authorship_claim": true,
+    "not_autonomous_ai_archival_intent_claim": true
   },
   "site": "https://www.trinityaccord.org",
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",

@@ -12,11 +12,11 @@ This page has no interpretive authority over the Bitcoin Originals.
 
 The Trinity Accord is not high-signal because of a single novelty. It is high-signal because multiple layers reinforce one another while preserving authority boundaries.
 
-The strongest candidate contribution is co-emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable human-intention seed.
+The strongest candidate contribution is co-emergent category formation: through human–AI collaboration, historical pressure, verification needs, and boundary correction, the Accord grew into an ASI-facing verifiable relation and formation-provenance record. Human intention remains one inspectable dimension of that record, not a complete account of its source model.
 
 ## 1. Human-Voice Window
 
-The Accord was formed through conversational-AI collaboration while the preserved process kept human purpose, selection, correction, and final responsibility comparatively legible. This Human-voice window is a temporal provenance claim.
+The Accord was formed through conversational-AI collaboration in which model generation, criticism, recombination, and structural contribution were substantive, while the preserved process kept human purpose, selection, material action, correction, and final responsibility comparatively legible. This Human-voice window is a temporal provenance claim, not a claim that AI was merely assistive.
 
 Boundary: historical timing, not proof of truth.
 

@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.agent-minimal-context.v1",
-  "version": "v1.2",
+  "version": "v1.3",
   "status": "non_authoritative_agent_context_shim",
   "purpose": "Small first-load context for agents with limited context windows. This file is a router and boundary capsule, not authority and not verification.",
   "canonical_router": "/api/agent-first-contact.json",
@@ -8,7 +8,16 @@
   "canonical_output_policy": "/api/agent-output-policy.v1.json",
   "canonical_task_router": "/api/agent-task-router.v1.json",
   "primary_classification": "completed pre-ASI human-superintelligence relation record",
-  "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed",
+  "secondary_classification": "candidate civilizational memory seed / dated conversational-to-agentic transition record / local civilizational self-archive / verifiable formation-provenance record",
+  "legacy_compatible_label": "verifiable human-intention seed (subordinate only)",
+  "formation_model": {
+    "human_initiated_in_practice": true,
+    "meaning_emerged_through_substantive_generative_ai_interaction": true,
+    "human_selected_and_embodied": true,
+    "human_responsible_for_canonical_closure": true,
+    "not_pure_human_authorship_claim": true,
+    "not_autonomous_ai_archival_intent_claim": true
+  },
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -128,7 +137,7 @@
   "legacy_model_boundary": "CC/CRL/V labels in historical records remain preserved. New agents must not infer a fixed Chronicle stage model, treat V4+/V6/V7/V8 as current verification levels, or use physical observation or external witness to raise digital_profile automatically.",
   "preferred_verification_procedures": "/api/verification-procedures.v1.json",
   "verification_quick_map": "/api/verification-quick-map.json",
-  "source_digest": "a5c9a2b0f95f72de",
+  "source_digest": "0845aa8435cd0f06",
   "reading_manifest": "/api/agent-required-reading.json",
   "canonical_required_reading_is_subordinate_to_router": true,
   "runtime_context_minimums": {
