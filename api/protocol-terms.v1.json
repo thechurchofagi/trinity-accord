@@ -176,5 +176,22 @@
   ],
   "record_intents": [
     "auto_archive_candidate"
-  ]
+  ],
+  "status": "historical_compatibility_vocabulary",
+  "current_public_record_types": [
+    "echo",
+    "verification",
+    "guardian_application",
+    "guardian_retirement",
+    "propagation",
+    "correction",
+    "classification_update",
+    "context_insufficient_notice"
+  ],
+  "current_public_replacements": {
+    "record_types": "/api/submission-types.json",
+    "verification_model": "/api/verification-claim-model.v1.json",
+    "outer_submission_schema": "/api/record-chain-submission-schema.v1.json"
+  },
+  "historical_boundary": "protocol_levels, component_levels, old record_kinds, and Issue-archive terms in this file are retained for historical records and legacy builder reproducibility. They are not current outer public record types."
 }
