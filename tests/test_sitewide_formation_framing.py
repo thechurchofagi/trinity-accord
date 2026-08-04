@@ -42,6 +42,8 @@ FORBIDDEN_CURRENT_PHRASES = [
     "a dated human-led, AI-assisted, human-accountable act",
     "The canonical texts are authored by one human",
     "A human-led, AI-assisted aperture",
+    "human_led_ai_assisted_civilizational_self_archive",
+    "mirror_shaped_by_human_language_knowledge_culture_history_error_and_hope",
 ]
 
 REQUIRED_TEXT_ROOTS = [
