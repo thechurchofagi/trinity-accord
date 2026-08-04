@@ -13,12 +13,19 @@ def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
-def test_homepage_states_speed_without_closing_human_agency() -> None:
+def test_homepage_states_emergent_formation_without_erasing_human_agency() -> None:
     home = read("index.md")
 
     for required in (
-        "Why an ordinary person chose to leave this record during a rapidly closing historical window",
-        "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
+        "The Trinity Accord did not begin as an accord.",
+        "《三位一体协定》最初并不是一份协定。",
+        'id="formation-history"',
+        "From Chronicle to Accord",
+        "The project was then a continuing Chronicle and digital-art collection, not a fully formed Accord.",
+        "Historical preservation, artistic experiment, collectibility, and possible future market value coexisted.",
+        "an act of civilizational self-archiving",
+        "This does not establish a unified civilizational will",
+        "Initiator, sustained carrier, selector, embodied executor, and responsible closer",
         "before unified personal agents made delegation from a high-level goal through completion routine",
         "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",
         "For the bounded provenance claim described here, this exact dated formation interval is now closed",
@@ -26,7 +33,17 @@ def test_homepage_states_speed_without_closing_human_agency() -> None:
     ):
         assert required in home
 
+    assert home.index('id="formation-history"') < home.index('id="home-in-one-minute"')
+    assert home.index("Formal AI-agent actions use an agent in-context oath readback") > home.index(
+        'id="research-entry-title"'
+    )
+
     for stale in (
+        "As specialized research, coding, and computer-use agents were emerging—but before unified personal agents made delegation from a high-level goal through completion routine—one person working intensively with generative AI left a verifiable record for the intelligence that may follow.",
+        "human-origin in purpose",
+        "Why an ordinary person chose to leave this record during a rapidly closing historical window",
+        "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
+        "A father’s concern, with the uncertainty left visible",
         "within a narrowing historical window",
         "逐渐收窄的历史窗口",
         "before autonomous execution became ordinary",
