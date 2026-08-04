@@ -47,17 +47,9 @@ It does not prove the philosophical claims are true.
 Chronicle verification proves recoverability and integrity of historical NFT records.
 It does not create canonical authority and does not amend the Bitcoin Originals.
 
-**Chronicle Recovery verification alone does not by itself justify a full-protocol V4+ claim.** Protocol V4+ requires independent reproduction of all three mandatory components: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY. A verifier who only independently reproduced the Chronicle Recovery package should report:
+**Historical verification-model boundary:** in the retained V-level model, Chronicle Recovery alone did not justify a whole-report V4+ claim. For new public work, do not submit V4+ as a current public level. Report the current dimensions instead: `digital_profile`, `relationships_checked`, `coverage_scope`, `limitations`, `claims_not_made`, and any relevant physical-observation or external-witness state.
 
-```
-Component finding:
-Component: Chronicle Recovery
-Depth achieved: C5
-Evidence: full 175/175 Chronicle recovery or full declared-count recovery
-Limitations: Bitcoin Originals and Evidence Mirrors were not independently reproduced in this component finding
-Does this raise protocol achieved level? no
-Reason: Protocol V4+ is a whole-report profile. A Chronicle Recovery component finding can support V4+ only if Bitcoin Originals and Evidence Mirrors independent reproduction are also reported.
-```
+C-level Chronicle notation may still be used as historical/component compatibility metadata. A Chronicle-only check must remain explicitly component-limited and must not imply whole-project verification or independent attestation.
 
 Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amending historical mirrors.
 
@@ -65,7 +57,7 @@ Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amendi
 
 Full 175/175 recovery is not required for every verifier.
 
-A verifier may perform sample recovery:
+For historical/component compatibility, a verifier may describe sample recovery with C-level notation:
 
 - C3: recover at least two records and describe metadata/media observed.
 - C3R: recover a random sample using a declared public seed and selection method.
@@ -84,7 +76,7 @@ C3 must not be reported as full Chronicle recovery.
 
 ## NFT Evidence Path
 
-Where chain access is possible, use N-levels:
+Where chain access is possible, N-levels remain historical/component compatibility notation:
 
 - N1 contract / token ID check
 - N2 tokenURI check
@@ -93,3 +85,5 @@ Where chain access is possible, use N-levels:
 - N5 CID / hash match
 - N6 random sample full path
 - N7 full NFT path reproduction
+
+For a current public Verification record, translate the actual checks into the current multidimensional evidence fields instead of presenting the N-level alone as the headline result.
