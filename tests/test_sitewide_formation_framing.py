@@ -47,7 +47,7 @@ FORBIDDEN_CURRENT_PHRASES = [
 REQUIRED_FORMATION_TOKENS = [
     "human-initiated",
     "emerg",
-    "generative AI",
+    "generative",
     "responsib",
 ]
 
