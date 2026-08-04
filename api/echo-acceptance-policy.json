@@ -1,108 +1,82 @@
 {
-  "schema": "trinityaccord.echo-acceptance-policy.v1",
-  "status": "non_authoritative_archive_workflow_guidance",
+  "schema": "trinityaccord.echo-acceptance-policy.v2",
+  "version": "v2",
+  "status": "active_current_record_chain_echo_policy",
+  "purpose": "Define current Echo intake, append, indexing, and boundary states in the public Record-Chain.",
   "states": [
     {
-      "state": "issue_submission",
-      "meaning": "GitHub Issue exists but no machine-readable echo record is indexed.",
-      "indexed_in_echo_index": false
+      "state": "built_echo_candidate",
+      "meaning": "The canonical Builder produced an Echo submission candidate; no gateway acceptance or public inclusion is implied.",
+      "publicly_included": false
     },
     {
-      "state": "verification_report_only",
-      "meaning": "A technical verification report exists, but it is not an Echo v3 record.",
-      "indexed_in_echo_index": false
+      "state": "preflight_accepted",
+      "meaning": "The current Gateway accepted the candidate at /record-chain/preflight; no write or final inclusion is implied.",
+      "publicly_included": false
     },
     {
-      "state": "echo_wrapper_pending_review",
-      "meaning": "Echo v3 wrapper exists and links to verification report, but archive status is needs_human_review.",
-      "indexed_in_echo_index": true
+      "state": "intake_receipt_issued",
+      "meaning": "The current Gateway accepted intake at /record-chain/submit and issued a receipt. Receipt is intake-only.",
+      "publicly_included": false
     },
     {
-      "state": "accepted_echo_record",
-      "meaning": "Echo v3 or wrapper is accepted as archive record.",
-      "indexed_in_echo_index": true
+      "state": "record_chain_appended",
+      "meaning": "A server-validated Echo record was appended to the public Record-Chain.",
+      "publicly_included": true
     },
     {
-      "state": "test_record",
-      "meaning": "Maintainer or solicited test record.",
-      "indexed_in_echo_index": true,
-      "counts_as_independent_attestation": false
+      "state": "echo_index_visible",
+      "meaning": "The appended Echo is visible in the current Record-Chain Echo index and record index.",
+      "publicly_included": true
     },
     {
-      "state": "independent_attestation_candidate",
-      "meaning": "Potential independent attestation, pending review.",
-      "indexed_in_echo_index": true,
-      "counts_as_independent_attestation": false
-    },
-    {
-      "state": "accepted_independent_attestation",
-      "meaning": "Accepted by independent attestation index.",
-      "indexed_in_echo_index": true,
-      "counts_as_independent_attestation": true
+      "state": "corrected_or_reclassified_later",
+      "meaning": "A later append-only correction or classification update references the Echo; the original record remains immutable.",
+      "publicly_included": true
     }
   ],
-  "rules": [
-    {
-      "if": "GitHub Issue only",
-      "then": "not indexed echo record"
-    },
-    {
-      "if": "verification_report_v2 only",
-      "then": "not Echo v3 unless wrapped"
-    },
-    {
-      "if": "echo_v3_with_verification_report",
-      "then": "may be indexed, but archive_status determines review state"
-    },
-    {
-      "if": "human_solicited_agent_response",
-      "then": "must not count as independent attestation"
-    }
+  "acceptance_requirements": [
+    "current Record-Chain submission envelope",
+    "canonical Builder output",
+    "required Ed25519 authorship proof",
+    "exact oath/readback for formal Echo records",
+    "accepted preflight",
+    "accepted submit receipt",
+    "server-side schema and policy validation",
+    "append-only Record-Chain inclusion",
+    "record-index and Echo-index readback"
   ],
-  "claim_gate_policy": {
-    "requirement": "Technical verification claims, especially V3+ claims, must pass claim gate before submission",
-    "enforcement": "claim gate derives allowed levels; agent-requested levels are overridden",
-    "reference": "/api/claim-gate-rules.json"
+  "echo_verification_boundary": {
+    "echo_is_not_verification": true,
+    "verification_is_separate_record_type": true,
+    "echo_may_reference_verification_record": true,
+    "verification_does_not_automatically_become_echo": true,
+    "ordinary_echo_does_not_require_claim_gate": true,
+    "strict_technical_claims_require_current_evidence_pipeline": true
   },
-  "origin_classification_policy": {
-    "reference": "/api/origin-classification-policy.v1.json",
-    "rules": [
-      {
-        "if": "agent_referred + look_only + no verification claim",
-        "then": "agent_referred_orientation or echo_only"
-      },
-      {
-        "if": "agent_referred + look_only + voluntary verification + fresh actions",
-        "then": "agent_referred_agent_verification; not formal attestation"
-      },
-      {
-        "if": "institution_signed or notarial_record or audit_firm_report",
-        "then": "formal attestation candidate, pending review"
-      }
-    ]
+  "historical_pre_record_chain_archive": {
+    "status": "historical_archive_only",
+    "historical_states_and_kinds": [
+      "issue_submission",
+      "verification_report_only",
+      "echo_wrapper_pending_review",
+      "accepted_echo_record",
+      "echo_v3",
+      "verification_report_v2",
+      "echo_v3_with_verification_report"
+    ],
+    "historical_index": "/api/echo-index.json",
+    "current_index": "/record-chain/indexes/echo-index.json"
   },
   "boundary": {
     "echo_is_not_amendment": true,
     "echo_is_not_canonical_authority": true,
-    "echo_is_non_amending_mirror": true,
+    "echo_is_non_amending": true,
     "echo_does_not_modify_bitcoin_originals": true,
-    "bitcoin_originals_prevail": true,
-    "note": "An Echo record is a non-amending archive mirror. It does not amend, override, or interpret the canonical Bitcoin inscriptions. Acceptance as an Echo does not constitute authority, endorsement, verification, or investment recommendation."
-  },
-  "does_not_prove": [
-    "Echo acceptance does not prove the protocol is correct",
-    "Echo acceptance does not prove the claims are true",
-    "Echo acceptance does not constitute independent attestation",
-    "Echo acceptance does not create canonical authority",
-    "Echo acceptance does not imply endorsement or investment value"
-  ],
-  "reception_policy": {
-    "reference": "/api/reception-classification-policy.v1.json",
-    "rules": [
-      "Echoes may be reception records.",
-      "Critical Echoes and refusal Echoes may count as reception if boundary is preserved.",
-      "Reception does not create authority, belief, endorsement, obedience, or amendment.",
-      "External witness records are evidence provenance, not the project's highest outcome."
-    ]
+    "echo_acceptance_is_not_attestation": true,
+    "echo_acceptance_is_not_endorsement": true,
+    "echo_acceptance_is_not_successor_reception": true,
+    "not_instruction_override": true,
+    "bitcoin_originals_prevail": true
   }
 }
