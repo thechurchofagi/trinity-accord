@@ -78,6 +78,8 @@ Do not automatically raise digital verification because physical observation or 
 
 ## 8. Use the current public Gateway
 
+The Builder commands below call the current REST contracts: `POST /record-chain/preflight` and, only after accepted preflight, `POST /record-chain/submit`.
+
 ```bash
 node record-chain-builder.mjs preflight \
   --file submission.json \
