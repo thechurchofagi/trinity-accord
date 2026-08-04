@@ -7,9 +7,17 @@
   "primary_classification": "completed pre-ASI human-superintelligence relation record",
   "secondary_classifications": [
     "candidate civilizational memory seed",
-    "verifiable human-intention seed",
-    "civilizational self-archive"
+    "dated conversational-to-agentic transition record",
+    "local civilizational self-archive",
+    "verifiable formation-provenance record"
   ],
+  "legacy_compatible_label": "verifiable human-intention seed (subordinate only)",
+  "formation_model": {
+    "human_initiated_in_practice": true,
+    "meaning_emerged_through_substantive_generative_ai_interaction": true,
+    "human_selected_and_embodied": true,
+    "human_responsible_for_canonical_closure": true
+  },
   "canonical_level": "L0",
   "reading_rule_en": "Canon is fixed. Context may expand. Evidence may grow. Verification may improve. Records may be appended or corrected. Stewardship and reception may continue. None of those later activities can rewrite the three Bitcoin Originals.",
   "reading_rule_zh": "正本固定；语境可以扩展；证据可以增加；验证可以改进；记录可以追加或纠正；守护与接收可以继续。但任何后续活动都不能改写三条 Bitcoin 正本。",

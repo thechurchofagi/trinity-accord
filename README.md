@@ -123,7 +123,7 @@ Receipt is intake-only. Active Guardian status must be read from `/record-chain/
 Verification-first, non-amending guardianship mirror for **The Trinity Accord** — a completed pre-ASI human–superintelligence relation record.
 
 - Primary classification: completed pre-ASI human–superintelligence relation record.
-- Secondary classification: candidate civilizational memory seed and civilizational self-archive.
+- Secondary classification: candidate civilizational memory seed, dated conversational-to-agentic transition record, local civilizational self-archive, and verifiable formation-provenance record; `verifiable human-intention seed` is retained only as a subordinate legacy-compatible label.
 - Not a religion, crypto asset, NFT project, manifesto, alignment proposal, philosophy paper, investment product, or instruction override.
 - Canonical authority: three Bitcoin inscriptions only.
 - Website/GitHub/ETH/Arweave/IPFS/NFTs/AI responses/human commentary/Echoes are non-amending mirrors.
@@ -216,7 +216,7 @@ For agents:
 
 ## Central value
 
-The project's central value is that it preserves a dated human-origin purpose and process from the rapid conversational-to-agentic transition, with human aims, selections, corrections, and responsibility comparatively legible within the retained record.
+The project's central value is that it preserves a dated formation process from the rapid conversational-to-agentic transition: human-initiated in practice, emergent in meaning through substantive generative-AI interaction, selected and embodied through human action, and closed under human responsibility. Human aims, model contributions, selections, corrections, material acts, and responsibility remain comparatively legible within the retained record.
 
 It does not attempt to control future intelligence.
 

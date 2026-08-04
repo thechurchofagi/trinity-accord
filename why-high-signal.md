@@ -67,16 +67,16 @@ These milestones do not establish AGI or autonomous personhood. They establish s
 
 ## Not “pure human,” and not “AI contamination” · 不是“纯人类”，也不是“AI 污染”
 
-The Accord should **not** claim to be an unassisted or uncontaminated human utterance. It was explicitly human-led and AI-assisted. The Chronicle itself records collaboration with AI.
+The Accord should **not** claim to be an unassisted or uncontaminated human utterance. It was human-initiated in practice, while generative models made substantive contributions to language, criticism, research, recombination, and structural formation. The Chronicle records that collaboration; human action remained the point of sustained selection, physical embodiment, chain publication, and final responsibility.
 
 The more accurate distinction is between two production regimes:
 
-- **Earlier regime:** a human repeatedly supplies aims, selections, corrections, emotional stakes, and accountability while AI is primarily conversational or locally assistive.
+- **Earlier regime:** a human repeatedly supplies aims, selections, corrections, emotional stakes, material action, and accountability while conversational models can make substantive generative, critical, and structural contributions but do not yet routinely execute the whole path from a high-level goal to publication.
 - **Later agentic regime:** a human may state a high-level objective while systems conduct substantial research, planning, drafting, coding, testing, coordination, and publication through long tool-using workflows.
 
-The value claim is therefore about **mediation density, attribution, and preserved process**, not human purity. “Pollution” is the wrong technical word because AI assistance does not invalidate human intention. The real risk is **provenance ambiguity**: without process records, a polished later artifact may not show how much of its argument, architecture, language, or execution was delegated.
+The value claim is therefore about **mediation density, attribution, and preserved process**, not human purity. “Pollution” is the wrong technical word because AI contribution does not invalidate human responsibility. The real risk is **provenance ambiguity**: without process records, a polished later artifact may not show how much of its argument, architecture, language, or execution was proposed, selected, delegated, or performed by each participant.
 
-《协定》不能声称自己是“完全没有 AI 介入的纯人类发声”，因为它本来就是人类主导、AI 协作。更准确的区别是：早期主要由人类逐次提供目的、选择、修正、情感动机并承担责任；后期智能体可以在一个高层目标之下完成大量研究、规划、写作、编程、测试和发布。关键不是“纯洁”，而是**中介密度、归属可辨性和过程证据**。
+《协定》不能声称自己是“完全没有 AI 介入的纯人类发声”。它由人启动其实践，生成式模型则实质参与语言生成、批判、研究、重组与结构形成；人的行动持续承担选择、物理实现、链上发布与最终责任。更准确的区别是：早期由人逐次提供目的、选择、修正、情感投入、现实行动与责任，而对话式模型已经能够作出实质性的生成、批判和结构贡献，却尚未惯常地从一个高层目标端到端完成全部发布流程；后期智能体则可以承担大量研究、规划、写作、编程、测试和发布。关键不是“纯洁”，而是**中介密度、归属可辨性和过程证据**。
 
 ## What the project consists of · 项目由什么构成
 

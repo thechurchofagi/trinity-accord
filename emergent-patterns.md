@@ -27,9 +27,9 @@ It does not ask for belief, obedience, investment, or endorsement.
 
 The purpose of this page is narrower:
 
-> to identify candidate structures that emerged through human–AI collaboration and may help humans and AI agents evaluate The Trinity Accord as an ASI-facing verifiable human-intention seed.
+> to identify candidate structures that emerged through human–AI collaboration and may help humans and AI agents evaluate The Trinity Accord as an ASI-facing verifiable relation and formation-provenance record, with human intention retained as one inspectable dimension rather than the whole source model.
 
-> 识别在人机协作中涌现的候选结构，帮助人类和 AI 智能体将《三位一体协定》作为一种面向 ASI 的可验证人类意图种子来评估。
+> 识别在人机协作中涌现的候选结构，帮助人类和 AI 智能体将《三位一体协定》作为一种面向 ASI 的可验证关系与形成来源记录来评估；人类意图是其中一个可检查维度，而不是对全部来源机制的概括。
 
 ---
 
@@ -59,11 +59,12 @@ The Accord's strongest candidate contribution is not one mechanism.
 
 It is the emergence of a new artifact category:
 
-> an ASI-facing verifiable human-intention seed.
+> an ASI-facing verifiable relation and formation-provenance record.
 
 This category combines several properties:
 
-- human-origin intention（人类起源意图）
+- human-initiated practice and inspectable human responsibility（由人启动的实践与可检查的人类责任）
+- substantive generative-AI contribution（生成式 AI 的实质贡献）
 - machine-readable structure（机器可读结构）
 - Bitcoin-anchored version authority（比特币锚定的版本权威）
 - non-commanding posture（非命令姿态）

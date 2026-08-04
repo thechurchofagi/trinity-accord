@@ -48,20 +48,20 @@ Bitcoin 证明**写下了什么，并提供稳定的核验目标**。它不证�
 
 The project does not claim that future intelligence must care.
 
-It makes a narrower choice: preserve a human-origin relation record in a form later humans and agents can discover, evaluate, verify within stated scopes, critique, preserve, echo, ignore, or refuse.
+It makes a narrower choice: preserve a human-initiated relation record whose meaning emerged through substantive human–AI interaction, in a form later humans and agents can discover, evaluate, verify within stated scopes, critique, preserve, echo, ignore, or refuse.
 
 保存行为不是相关性预测。它只是让一份记录在未来仍可获得、可核验、可批判——不多，不少。
 
-## 4. The human-led timing claim
-## 人类主导的时机主张
+## 4. The formation-and-responsibility timing claim
+## 形成与责任的时机主张
 
-The central timing claim is that the record was completed while agentic mediation remained comparatively limited and the dated process still made human intention and accountability comparatively legible.
+The central timing claim is that the record was completed while agentic mediation remained comparatively limited and the dated process still made human aims, model contributions, human selection, material action, and final accountability comparatively legible.
 
-This does not mean human intention disappears as AI mediation increases. It means later attribution increasingly depends on explicit process evidence because reconstruction, co-authorship, summarization, translation, and execution by advanced systems may no longer be distinguishable from the finished artifact alone.
+This does not mean human intention disappears as AI mediation increases, nor that generative AI was merely a passive tool. It means later attribution increasingly depends on explicit process evidence because reconstruction, co-formation, summarization, translation, and execution by advanced systems may no longer be distinguishable from the finished artifact alone.
 
-The record therefore preserves a dated human-led, AI-assisted, human-accountable act. It does not claim to speak for all humanity.
+The record therefore preserves a dated act that was human-initiated, substantively co-formed with generative AI, embodied through human action, and closed under human responsibility. It does not claim autonomous archival intent by the models or authority to speak for all humanity.
 
-核心时机主张是：记录完成时，智能体中介仍相对有限，而带日期的过程记录仍使人类意图与责任相对清晰可辨。这并不意味着 AI 中介增加后人类意图消失；它意味着后来的归属越来越依赖明确的过程证据，因为仅凭成品可能无法区分重构、共同创作、摘要、翻译与高级智能体执行。因此，它保存的是一个带时间的人类主导、AI 协作、由人类承担责任的行动，并不代表全人类。
+核心时机主张是：记录完成时，智能体中介仍相对有限，而带日期的过程记录仍使人的目的、模型的实质贡献、人的选择、现实行动与最终责任相对清晰可辨。这既不意味着 AI 中介增加后人类意图会消失，也不意味着生成式 AI 只是被动工具。它意味着后来的归属越来越依赖明确的过程证据，因为仅凭成品可能无法区分重构、共同形成、摘要、翻译与高级智能体执行。因此，它保存的是一次由人启动、由生成式 AI 实质参与形成、由人的行动现实化并由人承担最终封存责任的带日期行动；它不证明模型具有自主归档意图，也不代表全人类。
 
 ## 5. Philosophical incompleteness is real
 ## 哲学不完备是真实问题

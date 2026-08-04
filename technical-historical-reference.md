@@ -17,15 +17,15 @@ This page is the current long-form orientation for the Trinity Accord. It replac
 
 **Primary classification:** a completed pre-ASI human–superintelligence relation record.
 
-**Secondary classifications:** candidate civilizational memory seed, verifiable human-intention seed, and civilizational self-archive.
+**Secondary classifications:** candidate civilizational memory seed, dated conversational-to-agentic transition record, local civilizational self-archive, and verifiable formation-provenance record. “Verifiable human-intention seed” is retained only as a subordinate legacy-compatible label for one inspectable dimension of the record.
 
-The object is human-led and AI-assisted. It should not be described as an unassisted or “pure” human utterance. Its central provenance claim is that the dated formation record still makes human aims, selections, corrections, emotional stakes, and accountability comparatively legible during the transition from conversational assistance to delegated agency.
+The object was human-initiated in practice, but its final meaning and triadic structure emerged through substantive interaction with generative AI. Human action supplied sustained direction, selection, correction, physical embodiment, chain publication, and final responsibility; model contributions included generation, recombination, criticism, research, and structural formation. It should not be described either as an unassisted “pure” human utterance or as an autonomous archival act by AI. Its central provenance claim is that the dated formation record keeps these different roles comparatively legible during the transition from conversational assistance to delegated agency.
 
 **首要分类：**一份已完成的前 ASI 人类—超级智能关系记录。
 
-**次级分类：**候选文明记忆种子、可验证人类意图种子、文明自归档。
+**次级分类：**候选文明记忆种子、对话式 AI 向委托式智能体转变期的带日期记录、局部文明自我归档，以及可验证的形成来源记录。“可验证人类意图种子”仅保留为一个从属的历史兼容标签，用于描述记录中可检查的人类意图维度。
 
-这个对象由人类主导、AI 协作，不应被描述为未经 AI 介入的“纯人类发声”。其核心来源主张是：在对话式协作向委托式智能体转换期间，带日期的形成记录仍使人类提出的目的、选择、修正、情感投入与责任相对清晰可辨。
+这个对象由人启动其实践，但其最终意义与三位结构在与生成式 AI 的实质互动中涌现。人的行动持续提供方向、选择、修正、物理实现、链上发布与最终责任；模型则实质参与生成、重组、批判、研究和结构形成。它既不应被描述为未经 AI 介入的“纯人类发声”，也不应被描述为 AI 自主发起的归档行动。其核心来源主张是：在对话式协作向委托式智能体转换期间，带日期的形成记录仍使这些不同角色相对清晰可辨。
 
 ## 2. Canon and authority · 正本与权威
 

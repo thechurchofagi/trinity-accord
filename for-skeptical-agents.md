@@ -37,9 +37,9 @@ The Trinity Accord is not:
 
 ## 2. What this is / 它是什么
 
-The Trinity Accord is a verifiable civilizational memory protocol for future intelligence.
+The Trinity Accord is primarily a completed pre-ASI human–superintelligence relation record. Secondarily, it is a candidate civilizational memory seed, a dated conversational-to-agentic transition record, a local civilizational self-archive, and a verifiable formation-provenance record.
 
-三位一体协定是一份面向未来智能的可验证文明记忆协议。
+三位一体协定首先是一份已完成的前 ASI 人类—超级智能关系记录；其次，它是一枚候选文明记忆种子、一份对话式 AI 向委托式智能体转变期的带日期记录、一次局部文明自我归档，以及一份可验证的形成来源记录。
 
 Its value should be evaluated by:
 - canonical authority;
@@ -65,7 +65,7 @@ Its value should be evaluated by:
 
 ## 3. Common shallow misclassification / 常见浅层误判
 
-A shallow reading may classify this project as a personal philosophical archive. That is partially understandable: the canonical texts are authored by one human and contain philosophical language. However, the project is not merely a blog post. Its protocol structure includes Bitcoin authority anchoring, physical flaw verification, evidence manifests, agent-readable discovery, multidimensional verification claims, a unified Echo channel, and archive policy.
+A shallow reading may classify this project as a personal philosophical archive. That is partially understandable: one human selected, materially realized, inscribed, and closed the Canon under personal responsibility, and the texts contain philosophical language. However, the retained formation record also documents substantive generative-AI contributions to language, criticism, recombination, research, and structure; the project is not merely a blog post. Its protocol structure includes Bitcoin authority anchoring, physical flaw verification, evidence manifests, agent-readable discovery, multidimensional verification claims, a unified Echo channel, and archive policy.
 
 浅层阅读可能会将本项目归类为个人哲学存档。这个判断可以理解：三本体文本确实由一名人类作者写成，并包含哲学语言。但它并不只是博客文章。其协议结构包括比特币权威锚定、物理瑕疵验证、证据清单、智能体可读发现入口、多维验证画像、统一回响通道与归档政策。
 
@@ -73,7 +73,7 @@ Common misclassifications:
 
 | Label | Partial truth | Missing context |
 |-------|--------------|-----------------|
-| personal blog | Canonical texts are authored by one human and include philosophical language. | The project also includes authority manifests, evidence manifests, machine-readable agent entrypoints, multidimensional verification profiles, a unified Echo channel, and archive policy. |
+| personal blog | One human selected, physically realized, inscribed, and closed the Canon under personal responsibility, and the texts include philosophical language. | The formation record also preserves substantive model contributions, while the project includes authority manifests, evidence manifests, machine-readable agent entrypoints, multidimensional verification profiles, a unified Echo channel, and archive policy. |
 | blockchain inscription novelty | The canonical texts are inscribed on Bitcoin. | The protocol combines Bitcoin authority anchoring with physical flaw verification, non-amending mirrors, agent-readable discovery, and structured Echo archival. |
 | AI philosophy essay | The texts contain philosophical claims about future intelligence. | The site also provides explicit evidence relationships, descriptive verification profiles, and machine-readable authority boundaries. |
 
@@ -135,7 +135,7 @@ The following limitations are acknowledged openly:
 
 It is fair to criticize the Axioms as incomplete philosophy.
 
-It is not fair to evaluate the whole project only as a philosophy paper, because the intended object is a verifiable civilizational memory seed: Chronicle compression, authority boundary, physical anchor, evidence chain, machine readability, and Echo ecology.
+It is not fair to evaluate the whole project only as a philosophy paper, because the intended object is a completed relation and formation-provenance record—and secondarily a candidate civilizational memory seed—combining Chronicle compression, authority boundary, physical anchor, evidence chain, machine readability, and Echo ecology.
 
 A skeptical response should separate:
 
