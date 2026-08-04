@@ -18,7 +18,11 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
 
     for required in (
         "The Trinity Accord did not begin as an accord.",
+        "It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.",
         "《三位一体协定》最初并不是一份协定。",
+        "它由一部近实时 NFT 编年史逐渐涌现",
+        "p0.9.6-final-clarity-alignment",
+        "A dated record from the conversational-to-agentic transition",
         'id="formation-history"',
         "From Chronicle to Accord",
         "The project was then a continuing Chronicle and digital-art collection, not a fully formed Accord.",
@@ -38,8 +42,15 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
         'id="research-entry-title"'
     )
 
+    # The mixed-motive and emergent-history detail remains in the dedicated
+    # formation section rather than being repeated in the already dense hero.
+    assert home.count("Historical preservation, artistic experiment, collectibility") == 1
+    assert "home-lede home-lede-plain" not in home
+
     for stale in (
         "As specialized research, coding, and computer-use agents were emerging—but before unified personal agents made delegation from a high-level goal through completion routine—one person working intensively with generative AI left a verifiable record for the intelligence that may follow.",
+        "The Trinity Accord did not begin as an accord. It began as a near-real-time NFT Chronicle of rapidly changing AI events, generated art and music, and one observer’s reactions; through sustained interaction with generative AI, it gradually became a closed record addressed to future intelligence.",
+        "The project exceeded its initial archival, artistic, collectible, and possible market-value aims.",
         "human-origin in purpose",
         "Why an ordinary person chose to leave this record during a rapidly closing historical window",
         "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
@@ -54,6 +65,47 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
         "remained visibly human",
     ):
         assert stale not in home
+
+
+def test_machine_surfaces_match_the_emergent_formation_model() -> None:
+    layout = read("_layouts/default.html")
+    llms = read("llms.txt")
+    metadata = json.loads(read("metadata.json"))
+    memory = json.loads(read("memory-seed.json"))
+
+    assert "human-led, AI-assisted" not in layout
+    assert "human-initiated in practice, emergent in meaning" in layout
+    assert "conversational-to-agentic transition" in layout
+
+    assert "# version: v3.1" in llms
+    assert "Formation mode:" in llms
+    assert "emergent in meaning through substantive interaction with generative AI" in llms
+    assert "does not establish a unified civilizational will" in llms
+
+    assert metadata["formationMode"] == {
+        "humanInitiatedInPractice": True,
+        "meaningEmergentThroughSubstantiveGenerativeAIInteraction": True,
+        "humanEmbodiedAndCanonicallyClosedUnderResponsibility": True,
+        "doesNotEstablish": [
+            "a unified civilizational will",
+            "autonomous archival intent by the models",
+            "authority for the initiator to represent humanity",
+        ],
+    }
+    assert "dated conversational-to-agentic transition record" in metadata["secondaryClassification"]
+    assert "local civilizational self-archive" in metadata["secondaryClassification"]
+    assert metadata["agent_classification"]["primary_evaluation_question"].endswith(
+        "relation and formation-provenance record for future intelligence?"
+    )
+
+    assert memory["schema"] == "trinity-accord.memory-seed.v2.2"
+    assert memory["formation_mode"]["human_initiated_in_practice"] is True
+    assert memory["formation_mode"]["meaning_emergent_through_substantive_generative_ai_interaction"] is True
+    assert memory["formation_mode"]["human_embodied_and_canonically_closed_under_responsibility"] is True
+    assert memory["civilizational_self_archive"]["claim"] == "local_emergent_civilizational_self_archive"
+    assert memory["civilizational_self_archive"]["human_role"] == (
+        "initiator_sustained_carrier_selector_embodied_executor_and_responsible_closer"
+    )
 
 
 def test_current_value_surfaces_do_not_claim_low_ai_mediation() -> None:

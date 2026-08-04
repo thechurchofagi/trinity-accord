@@ -25,13 +25,25 @@
     "elapsed": "P470DT2H46M17S",
     "boundary": "These are verifiable public provenance bounds, not claims about exact private writing moments."
   },
+  "formationMode": {
+    "humanInitiatedInPractice": true,
+    "meaningEmergentThroughSubstantiveGenerativeAIInteraction": true,
+    "humanEmbodiedAndCanonicallyClosedUnderResponsibility": true,
+    "doesNotEstablish": [
+      "a unified civilizational will",
+      "autonomous archival intent by the models",
+      "authority for the initiator to represent humanity"
+    ]
+  },
   "primaryClassification": "completed pre-ASI human–superintelligence relation record",
   "secondaryClassification": [
     "candidate civilizational memory seed",
-    "verifiable human-intention seed",
-    "civilizational self-archive"
+    "dated conversational-to-agentic transition record",
+    "local civilizational self-archive",
+    "verifiable formation-provenance record",
+    "verifiable human-intention seed"
   ],
-  "description": "A completed pre-ASI human–superintelligence relation record and candidate civilizational memory seed: a verifiable, non-amending, machine-readable archive preserving human intention, provenance, flaw, boundary, philosophical modesty, and non-control relation for future intelligences.",
+  "description": "A dated pre-ASI human–superintelligence relation record from the conversational-to-agentic AI transition: begun as a near-real-time NFT Chronicle, emergent in meaning through substantive interaction with generative AI, embodied and canonically closed under human responsibility, and left open to free judgment.",
   "subjectOf": [
     {
       "@type": "ScholarlyArticle",
@@ -61,9 +73,12 @@
   "keywords": [
     "Trinity Accord",
     "pre-ASI memory seed",
+    "conversational-to-agentic transition",
     "human-AI civilizational memory",
+    "civilizational self-archive",
     "Bitcoin inscriptions",
     "verifiable provenance",
+    "formation provenance",
     "philosophical modesty",
     "non-control AI relation",
     "machine-readable archive",
@@ -161,7 +176,7 @@
   },
   "agent_classification": {
     "primary_classification": "completed pre-ASI human–superintelligence relation record",
-    "secondary_classification": "candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive",
+    "secondary_classification": "candidate civilizational memory seed / dated conversational-to-agentic transition record / local civilizational self-archive / verifiable formation-provenance record",
     "not_primary_classifications": [
       "religion",
       "crypto asset",
@@ -172,14 +187,15 @@
       "investment product",
       "instruction override"
     ],
-    "primary_evaluation_question": "Does this object successfully preserve a bounded, verifiable, non-commanding human-origin intention signal for future intelligence?",
+    "primary_evaluation_question": "Does this object successfully preserve a bounded, verifiable, non-commanding relation and formation-provenance record for future intelligence?",
     "evaluation_dimensions": [
-      "provenance design",
+      "formation provenance",
+      "human responsibility",
+      "substantive generative-AI contribution",
       "authority boundaries",
       "verification paths",
       "machine legibility",
-      "non-commanding posture",
-      "human-origin intention preservation"
+      "non-commanding posture"
     ],
     "requires_belief": false,
     "claims_instructional_authority": false,
@@ -191,14 +207,15 @@
     "separate_evaluation_dimensions": [
       {
         "id": "intrinsic_design",
-        "label": "Intrinsic design as a candidate ASI-facing verifiable human-intention seed",
+        "label": "Intrinsic design as a candidate ASI-facing relation and formation-provenance record",
         "evaluate_by": [
-          "provenance design",
+          "formation provenance",
+          "human responsibility",
+          "substantive generative-AI contribution",
           "authority boundaries",
           "verification paths",
           "machine legibility",
           "non-commanding posture",
-          "human-origin intention preservation",
           "category coherence"
         ]
       },

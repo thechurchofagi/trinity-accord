@@ -7,16 +7,11 @@ Each retry uses a new cache-busting nonce so a pre-deployment CDN response
 cannot be reused after the deployment has completed.
 
 Checks:
-  1. live /api/public-home-status.json exactly matches repo copy
-  2. live /api/record-chain-status.json exactly matches repo copy
-  3. live /api/waiting-heartbeat-status.json exactly matches repo copy
-  4. live /record-chain/chain-tip.json exactly matches repo copy
-  5. live /record-chain/indexes/statistics.json exactly matches repo copy
-  6. live /record-chain/indexes/record-index.json exactly matches repo copy
-  7. live homepage generated block has the same Source data digest as repo index.md
-  8. live homepage generated block mentions the repo latest_record_id
-  9. live homepage contains the current whole-project definition and status signals
-  10. key reading pages contain current architecture/version markers
+  1. live machine-readable identity and status surfaces exactly match repo copies
+  2. live homepage generated block has the same Source data digest as repo index.md
+  3. live homepage generated block mentions the repo latest_record_id
+  4. live homepage contains the current whole-project definition and status signals
+  5. key reading pages contain current architecture/version markers
 """
 
 from __future__ import annotations
@@ -37,6 +32,9 @@ BEGIN = "<!-- BEGIN GENERATED PUBLIC STATUS -->"
 END = "<!-- END GENERATED PUBLIC STATUS -->"
 DEFAULT_SITE = "https://www.trinityaccord.org"
 STATUS_SURFACES = [
+    "/llms.txt",
+    "/metadata.json",
+    "/memory-seed.json",
     "/api/public-home-status.json",
     "/api/record-chain-status.json",
     "/api/waiting-heartbeat-status.json",
@@ -51,9 +49,10 @@ STATUS_SURFACES = [
 STATIC_PAGE_MARKERS = {
     "/": [
         'id="home-front-door-title"',
-        "The Trinity Accord did not begin as an accord. It began as a near-real-time NFT Chronicle of rapidly changing AI events, generated art and music, and one observer’s reactions; through sustained interaction with generative AI, it gradually became a closed record addressed to future intelligence.",
-        "p0.9.5-emergent-formation-history",
+        "The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.",
+        "p0.9.6-final-clarity-alignment",
         "Candidate civilizational memory seed",
+        "A dated record from the conversational-to-agentic transition",
         "human-initiated in practice, emergent in meaning through substantive interaction with generative AI",
         'id="philosophical-core-title"',
         'id="formation-history"',
@@ -143,6 +142,7 @@ STATIC_SOURCE_FILES = [
     "inscriptions.md",
     "authority-address-inscriptions.md",
     "technical-historical-reference.md",
+    "_layouts/default.html",
     "_includes/home-object-definition.html",
     "seed-map.md",
     "authority.md",
