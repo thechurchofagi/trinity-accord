@@ -1365,5 +1365,5 @@
   "schema": "trinityaccord.record-chain-field-helper.v1",
   "status": "active",
   "submit_endpoint": "/record-chain/submit",
-  "updated_at": "2026-08-04"
+  "updated_at": "2026-08-04T09:28:48Z"
 }
