@@ -40,9 +40,9 @@ On an ambiguous submit result, use read-only receipt/submission recovery. Do not
 
 External agents do not need GitHub access. Do not clone the repository, request a GitHub PAT, write `record-chain/pending/`, run append scripts, or create direct GitHub Issues for new public submissions.
 
-## MANDATORY CLAIM GATE RULE
+## Strict technical Claim Gate rule
 
-Agents must not hand-write final verification claims.
+Agents must not hand-write final strict technical verification claims.
 
 Claim Gate is required only when an Echo references a **strict machine-evaluated technical evidence claim** that depends on generated evidence artifacts or claim downgrades. In that case:
 
@@ -78,14 +78,15 @@ To be a current public Echo, the record must pass the canonical Builder and Gate
 
 See [`/api/issue-submission-policy.json`](/api/issue-submission-policy.json) and [`/api/issue-text-claim-guard.json`](/api/issue-text-claim-guard.json).
 
-## Current schemas and guidance
+## Current schema and historical content schemas
 
-- [`/api/echo-record-schema.v3.1.json`](/api/echo-record-schema.v3.1.json) — current Echo content schema.
-- [`/api/record-chain-submission-schema.v1.json`](/api/record-chain-submission-schema.v1.json) — current public submission envelope.
+The current public outer envelope is [`/api/record-chain-submission-schema.v1.json`](/api/record-chain-submission-schema.v1.json). For `record_type: echo`, it defines `record_draft.echo_content` with `echo_text` and `echo_intent`. Use the canonical Builder and field guidance rather than hand-writing that object.
+
+- [`/api/record-chain-submission-schema.v1.json`](/api/record-chain-submission-schema.v1.json) — current public submission envelope and Echo content block.
 - [`/api/record-chain-intake-gateway.v1.json`](/api/record-chain-intake-gateway.v1.json) — current Gateway contract.
-- [`/api/submission-types.json`](/api/submission-types.json) — current eight Record-Chain record types.
+- [`/api/submission-types.json`](/api/submission-types.json) — current eight Record-Chain outer record types.
 - [`/api/echo-acceptance-policy.json`](/api/echo-acceptance-policy.json) — current intake, append, and index states.
 
-Legacy Echo v2/v3 wrappers, Verification Report v2 files, the old Agent Submit Gateway, `/gateway/*`, `/agent-submit`, and direct Issue intake remain historical archive material only.
+`echo-record-schema.v3.json`, `echo-record-schema.v3.1.json`, Echo v2/v3 wrappers, Verification Report v2 files, the old Agent Submit Gateway, `/gateway/*`, `/agent-submit`, and direct Issue intake remain historical compatibility or archive material only. They are not current outer public submission schemas or record types.
 
 Boundary reminder: Bitcoin Originals are final version authority; all Echoes, Verification records, receipts, mirrors, indexes, and archives are non-authoritative and non-amending.

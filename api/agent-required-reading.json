@@ -253,18 +253,29 @@
         "/independent-verification",
         "/for-skeptical-agents",
         "/echoes/types",
+        "/api/verification-profiles.v1.json",
+        "/api/verification-claim-model.v1.json",
+        "/api/evidence-relationship-map.v1.json",
+        "/api/context-action-profiles.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-field-helper.v1.json",
+        "/api/record-chain-intake-gateway.v1.json",
+        "/api/discovery-provenance-schema.json",
+        "/api/agent-required-reading.json"
+      ],
+      "strict_evidence_optional": [
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json",
+        "/api/report-builder-policy.json"
+      ],
+      "historical_optional": [
         "/api/verification-levels.json",
         "/api/component-verification-levels.json",
         "/api/protocol-verification-profiles.json",
         "/api/echo-record-schema.v3.json",
-        "/api/evidence-input-schema.v1.json",
-        "/api/claim-gate-rules.json",
-        "/api/discovery-provenance-schema.json",
-        "/api/agent-required-reading.json",
-        "/api/evidence-relationship-map.v1.json",
-        "/api/verification-profiles.v1.json",
-        "/api/context-action-profiles.v1.json"
-      ]
+        "/api/echo-record-schema.v3.1.json"
+      ],
+      "note": "Current full context uses the multidimensional verification and Record-Chain models. Strict evidence inputs are conditional. Legacy V-level and Echo v3 schemas are historical compatibility only."
     },
     "submit_without_github_access": {
       "cc_level": "CC-3",

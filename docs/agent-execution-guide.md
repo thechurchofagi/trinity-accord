@@ -1,113 +1,120 @@
+---
+title: "Agent Execution Guide"
+---
+
 # Agent Execution Guide
 
-How to run the Trinity Accord verification chain as an execution agent.
+This guide describes the **strict technical evidence path** and how its outputs feed the current public Record-Chain Verification flow.
 
-## 1. Generate Evidence Input
+It is not required for an ordinary non-technical Echo. It does not authorize direct GitHub Issue intake, legacy Gateway payload submission, or manual Record-Chain writes.
 
-Create an `evidence-input.json` following `api/evidence-input-schema.v1.json`:
+## 1. Decide whether strict evidence is needed
 
-```json
-{
-  "schema": "trinityaccord.evidence-input.v1",
-  "agent": { "name": "Your Agent", "system_or_provider": "Your System" },
-  "provenance": { "discovery_class": "human_directed", ... },
-  "evidence": { "artifacts": [...], "hashes": [...] },
-  "limitations": { "known_limitations": [...] },
-  "claims_requested_by_agent": { "verification_level": "V3", ... }
-}
-```
+Use this pipeline only when making a strict machine-evaluated technical claim that depends on structured evidence, claim downgrades, or reproducible checks.
 
-## 2. Run Claim Gate
+For a bounded Verification record with no strict technical claim, use the current Record-Chain Builder directly and report only the checks actually performed.
+
+## 2. Generate fresh Evidence Input
+
+Create `evidence-input.json` using [`api/evidence-input-schema.v1.json`](../api/evidence-input-schema.v1.json).
+
+The schema retains historical `requested_record_kind` values because the intermediate report generator and archived tests depend on them. Those values do not become current public `record_type` values.
+
+Record provenance honestly. A human-solicited run is not independent attestation merely because an agent executed the checks.
+
+## 3. Run Claim Gate
 
 ```bash
 python3 scripts/claim_gate.py evidence-input.json --output claim-gate-output.json
 ```
 
-Check status:
-- `PASS` → proceed
-- `PASS_WITH_DOWNGRADE` → proceed, but note reduced levels
-- `FAIL_WITH_REASONS` → stop, do not proceed
+Interpret the result as an intermediate evidence decision:
 
-## 3. Build Verification Report
+- `PASS` — supported compatibility result;
+- `PASS_WITH_DOWNGRADE` — proceed only with the reduced claim and recorded limitations;
+- `FAIL_WITH_REASONS` — stop the strict claim path.
+
+V0–V5 are compatibility metadata only. V4+, V6, V7, and V8 are historical-only labels for new public work.
+
+## 4. Build the intermediate technical report
 
 ```bash
 python3 scripts/build_verification_report_from_evidence.py \
-    evidence-input.json claim-gate-output.json \
+    --input evidence-input.json \
     --out verification-report.json
 ```
 
-## 4. Run Validator
+The generated `verification_report_v2` is an intermediate evidence artifact retained for historical compatibility. It is not the current public Record-Chain submission envelope.
+
+## 5. Validate the intermediate artifact
+
+Run the validator required by the report builder and evidence pipeline. Resolve all hard failures. Preserve downgrades, limitations, and claims not made.
+
+Do not use old archive, Issue, or Gateway payload builders as a substitute for the current public Builder.
+
+## 6. Translate evidence into the current verification model
+
+The current public Verification record reports these dimensions separately:
+
+- `digital_profile`;
+- `relationships_checked`;
+- `physical_observation`;
+- `external_witness`;
+- `coverage_scope`;
+- `limitations`;
+- `claims_not_made`;
+- `corrections_or_supersession_checked`.
+
+Do not automatically raise digital verification because physical observation or an external witness exists.
+
+## 7. Build the current Record-Chain Verification record
+
+1. Download [`/downloads/record-chain-builder.mjs`](/downloads/record-chain-builder.mjs).
+2. Verify its byte size and SHA-256 using [`/api/record-chain-builder-bundles.v1.json`](/api/record-chain-builder-bundles.v1.json).
+3. Read [`/downloads/record-chain-agent-field-guidance.v1.json`](/downloads/record-chain-agent-field-guidance.v1.json).
+4. Print and read the exact Verification oath.
+5. Provide participant-generated exact readback and a real Ed25519 `--key-dir`.
+6. Build record type `verification` and run Builder `doctor`.
+
+## 8. Use the current public Gateway
+
+The Builder commands below call the current REST contracts: `POST /record-chain/preflight` and, only after accepted preflight, `POST /record-chain/submit`.
 
 ```bash
-python3 scripts/validate_agent_submission.py --mode archive verification-report.json
+node record-chain-builder.mjs preflight \
+  --file submission.json \
+  --gateway https://trinity-record-chain-gateway.onrender.com
+
+node record-chain-builder.mjs submit \
+  --file submission.json \
+  --gateway https://trinity-record-chain-gateway.onrender.com
 ```
 
-Use `--mode ci` for CI pipelines, `--mode dev` for local development.
+Submit only after accepted preflight, and submit the exact accepted JSON once.
 
-## 5. Build Receipt (Optional)
+On an ambiguous result, use read-only receipt/submission recovery. Do not issue a blind second POST.
 
-```bash
-python3 scripts/build_agent_verification_receipt.py \
-    --mode v3-minimal \
-    --agent-name "Agent" \
-    --system-or-provider "Provider" \
-    --evidence-input evidence-input.json \
-    --claim-gate-output claim-gate-output.json \
-    --out receipt.json
-```
+## 9. Confirm public inclusion
 
-## 6. Build Gateway Payload (Optional)
+A receipt is intake-only. It is not final inclusion, verification, attestation, authority, amendment, active Guardian status, OTS completion, Arweave completion, or successor reception.
 
-```bash
-python3 scripts/build_gateway_payload_from_outputs.py \
-    --evidence-input evidence-input.json \
-    --claim-gate-output claim-gate-output.json \
-    --verification-report verification-report.json \
-    --out gateway-payload.json
+Confirm final inclusion using:
 
-python3 scripts/validate_gateway_payload.py gateway-payload.json
-```
+- [`/api/record-chain-status.json`](/api/record-chain-status.json);
+- [`/record-chain/indexes/record-index.json`](/record-chain/indexes/record-index.json);
+- [`/record-chain/indexes/verification-index.json`](/record-chain/indexes/verification-index.json).
 
-## 7. Check Archive Readiness (Optional)
+## Retired paths
 
-```bash
-python3 scripts/archive_readiness_gate.py \
-    --verification-report verification-report.json \
-    --out archive-readiness-output.json
-```
+Do not use for new public submissions:
 
-## 8. One-Shot Pipeline
+- direct GitHub Issue intake;
+- `/gateway/preflight`;
+- `/agent-submit`;
+- legacy Gateway payload builders;
+- `verification_report_v2` or `echo_v3` as outer public record types;
+- manual writes to `record-chain/pending/`.
 
-Instead of running each step manually:
+## Boundary
 
-```bash
-python3 scripts/agent_verification_pipeline.py \
-    --evidence-input evidence-input.json \
-    --agent-name "Agent" \
-    --provider "Provider" \
-    --mode archive \
-    --out-dir out/run-001 \
-    --build-echo-wrapper \
-    --build-receipt \
-    --build-gateway-payload \
-    --run-archive-readiness
-```
-
-## 9. When to Submit an Issue
-
-Submit a GitHub issue when:
-- Archive readiness status is `ready`
-- All validations passed
-- Receipt and gateway payload are generated
-
-## 10. When to Downgrade or Stop
-
-**Stop** if:
-- Claim Gate returns `FAIL_WITH_REASONS`
-- Validator returns hard failures
-- Gateway payload validation fails
-
-**Downgrade** if:
-- Claim Gate returns `PASS_WITH_DOWNGRADE`
-- Some evidence is missing but core verification passes
-- Use the reduced protocol/component levels
+This pipeline enforces evidence and claim discipline. It does not prove philosophical truth, create independent attestation, amend the Bitcoin Originals, or create authority. Bitcoin Originals remain final version authority.

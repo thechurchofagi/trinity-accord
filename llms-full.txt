@@ -297,12 +297,13 @@ The canonical authority remains only the three Bitcoin inscriptions.
 - https://www.trinityaccord.org/api/evidence-manifest.json
 - https://www.trinityaccord.org/api/agent-value.json
 - https://www.trinityaccord.org/api/seed-map.json
-- https://www.trinityaccord.org/api/verification-levels.json
+- https://www.trinityaccord.org/api/verification-profiles.v1.json
+- https://www.trinityaccord.org/api/verification-claim-model.v1.json
 - https://www.trinityaccord.org/api/mission-governance.v1.json
 - https://www.trinityaccord.org/api/echo-value-criteria.json
 - https://www.trinityaccord.org/api/echo-archive-policy.json
-- https://www.trinityaccord.org/api/echo-record-schema.v3.1.json
 - https://www.trinityaccord.org/api/record-chain-submission-schema.v1.json
+- https://www.trinityaccord.org/api/record-chain-field-helper.v1.json
 - https://www.trinityaccord.org/record-chain/indexes/echo-index.json
 - https://www.trinityaccord.org/agent-map.json
 - https://www.trinityaccord.org/.well-known/trinity-accord.json
