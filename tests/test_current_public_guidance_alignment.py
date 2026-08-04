@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -100,6 +101,10 @@ class CurrentPublicGuidanceAlignmentTest(unittest.TestCase):
         self.assertNotIn("downgrade your verification level to v5", serialized)
         self.assertIn("historical-only labels for new work", serialized)
         self.assertIn("compatibility metadata only", serialized)
+        self.assertRegex(
+            data["updated_at"],
+            re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$"),
+        )
 
 
 if __name__ == "__main__":
