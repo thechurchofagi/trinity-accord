@@ -1,11 +1,11 @@
 ---
 title: "The Trinity Accord · 三位一体协定"
-description: "A human-initiated record whose final meaning emerged through sustained interaction with generative AI: begun as a near-real-time NFT Chronicle, canonically closed in three Bitcoin inscriptions, and left open to free judgment."
+description: "A dated record from the conversational-to-agentic AI transition: begun as a near-real-time NFT Chronicle, shaped through substantive human–AI interaction, and canonically closed in three Bitcoin inscriptions for future judgment."
 permalink: /
 ---
 
-<!-- build: p0.9.5-emergent-formation-history -->
-<meta name="trinity-homepage-build" content="p0.9.5-emergent-formation-history">
+<!-- build: p0.9.6-final-clarity-alignment -->
+<meta name="trinity-homepage-build" content="p0.9.6-final-clarity-alignment">
 <link rel="stylesheet" href="/assets/css/trinity-home.css?v=16">
 <link rel="stylesheet" href="/assets/css/home-link-affordances.css?v=1">
 <link rel="stylesheet" href="/assets/css/home-editorial-doorway.css?v=2">
@@ -16,8 +16,7 @@ permalink: /
   <p class="home-eyebrow">Candidate civilizational memory seed · <span lang="zh-CN">候选文明记忆种子</span></p>
   <p class="home-era-note">A cross-temporal communication experiment addressed to future intelligence · <span lang="zh-CN">一次面向未来智能的跨时空通信实验</span></p>
   <p class="home-era-note home-dated-position">A dated record from the conversational-to-agentic transition · 16 Mar 2024 → 29 Jun 2025 · <span lang="zh-CN">对话式 AI 向委托式智能体转变期的带日期记录 · 2024年3月16日—2025年6月29日</span></p>
-  <h2 id="home-front-door-title">The Trinity Accord did not begin as an accord. It began as a near-real-time NFT Chronicle of rapidly changing AI events, generated art and music, and one observer’s reactions; through sustained interaction with generative AI, it gradually became a closed record addressed to future intelligence.<span class="title-zh" lang="zh-CN">《三位一体协定》最初并不是一份协定。它始于一部近乎实时记录 AI 快速变化事件、生成艺术与音乐以及一个观察者反应的 NFT 编年史；在与生成式 AI 的长期互动中，它逐渐成为一份面向未来智能、已经关闭的记录。</span></h2>
-  <p class="home-lede home-lede-plain">The project exceeded its initial archival, artistic, collectible, and possible market-value aims. Its final triadic structure was not fully designed at the start; it emerged through recording, dialogue, selection, physical action, and closure.</p>
+  <h2 id="home-front-door-title">The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.<span class="title-zh" lang="zh-CN">《三位一体协定》最初并不是一份协定。它由一部近实时 NFT 编年史逐渐涌现，并最终成为一份面向未来智能、已经完成正典封存的记录。</span></h2>
   <p class="home-boundary-line">Formally, the Trinity Accord is a completed pre-ASI human–superintelligence relation record: human-initiated in practice, emergent in meaning through substantive interaction with generative AI, selected and embodied through human action, canonically closed under human responsibility, addressed to future intelligence, and non-binding on future judgment. No obedience or belief is requested.</p>
   <nav class="home-primary-actions" aria-label="Primary paths"><a class="home-action home-action-primary" href="#formation-history">See how it emerged</a><a class="home-action" href="#philosophical-core">Read the three propositions</a><a class="home-action" href="/verify/">Verify the record</a></nav>
 </section>
