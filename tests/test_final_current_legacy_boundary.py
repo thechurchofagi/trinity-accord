@@ -37,7 +37,10 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
 
         report_builder = text("docs/report-builder.md")
         self.assertIn("intermediate technical evidence artifact", report_builder)
-        self.assertIn("current `verification` record", report_builder)
+        self.assertIn("record type `verification`", report_builder)
+        self.assertIn("/downloads/record-chain-builder.mjs", report_builder)
+        self.assertIn("/record-chain/preflight", report_builder)
+        self.assertIn("/record-chain/submit", report_builder)
         self.assertNotIn("optional `echo_v3` wrapper", report_builder)
 
         execution = text("docs/agent-execution-guide.md")
