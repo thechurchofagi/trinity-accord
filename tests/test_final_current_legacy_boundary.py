@@ -124,6 +124,11 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
         self.assertIs(historical["/api/echo-record-schema.v3.1.json"]["not_current_outer_submission_schema"], True)
         self.assertIs(historical["/api/verification-levels.json"]["v4plus_v6_v7_v8_historical_only_for_new_work"], True)
 
+    def test_boundary_registry_does_not_create_a_new_public_url(self) -> None:
+        self.assertFalse((ROOT / "api/current-legacy-boundary.v1.json").exists())
+        sitemap = text("sitemap.xml")
+        self.assertNotIn("/api/current-legacy-boundary.v1.json", sitemap)
+
     def test_chronicle_verification_marks_v_levels_historical(self) -> None:
         page = text("chronicle-verification.md")
         self.assertIn("Historical verification-model boundary", page)
