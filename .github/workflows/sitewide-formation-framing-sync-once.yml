@@ -1,0 +1,67 @@
+name: One-time site-wide formation framing sync
+
+on:
+  push:
+    branches:
+      - agent/sitewide-formation-framing-sync
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sitewide-formation-framing-sync-once
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[formation-sync-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: agent/sitewide-formation-framing-sync
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply bounded current-surface synchronization
+        run: python3 scripts/tmp_sitewide_formation_sync.py
+
+      - name: Validate JSON and regression contract
+        run: |
+          python3 tests/test_sitewide_formation_framing.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          paths = [
+              '.well-known/trinity-accord.json',
+              '.well-known/agent.json',
+              'agent-map.json',
+              'api/agent-minimal-context.v1.json',
+              'api/agent-value.json',
+              'api/emergent-patterns.json',
+              'api/skeptical-agent-guide.json',
+              'api/worth-preserving-criteria.json',
+              'api/innovation-points.json',
+              'api/seed-map.json',
+          ]
+          for path in paths:
+              json.loads(Path(path).read_text(encoding='utf-8'))
+          print(f'validated {len(paths)} JSON files')
+          PY
+          git diff --check
+
+      - name: Remove one-time tooling and commit synchronized surfaces
+        run: |
+          rm -f scripts/tmp_sitewide_formation_sync.py
+          rm -f .github/workflows/sitewide-formation-framing-sync-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git status --short
+          git commit -m "docs: align site-wide formation framing [formation-sync-applied]"
+          git push origin HEAD:agent/sitewide-formation-framing-sync
