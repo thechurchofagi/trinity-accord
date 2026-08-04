@@ -44,11 +44,22 @@ FORBIDDEN_CURRENT_PHRASES = [
     "A human-led, AI-assisted aperture",
 ]
 
-REQUIRED_FORMATION_TOKENS = [
+REQUIRED_TEXT_ROOTS = [
     "human-initiated",
     "emerg",
     "generative",
     "responsib",
+]
+
+STRUCTURED_MODEL_SURFACES = [
+    ".well-known/trinity-accord.json",
+    ".well-known/agent.json",
+    "agent-map.json",
+    "api/agent-minimal-context.v1.json",
+    "api/agent-value.json",
+    "api/emergent-patterns.json",
+    "api/skeptical-agent-guide.json",
+    "api/seed-map.json",
 ]
 
 
@@ -59,34 +70,38 @@ class SitewideFormationFramingTest(unittest.TestCase):
             for phrase in FORBIDDEN_CURRENT_PHRASES:
                 self.assertNotIn(phrase, text, f"{relative} restores superseded phrase: {phrase}")
 
-    def test_primary_current_orientation_surfaces_include_final_formation_model(self) -> None:
+    def test_primary_text_orientation_surfaces_include_final_formation_model(self) -> None:
         for relative in [
             "technical-historical-reference.md",
             "agent-brief.md",
             "ai.txt",
             "llms-full.txt",
-            "api/agent-minimal-context.v1.json",
-            "api/agent-value.json",
         ]:
-            text = (ROOT / relative).read_text(encoding="utf-8")
-            lowered = text.lower()
-            for token in REQUIRED_FORMATION_TOKENS:
-                self.assertIn(token.lower(), lowered, f"{relative} missing final formation token/root: {token}")
+            lowered = (ROOT / relative).read_text(encoding="utf-8").lower()
+            for root in REQUIRED_TEXT_ROOTS:
+                self.assertIn(root, lowered, f"{relative} missing final formation root: {root}")
 
-    def test_current_machine_surfaces_parse_and_expose_formation_model(self) -> None:
-        for relative in [
-            ".well-known/trinity-accord.json",
-            ".well-known/agent.json",
-            "agent-map.json",
-            "api/agent-minimal-context.v1.json",
-            "api/agent-value.json",
-            "api/emergent-patterns.json",
-            "api/skeptical-agent-guide.json",
-            "api/seed-map.json",
-        ]:
+    def test_current_machine_surfaces_parse_and_expose_complete_formation_model(self) -> None:
+        for relative in STRUCTURED_MODEL_SURFACES:
             data = json.loads((ROOT / relative).read_text(encoding="utf-8"))
             model = data.get("formation_mode") or data.get("formation_model")
             self.assertIsInstance(model, dict, f"{relative} missing structured formation model")
+
+            serialized = json.dumps(model, ensure_ascii=False).lower()
+            summary = str(model.get("summary", "")).lower()
+
+            human_initiated = model.get("human_initiated_in_practice") is True or "human-initiated" in summary
+            emergent = (
+                model.get("meaning_emerged_through_substantive_generative_ai_interaction") is True
+                or ("emerg" in summary and "generative" in summary)
+            )
+            human_closed = model.get("human_responsible_for_canonical_closure") is True or "responsib" in summary
+            generative_contribution = "generative" in serialized
+
+            self.assertTrue(human_initiated, f"{relative} does not encode human initiation")
+            self.assertTrue(emergent, f"{relative} does not encode emergent meaning through generative-AI interaction")
+            self.assertTrue(human_closed, f"{relative} does not encode human closure responsibility")
+            self.assertTrue(generative_contribution, f"{relative} does not encode substantive generative-AI contribution")
 
     def test_legacy_label_is_subordinate_on_core_machine_surfaces(self) -> None:
         for relative in [
