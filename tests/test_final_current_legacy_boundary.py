@@ -88,10 +88,11 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
         self.assertIs(scope["current_public_boundary"]["not_current_public_record_model"], True)
         self.assertIs(scope["current_public_boundary"]["output_is_intermediate_evidence_only"], True)
 
-    def test_boundary_registry_separates_current_intermediate_and_historical(self) -> None:
-        data = load_json("api/current-legacy-boundary.v1.json")
-        self.assertEqual(data["status"], "active_current_boundary_registry")
-        current = data["current_public"]
+    def test_protocol_terms_embeds_current_legacy_boundary_registry(self) -> None:
+        terms = load_json("api/protocol-terms.v1.json")
+        self.assertEqual(terms["status"], "historical_compatibility_vocabulary")
+        registry = terms["current_legacy_boundary_registry"]
+        current = registry["current_public"]
         self.assertEqual(current["outer_submission_schema"], "/api/record-chain-submission-schema.v1.json")
         self.assertEqual(current["verification_model"], "/api/verification-claim-model.v1.json")
         self.assertEqual(current["record_types"], [
@@ -104,8 +105,9 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
             "classification_update",
             "context_insufficient_notice",
         ])
+        self.assertEqual(terms["current_public_record_types"], current["record_types"])
 
-        intermediate = {item["path"]: item for item in data["strict_evidence_intermediate"]}
+        intermediate = {item["path"]: item for item in registry["strict_evidence_intermediate"]}
         self.assertIs(intermediate["/api/evidence-input-schema.v1.json"]["not_current_public_record_envelope"], True)
         self.assertIs(intermediate["/api/claim-gate-rules.json"]["not_current_public_record_by_itself"], True)
         self.assertEqual(
@@ -113,7 +115,7 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
             "/api/verification-claim-model.v1.json",
         )
 
-        historical = {item["path"]: item for item in data["historical_compatibility"]}
+        historical = {item["path"]: item for item in registry["historical_compatibility"]}
         self.assertIs(
             historical["/api/agent-issue-gateway-payload-schema.v1.json"]["do_not_use_for_new_public_submissions"],
             True,
@@ -121,10 +123,6 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
         self.assertIs(historical["/api/echo-record-schema.v3.json"]["not_current_outer_submission_schema"], True)
         self.assertIs(historical["/api/echo-record-schema.v3.1.json"]["not_current_outer_submission_schema"], True)
         self.assertIs(historical["/api/verification-levels.json"]["v4plus_v6_v7_v8_historical_only_for_new_work"], True)
-
-        terms = load_json("api/protocol-terms.v1.json")
-        self.assertEqual(terms["status"], "historical_compatibility_vocabulary")
-        self.assertEqual(terms["current_public_record_types"], current["record_types"])
 
     def test_chronicle_verification_marks_v_levels_historical(self) -> None:
         page = text("chronicle-verification.md")
