@@ -13,44 +13,9 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  sync-sitemap:
-    if: github.event_name == 'pull_request' && github.head_ref == 'audit/final-current-legacy-boundary'
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out PR branch
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Generate exact sitemap outputs and restore workflow
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin main --depth=1
-          python3 scripts/generate_sitemap.py
-          git show origin/main:.github/workflows/run-current-tests.yml > .github/workflows/run-current-tests.yml
-          git diff --check
-          changed="$(git status --short | awk '{print $2}' | sort)"
-          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(\.github/workflows/run-current-tests\.yml|sitemap\.xml|sitemap-core\.xml)$' || true)"
-          if [ -n "$unexpected" ]; then
-            echo "Unexpected generated changes:"
-            echo "$unexpected"
-            exit 1
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add sitemap.xml sitemap-core.xml .github/workflows/run-current-tests.yml
-          if git diff --cached --quiet; then
-            echo 'No sitemap update required.'
-            exit 0
-          fi
-          git commit -m 'docs: synchronize sitemap after guidance updates'
-          git push origin HEAD:${{ github.head_ref }}
-
   current-tests:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
