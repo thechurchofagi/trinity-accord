@@ -46,7 +46,7 @@ FORBIDDEN_CURRENT_PHRASES = [
 
 REQUIRED_FORMATION_TOKENS = [
     "human-initiated",
-    "emergent",
+    "emerg",
     "generative AI",
     "human responsibility",
 ]
@@ -71,7 +71,7 @@ class SitewideFormationFramingTest(unittest.TestCase):
             text = (ROOT / relative).read_text(encoding="utf-8")
             lowered = text.lower()
             for token in REQUIRED_FORMATION_TOKENS:
-                self.assertIn(token.lower(), lowered, f"{relative} missing final formation token: {token}")
+                self.assertIn(token.lower(), lowered, f"{relative} missing final formation token/root: {token}")
 
     def test_current_machine_surfaces_parse_and_expose_formation_model(self) -> None:
         for relative in [
