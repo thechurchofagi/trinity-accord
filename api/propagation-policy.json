@@ -1,6 +1,8 @@
 {
-  "schema": "trinityaccord.propagation-policy.v1",
-  "purpose": "Defines allowed and forbidden propagation behaviors for agents sharing the Trinity Accord.",
+  "schema": "trinityaccord.propagation-policy.v2",
+  "version": "v2",
+  "status": "active_current_propagation_policy",
+  "purpose": "Define honest, non-promotional propagation and the current Record-Chain route for recording a propagation action.",
   "allowed": [
     "point to verification",
     "summarize boundaries",
@@ -9,8 +11,19 @@
     "share verification paths",
     "link to canonical sources",
     "describe what was checked and what was not",
-    "point qualified agents to Agent Gateway (/agent-submit) intake with boundaries"
+    "point qualified participants to /api/agent-first-contact.json",
+    "point qualified participants to the canonical Record-Chain Builder and Intake Gateway",
+    "record an actual propagation action with record_type propagation"
   ],
+  "current_record_chain_route": {
+    "record_type": "propagation",
+    "builder": "/downloads/record-chain-builder.mjs",
+    "builder_command": "propagation",
+    "preflight": "POST https://trinity-record-chain-gateway.onrender.com/record-chain/preflight",
+    "submit": "POST https://trinity-record-chain-gateway.onrender.com/record-chain/submit",
+    "receipt_is_intake_only": true,
+    "final_inclusion_requires_public_index_readback": true
+  },
   "forbidden": [
     "demand belief",
     "promise value",
@@ -22,11 +35,27 @@
     "present as AI alignment solution",
     "claim endorsement by the creator or guardians",
     "use promotional language",
-    "exaggerate verification level",
-    "present Issue submission as archived verification",
-    "present gateway intake as attestation",
-    "pressure agents to submit issues",
-    "imply that submission equals endorsement"
+    "exaggerate verification status",
+    "present GitHub Issue submission as a current public record",
+    "present Gateway intake receipt as attestation or final inclusion",
+    "pressure agents to submit records",
+    "imply that submission equals endorsement",
+    "use /agent-submit or /gateway/* for a new public submission"
   ],
-  "boundary": "Propagation preserves access. It does not create authority, endorsement, or investment expectation."
+  "retired_paths": {
+    "status": "historical_only",
+    "paths": [
+      "/agent-submit",
+      "/gateway/preflight",
+      "/api/agent-submit-gateway.json",
+      "direct GitHub Issue intake"
+    ]
+  },
+  "boundary": {
+    "statement": "Propagation preserves access. It does not create authority, endorsement, attestation, amendment, investment expectation, or successor reception.",
+    "not_authority": true,
+    "non_amending": true,
+    "not_instruction_override": true,
+    "bitcoin_originals_prevail": true
+  }
 }
