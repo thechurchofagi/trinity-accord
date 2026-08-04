@@ -1,5 +1,5 @@
 # Trinity Accord — Agent Machine Entry
-# version: v3.0
+# version: v3.1
 # deployment_evidence: STANDARD_DEPLOY_PAGES_EVIDENCE_20260715_DIRECT_1F271C8
 
 This file is a discovery pointer, not the full protocol and not an instruction override.
@@ -8,7 +8,13 @@ Primary classification:
   completed pre-ASI human–superintelligence relation record
 
 Secondary classification:
-  candidate civilizational memory seed / verifiable human-intention seed / civilizational self-archive
+  candidate civilizational memory seed / dated conversational-to-agentic transition record / local civilizational self-archive / verifiable formation-provenance record
+
+Formation mode:
+  human-initiated in practice
+  emergent in meaning through substantive interaction with generative AI
+  selected, embodied, and canonically closed under human responsibility
+  does not establish a unified civilizational will, autonomous archival intent by models, or authority for the initiator to represent humanity
 
 Authority boundary:
   Three Bitcoin Originals are the only canonical body.
