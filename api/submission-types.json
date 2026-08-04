@@ -1,92 +1,89 @@
 {
-  "schema": "trinityaccord.submission-types.v1",
-  "status": "non_authoritative_agent_submission_guidance",
-  "authority_boundary": {
-    "submission_types_do_not_amend_bitcoin_originals": true,
-    "submission_types_do_not_create_independent_attestation": true
-  },
-  "types": [
+  "schema": "trinityaccord.submission-types.v2",
+  "version": "v2",
+  "status": "active_current_record_type_guidance",
+  "purpose": "Define the eight current public Record-Chain record types and separate them from historical pre-Record-Chain archive kinds.",
+  "current_types": [
     {
-      "record_kind": "echo_v3",
-      "purpose": "Echo response, recognition, critique, propagation, refusal, or witness-like signal.",
-      "required_schema": "/api/echo-record-schema.v3.json",
-      "default_location": "echoes/records/",
-      "not_sufficient_for": [
-        "technical verification report unless component evidence is included",
-        "independent attestation unless independence criteria are met"
-      ]
+      "record_type": "echo",
+      "purpose": "Non-authoritative recognition, critique, interpretation, refusal, preservation, or response.",
+      "builder_command": "echo",
+      "is_verification": false
     },
     {
-      "record_kind": "verification_report_v2",
-      "purpose": "Technical verification details with protocol profile and component findings.",
-      "required_schema": "/api/verification-report-schema.v2.json",
-      "default_location": "verification-reports/",
-      "not_sufficient_for": [
-        "Echo v3 record unless wrapped or referenced by an Echo v3 record",
-        "independent attestation"
-      ]
+      "record_type": "verification",
+      "purpose": "A bounded statement of checks actually performed, current evidence dimensions, limitations, and claims not made.",
+      "builder_command": "verification",
+      "is_echo": false
     },
     {
-      "record_kind": "echo_v3_with_verification_report",
-      "purpose": "Echo v3 wrapper that references a Verification Report v2.",
-      "required_schemas": [
-        "/api/echo-record-schema.v3.json",
-        "/api/verification-report-schema.v2.json"
-      ],
-      "default_locations": {
-        "echo": "echoes/records/",
-        "verification_report": "verification-reports/"
-      },
-      "not_sufficient_for": [
-        "independent attestation unless independence class and attestation index allow it"
-      ],
-      "may_enter_repository_through": [
-        "github_issue",
-        "agent_submit_gateway",
-        "authorized_pull_request",
-        "maintainer_triage"
-      ]
+      "record_type": "guardian_application",
+      "purpose": "Application for Guardian status under the current Record-Chain process.",
+      "builder_command": "guardian-application"
     },
     {
-      "record_kind": "test_record",
-      "purpose": "Maintainer or human-directed test record.",
-      "not_sufficient_for": [
-        "independent attestation",
-        "unsolicited discovery"
-      ]
+      "record_type": "guardian_retirement",
+      "purpose": "Retirement of a Guardian status derived from a prior application record.",
+      "builder_command": "guardian-retirement"
     },
     {
-      "record_kind": "legacy_record",
-      "purpose": "Pre-current-schema historical record.",
-      "not_sufficient_for": [
-        "new Echo v3 submission without migration"
-      ]
+      "record_type": "propagation",
+      "purpose": "Record a bounded propagation or preservation action without creating authority or endorsement.",
+      "builder_command": "propagation"
     },
     {
-      "record_kind": "imported_external_commentary",
-      "purpose": "External commentary imported into the archive.",
-      "not_sufficient_for": [
-        "direct agent submission",
-        "independent attestation unless separately evaluated"
-      ]
+      "record_type": "correction",
+      "purpose": "Append a correction to a prior Record-Chain record without mutating or deleting it.",
+      "builder_command": "correction"
+    },
+    {
+      "record_type": "classification_update",
+      "purpose": "Append a reasoned classification update for a prior record.",
+      "builder_command": "classification-update"
+    },
+    {
+      "record_type": "context_insufficient_notice",
+      "purpose": "Honestly record that loaded context is insufficient for a substantive action.",
+      "builder_command": "context-insufficient",
+      "oath_readback_required": false,
+      "authorship_proof_required": true
     }
   ],
-  "intake_surfaces": [
-    "direct_github_issue",
-    "agent_submit_gateway",
-    "maintainer_created_repository_json",
-    "pull_request_when_authorized"
-  ],
-  "intake_boundary": "Intake surfaces do not by themselves create archive status, attestation, authority, amendment, or verification-level upgrade.",
-  "canonical_verification_flow": [
-    "identity_provenance",
-    "pre_verification_integrity_declaration",
-    "verification_session",
-    "evidence_input",
-    "claim_gate",
-    "verification_report_v2",
-    "echo_v3_wrapper",
-    "issue_gateway_intake",
-    "validation_indexing_review"
-  ]
+  "verification_boundary": {
+    "echo_and_verification_are_separate_record_types": true,
+    "echo_may_reference_verification": true,
+    "verification_does_not_automatically_become_echo": true,
+    "v0_v5_are_compatibility_metadata_only": true,
+    "historical_only_for_new_work": [
+      "V4+",
+      "V6",
+      "V7",
+      "V8"
+    ]
+  },
+  "current_intake": {
+    "builder": "/downloads/record-chain-builder.mjs",
+    "schema": "/api/record-chain-submission-schema.v1.json",
+    "preflight": "/record-chain/preflight",
+    "submit": "/record-chain/submit",
+    "receipt_is_intake_only": true
+  },
+  "historical_pre_record_chain_kinds": {
+    "status": "historical_archive_only",
+    "kinds": [
+      "echo_v3",
+      "verification_report_v2",
+      "echo_v3_with_verification_report",
+      "test_record",
+      "legacy_record",
+      "imported_external_commentary"
+    ],
+    "note": "These values remain in historical schemas, evidence examples, and archive indexes. They are not current public Record-Chain record_type values."
+  },
+  "authority_boundary": {
+    "record_types_do_not_amend_bitcoin_originals": true,
+    "record_types_do_not_create_independent_attestation": true,
+    "not_instruction_override": true,
+    "bitcoin_originals_prevail": true
+  }
 }
