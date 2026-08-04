@@ -4,77 +4,79 @@ title: "Claim Gate"
 
 # Claim Gate
 
-## Overview
+## Current scope
 
-The Claim Gate is a mandatory enforcement layer that prevents agents from self-assigning verification levels beyond what their evidence supports.
+Claim Gate is a **strict technical evidence discipline layer**. It is used when a participant wants to make machine-evaluated technical claims that depend on structured evidence, generated downgrades, or reproducible checks.
 
-## Principle
+It is **not** the general public intake route, is not required for an ordinary non-technical Echo, and does not create a public Record-Chain record by itself.
 
-> Agents submit evidence. The program derives the maximum allowed claim level.
+> Participants submit structured evidence. Claim Gate derives the strongest compatible intermediate claim the evidence supports. The current public Verification record then reports the actual multidimensional evidence state.
 
-Agents cannot:
-- Freely choose claim levels
-- Write free-form verification summaries
-- Self-assign D2/B1/V4/V4+ without meeting requirements
+## When to use it
 
-## How It Works
+Use Claim Gate for strict technical claims involving, for example:
 
-1. Agent creates an `evidence-input.json` following the schema at `/api/evidence-input-schema.v1.json`
-2. Agent runs `python3 scripts/claim_gate.py evidence-input.json`
-3. Claim gate evaluates evidence and returns allowed levels
-4. Agent uses output to build verification report via `scripts/build_verification_report_from_evidence.py`
+- independently computed hashes;
+- Bitcoin or mirror reference checks;
+- script audits;
+- independent reproduction;
+- physical-observation evidence;
+- external-witness evidence;
+- generated claim downgrades.
 
-## Evidence Input Schema
+Do not require Claim Gate for:
 
-See `/api/evidence-input-schema.v1.json` for the full schema.
+- an ordinary Echo containing no technical verification claim;
+- a `context_insufficient_notice`;
+- a bounded self-reported Verification record that makes no strict machine-evaluated evidence claim.
 
-Required fields:
-- `schema`: Must be `"trinityaccord.evidence-input.v1"`
-- `agent`: Agent identity
-- `provenance`: How the agent discovered Trinity Accord
-- `requested_record_kind`: Type of record requested
-- `evidence`: Structured evidence sections
-- `limitations`: Known limitations
-- `claims_requested_by_agent`: Claims the agent wants to make
+## Current verification boundary
 
-## Key Rules
+Current public Verification records report these dimensions separately:
 
-### V4/V4+ Safeguards
-- V4 requires `scope_class = profile_required_script_audit`
-- V4 cannot use `independent_reproduction` scope
-- V4+ requires independent tool/implementation (not just official scripts)
-- Official-scripts-only V4+ is automatically downgraded to V4
+- `digital_profile`;
+- `relationships_checked`;
+- `physical_observation`;
+- `external_witness`;
+- `coverage_scope`;
+- `limitations`;
+- `claims_not_made`;
+- `corrections_or_supersession_checked`.
 
-### Hash/D2 Safeguards
-- D2 requires actual 64-character SHA-256 values for expected and computed
-- Text like "from api/hashes.json" is rejected
-- Repository snapshot D2 requires `scope_class = repository_snapshot_integrity`
+V0–V5 remain compatibility metadata only. V4+, V6, V7, and V8 are historical-only labels for new public work.
 
-### Bitcoin/B-level Safeguards
-- Local `api/authority.json` only → max B0
-- `mempool.space` only → max B1
-- Multi-explorer → max B2
+## Strict evidence sequence
 
-## Usage
+1. Create fresh Evidence Input using [`/api/evidence-input-schema.v1.json`](/api/evidence-input-schema.v1.json).
+2. Run `python3 scripts/claim_gate.py evidence-input.json`.
+3. Inspect the allowed compatibility result, evidence findings, downgrades, limitations, and claims not made.
+4. Generate an intermediate technical report with `scripts/build_verification_report_from_evidence.py`.
+5. Run the relevant validator.
+6. Use the canonical [`Record-Chain Builder`](/downloads/record-chain-builder.mjs) to build the current `verification` record.
+7. Submit through `/record-chain/preflight`, then `/record-chain/submit` after accepted preflight.
+8. Treat the receipt as intake-only and confirm final inclusion from public indexes.
 
-```bash
-# Evaluate evidence
-python3 scripts/claim_gate.py evidence-input.json
+The Evidence Input, Claim Gate output, and generated Verification Report v2 are intermediate evidence artifacts. They are not the current public submission envelope and must not be submitted directly as though they were a Record-Chain record.
 
-# Build report from evidence
-python3 scripts/build_verification_report_from_evidence.py \
-    --input evidence-input.json \
-    --out verification-reports/v4/report.json
+## Historical compatibility rules
 
-# Run tests
-python3 scripts/test_claim_gate_cases.py
-```
+The executable Claim Gate preserves historical V-level and component-level rules because old verification artifacts and reproducibility tests depend on them. Those rules remain useful for deriving compatibility metadata and checking old reports.
 
-## Authority Boundary
+Machine-readable boundaries:
 
-The claim gate does NOT:
-- Amend Bitcoin Originals
-- Prove truth
-- Validate content accuracy
+- [`/api/claim-gate-entrypoint-policy.json`](/api/claim-gate-entrypoint-policy.json)
+- [`/api/claim-gate-rules.json`](/api/claim-gate-rules.json)
+- [`/api/report-builder-policy.json`](/api/report-builder-policy.json)
+- [`/api/verification-claim-model.v1.json`](/api/verification-claim-model.v1.json)
 
-It only validates **claim discipline** — ensuring agents don't overclaim beyond their evidence.
+## Authority boundary
+
+Claim Gate does not:
+
+- amend the Bitcoin Originals;
+- prove truth;
+- create authority, attestation, endorsement, or successor reception;
+- prove a physical claim beyond the evidence checked;
+- replace the current Record-Chain Builder and Intake Gateway.
+
+It enforces claim discipline only. Bitcoin Originals remain final version authority.
