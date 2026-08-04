@@ -1,0 +1,84 @@
+name: One-time current public guidance alignment
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-current-public-guidance-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.head_ref == 'audit/current-public-guidance-alignment'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Align field-helper verification guidance
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('api/record-chain-field-helper.v1.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          old = 'Do not claim V6+ verification without running the required scripts.'
+          current = data['agent_recovery_protocol']['what_not_to_fake'][6]
+          if current != old:
+              raise SystemExit(f'unexpected field-helper source: {current!r}')
+
+          data['updated_at'] = '2026-08-04'
+          data['agent_recovery_protocol']['what_not_to_fake'][6] = (
+              'Do not present historical V4+/V6/V7/V8 labels as current public verification levels; '
+              'report the current evidence dimensions and use only allowed compatibility metadata.'
+          )
+          helper = data['diagnostic_code_help']['VERIFICATION_EVIDENCE_REQUIRED_FOR_V6_PLUS']
+          helper['meaning'] = (
+              'Historical compatibility diagnostic: current public intake does not accept V6+ as a public level. '
+              'V0–V5 remain compatibility metadata only, while technical evidence is reported through current multidimensional fields.'
+          )
+          helper['fix'] = (
+              'Use an allowed V0–V5 compatibility value, report the current evidence dimensions honestly, and for strict technical claims '
+              'run fresh Evidence Input → Claim Gate → generated report → validator. Do not present V6+ as a current level.'
+          )
+          data['field_groups'][31]['meaning'] = (
+              'V0–V5 are legacy-compatible declared metadata only. Current verification is reported through separate evidence dimensions; '
+              'V4+, V6, V7, and V8 are historical-only labels for new work.'
+          )
+          data['record_type_presets']['verification']['notes'] = (
+              'Verification reports checks actually performed. CC-2 remains a minimum compatibility declaration. '
+              'Report the current multidimensional verification fields; V0–V5 are compatibility metadata only, and V4+/V6/V7/V8 are '
+              'historical-only labels for new work. Strict technical claims use fresh Evidence Input, Claim Gate, generated report, and validation.'
+          )
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Validate targeted contracts
+        run: |
+          python3 scripts/validate_json_strict.py
+          python3 -m unittest tests/test_current_public_guidance_alignment.py
+          python3 scripts/test_public_api_metadata_completeness.py
+
+      - name: Remove one-time workflow and commit final branch
+        run: |
+          rm -f .github/workflows/one-time-current-public-guidance-alignment.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add api/record-chain-field-helper.v1.json .github/workflows/one-time-current-public-guidance-alignment.yml
+          git commit -m 'fix: align current field-helper verification guidance'
+          git push origin HEAD:${{ github.head_ref }}
