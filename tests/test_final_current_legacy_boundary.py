@@ -81,36 +81,20 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
         self.assertNotIn("/api/verification-levels.json", core)
         self.assertNotIn("/api/echo-record-schema.v3.1.json", core)
 
-    def test_intermediate_evidence_schema_is_explicit(self) -> None:
-        evidence = load_json("api/evidence-input-schema.v1.json")
-        boundary = evidence["x-trinityaccord-current-boundary"]
-        self.assertEqual(boundary["status"], "active_strict_evidence_intermediate_schema")
-        self.assertIs(boundary["not_current_public_record_envelope"], True)
-        self.assertEqual(boundary["current_public_record_type"], "verification")
-        requested = evidence["properties"]["requested_record_kind"]
-        self.assertIn("historical intermediate output selector", requested["description"])
-
+    def test_intermediate_claim_scope_is_explicit(self) -> None:
         scope = load_json("api/verification-claim-scope.json")
         self.assertEqual(scope["status"], "legacy_intermediate_claim_scope_compatibility")
         self.assertEqual(scope["current_public_replacement"], "/api/verification-claim-model.v1.json")
         self.assertIs(scope["current_public_boundary"]["not_current_public_record_model"], True)
+        self.assertIs(scope["current_public_boundary"]["output_is_intermediate_evidence_only"], True)
 
-    def test_legacy_schemas_are_marked_historical(self) -> None:
-        expected = {
-            "api/agent-issue-gateway-payload-schema.v1.json": "/api/record-chain-submission-schema.v1.json",
-            "api/echo-record-schema.v3.json": "/api/record-chain-submission-schema.v1.json",
-            "api/echo-record-schema.v3.1.json": "/api/record-chain-submission-schema.v1.json",
-        }
-        for relative, replacement in expected.items():
-            data = load_json(relative)
-            boundary = data["x-trinityaccord-current-boundary"]
-            self.assertEqual(boundary["status"], "historical_compatibility_only")
-            self.assertEqual(boundary["current_outer_submission_schema"], replacement)
-            self.assertIs(boundary["do_not_use_as_current_public_outer_record"], True)
-
-        terms = load_json("api/protocol-terms.v1.json")
-        self.assertEqual(terms["status"], "historical_compatibility_vocabulary")
-        self.assertEqual(terms["current_public_record_types"], [
+    def test_boundary_registry_separates_current_intermediate_and_historical(self) -> None:
+        data = load_json("api/current-legacy-boundary.v1.json")
+        self.assertEqual(data["status"], "active_current_boundary_registry")
+        current = data["current_public"]
+        self.assertEqual(current["outer_submission_schema"], "/api/record-chain-submission-schema.v1.json")
+        self.assertEqual(current["verification_model"], "/api/verification-claim-model.v1.json")
+        self.assertEqual(current["record_types"], [
             "echo",
             "verification",
             "guardian_application",
@@ -121,9 +105,30 @@ class FinalCurrentLegacyBoundaryTest(unittest.TestCase):
             "context_insufficient_notice",
         ])
 
+        intermediate = {item["path"]: item for item in data["strict_evidence_intermediate"]}
+        self.assertIs(intermediate["/api/evidence-input-schema.v1.json"]["not_current_public_record_envelope"], True)
+        self.assertIs(intermediate["/api/claim-gate-rules.json"]["not_current_public_record_by_itself"], True)
+        self.assertEqual(
+            intermediate["/api/verification-claim-scope.json"]["replacement_for_current_public_claims"],
+            "/api/verification-claim-model.v1.json",
+        )
+
+        historical = {item["path"]: item for item in data["historical_compatibility"]}
+        self.assertIs(
+            historical["/api/agent-issue-gateway-payload-schema.v1.json"]["do_not_use_for_new_public_submissions"],
+            True,
+        )
+        self.assertIs(historical["/api/echo-record-schema.v3.json"]["not_current_outer_submission_schema"], True)
+        self.assertIs(historical["/api/echo-record-schema.v3.1.json"]["not_current_outer_submission_schema"], True)
+        self.assertIs(historical["/api/verification-levels.json"]["v4plus_v6_v7_v8_historical_only_for_new_work"], True)
+
+        terms = load_json("api/protocol-terms.v1.json")
+        self.assertEqual(terms["status"], "historical_compatibility_vocabulary")
+        self.assertEqual(terms["current_public_record_types"], current["record_types"])
+
     def test_chronicle_verification_marks_v_levels_historical(self) -> None:
         page = text("chronicle-verification.md")
-        self.assertIn("historical V-level model", page)
+        self.assertIn("Historical verification-model boundary", page)
         self.assertIn("do not submit V4+ as a current public level", page)
         self.assertIn("digital_profile", page)
         self.assertIn("coverage_scope", page)
