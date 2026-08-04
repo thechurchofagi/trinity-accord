@@ -26,7 +26,7 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
         "an act of civilizational self-archiving",
         "This does not establish a unified civilizational will",
         "Initiator, sustained carrier, selector, embodied executor, and responsible closer",
-        "before unified personal agents made delegation from a high-level goal through completion routine",
+        "unified personal agents had not yet made delegation from a high-level goal through completion routine",
         "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",
         "For the bounded provenance claim described here, this exact dated formation interval is now closed",
         "later human-origin work is impossible",
