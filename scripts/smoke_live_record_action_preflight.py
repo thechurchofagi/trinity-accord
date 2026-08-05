@@ -307,9 +307,10 @@ def main() -> int:
             required_codes={"INSUFFICIENT_CONTEXT_COMPLETENESS"},
         ),
         dict(
-            name="guardian_retirement_cc1_context_accept",
+            name="guardian_retirement_cc1_reaches_target_binding",
             submission=_set_context(retirement, "CC-1", "CC-1"),
             accepted=False,
+            required_codes={"GUARDIAN_RETIREMENT_TARGET_NOT_FOUND"},
             forbidden_codes=CONTEXT_CODES,
         ),
         dict(
