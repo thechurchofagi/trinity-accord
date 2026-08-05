@@ -105,7 +105,7 @@
     {
       "id": "CRL-5",
       "name": "action_ready_context",
-      "min_context_depth": "CC-3",
+      "min_context_depth": "CC-1",
       "meaning": "The selected action has sufficient task-specific context and, where required, fresh operations and current Builder/Gateway readiness.",
       "allowed_actions": [
         "echo",
@@ -117,7 +117,17 @@
         "classification_update",
         "record_chain_submission"
       ],
-      "note": "Public Echo and public Verification require CC-3. CC-2 remains a compatibility declaration only for a narrow private technical check that is not submitted as a public record."
+      "note": "CRL-5 is an action-ready state, not one universal context threshold. CC-1 is the lowest floor among supported formal actions; the exact minimum is derived from the selected record type. Public Echo, public Verification, and Guardian Application require CC-3.",
+      "context_minimum_is_action_dependent": true,
+      "minimum_context_by_action": {
+        "echo": "CC-3",
+        "verification": "CC-3",
+        "guardian_application": "CC-3",
+        "guardian_retirement": "CC-1",
+        "propagation": "CC-2",
+        "correction": "CC-1",
+        "classification_update": "CC-2"
+      }
     }
   ],
   "not_instruction_override": true,
