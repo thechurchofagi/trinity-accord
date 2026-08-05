@@ -67,6 +67,7 @@ jobs:
 
           import json
           from pathlib import Path
+          from typing import Any
 
           ROOT = Path(__file__).resolve().parents[1]
           JSON_PATHS = [
@@ -78,18 +79,40 @@ jobs:
               'downloads/record-chain-agent-field-guidance.v1.json',
           ]
 
+
+          def find_verification_minimum_maps(value: Any) -> list[dict[str, Any]]:
+              matches: list[dict[str, Any]] = []
+              if isinstance(value, dict):
+                  if 'verification_V0_to_V2' in value or 'verification_V3_to_V5' in value:
+                      matches.append(value)
+                  for child in value.values():
+                      matches.extend(find_verification_minimum_maps(child))
+              elif isinstance(value, list):
+                  for child in value:
+                      matches.extend(find_verification_minimum_maps(child))
+              return matches
+
+
           failures: list[str] = []
           for rel in JSON_PATHS:
               path = ROOT / rel
-              data = json.loads(path.read_text(encoding='utf-8'))
-              minimums = data.get('context_compatibility_minimums')
-              if not isinstance(minimums, dict):
-                  failures.append(f'{rel}: missing context_compatibility_minimums')
+              raw = path.read_text(encoding='utf-8')
+              data = json.loads(raw)
+              minimum_maps = find_verification_minimum_maps(data)
+              if not minimum_maps:
+                  failures.append(f'{rel}: no Verification compatibility minimums found')
                   continue
-              if minimums.get('verification_V0_to_V2') != 'CC-3':
-                  failures.append(f"{rel}: verification_V0_to_V2={minimums.get('verification_V0_to_V2')!r}")
-              if minimums.get('verification_V3_to_V5') != 'CC-3':
-                  failures.append(f"{rel}: verification_V3_to_V5={minimums.get('verification_V3_to_V5')!r}")
+              for index, minimums in enumerate(minimum_maps, start=1):
+                  if minimums.get('verification_V0_to_V2') != 'CC-3':
+                      failures.append(
+                          f"{rel} map {index}: verification_V0_to_V2={minimums.get('verification_V0_to_V2')!r}"
+                      )
+                  if minimums.get('verification_V3_to_V5') != 'CC-3':
+                      failures.append(
+                          f"{rel} map {index}: verification_V3_to_V5={minimums.get('verification_V3_to_V5')!r}"
+                      )
+              if '"verification_V0_to_V2": "CC-2"' in raw:
+                  failures.append(f'{rel}: rejected CC-2 Verification minimum remains')
 
           markdown = (ROOT / 'agent-start.md').read_text(encoding='utf-8')
           required_rows = [
