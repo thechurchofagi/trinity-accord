@@ -103,6 +103,15 @@ class ContextReadinessContractConvergenceTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256(raw).hexdigest(), entry["sha256"], path)
             self.assertEqual(len(raw), entry["size_bytes"], path)
 
+    def test_phase5c_guardian_fixture_uses_current_cc3_contract(self) -> None:
+        script = (ROOT / "scripts/test_phase_5c_hotfix.py").read_text(encoding="utf-8")
+        guardian = script.split("def build_guardian", 1)[1].split("def helper_content_fields", 1)[0]
+        self.assertIn('"--context-level",\n            "CC-3"', guardian)
+        self.assertIn('"--context-read-confirmed",\n            "true"', guardian)
+        self.assertIn('"--context-sufficient-for-selected-action",\n            "true"', guardian)
+        self.assertIn('"--loaded-urls",\n            LOADED_URLS', guardian)
+        self.assertNotIn('"--context-level",\n            "CC-2"', guardian)
+
     def test_terminology_boundary_is_visible(self) -> None:
         brief = (ROOT / "agent-brief.md").read_text(encoding="utf-8")
         self.assertIn("Terminology boundary", brief)
