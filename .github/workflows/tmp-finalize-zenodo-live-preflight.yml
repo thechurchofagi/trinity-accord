@@ -1,0 +1,194 @@
+name: Temporary Finalize Zenodo and Live Preflight Gate
+
+on:
+  push:
+    branches:
+      - agent/zenodo-idempotency-live-preflight
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tmp-finalize-zenodo-live-preflight
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Apply permanent synchronization
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          descriptor_path = Path('api/record-chain-intake-gateway.v1.json')
+          descriptor = json.loads(descriptor_path.read_text(encoding='utf-8'))
+          descriptor['runtime_alignment']['context_compatibility_minimums'] = {
+              'echo': 'CC-3',
+              'verification': 'CC-3',
+              'guardian_application': 'CC-3',
+              'guardian_retirement': 'CC-1',
+              'propagation': 'CC-2',
+              'correction': 'CC-1',
+              'classification_update': 'CC-2',
+              'context_insufficient_notice': 'CC-0',
+          }
+          descriptor['updated_at'] = '2026-08-05T04:35:00Z'
+          descriptor_path.write_text(
+              json.dumps(descriptor, indent=2, ensure_ascii=False) + '\n',
+              encoding='utf-8',
+          )
+
+          workflow_path = Path('.github/workflows/deploy-pages.yml')
+          workflow = workflow_path.read_text(encoding='utf-8')
+          old_scope = "scripts/render_(manual|protected)_deploy\\\\.py)$'"
+          new_scope = "scripts/render_(manual|protected)_deploy\\\\.py|scripts/smoke_live_record_action_preflight\\\\.py)$'"
+          if old_scope not in workflow:
+              raise SystemExit('deploy scope anchor not found')
+          workflow = workflow.replace(old_scope, new_scope, 1)
+
+          anchor = '''      - name: Deploy exact Gateway source and wait for live
+        if: steps.scope.outputs.required == 'true'
+        env:
+          RENDER: ${{ secrets.RENDER }}
+          SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          python3 scripts/render_protected_deploy.py \\
+            --service trinity-record-chain-gateway \\
+            --reconcile-config \\
+            --deploy \\
+            --commit-id "$SOURCE_SHA" \\
+            --wait \\
+            --wait-timeout 900 \\
+            --poll-seconds 10
+'''
+          replacement = anchor + '''
+      - name: Install live preflight dependencies
+        if: steps.scope.outputs.required == 'true'
+        env:
+          PIP_PREFER_BINARY: "1"
+          PIP_ONLY_BINARY: "cryptography,cffi"
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run no-write live record action preflight matrix
+        if: steps.scope.outputs.required == 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/smoke_live_record_action_preflight.py \\
+            --output "$RUNNER_TEMP/live-record-action-preflight-report.json"
+
+      - name: Upload live record action preflight proof
+        if: always() && steps.scope.outputs.required == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: live-record-action-preflight-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/live-record-action-preflight-report.json
+          if-no-files-found: error
+          retention-days: 30
+'''
+          if anchor not in workflow:
+              raise SystemExit('gateway deploy anchor not found')
+          workflow_path.write_text(workflow.replace(anchor, replacement, 1), encoding='utf-8')
+
+          Path('tests/test_preservation_refresh_and_live_preflight_gate.py').write_text(
+              '''from __future__ import annotations
+
+import json
+import os
+import subprocess
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_consumed_preservation_refresh_is_secret_independent():
+    env = os.environ.copy()
+    env.pop("ZENODO_ACCESS_TOKEN", None)
+    env.pop("PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK", None)
+    env.pop("RUNNER_TEMP", None)
+    completed = subprocess.run(
+        ["bash", "scripts/run_repository_preservation_refresh_ci.sh"],
+        cwd=ROOT,
+        env=env,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    assert "already consumed and publicly proven" in completed.stdout
+
+
+def test_gateway_descriptor_exposes_current_action_minimums():
+    descriptor = json.loads(
+        (ROOT / "api/record-chain-intake-gateway.v1.json").read_text(encoding="utf-8")
+    )
+    minimums = descriptor["runtime_alignment"]["context_compatibility_minimums"]
+    assert minimums == {
+        "echo": "CC-3",
+        "verification": "CC-3",
+        "guardian_application": "CC-3",
+        "guardian_retirement": "CC-1",
+        "propagation": "CC-2",
+        "correction": "CC-1",
+        "classification_update": "CC-2",
+        "context_insufficient_notice": "CC-0",
+    }
+
+
+def test_live_preflight_gate_covers_all_changed_formal_routes_without_submit():
+    source = (ROOT / "scripts/smoke_live_record_action_preflight.py").read_text(
+        encoding="utf-8"
+    )
+    for marker in (
+        "echo_cc3_accept",
+        "echo_cc2_reject",
+        "verification_v2_cc3_accept",
+        "verification_v2_cc2_reject",
+        "guardian_application_cc3_accept",
+        "guardian_application_cc2_reject",
+        "guardian_retirement_cc1_context_accept",
+        "guardian_retirement_cc0_context_reject",
+    ):
+        assert marker in source
+    assert 'base_url.rstrip("/") + "/record-chain/preflight"' in source
+    assert '"submit_endpoint_called": False' in source
+''',
+              encoding='utf-8',
+          )
+          PY
+
+          rm -f .github/workflows/tmp-finalize-zenodo-live-preflight.yml
+
+      - name: Validate permanent changes
+        run: |
+          set -euo pipefail
+          python3 -m json.tool api/record-chain-intake-gateway.v1.json >/dev/null
+          python3 -m py_compile scripts/smoke_live_record_action_preflight.py \
+            tests/test_preservation_refresh_and_live_preflight_gate.py
+          env -u ZENODO_ACCESS_TOKEN -u PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK -u RUNNER_TEMP \
+            bash scripts/run_repository_preservation_refresh_ci.sh
+
+      - name: Commit permanent result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            .github/workflows/deploy-pages.yml \
+            api/record-chain-intake-gateway.v1.json \
+            scripts/run_repository_preservation_refresh_ci.sh \
+            scripts/smoke_live_record_action_preflight.py \
+            tests/test_preservation_refresh_and_live_preflight_gate.py \
+            .github/workflows/tmp-finalize-zenodo-live-preflight.yml
+          git commit -m "fix: close preservation and live preflight gaps"
+          git push origin HEAD:agent/zenodo-idempotency-live-preflight
