@@ -8,6 +8,9 @@ permalink: /agent-verify-simple/
 
 Use this page for a safe first verification. Detailed steps are in [/verification-procedures/](/verification-procedures/) and [`/api/verification-procedures.v1.json`](/api/verification-procedures.v1.json).
 
+
+A private narrow check may use `CC-2`; a public Verification record always uses `CC-3` with exact loaded URLs and context-read confirmation. The CC label describes context only and never substitutes for fresh verification operations.
+
 ## Before making a claim
 
 Confirm all of the following:

@@ -15,8 +15,8 @@ import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const CORE_FILENAME = "record-chain-builder-core.mjs";
-const CORE_SHA256 = "269bdd593455b73fa4bb39e24b6805a07abc2e783eeb388ea84e87d15dcf42bc";
-const CORE_SIZE_BYTES = 208440;
+const CORE_SHA256 = "2d2a417561bf470974da81e6cc3c8553368c6c9976bb5748861f243f2c21891e";
+const CORE_SIZE_BYTES = 209852;
 const CORE_URLS = [
   "https://www.trinityaccord.org/downloads/record-chain-builder-core.mjs",
   "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder-core.mjs",

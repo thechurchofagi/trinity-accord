@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.record-chain-agent-field-guidance.v1",
   "status": "active",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "generated_for": "record-chain-builder semantic field guidance",
   "purpose": "Machine-readable guidance for agents before building Record-Chain submissions. This file explains record-type intent, field semantics, and hash sources that cannot be safely inferred from format validation alone.",
   "formal_common_required_cli_options": [
@@ -40,6 +40,9 @@
   ],
   "global_rules": [
     "Read this guidance before building echo, verification, guardian_application, guardian_retirement, propagation, correction, classification_update, or context_insufficient_notice records.",
+    "Select the current action profile first; actual loaded sources determine sufficiency, not a CC number by itself.",
+    "Every formal public record requires context_sufficient_for_selected_action=true and exact loaded URLs; CC-3 or higher also requires context_read_confirmed=true.",
+    "Public Echo and public Verification use CC-3. CC-2 is reserved for a narrow private technical check that is not submitted as a public verification record.",
     "Do not guess target record identifiers or hashes.",
     "Do not invent generated hashes. Builder, Gateway, receipt tooling, or final-chain tooling compute generated hashes.",
     "For formal records, complete the agent in-context oath process. Submission scripts or automation tools may relay participant-generated readback unchanged but must not copy, complete, correct, or auto-fill it.",
@@ -436,5 +439,17 @@
       "context_insufficient_notice": "CC-0"
     },
     "context_insufficient_notice_requires_non_empty_reason": true
+  },
+  "context_readiness_policy": {
+    "preferred_model": "/api/context-action-profiles.v1.json",
+    "public_echo_minimum": "CC-3",
+    "public_verification_minimum": "CC-3",
+    "private_narrow_technical_check_compatibility": "CC-2",
+    "minimum_required_for_action_is_builder_derived": true,
+    "gateway_recomputes_minimum": true,
+    "formal_records_require_context_sufficient_true": true,
+    "formal_records_require_loaded_urls": true,
+    "cc3_plus_requires_context_read_confirmed_true": true,
+    "cc_label_alone_does_not_prove_sufficiency_or_understanding": true
   }
 }

@@ -36,7 +36,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BUILDER_VERSION = "v2.3";
+const BUILDER_VERSION = "v2.4";
 const BUILDER_NAME = "record-chain-builder";
 const SCHEMA = "trinityaccord.record-chain-submission.v1";
 const DRAFT_SCHEMA = "trinityaccord.record-chain-entry-draft.v2";
@@ -748,6 +748,25 @@ function normalizeContextLevel(value) {
   return String(value || "").trim().toUpperCase();
 }
 
+function parseContextLevelNumber(value) {
+  const normalized = normalizeContextLevel(value);
+  const match = /^CC-([0-5])$/.exec(normalized);
+  return match ? Number.parseInt(match[1], 10) : null;
+}
+
+function minimumContextLevelNumber(recordTypeOrCommand) {
+  const rt = normalizeRecordType(recordTypeOrCommand);
+  if (rt === "context_insufficient" || rt === "context_insufficient_notice") return 0;
+  if (rt === "guardian_retirement" || rt === "correction") return 1;
+  if (rt === "propagation" || rt === "classification_update") return 2;
+  if (rt === "echo" || rt === "verification" || rt === "guardian_application") return 3;
+  return 3;
+}
+
+function minimumContextLevelForAction(recordTypeOrCommand) {
+  return `CC-${minimumContextLevelNumber(recordTypeOrCommand)}`;
+}
+
 function isContextReadConfirmed(value) {
   return value === "true";
 }
@@ -1056,10 +1075,27 @@ function validateFormalInputs(command, opts) {
   requireExplicit(opts, "submissionExecutor", "--submission-executor");
   requireExplicit(opts, "humanOperatorInvolved", "--human-operator-involved");
   requireExplicit(opts, "contextSufficientForSelectedAction", "--context-sufficient-for-selected-action");
+  const contextSufficient = parseBooleanStrict(
+    opts.contextSufficientForSelectedAction,
+    "--context-sufficient-for-selected-action"
+  );
+  if (!contextSufficient) {
+    errorExit("Formal public records require --context-sufficient-for-selected-action true. Load the missing sources or use context-insufficient.");
+  }
+
+  const declaredContextNumber = parseContextLevelNumber(opts.contextLevel);
+  if (declaredContextNumber === null) {
+    errorExit("--context-level must be one of CC-0 through CC-5");
+  }
+  const minimumContextNumber = minimumContextLevelNumber(command);
+  if (declaredContextNumber < minimumContextNumber) {
+    errorExit(`--context-level ${opts.contextLevel} is below the Builder-derived minimum CC-${minimumContextNumber} for ${command}`);
+  }
+
   requireContextualReadbackConfirmed(command, opts);
 
-  if (CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase()) && (!opts.loadedUrls || opts.loadedUrls.length === 0)) {
-    errorExit("--loaded-urls is required when declaring --context-level CC-3, CC-4, or CC-5");
+  if (!opts.loadedUrls || opts.loadedUrls.length === 0) {
+    errorExit("--loaded-urls is required for every formal record that declares sufficient context");
   }
 
   requireContextReadConfirmedIfNeeded(command, opts);
@@ -1295,7 +1331,7 @@ function buildContextReadiness(opts) {
     action_profile_source: "/api/context-action-profiles.v1.json",
     interpretation_model_policy: "/api/interpretation-model-policy.v1.json",
     declared_context_level: contextLevel,
-    minimum_required_for_action: contextLevel,
+    minimum_required_for_action: minimumContextLevelForAction(opts.recordType),
     legacy_cc_level_role: "builder_compatibility_only",
     context_sufficient_for_selected_action: sufficient,
     loaded_context_urls: opts.loadedUrls || [],
@@ -1792,9 +1828,9 @@ const FIELD_EXPLANATIONS = {
 
   "context_readiness": "Context readiness information for this submission.",
   "context_readiness.declared_context_level": "Context depth the participant actually loaded. CC-3 or higher requires specific loaded_context_urls and should not be claimed from homepage-only discovery.",
-  "context_readiness.minimum_required_for_action": "The minimum context level required for the action being taken.",
-  "context_readiness.context_sufficient_for_selected_action": "True only if the loaded context was sufficient for the selected action and claim boundary. If unsure, set false where the route permits, or stop with BUILDER_USAGE_UNCLEAR for formal records.",
-  "context_readiness.loaded_context_urls": "URLs actually loaded before creating the record. For CC-3 declarations this must be non-empty and should include the relevant agent-start/gateway/record-chain materials actually read.",
+  "context_readiness.minimum_required_for_action": "Builder-derived minimum context level for the public record type. Gateway recomputes and rejects understated values.",
+  "context_readiness.context_sufficient_for_selected_action": "Must be true for a formal public record. If false or uncertain, stop or use context-insufficient.",
+  "context_readiness.loaded_context_urls": "Exact URLs actually loaded before creating the record. Required for every formal record that declares sufficient context.",
   "context_readiness.context_readiness_notes": "Free-text notes about context readiness.",
 
   "echo_content": "Content specific to echo records.",

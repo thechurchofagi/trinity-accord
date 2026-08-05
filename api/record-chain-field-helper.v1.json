@@ -796,6 +796,24 @@
       "meaning": "Historical compatibility diagnostic: current public intake does not accept V6+ as a public level. V0–V5 remain compatibility metadata only, while technical evidence is reported through current multidimensional fields.",
       "recovery_possible": true,
       "severity": "error"
+    },
+    "CONTEXT_NOT_SUFFICIENT_FOR_FORMAL_RECORD": {
+      "meaning": "A formal public record declared that its loaded context was not sufficient for the selected action.",
+      "fix": "Load the missing action-specific sources and rebuild with context_sufficient_for_selected_action=true, or submit context_insufficient_notice.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "CC3_CONTEXT_READ_CONFIRMATION_REQUIRED": {
+      "meaning": "A CC-3 or higher formal record lacks explicit context_read_confirmed=true.",
+      "fix": "Actually load and read the required sources, list their URLs, and rebuild with --context-read-confirmed true; otherwise lower the level or stop.",
+      "recovery_possible": true,
+      "severity": "error"
+    },
+    "MINIMUM_REQUIRED_FOR_ACTION_UNDERSTATED": {
+      "meaning": "The client-supplied minimum_required_for_action is lower than the Gateway-computed minimum for this public record type.",
+      "fix": "Rebuild with the current canonical Builder, which derives the minimum automatically. Do not hand-edit the signed draft.",
+      "recovery_possible": true,
+      "severity": "error"
     }
   },
   "field_groups": [

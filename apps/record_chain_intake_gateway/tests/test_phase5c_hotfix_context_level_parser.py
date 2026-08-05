@@ -70,6 +70,8 @@ def _make_submission_with_context_level(level) -> dict:
                 "declared_context_level": level,
                 "minimum_required_for_action": "CC-3",
                 "context_sufficient_for_selected_action": True,
+                "context_read_confirmed": True,
+                "loaded_context_urls": ["https://www.trinityaccord.org/authority/"],
             },
             "non_authority_boundary_acknowledgement": {
                 "not_authority": True,

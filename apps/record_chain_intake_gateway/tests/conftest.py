@@ -92,6 +92,10 @@ def _make_v2_echo_draft() -> dict[str, Any]:
             "declared_context_level": "CC-3",
             "minimum_required_for_action": "CC-3",
             "context_sufficient_for_selected_action": True,
+            "context_read_confirmed": True,
+            "action_profile": "interpretation",
+            "action_profile_source": "/api/context-action-profiles.v1.json",
+            "legacy_cc_level_role": "builder_compatibility_only",
             "loaded_context_urls": [
                 "https://www.trinityaccord.org/agent-start/",
                 "https://www.trinityaccord.org/api/record-chain-intake-gateway.v1.json",
