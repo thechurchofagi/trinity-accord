@@ -36,12 +36,10 @@ jobs:
           path.write_text(text.replace(old, new, 1), encoding='utf-8')
           PY
 
-      - name: Apply permanent files
-        run: python3 scripts/tmp_apply_zenodo_live_preflight_gate.py
-
-      - name: Validate permanent files
+      - name: Apply and validate permanent files
         run: |
           set -euo pipefail
+          python3 scripts/tmp_apply_zenodo_live_preflight_gate.py
           python3 -m json.tool api/record-chain-intake-gateway.v1.json >/dev/null
           python3 -m py_compile \
             scripts/smoke_live_record_action_preflight.py \
@@ -60,17 +58,16 @@ jobs:
           module.test_pages_deploy_runs_live_preflight_after_gateway_rollout()
           PY
 
-      - name: Remove one-time applicator
-        run: |
-          rm -f \
-            scripts/tmp_apply_zenodo_live_preflight_gate.py \
-            .github/workflows/tmp-apply-zenodo-live-preflight-gate.yml
-
-      - name: Commit permanent result
+      - name: Commit validated non-workflow result
         run: |
           set -euo pipefail
+          git checkout -- .github/workflows/deploy-pages.yml
+          rm -f scripts/tmp_apply_zenodo_live_preflight_gate.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "fix: close preservation and live preflight gaps"
+          git add \
+            api/record-chain-intake-gateway.v1.json \
+            tests/test_preservation_refresh_and_live_preflight_gate.py \
+            scripts/tmp_apply_zenodo_live_preflight_gate.py
+          git commit -m "fix: close preservation idempotency and test gaps"
           git push origin HEAD:agent/zenodo-idempotency-live-preflight
