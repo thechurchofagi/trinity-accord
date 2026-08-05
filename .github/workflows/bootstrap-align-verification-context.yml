@@ -1,0 +1,165 @@
+name: Bootstrap Verification Context Contract Fix
+
+on:
+  push:
+    branches:
+      - agent/align-verification-context-contract
+
+permissions:
+  contents: write
+
+jobs:
+  patch-contract:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: agent/align-verification-context-contract
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Align public Verification context contract
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          root = Path('.')
+          json_paths = [
+              '.well-known/trinity-accord.json',
+              'api/agent-first-contact.json',
+              'api/agent-required-reading.json',
+              'api/agent-start.v2.json',
+              'api/external-agent-quickstart.json',
+              'downloads/record-chain-agent-field-guidance.v1.json',
+          ]
+          old_json = '"verification_V0_to_V2": "CC-2"'
+          new_json = '"verification_V0_to_V2": "CC-3"'
+          for rel in json_paths:
+              path = root / rel
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old_json)
+              if count != 1:
+                  raise SystemExit(f'{rel}: expected exactly one old Verification minimum, found {count}')
+              path.write_text(text.replace(old_json, new_json), encoding='utf-8')
+
+          md = root / 'agent-start.md'
+          text = md.read_text(encoding='utf-8')
+          old_row = '| Verification `V0`–`V2` | `CC-2` |'
+          new_row = '| Verification `V0`–`V2` | `CC-3` |'
+          if text.count(old_row) != 1:
+              raise SystemExit('agent-start.md: expected exactly one V0–V2 CC-2 row')
+          text = text.replace(old_row, new_row)
+          old_note = 'These are compatibility lower bounds rather than proof of source loading. Formal `CC-3`–`CC-5` records carry non-empty `--loaded-urls` and exact `--context-read-confirmed true`.'
+          new_note = old_note + '\n\nFor current public submissions, every Verification compatibility level from `V0` through `V5` requires `CC-3`. `CC-2` remains legacy compatibility metadata only and is not sufficient for a current public Verification record.'
+          if text.count(old_note) != 1:
+              raise SystemExit('agent-start.md: compatibility note anchor missing or duplicated')
+          md.write_text(text.replace(old_note, new_note), encoding='utf-8')
+          PY
+
+          cat > scripts/test_public_verification_context_contract.py <<'PY'
+          #!/usr/bin/env python3
+          """Prevent public agent entrypoints from advertising a rejected Verification context."""
+          from __future__ import annotations
+
+          import json
+          from pathlib import Path
+
+          ROOT = Path(__file__).resolve().parents[1]
+          JSON_PATHS = [
+              '.well-known/trinity-accord.json',
+              'api/agent-first-contact.json',
+              'api/agent-required-reading.json',
+              'api/agent-start.v2.json',
+              'api/external-agent-quickstart.json',
+              'downloads/record-chain-agent-field-guidance.v1.json',
+          ]
+
+          failures: list[str] = []
+          for rel in JSON_PATHS:
+              path = ROOT / rel
+              data = json.loads(path.read_text(encoding='utf-8'))
+              minimums = data.get('context_compatibility_minimums')
+              if not isinstance(minimums, dict):
+                  failures.append(f'{rel}: missing context_compatibility_minimums')
+                  continue
+              if minimums.get('verification_V0_to_V2') != 'CC-3':
+                  failures.append(f"{rel}: verification_V0_to_V2={minimums.get('verification_V0_to_V2')!r}")
+              if minimums.get('verification_V3_to_V5') != 'CC-3':
+                  failures.append(f"{rel}: verification_V3_to_V5={minimums.get('verification_V3_to_V5')!r}")
+
+          markdown = (ROOT / 'agent-start.md').read_text(encoding='utf-8')
+          required_rows = [
+              '| Verification `V0`–`V2` | `CC-3` |',
+              '| Verification `V3`–`V5` | `CC-3` |',
+          ]
+          for row in required_rows:
+              if row not in markdown:
+                  failures.append(f'agent-start.md: missing {row}')
+          if '| Verification `V0`–`V2` | `CC-2` |' in markdown:
+              failures.append('agent-start.md: still advertises rejected CC-2 Verification submissions')
+          if 'every Verification compatibility level from `V0` through `V5` requires `CC-3`' not in markdown:
+              failures.append('agent-start.md: missing current-public-submission clarification')
+
+          action_profiles = json.loads((ROOT / 'api/context-action-profiles.v1.json').read_text(encoding='utf-8'))
+          record_action = next((p for p in action_profiles.get('profiles', []) if p.get('id') == 'record_action'), None)
+          if not record_action or 'CC-3 or higher under current Builder schema' not in record_action.get('legacy_cc_mapping', []):
+              failures.append('api/context-action-profiles.v1.json: record_action CC-3 contract missing')
+
+          gateway = json.loads((ROOT / 'api/record-chain-intake-gateway.v1.json').read_text(encoding='utf-8'))
+          if gateway.get('public_phase', {}).get('status') != 'production_live':
+              failures.append('api/record-chain-intake-gateway.v1.json: production_live status missing')
+
+          if failures:
+              raise SystemExit('\n'.join(f'FAIL: {item}' for item in failures))
+          print(f'PASS: {len(JSON_PATHS)} machine entrypoints and agent-start.md require CC-3 for Verification V0–V5')
+          PY
+          chmod +x scripts/test_public_verification_context_contract.py
+
+          cat > .github/workflows/public-verification-context-contract.yml <<'YAML'
+          name: Public Verification Context Contract
+
+          on:
+            pull_request:
+              branches: [main]
+            push:
+              branches: [main]
+            workflow_dispatch:
+
+          permissions:
+            contents: read
+
+          jobs:
+            contract:
+              runs-on: ubuntu-24.04
+              timeout-minutes: 5
+              steps:
+                - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+                - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+                  with:
+                    python-version: "3.12"
+                - run: python3 scripts/test_public_verification_context_contract.py
+          YAML
+
+          python3 scripts/test_public_verification_context_contract.py
+          rm .github/workflows/bootstrap-align-verification-context.yml
+      - name: Commit exact contract repair
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agent-start.md \
+            .well-known/trinity-accord.json \
+            api/agent-first-contact.json \
+            api/agent-required-reading.json \
+            api/agent-start.v2.json \
+            api/external-agent-quickstart.json \
+            downloads/record-chain-agent-field-guidance.v1.json \
+            scripts/test_public_verification_context_contract.py \
+            .github/workflows/public-verification-context-contract.yml \
+            .github/workflows/bootstrap-align-verification-context.yml
+          git commit -m "fix: align public Verification context minimum"
+          git push origin HEAD:agent/align-verification-context-contract
