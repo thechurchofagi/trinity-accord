@@ -61,7 +61,7 @@ jobs:
         run: |
           set -euo pipefail
           git rm .github/workflows/one-time-context-readiness-convergence.yml
-          git rm scripts/one_time_context_readiness_convergence.py
+          git rm -f scripts/one_time_context_readiness_convergence.py
           git diff --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
