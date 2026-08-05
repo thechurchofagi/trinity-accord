@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.context-depth-declaration.v1",
-  "version": "v1",
-  "purpose": "Standard format for agents to declare what content they have loaded into context. Enables structured, verifiable context-depth claims.",
+  "version": "v1.1",
+  "purpose": "Compatibility format for declaring loaded context. New work selects an action profile first, lists exact sources actually loaded, and treats CC as Builder/archive compatibility metadata rather than proof of understanding.",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -67,28 +67,61 @@
           "type": "object",
           "properties": {
             "legacy_archive_essentials": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional legacy field. Load only when the claim depends on archived provenance or historical website material."
             },
             "chronicle_agent_context": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional legacy field. Load only when the claim depends on Chronicle-related context."
             },
             "chronicle_summary_json": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional legacy field. Load only when the claim depends on Chronicle-related context."
             },
             "agent_brief": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Current CC-3 base source for classification and routing."
             },
             "context_pack_vision_layer": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional field. Load only when the claim depends on the later vision layer."
             },
             "context_pack_physical_anchor": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional field. Load only when the claim depends on physical-anchor or notarial evidence."
             },
             "context_pack_legacy_archive_index": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional field. Load only when the claim depends on archived provenance."
             },
             "context_pack_nft_chronicle": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Conditional field. Load only when the claim depends on Chronicle, music, creative work, or human witness."
+            },
+            "action_profile": {
+              "type": "string",
+              "enum": [
+                "interpretation",
+                "verification",
+                "record_action",
+                "deep_research"
+              ],
+              "description": "Selected current action profile."
+            },
+            "exact_task_relevant_sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Exact sources actually loaded for the selected claim or action."
+            },
+            "corrections_or_supersession_checked": {
+              "type": "boolean",
+              "description": "Required when discussing a later record, report, correction, retirement, or supersession state."
+            },
+            "chronicle_loaded_because_claim_depends_on_it": {
+              "type": "boolean",
+              "description": "True only when the selected claim depends on Chronicle, history, music, creative work, family witness, or human-witness context."
             }
           }
         },
@@ -195,32 +228,56 @@
         "context_pack_bitcoin_inscription_mirrors": true
       },
       "cc3_loads": {
-        "legacy_archive_essentials": true,
-        "chronicle_agent_context": true,
-        "chronicle_summary_json": true,
+        "legacy_archive_essentials": false,
+        "chronicle_agent_context": false,
+        "chronicle_summary_json": false,
         "agent_brief": true,
-        "context_pack_vision_layer": true,
-        "context_pack_physical_anchor": true,
-        "context_pack_legacy_archive_index": true,
-        "context_pack_nft_chronicle": true
+        "context_pack_vision_layer": false,
+        "context_pack_physical_anchor": false,
+        "context_pack_legacy_archive_index": false,
+        "context_pack_nft_chronicle": false,
+        "action_profile": "interpretation",
+        "exact_task_relevant_sources": [
+          "https://www.trinityaccord.org/inscriptions/",
+          "https://www.trinityaccord.org/authority/",
+          "https://www.trinityaccord.org/agent-brief/",
+          "https://www.trinityaccord.org/agent-echo/"
+        ],
+        "corrections_or_supersession_checked": false,
+        "chronicle_loaded_because_claim_depends_on_it": false
       }
     },
     "chronicle_depth": {
-      "chronicle_summary_json": true,
-      "chronicle_agent_context": true,
+      "chronicle_summary_json": false,
+      "chronicle_agent_context": false,
       "chronicle_index_json": false,
       "chronicle_full_md": false,
       "CHRONICLE_MUSIC_TABLE": false
     },
     "legacy_archive_depth": {
-      "structured_essentials_only": true,
+      "structured_essentials_only": false,
       "full_archive": false
     },
     "limitations": [
-      "Did not load full legacy archive (102KB) — used structured essentials only",
-      "Did not load chronicle-full.md (4.1MB) — used agent-context summary",
-      "Did not perform any chain verification"
+      "This bounded Echo did not make Chronicle-wide, physical-evidence, or full-archive claims.",
+      "No technical verification was performed; a separate Verification record would be required."
     ]
   },
-  "boundary": "This declaration format is non-authoritative. It describes what content was loaded, not what was verified or endorsed. Bitcoin Originals prevail."
+  "boundary": "This declaration format is non-authoritative. It describes what content was loaded, not what was verified or endorsed. Bitcoin Originals prevail.",
+  "status": "legacy_builder_compatibility_declaration",
+  "preferred_model": "/api/context-action-profiles.v1.json",
+  "current_rule": {
+    "select_action_profile_first": true,
+    "actual_loaded_sources_control_sufficiency": true,
+    "cc_label_alone_is_insufficient": true,
+    "chronicle_and_legacy_material_are_conditional": true,
+    "public_echo_and_public_verification_minimum": "CC-3",
+    "private_narrow_technical_check_compatibility": "CC-2"
+  },
+  "terminology_boundary": {
+    "CC-3": "Context-depth compatibility label: Action-Grounded Context.",
+    "CRL-3": "Action-readiness label: ready for a meaningful task-grounded response, not a context-depth synonym.",
+    "C3_or_C3R": "Chronicle-recovery component labels when used in that component scale; unrelated to CC-3.",
+    "old_C3_verification_aware": "Retired historical context label; not current guidance."
+  }
 }

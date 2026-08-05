@@ -483,9 +483,7 @@ _CC_RULES: dict[str, list[tuple[tuple[int, int | None], int]]] = {
         ((0, None), 3),
     ],
     "verification": [
-        ((0, 2), 2),
-        ((3, 5), 3),
-        ((6, None), 3),
+        ((0, None), 3),
     ],
     "guardian_application": [
         ((0, None), 3),
@@ -1589,6 +1587,50 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
 
     context_readiness = draft.get("context_readiness") if isinstance(draft.get("context_readiness"), dict) else {}
     loaded_urls = context_readiness.get("loaded_context_urls") if isinstance(context_readiness, dict) else None
+
+
+    declared_minimum = context_readiness.get("minimum_required_for_action")
+    parsed_declared_minimum = _parse_context_level_value(declared_minimum)
+    if parsed_declared_minimum is None:
+        diagnostics.append(_make_diagnostic(
+            code="MINIMUM_REQUIRED_FOR_ACTION_UNDERSTATED",
+            severity="error",
+            field="draft.context_readiness.minimum_required_for_action",
+            message="minimum_required_for_action must be a valid CC-0 through CC-5 value derived by the current Builder.",
+            meaning=f"The Gateway-computed minimum for record_type={record_type!r} is CC-{required_cc}.",
+            suggested_fix="Rebuild with the current canonical Builder; do not hand-edit the signed draft.",
+        ))
+    elif parsed_declared_minimum < required_cc:
+        diagnostics.append(_make_diagnostic(
+            code="MINIMUM_REQUIRED_FOR_ACTION_UNDERSTATED",
+            severity="error",
+            field="draft.context_readiness.minimum_required_for_action",
+            message=(
+                f"minimum_required_for_action CC-{parsed_declared_minimum} understates the Gateway-computed minimum CC-{required_cc}."
+            ),
+            meaning="Client declarations cannot lower the active public minimum for a record type.",
+            suggested_fix="Rebuild with the current canonical Builder; do not hand-edit the signed draft.",
+        ))
+
+    if record_type in _FORMAL_RECORD_TYPES and context_readiness.get("context_sufficient_for_selected_action") is not True:
+        diagnostics.append(_make_diagnostic(
+            code="CONTEXT_NOT_SUFFICIENT_FOR_FORMAL_RECORD",
+            severity="error",
+            field="draft.context_readiness.context_sufficient_for_selected_action",
+            message="Formal public records require context_sufficient_for_selected_action=true.",
+            meaning="A formal record cannot proceed while its own signed context declaration says the selected action was not sufficiently grounded.",
+            suggested_fix="Load the missing sources and rebuild, or submit context_insufficient_notice.",
+        ))
+
+    if record_type in _FORMAL_RECORD_TYPES and cc_level >= 3 and context_readiness.get("context_read_confirmed") is not True:
+        diagnostics.append(_make_diagnostic(
+            code="CC3_CONTEXT_READ_CONFIRMATION_REQUIRED",
+            severity="error",
+            field="draft.context_readiness.context_read_confirmed",
+            message="CC-3 or higher formal records require context_read_confirmed=true.",
+            meaning="The participant must explicitly confirm that the required action-specific context was actually loaded and read.",
+            suggested_fix="Load and read the required sources, list their URLs, then rebuild with --context-read-confirmed true.",
+        ))
     if isinstance(loaded_urls, list):
         normalized_urls: list[str] = []
         for index, value in enumerate(loaded_urls):

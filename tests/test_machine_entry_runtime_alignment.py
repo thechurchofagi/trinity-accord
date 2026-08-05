@@ -98,8 +98,9 @@ def test_builder_local_validation_matches_gateway() -> None:
     assert 'command === "context-insufficient"' in builder
     assert 'requireExplicit(opts, "body", "--body or --body-file")' in builder
     assert "MISSING_CONTEXT_INSUFFICIENT_REASON" in runtime
-    assert "CONTEXT_HONESTY_LEVELS.has(String(opts.contextLevel).toUpperCase())" in builder
-    assert "CC-3, CC-4, or CC-5" in builder
+    assert "minimumContextLevelForAction(opts.recordType)" in builder
+    assert "Formal public records require --context-sufficient-for-selected-action true" in builder
+    assert "--loaded-urls is required for every formal record" in builder
     assert "classification_update, context_insufficient_notice" in builder
 
 

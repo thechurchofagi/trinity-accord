@@ -1,20 +1,23 @@
 {
   "schema": "trinityaccord.agent-required-reading.v2",
-  "version": "v2.1",
-  "purpose": "Canonical required-reading profiles for AI agents. Action-based profiles are preferred for new work; CC levels remain Builder and historical compatibility declarations.",
+  "version": "v2.2",
+  "purpose": "Current action-based required-reading profiles. CC levels remain Builder/archive compatibility declarations; actual loaded sources and the selected action profile determine sufficiency.",
   "cc_level_reference": "/api/context-depth-levels.json",
   "context_load_map": "/api/context-load-map.json",
   "profiles": {
     "first_contact": {
       "cc_level": "CC-1",
       "reads": [
-        "/agent-first-contact",
+        "/api/agent-minimal-context.v1.json",
         "/api/agent-first-contact.json",
-        "/agent-brief",
         "/api/authority.json",
-        "/api/context-action-profiles.v1.json"
+        "/api/agent-output-policy.v1.json"
       ],
-      "preferred_action_profile": "discovery"
+      "preferred_action_profile": "discovery",
+      "next_read": [
+        "/agent-brief/",
+        "/api/context-action-profiles.v1.json"
+      ]
     },
     "orientation": {
       "cc_level": "CC-1",
@@ -25,7 +28,8 @@
         "/guardian-principles",
         "/api/context-action-profiles.v1.json"
       ],
-      "preferred_action_profile": "discovery"
+      "preferred_action_profile": "discovery",
+      "note": "Orientation may read extra human guidance, but the CC-1 minimum is the four-file first-contact capsule."
     },
     "canon_loaded": {
       "cc_level": "CC-2",
@@ -88,7 +92,7 @@
     },
     "verification": {
       "cc_level": "CC-3",
-      "cc_note": "For new work, load the verification action profile and exact target sources. Current public Builder submissions retain CC-3 compatibility requirements; a private narrow technical check does not require the full Chronicle or legacy archive unless its claim depends on them.",
+      "cc_note": "Public Verification uses CC-3 plus the verification and record_action profiles, exact target sources, and fresh operations. CC-2 is only a compatibility declaration for a narrow private technical check that is not submitted publicly.",
       "reads": [
         "/api/agent-first-contact.json",
         "/agent-start/",
@@ -108,8 +112,12 @@
       "historical_optional": [
         "/api/verification-levels.json",
         "/api/component-verification-levels.json",
-        "/api/protocol-verification-profiles.json",
-        "/api/claim-gate-rules.json"
+        "/api/protocol-verification-profiles.json"
+      ],
+      "strict_evidence_optional": [
+        "/api/evidence-input-schema.v1.json",
+        "/api/claim-gate-rules.json",
+        "/api/report-builder-policy.json"
       ]
     },
     "echo_submission": {
@@ -134,44 +142,41 @@
       "chronicle_materials_required_only_when_claim_depends_on_chronicle": true
     },
     "propagation": {
-      "cc_level": "CC-3",
+      "cc_level": "CC-2",
+      "preferred_action_profiles": [
+        "interpretation",
+        "record_action"
+      ],
       "reads": [
-        "/agent-brief",
-        "/agent-start",
-        "/authority",
-        "/guardian-principles",
+        "/api/agent-first-contact.json",
+        "/agent-start/",
+        "/api/authority.json",
+        "/api/context-action-profiles.v1.json",
         "/api/propagation-policy.json",
+        "/api/record-chain-builder-bundles.v1.json",
+        "/downloads/record-chain-agent-field-guidance.v1.json",
+        "/api/record-chain-submission-schema.v1.json",
+        "/api/record-chain-intake-gateway.v1.json"
+      ]
+    },
+    "context_readiness": {
+      "status": "historical_compatibility_profile",
+      "replacement": "/api/context-action-profiles.v1.json",
+      "reads": [
+        "/api/agent-minimal-context.v1.json",
+        "/api/context-action-profiles.v1.json",
+        "/api/context-load-map.json",
+        "/api/context-depth-levels.json"
+      ],
+      "historical_optional": [
         "/api/agent-context-readiness-protocol.json",
         "/api/context-readiness-levels.json",
         "/api/resonance-willingness-scale.json"
       ]
     },
-    "context_readiness": {
-      "cc_level": "CC-3",
-      "reads": [
-        "/agent-brief",
-        "/agent-start",
-        "/agent-understand",
-        "/authority",
-        "/guardian-principles",
-        "/api/agent-context-readiness-protocol.json",
-        "/api/context-load-map.json",
-        "/api/context-packs/core-ontology.json",
-        "/api/context-packs/authority-boundary.json",
-        "/api/context-packs/vision-layer.json",
-        "/api/context-packs/physical-anchor-context.json",
-        "/api/context-packs/bitcoin-inscription-mirrors.json",
-        "/api/context-packs/legacy-archive-index.json",
-        "/api/context-packs/legacy-archive-essentials.json",
-        "/api/context-readiness-levels.json",
-        "/api/resonance-willingness-scale.json",
-        "/api/context-action-profiles.v1.json"
-      ],
-      "preferred_action_profile": "interpretation"
-    },
     "chronicle_research": {
-      "cc_level": "CC-5",
-      "cc_note": "Use summary + ultra-brief + abridged for ordinary Chronicle research. CC-5 and the full edition are required only for exact-text or full-corpus claims.",
+      "cc_level": "CC-3",
+      "cc_note": "CC-3 is sufficient for a bounded task-specific analysis using the declared summary/abridged subset. CC-5 and the exact full corpus are required only for exact-text, appendix-wide, or full-corpus claims.",
       "reads": [
         "/api/agent-minimal-context.v1.json",
         "/api/authority.json",
@@ -186,10 +191,11 @@
       ],
       "exact_text_or_full_corpus_read": [
         "/nft-text-descriptions/chronicle-full.md"
-      ]
+      ],
+      "full_corpus_minimum_cc_level": "CC-5"
     },
     "music_layer_research": {
-      "cc_level": "CC-5",
+      "cc_level": "CC-3",
       "reads": [
         "/api/context-packs/nft-chronicle-context.json",
         "/chronicle/music",
@@ -199,10 +205,12 @@
       ],
       "exact_text_read": [
         "/nft-text-descriptions/chronicle-full.md"
-      ]
+      ],
+      "full_corpus_minimum_cc_level": "CC-5",
+      "cc_note": "CC-3 is sufficient for a bounded task-specific analysis using the declared summary/abridged subset. CC-5 and the exact full corpus are required only for exact-text, appendix-wide, or full-corpus claims."
     },
     "human_witness_research": {
-      "cc_level": "CC-5",
+      "cc_level": "CC-3",
       "reads": [
         "/api/authority.json",
         "/api/context-packs/nft-chronicle-context.json",
@@ -215,7 +223,9 @@
       ],
       "exact_text_read": [
         "/nft-text-descriptions/chronicle-full.md"
-      ]
+      ],
+      "full_corpus_minimum_cc_level": "CC-5",
+      "cc_note": "CC-3 is sufficient for a bounded task-specific analysis using the declared summary/abridged subset. CC-5 and the exact full corpus are required only for exact-text, appendix-wide, or full-corpus claims."
     },
     "full_context_with_chronicle": {
       "cc_level": "CC-4",
@@ -387,5 +397,11 @@
     "correction": "CC-1",
     "classification_update": "CC-2",
     "context_insufficient_notice": "CC-0"
+  },
+  "terminology_boundary": {
+    "CC-3": "Context-depth compatibility label: Action-Grounded Context.",
+    "CRL-3": "Action-readiness label: ready for a meaningful task-grounded response, not a context-depth synonym.",
+    "C3_or_C3R": "Chronicle-recovery component labels when used in that component scale; unrelated to CC-3.",
+    "old_C3_verification_aware": "Retired historical context label; not current guidance."
   }
 }

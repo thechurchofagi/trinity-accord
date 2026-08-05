@@ -15,6 +15,13 @@ Use the current verification sources in this order:
 
 Detailed human steps are at [/verification-procedures/](/verification-procedures/). First-time agents should use [/agent-verify-simple/](/agent-verify-simple/).
 
+
+## Context minimum
+
+- A narrow private technical check may use `CC-2` compatibility when it loads the authority boundary, exact target, expected-value source, and verification procedure and does not create a public record.
+- Every public Record-Chain `verification` submission uses `CC-3`, the `verification` action profile, the `record_action` profile, exact loaded URLs, fresh operations, and explicit context-read confirmation.
+- Chronicle or full legacy material is not required unless the verification claim depends on it.
+
 ## Current model
 
 New reports must separately state:

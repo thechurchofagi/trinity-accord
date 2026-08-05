@@ -132,21 +132,23 @@
             },
             "minimum_required_for_action": {
               "type": "string",
-              "pattern": "^CC-[0-5]$"
+              "pattern": "^CC-[0-5]$",
+              "description": "Builder-derived minimum for the selected public record type. Gateway recomputes the active minimum and rejects understated values."
             },
             "context_sufficient_for_selected_action": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Must be true for every formal public record. If the context is not sufficient, stop or submit context_insufficient_notice."
             },
             "loaded_context_urls": {
               "type": "array",
               "items": {
                 "type": "string"
               },
-              "description": "URLs actually loaded for the declared context level."
+              "description": "Exact absolute public URLs actually loaded. Required whenever a formal record claims sufficient context."
             },
             "context_read_confirmed": {
               "type": "boolean",
-              "description": "Self-declared confirmation that the participant actually loaded and read the context required for the declared context level. Required by Builder for formal CC-3+ records; does not prove subjective understanding."
+              "description": "Self-declared confirmation that required context was actually loaded and read. Required for CC-3 or higher formal records; does not prove subjective understanding."
             },
             "context_read_confirmation_boundary": {
               "type": "object",

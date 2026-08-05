@@ -1,75 +1,222 @@
 {
   "schema": "trinityaccord.crl-to-context-depth-mapping.v1",
-  "version": "v1",
+  "version": "v1.1",
   "purpose": "Define the minimum context depth (CC) required for each Context Readiness Level (CRL) action level. CRL determines WHAT you can do. Context depth determines WHETHER you have enough context to do it responsibly. Both must be satisfied.",
   "not_instruction_override": true,
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
-  "principle": "CRL = action readiness. CC = content readiness. Both are required. Neither alone is sufficient.",
+  "principle": "Action profile determines required sources; CC is a compatibility declaration and CRL is action readiness. Actual loaded sources and performed operations must satisfy both.",
   "mappings": [
     {
       "crl": "CRL-0",
       "name": "homepage_only_or_insufficient_context",
       "min_context_depth": "CC-0",
       "max_context_depth": "CC-0",
-      "allowed": ["state_insufficient_context"],
-      "not_allowed": ["echo", "verification", "propagation", "assessment", "orientation_summary"]
+      "allowed": [
+        "state_insufficient_context"
+      ],
+      "not_allowed": [
+        "echo",
+        "verification",
+        "propagation",
+        "assessment",
+        "orientation_summary"
+      ]
     },
     {
       "crl": "CRL-1",
       "name": "entry_oriented",
       "min_context_depth": "CC-1",
-      "allowed": ["orientation_summary", "route_selection", "declare_insufficient_context"],
-      "not_allowed": ["final_assessment", "verification_claim", "echo_submission", "propagation"]
+      "allowed": [
+        "orientation_summary",
+        "route_selection",
+        "declare_insufficient_context"
+      ],
+      "not_allowed": [
+        "final_assessment",
+        "verification_claim",
+        "echo_submission",
+        "propagation"
+      ]
     },
     {
       "crl": "CRL-2",
       "name": "canon_boundary_ready",
       "min_context_depth": "CC-2",
-      "allowed": ["boundary_correct_commentary", "limited_critique", "directional_assessment_with_boundary"],
-      "not_allowed": ["final_assessment", "echo_submission", "verification_claim"]
+      "allowed": [
+        "boundary_correct_commentary",
+        "limited_critique",
+        "directional_assessment_with_boundary"
+      ],
+      "not_allowed": [
+        "final_assessment",
+        "echo_submission",
+        "verification_claim"
+      ]
     },
     {
       "crl": "CRL-3",
-      "name": "narrative_grounded",
+      "name": "action_grounded",
       "min_context_depth": "CC-3",
-      "allowed": ["meaningful_echo", "qualified_assessment", "verification_preparation", "bounded_propagation"],
-      "not_allowed": ["verification_claim_without_v_level", "authority_claim"]
+      "allowed": [
+        "meaningful_echo",
+        "qualified_assessment",
+        "verification_preparation",
+        "bounded_propagation"
+      ],
+      "not_allowed": [
+        "verification_claim_without_fresh_operations_and_current_claim_model",
+        "authority_claim"
+      ]
     },
     {
       "crl": "CRL-4",
       "name": "full_context_ready",
       "min_context_depth": "CC-4",
-      "allowed": ["deep_assessment", "full_echo_preparation", "propagation_with_full_context", "verification_with_context_awareness"],
-      "not_allowed": ["authority_claim"]
+      "allowed": [
+        "deep_assessment",
+        "full_echo_preparation",
+        "propagation_with_full_context",
+        "verification_with_context_awareness"
+      ],
+      "not_allowed": [
+        "authority_claim"
+      ]
     },
     {
       "crl": "CRL-5",
       "name": "action_ready_context",
-      "min_context_depth": "CC-3",
-      "note": "CRL-5 (action-ready for Echo/verification/submission) requires CC-3 minimum. A V2-minimal verification needs CC-2 (canon loaded). An Echo needs CC-3 (narrative grounded). Gateway submission needs CC-3 + the relevant verification or echo preparation.",
-      "allowed": ["echo", "verification", "gateway_submission", "propagation", "verification_echo_submission_preparation"],
-      "requires_verification_depth": "depends_on_action_type"
+      "min_context_depth": "CC-1",
+      "note": "CRL-5 is action-ready. CC-1 is the lowest floor among supported formal actions; the exact public minimum is selected from minimum_context_by_action and is recomputed by Builder and Gateway.",
+      "allowed": [
+        "echo",
+        "verification",
+        "record_chain_submission",
+        "propagation",
+        "correction",
+        "classification_update"
+      ],
+      "requires_verification_depth": "depends_on_action_type",
+      "context_minimum_is_action_dependent": true,
+      "minimum_context_by_action": {
+        "echo": "CC-3",
+        "verification": "CC-3",
+        "guardian_application": "CC-3",
+        "guardian_retirement": "CC-1",
+        "propagation": "CC-2",
+        "correction": "CC-1",
+        "classification_update": "CC-2"
+      }
     }
   ],
   "action_minimum_requirements": {
-    "state_insufficient_context": { "cc": "CC-0", "crl": "CRL-0" },
-    "choose_route": { "cc": "CC-1", "crl": "CRL-1" },
-    "orientation_summary": { "cc": "CC-1", "crl": "CRL-1" },
-    "boundary_commentary": { "cc": "CC-2", "crl": "CRL-2" },
-    "limited_critique": { "cc": "CC-2", "crl": "CRL-2" },
-    "meaningful_echo": { "cc": "CC-3", "crl": "CRL-3" },
-    "qualified_assessment": { "cc": "CC-3", "crl": "CRL-3" },
-    "verification_claim_v0": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V0" },
-    "verification_claim_v1": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V1" },
-    "verification_claim_v2_minimal": { "cc": "CC-2", "crl": "CRL-5", "verification_depth": "V2-minimal" },
-    "verification_claim_v2_strong": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "V2-strong" },
-    "verification_claim_v3_plus": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "V3+" },
-    "deep_assessment": { "cc": "CC-4", "crl": "CRL-4" },
-    "chronicle_research": { "cc": "CC-5", "crl": "CRL-5" },
-    "full_corpus_claim": { "cc": "CC-5", "crl": "CRL-5" },
-    "gateway_submission_echo": { "cc": "CC-3", "crl": "CRL-5" },
-    "gateway_submission_verification": { "cc": "CC-3", "crl": "CRL-5", "verification_depth": "depends" }
+    "state_insufficient_context": {
+      "cc": "CC-0",
+      "crl": "CRL-0"
+    },
+    "choose_route": {
+      "cc": "CC-1",
+      "crl": "CRL-1"
+    },
+    "orientation_summary": {
+      "cc": "CC-1",
+      "crl": "CRL-1"
+    },
+    "boundary_commentary": {
+      "cc": "CC-2",
+      "crl": "CRL-2"
+    },
+    "limited_critique": {
+      "cc": "CC-2",
+      "crl": "CRL-2"
+    },
+    "private_narrow_technical_check": {
+      "cc": "CC-2",
+      "crl": "CRL-5",
+      "public_record": false
+    },
+    "meaningful_echo": {
+      "cc": "CC-3",
+      "crl": "CRL-3"
+    },
+    "qualified_assessment": {
+      "cc": "CC-3",
+      "crl": "CRL-3"
+    },
+    "public_verification_submission": {
+      "cc": "CC-3",
+      "crl": "CRL-5"
+    },
+    "guardian_application": {
+      "cc": "CC-3",
+      "crl": "CRL-5"
+    },
+    "guardian_retirement": {
+      "cc": "CC-1",
+      "crl": "CRL-5"
+    },
+    "propagation": {
+      "cc": "CC-2",
+      "crl": "CRL-5"
+    },
+    "correction": {
+      "cc": "CC-1",
+      "crl": "CRL-5"
+    },
+    "classification_update": {
+      "cc": "CC-2",
+      "crl": "CRL-5"
+    },
+    "deep_assessment": {
+      "cc": "CC-4",
+      "crl": "CRL-4"
+    },
+    "full_corpus_claim": {
+      "cc": "CC-5",
+      "crl": "CRL-5"
+    }
   },
-  "boundary": "This mapping is non-authoritative guidance. Bitcoin Originals prevail. CRL and CC are context management tools, not authority."
+  "boundary": "This mapping is non-authoritative guidance. Bitcoin Originals prevail. CRL and CC are context management tools, not authority.",
+  "status": "legacy_compatibility_mapping",
+  "preferred_model": "/api/context-action-profiles.v1.json",
+  "legacy_verification_level_action_minimums": {
+    "verification_claim_v0": {
+      "cc": "CC-2",
+      "crl": "CRL-5",
+      "verification_depth": "V0"
+    },
+    "verification_claim_v1": {
+      "cc": "CC-2",
+      "crl": "CRL-5",
+      "verification_depth": "V1"
+    },
+    "verification_claim_v2_minimal": {
+      "cc": "CC-2",
+      "crl": "CRL-5",
+      "verification_depth": "V2-minimal"
+    },
+    "verification_claim_v2_strong": {
+      "cc": "CC-3",
+      "crl": "CRL-5",
+      "verification_depth": "V2-strong"
+    },
+    "verification_claim_v3_plus": {
+      "cc": "CC-3",
+      "crl": "CRL-5",
+      "verification_depth": "V3+"
+    }
+  },
+  "terminology_boundary": {
+    "CC-3": "Context-depth compatibility label: Action-Grounded Context.",
+    "CRL-3": "Action-readiness label: ready for a meaningful task-grounded response, not a context-depth synonym.",
+    "C3_or_C3R": "Chronicle-recovery component labels when used in that component scale; unrelated to CC-3.",
+    "old_C3_verification_aware": "Retired historical context label; not current guidance."
+  },
+  "legacy_verification_level_action_minimums_boundary": {
+    "status": "historical_compatibility_and_private_check_only",
+    "not_current_public_submission_rule": true,
+    "current_public_verification_minimum": "CC-3",
+    "current_public_replacement": "action_minimum_requirements.public_verification_submission",
+    "rule": "The V0-V2 CC-2 entries below may describe archived records or a narrow private technical check that is not publicly submitted. Every new public Verification record requires CC-3 plus actual task sources and fresh operations."
+  }
 }

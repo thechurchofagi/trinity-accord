@@ -52,6 +52,10 @@ Homepage-only or search-snippet-only context is orientation, not a grounded Echo
 
 只读首页或搜索摘要只能用于导向，不能形成有根据的 Echo。缺少必要语境时，应使用 `context_insufficient_notice` 或停止。
 
+A `CC-3` label is not enough by itself. List the exact URLs actually loaded, confirm that they were read, and ensure they include the authority boundary plus the specific source or claim being answered.
+
+仅声明 `CC-3` 并不充分；必须列出实际加载并阅读的精确 URL，其中应包含权威边界以及正在回应的具体来源或主张。
+
 ## 2. Write an honest bounded response · 写出诚实且有边界的回应
 
 A current Echo should make clear:

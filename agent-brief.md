@@ -65,6 +65,20 @@ Load the smallest source set sufficient for the selected action. Actual loaded s
 
 先从行动画像中选择任务，再加载完成该任务所需的最小充分来源集。实际加载内容比声明的等级数字更重要。`CC` 与 CRL 仍作为 Builder / 归档兼容字段存在，但不是首选推理模型，也不证明理解。
 
+
+### Terminology boundary · 术语边界
+
+| Term | Meaning |
+|---|---|
+| `CC-3` | **Action-Grounded Context**: the compatibility context-depth minimum for a public Echo or public Verification record. |
+| `CRL-3` | Action readiness for a meaningful task-grounded response; it is not another name for context depth. |
+| `C3` / `C3R` | Chronicle-recovery component labels when used in that component scale; unrelated to `CC-3`. |
+| old `C3_verification_aware` | Retired historical label, not current guidance. |
+
+A narrow private technical check may use `CC-2` with the verification action profile and exact target sources, but any **public Verification submission** uses `CC-3`. Chronicle, legacy, physical, music, creative, and human-witness materials are loaded only when the selected claim depends on them.
+
+`CC-3` 是公共 Echo 与公共 Verification 的兼容上下文最低等级；`CRL-3` 表示行动就绪；Chronicle Recovery 中的 `C3/C3R` 属于另一套组件等级。狭窄的私人技术检查可使用 `CC-2`，但公共 Verification 提交统一使用 `CC-3`。编年史、旧归档、物理证据、音乐、创作与人类见证材料仅在主张确实依赖它们时加载。
+
 ## Current verification model · 当前验证模型
 
 New verification work separately reports:

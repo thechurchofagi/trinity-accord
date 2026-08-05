@@ -86,8 +86,9 @@ def test_new_verification_model_separates_physical_and_witness_dimensions() -> N
 
 def test_builder_emits_multidimensional_verification_claim_model() -> None:
     builder = (ROOT / "downloads/record-chain-builder.mjs").read_text(encoding="utf-8")
-    required_fragments = [
-        'const BUILDER_VERSION = "v2.3"',
+    core = (ROOT / "downloads/record-chain-builder-core.mjs").read_text(encoding="utf-8")
+    required_entrypoint_fragments = [
+        'source_declaration: \'const BUILDER_VERSION = "v2.4"\'',
         "verification_claim_model",
         "digital_profile",
         "relationships_checked",
@@ -101,8 +102,15 @@ def test_builder_emits_multidimensional_verification_claim_model() -> None:
         "--external-witness",
         "--coverage-scope",
     ]
-    for fragment in required_fragments:
-        assert fragment in builder, f"builder missing {fragment}"
+    for fragment in required_entrypoint_fragments:
+        assert fragment in builder, f"builder entrypoint missing {fragment}"
+
+    for fragment in [
+        'const BUILDER_VERSION = "v2.4"',
+        "minimumContextLevelForAction(opts.recordType)",
+        "Formal public records require --context-sufficient-for-selected-action true",
+    ]:
+        assert fragment in core, f"builder core missing {fragment}"
 
 
 def test_active_guidance_explains_new_and_legacy_fields() -> None:
