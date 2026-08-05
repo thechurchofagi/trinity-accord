@@ -103,6 +103,18 @@ class ContextReadinessContractConvergenceTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256(raw).hexdigest(), entry["sha256"], path)
             self.assertEqual(len(raw), entry["size_bytes"], path)
 
+    def test_context_diagnostic_help_is_sorted_and_complete(self) -> None:
+        helper = load("api/record-chain-field-helper.v1.json")["diagnostic_code_help"]
+        self.assertEqual(list(helper), sorted(helper))
+        for code in (
+            "CC3_CONTEXT_READ_CONFIRMATION_REQUIRED",
+            "CONTEXT_NOT_SUFFICIENT_FOR_FORMAL_RECORD",
+            "MINIMUM_REQUIRED_FOR_ACTION_UNDERSTATED",
+        ):
+            self.assertIn(code, helper)
+            self.assertEqual(helper[code]["severity"], "error")
+            self.assertIs(helper[code]["recovery_possible"], True)
+
     def test_phase5c_guardian_fixture_uses_current_cc3_contract(self) -> None:
         script = (ROOT / "scripts/test_phase_5c_hotfix.py").read_text(encoding="utf-8")
         guardian = script.split("def build_guardian", 1)[1].split("def helper_content_fields", 1)[0]
