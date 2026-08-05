@@ -84,3 +84,4 @@ def test_pages_deploy_runs_live_preflight_after_gateway_rollout():
     build_pos = workflow.index("  build:")
     assert deploy_pos < smoke_pos < build_pos
     assert "live-record-action-preflight-proof-${{ github.run_id }}" in workflow
+    assert "smoke_live_record_action_preflight" in workflow
