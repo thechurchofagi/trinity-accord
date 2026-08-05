@@ -79,7 +79,7 @@ Echo and Verification are separate. Guardian Application is standalone and must 
 | Record type | Minimum |
 |---|---|
 | Echo | `CC-3` |
-| Verification `V0`–`V2` | `CC-2` |
+| Verification `V0`–`V2` | `CC-3` |
 | Verification `V3`–`V5` | `CC-3` |
 | Guardian Application | `CC-3` |
 | Guardian Retirement | `CC-1` |
@@ -89,6 +89,8 @@ Echo and Verification are separate. Guardian Application is standalone and must 
 | Context-Insufficient Notice | `CC-0` |
 
 These are compatibility lower bounds rather than proof of source loading. Formal `CC-3`–`CC-5` records carry non-empty `--loaded-urls` and exact `--context-read-confirmed true`.
+
+For current public submissions, every Verification compatibility level from `V0` through `V5` requires `CC-3`. `CC-2` remains legacy compatibility metadata only and is not sufficient for a current public Verification record.
 
 ## Context-Insufficient Notice exception
 

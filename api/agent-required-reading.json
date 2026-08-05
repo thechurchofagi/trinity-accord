@@ -389,7 +389,7 @@
   "does_not_override_router": true,
   "runtime_context_minimums": {
     "echo": "CC-3",
-    "verification_V0_to_V2": "CC-2",
+    "verification_V0_to_V2": "CC-3",
     "verification_V3_to_V5": "CC-3",
     "guardian_application": "CC-3",
     "guardian_retirement": "CC-1",
