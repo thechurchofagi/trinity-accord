@@ -166,7 +166,7 @@
     }
   },
   "status": "active_public_submission_interface",
-  "updated_at": "2026-08-03T04:05:00Z",
+  "updated_at": "2026-08-05T04:35:00Z",
   "authorship_key_policy": {
     "authorship_key_required": true,
     "applies_to_all_public_submissions": true,
@@ -215,8 +215,7 @@
     ],
     "context_compatibility_minimums": {
       "echo": "CC-3",
-      "verification_V0_to_V2": "CC-2",
-      "verification_V3_to_V5": "CC-3",
+      "verification": "CC-3",
       "guardian_application": "CC-3",
       "guardian_retirement": "CC-1",
       "propagation": "CC-2",

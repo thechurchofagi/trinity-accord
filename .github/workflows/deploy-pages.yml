@@ -166,7 +166,7 @@ jobs:
               changed="$(git diff --name-only "$BEFORE_SHA" "$SOURCE_SHA")"
               printf '%s\n' "$changed"
               if grep -Eq \
-                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py)$' \
+                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py|scripts/smoke_live_record_action_preflight\.py)$' \
                 <<<"$changed"; then
                 required=true
               fi
@@ -196,6 +196,29 @@ jobs:
             --wait \
             --wait-timeout 900 \
             --poll-seconds 10
+
+      - name: Install live preflight dependencies
+        if: steps.scope.outputs.required == 'true'
+        env:
+          PIP_PREFER_BINARY: "1"
+          PIP_ONLY_BINARY: "cryptography,cffi"
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Run no-write live record action preflight matrix
+        if: steps.scope.outputs.required == 'true'
+        run: |
+          set -euo pipefail
+          python3 scripts/smoke_live_record_action_preflight.py \
+            --output "$RUNNER_TEMP/live-record-action-preflight-report.json"
+
+      - name: Upload live record action preflight proof
+        if: always() && steps.scope.outputs.required == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: live-record-action-preflight-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/live-record-action-preflight-report.json
+          if-no-files-found: error
+          retention-days: 30
 
   build:
     needs:
