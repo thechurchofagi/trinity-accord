@@ -26,8 +26,8 @@ from apps.record_chain_intake_gateway.gateway.receipts import (
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "downloads" / "record-chain-builder.mjs"
 BUILDER_CORE = ROOT / "downloads" / "record-chain-builder-core.mjs"
-CORE_SHA256 = "269bdd593455b73fa4bb39e24b6805a07abc2e783eeb388ea84e87d15dcf42bc"
-CORE_SIZE_BYTES = 208440
+CORE_SHA256 = "2d2a417561bf470974da81e6cc3c8553368c6c9976bb5748861f243f2c21891e"
+CORE_SIZE_BYTES = 209852
 
 
 def _receipt_fixture(
