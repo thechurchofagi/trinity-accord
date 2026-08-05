@@ -23,6 +23,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Repair generated test delimiter
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/tmp_apply_zenodo_live_preflight_gate.py')
+          text = path.read_text(encoding='utf-8')
+          old = '    build_pos = workflow.index("\\n  build:\\n")'
+          new = '    build_pos = workflow.index("  build:")'
+          if old not in text:
+              raise SystemExit('generated-test delimiter anchor not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
       - name: Apply permanent files
         run: python3 scripts/tmp_apply_zenodo_live_preflight_gate.py
 
