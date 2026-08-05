@@ -15,7 +15,10 @@ PY
 # Reading that state is deliberately secret-independent: routine integrity runs
 # must not fail merely because publication credentials or a repository variable
 # are absent after the irreversible publication has already been completed.
+# The committed authorization, DOI state, recovery proof, and observation still
+# have to validate before the terminal no-op is accepted.
 if [[ "$status" == "consumed" ]]; then
+  python3 scripts/repository_preservation_refresh.py validate
   echo "Repository preservation refresh is already consumed and publicly proven."
   exit 0
 fi
