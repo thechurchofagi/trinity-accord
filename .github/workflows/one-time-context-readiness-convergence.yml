@@ -30,7 +30,11 @@ jobs:
         with:
           node-version-file: '.node-version'
       - name: Apply bounded convergence patch
-        run: python3 scripts/one_time_context_readiness_convergence.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i 's/import base64, gzip/import base64, gzip, re/' scripts/one_time_context_readiness_convergence.py
+          python3 scripts/one_time_context_readiness_convergence.py
       - name: Synchronize generated sitemap
         run: python3 scripts/generate_sitemap.py
       - name: Static integrity checks
