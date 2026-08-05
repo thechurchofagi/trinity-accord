@@ -52,6 +52,29 @@ class ContextReadinessContractConvergenceTest(unittest.TestCase):
         self.assertEqual(crl3["name"], "action_grounded")
         self.assertNotIn("required_context_packs", crl3)
 
+    def test_crl5_uses_action_dependent_minimums(self) -> None:
+        expected = {
+            "echo": "CC-3",
+            "verification": "CC-3",
+            "guardian_application": "CC-3",
+            "guardian_retirement": "CC-1",
+            "propagation": "CC-2",
+            "correction": "CC-1",
+            "classification_update": "CC-2",
+        }
+        readiness = load("api/context-readiness-levels.json")
+        crl5 = next(item for item in readiness["levels"] if item["id"] == "CRL-5")
+        self.assertEqual(crl5["min_context_depth"], "CC-1")
+        self.assertIs(crl5["context_minimum_is_action_dependent"], True)
+        self.assertEqual(crl5["minimum_context_by_action"], expected)
+
+        mapping = load("api/crl-to-context-depth-mapping.json")
+        mapped_crl5 = next(item for item in mapping["mappings"] if item["crl"] == "CRL-5")
+        self.assertEqual(mapped_crl5["minimum_context_by_action"], expected)
+        boundary = mapping["legacy_verification_level_action_minimums_boundary"]
+        self.assertIs(boundary["not_current_public_submission_rule"], True)
+        self.assertEqual(boundary["current_public_verification_minimum"], "CC-3")
+
     def test_required_reading_separates_bounded_and_full_corpus_work(self) -> None:
         profiles = load("api/agent-required-reading.json")["profiles"]
         self.assertEqual(profiles["propagation"]["cc_level"], "CC-2")
