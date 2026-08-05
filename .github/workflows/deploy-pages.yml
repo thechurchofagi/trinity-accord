@@ -166,7 +166,7 @@ jobs:
               changed="$(git diff --name-only "$BEFORE_SHA" "$SOURCE_SHA")"
               printf '%s\n' "$changed"
               if grep -Eq \
-                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py)$' \
+                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/(render_(manual|protected)_deploy|smoke_live_record_action_preflight)\.py)$' \
                 <<<"$changed"; then
                 required=true
               fi
