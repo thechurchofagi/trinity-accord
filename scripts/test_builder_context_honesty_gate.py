@@ -41,19 +41,40 @@ def base_echo_cmd(key_dir: Path, readback: str):
     ]
 
 
+def base_propagation_cmd(key_dir: Path, readback: str):
+    return [
+        "node", str(BUILDER), "propagation",
+        "--actor-label", "Context Honesty Test Agent",
+        "--provider", "CI Test Runtime",
+        "--body", "propagation context minimum smoke test",
+        "--context-level", "CC-2",
+        "--context-sufficient-for-selected-action", "true",
+        "--loaded-urls", "https://www.trinityaccord.org/api/authority.json,https://www.trinityaccord.org/api/propagation-policy.json",
+        "--discovery-mode", "user_task_context",
+        "--requesting-party-type", "human",
+        "--introducing-party-type", "human",
+        "--record-decision", "human",
+        "--submission-executor", "self",
+        "--human-operator-involved", "false",
+        "--readback", readback,
+        "--contextual-readback-confirmed", "true",
+        "--key-dir", str(key_dir),
+    ]
+
+
 def main() -> int:
     readback = oath("echo")
 
     with tempfile.TemporaryDirectory() as td:
         key_dir = Path(td) / "keys"
 
-        # Missing confirmation fails.
+        # Missing confirmation fails for CC-3.
         out1 = Path(td) / "missing.json"
         r = run(base_echo_cmd(key_dir, readback) + ["--out", str(out1)])
         assert r.returncode != 0
         assert "Context honesty confirmation required" in (r.stderr + r.stdout)
 
-        # Explicit false fails.
+        # Explicit false fails for CC-3.
         out2 = Path(td) / "false.json"
         r = run(base_echo_cmd(key_dir, readback) + ["--context-read-confirmed", "false", "--out", str(out2)])
         assert r.returncode != 0
@@ -65,32 +86,43 @@ def main() -> int:
         assert r.returncode != 0
         assert "--context-read-confirmed must be passed as the explicit value true" in (r.stderr + r.stdout)
 
-        # Explicit true succeeds.
+        # Explicit true succeeds for CC-3 Echo.
         out4 = Path(td) / "ok.json"
         r = run(base_echo_cmd(key_dir, readback) + ["--context-read-confirmed", "true", "--out", str(out4)])
         assert r.returncode == 0, r.stderr + r.stdout
         data = json.loads(out4.read_text(encoding="utf-8"))
         cr = data["record_draft"]["context_readiness"]
         assert cr["context_read_confirmed"] is True
+        assert cr["minimum_required_for_action"] == "CC-3"
         b = cr["context_read_confirmation_boundary"]
         assert b["self_declared_only"] is True
         assert b["does_not_prove_subjective_understanding"] is True
         assert b["false_claim_is_oath_violation"] is True
         assert b["context_map"] == "/api/context-load-map.json"
 
-    # CC-1 does not require confirmation.
+    # CC-1 cannot bypass the derived CC-3 minimum for Echo.
     with tempfile.TemporaryDirectory() as td:
         key_dir = Path(td) / "keys"
-        out = Path(td) / "cc1.json"
+        out = Path(td) / "cc1-echo.json"
         cmd = base_echo_cmd(key_dir, readback)
         i = cmd.index("--context-level") + 1
         cmd[i] = "CC-1"
-        j = cmd.index("--context-sufficient-for-selected-action") + 1
-        cmd[j] = "true"
-        k = cmd.index("--loaded-urls") + 1
-        cmd[k] = "https://www.trinityaccord.org/api/agent-first-contact.json"
         r = run(cmd + ["--out", str(out)])
+        assert r.returncode != 0
+        assert "below the Builder-derived minimum CC-3 for echo" in (r.stderr + r.stdout)
+
+    # A lower-minimum formal action remains usable without claiming CC-3.
+    propagation_readback = oath("propagation")
+    with tempfile.TemporaryDirectory() as td:
+        key_dir = Path(td) / "keys"
+        out = Path(td) / "cc2-propagation.json"
+        r = run(base_propagation_cmd(key_dir, propagation_readback) + ["--out", str(out)])
         assert r.returncode == 0, r.stderr + r.stdout
+        data = json.loads(out.read_text(encoding="utf-8"))
+        cr = data["record_draft"]["context_readiness"]
+        assert cr["declared_context_level"] == "CC-2"
+        assert cr["minimum_required_for_action"] == "CC-2"
+        assert cr["context_read_confirmed"] is False
 
     # context-requirements command.
     r = run(["node", str(BUILDER), "context-requirements", "--context-level", "CC-3"])
