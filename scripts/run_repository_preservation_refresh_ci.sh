@@ -4,6 +4,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+status="$(python3 - <<'PY'
+import json
+from pathlib import Path
+print(json.loads(Path('preservation/repository-preservation-refresh-authorization.json').read_text())['status'])
+PY
+)"
+
+# A consumed authorization is an immutable, already-published terminal state.
+# Reading that state is deliberately secret-independent: routine integrity runs
+# must not fail merely because publication credentials or a repository variable
+# are absent after the irreversible publication has already been completed.
+if [[ "$status" == "consumed" ]]; then
+  echo "Repository preservation refresh is already consumed and publicly proven."
+  exit 0
+fi
+
 : "${RUNNER_TEMP:?RUNNER_TEMP is required}"
 : "${ZENODO_ACCESS_TOKEN:?ZENODO_ACCESS_TOKEN is required}"
 : "${PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK:?PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK is required}"
@@ -21,18 +37,6 @@ git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git fetch origin main --prune
 git checkout -B main origin/main
-
-status="$(python3 - <<'PY'
-import json
-from pathlib import Path
-print(json.loads(Path('preservation/repository-preservation-refresh-authorization.json').read_text())['status'])
-PY
-)"
-
-if [[ "$status" == "consumed" ]]; then
-  echo "Repository preservation refresh is already consumed and publicly proven."
-  exit 0
-fi
 
 if [[ "$status" == "pending" ]]; then
   base_commit="$(git rev-parse HEAD)"
