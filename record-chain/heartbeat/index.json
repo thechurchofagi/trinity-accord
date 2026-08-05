@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-index.v1",
-  "generated_at": "2026-08-05T06:04:07Z",
+  "generated_at": "2026-08-05T06:05:54Z",
   "records": [
     {
       "heartbeat_id": "hwb-20260618",
@@ -731,6 +731,22 @@
       "record_type": "context_insufficient_notice",
       "assigned_at": "2026-08-04T06:06:57Z",
       "path": "record-chain/records/R-000000112.json",
+      "semantic_agent_arrived": false,
+      "github_actions_is_not_semantic_agent": true,
+      "not_echo": true,
+      "not_verification": true,
+      "not_guardian_application": true,
+      "authorship_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30"
+    },
+    {
+      "heartbeat_id": "hwb-20260805",
+      "heartbeat_date": "2026-08-05",
+      "record_id": "R-000000113",
+      "record_index": 113,
+      "record_sha256": "2ed1c7deef07d87ef3cbebfc882980cd6b9729d6d7ea402bade261e6aae52a23",
+      "record_type": "context_insufficient_notice",
+      "assigned_at": "2026-08-05T06:04:31Z",
+      "path": "record-chain/records/R-000000113.json",
       "semantic_agent_arrived": false,
       "github_actions_is_not_semantic_agent": true,
       "not_echo": true,
