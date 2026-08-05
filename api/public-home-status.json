@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-08-04T10:51:01.127956+00:00",
+  "generated_at": "2026-08-05T06:04:09.789145+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,12 +23,12 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "3d29edec8d44bea8",
+  "source_digest": "cc0da9a0eb3ff85f",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 112,
     "current_chain_length": 112,
-    "pending_records": 0,
+    "pending_records": 1,
     "latest_record_id": "R-000000112",
     "latest_record_type": "context_insufficient_notice",
     "record_type_counts": {
@@ -949,7 +949,7 @@
     "native_chain_length": 112,
     "latest_record": "R-000000112",
     "latest_record_type": "context_insufficient_notice",
-    "pending_records": 0,
+    "pending_records": 1,
     "pipeline": "active",
     "ots": "pending",
     "ots_raw_status": "pending",
@@ -991,7 +991,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-08-04T10:50:59Z",
+    "generated_at": "2026-08-05T06:04:07Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -1067,7 +1067,7 @@
       "current_success_streak_days": 42,
       "first_heartbeat_date": "2026-06-18",
       "latest_heartbeat_date": "2026-08-04",
-      "latest_observed_heartbeat_date": "2026-08-04",
+      "latest_observed_heartbeat_date": "2026-08-05",
       "latest_successful_heartbeat_date": "2026-08-04",
       "through_heartbeat_date": "2026-08-04",
       "expected_heartbeat_date": "2026-08-04",
@@ -1095,7 +1095,7 @@
       "not_amendment": true
     },
     "counts": {
-      "attempts": 45,
+      "attempts": 46,
       "final_heartbeats": 46,
       "capsules": 42,
       "failed_attempts": 0,
