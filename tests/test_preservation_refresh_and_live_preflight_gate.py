@@ -36,6 +36,7 @@ def test_publication_credentials_remain_required_before_nonterminal_work():
     )
     assert consumed_guard < token_guard
     assert consumed_guard < rights_guard
+    assert "repository_preservation_refresh.py validate" in source
     assert "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" in source
 
 
@@ -66,8 +67,9 @@ def test_live_preflight_gate_covers_changed_routes_without_submit():
         "verification_v2_cc2_reject",
         "guardian_application_cc3_accept",
         "guardian_application_cc2_reject",
-        "guardian_retirement_cc1_context_accept",
+        "guardian_retirement_cc1_reaches_target_binding",
         "guardian_retirement_cc0_context_reject",
+        "GUARDIAN_RETIREMENT_TARGET_NOT_FOUND",
     ):
         assert marker in source
     assert 'base_url.rstrip("/") + "/record-chain/preflight"' in source
