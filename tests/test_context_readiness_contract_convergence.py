@@ -103,6 +103,14 @@ class ContextReadinessContractConvergenceTest(unittest.TestCase):
             self.assertEqual(hashlib.sha256(raw).hexdigest(), entry["sha256"], path)
             self.assertEqual(len(raw), entry["size_bytes"], path)
 
+    def test_gateway_shadow_schema_matches_public_schema_exactly(self) -> None:
+        public = (ROOT / "api/record-chain-submission-schema.v1.json").read_bytes()
+        shadow = (
+            ROOT
+            / "apps/record_chain_intake_gateway/schemas/record_chain_submission.schema.json"
+        ).read_bytes()
+        self.assertEqual(shadow, public)
+
     def test_context_diagnostic_help_is_sorted_and_complete(self) -> None:
         helper = load("api/record-chain-field-helper.v1.json")["diagnostic_code_help"]
         self.assertEqual(list(helper), sorted(helper))
