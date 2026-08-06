@@ -435,7 +435,7 @@ jobs:
           git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
           test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
 
-      - name: Select successful Pages deployment
+      - name: Select Pages deployment candidate for strict live verification
         env:
           PRIMARY_OUTCOME: ${{ needs.deploy-primary.outputs.outcome }}
           PRIMARY_URL: ${{ needs.deploy-primary.outputs.page_url }}
@@ -445,13 +445,21 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "$PRIMARY_OUTCOME" == "success" && -n "$PRIMARY_URL" ]]; then
-            echo "pages_deployment=primary"
+            echo "pages_deployment_candidate=primary-action-success"
             echo "page_url=$PRIMARY_URL"
           elif [[ "$RETRY_RESULT" == "success" && "$RETRY_OUTCOME" == "success" && -n "$RETRY_URL" ]]; then
-            echo "pages_deployment=retry"
+            echo "pages_deployment_candidate=retry-action-success"
             echo "page_url=$RETRY_URL"
+          elif [[ "$RETRY_RESULT" == "success" && -n "$RETRY_URL" ]]; then
+            echo "::warning::Retry action reported ${RETRY_OUTCOME}; strict live byte verification will decide the deployment result."
+            echo "pages_deployment_candidate=retry-action-race"
+            echo "page_url=$RETRY_URL"
+          elif [[ -n "$PRIMARY_URL" ]]; then
+            echo "::warning::Primary action reported ${PRIMARY_OUTCOME}; strict live byte verification will decide the deployment result."
+            echo "pages_deployment_candidate=primary-action-race"
+            echo "page_url=$PRIMARY_URL"
           else
-            echo "::error::No successful GitHub Pages deployment is available."
+            echo "::error::No GitHub Pages deployment candidate URL is available."
             echo "primary_outcome=$PRIMARY_OUTCOME"
             echo "retry_result=$RETRY_RESULT"
             echo "retry_outcome=$RETRY_OUTCOME"
