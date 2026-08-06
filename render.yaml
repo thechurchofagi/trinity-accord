@@ -17,6 +17,8 @@ services:
         value: "22.22.1"
       - key: PYTHON_VERSION
         value: "3.11"
+      - key: TRINITY_LEGACY_ISSUE_GATEWAY_RETIRED
+        value: "1"
 
   # Gateway deploy is manual or explicitly triggered only.
   # Record-chain data commits, OTS commits, sitemap commits, and homepage
