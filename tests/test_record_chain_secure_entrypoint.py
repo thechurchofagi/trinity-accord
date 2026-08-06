@@ -41,9 +41,13 @@ def test_render_configs_use_secure_entrypoint():
     from pathlib import Path
 
     root = Path(__file__).resolve().parents[1]
-    for path in [root / "render.yaml", root / "apps/record_chain_intake_gateway/render.yaml"]:
+    expected = "apps.record_chain_intake_gateway.secure_entrypoint_hardened:app"
+    for path in [
+        root / "render.yaml",
+        root / "apps/record_chain_intake_gateway/render.yaml",
+    ]:
         text = path.read_text(encoding="utf-8")
-        assert "apps.record_chain_intake_gateway.secure_entrypoint:app" in text
+        assert expected in text
         assert "TRINITY_COOLDOWN_SECRET" in text
 
 
