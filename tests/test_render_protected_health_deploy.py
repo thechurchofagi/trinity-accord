@@ -119,10 +119,10 @@ def test_live_attestation_checks_healthz_readyz_readiness_and_oversize(monkeypat
         if route.endswith(("/healthz", "/readyz")):
             return 200, {
                 "ok": True,
-                "version": "1.2.1-protected",
+                "version": module.EXPECTED_RUNTIME_VERSION,
                 "protection_required": True,
                 "protection_layer_active": True,
-                "protection_entrypoint": "apps.record_chain_intake_gateway.secure_entrypoint:app",
+                "protection_entrypoint": module.EXPECTED_ENTRYPOINT,
             }
         if route.endswith("/record-chain/readiness"):
             return 200, {
