@@ -94,6 +94,7 @@ jobs:
       - name: Run focused recovery regressions
         env:
           TRINITY_GITHUB_TOKEN: test-only-placeholder
+          TRINITY_REPO_FULL_NAME: test/repo
           PYTHONPATH: apps/record_chain_intake_gateway:.
         run: |
           python3 -m pip install -r requirements-ci.txt
