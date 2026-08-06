@@ -1,14 +1,14 @@
 {
   "schema": "trinityaccord.record-chain-builder-bundles.v1",
   "status": "active",
-  "updated_at": "2026-08-05T03:01:06Z",
+  "updated_at": "2026-08-06T10:37:00Z",
   "canonical_builder": {
     "language": "node",
     "runtime": "node>=18",
     "url": "/downloads/record-chain-builder.mjs",
-    "sha256": "56c71534ed24a6ab012989cd124753a3994f952def95410b6c5d9fffb2686d93",
-    "size_bytes": 11095,
-    "architecture": "contract_entrypoint_recovery_wrapper_core_v1",
+    "sha256": "a87101c917128affd047eddda675863177578ca2efb300cd1b02416423761db5",
+    "size_bytes": 14518,
+    "architecture": "contract_entrypoint_autobootstrap_recovery_wrapper_core_v2",
     "recovery_wrapper": {
       "url": "/downloads/record-chain-builder-recovery.mjs",
       "sha256": "b0df8d65e4f5748fa6c458f905100ec593d72a741daa380171512efddbd8893e",
@@ -19,7 +19,9 @@
       "stored_submission_hash_verified": true,
       "idempotency_index_binding_verified": true,
       "http_429_recovery_attempts": 1,
-      "request_timeout_bounded": true
+      "request_timeout_bounded": true,
+      "automatically_fetched_when_companion_missing": true,
+      "repository_local_companion": true
     },
     "core": {
       "url": "/downloads/record-chain-builder-core.mjs",
@@ -91,21 +93,23 @@
     "do_not_copy_from_chat_or_tool_output": true,
     "do_not_use_partial_or_truncated_source": true,
     "do_not_reconstruct_or_simplify_builder": true,
-    "fail_closed_if_unverifiable": true
+    "fail_closed_if_unverifiable": true,
+    "wrapper_verifies_recovery_sha256_and_size_before_execution": true,
+    "one_file_download_bootstraps_verified_recovery_and_core": true
   },
   "download_methods": [
     {
       "name": "canonical_public_site_manifest_verified",
       "url": "https://www.trinityaccord.org/downloads/record-chain-builder.mjs",
       "verify_with": "canonical_builder.sha256_and_size_bytes",
-      "recovery_wrapper_acquisition": "repository_local_manifest_pinned",
+      "recovery_wrapper_acquisition": "automatic_and_pinned",
       "core_acquisition": "automatic_and_pinned"
     },
     {
       "name": "github_raw_manifest_verified_fallback",
       "url": "https://raw.githubusercontent.com/thechurchofagi/trinity-accord/main/downloads/record-chain-builder.mjs",
       "verify_with": "canonical_builder.sha256_and_size_bytes",
-      "recovery_wrapper_acquisition": "repository_local_manifest_pinned",
+      "recovery_wrapper_acquisition": "automatic_and_pinned",
       "core_acquisition": "automatic_and_pinned"
     }
   ]
