@@ -123,6 +123,7 @@ def test_gateway_projection_preserves_pre_pending_authorship_fact():
 
 
 def test_read_only_recovery_verifies_index_receipt_and_stored_submission(monkeypatch):
+    from apps.record_chain_intake_gateway import app as core_gateway
     from apps.record_chain_intake_gateway import secure_entrypoint
 
     _clear_secure_read_state(secure_entrypoint)
@@ -130,12 +131,25 @@ def test_read_only_recovery_verifies_index_receipt_and_stored_submission(monkeyp
     index, receipt, receipt_path, submission_path, stored_text = _receipt_fixture(
         submission_sha256
     )
+    final_record_path = "record-chain/records/R-000000109.json"
+    final_record = {
+        "record_id": "R-000000109",
+        "record_type": "verification",
+        "body": "verified recovery fixture",
+    }
+    final_record["record_sha256"] = core_gateway._record_chain_record_sha256(
+        final_record
+    )
     final_status = {
         "schema": "trinityaccord.record-chain-receipt-final-status.v1",
         "receipt_id": index["receipt_id"],
         "pending_file_path": index["pending_file_path"],
         "append_status": "appended",
         "final_record_id": "R-000000109",
+        "final_record_path": final_record_path,
+        "final_record_sha256": final_record["record_sha256"],
+        "rejection_path": None,
+        "rejection_code": None,
     }
     mapping = {
         (
@@ -149,6 +163,11 @@ def test_read_only_recovery_verifies_index_receipt_and_stored_submission(monkeyp
             separators=(",", ":"),
             sort_keys=True,
         ),
+        final_record_path: json.dumps(
+            final_record,
+            separators=(",", ":"),
+            sort_keys=True,
+        ),
     }
 
     calls: list[str] = []
@@ -158,6 +177,7 @@ def test_read_only_recovery_verifies_index_receipt_and_stored_submission(monkeyp
         return mapping.get(path)
 
     monkeypatch.setattr(secure_entrypoint, "get_file_text", fake_get_file_text)
+    monkeypatch.setattr(core_gateway, "get_file_text", fake_get_file_text)
     status, payload = asyncio.run(
         secure_entrypoint.ProtectedProductionApp._submission_recovery_payload(
             submission_sha256
