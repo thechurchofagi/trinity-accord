@@ -13,15 +13,21 @@ def test_render_healthcheck_is_intercepted_by_secure_entrypoint() -> None:
     secure = (ROOT / "apps/record_chain_intake_gateway/secure_entrypoint.py").read_text(
         encoding="utf-8"
     )
+    hardened = (
+        ROOT / "apps/record_chain_intake_gateway/secure_entrypoint_hardened.py"
+    ).read_text(encoding="utf-8")
     render = (ROOT / "render.yaml").read_text(encoding="utf-8")
 
     assert '_PROTECTED_HEALTH_PATHS = frozenset({"/healthz", "/readyz"})' in secure
     assert "class ProtectedProductionApp" in secure
     assert 'path = str(scope.get("path") or "")' in secure
     assert "path in _PROTECTED_HEALTH_PATHS" in secure
+    assert "base._read_text = _deeply_verified_read_text" in hardened
+    assert "app = base.app" in hardened
     assert "healthCheckPath: /healthz" in render
     assert (
-        "startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app"
+        "startCommand: uvicorn "
+        "apps.record_chain_intake_gateway.secure_entrypoint_hardened:app"
         in render
     )
 
