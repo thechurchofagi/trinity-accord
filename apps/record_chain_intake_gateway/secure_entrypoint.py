@@ -254,10 +254,16 @@ async def _verify_intake_artifacts(
         raise RecoveryStateInconsistent("unexpected idempotency schema")
     if index.get("submission_sha256") != submission_sha256:
         raise RecoveryStateInconsistent("idempotency submission hash mismatch")
-    if index.get("idempotency_written") is not True:
-        raise RecoveryStateInconsistent("idempotency index is not committed")
-    if index.get("receipt_written") is not True:
-        raise RecoveryStateInconsistent("receipt is not marked written")
+    materialization_complete = (
+        index.get("idempotency_written") is True
+        and index.get("receipt_written") is True
+        and index.get("pending_written") is True
+        and index.get("transaction_state") == "pending_written"
+    )
+    if not materialization_complete:
+        raise RecoveryStateInconsistent(
+            "intake transaction is not fully materialized"
+        )
 
     receipt_id = index.get("receipt_id")
     record_type = index.get("record_type")
@@ -644,18 +650,23 @@ class ProtectedProductionApp:
                 )
                 final_status: dict[str, Any] | None = None
                 if final_status_text is not None:
-                    final_status = _parse_object(
-                        final_status_text,
-                        label="final status",
-                    )
-                    if final_status.get("receipt_id") != artifacts.receipt_id:
-                        raise RecoveryStateInconsistent(
-                            "final status receipt id mismatch"
+                    try:
+                        final_status = await core_gateway._read_receipt_final_status(
+                            artifacts.receipt_id
                         )
-                    if (
-                        final_status.get("pending_file_path")
-                        != artifacts.pending_file_path
-                    ):
+                    except RuntimeError as exc:
+                        raise RecoveryStateInconsistent(
+                            f"final receipt status failed verification: {exc}"
+                        ) from exc
+                    except Exception as exc:
+                        raise RecoveryBackendUnavailable(
+                            "final receipt status could not be verified"
+                        ) from exc
+                    if final_status is None:
+                        raise RecoveryStateInconsistent(
+                            "final receipt status disappeared during verification"
+                        )
+                    if final_status.get("pending_file_path") != artifacts.pending_file_path:
                         raise RecoveryStateInconsistent(
                             "final status pending path mismatch"
                         )
