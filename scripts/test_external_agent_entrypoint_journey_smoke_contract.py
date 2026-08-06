@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 SMOKE = ROOT / "scripts" / "smoke_external_agent_entrypoint_journeys.py"
+SMOKE_CORE = ROOT / "scripts" / "smoke_external_agent_entrypoint_journeys_core.py"
 WORKFLOW = ROOT / ".github" / "workflows" / "site-agent-entrypoint-journey-smoke.yml"
 RUN_CI_GROUP = ROOT / "scripts" / "run_ci_group.py"
 P0_REQUIRED = ROOT / "scripts" / "test_p0_main_required_commands.py"
@@ -29,6 +30,13 @@ REQUIRED_SMOKE_SNIPPETS = [
     "/api/agent-submit-gateway.json",
     "/api/agent-output-policy.v1.json",
     "before_leaving",
+]
+
+REQUIRED_WRAPPER_SNIPPETS = [
+    "smoke_external_agent_entrypoint_journeys_core",
+    "core.main()",
+    "smoke_live_builder_download",
+    "verify_builder",
 ]
 
 REQUIRED_WORKFLOW_SNIPPETS = [
@@ -65,7 +73,7 @@ def main() -> int:
     errors: list[str] = []
 
     # Required files.
-    for path in [SMOKE, WORKFLOW, RUN_CI_GROUP, P0_REQUIRED]:
+    for path in [SMOKE, SMOKE_CORE, WORKFLOW, RUN_CI_GROUP, P0_REQUIRED]:
         if not path.exists():
             errors.append(f"missing required file: {path.relative_to(ROOT)}")
 
@@ -76,6 +84,8 @@ def main() -> int:
         return 1
 
     smoke_text = read(SMOKE)
+    smoke_core_text = read(SMOKE_CORE)
+    smoke_contract_text = smoke_text + "\n" + smoke_core_text
     workflow_text = read(WORKFLOW)
     run_ci_text = read(RUN_CI_GROUP)
     p0_text = read(P0_REQUIRED)
@@ -86,10 +96,15 @@ def main() -> int:
         if re.search(pattern, self_text):
             errors.append(f"contract test contains actual dynamic operation: {label}")
 
-    # Smoke script must retain the route/discovery concepts.
-    for snippet in REQUIRED_SMOKE_SNIPPETS:
+    # The wrapper must delegate discovery to the core and add the real Builder journey.
+    for snippet in REQUIRED_WRAPPER_SNIPPETS:
         if snippet not in smoke_text:
-            errors.append(f"smoke script missing required snippet: {snippet}")
+            errors.append(f"smoke wrapper missing required snippet: {snippet}")
+
+    # The executable smoke contract spans the thin wrapper and delegated core.
+    for snippet in REQUIRED_SMOKE_SNIPPETS:
+        if snippet not in smoke_contract_text:
+            errors.append(f"smoke contract missing required snippet: {snippet}")
 
     # Workflow must run the smoke script in the live/action context.
     for snippet in REQUIRED_WORKFLOW_SNIPPETS:
@@ -119,9 +134,8 @@ def main() -> int:
         if re.search(p0_live_pattern, p0_section):
             errors.append("p0-main must not run live smoke_external_agent_entrypoint_journeys.py directly")
 
-    # Check stale endpoints in smoke script (skip lines that are checking for them)
+    # Check stale endpoints in the workflow (skip source assertions about retired paths).
     for stale in FORBIDDEN_STALE_ENDPOINTS:
-        # Only flag if the stale endpoint appears as an actual URL path, not as a check pattern
         stale_pattern = re.escape(stale)
         if re.search(rf'(?<!["\']){stale_pattern}(?!["\'])', workflow_text):
             errors.append(f"stale endpoint found in workflow: {stale}")
