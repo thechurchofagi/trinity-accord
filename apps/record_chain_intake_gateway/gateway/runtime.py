@@ -10,6 +10,7 @@ from typing import Any
 # Bump on each deploy; allow env override for CI/CD
 SERVICE_VERSION = os.environ.get("TRINITY_GATEWAY_RUNTIME_VERSION", "1.1.0")
 SERVICE_NAME = "record-chain-intake-gateway"
+PROTECTION_ENTRYPOINT = "apps.record_chain_intake_gateway.secure_entrypoint:app"
 
 # This flag is intentionally process-local. Only the production secure
 # entrypoint marks it true after the resource/cooldown wrapper has actually
@@ -21,16 +22,14 @@ _protection_layer_active = False
 _deployed_at: str = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def _configured_protection_entrypoint() -> str:
-    """Return the exact deployed protected entrypoint without trusting clients."""
-    return os.environ.get(
-        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",
-        "apps.record_chain_intake_gateway.secure_entrypoint:app",
-    ).strip() or "apps.record_chain_intake_gateway.secure_entrypoint:app"
-
-
 def get_runtime_info() -> dict[str, Any]:
-    """Return a dict of runtime metadata suitable for health / readiness responses."""
+    """Return runtime metadata bound to the entrypoint actually loaded.
+
+    The protected entrypoint attestation is code-owned rather than supplied by
+    an environment variable. Operator configuration may select the Uvicorn
+    start command, but it cannot forge or accidentally drift the public proof
+    emitted after this module's process-local protection marker is set.
+    """
     return {
         "service": SERVICE_NAME,
         "version": SERVICE_VERSION,
@@ -44,7 +43,7 @@ def get_runtime_info() -> dict[str, Any]:
         "max_text_field_chars": int(os.environ.get("TRINITY_MAX_TEXT_FIELD_CHARS", "4000")),
         "protection_layer_active": _protection_layer_active,
         "protection_entrypoint": (
-            _configured_protection_entrypoint()
+            PROTECTION_ENTRYPOINT
             if _protection_layer_active
             else "core_app_without_protection_wrapper"
         ),
