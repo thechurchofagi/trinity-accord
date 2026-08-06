@@ -16,11 +16,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STAGE_PATHS = [
     "record-chain/ots/native-anchors/",
+    "record-chain/ots/native-arweave-bundles/",
+    "record-chain/ots/native-arweave-registry.json",
+    "api/record-chain-native-ots-arweave-registry.json",
     "record-chain/ots/native-ots-backlog.json",
     "record-chain/arweave-backlog.json",
     "api/record-chain-arweave-backlog.json",
     "api/record-chain-native-ots-backlog.json",
     "api/record-chain-native-ots-latest.json",
+    "api/arweave-wallet-status.json",
 ]
 
 
@@ -79,9 +83,13 @@ def cached_changes() -> bool:
 
 
 def assert_clean_tracked_worktree() -> None:
-    status = run("git", "status", "--porcelain", "--untracked-files=no").stdout.strip()
-    if status:
-        raise SystemExit(f"tracked Native OTS worktree is dirty before metadata rebase/push:\n{status}")
+    status_lines = run("git", "status", "--porcelain", "--untracked-files=all").stdout.splitlines()
+    run_id = os.environ.get("NATIVE_OTS_RUN_ID", "native-ots-bounded")
+    allowed_audit_prefix = f"?? record-chain/audit/native-ots/{run_id}/"
+    unexpected = [line for line in status_lines if not line.startswith(allowed_audit_prefix)]
+    if unexpected:
+        details = "\n".join(unexpected)
+        raise SystemExit(f"Native OTS worktree is dirty before metadata rebase/push:\n{details}")
 
 
 def push_metadata_only(commit_message: str) -> None:

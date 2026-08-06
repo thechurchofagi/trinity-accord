@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Source contract for Native OTS repair under weekly paid publication.
 
-Historical and current Native OTS repair primitives remain available, but the
-daily scheduled lifecycle may only upgrade/verify local proofs. Wallet access
-and paid publication belong exclusively to the weekly Record-Chain continuity
-archive, which embeds the latest mature proof files.
+Historical and current Native OTS repair primitives remain available. The daily
+scheduled lifecycle may upgrade/verify local proofs and persist the resulting
+local bundle and registry metadata, but wallet credentials and paid Arweave
+publication belong exclusively to the weekly Record-Chain continuity archive.
 """
 from __future__ import annotations
 
@@ -125,17 +125,26 @@ def main() -> int:
         ],
     )
 
+    # The daily runner persists every durable no-cost output atomically. Local
+    # bundle/registry files are evidence metadata only; their presence is not an
+    # Arweave upload and does not grant access to wallet credentials.
     require_all(
         "scripts/run_native_ots_workflow_once.py",
         [
             '{"verify_only", "upgrade_only"}',
             "run_native_ots_upgrade_verify.py",
             "record-chain/ots/native-anchors/",
+            "record-chain/ots/native-arweave-bundles/",
+            "record-chain/ots/native-arweave-registry.json",
+            "api/record-chain-native-ots-arweave-registry.json",
             "api/record-chain-native-ots-latest.json",
+            "api/arweave-wallet-status.json",
             "scripts/reconcile_native_ots_generated_state.py",
             "scripts/restore_json_if_only_volatile_changes.py",
             "push_metadata_only",
             "assert_clean_tracked_worktree",
+            '"--untracked-files=all"',
+            "allowed_audit_prefix",
         ],
     )
     require_none(
@@ -144,9 +153,6 @@ def main() -> int:
             "evaluate_daily_spend",
             "native_ots_bundle_archive",
             "record-chain/arweave-wallet-ledger.json",
-            "record-chain/ots/native-arweave-bundles/",
-            "record-chain/ots/native-arweave-registry.json",
-            "api/record-chain-native-ots-arweave-registry.json",
             "ARWEAVE_JWK_PATH",
             "--enable-paid-upload",
             "--confirm-paid-upload",
@@ -240,8 +246,8 @@ def main() -> int:
     )
 
     print(
-        "PASS: Native OTS repair remains available; daily lifecycle is no-cost "
-        "and weekly continuity archival owns paid proof publication"
+        "PASS: Native OTS repair remains available; daily lifecycle persists "
+        "no-cost proof state and weekly continuity archival owns paid publication"
     )
     return 0
 
