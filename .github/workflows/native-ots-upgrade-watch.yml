@@ -1,6 +1,15 @@
 name: Native OTS Upgrade Watch
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/native-ots-upgrade-watch.yml"
+      - "scripts/run_native_ots_workflow_once.py"
+      - "scripts/run_native_ots_upgrade_verify.py"
+      - "scripts/reconcile_native_ots_generated_state.py"
+      - "scripts/detect_archive_backlog.py"
   schedule:
     # Daily no-cost OTS upgrade/verification. Arweave publication is owned only
     # by the weekly continuity archive workflow.
@@ -78,7 +87,7 @@ jobs:
         run: |
           set -euo pipefail
           mode="$REQUESTED_MODE"
-          if [ "$EVENT_NAME" = "schedule" ]; then
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]; then
             mode="upgrade_only"
           fi
           case "$mode" in
