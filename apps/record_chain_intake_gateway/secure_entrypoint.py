@@ -211,7 +211,7 @@ async def _latest_intake_commit_fail_closed(self, *, force: bool):
 protection.IntakeProtectionMiddleware._latest_intake_commit = _latest_intake_commit_fail_closed
 
 # This marker is process-local and is set only by this secure module.
-runtime.mark_protection_layer_active()
+runtime.mark_protection_layer_active(runtime.BASE_PROTECTION_ENTRYPOINT)
 
 
 def _parse_object(text: str, *, label: str) -> dict[str, Any]:

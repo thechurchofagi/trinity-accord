@@ -25,9 +25,16 @@ def test_render_configs_attest_exact_hardened_entrypoint() -> None:
         assert f"value: {EXPECTED_ENTRYPOINT}" in text
 
 
-def test_runtime_reports_configured_hardened_entrypoint(monkeypatch) -> None:
-    monkeypatch.setenv("TRINITY_GATEWAY_PROTECTION_ENTRYPOINT", EXPECTED_ENTRYPOINT)
-    runtime.mark_protection_layer_active()
+def test_runtime_reports_loaded_hardened_entrypoint(monkeypatch) -> None:
+    monkeypatch.setattr(runtime, "_protection_layer_active", False)
+    monkeypatch.setattr(runtime, "_protection_entrypoint", None)
+    monkeypatch.setenv(
+        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",
+        runtime.BASE_PROTECTION_ENTRYPOINT,
+    )
+    runtime.mark_protection_layer_active(
+        runtime.HARDENED_PROTECTION_ENTRYPOINT
+    )
     assert runtime.get_runtime_info()["protection_entrypoint"] == EXPECTED_ENTRYPOINT
 
 
