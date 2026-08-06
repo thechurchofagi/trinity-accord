@@ -45,6 +45,15 @@ def test_official_workflow_uses_synchronized_hardened_deployer() -> None:
     assert 'python scripts/render_hardened_deploy.py "${args[@]}"' in workflow
 
 
+def test_pages_workflow_uses_synchronized_hardened_deployer() -> None:
+    workflow = (
+        ROOT / ".github" / "workflows" / "deploy-pages.yml"
+    ).read_text(encoding="utf-8")
+    assert "python3 scripts/render_hardened_deploy.py" in workflow
+    assert "python3 scripts/render_protected_deploy.py" not in workflow
+    assert "render_(manual|protected|hardened)_deploy\\.py" in workflow
+
+
 def test_hardened_deployer_patches_shared_exact_commit_contract() -> None:
     scripts = str(ROOT / "scripts")
     sys.path.insert(0, scripts)
