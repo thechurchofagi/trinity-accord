@@ -1,0 +1,157 @@
+name: Bootstrap Record-Chain Status Contract Repair
+
+on:
+  push:
+    branches:
+      - agent/repair-record-chain-status-contract
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: agent/repair-record-chain-status-contract
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Repair generated status semantics and freshness
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/generate_record_chain_status.py')
+          text = path.read_text(encoding='utf-8')
+
+          anchor = '    status = copy.deepcopy(existing)\n\n'
+          insertion = '''    status = copy.deepcopy(existing)\n\n    # Current public production semantics must not inherit historical test-phase flags.\n    public_phase = status.setdefault("public_phase", {})\n    public_phase.update({\n        "status": "production_live",\n        "network_phase": "production",\n        "official_live_records_allowed": True,\n        "prelaunch_test_records_allowed": False,\n        "not_final_public_launch": False,\n        "test_phase_submissions_may_be_excluded_from_final_public_indexes": False,\n        "test_phase_submissions_may_be_reclassified": False,\n        "test_phase_submissions_may_move_to_historical_test_archive": False,\n        "canonical_for_public_index": True,\n    })\n\n    public_submission_phase = status.setdefault("public_submission_phase", {})\n    public_submission_phase.update({\n        "status": "production_live",\n        "phase": "production_live",\n        "official_live_records_allowed": True,\n        "official_live_record_true_now_permitted": True,\n        "not_final_public_launch": False,\n        "test_phase_records_may_be_reclassified": False,\n        "test_phase_submissions_may_move_to_historical_test_archive": False,\n        "counted_in_final_public_indexes": True,\n    })\n\n'''
+          if anchor not in text:
+              raise SystemExit('generator status-copy anchor missing')
+          text = text.replace(anchor, insertion, 1)
+
+          start_marker = '    # Derive record_type_requirements from native sources (correct CIN authorship)\n'
+          end_marker = '    # Derive API endpoints: separate current native from legacy archive\n'
+          start = text.find(start_marker)
+          end = text.find(end_marker)
+          if start < 0 or end < 0 or end <= start:
+              raise SystemExit('record_type_requirements generator block not found')
+          replacement = '''    # Current public Gateway context minimums. Historical lower mappings are not submission rules.\n    status["record_type_requirements"] = {\n        "echo": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "oath_extensions": []},\n        "verification": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "oath_extensions": []},\n        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "active_registration_minimum_context_level": "CC-3", "oath_extensions": ["guardian_stewardship_v1"]},\n        "guardian_retirement": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},\n        "propagation": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},\n        "correction": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},\n        "classification_update": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},\n        "context_insufficient_notice": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},\n    }\n\n'''
+          text = text[:start] + replacement + text[end:]
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          cat > scripts/test_record_chain_status_public_contract.py <<'PY'
+          #!/usr/bin/env python3
+          """Fail closed on stale or contradictory public Record-Chain status contracts."""
+          from __future__ import annotations
+
+          import json
+          from pathlib import Path
+          from typing import Any
+
+          ROOT = Path(__file__).resolve().parents[1]
+
+          def load(rel: str) -> dict[str, Any]:
+              return json.loads((ROOT / rel).read_text(encoding='utf-8'))
+
+          failures: list[str] = []
+          status = load('api/record-chain-status.json')
+          tip = load('record-chain/chain-tip.json')
+          gateway = load('api/record-chain-intake-gateway.v1.json')
+          home = load('api/public-home-status.json')
+
+          rc = status.get('record_chain', {})
+          expected_head = {
+              'latest_record_id': tip.get('latest_record_id'),
+              'latest_record_index': tip.get('latest_record_index'),
+              'latest_record_sha256': tip.get('latest_record_sha256'),
+              'native_record_count': tip.get('native_record_count'),
+          }
+          for key, expected in expected_head.items():
+              if rc.get(key) != expected:
+                  failures.append(f'record-chain-status record_chain.{key}={rc.get(key)!r}, expected {expected!r}')
+          if status.get('total_records') != tip.get('native_record_count'):
+              failures.append('record-chain-status total_records does not match chain-tip')
+          pipeline_head = status.get('pipeline_status', {}).get('chain_head', {})
+          for key in ('latest_record_id', 'latest_record_sha256', 'native_record_count'):
+              if pipeline_head.get(key) != expected_head.get(key):
+                  failures.append(f'pipeline_status.chain_head.{key} is stale')
+
+          public_phase = status.get('public_phase', {})
+          required_status_phase = {
+              'status': 'production_live',
+              'test_phase_submissions_may_be_excluded_from_final_public_indexes': False,
+              'test_phase_submissions_may_be_reclassified': False,
+              'test_phase_submissions_may_move_to_historical_test_archive': False,
+              'canonical_for_public_index': True,
+          }
+          for key, expected in required_status_phase.items():
+              if public_phase.get(key) != expected:
+                  failures.append(f'record-chain-status public_phase.{key}={public_phase.get(key)!r}, expected {expected!r}')
+
+          submission_phase = status.get('public_submission_phase', {})
+          for key, expected in {
+              'status': 'production_live',
+              'test_phase_records_may_be_reclassified': False,
+              'test_phase_submissions_may_move_to_historical_test_archive': False,
+              'counted_in_final_public_indexes': True,
+          }.items():
+              if submission_phase.get(key) != expected:
+                  failures.append(f'record-chain-status public_submission_phase.{key}={submission_phase.get(key)!r}, expected {expected!r}')
+
+          for rel, doc in (
+              ('api/record-chain-intake-gateway.v1.json', gateway),
+              ('api/public-home-status.json', home),
+          ):
+              phase = doc.get('public_phase', {})
+              for key in (
+                  'test_phase_submissions_may_be_excluded_from_final_public_indexes',
+                  'test_phase_submissions_may_be_reclassified',
+              ):
+                  if phase.get(key) is not False:
+                      failures.append(f'{rel} public_phase.{key} must be false')
+              if phase.get('submissions_remain_canonical') is not True:
+                  failures.append(f'{rel} public_phase.submissions_remain_canonical must be true')
+
+          expected_minimums = {
+              'echo': 'CC-3',
+              'verification': 'CC-3',
+              'guardian_application': 'CC-3',
+              'guardian_retirement': 'CC-1',
+              'propagation': 'CC-0',
+              'correction': 'CC-1',
+              'classification_update': 'CC-1',
+              'context_insufficient_notice': 'CC-0',
+          }
+          requirements = status.get('record_type_requirements', {})
+          for record_type, expected in expected_minimums.items():
+              actual = requirements.get(record_type, {}).get('minimum_context_level')
+              if actual != expected:
+                  failures.append(f'record_type_requirements.{record_type}.minimum_context_level={actual!r}, expected {expected!r}')
+
+          if failures:
+              raise SystemExit('\n'.join(f'FAIL: {failure}' for failure in failures))
+          print(f"PASS: public status is current through {tip.get('latest_record_id')} and production contracts agree")
+          PY
+          chmod +x scripts/test_record_chain_status_public_contract.py
+
+          python3 scripts/generate_record_chain_status.py
+          python3 scripts/generate_record_chain_status.py --check
+          python3 scripts/test_record_chain_status_public_contract.py
+      - name: Commit status contract repair
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/generate_record_chain_status.py \
+            scripts/test_record_chain_status_public_contract.py \
+            api/record-chain-status.json
+          git commit -m "fix: align and refresh public Record-Chain status"
+          git push origin HEAD:agent/repair-record-chain-status-contract
