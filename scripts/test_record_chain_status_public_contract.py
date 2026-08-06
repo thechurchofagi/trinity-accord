@@ -2,6 +2,7 @@
 """Fail closed on stale or contradictory public Record-Chain status contracts."""
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 from typing import Any
@@ -10,6 +11,39 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load(rel: str) -> dict[str, Any]:
     return json.loads((ROOT / rel).read_text(encoding='utf-8'))
+
+def gateway_context_minimums() -> dict[str, str]:
+    source = (ROOT / 'apps/record_chain_intake_gateway/gateway/validation.py').read_text(encoding='utf-8')
+    tree = ast.parse(source)
+    rules: dict[str, list[tuple[tuple[int, int | None], int]]] | None = None
+    for node in tree.body:
+        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.target.id == '_CC_RULES':
+            rules = ast.literal_eval(node.value)
+            break
+        if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == '_CC_RULES' for target in node.targets):
+            rules = ast.literal_eval(node.value)
+            break
+    if not isinstance(rules, dict):
+        raise SystemExit('FAIL: Gateway _CC_RULES source of truth was not found')
+    result: dict[str, str] = {}
+    for record_type, entries in rules.items():
+        minimums = {int(entry[1]) for entry in entries}
+        if len(minimums) != 1:
+            raise SystemExit(f'FAIL: {record_type} has version-dependent minima not representable by one status value: {sorted(minimums)}')
+        result[str(record_type)] = f'CC-{minimums.pop()}'
+    return result
+
+def find_context_maps(value: Any) -> list[dict[str, Any]]:
+    matches: list[dict[str, Any]] = []
+    if isinstance(value, dict):
+        if 'verification_V0_to_V2' in value and 'verification_V3_to_V5' in value:
+            matches.append(value)
+        for child in value.values():
+            matches.extend(find_context_maps(child))
+    elif isinstance(value, list):
+        for child in value:
+            matches.extend(find_context_maps(child))
+    return matches
 
 failures: list[str] = []
 status = load('api/record-chain-status.json')
@@ -76,22 +110,72 @@ if home_status.get('current_chain_length') != tip.get('native_record_count'):
 if home_status.get('receipt_boundary', {}).get('test_phase_records_may_be_reclassified') is not False:
     failures.append('public-home receipt boundary must forbid test-phase reclassification')
 
-expected_minimums = {
-    'echo': 'CC-3',
-    'verification': 'CC-3',
-    'guardian_application': 'CC-3',
-    'guardian_retirement': 'CC-1',
-    'propagation': 'CC-0',
-    'correction': 'CC-1',
-    'classification_update': 'CC-1',
-    'context_insufficient_notice': 'CC-0',
+expected_minimums = gateway_context_minimums()
+expected_types = {
+    'echo', 'verification', 'guardian_application', 'guardian_retirement',
+    'propagation', 'correction', 'classification_update', 'context_insufficient_notice',
 }
+if set(expected_minimums) != expected_types:
+    failures.append(f'Gateway context rule types={sorted(expected_minimums)}, expected {sorted(expected_types)}')
+
 requirements = status.get('record_type_requirements', {})
 for record_type, expected in expected_minimums.items():
     actual = requirements.get(record_type, {}).get('minimum_context_level')
     if actual != expected:
-        failures.append(f'record_type_requirements.{record_type}.minimum_context_level={actual!r}, expected {expected!r}')
+        failures.append(f'record_type_requirements.{record_type}.minimum_context_level={actual!r}, Gateway requires {expected!r}')
+
+markdown = (ROOT / 'agent-start.md').read_text(encoding='utf-8')
+human_labels = {
+    'echo': 'Echo',
+    'guardian_application': 'Guardian Application',
+    'guardian_retirement': 'Guardian Retirement',
+    'propagation': 'Propagation',
+    'correction': 'Correction',
+    'classification_update': 'Classification Update',
+    'context_insufficient_notice': 'Context-Insufficient Notice',
+}
+for record_type, label in human_labels.items():
+    row = f'| {label} | `{expected_minimums[record_type]}` |'
+    if row not in markdown:
+        failures.append(f'agent-start.md missing Gateway-aligned row: {row}')
+for label in ('Verification `V0`–`V2`', 'Verification `V3`–`V5`'):
+    row = f'| {label} | `{expected_minimums["verification"]}` |'
+    if row not in markdown:
+        failures.append(f'agent-start.md missing Gateway-aligned row: {row}')
+
+machine_paths = [
+    '.well-known/trinity-accord.json',
+    'api/agent-first-contact.json',
+    'api/agent-required-reading.json',
+    'api/agent-start.v2.json',
+    'api/external-agent-quickstart.json',
+    'downloads/record-chain-agent-field-guidance.v1.json',
+]
+machine_keys = {
+    'echo': 'echo',
+    'guardian_application': 'guardian_application',
+    'guardian_retirement': 'guardian_retirement',
+    'propagation': 'propagation',
+    'correction': 'correction',
+    'classification_update': 'classification_update',
+    'context_insufficient_notice': 'context_insufficient_notice',
+}
+for rel in machine_paths:
+    maps = find_context_maps(load(rel))
+    if not maps:
+        failures.append(f'{rel}: no current context minimum map found')
+        continue
+    for index, minimum_map in enumerate(maps, start=1):
+        for record_type, key in machine_keys.items():
+            if minimum_map.get(key) != expected_minimums[record_type]:
+                failures.append(f'{rel} map {index}: {key}={minimum_map.get(key)!r}, Gateway requires {expected_minimums[record_type]!r}')
+        for key in ('verification_V0_to_V2', 'verification_V3_to_V5'):
+            if minimum_map.get(key) != expected_minimums['verification']:
+                failures.append(f'{rel} map {index}: {key}={minimum_map.get(key)!r}, Gateway requires {expected_minimums["verification"]!r}')
+
+if "'CC-2'/'CC-3' for Verification depending on level" in (ROOT / 'apps/record_chain_intake_gateway/gateway/validation.py').read_text(encoding='utf-8'):
+    failures.append('Gateway validation diagnostic still advertises rejected CC-2 Verification')
 
 if failures:
     raise SystemExit('\n'.join(f'FAIL: {failure}' for failure in failures))
-print(f"PASS: public status is current through {tip.get('latest_record_id')} and production contracts agree")
+print(f"PASS: public status is current through {tip.get('latest_record_id')} and all context minimums match Gateway source")

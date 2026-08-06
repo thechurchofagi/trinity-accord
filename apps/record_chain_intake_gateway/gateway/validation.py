@@ -1557,7 +1557,7 @@ def validate_context_readiness(record_type: str, draft: dict[str, Any]) -> list[
             field="draft.context_readiness.declared_context_level",
             message=f"declared_context_level must be CC-N or integer, got {cc_level!r}",
             meaning="Context level may be represented as 'CC-3' or integer 3.",
-            suggested_fix="Use 'CC-3' for Echo and Guardian Application, or 'CC-2'/'CC-3' for Verification depending on level.",
+            suggested_fix="Use the record-type minimum from the current public contract; Verification requires CC-3 for every accepted V0-V5 compatibility level.",
         ))
         return diagnostics
     cc_level = parsed_cc
