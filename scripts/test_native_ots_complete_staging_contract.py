@@ -26,6 +26,26 @@ def main() -> None:
         "four-output backlog write contract",
     )
 
+    stage_start = orchestrator.index("STAGE_PATHS = [")
+    stage_end = orchestrator.index("\n]\n", stage_start) + 3
+    stage_paths = orchestrator[stage_start:stage_end]
+    generated_state_paths = [
+        "record-chain/ots/native-anchors/",
+        "record-chain/ots/native-arweave-bundles/",
+        "record-chain/ots/native-arweave-registry.json",
+        "api/record-chain-native-ots-arweave-registry.json",
+        "record-chain/ots/native-ots-backlog.json",
+        "api/record-chain-native-ots-backlog.json",
+        "record-chain/arweave-backlog.json",
+        "api/record-chain-arweave-backlog.json",
+        "api/record-chain-native-ots-latest.json",
+        "api/arweave-wallet-status.json",
+    ]
+    for path in generated_state_paths:
+        require(stage_paths, path, "complete Native OTS generated-state staging")
+    if "record-chain/audit/native-ots/" in stage_paths:
+        raise SystemExit("ephemeral Native OTS audit logs must not be committed")
+
     reconcile_start = orchestrator.index("def reconcile_and_stage()")
     reconcile_end = orchestrator.index("\n\ndef cached_changes", reconcile_start)
     reconcile = orchestrator[reconcile_start:reconcile_end]
@@ -54,8 +74,13 @@ def main() -> None:
     require(orchestrator, '"git", "diff", "--cached", "--check"', "staged diff validation")
     require(
         orchestrator,
-        '"git", "status", "--porcelain", "--untracked-files=no"',
-        "tracked dirty-tree guard",
+        '"git", "status", "--porcelain", "--untracked-files=all"',
+        "tracked and untracked dirty-tree guard",
+    )
+    require(
+        orchestrator,
+        'allowed_audit_prefix = f"?? record-chain/audit/native-ots/{run_id}/"',
+        "narrow ephemeral audit-log allowance",
     )
     require(orchestrator, "assert_clean_tracked_worktree()", "clean guard invocation")
 
