@@ -11,10 +11,10 @@ services:
     plan: starter
     autoDeploy: false
     buildCommand: pip install -r apps/record_chain_intake_gateway/requirements.txt
-    startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint:app --host 0.0.0.0 --port $PORT
-    # The secure entrypoint intercepts both /healthz and /readyz with the same
-    # fail-closed configuration/protection check. Render currently probes
-    # /healthz; deployment canaries also verify /readyz independently.
+    startCommand: uvicorn apps.record_chain_intake_gateway.secure_entrypoint_hardened:app --host 0.0.0.0 --port $PORT
+    # The hardened secure entrypoint intercepts both /healthz and /readyz with
+    # the same fail-closed configuration/protection check. Render currently
+    # probes /healthz; deployment canaries also verify /readyz independently.
     healthCheckPath: /healthz
     envVars:
       - key: PYTHON_VERSION
@@ -30,7 +30,7 @@ services:
       - key: TRINITY_GATEWAY_BASE_URL
         value: https://trinity-record-chain-gateway.onrender.com
       - key: TRINITY_GATEWAY_RUNTIME_VERSION
-        value: 1.2.1-protected
+        value: 1.2.2-protected
       - key: TRINITY_ENFORCE_PROTECTION_LAYER
         value: "1"
       - key: TRINITY_RECEIPT_CACHE_MAX_ENTRIES
