@@ -240,6 +240,32 @@ def latest_native_ots_proof_bundle_archive(
 def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status = copy.deepcopy(existing)
 
+    # Current public production semantics must not inherit historical test-phase flags.
+    public_phase = status.setdefault("public_phase", {})
+    public_phase.update({
+        "status": "production_live",
+        "network_phase": "production",
+        "official_live_records_allowed": True,
+        "prelaunch_test_records_allowed": False,
+        "not_final_public_launch": False,
+        "test_phase_submissions_may_be_excluded_from_final_public_indexes": False,
+        "test_phase_submissions_may_be_reclassified": False,
+        "test_phase_submissions_may_move_to_historical_test_archive": False,
+        "canonical_for_public_index": True,
+    })
+
+    public_submission_phase = status.setdefault("public_submission_phase", {})
+    public_submission_phase.update({
+        "status": "production_live",
+        "phase": "production_live",
+        "official_live_records_allowed": True,
+        "official_live_record_true_now_permitted": True,
+        "not_final_public_launch": False,
+        "test_phase_records_may_be_reclassified": False,
+        "test_phase_submissions_may_move_to_historical_test_archive": False,
+        "counted_in_final_public_indexes": True,
+    })
+
     # Clear stale top-level fields so they are always re-derived from native sources
     for stale_key in ("total_records", "committed_records", "pending_records"):
         status.pop(stale_key, None)
@@ -424,12 +450,12 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     status["updated_at"] = latest_created_at or tip.get("updated_at") or "unknown"
     status["source_digest"] = tip.get("latest_record_sha256", "")[:16] if tip.get("latest_record_sha256") else ""
 
-    # Derive record_type_requirements from native sources (correct CIN authorship)
+    # Current public Gateway context minimums. Historical lower mappings are not submission rules.
     status["record_type_requirements"] = {
-        "echo": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
-        "verification": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
-        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "active_registration_minimum_context_level": "CC-3", "oath_extensions": ["guardian_stewardship_v1"]},
-        "guardian_retirement": {"authorship_proof_required": True, "minimum_context_level": "CC-2", "oath_extensions": []},
+        "echo": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "oath_extensions": []},
+        "verification": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "oath_extensions": []},
+        "guardian_application": {"authorship_proof_required": True, "minimum_context_level": "CC-3", "active_registration_minimum_context_level": "CC-3", "oath_extensions": ["guardian_stewardship_v1"]},
+        "guardian_retirement": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
         "propagation": {"authorship_proof_required": True, "minimum_context_level": "CC-0", "oath_extensions": []},
         "correction": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
         "classification_update": {"authorship_proof_required": True, "minimum_context_level": "CC-1", "oath_extensions": []},
