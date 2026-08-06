@@ -115,40 +115,48 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     assert '"scripts/**"' in workflow
 
 
-def test_pages_deployment_retries_supported_platform_timeout() -> None:
+def test_pages_deployment_retries_in_fresh_job() -> None:
     workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(
         encoding="utf-8"
     )
-    deploy_job = workflow.split("\n  deploy:\n", 1)[1]
-    assert "timeout-minutes: 45" in deploy_job
-    assert "timeout: 1800000" not in deploy_job
-    assert deploy_job.count("actions/deploy-pages@") == 2
-    assert deploy_job.count("timeout: 600000") == 2
-    assert deploy_job.count("error_count: 10") == 2
-    assert deploy_job.count("reporting_interval: 10000") == 2
+    assert "timeout: 1800000" not in workflow
+    assert workflow.count("actions/deploy-pages@") == 2
+    assert workflow.count("timeout: 600000") == 2
+    assert workflow.count("error_count: 10") == 2
+    assert workflow.count("reporting_interval: 10000") == 2
 
-    primary = deploy_job.split("- name: Deploy to GitHub Pages", 1)[1].split(
-        "- name: Pause before retrying", 1
+    primary = workflow.split("\n  deploy-primary:\n", 1)[1].split(
+        "\n  deploy-retry:\n", 1
     )[0]
-    assert "id: deployment-primary" in primary
+    assert "timeout-minutes: 15" in primary
+    assert "outcome: ${{ steps.deployment.outcome }}" in primary
     assert "continue-on-error: true" in primary
+    assert "- name: Deploy to GitHub Pages" in primary
 
-    retry = deploy_job.split(
-        "- name: Retry GitHub Pages deployment after platform timeout", 1
-    )[1].split("- name: Select successful Pages deployment", 1)[0]
-    assert "id: deployment-retry" in retry
-    assert "if: steps.deployment-primary.outcome == 'failure'" in retry
-    assert "continue-on-error: true" in retry
-
-    selector = deploy_job.split("- name: Select successful Pages deployment", 1)[1].split(
-        "- name: Verify live machine contract", 1
+    retry = workflow.split("\n  deploy-retry:\n", 1)[1].split(
+        "\n  verify-live-deployment:\n", 1
     )[0]
-    assert "id: deployment" in selector
-    assert "if: always()" in selector
-    assert "PRIMARY_OUTCOME" in selector
-    assert "RETRY_OUTCOME" in selector
-    assert "Both GitHub Pages deployment attempts failed" in selector
-    assert 'echo "page_url=$page_url" >> "$GITHUB_OUTPUT"' in selector
+    assert "needs.deploy-primary.outputs.outcome == 'failure'" in retry
+    assert "Pause before independent GitHub Pages retry" in retry
+    assert "run: sleep 60" in retry
+    assert "Retry GitHub Pages deployment in fresh job" in retry
+    assert "continue-on-error: true" in retry
+    assert "Refuse stale source before retry" in retry
+
+    verifier = workflow.split("\n  verify-live-deployment:\n", 1)[1]
+    assert "if: ${{ always()" in verifier
+    assert "needs.deploy-primary.outputs.outcome" in verifier
+    assert "needs.deploy-retry.outputs.outcome" in verifier
+    assert "No successful GitHub Pages deployment is available" in verifier
+    assert "Verify live machine contract after edge propagation" in verifier
+    assert "Refuse stale source before live verification" in verifier
+
+    old_same_job_retry = (
+        "if: steps.deployment-primary.outcome == 'failure'\n"
+        "        continue-on-error: true\n"
+        "        uses: actions/deploy-pages@"
+    )
+    assert old_same_job_retry not in workflow
 
 
 def test_production_closure_only_verifies_successful_main_deployments() -> None:
