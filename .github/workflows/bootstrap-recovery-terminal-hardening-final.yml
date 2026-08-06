@@ -1,0 +1,110 @@
+name: Bootstrap Recovery Terminal Hardening Final
+
+on:
+  push:
+    branches:
+      - agent/harden-submission-recovery-terminal-status
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: agent/harden-submission-recovery-terminal-status
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Apply recovery verification patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/record_chain_intake_gateway/secure_entrypoint.py')
+          lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
+
+          start = next(i for i, line in enumerate(lines) if line.strip() == 'if index.get("idempotency_written") is not True:')
+          expected = [
+              'if index.get("idempotency_written") is not True:',
+              'raise RecoveryStateInconsistent("idempotency index is not committed")',
+              'if index.get("receipt_written") is not True:',
+              'raise RecoveryStateInconsistent("receipt is not marked written")',
+          ]
+          if [line.strip() for line in lines[start:start + 4]] != expected:
+              raise SystemExit('unexpected intake materialization block')
+          indent = lines[start][:-len(lines[start].lstrip())]
+          lines[start:start + 4] = [
+              f'{indent}materialization_complete = (\n',
+              f'{indent}    index.get("idempotency_written") is True\n',
+              f'{indent}    and index.get("receipt_written") is True\n',
+              f'{indent}    and index.get("pending_written") is True\n',
+              f'{indent}    and index.get("transaction_state") == "pending_written"\n',
+              f'{indent})\n',
+              f'{indent}if not materialization_complete:\n',
+              f'{indent}    raise RecoveryStateInconsistent(\n',
+              f'{indent}        "intake transaction is not fully materialized"\n',
+              f'{indent}    )\n',
+          ]
+
+          method = next(i for i, line in enumerate(lines) if line.strip() == 'async def _submission_recovery_payload(')
+          terminal = next(i for i in range(method, len(lines)) if lines[i].strip() == 'final_status_path = (')
+          result = next(i for i in range(terminal + 1, len(lines)) if lines[i].strip() == 'result = (')
+          indent = lines[terminal][:-len(lines[terminal].lstrip())]
+          lines[terminal:result] = [
+              f'{indent}final_status_path = (\n',
+              f'{indent}    f"record-chain/receipt-status/{{artifacts.receipt_id}}.json"\n',
+              f'{indent})\n',
+              f'{indent}final_status_text = await _read_text(\n',
+              f'{indent}    final_status_path,\n',
+              f'{indent}    label="final receipt status",\n',
+              f'{indent})\n',
+              f'{indent}final_status: dict[str, Any] | None = None\n',
+              f'{indent}if final_status_text is not None:\n',
+              f'{indent}    try:\n',
+              f'{indent}        final_status = await core_gateway._read_receipt_final_status(\n',
+              f'{indent}            artifacts.receipt_id\n',
+              f'{indent}        )\n',
+              f'{indent}    except RuntimeError as exc:\n',
+              f'{indent}        raise RecoveryStateInconsistent(\n',
+              f'{indent}            f"final receipt status failed verification: {{exc}}"\n',
+              f'{indent}        ) from exc\n',
+              f'{indent}    except Exception as exc:\n',
+              f'{indent}        raise RecoveryBackendUnavailable(\n',
+              f'{indent}            "final receipt status could not be verified"\n',
+              f'{indent}        ) from exc\n',
+              f'{indent}    if final_status is None:\n',
+              f'{indent}        raise RecoveryStateInconsistent(\n',
+              f'{indent}            "final receipt status disappeared during verification"\n',
+              f'{indent}        )\n',
+              f'{indent}    if final_status.get("pending_file_path") != artifacts.pending_file_path:\n',
+              f'{indent}        raise RecoveryStateInconsistent(\n',
+              f'{indent}            "final status pending path mismatch"\n',
+              f'{indent}        )\n',
+              '\n',
+          ]
+          path.write_text(''.join(lines), encoding='utf-8')
+          PY
+      - name: Run focused recovery regressions
+        env:
+          TRINITY_GITHUB_TOKEN: test-only-placeholder
+          PYTHONPATH: apps/record_chain_intake_gateway:.
+        run: |
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m pytest -q \
+            apps/record_chain_intake_gateway/tests/test_secure_recovery_terminal_validation.py \
+            apps/record_chain_intake_gateway/tests/test_deep_transaction_recovery.py \
+            apps/record_chain_intake_gateway/tests/test_deep_audit_round3.py
+      - name: Commit exact recovery repair
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/record_chain_intake_gateway/secure_entrypoint.py
+          git commit -m "fix: fully verify recovery terminal state"
+          git push origin HEAD:agent/harden-submission-recovery-terminal-status
