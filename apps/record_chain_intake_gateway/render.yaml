@@ -31,6 +31,8 @@ services:
         value: https://trinity-record-chain-gateway.onrender.com
       - key: TRINITY_GATEWAY_RUNTIME_VERSION
         value: 1.2.2-protected
+      - key: TRINITY_GATEWAY_PROTECTION_ENTRYPOINT
+        value: apps.record_chain_intake_gateway.secure_entrypoint_hardened:app
       - key: TRINITY_ENFORCE_PROTECTION_LAYER
         value: "1"
       - key: TRINITY_RECEIPT_CACHE_MAX_ENTRIES
