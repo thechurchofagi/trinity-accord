@@ -322,10 +322,13 @@ jobs:
         with:
           path: ./_site
 
-  deploy:
+  deploy-primary:
     needs: build
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 15
+    outputs:
+      outcome: ${{ steps.deployment.outcome }}
+      page_url: ${{ steps.deployment.outputs.page_url }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -347,47 +350,113 @@ jobs:
           test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
 
       - name: Deploy to GitHub Pages
-        id: deployment-primary
-        continue-on-error: true
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
-        with:
-          timeout: 600000
-          error_count: 10
-          reporting_interval: 10000
-
-      - name: Pause before retrying GitHub Pages deployment
-        if: steps.deployment-primary.outcome == 'failure'
-        run: sleep 30
-
-      - name: Retry GitHub Pages deployment after platform timeout
-        id: deployment-retry
-        if: steps.deployment-primary.outcome == 'failure'
-        continue-on-error: true
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
-        with:
-          timeout: 600000
-          error_count: 10
-          reporting_interval: 10000
-
-      - name: Select successful Pages deployment
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        with:
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 10000
+
+      - name: Record primary deployment outcome
         if: always()
         env:
-          PRIMARY_OUTCOME: ${{ steps.deployment-primary.outcome }}
-          PRIMARY_URL: ${{ steps.deployment-primary.outputs.page_url }}
-          RETRY_OUTCOME: ${{ steps.deployment-retry.outcome }}
-          RETRY_URL: ${{ steps.deployment-retry.outputs.page_url }}
+          DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
+        run: echo "primary_deployment_outcome=$DEPLOYMENT_OUTCOME"
+
+  deploy-retry:
+    needs:
+      - build
+      - deploy-primary
+    if: ${{ always() && needs.build.result == 'success' && needs.deploy-primary.outputs.outcome == 'failure' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    outputs:
+      outcome: ${{ steps.deployment.outcome }}
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout immutable built source for retry
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.build.outputs.source_sha }}
+
+      - name: Confirm immutable retry handoff
+        run: test "$(git rev-parse HEAD)" = "${{ needs.build.outputs.source_sha }}"
+
+      - name: Refuse stale source before retry
+        env:
+          SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
+
+      - name: Pause before independent GitHub Pages retry
+        run: sleep 60
+
+      - name: Retry GitHub Pages deployment in fresh job
+        id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        with:
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 10000
+
+      - name: Record retry deployment outcome
+        if: always()
+        env:
+          DEPLOYMENT_OUTCOME: ${{ steps.deployment.outcome }}
+        run: echo "retry_deployment_outcome=$DEPLOYMENT_OUTCOME"
+
+  verify-live-deployment:
+    needs:
+      - build
+      - deploy-primary
+      - deploy-retry
+    if: ${{ always() && needs.build.result == 'success' && needs.deploy-primary.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout immutable deployed source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.build.outputs.source_sha }}
+
+      - name: Refuse stale source before live verification
+        env:
+          SOURCE_SHA: ${{ needs.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_SHA"
+
+      - name: Select successful Pages deployment
+        env:
+          PRIMARY_OUTCOME: ${{ needs.deploy-primary.outputs.outcome }}
+          PRIMARY_URL: ${{ needs.deploy-primary.outputs.page_url }}
+          RETRY_RESULT: ${{ needs.deploy-retry.result }}
+          RETRY_OUTCOME: ${{ needs.deploy-retry.outputs.outcome }}
+          RETRY_URL: ${{ needs.deploy-retry.outputs.page_url }}
         run: |
           set -euo pipefail
           if [[ "$PRIMARY_OUTCOME" == "success" && -n "$PRIMARY_URL" ]]; then
-            page_url="$PRIMARY_URL"
-          elif [[ "$RETRY_OUTCOME" == "success" && -n "$RETRY_URL" ]]; then
-            page_url="$RETRY_URL"
+            echo "pages_deployment=primary"
+            echo "page_url=$PRIMARY_URL"
+          elif [[ "$RETRY_RESULT" == "success" && "$RETRY_OUTCOME" == "success" && -n "$RETRY_URL" ]]; then
+            echo "pages_deployment=retry"
+            echo "page_url=$RETRY_URL"
           else
-            echo "::error::Both GitHub Pages deployment attempts failed."
+            echo "::error::No successful GitHub Pages deployment is available."
+            echo "primary_outcome=$PRIMARY_OUTCOME"
+            echo "retry_result=$RETRY_RESULT"
+            echo "retry_outcome=$RETRY_OUTCOME"
             exit 1
           fi
-          echo "page_url=$page_url" >> "$GITHUB_OUTPUT"
 
       - name: Verify live machine contract after edge propagation
         run: |
