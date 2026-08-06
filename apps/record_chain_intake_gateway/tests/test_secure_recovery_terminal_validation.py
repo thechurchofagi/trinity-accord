@@ -160,7 +160,8 @@ async def test_recovery_rejects_forged_terminal_record_hash(monkeypatch) -> None
     assert status == 409
     assert payload["recovery_verified"] is False
     assert payload["diagnostic_code"] == "RECOVERY_STATE_INCONSISTENT"
-    assert "failed verification" in payload["message"]
+    assert "could not be verified" in payload["message"]
+    assert "hash recomputation failed" in payload["message"]
 
 
 @pytest.mark.asyncio
