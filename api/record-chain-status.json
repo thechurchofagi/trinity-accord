@@ -286,7 +286,7 @@
     },
     "propagation": {
       "authorship_proof_required": true,
-      "minimum_context_level": "CC-0",
+      "minimum_context_level": "CC-2",
       "oath_extensions": []
     },
     "correction": {
@@ -296,7 +296,7 @@
     },
     "classification_update": {
       "authorship_proof_required": true,
-      "minimum_context_level": "CC-1",
+      "minimum_context_level": "CC-2",
       "oath_extensions": []
     },
     "context_insufficient_notice": {
