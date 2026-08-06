@@ -12,6 +12,14 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/deploy-pages.yml"
 
 
+def _needs_list(value: object) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, list) and all(isinstance(item, str) for item in value):
+        return value
+    return []
+
+
 def main() -> int:
     text = WORKFLOW.read_text(encoding="utf-8")
     data = yaml.safe_load(text)
@@ -27,23 +35,54 @@ def main() -> int:
             errors.append(f"permissions.{key} must be {expected}")
 
     jobs = data.get("jobs", {})
-    for job in ("verify", "deploy-gateway-before-pages", "build", "deploy"):
-        if job not in jobs:
-            errors.append(f"missing jobs.{job}")
-    if jobs.get("deploy-gateway-before-pages", {}).get("needs") != "verify":
-        errors.append("Gateway rollout must depend on verify")
-    build_needs = jobs.get("build", {}).get("needs", [])
-    if isinstance(build_needs, str):
-        build_needs = [build_needs]
-    if not isinstance(build_needs, list) or set(build_needs) != {
+    required_jobs = (
         "verify",
         "deploy-gateway-before-pages",
-    }:
+        "build",
+        "deploy-primary",
+        "deploy-retry",
+        "verify-live-deployment",
+    )
+    for job in required_jobs:
+        if job not in jobs:
+            errors.append(f"missing jobs.{job}")
+
+    if jobs.get("deploy-gateway-before-pages", {}).get("needs") != "verify":
+        errors.append("Gateway rollout must depend on verify")
+
+    build_needs = _needs_list(jobs.get("build", {}).get("needs", []))
+    if set(build_needs) != {"verify", "deploy-gateway-before-pages"}:
         errors.append(
             "build must depend on verify and deploy-gateway-before-pages"
         )
-    if jobs.get("deploy", {}).get("needs") != "build":
-        errors.append("deploy must depend on build")
+
+    primary_needs = _needs_list(jobs.get("deploy-primary", {}).get("needs", []))
+    if primary_needs != ["build"]:
+        errors.append("deploy-primary must depend only on build")
+
+    retry_needs = _needs_list(jobs.get("deploy-retry", {}).get("needs", []))
+    if set(retry_needs) != {"build", "deploy-primary"}:
+        errors.append("deploy-retry must depend on build and deploy-primary")
+
+    verify_live_needs = _needs_list(
+        jobs.get("verify-live-deployment", {}).get("needs", [])
+    )
+    if set(verify_live_needs) != {
+        "build",
+        "deploy-primary",
+        "deploy-retry",
+    }:
+        errors.append(
+            "verify-live-deployment must depend on build, deploy-primary, and deploy-retry"
+        )
+
+    retry_if = str(jobs.get("deploy-retry", {}).get("if", ""))
+    if "needs.deploy-primary.outputs.outcome == 'failure'" not in retry_if:
+        errors.append("deploy-retry must run only after primary deployment failure")
+
+    verify_if = str(jobs.get("verify-live-deployment", {}).get("if", ""))
+    if "always()" not in verify_if:
+        errors.append("verify-live-deployment must evaluate after skipped retry jobs")
 
     required = [
         "source_sha: ${{ steps.source.outputs.source_sha }}",
@@ -59,6 +98,9 @@ def main() -> int:
         "Confirm immutable verify/build handoff",
         "required=true",
         "Confirm immutable build/deploy handoff",
+        "Confirm immutable retry handoff",
+        "Refuse stale source before retry",
+        "Refuse stale source before live verification",
         "trinity-pages-source-receipt.v1",
         "pages-source-receipt-${{ github.run_id }}",
         "python3 scripts/verify_retired_builder_bundle_archive.py",
@@ -75,10 +117,21 @@ def main() -> int:
         'cp -a "$rendered_downloads/." _site/downloads/',
         '".github/workflows/homepage-deployment-receipt.yml"',
         '"scripts/**"',
+        "outcome: ${{ steps.deployment.outcome }}",
+        "Pause before independent GitHub Pages retry",
+        "Retry GitHub Pages deployment in fresh job",
+        "No successful GitHub Pages deployment is available.",
     ]
     for marker in required:
         if marker not in text:
             errors.append(f"missing required publication marker: {marker}")
+
+    if text.count("actions/deploy-pages@") != 2:
+        errors.append("Pages publication must contain exactly two pinned deployment attempts")
+    if text.count("timeout: 600000") != 2:
+        errors.append("both Pages deployment attempts must use the supported 600000 ms timeout")
+    if text.count("continue-on-error: true") < 2:
+        errors.append("both Pages action attempts must expose outcome for fail-closed selection")
 
     forbidden = [
         "export_formal_builder_bundles.py --out-dir builder-bundles --update-api",
@@ -88,6 +141,8 @@ def main() -> int:
         "/gateway/submit",
         "while true",
         "git ls-remote",
+        "timeout: 1800000",
+        "if: steps.deployment-primary.outcome == 'failure'",
     ]
     for marker in forbidden:
         if marker in text:
@@ -102,7 +157,10 @@ def main() -> int:
         for error in errors:
             print("  -", error)
         return 1
-    print("PASS: deploy-pages workflow contract (current-main exact-SHA publication)")
+    print(
+        "PASS: deploy-pages workflow contract "
+        "(current-main exact-SHA publication with isolated retry)"
+    )
     return 0
 
 
