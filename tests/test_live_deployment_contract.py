@@ -113,6 +113,22 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     assert "scripts/smoke_live_discovery_contract_v2.py" in workflow
     assert "scripts/check_deployment_freshness_v2.py" in workflow
     assert '"scripts/**"' in workflow
+
+
+def test_pages_deployment_tolerates_platform_queueing() -> None:
+    workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(
+        encoding="utf-8"
+    )
+    deploy_job = workflow.split("\n  deploy:\n", 1)[1]
+    deploy_step = deploy_job.split("- name: Deploy to GitHub Pages", 1)[1].split(
+        "- name: Verify live machine contract", 1
+    )[0]
+    assert "timeout-minutes: 45" in deploy_job
+    assert "timeout: 1800000" in deploy_step
+    assert "error_count: 30" in deploy_step
+    assert "reporting_interval: 10000" in deploy_step
+
+
 def test_production_closure_only_verifies_successful_main_deployments() -> None:
     workflow = (ROOT / ".github/workflows/verify-pages-production.yml").read_text(
         encoding="utf-8"
