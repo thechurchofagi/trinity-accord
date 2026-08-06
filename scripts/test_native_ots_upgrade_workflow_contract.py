@@ -68,6 +68,12 @@ def main() -> None:
         '{"verify_only", "upgrade_only"}',
         "scripts/run_native_ots_upgrade_verify.py",
         'command.append("--verify-only")',
+        "bounded_backfill_upgrade_due",
+        "NATIVE_OTS_BACKFILL_MAX_ITEMS",
+        'item.get("archive_status") in {"upgrade_due", "upgrade_failed"}',
+        '"--anchor-file"',
+        '"--log-dir"',
+        "scripts/detect_archive_backlog.py",
         "scripts/reconcile_native_ots_generated_state.py",
         "scripts/restore_json_if_only_volatile_changes.py",
         "api/record-chain-native-ots-latest.json",
@@ -88,6 +94,26 @@ def main() -> None:
         "arweave_cost_gate.mjs",
     ]:
         forbid(orchestrator, marker, "no-cost orchestrator paid capability")
+
+    backfill = orchestrator.split("def bounded_backfill_upgrade_due", 1)[-1].split(
+        "def reconcile_and_stage", 1
+    )[0]
+    for marker in [
+        '"upgrade_due", "upgrade_failed"',
+        "max_items <= 25",
+        '"scripts/run_native_ots_upgrade_verify.py"',
+        '"--anchor-file"',
+        '"--log-dir"',
+    ]:
+        require(backfill, marker, "bounded historical upgrade backfill")
+    for forbidden in [
+        "--enable-paid-upload",
+        "--confirm-paid-upload",
+        "ARKEY",
+        "ARWEAVE_JWK",
+        "process_record_chain",
+    ]:
+        forbid(backfill, forbidden, "historical backfill paid capability")
 
     retry = orchestrator.split("def push_metadata_only", 1)[-1].split("def main", 1)[0]
     forbid(retry, "run_native_ots_upgrade_verify.py", "metadata retry lifecycle repeat")
@@ -127,7 +153,10 @@ def main() -> None:
     ]:
         require(weekly_builder, marker, "weekly embedded OTS evidence")
 
-    print("PASS: daily Native OTS is no-cost; lifecycle changes trigger immediate validation; weekly continuity archive owns paid publication")
+    print(
+        "PASS: daily Native OTS is no-cost, validates lifecycle changes immediately, "
+        "and performs bounded historical proof upgrades; weekly continuity archive owns paid publication"
+    )
 
 
 if __name__ == "__main__":
