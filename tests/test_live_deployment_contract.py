@@ -115,18 +115,40 @@ def test_deploy_workflow_uses_current_v2_checks() -> None:
     assert '"scripts/**"' in workflow
 
 
-def test_pages_deployment_tolerates_platform_queueing() -> None:
+def test_pages_deployment_retries_supported_platform_timeout() -> None:
     workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(
         encoding="utf-8"
     )
     deploy_job = workflow.split("\n  deploy:\n", 1)[1]
-    deploy_step = deploy_job.split("- name: Deploy to GitHub Pages", 1)[1].split(
+    assert "timeout-minutes: 45" in deploy_job
+    assert "timeout: 1800000" not in deploy_job
+    assert deploy_job.count("actions/deploy-pages@") == 2
+    assert deploy_job.count("timeout: 600000") == 2
+    assert deploy_job.count("error_count: 10") == 2
+    assert deploy_job.count("reporting_interval: 10000") == 2
+
+    primary = deploy_job.split("- name: Deploy to GitHub Pages", 1)[1].split(
+        "- name: Pause before retrying", 1
+    )[0]
+    assert "id: deployment-primary" in primary
+    assert "continue-on-error: true" in primary
+
+    retry = deploy_job.split(
+        "- name: Retry GitHub Pages deployment after platform timeout", 1
+    )[1].split("- name: Select successful Pages deployment", 1)[0]
+    assert "id: deployment-retry" in retry
+    assert "if: steps.deployment-primary.outcome == 'failure'" in retry
+    assert "continue-on-error: true" in retry
+
+    selector = deploy_job.split("- name: Select successful Pages deployment", 1)[1].split(
         "- name: Verify live machine contract", 1
     )[0]
-    assert "timeout-minutes: 45" in deploy_job
-    assert "timeout: 1800000" in deploy_step
-    assert "error_count: 30" in deploy_step
-    assert "reporting_interval: 10000" in deploy_step
+    assert "id: deployment" in selector
+    assert "if: always()" in selector
+    assert "PRIMARY_OUTCOME" in selector
+    assert "RETRY_OUTCOME" in selector
+    assert "Both GitHub Pages deployment attempts failed" in selector
+    assert 'echo "page_url=$page_url" >> "$GITHUB_OUTPUT"' in selector
 
 
 def test_production_closure_only_verifies_successful_main_deployments() -> None:
