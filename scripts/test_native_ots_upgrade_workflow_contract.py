@@ -26,6 +26,14 @@ def main() -> None:
     weekly_builder = (ROOT / "scripts/record_chain_arweave_incremental.py").read_text(encoding="utf-8")
 
     for marker in [
+        "push:",
+        "branches:",
+        "- main",
+        '".github/workflows/native-ots-upgrade-watch.yml"',
+        '"scripts/run_native_ots_workflow_once.py"',
+        '"scripts/run_native_ots_upgrade_verify.py"',
+        '"scripts/reconcile_native_ots_generated_state.py"',
+        '"scripts/detect_archive_backlog.py"',
         "workflow_dispatch:",
         'cron: "42 6 * * *"',
         "contents: write",
@@ -36,6 +44,7 @@ def main() -> None:
         "ref: main",
         "verify_only",
         "upgrade_only",
+        'if [ "$EVENT_NAME" = "schedule" ] || [ "$EVENT_NAME" = "push" ]',
         "Run Native OTS workflow contract tests",
         "scripts/test_native_ots_upgrade_workflow_contract.py",
         "scripts/test_native_ots_complete_staging_contract.py",
@@ -118,7 +127,7 @@ def main() -> None:
     ]:
         require(weekly_builder, marker, "weekly embedded OTS evidence")
 
-    print("PASS: daily Native OTS is no-cost; weekly continuity archive owns paid publication")
+    print("PASS: daily Native OTS is no-cost; lifecycle changes trigger immediate validation; weekly continuity archive owns paid publication")
 
 
 if __name__ == "__main__":
