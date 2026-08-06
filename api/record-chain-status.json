@@ -56,7 +56,7 @@
         "status": "registered_without_arweave_tx",
         "archive_status": "registered_without_arweave_tx",
         "latest_bundle_file": "record-chain/ots/native-arweave-bundles/native-record-114-R-000000114-75ede3f4b91ff8f6-c5a310b5ad4eb7ba.anchor.upgraded.arweave-bundle.json",
-        "latest_bundle_sha256": "ee0be6347a3f3095d5b3526880fa2849724db8215ca22d4177d43ed3b5a5c449",
+        "latest_bundle_sha256": "d71df67c7f59519741591c7b6e58f8c6c09ffbc76909c3f8072b2f32aa0be6da",
         "latest_tx_id": null,
         "latest_gateway_url": null,
         "latest_ots_status": "upgraded",
@@ -345,7 +345,7 @@
     "record_chain_arweave_failed": 0,
     "record_chain_arweave_waiting_for_key": 0,
     "native_ots_upgrade_pending": 0,
-    "native_ots_arweave_pending": 1,
+    "native_ots_arweave_pending": 8,
     "native_ots_arweave_failed": 0,
     "native_ots_waiting_for_key": 0,
     "backlog_current": false
