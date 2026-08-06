@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - name: Checkout exact merged main
+      - name: Checkout exact triggering commit
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
-          ref: main
+          ref: ${{ github.sha }}
 
       - name: Authorize one-time production deployment
         env:
@@ -39,12 +39,14 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Deploy exact merged commit and verify production
+      - name: Deploy exact triggering commit and verify production
         env:
           RENDER: ${{ secrets.RENDER }}
+          TRIGGER_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           source_sha="$(git rev-parse HEAD)"
+          test "$source_sha" = "$TRIGGER_SHA"
           python scripts/render_hardened_deploy.py \
             --service trinity-record-chain-gateway \
             --commit-id "$source_sha" \
