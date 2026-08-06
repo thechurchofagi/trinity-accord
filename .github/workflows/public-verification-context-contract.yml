@@ -20,3 +20,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 scripts/test_public_verification_context_contract.py
+      - run: python3 scripts/generate_record_chain_status.py --check
+      - run: python3 scripts/test_record_chain_status_public_contract.py
