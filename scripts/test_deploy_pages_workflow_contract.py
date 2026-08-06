@@ -120,7 +120,9 @@ def main() -> int:
         "outcome: ${{ steps.deployment.outcome }}",
         "Pause before independent GitHub Pages retry",
         "Retry GitHub Pages deployment in fresh job",
-        "No successful GitHub Pages deployment is available.",
+        "Select Pages deployment candidate for strict live verification",
+        "strict live byte verification will decide the deployment result",
+        "No GitHub Pages deployment candidate URL is available.",
     ]
     for marker in required:
         if marker not in text:
@@ -131,7 +133,7 @@ def main() -> int:
     if text.count("timeout: 600000") != 2:
         errors.append("both Pages deployment attempts must use the supported 600000 ms timeout")
     if text.count("continue-on-error: true") < 2:
-        errors.append("both Pages action attempts must expose outcome for fail-closed selection")
+        errors.append("both Pages action attempts must expose outcome for live verification")
 
     forbidden = [
         "export_formal_builder_bundles.py --out-dir builder-bundles --update-api",
@@ -143,6 +145,7 @@ def main() -> int:
         "git ls-remote",
         "timeout: 1800000",
         "if: steps.deployment-primary.outcome == 'failure'",
+        "No successful GitHub Pages deployment is available.",
     ]
     for marker in forbidden:
         if marker in text:
@@ -159,7 +162,7 @@ def main() -> int:
         return 1
     print(
         "PASS: deploy-pages workflow contract "
-        "(current-main exact-SHA publication with isolated retry)"
+        "(current-main exact-SHA publication with isolated retry and live-byte authority)"
     )
     return 0
 

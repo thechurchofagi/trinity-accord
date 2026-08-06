@@ -147,7 +147,10 @@ def test_pages_deployment_retries_in_fresh_job() -> None:
     assert "if: ${{ always()" in verifier
     assert "needs.deploy-primary.outputs.outcome" in verifier
     assert "needs.deploy-retry.outputs.outcome" in verifier
-    assert "No successful GitHub Pages deployment is available" in verifier
+    assert "Select Pages deployment candidate for strict live verification" in verifier
+    assert "strict live byte verification will decide the deployment result" in verifier
+    assert "No GitHub Pages deployment candidate URL is available" in verifier
+    assert "No successful GitHub Pages deployment is available" not in verifier
     assert "Verify live machine contract after edge propagation" in verifier
     assert "Refuse stale source before live verification" in verifier
 
