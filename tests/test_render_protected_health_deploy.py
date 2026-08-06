@@ -169,7 +169,7 @@ def test_all_permanent_deployment_paths_use_protected_gateway_wrapper() -> None:
     base_helper = (ROOT / "scripts/render_manual_deploy.py").read_text(encoding="utf-8")
     assert 'EXPECTED_GATEWAY_HEALTH_CHECK_PATH = "/healthz"' in base_helper
     assert "workflow_dispatch:" in manual
-    assert "python scripts/render_protected_deploy.py" in manual
+    assert "python scripts/render_hardened_deploy.py" in manual
     assert "python3 scripts/render_protected_deploy.py" in pages
     assert "scripts/render_(manual|protected)_deploy\\.py" in pages
     assert "python3 scripts/render_manual_deploy.py" not in pages
