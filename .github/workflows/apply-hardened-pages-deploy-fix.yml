@@ -1,0 +1,91 @@
+name: Apply Hardened Pages Deploy Fix
+
+on:
+  push:
+    branches:
+      - agent/bind-runtime-protection-attestation
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/bind-runtime-protection-attestation
+          fetch-depth: 0
+      - name: Bind entrypoints and deploy Pages through hardened adapter
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path_text: str, old: str, new: str) -> None:
+              path = Path(path_text)
+              text = path.read_text(encoding="utf-8")
+              if text.count(old) != 1:
+                  raise SystemExit(f"{path}: expected one occurrence, found {text.count(old)}")
+              path.write_text(text.replace(old, new), encoding="utf-8")
+
+          replace_once(
+              "apps/record_chain_intake_gateway/secure_entrypoint.py",
+              "runtime.mark_protection_layer_active()\n",
+              "runtime.mark_protection_layer_active(runtime.BASE_PROTECTION_ENTRYPOINT)\n",
+          )
+          replace_once(
+              "apps/record_chain_intake_gateway/secure_entrypoint_hardened.py",
+              "base._read_text = _deeply_verified_read_text\napp = base.app\n",
+              "base._read_text = _deeply_verified_read_text\n"
+              "base.runtime.mark_protection_layer_active(\n"
+              "    base.runtime.HARDENED_PROTECTION_ENTRYPOINT\n"
+              ")\n"
+              "app = base.app\n",
+          )
+          replace_once(
+              ".github/workflows/deploy-pages.yml",
+              "scripts/render_(manual|protected)_deploy\\.py",
+              "scripts/render_(manual|protected|hardened)_deploy\\.py",
+          )
+          replace_once(
+              ".github/workflows/deploy-pages.yml",
+              "python3 scripts/render_protected_deploy.py \\",
+              "python3 scripts/render_hardened_deploy.py \\",
+          )
+
+          test_path = Path("tests/test_hardened_render_deploy_contract.py")
+          text = test_path.read_text(encoding="utf-8")
+          old = '''def test_runtime_reports_configured_hardened_entrypoint(monkeypatch) -> None:\n    monkeypatch.setenv("TRINITY_GATEWAY_PROTECTION_ENTRYPOINT", EXPECTED_ENTRYPOINT)\n    runtime.mark_protection_layer_active()\n    assert runtime.get_runtime_info()["protection_entrypoint"] == EXPECTED_ENTRYPOINT\n'''
+          new = '''def test_runtime_reports_loaded_hardened_entrypoint(monkeypatch) -> None:\n    monkeypatch.setattr(runtime, "_protection_layer_active", False)\n    monkeypatch.setattr(runtime, "_protection_entrypoint", None)\n    monkeypatch.setenv(\n        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",\n        runtime.BASE_PROTECTION_ENTRYPOINT,\n    )\n    runtime.mark_protection_layer_active(\n        runtime.HARDENED_PROTECTION_ENTRYPOINT\n    )\n    assert runtime.get_runtime_info()["protection_entrypoint"] == EXPECTED_ENTRYPOINT\n'''
+          if text.count(old) != 1:
+              raise SystemExit("stale hardened runtime test block not found exactly once")
+          text = text.replace(old, new)
+          addition = '''\n\ndef test_pages_workflow_uses_synchronized_hardened_deployer() -> None:\n    workflow = (\n        ROOT / ".github" / "workflows" / "deploy-pages.yml"\n    ).read_text(encoding="utf-8")\n    assert "python3 scripts/render_hardened_deploy.py" in workflow\n    assert "render_(manual|protected|hardened)_deploy\\\\.py" in workflow\n'''
+          if "test_pages_workflow_uses_synchronized_hardened_deployer" not in text:
+              text += addition
+          test_path.write_text(text, encoding="utf-8")
+          PY
+      - name: Run focused regressions
+        env:
+          PYTHONPATH: apps/record_chain_intake_gateway:.
+        run: |
+          python3 -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
+          python3 -m compileall -q apps/record_chain_intake_gateway scripts tests
+          python3 -m pytest -q \
+            apps/record_chain_intake_gateway/tests/test_runtime_protection_attestation.py \
+            tests/test_hardened_render_deploy_contract.py
+          python3 scripts/test_deploy_pages_workflow_contract.py
+      - name: Commit formal fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            .github/workflows/deploy-pages.yml \
+            apps/record_chain_intake_gateway/secure_entrypoint.py \
+            apps/record_chain_intake_gateway/secure_entrypoint_hardened.py \
+            tests/test_hardened_render_deploy_contract.py
+          git commit -m "fix: deploy Pages through hardened Gateway contract"
+          git push origin HEAD:agent/bind-runtime-protection-attestation
