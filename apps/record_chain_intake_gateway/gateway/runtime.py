@@ -11,14 +11,22 @@ from typing import Any
 SERVICE_VERSION = os.environ.get("TRINITY_GATEWAY_RUNTIME_VERSION", "1.1.0")
 SERVICE_NAME = "record-chain-intake-gateway"
 
-# This flag is intentionally process-local.  Only the production secure
+# This flag is intentionally process-local. Only the production secure
 # entrypoint marks it true after the resource/cooldown wrapper has actually
-# been imported and installed.  A stale Render start command that imports the
+# been imported and installed. A stale Render start command that imports the
 # core app directly therefore cannot claim that the protection layer is live.
 _protection_layer_active = False
 
 # Set at module load; overwritten by healthcheck if needed
 _deployed_at: str = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _configured_protection_entrypoint() -> str:
+    """Return the exact deployed protected entrypoint without trusting clients."""
+    return os.environ.get(
+        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",
+        "apps.record_chain_intake_gateway.secure_entrypoint:app",
+    ).strip() or "apps.record_chain_intake_gateway.secure_entrypoint:app"
 
 
 def get_runtime_info() -> dict[str, Any]:
@@ -36,7 +44,7 @@ def get_runtime_info() -> dict[str, Any]:
         "max_text_field_chars": int(os.environ.get("TRINITY_MAX_TEXT_FIELD_CHARS", "4000")),
         "protection_layer_active": _protection_layer_active,
         "protection_entrypoint": (
-            "apps.record_chain_intake_gateway.secure_entrypoint:app"
+            _configured_protection_entrypoint()
             if _protection_layer_active
             else "core_app_without_protection_wrapper"
         ),

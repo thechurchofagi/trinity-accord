@@ -87,7 +87,7 @@ jobs:
             args+=(--allow-legacy)
           fi
           if [ "$INPUT_SERVICE" = "trinity-record-chain-gateway" ]; then
-            python scripts/render_protected_deploy.py "${args[@]}"
+            python scripts/render_hardened_deploy.py "${args[@]}"
           else
             python scripts/render_manual_deploy.py "${args[@]}"
           fi
