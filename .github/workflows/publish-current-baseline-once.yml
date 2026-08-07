@@ -274,6 +274,7 @@ jobs:
         if: steps.auth.outputs.status != 'consumed'
         env:
           NODE_OPTIONS: --import=./scripts/arweave_runtime_spend_guard.mjs
+          ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT: "1"
           ARWEAVE_MINIMUM_REMAINING_AR: "0.25"
           ARWEAVE_MAX_PAYLOAD_BYTES: "8388608"
           ARWEAVE_MAX_TRANSACTION_REWARD_AR: "0.05"
@@ -291,6 +292,7 @@ jobs:
             --upload-result-json "$RUNNER_TEMP/homepage-arweave-receipt.json" \
             --kind homepage_machine_snapshot \
             --source-path "${{ steps.snapshot.outputs.path }}"
+          python3 scripts/generate_arweave_wallet_status.py
 
       - name: Seal verified publication state
         if: steps.auth.outputs.status != 'consumed'
@@ -328,7 +330,8 @@ jobs:
                   preservation/current-baseline-publication-prepared-v1.json \
                   preservation/current-baseline-publication-observation-v1.json \
                   preservation/repository-preservation-state-v2.json \
-                  record-chain/arweave-wallet-ledger.json api/recovery-index.json
+                  record-chain/arweave-wallet-ledger.json \
+                  api/arweave-wallet-status.json api/recovery-index.json
           git commit -m "archive: record current baseline DOI and Arweave snapshot"
           pushed=false
           for attempt in 1 2 3; do
