@@ -170,19 +170,27 @@ def beacon_header_root(message: dict) -> str:
 
 
 def fetch_header(beacon: str, block_id: str, *, attempts: int = 4) -> dict:
-    data = get_json(beacon, f"/eth/v1/beacon/headers/{block_id}", attempts=attempts)["data"]
+    payload = get_json(beacon, f"/eth/v1/beacon/headers/{block_id}", attempts=attempts)
+    data = payload["data"]
     computed = beacon_header_root(data["header"]["message"])
     if computed.lower() != data["root"].lower():
         raise RuntimeError(f"beacon header root mismatch {data['root']} != {computed}")
-    return {"root": data["root"].lower(), "canonical": bool(data.get("canonical", True)), "message": data["header"]["message"]}
+    return {
+        "root": data["root"].lower(),
+        "canonical": bool(data.get("canonical", True)),
+        "finalized": payload.get("finalized"),
+        "execution_optimistic": payload.get("execution_optimistic"),
+        "message": data["header"]["message"],
+    }
 
 
 def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: int, target_root: str) -> tuple[dict, list[dict], list[dict]]:
     """Select a nearby descendant as the explicit weak-subjectivity trust root.
 
     Multiple providers only preserve provenance that they agree on the historical canonical
-    block root. The repository explicitly trusts that descendant root as finalized; the
-    offline proof verifies that the target is its ancestor.
+    block root. At least one provider must additionally report that root finalized. The
+    repository still explicitly trusts that descendant root as finalized; provider fields
+    are provenance, not a substitute for the declared trust assumption.
     """
     for base_offset in (128, 160, 192, 224, 256, 320):
         for extra in range(16):
@@ -197,6 +205,8 @@ def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: i
                         "observed_slot": int(hdr["message"]["slot"]),
                         "root": hdr["root"],
                         "canonical": hdr["canonical"],
+                        "finalized": hdr["finalized"],
+                        "execution_optimistic": hdr["execution_optimistic"],
                     })
                 except Exception as exc:
                     observations.append({"provider": base, "requested_slot": candidate_slot, "error": str(exc)})
@@ -205,7 +215,9 @@ def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: i
             if not counts:
                 continue
             root, votes = counts.most_common(1)[0]
-            if votes < 2:
+            matching = [o for o in good if o["root"] == root]
+            finalized_votes = sum(1 for o in matching if o.get("finalized") is True)
+            if votes < 2 or finalized_votes < 1:
                 continue
             chain = []
             cur = root
@@ -226,13 +238,14 @@ def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: i
                 "slot": candidate_slot,
                 "epoch": candidate_slot // SLOTS_PER_EPOCH,
                 "root": root,
-                "trust_model": "explicit weak-subjectivity assumption: this specific descendant Beacon root is trusted as finalized; cross-provider canonical-header agreement is provenance only and is not itself a cryptographic proof of finality",
+                "trust_model": "explicit weak-subjectivity assumption: this specific descendant Beacon root is trusted as finalized; cross-provider canonical/finalized API observations are provenance only and are not themselves a cryptographic proof of finality",
                 "matching_provider_votes": votes,
-                "provenance_kind": "cross_provider_historical_canonical_header_agreement",
+                "finalized_provider_votes": finalized_votes,
+                "provenance_kind": "cross_provider_historical_header_agreement_with_finalized_observation",
             }
-            print(f"trusted finalized root slot={candidate_slot} root={root} votes={votes}", flush=True)
+            print(f"trusted finalized root slot={candidate_slot} root={root} votes={votes} finalized_votes={finalized_votes}", flush=True)
             return checkpoint, observations, chain
-    raise RuntimeError("could not find a cross-provider-agreed descendant Beacon root for explicit checkpoint trust")
+    raise RuntimeError("could not find a cross-provider-agreed descendant Beacon root with finalized provenance")
 
 
 def main() -> int:
@@ -245,8 +258,7 @@ def main() -> int:
     args = ap.parse_args()
     beacons = args.beacon or [
         "https://ethereum-beacon-api.publicnode.com",
-        "https://lodestar-mainnet.chainsafe.io",
-        "https://mainnet-checkpoint-sync.attestant.io",
+        "https://docs-demo.quiknode.pro",
     ]
     primary = beacons[0]
     genesis = get_json(primary, "/eth/v1/beacon/genesis")["data"]
