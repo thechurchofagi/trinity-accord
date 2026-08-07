@@ -13,12 +13,16 @@ PY
 )"
 
 # A newer, explicitly authorized repository-baseline lifecycle supersedes the
-# older refresh transaction while it is prepared or after it is consumed. It
-# has its own strict cross-file validator; do not misclassify that bounded
-# transition as corruption merely because the legacy sequence is terminal.
-if [[ "$current_status" == "prepared" || "$current_status" == "consumed" ]]; then
+# older refresh transaction while it is prepared or after it is consumed. The
+# last verified DOI remains the active published state throughout preparation.
+if [[ "$current_status" == "prepared" ]]; then
+  python3 scripts/validate_current_baseline_prepared_state.py
+  echo "Superseding current-baseline publication is prepared and valid; legacy refresh remains consumed."
+  exit 0
+fi
+if [[ "$current_status" == "consumed" ]]; then
   python3 scripts/validate_current_baseline_publication_state.py
-  echo "Superseding current-baseline publication is $current_status and valid; legacy refresh remains consumed."
+  echo "Superseding current-baseline publication is consumed and valid; legacy refresh remains consumed."
   exit 0
 fi
 
