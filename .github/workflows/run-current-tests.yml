@@ -43,6 +43,35 @@ jobs:
           # This verifier is intentionally offline: checked-in proof bytes must
           # independently reconstruct L1/L2/L3 without contacting Ethereum RPCs.
           python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
+      - name: Verify NFT cryptographic proof annex
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/build_nft_cryptographic_commitment.py \
+            evidence/nft-proof-annex-v1/verification/capture_compact_proofs.py \
+            evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py
+          python3 scripts/build_nft_cryptographic_commitment.py --check
+          # No RPC is used here. The checked-in compact witnesses must prove the
+          # collection commitment, Ethereum execution inclusion, mint semantics,
+          # and checkpoint-relative Beacon ancestry entirely from repository bytes.
+          python3 evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py > /tmp/nft-proof-offline.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          generated = json.loads(Path('/tmp/nft-proof-offline.json').read_text(encoding='utf-8'))
+          checked = json.loads(Path('evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json').read_text(encoding='utf-8'))
+          assert generated == checked, 'checked-in NFT offline verification report is stale'
+          assert generated['result'] == 'PASS', generated.get('failures')
+          assert generated['L1_COLLECTION_COMMITMENT']['asset_count'] == 175
+          assert generated['L2_EXECUTION_INCLUSION']['mint_transactions'] == 175
+          assert generated['L3_CONSENSUS_FINALITY']['unique_execution_blocks'] == 175
+          print('NFT_OFFLINE_VERIFICATION=PASS')
+          print('NFT_MERKLE_ROOT=' + generated['L1_COLLECTION_COMMITMENT']['root_sha256'])
+          print('NFT_L2_MINT_TRANSACTIONS=' + str(generated['L2_EXECUTION_INCLUSION']['mint_transactions']))
+          print('NFT_L3_EXECUTION_BLOCKS=' + str(generated['L3_CONSENSUS_FINALITY']['unique_execution_blocks']))
+          PY
       - name: Run full current system tests
         id: current_system_tests
         continue-on-error: true
