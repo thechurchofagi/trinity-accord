@@ -37,7 +37,11 @@ jobs:
         run: |
           python3 -m py_compile \
             evidence/ethereum-evidence-annex-v1/verification/capture_eth_anchor.py \
+            evidence/ethereum-evidence-annex-v1/verification/generate_l2_l3_proofs.py \
             evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
+          node --check evidence/ethereum-evidence-annex-v1/verification/make_beacon_execution_proof.mjs
+          # This verifier is intentionally offline: checked-in proof bytes must
+          # independently reconstruct L1/L2/L3 without contacting Ethereum RPCs.
           python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
       - name: Run full current system tests
         id: current_system_tests
