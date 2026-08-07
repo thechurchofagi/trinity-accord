@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   capture:
@@ -46,6 +46,26 @@ jobs:
             --node-helper evidence/ethereum-evidence-annex-v1/verification/make_beacon_execution_proof.mjs \
             --beacon https://ethereum-beacon-api.publicnode.com \
             --beacon https://docs-demo.quiknode.pro
+      - name: Preserve exact proof bytes on capture branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          proof_dir=evidence/ethereum-evidence-annex-v1/proof-material
+          for d in /tmp/ethereum-l2-l3-proofs/0x*; do
+            tx=$(basename "$d")
+            mkdir -p "$proof_dir/$tx"
+            cp "$d/L2-execution-witness.json" "$proof_dir/$tx/L2-execution-witness.json"
+            cp "$d/L3-consensus-witness.json" "$proof_dir/$tx/L3-consensus-witness.json"
+          done
+          cp /tmp/ethereum-l2-l3-proofs/CAPTURE-SUMMARY.json "$proof_dir/L2-L3-CAPTURE-SUMMARY.json"
+          test "$(find "$proof_dir" -name 'L2-execution-witness.json' | wc -l)" -eq 10
+          test "$(find "$proof_dir" -name 'L3-consensus-witness.json' | wc -l)" -eq 10
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$proof_dir"
+          git diff --cached --check
+          git commit -m "evidence: preserve Ethereum L2 L3 proof witnesses"
+          git push origin HEAD:agent/ethereum-l2-l3-proofs-v1
       - name: Upload proof capture
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
