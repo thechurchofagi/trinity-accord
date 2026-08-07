@@ -1,0 +1,46 @@
+name: Probe Beacon History
+
+on:
+  push:
+    branches: [agent/ethereum-l2-l3-proofs-v1]
+    paths:
+      - ".github/workflows/probe-beacon-history.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Probe historical Beacon headers
+        shell: bash
+        run: |
+          set +e
+          slot=12525702
+          for base in \
+            https://ethereum-beacon-api.publicnode.com \
+            https://lodestar-mainnet.chainsafe.io \
+            https://eth-beacon.blockreq.com/v1/rpc/public \
+            https://docs-demo.quiknode.pro \
+            https://mainnet-checkpoint-sync.attestant.io
+          do
+            echo "=== $base ==="
+            code=$(curl -L -sS --connect-timeout 10 --max-time 20 -o /tmp/out.json -w '%{http_code}' "$base/eth/v1/beacon/headers/$slot")
+            echo "HTTP $code"
+            python3 - <<'PY'
+import json
+try:
+    d=json.load(open('/tmp/out.json'))
+    x=d.get('data',{})
+    if isinstance(x,dict):
+        print('root=',x.get('root'),'canonical=',x.get('canonical'),'slot=',x.get('header',{}).get('message',{}).get('slot'))
+    else:
+        print(str(d)[:500])
+except Exception as e:
+    print('parse_error=',e)
+    print(open('/tmp/out.json',errors='replace').read()[:500])
+PY
+          done
