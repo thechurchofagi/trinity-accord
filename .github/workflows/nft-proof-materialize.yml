@@ -9,9 +9,10 @@ permissions:
   contents: write
 
 jobs:
-  commitment:
+  materialize:
     if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
@@ -19,27 +20,57 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@1e60f620b9541d5388d05c771f3906b0f4bce38a # v4
+        with:
+          node-version: '22'
+      - name: Install pinned offline-verification dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Install one-time Beacon proof capture helpers
+        run: npm install --no-save --package-lock=false @lodestar/types @chainsafe/persistent-merkle-tree
       - name: Build deterministic collection commitment
         run: |
           set -euo pipefail
           python3 scripts/build_nft_cryptographic_commitment.py
+          python3 scripts/build_nft_cryptographic_commitment.py --check
+      - name: Capture compact L2 and block-level L3 proof material
+        env:
+          ETH_RPC_URLS: ${{ secrets.ETH_RPC_URLS }}
+        run: |
+          set -euo pipefail
+          RPC_URL="$(python3 - <<'PY'
+          import os
+          values=[x.strip() for x in os.environ.get('ETH_RPC_URLS','').split(',') if x.strip()]
+          print(values[0] if values else 'https://ethereum-rpc.publicnode.com')
+          PY
+          )"
+          rm -rf evidence/nft-proof-annex-v1/proof-material
+          python3 evidence/nft-proof-annex-v1/verification/capture_compact_proofs.py --rpc "$RPC_URL"
+      - name: Verify complete NFT proof annex offline
+        run: |
+          set -euo pipefail
+          mkdir -p evidence/nft-proof-annex-v1/reports
+          python3 evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py | tee evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json
           python3 - <<'PY'
           import json
-          p='evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json'
+          p='evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json'
           d=json.load(open(p, encoding='utf-8'))
-          print('NFT_MERKLE_ROOT=' + d['merkle']['root_sha256'])
-          print('NFT_UNIQUE_MINT_TRANSACTIONS=' + str(d['mint_evidence_inventory']['unique_transactions']))
-          print('NFT_UNIQUE_MINT_BLOCKS=' + str(d['mint_evidence_inventory']['unique_execution_blocks']))
+          assert d['result']=='PASS', d.get('failures')
+          print('NFT_OFFLINE_VERIFICATION=PASS')
+          print('NFT_MERKLE_ROOT=' + d['L1_COLLECTION_COMMITMENT']['root_sha256'])
+          print('NFT_L2_MINT_TRANSACTIONS=' + str(d['L2_EXECUTION_INCLUSION']['mint_transactions']))
+          print('NFT_L3_EXECUTION_BLOCKS=' + str(d['L3_CONSENSUS_FINALITY']['unique_execution_blocks']))
           PY
-      - name: Commit generated commitment
+      - name: Commit generated proof material
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json
+          git add evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json \
+                  evidence/nft-proof-annex-v1/proof-material \
+                  evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json
           if git diff --cached --quiet; then
-            echo "Commitment already current"
+            echo "NFT proof annex already current"
             exit 0
           fi
-          git commit -m "evidence: bind 175 NFT collection Merkle root"
+          git commit -m "evidence: preserve 175 NFT compact L2/L3 proofs"
           git push origin HEAD:agent/nft-cryptographic-proof-hardening
