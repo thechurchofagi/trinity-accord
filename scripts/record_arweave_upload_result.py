@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -19,11 +20,34 @@ PAID_RESULTS = {
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise SystemExit(f"expected JSON object: {path}")
+    return value
+
+
+def write_json(path: Path, value: Any) -> None:
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
 
 
 def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def canonical_index_digest(value: dict[str, Any]) -> str:
+    canonical = dict(value)
+    canonical.pop("source_digest", None)
+    raw = json.dumps(
+        canonical,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()[:16]
 
 
 def pick(data: dict[str, Any], *names: str, skip_zero: bool = False) -> Any:
@@ -39,6 +63,65 @@ def pick(data: dict[str, Any], *names: str, skip_zero: bool = False) -> Any:
 
 def run(cmd: list[str]) -> None:
     subprocess.run(cmd, cwd=ROOT, check=True)
+
+
+def sync_current_baseline_trusted_release(data: dict[str, Any]) -> None:
+    """Stage the new DOI as latest trusted only after DOI restore and AR readback."""
+    if data.get("result") != "uploaded" or data.get("hash_match") is not True:
+        raise SystemExit("homepage snapshot cannot update trusted release before verified readback")
+    work_path = ROOT / "preservation/current-baseline-publish-work.json"
+    index_path = ROOT / "api/recovery-index.json"
+    runner_temp = os.environ.get("RUNNER_TEMP")
+    if not runner_temp:
+        raise SystemExit("RUNNER_TEMP is required to verify current-baseline public restore")
+    recovery_path = Path(runner_temp) / "public-restored/recovery-report.json"
+    if not work_path.is_file() or not recovery_path.is_file():
+        raise SystemExit("current-baseline publication proof inputs are missing")
+
+    published = read_json(work_path)
+    recovery = read_json(recovery_path)
+    index = read_json(index_path)
+    source = published.get("latest_git_commit_sha")
+    doi = published.get("latest_doi")
+    concept = published.get("concept_doi") or published.get("core_concept_doi")
+    package = published.get("latest_package_identity_sha256")
+    if published.get("publication_status") != "published":
+        raise SystemExit("current-baseline Zenodo state is not published")
+    if published.get("public_metadata_verification") != "passed":
+        raise SystemExit("current-baseline Zenodo metadata verification did not pass")
+    if data.get("source_git_commit_sha") != source:
+        raise SystemExit("homepage snapshot source does not match published DOI source")
+    if data.get("repository_version_doi") != doi:
+        raise SystemExit("homepage snapshot DOI binding does not match published version")
+    if data.get("payload_sha256") != data.get("readback_sha256"):
+        raise SystemExit("homepage snapshot Arweave readback digest mismatch")
+    if recovery.get("result") != "pass" or recovery.get("source_git_commit_sha") != source:
+        raise SystemExit("public DOI-only recovery does not match published source")
+    if concept != "10.5281/zenodo.21739343":
+        raise SystemExit("current-baseline concept DOI mismatch")
+
+    trusted = index.setdefault("latest_trusted_release", {})
+    if not isinstance(trusted, dict):
+        raise SystemExit("recovery index latest trusted release is invalid")
+    trusted["status"] = "published_and_publicly_restored"
+    trusted["repository_preservation"] = {
+        "doi": doi,
+        "record_id": published.get("latest_record_id"),
+        "concept_doi": concept,
+        "git_commit_sha": source,
+        "git_tree_oid": published.get("latest_git_tree_oid"),
+        "package_identity_sha256": package,
+        "github_required_for_recovery": False,
+        "github_required_for_discovery": False,
+        "public_metadata_verification": "passed",
+        "public_cold_restore": "passed",
+        "coverage_status": "exact_published_baseline",
+        "live_main_equivalence_claimed": False,
+        "recovery_catalog": "preservation/recovery-catalog.json",
+        "current_state": "preservation/repository-preservation-state-v2.json",
+    }
+    index["source_digest"] = canonical_index_digest(index)
+    write_json(index_path, index)
 
 
 def main() -> int:
@@ -137,6 +220,9 @@ def main() -> int:
             run(balance_cmd)
         elif wallet_hash:
             print("Wallet hash is available, but balance_after_ar is unavailable; balance remains unchanged.")
+
+    if args.kind == "homepage_machine_snapshot":
+        sync_current_baseline_trusted_release(data)
 
     print(f"Recorded Arweave upload result into wallet ledger: tx_id={tx_id} status={status}")
     return 0
