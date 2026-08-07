@@ -6,6 +6,7 @@ on:
     paths:
       - preservation/current-baseline-publication-reconciliation-v1.json
       - .github/workflows/reconcile-current-baseline-publication.yml
+      - scripts/validate_current_baseline_reconciliation_artifact.py
       - scripts/verify_arweave_existing_payload.mjs
       - scripts/finalize_current_baseline_reconciliation.py
   workflow_dispatch:
@@ -55,9 +56,8 @@ jobs:
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           from pathlib import Path
-          p = Path('preservation/current-baseline-publication-reconciliation-v1.json')
-          data = json.loads(p.read_text())
-          expected = {
+          data = json.loads(Path('preservation/current-baseline-publication-reconciliation-v1.json').read_text())
+          required = {
               'schema': 'trinityaccord.current-baseline-publication-reconciliation.v1',
               'sequence': 1,
               'authorized_by': 'thechurchofagi',
@@ -69,7 +69,7 @@ jobs:
               'arweave_txid': '-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM',
               'arweave_payload_sha256': '361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63',
               'arweave_payload_bytes': 51342,
-              'proof_artifact_id': 8980674728,
+              'failed_workflow_run_id': 31143394148,
               'proof_artifact_name': 'current-baseline-publication-proof',
               'external_writes_already_complete': True,
               'allow_zenodo_write': False,
@@ -77,8 +77,8 @@ jobs:
               'non_amending_boundary': True,
               'live_main_equivalence_claimed': False,
           }
-          for key, value in expected.items():
-              if data.get(key) != value:
+          for key, expected in required.items():
+              if data.get(key) != expected:
                   raise SystemExit(f'reconciliation mismatch: {key}')
           if data.get('status') not in {'pending', 'consumed'}:
               raise SystemExit('invalid reconciliation status')
@@ -96,58 +96,23 @@ jobs:
         if: steps.reconciliation.outputs.status == 'consumed'
         run: echo "Current-baseline reconciliation already consumed; no action is required."
 
-      - name: Download the failed-run proof artifact
+      - name: Download retained proof from the interrupted run
         if: steps.reconciliation.outputs.status == 'pending'
-        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: ${{ steps.reconciliation.outputs.artifact_name }}
           path: ${{ runner.temp }}/prior-proof
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ steps.reconciliation.outputs.run_id }}
 
-      - name: Validate the preserved external-write evidence
+      - name: Validate and materialize retained proof
         if: steps.reconciliation.outputs.status == 'pending'
-        env:
-          SOURCE_SHA: ${{ steps.reconciliation.outputs.source }}
-          VERSION_DOI: ${{ steps.reconciliation.outputs.doi }}
-          TXID: ${{ steps.reconciliation.outputs.txid }}
-          PAYLOAD_SHA256: ${{ steps.reconciliation.outputs.payload_sha256 }}
         run: |
-          set -euo pipefail
-          work="$(find "$RUNNER_TEMP/prior-proof" -name current-baseline-publish-work.json -type f -print -quit)"
-          receipt="$(find "$RUNNER_TEMP/prior-proof" -name homepage-arweave-receipt.json -type f -print -quit)"
-          payload="$(find "$RUNNER_TEMP/prior-proof" -name 'trinity-homepage-machine-*.tar.gz' -type f -print -quit)"
-          test -n "$work" && test -n "$receipt" && test -n "$payload"
-          WORK="$work" RECEIPT="$receipt" PAYLOAD="$payload" python3 - <<'PY'
-          import hashlib, json, os, subprocess, tarfile
-          from pathlib import Path
-          source=os.environ['SOURCE_SHA']; doi=os.environ['VERSION_DOI']; txid=os.environ['TXID']; expected=os.environ['PAYLOAD_SHA256']
-          work=json.load(open(os.environ['WORK'])); receipt=json.load(open(os.environ['RECEIPT'])); payload=Path(os.environ['PAYLOAD'])
-          if work.get('publication_status') != 'published' or work.get('latest_git_commit_sha') != source or work.get('latest_doi') != doi:
-              raise SystemExit('artifact Zenodo state mismatch')
-          if (receipt.get('txid') or receipt.get('tx_id')) != txid or receipt.get('source_git_commit_sha') != source or receipt.get('repository_version_doi') != doi:
-              raise SystemExit('artifact Arweave receipt binding mismatch')
-          digest=hashlib.sha256(payload.read_bytes()).hexdigest()
-          if digest != expected or receipt.get('payload_sha256') != expected or receipt.get('readback_sha256') != expected or receipt.get('hash_match') is not True:
-              raise SystemExit('artifact Arweave digest mismatch')
-          extract=Path(os.environ['RUNNER_TEMP'])/'snapshot-extracted'; extract.mkdir()
-          with tarfile.open(payload, 'r:gz') as archive: archive.extractall(extract, filter='data')
-          manifest=json.loads((extract/'manifest.json').read_text())
-          if manifest.get('source_git_commit_sha') != source or manifest.get('repository_version_doi') != doi:
-              raise SystemExit('snapshot manifest binding mismatch')
-          for item in manifest.get('files', []):
-              name=item['path']; local=extract/name
-              if hashlib.sha256(local.read_bytes()).hexdigest() != item['sha256']:
-                  raise SystemExit(f'snapshot internal digest mismatch: {name}')
-              if name != 'rendered-homepage.html':
-                  raw=subprocess.check_output(['git','show',f'{source}:{name}'])
-                  if raw != local.read_bytes():
-                      raise SystemExit(f'snapshot source mismatch: {name}')
-          (extract/'checksums.sha256').read_text()
-          PY
-          cp "$work" "$RUNNER_TEMP/current-baseline-publish-work.json"
-          cp "$receipt" "$RUNNER_TEMP/prior-homepage-arweave-receipt.json"
-          cp "$payload" "$RUNNER_TEMP/current-homepage-machine.tar.gz"
+          python3 scripts/validate_current_baseline_reconciliation_artifact.py \
+            --proof-dir "$RUNNER_TEMP/prior-proof" \
+            --output-work-state "$RUNNER_TEMP/current-baseline-publish-work.json" \
+            --output-receipt "$RUNNER_TEMP/prior-homepage-arweave-receipt.json" \
+            --output-payload "$RUNNER_TEMP/current-homepage-machine.tar.gz"
 
       - name: Rebuild and prove the exact DOI capsule publicly
         if: steps.reconciliation.outputs.status == 'pending'
@@ -193,9 +158,16 @@ jobs:
           RECOVERY="$RUNNER_TEMP/public-restored/recovery-report.json" \
           METADATA="$RUNNER_TEMP/public-metadata-report.json" python3 - <<'PY'
           import json, os
-          p=os.environ['WORK']; data=json.load(open(p)); recovery=json.load(open(os.environ['RECOVERY'])); metadata=json.load(open(os.environ['METADATA']))
-          data.update({'public_download_verification':'passed','public_metadata_verification':'passed','public_cold_restore':'passed','public_cold_restore_report':recovery,'public_metadata_report':metadata})
-          open(p,'w').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          path = os.environ['WORK']
+          data = json.load(open(path))
+          data.update({
+              'public_download_verification': 'passed',
+              'public_metadata_verification': 'passed',
+              'public_cold_restore': 'passed',
+              'public_cold_restore_report': json.load(open(os.environ['RECOVERY'])),
+              'public_metadata_report': json.load(open(os.environ['METADATA'])),
+          })
+          open(path, 'w').write(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
           PY
           python3 scripts/record_arweave_upload_result.py \
             --upload-result-json "$RUNNER_TEMP/verified-homepage-arweave-receipt.json" \
