@@ -100,9 +100,27 @@ def verify_single_ssz_proof(proof: dict, expected_root: str) -> None:
         raise ValueError("SSZ proof root mismatch")
 
 
-def verify_l2(anchor: dict) -> dict:
+def bound_proof_path(anchor: dict, key: str, filename: str) -> tuple[pathlib.Path, dict]:
     txh = anchor["tx_hash"].lower()
-    path = ANNEX_DIR / "proof-material" / txh / "L2-execution-witness.json"
+    expected_rel = f"evidence/ethereum-evidence-annex-v1/proof-material/{txh}/{filename}"
+    record = anchor.get("proof_material", {}).get(key)
+    if not isinstance(record, dict):
+        raise ValueError(f"missing manifest proof binding {key}")
+    if record.get("path") != expected_rel:
+        raise ValueError(f"unexpected {key} path")
+    path = REPO_ROOT / expected_rel
+    if not path.is_file():
+        raise ValueError(f"missing {key} file")
+    size = path.stat().st_size
+    digest = sha256_file(path)
+    if size != record.get("size") or digest != record.get("sha256"):
+        raise ValueError(f"{key} size/SHA-256 binding mismatch")
+    return path, {"path": expected_rel, "size": size, "sha256": digest, "status": "PASS"}
+
+
+def verify_l2(anchor: dict) -> tuple[dict, dict]:
+    txh = anchor["tx_hash"].lower()
+    path, byte_check = bound_proof_path(anchor, "l2_execution_witness", "L2-execution-witness.json")
     witness = json.loads(path.read_text(encoding="utf-8"))
     if witness.get("schema") != "trinityaccord.ethereum-execution-inclusion-witness.v1":
         raise ValueError("unexpected L2 witness schema")
@@ -128,12 +146,20 @@ def verify_l2(anchor: dict) -> dict:
     idx = int(witness["target_transaction_index"])
     if idx < 0 or idx >= len(tx_hashes) or tx_hashes[idx] != txh:
         raise ValueError("target transaction index mismatch")
-    return {"tx_hash": txh, "status": "PASS", "block_hash": block["hash"].lower(), "transaction_index": idx, "transactions": len(tx_hashes)}
+    return ({
+        "tx_hash": txh,
+        "status": "PASS",
+        "block_hash": block["hash"].lower(),
+        "transaction_index": idx,
+        "transactions": len(tx_hashes),
+        "transactions_root": block["transactionsRoot"].lower(),
+        "receipts_root": block["receiptsRoot"].lower(),
+    }, byte_check)
 
 
-def verify_l3(anchor: dict, l2: dict) -> dict:
+def verify_l3(anchor: dict, l2: dict) -> tuple[dict, dict]:
     txh = anchor["tx_hash"].lower()
-    path = ANNEX_DIR / "proof-material" / txh / "L3-consensus-witness.json"
+    path, byte_check = bound_proof_path(anchor, "l3_consensus_witness", "L3-consensus-witness.json")
     witness = json.loads(path.read_text(encoding="utf-8"))
     if witness.get("schema") != "trinityaccord.ethereum-consensus-finality-witness.v1":
         raise ValueError("unexpected L3 witness schema")
@@ -172,14 +198,26 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
     if checkpoint_slot <= expected_slot:
         raise ValueError("trusted finalized root must descend from target slot")
     votes = int(checkpoint.get("matching_provider_votes", 0))
+    finalized_votes = int(checkpoint.get("finalized_provider_votes", 0))
+    observations = witness.get("checkpoint_observations", [])
     observed_matches = sum(
-        1 for o in witness.get("checkpoint_observations", [])
+        1 for o in observations
         if o.get("root", "").lower() == checkpoint_root
         and int(o.get("observed_slot", -1)) == checkpoint_slot
         and o.get("canonical") is True
     )
+    observed_finalized = sum(
+        1 for o in observations
+        if o.get("root", "").lower() == checkpoint_root
+        and int(o.get("observed_slot", -1)) == checkpoint_slot
+        and o.get("canonical") is True
+        and o.get("finalized") is True
+        and o.get("execution_optimistic") is False
+    )
     if votes < 2 or observed_matches < votes:
         raise ValueError("trusted finalized root provenance quorum mismatch")
+    if finalized_votes < 1 or observed_finalized < finalized_votes:
+        raise ValueError("trusted finalized root finalized-provenance mismatch")
 
     expected = checkpoint_root
     chain = witness.get("checkpoint_to_target_parent_chain", [])
@@ -192,7 +230,7 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
         expected = item["message"]["parent_root"].lower()
     if expected != target_root:
         raise ValueError("trusted finalized Beacon root is not linked to target Beacon block")
-    return {
+    return ({
         "tx_hash": txh,
         "status": "PASS",
         "target_beacon_root": target_root,
@@ -200,13 +238,16 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
         "trusted_finalized_slot": checkpoint_slot,
         "trusted_finalized_epoch": int(checkpoint["epoch"]),
         "ancestor_headers": len(chain),
-        "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement is provenance only.",
-    }
+        "matching_provider_votes": votes,
+        "finalized_provider_votes": finalized_votes,
+        "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only.",
+    }, byte_check)
 
 
 def main() -> int:
     failures: list[str] = []
     checks: list[dict] = []
+    proof_byte_checks: list[dict] = []
     try:
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -268,8 +309,9 @@ def main() -> int:
         try:
             if a.get("proof_status", {}).get("L2_EXECUTION_INCLUSION") != "PASS":
                 raise ValueError("manifest does not declare L2 PASS")
-            l2 = verify_l2(a)
+            l2, l2_bytes = verify_l2(a)
             l2_checks.append(l2)
+            proof_byte_checks.append({"tx_hash": tx, "level": "L2", **l2_bytes})
         except Exception as exc:
             l2_pass = False
             failures.append(f"{tx}: L2 {exc}")
@@ -277,7 +319,9 @@ def main() -> int:
         try:
             if a.get("proof_status", {}).get("L3_CONSENSUS_FINALITY") != "PASS":
                 raise ValueError("manifest does not declare L3 PASS")
-            l3_checks.append(verify_l3(a, l2))
+            l3, l3_bytes = verify_l3(a, l2)
+            l3_checks.append(l3)
+            proof_byte_checks.append({"tx_hash": tx, "level": "L3", **l3_bytes})
         except Exception as exc:
             l3_pass = False
             failures.append(f"{tx}: L3 {exc}")
@@ -290,11 +334,12 @@ def main() -> int:
         "L3_CONSENSUS_FINALITY": "PASS" if l3_pass and len(l3_checks) == len(anchors) else "FAIL",
         "anchors": len(anchors),
         "payload_checks": len(checks),
+        "proof_byte_checks": proof_byte_checks,
         "checks": checks,
         "l2_checks": l2_checks,
         "l3_checks": l3_checks,
         "failures": failures,
-        "claim_boundary": "L2 PASS is offline execution inclusion bound to the execution block hash. L3 PASS links that execution block hash through an SSZ Beacon-body proof and Beacon parent-root ancestry to an explicit weak-subjectivity trusted finalized Beacon root. Provider agreement is provenance only; the trusted-root finality assumption is explicit, and the result is not a trust-free real-world clock attestation.",
+        "claim_boundary": "L2 PASS is offline execution inclusion bound to the execution block hash. L3 PASS links that execution block hash through an SSZ Beacon-body proof and Beacon parent-root ancestry to an explicit weak-subjectivity trusted finalized Beacon root. Provider agreement/finalized fields are provenance only; the trusted-root finality assumption is explicit, and the result is not a trust-free real-world clock attestation.",
     }
     print(json.dumps(summary, indent=2, ensure_ascii=False))
     return 0 if not failures else 1
