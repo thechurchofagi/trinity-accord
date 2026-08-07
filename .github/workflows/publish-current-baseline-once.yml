@@ -199,6 +199,8 @@ jobs:
         if: steps.auth.outputs.status != 'consumed'
         id: zenodo
         run: |
+          cp preservation/repository-preservation-state-v2.json \
+             preservation/current-baseline-publish-work.json
           python3 scripts/publish_preservation_capsule_to_zenodo.py \
             --capsule-dir "$RUNNER_TEMP/current-baseline-capsule" \
             --state preservation/current-baseline-publish-work.json \
@@ -291,7 +293,7 @@ jobs:
           python3 scripts/record_arweave_upload_result.py \
             --upload-result-json "$RUNNER_TEMP/homepage-arweave-receipt.json" \
             --kind homepage_machine_snapshot \
-            --source-path "${{ steps.snapshot.outputs.path }}"
+            --source-path "homepage-machine-snapshot:${{ steps.source.outputs.sha }}"
           python3 scripts/generate_arweave_wallet_status.py
 
       - name: Seal verified publication state
@@ -355,6 +357,7 @@ jobs:
             ${{ runner.temp }}/public-restored/recovery-report.json
             ${{ runner.temp }}/homepage-arweave-receipt.json
             ${{ runner.temp }}/toolchain-provenance.json
+            preservation/current-baseline-publish-work.json
             ${{ steps.snapshot.outputs.path }}
           retention-days: 365
           if-no-files-found: warn
