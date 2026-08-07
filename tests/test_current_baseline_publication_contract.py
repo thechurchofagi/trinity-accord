@@ -20,6 +20,7 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
     assert data["authorized_by"] == "thechurchofagi"
     assert data["core_concept_doi"] == "10.5281/zenodo.21739343"
     assert data["previous_core_version_doi"] == "10.5281/zenodo.21755827"
+    assert data["zenodo_rights_acknowledgement"] == "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
     assert data["publication_confirmation"] == "PUBLISH_TRINITY_CURRENT_BASELINE_V1"
     assert data["include_full_repository_doi"] is True
     assert data["include_homepage_arweave_snapshot"] is True
@@ -46,6 +47,8 @@ def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     assert "--zenodo-record-id" in text
     assert "public restore source mismatch" in text
     assert "check" not in text.lower() or "checksums.sha256" in text
+    assert "PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" in text
+    assert "vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" not in text
     assert "ARWEAVE_MINIMUM_REMAINING_AR: \"0.25\"" in text
     assert "ARWEAVE_MAX_TRANSACTION_REWARD_AR: \"0.05\"" in text
     assert "ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: \"0.50\"" in text
