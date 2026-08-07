@@ -37,6 +37,9 @@ function paidKind() {
   if (script === "arweave_upload_payload.mjs") {
     return "record_chain_arweave_archive";
   }
+  if (script === "arweave_upload_homepage_snapshot.mjs") {
+    return "homepage_machine_snapshot";
+  }
   if (script === "arweave_cost_gate.mjs") {
     const recordType = argValue("--record-type") || process.env.ARWEAVE_RECORD_TYPE || "";
     if (recordType === "native_ots_proof_bundle") return "native_ots_bundle_archive";
