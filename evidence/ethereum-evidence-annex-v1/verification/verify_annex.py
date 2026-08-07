@@ -145,7 +145,10 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
     target_root = beacon_header_root(target["message"]).lower()
     if target_root != target["root"].lower():
         raise ValueError("target beacon header root mismatch")
-    expected_slot = (anchor["execution_reference"]["block_timestamp_unix"] - GENESIS_TIME) // SECONDS_PER_SLOT
+    timestamp = int(anchor["execution_reference"]["block_timestamp_unix"])
+    if timestamp < GENESIS_TIME or (timestamp - GENESIS_TIME) % SECONDS_PER_SLOT:
+        raise ValueError("execution timestamp does not map to an exact Beacon slot")
+    expected_slot = (timestamp - GENESIS_TIME) // SECONDS_PER_SLOT
     if int(target["message"]["slot"]) != expected_slot or int(witness["target_beacon_slot"]) != expected_slot:
         raise ValueError("target beacon slot mismatch")
     leaf_proof = witness["execution_block_hash_to_body_root"]
@@ -156,20 +159,27 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
         raise ValueError("SSZ proof body root declaration mismatch")
     verify_single_ssz_proof(leaf_proof, body_root)
 
-    checkpoint = witness["trusted_finalized_checkpoint"]
+    checkpoint = witness["trusted_finalized_beacon_root"]
     trust_model = checkpoint.get("trust_model", "")
-    if checkpoint.get("schema") != "trinityaccord.ethereum-trusted-finalized-checkpoint.v1":
-        raise ValueError("unexpected trusted checkpoint schema")
+    if checkpoint.get("schema") != "trinityaccord.ethereum-trusted-finalized-beacon-root.v1":
+        raise ValueError("unexpected trusted finalized Beacon-root schema")
     if "weak-subjectivity" not in trust_model or "explicit" not in trust_model:
-        raise ValueError("trusted checkpoint assumption is not explicit")
+        raise ValueError("trusted finalized root assumption is not explicit")
+    if "provenance only" not in trust_model:
+        raise ValueError("provider provenance boundary is not explicit")
     checkpoint_root = checkpoint["root"].lower()
+    checkpoint_slot = int(checkpoint["slot"])
+    if checkpoint_slot <= expected_slot:
+        raise ValueError("trusted finalized root must descend from target slot")
     votes = int(checkpoint.get("matching_provider_votes", 0))
     observed_matches = sum(
         1 for o in witness.get("checkpoint_observations", [])
-        if o.get("root", "").lower() == checkpoint_root and int(o.get("epoch", -1)) == int(checkpoint["finalized_epoch"])
+        if o.get("root", "").lower() == checkpoint_root
+        and int(o.get("observed_slot", -1)) == checkpoint_slot
+        and o.get("canonical") is True
     )
     if votes < 2 or observed_matches < votes:
-        raise ValueError("trusted checkpoint provenance quorum mismatch")
+        raise ValueError("trusted finalized root provenance quorum mismatch")
 
     expected = checkpoint_root
     chain = witness.get("checkpoint_to_target_parent_chain", [])
@@ -181,15 +191,16 @@ def verify_l3(anchor: dict, l2: dict) -> dict:
             raise ValueError("checkpoint ancestry header root mismatch")
         expected = item["message"]["parent_root"].lower()
     if expected != target_root:
-        raise ValueError("trusted finalized checkpoint is not linked to target beacon block")
+        raise ValueError("trusted finalized Beacon root is not linked to target Beacon block")
     return {
         "tx_hash": txh,
         "status": "PASS",
         "target_beacon_root": target_root,
-        "trusted_finalized_checkpoint": checkpoint_root,
-        "checkpoint_epoch": int(checkpoint["finalized_epoch"]),
+        "trusted_finalized_beacon_root": checkpoint_root,
+        "trusted_finalized_slot": checkpoint_slot,
+        "trusted_finalized_epoch": int(checkpoint["epoch"]),
         "ancestor_headers": len(chain),
-        "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity finalized checkpoint.",
+        "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement is provenance only.",
     }
 
 
@@ -283,7 +294,7 @@ def main() -> int:
         "l2_checks": l2_checks,
         "l3_checks": l3_checks,
         "failures": failures,
-        "claim_boundary": "L2 PASS is offline execution inclusion bound to the execution block hash. L3 PASS links that execution block hash through an SSZ Beacon-body proof and Beacon parent-root ancestry to an explicit weak-subjectivity trusted finalized checkpoint; it is not a trust-free real-world clock attestation.",
+        "claim_boundary": "L2 PASS is offline execution inclusion bound to the execution block hash. L3 PASS links that execution block hash through an SSZ Beacon-body proof and Beacon parent-root ancestry to an explicit weak-subjectivity trusted finalized Beacon root. Provider agreement is provenance only; the trusted-root finality assumption is explicit, and the result is not a trust-free real-world clock attestation.",
     }
     print(json.dumps(summary, indent=2, ensure_ascii=False))
     return 0 if not failures else 1
