@@ -33,7 +33,9 @@
     "transaction_or_receipt_inclusion_proof": "required_for_L2",
     "beacon_finality_material": "required_for_L3",
     "trusted_finalized_checkpoint": "required_for_L3",
-    "current_v1_note": "This first annex inventories and verifies preserved byte bindings and known chain references. Missing execution/consensus proof objects are explicitly UNVERIFIED, never inferred from historical RPC checks."
+    "current_v1_note": "This first annex inventories and verifies preserved byte bindings and known chain references. Missing execution/consensus proof objects are explicitly UNVERIFIED, never inferred from historical RPC checks.",
+    "rpc_history_capture": "PRESERVED_FOR_ALL_10_ANCHORS_REFERENCE_ONLY",
+    "rpc_history_capture_boundary": "Preserving transaction/receipt/block JSON freezes the observed Ethereum block timestamp and commitment context, but does not upgrade L2/L3 without independent inclusion/finality proof validation."
   },
   "anchors": [
     {
@@ -45,9 +47,32 @@
       "input_len": 2446,
       "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/guardian-principles/guardian-principles-original.md", "size": 2446, "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"}],
-      "execution_reference": {"block_number": 23301513, "block_timestamp_utc": "2025-09-06T03:55:11Z", "reference_source": "https://etherscan.io/tx/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420", "reference_checked": true},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/guardian-principles/guardian-principles-original.md",
+          "size": 2446,
+          "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23301513,
+        "block_hash": "0xaaa6cc06a7514eadde4237c464c9e834745393c65961676c82af3c7d43cc05d4",
+        "block_timestamp_unix": 1757130911,
+        "block_timestamp_utc": "2025-09-06T03:55:11Z",
+        "transaction_index": 96,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-btc-eth-mapping-attestation",
@@ -58,9 +83,32 @@
       "input_len": 3231,
       "input_sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6.raw", "size": 3231, "sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01"}],
-      "execution_reference": {"block_number": 23168072, "block_timestamp_utc": "2025-08-18T12:54:11Z", "reference_source": "https://etherscan.io/tx/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6", "reference_checked": true},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/legacy-pointers/eth-raw/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6.raw",
+          "size": 3231,
+          "sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23168072,
+        "block_hash": "0x684d5691bb5905448c7c5cbdc324c55b6129d0a6ad938e07cc25cf268a3ac28f",
+        "block_timestamp_unix": 1755521651,
+        "block_timestamp_utc": "2025-08-18T12:54:11Z",
+        "transaction_index": 69,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-protocol-mirror",
@@ -71,9 +119,32 @@
       "input_len": 1183,
       "input_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
       "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
-      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/97631551.txt", "size": 1183, "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"}],
-      "execution_reference": {"block_number": 23152856, "block_timestamp_utc": "2025-08-16T09:58:59Z", "reference_source": "https://etherscan.io/tx/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5", "reference_checked": true},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "bitcoin-inscription-mirrors/raw/97631551.txt",
+          "size": 1183,
+          "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23152856,
+        "block_hash": "0x3c283afa41ab697825816a1d3fd6b45e478de17342386998aee6461fa35a5d63",
+        "block_timestamp_unix": 1755338339,
+        "block_timestamp_utc": "2025-08-16T09:58:59Z",
+        "transaction_index": 172,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-covenant-mirror",
@@ -84,9 +155,32 @@
       "input_len": 1710,
       "input_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
       "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
-      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/98369145.txt", "size": 1710, "sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"}],
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "bitcoin-inscription-mirrors/raw/98369145.txt",
+          "size": 1710,
+          "sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23152874,
+        "block_hash": "0x7f904edd8090c7e8ddf1e76622857d2fafd0f7a5d8e0512d57b09855c839774b",
+        "block_timestamp_unix": 1755338555,
+        "block_timestamp_utc": "2025-08-16T10:02:35Z",
+        "transaction_index": 449,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-accord-mirror",
@@ -97,9 +191,32 @@
       "input_len": 15637,
       "input_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
       "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
-      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/98387475.txt", "size": 15637, "sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"}],
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "bitcoin-inscription-mirrors/raw/98387475.txt",
+          "size": 15637,
+          "sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23153056,
+        "block_hash": "0x6a80fc6c233ed21cc9d607a50a9e363984e4e2d974d67ce285ac8e388bf84699",
+        "block_timestamp_unix": 1755340739,
+        "block_timestamp_utc": "2025-08-16T10:38:59Z",
+        "transaction_index": 172,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-bip322-notice",
@@ -110,9 +227,32 @@
       "input_len": 412,
       "input_sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f.raw", "size": 412, "sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d"}],
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/legacy-pointers/eth-raw/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f.raw",
+          "size": 412,
+          "sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23297080,
+        "block_hash": "0xc82a4a3c0cfeabc5598b5936bdaa9394bfe3499ed4892f5099de9a8b3842fc48",
+        "block_timestamp_unix": 1757077403,
+        "block_timestamp_utc": "2025-09-05T13:03:23Z",
+        "transaction_index": 230,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-final-correction",
@@ -123,9 +263,32 @@
       "input_len": 4994,
       "input_sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51.raw", "size": 4994, "sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f"}],
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/legacy-pointers/eth-raw/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51.raw",
+          "size": 4994,
+          "sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23303102,
+        "block_hash": "0x65e601022a380441aae83521188ccfdf38918b94f09d8e0d304228f4f720d433",
+        "block_timestamp_unix": 1757150159,
+        "block_timestamp_utc": "2025-09-06T09:15:59Z",
+        "transaction_index": 160,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-superseded-correction",
@@ -136,9 +299,32 @@
       "input_len": 2446,
       "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6.raw", "size": 2446, "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"}],
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/legacy-pointers/eth-raw/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6.raw",
+          "size": 2446,
+          "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23302926,
+        "block_hash": "0x31768d00b9a9af205268c0da880959eca6aa687de7fdf19d9aef48dfddaeba3e",
+        "block_timestamp_unix": 1757148011,
+        "block_timestamp_utc": "2025-09-06T08:40:11Z",
+        "transaction_index": 175,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-guardian-principles-v1-1",
@@ -149,9 +335,32 @@
       "input_len": 4694,
       "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
       "payload_binding": "exact_transaction_input_bytes",
-      "payloads": [{"path": "archive/guardian-principles/guardian-principles-v1.1.md", "size": 4694, "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"}],
-      "execution_reference": {"block_number": 23495413, "receipt_status": "0x1", "reference_checked": true, "reference_source": "api/evidence-manifest.json"},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "payloads": [
+        {
+          "path": "archive/guardian-principles/guardian-principles-v1.1.md",
+          "size": 4694,
+          "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+        }
+      ],
+      "execution_reference": {
+        "block_number": 23429813,
+        "block_hash": "0x26d20e07ae86b09d3022bd845a8aa69ddad1093a48e926c32af5041aa65f1bce",
+        "block_timestamp_unix": 1758679703,
+        "block_timestamp_utc": "2025-09-24T02:08:23Z",
+        "transaction_index": 245,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     },
     {
       "id": "eth-btc-bip340-witness",
@@ -163,12 +372,37 @@
       "input_sha256": "fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e",
       "payload_binding": "witness_metadata_and_referenced_signed_object_not_raw_transaction_input",
       "payloads": [
-        {"path": "archive/eth-witness/eth-witness.json", "size": 606, "sha256": "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f"},
-        {"path": "archive/btc-signature/btc-signature.json", "size": 701, "sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b"}
+        {
+          "path": "archive/eth-witness/eth-witness.json",
+          "size": 606,
+          "sha256": "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f"
+        },
+        {
+          "path": "archive/btc-signature/btc-signature.json",
+          "size": 701,
+          "sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b"
+        }
       ],
       "raw_input_preserved": false,
-      "execution_reference": {"reference_checked": false},
-      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+      "execution_reference": {
+        "block_number": 23360820,
+        "block_hash": "0x84201f873daa7de0bd44fd7c51ab227160270fa0ff81a7d712a44dbb3f3f2e82",
+        "block_timestamp_unix": 1757846891,
+        "block_timestamp_utc": "2025-09-14T10:48:11Z",
+        "transaction_index": 144,
+        "receipt_status": "0x1",
+        "reference_checked": true,
+        "reference_kind": "preserved_rpc_capture",
+        "reference_capture_path": "evidence/ethereum-evidence-annex-v1/proof-material/0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137/capture-manifest.json",
+        "reference_provider": "https://ethereum-rpc.publicnode.com",
+        "claim_boundary": "Provider-returned historical evidence preserved for future inspection; not by itself an offline Merkle inclusion or PoS finality proof."
+      },
+      "proof_status": {
+        "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
+        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+      },
+      "rpc_capture_status": "REFERENCE_CAPTURED"
     }
   ]
 }
