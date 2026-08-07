@@ -63,6 +63,8 @@ def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     assert "status == 'consumed'" in text
     assert "archive: prepare current baseline publication v1" in text
     assert "build_preservation_capsule.py" in text
+    assert "python3 scripts/publish_preservation_capsule_to_zenodo_v3.py" in text
+    assert "python3 scripts/publish_preservation_capsule_to_zenodo.py" not in text
     assert "--zenodo-record-id" in text
     assert "public restore source mismatch" in text
     assert "check" not in text.lower() or "checksums.sha256" in text
