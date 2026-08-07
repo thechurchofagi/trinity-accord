@@ -16,7 +16,7 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
     data = json.loads(AUTH.read_text(encoding="utf-8"))
     assert data["schema"] == "trinityaccord.current-baseline-publication-authorization.v1"
     assert data["sequence"] == 1
-    assert data["status"] == "pending"
+    assert data["status"] in {"pending", "prepared", "consumed"}
     assert data["authorized_by"] == "thechurchofagi"
     assert data["core_concept_doi"] == "10.5281/zenodo.21739343"
     assert data["previous_core_version_doi"] == "10.5281/zenodo.21755827"
@@ -25,6 +25,15 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
     assert data["include_homepage_arweave_snapshot"] is True
     assert data["non_amending_boundary"] is True
     assert data["live_main_equivalence_claimed"] is False
+    if data["status"] in {"prepared", "consumed"}:
+        assert len(data["prepared_base_commit_sha"]) == 40
+    if data["status"] == "consumed":
+        assert len(data["published_source_baseline_commit_sha"]) == 40
+        assert data["published_doi"].startswith("10.5281/zenodo.")
+        assert data["published_doi"] != data["previous_core_version_doi"]
+        assert len(data["published_package_identity_sha256"]) == 64
+        assert data["homepage_snapshot_arweave_txid"]
+        assert len(data["homepage_snapshot_sha256"]) == 64
 
 
 def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
@@ -43,6 +52,8 @@ def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     assert "paid Arweave transaction(s) already recorded today" in text
     assert "git fetch origin main --prune" in text
     assert "git rebase origin/main" in text
+    assert "generate_arweave_wallet_status.py" in text
+    assert "api/arweave-wallet-status.json" in text
     assert "archive: record current baseline DOI and Arweave snapshot" in text
     for action in ("actions/checkout@", "actions/setup-python@", "actions/setup-node@", "actions/upload-artifact@"):
         line = next(line.strip() for line in text.splitlines() if action in line)
