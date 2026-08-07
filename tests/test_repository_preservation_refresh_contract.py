@@ -145,6 +145,14 @@ def test_consumed_refresh_has_complete_public_recovery_evidence():
     assert state["public_download_verification"] == "passed"
     assert state["public_metadata_verification"] == "passed"
     assert state["public_cold_restore"] == "passed"
+    if state["latest_doi"] != auth["published_doi"]:
+        current_auth = load(
+            ROOT / "preservation/current-baseline-publication-authorization-v1.json"
+        )
+        assert current_auth["status"] == "consumed"
+        assert current_auth["previous_core_version_doi"] == auth["published_doi"]
+        assert state["latest_doi"] == current_auth["published_doi"]
+        return
     assert state["latest_doi"] == auth["published_doi"]
     assert state["latest_git_commit_sha"] == auth[
         "published_source_baseline_commit_sha"

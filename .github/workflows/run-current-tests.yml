@@ -32,6 +32,13 @@ jobs:
       - run: python3 -m pip install -r requirements-ci.txt
       - name: Verify sitemap has no committed drift
         run: python3 scripts/generate_sitemap.py --check
+      - name: Verify Ethereum evidence annex
+        shell: bash
+        run: |
+          python3 -m py_compile \
+            evidence/ethereum-evidence-annex-v1/verification/capture_eth_anchor.py \
+            evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
+          python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
       - name: Run full current system tests
         id: current_system_tests
         continue-on-error: true

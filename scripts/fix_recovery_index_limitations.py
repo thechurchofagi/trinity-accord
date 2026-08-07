@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Normalize repository-preservation limitations and harden future sealing.
+# Normalize repository-preservation limitations and harden future sealing.
+#
+# This historical repair remains idempotent across later repository-preservation
+# publications. Later releases may supersede the historical literal DOI assertion
+# with the sealed current-baseline authorization contract.
 
-This repair is idempotent. It patches the refresh implementation once, removes the
-legacy moving-main wording, deduplicates the exact publication-baseline limitation,
-updates tests that still pin sequence-2 wording, and recomputes the recovery-index
-canonical digest.
-"""
 from __future__ import annotations
 
 import hashlib
@@ -146,6 +145,10 @@ OLD_CURRENT_DOI_ASSERTION = (
 NEW_CURRENT_DOI_ASSERTION = (
     '    assert current["latest_doi"] == "10.5281/zenodo.21755827"\n'
 )
+CURRENT_DOI_CONTRACT_ASSERTION = (
+    '    assert current["latest_doi"] == current_baseline["published_doi"]\n'
+)
+CURRENT_DOI_CONTRACT_SOURCE = "current-baseline-publication-authorization-v1.json"
 
 OLD_RECOVERY_STATUS_ASSERTION = (
     '    assert report["repository_recovery_status"] == '
@@ -210,8 +213,14 @@ def canonical_digest(value: dict[str, Any]) -> str:
 
 
 def replace_required(text: str, old: str, new: str, *, expected_count: int) -> str:
-    if new in text and old not in text:
+    normalized_count = text.count(new)
+    if normalized_count == expected_count:
         return text
+    if normalized_count:
+        raise SystemExit(
+            "recovery-index repair normalized anchor count mismatch: "
+            f"expected={expected_count} observed={normalized_count}"
+        )
     observed = text.count(old)
     if observed != expected_count:
         raise SystemExit(
@@ -226,15 +235,36 @@ def patch_file(path: Path, old: str, new: str, *, expected_count: int = 1) -> No
     path.write_text(updated, encoding="utf-8")
 
 
-def normalize_execution_setup(text: str) -> str:
-    """Keep exactly one legacy authorization fixture before module execution.
+def has_current_baseline_doi_contract(text: str) -> bool:
+    return (
+        CURRENT_DOI_CONTRACT_ASSERTION in text
+        and CURRENT_DOI_CONTRACT_SOURCE in text
+        and "current_baseline = json.loads(" in text
+    )
 
-    The old generic replacement was not idempotent because its old anchor was a
-    suffix of the replacement. Each invocation therefore nested another fixture
-    into the already-patched test source. Normalize structurally instead: remove
-    every exact fixture copy, require one module-execution anchor, then insert one
-    fixture immediately before it.
-    """
+
+def normalize_annex_v2_current_doi_assertion() -> None:
+    # Preserve the historical 21755655 -> 21755827 repair while accepting
+    # the stronger forward-compatible contract used by later sealed baselines.
+    text = ANNEX_V2_TEST.read_text(encoding="utf-8")
+    if OLD_CURRENT_DOI_ASSERTION in text:
+        updated = replace_required(
+            text,
+            OLD_CURRENT_DOI_ASSERTION,
+            NEW_CURRENT_DOI_ASSERTION,
+            expected_count=1,
+        )
+        ANNEX_V2_TEST.write_text(updated, encoding="utf-8")
+        return
+    if NEW_CURRENT_DOI_ASSERTION in text:
+        return
+    if has_current_baseline_doi_contract(text):
+        return
+    raise SystemExit("recovery-index repair current DOI contract is unrecognized")
+
+
+def normalize_execution_setup(text: str) -> str:
+    # Keep exactly one legacy authorization fixture before module execution.
     without_duplicates = text.replace(EXECUTION_AUTH_SETUP, "")
     observed = without_duplicates.count(EXECUTION_MODULE_SETUP)
     if observed != 1:
@@ -280,7 +310,7 @@ def main() -> int:
     REFRESH.write_text(source, encoding="utf-8")
 
     patch_file(FINAL_STATE_TEST, OLD_FINAL_STATE_ASSERTION, NEW_FINAL_STATE_ASSERTION)
-    patch_file(ANNEX_V2_TEST, OLD_CURRENT_DOI_ASSERTION, NEW_CURRENT_DOI_ASSERTION)
+    normalize_annex_v2_current_doi_assertion()
     patch_file(
         CAPSULE_TEST,
         OLD_RECOVERY_STATUS_ASSERTION,
