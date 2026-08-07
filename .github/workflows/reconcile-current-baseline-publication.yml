@@ -190,8 +190,8 @@ jobs:
           python3 scripts/validate_current_baseline_publication_state.py
           python3 -m pytest -q \
             tests/test_current_baseline_publication_contract.py \
-            tests/test_current_baseline_reconciliation_contract.py \
-            tests/test_arweave_wallet_ledger.py
+            tests/test_current_baseline_reconciliation_contract.py
+          python3 scripts/test_arweave_wallet_ledger_update.py
           git diff --check
 
       - name: Commit reconciled DOI and Arweave state
