@@ -4,6 +4,24 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+current_status="$(python3 - <<'PY'
+import json
+from pathlib import Path
+path = Path('preservation/current-baseline-publication-authorization-v1.json')
+print(json.loads(path.read_text())['status'] if path.is_file() else 'absent')
+PY
+)"
+
+# A newer, explicitly authorized repository-baseline lifecycle supersedes the
+# older refresh transaction while it is prepared or after it is consumed. It
+# has its own strict cross-file validator; do not misclassify that bounded
+# transition as corruption merely because the legacy sequence is terminal.
+if [[ "$current_status" == "prepared" || "$current_status" == "consumed" ]]; then
+  python3 scripts/validate_current_baseline_publication_state.py
+  echo "Superseding current-baseline publication is $current_status and valid; legacy refresh remains consumed."
+  exit 0
+fi
+
 status="$(python3 - <<'PY'
 import json
 from pathlib import Path
