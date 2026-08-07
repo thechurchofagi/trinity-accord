@@ -1,16 +1,466 @@
 {
-  "schema": "trinityaccord.ethereum-annex-offline-verification.v1",
-  "generated_from": "ANNEX-MANIFEST.json",
-  "base_main_commit": "d9d79233f1a68c49e62608190743020b0e23d141",
-  "status": {
-    "L1_BYTE_INTEGRITY": "EXPECTED_PASS_ON_REPOSITORY_CHECKOUT",
-    "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-    "L3_CONSENSUS_FINALITY": "UNVERIFIED"
-  },
-  "reason": "The annex was introduced from previously audited byte bindings. The checked-in verifier recomputes those bytes in a full repository checkout. Execution MPT/receipt and beacon finality proof objects are not yet carried by v1 and therefore cannot be marked PASS.",
-  "non_claims": [
-    "No claim that RPC JSON alone proves execution inclusion.",
-    "No claim that an explorer timestamp is an absolute Earth-time notarization.",
-    "No claim that Ethereum changes or supplements the three Bitcoin Originals as Canon."
-  ]
+  "schema": "trinityaccord.ethereum-annex-offline-verification.v2",
+  "result": "PASS",
+  "L1_BYTE_INTEGRITY": "PASS",
+  "L2_EXECUTION_INCLUSION": "PASS",
+  "L3_CONSENSUS_FINALITY": "PASS",
+  "anchors": 10,
+  "payload_checks": 11,
+  "proof_byte_checks": [
+    {
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420/L2-execution-witness.json",
+      "size": 255020,
+      "sha256": "542967a65f0effca354b4cbedd997d84649ac177a60aac0b7b2f0a459f45cd35",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420/L3-consensus-witness.json",
+      "size": 58933,
+      "sha256": "4c6d0c296df8f0074778136d8ea40107691228bc9cc5d4c1452acebe2eab0f17",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6/L2-execution-witness.json",
+      "size": 543933,
+      "sha256": "7fa2d03c2f6bb13343e2e1979f2e17778a7153e6f0c171e0fba07e1cfe9284db",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6/L3-consensus-witness.json",
+      "size": 58060,
+      "sha256": "aa628f61d66f17ff69d862494f2f1a8597e2e17f2b1db2e1e28ce32535680d36",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5/L2-execution-witness.json",
+      "size": 559152,
+      "sha256": "87c048f4ddacaadc85f236762b31ca6f04b8ca69c42adfcf9dfb16e9d38ff753",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5/L3-consensus-witness.json",
+      "size": 59825,
+      "sha256": "c88eee2656fb6a4bf064ef12ce7f48c01ece0766a29076eb09f6d6e37e46907a",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612/L2-execution-witness.json",
+      "size": 1150344,
+      "sha256": "b1a0dd8c69fc3ed5f2ba8fbd30db36e0e3f292d46ca9c7e3eed1b1df06fa16de",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612/L3-consensus-witness.json",
+      "size": 59823,
+      "sha256": "380c7655d34a59712cce29d373990bf81585c7510c67703d8ad790b11cd21ede",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665/L2-execution-witness.json",
+      "size": 505994,
+      "sha256": "ff08f0799c156009e72dc402ecd0ca65d799104db2b19664b7e75c62efffa7e9",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665/L3-consensus-witness.json",
+      "size": 59390,
+      "sha256": "79ca56174b6c626d7e64bb8ccbd5827da913e8334633ed02002f19986190e7e2",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f/L2-execution-witness.json",
+      "size": 662928,
+      "sha256": "59bd586f023707ceb64395ef4191525371ad2d73665d56c7e2d48f4e4c67b307",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f/L3-consensus-witness.json",
+      "size": 59382,
+      "sha256": "219e67efe102a35f2766114af9ca9dd5e188a0ce5bd8c4e14249a7b050f03541",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51/L2-execution-witness.json",
+      "size": 1276892,
+      "sha256": "c2ff685ca845f394b7048821bf804d56b6163bd18fa9177c83852ad2cdb27e61",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51/L3-consensus-witness.json",
+      "size": 59828,
+      "sha256": "1f7c710cc9b6224f234dc447f9c93eeabad0fb08fa53dd54aebd59466c81d724",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6/L2-execution-witness.json",
+      "size": 881386,
+      "sha256": "9730dbaa8ad7decaa385f707f25539380612c931d966b241a31ca29a5083c0fa",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6/L3-consensus-witness.json",
+      "size": 58937,
+      "sha256": "2dc458a24e746088602afe811bbadedea975cc22ade50b78557bc072aceaea28",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628/L2-execution-witness.json",
+      "size": 802971,
+      "sha256": "d11d60ef9c8ec817d2250decbf20cfd2cda9082a5ed4e14027b14bf4e1967e4d",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628/L3-consensus-witness.json",
+      "size": 59386,
+      "sha256": "fa8086beef8f9fcbd1e4bb80b369136d7788e22b6f3f4c394c690682d6e2fec9",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "level": "L2",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137/L2-execution-witness.json",
+      "size": 600731,
+      "sha256": "d9762a10b003ff79c89042890d2b23b8cfe844a132617da4d01506ad004276e8",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "level": "L3",
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137/L3-consensus-witness.json",
+      "size": 59385,
+      "sha256": "ebe786ccb0bd3c8d5d1aae15cb78e5afae57b5a692450fab40b2f9c6f10b3774",
+      "status": "PASS"
+    }
+  ],
+  "checks": [
+    {
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "path": "archive/guardian-principles/guardian-principles-original.md",
+      "size": 2446,
+      "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "path": "archive/legacy-pointers/eth-raw/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6.raw",
+      "size": 3231,
+      "sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "path": "bitcoin-inscription-mirrors/raw/97631551.txt",
+      "size": 1183,
+      "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "path": "bitcoin-inscription-mirrors/raw/98369145.txt",
+      "size": 1710,
+      "sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "path": "bitcoin-inscription-mirrors/raw/98387475.txt",
+      "size": 15637,
+      "sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "path": "archive/legacy-pointers/eth-raw/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f.raw",
+      "size": 412,
+      "sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "path": "archive/legacy-pointers/eth-raw/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51.raw",
+      "size": 4994,
+      "sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "path": "archive/legacy-pointers/eth-raw/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6.raw",
+      "size": 2446,
+      "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "path": "archive/guardian-principles/guardian-principles-v1.1.md",
+      "size": 4694,
+      "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "path": "archive/eth-witness/eth-witness.json",
+      "size": 606,
+      "sha256": "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f",
+      "status": "PASS"
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "path": "archive/btc-signature/btc-signature.json",
+      "size": 701,
+      "sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b",
+      "status": "PASS"
+    }
+  ],
+  "l2_checks": [
+    {
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "status": "PASS",
+      "block_hash": "0xaaa6cc06a7514eadde4237c464c9e834745393c65961676c82af3c7d43cc05d4",
+      "transaction_index": 96,
+      "transactions": 107,
+      "transactions_root": "0x13fab10a112dcccd21927f4d633a92293c21dd546eafa8c7186bad27f5d29a44",
+      "receipts_root": "0x3a7dc0581381722ac44eb6a2ab1791c77ac0b1f1d719eda241bed67539fd42ec"
+    },
+    {
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "status": "PASS",
+      "block_hash": "0x684d5691bb5905448c7c5cbdc324c55b6129d0a6ad938e07cc25cf268a3ac28f",
+      "transaction_index": 69,
+      "transactions": 224,
+      "transactions_root": "0x228a4339b2ccf25c76e057ca348317ddac5f2592f11a94ccb5860fc4dcfe8873",
+      "receipts_root": "0xd74535aebfa99177efdcc9c38b8bcccda29e019112098784482739bc6a6c6fb8"
+    },
+    {
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "status": "PASS",
+      "block_hash": "0x3c283afa41ab697825816a1d3fd6b45e478de17342386998aee6461fa35a5d63",
+      "transaction_index": 172,
+      "transactions": 200,
+      "transactions_root": "0xa51a7a5de05a9315f3d59cfef659bf032291d7ca25b5ed89692d3607f821ee9b",
+      "receipts_root": "0xa2a7b5f7f964b532ed18233334d7348d3a64aee829f359f27aafa0755d9f4a3d"
+    },
+    {
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "status": "PASS",
+      "block_hash": "0x7f904edd8090c7e8ddf1e76622857d2fafd0f7a5d8e0512d57b09855c839774b",
+      "transaction_index": 449,
+      "transactions": 515,
+      "transactions_root": "0x9a6f64a7e731d611ef68a328de84a9e202d2ba7746566e0975dbfc86c83a650f",
+      "receipts_root": "0xc090a07bff2dbe69c8929505f4a1acd211557a921be2f22c188b8bfd1fd936ac"
+    },
+    {
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "status": "PASS",
+      "block_hash": "0x6a80fc6c233ed21cc9d607a50a9e363984e4e2d974d67ce285ac8e388bf84699",
+      "transaction_index": 172,
+      "transactions": 190,
+      "transactions_root": "0x1971a0894024e26abe83b55ec377a228c4a93b61cf3cbadfd735037fd7534193",
+      "receipts_root": "0x4f7244d37677adacff0a58d4a52b7a34248434a106dd5e1435a8d9a226570583"
+    },
+    {
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "status": "PASS",
+      "block_hash": "0xc82a4a3c0cfeabc5598b5936bdaa9394bfe3499ed4892f5099de9a8b3842fc48",
+      "transaction_index": 230,
+      "transactions": 244,
+      "transactions_root": "0x965e17694149cae289e4517dd2ba264e1251f955e9ef9fbb280433fef004e878",
+      "receipts_root": "0xc1954c6bd242e555fd232980ffe9be66023958037e03a3d93e6aff3cfe2fe06e"
+    },
+    {
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "status": "PASS",
+      "block_hash": "0x65e601022a380441aae83521188ccfdf38918b94f09d8e0d304228f4f720d433",
+      "transaction_index": 160,
+      "transactions": 174,
+      "transactions_root": "0x6356d9e5ae5c77f0cb181d3a05919a947fd6f129de5f446ea0e98900a781fb93",
+      "receipts_root": "0x063de929dadf7ba507ed3661b51102b7ad8f7612ae3d7904c14774c0d1f2bb4a"
+    },
+    {
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "status": "PASS",
+      "block_hash": "0x31768d00b9a9af205268c0da880959eca6aa687de7fdf19d9aef48dfddaeba3e",
+      "transaction_index": 175,
+      "transactions": 252,
+      "transactions_root": "0xf8d1590fdb8daa444afdff75c53e9c532dcce30bb0714a66ce3d263bb311d129",
+      "receipts_root": "0x8e36445ea9ec8abae143597efde6dfb18c113e2475f23e0c75d7ce6c51d68516"
+    },
+    {
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "status": "PASS",
+      "block_hash": "0x26d20e07ae86b09d3022bd845a8aa69ddad1093a48e926c32af5041aa65f1bce",
+      "transaction_index": 245,
+      "transactions": 277,
+      "transactions_root": "0xa55a3d4ecdabd8eb8ba03a1d1c69bd1fe3ace479f16f09b2377d22a66d16e9c5",
+      "receipts_root": "0xbbebb5e57007964437d59120dda5c3f6aacf0ca9cbedbbb74acb18bfbee44efd"
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "status": "PASS",
+      "block_hash": "0x84201f873daa7de0bd44fd7c51ab227160270fa0ff81a7d712a44dbb3f3f2e82",
+      "transaction_index": 144,
+      "transactions": 241,
+      "transactions_root": "0x71ef3349aa721935f995bc217d10b7d565bef0f231189a2aba30867749fa60e1",
+      "receipts_root": "0x47b7d8ed4b6d5b7b5f90dcbacd4892a6846b88f732d1c3b2d6aad8e00a3433a6"
+    }
+  ],
+  "l3_checks": [
+    {
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "status": "PASS",
+      "target_beacon_root": "0x97c4fe9a54ab649b725e1a3468070d8baae67f0dc180bef3baa72de3fc34a512",
+      "trusted_finalized_beacon_root": "0x24575b47c8a13307d9ce1f5fe557cfcfe363484a47b566bcb2a7df5b63eae25e",
+      "trusted_finalized_slot": 12525702,
+      "trusted_finalized_epoch": 391428,
+      "ancestor_headers": 126,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "status": "PASS",
+      "target_beacon_root": "0x52fceb7277b42faf4eae4bfc8a3080d484a48c04e180eb616ccab5cb756fed98",
+      "trusted_finalized_beacon_root": "0xd01d49d788f9f0fe2c8eb519d5236bb9cb2d0cb2666446f9b2f2e0262e04117b",
+      "trusted_finalized_slot": 12391597,
+      "trusted_finalized_epoch": 387237,
+      "ancestor_headers": 124,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "status": "PASS",
+      "target_beacon_root": "0xbf165a439ac770c698f7265bb80874950aa68ea7aa53b1a7dc4159ade78d5a62",
+      "trusted_finalized_beacon_root": "0x1e9f5826be8fbc3544b6a7b23d31f2756bb6a77c62c77de067ab38fffdb8598e",
+      "trusted_finalized_slot": 12376321,
+      "trusted_finalized_epoch": 386760,
+      "ancestor_headers": 128,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "status": "PASS",
+      "target_beacon_root": "0x60029cda5c48b4578099fb9700da06289f8860809e17df504cd4b3523ef40348",
+      "trusted_finalized_beacon_root": "0x3ae34d3089e3e5ebf07667959c6bc530c8351318254cdee331455a10b331f7c9",
+      "trusted_finalized_slot": 12376339,
+      "trusted_finalized_epoch": 386760,
+      "ancestor_headers": 128,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "status": "PASS",
+      "target_beacon_root": "0xa5f5c101d6217d6b4299f2ee3a1894f5259edc1d11e0aa8c1ae59965d17921e3",
+      "trusted_finalized_beacon_root": "0x3d63c39df2e15218c5a06d550804a26c3124008abc297e640ec336fdcec3b680",
+      "trusted_finalized_slot": 12376521,
+      "trusted_finalized_epoch": 386766,
+      "ancestor_headers": 127,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "status": "PASS",
+      "target_beacon_root": "0xfa79884eaa36dace461ce429a6775f72da100c757f7aa32a3c294a39be478940",
+      "trusted_finalized_beacon_root": "0x66e91052bddc1f75599acd9a4cb38fb27fac93c62230ae35f238e1de0c8a44ca",
+      "trusted_finalized_slot": 12521243,
+      "trusted_finalized_epoch": 391288,
+      "ancestor_headers": 127,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "status": "PASS",
+      "target_beacon_root": "0xa0d4c0a409ee57f682644621a12422b44d0daa960528a698087e2c36aad9dbeb",
+      "trusted_finalized_beacon_root": "0xa1219507f1e563a7fa07df40a70dcb1ac7dc96a9032c5955614ea8716233cfe7",
+      "trusted_finalized_slot": 12527306,
+      "trusted_finalized_epoch": 391478,
+      "ancestor_headers": 128,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "status": "PASS",
+      "target_beacon_root": "0x03f2c20fbf29af97d6bb80920b4cbc5e981c95505fee83c63cbf4272274e3c52",
+      "trusted_finalized_beacon_root": "0xf4ac2d68f082cde04fd0a1aec99ebb2149fc207288d7516cc98dbd570b76cbf0",
+      "trusted_finalized_slot": 12527127,
+      "trusted_finalized_epoch": 391472,
+      "ancestor_headers": 126,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "status": "PASS",
+      "target_beacon_root": "0x8352dc791806a71554186708cb3addb62abbb75e984774a0e914a87b172cb5e2",
+      "trusted_finalized_beacon_root": "0xceffcf5d9b6c36d6fea03744a953eb813512a51912df1279c9ae6e545828d2e0",
+      "trusted_finalized_slot": 12654768,
+      "trusted_finalized_epoch": 395461,
+      "ancestor_headers": 127,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    },
+    {
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "status": "PASS",
+      "target_beacon_root": "0x3ab4e27b6afdd88f4755c8aaf3d2469c3c4cc2c4ddd15387094cc9445d2fc5ff",
+      "trusted_finalized_beacon_root": "0x0ac4cd130a2916eaa1ca219351f897b3a8a2aa13e9fd257a9a4a0f676e8d3813",
+      "trusted_finalized_slot": 12585367,
+      "trusted_finalized_epoch": 393292,
+      "ancestor_headers": 127,
+      "matching_provider_votes": 2,
+      "finalized_provider_votes": 2,
+      "trust_boundary": "PASS is conditional on the explicitly declared weak-subjectivity trusted finalized Beacon root; provider agreement/finalized fields are provenance only."
+    }
+  ],
+  "failures": [],
+  "claim_boundary": "L2 PASS is offline execution inclusion bound to the execution block hash. L3 PASS links that execution block hash through an SSZ Beacon-body proof and Beacon parent-root ancestry to an explicit weak-subjectivity trusted finalized Beacon root. Provider agreement/finalized fields are provenance only; the trusted-root finality assumption is explicit, and the result is not a trust-free real-world clock attestation."
 }

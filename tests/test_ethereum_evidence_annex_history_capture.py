@@ -16,7 +16,7 @@ def load(path: Path) -> dict[str, object]:
     return value
 
 
-def test_all_audited_ethereum_anchors_carry_frozen_history_context_without_overclaim():
+def test_all_audited_ethereum_anchors_carry_frozen_history_and_offline_proofs_without_overclaim():
     manifest = load(MANIFEST)
     anchors = manifest["anchors"]
     assert isinstance(anchors, list)
@@ -28,8 +28,8 @@ def test_all_audited_ethereum_anchors_carry_frozen_history_context_without_overc
     for anchor in anchors:
         assert anchor["rpc_capture_status"] == "REFERENCE_CAPTURED"
         proof_status = anchor["proof_status"]
-        assert proof_status["L2_EXECUTION_INCLUSION"] == "UNVERIFIED"
-        assert proof_status["L3_CONSENSUS_FINALITY"] == "UNVERIFIED"
+        assert proof_status["L2_EXECUTION_INCLUSION"] == "PASS"
+        assert proof_status["L3_CONSENSUS_FINALITY"] == "PASS"
 
         tx_hash = anchor["tx_hash"]
         evidence_dir = ANNEX / "proof-material" / tx_hash
@@ -37,11 +37,15 @@ def test_all_audited_ethereum_anchors_carry_frozen_history_context_without_overc
         receipt = load(evidence_dir / "receipt.json")
         block = load(evidence_dir / "block.json")
         capture = load(evidence_dir / "capture-manifest.json")
+        l2 = load(evidence_dir / "L2-execution-witness.json")
+        l3 = load(evidence_dir / "L3-consensus-witness.json")
 
         assert tx["hash"].lower() == tx_hash.lower()
         assert receipt["transactionHash"].lower() == tx_hash.lower()
         assert capture["tx_hash"].lower() == tx_hash.lower()
         assert capture["chain_id"] == "0x1"
+        # Historical RPC capture remains reference-only. It is deliberately not
+        # retroactively relabelled as the source of L2/L3 PASS.
         assert capture["verification_status"] == {
             "consensus_finality": "UNVERIFIED",
             "execution_inclusion": "UNVERIFIED",
@@ -70,6 +74,31 @@ def test_all_audited_ethereum_anchors_carry_frozen_history_context_without_overc
         for name in ("transaction.json", "receipt.json", "block.json"):
             payload = (evidence_dir / name).read_bytes()
             assert hashlib.sha256(payload).hexdigest() == record_digests[name]
+
+        assert l2["schema"] == "trinityaccord.ethereum-execution-inclusion-witness.v1"
+        assert l2["target_tx_hash"].lower() == tx_hash.lower()
+        assert l2["block"]["hash"].lower() == block_hash.lower()
+        assert l3["schema"] == "trinityaccord.ethereum-consensus-finality-witness.v1"
+        assert l3["target_tx_hash"].lower() == tx_hash.lower()
+        assert l3["execution_block_hash"].lower() == block_hash.lower()
+        checkpoint = l3["trusted_finalized_beacon_root"]
+        assert checkpoint["schema"] == "trinityaccord.ethereum-trusted-finalized-beacon-root.v1"
+        assert checkpoint["matching_provider_votes"] >= 2
+        assert checkpoint["finalized_provider_votes"] >= 1
+        assert "weak-subjectivity" in checkpoint["trust_model"]
+        assert "provenance only" in checkpoint["trust_model"]
+
+        proof_material = anchor["proof_material"]
+        for key, filename in (
+            ("l2_execution_witness", "L2-execution-witness.json"),
+            ("l3_consensus_witness", "L3-consensus-witness.json"),
+        ):
+            binding = proof_material[key]
+            path = evidence_dir / filename
+            data = path.read_bytes()
+            assert binding["path"] == path.relative_to(ROOT).as_posix()
+            assert binding["size"] == len(data)
+            assert binding["sha256"] == hashlib.sha256(data).hexdigest()
 
 
 def test_original_ethereum_time_is_not_relabelled_as_preservation_time():

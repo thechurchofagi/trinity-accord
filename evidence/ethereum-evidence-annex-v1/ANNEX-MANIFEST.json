@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.ethereum-proof-carrying-evidence-annex.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "created_from_main_commit": "d9d79233f1a68c49e62608190743020b0e23d141",
   "network": {
     "name": "Ethereum Mainnet",
@@ -15,10 +15,10 @@
     "block_timestamp_claim": "A preserved and cryptographically verified inclusion/finality proof can show that a commitment was included in an Ethereum mainnet block assigned to a consensus slot/time. It is not an absolute real-world clock attestation.",
     "levels": {
       "L1_BYTE_INTEGRITY": "PASS only when every declared preserved payload has the recorded size and SHA-256.",
-      "L2_EXECUTION_INCLUSION": "PASS only when transaction/receipt inclusion can be verified against preserved execution block roots. RPC/explorer lookup alone is REFERENCE_CHECKED, not PASS.",
-      "L3_CONSENSUS_FINALITY": "PASS only when the execution block is linked to preserved Ethereum PoS finality material and the documented trust checkpoint. A claimed finality status without proof material is not PASS."
+      "L2_EXECUTION_INCLUSION": "PASS only when preserved raw signed transactions and encoded receipts independently reconstruct the execution block transactionsRoot/receiptsRoot and the execution header recomputes to the declared block hash.",
+      "L3_CONSENSUS_FINALITY": "PASS only when the execution block hash is SSZ-proven into the target Beacon block body and that target Beacon root is linked by verified parent-root ancestry to an explicitly declared trusted finalized descendant Beacon root under the documented weak-subjectivity assumption."
     },
-    "trusted_checkpoint_rule": "Ethereum light-client verification requires an explicitly documented trusted finalized checkpoint/root. The annex must not hide or manufacture that trust assumption."
+    "trusted_checkpoint_rule": "L3 PASS is checkpoint-relative: the annex explicitly names the trusted finalized Beacon root for each anchor. Cross-provider canonical/finalized API observations are preserved as provenance only and never replace the weak-subjectivity trust assumption."
   },
   "source_registries": [
     "archive/legacy-pointers/index.json",
@@ -30,12 +30,20 @@
     "transaction_json": "required_for_L2",
     "receipt_json": "required_for_L2",
     "execution_block_header": "required_for_L2",
-    "transaction_or_receipt_inclusion_proof": "required_for_L2",
-    "beacon_finality_material": "required_for_L3",
-    "trusted_finalized_checkpoint": "required_for_L3",
-    "current_v1_note": "This first annex inventories and verifies preserved byte bindings and known chain references. Missing execution/consensus proof objects are explicitly UNVERIFIED, never inferred from historical RPC checks.",
+    "transaction_or_receipt_inclusion_proof": "full deterministic trie reconstruction witness accepted: all raw signed transactions and encoded receipts reconstruct the committed roots offline",
+    "beacon_finality_material": "SSZ execution-block-hash branch plus Beacon header parent-root ancestry to an explicit trusted finalized descendant root",
+    "trusted_finalized_checkpoint": "explicit per-anchor trusted finalized Beacon root under weak subjectivity",
+    "current_v1_note": "All 10 audited non-NFT anchors now preserve byte-bound L2 execution reconstruction witnesses and L3 checkpoint-relative Beacon consensus witnesses. Historical RPC capture files remain reference-only and are not the basis of L2/L3 PASS.",
     "rpc_history_capture": "PRESERVED_FOR_ALL_10_ANCHORS_REFERENCE_ONLY",
-    "rpc_history_capture_boundary": "Preserving transaction/receipt/block JSON freezes the observed Ethereum block timestamp and commitment context, but does not upgrade L2/L3 without independent inclusion/finality proof validation."
+    "rpc_history_capture_boundary": "Preserving transaction/receipt/block JSON freezes the observed Ethereum block timestamp and commitment context, but does not upgrade L2/L3 without independent inclusion/finality proof validation.",
+    "execution_reconstruction_witness": "PRESERVED_AND_SHA256_BOUND_FOR_ALL_10_ANCHORS",
+    "beacon_consensus_witness": "PRESERVED_AND_SHA256_BOUND_FOR_ALL_10_ANCHORS",
+    "offline_verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+    "capture_summary": {
+      "path": "evidence/ethereum-evidence-annex-v1/proof-material/L2-L3-CAPTURE-SUMMARY.json",
+      "size": 3703,
+      "sha256": "81a4b4f66ed8fd185d0f86583f6ff883878d77ab89a276e0e63fb317b877d710"
+    }
   },
   "anchors": [
     {
@@ -69,10 +77,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420/L2-execution-witness.json",
+          "size": 255020,
+          "sha256": "542967a65f0effca354b4cbedd997d84649ac177a60aac0b7b2f0a459f45cd35"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420/L3-consensus-witness.json",
+          "size": 58933,
+          "sha256": "4c6d0c296df8f0074778136d8ea40107691228bc9cc5d4c1452acebe2eab0f17"
+        }
+      }
     },
     {
       "id": "eth-btc-eth-mapping-attestation",
@@ -105,10 +125,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6/L2-execution-witness.json",
+          "size": 543933,
+          "sha256": "7fa2d03c2f6bb13343e2e1979f2e17778a7153e6f0c171e0fba07e1cfe9284db"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6/L3-consensus-witness.json",
+          "size": 58060,
+          "sha256": "aa628f61d66f17ff69d862494f2f1a8597e2e17f2b1db2e1e28ce32535680d36"
+        }
+      }
     },
     {
       "id": "eth-protocol-mirror",
@@ -141,10 +173,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5/L2-execution-witness.json",
+          "size": 559152,
+          "sha256": "87c048f4ddacaadc85f236762b31ca6f04b8ca69c42adfcf9dfb16e9d38ff753"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5/L3-consensus-witness.json",
+          "size": 59825,
+          "sha256": "c88eee2656fb6a4bf064ef12ce7f48c01ece0766a29076eb09f6d6e37e46907a"
+        }
+      }
     },
     {
       "id": "eth-covenant-mirror",
@@ -177,10 +221,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612/L2-execution-witness.json",
+          "size": 1150344,
+          "sha256": "b1a0dd8c69fc3ed5f2ba8fbd30db36e0e3f292d46ca9c7e3eed1b1df06fa16de"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612/L3-consensus-witness.json",
+          "size": 59823,
+          "sha256": "380c7655d34a59712cce29d373990bf81585c7510c67703d8ad790b11cd21ede"
+        }
+      }
     },
     {
       "id": "eth-accord-mirror",
@@ -213,10 +269,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665/L2-execution-witness.json",
+          "size": 505994,
+          "sha256": "ff08f0799c156009e72dc402ecd0ca65d799104db2b19664b7e75c62efffa7e9"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665/L3-consensus-witness.json",
+          "size": 59390,
+          "sha256": "79ca56174b6c626d7e64bb8ccbd5827da913e8334633ed02002f19986190e7e2"
+        }
+      }
     },
     {
       "id": "eth-bip322-notice",
@@ -249,10 +317,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f/L2-execution-witness.json",
+          "size": 662928,
+          "sha256": "59bd586f023707ceb64395ef4191525371ad2d73665d56c7e2d48f4e4c67b307"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f/L3-consensus-witness.json",
+          "size": 59382,
+          "sha256": "219e67efe102a35f2766114af9ca9dd5e188a0ce5bd8c4e14249a7b050f03541"
+        }
+      }
     },
     {
       "id": "eth-final-correction",
@@ -285,10 +365,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51/L2-execution-witness.json",
+          "size": 1276892,
+          "sha256": "c2ff685ca845f394b7048821bf804d56b6163bd18fa9177c83852ad2cdb27e61"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51/L3-consensus-witness.json",
+          "size": 59828,
+          "sha256": "1f7c710cc9b6224f234dc447f9c93eeabad0fb08fa53dd54aebd59466c81d724"
+        }
+      }
     },
     {
       "id": "eth-superseded-correction",
@@ -321,10 +413,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6/L2-execution-witness.json",
+          "size": 881386,
+          "sha256": "9730dbaa8ad7decaa385f707f25539380612c931d966b241a31ca29a5083c0fa"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6/L3-consensus-witness.json",
+          "size": 58937,
+          "sha256": "2dc458a24e746088602afe811bbadedea975cc22ade50b78557bc072aceaea28"
+        }
+      }
     },
     {
       "id": "eth-guardian-principles-v1-1",
@@ -357,10 +461,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628/L2-execution-witness.json",
+          "size": 802971,
+          "sha256": "d11d60ef9c8ec817d2250decbf20cfd2cda9082a5ed4e14027b14bf4e1967e4d"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628/L3-consensus-witness.json",
+          "size": 59386,
+          "sha256": "fa8086beef8f9fcbd1e4bb80b369136d7788e22b6f3f4c394c690682d6e2fec9"
+        }
+      }
     },
     {
       "id": "eth-btc-bip340-witness",
@@ -399,10 +515,22 @@
       },
       "proof_status": {
         "L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY",
-        "L2_EXECUTION_INCLUSION": "UNVERIFIED",
-        "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+        "L2_EXECUTION_INCLUSION": "PASS",
+        "L3_CONSENSUS_FINALITY": "PASS"
       },
-      "rpc_capture_status": "REFERENCE_CAPTURED"
+      "rpc_capture_status": "REFERENCE_CAPTURED",
+      "proof_material": {
+        "l2_execution_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137/L2-execution-witness.json",
+          "size": 600731,
+          "sha256": "d9762a10b003ff79c89042890d2b23b8cfe844a132617da4d01506ad004276e8"
+        },
+        "l3_consensus_witness": {
+          "path": "evidence/ethereum-evidence-annex-v1/proof-material/0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137/L3-consensus-witness.json",
+          "size": 59385,
+          "sha256": "ebe786ccb0bd3c8d5d1aae15cb78e5afae57b5a692450fab40b2f9c6f10b3774"
+        }
+      }
     }
   ]
 }
