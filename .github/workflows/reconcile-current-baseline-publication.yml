@@ -47,6 +47,9 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
 
+      - name: Install locked Python dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
       - name: Install locked Node dependencies
         run: npm ci
 

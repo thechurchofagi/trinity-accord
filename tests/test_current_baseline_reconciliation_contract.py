@@ -41,6 +41,7 @@ def test_reconciliation_workflow_reverifies_without_external_write_paths() -> No
     assert "schedule:" not in text
     assert "actions: read" in text and "contents: write" in text
     assert f"actions/download-artifact@{DOWNLOAD_ARTIFACT_SHA}" in text
+    assert "python3 -m pip install -r requirements-ci.txt" in text
     assert "validate_current_baseline_reconciliation_artifact.py" in text
     assert "repository_preservation_refresh.py verify-public" in text
     assert "verify_arweave_existing_payload.mjs" in text
