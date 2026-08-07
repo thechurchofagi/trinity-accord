@@ -10,6 +10,7 @@ WORKFLOW = ROOT / ".github/workflows/reconcile-current-baseline-publication.yml"
 ARTIFACT_VALIDATOR = ROOT / "scripts/validate_current_baseline_reconciliation_artifact.py"
 READBACK = ROOT / "scripts/verify_arweave_existing_payload.mjs"
 FINALIZER = ROOT / "scripts/finalize_current_baseline_reconciliation.py"
+WALLET_LEDGER_TEST = ROOT / "scripts/test_arweave_wallet_ledger_update.py"
 DOWNLOAD_ARTIFACT_SHA = "3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c"
 
 
@@ -47,6 +48,9 @@ def test_reconciliation_workflow_reverifies_without_external_write_paths() -> No
     assert "verify_arweave_existing_payload.mjs" in text
     assert "finalize_current_baseline_reconciliation.py" in text
     assert "validate_current_baseline_publication_state.py" in text
+    assert "python3 scripts/test_arweave_wallet_ledger_update.py" in text
+    assert WALLET_LEDGER_TEST.is_file()
+    assert "tests/test_arweave_wallet_ledger.py" not in text
     assert "publish_preservation_capsule_to_zenodo" not in text
     assert "arweave_upload_homepage_snapshot.mjs" not in text
     assert "ZENODO_ACCESS_TOKEN" not in text
