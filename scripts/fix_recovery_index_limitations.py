@@ -148,10 +148,7 @@ NEW_CURRENT_DOI_ASSERTION = (
 CURRENT_DOI_CONTRACT_ASSERTION = (
     '    assert current["latest_doi"] == current_baseline["published_doi"]\n'
 )
-CURRENT_DOI_CONTRACT_SOURCE = (
-    'CURRENT_BASELINE_AUTHORIZATION = ROOT / "agent-safety-toolkit/evidence/'
-    'repository-preservation/current-baseline-publication-authorization-v1.json"'
-)
+CURRENT_DOI_CONTRACT_SOURCE = "current-baseline-publication-authorization-v1.json"
 
 OLD_RECOVERY_STATUS_ASSERTION = (
     '    assert report["repository_recovery_status"] == '
@@ -232,6 +229,14 @@ def patch_file(path: Path, old: str, new: str, *, expected_count: int = 1) -> No
     path.write_text(updated, encoding="utf-8")
 
 
+def has_current_baseline_doi_contract(text: str) -> bool:
+    return (
+        CURRENT_DOI_CONTRACT_ASSERTION in text
+        and CURRENT_DOI_CONTRACT_SOURCE in text
+        and "current_baseline = json.loads(" in text
+    )
+
+
 def normalize_annex_v2_current_doi_assertion() -> None:
     # Preserve the historical 21755655 -> 21755827 repair while accepting
     # the stronger forward-compatible contract used by later sealed baselines.
@@ -247,10 +252,7 @@ def normalize_annex_v2_current_doi_assertion() -> None:
         return
     if NEW_CURRENT_DOI_ASSERTION in text:
         return
-    if (
-        CURRENT_DOI_CONTRACT_ASSERTION in text
-        and CURRENT_DOI_CONTRACT_SOURCE in text
-    ):
+    if has_current_baseline_doi_contract(text):
         return
     raise SystemExit("recovery-index repair current DOI contract is unrecognized")
 
