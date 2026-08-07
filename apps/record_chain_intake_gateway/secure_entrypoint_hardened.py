@@ -167,4 +167,7 @@ async def _deeply_verified_read_text(path: str, *, label: str) -> str | None:
 # ProtectedProductionApp resolves this module global at request time, so the
 # already-created base application immediately receives the stronger check.
 base._read_text = _deeply_verified_read_text
+base.runtime.mark_protection_layer_active(
+    base.runtime.HARDENED_PROTECTION_ENTRYPOINT
+)
 app = base.app

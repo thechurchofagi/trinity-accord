@@ -166,7 +166,7 @@ jobs:
               changed="$(git diff --name-only "$BEFORE_SHA" "$SOURCE_SHA")"
               printf '%s\n' "$changed"
               if grep -Eq \
-                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py|scripts/smoke_live_record_action_preflight\.py)$' \
+                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected|hardened)_deploy\.py|scripts/smoke_live_record_action_preflight\.py)$' \
                 <<<"$changed"; then
                 required=true
               fi
@@ -188,7 +188,7 @@ jobs:
           SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
         run: |
           set -euo pipefail
-          python3 scripts/render_protected_deploy.py \
+          python3 scripts/render_hardened_deploy.py \
             --service trinity-record-chain-gateway \
             --reconcile-config \
             --deploy \

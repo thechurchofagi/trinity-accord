@@ -25,9 +25,16 @@ def test_render_configs_attest_exact_hardened_entrypoint() -> None:
         assert f"value: {EXPECTED_ENTRYPOINT}" in text
 
 
-def test_runtime_reports_configured_hardened_entrypoint(monkeypatch) -> None:
-    monkeypatch.setenv("TRINITY_GATEWAY_PROTECTION_ENTRYPOINT", EXPECTED_ENTRYPOINT)
-    runtime.mark_protection_layer_active()
+def test_runtime_reports_loaded_hardened_entrypoint(monkeypatch) -> None:
+    monkeypatch.setattr(runtime, "_protection_layer_active", False)
+    monkeypatch.setattr(runtime, "_protection_entrypoint", None)
+    monkeypatch.setenv(
+        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",
+        runtime.BASE_PROTECTION_ENTRYPOINT,
+    )
+    runtime.mark_protection_layer_active(
+        runtime.HARDENED_PROTECTION_ENTRYPOINT
+    )
     assert runtime.get_runtime_info()["protection_entrypoint"] == EXPECTED_ENTRYPOINT
 
 
@@ -36,6 +43,15 @@ def test_official_workflow_uses_synchronized_hardened_deployer() -> None:
         ROOT / ".github" / "workflows" / "render-manual-deploy.yml"
     ).read_text(encoding="utf-8")
     assert 'python scripts/render_hardened_deploy.py "${args[@]}"' in workflow
+
+
+def test_pages_workflow_uses_synchronized_hardened_deployer() -> None:
+    workflow = (
+        ROOT / ".github" / "workflows" / "deploy-pages.yml"
+    ).read_text(encoding="utf-8")
+    assert "python3 scripts/render_hardened_deploy.py" in workflow
+    assert "python3 scripts/render_protected_deploy.py" not in workflow
+    assert "render_(manual|protected|hardened)_deploy\\.py" in workflow
 
 
 def test_hardened_deployer_patches_shared_exact_commit_contract() -> None:

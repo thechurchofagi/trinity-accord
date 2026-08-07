@@ -10,27 +10,34 @@ from typing import Any
 # Bump on each deploy; allow env override for CI/CD
 SERVICE_VERSION = os.environ.get("TRINITY_GATEWAY_RUNTIME_VERSION", "1.1.0")
 SERVICE_NAME = "record-chain-intake-gateway"
+BASE_PROTECTION_ENTRYPOINT = (
+    "apps.record_chain_intake_gateway.secure_entrypoint:app"
+)
+HARDENED_PROTECTION_ENTRYPOINT = (
+    "apps.record_chain_intake_gateway.secure_entrypoint_hardened:app"
+)
+_ALLOWED_PROTECTION_ENTRYPOINTS = frozenset(
+    {BASE_PROTECTION_ENTRYPOINT, HARDENED_PROTECTION_ENTRYPOINT}
+)
 
-# This flag is intentionally process-local. Only the production secure
-# entrypoint marks it true after the resource/cooldown wrapper has actually
-# been imported and installed. A stale Render start command that imports the
-# core app directly therefore cannot claim that the protection layer is live.
+# These values are intentionally process-local. Only a loaded secure entrypoint
+# may mark protection active and identify itself. Environment configuration can
+# select the Uvicorn start command, but cannot forge the public runtime proof.
 _protection_layer_active = False
+_protection_entrypoint: str | None = None
 
 # Set at module load; overwritten by healthcheck if needed
 _deployed_at: str = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def _configured_protection_entrypoint() -> str:
-    """Return the exact deployed protected entrypoint without trusting clients."""
-    return os.environ.get(
-        "TRINITY_GATEWAY_PROTECTION_ENTRYPOINT",
-        "apps.record_chain_intake_gateway.secure_entrypoint:app",
-    ).strip() or "apps.record_chain_intake_gateway.secure_entrypoint:app"
-
-
 def get_runtime_info() -> dict[str, Any]:
-    """Return a dict of runtime metadata suitable for health / readiness responses."""
+    """Return runtime metadata bound to the entrypoint actually loaded."""
+    active_entrypoint = (
+        _protection_entrypoint
+        if _protection_layer_active
+        and _protection_entrypoint in _ALLOWED_PROTECTION_ENTRYPOINTS
+        else None
+    )
     return {
         "service": SERVICE_NAME,
         "version": SERVICE_VERSION,
@@ -42,24 +49,27 @@ def get_runtime_info() -> dict[str, Any]:
         "max_submission_bytes": int(os.environ.get("TRINITY_MAX_SUBMISSION_BYTES", "98304")),
         "record_draft_max_bytes": int(os.environ.get("TRINITY_RECORD_DRAFT_MAX_BYTES", "49152")),
         "max_text_field_chars": int(os.environ.get("TRINITY_MAX_TEXT_FIELD_CHARS", "4000")),
-        "protection_layer_active": _protection_layer_active,
+        "protection_layer_active": active_entrypoint is not None,
         "protection_entrypoint": (
-            _configured_protection_entrypoint()
-            if _protection_layer_active
-            else "core_app_without_protection_wrapper"
+            active_entrypoint or "core_app_without_protection_wrapper"
         ),
         "global_acceptance_cooldown_seconds": (
             {"minimum": 3600, "maximum": 7200, "secret_keyed": True}
-            if _protection_layer_active
+            if active_entrypoint is not None
             else None
         ),
     }
 
 
-def mark_protection_layer_active() -> None:
-    """Attest that the secure ASGI entrypoint installed the live wrapper."""
-    global _protection_layer_active
+def mark_protection_layer_active(
+    entrypoint: str = BASE_PROTECTION_ENTRYPOINT,
+) -> None:
+    """Attest which known secure ASGI entrypoint installed the live wrapper."""
+    if entrypoint not in _ALLOWED_PROTECTION_ENTRYPOINTS:
+        raise ValueError(f"unknown protection entrypoint: {entrypoint}")
+    global _protection_layer_active, _protection_entrypoint
     _protection_layer_active = True
+    _protection_entrypoint = entrypoint
 
 
 def _python_version() -> str:
