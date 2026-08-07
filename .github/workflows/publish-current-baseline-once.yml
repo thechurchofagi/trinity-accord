@@ -39,6 +39,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
@@ -326,6 +331,7 @@ jobs:
             ${{ runner.temp }}/local-restored/recovery-report.json
             ${{ runner.temp }}/public-restored/recovery-report.json
             ${{ runner.temp }}/homepage-arweave-receipt.json
+            ${{ runner.temp }}/toolchain-provenance.json
             ${{ steps.snapshot.outputs.path }}
           retention-days: 365
           if-no-files-found: warn
