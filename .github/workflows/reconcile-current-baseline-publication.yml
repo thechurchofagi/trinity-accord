@@ -1,0 +1,252 @@
+name: Reconcile Current Baseline Publication
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - preservation/current-baseline-publication-reconciliation-v1.json
+      - .github/workflows/reconcile-current-baseline-publication.yml
+      - scripts/verify_arweave_existing_payload.mjs
+      - scripts/finalize_current_baseline_reconciliation.py
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout current main with source history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .node-version
+
+      - name: Install locked Node dependencies
+        run: npm ci
+
+      - name: Inspect read-only reconciliation authorization
+        id: reconciliation
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          p = Path('preservation/current-baseline-publication-reconciliation-v1.json')
+          data = json.loads(p.read_text())
+          expected = {
+              'schema': 'trinityaccord.current-baseline-publication-reconciliation.v1',
+              'sequence': 1,
+              'authorized_by': 'thechurchofagi',
+              'source_git_commit_sha': '3e013bbb44a741546db68013c4034c2121017f33',
+              'zenodo_record_id': 21831412,
+              'version_doi': '10.5281/zenodo.21831412',
+              'concept_doi': '10.5281/zenodo.21739343',
+              'package_identity_sha256': '1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54',
+              'arweave_txid': '-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM',
+              'arweave_payload_sha256': '361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63',
+              'arweave_payload_bytes': 51342,
+              'proof_artifact_id': 8980674728,
+              'proof_artifact_name': 'current-baseline-publication-proof',
+              'external_writes_already_complete': True,
+              'allow_zenodo_write': False,
+              'allow_arweave_post': False,
+              'non_amending_boundary': True,
+              'live_main_equivalence_claimed': False,
+          }
+          for key, value in expected.items():
+              if data.get(key) != value:
+                  raise SystemExit(f'reconciliation mismatch: {key}')
+          if data.get('status') not in {'pending', 'consumed'}:
+              raise SystemExit('invalid reconciliation status')
+          print(f"status={data['status']}")
+          print(f"run_id={data['failed_workflow_run_id']}")
+          print(f"artifact_name={data['proof_artifact_name']}")
+          print(f"source={data['source_git_commit_sha']}")
+          print(f"record_id={data['zenodo_record_id']}")
+          print(f"doi={data['version_doi']}")
+          print(f"txid={data['arweave_txid']}")
+          print(f"payload_sha256={data['arweave_payload_sha256']}")
+          PY
+
+      - name: Stop after consumed reconciliation
+        if: steps.reconciliation.outputs.status == 'consumed'
+        run: echo "Current-baseline reconciliation already consumed; no action is required."
+
+      - name: Download the failed-run proof artifact
+        if: steps.reconciliation.outputs.status == 'pending'
+        uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ${{ steps.reconciliation.outputs.artifact_name }}
+          path: ${{ runner.temp }}/prior-proof
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ steps.reconciliation.outputs.run_id }}
+
+      - name: Validate the preserved external-write evidence
+        if: steps.reconciliation.outputs.status == 'pending'
+        env:
+          SOURCE_SHA: ${{ steps.reconciliation.outputs.source }}
+          VERSION_DOI: ${{ steps.reconciliation.outputs.doi }}
+          TXID: ${{ steps.reconciliation.outputs.txid }}
+          PAYLOAD_SHA256: ${{ steps.reconciliation.outputs.payload_sha256 }}
+        run: |
+          set -euo pipefail
+          work="$(find "$RUNNER_TEMP/prior-proof" -name current-baseline-publish-work.json -type f -print -quit)"
+          receipt="$(find "$RUNNER_TEMP/prior-proof" -name homepage-arweave-receipt.json -type f -print -quit)"
+          payload="$(find "$RUNNER_TEMP/prior-proof" -name 'trinity-homepage-machine-*.tar.gz' -type f -print -quit)"
+          test -n "$work" && test -n "$receipt" && test -n "$payload"
+          WORK="$work" RECEIPT="$receipt" PAYLOAD="$payload" python3 - <<'PY'
+          import hashlib, json, os, subprocess, tarfile
+          from pathlib import Path
+          source=os.environ['SOURCE_SHA']; doi=os.environ['VERSION_DOI']; txid=os.environ['TXID']; expected=os.environ['PAYLOAD_SHA256']
+          work=json.load(open(os.environ['WORK'])); receipt=json.load(open(os.environ['RECEIPT'])); payload=Path(os.environ['PAYLOAD'])
+          if work.get('publication_status') != 'published' or work.get('latest_git_commit_sha') != source or work.get('latest_doi') != doi:
+              raise SystemExit('artifact Zenodo state mismatch')
+          if (receipt.get('txid') or receipt.get('tx_id')) != txid or receipt.get('source_git_commit_sha') != source or receipt.get('repository_version_doi') != doi:
+              raise SystemExit('artifact Arweave receipt binding mismatch')
+          digest=hashlib.sha256(payload.read_bytes()).hexdigest()
+          if digest != expected or receipt.get('payload_sha256') != expected or receipt.get('readback_sha256') != expected or receipt.get('hash_match') is not True:
+              raise SystemExit('artifact Arweave digest mismatch')
+          extract=Path(os.environ['RUNNER_TEMP'])/'snapshot-extracted'; extract.mkdir()
+          with tarfile.open(payload, 'r:gz') as archive: archive.extractall(extract, filter='data')
+          manifest=json.loads((extract/'manifest.json').read_text())
+          if manifest.get('source_git_commit_sha') != source or manifest.get('repository_version_doi') != doi:
+              raise SystemExit('snapshot manifest binding mismatch')
+          for item in manifest.get('files', []):
+              name=item['path']; local=extract/name
+              if hashlib.sha256(local.read_bytes()).hexdigest() != item['sha256']:
+                  raise SystemExit(f'snapshot internal digest mismatch: {name}')
+              if name != 'rendered-homepage.html':
+                  raw=subprocess.check_output(['git','show',f'{source}:{name}'])
+                  if raw != local.read_bytes():
+                      raise SystemExit(f'snapshot source mismatch: {name}')
+          (extract/'checksums.sha256').read_text()
+          PY
+          cp "$work" "$RUNNER_TEMP/current-baseline-publish-work.json"
+          cp "$receipt" "$RUNNER_TEMP/prior-homepage-arweave-receipt.json"
+          cp "$payload" "$RUNNER_TEMP/current-homepage-machine.tar.gz"
+
+      - name: Rebuild and prove the exact DOI capsule publicly
+        if: steps.reconciliation.outputs.status == 'pending'
+        env:
+          SOURCE_SHA: ${{ steps.reconciliation.outputs.source }}
+          RECORD_ID: ${{ steps.reconciliation.outputs.record_id }}
+        run: |
+          set -euo pipefail
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "$SOURCE_SHA" \
+            --output-dir "$RUNNER_TEMP/reconciliation-capsule"
+          python3 "$RUNNER_TEMP/reconciliation-capsule/restore-trinity-accord.py" \
+            --zenodo-record-id "$RECORD_ID" \
+            --output-dir "$RUNNER_TEMP/public-restored"
+          python3 scripts/repository_preservation_refresh.py verify-public \
+            --record-id "$RECORD_ID" \
+            --capsule-dir "$RUNNER_TEMP/reconciliation-capsule" \
+            --output "$RUNNER_TEMP/public-metadata-report.json"
+
+      - name: Verify the existing Arweave transaction without a wallet key
+        if: steps.reconciliation.outputs.status == 'pending'
+        env:
+          ARWEAVE_READBACK_MAX_RETRIES: "30"
+          ARWEAVE_READBACK_DELAY_MS: "10000"
+          ARWEAVE_READBACK_MAX_SECONDS: "420"
+        run: |
+          node scripts/verify_arweave_existing_payload.mjs \
+            --payload "$RUNNER_TEMP/current-homepage-machine.tar.gz" \
+            --prior-receipt "$RUNNER_TEMP/prior-homepage-arweave-receipt.json" \
+            --out "$RUNNER_TEMP/verified-homepage-arweave-receipt.json" \
+            --txid "${{ steps.reconciliation.outputs.txid }}" \
+            --source-sha "${{ steps.reconciliation.outputs.source }}" \
+            --doi "${{ steps.reconciliation.outputs.doi }}" \
+            --sha256 "${{ steps.reconciliation.outputs.payload_sha256 }}"
+
+      - name: Promote only independently reverified evidence
+        if: steps.reconciliation.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          cp "$RUNNER_TEMP/current-baseline-publish-work.json" preservation/current-baseline-publish-work.json
+          WORK=preservation/current-baseline-publish-work.json \
+          RECOVERY="$RUNNER_TEMP/public-restored/recovery-report.json" \
+          METADATA="$RUNNER_TEMP/public-metadata-report.json" python3 - <<'PY'
+          import json, os
+          p=os.environ['WORK']; data=json.load(open(p)); recovery=json.load(open(os.environ['RECOVERY'])); metadata=json.load(open(os.environ['METADATA']))
+          data.update({'public_download_verification':'passed','public_metadata_verification':'passed','public_cold_restore':'passed','public_cold_restore_report':recovery,'public_metadata_report':metadata})
+          open(p,'w').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          PY
+          python3 scripts/record_arweave_upload_result.py \
+            --upload-result-json "$RUNNER_TEMP/verified-homepage-arweave-receipt.json" \
+            --kind homepage_machine_snapshot \
+            --source-path "homepage-machine-snapshot:${{ steps.reconciliation.outputs.source }}"
+          python3 scripts/generate_arweave_wallet_status.py
+          python3 scripts/finalize_current_baseline_reconciliation.py \
+            --work-state preservation/current-baseline-publish-work.json \
+            --public-recovery-report "$RUNNER_TEMP/public-restored/recovery-report.json" \
+            --public-metadata-report "$RUNNER_TEMP/public-metadata-report.json" \
+            --arweave-receipt "$RUNNER_TEMP/verified-homepage-arweave-receipt.json"
+          rm preservation/current-baseline-publish-work.json
+
+      - name: Validate final state and repository contracts
+        if: steps.reconciliation.outputs.status == 'pending'
+        run: |
+          python3 scripts/validate_current_baseline_publication_state.py
+          python3 -m pytest -q \
+            tests/test_current_baseline_publication_contract.py \
+            tests/test_current_baseline_reconciliation_contract.py \
+            tests/test_arweave_wallet_ledger.py
+          git diff --check
+
+      - name: Commit reconciled DOI and Arweave state
+        if: steps.reconciliation.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            preservation/current-baseline-publication-authorization-v1.json \
+            preservation/current-baseline-publication-prepared-v1.json \
+            preservation/current-baseline-publication-observation-v1.json \
+            preservation/current-baseline-publication-reconciliation-v1.json \
+            preservation/repository-preservation-state-v2.json \
+            record-chain/arweave-wallet-ledger.json \
+            api/arweave-wallet-status.json \
+            api/recovery-index.json
+          git commit -m "archive: reconcile current baseline DOI and Arweave snapshot"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          echo "::error::Verified reconciliation could not be pushed to main."
+          exit 1
+
+      - name: Upload reconciliation proof
+        if: always() && steps.reconciliation.outputs.status == 'pending'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: current-baseline-reconciliation-proof
+          path: |
+            ${{ runner.temp }}/public-restored/recovery-report.json
+            ${{ runner.temp }}/public-metadata-report.json
+            ${{ runner.temp }}/verified-homepage-arweave-receipt.json
+          retention-days: 90
+          if-no-files-found: warn
