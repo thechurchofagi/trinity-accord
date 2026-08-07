@@ -1,0 +1,45 @@
+name: Materialize NFT Proof Annex
+
+on:
+  push:
+    branches:
+      - agent/nft-cryptographic-proof-hardening
+
+permissions:
+  contents: write
+
+jobs:
+  commitment:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: agent/nft-cryptographic-proof-hardening
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Build deterministic collection commitment
+        run: |
+          set -euo pipefail
+          python3 scripts/build_nft_cryptographic_commitment.py
+          python3 - <<'PY'
+          import json
+          p='evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json'
+          d=json.load(open(p, encoding='utf-8'))
+          print('NFT_MERKLE_ROOT=' + d['merkle']['root_sha256'])
+          print('NFT_UNIQUE_MINT_TRANSACTIONS=' + str(d['mint_evidence_inventory']['unique_transactions']))
+          print('NFT_UNIQUE_MINT_BLOCKS=' + str(d['mint_evidence_inventory']['unique_execution_blocks']))
+          PY
+      - name: Commit generated commitment
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json
+          if git diff --cached --quiet; then
+            echo "Commitment already current"
+            exit 0
+          fi
+          git commit -m "evidence: bind 175 NFT collection Merkle root"
+          git push origin HEAD:agent/nft-cryptographic-proof-hardening
