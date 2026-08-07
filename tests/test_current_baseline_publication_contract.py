@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
+STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 WORKFLOW = ROOT / ".github/workflows/publish-current-baseline-once.yml"
 UPLOADER = ROOT / "scripts/arweave_upload_homepage_snapshot.mjs"
+RECORDER = ROOT / "scripts/record_arweave_upload_result.py"
 SPEND_GUARD = ROOT / "scripts/arweave_runtime_spend_guard.mjs"
 SPEND_HELPERS = ROOT / "scripts/arweave_spend_budget_helpers.mjs"
 
@@ -35,6 +39,21 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
         assert len(data["published_package_identity_sha256"]) == 64
         assert data["homepage_snapshot_arweave_txid"]
         assert len(data["homepage_snapshot_sha256"]) == 64
+
+
+def test_current_baseline_transition_validates_without_displacing_prior_doi() -> None:
+    auth = json.loads(AUTH.read_text(encoding="utf-8"))
+    state = json.loads(STATE.read_text(encoding="utf-8"))
+    if auth["status"] == "prepared":
+        assert state["publication_status"] == "published_and_publicly_restored"
+        assert state["latest_doi"] == auth["previous_core_version_doi"]
+        script = ROOT / "scripts/validate_current_baseline_prepared_state.py"
+    elif auth["status"] == "consumed":
+        script = ROOT / "scripts/validate_current_baseline_publication_state.py"
+    else:
+        assert auth["status"] == "pending"
+        return
+    subprocess.run([sys.executable, str(script)], cwd=ROOT, check=True)
 
 
 def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
@@ -90,3 +109,13 @@ def test_homepage_snapshot_uses_shared_runtime_spend_guard() -> None:
     assert "rollingPaid + reward > rollingLimit" in guard
     assert 'homepage_machine_snapshot: "ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT"' in helpers
     assert "Unrecognized paid Arweave upload kind" in helpers
+
+
+def test_verified_snapshot_promotes_the_new_doi_to_latest_trusted_release() -> None:
+    text = RECORDER.read_text(encoding="utf-8")
+    assert "sync_current_baseline_trusted_release" in text
+    assert 'trusted["status"] = "published_and_publicly_restored"' in text
+    assert '"public_cold_restore": "passed"' in text
+    assert '"coverage_status": "exact_published_baseline"' in text
+    assert "homepage snapshot source does not match published DOI source" in text
+    assert "public DOI-only recovery does not match published source" in text
