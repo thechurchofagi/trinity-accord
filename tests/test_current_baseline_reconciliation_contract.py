@@ -7,8 +7,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RECONCILIATION = ROOT / "preservation/current-baseline-publication-reconciliation-v1.json"
 WORKFLOW = ROOT / ".github/workflows/reconcile-current-baseline-publication.yml"
+ARTIFACT_VALIDATOR = ROOT / "scripts/validate_current_baseline_reconciliation_artifact.py"
 READBACK = ROOT / "scripts/verify_arweave_existing_payload.mjs"
 FINALIZER = ROOT / "scripts/finalize_current_baseline_reconciliation.py"
+DOWNLOAD_ARTIFACT_SHA = "3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c"
 
 
 def test_reconciliation_is_exact_owner_authorized_and_read_only() -> None:
@@ -38,7 +40,8 @@ def test_reconciliation_workflow_reverifies_without_external_write_paths() -> No
     text = WORKFLOW.read_text(encoding="utf-8")
     assert "schedule:" not in text
     assert "actions: read" in text and "contents: write" in text
-    assert "actions/download-artifact@" in text
+    assert f"actions/download-artifact@{DOWNLOAD_ARTIFACT_SHA}" in text
+    assert "validate_current_baseline_reconciliation_artifact.py" in text
     assert "repository_preservation_refresh.py verify-public" in text
     assert "verify_arweave_existing_payload.mjs" in text
     assert "finalize_current_baseline_reconciliation.py" in text
@@ -58,6 +61,17 @@ def test_reconciliation_workflow_reverifies_without_external_write_paths() -> No
         line = next(line.strip() for line in text.splitlines() if action in line)
         ref = line.rsplit("@", 1)[1]
         assert len(ref) == 40 and all(ch in "0123456789abcdef" for ch in ref)
+
+
+def test_retained_artifact_validator_binds_every_external_identity() -> None:
+    text = ARTIFACT_VALIDATOR.read_text(encoding="utf-8")
+    assert 'authorization.get("allow_zenodo_write") is not False' in text
+    assert 'authorization.get("allow_arweave_post") is not False' in text
+    assert 'work.get("latest_package_identity_sha256") == package' in text
+    assert 'receipt.get("readback_sha256") == expected_payload' in text
+    assert "unsafe snapshot member" in text
+    assert "snapshot file differs from exact source" in text
+    assert "snapshot checksum mismatch" in text
 
 
 def test_arweave_reconciliation_verifier_has_no_posting_capability() -> None:
