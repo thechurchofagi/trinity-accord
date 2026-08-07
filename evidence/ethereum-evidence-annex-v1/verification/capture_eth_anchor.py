@@ -11,7 +11,14 @@ from datetime import datetime, timezone
 
 def rpc(url: str, method: str, params: list):
     body=json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params},separators=(",",":")).encode()
-    req=urllib.request.Request(url,data=body,headers={"Content-Type":"application/json"})
+    req=urllib.request.Request(
+        url,
+        data=body,
+        headers={
+            "Content-Type":"application/json",
+            "User-Agent":"trinityaccord-ethereum-evidence/1",
+        },
+    )
     with urllib.request.urlopen(req,timeout=30) as r:
         payload=json.loads(r.read())
     if payload.get("error"):
