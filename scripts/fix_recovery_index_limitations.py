@@ -213,8 +213,14 @@ def canonical_digest(value: dict[str, Any]) -> str:
 
 
 def replace_required(text: str, old: str, new: str, *, expected_count: int) -> str:
-    if new in text and old not in text:
+    normalized_count = text.count(new)
+    if normalized_count == expected_count:
         return text
+    if normalized_count:
+        raise SystemExit(
+            "recovery-index repair normalized anchor count mismatch: "
+            f"expected={expected_count} observed={normalized_count}"
+        )
     observed = text.count(old)
     if observed != expected_count:
         raise SystemExit(
