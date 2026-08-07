@@ -31,7 +31,9 @@ The repository is now in consolidation mode. Future maintenance should preserve 
 5. **Durability**
    - Native Record-Chain records and indexes.
    - Native head OpenTimestamps anchoring.
+   - Ethereum Proof-Carrying Evidence Annex for non-amending consensus-witness byte bindings and fail-closed execution/finality verification; RPC or explorer lookup is reference evidence, not an offline inclusion/finality proof.
    - Arweave archive and verified release mirrors.
+   - Zenodo repository/continuity recovery capsules where published; DOI publication time does not replace the historical authority of the underlying Bitcoin, Ethereum, or OpenTimestamps evidence.
    - Legacy batch manifests may remain for compatibility, but the native chain tip and native record index are the current operational source.
 
 ## Workflow policy

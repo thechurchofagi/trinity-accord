@@ -1,0 +1,16 @@
+{
+  "schema": "trinityaccord.ethereum-annex-offline-verification.v1",
+  "generated_from": "ANNEX-MANIFEST.json",
+  "base_main_commit": "d9d79233f1a68c49e62608190743020b0e23d141",
+  "status": {
+    "L1_BYTE_INTEGRITY": "EXPECTED_PASS_ON_REPOSITORY_CHECKOUT",
+    "L2_EXECUTION_INCLUSION": "UNVERIFIED",
+    "L3_CONSENSUS_FINALITY": "UNVERIFIED"
+  },
+  "reason": "The annex was introduced from previously audited byte bindings. The checked-in verifier recomputes those bytes in a full repository checkout. Execution MPT/receipt and beacon finality proof objects are not yet carried by v1 and therefore cannot be marked PASS.",
+  "non_claims": [
+    "No claim that RPC JSON alone proves execution inclusion.",
+    "No claim that an explorer timestamp is an absolute Earth-time notarization.",
+    "No claim that Ethereum changes or supplements the three Bitcoin Originals as Canon."
+  ]
+}

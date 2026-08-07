@@ -1,0 +1,174 @@
+{
+  "schema": "trinityaccord.ethereum-proof-carrying-evidence-annex.v1",
+  "version": "1.0.0",
+  "created_from_main_commit": "d9d79233f1a68c49e62608190743020b0e23d141",
+  "network": {
+    "name": "Ethereum Mainnet",
+    "chain_id": 1
+  },
+  "authority_boundary": {
+    "canonical_authority": "three Bitcoin Originals only",
+    "ethereum_role": "non-amending consensus witness and historical commitment-time evidence",
+    "no_authority_escalation": true
+  },
+  "claim_model": {
+    "block_timestamp_claim": "A preserved and cryptographically verified inclusion/finality proof can show that a commitment was included in an Ethereum mainnet block assigned to a consensus slot/time. It is not an absolute real-world clock attestation.",
+    "levels": {
+      "L1_BYTE_INTEGRITY": "PASS only when every declared preserved payload has the recorded size and SHA-256.",
+      "L2_EXECUTION_INCLUSION": "PASS only when transaction/receipt inclusion can be verified against preserved execution block roots. RPC/explorer lookup alone is REFERENCE_CHECKED, not PASS.",
+      "L3_CONSENSUS_FINALITY": "PASS only when the execution block is linked to preserved Ethereum PoS finality material and the documented trust checkpoint. A claimed finality status without proof material is not PASS."
+    },
+    "trusted_checkpoint_rule": "Ethereum light-client verification requires an explicitly documented trusted finalized checkpoint/root. The annex must not hide or manufacture that trust assumption."
+  },
+  "source_registries": [
+    "archive/legacy-pointers/index.json",
+    "archive/legacy-pointers/eth-raw/metadata.json",
+    "api/evidence-manifest.json",
+    "archive/eth-witness/eth-witness.json"
+  ],
+  "proof_material_policy": {
+    "transaction_json": "required_for_L2",
+    "receipt_json": "required_for_L2",
+    "execution_block_header": "required_for_L2",
+    "transaction_or_receipt_inclusion_proof": "required_for_L2",
+    "beacon_finality_material": "required_for_L3",
+    "trusted_finalized_checkpoint": "required_for_L3",
+    "current_v1_note": "This first annex inventories and verifies preserved byte bindings and known chain references. Missing execution/consensus proof objects are explicitly UNVERIFIED, never inferred from historical RPC checks."
+  },
+  "anchors": [
+    {
+      "id": "eth-guardian-principles-original",
+      "label": "Guardianship Principles (0 ETH data)",
+      "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 2446,
+      "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/guardian-principles/guardian-principles-original.md", "size": 2446, "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"}],
+      "execution_reference": {"block_number": 23301513, "block_timestamp_utc": "2025-09-06T03:55:11Z", "reference_source": "https://etherscan.io/tx/0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420", "reference_checked": true},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-btc-eth-mapping-attestation",
+      "label": "BTC-ETH Guardianship Mirrors Attestation",
+      "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 3231,
+      "input_sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6.raw", "size": 3231, "sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01"}],
+      "execution_reference": {"block_number": 23168072, "block_timestamp_utc": "2025-08-18T12:54:11Z", "reference_source": "https://etherscan.io/tx/0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6", "reference_checked": true},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-protocol-mirror",
+      "label": "Protocol mirror",
+      "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 1183,
+      "input_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+      "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
+      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/97631551.txt", "size": 1183, "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"}],
+      "execution_reference": {"block_number": 23152856, "block_timestamp_utc": "2025-08-16T09:58:59Z", "reference_source": "https://etherscan.io/tx/0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5", "reference_checked": true},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-covenant-mirror",
+      "label": "Covenant mirror",
+      "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 1710,
+      "input_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+      "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
+      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/98369145.txt", "size": 1710, "sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"}],
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-accord-mirror",
+      "label": "Accord mirror",
+      "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 15637,
+      "input_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+      "payload_binding": "exact_transaction_input_bytes_reused_from_bitcoin_mirror",
+      "payloads": [{"path": "bitcoin-inscription-mirrors/raw/98387475.txt", "size": 15637, "sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"}],
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-bip322-notice",
+      "label": "BIP-322 notice (non-amending)",
+      "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 412,
+      "input_sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f.raw", "size": 412, "sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d"}],
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-final-correction",
+      "label": "Mirror correction (final version)",
+      "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+      "chain_id": 1,
+      "status": "final_valid_supersedes_error",
+      "input_len": 4994,
+      "input_sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51.raw", "size": 4994, "sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f"}],
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-superseded-correction",
+      "label": "Mirror correction (superseded erroneous version)",
+      "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+      "chain_id": 1,
+      "status": "superseded_error_preserved",
+      "input_len": 2446,
+      "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/legacy-pointers/eth-raw/0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6.raw", "size": 2446, "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"}],
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-guardian-principles-v1-1",
+      "label": "Guardianship Principles v1.1 (0 ETH data)",
+      "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 4694,
+      "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81",
+      "payload_binding": "exact_transaction_input_bytes",
+      "payloads": [{"path": "archive/guardian-principles/guardian-principles-v1.1.md", "size": 4694, "sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"}],
+      "execution_reference": {"block_number": 23495413, "receipt_status": "0x1", "reference_checked": true, "reference_source": "api/evidence-manifest.json"},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    },
+    {
+      "id": "eth-btc-bip340-witness",
+      "label": "BTC BIP-340 signature witness",
+      "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+      "chain_id": 1,
+      "status": "final_valid",
+      "input_len": 600,
+      "input_sha256": "fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e",
+      "payload_binding": "witness_metadata_and_referenced_signed_object_not_raw_transaction_input",
+      "payloads": [
+        {"path": "archive/eth-witness/eth-witness.json", "size": 606, "sha256": "3c187c6b764a1d53984588875c1c1fed3f1c91fd165512ad8dfa4f279542a65f"},
+        {"path": "archive/btc-signature/btc-signature.json", "size": 701, "sha256": "8e70e0e0d8f8e0cdd8e388ee4c462f86358a6ac9bb6231701d7876439ada561b"}
+      ],
+      "raw_input_preserved": false,
+      "execution_reference": {"reference_checked": false},
+      "proof_status": {"L1_BYTE_INTEGRITY": "CHECK_ON_VERIFY", "L2_EXECUTION_INCLUSION": "UNVERIFIED", "L3_CONSENSUS_FINALITY": "UNVERIFIED"}
+    }
+  ]
+}
