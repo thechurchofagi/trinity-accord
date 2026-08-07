@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "24ac474041482be8",
+  "source_digest": "69688ad28e0d5cea",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -142,16 +142,13 @@
     "external social adoption"
   ],
   "publication_refresh": {
-    "schema": "trinityaccord.repository-preservation-refresh-authorization.v1",
-    "sequence": 3,
-    "status": "published_and_publicly_restored",
-    "source_baseline_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
-    "doi": "10.5281/zenodo.21755827",
-    "record_id": 21755827,
-    "concept_doi": "10.5281/zenodo.21739343",
-    "external_annex_dois": {
-      "evidence": "10.5281/zenodo.21753937",
-      "nft": "10.5281/zenodo.21754229"
-    }
+    "schema": "trinityaccord.current-baseline-publication-authorization.v1",
+    "sequence": 1,
+    "status": "prepared_for_current_baseline_publication",
+    "authorized_base_commit_sha": "fc28c9f9215401257ca56af87dcef0596dea1b0f",
+    "previous_version_doi": "10.5281/zenodo.21755827",
+    "core_concept_doi": "10.5281/zenodo.21739343",
+    "homepage_arweave_snapshot_planned": true,
+    "non_amending_boundary": true
   }
 }
