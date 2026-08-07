@@ -1,0 +1,63 @@
+name: Finalize Ethereum L2 L3 Proof State
+
+on:
+  push:
+    branches: [agent/ethereum-l2-l3-proofs-v1]
+    paths:
+      - ".github/workflows/finalize-ethereum-l2-l3-proof-state.yml"
+      - "scripts/finalize_ethereum_l2_l3_once.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          show-progress: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Install offline verifier dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Bind proof bytes into manifest
+        run: python3 scripts/finalize_ethereum_l2_l3_once.py
+      - name: Run independent offline L1 L2 L3 verifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py \
+            > /tmp/ethereum-offline-verification.json
+          python3 - <<'PY'
+          import json
+          p='/tmp/ethereum-offline-verification.json'
+          v=json.load(open(p, encoding='utf-8'))
+          assert v['result']=='PASS', v
+          assert v['L1_BYTE_INTEGRITY']=='PASS', v
+          assert v['L2_EXECUTION_INCLUSION']=='PASS', v
+          assert v['L3_CONSENSUS_FINALITY']=='PASS', v
+          assert v['anchors']==10, v
+          assert len(v['l2_checks'])==10, v
+          assert len(v['l3_checks'])==10, v
+          assert len(v['proof_byte_checks'])==20, v
+          assert not v['failures'], v
+          print(json.dumps({k:v[k] for k in ('result','L1_BYTE_INTEGRITY','L2_EXECUTION_INCLUSION','L3_CONSENSUS_FINALITY','anchors','payload_checks')}, indent=2))
+          PY
+          cp /tmp/ethereum-offline-verification.json \
+            evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json
+      - name: Commit manifest and offline report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json \
+            evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json
+          git diff --cached --check
+          git commit -m "evidence: bind and verify Ethereum L2 L3 proofs"
+          git push origin HEAD:agent/ethereum-l2-l3-proofs-v1
