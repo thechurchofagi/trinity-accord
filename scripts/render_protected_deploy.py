@@ -177,20 +177,25 @@ def _validate_protected_route(*, route: str, status: int, payload: dict[str, Any
         raise RuntimeError(f"protected {route} does not attest the hardened entrypoint")
 
 
-def verify_public_gateway_protection_once(base_url: str) -> None:
-    """Verify protected health routes and non-writing production canaries."""
+def verify_public_gateway_protection_once(base_url: str) -> dict[str, Any]:
+    """Verify protected production canaries and return the observed proof fields."""
     nonce = str(time.time_ns())
     root = base_url.rstrip("/")
+    observed_runtime_version = ""
 
     for route in (EXPECTED_RENDER_HEALTH_PATH, AUXILIARY_PROTECTED_READINESS_PATH):
         status, payload = base._public_json(f"{root}{route}?protection_attestation={nonce}")
         _validate_protected_route(route=route, status=status, payload=payload)
+        route_runtime_version = str(payload.get("version") or "")
+        if observed_runtime_version and route_runtime_version != observed_runtime_version:
+            raise RuntimeError("protected health routes disagree on runtime version")
+        observed_runtime_version = route_runtime_version
 
-    status, readiness = base._public_json(
+    readiness_status, readiness = base._public_json(
         f"{root}/record-chain/readiness?protection_attestation={nonce}"
     )
-    if status != 200:
-        raise RuntimeError(f"Gateway readiness returned HTTP {status}")
+    if readiness_status != 200:
+        raise RuntimeError(f"Gateway readiness returned HTTP {readiness_status}")
     if readiness.get("ok") is not True or readiness.get("submit_ready") is not True:
         raise RuntimeError("Gateway readiness is not submit-ready")
     for key, expected in base.EXPECTED_GATEWAY_READINESS.items():
@@ -206,22 +211,62 @@ def verify_public_gateway_protection_once(base_url: str) -> None:
         )
 
     oversized = b"{" + (b"x" * 99_999)
-    status, payload = base._public_json(
+    oversized_status, payload = base._public_json(
         f"{root}/record-chain/preflight", method="POST", data=oversized
     )
     diagnostics = payload.get("diagnostics")
     code = diagnostics[0].get("code") if isinstance(diagnostics, list) and diagnostics else None
-    if status != 413 or code != "REQUEST_BODY_TOO_LARGE":
+    if oversized_status != 413 or code != "REQUEST_BODY_TOO_LARGE":
         raise RuntimeError(
             "100000-byte preflight was not rejected by the protection layer: "
-            f"HTTP {status}, diagnostic={code!r}"
+            f"HTTP {oversized_status}, diagnostic={code!r}"
         )
+
+    return {
+        "protection_layer_active": True,
+        "protected_readiness_http": readiness_status,
+        "runtime_version": observed_runtime_version,
+        "request_max_bytes": readiness["max_submission_bytes"],
+        "oversized_preflight_http": oversized_status,
+        "submit_called": False,
+    }
+
+
+def verify_public_gateway_protection(
+    base_url: str = base.GATEWAY_PUBLIC_BASE_URL,
+    *,
+    attempts: int = 12,
+    delay_seconds: float = 5.0,
+) -> None:
+    """Retry the live verifier and emit only fields observed in the passing attempt."""
+    last_error = ""
+    for attempt in range(1, attempts + 1):
+        try:
+            attestation = verify_public_gateway_protection_once(base_url)
+        except Exception as exc:
+            last_error = str(exc)
+            if attempt < attempts:
+                print(f"GATEWAY_PROTECTION_WAIT attempt={attempt}/{attempts} error={last_error}")
+                time.sleep(max(0.0, delay_seconds))
+                continue
+            base.fail(f"public Gateway protection attestation failed: {last_error}")
+        print(
+            "GATEWAY_PROTECTION_ATTESTED "
+            f"protection_layer_active={str(attestation['protection_layer_active']).lower()} "
+            f"protected_readiness_http={attestation['protected_readiness_http']} "
+            f"runtime_version={attestation['runtime_version']} "
+            f"request_max_bytes={attestation['request_max_bytes']} "
+            f"oversized_preflight_http={attestation['oversized_preflight_http']} "
+            f"submit_called={str(attestation['submit_called']).lower()}"
+        )
+        return
 
 
 _original_recover_unique_deploy_id = base.recover_unique_deploy_id
 base.reconcile_gateway_config = reconcile_gateway_config
 base.recover_unique_deploy_id = recover_usable_existing_deploy_id
 base._verify_public_gateway_protection_once = verify_public_gateway_protection_once
+base.verify_public_gateway_protection = verify_public_gateway_protection
 
 
 def main() -> int:
