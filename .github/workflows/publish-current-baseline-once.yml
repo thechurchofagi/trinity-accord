@@ -144,7 +144,17 @@ jobs:
                   preservation/current-baseline-publication-prepared-v1.json \
                   preservation/repository-preservation-state-v2.json api/recovery-index.json
           git commit -m "archive: prepare current baseline publication v1"
-          git push origin HEAD:main
+          pushed=false
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              pushed=true
+              break
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          test "$pushed" = true
 
       - name: Resolve exact publication source
         if: steps.auth.outputs.status != 'consumed'
@@ -320,7 +330,17 @@ jobs:
                   preservation/repository-preservation-state-v2.json \
                   record-chain/arweave-wallet-ledger.json api/recovery-index.json
           git commit -m "archive: record current baseline DOI and Arweave snapshot"
-          git push origin HEAD:main
+          pushed=false
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              pushed=true
+              break
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          test "$pushed" = true
 
       - name: Upload proof artifacts
         if: always() && steps.auth.outputs.status != 'consumed'
