@@ -45,12 +45,12 @@ jobs:
             --out /tmp/ethereum-l2-l3-proofs \
             --node-helper evidence/ethereum-evidence-annex-v1/verification/make_beacon_execution_proof.mjs \
             --beacon https://ethereum-beacon-api.publicnode.com \
-            --beacon https://lodestar-mainnet.chainsafe.io \
-            --beacon https://mainnet-checkpoint-sync.attestant.io
+            --beacon https://docs-demo.quiknode.pro
       - name: Upload proof capture
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: ethereum-l2-l3-proof-capture
           path: /tmp/ethereum-l2-l3-proofs
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
