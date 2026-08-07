@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "69688ad28e0d5cea",
+  "source_digest": "f6c5ba5548ce0fa4",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -86,12 +86,12 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21755827",
-      "record_id": 21755827,
+      "doi": "10.5281/zenodo.21831412",
+      "record_id": 21831412,
       "concept_doi": "10.5281/zenodo.21739343",
-      "git_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
-      "git_tree_oid": "3769e20732a826f66cb772aefa1e37f434566738",
-      "package_identity_sha256": "b45e3fd5aaafe30c435e754499ea40baa7500a36cb33f5e08dd6c0fd3d94ff17",
+      "git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
+      "git_tree_oid": "30d952b2ea8e064facb72f42111da1a4a94c1854",
+      "package_identity_sha256": "1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54",
       "github_required_for_recovery": false,
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
@@ -144,11 +144,12 @@
   "publication_refresh": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v1",
     "sequence": 1,
-    "status": "prepared_for_current_baseline_publication",
-    "authorized_base_commit_sha": "fc28c9f9215401257ca56af87dcef0596dea1b0f",
-    "previous_version_doi": "10.5281/zenodo.21755827",
+    "status": "published_verified_and_consumed",
+    "source_git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
+    "version_doi": "10.5281/zenodo.21831412",
     "core_concept_doi": "10.5281/zenodo.21739343",
-    "homepage_arweave_snapshot_planned": true,
+    "arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
+    "arweave_payload_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63",
     "non_amending_boundary": true
   }
 }

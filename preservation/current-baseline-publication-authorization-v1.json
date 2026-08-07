@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.current-baseline-publication-authorization.v1",
   "sequence": 1,
-  "status": "prepared",
+  "status": "consumed",
   "authorized_by": "thechurchofagi",
   "authorized_purpose": "Publish one exact current repository baseline that includes the finalized homepage provenance and historical-position framing, then cross-link a compact homepage and machine-entrypoint snapshot on Arweave.",
   "core_concept_doi": "10.5281/zenodo.21739343",
@@ -13,5 +13,11 @@
   "include_homepage_arweave_snapshot": true,
   "non_amending_boundary": true,
   "live_main_equivalence_claimed": false,
-  "prepared_base_commit_sha": "fc28c9f9215401257ca56af87dcef0596dea1b0f"
+  "prepared_base_commit_sha": "fc28c9f9215401257ca56af87dcef0596dea1b0f",
+  "published_source_baseline_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
+  "published_record_id": 21831412,
+  "published_doi": "10.5281/zenodo.21831412",
+  "published_package_identity_sha256": "1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54",
+  "homepage_snapshot_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
+  "homepage_snapshot_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63"
 }
