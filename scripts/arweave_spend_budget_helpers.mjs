@@ -51,9 +51,15 @@ function payloadByteLength(value) {
 }
 
 function dailyLimit(kind) {
-  const name = kind === "record_chain_arweave_archive"
-    ? "ARWEAVE_DAILY_RECORD_CHAIN_UPLOAD_LIMIT"
-    : "ARWEAVE_DAILY_NATIVE_OTS_UPLOAD_LIMIT";
+  const names = {
+    record_chain_arweave_archive: "ARWEAVE_DAILY_RECORD_CHAIN_UPLOAD_LIMIT",
+    native_ots_bundle_archive: "ARWEAVE_DAILY_NATIVE_OTS_UPLOAD_LIMIT",
+    homepage_machine_snapshot: "ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT",
+  };
+  const name = names[kind];
+  if (!name) {
+    throw new Error(`Unrecognized paid Arweave upload kind: ${kind}`);
+  }
   const value = Number(process.env[name] || "1");
   if (!Number.isInteger(value) || value < 0 || value > 1) {
     throw new Error(`Unsafe ${name}: ${process.env[name]}`);
