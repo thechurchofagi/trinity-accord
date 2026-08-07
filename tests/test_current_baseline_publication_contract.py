@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
+STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 WORKFLOW = ROOT / ".github/workflows/publish-current-baseline-once.yml"
 UPLOADER = ROOT / "scripts/arweave_upload_homepage_snapshot.mjs"
+RECORDER = ROOT / "scripts/record_arweave_upload_result.py"
 SPEND_GUARD = ROOT / "scripts/arweave_runtime_spend_guard.mjs"
 SPEND_HELPERS = ROOT / "scripts/arweave_spend_budget_helpers.mjs"
 
@@ -20,6 +24,7 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
     assert data["authorized_by"] == "thechurchofagi"
     assert data["core_concept_doi"] == "10.5281/zenodo.21739343"
     assert data["previous_core_version_doi"] == "10.5281/zenodo.21755827"
+    assert data["zenodo_rights_acknowledgement"] == "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
     assert data["publication_confirmation"] == "PUBLISH_TRINITY_CURRENT_BASELINE_V1"
     assert data["include_full_repository_doi"] is True
     assert data["include_homepage_arweave_snapshot"] is True
@@ -36,6 +41,21 @@ def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
         assert len(data["homepage_snapshot_sha256"]) == 64
 
 
+def test_current_baseline_transition_validates_without_displacing_prior_doi() -> None:
+    auth = json.loads(AUTH.read_text(encoding="utf-8"))
+    state = json.loads(STATE.read_text(encoding="utf-8"))
+    if auth["status"] == "prepared":
+        assert state["publication_status"] == "published_and_publicly_restored"
+        assert state["latest_doi"] == auth["previous_core_version_doi"]
+        script = ROOT / "scripts/validate_current_baseline_prepared_state.py"
+    elif auth["status"] == "consumed":
+        script = ROOT / "scripts/validate_current_baseline_publication_state.py"
+    else:
+        assert auth["status"] == "pending"
+        return
+    subprocess.run([sys.executable, str(script)], cwd=ROOT, check=True)
+
+
 def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     assert "schedule:" not in text
@@ -46,6 +66,8 @@ def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     assert "--zenodo-record-id" in text
     assert "public restore source mismatch" in text
     assert "check" not in text.lower() or "checksums.sha256" in text
+    assert "PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" in text
+    assert "vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" not in text
     assert "ARWEAVE_MINIMUM_REMAINING_AR: \"0.25\"" in text
     assert "ARWEAVE_MAX_TRANSACTION_REWARD_AR: \"0.05\"" in text
     assert "ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: \"0.50\"" in text
@@ -87,3 +109,13 @@ def test_homepage_snapshot_uses_shared_runtime_spend_guard() -> None:
     assert "rollingPaid + reward > rollingLimit" in guard
     assert 'homepage_machine_snapshot: "ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT"' in helpers
     assert "Unrecognized paid Arweave upload kind" in helpers
+
+
+def test_verified_snapshot_promotes_the_new_doi_to_latest_trusted_release() -> None:
+    text = RECORDER.read_text(encoding="utf-8")
+    assert "sync_current_baseline_trusted_release" in text
+    assert 'trusted["status"] = "published_and_publicly_restored"' in text
+    assert '"public_cold_restore": "passed"' in text
+    assert '"coverage_status": "exact_published_baseline"' in text
+    assert "homepage snapshot source does not match published DOI source" in text
+    assert "public DOI-only recovery does not match published source" in text

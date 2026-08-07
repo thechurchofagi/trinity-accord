@@ -22,7 +22,22 @@ def test_consumed_preservation_refresh_is_secret_independent():
         text=True,
         capture_output=True,
     )
-    assert "already consumed and publicly proven" in completed.stdout
+    current_auth_path = (
+        ROOT / "preservation/current-baseline-publication-authorization-v1.json"
+    )
+    current_status = (
+        json.loads(current_auth_path.read_text(encoding="utf-8"))["status"]
+        if current_auth_path.is_file()
+        else "absent"
+    )
+    if current_status == "prepared":
+        assert "prepared transition valid; prior DOI remains active" in completed.stdout
+        assert "legacy refresh remains consumed" in completed.stdout
+    elif current_status == "consumed":
+        assert "current-baseline publication is consumed and valid" in completed.stdout
+        assert "legacy refresh remains consumed" in completed.stdout
+    else:
+        assert "already consumed and publicly proven" in completed.stdout
 
 
 def test_publication_credentials_remain_required_before_nonterminal_work():
@@ -37,6 +52,8 @@ def test_publication_credentials_remain_required_before_nonterminal_work():
     assert consumed_guard < token_guard
     assert consumed_guard < rights_guard
     assert "repository_preservation_refresh.py validate" in source
+    assert "validate_current_baseline_prepared_state.py" in source
+    assert "validate_current_baseline_publication_state.py" in source
     assert "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" in source
 
 

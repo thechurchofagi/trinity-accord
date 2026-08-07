@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 120
     env:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
-      PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: ${{ vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK }}
+      PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED
       ARKEY: ${{ secrets.ARKEY || vars.ARKEY }}
     steps:
       - name: Checkout current main
