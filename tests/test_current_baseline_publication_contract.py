@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
 WORKFLOW = ROOT / ".github/workflows/publish-current-baseline-once.yml"
 UPLOADER = ROOT / "scripts/arweave_upload_homepage_snapshot.mjs"
+SPEND_GUARD = ROOT / "scripts/arweave_runtime_spend_guard.mjs"
+SPEND_HELPERS = ROOT / "scripts/arweave_spend_budget_helpers.mjs"
 
 
 def test_publication_requires_explicit_one_shot_owner_authorization() -> None:
@@ -39,6 +41,8 @@ def test_workflow_is_one_shot_bounded_and_publicly_verified() -> None:
     assert "ARWEAVE_MAX_TRANSACTION_REWARD_AR: \"0.05\"" in text
     assert "ARWEAVE_ROLLING_30_DAY_SPEND_LIMIT_AR: \"0.50\"" in text
     assert "paid Arweave transaction(s) already recorded today" in text
+    assert "git fetch origin main --prune" in text
+    assert "git rebase origin/main" in text
     assert "archive: record current baseline DOI and Arweave snapshot" in text
     for action in ("actions/checkout@", "actions/setup-python@", "actions/setup-node@", "actions/upload-artifact@"):
         line = next(line.strip() for line in text.splitlines() if action in line)
@@ -61,3 +65,14 @@ def test_arweave_uploader_binds_payload_source_and_doi_before_resume() -> None:
     assert "ARWEAVE_HOMEPAGE_UPLOAD_OK" in text
     assert "hash_match: match" in text
     assert "bitcoin_originals_prevail: true" in text
+
+
+def test_homepage_snapshot_uses_shared_runtime_spend_guard() -> None:
+    guard = SPEND_GUARD.read_text(encoding="utf-8")
+    helpers = SPEND_HELPERS.read_text(encoding="utf-8")
+    assert 'script === "arweave_upload_homepage_snapshot.mjs"' in guard
+    assert 'return "homepage_machine_snapshot"' in guard
+    assert "const rollingPaid = rollingPaidWinston(ledger)" in guard
+    assert "rollingPaid + reward > rollingLimit" in guard
+    assert 'homepage_machine_snapshot: "ARWEAVE_DAILY_HOMEPAGE_SNAPSHOT_UPLOAD_LIMIT"' in helpers
+    assert "Unrecognized paid Arweave upload kind" in helpers
