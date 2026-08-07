@@ -18,9 +18,15 @@ The root commits to:
 
 Presentation URLs and the informational packed-token-ID interpretation are deliberately excluded.
 
+The preserved v1 collection commitment contains 175 leaves and has Merkle root:
+
+```text
+097bb48d98ab7fc036aed97f5b5fcb1a65962d64d327081277255d1829212267
+```
+
 ## L2 — compact execution inclusion
 
-A full Ethereum transaction/receipt trie is reconstructed from the historical mint block during capture. The repository preserves only what is required for offline verification of each NFT mint:
+A full Ethereum transaction/receipt trie was reconstructed from each historical mint block during capture. The repository preserves only what is required for offline verification of each NFT mint:
 
 - target raw signed transaction;
 - target encoded receipt;
@@ -31,11 +37,13 @@ A full Ethereum transaction/receipt trie is reconstructed from the historical mi
 
 This is cryptographically equivalent for target inclusion to preserving the full reconstructed tries, while avoiding repeated storage of unrelated transactions and receipts.
 
-Ethereum receipt RLP does **not** encode the JSON-RPC `logIndex`. `logIndex` remains a historical lookup coordinate. During capture it is resolved to `receipt_log_position`; offline verification proves and decodes the actual receipt log at that position.
+Ethereum receipt RLP does **not** encode the JSON-RPC `logIndex`. `logIndex` remains a historical lookup coordinate. During capture it was resolved to `receipt_log_position`; offline verification proves and decodes the actual receipt log at that position.
+
+The frozen v1 inventory contains 175 distinct mint transactions, and all 175 compact L2 witnesses pass offline verification.
 
 ## L3 — consensus finality
 
-L3 is deduplicated by execution block. Multiple NFT mints in one execution block share one L3 witness.
+L3 is deduplicated by execution block. Multiple NFT mints in one execution block would share one L3 witness. In this specific frozen v1 inventory, the 175 NFT mint transactions happen to occupy 175 distinct execution blocks, so the resulting proof set contains 175 L3 witnesses.
 
 Each L3 witness follows the same model as `ethereum-evidence-annex-v1`:
 
@@ -46,13 +54,27 @@ Each L3 witness follows the same model as `ethereum-evidence-annex-v1`:
 
 L3 therefore remains explicitly **checkpoint-relative under Ethereum weak subjectivity**. It is not claimed to be trust-free finality from no starting checkpoint, and it is not an absolute real-world clock attestation.
 
+All 175 preserved L3 witnesses pass the offline verifier.
+
 ## Authority boundary
 
 The three Bitcoin Originals remain the sole and final Canon. NFT evidence is non-amending historical chronicle/recovery evidence. This annex does not elevate NFT records into authority over the Accord.
 
+## Preserved proof material
+
+The checked-in annex now contains:
+
+- `NFT-COLLECTION-COMMITMENT.json` — deterministic 175-leaf L1 commitment;
+- `proof-material/L2/` — 175 compact mint-transaction/receipt inclusion witnesses;
+- `proof-material/L3/` — 175 block-level Beacon consensus witnesses;
+- `proof-material/CAPTURE-SUMMARY.json` — exact proof paths, sizes and SHA-256 bindings;
+- `reports/OFFLINE-VERIFICATION.json` — deterministic offline verification report.
+
+Large NFT media/CAR payloads are intentionally not copied into this annex.
+
 ## Verification
 
-After proof material has been captured:
+Run:
 
 ```bash
 python3 scripts/build_nft_cryptographic_commitment.py --check
@@ -60,3 +82,5 @@ python3 evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py
 ```
 
 The verifier is fail-closed. It verifies the collection commitment, exact proof-file byte bindings, MPT transaction and receipt inclusion, the mint event itself, execution block header hash, SSZ execution-block inclusion, and checkpoint-relative Beacon ancestry.
+
+The required `Run Current Tests` workflow performs the same proof verification offline on every pull request and on `main`. The one-time network capture workflow used to materialize the proof set was removed after the proof bytes were committed, so routine verification does not depend on Ethereum RPC or Beacon APIs.
