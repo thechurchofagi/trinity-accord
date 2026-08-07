@@ -3,8 +3,8 @@
 
 This generator is networked and intended for controlled capture. The resulting witness
 files are verified offline by verify_annex.py. L3 is explicitly conditional on a named
-trusted finalized checkpoint (weak-subjectivity assumption); the checkpoint source is
-preserved and never hidden.
+trusted finalized Beacon root (the Ethereum weak-subjectivity assumption); provider
+agreement is preserved only as provenance and never disguised as cryptographic finality.
 """
 from __future__ import annotations
 
@@ -15,7 +15,6 @@ import json
 import pathlib
 import subprocess
 import time
-import urllib.error
 import urllib.request
 
 import rlp
@@ -95,17 +94,18 @@ def rpc_batch(url: str, method: str, params_list: list[list], *, timeout: int = 
     raise RuntimeError(f"RPC batch {method} failed: {last}")
 
 
-def get_json(base: str, path: str, *, timeout: int = 45):
+def get_json(base: str, path: str, *, timeout: int = 45, attempts: int = 4):
     url = base.rstrip("/") + path
     req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": "trinityaccord-l2-l3-proof-capture/1"})
     last = None
-    for attempt in range(4):
+    for attempt in range(attempts):
         try:
             with urllib.request.urlopen(req, timeout=timeout) as res:
                 return json.loads(res.read())
         except Exception as exc:
             last = exc
-            time.sleep(1.5 * (attempt + 1))
+            if attempt + 1 < attempts:
+                time.sleep(1.5 * (attempt + 1))
     raise RuntimeError(f"GET {url} failed: {last}")
 
 
@@ -169,54 +169,70 @@ def beacon_header_root(message: dict) -> str:
     return "0x" + merkleize_chunks(fields).hex()
 
 
-def fetch_header(beacon: str, block_id: str) -> dict:
-    data = get_json(beacon, f"/eth/v1/beacon/headers/{block_id}")["data"]
+def fetch_header(beacon: str, block_id: str, *, attempts: int = 4) -> dict:
+    data = get_json(beacon, f"/eth/v1/beacon/headers/{block_id}", attempts=attempts)["data"]
     computed = beacon_header_root(data["header"]["message"])
     if computed.lower() != data["root"].lower():
         raise RuntimeError(f"beacon header root mismatch {data['root']} != {computed}")
     return {"root": data["root"].lower(), "canonical": bool(data.get("canonical", True)), "message": data["header"]["message"]}
 
 
-def find_checkpoint(beacons: list[str], primary: str, target_slot: int, target_root: str) -> tuple[dict, list[dict]]:
-    for offset in (96, 128, 160, 192, 256, 320):
-        state_slot = target_slot + offset
-        observations = []
-        for base in beacons:
-            try:
-                value = get_json(base, f"/eth/v1/beacon/states/{state_slot}/finality_checkpoints")["data"]["finalized"]
-                observations.append({"provider": base, "state_slot": state_slot, "epoch": int(value["epoch"]), "root": value["root"].lower()})
-            except Exception as exc:
-                observations.append({"provider": base, "state_slot": state_slot, "error": str(exc)})
-        good = [o for o in observations if "root" in o and o["root"] != "0x" + "00" * 32]
-        counts = collections.Counter((o["epoch"], o["root"]) for o in good)
-        if not counts:
-            continue
-        (epoch, root), votes = counts.most_common(1)[0]
-        if votes < 2 and len(beacons) >= 2:
-            continue
-        chain = []
-        cur = root
-        found = False
-        for _ in range(512):
-            hdr = fetch_header(primary, cur)
-            chain.append(hdr)
-            parent = hdr["message"]["parent_root"].lower()
-            if parent == target_root.lower():
-                found = True
-                break
-            cur = parent
-        if found:
+def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: int, target_root: str) -> tuple[dict, list[dict], list[dict]]:
+    """Select a nearby descendant as the explicit weak-subjectivity trust root.
+
+    Multiple providers only preserve provenance that they agree on the historical canonical
+    block root. The repository explicitly trusts that descendant root as finalized; the
+    offline proof verifies that the target is its ancestor.
+    """
+    for base_offset in (128, 160, 192, 224, 256, 320):
+        for extra in range(16):
+            candidate_slot = target_slot + base_offset + extra
+            observations = []
+            for base in beacons:
+                try:
+                    hdr = fetch_header(base, str(candidate_slot), attempts=1)
+                    observations.append({
+                        "provider": base,
+                        "requested_slot": candidate_slot,
+                        "observed_slot": int(hdr["message"]["slot"]),
+                        "root": hdr["root"],
+                        "canonical": hdr["canonical"],
+                    })
+                except Exception as exc:
+                    observations.append({"provider": base, "requested_slot": candidate_slot, "error": str(exc)})
+            good = [o for o in observations if o.get("canonical") is True and o.get("observed_slot") == candidate_slot and "root" in o]
+            counts = collections.Counter(o["root"] for o in good)
+            if not counts:
+                continue
+            root, votes = counts.most_common(1)[0]
+            if votes < 2:
+                continue
+            chain = []
+            cur = root
+            found = False
+            for _ in range(512):
+                hdr = fetch_header(primary, cur)
+                chain.append(hdr)
+                parent = hdr["message"]["parent_root"].lower()
+                if parent == target_root.lower():
+                    found = True
+                    break
+                cur = parent
+            if not found:
+                continue
             checkpoint = {
-                "schema": "trinityaccord.ethereum-trusted-finalized-checkpoint.v1",
+                "schema": "trinityaccord.ethereum-trusted-finalized-beacon-root.v1",
                 "network": "Ethereum Mainnet",
-                "state_slot_observed": state_slot,
-                "finalized_epoch": epoch,
+                "slot": candidate_slot,
+                "epoch": candidate_slot // SLOTS_PER_EPOCH,
                 "root": root,
-                "trust_model": "explicit weak-subjectivity finalized checkpoint; quorum observations are provenance, not a substitute for the declared trust assumption",
+                "trust_model": "explicit weak-subjectivity assumption: this specific descendant Beacon root is trusted as finalized; cross-provider canonical-header agreement is provenance only and is not itself a cryptographic proof of finality",
                 "matching_provider_votes": votes,
+                "provenance_kind": "cross_provider_historical_canonical_header_agreement",
             }
+            print(f"trusted finalized root slot={candidate_slot} root={root} votes={votes}", flush=True)
             return checkpoint, observations, chain
-    raise RuntimeError("could not find a cross-checked finalized checkpoint descending from target")
+    raise RuntimeError("could not find a cross-provider-agreed descendant Beacon root for explicit checkpoint trust")
 
 
 def main() -> int:
@@ -278,6 +294,7 @@ def main() -> int:
             "verification": {"execution_header_hash": "PASS", "transactions_root": "PASS", "receipts_root": "PASS"},
         }
         write_json(target_dir / "L2-execution-witness.json", witness)
+        print(f"L2 roots PASS txs={len(tx_hashes)} index={target_index}", flush=True)
 
         timestamp = q(block["timestamp"])
         if timestamp < GENESIS_TIME or (timestamp - GENESIS_TIME) % SECONDS_PER_SLOT:
@@ -296,7 +313,7 @@ def main() -> int:
             raise RuntimeError(f"{txh}: beacon execution leaf is not execution block hash")
         if leaf_proof["body_root"].lower() != target_header["message"]["body_root"].lower():
             raise RuntimeError(f"{txh}: beacon body root proof source mismatch")
-        checkpoint, observations, chain = find_checkpoint(beacons, primary, slot, target_header["root"])
+        checkpoint, observations, chain = find_trusted_finalized_root(beacons, primary, slot, target_header["root"])
         consensus = {
             "schema": "trinityaccord.ethereum-consensus-finality-witness.v1",
             "target_tx_hash": txh,
@@ -304,13 +321,21 @@ def main() -> int:
             "target_beacon_slot": slot,
             "target_beacon_header": target_header,
             "execution_block_hash_to_body_root": leaf_proof,
-            "trusted_finalized_checkpoint": checkpoint,
+            "trusted_finalized_beacon_root": checkpoint,
             "checkpoint_observations": observations,
             "checkpoint_to_target_parent_chain": chain,
-            "verification_model": "execution block hash is SSZ-proven into target beacon body; target beacon root is linked by verified parent roots to the explicit trusted finalized checkpoint",
+            "verification_model": "execution block hash is SSZ-proven into target Beacon body; target Beacon root is linked by verified parent roots to an explicit trusted finalized descendant Beacon root",
         }
         write_json(target_dir / "L3-consensus-witness.json", consensus)
-        summary.append({"tx_hash": txh, "block_hash": block["hash"].lower(), "slot": slot, "checkpoint_root": checkpoint["root"], "checkpoint_epoch": checkpoint["finalized_epoch"], "ancestor_headers": len(chain)})
+        summary.append({
+            "tx_hash": txh,
+            "block_hash": block["hash"].lower(),
+            "slot": slot,
+            "trusted_finalized_root": checkpoint["root"],
+            "trusted_finalized_slot": checkpoint["slot"],
+            "trusted_finalized_epoch": checkpoint["epoch"],
+            "ancestor_headers": len(chain),
+        })
     write_json(out / "CAPTURE-SUMMARY.json", {"schema": "trinityaccord.ethereum-l2-l3-capture-summary.v1", "anchors": summary})
     print(json.dumps(summary, indent=2))
     return 0
