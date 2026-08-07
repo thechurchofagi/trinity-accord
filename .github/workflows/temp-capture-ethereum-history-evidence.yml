@@ -1,0 +1,48 @@
+name: Temporary Ethereum History Evidence Capture
+
+on:
+  push:
+    branches:
+      - agent/preserve-ethereum-history-evidence
+    paths:
+      - scripts/capture_ethereum_history_evidence.py
+      - .github/workflows/temp-capture-ethereum-history-evidence.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout capture branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: agent/preserve-ethereum-history-evidence
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Capture read-only Ethereum history evidence
+        run: |
+          set -euo pipefail
+          python3 scripts/capture_ethereum_history_evidence.py --min-agreeing-rpcs 2
+
+      - name: Commit captured evidence
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add archive/ethereum-evidence
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No evidence changes to commit"
+            exit 0
+          fi
+          git commit -m "archive: freeze Ethereum historical block evidence"
+          git push origin HEAD:agent/preserve-ethereum-history-evidence
