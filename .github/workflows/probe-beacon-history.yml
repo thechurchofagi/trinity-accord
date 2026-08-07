@@ -30,17 +30,6 @@ jobs:
             echo "=== $base ==="
             code=$(curl -L -sS --connect-timeout 10 --max-time 20 -o /tmp/out.json -w '%{http_code}' "$base/eth/v1/beacon/headers/$slot")
             echo "HTTP $code"
-            python3 - <<'PY'
-import json
-try:
-    d=json.load(open('/tmp/out.json'))
-    x=d.get('data',{})
-    if isinstance(x,dict):
-        print('root=',x.get('root'),'canonical=',x.get('canonical'),'slot=',x.get('header',{}).get('message',{}).get('slot'))
-    else:
-        print(str(d)[:500])
-except Exception as e:
-    print('parse_error=',e)
-    print(open('/tmp/out.json',errors='replace').read()[:500])
-PY
+            python3 -c 'import json; d=json.load(open("/tmp/out.json")); x=d.get("data",{}); print("root=",x.get("root") if isinstance(x,dict) else None,"canonical=",x.get("canonical") if isinstance(x,dict) else None,"slot=",x.get("header",{}).get("message",{}).get("slot") if isinstance(x,dict) else None,"raw=",str(d)[:300])' || head -c 500 /tmp/out.json
+            echo
           done
