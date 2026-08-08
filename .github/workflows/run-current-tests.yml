@@ -49,12 +49,17 @@ jobs:
           set -euo pipefail
           python3 -m py_compile \
             scripts/build_nft_cryptographic_commitment.py \
+            evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py \
             evidence/nft-proof-annex-v1/verification/capture_compact_proofs.py \
             evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py
+          python3 -m pytest -q \
+            tests/test_nft_proof_annex.py \
+            tests/test_nft_proof_annex_fail_closed.py
           python3 scripts/build_nft_cryptographic_commitment.py --check
           # No RPC is used here. The checked-in compact witnesses must prove the
           # collection commitment, Ethereum execution inclusion, mint semantics,
-          # and checkpoint-relative Beacon ancestry entirely from repository bytes.
+          # cross-field identity bindings, and checkpoint-relative Beacon ancestry
+          # entirely from repository bytes.
           python3 evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py > /tmp/nft-proof-offline.json
           python3 - <<'PY'
           import json
