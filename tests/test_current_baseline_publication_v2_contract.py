@@ -22,6 +22,8 @@ def test_sequence2_authorization_is_exact_and_current_state_is_valid():
     assert auth["core_concept_doi"] == "10.5281/zenodo.21739343"
     assert auth["previous_core_version_doi"] == "10.5281/zenodo.21831412"
     assert auth["required_proof_hardening_commit_sha"] == "0cdba0d13b97f242908f150b634ae7a481be9ee3"
+    assert auth["zenodo_rights_acknowledgement"] == "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
+    assert auth["publication_confirmation"] == "PUBLISH_TRINITY_CURRENT_BASELINE_V2"
     assert auth["include_full_repository_doi"] is True
     assert auth["include_homepage_arweave_snapshot"] is False
     assert auth["non_amending_boundary"] is True
@@ -47,6 +49,9 @@ def test_sequence2_runner_is_zenodo_only_and_idempotent_publisher_based():
     assert "record_arweave_upload_result" not in text
     assert "required_proof_hardening_commit_sha" in text
     assert "git diff --quiet" in text
+    assert "committed_rights_ack" in text
+    assert "Environment rights acknowledgement conflicts with committed sequence-2 authorization" in text
+    assert ': "${PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK:?' not in text
 
 
 def test_integrity_dispatcher_prioritizes_sequence2_before_sequence1():
