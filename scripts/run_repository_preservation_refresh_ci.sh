@@ -19,11 +19,13 @@ PY
   fi
   if [[ "$v2_status" == "pending" || "$v2_status" == "prepared" ]]; then
     python3 scripts/current_baseline_publication_v2.py validate
-    if [[ "${GITHUB_EVENT_NAME:-}" == "push" && "${GITHUB_REF:-}" == "refs/heads/main" ]]; then
+    if [[ "${GITHUB_EVENT_NAME:-}" == "push" \
+      && "${GITHUB_REF:-}" == "refs/heads/main" \
+      && "${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}" == "1" ]]; then
       bash scripts/run_current_baseline_publication_v2_ci.sh
       exit $?
     fi
-    echo "Final proof baseline publication v2 $v2_status state is valid; external publication is restricted to a main-branch push."
+    echo "Final proof baseline publication v2 $v2_status state is valid; external publication requires the dedicated main-branch preservation executor."
   else
     echo "::error::Unexpected current-baseline publication v2 status: $v2_status"
     exit 1
