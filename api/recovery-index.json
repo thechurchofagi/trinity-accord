@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "f6c5ba5548ce0fa4",
+  "source_digest": "8467c77766f1b068",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -142,14 +142,15 @@
     "external social adoption"
   ],
   "publication_refresh": {
-    "schema": "trinityaccord.current-baseline-publication-authorization.v1",
-    "sequence": 1,
-    "status": "published_verified_and_consumed",
-    "source_git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
-    "version_doi": "10.5281/zenodo.21831412",
+    "schema": "trinityaccord.current-baseline-publication-authorization.v2",
+    "sequence": 2,
+    "status": "prepared_for_current_baseline_publication",
+    "authorized_base_commit_sha": "aaa117ea3c9b4e5a7af0c7544b42bc6e50804ebf",
+    "required_proof_hardening_commit_sha": "0cdba0d13b97f242908f150b634ae7a481be9ee3",
+    "previous_version_doi": "10.5281/zenodo.21831412",
     "core_concept_doi": "10.5281/zenodo.21739343",
-    "arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
-    "arweave_payload_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63",
+    "arweave_snapshot_refreshed": false,
+    "previous_sequence_1_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
     "non_amending_boundary": true
   }
 }

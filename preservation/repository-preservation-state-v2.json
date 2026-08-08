@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.repository-preservation-zenodo-state.v2",
-  "publication_status": "published_and_publicly_restored",
+  "publication_status": "prepared_for_current_baseline_publication_v2",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
   "latest_capsule_id": "repository-3e013bbb44a7",
   "latest_git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
@@ -184,10 +184,11 @@
   "live_main_equivalence_claimed": false,
   "coverage_scope": "exact Git-tracked publication baseline named by latest_git_commit_sha",
   "previous_verified_version": {
-    "doi": "10.5281/zenodo.21755827",
-    "record_id": 21755827,
-    "git_commit_sha": "d3f3582912caeba4fc37c89253f7e62bd36c2f4b",
-    "package_identity_sha256": "b45e3fd5aaafe30c435e754499ea40baa7500a36cb33f5e08dd6c0fd3d94ff17"
+    "doi": "10.5281/zenodo.21831412",
+    "record_id": 21831412,
+    "git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
+    "git_tree_oid": "30d952b2ea8e064facb72f42111da1a4a94c1854",
+    "package_identity_sha256": "1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54"
   },
   "homepage_machine_snapshot_arweave": {
     "schema": "trinityaccord.homepage-arweave-upload-result.v1",
@@ -220,5 +221,7 @@
       "arweave_snapshot_is_not_amendment": true,
       "bitcoin_originals_prevail": true
     }
-  }
+  },
+  "prepared_base_commit_sha": "aaa117ea3c9b4e5a7af0c7544b42bc6e50804ebf",
+  "planned_homepage_arweave_snapshot": false
 }
