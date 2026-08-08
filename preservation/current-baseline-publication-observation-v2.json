@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.current-baseline-publication-observation.v2",
+  "sequence": 2,
+  "status": "passed",
+  "source_git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
+  "version_doi": "10.5281/zenodo.21846249",
+  "concept_doi": "10.5281/zenodo.21739343",
+  "zenodo_record_id": 21846249,
+  "zenodo_package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823",
+  "public_metadata_and_byte_verification": "passed_by_v3_publisher",
+  "public_cold_restore": "passed",
+  "arweave_snapshot_refreshed": false,
+  "previous_sequence_1_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
+  "boundary": {
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "repository_doi_is_exact_baseline_not_live_main": true,
+    "sequence_1_arweave_snapshot_remains_historical_mirror_only": true
+  }
+}

@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "8467c77766f1b068",
+  "source_digest": "0ef041401a28edf8",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -86,12 +86,12 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21831412",
-      "record_id": 21831412,
+      "doi": "10.5281/zenodo.21846249",
+      "record_id": 21846249,
       "concept_doi": "10.5281/zenodo.21739343",
-      "git_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
-      "git_tree_oid": "30d952b2ea8e064facb72f42111da1a4a94c1854",
-      "package_identity_sha256": "1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54",
+      "git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
+      "git_tree_oid": "6ce8ef104f712cac7fc5932c5bc568841c707480",
+      "package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823",
       "github_required_for_recovery": false,
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
@@ -144,13 +144,15 @@
   "publication_refresh": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v2",
     "sequence": 2,
-    "status": "prepared_for_current_baseline_publication",
-    "authorized_base_commit_sha": "aaa117ea3c9b4e5a7af0c7544b42bc6e50804ebf",
-    "required_proof_hardening_commit_sha": "0cdba0d13b97f242908f150b634ae7a481be9ee3",
-    "previous_version_doi": "10.5281/zenodo.21831412",
+    "status": "published_verified_and_consumed",
+    "source_git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
+    "version_doi": "10.5281/zenodo.21846249",
     "core_concept_doi": "10.5281/zenodo.21739343",
+    "previous_version_doi": "10.5281/zenodo.21831412",
+    "required_proof_hardening_commit_sha": "0cdba0d13b97f242908f150b634ae7a481be9ee3",
     "arweave_snapshot_refreshed": false,
     "previous_sequence_1_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
+    "previous_sequence_1_arweave_payload_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63",
     "non_amending_boundary": true
   }
 }
