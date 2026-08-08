@@ -96,7 +96,15 @@ def main() -> int:
         'if [[ "${source_sha}" != "${main_sha}" ]]',
         "Refusing to publish ${source_sha}; current main is ${main_sha}",
         "Confirm immutable verify/build handoff",
+        "required=false",
         "required=true",
+        "force_gateway_rollout:",
+        'default: false',
+        'type: boolean',
+        "FORCE_GATEWAY_ROLLOUT: ${{ github.event.inputs.force_gateway_rollout || 'false' }}",
+        'elif [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]',
+        'if [[ "$FORCE_GATEWAY_ROLLOUT" == "true" ]]',
+        "Unsupported deploy-pages event",
         "Confirm immutable build/deploy handoff",
         "Confirm immutable retry handoff",
         "Refuse stale source before retry",
@@ -127,6 +135,11 @@ def main() -> int:
     for marker in required:
         if marker not in text:
             errors.append(f"missing required publication marker: {marker}")
+
+    if "deploy-pages|render-manual-deploy" in text:
+        errors.append(
+            "Pages workflow changes alone must not be classified as Gateway runtime changes"
+        )
 
     if text.count("actions/deploy-pages@") != 2:
         errors.append("Pages publication must contain exactly two pinned deployment attempts")
@@ -162,7 +175,7 @@ def main() -> int:
         return 1
     print(
         "PASS: deploy-pages workflow contract "
-        "(current-main exact-SHA publication with isolated retry and live-byte authority)"
+        "(current-main exact-SHA publication with scoped Gateway rollout, isolated retry, and live-byte authority)"
     )
     return 0
 
