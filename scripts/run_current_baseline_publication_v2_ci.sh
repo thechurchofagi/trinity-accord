@@ -8,6 +8,7 @@ AUTH="preservation/current-baseline-publication-authorization-v2.json"
 WORK_STATE="preservation/current-baseline-publish-v2-work.json"
 PREPARE_MESSAGE="archive: prepare final proof baseline publication v2"
 SEAL_MESSAGE="archive: record final proof baseline publication v2"
+EXPECTED_RIGHTS_ACK="TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
 
 status="$(python3 - <<'PY'
 import json
@@ -29,12 +30,22 @@ fi
 
 : "${RUNNER_TEMP:?RUNNER_TEMP is required}"
 : "${ZENODO_ACCESS_TOKEN:?ZENODO_ACCESS_TOKEN is required}"
-: "${PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK:?PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK is required}"
 ZENODO_API_BASE="${ZENODO_API_BASE:-https://zenodo.org/api}"
-if [[ "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" != "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" ]]; then
-  echo "::error::Repository preservation rights acknowledgement mismatch."
+committed_rights_ack="$(python3 - <<'PY'
+import json
+print(json.load(open('preservation/current-baseline-publication-authorization-v2.json'))['zenodo_rights_acknowledgement'])
+PY
+)"
+if [[ "$committed_rights_ack" != "$EXPECTED_RIGHTS_ACK" ]]; then
+  echo "::error::Committed sequence-2 repository preservation rights acknowledgement mismatch."
   exit 1
 fi
+if [[ -n "${PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK:-}" \
+  && "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" != "$committed_rights_ack" ]]; then
+  echo "::error::Environment rights acknowledgement conflicts with committed sequence-2 authorization."
+  exit 1
+fi
+export PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK="$committed_rights_ack"
 
 python3 scripts/current_baseline_publication_v2.py validate
 
