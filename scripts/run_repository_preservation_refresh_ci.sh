@@ -4,6 +4,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+v2_authorization="preservation/current-baseline-publication-authorization-v2.json"
+if [[ -f "$v2_authorization" ]]; then
+  v2_status="$(python3 - <<'PY'
+import json
+from pathlib import Path
+print(json.loads(Path('preservation/current-baseline-publication-authorization-v2.json').read_text())['status'])
+PY
+)"
+  if [[ "$v2_status" == "pending" || "$v2_status" == "prepared" || "$v2_status" == "consumed" ]]; then
+    bash scripts/run_current_baseline_publication_v2_ci.sh
+    exit $?
+  fi
+  echo "::error::Unexpected current-baseline publication v2 status: $v2_status"
+  exit 1
+fi
+
 current_status="$(python3 - <<'PY'
 import json
 from pathlib import Path
