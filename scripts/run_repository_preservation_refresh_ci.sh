@@ -12,12 +12,22 @@ from pathlib import Path
 print(json.loads(Path('preservation/current-baseline-publication-authorization-v2.json').read_text())['status'])
 PY
 )"
-  if [[ "$v2_status" == "pending" || "$v2_status" == "prepared" || "$v2_status" == "consumed" ]]; then
-    bash scripts/run_current_baseline_publication_v2_ci.sh
-    exit $?
+  if [[ "$v2_status" == "consumed" ]]; then
+    python3 scripts/current_baseline_publication_v2.py validate
+    echo "Final proof baseline publication v2 is consumed and valid; no external write will run."
+    exit 0
   fi
-  echo "::error::Unexpected current-baseline publication v2 status: $v2_status"
-  exit 1
+  if [[ "$v2_status" == "pending" || "$v2_status" == "prepared" ]]; then
+    python3 scripts/current_baseline_publication_v2.py validate
+    if [[ "${GITHUB_EVENT_NAME:-}" == "push" && "${GITHUB_REF:-}" == "refs/heads/main" ]]; then
+      bash scripts/run_current_baseline_publication_v2_ci.sh
+      exit $?
+    fi
+    echo "Final proof baseline publication v2 $v2_status state is valid; external publication is restricted to a main-branch push."
+  else
+    echo "::error::Unexpected current-baseline publication v2 status: $v2_status"
+    exit 1
+  fi
 fi
 
 current_status="$(python3 - <<'PY'
