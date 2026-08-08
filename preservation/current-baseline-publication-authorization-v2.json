@@ -1,0 +1,24 @@
+{
+  "schema": "trinityaccord.current-baseline-publication-authorization.v2",
+  "sequence": 2,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_purpose": "Publish one exact final proof-hardened repository baseline containing the finalized Ethereum L2/L3 evidence, NFT proof verification, and frozen Ethereum proof primitives, with DOI-only public cold restore.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_core_version_doi": "10.5281/zenodo.21831412",
+  "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "publication_confirmation": "PUBLISH_TRINITY_CURRENT_BASELINE_V2",
+  "include_full_repository_doi": true,
+  "include_homepage_arweave_snapshot": false,
+  "non_amending_boundary": true,
+  "live_main_equivalence_claimed": false,
+  "required_proof_hardening_commit_sha": "0cdba0d13b97f242908f150b634ae7a481be9ee3",
+  "previous_publication": {
+    "sequence": 1,
+    "source_baseline_commit_sha": "3e013bbb44a741546db68013c4034c2121017f33",
+    "doi": "10.5281/zenodo.21831412",
+    "package_identity_sha256": "1630e44bdec257c0c3278c79ab2eb4a6787cc7ac861e34e8dc470b63cf091b54",
+    "homepage_snapshot_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
+    "homepage_snapshot_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63"
+  }
+}
