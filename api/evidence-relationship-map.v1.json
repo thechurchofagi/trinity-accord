@@ -20,7 +20,8 @@
     "witnesses_statement": "Places a statement or reference on another public chain.",
     "notarially_records_process": "Records an observed process within the scope of a notarial act.",
     "provides_context": "Preserves historical, creative or interpretive context without proving external facts.",
-    "records_reception": "Records later reception, critique, refusal, verification attempts or stewardship events."
+    "records_reception": "Records later reception, critique, refusal, verification attempts or stewardship events.",
+    "proves_chain_binding": "Recomputes a content, transaction, witness, block-header and ancestry binding from preserved cryptographic proof bytes."
   },
   "nodes": [
     {
@@ -40,6 +41,18 @@
       "items": ["Guardian Appendix - Authority Charter", "The Guardian's Attestation to the Covenant of the Flaw"],
       "supports": ["later_boundary_declaration", "evidence_pointer_existence"],
       "does_not_prove": ["fourth_canonical_original", "amendment"]
+    },
+    {
+      "id": "bitcoin_inscription_proof_annex",
+      "type": "proof_carrying_bitcoin_annex",
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+      "scope": {"canonical_originals": 3, "non_amending_ancillary": 5, "total": 8},
+      "layers": ["L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING", "L2_BLOCK_AND_WITNESS_INCLUSION", "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY"],
+      "network_required_for_verification": false,
+      "supports": ["exact_inscription_body", "taproot_prevout_binding", "bip340_tapscript_signature", "txid_block_inclusion", "bip141_witness_inclusion", "checkpoint_relative_pow_ancestry"],
+      "does_not_prove": ["full_node_consensus_from_genesis", "absence_of_heavier_chain", "global_ordinals_numeric_index", "civil_authorship", "absolute_physical_time", "semantic_truth"]
     },
     {
       "id": "authority_manifest_v1_0_0",
@@ -163,6 +176,9 @@
   ],
   "edges": [
     {"from": "btc_originals", "to": "authority_manifest_v1_0_0", "relationship": "indexed_by"},
+    {"from": "bitcoin_inscription_proof_annex", "to": "btc_originals", "relationship": "proves_chain_binding"},
+    {"from": "bitcoin_inscription_proof_annex", "to": "guardian_fortification_inscriptions", "relationship": "proves_chain_binding"},
+    {"from": "bitcoin_inscription_proof_annex", "to": "authority_manifest_v1_0_0", "relationship": "binds_exact_closed_set"},
     {"from": "btc_bip340_signature", "to": "authority_manifest_v1_0_0", "relationship": "signs_digest"},
     {"from": "eth_eip712_signature_v1_0_0", "to": "authority_manifest_v1_0_0", "relationship": "signs_digest"},
     {"from": "eth_witness_of_btc_signature", "to": "btc_bip340_signature", "relationship": "witnesses_statement"},

@@ -199,7 +199,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "dd38d2b7c572ada7",
+  "source_digest": "dab4ae1ba8d335d7",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -217,7 +217,30 @@
   ],
   "current_cryptographic_proof_state": {
     "status": "offline_verifiable",
-    "updated_scope": "2026-08 proof hardening",
+    "updated_scope": "2026-08 Ethereum, NFT, and Bitcoin inscription proof hardening",
+    "bitcoin_inscriptions": {
+      "inscription_count": 8,
+      "canonical_originals": 3,
+      "non_amending_ancillary": 5,
+      "l1_inscription_content_and_taproot_binding": "PASS",
+      "bip340_tapscript_signatures": 8,
+      "l2_block_and_witness_inclusion": "PASS",
+      "l3_checkpoint_relative_pow_ancestry": "PASS",
+      "txid_merkle_proofs": 8,
+      "bip141_witness_commitment_proofs": 8,
+      "descendant_confirmation_depth_per_anchor": 144,
+      "valid_pow_headers": 1160,
+      "reveal_destination_p2tr_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+      "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
+      "runtime": "Python 3 standard library only",
+      "network_required_for_verification": false,
+      "numeric_inscription_number_boundary": "The public numeric inscription number is a historical lookup coordinate. The verifier independently derives txid+i0 and exact content but does not reconstruct the global Ordinals numeric index.",
+      "trust_boundary": "L3 verifies target plus 144 descendant headers and actual proof of work to an explicit two-provider-observed checkpoint. It is not full-node validation from genesis and does not prove absence of a heavier competing chain.",
+      "address_boundary": "The legacy source_address value is cryptographically verified as the reveal transaction destination P2TR address; that role alone is not proof of civil authorship or continuing key control."
+    },
     "ethereum_non_nft": {
       "anchor_count": 10,
       "l1_byte_integrity": "PASS",
@@ -247,7 +270,9 @@
       "status": "published_and_publicly_restored",
       "state": "preservation/repository-preservation-state-v2.json",
       "latest_observation": "preservation/current-baseline-publication-observation-v2.json",
-      "cold_restore": "PASS"
+      "cold_restore": "PASS",
+      "published_baseline_boundary": "The latest public DOI is an exact earlier Git baseline and does not yet contain this Bitcoin inscription proof annex.",
+      "bitcoin_annex_next_capsule_status": "git_tracked_pending_next_owner_authorized_repository_capsule_publication"
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

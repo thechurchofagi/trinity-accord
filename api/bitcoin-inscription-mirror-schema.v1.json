@@ -42,7 +42,7 @@
         "timestamp_utc": { "type": ["string", "null"] },
         "content_type": { "type": ["string", "null"] },
         "source_address": { "type": "string" },
-        "source_address_role": { "type": "string" }
+        "source_address_role": { "type": "string", "description": "Role actually established by evidence. Current records use reveal_destination_p2tr_address; the legacy source_address field name is retained for compatibility." }
       }
     },
     "classification": {
@@ -71,12 +71,16 @@
       "type": "object",
       "required": ["verification_status", "verification_script"],
       "properties": {
-        "verification_status": { "type": "string", "enum": ["verified_onchain_match", "discovered_unverified", "mismatch", "not_checked"] },
+        "verification_status": { "type": "string", "enum": ["verified_onchain_match", "mirror_matches_onchain", "discovered_unverified", "mismatch", "not_checked"] },
         "last_verified_utc": { "type": ["string", "null"] },
         "verification_method": { "type": ["string", "null"] },
         "onchain_content_sha256": { "type": ["string", "null"] },
         "mirror_matches_onchain": { "type": ["boolean", "null"] },
-        "verification_script": { "type": "string" }
+        "verification_script": { "type": "string" },
+        "network_required_for_verification": { "type": "boolean" },
+        "proof_manifest": { "type": "string" },
+        "proof_material": { "type": "string" },
+        "proof_status": { "type": "object", "additionalProperties": { "type": "string", "const": "PASS" } }
       }
     },
     "limitations": {

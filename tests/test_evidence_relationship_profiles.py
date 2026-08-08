@@ -27,6 +27,7 @@ def test_evidence_relationship_map() -> None:
 
     required = {
         "btc_originals",
+        "bitcoin_inscription_proof_annex",
         "authority_manifest_v1_0_0",
         "btc_bip340_signature",
         "eth_eip712_signature_v1_0_0",
@@ -43,6 +44,20 @@ def test_evidence_relationship_map() -> None:
     btc_sig = node_by_id["btc_bip340_signature"]
     assert btc_sig["signed_message_sha256"] == node_by_id["authority_manifest_v1_0_0"]["sha256"]
 
+    bitcoin_annex = node_by_id["bitcoin_inscription_proof_annex"]
+    assert bitcoin_annex["scope"] == {
+        "canonical_originals": 3,
+        "non_amending_ancillary": 5,
+        "total": 8,
+    }
+    assert bitcoin_annex["network_required_for_verification"] is False
+    assert "bip340_tapscript_signature" in bitcoin_annex["supports"]
+    assert "bip141_witness_inclusion" in bitcoin_annex["supports"]
+    assert "global_ordinals_numeric_index" in bitcoin_annex["does_not_prove"]
+    assert ROOT.joinpath(bitcoin_annex["manifest"]).is_file()
+    assert ROOT.joinpath(bitcoin_annex["offline_report"]).is_file()
+    assert ROOT.joinpath(bitcoin_annex["verifier"]).is_file()
+
     notary = node_by_id["shenzhen_notarial_record"]
     assert notary["certificate_number"] == "(2026)深证字第36024号"
     assert notary["certificate_date"] == "2026-05-13"
@@ -52,6 +67,14 @@ def test_evidence_relationship_map() -> None:
     for edge in data["edges"]:
         assert edge["from"] in node_by_id, f"unknown edge source: {edge}"
         assert edge["to"] in node_by_id, f"unknown edge target: {edge}"
+
+    assert {
+        (edge["from"], edge["to"], edge["relationship"])
+        for edge in data["edges"]
+    }.issuperset({
+        ("bitcoin_inscription_proof_annex", "btc_originals", "proves_chain_binding"),
+        ("bitcoin_inscription_proof_annex", "authority_manifest_v1_0_0", "binds_exact_closed_set"),
+    })
 
 
 def test_verification_profiles() -> None:

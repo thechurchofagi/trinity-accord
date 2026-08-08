@@ -24,6 +24,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { execFileSync } from 'child_process';
 import { collectToolchainProvenance } from './toolchain_provenance.mjs';
+import { runBitcoinInscriptionOfflineVerification } from './bitcoin-inscription-offline-adapter.mjs';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CLI ARGS
@@ -1728,151 +1729,14 @@ async function verifyChainC() {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function verifyChainD1() {
-  log('\n═══ Chain D1: Bitcoin TX Anchor Verification ═══\n');
-
-  const result = {
-    bitcoin_tx_anchor_pass: false,
-    bitcoin_anchors_total: 0,
-    bitcoin_anchors_pass: 0,
-    bitcoin_anchors_fail: 0,
-    originals_total: 0,
-    ancillary_total: 0,
-    earliest_anchor: null,
-    latest_anchor: null,
-    anchor_details: [],
-    critical_errors: [],
-  };
-
-  const authority = readRepoJson(AUTHORITY_JCS_FILE);
-  if (!authority) {
-    result.critical_errors.push('authority.jcs.json not found');
-    log('  ❌ authority.jcs.json not found');
-    return result;
-  }
-
-  const originals = authority.bitcoin?.originals || [];
-  const ancillary = authority.bitcoin?.ancillary || [];
-  result.originals_total = originals.length;
-  result.ancillary_total = ancillary.length;
-  result.bitcoin_anchors_total = originals.length + ancillary.length;
-
-  log(`  Originals : ${originals.length}`);
-  log(`  Ancillary : ${ancillary.length}`);
-
-  const allAnchors = [
-    ...originals.map(a => ({ ...a, _type: 'original' })),
-    ...ancillary.map(a => ({ ...a, _type: 'ancillary' })),
-  ];
-
-  let earliestTimestamp = Infinity;
-  let latestTimestamp = -Infinity;
-
-  for (const anchor of allAnchors) {
-    const txid = anchor.txid;
-    const detail = {
-      txid, label: anchor.label || anchor.title || anchor._type,
-      type: anchor._type,
-      exists: false, confirmed: false,
-      block_height_match: false, block_hash_match: false,
-      block_height: null, block_hash: null, block_timestamp: null,
-      merkle_proof: 'not_checked', error: null,
-    };
-
-    try {
-      if (!txid) {
-        detail.error = 'No txid';
-        result.bitcoin_anchors_fail++;
-        result.anchor_details.push(detail);
-        continue;
-      }
-
-      const txInfo = await btcFetch(`/tx/${txid}`);
-      if (!txInfo) {
-        detail.error = 'Transaction not found';
-        result.bitcoin_anchors_fail++;
-        result.anchor_details.push(detail);
-        continue;
-      }
-
-      detail.exists = true;
-      detail.confirmed = !!txInfo.status?.confirmed;
-
-      if (txInfo.status?.block_height) detail.block_height = txInfo.status.block_height;
-      if (txInfo.status?.block_hash) detail.block_hash = txInfo.status.block_hash;
-
-      // Verify block_height and block_hash match manifest
-      if (anchor.block_height != null) {
-        detail.block_height_match = txInfo.status?.block_height === anchor.block_height;
-      }
-      if (anchor.block_hash) {
-        detail.block_hash_match = txInfo.status?.block_hash === anchor.block_hash;
-      }
-
-      // Query block for timestamp
-      const blockHash = txInfo.status?.block_hash;
-      if (blockHash) {
-        try {
-          const blockInfo = await btcFetch(`/block/${blockHash}`);
-          if (blockInfo) {
-            detail.block_timestamp = blockInfo.timestamp;
-            if (blockInfo.timestamp) {
-              if (blockInfo.timestamp < earliestTimestamp) {
-                earliestTimestamp = blockInfo.timestamp;
-                result.earliest_anchor = {
-                  label: detail.label, txid, block_height: detail.block_height,
-                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
-                };
-              }
-              if (blockInfo.timestamp > latestTimestamp) {
-                latestTimestamp = blockInfo.timestamp;
-                result.latest_anchor = {
-                  title: detail.label, txid, block_height: detail.block_height,
-                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
-                };
-              }
-            }
-          }
-        } catch { /* non-fatal */ }
-      }
-
-      // Try merkle proof
-      try {
-        const proof = await btcFetch(`/tx/${txid}/merkle-proof`);
-        if (proof) {
-          detail.merkle_proof = 'verified';
-        } else {
-          detail.merkle_proof = 'unavailable';
-        }
-      } catch {
-        detail.merkle_proof = 'unavailable';
-      }
-
-      // Overall anchor pass
-      const anchorPass = detail.exists && detail.confirmed
-        && (!anchor.block_height || detail.block_height_match)
-        && (!anchor.block_hash || detail.block_hash_match);
-      if (anchorPass) result.bitcoin_anchors_pass++;
-      else {
-        result.bitcoin_anchors_fail++;
-        detail.error = detail.error || 'Anchor verification failed';
-      }
-
-    } catch (e) {
-      detail.error = e.message;
-      result.bitcoin_anchors_fail++;
-      result.critical_errors.push(`Anchor ${txid}: ${e.message}`);
-    }
-
-    result.anchor_details.push(detail);
-  }
-
-  result.bitcoin_tx_anchor_pass = result.bitcoin_anchors_fail === 0 && result.bitcoin_anchors_total > 0;
-
-  log(`  Anchors total  : ${result.bitcoin_anchors_total}`);
-  log(`  Anchors pass   : ${result.bitcoin_anchors_pass}`);
-  log(`  Anchors fail   : ${result.bitcoin_anchors_fail}`);
-  log(`  Chain D1 pass  : ${result.bitcoin_tx_anchor_pass}`);
-
+  log('\n═══ Chain D1: Bitcoin Inscription Offline Proof Verification ═══\n');
+  const result = runBitcoinInscriptionOfflineVerification();
+  log(`  Verification mode : ${result.verification_mode}`);
+  log(`  Network required  : ${result.network_required_for_verification}`);
+  log(`  Anchors pass      : ${result.bitcoin_anchors_pass}/${result.bitcoin_anchors_total}`);
+  log(`  Witness proofs    : ${result.witness_commitment_verified_count || 0}`);
+  log(`  Valid PoW headers : ${result.valid_pow_headers || 0}`);
+  log(`  Chain D1 pass     : ${result.bitcoin_tx_anchor_pass}`);
   return result;
 }
 

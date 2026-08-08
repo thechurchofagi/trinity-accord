@@ -4,13 +4,15 @@ Build the Bitcoin inscription mirror index from mirror records.
 Scans bitcoin-inscription-mirrors/**/*.json, validates, and generates
 api/bitcoin-inscription-mirror-index.json.
 """
-import json, os, sys
+import json, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MIRROR_DIR = ROOT / "bitcoin-inscription-mirrors"
 INDEX_PATH = ROOT / "api" / "bitcoin-inscription-mirror-index.json"
 SCHEMA_PATH = ROOT / "api" / "bitcoin-inscription-mirror-schema.v1.json"
+ANNEX_MANIFEST_PATH = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "ANNEX-MANIFEST.json"
+ANNEX_REPORT_PATH = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 
 def load_json(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -59,6 +61,27 @@ def validate_record(record, schema):
 def build_index():
     """Build the mirror index."""
     schema = load_json(SCHEMA_PATH)
+    proof_manifest = load_json(ANNEX_MANIFEST_PATH)
+    checked_proof_report = load_json(ANNEX_REPORT_PATH)
+    completed = subprocess.run(
+        [sys.executable, str(ROOT / proof_manifest["verification_implementation"]["verifier"])],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        env={"PATH": str(Path(sys.executable).parent)},
+    )
+    try:
+        proof_report = json.loads(completed.stdout)
+    except json.JSONDecodeError as exc:
+        print(f"ERROR: offline Bitcoin proof verifier emitted invalid JSON: {exc}", file=sys.stderr)
+        return 1
+    if completed.returncode != 0 or proof_report.get("result") != "PASS":
+        print(f"ERROR: offline Bitcoin proof verification failed: {proof_report.get('failures')}", file=sys.stderr)
+        return 1
+    if proof_report != checked_proof_report:
+        print("ERROR: checked-in Bitcoin proof report is stale", file=sys.stderr)
+        return 1
     records = scan_mirrors()
 
     if not records:
@@ -131,7 +154,30 @@ def build_index():
             "canonical_original_count": 3,
             "canonical_authority": "three_bitcoin_originals_only",
             "github_mirrors_non_amending": True,
-            "verification_requires_onchain_check": True
+            "verification_requires_onchain_check": True,
+            "network_required_for_verification": False
+        },
+        "cryptographic_proof_annex": {
+            "schema": proof_manifest["schema"],
+            "status": proof_report["result"],
+            "inscription_count": proof_manifest["closed_set"]["inscription_count"],
+            "canonical_originals": proof_manifest["closed_set"]["canonical_originals"],
+            "non_amending_ancillary": proof_manifest["closed_set"]["non_amending_ancillary"],
+            "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": proof_report["L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING"]["status"],
+            "bip340_tapscript_signatures": sum(
+                item.get("tapscript_signature_status") == "PASS"
+                for item in proof_report["l1_checks"]
+            ),
+            "L2_BLOCK_AND_WITNESS_INCLUSION": proof_report["L2_BLOCK_AND_WITNESS_INCLUSION"]["status"],
+            "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": proof_report["L3_CHECKPOINT_RELATIVE_POW_ANCESTRY"]["status"],
+            "descendant_confirmation_depth_per_anchor": proof_report["L3_CHECKPOINT_RELATIVE_POW_ANCESTRY"]["descendant_confirmation_depth_per_anchor"],
+            "valid_pow_headers": proof_report["L3_CHECKPOINT_RELATIVE_POW_ANCESTRY"]["valid_pow_headers"],
+            "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+            "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+            "verifier": proof_manifest["verification_implementation"]["verifier"],
+            "frozen_primitives": proof_manifest["verification_implementation"]["frozen_primitives"],
+            "network_required_for_verification": False,
+            "numeric_inscription_number_boundary": "Historical lookup coordinate; txid+i0 and exact inscription body are independently derived, while the global Ordinals numeric index is not reconstructed."
         },
         "counts": {
             "canonical_originals": len(canonical),

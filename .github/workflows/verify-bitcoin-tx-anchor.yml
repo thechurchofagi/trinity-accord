@@ -17,7 +17,11 @@ jobs:
         with:
           node-version-file: ".node-version"
 
-      - name: Run Bitcoin TX Anchor Verification
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Run offline Bitcoin inscription proof verification
         run: node scripts/verify-bitcoin-tx-anchor.mjs
 
       - name: Upload BITCOIN-TX-ANCHOR-AUDIT.json

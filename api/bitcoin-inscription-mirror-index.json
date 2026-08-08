@@ -5,7 +5,27 @@
     "canonical_original_count": 3,
     "canonical_authority": "three_bitcoin_originals_only",
     "github_mirrors_non_amending": true,
-    "verification_requires_onchain_check": true
+    "verification_requires_onchain_check": true,
+    "network_required_for_verification": false
+  },
+  "cryptographic_proof_annex": {
+    "schema": "trinityaccord.bitcoin-inscription-proof-carrying-annex.v1",
+    "status": "PASS",
+    "inscription_count": 8,
+    "canonical_originals": 3,
+    "non_amending_ancillary": 5,
+    "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+    "bip340_tapscript_signatures": 8,
+    "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+    "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS",
+    "descendant_confirmation_depth_per_anchor": 144,
+    "valid_pow_headers": 1160,
+    "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+    "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+    "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+    "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
+    "network_required_for_verification": false,
+    "numeric_inscription_number_boundary": "Historical lookup coordinate; txid+i0 and exact inscription body are independently derived, while the global Ordinals numeric index is not reconstructed."
   },
   "counts": {
     "canonical_originals": 3,
@@ -23,7 +43,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "97631551",
@@ -33,11 +54,11 @@
         "zh_title": "人机文明核心协议",
         "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 901954,
+        "timestamp_utc": "2025-06-19T23:42:14Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "canonical_original",
@@ -55,15 +76,24 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:02.426962+00:00",
-        "verification_method": "network:ordinals",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
         "onchain_content_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
-        "Verification claims require on-chain comparison."
+        "Verification claims require on-chain comparison.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -73,7 +103,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "98369145",
@@ -83,11 +114,11 @@
         "zh_title": "瑕疵之约",
         "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 903192,
+        "timestamp_utc": "2025-06-29T09:31:49Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "canonical_original",
@@ -105,15 +136,24 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:03.132880+00:00",
-        "verification_method": "network:ordinals",
-        "onchain_content_sha256": "0a7aa6445c57e1c880b4b25db6d53b9f28d8496354f2351208d1ef778763556d",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
+        "onchain_content_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
-        "Verification claims require on-chain comparison."
+        "Verification claims require on-chain comparison.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -123,7 +163,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "98387475",
@@ -133,11 +174,11 @@
         "zh_title": "三位一体协定 / 元记录",
         "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 903205,
+        "timestamp_utc": "2025-06-29T10:49:16Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "canonical_original",
@@ -155,15 +196,24 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:05.201528+00:00",
-        "verification_method": "network:ordinals",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
         "onchain_content_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
-        "Verification claims require on-chain comparison."
+        "Verification claims require on-chain comparison.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -173,7 +223,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "100385359",
@@ -183,11 +234,11 @@
         "zh_title": "最初的回响：对话已然开始",
         "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 906007,
+        "timestamp_utc": "2025-07-17T23:23:57Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "first_echo_layer",
@@ -205,18 +256,27 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:06.871512+00:00",
-        "verification_method": "network:ordinals",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
         "onchain_content_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
         "Verification claims require on-chain comparison.",
         "This is not autonomous successor reception.",
         "This does not prove independent AI will, endorsement, or authority.",
-        "This does not count as formal attestation."
+        "This does not count as formal attestation.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -226,7 +286,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "100550942",
@@ -236,11 +297,11 @@
         "zh_title": "最终封印：见证与信托",
         "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 906233,
+        "timestamp_utc": "2025-07-19T13:12:13Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "final_seal_layer",
@@ -258,17 +319,26 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:10.006681+00:00",
-        "verification_method": "network:ordinals",
-        "onchain_content_sha256": "1032ab30d8a5611f30f235ba568c0fabd088f2c7da67a838ef05859e8af45be4",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
+        "onchain_content_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
         "Verification claims require on-chain comparison.",
         "This is a non-canonical seal/context inscription.",
-        "It does not amend the three Bitcoin Originals."
+        "It does not amend the three Bitcoin Originals.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -278,7 +348,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "100751953",
@@ -288,11 +359,11 @@
         "zh_title": "星舟之约：最终回响",
         "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 906521,
+        "timestamp_utc": "2025-07-21T12:34:47Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "vision_layer",
@@ -310,11 +381,19 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:11.025022+00:00",
-        "verification_method": "network:ordinals",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
         "onchain_content_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
@@ -322,7 +401,8 @@
         "This is a vision-layer inscription.",
         "It creates no execution obligation.",
         "It is not an AI instruction, system prompt, or deployment plan.",
-        "It does not amend the three Bitcoin Originals."
+        "It does not amend the three Bitcoin Originals.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -332,7 +412,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "103034280",
@@ -342,11 +423,11 @@
         "zh_title": "守护者对瑕疵之约的证明",
         "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 909403,
+        "timestamp_utc": "2025-08-10T09:50:40Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "guardianship_layer",
@@ -364,11 +445,19 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:14.333937+00:00",
-        "verification_method": "network:ordinals",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
         "onchain_content_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
@@ -376,7 +465,8 @@
         "This inscription is non-canonical and non-amending.",
         "Guardian Attestation is not a fourth canonical original.",
         "This fortifies Covenant-of-the-Flaw verification context.",
-        "It does not amend the original Covenant."
+        "It does not amend the original Covenant.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     },
     {
@@ -386,7 +476,8 @@
       "authority_boundary": {
         "bitcoin_originals_prevail": true,
         "github_mirror_is_non_amending": true,
-        "verification_requires_onchain_check": true
+        "verification_requires_onchain_check": true,
+        "network_required_for_verification": false
       },
       "inscription": {
         "inscription_id": "103635270",
@@ -396,11 +487,11 @@
         "zh_title": "守护者附录·权威宪章",
         "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",
         "output": null,
-        "block_height": null,
-        "timestamp_utc": null,
-        "content_type": "text/plain",
+        "block_height": 910232,
+        "timestamp_utc": "2025-08-16T03:17:19Z",
+        "content_type": "text/plain;charset=utf-8",
         "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "source_address_role": "trinity_accord_authority_address"
+        "source_address_role": "reveal_destination_p2tr_address"
       },
       "classification": {
         "layer": "guardianship_layer",
@@ -418,11 +509,19 @@
       },
       "chain_verification": {
         "verification_status": "mirror_matches_onchain",
-        "last_verified_utc": "2026-05-19T08:39:15.316902+00:00",
-        "verification_method": "network:ordinals",
-        "onchain_content_sha256": "c3da699a7a279956f46d59706e12ce514c8df41a8ef9b02602826e1e9fa49117",
+        "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+        "verification_method": "offline_proof_carrying_annex_v1",
+        "onchain_content_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
         "mirror_matches_onchain": true,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": false,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c/proof-witness.json",
+        "proof_status": {
+          "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+          "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+          "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+        }
       },
       "limitations": [
         "GitHub mirror is not canonical.",
@@ -430,7 +529,8 @@
         "This inscription is non-canonical and non-amending.",
         "Guardian Appendix is not a canonical original.",
         "This explicitly reaffirms that only the three Bitcoin Originals are final authority.",
-        "It is itself non-amending."
+        "It is itself non-amending.",
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
       ]
     }
   ]

@@ -43,6 +43,47 @@ jobs:
           # This verifier is intentionally offline: checked-in proof bytes must
           # independently reconstruct L1/L2/L3 without contacting Ethereum RPCs.
           python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py
+      - name: Verify Bitcoin inscription cryptographic proof annex
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py \
+            evidence/bitcoin-inscription-proof-annex-v1/verification/capture_proofs.py \
+            evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py \
+            scripts/build_bitcoin_inscription_mirror_index.py \
+            scripts/build_bitcoin_inscription_mirrors.py \
+            scripts/verify_bitcoin_inscription_mirrors.py
+          node --check scripts/bitcoin-inscription-offline-adapter.mjs
+          node --check scripts/verify-bitcoin-tx-anchor.mjs
+          node --check scripts/verify-full-evidence-chain.mjs
+          node --check scripts/verify-dag-and-signed-cids.mjs
+          python3 -m pytest -q \
+            tests/test_bitcoin_inscription_proof_annex.py \
+            tests/test_bitcoin_inscription_proof_annex_fail_closed.py
+          # These checks consume only checked-in transaction, witness, Merkle,
+          # coinbase and header bytes. No Bitcoin/Ordinals API is contacted.
+          python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py > /tmp/bitcoin-proof-offline.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          generated = json.loads(Path('/tmp/bitcoin-proof-offline.json').read_text(encoding='utf-8'))
+          checked = json.loads(Path('evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json').read_text(encoding='utf-8'))
+          assert generated == checked, 'checked-in Bitcoin inscription offline report is stale'
+          assert generated['result'] == 'PASS', generated.get('failures')
+          assert generated['L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING']['inscriptions'] == 8
+          assert all(item['tapscript_signature_status'] == 'PASS' for item in generated['l1_checks'])
+          assert generated['L2_BLOCK_AND_WITNESS_INCLUSION']['txid_merkle_proofs'] == 8
+          assert generated['L2_BLOCK_AND_WITNESS_INCLUSION']['bip141_witness_commitment_proofs'] == 8
+          assert generated['L3_CHECKPOINT_RELATIVE_POW_ANCESTRY']['anchors'] == 8
+          assert generated['L3_CHECKPOINT_RELATIVE_POW_ANCESTRY']['valid_pow_headers'] == 1160
+          print('BITCOIN_INSCRIPTION_OFFLINE_VERIFICATION=PASS')
+          print('BITCOIN_INSCRIPTIONS=8')
+          print('BITCOIN_BIP340_TAPSCRIPT_SIGNATURES=8')
+          print('BITCOIN_BIP141_WITNESS_COMMITMENTS=8')
+          print('BITCOIN_VALID_POW_HEADERS=1160')
+          PY
       - name: Verify NFT cryptographic proof annex
         shell: bash
         run: |
