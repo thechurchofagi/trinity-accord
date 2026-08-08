@@ -88,12 +88,13 @@ def test_later_current_baseline_contract_supersedes_historical_doi_literal(tmp_p
 
     annex_source = sandbox["ANNEX_V2_TEST"].read_text(encoding="utf-8")
     assert module.CURRENT_DOI_CONTRACT_SOURCE in annex_source
-    assert module.CURRENT_DOI_CONTRACT_ASSERTION in annex_source
-    assert "current_baseline = json.loads(" in annex_source
+    assert module.CURRENT_DOI_SUCCESSOR_SOURCE in annex_source
+    assert module.CURRENT_DOI_SUCCESSOR_ASSERTION in annex_source
+    assert module.CURRENT_DOI_SUCCESSOR_LINEAGE_ASSERTION in annex_source
     assert module.has_current_baseline_doi_contract(annex_source)
     assert module.OLD_CURRENT_DOI_ASSERTION not in annex_source
 
-    # A later sealed baseline is already normalized for purposes of this
+    # A later sealed successor baseline is already normalized for purposes of this
     # historical repair and must not be rewritten back to an older literal DOI.
     module.normalize_annex_v2_current_doi_assertion()
     assert sandbox["ANNEX_V2_TEST"].read_text(encoding="utf-8") == annex_source

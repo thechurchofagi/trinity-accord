@@ -8,6 +8,10 @@
     "nft": "5d8b5b460bb7afc8a59b6b8d00cf972c4286dff7"
   },
   "core_repository_preservation_doi": "10.5281/zenodo.21739344",
+  "core_repository_preservation_doi_role": "historical_version_reference",
+  "current_core_repository_concept_doi": "10.5281/zenodo.21739343",
+  "current_core_repository_latest_version_doi": "10.5281/zenodo.21846249",
+  "core_repository_reference_note": "The legacy core_repository_preservation_doi is retained as a historical version reference; it is not the current Concept DOI. Current repository preservation identity is the Concept DOI plus its latest published version DOI above.",
   "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
   "annexes": {
     "evidence": {

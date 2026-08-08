@@ -3,7 +3,7 @@
 #
 # This historical repair remains idempotent across later repository-preservation
 # publications. Later releases may supersede the historical literal DOI assertion
-# with the sealed current-baseline authorization contract.
+# with a sealed current-baseline authorization succession contract.
 
 from __future__ import annotations
 
@@ -149,6 +149,13 @@ CURRENT_DOI_CONTRACT_ASSERTION = (
     '    assert current["latest_doi"] == current_baseline["published_doi"]\n'
 )
 CURRENT_DOI_CONTRACT_SOURCE = "current-baseline-publication-authorization-v1.json"
+CURRENT_DOI_SUCCESSOR_ASSERTION = (
+    '    assert current["latest_doi"] == seq2["published_doi"]\n'
+)
+CURRENT_DOI_SUCCESSOR_LINEAGE_ASSERTION = (
+    '    assert seq2["previous_core_version_doi"] == seq1["published_doi"]\n'
+)
+CURRENT_DOI_SUCCESSOR_SOURCE = "current-baseline-publication-authorization-v2.json"
 
 OLD_RECOVERY_STATUS_ASSERTION = (
     '    assert report["repository_recovery_status"] == '
@@ -236,16 +243,23 @@ def patch_file(path: Path, old: str, new: str, *, expected_count: int = 1) -> No
 
 
 def has_current_baseline_doi_contract(text: str) -> bool:
-    return (
+    sequence1_contract = (
         CURRENT_DOI_CONTRACT_ASSERTION in text
         and CURRENT_DOI_CONTRACT_SOURCE in text
         and "current_baseline = json.loads(" in text
     )
+    sequence2_contract = (
+        CURRENT_DOI_SUCCESSOR_ASSERTION in text
+        and CURRENT_DOI_SUCCESSOR_LINEAGE_ASSERTION in text
+        and CURRENT_DOI_CONTRACT_SOURCE in text
+        and CURRENT_DOI_SUCCESSOR_SOURCE in text
+    )
+    return sequence1_contract or sequence2_contract
 
 
 def normalize_annex_v2_current_doi_assertion() -> None:
     # Preserve the historical 21755655 -> 21755827 repair while accepting
-    # the stronger forward-compatible contract used by later sealed baselines.
+    # stronger sealed current-baseline succession contracts used by later versions.
     text = ANNEX_V2_TEST.read_text(encoding="utf-8")
     if OLD_CURRENT_DOI_ASSERTION in text:
         updated = replace_required(

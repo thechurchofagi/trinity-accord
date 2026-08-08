@@ -84,9 +84,10 @@
       "release_assets": "Large payloads stored in GitHub Releases.",
       "arweave_assets": "Arweave-origin assets verified by txid and SHA-256.",
       "ipfs_assets": "CID-addressed assets; availability depends on gateways."
-    }
+    },
+    "stats_scope": "legacy_archive_snapshot_not_current_cryptographic_proof_inventory"
   },
-  "warning": "manual external verification required",
+  "warning": "Legacy archive fields below include historical mirror statistics. For current cryptographic verification state, use current_cryptographic_proof_state and its checked-in offline reports.",
   "chronicle_recovery_package": {
     "description": "ASIMilestones Chronicle NFT recovery package, 175/175 historical NFT records",
     "status": "non_amending_chronicle_recovery_layer",
@@ -198,7 +199,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "d52afc608f9b912e",
+  "source_digest": "dd38d2b7c572ada7",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -213,5 +214,47 @@
     "investment value",
     "religious authority",
     "AI system instruction authority"
-  ]
+  ],
+  "current_cryptographic_proof_state": {
+    "status": "offline_verifiable",
+    "updated_scope": "2026-08 proof hardening",
+    "ethereum_non_nft": {
+      "anchor_count": 10,
+      "l1_byte_integrity": "PASS",
+      "l2_execution_inclusion": "PASS",
+      "l3_checkpoint_relative_finality": "PASS",
+      "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+      "trust_boundary": "L3 is conditional on explicitly declared Ethereum weak-subjectivity trusted finalized Beacon roots; provider observations are provenance only."
+    },
+    "chronicle_nft": {
+      "asset_count": 175,
+      "l1_collection_commitment": "PASS",
+      "l2_execution_inclusion": "PASS",
+      "l3_checkpoint_relative_finality": "PASS",
+      "collection_merkle_root_sha256": "097bb48d98ab7fc036aed97f5b5fcb1a65962d64d327081277255d1829212267",
+      "commitment": "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
+      "capture_summary": "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json",
+      "offline_report": "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+      "frozen_primitives_manifest": "evidence/ethereum-proof-primitives-v1/PRIMITIVES-MANIFEST.json",
+      "global_log_index_boundary": "Historical JSON-RPC global logIndex is cross-bound as a lookup coordinate; receipt-local position and event semantics are cryptographically verified from the receipt."
+    },
+    "repository_preservation": {
+      "concept_doi": "10.5281/zenodo.21739343",
+      "latest_published_version_doi": "10.5281/zenodo.21846249",
+      "status": "published_and_publicly_restored",
+      "state": "preservation/repository-preservation-state-v2.json",
+      "latest_observation": "preservation/current-baseline-publication-observation-v2.json",
+      "cold_restore": "PASS"
+    },
+    "external_binary_annexes": {
+      "evidence_doi": "10.5281/zenodo.21753937",
+      "nft_media_doi": "10.5281/zenodo.21754229",
+      "public_cold_restore": "PASS",
+      "state": "preservation/external-binary-annex-state.json"
+    },
+    "authority_boundary": "Non-amending evidence only. The Bitcoin Originals remain the sole and final Canon."
+  }
 }

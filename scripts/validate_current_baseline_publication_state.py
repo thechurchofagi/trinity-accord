@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Validate the one-shot current-baseline DOI and Arweave publication lifecycle."""
+"""Validate the sequence-1 current-baseline DOI/Arweave publication lifecycle.
+
+Once sequence 2 exists, sequence 1 is immutable publication history rather than
+the owner of the repository's canonical ``latest_*`` fields. This validator
+therefore continues to prove the exact sequence-1 DOI/source/package/Arweave
+record while also failing closed if a consumed sequence 2 does not own the
+current canonical latest state exactly.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -13,12 +20,16 @@ ROOT = Path(__file__).resolve().parents[1]
 AUTH_PATH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
 PREPARED_PATH = ROOT / "preservation/current-baseline-publication-prepared-v1.json"
 OBSERVATION_PATH = ROOT / "preservation/current-baseline-publication-observation-v1.json"
+V2_AUTH_PATH = ROOT / "preservation/current-baseline-publication-authorization-v2.json"
+V2_OBSERVATION_PATH = ROOT / "preservation/current-baseline-publication-observation-v2.json"
 STATE_PATH = ROOT / "preservation/repository-preservation-state-v2.json"
 INDEX_PATH = ROOT / "api/recovery-index.json"
 
 AUTH_SCHEMA = "trinityaccord.current-baseline-publication-authorization.v1"
 PREPARED_SCHEMA = "trinityaccord.current-baseline-publication-prepared.v1"
 OBSERVATION_SCHEMA = "trinityaccord.current-baseline-publication-observation.v1"
+V2_AUTH_SCHEMA = "trinityaccord.current-baseline-publication-authorization.v2"
+V2_OBSERVATION_SCHEMA = "trinityaccord.current-baseline-publication-observation.v2"
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 PREVIOUS_DOI = "10.5281/zenodo.21755827"
 ZENODO_ACK = "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
@@ -132,6 +143,89 @@ def validate_prepared(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require(isinstance(repository, dict) and repository.get("doi") == PREVIOUS_DOI, "prepared transition displaced the last trusted DOI")
 
 
+def validate_sequence1_history_in_state(
+    auth: dict[str, Any], state: dict[str, Any], source: str, doi: str, package: str
+) -> None:
+    versions = state.get("versions")
+    require(isinstance(versions, list), "repository preservation version history is missing")
+    matches = [item for item in versions if isinstance(item, dict) and item.get("doi") == doi]
+    require(len(matches) == 1, "sequence-1 DOI must appear exactly once in repository preservation history")
+    historical = matches[0]
+    require(historical.get("git_commit_sha") == source, "sequence-1 historical source commit mismatch")
+    require(historical.get("package_identity_sha256") == package, "sequence-1 historical package identity mismatch")
+    record_id = auth.get("published_record_id")
+    if isinstance(record_id, int):
+        require(historical.get("record_id") == record_id, "sequence-1 historical record id mismatch")
+
+
+def validate_sequence2_successor(
+    sequence1_doi: str,
+    state: dict[str, Any],
+    index: dict[str, Any],
+) -> str | None:
+    if not V2_AUTH_PATH.is_file():
+        return None
+    v2 = strict_json(V2_AUTH_PATH)
+    require(v2.get("schema") == V2_AUTH_SCHEMA, "sequence-2 authorization schema mismatch")
+    require(v2.get("sequence") == 2, "sequence-2 authorization sequence mismatch")
+    require(v2.get("core_concept_doi") == CONCEPT_DOI, "sequence-2 concept DOI mismatch")
+    require(v2.get("previous_core_version_doi") == sequence1_doi, "sequence-2 lineage does not descend from sequence 1")
+    require(v2.get("non_amending_boundary") is True, "sequence-2 must remain non-amending")
+    status = v2.get("status")
+    require(status in {"pending", "prepared", "consumed"}, "invalid sequence-2 authorization status")
+
+    trusted = index.get("latest_trusted_release")
+    require(isinstance(trusted, dict), "latest trusted release is missing")
+    repository = trusted.get("repository_preservation")
+    require(isinstance(repository, dict), "latest trusted repository entry is missing")
+
+    if status in {"pending", "prepared"}:
+        require(state.get("latest_doi") == sequence1_doi, "unconsumed sequence 2 displaced sequence-1 DOI")
+        require(repository.get("doi") == sequence1_doi, "unconsumed sequence 2 displaced sequence-1 trusted DOI")
+        return str(status)
+
+    source = v2.get("published_source_baseline_commit_sha")
+    doi = v2.get("published_doi")
+    package = v2.get("published_package_identity_sha256")
+    record_id = v2.get("published_record_id")
+    require(isinstance(source, str) and COMMIT_RE.fullmatch(source) is not None, "sequence-2 consumed source is invalid")
+    require(isinstance(doi, str) and DOI_RE.fullmatch(doi) is not None and doi != sequence1_doi, "sequence-2 consumed DOI is invalid")
+    require(isinstance(package, str) and SHA256_RE.fullmatch(package) is not None, "sequence-2 consumed package identity is invalid")
+    require(isinstance(record_id, int) and record_id > 0, "sequence-2 consumed record id is invalid")
+
+    require(state.get("publication_status") == "published_and_publicly_restored", "sequence-2 canonical state is not publicly restored")
+    require(state.get("latest_doi") == doi, "sequence-2 canonical latest DOI mismatch")
+    require(state.get("latest_record_id") == record_id, "sequence-2 canonical latest record id mismatch")
+    require(state.get("latest_git_commit_sha") == source, "sequence-2 canonical latest source mismatch")
+    require(state.get("source_baseline_commit_sha") == source, "sequence-2 canonical baseline source mismatch")
+    require(state.get("latest_package_identity_sha256") == package, "sequence-2 canonical package identity mismatch")
+    require(state.get("public_cold_restore") == "passed", "sequence-2 canonical state lacks public cold restore")
+    require(repository.get("doi") == doi, "sequence-2 latest-trusted DOI mismatch")
+    require(repository.get("git_commit_sha") == source, "sequence-2 latest-trusted source mismatch")
+    require(repository.get("package_identity_sha256") == package, "sequence-2 latest-trusted package mismatch")
+    require(repository.get("public_cold_restore") == "passed", "sequence-2 latest-trusted state lacks cold restore")
+
+    observation = strict_json(V2_OBSERVATION_PATH)
+    require(observation.get("schema") == V2_OBSERVATION_SCHEMA, "sequence-2 observation schema mismatch")
+    require(observation.get("sequence") == 2 and observation.get("status") == "passed", "sequence-2 observation did not pass")
+    require(observation.get("source_git_commit_sha") == source, "sequence-2 observation source mismatch")
+    require(observation.get("version_doi") == doi, "sequence-2 observation DOI mismatch")
+    require(observation.get("zenodo_record_id") == record_id, "sequence-2 observation record id mismatch")
+    require(observation.get("zenodo_package_identity_sha256") == package, "sequence-2 observation package mismatch")
+    require(observation.get("public_cold_restore") == "passed", "sequence-2 observation lacks public cold restore")
+    require(observation.get("arweave_snapshot_refreshed") is False, "sequence-2 unexpectedly refreshed Arweave")
+
+    refresh = index.get("publication_refresh")
+    require(isinstance(refresh, dict), "sequence-2 recovery publication refresh is missing")
+    require(refresh.get("schema") == V2_AUTH_SCHEMA and refresh.get("sequence") == 2, "sequence-2 recovery refresh schema mismatch")
+    require(refresh.get("status") == "published_verified_and_consumed", "sequence-2 recovery refresh status mismatch")
+    require(refresh.get("previous_version_doi") == sequence1_doi, "sequence-2 recovery lineage mismatch")
+    require(refresh.get("version_doi") == doi, "sequence-2 recovery DOI mismatch")
+    require(refresh.get("source_git_commit_sha") == source, "sequence-2 recovery source mismatch")
+    require(refresh.get("arweave_snapshot_refreshed") is False, "sequence-2 recovery incorrectly claims Arweave refresh")
+    return "consumed"
+
+
 def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[str, Any]) -> None:
     source = auth.get("published_source_baseline_commit_sha")
     doi = auth.get("published_doi")
@@ -151,16 +245,12 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require(prepared.get("version_doi") == doi, "prepared record DOI mismatch")
     require(prepared.get("arweave_txid") == txid, "prepared record Arweave transaction mismatch")
 
-    require(state.get("publication_status") == "published_and_publicly_restored", "consumed lifecycle lacks final published state")
-    require(state.get("latest_doi") == doi, "final state DOI mismatch")
-    require(state.get("latest_git_commit_sha") == source, "final state source commit mismatch")
-    require(state.get("source_baseline_commit_sha") == source, "final state baseline commit mismatch")
-    require(state.get("latest_package_identity_sha256") == package, "final state package identity mismatch")
     require(state.get("concept_doi") == CONCEPT_DOI or state.get("core_concept_doi") == CONCEPT_DOI, "final state concept DOI mismatch")
     require(state.get("public_download_verification") == "passed", "final state lacks public download verification")
     require(state.get("public_metadata_verification") == "passed", "final state lacks public metadata verification")
     require(state.get("public_cold_restore") == "passed", "final state lacks public cold restore")
     require(state.get("live_main_equivalence_claimed") is False, "final state overclaims live-main equivalence")
+    validate_sequence1_history_in_state(auth, state, source, doi, package)
 
     arweave = state.get("homepage_machine_snapshot_arweave")
     require(isinstance(arweave, dict), "final state lacks homepage Arweave receipt")
@@ -184,25 +274,31 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require(observation.get("arweave_payload_sha256") == payload_sha, "observation Arweave payload mismatch")
     require(observation.get("arweave_readback_sha256") == payload_sha, "observation Arweave readback mismatch")
 
-    refresh = index.get("publication_refresh")
-    require(isinstance(refresh, dict), "final recovery index refresh is missing")
-    require(refresh.get("schema") == AUTH_SCHEMA and refresh.get("sequence") == 1, "final recovery index schema mismatch")
-    require(refresh.get("status") == "published_verified_and_consumed", "final recovery index status mismatch")
-    require(refresh.get("source_git_commit_sha") == source, "final recovery index source mismatch")
-    require(refresh.get("version_doi") == doi, "final recovery index DOI mismatch")
-    require(refresh.get("core_concept_doi") == CONCEPT_DOI, "final recovery index concept DOI mismatch")
-    require(refresh.get("arweave_txid") == txid, "final recovery index Arweave transaction mismatch")
-    require(refresh.get("arweave_payload_sha256") == payload_sha, "final recovery index Arweave digest mismatch")
-    require(refresh.get("non_amending_boundary") is True, "final recovery index lacks non-amending boundary")
-
-    trusted = index.get("latest_trusted_release")
-    require(isinstance(trusted, dict) and trusted.get("status") == "published_and_publicly_restored", "final latest-trusted status mismatch")
-    repository = trusted.get("repository_preservation")
-    require(isinstance(repository, dict), "final latest-trusted repository entry is missing")
-    require(repository.get("doi") == doi, "final latest-trusted DOI mismatch")
-    require(repository.get("git_commit_sha") == source, "final latest-trusted source mismatch")
-    require(repository.get("package_identity_sha256") == package, "final latest-trusted package mismatch")
-    require(repository.get("public_cold_restore") == "passed", "final latest-trusted release lacks cold restore")
+    successor_status = validate_sequence2_successor(doi, state, index)
+    if successor_status is None:
+        require(state.get("publication_status") == "published_and_publicly_restored", "consumed lifecycle lacks final published state")
+        require(state.get("latest_doi") == doi, "final state DOI mismatch")
+        require(state.get("latest_git_commit_sha") == source, "final state source commit mismatch")
+        require(state.get("source_baseline_commit_sha") == source, "final state baseline commit mismatch")
+        require(state.get("latest_package_identity_sha256") == package, "final state package identity mismatch")
+        refresh = index.get("publication_refresh")
+        require(isinstance(refresh, dict), "final recovery index refresh is missing")
+        require(refresh.get("schema") == AUTH_SCHEMA and refresh.get("sequence") == 1, "final recovery index schema mismatch")
+        require(refresh.get("status") == "published_verified_and_consumed", "final recovery index status mismatch")
+        require(refresh.get("source_git_commit_sha") == source, "final recovery index source mismatch")
+        require(refresh.get("version_doi") == doi, "final recovery index DOI mismatch")
+        require(refresh.get("core_concept_doi") == CONCEPT_DOI, "final recovery index concept DOI mismatch")
+        require(refresh.get("arweave_txid") == txid, "final recovery index Arweave transaction mismatch")
+        require(refresh.get("arweave_payload_sha256") == payload_sha, "final recovery index Arweave digest mismatch")
+        require(refresh.get("non_amending_boundary") is True, "final recovery index lacks non-amending boundary")
+        trusted = index.get("latest_trusted_release")
+        require(isinstance(trusted, dict) and trusted.get("status") == "published_and_publicly_restored", "final latest-trusted status mismatch")
+        repository = trusted.get("repository_preservation")
+        require(isinstance(repository, dict), "final latest-trusted repository entry is missing")
+        require(repository.get("doi") == doi, "final latest-trusted DOI mismatch")
+        require(repository.get("git_commit_sha") == source, "final latest-trusted source mismatch")
+        require(repository.get("package_identity_sha256") == package, "final latest-trusted package mismatch")
+        require(repository.get("public_cold_restore") == "passed", "final latest-trusted release lacks cold restore")
 
 
 def validate() -> str:
@@ -219,7 +315,7 @@ def validate() -> str:
         validate_prepared(auth, state, index)
     elif status == "consumed":
         validate_consumed(auth, state, index)
-    else:  # guarded above; retained for fail-closed readability
+    else:
         raise SystemExit("unsupported current-baseline lifecycle state")
     print(f"Current baseline publication state valid: {status}")
     return status

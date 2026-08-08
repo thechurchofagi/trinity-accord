@@ -22,9 +22,15 @@ def test_consumed_preservation_refresh_is_secret_independent():
         text=True,
         capture_output=True,
     )
-    current_auth_path = (
-        ROOT / "preservation/current-baseline-publication-authorization-v1.json"
-    )
+    v2_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v2.json"
+    if v2_auth_path.is_file():
+        v2_status = json.loads(v2_auth_path.read_text(encoding="utf-8"))["status"]
+        if v2_status == "consumed":
+            assert "Current baseline publication v2 state valid: consumed" in completed.stdout
+            assert "Final proof baseline publication v2 is consumed and valid; no external write will run." in completed.stdout
+            return
+
+    current_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
     current_status = (
         json.loads(current_auth_path.read_text(encoding="utf-8"))["status"]
         if current_auth_path.is_file()
