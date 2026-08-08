@@ -81,9 +81,10 @@ def test_machine_summary_matches_checked_in_offline_reports():
     nft_report = load(NFT_REPORT)
 
     assert eth_report["result"] == "PASS"
-    assert eth_report["L1_BYTE_INTEGRITY"]["status"] == manifest["ethereum_non_nft"]["l1_byte_integrity"]
-    assert eth_report["L2_EXECUTION_INCLUSION"]["status"] == manifest["ethereum_non_nft"]["l2_execution_inclusion"]
-    assert eth_report["L3_CONSENSUS_FINALITY"]["status"] == manifest["ethereum_non_nft"]["l3_checkpoint_relative_finality"]
+    assert eth_report["anchors"] == manifest["ethereum_non_nft"]["anchor_count"]
+    assert eth_report["L1_BYTE_INTEGRITY"] == manifest["ethereum_non_nft"]["l1_byte_integrity"]
+    assert eth_report["L2_EXECUTION_INCLUSION"] == manifest["ethereum_non_nft"]["l2_execution_inclusion"]
+    assert eth_report["L3_CONSENSUS_FINALITY"] == manifest["ethereum_non_nft"]["l3_checkpoint_relative_finality"]
 
     assert nft_report["result"] == "PASS"
     assert nft_report["L1_COLLECTION_COMMITMENT"]["status"] == manifest["chronicle_nft"]["l1_collection_commitment"]
