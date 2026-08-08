@@ -3,17 +3,19 @@
 Generate complete Bitcoin inscription mirror files and aggregate index.
 Reads bootstrap data and raw text files, produces:
   - Individual mirror JSON files
-  - Aggregate index (api/bitcoin-inscription-mirror-index.json)
+  - Aggregate proof-aware index (via build_bitcoin_inscription_mirror_index.py)
 """
 import hashlib
 import json
+import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BOOTSTRAP = ROOT / "data" / "authority-address-inscriptions.bootstrap.json"
 RAW_DIR = ROOT / "bitcoin-inscription-mirrors" / "raw"
-INDEX_PATH = ROOT / "api" / "bitcoin-inscription-mirror-index.json"
+ANNEX_MANIFEST_PATH = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "ANNEX-MANIFEST.json"
 
 MIRROR_DIR = ROOT / "bitcoin-inscription-mirrors"
 
@@ -187,31 +189,41 @@ def load_bootstrap():
         return json.load(f)
 
 
-def build_mirror_record(inscription_id: str, info: dict) -> dict:
+def load_proof_anchors():
+    manifest = json.loads(ANNEX_MANIFEST_PATH.read_text(encoding="utf-8"))
+    return manifest, {
+        str(anchor["inscription_number"]): anchor
+        for anchor in manifest["anchors"]
+    }
+
+
+def build_mirror_record(inscription_id: str, info: dict, proof_manifest: dict, proof_anchor: dict) -> dict:
     raw_path = RAW_DIR / f"{inscription_id}.txt"
     raw_text = raw_path.read_text(encoding="utf-8")
     mirror_hash = sha256_text(raw_text)
     canon_hash = sha256_text(canonicalize(raw_text))
 
-    # Preserve existing chain_verification if already verified
     chain_verification = {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": None,
-        "verification_method": None,
-        "onchain_content_sha256": None,
-        "mirror_matches_onchain": None,
-        "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py",
+        "verification_status": "mirror_matches_onchain",
+        "last_verified_utc": proof_manifest["created_at_utc"],
+        "verification_method": "offline_proof_carrying_annex_v1",
+        "onchain_content_sha256": proof_anchor["content"]["body_sha256"],
+        "mirror_matches_onchain": True,
+        "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "network_required_for_verification": False,
+        "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "proof_material": proof_anchor["proof_material"]["path"],
+        "proof_status": proof_anchor["proof_status"],
     }
-    existing_path = MIRROR_DIR / info["output_dir"] / info["output_file"]
-    if existing_path.exists():
-        try:
-            with open(existing_path, "r", encoding="utf-8") as f:
-                existing = json.load(f)
-            existing_cv = existing.get("chain_verification", {})
-            if existing_cv.get("verification_status") != "legacy_bootstrap_pending_chain_check":
-                chain_verification = existing_cv
-        except (json.JSONDecodeError, KeyError):
-            pass
+
+    if proof_anchor["content"]["mirror_sha256"] != mirror_hash:
+        raise ValueError(f"{inscription_id}: proof annex does not bind current mirror bytes")
+
+    limitations = list(info["limitations"])
+    limitations.append(
+        "The proof-carrying annex permits network-free cryptographic on-chain comparison; "
+        "the public numeric inscription number remains a historical lookup coordinate."
+    )
 
     return {
         "schema": "trinityaccord.bitcoin-inscription-mirror.v1",
@@ -221,6 +233,7 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
             "bitcoin_originals_prevail": True,
             "github_mirror_is_non_amending": True,
             "verification_requires_onchain_check": True,
+            "network_required_for_verification": False,
         },
         "inscription": {
             "inscription_id": inscription_id,
@@ -230,11 +243,13 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
             "zh_title": info["zh_title"],
             "txid": info["txid"],
             "output": None,
-            "block_height": None,
-            "timestamp_utc": None,
-            "content_type": "text/plain",
+            "block_height": proof_anchor["block_reference"]["height"],
+            "timestamp_utc": datetime.fromtimestamp(
+                proof_anchor["block_reference"]["timestamp"], tz=timezone.utc
+            ).isoformat().replace("+00:00", "Z"),
+            "content_type": proof_anchor["content"]["content_type_utf8"],
             "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-            "source_address_role": "trinity_accord_authority_address",
+            "source_address_role": "reveal_destination_p2tr_address",
         },
         "classification": {
             "layer": info["layer"],
@@ -251,92 +266,7 @@ def build_mirror_record(inscription_id: str, info: dict) -> dict:
             "agent_load_excerpt": info["agent_load_excerpt"],
         },
         "chain_verification": chain_verification,
-        "limitations": info["limitations"],
-    }
-
-
-def load_existing_chain_verification(inscription_id: str, info: dict) -> dict:
-    """Load chain_verification from existing mirror JSON on disk if available."""
-    existing_path = MIRROR_DIR / info["output_dir"] / info["output_file"]
-    if existing_path.exists():
-        try:
-            with open(existing_path, "r", encoding="utf-8") as f:
-                existing = json.load(f)
-            cv = existing.get("chain_verification", {})
-            # Only preserve if it's been actually verified (not the default)
-            if cv.get("verification_status") != "legacy_bootstrap_pending_chain_check":
-                return {
-                    "verification_status": cv.get("verification_status", "legacy_bootstrap_pending_chain_check"),
-                    "last_verified_utc": cv.get("last_verified_utc"),
-                    "mirror_matches_onchain": cv.get("mirror_matches_onchain"),
-                    "onchain_content_sha256": cv.get("onchain_content_sha256"),
-                    "verification_method": cv.get("verification_method"),
-                }
-        except (json.JSONDecodeError, KeyError):
-            pass
-    return {
-        "verification_status": "legacy_bootstrap_pending_chain_check",
-        "last_verified_utc": None,
-    }
-
-
-def build_aggregate_index(bootstrap: dict, records: list) -> dict:
-    index_records = []
-    for rec in records:
-        ins_id = rec["inscription"]["inscription_id"]
-        info = CLASSIFICATION_MAP[ins_id]
-        # Load chain_verification from existing individual mirror JSON on disk
-        chain_ver = load_existing_chain_verification(ins_id, info)
-        index_records.append({
-            "inscription_id": ins_id,
-            "inscription_number": rec["inscription"]["inscription_number"],
-            "ordinals_inscription_id": rec["inscription"]["ordinals_inscription_id"],
-            "title": rec["inscription"]["title"],
-            "layer": info["layer"],
-            "canonical_status": info["canonical_status"],
-            "is_one_of_three_bitcoin_originals": info["is_one_of_three_bitcoin_originals"],
-            "amends_originals": False,
-            "creates_new_authority": False,
-            "mirror_json_path": f"bitcoin-inscription-mirrors/{info['output_dir']}/{info['output_file']}",
-            "raw_text_path": f"bitcoin-inscription-mirrors/raw/{ins_id}.txt",
-            "mirror_text_sha256": rec["content"]["mirror_text_sha256"],
-            "canonicalized_text_sha256": rec["content"]["canonicalized_text_sha256"],
-            "chain_verification": chain_ver,
-            "agent_load_excerpt": rec["content"]["agent_load_excerpt"],
-        })
-
-    return {
-        "schema": "trinityaccord.bitcoin-inscription-mirror-index.v2",
-        "purpose": "Quick-load GitHub mirror index for relevant Bitcoin inscriptions associated with the Trinity Accord authority address.",
-        "source": {
-            "bootstrap": "data/authority-address-inscriptions.bootstrap.json",
-            "legacy_archive": "archive_legacy_index_2025_09.md",
-            "generated_by": "scripts/build_bitcoin_inscription_mirrors.py",
-        },
-        "authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-        "scope_policy": {
-            "pre_original_same_address_inscriptions_ignored": True,
-            "relevant_stack_begins_at": "97631551",
-            "post_original_same_address_inscriptions_included": True,
-        },
-        "authority_boundary": {
-            "canonical_original_count": 3,
-            "canonical_authority": "three_bitcoin_originals_only",
-            "github_mirrors_non_amending": True,
-            "later_same_address_inscriptions_non_amending": True,
-            "verification_requires_onchain_check": True,
-        },
-        "counts": {
-            "total_relevant_inscriptions": 8,
-            "canonical_originals": 3,
-            "post_original_non_amending": 5,
-            "first_echo_layer": 1,
-            "final_seal_layer": 1,
-            "vision_layer": 1,
-            "guardianship_layer": 2,
-            "unknown_or_pending": 0,
-        },
-        "records": index_records,
+        "limitations": limitations,
     }
 
 
@@ -346,7 +276,8 @@ def main():
         print("Run extract_legacy_authority_address_inscriptions.py first.", file=sys.stderr)
         sys.exit(1)
 
-    bootstrap = load_bootstrap()
+    load_bootstrap()
+    proof_manifest, proof_anchors = load_proof_anchors()
     all_records = []
 
     for ins_id, info in CLASSIFICATION_MAP.items():
@@ -355,7 +286,10 @@ def main():
             print(f"ERROR: Missing raw text: {raw_path}", file=sys.stderr)
             sys.exit(1)
 
-        record = build_mirror_record(ins_id, info)
+        if ins_id not in proof_anchors:
+            print(f"ERROR: Proof annex missing inscription: {ins_id}", file=sys.stderr)
+            sys.exit(1)
+        record = build_mirror_record(ins_id, info, proof_manifest, proof_anchors[ins_id])
         all_records.append(record)
 
         # Write individual mirror JSON
@@ -366,16 +300,17 @@ def main():
             json.dump(record, f, indent=2, ensure_ascii=False)
         print(f"Wrote {out_path}")
 
-    # Build and write aggregate index
-    index = build_aggregate_index(bootstrap, all_records)
-    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(INDEX_PATH, "w", encoding="utf-8") as f:
-        json.dump(index, f, indent=2, ensure_ascii=False)
-    print(f"Wrote {INDEX_PATH}")
+    # Keep the public index in its established nested-record v1 shape. The
+    # scanner also attaches the cryptographic proof-annex summary.
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_bitcoin_inscription_mirror_index.py")],
+        cwd=ROOT,
+        check=True,
+    )
 
     print(f"\nGenerated {len(all_records)} mirror files and aggregate index.")
-    print(f"Canonical originals: {index['counts']['canonical_originals']}")
-    print(f"Post-original non-amending: {index['counts']['post_original_non_amending']}")
+    print("Canonical originals: 3")
+    print("Post-original non-amending: 5")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "0ef041401a28edf8",
+  "source_digest": "40bde2a58fa867e8",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -33,10 +33,15 @@
     "archive/trust-root-policy.json",
     "archive/evidence/digest-manifest.json",
     "archive/evidence/digest-manifest.csv",
+    "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+    "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+    "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+    "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
     "api/corrections-index.json"
   ],
   "mandatory_recovery_steps": [
     "verify_bitcoin_originals",
+    "verify_bitcoin_inscription_proof_annex_offline",
     "verify_authority_manifest",
     "verify_btc_signature",
     "verify_digest_manifests",
@@ -57,6 +62,9 @@
     "corrections_index": "api/corrections-index.json",
     "authority_api": "api/authority.json",
     "evidence_manifest": "api/evidence-manifest.json",
+    "bitcoin_inscription_proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+    "bitcoin_inscription_offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+    "bitcoin_inscription_offline_verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
     "hashes": "api/hashes.json",
     "claim_registry": "api/claim-registry.json",
     "external_binary_annex_observation": "preservation/external-binary-annex-observation.json",
@@ -101,6 +109,14 @@
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
     },
+    "repository_additions_after_published_baseline": {
+      "bitcoin_inscription_proof_annex": {
+        "status": "git_tracked_pending_next_owner_authorized_repository_capsule_publication",
+        "ordinary_verification_network_required": false,
+        "runtime": "Python 3 standard library only",
+        "boundary": "The current public repository DOI remains a valid exact older baseline but must not be claimed to contain the later Bitcoin proof-annex bytes."
+      }
+    },
     "external_binary_annexes": {
       "evidence": {
         "doi": "10.5281/zenodo.21753937",
@@ -132,6 +148,7 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every Git-tracked byte in the exact publication baseline named by its manifest, while deliberately excluding production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
+    "The Bitcoin inscription proof annex is Git-tracked and will be included by the next owner-authorized repository capsule publication; the current published DOI predates it and does not contain these later bytes.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
   "does_not_prove": [

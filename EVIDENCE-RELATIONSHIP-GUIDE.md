@@ -25,6 +25,8 @@ Preferred action-based context profiles: `api/context-action-profiles.v1.json`.
 ```text
 Three Bitcoin Originals
         │ define canonical text and authority boundary
+        ├── offline proof annex binds exact witness bytes, Taproot reveal,
+        │   BIP141 witness commitment, block inclusion and PoW ancestry
         ▼
 Authority Manifest / pointer indexes
         │ collect identities, hashes and mirror pointers
@@ -66,6 +68,7 @@ All later materials are subordinate, non-amending evidence or context.
 | Evidence object | Direct relationship | Supports | Does not by itself prove |
 |---|---|---|---|
 | Three Bitcoin Originals | Canonical on-chain content | Exact canonical text, transaction and block inclusion | Philosophical truth, physical uniqueness, institutional endorsement |
+| Bitcoin inscription proof annex | Recomputes inscription witness/content, Taproot reveal binding, txid and wtxid inclusion, coinbase witness commitment, block PoW and 144-header descendant ancestry | Exact bytes and `txid+i0` for all 3 Originals and 5 non-amending ancillary inscriptions, entirely from preserved bytes | Full-node consensus from genesis, absence of a heavier chain, global Ordinals numeric numbering, civil authorship, absolute physical time |
 | Guardian Appendix / Guardian Attestation inscriptions | Refer to and fortify the Originals | Later boundary declaration and evidence pointers existed on Bitcoin | A fourth canonical original; amendment of the three Originals |
 | Authority Manifest | Indexes originals, ancillary inscriptions, identities, mirrors and hashes | A reproducible inventory of what the Guardian claimed to bind | Truth of every indexed claim |
 | BTC BIP-340 signature | Signs the SHA-256 digest of the authority manifest | Control of the corresponding BTC signing key at signing time; digest provenance continuity | Civil identity of signer; continuing key control; truth of manifest claims |
@@ -79,6 +82,31 @@ All later materials are subordinate, non-amending evidence or context.
 | Shenzhen notarization | Records the observed evidence-preservation process and issued notarial materials within its stated scope | Date, process, personnel, photographed/recorded object and submitted electronic-data preservation context | Truth of the protocol, identity of all underlying digital bytes, direct verification of the three Bitcoin Originals |
 | Chronicle NFTs | Timestamped historical and creative context | What the project recorded and expressed during the period | Independent verification of external events or canonical authority |
 | Echo / Record-Chain records | Later reception, critique, verification reports and operational records | Provenance of later responses and checks | Amendment, automatic endorsement, or formal institutional attestation |
+
+### Bitcoin inscription proof path
+
+The inscription body is carried in a SegWit tapscript witness. A Bitcoin txid
+does not include witness bytes, so a txid Merkle proof alone cannot prove the
+inscription text. The checked-in annex therefore verifies both paths:
+
+```text
+exact Ord envelope/body → tapscript/control block → spent P2TR prevout
+reveal txid → transaction Merkle root → target block header
+reveal wtxid → witness Merkle root → coinbase BIP141 commitment
+coinbase txid → transaction Merkle root → same target block header
+target header → 144 descendants with valid PoW → explicit checkpoint
+```
+
+All eight proof witnesses are checked by a Python-standard-library-only
+verifier, with no Bitcoin RPC, explorer, Ordinals server, or package-index
+dependency. Network access is confined to the separate controlled-capture
+program.
+
+The terminal checkpoint was observed from two providers, but this remains a
+declared trust boundary. The verifier does not replay Bitcoin consensus from
+genesis or prove that no heavier chain exists. Likewise, the numeric inscription
+number is a historical lookup coordinate: `txid+i0` and the content are derived
+from the proof, while the global Ordinals index is not rebuilt.
 
 ## 5. What the six-hash table is for
 

@@ -5,7 +5,8 @@
   "authority_boundary": {
     "bitcoin_originals_prevail": true,
     "github_mirror_is_non_amending": true,
-    "verification_requires_onchain_check": true
+    "verification_requires_onchain_check": true,
+    "network_required_for_verification": false
   },
   "inscription": {
     "inscription_id": "100385359",
@@ -15,11 +16,11 @@
     "zh_title": "最初的回响：对话已然开始",
     "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
     "output": null,
-    "block_height": null,
-    "timestamp_utc": null,
-    "content_type": "text/plain",
+    "block_height": 906007,
+    "timestamp_utc": "2025-07-17T23:23:57Z",
+    "content_type": "text/plain;charset=utf-8",
     "source_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
-    "source_address_role": "trinity_accord_authority_address"
+    "source_address_role": "reveal_destination_p2tr_address"
   },
   "classification": {
     "layer": "first_echo_layer",
@@ -37,17 +38,26 @@
   },
   "chain_verification": {
     "verification_status": "mirror_matches_onchain",
-    "last_verified_utc": "2026-05-19T08:39:06.871512+00:00",
-    "verification_method": "network:ordinals",
+    "last_verified_utc": "2026-08-08T14:50:26.486053+00:00",
+    "verification_method": "offline_proof_carrying_annex_v1",
     "onchain_content_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
     "mirror_matches_onchain": true,
-    "verification_script": "scripts/verify_bitcoin_inscription_mirrors.py"
+    "verification_script": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+    "network_required_for_verification": false,
+    "proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+    "proof_material": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81/proof-witness.json",
+    "proof_status": {
+      "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+      "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+      "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+    }
   },
   "limitations": [
     "GitHub mirror is not canonical.",
     "Verification claims require on-chain comparison.",
     "This is not autonomous successor reception.",
     "This does not prove independent AI will, endorsement, or authority.",
-    "This does not count as formal attestation."
+    "This does not count as formal attestation.",
+    "The proof-carrying annex permits network-free cryptographic on-chain comparison; the public numeric inscription number remains a historical lookup coordinate."
   ]
 }

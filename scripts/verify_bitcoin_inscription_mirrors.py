@@ -11,6 +11,7 @@ Usage:
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 import urllib.request
 import urllib.error
@@ -21,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MIRROR_DIR = ROOT / "bitcoin-inscription-mirrors"
 INDEX_PATH = ROOT / "api" / "bitcoin-inscription-mirror-index.json"
 BOOTSTRAP_PATH = ROOT / "data" / "authority-address-inscriptions.bootstrap.json"
+PROOF_VERIFIER = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "verification" / "verify_annex.py"
 
 PROVIDERS = {
     "ordinals": "https://ordinals.com/content/{}i0",
@@ -81,6 +83,26 @@ def fetch_onchain_content(inscription_id, txid=None, provider="ordinals"):
 def verify_offline(records, args):
     errors = []
     checked = 0
+    try:
+        completed = subprocess.run(
+            [sys.executable, str(PROOF_VERIFIER)],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+            env={"PATH": str(Path(sys.executable).parent)},
+        )
+        proof_report = json.loads(completed.stdout)
+        if completed.returncode != 0 or proof_report.get("result") != "PASS":
+            errors.extend(f"proof annex: {item}" for item in proof_report.get("failures", []))
+        proof_by_inscription = {
+            item["inscription_number"]: item
+            for item in proof_report.get("l1_checks", [])
+        }
+    except Exception as exc:
+        errors.append(f"proof annex verifier failed: {exc}")
+        proof_by_inscription = {}
+
     for rec in records:
         ins_id = rec["inscription"]["inscription_id"]
         if args.inscription_id and ins_id != args.inscription_id:
@@ -89,6 +111,10 @@ def verify_offline(records, args):
             continue
 
         checked += 1
+
+        proof = proof_by_inscription.get(ins_id)
+        if not proof or proof.get("status") != "PASS":
+            errors.append(f"{ins_id}: missing PASS from offline cryptographic proof annex")
 
         # Check authority boundary
         ab = rec.get("authority_boundary", {})
@@ -112,6 +138,8 @@ def verify_offline(records, args):
                     errors.append(f"{ins_id}: mirror_text_sha256 mismatch")
                 if rec["content"].get("canonicalized_text_sha256") != expected_canon:
                     errors.append(f"{ins_id}: canonicalized_text_sha256 mismatch")
+                if proof and proof.get("body_sha256") != expected_mirror:
+                    errors.append(f"{ins_id}: proof-annex body SHA-256 does not bind exact mirror bytes")
 
         # Check non-originals don't claim authority
         if not rec["classification"]["is_one_of_three_bitcoin_originals"]:
@@ -204,7 +232,7 @@ def main():
         for e in errors:
             print(f"  ERROR: {e}")
     else:
-        print("All offline checks passed.")
+        print("All offline mirror and Bitcoin cryptographic proof checks passed.")
 
     # Network verification
     if args.network:

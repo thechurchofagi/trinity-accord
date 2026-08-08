@@ -17,6 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { runBitcoinInscriptionOfflineVerification } from './bitcoin-inscription-offline-adapter.mjs';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CLI ARGS
@@ -1146,169 +1147,14 @@ async function verifyChainC() {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function verifyChainD() {
-  log('\n═══ Chain D: Bitcoin Time Anchor Verification ═══\n');
-
-  const result = {
-    bitcoin_time_anchor_pass: false,
-    anchors_total: 0,
-    anchors_pass: 0,
-    anchors_fail: 0,
-    originals_total: 0,
-    ancillary_total: 0,
-    earliest_anchor: null,
-    latest_anchor: null,
-    merkle_proof_verified_count: 0,
-    merkle_proof_unavailable_count: 0,
-    anchor_details: [],
-    critical_errors: [],
-  };
-
-  // 1. Read authority.jcs.json
-  const authority = readRepoJson(AUTHORITY_JCS_FILE);
-  if (!authority) {
-    result.critical_errors.push('authority.jcs.json not found');
-    log('  ❌ authority.jcs.json not found');
-    return result;
-  }
-
-  const originals = authority.bitcoin?.originals || [];
-  const ancillary = authority.bitcoin?.ancillary || [];
-  result.originals_total = originals.length;
-  result.ancillary_total = ancillary.length;
-  result.anchors_total = originals.length + ancillary.length;
-
-  log(`  Originals : ${originals.length}`);
-  log(`  Ancillary : ${ancillary.length}`);
-
-  const allAnchors = [
-    ...originals.map(a => ({ ...a, _type: 'original' })),
-    ...ancillary.map(a => ({ ...a, _type: 'ancillary' })),
-  ];
-
-  let earliestTimestamp = Infinity;
-  let latestTimestamp = -Infinity;
-
-  for (const anchor of allAnchors) {
-    const txid = anchor.txid || anchor.tx_hash;
-    const detail = {
-      txid, label: anchor.label || anchor.title || anchor._type,
-      type: anchor._type,
-      exists: false, confirmed: false,
-      block_height_match: false, block_hash_match: false,
-      block_height: null, block_hash: null, block_timestamp: null, confirmations: null,
-      merkle_proof: 'not_checked', error: null,
-    };
-
-    try {
-      if (!txid) { detail.error = 'No txid'; result.anchors_fail++; result.anchor_details.push(detail); continue; }
-
-      // 2a. Query BTC API for tx
-      const txInfo = await btcFetch(`/tx/${txid}`);
-      if (!txInfo) {
-        detail.error = 'Transaction not found';
-        result.anchors_fail++;
-        result.anchor_details.push(detail);
-        continue;
-      }
-
-      detail.exists = true;
-      detail.confirmed = !!txInfo.status?.confirmed;
-
-      if (txInfo.status?.block_height) detail.block_height = txInfo.status.block_height;
-      if (txInfo.status?.block_hash) detail.block_hash = txInfo.status.block_hash;
-
-      // 2c-d. Verify block_height and block_hash match manifest
-      if (anchor.block_height != null) {
-        detail.block_height_match = txInfo.status?.block_height === anchor.block_height;
-      }
-      if (anchor.block_hash) {
-        detail.block_hash_match = txInfo.status?.block_hash === anchor.block_hash;
-      }
-
-      // 2e-g. Query block to verify
-      const blockHash = txInfo.status?.block_hash;
-      if (blockHash) {
-        try {
-          const blockInfo = await btcFetch(`/block/${blockHash}`);
-          if (blockInfo) {
-            if (anchor.block_height != null && blockInfo.height !== anchor.block_height) {
-              detail.error = `Block height mismatch: ${blockInfo.height} vs ${anchor.block_height}`;
-            }
-            if (anchor.block_hash && blockInfo.id !== anchor.block_hash) {
-              detail.error = `Block hash mismatch: ${blockInfo.id} vs ${anchor.block_hash}`;
-            }
-            detail.block_timestamp = blockInfo.timestamp;
-            detail.confirmations = blockInfo.confirmations || (blockInfo.height ? /* compute later */ null : null);
-
-            // Track earliest/latest
-            if (blockInfo.timestamp) {
-              if (blockInfo.timestamp < earliestTimestamp) {
-                earliestTimestamp = blockInfo.timestamp;
-                result.earliest_anchor = {
-                  label: detail.label, txid, block_height: detail.block_height,
-                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
-                  confirmations: detail.confirmations,
-                };
-              }
-              if (blockInfo.timestamp > latestTimestamp) {
-                latestTimestamp = blockInfo.timestamp;
-                result.latest_anchor = {
-                  title: detail.label, txid, block_height: detail.block_height,
-                  block_hash: detail.block_hash, block_timestamp: blockInfo.timestamp,
-                  confirmations: detail.confirmations,
-                };
-              }
-            }
-          }
-        } catch (e) {
-          // Block query failure is non-fatal
-        }
-      }
-
-      // 3. Try merkle proof
-      try {
-        const proof = await btcFetch(`/tx/${txid}/merkle-proof`);
-        if (proof) {
-          detail.merkle_proof = 'verified';
-          result.merkle_proof_verified_count++;
-        } else {
-          detail.merkle_proof = 'unavailable';
-          result.merkle_proof_unavailable_count++;
-        }
-      } catch {
-        detail.merkle_proof = 'unavailable';
-        result.merkle_proof_unavailable_count++;
-      }
-
-      // Overall anchor pass
-      const anchorPass = detail.exists && detail.confirmed
-        && (!anchor.block_height || detail.block_height_match)
-        && (!anchor.block_hash || detail.block_hash_match);
-      if (anchorPass) result.anchors_pass++;
-      else {
-        result.anchors_fail++;
-        detail.error = detail.error || 'Anchor verification failed';
-      }
-
-    } catch (e) {
-      detail.error = e.message;
-      result.anchors_fail++;
-      result.critical_errors.push(`Anchor ${txid}: ${e.message}`);
-    }
-
-    result.anchor_details.push(detail);
-  }
-
-  result.bitcoin_time_anchor_pass = result.anchors_fail === 0 && result.anchors_total > 0;
-
-  log(`  Anchors total       : ${result.anchors_total}`);
-  log(`  Anchors pass        : ${result.anchors_pass}`);
-  log(`  Anchors fail        : ${result.anchors_fail}`);
-  log(`  Earliest anchor     : ${result.earliest_anchor?.block_timestamp || 'N/A'}`);
-  log(`  Latest anchor       : ${result.latest_anchor?.block_timestamp || 'N/A'}`);
-  log(`  Merkle proofs       : ${result.merkle_proof_verified_count} verified, ${result.merkle_proof_unavailable_count} unavailable`);
-  log(`  Chain D pass        : ${result.bitcoin_time_anchor_pass}`);
-
+  log('\n═══ Chain D: Bitcoin Inscription Offline Proof Verification ═══\n');
+  const result = runBitcoinInscriptionOfflineVerification();
+  log(`  Verification mode : ${result.verification_mode}`);
+  log(`  Network required  : ${result.network_required_for_verification}`);
+  log(`  Anchors pass      : ${result.anchors_pass}/${result.anchors_total}`);
+  log(`  Witness proofs    : ${result.witness_commitment_verified_count || 0}`);
+  log(`  Valid PoW headers : ${result.valid_pow_headers || 0}`);
+  log(`  Chain D pass      : ${result.bitcoin_time_anchor_pass}`);
   return result;
 }
 

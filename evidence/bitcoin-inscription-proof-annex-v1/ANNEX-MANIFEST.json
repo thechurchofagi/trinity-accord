@@ -1,0 +1,344 @@
+{
+  "schema": "trinityaccord.bitcoin-inscription-proof-carrying-annex.v1",
+  "version": "1.0.0",
+  "created_at_utc": "2026-08-08T14:50:26.486053+00:00",
+  "created_from_git_commit": "3a6df19786c2743910d01ab69a004a3bc21cb441",
+  "network": {
+    "name": "Bitcoin Mainnet",
+    "chain": "main",
+    "bech32_hrp": "bc"
+  },
+  "authority_boundary": {
+    "canonical_authority": "three Bitcoin Originals only",
+    "canonical_original_count": 3,
+    "ancillary_inscriptions_non_amending": true,
+    "proof_annex_is_non_amending": true,
+    "no_authority_escalation": true
+  },
+  "claim_model": {
+    "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS only when the preserved reveal/prevout bytes recompute the declared txids, the txid+i0 envelope yields the declared exact body/content type, the tapscript and BIP341 control block commit to the referenced P2TR prevout, the observed BIP342 script shape executes with a valid BIP340 SIGHASH_DEFAULT signature, the mirror binding is explicit, and the reveal destination address matches.",
+    "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS only when the reveal txid reconstructs the block-header transaction Merkle root and the reveal wtxid reconstructs the BIP141 witness root whose commitment is in a coinbase transaction independently proven into the same block header.",
+    "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS only when the target block header and 144 descendants form a contiguous valid-PoW Bitcoin-mainnet header chain to an explicit checkpoint observed consistently by two providers.",
+    "checkpoint_rule": "The offline proof verifies actual header work and ancestry. Provider observations are capture provenance only. The result remains checkpoint-relative and is not a substitute for full-node validation from genesis or a proof that no heavier competing chain exists.",
+    "time_rule": "Bitcoin header timestamps are consensus header fields with protocol bounds; they are not absolute physical-world clocks."
+  },
+  "closed_set": {
+    "inscription_count": 8,
+    "canonical_originals": 3,
+    "non_amending_ancillary": 5,
+    "source": "archive/authority-manifest/authority.jcs.json"
+  },
+  "verification_implementation": {
+    "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+    "verifier_sha256": "9d16d1099d51fa4f885a7963a7d780ae2f754f5c31f22a38fbca4eb37b9ee362",
+    "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
+    "frozen_primitives_sha256": "fc14169982ca0622d0a0a0fb27f9326c630432585ea733bbf88f01cfb962c67e",
+    "runtime": "Python 3 standard library only",
+    "network_required_for_verification": false,
+    "network_required_for_controlled_capture": true
+  },
+  "preservation_policy": {
+    "proof_material_git_tracked": true,
+    "future_repository_capsule_coverage": "Automatically included in the next authorized repository preservation capsule because every annex byte is Git-tracked.",
+    "current_published_repository_doi_boundary": "The repository DOI published before this annex remains an exact older baseline and must not be claimed to contain these proof bytes.",
+    "runtime_self_containment": "Ordinary verification uses only Python 3 standard-library modules; no package-index artifact is required."
+  },
+  "anchors": [
+    {
+      "id": "bitcoin-inscription-97631551",
+      "title": "Protocol (Axioms)",
+      "classification": "canonical_original",
+      "inscription_number": "97631551",
+      "ordinals_inscription_id": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
+      "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+      "wtxid": "1773396b45f7260de0ebcd64d76d47293c5fbbc59f678e5f8283d460cf884b0b",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 901954,
+        "hash": "00000000000000000000a468b306fb8bda4141ef276b422d06d2d117211e795f",
+        "timestamp": 1750376534
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 1183,
+        "body_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/97631551.txt",
+        "mirror_bytes": 1183,
+        "mirror_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343/proof-witness.json",
+        "size": 37783,
+        "sha256": "772e4f5247ad34c466fd78d0d18254362f4c9ce32074e107e2c933b161a0f596"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-98369145",
+      "title": "Covenant of the Flaw",
+      "classification": "canonical_original",
+      "inscription_number": "98369145",
+      "ordinals_inscription_id": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
+      "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+      "wtxid": "1417b730664ed9f75e5956be72ff390c5a58a2089532d3bd59c6aeaa1cee3cc9",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 903192,
+        "hash": "00000000000000000001b58353d4d84b72e4bb835b2ce35365421bc399148012",
+        "timestamp": 1751189509
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 1710,
+        "body_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/98369145.txt",
+        "mirror_bytes": 1710,
+        "mirror_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258/proof-witness.json",
+        "size": 39290,
+        "sha256": "d06ee302092bbfd0826fb744382166a94edc0eee1e498ba4348c84177c651494"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-98387475",
+      "title": "The Trinity Accord (Meta-record)",
+      "classification": "canonical_original",
+      "inscription_number": "98387475",
+      "ordinals_inscription_id": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0",
+      "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+      "wtxid": "f0a4d563aeb1204c633ff7c8189c98a1542bd349943d4d2f2c62ff0cb65723c4",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 903205,
+        "hash": "00000000000000000000be192767a61f4612899dd31225f19e7b1254155bbb04",
+        "timestamp": 1751194156
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 15637,
+        "body_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/98387475.txt",
+        "mirror_bytes": 15637,
+        "mirror_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c/proof-witness.json",
+        "size": 66790,
+        "sha256": "48d2f96ca6001108e9ac16b9be35a1031318de9dfbdf9d7075e99f251a127436"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-100385359",
+      "title": "The First Echoes: A Dialogue Begins",
+      "classification": "non_amending_ancillary",
+      "inscription_number": "100385359",
+      "ordinals_inscription_id": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0",
+      "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
+      "wtxid": "f7ab44daff700cd9ec43f0967f3c115267830068964f3bbf225e209b5b9b4fff",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 906007,
+        "hash": "0000000000000000000019670bc15750b23c15cce41435acd34e87b6e205e4fb",
+        "timestamp": 1752794637
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 4269,
+        "body_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/100385359.txt",
+        "mirror_bytes": 4269,
+        "mirror_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81/proof-witness.json",
+        "size": 44501,
+        "sha256": "205c06c4f8996b314c30a02e126b042e3da6e1cc42fe565cbbd3bca9610adf47"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-100550942",
+      "title": "The Final Seal: A Testament and a Trust",
+      "classification": "non_amending_ancillary",
+      "inscription_number": "100550942",
+      "ordinals_inscription_id": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0",
+      "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
+      "wtxid": "50c45a807957615ee6b5c5225b6db28dfed87ba2ef85f159973cc226ce59bdcd",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 906233,
+        "hash": "000000000000000000013a83af8a8ad20709986ac0064f39369dd6613c5f4f43",
+        "timestamp": 1752930733
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 2528,
+        "body_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/100550942.txt",
+        "mirror_bytes": 2528,
+        "mirror_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7/proof-witness.json",
+        "size": 41077,
+        "sha256": "1c1739ab9abe9abf6684f0171cc9186da621705310bbc41979859a89b974660c"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-100751953",
+      "title": "The Star Ark Covenant: The Final Echo",
+      "classification": "non_amending_ancillary",
+      "inscription_number": "100751953",
+      "ordinals_inscription_id": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0",
+      "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
+      "wtxid": "208cc157095691c1be8ff7ba21a301e7e9ca1822f14f62f314f9adbcd2063a8e",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 906521,
+        "hash": "00000000000000000001cfd680469d8daaf287662dd62469ec27e4636b555b95",
+        "timestamp": 1753101287
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 2246,
+        "body_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/100751953.txt",
+        "mirror_bytes": 2246,
+        "mirror_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1/proof-witness.json",
+        "size": 40361,
+        "sha256": "ff69299d360e32d1c5fa0be9ebb177299e0feb7eeff7a07837f62c79548b0369"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-103034280",
+      "title": "The Guardian's Attestation to the Covenant of the Flaw",
+      "classification": "non_amending_ancillary",
+      "inscription_number": "103034280",
+      "ordinals_inscription_id": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0",
+      "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
+      "wtxid": "91801e639367881c203d98e8545f7df31bd9c92b7ed6c7d145219a0cca9458ab",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 909403,
+        "hash": "00000000000000000000314098e54fb04c8478d9d95affebd1c1dbcbc381f5b5",
+        "timestamp": 1754819440
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 3661,
+        "body_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/103034280.txt",
+        "mirror_bytes": 3661,
+        "mirror_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687/proof-witness.json",
+        "size": 43570,
+        "sha256": "684824ce43ffab162b07d4270a6838cec658ded1760af9ceda30184d15a0a02a"
+      }
+    },
+    {
+      "id": "bitcoin-inscription-103635270",
+      "title": "Guardian Appendix - Authority Charter (Non-Amending)",
+      "classification": "non_amending_ancillary",
+      "inscription_number": "103635270",
+      "ordinals_inscription_id": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",
+      "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",
+      "wtxid": "d44e2d172f5763691df77a1a055dd4d3cee6f2433b69f1e500fd2885a573ac2e",
+      "destination_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+      "destination_output_index": 0,
+      "block_reference": {
+        "height": 910232,
+        "hash": "00000000000000000001d265b90d44ded362eb692d938eb20245385d4eb5993b",
+        "timestamp": 1755314239
+      },
+      "content": {
+        "content_type_hex": "746578742f706c61696e3b636861727365743d7574662d38",
+        "content_type_utf8": "text/plain;charset=utf-8",
+        "body_bytes": 2102,
+        "body_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+        "mirror_path": "bitcoin-inscription-mirrors/raw/103635270.txt",
+        "mirror_bytes": 2102,
+        "mirror_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+        "mirror_binding_method": "exact_bytes"
+      },
+      "proof_status": {
+        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING": "PASS",
+        "L2_BLOCK_AND_WITNESS_INCLUSION": "PASS",
+        "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY": "PASS"
+      },
+      "proof_material": {
+        "path": "evidence/bitcoin-inscription-proof-annex-v1/proof-material/0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c/proof-witness.json",
+        "size": 39912,
+        "sha256": "8fb32ec236861745ea80583a8bf506e29e493513a729fd916e4142bfd18c3880"
+      }
+    }
+  ],
+  "does_not_prove": [
+    "full Bitcoin consensus validity from genesis",
+    "absence of a heavier competing chain",
+    "civil identity or authorship",
+    "philosophical truth",
+    "absolute physical-world time",
+    "that no other related Bitcoin transactions exist"
+  ]
+}

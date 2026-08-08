@@ -1,24 +1,27 @@
 {
   "schema": "trinityaccord.bitcoin-inscription-mirror-manifest.v1",
-  "generated_utc": "2026-05-13T00:00:00Z",
+  "generated_utc": "2026-08-08T14:50:26.486053Z",
   "purpose": "Manifest of all Bitcoin inscription mirrors in this directory.",
   "canonical_originals": [
-    "canonical-originals/protocol-axioms-97631551.json",
-    "canonical-originals/covenant-of-the-flaw-98369145.json",
-    "canonical-originals/trinity-accord-meta-record-98387475.json"
+    "canonical-originals/97631551-protocol-axioms.json",
+    "canonical-originals/98369145-covenant-of-the-flaw.json",
+    "canonical-originals/98387475-trinity-accord-meta-record.json"
   ],
   "vision_layer": [
-    "vision-layer/star-ark-covenant.json",
-    "vision-layer/final-seal.json",
-    "vision-layer/first-echoes.json"
+    "vision-layer/100385359-first-echoes.json",
+    "vision-layer/100550942-final-seal.json",
+    "vision-layer/100751953-star-ark-covenant.json"
   ],
   "context_layer": [
-    "context-layer/guardian-attestation.json"
+    "context-layer/103034280-guardian-attestation.json",
+    "context-layer/103635270-guardian-appendix-authority-charter.json"
   ],
   "counts": {
     "canonical_originals": 3,
     "vision_layer": 3,
-    "context_layer": 1,
-    "total": 7
-  }
+    "context_layer": 2,
+    "total": 8
+  },
+  "cryptographic_proof_annex": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+  "offline_verification_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json"
 }

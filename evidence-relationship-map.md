@@ -51,6 +51,8 @@ L3 Cryptographic Coverage
    six-hash coverage
 
 L4 Anchors and Witnesses
+   Bitcoin inscription proof annex (3 canonical + 5 non-amending)
+   Taproot + txid Merkle + BIP141 witness commitment + PoW ancestry
    BTC BIP340 signature
    ETH witness 8/8 PASS
    OTS Bitcoin timestamping
@@ -106,6 +108,13 @@ flowchart TD
 GitHub, Arweave, ETH, IPFS, NFTs, and Releases strengthen availability and verification, but do not create canonical authority.
 
 Bitcoin Originals prevail.
+
+The Bitcoin inscription proof annex is verifiable from repository bytes with no
+network request. It proves exact inscription content and `txid+i0`, Taproot
+reveal binding, txid and witness inclusion in the declared blocks, and 144
+descendant proof-of-work headers per anchor. It remains checkpoint-relative: it
+does not replace full-node validation from genesis, prove the absence of a
+heavier chain, or rebuild the global Ordinals numeric inscription index.
 
 ## 7. Gateway Availability Note
 

@@ -4,14 +4,19 @@
 
 This directory contains GitHub mirrors for quick agent loading of relevant Bitcoin inscriptions associated with the Trinity Accord.
 
-**These mirrors support context readiness only. They do not create authority. They are not sufficient for verification claims.**
+These mirrors do not create authority. Their exact bytes are now bound to a
+checked-in, proof-carrying Bitcoin annex, so the on-chain comparison can be
+reproduced cryptographically without a network connection.
 
 ## Authority Boundary
 
 - The three Bitcoin Originals remain the only canonical body.
 - Same-address non-canonical Bitcoin inscriptions may be important context, but they are not canonical body.
 - GitHub mirrors are for fast context loading only.
-- Verification claims about inscription content require on-chain Bitcoin comparison.
+- Verification claims about inscription content require an on-chain Bitcoin
+  comparison. The offline proof annex performs that comparison from preserved
+  reveal transactions, Taproot data, Merkle branches, BIP141 witness
+  commitments, and proof-of-work headers.
 
 ## Directory Structure
 
@@ -40,7 +45,12 @@ Non-canonical Bitcoin inscriptions that provide future-facing context:
 ## Important Rules
 
 - GitHub mirrors are not canonical.
-- Verification requires comparing against on-chain Bitcoin inscription content.
+- Run `python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py`
+  for the fail-closed, network-free comparison.
+- The legacy `source_address` field names the reveal transaction's destination
+  P2TR address. It does not by itself prove civil authorship or key ownership.
+- The public numeric inscription number remains a historical lookup coordinate;
+  the verifier independently derives the full `txid+i0` Ordinals identifier.
 - Context Readiness Level is not Verification Level.
 - Context readiness is not proof.
 - Vision-layer inscriptions do not amend the three Bitcoin Originals.
