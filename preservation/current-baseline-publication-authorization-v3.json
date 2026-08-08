@@ -1,0 +1,35 @@
+{
+  "schema": "trinityaccord.current-baseline-publication-authorization.v3",
+  "sequence": 3,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_at_utc": "2026-08-08T00:00:00Z",
+  "authorization_basis": "The repository owner explicitly authorized completion of the Bitcoin/Ethereum evidence reorganization and publication of one final frozen DOI version.",
+  "authorized_purpose": "Publish one exact final evidence baseline containing the complete 8-inscription Bitcoin proof annex, 10 non-NFT Ethereum proofs, 175 NFT proofs, frozen proof primitives, unified evidence inventory and recovery topology, with DOI-only public cold restore.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_core_version_doi": "10.5281/zenodo.21846249",
+  "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "publication_confirmation": "PUBLISH_TRINITY_FINAL_EVIDENCE_BASELINE_V3",
+  "include_full_repository_doi": true,
+  "include_homepage_arweave_snapshot": false,
+  "intended_as_final_evidence_freeze": true,
+  "non_amending_boundary": true,
+  "live_main_equivalence_claimed": false,
+  "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
+  "previous_publication": {
+    "sequence": 2,
+    "source_baseline_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
+    "doi": "10.5281/zenodo.21846249",
+    "package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823"
+  },
+  "frozen_evidence_scope": {
+    "bitcoin_inscriptions": 8,
+    "bitcoin_canonical_originals": 3,
+    "bitcoin_non_amending_ancillary": 5,
+    "ethereum_non_nft_anchors": 10,
+    "ethereum_chronicle_nfts": 175,
+    "nft_contracts": 4,
+    "proof_status_required": "PASS",
+    "ordinary_verification_network_required": false
+  }
+}

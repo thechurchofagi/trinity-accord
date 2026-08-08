@@ -20,6 +20,7 @@ OBSERVATION = ROOT / "preservation/current-baseline-publication-observation-v2.j
 STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 INDEX = ROOT / "api/recovery-index.json"
 SEQ1_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
+SEQ3_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v3.json"
 
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 PREVIOUS_DOI = "10.5281/zenodo.21831412"
@@ -133,6 +134,54 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
         raise SystemExit("consumed authorization has invalid record id")
     if not isinstance(package, str) or len(package) != 64:
         raise SystemExit("consumed authorization has invalid package identity")
+
+    # Sequence 2 remains immutable publication history after the explicitly
+    # authorized sequence-3 final evidence freeze starts.  Validate its own
+    # prepared/observation records and the successor lineage, but do not require
+    # sequence 2 to keep owning the moving latest-state pointers.
+    if SEQ3_AUTH.is_file():
+        successor = load(SEQ3_AUTH)
+        successor_status = successor.get("status")
+        if successor_status in {"prepared", "consumed"}:
+            require_equal(successor.get("sequence"), 3, "sequence3.sequence")
+            require_equal(successor.get("core_concept_doi"), CONCEPT_DOI, "sequence3.concept_doi")
+            require_equal(successor.get("previous_core_version_doi"), doi, "sequence3.previous_doi")
+            previous = successor.get("previous_publication")
+            if not isinstance(previous, dict):
+                raise SystemExit("sequence3.previous_publication missing")
+            require_equal(previous.get("source_baseline_commit_sha"), source, "sequence3.previous_source")
+            require_equal(previous.get("doi"), doi, "sequence3.previous_publication.doi")
+            require_equal(previous.get("package_identity_sha256"), package, "sequence3.previous_package")
+            versions = state.get("versions")
+            if not isinstance(versions, list) or doi not in {
+                item.get("doi") for item in versions if isinstance(item, dict)
+            }:
+                raise SystemExit("preservation history no longer contains sequence-2 DOI")
+            prepared_v2 = load(PREPARED)
+            require_equal(prepared_v2.get("status"), "published_verified", "prepared.status")
+            require_equal(prepared_v2.get("source_git_commit_sha"), source, "prepared.source")
+            require_equal(prepared_v2.get("version_doi"), doi, "prepared.version_doi")
+            observation_v2 = load(OBSERVATION)
+            require_equal(observation_v2.get("status"), "passed", "observation.status")
+            require_equal(observation_v2.get("source_git_commit_sha"), source, "observation.source")
+            require_equal(observation_v2.get("version_doi"), doi, "observation.version_doi")
+            if successor_status == "prepared":
+                require_equal(state.get("latest_doi"), doi, "prepared sequence3 predecessor DOI")
+                require_equal(
+                    state.get("publication_status"),
+                    "prepared_for_final_evidence_baseline_publication_v3",
+                    "prepared sequence3 state",
+                )
+            else:
+                require_equal(state.get("latest_doi"), successor.get("published_doi"), "sequence3 latest DOI")
+                require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence3 state")
+                refresh = index.get("publication_refresh")
+                if not isinstance(refresh, dict):
+                    raise SystemExit("sequence3 recovery publication_refresh missing")
+                require_equal(refresh.get("sequence"), 3, "sequence3 recovery sequence")
+                require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence3 recovery status")
+            validate_sequence1_history()
+            return
 
     require_equal(state.get("publication_status"), "published_and_publicly_restored", "state.publication_status")
     require_equal(state.get("latest_git_commit_sha"), source, "state.latest_git_commit_sha")

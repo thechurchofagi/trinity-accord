@@ -256,20 +256,33 @@ def test_recovery_index_declares_the_published_core_repository_doi():
             encoding="utf-8"
         )
     )
+    seq3 = json.loads(
+        (ROOT / "preservation/current-baseline-publication-authorization-v3.json").read_text(
+            encoding="utf-8"
+        )
+    )
 
-    assert current["publication_status"] == "published_and_publicly_restored"
+    if seq3["status"] == "prepared":
+        assert current["publication_status"] == "prepared_for_final_evidence_baseline_publication_v3"
+    else:
+        assert current["publication_status"] == "published_and_publicly_restored"
     assert seq1["status"] == "consumed"
     assert seq2["status"] == "consumed"
     assert seq2["previous_core_version_doi"] == seq1["published_doi"]
-    assert current["latest_doi"] == seq2["published_doi"]
-    assert current["latest_git_commit_sha"] == seq2["published_source_baseline_commit_sha"]
-    assert current["latest_package_identity_sha256"] == seq2["published_package_identity_sha256"]
+    assert seq3["previous_core_version_doi"] == seq2["published_doi"]
+    active = seq3 if seq3["status"] == "consumed" else seq2
+    assert current["latest_doi"] == active["published_doi"]
+    assert current["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]
+    assert current["latest_package_identity_sha256"] == active["published_package_identity_sha256"]
 
     versions = {entry["doi"]: entry for entry in current["versions"]}
     assert versions[seq1["published_doi"]]["git_commit_sha"] == seq1["published_source_baseline_commit_sha"]
     assert versions[seq1["published_doi"]]["package_identity_sha256"] == seq1["published_package_identity_sha256"]
     assert versions[seq2["published_doi"]]["git_commit_sha"] == seq2["published_source_baseline_commit_sha"]
     assert versions[seq2["published_doi"]]["package_identity_sha256"] == seq2["published_package_identity_sha256"]
+    if seq3["status"] == "consumed":
+        assert versions[seq3["published_doi"]]["git_commit_sha"] == seq3["published_source_baseline_commit_sha"]
+        assert versions[seq3["published_doi"]]["package_identity_sha256"] == seq3["published_package_identity_sha256"]
 
     assert legacy_state["publication_status"] == "published"
     assert legacy_state["latest_doi"] == "10.5281/zenodo.21739344"

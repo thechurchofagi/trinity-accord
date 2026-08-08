@@ -118,6 +118,21 @@ jobs:
           print('NFT_L2_MINT_TRANSACTIONS=' + str(generated['L2_EXECUTION_INCLUSION']['mint_transactions']))
           print('NFT_L3_EXECUTION_BLOCKS=' + str(generated['L3_CONSENSUS_FINALITY']['unique_execution_blocks']))
           PY
+      - name: Verify unified final evidence and DOI freeze contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/build_final_evidence_inventory.py \
+            scripts/current_baseline_publication_v3.py
+          bash -n \
+            scripts/run_current_baseline_publication_v3_ci.sh \
+            scripts/run_repository_preservation_refresh_ci.sh
+          python3 scripts/build_final_evidence_inventory.py --check
+          python3 scripts/current_baseline_publication_v3.py validate
+          python3 -m pytest -q \
+            tests/test_current_baseline_publication_v3_contract.py \
+            tests/test_evidence_manifest_current_proof_state.py
       - name: Run full current system tests
         id: current_system_tests
         continue-on-error: true

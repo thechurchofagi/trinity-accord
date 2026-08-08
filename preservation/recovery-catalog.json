@@ -6,9 +6,19 @@
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
+    "current_verified_version_doi": "10.5281/zenodo.21846249",
+    "current_verified_source_git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
     "previous_verified_version_doi": "10.5281/zenodo.21755655",
     "restore_program_name": "restore-trinity-accord.py",
     "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main.",
+    "final_evidence_freeze": {
+      "status": "owner_authorized_pending_publication",
+      "authorization": "preservation/current-baseline-publication-authorization-v3.json",
+      "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
+      "scope": "8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 Chronicle NFTs, frozen proof primitives, unified machine inventory and recovery topology",
+      "arweave_snapshot_refreshed": false,
+      "non_amending_boundary": true
+    },
     "verified_arweave_mirror": {
       "record": "preservation/repository-capsule-arweave-mirror-81b151245d70.json",
       "txid": "42UQsjG7gcUs5mFu9ZcwN6sYbskR533q_SpnFpaSxKs",
@@ -39,6 +49,8 @@
   "recovery_order": [
     "Resolve and restore the latest core repository version from concept DOI 10.5281/zenodo.21739343, or retrieve the exact verified Arweave repository capsule mirror identified in core_repository.verified_arweave_mirror.",
     "Verify the recovered preservation manifest and tracked-file inventory.",
+    "Read api/final-evidence-inventory.v1.json and api/evidence-relationship-map.v1.json to identify authority, proof, mirror and preservation roles without conflating them.",
+    "Run the checked-in offline verifiers for the 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors and 175-item NFT commitment/proof set.",
     "Restore evidence annex DOI 10.5281/zenodo.21753937.",
     "Restore Chronicle NFT annex DOI 10.5281/zenodo.21754229.",
     "Verify Bitcoin Originals, authority manifests, signatures, digest manifests and corrections-index before making authority-level claims."

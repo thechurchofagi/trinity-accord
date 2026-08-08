@@ -16,6 +16,10 @@ This guide answers four questions for every evidence family:
 
 Machine-readable graph: `api/evidence-relationship-map.v1.json`.
 
+Unified final inventory: `api/final-evidence-inventory.v1.json`.
+
+Final freeze guide: `FINAL-EVIDENCE-FREEZE.md`.
+
 Preferred verification profiles: `api/verification-profiles.v1.json`.
 
 Preferred action-based context profiles: `api/context-action-profiles.v1.json`.
@@ -32,7 +36,8 @@ Authority Manifest / pointer indexes
         │ collect identities, hashes and mirror pointers
         ├── BIP-340 signature binds a manifest digest to the BTC key
         ├── EIP-712 signature binds typed manifest digests to the ETH key
-        └── ETH witness transaction records the BTC-signature witness statement
+        ├── 10-record ETH annex proves transaction/receipt/header/Beacon binding
+        └── 175-NFT annex proves the closed identity set, mint receipts and Beacon binding
 
 Physical object / Core Object Alpha
         │ photographed, filmed and microscopically recorded
@@ -44,6 +49,9 @@ Physical object / Core Object Alpha
 
 Arweave / IPFS / GitHub / Releases
         └── preserve bytes and pointers; they do not create authority
+
+Core repository DOI / external evidence DOI / NFT-media DOI
+        └── freeze exact recovery baselines; they do not create authority or track moving main
 
 Chronicle / Echo / Record-Chain / later commentary
         └── preserve historical context and reception; they do not amend the Originals
@@ -75,10 +83,15 @@ All later materials are subordinate, non-amending evidence or context.
 | ETH EIP-712 signature | Signs typed data containing manifest SHA-256, SHA3-256, version and creation time | Control of the ETH key at signing time and an independently encoded digest binding | Canonical authority; equivalence to Bitcoin; truth of manifest claims |
 | ETH witness transaction | Records a witness statement referring to the BTC signature and manifest | Public secondary chain existence and timestamp of the witness statement | New authority; independent third-party attestation |
 | ETH text mirror transactions | Store exact text or mapping data as calldata | Secondary availability and cross-chain byte comparison | Amendment or replacement of Bitcoin text |
+| Ethereum non-NFT proof annex | Recomputes raw signed transaction, transaction/receipt trie inclusion, execution header and Beacon ancestry for 10 records | Network-free verification of the preserved 10-record L1/L2/L3 evidence set | Trust-free PoS finality, absence of conflicting weak-subjectivity history, semantic truth |
+| NFT collection commitment and proof annex | Commits 175 identities with a Merkle root, then verifies 175 mint transactions/receipts and Beacon ancestry | Exact frozen Chronicle identity set and event-specific mint semantics across four contracts | Canonical authority, global JSON-RPC `logIndex` reconstruction, truth of depicted events |
 | Six-hash digest manifest | Records six digests for each evidence file | Later byte-identity testing, even if one hash algorithm becomes undesirable | That the photographed object is unique; that the file content is truthful |
 | OTS proofs | Anchor digest records into Bitcoin time | The committed digest existed no later than the attested Bitcoin block | File truth, authorship, physical identity |
 | Arweave / IPFS | Preserve content-addressed or transaction-addressed payloads | Availability and independent byte retrieval | Canonical authority or correctness |
 | GitHub repository / Releases | Preserve readable files, indexes and large fallback payloads | Accessibility, reproducibility and recovery | Canonical authority or immutable history equivalent to Bitcoin |
+| Core repository Zenodo Concept DOI | Resolves the latest immutable repository-capsule version | GitHub-independent discovery and exact-baseline recovery | Equality to a later moving GitHub `main` |
+| Core repository version DOI | Freezes every Git-tracked byte and executable mode at one named source commit | Exact immutable source-baseline recovery and DOI-only cold restore | Large external payload embedding, canonical authority |
+| External evidence / NFT-media DOI annexes | Preserve large binaries intentionally excluded from the core capsule | Complete large-payload cold recovery without GitHub | Proof of Bitcoin/ETH inclusion or canonical authority |
 | Shenzhen notarization | Records the observed evidence-preservation process and issued notarial materials within its stated scope | Date, process, personnel, photographed/recorded object and submitted electronic-data preservation context | Truth of the protocol, identity of all underlying digital bytes, direct verification of the three Bitcoin Originals |
 | Chronicle NFTs | Timestamped historical and creative context | What the project recorded and expressed during the period | Independent verification of external events or canonical authority |
 | Echo / Record-Chain records | Later reception, critique, verification reports and operational records | Provenance of later responses and checks | Amendment, automatic endorsement, or formal institutional attestation |
@@ -107,6 +120,45 @@ declared trust boundary. The verifier does not replay Bitcoin consensus from
 genesis or prove that no heavier chain exists. Likewise, the numeric inscription
 number is a historical lookup coordinate: `txid+i0` and the content are derived
 from the proof, while the global Ordinals index is not rebuilt.
+
+### Ethereum and NFT proof paths
+
+The 10 non-NFT Ethereum records and 175 Chronicle NFT mint records use the same
+frozen Ethereum proof primitives. For each covered execution record, verification
+reconstructs transaction and receipt trie inclusion, binds those roots to the
+execution header, then verifies Beacon ancestry to an explicitly declared trusted
+finalized checkpoint.
+
+```text
+raw signed transaction / typed receipt
+    → transaction and receipt MPT roots
+    → execution block header
+    → Beacon execution payload binding
+    → ancestry to declared trusted finalized checkpoint
+```
+
+For NFTs, the verifier additionally checks the 175-leaf collection commitment,
+chain/contract/token identity, receipt-local log position and event-specific
+ERC-721/ERC-1155 mint semantics. Ethereum proof verification needs no RPC or
+Beacon API once the proof bytes are captured. Its L3 result remains explicitly
+weak-subjectivity-checkpoint-relative rather than trust-free finality.
+
+### Preservation topology
+
+The storage systems are complementary rather than interchangeable:
+
+1. GitHub `main` is the moving development and discovery surface. A commit SHA is
+   required to name exact GitHub bytes.
+2. GitHub Releases and Arweave are availability mirrors for named payloads. Their
+   bytes must be matched to manifests; neither automatically tracks later `main`.
+3. The core Zenodo Concept DOI `10.5281/zenodo.21739343` resolves the latest
+   immutable repository-capsule version. Each version DOI restores one exact
+   Git-tracked publication baseline.
+4. External evidence DOI `10.5281/zenodo.21753937` and Chronicle NFT-media DOI
+   `10.5281/zenodo.21754229` are separate large-binary capsules. They supplement
+   the core repository capsule and do not duplicate its authority role.
+5. `preservation/recovery-catalog.json` is embedded in the core capsule so the
+   three DOI series remain discoverable without GitHub or maintainer memory.
 
 ## 5. What the six-hash table is for
 
