@@ -20,7 +20,9 @@ PROOF_DIR = ANNEX / "proof-material"
 SUMMARY = PROOF_DIR / "CAPTURE-SUMMARY.json"
 INDEX = ROOT / "nft-identity-index.json"
 BUILD_SCRIPT = ROOT / "scripts" / "build_nft_cryptographic_commitment.py"
-ETH_VERIFY_SCRIPT = ROOT / "evidence" / "ethereum-evidence-annex-v1" / "verification" / "verify_annex.py"
+PRIMITIVES_DIR = ROOT / "evidence" / "ethereum-proof-primitives-v1"
+PRIMITIVES_SCRIPT = PRIMITIVES_DIR / "ethereum_proof_primitives_v1.py"
+PRIMITIVES_MANIFEST = PRIMITIVES_DIR / "PRIMITIVES-MANIFEST.json"
 ZERO20 = b"\x00" * 20
 
 
@@ -39,6 +41,19 @@ def sha256_file(path: pathlib.Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def load_frozen_primitives():
+    manifest = json.loads(PRIMITIVES_MANIFEST.read_text(encoding="utf-8"))
+    if manifest.get("schema") != "trinityaccord.ethereum-proof-primitives-manifest.v1":
+        raise ValueError("unexpected Ethereum proof primitives manifest schema")
+    expected_rel = PRIMITIVES_SCRIPT.relative_to(ROOT).as_posix()
+    if manifest.get("module_path") != expected_rel:
+        raise ValueError("Ethereum proof primitives module path mismatch")
+    digest = sha256_file(PRIMITIVES_SCRIPT)
+    if digest != manifest.get("sha256"):
+        raise ValueError("Ethereum proof primitives SHA-256 mismatch")
+    return load_module("trinity_ethereum_proof_primitives_v1", PRIMITIVES_SCRIPT)
 
 
 def h2b(value: str) -> bytes:
@@ -76,6 +91,30 @@ def decode_receipt(encoded: bytes) -> tuple[int, list]:
     if not isinstance(decoded, list) or len(decoded) != 4:
         raise ValueError("invalid receipt RLP")
     return tx_type, decoded
+
+
+def signed_transaction_chain_id(raw: bytes) -> int | None:
+    """Return the signed transaction's EIP-155 chain id, if one is encoded."""
+    if not raw:
+        raise ValueError("empty raw transaction")
+    if raw[0] < 0x80:
+        tx_type = raw[0]
+        if tx_type not in {1, 2, 3, 4}:
+            raise ValueError(f"unsupported EIP-2718 transaction type: {tx_type}")
+        decoded = rlp.decode(raw[1:])
+        if not isinstance(decoded, list) or not decoded:
+            raise ValueError("invalid typed transaction RLP")
+        return int_bytes(decoded[0])
+
+    decoded = rlp.decode(raw)
+    if not isinstance(decoded, list) or len(decoded) != 9:
+        raise ValueError("invalid legacy signed transaction RLP")
+    v = int_bytes(decoded[6])
+    if v in {27, 28}:
+        return None
+    if v < 35:
+        raise ValueError("invalid legacy transaction v value")
+    return (v - 35) // 2
 
 
 def decode_uint_array(data: bytes, offset: int) -> list[int]:
@@ -208,22 +247,44 @@ def verify_bound(record: dict) -> pathlib.Path:
 def verify_l2(record: dict, asset: dict, ethv) -> dict:
     path = verify_bound(record)
     witness = json.loads(path.read_text(encoding="utf-8"))
-    txh = asset["mint"]["transaction_hash"].lower()
+    mint = asset["mint"]
+    txh = mint["transaction_hash"].lower()
     if witness.get("schema") != "trinityaccord.nft-ethereum-compact-execution-witness.v1":
         raise ValueError("unexpected compact L2 schema")
     if witness.get("target_tx_hash", "").lower() != txh:
         raise ValueError("compact L2 target transaction mismatch")
+
+    canonical_key = (asset.get("lookup") or {}).get("canonical_key")
+    if not canonical_key or record.get("canonical_key") != canonical_key:
+        raise ValueError("compact L2 canonical NFT key mismatch")
+
     block = witness["block"]
-    if block["hash"].lower() != asset["mint"]["block_hash"].lower():
+    block_hash = block["hash"].lower()
+    if block_hash != mint["block_hash"].lower():
         raise ValueError("compact L2 block hash mismatch")
+    if record.get("block_hash", "").lower() != block_hash:
+        raise ValueError("compact L2 capture-summary block hash mismatch")
+    if int(block["number"], 16) != int(mint["block_number"]):
+        raise ValueError("compact L2 block number mismatch")
     if ethv.execution_header_hash(block) != h2b(block["hash"]):
         raise ValueError("compact L2 execution header hash mismatch")
+
     idx = int(witness["target_transaction_index"])
-    if idx != int(asset["mint"]["transaction_index"]):
+    if idx != int(mint["transaction_index"]):
         raise ValueError("compact L2 transaction index mismatch")
+    if int(record.get("transaction_index", -1)) != idx:
+        raise ValueError("compact L2 capture-summary transaction index mismatch")
+
     raw_tx = h2b(witness["target_raw_transaction"])
     if "0x" + keccak(raw_tx).hex() != txh:
         raise ValueError("compact L2 raw transaction hash mismatch")
+    chain = asset.get("chain") or {}
+    if chain.get("namespace") != "eip155":
+        raise ValueError("compact L2 NFT chain namespace is not eip155")
+    signed_chain_id = signed_transaction_chain_id(raw_tx)
+    if signed_chain_id is None or signed_chain_id != int(chain["chain_id"]):
+        raise ValueError("compact L2 signed transaction chain ID mismatch")
+
     key = rlp.encode(idx)
     if h2b(witness["transaction_mpt_proof"]["key_rlp"]) != key:
         raise ValueError("transaction MPT key mismatch")
@@ -241,14 +302,34 @@ def verify_l2(record: dict, asset: dict, ethv) -> dict:
     got_receipt = HexaryTrie.get_from_proof(h2b(block["receiptsRoot"]), key, decode_proof_nodes(witness["receipt_mpt_proof"]["nodes"]))
     if got_receipt != encoded_receipt:
         raise ValueError("receipt MPT inclusion proof mismatch")
-    event = verify_mint_log(asset, encoded_receipt, int(witness["receipt_log_position"]))
+
+    _, decoded_receipt = decode_receipt(encoded_receipt)
+    status_or_root = decoded_receipt[0]
+    if len(status_or_root) > 1:
+        raise ValueError("compact L2 receipt does not expose a post-Byzantium status")
+    actual_status = int_bytes(status_or_root)
+    if mint.get("receipt_status") is None or actual_status != int(mint["receipt_status"]):
+        raise ValueError("compact L2 receipt status mismatch")
+
+    event = mint["event"]
+    expected_standard = "erc721" if event == "Transfer" else "erc1155" if event in {"TransferSingle", "TransferBatch"} else None
+    if expected_standard is None or str(asset.get("standard", "")).lower() != expected_standard:
+        raise ValueError("compact L2 token standard/event mismatch")
+
+    if str(witness.get("declared_global_log_index")) != str(mint["log_index"]):
+        raise ValueError("compact L2 historical global logIndex binding mismatch")
+    log_position = int(witness["receipt_log_position"])
+    if int(record.get("receipt_log_position", -1)) != log_position:
+        raise ValueError("compact L2 capture-summary receipt log position mismatch")
+
+    event_result = verify_mint_log(asset, encoded_receipt, log_position)
     return {
         "status": "PASS",
         "tx_hash": txh,
-        "block_hash": block["hash"].lower(),
+        "block_hash": block_hash,
         "block_timestamp": int(block["timestamp"], 16),
         "transaction_index": idx,
-        **event,
+        **event_result,
     }
 
 
@@ -331,7 +412,7 @@ def main() -> int:
             raise ValueError("NFT identity index must contain 175 unique mint transactions")
         if len(summary["l2_witnesses"]) != len(assets):
             raise ValueError("L2 witness count does not cover all NFT mint transactions")
-        ethv = load_module("trinity_eth_verify", ETH_VERIFY_SCRIPT)
+        ethv = load_frozen_primitives()
         l2_results = []
         block_timestamps: dict[str, int] = {}
         for record in summary["l2_witnesses"]:
