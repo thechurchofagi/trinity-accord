@@ -19,14 +19,42 @@ def load_verifier():
     return module
 
 
-def first_real_l2_case():
+def real_l2_cases():
     mod = load_verifier()
     summary = json.loads(mod.SUMMARY.read_text(encoding="utf-8"))
     assets = mod.index_by_tx()
-    record = copy.deepcopy(summary["l2_witnesses"][0])
-    asset = copy.deepcopy(assets[record["tx_hash"].lower()])
     primitives = mod.load_frozen_primitives()
-    return mod, record, asset, primitives
+    cases = []
+    for original_record in summary["l2_witnesses"]:
+        record = copy.deepcopy(original_record)
+        asset = copy.deepcopy(assets[record["tx_hash"].lower()])
+        cases.append((mod, record, asset, primitives))
+    return cases
+
+
+def first_real_l2_case():
+    return real_l2_cases()[0]
+
+
+def first_case_for_event(event: str):
+    for case in real_l2_cases():
+        if case[2]["mint"]["event"] == event:
+            return case
+    raise AssertionError(f"no real NFT proof case for event {event}")
+
+
+def first_erc1155_case():
+    for case in real_l2_cases():
+        if case[2]["mint"]["event"] in {"TransferSingle", "TransferBatch"}:
+            return case
+    raise AssertionError("no real ERC-1155 NFT proof case")
+
+
+def different_address(value: str) -> str:
+    assert value.startswith("0x") and len(value) == 42
+    raw = bytearray.fromhex(value[2:])
+    raw[-1] ^= 1
+    return "0x" + raw.hex()
 
 
 def test_frozen_ethereum_primitives_manifest_matches_module():
@@ -45,6 +73,13 @@ def test_real_compact_l2_witness_still_passes_after_hardening():
     result = mod.verify_l2(record, asset, primitives)
     assert result["status"] == "PASS"
     assert result["tx_hash"] == asset["mint"]["transaction_hash"].lower()
+
+
+def test_all_real_compact_l2_witnesses_pass_event_specific_semantics():
+    cases = real_l2_cases()
+    assert len(cases) == 175
+    for mod, record, asset, primitives in cases:
+        assert mod.verify_l2(record, asset, primitives)["status"] == "PASS"
 
 
 @pytest.mark.parametrize(
@@ -78,3 +113,57 @@ def test_real_compact_l2_witness_rejects_cross_field_mutation(mutation: str, mes
 
     with pytest.raises(ValueError, match=message):
         mod.verify_l2(record, asset, primitives)
+
+
+def test_erc721_rejects_operator_and_batch_index_metadata():
+    mod, record, asset, primitives = first_case_for_event("Transfer")
+    assert asset["standard"].lower() == "erc721"
+
+    bad_operator = copy.deepcopy(asset)
+    bad_operator["mint"]["operator"] = "0x0000000000000000000000000000000000000001"
+    with pytest.raises(ValueError, match="ERC-721 mint operator must be null"):
+        mod.verify_l2(record, bad_operator, primitives)
+
+    bad_batch = copy.deepcopy(asset)
+    bad_batch["mint"]["batch_index"] = 0
+    with pytest.raises(ValueError, match="ERC-721 mint batch_index must be null"):
+        mod.verify_l2(record, bad_batch, primitives)
+
+
+def test_erc1155_rejects_missing_or_mismatched_operator():
+    mod, record, asset, primitives = first_erc1155_case()
+    operator = asset["mint"].get("operator")
+    assert isinstance(operator, str) and len(operator) == 42
+
+    missing = copy.deepcopy(asset)
+    missing["mint"]["operator"] = None
+    with pytest.raises(ValueError, match="operator must be a 20-byte 0x address"):
+        mod.verify_l2(record, missing, primitives)
+
+    malformed = copy.deepcopy(asset)
+    malformed["mint"]["operator"] = "0x1234"
+    with pytest.raises(ValueError, match="operator must be a 20-byte 0x address"):
+        mod.verify_l2(record, malformed, primitives)
+
+    mismatched = copy.deepcopy(asset)
+    mismatched["mint"]["operator"] = different_address(operator)
+    with pytest.raises(ValueError, match="operator mismatch"):
+        mod.verify_l2(record, mismatched, primitives)
+
+
+def test_erc1155_event_specific_batch_index_is_fail_closed():
+    mod, record, asset, primitives = first_erc1155_case()
+    event = asset["mint"]["event"]
+    mutated = copy.deepcopy(asset)
+
+    if event == "TransferSingle":
+        assert asset["mint"].get("batch_index") is None
+        mutated["mint"]["batch_index"] = 0
+        with pytest.raises(ValueError, match="TransferSingle batch_index must be null"):
+            mod.verify_l2(record, mutated, primitives)
+    else:
+        assert event == "TransferBatch"
+        assert asset["mint"].get("batch_index") is not None
+        mutated["mint"]["batch_index"] = None
+        with pytest.raises(ValueError, match="TransferBatch batch_index is required"):
+            mod.verify_l2(record, mutated, primitives)
