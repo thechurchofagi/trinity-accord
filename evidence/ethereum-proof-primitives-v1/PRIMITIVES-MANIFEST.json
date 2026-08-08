@@ -1,0 +1,13 @@
+{
+  "schema": "trinityaccord.ethereum-proof-primitives-manifest.v1",
+  "version": "1.0.0",
+  "module_path": "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
+  "sha256": "d605cc3d7aad3b846d998f4192aae9cceb8ce3c1f0efa4e4578a22a2b5d47dc2",
+  "purpose": "Frozen deterministic Ethereum execution-header, MPT and Beacon/SSZ verification primitives for proof annex v1 verifiers.",
+  "change_policy": "immutable_v1_publish_new_version_instead",
+  "network_constants": {
+    "ethereum_mainnet_beacon_genesis_time": 1606824023,
+    "seconds_per_slot": 12
+  },
+  "authority_boundary": "verification utility only; does not create or amend Accord authority"
+}
