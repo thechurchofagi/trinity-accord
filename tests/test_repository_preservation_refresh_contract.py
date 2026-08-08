@@ -140,27 +140,60 @@ def test_consumed_refresh_has_complete_public_recovery_evidence():
     if auth["status"] != "consumed":
         assert auth["status"] in {"pending", "prepared"}
         return
+
     state = load(STATE)
     assert state["publication_status"] == "published_and_publicly_restored"
     assert state["public_download_verification"] == "passed"
     assert state["public_metadata_verification"] == "passed"
     assert state["public_cold_restore"] == "passed"
-    if state["latest_doi"] != auth["published_doi"]:
-        current_auth = load(
-            ROOT / "preservation/current-baseline-publication-authorization-v1.json"
-        )
-        assert current_auth["status"] == "consumed"
-        assert current_auth["previous_core_version_doi"] == auth["published_doi"]
-        assert state["latest_doi"] == current_auth["published_doi"]
-        return
-    assert state["latest_doi"] == auth["published_doi"]
-    assert state["latest_git_commit_sha"] == auth[
+
+    versions = {entry["doi"]: entry for entry in state["versions"]}
+    assert versions[auth["published_doi"]]["git_commit_sha"] == auth[
         "published_source_baseline_commit_sha"
     ]
+    assert versions[auth["published_doi"]]["package_identity_sha256"] == auth[
+        "published_package_identity_sha256"
+    ]
+
     observation = load(OBSERVATION)
-    assert observation["doi"] == state["latest_doi"]
-    assert observation["source_baseline_commit_sha"] == state[
-        "latest_git_commit_sha"
+    assert observation["doi"] == auth["published_doi"]
+    assert observation["source_baseline_commit_sha"] == auth[
+        "published_source_baseline_commit_sha"
     ]
     assert observation["observed_without_github_credentials"] is True
     assert observation["observed_without_zenodo_credentials"] is True
+
+    seq1 = load(ROOT / "preservation/current-baseline-publication-authorization-v1.json")
+    assert seq1["status"] == "consumed"
+    assert seq1["previous_core_version_doi"] == auth["published_doi"]
+    assert versions[seq1["published_doi"]]["git_commit_sha"] == seq1[
+        "published_source_baseline_commit_sha"
+    ]
+    assert versions[seq1["published_doi"]]["package_identity_sha256"] == seq1[
+        "published_package_identity_sha256"
+    ]
+
+    seq2 = load(ROOT / "preservation/current-baseline-publication-authorization-v2.json")
+    assert seq2["status"] == "consumed"
+    assert seq2["previous_core_version_doi"] == seq1["published_doi"]
+    assert state["latest_doi"] == seq2["published_doi"]
+    assert state["latest_git_commit_sha"] == seq2[
+        "published_source_baseline_commit_sha"
+    ]
+    assert state["latest_package_identity_sha256"] == seq2[
+        "published_package_identity_sha256"
+    ]
+    assert versions[seq2["published_doi"]]["git_commit_sha"] == seq2[
+        "published_source_baseline_commit_sha"
+    ]
+    assert versions[seq2["published_doi"]]["package_identity_sha256"] == seq2[
+        "published_package_identity_sha256"
+    ]
+
+    seq2_observation = load(
+        ROOT / "preservation/current-baseline-publication-observation-v2.json"
+    )
+    assert seq2_observation["status"] == "passed"
+    assert seq2_observation["version_doi"] == state["latest_doi"]
+    assert seq2_observation["source_git_commit_sha"] == state["latest_git_commit_sha"]
+    assert seq2_observation["public_cold_restore"] == "passed"
