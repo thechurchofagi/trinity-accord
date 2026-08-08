@@ -163,6 +163,43 @@ if [[ "$local_source" != "$source_sha" ]]; then
   exit 1
 fi
 
+# Fail closed before any external write if the authenticated preservation
+# series has moved unexpectedly or contains an unrelated unfinished draft.
+# A retry after an ambiguous prior attempt may continue only when the newest
+# published/draft object has the exact capsule id being reconciled.
+CAPSULE_DIR="$capsule" ZENODO_API_BASE="$ZENODO_API_BASE" python3 - <<'PY'
+import os
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path('scripts').resolve()))
+import publish_preservation_capsule_to_zenodo as pub
+
+previous_doi = '10.5281/zenodo.21831412'
+package = pub.verify_local_package(Path(os.environ['CAPSULE_DIR']))
+client = pub.ZenodoClient(os.environ['ZENODO_ACCESS_TOKEN'].strip(), os.environ['ZENODO_API_BASE'])
+series = pub.series_records(pub.list_depositions(client))
+published = [item for item in series if pub.is_published(item)]
+drafts = [item for item in series if not pub.is_published(item)]
+if not published:
+    raise SystemExit('Zenodo preservation series has no published predecessor')
+latest = published[-1]
+matching_published = [item for item in published if pub.capsule_id(item) == package['capsule_id']]
+matching_drafts = [item for item in drafts if pub.capsule_id(item) == package['capsule_id']]
+unrelated_drafts = [item for item in drafts if pub.capsule_id(item) != package['capsule_id']]
+if unrelated_drafts:
+    raise SystemExit('unrelated unfinished Zenodo preservation draft exists; refusing sequence-2 publication')
+if matching_published:
+    if len(matching_published) != 1 or pub.deposition_id(matching_published[0]) != pub.deposition_id(latest):
+        raise SystemExit('matching sequence-2 publication exists but is not the latest preservation version')
+    print(f"Reconciling already-published exact capsule: {pub.doi(matching_published[0])}")
+elif pub.doi(latest) != previous_doi:
+    raise SystemExit(f"Zenodo preservation lineage moved unexpectedly: latest={pub.doi(latest)!r} expected={previous_doi!r}")
+elif len(matching_drafts) > 1:
+    raise SystemExit('multiple matching sequence-2 drafts exist')
+else:
+    print(f"Zenodo lineage preflight PASS: previous={previous_doi} capsule={package['capsule_id']}")
+PY
+
 cp preservation/repository-preservation-state-v2.json "$WORK_STATE"
 python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
   --capsule-dir "$capsule" \
