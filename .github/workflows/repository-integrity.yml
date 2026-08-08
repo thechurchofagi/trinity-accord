@@ -197,6 +197,7 @@ jobs:
     permissions:
       contents: write
     env:
+      TRINITY_PRESERVATION_REFRESH_EXECUTOR: "1"
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: https://zenodo.org/api
       PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK: ${{ vars.PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK }}
