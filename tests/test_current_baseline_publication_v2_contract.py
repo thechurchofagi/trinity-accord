@@ -10,6 +10,7 @@ AUTH = ROOT / "preservation/current-baseline-publication-authorization-v2.json"
 STATE_MACHINE = ROOT / "scripts/current_baseline_publication_v2.py"
 RUNNER = ROOT / "scripts/run_current_baseline_publication_v2_ci.sh"
 DISPATCHER = ROOT / "scripts/run_repository_preservation_refresh_ci.sh"
+INTEGRITY_WORKFLOW = ROOT / ".github/workflows/repository-integrity.yml"
 SEQ1_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
 
 
@@ -55,3 +56,13 @@ def test_integrity_dispatcher_prioritizes_sequence2_before_sequence1():
     v1 = text.index("current-baseline-publication-authorization-v1.json")
     assert v2 < v1
     assert "run_current_baseline_publication_v2_ci.sh" in text
+
+
+def test_external_publication_requires_dedicated_integrity_executor():
+    dispatcher = DISPATCHER.read_text(encoding="utf-8")
+    workflow = INTEGRITY_WORKFLOW.read_text(encoding="utf-8")
+    marker = "TRINITY_PRESERVATION_REFRESH_EXECUTOR"
+    assert '${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}' in dispatcher
+    assert '== "1"' in dispatcher
+    assert f'{marker}: "1"' in workflow
+    assert workflow.index(f'{marker}: "1"') > workflow.index("refresh-repository-preservation-doi:")
