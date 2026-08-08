@@ -13,11 +13,11 @@ DISPATCHER = ROOT / "scripts/run_repository_preservation_refresh_ci.sh"
 SEQ1_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
 
 
-def test_sequence2_pending_authorization_is_exact_and_valid():
+def test_sequence2_authorization_is_exact_and_current_state_is_valid():
     auth = json.loads(AUTH.read_text(encoding="utf-8"))
     assert auth["schema"] == "trinityaccord.current-baseline-publication-authorization.v2"
     assert auth["sequence"] == 2
-    assert auth["status"] == "pending"
+    assert auth["status"] in {"pending", "prepared", "consumed"}
     assert auth["core_concept_doi"] == "10.5281/zenodo.21739343"
     assert auth["previous_core_version_doi"] == "10.5281/zenodo.21831412"
     assert auth["required_proof_hardening_commit_sha"] == "0cdba0d13b97f242908f150b634ae7a481be9ee3"
