@@ -78,6 +78,16 @@ def address_hex(value: bytes) -> str:
     return "0x" + value.hex()
 
 
+def require_address(value: Any, field: str) -> str:
+    if not isinstance(value, str) or not value.startswith("0x") or len(value) != 42:
+        raise ValueError(f"{field} must be a 20-byte 0x address")
+    try:
+        bytes.fromhex(value[2:])
+    except ValueError as exc:
+        raise ValueError(f"{field} must be a 20-byte 0x address") from exc
+    return value.lower()
+
+
 def decode_receipt(encoded: bytes) -> tuple[int, list]:
     if not encoded:
         raise ValueError("empty receipt")
@@ -154,6 +164,10 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
     expected_to = mint["to"].lower()
 
     if event == "Transfer":
+        if mint.get("operator") is not None:
+            raise ValueError("ERC-721 mint operator must be null")
+        if mint.get("batch_index") is not None:
+            raise ValueError("ERC-721 mint batch_index must be null")
         if topics[0] != transfer or len(topics) != 4:
             raise ValueError("ERC-721 Transfer topic mismatch")
         if topics[1][-20:] != ZERO20:
@@ -164,6 +178,9 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
             raise ValueError("ERC-721 token/quantity mismatch")
         decoded_event = "erc721.Transfer"
     elif event == "TransferSingle":
+        if mint.get("batch_index") is not None:
+            raise ValueError("ERC-1155 TransferSingle batch_index must be null")
+        expected_operator = require_address(mint.get("operator"), "ERC-1155 operator")
         if topics[0] != transfer_single or len(topics) != 4:
             raise ValueError("ERC-1155 TransferSingle topic mismatch")
         if topics[2][-20:] != ZERO20:
@@ -172,10 +189,19 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
             raise ValueError("ERC-1155 recipient mismatch")
         if len(data) != 64 or int.from_bytes(data[:32], "big") != token_id or int.from_bytes(data[32:], "big") != quantity:
             raise ValueError("ERC-1155 TransferSingle token/quantity mismatch")
-        if mint.get("operator") and address_from_topic(topics[1]).lower() != mint["operator"].lower():
+        if address_from_topic(topics[1]).lower() != expected_operator:
             raise ValueError("ERC-1155 operator mismatch")
         decoded_event = "erc1155.TransferSingle"
     elif event == "TransferBatch":
+        expected_operator = require_address(mint.get("operator"), "ERC-1155 batch operator")
+        if mint.get("batch_index") is None:
+            raise ValueError("ERC-1155 TransferBatch batch_index is required")
+        if isinstance(mint["batch_index"], bool):
+            raise ValueError("ERC-1155 TransferBatch batch_index is invalid")
+        try:
+            batch_index = int(mint["batch_index"])
+        except (TypeError, ValueError) as exc:
+            raise ValueError("ERC-1155 TransferBatch batch_index is invalid") from exc
         if topics[0] != transfer_batch or len(topics) != 4:
             raise ValueError("ERC-1155 TransferBatch topic mismatch")
         if topics[2][-20:] != ZERO20:
@@ -188,10 +214,9 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
         values = decode_uint_array(data, int.from_bytes(data[32:64], "big"))
         if len(ids) != len(values):
             raise ValueError("TransferBatch ids/values mismatch")
-        batch_index = int(mint["batch_index"])
         if batch_index < 0 or batch_index >= len(ids) or ids[batch_index] != token_id or values[batch_index] != quantity:
             raise ValueError("ERC-1155 TransferBatch item mismatch")
-        if mint.get("operator") and address_from_topic(topics[1]).lower() != mint["operator"].lower():
+        if address_from_topic(topics[1]).lower() != expected_operator:
             raise ValueError("ERC-1155 batch operator mismatch")
         decoded_event = "erc1155.TransferBatch"
     else:
