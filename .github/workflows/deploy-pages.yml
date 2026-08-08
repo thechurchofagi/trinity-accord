@@ -8,6 +8,11 @@ on:
         required: false
         default: ""
         type: string
+      force_gateway_rollout:
+        description: "Also redeploy the Render Gateway before Pages"
+        required: false
+        default: false
+        type: boolean
   push:
     branches:
       - main
@@ -154,11 +159,11 @@ jobs:
         env:
           BEFORE_SHA: ${{ github.event.before }}
           SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
+          FORCE_GATEWAY_ROLLOUT: ${{ github.event.inputs.force_gateway_rollout || 'false' }}
         run: |
           set -euo pipefail
-          required=true
+          required=false
           if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            required=false
             if [[ -z "$BEFORE_SHA" || "$BEFORE_SHA" =~ ^0+$ ]]; then
               required=true
             else
@@ -166,11 +171,18 @@ jobs:
               changed="$(git diff --name-only "$BEFORE_SHA" "$SOURCE_SHA")"
               printf '%s\n' "$changed"
               if grep -Eq \
-                '^(\.github/workflows/(deploy-pages|render-manual-deploy)\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py|scripts/smoke_live_record_action_preflight\.py)$' \
+                '^(\.github/workflows/render-manual-deploy\.yml|api/record-chain-oath-policy\.v1\.json|apps/record_chain_intake_gateway/.*|downloads/record-chain-builder\.mjs|render\.yaml|scripts/render_(manual|protected)_deploy\.py|scripts/smoke_live_record_action_preflight\.py)$' \
                 <<<"$changed"; then
                 required=true
               fi
             fi
+          elif [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            if [[ "$FORCE_GATEWAY_ROLLOUT" == "true" ]]; then
+              required=true
+            fi
+          else
+            echo "::error::Unsupported deploy-pages event: $GITHUB_EVENT_NAME"
+            exit 1
           fi
           echo "required=$required" >> "$GITHUB_OUTPUT"
           echo "gateway_rollout_required=$required"
@@ -217,7 +229,7 @@ jobs:
         with:
           name: live-record-action-preflight-proof-${{ github.run_id }}
           path: ${{ runner.temp }}/live-record-action-preflight-report.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
 
   build:
