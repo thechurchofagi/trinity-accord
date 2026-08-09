@@ -88,6 +88,13 @@ def test_existing_preservation_controller_runs_inline_refresh_on_main_push():
     assert "queue: max" in text
     assert "contents: write" in text
     assert "bash scripts/run_repository_preservation_refresh_ci.sh" in text
+    push_writer = text.split("  refresh-published-recovery:\n", 1)[1].split(
+        "  build-and-cold-restore:\n", 1
+    )[0]
+    install = "python3 -m pip install -r requirements-ci.txt"
+    execute = "bash scripts/run_repository_preservation_refresh_ci.sh"
+    assert install in push_writer
+    assert push_writer.index(install) < push_writer.index(execute)
     assert "if: github.event_name != 'push'" in text
     assert "cancel-in-progress: false" in text
     assert "uses: ./.github/workflows/repository-preservation-refresh.yml" not in text
