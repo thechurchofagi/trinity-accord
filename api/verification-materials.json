@@ -7,7 +7,10 @@
     "machine_procedures": "/api/verification-procedures.v1.json",
     "profiles": "/api/verification-profiles.v1.json",
     "claim_model": "/api/verification-claim-model.v1.json",
+    "final_evidence_inventory": "/api/final-evidence-inventory.v1.json",
+    "evidence_manifest": "/api/evidence-manifest.json",
     "relationship_map": "/api/evidence-relationship-map.v1.json",
+    "recovery_index": "/api/recovery-index.json",
     "quick_map": "/api/verification-quick-map.json",
     "agent_cheatsheet": "/api/agent-verification-cheatsheet.v1.json"
   },
@@ -25,6 +28,8 @@
   },
   "evidence_relationships": {
     "source": "/api/evidence-relationship-map.v1.json",
+    "complete_frozen_inventory": "/api/final-evidence-inventory.v1.json",
+    "cold_recovery_entrypoint": "/api/recovery-index.json",
     "human_page": "/evidence-relationship-guide/",
     "examples": [
       "defines_canonical_text",
@@ -48,6 +53,8 @@
   },
   "evidence_mirrors": {
     "manifest": "/api/evidence-manifest.json",
+    "final_inventory": "/api/final-evidence-inventory.v1.json",
+    "recovery_index": "/api/recovery-index.json",
     "hashes": "/api/hashes.json",
     "human_page": "/data-verification/",
     "used_for": ["reference checks", "byte integrity", "cross-mirror comparison", "availability reporting"]

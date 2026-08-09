@@ -174,26 +174,32 @@ def test_consumed_refresh_has_complete_public_recovery_evidence():
     ]
 
     seq2 = load(ROOT / "preservation/current-baseline-publication-authorization-v2.json")
+    seq3 = load(ROOT / "preservation/current-baseline-publication-authorization-v3.json")
     assert seq2["status"] == "consumed"
     assert seq2["previous_core_version_doi"] == seq1["published_doi"]
-    assert state["latest_doi"] == seq2["published_doi"]
-    assert state["latest_git_commit_sha"] == seq2[
-        "published_source_baseline_commit_sha"
-    ]
-    assert state["latest_package_identity_sha256"] == seq2[
-        "published_package_identity_sha256"
-    ]
+    assert seq3["previous_core_version_doi"] == seq2["published_doi"]
+    active = seq3 if seq3["status"] == "consumed" else seq2
+    assert state["latest_doi"] == active["published_doi"]
+    assert state["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]
+    assert state["latest_package_identity_sha256"] == active["published_package_identity_sha256"]
     assert versions[seq2["published_doi"]]["git_commit_sha"] == seq2[
         "published_source_baseline_commit_sha"
     ]
     assert versions[seq2["published_doi"]]["package_identity_sha256"] == seq2[
         "published_package_identity_sha256"
     ]
+    if seq3["status"] == "consumed":
+        assert versions[seq3["published_doi"]]["git_commit_sha"] == seq3[
+            "published_source_baseline_commit_sha"
+        ]
+        assert versions[seq3["published_doi"]]["package_identity_sha256"] == seq3[
+            "published_package_identity_sha256"
+        ]
 
     seq2_observation = load(
         ROOT / "preservation/current-baseline-publication-observation-v2.json"
     )
     assert seq2_observation["status"] == "passed"
-    assert seq2_observation["version_doi"] == state["latest_doi"]
-    assert seq2_observation["source_git_commit_sha"] == state["latest_git_commit_sha"]
+    assert seq2_observation["version_doi"] == seq2["published_doi"]
+    assert seq2_observation["source_git_commit_sha"] == seq2["published_source_baseline_commit_sha"]
     assert seq2_observation["public_cold_restore"] == "passed"

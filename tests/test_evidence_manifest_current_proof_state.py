@@ -11,6 +11,7 @@ RECOVERY_INDEX = ROOT / "api" / "recovery-index.json"
 ETH_REPORT = ROOT / "evidence" / "ethereum-evidence-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 NFT_REPORT = ROOT / "evidence" / "nft-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 BTC_REPORT = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
+FINAL_AUTH = ROOT / "preservation" / "current-baseline-publication-authorization-v3.json"
 
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 LATEST_REPOSITORY_DOI = "10.5281/zenodo.21846249"
@@ -29,7 +30,14 @@ def source_digest(data: dict) -> str:
     return hashlib.sha256(canonical).hexdigest()[:16]
 
 
+def final_publication_state() -> tuple[dict, str]:
+    auth = load(FINAL_AUTH)
+    doi = auth["published_doi"] if auth["status"] == "consumed" else LATEST_REPOSITORY_DOI
+    return auth, doi
+
+
 def test_machine_evidence_manifest_exposes_current_offline_proof_state():
+    final_auth, expected_repository_doi = final_publication_state()
     data = load(EVIDENCE_MANIFEST)
     assert data["schema"] == "trinity-accord.evidence-manifest.v1"
     assert data["non_amending_boundary"] is True
@@ -91,11 +99,20 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
 
     preservation = current["repository_preservation"]
     assert preservation["concept_doi"] == CONCEPT_DOI
-    assert preservation["latest_published_version_doi"] == LATEST_REPOSITORY_DOI
-    assert preservation["status"] == "published_and_publicly_restored"
+    assert preservation["latest_published_version_doi"] == expected_repository_doi
     assert preservation["cold_restore"] == "PASS"
-    assert "does not yet contain" in preservation["published_baseline_boundary"]
-    assert preservation["bitcoin_annex_next_capsule_status"].endswith("owner_authorized_repository_capsule_publication")
+    assert preservation["final_freeze_authorization"] == "preservation/current-baseline-publication-authorization-v3.json"
+    assert preservation["final_freeze_intended_as_last_planned_evidence_version"] is True
+    if final_auth["status"] == "consumed":
+        assert preservation["status"] == "final_frozen_and_publicly_restored"
+        assert preservation["final_freeze_status"] == "published_verified_and_consumed"
+        assert preservation["final_freeze_version_doi"] == expected_repository_doi
+        assert preservation["final_freeze_source_baseline_commit_sha"] == final_auth["published_source_baseline_commit_sha"]
+        assert "exact owner-authorized final evidence baseline" in preservation["published_baseline_boundary"]
+    else:
+        assert preservation["status"] == "published_and_publicly_restored"
+        assert preservation["final_freeze_status"] in {"owner_authorized_pending_publication", "prepared"}
+        assert "latest public doi" in preservation["published_baseline_boundary"].lower()
     assert ROOT.joinpath(preservation["state"]).is_file()
     assert ROOT.joinpath(preservation["latest_observation"]).is_file()
 
@@ -131,12 +148,13 @@ def test_machine_summary_matches_checked_in_offline_reports():
 
 
 def test_external_annex_state_disambiguates_historical_core_version_from_current_concept():
+    _, expected_repository_doi = final_publication_state()
     data = load(EXTERNAL_ANNEX_STATE)
     assert data["publication_status"] == "published_and_publicly_restored"
     assert data["core_repository_preservation_doi"] == HISTORICAL_CORE_VERSION_DOI
     assert data["core_repository_preservation_doi_role"] == "historical_version_reference"
     assert data["current_core_repository_concept_doi"] == CONCEPT_DOI
-    assert data["current_core_repository_latest_version_doi"] == LATEST_REPOSITORY_DOI
+    assert data["current_core_repository_latest_version_doi"] == expected_repository_doi
     assert "not the current Concept DOI" in data["core_repository_reference_note"]
 
     assert data["annexes"]["evidence"]["public_cold_restore"] == "passed"
@@ -144,20 +162,40 @@ def test_external_annex_state_disambiguates_historical_core_version_from_current
     assert data["external_binary_payload_recovery_requires_github"] is False
 
 
-def test_recovery_index_routes_bitcoin_annex_without_overclaiming_current_doi():
+def test_recovery_index_routes_all_offline_annexes_without_overclaiming_current_doi():
+    final_auth, _ = final_publication_state()
     data = load(RECOVERY_INDEX)
     expected = {
+        "api/final-evidence-inventory.v1.json",
+        "api/evidence-relationship-map.v1.json",
         "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
         "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
         "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
         "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
+        "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+        "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+        "nft-identity-index.json",
+        "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
+        "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+        "evidence/ethereum-proof-primitives-v1/PRIMITIVES-MANIFEST.json",
+        "archive/evidence/ots-proofs/OTS/digest-manifest.json.ots",
     }
     assert expected.issubset(set(data["required_recovery_files"]))
     assert "verify_bitcoin_inscription_proof_annex_offline" in data["mandatory_recovery_steps"]
+    assert "verify_ethereum_non_nft_proof_annex_offline" in data["mandatory_recovery_steps"]
+    assert "verify_175_item_nft_commitment_and_proof_annex_offline" in data["mandatory_recovery_steps"]
+    assert "verify_opentimestamps_proof_and_preserved_fullnode_observation" in data["mandatory_recovery_steps"]
     for path in expected:
         assert ROOT.joinpath(path).is_file()
-
-    addition = data["latest_trusted_release"]["repository_additions_after_published_baseline"]["bitcoin_inscription_proof_annex"]
-    assert addition["ordinary_verification_network_required"] is False
-    assert addition["status"].endswith("owner_authorized_repository_capsule_publication")
-    assert "must not be claimed" in addition["boundary"]
+    additions = data["latest_trusted_release"]["repository_additions_after_published_baseline"]
+    if final_auth["status"] == "consumed":
+        assert additions == {}
+        assert data["publication_refresh"]["sequence"] == 3
+        assert data["publication_refresh"]["status"] == "published_verified_and_consumed"
+    else:
+        addition = additions["final_evidence_freeze"]
+        assert addition["ordinary_verification_network_required"] is False
+        assert addition["status"] == "owner_authorized_pending_final_repository_capsule_publication"
+        assert "must not be claimed" in addition["boundary"]

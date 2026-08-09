@@ -150,12 +150,12 @@ CURRENT_DOI_CONTRACT_ASSERTION = (
 )
 CURRENT_DOI_CONTRACT_SOURCE = "current-baseline-publication-authorization-v1.json"
 CURRENT_DOI_SUCCESSOR_ASSERTION = (
-    '    assert current["latest_doi"] == seq2["published_doi"]\n'
+    '    assert current["latest_doi"] == active["published_doi"]\n'
 )
 CURRENT_DOI_SUCCESSOR_LINEAGE_ASSERTION = (
-    '    assert seq2["previous_core_version_doi"] == seq1["published_doi"]\n'
+    '    assert seq3["previous_core_version_doi"] == seq2["published_doi"]\n'
 )
-CURRENT_DOI_SUCCESSOR_SOURCE = "current-baseline-publication-authorization-v2.json"
+CURRENT_DOI_SUCCESSOR_SOURCE = "current-baseline-publication-authorization-v3.json"
 
 OLD_RECOVERY_STATUS_ASSERTION = (
     '    assert report["repository_recovery_status"] == '

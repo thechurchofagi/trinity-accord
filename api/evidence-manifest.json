@@ -2,6 +2,13 @@
   "schema": "trinity-accord.evidence-manifest.v1",
   "note": "Guardianship mirror manifest. Non-amending.",
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
+  "evidence_system_entrypoints": {
+    "final_inventory": "/api/final-evidence-inventory.v1.json",
+    "relationship_map": "/api/evidence-relationship-map.v1.json",
+    "human_freeze_guide": "/FINAL-EVIDENCE-FREEZE.md",
+    "recovery_index": "/api/recovery-index.json",
+    "repository_preservation_state": "/preservation/repository-preservation-state-v2.json"
+  },
   "public_covenant_archive": {
     "arweave_tx": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
     "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
@@ -199,7 +206,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "dab4ae1ba8d335d7",
+  "source_digest": "f6bff77114e77d5f",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -271,8 +278,12 @@
       "state": "preservation/repository-preservation-state-v2.json",
       "latest_observation": "preservation/current-baseline-publication-observation-v2.json",
       "cold_restore": "PASS",
-      "published_baseline_boundary": "The latest public DOI is an exact earlier Git baseline and does not yet contain this Bitcoin inscription proof annex.",
-      "bitcoin_annex_next_capsule_status": "git_tracked_pending_next_owner_authorized_repository_capsule_publication"
+      "published_baseline_boundary": "The latest public DOI is an exact earlier Git baseline and does not yet contain the Bitcoin inscription proof annex or this unified final-evidence inventory.",
+      "final_freeze_authorization": "preservation/current-baseline-publication-authorization-v3.json",
+      "final_freeze_status": "owner_authorized_pending_publication",
+      "final_freeze_required_evidence_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
+      "final_freeze_intended_as_last_planned_evidence_version": true,
+      "arweave_snapshot_refresh_requested": false
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

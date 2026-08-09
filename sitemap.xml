@@ -127,6 +127,7 @@
   <url><loc>https://www.trinityaccord.org/api/external-agent-quickstart.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/external-witness-index-schema.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/external-witness-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/final-evidence-inventory.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/formal-builder-bundle-signatures.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/formal-builder-bundles.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/founding-guardian-application-readiness.v1.json</loc></url>

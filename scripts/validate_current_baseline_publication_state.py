@@ -22,6 +22,7 @@ PREPARED_PATH = ROOT / "preservation/current-baseline-publication-prepared-v1.js
 OBSERVATION_PATH = ROOT / "preservation/current-baseline-publication-observation-v1.json"
 V2_AUTH_PATH = ROOT / "preservation/current-baseline-publication-authorization-v2.json"
 V2_OBSERVATION_PATH = ROOT / "preservation/current-baseline-publication-observation-v2.json"
+V3_AUTH_PATH = ROOT / "preservation/current-baseline-publication-authorization-v3.json"
 STATE_PATH = ROOT / "preservation/repository-preservation-state-v2.json"
 INDEX_PATH = ROOT / "api/recovery-index.json"
 
@@ -302,6 +303,19 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
 
 
 def validate() -> str:
+    if V3_AUTH_PATH.is_file():
+        # The historical validators remain useful, but sequence 3 owns the
+        # canonical latest-state pointers once prepared.  Validate both the
+        # sequence-2 lineage (which also checks sequence 1) and the final
+        # sequence-3 lifecycle through their dedicated fail-closed machines.
+        import current_baseline_publication_v2
+        import current_baseline_publication_v3
+
+        current_baseline_publication_v2.validate()
+        current_baseline_publication_v3.validate()
+        status = str(strict_json(V3_AUTH_PATH)["status"])
+        print(f"Current baseline publication state valid through sequence 3: {status}")
+        return status
     auth = validate_authorization()
     state = strict_json(STATE_PATH)
     index = strict_json(INDEX_PATH)

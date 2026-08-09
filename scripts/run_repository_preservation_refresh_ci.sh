@@ -4,6 +4,34 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+v3_authorization="preservation/current-baseline-publication-authorization-v3.json"
+if [[ -f "$v3_authorization" ]]; then
+  v3_status="$(python3 - <<'PY'
+import json
+from pathlib import Path
+print(json.loads(Path('preservation/current-baseline-publication-authorization-v3.json').read_text())['status'])
+PY
+)"
+  if [[ "$v3_status" == "consumed" ]]; then
+    python3 scripts/current_baseline_publication_v3.py validate
+    echo "Final evidence baseline publication v3 is consumed and valid; no external write will run."
+    exit 0
+  fi
+  if [[ "$v3_status" == "pending" || "$v3_status" == "prepared" ]]; then
+    python3 scripts/current_baseline_publication_v3.py validate
+    if [[ "${GITHUB_EVENT_NAME:-}" == "push" \
+      && "${GITHUB_REF:-}" == "refs/heads/main" \
+      && "${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}" == "1" ]]; then
+      bash scripts/run_current_baseline_publication_v3_ci.sh
+      exit $?
+    fi
+    echo "Final evidence baseline publication v3 $v3_status state is valid; external publication requires the dedicated main-branch preservation executor."
+    exit 0
+  fi
+  echo "::error::Unexpected current-baseline publication v3 status: $v3_status"
+  exit 1
+fi
+
 v2_authorization="preservation/current-baseline-publication-authorization-v2.json"
 if [[ -f "$v2_authorization" ]]; then
   v2_status="$(python3 - <<'PY'

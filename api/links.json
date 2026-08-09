@@ -61,6 +61,8 @@
     "/api/context-load-map.json",
     "/api/echo-types.json",
     "/api/verification-profiles.v1.json",
+    "/api/final-evidence-inventory.v1.json",
+    "/api/evidence-manifest.json",
     "/api/evidence-relationship-map.v1.json",
     "/api/verification-claim-model.v1.json",
     "/api/verification-procedures.v1.json",
@@ -177,7 +179,7 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "1bc0de0010a8066a",
+  "source_digest": "d2b0538a4ca9b8e9",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",

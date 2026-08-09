@@ -1,0 +1,441 @@
+{
+  "schema": "trinityaccord.final-evidence-inventory.v1",
+  "version": "1.0.0",
+  "status": "final_evidence_freeze_model",
+  "purpose": "One non-amending map of canonical objects, offline cryptographic proofs, availability mirrors and DOI recovery capsules.",
+  "authority_boundary": {
+    "canonical_authority": "three Bitcoin Originals only",
+    "canonical_count": 3,
+    "all_other_objects_non_amending": true,
+    "preservation_is_not_authority": true
+  },
+  "evidence_sets": {
+    "bitcoin_inscriptions": {
+      "object_role": "canonical core plus non-amending ancillary inscriptions",
+      "count": 8,
+      "canonical_originals": 3,
+      "non_amending_ancillary": 5,
+      "items": [
+        {
+          "classification": "canonical_original",
+          "title": "Protocol (Axioms)",
+          "inscription_number": "97631551",
+          "derived_inscription_id": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
+          "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
+          "wtxid": "1773396b45f7260de0ebcd64d76d47293c5fbbc59f678e5f8283d460cf884b0b",
+          "block_height": 901954,
+          "block_hash": "00000000000000000000a468b306fb8bda4141ef276b422d06d2d117211e795f",
+          "body_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+        },
+        {
+          "classification": "canonical_original",
+          "title": "Covenant of the Flaw",
+          "inscription_number": "98369145",
+          "derived_inscription_id": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
+          "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
+          "wtxid": "1417b730664ed9f75e5956be72ff390c5a58a2089532d3bd59c6aeaa1cee3cc9",
+          "block_height": 903192,
+          "block_hash": "00000000000000000001b58353d4d84b72e4bb835b2ce35365421bc399148012",
+          "body_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"
+        },
+        {
+          "classification": "canonical_original",
+          "title": "The Trinity Accord (Meta-record)",
+          "inscription_number": "98387475",
+          "derived_inscription_id": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0",
+          "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
+          "wtxid": "f0a4d563aeb1204c633ff7c8189c98a1542bd349943d4d2f2c62ff0cb65723c4",
+          "block_height": 903205,
+          "block_hash": "00000000000000000000be192767a61f4612899dd31225f19e7b1254155bbb04",
+          "body_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"
+        },
+        {
+          "classification": "non_amending_ancillary",
+          "title": "The First Echoes: A Dialogue Begins",
+          "inscription_number": "100385359",
+          "derived_inscription_id": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0",
+          "txid": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81",
+          "wtxid": "f7ab44daff700cd9ec43f0967f3c115267830068964f3bbf225e209b5b9b4fff",
+          "block_height": 906007,
+          "block_hash": "0000000000000000000019670bc15750b23c15cce41435acd34e87b6e205e4fb",
+          "body_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2"
+        },
+        {
+          "classification": "non_amending_ancillary",
+          "title": "The Final Seal: A Testament and a Trust",
+          "inscription_number": "100550942",
+          "derived_inscription_id": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0",
+          "txid": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7",
+          "wtxid": "50c45a807957615ee6b5c5225b6db28dfed87ba2ef85f159973cc226ce59bdcd",
+          "block_height": 906233,
+          "block_hash": "000000000000000000013a83af8a8ad20709986ac0064f39369dd6613c5f4f43",
+          "body_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c"
+        },
+        {
+          "classification": "non_amending_ancillary",
+          "title": "The Star Ark Covenant: The Final Echo",
+          "inscription_number": "100751953",
+          "derived_inscription_id": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0",
+          "txid": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1",
+          "wtxid": "208cc157095691c1be8ff7ba21a301e7e9ca1822f14f62f314f9adbcd2063a8e",
+          "block_height": 906521,
+          "block_hash": "00000000000000000001cfd680469d8daaf287662dd62469ec27e4636b555b95",
+          "body_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259"
+        },
+        {
+          "classification": "non_amending_ancillary",
+          "title": "The Guardian's Attestation to the Covenant of the Flaw",
+          "inscription_number": "103034280",
+          "derived_inscription_id": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0",
+          "txid": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687",
+          "wtxid": "91801e639367881c203d98e8545f7df31bd9c92b7ed6c7d145219a0cca9458ab",
+          "block_height": 909403,
+          "block_hash": "00000000000000000000314098e54fb04c8478d9d95affebd1c1dbcbc381f5b5",
+          "body_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d"
+        },
+        {
+          "classification": "non_amending_ancillary",
+          "title": "Guardian Appendix - Authority Charter (Non-Amending)",
+          "inscription_number": "103635270",
+          "derived_inscription_id": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",
+          "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",
+          "wtxid": "d44e2d172f5763691df77a1a055dd4d3cee6f2433b69f1e500fd2885a573ac2e",
+          "block_height": 910232,
+          "block_hash": "00000000000000000001d265b90d44ded362eb692d938eb20245385d4eb5993b",
+          "body_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896"
+        }
+      ],
+      "proof_layers": {
+        "L1": {
+          "status": "PASS",
+          "inscriptions": 8,
+          "canonical_originals": 3,
+          "non_amending_ancillary": 5
+        },
+        "L2": {
+          "status": "PASS",
+          "reveal_transactions": 8,
+          "txid_merkle_proofs": 8,
+          "bip141_witness_commitment_proofs": 8
+        },
+        "L3": {
+          "status": "PASS",
+          "anchors": 8,
+          "descendant_confirmation_depth_per_anchor": 144,
+          "valid_pow_headers": 1160
+        }
+      },
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+      "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
+      "runtime": "Python 3 standard library only",
+      "network_required_for_verification": false
+    },
+    "ethereum_non_nft": {
+      "object_role": "non-amending cross-chain records and historical commitments",
+      "count": 10,
+      "items": [
+        {
+          "id": "eth-guardian-principles-original",
+          "label": "Guardianship Principles (0 ETH data)",
+          "tx_hash": "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+          "block_number": 23301513,
+          "block_hash": "0xaaa6cc06a7514eadde4237c464c9e834745393c65961676c82af3c7d43cc05d4",
+          "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"
+        },
+        {
+          "id": "eth-btc-eth-mapping-attestation",
+          "label": "BTC-ETH Guardianship Mirrors Attestation",
+          "tx_hash": "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+          "block_number": 23168072,
+          "block_hash": "0x684d5691bb5905448c7c5cbdc324c55b6129d0a6ad938e07cc25cf268a3ac28f",
+          "input_sha256": "f4af38f0f42c9b38deaccbace119736da57a245a6601e5d0ea5698deec4a8a01"
+        },
+        {
+          "id": "eth-protocol-mirror",
+          "label": "Protocol mirror",
+          "tx_hash": "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+          "block_number": 23152856,
+          "block_hash": "0x3c283afa41ab697825816a1d3fd6b45e478de17342386998aee6461fa35a5d63",
+          "input_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+        },
+        {
+          "id": "eth-covenant-mirror",
+          "label": "Covenant mirror",
+          "tx_hash": "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+          "block_number": 23152874,
+          "block_hash": "0x7f904edd8090c7e8ddf1e76622857d2fafd0f7a5d8e0512d57b09855c839774b",
+          "input_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"
+        },
+        {
+          "id": "eth-accord-mirror",
+          "label": "Accord mirror",
+          "tx_hash": "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+          "block_number": 23153056,
+          "block_hash": "0x6a80fc6c233ed21cc9d607a50a9e363984e4e2d974d67ce285ac8e388bf84699",
+          "input_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"
+        },
+        {
+          "id": "eth-bip322-notice",
+          "label": "BIP-322 notice (non-amending)",
+          "tx_hash": "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+          "block_number": 23297080,
+          "block_hash": "0xc82a4a3c0cfeabc5598b5936bdaa9394bfe3499ed4892f5099de9a8b3842fc48",
+          "input_sha256": "abd10a807323ef3a07fe22eb3a3cc083e77db93d7362eb29c939c195825f2c2d"
+        },
+        {
+          "id": "eth-final-correction",
+          "label": "Mirror correction (final version)",
+          "tx_hash": "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+          "block_number": 23303102,
+          "block_hash": "0x65e601022a380441aae83521188ccfdf38918b94f09d8e0d304228f4f720d433",
+          "input_sha256": "fc009f5393b11e95f013464405e24c9713a55415fa326b2707886d436d4cbd6f"
+        },
+        {
+          "id": "eth-superseded-correction",
+          "label": "Mirror correction (superseded erroneous version)",
+          "tx_hash": "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+          "block_number": 23302926,
+          "block_hash": "0x31768d00b9a9af205268c0da880959eca6aa687de7fdf19d9aef48dfddaeba3e",
+          "input_sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483"
+        },
+        {
+          "id": "eth-guardian-principles-v1-1",
+          "label": "Guardianship Principles v1.1 (0 ETH data)",
+          "tx_hash": "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+          "block_number": 23429813,
+          "block_hash": "0x26d20e07ae86b09d3022bd845a8aa69ddad1093a48e926c32af5041aa65f1bce",
+          "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+        },
+        {
+          "id": "eth-btc-bip340-witness",
+          "label": "BTC BIP-340 signature witness",
+          "tx_hash": "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+          "block_number": 23360820,
+          "block_hash": "0x84201f873daa7de0bd44fd7c51ab227160270fa0ff81a7d712a44dbb3f3f2e82",
+          "input_sha256": "fb8746462a4aae73628f542b3ada48621ab298ab2117b6162161d79d2aaad54e"
+        }
+      ],
+      "proof_layers": {
+        "L1": "PASS",
+        "L2": "PASS",
+        "L3": "PASS"
+      },
+      "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+      "frozen_primitives": "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
+      "network_required_for_existing_proof_verification": false,
+      "trust_boundary": {
+        "canonical_authority": "three Bitcoin Originals only",
+        "ethereum_role": "non-amending consensus witness and historical commitment-time evidence",
+        "no_authority_escalation": true
+      }
+    },
+    "ethereum_chronicle_nft": {
+      "object_role": "non-amending historical Chronicle and recovery evidence",
+      "asset_count": 175,
+      "contract_count": 4,
+      "standards": {
+        "erc721": 173,
+        "erc1155": 2
+      },
+      "contracts": [
+        "0x019372bbee377109b8eae66d7267f5c4eaadbb79",
+        "0x2b0c3cc5cd9652bef0cacfc9c7699455725b9cc1",
+        "0x74f97bdefa07c2f99c876c2bd3b49628edd1c603",
+        "0xf12815d22baf904a21b498a5df8e5d8529d2079e"
+      ],
+      "unique_mint_transactions": 175,
+      "unique_execution_blocks": 175,
+      "collection_merkle_root_sha256": "097bb48d98ab7fc036aed97f5b5fcb1a65962d64d327081277255d1829212267",
+      "proof_layers": {
+        "L1": "PASS",
+        "L2": "PASS",
+        "L3": "PASS"
+      },
+      "identity_index": "nft-identity-index.json",
+      "commitment": "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
+      "offline_report": "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+      "frozen_primitives": "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
+      "network_required_for_existing_proof_verification": false
+    },
+    "digest_and_time": {
+      "digest_manifest": "archive/evidence/digest-manifest.json",
+      "digest_algorithms": [
+        "sha256",
+        "sha3-256",
+        "blake2b-256",
+        "shake256-256",
+        "sha512-256",
+        "blake3-256"
+      ],
+      "digest_algorithm_count": 6,
+      "digest_inventory_items": 884,
+      "open_timestamps": {
+        "status": "PASS",
+        "committed_object": "archive/evidence/digest-manifest.json",
+        "committed_object_sha256": "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9",
+        "proof": "archive/evidence/ots-proofs/OTS/digest-manifest.json.ots",
+        "proof_sha256": "6272448e7b55d5ed79dbd38ae3c5bd747c5a02be9a2f466a490ddefbbdf43d0b",
+        "confirmed_bitcoin_blocks": [
+          913079,
+          913081
+        ],
+        "confirmed_attestations": 2,
+        "boundary": "OTS proves that the committed digest existed no later than an attested Bitcoin block; it does not prove content truth or authorship."
+      }
+    }
+  },
+  "binding_objects": {
+    "authority_manifest": {
+      "path": "archive/authority-manifest/authority.jcs.json",
+      "sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+      "indexes_bitcoin_inscriptions": 8
+    },
+    "btc_bip340_signature": {
+      "path": "archive/btc-signature/btc-signature.json",
+      "method": "bip340-taproot-xonly",
+      "signed_message_sha256": "41f95905e50cc699a7e6a3fcb0bd8633cf36170d3ef41170cd373467f8528b33",
+      "binds": "authority_manifest"
+    },
+    "eth_eip712_signature": {
+      "path": "archive/authority-manifest/signature.json",
+      "role": "secondary non-canonical typed manifest binding"
+    }
+  },
+  "storage_and_preservation": {
+    "github": {
+      "repository": "https://github.com/thechurchofagi/trinity-accord",
+      "pages": "https://www.trinityaccord.org",
+      "roles": [
+        "moving development source",
+        "public discovery",
+        "CI",
+        "small-file mirror",
+        "Release fallback"
+      ],
+      "boundary": "GitHub main is mutable and is not itself an immutable publication DOI."
+    },
+    "arweave": {
+      "role": "transaction-addressed long-lived mirrors; non-authoritative",
+      "authority_manifest_documents": [
+        {
+          "label": "Guardianship Principles",
+          "txid": "w9LPP30D31zd5M60v18WXpWuig0_wc9EVNnXk8kz1vA",
+          "sha256": "3e9d2bd10c3e8f4d37713c4b8e28d518fd7efff52613e572a1451fedadab5483",
+          "bytes": 2446
+        },
+        {
+          "label": "Guardian Index",
+          "txid": "BwVHuxODfV65xE_L1fqrCDBvLvJNnSuBEXaZNuoRcIk",
+          "sha256": "71bc981a994a93cdf488b89aee2b132b658464a7cbb1dec791af604a1127ef98",
+          "bytes": 1200
+        },
+        {
+          "label": "Guardian Pointer",
+          "txid": "9McJS3_xvIl6_87e7NDJ6g3SgGlA8Js7z--eMLGMRZg",
+          "sha256": "3246afb59552dcda700e490767aadd3d67083911dae6bccbb2762ef568c7e289",
+          "bytes": 367
+        },
+        {
+          "label": "Primary Verification Archive (public)",
+          "txid": "j6anZ4m5Wwvx5P_9-kM2EVG35TyKtm1lgaKfhT743rk",
+          "sha256": "ef816480f77f30405378800807b42bff0a854b83a8f77793a0e0adf0944a8263",
+          "bytes": 24246033
+        },
+        {
+          "label": "digest-manifest.json",
+          "txid": "X2IuLCIM4vLJSzgRMl_YEmxYSvPceMrAdug9a3i7p4o",
+          "sha256": "c045642fe5cfab5eb78af7b40e98b9699dfff9121690e07ec6acaa07a445d6e9",
+          "bytes": 685537
+        },
+        {
+          "label": "digest-manifest.csv",
+          "txid": "i02XhY7No6NLZDfEwFUU6nZoGaPu7K0f42LDNDNnZEo",
+          "sha256": "121c5a1da38f733c3991f8d3f030f39a019501d43828f84c13ea93ac3873511b",
+          "bytes": 502283
+        },
+        {
+          "label": "OTS anchor",
+          "txid": "TTi9d8fqm9Cw4yRPkwX4gdlaRzBnjJID-LAs9Y3CS0M",
+          "sha256": "fa3f306ab30525677595d9f38808a87a8dd96260468285c8f8066661e853d907",
+          "bytes": 3614
+        }
+      ],
+      "repository_capsule_historical_mirror": {
+        "record": "preservation/repository-capsule-arweave-mirror-81b151245d70.json",
+        "txid": "42UQsjG7gcUs5mFu9ZcwN6sYbskR533q_SpnFpaSxKs",
+        "capsule_id": "repository-81b151245d70",
+        "source_git_commit_sha": "81b151245d70f6b775418de60f7b8a1366f28944",
+        "git_tree_oid": "c63cb393713f9824970bab80b07c214dc79e561a",
+        "package_identity_sha256": "ab3e0c54dce4b51330060e88133399553442f091d6f98adf06b8439e27be00c2",
+        "payload_bytes": 36925440,
+        "payload_sha256": "132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14",
+        "public_readback": "passed",
+        "scope": "Exact non-authoritative repository preservation capsule mirror; external evidence and Chronicle NFT annex payloads remain separately mirrored and referenced."
+      },
+      "boundary": "Each Arweave tx preserves its named payload only; it is not automatically the latest GitHub tree or DOI baseline."
+    },
+    "zenodo": {
+      "core_repository_series": {
+        "concept_doi": "10.5281/zenodo.21739343",
+        "version_doi": "10.5281/zenodo.21846249",
+        "source_git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
+        "git_tree_oid": "6ce8ef104f712cac7fc5932c5bc568841c707480",
+        "package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823",
+        "status": "published_and_publicly_restored",
+        "public_cold_restore": "passed",
+        "boundary": "A version DOI freezes one exact Git-tracked publication baseline. The Concept DOI resolves the latest published version; neither is a moving GitHub main."
+      },
+      "external_evidence_annex": {
+        "doi": "10.5281/zenodo.21753937",
+        "concept_doi": "10.5281/zenodo.21753253",
+        "asset_count": 28,
+        "payload_bytes": 204595967,
+        "package_identity_sha256": "830eaa1b2ee8a0c6c961cf2ab5f369147a59c9df0b05304102da17b897d44bbf",
+        "public_cold_restore": "passed"
+      },
+      "chronicle_nft_media_annex": {
+        "doi": "10.5281/zenodo.21754229",
+        "concept_doi": "10.5281/zenodo.21754228",
+        "asset_count": 10,
+        "payload_bytes": 862714954,
+        "package_identity_sha256": "dd53f5ec93c610185795802efb7fd8167863b2a95f5d82280e406fc51f696dbf",
+        "public_cold_restore": "passed"
+      },
+      "large_binary_boundary": "External evidence and NFT media annex payloads are separate DOI series and are not embedded in the core repository capsule."
+    }
+  },
+  "final_freeze": {
+    "authorization": "preservation/current-baseline-publication-authorization-v3.json",
+    "status": "pending",
+    "authorized_by": "thechurchofagi",
+    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
+    "intended_as_final_evidence_freeze": true,
+    "publication_confirmation": "PUBLISH_TRINITY_FINAL_EVIDENCE_BASELINE_V3",
+    "published_doi": null,
+    "published_source_baseline_commit_sha": null,
+    "boundary": "The final DOI version is immutable, exact-baseline preservation; it creates no new canonical authority."
+  },
+  "verification_order": [
+    "verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex",
+    "verify the authority manifest and BTC/EIP-712 signature bindings",
+    "verify the 10 Ethereum non-NFT L1/L2/L3 proofs",
+    "verify the 175-item NFT commitment and L2/L3 proofs",
+    "verify digest manifests and OTS anchors for their stated byte/time scope",
+    "restore the core repository DOI and then the two external binary annex DOI records",
+    "compare any GitHub or Arweave mirror to its named digest before using it"
+  ],
+  "global_boundaries": [
+    "Blockchain inclusion proves committed bytes and chain context, not semantic truth.",
+    "Bitcoin PoW ancestry is checkpoint-relative and does not prove absence of a heavier chain.",
+    "Ethereum finality is relative to explicitly trusted weak-subjectivity checkpoints.",
+    "NFT global logIndex and Ordinals global numeric inscription number remain historical lookup coordinates.",
+    "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
+  ],
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
+  "source_digest": "36ec3e06a42898df"
+}
