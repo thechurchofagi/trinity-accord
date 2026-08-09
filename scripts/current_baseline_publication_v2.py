@@ -332,6 +332,9 @@ def seal(source_commit: str, published_state_path: Path, recovery_report_path: P
     previous_verified = state.get("previous_verified_version")
     final = dict(state)
     final.update(published)
+    # The prepared state inherited sequence 1's report.  It is bound to the
+    # predecessor record and must not be presented as sequence 2 metadata.
+    final.pop("public_metadata_report", None)
     final.update(
         {
             "schema": "trinityaccord.repository-preservation-zenodo-state.v2",

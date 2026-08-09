@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "status": "final_evidence_freeze_model",
   "purpose": "One non-amending map of canonical objects, offline cryptographic proofs, availability mirrors and DOI recovery capsules.",
+  "evolution_and_handoff": {
+    "human_guide": "EVIDENCE-EVOLUTION.md",
+    "machine_plan": "api/evidence-evolution-plan.v1.json",
+    "current_version_remains_immutable": true,
+    "future_material_improvements_use_new_versions": true,
+    "final_core_arweave_mirror": "intentionally_deferred"
+  },
   "authority_boundary": {
     "canonical_authority": "three Bitcoin Originals only",
     "canonical_count": 3,
@@ -437,5 +444,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "1ce53579c6ae04e0"
+  "source_digest": "61dd537e06a633a3"
 }

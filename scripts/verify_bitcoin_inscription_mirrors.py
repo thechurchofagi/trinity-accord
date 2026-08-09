@@ -83,6 +83,13 @@ def fetch_onchain_content(inscription_id, txid=None, provider="ordinals"):
 def verify_offline(records, args):
     errors = []
     checked = 0
+    selected_ids = {
+        rec["inscription"]["inscription_id"]
+        for rec in records
+        if (not args.inscription_id or rec["inscription"]["inscription_id"] == args.inscription_id)
+        and (not args.layer or rec["classification"]["layer"] == args.layer)
+    }
+    known_ids = {rec["inscription"]["inscription_id"] for rec in records}
     try:
         completed = subprocess.run(
             [sys.executable, str(PROOF_VERIFIER)],
@@ -94,7 +101,11 @@ def verify_offline(records, args):
         )
         proof_report = json.loads(completed.stdout)
         if completed.returncode != 0 or proof_report.get("result") != "PASS":
-            errors.extend(f"proof annex: {item}" for item in proof_report.get("failures", []))
+            for item in proof_report.get("failures", []):
+                prefix = str(item).split(":", 1)[0]
+                is_scoped_anchor_failure = prefix in known_ids
+                if args.all or not is_scoped_anchor_failure or prefix in selected_ids:
+                    errors.append(f"proof annex: {item}")
         proof_by_inscription = {
             item["inscription_number"]: item
             for item in proof_report.get("l1_checks", [])
@@ -232,7 +243,7 @@ def main():
         for e in errors:
             print(f"  ERROR: {e}")
     else:
-        print("All offline mirror and Bitcoin cryptographic proof checks passed.")
+        print("All offline checks passed (mirror and Bitcoin cryptographic proof).")
 
     # Network verification
     if args.network:

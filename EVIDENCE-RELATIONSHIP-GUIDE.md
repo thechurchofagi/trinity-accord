@@ -20,6 +20,9 @@ Unified final inventory: `api/final-evidence-inventory.v1.json`.
 
 Final freeze guide: `FINAL-EVIDENCE-FREEZE.md`.
 
+Future-agent maintenance handoff: `EVIDENCE-EVOLUTION.md` and
+`api/evidence-evolution-plan.v1.json`.
+
 Preferred verification profiles: `api/verification-profiles.v1.json`.
 
 Preferred action-based context profiles: `api/context-action-profiles.v1.json`.
@@ -92,6 +95,7 @@ All later materials are subordinate, non-amending evidence or context.
 | Core repository Zenodo Concept DOI | Resolves the latest immutable repository-capsule version | GitHub-independent discovery and exact-baseline recovery | Equality to a later moving GitHub `main` |
 | Core repository version DOI | Freezes every Git-tracked byte and executable mode at one named source commit | Exact immutable source-baseline recovery and DOI-only cold restore | Large external payload embedding, canonical authority |
 | External evidence / NFT-media DOI annexes | Preserve large binaries intentionally excluded from the core capsule | Complete large-payload cold recovery without GitHub | Proof of Bitcoin/ETH inclusion or canonical authority |
+| Evidence evolution handoff | Records completed maintenance, review triggers, deferred work and authorization boundaries | Lets a future agent continue without overwriting immutable checkpoints or repeating completed work | Cryptographic inclusion, new authority, a completed DOI/Arweave write |
 | Shenzhen notarization | Records the observed evidence-preservation process and issued notarial materials within its stated scope | Date, process, personnel, photographed/recorded object and submitted electronic-data preservation context | Truth of the protocol, identity of all underlying digital bytes, direct verification of the three Bitcoin Originals |
 | Chronicle NFTs | Timestamped historical and creative context | What the project recorded and expressed during the period | Independent verification of external events or canonical authority |
 | Echo / Record-Chain records | Later reception, critique, verification reports and operational records | Provenance of later responses and checks | Amendment, automatic endorsement, or formal institutional attestation |
@@ -152,13 +156,21 @@ The storage systems are complementary rather than interchangeable:
 2. GitHub Releases and Arweave are availability mirrors for named payloads. Their
    bytes must be matched to manifests; neither automatically tracks later `main`.
 3. The core Zenodo Concept DOI `10.5281/zenodo.21739343` resolves the latest
-   immutable repository-capsule version. Each version DOI restores one exact
-   Git-tracked publication baseline.
+   immutable repository-capsule version. The current frozen version DOI is
+   `10.5281/zenodo.21855814`; each version DOI restores one exact Git-tracked
+   publication baseline. `10.5281/zenodo.21739344` is a historical version
+   reference, not the current Concept DOI.
 4. External evidence DOI `10.5281/zenodo.21753937` and Chronicle NFT-media DOI
    `10.5281/zenodo.21754229` are separate large-binary capsules. They supplement
    the core repository capsule and do not duplicate its authority role.
 5. `preservation/recovery-catalog.json` is embedded in the core capsule so the
    three DOI series remain discoverable without GitHub or maintainer memory.
+6. The checked-in repository-capsule Arweave record is historical. An exact
+   Arweave mirror of version DOI `10.5281/zenodo.21855814` is intentionally
+   deferred, has not been uploaded, and requires fresh owner cost authorization.
+7. GitHub `main` may contain post-freeze verifier and discovery hardening. Those
+   changes are not retroactively part of the immutable DOI; the evolution handoff
+   records how a later agent should evaluate a genuinely material new version.
 
 ## 5. What the six-hash table is for
 

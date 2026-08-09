@@ -88,6 +88,44 @@ def require_address(value: Any, field: str) -> str:
     return value.lower()
 
 
+def verify_checkpoint_provider_quorum(checkpoint: dict, observations: object) -> None:
+    """Reject duplicated provider observations masquerading as an L3 quorum."""
+    if not isinstance(observations, list):
+        raise ValueError("NFT L3 checkpoint observations are not a list")
+    checkpoint_root = str(checkpoint.get("root", "")).lower()
+    checkpoint_slot = int(checkpoint.get("slot", -1))
+    votes = int(checkpoint.get("matching_provider_votes", 0))
+    finalized_votes = int(checkpoint.get("finalized_provider_votes", 0))
+    matching_providers: set[str] = set()
+    finalized_providers: set[str] = set()
+    for observation in observations:
+        if not isinstance(observation, dict):
+            raise ValueError("NFT L3 checkpoint observation is not an object")
+        provider = str(observation.get("provider", "")).strip()
+        if not provider:
+            raise ValueError("NFT L3 checkpoint observation provider is missing")
+        matches = (
+            str(observation.get("root", "")).lower() == checkpoint_root
+            and int(observation.get("observed_slot", -1)) == checkpoint_slot
+            and observation.get("canonical") is True
+        )
+        if matches:
+            matching_providers.add(provider)
+            if (
+                observation.get("finalized") is True
+                and observation.get("execution_optimistic") is False
+            ):
+                finalized_providers.add(provider)
+    if (
+        votes < 2
+        or len(matching_providers) < votes
+        or finalized_votes < 1
+        or finalized_votes > votes
+        or len(finalized_providers) < finalized_votes
+    ):
+        raise ValueError("NFT L3 checkpoint provenance quorum mismatch")
+
+
 def decode_receipt(encoded: bytes) -> tuple[int, list]:
     if not encoded:
         raise ValueError("empty receipt")
@@ -164,6 +202,10 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
     expected_to = mint["to"].lower()
 
     if event == "Transfer":
+        if "operator" not in mint:
+            raise ValueError("ERC-721 mint operator must be explicitly present")
+        if "batch_index" not in mint:
+            raise ValueError("ERC-721 mint batch_index must be explicitly present")
         if mint.get("operator") is not None:
             raise ValueError("ERC-721 mint operator must be null")
         if mint.get("batch_index") is not None:
@@ -178,6 +220,10 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
             raise ValueError("ERC-721 token/quantity mismatch")
         decoded_event = "erc721.Transfer"
     elif event == "TransferSingle":
+        if "operator" not in mint:
+            raise ValueError("ERC-1155 operator must be explicitly present")
+        if "batch_index" not in mint:
+            raise ValueError("ERC-1155 TransferSingle batch_index must be explicitly present")
         if mint.get("batch_index") is not None:
             raise ValueError("ERC-1155 TransferSingle batch_index must be null")
         expected_operator = require_address(mint.get("operator"), "ERC-1155 operator")
@@ -193,6 +239,10 @@ def verify_mint_log(asset: dict, encoded_receipt: bytes, log_position: int) -> d
             raise ValueError("ERC-1155 operator mismatch")
         decoded_event = "erc1155.TransferSingle"
     elif event == "TransferBatch":
+        if "operator" not in mint:
+            raise ValueError("ERC-1155 batch operator must be explicitly present")
+        if "batch_index" not in mint:
+            raise ValueError("ERC-1155 TransferBatch batch_index must be explicitly present")
         expected_operator = require_address(mint.get("operator"), "ERC-1155 batch operator")
         if mint.get("batch_index") is None:
             raise ValueError("ERC-1155 TransferBatch batch_index is required")
@@ -392,13 +442,8 @@ def verify_l3(record: dict, expected_block_hash: str, block_timestamp: int, ethv
     checkpoint_slot = int(checkpoint["slot"])
     if checkpoint_slot <= expected_slot:
         raise ValueError("NFT L3 checkpoint is not a descendant")
-    votes = int(checkpoint.get("matching_provider_votes", 0))
-    finalized_votes = int(checkpoint.get("finalized_provider_votes", 0))
     observations = witness.get("checkpoint_observations", [])
-    observed_matches = sum(1 for o in observations if o.get("root", "").lower() == checkpoint_root and int(o.get("observed_slot", -1)) == checkpoint_slot and o.get("canonical") is True)
-    observed_finalized = sum(1 for o in observations if o.get("root", "").lower() == checkpoint_root and int(o.get("observed_slot", -1)) == checkpoint_slot and o.get("canonical") is True and o.get("finalized") is True and o.get("execution_optimistic") is False)
-    if votes < 2 or observed_matches < votes or finalized_votes < 1 or observed_finalized < finalized_votes:
-        raise ValueError("NFT L3 checkpoint provenance quorum mismatch")
+    verify_checkpoint_provider_quorum(checkpoint, observations)
     expected = checkpoint_root
     chain = witness.get("checkpoint_to_target_parent_chain", [])
     if not chain:

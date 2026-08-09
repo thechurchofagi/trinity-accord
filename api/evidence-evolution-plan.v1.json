@@ -1,0 +1,172 @@
+{
+  "schema": "trinityaccord.evidence-evolution-plan.v1",
+  "version": "1.0.0",
+  "status": "active_handoff",
+  "decision_recorded_at_utc": "2026-08-09T00:00:00Z",
+  "purpose": "Machine-readable handoff for future agents to audit and improve the evidence system without overwriting immutable historical checkpoints or repeating completed work.",
+  "current_checkpoint": {
+    "scope_label": "2026 final evidence baseline v3",
+    "core_concept_doi": "10.5281/zenodo.21739343",
+    "core_version_doi": "10.5281/zenodo.21855814",
+    "frozen_source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+    "publication_state_commit_sha": "96c48b287eb1458f6e911836bfa017fd7b2bfc12",
+    "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
+    "public_metadata_and_byte_verification": "passed",
+    "public_doi_only_cold_restore": "passed",
+    "evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 10,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "ordinary_proof_verification_network_required": false
+    }
+  },
+  "versioning_semantics": {
+    "current_version_doi_is_immutable": true,
+    "current_version_must_never_be_overwritten": true,
+    "final_means_final_for_this_evidence_epoch": true,
+    "final_does_not_mean_project_evolution_is_closed": true,
+    "future_material_improvements_use_a_new_version": true,
+    "concept_doi_may_resolve_a_later_verified_version": true,
+    "github_main_may_continue_to_evolve": true
+  },
+  "owner_decision": {
+    "final_core_arweave_mirror": {
+      "status": "intentionally_deferred",
+      "authorized_for_upload": false,
+      "reason": "The current exact baseline is already DOI-preserved and publicly cold-restored. A later materially improved evidence epoch may be a better single target for an additional permanent Arweave repository-capsule mirror.",
+      "not_a_failure": true,
+      "not_a_missing_cryptographic_proof": true,
+      "existing_repository_capsule_arweave_mirror_is_historical": true,
+      "do_not_claim_current_final_baseline_is_on_arweave": true,
+      "non_binding_cost_observation": {
+        "observed_at_utc": "2026-08-09T00:00:00Z",
+        "payload_bytes": 50052055,
+        "minimum_reward_ar": "0.507071251653",
+        "suggested_one_time_cap_ar": "0.60",
+        "price_endpoint": "https://arweave.net/price/50052055",
+        "warning": "This is a historical planning observation only. Requote at signing time and obtain fresh owner authorization before any paid irreversible write."
+      }
+    }
+  },
+  "review_policy": {
+    "quarterly_read_only_recovery_checks_continue": true,
+    "next_read_only_architecture_review_not_before": "2027-02-08",
+    "next_publication_decision_target": "2027-08-08",
+    "calendar_dates_are_review_points_not_automatic_publication_triggers": true,
+    "early_review_triggers": [
+      "two consecutive public DOI recovery failures",
+      "checksum or public metadata mismatch",
+      "material Zenodo, GitHub, IPFS or Arweave availability-policy change",
+      "new Bitcoin or Ethereum evidence objects entering the declared closed set",
+      "material fail-closed verifier improvement",
+      "completion of reproducible long-term verifier dependency artifacts",
+      "planned transition to long-term unattended maintenance"
+    ]
+  },
+  "maintenance_checkpoint_2026_08_08": {
+    "status": "implemented_and_locally_verified",
+    "scope": "Post-freeze repository hardening and future-agent handoff; this does not alter the bytes or identity of the immutable DOI version.",
+    "reviewed_merged_pull_requests": [
+      954,
+      957,
+      958,
+      959
+    ],
+    "completed_work": [
+      "NFT commitments and verification now reject omitted operator or batch_index keys and enforce event-specific null, required-operator and TransferBatch-index semantics.",
+      "A synthetic ERC-1155 TransferBatch receipt exercises the previously untested verifier branch and its negative mutations.",
+      "Bitcoin block time is decoded from and bound to the proof-carrying header; checkpoint votes require distinct matching providers.",
+      "Bitcoin scoped mirror verification, stable success output, structured adapter failures, manifest-derived inventory totals and recovery dependencies are repaired.",
+      "Ethereum and NFT checkpoint provenance counts also require distinct matching providers, matching the Bitcoin fail-closed rule.",
+      "The unified final inventory freshly executes and compares the Bitcoin, Ethereum and NFT reports before consuming checked-in summaries.",
+      "Final-publication observation identities, frozen input coverage and Zenodo Concept-DOI lineage preflight are fail-closed.",
+      "Historical external-annex DOI roles and rich repository-version metadata survive future writer reruns.",
+      "Human and machine discovery surfaces now expose this evolution handoff."
+    ],
+    "verification_record": {
+      "bitcoin_offline_annex": "PASS; checked-in report unchanged",
+      "ethereum_offline_annex": "PASS; checked-in report unchanged",
+      "nft_offline_annex": "PASS; checked-in report unchanged",
+      "nft_collection_merkle_root_unchanged": "097bb48d98ab7fc036aed97f5b5fcb1a65962d64d327081277255d1829212267",
+      "targeted_review_regressions": "PASS",
+      "complete_current_system_tests": "PASS",
+      "gateway_unit_tests": "383 passed, 1 skipped",
+      "live_site_read_only_checks": "Homepage and Verify navigation rendered without broken images or horizontal overflow; five critical public JSON endpoints returned HTTP 200 and parsed; healthz, readyz and readiness returned HTTP 200 with active protection and ready preflight/submit."
+    },
+    "external_write_record": {
+      "new_zenodo_version_published": false,
+      "arweave_upload_performed": false,
+      "proof_or_commitment_bytes_changed": false,
+      "owner_cost_authorization_consumed": false
+    },
+    "continuation_note": "Determine merge and deployment identity from Git history and GitHub before relying on this post-freeze maintenance checkpoint. The immutable DOI version remains the earlier named baseline."
+  },
+  "future_agent_start_sequence": [
+    "Read api/final-evidence-inventory.v1.json and api/evidence-relationship-map.v1.json.",
+    "Read FINAL-EVIDENCE-FREEZE.md, EVIDENCE-EVOLUTION.md and this plan.",
+    "Run every checked-in Bitcoin, Ethereum and NFT offline verifier before proposing changes.",
+    "Perform DOI-only cold restoration of the core repository and both external annex DOI records.",
+    "Compare current GitHub main against frozen source baseline 887322dc7f6f64efd04f7452e2039ee4440b226b and produce an explicit delta report.",
+    "Separate cryptographic proof defects from preservation, discovery, dependency and presentation improvements.",
+    "Change proof or commitment bytes only when a reproduced defect or material new evidence requires it.",
+    "Publish a new immutable DOI version only after all material changes pass fail-closed tests and public cold restore.",
+    "Consider one exact Arweave mirror of the newly selected stable DOI capsule only after fresh owner cost authorization and public readback verification."
+  ],
+  "material_refresh_criteria": [
+    "proof coverage or verifier rejection semantics materially improve",
+    "new evidence objects are explicitly authorized and cryptographically bound",
+    "offline verification becomes more independently reproducible",
+    "long-term dependency artifacts and hashes are added",
+    "a recovery drill identifies a reproducible gap",
+    "machine discovery or relationship topology is materially corrected"
+  ],
+  "not_material_by_itself": [
+    "a newer AI model exists",
+    "cosmetic wording changes",
+    "GitHub main has a later commit SHA",
+    "a mirror URL changes without a payload-identity change"
+  ],
+  "deferred_improvements": [
+    {
+      "id": "long_term_verifier_dependencies",
+      "status": "optional_future_hardening",
+      "work": "Preserve the minimum Python wheel/sdist dependency set with SHA-256 values and a documented blank-machine bootstrap path."
+    },
+    {
+      "id": "future_full_evidence_reaudit",
+      "status": "scheduled_review",
+      "work": "Use later verification capability to re-audit Bitcoin, Ethereum and NFT fail-closed semantics against real witnesses and adversarial mutations."
+    },
+    {
+      "id": "final_core_arweave_mirror",
+      "status": "intentionally_deferred",
+      "work": "If later authorized, upload one deterministic archive of the selected stable DOI capsule, record its exact byte length and SHA-256, and verify public readback before registering the txid."
+    }
+  ],
+  "authorization_boundary": {
+    "read_only_audit_and_local_test_improvements_do_not_authorize_external_writes": true,
+    "new_zenodo_publication_requires_fresh_owner_authorization": true,
+    "paid_arweave_upload_requires_fresh_owner_authorization_and_cost_cap": true,
+    "canonical_authority_or_governance_changes_require_explicit_owner_direction": true,
+    "future_agents_must_not_use_repository_credentials_outside_existing_guarded_workflows": true
+  },
+  "canonical_authority": "Bitcoin Originals only",
+  "non_amending_boundary": true,
+  "not_instruction_override": true,
+  "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
+  "source_digest": "38ccb0913e9f3e1b",
+  "limitations": [
+    "This plan records repository maintenance intent and does not amend the Bitcoin Originals.",
+    "Dates and cost observations are planning checkpoints, not automatic authorization or guarantees of future service availability."
+  ],
+  "does_not_prove": [
+    "future AI systems will necessarily be stronger",
+    "all storage providers will remain available",
+    "a future evidence refresh is required",
+    "Arweave publication has been authorized or completed",
+    "philosophical truth or independent institutional endorsement"
+  ]
+}

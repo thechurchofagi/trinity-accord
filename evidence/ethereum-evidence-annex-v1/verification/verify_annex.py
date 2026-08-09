@@ -100,6 +100,47 @@ def verify_single_ssz_proof(proof: dict, expected_root: str) -> None:
         raise ValueError("SSZ proof root mismatch")
 
 
+def verify_checkpoint_provider_quorum(
+    checkpoint: dict, observations: object
+) -> tuple[int, int]:
+    """Require declared quorum counts to represent distinct matching providers."""
+    if not isinstance(observations, list):
+        raise ValueError("trusted finalized root observations are not a list")
+    checkpoint_root = str(checkpoint.get("root", "")).lower()
+    checkpoint_slot = int(checkpoint.get("slot", -1))
+    votes = int(checkpoint.get("matching_provider_votes", 0))
+    finalized_votes = int(checkpoint.get("finalized_provider_votes", 0))
+    matching_providers: set[str] = set()
+    finalized_providers: set[str] = set()
+    for observation in observations:
+        if not isinstance(observation, dict):
+            raise ValueError("trusted finalized root observation is not an object")
+        provider = str(observation.get("provider", "")).strip()
+        if not provider:
+            raise ValueError("trusted finalized root observation provider is missing")
+        matches = (
+            str(observation.get("root", "")).lower() == checkpoint_root
+            and int(observation.get("observed_slot", -1)) == checkpoint_slot
+            and observation.get("canonical") is True
+        )
+        if matches:
+            matching_providers.add(provider)
+            if (
+                observation.get("finalized") is True
+                and observation.get("execution_optimistic") is False
+            ):
+                finalized_providers.add(provider)
+    if votes < 2 or len(matching_providers) < votes:
+        raise ValueError("trusted finalized root provenance quorum mismatch")
+    if (
+        finalized_votes < 1
+        or finalized_votes > votes
+        or len(finalized_providers) < finalized_votes
+    ):
+        raise ValueError("trusted finalized root finalized-provenance mismatch")
+    return votes, finalized_votes
+
+
 def bound_proof_path(anchor: dict, key: str, filename: str) -> tuple[pathlib.Path, dict]:
     txh = anchor["tx_hash"].lower()
     expected_rel = f"evidence/ethereum-evidence-annex-v1/proof-material/{txh}/{filename}"
@@ -197,27 +238,8 @@ def verify_l3(anchor: dict, l2: dict) -> tuple[dict, dict]:
     checkpoint_slot = int(checkpoint["slot"])
     if checkpoint_slot <= expected_slot:
         raise ValueError("trusted finalized root must descend from target slot")
-    votes = int(checkpoint.get("matching_provider_votes", 0))
-    finalized_votes = int(checkpoint.get("finalized_provider_votes", 0))
     observations = witness.get("checkpoint_observations", [])
-    observed_matches = sum(
-        1 for o in observations
-        if o.get("root", "").lower() == checkpoint_root
-        and int(o.get("observed_slot", -1)) == checkpoint_slot
-        and o.get("canonical") is True
-    )
-    observed_finalized = sum(
-        1 for o in observations
-        if o.get("root", "").lower() == checkpoint_root
-        and int(o.get("observed_slot", -1)) == checkpoint_slot
-        and o.get("canonical") is True
-        and o.get("finalized") is True
-        and o.get("execution_optimistic") is False
-    )
-    if votes < 2 or observed_matches < votes:
-        raise ValueError("trusted finalized root provenance quorum mismatch")
-    if finalized_votes < 1 or observed_finalized < finalized_votes:
-        raise ValueError("trusted finalized root finalized-provenance mismatch")
+    votes, finalized_votes = verify_checkpoint_provider_quorum(checkpoint, observations)
 
     expected = checkpoint_root
     chain = witness.get("checkpoint_to_target_parent_chain", [])

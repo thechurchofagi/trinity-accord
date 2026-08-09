@@ -8,6 +8,9 @@ Relationship graph: `api/evidence-relationship-map.v1.json`
 
 Recovery entrypoint: `api/recovery-index.json`
 
+Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
+`api/evidence-evolution-plan.v1.json`
+
 ## 1. The four layers
 
 | Layer | Objects | What it does | What it does not do |
@@ -93,3 +96,10 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 5. verify digest manifests and OTS anchors for their stated byte/time scope
 6. restore the core repository DOI and then the two external binary annex DOI records
 7. compare any GitHub or Arweave mirror to its named digest before using it
+
+## 8. Evolution boundary
+
+This version remains immutable.  Future material improvements use a new version
+rather than overwriting this checkpoint.  The exact final core capsule Arweave
+mirror is intentionally deferred and requires fresh owner authorization before any
+paid irreversible upload.  Future agents must begin with the handoff files above.

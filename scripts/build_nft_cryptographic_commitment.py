@@ -93,6 +93,9 @@ def project_asset(asset: dict) -> dict:
     contract = norm_hex(asset.get("contract_address"), "contract_address", 20)
     token_id = norm_decimal(asset.get("token_id"), "token_id")
     mint = asset.get("mint") or {}
+    for field in ("operator", "batch_index"):
+        if field not in mint:
+            raise ValueError(f"mint.{field} must be explicitly present")
     projected = {
         "identity": {
             "chain_id": chain_id,
