@@ -103,6 +103,11 @@ def test_repository_integrity_runs_refresh_only_after_full_main_gate():
     assert "group: main-write-lock" in text
     assert "queue: max" in text
     assert "contents: write" in text
+    writer = text.split("  refresh-repository-preservation-doi:\n", 1)[1]
+    assert "python3 -m pip install -r requirements-ci.txt" in writer
+    assert writer.index("python3 -m pip install -r requirements-ci.txt") < writer.index(
+        "bash scripts/run_repository_preservation_refresh_ci.sh"
+    )
     assert "bash scripts/run_repository_preservation_refresh_ci.sh" in text
     assert "repository-preservation-refresh-proof-integrity" in text
 
