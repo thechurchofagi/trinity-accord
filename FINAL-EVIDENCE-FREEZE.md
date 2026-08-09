@@ -66,7 +66,7 @@ OTS proves a latest-possible existence time for that digest, not file truth or a
 | GitHub Releases | Large fallback mirror | Release assets must be checked against their manifest hashes |
 | Arweave | Long-lived transaction-addressed payload mirror | Each txid names one payload; it is not automatically the latest repository |
 | Core Zenodo Concept DOI `10.5281/zenodo.21739343` | Stable resolver for the repository series | Resolves the latest published immutable version |
-| Core version DOI `10.5281/zenodo.21855814` | Exact Git-tracked repository baseline | Source `887322dc7f6f64efd04f7452e2039ee4440b226b`; public cold restore `passed` |
+| Core version DOI `10.5281/zenodo.21859437` | Exact Git-tracked repository baseline | Source `ba34564c579d645a5a1595f0538223e0e957155e`; public cold restore `passed` |
 | Evidence annex DOI `10.5281/zenodo.21753937` | 28 external evidence assets | Separate 204595967 byte payload capsule |
 | NFT media annex DOI `10.5281/zenodo.21754229` | 10 NFT media package assets | Separate 862714954 byte payload capsule |
 
@@ -76,10 +76,10 @@ annex series and are discovered through the embedded recovery catalog.
 
 ## 6. Current checkpoint status
 
-- Authorization state: `prepared`
+- Authorization state: `consumed`
 - Required evidence-checkpoint ancestor: `5a4999c6108f1a05e153c63a06a4a70252467aed`
-- Published checkpoint version DOI: `None`
-- Published source baseline: `None`
+- Published checkpoint version DOI: `10.5281/zenodo.21859437`
+- Published source baseline: `ba34564c579d645a5a1595f0538223e0e957155e`
 - Intended as permanently final: `false`
 - Future material versions allowed: `true`
 - Arweave snapshot requested: `false`

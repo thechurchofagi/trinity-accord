@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "7dc64f72a3280142",
+  "source_digest": "41b45638c26e4a88",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -214,52 +214,22 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21855814",
-      "record_id": 21855814,
+      "doi": "10.5281/zenodo.21859437",
+      "record_id": 21859437,
       "concept_doi": "10.5281/zenodo.21739343",
-      "git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
-      "git_tree_oid": "7defec4fe1216fb44e922036b6e5cd43bbeadd1a",
-      "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
+      "git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+      "git_tree_oid": "8afbf03dc102664186c24496d14c4b2b51c2287c",
+      "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36",
       "github_required_for_recovery": false,
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
       "public_cold_restore": "passed",
-      "coverage_status": "exact_final_evidence_baseline",
+      "coverage_status": "exact_current_evidence_checkpoint",
       "live_main_equivalence_claimed": false,
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
     },
-    "repository_additions_after_published_baseline": {
-      "ethereum_non_nft_two_anchor_delta": {
-        "status": "offline_verified_not_in_published_final_doi_v3",
-        "baseline_version_doi": "10.5281/zenodo.21855814",
-        "included_in_published_doi": false,
-        "current_anchor_count": 12,
-        "published_doi_anchor_count": 10,
-        "tx_hashes": [
-          "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
-          "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2"
-        ],
-        "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
-        "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
-        "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
-        "ordinary_verification_network_required": false,
-        "current_recovery_requires_named_git_commit_or_later_mirror": true,
-        "new_doi_publication": "owner_authorized_pending_publication_v4",
-        "new_arweave_upload": "intentionally_deferred_not_attempted",
-        "boundary": "This entry records a current repository delta and must not be claimed as bytes contained by DOI 10.5281/zenodo.21855814.",
-        "future_checkpoint_scope": "8_bitcoin_12_ethereum_175_nft"
-      },
-      "fail_closed_verifier_and_discovery_hardening": {
-        "status": "repository_delta_not_in_published_final_doi_v3",
-        "baseline_version_doi": "10.5281/zenodo.21855814",
-        "included_in_published_doi": false,
-        "ordinary_verification_network_required": false,
-        "boundary": "Current verifier, recovery and discovery improvements must be recovered from a named verified Git commit until another immutable version is separately authorized.",
-        "new_doi_publication": "owner_authorized_pending_publication_v4",
-        "future_checkpoint_scope": "8_bitcoin_12_ethereum_175_nft"
-      }
-    },
+    "repository_additions_after_published_baseline": {},
     "external_binary_annexes": {
       "evidence": {
         "doi": "10.5281/zenodo.21753937",
@@ -292,7 +262,7 @@
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every Git-tracked byte in the exact publication baseline named by its manifest, while deliberately excluding production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
     "The owner-authorized sequence-3 final evidence freeze was published and cold-restored as DOI 10.5281/zenodo.21855814 with 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 NFT proofs and the unified frozen inventory.",
-    "Current GitHub adds two offline-verified Ethereum authority/signature anchors after DOI v3. Sequence 4 is owner-authorized to freeze the complete 8 + 12 + 175 checkpoint; until it is consumed, the two-anchor delta still requires a named verified Git commit.",
+    "Checkpoint v4 (10.5281/zenodo.21859437) incorporates the two Ethereum authority/signature anchors. Any later GitHub additions must again be separated from this immutable baseline.",
     "Offline proof verification needs no Bitcoin, Ethereum or Beacon network, but the Python verifier dependencies are presently version-pinned rather than preserved as a complete wheel/sdist set with SHA-256 values. A completely blank machine without an available package index therefore still needs a future dependency capsule.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
@@ -306,38 +276,16 @@
   "publication_refresh": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v4",
     "sequence": 4,
-    "status": "prepared_for_evidence_checkpoint_publication",
-    "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
-    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
-    "previous_version_doi": "10.5281/zenodo.21855814",
+    "status": "published_verified_and_consumed",
+    "source_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+    "version_doi": "10.5281/zenodo.21859437",
+    "record_id": 21859437,
     "core_concept_doi": "10.5281/zenodo.21739343",
+    "previous_version_doi": "10.5281/zenodo.21855814",
+    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
     "arweave_snapshot_refreshed": false,
     "intended_as_final_evidence_freeze": false,
     "future_material_versions_allowed": true,
     "non_amending_boundary": true
-  },
-  "pending_evidence_checkpoint": {
-    "schema": "trinityaccord.current-baseline-publication-authorization.v4",
-    "sequence": 4,
-    "status": "prepared",
-    "authorization": "preservation/current-baseline-publication-authorization-v4.json",
-    "previous_version_doi": "10.5281/zenodo.21855814",
-    "core_concept_doi": "10.5281/zenodo.21739343",
-    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
-    "evidence_scope": {
-      "bitcoin_inscriptions": 8,
-      "bitcoin_canonical_originals": 3,
-      "bitcoin_non_amending_ancillary": 5,
-      "ethereum_non_nft_anchors": 12,
-      "ethereum_chronicle_nfts": 175,
-      "nft_contracts": 4,
-      "proof_status_required": "PASS",
-      "ordinary_verification_network_required": false
-    },
-    "arweave_snapshot_requested": false,
-    "intended_as_final_evidence_freeze": false,
-    "future_material_versions_allowed": true,
-    "non_amending_boundary": true,
-    "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
   }
 }

@@ -46,8 +46,8 @@
         "ethereum_non_nft": 12,
         "chronicle_nft": 175
       },
-      "freeze_role": "current checkpoint v4 inventory; publication pending",
-      "role": "Indexes the current 8 + 12 + 175 verified evidence checkpoint while preserving DOI v3 as immutable history.",
+      "freeze_role": "immutable checkpoint v4 snapshot at source commit ba34564c579d645a5a1595f0538223e0e957155e",
+      "role": "Preserves the 8 + 12 + 175 inventory frozen in version DOI 10.5281/zenodo.21859437.",
       "supports": [
         "machine_discovery",
         "closed_set_counts",
@@ -93,7 +93,7 @@
         "ethereum_non_nft": 10,
         "chronicle_nft": 175
       },
-      "role": "Exposes the currently verified GitHub state and its explicit two-anchor post-freeze Ethereum delta.",
+      "role": "Exposes the same verified 8 + 12 + 175 evidence scope frozen by checkpoint v4, plus any later explicitly separated Git delta.",
       "supports": [
         "current_machine_discovery",
         "post_freeze_delta_discovery",
@@ -103,7 +103,12 @@
         "the_two_anchor_delta_is_in_doi_v3",
         "immutable_identity_without_commit_sha",
         "new_authority"
-      ]
+      ],
+      "published_checkpoint_v4_scope": {
+        "bitcoin_inscriptions": 8,
+        "ethereum_non_nft": 12,
+        "chronicle_nft": 175
+      }
     },
     {
       "id": "ethereum_address_scope_audit",
@@ -580,7 +585,7 @@
         "ethereum_non_nft": 10,
         "chronicle_nft": 175
       },
-      "current_live_two_anchor_ethereum_delta_included": false,
+      "current_live_two_anchor_ethereum_delta_included": true,
       "supports": [
         "exact_git_tracked_baseline_restore",
         "github_independent_discovery",
@@ -591,18 +596,15 @@
         "canonical_authority",
         "embedded_external_large_binary_payloads"
       ],
-      "latest_version_doi": "10.5281/zenodo.21855814",
-      "pending_checkpoint_v4": {
-        "status": "prepared",
-        "authorization": "preservation/current-baseline-publication-authorization-v4.json",
-        "scope": {
-          "bitcoin_inscriptions": 8,
-          "ethereum_non_nft": 12,
-          "chronicle_nft": 175
-        },
-        "arweave_upload_requested": false,
-        "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
-      }
+      "latest_version_doi": "10.5281/zenodo.21859437",
+      "current_checkpoint_authorization": "preservation/current-baseline-publication-authorization-v4.json",
+      "current_checkpoint_scope": {
+        "bitcoin_inscriptions": 8,
+        "ethereum_non_nft": 12,
+        "chronicle_nft": 175
+      },
+      "current_checkpoint_source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+      "current_checkpoint_public_cold_restore": "passed"
     },
     {
       "id": "external_evidence_zenodo_annex",

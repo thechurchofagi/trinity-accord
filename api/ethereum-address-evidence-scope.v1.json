@@ -761,11 +761,13 @@
       "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
       "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd"
     ],
-    "new_doi_publication_status": "prepared_for_publication_v4",
-    "new_arweave_upload_status": "intentionally_deferred_not_authorized",
-    "current_checkpoint_v4_includes_post_freeze_additions": false,
-    "current_checkpoint_v4_authorization": "preservation/current-baseline-publication-authorization-v4.json"
+    "new_doi_publication_status": "published_verified_and_consumed",
+    "new_arweave_upload_status": "intentionally_deferred_not_attempted",
+    "current_checkpoint_v4_includes_post_freeze_additions": true,
+    "current_checkpoint_v4_authorization": "preservation/current-baseline-publication-authorization-v4.json",
+    "current_checkpoint_v4_version_doi": "10.5281/zenodo.21859437",
+    "current_checkpoint_v4_source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "cadcfaab3a488ba7"
+  "source_digest": "d9d7f5837ec79e79"
 }

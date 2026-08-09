@@ -6,9 +6,9 @@
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
-    "current_verified_version_doi": "10.5281/zenodo.21855814",
-    "current_verified_source_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
-    "previous_verified_version_doi": "10.5281/zenodo.21846249",
+    "current_verified_version_doi": "10.5281/zenodo.21859437",
+    "current_verified_source_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+    "previous_verified_version_doi": "10.5281/zenodo.21855814",
     "restore_program_name": "restore-trinity-accord.py",
     "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main.",
     "final_evidence_freeze": {
@@ -37,7 +37,7 @@
     },
     "current_evidence_checkpoint": {
       "sequence": 4,
-      "status": "prepared",
+      "status": "published_verified_and_consumed",
       "authorization": "preservation/current-baseline-publication-authorization-v4.json",
       "previous_version_doi": "10.5281/zenodo.21855814",
       "core_concept_doi": "10.5281/zenodo.21739343",
@@ -53,7 +53,10 @@
       },
       "arweave_snapshot_requested": false,
       "future_material_versions_allowed": true,
-      "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
+      "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
+      "version_doi": "10.5281/zenodo.21859437",
+      "source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+      "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36"
     }
   },
   "external_binary_annexes": {

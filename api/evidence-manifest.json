@@ -210,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "8b1a84837faf5e3d",
+  "source_digest": "1ec388537fbc47bb",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -227,7 +227,7 @@
     "AI system instruction authority"
   ],
   "current_cryptographic_proof_state": {
-    "status": "offline_verifiable_with_explicit_post_freeze_delta",
+    "status": "offline_verifiable_and_immutable_checkpoint_v4",
     "updated_scope": "2026-08 Bitcoin/NFT hardening plus complete 12-transaction Ethereum self-data scope",
     "bitcoin_inscriptions": {
       "inscription_count": 8,
@@ -255,11 +255,8 @@
     "ethereum_non_nft": {
       "anchor_count": 12,
       "published_final_doi_v3_anchor_count": 10,
-      "post_freeze_live_delta_anchor_count": 2,
-      "post_freeze_live_delta_tx_hashes": [
-        "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
-        "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2"
-      ],
+      "post_freeze_live_delta_anchor_count": 0,
+      "post_freeze_live_delta_tx_hashes": [],
       "l1_byte_integrity": "PASS",
       "l2_execution_inclusion": "PASS",
       "l3_checkpoint_relative_finality": "PASS",
@@ -273,10 +270,11 @@
       "verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
       "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
       "network_required_for_existing_proof_verification": false,
-      "doi_boundary": "The immutable DOI 10.5281/zenodo.21855814 contains the earlier 10-anchor freeze and does not contain the two authority/signature anchors or verifier hardening. Those are a current GitHub delta.",
+      "doi_boundary": "The immutable checkpoint DOI 10.5281/zenodo.21859437 contains all 12 current non-NFT Ethereum anchors, including the authority-manifest digest and EIP-712 signature records.",
       "trust_boundary": "L3 is conditional on explicitly declared Ethereum weak-subjectivity trusted finalized Beacon roots; provider observations are provenance only.",
       "next_checkpoint_v4_anchor_count": 12,
-      "next_checkpoint_v4_status": "owner_authorized_pending_publication"
+      "next_checkpoint_v4_status": "published_verified_and_consumed",
+      "published_current_checkpoint_v4_anchor_count": 12
     },
     "chronicle_nft": {
       "asset_count": 175,
@@ -293,18 +291,18 @@
     },
     "repository_preservation": {
       "concept_doi": "10.5281/zenodo.21739343",
-      "latest_published_version_doi": "10.5281/zenodo.21855814",
-      "status": "final_frozen_and_publicly_restored",
+      "latest_published_version_doi": "10.5281/zenodo.21859437",
+      "status": "checkpoint_published_and_publicly_restored",
       "state": "preservation/repository-preservation-state-v2.json",
-      "latest_observation": "preservation/current-baseline-publication-observation-v3.json",
+      "latest_observation": "preservation/current-baseline-publication-observation-v4.json",
       "cold_restore": "PASS",
-      "published_baseline_boundary": "DOI v3 remains the latest public immutable baseline while the owner-authorized 8 + 12 + 175 checkpoint is prepared and not yet published.",
+      "published_baseline_boundary": "This DOI is the exact owner-authorized 8 Bitcoin + 12 Ethereum + 175 NFT current evidence checkpoint. It is immutable, is not moving GitHub main, and is not declared permanently final.",
       "live_repository_delta": {
-        "status": "verified_not_in_published_final_doi_v3",
-        "ethereum_non_nft_additions": 2,
-        "new_doi_publication": "owner_authorized_pending_publication_v4",
+        "status": "incorporated_into_published_checkpoint_v4",
+        "ethereum_non_nft_additions": 0,
+        "new_doi_publication": "published_verified_and_consumed",
         "new_arweave_upload": "intentionally_deferred_not_attempted",
-        "recovery_boundary": "Until a separately authorized immutable refresh exists, the two-anchor delta is recovered from a verified Git commit or another future hash-matched mirror."
+        "recovery_boundary": "The named v4 DOI restores the complete 8 + 12 + 175 checkpoint without GitHub."
       },
       "final_freeze_authorization": "preservation/current-baseline-publication-authorization-v3.json",
       "final_freeze_status": "published_verified_and_consumed",
@@ -316,7 +314,7 @@
       "final_freeze_source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
       "final_freeze_package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
       "current_checkpoint_authorization": "preservation/current-baseline-publication-authorization-v4.json",
-      "current_checkpoint_status": "prepared",
+      "current_checkpoint_status": "published_verified_and_consumed",
       "current_checkpoint_required_evidence_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
       "current_checkpoint_intended_as_permanent_final": false,
       "current_checkpoint_future_material_versions_allowed": true,
@@ -331,7 +329,10 @@
         "ordinary_verification_network_required": false
       },
       "current_checkpoint_arweave_upload_requested": false,
-      "current_checkpoint_authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
+      "current_checkpoint_authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
+      "current_checkpoint_version_doi": "10.5281/zenodo.21859437",
+      "current_checkpoint_source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+      "current_checkpoint_package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36"
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

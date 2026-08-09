@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.current-baseline-publication-authorization.v4",
   "sequence": 4,
-  "status": "prepared",
+  "status": "consumed",
   "authorized_by": "thechurchofagi",
   "authorized_at_utc": "2026-08-09T08:28:05Z",
   "authorization_basis": "The repository owner delegated the publication decision and explicitly authorized publication if the evidence review concluded that a new DOI checkpoint was warranted.",
@@ -35,5 +35,9 @@
     "proof_status_required": "PASS",
     "ordinary_verification_network_required": false
   },
-  "prepared_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
+  "prepared_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
+  "published_source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+  "published_record_id": 21859437,
+  "published_doi": "10.5281/zenodo.21859437",
+  "published_package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36"
 }

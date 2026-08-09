@@ -10,8 +10,8 @@
   "core_repository_preservation_doi": "10.5281/zenodo.21739344",
   "core_repository_preservation_doi_role": "historical_version_reference",
   "current_core_repository_concept_doi": "10.5281/zenodo.21739343",
-  "current_core_repository_latest_version_doi": "10.5281/zenodo.21855814",
-  "core_repository_reference_note": "10.5281/zenodo.21739344 is a historical version reference, not the current Concept DOI. The Concept DOI is 10.5281/zenodo.21739343; the final verified repository version is 10.5281/zenodo.21855814.",
+  "current_core_repository_latest_version_doi": "10.5281/zenodo.21859437",
+  "core_repository_reference_note": "10.5281/zenodo.21739344 is a historical version reference, not the current Concept DOI. The Concept DOI is 10.5281/zenodo.21739343; the current verified checkpoint version is 10.5281/zenodo.21859437.",
   "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
   "annexes": {
     "evidence": {

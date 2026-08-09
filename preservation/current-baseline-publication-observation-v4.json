@@ -1,0 +1,31 @@
+{
+  "schema": "trinityaccord.current-baseline-publication-observation.v4",
+  "sequence": 4,
+  "status": "passed",
+  "source_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+  "version_doi": "10.5281/zenodo.21859437",
+  "concept_doi": "10.5281/zenodo.21739343",
+  "zenodo_record_id": 21859437,
+  "zenodo_package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36",
+  "public_metadata_and_byte_verification": "passed",
+  "public_cold_restore": "passed",
+  "checkpoint_evidence_scope": {
+    "bitcoin_inscriptions": 8,
+    "bitcoin_canonical_originals": 3,
+    "bitcoin_non_amending_ancillary": 5,
+    "ethereum_non_nft_anchors": 12,
+    "ethereum_chronicle_nfts": 175,
+    "nft_contracts": 4,
+    "proof_status_required": "PASS",
+    "ordinary_verification_network_required": false
+  },
+  "intended_as_final_evidence_freeze": false,
+  "future_material_versions_allowed": true,
+  "arweave_snapshot_refreshed": false,
+  "boundary": {
+    "non_amending": true,
+    "bitcoin_originals_prevail": true,
+    "repository_doi_is_exact_baseline_not_live_main": true,
+    "arweave_mirrors_remain_historical_named_payloads": true
+  }
+}
