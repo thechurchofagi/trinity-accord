@@ -57,6 +57,40 @@ IGNORE_VALUES = {
     "/record-chain/receipt/{receipt_id}",
 }
 
+PERMALINK_RE = re.compile(r"(?m)^permalink:\s*['\"]?([^'\"\r\n]+)['\"]?\s*$")
+
+
+def collect_permalink_sources() -> dict[str, list[Path]]:
+    """Map Jekyll permalinks to their Markdown sources.
+
+    Public URLs are not required to mirror source filename casing.  In
+    particular, an authoritative uppercase evidence document can publish a
+    stable lowercase route through front matter.  Treat that declared route as
+    a real local source instead of reporting it missing.
+    """
+    sources: dict[str, list[Path]] = {}
+    ignored_parts = {".git", "node_modules", "vendor", "_site"}
+    for source in ROOT.rglob("*.md"):
+        if ignored_parts.intersection(source.relative_to(ROOT).parts):
+            continue
+        try:
+            text = source.read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            continue
+        if not text.startswith("---"):
+            continue
+        front_matter_end = text.find("\n---", 3)
+        if front_matter_end == -1:
+            continue
+        match = PERMALINK_RE.search(text[:front_matter_end])
+        if match:
+            sources.setdefault(match.group(1).strip(), []).append(source)
+    return sources
+
+
+PERMALINK_SOURCES = collect_permalink_sources()
+
+
 def extract_strings(obj):
     if isinstance(obj, str):
         yield obj
@@ -111,6 +145,7 @@ def candidates(path: str) -> list[Path]:
         ROOT / clean / "index.html",
         ROOT / f"{clean}.md",
         ROOT / f"{clean}.html",
+        *PERMALINK_SOURCES.get(path, []),
     ]
 
 errors = []
