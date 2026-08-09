@@ -12,12 +12,13 @@
     "restore_program_name": "restore-trinity-accord.py",
     "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main.",
     "final_evidence_freeze": {
-      "status": "owner_authorized_pending_publication",
+      "status": "prepared",
       "authorization": "preservation/current-baseline-publication-authorization-v3.json",
       "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
       "scope": "8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 Chronicle NFTs, frozen proof primitives, unified machine inventory and recovery topology",
       "arweave_snapshot_refreshed": false,
-      "non_amending_boundary": true
+      "non_amending_boundary": true,
+      "authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869"
     },
     "verified_arweave_mirror": {
       "record": "preservation/repository-capsule-arweave-mirror-81b151245d70.json",

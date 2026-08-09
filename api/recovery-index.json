@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "463e24982c6e3dba",
+  "source_digest": "98ef514312db1d55",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -206,29 +206,28 @@
     "external social adoption"
   ],
   "publication_refresh": {
-    "schema": "trinityaccord.current-baseline-publication-authorization.v2",
-    "sequence": 2,
-    "status": "published_verified_and_consumed",
-    "source_git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
-    "version_doi": "10.5281/zenodo.21846249",
+    "schema": "trinityaccord.current-baseline-publication-authorization.v3",
+    "sequence": 3,
+    "status": "prepared_for_final_evidence_baseline_publication",
+    "authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869",
+    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
+    "previous_version_doi": "10.5281/zenodo.21846249",
     "core_concept_doi": "10.5281/zenodo.21739343",
-    "previous_version_doi": "10.5281/zenodo.21831412",
-    "required_proof_hardening_commit_sha": "0cdba0d13b97f242908f150b634ae7a481be9ee3",
     "arweave_snapshot_refreshed": false,
-    "previous_sequence_1_arweave_txid": "-lAi9yvTzgfDTx32n8nzNRKAGOegO_croyzNHX3y7IM",
-    "previous_sequence_1_arweave_payload_sha256": "361f0a1479e48fc5b194f19a65929a1dad53c1264a593e163eb24b3cacc8be63",
+    "intended_as_final_evidence_freeze": true,
     "non_amending_boundary": true
   },
   "pending_final_freeze": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v3",
     "sequence": 3,
-    "status": "owner_authorized_pending_publication",
+    "status": "prepared",
     "authorization": "preservation/current-baseline-publication-authorization-v3.json",
     "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
     "previous_version_doi": "10.5281/zenodo.21846249",
     "core_concept_doi": "10.5281/zenodo.21739343",
     "include_homepage_arweave_snapshot": false,
     "intended_as_final_evidence_freeze": true,
-    "non_amending_boundary": true
+    "non_amending_boundary": true,
+    "authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869"
   }
 }

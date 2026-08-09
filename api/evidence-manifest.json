@@ -206,7 +206,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "f6bff77114e77d5f",
+  "source_digest": "7b5fd38c24dd5d8f",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -278,12 +278,13 @@
       "state": "preservation/repository-preservation-state-v2.json",
       "latest_observation": "preservation/current-baseline-publication-observation-v2.json",
       "cold_restore": "PASS",
-      "published_baseline_boundary": "The latest public DOI is an exact earlier Git baseline and does not yet contain the Bitcoin inscription proof annex or this unified final-evidence inventory.",
+      "published_baseline_boundary": "The latest public DOI remains the exact sequence-2 baseline while the owner-authorized final evidence baseline is prepared and not yet published.",
       "final_freeze_authorization": "preservation/current-baseline-publication-authorization-v3.json",
-      "final_freeze_status": "owner_authorized_pending_publication",
+      "final_freeze_status": "prepared",
       "final_freeze_required_evidence_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
       "final_freeze_intended_as_last_planned_evidence_version": true,
-      "arweave_snapshot_refresh_requested": false
+      "arweave_snapshot_refresh_requested": false,
+      "final_freeze_authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869"
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

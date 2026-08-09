@@ -73,7 +73,7 @@ annex series and are discovered through the embedded recovery catalog.
 
 ## 6. Final freeze status
 
-- Authorization state: `pending`
+- Authorization state: `prepared`
 - Required evidence-freeze ancestor: `5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162`
 - Published final version DOI: `None`
 - Published source baseline: `None`
