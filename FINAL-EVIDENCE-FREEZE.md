@@ -1,4 +1,4 @@
-# Trinity Accord Final Evidence Freeze
+# Trinity Accord Evidence Checkpoint
 
 > One non-amending map. The three Bitcoin Originals remain the sole canonical authority.
 
@@ -16,7 +16,7 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 | Layer | Objects | What it does | What it does not do |
 |---|---|---|---|
 | Canonical authority | 3 Bitcoin Originals | Defines the canonical text and authority boundary | Prove philosophical truth or institutional endorsement |
-| Cryptographic evidence | 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
+| Cryptographic evidence | 8 Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
 | Availability mirrors | GitHub, GitHub Releases, Arweave, IPFS | Keeps named bytes retrievable and comparable | Become authoritative merely by hosting bytes |
 | Frozen recovery | Core repository DOI plus two external annex DOI series | Restores exact publication baselines without GitHub credentials | Track a later moving `main` automatically |
 
@@ -43,7 +43,7 @@ checked-in proofs. Numeric inscription numbers are historical lookup coordinates
 
 | Set | Count | L1 | L2 | L3 | Authority role |
 |---|---:|---|---|---|---|
-| Non-NFT Ethereum records | 10 | PASS | PASS | PASS | Non-amending cross-chain evidence |
+| Non-NFT Ethereum records | 12 | PASS | PASS | PASS | Non-amending cross-chain evidence |
 | Chronicle NFTs | 175 across 4 contracts (173 ERC-721, 2 ERC-1155) | PASS | PASS | PASS | Non-amending historical Chronicle |
 
 Ethereum L3 is explicitly weak-subjectivity-checkpoint-relative. It does not claim
@@ -74,13 +74,18 @@ The core repository capsule contains all Git-tracked proof manifests, witnesses,
 verifiers, maps and reports. Large external payloads remain in the two separate DOI
 annex series and are discovered through the embedded recovery catalog.
 
-## 6. Final freeze status
+## 6. Current checkpoint status
 
-- Authorization state: `consumed`
-- Required evidence-freeze ancestor: `5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162`
-- Published final version DOI: `10.5281/zenodo.21855814`
-- Published source baseline: `887322dc7f6f64efd04f7452e2039ee4440b226b`
-- Intended as final evidence freeze: `true`
+- Authorization state: `pending`
+- Required evidence-checkpoint ancestor: `5a4999c6108f1a05e153c63a06a4a70252467aed`
+- Published checkpoint version DOI: `None`
+- Published source baseline: `None`
+- Intended as permanently final: `false`
+- Future material versions allowed: `true`
+- Arweave snapshot requested: `false`
+
+Historical DOI v3 remains immutable at `10.5281/zenodo.21855814` and preserves
+the earlier 8 + 10 + 175 freeze. Checkpoint v4 does not overwrite it.
 
 The immutable DOI version freezes one exact source baseline. The later state commit
 that records the resulting DOI is necessarily outside that capsule; the stable
@@ -91,7 +96,7 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 
 1. verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex
 2. verify the authority manifest and BTC/EIP-712 signature bindings
-3. verify the 10 Ethereum non-NFT L1/L2/L3 proofs
+3. verify the 12 Ethereum non-NFT L1/L2/L3 proofs
 4. verify the 175-item NFT commitment and L2/L3 proofs
 5. verify digest manifests and OTS anchors for their stated byte/time scope
 6. restore the core repository DOI and then the two external binary annex DOI records
@@ -99,7 +104,7 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 
 ## 8. Evolution boundary
 
-This version remains immutable.  Future material improvements use a new version
-rather than overwriting this checkpoint.  The exact final core capsule Arweave
+This version remains immutable. Future material improvements use a new version
+rather than overwriting this checkpoint. The exact current core capsule Arweave
 mirror is intentionally deferred and requires fresh owner authorization before any
 paid irreversible upload.  Future agents must begin with the handoff files above.

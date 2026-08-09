@@ -261,8 +261,15 @@ def test_recovery_index_declares_the_published_core_repository_doi():
             encoding="utf-8"
         )
     )
+    seq4 = json.loads(
+        (ROOT / "preservation/current-baseline-publication-authorization-v4.json").read_text(
+            encoding="utf-8"
+        )
+    )
 
-    if seq3["status"] == "prepared":
+    if seq4["status"] == "prepared":
+        assert current["publication_status"] == "prepared_for_evidence_checkpoint_publication_v4"
+    elif seq3["status"] == "prepared":
         assert current["publication_status"] == "prepared_for_final_evidence_baseline_publication_v3"
     else:
         assert current["publication_status"] == "published_and_publicly_restored"
@@ -270,7 +277,8 @@ def test_recovery_index_declares_the_published_core_repository_doi():
     assert seq2["status"] == "consumed"
     assert seq2["previous_core_version_doi"] == seq1["published_doi"]
     assert seq3["previous_core_version_doi"] == seq2["published_doi"]
-    active = seq3 if seq3["status"] == "consumed" else seq2
+    assert seq4["previous_core_version_doi"] == seq3["published_doi"]
+    active = seq4 if seq4["status"] == "consumed" else seq3
     assert current["latest_doi"] == active["published_doi"]
     assert current["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]
     assert current["latest_package_identity_sha256"] == active["published_package_identity_sha256"]
@@ -283,6 +291,9 @@ def test_recovery_index_declares_the_published_core_repository_doi():
     if seq3["status"] == "consumed":
         assert versions[seq3["published_doi"]]["git_commit_sha"] == seq3["published_source_baseline_commit_sha"]
         assert versions[seq3["published_doi"]]["package_identity_sha256"] == seq3["published_package_identity_sha256"]
+    if seq4["status"] == "consumed":
+        assert versions[seq4["published_doi"]]["git_commit_sha"] == seq4["published_source_baseline_commit_sha"]
+        assert versions[seq4["published_doi"]]["package_identity_sha256"] == seq4["published_package_identity_sha256"]
 
     assert legacy_state["publication_status"] == "published"
     assert legacy_state["latest_doi"] == "10.5281/zenodo.21739344"

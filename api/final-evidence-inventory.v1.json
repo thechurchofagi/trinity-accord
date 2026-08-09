@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.final-evidence-inventory.v1",
-  "version": "1.0.0",
-  "status": "final_evidence_freeze_model",
+  "version": "1.1.0",
+  "status": "current_evidence_checkpoint_model",
   "purpose": "One non-amending map of canonical objects, offline cryptographic proofs, availability mirrors and DOI recovery capsules.",
   "evolution_and_handoff": {
     "human_guide": "EVIDENCE-EVOLUTION.md",
@@ -141,7 +141,7 @@
     },
     "ethereum_non_nft": {
       "object_role": "non-amending cross-chain records and historical commitments",
-      "count": 10,
+      "count": 12,
       "items": [
         {
           "id": "eth-guardian-principles-original",
@@ -214,6 +214,22 @@
           "block_number": 23429813,
           "block_hash": "0x26d20e07ae86b09d3022bd845a8aa69ddad1093a48e926c32af5041aa65f1bce",
           "input_sha256": "e19018f1c71da8307ef20e8e8e5c12834f854d60a6aae60e35d2d8c71a333a81"
+        },
+        {
+          "id": "eth-authority-manifest-sha256-notarization",
+          "label": "Authority Manifest SHA-256 notarization",
+          "tx_hash": "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
+          "block_number": 23354000,
+          "block_hash": "0xcfab1287f2384ca1cffc01c85bde666151ada184c7172d933f19f00309743c5e",
+          "input_sha256": "4d1f5557b7967948e96f66ecd44561345af3dce6bf4efa52403f0fb07f0245f1"
+        },
+        {
+          "id": "eth-eip712-authority-signature-record",
+          "label": "Authority Manifest EIP-712 signature record",
+          "tx_hash": "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
+          "block_number": 23354749,
+          "block_hash": "0xd17f7d25cac80383b31ed40efe21f6770864071cb67e089b690f01d64dffa7ab",
+          "input_sha256": "3762f739fdf1466cc2eddc2947f70c0070ed9afcf11e681c858be9706108c372"
         },
         {
           "id": "eth-btc-bip340-witness",
@@ -427,10 +443,34 @@
     "published_source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
     "boundary": "The final DOI version is immutable, exact-baseline preservation; it creates no new canonical authority."
   },
+  "current_checkpoint": {
+    "authorization": "preservation/current-baseline-publication-authorization-v4.json",
+    "sequence": 4,
+    "status": "pending",
+    "authorized_by": "thechurchofagi",
+    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
+    "checkpoint_evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 12,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "proof_status_required": "PASS",
+      "ordinary_verification_network_required": false
+    },
+    "intended_as_permanent_final": false,
+    "future_material_versions_allowed": true,
+    "publication_confirmation": "PUBLISH_TRINITY_EVIDENCE_CHECKPOINT_V4",
+    "published_doi": null,
+    "published_source_baseline_commit_sha": null,
+    "arweave_snapshot_requested": false,
+    "boundary": "Checkpoint v4 is an immutable exact-baseline publication, not a permanent end to future material evidence versions and not a new source of canonical authority."
+  },
   "verification_order": [
     "verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex",
     "verify the authority manifest and BTC/EIP-712 signature bindings",
-    "verify the 10 Ethereum non-NFT L1/L2/L3 proofs",
+    "verify the 12 Ethereum non-NFT L1/L2/L3 proofs",
     "verify the 175-item NFT commitment and L2/L3 proofs",
     "verify digest manifests and OTS anchors for their stated byte/time scope",
     "restore the core repository DOI and then the two external binary annex DOI records",
@@ -444,5 +484,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "61dd537e06a633a3"
+  "source_digest": "f6ca0d62c71d3273"
 }

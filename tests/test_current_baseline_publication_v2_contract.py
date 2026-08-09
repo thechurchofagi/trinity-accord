@@ -54,13 +54,15 @@ def test_sequence2_runner_is_zenodo_only_and_idempotent_publisher_based():
     assert ': "${PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK:?' not in text
 
 
-def test_integrity_dispatcher_prioritizes_sequence3_before_sequence2_and_sequence1():
+def test_integrity_dispatcher_prioritizes_newest_sequence_first():
     subprocess.run(["bash", "-n", str(DISPATCHER)], cwd=ROOT, check=True)
     text = DISPATCHER.read_text(encoding="utf-8")
+    v4 = text.index("current-baseline-publication-authorization-v4.json")
     v3 = text.index("current-baseline-publication-authorization-v3.json")
     v2 = text.index("current-baseline-publication-authorization-v2.json")
     v1 = text.index("current-baseline-publication-authorization-v1.json")
-    assert v3 < v2 < v1
+    assert v4 < v3 < v2 < v1
+    assert "run_current_baseline_publication_v4_ci.sh" in text
     assert "run_current_baseline_publication_v3_ci.sh" in text
     assert "run_current_baseline_publication_v2_ci.sh" in text
 

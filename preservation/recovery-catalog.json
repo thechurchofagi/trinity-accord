@@ -34,6 +34,25 @@
       "payload_sha256": "132cc58496f903990447f06847325b7393d1dedf8b4eae24ad888f4145b1df14",
       "public_readback": "passed",
       "scope": "Exact non-authoritative repository preservation capsule mirror; external evidence and Chronicle NFT annex payloads remain separately mirrored and referenced."
+    },
+    "current_evidence_checkpoint": {
+      "sequence": 4,
+      "status": "owner_authorized_pending_publication",
+      "authorization": "preservation/current-baseline-publication-authorization-v4.json",
+      "previous_version_doi": "10.5281/zenodo.21855814",
+      "core_concept_doi": "10.5281/zenodo.21739343",
+      "evidence_scope": {
+        "bitcoin_inscriptions": 8,
+        "bitcoin_canonical_originals": 3,
+        "bitcoin_non_amending_ancillary": 5,
+        "ethereum_non_nft_anchors": 12,
+        "ethereum_chronicle_nfts": 175,
+        "nft_contracts": 4,
+        "proof_status_required": "PASS",
+        "ordinary_verification_network_required": false
+      },
+      "arweave_snapshot_requested": false,
+      "future_material_versions_allowed": true
     }
   },
   "external_binary_annexes": {

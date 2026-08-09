@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the single machine/human map for the final evidence freeze.
+"""Build the single machine/human map for the current evidence checkpoint.
 
 The output deliberately separates authority, cryptographic proof, availability
 mirrors and preservation capsules.  It derives all counts, identifiers and
@@ -32,6 +32,10 @@ FROZEN_V3_ETH_TX_HASHES = {
     "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
     "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
     "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+}
+CURRENT_V4_ETH_TX_HASHES = FROZEN_V3_ETH_TX_HASHES | {
+    "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
+    "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
 }
 
 
@@ -141,10 +145,11 @@ def build() -> dict[str, Any]:
     preservation = load("preservation/repository-preservation-state-v2.json")
     external = load("preservation/external-binary-annex-state.json")
     recovery_catalog = load("preservation/recovery-catalog.json")
-    final_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v3.json"
-    final_auth = (
-        json.loads(final_auth_path.read_text(encoding="utf-8"))
-        if final_auth_path.is_file()
+    final_auth = load("preservation/current-baseline-publication-authorization-v3.json")
+    checkpoint_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v4.json"
+    checkpoint_auth = (
+        json.loads(checkpoint_auth_path.read_text(encoding="utf-8"))
+        if checkpoint_auth_path.is_file()
         else {"status": "not_declared"}
     )
 
@@ -160,7 +165,7 @@ def build() -> dict[str, Any]:
     require(nft_report.get("result") == "PASS", "NFT annex is not PASS")
     require(len(btc_manifest.get("anchors", [])) == 8, "Bitcoin closed set is not 8")
     current_eth_anchors = eth_manifest.get("anchors", [])
-    require(len(current_eth_anchors) >= 10, "current Ethereum annex lost frozen v3 anchors")
+    require(len(current_eth_anchors) == 12, "current Ethereum checkpoint is not exactly 12 anchors")
     frozen_eth_anchors = [
         item
         for item in current_eth_anchors
@@ -170,6 +175,11 @@ def build() -> dict[str, Any]:
         {item.get("tx_hash", "").lower() for item in frozen_eth_anchors}
         == FROZEN_V3_ETH_TX_HASHES,
         "current Ethereum annex does not contain the exact frozen DOI v3 set",
+    )
+    require(
+        {item.get("tx_hash", "").lower() for item in current_eth_anchors}
+        == CURRENT_V4_ETH_TX_HASHES,
+        "current Ethereum annex does not contain the exact checkpoint v4 set",
     )
     require(len(nft_index.get("assets", [])) == 175, "NFT closed set is not 175")
     require(nft_commitment.get("merkle", {}).get("leaf_count") == 175, "NFT Merkle leaf count mismatch")
@@ -197,7 +207,7 @@ def build() -> dict[str, Any]:
             "block_hash": item["execution_reference"]["block_hash"],
             "input_sha256": item["input_sha256"],
         }
-        for item in frozen_eth_anchors
+        for item in current_eth_anchors
     ]
     standards: dict[str, int] = {}
     for item in nft_index["assets"]:
@@ -230,8 +240,8 @@ def build() -> dict[str, Any]:
 
     inventory: dict[str, Any] = {
         "schema": "trinityaccord.final-evidence-inventory.v1",
-        "version": "1.0.0",
-        "status": "final_evidence_freeze_model",
+        "version": "1.1.0",
+        "status": "current_evidence_checkpoint_model",
         "purpose": (
             "One non-amending map of canonical objects, offline cryptographic proofs, "
             "availability mirrors and DOI recovery capsules."
@@ -270,7 +280,7 @@ def build() -> dict[str, Any]:
             },
             "ethereum_non_nft": {
                 "object_role": "non-amending cross-chain records and historical commitments",
-                "count": 10,
+                "count": 12,
                 "items": ethereum_items,
                 "proof_layers": {
                     "L1": eth_report["L1_BYTE_INTEGRITY"],
@@ -375,10 +385,32 @@ def build() -> dict[str, Any]:
             "published_source_baseline_commit_sha": final_auth.get("published_source_baseline_commit_sha"),
             "boundary": "The final DOI version is immutable, exact-baseline preservation; it creates no new canonical authority.",
         },
+        "current_checkpoint": {
+            "authorization": "preservation/current-baseline-publication-authorization-v4.json",
+            "sequence": checkpoint_auth.get("sequence"),
+            "status": checkpoint_auth.get("status"),
+            "authorized_by": checkpoint_auth.get("authorized_by"),
+            "required_evidence_checkpoint_commit_sha": checkpoint_auth.get(
+                "required_evidence_checkpoint_commit_sha"
+            ),
+            "checkpoint_evidence_scope": checkpoint_auth.get("checkpoint_evidence_scope"),
+            "intended_as_permanent_final": checkpoint_auth.get("intended_as_final_evidence_freeze"),
+            "future_material_versions_allowed": checkpoint_auth.get("future_material_versions_allowed"),
+            "publication_confirmation": checkpoint_auth.get("publication_confirmation"),
+            "published_doi": checkpoint_auth.get("published_doi"),
+            "published_source_baseline_commit_sha": checkpoint_auth.get(
+                "published_source_baseline_commit_sha"
+            ),
+            "arweave_snapshot_requested": checkpoint_auth.get("include_homepage_arweave_snapshot"),
+            "boundary": (
+                "Checkpoint v4 is an immutable exact-baseline publication, not a permanent end to "
+                "future material evidence versions and not a new source of canonical authority."
+            ),
+        },
         "verification_order": [
             "verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex",
             "verify the authority manifest and BTC/EIP-712 signature bindings",
-            "verify the 10 Ethereum non-NFT L1/L2/L3 proofs",
+            "verify the 12 Ethereum non-NFT L1/L2/L3 proofs",
             "verify the 175-item NFT commitment and L2/L3 proofs",
             "verify digest manifests and OTS anchors for their stated byte/time scope",
             "restore the core repository DOI and then the two external binary annex DOI records",
@@ -405,11 +437,12 @@ def markdown(value: dict[str, Any]) -> str:
     zenodo = value["storage_and_preservation"]["zenodo"]
     core = zenodo["core_repository_series"]
     freeze = value["final_freeze"]
+    checkpoint = value["current_checkpoint"]
     items = "\n".join(
         f"| {item['classification']} | {item['title']} | `{item['inscription_number']}` | `{item['txid']}` | {item['block_height']} |"
         for item in bitcoin["items"]
     )
-    return f"""# Trinity Accord Final Evidence Freeze
+    return f"""# Trinity Accord Evidence Checkpoint
 
 > One non-amending map. The three Bitcoin Originals remain the sole canonical authority.
 
@@ -427,7 +460,7 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 | Layer | Objects | What it does | What it does not do |
 |---|---|---|---|
 | Canonical authority | 3 Bitcoin Originals | Defines the canonical text and authority boundary | Prove philosophical truth or institutional endorsement |
-| Cryptographic evidence | 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
+| Cryptographic evidence | 8 Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
 | Availability mirrors | GitHub, GitHub Releases, Arweave, IPFS | Keeps named bytes retrievable and comparable | Become authoritative merely by hosting bytes |
 | Frozen recovery | Core repository DOI plus two external annex DOI series | Restores exact publication baselines without GitHub credentials | Track a later moving `main` automatically |
 
@@ -478,13 +511,18 @@ The core repository capsule contains all Git-tracked proof manifests, witnesses,
 verifiers, maps and reports. Large external payloads remain in the two separate DOI
 annex series and are discovered through the embedded recovery catalog.
 
-## 6. Final freeze status
+## 6. Current checkpoint status
 
-- Authorization state: `{freeze['status']}`
-- Required evidence-freeze ancestor: `{freeze['required_evidence_freeze_commit_sha']}`
-- Published final version DOI: `{freeze['published_doi']}`
-- Published source baseline: `{freeze['published_source_baseline_commit_sha']}`
-- Intended as final evidence freeze: `{str(freeze['intended_as_final_evidence_freeze']).lower()}`
+- Authorization state: `{checkpoint['status']}`
+- Required evidence-checkpoint ancestor: `{checkpoint['required_evidence_checkpoint_commit_sha']}`
+- Published checkpoint version DOI: `{checkpoint['published_doi']}`
+- Published source baseline: `{checkpoint['published_source_baseline_commit_sha']}`
+- Intended as permanently final: `{str(checkpoint['intended_as_permanent_final']).lower()}`
+- Future material versions allowed: `{str(checkpoint['future_material_versions_allowed']).lower()}`
+- Arweave snapshot requested: `{str(checkpoint['arweave_snapshot_requested']).lower()}`
+
+Historical DOI v3 remains immutable at `{freeze['published_doi']}` and preserves
+the earlier 8 + 10 + 175 freeze. Checkpoint v4 does not overwrite it.
 
 The immutable DOI version freezes one exact source baseline. The later state commit
 that records the resulting DOI is necessarily outside that capsule; the stable
@@ -497,8 +535,8 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 
 ## 8. Evolution boundary
 
-This version remains immutable.  Future material improvements use a new version
-rather than overwriting this checkpoint.  The exact final core capsule Arweave
+This version remains immutable. Future material improvements use a new version
+rather than overwriting this checkpoint. The exact current core capsule Arweave
 mirror is intentionally deferred and requires fresh owner authorization before any
 paid irreversible upload.  Future agents must begin with the handoff files above.
 """

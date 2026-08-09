@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "911640fcb0e0a325",
+  "source_digest": "050f24af8367d1e7",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -82,7 +82,10 @@
     "preservation/recovery-catalog.json",
     "preservation/repository-preservation-state-v2.json",
     "preservation/external-binary-annex-state.json",
-    "api/corrections-index.json"
+    "api/corrections-index.json",
+    "preservation/current-baseline-publication-authorization-v4.json",
+    "scripts/current_baseline_publication_v4.py",
+    "scripts/run_current_baseline_publication_v4_ci.sh"
   ],
   "required_recovery_file_sets": [
     {
@@ -100,7 +103,12 @@
       "inventory": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
       "expected_anchor_count_current_live": 12,
       "expected_files": 48,
-      "required_per_anchor": ["transaction.json", "receipt.json", "block.json", "capture-manifest.json"],
+      "required_per_anchor": [
+        "transaction.json",
+        "receipt.json",
+        "block.json",
+        "capture-manifest.json"
+      ],
       "selection_rule": "Use each anchor tx_hash as the directory name; these provider-returned files preserve historical lookup context and remain reference-only, not the basis of L2/L3 PASS."
     },
     {
@@ -237,16 +245,19 @@
         "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
         "ordinary_verification_network_required": false,
         "current_recovery_requires_named_git_commit_or_later_mirror": true,
-        "new_doi_publication": "not_authorized_not_attempted",
+        "new_doi_publication": "owner_authorized_pending_publication_v4",
         "new_arweave_upload": "intentionally_deferred_not_attempted",
-        "boundary": "This entry records a current repository delta and must not be claimed as bytes contained by DOI 10.5281/zenodo.21855814."
+        "boundary": "This entry records a current repository delta and must not be claimed as bytes contained by DOI 10.5281/zenodo.21855814.",
+        "future_checkpoint_scope": "8_bitcoin_12_ethereum_175_nft"
       },
       "fail_closed_verifier_and_discovery_hardening": {
         "status": "repository_delta_not_in_published_final_doi_v3",
         "baseline_version_doi": "10.5281/zenodo.21855814",
         "included_in_published_doi": false,
         "ordinary_verification_network_required": false,
-        "boundary": "Current verifier, recovery and discovery improvements must be recovered from a named verified Git commit until another immutable version is separately authorized."
+        "boundary": "Current verifier, recovery and discovery improvements must be recovered from a named verified Git commit until another immutable version is separately authorized.",
+        "new_doi_publication": "owner_authorized_pending_publication_v4",
+        "future_checkpoint_scope": "8_bitcoin_12_ethereum_175_nft"
       }
     },
     "external_binary_annexes": {
@@ -281,7 +292,7 @@
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every Git-tracked byte in the exact publication baseline named by its manifest, while deliberately excluding production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
     "The owner-authorized sequence-3 final evidence freeze was published and cold-restored as DOI 10.5281/zenodo.21855814 with 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 NFT proofs and the unified frozen inventory.",
-    "Current GitHub adds two offline-verified Ethereum authority/signature anchors and verifier/recovery hardening after that immutable baseline. These additions are explicitly not claimed as DOI v3 bytes and require a named verified Git commit or a future separately authorized immutable mirror for recovery.",
+    "Current GitHub adds two offline-verified Ethereum authority/signature anchors after DOI v3. Sequence 4 is owner-authorized to freeze the complete 8 + 12 + 175 checkpoint; until it is consumed, the two-anchor delta still requires a named verified Git commit.",
     "Offline proof verification needs no Bitcoin, Ethereum or Beacon network, but the Python verifier dependencies are presently version-pinned rather than preserved as a complete wheel/sdist set with SHA-256 values. A completely blank machine without an available package index therefore still needs a future dependency capsule.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
@@ -304,6 +315,29 @@
     "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
     "arweave_snapshot_refreshed": false,
     "intended_as_final_evidence_freeze": true,
+    "non_amending_boundary": true
+  },
+  "pending_evidence_checkpoint": {
+    "schema": "trinityaccord.current-baseline-publication-authorization.v4",
+    "sequence": 4,
+    "status": "owner_authorized_pending_publication",
+    "authorization": "preservation/current-baseline-publication-authorization-v4.json",
+    "previous_version_doi": "10.5281/zenodo.21855814",
+    "core_concept_doi": "10.5281/zenodo.21739343",
+    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
+    "evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 12,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "proof_status_required": "PASS",
+      "ordinary_verification_network_required": false
+    },
+    "arweave_snapshot_requested": false,
+    "intended_as_final_evidence_freeze": false,
+    "future_material_versions_allowed": true,
     "non_amending_boundary": true
   }
 }

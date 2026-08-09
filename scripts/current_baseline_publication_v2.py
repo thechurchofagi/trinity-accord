@@ -21,6 +21,7 @@ STATE = ROOT / "preservation/repository-preservation-state-v2.json"
 INDEX = ROOT / "api/recovery-index.json"
 SEQ1_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v1.json"
 SEQ3_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v3.json"
+SEQ4_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v4.json"
 
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 PREVIOUS_DOI = "10.5281/zenodo.21831412"
@@ -173,13 +174,44 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
                     "prepared sequence3 state",
                 )
             else:
-                require_equal(state.get("latest_doi"), successor.get("published_doi"), "sequence3 latest DOI")
-                require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence3 state")
-                refresh = index.get("publication_refresh")
-                if not isinstance(refresh, dict):
-                    raise SystemExit("sequence3 recovery publication_refresh missing")
-                require_equal(refresh.get("sequence"), 3, "sequence3 recovery sequence")
-                require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence3 recovery status")
+                sequence3_doi = successor.get("published_doi")
+                if SEQ4_AUTH.is_file():
+                    sequence4 = load(SEQ4_AUTH)
+                    sequence4_status = sequence4.get("status")
+                    require_equal(sequence4.get("sequence"), 4, "sequence4.sequence")
+                    require_equal(sequence4.get("previous_core_version_doi"), sequence3_doi, "sequence4.previous_doi")
+                    previous4 = sequence4.get("previous_publication")
+                    if not isinstance(previous4, dict):
+                        raise SystemExit("sequence4.previous_publication missing")
+                    require_equal(previous4.get("doi"), sequence3_doi, "sequence4.previous_publication.doi")
+                    refresh = index.get("publication_refresh")
+                    if sequence4_status == "pending":
+                        require_equal(state.get("latest_doi"), sequence3_doi, "pending sequence4 predecessor DOI")
+                        require_equal(state.get("publication_status"), "published_and_publicly_restored", "pending sequence4 state")
+                    elif sequence4_status == "prepared":
+                        require_equal(state.get("latest_doi"), sequence3_doi, "prepared sequence4 predecessor DOI")
+                        require_equal(state.get("publication_status"), "prepared_for_evidence_checkpoint_publication_v4", "prepared sequence4 state")
+                        if not isinstance(refresh, dict):
+                            raise SystemExit("sequence4 recovery publication_refresh missing")
+                        require_equal(refresh.get("sequence"), 4, "sequence4 recovery sequence")
+                        require_equal(refresh.get("status"), "prepared_for_evidence_checkpoint_publication", "sequence4 recovery status")
+                    elif sequence4_status == "consumed":
+                        require_equal(state.get("latest_doi"), sequence4.get("published_doi"), "sequence4 latest DOI")
+                        require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence4 state")
+                        if not isinstance(refresh, dict):
+                            raise SystemExit("sequence4 recovery publication_refresh missing")
+                        require_equal(refresh.get("sequence"), 4, "sequence4 recovery sequence")
+                        require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence4 recovery status")
+                    else:
+                        raise SystemExit(f"invalid sequence4 authorization status: {sequence4_status!r}")
+                else:
+                    require_equal(state.get("latest_doi"), sequence3_doi, "sequence3 latest DOI")
+                    require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence3 state")
+                    refresh = index.get("publication_refresh")
+                    if not isinstance(refresh, dict):
+                        raise SystemExit("sequence3 recovery publication_refresh missing")
+                    require_equal(refresh.get("sequence"), 3, "sequence3 recovery sequence")
+                    require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence3 recovery status")
             validate_sequence1_history()
             return
 

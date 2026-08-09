@@ -52,8 +52,8 @@
     "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
     "current_offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "published_final_doi_v3_includes_this_delta": false,
-    "new_doi_publication_status": "not_authorized_not_attempted",
-    "new_arweave_upload_status": "intentionally_deferred_not_attempted",
+    "new_doi_publication_status": "owner_authorized_pending_publication_v4",
+    "new_arweave_upload_status": "intentionally_deferred_not_authorized",
     "recovery_boundary": "The immutable v3 DOI restores the frozen 10-anchor checkpoint. Until a future owner-authorized immutable refresh, the two-anchor delta requires a verified Git commit or another future hash-matched mirror."
   },
   "versioning_semantics": {
@@ -171,12 +171,12 @@
     "continuation_note": "After merge, record the exact merge/deployment identity from GitHub history. Do not reinterpret this current 12-anchor GitHub state as bytes contained in the immutable 10-anchor DOI v3 freeze."
   },
   "future_agent_start_sequence": [
-    "Read api/final-evidence-inventory.v1.json as the immutable DOI v3 snapshot, then read api/evidence-manifest.json and api/ethereum-address-evidence-scope.v1.json for the current live 12-anchor state.",
+    "Read api/final-evidence-inventory.v1.json as the current 8 + 12 + 175 checkpoint inventory; read its historical final_freeze object for immutable DOI v3 and current_checkpoint for sequence 4.",
     "Read api/evidence-relationship-map.v1.json and distinguish every frozen-DOI edge from moving-GitHub edges.",
     "Read FINAL-EVIDENCE-FREEZE.md, EVIDENCE-EVOLUTION.md and this plan.",
     "Run every checked-in Bitcoin, Ethereum and NFT offline verifier before proposing changes.",
     "Perform DOI-only cold restoration of the core repository and both external annex DOI records.",
-    "Compare current GitHub main against frozen source baseline 887322dc7f6f64efd04f7452e2039ee4440b226b and produce an explicit delta report.",
+    "While sequence 4 is pending, compare current GitHub main against DOI v3 source baseline 887322dc7f6f64efd04f7452e2039ee4440b226b and preserve the explicit two-anchor delta boundary.",
     "Separate cryptographic proof defects from preservation, discovery, dependency and presentation improvements.",
     "Change proof or commitment bytes only when a reproduced defect or material new evidence requires it.",
     "Publish a new immutable DOI version only after all material changes pass fail-closed tests and public cold restore.",
@@ -218,13 +218,14 @@
     "new_zenodo_publication_requires_fresh_owner_authorization": true,
     "paid_arweave_upload_requires_fresh_owner_authorization_and_cost_cap": true,
     "canonical_authority_or_governance_changes_require_explicit_owner_direction": true,
-    "future_agents_must_not_use_repository_credentials_outside_existing_guarded_workflows": true
+    "future_agents_must_not_use_repository_credentials_outside_existing_guarded_workflows": true,
+    "latest_zenodo_authorization": "sequence_4_checkpoint_authorized_pending_publication"
   },
   "canonical_authority": "Bitcoin Originals only",
   "non_amending_boundary": true,
   "not_instruction_override": true,
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "002793693b8880b2",
+  "source_digest": "571676d25322f7b2",
   "limitations": [
     "This plan records repository maintenance intent and does not amend the Bitcoin Originals.",
     "Dates and cost observations are planning checkpoints, not automatic authorization or guarantees of future service availability."
@@ -235,5 +236,24 @@
     "a future evidence refresh is required",
     "Arweave publication has been authorized or completed",
     "philosophical truth or independent institutional endorsement"
-  ]
+  ],
+  "pending_checkpoint_v4": {
+    "status": "owner_authorized_pending_publication",
+    "authorization": "preservation/current-baseline-publication-authorization-v4.json",
+    "core_concept_doi": "10.5281/zenodo.21739343",
+    "previous_version_doi": "10.5281/zenodo.21855814",
+    "evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 12,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "proof_status_required": "PASS",
+      "ordinary_verification_network_required": false
+    },
+    "arweave_upload_authorized": false,
+    "intended_as_permanent_final": false,
+    "future_material_versions_allowed": true
+  }
 }

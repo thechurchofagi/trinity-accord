@@ -187,10 +187,12 @@ def test_consumed_refresh_has_complete_public_recovery_evidence():
 
     seq2 = load(ROOT / "preservation/current-baseline-publication-authorization-v2.json")
     seq3 = load(ROOT / "preservation/current-baseline-publication-authorization-v3.json")
+    seq4 = load(ROOT / "preservation/current-baseline-publication-authorization-v4.json")
     assert seq2["status"] == "consumed"
     assert seq2["previous_core_version_doi"] == seq1["published_doi"]
     assert seq3["previous_core_version_doi"] == seq2["published_doi"]
-    active = seq3 if seq3["status"] == "consumed" else seq2
+    assert seq4["previous_core_version_doi"] == seq3["published_doi"]
+    active = seq4 if seq4["status"] == "consumed" else seq3
     assert state["latest_doi"] == active["published_doi"]
     assert state["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]
     assert state["latest_package_identity_sha256"] == active["published_package_identity_sha256"]
@@ -205,6 +207,13 @@ def test_consumed_refresh_has_complete_public_recovery_evidence():
             "published_source_baseline_commit_sha"
         ]
         assert versions[seq3["published_doi"]]["package_identity_sha256"] == seq3[
+            "published_package_identity_sha256"
+        ]
+    if seq4["status"] == "consumed":
+        assert versions[seq4["published_doi"]]["git_commit_sha"] == seq4[
+            "published_source_baseline_commit_sha"
+        ]
+        assert versions[seq4["published_doi"]]["package_identity_sha256"] == seq4[
             "published_package_identity_sha256"
         ]
 

@@ -26,6 +26,7 @@ EVIDENCE_MANIFEST = ROOT / "api/evidence-manifest.json"
 EXTERNAL_STATE = ROOT / "preservation/external-binary-annex-state.json"
 RECOVERY_CATALOG = ROOT / "preservation/recovery-catalog.json"
 SEQ2_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v2.json"
+SEQ4_AUTH = ROOT / "preservation/current-baseline-publication-authorization-v4.json"
 
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 PREVIOUS_DOI = "10.5281/zenodo.21846249"
@@ -330,12 +331,56 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require_equal(catalog.get("current_verified_source_git_commit_sha"), source, "catalog.current_source")
 
 
+def validate_superseded_consumed(auth: dict[str, Any], state: dict[str, Any]) -> None:
+    """Validate sequence 3 as immutable history after sequence 4 is declared."""
+    require_equal(auth.get("status"), "consumed", "authorization.status")
+    source = auth.get("published_source_baseline_commit_sha")
+    doi = auth.get("published_doi")
+    package = auth.get("published_package_identity_sha256")
+    record_id = auth.get("published_record_id")
+    require(isinstance(source, str) and COMMIT_RE.fullmatch(source) is not None, "invalid historical source")
+    require(isinstance(doi, str) and DOI_RE.fullmatch(doi) is not None, "invalid historical DOI")
+    require(isinstance(package, str) and SHA256_RE.fullmatch(package) is not None, "invalid historical package")
+    require(isinstance(record_id, int) and doi.endswith(str(record_id)), "historical DOI/record mismatch")
+    versions = state.get("versions")
+    require(isinstance(versions, list), "state.versions missing")
+    matches = [item for item in versions if isinstance(item, dict) and item.get("doi") == doi]
+    require(len(matches) == 1, "sequence-3 DOI must appear exactly once in preservation history")
+    require_equal(matches[0].get("git_commit_sha"), source, "historical.source")
+    require_equal(matches[0].get("package_identity_sha256"), package, "historical.package")
+    prepared = load(PREPARED)
+    observation = load(OBSERVATION)
+    require_equal(prepared.get("status"), "published_verified", "historical.prepared.status")
+    require_equal(prepared.get("source_git_commit_sha"), source, "historical.prepared.source")
+    require_equal(prepared.get("version_doi"), doi, "historical.prepared.doi")
+    require_equal(observation.get("status"), "passed", "historical.observation.status")
+    require_equal(observation.get("source_git_commit_sha"), source, "historical.observation.source")
+    require_equal(observation.get("version_doi"), doi, "historical.observation.doi")
+    successor = load(SEQ4_AUTH)
+    require_equal(successor.get("sequence"), 4, "sequence4.sequence")
+    require_equal(successor.get("previous_core_version_doi"), doi, "sequence4.previous_doi")
+    previous = successor.get("previous_publication")
+    require(isinstance(previous, dict), "sequence4.previous_publication missing")
+    require_equal(previous.get("source_baseline_commit_sha"), source, "sequence4.previous.source")
+    require_equal(previous.get("doi"), doi, "sequence4.previous.doi")
+    require_equal(previous.get("package_identity_sha256"), package, "sequence4.previous.package")
+
+
 def validate() -> None:
     auth = load(AUTH)
     state = load(STATE)
     index = load(INDEX)
     validate_static_auth(auth)
     validate_sequence2_history()
+    if SEQ4_AUTH.is_file():
+        successor_status = load(SEQ4_AUTH).get("status")
+        if successor_status in {"pending", "prepared", "consumed"}:
+            validate_superseded_consumed(auth, state)
+            print(
+                "Final evidence baseline publication v3 historical state valid; "
+                f"sequence 4 is {successor_status}"
+            )
+            return
     validate_relationship_topology()
     status = auth.get("status")
     if status == "pending":

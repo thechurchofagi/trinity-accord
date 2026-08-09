@@ -7,7 +7,10 @@ on:
     paths:
       - .github/workflows/repository-preservation-capsule.yml
       - scripts/run_repository_preservation_refresh_ci.sh
+      - scripts/run_current_baseline_publication_v4_ci.sh
+      - scripts/current_baseline_publication_v4.py
       - preservation/repository-preservation-refresh-authorization.json
+      - preservation/current-baseline-publication-authorization-v4.json
   schedule:
     - cron: "17 9 1 1,4,7,10 *"
   workflow_dispatch:

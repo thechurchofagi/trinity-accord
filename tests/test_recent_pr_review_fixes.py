@@ -422,7 +422,7 @@ def test_external_annex_writer_validates_core_doi_roles_before_publish(
 
 
 def test_final_runner_freezes_all_named_binding_roots():
-    runner = (ROOT / "scripts/run_current_baseline_publication_v3_ci.sh").read_text(
+    runner = (ROOT / "scripts/run_current_baseline_publication_v4_ci.sh").read_text(
         encoding="utf-8"
     )
     for path in (
@@ -438,17 +438,35 @@ def test_final_runner_freezes_all_named_binding_roots():
 
 def test_evidence_evolution_handoff_is_consistent_and_non_authorizing():
     plan = json.loads((ROOT / "api/evidence-evolution-plan.v1.json").read_text(encoding="utf-8"))
+    checkpoint_auth = json.loads(
+        (ROOT / "preservation/current-baseline-publication-authorization-v4.json").read_text(
+            encoding="utf-8"
+        )
+    )
     assert plan["source_digest"] == canonical_digest(plan)
     assert plan["status"] == "active_handoff"
-    assert plan["current_checkpoint"]["core_version_doi"] == "10.5281/zenodo.21855814"
+    expected_doi = (
+        checkpoint_auth["published_doi"]
+        if checkpoint_auth["status"] == "consumed"
+        else "10.5281/zenodo.21855814"
+    )
+    assert plan["current_checkpoint"]["core_version_doi"] == expected_doi
     assert plan["current_checkpoint"]["evidence_scope"]["bitcoin_inscriptions"] == 8
-    assert plan["current_checkpoint"]["evidence_scope"]["ethereum_non_nft_anchors"] == 10
+    assert plan["current_checkpoint"]["evidence_scope"]["ethereum_non_nft_anchors"] == (
+        12 if checkpoint_auth["status"] == "consumed" else 10
+    )
     assert plan["current_checkpoint"]["evidence_scope"]["ethereum_chronicle_nfts"] == 175
-    assert plan["current_checkpoint"]["checkpoint_kind"] == "immutable_published_freeze_not_live_main"
+    assert plan["current_checkpoint"]["checkpoint_kind"] in {
+        "immutable_published_freeze_not_live_main",
+        "immutable_published_checkpoint_not_live_main",
+    }
     live = plan["live_repository_checkpoint"]
     assert live["evidence_scope"]["ethereum_non_nft_anchors"] == 12
     assert live["published_final_doi_v3_includes_this_delta"] is False
-    assert live["new_doi_publication_status"] == "not_authorized_not_attempted"
+    assert live["new_doi_publication_status"] in {
+        "owner_authorized_pending_publication_v4",
+        "published_verified_and_consumed",
+    }
     assert len(live["ethereum_post_freeze_additions"]) == 2
     arweave = plan["owner_decision"]["final_core_arweave_mirror"]
     assert arweave["status"] == "intentionally_deferred"

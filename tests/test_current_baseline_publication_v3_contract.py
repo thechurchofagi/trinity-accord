@@ -67,7 +67,11 @@ def test_final_inventory_is_derived_and_complete():
     assert inventory["authority_boundary"]["canonical_count"] == 3
     assert inventory["evidence_sets"]["bitcoin_inscriptions"]["count"] == 8
     assert inventory["evidence_sets"]["bitcoin_inscriptions"]["network_required_for_verification"] is False
-    assert inventory["evidence_sets"]["ethereum_non_nft"]["count"] == 10
+    # The compatibility inventory path now exposes the current v4 checkpoint;
+    # the immutable v3 10-anchor scope remains under final_freeze history.
+    assert inventory["evidence_sets"]["ethereum_non_nft"]["count"] == 12
+    assert inventory["final_freeze"]["published_doi"] == "10.5281/zenodo.21855814"
+    assert inventory["current_checkpoint"]["sequence"] == 4
     assert inventory["evidence_sets"]["ethereum_non_nft"]["network_required_for_existing_proof_verification"] is False
     assert inventory["evidence_sets"]["ethereum_chronicle_nft"]["asset_count"] == 175
     assert inventory["evidence_sets"]["ethereum_chronicle_nft"]["network_required_for_existing_proof_verification"] is False
@@ -119,7 +123,8 @@ def test_final_runner_is_zenodo_only_retry_safe_and_dispatcher_priority_is_corre
     assert "ARKEY" not in runner
     assert "arweave_upload_homepage_snapshot" not in runner
     dispatcher = DISPATCHER.read_text(encoding="utf-8")
-    assert dispatcher.index("current-baseline-publication-authorization-v3.json") < dispatcher.index(
-        "current-baseline-publication-authorization-v2.json"
-    )
+    assert dispatcher.index("current-baseline-publication-authorization-v4.json") < dispatcher.index(
+        "current-baseline-publication-authorization-v3.json"
+    ) < dispatcher.index("current-baseline-publication-authorization-v2.json")
+    assert "run_current_baseline_publication_v4_ci.sh" in dispatcher
     assert "run_current_baseline_publication_v3_ci.sh" in dispatcher

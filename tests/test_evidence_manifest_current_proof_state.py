@@ -12,6 +12,7 @@ ETH_REPORT = ROOT / "evidence" / "ethereum-evidence-annex-v1" / "reports" / "OFF
 NFT_REPORT = ROOT / "evidence" / "nft-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 BTC_REPORT = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 FINAL_AUTH = ROOT / "preservation" / "current-baseline-publication-authorization-v3.json"
+CHECKPOINT_AUTH = ROOT / "preservation" / "current-baseline-publication-authorization-v4.json"
 
 CONCEPT_DOI = "10.5281/zenodo.21739343"
 LATEST_REPOSITORY_DOI = "10.5281/zenodo.21846249"
@@ -31,8 +32,9 @@ def source_digest(data: dict) -> str:
 
 
 def final_publication_state() -> tuple[dict, str]:
-    auth = load(FINAL_AUTH)
-    doi = auth["published_doi"] if auth["status"] == "consumed" else LATEST_REPOSITORY_DOI
+    auth = load(CHECKPOINT_AUTH)
+    historical = load(FINAL_AUTH)
+    doi = auth["published_doi"] if auth["status"] == "consumed" else historical["published_doi"]
     return auth, doi
 
 
@@ -51,7 +53,10 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert "current_cryptographic_proof_state" in data["warning"]
 
     current = data["current_cryptographic_proof_state"]
-    assert current["status"] == "offline_verifiable_with_explicit_post_freeze_delta"
+    assert current["status"] in {
+        "offline_verifiable_with_explicit_post_freeze_delta",
+        "offline_verifiable_and_immutable_checkpoint_v4",
+    }
 
     bitcoin = current["bitcoin_inscriptions"]
     assert bitcoin["inscription_count"] == 8
@@ -77,14 +82,19 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     eth = current["ethereum_non_nft"]
     assert eth["anchor_count"] == 12
     assert eth["published_final_doi_v3_anchor_count"] == 10
-    assert eth["post_freeze_live_delta_anchor_count"] == 2
+    assert eth["post_freeze_live_delta_anchor_count"] == (
+        0 if final_auth["status"] == "consumed" else 2
+    )
     assert eth["l1_byte_integrity"] == "PASS"
     assert eth["l2_execution_inclusion"] == "PASS"
     assert eth["l3_checkpoint_relative_finality"] == "PASS"
     assert eth["signed_transaction_semantics"] == "PASS"
     assert eth["receipt_success_semantics"] == "PASS"
     assert eth["eip712_authority_signature_binding"] == "PASS"
-    assert "does not contain" in eth["doi_boundary"]
+    if final_auth["status"] == "consumed":
+        assert "contains all 12" in eth["doi_boundary"]
+    else:
+        assert "does not contain" in eth["doi_boundary"]
     assert "weak-subjectivity" in eth["trust_boundary"]
     assert ROOT.joinpath(eth["manifest"]).is_file()
     assert ROOT.joinpath(eth["offline_report"]).is_file()
@@ -110,18 +120,24 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert preservation["cold_restore"] == "PASS"
     assert preservation["final_freeze_authorization"] == "preservation/current-baseline-publication-authorization-v3.json"
     assert preservation["final_freeze_intended_as_last_planned_evidence_version"] is True
-    assert preservation["live_repository_delta"]["status"] == "verified_not_in_published_final_doi_v3"
-    assert preservation["live_repository_delta"]["new_doi_publication"] == "not_authorized_not_attempted"
+    assert preservation["current_checkpoint_authorization"] == "preservation/current-baseline-publication-authorization-v4.json"
+    assert preservation["current_checkpoint_intended_as_permanent_final"] is False
+    assert preservation["current_checkpoint_future_material_versions_allowed"] is True
     if final_auth["status"] == "consumed":
-        assert preservation["status"] == "final_frozen_and_publicly_restored"
-        assert preservation["final_freeze_status"] == "published_verified_and_consumed"
-        assert preservation["final_freeze_version_doi"] == expected_repository_doi
-        assert preservation["final_freeze_source_baseline_commit_sha"] == final_auth["published_source_baseline_commit_sha"]
-        assert "exact owner-authorized final evidence baseline" in preservation["published_baseline_boundary"]
+        assert preservation["status"] == "checkpoint_published_and_publicly_restored"
+        assert preservation["current_checkpoint_status"] == "published_verified_and_consumed"
+        assert preservation["current_checkpoint_version_doi"] == expected_repository_doi
+        assert preservation["current_checkpoint_source_baseline_commit_sha"] == final_auth["published_source_baseline_commit_sha"]
+        assert "8 Bitcoin + 12 Ethereum + 175 NFT" in preservation["published_baseline_boundary"]
+        assert preservation["live_repository_delta"]["status"] == "incorporated_into_published_checkpoint_v4"
     else:
-        assert preservation["status"] == "published_and_publicly_restored"
-        assert preservation["final_freeze_status"] in {"owner_authorized_pending_publication", "prepared"}
-        assert "latest public doi" in preservation["published_baseline_boundary"].lower()
+        assert preservation["status"] == "final_frozen_and_publicly_restored"
+        assert preservation["current_checkpoint_status"] in {"owner_authorized_pending_publication", "prepared"}
+        assert preservation["live_repository_delta"]["status"] == "verified_not_in_published_final_doi_v3"
+        assert preservation["live_repository_delta"]["new_doi_publication"] in {
+            "owner_authorized_pending_publication_v4",
+            "prepared",
+        }
     assert ROOT.joinpath(preservation["state"]).is_file()
     assert ROOT.joinpath(preservation["latest_observation"]).is_file()
 
@@ -210,16 +226,18 @@ def test_recovery_index_routes_all_offline_annexes_without_overclaiming_current_
     assert file_sets["chronicle_nft_l3_witnesses"]["expected_files"] == 175
     additions = data["latest_trusted_release"]["repository_additions_after_published_baseline"]
     if final_auth["status"] == "consumed":
+        assert additions == {}
+        assert data["publication_refresh"]["sequence"] == 4
+        assert data["publication_refresh"]["status"] == "published_verified_and_consumed"
+    else:
         eth_delta = additions["ethereum_non_nft_two_anchor_delta"]
         assert eth_delta["included_in_published_doi"] is False
         assert eth_delta["current_anchor_count"] == 12
         assert eth_delta["published_doi_anchor_count"] == 10
-        assert eth_delta["new_doi_publication"] == "not_authorized_not_attempted"
+        assert eth_delta["new_doi_publication"] == "owner_authorized_pending_publication_v4"
         assert len(eth_delta["tx_hashes"]) == 2
-        assert data["publication_refresh"]["sequence"] == 3
-        assert data["publication_refresh"]["status"] == "published_verified_and_consumed"
-    else:
-        addition = additions["final_evidence_freeze"]
-        assert addition["ordinary_verification_network_required"] is False
-        assert addition["status"] == "owner_authorized_pending_final_repository_capsule_publication"
-        assert "must not be claimed" in addition["boundary"]
+        assert data["pending_evidence_checkpoint"]["sequence"] == 4
+        assert data["pending_evidence_checkpoint"]["status"] in {
+            "owner_authorized_pending_publication",
+            "prepared",
+        }

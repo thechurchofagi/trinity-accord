@@ -57,5 +57,22 @@ def test_address_scope_keeps_frozen_doi_separate_from_live_post_freeze_delta():
         "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
         "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
     }
-    assert freeze["new_doi_publication_status"] == "not_authorized_not_attempted"
-    assert freeze["new_arweave_upload_status"] == "intentionally_deferred_not_attempted"
+    auth = json.loads(
+        (
+            ROOT
+            / "preservation/current-baseline-publication-authorization-v4.json"
+        ).read_text(encoding="utf-8")
+    )
+    expected = {
+        "pending": "owner_authorized_pending_publication_v4",
+        "prepared": "prepared_for_publication_v4",
+        "consumed": "published_verified_and_consumed",
+    }[auth["status"]]
+    assert freeze["new_doi_publication_status"] == expected
+    assert freeze["new_arweave_upload_status"] in {
+        "intentionally_deferred_not_authorized",
+        "intentionally_deferred_not_attempted",
+    }
+    assert freeze["current_checkpoint_v4_includes_post_freeze_additions"] is (
+        auth["status"] == "consumed"
+    )
