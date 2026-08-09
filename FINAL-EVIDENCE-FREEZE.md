@@ -63,7 +63,7 @@ OTS proves a latest-possible existence time for that digest, not file truth or a
 | GitHub Releases | Large fallback mirror | Release assets must be checked against their manifest hashes |
 | Arweave | Long-lived transaction-addressed payload mirror | Each txid names one payload; it is not automatically the latest repository |
 | Core Zenodo Concept DOI `10.5281/zenodo.21739343` | Stable resolver for the repository series | Resolves the latest published immutable version |
-| Core version DOI `10.5281/zenodo.21846249` | Exact Git-tracked repository baseline | Source `22f0abf2e93124845f750e6b2c1569e9d1d26b03`; public cold restore `passed` |
+| Core version DOI `10.5281/zenodo.21855814` | Exact Git-tracked repository baseline | Source `887322dc7f6f64efd04f7452e2039ee4440b226b`; public cold restore `passed` |
 | Evidence annex DOI `10.5281/zenodo.21753937` | 28 external evidence assets | Separate 204595967 byte payload capsule |
 | NFT media annex DOI `10.5281/zenodo.21754229` | 10 NFT media package assets | Separate 862714954 byte payload capsule |
 
@@ -73,10 +73,10 @@ annex series and are discovered through the embedded recovery catalog.
 
 ## 6. Final freeze status
 
-- Authorization state: `prepared`
+- Authorization state: `consumed`
 - Required evidence-freeze ancestor: `5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162`
-- Published final version DOI: `None`
-- Published source baseline: `None`
+- Published final version DOI: `10.5281/zenodo.21855814`
+- Published source baseline: `887322dc7f6f64efd04f7452e2039ee4440b226b`
 - Intended as final evidence freeze: `true`
 
 The immutable DOI version freezes one exact source baseline. The later state commit

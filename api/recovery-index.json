@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "98ef514312db1d55",
+  "source_digest": "30a777b9efe7c1e3",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -134,36 +134,22 @@
   "latest_trusted_release": {
     "status": "published_and_publicly_restored",
     "repository_preservation": {
-      "doi": "10.5281/zenodo.21846249",
-      "record_id": 21846249,
+      "doi": "10.5281/zenodo.21855814",
+      "record_id": 21855814,
       "concept_doi": "10.5281/zenodo.21739343",
-      "git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
-      "git_tree_oid": "6ce8ef104f712cac7fc5932c5bc568841c707480",
-      "package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823",
+      "git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+      "git_tree_oid": "7defec4fe1216fb44e922036b6e5cd43bbeadd1a",
+      "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
       "github_required_for_recovery": false,
       "github_required_for_discovery": false,
       "public_metadata_verification": "passed",
       "public_cold_restore": "passed",
-      "coverage_status": "exact_published_baseline",
+      "coverage_status": "exact_final_evidence_baseline",
       "live_main_equivalence_claimed": false,
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
     },
-    "repository_additions_after_published_baseline": {
-      "final_evidence_freeze": {
-        "status": "owner_authorized_pending_final_repository_capsule_publication",
-        "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
-        "contains": [
-          "8-item Bitcoin inscription L1/L2/L3 proof annex",
-          "10-item non-NFT Ethereum L1/L2/L3 proof annex",
-          "175-item Chronicle NFT commitment and L2/L3 proof annex",
-          "frozen Bitcoin and Ethereum proof primitives",
-          "unified evidence inventory, relationship map and recovery topology"
-        ],
-        "ordinary_verification_network_required": false,
-        "boundary": "The current public repository DOI remains a valid exact older baseline, but it must not be claimed to contain the later Bitcoin annex or final unified inventory until sequence 3 is published and publicly restored."
-      }
-    },
+    "repository_additions_after_published_baseline": {},
     "external_binary_annexes": {
       "evidence": {
         "doi": "10.5281/zenodo.21753937",
@@ -208,26 +194,15 @@
   "publication_refresh": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v3",
     "sequence": 3,
-    "status": "prepared_for_final_evidence_baseline_publication",
-    "authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869",
-    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
-    "previous_version_doi": "10.5281/zenodo.21846249",
+    "status": "published_verified_and_consumed",
+    "source_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+    "version_doi": "10.5281/zenodo.21855814",
+    "record_id": 21855814,
     "core_concept_doi": "10.5281/zenodo.21739343",
+    "previous_version_doi": "10.5281/zenodo.21846249",
+    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
     "arweave_snapshot_refreshed": false,
     "intended_as_final_evidence_freeze": true,
     "non_amending_boundary": true
-  },
-  "pending_final_freeze": {
-    "schema": "trinityaccord.current-baseline-publication-authorization.v3",
-    "sequence": 3,
-    "status": "prepared",
-    "authorization": "preservation/current-baseline-publication-authorization-v3.json",
-    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
-    "previous_version_doi": "10.5281/zenodo.21846249",
-    "core_concept_doi": "10.5281/zenodo.21739343",
-    "include_homepage_arweave_snapshot": false,
-    "intended_as_final_evidence_freeze": true,
-    "non_amending_boundary": true,
-    "authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869"
   }
 }

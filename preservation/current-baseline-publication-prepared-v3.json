@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.current-baseline-publication-prepared.v3",
   "sequence": 3,
-  "status": "prepared",
+  "status": "published_verified",
   "base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869",
   "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
   "previous_version_doi": "10.5281/zenodo.21846249",
@@ -22,5 +22,9 @@
     "non_amending": true,
     "bitcoin_originals_prevail": true,
     "repository_doi_is_exact_baseline_not_live_main": true
-  }
+  },
+  "source_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+  "version_doi": "10.5281/zenodo.21855814",
+  "zenodo_record_id": 21855814,
+  "zenodo_package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c"
 }
