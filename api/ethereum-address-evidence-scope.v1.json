@@ -761,11 +761,11 @@
       "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
       "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd"
     ],
-    "new_doi_publication_status": "owner_authorized_pending_publication_v4",
+    "new_doi_publication_status": "prepared_for_publication_v4",
     "new_arweave_upload_status": "intentionally_deferred_not_authorized",
     "current_checkpoint_v4_includes_post_freeze_additions": false,
     "current_checkpoint_v4_authorization": "preservation/current-baseline-publication-authorization-v4.json"
   },
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "beae5b002aa247ec"
+  "source_digest": "cadcfaab3a488ba7"
 }

@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.repository-preservation-zenodo-state.v2",
-  "publication_status": "published_and_publicly_restored",
+  "publication_status": "prepared_for_evidence_checkpoint_publication_v4",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
   "latest_capsule_id": "repository-887322dc7f6f",
   "latest_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
@@ -288,11 +288,11 @@
   "live_main_equivalence_claimed": false,
   "coverage_scope": "exact Git-tracked final evidence baseline named by latest_git_commit_sha",
   "previous_verified_version": {
-    "doi": "10.5281/zenodo.21846249",
-    "record_id": 21846249,
-    "git_commit_sha": "22f0abf2e93124845f750e6b2c1569e9d1d26b03",
-    "git_tree_oid": "6ce8ef104f712cac7fc5932c5bc568841c707480",
-    "package_identity_sha256": "afdc93dd20f64ab6bd36b98410ef0d72a10b2f5cf5d722634d5c3ada4d924823"
+    "doi": "10.5281/zenodo.21855814",
+    "record_id": 21855814,
+    "git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+    "git_tree_oid": "7defec4fe1216fb44e922036b6e5cd43bbeadd1a",
+    "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c"
   },
   "homepage_machine_snapshot_arweave": {
     "schema": "trinityaccord.homepage-arweave-upload-result.v1",
@@ -326,7 +326,7 @@
       "bitcoin_originals_prevail": true
     }
   },
-  "prepared_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869",
+  "prepared_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
   "planned_homepage_arweave_snapshot": false,
   "homepage_snapshot_refresh": {
     "status": "not_requested_sequence_3",
@@ -351,5 +351,22 @@
     "intended_as_final_evidence_freeze": true,
     "arweave_snapshot_refreshed": false,
     "non_amending_boundary": true
+  },
+  "current_evidence_checkpoint": {
+    "status": "prepared",
+    "sequence": 4,
+    "evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 12,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "proof_status_required": "PASS",
+      "ordinary_verification_network_required": false
+    },
+    "intended_as_final_evidence_freeze": false,
+    "future_material_versions_allowed": true,
+    "arweave_snapshot_refreshed": false
   }
 }

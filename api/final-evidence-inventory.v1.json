@@ -409,7 +409,7 @@
         "source_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
         "git_tree_oid": "7defec4fe1216fb44e922036b6e5cd43bbeadd1a",
         "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
-        "status": "published_and_publicly_restored",
+        "status": "prepared_for_evidence_checkpoint_publication_v4",
         "public_cold_restore": "passed",
         "boundary": "A version DOI freezes one exact Git-tracked publication baseline. The Concept DOI resolves the latest published version; neither is a moving GitHub main."
       },
@@ -446,7 +446,7 @@
   "current_checkpoint": {
     "authorization": "preservation/current-baseline-publication-authorization-v4.json",
     "sequence": 4,
-    "status": "pending",
+    "status": "prepared",
     "authorized_by": "thechurchofagi",
     "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
     "checkpoint_evidence_scope": {
@@ -484,5 +484,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "f6ca0d62c71d3273"
+  "source_digest": "81db1bf494b6e9fc"
 }

@@ -593,14 +593,15 @@
       ],
       "latest_version_doi": "10.5281/zenodo.21855814",
       "pending_checkpoint_v4": {
-        "status": "owner_authorized_pending_publication",
+        "status": "prepared",
         "authorization": "preservation/current-baseline-publication-authorization-v4.json",
         "scope": {
           "bitcoin_inscriptions": 8,
           "ethereum_non_nft": 12,
           "chronicle_nft": 175
         },
-        "arweave_upload_requested": false
+        "arweave_upload_requested": false,
+        "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
       }
     },
     {

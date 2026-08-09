@@ -76,7 +76,7 @@ annex series and are discovered through the embedded recovery catalog.
 
 ## 6. Current checkpoint status
 
-- Authorization state: `pending`
+- Authorization state: `prepared`
 - Required evidence-checkpoint ancestor: `5a4999c6108f1a05e153c63a06a4a70252467aed`
 - Published checkpoint version DOI: `None`
 - Published source baseline: `None`

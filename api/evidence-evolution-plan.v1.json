@@ -225,7 +225,7 @@
   "non_amending_boundary": true,
   "not_instruction_override": true,
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "571676d25322f7b2",
+  "source_digest": "d8a4ee5f3a513ca1",
   "limitations": [
     "This plan records repository maintenance intent and does not amend the Bitcoin Originals.",
     "Dates and cost observations are planning checkpoints, not automatic authorization or guarantees of future service availability."
@@ -238,7 +238,7 @@
     "philosophical truth or independent institutional endorsement"
   ],
   "pending_checkpoint_v4": {
-    "status": "owner_authorized_pending_publication",
+    "status": "prepared",
     "authorization": "preservation/current-baseline-publication-authorization-v4.json",
     "core_concept_doi": "10.5281/zenodo.21739343",
     "previous_version_doi": "10.5281/zenodo.21855814",
@@ -254,6 +254,7 @@
     },
     "arweave_upload_authorized": false,
     "intended_as_permanent_final": false,
-    "future_material_versions_allowed": true
+    "future_material_versions_allowed": true,
+    "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
   }
 }

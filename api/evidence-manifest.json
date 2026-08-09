@@ -210,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "39c7418060c93679",
+  "source_digest": "8b1a84837faf5e3d",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -298,7 +298,7 @@
       "state": "preservation/repository-preservation-state-v2.json",
       "latest_observation": "preservation/current-baseline-publication-observation-v3.json",
       "cold_restore": "PASS",
-      "published_baseline_boundary": "This DOI is the exact owner-authorized final evidence baseline containing 8 Bitcoin inscriptions, the frozen 10-anchor Ethereum revision, 175 NFT proofs and the unified frozen inventory. It is not moving GitHub main and does not contain the later two-anchor Ethereum delta.",
+      "published_baseline_boundary": "DOI v3 remains the latest public immutable baseline while the owner-authorized 8 + 12 + 175 checkpoint is prepared and not yet published.",
       "live_repository_delta": {
         "status": "verified_not_in_published_final_doi_v3",
         "ethereum_non_nft_additions": 2,
@@ -316,7 +316,7 @@
       "final_freeze_source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
       "final_freeze_package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
       "current_checkpoint_authorization": "preservation/current-baseline-publication-authorization-v4.json",
-      "current_checkpoint_status": "owner_authorized_pending_publication",
+      "current_checkpoint_status": "prepared",
       "current_checkpoint_required_evidence_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
       "current_checkpoint_intended_as_permanent_final": false,
       "current_checkpoint_future_material_versions_allowed": true,
@@ -330,7 +330,8 @@
         "proof_status_required": "PASS",
         "ordinary_verification_network_required": false
       },
-      "current_checkpoint_arweave_upload_requested": false
+      "current_checkpoint_arweave_upload_requested": false,
+      "current_checkpoint_authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

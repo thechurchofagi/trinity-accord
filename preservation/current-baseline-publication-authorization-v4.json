@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.current-baseline-publication-authorization.v4",
   "sequence": 4,
-  "status": "pending",
+  "status": "prepared",
   "authorized_by": "thechurchofagi",
   "authorized_at_utc": "2026-08-09T08:28:05Z",
   "authorization_basis": "The repository owner delegated the publication decision and explicitly authorized publication if the evidence review concluded that a new DOI checkpoint was warranted.",
@@ -34,5 +34,6 @@
     "nft_contracts": 4,
     "proof_status_required": "PASS",
     "ordinary_verification_network_required": false
-  }
+  },
+  "prepared_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
 }

@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "050f24af8367d1e7",
+  "source_digest": "7dc64f72a3280142",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -304,23 +304,22 @@
     "external social adoption"
   ],
   "publication_refresh": {
-    "schema": "trinityaccord.current-baseline-publication-authorization.v3",
-    "sequence": 3,
-    "status": "published_verified_and_consumed",
-    "source_git_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
-    "version_doi": "10.5281/zenodo.21855814",
-    "record_id": 21855814,
+    "schema": "trinityaccord.current-baseline-publication-authorization.v4",
+    "sequence": 4,
+    "status": "prepared_for_evidence_checkpoint_publication",
+    "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
+    "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
+    "previous_version_doi": "10.5281/zenodo.21855814",
     "core_concept_doi": "10.5281/zenodo.21739343",
-    "previous_version_doi": "10.5281/zenodo.21846249",
-    "required_evidence_freeze_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
     "arweave_snapshot_refreshed": false,
-    "intended_as_final_evidence_freeze": true,
+    "intended_as_final_evidence_freeze": false,
+    "future_material_versions_allowed": true,
     "non_amending_boundary": true
   },
   "pending_evidence_checkpoint": {
     "schema": "trinityaccord.current-baseline-publication-authorization.v4",
     "sequence": 4,
-    "status": "owner_authorized_pending_publication",
+    "status": "prepared",
     "authorization": "preservation/current-baseline-publication-authorization-v4.json",
     "previous_version_doi": "10.5281/zenodo.21855814",
     "core_concept_doi": "10.5281/zenodo.21739343",
@@ -338,6 +337,7 @@
     "arweave_snapshot_requested": false,
     "intended_as_final_evidence_freeze": false,
     "future_material_versions_allowed": true,
-    "non_amending_boundary": true
+    "non_amending_boundary": true,
+    "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204"
   }
 }
