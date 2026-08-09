@@ -6,6 +6,8 @@
     "final_inventory": "/api/final-evidence-inventory.v1.json",
     "relationship_map": "/api/evidence-relationship-map.v1.json",
     "human_freeze_guide": "/FINAL-EVIDENCE-FREEZE.md",
+    "human_evolution_handoff": "/evidence-evolution/",
+    "machine_evolution_plan": "/api/evidence-evolution-plan.v1.json",
     "recovery_index": "/api/recovery-index.json",
     "repository_preservation_state": "/preservation/repository-preservation-state-v2.json"
   },
@@ -206,7 +208,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "2176614f71bca1a1",
+  "source_digest": "035db182f9c8e0d3",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

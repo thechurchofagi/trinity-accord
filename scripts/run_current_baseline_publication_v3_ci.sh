@@ -59,11 +59,11 @@ PY
 )"
 
 frozen_paths=(
-  archive/authority-manifest/authority.jcs.json
-  archive/btc-signature/btc-signature.json
-  archive/evidence/digest-manifest.json
-  archive/evidence/digest-manifest.csv
-  archive/evidence/ots-proofs
+  archive/authority-manifest
+  archive/btc-signature
+  archive/eth-witness
+  archive/trust-root-policy.json
+  archive/evidence
   bitcoin-inscription-mirrors
   evidence/bitcoin-inscription-proof-annex-v1
   evidence/ethereum-evidence-annex-v1
@@ -71,6 +71,7 @@ frozen_paths=(
   evidence/ethereum-proof-primitives-v1
   evidence/ots/fullnode-verification
   nft-identity-index.json
+  scripts/build_nft_cryptographic_commitment.py
   tests/test_nft_proof_annex_fail_closed.py
   tests/test_ethereum_proof_primitives_parity.py
 )
@@ -189,9 +190,13 @@ sys.path.insert(0, str(Path('scripts').resolve()))
 import publish_preservation_capsule_to_zenodo as pub
 
 previous_doi = '10.5281/zenodo.21846249'
+concept_doi = '10.5281/zenodo.21739343'
+concept_record_id = 21739343
 package = pub.verify_local_package(Path(os.environ['CAPSULE_DIR']))
 client = pub.ZenodoClient(os.environ['ZENODO_ACCESS_TOKEN'].strip(), os.environ['ZENODO_API_BASE'])
 series = pub.series_records(pub.list_depositions(client))
+for item in series:
+    pub.require_concept_series(item, concept_doi, concept_record_id)
 published = [item for item in series if pub.is_published(item)]
 drafts = [item for item in series if not pub.is_published(item)]
 if not published:

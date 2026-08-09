@@ -277,6 +277,38 @@ def concept_doi(record: dict[str, Any]) -> str:
     return str(record.get("conceptdoi") or metadata(record).get("conceptdoi") or "")
 
 
+def concept_record_id(record: dict[str, Any]) -> int | None:
+    value = record.get("conceptrecid")
+    if value in (None, ""):
+        value = metadata(record).get("conceptrecid")
+    if value in (None, ""):
+        parent = record.get("parent")
+        if isinstance(parent, dict):
+            value = parent.get("id")
+    try:
+        return int(value) if value not in (None, "") else None
+    except (TypeError, ValueError) as exc:
+        raise SystemExit("Zenodo response has an invalid concept record id") from exc
+
+
+def require_concept_series(
+    record: dict[str, Any], expected_doi: str, expected_record_id: int
+) -> None:
+    observed_doi = concept_doi(record)
+    observed_record_id = concept_record_id(record)
+    if not observed_doi and observed_record_id is None:
+        raise SystemExit("Zenodo record lacks a fail-closed Concept DOI identity")
+    if observed_doi and observed_doi != expected_doi:
+        raise SystemExit(
+            f"Zenodo record belongs to a different Concept DOI: {observed_doi!r}"
+        )
+    if observed_record_id is not None and observed_record_id != expected_record_id:
+        raise SystemExit(
+            "Zenodo record belongs to a different concept record id: "
+            f"{observed_record_id!r}"
+        )
+
+
 def doi_url(record: dict[str, Any]) -> str:
     value = doi(record)
     links = record.get("links")
@@ -307,7 +339,14 @@ def build_state(
             versions[str(item["capsule_id"])] = dict(item)
     for record in known_series:
         if capsule_id(record) and is_published(record):
-            versions[capsule_id(record)] = version_entry(record)
+            key = capsule_id(record)
+            # Remote history supplies current DOI/deposition coordinates, while
+            # the checked-in state may carry richer verified Git and file
+            # identities that Zenodo cannot reconstruct.  Never replace those
+            # rich fields with a minimal remote entry on a later publication.
+            merged = dict(versions.get(key, {}))
+            merged.update(version_entry(record))
+            versions[key] = merged
     current = version_entry(published)
     current.update(
         {

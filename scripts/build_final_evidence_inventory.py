@@ -10,7 +10,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -50,6 +53,26 @@ def require(value: bool, message: str) -> None:
         raise SystemExit(message)
 
 
+def verified_report(report_relative: str, verifier_relative: str) -> dict[str, Any]:
+    checked = load(report_relative)
+    completed = subprocess.run(
+        [sys.executable, str(ROOT / verifier_relative)],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        env={"PATH": os.environ.get("PATH", "")},
+    )
+    try:
+        generated = json.loads(completed.stdout)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"{verifier_relative} did not emit a JSON report") from exc
+    require(isinstance(generated, dict), f"{verifier_relative} emitted a non-object report")
+    require(completed.returncode == 0, f"{verifier_relative} failed fresh verification")
+    require(generated == checked, f"{report_relative} is stale relative to fresh verifier output")
+    return checked
+
+
 def ots_state() -> dict[str, Any]:
     verification = (
         ROOT / "evidence/ots/fullnode-verification/post-upgrade.ots-verify.txt"
@@ -82,12 +105,21 @@ def build() -> dict[str, Any]:
     authority = load("archive/authority-manifest/authority.jcs.json")
     authority_signature = load("archive/btc-signature/btc-signature.json")
     btc_manifest = load("evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json")
-    btc_report = load("evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json")
+    btc_report = verified_report(
+        "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+    )
     eth_manifest = load("evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json")
-    eth_report = load("evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json")
+    eth_report = verified_report(
+        "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+    )
     nft_index = load("nft-identity-index.json")
     nft_commitment = load("evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json")
-    nft_report = load("evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json")
+    nft_report = verified_report(
+        "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+    )
     digest_manifest = load("archive/evidence/digest-manifest.json")
     preservation = load("preservation/repository-preservation-state-v2.json")
     external = load("preservation/external-binary-annex-state.json")
@@ -176,6 +208,13 @@ def build() -> dict[str, Any]:
             "One non-amending map of canonical objects, offline cryptographic proofs, "
             "availability mirrors and DOI recovery capsules."
         ),
+        "evolution_and_handoff": {
+            "human_guide": "EVIDENCE-EVOLUTION.md",
+            "machine_plan": "api/evidence-evolution-plan.v1.json",
+            "current_version_remains_immutable": True,
+            "future_material_improvements_use_new_versions": True,
+            "final_core_arweave_mirror": "intentionally_deferred",
+        },
         "authority_boundary": {
             "canonical_authority": "three Bitcoin Originals only",
             "canonical_count": 3,
@@ -352,6 +391,9 @@ Relationship graph: `api/evidence-relationship-map.v1.json`
 
 Recovery entrypoint: `api/recovery-index.json`
 
+Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
+`api/evidence-evolution-plan.v1.json`
+
 ## 1. The four layers
 
 | Layer | Objects | What it does | What it does not do |
@@ -423,7 +465,15 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 
 ## 7. Verification order
 
-""" + "\n".join(f"{index}. {step}" for index, step in enumerate(value["verification_order"], 1)) + "\n"
+""" + "\n".join(f"{index}. {step}" for index, step in enumerate(value["verification_order"], 1)) + """
+
+## 8. Evolution boundary
+
+This version remains immutable.  Future material improvements use a new version
+rather than overwriting this checkpoint.  The exact final core capsule Arweave
+mirror is intentionally deferred and requires fresh owner authorization before any
+paid irreversible upload.  Future agents must begin with the handoff files above.
+"""
 
 
 def write_outputs(value: dict[str, Any]) -> None:

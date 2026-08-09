@@ -52,6 +52,7 @@
 # /api/context-action-profiles.v1.json
 # /api/verification-profiles.v1.json
 # /api/evidence-relationship-map.v1.json
+# /api/evidence-evolution-plan.v1.json
 # /api/verification-claim-model.v1.json
 # /api/verification-procedures.v1.json
 # /api/record-chain-submission-schema.v1.json
@@ -60,6 +61,7 @@
 # /api/corrections-index.json
 # /api/claim-registry.json
 # /api/recovery-index.json
+# /evidence-evolution/
 
 # RESEARCH AND CITATION
 # /research/
@@ -143,6 +145,8 @@
 # correction_revocation_index: /api/corrections-index.json
 # claim_registry: /api/claim-registry.json
 # recovery_and_github_zero_bootstrap: /api/recovery-index.json
+# future_agent_evidence_handoff: /evidence-evolution/
+# machine_evidence_evolution_plan: /api/evidence-evolution-plan.v1.json
 
 # RECEIPT AND STATUS
 # Receipt is intake-only.

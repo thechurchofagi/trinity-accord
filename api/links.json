@@ -13,6 +13,7 @@
     "/authority",
     "/verify",
     "/evidence-relationship-guide/",
+    "/evidence-evolution/",
     "/agent-start",
     "/agent-brief",
     "/agent-value",
@@ -62,6 +63,7 @@
     "/api/echo-types.json",
     "/api/verification-profiles.v1.json",
     "/api/final-evidence-inventory.v1.json",
+    "/api/evidence-evolution-plan.v1.json",
     "/api/evidence-manifest.json",
     "/api/evidence-relationship-map.v1.json",
     "/api/verification-claim-model.v1.json",
@@ -179,10 +181,12 @@
     "title": "v30.5 Final Closure Report",
     "description": "Human-readable final closure report for v30.5."
   },
-  "source_digest": "d2b0538a4ca9b8e9",
+  "source_digest": "61e3b01a5fdc252a",
   "preferred_models": {
     "evidence_relationship_guide": "/evidence-relationship-guide/",
     "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
+    "evidence_evolution_handoff": "/evidence-evolution/",
+    "evidence_evolution_plan": "/api/evidence-evolution-plan.v1.json",
     "verification_profiles": "/api/verification-profiles.v1.json",
     "context_action_profiles": "/api/context-action-profiles.v1.json",
     "legacy_compatibility": [

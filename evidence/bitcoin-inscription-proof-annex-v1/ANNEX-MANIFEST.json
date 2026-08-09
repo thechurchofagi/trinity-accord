@@ -30,7 +30,7 @@
   },
   "verification_implementation": {
     "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
-    "verifier_sha256": "9d16d1099d51fa4f885a7963a7d780ae2f754f5c31f22a38fbca4eb37b9ee362",
+    "verifier_sha256": "c212fef2de6dea75016e46623b533de74e01ec585f0dc17db403279ebcb3c0ab",
     "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
     "frozen_primitives_sha256": "fc14169982ca0622d0a0a0fb27f9326c630432585ea733bbf88f01cfb962c67e",
     "runtime": "Python 3 standard library only",

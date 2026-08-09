@@ -45,6 +45,33 @@ EXACT_STABLE_EVIDENCE_FILES = (
 )
 
 
+def current_core_repository_reference() -> dict[str, str]:
+    state_path = publisher.ROOT / "preservation/repository-preservation-state-v2.json"
+    value = json.loads(state_path.read_text(encoding="utf-8"))
+    external_state_path = publisher.ROOT / "preservation/external-binary-annex-state.json"
+    external_state = json.loads(external_state_path.read_text(encoding="utf-8"))
+    concept = str(value.get("concept_doi") or "")
+    latest = str(value.get("latest_doi") or "")
+    if concept != "10.5281/zenodo.21739343":
+        raise SystemExit("unexpected current core repository Concept DOI")
+    if not latest.startswith("10.5281/zenodo."):
+        raise SystemExit("current core repository version DOI is missing")
+    historical = "10.5281/zenodo.21739344"
+    expected = {
+        "core_repository_preservation_doi": historical,
+        "core_repository_preservation_doi_role": "historical_version_reference",
+        "current_core_repository_concept_doi": concept,
+        "current_core_repository_latest_version_doi": latest,
+    }
+    for field, wanted in expected.items():
+        if external_state.get(field) != wanted:
+            raise SystemExit(f"external annex state has a stale DOI role: {field}")
+    note = external_state.get("core_repository_reference_note")
+    if not isinstance(note, str) or historical not in note or concept not in note or latest not in note:
+        raise SystemExit("external annex state has an incomplete core repository DOI note")
+    return {**expected, "core_repository_reference_note": note}
+
+
 def _canonical_related_identifier(identifier: Any, scheme: Any = "") -> str:
     """Normalize only representation-equivalent DOI identifiers."""
     value = str(identifier or "").strip()
@@ -362,7 +389,7 @@ def main() -> int:
         "source_commit_sha": workflow_source,
         "publication_workflow_source_commit_sha": workflow_source,
         "annex_source_commits": expected_sources,
-        "core_repository_preservation_doi": "10.5281/zenodo.21739344",
+        **current_core_repository_reference(),
         "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
         "annexes": {"evidence": evidence, "nft": nft},
         "all_named_release_assets_embedded": True,

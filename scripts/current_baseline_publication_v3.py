@@ -178,6 +178,7 @@ def validate_relationship_topology() -> None:
     node_ids = {item.get("id") for item in graph.get("nodes", []) if isinstance(item, dict)}
     required_nodes = {
         "final_evidence_inventory",
+        "evidence_evolution_handoff",
         "bitcoin_inscription_proof_annex",
         "ethereum_non_nft_proof_annex",
         "chronicle_nft_proof_annex",
@@ -192,6 +193,11 @@ def validate_relationship_topology() -> None:
     require(isinstance(entrypoints, dict), "evidence manifest lacks evidence-system entrypoints")
     require_equal(entrypoints.get("final_inventory"), "/api/final-evidence-inventory.v1.json", "entrypoints.inventory")
     require_equal(entrypoints.get("recovery_index"), "/api/recovery-index.json", "entrypoints.recovery")
+    require_equal(
+        entrypoints.get("machine_evolution_plan"),
+        "/api/evidence-evolution-plan.v1.json",
+        "entrypoints.evolution",
+    )
 
 
 def validate_pending(auth: dict[str, Any], state: dict[str, Any], index: dict[str, Any]) -> None:
@@ -277,6 +283,12 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require_equal(observation.get("status"), "passed", "observation.status")
     require_equal(observation.get("source_git_commit_sha"), source, "observation.source")
     require_equal(observation.get("version_doi"), doi, "observation.doi")
+    require_equal(observation.get("zenodo_record_id"), record_id, "observation.record_id")
+    require_equal(
+        observation.get("zenodo_package_identity_sha256"),
+        package,
+        "observation.package_identity",
+    )
     require_equal(observation.get("public_cold_restore"), "passed", "observation.restore")
     require_equal(observation.get("arweave_snapshot_refreshed"), False, "observation.arweave")
     refresh = index.get("publication_refresh")

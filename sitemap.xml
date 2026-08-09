@@ -98,6 +98,7 @@
   <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/emergent-patterns.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/eth-witness-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-evolution-plan.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v1-authority-boundary.template.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v2-minimal-bitcoin-b1.template.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/test-fixtures/v1-passing-fixture.json</loc></url>
@@ -307,6 +308,7 @@
   <url><loc>https://www.trinityaccord.org/emergent-patterns/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-coverage/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-backup-gaps/</loc></url>
+  <url><loc>https://www.trinityaccord.org/evidence-evolution/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-model-migration-audit/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-relationship-guide/</loc></url>
   <url><loc>https://www.trinityaccord.org/evidence-relationship-map/</loc></url>

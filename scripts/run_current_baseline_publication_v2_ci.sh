@@ -186,9 +186,13 @@ sys.path.insert(0, str(Path('scripts').resolve()))
 import publish_preservation_capsule_to_zenodo as pub
 
 previous_doi = '10.5281/zenodo.21831412'
+concept_doi = '10.5281/zenodo.21739343'
+concept_record_id = 21739343
 package = pub.verify_local_package(Path(os.environ['CAPSULE_DIR']))
 client = pub.ZenodoClient(os.environ['ZENODO_ACCESS_TOKEN'].strip(), os.environ['ZENODO_API_BASE'])
 series = pub.series_records(pub.list_depositions(client))
+for item in series:
+    pub.require_concept_series(item, concept_doi, concept_record_id)
 published = [item for item in series if pub.is_published(item)]
 drafts = [item for item in series if not pub.is_published(item)]
 if not published:

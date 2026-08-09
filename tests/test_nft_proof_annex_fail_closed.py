@@ -9,10 +9,19 @@ import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 VERIFY_SCRIPT = ROOT / "evidence" / "nft-proof-annex-v1" / "verification" / "verify_nft_proof_annex.py"
+COMMITMENT_SCRIPT = ROOT / "scripts" / "build_nft_cryptographic_commitment.py"
 
 
 def load_verifier():
     spec = importlib.util.spec_from_file_location("nft_proof_fail_closed_test", VERIFY_SCRIPT)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_commitment_builder():
+    spec = importlib.util.spec_from_file_location("nft_commitment_fail_closed_test", COMMITMENT_SCRIPT)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -129,6 +138,26 @@ def test_erc721_rejects_operator_and_batch_index_metadata():
     with pytest.raises(ValueError, match="ERC-721 mint batch_index must be null"):
         mod.verify_l2(record, bad_batch, primitives)
 
+    missing_operator = copy.deepcopy(asset)
+    del missing_operator["mint"]["operator"]
+    with pytest.raises(ValueError, match="operator must be explicitly present"):
+        mod.verify_l2(record, missing_operator, primitives)
+
+    missing_batch = copy.deepcopy(asset)
+    del missing_batch["mint"]["batch_index"]
+    with pytest.raises(ValueError, match="batch_index must be explicitly present"):
+        mod.verify_l2(record, missing_batch, primitives)
+
+
+def test_commitment_builder_rejects_omitted_event_semantic_keys():
+    _, _, asset, _ = first_case_for_event("Transfer")
+    builder = load_commitment_builder()
+    for field in ("operator", "batch_index"):
+        mutated = copy.deepcopy(asset)
+        del mutated["mint"][field]
+        with pytest.raises(ValueError, match=rf"mint\.{field} must be explicitly present"):
+            builder.project_asset(mutated)
+
 
 def test_erc1155_rejects_missing_or_mismatched_operator():
     mod, record, asset, primitives = first_erc1155_case()
@@ -167,3 +196,49 @@ def test_erc1155_event_specific_batch_index_is_fail_closed():
         mutated["mint"]["batch_index"] = None
         with pytest.raises(ValueError, match="TransferBatch batch_index is required"):
             mod.verify_l2(record, mutated, primitives)
+
+
+def test_synthetic_transfer_batch_path_is_fully_exercised():
+    mod = load_verifier()
+    contract = "0x" + "11" * 20
+    recipient = "0x" + "22" * 20
+    operator = "0x" + "33" * 20
+    topic_address = lambda value: b"\x00" * 12 + bytes.fromhex(value[2:])
+    word = lambda value: int(value).to_bytes(32, "big")
+    event_topic = mod.keccak(b"TransferBatch(address,address,address,uint256[],uint256[])")
+    # ABI: heads point to ids at 0x40 and values at 0xa0.
+    data = b"".join(
+        [word(64), word(160), word(2), word(9), word(10), word(2), word(4), word(5)]
+    )
+    receipt = mod.rlp.encode(
+        [
+            b"\x01",
+            b"",
+            b"",
+            [[bytes.fromhex(contract[2:]), [event_topic, topic_address(operator), topic_address("0x" + "00" * 20), topic_address(recipient)], data]],
+        ]
+    )
+    asset = {
+        "contract_address": contract,
+        "token_id": "10",
+        "mint": {
+            "event": "TransferBatch",
+            "quantity": "5",
+            "to": recipient,
+            "operator": operator,
+            "batch_index": 1,
+        },
+    }
+    result = mod.verify_mint_log(asset, receipt, 0)
+    assert result["event"] == "erc1155.TransferBatch"
+    assert result["token_id"] == "10"
+
+    missing_index = copy.deepcopy(asset)
+    del missing_index["mint"]["batch_index"]
+    with pytest.raises(ValueError, match="batch_index must be explicitly present"):
+        mod.verify_mint_log(missing_index, receipt, 0)
+
+    bad_index = copy.deepcopy(asset)
+    bad_index["mint"]["batch_index"] = 0
+    with pytest.raises(ValueError, match="TransferBatch item mismatch"):
+        mod.verify_mint_log(bad_index, receipt, 0)

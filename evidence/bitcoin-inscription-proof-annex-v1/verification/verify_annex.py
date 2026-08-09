@@ -210,7 +210,8 @@ def verify_l2(anchor: dict[str, Any], proof: dict[str, Any], l1: dict[str, Any])
     require_equal(parsed_header["hash"], block_ref["hash"], "block hash")
     require_equal(inclusion.get("hash"), block_ref["hash"], "proof block hash")
     require_equal(inclusion.get("height"), block_ref["height"], "block height")
-    require_equal(inclusion.get("timestamp"), block_ref["timestamp"], "block timestamp")
+    require_equal(block_ref.get("timestamp"), parsed_header["timestamp"], "manifest block timestamp")
+    require_equal(inclusion.get("timestamp"), parsed_header["timestamp"], "proof block timestamp")
     require_equal(inclusion.get("bits"), parsed_header["bits"], "block bits")
 
     tx_count = int(inclusion["transaction_count"])
@@ -259,7 +260,7 @@ def verify_l2(anchor: dict[str, Any], proof: dict[str, Any], l1: dict[str, Any])
         "status": "PASS",
         "block_height": block_ref["height"],
         "block_hash": block_ref["hash"],
-        "block_timestamp": block_ref["timestamp"],
+        "block_timestamp": parsed_header["timestamp"],
         "transaction_position": position,
         "transaction_count": tx_count,
         "transaction_merkle_root": parsed_header["merkle_root"],
@@ -316,9 +317,11 @@ def verify_l3(anchor: dict[str, Any], proof: dict[str, Any], l2: dict[str, Any])
     if not isinstance(observations, list) or votes < 2 or len(observations) < votes:
         raise ValueError("PoW checkpoint provenance quorum is missing")
     providers: set[str] = set()
-    matches = 0
+    matching_providers: set[str] = set()
     for observation in observations:
         provider = str(observation.get("provider", ""))
+        if not provider:
+            raise ValueError("PoW checkpoint provenance provider is missing")
         providers.add(provider)
         if (
             observation.get("target_height") == target_height
@@ -327,8 +330,8 @@ def verify_l3(anchor: dict[str, Any], proof: dict[str, Any], l2: dict[str, Any])
             and str(observation.get("checkpoint_hash", "")).lower() == previous["hash"]
             and "provenance only" in str(observation.get("role", ""))
         ):
-            matches += 1
-    if len(providers) < 2 or matches < votes:
+            matching_providers.add(provider)
+    if len(providers) < 2 or len(matching_providers) < votes:
         raise ValueError("PoW checkpoint provenance observations do not match")
 
     return {
