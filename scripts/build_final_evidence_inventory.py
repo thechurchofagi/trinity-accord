@@ -66,7 +66,12 @@ def verified_report(report_relative: str, verifier_relative: str) -> dict[str, A
     try:
         generated = json.loads(completed.stdout)
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"{verifier_relative} did not emit a JSON report") from exc
+        stderr = completed.stderr.strip()
+        detail = f": {stderr[:1000]}" if stderr else ""
+        raise SystemExit(
+            f"{verifier_relative} did not emit a JSON report "
+            f"(exit {completed.returncode}){detail}"
+        ) from exc
     require(isinstance(generated, dict), f"{verifier_relative} emitted a non-object report")
     require(completed.returncode == 0, f"{verifier_relative} failed fresh verification")
     require(generated == checked, f"{report_relative} is stale relative to fresh verifier output")
