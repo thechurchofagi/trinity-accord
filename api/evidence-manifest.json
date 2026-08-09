@@ -210,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "73100ba15d32d8eb",
+  "source_digest": "39c7418060c93679",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -274,7 +274,9 @@
       "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
       "network_required_for_existing_proof_verification": false,
       "doi_boundary": "The immutable DOI 10.5281/zenodo.21855814 contains the earlier 10-anchor freeze and does not contain the two authority/signature anchors or verifier hardening. Those are a current GitHub delta.",
-      "trust_boundary": "L3 is conditional on explicitly declared Ethereum weak-subjectivity trusted finalized Beacon roots; provider observations are provenance only."
+      "trust_boundary": "L3 is conditional on explicitly declared Ethereum weak-subjectivity trusted finalized Beacon roots; provider observations are provenance only.",
+      "next_checkpoint_v4_anchor_count": 12,
+      "next_checkpoint_v4_status": "owner_authorized_pending_publication"
     },
     "chronicle_nft": {
       "asset_count": 175,
@@ -300,7 +302,7 @@
       "live_repository_delta": {
         "status": "verified_not_in_published_final_doi_v3",
         "ethereum_non_nft_additions": 2,
-        "new_doi_publication": "not_authorized_not_attempted",
+        "new_doi_publication": "owner_authorized_pending_publication_v4",
         "new_arweave_upload": "intentionally_deferred_not_attempted",
         "recovery_boundary": "Until a separately authorized immutable refresh exists, the two-anchor delta is recovered from a verified Git commit or another future hash-matched mirror."
       },
@@ -312,7 +314,23 @@
       "final_freeze_authorized_base_commit_sha": "489827341860a9e7ec673e7b199ff7917df29869",
       "final_freeze_version_doi": "10.5281/zenodo.21855814",
       "final_freeze_source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
-      "final_freeze_package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c"
+      "final_freeze_package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c",
+      "current_checkpoint_authorization": "preservation/current-baseline-publication-authorization-v4.json",
+      "current_checkpoint_status": "owner_authorized_pending_publication",
+      "current_checkpoint_required_evidence_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
+      "current_checkpoint_intended_as_permanent_final": false,
+      "current_checkpoint_future_material_versions_allowed": true,
+      "current_checkpoint_scope": {
+        "bitcoin_inscriptions": 8,
+        "bitcoin_canonical_originals": 3,
+        "bitcoin_non_amending_ancillary": 5,
+        "ethereum_non_nft_anchors": 12,
+        "ethereum_chronicle_nfts": 175,
+        "nft_contracts": 4,
+        "proof_status_required": "PASS",
+        "ordinary_verification_network_required": false
+      },
+      "current_checkpoint_arweave_upload_requested": false
     },
     "external_binary_annexes": {
       "evidence_doi": "10.5281/zenodo.21753937",

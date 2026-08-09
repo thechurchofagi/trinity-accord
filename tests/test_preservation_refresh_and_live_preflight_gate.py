@@ -24,6 +24,15 @@ def test_consumed_preservation_refresh_is_secret_independent():
         text=True,
         capture_output=True,
     )
+    v4_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v4.json"
+    if v4_auth_path.is_file():
+        v4_status = json.loads(v4_auth_path.read_text(encoding="utf-8"))["status"]
+        assert f"Current evidence checkpoint publication v4 state valid: {v4_status}" in completed.stdout
+        if v4_status == "consumed":
+            assert "consumed and valid; no external write will run" in completed.stdout
+        else:
+            assert "external publication requires the dedicated main-branch preservation executor" in completed.stdout
+        return
     v3_auth_path = ROOT / "preservation/current-baseline-publication-authorization-v3.json"
     if v3_auth_path.is_file():
         v3_status = json.loads(v3_auth_path.read_text(encoding="utf-8"))["status"]

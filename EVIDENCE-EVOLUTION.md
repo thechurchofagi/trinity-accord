@@ -7,11 +7,12 @@ description: Current evidence checkpoint, intentionally deferred work, review tr
 
 # Evidence Evolution and Future-Agent Handoff
 
-The published evidence baseline is complete for its declared 2026 freeze scope,
-immutable under version DOI `10.5281/zenodo.21855814`, and publicly cold-restored.
-“Final” means final for that evidence epoch.  GitHub now also contains an explicit,
-verified two-transaction Ethereum delta.  That delta does not retroactively enter
-the old DOI and has not triggered a new publication or paid Arweave upload.
+Version DOI `10.5281/zenodo.21855814` remains the immutable, publicly cold-restored
+8 + 10 + 175 historical v3 freeze. GitHub now contains the complete verified
+8 + 12 + 175 topology. A separate one-shot v4 authorization records the owner's
+decision to publish that current topology under the existing Concept DOI without
+an Arweave upload. Read the v4 authorization status and observation rather than
+assuming that a pending, prepared, or consumed state is current forever.
 
 Machine plan: [`api/evidence-evolution-plan.v1.json`](/api/evidence-evolution-plan.v1.json)
 
@@ -28,18 +29,18 @@ Recovery entrypoint: [`api/recovery-index.json`](/api/recovery-index.json)
 | Object | Current verified identity |
 |---|---|
 | Core Concept DOI | `10.5281/zenodo.21739343` |
-| Frozen version DOI | `10.5281/zenodo.21855814` |
-| Frozen source baseline | `887322dc7f6f64efd04f7452e2039ee4440b226b` |
-| Package identity SHA-256 | `a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c` |
+| Historical v3 version DOI | `10.5281/zenodo.21855814` |
+| Historical v3 source baseline | `887322dc7f6f64efd04f7452e2039ee4440b226b` |
+| v4 authorization and resulting DOI | `preservation/current-baseline-publication-authorization-v4.json` |
 | Bitcoin inscription proofs | 8/8 offline PASS |
-| Non-NFT Ethereum proofs | 10/10 L1/L2/L3 PASS |
+| Non-NFT Ethereum proofs | 12/12 L1/L2/L3 and signed semantics PASS |
 | Chronicle NFT proofs | 175/175 L1/L2/L3 PASS |
 | DOI-only public cold restore | PASS |
 
-The immutable version must never be edited or represented as a live copy of a
-later GitHub `main`.  Material future improvements belong in a new version; the
-Concept DOI may then resolve to that later verified version while this checkpoint
-remains independently citable.
+Every immutable version must remain independently citable and must never be
+represented as a moving copy of GitHub `main`. Sequence 4 is a current evidence
+checkpoint, not a claim that evidence engineering is permanently finished.
+Material future improvements belong in another new version.
 
 ## Current live repository delta
 
@@ -63,9 +64,10 @@ enforces the anchor-specific byte/digest/signature relationship.  The live state
 therefore 8 Bitcoin inscriptions + 12 non-NFT Ethereum anchors + 175 NFTs, while the
 immutable DOI v3 remains 8 + 10 + 175.
 
-No new DOI has been authorized or attempted.  Until a future immutable refresh is
-separately authorized and cold-restored, recovery of the two-anchor delta requires a
-verified Git commit or another later hash-matched mirror.
+The v4 one-shot state machine is owner-authorized for a Zenodo-only checkpoint.
+While its status is `pending` or `prepared`, recovery of the two-anchor delta still
+requires a verified Git commit. Once its status is `consumed`, the resulting v4
+version DOI and public observation are the GitHub-independent recovery path.
 
 ## Work completed in the 2026-08-08 maintenance pass
 
@@ -85,10 +87,9 @@ The complete repository system tests passed, the Gateway suite reported 383
 passed and 1 skipped, and read-only live checks found the homepage, Verify page,
 five critical JSON APIs and all three Gateway readiness probes operational.
 
-No DOI version was published, no Arweave upload occurred, no proof or commitment
-bytes changed, and no paid-write authorization was consumed in this pass.  A
-future agent must obtain the merge/deployment identity from Git history rather
-than treating this maintenance record as part of the earlier frozen DOI bytes.
+That maintenance pass itself published no DOI and performed no Arweave upload.
+The later, separately authorized sequence-4 lifecycle is recorded independently
+so this historical statement is not misread as the current publication status.
 
 ## Work completed in the 2026-08-09 evidence-closure pass
 
@@ -99,9 +100,9 @@ adapter invocation failure, normalized checkpoint-provider identity, and Zenodo 
 role preflight before publication.  It also made the recovery map distinguish the
 frozen DOI from files needed by the moving current proof sets.
 
-Existing frozen proof bytes were not rewritten.  New proof bytes were added only for
-the two post-freeze transactions.  No external publication or paid storage write was
-performed.  The final local verification pass completed all current-system checks,
+Existing frozen proof bytes were not rewritten. New proof bytes were added only for
+the two post-freeze transactions. The evidence-closure pass itself performed no
+external publication or paid storage write. The final local verification pass completed all current-system checks,
 including 504 top-level pytest tests, the 12-anchor Ethereum offline verifier, the
 frozen 10-anchor inventory rebuild, recovery-file-set validation, sitemap drift and
 machine-discovery contracts.
@@ -135,13 +136,13 @@ only then register its transaction ID as a non-authoritative mirror.
 
 ## Future-agent continuation order
 
-1. Read the final inventory as the DOI v3 snapshot; then read the current evidence
+1. Read the current checkpoint inventory, v4 authorization, current evidence
    manifest, Ethereum address scope audit, relationship map, this handoff and the
-   recovery index.
+   recovery index. Treat v3 as immutable history, not as the current 12-anchor map.
 2. Re-run all checked-in Bitcoin, Ethereum and NFT verifiers without network access.
 3. Restore the core DOI and both external annex DOI records without GitHub credentials.
-4. Produce a file- and claim-level delta from frozen source `887322dc…` to current
-   `main`; do not silently treat later files as part of the old DOI.
+4. Select the latest consumed version from the Concept DOI lineage, then produce a
+   file- and claim-level delta from its exact source baseline to current `main`.
 5. Separate cryptographic defects from availability, dependency, discovery and
    presentation improvements.
 6. Implement and mutation-test only material changes.

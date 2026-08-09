@@ -9,6 +9,34 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   exit 1
 fi
 
+v4_authorization="preservation/current-baseline-publication-authorization-v4.json"
+if [[ -f "$v4_authorization" ]]; then
+  v4_status="$("$PYTHON_BIN" - <<'PY'
+import json
+from pathlib import Path
+print(json.loads(Path('preservation/current-baseline-publication-authorization-v4.json').read_text())['status'])
+PY
+)"
+  if [[ "$v4_status" == "consumed" ]]; then
+    "$PYTHON_BIN" scripts/current_baseline_publication_v4.py validate
+    echo "Current evidence checkpoint publication v4 is consumed and valid; no external write will run."
+    exit 0
+  fi
+  if [[ "$v4_status" == "pending" || "$v4_status" == "prepared" ]]; then
+    "$PYTHON_BIN" scripts/current_baseline_publication_v4.py validate
+    if [[ "${GITHUB_EVENT_NAME:-}" == "push" \
+      && "${GITHUB_REF:-}" == "refs/heads/main" \
+      && "${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}" == "1" ]]; then
+      bash scripts/run_current_baseline_publication_v4_ci.sh
+      exit $?
+    fi
+    echo "Current evidence checkpoint v4 $v4_status state is valid; external publication requires the dedicated main-branch preservation executor."
+    exit 0
+  fi
+  echo "::error::Unexpected current-baseline publication v4 status: $v4_status"
+  exit 1
+fi
+
 v3_authorization="preservation/current-baseline-publication-authorization-v3.json"
 if [[ -f "$v3_authorization" ]]; then
   v3_status="$("$PYTHON_BIN" - <<'PY'

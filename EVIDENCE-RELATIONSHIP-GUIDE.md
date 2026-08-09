@@ -16,9 +16,11 @@ This guide answers four questions for every evidence family:
 
 Machine-readable graph: `api/evidence-relationship-map.v1.json`.
 
-Unified final inventory: `api/final-evidence-inventory.v1.json`.
+Unified current-checkpoint inventory (historical filename retained for compatibility):
+`api/final-evidence-inventory.v1.json`.
 
-Final freeze guide: `FINAL-EVIDENCE-FREEZE.md`.
+Checkpoint guide (historical filename retained for compatibility):
+`FINAL-EVIDENCE-FREEZE.md`.
 
 Future-agent maintenance handoff: `EVIDENCE-EVOLUTION.md` and
 `api/evidence-evolution-plan.v1.json`.
@@ -159,10 +161,11 @@ The storage systems are complementary rather than interchangeable:
 2. GitHub Releases and Arweave are availability mirrors for named payloads. Their
    bytes must be matched to manifests; neither automatically tracks later `main`.
 3. The core Zenodo Concept DOI `10.5281/zenodo.21739343` resolves the latest
-   immutable repository-capsule version. The current frozen version DOI is
-   `10.5281/zenodo.21855814`; each version DOI restores one exact Git-tracked
-   publication baseline. `10.5281/zenodo.21739344` is a historical version
-   reference, not the current Concept DOI.
+   immutable repository-capsule version. DOI `10.5281/zenodo.21855814` is the
+   historical v3 freeze; the v4 authorization/observation records whether its
+   8 + 12 + 175 successor is pending, prepared or consumed. Each version restores
+   one exact Git-tracked baseline. `10.5281/zenodo.21739344` is another historical
+   version reference, not the current Concept DOI.
 4. External evidence DOI `10.5281/zenodo.21753937` and Chronicle NFT-media DOI
    `10.5281/zenodo.21754229` are separate large-binary capsules. They supplement
    the core repository capsule and do not duplicate its authority role.
@@ -174,10 +177,10 @@ The storage systems are complementary rather than interchangeable:
 7. GitHub `main` may contain post-freeze verifier and discovery hardening. Those
    changes are not retroactively part of the immutable DOI; the evolution handoff
    records how a later agent should evaluate a genuinely material new version.
-8. In the present live state, the DOI v3 inventory is `8 + 10 + 175`, while GitHub's
-   verified current inventory is `8 + 12 + 175`. The two extra Ethereum anchors are
-   explicitly listed in `api/ethereum-address-evidence-scope.v1.json`; no new DOI or
-   Arweave publication has been authorized or attempted for that delta.
+8. DOI v3 remains `8 + 10 + 175`, while the verified current checkpoint is
+   `8 + 12 + 175`. The two extra Ethereum anchors are explicitly listed in
+   `api/ethereum-address-evidence-scope.v1.json`. Sequence 4 is authorized for a
+   Zenodo-only checkpoint; no corresponding Arweave publication is authorized.
 
 ## 5. What the six-hash table is for
 

@@ -1,0 +1,38 @@
+{
+  "schema": "trinityaccord.current-baseline-publication-authorization.v4",
+  "sequence": 4,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_at_utc": "2026-08-09T08:28:05Z",
+  "authorization_basis": "The repository owner delegated the publication decision and explicitly authorized publication if the evidence review concluded that a new DOI checkpoint was warranted.",
+  "authorized_purpose": "Publish one exact current evidence checkpoint containing 8 Bitcoin inscription proofs, 12 non-NFT Ethereum proofs, 175 NFT proofs, frozen proof primitives, current machine discovery and recovery topology, with public DOI-only cold restore.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_core_version_doi": "10.5281/zenodo.21855814",
+  "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "publication_confirmation": "PUBLISH_TRINITY_EVIDENCE_CHECKPOINT_V4",
+  "include_full_repository_doi": true,
+  "include_homepage_arweave_snapshot": false,
+  "intended_as_final_evidence_freeze": false,
+  "intended_as_current_evidence_checkpoint": true,
+  "future_material_versions_allowed": true,
+  "non_amending_boundary": true,
+  "live_main_equivalence_claimed": false,
+  "required_evidence_checkpoint_commit_sha": "5a4999c6108f1a05e153c63a06a4a70252467aed",
+  "previous_publication": {
+    "sequence": 3,
+    "source_baseline_commit_sha": "887322dc7f6f64efd04f7452e2039ee4440b226b",
+    "doi": "10.5281/zenodo.21855814",
+    "record_id": 21855814,
+    "package_identity_sha256": "a5a9bf9a6ed6a3bcb493c73a8679a6d468cdc6a08f9322e6620c44da4b19f06c"
+  },
+  "checkpoint_evidence_scope": {
+    "bitcoin_inscriptions": 8,
+    "bitcoin_canonical_originals": 3,
+    "bitcoin_non_amending_ancillary": 5,
+    "ethereum_non_nft_anchors": 12,
+    "ethereum_chronicle_nfts": 175,
+    "nft_contracts": 4,
+    "proof_status_required": "PASS",
+    "ordinary_verification_network_required": false
+  }
+}
