@@ -370,6 +370,9 @@ def main() -> int:
 
     evidence_dir = Path(args.evidence_package_dir).resolve()
     nft_dir = Path(args.nft_package_dir).resolve()
+    # Resolve and validate DOI roles before the first potentially irreversible publish.
+    # A stale or ambiguous repository reference must fail before Zenodo is mutated.
+    core_reference = current_core_repository_reference()
     token = os.environ.get("ZENODO_ACCESS_TOKEN", "").strip()
     client = publisher.ZenodoClient(token, args.api_base)
 
@@ -389,7 +392,7 @@ def main() -> int:
         "source_commit_sha": workflow_source,
         "publication_workflow_source_commit_sha": workflow_source,
         "annex_source_commits": expected_sources,
-        **current_core_repository_reference(),
+        **core_reference,
         "rights_boundary_schema": "trinityaccord.external-binary-annex-rights.v1",
         "annexes": {"evidence": evidence, "nft": nft},
         "all_named_release_assets_embedded": True,

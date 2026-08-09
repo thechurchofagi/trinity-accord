@@ -51,7 +51,7 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert "current_cryptographic_proof_state" in data["warning"]
 
     current = data["current_cryptographic_proof_state"]
-    assert current["status"] == "offline_verifiable"
+    assert current["status"] == "offline_verifiable_with_explicit_post_freeze_delta"
 
     bitcoin = current["bitcoin_inscriptions"]
     assert bitcoin["inscription_count"] == 8
@@ -75,14 +75,21 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert ROOT.joinpath(bitcoin["frozen_primitives"]).is_file()
 
     eth = current["ethereum_non_nft"]
-    assert eth["anchor_count"] == 10
+    assert eth["anchor_count"] == 12
+    assert eth["published_final_doi_v3_anchor_count"] == 10
+    assert eth["post_freeze_live_delta_anchor_count"] == 2
     assert eth["l1_byte_integrity"] == "PASS"
     assert eth["l2_execution_inclusion"] == "PASS"
     assert eth["l3_checkpoint_relative_finality"] == "PASS"
+    assert eth["signed_transaction_semantics"] == "PASS"
+    assert eth["receipt_success_semantics"] == "PASS"
+    assert eth["eip712_authority_signature_binding"] == "PASS"
+    assert "does not contain" in eth["doi_boundary"]
     assert "weak-subjectivity" in eth["trust_boundary"]
     assert ROOT.joinpath(eth["manifest"]).is_file()
     assert ROOT.joinpath(eth["offline_report"]).is_file()
     assert ROOT.joinpath(eth["verifier"]).is_file()
+    assert ROOT.joinpath(eth["address_scope_audit"]).is_file()
 
     nft = current["chronicle_nft"]
     assert nft["asset_count"] == 175
@@ -103,6 +110,8 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert preservation["cold_restore"] == "PASS"
     assert preservation["final_freeze_authorization"] == "preservation/current-baseline-publication-authorization-v3.json"
     assert preservation["final_freeze_intended_as_last_planned_evidence_version"] is True
+    assert preservation["live_repository_delta"]["status"] == "verified_not_in_published_final_doi_v3"
+    assert preservation["live_repository_delta"]["new_doi_publication"] == "not_authorized_not_attempted"
     if final_auth["status"] == "consumed":
         assert preservation["status"] == "final_frozen_and_publicly_restored"
         assert preservation["final_freeze_status"] == "published_verified_and_consumed"
@@ -168,6 +177,8 @@ def test_recovery_index_routes_all_offline_annexes_without_overclaiming_current_
     expected = {
         "api/final-evidence-inventory.v1.json",
         "api/evidence-relationship-map.v1.json",
+        "api/evidence-manifest.json",
+        "api/ethereum-address-evidence-scope.v1.json",
         "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
         "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
         "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
@@ -175,6 +186,8 @@ def test_recovery_index_routes_all_offline_annexes_without_overclaiming_current_
         "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
         "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
         "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+        "evidence/ethereum-evidence-annex-v1/proof-material/L2-L3-CAPTURE-SUMMARY.json",
+        "archive/authority-manifest/signature.json",
         "nft-identity-index.json",
         "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
         "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
@@ -185,13 +198,24 @@ def test_recovery_index_routes_all_offline_annexes_without_overclaiming_current_
     assert expected.issubset(set(data["required_recovery_files"]))
     assert "verify_bitcoin_inscription_proof_annex_offline" in data["mandatory_recovery_steps"]
     assert "verify_ethereum_non_nft_proof_annex_offline" in data["mandatory_recovery_steps"]
+    assert "verify_required_recovery_file_sets_and_manifest_bound_hashes" in data["mandatory_recovery_steps"]
     assert "verify_175_item_nft_commitment_and_proof_annex_offline" in data["mandatory_recovery_steps"]
     assert "verify_opentimestamps_proof_and_preserved_fullnode_observation" in data["mandatory_recovery_steps"]
     for path in expected:
         assert ROOT.joinpath(path).is_file()
+    file_sets = {item["id"]: item for item in data["required_recovery_file_sets"]}
+    assert file_sets["ethereum_non_nft_l2_l3_witnesses"]["expected_files"] == 24
+    assert file_sets["ethereum_non_nft_reference_captures"]["expected_files"] == 48
+    assert file_sets["chronicle_nft_l2_witnesses"]["expected_files"] == 175
+    assert file_sets["chronicle_nft_l3_witnesses"]["expected_files"] == 175
     additions = data["latest_trusted_release"]["repository_additions_after_published_baseline"]
     if final_auth["status"] == "consumed":
-        assert additions == {}
+        eth_delta = additions["ethereum_non_nft_two_anchor_delta"]
+        assert eth_delta["included_in_published_doi"] is False
+        assert eth_delta["current_anchor_count"] == 12
+        assert eth_delta["published_doi_anchor_count"] == 10
+        assert eth_delta["new_doi_publication"] == "not_authorized_not_attempted"
+        assert len(eth_delta["tx_hashes"]) == 2
         assert data["publication_refresh"]["sequence"] == 3
         assert data["publication_refresh"]["status"] == "published_verified_and_consumed"
     else:

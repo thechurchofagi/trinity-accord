@@ -2,7 +2,7 @@
   "schema": "trinity-accord.recovery-index.v1",
   "version": "v1",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "8fe76e798d3da6d4",
+  "source_digest": "911640fcb0e0a325",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "purpose": "Machine-readable cold-start recovery entrypoint for rebuilding repository-maintained state from canonical and mirrored materials.",
@@ -28,11 +28,14 @@
   },
   "required_recovery_files": [
     "api/final-evidence-inventory.v1.json",
+    "api/evidence-manifest.json",
     "api/evidence-relationship-map.v1.json",
     "api/evidence-evolution-plan.v1.json",
+    "api/ethereum-address-evidence-scope.v1.json",
     "FINAL-EVIDENCE-FREEZE.md",
     "EVIDENCE-EVOLUTION.md",
     "archive/authority-manifest/authority.jcs.json",
+    "archive/authority-manifest/signature.json",
     "archive/btc-signature/btc-signature.json",
     "archive/eth-witness/eth-witness.json",
     "archive/trust-root-policy.json",
@@ -64,10 +67,16 @@
     "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
     "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+    "evidence/ethereum-evidence-annex-v1/proof-material/L2-L3-CAPTURE-SUMMARY.json",
+    "evidence/ethereum-evidence-annex-v1/verification/package.json",
+    "evidence/ethereum-evidence-annex-v1/verification/package-lock.json",
+    "requirements-ci.txt",
+    "scripts/build_ethereum_address_evidence_scope.py",
     "nft-identity-index.json",
     "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
     "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+    "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json",
     "evidence/ethereum-proof-primitives-v1/PRIMITIVES-MANIFEST.json",
     "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
     "preservation/recovery-catalog.json",
@@ -75,13 +84,52 @@
     "preservation/external-binary-annex-state.json",
     "api/corrections-index.json"
   ],
+  "required_recovery_file_sets": [
+    {
+      "id": "ethereum_non_nft_l2_l3_witnesses",
+      "root": "evidence/ethereum-evidence-annex-v1/proof-material",
+      "inventory": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+      "expected_anchor_count_current_live": 12,
+      "expected_files": 24,
+      "selection_rule": "For every manifest anchor, recover the exact l2_execution_witness.path and l3_consensus_witness.path and require their declared size and SHA-256.",
+      "ordinary_verification_network_required": false
+    },
+    {
+      "id": "ethereum_non_nft_reference_captures",
+      "root": "evidence/ethereum-evidence-annex-v1/proof-material",
+      "inventory": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+      "expected_anchor_count_current_live": 12,
+      "expected_files": 48,
+      "required_per_anchor": ["transaction.json", "receipt.json", "block.json", "capture-manifest.json"],
+      "selection_rule": "Use each anchor tx_hash as the directory name; these provider-returned files preserve historical lookup context and remain reference-only, not the basis of L2/L3 PASS."
+    },
+    {
+      "id": "chronicle_nft_l2_witnesses",
+      "root": "evidence/nft-proof-annex-v1/proof-material/L2",
+      "inventory": "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json",
+      "expected_files": 175,
+      "selection_rule": "Recover every path in l2_witnesses and require its declared size and SHA-256.",
+      "ordinary_verification_network_required": false
+    },
+    {
+      "id": "chronicle_nft_l3_witnesses",
+      "root": "evidence/nft-proof-annex-v1/proof-material/L3",
+      "inventory": "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json",
+      "expected_files": 175,
+      "selection_rule": "Recover every path in l3_witnesses and require its declared size and SHA-256.",
+      "ordinary_verification_network_required": false
+    }
+  ],
   "mandatory_recovery_steps": [
     "verify_final_evidence_inventory_and_relationship_topology",
+    "verify_frozen_doi_v3_vs_current_live_evidence_scope_boundary",
+    "verify_required_recovery_file_sets_and_manifest_bound_hashes",
     "verify_bitcoin_originals",
     "verify_bitcoin_inscription_proof_annex_offline",
     "verify_authority_manifest",
     "verify_btc_signature",
     "verify_ethereum_non_nft_proof_annex_offline",
+    "verify_ethereum_address_scope_partition_and_eip712_authority_binding",
     "verify_175_item_nft_commitment_and_proof_annex_offline",
     "verify_frozen_ethereum_proof_primitives",
     "verify_digest_manifests",
@@ -111,16 +159,19 @@
     "corrections_index": "api/corrections-index.json",
     "authority_api": "api/authority.json",
     "evidence_manifest": "api/evidence-manifest.json",
+    "ethereum_address_evidence_scope": "api/ethereum-address-evidence-scope.v1.json",
     "bitcoin_inscription_proof_manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
     "bitcoin_inscription_offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "bitcoin_inscription_offline_verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
     "ethereum_non_nft_proof_manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
     "ethereum_non_nft_offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "ethereum_non_nft_offline_verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+    "ethereum_non_nft_capture_summary": "evidence/ethereum-evidence-annex-v1/proof-material/L2-L3-CAPTURE-SUMMARY.json",
     "chronicle_nft_identity_index": "nft-identity-index.json",
     "chronicle_nft_commitment": "evidence/nft-proof-annex-v1/NFT-COLLECTION-COMMITMENT.json",
     "chronicle_nft_offline_report": "evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
     "chronicle_nft_offline_verifier": "evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py",
+    "chronicle_nft_capture_summary": "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json",
     "ethereum_frozen_proof_primitives_manifest": "evidence/ethereum-proof-primitives-v1/PRIMITIVES-MANIFEST.json",
     "ethereum_frozen_proof_primitives": "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
     "opentimestamps_proof": "archive/evidence/ots-proofs/OTS/digest-manifest.json.ots",
@@ -134,6 +185,7 @@
   },
   "mirror_classes": {
     "github_main": "discovery_only_until_verified",
+    "post_freeze_github_delta": "recoverable only from a named verified Git commit or later hash-matched immutable mirror; never infer inclusion in the older DOI",
     "github_pages": "non_amending_mirror",
     "github_releases": "verified_only_with_release_manifest",
     "arweave": "verified_only_with_expected_hash",
@@ -169,7 +221,34 @@
       "recovery_catalog": "preservation/recovery-catalog.json",
       "current_state": "preservation/repository-preservation-state-v2.json"
     },
-    "repository_additions_after_published_baseline": {},
+    "repository_additions_after_published_baseline": {
+      "ethereum_non_nft_two_anchor_delta": {
+        "status": "offline_verified_not_in_published_final_doi_v3",
+        "baseline_version_doi": "10.5281/zenodo.21855814",
+        "included_in_published_doi": false,
+        "current_anchor_count": 12,
+        "published_doi_anchor_count": 10,
+        "tx_hashes": [
+          "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
+          "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2"
+        ],
+        "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
+        "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
+        "ordinary_verification_network_required": false,
+        "current_recovery_requires_named_git_commit_or_later_mirror": true,
+        "new_doi_publication": "not_authorized_not_attempted",
+        "new_arweave_upload": "intentionally_deferred_not_attempted",
+        "boundary": "This entry records a current repository delta and must not be claimed as bytes contained by DOI 10.5281/zenodo.21855814."
+      },
+      "fail_closed_verifier_and_discovery_hardening": {
+        "status": "repository_delta_not_in_published_final_doi_v3",
+        "baseline_version_doi": "10.5281/zenodo.21855814",
+        "included_in_published_doi": false,
+        "ordinary_verification_network_required": false,
+        "boundary": "Current verifier, recovery and discovery improvements must be recovered from a named verified Git commit until another immutable version is separately authorized."
+      }
+    },
     "external_binary_annexes": {
       "evidence": {
         "doi": "10.5281/zenodo.21753937",
@@ -201,7 +280,9 @@
     "A stale copy of this index must be checked against source_digest and corrections-index.",
     "Public claims should be interpreted through the claim registry and corrections-index.",
     "The core repository capsule embeds every Git-tracked byte in the exact publication baseline named by its manifest, while deliberately excluding production parent-history and tag objects so historical credentials are not republished; source commit/tag identities remain manifest metadata.",
-    "The owner-authorized sequence-3 final evidence freeze will include the Git-tracked Bitcoin, Ethereum and NFT proof annexes plus the unified inventory; the current published DOI predates the Bitcoin annex and this final topology.",
+    "The owner-authorized sequence-3 final evidence freeze was published and cold-restored as DOI 10.5281/zenodo.21855814 with 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors, 175 NFT proofs and the unified frozen inventory.",
+    "Current GitHub adds two offline-verified Ethereum authority/signature anchors and verifier/recovery hardening after that immutable baseline. These additions are explicitly not claimed as DOI v3 bytes and require a named verified Git commit or a future separately authorized immutable mirror for recovery.",
+    "Offline proof verification needs no Bitcoin, Ethereum or Beacon network, but the Python verifier dependencies are presently version-pinned rather than preserved as a complete wheel/sdist set with SHA-256 values. A completely blank machine without an available package index therefore still needs a future dependency capsule.",
     "The core repository capsule and the separately published evidence and Chronicle NFT binary annex DOI records together preserve the exact Git-tracked publication baseline named by the core manifest and every custom asset; this does not assert byte equality with a later moving GitHub main."
   ],
   "does_not_prove": [

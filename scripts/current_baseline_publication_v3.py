@@ -299,7 +299,22 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require_equal(refresh.get("version_doi"), doi, "final recovery doi")
     require("pending_final_freeze" not in index, "consumed recovery index retains pending_final_freeze")
     additions = index.get("latest_trusted_release", {}).get("repository_additions_after_published_baseline")
-    require_equal(additions, {}, "final repository additions")
+    require(isinstance(additions, dict), "final repository additions must be an object")
+    # A consumed immutable publication may later acquire an explicitly separated
+    # moving-source delta. Such entries must fail closed against accidental DOI
+    # overclaim; an empty mapping remains valid at the moment of publication.
+    for addition_id, addition in additions.items():
+        require(isinstance(addition, dict), f"repository addition {addition_id} malformed")
+        require_equal(
+            addition.get("included_in_published_doi"),
+            False,
+            f"repository addition {addition_id}.included_in_published_doi",
+        )
+        require_equal(
+            addition.get("baseline_version_doi"),
+            doi,
+            f"repository addition {addition_id}.baseline_version_doi",
+        )
     latest = index.get("latest_trusted_release", {}).get("repository_preservation", {})
     require_equal(latest.get("doi"), doi, "recovery.latest.doi")
     require_equal(latest.get("git_commit_sha"), source, "recovery.latest.source")

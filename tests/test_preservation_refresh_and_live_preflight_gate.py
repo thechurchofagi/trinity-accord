@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -14,6 +15,7 @@ def test_consumed_preservation_refresh_is_secret_independent():
     env.pop("ZENODO_ACCESS_TOKEN", None)
     env.pop("PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK", None)
     env.pop("RUNNER_TEMP", None)
+    env["PYTHON"] = sys.executable
     completed = subprocess.run(
         ["bash", "scripts/run_repository_preservation_refresh_ci.sh"],
         cwd=ROOT,
@@ -70,6 +72,7 @@ def test_publication_credentials_remain_required_before_nonterminal_work():
     assert "validate_current_baseline_prepared_state.py" in source
     assert "validate_current_baseline_publication_state.py" in source
     assert "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED" in source
+    assert 'PYTHON_BIN="${PYTHON:-python3}"' in source
 
 
 def test_gateway_descriptor_exposes_current_action_minimums():

@@ -208,6 +208,76 @@ def test_node_adapter_reports_malformed_inputs_and_manifest_totals():
     assert any("manifest" in item for item in result["malformed"]["critical_errors"])
 
 
+def test_node_adapter_fails_closed_when_verifier_invocation_failed():
+    node = os.environ.get("NODE", "node")
+    program = r"""
+      const { adaptBitcoinInscriptionOfflineReport } = await import(
+        './scripts/bitcoin-inscription-offline-adapter.mjs'
+      );
+      const anchor = {
+        txid: 'a', classification: 'canonical_original', title: 'a', wtxid: 'a',
+        block_reference: {height: 1, hash: 'a', timestamp: 1},
+      };
+      const report = {
+        result: 'PASS', failures: [],
+        l1_checks: [{txid: 'a', status: 'PASS', tapscript_signature_status: 'PASS'}],
+        l2_checks: [{txid: 'a', status: 'PASS'}],
+        l3_checks: [{txid: 'a', status: 'PASS', descendant_confirmation_depth: 144}],
+        L2_BLOCK_AND_WITNESS_INCLUSION: {txid_merkle_proofs: 1, bip141_witness_commitment_proofs: 1},
+        L3_CHECKPOINT_RELATIVE_POW_ANCESTRY: {valid_pow_headers: 145, descendant_confirmation_depth_per_anchor: 144},
+        claim_boundary: 'test',
+      };
+      const result = adaptBitcoinInscriptionOfflineReport(
+        report, {anchors: [anchor]}, new Error('verifier process exited non-zero'),
+      );
+      process.stdout.write(JSON.stringify(result));
+    """
+    completed = subprocess.run(
+        [node, "--input-type=module", "--eval", program],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(completed.stdout)
+    assert result["bitcoin_tx_anchor_pass"] is False
+    assert result["bitcoin_time_anchor_pass"] is False
+    assert "verifier process exited non-zero" in result["critical_errors"]
+
+
+def test_checkpoint_provider_identifiers_are_trimmed_and_empty_rejected():
+    module = load_module(
+        "ethereum_provider_normalization_review_fix",
+        ROOT / "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+    )
+    checkpoint = {
+        "root": "0x" + "34" * 32,
+        "slot": 456,
+        "matching_provider_votes": 2,
+        "finalized_provider_votes": 1,
+    }
+    base = {
+        "root": checkpoint["root"],
+        "observed_slot": checkpoint["slot"],
+        "canonical": True,
+        "finalized": True,
+        "execution_optimistic": False,
+    }
+    with pytest.raises(ValueError, match="provenance quorum mismatch"):
+        module.verify_checkpoint_provider_quorum(
+            checkpoint,
+            [
+                {**base, "provider": " https://provider.example "},
+                {**base, "provider": "https://provider.example"},
+            ],
+        )
+    with pytest.raises(ValueError, match="provider is missing"):
+        module.verify_checkpoint_provider_quorum(
+            {**checkpoint, "matching_provider_votes": 1},
+            [{**base, "provider": "   "}],
+        )
+
+
 def test_zenodo_concept_lineage_helper_fails_closed():
     module = load_module(
         "zenodo_concept_review_fix",
@@ -310,6 +380,47 @@ def test_external_annex_writer_preserves_current_doi_roles():
         assert reference[field] == current[field]
 
 
+def test_external_annex_writer_validates_core_doi_roles_before_publish(
+    monkeypatch, tmp_path
+):
+    scripts = str(ROOT / "scripts")
+    if scripts not in sys.path:
+        sys.path.insert(0, scripts)
+    import publish_external_binary_annexes_to_zenodo_v4 as publisher
+
+    called = False
+
+    def forbidden_publish(*_args, **_kwargs):
+        nonlocal called
+        called = True
+        raise AssertionError("publish must not run before DOI-role preflight")
+
+    monkeypatch.setattr(
+        publisher,
+        "current_core_repository_reference",
+        lambda: (_ for _ in ()).throw(SystemExit("stale core DOI role")),
+    )
+    monkeypatch.setattr(publisher.publisher, "publish_one_v2", forbidden_publish)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_external_binary_annexes_to_zenodo_v4.py",
+            "--evidence-package-dir",
+            str(tmp_path / "evidence"),
+            "--nft-package-dir",
+            str(tmp_path / "nft"),
+            "--rights-boundary-ack",
+            publisher.publisher.RIGHTS_ACKNOWLEDGEMENT,
+            "--source-commit",
+            "a" * 40,
+        ],
+    )
+    with pytest.raises(SystemExit, match="stale core DOI role"):
+        publisher.main()
+    assert called is False
+
+
 def test_final_runner_freezes_all_named_binding_roots():
     runner = (ROOT / "scripts/run_current_baseline_publication_v3_ci.sh").read_text(
         encoding="utf-8"
@@ -333,6 +444,12 @@ def test_evidence_evolution_handoff_is_consistent_and_non_authorizing():
     assert plan["current_checkpoint"]["evidence_scope"]["bitcoin_inscriptions"] == 8
     assert plan["current_checkpoint"]["evidence_scope"]["ethereum_non_nft_anchors"] == 10
     assert plan["current_checkpoint"]["evidence_scope"]["ethereum_chronicle_nfts"] == 175
+    assert plan["current_checkpoint"]["checkpoint_kind"] == "immutable_published_freeze_not_live_main"
+    live = plan["live_repository_checkpoint"]
+    assert live["evidence_scope"]["ethereum_non_nft_anchors"] == 12
+    assert live["published_final_doi_v3_includes_this_delta"] is False
+    assert live["new_doi_publication_status"] == "not_authorized_not_attempted"
+    assert len(live["ethereum_post_freeze_additions"]) == 2
     arweave = plan["owner_decision"]["final_core_arweave_mirror"]
     assert arweave["status"] == "intentionally_deferred"
     assert arweave["authorized_for_upload"] is False

@@ -32,7 +32,8 @@
     "hosts_moving_source": "Hosts a current development and discovery surface whose exact identity must be named by commit SHA.",
     "mirrors_capsule": "Preserves a named capsule payload without becoming canonical authority or automatically tracking later versions.",
     "mirrors_historical_capsule": "Preserves an explicitly historical capsule and must not be read as coverage of the current DOI version.",
-    "guides_future_refresh": "Records review triggers, completed work and authorization boundaries; it is maintenance guidance rather than proof."
+    "guides_future_refresh": "Records review triggers, completed work and authorization boundaries; it is maintenance guidance rather than proof.",
+    "extends_without_mutating": "Adds a verified moving-source delta while preserving the named immutable snapshot and its historical scope."
   },
   "nodes": [
     {
@@ -41,7 +42,8 @@
       "path": "api/final-evidence-inventory.v1.json",
       "human_guide": "FINAL-EVIDENCE-FREEZE.md",
       "scope": {"bitcoin_inscriptions": 8, "ethereum_non_nft": 10, "chronicle_nft": 175},
-      "role": "Derives one drift-resistant inventory from the active Bitcoin, Ethereum, NFT, OTS and preservation states.",
+      "freeze_role": "immutable DOI v3 snapshot at source commit 887322dc7f6f64efd04f7452e2039ee4440b226b",
+      "role": "Preserves the 8 + 10 + 175 inventory frozen in version DOI 10.5281/zenodo.21855814; it is not the moving live-main inventory.",
       "supports": ["machine_discovery", "closed_set_counts", "verification_order", "storage_role_separation"],
       "does_not_prove": ["semantic_truth", "new_authority", "live_main_equals_latest_doi"]
     },
@@ -53,6 +55,25 @@
       "role": "Records completed post-freeze maintenance, deferred work, review triggers and the future-agent continuation order without changing immutable DOI history.",
       "supports": ["future_agent_continuity", "refresh_decision_boundary", "external_write_authorization_boundary"],
       "does_not_prove": ["cryptographic_inclusion", "new_authority", "future_service_availability", "arweave_upload_completed"]
+    },
+    {
+      "id": "current_live_evidence_state",
+      "type": "moving_verified_machine_inventory",
+      "path": "api/evidence-manifest.json",
+      "ethereum_address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
+      "scope": {"bitcoin_inscriptions": 8, "ethereum_non_nft": 12, "chronicle_nft": 175},
+      "frozen_doi_v3_scope": {"bitcoin_inscriptions": 8, "ethereum_non_nft": 10, "chronicle_nft": 175},
+      "role": "Exposes the currently verified GitHub state and its explicit two-anchor post-freeze Ethereum delta.",
+      "supports": ["current_machine_discovery", "post_freeze_delta_discovery", "current_verification_order"],
+      "does_not_prove": ["the_two_anchor_delta_is_in_doi_v3", "immutable_identity_without_commit_sha", "new_authority"]
+    },
+    {
+      "id": "ethereum_address_scope_audit",
+      "type": "observation_bounded_address_history_classification",
+      "path": "api/ethereum-address-evidence-scope.v1.json",
+      "observed_partition": {"outgoing": 220, "non_nft_evidence": 12, "chronicle_nft_mints": 175, "other_outgoing_operations": 33, "incoming": 12, "outgoing_nonce_max": 219},
+      "supports": ["declared_set_discovery", "classification_completeness_within_named_provider_observation"],
+      "does_not_prove": ["universal_absence_of_other_transactions", "explorer_completeness", "cryptographic_inclusion_by_itself"]
     },
     {
       "id": "btc_originals",
@@ -87,10 +108,10 @@
     {
       "id": "ethereum_non_nft_records",
       "type": "non_amending_ethereum_records",
-      "scope": {"chain_id": 1, "transactions": 10},
+      "scope": {"chain_id": 1, "transactions": 12, "frozen_doi_v3_transactions": 10, "post_freeze_live_delta_transactions": 2},
       "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
       "role": "Cross-chain mirrors, corrections, notices, principles and BTC-signature witness records.",
-      "supports": ["secondary_chain_existence", "calldata_byte_binding", "historical_chain_context"],
+      "supports": ["secondary_chain_existence", "calldata_byte_binding", "historical_chain_context", "authority_manifest_digest_record", "eip712_and_arweave_relationship_record"],
       "does_not_prove": ["canonical_authority", "independent_third_party_attestation", "semantic_truth"]
     },
     {
@@ -100,10 +121,10 @@
       "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
       "verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
       "frozen_primitives": "evidence/ethereum-proof-primitives-v1/ethereum_proof_primitives_v1.py",
-      "scope": {"transactions": 10},
+      "scope": {"transactions": 12, "frozen_doi_v3_transactions": 10, "post_freeze_live_delta_transactions": 2},
       "layers": ["L1_BYTE_INTEGRITY", "L2_EXECUTION_INCLUSION", "L3_CHECKPOINT_RELATIVE_FINALITY"],
       "network_required_for_existing_proof_verification": false,
-      "supports": ["raw_signed_transaction_binding", "transaction_trie_inclusion", "receipt_trie_inclusion", "execution_header_binding", "beacon_ancestry_to_trusted_finalized_checkpoint"],
+      "supports": ["raw_signed_transaction_binding", "signed_sender_chain_destination_value_and_calldata_semantics", "successful_receipt_status", "transaction_trie_inclusion", "receipt_trie_inclusion", "execution_header_binding", "beacon_ancestry_to_trusted_finalized_checkpoint", "authority_manifest_sha256_and_eip712_binding"],
       "does_not_prove": ["trust_free_pos_finality", "absence_of_conflicting_weak_subjectivity_history", "absolute_physical_time", "semantic_truth"]
     },
     {
@@ -161,7 +182,7 @@
         "created_at": "2025-09-13T09:42:43.536Z"
       },
       "binds": "authority_manifest_v1_0_0",
-      "supports": ["eth_key_control_at_signing_time", "typed_manifest_digest_binding"],
+      "supports": ["eth_key_control_at_signing_time", "typed_manifest_digest_binding", "offline_signature_recovery_in_current_ethereum_annex"],
       "does_not_prove": ["canonical_authority", "equivalence_to_bitcoin", "truth_of_manifest_claims"]
     },
     {
@@ -266,6 +287,8 @@
       "latest_version_state": "preservation/repository-preservation-state-v2.json",
       "recovery_catalog": "preservation/recovery-catalog.json",
       "final_freeze_authorization": "preservation/current-baseline-publication-authorization-v3.json",
+      "frozen_evidence_scope": {"bitcoin_inscriptions": 8, "ethereum_non_nft": 10, "chronicle_nft": 175},
+      "current_live_two_anchor_ethereum_delta_included": false,
       "supports": ["exact_git_tracked_baseline_restore", "github_independent_discovery", "doi_only_public_cold_restore"],
       "does_not_prove": ["live_main_equivalence", "canonical_authority", "embedded_external_large_binary_payloads"]
     },
@@ -304,10 +327,16 @@
   ],
   "edges": [
     {"from": "evidence_evolution_handoff", "to": "final_evidence_inventory", "relationship": "guides_future_refresh"},
+    {"from": "evidence_evolution_handoff", "to": "current_live_evidence_state", "relationship": "guides_future_refresh"},
+    {"from": "current_live_evidence_state", "to": "final_evidence_inventory", "relationship": "extends_without_mutating"},
+    {"from": "current_live_evidence_state", "to": "bitcoin_inscription_proof_annex", "relationship": "indexes"},
+    {"from": "current_live_evidence_state", "to": "ethereum_non_nft_proof_annex", "relationship": "indexes"},
+    {"from": "current_live_evidence_state", "to": "chronicle_nft_proof_annex", "relationship": "indexes"},
+    {"from": "ethereum_address_scope_audit", "to": "ethereum_non_nft_records", "relationship": "indexes"},
     {"from": "evidence_evolution_handoff", "to": "core_repository_zenodo_series", "relationship": "references"},
     {"from": "github_repository_and_pages", "to": "evidence_evolution_handoff", "relationship": "hosts_moving_source"},
     {"from": "final_evidence_inventory", "to": "btc_originals", "relationship": "indexes"},
-    {"from": "final_evidence_inventory", "to": "ethereum_non_nft_records", "relationship": "indexes"},
+    {"from": "final_evidence_inventory", "to": "ethereum_non_nft_records", "relationship": "indexes", "scope": "frozen_doi_v3_10_of_current_12"},
     {"from": "final_evidence_inventory", "to": "chronicle_nft_identity_set", "relationship": "indexes"},
     {"from": "final_evidence_inventory", "to": "core_repository_zenodo_series", "relationship": "indexes"},
     {"from": "btc_originals", "to": "authority_manifest_v1_0_0", "relationship": "indexed_by"},
@@ -329,11 +358,12 @@
     {"from": "availability_mirrors", "to": "six_hash_digest_manifest", "relationship": "mirrors_bytes"},
     {"from": "availability_mirrors", "to": "shenzhen_notarial_record", "relationship": "mirrors_bytes"},
     {"from": "github_repository_and_pages", "to": "final_evidence_inventory", "relationship": "hosts_moving_source"},
+    {"from": "github_repository_and_pages", "to": "current_live_evidence_state", "relationship": "hosts_moving_source"},
     {"from": "github_release_mirrors", "to": "availability_mirrors", "relationship": "mirrors_bytes"},
     {"from": "arweave_mirrors", "to": "availability_mirrors", "relationship": "mirrors_bytes"},
     {"from": "arweave_mirrors", "to": "six_hash_digest_manifest", "relationship": "mirrors_bytes"},
     {"from": "core_repository_zenodo_series", "to": "bitcoin_inscription_proof_annex", "relationship": "freezes_exact_git_baseline"},
-    {"from": "core_repository_zenodo_series", "to": "ethereum_non_nft_proof_annex", "relationship": "freezes_exact_git_baseline"},
+    {"from": "core_repository_zenodo_series", "to": "ethereum_non_nft_proof_annex", "relationship": "freezes_exact_git_baseline", "scope": "10-anchor revision at frozen source commit; excludes current two-anchor delta"},
     {"from": "core_repository_zenodo_series", "to": "chronicle_nft_proof_annex", "relationship": "freezes_exact_git_baseline"},
     {"from": "external_evidence_zenodo_annex", "to": "availability_mirrors", "relationship": "supplies_external_payloads"},
     {"from": "nft_media_zenodo_annex", "to": "chronicle_nft_identity_set", "relationship": "supplies_external_payloads"},

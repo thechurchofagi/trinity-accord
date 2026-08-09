@@ -20,9 +20,9 @@ def test_all_audited_ethereum_anchors_carry_frozen_history_and_offline_proofs_wi
     manifest = load(MANIFEST)
     anchors = manifest["anchors"]
     assert isinstance(anchors, list)
-    assert len(anchors) == 10
+    assert len(anchors) == 12
     assert manifest["proof_material_policy"]["rpc_history_capture"] == (
-        "PRESERVED_FOR_ALL_10_ANCHORS_REFERENCE_ONLY"
+        "PRESERVED_FOR_ALL_12_ANCHORS_REFERENCE_ONLY"
     )
 
     for anchor in anchors:

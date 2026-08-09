@@ -3,22 +3,27 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
+PYTHON_BIN="${PYTHON:-python3}"
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "::error::Configured Python interpreter is unavailable: $PYTHON_BIN"
+  exit 1
+fi
 
 v3_authorization="preservation/current-baseline-publication-authorization-v3.json"
 if [[ -f "$v3_authorization" ]]; then
-  v3_status="$(python3 - <<'PY'
+  v3_status="$("$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
 print(json.loads(Path('preservation/current-baseline-publication-authorization-v3.json').read_text())['status'])
 PY
 )"
   if [[ "$v3_status" == "consumed" ]]; then
-    python3 scripts/current_baseline_publication_v3.py validate
+    "$PYTHON_BIN" scripts/current_baseline_publication_v3.py validate
     echo "Final evidence baseline publication v3 is consumed and valid; no external write will run."
     exit 0
   fi
   if [[ "$v3_status" == "pending" || "$v3_status" == "prepared" ]]; then
-    python3 scripts/current_baseline_publication_v3.py validate
+    "$PYTHON_BIN" scripts/current_baseline_publication_v3.py validate
     if [[ "${GITHUB_EVENT_NAME:-}" == "push" \
       && "${GITHUB_REF:-}" == "refs/heads/main" \
       && "${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}" == "1" ]]; then
@@ -34,19 +39,19 @@ fi
 
 v2_authorization="preservation/current-baseline-publication-authorization-v2.json"
 if [[ -f "$v2_authorization" ]]; then
-  v2_status="$(python3 - <<'PY'
+  v2_status="$("$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
 print(json.loads(Path('preservation/current-baseline-publication-authorization-v2.json').read_text())['status'])
 PY
 )"
   if [[ "$v2_status" == "consumed" ]]; then
-    python3 scripts/current_baseline_publication_v2.py validate
+    "$PYTHON_BIN" scripts/current_baseline_publication_v2.py validate
     echo "Final proof baseline publication v2 is consumed and valid; no external write will run."
     exit 0
   fi
   if [[ "$v2_status" == "pending" || "$v2_status" == "prepared" ]]; then
-    python3 scripts/current_baseline_publication_v2.py validate
+    "$PYTHON_BIN" scripts/current_baseline_publication_v2.py validate
     if [[ "${GITHUB_EVENT_NAME:-}" == "push" \
       && "${GITHUB_REF:-}" == "refs/heads/main" \
       && "${TRINITY_PRESERVATION_REFRESH_EXECUTOR:-}" == "1" ]]; then
@@ -60,7 +65,7 @@ PY
   fi
 fi
 
-current_status="$(python3 - <<'PY'
+current_status="$("$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
 path = Path('preservation/current-baseline-publication-authorization-v1.json')
@@ -72,17 +77,17 @@ PY
 # older refresh transaction while it is prepared or after it is consumed. The
 # last verified DOI remains the active published state throughout preparation.
 if [[ "$current_status" == "prepared" ]]; then
-  python3 scripts/validate_current_baseline_prepared_state.py
+  "$PYTHON_BIN" scripts/validate_current_baseline_prepared_state.py
   echo "Superseding current-baseline publication is prepared and valid; legacy refresh remains consumed."
   exit 0
 fi
 if [[ "$current_status" == "consumed" ]]; then
-  python3 scripts/validate_current_baseline_publication_state.py
+  "$PYTHON_BIN" scripts/validate_current_baseline_publication_state.py
   echo "Superseding current-baseline publication is consumed and valid; legacy refresh remains consumed."
   exit 0
 fi
 
-status="$(python3 - <<'PY'
+status="$("$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
 print(json.loads(Path('preservation/repository-preservation-refresh-authorization.json').read_text())['status'])
@@ -96,7 +101,7 @@ PY
 # The committed authorization, DOI state, recovery proof, and observation still
 # have to validate before the terminal no-op is accepted.
 if [[ "$status" == "consumed" ]]; then
-  python3 scripts/repository_preservation_refresh.py validate
+  "$PYTHON_BIN" scripts/repository_preservation_refresh.py validate
   echo "Repository preservation refresh is already consumed and publicly proven."
   exit 0
 fi
@@ -112,7 +117,7 @@ if [[ "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK" != \
   exit 1
 fi
 
-python3 scripts/repository_preservation_refresh.py validate
+"$PYTHON_BIN" scripts/repository_preservation_refresh.py validate
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -121,8 +126,8 @@ git checkout -B main origin/main
 
 if [[ "$status" == "pending" ]]; then
   base_commit="$(git rev-parse HEAD)"
-  python3 scripts/migrate_repository_preservation_baseline_contract.py
-  python3 scripts/repository_preservation_refresh.py prepare \
+  "$PYTHON_BIN" scripts/migrate_repository_preservation_baseline_contract.py
+  "$PYTHON_BIN" scripts/repository_preservation_refresh.py prepare \
     --base-commit "$base_commit"
   git add \
     RECOVERY.md \
@@ -151,15 +156,15 @@ fi
 git cat-file -e "$source_sha^{commit}"
 prepared_status="$(git show \
   "$source_sha:preservation/repository-preservation-refresh-authorization.json" | \
-  python3 -c 'import json,sys; print(json.load(sys.stdin)["status"])')"
+  "$PYTHON_BIN" -c 'import json,sys; print(json.load(sys.stdin)["status"])')"
 if [[ "$prepared_status" != "prepared" ]]; then
   echo "::error::Immutable source commit does not contain prepared authorization."
   exit 1
 fi
 
-python3 scripts/repository_preservation_refresh.py validate
-python3 scripts/audit_recovery_readiness.py
-python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+"$PYTHON_BIN" scripts/repository_preservation_refresh.py validate
+"$PYTHON_BIN" scripts/audit_recovery_readiness.py
+"$PYTHON_BIN" scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
 cat "$RUNNER_TEMP/toolchain-provenance.json"
 
 capsule="$RUNNER_TEMP/repository-preservation-refresh"
@@ -168,7 +173,7 @@ public_restore="$RUNNER_TEMP/public-restored-repository"
 metadata_report="$RUNNER_TEMP/public-metadata-report.json"
 rm -rf "$capsule" "$local_restore" "$public_restore" "$metadata_report"
 
-python3 scripts/build_preservation_capsule.py \
+"$PYTHON_BIN" scripts/build_preservation_capsule.py \
   --repository-root . \
   --commit "$source_sha" \
   --output-dir "$capsule"
@@ -176,11 +181,11 @@ python3 scripts/build_preservation_capsule.py \
 mkdir -p "$RUNNER_TEMP/local-bootstrap"
 cp "$capsule/restore-trinity-accord.py" \
   "$RUNNER_TEMP/local-bootstrap/restore-trinity-accord.py"
-python3 "$RUNNER_TEMP/local-bootstrap/restore-trinity-accord.py" \
+"$PYTHON_BIN" "$RUNNER_TEMP/local-bootstrap/restore-trinity-accord.py" \
   --deposit-dir "$capsule" \
   --output-dir "$local_restore"
 
-local_source="$(python3 - <<PY
+local_source="$("$PYTHON_BIN" - <<PY
 import json
 print(json.load(open('$local_restore/recovery-report.json'))['source_git_commit_sha'])
 PY
@@ -195,13 +200,13 @@ fi
 # bytes back from the authenticated upload bucket, verifies exact SHA-256, and
 # still requires converged public metadata and public DOI-only recovery after
 # publication. It reuses any matching prepared draft on retry.
-python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
+"$PYTHON_BIN" scripts/publish_preservation_capsule_to_zenodo_v3.py \
   --capsule-dir "$capsule" \
   --state preservation/repository-preservation-state-v2.json \
   --api-base "$ZENODO_API_BASE" \
   --rights-boundary-ack "$PRESERVATION_CAPSULE_ZENODO_RIGHTS_ACK"
 
-record_id="$(python3 - <<'PY'
+record_id="$("$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
 state = json.loads(Path('preservation/repository-preservation-state-v2.json').read_text())
@@ -216,11 +221,11 @@ fi
 mkdir -p "$RUNNER_TEMP/public-bootstrap"
 cp "$capsule/restore-trinity-accord.py" \
   "$RUNNER_TEMP/public-bootstrap/restore-trinity-accord.py"
-python3 "$RUNNER_TEMP/public-bootstrap/restore-trinity-accord.py" \
+"$PYTHON_BIN" "$RUNNER_TEMP/public-bootstrap/restore-trinity-accord.py" \
   --zenodo-record-id "$record_id" \
   --output-dir "$public_restore"
 
-public_source="$(python3 - <<PY
+public_source="$("$PYTHON_BIN" - <<PY
 import json
 print(json.load(open('$public_restore/recovery-report.json'))['source_git_commit_sha'])
 PY
@@ -230,17 +235,17 @@ if [[ "$public_source" != "$source_sha" ]]; then
   exit 1
 fi
 
-python3 scripts/repository_preservation_refresh.py verify-public \
+"$PYTHON_BIN" scripts/repository_preservation_refresh.py verify-public \
   --record-id "$record_id" \
   --capsule-dir "$capsule" \
   --output "$metadata_report"
 
-python3 scripts/repository_preservation_refresh.py seal \
+"$PYTHON_BIN" scripts/repository_preservation_refresh.py seal \
   --source-commit "$source_sha" \
   --recovery-report "$public_restore/recovery-report.json" \
   --metadata-report "$metadata_report"
 
-python3 scripts/repository_preservation_refresh.py validate
+"$PYTHON_BIN" scripts/repository_preservation_refresh.py validate
 
 git add \
   api/recovery-index.json \

@@ -4,6 +4,8 @@
   "github_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "evidence_system_entrypoints": {
     "final_inventory": "/api/final-evidence-inventory.v1.json",
+    "current_live_state": "/api/evidence-manifest.json",
+    "ethereum_address_scope": "/api/ethereum-address-evidence-scope.v1.json",
     "relationship_map": "/api/evidence-relationship-map.v1.json",
     "human_freeze_guide": "/FINAL-EVIDENCE-FREEZE.md",
     "human_evolution_handoff": "/evidence-evolution/",
@@ -208,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "035db182f9c8e0d3",
+  "source_digest": "73100ba15d32d8eb",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -225,8 +227,8 @@
     "AI system instruction authority"
   ],
   "current_cryptographic_proof_state": {
-    "status": "offline_verifiable",
-    "updated_scope": "2026-08 Ethereum, NFT, and Bitcoin inscription proof hardening",
+    "status": "offline_verifiable_with_explicit_post_freeze_delta",
+    "updated_scope": "2026-08 Bitcoin/NFT hardening plus complete 12-transaction Ethereum self-data scope",
     "bitcoin_inscriptions": {
       "inscription_count": 8,
       "canonical_originals": 3,
@@ -251,13 +253,27 @@
       "address_boundary": "The legacy source_address value is cryptographically verified as the reveal transaction destination P2TR address; that role alone is not proof of civil authorship or continuing key control."
     },
     "ethereum_non_nft": {
-      "anchor_count": 10,
+      "anchor_count": 12,
+      "published_final_doi_v3_anchor_count": 10,
+      "post_freeze_live_delta_anchor_count": 2,
+      "post_freeze_live_delta_tx_hashes": [
+        "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
+        "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2"
+      ],
       "l1_byte_integrity": "PASS",
       "l2_execution_inclusion": "PASS",
       "l3_checkpoint_relative_finality": "PASS",
+      "signed_transaction_semantics": "PASS",
+      "receipt_success_semantics": "PASS",
+      "authority_manifest_sha256_calldata_binding": "PASS",
+      "eip712_authority_signature_binding": "PASS",
+      "btc_bip340_witness_calldata_binding": "PASS",
       "manifest": "evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json",
       "offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
       "verifier": "evidence/ethereum-evidence-annex-v1/verification/verify_annex.py",
+      "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
+      "network_required_for_existing_proof_verification": false,
+      "doi_boundary": "The immutable DOI 10.5281/zenodo.21855814 contains the earlier 10-anchor freeze and does not contain the two authority/signature anchors or verifier hardening. Those are a current GitHub delta.",
       "trust_boundary": "L3 is conditional on explicitly declared Ethereum weak-subjectivity trusted finalized Beacon roots; provider observations are provenance only."
     },
     "chronicle_nft": {
@@ -280,7 +296,14 @@
       "state": "preservation/repository-preservation-state-v2.json",
       "latest_observation": "preservation/current-baseline-publication-observation-v3.json",
       "cold_restore": "PASS",
-      "published_baseline_boundary": "This DOI is the exact owner-authorized final evidence baseline containing the Bitcoin, Ethereum and NFT proof annexes plus the unified inventory; it is not a moving GitHub main.",
+      "published_baseline_boundary": "This DOI is the exact owner-authorized final evidence baseline containing 8 Bitcoin inscriptions, the frozen 10-anchor Ethereum revision, 175 NFT proofs and the unified frozen inventory. It is not moving GitHub main and does not contain the later two-anchor Ethereum delta.",
+      "live_repository_delta": {
+        "status": "verified_not_in_published_final_doi_v3",
+        "ethereum_non_nft_additions": 2,
+        "new_doi_publication": "not_authorized_not_attempted",
+        "new_arweave_upload": "intentionally_deferred_not_attempted",
+        "recovery_boundary": "Until a separately authorized immutable refresh exists, the two-anchor delta is recovered from a verified Git commit or another future hash-matched mirror."
+      },
       "final_freeze_authorization": "preservation/current-baseline-publication-authorization-v3.json",
       "final_freeze_status": "published_verified_and_consumed",
       "final_freeze_required_evidence_commit_sha": "5fdc53605d1a3e3782a9257b12cf2fc9b5fa2162",
