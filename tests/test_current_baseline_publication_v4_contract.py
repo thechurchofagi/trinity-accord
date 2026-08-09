@@ -121,7 +121,31 @@ def test_sequence4_state_machine_and_generated_maps_validate():
     assert inventory["final_freeze"]["published_doi"] == PREVIOUS_DOI
 
 
-def test_sequence4_prepare_and_seal_transition_in_isolated_copy(tmp_path):
+def test_sequence4_prepare_and_seal_transition_or_consumed_terminal_state(tmp_path):
+    source_auth = load(AUTH)
+    if source_auth["status"] == "consumed":
+        final = load(ROOT / "preservation/repository-preservation-state-v2.json")
+        observation = load(
+            ROOT / "preservation/current-baseline-publication-observation-v4.json"
+        )
+        assert source_auth["published_doi"] == final["latest_doi"]
+        assert source_auth["published_source_baseline_commit_sha"] == final[
+            "latest_git_commit_sha"
+        ]
+        assert source_auth["published_package_identity_sha256"] == final[
+            "latest_package_identity_sha256"
+        ]
+        assert final["current_evidence_checkpoint"]["status"] == (
+            "published_verified_and_consumed"
+        )
+        assert final["public_metadata_verification"] == "passed"
+        assert final["public_cold_restore"] == "passed"
+        assert observation["status"] == "passed"
+        assert observation["public_cold_restore"] == "passed"
+        assert observation["arweave_snapshot_refreshed"] is False
+        return
+
+    assert source_auth["status"] in {"pending", "prepared"}
     module = state_module()
     path_map = {
         "AUTH": AUTH,
@@ -139,15 +163,22 @@ def test_sequence4_prepare_and_seal_transition_in_isolated_copy(tmp_path):
         shutil.copy2(source, destination)
         setattr(module, name, destination)
     module.PREPARED = tmp_path / "prepared-v4.json"
+    if source_auth["status"] == "prepared":
+        shutil.copy2(
+            ROOT / "preservation/current-baseline-publication-prepared-v4.json",
+            module.PREPARED,
+        )
     module.OBSERVATION = tmp_path / "observation-v4.json"
     module.refresh_inventory = lambda: None
 
     base = "a" * 40
-    module.prepare(base)
+    if source_auth["status"] == "pending":
+        module.prepare(base)
     prepared_auth = load(module.AUTH)
     prepared_state = load(module.STATE)
     assert prepared_auth["status"] == "prepared"
-    assert prepared_auth["prepared_base_commit_sha"] == base
+    if source_auth["status"] == "pending":
+        assert prepared_auth["prepared_base_commit_sha"] == base
     assert prepared_state["latest_doi"] == PREVIOUS_DOI
     assert prepared_state["publication_status"] == "prepared_for_evidence_checkpoint_publication_v4"
     assert prepared_state["current_evidence_checkpoint"]["arweave_snapshot_refreshed"] is False
