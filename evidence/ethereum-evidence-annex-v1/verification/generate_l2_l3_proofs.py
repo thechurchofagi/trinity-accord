@@ -169,8 +169,15 @@ def beacon_header_root(message: dict) -> str:
     return "0x" + merkleize_chunks(fields).hex()
 
 
-def fetch_header(beacon: str, block_id: str, *, attempts: int = 4) -> dict:
-    payload = get_json(beacon, f"/eth/v1/beacon/headers/{block_id}", attempts=attempts)
+def fetch_header(
+    beacon: str, block_id: str, *, attempts: int = 4, timeout: int = 45
+) -> dict:
+    payload = get_json(
+        beacon,
+        f"/eth/v1/beacon/headers/{block_id}",
+        attempts=attempts,
+        timeout=timeout,
+    )
     data = payload["data"]
     computed = beacon_header_root(data["header"]["message"])
     if computed.lower() != data["root"].lower():
@@ -192,8 +199,11 @@ def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: i
     repository still explicitly trusts that descendant root as finalized; provider fields
     are provenance, not a substitute for the declared trust assumption.
     """
-    for base_offset in (128, 160, 192, 224, 256, 320):
-        for extra in range(16):
+    # Finality is explicitly trusted at the named descendant root; it is not inferred
+    # from an arbitrary confirmation distance. Prefer the nearest finalized descendant
+    # so capture requires only a small, bounded number of public API requests.
+    for base_offset in (1, 8, 16, 32):
+        for extra in range(8):
             candidate_slot = target_slot + base_offset + extra
             observations = []
             for base in beacons:
@@ -211,18 +221,27 @@ def find_trusted_finalized_root(beacons: list[str], primary: str, target_slot: i
                 except Exception as exc:
                     observations.append({"provider": base, "requested_slot": candidate_slot, "error": str(exc)})
             good = [o for o in observations if o.get("canonical") is True and o.get("observed_slot") == candidate_slot and "root" in o]
-            counts = collections.Counter(o["root"] for o in good)
+            providers_by_root: dict[str, set[str]] = collections.defaultdict(set)
+            finalized_by_root: dict[str, set[str]] = collections.defaultdict(set)
+            for observation in good:
+                provider = str(observation.get("provider", "")).strip()
+                if not provider:
+                    continue
+                root = observation["root"]
+                providers_by_root[root].add(provider)
+                if observation.get("finalized") is True and observation.get("execution_optimistic") is False:
+                    finalized_by_root[root].add(provider)
+            counts = collections.Counter({root: len(providers) for root, providers in providers_by_root.items()})
             if not counts:
                 continue
             root, votes = counts.most_common(1)[0]
-            matching = [o for o in good if o["root"] == root]
-            finalized_votes = sum(1 for o in matching if o.get("finalized") is True)
+            finalized_votes = len(finalized_by_root[root])
             if votes < 2 or finalized_votes < 1:
                 continue
             chain = []
             cur = root
             found = False
-            for _ in range(512):
+            for _ in range(64):
                 hdr = fetch_header(primary, cur)
                 chain.append(hdr)
                 parent = hdr["message"]["parent_root"].lower()
@@ -254,12 +273,21 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--rpc", default="https://ethereum-rpc.publicnode.com")
     ap.add_argument("--beacon", action="append", default=[])
+    ap.add_argument(
+        "--tx",
+        action="append",
+        default=[],
+        help="Capture only the named transaction hash; repeat for multiple anchors.",
+    )
     ap.add_argument("--node-helper", required=True)
     args = ap.parse_args()
     beacons = args.beacon or [
         "https://ethereum-beacon-api.publicnode.com",
         "https://docs-demo.quiknode.pro",
     ]
+    beacons = list(dict.fromkeys(base.strip() for base in beacons if base.strip()))
+    if len(beacons) < 2:
+        raise SystemExit("proof capture requires at least two distinct Beacon providers")
     primary = beacons[0]
     genesis = get_json(primary, "/eth/v1/beacon/genesis")["data"]
     if int(genesis["genesis_time"]) != GENESIS_TIME:
@@ -267,8 +295,22 @@ def main() -> int:
 
     manifest = json.loads(pathlib.Path(args.manifest).read_text(encoding="utf-8"))
     out = pathlib.Path(args.out)
+    requested = {value.lower() for value in args.tx}
+    known = {anchor["tx_hash"].lower() for anchor in manifest["anchors"]}
+    unknown = sorted(requested - known)
+    if unknown:
+        raise SystemExit(f"unknown requested transaction(s): {', '.join(unknown)}")
+    selected = [
+        anchor for anchor in manifest["anchors"]
+        if not requested or anchor["tx_hash"].lower() in requested
+    ]
+    summary_path = out / "L2-L3-CAPTURE-SUMMARY.json"
+    previous = {}
+    if summary_path.is_file():
+        prior = json.loads(summary_path.read_text(encoding="utf-8"))
+        previous = {item["tx_hash"].lower(): item for item in prior.get("anchors", [])}
     summary = []
-    for anchor in manifest["anchors"]:
+    for anchor in selected:
         txh = anchor["tx_hash"].lower()
         print(f"capturing {txh}", flush=True)
         target_dir = out / txh
@@ -339,7 +381,7 @@ def main() -> int:
             "verification_model": "execution block hash is SSZ-proven into target Beacon body; target Beacon root is linked by verified parent roots to an explicit trusted finalized descendant Beacon root",
         }
         write_json(target_dir / "L3-consensus-witness.json", consensus)
-        summary.append({
+        previous[txh] = {
             "tx_hash": txh,
             "block_hash": block["hash"].lower(),
             "slot": slot,
@@ -347,8 +389,10 @@ def main() -> int:
             "trusted_finalized_slot": checkpoint["slot"],
             "trusted_finalized_epoch": checkpoint["epoch"],
             "ancestor_headers": len(chain),
-        })
-    write_json(out / "CAPTURE-SUMMARY.json", {"schema": "trinityaccord.ethereum-l2-l3-capture-summary.v1", "anchors": summary})
+        }
+    order = [anchor["tx_hash"].lower() for anchor in manifest["anchors"]]
+    summary = [previous[txh] for txh in order if txh in previous]
+    write_json(summary_path, {"schema": "trinityaccord.ethereum-l2-l3-capture-summary.v1", "anchors": summary})
     print(json.dumps(summary, indent=2))
     return 0
 

@@ -4,6 +4,7 @@ import hashlib
 import json
 import pathlib
 import subprocess
+import sys
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -52,12 +53,12 @@ def test_sequence3_authorization_is_exact_and_state_is_valid():
         "proof_status_required": "PASS",
         "ordinary_verification_network_required": False,
     }
-    subprocess.run(["python3", str(STATE_MACHINE), "validate"], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(STATE_MACHINE), "validate"], cwd=ROOT, check=True)
 
 
 def test_final_inventory_is_derived_and_complete():
     subprocess.run(
-        ["python3", "scripts/build_final_evidence_inventory.py", "--check"],
+        [sys.executable, "scripts/build_final_evidence_inventory.py", "--check"],
         cwd=ROOT,
         check=True,
     )
@@ -93,6 +94,8 @@ def test_recovery_and_relationship_topology_cover_all_layers():
     node_ids = {item["id"] for item in graph["nodes"]}
     assert {
         "final_evidence_inventory",
+        "current_live_evidence_state",
+        "ethereum_address_scope_audit",
         "bitcoin_inscription_proof_annex",
         "ethereum_non_nft_proof_annex",
         "chronicle_nft_proof_annex",

@@ -21,6 +21,18 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_JSON = ROOT / "api" / "final-evidence-inventory.v1.json"
 OUTPUT_MD = ROOT / "FINAL-EVIDENCE-FREEZE.md"
+FROZEN_V3_ETH_TX_HASHES = {
+    "0xd082a3ced27ece935d4093fb001a9ebfba42b415f78de4377c8cda55338c6420",
+    "0x59cf33b1291de63c4840b79e7c674b8fc7c6a771d8a3ba2bb50def1fe55a71c6",
+    "0x6652162e8e6c56ddc0d9476407b3b911e918d4e4683408440dc3af51c5bb63d5",
+    "0x9c1bd6e21dc2370e8dbb6549b7ba13b4ea7ba7a192b3b876e0ec28b4633f1612",
+    "0x0affc8099ea965cd6d6a0d1cf9b93adb11f7e40ac41fffe1b0ca4637f39df665",
+    "0x55a0c131642f71c7b2386ccaac8bcee36563992226befb35363e978044a18e8f",
+    "0xa4023b1eb0de76993e1a8dcd571e5e033bf64e2d32a9a113b030b4094a19cf51",
+    "0x940300cba1acd7aa7078e614510400d4ec4b8961a2f05470d129c709b8cce3e6",
+    "0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628",
+    "0x214d73b839ed95707410af3d5b8224a44a5dd310041d5e7ab1756ae9c5378137",
+}
 
 
 def load(relative: str) -> dict[str, Any]:
@@ -147,7 +159,18 @@ def build() -> dict[str, Any]:
     require(eth_report.get("result") == "PASS", "Ethereum annex is not PASS")
     require(nft_report.get("result") == "PASS", "NFT annex is not PASS")
     require(len(btc_manifest.get("anchors", [])) == 8, "Bitcoin closed set is not 8")
-    require(len(eth_manifest.get("anchors", [])) == 10, "Ethereum closed set is not 10")
+    current_eth_anchors = eth_manifest.get("anchors", [])
+    require(len(current_eth_anchors) >= 10, "current Ethereum annex lost frozen v3 anchors")
+    frozen_eth_anchors = [
+        item
+        for item in current_eth_anchors
+        if item.get("tx_hash", "").lower() in FROZEN_V3_ETH_TX_HASHES
+    ]
+    require(
+        {item.get("tx_hash", "").lower() for item in frozen_eth_anchors}
+        == FROZEN_V3_ETH_TX_HASHES,
+        "current Ethereum annex does not contain the exact frozen DOI v3 set",
+    )
     require(len(nft_index.get("assets", [])) == 175, "NFT closed set is not 175")
     require(nft_commitment.get("merkle", {}).get("leaf_count") == 175, "NFT Merkle leaf count mismatch")
 
@@ -174,7 +197,7 @@ def build() -> dict[str, Any]:
             "block_hash": item["execution_reference"]["block_hash"],
             "input_sha256": item["input_sha256"],
         }
-        for item in eth_manifest["anchors"]
+        for item in frozen_eth_anchors
     ]
     standards: dict[str, int] = {}
     for item in nft_index["assets"]:

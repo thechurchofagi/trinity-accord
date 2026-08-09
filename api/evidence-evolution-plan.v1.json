@@ -5,6 +5,7 @@
   "decision_recorded_at_utc": "2026-08-09T00:00:00Z",
   "purpose": "Machine-readable handoff for future agents to audit and improve the evidence system without overwriting immutable historical checkpoints or repeating completed work.",
   "current_checkpoint": {
+    "checkpoint_kind": "immutable_published_freeze_not_live_main",
     "scope_label": "2026 final evidence baseline v3",
     "core_concept_doi": "10.5281/zenodo.21739343",
     "core_version_doi": "10.5281/zenodo.21855814",
@@ -22,6 +23,38 @@
       "nft_contracts": 4,
       "ordinary_proof_verification_network_required": false
     }
+  },
+  "live_repository_checkpoint": {
+    "checkpoint_kind": "verified_post_freeze_github_delta",
+    "repository_base_commit_before_delta": "f57ffd3763e4165c0030040683c4d51e4be83a79",
+    "merge_commit": "determine_from_git_history_after_merge",
+    "evidence_scope": {
+      "bitcoin_inscriptions": 8,
+      "bitcoin_canonical_originals": 3,
+      "bitcoin_non_amending_ancillary": 5,
+      "ethereum_non_nft_anchors": 12,
+      "ethereum_chronicle_nfts": 175,
+      "nft_contracts": 4,
+      "ordinary_proof_verification_network_required": false
+    },
+    "ethereum_post_freeze_additions": [
+      {
+        "role": "Authority Manifest SHA-256 notarization",
+        "tx_hash": "0x06b1d82b7828054f249cdcc2e820321f634bd8bef44318751113098d2ee37acd",
+        "binding": "signed calldata equals SHA-256(authority.jcs.json)"
+      },
+      {
+        "role": "Authority Manifest EIP-712 signature record",
+        "tx_hash": "0x04314e8f9b47fac54dcf2db3a65f40aad60c226e65614f0ad22588bd39c416d2",
+        "binding": "signed calldata records and the verifier cryptographically checks the EIP-712 Authority Manifest binding plus declared Ethereum/Arweave references"
+      }
+    ],
+    "address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
+    "current_offline_report": "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
+    "published_final_doi_v3_includes_this_delta": false,
+    "new_doi_publication_status": "not_authorized_not_attempted",
+    "new_arweave_upload_status": "intentionally_deferred_not_attempted",
+    "recovery_boundary": "The immutable v3 DOI restores the frozen 10-anchor checkpoint. Until a future owner-authorized immutable refresh, the two-anchor delta requires a verified Git commit or another future hash-matched mirror."
   },
   "versioning_semantics": {
     "current_version_doi_is_immutable": true,
@@ -104,8 +137,42 @@
     },
     "continuation_note": "Determine merge and deployment identity from Git history and GitHub before relying on this post-freeze maintenance checkpoint. The immutable DOI version remains the earlier named baseline."
   },
+  "maintenance_checkpoint_2026_08_09": {
+    "status": "completed_and_locally_verified",
+    "scope": "Complete the observation-bounded Ethereum evidence set, close signed-transaction semantics, repair recovery discovery and resolve actionable recent PR review comments without publishing a DOI or writing Arweave.",
+    "completed_work": [
+      "Classified all 232 provider-observed normal transactions for the guardian address through outgoing nonce 219: 12 non-NFT self-data evidence transactions, 175 Chronicle NFT mint transactions, 33 other outgoing account operations and 12 incoming transactions.",
+      "Added the two omitted self-data evidence transactions: the Authority Manifest SHA-256 notarization and the on-chain EIP-712 signature/release record.",
+      "Generated and SHA-256-bound offline execution-trie and checkpoint-relative Beacon witnesses for both additions; existing proof bytes remain unchanged.",
+      "Hardened the Ethereum verifier to recover and verify the signed transaction sender and enforce chain ID, destination, zero value, calldata length/hash, successful receipt status and anchor-specific payload semantics.",
+      "Made the EIP-712 Authority Manifest signature machine-verifiable offline and bound its on-chain record to the declared Ethereum and Arweave references.",
+      "Bound the BTC BIP-340 witness transaction calldata field-by-field to the preserved signature object and its Arweave TxID; BIP-340 validity remains checked by the authority-signature verifier.",
+      "Fixed the Bitcoin report adapter so a verifier invocation error can never produce PASS.",
+      "Moved external-annex core DOI-role validation before the first potentially irreversible Zenodo publication call.",
+      "Added regressions for invocation failure, DOI preflight ordering, normalized provider identity, signed Ethereum semantics, receipt status, Authority digest and EIP-712 signature mutation.",
+      "Expanded the recovery index and validator to enumerate and hash-check the current Ethereum and NFT witness file sets and exposed the live-versus-frozen split through public machine discovery.",
+      "Made the preservation dispatcher inherit an explicitly selected Python interpreter so nested recovery validation cannot silently escape its pinned dependency environment."
+    ],
+    "verification_record": {
+      "ethereum_offline_annex": "PASS; 12/12 L1/L2/L3 plus signed-transaction and payload semantics",
+      "address_scope_partition": "PASS; 220 = 12 + 175 + 33 and 12 incoming are separate",
+      "targeted_evidence_and_review_tests": "PASS; 40 passed",
+      "recovery_index_and_frozen_inventory": "PASS",
+      "complete_current_system_tests": "PASS; includes 504 top-level pytest tests",
+      "sitemap_and_machine_source_contracts": "PASS"
+    },
+    "external_write_record": {
+      "new_zenodo_version_published": false,
+      "arweave_upload_performed": false,
+      "existing_frozen_proof_bytes_changed": false,
+      "new_post_freeze_proof_bytes_added": true,
+      "owner_cost_authorization_consumed": false
+    },
+    "continuation_note": "After merge, record the exact merge/deployment identity from GitHub history. Do not reinterpret this current 12-anchor GitHub state as bytes contained in the immutable 10-anchor DOI v3 freeze."
+  },
   "future_agent_start_sequence": [
-    "Read api/final-evidence-inventory.v1.json and api/evidence-relationship-map.v1.json.",
+    "Read api/final-evidence-inventory.v1.json as the immutable DOI v3 snapshot, then read api/evidence-manifest.json and api/ethereum-address-evidence-scope.v1.json for the current live 12-anchor state.",
+    "Read api/evidence-relationship-map.v1.json and distinguish every frozen-DOI edge from moving-GitHub edges.",
     "Read FINAL-EVIDENCE-FREEZE.md, EVIDENCE-EVOLUTION.md and this plan.",
     "Run every checked-in Bitcoin, Ethereum and NFT offline verifier before proposing changes.",
     "Perform DOI-only cold restoration of the core repository and both external annex DOI records.",
@@ -157,7 +224,7 @@
   "non_amending_boundary": true,
   "not_instruction_override": true,
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
-  "source_digest": "38ccb0913e9f3e1b",
+  "source_digest": "002793693b8880b2",
   "limitations": [
     "This plan records repository maintenance intent and does not amend the Bitcoin Originals.",
     "Dates and cost observations are planning checkpoints, not automatic authorization or guarantees of future service availability."

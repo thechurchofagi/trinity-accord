@@ -11,6 +11,7 @@ guardian-output/
 # Node.js
 node_modules/
 package-lock.json
+!evidence/ethereum-evidence-annex-v1/verification/package-lock.json
 
 # Python
 *.pyc

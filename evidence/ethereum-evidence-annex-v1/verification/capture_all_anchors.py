@@ -39,8 +39,8 @@ def main() -> int:
 
     data = load(MANIFEST)
     anchors = data.get("anchors", [])
-    if len(anchors) != 10:
-        raise SystemExit(f"expected 10 audited anchors, found {len(anchors)}")
+    if len(anchors) != 12:
+        raise SystemExit(f"expected 12 audited anchors, found {len(anchors)}")
 
     proof_root = ANNEX_DIR / "proof-material"
     for anchor in anchors:
@@ -94,13 +94,13 @@ def main() -> int:
             time.sleep(args.sleep_seconds)
 
     policy = data.setdefault("proof_material_policy", {})
-    policy["rpc_history_capture"] = "PRESERVED_FOR_ALL_10_ANCHORS_REFERENCE_ONLY"
+    policy["rpc_history_capture"] = "PRESERVED_FOR_ALL_12_ANCHORS_REFERENCE_ONLY"
     policy["rpc_history_capture_boundary"] = (
         "Preserving transaction/receipt/block JSON freezes the observed Ethereum block timestamp "
         "and commitment context, but does not upgrade L2/L3 without independent inclusion/finality proof validation."
     )
     MANIFEST.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print("PASS: captured and bound Ethereum history for 10/10 audited anchors")
+    print("PASS: captured and bound Ethereum history for 12/12 audited anchors")
     return 0
 
 

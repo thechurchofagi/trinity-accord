@@ -39,7 +39,7 @@ Authority Manifest / pointer indexes
         │ collect identities, hashes and mirror pointers
         ├── BIP-340 signature binds a manifest digest to the BTC key
         ├── EIP-712 signature binds typed manifest digests to the ETH key
-        ├── 10-record ETH annex proves transaction/receipt/header/Beacon binding
+        ├── live 12-record ETH annex proves signed-transaction/receipt/header/Beacon binding
         └── 175-NFT annex proves the closed identity set, mint receipts and Beacon binding
 
 Physical object / Core Object Alpha
@@ -86,7 +86,7 @@ All later materials are subordinate, non-amending evidence or context.
 | ETH EIP-712 signature | Signs typed data containing manifest SHA-256, SHA3-256, version and creation time | Control of the ETH key at signing time and an independently encoded digest binding | Canonical authority; equivalence to Bitcoin; truth of manifest claims |
 | ETH witness transaction | Records a witness statement referring to the BTC signature and manifest | Public secondary chain existence and timestamp of the witness statement | New authority; independent third-party attestation |
 | ETH text mirror transactions | Store exact text or mapping data as calldata | Secondary availability and cross-chain byte comparison | Amendment or replacement of Bitcoin text |
-| Ethereum non-NFT proof annex | Recomputes raw signed transaction, transaction/receipt trie inclusion, execution header and Beacon ancestry for 10 records | Network-free verification of the preserved 10-record L1/L2/L3 evidence set | Trust-free PoS finality, absence of conflicting weak-subjectivity history, semantic truth |
+| Ethereum non-NFT proof annex | Recomputes and decodes raw signed transactions, recovers the sender, checks chain/destination/value/calldata/receipt semantics, transaction/receipt trie inclusion, execution headers and Beacon ancestry for 12 records | Network-free verification of the live 12-record set, including the Authority Manifest digest, EIP-712 record and BTC-signature witness bindings | Trust-free PoS finality, absence of conflicting weak-subjectivity history, semantic truth, or inclusion of the two-record delta in the older DOI |
 | NFT collection commitment and proof annex | Commits 175 identities with a Merkle root, then verifies 175 mint transactions/receipts and Beacon ancestry | Exact frozen Chronicle identity set and event-specific mint semantics across four contracts | Canonical authority, global JSON-RPC `logIndex` reconstruction, truth of depicted events |
 | Six-hash digest manifest | Records six digests for each evidence file | Later byte-identity testing, even if one hash algorithm becomes undesirable | That the photographed object is unique; that the file content is truthful |
 | OTS proofs | Anchor digest records into Bitcoin time | The committed digest existed no later than the attested Bitcoin block | File truth, authorship, physical identity |
@@ -127,11 +127,14 @@ from the proof, while the global Ordinals index is not rebuilt.
 
 ### Ethereum and NFT proof paths
 
-The 10 non-NFT Ethereum records and 175 Chronicle NFT mint records use the same
+The live 12 non-NFT Ethereum records and 175 Chronicle NFT mint records use the same
 frozen Ethereum proof primitives. For each covered execution record, verification
 reconstructs transaction and receipt trie inclusion, binds those roots to the
 execution header, then verifies Beacon ancestry to an explicitly declared trusted
-finalized checkpoint.
+finalized checkpoint. For non-NFT records it also decodes the signed type-2
+transaction, recovers the guardian sender, requires chain ID 1, the declared
+destination, zero value, exact calldata length/hash and successful receipt status,
+then enforces the record-specific byte/digest/signature relationship.
 
 ```text
 raw signed transaction / typed receipt
@@ -171,6 +174,10 @@ The storage systems are complementary rather than interchangeable:
 7. GitHub `main` may contain post-freeze verifier and discovery hardening. Those
    changes are not retroactively part of the immutable DOI; the evolution handoff
    records how a later agent should evaluate a genuinely material new version.
+8. In the present live state, the DOI v3 inventory is `8 + 10 + 175`, while GitHub's
+   verified current inventory is `8 + 12 + 175`. The two extra Ethereum anchors are
+   explicitly listed in `api/ethereum-address-evidence-scope.v1.json`; no new DOI or
+   Arweave publication has been authorized or attempted for that delta.
 
 ## 5. What the six-hash table is for
 

@@ -22,6 +22,97 @@ def _stable_json(v):
     return json.dumps(v, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _validate_bound_records(records, expected_count: int, label: str, errors: list[str]):
+    if not isinstance(records, list) or len(records) != expected_count:
+        errors.append(f"{label} expected {expected_count} records, got {len(records) if isinstance(records, list) else 'non-list'}")
+        return
+    paths = [record.get("path") for record in records if isinstance(record, dict)]
+    if len(paths) != len(set(paths)):
+        errors.append(f"{label} contains duplicate paths")
+    for record in records:
+        if not isinstance(record, dict):
+            errors.append(f"{label} contains a non-object record")
+            continue
+        relative = record.get("path")
+        path = ROOT / relative if isinstance(relative, str) else None
+        if path is None or not path.is_file():
+            errors.append(f"{label} missing file: {relative}")
+            continue
+        if path.stat().st_size != record.get("size") or _sha256(path) != record.get("sha256"):
+            errors.append(f"{label} size/SHA-256 mismatch: {relative}")
+
+
+def _validate_recovery_file_sets(data: dict, errors: list[str]) -> None:
+    file_sets = data.get("required_recovery_file_sets")
+    if not isinstance(file_sets, list) or not file_sets:
+        errors.append("required_recovery_file_sets must be a non-empty list")
+        return
+    by_id = {
+        item.get("id"): item
+        for item in file_sets
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    if len(by_id) != len(file_sets):
+        errors.append("required_recovery_file_sets contains malformed or duplicate IDs")
+        return
+    for item in file_sets:
+        for field in ("root", "inventory", "selection_rule"):
+            if not isinstance(item.get(field), str) or not item[field]:
+                errors.append(f"{item.get('id')}: missing {field}")
+        if not isinstance(item.get("expected_files"), int) or item["expected_files"] < 1:
+            errors.append(f"{item.get('id')}: invalid expected_files")
+        for field in ("root", "inventory"):
+            relative = item.get(field)
+            if isinstance(relative, str) and not (ROOT / relative).exists():
+                errors.append(f"{item.get('id')}: missing {field} path {relative}")
+
+    eth_set = by_id.get("ethereum_non_nft_l2_l3_witnesses")
+    if eth_set:
+        manifest = json.loads((ROOT / eth_set["inventory"]).read_text(encoding="utf-8"))
+        records = []
+        for anchor in manifest.get("anchors", []):
+            proof = anchor.get("proof_material", {})
+            records.extend(
+                [proof.get("l2_execution_witness"), proof.get("l3_consensus_witness")]
+            )
+        _validate_bound_records(records, eth_set["expected_files"], eth_set["id"], errors)
+        expected_anchors = eth_set.get("expected_anchor_count_current_live")
+        if len(manifest.get("anchors", [])) != expected_anchors:
+            errors.append(f"{eth_set['id']} current anchor count mismatch")
+
+    reference_set = by_id.get("ethereum_non_nft_reference_captures")
+    if reference_set:
+        manifest = json.loads((ROOT / reference_set["inventory"]).read_text(encoding="utf-8"))
+        names = reference_set.get("required_per_anchor", [])
+        paths = [
+            ROOT / "evidence/ethereum-evidence-annex-v1/proof-material" / anchor["tx_hash"] / name
+            for anchor in manifest.get("anchors", [])
+            for name in names
+        ]
+        if len(paths) != reference_set["expected_files"]:
+            errors.append(f"{reference_set['id']} expected file count mismatch")
+        for path in paths:
+            if not path.is_file():
+                errors.append(f"{reference_set['id']} missing file: {path.relative_to(ROOT)}")
+
+    nft_summary_path = ROOT / "evidence/nft-proof-annex-v1/proof-material/CAPTURE-SUMMARY.json"
+    if nft_summary_path.is_file():
+        summary = json.loads(nft_summary_path.read_text(encoding="utf-8"))
+        for set_id, key in (
+            ("chronicle_nft_l2_witnesses", "l2_witnesses"),
+            ("chronicle_nft_l3_witnesses", "l3_witnesses"),
+        ):
+            item = by_id.get(set_id)
+            if item:
+                _validate_bound_records(
+                    summary.get(key), item["expected_files"], item["id"], errors
+                )
+
+
 def validate(index_path: str | Path) -> list[str]:
     """Validate recovery-index.json. Returns list of errors."""
     errors = []
@@ -71,6 +162,10 @@ def validate(index_path: str | Path) -> list[str]:
     req_files = data.get("required_recovery_files", [])
     if not any("corrections-index" in f for f in req_files):
         errors.append("required_recovery_files must include corrections-index")
+    for relative in req_files:
+        if not (ROOT / relative).is_file():
+            errors.append(f"required recovery file is missing: {relative}")
+    _validate_recovery_file_sets(data, errors)
 
     # mandatory_recovery_steps must include check_corrections_index
     steps = data.get("mandatory_recovery_steps", [])

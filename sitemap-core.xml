@@ -13,7 +13,11 @@
   <url><loc>https://www.trinityaccord.org/api/agent-minimal-context.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/authority.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/bitcoin-inscription-mirror-index.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/ethereum-address-evidence-scope.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-evolution-plan.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-manifest.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/evidence-relationship-map.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/final-evidence-inventory.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/public-home-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/record-chain-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/research-preprint.v1.json</loc></url>

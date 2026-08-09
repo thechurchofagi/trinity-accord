@@ -98,6 +98,7 @@
   <url><loc>https://www.trinityaccord.org/api/echo-value-criteria.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/emergent-patterns.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/eth-witness-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/ethereum-address-evidence-scope.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-evolution-plan.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v1-authority-boundary.template.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/evidence-input-examples/templates/v2-minimal-bitcoin-b1.template.json</loc></url>

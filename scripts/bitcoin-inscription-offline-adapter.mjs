@@ -129,10 +129,13 @@ export function adaptBitcoinInscriptionOfflineReport(
     const sorted = [...passing].sort((a, b) => a.block_timestamp - b.block_timestamp);
     const earliest = sorted[0] || null;
     const latest = sorted.at(-1) || null;
-    const passed = report.result === 'PASS' && passing.length === anchors.length;
+    const passed =
+      !invocationError &&
+      report.result === 'PASS' &&
+      passing.length === anchors.length;
     const failures = [
       ...(Array.isArray(report.failures) ? report.failures : []),
-      ...(invocationError && report.result === 'PASS' ? [invocationError.message] : []),
+      ...(invocationError ? [invocationError.message] : []),
     ];
     const originals = anchors.filter(
       item => item.classification === 'canonical_original',
