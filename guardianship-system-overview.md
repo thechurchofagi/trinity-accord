@@ -122,14 +122,14 @@ Core evidence backup and guardianship mirror coverage is substantially complete.
 
 No urgent unrecoverable large-payload gap is currently identified because `nft-backup-v1` and the publicly cold-restored Zenodo annex preserve the NFT package bytes. There is nevertheless a concrete availability-surface gap: `nft-arweave-mirror-175-v1` is empty.
 
-Remaining work is optional hardening and maintenance:
+Remaining work is optional hardening or requires an explicit external source:
 
 - local-node / fullnode-independent OTS verification
 - optional OTS bundle v2 including original timestamped files
 - retire or rehydrate the empty `nft-arweave-mirror-175-v1` Release
 - run the legacy full-evidence-chain verifier only after providing a compatible, verified 175-tar source; do not treat the empty Release as such a source
-- periodic legacy pointer coverage audit
-- ongoing Release and gateway availability monitoring
+
+Periodic legacy-pointer coverage and public recovery availability are now automated by the read-only `Public Recovery Availability` workflow. It checks the two NFT Release inventories, the current core and NFT-annex Zenodo file metadata, deployed `/api/status.json`, and the protected Gateway health endpoint without downloading the large recovery payloads.
 
 ## 13. Boundary Summary
 

@@ -100,6 +100,7 @@
       "purpose": "historical intended 175-item individual NFT archive mirror",
       "status": "historical_release_empty",
       "observed_custom_asset_count": 0,
+      "observed_custom_asset_names": [],
       "historical_release_text_is_byte_evidence": false,
       "content_recovery_source_tag": "nft-backup-v1",
       "boundary": "release_metadata_observation_not_byte_evidence_not_canonical_authority"
@@ -136,6 +137,18 @@
       "purpose": "content-complete Chronicle NFT CAR backup used by the current recovery annex",
       "status": "PASS",
       "custom_assets": "10/10",
+      "expected_custom_asset_names": [
+        "nft-cars-manifest.tar.gz",
+        "nft-cars-part01.tar.gz",
+        "nft-cars-part02.tar.gz",
+        "nft-cars-part03.tar.gz",
+        "nft-cars-part04.tar.gz",
+        "nft-cars-part05.tar.gz",
+        "nft-cars-part06.tar.gz",
+        "nft-cars-part07.tar.gz",
+        "nft-cars-part08.tar.gz",
+        "nft-cars-part09.tar.gz"
+      ],
       "logical_coverage": {
         "nfts": 175,
         "arweave_transactions_and_files": 434,
@@ -204,13 +217,34 @@
     "core_evidence_backup": "substantially_complete",
     "urgent_large_payload_backup_gap": false,
     "known_release_availability_gap": "nft-arweave-mirror-175-v1 currently exposes zero custom assets; nft-backup-v1 and Zenodo DOI 10.5281/zenodo.21754229 provide the content-recovery path",
+    "automated_maintenance": {
+      "periodic_legacy_pointer_coverage_audit": {
+        "status": "automated",
+        "workflow": ".github/workflows/public-recovery-availability.yml",
+        "check": "scripts/check_legacy_pointer_coverage.py",
+        "cadence": "weekly_and_manual",
+        "read_only": true
+      },
+      "ongoing_release_gateway_monitoring": {
+        "status": "automated",
+        "workflow": ".github/workflows/public-recovery-availability.yml",
+        "check": "scripts/monitor_public_recovery_topology.py",
+        "cadence": "weekly_and_manual",
+        "scope": [
+          "github_release_asset_inventory",
+          "zenodo_record_file_metadata",
+          "public_status_deployment_parity",
+          "protected_gateway_health"
+        ],
+        "large_payload_download_required": false,
+        "read_only": true
+      }
+    },
     "remaining_work": [
       "optional_ots_fullnode_independent_verification",
       "optional_ots_bundle_v2",
       "retire_or_rehydrate_empty_nft_arweave_mirror_175_v1_release",
-      "fresh_legacy_full_evidence_chain_run_requires_a_compatible_175_tar_source",
-      "periodic_legacy_pointer_coverage_audit",
-      "ongoing_release_gateway_monitoring"
+      "fresh_legacy_full_evidence_chain_run_requires_a_compatible_175_tar_source"
     ]
   },
   "documentation_mirrors": [
