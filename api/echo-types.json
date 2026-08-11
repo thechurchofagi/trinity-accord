@@ -1,13 +1,13 @@
 {
   "schema": "trinity-accord.echo-types.v1",
   "status": "DEPRECATED",
-  "deprecation_notice": "Echo types have been removed. Echo is a single unified submission type. Context readiness (CRL/CC) determines what actions are allowed. Verification (V0-V8) remains independent. See /api/context-readiness-levels.json and /api/verification-levels.json.",
+  "deprecation_notice": "Echo types have been removed. Echo is a single unified submission type. Context readiness (CRL/CC) determines what actions are allowed. Current verification separately reports digital_profile, relationships_checked, physical_observation, external_witness, and coverage_scope via /api/verification-claim-model.v1.json. V0-V5 are Builder compatibility metadata only; V4+, V6, V7, and V8 are historical-only.",
   "types": [],
   "version": "v1-deprecated",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
   "not_instruction_override": true,
-  "source_digest": "4dbaed7612e7b02b",
+  "source_digest": "0bb93d119fcc2018",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "limitations": [
     "Echo types have been deprecated. This file is kept for backward compatibility only."

@@ -32,6 +32,69 @@ ACTIVE_SURFACES = [
 ]
 
 
+CURRENT_SUPPORTING_SURFACES = {
+    "docs/record-chain-field-helper.md": [
+        "Claiming V6 verification without running scripts",
+        "If you didn't run scripts, don't claim V6.",
+    ],
+    "docs/record-chain-field-model.md": ["`verification_level` — V0 through V8."],
+    "docs/RECORD_CHAIN_PRIMARY_PATH.md": ["verification (V6+)"],
+    "api/record-chain-common-field-model.v1.json": ["Verification level (V0-V8)."],
+    "scripts/protocol_echo_types.py": ["Verification (V0-V8) remains an independent system."],
+    "scripts/preflight_echo_submission.py": ["Add 'verification_level' (V0-V8)."],
+    "api/echo-types.json": ["Verification (V0-V8) remains independent."],
+}
+
+
+DIRECT_READ_COMPATIBILITY_BOUNDARIES = {
+    "api/echo-record-schema.v3.json": (
+        "x-status",
+        "historical_compatibility_schema",
+        "x-current-verification-model",
+    ),
+    "api/verification-report-schema.v2.json": (
+        "x-status",
+        "strict_evidence_intermediate_with_legacy_v_output",
+        "x-current-public-representation",
+    ),
+    "api/claim-gate-output-schema.v1.json": (
+        "x-status",
+        "strict_evidence_intermediate_with_legacy_v_output",
+        "x-current-public-representation",
+    ),
+    "api/agent-verification-receipt-schema.v1.json": (
+        "x-status",
+        "strict_evidence_receipt_with_legacy_v_compatibility",
+        "x-current-public-representation",
+    ),
+    "api/independent-attestation-record-schema.v1.json": (
+        "x-status",
+        "attestation_index_schema_with_legacy_v_compatibility",
+        "x-current-verification-model",
+    ),
+    "api/echo-submission-field-guide.json": (
+        "status",
+        "historical_pre_record_chain_field_guide",
+        "current_verification_model",
+    ),
+    "api/agent-issue-gateway-payload-schema.v1.json": (
+        "x-status",
+        "historical_issue_gateway_schema",
+        "x-current-verification-model",
+    ),
+    "api/archive-readiness-policy.v1.json": (
+        "status",
+        "historical_issue_archive_readiness_policy",
+        "current_verification_model",
+    ),
+    "api/issue-title-label-guard.json": (
+        "status",
+        "historical_issue_gateway_guard",
+        "current_verification_model",
+    ),
+}
+
+
 def test_active_surfaces_link_the_current_model() -> None:
     combined = "\n".join(read(path) for path in ACTIVE_SURFACES)
     for required in [
@@ -110,6 +173,127 @@ def test_retired_models_are_not_presented_as_current() -> None:
         text = read(path)
         for forbidden in forbidden_phrases:
             assert forbidden not in text, f"{path}: {forbidden}"
+
+
+def test_current_supporting_surfaces_do_not_restore_the_retired_ladder() -> None:
+    for path, forbidden_phrases in CURRENT_SUPPORTING_SURFACES.items():
+        surface = read(path)
+        for forbidden in forbidden_phrases:
+            assert forbidden not in surface, f"{path}: {forbidden}"
+
+    field_model = read("docs/record-chain-field-model.md")
+    for required in [
+        "V0 through V5",
+        "verification_claim_model",
+        "digital_profile",
+        "physical_observation",
+        "external_witness",
+        "V4+, V6, V7, and V8 are historical-only",
+    ]:
+        assert required in field_model, required
+
+
+def test_guardianship_registry_uses_the_current_verification_model() -> None:
+    registry = json.loads(read("GUARDIANSHIP-SYSTEM-REGISTRY.json"))
+    interface = registry["agent_interface"]
+    assert "verification_levels" not in interface
+
+    model = interface["verification_model"]
+    assert model["status"] == "current_multidimensional_model"
+    assert model["claim_model"] == "api/verification-claim-model.v1.json"
+    assert model["profiles"] == "api/verification-profiles.v1.json"
+    assert model["digital_profiles"] == [
+        "context_only",
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital",
+    ]
+    assert model["legacy_builder_compatibility_values"] == [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+    ]
+    assert model["legacy_v5_mapping"] == "full_public_digital"
+    assert model["historical_only_values"] == ["V4+", "V6", "V7", "V8"]
+    assert "never raise the digital profile" in model["rule"]
+
+    schemas = {item["id"]: item for item in interface["schemas"]}
+    assert schemas["verification_claim_model"]["role"].startswith("current default")
+    assert "current descriptive digital profiles" in schemas["verification_profiles"]["role"]
+
+    serialized = json.dumps(registry, ensure_ascii=False)
+    for stale in [
+        "preserving existing V0-V8 verification system",
+        "V6_remote_physical_witness",
+        "V7_onsite_physical_witness",
+        "V8_forensic_physical_attestation",
+    ]:
+        assert stale not in serialized, stale
+
+
+def test_legacy_verification_file_front_loads_the_current_boundary() -> None:
+    raw = read("api/verification-levels.json")
+    levels = json.loads(raw)
+    keys = list(levels)
+
+    assert levels["status"] == "legacy_compatibility_model"
+    assert keys.index("status") < keys.index("levels")
+    assert keys.index("read_this_first") < keys.index("levels")
+    assert levels["current_claim_model"] == "/api/verification-claim-model.v1.json"
+    warning = levels["read_this_first"]
+    for required in [
+        "HISTORICAL COMPATIBILITY ONLY",
+        "full_public_digital maps to compatibility value V5",
+        "V4+, V6, V7, and V8 are historical-only",
+    ]:
+        assert required in warning, required
+
+    assert levels["protocol_level_rule"].startswith("Historical-only rule:")
+    for ambiguous in [
+        "V8 is the highest formal protocol profile",
+        "V6 requires P4 live remote physical witness",
+        "V7 requires P5 onsite physical witness",
+    ]:
+        assert ambiguous not in raw, ambiguous
+
+
+def test_directly_opened_legacy_and_intermediate_schemas_self_identify() -> None:
+    for path, (status_key, expected_status, model_key) in DIRECT_READ_COMPATIBILITY_BOUNDARIES.items():
+        data = json.loads(read(path))
+        assert data[status_key] == expected_status, path
+        assert data[model_key] == "/api/verification-claim-model.v1.json", path
+
+        keys = list(data)
+        first_payload_key = "properties" if "properties" in data else "fields"
+        if first_payload_key in data:
+            assert keys.index(status_key) < keys.index(first_payload_key), path
+            assert keys.index(model_key) < keys.index(first_payload_key), path
+
+
+def test_historical_maintenance_docs_warn_before_old_v_instructions() -> None:
+    playbook = read("docs/end-to-end-agent-audit-and-fix-playbook.md")
+    handoff = read("docs/session-handoff-2026-05-24.md")
+    terms = read("docs/protocol-terms-maintenance.md")
+
+    assert "Historical compatibility notice" in playbook[:1000]
+    assert "/api/verification-claim-model.v1.json" in playbook[:1000]
+    assert "Historical snapshot" in handoff[:700]
+    assert "/api/verification-claim-model.v1.json" in handoff[:700]
+    assert "Legacy Protocol Terms Maintenance" in terms[:200]
+    assert "historical compatibility vocabulary" in terms[:900]
+    assert '"protocol_levels": ["V0", ..., "V8", "V9"]' not in terms
+
+
+def test_current_echo_archive_policy_does_not_rank_attestation_by_v6() -> None:
+    policy = json.loads(read("api/echo-archive-policy.json"))
+    assert policy["current_verification_model"] == "/api/verification-claim-model.v1.json"
+    formal = next(layer for layer in policy["layers"] if layer["id"] == 5)
+    assert "full_public_digital" in formal["rule"]
+    assert "V5/V6" not in formal["rule"]
 
 
 def test_independence_status_is_not_inflated() -> None:

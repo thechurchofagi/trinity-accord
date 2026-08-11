@@ -3,7 +3,9 @@
 
 Echo types have been removed. Echo is a single unified submission type.
 Context readiness (CRL/CC) determines what actions are allowed.
-Verification (V0-V8) remains an independent system.
+Current verification uses separate digital profile, evidence relationship,
+physical observation, and external witness dimensions. V0-V5 remain Builder
+compatibility metadata; V4+, V6, V7, and V8 are historical-only.
 
 This module is kept for backward compatibility with existing records and scripts
 that reference echo type constants. All functions return empty sets or

@@ -372,8 +372,8 @@
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   },
   "verification_context_rule": {
-    "technical_verification_minimum": "CC-2 + verification depth V2+ for private technical checking only",
-    "public_verification_submission_minimum": "CC-3 + explicit verification level/actions/claim/fresh actions",
+    "technical_verification_minimum": "CC-2 plus exact task-relevant sources and current verification dimensions for private technical checking only",
+    "public_verification_submission_minimum": "CC-3 plus explicit digital profile, evidence relationships, physical observation, external witness, coverage, limitations, claim, and fresh actions",
     "narrative_grounded_assessment_minimum": "CC-3",
     "historical_v6_plus_rule": "V4+/V6/V7/V8 are historical-only labels for new public work; current multidimensional fields describe verification."
   },

@@ -2,7 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/verification-report-schema.v2.json",
   "title": "Trinity Accord Verification Report Schema v2",
-  "description": "Schema for component-level, protocol-profile-validated verification reports.",
+  "description": "Strict-evidence intermediate schema retained for reproducible technical reports. It is not the current public verification claim model or submission envelope.",
+  "x-status": "strict_evidence_intermediate_with_legacy_v_output",
+  "x-current-public-representation": "/api/verification-claim-model.v1.json",
+  "x-current-public-envelope": "/api/record-chain-submission-schema.v1.json",
+  "x-legacy-v-boundary": "Any V4+, V6, V7, or V8 output is historical/intermediate only and must be represented through current digital_profile, physical_observation, external_witness, coverage, and limitation fields before public submission.",
   "type": "object",
   "required": [
     "schema_version",

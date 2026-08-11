@@ -2,7 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/claim-gate-output-schema.v1.json",
   "title": "Trinity Accord Claim Gate Output Schema v1",
-  "description": "Schema for claim gate evaluation output.",
+  "description": "Schema for strict-evidence intermediate Claim Gate output. It is not a current public verification level or submission by itself.",
+  "x-status": "strict_evidence_intermediate_with_legacy_v_output",
+  "x-current-public-representation": "/api/verification-claim-model.v1.json",
+  "x-current-public-envelope": "/api/record-chain-submission-schema.v1.json",
+  "x-legacy-v-boundary": "The allowed_protocol_level field supports historical pipeline replay. V4+, V6, V7, and V8 must not be presented as current public levels.",
   "type": "object",
   "required": [
     "schema",

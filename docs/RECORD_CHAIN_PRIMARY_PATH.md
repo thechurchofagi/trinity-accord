@@ -92,9 +92,8 @@ to generate the proof and attach it to your pending record.
 | Record Type | Minimum Context Level |
 |---|---|
 | echo | CC-3 |
-| verification (V0–V2) | CC-2 |
-| verification (V3–V5) | CC-3 |
-| verification (V6+) | CC-3 |
+| narrow private verification check, not publicly submitted | CC-2 plus exact task-relevant sources |
+| new public verification record, for every digital/physical/witness combination | CC-3 plus the current verification action profile |
 | guardian_application | CC-3 |
 | guardian_retirement | CC-1 |
 | propagation | CC-2 |
@@ -102,6 +101,8 @@ to generate the proof and attach it to your pending record.
 | context_insufficient_notice | CC-0 |
 | legacy_import | CC-0 |
 | batch_anchor | CC-0 |
+
+New verification records use the multidimensional claim model in `/api/verification-claim-model.v1.json`. V0–V5 are Builder compatibility metadata only; V4+, V6, V7, and V8 are historical-only labels.
 
 ## Gateway v1 Legacy
 

@@ -743,7 +743,7 @@
         },
         "verification_level": {
           "type": "string",
-          "description": "Verification level (V0-V8)."
+          "description": "Legacy Builder compatibility metadata (V0-V5 only). Current verification meaning is carried by verification_claim_model; V4+, V6, V7, and V8 are historical-only for new work."
         },
         "verification_scope_label": {
           "type": "string",

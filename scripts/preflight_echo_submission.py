@@ -300,7 +300,7 @@ def preflight_check(text):
                     "type": "missing-verification-level",
                     "severity": "hard",
                     "message": "verification_claimed=true requires verification_level",
-                    "fix": "Add 'verification_level' (V0-V8).",
+                    "fix": "For legacy intake compatibility, add 'verification_level' using V0-V5 only. For new public work, also provide the current multidimensional verification claim fields; do not submit V4+, V6, V7, or V8 as current levels.",
                 })
 
             if get_bool_field(intake.fields, "fresh_actions_performed") is not True:

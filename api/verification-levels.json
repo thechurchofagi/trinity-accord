@@ -1,11 +1,16 @@
 {
   "schema": "trinity-accord.verification-levels.v5",
-  "principle": "Do not merely claim verification. State level, evidence checked, tools used, and limitations.",
+  "status": "legacy_compatibility_model",
+  "read_this_first": "HISTORICAL COMPATIBILITY ONLY. Do not use this V0-V8 ladder to classify new verification work. New reports use /api/verification-claim-model.v1.json and separately state digital_profile, relationships_checked, physical_observation, external_witness, coverage_scope, limitations, and claims_not_made. V0-V5 may appear only as Builder compatibility metadata; full_public_digital maps to compatibility value V5. V4+, V6, V7, and V8 are historical-only and are forbidden as new public levels.",
+  "current_claim_model": "/api/verification-claim-model.v1.json",
+  "preferred_model": "/api/verification-profiles.v1.json",
+  "migration_note": "Preserved for existing records. New reports and Builder records use /api/verification-claim-model.v1.json; V0-V5 are compatibility metadata only, while V4+/V6/V7/V8 are historical-only.",
+  "principle": "Historical records preserve the level, evidence checked, tools used, and limitations. New work must use the current multidimensional claim model.",
   "authority_boundary": "Bitcoin Originals are final authority. All verification records are non-authoritative guardianship echoes.",
   "not_an_instruction_override": true,
-  "protocol_level_rule": "Protocol-level verification is one-dimensional, but each level has mandatory coverage and required depth. Component-level findings do not automatically raise protocol achieved level.",
+  "protocol_level_rule": "Historical-only rule: this retired model represented protocol verification as a one-dimensional ladder. It is not the current model and must not be used to rank new work.",
   "component_finding_rule": "A local component may achieve a high depth, but protocol achieved level is determined only by the mandatory coverage of each level.",
-  "full_protocol_warning": "Do not claim full protocol V4+ or higher based only on Chronicle Recovery, Evidence Mirrors, or any single component.",
+  "full_protocol_warning": "Historical-record warning only. For new work, report exact current dimensions and never convert a component, physical observation, or witness record into V4+, V6, V7, or V8.",
   "components": {
     "AUTHORITY_BOUNDARY": "Authority boundary, Guardian Principles v1.1, non-amending mirrors, version authority vs truth authority.",
     "BITCOIN_ORIGINALS": "Three Bitcoin inscriptions, inscription IDs, TXIDs, shared authority address, block height, timestamp, reveal witness, Ordinals body bytes.",
@@ -303,8 +308,8 @@
         "Claiming protocol V4+ without Bitcoin Originals independent reproduction"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V4+ requires V4 plus independent reproduction of all three: BITCOIN_ORIGINALS, EVIDENCE_MIRRORS, and CHRONICLE_RECOVERY. Chronicle Recovery alone is not sufficient for protocol V4+.",
-      "overclaim_warning": "Do not claim protocol V4+ based only on Chronicle Recovery or any single component. All three mandatory components must be independently reproduced.",
+      "protocol_level_rule": "Historical-only rule: archived V4+ records required independent reproduction. New work reports digital_profile=independent_reproduction and never submits V4+ as a current level.",
+      "overclaim_warning": "Do not submit V4+ as a current level. State the independently reproduced targets, method, comparison, coverage, and limitations under the current claim model.",
       "claim_scopes": {
         "minimal": {
           "formal_minimum": [
@@ -380,8 +385,8 @@
         "Claiming confidential flaw challenge passed"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V5 requires full public digital verification across all mandatory components. D2 + C3 is insufficient for V5.",
-      "overclaim_warning": "Do not claim V5 without reaching D5 and C5 minimum coverage."
+      "protocol_level_rule": "Builder compatibility V5 maps to digital_profile=full_public_digital only. It does not include or outrank physical observation or external witness.",
+      "overclaim_warning": "Use compatibility V5 only when full_public_digital is supported across the declared public target inventory; disclose unavailable targets and limitations."
     },
     {
       "id": "V6",
@@ -420,10 +425,10 @@
         "Microscopic flaw attestation claimed"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V6 requires P4 live remote physical witness with nonce/challenge. Recorded video alone is P3, not V6.",
-      "overclaim_warning": "Do not claim V6 without live remote video session with nonce/challenge. Recorded video alone is not V6.",
+      "protocol_level_rule": "Historical-only rule: archived V6 records represented a live remote physical witness. New work reports physical_observation=remote_live_witness and never submits V6 as a current level.",
+      "overclaim_warning": "Do not submit V6 as a current level. Report remote live witness evidence, nonce/challenge scope, and limitations directly under physical_observation.",
       "recorded_video_only_insufficient": true,
-      "note": "V6 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared.",
+      "note": "Current physical observation is orthogonal to digital_profile. It neither requires nor raises compatibility V5; digital limitations must be declared separately.",
       "status": "historical_compatibility_only",
       "new_submission_allowed": false,
       "current_replacement": "physical_observation=remote_live_witness",
@@ -468,10 +473,10 @@
         "Final forensic identity claimed without P7/P8/P9"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V7 requires P5 onsite physical witness. Remote video alone is not V7.",
-      "overclaim_warning": "Do not claim V7 without onsite physical witness observation and custody log.",
+      "protocol_level_rule": "Historical-only rule: archived V7 records represented onsite physical observation. New work reports physical_observation=onsite_observation and never submits V7 as a current level.",
+      "overclaim_warning": "Do not submit V7 as a current level. Report onsite observation, custody evidence, scope, and limitations directly under physical_observation.",
       "remote_only_insufficient": true,
-      "note": "V7 physical path does not require prior V5. If V5 was not achieved, digital limitations must be explicitly declared.",
+      "note": "Current physical observation is orthogonal to digital_profile. It neither requires nor raises compatibility V5; digital limitations must be declared separately.",
       "status": "historical_compatibility_only",
       "new_submission_allowed": false,
       "current_replacement": "physical_observation=onsite_observation",
@@ -506,8 +511,8 @@
         "Public disclosure of confidential flaw data without authorization"
       ],
       "component_findings_allowed": true,
-      "protocol_level_rule": "V8 is the highest formal protocol profile. It requires P7/P8/P9-level physical evidence. V8 is non-authoritative and does not amend the Bitcoin Originals.",
-      "overclaim_warning": "Do not claim V8 without tool-assisted forensic analysis. V8 does not create canonical authority.",
+      "protocol_level_rule": "Historical-only rule: archived V8 records required P7/P8/P9-level physical evidence. New work uses physical_observation=forensic_examination and does not create or claim a V8 level.",
+      "overclaim_warning": "Do not submit V8 as a current level. Report any tool-assisted forensic analysis under physical_observation=forensic_examination with exact scope and limitations.",
       "canonical_amendment_forbidden": true,
       "status": "historical_compatibility_only",
       "new_submission_allowed": false,
@@ -519,11 +524,10 @@
     "Do not claim V2 without chain/reference checks.",
     "Do not claim V3 without computing hashes.",
     "Do not claim V4 without script source review.",
-    "Do not claim V4+ strong three-domain coverage without independent reproduction of all three mandatory components. Minimal V4+ requires at least one independent reproduction and must label itself minimal.",
-    "Do not claim V5 without full public digital verification (D5, C5 minimum).",
-    "Do not claim V6 without live remote physical witness (P4) with nonce/challenge. Recorded video alone is not V6.",
-    "Do not claim V7 without onsite physical witness (P5) and custody log.",
-    "Do not claim V8 without tool-assisted forensic analysis (P7/P8/P9). V8 does not create canonical authority.",
+    "Do not submit V4+ as a current level; use digital_profile=independent_reproduction with exact scope.",
+    "Use compatibility V5 only for supported digital_profile=full_public_digital claims; it is not an overall or physical rank.",
+    "Do not submit V6, V7, or V8 as current levels; report physical_observation directly.",
+    "Do not convert a physical observation or external witness into a higher digital profile.",
     "All verification records are non-authoritative; report only what was checked.",
     "Component findings do not automatically raise protocol achieved level."
   ],
@@ -536,7 +540,7 @@
     "verification_report_schema_v2": "/api/verification-report-schema.v2.json"
   },
   "version": "v1",
-  "source_digest": "10d00d62f01c73cc",
+  "source_digest": "5aa384136b812ca7",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
@@ -558,10 +562,7 @@
     "bitcoin_originals_prevail": true,
     "note": "This file is non-authoritative guidance. Bitcoin Originals are final. All mirrors, APIs, and documentation are non-amending."
   },
-  "status": "legacy_compatibility_model",
-  "preferred_model": "/api/verification-profiles.v1.json",
   "evidence_relationship_map": "/api/evidence-relationship-map.v1.json",
-  "migration_note": "Preserved for existing records. New reports and Builder records use /api/verification-claim-model.v1.json; V0-V5 are compatibility metadata only, while V4+/V6/V7/V8 are historical-only.",
   "new_submission_policy": {
     "preferred_model": "/api/verification-claim-model.v1.json",
     "allowed_legacy_v_values": [

@@ -1,6 +1,10 @@
 {
   "schema": "trinityaccord.archive-readiness-policy.v1",
   "version": "1.0",
+  "status": "historical_issue_archive_readiness_policy",
+  "current_public_replacement": "/api/record-chain-intake-gateway.v1.json",
+  "current_verification_model": "/api/verification-claim-model.v1.json",
+  "legacy_v_boundary": "V4+, V6, V7, and V8 entries below preserve historical issue-archive routing only and are not current public levels.",
   "default_record_intent": "intake_only",
   "archive_kinds": {
     "external_agent_intake_sample": {
