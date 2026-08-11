@@ -33,7 +33,7 @@ def make_valid_report():
         "report_status": "current",
         "is_current": True,
         "historical_report_only": False,
-        "current_status_url": "https://www.trinityaccord.org/api/corrections-index.json",
+        "current_status_url": "https://www.trinityaccord.org/api/status.json",
         "corrections_index_url": "https://www.trinityaccord.org/api/corrections-index.json",
     }
 

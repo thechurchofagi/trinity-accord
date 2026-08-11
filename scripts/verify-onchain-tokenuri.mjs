@@ -22,8 +22,8 @@
  *
  * Usage:
  *   ETH_RPC_URL=xxx node scripts/verify-onchain-tokenuri.mjs \
- *     [--release-tag nft-arweave-mirror-175-v1] \
  *     [--source token_index|manifest] \
+ *     [--release-tag compatible-release-tag-for-manifest-source] \
  *     [--concurrency 10]
  */
 
@@ -225,7 +225,11 @@ function classifyOnchainAudit(rec) {
 // ─── GitHub helpers ────────────────────────────────────────────────────────
 
 function ghHeaders(extra = {}) {
-  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+  return {
+    Accept: 'application/vnd.github+json',
+    ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
+    ...extra,
+  };
 }
 
 async function getReleaseByTag(tag) {
@@ -256,12 +260,24 @@ async function downloadAsset(assetId, retries = MAX_RETRIES) {
 
 async function main() {
   const args = process.argv.slice(2);
-  const releaseTag = args.includes('--release-tag') ? args[args.indexOf('--release-tag') + 1] : 'nft-arweave-mirror-175-v1';
-  const source = args.includes('--source') ? args[args.indexOf('--source') + 1] : 'manifest';
+  const releaseTag = args.includes('--release-tag') ? args[args.indexOf('--release-tag') + 1] : '';
+  const source = args.includes('--source') ? args[args.indexOf('--source') + 1] : 'token_index';
   const concurrencyArg = args.includes('--concurrency') ? Number(args[args.indexOf('--concurrency') + 1]) : null;
-  const concurrency = concurrencyArg || ETH_CONCURRENCY;
+  const concurrency = concurrencyArg === null ? ETH_CONCURRENCY : concurrencyArg;
 
   if (!ETH_RPC_URL) { err('❌ ETH_RPC_URL required'); process.exit(1); }
+  if (!['token_index', 'manifest'].includes(source)) {
+    err(`❌ Invalid --source: ${source}. Expected token_index or manifest.`);
+    process.exit(1);
+  }
+  if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 25) {
+    err(`❌ Invalid concurrency: ${concurrency}. Expected an integer from 1 to 25.`);
+    process.exit(1);
+  }
+  if (source === 'manifest' && !releaseTag) {
+    err('❌ --release-tag is required when --source manifest is selected.');
+    process.exit(1);
+  }
 
   let sourceCommit = 'unknown';
   try { sourceCommit = require('child_process').execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf-8' }).trim(); } catch {}

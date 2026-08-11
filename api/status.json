@@ -1,6 +1,56 @@
 {
   "schema": "trinityaccord.status.v1",
+  "current_evidence_checkpoint": {
+    "status": "PASS",
+    "published_date": "2026-08-09",
+    "ordinary_verification_network_required": false,
+    "workflow": "Run Current Tests",
+    "published_version_doi": "10.5281/zenodo.21859437",
+    "published_source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+    "proof_sets": {
+      "bitcoin_inscriptions": {
+        "status": "PASS",
+        "count": 8,
+        "canonical_originals": 3,
+        "non_amending_ancillary": 5,
+        "levels": ["L1", "L2", "L3"]
+      },
+      "ethereum_non_nft_anchors": {
+        "status": "PASS",
+        "count": 12,
+        "levels": ["L1", "L2", "L3"],
+        "l3_boundary": "checkpoint_relative_under_explicit_weak_subjectivity"
+      },
+      "chronicle_nfts": {
+        "status": "PASS",
+        "count": 175,
+        "contracts": 4,
+        "levels": ["L1", "L2", "L3"],
+        "l3_boundary": "checkpoint_relative_under_explicit_weak_subjectivity"
+      }
+    },
+    "public_cold_restore": "passed",
+    "canonical_authority": "three Bitcoin Originals only"
+  },
+  "nft_media_availability": {
+    "historical_individual_archive_release": {
+      "tag": "nft-arweave-mirror-175-v1",
+      "observed_custom_asset_count": 0,
+      "historical_release_text_is_byte_evidence": false,
+      "usable_as_current_recovery_source": false
+    },
+    "current_content_recovery": {
+      "github_release_tag": "nft-backup-v1",
+      "custom_asset_count": 10,
+      "logical_nft_coverage": 175,
+      "logical_car_file_coverage": 434,
+      "failed_downloads_in_bound_manifest": 0,
+      "zenodo_annex_doi": "10.5281/zenodo.21754229",
+      "public_cold_restore": "passed"
+    }
+  },
   "full_evidence_chain": {
+    "model": "legacy_full_evidence_chain_v1",
     "historical_pass": true,
     "historical_pass_date": "2026-05-01",
     "current_pass_restatement": false,

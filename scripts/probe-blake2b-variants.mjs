@@ -10,7 +10,9 @@
  * to find which one matches.
  *
  * Usage:
- *   node scripts/probe-blake2b-variants.mjs [--release-tag TAG] [--concurrency N]
+ *   node scripts/probe-blake2b-variants.mjs \
+ *     --release-tag compatible-release-with-175-individual-nft-tars \
+ *     [--concurrency N]
  */
 
 import fs from 'fs';
@@ -28,7 +30,7 @@ function getArg(name, def) {
   const idx = args.indexOf(name);
   return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
 }
-const RELEASE_TAG = getArg('--release-tag', 'nft-arweave-mirror-175-v1');
+const RELEASE_TAG = getArg('--release-tag', '');
 const CONCURRENCY = Number(getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'));
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -315,6 +317,10 @@ function findManifestEntry(fileSha256, filePath, indexes) {
 
 async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
+  if (!RELEASE_TAG) {
+    err('❌ --release-tag is required and must name a compatible Release containing 175 individual nft-*.tar assets.');
+    process.exit(1);
+  }
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
   log('═══════════════════════════════════════════════════════════');
@@ -343,6 +349,9 @@ async function main() {
   const allAssets = await getAllAssets(release.id);
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-') && a.name.endsWith('.tar'));
   log(`  ${allAssets.length} total assets, ${nftAssets.length} NFT tars`);
+  if (nftAssets.length !== EXPECTED_NFTS) {
+    throw new Error(`Expected exactly ${EXPECTED_NFTS} individual nft-*.tar assets, found ${nftAssets.length}.`);
+  }
 
   // ── Variant match counters ────────────────────────────────────────
   const VARIANT_NAMES = [

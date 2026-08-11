@@ -24,7 +24,7 @@ function getArg(name, def) {
   const idx = args.indexOf(name);
   return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
 }
-const RELEASE_TAG = getArg('--release-tag', 'nft-arweave-mirror-175-v1');
+const RELEASE_TAG = getArg('--release-tag', '');
 const CONCURRENCY = Number(getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'));
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -607,6 +607,10 @@ function findManifestEntry(fileSha256, filePath, fileCid, indexes) {
 
 async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
+  if (!RELEASE_TAG) {
+    err('❌ --release-tag is required and must name a compatible Release containing 175 individual nft-*.tar assets.');
+    process.exit(1);
+  }
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
   log('═══════════════════════════════════════════════════════════');

@@ -42,14 +42,14 @@ else
 fi
 
 echo
-echo "== Optional: run existing full evidence chain if ETH RPC and GitHub token are available =="
-if [ -n "${GITHUB_TOKEN:-}" ] && [ -n "${ETH_RPC_URL:-}" ]; then
+echo "== Optional: run legacy full evidence chain with an explicit compatible 175-tar source =="
+if [ -n "${GITHUB_TOKEN:-}" ] && [ -n "${ETH_RPC_URL:-}" ] && [ -n "${FEC_RELEASE_TAG:-}" ]; then
   node scripts/verify-full-evidence-chain.mjs \
-    --release-tag nft-arweave-mirror-175-v1 \
+    --release-tag "$FEC_RELEASE_TAG" \
     --ots-release-tag ots-and-flaw-mirror-v1 \
     --concurrency "${DAG_VERIFY_CONCURRENCY:-8}"
 else
-  echo "Skipping full evidence chain because GITHUB_TOKEN or ETH_RPC_URL is missing."
+  echo "Skipping legacy full evidence chain. GITHUB_TOKEN, ETH_RPC_URL, and FEC_RELEASE_TAG naming a verified 175-tar source are all required."
 fi
 
 echo

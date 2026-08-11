@@ -11,7 +11,8 @@
  * Output: DAG-CID-AUDIT.json
  *
  * Usage:
- *   GITHUB_TOKEN=xxx ETH_RPC_URL=https://... node scripts/verify-dag-and-signed-cids.mjs
+ *   GITHUB_TOKEN=xxx ETH_RPC_URL=https://... node scripts/verify-dag-and-signed-cids.mjs \
+ *     --release-tag compatible-release-with-175-individual-nft-tars
  */
 
 import fs from 'fs';
@@ -51,7 +52,7 @@ const DIGEST_MANIFEST_JSON = 'archive/evidence/digest-manifest.json';
 const DIGEST_MANIFEST_CSV = 'archive/evidence/digest-manifest.csv';
 const ETH_WITNESS_FILE = 'archive/eth-witness/eth-witness.json';
 const EXPECTED_NFTS = 175;
-const RELEASE_TAG = getArg('--release-tag', process.env.INPUT_RELEASE_TAG || 'nft-arweave-mirror-175-v1');
+const RELEASE_TAG = getArg('--release-tag', process.env.INPUT_RELEASE_TAG || '');
 const INPUT_ETH_AUDIT_FILE = getArg('--eth-audit-file', process.env.INPUT_ETH_AUDIT_FILE || '');
 const CONCURRENCY = parseBoundedInt(
   getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'),
@@ -1164,6 +1165,10 @@ async function verifyChainD() {
 
 async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
+  if (!RELEASE_TAG) {
+    err('❌ --release-tag is required and must name a compatible Release containing 175 individual nft-*.tar assets.');
+    process.exit(1);
+  }
 
   // Ensure tmp dir
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });

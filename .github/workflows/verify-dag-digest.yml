@@ -1,12 +1,11 @@
-name: Verify DAG + Digest Manifest
+name: Verify Legacy DAG + Digest (explicit 175-tar source)
 
 on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'GitHub Release tag for NFT backup'
-        required: false
-        default: 'nft-arweave-mirror-175-v1'
+        description: 'Compatible Release containing exactly 175 individual nft-*.tar assets; the historical base tag is empty'
+        required: true
       concurrency:
         description: 'Concurrency level'
         required: false
@@ -30,13 +29,14 @@ jobs:
       - name: Run DAG + Digest Manifest Verification
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUT_RELEASE_TAG: ${{ inputs.release_tag || 'nft-arweave-mirror-175-v1' }}
+          INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
           INPUT_CONCURRENCY: ${{ inputs.concurrency || '4' }}
         run: |
           set -euo pipefail
 
           [[ "$INPUT_CONCURRENCY" =~ ^[0-9]+$ ]] || { echo "Invalid concurrency"; exit 1; }
           [ "$INPUT_CONCURRENCY" -ge 1 ] && [ "$INPUT_CONCURRENCY" -le 25 ] || { echo "Concurrency out of range"; exit 1; }
+          [[ "$INPUT_RELEASE_TAG" =~ ^[A-Za-z0-9._/-]{1,100}$ ]] || { echo "Invalid or missing compatible release tag"; exit 1; }
 
           node scripts/verify-dag-digest.mjs \
             --release-tag "$INPUT_RELEASE_TAG" \

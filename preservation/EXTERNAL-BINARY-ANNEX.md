@@ -21,10 +21,10 @@ The external-binary annex series preserves the separately hosted public payload 
    - `flaw-covenant-archive-accessibility-mirror-v1`
 
 2. **Chronicle NFT Media Binary Annex**
-   - `nft-arweave-mirror-175-v1`
-   - `nft-backup-v1`
+   - `nft-arweave-mirror-175-v1` — historical Release metadata only; the complete paginated asset observation found zero custom assets, so its text is not treated as byte evidence
+   - `nft-backup-v1` — ten embedded package assets whose manifest covers 175 NFTs, 434 Arweave transactions/files, four contracts, 434 successful downloads, and zero failed downloads
 
-Every custom GitHub Release asset from the named releases is embedded byte-for-byte in the relevant annex package. GitHub-generated source archives are excluded because the core repository DOI already preserves the source tree. Deprecated failed NFT attempts (`nft-individual-v1`, `nft-individual-v2`) are not promoted into the annex.
+Every custom GitHub Release asset actually observed through the complete paginated API listing is embedded byte-for-byte in the relevant annex package. For the NFT annex, all ten payload assets come from `nft-backup-v1`; the empty historical Release contributes no payload bytes. GitHub-generated source archives are excluded because the core repository DOI already preserves the source tree. Deprecated failed NFT attempts (`nft-individual-v1`, `nft-individual-v2`) are not promoted into the annex.
 
 Each annex contains:
 

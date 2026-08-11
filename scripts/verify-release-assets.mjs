@@ -14,7 +14,7 @@
  *
  * Usage:
  *   GITHUB_TOKEN=xxx node scripts/verify-release-assets.mjs \
- *     [--release-tag nft-arweave-mirror-175-v1] \
+ *     --release-tag compatible-manifest-bearing-release \
  *     [--cid-check] \
  *     [--concurrency 8]
  */
@@ -412,12 +412,16 @@ async function downloadAsset(assetId, retries = MAX_RETRIES) {
 
 async function main() {
   const args = process.argv.slice(2);
-  const releaseTag = args.includes('--release-tag') ? args[args.indexOf('--release-tag') + 1] : 'nft-arweave-mirror-175-v1';
+  const releaseTag = args.includes('--release-tag') ? args[args.indexOf('--release-tag') + 1] : '';
   const cidCheck = args.includes('--cid-check');
   const concurrencyArg = args.includes('--concurrency') ? Number(args[args.indexOf('--concurrency') + 1]) : null;
   const concurrency = concurrencyArg || VERIFY_CONCURRENCY;
 
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
+  if (!releaseTag) {
+    err('❌ --release-tag is required and must name a compatible manifest-bearing Release.');
+    process.exit(1);
+  }
 
   log('═══════════════════════════════════════════════════════════');
   log('  Release Asset Re-Verification (v3 — strict, manifest-driven)');
@@ -696,7 +700,7 @@ async function main() {
     report_status: 'current',
     is_current: true,
     historical_report_only: false,
-    current_status_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+    current_status_url: 'https://www.trinityaccord.org/api/status.json',
     corrections_index_url: 'https://www.trinityaccord.org/api/corrections-index.json',
 
     required_checks: [
