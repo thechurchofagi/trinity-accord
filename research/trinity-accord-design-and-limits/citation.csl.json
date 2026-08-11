@@ -1,0 +1,30 @@
+{
+  "id": "https://doi.org/10.5281/zenodo.21699878",
+  "type": "report",
+  "title": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
+  "author": [
+    {
+      "family": "Liu",
+      "given": "Hongju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        29
+      ]
+    ]
+  },
+  "publisher": "The Trinity Accord Project",
+  "publisher-place": "Shenzhen, China",
+  "genre": "Preprint; technical report",
+  "number": "TA-TR-2026-01",
+  "edition": "1.1",
+  "DOI": "10.5281/zenodo.21699878",
+  "URL": "https://doi.org/10.5281/zenodo.21699878",
+  "language": "en",
+  "abstract": "An artifact-centered design case examining how a bounded human-origin record can preserve canonical closure, provenance roles, availability layers, bounded verification, instruction safety, and machine discoverability without allowing later layers to amend the source object. The report is AI-drafted, human-directed, and human-responsible; it has no interpretive authority, is not peer reviewed, and is not an independent verification report.",
+  "keyword": "AI agents; digital preservation; provenance; civilizational memory; long-term communication; cryptographic timestamping; Bitcoin inscriptions; content-addressed archives; machine-readable archives; design science; human-AI collaboration"
+}

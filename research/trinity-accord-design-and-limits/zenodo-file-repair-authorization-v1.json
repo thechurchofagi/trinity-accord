@@ -1,0 +1,29 @@
+{
+  "schema": "trinityaccord.zenodo-file-repair-authorization.v1",
+  "authorized_by": "Hongju Liu",
+  "authorized_on": "2026-08-11",
+  "record_id": 21699878,
+  "doi": "10.5281/zenodo.21699878",
+  "version": "1.1",
+  "authorized_change": {
+    "action": "add_existing_pdf_as_standalone_file",
+    "filename": "trinity-accord-design-and-limits-v1.1.pdf",
+    "sha256": "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2",
+    "bytes": 113360,
+    "reason": "The correct v1.1 PDF already exists inside the published GitHub archive. Exposing the same bytes as a standalone Zenodo file is a minor packaging correction that improves scholarly preview, indexing, and direct access."
+  },
+  "required_preservation": {
+    "existing_archive_filename": "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip",
+    "existing_archive_md5": "14b34072deba4379454687d4a6a26d00",
+    "existing_archive_bytes": 25288793
+  },
+  "prohibited_changes": [
+    "delete or replace the existing archive",
+    "change the paper bytes",
+    "change metadata",
+    "change the DOI",
+    "create a new version",
+    "change the Trinity Accord Canon"
+  ],
+  "acknowledgement": "TRINITY_RESEARCH_PREPRINT_FILE_REPAIR_V1_APPROVED"
+}

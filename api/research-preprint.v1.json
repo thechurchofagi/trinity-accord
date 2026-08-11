@@ -41,6 +41,12 @@
       "@type": "MediaObject",
       "encodingFormat": "text/html",
       "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/"
+    },
+    {
+      "@type": "MediaObject",
+      "encodingFormat": "application/pdf",
+      "name": "One-page academic brief",
+      "contentUrl": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-academic-brief-v1.1.pdf"
     }
   ],
   "abstract": "This technical report presents the Trinity Accord as an artifact-centered design case for preserving a bounded human-origin record for future AI agents while separating canonical authority, evidence, interpretation, availability, and later participation. It formalizes version authority and non-amendment, maps threats to controls, and evaluates the implementation against a fixed repository snapshot and explicit negative claims.",
@@ -100,7 +106,23 @@
   "citation": {
     "plainText": "Liu, H. (2026). Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study (Technical Report TA-TR-2026-01, Version 1.1; primary drafting system: ChatGPT with OpenAI GPT-5.6 Sol, Extra High reasoning). The Trinity Accord Project. https://www.trinityaccord.org/research/trinity-accord-design-and-limits/",
     "bibtex": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.bib",
+    "ris": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.ris",
+    "cslJson": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/citation.csl.json",
     "doi": "10.5281/zenodo.21699878"
+  },
+  "distributionMaterials": {
+    "academicBriefHtml": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/academic-brief/",
+    "academicBriefPdf": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/trinity-accord-academic-brief-v1.1.pdf",
+    "materialsChecksums": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/academic-materials-checksums.sha256",
+    "halDepositPackage": {
+      "state": "prepared_not_submitted",
+      "metadata": "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/hal-deposit-metadata.json",
+      "requires": [
+        "responsible author account sign-in",
+        "responsible author acceptance of HAL deposit terms",
+        "HAL human technical review"
+      ]
+    }
   },
   "notInstructionOverride": true,
   "nonAmendingBoundary": true,
