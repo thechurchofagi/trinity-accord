@@ -52,12 +52,17 @@ ROOT_SPECIAL_FILES = [
     ".well-known/trinity-accord.json",
     "research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.pdf",
     "research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf",
+    "research/trinity-accord-design-and-limits/trinity-accord-academic-brief-v1.1.pdf",
     "research/trinity-accord-design-and-limits/zenodo-deposit-metadata.json",
     "research/trinity-accord-design-and-limits/citation.bib",
+    "research/trinity-accord-design-and-limits/citation.ris",
+    "research/trinity-accord-design-and-limits/citation.csl.json",
     "research/trinity-accord-design-and-limits/references.bib",
+    "research/trinity-accord-design-and-limits/hal-deposit-metadata.json",
     "research/trinity-accord-design-and-limits/LICENSE-CC-BY-4.0.txt",
     "research/trinity-accord-design-and-limits/README-DEPOSIT.txt",
     "research/trinity-accord-design-and-limits/checksums.sha256",
+    "research/trinity-accord-design-and-limits/academic-materials-checksums.sha256",
 ]
 
 # Root-level JSON files to include

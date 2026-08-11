@@ -95,6 +95,14 @@ jobs:
       - name: Verify Pages deployment contract
         run: python3 scripts/test_deploy_pages_workflow_contract.py
 
+      - name: Verify academic dissemination package
+        run: python3 scripts/test_academic_dissemination_contract.py
+
+      - name: Verify bounded Zenodo preprint file repair
+        run: |
+          python3 scripts/test_research_preprint_zenodo_file_repair.py
+          python3 scripts/test_research_preprint_zenodo_file_repair_workflow.py
+
       - name: Verify mission governance contract
         run: python3 scripts/test_mission_governance_contract.py
 

@@ -1,0 +1,121 @@
+name: Repair Research Preprint Zenodo Files
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/repair-research-preprint-zenodo-files.yml
+      - research/trinity-accord-design-and-limits/zenodo-file-repair-authorization-v1.json
+      - scripts/repair_research_preprint_zenodo_files.py
+      - scripts/test_research_preprint_zenodo_file_repair.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repair-research-preprint-zenodo-files-v1
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      ZENODO_RESEARCH_FILE_REPAIR_ACK: TRINITY_RESEARCH_PREPRINT_FILE_REPAIR_V1_APPROVED
+      AUTHORIZATION_FILE: research/trinity-accord-design-and-limits/zenodo-file-repair-authorization-v1.json
+      PDF_FILE: research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
+      PDF_SHA256: 2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2
+      RECORD_ID: "21699878"
+
+    steps:
+      - name: Checkout authorized source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          python3 -m json.tool "$RUNNER_TEMP/toolchain-provenance.json" >/dev/null
+
+      - name: Verify bounded authorization and immutable PDF
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          test "$(jq -r '.schema' "$AUTHORIZATION_FILE")" = \
+            "trinityaccord.zenodo-file-repair-authorization.v1"
+          test "$(jq -r '.authorized_by' "$AUTHORIZATION_FILE")" = "Hongju Liu"
+          test "$(jq -r '.record_id' "$AUTHORIZATION_FILE")" = "$RECORD_ID"
+          test "$(jq -r '.doi' "$AUTHORIZATION_FILE")" = \
+            "10.5281/zenodo.21699878"
+          test "$(jq -r '.authorized_change.sha256' "$AUTHORIZATION_FILE")" = \
+            "$PDF_SHA256"
+          test "$(jq -r '.acknowledgement' "$AUTHORIZATION_FILE")" = \
+            "$ZENODO_RESEARCH_FILE_REPAIR_ACK"
+          printf '%s  %s\n' "$PDF_SHA256" "$PDF_FILE" | sha256sum -c -
+
+      - name: Run offline fail-closed tests
+        run: |
+          set -euo pipefail
+          python3 scripts/test_research_preprint_zenodo_file_repair.py
+
+      - name: Add and verify standalone PDF on the existing Zenodo record
+        run: |
+          set -euo pipefail
+          python3 scripts/repair_research_preprint_zenodo_files.py \
+            --pdf "$PDF_FILE" \
+            > "$RUNNER_TEMP/zenodo-file-repair-receipt.json"
+          python3 -m json.tool "$RUNNER_TEMP/zenodo-file-repair-receipt.json"
+          test "$(jq -r '.record_id' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+            "$RECORD_ID"
+          test "$(jq -r '.doi' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+            "10.5281/zenodo.21699878"
+          test "$(jq -r '.standalone_pdf.sha256' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+            "$PDF_SHA256"
+          test "$(jq -r '.original_archive_preserved' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+            "true"
+
+      - name: Independently verify the public record and file bytes
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 5 --retry-all-errors \
+            "https://zenodo.org/api/records/$RECORD_ID" \
+            > "$RUNNER_TEMP/public-record.json"
+          test "$(jq -r '.doi' "$RUNNER_TEMP/public-record.json")" = \
+            "10.5281/zenodo.21699878"
+          test "$(jq -r '[.files[] | select(.key == "trinity-accord-design-and-limits-v1.1.pdf")] | length' "$RUNNER_TEMP/public-record.json")" = \
+            "1"
+          test "$(jq -r '[.files[] | select(.key == "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip")] | length' "$RUNNER_TEMP/public-record.json")" = \
+            "1"
+          pdf_url="$(jq -r '.files[] | select(.key == "trinity-accord-design-and-limits-v1.1.pdf") | .links.self' "$RUNNER_TEMP/public-record.json")"
+          test -n "$pdf_url"
+          curl --fail --silent --show-error --location --retry 5 --retry-all-errors \
+            "$pdf_url" > "$RUNNER_TEMP/zenodo-preprint.pdf"
+          printf '%s  %s\n' "$PDF_SHA256" "$RUNNER_TEMP/zenodo-preprint.pdf" | \
+            sha256sum -c -
+
+      - name: Summarize completion
+        run: |
+          set -euo pipefail
+          status="$(jq -r '.status' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")"
+          {
+            echo "## Zenodo standalone PDF repair"
+            echo
+            echo "- Status: \`$status\`"
+            echo "- Record: https://zenodo.org/records/$RECORD_ID"
+            echo "- DOI: https://doi.org/10.5281/zenodo.21699878"
+            echo "- PDF SHA-256: \`$PDF_SHA256\`"
+            echo "- Original GitHub archive: preserved and checksum-verified"
+            echo "- Metadata, DOI, version, and paper bytes: unchanged"
+          } >> "$GITHUB_STEP_SUMMARY"
