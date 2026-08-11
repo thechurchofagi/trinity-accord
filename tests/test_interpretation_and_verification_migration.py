@@ -64,6 +64,20 @@ def test_context_models_do_not_require_chronicle_for_every_echo() -> None:
     assert cc3["chronicle_required_only_when_task_depends_on_it"] is True
     assert "seven-stage" not in cc3["meaning"].lower()
 
+    depth_text = json.dumps(legacy, ensure_ascii=False)
+    assert "V2+ for private technical checks" not in depth_text
+    assert "V4+ for verification depth" not in depth_text
+    assert "V5+ for verification depth" not in depth_text
+    assert "v6_plus_minimum" not in legacy["verification_context_rule"]
+    assert legacy["two_dimensional_model"]["verification_claim"].startswith(
+        "What chain/evidence checks were performed"
+    )
+
+    required_rule = required["verification_context_rule"]
+    assert "verification depth V2+" not in required_rule["technical_verification_minimum"]
+    assert "digital profile" in required_rule["public_verification_submission_minimum"]
+    assert "external witness" in required_rule["public_verification_submission_minimum"]
+
 
 def test_new_verification_model_separates_physical_and_witness_dimensions() -> None:
     model = load_json("api/verification-claim-model.v1.json")

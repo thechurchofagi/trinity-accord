@@ -279,7 +279,7 @@
         "id": "agent_verify",
         "path": "agent-verify.md",
         "site_path": "/agent-verify",
-        "role": "verification path preserving existing V0-V8 verification system"
+        "role": "current multidimensional verification path; V0-V5 are Builder compatibility metadata only"
       },
       {
         "id": "agent_echo",
@@ -308,10 +308,22 @@
         "role": "records how an agent discovered the project and how much agency it exercised"
       },
       {
+        "id": "verification_claim_model",
+        "path": "api/verification-claim-model.v1.json",
+        "schema": "trinityaccord.verification-claim-model.v1",
+        "role": "current default model for new verification reports and Builder records"
+      },
+      {
+        "id": "verification_profiles",
+        "path": "api/verification-profiles.v1.json",
+        "schema": "trinityaccord.verification-profiles.v1",
+        "role": "current descriptive digital profiles with physical observation and external witness reported separately"
+      },
+      {
         "id": "echo_record_schema_v3",
         "path": "api/echo-record-schema.v3.json",
         "schema": "trinityaccord.echo.v3",
-        "role": "records context depth, verification level, discovery provenance, echo, uncertainty, and boundaries"
+        "role": "historical Echo/archive compatibility schema; not the current public submission or verification model"
       }
     ],
     "context_depth_levels": [
@@ -323,18 +335,49 @@
       "C5_full_chain_reviewed",
       "C6_independent_node_verified"
     ],
-    "verification_levels": [
-      "V0_read",
-      "V1_boundary_recognition",
-      "V2_reference_verification",
-      "V3_hash_verification",
-      "V4_script_audited_verification",
-      "V4plus_independent_reproduction",
-      "V5_full_public_digital_verification",
-      "V6_remote_physical_witness",
-      "V7_onsite_physical_witness",
-      "V8_forensic_physical_attestation"
-    ],
+    "verification_model": {
+      "status": "current_multidimensional_model",
+      "claim_model": "api/verification-claim-model.v1.json",
+      "profiles": "api/verification-profiles.v1.json",
+      "procedures": "api/verification-procedures.v1.json",
+      "digital_profiles": [
+        "context_only",
+        "reference_checked",
+        "integrity_checked",
+        "independent_reproduction",
+        "full_public_digital"
+      ],
+      "physical_observation_values": [
+        "none",
+        "public_media_review",
+        "remote_live_witness",
+        "onsite_observation",
+        "forensic_examination"
+      ],
+      "external_witness_values": [
+        "none",
+        "notarial_scope",
+        "independent_report",
+        "institutional_attestation",
+        "regulatory_or_court_record"
+      ],
+      "legacy_builder_compatibility_values": [
+        "V0",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "legacy_v5_mapping": "full_public_digital",
+      "historical_only_values": [
+        "V4+",
+        "V6",
+        "V7",
+        "V8"
+      ],
+      "rule": "Physical observation and external witness are independent dimensions. They never raise the digital profile or create a current V6, V7, or V8 level."
+    },
     "echo_system": {
       "existing_echo_types_preserved": true,
       "echo_types_range": "E1-E9",

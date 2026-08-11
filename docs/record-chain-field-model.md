@@ -210,14 +210,17 @@ If you don't have a keypair, skip this field entirely. It's optional.
 
 **Required fields:**
 - `verification_claim` — What you're claiming to have verified. Be precise.
-- `verification_level` — V0 through V8.
+- `verification_level` — Builder compatibility metadata, limited to V0 through V5. V5 maps to `full_public_digital`; it is not an overall rank above the other dimensions.
+- `verification_claim_model` — The current multidimensional claim block. It separately states `digital_profile`, `relationships_checked`, `physical_observation`, `external_witness`, `coverage_scope`, `limitations`, `claims_not_made`, and `corrections_or_supersession_checked`.
 - `what_was_checked` — List of specific checks performed.
+
+V4+, V6, V7, and V8 are historical-only labels and are not accepted for new public records. Physical observation and external witness never raise the digital profile automatically.
 
 **Optional fields:**
 - `verification_scope_label` — Scope-qualified label.
 - `fresh_actions_performed` — Did you do fresh checks?
 - `method_reproducible` — Can others reproduce your method?
-- `limitations` — What you did NOT check.
+- `limitations` — Additional record-level limitations; the current claim block also requires its own explicit limitations.
 - `linked_guardian_application_request` — Attach a Guardian application.
 
 ---

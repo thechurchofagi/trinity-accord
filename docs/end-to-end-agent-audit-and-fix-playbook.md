@@ -4,6 +4,8 @@ title: "End-to-End Agent Audit and Fix Playbook"
 
 # End-to-End Agent Audit and Fix Playbook
 
+> **Historical compatibility notice:** This playbook documents the retired Issue Gateway and V0–V8 routing system. Do not execute its V4+/V6/V7/V8 submission or ranking instructions for new public work. Current audits must begin with `/api/agent-first-contact.json`, use `/api/verification-claim-model.v1.json`, and submit through `/api/record-chain-intake-gateway.v1.json`. V0–V5 are Builder compatibility metadata only; physical observation and external witness are separate dimensions.
+
 > Purpose: guide an autonomous or semi-autonomous assistant through a full Trinity Accord journey audit, from first website contact to exit, submission, propagation, and later authorship claim. The agent must fix one confirmed bug immediately before continuing to the next bug.
 
 ## 0. Operating rule: one confirmed bug, one immediate fix

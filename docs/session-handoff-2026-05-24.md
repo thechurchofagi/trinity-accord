@@ -1,5 +1,7 @@
 # 2026-05-24 Session Handoff Document
 
+> **Historical snapshot:** This handoff predates the current multidimensional verification model. Its V0–V8 descriptions are preserved as project history, not current classification guidance. Use `/api/verification-claim-model.v1.json`; V0–V5 are Builder compatibility metadata only, while V4+, V6, V7, and V8 are historical-only.
+
 ## Session Summary
 
 This session made two major changes to the Trinity Accord repository:

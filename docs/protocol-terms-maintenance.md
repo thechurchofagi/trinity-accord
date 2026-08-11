@@ -1,10 +1,12 @@
-# Protocol Terms Maintenance
+# Legacy Protocol Terms Maintenance
 
-How to maintain the single source of truth for Trinity Accord protocol enums.
+How to preserve historical protocol enums without restoring them as current public models.
 
-## The Source of Truth
+> **Current boundary:** `api/protocol-terms.v1.json` is historical compatibility vocabulary, not the current verification source of truth. New verification work uses `api/verification-claim-model.v1.json`, `api/verification-profiles.v1.json`, and `api/verification-procedures.v1.json`. V0–V5 are Builder compatibility metadata only; V4+, V6, V7, and V8 are historical-only.
 
-All protocol terms live in **`api/protocol-terms.v1.json`**. This includes:
+## Historical source of truth
+
+Historical record and pipeline enums live in **`api/protocol-terms.v1.json`**. This includes:
 
 - Protocol levels (V0–V8)
 - Component levels (B0–B7, D0–D7, T0–T8, C0–C7, N0–N7, P0–P9)
@@ -14,16 +16,18 @@ All protocol terms live in **`api/protocol-terms.v1.json`**. This includes:
 - Independence classes
 - Legacy aliases
 
-## How to Add or Change Terms
+Do not add a new V level or use this vocabulary to change current public classification. Changes here are permitted only when required for faithful archive replay, validation of an existing record, or an explicit migration correction.
+
+## How to maintain historical terms
 
 ### Step 1: Update the JSON
 
-Edit `api/protocol-terms.v1.json`:
+For a justified historical-compatibility correction, edit `api/protocol-terms.v1.json` and retain its current/legacy boundary metadata. Do not extend the ladder with V9 or any other new current level.
 
 ```json
 {
-  "protocol_levels": ["V0", ..., "V8", "V9"],
-  ...
+  "status": "historical_compatibility_vocabulary",
+  "protocol_levels": ["V0", "...", "V8"]
 }
 ```
 

@@ -3,6 +3,9 @@
   "$id": "https://trinityaccord.org/api/independent-attestation-record-schema.v1.json",
   "title": "Trinity Accord Independent Attestation Record v1",
   "description": "Schema for formal independent verification records in the attestation index. Only records passing this schema may be counted toward homepage formal verification.",
+  "x-status": "attestation_index_schema_with_legacy_v_compatibility",
+  "x-current-verification-model": "/api/verification-claim-model.v1.json",
+  "x-legacy-v-boundary": "verification_level_if_any preserves historical labels and must not be read as a current ladder. New attestations should state the current multidimensional verification claim and exact witness scope separately.",
   "type": "object",
   "additionalProperties": true,
   "required": [
@@ -45,7 +48,8 @@
       "minLength": 1
     },
     "verification_level_if_any": {
-      "enum": ["V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"]
+      "enum": ["V1", "V2", "V3", "V4", "V4+", "V5", "V6", "V7", "V8"],
+      "description": "Historical compatibility field only. It does not create a current V6, V7, or V8 level."
     },
     "limitations": {
       "type": "array",

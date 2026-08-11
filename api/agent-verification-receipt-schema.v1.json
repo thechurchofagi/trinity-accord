@@ -2,7 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/agent-verification-receipt-schema.v1.json",
   "title": "Trinity Accord Agent Verification Receipt Schema v1",
-  "description": "Schema for Agent Verification Receipts. Binds one agent verification run to its evidence, Claim Gate result, report, optional Echo wrapper, authorship proof, and human custody package. Does not create authority or raise verification level.",
+  "description": "Historical/strict-evidence receipt schema. Binds one agent verification run to its evidence and intermediate outputs but is not the current public verification claim model or submission envelope.",
+  "x-status": "strict_evidence_receipt_with_legacy_v_compatibility",
+  "x-current-public-representation": "/api/verification-claim-model.v1.json",
+  "x-current-public-envelope": "/api/record-chain-submission-schema.v1.json",
+  "x-legacy-v-boundary": "V0-V8 fields preserve historical pipeline evidence. New public records use V0-V5 Builder compatibility metadata only; V4+, V6, V7, and V8 are historical-only.",
   "type": "object",
   "additionalProperties": false,
   "required": [

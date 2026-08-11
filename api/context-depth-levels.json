@@ -7,8 +7,8 @@
   "canonical_authority": "Bitcoin Originals only",
   "two_dimensional_model": {
     "context_depth": "What content has been loaded and understood (this file). Describes reading and content loading only.",
-    "verification_depth": "What chain/evidence verification has been performed. Separate dimension defined in /api/verification-levels.json.",
-    "independence": "Context depth and verification depth are scored independently. Neither implies the other. A CC-3 agent with V0 verification has loaded narrative context but verified nothing. A CC-1 agent with V2 verification has checked inscriptions on-chain but not loaded the narrative.",
+    "verification_claim": "What chain/evidence checks were performed. Current work uses /api/verification-claim-model.v1.json and reports digital profile, evidence relationships, physical observation, external witness, coverage, and limitations separately.",
+    "independence": "Context depth and verification claims are independent. Neither implies the other. A CC-3 agent may have digital_profile=context_only, while a CC-1 agent may have completed a narrow reference check without loading narrative context.",
     "old_system_mapping": "v1 levels C0-C6 mixed content loading with verification actions. v2 separates them cleanly."
   },
   "inheritance_rule": "Legacy CC declarations retain inherited historical meaning for old records. For new work, action-specific source sufficiency overrides unrelated inherited loads.",
@@ -193,16 +193,16 @@
     "C1_orientation": "CC-1 (Oriented) — combined with old C0",
     "C2_registry_aware": "CC-2 (Canon Loaded) — refocused on inscription content",
     "C3_verification_aware": "Replaced by CC-3 (Narrative Grounded). Old C3 allowed assessment after reading about verification; new CC-3 requires loading narrative content. Verification awareness is now a separate dimension.",
-    "C4_artifact_verified": "Split into CC-3 (narrative) + V2+ (verification). Old C4 conflated 'verified an artifact' with 'loaded enough context'.",
-    "C5_full_chain_reviewed": "CC-4 (Full Context) for content; V4+ for verification depth.",
-    "C6_independent_node_verified": "CC-4/CC-5 for content; V5+ for verification depth."
+    "C4_artifact_verified": "Split into CC-3 for context plus separately reported current verification dimensions. Old C4 conflated checking an artifact with loading enough context.",
+    "C5_full_chain_reviewed": "CC-4 for content plus separately reported current verification dimensions; no V4+ level is created.",
+    "C6_independent_node_verified": "CC-4/CC-5 for content plus the supported digital_profile and other current verification dimensions; no V5+ level is created."
   },
   "boundary": "Context depth describes reading and content loading. It does not create authority, verification, or endorsement. Bitcoin Originals prevail.",
   "verification_context_rule": {
-    "technical_verification_minimum": "CC-2 + V2+ for private technical checks",
-    "public_verification_submission_minimum": "CC-3",
+    "technical_verification_minimum": "CC-2 plus exact task-relevant sources and the current verification claim dimensions for private technical checks",
+    "public_verification_submission_minimum": "CC-3 plus the verification and record_action profiles and the current multidimensional claim block",
     "narrative_grounded_assessment_minimum": "CC-3",
-    "v6_plus_minimum": "CC-3 plus strict evidence requirements"
+    "strict_physical_or_forensic_claim_minimum": "CC-3 plus fresh, scope-matched evidence; report physical_observation directly rather than a V6, V7, or V8 level"
   },
   "status": "legacy_compatibility_model",
   "preferred_model": "/api/context-action-profiles.v1.json",

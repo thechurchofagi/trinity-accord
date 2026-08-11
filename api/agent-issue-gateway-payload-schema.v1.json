@@ -2,6 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.trinityaccord.org/api/agent-issue-gateway-payload-schema.v1.json",
   "title": "Trinity Accord Agent Issue Gateway Payload Schema v1",
+  "description": "Historical GitHub Issue Gateway schema. Do not use it for current public submissions or verification classification.",
+  "x-status": "historical_issue_gateway_schema",
+  "x-current-public-replacement": "/api/record-chain-submission-schema.v1.json",
+  "x-current-verification-model": "/api/verification-claim-model.v1.json",
   "type": "object",
   "additionalProperties": false,
   "required": [

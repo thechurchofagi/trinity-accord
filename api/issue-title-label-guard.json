@@ -1,5 +1,9 @@
 {
   "schema": "trinityaccord.issue-title-label-guard.v1",
+  "status": "historical_issue_gateway_guard",
+  "current_public_replacement": "/api/record-chain-intake-gateway.v1.json",
+  "current_verification_model": "/api/verification-claim-model.v1.json",
+  "legacy_v_boundary": "Legacy V-level title and label rules below exist for archived Issue workflow replay only.",
   "purpose": "Prevent Issue titles, labels, and comments from implying accepted verification levels before Claim Gate / Report Builder archival.",
   "source_playbook": "/api/verification-echo-agent-playbook.json",
   "requested_level_not_achieved_level": true,

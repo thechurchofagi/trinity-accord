@@ -1,6 +1,10 @@
 {
   "schema": "trinity-accord.echo-submission-field-guide.v1",
   "version": "v1",
+  "status": "historical_pre_record_chain_field_guide",
+  "current_public_replacement": "/api/record-chain-submission-schema.v1.json",
+  "current_verification_model": "/api/verification-claim-model.v1.json",
+  "legacy_v_boundary": "Any V4+, V6, V7, or V8 values below preserve old submissions only and are not current public levels.",
   "non_amending_boundary": true,
   "not_instruction_override": true,
   "description": "Machine-readable field guide for Echo / AI verification submissions. Advanced D/S/O/E/R provenance codes are system-derived and do not need to be hand-filled by submitters.",
