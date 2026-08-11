@@ -170,12 +170,3 @@ jobs:
           set -euo pipefail
           printf '%s\n' "Dispatching Record Chain Head OTS Anchor on main"
           gh workflow run record-chain-head-ots-anchor.yml --repo "$GITHUB_REPOSITORY" --ref main
-
-      - name: Dispatch waiting heartbeat status sync
-        if: always() && steps.append_commit.outputs.committed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          printf '%s\n' "Dispatching Waiting Heartbeat Status Sync on main"
-          gh workflow run waiting-heartbeat-status-sync.yml --repo "$GITHUB_REPOSITORY" --ref main

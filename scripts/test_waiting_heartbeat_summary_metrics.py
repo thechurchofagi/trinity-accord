@@ -16,6 +16,9 @@ PUBLIC = ROOT / "api" / "public-home-status.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-submit.yml"
 CAPSULE_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-capsule.yml"
 STATUS_SYNC_WORKFLOW = ROOT / ".github" / "workflows" / "waiting-heartbeat-status-sync.yml"
+HOME_SYNC_WORKFLOW = ROOT / ".github" / "workflows" / "homepage-status-sync.yml"
+APPEND_WORKFLOW = ROOT / ".github" / "workflows" / "record-chain-append.yml"
+OTS_WORKFLOW = ROOT / ".github" / "workflows" / "record-chain-head-ots-anchor.yml"
 GENERATOR = ROOT / "scripts" / "generate_waiting_heartbeat_status.py"
 SUBMIT_SCRIPT = ROOT / "scripts" / "submit_waiting_heartbeat.py"
 CAPSULE_BUILDER = ROOT / "scripts" / "build_waiting_heartbeat_arweave_capsule.py"
@@ -460,14 +463,29 @@ def test_current_verified_capsules_all_bind_to_repository_evidence() -> None:
     generator.require_verified_capsule_bindings(generator.load_capsules())
 
 
-def test_status_sync_regenerates_after_rebase() -> None:
+def test_status_sync_is_retired_and_delegates_to_homepage_sync() -> None:
     text = STATUS_SYNC_WORKFLOW.read_text(encoding="utf-8")
-    rebase_pos = text.find("git rebase origin/main")
-    regenerate_pos = text.find("regenerate_waiting_status_artifacts", rebase_pos)
-    amend_pos = text.find("git commit --amend --no-edit", regenerate_pos)
-    require(rebase_pos >= 0, "status sync must rebase when main advances")
-    require(regenerate_pos > rebase_pos, "status sync must regenerate derived state after rebase")
-    require(amend_pos > regenerate_pos, "status sync must amend regenerated state before retrying push")
+    require("Retired" in text, "duplicate Waiting Heartbeat status writer must declare retirement")
+    require("contents: read" in text, "retired status writer must be read-only")
+    require("contents: write" not in text, "retired status writer must not retain write permission")
+    require("schedule:" not in text, "retired status writer must not be scheduled")
+    require("workflow_run:" not in text, "retired status writer must not auto-trigger")
+    require("update_public_generated_artifacts.py" not in text, "retired status writer must not generate public mirrors")
+    require("git push" not in text, "retired status writer must not push repository state")
+
+    home = HOME_SYNC_WORKFLOW.read_text(encoding="utf-8")
+    for workflow_name in [
+        "Waiting Heartbeat Submit",
+        "Append Record Chain Entries",
+        "Record Chain Head OTS Anchor",
+    ]:
+        require(workflow_name in home, f"central homepage sync must listen to {workflow_name}")
+    require("Waiting Heartbeat Status Sync" not in home, "central sync must not listen to the retired duplicate writer")
+    for upstream in [APPEND_WORKFLOW, OTS_WORKFLOW]:
+        require(
+            "waiting-heartbeat-status-sync.yml" not in upstream.read_text(encoding="utf-8"),
+            f"{upstream.name} must not dispatch the retired duplicate writer",
+        )
 
 
 def test_standalone_capsule_workflow_is_retired_but_historical_tools_remain() -> None:
@@ -617,14 +635,14 @@ def test_key_continuity_failure_takes_precedence_over_pending_append() -> None:
     require(bad_record.get("authorship_public_key_sha256") != "correct-key-sha", "record key must differ from manifest key")
 
 
-def test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror() -> None:
+def test_submit_workflow_has_no_historical_backfill_input_and_delegates_public_mirrors() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     require("github.event.inputs.date" not in text, "submit workflow must not accept historical date input")
     require("HEARTBEAT_DATE" not in text, "submit workflow must not thread manual date input")
     require("--date" not in text, "submit workflow must not call heartbeat submit with manual backfill date")
-    require("api/public-home-status.json" in text, "submit workflow must stage public-home-status mirror")
-    require("index.md" in text, "submit workflow must stage homepage markdown mirror")
-    require("sitemap.xml" in text, "submit workflow must stage sitemap mirror")
+    require("git add record-chain/heartbeat" in text, "submit workflow must persist only Waiting Heartbeat source state")
+    require("centralized" in text and "homepage/status sync owns these paths" in text, "submit workflow must document central public-mirror ownership")
+    require("update_public_generated_artifacts.py" not in text, "submit workflow must not generate public mirrors")
 
 
 def main() -> int:
@@ -642,11 +660,11 @@ def main() -> int:
     test_capsule_builder_recognizes_existing_result_states()
     test_verified_capsule_binds_exact_bytes_and_final_record()
     test_current_verified_capsules_all_bind_to_repository_evidence()
-    test_status_sync_regenerates_after_rebase()
+    test_status_sync_is_retired_and_delegates_to_homepage_sync()
     test_standalone_capsule_workflow_is_retired_but_historical_tools_remain()
     test_capsule_upload_and_repair_scripts_keep_pending_readback_retryable()
     test_submit_script_persists_append_dispatch_metadata()
-    test_submit_workflow_has_no_historical_backfill_input_and_stages_public_mirror()
+    test_submit_workflow_has_no_historical_backfill_input_and_delegates_public_mirrors()
     test_append_status_pending_treated_as_pending_append()
     test_rejected_receipt_excluded_from_pending_append()
     test_rejected_same_date_resubmission_not_blocked()

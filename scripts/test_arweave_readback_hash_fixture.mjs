@@ -121,10 +121,10 @@ async function main() {
       throw new Error("hash mismatch fixture unexpectedly passed");
     }
 
-    if (!result.stdout.includes("reason: hash_mismatch")) {
+    if (!result.stdout.includes("reason: persistent_content_mismatch")) {
       console.error(result.stdout);
       console.error(result.stderr);
-      throw new Error("hash mismatch reason not printed");
+      throw new Error("persistent content mismatch reason not printed");
     }
 
     const readbackLog = JSON.parse(
@@ -138,11 +138,19 @@ async function main() {
       throw new Error("readback log did not record fail");
     }
 
-    if (readbackLog.reason !== "hash_mismatch") {
-      throw new Error("readback log did not record hash_mismatch");
+    if (readbackLog.reason !== "persistent_content_mismatch") {
+      throw new Error("readback log did not record persistent_content_mismatch");
     }
 
-    console.log("PASS: arweave readback hash mismatch fixture");
+    if (readbackLog.last_failure?.reason !== "hash_mismatch") {
+      throw new Error("readback log did not preserve the underlying hash_mismatch diagnostic");
+    }
+
+    if (readbackLog.action !== "stop_paid_uploads_and_open_bug") {
+      throw new Error("persistent mismatch did not retain the paid-upload stop action");
+    }
+
+    console.log("PASS: persistent Arweave hash mismatch fixture");
   } finally {
     server.close();
   }

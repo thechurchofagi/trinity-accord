@@ -95,10 +95,23 @@ def main():
         "ai.txt",
     ]
 
+    homepage_phrase = "completed pre-ASI record addressed toward a possible future human\u2013superintelligence relationship"
     primary_phrase = "completed pre-ASI human"
     for path in files:
         text = read(path)
-        require_contains(text, primary_phrase, f"{path} contains P0.3 primary phrase")
+        if path == "index.md":
+            require_contains(
+                text,
+                homepage_phrase,
+                "index.md contains bounded public-facing P0.3 phrase",
+            )
+            check(
+                primary_phrase not in text,
+                "index.md does not overstate the relation-record classification",
+                primary_phrase,
+            )
+        else:
+            require_contains(text, primary_phrase, f"{path} contains P0.3 primary phrase")
         fail_if_old_primary_context(text, path)
 
     agent_value = read_json("api/agent-value.json")

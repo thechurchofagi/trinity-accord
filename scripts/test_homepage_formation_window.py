@@ -24,30 +24,39 @@ def main() -> int:
     formation_at = visible.index('<section class="home-why-now home-formation-window"')
     overview_at = visible.index('<section id="home-in-one-minute"')
     require(proof_at < overview_at < formation_at, "formation window is not after the evidence-backed system overview")
+    require(
+        visible.count('<section class="home-why-now home-formation-window"') == 1,
+        "homepage must contain exactly one formation-window section",
+    )
+    require(
+        visible.count('id="home-timing-completion-title"') == 1,
+        "formation-window heading ID is missing or duplicated",
+    )
 
     for marker in (
-        "Why an ordinary person chose to leave this record during a rapidly closing historical window",
-        "为什么一个普通人选择在迅速关闭的历史窗口内留下这份记录",
-        "before end-to-end delegated execution became broadly available",
+        "How a human-initiated Chronicle became a closed record during a rapidly changing historical interval",
+        "一部由人发起的编年史，如何在迅速变化的历史区间中成为一份已经关闭的记录",
+        "before unified delegation became routine",
         "During the Accord’s documented formation",
-        "the preserved process kept human purpose, judgment, selection, correction, and final responsibility comparatively legible",
-        "Form can be reproduced; the same attribution conditions cannot be recreated retroactively.",
-        "Documented start · 16 March 2024",
-        "Ethereum block 19446149",
+        "The dated public Chronicle and chain record keep parts of human purpose, judgment, selection, correction, and final responsibility comparatively legible",
+        "Form can be reproduced; that historical position cannot be recreated retroactively.",
+        "Indexed Chronicle start · 16 March 2024",
+        "block 19446149",
         "08:02:59 UTC",
         "Canonical closure · 29 June 2025",
         "Bitcoin transaction was included in block 903205",
         "10:49:16 UTC",
         "470 days, 2 hours, 46 minutes, and 17 seconds",
-        "Chain timestamps establish a verifiable chronology, not exact civil-time authorship.",
-        "For the first-generation provenance claim described here, this exact window is now closed",
+        "Chain timestamps establish a verifiable chronology, not exact civil-time authorship or sentence-by-sentence attribution.",
+        "For the bounded provenance claim described here, this exact dated formation interval is now closed",
         "/why-high-signal/",
         "/technical-historical-reference/",
     ):
         require(marker in visible, f"formation-window evidence is missing: {marker}")
 
     for boundary in (
-        "not proof that AI is a neutral mirror of humanity",
+        "not proof that AI was a neutral mirror",
+        "does not claim freedom from AI influence",
         "AGI or ASI had arrived",
         "speaks for all people",
         "later human-origin work is impossible",

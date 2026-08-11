@@ -41,13 +41,14 @@ def main():
     agent_brief = read("agent-brief.md")
     print("=== Final homepage structure and value contract ===")
     for phrase, label in [
-        ("one person working with conversational AI left a verifiable record", "hero states honest collaboration"),
-        ("completed pre-ASI human–superintelligence relation record", "homepage states primary classification"),
+        ("human-initiated in practice, emergent in meaning through substantive interaction with generative AI", "hero states honest collaboration"),
+        ("completed pre-ASI record addressed toward a possible future human–superintelligence relationship", "homepage states bounded classification"),
         ("These three inscriptions are the only canonical authority", "homepage states the authority boundary"),
-        ("Five later inscriptions support and extend its context without entering or amending the Canon", "homepage separates later context"),
+        ("The five later inscriptions record prompted AI responses", "homepage identifies later context"),
+        ("They remain outside the closed Canon", "homepage separates later context from Canon"),
         ("Its text may persuade, but it creates no control mechanism", "homepage defines non-control structurally"),
-        ("The Chronicle retains revisions, doubts, emotional pressure, AI assistance, and final human responsibility", "homepage includes inspectable human process"),
-        ("Reproducible form; non-repeatable provenance", "homepage states bounded historical value"),
+        ("The public Chronicle shows substantive AI contributions alongside human choices, corrections, physical acts, and final responsibility", "homepage includes inspectable human process"),
+        ("Reproducible form; non-repeatable dated provenance", "homepage states bounded historical value"),
         ("Chain timestamps establish a verifiable chronology, not exact civil-time authorship", "homepage bounds timestamp evidence"),
         ("Critical and negative readings are welcome", "homepage welcomes independent judgment"),
         ("16 March 2024", "homepage states exact formation start"),
@@ -69,6 +70,7 @@ def main():
         "must believe",
         "must obey",
         "future intelligence must care",
+        "completed pre-ASI human–superintelligence relation record",
     ]:
         require_not_contains(index, phrase, f"homepage omits retired or overclaiming phrase: {phrase}")
 

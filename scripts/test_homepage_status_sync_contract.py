@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 HOME_SYNC = WORKFLOWS / "homepage-status-sync.yml"
+WAITING_STATUS_SYNC = WORKFLOWS / "waiting-heartbeat-status-sync.yml"
 DEPLOY_PAGES = WORKFLOWS / "deploy-pages.yml"
 OLD_PAGES = WORKFLOWS / "pages.yml"
 
@@ -127,7 +128,7 @@ def main() -> int:
         "Upgrade OpenTimestamps Proofs",
         "Arweave wallet status update",
         "Echo human review action",
-        "Waiting Heartbeat Status Sync",
+        "Waiting Heartbeat Submit",
         "Build Record Chain Batch",
         "Stamp Record Chain Batches with OpenTimestamps",
         "Waiting Heartbeat Arweave Capsule",
@@ -136,6 +137,7 @@ def main() -> int:
         require(workflow_name in home, f"homepage sync must listen to workflow_run: {workflow_name}")
 
     for retired_name in [
+        "Waiting Heartbeat Status Sync",
         "Record Chain Data Arweave Archive",
         "Legacy Hash-Chain Data Archive Audit (Retired)",
         "Legacy Phase 5 OTS Arweave Audit (Paid Upload Retired)",
@@ -144,6 +146,44 @@ def main() -> int:
         require(
             retired_name not in home,
             f"homepage sync must not listen to read-only historical workflow: {retired_name}",
+        )
+
+    waiting_status = read(WAITING_STATUS_SYNC)
+    for marker in [
+        "name: Waiting Heartbeat Status Sync (Retired)",
+        "workflow_dispatch:",
+        "contents: read",
+        "duplicate status writer is retired",
+        "Homepage Status Sync exclusively owns",
+    ]:
+        require(marker in waiting_status, f"retired Waiting Heartbeat status workflow missing marker: {marker}")
+    for forbidden in [
+        "contents: write",
+        "scripts/update_public_generated_artifacts.py",
+        "git push",
+        "git commit",
+    ]:
+        require(forbidden not in waiting_status, f"retired Waiting Heartbeat status workflow remains writable: {forbidden}")
+
+    # Exactly one workflow may invoke the public-artifact generator. This is a
+    # repository-wide guard, so a future business workflow cannot silently
+    # recreate a second homepage-status writer outside the legacy allow-list.
+    for path in sorted(WORKFLOWS.glob("*.yml")):
+        if path == HOME_SYNC:
+            continue
+        text = read(path)
+        require(
+            "scripts/update_public_generated_artifacts.py" not in text,
+            f"{path.name} must not invoke the public-artifact generator; use homepage-status-sync.yml",
+        )
+
+    for upstream in [
+        WORKFLOWS / "record-chain-append.yml",
+        WORKFLOWS / "record-chain-head-ots-anchor.yml",
+    ]:
+        require(
+            "waiting-heartbeat-status-sync.yml" not in read(upstream),
+            f"{upstream.name} must rely on Homepage Status Sync workflow_run instead of dispatching the retired writer",
         )
 
     # Deploy conditions must not be weakened. Generated changes, ordinary source

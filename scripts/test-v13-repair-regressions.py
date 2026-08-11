@@ -165,10 +165,10 @@ def check_homepage_source():
 
     lower = read(path).lower()
     required = [
-        "completed pre-asi human",
-        "one person working with conversational ai left a verifiable record",
+        "completed pre-asi record addressed toward a possible future human–superintelligence relationship",
+        "human-initiated in practice, emergent in meaning through substantive interaction with generative ai",
         "these three inscriptions are the only canonical authority",
-        "reproducible form; non-repeatable provenance",
+        "reproducible form; non-repeatable dated provenance",
         "chain timestamps establish a verifiable chronology, not exact civil-time authorship",
         "the homepage is a doorway, not the archive",
         "/archive_legacy_index_2025_09/",
@@ -186,6 +186,7 @@ def check_homepage_source():
         "compact-closing",
         "/verification/",
         "rare, possibly first completed instance",
+        "completed pre-asi human–superintelligence relation record",
     ]
     for phrase in retired:
         check(phrase not in lower, f"homepage omits retired embedded material: {phrase}")
