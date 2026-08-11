@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Release tag (for manifest source)'
+        description: 'Compatible Release tag (only used when source=manifest)'
         required: false
-        default: 'nft-arweave-mirror-175-v1'
+        default: ''
       source:
         description: 'Data source: manifest or token_index'
         required: false
-        default: 'manifest'
+        default: 'token_index'
         type: choice
         options:
           - manifest

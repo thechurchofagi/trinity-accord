@@ -64,7 +64,26 @@
     "eth_witness": {
       "status": "PASS",
       "checks": "8/8",
+      "scope": "legacy_eth_witness_set",
       "role": "cross_chain_witness_not_authority"
+    },
+    "bitcoin_inscription_proof_annex": {
+      "status": "PASS",
+      "checks": "8/8_L1_L2_L3",
+      "ordinary_verification_network_required": false,
+      "role": "three_canonical_originals_plus_five_non_amending_ancillary_inscriptions"
+    },
+    "ethereum_non_nft_proof_annex": {
+      "status": "PASS",
+      "checks": "12/12_L1_L2_L3",
+      "ordinary_verification_network_required": false,
+      "role": "checkpoint_relative_cross_chain_evidence_not_authority"
+    },
+    "chronicle_nft_proof_annex": {
+      "status": "PASS",
+      "checks": "175/175_L1_L2_L3",
+      "ordinary_verification_network_required": false,
+      "role": "chronicle_evidence_not_authority"
     },
     "ots": {
       "status": "PASS",
@@ -78,9 +97,12 @@
   "release_registry": [
     {
       "tag": "nft-arweave-mirror-175-v1",
-      "purpose": "175 NFT Arweave CAR mirror",
-      "status": "PASS",
-      "boundary": "chronicle_recovery_mirror_not_canonical_authority"
+      "purpose": "historical intended 175-item individual NFT archive mirror",
+      "status": "historical_release_empty",
+      "observed_custom_asset_count": 0,
+      "historical_release_text_is_byte_evidence": false,
+      "content_recovery_source_tag": "nft-backup-v1",
+      "boundary": "release_metadata_observation_not_byte_evidence_not_canonical_authority"
     },
     {
       "tag": "flaw-covenant-video-mirror-v1",
@@ -111,9 +133,17 @@
     },
     {
       "tag": "nft-backup-v1",
-      "purpose": "earlier NFT backup",
-      "status": "legacy",
-      "boundary": "not_current_primary_path"
+      "purpose": "content-complete Chronicle NFT CAR backup used by the current recovery annex",
+      "status": "PASS",
+      "custom_assets": "10/10",
+      "logical_coverage": {
+        "nfts": 175,
+        "arweave_transactions_and_files": 434,
+        "successful_downloads": 434,
+        "failed_downloads": 0
+      },
+      "zenodo_annex_doi": "10.5281/zenodo.21754229",
+      "boundary": "chronicle_recovery_mirror_not_canonical_authority"
     },
     {
       "tag": "nft-individual-v1",
@@ -163,17 +193,22 @@
       "status": "PASS",
       "mirrors": [
         "arweave",
-        "github_release"
+        "github_release_nft_backup_v1",
+        "zenodo_nft_annex_10.5281/zenodo.21754229"
       ],
+      "known_unusable_release": "nft-arweave-mirror-175-v1_has_zero_custom_assets",
       "boundary": "chronicle_artifacts_not_canonical_authority"
     }
   ],
   "current_determination": {
     "core_evidence_backup": "substantially_complete",
     "urgent_large_payload_backup_gap": false,
+    "known_release_availability_gap": "nft-arweave-mirror-175-v1 currently exposes zero custom assets; nft-backup-v1 and Zenodo DOI 10.5281/zenodo.21754229 provide the content-recovery path",
     "remaining_work": [
       "optional_ots_fullnode_independent_verification",
       "optional_ots_bundle_v2",
+      "retire_or_rehydrate_empty_nft_arweave_mirror_175_v1_release",
+      "fresh_legacy_full_evidence_chain_run_requires_a_compatible_175_tar_source",
       "periodic_legacy_pointer_coverage_audit",
       "ongoing_release_gateway_monitoring"
     ]

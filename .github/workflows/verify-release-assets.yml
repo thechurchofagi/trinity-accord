@@ -1,12 +1,11 @@
-name: Verify Release Assets (175 NFTs)
+name: Verify Release Assets (explicit compatible source)
 
 on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Release tag to verify'
-        required: false
-        default: 'nft-arweave-mirror-175-v1'
+        description: 'Compatible manifest-bearing Release tag; the historical 175-item base tag is empty'
+        required: true
       cid_check:
         description: 'Enable root CID verification (metadata=strict, media=audit)'
         type: boolean

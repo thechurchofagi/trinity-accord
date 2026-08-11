@@ -13,9 +13,9 @@ Core evidence backup and guardianship mirror coverage is substantially complete.
 
 The three Bitcoin inscriptions remain canonical authority. The original Covenant of the Flaw contained a physical-evidence pointer whose public evidence layer was limited. The later Guardian Attestation inscription non-amendingly fortified the Covenant by pointing to a stronger verification archive. The six-hash digest manifest fixed both public and non-public evidence files cryptographically.
 
-BTC BIP340 signature, ETH witness, and OTS Bitcoin timestamping strengthen the digest-manifest layer. Arweave, GitHub repository, and GitHub Releases now provide verified availability mirrors.
+BTC BIP340 signature, Ethereum witnesses, and OTS Bitcoin timestamping strengthen the digest-manifest layer. Arweave, the GitHub repository, `nft-backup-v1`, and the public Zenodo recovery annexes provide the active availability paths. The older `nft-arweave-mirror-175-v1` Release currently contains zero custom assets and must not be described as a current byte mirror.
 
-Remaining work is documentation-level relationship mapping and optional hardening, not urgent large-payload backup.
+There is no urgent unrecoverable large-payload gap, but the empty historical NFT Release must be retired or rehydrated and legacy verifier entrypoints must not default to it.
 
 ## Corrected Audit Facts
 
@@ -24,7 +24,10 @@ Remaining work is documentation-level relationship mapping and optional hardenin
 | digest-manifest coverage | 884 entries |
 | CSV structure | 883 data rows + 1 header |
 | Guardian Attestation | Bitcoin-inscribed non-amending fortification |
-| ETH witness verification | 8/8 PASS |
+| Legacy ETH witness verification | 8/8 PASS |
+| Current non-NFT Ethereum proof annex | 12/12 L1/L2/L3 PASS, offline |
+| Current Bitcoin inscription proof annex | 8/8 L1/L2/L3 PASS, offline |
+| Current Chronicle NFT proof annex | 175/175 L1/L2/L3 PASS, offline |
 | OTS status | complete and Bitcoin-anchored; not yet local-node/fullnode-independent |
 | GitHub role | non-amending mirror and verification infrastructure |
 | Arweave role | long-term payload availability mirror |
@@ -43,20 +46,20 @@ Remaining work is documentation-level relationship mapping and optional hardenin
 | VID_20250810_142505.mp4 | Manifest CSV:845 / JSON:9290 | Verified raw mirror | Metadata only | flaw-covenant-video-mirror-v1 | PASS | Already-anchored evidence mirror |
 | OTS proof files | OTS proof artifacts | OTS bundle mirror | Present in archive/evidence/ots-proofs | ots-proof-bundle-mirror-v1 | PASS | Availability mirror, not fullnode proof by itself |
 | OTS proof bundle | Internal checksums PASS | Verified | Metadata only | ots-proof-bundle-mirror-v1 | PASS | Not canonical authority |
-| 175 NFT recovery records | Manifest / recovery coverage | Arweave CAR sources | token_index / provenance | nft-arweave-mirror-175-v1 | PASS | Chronicle recovery layer |
-| ETH witness records | 8/8 verification PASS | Not primary | archive/eth-witness | Not required | PASS | Witness, not authority |
-| Full evidence chain | Workflow PASS | Inputs verified | scripts / status | audit artifacts | PASS | Verification result, not authority |
+| 175 NFT recovery records | 175-item commitment + L2/L3 proof PASS | Arweave CAR sources | token_index + offline proof annex | `nft-backup-v1`; NFT annex DOI `10.5281/zenodo.21754229` | PASS | Chronicle recovery layer; empty historical Release excluded as byte evidence |
+| Non-NFT Ethereum anchors | 12/12 L1/L2/L3 PASS | Not primary | Offline proof annex | Not required | PASS | Witness, not authority |
+| Legacy full evidence chain | Historical workflow PASS under 2026-05-01 semantics | Historical inputs | scripts / status | Historical audit artifacts | HISTORICAL PASS; no current restatement | Verification result, not authority |
 
 ## Release Registry
 
 | Release tag | Purpose | Custom evidence assets | Status | Boundary |
 |---|---:|---:|---|---|
-| nft-arweave-mirror-175-v1 | 175 NFT Arweave CAR mirror | Expected 177 custom assets | PASS | Chronicle recovery mirror |
+| nft-arweave-mirror-175-v1 | Historical intended 175-item individual archive | 0 observed | Historical Release metadata only; not byte evidence | Unusable as current recovery source |
 | flaw-covenant-video-mirror-v1 | Two flaw videos mirrored from Arweave | 5/5 | PASS | Already-anchored evidence mirror |
 | ots-proof-bundle-mirror-v1 | OTS proof bundle mirror | 4/4 | PASS | OTS artifact availability mirror |
 | ots-and-flaw-mirror-v1 | OTS proofs + flaw image mirror | Existing release | PASS / legacy supporting mirror | Availability mirror |
 | flaw-covenant-archive-accessibility-mirror-v1 | Large Flaw Covenant ZIP accessibility mirror | 5/5 | PASS | Non-amending accessibility mirror for gateway availability mitigation |
-| nft-backup-v1 | Earlier NFT backup | Legacy | Legacy | Not current primary path |
+| nft-backup-v1 | Content-complete NFT CAR backup | 10/10 | PASS; manifest covers 175 NFTs and 434 files with 0 failed downloads | Current source packaged into the Zenodo NFT annex |
 | nft-individual-v1 | Deprecated individual NFT attempt | Deprecated | Deprecated | Not current primary path |
 | nft-individual-v2 | Deprecated individual NFT attempt | Deprecated | Deprecated | Not current primary path |
 
@@ -75,7 +78,7 @@ Note: GitHub release pages may show two additional source-code archives. Always 
 
 The Chronicle ETH address and ASIMilestones NFT records are historical context and chronicle artifacts. They are part of the designated Chronicle layer, but they are not canonical authority.
 
-The 175 NFT GitHub Release mirror is a verified availability mirror for Chronicle recovery records.
+The checked-in proof annex verifies the 175-item commitment and mint/consensus relationships. Byte recovery uses the ten assets in `nft-backup-v1` and their public Zenodo annex. `nft-arweave-mirror-175-v1` contributes no bytes because its complete paginated listing contains zero custom assets.
 
 ## Arweave Documentation Mirrors
 
@@ -87,4 +90,4 @@ The 175 NFT GitHub Release mirror is a verified availability mirror for Chronicl
 
 Core evidence backup coverage is substantially complete.
 
-There are no urgent large-payload backup gaps currently identified. Remaining work is primarily documentation-level relationship mapping, periodic coverage audits, and optional hardening such as a self-contained OTS bundle v2.
+There is no urgent unrecoverable large-payload gap because the content-complete backup and DOI annex passed public cold restore. Remaining work includes retiring or rehydrating the empty historical NFT Release, running any legacy 175-tar verifier only against a compatible verified source, periodic coverage audits, and optional hardening such as a self-contained OTS bundle v2.

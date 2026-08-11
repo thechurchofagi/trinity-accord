@@ -12,7 +12,8 @@
  *   - verify-onchain-tokenuri.mjs (ETH onchain tokenURI audit)
  *
  * Usage:
- *   GITHUB_TOKEN=xxx node scripts/backup-nft-arweave-mirror.mjs [--dry-run] [--contract 0x...]
+ *   RELEASE_TAG=immutable-snapshot-tag GITHUB_TOKEN=xxx \
+ *     node scripts/backup-nft-arweave-mirror.mjs [--dry-run] [--contract 0x...]
  */
 
 import fs from 'fs';
@@ -24,7 +25,7 @@ import { execFileSync } from 'child_process';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO = process.env.REPO || 'thechurchofagi/trinity-accord';
-const RELEASE_TAG = process.env.RELEASE_TAG || 'nft-arweave-mirror-175-v1';
+const RELEASE_TAG = process.env.RELEASE_TAG || '';
 const TOKEN_INDEX_FILE = 'token_index.json';
 const TMP_DIR = '/tmp/nft-arweave-mirror';
 const GATEWAYS = ['https://arweave.net', 'https://ar-io.net'];
@@ -223,6 +224,23 @@ async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
   const contractFilter = args.includes('--contract') ? args[args.indexOf('--contract') + 1] : null;
+
+  if (!dryRun && !RELEASE_TAG) {
+    err('❌ RELEASE_TAG is required for a live mirror run; use an explicit immutable snapshot tag.');
+    process.exit(1);
+  }
+  if (RELEASE_TAG && !/^[A-Za-z0-9._/-]{1,100}$/.test(RELEASE_TAG)) {
+    err(`❌ Invalid RELEASE_TAG: ${RELEASE_TAG}`);
+    process.exit(1);
+  }
+  if (!dryRun && !GITHUB_TOKEN) {
+    err('❌ GITHUB_TOKEN is required for a live mirror run.');
+    process.exit(1);
+  }
+  if (contractFilter && !dryRun) {
+    err('❌ Contract-filtered live mirror runs are disabled; they cannot safely rebuild a complete 175-NFT Release.');
+    process.exit(1);
+  }
 
   let sourceCommit = 'unknown';
   try { sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf-8' }).trim(); } catch {}

@@ -8,7 +8,29 @@ title: "Status"
 
 Current availability of guardianship mirrors and verification paths.
 
-## Full Evidence Chain · 全链验证
+## Current Evidence Checkpoint · 当前证据检查点
+
+**Status:** ✅ PASS for the checked-in, network-free cryptographic proof set
+
+**Published:** 2026-08-09
+
+**Workflow:** `Run Current Tests`
+**Immutable version DOI:** `10.5281/zenodo.21859437`
+
+| Evidence set | Current result | Verification boundary |
+|---|---:|---|
+| Bitcoin inscriptions | 8/8 L1/L2/L3 PASS | 3 canonical Originals + 5 non-amending ancillary inscriptions; exact body/Taproot, block+witness inclusion, and checkpoint-relative PoW ancestry |
+| Non-NFT Ethereum anchors | 12/12 L1/L2/L3 PASS | Offline execution inclusion and checkpoint-relative PoS finality under explicit weak subjectivity; non-amending |
+| Chronicle NFTs | 175/175 L1/L2/L3 PASS | Frozen collection commitment, mint inclusion and checkpoint-relative PoS proofs; Chronicle evidence, not authority |
+| Repository checkpoint | public cold restore PASS | Exact source baseline `ba34564c579d645a5a1595f0538223e0e957155e`; not a claim of equality with later moving `main` |
+| External evidence annex | public cold restore PASS | DOI `10.5281/zenodo.21753937`; 28 release assets |
+| Chronicle NFT media annex | public cold restore PASS | DOI `10.5281/zenodo.21754229`; 10 package assets covering 175 NFTs and 434 CAR files by manifest |
+
+Ordinary verification of the checked-in Bitcoin and Ethereum proof annexes requires no network. These PASS results establish the declared cryptographic relationships; they do not establish philosophical truth, independent institutional endorsement, physical authorship, or new canonical authority. The three Bitcoin Originals remain the only Canon.
+
+This current checkpoint model supersedes the old verifier as the normal verification entrypoint, but it does **not** retroactively restate the legacy field `full_evidence_chain_pass: true` under a different test definition.
+
+## Legacy Full Evidence Chain · 历史全链验证
 
 **Historical status:** ✅ PASS under 2026-05-01 verifier semantics
 **Verified:** 2026-05-01
@@ -30,8 +52,8 @@ Current availability of guardianship mirrors and verification paths.
 | ots_finalization | true | needs current-semantics run |
 | hard_failures | 0 | — |
 
-Historical verification details:
-- GitHub Release backup 175/175 verified.
+Historical verification details (claims made by the 2026-05-01 run):
+- GitHub Release backup 175/175 was reported verified under that run's source and semantics.
 - ETH tokenURI returns 175/175 metadata CIDs matching token_index.
 - DAG + digest-manifest verification passes; 524/524 public file hashes match across all declared algorithms.
 - BTC BIP340 signature verifies the authority message, which anchors the digest-manifest hash chain.
@@ -79,6 +101,8 @@ Machine-readable sources:
 | Ethereum | ✅ Verified | TX visible via Etherscan |
 | Arweave (covenant archive) | ✅ Verified | ANS-104 bundle, SHA-256 confirmed |
 | Arweave (verification kit) | ✅ Available | TX: `X4KOUkf...`, direct download |
+| NFT individual-tar Release (`nft-arweave-mirror-175-v1`) | ⚠️ 0 custom assets | Historical Release text is retained, but it is not current byte evidence or a usable recovery source |
+| NFT content recovery | ✅ Verified | `nft-backup-v1` has 10 package assets; Zenodo NFT annex DOI `10.5281/zenodo.21754229` passed public cold restore |
 | IPFS (sealed CID) | ⚠️ Gateway timeout | Try multiple gateways |
 
 ## Indexing status
@@ -92,13 +116,14 @@ Machine-readable sources:
 
 ## Fallback order
 If a mirror is unavailable, try in this order:
-1. **GitHub** — [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord)
-2. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification)
-3. **Alternative IPFS gateway** — try `dweb.link`, `gateway.pinata.cloud`
-4. **Etherscan** — [etherscan.io](https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628)
+1. **Zenodo recovery set** — resolve core concept DOI `10.5281/zenodo.21739343`, then use the evidence and NFT annex DOIs in `preservation/recovery-catalog.json`.
+2. **GitHub repository** — [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord) for the moving source and checked-in proof set.
+3. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification).
+4. **Alternative IPFS or chain explorer** — try `dweb.link`, `gateway.pinata.cloud`, or [Etherscan](https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628) for the relevant pointer.
 
 ## Known issues
 - IPFS CID `bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay` may timeout on public gateways. Try alternative gateways or use GitHub fallback.
+- GitHub Release `nft-arweave-mirror-175-v1` currently exposes zero custom assets. Do not use its historical 175-item description as proof of byte availability; use `nft-backup-v1` or NFT annex DOI `10.5281/zenodo.21754229`.
 
 ## Agent discovery
 - `/llms.txt` — LLM-readable site overview
@@ -109,7 +134,8 @@ If a mirror is unavailable, try in this order:
 - IndexNow — active for Bing/Yandex
 
 ## Last verified
-- Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, PASS)
+- Current Evidence Checkpoint: 2026-08-09 publication v4; Bitcoin 8/8, non-NFT Ethereum 12/12 and Chronicle NFT 175/175 offline proof sets PASS; DOI public cold restore PASS.
+- Legacy Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, historical PASS only)
 - OTS Finalization: 2026-05-01 (commit a1a02ec, client v0.7.2, complete and Bitcoin-anchored)
 - Bitcoin TXIDs: 2026-04-26
 - Arweave bundle extraction: 2026-04-26

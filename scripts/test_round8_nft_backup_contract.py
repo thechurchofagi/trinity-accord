@@ -56,6 +56,19 @@ def main() -> int:
         "filtered live guard runs after the destructive mirror script",
     )
 
+    publisher = read("scripts/backup-nft-arweave-mirror.mjs")
+    for marker in [
+        "process.env.RELEASE_TAG || ''",
+        "RELEASE_TAG is required for a live mirror run",
+        "GITHUB_TOKEN is required for a live mirror run",
+        "Contract-filtered live mirror runs are disabled",
+    ]:
+        require(marker in publisher, f"NFT mirror publisher missing fail-closed control: {marker}")
+    require(
+        "process.env.RELEASE_TAG || 'nft-arweave-mirror-175-v1'" not in publisher,
+        "NFT mirror publisher still defaults live writes to the historical empty base tag",
+    )
+
     for path, script in [
         (".github/workflows/backup-nft-individual.yml", "backup-nft-individual.mjs"),
         (".github/workflows/backup-nft-individual-v2.yml", "backup-nft-individual-v2.mjs"),

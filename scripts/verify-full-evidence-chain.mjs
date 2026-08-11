@@ -14,7 +14,7 @@
  *
  * Usage:
  *   GITHUB_TOKEN=xxx ETH_RPC_URL=https://... node scripts/verify-full-evidence-chain.mjs \
- *     --release-tag nft-arweave-mirror-175-v1 \
+ *     --release-tag compatible-release-with-175-individual-nft-tars \
  *     --ots-release-tag ots-and-flaw-mirror-v1 \
  *     --concurrency 8
  */
@@ -35,7 +35,7 @@ function getArg(name, def) {
   const idx = args.indexOf(name);
   return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : def;
 }
-const RELEASE_TAG = getArg('--release-tag', 'nft-arweave-mirror-175-v1');
+const RELEASE_TAG = getArg('--release-tag', '');
 const OTS_RELEASE_TAG = getArg('--ots-release-tag', 'ots-and-flaw-mirror-v1');
 const CONCURRENCY = Number(getArg('--concurrency', process.env.DAG_VERIFY_CONCURRENCY || '4'));
 
@@ -633,7 +633,11 @@ function deriveTaprootAddress(xonlyHex) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function ghHeaders(extra = {}) {
-  return { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', ...extra };
+  return {
+    Accept: 'application/vnd.github+json',
+    ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
+    ...extra,
+  };
 }
 
 async function getReleaseByTag(tag) {
@@ -1978,6 +1982,10 @@ async function verifyChainD2(otsAssets) {
 
 async function main() {
   if (!GITHUB_TOKEN) { err('❌ GITHUB_TOKEN required'); process.exit(1); }
+  if (!RELEASE_TAG) {
+    err('❌ --release-tag is required and must name a compatible Release containing 175 individual nft-*.tar assets.');
+    process.exit(1);
+  }
 
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
@@ -2009,6 +2017,12 @@ async function main() {
   const allAssets = await getAllAssets(release.id);
   const nftAssets = allAssets.filter(a => a.name.startsWith('nft-') && a.name.endsWith('.tar'));
   log(`  ${allAssets.length} total assets, ${nftAssets.length} NFT tar files`);
+  if (RELEASE_TAG === 'nft-arweave-mirror-175-v1' && allAssets.length === 0) {
+    throw new Error(
+      'nft-arweave-mirror-175-v1 currently exposes zero custom assets and is not a compatible byte source. ' +
+      'Use the current offline evidence-checkpoint verifiers, or provide a separately verified Release with 175 individual nft-*.tar assets.'
+    );
+  }
   if (nftAssets.length !== EXPECTED_NFTS) {
     err(`  ⚠️  Expected ${EXPECTED_NFTS} nft-*.tar, found ${nftAssets.length}`);
   }
@@ -2149,7 +2163,7 @@ async function main() {
     report_status: 'current',
     is_current: true,
     historical_report_only: false,
-    current_status_url: 'https://www.trinityaccord.org/api/corrections-index.json',
+    current_status_url: 'https://www.trinityaccord.org/api/status.json',
     corrections_index_url: 'https://www.trinityaccord.org/api/corrections-index.json',
 
     overall_status: allRequiredChainsPass ? 'PASS' : 'FAIL',

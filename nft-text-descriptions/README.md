@@ -34,24 +34,59 @@ NFT 元数据存储在 Arweave 上的 CAR 文件中。每个 NFT 的 metadata.ca
 }
 ```
 
+## 当前可用性说明
+
+`nft-arweave-mirror-175-v1` 的历史说明曾描述 175 个单项 tar，但完整分页 API 观察显示该 Release 当前有 **0 个自定义资产**。它不是当前可用的字节恢复源，Release 文本也不能代替字节证据。
+
+当前恢复路径是：
+
+- 仓库内已经完成的 175 份 Markdown 文本镜像；
+- `nft-backup-v1` 的 9 个 CAR 分卷和 1 个清单包；
+- Zenodo NFT annex DOI `10.5281/zenodo.21754229`，其中逐字节保存上述 10 个包，并已完成公开冷恢复；
+- Arweave 上由清单逐项指向的 CAR。
+
 ## 提取方法
 
-### 方法一：从 GitHub Release 下载单个 NFT tar（推荐）
+### 方法一：直接使用已完成的文本镜像
 
-Release: `nft-arweave-mirror-175-v1` (175 个 tar 文件)
+一般阅读或分析无需再次下载约 823 MB 的 CAR 包。读取本目录的 `index.json`，再按 `{contract}_{token_id}.md` 打开对应的 175 份文本即可。
 
-每个 tar 包含：
-- `nft/metadata.car` — 元数据 CAR 文件（3-19KB）
-- `nft/media-000.car` — 图片 CAR
-- `nft/media-001.car` — 音频 CAR（部分有）
+### 方法二：从 Zenodo annex 完整恢复（可复现恢复推荐）
 
-**步骤：**
+从仓库根目录运行：
 
-1. 读取 `/tmp/nft-manifest.json`（或从 release 下载 `RELEASE-MANIFEST.json`）获取每个 NFT 的 `nft_asset_name`
-2. 下载 tar: `curl -sL -H "Authorization: Bearer $TOKEN" "https://github.com/thechurchofagi/trinity-accord/releases/download/nft-arweave-mirror-175-v1/{asset_name}" -o /tmp/nft.tar`
-3. 从 tar 中提取 `metadata.car`
-4. 从 CAR 文件中提取 JSON（搜索 `{"name":` 开头的平衡花括号）
-5. 取 `name` 和 `description` 字段，写入 `{contract}_{token_id}.md`
+```bash
+python3 scripts/restore_external_binary_annex.py \
+  --zenodo-record-id 21754229 \
+  --output-dir /tmp/trinity-nft-annex
+```
+
+恢复后，10 个原始 GitHub Release 包位于：
+
+```text
+/tmp/trinity-nft-annex/payload/releases/nft-backup-v1/
+```
+
+其中：
+
+- `nft-cars-manifest.tar.gz` 包含 `manifest.json`；
+- `nft-cars-part01.tar.gz` 至 `nft-cars-part09.tar.gz` 包含 434 个 CAR 文件；
+- 分卷内的文件名是 `{arweave_txid}.car`，通过清单映射到 contract、token ID 和 metadata/media 角色。
+
+该恢复会验证 annex 包、资产集合以及每个外层资产的大小和 SHA-256。清单记录 175 个 NFT、434 个 Arweave 文件、434 次成功下载和 0 次失败。
+
+### 方法三：从 Arweave 获取单个 metadata CAR
+
+若只需重新提取一个 NFT，先在 `nft-cars-manifest.json` 中按 contract 和 token ID 查到 role 为 `metadata` 的 txid、SHA-256 和 size，再下载并核对：
+
+```bash
+curl -fsSL "https://arweave.net/{txid}" -o /tmp/metadata.car
+sha256sum /tmp/metadata.car
+```
+
+不要仅因网关返回了内容就视为验证通过；必须同时匹配清单中的大小与 SHA-256。
+
+从 CAR 文件中提取 JSON 后，取 `name` 和 `description` 字段，写入 `{contract}_{token_id}.md`。
 
 **CAR 文件解析方法：**
 ```python
@@ -75,7 +110,7 @@ def extract_json_from_car(car_bytes):
     return None
 ```
 
-### 方法二：从 nft-backup-v1 分卷包提取
+### 方法四：直接从 `nft-backup-v1` 分卷包提取
 
 Release: `nft-backup-v1` 有 9 个分卷：
 - `nft-cars-part01.tar.gz` ~70MB
@@ -84,23 +119,11 @@ Release: `nft-backup-v1` 有 9 个分卷：
 - `nft-cars-part09.tar.gz` ~65MB
 - 总计 ~823MB
 
-每个分卷包含所有 NFT 的 CAR 文件（含 metadata + media）。
+九个分卷合计包含全部 434 个 CAR 文件（metadata + media）。
 
-路径格式: `{contract}/{token_id}/metadata.car`
+分卷内路径格式: `{arweave_txid}.car`；使用 `nft-cars-manifest.json` 或清单包中的 `manifest.json` 解析身份和角色。
 
-**注意：** 下载量大，网络慢时推荐方法一。
-
-### 方法三：从 Arweave/IPFS 直接获取（最快但需要网络通）
-
-metadata CAR 文件的 Arweave txid 和 IPFS CID 在以下文件中有记录：
-- Release `nft-arweave-mirror-175-v1` 的 `RELEASE-MANIFEST.json`
-- Release `nft-backup-v1` 的 `nft-cars-manifest.tar.gz` → `manifest.json`
-
-```bash
-curl -sL "https://arweave.net/{txid}" -o metadata.car
-# 或
-curl -sL "https://ipfs.io/ipfs/{cid}" -o metadata.car
-```
+**注意：** 公开 Release 资产可直接下载；GitHub token 只用于提高 API 额度，并不是读取公开资产所必需。完整下载量较大时，优先使用上面的 DOI 冷恢复入口。
 
 ## 文件命名规则
 
@@ -133,7 +156,7 @@ curl -sL "https://ipfs.io/ipfs/{cid}" -o metadata.car
 
 ## GitHub Token
 
-需要 PAT token（repo 权限）。配置在环境变量 `GITHUB_TOKEN` 中。
+读取公开 Release 或仓库不需要 PAT。若脚本通过 GitHub API 做大量枚举，可选地配置只读 `GITHUB_TOKEN` 以提高速率上限；不要为公开读取授予 `repo` 写权限。
 
 ## 并行下载优化
 
@@ -146,5 +169,5 @@ curl -sL "https://ipfs.io/ipfs/{cid}" -o metadata.car
 ## 相关文件
 
 - `index.json` — 已完成的 NFT 索引
-- `RELEASE-MANIFEST.json` — Release `nft-arweave-mirror-175-v1` 的完整清单（含所有 arweave txid）
-- `nft-cars-manifest/manifest.json` — `nft-backup-v1` 的 CAR 文件清单
+- `RELEASE-MANIFEST.json` — 历史 175 项映射快照；当前不应从空 Release 下载
+- `nft-cars-manifest.json` — `nft-backup-v1` 的 434 项 CAR 文件清单

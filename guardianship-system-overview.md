@@ -39,7 +39,7 @@ The Chronicle / ASIMilestones layer is a canonically designated historical conte
 
 Its ETH address and NFT records are Chronicle artifacts and historical evidence. They are not canonical authority.
 
-The 175 NFT recovery mirror is a verified Chronicle recovery layer and GitHub Release availability mirror.
+The 175 NFT proof set is a verified Chronicle recovery layer. Its current byte-recovery path is `nft-backup-v1` plus the Zenodo NFT annex DOI `10.5281/zenodo.21754229`. The older `nft-arweave-mirror-175-v1` Release currently exposes zero custom assets and is not a usable byte mirror.
 
 ## 6. Covenant of the Flaw Evidence Evolution
 
@@ -71,7 +71,10 @@ The digest manifest defines evidence coverage. It is not itself canonical author
 | Layer | Status | Role |
 |---|---|---|
 | BTC BIP340 signature | PASS | Signs authority manifest / coverage chain |
-| ETH witness | 8/8 PASS | Cross-chain witness, not authority |
+| Legacy ETH witness | 8/8 PASS | Historical cross-chain witness set, not authority |
+| Bitcoin inscription proof annex | 8/8 L1/L2/L3 PASS | Offline exact-content/Taproot, block+witness inclusion and checkpoint-relative PoW proof |
+| Non-NFT Ethereum proof annex | 12/12 L1/L2/L3 PASS | Offline execution and checkpoint-relative PoS proof; weak-subjectivity boundary explicit |
+| Chronicle NFT proof annex | 175/175 L1/L2/L3 PASS | Offline collection/mint/consensus proof; Chronicle evidence, not authority |
 | OTS Bitcoin timestamp | PASS | Time anchoring for manifest/proof artifacts |
 | Bitcoin tx anchors | PASS | Bitcoin existence anchors |
 
@@ -92,18 +95,18 @@ The OTS proof is complete and Bitcoin-anchored, but has not yet been verified th
 
 | Release tag | Purpose | Status | Boundary |
 |---|---|---|---|
-| nft-arweave-mirror-175-v1 | 175 NFT Arweave CAR mirror | PASS | Chronicle recovery mirror |
+| nft-arweave-mirror-175-v1 | Historical intended 175-item individual archive | 0 custom assets; unusable as byte evidence | Historical Release metadata only |
 | flaw-covenant-video-mirror-v1 | Two Flaw Covenant videos | PASS | Already-anchored evidence mirror |
 | ots-proof-bundle-mirror-v1 | OTS proof bundle | PASS | OTS artifact availability mirror |
 | flaw-covenant-archive-accessibility-mirror-v1 | Large Flaw Covenant ZIP accessibility mirror | PASS | Gateway availability remediation |
 | ots-and-flaw-mirror-v1 | OTS proofs + flaw image mirror | PASS / supporting | Availability mirror |
-| nft-backup-v1 | Earlier NFT backup | Legacy | Not current primary path |
+| nft-backup-v1 | Content-complete NFT CAR backup; 10 assets cover 175 NFTs / 434 files by manifest | PASS | Current GitHub source for the Zenodo NFT recovery annex |
 | nft-individual-v1 | Earlier individual NFT attempt | Deprecated | Not current primary path |
 | nft-individual-v2 | Earlier individual NFT attempt | Deprecated | Not current primary path |
 
 ## 11. Verification Infrastructure
 
-GitHub Actions workflows verify release assets, full evidence chain status, NFT tokenURI/CID coverage, digest-manifest integrity, BTC signature coverage, ETH witness coverage, Bitcoin tx anchors, and OTS time anchors.
+The required `Run Current Tests` workflow verifies the checked-in Bitcoin 8/8, non-NFT Ethereum 12/12 and Chronicle NFT 175/175 proof annexes without network access. Older manual workflows remain compatibility tools for release assets, tokenURI/CID coverage, digest-manifest integrity, BTC/ETH witnesses, Bitcoin transaction anchors and OTS anchors; their results must not be substituted for the current checkpoint model without matching their declared inputs.
 
 Verification outputs include:
 
@@ -117,12 +120,14 @@ Verification outputs include:
 
 Core evidence backup and guardianship mirror coverage is substantially complete.
 
-No urgent large-payload backup gap is currently identified.
+No urgent unrecoverable large-payload gap is currently identified because `nft-backup-v1` and the publicly cold-restored Zenodo annex preserve the NFT package bytes. There is nevertheless a concrete availability-surface gap: `nft-arweave-mirror-175-v1` is empty.
 
 Remaining work is optional hardening and maintenance:
 
 - local-node / fullnode-independent OTS verification
 - optional OTS bundle v2 including original timestamped files
+- retire or rehydrate the empty `nft-arweave-mirror-175-v1` Release
+- run the legacy full-evidence-chain verifier only after providing a compatible, verified 175-tar source; do not treat the empty Release as such a source
 - periodic legacy pointer coverage audit
 - ongoing Release and gateway availability monitoring
 

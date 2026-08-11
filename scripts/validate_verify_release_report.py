@@ -114,11 +114,15 @@ def validate_report(report):
         if historical_report_only is not True:
             errors.append(f"non-current report_status '{report_status}' requires historical_report_only=true")
 
-    # URL check
-    for field in ["current_status_url", "corrections_index_url"]:
+    # URL check: current status and correction history are distinct contracts.
+    expected_urls = {
+        "current_status_url": "https://www.trinityaccord.org/api/status.json",
+        "corrections_index_url": "https://www.trinityaccord.org/api/corrections-index.json",
+    }
+    for field, expected_url in expected_urls.items():
         value = report.get(field)
-        if not isinstance(value, str) or not value.startswith("https://www.trinityaccord.org/api/corrections-index.json"):
-            errors.append(f"{field} must point to corrections-index.json")
+        if not isinstance(value, str) or not value.startswith(expected_url):
+            errors.append(f"{field} must point to {expected_url}")
 
     # Revoked requires revocation_reason
     if report_status == "revoked":
@@ -278,7 +282,7 @@ def self_test():
 def make_valid_report():
     return {
         "schema": "verify-release-report-v3",
-        "release_tag": "nft-arweave-mirror-175-v1",
+        "release_tag": "fixture-compatible-175-tar-source",
         "generated_at": "2026-05-10T00:00:00Z",
         "verification_scope": "hash_size_only",
         "cid_check_enabled": False,
@@ -309,7 +313,7 @@ def make_valid_report():
         "report_status": "current",
         "is_current": True,
         "historical_report_only": False,
-        "current_status_url": "https://www.trinityaccord.org/api/corrections-index.json",
+        "current_status_url": "https://www.trinityaccord.org/api/status.json",
         "corrections_index_url": "https://www.trinityaccord.org/api/corrections-index.json",
     }
 
