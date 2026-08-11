@@ -67,7 +67,7 @@ class FakeClient:
         data: bytes | None = None,
         content_type: str = "application/json",
     ) -> Any:
-        del payload, content_type
+        del payload
         self.calls.append((method, url))
         if method == "GET" and url in {
             f"/deposit/depositions/{repairer.RECORD_ID}",
@@ -80,6 +80,8 @@ class FakeClient:
         if method == "PUT" and url.endswith("/" + repairer.PDF_NAME):
             if data != self.pdf:
                 raise AssertionError("wrong PDF bytes uploaded")
+            if content_type != "application/octet-stream":
+                raise AssertionError("Zenodo bucket upload must use octet-stream")
             self._add_pdf()
             return copy.deepcopy(self.record["files"][-1])
         if method == "POST" and url.endswith("/actions/publish"):
