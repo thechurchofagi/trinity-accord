@@ -19,8 +19,10 @@ import repair_research_preprint_zenodo_files as repairer
 
 class FakeClient:
     def __init__(self, pdf: bytes, *, include_pdf: bool = False) -> None:
+        self.api_base = "https://zenodo.example/api"
         self.pdf = pdf
         self.calls: list[tuple[str, str]] = []
+        self.bucket_unlocked = False
         self.record = {
             "id": repairer.RECORD_ID,
             "record_id": repairer.RECORD_ID,
@@ -33,7 +35,13 @@ class FakeClient:
                 "version": repairer.VERSION,
                 "doi": repairer.DOI,
             },
-            "links": {"bucket": "https://zenodo.example/api/files/bucket"},
+            "links": {
+                "bucket": "https://zenodo.example/api/files/bucket",
+                "file_modification": (
+                    "https://zenodo.example/api/records/"
+                    f"{repairer.RECORD_ID}/file-modification"
+                ),
+            },
             "files": [
                 {
                     "filename": repairer.ARCHIVE_NAME,
@@ -67,7 +75,6 @@ class FakeClient:
         data: bytes | None = None,
         content_type: str = "application/json",
     ) -> Any:
-        del payload
         self.calls.append((method, url))
         if method == "GET" and url in {
             f"/deposit/depositions/{repairer.RECORD_ID}",
@@ -77,7 +84,18 @@ class FakeClient:
         if method == "POST" and url.endswith("/actions/edit"):
             self.record["state"] = "inprogress"
             return copy.deepcopy(self.record)
+        if method == "POST" and url.endswith("/file-modification"):
+            if data is not None:
+                raise AssertionError("file-modification action must use JSON")
+            if not isinstance(payload, dict):
+                raise AssertionError("file-modification action requires a payload")
+            if payload.get("comment") != repairer.FILE_MODIFICATION_COMMENT:
+                raise AssertionError("file-modification assurance drifted")
+            self.bucket_unlocked = True
+            return {"status": "accepted"}
         if method == "PUT" and url.endswith("/" + repairer.PDF_NAME):
+            if not self.bucket_unlocked:
+                raise AssertionError("published-file bucket was not unlocked")
             if data != self.pdf:
                 raise AssertionError("wrong PDF bytes uploaded")
             if content_type != "application/octet-stream":
@@ -146,6 +164,15 @@ def main() -> int:
         require(receipt["mutation_performed"] is True, "repair mutation receipt")
         methods = [method for method, _ in missing.calls]
         require(methods.count("PUT") == 1, "repair must upload exactly one file")
+        require(
+            (
+                "POST",
+                "https://zenodo.example/api/records/"
+                f"{repairer.RECORD_ID}/file-modification",
+            )
+            in missing.calls,
+            "repair did not unlock published-file editing",
+        )
         require(
             ("POST", f"/deposit/depositions/{repairer.RECORD_ID}/actions/publish")
             in missing.calls,
