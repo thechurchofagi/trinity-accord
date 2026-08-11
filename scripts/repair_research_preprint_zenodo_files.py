@@ -268,7 +268,9 @@ def repair(
             "PUT",
             bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME),
             data=pdf_path.read_bytes(),
-            content_type="application/pdf",
+            # Zenodo's bucket endpoint accepts file bytes only as an opaque
+            # octet stream, regardless of the uploaded file's media type.
+            content_type="application/octet-stream",
         )
 
     current = get_deposition(client)
