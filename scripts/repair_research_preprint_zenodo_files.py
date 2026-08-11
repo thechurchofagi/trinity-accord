@@ -39,6 +39,10 @@ ARCHIVE_NAME = "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip"
 ARCHIVE_MD5 = "14b34072deba4379454687d4a6a26d00"
 ARCHIVE_BYTES = 25288793
 ACKNOWLEDGEMENT = "TRINITY_RESEARCH_PREPRINT_FILE_REPAIR_V1_APPROVED"
+FILE_MODIFICATION_COMMENT = (
+    "Expose the exact existing v1.1 research PDF already contained in the "
+    "published source archive; no findings or results are being changed."
+)
 
 
 def as_object(value: Any, label: str) -> dict[str, Any]:
@@ -201,6 +205,29 @@ def get_public_record(client: ZenodoClient) -> dict[str, Any]:
     return record
 
 
+def unlock_published_files(client: ZenodoClient) -> None:
+    """Use Zenodo's published-file modification action to unlock the draft bucket."""
+    public = get_public_record(client)
+    links = public.get("links")
+    action = links.get("file_modification") if isinstance(links, dict) else None
+    expected = f"{client.api_base}/records/{RECORD_ID}/file-modification"
+    if action != expected:
+        raise SystemExit("Zenodo public record has an unexpected file-modification link")
+    request = as_object(
+        client.request(
+            "POST",
+            action,
+            payload={
+                "reason": "minor packaging correction",
+                "comment": FILE_MODIFICATION_COMMENT,
+            },
+        ),
+        "file-modification",
+    )
+    if str(request.get("status") or "").lower() != "accepted":
+        raise SystemExit("Zenodo did not accept the published-file modification action")
+
+
 def repair(
     client: ZenodoClient,
     pdf_path: Path,
@@ -260,6 +287,12 @@ def repair(
         raise SystemExit("Zenodo edit draft contains unexpected files")
 
     if PDF_NAME not in draft_files:
+        # A normal edit action unlocks metadata only. Zenodo requires its
+        # dedicated, policy-checked action before a published record's file
+        # bucket can be changed during the correction window.
+        unlock_published_files(client)
+        current = get_deposition(client)
+        validate_archive_preserved(current)
         links = current.get("links")
         bucket = links.get("bucket") if isinstance(links, dict) else None
         if not isinstance(bucket, str) or not bucket:
