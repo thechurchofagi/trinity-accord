@@ -103,6 +103,7 @@ Machine-readable sources:
 | Arweave (verification kit) | ✅ Available | TX: `X4KOUkf...`, direct download |
 | NFT individual-tar Release (`nft-arweave-mirror-175-v1`) | ⚠️ 0 custom assets | Historical Release text is retained, but it is not current byte evidence or a usable recovery source |
 | NFT content recovery | ✅ Verified | `nft-backup-v1` has 10 package assets; Zenodo NFT annex DOI `10.5281/zenodo.21754229` passed public cold restore |
+| Recovery availability monitor | ✅ Automated | Weekly/manual metadata-only check of Release inventories, Zenodo file metadata, deployed status parity, legacy pointers, and protected Gateway health; 90-day reports retained |
 | IPFS (sealed CID) | ⚠️ Gateway timeout | Try multiple gateways |
 
 ## Indexing status

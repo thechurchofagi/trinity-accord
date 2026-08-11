@@ -26,7 +26,7 @@ The machine-readable registry is `archive/legacy-pointers/index.json`.
 - The readable `archive_legacy_index_2025_09.md` remains a separate human-oriented archival rendering; it is not substituted for the exact AR bytes.
 - Four Ethereum calldata objects that previously lacked isolated raw files have been retrieved from Ethereum mainnet and mirrored under `archive/legacy-pointers/eth-raw/`.
 - The three Ethereum text mirrors for Protocol, Covenant, and Accord are not duplicated: their calldata length and SHA-256 exactly match the existing Bitcoin inscription raw-text mirrors.
-- `archive/hash-manifest.json` contains one semantic false positive: `7d6ac9...` is the JCS digest covered by Authority Manifest v1.0.2 and its EIP-712 signature, not an established SHA-256 of the Arweave transaction payload. The current mismatch label therefore does not prove that the repository copy differs from Arweave.
+- Authority Manifest v1.0.2 canonical recovery is resolved: `scripts/rebuild_authority_v1_0_2_canon.py` deterministically reconstructs the exact 9,174-byte JCS payload from the preserved pretty source. SHA-256 `7d6ac9...` and SHA3-256 `31442f...` match both the EIP-712 signed values and the checked-in 2026-05-08 Arweave readback observation. The trust-root CI gate fails if any of those bindings drift.
 
 ## Ethereum non-NFT records
 

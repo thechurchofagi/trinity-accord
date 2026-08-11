@@ -332,6 +332,7 @@ GROUPS = {
         ["python3", "scripts/test_claim_gate_p7_p8_external_report_requirements.py"],
     ],
     "trust-root": [
+        ["python3", "scripts/rebuild_authority_v1_0_2_canon.py"],
         ["python3", "scripts/validate_authority_manifest.py", "--self-test"],
         ["python3", "scripts/validate_authority_manifest.py", "archive/authority-manifest/authority.jcs.json"],
         ["python3", "scripts/validate_btc_signature_manifest.py", "--self-test"],

@@ -1,0 +1,48 @@
+name: Public Recovery Availability
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly metadata-only recovery check; large payloads are never downloaded.
+    - cron: "41 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-recovery-availability
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Verify legacy pointer coverage
+        run: python3 scripts/check_legacy_pointer_coverage.py
+
+      - name: Verify public recovery topology
+        id: availability
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/monitor_public_recovery_topology.py \
+            --report "$RUNNER_TEMP/public-recovery-availability.json"
+
+      - name: Upload availability report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-recovery-availability-${{ github.run_id }}
+          path: ${{ runner.temp }}/public-recovery-availability.json
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Surface availability failure
+        if: steps.availability.outcome == 'failure'
+        run: |
+          cat "$RUNNER_TEMP/public-recovery-availability.json"
+          exit 1

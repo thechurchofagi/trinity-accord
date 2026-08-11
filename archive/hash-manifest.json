@@ -121,13 +121,12 @@
     },
     {
       "path": "archive/authority-manifest/authority-v1.0.2-canon.json",
-      "sha256": "c02e16dbff2e669125b75e688cfad0fabbe23b989bd3bc99a48f4097a08b009c",
-      "size_bytes": 12712,
+      "sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
+      "size_bytes": 9174,
       "arweave_tx": "TvmjyJBq5ZoGv-tmX0aeiqsEKTGmSyIvBHj1FqZiIpI",
       "expected_sha256": "7d6ac9d3184bb5b0bbaf8217354799efef68669c21b4180e28ec06b0c57439e6",
-      "verified": false,
-      "hash_mismatch": true,
-      "mismatch_reason": "actual sha256 does not match expected_sha256; do not treat as verified",
+      "verified": true,
+      "verification_basis": "deterministic JCS reconstruction bound to the EIP-712 signed SHA-256/SHA3-256 values and checked-in 2026-05-08 Arweave readback",
       "storage_domain": "repo",
       "asset_id": "authority_manifest_authority_v1_0_2_canon_json"
     },
@@ -448,9 +447,9 @@
   ],
   "summary": {
     "repo_files_total": 39,
-    "repo_files_verified": 21,
+    "repo_files_verified": 22,
     "repo_files_no_expected_hash": 17,
-    "repo_files_hash_mismatch": 1,
+    "repo_files_hash_mismatch": 0,
     "release_assets_total": 3,
     "release_assets_verified": 3,
     "release_assets_not_checked": 0,
@@ -463,9 +462,9 @@
     "eth_attestations_verified": 8,
     "eth_attestations_failed": 0,
     "total_files": 39,
-    "verified_against_arweave": 21,
+    "verified_against_arweave": 22,
     "no_expected_hash": 17,
-    "hash_mismatch": 1
+    "hash_mismatch": 0
   },
   "policy": {
     "large_binary_assets_must_not_be_committed_to_git": true,

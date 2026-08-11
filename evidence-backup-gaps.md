@@ -23,7 +23,7 @@ The legacy homepage audit now also provides exact GitHub mirrors for the histori
 | Guardian Attestation terminology | Low | It may be mistaken as part of the three canonical originals | Always describe it as Bitcoin-inscribed non-amending fortification |
 | ETH witness count terminology | Low | authority.jcs.json records 7 items while verification-report confirms 8/8 including Guardianship Principles v1.1 | Use "ETH witness verification: 8/8 PASS" |
 | Legacy homepage external pointer coverage | Resolved / maintain | The dedicated registries enumerate 35 Arweave records, 10 Ethereum non-NFT records, and IPFS pointers. The exact historical homepage AR payload, the two missing small AR payloads, and four isolated ETH calldata objects are now mirrored. | Maintain `LEGACY-POINTER-COVERAGE.md`, `archive/legacy-pointers/index.json`, and their automated hash checks |
-| Authority v1.0.2 hash semantics | Medium | The signed `7d6a...` value is a covered JCS digest, not established as the Arweave transaction payload SHA-256; the current asset manifest therefore reports a semantic false-positive mismatch | Correct the manifest generator before changing any mirrored authority file |
+| Authority v1.0.2 hash semantics | Resolved | The exact 9,174-byte JCS payload is deterministically reconstructed from the preserved pretty source; its SHA-256 `7d6a...` and SHA3-256 `3144...` match the EIP-712 signed values and the checked-in 2026-05-08 Arweave readback | Keep `scripts/rebuild_authority_v1_0_2_canon.py` in the trust-root gate |
 | Arweave/GitHub authority confusion | Medium | Mirrors may be mistaken for canonical authority | Repeat boundary statement in all summary docs |
 | Large payload repository risk | Low | Videos and large CAR/ZIP payloads should not be committed to the repository tree when verified Release mirrors exist | Keep large payloads in Arweave and GitHub Releases only |
 | Gateway availability for large ZIPs | ~~Medium~~ → Resolved | arweave.net returned 404 for large flaw archive ZIPs | ✅ Resolved: GitHub Release `flaw-covenant-archive-accessibility-mirror-v1` created as non-amending accessibility mirror |
@@ -55,13 +55,7 @@ The following are not evidence-chain failures:
    - verify-report.json.ots
    - checksums and manifest
 
-2. Correct the Authority Manifest v1.0.2 expected-hash semantics in the manifest generator.
-
-3. Add Guardian Attestation to the top-level evidence relationship diagram as:
-   - non-amending Bitcoin-inscribed fortification
-   - not a fourth canonical original
-
-4. Run fullnode-independent OTS verification using:
+2. Run fullnode-independent OTS verification using:
    - local Bitcoin Core
    - or pruned-node RPC
    - and record result separately

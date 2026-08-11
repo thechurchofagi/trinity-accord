@@ -67,9 +67,9 @@
     "verification_report": "archive/VERIFICATION-REPORT.md",
     "stats": {
       "repo_files_total": 39,
-      "repo_files_verified": 21,
+      "repo_files_verified": 22,
       "repo_files_no_expected_hash": 17,
-      "repo_files_hash_mismatch": 1,
+      "repo_files_hash_mismatch": 0,
       "release_assets_total": 3,
       "release_assets_verified": 3,
       "release_assets_not_checked": 0,
@@ -210,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "1ec388537fbc47bb",
+  "source_digest": "1bbe6a4d314e8baa",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

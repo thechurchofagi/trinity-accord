@@ -90,4 +90,4 @@ The checked-in proof annex verifies the 175-item commitment and mint/consensus r
 
 Core evidence backup coverage is substantially complete.
 
-There is no urgent unrecoverable large-payload gap because the content-complete backup and DOI annex passed public cold restore. Remaining work includes retiring or rehydrating the empty historical NFT Release, running any legacy 175-tar verifier only against a compatible verified source, periodic coverage audits, and optional hardening such as a self-contained OTS bundle v2.
+There is no urgent unrecoverable large-payload gap because the content-complete backup and DOI annex passed public cold restore. Weekly read-only automation now checks legacy pointer coverage, both relevant NFT Release inventories, the current core and NFT-annex Zenodo metadata, deployed status parity, and protected Gateway health. Remaining work is limited to retiring or rehydrating the empty historical NFT Release, running any legacy 175-tar verifier only against a compatible verified source, and optional hardening such as a self-contained OTS bundle v2 or fullnode-independent OTS verification.
