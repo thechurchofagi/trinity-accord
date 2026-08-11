@@ -61,7 +61,6 @@ on:
       - "Upgrade OpenTimestamps Proofs"
       - "Arweave wallet status update"
       - "Echo human review action"
-      - "Waiting Heartbeat Status Sync"
       - "Waiting Heartbeat Submit"
       - "Build Record Chain Batch"
       - "Stamp Record Chain Batches with OpenTimestamps"
