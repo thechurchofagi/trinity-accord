@@ -1,0 +1,16 @@
+{
+  "schema": "trinityaccord.zenodo-publication.v1",
+  "technical_report": "TA-TR-2026-02",
+  "version": "1.3",
+  "record_id": 21900592,
+  "doi": "10.5281/zenodo.21900592",
+  "publication_status": "published",
+  "publication_date": "2026-08-12",
+  "frozen_source_sha256": "8472d3f5264bb61fb62c48bf90ffe3162955e8fed1a04cb5e122b0e6104ce41f",
+  "portable_source_sha256": "37a8f36c4a470fb0a318be4c1f9f5a263064c7fa9dd8e7bc8f7c8eb27012e2c5",
+  "pdf_sha256": "8003ca9f3fcdde3c17037bd5fcfb17e1e4a309bd5172afe3a195a6ae6c77bdee",
+  "pdf_pages": 22,
+  "noncanonical": true,
+  "interpretive_authority": "none",
+  "public_record": "https://zenodo.org/records/21900592"
+}
