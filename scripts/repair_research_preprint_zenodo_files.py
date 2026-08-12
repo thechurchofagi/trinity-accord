@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import urllib.parse
+import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -160,6 +161,27 @@ def classify_pdf_entry(item: dict[str, Any]) -> str:
     raise SystemExit(f"unexpected Zenodo standalone PDF identity: {observed}")
 
 
+def deletion_url(item: dict[str, Any], api_base: str) -> str:
+    """Return only this deposition's canonical UUID-addressed file resource."""
+    links = item.get("links")
+    self_url = str(links.get("self") or "") if isinstance(links, dict) else ""
+    file_id = str(item.get("id") or "")
+    try:
+        parsed_id = uuid.UUID(file_id)
+    except (ValueError, AttributeError) as exc:
+        raise SystemExit("Zenodo standalone PDF has an invalid file resource id") from exc
+    if str(parsed_id) != file_id.lower():
+        raise SystemExit("Zenodo standalone PDF has a non-canonical file resource id")
+    expected = (
+        api_base.rstrip("/")
+        + f"/deposit/depositions/{RECORD_ID}/files/"
+        + urllib.parse.quote(file_id, safe="")
+    )
+    if self_url != expected:
+        raise SystemExit("Zenodo standalone PDF has an unexpected deletion URL")
+    return expected
+
+
 def validate_archive_preserved(record: dict[str, Any]) -> None:
     remote = files_by_name(record)
     archive = remote.get(ARCHIVE_NAME)
@@ -260,6 +282,10 @@ def repair(
     current_pdf_state = None
     if PDF_NAME in current_files:
         current_pdf_state = classify_pdf_entry(current_files[PDF_NAME])
+        if current_pdf_state == "prior":
+            # Resolve and validate the one permitted deletion target before
+            # opening an edit or making any other remote mutation.
+            deletion_url(current_files[PDF_NAME], client.api_base)
         if current_pdf_state == "corrected":
             verify_pdf_download(client, current_files[PDF_NAME], local)
             public = get_public_record(client)
@@ -327,10 +353,13 @@ def repair(
         pdf_state = classify_pdf_entry(remote_pdf)
         if pdf_state == "corrected":
             verify_pdf_download(client, remote_pdf, local)
-    if remote_pdf is None or pdf_state == "prior":
-        # Zenodo's bucket is an object store: PUT to the existing key advances
-        # that file's head version. This avoids relying on the representation-
-        # specific `links.self` URL returned for a published file.
+        else:
+            client.delete(deletion_url(remote_pdf, client.api_base))
+
+    current = get_deposition(client)
+    validate_archive_preserved(current)
+    draft_files = files_by_name(current)
+    if PDF_NAME not in draft_files:
         client.request(
             "PUT",
             bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME),

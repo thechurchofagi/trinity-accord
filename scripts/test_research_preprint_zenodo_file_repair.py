@@ -18,6 +18,8 @@ import repair_research_preprint_zenodo_files as repairer
 
 
 class FakeClient:
+    PDF_FILE_ID = "7c29933b-dcd9-4db0-a625-2d18f43e3239"
+
     def __init__(
         self, pdf: bytes, *, pdf_state: str = "missing", state: str = "done"
     ) -> None:
@@ -63,13 +65,17 @@ class FakeClient:
     @staticmethod
     def _pdf_links() -> dict[str, str]:
         return {
-            "self": "https://zenodo.example/api/files/bucket/" + repairer.PDF_NAME,
+            "self": (
+                "https://zenodo.example/api/deposit/depositions/"
+                f"{repairer.RECORD_ID}/files/{FakeClient.PDF_FILE_ID}"
+            ),
             "download": "https://zenodo.example/pdf",
         }
 
     def _add_prior_pdf(self) -> None:
         self.record["files"].append(
             {
+                "id": self.PDF_FILE_ID,
                 "filename": repairer.PDF_NAME,
                 "filesize": repairer.PRIOR_PDF_BYTES,
                 "checksum": "md5:" + repairer.PRIOR_PDF_MD5,
@@ -85,6 +91,7 @@ class FakeClient:
         ]
         self.record["files"].append(
             {
+                "id": self.PDF_FILE_ID,
                 "filename": repairer.PDF_NAME,
                 "filesize": len(self.pdf),
                 "checksum": "md5:" + hashlib.md5(self.pdf).hexdigest(),  # nosec B324
@@ -117,6 +124,15 @@ class FakeClient:
                 raise AssertionError("file-modification assurance drifted")
             self.bucket_unlocked = True
             return {"status": "accepted"}
+        if method == "DELETE" and url.endswith("/files/" + self.PDF_FILE_ID):
+            if not self.bucket_unlocked:
+                raise AssertionError("published-file bucket was not unlocked")
+            self.record["files"] = [
+                item
+                for item in self.record["files"]
+                if repairer.file_name(item) != repairer.PDF_NAME
+            ]
+            return {}
         if method == "PUT" and url.endswith("/" + repairer.PDF_NAME):
             if not self.bucket_unlocked:
                 raise AssertionError("published-file bucket was not unlocked")
@@ -181,12 +197,6 @@ def main() -> int:
         )
 
         prior = FakeClient(raw, pdf_state="prior")
-        # A published file's representation-specific self link is not the
-        # draft bucket key and must not be used as a deletion precondition.
-        repairer.files_by_name(prior.record)[repairer.PDF_NAME]["links"]["self"] = (
-            "https://zenodo.example/api/deposit/depositions/"
-            f"{repairer.RECORD_ID}/files/server-generated-id"
-        )
         receipt = repairer.repair(
             prior,
             pdf_path,
@@ -196,7 +206,7 @@ def main() -> int:
         require(receipt["status"] == "corrected_published_verified", "correction status")
         require(receipt["mutation_performed"] is True, "correction mutation receipt")
         methods = [method for method, _ in prior.calls]
-        require(methods.count("DELETE") == 0, "correction must not delete by a returned link")
+        require(methods.count("DELETE") == 1, "correction must delete one exact prior PDF")
         require(methods.count("PUT") == 1, "correction must upload one corrected PDF")
         require(
             (
@@ -243,6 +253,22 @@ def main() -> int:
             sum(method == "PUT" for method, _ in resumed.calls) == 1,
             "resume did not replace the prior PDF",
         )
+
+        wrong_delete = FakeClient(raw, pdf_state="prior")
+        repairer.files_by_name(wrong_delete.record)[repairer.PDF_NAME]["links"]["self"] = (
+            "https://zenodo.example/api/deposit/depositions/999/files/"
+            + FakeClient.PDF_FILE_ID
+        )
+        expect_failure(
+            lambda: repairer.repair(
+                wrong_delete,
+                pdf_path,
+                acknowledgement=repairer.ACKNOWLEDGEMENT,
+                now=datetime(2026, 8, 11, tzinfo=timezone.utc),
+            ),
+            "unexpected deletion URL",
+        )
+        require(len(wrong_delete.calls) == 1, "unsafe delete target mutated before refusal")
 
         missing = FakeClient(raw)
         receipt = repairer.repair(
