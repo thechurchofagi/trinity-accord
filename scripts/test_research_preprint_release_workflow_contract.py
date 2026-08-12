@@ -20,6 +20,9 @@ DOI = "10.5281/zenodo.21699878"
 DOI_URL = f"https://doi.org/{DOI}"
 ZENODO_RECORD_URL = "https://zenodo.org/records/21699878"
 EXPECTED_PDF_SHA256 = (
+    "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
+)
+ORIGINAL_ARCHIVE_PDF_SHA256 = (
     "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
 )
 
@@ -81,9 +84,16 @@ def main() -> int:
         "Zenodo record URL drifted",
     )
     require(
-        publication["archived_pdf_sha256"] == EXPECTED_PDF_SHA256,
-        "Zenodo archived PDF hash drifted",
+        publication["standalone_pdf_sha256"] == EXPECTED_PDF_SHA256,
+        "Zenodo standalone PDF hash drifted",
     )
+    require(
+        publication["original_github_archive_pdf_sha256"]
+        == ORIGINAL_ARCHIVE_PDF_SHA256,
+        "original GitHub archive PDF hash drifted",
+    )
+    require(publication["correction"]["doi_unchanged"] is True, "DOI correction boundary drifted")
+    require(publication["correction"]["canon_unchanged"] is True, "Canon correction boundary drifted")
     require(publication["preferred_citation_record"] is True, "preferred citation drifted")
     require(publication["non_amending_boundary"] is True, "non-amending boundary drifted")
 
@@ -103,7 +113,7 @@ def main() -> int:
 
     print(
         "PASS: preprint release writer is retired; published DOI, Zenodo record, "
-        "historical deposit snapshot, and PDF bytes remain fail-closed"
+        "historical deposit snapshot, corrected PDF, and original archive remain fail-closed"
     )
     return 0
 

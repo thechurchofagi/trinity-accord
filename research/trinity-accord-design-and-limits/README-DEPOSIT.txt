@@ -37,9 +37,12 @@ citation for this paper.
 
 The file zenodo-deposit-metadata.json remains the exact pre-publication metadata
 snapshot used to create the archive. Current publication facts are recorded in
-zenodo-publication-record.json. The v1.1 PDF remains byte-identical to the file
-archived by Zenodo; the minted DOI is backfilled into current discovery and
-citation metadata without rewriting the deposited PDF.
+zenodo-publication-record.json. The original GitHub release archive remains
+preserved on Zenodo. Within Zenodo's post-publication correction window, the
+standalone v1.1 PDF was corrected on 11 August 2026 to formalize interpretive
+non-exclusivity, use source-version terminology where appropriate, and display
+the existing DOI. The record, version, DOI, metadata, Canon, and empirical
+results were not changed.
 
 This research package analyzes the Trinity Accord. It has no interpretive
 authority and does not amend the three Bitcoin Originals.

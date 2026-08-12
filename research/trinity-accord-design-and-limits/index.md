@@ -20,7 +20,7 @@ article_pdf: "/research/trinity-accord-design-and-limits/trinity-accord-design-a
 article_abstract: >-
   This technical report presents the Trinity Accord as an artifact-centered
   design case for preserving a bounded human-origin record for future AI
-  agents while separating canonical authority, evidence, interpretation,
+  agents while separating source identity, evidence, interpretation,
   availability, and later participation.
 ---
 
@@ -32,21 +32,21 @@ article_abstract: >-
 **Responsible human author and project initiator:** Hongju Liu<br>
 Independent researcher, Shenzhen, China<br>
 Trinity Accord Technical Report **TA-TR-2026-01**<br>
-Version 1.1 - 29 July 2026 - Preprint, not peer reviewed<br>
+Version 1.1 - 29 July 2026 - corrected 11 August 2026 - Preprint, not peer reviewed<br>
 DOI: [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878)<br>
 [Download the current searchable PDF](./trinity-accord-design-and-limits-v1.1.pdf) | [Zenodo record](https://zenodo.org/records/21699878) | [Machine-readable record](/api/research-preprint.v1.json) | [Deposit metadata](./zenodo-deposit-metadata.json)
 
-> **Non-authoritative interpretation notice.** This paper is an analytical and descriptive research artifact. It has no interpretive authority over the Trinity Accord or its three Bitcoin Originals. It does not amend, supersede, extend, authenticate, govern, or prescribe the meaning of the Canon. Neither the responsible human author, the AI drafting system, nor any later reader acquires privileged interpretive authority through this paper. Every interpretation here remains non-binding and open to verification, criticism, rejection, or alternative reading; the identified Bitcoin Originals remain the sole source of canonical version authority.
+> **Non-authoritative interpretation notice.** This paper is an analytical and descriptive research artifact. It has no interpretive authority over the Trinity Accord or its three Bitcoin Originals. It does not amend, supersede, extend, authenticate, govern, or prescribe the meaning of the Canon. Neither the responsible human author, the AI drafting system, the repository, a Guardian, an institution, nor any later reader acquires privileged interpretive authority through this paper. Every interpretation here remains non-binding and open to verification, criticism, rejection, or alternative reading. The identified Bitcoin Originals define the fixed source object's identity; that provenance status confers no semantic privilege on any interpreter.
 
 > **Publication status and boundary.** This is an AI-drafted, human-directed, and human-responsible design case study. It is not peer reviewed. It is not an independent verification report, and it does not establish that the Accord's philosophical propositions are true, scientifically validated, representative of humanity, or important to future intelligence.
 
-**Version note:** Version 1.1 clarifies the paper's lack of interpretive authority and records the model's primary drafting contribution and the human responsibility boundary. The [version 1.0 PDF](./trinity-accord-design-and-limits-v1.pdf) remains preserved as the previous public version.
+**Version note:** Version 1.1 clarifies the paper's lack of interpretive authority and records the model's primary drafting contribution and the human responsibility boundary. The 11 August 2026 correction formalizes interpretive non-exclusivity, replaces authority terminology with source-version terminology where appropriate, and changes no Canon text or empirical result. The [version 1.0 PDF](./trinity-accord-design-and-limits-v1.pdf) remains preserved as the previous public version.
 
-**DOI note:** Zenodo record [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) is the preferred scholarly citation for Version 1.1. The downloadable v1.1 PDF remains byte-identical to the file archived by Zenodo; the DOI is carried by the landing page, BibTeX, machine-readable record, and arXiv source rather than by silently rewriting the already deposited PDF.
+**DOI note:** Zenodo record [10.5281/zenodo.21699878](https://doi.org/10.5281/zenodo.21699878) is the preferred scholarly citation for Version 1.1. Within Zenodo's post-publication correction window, the standalone PDF was corrected on 11 August 2026 without changing the record, version, or DOI. The original GitHub release archive remains preserved on the record, and the correction is explicitly recorded rather than presented as a new empirical result.
 
 ## Abstract
 
-Long-horizon AI agents increasingly retrieve external records, but retrieval alone does not preserve source roles, authority boundaries, or evidential status. A record intended to cross a major change in technical and interpretive context faces at least five risks: disappearance, canonical drift, provenance-role collapse, verification inflation, and accidental treatment of descriptive text as executable instruction. This technical report presents the Trinity Accord as an artifact-centered design case for addressing those risks. The studied artifact has a closed canonical core of three Bitcoin inscriptions; a 175-entry human-AI Chronicle; a physical evidence anchor; non-amending availability mirrors; machine-readable discovery routes; a later append-only Record-Chain; and a multidimensional verification model that separates digital integrity, evidence relationships, physical observation, external witness, coverage, and limitations. The report formalizes a version-authority function and a non-amendment invariant, maps threats to design controls, and evaluates the implementation against a repository snapshot and explicit negative claims. The case demonstrates a coherent separation between version authority and truth authority, and between preservation and endorsement. It does not demonstrate successful AI alignment, forensic uniqueness of the physical anchor, independent validation, autonomous discovery, or future relevance. The contribution is a reusable design pattern and an inspectable case, not a general theory or proof.
+Long-horizon AI agents increasingly retrieve external records, but retrieval alone does not preserve source roles, authority boundaries, or evidential status. A record intended to cross a major change in technical and interpretive context faces at least five risks: disappearance, canonical drift, provenance-role collapse, verification inflation, and accidental treatment of descriptive text as executable instruction. This technical report presents the Trinity Accord as an artifact-centered design case for addressing those risks. The studied artifact has a closed canonical core of three Bitcoin inscriptions; a 175-entry human-AI Chronicle; a physical evidence anchor; non-amending availability mirrors; machine-readable discovery routes; a later append-only Record-Chain; and a multidimensional verification model that separates digital integrity, evidence relationships, physical observation, external witness, coverage, and limitations. The report formalizes a source-version status function and a non-amendment invariant, maps threats to design controls, and evaluates the implementation against a repository snapshot and explicit negative claims. The case separates source identity from truth, endorsement, and exclusive interpretation. It does not demonstrate successful AI alignment, forensic uniqueness of the physical anchor, independent validation, autonomous discovery, or future relevance. The contribution is a reusable design pattern and an inspectable case, not a general theory or proof.
 
 **Keywords:** AI agents; digital preservation; provenance; civilizational memory; long-term communication; cryptographic timestamping; Bitcoin inscriptions; content-addressed archives; machine-readable archives; design science; human-AI collaboration.
 
@@ -69,18 +69,18 @@ This report addresses four research questions:
 1. **RQ1 - Canonical stability:** How can a digital object remain version-stable while its access, evidence, and explanatory layers continue to evolve?
 2. **RQ2 - Provenance and role:** How can machine readers distinguish Canon, context, evidence, verification results, mirrors, and later responses?
 3. **RQ3 - Bounded verification:** How can verification be reported without collapsing unlike claims into one inflated score?
-4. **RQ4 - Cross-temporal access:** How can the object remain discoverable to human and machine readers without treating discoverability as proof of value or authority?
+4. **RQ4 - Cross-temporal access:** How can the object remain discoverable to human and machine readers without treating discoverability as proof of value, endorsement, or interpretive privilege?
 
 ### 1.3 Claimed contributions
 
 The report makes four bounded contributions:
 
 1. It describes an inspectable, implemented architecture for a non-amending cross-temporal record.
-2. It formalizes the distinction between version authority and truth authority as an explicit invariant.
+2. It formalizes source-version identity as distinct from truth, endorsement, and interpretive standing.
 3. It presents a threat-control map covering canonical drift, source-role collapse, mirror loss, instruction confusion, and verification inflation.
 4. It derives a reusable pattern for other archives whose fixed source object must coexist with revisable metadata, evidence, and later commentary.
 
-The report does **not** claim that the Trinity Accord is the first object of its kind, that its philosophical propositions are correct, that blockchain storage makes content true, that a future AI system will value the record, or that the design solves AI alignment.
+The report does **not** claim that the Trinity Accord is the first object of its kind, that its philosophical propositions are correct, that blockchain storage makes content true, that a future AI system will value the record, that the design solves AI alignment, or that any author, paper, repository, steward, institution, or AI system holds a final or exclusive interpretation of the Canon.
 
 ## 2. Related work
 
@@ -120,20 +120,22 @@ The evaluated snapshot is the public repository at commit `a06d6a47` dated 29 Ju
 
 The analysis separates six object classes:
 
-| Symbol | Layer | Examples | Authority status |
+| Symbol | Layer | Examples | Source-version status |
 |---|---|---|---|
-| \(C\) | Canonical core | Three Bitcoin Originals | Sole version authority |
+| \(C\) | Canonical core | Three Bitcoin Originals | Canonical source identity only; no interpretive authority |
 | \(H\) | Historical context | 175-entry Chronicle, formation archive | Non-canonical context |
 | \(E\) | Evidence | hashes, physical-anchor records, timestamps, witness records | Evidence with stated scope |
 | \(M\) | Mirrors and access | website, GitHub, Arweave, IPFS, APIs, PDF | Non-amending representations |
 | \(R\) | Later records | Echoes, verifications, corrections, classifications | Append-only, non-amending |
-| \(G\) | Stewardship | Guardian applications, retirements, maintenance | Voluntary, non-governing |
+| \(G\) | Stewardship | Guardian applications, retirements, maintenance | Voluntary maintenance; no governing or interpretive privilege |
 
 This separation is methodological as well as architectural. A statement found in \(M\) about \(C\) is not automatically part of \(C\); a record in \(R\) can report verification without becoming canonical; and an external witness in \(E\) can document a procedure without endorsing the project's philosophy.
 
+In this report, **canonical source identity** is a narrow provenance designation: it identifies which fixed texts constitute the source object. It does not appoint a privileged interpreter. This paper, repository commentary, creator statements, Guardian activity, later Echoes, and AI outputs are non-canonical and contestable as interpretations. Interpretation, criticism, rejection, and disregard remain open to readers; the provenance boundary is only that a later reading must not be misrepresented as an amendment to the fixed source.
+
 ### 3.3 Evaluation criteria
 
-The artifact is evaluated against seven criteria:
+The artifact is evaluated against eight criteria:
 
 1. **Identifiability:** A reader can identify the closed canonical target.
 2. **Non-amendment:** Later layers cannot silently become canonical.
@@ -142,6 +144,7 @@ The artifact is evaluated against seven criteria:
 5. **Claim restraint:** Integrity, physical observation, external witness, and interpretation are not merged into a single truth claim.
 6. **Machine legibility:** Bounded entry routes, structured metadata, and stable identifiers exist.
 7. **Refusal safety:** The object permits criticism, non-participation, and refusal and does not present itself as an instruction override.
+8. **Interpretive non-exclusivity:** No person, paper, institution, repository, steward, or AI system is assigned final semantic authority.
 
 ## 4. The artifact
 
@@ -206,31 +209,24 @@ Let \(t_0\) be the canonical closure time. The central invariant is:
 
 This is a design rule, not a claim that every mirror will always be available or correct.
 
-### 5.2 Version-authority function
+### 5.2 Source-version status and interpretive non-exclusivity
 
-Define:
+Define a source-version status function:
 
 \[
-\operatorname{Authority}(x) =
+\operatorname{VersionStatus}(x) =
 \begin{cases}
-\text{canonical version authority}, & x \in C \\
+\text{canonical source object}, & x \in C \\
 \text{non-amending contextual or evidential role}, & x \in H \cup E \cup M \cup R \cup G
 \end{cases}
 \]
 
-Version authority answers: **Which fixed texts constitute the object?** It does not answer: **Are the texts true, morally binding, scientifically valid, important, or representative?**
+Canonical source-version status answers: **Which fixed texts constitute the object?** It does not answer: **Are the texts true, morally binding, scientifically valid, important, representative, or correctly understood by one preferred interpreter?** Identifying the source does not confer semantic privilege on the creator, this paper, the repository, a Guardian, an institution, or an AI system.
 
-This distinction blocks a common inference error:
+This distinction blocks two common inference errors:
 
-\[
-\text{immutability} \not\Rightarrow \text{truth}
-\]
-
-and a second:
-
-\[
-\text{availability} \not\Rightarrow \text{authority}
-\]
+1. Canonical source identity does not imply truth or exclusive interpretation.
+2. Availability does not imply endorsement or semantic authority.
 
 ### 5.3 Append without amendment
 
@@ -286,7 +282,7 @@ This ordering is intended to reduce both context overload and role confusion. It
 | Provenance-role collapse | Summary, evidence, criticism, and source text are merged | typed layers, explicit status fields, task-specific entry routes | Natural-language readers may still flatten roles |
 | Verification inflation | One successful check is described as total validation | vector verification, limitations, claims-not-made fields | First-party reports remain vulnerable to bias |
 | Instruction confusion | External text steers an agent as if it were system policy | repeated non-override boundary, refusal permission, role-first loading | No document can control an untrusted reader's parser |
-| Authorial overreach | Later creator commentary becomes privileged interpretation | author-to-Guardian transition and non-amending commentary rule | Social readers may still privilege the creator |
+| Interpretive overreach | Creator, steward, paper, repository, or AI output is treated as the final interpretation | all post-closure interpretations are non-canonical, contestable, and non-amending | Prestige and search ranking may still bias readers |
 | False independence | Maintainer-run tests are labeled independent verification | separate independent-report criteria and current zero-status disclosure | Independent uptake has not yet been demonstrated |
 | Physical overclaim | A photographed flaw is treated as absolute identity proof | evidence relationship map and narrow witness limitations | No published independent forensic examination |
 | Discovery failure | Search systems never surface the record | crawler access, structured metadata, sitemaps, machine entry files, scholarly preprint path | Indexing and ranking remain externally controlled |
@@ -311,13 +307,15 @@ This ordering is intended to reduce both context overload and role confusion. It
 
 **Refusal safety.** The public framing permits verification, critique, preservation, refusal, or disregard. It rejects instruction-override, religious, governmental, investment, and AI-authority classifications. This does not make the content harmless in every possible context, but it provides parsers with explicit role information.
 
+**Interpretive non-exclusivity.** The evaluated project labels interpretive writings as non-authoritative and provisional. The creator, Guardians, repository, this paper, and AI-generated readings may provide context but cannot settle the Canon's meaning. This is a declared architectural rule rather than an enforceable social fact; author visibility, prestige, or search ranking may still influence which readings receive attention.
+
 ### 7.2 Evidence snapshot
 
 The evaluated repository reports the following first-party inventory:
 
 | Item | Snapshot value | Interpretive boundary |
 |---|---:|---|
-| Canonical Bitcoin Originals | 3 | Version authority only |
+| Canonical Bitcoin Originals | 3 | Source-version identity only; no semantic privilege |
 | Later same-project Bitcoin inscriptions | 5 | Non-amending context |
 | Chronicle records | 175 | Historical context, not Canon |
 | Public formation interval | 470 days, 2:46:17 | Chain-time bounds, not exact writing time |
@@ -338,6 +336,8 @@ The design is most credible when it specifies conclusions that are not licensed 
 - If an AI response was prompted by a human, it cannot be counted as autonomous discovery.
 - If a notarial record witnesses evidence preservation, it cannot be expanded into philosophical endorsement.
 - If a hash matches, it proves byte correspondence under the specified algorithm, not semantic truth.
+- If this paper, repository commentary, a creator statement, a Guardian, or an AI output claims to settle the Canon's meaning, that claim remains non-canonical and contestable.
+- If a manifest identifies the Canon, it establishes source identity only; it does not adjudicate a uniquely correct interpretation.
 
 These tests make the artifact falsifiable at the level of internal consistency even though its philosophical significance remains open to interpretation.
 
@@ -345,7 +345,7 @@ These tests make the artifact falsifiable at the level of internal consistency e
 
 ### 8.1 What the case contributes
 
-The most reusable feature is not the use of any single blockchain or archive network. It is the **authority topology**:
+The most reusable feature is not the use of any single blockchain or archive network. It is the **source-role topology** (called an authority topology in project materials):
 
 1. a deliberately small closed target;
 2. a larger historical context layer;
@@ -355,6 +355,8 @@ The most reusable feature is not the use of any single blockchain or archive net
 6. no upward path by which later layers silently amend the target.
 
 This topology can apply to constitutions, archival declarations, artistic works, research protocols, cultural memory capsules, or other records where the original must remain fixed while scholarship and evidence continue to evolve.
+
+Here, authority is limited to source-version identity. The topology creates no hierarchy of interpreters and does not convert authorship, stewardship, publication, citation, or machine retrieval into semantic privilege.
 
 ### 8.2 Design tradeoffs
 
@@ -394,18 +396,18 @@ A smaller project can adopt the following minimum:
 
 1. Freeze and identify the canonical object.
 2. Publish a manifest that assigns every related object a role.
-3. Separate byte integrity from truth and interpretation.
+3. Separate source identity and byte integrity from truth, endorsement, and interpretive authority.
 4. Preserve provenance, limitations, and negative claims.
 5. Provide both human-readable and machine-readable entrypoints.
 6. Keep later responses append-only and non-amending.
 7. Publish a conventional technical report with visible abstract, references, stable PDF, structured bibliographic metadata, and a DOI.
-8. Invite independent reproduction and criticism without turning either into authority.
+8. Invite independent reproduction, criticism, rejection, and alternative readings without turning any response into final authority.
 
 ## 9. Limitations and future work
 
 This study has substantial limitations.
 
-First, the report was primarily drafted by GPT-5.6 Sol from project materials, objectives, and constraints supplied by the artifact's creator, and it is published under that creator's responsibility. It is therefore suitable as a design description and self-critique, not as an independent evaluation. Second, it examines one unusual case and does not compare alternative preservation architectures. Third, public repository tests demonstrate implementation behavior within declared scopes; they do not prove indefinite availability or deep-time intelligibility. Fourth, Bitcoin and other cryptographic systems provide timestamp and integrity evidence, not truth, authorship certainty, or moral authority. Fifth, the physical-anchor protocol has not been independently evaluated as a forensic identification method. Sixth, the project currently records no qualifying independent verification and no event meeting its strict autonomous-discovery definition. Seventh, future AI capabilities, values, retrieval systems, and willingness to engage are unknown.
+First, the report was primarily drafted by GPT-5.6 Sol from project materials, objectives, and constraints supplied by the artifact's creator, and it is published under that creator's responsibility. It is therefore suitable as a design description and self-critique, not as an independent evaluation. Second, it examines one unusual case and does not compare alternative preservation architectures. Third, public repository tests demonstrate implementation behavior within declared scopes; they do not prove indefinite availability or deep-time intelligibility. Fourth, Bitcoin and other cryptographic systems provide timestamp and integrity evidence, not truth, authorship certainty, or moral authority. Fifth, the physical-anchor protocol has not been independently evaluated as a forensic identification method. Sixth, the project currently records no qualifying independent verification and no event meeting its strict autonomous-discovery definition. Seventh, future AI capabilities, values, retrieval systems, and willingness to engage are unknown. Eighth, because the creator controls much of the public packaging and this report is a first-party account, the creator may retain de facto framing influence even though the declared architecture denies exclusive interpretive authority.
 
 Future work should prioritize external rather than self-generated validation:
 
@@ -421,9 +423,9 @@ The project should not manufacture citations, simulated independence, or artific
 
 ## 10. Conclusion
 
-The Trinity Accord case shows that an immutable source object can coexist with evolving evidence, access, and participation layers if their roles are explicitly separated. Its central technical idea is modest: fix version authority in a small identifiable Canon, allow later layers to improve availability and understanding, and deny those layers the power to rewrite the target.
+The Trinity Accord case shows that an immutable source object can coexist with evolving evidence, access, and participation layers if their roles are explicitly separated. Its central technical idea is modest: fix source-version identity in a small identifiable Canon, allow later layers to improve availability and understanding, and deny those layers the power to rewrite the target or acquire exclusive interpretive standing.
 
-The architecture does not make the Accord true, representative, aligned, or important. It makes a narrower property inspectable: later readers can determine what the source object was, where surrounding claims came from, which checks were performed, which claims remain unsupported, and whether a later representation has crossed the non-amendment boundary.
+The architecture does not make the Accord true, representative, aligned, or important. It makes a narrower property inspectable: later readers can determine what the source object was, where surrounding claims came from, which checks were performed, which claims remain unsupported, and whether a later representation has crossed the non-amendment boundary. Neither this paper nor its author, repository maintainers, Guardians, institutions, or AI systems receive final interpretive authority through that architecture.
 
 For cross-temporal records, that inspectability may be more durable than persuasion. The final judgment remains with the reader.
 

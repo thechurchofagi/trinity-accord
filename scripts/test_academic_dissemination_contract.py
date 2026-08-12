@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RESEARCH = ROOT / "research" / "trinity-accord-design-and-limits"
 DOI = "10.5281/zenodo.21699878"
-PDF_SHA256 = "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
+PDF_SHA256 = "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
 BRIEF_SHA256 = "57a4bda56a50e662313a1de0853393c61ecf7fd6348c73c442cffb56d5087036"
 
 
@@ -26,9 +26,9 @@ def strict_json(path: Path) -> dict:
 
 
 def main() -> int:
-    original_pdf = RESEARCH / "trinity-accord-design-and-limits-v1.1.pdf"
+    current_pdf = RESEARCH / "trinity-accord-design-and-limits-v1.1.pdf"
     require(
-        hashlib.sha256(original_pdf.read_bytes()).hexdigest() == PDF_SHA256,
+        hashlib.sha256(current_pdf.read_bytes()).hexdigest() == PDF_SHA256,
         "published preprint bytes changed",
     )
 

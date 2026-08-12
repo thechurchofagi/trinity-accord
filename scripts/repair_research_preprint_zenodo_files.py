@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Add the existing v1.1 paper PDF to its Zenodo record as a standalone file.
+"""Correct the standalone v1.1 PDF on its existing Zenodo record.
 
-The Zenodo/GitHub integration published the correct preprint metadata but stored
-the release as one repository ZIP.  This bounded repair exposes the exact PDF
-already contained in that ZIP.  It does not remove or replace files, alter
-metadata, mint a DOI, or create a new version.
+The original GitHub archive remains immutable.  During Zenodo's bounded
+post-publication correction window, this script may replace only the known
+standalone PDF revision with the known corrected revision.  It does not alter
+metadata, mint a DOI, create a new version, or modify the archived Canon.
 """
 from __future__ import annotations
 
@@ -32,16 +32,19 @@ TITLE = (
     "for Future AI Agents: The Trinity Accord Case Study"
 )
 PDF_NAME = "trinity-accord-design-and-limits-v1.1.pdf"
-PDF_SHA256 = "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
-PDF_MD5 = "b7dbc4cf4f81dc6e3de5fa35a36987ac"
-PDF_BYTES = 113360
+PDF_SHA256 = "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
+PDF_MD5 = "f5d977178f40539018f92e500cc59d9e"
+PDF_BYTES = 116911
+PRIOR_PDF_SHA256 = "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
+PRIOR_PDF_MD5 = "b7dbc4cf4f81dc6e3de5fa35a36987ac"
+PRIOR_PDF_BYTES = 113360
 ARCHIVE_NAME = "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip"
 ARCHIVE_MD5 = "14b34072deba4379454687d4a6a26d00"
 ARCHIVE_BYTES = 25288793
-ACKNOWLEDGEMENT = "TRINITY_RESEARCH_PREPRINT_FILE_REPAIR_V1_APPROVED"
+ACKNOWLEDGEMENT = "TRINITY_RESEARCH_PREPRINT_PDF_CORRECTION_V2_APPROVED"
 FILE_MODIFICATION_COMMENT = (
-    "Expose the exact existing v1.1 research PDF already contained in the "
-    "published source archive; no findings or results are being changed."
+    "Correct the v1.1 standalone PDF to formalize interpretive non-exclusivity "
+    "and source-version terminology; no Canon text or empirical result changes."
 )
 
 
@@ -145,6 +148,27 @@ def validate_file_entry(
         raise SystemExit(f"Zenodo file checksum mismatch for {name}")
 
 
+def classify_pdf_entry(item: dict[str, Any]) -> str:
+    """Accept only the exact prior or corrected standalone PDF identity."""
+    if file_name(item) != PDF_NAME:
+        raise SystemExit("Zenodo standalone PDF name mismatch")
+    observed = (file_size(item), file_md5(item))
+    if observed == (PDF_BYTES, PDF_MD5):
+        return "corrected"
+    if observed == (PRIOR_PDF_BYTES, PRIOR_PDF_MD5):
+        return "prior"
+    raise SystemExit(f"unexpected Zenodo standalone PDF identity: {observed}")
+
+
+def deletion_url(item: dict[str, Any], bucket: str) -> str:
+    links = item.get("links")
+    self_url = links.get("self") if isinstance(links, dict) else None
+    expected = bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME)
+    if self_url != expected:
+        raise SystemExit("Zenodo standalone PDF has an unexpected deletion URL")
+    return expected
+
+
 def validate_archive_preserved(record: dict[str, Any]) -> None:
     remote = files_by_name(record)
     archive = remote.get(ARCHIVE_NAME)
@@ -243,26 +267,31 @@ def repair(
     current_files = files_by_name(current)
 
     if PDF_NAME in current_files:
-        verify_pdf_download(client, current_files[PDF_NAME], local)
-        public = get_public_record(client)
-        validate_archive_preserved(public)
-        verify_pdf_download(client, files_by_name(public)[PDF_NAME], local)
-        return {
-            "schema": "trinityaccord.zenodo-file-repair-receipt.v1",
-            "status": "already_present_verified",
-            "mutation_performed": False,
-            "record_id": RECORD_ID,
-            "doi": DOI,
-            "record_url": f"https://zenodo.org/records/{RECORD_ID}",
-            "standalone_pdf": local,
-            "original_archive_preserved": True,
-        }
+        pdf_state = classify_pdf_entry(current_files[PDF_NAME])
+        if pdf_state == "corrected":
+            verify_pdf_download(client, current_files[PDF_NAME], local)
+            public = get_public_record(client)
+            validate_archive_preserved(public)
+            public_pdf = files_by_name(public).get(PDF_NAME)
+            if public_pdf is None or classify_pdf_entry(public_pdf) != "corrected":
+                raise SystemExit("Zenodo public record lacks the corrected standalone PDF")
+            verify_pdf_download(client, public_pdf, local)
+            return {
+                "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
+                "status": "already_corrected_verified",
+                "mutation_performed": False,
+                "record_id": RECORD_ID,
+                "doi": DOI,
+                "record_url": f"https://zenodo.org/records/{RECORD_ID}",
+                "standalone_pdf": local,
+                "original_archive_preserved": True,
+            }
 
     unexpected = set(current_files) - {ARCHIVE_NAME}
-    if unexpected:
+    if unexpected - {PDF_NAME}:
         raise SystemExit(
-            "unexpected Zenodo files require human review before repair: "
-            f"{sorted(unexpected)}"
+            "unexpected Zenodo files require human review before correction: "
+            f"{sorted(unexpected - {PDF_NAME})}"
         )
     validate_repair_window(current, now or datetime.now(timezone.utc))
 
@@ -286,17 +315,28 @@ def repair(
     if set(draft_files) - {ARCHIVE_NAME, PDF_NAME}:
         raise SystemExit("Zenodo edit draft contains unexpected files")
 
+    # A normal edit action unlocks metadata only. Zenodo requires its
+    # dedicated, policy-checked action before published files can be changed.
+    unlock_published_files(client)
+    current = get_deposition(client)
+    validate_archive_preserved(current)
+    links = current.get("links")
+    bucket = links.get("bucket") if isinstance(links, dict) else None
+    if not isinstance(bucket, str) or not bucket:
+        raise SystemExit("Zenodo edit draft has no upload bucket")
+    draft_files = files_by_name(current)
+    remote_pdf = draft_files.get(PDF_NAME)
+    if remote_pdf is not None:
+        pdf_state = classify_pdf_entry(remote_pdf)
+        if pdf_state == "corrected":
+            verify_pdf_download(client, remote_pdf, local)
+        else:
+            client.delete(deletion_url(remote_pdf, bucket))
+
+    current = get_deposition(client)
+    validate_archive_preserved(current)
+    draft_files = files_by_name(current)
     if PDF_NAME not in draft_files:
-        # A normal edit action unlocks metadata only. Zenodo requires its
-        # dedicated, policy-checked action before a published record's file
-        # bucket can be changed during the correction window.
-        unlock_published_files(client)
-        current = get_deposition(client)
-        validate_archive_preserved(current)
-        links = current.get("links")
-        bucket = links.get("bucket") if isinstance(links, dict) else None
-        if not isinstance(bucket, str) or not bucket:
-            raise SystemExit("Zenodo edit draft has no upload bucket")
         client.request(
             "PUT",
             bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME),
@@ -327,18 +367,24 @@ def repair(
     validate_archive_preserved(public)
     public_files = files_by_name(public)
     if set(public_files) != {ARCHIVE_NAME, PDF_NAME}:
-        raise SystemExit("Zenodo public file set does not match the bounded repair")
+        raise SystemExit("Zenodo public file set does not match the bounded correction")
+    if classify_pdf_entry(public_files[PDF_NAME]) != "corrected":
+        raise SystemExit("Zenodo public PDF is not the corrected revision")
     verify_pdf_download(client, public_files[PDF_NAME], local)
     return {
-        "schema": "trinityaccord.zenodo-file-repair-receipt.v1",
-        "status": "published_verified",
+        "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
+        "status": "corrected_published_verified",
         "mutation_performed": True,
         "record_id": RECORD_ID,
         "doi": DOI,
         "record_url": f"https://zenodo.org/records/{RECORD_ID}",
         "standalone_pdf": local,
         "original_archive_preserved": True,
-        "scope": "add exact existing PDF; no deletion, replacement, metadata change, new DOI, or new version",
+        "prior_standalone_pdf_sha256": PRIOR_PDF_SHA256,
+        "scope": (
+            "replace only the known standalone PDF correction; preserve the original "
+            "archive, metadata, record, version, DOI, and Canon"
+        ),
     }
 
 

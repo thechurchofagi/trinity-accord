@@ -12,7 +12,8 @@ RESEARCH = ROOT / "research" / "trinity-accord-design-and-limits"
 DOI = "10.5281/zenodo.21699878"
 DOI_URL = "https://doi.org/10.5281/zenodo.21699878"
 RECORD_URL = "https://zenodo.org/records/21699878"
-PDF_SHA256 = "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
+PDF_SHA256 = "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
+ORIGINAL_ARCHIVE_PDF_SHA256 = "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2"
 
 
 def require(condition: bool, message: str) -> None:
@@ -25,7 +26,7 @@ def main() -> int:
     require(f'citation_doi: "{DOI}"' in landing, "landing-page citation DOI missing")
     require(f'article_doi: "{DOI}"' in landing, "landing-page article DOI missing")
     require(DOI_URL in landing and RECORD_URL in landing, "landing-page DOI links missing")
-    require("byte-identical" in landing, "deposited-PDF immutability note missing")
+    require("post-publication correction window" in landing, "PDF correction note missing")
 
     research_index = (ROOT / "research" / "index.md").read_text(encoding="utf-8")
     require(DOI_URL in research_index, "research index DOI URL missing")
@@ -54,7 +55,12 @@ def main() -> int:
     require(publication["publication_state"] == "published", "Zenodo state mismatch")
     require(publication["doi"] == DOI, "Zenodo publication DOI mismatch")
     require(publication["zenodo_record_url"] == RECORD_URL, "Zenodo record URL mismatch")
-    require(publication["archived_pdf_sha256"] == PDF_SHA256, "recorded PDF hash mismatch")
+    require(publication["standalone_pdf_sha256"] == PDF_SHA256, "recorded PDF hash mismatch")
+    require(
+        publication["original_github_archive_pdf_sha256"] == ORIGINAL_ARCHIVE_PDF_SHA256,
+        "original archive PDF hash mismatch",
+    )
+    require(publication["correction"]["doi_unchanged"] is True, "DOI correction boundary missing")
 
     deposit = json.loads((RESEARCH / "zenodo-deposit-metadata.json").read_text(encoding="utf-8"))
     require(deposit["deposit_state"] == "prepared_not_submitted", "deposit snapshot was rewritten")
@@ -73,7 +79,7 @@ def main() -> int:
         actual = hashlib.sha256((RESEARCH / filename).read_bytes()).hexdigest()
         require(actual == expected, f"checksum mismatch for {filename}")
 
-    print("PASS: Zenodo DOI is synchronized without rewriting the deposited PDF")
+    print("PASS: corrected standalone PDF is synchronized to the unchanged Zenodo DOI")
     return 0
 
 
