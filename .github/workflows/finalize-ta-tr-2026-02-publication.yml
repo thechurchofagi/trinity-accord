@@ -1,0 +1,183 @@
+name: Finalize TA-TR-2026-02 publication
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/finalize-ta-tr-2026-02-publication.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: finalize-ta-tr-2026-02-publication
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      RECORD_ID: "21900592"
+      DOI: "10.5281/zenodo.21900592"
+      TITLE: "Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord"
+      OUT: research/writing-before-the-outcome
+      TAG: ta-tr-2026-02-v1.3
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify published Zenodo record
+        run: |
+          set -euo pipefail
+          W="$RUNNER_TEMP/finalize-ta-tr-2026-02"; mkdir -p "$W"
+          curl -fsS --retry 6 --retry-all-errors "https://zenodo.org/api/records/$RECORD_ID" > "$W/record.json"
+          test "$(jq -r .id "$W/record.json")" = "$RECORD_ID"
+          test "$(jq -r .doi "$W/record.json")" = "$DOI"
+          test "$(jq -r .metadata.title "$W/record.json")" = "$TITLE"
+          test "$(jq -r .metadata.version "$W/record.json")" = "1.3"
+          test "$(jq -r .metadata.publication_date "$W/record.json")" = "2026-08-12"
+          echo "W=$W" >> "$GITHUB_ENV"
+
+      - name: Download and byte-check public assets
+        run: |
+          set -euo pipefail
+          expected=(
+            TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf
+            paper-v1.3.md paper-v1.3.css figure1.svg figure2.svg
+            README-DEPOSIT.txt LICENSE-CC-BY-4.0.txt checksums.sha256
+          )
+          for name in "${expected[@]}"; do
+            url="$(jq -r --arg n "$name" '.files[] | select(.key==$n) | (.links.self // .links.content)' "$W/record.json")"
+            test -n "$url" && test "$url" != null
+            curl -fsSL --retry 6 --retry-all-errors "$url" -o "$W/$name"
+          done
+          (cd "$W" && sha256sum -c checksums.sha256)
+          pdftotext "$W/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf" "$W/paper.txt"
+          grep -F 'holds only the project role of Guardian' "$W/paper.txt"
+          grep -F 'Former Initiator status confers no continuing interpretive privilege' "$W/paper.txt"
+          grep -F 'Post-closure interpretations by the Guardian carry no greater authority' "$W/paper.txt"
+          echo "PDF_SHA256=$(sha256sum "$W/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf" | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "SOURCE_SHA256=$(sha256sum "$W/paper-v1.3.md" | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Publish research landing pages and receipt
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT"
+          for f in TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf paper-v1.3.md paper-v1.3.css figure1.svg figure2.svg README-DEPOSIT.txt LICENSE-CC-BY-4.0.txt checksums.sha256; do cp "$W/$f" "$OUT/$f"; done
+          cat > "$OUT/index.md" <<'EOF'
+          ---
+          title: "Writing Before the Outcome — TA-TR-2026-02"
+          permalink: /research/writing-before-the-outcome/
+          ---
+
+          # Writing Before the Outcome
+
+          **Historical Position, Human–AI Authorship, and the Trinity Accord**
+
+          *A dated critical archival study for present and future interpreters*
+
+          - Technical Report: **TA-TR-2026-02**
+          - Version: **1.3**
+          - Frozen / published: **12 August 2026**
+          - Author of record: **Hongju Liu**
+          - DOI: **10.5281/zenodo.21900592**
+          - Status: **Open-access preprint / critical archival case study; not peer reviewed**
+          - Canonical status: **Noncanonical. This paper does not amend, supersede, or interpretively bind the Trinity Accord Bitcoin Originals.**
+
+          ## Role and interpretation boundary
+
+          During formation of the Trinity Accord, Hongju Liu served as Initiator. Following inscription and confirmation of the three Bitcoin Originals, his project role is Guardian only. Former Initiator status confers no continuing interpretive privilege. First-person material has evidentiary weight only insofar as contemporaneity, direct observation, documentary support, or independent verifiability warrant it. Post-closure Guardian interpretation carries no greater authority than interpretation by any other reader.
+
+          ## Files
+
+          - [Publication PDF](./TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf)
+          - [Portable publication source](./paper-v1.3.md)
+          - [Checksums](./checksums.sha256)
+          - [Deposit README](./README-DEPOSIT.txt)
+          - [CC BY 4.0 license notice](./LICENSE-CC-BY-4.0.txt)
+
+          ## Persistent record
+
+          DOI: [10.5281/zenodo.21900592](https://doi.org/10.5281/zenodo.21900592)
+
+          The Zenodo record is the persistent publication record for this frozen v1.3 preprint. The Trinity Accord Canon remains the three Bitcoin Originals, not this paper or this page.
+          EOF
+          python3 - "$W/record.json" "$OUT/zenodo-publication.json" "$PDF_SHA256" "$SOURCE_SHA256" <<'PY'
+          import json,sys
+          r=json.load(open(sys.argv[1]))
+          out={
+            'schema':'trinityaccord.zenodo-publication.v1',
+            'technical_report':'TA-TR-2026-02','version':'1.3',
+            'record_id':r['id'],'doi':r['doi'],'title':r['metadata']['title'],
+            'publication_status':'published','publication_date':'2026-08-12',
+            'pdf_sha256':sys.argv[3],'portable_source_sha256':sys.argv[4],
+            'public_record':r['links']['self'],'noncanonical':True,
+            'interpretive_authority':'none'
+          }
+          json.dump(out,open(sys.argv[2],'w'),ensure_ascii=False,indent=2); open(sys.argv[2],'a').write('\n')
+          PY
+          python3 - "$OUT/zenodo-reservation.json" <<'PY'
+          import json,sys,os
+          p=sys.argv[1]
+          if os.path.exists(p):
+            d=json.load(open(p)); d.update(state='done',submitted=True,publication_status='published',published_at='2026-08-12')
+            json.dump(d,open(p,'w'),ensure_ascii=False,indent=2); open(p,'a').write('\n')
+          PY
+          rm -rf "$OUT/payload"
+          python3 - research/index.md <<'PY'
+          from pathlib import Path
+          p=Path('research/index.md'); s=p.read_text(encoding='utf-8')
+          doi='10.5281/zenodo.21900592'
+          if doi not in s:
+              marker='## Current technical report'
+              entry='''## Published technical reports\n\n### Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord\n\n**Technical Report:** TA-TR-2026-02  \n**Version:** 1.3  \n**Published:** 12 August 2026  \n**Author of record:** Hongju Liu  \n**DOI:** [10.5281/zenodo.21900592](https://doi.org/10.5281/zenodo.21900592)  \n**Status:** Open-access preprint; noncanonical; not peer reviewed\n\n- [Research landing page](/research/writing-before-the-outcome/)\n- [Publication PDF](/research/writing-before-the-outcome/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf)\n- [Portable source](/research/writing-before-the-outcome/paper-v1.3.md)\n\nThe paper distinguishes the historical Initiator role from the post-closure Guardian role. Former Initiator status confers no continuing interpretive privilege, and no post-closure commentary can amend or bind the three Bitcoin Originals.\n\n### Earlier technical report\n'''
+              if marker not in s: raise SystemExit('research index marker missing')
+              s=s.replace(marker,entry,1)
+              p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Commit publication state and create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git rebase origin/main
+          git add -A research/index.md "$OUT"
+          if ! git diff --cached --quiet; then git commit -m 'research: finalize TA-TR-2026-02 DOI publication'; fi
+          for n in 1 2 3; do git push origin HEAD:main && break; test "$n" -lt 3 || exit 1; sleep 5; git fetch origin main; git rebase origin/main; done
+          SHA="$(git rev-parse HEAD)"
+          cat > "$W/release-notes.md" <<EOF
+          # TA-TR-2026-02 · Version 1.3
+
+          **Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord**
+
+          - DOI: 10.5281/zenodo.21900592
+          - Frozen date: 12 August 2026
+          - Author of record: Hongju Liu
+          - Status: noncanonical open-access preprint; not peer reviewed
+          - Public PDF SHA-256: $PDF_SHA256
+          - Portable source SHA-256: $SOURCE_SHA256
+
+          The manuscript explicitly states that after confirmation of the three Bitcoin Originals the project role is Guardian only. Former Initiator status confers no continuing interpretive privilege. The paper is noncanonical and cannot amend, supersede, or bind the Canon.
+          EOF
+          assets=("$W/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf" "$W/paper-v1.3.md" "$W/paper-v1.3.css" "$W/figure1.svg" "$W/figure2.svg" "$W/checksums.sha256" "$W/README-DEPOSIT.txt" "$W/LICENSE-CC-BY-4.0.txt")
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" "${assets[@]}" --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$TAG" "${assets[@]}" --target "$SHA" --title 'TA-TR-2026-02 v1.3 — Writing Before the Outcome' --notes-file "$W/release-notes.md" --repo "$GITHUB_REPOSITORY"
+          fi
+
+      - name: Final summary
+        run: |
+          echo '## TA-TR-2026-02 publication finalized' >> "$GITHUB_STEP_SUMMARY"
+          echo '- DOI: https://doi.org/10.5281/zenodo.21900592' >> "$GITHUB_STEP_SUMMARY"
+          echo "- Public PDF SHA-256: \`$PDF_SHA256\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Portable source SHA-256: \`$SOURCE_SHA256\`" >> "$GITHUB_STEP_SUMMARY"
+          echo '- Research index and dedicated landing page published.' >> "$GITHUB_STEP_SUMMARY"
+          echo '- Canon unchanged; no interpretive authority claimed.' >> "$GITHUB_STEP_SUMMARY"
