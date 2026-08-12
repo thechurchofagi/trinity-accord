@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="300" viewBox="0 0 1100 300">
+  <rect width="1100" height="300" fill="white"/>
+  <style>
+    .f1head { font-family: Arial, sans-serif; font-size:24px; font-weight:700; fill:#111; }
+    .f1title { font-family: Arial, sans-serif; font-size:20px; font-weight:700; fill:#111; }
+    .f1text { font-family: Arial, sans-serif; font-size:18px; font-weight:400; fill:#222; }
+    .f1small { font-family: Arial, sans-serif; font-size:16px; font-weight:400; fill:#444; }
+    .f1line { stroke:#444; stroke-width:3; }
+    .f1box { fill:#f7f7f7; stroke:#333; stroke-width:2; }
+  </style>
+  <text x="550" y="38" text-anchor="middle" class="f1head">Three Temporal Positions</text>
+  <line x1="160" y1="165" x2="940" y2="165" class="f1line"/>
+  <polygon points="940,165 915,153 915,177" fill="#444"/>
+  <rect x="70" y="90" width="260" height="120" rx="10" class="f1box"/>
+  <text x="200" y="125" text-anchor="middle" class="f1title">T0</text>
+  <text x="200" y="153" text-anchor="middle" class="f1text">2024–2025</text>
+  <text x="200" y="181" text-anchor="middle" class="f1small">formation + closure</text>
+  <rect x="420" y="90" width="260" height="120" rx="10" class="f1box"/>
+  <text x="550" y="125" text-anchor="middle" class="f1title">T1</text>
+  <text x="550" y="153" text-anchor="middle" class="f1text">12 Aug 2026</text>
+  <text x="550" y="181" text-anchor="middle" class="f1small">dated critical checkpoint</text>
+  <rect x="770" y="90" width="260" height="120" rx="10" class="f1box"/>
+  <text x="900" y="125" text-anchor="middle" class="f1title">T2</text>
+  <text x="900" y="153" text-anchor="middle" class="f1text">Future</text>
+  <text x="900" y="181" text-anchor="middle" class="f1small">independent audit</text>
+  <text x="550" y="265" text-anchor="middle" class="f1small">Later knowledge can evaluate earlier positions without becoming their co-author.</text>
+</svg>
