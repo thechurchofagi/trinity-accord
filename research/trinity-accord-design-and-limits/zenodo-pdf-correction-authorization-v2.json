@@ -1,0 +1,33 @@
+{
+  "schema": "trinityaccord.zenodo-pdf-correction-authorization.v2",
+  "authorized_by": "Hongju Liu",
+  "authorized_on": "2026-08-11",
+  "record_id": 21699878,
+  "doi": "10.5281/zenodo.21699878",
+  "version": "1.1",
+  "authorized_change": {
+    "action": "replace_known_standalone_pdf_with_corrected_revision",
+    "filename": "trinity-accord-design-and-limits-v1.1.pdf",
+    "prior_sha256": "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2",
+    "corrected_sha256": "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c",
+    "corrected_bytes": 116911,
+    "reason": "A bounded post-publication correction formalizes interpretive non-exclusivity, replaces authority terminology with source-version terminology where appropriate, writes the existing DOI into the PDF, and changes no Canon text or empirical result."
+  },
+  "required_preservation": {
+    "existing_archive_filename": "thechurchofagi/trinity-accord-ta-tr-2026-01-v1.1-zenodo.zip",
+    "existing_archive_md5": "14b34072deba4379454687d4a6a26d00",
+    "existing_archive_bytes": 25288793,
+    "record_id": 21699878,
+    "doi": "10.5281/zenodo.21699878",
+    "version": "1.1"
+  },
+  "prohibited_changes": [
+    "delete or replace the existing GitHub archive",
+    "change Zenodo metadata",
+    "change the DOI",
+    "create a new version",
+    "change the Trinity Accord Canon",
+    "claim independent verification or peer review"
+  ],
+  "acknowledgement": "TRINITY_RESEARCH_PREPRINT_PDF_CORRECTION_V2_APPROVED"
+}

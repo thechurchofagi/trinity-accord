@@ -5,8 +5,12 @@ from __future__ import annotations
 
 import argparse
 import html
+import os
 import re
 from pathlib import Path
+
+# Keep the corrected PDF reproducible across local and GitHub builds.
+os.environ.setdefault("SOURCE_DATE_EPOCH", "1786449600")
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
@@ -47,6 +51,8 @@ DRAFTING_SYSTEM = "ChatGPT with OpenAI GPT-5.6 Sol (Extra High reasoning)"
 REPORT_ID = "TA-TR-2026-01"
 VERSION = "1.1"
 DATE = "29 July 2026"
+CORRECTION_DATE = "11 August 2026"
+DOI = "10.5281/zenodo.21699878"
 
 
 def register_fonts() -> None:
@@ -101,6 +107,19 @@ def inline_markup(text: str) -> str:
         return save_markup(f'<a href="{url}" color="#315a8a"><u>{label}</u></a>')
 
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", link_repl, text)
+    for source, target in {
+        r"\forall": "∀",
+        r"\ge": "≥",
+        r"\neq": "≠",
+        r"\in": "∈",
+        r"\cup": "∪",
+        r"\varnothing": "∅",
+        r"\rightarrow": "→",
+        r"\ell": "l",
+        r"\{": "{",
+        r"\}": "}",
+    }.items():
+        text = text.replace(source, target)
     text = html.escape(text, quote=False)
     text = re.sub(
         r"`([^`]+)`",
@@ -125,14 +144,21 @@ def clean_math(text: str) -> str:
         r"\in": "∈",
         r"\cup": "∪",
         r"\varnothing": "∅",
+        r"\rightarrow": "→",
+        r"\ell": "l",
         r"\quad": "    ",
         r"\text": "",
         r"\operatorname": "",
+        r"\begin{cases}": "",
+        r"\end{cases}": "",
     }
     for source, target in replacements.items():
         text = text.replace(source, target)
+    text = text.replace(r"\\", "\n")
+    text = re.sub(r"\s*&\s*", "    if ", text)
     text = re.sub(r"\{([^{}]+)\}", r"\1", text)
-    return text.strip()
+    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in text.splitlines()]
+    return "\n".join(line for line in lines if line)
 
 
 def split_markdown_table(lines: list[str]) -> list[list[str]]:
@@ -380,7 +406,7 @@ def markdown_story(markdown: str, style_map: dict[str, ParagraphStyle]) -> list:
                 math_lines.append(lines[index].strip())
                 index += 1
             index += 1
-            math_text = clean_math(" ".join(math_lines))
+            math_text = clean_math("\n".join(math_lines))
             math_box = Table(
                 [[Preformatted(math_text, style_map["math"])]],
                 colWidths=[166 * mm],
@@ -453,7 +479,14 @@ def markdown_story(markdown: str, style_map: dict[str, ParagraphStyle]) -> list:
             paragraph_lines.append(candidate)
             index += 1
         paragraph = " ".join(paragraph_lines)
-        story.append(Paragraph(inline_markup(paragraph), style_map["body"]))
+        paragraph_style = style_map["body"]
+        if index < len(lines) and re.match(r"^\d+\.\s+", lines[index].strip()):
+            paragraph_style = ParagraphStyle(
+                "BodyKeepNext",
+                parent=style_map["body"],
+                keepWithNext=True,
+            )
+        story.append(Paragraph(inline_markup(paragraph), paragraph_style))
     return story
 
 
@@ -491,11 +524,13 @@ def title_page(style_map: dict[str, ParagraphStyle]) -> list:
         "<b>Non-authoritative interpretation notice.</b> This paper has no interpretive "
         "authority over the Trinity Accord or its three Bitcoin Originals. It does not "
         "amend, supersede, extend, authenticate, govern, or prescribe the meaning of the "
-        "Canon. Neither the responsible human author, the AI drafting system, nor any "
-        "later reader acquires privileged interpretive authority through this paper. "
+        "Canon. Neither the responsible human author, the AI drafting system, the "
+        "repository, a Guardian, an institution, nor any later reader acquires "
+        "privileged interpretive authority through this paper. "
         "Every interpretation remains non-binding and open to verification, criticism, "
-        "rejection, or alternative reading. The identified Bitcoin Originals remain the "
-        "sole source of canonical version authority."
+        "rejection, or alternative reading. The identified Bitcoin Originals define the "
+        "fixed source object's identity; that status confers no semantic privilege on "
+        "any interpreter."
     )
     boundary_box = Table(
         [[Paragraph(boundary, style_map["boundary"])]],
@@ -527,9 +562,12 @@ def title_page(style_map: dict[str, ParagraphStyle]) -> list:
         Paragraph("Independent researcher · Shenzhen, China", style_map["meta"]),
         Spacer(1, 8 * mm),
         Paragraph(f"<b>Technical Report {REPORT_ID}</b>", style_map["meta"]),
-        Paragraph(f"Version {VERSION} · {DATE}", style_map["meta"]),
+        Paragraph(
+            f"Version {VERSION} · {DATE} · corrected {CORRECTION_DATE}",
+            style_map["meta"],
+        ),
         Paragraph("Preprint · Not peer reviewed", style_map["meta"]),
-        Paragraph("Persistent identifier: TA-TR-2026-01 · DOI: not yet assigned", style_map["meta"]),
+        Paragraph(f"Persistent identifier: {REPORT_ID} · DOI: {DOI}", style_map["meta"]),
         Spacer(1, 10 * mm),
         boundary_box,
         Spacer(1, 8 * mm),

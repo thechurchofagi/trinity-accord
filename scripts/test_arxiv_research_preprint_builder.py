@@ -46,7 +46,7 @@ def main() -> int:
         "$t$",
         "$$",
         r"\forall t \ge t_0",
-        r"\operatorname{Authority}(x)",
+        r"\operatorname{VersionStatus}(x)",
         r"V = (d, r, p, w, s, \ell, n)",
         r"\begin{aligned}",
         r"&\rightarrow \text{search and agent retrieval}",
@@ -58,7 +58,7 @@ def main() -> int:
     valid_converted_math = "\n".join(
         [
             r"\forall t \ge t_0,\quad C_t = C_{t_0}",
-            r"\operatorname{Authority}(x) =",
+            r"\operatorname{VersionStatus}(x) =",
             r"\begin{cases}",
             r"\operatorname{Apply}(op, L_t) \rightarrow L_{t+1}",
             r"V = (d, r, p, w, s, \ell, n)",

@@ -1,13 +1,17 @@
-name: Repair Research Preprint Zenodo Files
+name: Correct Research Preprint Zenodo PDF
 
 on:
   push:
     branches: [main]
     paths:
       - .github/workflows/repair-research-preprint-zenodo-files.yml
-      - research/trinity-accord-design-and-limits/zenodo-file-repair-authorization-v1.json
+      - research/trinity-accord-design-and-limits/index.md
+      - research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
+      - research/trinity-accord-design-and-limits/zenodo-pdf-correction-authorization-v2.json
+      - scripts/build_research_preprint_pdf.py
       - scripts/repair_research_preprint_zenodo_files.py
       - scripts/test_research_preprint_zenodo_file_repair.py
+      - scripts/test_research_preprint_zenodo_file_repair_workflow.py
   workflow_dispatch:
 
 permissions:
@@ -25,10 +29,11 @@ jobs:
     env:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: https://zenodo.org/api
-      ZENODO_RESEARCH_FILE_REPAIR_ACK: TRINITY_RESEARCH_PREPRINT_FILE_REPAIR_V1_APPROVED
-      AUTHORIZATION_FILE: research/trinity-accord-design-and-limits/zenodo-file-repair-authorization-v1.json
+      ZENODO_RESEARCH_FILE_REPAIR_ACK: TRINITY_RESEARCH_PREPRINT_PDF_CORRECTION_V2_APPROVED
+      AUTHORIZATION_FILE: research/trinity-accord-design-and-limits/zenodo-pdf-correction-authorization-v2.json
       PDF_FILE: research/trinity-accord-design-and-limits/trinity-accord-design-and-limits-v1.1.pdf
-      PDF_SHA256: 2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2
+      PDF_SHA256: b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c
+      PRIOR_PDF_SHA256: 2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2
       RECORD_ID: "21699878"
 
     steps:
@@ -49,18 +54,20 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           python3 -m json.tool "$RUNNER_TEMP/toolchain-provenance.json" >/dev/null
 
-      - name: Verify bounded authorization and immutable PDF
+      - name: Verify bounded authorization and corrected PDF
         run: |
           set -euo pipefail
           test -n "$ZENODO_ACCESS_TOKEN"
           test "$(jq -r '.schema' "$AUTHORIZATION_FILE")" = \
-            "trinityaccord.zenodo-file-repair-authorization.v1"
+            "trinityaccord.zenodo-pdf-correction-authorization.v2"
           test "$(jq -r '.authorized_by' "$AUTHORIZATION_FILE")" = "Hongju Liu"
           test "$(jq -r '.record_id' "$AUTHORIZATION_FILE")" = "$RECORD_ID"
           test "$(jq -r '.doi' "$AUTHORIZATION_FILE")" = \
             "10.5281/zenodo.21699878"
-          test "$(jq -r '.authorized_change.sha256' "$AUTHORIZATION_FILE")" = \
+          test "$(jq -r '.authorized_change.corrected_sha256' "$AUTHORIZATION_FILE")" = \
             "$PDF_SHA256"
+          test "$(jq -r '.authorized_change.prior_sha256' "$AUTHORIZATION_FILE")" = \
+            "$PRIOR_PDF_SHA256"
           test "$(jq -r '.acknowledgement' "$AUTHORIZATION_FILE")" = \
             "$ZENODO_RESEARCH_FILE_REPAIR_ACK"
           printf '%s  %s\n' "$PDF_SHA256" "$PDF_FILE" | sha256sum -c -
@@ -70,20 +77,20 @@ jobs:
           set -euo pipefail
           python3 scripts/test_research_preprint_zenodo_file_repair.py
 
-      - name: Add and verify standalone PDF on the existing Zenodo record
+      - name: Correct and verify the standalone PDF on the existing Zenodo record
         run: |
           set -euo pipefail
           python3 scripts/repair_research_preprint_zenodo_files.py \
             --pdf "$PDF_FILE" \
-            > "$RUNNER_TEMP/zenodo-file-repair-receipt.json"
-          python3 -m json.tool "$RUNNER_TEMP/zenodo-file-repair-receipt.json"
-          test "$(jq -r '.record_id' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+            > "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json"
+          python3 -m json.tool "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json"
+          test "$(jq -r '.record_id' "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json")" = \
             "$RECORD_ID"
-          test "$(jq -r '.doi' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+          test "$(jq -r '.doi' "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json")" = \
             "10.5281/zenodo.21699878"
-          test "$(jq -r '.standalone_pdf.sha256' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+          test "$(jq -r '.standalone_pdf.sha256' "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json")" = \
             "$PDF_SHA256"
-          test "$(jq -r '.original_archive_preserved' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")" = \
+          test "$(jq -r '.original_archive_preserved' "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json")" = \
             "true"
 
       - name: Independently verify the public record and file bytes
@@ -108,14 +115,15 @@ jobs:
       - name: Summarize completion
         run: |
           set -euo pipefail
-          status="$(jq -r '.status' "$RUNNER_TEMP/zenodo-file-repair-receipt.json")"
+          status="$(jq -r '.status' "$RUNNER_TEMP/zenodo-pdf-correction-receipt.json")"
           {
-            echo "## Zenodo standalone PDF repair"
+            echo "## Zenodo standalone PDF correction"
             echo
             echo "- Status: \`$status\`"
             echo "- Record: https://zenodo.org/records/$RECORD_ID"
             echo "- DOI: https://doi.org/10.5281/zenodo.21699878"
             echo "- PDF SHA-256: \`$PDF_SHA256\`"
             echo "- Original GitHub archive: preserved and checksum-verified"
-            echo "- Metadata, DOI, version, and paper bytes: unchanged"
+            echo "- Record, DOI, version, metadata, and Canon: unchanged"
+            echo "- Standalone paper PDF: corrected and byte-verified"
           } >> "$GITHUB_STEP_SUMMARY"

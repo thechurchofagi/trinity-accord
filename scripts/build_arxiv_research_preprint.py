@@ -143,7 +143,7 @@ def normalize_gfm_math(markdown: str) -> str:
 def validate_converted_math(latex: str) -> None:
     required_markers = [
         r"\forall t \ge t_0,\quad C_t = C_{t_0}",
-        r"\operatorname{Authority}(x) =",
+        r"\operatorname{VersionStatus}(x) =",
         r"\begin{cases}",
         r"\operatorname{Apply}(op, L_t) \rightarrow L_{t+1}",
         r"V = (d, r, p, w, s, \ell, n)",
@@ -259,10 +259,12 @@ This paper is an analytical and descriptive research artifact. It has no
 interpretive authority over the Trinity Accord or its three Bitcoin Originals.
 It does not amend, supersede, extend, authenticate, govern, or prescribe the
 meaning of the Canon. Neither the responsible human author, the AI drafting
-system, nor any later reader acquires privileged interpretive authority through
-this paper. Every interpretation remains non-binding and open to verification,
-criticism, rejection, or alternative reading; the identified Bitcoin Originals
-remain the sole source of canonical version authority.
+system, the repository, a Guardian, an institution, nor any later reader
+acquires privileged interpretive authority through this paper. Every
+interpretation remains non-binding and open to verification, criticism,
+rejection, or alternative reading. The identified Bitcoin Originals define the
+fixed source object's identity; that provenance status confers no semantic
+privilege on any interpreter.
 \end{{minipage}}
 \vfill
 {{\small AI-drafted -- Human-directed and human-responsible --

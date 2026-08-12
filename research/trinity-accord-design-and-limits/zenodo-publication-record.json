@@ -6,6 +6,7 @@
   "title": "Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents: The Trinity Accord Case Study",
   "creator": "Liu, Hongju",
   "version": "1.1",
+  "corrected_on": "2026-08-11",
   "technical_report": "TA-TR-2026-01",
   "doi": "10.5281/zenodo.21699878",
   "doi_url": "https://doi.org/10.5281/zenodo.21699878",
@@ -13,8 +14,18 @@
   "zenodo_record_url": "https://zenodo.org/records/21699878",
   "github_release_tag": "ta-tr-2026-01-v1.1-zenodo",
   "github_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/ta-tr-2026-01-v1.1-zenodo",
-  "archived_pdf": "trinity-accord-design-and-limits-v1.1.pdf",
-  "archived_pdf_sha256": "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2",
+  "standalone_pdf": "trinity-accord-design-and-limits-v1.1.pdf",
+  "standalone_pdf_sha256": "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c",
+  "original_github_archive_pdf_sha256": "2facb19a2cfbd6d18573b7c1b18b52a7667cf0202e163c5d847ceb7a31cea4f2",
+  "correction": {
+    "scope": "interpretive non-exclusivity, source-version terminology, and DOI display",
+    "record_unchanged": true,
+    "version_unchanged": true,
+    "doi_unchanged": true,
+    "metadata_unchanged": true,
+    "canon_unchanged": true,
+    "empirical_results_unchanged": true
+  },
   "related_earlier_record": {
     "doi": "10.5281/zenodo.21675727",
     "relationship": "earlier project-level metadata record",
