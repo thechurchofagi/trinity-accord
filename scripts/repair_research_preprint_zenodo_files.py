@@ -161,12 +161,25 @@ def classify_pdf_entry(item: dict[str, Any]) -> str:
 
 
 def deletion_url(item: dict[str, Any], bucket: str) -> str:
-    links = item.get("links")
-    self_url = links.get("self") if isinstance(links, dict) else None
-    expected = bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME)
-    if self_url != expected:
-        raise SystemExit("Zenodo standalone PDF has an unexpected deletion URL")
-    return expected
+    """Return the authenticated draft-bucket endpoint for the exact prior PDF.
+
+    Zenodo file entries can expose a record-file ``links.self`` URL that is not
+    the writable bucket endpoint.  The deposition's validated ``links.bucket``
+    is the authoritative upload/delete endpoint, so construct the bounded
+    target from that bucket instead of requiring the two URL shapes to match.
+    """
+    if classify_pdf_entry(item) != "prior":
+        raise SystemExit("refusing to delete anything except the known prior standalone PDF")
+    parsed = urllib.parse.urlsplit(bucket)
+    if (
+        parsed.scheme != "https"
+        or not parsed.netloc
+        or not parsed.path.startswith("/api/files/")
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise SystemExit("Zenodo edit draft has an unexpected upload bucket URL")
+    return bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME)
 
 
 def validate_archive_preserved(record: dict[str, Any]) -> None:
