@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import urllib.parse
+import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -160,10 +161,22 @@ def classify_pdf_entry(item: dict[str, Any]) -> str:
     raise SystemExit(f"unexpected Zenodo standalone PDF identity: {observed}")
 
 
-def deletion_url(item: dict[str, Any], bucket: str) -> str:
+def deletion_url(item: dict[str, Any], api_base: str) -> str:
+    """Return only this deposition's canonical UUID-addressed file resource."""
     links = item.get("links")
-    self_url = links.get("self") if isinstance(links, dict) else None
-    expected = bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME)
+    self_url = str(links.get("self") or "") if isinstance(links, dict) else ""
+    file_id = str(item.get("id") or "")
+    try:
+        parsed_id = uuid.UUID(file_id)
+    except (ValueError, AttributeError) as exc:
+        raise SystemExit("Zenodo standalone PDF has an invalid file resource id") from exc
+    if str(parsed_id) != file_id.lower():
+        raise SystemExit("Zenodo standalone PDF has a non-canonical file resource id")
+    expected = (
+        api_base.rstrip("/")
+        + f"/deposit/depositions/{RECORD_ID}/files/"
+        + urllib.parse.quote(file_id, safe="")
+    )
     if self_url != expected:
         raise SystemExit("Zenodo standalone PDF has an unexpected deletion URL")
     return expected
@@ -266,26 +279,32 @@ def repair(
     validate_archive_preserved(current)
     current_files = files_by_name(current)
 
+    current_pdf_state = None
     if PDF_NAME in current_files:
-        pdf_state = classify_pdf_entry(current_files[PDF_NAME])
-        if pdf_state == "corrected":
+        current_pdf_state = classify_pdf_entry(current_files[PDF_NAME])
+        if current_pdf_state == "prior":
+            # Resolve and validate the one permitted deletion target before
+            # opening an edit or making any other remote mutation.
+            deletion_url(current_files[PDF_NAME], client.api_base)
+        if current_pdf_state == "corrected":
             verify_pdf_download(client, current_files[PDF_NAME], local)
             public = get_public_record(client)
             validate_archive_preserved(public)
             public_pdf = files_by_name(public).get(PDF_NAME)
-            if public_pdf is None or classify_pdf_entry(public_pdf) != "corrected":
-                raise SystemExit("Zenodo public record lacks the corrected standalone PDF")
-            verify_pdf_download(client, public_pdf, local)
-            return {
-                "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
-                "status": "already_corrected_verified",
-                "mutation_performed": False,
-                "record_id": RECORD_ID,
-                "doi": DOI,
-                "record_url": f"https://zenodo.org/records/{RECORD_ID}",
-                "standalone_pdf": local,
-                "original_archive_preserved": True,
-            }
+            if public_pdf is not None:
+                public_pdf_state = classify_pdf_entry(public_pdf)
+                if public_pdf_state == "corrected":
+                    verify_pdf_download(client, public_pdf, local)
+                    return {
+                        "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
+                        "status": "already_corrected_verified",
+                        "mutation_performed": False,
+                        "record_id": RECORD_ID,
+                        "doi": DOI,
+                        "record_url": f"https://zenodo.org/records/{RECORD_ID}",
+                        "standalone_pdf": local,
+                        "original_archive_preserved": True,
+                    }
 
     unexpected = set(current_files) - {ARCHIVE_NAME}
     if unexpected - {PDF_NAME}:
@@ -296,6 +315,7 @@ def repair(
     validate_repair_window(current, now or datetime.now(timezone.utc))
 
     state = str(current.get("state") or "").lower()
+    resuming_file_edit = state == "inprogress"
     if state == "done":
         current = as_object(
             client.request(
@@ -317,7 +337,10 @@ def repair(
 
     # A normal edit action unlocks metadata only. Zenodo requires its
     # dedicated, policy-checked action before published files can be changed.
-    unlock_published_files(client)
+    # An in-progress draft is the safe retry state left after that action was
+    # accepted, so do not submit a duplicate file-modification request.
+    if not resuming_file_edit:
+        unlock_published_files(client)
     current = get_deposition(client)
     validate_archive_preserved(current)
     links = current.get("links")
@@ -331,7 +354,7 @@ def repair(
         if pdf_state == "corrected":
             verify_pdf_download(client, remote_pdf, local)
         else:
-            client.delete(deletion_url(remote_pdf, bucket))
+            client.delete(deletion_url(remote_pdf, client.api_base))
 
     current = get_deposition(client)
     validate_archive_preserved(current)
