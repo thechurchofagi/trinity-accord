@@ -1,0 +1,51 @@
+name: Diagnose TA-TR-2026-02 staged source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-ta-tr-2026-02-source.yml
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Diagnose staged source
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, base64, lzma
+          root=Path('research/writing-before-the-outcome/publication-source')
+          ps=sorted(root.glob('extracted-v1.3.md.xz.b64.part*'))
+          vals=[]
+          for p in ps:
+              raw=p.read_text(encoding='utf-8')
+              s=''.join(raw.split())
+              vals.append(s)
+              print(p.name, 'raw',len(raw),'clean',len(s),'mod4',len(s)%4,'sha',hashlib.sha256(s.encode()).hexdigest(),'first',s[:16],'last',s[-16:])
+          all_s=''.join(vals)
+          print('total-clean',len(all_s),'mod4',len(all_s)%4,'sha',hashlib.sha256(all_s.encode()).hexdigest())
+          for i in range(len(vals)-1):
+              a,b=vals[i],vals[i+1]
+              best=0
+              maxk=min(len(a),len(b),15000)
+              for k in range(1,maxk+1):
+                  if a[-k:]==b[:k]: best=k
+              print('overlap',i,i+1,best)
+          # Test natural candidates made from whole parts and prefixes/suffixes around boundaries.
+          target='4c2974797639b0ac761468060f332b853716e45f855df29af551e1efbdda25ea'
+          def test(label,s):
+              try:
+                  b=base64.b64decode(s,validate=True)
+                  d=lzma.decompress(b)
+                  h=hashlib.sha256(d).hexdigest()
+                  print('candidate',label,'OK decode/decompress','chars',len(s),'hash',h,'TARGET',h==target)
+              except Exception as e:
+                  print('candidate',label,'FAIL',type(e).__name__,str(e)[:120])
+          test('all',all_s)
+          for n in (31792,31788,31796,31800):
+              if len(all_s)>=n: test('prefix-'+str(n),all_s[:n])
+          for i,v in enumerate(vals): test('part-'+str(i),v)
+          PY
