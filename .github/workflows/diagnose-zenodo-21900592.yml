@@ -1,0 +1,19 @@
+name: Diagnose reserved TA-TR-2026-02 Zenodo draft
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-zenodo-21900592.yml
+  workflow_dispatch:
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+    steps:
+      - name: Read safe draft fields
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          curl -fsS -H "Authorization: Bearer $ZENODO_ACCESS_TOKEN" https://zenodo.org/api/deposit/depositions/21900592 > /tmp/d.json
+          jq '{id,doi,submitted,state,title:.metadata.title,version:.metadata.version,prereserve_doi:.metadata.prereserve_doi,files_count:(.files|length),bucket:.links.bucket}' /tmp/d.json
