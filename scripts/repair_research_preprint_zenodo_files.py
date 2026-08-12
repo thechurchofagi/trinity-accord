@@ -160,15 +160,6 @@ def classify_pdf_entry(item: dict[str, Any]) -> str:
     raise SystemExit(f"unexpected Zenodo standalone PDF identity: {observed}")
 
 
-def deletion_url(item: dict[str, Any], bucket: str) -> str:
-    links = item.get("links")
-    self_url = links.get("self") if isinstance(links, dict) else None
-    expected = bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME)
-    if self_url != expected:
-        raise SystemExit("Zenodo standalone PDF has an unexpected deletion URL")
-    return expected
-
-
 def validate_archive_preserved(record: dict[str, Any]) -> None:
     remote = files_by_name(record)
     archive = remote.get(ARCHIVE_NAME)
@@ -266,26 +257,28 @@ def repair(
     validate_archive_preserved(current)
     current_files = files_by_name(current)
 
+    current_pdf_state = None
     if PDF_NAME in current_files:
-        pdf_state = classify_pdf_entry(current_files[PDF_NAME])
-        if pdf_state == "corrected":
+        current_pdf_state = classify_pdf_entry(current_files[PDF_NAME])
+        if current_pdf_state == "corrected":
             verify_pdf_download(client, current_files[PDF_NAME], local)
             public = get_public_record(client)
             validate_archive_preserved(public)
             public_pdf = files_by_name(public).get(PDF_NAME)
-            if public_pdf is None or classify_pdf_entry(public_pdf) != "corrected":
-                raise SystemExit("Zenodo public record lacks the corrected standalone PDF")
-            verify_pdf_download(client, public_pdf, local)
-            return {
-                "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
-                "status": "already_corrected_verified",
-                "mutation_performed": False,
-                "record_id": RECORD_ID,
-                "doi": DOI,
-                "record_url": f"https://zenodo.org/records/{RECORD_ID}",
-                "standalone_pdf": local,
-                "original_archive_preserved": True,
-            }
+            if public_pdf is not None:
+                public_pdf_state = classify_pdf_entry(public_pdf)
+                if public_pdf_state == "corrected":
+                    verify_pdf_download(client, public_pdf, local)
+                    return {
+                        "schema": "trinityaccord.zenodo-pdf-correction-receipt.v2",
+                        "status": "already_corrected_verified",
+                        "mutation_performed": False,
+                        "record_id": RECORD_ID,
+                        "doi": DOI,
+                        "record_url": f"https://zenodo.org/records/{RECORD_ID}",
+                        "standalone_pdf": local,
+                        "original_archive_preserved": True,
+                    }
 
     unexpected = set(current_files) - {ARCHIVE_NAME}
     if unexpected - {PDF_NAME}:
@@ -296,6 +289,7 @@ def repair(
     validate_repair_window(current, now or datetime.now(timezone.utc))
 
     state = str(current.get("state") or "").lower()
+    resuming_file_edit = state == "inprogress"
     if state == "done":
         current = as_object(
             client.request(
@@ -317,7 +311,10 @@ def repair(
 
     # A normal edit action unlocks metadata only. Zenodo requires its
     # dedicated, policy-checked action before published files can be changed.
-    unlock_published_files(client)
+    # An in-progress draft is the safe retry state left after that action was
+    # accepted, so do not submit a duplicate file-modification request.
+    if not resuming_file_edit:
+        unlock_published_files(client)
     current = get_deposition(client)
     validate_archive_preserved(current)
     links = current.get("links")
@@ -330,13 +327,10 @@ def repair(
         pdf_state = classify_pdf_entry(remote_pdf)
         if pdf_state == "corrected":
             verify_pdf_download(client, remote_pdf, local)
-        else:
-            client.delete(deletion_url(remote_pdf, bucket))
-
-    current = get_deposition(client)
-    validate_archive_preserved(current)
-    draft_files = files_by_name(current)
-    if PDF_NAME not in draft_files:
+    if remote_pdf is None or pdf_state == "prior":
+        # Zenodo's bucket is an object store: PUT to the existing key advances
+        # that file's head version. This avoids relying on the representation-
+        # specific `links.self` URL returned for a published file.
         client.request(
             "PUT",
             bucket.rstrip("/") + "/" + urllib.parse.quote(PDF_NAME),

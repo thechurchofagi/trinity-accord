@@ -18,17 +18,19 @@ import repair_research_preprint_zenodo_files as repairer
 
 
 class FakeClient:
-    def __init__(self, pdf: bytes, *, pdf_state: str = "missing") -> None:
+    def __init__(
+        self, pdf: bytes, *, pdf_state: str = "missing", state: str = "done"
+    ) -> None:
         self.api_base = "https://zenodo.example/api"
         self.pdf = pdf
         self.calls: list[tuple[str, str]] = []
-        self.bucket_unlocked = False
+        self.bucket_unlocked = state == "inprogress"
         self.record = {
             "id": repairer.RECORD_ID,
             "record_id": repairer.RECORD_ID,
             "doi": repairer.DOI,
             "created": "2026-07-30T08:08:17+00:00",
-            "state": "done",
+            "state": state,
             "submitted": True,
             "metadata": {
                 "title": repairer.TITLE,
@@ -76,8 +78,11 @@ class FakeClient:
         )
 
     def _add_corrected_pdf(self) -> None:
-        if any(repairer.file_name(item) == repairer.PDF_NAME for item in self.record["files"]):
-            return
+        self.record["files"] = [
+            item
+            for item in self.record["files"]
+            if repairer.file_name(item) != repairer.PDF_NAME
+        ]
         self.record["files"].append(
             {
                 "filename": repairer.PDF_NAME,
@@ -112,15 +117,6 @@ class FakeClient:
                 raise AssertionError("file-modification assurance drifted")
             self.bucket_unlocked = True
             return {"status": "accepted"}
-        if method == "DELETE" and url.endswith("/" + repairer.PDF_NAME):
-            if not self.bucket_unlocked:
-                raise AssertionError("published-file bucket was not unlocked")
-            self.record["files"] = [
-                item
-                for item in self.record["files"]
-                if repairer.file_name(item) != repairer.PDF_NAME
-            ]
-            return {}
         if method == "PUT" and url.endswith("/" + repairer.PDF_NAME):
             if not self.bucket_unlocked:
                 raise AssertionError("published-file bucket was not unlocked")
@@ -185,6 +181,12 @@ def main() -> int:
         )
 
         prior = FakeClient(raw, pdf_state="prior")
+        # A published file's representation-specific self link is not the
+        # draft bucket key and must not be used as a deletion precondition.
+        repairer.files_by_name(prior.record)[repairer.PDF_NAME]["links"]["self"] = (
+            "https://zenodo.example/api/deposit/depositions/"
+            f"{repairer.RECORD_ID}/files/server-generated-id"
+        )
         receipt = repairer.repair(
             prior,
             pdf_path,
@@ -194,7 +196,7 @@ def main() -> int:
         require(receipt["status"] == "corrected_published_verified", "correction status")
         require(receipt["mutation_performed"] is True, "correction mutation receipt")
         methods = [method for method, _ in prior.calls]
-        require(methods.count("DELETE") == 1, "correction must delete one known prior PDF")
+        require(methods.count("DELETE") == 0, "correction must not delete by a returned link")
         require(methods.count("PUT") == 1, "correction must upload one corrected PDF")
         require(
             (
@@ -219,6 +221,27 @@ def main() -> int:
             repairer.classify_pdf_entry(repairer.files_by_name(prior.record)[repairer.PDF_NAME])
             == "corrected",
             "correction did not leave the corrected PDF",
+        )
+
+        resumed = FakeClient(raw, pdf_state="prior", state="inprogress")
+        receipt = repairer.repair(
+            resumed,
+            pdf_path,
+            acknowledgement=repairer.ACKNOWLEDGEMENT,
+            now=datetime(2026, 8, 11, tzinfo=timezone.utc),
+        )
+        require(receipt["status"] == "corrected_published_verified", "resume status")
+        require(
+            not any(url.endswith("/actions/edit") for _, url in resumed.calls),
+            "resume repeated the edit action",
+        )
+        require(
+            not any(url.endswith("/file-modification") for _, url in resumed.calls),
+            "resume repeated the file-modification action",
+        )
+        require(
+            sum(method == "PUT" for method, _ in resumed.calls) == 1,
+            "resume did not replace the prior PDF",
         )
 
         missing = FakeClient(raw)
