@@ -1,0 +1,14 @@
+{
+  "schema": "trinityaccord.zenodo-reservation.v1",
+  "title": "Writing Before the Outcome: Historical Position, Human-AI Authorship, and the Trinity Accord",
+  "technical_report": "TA-TR-2026-02",
+  "version": "1.3",
+  "deposition_id": 21900592,
+  "record_id": 21900592,
+  "doi": "10.5281/zenodo.21900592",
+  "state": "unsubmitted",
+  "submitted": false,
+  "bucket_url": "https://zenodo.org/api/files/0efb302c-a66e-43a0-a567-f062c3d24e6b",
+  "reserved_at_workflow_sha": "cb31c2197b3f394ccb7ff5aa1900c0196d0944db",
+  "publication_status": "reserved_not_published"
+}
