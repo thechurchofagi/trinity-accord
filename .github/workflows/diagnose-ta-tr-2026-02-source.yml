@@ -19,33 +19,50 @@ jobs:
           import hashlib, base64, lzma
           root=Path('research/writing-before-the-outcome/publication-source')
           ps=sorted(root.glob('extracted-v1.3.md.xz.b64.part*'))
-          vals=[]
-          for p in ps:
-              raw=p.read_text(encoding='utf-8')
-              s=''.join(raw.split())
-              vals.append(s)
-              print(p.name, 'raw',len(raw),'clean',len(s),'mod4',len(s)%4,'sha',hashlib.sha256(s.encode()).hexdigest(),'first',s[:16],'last',s[-16:])
-          all_s=''.join(vals)
-          print('total-clean',len(all_s),'mod4',len(all_s)%4,'sha',hashlib.sha256(all_s.encode()).hexdigest())
-          for i in range(len(vals)-1):
-              a,b=vals[i],vals[i+1]
+          vals=[''.join(p.read_text(encoding='utf-8').split()) for p in ps]
+          for i,(p,s) in enumerate(zip(ps,vals)):
+              print(i,p.name,'len',len(s),'mod4',len(s)%4,'first',s[:16],'last',s[-16:])
+          a,b,c=vals
+          print('b-in-c',b in c,'b-pos-c',c.find(b),'suffix-equal',c.endswith(b))
+          print('c-in-b',c in b,'c-pos-b',b.find(c))
+          for x,y,label in ((a,b,'a-b'),(a,c,'a-c'),(b,c,'b-c')):
               best=0
-              maxk=min(len(a),len(b),15000)
-              for k in range(1,maxk+1):
-                  if a[-k:]==b[:k]: best=k
-              print('overlap',i,i+1,best)
-          # Test natural candidates made from whole parts and prefixes/suffixes around boundaries.
+              for k in range(1,min(len(x),len(y))+1):
+                  if x[-k:]==y[:k]: best=k
+              print('suffix-prefix-overlap',label,best)
+          # locate c's first 64 chars inside a and b; locate a's last 64 chars in c
+          for n in (16,32,64,128,256):
+              print('c-prefix',n,'in-a',a.find(c[:n]),'in-b',b.find(c[:n]))
+              print('a-suffix',n,'in-c',c.find(a[-n:]),'in-b',b.find(a[-n:]))
           target='4c2974797639b0ac761468060f332b853716e45f855df29af551e1efbdda25ea'
-          def test(label,s):
+          def check(label,s):
               try:
-                  b=base64.b64decode(s,validate=True)
-                  d=lzma.decompress(b)
+                  raw=base64.b64decode(s,validate=True)
+                  d=lzma.decompress(raw)
                   h=hashlib.sha256(d).hexdigest()
-                  print('candidate',label,'OK decode/decompress','chars',len(s),'hash',h,'TARGET',h==target)
+                  print('CHECK',label,'len',len(s),'hash',h,'TARGET',h==target)
+                  return h==target
               except Exception as e:
-                  print('candidate',label,'FAIL',type(e).__name__,str(e)[:120])
-          test('all',all_s)
-          for n in (31792,31788,31796,31800):
-              if len(all_s)>=n: test('prefix-'+str(n),all_s[:n])
-          for i,v in enumerate(vals): test('part-'+str(i),v)
+                  print('CHECK',label,'len',len(s),'FAIL',type(e).__name__,str(e)[:100])
+                  return False
+          # likely overlap merges
+          for k in range(0,min(len(a),len(c))+1):
+              if k and a[-k:]==c[:k]:
+                  check(f'a+c-overlap-{k}',a+c[k:])
+          # Search all splice points from a prefix + c suffix that produce 31792 chars.
+          # i chars from a + (31792-i) chars from end of c.
+          found=False
+          for i in range(4,len(a)+1,4):
+              need=31792-i
+              if 0 <= need <= len(c):
+                  s=a[:i]+c[-need:]
+                  try:
+                      raw=base64.b64decode(s,validate=True)
+                      d=lzma.decompress(raw)
+                  except Exception:
+                      continue
+                  h=hashlib.sha256(d).hexdigest()
+                  print('SPLICE-DECOMPRESSED','i',i,'c-suffix',need,'hash',h,'TARGET',h==target)
+                  if h==target: found=True; break
+          print('TARGET_SPLICE_FOUND',found)
           PY
