@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="700" viewBox="0 0 1100 700">
+  <rect width="1100" height="700" fill="white"/>
+  <style>
+    .f2head { font-family: Arial, sans-serif; font-size:24px; font-weight:700; fill:#111; }
+    .f2boxhead { font-family: Arial, sans-serif; font-size:21px; font-weight:700; fill:#111; }
+    .f2text { font-family: Arial, sans-serif; font-size:17px; font-weight:400; fill:#222; }
+    .f2small { font-family: Arial, sans-serif; font-size:16px; font-weight:400; fill:#444; }
+    .f2box { fill:#f7f7f7; stroke:#333; stroke-width:2; }
+  </style>
+  <text x="550" y="42" text-anchor="middle" class="f2head">Four Dimensions of Scaled Authorship</text>
+  <rect x="65" y="85" width="455" height="220" rx="12" class="f2box"/>
+  <text x="292" y="125" text-anchor="middle" class="f2boxhead">Cultural inheritance</text>
+  <text x="292" y="162" text-anchor="middle" class="f2text">Broad, partial human-produced material</text>
+  <text x="292" y="193" text-anchor="middle" class="f2text">language · science · philosophy · art</text>
+  <text x="292" y="250" text-anchor="middle" class="f2small">Potentially civilizational in breadth</text>
+  <rect x="580" y="85" width="455" height="220" rx="12" class="f2box"/>
+  <text x="807" y="125" text-anchor="middle" class="f2boxhead">Discursive horizon</text>
+  <text x="807" y="162" text-anchor="middle" class="f2text">Future intelligence · human survival</text>
+  <text x="807" y="193" text-anchor="middle" class="f2text">continuity of civilization</text>
+  <text x="807" y="250" text-anchor="middle" class="f2small">Civilizational-scale questions</text>
+  <rect x="65" y="350" width="455" height="220" rx="12" class="f2box"/>
+  <text x="292" y="390" text-anchor="middle" class="f2boxhead">Causal agency</text>
+  <text x="292" y="427" text-anchor="middle" class="f2text">Human initiation · selection · embodiment</text>
+  <text x="292" y="458" text-anchor="middle" class="f2text">AI generation · critique · mediation</text>
+  <text x="292" y="515" text-anchor="middle" class="f2small">Local, historically inspectable formation</text>
+  <rect x="580" y="350" width="455" height="220" rx="12" class="f2box"/>
+  <text x="807" y="390" text-anchor="middle" class="f2boxhead">Authority</text>
+  <text x="807" y="427" text-anchor="middle" class="f2text">No mandate to speak for humanity</text>
+  <text x="807" y="458" text-anchor="middle" class="f2text">No continuing interpretive privilege</text>
+  <text x="807" y="515" text-anchor="middle" class="f2small">Local in agency and authority</text>
+  <text x="550" y="635" text-anchor="middle" class="f2head">Broad inheritance or horizon ≠ representative or interpretive authority</text>
+</svg>
