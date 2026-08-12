@@ -60,8 +60,14 @@ class FakeClient:
 
     @staticmethod
     def _pdf_links() -> dict[str, str]:
+        # Real Zenodo record-file links need not equal the writable draft bucket
+        # endpoint.  Keep the two URL shapes intentionally different so this
+        # test exercises the production failure fixed in August 2026.
         return {
-            "self": "https://zenodo.example/api/files/bucket/" + repairer.PDF_NAME,
+            "self": (
+                "https://zenodo.example/api/records/"
+                f"{repairer.RECORD_ID}/files/{repairer.PDF_NAME}"
+            ),
             "download": "https://zenodo.example/pdf",
         }
 
@@ -112,7 +118,9 @@ class FakeClient:
                 raise AssertionError("file-modification assurance drifted")
             self.bucket_unlocked = True
             return {"status": "accepted"}
-        if method == "DELETE" and url.endswith("/" + repairer.PDF_NAME):
+        if method == "DELETE" and url == (
+            "https://zenodo.example/api/files/bucket/" + repairer.PDF_NAME
+        ):
             if not self.bucket_unlocked:
                 raise AssertionError("published-file bucket was not unlocked")
             self.record["files"] = [
@@ -198,6 +206,14 @@ def main() -> int:
         require(methods.count("PUT") == 1, "correction must upload one corrected PDF")
         require(
             (
+                "DELETE",
+                "https://zenodo.example/api/files/bucket/" + repairer.PDF_NAME,
+            )
+            in prior.calls,
+            "correction did not delete through the validated draft bucket",
+        )
+        require(
+            (
                 "POST",
                 "https://zenodo.example/api/records/"
                 f"{repairer.RECORD_ID}/file-modification",
@@ -219,6 +235,22 @@ def main() -> int:
             repairer.classify_pdf_entry(repairer.files_by_name(prior.record)[repairer.PDF_NAME])
             == "corrected",
             "correction did not leave the corrected PDF",
+        )
+
+        bad_bucket = FakeClient(raw, pdf_state="prior")
+        bad_bucket.record["links"]["bucket"] = "https://zenodo.example/api/records/not-a-bucket"
+        expect_failure(
+            lambda: repairer.repair(
+                bad_bucket,
+                pdf_path,
+                acknowledgement=repairer.ACKNOWLEDGEMENT,
+                now=datetime(2026, 8, 11, tzinfo=timezone.utc),
+            ),
+            "unexpected upload bucket URL",
+        )
+        require(
+            not any(method in {"DELETE", "PUT"} for method, _ in bad_bucket.calls),
+            "unexpected bucket mutated Zenodo files",
         )
 
         missing = FakeClient(raw)
