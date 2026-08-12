@@ -1,0 +1,315 @@
+name: Publish TA-TR-2026-02 v1.3 to Zenodo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-ta-tr-2026-02-v1.3-zenodo.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-ta-tr-2026-02-v1.3-zenodo
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'thechurchofagi/trinity-accord'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      DEPOSITION_ID: "21900592"
+      RECORD_ID: "21900592"
+      DOI: "10.5281/zenodo.21900592"
+      TITLE: "Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord"
+      VERSION: "1.3"
+      SRC_DIR: research/writing-before-the-outcome/publication-source
+      OUT_DIR: research/writing-before-the-outcome
+      EXTRACTED_SOURCE_SHA256: 4c2974797639b0ac761468060f332b853716e45f855df29af551e1efbdda25ea
+      FIG1_SHA256: 83aa95414973c59b822010c13b39fb0924f8d34f649e8a0de9f235c90584a22b
+      FIG2_SHA256: 211eda748340731de60eac7a53392f7275d5a06b95b7907a7dba6138efdf6cb1
+      CSS_SHA256: c77633f2b1746891254abc98ea21239c8229088ba2165d171fa1ea0e2a93f326
+      RELEASE_TAG: ta-tr-2026-02-v1.3
+
+    steps:
+      - name: Checkout publication source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify frozen v1.3 source
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          work="$RUNNER_TEMP/ta-tr-2026-02"
+          mkdir -p "$work"
+          cat "$SRC_DIR"/extracted-v1.3.md.xz.b64.part* > "$work/source.b64"
+          base64 -d "$work/source.b64" > "$work/source.xz"
+          xz -dc "$work/source.xz" > "$work/extracted.md"
+          printf '%s  %s\n' "$EXTRACTED_SOURCE_SHA256" "$work/extracted.md" | sha256sum -c -
+          printf '%s  %s\n' "$FIG1_SHA256" "$SRC_DIR/figures/figure1.svg" | sha256sum -c -
+          printf '%s  %s\n' "$FIG2_SHA256" "$SRC_DIR/figures/figure2.svg" | sha256sum -c -
+          printf '%s  %s\n' "$CSS_SHA256" "$SRC_DIR/paper.css" | sha256sum -c -
+          cp "$SRC_DIR/figures/figure1.svg" "$work/figure1.svg"
+          cp "$SRC_DIR/figures/figure2.svg" "$work/figure2.svg"
+          cp "$SRC_DIR/paper.css" "$work/paper.css"
+          cp research/trinity-accord-design-and-limits/LICENSE-CC-BY-4.0.txt "$work/LICENSE-CC-BY-4.0.txt"
+          python3 - "$work/extracted.md" "$work/paper-v1.3.md" <<'PY'
+          from pathlib import Path
+          import sys
+          p = Path(sys.argv[1]).read_text(encoding='utf-8')
+          p = p.replace('/mnt/data/v13_md/media/media/image1.png', 'figure1.svg')
+          p = p.replace('/mnt/data/v13_md/media/media/image2.png', 'figure2.svg')
+          Path(sys.argv[2]).write_text(p, encoding='utf-8')
+          PY
+          grep -F 'holds only the project role of Guardian' "$work/paper-v1.3.md"
+          grep -F 'evidentiary weight derives from contemporaneity' "$work/paper-v1.3.md"
+          grep -F 'Post-closure interpretations by the Guardian' "$work/paper-v1.3.md"
+          echo "WORK=$work" >> "$GITHUB_ENV"
+
+      - name: Install publication renderer
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc poppler-utils xz-utils fonts-noto-core fonts-noto-cjk
+          python3 -m pip install --disable-pip-version-check --quiet 'weasyprint==68.0'
+          pandoc --version | head -1
+          weasyprint --version
+
+      - name: Build and validate DOI PDF
+        run: |
+          set -euo pipefail
+          python3 - "$WORK/paper-v1.3.md" "$WORK/render.md" <<'PY'
+          from pathlib import Path
+          import sys
+          source = Path(sys.argv[1]).read_text(encoding='utf-8')
+          marker = '## Role and First-Person Evidence Boundary'
+          if source.count(marker) != 1:
+              raise SystemExit('role-boundary marker mismatch')
+          _, rest = source.split(marker, 1)
+          title = '''<div class="title-page">
+          <h1>Writing Before the Outcome</h1>
+          <div class="subtitle">Historical Position, Human–AI Authorship, and the Trinity Accord</div>
+          <div class="meta"><em>A dated critical archival study for present and future interpreters</em><br><br>
+          <strong>TA-TR-2026-02 · Version 1.3 · 12 August 2026</strong><br>
+          Author of record: Hongju Liu<br>
+          Analytical drafting and literature synthesis: GPT-5.6 Sol (OpenAI)<br><br>
+          Status: Preprint / critical archival case study<br>
+          Not part of the Trinity Accord Canon<br>
+          DOI: 10.5281/zenodo.21900592</div>
+          </div>'''
+          Path(sys.argv[2]).write_text(title + '\n\n' + marker + rest, encoding='utf-8')
+          PY
+          (
+            cd "$WORK"
+            pandoc render.md -s --css=paper.css --metadata lang=en \
+              --metadata pagetitle='Writing Before the Outcome' -o paper.html
+            weasyprint paper.html TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf
+          )
+          pdf="$WORK/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf"
+          pages="$(pdfinfo "$pdf" | awk '/^Pages:/ {print $2}')"
+          test "$pages" -ge 18 && test "$pages" -le 26
+          pdfinfo "$pdf" | grep -F 'Page size:' | grep -F 'A4'
+          pdftotext "$pdf" "$WORK/paper.txt"
+          grep -F 'Role and First-Person Evidence Boundary' "$WORK/paper.txt"
+          grep -F 'holds only the project role of Guardian' "$WORK/paper.txt"
+          grep -F 'The artifact is closed. Its historical class is not.' "$WORK/paper.txt"
+          grep -F 'Appendix B. Minimal Criteria for Future Comparative' "$WORK/paper.txt"
+          echo "PDF_SHA256=$(sha256sum "$pdf" | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "SOURCE_SHA256=$(sha256sum "$WORK/paper-v1.3.md" | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "PDF_PAGES=$pages" >> "$GITHUB_ENV"
+
+      - name: Prepare open deposit package
+        run: |
+          set -euo pipefail
+          cat > "$WORK/README-DEPOSIT.txt" <<EOF
+          Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord
+          Technical report: TA-TR-2026-02
+          Version: 1.3
+          Frozen date: 12 August 2026
+          Author of record: Hongju Liu
+          DOI: 10.5281/zenodo.21900592
+          Status: open-access preprint / critical archival case study; not part of the Trinity Accord Canon.
+
+          Role boundary: after inscription and confirmation of the three Bitcoin Originals, the project role is Guardian only. Former Initiator status confers no continuing interpretive privilege. Post-closure Guardian interpretation cannot amend, supersede, or bind the Bitcoin Originals.
+
+          DOCX-extracted source SHA-256: $EXTRACTED_SOURCE_SHA256
+          Portable publication Markdown SHA-256: $SOURCE_SHA256
+          Publication PDF SHA-256: $PDF_SHA256
+          Publication PDF pages: $PDF_PAGES (A4)
+          Rendering: Pandoc + WeasyPrint 68.0; vector figures.
+          License: CC BY 4.0. Peer review: none.
+          EOF
+          cp "$WORK/paper.css" "$WORK/paper-v1.3.css"
+          (
+            cd "$WORK"
+            sha256sum TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf \
+              paper-v1.3.md paper-v1.3.css figure1.svg figure2.svg \
+              README-DEPOSIT.txt LICENSE-CC-BY-4.0.txt > checksums.sha256
+          )
+
+      - name: Publish or recover Zenodo deposition
+        run: |
+          set -euo pipefail
+          auth="Authorization: Bearer $ZENODO_ACCESS_TOKEN"
+          dep="$ZENODO_API_BASE/deposit/depositions/$DEPOSITION_ID"
+          curl -fsS -H "$auth" "$dep" > "$WORK/deposition.json"
+          test "$(jq -r '.id' "$WORK/deposition.json")" = "$DEPOSITION_ID"
+          test "$(jq -r '.doi' "$WORK/deposition.json")" = "$DOI"
+          test "$(jq -r '.metadata.title' "$WORK/deposition.json")" = "$TITLE"
+          test "$(jq -r '.metadata.version' "$WORK/deposition.json")" = "$VERSION"
+          test "$(jq -r '.metadata.upload_type' "$WORK/deposition.json")" = publication
+          test "$(jq -r '.metadata.publication_type' "$WORK/deposition.json")" = preprint
+          test "$(jq -r '.metadata.publication_date' "$WORK/deposition.json")" = 2026-08-12
+          test "$(jq -r '.metadata.access_right' "$WORK/deposition.json")" = open
+          if [ "$(jq -r '.submitted' "$WORK/deposition.json")" = false ]; then
+            while IFS= read -r file_url; do
+              [ -z "$file_url" ] || curl -fsS -X DELETE -H "$auth" "$file_url" >/dev/null
+            done < <(jq -r '.files[]?.links.self // empty' "$WORK/deposition.json")
+            bucket="$(jq -r '.links.bucket' "$WORK/deposition.json")"
+            test -n "$bucket" && test "$bucket" != null
+            for f in TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf \
+              paper-v1.3.md paper-v1.3.css figure1.svg figure2.svg \
+              README-DEPOSIT.txt LICENSE-CC-BY-4.0.txt checksums.sha256; do
+              curl -fsS -X PUT -H "$auth" --upload-file "$WORK/$f" "$bucket/$f" >/dev/null
+            done
+            curl -fsS -X POST -H "$auth" "$dep/actions/publish" > "$WORK/publish.json"
+          else
+            echo 'Zenodo deposition already submitted; verifying public state.'
+          fi
+
+      - name: Verify public Zenodo record and bytes
+        run: |
+          set -euo pipefail
+          public="$ZENODO_API_BASE/records/$RECORD_ID"
+          ok=false
+          for _ in $(seq 1 18); do
+            if curl -fsS "$public" > "$WORK/public-record.json"; then ok=true; break; fi
+            sleep 10
+          done
+          test "$ok" = true
+          test "$(jq -r '.id' "$WORK/public-record.json")" = "$RECORD_ID"
+          test "$(jq -r '.doi' "$WORK/public-record.json")" = "$DOI"
+          test "$(jq -r '.metadata.title' "$WORK/public-record.json")" = "$TITLE"
+          test "$(jq -r '.metadata.version' "$WORK/public-record.json")" = "$VERSION"
+          pdf_name=TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf
+          pdf_url="$(jq -r --arg n "$pdf_name" '.files[] | select(.key == $n) | (.links.self // .links.content)' "$WORK/public-record.json")"
+          test -n "$pdf_url" && test "$pdf_url" != null
+          curl -fsSL "$pdf_url" -o "$WORK/public.pdf"
+          printf '%s  %s\n' "$PDF_SHA256" "$WORK/public.pdf" | sha256sum -c -
+          md_url="$(jq -r '.files[] | select(.key == "paper-v1.3.md") | (.links.self // .links.content)' "$WORK/public-record.json")"
+          test -n "$md_url" && test "$md_url" != null
+          curl -fsSL "$md_url" -o "$WORK/public.md"
+          printf '%s  %s\n' "$SOURCE_SHA256" "$WORK/public.md" | sha256sum -c -
+          python3 - "$WORK/public-record.json" "$WORK/zenodo-publication.json" "$PDF_SHA256" "$SOURCE_SHA256" <<'PY'
+          import json, sys
+          r=json.load(open(sys.argv[1], encoding='utf-8'))
+          out={
+            'schema':'trinityaccord.zenodo-publication.v1',
+            'technical_report':'TA-TR-2026-02','version':'1.3',
+            'record_id':r['id'],'doi':r['doi'],'title':r['metadata']['title'],
+            'publication_status':'published','publication_date':'2026-08-12',
+            'pdf_sha256':sys.argv[3],'portable_source_sha256':sys.argv[4],
+            'extracted_source_sha256':'4c2974797639b0ac761468060f332b853716e45f855df29af551e1efbdda25ea',
+            'public_record':r['links']['self'],'noncanonical':True,
+            'interpretive_authority':'none'
+          }
+          json.dump(out, open(sys.argv[2],'w',encoding='utf-8'), ensure_ascii=False, indent=2)
+          open(sys.argv[2],'a',encoding='utf-8').write('\n')
+          PY
+
+      - name: Preserve verified publication and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          mkdir -p "$OUT_DIR"
+          cp "$WORK/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf" "$OUT_DIR/"
+          cp "$WORK/paper-v1.3.md" "$OUT_DIR/paper-v1.3.md"
+          cp "$WORK/paper-v1.3.css" "$OUT_DIR/paper-v1.3.css"
+          cp "$WORK/figure1.svg" "$OUT_DIR/figure1.svg"
+          cp "$WORK/figure2.svg" "$OUT_DIR/figure2.svg"
+          cp "$WORK/README-DEPOSIT.txt" "$OUT_DIR/README-DEPOSIT.txt"
+          cp "$WORK/LICENSE-CC-BY-4.0.txt" "$OUT_DIR/LICENSE-CC-BY-4.0.txt"
+          cp "$WORK/checksums.sha256" "$OUT_DIR/checksums.sha256"
+          cp "$WORK/zenodo-publication.json" "$OUT_DIR/zenodo-publication.json"
+          python3 - "$OUT_DIR/zenodo-reservation.json" <<'PY'
+          import json, sys
+          p=sys.argv[1]; d=json.load(open(p, encoding='utf-8'))
+          d.update({'state':'done','submitted':True,'publication_status':'published','published_at':'2026-08-12'})
+          json.dump(d, open(p,'w',encoding='utf-8'), ensure_ascii=False, indent=2)
+          open(p,'a',encoding='utf-8').write('\n')
+          PY
+          rm -rf "$OUT_DIR/payload"
+          cat > "$OUT_DIR/citation.bib" <<'EOF'
+          @misc{liu2026writingbeforeoutcome,
+            author = {Liu, Hongju},
+            title = {Writing Before the Outcome: Historical Position, Human--AI Authorship, and the Trinity Accord},
+            year = {2026},
+            month = {8},
+            version = {1.3},
+            doi = {10.5281/zenodo.21900592},
+            note = {Technical Report TA-TR-2026-02; noncanonical preprint}
+          }
+          EOF
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            git add -A "$OUT_DIR"
+            if ! git diff --cached --quiet; then
+              git commit -m 'research: publish TA-TR-2026-02 v1.3 with Zenodo DOI'
+            fi
+            if git push origin HEAD:main; then break; fi
+            test "$attempt" -lt 3 || exit 1
+            sleep 5
+          done
+          final_sha="$(git rev-parse HEAD)"
+          cat > "$WORK/release-notes.md" <<EOF
+          # TA-TR-2026-02 · Version 1.3
+
+          **Writing Before the Outcome: Historical Position, Human–AI Authorship, and the Trinity Accord**
+
+          - DOI: 10.5281/zenodo.21900592
+          - Frozen date: 12 August 2026
+          - Author of record: Hongju Liu
+          - Status: noncanonical open-access preprint; not peer reviewed
+          - PDF SHA-256: $PDF_SHA256
+          - Portable source SHA-256: $SOURCE_SHA256
+
+          After confirmation of the three Bitcoin Originals the project role is Guardian only. Former Initiator status confers no continuing interpretive privilege; post-closure Guardian interpretation cannot amend, supersede, or bind the Canon.
+          EOF
+          assets=(
+            "$OUT_DIR/TA-TR-2026-02_Writing_Before_the_Outcome_v1.3.pdf"
+            "$OUT_DIR/paper-v1.3.md" "$OUT_DIR/paper-v1.3.css"
+            "$OUT_DIR/figure1.svg" "$OUT_DIR/figure2.svg"
+            "$OUT_DIR/checksums.sha256" "$OUT_DIR/README-DEPOSIT.txt"
+            "$OUT_DIR/LICENSE-CC-BY-4.0.txt"
+          )
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$RELEASE_TAG" "${assets[@]}" --target "$final_sha" \
+              --title 'TA-TR-2026-02 v1.3 — Writing Before the Outcome' \
+              --notes-file "$WORK/release-notes.md" --repo "$GITHUB_REPOSITORY"
+          fi
+          echo "FINAL_SHA=$final_sha" >> "$GITHUB_ENV"
+
+      - name: Publication summary
+        run: |
+          {
+            echo '## TA-TR-2026-02 v1.3 published and verified'
+            echo
+            echo '- DOI: https://doi.org/10.5281/zenodo.21900592'
+            echo '- Zenodo record: https://zenodo.org/records/21900592'
+            echo "- PDF pages: $PDF_PAGES (A4)"
+            echo "- PDF SHA-256: \`$PDF_SHA256\`"
+            echo "- Portable source SHA-256: \`$SOURCE_SHA256\`"
+            echo "- Repository publication commit: \`$FINAL_SHA\`"
+            echo '- Canon unchanged; the paper is noncanonical and carries no interpretive authority.'
+          } >> "$GITHUB_STEP_SUMMARY"
