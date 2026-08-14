@@ -87,7 +87,9 @@ p.write_text(text, encoding="utf-8")
 
 p = Path("tests/test_evidence_relationship_profiles.py")
 text = p.read_text(encoding="utf-8")
-text = require_replace(text, '{"canonical_originals": 3, "non_amending_ancillary": 5, "total": 8}', '{"pre_canonical_formation": 4, "canonical_originals": 3, "post_canonical_non_amending": 5, "total": 12}', "relationship proof scope")
+old_scope = '''    assert bitcoin_annex["scope"] == {\n        "canonical_originals": 3,\n        "non_amending_ancillary": 5,\n        "total": 8,\n    }\n'''
+new_scope = '''    assert bitcoin_annex["scope"] == {\n        "pre_canonical_formation": 4,\n        "canonical_originals": 3,\n        "post_canonical_non_amending": 5,\n        "total": 12,\n    }\n'''
+text = require_replace(text, old_scope, new_scope, "relationship proof scope")
 text = text.replace("evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json", "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json")
 text = text.replace("evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json", "evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json")
 text = text.replace("evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py", "evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py")
