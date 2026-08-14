@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 
@@ -9,6 +10,7 @@ AUTH = ROOT / "preservation/address-wide-repository-publication-authorization-v1
 MANIFEST = ROOT / "bitcoin-inscription-mirrors/address-wide/manifest.json"
 CLASSIFICATION = ROOT / "bitcoin-inscription-mirrors/address-wide/classification.json"
 WORKFLOW = ROOT / ".github/workflows/publish-address-wide-repository-preservation.yml"
+OBJECTS = ROOT / "bitcoin-inscription-mirrors/address-wide/objects"
 
 
 def load(path: Path) -> dict:
@@ -74,6 +76,17 @@ def test_address_archive_and_classification_are_complete_and_bounded() -> None:
     proto = next(record for record in records if record["role"] == "direct_proto_protocol")
     assert proto["canonical"] is False
     assert proto["ordinals_inscription_id"] == "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0"
+
+
+def test_decoded_content_sha256_sidecars_match_manifest_and_format() -> None:
+    manifest = load(MANIFEST)
+    by_id = {item["id"]: item for item in manifest["objects"]}
+    assert set(by_id) == set(manifest["ids"])
+    for inscription_id in manifest["ids"]:
+        sidecar = (OBJECTS / inscription_id / "CONTENT_SHA256").read_text(encoding="ascii").strip()
+        match = re.fullmatch(r"([0-9a-f]{64})  decoded-content", sidecar)
+        assert match is not None, inscription_id
+        assert match.group(1) == by_id[inscription_id]["content_sha256"], inscription_id
 
 
 def test_workflow_reuses_repository_preservation_primitives_without_paid_mirror_write() -> None:
