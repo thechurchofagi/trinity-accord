@@ -6,8 +6,8 @@
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
-    "current_verified_version_doi": "10.5281/zenodo.21859437",
-    "current_verified_source_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+    "current_verified_version_doi": "10.5281/zenodo.21930809",
+    "current_verified_source_git_commit_sha": "b6323fa054af74cf293dcac1e98886cab6e66899",
     "previous_verified_version_doi": "10.5281/zenodo.21855814",
     "restore_program_name": "restore-trinity-accord.py",
     "coverage_rule": "Each version restores the exact immutable Git-tracked publication baseline named in its manifest; no version claims byte equality with a later moving GitHub main.",
@@ -69,7 +69,10 @@
       "offline_report": "evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json",
       "verifier": "evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py",
       "published_repository_version_boundary": "The current verified v2 proof is Git-tracked after the currently named checkpoint DOI. Do not attribute v2 bytes to an older DOI; resolve the concept DOI after the next verified publication."
-    }
+    },
+    "current_verified_package_identity_sha256": "50556e33d34b21263e8e54442a26e3d1f258d1e256a00df8a99bf9d2479fc7d4",
+    "current_verified_record_id": 21930809,
+    "current_repository_arweave_publication_status": "deferred_by_owner"
   },
   "external_binary_annexes": {
     "evidence": {

@@ -1,0 +1,20 @@
+{
+  "schema": "trinityaccord.bitcoin12-doi-closure-observation.v1",
+  "status": "passed",
+  "source_git_commit_sha": "b6323fa054af74cf293dcac1e98886cab6e66899",
+  "git_tree_oid": "d263c22f27494ff09e3ffcb3833f963011be0fe9",
+  "capsule_id": "repository-b6323fa054af",
+  "package_identity_sha256": "50556e33d34b21263e8e54442a26e3d1f258d1e256a00df8a99bf9d2479fc7d4",
+  "repository_doi": "10.5281/zenodo.21930809",
+  "zenodo_record_id": 21930809,
+  "public_doi_only_cold_restore": "passed",
+  "arweave_publication_status": "deferred_by_owner",
+  "new_arweave_transaction_created": false,
+  "bitcoin_l1_l2_l3": "12/12 PASS",
+  "tag5_metadata_present": 1,
+  "tag5_metadata_absent_verified": 11,
+  "non_amending_boundary": true,
+  "three_bitcoin_originals_remain_canonical": true,
+  "future_arweave_must_preserve_this_capsule_identity": true,
+  "live_main_equivalence_claimed": false
+}

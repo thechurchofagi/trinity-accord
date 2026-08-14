@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.bitcoin12-external-closure-authorization.v1",
   "sequence": 1,
-  "status": "pending",
+  "status": "doi_published_arweave_deferred",
   "authorized_by": "thechurchofagi",
   "authorization_basis": "Repository owner explicitly instructed completion of the DOI preservation gap now while deferring any new Arweave upload.",
   "publication_scope": "doi_only_arweave_deferred",
@@ -27,5 +27,9 @@
   "non_amending_boundary": true,
   "three_bitcoin_originals_remain_canonical": true,
   "live_main_equivalence_claimed": false,
-  "future_material_versions_allowed": true
+  "future_material_versions_allowed": true,
+  "published_source_baseline_commit_sha": "b6323fa054af74cf293dcac1e98886cab6e66899",
+  "published_repository_doi": "10.5281/zenodo.21930809",
+  "published_repository_record_id": 21930809,
+  "published_package_identity_sha256": "50556e33d34b21263e8e54442a26e3d1f258d1e256a00df8a99bf9d2479fc7d4"
 }

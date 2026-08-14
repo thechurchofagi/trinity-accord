@@ -2,15 +2,15 @@
   "schema": "trinityaccord.repository-preservation-zenodo-state.v1",
   "publication_status": "published",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
-  "latest_capsule_id": "repository-484bdd7a8569",
-  "latest_git_commit_sha": "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e",
-  "latest_git_tree_oid": "47aa1f8b77f6f0c77237906b53929c08b665060f",
-  "latest_record_id": 21739344,
-  "latest_doi": "10.5281/zenodo.21739344",
-  "latest_doi_url": "https://doi.org/10.5281/zenodo.21739344",
-  "concept_record_id": 21739343,
+  "latest_capsule_id": "repository-b6323fa054af",
+  "latest_git_commit_sha": "b6323fa054af74cf293dcac1e98886cab6e66899",
+  "latest_git_tree_oid": "d263c22f27494ff09e3ffcb3833f963011be0fe9",
+  "latest_record_id": 21930809,
+  "latest_doi": "10.5281/zenodo.21930809",
+  "latest_doi_url": "https://doi.org/10.5281/zenodo.21930809",
+  "concept_record_id": "21739343",
   "concept_doi": "10.5281/zenodo.21739343",
-  "latest_package_identity_sha256": "b8d618e7873a7b69fc31b2aa9a0df1ed7be03839ebb55dd5a84977d58b660390",
+  "latest_package_identity_sha256": "50556e33d34b21263e8e54442a26e3d1f258d1e256a00df8a99bf9d2479fc7d4",
   "versions": [
     {
       "capsule_id": "repository-484bdd7a8569",
@@ -63,19 +63,61 @@
           "md5": "57fd4bafd74ebc699843d73b202cbfc4"
         }
       }
+    },
+    {
+      "capsule_id": "repository-b6323fa054af",
+      "deposition_id": 21930809,
+      "record_id": 21930809,
+      "doi": "10.5281/zenodo.21930809",
+      "doi_url": "https://doi.org/10.5281/zenodo.21930809",
+      "git_commit_sha": "b6323fa054af74cf293dcac1e98886cab6e66899",
+      "git_tree_oid": "d263c22f27494ff09e3ffcb3833f963011be0fe9",
+      "package_identity_sha256": "50556e33d34b21263e8e54442a26e3d1f258d1e256a00df8a99bf9d2479fc7d4",
+      "files": {
+        "trinity-accord-source.tar.gz": {
+          "bytes": 29797535,
+          "sha256": "774342ca6fd4774588fb00431594b1c6dfd34277555291d5aea443f80d7bd8ec",
+          "md5": "2db77aa856369b3fa7e4aff480ed5c6e"
+        },
+        "trinity-accord-recovery.bundle": {
+          "bytes": 21477930,
+          "sha256": "4196500809eca347f4340ead04ef7f3b8912fbe9e8cf5f6a3b812073a7c61ab2",
+          "md5": "6db591368f5b9c36d240afff4e59ed8e"
+        },
+        "tracked-files.json": {
+          "bytes": 1556223,
+          "sha256": "df56208e436c13015d323f00216828b0b153aeec44c018ed64f2181caa247191",
+          "md5": "53128dc5a323ba828478cf7805577e76"
+        },
+        "preservation-manifest.json": {
+          "bytes": 6977,
+          "sha256": "bc0ead108024b34fd37c5ce7832066d938b6469182ac07cdfd88b5fba3c7564d",
+          "md5": "bbda354d701b4e60091ae21228cb047a"
+        },
+        "checksums.sha256": {
+          "bytes": 533,
+          "sha256": "b3ae4ffc8767c5bad92177382a6fd7331345e39dad388dc475259381dd334837",
+          "md5": "c1b441ca7cd6325d40c0dad0c0b5b631"
+        },
+        "README.txt": {
+          "bytes": 1396,
+          "sha256": "42fb3f8c2f02f6e883fb88bb324f091ebcfcfb6257dff48d9354c374bb0bb9c7",
+          "md5": "ce0b32d3486d69d4d3c1ebd52de14f78"
+        },
+        "restore-trinity-accord.py": {
+          "bytes": 24011,
+          "sha256": "81e159e4a2ec62a4e2c6a5dc5d5677f55eb4134688bc7708c307d64f351c0558",
+          "md5": "b9c5955f7393f73a5b2d1b2ce63f1591"
+        },
+        "zenodo-metadata.json": {
+          "bytes": 1975,
+          "sha256": "d239d5a87aeb0c689b606d6e756796291d9ce7b9d83d7b8acd8f996f985ff54b",
+          "md5": "4c28548fda63bd73a8fbdd59347adfac"
+        }
+      }
     }
   ],
   "api_base": "https://zenodo.org/api",
   "github_required_for_repository_recovery": false,
-  "external_large_binary_annex_embedded": false,
-  "earlier_software_snapshot": {
-    "doi": "10.5281/zenodo.21675727",
-    "record_id": 21675727,
-    "scope": "older GitHub source ZIP only",
-    "limitations": [
-      "Does not contain full Git history.",
-      "Predates the protected Gateway and repository preservation capsule implementation.",
-      "Does not represent the current production repository state."
-    ]
-  }
+  "external_large_binary_annex_embedded": false
 }
