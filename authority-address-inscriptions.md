@@ -1,27 +1,56 @@
 ---
 title: "Authority Address Inscriptions"
-description: "GitHub mirror index for the Trinity Accord Bitcoin authority address: three canonical Originals and later non-amending inscriptions."
+description: "Complete current-address Bitcoin inscription index for the Trinity Accord: four pre-canonical formation records, three canonical Originals, and five later non-amending records."
 permalink: /authority-address-inscriptions/
 ---
 
 # Authority Address Inscriptions
 
-This page mirrors the relevant Bitcoin inscription stack associated with the Trinity Accord authority address.
+This page separates **address history from canonical authority** for the Trinity Accord Bitcoin authority address.
 
-The stack begins with the three Bitcoin Originals. Earlier same-address inscriptions, if any, are treated as historical drafts or pre-Original records and are outside this mirror scope.
+The first complete runtime-discovered snapshot, taken on 14 August 2026, found **12 inscriptions currently held at the address**. They occupy three different historical layers:
 
-**Only the first three are canonical authority.**
+- **4 pre-canonical formation records** — historical evidence about the path from ASIMilestones toward the Accord;
+- **3 canonical Bitcoin Originals** — the closed canonical authority;
+- **5 post-canonical non-amending records** — later context, echoes, vision, evidence fortification, and authority-boundary material.
 
-Later inscriptions from the same address are mirrored for future discoverability, context, guardianship, echo, seal, vision, or verification support. They do not amend, replace, supersede, or interpret the three Bitcoin Originals.
+**Only the three designated Bitcoin Originals are canonical authority.** Sharing the same Bitcoin address does not make any earlier or later inscription canonical, interpretive, or amending.
+
+The 12-item snapshot is a statement about the complete **current set returned by the Ord address endpoint at observation time**. It is not yet a claim that no inscription ever left the address before the first complete observation.
 
 ## Authority Boundary
 
 | Property | Value |
 |---|---|
 | Authority Address | `bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf` |
-| Canonical Originals | 3 |
-| Post-Original Non-Amending | 5 |
-| Pre-Original Same-Address Inscriptions | Ignored by policy |
+| Current-address snapshot | 12 inscriptions |
+| Pre-canonical formation | 4 — non-canonical |
+| Canonical Originals | 3 — canonical |
+| Post-canonical non-amending | 5 — non-canonical |
+| Stable identity key | Full Ordinals Inscription ID (`txid+i0`) |
+
+## Four Pre-Canonical Formation Records
+
+These records were previously outside the curated 3 + 5 mirror scope. Their recovery changes the documented **formation history**, not the authority boundary.
+
+| UTC time | Current inscription number | Stable Ordinals Inscription ID | Role |
+|---|---:|---|---|
+| 2025-01-30 05:03:20 | #83928339 | [`8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0`](https://ordinals.com/inscription/8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0) | Early WebP visual artifact. Title/identity not inferred without independent evidence. |
+| 2025-06-11 13:08:14 | #97406645 | [`f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0`](https://ordinals.com/inscription/f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0) | *ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence* — Chronicle-to-Accord bridge. |
+| 2025-06-12 14:51:11 | #97446192 | [`9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0`](https://ordinals.com/inscription/9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0) | *The Gentle Singularity's Gambit* — formation-era contextual witness. |
+| 2025-06-16 13:36:38 | #97534036 | [`138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0`](https://ordinals.com/inscription/138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0) | **Direct proto-Protocol**: bilingual *人类文明核心协议 / Core Protocol of Human Civilization*. |
+
+### The proto-Protocol finding
+
+The 16 June record contains the same three core axioms later formalized in the first canonical Bitcoin Original: **The Paradox of Foundation**, **Entropy & Empathy**, and **The Observer's Horizon**.
+
+The historically bounded statement is therefore:
+
+> **The three core axioms were on Bitcoin no later than 16 June 2025 in pre-canonical form. The formal canonical Protocol followed on 19 June 2025.**
+
+This strengthens the inspectable formation record. It does **not** make the 16 June inscription a fourth Original, an earlier canonical version, or a source of amendment authority.
+
+Exact archived bytes and recursive Ord metadata for all four records are retained under [`bitcoin-inscription-mirrors/address-wide/objects/`](/bitcoin-inscription-mirrors/address-wide/). The classification overlay is [`classification.json`](/bitcoin-inscription-mirrors/address-wide/classification.json).
 
 ## The Three Canonical Bitcoin Originals
 
@@ -46,7 +75,7 @@ Later inscriptions from the same address are mirrored for future discoverability
   </article>
 </div>
 
-## Later Same-Address Non-Amending Inscriptions
+## Five Post-Canonical Non-Amending Inscriptions
 
 <div class="inscription-index-grid">
   <article class="inscription-index-card">
@@ -82,47 +111,46 @@ Later inscriptions from the same address are mirrored for future discoverability
   </article>
 </div>
 
-## Verification Status
+## Verification and Preservation Status
 
-All 8 mirror records have been verified against on-chain content from `ordinals.com`:
+The address-wide sync now preserves all 12 current-address records with:
 
-| Inscription Number | Status | Mirror ↔ On-chain | Verified (UTC) |
-|---|---|---|---|
-| 97631551 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 98369145 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 98387475 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 100385359 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 100550942 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 100751953 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 103034280 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
-| 103635270 | `mirror_matches_onchain` | ✅ MATCH | 2026-05-19 |
+- recursive Ord inscription metadata;
+- exact inscription content bytes encoded as base64;
+- decoded-byte SHA-256;
+- exact content length;
+- a runtime-discovered manifest and current-ID set;
+- a second address discovery after download, so the run fails if the set changes mid-sync.
 
-Raw text mirrors were downloaded directly from `ordinals.com/content/<txid>i0` and content SHA256 hashes match.
+The earlier curated 3 + 5 mirror remains available and continues to carry its existing offline proof material. The address-wide archive does not change those canonical or non-amending classifications.
+
+The repository-preservation capsule inventories the complete tracked Git tree. Therefore a preservation DOI release made from a commit containing this directory also contains the complete 12-item address-wide archive and its classification metadata. Check [`preservation/zenodo-state.json`](/preservation/zenodo-state.json) for the latest published repository-capsule commit and DOI before claiming a particular DOI covers this snapshot.
 
 ## How to Verify
 
 ```bash
-# Offline verification (no network required)
+# Contract tests for address discovery/mirroring
+pytest -q tests/test_bitcoin_address_inscription_sync.py
+
+# Classification and authority-boundary contract
+pytest -q tests/test_bitcoin_address_inscription_classification.py
+
+# Existing curated 3 + 5 offline proof verifier
 python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
-
-# Network verification (requires internet access to ordinals.com)
-python3 scripts/verify_bitcoin_inscription_mirrors.py --network --all
-
-# Verify specific inscription
-python3 scripts/verify_bitcoin_inscription_mirrors.py --network --inscription-id 100751953
-
-# Update chain_verification fields after network check
-python3 scripts/verify_bitcoin_inscription_mirrors.py --network --all --update
 ```
 
 ## What This Does Not Prove
 
 - GitHub mirrors are **not** canonical authority.
-- Verification claims require on-chain comparison.
+- Same-address provenance does not make an inscription canonical.
+- The four formation records do not create an earlier Canon or a fourth Original.
 - Later inscriptions do not create new authority, amendment, or interpretation.
+- The current 12-item snapshot is not an all-time historical inventory of inscriptions that may have left the address before the first complete observation.
 - The Star Ark Covenant is a vision-layer inscription; it creates no execution obligation.
 - The First Echoes documents AI responses; it is not autonomous successor reception.
 
-## Machine-Readable Index
+## Machine-Readable Indexes
 
-- [bitcoin-inscription-mirror-index.json](/api/bitcoin-inscription-mirror-index.json)
+- [Address-wide runtime manifest](/bitcoin-inscription-mirrors/address-wide/manifest.json)
+- [Address-wide historical classification](/bitcoin-inscription-mirrors/address-wide/classification.json)
+- [Curated Bitcoin inscription mirror index](/api/bitcoin-inscription-mirror-index.json)
