@@ -156,7 +156,7 @@ jobs:
                   raise SystemExit(f'content sha256 mismatch: {inscription_id}')
               if (obj_dir / 'CONTENT_LENGTH').read_text().strip() != str(len(raw)):
                   raise SystemExit(f'CONTENT_LENGTH mismatch: {inscription_id}')
-              if (obj_dir / 'CONTENT_SHA256').read_text().strip() != digest:
+              if (obj_dir / 'CONTENT_SHA256').read_text().strip() != f'{digest}  decoded-content':
                   raise SystemExit(f'CONTENT_SHA256 mismatch: {inscription_id}')
           proto = next(item for item in classification['records'] if item.get('role') == 'direct_proto_protocol')
           if proto.get('canonical') is not False:
