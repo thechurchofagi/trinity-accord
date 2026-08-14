@@ -33,6 +33,22 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Restore cumulative objects from prior snapshot branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"; then
+            if git cat-file -e "refs/remotes/origin/$SYNC_BRANCH:$ARCHIVE_DIR" 2>/dev/null; then
+              git restore --source="refs/remotes/origin/$SYNC_BRANCH" --worktree -- "$ARCHIVE_DIR"
+              echo "Restored prior address-wide snapshot objects before current discovery."
+            fi
+          else
+            echo "No prior snapshot branch exists yet."
+          fi
+
       - name: Sync complete stable address snapshot
         run: python3 scripts/sync_bitcoin_address_inscriptions.py
 
@@ -63,7 +79,7 @@ jobs:
           git diff --cached --check
           git commit -m "archive: sync all Bitcoin authority-address inscriptions"
 
-          # Fetch the previous automation branch, if any, so force-with-lease is safe.
+          # Refresh the lease immediately before publishing the automation branch.
           git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH" || true
           git push --force-with-lease origin "HEAD:refs/heads/$SYNC_BRANCH"
 
@@ -88,4 +104,4 @@ jobs:
             --head "$SYNC_BRANCH" \
             --draft \
             --title "archive: sync all Bitcoin authority-address inscriptions" \
-            --body "Automated address-wide Ordinals snapshot. The inscription set is discovered from the authority address at runtime with no fixed expected count. Exact content bytes, metadata, lengths, and SHA-256 hashes are mirrored under bitcoin-inscription-mirrors/address-wide/. The three Bitcoin Originals remain the only canonical body; same-address archival records do not amend or interpret them."
+            --body "Automated address-wide Ordinals snapshot. The inscription set is discovered from the authority address at runtime with no fixed expected count. Exact content bytes, metadata, lengths, and SHA-256 hashes are mirrored under bitcoin-inscription-mirrors/address-wide/. Historical objects are cumulative. The three Bitcoin Originals remain the only canonical body; same-address archival records do not amend or interpret them."
