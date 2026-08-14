@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 """Mirror every inscription currently held by the Trinity Bitcoin address.
 
-This is an archival mirror only. It never changes the authority boundary: the
-three Bitcoin Originals remain the canonical body.
+This archive preserves, independently:
+1. exact inscription content bytes from /content/<INSCRIPTION_ID>;
+2. exact tag-5 CBOR metadata bytes from /r/metadata/<INSCRIPTION_ID>, when present.
 
-Each inscription is archived as two independent Ordinals payload classes when
-present:
-1. content bytes returned by /content/<INSCRIPTION_ID>;
-2. CBOR metadata bytes returned by /r/metadata/<INSCRIPTION_ID>.
+The /r/inscription/<ID> JSON is descriptive index data. It is preserved too, but
+it is not the same object as the inscription's CBOR metadata field.
 
-The recursive inscription-information JSON from /r/inscription/<ID> is also
-preserved, but it is descriptive index data rather than the inscription's CBOR
-metadata field.
+This is archival only. The three Bitcoin Originals remain the canonical body.
 """
 from __future__ import annotations
 
@@ -33,7 +30,7 @@ DEFAULT_BASE_URL = "https://ordinals.com"
 DEFAULT_OUTPUT = Path("bitcoin-inscription-mirrors/address-wide")
 ID_RE = re.compile(r"^[0-9a-f]{64}i(?:0|[1-9][0-9]*)$")
 HEX_RE = re.compile(r"^(?:[0-9a-fA-F]{2})*$")
-USER_AGENT = "trinity-accord-address-inscription-sync/1.2"
+USER_AGENT = "trinity-accord-address-inscription-sync/1.3"
 
 
 class _Break:
@@ -44,11 +41,7 @@ BREAK = _Break()
 
 
 class CborReader:
-    """Small deterministic CBOR decoder for human-readable archive derivatives.
-
-    The raw CBOR bytes are always preserved and hashed independently. Decoding
-    is only a convenience derivative and is not the authority source.
-    """
+    """Minimal deterministic CBOR decoder for non-authoritative readable derivatives."""
 
     def __init__(self, data: bytes):
         self.data = data
@@ -81,8 +74,30 @@ class CborReader:
         major = initial >> 5
         additional = initial & 0x1F
 
-        if major == 7 and additional == 31:
-            return BREAK
+        # Major type 7 uses the additional-information bytes as the value itself,
+        # so handle it before the generic length/integer argument decoder.
+        if major == 7:
+            if additional < 20:
+                return {"$cbor_simple": additional}
+            if additional == 20:
+                return False
+            if additional == 21:
+                return True
+            if additional == 22:
+                return None
+            if additional == 23:
+                return {"$cbor_undefined": True}
+            if additional == 24:
+                return {"$cbor_simple": self.read(1)[0]}
+            if additional == 25:
+                return struct.unpack(">e", self.read(2))[0]
+            if additional == 26:
+                return struct.unpack(">f", self.read(4))[0]
+            if additional == 27:
+                return struct.unpack(">d", self.read(8))[0]
+            if additional == 31:
+                return BREAK
+            raise ValueError("reserved CBOR simple/float value")
 
         arg = self.argument(additional)
 
@@ -112,24 +127,22 @@ class CborReader:
                 raw = b"".join(chunks)
             else:
                 raw = self.read(arg)
-            if major == 2:
-                return raw
-            return raw.decode("utf-8")
+            return raw if major == 2 else raw.decode("utf-8")
         if major == 4:
-            items: list[Any] = []
+            values: list[Any] = []
             if arg is None:
                 while True:
                     value = self.item()
                     if value is BREAK:
                         break
-                    items.append(value)
+                    values.append(value)
             else:
                 for _ in range(arg):
                     value = self.item()
                     if value is BREAK:
                         raise ValueError("unexpected CBOR break in definite array")
-                    items.append(value)
-            return items
+                    values.append(value)
+            return values
         if major == 5:
             pairs: list[tuple[Any, Any]] = []
             if arg is None:
@@ -163,27 +176,6 @@ class CborReader:
             if value is BREAK:
                 raise ValueError("unexpected CBOR break after tag")
             return {"$cbor_tag": arg, "value": value}
-        if major == 7:
-            if additional < 20:
-                return {"$cbor_simple": additional}
-            if additional == 20:
-                return False
-            if additional == 21:
-                return True
-            if additional == 22:
-                return None
-            if additional == 23:
-                return {"$cbor_undefined": True}
-            if additional == 24:
-                assert arg is not None
-                return {"$cbor_simple": arg}
-            if additional == 25:
-                return struct.unpack(">e", self.read(2))[0]
-            if additional == 26:
-                return struct.unpack(">f", self.read(4))[0]
-            if additional == 27:
-                return struct.unpack(">d", self.read(8))[0]
-            raise ValueError("unsupported CBOR simple value")
         raise ValueError("unsupported CBOR major type")
 
 
@@ -216,26 +208,49 @@ def decode_cbor(data: bytes) -> Any:
     return json_compatible(value)
 
 
-def fetch_bytes(url: str, *, accept: str | None = None, attempts: int = 4) -> bytes:
+def fetch_bytes(
+    url: str,
+    *,
+    accept: str | None = None,
+    attempts: int = 4,
+    absent_statuses: frozenset[int] = frozenset(),
+) -> bytes | None:
+    """Fetch bytes with fail-closed retry semantics.
+
+    Explicitly allowed absent HTTP statuses (currently used only for optional
+    inscription metadata) return None immediately. Other 4xx responses fail
+    immediately; transient transport errors and 5xx responses are retried.
+    """
     headers = {"User-Agent": USER_AGENT}
     if accept:
         headers["Accept"] = accept
+
     last: Exception | None = None
     for attempt in range(1, attempts + 1):
         try:
             req = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(req, timeout=45) as response:
                 return response.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code in absent_statuses:
+                return None
+            last = exc
+            if 400 <= exc.code < 500:
+                break
         except (urllib.error.URLError, TimeoutError) as exc:
             last = exc
-            if attempt == attempts:
-                break
-            time.sleep(attempt * 2)
+
+        if attempt == attempts:
+            break
+        time.sleep(attempt * 2)
+
     raise RuntimeError(f"failed to fetch {url}: {last}")
 
 
 def fetch_json(url: str, *, negotiate: bool = True) -> dict:
     raw = fetch_bytes(url, accept="application/json" if negotiate else None)
+    if raw is None:
+        raise RuntimeError(f"unexpected absent response from {url}")
     value = json.loads(raw)
     if not isinstance(value, dict):
         raise RuntimeError(f"expected JSON object from {url}")
@@ -243,9 +258,12 @@ def fetch_json(url: str, *, negotiate: bool = True) -> dict:
 
 
 def fetch_inscription_metadata_cbor(base_url: str, inscription_id: str) -> bytes:
-    """Fetch exact inscription CBOR metadata bytes from ord's recursive endpoint."""
+    """Fetch exact tag-5 CBOR bytes; 404 means this inscription has no metadata."""
     url = f"{base_url.rstrip('/')}/r/metadata/{inscription_id}"
-    raw = fetch_bytes(url)
+    raw = fetch_bytes(url, absent_statuses=frozenset({404}))
+    if raw is None:
+        return b""
+
     value = json.loads(raw)
     if value is None or value == "":
         return b""
@@ -270,7 +288,6 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     obj_dir = root / "objects" / inscription_id
     obj_dir.mkdir(parents=True, exist_ok=True)
 
-    # /r/inscription is descriptive recursive index data.
     info = fetch_json(
         f"{base_url.rstrip('/')}/r/inscription/{inscription_id}", negotiate=False
     )
@@ -279,14 +296,16 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     if info.get("address") != address:
         raise RuntimeError(f"inscription info address mismatch for {inscription_id}")
 
-    # The inscription body and CBOR metadata are distinct on-chain payloads.
     content = fetch_bytes(f"{base_url.rstrip('/')}/content/{inscription_id}")
+    if content is None:
+        raise RuntimeError(f"unexpected absent content for {inscription_id}")
     metadata_cbor = fetch_inscription_metadata_cbor(base_url, inscription_id)
 
     declared = info.get("content_length")
     if declared is not None and int(declared) != len(content):
         raise RuntimeError(
-            f"content length mismatch for {inscription_id}: declared={declared} actual={len(content)}"
+            f"content length mismatch for {inscription_id}: "
+            f"declared={declared} actual={len(content)}"
         )
 
     content_sha256 = hashlib.sha256(content).hexdigest()
@@ -304,7 +323,6 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     )
     (obj_dir / "CONTENT_LENGTH").write_text(f"{len(content)}\n", encoding="ascii")
 
-    # Preserve exact CBOR metadata bytes even when the content is a binary image.
     (obj_dir / "inscription-metadata.cbor.b64").write_text(
         base64.b64encode(metadata_cbor).decode("ascii") + "\n", encoding="ascii"
     )
@@ -335,18 +353,24 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
         encoding="utf-8",
     )
 
-    encoded = (obj_dir / "content.b64").read_text(encoding="ascii").strip()
-    decoded = base64.b64decode(encoded, validate=True)
-    if decoded != content or hashlib.sha256(decoded).hexdigest() != content_sha256:
+    decoded_content = base64.b64decode(
+        (obj_dir / "content.b64").read_text(encoding="ascii").strip(), validate=True
+    )
+    if (
+        decoded_content != content
+        or hashlib.sha256(decoded_content).hexdigest() != content_sha256
+    ):
         raise RuntimeError(f"local content round-trip verification failed for {inscription_id}")
 
-    metadata_encoded = (
-        obj_dir / "inscription-metadata.cbor.b64"
-    ).read_text(encoding="ascii").strip()
-    metadata_decoded = base64.b64decode(metadata_encoded, validate=True)
+    decoded_metadata_cbor = base64.b64decode(
+        (obj_dir / "inscription-metadata.cbor.b64")
+        .read_text(encoding="ascii")
+        .strip(),
+        validate=True,
+    )
     if (
-        metadata_decoded != metadata_cbor
-        or hashlib.sha256(metadata_decoded).hexdigest() != metadata_sha256
+        decoded_metadata_cbor != metadata_cbor
+        or hashlib.sha256(decoded_metadata_cbor).hexdigest() != metadata_sha256
     ):
         raise RuntimeError(
             f"local inscription metadata round-trip verification failed for {inscription_id}"
@@ -378,7 +402,9 @@ def build_manifest(address: str, current_ids: list[str], objects: list[dict]) ->
             "objects_are_cumulative": True,
             "content_encoding": "base64 of exact inscription body bytes",
             "content_hash": "sha256 of decoded exact inscription body bytes",
-            "inscription_metadata_encoding": "base64 and hex of exact tag-5 CBOR metadata bytes",
+            "inscription_metadata_encoding": (
+                "base64 and hex of exact tag-5 CBOR metadata bytes"
+            ),
             "inscription_metadata_hash": "sha256 of decoded exact CBOR metadata bytes",
             "decoded_metadata_is_derivative": True,
         },
@@ -396,11 +422,10 @@ def sync(base_url: str, address: str, output: Path) -> dict:
     output.mkdir(parents=True, exist_ok=True)
 
     objects: list[dict] = []
-    for index, item in enumerate(start_ids, start=1):
-        print(f"[{index}/{len(start_ids)}] mirroring {item}", flush=True)
-        objects.append(write_object(base_url, address, item, output))
+    for index, inscription_id in enumerate(start_ids, start=1):
+        print(f"[{index}/{len(start_ids)}] mirroring {inscription_id}", flush=True)
+        objects.append(write_object(base_url, address, inscription_id, output))
 
-    # Fail closed if ownership changed during collection; never publish a mixed snapshot.
     end_ids = discover_ids(base_url, address)
     if start_ids != end_ids:
         raise RuntimeError("address inscription set changed during synchronization")
@@ -417,11 +442,16 @@ def sync(base_url: str, address: str, output: Path) -> dict:
         "# Address-wide Bitcoin inscription mirror\n\n"
         f"Authority address: `{address}`.\n\n"
         "The current set is discovered at runtime; no inscription count is hard-coded. "
-        "Objects are cumulative, so previously observed inscriptions remain preserved if they later leave the address.\n\n"
-        "For every inscription, the archive preserves the inscription body returned by `/content/<ID>` and the "
-        "independent tag-5 CBOR metadata returned by `/r/metadata/<ID>`. A human-readable decoded metadata JSON is "
-        "stored only as a derivative; the exact CBOR bytes and SHA-256 remain the source preserved for verification.\n\n"
-        "This is an archival/discovery mirror only. The three Bitcoin Originals remain the canonical body.\n",
+        "Objects are cumulative, so previously observed inscriptions remain preserved "
+        "if they later leave the address.\n\n"
+        "For every inscription, the archive preserves the inscription body returned by "
+        "`/content/<ID>` and the independent tag-5 CBOR metadata returned by "
+        "`/r/metadata/<ID>` when present. HTTP 404 from that optional metadata endpoint "
+        "is recorded as absence, not as a synchronization failure. A human-readable "
+        "decoded metadata JSON is only a derivative; the exact CBOR bytes and SHA-256 "
+        "remain the preserved verification source.\n\n"
+        "This is an archival/discovery mirror only. The three Bitcoin Originals remain "
+        "the canonical body.\n",
         encoding="utf-8",
     )
     return manifest
