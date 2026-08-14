@@ -12,6 +12,7 @@ CANONICAL_IDS = {
 }
 PROTO_PROTOCOL_ID = "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0"
 EARLY_VISUAL_ID = "8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0"
+EARLY_VISUAL_TITLE = "ASIMilestones:Permanently engraved the moment of the open-source release of DeepSeek-R1"
 
 
 def load_json(name):
@@ -60,12 +61,26 @@ def test_proto_protocol_is_formation_evidence_not_canon():
     assert classification["historical_claims"]["formal_canonical_protocol_timestamp_utc"] == "2025-06-19T23:42:14Z"
 
 
-def test_unidentified_visual_record_remains_unidentified():
+def test_early_visual_record_identity_is_grounded_in_tag5_metadata():
     classification = load_json("classification.json")
     record = next(
         item for item in classification["records"]
         if item["ordinals_inscription_id"] == EARLY_VISUAL_ID
     )
 
-    assert record["title"] is None
-    assert record["title_status"] == "unidentified_do_not_infer"
+    assert record["title"] == EARLY_VISUAL_TITLE
+    assert record["title_status"] == "identified_from_onchain_tag5_cbor_metadata"
+    assert record["canonical"] is False
+    assert record["amends_canon"] is False
+
+    decoded = json.loads(
+        (
+            ARCHIVE
+            / "objects"
+            / EARLY_VISUAL_ID
+            / "inscription-metadata.decoded.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert decoded["present"] is True
+    assert decoded["source"] == "ord inscription field tag 5 (CBOR metadata)"
+    assert EARLY_VISUAL_TITLE in decoded["decoded"]

@@ -82,15 +82,15 @@ jobs:
       - name: Install test dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
-      - name: Restore cumulative objects from prior snapshot branch
+      - name: Restore cumulative objects only from prior snapshot branch
         shell: bash
         run: |
           set -euo pipefail
           if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
-            if git cat-file -e "refs/remotes/origin/$SYNC_BRANCH:$ARCHIVE_DIR" 2>/dev/null; then
-              git restore --source="refs/remotes/origin/$SYNC_BRANCH" --worktree -- "$ARCHIVE_DIR"
-              echo "Restored prior address-wide snapshot objects before current discovery."
+            if git cat-file -e "refs/remotes/origin/$SYNC_BRANCH:$ARCHIVE_DIR/objects" 2>/dev/null; then
+              git restore --source="refs/remotes/origin/$SYNC_BRANCH" --worktree -- "$ARCHIVE_DIR/objects"
+              echo "Restored prior cumulative address-wide objects without replacing current-main overlays."
             fi
           else
             echo "No prior snapshot branch exists yet."
