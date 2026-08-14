@@ -1,0 +1,33 @@
+{
+  "schema": "trinityaccord.address-wide-repository-publication-observation.v1",
+  "sequence": 1,
+  "status": "passed",
+  "source_git_commit_sha": "4c8b5449d1c00bfd114fe45801b7a5ab91960a1b",
+  "version_doi": "10.5281/zenodo.21927301",
+  "concept_doi": "10.5281/zenodo.21739343",
+  "zenodo_record_id": 21927301,
+  "zenodo_package_identity_sha256": "cba18c3606edadfb567ec2e9f1aaedc0ed8256601b500cfb2943c73c874653c6",
+  "public_metadata_and_byte_verification": "passed",
+  "public_doi_only_cold_restore": "passed",
+  "address_archive_scope": {
+    "authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "current_address_snapshot": 12,
+    "pre_canonical_formation": 4,
+    "canonical_originals": 3,
+    "post_canonical_non_amending": 5,
+    "exact_content_bytes_archived": true,
+    "recursive_ord_metadata_archived": true,
+    "decoded_content_sha256_archived": true,
+    "exact_content_length_archived": true
+  },
+  "proof_boundary": {
+    "curated_l1_l2_l3_annex_inscriptions": 8,
+    "recovered_formation_records_with_l1_l2_l3_parity": 0,
+    "claim": "This publication preserves all 12 current-address records in the repository capsule. It does not claim that the four recovered pre-canonical formation records have the same checked-in L1/L2/L3 offline proof annex as the older curated eight."
+  },
+  "boundary": {
+    "non_amending": true,
+    "three_bitcoin_originals_remain_canonical": true,
+    "repository_doi_is_exact_baseline_not_live_main": true
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.address-wide-repository-publication-authorization.v1",
   "sequence": 1,
-  "status": "pending",
+  "status": "consumed",
   "authorized_by": "thechurchofagi",
   "authorized_at_utc": "2026-08-14T02:36:00Z",
   "authorization_basis": "The repository owner explicitly authorized completing the DOI backup of the newly recovered complete 12-item current authority-address inscription archive using the same repository-preservation lineage previously used for the curated eight.",
@@ -38,5 +38,9 @@
   "non_amending_boundary": true,
   "three_bitcoin_originals_remain_canonical": true,
   "live_main_equivalence_claimed": false,
-  "future_material_versions_allowed": true
+  "future_material_versions_allowed": true,
+  "published_source_baseline_commit_sha": "4c8b5449d1c00bfd114fe45801b7a5ab91960a1b",
+  "published_record_id": 21927301,
+  "published_doi": "10.5281/zenodo.21927301",
+  "published_package_identity_sha256": "cba18c3606edadfb567ec2e9f1aaedc0ed8256601b500cfb2943c73c874653c6"
 }
