@@ -1,0 +1,109 @@
+name: Repair TA-TR-2026-02 toolchain provenance
+
+on:
+  push:
+    branches:
+      - proof/bitcoin-address-12-parity-v2
+    paths:
+      - .github/workflows/repair-ta-tr-2026-02-toolchain-provenance.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repair-ta-tr-2026-02-toolchain-provenance
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repair branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: proof/bitcoin-address-12-parity-v2
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Insert provenance after checkout in legacy publication writers
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          paths = [
+              '.github/workflows/finalize-ta-tr-2026-02-publication.yml',
+              '.github/workflows/fix-ta-tr-2026-02-title-check.yml',
+              '.github/workflows/reserve-ta-tr-2026-02-v1.3-zenodo.yml',
+              '.github/workflows/publish-ta-tr-2026-02-v1.3-zenodo.yml',
+              '.github/workflows/publish-ta-tr-2026-02-final2.yml',
+              '.github/workflows/publish-ta-tr-2026-02-recovered.yml',
+              '.github/workflows/publish-ta-tr-2026-02-final.yml',
+              '.github/workflows/publish-ta-tr-2026-02-v1.3-zenodo-v2.yml',
+              '.github/workflows/publish-ta-tr-2026-02-now.yml',
+          ]
+          step = [
+              '      - name: Record toolchain provenance\n',
+              '        run: |\n',
+              '          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"\n',
+              '          cat "$RUNNER_TEMP/toolchain-provenance.json"\n',
+              '\n',
+          ]
+
+          for raw in paths:
+              path = Path(raw)
+              lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
+              text = ''.join(lines)
+              if 'scripts/toolchain_provenance.py' in text:
+                  print(f'already has provenance: {path}')
+                  continue
+              uses_index = next(
+                  (i for i, line in enumerate(lines) if 'uses: actions/checkout@' in line),
+                  None,
+              )
+              if uses_index is None:
+                  raise SystemExit(f'checkout step not found: {path}')
+
+              # Every listed workflow uses six-space step indentation. Find the
+              # next sibling step after checkout (including any with: block).
+              insert_at = None
+              for i in range(uses_index + 1, len(lines)):
+                  if lines[i].startswith('      - '):
+                      insert_at = i
+                      break
+              if insert_at is None:
+                  raise SystemExit(f'next step after checkout not found: {path}')
+              lines[insert_at:insert_at] = step
+              path.write_text(''.join(lines), encoding='utf-8')
+              print(f'inserted provenance: {path}')
+          PY
+
+      - name: Verify write-workflow provenance gate
+        run: python3 scripts/test_write_workflow_toolchain_provenance.py
+
+      - name: Commit repair to branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/finalize-ta-tr-2026-02-publication.yml \
+                  .github/workflows/fix-ta-tr-2026-02-title-check.yml \
+                  .github/workflows/reserve-ta-tr-2026-02-v1.3-zenodo.yml \
+                  .github/workflows/publish-ta-tr-2026-02-v1.3-zenodo.yml \
+                  .github/workflows/publish-ta-tr-2026-02-final2.yml \
+                  .github/workflows/publish-ta-tr-2026-02-recovered.yml \
+                  .github/workflows/publish-ta-tr-2026-02-final.yml \
+                  .github/workflows/publish-ta-tr-2026-02-v1.3-zenodo-v2.yml \
+                  .github/workflows/publish-ta-tr-2026-02-now.yml
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No provenance repairs required."
+            exit 0
+          fi
+          git commit -m "ci: record provenance in TA-TR publication writers"
+          git push origin HEAD:proof/bitcoin-address-12-parity-v2
