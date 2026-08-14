@@ -1,0 +1,413 @@
+name: Publish Address-Wide Repository Preservation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-address-wide-repository-preservation.yml
+      - preservation/address-wide-repository-publication-authorization-v1.json
+      - tests/test_address_wide_repository_publication_contract.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-write-lock
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      RIGHTS_ACK: TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED
+      CONFIRMATION: PUBLISH_TRINITY_ADDRESS_WIDE_REPOSITORY_V1
+      AUTH_PATH: preservation/address-wide-repository-publication-authorization-v1.json
+    steps:
+      - name: Checkout current main with full history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Install verification dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Inspect one-shot authorization
+        id: auth
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os, re
+          from pathlib import Path
+
+          path = Path(os.environ['AUTH_PATH'])
+          auth = json.loads(path.read_text())
+          required = {
+              'schema': 'trinityaccord.address-wide-repository-publication-authorization.v1',
+              'sequence': 1,
+              'authorized_by': 'thechurchofagi',
+              'core_concept_doi': '10.5281/zenodo.21739343',
+              'previous_core_version_doi': '10.5281/zenodo.21859437',
+              'zenodo_rights_acknowledgement': os.environ['RIGHTS_ACK'],
+              'publication_confirmation': os.environ['CONFIRMATION'],
+              'required_address_archive_commit_sha': '3c3070dc799d2dcff16aef95e95d3b65f1c7d1bd',
+              'include_full_repository_doi': True,
+              'include_arweave_upload': False,
+              'non_amending_boundary': True,
+              'three_bitcoin_originals_remain_canonical': True,
+              'live_main_equivalence_claimed': False,
+              'future_material_versions_allowed': True,
+          }
+          for key, value in required.items():
+              if auth.get(key) != value:
+                  raise SystemExit(f'authorization mismatch: {key}')
+          if auth.get('status') not in {'pending', 'consumed'}:
+              raise SystemExit(f"invalid authorization status: {auth.get('status')!r}")
+          previous = auth.get('previous_publication', {})
+          expected_previous = {
+              'source_baseline_commit_sha': 'ba34564c579d645a5a1595f0538223e0e957155e',
+              'doi': '10.5281/zenodo.21859437',
+              'record_id': 21859437,
+              'package_identity_sha256': 'fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36',
+          }
+          if previous != expected_previous:
+              raise SystemExit('previous publication identity mismatch')
+          if auth['status'] == 'pending' and os.environ['ACTOR'] != 'thechurchofagi':
+              raise SystemExit('pending irreversible publication must be triggered by repository owner')
+          if auth['status'] == 'consumed':
+              for key in ('published_source_baseline_commit_sha', 'published_record_id', 'published_doi', 'published_package_identity_sha256'):
+                  if key not in auth:
+                      raise SystemExit(f'consumed authorization missing {key}')
+              if not re.fullmatch(r'10\.5281/zenodo\.\d+', str(auth['published_doi'])):
+                  raise SystemExit('consumed authorization has invalid DOI')
+          print(f"status={auth['status']}")
+          PY
+
+      - name: Stop safely after consumed authorization
+        if: steps.auth.outputs.status == 'consumed'
+        run: echo "Address-wide repository preservation publication is already consumed; no external write will run."
+
+      - name: Record toolchain provenance
+        if: steps.auth.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Verify publication contract and exact 12-item archive
+        if: steps.auth.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          python3 -m pytest -q tests/test_address_wide_repository_publication_contract.py
+          required="$(python3 -c 'import json; print(json.load(open("preservation/address-wide-repository-publication-authorization-v1.json"))["required_address_archive_commit_sha"])')"
+          git cat-file -e "$required^{commit}"
+          git merge-base --is-ancestor "$required" HEAD
+          python3 - <<'PY'
+          import base64, hashlib, json
+          from pathlib import Path
+
+          root = Path('bitcoin-inscription-mirrors/address-wide')
+          manifest = json.loads((root / 'manifest.json').read_text())
+          classification = json.loads((root / 'classification.json').read_text())
+          if manifest.get('count') != 12 or len(manifest.get('ids', [])) != 12:
+              raise SystemExit('address-wide manifest is not the expected 12-item current snapshot')
+          expected_counts = {
+              'current_address_snapshot': 12,
+              'pre_canonical_formation': 4,
+              'canonical_originals': 3,
+              'post_canonical_non_amending': 5,
+          }
+          if classification.get('counts') != expected_counts:
+              raise SystemExit('4 + 3 + 5 classification boundary mismatch')
+          if sum(item.get('canonical') is True for item in classification.get('records', [])) != 3:
+              raise SystemExit('canonical authority count is not exactly three')
+          if any(item.get('amends_canon') is not False for item in classification.get('records', [])):
+              raise SystemExit('non-amending boundary violated')
+          by_id = {item['id']: item for item in manifest['objects']}
+          if set(by_id) != set(manifest['ids']):
+              raise SystemExit('manifest object/id set mismatch')
+          for inscription_id in manifest['ids']:
+              obj_dir = root / 'objects' / inscription_id
+              metadata = json.loads((obj_dir / 'metadata.json').read_text())
+              raw = base64.b64decode((obj_dir / 'content.b64').read_text().strip(), validate=True)
+              item = by_id[inscription_id]
+              digest = hashlib.sha256(raw).hexdigest()
+              if metadata.get('id') != inscription_id:
+                  raise SystemExit(f'metadata id mismatch: {inscription_id}')
+              if metadata.get('address') != manifest['address']:
+                  raise SystemExit(f'metadata address mismatch: {inscription_id}')
+              if len(raw) != item['content_length']:
+                  raise SystemExit(f'content length mismatch: {inscription_id}')
+              if digest != item['content_sha256']:
+                  raise SystemExit(f'content sha256 mismatch: {inscription_id}')
+              if (obj_dir / 'CONTENT_LENGTH').read_text().strip() != str(len(raw)):
+                  raise SystemExit(f'CONTENT_LENGTH mismatch: {inscription_id}')
+              if (obj_dir / 'CONTENT_SHA256').read_text().strip() != digest:
+                  raise SystemExit(f'CONTENT_SHA256 mismatch: {inscription_id}')
+          proto = next(item for item in classification['records'] if item.get('role') == 'direct_proto_protocol')
+          if proto.get('canonical') is not False:
+              raise SystemExit('proto-Protocol must remain pre-canonical')
+          print('Address-wide repository publication preflight PASS: 12 exact objects, 4 + 3 + 5 boundary intact.')
+          PY
+          python3 - <<'PY'
+          import json
+          state = json.load(open('preservation/repository-preservation-state-v2.json'))
+          expected = {
+              'concept_doi': '10.5281/zenodo.21739343',
+              'latest_doi': '10.5281/zenodo.21859437',
+              'latest_record_id': 21859437,
+              'latest_git_commit_sha': 'ba34564c579d645a5a1595f0538223e0e957155e',
+              'latest_package_identity_sha256': 'fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36',
+              'publication_status': 'published_and_publicly_restored',
+          }
+          for key, value in expected.items():
+              if state.get(key) != value:
+                  raise SystemExit(f'published predecessor moved unexpectedly: {key}')
+          PY
+
+      - name: Build GitHub-independent repository capsule
+        if: steps.auth.outputs.status == 'pending'
+        id: build
+        run: |
+          set -euo pipefail
+          source_sha="$(git rev-parse HEAD)"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+          python3 scripts/build_preservation_capsule.py \
+            --repository-root . \
+            --commit "$source_sha" \
+            --output-dir "$RUNNER_TEMP/address-wide-repository-capsule"
+
+      - name: Prove local GitHub-zero recovery
+        if: steps.auth.outputs.status == 'pending'
+        env:
+          SOURCE_SHA: ${{ steps.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/local-bootstrap"
+          cp "$RUNNER_TEMP/address-wide-repository-capsule/restore-trinity-accord.py" "$RUNNER_TEMP/local-bootstrap/restore-trinity-accord.py"
+          python3 "$RUNNER_TEMP/local-bootstrap/restore-trinity-accord.py" \
+            --deposit-dir "$RUNNER_TEMP/address-wide-repository-capsule" \
+            --output-dir "$RUNNER_TEMP/local-restored-repository"
+          REPORT="$RUNNER_TEMP/local-restored-repository/recovery-report.json" python3 - <<'PY'
+          import json, os
+          report = json.load(open(os.environ['REPORT']))
+          if report.get('result') != 'pass':
+              raise SystemExit('local recovery did not pass')
+          if report.get('source_git_commit_sha') != os.environ['SOURCE_SHA']:
+              raise SystemExit('local recovery source mismatch')
+          PY
+          python3 "$RUNNER_TEMP/local-restored-repository/repository/scripts/audit_recovery_readiness.py"
+
+      - name: Enforce publication credential and lineage preflight
+        if: steps.auth.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          test -n "$ZENODO_ACCESS_TOKEN"
+          test "$RIGHTS_ACK" = "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED"
+          CAPSULE_DIR="$RUNNER_TEMP/address-wide-repository-capsule" python3 - <<'PY'
+          import os, sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path('scripts').resolve()))
+          import publish_preservation_capsule_to_zenodo as pub
+
+          previous_doi = '10.5281/zenodo.21859437'
+          concept_doi = '10.5281/zenodo.21739343'
+          concept_record_id = 21739343
+          package = pub.verify_local_package(Path(os.environ['CAPSULE_DIR']))
+          client = pub.ZenodoClient(os.environ['ZENODO_ACCESS_TOKEN'].strip(), os.environ['ZENODO_API_BASE'])
+          series = pub.series_records(pub.list_depositions(client))
+          for item in series:
+              pub.require_concept_series(item, concept_doi, concept_record_id)
+          published = [item for item in series if pub.is_published(item)]
+          drafts = [item for item in series if not pub.is_published(item)]
+          if not published:
+              raise SystemExit('Zenodo preservation series has no published predecessor')
+          latest = published[-1]
+          matching_published = [item for item in published if pub.capsule_id(item) == package['capsule_id']]
+          matching_drafts = [item for item in drafts if pub.capsule_id(item) == package['capsule_id']]
+          unrelated_drafts = [item for item in drafts if pub.capsule_id(item) != package['capsule_id']]
+          if unrelated_drafts:
+              raise SystemExit('unrelated unfinished Zenodo preservation draft exists; refusing publication')
+          if matching_published:
+              if len(matching_published) != 1 or pub.deposition_id(matching_published[0]) != pub.deposition_id(latest):
+                  raise SystemExit('matching publication exists but is not the latest preservation version')
+              print(f"Reconciling already-published exact capsule: {pub.doi(matching_published[0])}")
+          elif pub.doi(latest) != previous_doi:
+              raise SystemExit(f"Zenodo preservation lineage moved unexpectedly: latest={pub.doi(latest)!r} expected={previous_doi!r}")
+          elif len(matching_drafts) > 1:
+              raise SystemExit('multiple matching publication drafts exist')
+          else:
+              print(f"Zenodo lineage preflight PASS: previous={previous_doi} capsule={package['capsule_id']}")
+          PY
+
+      - name: Publish or reconcile exact repository capsule
+        if: steps.auth.outputs.status == 'pending'
+        id: publish
+        env:
+          SOURCE_SHA: ${{ steps.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          work_state="$RUNNER_TEMP/address-wide-publish-work.json"
+          cp preservation/repository-preservation-state-v2.json "$work_state"
+          python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
+            --capsule-dir "$RUNNER_TEMP/address-wide-repository-capsule" \
+            --state "$work_state" \
+            --api-base "$ZENODO_API_BASE" \
+            --rights-boundary-ack "$RIGHTS_ACK"
+          WORK_STATE="$work_state" python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          state = json.load(open(os.environ['WORK_STATE']))
+          print(f"record_id={state['latest_record_id']}")
+          print(f"doi={state['latest_doi']}")
+          print(f"package_identity_sha256={state['latest_package_identity_sha256']}")
+          if state.get('latest_git_commit_sha') != os.environ['SOURCE_SHA']:
+              raise SystemExit('publisher source mismatch')
+          if state.get('latest_doi') == '10.5281/zenodo.21859437':
+              raise SystemExit('publisher did not advance or reconcile a new exact version')
+          PY
+
+      - name: Prove public DOI-only cold recovery
+        if: steps.auth.outputs.status == 'pending'
+        env:
+          SOURCE_SHA: ${{ steps.build.outputs.source_sha }}
+          RECORD_ID: ${{ steps.publish.outputs.record_id }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/public-bootstrap"
+          cp "$RUNNER_TEMP/address-wide-repository-capsule/restore-trinity-accord.py" "$RUNNER_TEMP/public-bootstrap/restore-trinity-accord.py"
+          python3 "$RUNNER_TEMP/public-bootstrap/restore-trinity-accord.py" \
+            --zenodo-record-id "$RECORD_ID" \
+            --output-dir "$RUNNER_TEMP/public-doi-restore"
+          REPORT="$RUNNER_TEMP/public-doi-restore/recovery-report.json" python3 - <<'PY'
+          import json, os
+          report = json.load(open(os.environ['REPORT']))
+          if report.get('result') != 'pass':
+              raise SystemExit('public DOI-only recovery did not pass')
+          if report.get('source_git_commit_sha') != os.environ['SOURCE_SHA']:
+              raise SystemExit('public DOI-only recovery source mismatch')
+          PY
+          python3 "$RUNNER_TEMP/public-doi-restore/repository/scripts/audit_recovery_readiness.py"
+
+      - name: Verify public DOI metadata and exact package identity
+        if: steps.auth.outputs.status == 'pending'
+        env:
+          RECORD_ID: ${{ steps.publish.outputs.record_id }}
+        run: |
+          set -euo pipefail
+          python3 scripts/repository_preservation_refresh.py verify-public \
+            --record-id "$RECORD_ID" \
+            --capsule-dir "$RUNNER_TEMP/address-wide-repository-capsule" \
+            --output "$RUNNER_TEMP/address-wide-public-metadata-report.json"
+
+      - name: Seal consumed authorization and repository DOI state
+        if: steps.auth.outputs.status == 'pending'
+        env:
+          SOURCE_SHA: ${{ steps.build.outputs.source_sha }}
+          RECORD_ID: ${{ steps.publish.outputs.record_id }}
+          VERSION_DOI: ${{ steps.publish.outputs.doi }}
+          PACKAGE_SHA256: ${{ steps.publish.outputs.package_identity_sha256 }}
+        run: |
+          set -euo pipefail
+          cp "$RUNNER_TEMP/address-wide-publish-work.json" preservation/repository-preservation-state-v2.json
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+
+          auth_path = Path('preservation/address-wide-repository-publication-authorization-v1.json')
+          auth = json.loads(auth_path.read_text())
+          if auth.get('status') != 'pending':
+              raise SystemExit('authorization changed before seal')
+          doi = os.environ['VERSION_DOI']
+          record_id = int(os.environ['RECORD_ID'])
+          if doi != f'10.5281/zenodo.{record_id}':
+              raise SystemExit('DOI/record mismatch at seal')
+          if doi == auth['previous_core_version_doi']:
+              raise SystemExit('seal refuses predecessor DOI')
+          if not re.fullmatch(r'[0-9a-f]{64}', os.environ['PACKAGE_SHA256']):
+              raise SystemExit('invalid package identity at seal')
+          report = json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'public-doi-restore', 'recovery-report.json')))
+          metadata = json.load(open(os.path.join(os.environ['RUNNER_TEMP'], 'address-wide-public-metadata-report.json')))
+          if report.get('result') != 'pass' or report.get('source_git_commit_sha') != os.environ['SOURCE_SHA']:
+              raise SystemExit('public recovery proof mismatch at seal')
+          if metadata.get('status') != 'passed' or metadata.get('git_commit_sha') != os.environ['SOURCE_SHA']:
+              raise SystemExit('public metadata proof mismatch at seal')
+          auth.update({
+              'status': 'consumed',
+              'published_source_baseline_commit_sha': os.environ['SOURCE_SHA'],
+              'published_record_id': record_id,
+              'published_doi': doi,
+              'published_package_identity_sha256': os.environ['PACKAGE_SHA256'],
+          })
+          auth_path.write_text(json.dumps(auth, ensure_ascii=False, indent=2) + '\n')
+          observation = {
+              'schema': 'trinityaccord.address-wide-repository-publication-observation.v1',
+              'sequence': 1,
+              'status': 'passed',
+              'source_git_commit_sha': os.environ['SOURCE_SHA'],
+              'version_doi': doi,
+              'concept_doi': auth['core_concept_doi'],
+              'zenodo_record_id': record_id,
+              'zenodo_package_identity_sha256': os.environ['PACKAGE_SHA256'],
+              'public_metadata_and_byte_verification': 'passed',
+              'public_doi_only_cold_restore': 'passed',
+              'address_archive_scope': auth['address_archive_scope'],
+              'proof_boundary': auth['proof_boundary'],
+              'boundary': {
+                  'non_amending': True,
+                  'three_bitcoin_originals_remain_canonical': True,
+                  'repository_doi_is_exact_baseline_not_live_main': True,
+              },
+          }
+          Path('preservation/address-wide-repository-publication-observation-v1.json').write_text(
+              json.dumps(observation, ensure_ascii=False, indent=2) + '\n'
+          )
+          PY
+          python3 -m pytest -q tests/test_address_wide_repository_publication_contract.py
+
+      - name: Commit verified DOI publication state
+        if: steps.auth.outputs.status == 'pending'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            preservation/address-wide-repository-publication-authorization-v1.json \
+            preservation/address-wide-repository-publication-observation-v1.json \
+            preservation/repository-preservation-state-v2.json
+          git commit -m "archive: record 12-inscription repository preservation DOI"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 5))
+          done
+          echo "::error::Zenodo publication succeeded but verified DOI state could not be pushed; rerun will reconcile the exact capsule."
+          exit 1
+
+      - name: Upload DOI recovery proofs
+        if: always() && steps.auth.outputs.status == 'pending'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: address-wide-repository-preservation-proof
+          path: |
+            ${{ runner.temp }}/public-doi-restore/recovery-report.json
+            ${{ runner.temp }}/address-wide-public-metadata-report.json
+            ${{ runner.temp }}/toolchain-provenance.json
+          retention-days: 365
+          if-no-files-found: warn
