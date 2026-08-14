@@ -69,7 +69,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"; then
+          if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
             if git cat-file -e "refs/remotes/origin/$SYNC_BRANCH:$ARCHIVE_DIR" 2>/dev/null; then
               git restore --source="refs/remotes/origin/$SYNC_BRANCH" --worktree -- "$ARCHIVE_DIR"
               echo "Restored prior address-wide snapshot objects before current discovery."
@@ -109,7 +110,9 @@ jobs:
           git commit -m "archive: sync all Bitcoin authority-address inscriptions"
 
           # Refresh the lease immediately before publishing the automation branch.
-          git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH" || true
+          if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
+          fi
           git push --force-with-lease origin "HEAD:refs/heads/$SYNC_BRANCH"
 
           existing="$(
