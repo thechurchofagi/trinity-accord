@@ -8,6 +8,12 @@ These mirrors do not create authority. Their exact bytes are now bound to a
 checked-in, proof-carrying Bitcoin annex, so the on-chain comparison can be
 reproduced cryptographically without a network connection.
 
+## Address-wide scope
+
+The historical curated mirror set is **not an exhaustive inventory of the Bitcoin authority address**. In particular, the number eight must not be used as a fixed address-wide count.
+
+The authority address is `bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf`. Address-wide archival automation must discover the current inscription IDs from the address itself at run time and must not hard-code an expected inscription count. Any same-address inscription outside the curated folders below remains non-canonical unless it is one of the three Bitcoin Originals.
+
 ## Authority Boundary
 
 - The three Bitcoin Originals remain the only canonical body.
