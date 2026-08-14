@@ -1,0 +1,8 @@
+{
+  "schema": "trinityaccord.complete-12-inscription-parity-status.v1",
+  "status": "in_progress",
+  "target_current_address_count": 12,
+  "target_l1_l2_l3_count": 12,
+  "canonical_originals": 3,
+  "non_amending_boundary": true
+}
