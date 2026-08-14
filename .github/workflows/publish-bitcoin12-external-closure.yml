@@ -38,6 +38,11 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-ci.txt
 
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
       - name: Install dependencies
         run: |
           set -euo pipefail
