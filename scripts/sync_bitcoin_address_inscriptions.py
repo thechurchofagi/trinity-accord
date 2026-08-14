@@ -89,7 +89,8 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     (obj_dir / "CONTENT_LENGTH").write_text(f"{len(content)}\n", encoding="ascii")
 
     # Immediate local round-trip verification.
-    decoded = base64.b64decode((obj_dir / "content.b64").read_text(encoding="ascii"), validate=True)
+    encoded = (obj_dir / "content.b64").read_text(encoding="ascii").strip()
+    decoded = base64.b64decode(encoded, validate=True)
     if decoded != content or hashlib.sha256(decoded).hexdigest() != sha256:
         raise RuntimeError(f"local round-trip verification failed for {inscription_id}")
 
