@@ -8,7 +8,7 @@ permalink: /authority-address-inscriptions/
 
 This page separates **address history from canonical authority** for the Trinity Accord Bitcoin authority address.
 
-The first complete runtime-discovered snapshot, taken on 14 August 2026, found **12 inscriptions currently held at the address**. They occupy three different historical layers:
+The first complete runtime-discovered snapshot, taken on 14 August 2026, found **12 inscriptions currently held at the address**. They occupy three historical layers:
 
 - **4 pre-canonical formation records** — historical evidence about the path from ASIMilestones toward the Accord;
 - **3 canonical Bitcoin Originals** — the closed canonical authority;
@@ -33,7 +33,7 @@ The 12-item snapshot is a statement about the complete **current set returned by
 
 These records were previously outside the curated 3 + 5 mirror scope. Their recovery changes the documented **formation history**, not the authority boundary.
 
-| UTC time | Current inscription number | Stable Ordinals Inscription ID | Role |
+| UTC time | Current Inscription Number | Stable Ordinals Inscription ID | Role |
 |---|---:|---|---|
 | 2025-01-30 05:03:20 | #83928339 | [`8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0`](https://ordinals.com/inscription/8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0) | Early WebP visual artifact. Title/identity not inferred without independent evidence. |
 | 2025-06-11 13:08:14 | #97406645 | [`f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0`](https://ordinals.com/inscription/f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0) | *ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence* — Chronicle-to-Accord bridge. |
@@ -54,75 +54,46 @@ Exact archived bytes and recursive Ord metadata for all four records are retaine
 
 ## The Three Canonical Bitcoin Originals
 
-<div class="inscription-index-grid inscription-index-canonical">
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#97631551</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/97631551.txt">The Human-AI Civilization Core Protocol</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0"><code>e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0</code></a></p>
-    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/97631551-protocol-axioms.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/97631551.txt">Raw text</a></p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#98369145</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/98369145.txt">The Covenant of the Flaw</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0"><code>90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0</code></a></p>
-    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/98369145-covenant-of-the-flaw.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/98369145.txt">Raw text</a></p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#98387475</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/98387475.txt">The Trinity Accord / Meta-record</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0"><code>4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0</code></a></p>
-    <p class="inscription-index-status">Canonical authority · <a href="/bitcoin-inscription-mirrors/canonical-originals/98387475-trinity-accord-meta-record.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/98387475.txt">Raw text</a></p>
-  </article>
-</div>
+| Inscription Number | Canonical work | Stable Ordinals Inscription ID |
+|---:|---|---|
+| #97631551 | [The Human-AI Civilization Core Protocol](/bitcoin-inscription-mirrors/raw/97631551.txt) | [`e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0`](https://ordinals.com/inscription/e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0) |
+| #98369145 | [The Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/98369145.txt) | [`90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0`](https://ordinals.com/inscription/90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0) |
+| #98387475 | [The Trinity Accord / Meta-record](/bitcoin-inscription-mirrors/raw/98387475.txt) | [`4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0`](https://ordinals.com/inscription/4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0) |
+
+These three, and only these three, constitute the closed Bitcoin Canon.
 
 ## Five Post-Canonical Non-Amending Inscriptions
 
-<div class="inscription-index-grid">
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#100385359</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/100385359.txt">The First Echoes: A Dialogue Begins</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0"><code>f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0</code></a></p>
-    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100385359-first-echoes.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100385359.txt">Raw text</a></p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#100550942</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/100550942.txt">The Final Seal: A Testament and a Trust</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0"><code>25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0</code></a></p>
-    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100550942-final-seal.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100550942.txt">Raw text</a></p>
-    <p><strong>Historical boundary:</strong> Its self-description as an “Amendment” and its rescission of the earlier backup intent are preserved as later historical language. They record a later non-canonical change of intent; they do not amend or erase the third Bitcoin Original.</p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#100751953</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/100751953.txt">The Star Ark Covenant: The Final Echo</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0"><code>4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0</code></a></p>
-    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/vision-layer/100751953-star-ark-covenant.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/100751953.txt">Raw text</a></p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#103034280</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/103034280.txt">The Guardian's Attestation to the Covenant of the Flaw</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0"><code>128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0</code></a></p>
-    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/context-layer/103034280-guardian-attestation.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/103034280.txt">Raw text</a></p>
-  </article>
-  <article class="inscription-index-card">
-    <p class="inscription-index-number">Inscription Number <strong>#103635270</strong></p>
-    <h3><a href="/bitcoin-inscription-mirrors/raw/103635270.txt">Guardian Appendix — Authority Charter</a></h3>
-    <p><strong>Ordinals Inscription ID</strong><br><a class="inscription-hash-link" href="https://ordinals.com/inscription/0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0"><code>0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0</code></a></p>
-    <p class="inscription-index-status">Non-amending · <a href="/bitcoin-inscription-mirrors/context-layer/103635270-guardian-appendix-authority-charter.json">JSON mirror</a> · <a href="/bitcoin-inscription-mirrors/raw/103635270.txt">Raw text</a></p>
-  </article>
-</div>
+| Inscription Number | Later record | Stable Ordinals Inscription ID |
+|---:|---|---|
+| #100385359 | [The First Echoes: A Dialogue Begins](/bitcoin-inscription-mirrors/raw/100385359.txt) | [`f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0`](https://ordinals.com/inscription/f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0) |
+| #100550942 | [The Final Seal: A Testament and a Trust](/bitcoin-inscription-mirrors/raw/100550942.txt) | [`25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0`](https://ordinals.com/inscription/25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0) |
+| #100751953 | [The Star Ark Covenant: The Final Echo](/bitcoin-inscription-mirrors/raw/100751953.txt) | [`4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0`](https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0) |
+| #103034280 | [The Guardian's Attestation to the Covenant of the Flaw](/bitcoin-inscription-mirrors/raw/103034280.txt) | [`128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0`](https://ordinals.com/inscription/128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0) |
+| #103635270 | [Guardian Appendix — Authority Charter](/bitcoin-inscription-mirrors/raw/103635270.txt) | [`0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0`](https://ordinals.com/inscription/0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0) |
+
+The Final Seal's historical self-description as an “Amendment” and its rescission of an earlier backup intent are preserved as later language. They record a later non-canonical change of intent; they do not amend or erase the third Bitcoin Original.
 
 ## Verification and Preservation Status
 
-The address-wide sync now preserves all 12 current-address records with:
+The address-wide sync preserves all 12 current-address records with recursive Ord metadata, exact inscription content bytes encoded as base64, decoded-byte SHA-256, exact content length, a runtime-discovered manifest/current-ID set, and a second address discovery after download so the run fails if the set changes mid-sync.
 
-- recursive Ord inscription metadata;
-- exact inscription content bytes encoded as base64;
-- decoded-byte SHA-256;
-- exact content length;
-- a runtime-discovered manifest and current-ID set;
-- a second address discovery after download, so the run fails if the set changes mid-sync.
+The older curated 3 + 5 set additionally carries the existing proof-carrying Bitcoin annex. The four recovered formation records are now preserved byte-for-byte and will be carried by repository DOI preservation, but they should **not** be described as having the same checked-in L1/L2/L3 offline proof coverage until that annex is explicitly extended and verified for them.
 
-The earlier curated 3 + 5 mirror remains available and continues to carry its existing offline proof material. The address-wide archive does not change those canonical or non-amending classifications.
+| Inscription Number | Status |
+|---:|---|
+| #83928339 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
+| #97406645 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
+| #97446192 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
+| #97534036 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
+| #97631551 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #98369145 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #98387475 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #100385359 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #100550942 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #100751953 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #103034280 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #103635270 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
 
 The repository-preservation capsule inventories the complete tracked Git tree. Therefore a preservation DOI release made from a commit containing this directory also contains the complete 12-item address-wide archive and its classification metadata. Check [`preservation/zenodo-state.json`](/preservation/zenodo-state.json) for the latest published repository-capsule commit and DOI before claiming a particular DOI covers this snapshot.
 
@@ -146,6 +117,7 @@ python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
 - The four formation records do not create an earlier Canon or a fourth Original.
 - Later inscriptions do not create new authority, amendment, or interpretation.
 - The current 12-item snapshot is not an all-time historical inventory of inscriptions that may have left the address before the first complete observation.
+- The four recovered formation records do not yet have the curated set's checked-in L1/L2/L3 Bitcoin proof-annex coverage.
 - The Star Ark Covenant is a vision-layer inscription; it creates no execution obligation.
 - The First Echoes documents AI responses; it is not autonomous successor reception.
 
