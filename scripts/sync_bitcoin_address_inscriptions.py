@@ -20,7 +20,7 @@ AUTHORITY_ADDRESS = "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq
 DEFAULT_BASE_URL = "https://ordinals.com"
 DEFAULT_OUTPUT = Path("bitcoin-inscription-mirrors/address-wide")
 ID_RE = re.compile(r"^[0-9a-f]{64}i(?:0|[1-9][0-9]*)$")
-USER_AGENT = "trinity-accord-address-inscription-sync/1.0"
+USER_AGENT = "trinity-accord-address-inscription-sync/1.1"
 
 
 def fetch_bytes(url: str, *, accept: str | None = None, attempts: int = 4) -> bytes:
@@ -41,8 +41,9 @@ def fetch_bytes(url: str, *, accept: str | None = None, attempts: int = 4) -> by
     raise RuntimeError(f"failed to fetch {url}: {last}")
 
 
-def fetch_json(url: str) -> dict:
-    value = json.loads(fetch_bytes(url, accept="application/json"))
+def fetch_json(url: str, *, negotiate: bool = True) -> dict:
+    raw = fetch_bytes(url, accept="application/json" if negotiate else None)
+    value = json.loads(raw)
     if not isinstance(value, dict):
         raise RuntimeError(f"expected JSON object from {url}")
     return value
@@ -64,7 +65,11 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     obj_dir = root / "objects" / inscription_id
     obj_dir.mkdir(parents=True, exist_ok=True)
 
-    metadata = fetch_json(f"{base_url.rstrip('/')}/inscription/{inscription_id}")
+    # Use ord's backwards-compatible recursive metadata endpoint. The public
+    # ordinals.com human inscription route may reject JSON content negotiation.
+    metadata = fetch_json(
+        f"{base_url.rstrip('/')}/r/inscription/{inscription_id}", negotiate=False
+    )
     if metadata.get("id") != inscription_id:
         raise RuntimeError(f"metadata id mismatch for {inscription_id}")
     if metadata.get("address") != address:
@@ -88,7 +93,6 @@ def write_object(base_url: str, address: str, inscription_id: str, root: Path) -
     (obj_dir / "CONTENT_SHA256").write_text(f"{sha256}  decoded-content\n", encoding="ascii")
     (obj_dir / "CONTENT_LENGTH").write_text(f"{len(content)}\n", encoding="ascii")
 
-    # Immediate local round-trip verification.
     encoded = (obj_dir / "content.b64").read_text(encoding="ascii").strip()
     decoded = base64.b64decode(encoded, validate=True)
     if decoded != content or hashlib.sha256(decoded).hexdigest() != sha256:
@@ -128,9 +132,13 @@ def build_manifest(address: str, current_ids: list[str], objects: list[dict]) ->
 
 def sync(base_url: str, address: str, output: Path) -> dict:
     start_ids = discover_ids(base_url, address)
+    print(f"discovered {len(start_ids)} inscriptions for {address}", flush=True)
     output.mkdir(parents=True, exist_ok=True)
 
-    objects = [write_object(base_url, address, item, output) for item in start_ids]
+    objects: list[dict] = []
+    for index, item in enumerate(start_ids, start=1):
+        print(f"[{index}/{len(start_ids)}] mirroring {item}", flush=True)
+        objects.append(write_object(base_url, address, item, output))
 
     # Fail closed if ownership changed during collection; never publish a mixed snapshot.
     end_ids = discover_ids(base_url, address)
