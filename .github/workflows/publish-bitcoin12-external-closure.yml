@@ -1,4 +1,4 @@
-name: Publish Bitcoin12 External Closure
+name: Publish Bitcoin12 DOI Closure
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
     paths:
       - .github/workflows/publish-bitcoin12-external-closure.yml
       - preservation/bitcoin12-external-closure-authorization-v1.json
-      - scripts/upload_repository_capsule_to_arweave.mjs
 
 permissions:
   contents: write
@@ -19,14 +18,11 @@ jobs:
   publish:
     if: github.actor == 'thechurchofagi'
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
+    timeout-minutes: 120
     env:
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: https://zenodo.org/api
-      ARKEY: ${{ secrets.ARKEY }}
       RIGHTS_ACK: TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED
-      REPOSITORY_ARWEAVE_MAX_COST_AR: '0.75'
-      REPOSITORY_ARWEAVE_MIN_REMAINING_AR: '0.25'
     steps:
       - name: Checkout exact main baseline with history
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -42,24 +38,16 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-ci.txt
 
-      - name: Set up Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '20'
-          cache: npm
-
       - name: Install dependencies
         run: |
           set -euo pipefail
           python3 -m pip install -r requirements-ci.txt
-          npm ci --ignore-scripts
 
-      - name: Verify one-shot authorization and 12-item proof state
+      - name: Verify DOI-only authorization and 12-item proof state
         id: preflight
         run: |
           set -euo pipefail
           test -n "$ZENODO_ACCESS_TOKEN"
-          test -n "$ARKEY"
           source_sha="$(git rev-parse HEAD)"
           echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
           git merge-base --is-ancestor 1b30048505af6968ef8fab61eb444a9ecb41ba1e "$source_sha"
@@ -67,20 +55,20 @@ jobs:
           python3 scripts/build_final_evidence_inventory.py --check
           python3 - <<'PY'
           import json
-          from pathlib import Path
           auth=json.load(open('preservation/bitcoin12-external-closure-authorization-v1.json'))
           required={
             'schema':'trinityaccord.bitcoin12-external-closure-authorization.v1',
             'sequence':1,'status':'pending','authorized_by':'thechurchofagi',
+            'publication_scope':'doi_only_arweave_deferred',
             'required_ancestor_commit_sha':'1b30048505af6968ef8fab61eb444a9ecb41ba1e',
             'current_address_snapshot':12,'pre_canonical_formation':4,
             'canonical_originals':3,'post_canonical_non_amending':5,
             'core_concept_doi':'10.5281/zenodo.21739343',
             'publish_new_repository_doi_version':True,
-            'publish_new_repository_arweave_capsule':True,
-            'same_exact_repository_capsule_required':True,
+            'publish_new_repository_arweave_capsule':False,
+            'arweave_publication_status':'deferred_by_owner',
             'public_doi_cold_restore_required':True,
-            'public_arweave_readback_required':True,
+            'public_arweave_readback_required':False,
             'non_amending_boundary':True,
             'three_bitcoin_originals_remain_canonical':True,
           }
@@ -93,7 +81,7 @@ jobs:
           if obj.get('inscription_metadata_sha256')!='1c51702f58b230caba573250769caecd0534f6c8002e16f2f182a16b19a27dcc': raise SystemExit('8e81 metadata hash mismatch')
           report=json.load(open('evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json'))
           if report.get('result')!='PASS': raise SystemExit('Bitcoin v2 report not PASS')
-          print('External closure preflight PASS: 12/12 v2, CBOR bound, authority boundary intact.')
+          print('DOI-only preflight PASS: 12/12 v2, CBOR bound, Arweave explicitly deferred.')
           PY
 
       - name: Build exact repository preservation capsule
@@ -120,7 +108,9 @@ jobs:
           SOURCE_SHA: ${{ steps.preflight.outputs.source_sha }}
         run: |
           set -euo pipefail
-          python3 "$RUNNER_TEMP/repository-capsule/restore-trinity-accord.py" --deposit-dir "$RUNNER_TEMP/repository-capsule" --output-dir "$RUNNER_TEMP/local-restore"
+          python3 "$RUNNER_TEMP/repository-capsule/restore-trinity-accord.py" \
+            --deposit-dir "$RUNNER_TEMP/repository-capsule" \
+            --output-dir "$RUNNER_TEMP/local-restore"
           REPORT="$RUNNER_TEMP/local-restore/recovery-report.json" python3 - <<'PY'
           import json,os
           r=json.load(open(os.environ['REPORT']))
@@ -132,18 +122,23 @@ jobs:
         id: zenodo
         run: |
           set -euo pipefail
-          cp preservation/zenodo-state.json "$RUNNER_TEMP/zenodo-work-state.json"
-          cp "$RUNNER_TEMP/zenodo-work-state.json" preservation/bitcoin12-zenodo-work-state.json
+          cp preservation/zenodo-state.json preservation/bitcoin12-zenodo-work-state.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          s=json.load(open('preservation/bitcoin12-zenodo-work-state.json'))
+          print(f"previous_doi={s.get('latest_doi','')}")
+          PY
           python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
             --capsule-dir "$RUNNER_TEMP/repository-capsule" \
             --state preservation/bitcoin12-zenodo-work-state.json \
             --api-base "$ZENODO_API_BASE" \
             --rights-boundary-ack "$RIGHTS_ACK"
-          python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
+          PREVIOUS_DOI="${{ steps.zenodo.outputs.previous_doi }}" python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json,os
           s=json.load(open('preservation/bitcoin12-zenodo-work-state.json'))
           if s.get('concept_doi')!='10.5281/zenodo.21739343': raise SystemExit('Concept DOI mismatch')
-          if s.get('latest_doi') in {'10.5281/zenodo.21927301','10.5281/zenodo.21859437'}: raise SystemExit('Zenodo did not advance to a new exact version')
+          if not s.get('latest_doi'): raise SystemExit('published DOI missing')
+          if s.get('latest_doi')==os.environ.get('PREVIOUS_DOI'): raise SystemExit('Zenodo did not advance to a new repository version')
           print(f"doi={s['latest_doi']}")
           print(f"record_id={s['latest_record_id']}")
           print(f"package_sha={s['latest_package_identity_sha256']}")
@@ -155,7 +150,9 @@ jobs:
           RECORD_ID: ${{ steps.zenodo.outputs.record_id }}
         run: |
           set -euo pipefail
-          python3 "$RUNNER_TEMP/repository-capsule/restore-trinity-accord.py" --zenodo-record-id "$RECORD_ID" --output-dir "$RUNNER_TEMP/doi-restore"
+          python3 "$RUNNER_TEMP/repository-capsule/restore-trinity-accord.py" \
+            --zenodo-record-id "$RECORD_ID" \
+            --output-dir "$RUNNER_TEMP/doi-restore"
           REPORT="$RUNNER_TEMP/doi-restore/recovery-report.json" python3 - <<'PY'
           import json,os
           r=json.load(open(os.environ['REPORT']))
@@ -163,41 +160,7 @@ jobs:
           if r.get('source_git_commit_sha')!=os.environ['SOURCE_SHA']: raise SystemExit('public DOI source mismatch')
           PY
 
-      - name: Build deterministic Arweave transport from same capsule
-        id: transport
-        run: |
-          set -euo pipefail
-          cd "$RUNNER_TEMP/repository-capsule"
-          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -cf "$RUNNER_TEMP/repository-capsule.tar" .
-          cd - >/dev/null
-          echo "sha=$(sha256sum "$RUNNER_TEMP/repository-capsule.tar" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "bytes=$(stat -c %s "$RUNNER_TEMP/repository-capsule.tar")" >> "$GITHUB_OUTPUT"
-
-      - name: Upload same repository capsule to Arweave and verify public readback
-        id: arweave
-        env:
-          SOURCE_SHA: ${{ steps.preflight.outputs.source_sha }}
-          CAPSULE_ID: ${{ steps.capsule.outputs.capsule_id }}
-          PACKAGE_SHA: ${{ steps.capsule.outputs.package_sha }}
-        run: |
-          set -euo pipefail
-          node scripts/upload_repository_capsule_to_arweave.mjs \
-            --payload "$RUNNER_TEMP/repository-capsule.tar" \
-            --out "$RUNNER_TEMP/arweave-result.json" \
-            --capsule-id "$CAPSULE_ID" \
-            --source-sha "$SOURCE_SHA" \
-            --package-sha256 "$PACKAGE_SHA"
-          RESULT="$RUNNER_TEMP/arweave-result.json" python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json,os
-          r=json.load(open(os.environ['RESULT']))
-          if r.get('status')!='uploaded_and_publicly_verified': raise SystemExit('Arweave public readback not verified')
-          if r.get('payload_sha256')!=r.get('readback_sha256'): raise SystemExit('Arweave readback hash mismatch')
-          print(f"txid={r['txid']}")
-          print(f"payload_sha={r['payload_sha256']}")
-          print(f"payload_bytes={r['payload_bytes']}")
-          PY
-
-      - name: Seal durable DOI and Arweave observation
+      - name: Seal durable DOI observation while leaving Arweave unchanged
         env:
           SOURCE_SHA: ${{ steps.preflight.outputs.source_sha }}
           CAPSULE_ID: ${{ steps.capsule.outputs.capsule_id }}
@@ -205,61 +168,64 @@ jobs:
           GIT_TREE_OID: ${{ steps.capsule.outputs.git_tree_oid }}
           DOI: ${{ steps.zenodo.outputs.doi }}
           RECORD_ID: ${{ steps.zenodo.outputs.record_id }}
-          AR_TXID: ${{ steps.arweave.outputs.txid }}
-          AR_PAYLOAD_SHA: ${{ steps.arweave.outputs.payload_sha }}
-          AR_PAYLOAD_BYTES: ${{ steps.arweave.outputs.payload_bytes }}
         run: |
           set -euo pipefail
-          cp "$RUNNER_TEMP/arweave-result.json" preservation/bitcoin12-repository-arweave-upload-result.json
           python3 - <<'PY'
           import json,os
           from pathlib import Path
           auth_path=Path('preservation/bitcoin12-external-closure-authorization-v1.json')
           auth=json.loads(auth_path.read_text())
           auth.update({
-            'status':'consumed','published_source_baseline_commit_sha':os.environ['SOURCE_SHA'],
-            'published_repository_doi':os.environ['DOI'],'published_repository_record_id':int(os.environ['RECORD_ID']),
-            'published_package_identity_sha256':os.environ['PACKAGE_SHA'],'published_arweave_txid':os.environ['AR_TXID'],
-            'published_arweave_payload_sha256':os.environ['AR_PAYLOAD_SHA']})
+            'status':'doi_published_arweave_deferred',
+            'published_source_baseline_commit_sha':os.environ['SOURCE_SHA'],
+            'published_repository_doi':os.environ['DOI'],
+            'published_repository_record_id':int(os.environ['RECORD_ID']),
+            'published_package_identity_sha256':os.environ['PACKAGE_SHA'],
+            'arweave_publication_status':'deferred_by_owner'
+          })
           auth_path.write_text(json.dumps(auth,ensure_ascii=False,indent=2)+'\n')
           observation={
-            'schema':'trinityaccord.bitcoin12-external-closure-observation.v1','status':'passed',
-            'source_git_commit_sha':os.environ['SOURCE_SHA'],'git_tree_oid':os.environ['GIT_TREE_OID'],
-            'capsule_id':os.environ['CAPSULE_ID'],'package_identity_sha256':os.environ['PACKAGE_SHA'],
-            'repository_doi':os.environ['DOI'],'zenodo_record_id':int(os.environ['RECORD_ID']),
-            'public_doi_only_cold_restore':'passed','arweave_txid':os.environ['AR_TXID'],
-            'arweave_payload_sha256':os.environ['AR_PAYLOAD_SHA'],'arweave_payload_bytes':int(os.environ['AR_PAYLOAD_BYTES']),
-            'public_arweave_readback':'passed','bitcoin_l1_l2_l3':'12/12 PASS',
-            'tag5_metadata_present':1,'tag5_metadata_absent_verified':11,
-            'non_amending_boundary':True,'three_bitcoin_originals_remain_canonical':True,
-            'repository_doi_and_arweave_share_exact_capsule_identity':True,
-            'live_main_equivalence_claimed':False}
-          Path('preservation/bitcoin12-external-closure-observation-v1.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2)+'\n')
+            'schema':'trinityaccord.bitcoin12-doi-closure-observation.v1',
+            'status':'passed',
+            'source_git_commit_sha':os.environ['SOURCE_SHA'],
+            'git_tree_oid':os.environ['GIT_TREE_OID'],
+            'capsule_id':os.environ['CAPSULE_ID'],
+            'package_identity_sha256':os.environ['PACKAGE_SHA'],
+            'repository_doi':os.environ['DOI'],
+            'zenodo_record_id':int(os.environ['RECORD_ID']),
+            'public_doi_only_cold_restore':'passed',
+            'arweave_publication_status':'deferred_by_owner',
+            'new_arweave_transaction_created':False,
+            'bitcoin_l1_l2_l3':'12/12 PASS',
+            'tag5_metadata_present':1,
+            'tag5_metadata_absent_verified':11,
+            'non_amending_boundary':True,
+            'three_bitcoin_originals_remain_canonical':True,
+            'future_arweave_must_preserve_this_capsule_identity':True,
+            'live_main_equivalence_claimed':False
+          }
+          Path('preservation/bitcoin12-doi-closure-observation-v1.json').write_text(
+            json.dumps(observation,ensure_ascii=False,indent=2)+'\n')
           state=json.load(open('preservation/bitcoin12-zenodo-work-state.json'))
           Path('preservation/zenodo-state.json').write_text(json.dumps(state,ensure_ascii=False,indent=2)+'\n')
-          catalog=json.load(open('preservation/recovery-catalog.json'))
+          catalog_path=Path('preservation/recovery-catalog.json')
+          catalog=json.loads(catalog_path.read_text())
           core=catalog['core_repository']
           core['current_verified_version_doi']=os.environ['DOI']
           core['current_verified_source_git_commit_sha']=os.environ['SOURCE_SHA']
-          previous=core.get('verified_arweave_mirror')
-          core['previous_verified_arweave_mirror']=previous
-          core['verified_arweave_mirror']={
-            'record':'preservation/bitcoin12-repository-arweave-upload-result.json','txid':os.environ['AR_TXID'],
-            'capsule_id':os.environ['CAPSULE_ID'],'source_git_commit_sha':os.environ['SOURCE_SHA'],
-            'git_tree_oid':os.environ['GIT_TREE_OID'],'package_identity_sha256':os.environ['PACKAGE_SHA'],
-            'payload_bytes':int(os.environ['AR_PAYLOAD_BYTES']),'payload_sha256':os.environ['AR_PAYLOAD_SHA'],
-            'public_readback':'passed','scope':'Exact non-authoritative repository preservation capsule mirror including verified 12-item Bitcoin proof annex v2 and tag-5 CBOR preservation.'}
-          Path('preservation/recovery-catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
+          core['current_verified_package_identity_sha256']=os.environ['PACKAGE_SHA']
+          core['current_verified_record_id']=int(os.environ['RECORD_ID'])
+          core['current_repository_arweave_publication_status']='deferred_by_owner'
+          catalog_path.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
           PY
           rm preservation/bitcoin12-zenodo-work-state.json
           git config user.name actions-user
           git config user.email actions@github.com
           git add preservation/bitcoin12-external-closure-authorization-v1.json \
-            preservation/bitcoin12-external-closure-observation-v1.json \
-            preservation/bitcoin12-repository-arweave-upload-result.json \
+            preservation/bitcoin12-doi-closure-observation-v1.json \
             preservation/zenodo-state.json preservation/recovery-catalog.json
           git diff --cached --check
-          git commit -m 'preservation: seal 12-item DOI and Arweave closure'
+          git commit -m 'preservation: seal 12-item DOI closure; defer Arweave'
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main && git push origin HEAD:main && exit 0
