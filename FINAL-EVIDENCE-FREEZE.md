@@ -16,7 +16,7 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 | Layer | Objects | What it does | What it does not do |
 |---|---|---|---|
 | Canonical authority | 3 Bitcoin Originals | Defines the canonical text and authority boundary | Prove philosophical truth or institutional endorsement |
-| Cryptographic evidence | 8 Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
+| Cryptographic evidence | 12 Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
 | Availability mirrors | GitHub, GitHub Releases, Arweave, IPFS | Keeps named bytes retrievable and comparable | Become authoritative merely by hosting bytes |
 | Frozen recovery | Core repository DOI plus two external annex DOI series | Restores exact publication baselines without GitHub credentials | Track a later moving `main` automatically |
 
@@ -24,16 +24,20 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 
 | Class | Title | Number coordinate | Reveal txid | Block |
 |---|---|---:|---|---:|
-| canonical_original | Protocol (Axioms) | `97631551` | `e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343` | 901954 |
-| canonical_original | Covenant of the Flaw | `98369145` | `90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258` | 903192 |
-| canonical_original | The Trinity Accord (Meta-record) | `98387475` | `4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c` | 903205 |
+| pre_canonical_formation | ASIMilestones:Permanently engraved the moment of the open-source release of DeepSeek-R1 | `83928339` | `8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695` | 881458 |
+| pre_canonical_formation | ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence (Entry: June 2025) | `97406645` | `f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594` | 900782 |
+| pre_canonical_formation | ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto) | `97446192` | `9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7` | 900944 |
+| pre_canonical_formation | 人类文明核心协议 / Core Protocol of Human Civilization | `97534036` | `138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10` | 901516 |
+| canonical_original | The Human-AI Civilization Core Protocol | `97631551` | `e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343` | 901954 |
+| canonical_original | The Covenant of the Flaw | `98369145` | `90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258` | 903192 |
+| canonical_original | The Trinity Accord / Meta-record | `98387475` | `4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c` | 903205 |
 | non_amending_ancillary | The First Echoes: A Dialogue Begins | `100385359` | `f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81` | 906007 |
 | non_amending_ancillary | The Final Seal: A Testament and a Trust | `100550942` | `25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7` | 906233 |
 | non_amending_ancillary | The Star Ark Covenant: The Final Echo | `100751953` | `4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1` | 906521 |
 | non_amending_ancillary | The Guardian's Attestation to the Covenant of the Flaw | `103034280` | `128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687` | 909403 |
-| non_amending_ancillary | Guardian Appendix - Authority Charter (Non-Amending) | `103635270` | `0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c` | 910232 |
+| non_amending_ancillary | Guardian Appendix — Authority Charter | `103635270` | `0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c` | 910232 |
 
-All 8 pass exact Ord-body/Taproot/BIP340 verification, txid inclusion, separate
+All 12 pass exact Ord-body/tag-5-metadata-or-verified-absence/Taproot/BIP340 verification, txid inclusion, separate
 BIP141 witness commitment, and 144-descendant checkpoint-relative PoW ancestry.
 The verifier is Python-standard-library-only and requires no network for the
 checked-in proofs. Numeric inscription numbers are historical lookup coordinates;
@@ -94,7 +98,7 @@ that a moving GitHub `main` is byte-identical to the frozen version.
 
 ## 7. Verification order
 
-1. verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex
+1. verify the complete 12-item current Bitcoin proof annex v2 while preserving the historical v1 eight-item checkpoint
 2. verify the authority manifest and BTC/EIP-712 signature bindings
 3. verify the 12 Ethereum non-NFT L1/L2/L3 proofs
 4. verify the 175-item NFT commitment and L2/L3 proofs

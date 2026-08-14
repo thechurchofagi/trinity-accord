@@ -8,6 +8,7 @@ cold-restore verification succeeds.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -35,6 +36,13 @@ def load(path: Path) -> dict[str, Any]:
 def dump(path: Path, obj: dict[str, Any]) -> None:
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+
+
+def canonical_source_digest(doc: dict[str, Any]) -> str:
+    clone = dict(doc)
+    clone.pop("source_digest", None)
+    raw = json.dumps(clone, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()[:16]
 
 def verified_inputs() -> tuple[dict[str, Any], dict[str, Any]]:
     manifest = load(V2_MANIFEST)
@@ -141,6 +149,8 @@ def update_final_inventory(manifest: dict[str, Any], report: dict[str, Any]) -> 
         "authority_boundary": "Only the three designated Bitcoin Originals are canonical. The four formation records and five later records are non-canonical and non-amending.",
     })
     bitcoin.pop("non_amending_ancillary", None)
+    if doc.get("verification_order"):
+        doc["verification_order"][0] = "verify the complete 12-item current Bitcoin proof annex v2 while preserving the historical v1 eight-item checkpoint"
     dump(path, doc)
 
 
@@ -196,6 +206,7 @@ def update_evidence_manifest(report: dict[str, Any]) -> None:
         "new_arweave_upload": "required_for_current_git_delta_not_yet_claimed_here",
         "recovery_boundary": "The currently named older DOI remains an exact historical publication baseline until a new version is publicly verified. Current Git v2 proof bytes are not retroactively attributed to it.",
     })
+    doc["source_digest"] = canonical_source_digest(doc)
     dump(path, doc)
 
 

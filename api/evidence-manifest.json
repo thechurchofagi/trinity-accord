@@ -210,7 +210,7 @@
     }
   },
   "version": "v1",
-  "source_digest": "1bbe6a4d314e8baa",
+  "source_digest": "ce557fdcc68f293e",
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",

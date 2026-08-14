@@ -562,7 +562,7 @@
     "boundary": "Checkpoint v4 is an immutable exact-baseline publication, not a permanent end to future material evidence versions and not a new source of canonical authority."
   },
   "verification_order": [
-    "verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex",
+    "verify the complete 12-item current Bitcoin proof annex v2 while preserving the historical v1 eight-item checkpoint",
     "verify the authority manifest and BTC/EIP-712 signature bindings",
     "verify the 12 Ethereum non-NFT L1/L2/L3 proofs",
     "verify the 175-item NFT commitment and L2/L3 proofs",
@@ -578,5 +578,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "a5089e7bfcc3a380"
+  "source_digest": "344a9c5e0efb61da"
 }

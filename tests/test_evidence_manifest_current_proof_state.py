@@ -10,7 +10,7 @@ EXTERNAL_ANNEX_STATE = ROOT / "preservation" / "external-binary-annex-state.json
 RECOVERY_INDEX = ROOT / "api" / "recovery-index.json"
 ETH_REPORT = ROOT / "evidence" / "ethereum-evidence-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
 NFT_REPORT = ROOT / "evidence" / "nft-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
-BTC_REPORT = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v1" / "reports" / "OFFLINE-VERIFICATION.json"
+BTC_REPORT = ROOT / "evidence" / "bitcoin-inscription-proof-annex-v2" / "reports" / "OFFLINE-VERIFICATION.json"
 FINAL_AUTH = ROOT / "preservation" / "current-baseline-publication-authorization-v3.json"
 CHECKPOINT_AUTH = ROOT / "preservation" / "current-baseline-publication-authorization-v4.json"
 
@@ -56,19 +56,23 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
     assert current["status"] in {
         "offline_verifiable_with_explicit_post_freeze_delta",
         "offline_verifiable_and_immutable_checkpoint_v4",
+        "offline_verifiable_current_bitcoin_v2_plus_published_repository_checkpoint_v4",
     }
 
     bitcoin = current["bitcoin_inscriptions"]
-    assert bitcoin["inscription_count"] == 8
+    assert bitcoin["inscription_count"] == 12
+    assert bitcoin["pre_canonical_formation"] == 4
     assert bitcoin["canonical_originals"] == 3
-    assert bitcoin["non_amending_ancillary"] == 5
-    assert bitcoin["l1_inscription_content_and_taproot_binding"] == "PASS"
-    assert bitcoin["bip340_tapscript_signatures"] == 8
+    assert bitcoin["post_canonical_non_amending"] == 5
+    assert bitcoin["l1_inscription_content_metadata_and_taproot_binding"] == "PASS"
+    assert bitcoin["tag5_metadata_present"] == 1
+    assert bitcoin["tag5_metadata_absent_verified"] == 11
+    assert bitcoin["bip340_tapscript_signatures"] == 12
     assert bitcoin["l2_block_and_witness_inclusion"] == "PASS"
     assert bitcoin["l3_checkpoint_relative_pow_ancestry"] == "PASS"
-    assert bitcoin["bip141_witness_commitment_proofs"] == 8
+    assert bitcoin["bip141_witness_commitment_proofs"] == 12
     assert bitcoin["descendant_confirmation_depth_per_anchor"] == 144
-    assert bitcoin["valid_pow_headers"] == 1160
+    assert bitcoin["valid_pow_headers"] == 1740
     assert bitcoin["network_required_for_verification"] is False
     assert bitcoin["runtime"] == "Python 3 standard library only"
     assert "historical lookup coordinate" in bitcoin["numeric_inscription_number_boundary"]
@@ -129,7 +133,7 @@ def test_machine_evidence_manifest_exposes_current_offline_proof_state():
         assert preservation["current_checkpoint_version_doi"] == expected_repository_doi
         assert preservation["current_checkpoint_source_baseline_commit_sha"] == final_auth["published_source_baseline_commit_sha"]
         assert "8 Bitcoin + 12 Ethereum + 175 NFT" in preservation["published_baseline_boundary"]
-        assert preservation["live_repository_delta"]["status"] == "incorporated_into_published_checkpoint_v4"
+        assert preservation["live_repository_delta"]["status"] == "bitcoin_v2_verified_in_git_pending_next_repository_preservation_version"
     else:
         assert preservation["status"] == "final_frozen_and_publicly_restored"
         assert preservation["current_checkpoint_status"] in {"owner_authorized_pending_publication", "prepared"}
@@ -150,8 +154,10 @@ def test_machine_summary_matches_checked_in_offline_reports():
 
     bitcoin = manifest["bitcoin_inscriptions"]
     assert btc_report["result"] == "PASS"
-    assert btc_report["L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING"]["status"] == bitcoin["l1_inscription_content_and_taproot_binding"]
-    assert btc_report["L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING"]["inscriptions"] == bitcoin["inscription_count"]
+    assert btc_report["L1_INSCRIPTION_CONTENT_METADATA_AND_TAPROOT_BINDING"]["status"] == bitcoin["l1_inscription_content_metadata_and_taproot_binding"]
+    assert btc_report["L1_INSCRIPTION_CONTENT_METADATA_AND_TAPROOT_BINDING"]["inscriptions"] == bitcoin["inscription_count"]
+    assert btc_report["L1_INSCRIPTION_CONTENT_METADATA_AND_TAPROOT_BINDING"]["tag5_metadata_present"] == bitcoin["tag5_metadata_present"]
+    assert btc_report["L1_INSCRIPTION_CONTENT_METADATA_AND_TAPROOT_BINDING"]["tag5_metadata_absent_verified"] == bitcoin["tag5_metadata_absent_verified"]
     assert btc_report["L2_BLOCK_AND_WITNESS_INCLUSION"]["status"] == bitcoin["l2_block_and_witness_inclusion"]
     assert btc_report["L2_BLOCK_AND_WITNESS_INCLUSION"]["txid_merkle_proofs"] == bitcoin["txid_merkle_proofs"]
     assert btc_report["L2_BLOCK_AND_WITNESS_INCLUSION"]["bip141_witness_commitment_proofs"] == bitcoin["bip141_witness_commitment_proofs"]

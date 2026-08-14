@@ -188,7 +188,7 @@ def validate_generated(auth: dict[str, Any], index: dict[str, Any]) -> None:
     checkpoint = expected.get("current_checkpoint")
     require(isinstance(checkpoint, dict), "inventory.current_checkpoint missing")
     require_equal(checkpoint.get("status"), auth.get("status"), "inventory.current_checkpoint.status")
-    require_equal(expected["evidence_sets"]["bitcoin_inscriptions"]["count"], 8, "inventory.bitcoin.count")
+    require_equal(expected["evidence_sets"]["bitcoin_inscriptions"]["count"], 12, "inventory.bitcoin.count")
     require_equal(expected["evidence_sets"]["ethereum_non_nft"]["count"], 12, "inventory.ethereum.count")
     require_equal(expected["evidence_sets"]["ethereum_chronicle_nft"]["asset_count"], 175, "inventory.nft.count")
 
