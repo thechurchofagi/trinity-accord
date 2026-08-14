@@ -32,7 +32,7 @@ def main() -> int:
     home_base = (ROOT / "assets/css/trinity-home-base.css").read_text(encoding="utf-8")
 
     records = index.get("records", [])
-    require(len(records) == 8, "mirror index must contain all eight inscriptions")
+    require(len(records) == 8, "curated mirror index must contain the historical eight inscriptions")
     for record in records:
         inscription = record.get("inscription", {})
         number = inscription.get("inscription_number")
@@ -44,7 +44,11 @@ def main() -> int:
     for number in ("97631551", "98369145", "98387475"):
         require(EXPECTED[number] in originals_page, f"canonical page missing full ID for {number}")
 
-    require("| Inscription Number | Status |" in authority_page, "verification table still mislabels numbers as IDs")
+    verification_headers = (
+        "| Inscription Number | Status |",
+        "| Inscription Number | Current proof status |",
+    )
+    require(any(header in authority_page for header in verification_headers), "verification table still mislabels numbers as IDs")
     require("text-decoration-line: underline" in style, "content-page text links are not visibly underlined")
     require("text-decoration-line: underline !important" in home_base, "homepage text links are not visibly underlined")
     require("word-break: break-all" in style, "long inscription IDs do not wrap on mobile")
