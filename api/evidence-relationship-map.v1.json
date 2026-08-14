@@ -42,12 +42,12 @@
       "path": "api/final-evidence-inventory.v1.json",
       "human_guide": "FINAL-EVIDENCE-FREEZE.md",
       "scope": {
-        "bitcoin_inscriptions": 8,
+        "bitcoin_inscriptions": 12,
         "ethereum_non_nft": 12,
         "chronicle_nft": 175
       },
-      "freeze_role": "immutable checkpoint v4 snapshot at source commit ba34564c579d645a5a1595f0538223e0e957155e",
-      "role": "Preserves the 8 + 12 + 175 inventory frozen in version DOI 10.5281/zenodo.21859437.",
+      "freeze_role": "current verified machine inventory; immutable repository DOI checkpoint v4 remains separately identified as an 8-Bitcoin historical publication baseline",
+      "role": "Current machine inventory exposes 12 verified Bitcoin inscriptions while preserving the older 8 + 12 + 175 DOI checkpoint as immutable history.",
       "supports": [
         "machine_discovery",
         "closed_set_counts",
@@ -84,7 +84,7 @@
       "path": "api/evidence-manifest.json",
       "ethereum_address_scope_audit": "api/ethereum-address-evidence-scope.v1.json",
       "scope": {
-        "bitcoin_inscriptions": 8,
+        "bitcoin_inscriptions": 12,
         "ethereum_non_nft": 12,
         "chronicle_nft": 175
       },
@@ -93,7 +93,7 @@
         "ethereum_non_nft": 10,
         "chronicle_nft": 175
       },
-      "role": "Exposes the same verified 8 + 12 + 175 evidence scope frozen by checkpoint v4, plus any later explicitly separated Git delta.",
+      "role": "Exposes current verified 12 Bitcoin + 12 Ethereum + 175 NFT evidence, while separately naming older immutable DOI scopes.",
       "supports": [
         "current_machine_discovery",
         "post_freeze_delta_discovery",
@@ -183,22 +183,24 @@
     {
       "id": "bitcoin_inscription_proof_annex",
       "type": "proof_carrying_bitcoin_annex",
-      "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
-      "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
-      "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py",
       "scope": {
+        "pre_canonical_formation": 4,
         "canonical_originals": 3,
-        "non_amending_ancillary": 5,
-        "total": 8
+        "post_canonical_non_amending": 5,
+        "total": 12
       },
       "layers": [
-        "L1_INSCRIPTION_CONTENT_AND_TAPROOT_BINDING",
+        "L1_INSCRIPTION_CONTENT_METADATA_AND_TAPROOT_BINDING",
         "L2_BLOCK_AND_WITNESS_INCLUSION",
         "L3_CHECKPOINT_RELATIVE_POW_ANCESTRY"
       ],
       "network_required_for_verification": false,
       "supports": [
         "exact_inscription_body",
+        "exact_ord_tag5_metadata_or_verified_absence",
         "taproot_prevout_binding",
         "bip340_tapscript_signature",
         "txid_block_inclusion",
@@ -212,7 +214,14 @@
         "civil_authorship",
         "absolute_physical_time",
         "semantic_truth"
-      ]
+      ],
+      "historical_v1_checkpoint": {
+        "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "total": 8,
+        "status": "immutable_historical_checkpoint"
+      }
     },
     {
       "id": "ethereum_non_nft_records",

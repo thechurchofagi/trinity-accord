@@ -56,7 +56,19 @@
       "authorized_base_commit_sha": "1f772c295566eb2808334428c373c073c5751204",
       "version_doi": "10.5281/zenodo.21859437",
       "source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
-      "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36"
+      "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36",
+      "historical_scope_note": "Immutable checkpoint v4 predates the 12-item Bitcoin v2 proof and remains correctly described as an 8-Bitcoin publication baseline."
+    },
+    "current_git_verified_bitcoin_proof": {
+      "status": "PASS",
+      "count": 12,
+      "pre_canonical_formation": 4,
+      "canonical_originals": 3,
+      "post_canonical_non_amending": 5,
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py",
+      "published_repository_version_boundary": "The current verified v2 proof is Git-tracked after the currently named checkpoint DOI. Do not attribute v2 bytes to an older DOI; resolve the concept DOI after the next verified publication."
     }
   },
   "external_binary_annexes": {
@@ -77,7 +89,7 @@
     "Resolve and restore the latest core repository version from concept DOI 10.5281/zenodo.21739343, or retrieve the exact verified Arweave repository capsule mirror identified in core_repository.verified_arweave_mirror.",
     "Verify the recovered preservation manifest and tracked-file inventory.",
     "Read api/final-evidence-inventory.v1.json and api/evidence-relationship-map.v1.json to identify authority, proof, mirror and preservation roles without conflating them.",
-    "Run the checked-in offline verifiers for the 8 Bitcoin inscriptions, 10 non-NFT Ethereum anchors and 175-item NFT commitment/proof set.",
+    "Run the checked-in current offline verifier for the 12-item Bitcoin v2 snapshot, plus the Ethereum and 175-item NFT verifiers; when restoring an older DOI, respect that version's historical Bitcoin scope.",
     "Restore evidence annex DOI 10.5281/zenodo.21753937.",
     "Restore Chronicle NFT annex DOI 10.5281/zenodo.21754229.",
     "Verify Bitcoin Originals, authority manifests, signatures, digest manifests and corrections-index before making authority-level claims."
