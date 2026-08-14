@@ -33,6 +33,26 @@ def test_manifest_has_no_fixed_expected_count():
     assert "expected_count" not in manifest
 
 
+def test_write_object_uses_recursive_metadata_endpoint(tmp_path):
+    inscription_id = "a" * 64 + "i0"
+    metadata = {
+        "id": inscription_id,
+        "address": sync_mod.AUTHORITY_ADDRESS,
+        "content_length": 3,
+        "content_type": "text/plain",
+    }
+    with patch.object(sync_mod, "fetch_json", return_value=metadata) as fetch_json, patch.object(
+        sync_mod, "fetch_bytes", return_value=b"abc"
+    ):
+        result = sync_mod.write_object(
+            "https://ordinals.example", sync_mod.AUTHORITY_ADDRESS, inscription_id, tmp_path
+        )
+    fetch_json.assert_called_once_with(
+        f"https://ordinals.example/r/inscription/{inscription_id}", negotiate=False
+    )
+    assert result["content_sha256"] == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+
+
 def test_sync_fails_closed_when_address_set_changes(tmp_path):
     first = ["0" * 64 + "i0"]
     second = ["0" * 64 + "i0", "1" * 64 + "i0"]
