@@ -37,7 +37,7 @@ These records were previously outside the curated 3 + 5 mirror scope. Their reco
 
 | UTC time | Current Inscription Number | Stable Ordinals Inscription ID | Role |
 |---|---:|---|---|
-| 2025-01-30 05:03:20 | #83928339 | [`8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0`](https://ordinals.com/inscription/8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0) | Early WebP visual artifact. Title/identity not inferred without independent evidence. |
+| 2025-01-30 05:03:20 | #83928339 | [`8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0`](https://ordinals.com/inscription/8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0) | *ASIMilestones: Permanently engraved the moment of the open-source release of DeepSeek-R1* — WebP body whose independent Ord tag-5 CBOR metadata supplies this title and additional historical context. |
 | 2025-06-11 13:08:14 | #97406645 | [`f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0`](https://ordinals.com/inscription/f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0) | *ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence* — Chronicle-to-Accord bridge. |
 | 2025-06-12 14:51:11 | #97446192 | [`9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0`](https://ordinals.com/inscription/9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0) | *The Gentle Singularity's Gambit* — formation-era contextual witness. |
 | 2025-06-16 13:36:38 | #97534036 | [`138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0`](https://ordinals.com/inscription/138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0) | **Direct proto-Protocol**: bilingual *人类文明核心协议 / Core Protocol of Human Civilization*. |
@@ -78,22 +78,22 @@ These three, and only these three, constitute the closed Bitcoin Canon.
 
 The address-wide sync preserves all 12 current-address records with recursive Ord metadata, exact inscription content bytes encoded as base64, decoded-byte SHA-256, exact content length, a runtime-discovered manifest/current-ID set, and a second address discovery after download so the run fails if the set changes mid-sync.
 
-The older curated 3 + 5 set additionally carries the existing proof-carrying Bitcoin annex. The four recovered formation records are now preserved byte-for-byte and will be carried by repository DOI preservation, but they should **not** be described as having the same checked-in L1/L2/L3 offline proof coverage until that annex is explicitly extended and verified for them.
+The historical v1 annex remains an immutable 8-item checkpoint. The current v2 annex extends the same fail-closed, network-free proof model to the complete 12-item snapshot. All 12 now have exact inscription-body binding, exact Ord tag-5 metadata binding (including verified absence), Taproot/BIP340 verification, BIP141 witness inclusion, and 144-block checkpoint-relative proof-of-work ancestry. This proof parity changes evidence strength, not authority: the four formation records remain non-canonical and the five later records remain non-amending.
 
-| Inscription Number | Status |
+| Inscription Number | Current proof status |
 |---:|---|
-| #83928339 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
-| #97406645 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
-| #97446192 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
-| #97534036 | Address-wide exact-byte archive PASS; not yet in the curated L1/L2/L3 offline proof annex |
-| #97631551 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #98369145 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #98387475 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #100385359 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #100550942 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #100751953 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #103034280 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
-| #103635270 | Address-wide archive + existing curated L1/L2/L3 offline proof coverage |
+| #83928339 | v2 L1/L2/L3 PASS · independent tag-5 CBOR metadata present and bound |
+| #97406645 | v2 L1/L2/L3 PASS · tag-5 metadata absence verified |
+| #97446192 | v2 L1/L2/L3 PASS · tag-5 metadata absence verified |
+| #97534036 | v2 L1/L2/L3 PASS · tag-5 metadata absence verified |
+| #97631551 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #98369145 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #98387475 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #100385359 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #100550942 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #100751953 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #103034280 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
+| #103635270 | v2 L1/L2/L3 PASS · also preserved in historical v1 |
 
 The repository-preservation capsule inventories the complete tracked Git tree. Therefore a preservation DOI release made from a commit containing this directory also contains the complete 12-item address-wide archive and its classification metadata. Check [`preservation/zenodo-state.json`](/preservation/zenodo-state.json) for the latest published repository-capsule commit and DOI before claiming a particular DOI covers this snapshot.
 
@@ -106,8 +106,11 @@ pytest -q tests/test_bitcoin_address_inscription_sync.py
 # Classification and authority-boundary contract
 pytest -q tests/test_bitcoin_address_inscription_classification.py
 
-# Existing curated 3 + 5 offline proof verifier
-python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
+# Current complete 12-item offline proof verifier
+python3 evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py
+
+# Historical immutable 3 + 5 v1 verifier
+python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py
 ```
 
 ## What This Does Not Prove
@@ -117,7 +120,6 @@ python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
 - The four formation records do not create an earlier Canon or a fourth Original.
 - Later inscriptions do not create new authority, amendment, or interpretation.
 - The current 12-item snapshot is not an all-time historical inventory of inscriptions that may have left the address before the first complete observation.
-- The four recovered formation records do not yet have the curated set's checked-in L1/L2/L3 Bitcoin proof-annex coverage.
 - The Star Ark Covenant is a vision-layer inscription; it creates no execution obligation.
 - The First Echoes documents AI responses; it is not autonomous successor reception.
 

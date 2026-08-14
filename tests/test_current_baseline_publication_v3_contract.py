@@ -65,7 +65,7 @@ def test_final_inventory_is_derived_and_complete():
     inventory = load(INVENTORY)
     assert inventory["source_digest"] == canonical_digest(inventory)
     assert inventory["authority_boundary"]["canonical_count"] == 3
-    assert inventory["evidence_sets"]["bitcoin_inscriptions"]["count"] == 8
+    assert inventory["evidence_sets"]["bitcoin_inscriptions"]["count"] == 12
     assert inventory["evidence_sets"]["bitcoin_inscriptions"]["network_required_for_verification"] is False
     # The compatibility inventory path now exposes the current v4 checkpoint;
     # the immutable v3 10-anchor scope remains under final_freeze history.

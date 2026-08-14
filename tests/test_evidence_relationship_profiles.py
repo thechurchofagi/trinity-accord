@@ -46,9 +46,10 @@ def test_evidence_relationship_map() -> None:
 
     bitcoin_annex = node_by_id["bitcoin_inscription_proof_annex"]
     assert bitcoin_annex["scope"] == {
+        "pre_canonical_formation": 4,
         "canonical_originals": 3,
-        "non_amending_ancillary": 5,
-        "total": 8,
+        "post_canonical_non_amending": 5,
+        "total": 12,
     }
     assert bitcoin_annex["network_required_for_verification"] is False
     assert "bip340_tapscript_signature" in bitcoin_annex["supports"]

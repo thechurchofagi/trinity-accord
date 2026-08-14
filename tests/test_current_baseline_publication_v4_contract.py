@@ -111,8 +111,8 @@ def test_sequence4_state_machine_and_generated_maps_validate():
         data = load(path)
         assert data["source_digest"] == canonical_digest(data)
     inventory = load(INVENTORY)
-    assert inventory["status"] == "current_evidence_checkpoint_model"
-    assert inventory["evidence_sets"]["bitcoin_inscriptions"]["count"] == 8
+    assert inventory["status"] == "current_verified_evidence_model_with_historical_published_checkpoints"
+    assert inventory["evidence_sets"]["bitcoin_inscriptions"]["count"] == 12
     assert inventory["evidence_sets"]["ethereum_non_nft"]["count"] == 12
     assert inventory["evidence_sets"]["ethereum_chronicle_nft"]["asset_count"] == 175
     assert inventory["current_checkpoint"]["sequence"] == 4

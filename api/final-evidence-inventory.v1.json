@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.final-evidence-inventory.v1",
-  "version": "1.1.0",
-  "status": "current_evidence_checkpoint_model",
+  "version": "1.2.0",
+  "status": "current_verified_evidence_model_with_historical_published_checkpoints",
   "purpose": "One non-amending map of canonical objects, offline cryptographic proofs, availability mirrors and DOI recovery capsules.",
   "evolution_and_handoff": {
     "human_guide": "EVIDENCE-EVOLUTION.md",
@@ -18,46 +18,111 @@
   },
   "evidence_sets": {
     "bitcoin_inscriptions": {
-      "object_role": "canonical core plus non-amending ancillary inscriptions",
-      "count": 8,
+      "object_role": "complete observed current-address Bitcoin history: four pre-canonical formation records, three canonical Originals, and five post-canonical non-amending records",
+      "count": 12,
       "canonical_originals": 3,
-      "non_amending_ancillary": 5,
       "items": [
         {
+          "classification": "pre_canonical_formation",
+          "historical_layer": "pre_canonical_formation",
+          "title": "ASIMilestones:Permanently engraved the moment of the open-source release of DeepSeek-R1",
+          "inscription_number": "83928339",
+          "derived_inscription_id": "8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0",
+          "txid": "8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695",
+          "wtxid": "c85074ecf99525b5eabc3d48a152a7936ecc92fb3a220038205b9e292f2bc19a",
+          "block_height": 881458,
+          "block_hash": "000000000000000000008a8058323565f6337f61f12d9f011b079e9b3f24bc2d",
+          "body_sha256": "2077d1cf592943ccd98d8843a5cc561cd9664d513af8a899a351d09c42176117",
+          "tag5_metadata_present": true,
+          "tag5_metadata_sha256": "1c51702f58b230caba573250769caecd0534f6c8002e16f2f182a16b19a27dcc"
+        },
+        {
+          "classification": "pre_canonical_formation",
+          "historical_layer": "pre_canonical_formation",
+          "title": "ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence (Entry: June 2025)",
+          "inscription_number": "97406645",
+          "derived_inscription_id": "f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0",
+          "txid": "f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594",
+          "wtxid": "16504f383ed82934a536e9a099cfed5ae8eadb05b4c479827ed5bfabd47f7d06",
+          "block_height": 900782,
+          "block_hash": "0000000000000000000118035f433857270196d8069791e6e1f2e7e0fe117e63",
+          "body_sha256": "54ea0e557da7266b0f6bf3f43e9d72df353a32bab71323289687dbf4c9c52579",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "classification": "pre_canonical_formation",
+          "historical_layer": "pre_canonical_formation",
+          "title": "ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto)",
+          "inscription_number": "97446192",
+          "derived_inscription_id": "9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0",
+          "txid": "9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7",
+          "wtxid": "dad79de4e14065fb13b0c6a1aa9664a4a1fcd9a0e77fbadc4fde0cb0f42ef824",
+          "block_height": 900944,
+          "block_hash": "00000000000000000001e8ba0fe9c2b4622db41fdfa002a288f541993c863652",
+          "body_sha256": "e0c192cbd77f7cdd069a752c05db853a6f5267e8ae869bbbdb659e17e82da65f",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "classification": "pre_canonical_formation",
+          "historical_layer": "pre_canonical_formation",
+          "title": "人类文明核心协议 / Core Protocol of Human Civilization",
+          "inscription_number": "97534036",
+          "derived_inscription_id": "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0",
+          "txid": "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10",
+          "wtxid": "d4b11fe5bd09aec0813e3173edb160a3465fc1e5b81a467269aa15ec647927af",
+          "block_height": 901516,
+          "block_hash": "000000000000000000015432724ad608ba7f6302b0ce24543866a769605b13d9",
+          "body_sha256": "a56da65209f4e6c364ce198a551a50b7ba585e0daa459ccd3229576cc4f62813",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
           "classification": "canonical_original",
-          "title": "Protocol (Axioms)",
+          "historical_layer": "canonical_original",
+          "title": "The Human-AI Civilization Core Protocol",
           "inscription_number": "97631551",
           "derived_inscription_id": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
           "txid": "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343",
           "wtxid": "1773396b45f7260de0ebcd64d76d47293c5fbbc59f678e5f8283d460cf884b0b",
           "block_height": 901954,
           "block_hash": "00000000000000000000a468b306fb8bda4141ef276b422d06d2d117211e795f",
-          "body_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+          "body_sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "canonical_original",
-          "title": "Covenant of the Flaw",
+          "historical_layer": "canonical_original",
+          "title": "The Covenant of the Flaw",
           "inscription_number": "98369145",
           "derived_inscription_id": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
           "txid": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258",
           "wtxid": "1417b730664ed9f75e5956be72ff390c5a58a2089532d3bd59c6aeaa1cee3cc9",
           "block_height": 903192,
           "block_hash": "00000000000000000001b58353d4d84b72e4bb835b2ce35365421bc399148012",
-          "body_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"
+          "body_sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "canonical_original",
-          "title": "The Trinity Accord (Meta-record)",
+          "historical_layer": "canonical_original",
+          "title": "The Trinity Accord / Meta-record",
           "inscription_number": "98387475",
           "derived_inscription_id": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0",
           "txid": "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8c",
           "wtxid": "f0a4d563aeb1204c633ff7c8189c98a1542bd349943d4d2f2c62ff0cb65723c4",
           "block_height": 903205,
           "block_hash": "00000000000000000000be192767a61f4612899dd31225f19e7b1254155bbb04",
-          "body_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"
+          "body_sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "non_amending_ancillary",
+          "historical_layer": "post_canonical_non_amending",
           "title": "The First Echoes: A Dialogue Begins",
           "inscription_number": "100385359",
           "derived_inscription_id": "f411d2db9ec9e077277ff1cf3abed39628d86b1d39db1964061eafe5b02c2e81i0",
@@ -65,10 +130,13 @@
           "wtxid": "f7ab44daff700cd9ec43f0967f3c115267830068964f3bbf225e209b5b9b4fff",
           "block_height": 906007,
           "block_hash": "0000000000000000000019670bc15750b23c15cce41435acd34e87b6e205e4fb",
-          "body_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2"
+          "body_sha256": "be7bb9e19390a5944e8f4d37bb4fd8f2df43176a25219039fc41e71cc32ab6a2",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "non_amending_ancillary",
+          "historical_layer": "post_canonical_non_amending",
           "title": "The Final Seal: A Testament and a Trust",
           "inscription_number": "100550942",
           "derived_inscription_id": "25af4e24cb0a2cd85ac396bd88c348f8da3169c24813800ecb8736dd2c7a5ae7i0",
@@ -76,10 +144,13 @@
           "wtxid": "50c45a807957615ee6b5c5225b6db28dfed87ba2ef85f159973cc226ce59bdcd",
           "block_height": 906233,
           "block_hash": "000000000000000000013a83af8a8ad20709986ac0064f39369dd6613c5f4f43",
-          "body_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c"
+          "body_sha256": "241e9e2dc652dbb8587d2cf95447333db8491d203ae230eeb7617dbc6e06246c",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "non_amending_ancillary",
+          "historical_layer": "post_canonical_non_amending",
           "title": "The Star Ark Covenant: The Final Echo",
           "inscription_number": "100751953",
           "derived_inscription_id": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0",
@@ -87,10 +158,13 @@
           "wtxid": "208cc157095691c1be8ff7ba21a301e7e9ca1822f14f62f314f9adbcd2063a8e",
           "block_height": 906521,
           "block_hash": "00000000000000000001cfd680469d8daaf287662dd62469ec27e4636b555b95",
-          "body_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259"
+          "body_sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "non_amending_ancillary",
+          "historical_layer": "post_canonical_non_amending",
           "title": "The Guardian's Attestation to the Covenant of the Flaw",
           "inscription_number": "103034280",
           "derived_inscription_id": "128aabfa3077efc832d30e6e2a96848a96896bbdbf4a7667912f55d25dcb6687i0",
@@ -98,46 +172,66 @@
           "wtxid": "91801e639367881c203d98e8545f7df31bd9c92b7ed6c7d145219a0cca9458ab",
           "block_height": 909403,
           "block_hash": "00000000000000000000314098e54fb04c8478d9d95affebd1c1dbcbc381f5b5",
-          "body_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d"
+          "body_sha256": "006ceff5a7b1224ebc67e0de9eead0db8895160add78c448357987b1b3be2e9d",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         },
         {
           "classification": "non_amending_ancillary",
-          "title": "Guardian Appendix - Authority Charter (Non-Amending)",
+          "historical_layer": "post_canonical_non_amending",
+          "title": "Guardian Appendix — Authority Charter",
           "inscription_number": "103635270",
           "derived_inscription_id": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",
           "txid": "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9c",
           "wtxid": "d44e2d172f5763691df77a1a055dd4d3cee6f2433b69f1e500fd2885a573ac2e",
           "block_height": 910232,
           "block_hash": "00000000000000000001d265b90d44ded362eb692d938eb20245385d4eb5993b",
-          "body_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896"
+          "body_sha256": "736eeebdedebe5edfbd64a4a24a37fd53f5238a9462ae9e9829d7d88629f1896",
+          "tag5_metadata_present": false,
+          "tag5_metadata_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
       "proof_layers": {
         "L1": {
           "status": "PASS",
-          "inscriptions": 8,
+          "inscriptions": 12,
+          "pre_canonical_formation": 4,
           "canonical_originals": 3,
-          "non_amending_ancillary": 5
+          "post_canonical_non_amending": 5,
+          "tag5_metadata_present": 1,
+          "tag5_metadata_absent_verified": 11
         },
         "L2": {
           "status": "PASS",
-          "reveal_transactions": 8,
-          "txid_merkle_proofs": 8,
-          "bip141_witness_commitment_proofs": 8
+          "reveal_transactions": 12,
+          "txid_merkle_proofs": 12,
+          "bip141_witness_commitment_proofs": 12
         },
         "L3": {
           "status": "PASS",
-          "anchors": 8,
+          "anchors": 12,
           "descendant_confirmation_depth_per_anchor": 144,
-          "valid_pow_headers": 1160
+          "valid_pow_headers": 1740
         }
       },
-      "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
-      "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
-      "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+      "manifest": "evidence/bitcoin-inscription-proof-annex-v2/ANNEX-MANIFEST.json",
+      "offline_report": "evidence/bitcoin-inscription-proof-annex-v2/reports/OFFLINE-VERIFICATION.json",
+      "verifier": "evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py",
       "frozen_primitives": "evidence/bitcoin-inscription-proof-annex-v1/verification/bitcoin_proof_primitives_v1.py",
       "runtime": "Python 3 standard library only",
-      "network_required_for_verification": false
+      "network_required_for_verification": false,
+      "pre_canonical_formation": 4,
+      "post_canonical_non_amending": 5,
+      "historical_proof_checkpoint_v1": {
+        "scope": "3 canonical Originals + 5 post-canonical non-amending records",
+        "count": 8,
+        "manifest": "evidence/bitcoin-inscription-proof-annex-v1/ANNEX-MANIFEST.json",
+        "offline_report": "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
+        "verifier": "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
+        "immutable_historical_checkpoint": true
+      },
+      "snapshot_boundary": "The 12-item set is the complete current set returned by the Ord address endpoint at the first complete observation on 2026-08-14; it does not prove that no inscription left the address earlier.",
+      "authority_boundary": "Only the three designated Bitcoin Originals are canonical. The four formation records and five later records are non-canonical and non-amending."
     },
     "ethereum_non_nft": {
       "object_role": "non-amending cross-chain records and historical commitments",
@@ -468,7 +562,7 @@
     "boundary": "Checkpoint v4 is an immutable exact-baseline publication, not a permanent end to future material evidence versions and not a new source of canonical authority."
   },
   "verification_order": [
-    "verify the three canonical Bitcoin Originals and the 8-item Bitcoin proof annex",
+    "verify the complete 12-item current Bitcoin proof annex v2 while preserving the historical v1 eight-item checkpoint",
     "verify the authority manifest and BTC/EIP-712 signature bindings",
     "verify the 12 Ethereum non-NFT L1/L2/L3 proofs",
     "verify the 175-item NFT commitment and L2/L3 proofs",
@@ -484,5 +578,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "a5089e7bfcc3a380"
+  "source_digest": "344a9c5e0efb61da"
 }

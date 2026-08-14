@@ -5,8 +5,10 @@
 This directory contains GitHub mirrors for quick agent loading of relevant Bitcoin inscriptions associated with the Trinity Accord.
 
 These mirrors do not create authority. Their exact bytes are now bound to a
-checked-in, proof-carrying Bitcoin annex, so the on-chain comparison can be
-reproduced cryptographically without a network connection.
+checked-in, proof-carrying Bitcoin annexes, so the on-chain comparison can be
+reproduced cryptographically without a network connection. V1 preserves the historical
+curated eight; v2 covers the complete 12-item current-address snapshot first observed
+on 14 August 2026, including exact Ord tag-5 CBOR metadata bytes or verified absence.
 
 ## Address-wide scope
 
@@ -51,8 +53,9 @@ Non-canonical Bitcoin inscriptions that provide future-facing context:
 ## Important Rules
 
 - GitHub mirrors are not canonical.
-- Run `python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py`
-  for the fail-closed, network-free comparison.
+- Run `python3 evidence/bitcoin-inscription-proof-annex-v2/verification/verify_annex.py`
+  for the current complete 12-item fail-closed, network-free comparison.
+- V1 remains an immutable historical 8-item checkpoint and is not rewritten by v2.
 - The legacy `source_address` field names the reveal transaction's destination
   P2TR address. It does not by itself prove civil authorship or key ownership.
 - The public numeric inscription number remains a historical lookup coordinate;

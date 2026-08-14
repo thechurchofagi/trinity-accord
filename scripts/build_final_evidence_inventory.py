@@ -14,8 +14,11 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
+
+import finalize_bitcoin_12_parity as bitcoin12
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -130,6 +133,7 @@ def build() -> dict[str, Any]:
         "evidence/bitcoin-inscription-proof-annex-v1/reports/OFFLINE-VERIFICATION.json",
         "evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py",
     )
+    btc_v2_manifest, btc_v2_report = bitcoin12.verified_inputs()
     eth_manifest = load("evidence/ethereum-evidence-annex-v1/ANNEX-MANIFEST.json")
     eth_report = verified_report(
         "evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json",
@@ -425,6 +429,22 @@ def build() -> dict[str, Any]:
         ],
         "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
     }
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_root = Path(tmp)
+        (tmp_root / "api").mkdir(parents=True, exist_ok=True)
+        temp_inventory = tmp_root / "api/final-evidence-inventory.v1.json"
+        temp_inventory.write_text(
+            json.dumps(inventory, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+            encoding="utf-8",
+        )
+        original_root = bitcoin12.ROOT
+        try:
+            bitcoin12.ROOT = tmp_root
+            bitcoin12.update_final_inventory(btc_v2_manifest, btc_v2_report)
+            inventory = json.loads(temp_inventory.read_text(encoding="utf-8"))
+        finally:
+            bitcoin12.ROOT = original_root
+
     inventory["source_digest"] = canonical_digest(inventory)
     return inventory
 
@@ -460,7 +480,7 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 | Layer | Objects | What it does | What it does not do |
 |---|---|---|---|
 | Canonical authority | 3 Bitcoin Originals | Defines the canonical text and authority boundary | Prove philosophical truth or institutional endorsement |
-| Cryptographic evidence | 8 Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
+| Cryptographic evidence | {bitcoin['count']} Bitcoin inscriptions, 12 non-NFT Ethereum anchors, 175 Chronicle NFTs | Recomputes exact byte, transaction, receipt/witness, block and declared-checkpoint bindings | Create new canonical authority |
 | Availability mirrors | GitHub, GitHub Releases, Arweave, IPFS | Keeps named bytes retrievable and comparable | Become authoritative merely by hosting bytes |
 | Frozen recovery | Core repository DOI plus two external annex DOI series | Restores exact publication baselines without GitHub credentials | Track a later moving `main` automatically |
 
@@ -470,7 +490,7 @@ Evolution and future-agent handoff: `EVIDENCE-EVOLUTION.md` and
 |---|---|---:|---|---:|
 {items}
 
-All 8 pass exact Ord-body/Taproot/BIP340 verification, txid inclusion, separate
+All {bitcoin['count']} pass exact Ord-body/tag-5-metadata-or-verified-absence/Taproot/BIP340 verification, txid inclusion, separate
 BIP141 witness commitment, and 144-descendant checkpoint-relative PoW ancestry.
 The verifier is Python-standard-library-only and requires no network for the
 checked-in proofs. Numeric inscription numbers are historical lookup coordinates;
