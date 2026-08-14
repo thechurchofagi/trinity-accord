@@ -6,6 +6,7 @@ on:
       - .github/workflows/sync-bitcoin-address-inscriptions.yml
       - scripts/sync_bitcoin_address_inscriptions.py
       - tests/test_bitcoin_address_inscription_sync.py
+      - tests/test_bitcoin_address_inscription_metadata_runtime.py
   push:
     branches:
       - main
@@ -13,6 +14,7 @@ on:
       - .github/workflows/sync-bitcoin-address-inscriptions.yml
       - scripts/sync_bitcoin_address_inscriptions.py
       - tests/test_bitcoin_address_inscription_sync.py
+      - tests/test_bitcoin_address_inscription_metadata_runtime.py
   workflow_dispatch:
   schedule:
     - cron: "47 8 * * *"
@@ -48,7 +50,10 @@ jobs:
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Verify dedicated sync contract
-        run: python3 -m pytest -q tests/test_bitcoin_address_inscription_sync.py
+        run: >-
+          python3 -m pytest -q
+          tests/test_bitcoin_address_inscription_sync.py
+          tests/test_bitcoin_address_inscription_metadata_runtime.py
 
   sync:
     if: github.event_name != 'pull_request'
@@ -95,7 +100,10 @@ jobs:
         run: python3 scripts/sync_bitcoin_address_inscriptions.py
 
       - name: Verify dedicated sync contract
-        run: python3 -m pytest -q tests/test_bitcoin_address_inscription_sync.py
+        run: >-
+          python3 -m pytest -q
+          tests/test_bitcoin_address_inscription_sync.py
+          tests/test_bitcoin_address_inscription_metadata_runtime.py
 
       - name: Preserve curated Bitcoin mirror boundary
         run: python3 scripts/verify_bitcoin_inscription_mirrors.py --offline --all
@@ -121,7 +129,6 @@ jobs:
           git diff --cached --check
           git commit -m "archive: sync all Bitcoin authority-address inscriptions"
 
-          # Refresh the lease immediately before publishing the automation branch.
           if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
           fi
@@ -148,4 +155,4 @@ jobs:
             --head "$SYNC_BRANCH" \
             --draft \
             --title "archive: sync all Bitcoin authority-address inscriptions" \
-            --body "Automated address-wide Ordinals snapshot. The inscription set is discovered from the authority address at runtime with no fixed expected count. Bytes served by ord for each /content/<ID>, metadata, lengths, and SHA-256 hashes are mirrored under bitcoin-inscription-mirrors/address-wide/. Historical objects are cumulative. The three Bitcoin Originals remain the only canonical body; same-address archival records do not amend or interpret them."
+            --body "Automated address-wide Ordinals snapshot. The inscription set is discovered from the authority address at runtime with no fixed expected count. Exact inscription body bytes and independent tag-5 CBOR metadata bytes, when present, are mirrored with lengths and SHA-256 hashes under bitcoin-inscription-mirrors/address-wide/. Historical objects are cumulative. The three Bitcoin Originals remain the only canonical body; same-address archival records do not amend or interpret them."

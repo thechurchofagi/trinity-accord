@@ -55,13 +55,14 @@ def test_fetch_inscription_metadata_cbor_decodes_recursive_hex_string():
         )
     assert observed == raw
     fetch_bytes.assert_called_once_with(
-        f"https://ordinals.example/r/metadata/{inscription_id}"
+        f"https://ordinals.example/r/metadata/{inscription_id}",
+        absent_statuses=frozenset({404}),
     )
 
 
 def test_fetch_inscription_metadata_cbor_accepts_absent_metadata():
     inscription_id = "a" * 64 + "i0"
-    for response in (b'""', b"null"):
+    for response in (b'""', b"null", None):
         with patch.object(sync_mod, "fetch_bytes", return_value=response):
             assert (
                 sync_mod.fetch_inscription_metadata_cbor(
