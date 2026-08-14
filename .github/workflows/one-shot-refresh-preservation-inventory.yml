@@ -1,0 +1,97 @@
+name: One-shot refresh preservation inventory
+
+on:
+  push:
+    branches:
+      - fix/repository-preservation-observation-binding
+    paths:
+      - .github/workflows/one-shot-refresh-preservation-inventory.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: fix/repository-preservation-observation-binding
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Install verification dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Bind latest preservation state to public observation and regenerate
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/build_final_evidence_inventory.py')
+          text = path.read_text(encoding='utf-8')
+          old_load = '    preservation = load("preservation/repository-preservation-state-v2.json")\n    external = load("preservation/external-binary-annex-state.json")\n'
+          new_load = '''    preservation = load("preservation/repository-preservation-state-v2.json")
+    preservation_observation = load(
+        "preservation/address-wide-repository-publication-observation-v1.json"
+    )
+    require(
+        preservation_observation.get("status") == "passed",
+        "latest repository preservation public observation is not passed",
+    )
+    require(
+        preservation_observation.get("version_doi") == preservation.get("latest_doi"),
+        "repository preservation DOI/observation mismatch",
+    )
+    require(
+        preservation_observation.get("zenodo_record_id") == preservation.get("latest_record_id"),
+        "repository preservation record/observation mismatch",
+    )
+    require(
+        preservation_observation.get("concept_doi") == preservation.get("concept_doi"),
+        "repository preservation concept DOI/observation mismatch",
+    )
+    require(
+        preservation_observation.get("source_git_commit_sha")
+        == preservation.get("latest_git_commit_sha"),
+        "repository preservation source/observation mismatch",
+    )
+    require(
+        preservation_observation.get("zenodo_package_identity_sha256")
+        == preservation.get("latest_package_identity_sha256"),
+        "repository preservation package/observation mismatch",
+    )
+    require(
+        preservation_observation.get("public_metadata_and_byte_verification") == "passed",
+        "repository preservation public metadata verification is not passed",
+    )
+    require(
+        preservation_observation.get("public_doi_only_cold_restore") == "passed",
+        "repository preservation public DOI-only cold restore is not passed",
+    )
+    repository_public_status = "published_and_publicly_restored"
+    repository_public_cold_restore = "passed"
+    external = load("preservation/external-binary-annex-state.json")
+'''
+          if old_load not in text:
+              raise SystemExit('preservation load anchor changed')
+          text = text.replace(old_load, new_load, 1)
+          old_fields = '        "status": preservation["publication_status"],\n        "public_cold_restore": preservation["public_cold_restore"],\n'
+          new_fields = '        "status": repository_public_status,\n        "public_cold_restore": repository_public_cold_restore,\n'
+          if old_fields not in text:
+              raise SystemExit('repository_latest anchor changed')
+          text = text.replace(old_fields, new_fields, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+          python3 scripts/build_final_evidence_inventory.py --write
+          python3 scripts/build_final_evidence_inventory.py --check
+          git rm .github/workflows/one-shot-refresh-preservation-inventory.yml
+      - name: Commit regenerated current preservation inventory
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/build_final_evidence_inventory.py api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
+          git commit -m "fix: bind repository preservation inventory to public observation"
+          git push origin HEAD:fix/repository-preservation-observation-binding
