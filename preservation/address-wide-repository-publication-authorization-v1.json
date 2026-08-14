@@ -1,0 +1,42 @@
+{
+  "schema": "trinityaccord.address-wide-repository-publication-authorization.v1",
+  "sequence": 1,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_at_utc": "2026-08-14T02:36:00Z",
+  "authorization_basis": "The repository owner explicitly authorized completing the DOI backup of the newly recovered complete 12-item current authority-address inscription archive using the same repository-preservation lineage previously used for the curated eight.",
+  "authorized_purpose": "Publish one new exact repository-preservation Zenodo version that includes the complete 12-item current authority-address inscription archive, its exact bytes and recursive Ord metadata, the 4 + 3 + 5 classification overlay, and the updated public explanation, with public DOI-only cold restore.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_core_version_doi": "10.5281/zenodo.21859437",
+  "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "publication_confirmation": "PUBLISH_TRINITY_ADDRESS_WIDE_REPOSITORY_V1",
+  "required_address_archive_commit_sha": "3c3070dc799d2dcff16aef95e95d3b65f1c7d1bd",
+  "previous_publication": {
+    "source_baseline_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+    "doi": "10.5281/zenodo.21859437",
+    "record_id": 21859437,
+    "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36"
+  },
+  "address_archive_scope": {
+    "authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+    "current_address_snapshot": 12,
+    "pre_canonical_formation": 4,
+    "canonical_originals": 3,
+    "post_canonical_non_amending": 5,
+    "exact_content_bytes_archived": true,
+    "recursive_ord_metadata_archived": true,
+    "decoded_content_sha256_archived": true,
+    "exact_content_length_archived": true
+  },
+  "proof_boundary": {
+    "curated_l1_l2_l3_annex_inscriptions": 8,
+    "recovered_formation_records_with_l1_l2_l3_parity": 0,
+    "claim": "This publication preserves all 12 current-address records in the repository capsule. It does not claim that the four recovered pre-canonical formation records have the same checked-in L1/L2/L3 offline proof annex as the older curated eight."
+  },
+  "include_full_repository_doi": true,
+  "include_arweave_upload": false,
+  "non_amending_boundary": true,
+  "three_bitcoin_originals_remain_canonical": true,
+  "live_main_equivalence_claimed": false,
+  "future_material_versions_allowed": true
+}
