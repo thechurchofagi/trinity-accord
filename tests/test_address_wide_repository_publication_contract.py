@@ -76,8 +76,9 @@ def test_address_archive_and_classification_are_complete_and_bounded() -> None:
     assert proto["ordinals_inscription_id"] == "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0"
 
 
-def test_workflow_reuses_repository_preservation_primitives_without_arweave() -> None:
+def test_workflow_reuses_repository_preservation_primitives_without_paid_mirror_write() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
+    lower = text.lower()
     assert "build_preservation_capsule.py" in text
     assert "publish_preservation_capsule_to_zenodo_v3.py" in text
     assert "repository_preservation_refresh.py verify-public" in text
@@ -85,4 +86,6 @@ def test_workflow_reuses_repository_preservation_primitives_without_arweave() ->
     assert "toolchain_provenance.py" in text
     assert "PUBLISH_TRINITY_ADDRESS_WIDE_REPOSITORY_V1" in text
     assert "thechurchofagi" in text
-    assert "arweave" not in text.lower()
+    assert "arweave_upload" not in lower
+    assert "arweave.net" not in lower
+    assert "arkey" not in lower
