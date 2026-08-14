@@ -41,7 +41,7 @@ def test_supplemental_evidence_routes_remain_discoverable() -> None:
 
     assert 'href="/physical-anchor/"' in HOMEPAGE
     assert 'href="/authority-address-inscriptions/"' in HOMEPAGE
-    assert "Inspect the complete 3 + 5 index" in HOMEPAGE
+    assert "Inspect the complete 4 + 3 + 5 index" in HOMEPAGE
 
 
 def test_homepage_javascript_does_not_rewrite_primary_navigation() -> None:
