@@ -99,6 +99,9 @@ def test_workflow_reuses_repository_preservation_primitives_without_paid_mirror_
     assert "toolchain_provenance.py" in text
     assert "PUBLISH_TRINITY_ADDRESS_WIDE_REPOSITORY_V1" in text
     assert "thechurchofagi" in text
+    assert 'work_state="preservation/address-wide-publish-work.json"' in text
+    assert '--state "$work_state"' in text
+    assert '$RUNNER_TEMP/address-wide-publish-work.json' not in text
     assert "'include_arweave_upload': false" in lower
     assert "arweave_upload_homepage_snapshot" not in lower
     assert "node scripts/arweave" not in lower
