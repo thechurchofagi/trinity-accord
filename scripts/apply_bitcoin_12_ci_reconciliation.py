@@ -63,6 +63,18 @@ text = require_replace(
 )
 p.write_text(text, encoding="utf-8")
 
+# Sequence-4 publication is immutable history (8 Bitcoin), while validation of
+# the moving current Git inventory must allow the verified v2 12-item state.
+p = Path("scripts/current_baseline_publication_v4.py")
+text = p.read_text(encoding="utf-8")
+text = require_replace(
+    text,
+    '    require_equal(expected["evidence_sets"]["bitcoin_inscriptions"]["count"], 8, "inventory.bitcoin.count")\n',
+    '    require_equal(expected["evidence_sets"]["bitcoin_inscriptions"]["count"], 12, "inventory.bitcoin.count")\n',
+    "v4 validator current bitcoin count",
+)
+p.write_text(text, encoding="utf-8")
+
 # Migrate current-state tests from historical v1 to verified current v2.
 p = Path("tests/test_evidence_manifest_current_proof_state.py")
 text = p.read_text(encoding="utf-8")
