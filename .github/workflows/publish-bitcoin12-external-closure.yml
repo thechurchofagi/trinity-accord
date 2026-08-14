@@ -12,6 +12,7 @@ permissions:
 
 concurrency:
   group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -233,7 +234,7 @@ jobs:
           git diff --cached --check
           git commit -m 'preservation: seal 12-item DOI closure; defer Arweave'
           for attempt in 1 2 3 4 5; do
-            git fetch origin main
+            git fetch origin main --prune
             git rebase origin/main && git push origin HEAD:main && exit 0
             git rebase --abort || true
             sleep $((attempt * 3))
