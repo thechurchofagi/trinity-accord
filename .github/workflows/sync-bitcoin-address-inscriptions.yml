@@ -6,6 +6,13 @@ on:
       - .github/workflows/sync-bitcoin-address-inscriptions.yml
       - scripts/sync_bitcoin_address_inscriptions.py
       - tests/test_bitcoin_address_inscription_sync.py
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/sync-bitcoin-address-inscriptions.yml
+      - scripts/sync_bitcoin_address_inscriptions.py
+      - tests/test_bitcoin_address_inscription_sync.py
   workflow_dispatch:
   schedule:
     - cron: "47 8 * * *"
