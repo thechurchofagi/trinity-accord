@@ -67,7 +67,8 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
     site_status = load_object(root / "api/status.json")
     recovery_catalog = load_object(root / "preservation/recovery-catalog.json")
     annex_state = load_object(root / "preservation/external-binary-annex-state.json")
-    repository_state = load_object(root / "preservation/repository-preservation-state-v2.json")
+    checkpoint_state = load_object(root / "preservation/repository-preservation-state-v2.json")
+    repository_state = load_object(root / "preservation/zenodo-state.json")
 
     status_nft = site_status.get("nft_media_availability", {})
     historical_status = status_nft.get("historical_individual_archive_release", {})
@@ -138,6 +139,10 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
     )
 
     core_catalog = recovery_catalog.get("core_repository", {})
+
+    # The recovery catalog's top-level current_verified_* fields track the
+    # latest independently verified repository-preservation version and may
+    # advance after a historical evidence checkpoint was consumed.
     latest_record_id = repository_state.get("latest_record_id")
     latest_doi = repository_state.get("latest_doi")
     require(
@@ -145,9 +150,18 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
         "current core recovery DOI drift",
     )
     require(
-        latest_doi
-        == site_status.get("current_evidence_checkpoint", {}).get("published_version_doi"),
-        "public status current checkpoint DOI drift",
+        latest_record_id == core_catalog.get("current_verified_record_id"),
+        "current core recovery record id drift",
+    )
+    require(
+        repository_state.get("latest_git_commit_sha")
+        == core_catalog.get("current_verified_source_git_commit_sha"),
+        "current core recovery source commit drift",
+    )
+    require(
+        repository_state.get("latest_package_identity_sha256")
+        == core_catalog.get("current_verified_package_identity_sha256"),
+        "current core recovery package identity drift",
     )
     matching_versions = [
         item
@@ -157,6 +171,33 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
     require(len(matching_versions) == 1, "latest core Zenodo version inventory is missing or duplicated")
     latest_version = matching_versions[0]
     require(latest_version.get("doi") == latest_doi, "latest core Zenodo version DOI drift")
+
+    # The public evidence status intentionally names the immutable Sequence-4
+    # evidence checkpoint.  Verify that historical checkpoint separately rather
+    # than conflating it with the later moving repository-preservation series.
+    catalog_checkpoint = core_catalog.get("current_evidence_checkpoint", {})
+    public_checkpoint = site_status.get("current_evidence_checkpoint", {})
+    require(
+        checkpoint_state.get("latest_doi")
+        == catalog_checkpoint.get("version_doi")
+        == public_checkpoint.get("published_version_doi"),
+        "public status evidence checkpoint DOI drift",
+    )
+    require(
+        checkpoint_state.get("latest_git_commit_sha")
+        == catalog_checkpoint.get("source_baseline_commit_sha")
+        == public_checkpoint.get("published_source_baseline_commit_sha"),
+        "public status evidence checkpoint source drift",
+    )
+    require(
+        checkpoint_state.get("latest_package_identity_sha256")
+        == catalog_checkpoint.get("package_identity_sha256"),
+        "evidence checkpoint package identity drift",
+    )
+    require(
+        catalog_checkpoint.get("status") == "published_verified_and_consumed",
+        "recovery catalog evidence checkpoint is not consumed",
+    )
 
     return {
         "releases": [
@@ -179,7 +220,7 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
                 "files": nft_annex.get("files"),
             },
             {
-                "label": "current core repository checkpoint",
+                "label": "current core repository version",
                 "record_id": latest_record_id,
                 "doi": latest_doi,
                 "files": latest_version.get("files"),

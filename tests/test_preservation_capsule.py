@@ -245,13 +245,22 @@ def test_capsule_workflow_is_manual_for_publication_and_quarterly_for_validation
 
 def test_published_state_records_verified_repository_doi_and_prior_snapshot():
     state = json.loads((ROOT / "preservation/zenodo-state.json").read_text())
+    catalog = json.loads((ROOT / "preservation/recovery-catalog.json").read_text())
+    core = catalog["core_repository"]
+
     assert state["publication_status"] == "published"
-    assert state["latest_record_id"] == 21739344
-    assert state["latest_doi"] == "10.5281/zenodo.21739344"
+    assert state["latest_record_id"] == core["current_verified_record_id"]
+    assert state["latest_doi"] == core["current_verified_version_doi"]
+    assert state["latest_git_commit_sha"] == core["current_verified_source_git_commit_sha"]
+    assert state["latest_package_identity_sha256"] == core["current_verified_package_identity_sha256"]
     assert state["concept_doi"] == "10.5281/zenodo.21739343"
-    assert state["latest_git_commit_sha"] == "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e"
-    assert state["latest_git_tree_oid"] == "47aa1f8b77f6f0c77237906b53929c08b665060f"
-    assert state["earlier_software_snapshot"]["doi"] == "10.5281/zenodo.21675727"
+
+    versions = {entry["doi"]: entry for entry in state["versions"]}
+    initial = versions["10.5281/zenodo.21739344"]
+    assert initial["record_id"] == 21739344
+    assert initial["git_commit_sha"] == "484bdd7a85694ad53fe7e6e9dcea94d0dee5617e"
+    assert initial["git_tree_oid"] == "47aa1f8b77f6f0c77237906b53929c08b665060f"
+
     assert state["github_required_for_repository_recovery"] is False
     assert state["external_large_binary_annex_embedded"] is False
 
