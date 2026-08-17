@@ -242,8 +242,11 @@ def test_recovery_index_declares_the_published_core_repository_doi():
             encoding="utf-8"
         )
     )
-    legacy_state = json.loads(
+    repository_state = json.loads(
         (ROOT / "preservation/zenodo-state.json").read_text(encoding="utf-8")
+    )
+    recovery_catalog = json.loads(
+        (ROOT / "preservation/recovery-catalog.json").read_text(encoding="utf-8")
     )
     index = json.loads((ROOT / "api/recovery-index.json").read_text(encoding="utf-8"))
     seq1 = json.loads(
@@ -295,8 +298,15 @@ def test_recovery_index_declares_the_published_core_repository_doi():
         assert versions[seq4["published_doi"]]["git_commit_sha"] == seq4["published_source_baseline_commit_sha"]
         assert versions[seq4["published_doi"]]["package_identity_sha256"] == seq4["published_package_identity_sha256"]
 
-    assert legacy_state["publication_status"] == "published"
-    assert legacy_state["latest_doi"] == "10.5281/zenodo.21739344"
+    core_catalog = recovery_catalog["core_repository"]
+    assert repository_state["publication_status"] == "published"
+    assert repository_state["latest_doi"] == core_catalog["current_verified_version_doi"]
+    assert repository_state["latest_record_id"] == core_catalog["current_verified_record_id"]
+    assert repository_state["latest_git_commit_sha"] == core_catalog["current_verified_source_git_commit_sha"]
+    assert repository_state["latest_package_identity_sha256"] == core_catalog["current_verified_package_identity_sha256"]
+    repository_versions = {entry["doi"]: entry for entry in repository_state["versions"]}
+    assert "10.5281/zenodo.21739344" in repository_versions
+
     latest = index["latest_trusted_release"]
     assert latest["status"] == "published_and_publicly_restored"
     repository = latest["repository_preservation"]
