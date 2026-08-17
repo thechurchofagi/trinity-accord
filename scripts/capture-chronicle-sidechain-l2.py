@@ -30,6 +30,7 @@ def h2b(v, allow_none=False):
 
 def h2i(v):
     if v is None: return 0
+    if isinstance(v, bool): return 1 if v else 0
     return int(v, 16) if isinstance(v, str) and v.startswith('0x') else int(v)
 
 def intb(v):
@@ -41,7 +42,7 @@ def rpc(chain, method, params):
     last = None
     for attempt in range(RETRIES + 1):
         try:
-            req = urllib.request.Request(RPC[chain], data=payload, headers={'content-type':'application/json','user-agent':'trinity-accord-sidechain-l2/2.0'})
+            req = urllib.request.Request(RPC[chain], data=payload, headers={'content-type':'application/json','user-agent':'trinity-accord-sidechain-l2/2.1'})
             with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
                 data = json.loads(res.read())
             if data.get('error'): raise RuntimeError(f"{method}: {data['error']}")
@@ -61,8 +62,21 @@ def access_list(v):
 
 def encode_tx(tx):
     typ=h2i(tx.get('type','0x0'))
-    to=h2b(tx.get('to'), allow_none=True)
     common_input=h2b(tx.get('input') or tx.get('data') or '0x')
+    # OP Stack post-exec transactions (0x7d) expose `input` as the already-RLP-encoded
+    # post-exec payload. Their canonical EIP-2718 form is simply 0x7d || payload.
+    if typ == 0x7d:
+        return bytes([typ]) + common_input
+    to=h2b(tx.get('to'), allow_none=True)
+    # OP Stack deposited transaction, per the OP Stack consensus spec:
+    # sourceHash, from, to, mint, value, gas, isSystemTx, data.
+    if typ == 0x7e:
+        fields=[
+            h2b(tx['sourceHash']), h2b(tx['from']), to,
+            intb(tx.get('mint') or 0), intb(tx.get('value') or 0), intb(tx['gas']),
+            intb(tx.get('isSystemTx') or 0), common_input,
+        ]
+        return bytes([typ]) + rlp.encode(fields)
     if typ == 0:
         fields=[intb(tx['nonce']), intb(tx['gasPrice']), intb(tx['gas']), to, intb(tx['value']), common_input, intb(tx['v']), intb(tx['r']), intb(tx['s'])]
         return rlp.encode(fields)
@@ -84,8 +98,16 @@ def encode_receipt(rec):
     status = rec.get('status')
     root = rec.get('root')
     first = intb(status) if status is not None else h2b(root)
-    payload=rlp.encode([first, intb(rec['cumulativeGasUsed']), h2b(rec['logsBloom']), [encode_log(x) for x in rec.get('logs',[])]])
+    fields=[first, intb(rec['cumulativeGasUsed']), h2b(rec['logsBloom']), [encode_log(x) for x in rec.get('logs',[])]]
     typ=h2i(rec.get('type','0x0'))
+    # Post-Canyon OP Stack deposit receipts commit two optional consensus fields.
+    # RPC JSON names the second field `depositReceiptVersion`.
+    if typ == 0x7e:
+        if rec.get('depositNonce') is not None:
+            fields.append(intb(rec['depositNonce']))
+        if rec.get('depositReceiptVersion') is not None:
+            fields.append(intb(rec['depositReceiptVersion']))
+    payload=rlp.encode(fields)
     return (bytes([typ])+payload) if typ else payload
 
 def header_fields(block):
@@ -148,7 +170,11 @@ def capture_group(item):
     tx_trie=HexaryTrie(db={}); rec_trie=HexaryTrie(db={})
     tx_encoded=[]; rec_encoded=[]
     for i,(tx,rec) in enumerate(zip(block['transactions'],receipts)):
-        et=encode_tx(tx); er=encode_receipt(rec); key=rlp.encode(i); tx_trie[key]=et; rec_trie[key]=er; tx_encoded.append(et); rec_encoded.append(er)
+        et=encode_tx(tx); er=encode_receipt(rec)
+        encoded_hash='0x'+keccak(et).hex()
+        if encoded_hash.lower()!=tx['hash'].lower():
+            raise ValueError(f"tx encoding mismatch index={i} type={tx.get('type')} computed={encoded_hash} rpc={tx['hash']}")
+        key=rlp.encode(i); tx_trie[key]=et; rec_trie[key]=er; tx_encoded.append(et); rec_encoded.append(er)
     if ('0x'+tx_trie.root_hash.hex()).lower()!=block['transactionsRoot'].lower(): raise ValueError('transactionsRoot mismatch')
     if ('0x'+rec_trie.root_hash.hex()).lower()!=block['receiptsRoot'].lower(): raise ValueError('receiptsRoot mismatch')
     outputs=[]
