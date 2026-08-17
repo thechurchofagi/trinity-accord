@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - "scripts/discover-chronicle-sidechain-nfts.mjs"
+      - "scripts/reconcile-chronicle-sidechain-records.mjs"
+      - "scripts/finalize-chronicle-sidechain-reconciliation.mjs"
       - "scripts/run-chronicle-sidechain-mirror-observed.sh"
       - ".github/workflows/chronicle-sidechain-mirror.yml"
 
@@ -32,12 +34,16 @@ jobs:
         with:
           node-version-file: ".node-version"
 
-      - name: Validate scanner and diagnostics wrapper
+      - name: Validate scanner, reconciliation and diagnostics wrapper
         run: |
           set -euo pipefail
           node --check scripts/discover-chronicle-sidechain-nfts.mjs
+          node --check scripts/reconcile-chronicle-sidechain-records.mjs
+          node --check scripts/finalize-chronicle-sidechain-reconciliation.mjs
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
           echo "[VALIDATION OK] scanner syntax"
+          echo "[VALIDATION OK] reconciliation syntax"
+          echo "[VALIDATION OK] reconciliation finalizer syntax"
           echo "[VALIDATION OK] diagnostics wrapper syntax"
 
       - name: Discover and mirror Polygon + Base history
@@ -49,6 +55,15 @@ jobs:
           CHRONICLE_HEARTBEAT_SECONDS: "60"
           CHRONICLE_STALL_WARN_SECONDS: "300"
         run: bash scripts/run-chronicle-sidechain-mirror-observed.sh
+
+      - name: Reconcile technical coordinates to logical Chronicle records
+        env:
+          CHRONICLE_EXPECTED_EXISTING_RECORDS: "175"
+          CHRONICLE_KNOWN_FORMATION_START: "2024-03-16T08:02:59Z"
+        run: |
+          set -euo pipefail
+          node scripts/reconcile-chronicle-sidechain-records.mjs
+          node scripts/finalize-chronicle-sidechain-reconciliation.mjs
 
       - name: Build immutable mirror archive
         id: package
@@ -70,6 +85,8 @@ jobs:
         run: |
           set -euo pipefail
           summary="artifacts/chronicle-sidechain-scan/SUMMARY.json"
+          reconciliation_json="artifacts/chronicle-sidechain-scan/RECONCILIATION.json"
+          reconciliation_md="artifacts/chronicle-sidechain-scan/RECONCILIATION.md"
           manifest_json="artifacts/chronicle-sidechain-scan/MANIFEST.sha256.json"
           manifest_txt="artifacts/chronicle-sidechain-scan/MANIFEST.sha256"
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
@@ -80,8 +97,8 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
             --title "Chronicle Polygon + Base historical NFT mirror — ${GITHUB_SHA:0:12}" \
-            --notes "Immutable discovery/mirror snapshot for historical ERC-721/ERC-1155 activity of 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8 on Polygon and Base. Evidence input only: this does not amend Canon or automatically redefine Chronicle membership." \
-            "$ARCHIVE" "$ARCHIVE.sha256" "$summary" "$manifest_json" "$manifest_txt"
+            --notes "Immutable discovery/mirror snapshot for historical ERC-721/ERC-1155 activity of 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8 on Polygon and Base, with content-address logical reconciliation against the existing 175-record preservation index. Evidence input only: this does not amend Canon or automatically redefine Chronicle membership." \
+            "$ARCHIVE" "$ARCHIVE.sha256" "$summary" "$reconciliation_json" "$reconciliation_md" "$manifest_json" "$manifest_txt"
 
       - name: Job summary
         if: ${{ always() }}
@@ -98,4 +115,8 @@ jobs:
             echo '```json' >> "$GITHUB_STEP_SUMMARY"
             cat artifacts/chronicle-sidechain-scan/SUMMARY.json >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -s artifacts/chronicle-sidechain-scan/RECONCILIATION.md ]; then
+            echo '### Logical reconciliation' >> "$GITHUB_STEP_SUMMARY"
+            cat artifacts/chronicle-sidechain-scan/RECONCILIATION.md >> "$GITHUB_STEP_SUMMARY"
           fi
