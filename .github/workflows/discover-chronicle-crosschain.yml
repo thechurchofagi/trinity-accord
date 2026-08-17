@@ -32,7 +32,7 @@ permissions:
 
 concurrency:
   group: chronicle-crosschain-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   discover-and-mirror:
