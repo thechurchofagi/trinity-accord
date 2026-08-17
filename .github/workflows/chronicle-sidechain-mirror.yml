@@ -2,6 +2,12 @@ name: Chronicle Polygon + Base historical NFT evidence mirror
 
 on:
   workflow_dispatch:
+    inputs:
+      refresh_live:
+        description: "Re-read Polygon/Base instead of bootstrapping from the verified immutable v1 snapshot"
+        required: false
+        default: false
+        type: boolean
   push:
     branches: [main]
     paths:
@@ -19,6 +25,11 @@ permissions:
 concurrency:
   group: chronicle-sidechain-mirror
   cancel-in-progress: true
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
 
 jobs:
   mirror:
@@ -49,7 +60,36 @@ jobs:
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
           echo "[VALIDATION OK] scanner + CAR/L1/L2/offline verification syntax"
 
-      - name: Discover and mirror Polygon + Base history
+      - name: Bootstrap verified sidechain snapshot
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.refresh_live != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$tmp" --pattern "$BOOTSTRAP_ARCHIVE"
+          actual="$(sha256sum "$tmp/$BOOTSTRAP_ARCHIVE" | awk '{print $1}')"
+          test "$actual" = "$BOOTSTRAP_ARCHIVE_SHA256" || {
+            echo "bootstrap archive digest mismatch: expected=$BOOTSTRAP_ARCHIVE_SHA256 actual=$actual" >&2
+            exit 1
+          }
+          mkdir -p artifacts
+          tar -xzf "$tmp/$BOOTSTRAP_ARCHIVE" -C artifacts
+          root="artifacts/chronicle-sidechain-scan"
+          test -s "$root/recovered-tokens.json"
+          test -s "$root/SUMMARY.json"
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('artifacts/chronicle-sidechain-scan')
+          records=json.loads((root/'recovered-tokens.json').read_text())
+          if len(records) != 217:
+              raise SystemExit(f'expected 217 sidechain NFT coordinates, found {len(records)}')
+          summary=json.loads((root/'SUMMARY.json').read_text())
+          print(f"[BOOTSTRAP OK] records={len(records)} source_schema={summary.get('schema')} archive_sha256=d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8")
+          PY
+
+      - name: Live refresh Polygon + Base history
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh_live == true }}
         env:
           CHRONICLE_ADDRESS: "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8"
           BLOCKSCOUT_API_KEY: ${{ secrets.BLOCKSCOUT_API_KEY }}
@@ -107,7 +147,7 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
             --title "Chronicle Polygon + Base NFT evidence v2 — ${GITHUB_SHA:0:12}" \
-            --notes "Immutable Polygon/Base Chronicle NFT evidence snapshot. Every chain+contract+token coordinate is preserved as one Chronicle record; transfer events remain provenance. Includes trustless IPFS CAR preservation, deterministic L1 collection commitment, L2 transaction/receipt MPT inclusion proofs, offline verification, complete timestamp/tx/block coordinates, and a deterministic request for new BTC/ETH/OTS anchoring. Historical signatures are not retroactively extended; L3 sidechain settlement is separately statused and is not claimed PASS here. This does not amend the three-inscription Bitcoin Canon." \
+            --notes "Immutable Polygon/Base Chronicle NFT evidence snapshot. Every chain+contract+token coordinate is preserved as one Chronicle record; transfer events remain provenance. Default construction bootstraps from the pinned v1 archive only after SHA-256 verification, so rebuilding the evidence layer does not require re-reading Polygon/Base content. Includes trustless IPFS CAR preservation, deterministic L1 collection commitment, L2 transaction/receipt MPT inclusion proofs, offline verification, complete timestamp/tx/block coordinates, and a deterministic request for new BTC/ETH/OTS anchoring. Historical signatures are not retroactively extended; L3 sidechain settlement is separately statused and is not claimed PASS here. This does not amend the three-inscription Bitcoin Canon." \
             "$ARCHIVE" "$ARCHIVE.sha256" \
             "$root/SUMMARY.json" "$root/MANIFEST.sha256.json" "$root/MANIFEST.sha256" \
             "$root/evidence-v2/SIDECHAIN-NFT-IDENTITY-INDEX.json" \
