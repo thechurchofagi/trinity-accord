@@ -319,9 +319,31 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     external = load(EXTERNAL_STATE)
     require_equal(external.get("current_core_repository_latest_version_doi"), doi, "external.current_core_doi")
     catalog = load(RECOVERY_CATALOG).get("core_repository", {})
-    require_equal(catalog.get("current_verified_version_doi"), doi, "catalog.current_doi")
-    require_equal(catalog.get("current_verified_source_git_commit_sha"), source, "catalog.current_source")
-    require_equal(catalog.get("current_evidence_checkpoint", {}).get("status"), "published_verified_and_consumed", "catalog.checkpoint.status")
+    catalog_checkpoint = catalog.get("current_evidence_checkpoint")
+    require(isinstance(catalog_checkpoint, dict), "recovery catalog current checkpoint missing")
+    require_equal(catalog_checkpoint.get("sequence"), 4, "catalog.checkpoint.sequence")
+    require_equal(catalog_checkpoint.get("status"), "published_verified_and_consumed", "catalog.checkpoint.status")
+    require_equal(catalog_checkpoint.get("version_doi"), doi, "catalog.checkpoint.doi")
+    require_equal(catalog_checkpoint.get("source_baseline_commit_sha"), source, "catalog.checkpoint.source")
+    require_equal(catalog_checkpoint.get("package_identity_sha256"), package, "catalog.checkpoint.package")
+    current_catalog_doi = catalog.get("current_verified_version_doi")
+    current_catalog_match = DOI_RE.fullmatch(str(current_catalog_doi))
+    require(current_catalog_match is not None, "catalog current verified DOI is invalid")
+    current_catalog_record = catalog.get("current_verified_record_id")
+    require(
+        isinstance(current_catalog_record, int) and int(current_catalog_match.group(1)) == current_catalog_record,
+        "catalog current verified DOI/record mismatch",
+    )
+    current_catalog_source = catalog.get("current_verified_source_git_commit_sha")
+    require(
+        isinstance(current_catalog_source, str) and COMMIT_RE.fullmatch(current_catalog_source) is not None,
+        "catalog current verified source commit is invalid",
+    )
+    current_catalog_package = catalog.get("current_verified_package_identity_sha256")
+    require(
+        isinstance(current_catalog_package, str) and SHA256_RE.fullmatch(current_catalog_package) is not None,
+        "catalog current verified package identity is invalid",
+    )
     plan = load(EVOLUTION_PLAN)
     require_equal(plan.get("current_checkpoint", {}).get("core_version_doi"), doi, "evolution.current.doi")
     require_equal(plan.get("pending_checkpoint_v4"), None, "evolution.pending")
