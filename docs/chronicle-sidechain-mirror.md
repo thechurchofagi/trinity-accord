@@ -6,7 +6,7 @@ This recovery path enumerates the historical ERC-721 and ERC-1155 activity of th
 
 The scanner records transfer coordinates, contract/token IDs, transaction hashes, block/timestamp data, on-chain `tokenURI(uint256)` or `uri(uint256)` reads, Blockscout NFT-instance responses, resolved metadata, referenced image/animation/media bytes, and SHA-256 manifests.
 
-Discovery is historical, not balance-based: NFTs that were later transferred away remain in scope. The current `token_index.json` is compared by contract/token ID so the report can identify possible omissions without modifying the existing 175-NFT mirror.
+Discovery is historical, not balance-based: NFTs that were later transferred away remain in scope. The current `token_index.json` is compared by contract/token ID so the report can identify possible omissions without modifying the existing 175-NFT mirror. Because that comparison does not encode chain identity, a same contract/token coordinate is only an overlap heuristic, not proof of logical record identity.
 
 ## Evidence boundary
 
@@ -16,12 +16,14 @@ The workflow never edits the three Bitcoin Canon inscriptions.
 
 ## Sources
 
-The scanner uses the Polygon and Base Blockscout account APIs for ERC-721 and ERC-1155 history. It reads token URIs through public Polygon/Base JSON-RPC endpoints. Optional repository secrets `POLYGON_RPC_URL`, `BASE_RPC_URL`, and `BLOCKSCOUT_API_KEY` can replace the public defaults.
+Historical discovery uses the Polygon and Base Blockscout v2 address token-transfer API, one ERC standard at a time, and follows `next_page_params` until exhaustion. Every discovery page is preserved verbatim in the mirror. If a v2 call fails, the scanner attempts the corresponding legacy Blockscout account API as a fallback and fails closed if both sources fail.
+
+Token URIs are read independently through Polygon/Base JSON-RPC endpoints. Optional repository secrets `POLYGON_RPC_URL`, `BASE_RPC_URL`, and `BLOCKSCOUT_API_KEY` can replace public defaults or authenticate the legacy fallback.
 
 ## Output
 
-Each run creates an immutable release tag:
+Each successful run creates an immutable release tag:
 
 `chronicle-sidechain-mirror-v1-<source-commit>`
 
-The release contains the complete tarball, its SHA-256, `SUMMARY.json`, and per-file manifests. The summary reports the earliest observed sidechain transfer and how many recovered contract/token coordinates are absent from the current `token_index.json`.
+The release contains the complete tarball, its SHA-256, `SUMMARY.json`, and per-file manifests. The summary reports Polygon/Base counts separately, the earliest observed transfer on each network, the global earliest observed sidechain transfer, metadata recovery totals, and heuristic overlap with the current `token_index.json`.
