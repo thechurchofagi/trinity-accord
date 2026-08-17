@@ -17,7 +17,7 @@ PY
 )"
 
 if [[ "$status" == "consumed" ]]; then
-  python3 scripts/current_baseline_publication_v4.py validate
+  python3 scripts/validate_current_baseline_v4_history.py
   echo "Current evidence checkpoint v4 is consumed and publicly proven; no external write will run."
   exit 0
 fi
