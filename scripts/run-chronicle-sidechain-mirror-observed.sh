@@ -64,7 +64,7 @@ PY
   mv "$HEARTBEAT_FILE.tmp" "$HEARTBEAT_FILE"
 
   printf '[HEARTBEAT] %s elapsed=%ss discovery_pages=%s recovered_records=%s metadata=%s media_files=%s total_files=%s bytes=%s latest=%s\n' \
-    "$HB_NOW_ISO" "$elapsed" "$discovery_pages" "$recovered_records" "$normalized_metadata" "$media_files" "$total_files" "$bytes" "${latest_file:-none}"
+    "$HB_NOW_ISO" "$elapsed" "$discovery_pages" "$recovered_records" "$normalized_metadata" "$media_files" "$total_files" "$bytes" "${latest_file:-none}" >&2
 
   printf '%s|%s|%s|%s|%s|%s' "$discovery_pages" "$recovered_records" "$normalized_metadata" "$media_files" "$total_files" "$bytes"
 }
@@ -124,10 +124,25 @@ heartbeat_loop() {
       previous_signature="$signature"
     fi
     if (( unchanged_seconds >= STALL_WARN_SECONDS )); then
-      echo "[STALL WARNING] no observable artifact-count/size progress for ${unchanged_seconds}s; process is still alive but may be retrying or waiting on a remote endpoint"
+      echo "[STALL WARNING] no observable artifact-count/size progress for ${unchanged_seconds}s; process is still alive but may be retrying or waiting on a remote endpoint" >&2
       unchanged_seconds=0
     fi
   done
+}
+
+print_result_summary() {
+  python3 - "$OUT/SUMMARY.json" <<'PY'
+import json, sys
+with open(sys.argv[1],encoding="utf-8") as f:
+    s=json.load(f)
+print("=== RECOVERY RESULT SUMMARY ===")
+for chain in ("polygon","base"):
+    x=(s.get("per_chain") or {}).get(chain) or {}
+    earliest=(x.get("earliest_observed_transfer") or {}).get("timestamp")
+    print(f"[RESULT] {chain}: transfers={x.get('transfer_occurrences',0)} unique_coordinates={x.get('unique_coordinates',0)} metadata_recovered={x.get('metadata_recovered',0)} earliest={earliest}")
+print(f"[RESULT] total_unique_sidechain_coordinates={s.get('unique_sidechain_coordinates',0)} metadata_recovered={s.get('metadata_recovered',0)} recovery_errors={s.get('recovery_errors',0)}")
+print("=== END RESULT SUMMARY ===")
+PY
 }
 
 finalize() {
@@ -199,4 +214,26 @@ SCANNER_RC=${PIPESTATUS[0]}
 set -e
 
 echo "=== Scanner process exited with code $SCANNER_RC ==="
+
+if (( SCANNER_RC == 0 )); then
+  for required in SUMMARY.json MANIFEST.sha256 MANIFEST.sha256.json; do
+    if [[ ! -s "$OUT/$required" ]]; then
+      echo "[POSTCHECK FAIL] scanner returned 0 but required output is missing/empty: $OUT/$required" >&2
+      SCANNER_RC=2
+    else
+      echo "[POSTCHECK OK] $OUT/$required"
+    fi
+  done
+fi
+
+if (( SCANNER_RC == 0 )); then
+  if python3 -m json.tool "$OUT/SUMMARY.json" >/dev/null; then
+    echo '[POSTCHECK OK] SUMMARY.json is valid JSON'
+    print_result_summary
+  else
+    echo '[POSTCHECK FAIL] SUMMARY.json is not valid JSON' >&2
+    SCANNER_RC=3
+  fi
+fi
+
 exit "$SCANNER_RC"
