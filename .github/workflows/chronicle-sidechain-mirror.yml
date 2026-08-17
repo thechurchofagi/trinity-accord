@@ -127,8 +127,8 @@ jobs:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           CHRONICLE_EVIDENCE_CONCURRENCY: "4"
-          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "25000"
-          CHRONICLE_CAR_HTTP_RETRIES: "1"
+          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "45000"
+          CHRONICLE_CAR_HTTP_RETRIES: "2"
         run: node scripts/build-chronicle-sidechain-evidence.mjs
 
       - name: Save CAR retrieval cache
