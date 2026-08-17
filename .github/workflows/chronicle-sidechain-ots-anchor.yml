@@ -54,7 +54,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install -r requirements-ots.txt
-          ots --version
+          ots --help >/dev/null
 
       - name: Resolve and verify source evidence release
         id: source
@@ -65,9 +65,11 @@ jobs:
           short_sha="${SOURCE_SHA:0:12}"
           source_tag="chronicle-sidechain-evidence-v2-${short_sha}"
           anchor_tag="chronicle-sidechain-ots-v2-${short_sha}"
-          target="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${source_tag}" --jq '.target_commitish')"
-          test "$target" = "$SOURCE_SHA" || {
-            echo "Source release target mismatch: expected=$SOURCE_SHA actual=$target" >&2
+          gh release view "$source_tag" --repo "$GITHUB_REPOSITORY" >/dev/null
+          git fetch origin "refs/tags/${source_tag}:refs/tags/${source_tag}"
+          tag_commit="$(git rev-list -n 1 "$source_tag")"
+          test "$tag_commit" = "$SOURCE_SHA" || {
+            echo "Source release tag mismatch: expected=$SOURCE_SHA actual=$tag_commit" >&2
             exit 1
           }
           mkdir -p ots-anchor
