@@ -22,15 +22,17 @@ const CHAINS = [
     key: 'polygon',
     name: 'Polygon Mainnet',
     chainId: 137,
-    rpcUrl: process.env.POLYGON_RPC_URL || 'https://polygon-rpc.com',
+    rpcUrl: process.env.POLYGON_RPC_URL || 'https://polygon.drpc.org',
     explorer: 'https://polygonscan.com',
+    blockscout: 'https://polygon.blockscout.com',
   },
   {
     key: 'base',
     name: 'Base Mainnet',
     chainId: 8453,
     rpcUrl: process.env.BASE_RPC_URL || 'https://mainnet.base.org',
-    explorer: 'https://basescan.org',
+    explorer: 'https://base.blockscout.com',
+    blockscout: 'https://base.blockscout.com',
   },
 ];
 
@@ -163,20 +165,9 @@ async function fetchBytesFromUri(uri, maxBytes = MAX_MEDIA_BYTES) {
 
 function guessExtension(uri, contentType) {
   const byType = {
-    'application/json': '.json',
-    'image/png': '.png',
-    'image/jpeg': '.jpg',
-    'image/gif': '.gif',
-    'image/webp': '.webp',
-    'image/svg+xml': '.svg',
-    'video/mp4': '.mp4',
-    'video/webm': '.webm',
-    'audio/mpeg': '.mp3',
-    'audio/mp4': '.m4a',
-    'audio/ogg': '.ogg',
-    'application/pdf': '.pdf',
-    'text/plain': '.txt',
-    'text/html': '.html',
+    'application/json': '.json', 'image/png': '.png', 'image/jpeg': '.jpg', 'image/gif': '.gif',
+    'image/webp': '.webp', 'image/svg+xml': '.svg', 'video/mp4': '.mp4', 'video/webm': '.webm',
+    'audio/mpeg': '.mp3', 'audio/mp4': '.m4a', 'audio/ogg': '.ogg', 'application/pdf': '.pdf', 'text/plain': '.txt', 'text/html': '.html',
   };
   const cleanType = String(contentType || '').split(';')[0].toLowerCase();
   if (byType[cleanType]) return byType[cleanType];
@@ -190,16 +181,8 @@ function guessExtension(uri, contentType) {
 
 async function etherscanPage(chainId, action, page) {
   const params = new URLSearchParams({
-    chainid: String(chainId),
-    module: 'account',
-    action,
-    address: WALLET,
-    startblock: '0',
-    endblock: '999999999',
-    page: String(page),
-    offset: String(PAGE_SIZE),
-    sort: 'asc',
-    apikey: ETHERSCAN_API_KEY,
+    chainid: String(chainId), module: 'account', action, address: WALLET,
+    startblock: '0', endblock: '999999999', page: String(page), offset: String(PAGE_SIZE), sort: 'asc', apikey: ETHERSCAN_API_KEY,
   });
   const response = await fetchWithTimeout(`https://api.etherscan.io/v2/api?${params}`);
   if (!response.ok) throw new Error(`Etherscan HTTP ${response.status}`);
@@ -223,30 +206,105 @@ async function discoverWithEtherscan(chain) {
       const rows = await etherscanPage(chain.chainId, spec.action, page);
       for (const row of rows) {
         out.push({
-          chain: chain.key,
-          chainName: chain.name,
-          chainId: chain.chainId,
-          discovery: 'etherscan-v2',
-          standard: spec.standard,
-          blockNumber: Number(row.blockNumber),
-          blockTimestamp: row.timeStamp ? new Date(Number(row.timeStamp) * 1000).toISOString() : null,
-          txHash: row.hash,
-          transactionIndex: row.transactionIndex != null ? Number(row.transactionIndex) : null,
-          logIndex: row.logIndex != null ? Number(row.logIndex) : null,
-          contract: String(row.contractAddress || '').toLowerCase(),
-          tokenId: String(row.tokenID ?? row.tokenId ?? ''),
-          value: String(row.tokenValue ?? '1'),
-          from: String(row.from || '').toLowerCase(),
-          to: String(row.to || '').toLowerCase(),
-          tokenName: row.tokenName || null,
-          tokenSymbol: row.tokenSymbol || null,
-          direction: direction(row.from, row.to),
-          explorerTx: `${chain.explorer}/tx/${row.hash}`,
+          chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'etherscan-v2', standard: spec.standard,
+          blockNumber: Number(row.blockNumber), blockTimestamp: row.timeStamp ? new Date(Number(row.timeStamp) * 1000).toISOString() : null,
+          txHash: row.hash, transactionIndex: row.transactionIndex != null ? Number(row.transactionIndex) : null,
+          logIndex: row.logIndex != null ? Number(row.logIndex) : null, contract: String(row.contractAddress || '').toLowerCase(),
+          tokenId: String(row.tokenID ?? row.tokenId ?? ''), value: String(row.tokenValue ?? '1'),
+          from: String(row.from || '').toLowerCase(), to: String(row.to || '').toLowerCase(),
+          tokenName: row.tokenName || null, tokenSymbol: row.tokenSymbol || null,
+          direction: direction(row.from, row.to), explorerTx: `${chain.explorer}/tx/${row.hash}`,
         });
       }
       if (rows.length < PAGE_SIZE) break;
-      await new Promise((r) => setTimeout(r, 350));
+      await new Promise((r) => setTimeout(r, 250));
     }
+  }
+  return out;
+}
+
+function addressHash(value) {
+  if (value && typeof value === 'object') return String(value.hash || value.address_hash || '').toLowerCase();
+  return String(value || '').toLowerCase();
+}
+
+function blockscoutTokenIds(row) {
+  const candidates = [
+    row.token_id,
+    row.tokenId,
+    row.id,
+    row.total?.token_id,
+    row.total?.tokenId,
+  ];
+  if (Array.isArray(row.token_ids)) candidates.push(...row.token_ids);
+  if (Array.isArray(row.tokenIds)) candidates.push(...row.tokenIds);
+  const ids = candidates
+    .flatMap((v) => Array.isArray(v) ? v : [v])
+    .filter((v) => v !== null && v !== undefined && String(v) !== '')
+    .map(String);
+  return [...new Set(ids)];
+}
+
+async function discoverWithBlockscout(chain) {
+  const out = [];
+  let next = {};
+  let page = 0;
+  const seenPages = new Set();
+  for (;;) {
+    page += 1;
+    const url = new URL(`${chain.blockscout}/api/v2/addresses/${WALLET}/token-transfers`);
+    url.searchParams.set('type', 'ERC-721,ERC-1155');
+    for (const [key, value] of Object.entries(next || {})) {
+      if (value !== null && value !== undefined) url.searchParams.set(key, String(value));
+    }
+    const pageKey = url.searchParams.toString();
+    if (seenPages.has(pageKey)) throw new Error(`Blockscout pagination loop on ${chain.key}`);
+    seenPages.add(pageKey);
+    const response = await fetchWithTimeout(url);
+    if (!response.ok) throw new Error(`Blockscout HTTP ${response.status} for ${chain.key}`);
+    const payload = await response.json();
+    if (!Array.isArray(payload.items)) throw new Error(`Blockscout ${chain.key}: unexpected items payload`);
+    for (const row of payload.items) {
+      const tokenType = String(row.token?.type || '').toUpperCase();
+      if (!/(ERC-721|ERC-1155)/.test(tokenType)) continue;
+      const standard = tokenType.includes('1155') ? 'erc1155' : 'erc721';
+      const contract = String(row.token?.address_hash || row.contract_address_hash || row.contractAddress || '').toLowerCase();
+      const from = addressHash(row.from);
+      const to = addressHash(row.to);
+      const ids = blockscoutTokenIds(row);
+      if (!contract || ids.length === 0) {
+        process.stderr.write(`Blockscout ${chain.key}: skipped NFT transfer without contract/token id in ${row.transaction_hash || 'unknown tx'}\n`);
+        continue;
+      }
+      for (let i = 0; i < ids.length; i += 1) {
+        out.push({
+          chain: chain.key,
+          chainName: chain.name,
+          chainId: chain.chainId,
+          discovery: 'blockscout-v2',
+          standard,
+          blockNumber: row.block_number != null ? Number(row.block_number) : null,
+          blockTimestamp: row.timestamp ? new Date(row.timestamp).toISOString() : null,
+          txHash: row.transaction_hash || row.transactionHash || '',
+          transactionIndex: row.transaction_index != null ? Number(row.transaction_index) : null,
+          logIndex: row.log_index != null ? Number(row.log_index) : null,
+          batchIndex: ids.length > 1 ? i : undefined,
+          contract,
+          tokenId: ids[i],
+          value: String(row.total?.value ?? row.value ?? '1'),
+          from,
+          to,
+          tokenName: row.token?.name || null,
+          tokenSymbol: row.token?.symbol || null,
+          direction: direction(from, to),
+          explorerTx: `${chain.explorer}/tx/${row.transaction_hash || row.transactionHash}`,
+        });
+      }
+    }
+    next = payload.next_page_params;
+    process.stdout.write(`Blockscout ${chain.key}: page ${page}, ${payload.items.length} rows, ${out.length} NFT occurrences normalized\n`);
+    if (!next || Object.keys(next).length === 0) break;
+    await new Promise((r) => setTimeout(r, 120));
   }
   return out;
 }
@@ -302,42 +360,32 @@ async function discoverWithRpc(chain) {
   const sorted = [...rawLogs.values()].sort((a, b) => a.blockNumber - b.blockNumber || a.index - b.index);
   for (const log of sorted) {
     let parsed;
-    try {
-      parsed = transferIface.parseLog(log);
-    } catch {
-      continue;
-    }
+    try { parsed = transferIface.parseLog(log); } catch { continue; }
     const ts = await getBlockTimestamp(provider, cache, log.blockNumber);
     if (parsed.name === 'Transfer') {
-      // ERC-721 has indexed tokenId and therefore four topics; exclude ERC-20 Transfer logs.
+      // Exclude ERC-20 Transfer logs: ERC-721 has indexed tokenId => four topics total.
       if (log.topics.length !== 4) continue;
       const [from, to, tokenId] = parsed.args;
-      out.push({
-        chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc721',
+      out.push({ chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc721',
         blockNumber: log.blockNumber, blockTimestamp: ts, txHash: log.transactionHash, transactionIndex: log.transactionIndex ?? null,
         logIndex: log.index, contract: log.address.toLowerCase(), tokenId: tokenId.toString(), value: '1',
         from: String(from).toLowerCase(), to: String(to).toLowerCase(), tokenName: null, tokenSymbol: null,
-        direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}`,
-      });
+        direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}` });
     } else if (parsed.name === 'TransferSingle') {
       const [, from, to, tokenId, value] = parsed.args;
-      out.push({
-        chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc1155',
+      out.push({ chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc1155',
         blockNumber: log.blockNumber, blockTimestamp: ts, txHash: log.transactionHash, transactionIndex: log.transactionIndex ?? null,
         logIndex: log.index, contract: log.address.toLowerCase(), tokenId: tokenId.toString(), value: value.toString(),
         from: String(from).toLowerCase(), to: String(to).toLowerCase(), tokenName: null, tokenSymbol: null,
-        direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}`,
-      });
+        direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}` });
     } else if (parsed.name === 'TransferBatch') {
       const [, from, to, ids, values] = parsed.args;
       for (let i = 0; i < ids.length; i += 1) {
-        out.push({
-          chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc1155',
+        out.push({ chain: chain.key, chainName: chain.name, chainId: chain.chainId, discovery: 'rpc-log-scan', standard: 'erc1155',
           blockNumber: log.blockNumber, blockTimestamp: ts, txHash: log.transactionHash, transactionIndex: log.transactionIndex ?? null,
           logIndex: log.index, batchIndex: i, contract: log.address.toLowerCase(), tokenId: ids[i].toString(), value: values[i].toString(),
           from: String(from).toLowerCase(), to: String(to).toLowerCase(), tokenName: null, tokenSymbol: null,
-          direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}`,
-        });
+          direction: direction(from, to), explorerTx: `${chain.explorer}/tx/${log.transactionHash}` });
       }
     }
   }
@@ -350,8 +398,13 @@ async function discoverChain(chain) {
     try {
       return await discoverWithEtherscan(chain);
     } catch (error) {
-      process.stderr.write(`Etherscan discovery failed on ${chain.key}; falling back to RPC: ${error.message}\n`);
+      process.stderr.write(`Etherscan discovery failed on ${chain.key}; trying Blockscout: ${error.message}\n`);
     }
+  }
+  try {
+    return await discoverWithBlockscout(chain);
+  } catch (error) {
+    process.stderr.write(`Blockscout discovery failed on ${chain.key}; falling back to RPC log scan: ${error.message}\n`);
   }
   return discoverWithRpc(chain);
 }
@@ -449,9 +502,7 @@ async function mirrorTokens(occurrences, existingIndex) {
         const rawPath = path.join(tokenDir, 'metadata.source.json');
         await fs.writeFile(rawPath, metadataFetch.buffer);
         let parsed = null;
-        try {
-          parsed = JSON.parse(metadataFetch.buffer.toString('utf8'));
-        } catch {}
+        try { parsed = JSON.parse(metadataFetch.buffer.toString('utf8')); } catch {}
         result.metadata = {
           sourceUri: result.tokenUri,
           resolvedUrl: metadataFetch.resolvedUrl,
@@ -553,35 +604,24 @@ function summaryMarkdown({ occurrences, tokenResults, logicalRecords, formation,
   const metadataOk = [...tokenResults.values()].filter((t) => t.metadata?.sha256).length;
   const mediaOk = [...tokenResults.values()].reduce((n, t) => n + (t.media || []).filter((m) => m.mirrored).length, 0);
   const lines = [
-    '# Polygon + Base Chronicle NFT discovery',
-    '',
-    `- Address: \`${WALLET}\``,
-    `- Generated: ${new Date().toISOString()}`,
+    '# Polygon + Base Chronicle NFT discovery', '',
+    `- Address: \`${WALLET}\``, `- Generated: ${new Date().toISOString()}`,
     `- Historical NFT transfer occurrences: **${occurrences.length}**`,
     `- Unique chain/contract/token tuples: **${tokenResults.size}**`,
     `- Logical content groups: **${logicalRecords.length}**`,
     `- Tuples not found in legacy token_index.json: **${missing}**`,
     `- Metadata recovered: **${metadataOk}/${tokenResults.size}**`,
     `- Media objects mirrored: **${mediaOk}**`,
-    `- Existing index contracts detected: **${existingIndex.contracts.length}**`,
-    '',
-    '## Chain counts',
-    '',
-    '| Chain | Occurrences | Unique tokens | Discovery |',
-    '|---|---:|---:|---|',
-    ...chainStats.map((s) => `| ${s.chain} | ${s.occurrences} | ${s.uniqueTokens} | ${s.discovery.join(', ')} |`),
-    '',
-    '## Formation-time audit',
-    '',
-    `Current formation baseline: **${FORMATION_BASELINE}**`,
-    `Closure: **${CLOSURE_TIME}**`,
+    `- Existing index contracts detected: **${existingIndex.contracts.length}**`, '',
+    '## Chain counts', '', '| Chain | Occurrences | Unique tokens | Discovery |', '|---|---:|---:|---|',
+    ...chainStats.map((s) => `| ${s.chain} | ${s.occurrences} | ${s.uniqueTokens} | ${s.discovery.join(', ')} |`), '',
+    '## Formation-time audit', '',
+    `Current formation baseline: **${FORMATION_BASELINE}**`, `Closure: **${CLOSURE_TIME}**`,
     formation.earliestRecoveredSidechainOccurrence
       ? `Earliest recovered Polygon/Base occurrence: **${formation.earliestRecoveredSidechainOccurrence.blockTimestamp}** on ${formation.earliestRecoveredSidechainOccurrence.chain}.`
       : 'No dated Polygon/Base occurrence was recovered.',
-    `Would move the formation start earlier: **${formation.wouldMoveFormationStartEarlier ? 'YES' : 'NO'}**`,
-    '',
-    '> Cross-chain occurrences are evidence records, not automatically new Chronicle logical records. This workflow never modifies the Bitcoin Canon.',
-    '',
+    `Would move the formation start earlier: **${formation.wouldMoveFormationStartEarlier ? 'YES' : 'NO'}**`, '',
+    '> Cross-chain occurrences are evidence records, not automatically new Chronicle logical records. This workflow never modifies the Bitcoin Canon.', '',
   ];
   return lines.join('\n');
 }
@@ -602,8 +642,7 @@ async function main() {
   for (const o of raw) dedupedMap.set(`${occurrenceKey(o)}:${o.batchIndex ?? ''}`, o);
   const occurrences = [...dedupedMap.values()].sort((a, b) =>
     (Date.parse(a.blockTimestamp || 0) - Date.parse(b.blockTimestamp || 0)) ||
-    a.chainId - b.chainId ||
-    a.blockNumber - b.blockNumber,
+    a.chainId - b.chainId || (a.blockNumber ?? 0) - (b.blockNumber ?? 0),
   );
   for (const o of occurrences) {
     o.preClosure = o.blockTimestamp ? Date.parse(o.blockTimestamp) <= Date.parse(CLOSURE_TIME) : null;
@@ -615,32 +654,24 @@ async function main() {
   const chainStats = CHAINS.map((c) => {
     const subset = occurrences.filter((o) => o.chainId === c.chainId);
     return {
-      chain: c.key,
-      chainId: c.chainId,
-      occurrences: subset.length,
+      chain: c.key, chainId: c.chainId, occurrences: subset.length,
       uniqueTokens: new Set(subset.map((o) => `${o.contract}:${o.tokenId}`)).size,
       discovery: [...new Set(subset.map((o) => o.discovery))],
     };
   });
   const mirrorManifest = [...tokenResults.values()];
   const report = {
-    schema: 'trinity-accord/chronicle-crosschain-audit-v1',
-    generatedAt: new Date().toISOString(),
-    address: WALLET,
+    schema: 'trinity-accord/chronicle-crosschain-audit-v1', generatedAt: new Date().toISOString(), address: WALLET,
     chains: CHAINS.map(({ key, name, chainId, explorer }) => ({ key, name, chainId, explorer })),
     legacyIndex: { contracts: existingIndex.contracts, loadError: existingIndex.error || null },
-    counts: { occurrences: occurrences.length, uniqueTokens: tokenResults.size, logicalRecords: logicalRecords.length },
-    formation,
+    counts: { occurrences: occurrences.length, uniqueTokens: tokenResults.size, logicalRecords: logicalRecords.length }, formation,
   };
   await writeJson(path.join(OUT_DIR, 'audit.json'), report);
   await writeJson(path.join(OUT_DIR, 'occurrences.json'), occurrences);
   await writeJson(path.join(OUT_DIR, 'logical-records.json'), logicalRecords);
   await writeJson(path.join(OUT_DIR, 'formation-candidate.json'), formation);
   await writeJson(path.join(OUT_DIR, 'mirror-manifest.json'), mirrorManifest);
-  await fs.writeFile(
-    path.join(OUT_DIR, 'summary.md'),
-    summaryMarkdown({ occurrences, tokenResults, logicalRecords, formation, chainStats, existingIndex }),
-  );
+  await fs.writeFile(path.join(OUT_DIR, 'summary.md'), summaryMarkdown({ occurrences, tokenResults, logicalRecords, formation, chainStats, existingIndex }));
   const files = [];
   async function walk(dir) {
     for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
@@ -648,11 +679,7 @@ async function main() {
       if (entry.isDirectory()) await walk(full);
       else {
         const bytes = await fs.readFile(full);
-        files.push({
-          path: path.relative(OUT_DIR, full).replaceAll(path.sep, '/'),
-          bytes: bytes.length,
-          sha256: sha256(bytes),
-        });
+        files.push({ path: path.relative(OUT_DIR, full).replaceAll(path.sep, '/'), bytes: bytes.length, sha256: sha256(bytes) });
       }
     }
   }
