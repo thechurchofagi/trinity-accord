@@ -15,6 +15,7 @@ import pytest
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 AUTH = ROOT / "preservation/current-baseline-publication-authorization-v4.json"
 STATE_MACHINE = ROOT / "scripts/current_baseline_publication_v4.py"
+HISTORICAL_VALIDATOR = ROOT / "scripts/validate_current_baseline_v4_history.py"
 RUNNER = ROOT / "scripts/run_current_baseline_publication_v4_ci.sh"
 DISPATCHER = ROOT / "scripts/run_repository_preservation_refresh_ci.sh"
 CONTROLLER = ROOT / ".github/workflows/repository-preservation-capsule.yml"
@@ -106,7 +107,11 @@ def test_sequence4_authorization_mutations_fail_closed(path, value):
 
 
 def test_sequence4_state_machine_and_generated_maps_validate():
-    subprocess.run([sys.executable, str(STATE_MACHINE), "validate"], cwd=ROOT, check=True)
+    auth = load(AUTH)
+    if auth["status"] == "consumed":
+        subprocess.run([sys.executable, str(HISTORICAL_VALIDATOR)], cwd=ROOT, check=True)
+    else:
+        subprocess.run([sys.executable, str(STATE_MACHINE), "validate"], cwd=ROOT, check=True)
     for path in (RECOVERY, MANIFEST, PLAN, INVENTORY):
         data = load(path)
         assert data["source_digest"] == canonical_digest(data)
