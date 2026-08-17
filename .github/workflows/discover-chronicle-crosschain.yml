@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 330
     env:
       CHRONICLE_ADDRESS: ${{ inputs.address || '0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8' }}
-      MIRROR_MEDIA: ${{ inputs.mirror_media == false && 'false' || 'true' }}
+      MIRROR_MEDIA: ${{ github.event_name == 'workflow_dispatch' && inputs.mirror_media == false && 'false' || 'true' }}
       ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
       POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
       BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
@@ -56,7 +56,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install scanner dependency
         run: npm install --no-save --ignore-scripts ethers@6
@@ -64,7 +64,7 @@ jobs:
       - name: Discover historical Polygon/Base NFTs and mirror content
         run: node scripts/discover-chronicle-crosschain.mjs
 
-      - name: Package deterministic mirror bundle
+      - name: Package mirror bundle with normalized tar metadata
         shell: bash
         run: |
           set -euo pipefail
