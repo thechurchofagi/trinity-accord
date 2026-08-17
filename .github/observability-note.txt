@@ -1,1 +1,0 @@
-Chronicle Polygon/Base mirror observability hardening: live heartbeat, stall warning, preflight diagnostics, fail-closed output checks, and final runtime diagnostics. No Canon changes.
