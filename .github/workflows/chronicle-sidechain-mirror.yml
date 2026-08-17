@@ -37,11 +37,21 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 360
     steps:
-      - name: Checkout current main
+      - name: Checkout evidence source commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
-          ref: main
+          ref: ${{ github.sha }}
+
+      - name: Bind execution to event source commit
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$GITHUB_SHA" || {
+            echo "evidence source mismatch: event=$GITHUB_SHA checkout=$actual" >&2
+            exit 1
+          }
+          echo "[SOURCE BOUND] $actual"
 
       - name: Record toolchain provenance
         run: |
@@ -104,12 +114,29 @@ jobs:
           CHRONICLE_STALL_WARN_SECONDS: "300"
         run: bash scripts/run-chronicle-sidechain-mirror-observed.sh
 
+      - name: Restore prior CAR retrieval cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          key: chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-
+
       - name: Resolve mint history and capture trustless CARs + L1 commitment
         env:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           CHRONICLE_EVIDENCE_CONCURRENCY: "4"
+          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "25000"
+          CHRONICLE_CAR_HTTP_RETRIES: "1"
         run: node scripts/build-chronicle-sidechain-evidence.mjs
+
+      - name: Save CAR retrieval cache
+        if: ${{ always() }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          key: chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Capture L2 transaction and receipt inclusion proofs
         env:
