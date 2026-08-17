@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: chronicle-sidechain-mirror
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   mirror:
