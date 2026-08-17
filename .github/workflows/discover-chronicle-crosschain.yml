@@ -1,0 +1,111 @@
+name: Discover and mirror Polygon/Base Chronicle NFTs
+
+on:
+  workflow_dispatch:
+    inputs:
+      address:
+        description: Cross-chain Chronicle wallet/address to audit
+        required: false
+        default: "0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8"
+        type: string
+      mirror_media:
+        description: Download referenced NFT media into the mirror bundle
+        required: false
+        default: true
+        type: boolean
+      publish_release:
+        description: Publish/replace assets in the dedicated cross-chain mirror release (main branch only)
+        required: false
+        default: true
+        type: boolean
+  push:
+    branches:
+      - main
+      - "codex/crosschain-chronicle-*"
+    paths:
+      - ".github/workflows/discover-chronicle-crosschain.yml"
+      - "scripts/discover-chronicle-crosschain.mjs"
+      - "token_index.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chronicle-crosschain-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  discover-and-mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      CHRONICLE_ADDRESS: ${{ inputs.address || '0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8' }}
+      MIRROR_MEDIA: ${{ inputs.mirror_media == false && 'false' || 'true' }}
+      ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+      POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      IPFS_GATEWAY: https://ipfs.io/ipfs/
+      ARWEAVE_GATEWAY: https://arweave.net/
+      CROSSCHAIN_OUT_DIR: out/chronicle-crosschain
+      MAX_MEDIA_BYTES: "104857600"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install scanner dependency
+        run: npm install --no-save --ignore-scripts ethers@6
+
+      - name: Discover historical Polygon/Base NFTs and mirror content
+        run: node scripts/discover-chronicle-crosschain.mjs
+
+      - name: Package deterministic mirror bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
+            -czf chronicle-crosschain-mirror.tar.gz -C out chronicle-crosschain
+          sha256sum chronicle-crosschain-mirror.tar.gz > chronicle-crosschain-mirror.tar.gz.sha256
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chronicle-crosschain-mirror-${{ github.sha }}
+          path: |
+            out/chronicle-crosschain/
+            chronicle-crosschain-mirror.tar.gz
+            chronicle-crosschain-mirror.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish durable cross-chain mirror release
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          (github.event_name != 'workflow_dispatch' || inputs.publish_release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="chronicle-crosschain-mirror-v1"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --title "Chronicle Polygon/Base mirror v1" \
+              --notes "Historical Polygon/Base NFT discovery and content mirror for the Trinity Accord Chronicle. Cross-chain occurrences are evidentiary and do not modify the Bitcoin Canon."
+          fi
+          gh release upload "$TAG" \
+            chronicle-crosschain-mirror.tar.gz \
+            chronicle-crosschain-mirror.tar.gz.sha256 \
+            out/chronicle-crosschain/audit.json \
+            out/chronicle-crosschain/occurrences.json \
+            out/chronicle-crosschain/logical-records.json \
+            out/chronicle-crosschain/formation-candidate.json \
+            out/chronicle-crosschain/mirror-manifest.json \
+            out/chronicle-crosschain/sha256-manifest.json \
+            out/chronicle-crosschain/summary.md \
+            --clobber
