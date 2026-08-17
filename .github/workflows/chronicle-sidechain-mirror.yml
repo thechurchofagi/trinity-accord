@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "scripts/discover-chronicle-sidechain-nfts.mjs"
+      - "scripts/run-chronicle-sidechain-mirror-observed.sh"
       - ".github/workflows/chronicle-sidechain-mirror.yml"
 
 permissions:
@@ -13,7 +14,7 @@ permissions:
 
 concurrency:
   group: chronicle-sidechain-mirror
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   mirror:
@@ -31,8 +32,13 @@ jobs:
         with:
           node-version-file: ".node-version"
 
-      - name: Validate scanner
-        run: node --check scripts/discover-chronicle-sidechain-nfts.mjs
+      - name: Validate scanner and diagnostics wrapper
+        run: |
+          set -euo pipefail
+          node --check scripts/discover-chronicle-sidechain-nfts.mjs
+          bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
+          echo "[VALIDATION OK] scanner syntax"
+          echo "[VALIDATION OK] diagnostics wrapper syntax"
 
       - name: Discover and mirror Polygon + Base history
         env:
@@ -40,7 +46,9 @@ jobs:
           BLOCKSCOUT_API_KEY: ${{ secrets.BLOCKSCOUT_API_KEY }}
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
-        run: node scripts/discover-chronicle-sidechain-nfts.mjs
+          CHRONICLE_HEARTBEAT_SECONDS: "60"
+          CHRONICLE_STALL_WARN_SECONDS: "300"
+        run: bash scripts/run-chronicle-sidechain-mirror-observed.sh
 
       - name: Build immutable mirror archive
         id: package
@@ -76,8 +84,18 @@ jobs:
             "$ARCHIVE" "$ARCHIVE.sha256" "$summary" "$manifest_json" "$manifest_txt"
 
       - name: Job summary
+        if: ${{ always() }}
         run: |
-          echo '## Chronicle sidechain mirror' >> "$GITHUB_STEP_SUMMARY"
-          echo '```json' >> "$GITHUB_STEP_SUMMARY"
-          cat artifacts/chronicle-sidechain-scan/SUMMARY.json >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo '## Chronicle sidechain mirror diagnostics' >> "$GITHUB_STEP_SUMMARY"
+          if [ -s artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json ]; then
+            echo '### Runtime result' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -s artifacts/chronicle-sidechain-scan/SUMMARY.json ]; then
+            echo '### Recovery summary' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat artifacts/chronicle-sidechain-scan/SUMMARY.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
