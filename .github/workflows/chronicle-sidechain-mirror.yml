@@ -1,4 +1,4 @@
-name: Chronicle Polygon + Base historical NFT mirror
+name: Chronicle Polygon + Base historical NFT evidence mirror
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
     paths:
       - "scripts/discover-chronicle-sidechain-nfts.mjs"
       - "scripts/run-chronicle-sidechain-mirror-observed.sh"
+      - "scripts/build-chronicle-sidechain-evidence.mjs"
+      - "scripts/capture-chronicle-sidechain-l2.py"
+      - "scripts/verify-chronicle-sidechain-evidence.py"
+      - "scripts/finalize-chronicle-sidechain-evidence.mjs"
       - ".github/workflows/chronicle-sidechain-mirror.yml"
 
 permissions:
@@ -20,7 +24,7 @@ jobs:
   mirror:
     if: ${{ github.ref == 'refs/heads/main' && (github.actor == 'thechurchofagi' || github.actor == 'github-actions[bot]' || github.event_name == 'push') }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 180
+    timeout-minutes: 360
     steps:
       - name: Checkout current main
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -32,13 +36,18 @@ jobs:
         with:
           node-version-file: ".node-version"
 
-      - name: Validate scanner and diagnostics wrapper
+      - name: Install proof dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Validate scanner, evidence builders, and diagnostics wrapper
         run: |
           set -euo pipefail
           node --check scripts/discover-chronicle-sidechain-nfts.mjs
+          node --check scripts/build-chronicle-sidechain-evidence.mjs
+          node --check scripts/finalize-chronicle-sidechain-evidence.mjs
+          python3 -m py_compile scripts/capture-chronicle-sidechain-l2.py scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
-          echo "[VALIDATION OK] scanner syntax"
-          echo "[VALIDATION OK] diagnostics wrapper syntax"
+          echo "[VALIDATION OK] scanner + CAR/L1/L2/offline verification syntax"
 
       - name: Discover and mirror Polygon + Base history
         env:
@@ -50,28 +59,46 @@ jobs:
           CHRONICLE_STALL_WARN_SECONDS: "300"
         run: bash scripts/run-chronicle-sidechain-mirror-observed.sh
 
-      - name: Build immutable mirror archive
+      - name: Resolve mint history and capture trustless CARs + L1 commitment
+        env:
+          POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          CHRONICLE_EVIDENCE_CONCURRENCY: "4"
+        run: node scripts/build-chronicle-sidechain-evidence.mjs
+
+      - name: Capture L2 transaction and receipt inclusion proofs
+        env:
+          POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
+          BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          CHRONICLE_L2_CONCURRENCY: "4"
+        run: python3 scripts/capture-chronicle-sidechain-l2.py
+
+      - name: Verify CAR/DAG, L1 commitment, L2 MPT, block hash and timestamp offline
+        run: python3 scripts/verify-chronicle-sidechain-evidence.py
+
+      - name: Finalize manifest and new anchor request
+        run: node scripts/finalize-chronicle-sidechain-evidence.mjs
+
+      - name: Build immutable evidence archive
         id: package
         run: |
           set -euo pipefail
           short_sha="${GITHUB_SHA:0:12}"
-          tag="chronicle-sidechain-mirror-v1-${short_sha}"
-          archive="chronicle-sidechain-mirror-${short_sha}.tar.gz"
+          tag="chronicle-sidechain-evidence-v2-${short_sha}"
+          archive="chronicle-sidechain-evidence-v2-${short_sha}.tar.gz"
           tar -C artifacts -czf "$archive" chronicle-sidechain-scan
           sha256sum "$archive" > "$archive.sha256"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "archive=$archive" >> "$GITHUB_OUTPUT"
 
-      - name: Publish immutable GitHub Release mirror
+      - name: Publish immutable GitHub Release evidence mirror
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.package.outputs.tag }}
           ARCHIVE: ${{ steps.package.outputs.archive }}
         run: |
           set -euo pipefail
-          summary="artifacts/chronicle-sidechain-scan/SUMMARY.json"
-          manifest_json="artifacts/chronicle-sidechain-scan/MANIFEST.sha256.json"
-          manifest_txt="artifacts/chronicle-sidechain-scan/MANIFEST.sha256"
+          root="artifacts/chronicle-sidechain-scan"
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo "Release $TAG already exists; refusing to mutate immutable snapshot." >&2
             exit 1
@@ -79,23 +106,32 @@ jobs:
           gh release create "$TAG" \
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
-            --title "Chronicle Polygon + Base historical NFT mirror — ${GITHUB_SHA:0:12}" \
-            --notes "Immutable discovery/mirror snapshot for historical ERC-721/ERC-1155 activity of 0xbc63566A41cBfDB9C266a5941CBe47894DaA54A8 on Polygon and Base. Evidence input only: this does not amend Canon or automatically redefine Chronicle membership." \
-            "$ARCHIVE" "$ARCHIVE.sha256" "$summary" "$manifest_json" "$manifest_txt"
+            --title "Chronicle Polygon + Base NFT evidence v2 — ${GITHUB_SHA:0:12}" \
+            --notes "Immutable Polygon/Base Chronicle NFT evidence snapshot. Every chain+contract+token coordinate is preserved as one Chronicle record; transfer events remain provenance. Includes trustless IPFS CAR preservation, deterministic L1 collection commitment, L2 transaction/receipt MPT inclusion proofs, offline verification, complete timestamp/tx/block coordinates, and a deterministic request for new BTC/ETH/OTS anchoring. Historical signatures are not retroactively extended; L3 sidechain settlement is separately statused and is not claimed PASS here. This does not amend the three-inscription Bitcoin Canon." \
+            "$ARCHIVE" "$ARCHIVE.sha256" \
+            "$root/SUMMARY.json" "$root/MANIFEST.sha256.json" "$root/MANIFEST.sha256" \
+            "$root/evidence-v2/SIDECHAIN-NFT-IDENTITY-INDEX.json" \
+            "$root/evidence-v2/SIDECHAIN-NFT-COLLECTION-COMMITMENT.json" \
+            "$root/evidence-v2/TIMELINE.json" \
+            "$root/evidence-v2/POLYGON-TIMELINE.json" "$root/evidence-v2/BASE-TIMELINE.json" \
+            "$root/evidence-v2/L2-CAPTURE-SUMMARY.json" "$root/evidence-v2/OFFLINE-VERIFICATION.json" \
+            "$root/evidence-v2/L3-SETTLEMENT-STATUS.json" "$root/evidence-v2/ANCHOR-REQUEST.json"
 
       - name: Job summary
         if: ${{ always() }}
         run: |
-          echo '## Chronicle sidechain mirror diagnostics' >> "$GITHUB_STEP_SUMMARY"
-          if [ -s artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json ]; then
-            echo '### Runtime result' >> "$GITHUB_STEP_SUMMARY"
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [ -s artifacts/chronicle-sidechain-scan/SUMMARY.json ]; then
-            echo '### Recovery summary' >> "$GITHUB_STEP_SUMMARY"
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat artifacts/chronicle-sidechain-scan/SUMMARY.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
+          echo '## Chronicle sidechain evidence diagnostics' >> "$GITHUB_STEP_SUMMARY"
+          for f in \
+            artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json \
+            artifacts/chronicle-sidechain-scan/SUMMARY.json \
+            artifacts/chronicle-sidechain-scan/evidence-v2/BUILD-REPORT.json \
+            artifacts/chronicle-sidechain-scan/evidence-v2/L2-CAPTURE-SUMMARY.json \
+            artifacts/chronicle-sidechain-scan/evidence-v2/OFFLINE-VERIFICATION.json \
+            artifacts/chronicle-sidechain-scan/evidence-v2/ANCHOR-REQUEST.json; do
+            if [ -s "$f" ]; then
+              echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
+              echo '```json' >> "$GITHUB_STEP_SUMMARY"
+              cat "$f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
