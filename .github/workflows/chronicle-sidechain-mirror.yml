@@ -126,7 +126,7 @@ jobs:
         env:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
-          CHRONICLE_EVIDENCE_CONCURRENCY: "1"
+          CHRONICLE_EVIDENCE_CONCURRENCY: "2"
           CHRONICLE_CAR_HTTP_TIMEOUT_MS: "45000"
           CHRONICLE_CAR_HTTP_RETRIES: "2"
           CHRONICLE_CAR_GATEWAYS: "https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
