@@ -7,6 +7,7 @@ import {
   encodeVarint,
   fetchBlockwiseCar,
   parseCarStrict,
+  singleBlockCar,
 } from './ipfs-car-blockwise.mjs';
 
 const sha = value => crypto.createHash('sha256').update(value).digest();
@@ -40,6 +41,16 @@ const source = new Map([
   [imageCid.toString('hex'), car(imageCid, [{ cid: imageCid, data: image }])],
   [animationCid.toString('hex'), car(animationCid, [{ cid: animationCid, data: animation }])],
 ]);
+
+const rawWrapped = singleBlockCar(cidBytesToString(imageCid), image);
+const rawParsed = parseCarStrict(rawWrapped);
+assert.equal(rawParsed.blocks.length, 1);
+assert.equal(rawParsed.blocks[0].key, imageCid.toString('hex'));
+assert.deepEqual(rawParsed.blocks[0].data, image);
+await assert.rejects(
+  async () => singleBlockCar(cidBytesToString(imageCid), Buffer.from('wrong historical bytes')),
+  /block CID hash mismatch/,
+);
 
 const calls = [];
 const result = await fetchBlockwiseCar({
