@@ -1,0 +1,36 @@
+name: Chronicle sidechain L2 parallel preflight
+
+on:
+  pull_request:
+    paths:
+      - "scripts/capture-chronicle-sidechain-l2.py"
+      - "scripts/capture-chronicle-sidechain-l2-parallel.py"
+      - "scripts/test_chronicle_sidechain_l2.py"
+      - "scripts/test_chronicle_sidechain_l2_parallel.py"
+      - "scripts/publish-chronicle-sidechain-progress.py"
+      - "scripts/stream-chronicle-sidechain-progress.sh"
+      - ".github/workflows/chronicle-sidechain-mirror-v3.yml"
+      - ".github/workflows/chronicle-sidechain-l2-preflight.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Install proof dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Run L2 regression and parallelism tests
+        run: |
+          set -euo pipefail
+          python3 scripts/test_chronicle_sidechain_l2.py
+          python3 scripts/test_chronicle_sidechain_l2_parallel.py
+          python3 -m py_compile \
+            scripts/capture-chronicle-sidechain-l2.py \
+            scripts/capture-chronicle-sidechain-l2-parallel.py \
+            scripts/publish-chronicle-sidechain-progress.py
+          bash -n scripts/stream-chronicle-sidechain-progress.sh
+          echo "[PREFLIGHT PASS] legacy correctness + endpoint parallelism + telemetry"

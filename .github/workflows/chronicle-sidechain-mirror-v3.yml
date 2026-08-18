@@ -18,13 +18,18 @@ on:
       - "scripts/test_chronicle_car_blockwise.mjs"
       - "scripts/test_chronicle_bootstrap_history.mjs"
       - "scripts/capture-chronicle-sidechain-l2.py"
+      - "scripts/capture-chronicle-sidechain-l2-parallel.py"
       - "scripts/test_chronicle_sidechain_l2.py"
+      - "scripts/test_chronicle_sidechain_l2_parallel.py"
+      - "scripts/publish-chronicle-sidechain-progress.py"
+      - "scripts/stream-chronicle-sidechain-progress.sh"
       - "scripts/verify-chronicle-sidechain-evidence.py"
       - "scripts/finalize-chronicle-sidechain-evidence.mjs"
-      - ".github/workflows/chronicle-sidechain-mirror.yml"
+      - ".github/workflows/chronicle-sidechain-mirror-v3.yml"
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: chronicle-sidechain-mirror
@@ -38,6 +43,7 @@ env:
   LASSIE_LINUX_AMD64_SHA256: cbd81ce9625a7db346a1c7f3bb67d4654fba4af0d8c5bdfdd1c0aaddd2c76286
   KUBO_VERSION: 0.37.0
   KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+  CHRONICLE_PROGRESS_ISSUE: "1020"
 
 jobs:
   mirror:
@@ -61,6 +67,12 @@ jobs:
           }
           echo "[SOURCE BOUND] $actual"
 
+      - name: Initialize live progress
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase setup --status running || true
+
       - name: Record toolchain provenance
         run: |
           python3 scripts/toolchain_provenance.py > toolchain-provenance.json
@@ -73,7 +85,7 @@ jobs:
       - name: Install proof dependencies
         run: python3 -m pip install -r requirements-ci.txt
 
-      - name: Validate scanner, evidence builders, and diagnostics wrapper
+      - name: Validate scanner, evidence builders, parallel L2, and telemetry
         run: |
           set -euo pipefail
           node --check scripts/discover-chronicle-sidechain-nfts.mjs
@@ -82,10 +94,16 @@ jobs:
           node scripts/test_chronicle_car_blockwise.mjs
           node scripts/test_chronicle_bootstrap_history.mjs
           python3 scripts/test_chronicle_sidechain_l2.py
+          python3 scripts/test_chronicle_sidechain_l2_parallel.py
           node --check scripts/finalize-chronicle-sidechain-evidence.mjs
-          python3 -m py_compile scripts/capture-chronicle-sidechain-l2.py scripts/verify-chronicle-sidechain-evidence.py
+          python3 -m py_compile \
+            scripts/capture-chronicle-sidechain-l2.py \
+            scripts/capture-chronicle-sidechain-l2-parallel.py \
+            scripts/publish-chronicle-sidechain-progress.py \
+            scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
-          echo "[VALIDATION OK] scanner + CAR/L1/L2/offline verification syntax"
+          bash -n scripts/stream-chronicle-sidechain-progress.sh
+          echo "[VALIDATION OK] scanner + CAR/L1 + parallel L2 + telemetry + offline verification"
 
       - name: Bootstrap verified sidechain snapshot
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.refresh_live != true }}
@@ -171,6 +189,12 @@ jobs:
           "$tools/kubo/ipfs" config --json Swarm.DisableNatPortMap true
           echo "[KUBO PINNED] $kubo_version asset_sha512=$KUBO_LINUX_AMD64_SHA512"
 
+      - name: Publish CAR/L1 phase
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase car_l1 --status running || true
+
       - name: Resolve mint history and capture trustless CARs + L1 commitment
         env:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
@@ -236,19 +260,46 @@ jobs:
             artifacts/chronicle-sidechain-car-block-cache
           key: chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - name: Capture L2 transaction and receipt inclusion proofs
+      - name: Capture L2 transaction and receipt inclusion proofs in parallel
         env:
+          GH_TOKEN: ${{ github.token }}
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           CHRONICLE_POLYGON_RPC_FALLBACK_URLS: "https://polygon.drpc.org,https://polygon-bor-rpc.publicnode.com"
           CHRONICLE_BASE_RPC_FALLBACK_URLS: "https://base.drpc.org,https://base-rpc.publicnode.com,https://mainnet.base.org"
-          CHRONICLE_L2_CONCURRENCY: "4"
+          CHRONICLE_L2_CONCURRENCY: "8"
+          CHRONICLE_L2_RPC_ENDPOINT_INFLIGHT: "1"
           CHRONICLE_L2_HTTP_RETRIES: "4"
           CHRONICLE_L2_RPC_MIN_INTERVAL_MS: "100"
-        run: python3 scripts/capture-chronicle-sidechain-l2.py
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+          CHRONICLE_PROGRESS_PUBLISH_SECONDS: "30"
+        run: |
+          set -u
+          python3 scripts/capture-chronicle-sidechain-l2-parallel.py &
+          capture_pid=$!
+          bash scripts/stream-chronicle-sidechain-progress.sh "$capture_pid" &
+          publisher_pid=$!
+          set +e
+          wait "$capture_pid"
+          rc=$?
+          set -e
+          wait "$publisher_pid" || true
+          exit "$rc"
+
+      - name: Publish offline verification phase
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase offline_verify --status running || true
 
       - name: Verify CAR/DAG, L1 commitment, L2 MPT, block hash and timestamp offline
         run: python3 scripts/verify-chronicle-sidechain-evidence.py
+
+      - name: Publish finalization phase
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase finalize --status running || true
 
       - name: Finalize manifest and new anchor request
         run: node scripts/finalize-chronicle-sidechain-evidence.mjs
@@ -264,6 +315,12 @@ jobs:
           sha256sum "$archive" > "$archive.sha256"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "archive=$archive" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release phase
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase release --status running || true
 
       - name: Publish immutable GitHub Release evidence mirror
         env:
@@ -301,7 +358,8 @@ jobs:
             artifacts/chronicle-sidechain-scan/evidence-v2/BUILD-REPORT.json \
             artifacts/chronicle-sidechain-scan/evidence-v2/L2-CAPTURE-SUMMARY.json \
             artifacts/chronicle-sidechain-scan/evidence-v2/OFFLINE-VERIFICATION.json \
-            artifacts/chronicle-sidechain-scan/evidence-v2/ANCHOR-REQUEST.json; do
+            artifacts/chronicle-sidechain-scan/evidence-v2/ANCHOR-REQUEST.json \
+            "$RUNNER_TEMP/chronicle-sidechain-l2-progress.json"; do
             if [ -s "$f" ]; then
               echo "### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
               echo '```json' >> "$GITHUB_STEP_SUMMARY"
@@ -309,3 +367,10 @@ jobs:
               echo '```' >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+
+      - name: Publish terminal progress
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
+        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase workflow_complete --status "${{ job.status }}" || true
