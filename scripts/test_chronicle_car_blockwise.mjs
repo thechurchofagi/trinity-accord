@@ -155,6 +155,52 @@ assert.equal(resumed.requests, 1);
 assert.deepEqual(resumedCalls, [cidBytesToString(animationCid)]);
 assert.equal(blockCache.size, 3);
 
+const fallbackCalls = [];
+const fallbackCache = new Map();
+const fallbackResult = await fetchBlockwiseCar({
+  rootCid: cidBytesToString(rootCid),
+  gateways: ['https://unavailable.invalid/ipfs/{cid}'],
+  maxBytes: 1024 * 1024,
+  concurrency: 2,
+  saveBlock: async ({ key, buffer }) => fallbackCache.set(key, Buffer.from(buffer)),
+  fetchCar: async () => {
+    throw Error('fixture gateway unavailable');
+  },
+  fetchFallback: async context => {
+    fallbackCalls.push(context);
+    return source.get(context.cid === cidBytesToString(rootCid)
+      ? rootCid.toString('hex')
+      : context.cid === cidBytesToString(imageCid)
+        ? imageCid.toString('hex')
+        : animationCid.toString('hex'));
+  },
+});
+assert.equal(fallbackResult.blocks, 3);
+assert.equal(fallbackResult.requests, 6);
+assert.equal(fallbackResult.fallbackRequests, 3);
+assert.equal(fallbackResult.fallbackHits, 3);
+assert.equal(fallbackCalls.length, 3);
+assert.ok(fallbackCalls.every(call => call.scope === 'block'));
+assert.equal(fallbackCache.size, 3);
+
+let invalidFallbackCacheWrites = 0;
+await assert.rejects(
+  fetchBlockwiseCar({
+    rootCid: cidBytesToString(rootCid),
+    gateways: ['https://unavailable.invalid/ipfs/{cid}'],
+    maxBytes: 1024 * 1024,
+    fetchCar: async () => {
+      throw Error('fixture gateway unavailable');
+    },
+    fetchFallback: async () => source.get(imageCid.toString('hex')),
+    saveBlock: async () => {
+      invalidFallbackCacheWrites++;
+    },
+  }),
+  /fallback: requested block absent/,
+);
+assert.equal(invalidFallbackCacheWrites, 0);
+
 const corrupt = Buffer.from(source.get(imageCid.toString('hex')));
 corrupt[corrupt.length - 1] ^= 1;
 await assert.rejects(

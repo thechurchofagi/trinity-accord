@@ -332,6 +332,7 @@ export async function fetchBlockwiseCar({
   rootCid,
   gateways,
   fetchCar,
+  fetchFallback = null,
   maxBytes,
   concurrency = 2,
   maxBlocks = 4096,
@@ -341,6 +342,7 @@ export async function fetchBlockwiseCar({
 }) {
   if (!Array.isArray(gateways) || gateways.length === 0) throw Error('at least one CAR gateway is required');
   if (typeof fetchCar !== 'function') throw Error('fetchCar callback is required');
+  if (fetchFallback !== null && typeof fetchFallback !== 'function') throw Error('fetchFallback must be a function');
   if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) throw Error(`invalid maxBytes ${maxBytes}`);
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 16) throw Error(`invalid concurrency ${concurrency}`);
   if (!Number.isInteger(maxBlocks) || maxBlocks < 1) throw Error(`invalid maxBlocks ${maxBlocks}`);
@@ -360,6 +362,8 @@ export async function fetchBlockwiseCar({
   let requestCount = 0;
   let cacheHitCount = 0;
   let cacheWriteCount = 0;
+  let fallbackRequestCount = 0;
+  let fallbackHitCount = 0;
   let preferredGateway = 0;
 
   function addBlock(block) {
@@ -428,6 +432,22 @@ export async function fetchBlockwiseCar({
       preferredGateway = winner.gatewayOffset;
       return { ...winner.parsed, gatewayIndex: winner.gatewayIndex, url: winner.url };
     }
+    if (fetchFallback) {
+      fallbackRequestCount++;
+      requestCount++;
+      try {
+        const response = Buffer.from(await fetchFallback({ cid, key, scope: 'block' }));
+        const parsed = parseRequestedBlock(response, cidBytes, cid, 'fallback');
+        if (saveBlock) {
+          await saveBlock({ cid, key, buffer: response });
+          cacheWriteCount++;
+        }
+        fallbackHitCount++;
+        return { ...parsed, gatewayIndex: null, url: null, fallback: true };
+      } catch (error) {
+        errors.push(`fallback: ${error.message}`);
+      }
+    }
     throw Error(`block ${cid} unavailable from ${gateways.length} gateways: ${errors.join('; ')}`);
   }
 
@@ -483,5 +503,7 @@ export async function fetchBlockwiseCar({
     requests: requestCount,
     cacheHits: cacheHitCount,
     cacheWrites: cacheWriteCount,
+    fallbackRequests: fallbackRequestCount,
+    fallbackHits: fallbackHitCount,
   };
 }

@@ -2,7 +2,12 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import os from 'os';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 import { fetchBlockwiseCar, singleBlockCar } from './ipfs-car-blockwise.mjs';
+
+const execFileAsync = promisify(execFile);
 
 const OUT = process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan';
 const ZERO = '0x0000000000000000000000000000000000000000';
@@ -22,6 +27,11 @@ const CAR_BLOCK_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS
 const CAR_BLOCK_RAW_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_RAW_HTTP_TIMEOUT_MS || 15000);
 const CAR_BLOCK_RETRIES = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_RETRIES || 0);
 const CAR_BLOCK_CACHE_DIR = process.env.CHRONICLE_CAR_BLOCK_CACHE_DIR || 'artifacts/chronicle-sidechain-car-block-cache';
+const LASSIE_BIN = String(process.env.CHRONICLE_LASSIE_BIN || '').trim();
+const LASSIE_GLOBAL_TIMEOUT = Math.max(10000, Math.min(600000, Number(process.env.CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS || 180000)));
+const LASSIE_PROVIDER_TIMEOUT = Math.max(5000, Math.min(LASSIE_GLOBAL_TIMEOUT, Number(process.env.CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS || 45000)));
+const LASSIE_VERSION = String(process.env.CHRONICLE_LASSIE_VERSION || '').trim() || null;
+const LASSIE_ASSET_SHA256 = String(process.env.CHRONICLE_LASSIE_ASSET_SHA256 || '').trim() || null;
 const REFRESH_HISTORY = /^(1|true|yes)$/i.test(process.env.CHRONICLE_EVIDENCE_REFRESH_HISTORY || 'false');
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
 const DEFAULT_CAR_GATEWAYS = [
@@ -198,6 +208,39 @@ function rawBlockUrl(value) {
   url.searchParams.delete('entity-bytes');
   return url.toString();
 }
+async function fetchLassieBlock({ cid }) {
+  if (!LASSIE_BIN) throw Error('Lassie fallback is not configured');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-lassie-'));
+  const output = path.join(tmp, `${cid}.car`);
+  try {
+    const { stdout, stderr } = await execFileAsync(LASSIE_BIN, [
+      'fetch',
+      '--output', output,
+      '--tempdir', tmp,
+      '--dag-scope', 'block',
+      '--protocols', 'bitswap,graphsync,http',
+      '--global-timeout', `${LASSIE_GLOBAL_TIMEOUT}ms`,
+      '--provider-timeout', `${LASSIE_PROVIDER_TIMEOUT}ms`,
+      cid,
+    ], {
+      timeout: LASSIE_GLOBAL_TIMEOUT + 15000,
+      maxBuffer: 2 * 1024 * 1024,
+      windowsHide: true,
+    });
+    if (!fs.existsSync(output)) throw Error('completed without a CAR output file');
+    const buffer = fs.readFileSync(output);
+    if (!buffer.length) throw Error('returned an empty CAR');
+    if (buffer.length > MAX) throw Error(`CAR bytes ${buffer.length}>${MAX}`);
+    const detail = String(stderr || stdout || '').trim().replace(/\s+/g, ' ').slice(0, 400);
+    console.log(`[CAR LASSIE BLOCK RECEIVED] cid=${cid} bytes=${buffer.length}${detail ? ` detail=${detail}` : ''}`);
+    return buffer;
+  } catch (error) {
+    const detail = String(error.stderr || error.stdout || error.message || error).trim().replace(/\s+/g, ' ').slice(0, 800);
+    throw Error(`Lassie provider retrieval failed for ${cid}: ${detail || 'unknown error'}`);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+}
 async function car(ref) {
   if (!ref) return { status: 'not_ipfs' };
   let base = cache.get(ref.root_cid);
@@ -258,6 +301,7 @@ async function car(ref) {
           gatewayRace: Math.min(CAR_BLOCK_GATEWAY_RACE, CAR_GATEWAYS.length),
           loadBlock: loadCachedBlock,
           saveBlock: saveCachedBlock,
+          fetchFallback: LASSIE_BIN ? fetchLassieBlock : null,
           fetchCar: async (url, context) => {
             let carError;
             try {
@@ -294,7 +338,7 @@ async function car(ref) {
           },
         });
         fs.writeFileSync(f, recovered.buffer);
-        console.log(`[CAR BLOCKWISE COMPLETE] cid=${ref.root_cid} blocks=${recovered.blocks} requests=${recovered.requests} bytes=${recovered.buffer.length}`);
+        console.log(`[CAR BLOCKWISE COMPLETE] cid=${ref.root_cid} blocks=${recovered.blocks} requests=${recovered.requests} lassie=${recovered.fallbackHits}/${recovered.fallbackRequests} bytes=${recovered.buffer.length}`);
         return {
           status: 'ok',
           root_cid: ref.root_cid,
@@ -307,6 +351,8 @@ async function car(ref) {
           blockwise_request_count: recovered.requests,
           block_cache_hits: recovered.cacheHits,
           block_cache_writes: recovered.cacheWrites,
+          lassie_fallback_requests: recovered.fallbackRequests,
+          lassie_fallback_hits: recovered.fallbackHits,
         };
       } catch (e) {
         errors.push({ mode: 'blockwise', error: e.message });
@@ -517,6 +563,13 @@ write(path.join(E, 'BUILD-REPORT.json'), {
   mint_not_observed: fallback.length,
   car_failures: fail,
   car_gateway_count: CAR_GATEWAYS.length,
+  lassie_fallback: {
+    enabled: Boolean(LASSIE_BIN),
+    version: LASSIE_VERSION,
+    asset_sha256: LASSIE_ASSET_SHA256,
+    global_timeout_ms: LASSIE_GLOBAL_TIMEOUT,
+    provider_timeout_ms: LASSIE_PROVIDER_TIMEOUT,
+  },
   history_refresh_enabled: REFRESH_HISTORY,
   history_sources: Object.fromEntries([...new Set(res.map(r => r.origin_resolution.full_instance_history))]
     .sort()
