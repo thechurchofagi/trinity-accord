@@ -14,6 +14,7 @@ import {
   rootCidFromWholeDagUrl,
   verifyCompleteCar,
 } from './chronicle-sidechain-car-integrity.mjs';
+import { updateCarProgressFromLine } from './chronicle-sidechain-car-progress.mjs';
 
 function cidV1(codec, data) {
   const digest = crypto.createHash('sha256').update(data).digest();
@@ -62,4 +63,14 @@ try {
   fs.rmSync(temp, { recursive: true, force: true });
 }
 
-console.log('[CAR INTEGRITY TEST PASS] valid cache retained; truncated/incomplete DAG rejected before builder acceptance');
+const progress = {};
+assert.equal(updateCarProgressFromLine(progress, '[EVIDENCE PROGRESS] 37/217 origin=mint car=ok'), true);
+assert.equal(progress.records_completed, 37);
+assert.equal(progress.records_expected, 217);
+assert.equal(progress.last_metadata_car_status, 'ok');
+assert.equal(updateCarProgressFromLine(progress, '[CAR BLOCKWISE COMPLETE] cid=test blocks=2'), true);
+assert.equal(progress.blockwise_completed, 1);
+assert.equal(updateCarProgressFromLine(progress, '[CAR FAILED] cid=test'), true);
+assert.equal(progress.car_failed_events, 1);
+
+console.log('[CAR INTEGRITY TEST PASS] valid cache retained; incomplete DAG rejected; live CAR progress parser verified');
