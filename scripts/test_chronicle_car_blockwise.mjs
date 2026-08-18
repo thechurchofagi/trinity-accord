@@ -5,6 +5,7 @@ import {
   cidBytesToString,
   cidSha256Digest,
   cidStringToBytes,
+  delegatedProviderMultiaddrs,
   encodeVarint,
   fetchBlockwiseCar,
   parseCarStrict,
@@ -37,6 +38,30 @@ const cidV0 = Buffer.concat([Buffer.from([0x12, 0x20]), sha(Buffer.from('cid-v0 
 assert.ok(cidBytesToString(cidV0).startsWith('Qm'));
 assert.deepEqual(cidStringToBytes(cidBytesToString(cidV0)), cidV0);
 assert.deepEqual(cidSha256Digest(cidBytesToString(imageCid)), sha(image));
+
+const delegatedProviders = delegatedProviderMultiaddrs({
+  Providers: [
+    {
+      ID: '12D3KooWCL2pXbQVaVnJntNZFNvz58PdY9gXo2R6NJajnDyhzxc4',
+      Addrs: [
+        '/ip6/2607:5300:60:7e71::/tcp/4001',
+        '/ip4/158.69.25.113/udp/4001/quic-v1/webtransport/certhash/not-used',
+        '/ip4/158.69.25.113/tcp/4001',
+        '/ip4/158.69.25.113/udp/4001/quic-v1',
+        '/dns4/provider.libp2p.direct/tcp/4001/tls/ws',
+      ],
+    },
+    { ID: 'invalid peer id', Addrs: ['/ip4/127.0.0.1/tcp/4001'] },
+  ],
+});
+assert.deepEqual(delegatedProviders, [
+  '/ip4/158.69.25.113/tcp/4001/p2p/12D3KooWCL2pXbQVaVnJntNZFNvz58PdY9gXo2R6NJajnDyhzxc4',
+  '/dns4/provider.libp2p.direct/tcp/4001/tls/ws/p2p/12D3KooWCL2pXbQVaVnJntNZFNvz58PdY9gXo2R6NJajnDyhzxc4',
+  '/ip4/158.69.25.113/udp/4001/quic-v1/p2p/12D3KooWCL2pXbQVaVnJntNZFNvz58PdY9gXo2R6NJajnDyhzxc4',
+  '/ip6/2607:5300:60:7e71::/tcp/4001/p2p/12D3KooWCL2pXbQVaVnJntNZFNvz58PdY9gXo2R6NJajnDyhzxc4',
+]);
+assert.deepEqual(delegatedProviderMultiaddrs({ Providers: 'not-an-array' }), []);
+assert.throws(() => delegatedProviderMultiaddrs({}, { maxProviders: 0 }), /invalid maxProviders/);
 
 const source = new Map([
   [rootCid.toString('hex'), car(rootCid, [{ cid: rootCid, data: rootData }])],
