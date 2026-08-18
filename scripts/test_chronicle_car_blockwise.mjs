@@ -3,6 +3,7 @@ import assert from 'assert/strict';
 import crypto from 'crypto';
 import {
   cidBytesToString,
+  cidSha256Digest,
   cidStringToBytes,
   encodeVarint,
   fetchBlockwiseCar,
@@ -35,6 +36,7 @@ const rootCid = cid(0x70, rootData);
 const cidV0 = Buffer.concat([Buffer.from([0x12, 0x20]), sha(Buffer.from('cid-v0 fixture'))]);
 assert.ok(cidBytesToString(cidV0).startsWith('Qm'));
 assert.deepEqual(cidStringToBytes(cidBytesToString(cidV0)), cidV0);
+assert.deepEqual(cidSha256Digest(cidBytesToString(imageCid)), sha(image));
 
 const source = new Map([
   [rootCid.toString('hex'), car(rootCid, [{ cid: rootCid, data: rootData }])],
@@ -182,6 +184,37 @@ assert.equal(fallbackResult.fallbackHits, 3);
 assert.equal(fallbackCalls.length, 3);
 assert.ok(fallbackCalls.every(call => call.scope === 'block'));
 assert.equal(fallbackCache.size, 3);
+
+const rootAwareCache = new Map([
+  [rootCid.toString('hex'), source.get(rootCid.toString('hex'))],
+  [imageCid.toString('hex'), source.get(imageCid.toString('hex'))],
+]);
+const fullDagCar = car(rootCid, [
+  { cid: rootCid, data: rootData },
+  { cid: imageCid, data: image },
+  { cid: animationCid, data: animation },
+]);
+const rootAware = await fetchBlockwiseCar({
+  rootCid: cidBytesToString(rootCid),
+  gateways: ['https://unavailable.invalid/ipfs/{cid}'],
+  maxBytes: 1024 * 1024,
+  loadBlock: async ({ key }) => rootAwareCache.get(key) || null,
+  saveBlock: async ({ key, buffer }) => rootAwareCache.set(key, Buffer.from(buffer)),
+  fetchCar: async () => {
+    throw Error('fixture gateway unavailable');
+  },
+  fetchFallback: async () => fullDagCar,
+});
+assert.equal(rootAware.blocks, 3);
+assert.equal(rootAware.cacheHits, 2);
+assert.equal(rootAware.requests, 2);
+assert.equal(rootAware.fallbackRequests, 1);
+assert.equal(rootAware.fallbackHits, 1);
+assert.deepEqual(parseCarStrict(rootAwareCache.get(animationCid.toString('hex'))).blocks.map(block => block.key), [
+  rootCid.toString('hex'),
+  imageCid.toString('hex'),
+  animationCid.toString('hex'),
+]);
 
 let invalidFallbackCacheWrites = 0;
 await assert.rejects(
