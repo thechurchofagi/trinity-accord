@@ -1,18 +1,40 @@
 #!/usr/bin/env python3
-import concurrent.futures, json, os, pathlib, time, urllib.request
+import concurrent.futures, json, os, pathlib, threading, time, urllib.error, urllib.request
 import rlp
 from eth_hash.auto import keccak
 from trie import HexaryTrie
 
 OUT = pathlib.Path(os.getenv('CHRONICLE_OUT', 'artifacts/chronicle-sidechain-scan'))
 EVID = OUT / 'evidence-v2'
+
+def endpoint_list(primary, fallbacks):
+    values=[]
+    for raw in (primary, fallbacks):
+        for value in str(raw or '').replace('\n', ',').split(','):
+            value=value.strip().rstrip('/')
+            if value and value not in values: values.append(value)
+    if not values: raise ValueError('at least one RPC endpoint is required')
+    return values
+
 RPC = {
-    'polygon': os.getenv('POLYGON_RPC_URL') or 'https://polygon.drpc.org',
-    'base': os.getenv('BASE_RPC_URL') or 'https://mainnet.base.org',
+    'polygon': endpoint_list(
+        os.getenv('POLYGON_RPC_URL'),
+        os.getenv('CHRONICLE_POLYGON_RPC_FALLBACK_URLS') or 'https://polygon.drpc.org,https://polygon-bor-rpc.publicnode.com',
+    ),
+    'base': endpoint_list(
+        os.getenv('BASE_RPC_URL'),
+        os.getenv('CHRONICLE_BASE_RPC_FALLBACK_URLS') or 'https://base.drpc.org,https://base-rpc.publicnode.com,https://mainnet.base.org',
+    ),
 }
 CONCURRENCY = max(1, min(8, int(os.getenv('CHRONICLE_L2_CONCURRENCY', '4'))))
 TIMEOUT = int(os.getenv('CHRONICLE_L2_HTTP_TIMEOUT_SECONDS', '45'))
 RETRIES = int(os.getenv('CHRONICLE_L2_HTTP_RETRIES', '2'))
+RPC_MIN_INTERVAL = max(0, int(os.getenv('CHRONICLE_L2_RPC_MIN_INTERVAL_MS', '100'))) / 1000
+RPC_LOCKS = {chain: threading.Lock() for chain in RPC}
+RPC_STATE_LOCK = threading.Lock()
+RPC_PREFERRED = {chain: 0 for chain in RPC}
+RPC_LAST_CALL = {chain: 0.0 for chain in RPC}
+RPC_SUCCESSES = {chain: [0] * len(endpoints) for chain, endpoints in RPC.items()}
 TRANSFER = '0x' + keccak(b'Transfer(address,address,uint256)').hex()
 SINGLE = '0x' + keccak(b'TransferSingle(address,address,address,uint256,uint256)').hex()
 BATCH = '0x' + keccak(b'TransferBatch(address,address,address,uint256[],uint256[])').hex()
@@ -37,20 +59,57 @@ def intb(v):
     n = h2i(v)
     return b'' if n == 0 else n.to_bytes((n.bit_length()+7)//8, 'big')
 
-def rpc(chain, method, params):
+class RpcFailure(RuntimeError):
+    def __init__(self, message, retry_after=0):
+        super().__init__(message)
+        self.retry_after = retry_after
+
+def rpc_once(chain, endpoint_index, method, params):
     payload = json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params}).encode()
-    last = None
-    for attempt in range(RETRIES + 1):
+    elapsed = time.monotonic() - RPC_LAST_CALL[chain]
+    if elapsed < RPC_MIN_INTERVAL: time.sleep(RPC_MIN_INTERVAL - elapsed)
+    RPC_LAST_CALL[chain] = time.monotonic()
+    req = urllib.request.Request(RPC[chain][endpoint_index], data=payload, headers={'content-type':'application/json','user-agent':'trinity-accord-sidechain-l2/2.2'})
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
+            data = json.loads(res.read())
+    except urllib.error.HTTPError as e:
+        retry_after=0
         try:
-            req = urllib.request.Request(RPC[chain], data=payload, headers={'content-type':'application/json','user-agent':'trinity-accord-sidechain-l2/2.1'})
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
-                data = json.loads(res.read())
-            if data.get('error'): raise RuntimeError(f"{method}: {data['error']}")
-            return data.get('result')
-        except Exception as e:
-            last = e
-            print(f'[L2 RETRY] {chain} {method} attempt={attempt+1}/{RETRIES+1} error={e}', flush=True)
-            if attempt < RETRIES: time.sleep(.5 * (2 ** attempt))
+            retry_after=float(e.headers.get('retry-after') or 0)
+        except (TypeError, ValueError):
+            pass
+        raise RpcFailure(f'HTTP Error {e.code}: {e.reason}', retry_after) from e
+    except Exception as e:
+        raise RpcFailure(str(e)) from e
+    if not isinstance(data, dict): raise RpcFailure('non-object JSON-RPC response')
+    if data.get('error'): raise RpcFailure(f"{method}: {data['error']}")
+    return data.get('result')
+
+def rpc(chain, method, params, retries=None):
+    rounds = (RETRIES if retries is None else max(0, retries)) + 1
+    last = None
+    with RPC_LOCKS[chain]:
+        for attempt in range(rounds):
+            with RPC_STATE_LOCK: preferred=RPC_PREFERRED[chain]
+            order=list(range(preferred, len(RPC[chain])))+list(range(0, preferred))
+            errors=[]; retry_after=0
+            for endpoint_index in order:
+                try:
+                    result=rpc_once(chain, endpoint_index, method, params)
+                    with RPC_STATE_LOCK:
+                        previous=RPC_PREFERRED[chain]
+                        RPC_PREFERRED[chain]=endpoint_index
+                        RPC_SUCCESSES[chain][endpoint_index]+=1
+                    if endpoint_index != previous:
+                        print(f'[L2 RPC ROUTE] {chain} endpoint={endpoint_index+1}/{len(RPC[chain])} method={method}', flush=True)
+                    return result
+                except RpcFailure as e:
+                    last=e; retry_after=max(retry_after, e.retry_after)
+                    errors.append(f'endpoint={endpoint_index+1}/{len(RPC[chain])} {e}')
+            print(f'[L2 RETRY] {chain} {method} attempt={attempt+1}/{rounds} error={"; ".join(errors)}', flush=True)
+            if attempt < rounds - 1:
+                time.sleep(max(retry_after, min(.5 * (2 ** attempt), 30)))
     raise RuntimeError(str(last))
 
 def access_list(v):
@@ -58,6 +117,18 @@ def access_list(v):
     for item in v or []:
         if isinstance(item, dict): out.append([h2b(item['address']), [h2b(x) for x in item.get('storageKeys',[])]])
         else: out.append([h2b(item[0]), [h2b(x) for x in item[1]]])
+    return out
+
+def authorization_list(v):
+    out=[]
+    for item in v or []:
+        if isinstance(item, dict):
+            out.append([
+                intb(item.get('chainId', item.get('chain_id'))), h2b(item['address']), intb(item['nonce']),
+                intb(item.get('yParity', item.get('y_parity'))), intb(item['r']), intb(item['s']),
+            ])
+        else:
+            out.append([intb(item[0]), h2b(item[1]), intb(item[2]), intb(item[3]), intb(item[4]), intb(item[5])])
     return out
 
 def encode_tx(tx):
@@ -87,6 +158,10 @@ def encode_tx(tx):
         fields=[intb(tx['chainId']),intb(tx['nonce']),intb(tx['maxPriorityFeePerGas']),intb(tx['maxFeePerGas']),intb(tx['gas']),to,intb(tx['value']),common_input,access_list(tx.get('accessList')),intb(y),intb(tx['r']),intb(tx['s'])]
     elif typ == 3:
         fields=[intb(tx['chainId']),intb(tx['nonce']),intb(tx['maxPriorityFeePerGas']),intb(tx['maxFeePerGas']),intb(tx['gas']),to,intb(tx['value']),common_input,access_list(tx.get('accessList')),intb(tx['maxFeePerBlobGas']),[h2b(x) for x in tx.get('blobVersionedHashes',[])],intb(y),intb(tx['r']),intb(tx['s'])]
+    elif typ == 4:
+        auths=authorization_list(tx.get('authorizationList', tx.get('authorization_list')))
+        if not auths: raise ValueError('type 4 transaction missing authorizationList')
+        fields=[intb(tx['chainId']),intb(tx['nonce']),intb(tx['maxPriorityFeePerGas']),intb(tx['maxFeePerGas']),intb(tx['gas']),to,intb(tx['value']),common_input,access_list(tx.get('accessList')),auths,intb(y),intb(tx['r']),intb(tx['s'])]
     else:
         raise ValueError(f'unsupported tx type {typ}')
     return bytes([typ])+rlp.encode(fields)
@@ -151,7 +226,7 @@ def match_origin_log(record, receipt):
 
 def get_receipts(chain, block):
     try:
-        recs=rpc(chain,'eth_getBlockReceipts',[block['hash']])
+        recs=rpc(chain,'eth_getBlockReceipts',[block['hash']],retries=0)
         if isinstance(recs,list) and len(recs)==len(block['transactions']): return recs, 'eth_getBlockReceipts'
     except Exception as e:
         print(f"[L2 INFO] {chain} block={h2i(block['number'])} batch receipts unavailable: {e}", flush=True)
@@ -222,7 +297,7 @@ def main():
     witness_dir=EVID/'l2'
     for record,w in results:
         p=witness_dir/record['chain']['name']/record['contract']/record['token_id']/'witness.json'; jwrite(p,w)
-    summary={'schema':'trinity-accord/chronicle-sidechain-l2-capture-summary/v2','generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'records_expected':len(records),'records_pass':len(results),'unique_blocks':len(groups),'blocks_failed':len(errors),'errors':errors,'pass':len(results)==len(records) and not errors}
+    summary={'schema':'trinity-accord/chronicle-sidechain-l2-capture-summary/v2','generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'records_expected':len(records),'records_pass':len(results),'unique_blocks':len(groups),'blocks_failed':len(errors),'rpc_routes':{chain:{'endpoint_count':len(RPC[chain]),'successful_requests_by_endpoint':RPC_SUCCESSES[chain]} for chain in sorted(RPC)},'errors':errors,'pass':len(results)==len(records) and not errors}
     jwrite(EVID/'L2-CAPTURE-SUMMARY.json',summary)
     print(f"[L2 COMPLETE] records_pass={len(results)}/{len(records)} blocks_failed={len(errors)}", flush=True)
     if not summary['pass']: raise SystemExit(1)
