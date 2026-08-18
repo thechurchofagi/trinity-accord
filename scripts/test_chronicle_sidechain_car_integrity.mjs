@@ -64,13 +64,29 @@ try {
 }
 
 const progress = {};
+assert.equal(updateCarProgressFromLine(progress, '[EVIDENCE START] 38/217 worker=3 base 0xabc #42'), true);
+assert.equal(progress.workers['3'].record_index, 38);
+assert.equal(progress.workers['3'].chain, 'base');
+assert.equal(progress.workers['3'].contract, '0xabc');
+assert.equal(progress.workers['3'].token_id, '42');
 assert.equal(updateCarProgressFromLine(progress, '[EVIDENCE PROGRESS] 37/217 origin=mint car=ok'), true);
 assert.equal(progress.records_completed, 37);
 assert.equal(progress.records_expected, 217);
 assert.equal(progress.last_metadata_car_status, 'ok');
 assert.equal(updateCarProgressFromLine(progress, '[CAR BLOCKWISE COMPLETE] cid=test blocks=2'), true);
 assert.equal(progress.blockwise_completed, 1);
-assert.equal(updateCarProgressFromLine(progress, '[CAR FAILED] cid=test'), true);
+assert.equal(progress.last_cid, 'test');
+assert.equal(updateCarProgressFromLine(progress, '[CAR FAILED] cid=bafyfailed endpoints=11 blockwise=no-provider'), true);
 assert.equal(progress.car_failed_events, 1);
+assert.deepEqual(progress.failed_cids, ['bafyfailed']);
+assert.equal(progress.last_cid, 'bafyfailed');
+assert.match(progress.last_event_detail, /bafyfailed/);
+assert.equal(updateCarProgressFromLine(progress, '[CAR LASSIE START] cid=bafyroot scope=all needed=bafychild delegated_multiaddrs=2'), true);
+assert.equal(progress.lassie_starts, 1);
+assert.equal(progress.last_cid, 'bafyroot');
 
-console.log('[CAR INTEGRITY TEST PASS] valid cache retained; incomplete DAG rejected; live CAR progress parser verified');
+const wrapper = fs.readFileSync('scripts/build-chronicle-sidechain-evidence.mjs', 'utf8');
+assert.match(wrapper, /CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT/);
+assert.match(wrapper, /configuredWholeDagEndpoints < 4/);
+
+console.log('[CAR INTEGRITY TEST PASS] valid cache retained; incomplete DAG rejected; multi-gateway retry and white-box CAR telemetry verified');
