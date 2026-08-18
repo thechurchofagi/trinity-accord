@@ -22,6 +22,7 @@ const CAR_BLOCK_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS
 const CAR_BLOCK_RAW_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_RAW_HTTP_TIMEOUT_MS || 15000);
 const CAR_BLOCK_RETRIES = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_RETRIES || 0);
 const CAR_BLOCK_CACHE_DIR = process.env.CHRONICLE_CAR_BLOCK_CACHE_DIR || 'artifacts/chronicle-sidechain-car-block-cache';
+const REFRESH_HISTORY = /^(1|true|yes)$/i.test(process.env.CHRONICLE_EVIDENCE_REFRESH_HISTORY || 'false');
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
 const DEFAULT_CAR_GATEWAYS = [
   'https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all',
@@ -92,6 +93,12 @@ async function get(url, { headers = {}, max = 20 * 1024 * 1024, label = url, tim
 async function getJson(u, o = {}) {
   return JSON.parse((await get(u, o)).b.toString('utf8'));
 }
+function sortHistory(rows) {
+  return [...rows].sort((a, b) =>
+    (a.timestamp_unix || 0) - (b.timestamp_unix || 0) ||
+    (a.block_number || 0) - (b.block_number || 0) ||
+    (a.log_index ?? 1e9) - (b.log_index ?? 1e9));
+}
 function norm(token, row) {
   const id = row?.total?.token_id ?? row?.token_id ?? row?.tokenID ?? token.token_id;
   if (String(id) !== String(token.token_id)) return null;
@@ -135,10 +142,14 @@ async function history(token) {
     const k = [y.chain, y.transaction_hash || '', y.log_index ?? '', y.contract, y.token_id, y.from || '', y.to || '', y.quantity || '1'].join('|');
     if (!m.has(k)) m.set(k, y);
   }
-  return [...m.values()].sort((a, b) =>
-    (a.timestamp_unix || 0) - (b.timestamp_unix || 0) ||
-    (a.block_number || 0) - (b.block_number || 0) ||
-    (a.log_index ?? 1e9) - (b.log_index ?? 1e9));
+  return sortHistory(m.values());
+}
+function snapshotHistory(token) {
+  const rows = sortHistory(token.transfers || []);
+  if (!rows.length) {
+    throw Error(`verified snapshot has no transfer history for ${token.chain} ${token.contract} #${token.token_id}`);
+  }
+  return rows;
 }
 function origin(xs) {
   const ms = xs.filter(x => String(x.from || '').toLowerCase() === ZERO);
@@ -321,6 +332,7 @@ function mth(a) {
 }
 
 const src = read(path.join(OUT, 'recovered-tokens.json'));
+console.log(`[HISTORY SOURCE] ${REFRESH_HISTORY ? 'live_blockscout_refresh' : 'verified_recovered_tokens_snapshot'} records=${src.length}`);
 const res = new Array(src.length);
 let next = 0, done = 0;
 async function worker(id) {
@@ -329,12 +341,19 @@ async function worker(id) {
     if (i >= src.length) return;
     const t = src[i];
     console.log(`[EVIDENCE START] ${i + 1}/${src.length} worker=${id} ${t.chain} ${t.contract} #${t.token_id}`);
-    let xs, err = null;
-    try {
-      xs = await history(t);
-    } catch (e) {
-      err = e.message;
-      xs = [...(t.transfers || [])].sort((a, b) => (a.timestamp_unix || 0) - (b.timestamp_unix || 0));
+    let xs, err = null, historySource;
+    if (!REFRESH_HISTORY) {
+      xs = snapshotHistory(t);
+      historySource = 'verified_recovered_tokens_snapshot';
+    } else {
+      try {
+        xs = await history(t);
+        historySource = 'blockscout_instance_history';
+      } catch (e) {
+        err = e.message;
+        xs = snapshotHistory(t);
+        historySource = 'verified_recovered_tokens_snapshot_fallback';
+      }
     }
     const o = origin(xs);
     const mu = t.token_uri?.uri || null;
@@ -353,7 +372,7 @@ async function worker(id) {
       contract: t.contract.toLowerCase(),
       token_id: String(t.token_id),
       origin: o,
-      origin_resolution: { full_instance_history: err ? 'fallback_address_history' : 'blockscout_instance_history', error: err },
+      origin_resolution: { full_instance_history: historySource, error: err },
       transfers: xs,
       token_uri: mu,
       content: {
@@ -498,6 +517,10 @@ write(path.join(E, 'BUILD-REPORT.json'), {
   mint_not_observed: fallback.length,
   car_failures: fail,
   car_gateway_count: CAR_GATEWAYS.length,
+  history_refresh_enabled: REFRESH_HISTORY,
+  history_sources: Object.fromEntries([...new Set(res.map(r => r.origin_resolution.full_instance_history))]
+    .sort()
+    .map(source => [source, res.filter(r => r.origin_resolution.full_instance_history === source).length])),
   l1_merkle_root_sha256: commit.merkle_root_sha256,
   pass: !miss.length && !fail.length,
 });
