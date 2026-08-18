@@ -18,6 +18,7 @@ on:
       - "scripts/test_chronicle_car_blockwise.mjs"
       - "scripts/test_chronicle_bootstrap_history.mjs"
       - "scripts/capture-chronicle-sidechain-l2.py"
+      - "scripts/test_chronicle_sidechain_l2.py"
       - "scripts/verify-chronicle-sidechain-evidence.py"
       - "scripts/finalize-chronicle-sidechain-evidence.mjs"
       - ".github/workflows/chronicle-sidechain-mirror.yml"
@@ -80,6 +81,7 @@ jobs:
           node --check scripts/ipfs-car-blockwise.mjs
           node scripts/test_chronicle_car_blockwise.mjs
           node scripts/test_chronicle_bootstrap_history.mjs
+          python3 scripts/test_chronicle_sidechain_l2.py
           node --check scripts/finalize-chronicle-sidechain-evidence.mjs
           python3 -m py_compile scripts/capture-chronicle-sidechain-l2.py scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
@@ -238,7 +240,11 @@ jobs:
         env:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          CHRONICLE_POLYGON_RPC_FALLBACK_URLS: "https://polygon.drpc.org,https://polygon-bor-rpc.publicnode.com"
+          CHRONICLE_BASE_RPC_FALLBACK_URLS: "https://base.drpc.org,https://base-rpc.publicnode.com,https://mainnet.base.org"
           CHRONICLE_L2_CONCURRENCY: "4"
+          CHRONICLE_L2_HTTP_RETRIES: "4"
+          CHRONICLE_L2_RPC_MIN_INTERVAL_MS: "100"
         run: python3 scripts/capture-chronicle-sidechain-l2.py
 
       - name: Verify CAR/DAG, L1 commitment, L2 MPT, block hash and timestamp offline
