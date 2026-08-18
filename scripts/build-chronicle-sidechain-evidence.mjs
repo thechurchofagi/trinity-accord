@@ -11,6 +11,10 @@ const configuredConcurrency = Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY 
 if (!Number.isFinite(configuredConcurrency) || configuredConcurrency < 4) {
   process.env.CHRONICLE_EVIDENCE_CONCURRENCY = '4';
 }
+const configuredWholeDagEndpoints = Number(process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT || 0);
+if (!Number.isFinite(configuredWholeDagEndpoints) || configuredWholeDagEndpoints < 4) {
+  process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT = '4';
+}
 const carDir = path.join(out, 'evidence-v2', 'cars');
 const audit = auditWholeCarCache(carDir);
 console.log(`[CAR CACHE AUDIT] checked=${audit.checked} valid=${audit.valid} removed=${audit.removed}`);
