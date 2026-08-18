@@ -17,6 +17,15 @@ const configuredWholeDagEndpoints = Number(process.env.CHRONICLE_CAR_WHOLE_DAG_E
 if (!Number.isFinite(configuredWholeDagEndpoints) || configuredWholeDagEndpoints < 4) {
   process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT = '4';
 }
+// Whole-DAG is only a fast path. Slow gateways must not hold every worker for
+// 30s per endpoint before the strict blockwise/provider recovery chain can run.
+const configuredCarTimeout = Number(process.env.CHRONICLE_CAR_HTTP_TIMEOUT_MS || 0);
+if (!Number.isFinite(configuredCarTimeout) || configuredCarTimeout <= 0 || configuredCarTimeout > 10000) {
+  process.env.CHRONICLE_CAR_HTTP_TIMEOUT_MS = '10000';
+}
+if (!process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES) {
+  process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES = '2';
+}
 
 const runtimeDir = path.join(out, 'runtime');
 fs.mkdirSync(runtimeDir, { recursive: true });
@@ -44,6 +53,8 @@ trace.phase('wrapper', 'running', {
   evidence_concurrency: Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY),
   car_block_concurrency: Number(process.env.CHRONICLE_CAR_BLOCK_CONCURRENCY || 0) || null,
   whole_dag_endpoint_limit: Number(process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT),
+  whole_dag_timeout_ms: Number(process.env.CHRONICLE_CAR_HTTP_TIMEOUT_MS),
+  whole_dag_circuit_failures: Number(process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES),
 });
 
 const carDir = path.join(out, 'evidence-v2', 'cars');
