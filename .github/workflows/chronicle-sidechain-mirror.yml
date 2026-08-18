@@ -14,6 +14,8 @@ on:
       - "scripts/discover-chronicle-sidechain-nfts.mjs"
       - "scripts/run-chronicle-sidechain-mirror-observed.sh"
       - "scripts/build-chronicle-sidechain-evidence.mjs"
+      - "scripts/ipfs-car-blockwise.mjs"
+      - "scripts/test_chronicle_car_blockwise.mjs"
       - "scripts/capture-chronicle-sidechain-l2.py"
       - "scripts/verify-chronicle-sidechain-evidence.py"
       - "scripts/finalize-chronicle-sidechain-evidence.mjs"
@@ -70,6 +72,8 @@ jobs:
           set -euo pipefail
           node --check scripts/discover-chronicle-sidechain-nfts.mjs
           node --check scripts/build-chronicle-sidechain-evidence.mjs
+          node --check scripts/ipfs-car-blockwise.mjs
+          node scripts/test_chronicle_car_blockwise.mjs
           node --check scripts/finalize-chronicle-sidechain-evidence.mjs
           python3 -m py_compile scripts/capture-chronicle-sidechain-l2.py scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
@@ -129,6 +133,9 @@ jobs:
           CHRONICLE_EVIDENCE_CONCURRENCY: "2"
           CHRONICLE_CAR_HTTP_TIMEOUT_MS: "45000"
           CHRONICLE_CAR_HTTP_RETRIES: "2"
+          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "2"
+          CHRONICLE_CAR_BLOCK_CONCURRENCY: "2"
+          CHRONICLE_CAR_BLOCK_MAX_COUNT: "4096"
           CHRONICLE_CAR_GATEWAYS: "https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: node scripts/build-chronicle-sidechain-evidence.mjs
 
