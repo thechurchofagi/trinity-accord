@@ -59,6 +59,22 @@ def summarize_offline(report, limit=40):
     }
 
 
+def summarize_l1(report, limit=40):
+    if not isinstance(report, dict):
+        return None
+    mismatches = report.get('leaf_mismatches') if isinstance(report.get('leaf_mismatches'), list) else []
+    return {
+        'schema': report.get('schema'),
+        'records': report.get('records'),
+        'commitment_leaf_count': report.get('commitment_leaf_count'),
+        'leaf_mismatch_count': report.get('leaf_mismatch_count'),
+        'leaf_mismatches': mismatches[:limit],
+        'leaf_mismatches_omitted': report.get('leaf_mismatches_omitted', max(0, len(mismatches) - limit)),
+        'order_matches': report.get('order_matches'),
+        'first_order_difference': report.get('first_order_difference'),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--phase', default=None)
@@ -96,6 +112,9 @@ def main():
     offline = summarize_offline(load_json(out / 'evidence-v2' / 'OFFLINE-VERIFICATION.json'))
     if offline is not None:
         progress['offline_verification'] = offline
+    l1 = summarize_l1(load_json(out / 'evidence-v2' / 'L1-LEAF-DIAGNOSTICS.json'))
+    if l1 is not None:
+        progress['l1_leaf_diagnostics'] = l1
 
     run_id = progress.get('run_id')
     run_url = f'https://github.com/{repo}/actions/runs/{run_id}' if run_id else None
@@ -124,7 +143,7 @@ def main():
             'authorization': f'Bearer {token}',
             'accept': 'application/vnd.github+json',
             'content-type': 'application/json',
-            'user-agent': 'trinity-accord-sidechain-progress/1.1',
+            'user-agent': 'trinity-accord-sidechain-progress/1.2',
             'x-github-api-version': '2022-11-28',
         },
     )
