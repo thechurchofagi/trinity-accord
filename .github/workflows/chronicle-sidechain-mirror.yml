@@ -197,7 +197,7 @@ jobs:
           CHRONICLE_KUBO_VERSION: ${{ env.KUBO_VERSION }}
           CHRONICLE_KUBO_ASSET_SHA512: ${{ env.KUBO_LINUX_AMD64_SHA512 }}
           CHRONICLE_KUBO_CONNECT_TIMEOUT_MS: "15000"
-          CHRONICLE_KUBO_BLOCK_TIMEOUT_MS: "60000"
+          CHRONICLE_KUBO_BLOCK_TIMEOUT_MS: "180000"
           CHRONICLE_CAR_GATEWAYS: "https://ipfs.raribleuserdata.com/ipfs/{cid}?format=car&dag-scope=all,https://rarible.mypinata.cloud/ipfs/{cid}?format=car&dag-scope=all,https://gw-seattle.crustcloud.io/ipfs/{cid}?format=car&dag-scope=all,https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.filebase.io/ipfs/{cid}?format=car&dag-scope=all,https://4everland.io/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: |
           set -euo pipefail
