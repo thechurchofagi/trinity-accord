@@ -73,6 +73,77 @@ assert.ok(calls.every(call => call.context.scope === 'block'));
 const parsed = parseCarStrict(result.buffer);
 assert.deepEqual(new Set(parsed.blocks.map(block => block.key)), new Set(source.keys()));
 
+const raceCalls = [];
+const raced = await fetchBlockwiseCar({
+  rootCid: cidBytesToString(rootCid),
+  gateways: [
+    'https://slow.invalid/ipfs/{cid}',
+    'https://fast.invalid/ipfs/{cid}',
+  ],
+  gatewayRace: 2,
+  maxBytes: 1024 * 1024,
+  concurrency: 2,
+  fetchCar: async (_url, context) => {
+    raceCalls.push(context);
+    if (context.gatewayIndex === 1) {
+      await new Promise(resolve => setTimeout(resolve, 40));
+      throw Error('fixture slow gateway unavailable');
+    }
+    return source.get(context.cid === cidBytesToString(rootCid)
+      ? rootCid.toString('hex')
+      : context.cid === cidBytesToString(imageCid)
+        ? imageCid.toString('hex')
+        : animationCid.toString('hex'));
+  },
+});
+assert.equal(raced.blocks, 3);
+assert.equal(raced.requests, 6);
+assert.equal(raceCalls.filter(call => call.gatewayIndex === 1).length, 3);
+assert.equal(raceCalls.filter(call => call.gatewayIndex === 2).length, 3);
+
+const blockCache = new Map();
+await assert.rejects(
+  fetchBlockwiseCar({
+    rootCid: cidBytesToString(rootCid),
+    gateways: ['https://example.invalid/ipfs/{cid}'],
+    maxBytes: 1024 * 1024,
+    concurrency: 2,
+    loadBlock: async ({ key }) => blockCache.get(key) || null,
+    saveBlock: async ({ key, buffer }) => blockCache.set(key, Buffer.from(buffer)),
+    fetchCar: async (_url, context) => {
+      if (context.cid === cidBytesToString(animationCid)) {
+        await new Promise(resolve => setTimeout(resolve, 10));
+        throw Error('fixture interrupted after partial progress');
+      }
+      return source.get(context.cid === cidBytesToString(rootCid)
+        ? rootCid.toString('hex')
+        : imageCid.toString('hex'));
+    },
+  }),
+  /fixture interrupted after partial progress/,
+);
+assert.equal(blockCache.size, 2);
+
+const resumedCalls = [];
+const resumed = await fetchBlockwiseCar({
+  rootCid: cidBytesToString(rootCid),
+  gateways: ['https://example.invalid/ipfs/{cid}'],
+  maxBytes: 1024 * 1024,
+  concurrency: 2,
+  loadBlock: async ({ key }) => blockCache.get(key) || null,
+  saveBlock: async ({ key, buffer }) => blockCache.set(key, Buffer.from(buffer)),
+  fetchCar: async (_url, context) => {
+    resumedCalls.push(context.cid);
+    if (context.cid !== cidBytesToString(animationCid)) throw Error(`unexpected resumed request ${context.cid}`);
+    return source.get(animationCid.toString('hex'));
+  },
+});
+assert.equal(resumed.blocks, 3);
+assert.equal(resumed.cacheHits, 2);
+assert.equal(resumed.requests, 1);
+assert.deepEqual(resumedCalls, [cidBytesToString(animationCid)]);
+assert.equal(blockCache.size, 3);
+
 const corrupt = Buffer.from(source.get(imageCid.toString('hex')));
 corrupt[corrupt.length - 1] ^= 1;
 await assert.rejects(

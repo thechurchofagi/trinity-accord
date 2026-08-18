@@ -283,12 +283,20 @@ export async function fetchBlockwiseCar({
   maxBytes,
   concurrency = 2,
   maxBlocks = 4096,
+  gatewayRace = 1,
+  loadBlock = null,
+  saveBlock = null,
 }) {
   if (!Array.isArray(gateways) || gateways.length === 0) throw Error('at least one CAR gateway is required');
   if (typeof fetchCar !== 'function') throw Error('fetchCar callback is required');
   if (!Number.isSafeInteger(maxBytes) || maxBytes <= 0) throw Error(`invalid maxBytes ${maxBytes}`);
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 16) throw Error(`invalid concurrency ${concurrency}`);
   if (!Number.isInteger(maxBlocks) || maxBlocks < 1) throw Error(`invalid maxBlocks ${maxBlocks}`);
+  if (!Number.isInteger(gatewayRace) || gatewayRace < 1 || gatewayRace > gateways.length) {
+    throw Error(`invalid gatewayRace ${gatewayRace}`);
+  }
+  if (loadBlock !== null && typeof loadBlock !== 'function') throw Error('loadBlock must be a function');
+  if (saveBlock !== null && typeof saveBlock !== 'function') throw Error('saveBlock must be a function');
 
   const rootBytes = cidStringToBytes(rootCid);
   const rootKey = rootBytes.toString('hex');
@@ -298,6 +306,8 @@ export async function fetchBlockwiseCar({
   let header = null;
   let totalBytes = 0;
   let requestCount = 0;
+  let cacheHitCount = 0;
+  let cacheWriteCount = 0;
   let preferredGateway = 0;
 
   function addBlock(block) {
@@ -312,23 +322,59 @@ export async function fetchBlockwiseCar({
     blocks.set(block.key, block);
   }
 
+  function parseRequestedBlock(response, cidBytes, cid, source) {
+    const parsed = parseCarStrict(response);
+    const target = parsed.blocks.find(block => block.key === cidBytes.toString('hex'));
+    if (!target) throw Error(`requested block absent for ${cid} from ${source}`);
+    return parsed;
+  }
+
   async function fetchOne(cidBytes) {
     const cid = cidBytesToString(cidBytes);
+    const key = cidBytes.toString('hex');
+    if (loadBlock) {
+      try {
+        const cached = await loadBlock({ cid, key });
+        if (cached) {
+          const parsed = parseRequestedBlock(cached, cidBytes, cid, 'cache');
+          cacheHitCount++;
+          return { ...parsed, gatewayIndex: null, url: null, cached: true };
+        }
+      } catch (error) {
+        console.warn(`[CAR BLOCK CACHE REJECTED] cid=${cid} ${error.message}`);
+      }
+    }
+
     const errors = [];
     const order = [preferredGateway, ...gateways.map((_, i) => i).filter(i => i !== preferredGateway)];
-    for (const i of order) {
+    const attempt = async i => {
       const url = carScopeUrl(gateways[i], cid, 'block');
       try {
         requestCount++;
         const response = await fetchCar(url, { cid, scope: 'block', gatewayIndex: i + 1 });
-        const parsed = parseCarStrict(response);
-        const target = parsed.blocks.find(block => block.key === cidBytes.toString('hex'));
-        if (!target) throw Error(`requested block absent for ${cid}`);
-        preferredGateway = i;
-        return { ...parsed, gatewayIndex: i + 1, url };
+        const parsed = parseRequestedBlock(response, cidBytes, cid, `gateway ${i + 1}`);
+        return { parsed, response: Buffer.from(response), gatewayIndex: i + 1, gatewayOffset: i, url };
       } catch (error) {
-        errors.push(`gateway ${i + 1}: ${error.message}`);
+        throw Error(`gateway ${i + 1}: ${error.message}`);
       }
+    };
+
+    for (let start = 0; start < order.length; start += gatewayRace) {
+      const batch = order.slice(start, start + gatewayRace);
+      let winner;
+      try {
+        winner = await Promise.any(batch.map(attempt));
+      } catch (error) {
+        const batchErrors = error instanceof AggregateError ? error.errors : [error];
+        errors.push(...batchErrors.map(item => item.message));
+        continue;
+      }
+      if (saveBlock) {
+        await saveBlock({ cid, key, buffer: winner.response });
+        cacheWriteCount++;
+      }
+      preferredGateway = winner.gatewayOffset;
+      return { ...winner.parsed, gatewayIndex: winner.gatewayIndex, url: winner.url };
     }
     throw Error(`block ${cid} unavailable from ${gateways.length} gateways: ${errors.join('; ')}`);
   }
@@ -383,5 +429,7 @@ export async function fetchBlockwiseCar({
     blocks: verifiedBlocks.size,
     reachable: reachable.size,
     requests: requestCount,
+    cacheHits: cacheHitCount,
+    cacheWrites: cacheWriteCount,
   };
 }
