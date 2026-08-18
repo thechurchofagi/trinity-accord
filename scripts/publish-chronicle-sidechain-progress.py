@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import collections
 import json
 import os
 import pathlib
@@ -12,14 +13,50 @@ def now_iso():
     return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
 
 
-def load_progress(path):
+def load_json(path):
     if not path or not path.exists() or not path.stat().st_size:
-        return {}
+        return None
     try:
-        data = json.loads(path.read_text())
-        return data if isinstance(data, dict) else {'progress_payload': data}
-    except Exception as exc:
-        return {'progress_read_error': str(exc)}
+        return json.loads(path.read_text())
+    except Exception:
+        return None
+
+
+def load_progress(path):
+    data = load_json(path)
+    if isinstance(data, dict):
+        return data
+    if data is not None:
+        return {'progress_payload': data}
+    return {}
+
+
+def classify_error(value):
+    text = str(value)
+    if text.startswith('L1 '): return 'L1'
+    if text.startswith('CAR '): return 'CAR'
+    if text.startswith('L2 '):
+        tail = text.rsplit(': ', 1)[-1]
+        return f'L2:{tail}'
+    return 'other'
+
+
+def summarize_offline(report, limit=40):
+    if not isinstance(report, dict):
+        return None
+    errors = [str(x) for x in report.get('errors', [])]
+    counts = collections.Counter(classify_error(x) for x in errors)
+    return {
+        'schema': report.get('schema'),
+        'pass': report.get('pass'),
+        'records': report.get('records'),
+        'car_files_checked': report.get('car_files_checked'),
+        'l2_records_checked': report.get('l2_records_checked'),
+        'error_count': len(errors),
+        'error_classes': dict(sorted(counts.items())),
+        'errors_sample': errors[:limit],
+        'errors_omitted': max(0, len(errors) - limit),
+    }
 
 
 def main():
@@ -55,6 +92,11 @@ def main():
     elif progress.get('status'):
         progress['workflow_status'] = progress['status']
 
+    out = pathlib.Path(os.getenv('CHRONICLE_OUT', 'artifacts/chronicle-sidechain-scan'))
+    offline = summarize_offline(load_json(out / 'evidence-v2' / 'OFFLINE-VERIFICATION.json'))
+    if offline is not None:
+        progress['offline_verification'] = offline
+
     run_id = progress.get('run_id')
     run_url = f'https://github.com/{repo}/actions/runs/{run_id}' if run_id else None
     lines = [
@@ -82,7 +124,7 @@ def main():
             'authorization': f'Bearer {token}',
             'accept': 'application/vnd.github+json',
             'content-type': 'application/json',
-            'user-agent': 'trinity-accord-sidechain-progress/1.0',
+            'user-agent': 'trinity-accord-sidechain-progress/1.1',
             'x-github-api-version': '2022-11-28',
         },
     )

@@ -131,5 +131,7 @@ def main():
     report={'schema':'trinity-accord/chronicle-sidechain-offline-verification/v2','records':len(records),'l1_merkle_root_sha256':root,'car_files_checked':car_checked,'l2_records_checked':l2_checked,'errors':errors,'pass':not errors and l2_checked==len(records)}
     (E/'OFFLINE-VERIFICATION.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
     print(f"[OFFLINE VERIFY] records={len(records)} cars={car_checked} l2={l2_checked} errors={len(errors)} pass={report['pass']}")
+    for error in errors[:40]: print(f'[OFFLINE ERROR] {error}', flush=True)
+    if len(errors)>40: print(f'[OFFLINE ERROR] ... {len(errors)-40} additional errors persisted in OFFLINE-VERIFICATION.json', flush=True)
     if not report['pass']:raise SystemExit(1)
 if __name__=='__main__':main()
