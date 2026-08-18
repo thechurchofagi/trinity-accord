@@ -27,6 +27,11 @@ function rootCidFromWholeDagUrl(value) {
   }
 }
 
+function report(onEvent, event) {
+  if (typeof onEvent !== 'function') return;
+  try { onEvent(event); } catch {}
+}
+
 export function verifyCompleteCar(input, rootCid) {
   const buf = Buffer.from(input);
   const rootBytes = cidStringToBytes(rootCid);
@@ -63,42 +68,106 @@ export function verifyCompleteCar(input, rootCid) {
   };
 }
 
-export function auditWholeCarCache(dir) {
+export function auditWholeCarCache(dir, { onEvent } = {}) {
   const result = { checked: 0, valid: 0, removed: 0, errors: [] };
-  if (!fs.existsSync(dir)) return result;
+  report(onEvent, { event: 'cache_audit_start', phase: 'cache_audit', status: 'running', directory: dir });
+  if (!fs.existsSync(dir)) {
+    report(onEvent, { event: 'cache_audit_complete', phase: 'cache_audit', status: 'success', ...result });
+    return result;
+  }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (!entry.isFile() || !entry.name.endsWith('.car')) continue;
     result.checked++;
     const rootCid = entry.name.slice(0, -4);
     const file = path.join(dir, entry.name);
+    report(onEvent, { event: 'cache_check', phase: 'cache_audit', status: 'running', root_cid: rootCid });
     try {
-      verifyCompleteCar(fs.readFileSync(file), rootCid);
+      const verified = verifyCompleteCar(fs.readFileSync(file), rootCid);
       result.valid++;
+      report(onEvent, {
+        event: 'cache_valid', phase: 'cache_audit', status: 'success', root_cid: rootCid,
+        bytes: verified.bytes, blocks: verified.blocks, reachable: verified.reachable,
+      });
     } catch (error) {
       fs.rmSync(file, { force: true });
       result.removed++;
-      if (result.errors.length < 40) result.errors.push({ root_cid: rootCid, error: error?.message || String(error) });
-      console.warn(`[CAR CACHE REJECTED] cid=${rootCid} error=${error?.message || error}`);
+      const message = error?.message || String(error);
+      if (result.errors.length < 40) result.errors.push({ root_cid: rootCid, error: message });
+      report(onEvent, { event: 'cache_rejected', phase: 'cache_audit', status: 'failure', root_cid: rootCid, error: message });
+      console.warn(`[CAR CACHE REJECTED] cid=${rootCid} error=${message}`);
     }
   }
+  report(onEvent, { event: 'cache_audit_complete', phase: 'cache_audit', status: 'success', ...result });
   return result;
 }
 
-export function installWholeDagFetchGuard() {
+export function installWholeDagFetchGuard({ onEvent } = {}) {
   const originalFetch = globalThis.fetch;
   if (typeof originalFetch !== 'function') throw Error('global fetch is unavailable');
   globalThis.fetch = async function guardedFetch(input, init) {
-    const response = await originalFetch(input, init);
     const rawUrl = typeof input === 'string' || input instanceof URL ? input : input?.url;
     const rootCid = rootCidFromWholeDagUrl(rawUrl);
-    if (!rootCid || !response.ok) return response;
+    const started = Date.now();
+    if (rootCid) {
+      report(onEvent, {
+        event: 'whole_dag_attempt', phase: 'whole_dag', status: 'running',
+        root_cid: rootCid, endpoint: rawUrl,
+      });
+    }
 
-    const body = Buffer.from(await response.arrayBuffer());
+    let response;
+    try {
+      response = await originalFetch(input, init);
+    } catch (error) {
+      if (rootCid) {
+        report(onEvent, {
+          event: 'whole_dag_network_failure', phase: 'whole_dag', status: 'failure',
+          root_cid: rootCid, endpoint: rawUrl, elapsed_ms: Date.now() - started,
+          error: error?.message || String(error),
+        });
+      }
+      throw error;
+    }
+    if (!rootCid) return response;
+
+    if (!response.ok) {
+      report(onEvent, {
+        event: 'whole_dag_http_failure', phase: 'whole_dag', status: 'failure',
+        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
+        elapsed_ms: Date.now() - started,
+      });
+      return response;
+    }
+
+    let body;
+    try {
+      body = Buffer.from(await response.arrayBuffer());
+    } catch (error) {
+      report(onEvent, {
+        event: 'whole_dag_body_failure', phase: 'whole_dag', status: 'failure',
+        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
+        elapsed_ms: Date.now() - started, error: error?.message || String(error),
+      });
+      throw error;
+    }
+
     try {
       const verified = verifyCompleteCar(body, rootCid);
+      report(onEvent, {
+        event: 'whole_dag_verified', phase: 'whole_dag', status: 'success',
+        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
+        elapsed_ms: Date.now() - started, bytes: verified.bytes,
+        blocks: verified.blocks, reachable: verified.reachable,
+      });
       console.log(`[CAR WHOLE-DAG VERIFIED] cid=${rootCid} blocks=${verified.blocks} reachable=${verified.reachable} bytes=${verified.bytes}`);
     } catch (error) {
-      throw Error(`whole-DAG CAR integrity failure cid=${rootCid}: ${error?.message || error}`);
+      const message = error?.message || String(error);
+      report(onEvent, {
+        event: 'whole_dag_integrity_failure', phase: 'whole_dag', status: 'failure',
+        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
+        elapsed_ms: Date.now() - started, bytes: body.length, error: message,
+      });
+      throw Error(`whole-DAG CAR integrity failure cid=${rootCid}: ${message}`);
     }
     return new Response(body, {
       status: response.status,
