@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { fetchBlockwiseCar } from './ipfs-car-blockwise.mjs';
 
 const OUT = process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan';
 const ZERO = '0x0000000000000000000000000000000000000000';
@@ -14,6 +15,8 @@ const RETRIES = Number(process.env.CHRONICLE_EVIDENCE_HTTP_RETRIES || 2);
 const CAR_TIMEOUT = Number(process.env.CHRONICLE_CAR_HTTP_TIMEOUT_MS || 25000);
 const CAR_RETRIES = Number(process.env.CHRONICLE_CAR_HTTP_RETRIES || 1);
 const MAX = Number(process.env.CHRONICLE_CAR_MAX_BYTES || 157286400);
+const CAR_BLOCK_CONCURRENCY = Math.max(1, Math.min(16, Number(process.env.CHRONICLE_CAR_BLOCK_CONCURRENCY || 2)));
+const CAR_BLOCK_MAX_COUNT = Math.max(1, Math.min(100000, Number(process.env.CHRONICLE_CAR_BLOCK_MAX_COUNT || 4096)));
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
 const DEFAULT_CAR_GATEWAYS = [
   'https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all',
@@ -26,6 +29,10 @@ const CAR_GATEWAYS = (process.env.CHRONICLE_CAR_GATEWAYS || DEFAULT_CAR_GATEWAYS
   .split(/[\n,]/)
   .map(x => x.trim())
   .filter(Boolean);
+const CAR_WHOLE_DAG_ENDPOINT_LIMIT = Math.max(1, Math.min(
+  CAR_GATEWAYS.length,
+  Number(process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT || CAR_GATEWAYS.length),
+));
 
 const sha = b => crypto.createHash('sha256').update(b).digest();
 const sh = b => sha(b).toString('hex');
@@ -173,7 +180,7 @@ async function car(ref) {
         };
       }
       const errors = [];
-      for (let i = 0; i < CAR_GATEWAYS.length; i++) {
+      for (let i = 0; i < CAR_WHOLE_DAG_ENDPOINT_LIMIT; i++) {
         const u = carUrl(CAR_GATEWAYS[i], ref.root_cid);
         try {
           const r = await get(u, {
@@ -202,8 +209,47 @@ async function car(ref) {
           errors.push({ endpoint_index: i + 1, error: e.message });
         }
       }
-      console.error(`[CAR FAILED] cid=${ref.root_cid} endpoints=${CAR_GATEWAYS.length}`);
-      return { status: 'failed', root_cid: ref.root_cid, error: errors.at(-1)?.error || 'all CAR endpoints failed', attempts: errors };
+      console.warn(`[CAR WHOLE-DAG FAILED] cid=${ref.root_cid} endpoints=${CAR_WHOLE_DAG_ENDPOINT_LIMIT}; trying blockwise recovery`);
+      try {
+        const recovered = await fetchBlockwiseCar({
+          rootCid: ref.root_cid,
+          gateways: CAR_GATEWAYS,
+          maxBytes: MAX,
+          concurrency: CAR_BLOCK_CONCURRENCY,
+          maxBlocks: CAR_BLOCK_MAX_COUNT,
+          fetchCar: async (url, context) => {
+            const r = await get(url, {
+              headers: { accept: 'application/vnd.ipld.car' },
+              max: MAX,
+              label: `CAR block ${context.cid} gateway=${context.gatewayIndex}/${CAR_GATEWAYS.length}`,
+              timeout: CAR_TIMEOUT,
+              retries: CAR_RETRIES,
+            });
+            const type = r.type.toLowerCase();
+            if (!type.includes('application/vnd.ipld.car') && !type.includes('application/octet-stream')) {
+              throw Error(`unexpected content-type ${r.type || '(empty)'}`);
+            }
+            return r.b;
+          },
+        });
+        fs.writeFileSync(f, recovered.buffer);
+        console.log(`[CAR BLOCKWISE COMPLETE] cid=${ref.root_cid} blocks=${recovered.blocks} requests=${recovered.requests} bytes=${recovered.buffer.length}`);
+        return {
+          status: 'ok',
+          root_cid: ref.root_cid,
+          file: path.relative(OUT, f).replaceAll('\\', '/'),
+          car_bytes: recovered.buffer.length,
+          car_sha256: sh(recovered.buffer),
+          content_type: 'application/vnd.ipld.car',
+          retrieval: 'gateway_untrusted_blockwise_car_offline_verification_required',
+          block_count: recovered.blocks,
+          blockwise_request_count: recovered.requests,
+        };
+      } catch (e) {
+        errors.push({ mode: 'blockwise', error: e.message });
+        console.error(`[CAR FAILED] cid=${ref.root_cid} endpoints=${CAR_GATEWAYS.length} blockwise=${e.message}`);
+        return { status: 'failed', root_cid: ref.root_cid, error: e.message, attempts: errors };
+      }
     })();
     cache.set(ref.root_cid, base);
   }
