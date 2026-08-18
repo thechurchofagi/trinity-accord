@@ -151,6 +151,58 @@ export function cidStringToBytes(value) {
   throw Error(`unsupported CID multibase ${value[0] || '(empty)'}`);
 }
 
+function encodeCborHead(major, value) {
+  if (!Number.isSafeInteger(value) || value < 0) throw Error(`invalid CBOR length ${value}`);
+  if (value < 24) return Buffer.from([(major << 5) | value]);
+  if (value <= 0xff) return Buffer.from([(major << 5) | 24, value]);
+  if (value <= 0xffff) {
+    const out = Buffer.alloc(3);
+    out[0] = (major << 5) | 25;
+    out.writeUInt16BE(value, 1);
+    return out;
+  }
+  if (value <= 0xffffffff) {
+    const out = Buffer.alloc(5);
+    out[0] = (major << 5) | 26;
+    out.writeUInt32BE(value, 1);
+    return out;
+  }
+  throw Error(`CBOR length exceeds supported range ${value}`);
+}
+
+export function singleBlockCar(cidValue, dataValue) {
+  const cid = cidStringToBytes(cidValue);
+  const data = Buffer.from(dataValue);
+  const taggedCid = Buffer.concat([
+    Buffer.from([0xd8, 0x2a]),
+    encodeCborHead(2, cid.length + 1),
+    Buffer.from([0]),
+    cid,
+  ]);
+  const headerBody = Buffer.concat([
+    Buffer.from([0xa2, 0x65]),
+    Buffer.from('roots'),
+    Buffer.from([0x81]),
+    taggedCid,
+    Buffer.from([0x67]),
+    Buffer.from('version'),
+    Buffer.from([0x01]),
+  ]);
+  const sectionBody = Buffer.concat([cid, data]);
+  const car = Buffer.concat([
+    encodeVarint(headerBody.length),
+    headerBody,
+    encodeVarint(sectionBody.length),
+    sectionBody,
+  ]);
+  const parsed = parseCarStrict(car);
+  const key = cid.toString('hex');
+  if (!parsed.header.includes(cid) || !parsed.blocks.some(block => block.key === key)) {
+    throw Error(`single-block CAR does not contain requested CID ${cidValue}`);
+  }
+  return car;
+}
+
 function verifyBlock(block) {
   if (block.multihashCode !== SHA256_CODE || block.digest.length !== 32) {
     throw Error(`unsupported block multihash code=${block.multihashCode} bytes=${block.digest.length}`);

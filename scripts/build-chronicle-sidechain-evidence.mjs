@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { fetchBlockwiseCar } from './ipfs-car-blockwise.mjs';
+import { fetchBlockwiseCar, singleBlockCar } from './ipfs-car-blockwise.mjs';
 
 const OUT = process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan';
 const ZERO = '0x0000000000000000000000000000000000000000';
@@ -19,6 +19,7 @@ const CAR_BLOCK_CONCURRENCY = Math.max(1, Math.min(16, Number(process.env.CHRONI
 const CAR_BLOCK_MAX_COUNT = Math.max(1, Math.min(100000, Number(process.env.CHRONICLE_CAR_BLOCK_MAX_COUNT || 4096)));
 const CAR_BLOCK_GATEWAY_RACE = Math.max(1, Math.min(16, Number(process.env.CHRONICLE_CAR_BLOCK_GATEWAY_RACE || 2)));
 const CAR_BLOCK_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS || 20000);
+const CAR_BLOCK_RAW_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_RAW_HTTP_TIMEOUT_MS || 15000);
 const CAR_BLOCK_RETRIES = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_RETRIES || 0);
 const CAR_BLOCK_CACHE_DIR = process.env.CHRONICLE_CAR_BLOCK_CACHE_DIR || 'artifacts/chronicle-sidechain-car-block-cache';
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
@@ -179,6 +180,13 @@ function saveCachedBlock({ cid, key, buffer }) {
 function carUrl(template, cid) {
   return template.includes('{cid}') ? template.replaceAll('{cid}', encodeURIComponent(cid)) : `${template.replace(/\/$/, '')}/ipfs/${encodeURIComponent(cid)}?format=car&dag-scope=all`;
 }
+function rawBlockUrl(value) {
+  const url = new URL(value);
+  url.searchParams.set('format', 'raw');
+  url.searchParams.delete('dag-scope');
+  url.searchParams.delete('entity-bytes');
+  return url.toString();
+}
 async function car(ref) {
   if (!ref) return { status: 'not_ipfs' };
   let base = cache.get(ref.root_cid);
@@ -240,18 +248,38 @@ async function car(ref) {
           loadBlock: loadCachedBlock,
           saveBlock: saveCachedBlock,
           fetchCar: async (url, context) => {
-            const r = await get(url, {
-              headers: { accept: 'application/vnd.ipld.car' },
-              max: MAX,
-              label: `CAR block ${context.cid} gateway=${context.gatewayIndex}/${CAR_GATEWAYS.length}`,
-              timeout: CAR_BLOCK_TIMEOUT,
-              retries: CAR_BLOCK_RETRIES,
-            });
-            const type = r.type.toLowerCase();
-            if (!type.includes('application/vnd.ipld.car') && !type.includes('application/octet-stream')) {
-              throw Error(`unexpected content-type ${r.type || '(empty)'}`);
+            let carError;
+            try {
+              const r = await get(url, {
+                headers: { accept: 'application/vnd.ipld.car' },
+                max: MAX,
+                label: `CAR block ${context.cid} gateway=${context.gatewayIndex}/${CAR_GATEWAYS.length}`,
+                timeout: CAR_BLOCK_TIMEOUT,
+                retries: CAR_BLOCK_RETRIES,
+              });
+              const type = r.type.toLowerCase();
+              if (!type.includes('application/vnd.ipld.car') && !type.includes('application/octet-stream')) {
+                throw Error(`unexpected content-type ${r.type || '(empty)'}`);
+              }
+              return r.b;
+            } catch (error) {
+              carError = error;
             }
-            return r.b;
+            try {
+              const rawUrl = rawBlockUrl(url);
+              const r = await get(rawUrl, {
+                headers: { accept: 'application/vnd.ipld.raw' },
+                max: MAX,
+                label: `raw block ${context.cid} gateway=${context.gatewayIndex}/${CAR_GATEWAYS.length}`,
+                timeout: CAR_BLOCK_RAW_TIMEOUT,
+                retries: CAR_BLOCK_RETRIES,
+              });
+              const wrapped = singleBlockCar(context.cid, r.b);
+              console.log(`[CAR RAW BLOCK VERIFIED] cid=${context.cid} gateway=${context.gatewayIndex} bytes=${r.b.length}`);
+              return wrapped;
+            } catch (rawError) {
+              throw Error(`CAR request failed: ${carError.message}; raw request failed: ${rawError.message}`);
+            }
           },
         });
         fs.writeFileSync(f, recovered.buffer);
