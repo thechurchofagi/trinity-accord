@@ -15,7 +15,7 @@ SPEC.loader.exec_module(capture)
 
 PROGRESS_FILE = pathlib.Path(os.getenv('CHRONICLE_L2_PROGRESS_FILE', '/tmp/chronicle-sidechain-l2-progress.json'))
 PER_ENDPOINT_INFLIGHT = max(1, min(4, int(os.getenv('CHRONICLE_L2_RPC_ENDPOINT_INFLIGHT', '1'))))
-PROGRESS_EVENT_LIMIT = max(20, min(500, int(os.getenv('CHRONICLE_L2_PROGRESS_EVENT_LIMIT', '250'))))
+PROGRESS_EVENT_LIMIT = max(20, min(500, int(os.getenv('CHRONICLE_L2_PROGRESS_EVENT_LIMIT', '120'))))
 STATE_LOCK = threading.Lock()
 ROUTE_CURSOR = {chain: 0 for chain in capture.RPC}
 ENDPOINT_SLOTS = {
@@ -194,7 +194,7 @@ def install_capture_group_progress():
                 PROGRESS['blocks_failed'] += 1
                 PROGRESS['chains'][chain]['blocks_completed'] += 1
                 PROGRESS['chains'][chain]['blocks_failed'] += 1
-            progress_event('block_failed', chain=chain, block_hash=block_hash, error=str(e)[:500])
+            progress_event('block_failed', chain=chain, block_hash=block_hash, error_type=type(e).__name__)
             raise
         with STATE_LOCK:
             PROGRESS['blocks_completed'] += 1
@@ -216,7 +216,7 @@ def main():
         with STATE_LOCK:
             PROGRESS['status'] = 'failed'
             PROGRESS['phase'] = 'l2_failed'
-        progress_event('l2_failed', error=str(e)[:1000])
+        progress_event('l2_failed', error_type=type(e).__name__)
         raise
     else:
         with STATE_LOCK:
