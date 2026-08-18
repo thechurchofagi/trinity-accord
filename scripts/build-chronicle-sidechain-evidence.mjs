@@ -44,6 +44,11 @@ const LASSIE_DELEGATED_ROUTING_ENDPOINT = String(process.env.CHRONICLE_LASSIE_DE
 const LASSIE_DELEGATED_ROUTING_TIMEOUT = Math.max(1000, Math.min(30000, Number(process.env.CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS || 10000)));
 const LASSIE_VERSION = String(process.env.CHRONICLE_LASSIE_VERSION || '').trim() || null;
 const LASSIE_ASSET_SHA256 = String(process.env.CHRONICLE_LASSIE_ASSET_SHA256 || '').trim() || null;
+const KUBO_BIN = String(process.env.CHRONICLE_KUBO_BIN || '').trim();
+const KUBO_VERSION = String(process.env.CHRONICLE_KUBO_VERSION || '').trim() || null;
+const KUBO_ASSET_SHA512 = String(process.env.CHRONICLE_KUBO_ASSET_SHA512 || '').trim() || null;
+const KUBO_CONNECT_TIMEOUT = Math.max(5000, Math.min(60000, Number(process.env.CHRONICLE_KUBO_CONNECT_TIMEOUT_MS || 15000)));
+const KUBO_BLOCK_TIMEOUT = Math.max(10000, Math.min(180000, Number(process.env.CHRONICLE_KUBO_BLOCK_TIMEOUT_MS || 60000)));
 const REFRESH_HISTORY = /^(1|true|yes)$/i.test(process.env.CHRONICLE_EVIDENCE_REFRESH_HISTORY || 'false');
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
 const DEFAULT_CAR_GATEWAYS = [
@@ -332,6 +337,49 @@ async function discoverLassieProviders(cids) {
   }
   return providers;
 }
+function addressesByPeer(providers) {
+  const groups = new Map();
+  for (const provider of providers) {
+    const match = provider.match(/\/p2p\/([^/]+)$/);
+    if (!match) continue;
+    const addresses = groups.get(match[1]) || [];
+    addresses.push(provider);
+    groups.set(match[1], addresses);
+  }
+  return [...groups.values()];
+}
+async function fetchKuboBlock({ cid, rootCid }) {
+  if (!KUBO_BIN) throw Error('Kubo Bitswap fallback is not configured');
+  const providers = await discoverLassieProviders([cid, rootCid]);
+  const peerGroups = addressesByPeer(providers);
+  const connections = await Promise.allSettled(peerGroups.map(addresses => execFileAsync(KUBO_BIN, [
+    'swarm', 'connect', ...addresses,
+  ], {
+    timeout: KUBO_CONNECT_TIMEOUT,
+    maxBuffer: 1024 * 1024,
+    windowsHide: true,
+  })));
+  const connected = connections.filter(result => result.status === 'fulfilled').length;
+  console.log(`[CAR KUBO CONNECT] cid=${cid} multiaddrs=${providers.length} peers=${peerGroups.length} connected=${connected}`);
+  try {
+    const { stdout } = await execFileAsync(KUBO_BIN, ['block', 'get', cid], {
+      timeout: KUBO_BLOCK_TIMEOUT,
+      maxBuffer: MAX,
+      encoding: 'buffer',
+      windowsHide: true,
+    });
+    const data = Buffer.from(stdout);
+    if (!data.length) throw Error('returned an empty block');
+    const buffer = singleBlockCar(cid, data);
+    console.log(`[CAR KUBO BLOCK VERIFIED] cid=${cid} bytes=${data.length} connected=${connected}`);
+    return buffer;
+  } catch (error) {
+    const detail = Buffer.isBuffer(error.stderr)
+      ? error.stderr.toString('utf8')
+      : String(error.stderr || error.stdout || error.message || error);
+    throw Error(`Kubo block retrieval failed for ${cid} multiaddrs=${providers.length} peers=${peerGroups.length} connected=${connected}: ${detail.trim().replace(/\s+/g, ' ').slice(0, 800)}`);
+  }
+}
 async function runLassieCar({ cid, scope, neededCid, providerCids = [] }) {
   if (!LASSIE_BIN) throw Error('Lassie fallback is not configured');
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-lassie-'));
@@ -396,6 +444,24 @@ async function fetchLassieBlock({ cid, rootCid }) {
   }
   throw blockError;
 }
+async function fetchProviderBlock({ cid, rootCid }) {
+  const errors = [];
+  if (KUBO_BIN) {
+    try {
+      return await fetchKuboBlock({ cid, rootCid });
+    } catch (error) {
+      errors.push(error.message);
+    }
+  }
+  if (LASSIE_BIN) {
+    try {
+      return await fetchLassieBlock({ cid, rootCid });
+    } catch (error) {
+      errors.push(error.message);
+    }
+  }
+  throw Error(errors.join('; ') || 'provider fallback is not configured');
+}
 async function car(ref) {
   if (!ref) return { status: 'not_ipfs' };
   let base = cache.get(ref.root_cid);
@@ -456,8 +522,8 @@ async function car(ref) {
           gatewayRace: Math.min(CAR_BLOCK_GATEWAY_RACE, CAR_GATEWAYS.length),
           loadBlock: loadCachedBlock,
           saveBlock: saveCachedBlock,
-          fetchFallback: LASSIE_BIN
-            ? context => fetchLassieBlock({ ...context, rootCid: ref.root_cid })
+          fetchFallback: LASSIE_BIN || KUBO_BIN
+            ? context => fetchProviderBlock({ ...context, rootCid: ref.root_cid })
             : null,
           fetchCar: async (url, context) => {
             let carError;
@@ -729,6 +795,13 @@ write(path.join(E, 'BUILD-REPORT.json'), {
     delegated_routing_endpoint: LASSIE_DELEGATED_ROUTING_ENDPOINT || null,
     delegated_routing_timeout_ms: LASSIE_DELEGATED_ROUTING_TIMEOUT,
     delegated_provider_multiaddrs_by_cid: Object.fromEntries([...delegatedProviderObservations.entries()].sort(([a], [b]) => a.localeCompare(b))),
+  },
+  kubo_bitswap_fallback: {
+    enabled: Boolean(KUBO_BIN),
+    version: KUBO_VERSION,
+    asset_sha512: KUBO_ASSET_SHA512,
+    connect_timeout_ms: KUBO_CONNECT_TIMEOUT,
+    block_timeout_ms: KUBO_BLOCK_TIMEOUT,
   },
   historical_chunk_fallback: {
     chunk_sizes: HISTORICAL_CHUNK_SIZES,

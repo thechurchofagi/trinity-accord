@@ -17,8 +17,14 @@ assert.match(workflow, /chronicle-sidechain-cars-v2-d0fe9d4c5f57d98f784ea9c9726d
 assert.match(workflow, /CHRONICLE_HISTORICAL_CHUNK_SIZES: "1048576,262144"/);
 assert.match(workflow, /https:\/\/ipfs\.raribleuserdata\.com\/ipfs\/\{cid\}/);
 assert.match(workflow, /https:\/\/rarible\.mypinata\.cloud\/ipfs\/\{cid\}/);
+assert.match(workflow, /KUBO_VERSION: 0\.37\.0/);
+assert.match(workflow, /KUBO_LINUX_AMD64_SHA512: [0-9a-f]{128}/);
+assert.match(workflow, /sha512sum --check --strict/);
+assert.match(workflow, /daemon --migrate=false/);
 assert.match(build, /CAR HISTORICAL CHUNK VERIFIED/);
 assert.match(build, /scope: 'all'/);
 assert.match(build, /CAR LASSIE ROOT REUSE/);
+assert.match(build, /CAR KUBO BLOCK VERIFIED/);
+assert.match(build, /singleBlockCar\(cid, data\)/);
 
 console.log('[BOOTSTRAP HISTORY TEST PASS] verified snapshot history + layered CAR caches');
