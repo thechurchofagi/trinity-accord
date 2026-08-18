@@ -24,6 +24,10 @@ const builderLog = path.join(runtimeDir, 'CAR-BUILDER.log');
 fs.writeFileSync(builderLog, '');
 const trace = createCarTrace({ out });
 let progress = null;
+const observeCarEvent = event => {
+  try { trace.emit(event); } catch {}
+  try { progress?.observeEvent(event); } catch {}
+};
 
 const original = { log: console.log, warn: console.warn, error: console.error };
 for (const method of ['log', 'warn', 'error']) {
@@ -44,7 +48,7 @@ trace.phase('wrapper', 'running', {
 
 const carDir = path.join(out, 'evidence-v2', 'cars');
 trace.phase('cache_audit', 'running', { directory: carDir });
-const audit = auditWholeCarCache(carDir, { onEvent: trace.emit });
+const audit = auditWholeCarCache(carDir, { onEvent: observeCarEvent });
 trace.phase('cache_audit', 'success', { checked: audit.checked, valid: audit.valid, removed: audit.removed });
 console.log(`[CAR CACHE AUDIT] checked=${audit.checked} valid=${audit.valid} removed=${audit.removed}`);
 if (audit.removed) {
@@ -53,7 +57,7 @@ if (audit.removed) {
 
 progress = createCarProgress({ out, audit });
 await progress.publish();
-installWholeDagFetchGuard({ onEvent: trace.emit });
+installWholeDagFetchGuard({ onEvent: observeCarEvent });
 trace.phase('evidence_builder', 'running');
 try {
   await import('./build-chronicle-sidechain-evidence-core.mjs');
