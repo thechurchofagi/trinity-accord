@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { execFileSync } from 'child_process';
+import { sanitizeEndpoint, sanitizeTraceText } from './chronicle-sidechain-car-trace.mjs';
 
 function nowIso() { return new Date().toISOString(); }
 
@@ -39,7 +40,7 @@ export function updateCarProgressFromLine(state, line) {
     if (!state.failed_cids.includes(m[1]) && state.failed_cids.length < 40) state.failed_cids.push(m[1]);
     state.last_cid = m[1];
     state.last_event = 'car_failed';
-    state.last_event_detail = line.slice(0, 800);
+    state.last_event_detail = sanitizeTraceText(line);
     state.last_event_at = nowIso();
     return true;
   }
@@ -60,12 +61,42 @@ export function updateCarProgressFromLine(state, line) {
       const cid = line.match(/\bcid=([^\s]+)/)?.[1];
       if (cid) state.last_cid = cid;
       state.last_event = needle.slice(1, -1).toLowerCase().replaceAll(' ', '_');
-      state.last_event_detail = line.slice(0, 800);
+      state.last_event_detail = sanitizeTraceText(line);
       state.last_event_at = nowIso();
       return true;
     }
   }
   return false;
+}
+
+export function updateCarProgressFromEvent(state, event) {
+  if (!event || typeof event !== 'object') return false;
+  const name = String(event.event || 'car_event');
+  const row = {
+    timestamp: nowIso(),
+    event: name,
+    status: event.status || null,
+    root_cid: event.root_cid || null,
+    endpoint: event.endpoint ? sanitizeEndpoint(event.endpoint) : null,
+    http_status: event.http_status ?? null,
+    elapsed_ms: event.elapsed_ms ?? null,
+    error: event.error ? sanitizeTraceText(event.error) : null,
+  };
+  state.last_recovery_event = row;
+  state.last_event = name;
+  state.last_event_at = row.timestamp;
+  if (row.root_cid) state.last_cid = row.root_cid;
+  state.recovery_event_counts ||= {};
+  state.recovery_event_counts[name] = (state.recovery_event_counts[name] || 0) + 1;
+  state.recent_recovery_events ||= [];
+  state.recent_recovery_events.push(row);
+  if (state.recent_recovery_events.length > 20) state.recent_recovery_events.splice(0, state.recent_recovery_events.length - 20);
+  if (row.status === 'failure') {
+    state.recent_recovery_failures ||= [];
+    state.recent_recovery_failures.push(row);
+    if (state.recent_recovery_failures.length > 20) state.recent_recovery_failures.splice(0, state.recent_recovery_failures.length - 20);
+  }
+  return true;
 }
 
 function checkoutAuthorization() {
@@ -81,7 +112,7 @@ function checkoutAuthorization() {
 
 export function createCarProgress({ out, audit, intervalMs = 30000 }) {
   const state = {
-    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v2',
+    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v3',
     phase: 'car_l1',
     status: 'running',
     run_id: process.env.GITHUB_RUN_ID || null,
@@ -95,6 +126,9 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
     records_expected: 217,
     workers: {},
     failed_cids: [],
+    recovery_event_counts: {},
+    recent_recovery_events: [],
+    recent_recovery_failures: [],
     started_at: nowIso(),
     published_at: null,
   };
@@ -133,7 +167,7 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
           authorization,
           accept: 'application/vnd.github+json',
           'content-type': 'application/json',
-          'user-agent': 'trinity-accord-sidechain-car-progress/2.0',
+          'user-agent': 'trinity-accord-sidechain-car-progress/3.0',
           'x-github-api-version': '2022-11-28',
         },
         body: JSON.stringify({ body }),
@@ -147,11 +181,15 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
   const observe = line => {
     if (updateCarProgressFromLine(state, line)) write();
   };
+  const observeEvent = event => {
+    if (updateCarProgressFromEvent(state, event)) write();
+  };
   const timer = setInterval(() => { publish().catch(() => {}); }, intervalMs);
   timer.unref();
   return {
     state,
     observe,
+    observeEvent,
     publish,
     async finish(status) {
       state.status = status;
