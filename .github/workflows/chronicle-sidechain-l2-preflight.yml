@@ -3,6 +3,8 @@ name: Chronicle sidechain L2 parallel preflight
 on:
   pull_request:
     paths:
+      - "scripts/build-chronicle-sidechain-evidence.mjs"
+      - "scripts/test_chronicle_bootstrap_history.mjs"
       - "scripts/capture-chronicle-sidechain-l2.py"
       - "scripts/capture-chronicle-sidechain-l2-parallel.py"
       - "scripts/test_chronicle_sidechain_l2.py"
@@ -21,11 +23,15 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version-file: ".node-version"
       - name: Install proof dependencies
         run: python3 -m pip install -r requirements-ci.txt
-      - name: Run L2 regression and parallelism tests
+      - name: Run bootstrap, L2 regression, parallelism, and telemetry tests
         run: |
           set -euo pipefail
+          node scripts/test_chronicle_bootstrap_history.mjs
           python3 scripts/test_chronicle_sidechain_l2.py
           python3 scripts/test_chronicle_sidechain_l2_parallel.py
           python3 -m py_compile \
@@ -33,4 +39,4 @@ jobs:
             scripts/capture-chronicle-sidechain-l2-parallel.py \
             scripts/publish-chronicle-sidechain-progress.py
           bash -n scripts/stream-chronicle-sidechain-progress.sh
-          echo "[PREFLIGHT PASS] legacy correctness + endpoint parallelism + telemetry"
+          echo "[PREFLIGHT PASS] bootstrap + legacy correctness + endpoint parallelism + telemetry"
