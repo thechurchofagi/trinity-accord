@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+import assert from 'assert/strict';
+import crypto from 'crypto';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import {
+  cidBytesToString,
+  encodeVarint,
+  singleBlockCar,
+} from './ipfs-car-blockwise.mjs';
+import {
+  auditWholeCarCache,
+  rootCidFromWholeDagUrl,
+  verifyCompleteCar,
+} from './chronicle-sidechain-car-integrity.mjs';
+
+function cidV1(codec, data) {
+  const digest = crypto.createHash('sha256').update(data).digest();
+  return Buffer.concat([
+    encodeVarint(1),
+    encodeVarint(codec),
+    encodeVarint(0x12),
+    encodeVarint(digest.length),
+    digest,
+  ]);
+}
+
+const raw = Buffer.from('trinity-sidechain-car-integrity-regression');
+const rawCidBytes = cidV1(0x55, raw);
+const rawCid = cidBytesToString(rawCidBytes);
+const validCar = singleBlockCar(rawCid, raw);
+const valid = verifyCompleteCar(validCar, rawCid);
+assert.equal(valid.blocks, 1);
+assert.equal(valid.reachable, 1);
+assert.throws(() => verifyCompleteCar(validCar.subarray(0, validCar.length - 1), rawCid), /exceeds input|truncated/i);
+
+const child = Buffer.from('missing-linked-child');
+const childCidBytes = cidV1(0x55, child);
+const pbLink = Buffer.concat([Buffer.from([0x0a]), encodeVarint(childCidBytes.length), childCidBytes]);
+const rootData = Buffer.concat([Buffer.from([0x12]), encodeVarint(pbLink.length), pbLink]);
+const rootCidBytes = cidV1(0x70, rootData);
+const rootCid = cidBytesToString(rootCidBytes);
+const incompleteDagCar = singleBlockCar(rootCid, rootData);
+assert.throws(() => verifyCompleteCar(incompleteDagCar, rootCid), /linked block missing/);
+
+assert.equal(rootCidFromWholeDagUrl(`https://example.invalid/ipfs/${rawCid}?format=car&dag-scope=all`), rawCid);
+assert.equal(rootCidFromWholeDagUrl(`https://example.invalid/ipfs/${rawCid}?format=car&dag-scope=block`), null);
+assert.equal(rootCidFromWholeDagUrl(`https://example.invalid/ipfs/${rawCid}`), null);
+
+const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'trinity-car-audit-'));
+try {
+  fs.writeFileSync(path.join(temp, `${rawCid}.car`), validCar);
+  fs.writeFileSync(path.join(temp, `${rootCid}.car`), incompleteDagCar);
+  const audit = auditWholeCarCache(temp);
+  assert.equal(audit.checked, 2);
+  assert.equal(audit.valid, 1);
+  assert.equal(audit.removed, 1);
+  assert.equal(fs.existsSync(path.join(temp, `${rawCid}.car`)), true);
+  assert.equal(fs.existsSync(path.join(temp, `${rootCid}.car`)), false);
+} finally {
+  fs.rmSync(temp, { recursive: true, force: true });
+}
+
+console.log('[CAR INTEGRITY TEST PASS] valid cache retained; truncated/incomplete DAG rejected before builder acceptance');
