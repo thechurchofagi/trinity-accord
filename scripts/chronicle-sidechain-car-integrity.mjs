@@ -20,11 +20,7 @@ function rootCidFromWholeDagUrl(value) {
   if ((url.searchParams.get('dag-scope') || '').toLowerCase() !== 'all') return null;
   const match = url.pathname.match(/\/ipfs\/([^/]+)/i);
   if (!match) return null;
-  try {
-    return decodeURIComponent(match[1]);
-  } catch {
-    return match[1];
-  }
+  try { return decodeURIComponent(match[1]); } catch { return match[1]; }
 }
 
 function report(onEvent, event) {
@@ -37,11 +33,9 @@ export function verifyCompleteCar(input, rootCid) {
   const rootBytes = cidStringToBytes(rootCid);
   const parsed = parseCarStrict(buf);
   if (!parsed.header.includes(rootBytes)) throw Error('root absent header');
-
   const blocks = new Map(parsed.blocks.map(block => [block.key, block]));
   const rootKey = rootBytes.toString('hex');
   if (!blocks.has(rootKey)) throw Error('root block missing');
-
   const seen = new Set();
   const stack = [rootKey];
   while (stack.length) {
@@ -60,12 +54,7 @@ export function verifyCompleteCar(input, rootCid) {
       throw Error(`unsupported block codec ${block.codec}`);
     }
   }
-
-  return {
-    bytes: buf.length,
-    blocks: blocks.size,
-    reachable: seen.size,
-  };
+  return { bytes: buf.length, blocks: blocks.size, reachable: seen.size };
 }
 
 export function auditWholeCarCache(dir, { onEvent } = {}) {
@@ -84,10 +73,7 @@ export function auditWholeCarCache(dir, { onEvent } = {}) {
     try {
       const verified = verifyCompleteCar(fs.readFileSync(file), rootCid);
       result.valid++;
-      report(onEvent, {
-        event: 'cache_valid', phase: 'cache_audit', status: 'success', root_cid: rootCid,
-        bytes: verified.bytes, blocks: verified.blocks, reachable: verified.reachable,
-      });
+      report(onEvent, { event: 'cache_valid', phase: 'cache_audit', status: 'success', root_cid: rootCid, ...verified });
     } catch (error) {
       fs.rmSync(file, { force: true });
       result.removed++;
@@ -104,38 +90,39 @@ export function auditWholeCarCache(dir, { onEvent } = {}) {
 export function installWholeDagFetchGuard({ onEvent } = {}) {
   const originalFetch = globalThis.fetch;
   if (typeof originalFetch !== 'function') throw Error('global fetch is unavailable');
+  const threshold = Math.max(1, Math.min(20, Number(process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES || 2)));
+  const failures = new Map();
+  const hostOf = value => { try { return new URL(String(value)).host; } catch { return null; } };
+  const markFailure = host => { if (host) failures.set(host, (failures.get(host) || 0) + 1); };
+  const markSuccess = host => { if (host) failures.delete(host); };
+
   globalThis.fetch = async function guardedFetch(input, init) {
     const rawUrl = typeof input === 'string' || input instanceof URL ? input : input?.url;
     const rootCid = rootCidFromWholeDagUrl(rawUrl);
+    const host = rootCid ? hostOf(rawUrl) : null;
     const started = Date.now();
-    if (rootCid) {
-      report(onEvent, {
-        event: 'whole_dag_attempt', phase: 'whole_dag', status: 'running',
-        root_cid: rootCid, endpoint: rawUrl,
-      });
+    if (rootCid && host && (failures.get(host) || 0) >= threshold) {
+      const count = failures.get(host) || 0;
+      const error = Error(`whole-DAG endpoint circuit open host=${host} failures=${count}`);
+      report(onEvent, { event: 'whole_dag_circuit_open', phase: 'whole_dag', status: 'failure', root_cid: rootCid, endpoint: rawUrl, host, failures: count, error: error.message });
+      throw error;
     }
+    if (rootCid) report(onEvent, { event: 'whole_dag_attempt', phase: 'whole_dag', status: 'running', root_cid: rootCid, endpoint: rawUrl, host });
 
     let response;
     try {
       response = await originalFetch(input, init);
     } catch (error) {
       if (rootCid) {
-        report(onEvent, {
-          event: 'whole_dag_network_failure', phase: 'whole_dag', status: 'failure',
-          root_cid: rootCid, endpoint: rawUrl, elapsed_ms: Date.now() - started,
-          error: error?.message || String(error),
-        });
+        markFailure(host);
+        report(onEvent, { event: 'whole_dag_network_failure', phase: 'whole_dag', status: 'failure', root_cid: rootCid, endpoint: rawUrl, host, elapsed_ms: Date.now() - started, error: error?.message || String(error) });
       }
       throw error;
     }
     if (!rootCid) return response;
-
     if (!response.ok) {
-      report(onEvent, {
-        event: 'whole_dag_http_failure', phase: 'whole_dag', status: 'failure',
-        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
-        elapsed_ms: Date.now() - started,
-      });
+      if (response.status === 429 || response.status >= 500) markFailure(host);
+      report(onEvent, { event: 'whole_dag_http_failure', phase: 'whole_dag', status: 'failure', root_cid: rootCid, endpoint: rawUrl, host, http_status: response.status, elapsed_ms: Date.now() - started });
       return response;
     }
 
@@ -143,37 +130,23 @@ export function installWholeDagFetchGuard({ onEvent } = {}) {
     try {
       body = Buffer.from(await response.arrayBuffer());
     } catch (error) {
-      report(onEvent, {
-        event: 'whole_dag_body_failure', phase: 'whole_dag', status: 'failure',
-        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
-        elapsed_ms: Date.now() - started, error: error?.message || String(error),
-      });
+      markFailure(host);
+      report(onEvent, { event: 'whole_dag_body_failure', phase: 'whole_dag', status: 'failure', root_cid: rootCid, endpoint: rawUrl, host, http_status: response.status, elapsed_ms: Date.now() - started, error: error?.message || String(error) });
       throw error;
     }
 
     try {
       const verified = verifyCompleteCar(body, rootCid);
-      report(onEvent, {
-        event: 'whole_dag_verified', phase: 'whole_dag', status: 'success',
-        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
-        elapsed_ms: Date.now() - started, bytes: verified.bytes,
-        blocks: verified.blocks, reachable: verified.reachable,
-      });
+      markSuccess(host);
+      report(onEvent, { event: 'whole_dag_verified', phase: 'whole_dag', status: 'success', root_cid: rootCid, endpoint: rawUrl, host, http_status: response.status, elapsed_ms: Date.now() - started, bytes: verified.bytes, blocks: verified.blocks, reachable: verified.reachable });
       console.log(`[CAR WHOLE-DAG VERIFIED] cid=${rootCid} blocks=${verified.blocks} reachable=${verified.reachable} bytes=${verified.bytes}`);
     } catch (error) {
+      markFailure(host);
       const message = error?.message || String(error);
-      report(onEvent, {
-        event: 'whole_dag_integrity_failure', phase: 'whole_dag', status: 'failure',
-        root_cid: rootCid, endpoint: rawUrl, http_status: response.status,
-        elapsed_ms: Date.now() - started, bytes: body.length, error: message,
-      });
+      report(onEvent, { event: 'whole_dag_integrity_failure', phase: 'whole_dag', status: 'failure', root_cid: rootCid, endpoint: rawUrl, host, http_status: response.status, elapsed_ms: Date.now() - started, bytes: body.length, error: message });
       throw Error(`whole-DAG CAR integrity failure cid=${rootCid}: ${message}`);
     }
-    return new Response(body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-    });
+    return new Response(body, { status: response.status, statusText: response.statusText, headers: response.headers });
   };
   return () => { globalThis.fetch = originalFetch; };
 }
