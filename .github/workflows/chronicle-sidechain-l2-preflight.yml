@@ -15,6 +15,8 @@ on:
       - "scripts/publish-chronicle-sidechain-progress.py"
       - "scripts/test_chronicle_progress_publisher.py"
       - "scripts/verify-chronicle-sidechain-evidence.py"
+      - "scripts/verify-chronicle-sidechain-evidence-core.py"
+      - "scripts/diagnose-chronicle-sidechain-l1.py"
       - "scripts/stream-chronicle-sidechain-progress.sh"
       - ".github/workflows/chronicle-sidechain-mirror-v3.yml"
       - ".github/workflows/chronicle-sidechain-l2-preflight.yml"
@@ -48,6 +50,8 @@ jobs:
             scripts/capture-chronicle-sidechain-l2.py \
             scripts/capture-chronicle-sidechain-l2-parallel.py \
             scripts/publish-chronicle-sidechain-progress.py \
-            scripts/verify-chronicle-sidechain-evidence.py
+            scripts/verify-chronicle-sidechain-evidence.py \
+            scripts/verify-chronicle-sidechain-evidence-core.py \
+            scripts/diagnose-chronicle-sidechain-l1.py
           bash -n scripts/stream-chronicle-sidechain-progress.sh
-          echo "[PREFLIGHT PASS] bootstrap + CAR integrity gate + legacy correctness + endpoint parallelism + telemetry + offline diagnostics"
+          echo "[PREFLIGHT PASS] bootstrap + strict CAR integrity gate + legacy correctness + endpoint parallelism + telemetry + offline/L1 diagnostics"
