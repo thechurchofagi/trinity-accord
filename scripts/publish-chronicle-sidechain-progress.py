@@ -31,6 +31,21 @@ def load_progress(path):
     return {}
 
 
+def load_jsonl_tail(path, limit=25):
+    if not path or not path.exists() or not path.stat().st_size:
+        return []
+    rows = []
+    try:
+        for line in path.read_text(errors='replace').splitlines()[-limit:]:
+            try:
+                rows.append(json.loads(line))
+            except Exception:
+                rows.append({'unparsed': line[:1000]})
+    except Exception:
+        return []
+    return rows
+
+
 def classify_error(value):
     text = str(value)
     if text.startswith('L1 '): return 'L1'
@@ -75,6 +90,24 @@ def summarize_l1(report, limit=40):
     }
 
 
+def summarize_car(report):
+    if not isinstance(report, dict):
+        return None
+    keys = [
+        'schema', 'phase', 'status', 'run_id', 'run_attempt', 'source_sha',
+        'evidence_concurrency', 'car_block_concurrency', 'whole_dag_endpoint_limit',
+        'cache_audit', 'records_completed', 'records_expected', 'workers',
+        'failed_cids', 'car_failed_events', 'recovery_event_counts',
+        'last_cid', 'last_event', 'last_event_detail', 'last_event_at',
+        'last_recovery_event', 'recent_recovery_events', 'recent_recovery_failures',
+        'whole_dag_verified', 'blockwise_completed', 'historical_chunk_verified',
+        'kubo_blocks_verified', 'lassie_starts', 'lassie_root_reuse',
+        'raw_blocks_verified', 'cache_rejected_events', 'started_at',
+        'finished_at', 'published_at',
+    ]
+    return {key: report.get(key) for key in keys if key in report}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--phase', default=None)
@@ -109,6 +142,12 @@ def main():
         progress['workflow_status'] = progress['status']
 
     out = pathlib.Path(os.getenv('CHRONICLE_OUT', 'artifacts/chronicle-sidechain-scan'))
+    car = summarize_car(load_json(out / 'runtime' / 'CAR-PROGRESS.json'))
+    if car is not None:
+        progress['car_l1_progress'] = car
+    trace_tail = load_jsonl_tail(out / 'runtime' / 'CAR-TRACE.jsonl', 25)
+    if trace_tail:
+        progress['car_trace_tail'] = trace_tail
     offline = summarize_offline(load_json(out / 'evidence-v2' / 'OFFLINE-VERIFICATION.json'))
     if offline is not None:
         progress['offline_verification'] = offline
@@ -143,7 +182,7 @@ def main():
             'authorization': f'Bearer {token}',
             'accept': 'application/vnd.github+json',
             'content-type': 'application/json',
-            'user-agent': 'trinity-accord-sidechain-progress/1.2',
+            'user-agent': 'trinity-accord-sidechain-progress/1.3',
             'x-github-api-version': '2022-11-28',
         },
     )
