@@ -175,6 +175,8 @@ jobs:
           CHRONICLE_LASSIE_ASSET_SHA256: ${{ env.LASSIE_LINUX_AMD64_SHA256 }}
           CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS: "180000"
           CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS: "45000"
+          CHRONICLE_LASSIE_DELEGATED_ROUTING_ENDPOINT: "https://delegated-ipfs.dev"
+          CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS: "10000"
           CHRONICLE_CAR_GATEWAYS: "https://ipfs.raribleuserdata.com/ipfs/{cid}?format=car&dag-scope=all,https://rarible.mypinata.cloud/ipfs/{cid}?format=car&dag-scope=all,https://gw-seattle.crustcloud.io/ipfs/{cid}?format=car&dag-scope=all,https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.filebase.io/ipfs/{cid}?format=car&dag-scope=all,https://4everland.io/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: node scripts/build-chronicle-sidechain-evidence.mjs
 

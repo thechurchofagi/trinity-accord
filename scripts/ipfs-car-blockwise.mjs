@@ -161,6 +161,51 @@ export function cidSha256Digest(value) {
   return Buffer.from(parsed.digest);
 }
 
+export function delegatedProviderMultiaddrs(payload, { maxProviders = 8, maxAddrsPerProvider = 4 } = {}) {
+  if (!Number.isInteger(maxProviders) || maxProviders < 1 || maxProviders > 64) {
+    throw Error(`invalid maxProviders ${maxProviders}`);
+  }
+  if (!Number.isInteger(maxAddrsPerProvider) || maxAddrsPerProvider < 1 || maxAddrsPerProvider > 16) {
+    throw Error(`invalid maxAddrsPerProvider ${maxAddrsPerProvider}`);
+  }
+  const providers = Array.isArray(payload?.Providers) ? payload.Providers : [];
+  const out = [];
+  const seen = new Set();
+  let acceptedProviders = 0;
+  const score = value => {
+    if (/^\/ip4\/[^/]+\/tcp\/\d+$/.test(value)) return 0;
+    if (/^\/dns4\/[^/]+\/tcp\/\d+(?:\/tls\/ws)?$/.test(value)) return 1;
+    if (/^\/ip4\/[^/]+\/udp\/\d+\/quic-v1$/.test(value)) return 2;
+    if (/^\/dnsaddr\/[^/]+$/.test(value)) return 3;
+    if (/^\/ip6\/[^/]+\/tcp\/\d+$/.test(value)) return 4;
+    if (/^\/ip6\/[^/]+\/udp\/\d+\/quic-v1$/.test(value)) return 5;
+    return 99;
+  };
+  for (const provider of providers) {
+    if (acceptedProviders >= maxProviders) break;
+    const id = typeof provider?.ID === 'string' ? provider.ID.trim() : '';
+    if (!/^[1-9A-HJ-NP-Za-km-z]{32,128}$/.test(id)) continue;
+    const candidates = [...new Set((Array.isArray(provider.Addrs) ? provider.Addrs : [])
+      .filter(value => typeof value === 'string')
+      .map(value => value.trim())
+      .filter(value => value.length > 0 && value.length <= 1000 && !value.includes(',')))]
+      .map(value => ({ value, score: score(value.replace(/\/(?:p2p|ipfs)\/[^/]+$/, '')) }))
+      .filter(item => item.score < 99)
+      .sort((a, b) => a.score - b.score || a.value.localeCompare(b.value));
+    let acceptedAddrs = 0;
+    for (const { value } of candidates) {
+      if (acceptedAddrs >= maxAddrsPerProvider) break;
+      const full = /\/(?:p2p|ipfs)\/[^/]+$/.test(value) ? value : `${value}/p2p/${id}`;
+      if (seen.has(full)) continue;
+      seen.add(full);
+      out.push(full);
+      acceptedAddrs++;
+    }
+    if (acceptedAddrs) acceptedProviders++;
+  }
+  return out;
+}
+
 function encodeCborHead(major, value) {
   if (!Number.isSafeInteger(value) || value < 0) throw Error(`invalid CBOR length ${value}`);
   if (value < 24) return Buffer.from([(major << 5) | value]);

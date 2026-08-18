@@ -5,7 +5,12 @@ import crypto from 'crypto';
 import os from 'os';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
-import { cidSha256Digest, fetchBlockwiseCar, singleBlockCar } from './ipfs-car-blockwise.mjs';
+import {
+  cidSha256Digest,
+  delegatedProviderMultiaddrs,
+  fetchBlockwiseCar,
+  singleBlockCar,
+} from './ipfs-car-blockwise.mjs';
 
 const execFileAsync = promisify(execFile);
 
@@ -35,6 +40,8 @@ const HISTORICAL_CHUNK_SIZES = [...new Set(String(process.env.CHRONICLE_HISTORIC
 const LASSIE_BIN = String(process.env.CHRONICLE_LASSIE_BIN || '').trim();
 const LASSIE_GLOBAL_TIMEOUT = Math.max(10000, Math.min(600000, Number(process.env.CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS || 180000)));
 const LASSIE_PROVIDER_TIMEOUT = Math.max(5000, Math.min(LASSIE_GLOBAL_TIMEOUT, Number(process.env.CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS || 45000)));
+const LASSIE_DELEGATED_ROUTING_ENDPOINT = String(process.env.CHRONICLE_LASSIE_DELEGATED_ROUTING_ENDPOINT || '').trim().replace(/\/+$/, '');
+const LASSIE_DELEGATED_ROUTING_TIMEOUT = Math.max(1000, Math.min(30000, Number(process.env.CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS || 10000)));
 const LASSIE_VERSION = String(process.env.CHRONICLE_LASSIE_VERSION || '').trim() || null;
 const LASSIE_ASSET_SHA256 = String(process.env.CHRONICLE_LASSIE_ASSET_SHA256 || '').trim() || null;
 const REFRESH_HISTORY = /^(1|true|yes)$/i.test(process.env.CHRONICLE_EVIDENCE_REFRESH_HISTORY || 'false');
@@ -285,12 +292,53 @@ function rawBlockUrl(value) {
   url.searchParams.delete('entity-bytes');
   return url.toString();
 }
-async function runLassieCar({ cid, scope, neededCid }) {
+const delegatedProviderCache = new Map();
+const delegatedProviderObservations = new Map();
+async function discoverDelegatedProviders(cid) {
+  if (!LASSIE_DELEGATED_ROUTING_ENDPOINT) return [];
+  let pending = delegatedProviderCache.get(cid);
+  if (!pending) {
+    pending = (async () => {
+      const url = `${LASSIE_DELEGATED_ROUTING_ENDPOINT}/routing/v1/providers/${encodeURIComponent(cid)}`;
+      const payload = await getJson(url, {
+        headers: { accept: 'application/json' },
+        max: 1024 * 1024,
+        label: `delegated providers ${cid}`,
+        timeout: LASSIE_DELEGATED_ROUTING_TIMEOUT,
+        retries: 0,
+      });
+      const providers = delegatedProviderMultiaddrs(payload);
+      delegatedProviderObservations.set(cid, providers.length);
+      console.log(`[CAR DELEGATED PROVIDERS] cid=${cid} multiaddrs=${providers.length}`);
+      return providers;
+    })();
+    delegatedProviderCache.set(cid, pending);
+  }
+  return pending;
+}
+async function discoverLassieProviders(cids) {
+  const providers = [];
+  const seen = new Set();
+  for (const cid of [...new Set(cids.filter(Boolean))]) {
+    try {
+      for (const provider of await discoverDelegatedProviders(cid)) {
+        if (seen.has(provider)) continue;
+        seen.add(provider);
+        providers.push(provider);
+      }
+    } catch (error) {
+      console.warn(`[CAR DELEGATED PROVIDERS FAILED] cid=${cid} ${error.message}`);
+    }
+  }
+  return providers;
+}
+async function runLassieCar({ cid, scope, neededCid, providerCids = [] }) {
   if (!LASSIE_BIN) throw Error('Lassie fallback is not configured');
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-lassie-'));
   const output = path.join(tmp, `${cid}-${scope}.car`);
   try {
-    const { stdout, stderr } = await execFileAsync(LASSIE_BIN, [
+    const providers = await discoverLassieProviders([cid, ...providerCids]);
+    const args = [
       'fetch',
       '--output', output,
       '--tempdir', tmp,
@@ -298,8 +346,11 @@ async function runLassieCar({ cid, scope, neededCid }) {
       '--protocols', 'bitswap,graphsync,http',
       '--global-timeout', `${LASSIE_GLOBAL_TIMEOUT}ms`,
       '--provider-timeout', `${LASSIE_PROVIDER_TIMEOUT}ms`,
-      cid,
-    ], {
+    ];
+    if (providers.length) args.push('--providers', providers.join(','));
+    args.push(cid);
+    console.log(`[CAR LASSIE START] cid=${cid} scope=${scope} needed=${neededCid} delegated_multiaddrs=${providers.length}`);
+    const { stdout, stderr } = await execFileAsync(LASSIE_BIN, args, {
       timeout: LASSIE_GLOBAL_TIMEOUT + 15000,
       maxBuffer: 2 * 1024 * 1024,
       windowsHide: true,
@@ -322,7 +373,7 @@ const lassieRootCars = new Map();
 function fetchLassieRootCar({ rootCid, neededCid }) {
   let pending = lassieRootCars.get(rootCid);
   if (!pending) {
-    pending = runLassieCar({ cid: rootCid, scope: 'all', neededCid });
+    pending = runLassieCar({ cid: rootCid, scope: 'all', neededCid, providerCids: [neededCid] });
     lassieRootCars.set(rootCid, pending);
   } else {
     console.log(`[CAR LASSIE ROOT REUSE] cid=${rootCid} needed=${neededCid}`);
@@ -332,7 +383,7 @@ function fetchLassieRootCar({ rootCid, neededCid }) {
 async function fetchLassieBlock({ cid, rootCid }) {
   let blockError;
   try {
-    return await runLassieCar({ cid, scope: 'block', neededCid: cid });
+    return await runLassieCar({ cid, scope: 'block', neededCid: cid, providerCids: [rootCid] });
   } catch (error) {
     blockError = error;
   }
@@ -675,6 +726,9 @@ write(path.join(E, 'BUILD-REPORT.json'), {
     asset_sha256: LASSIE_ASSET_SHA256,
     global_timeout_ms: LASSIE_GLOBAL_TIMEOUT,
     provider_timeout_ms: LASSIE_PROVIDER_TIMEOUT,
+    delegated_routing_endpoint: LASSIE_DELEGATED_ROUTING_ENDPOINT || null,
+    delegated_routing_timeout_ms: LASSIE_DELEGATED_ROUTING_TIMEOUT,
+    delegated_provider_multiaddrs_by_cid: Object.fromEntries([...delegatedProviderObservations.entries()].sort(([a], [b]) => a.localeCompare(b))),
   },
   historical_chunk_fallback: {
     chunk_sizes: HISTORICAL_CHUNK_SIZES,
