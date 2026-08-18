@@ -17,6 +17,10 @@ const CAR_RETRIES = Number(process.env.CHRONICLE_CAR_HTTP_RETRIES || 1);
 const MAX = Number(process.env.CHRONICLE_CAR_MAX_BYTES || 157286400);
 const CAR_BLOCK_CONCURRENCY = Math.max(1, Math.min(16, Number(process.env.CHRONICLE_CAR_BLOCK_CONCURRENCY || 2)));
 const CAR_BLOCK_MAX_COUNT = Math.max(1, Math.min(100000, Number(process.env.CHRONICLE_CAR_BLOCK_MAX_COUNT || 4096)));
+const CAR_BLOCK_GATEWAY_RACE = Math.max(1, Math.min(16, Number(process.env.CHRONICLE_CAR_BLOCK_GATEWAY_RACE || 2)));
+const CAR_BLOCK_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS || 20000);
+const CAR_BLOCK_RETRIES = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_RETRIES || 0);
+const CAR_BLOCK_CACHE_DIR = process.env.CHRONICLE_CAR_BLOCK_CACHE_DIR || 'artifacts/chronicle-sidechain-car-block-cache';
 const C = Math.max(1, Math.min(8, Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 4)));
 const DEFAULT_CAR_GATEWAYS = [
   'https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all',
@@ -157,6 +161,21 @@ function ipfs(uri) {
 }
 
 const cache = new Map();
+function blockCacheFile(key) {
+  return path.join(CAR_BLOCK_CACHE_DIR, `${key}.car`);
+}
+function loadCachedBlock({ key }) {
+  const file = blockCacheFile(key);
+  return fs.existsSync(file) ? fs.readFileSync(file) : null;
+}
+function saveCachedBlock({ cid, key, buffer }) {
+  fs.mkdirSync(CAR_BLOCK_CACHE_DIR, { recursive: true });
+  const file = blockCacheFile(key);
+  const tmp = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
+  fs.writeFileSync(tmp, buffer);
+  fs.renameSync(tmp, file);
+  console.log(`[CAR BLOCK CACHED] cid=${cid} bytes=${buffer.length}`);
+}
 function carUrl(template, cid) {
   return template.includes('{cid}') ? template.replaceAll('{cid}', encodeURIComponent(cid)) : `${template.replace(/\/$/, '')}/ipfs/${encodeURIComponent(cid)}?format=car&dag-scope=all`;
 }
@@ -217,13 +236,16 @@ async function car(ref) {
           maxBytes: MAX,
           concurrency: CAR_BLOCK_CONCURRENCY,
           maxBlocks: CAR_BLOCK_MAX_COUNT,
+          gatewayRace: Math.min(CAR_BLOCK_GATEWAY_RACE, CAR_GATEWAYS.length),
+          loadBlock: loadCachedBlock,
+          saveBlock: saveCachedBlock,
           fetchCar: async (url, context) => {
             const r = await get(url, {
               headers: { accept: 'application/vnd.ipld.car' },
               max: MAX,
               label: `CAR block ${context.cid} gateway=${context.gatewayIndex}/${CAR_GATEWAYS.length}`,
-              timeout: CAR_TIMEOUT,
-              retries: CAR_RETRIES,
+              timeout: CAR_BLOCK_TIMEOUT,
+              retries: CAR_BLOCK_RETRIES,
             });
             const type = r.type.toLowerCase();
             if (!type.includes('application/vnd.ipld.car') && !type.includes('application/octet-stream')) {
@@ -244,6 +266,8 @@ async function car(ref) {
           retrieval: 'gateway_untrusted_blockwise_car_offline_verification_required',
           block_count: recovered.blocks,
           blockwise_request_count: recovered.requests,
+          block_cache_hits: recovered.cacheHits,
+          block_cache_writes: recovered.cacheWrites,
         };
       } catch (e) {
         errors.push({ mode: 'blockwise', error: e.message });

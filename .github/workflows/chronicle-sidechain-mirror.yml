@@ -121,7 +121,9 @@ jobs:
       - name: Restore prior CAR retrieval cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          path: |
+            artifacts/chronicle-sidechain-scan/evidence-v2/cars
+            artifacts/chronicle-sidechain-car-block-cache
           key: chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-
@@ -131,11 +133,14 @@ jobs:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           CHRONICLE_EVIDENCE_CONCURRENCY: "2"
-          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "45000"
-          CHRONICLE_CAR_HTTP_RETRIES: "2"
-          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "2"
+          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "30000"
+          CHRONICLE_CAR_HTTP_RETRIES: "0"
+          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "1"
           CHRONICLE_CAR_BLOCK_CONCURRENCY: "2"
           CHRONICLE_CAR_BLOCK_MAX_COUNT: "4096"
+          CHRONICLE_CAR_BLOCK_GATEWAY_RACE: "2"
+          CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS: "20000"
+          CHRONICLE_CAR_BLOCK_HTTP_RETRIES: "0"
           CHRONICLE_CAR_GATEWAYS: "https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: node scripts/build-chronicle-sidechain-evidence.mjs
 
@@ -143,7 +148,9 @@ jobs:
         if: ${{ always() }}
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          path: |
+            artifacts/chronicle-sidechain-scan/evidence-v2/cars
+            artifacts/chronicle-sidechain-car-block-cache
           key: chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Capture L2 transaction and receipt inclusion proofs
