@@ -2,12 +2,18 @@
 import assert from 'assert/strict';
 import fs from 'fs';
 
-const build = fs.readFileSync('scripts/build-chronicle-sidechain-evidence.mjs', 'utf8');
+const wrapper = fs.readFileSync('scripts/build-chronicle-sidechain-evidence.mjs', 'utf8');
+const corePath = 'scripts/build-chronicle-sidechain-evidence-core.mjs';
+assert.ok(fs.existsSync(corePath), `sidechain evidence builder core missing: ${corePath}`);
+const build = fs.readFileSync(corePath, 'utf8');
 const workflowPath = '.github/workflows/chronicle-sidechain-mirror-v3.yml';
 assert.ok(fs.existsSync(workflowPath), `active sidechain workflow missing: ${workflowPath}`);
 assert.ok(!fs.existsSync('.github/workflows/chronicle-sidechain-mirror.yml'), 'retired serial sidechain workflow must remain absent');
 const workflow = fs.readFileSync(workflowPath, 'utf8');
 
+assert.match(wrapper, /auditWholeCarCache/);
+assert.match(wrapper, /installWholeDagFetchGuard/);
+assert.match(wrapper, /build-chronicle-sidechain-evidence-core\.mjs/);
 assert.match(build, /CHRONICLE_EVIDENCE_REFRESH_HISTORY/);
 assert.match(build, /verified_recovered_tokens_snapshot/);
 assert.match(build, /snapshotHistory\(t\)/);
@@ -30,4 +36,4 @@ assert.match(build, /CAR LASSIE ROOT REUSE/);
 assert.match(build, /CAR KUBO BLOCK VERIFIED/);
 assert.match(build, /singleBlockCar\(cid, data\)/);
 
-console.log('[BOOTSTRAP HISTORY TEST PASS] verified snapshot history + layered CAR caches + active v3 workflow');
+console.log('[BOOTSTRAP HISTORY TEST PASS] strict wrapper + preserved snapshot history + layered CAR caches + active v3 workflow');
