@@ -16,6 +16,7 @@ on:
       - "scripts/build-chronicle-sidechain-evidence.mjs"
       - "scripts/ipfs-car-blockwise.mjs"
       - "scripts/test_chronicle_car_blockwise.mjs"
+      - "scripts/test_chronicle_bootstrap_history.mjs"
       - "scripts/capture-chronicle-sidechain-l2.py"
       - "scripts/verify-chronicle-sidechain-evidence.py"
       - "scripts/finalize-chronicle-sidechain-evidence.mjs"
@@ -74,6 +75,7 @@ jobs:
           node --check scripts/build-chronicle-sidechain-evidence.mjs
           node --check scripts/ipfs-car-blockwise.mjs
           node scripts/test_chronicle_car_blockwise.mjs
+          node scripts/test_chronicle_bootstrap_history.mjs
           node --check scripts/finalize-chronicle-sidechain-evidence.mjs
           python3 -m py_compile scripts/capture-chronicle-sidechain-l2.py scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
@@ -118,7 +120,13 @@ jobs:
           CHRONICLE_STALL_WARN_SECONDS: "300"
         run: bash scripts/run-chronicle-sidechain-mirror-observed.sh
 
-      - name: Restore prior CAR retrieval cache
+      - name: Restore complete CAR baseline cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          key: chronicle-sidechain-cars-v2-d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8-32078752685-1
+
+      - name: Restore latest CAR and block recovery cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
@@ -132,6 +140,7 @@ jobs:
         env:
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+          CHRONICLE_EVIDENCE_REFRESH_HISTORY: "false"
           CHRONICLE_EVIDENCE_CONCURRENCY: "2"
           CHRONICLE_CAR_HTTP_TIMEOUT_MS: "30000"
           CHRONICLE_CAR_HTTP_RETRIES: "0"
