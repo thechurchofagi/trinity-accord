@@ -27,6 +27,20 @@ if (!process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES) {
   process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES = '2';
 }
 
+// Provider fallbacks are recovery paths, not evidence acceptance rules. Bound
+// their latency so one missing block cannot serialize a worker for 3+ minutes
+// before the next independent provider is tried. The recovered bytes are still
+// CID-checked by the blockwise builder and the final CAR/DAG verifier.
+function capEnv(name, maxMs) {
+  const value = Number(process.env[name] || 0);
+  if (!Number.isFinite(value) || value <= 0 || value > maxMs) process.env[name] = String(maxMs);
+}
+capEnv('CHRONICLE_KUBO_CONNECT_TIMEOUT_MS', 8000);
+capEnv('CHRONICLE_KUBO_BLOCK_TIMEOUT_MS', 30000);
+capEnv('CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS', 8000);
+capEnv('CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS', 15000);
+capEnv('CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS', 60000);
+
 const runtimeDir = path.join(out, 'runtime');
 fs.mkdirSync(runtimeDir, { recursive: true });
 const builderLog = path.join(runtimeDir, 'CAR-BUILDER.log');
@@ -55,6 +69,11 @@ trace.phase('wrapper', 'running', {
   whole_dag_endpoint_limit: Number(process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT),
   whole_dag_timeout_ms: Number(process.env.CHRONICLE_CAR_HTTP_TIMEOUT_MS),
   whole_dag_circuit_failures: Number(process.env.CHRONICLE_CAR_WHOLE_DAG_CIRCUIT_FAILURES),
+  kubo_connect_timeout_ms: Number(process.env.CHRONICLE_KUBO_CONNECT_TIMEOUT_MS),
+  kubo_block_timeout_ms: Number(process.env.CHRONICLE_KUBO_BLOCK_TIMEOUT_MS),
+  lassie_routing_timeout_ms: Number(process.env.CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS),
+  lassie_provider_timeout_ms: Number(process.env.CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS),
+  lassie_global_timeout_ms: Number(process.env.CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS),
 });
 
 const carDir = path.join(out, 'evidence-v2', 'cars');
