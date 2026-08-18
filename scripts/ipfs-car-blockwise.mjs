@@ -151,6 +151,16 @@ export function cidStringToBytes(value) {
   throw Error(`unsupported CID multibase ${value[0] || '(empty)'}`);
 }
 
+export function cidSha256Digest(value) {
+  const bytes = cidStringToBytes(value);
+  const parsed = parseCidAt(bytes, 0);
+  if (parsed.next !== bytes.length) throw Error('trailing CID bytes');
+  if (parsed.multihashCode !== SHA256_CODE || parsed.digest.length !== 32) {
+    throw Error(`unsupported CID multihash code=${parsed.multihashCode} bytes=${parsed.digest.length}`);
+  }
+  return Buffer.from(parsed.digest);
+}
+
 function encodeCborHead(major, value) {
   if (!Number.isSafeInteger(value) || value < 0) throw Error(`invalid CBOR length ${value}`);
   if (value < 24) return Buffer.from([(major << 5) | value]);

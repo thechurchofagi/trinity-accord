@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import os from 'os';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
-import { fetchBlockwiseCar, singleBlockCar } from './ipfs-car-blockwise.mjs';
+import { cidSha256Digest, fetchBlockwiseCar, singleBlockCar } from './ipfs-car-blockwise.mjs';
 
 const execFileAsync = promisify(execFile);
 
@@ -27,6 +27,11 @@ const CAR_BLOCK_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS
 const CAR_BLOCK_RAW_TIMEOUT = Number(process.env.CHRONICLE_CAR_BLOCK_RAW_HTTP_TIMEOUT_MS || 15000);
 const CAR_BLOCK_RETRIES = Number(process.env.CHRONICLE_CAR_BLOCK_HTTP_RETRIES || 0);
 const CAR_BLOCK_CACHE_DIR = process.env.CHRONICLE_CAR_BLOCK_CACHE_DIR || 'artifacts/chronicle-sidechain-car-block-cache';
+const HISTORICAL_CHUNK_SIZES = [...new Set(String(process.env.CHRONICLE_HISTORICAL_CHUNK_SIZES || '1048576,262144')
+  .split(',')
+  .map(value => Number(value.trim()))
+  .filter(value => Number.isSafeInteger(value) && value > 0 && value <= MAX))]
+  .sort((a, b) => b - a);
 const LASSIE_BIN = String(process.env.CHRONICLE_LASSIE_BIN || '').trim();
 const LASSIE_GLOBAL_TIMEOUT = Math.max(10000, Math.min(600000, Number(process.env.CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS || 180000)));
 const LASSIE_PROVIDER_TIMEOUT = Math.max(5000, Math.min(LASSIE_GLOBAL_TIMEOUT, Number(process.env.CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS || 45000)));
@@ -183,12 +188,84 @@ function ipfs(uri) {
 }
 
 const cache = new Map();
+let historicalChunkIndex = null;
+let historicalIndexedFiles = 0;
+const historicalChunkRecoveries = new Map();
 function blockCacheFile(key) {
   return path.join(CAR_BLOCK_CACHE_DIR, `${key}.car`);
 }
-function loadCachedBlock({ key }) {
+function historicalPayloadFiles() {
+  const root = path.resolve(OUT);
+  const prefix = `${root}${path.sep}`;
+  const files = new Set();
+  for (const token of src) {
+    for (const payload of [token.metadata_mirror, ...(token.media || [])]) {
+      if (payload?.status !== 'ok' || typeof payload.file !== 'string') continue;
+      const file = path.resolve(payload.file);
+      if (!file.startsWith(prefix) || !fs.existsSync(file) || !fs.statSync(file).isFile()) continue;
+      files.add(file);
+    }
+  }
+  return [...files].sort();
+}
+function ensureHistoricalChunkIndex() {
+  if (historicalChunkIndex) return historicalChunkIndex;
+  const index = new Map();
+  const files = historicalPayloadFiles();
+  for (const file of files) {
+    const buffer = fs.readFileSync(file);
+    const sourceSha256 = sh(buffer);
+    const ranges = new Map();
+    ranges.set(`0:${buffer.length}`, { offset: 0, length: buffer.length });
+    for (const size of HISTORICAL_CHUNK_SIZES) {
+      for (let offset = 0; offset < buffer.length; offset += size) {
+        const length = Math.min(size, buffer.length - offset);
+        ranges.set(`${offset}:${length}`, { offset, length });
+      }
+    }
+    for (const { offset, length } of ranges.values()) {
+      const digest = sh(buffer.subarray(offset, offset + length));
+      if (!index.has(digest)) index.set(digest, { file, offset, length, sourceSha256 });
+    }
+  }
+  historicalChunkIndex = index;
+  historicalIndexedFiles = files.length;
+  console.log(`[HISTORICAL CHUNK INDEX] files=${files.length} chunks=${index.size} sizes=${HISTORICAL_CHUNK_SIZES.join(',')}`);
+  return index;
+}
+function recoverHistoricalBlock({ cid, key }) {
+  let digest;
+  try {
+    digest = cidSha256Digest(cid).toString('hex');
+  } catch {
+    return null;
+  }
+  const match = ensureHistoricalChunkIndex().get(digest);
+  if (!match) return null;
+  const fd = fs.openSync(match.file, 'r');
+  const data = Buffer.alloc(match.length);
+  try {
+    const bytesRead = fs.readSync(fd, data, 0, data.length, match.offset);
+    if (bytesRead !== data.length) throw Error(`historical chunk short read ${bytesRead}/${data.length}`);
+  } finally {
+    fs.closeSync(fd);
+  }
+  const buffer = singleBlockCar(cid, data);
+  const recovery = {
+    cid,
+    source_file: path.relative(OUT, match.file).replaceAll('\\', '/'),
+    source_file_sha256: match.sourceSha256,
+    offset: match.offset,
+    bytes: match.length,
+  };
+  historicalChunkRecoveries.set(cid, recovery);
+  saveCachedBlock({ cid, key, buffer });
+  console.log(`[CAR HISTORICAL CHUNK VERIFIED] cid=${cid} file=${recovery.source_file} offset=${match.offset} bytes=${match.length}`);
+  return buffer;
+}
+function loadCachedBlock({ cid, key }) {
   const file = blockCacheFile(key);
-  return fs.existsSync(file) ? fs.readFileSync(file) : null;
+  return fs.existsSync(file) ? fs.readFileSync(file) : recoverHistoricalBlock({ cid, key });
 }
 function saveCachedBlock({ cid, key, buffer }) {
   fs.mkdirSync(CAR_BLOCK_CACHE_DIR, { recursive: true });
@@ -208,16 +285,16 @@ function rawBlockUrl(value) {
   url.searchParams.delete('entity-bytes');
   return url.toString();
 }
-async function fetchLassieBlock({ cid }) {
+async function runLassieCar({ cid, scope, neededCid }) {
   if (!LASSIE_BIN) throw Error('Lassie fallback is not configured');
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-lassie-'));
-  const output = path.join(tmp, `${cid}.car`);
+  const output = path.join(tmp, `${cid}-${scope}.car`);
   try {
     const { stdout, stderr } = await execFileAsync(LASSIE_BIN, [
       'fetch',
       '--output', output,
       '--tempdir', tmp,
-      '--dag-scope', 'block',
+      '--dag-scope', scope,
       '--protocols', 'bitswap,graphsync,http',
       '--global-timeout', `${LASSIE_GLOBAL_TIMEOUT}ms`,
       '--provider-timeout', `${LASSIE_PROVIDER_TIMEOUT}ms`,
@@ -232,14 +309,41 @@ async function fetchLassieBlock({ cid }) {
     if (!buffer.length) throw Error('returned an empty CAR');
     if (buffer.length > MAX) throw Error(`CAR bytes ${buffer.length}>${MAX}`);
     const detail = String(stderr || stdout || '').trim().replace(/\s+/g, ' ').slice(0, 400);
-    console.log(`[CAR LASSIE BLOCK RECEIVED] cid=${cid} bytes=${buffer.length}${detail ? ` detail=${detail}` : ''}`);
+    console.log(`[CAR LASSIE RECEIVED] cid=${cid} scope=${scope} needed=${neededCid} bytes=${buffer.length}${detail ? ` detail=${detail}` : ''}`);
     return buffer;
   } catch (error) {
     const detail = String(error.stderr || error.stdout || error.message || error).trim().replace(/\s+/g, ' ').slice(0, 800);
-    throw Error(`Lassie provider retrieval failed for ${cid}: ${detail || 'unknown error'}`);
+    throw Error(`Lassie ${scope} retrieval failed for ${cid}: ${detail || 'unknown error'}`);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }
+}
+const lassieRootCars = new Map();
+function fetchLassieRootCar({ rootCid, neededCid }) {
+  let pending = lassieRootCars.get(rootCid);
+  if (!pending) {
+    pending = runLassieCar({ cid: rootCid, scope: 'all', neededCid });
+    lassieRootCars.set(rootCid, pending);
+  } else {
+    console.log(`[CAR LASSIE ROOT REUSE] cid=${rootCid} needed=${neededCid}`);
+  }
+  return pending;
+}
+async function fetchLassieBlock({ cid, rootCid }) {
+  let blockError;
+  try {
+    return await runLassieCar({ cid, scope: 'block', neededCid: cid });
+  } catch (error) {
+    blockError = error;
+  }
+  if (rootCid && rootCid !== cid) {
+    try {
+      return await fetchLassieRootCar({ rootCid, neededCid: cid });
+    } catch (rootError) {
+      throw Error(`direct=${blockError.message}; root=${rootError.message}`);
+    }
+  }
+  throw blockError;
 }
 async function car(ref) {
   if (!ref) return { status: 'not_ipfs' };
@@ -301,7 +405,9 @@ async function car(ref) {
           gatewayRace: Math.min(CAR_BLOCK_GATEWAY_RACE, CAR_GATEWAYS.length),
           loadBlock: loadCachedBlock,
           saveBlock: saveCachedBlock,
-          fetchFallback: LASSIE_BIN ? fetchLassieBlock : null,
+          fetchFallback: LASSIE_BIN
+            ? context => fetchLassieBlock({ ...context, rootCid: ref.root_cid })
+            : null,
           fetchCar: async (url, context) => {
             let carError;
             try {
@@ -569,6 +675,11 @@ write(path.join(E, 'BUILD-REPORT.json'), {
     asset_sha256: LASSIE_ASSET_SHA256,
     global_timeout_ms: LASSIE_GLOBAL_TIMEOUT,
     provider_timeout_ms: LASSIE_PROVIDER_TIMEOUT,
+  },
+  historical_chunk_fallback: {
+    chunk_sizes: HISTORICAL_CHUNK_SIZES,
+    indexed_files: historicalIndexedFiles,
+    recoveries: [...historicalChunkRecoveries.values()].sort((a, b) => a.cid.localeCompare(b.cid)),
   },
   history_refresh_enabled: REFRESH_HISTORY,
   history_sources: Object.fromEntries([...new Set(res.map(r => r.origin_resolution.full_instance_history))]
