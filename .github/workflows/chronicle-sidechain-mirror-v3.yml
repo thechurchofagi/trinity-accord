@@ -14,6 +14,11 @@ on:
       - "scripts/discover-chronicle-sidechain-nfts.mjs"
       - "scripts/run-chronicle-sidechain-mirror-observed.sh"
       - "scripts/build-chronicle-sidechain-evidence.mjs"
+      - "scripts/rebuild-chronicle-sidechain-cars-from-history.mjs"
+      - "scripts/sidechain-debug-live.py"
+      - "scripts/chronicle-sidechain-car-integrity.mjs"
+      - "scripts/chronicle-sidechain-car-progress.mjs"
+      - "scripts/chronicle-sidechain-car-trace.mjs"
       - "scripts/ipfs-car-blockwise.mjs"
       - "scripts/test_chronicle_car_blockwise.mjs"
       - "scripts/test_chronicle_bootstrap_history.mjs"
@@ -44,6 +49,8 @@ env:
   KUBO_VERSION: 0.37.0
   KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
   CHRONICLE_PROGRESS_ISSUE: "1020"
+  CHRONICLE_DEBUG_PUBLISH_SECONDS: "15"
+  CHRONICLE_PROGRESS_PUBLISH_SECONDS: "15"
 
 jobs:
   mirror:
@@ -90,6 +97,7 @@ jobs:
           set -euo pipefail
           node --check scripts/discover-chronicle-sidechain-nfts.mjs
           node --check scripts/build-chronicle-sidechain-evidence.mjs
+          node --check scripts/rebuild-chronicle-sidechain-cars-from-history.mjs
           node --check scripts/ipfs-car-blockwise.mjs
           node scripts/test_chronicle_car_blockwise.mjs
           node scripts/test_chronicle_bootstrap_history.mjs
@@ -97,13 +105,14 @@ jobs:
           python3 scripts/test_chronicle_sidechain_l2_parallel.py
           node --check scripts/finalize-chronicle-sidechain-evidence.mjs
           python3 -m py_compile \
+            scripts/sidechain-debug-live.py \
             scripts/capture-chronicle-sidechain-l2.py \
             scripts/capture-chronicle-sidechain-l2-parallel.py \
             scripts/publish-chronicle-sidechain-progress.py \
             scripts/verify-chronicle-sidechain-evidence.py
           bash -n scripts/run-chronicle-sidechain-mirror-observed.sh
           bash -n scripts/stream-chronicle-sidechain-progress.sh
-          echo "[VALIDATION OK] scanner + CAR/L1 + parallel L2 + telemetry + offline verification"
+          echo "[VALIDATION OK] scanner + CAR/L1 + live debug + parallel L2 + telemetry + offline verification"
 
       - name: Bootstrap verified sidechain snapshot
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.refresh_live != true }}
@@ -197,13 +206,14 @@ jobs:
 
       - name: Resolve mint history and capture trustless CARs + L1 commitment
         env:
+          GH_TOKEN: ${{ github.token }}
           POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
           BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
           CHRONICLE_EVIDENCE_REFRESH_HISTORY: "false"
-          CHRONICLE_EVIDENCE_CONCURRENCY: "2"
-          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "30000"
+          CHRONICLE_EVIDENCE_CONCURRENCY: "4"
+          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "10000"
           CHRONICLE_CAR_HTTP_RETRIES: "0"
-          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "1"
+          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "4"
           CHRONICLE_CAR_BLOCK_CONCURRENCY: "2"
           CHRONICLE_CAR_BLOCK_MAX_COUNT: "4096"
           CHRONICLE_CAR_BLOCK_GATEWAY_RACE: "4"
@@ -214,16 +224,16 @@ jobs:
           CHRONICLE_LASSIE_BIN: ${{ runner.temp }}/trinity-tools/lassie
           CHRONICLE_LASSIE_VERSION: ${{ env.LASSIE_VERSION }}
           CHRONICLE_LASSIE_ASSET_SHA256: ${{ env.LASSIE_LINUX_AMD64_SHA256 }}
-          CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS: "180000"
-          CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS: "45000"
+          CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS: "60000"
+          CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS: "15000"
           CHRONICLE_LASSIE_DELEGATED_ROUTING_ENDPOINT: "https://delegated-ipfs.dev"
-          CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS: "10000"
+          CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS: "8000"
           IPFS_PATH: ${{ runner.temp }}/chronicle-kubo-repo
           CHRONICLE_KUBO_BIN: ${{ runner.temp }}/trinity-tools/kubo/ipfs
           CHRONICLE_KUBO_VERSION: ${{ env.KUBO_VERSION }}
           CHRONICLE_KUBO_ASSET_SHA512: ${{ env.KUBO_LINUX_AMD64_SHA512 }}
-          CHRONICLE_KUBO_CONNECT_TIMEOUT_MS: "15000"
-          CHRONICLE_KUBO_BLOCK_TIMEOUT_MS: "180000"
+          CHRONICLE_KUBO_CONNECT_TIMEOUT_MS: "8000"
+          CHRONICLE_KUBO_BLOCK_TIMEOUT_MS: "30000"
           CHRONICLE_CAR_GATEWAYS: "https://ipfs.raribleuserdata.com/ipfs/{cid}?format=car&dag-scope=all,https://rarible.mypinata.cloud/ipfs/{cid}?format=car&dag-scope=all,https://gw-seattle.crustcloud.io/ipfs/{cid}?format=car&dag-scope=all,https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.filebase.io/ipfs/{cid}?format=car&dag-scope=all,https://4everland.io/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: |
           set -euo pipefail
@@ -272,7 +282,7 @@ jobs:
           CHRONICLE_L2_HTTP_RETRIES: "4"
           CHRONICLE_L2_RPC_MIN_INTERVAL_MS: "100"
           CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
-          CHRONICLE_PROGRESS_PUBLISH_SECONDS: "30"
+          CHRONICLE_PROGRESS_PUBLISH_SECONDS: "15"
         run: |
           set -u
           python3 scripts/capture-chronicle-sidechain-l2-parallel.py &
@@ -353,6 +363,10 @@ jobs:
         run: |
           echo '## Chronicle sidechain evidence diagnostics' >> "$GITHUB_STEP_SUMMARY"
           for f in \
+            artifacts/chronicle-sidechain-scan/runtime/SIDECHAIN-DEBUG.json \
+            artifacts/chronicle-sidechain-scan/runtime/WORKFLOW-STAGE.json \
+            artifacts/chronicle-sidechain-scan/runtime/HISTORICAL-CAR-ROOT-MAP.json \
+            artifacts/chronicle-sidechain-scan/runtime/HISTORICAL-CAR-REBUILD.json \
             artifacts/chronicle-sidechain-scan/runtime/FINAL-DIAGNOSTICS.json \
             artifacts/chronicle-sidechain-scan/SUMMARY.json \
             artifacts/chronicle-sidechain-scan/evidence-v2/BUILD-REPORT.json \
@@ -367,10 +381,18 @@ jobs:
               echo '```' >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+          if [ -s artifacts/chronicle-sidechain-scan/runtime/SIDECHAIN-DEBUG.jsonl ]; then
+            echo '### SIDECHAIN-DEBUG.jsonl (last 80 events)' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            tail -n 80 artifacts/chronicle-sidechain-scan/runtime/SIDECHAIN-DEBUG.jsonl >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Publish terminal progress
         if: ${{ always() }}
         env:
           GH_TOKEN: ${{ github.token }}
           CHRONICLE_L2_PROGRESS_FILE: ${{ runner.temp }}/chronicle-sidechain-l2-progress.json
-        run: python3 scripts/publish-chronicle-sidechain-progress.py --phase workflow_complete --status "${{ job.status }}" || true
+        run: |
+          python3 scripts/publish-chronicle-sidechain-progress.py --phase workflow_complete --status "${{ job.status }}" || true
+          python3 scripts/sidechain-debug-live.py mark --phase workflow_complete --step terminal --status "${{ job.status }}" --detail "terminal workflow status" || true
