@@ -34,6 +34,7 @@ assert.match(rebuildImplementation, /computed !== rootCid/);
 assert.match(rebuild, /baseRebuildCarsFromHistoricalPayloads/);
 assert.match(rebuild, /kubo_exact_content_rebuild/);
 assert.match(rebuild, /HISTORICAL-CONTENT-RECOVERY\.ndjson/);
+assert.match(rebuild, /'name', 'description', 'external_url', 'image'/);
 assert.match(rebuild, /https:\/\/ipfs\.io\/ipfs\/\{cid\}/);
 assert.match(rebuild, /https:\/\/nftstorage\.link\/ipfs\/\{cid\}/);
 assert.match(build, /CHRONICLE_EVIDENCE_REFRESH_HISTORY/);
