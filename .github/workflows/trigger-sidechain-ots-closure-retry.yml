@@ -1,0 +1,158 @@
+name: Trigger Sidechain OTS Closure Retry
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/trigger-sidechain-ots-closure-retry.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+  statuses: write
+
+concurrency:
+  group: trigger-sidechain-ots-closure-retry
+  cancel-in-progress: false
+
+jobs:
+  dispatch-and-observe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CLOSURE_WORKFLOW: chronicle-sidechain-ots-bitcoin-closure.yml
+      STATUS_CONTEXT: trinity/sidechain-ots
+    steps:
+      - name: Dispatch strict OTS closure now
+        id: dispatch
+        run: |
+          set -euo pipefail
+          started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "started_at=$started_at" >> "$GITHUB_OUTPUT"
+          echo "[OTS RETRY DISPATCH] workflow=$CLOSURE_WORKFLOW ref=main started_at=$started_at sha=$GITHUB_SHA"
+          gh workflow run "$CLOSURE_WORKFLOW" --repo "$GITHUB_REPOSITORY" --ref main
+
+      - name: Resolve dispatched closure run
+        id: resolve
+        env:
+          STARTED_AT: ${{ steps.dispatch.outputs.started_at }}
+        run: |
+          set -euo pipefail
+          run_id=""
+          run_url=""
+          for attempt in $(seq 1 30); do
+            echo "[OTS RUN DISCOVERY] attempt=$attempt"
+            gh run list \
+              --repo "$GITHUB_REPOSITORY" \
+              --workflow "$CLOSURE_WORKFLOW" \
+              --event workflow_dispatch \
+              --branch main \
+              --limit 20 \
+              --json databaseId,url,headSha,createdAt,status,conclusion > "$RUNNER_TEMP/ots-runs.json"
+            cat "$RUNNER_TEMP/ots-runs.json"
+            read -r run_id run_url < <(python3 - <<'PY'
+          import datetime,json,os
+          rows=json.load(open(os.environ['RUNNER_TEMP']+'/ots-runs.json'))
+          started=datetime.datetime.fromisoformat(os.environ['STARTED_AT'].replace('Z','+00:00'))
+          candidates=[]
+          for row in rows:
+              created=datetime.datetime.fromisoformat(row['createdAt'].replace('Z','+00:00'))
+              if row.get('headSha')==os.environ['GITHUB_SHA'] and created >= started-datetime.timedelta(seconds=5):
+                  candidates.append((created,row))
+          if candidates:
+              row=max(candidates,key=lambda x:x[0])[1]
+              print(row['databaseId'],row['url'])
+          PY
+            )
+            if [ -n "${run_id:-}" ]; then
+              break
+            fi
+            sleep 2
+          done
+          if [ -z "${run_id:-}" ]; then
+            echo "[OTS RUN DISCOVERY ERROR] could not resolve dispatched run" >&2
+            exit 1
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "run_url=$run_url" >> "$GITHUB_OUTPUT"
+          echo "[OTS RUN RESOLVED] run_id=$run_id url=$run_url"
+
+      - name: Publish pending observable status
+        env:
+          RUN_ID: ${{ steps.resolve.outputs.run_id }}
+          RUN_URL: ${{ steps.resolve.outputs.run_url }}
+        run: |
+          set -euo pipefail
+          target="${RUN_URL}#trinity-ots?state=pending&run=${RUN_ID}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=pending \
+            -f context="$STATUS_CONTEXT" \
+            -f description="strict OTS Bitcoin verification running" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS STATUS] state=pending run_id=$RUN_ID target=$target"
+
+      - name: Wait for strict closure run
+        id: watch
+        env:
+          RUN_ID: ${{ steps.resolve.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          echo "[OTS RUN WATCH START] run_id=$RUN_ID"
+          set +e
+          gh run watch "$RUN_ID" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
+          watch_rc=$?
+          set -e
+          echo "watch_rc=$watch_rc" >> "$GITHUB_OUTPUT"
+          echo "[OTS RUN WATCH END] run_id=$RUN_ID rc=$watch_rc"
+          gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --json databaseId,status,conclusion,url,headSha,createdAt,updatedAt,jobs > "$RUNNER_TEMP/ots-run.json"
+          cat "$RUNNER_TEMP/ots-run.json"
+          gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log > "$RUNNER_TEMP/ots-run.log" 2>&1
+          echo "[OTS RUN LOG TAIL]"
+          tail -n 240 "$RUNNER_TEMP/ots-run.log"
+
+      - name: Classify strict Bitcoin verification result
+        env:
+          RUN_ID: ${{ steps.resolve.outputs.run_id }}
+          RUN_URL: ${{ steps.resolve.outputs.run_url }}
+          WATCH_RC: ${{ steps.watch.outputs.watch_rc }}
+        run: |
+          set -euo pipefail
+          log="$RUNNER_TEMP/ots-run.log"
+          state=""
+          description=""
+          marker=""
+          if grep -Eq '\[BITCOIN CONFIRMATION (PUBLISHED|ALREADY EXISTS)\]' "$log"; then
+            state="success"
+            description="strict OTS Bitcoin confirmation verified"
+            marker="bitcoin_verified"
+          elif grep -q '\[OTS PENDING\]' "$log"; then
+            state="pending"
+            description="OTS calendars not Bitcoin-verifiable yet"
+            marker="pending_attestation"
+          elif [ "$WATCH_RC" != "0" ]; then
+            state="failure"
+            description="OTS closure workflow failed; inspect run"
+            marker="workflow_failure"
+          else
+            state="error"
+            description="OTS closure ended without a recognized terminal marker"
+            marker="unclassified"
+          fi
+          target="${RUN_URL}#trinity-ots?state=${marker}&run=${RUN_ID}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state="$state" \
+            -f context="$STATUS_CONTEXT" \
+            -f description="$description" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS FINAL STATUS] state=$state marker=$marker run_id=$RUN_ID target=$target"
+          if [ "$state" = "failure" ] || [ "$state" = "error" ]; then
+            exit 1
+          fi
