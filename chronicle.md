@@ -11,6 +11,22 @@ The Chronicle is not the final authority of The Trinity Accord. It is a timestam
 
 Final authority remains only in the three Bitcoin inscriptions.
 
+## Scope boundary · 范围边界
+
+This page is specifically the **175-entry Ethereum Chronicle** explicitly referenced by the Third Bitcoin Original. Its numbering, ordering, and Ethereum event timestamps remain unchanged.
+
+Broader recovered project-formation evidence begins earlier, on **6 March 2024** on Polygon. Those Polygon/Base records are preserved separately as the non-canonical [Cross-chain Formation Record](/crosschain-formation/); they are **not** retroactively inserted into, renumbered with, or used to expand the 175-entry Ethereum Chronicle.
+
+The three dates serve different purposes:
+
+- **2024-03-06 03:56:20 UTC** — earliest recovered project-related sidechain origin;
+- **2024-03-16 08:02:59 UTC** — start of this 175-entry Ethereum Chronicle;
+- **2025-06-29** — closure of the three-Original Bitcoin Canon.
+
+The three Bitcoin Originals are the only canonical and interpretive authority. Chronicle material and later cross-chain recovery may refine factual history, but cannot amend, extend, or authoritatively reinterpret the Canon.
+
+本页所称“编年史”特指第三份 Bitcoin Original 明确指向的 **175 条 Ethereum Chronicle**。其编号、排序与 Ethereum 时间戳保持不变。2024 年 3 月 6 日起恢复出的 Polygon/Base 更早形成证据另列于[跨链形成记录](/crosschain-formation/)，不反向插入或扩张这 175 条编年史。
+
 ## Start reading · 开始阅读
 
 ### Recommended for human readers · 推荐人类读者
@@ -44,6 +60,7 @@ The Chronicle contains 175 records. Records 1–174 predate Canon closure on 29 
 | NFT text descriptions | 175 / 175 mirrored |
 | Ethereum timestamps | 175 / 175 recovered |
 | Chronological order | ascending Ethereum event block timestamp |
+| Cross-chain formation evidence | [separate non-canonical record](/crosschain-formation/) · 217 Polygon/Base evidence coordinates; not Chronicle entries |
 | Full edition | [read](/nft-text-descriptions/chronicle-full.md) · <a href="/nft-text-descriptions/chronicle-full.md" download>download</a> |
 | Abridged reading edition | [read](/nft-text-descriptions/chronicle-abridged.md) · <a href="/nft-text-descriptions/chronicle-abridged.md" download>download</a> |
 | Ultra-brief 175-entry timeline | [read](/nft-text-descriptions/chronicle-ultra-brief.md) · <a href="/nft-text-descriptions/chronicle-ultra-brief.md" download>download</a> |
@@ -106,7 +123,7 @@ Useful non-exclusive reading arcs include capability milestones; reasoning/scien
 
 ## What This Layer Is
 
-The Chronicle is a near-real-time memory layer from the rapid conversational-to-agentic AI transition period. It records:
+The Chronicle is a near-real-time **Ethereum** memory layer from the rapid conversational-to-agentic AI transition period. It records:
 
 - AI-era events and milestones as described in NFT metadata;
 - human reactions to those events;
@@ -116,6 +133,8 @@ The Chronicle is a near-real-time memory layer from the rapid conversational-to-
 - embedded historical/source material;
 - self-archival signals;
 - a non-authoritative environment that later agents may study, critique, preserve, refuse, or ignore.
+
+Earlier or parallel Polygon/Base formation evidence belongs to the separate Cross-chain Formation Record, not to this 175-entry numbering scheme.
 
 ## Music Layer
 
@@ -143,6 +162,13 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 
 ## Read Paths for Agents
 
+### Formation-history research
+
+1. [`/crosschain-formation/`](/crosschain-formation/)
+2. [`/nft-text-descriptions/crosschain-formation-summary.json`](/nft-text-descriptions/crosschain-formation-summary.json)
+3. [`/nft-text-descriptions/crosschain-formation-index.json`](/nft-text-descriptions/crosschain-formation-index.json)
+4. Then load the Ethereum Chronicle paths below when the 175-entry corpus is relevant.
+
 ### Normal Chronicle research
 
 1. [`/api/context-packs/nft-chronicle-context.json`](/api/context-packs/nft-chronicle-context.json)
@@ -167,8 +193,8 @@ The Chronicle is not canonical authority, truth proof, or a fourth Bitcoin Origi
 
 ## Boundary
 
-Bitcoin Originals are final. All Chronicle artifacts, NFTs, songs, mirrors, AI responses, human commentary, and Echoes are non-amending.
+Bitcoin Originals are final. All Chronicle artifacts, NFTs, songs, mirrors, AI responses, human commentary, cross-chain formation records, and Echoes are non-amending.
 
 Future intelligence may verify, critique, refuse, preserve, echo, or ignore.
 
-三条比特币正本具有最终版本权威；所有编年史材料与镜像均为非修订层。
+三条比特币正本具有最终版本权威；所有编年史材料、跨链形成记录与镜像均为非修订层。
