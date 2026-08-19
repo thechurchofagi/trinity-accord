@@ -6,6 +6,7 @@ on:
     paths:
       - "scripts/build_chronicle_sidechain_zenodo_deposit.py"
       - "scripts/publish_chronicle_sidechain_to_zenodo.py"
+      - "archive/chronicle-sidechain-zenodo-rights-approval.json"
       - ".github/workflows/chronicle-sidechain-zenodo-cold-recovery.yml"
   workflow_dispatch:
 
@@ -137,41 +138,68 @@ jobs:
           set -euo pipefail
           token_configured=false
           rights_approved=false
+          rights_ack=""
+          approval_source="none"
+          approval_file="archive/chronicle-sidechain-zenodo-rights-approval.json"
           if [ -n "${ZENODO_ACCESS_TOKEN:-}" ]; then token_configured=true; fi
-          if [ "${CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK:-}" = "TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED" ]; then rights_approved=true; fi
+          if [ "${CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK:-}" = "TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED" ]; then
+            rights_approved=true
+            rights_ack="TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED"
+            approval_source="repository_variable"
+          elif python3 - "$approval_file" <<'PY'
+          import json,pathlib,sys
+          p=pathlib.Path(sys.argv[1])
+          if not p.is_file(): raise SystemExit(1)
+          r=json.loads(p.read_text(encoding='utf-8'))
+          if r.get('schema') != 'trinity-accord/chronicle-sidechain-zenodo-rights-approval/v1': raise SystemExit(1)
+          if r.get('approval') != 'TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED': raise SystemExit(1)
+          if r.get('status') != 'approved': raise SystemExit(1)
+          boundary=str(r.get('boundary') or '')
+          if 'does not claim ownership of third-party material' not in boundary: raise SystemExit(1)
+          if 'does not relicense third-party material' not in boundary: raise SystemExit(1)
+          print('[ZENODO RIGHTS FILE PASS] bounded mixed-rights publication approval validated')
+          PY
+          then
+            rights_approved=true
+            rights_ack="TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED"
+            approval_source="versioned_file"
+          fi
           publication_enabled=false
           if [ "$token_configured" = true ] && [ "$rights_approved" = true ]; then publication_enabled=true; fi
           echo "token_configured=$token_configured" >> "$GITHUB_OUTPUT"
           echo "rights_approved=$rights_approved" >> "$GITHUB_OUTPUT"
+          echo "rights_ack=$rights_ack" >> "$GITHUB_OUTPUT"
+          echo "approval_source=$approval_source" >> "$GITHUB_OUTPUT"
           echo "publication_enabled=$publication_enabled" >> "$GITHUB_OUTPUT"
-          echo "[ZENODO AUTH] token_configured=$token_configured rights_approved=$rights_approved publication_enabled=$publication_enabled"
+          echo "[ZENODO AUTH] token_configured=$token_configured rights_approved=$rights_approved approval_source=$approval_source publication_enabled=$publication_enabled"
 
       - name: Publish observable authorization state
         env:
           TOKEN_CONFIGURED: ${{ steps.auth.outputs.token_configured }}
           RIGHTS_APPROVED: ${{ steps.auth.outputs.rights_approved }}
+          APPROVAL_SOURCE: ${{ steps.auth.outputs.approval_source }}
           PUBLICATION_ENABLED: ${{ steps.auth.outputs.publication_enabled }}
         run: |
           set -euo pipefail
           run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           if [ "$PUBLICATION_ENABLED" = "true" ]; then
-            target="${run_url}#trinity-zenodo?state=authorized&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}"
+            target="${run_url}#trinity-zenodo?state=authorized&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}&approval_source=${APPROVAL_SOURCE}"
             gh api --method POST -H "Accept: application/vnd.github+json" \
               "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
               -f state=pending \
               -f context="$STATUS_CONTEXT" \
               -f description="Zenodo authorization present; publication in progress" \
               -f target_url="$target" >/dev/null
-            echo "[ZENODO AUTHORIZED] publication may proceed"
+            echo "[ZENODO AUTHORIZED] approval_source=$APPROVAL_SOURCE publication may proceed"
           else
-            target="${run_url}#trinity-zenodo?state=authorization_missing&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}"
+            target="${run_url}#trinity-zenodo?state=authorization_missing&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}&approval_source=${APPROVAL_SOURCE}"
             gh api --method POST -H "Accept: application/vnd.github+json" \
               "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
               -f state=failure \
               -f context="$STATUS_CONTEXT" \
               -f description="Zenodo publication authorization incomplete" \
               -f target_url="$target" >/dev/null
-            echo "[ZENODO AUTH BLOCKED] token_configured=$TOKEN_CONFIGURED rights_approved=$RIGHTS_APPROVED" >&2
+            echo "[ZENODO AUTH BLOCKED] token_configured=$TOKEN_CONFIGURED rights_approved=$RIGHTS_APPROVED approval_source=$APPROVAL_SOURCE" >&2
             exit 1
           fi
 
@@ -180,13 +208,15 @@ jobs:
         if: steps.auth.outputs.publication_enabled == 'true' && success()
         env:
           DEPOSIT_DIR: ${{ steps.package.outputs.deposit_dir }}
+          RIGHTS_ACK: ${{ steps.auth.outputs.rights_ack }}
         run: |
           set -euo pipefail
-          echo "[ZENODO PUBLISH START] api_base=$ZENODO_API_BASE deposit=$DEPOSIT_DIR"
+          test "$RIGHTS_ACK" = "TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED"
+          echo "[ZENODO PUBLISH START] api_base=$ZENODO_API_BASE deposit=$DEPOSIT_DIR approval_source=${{ steps.auth.outputs.approval_source }}"
           python3 scripts/publish_chronicle_sidechain_to_zenodo.py \
             --deposit-dir "$DEPOSIT_DIR" \
             --api-base "$ZENODO_API_BASE" \
-            --rights-boundary-ack "$CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK"
+            --rights-boundary-ack "$RIGHTS_ACK"
           test -s archive/chronicle-sidechain-zenodo-state.json
           python3 - <<'PY'
           import json,pathlib
@@ -195,6 +225,8 @@ jobs:
           doi=r.get('doi') or r.get('version_doi')
           if not doi:
               raise SystemExit('Zenodo publisher returned without a DOI in state file')
+          if r.get('remote_full_readback_sha256_verified') is not True:
+              raise SystemExit('Zenodo state lacks full remote SHA-256 readback verification')
           print(f'[ZENODO PUBLISH PASS] doi={doi} concept_doi={r.get("concept_doi") or r.get("conceptdoi") or ""}')
           PY
 
@@ -244,6 +276,7 @@ jobs:
           doi=r.get('doi') or r.get('version_doi') or ''
           concept=r.get('concept_doi') or r.get('conceptdoi') or ''
           if not doi: raise SystemExit('missing DOI at terminal success gate')
+          if r.get('remote_full_readback_sha256_verified') is not True: raise SystemExit('missing remote SHA-256 readback verification at terminal gate')
           print('DOI='+shlex.quote(str(doi)))
           print('CONCEPT_DOI='+shlex.quote(str(concept)))
           PY
@@ -281,6 +314,7 @@ jobs:
             .sidechain-zenodo-deposit/
             ${{ runner.temp }}/sidechain-zenodo-build.json
             ${{ runner.temp }}/toolchain-provenance.json
+            archive/chronicle-sidechain-zenodo-rights-approval.json
             archive/chronicle-sidechain-zenodo-state.json
           retention-days: 90
           if-no-files-found: warn
@@ -293,6 +327,7 @@ jobs:
           printf 'deposit_dir=%s\n' '${{ steps.package.outputs.deposit_dir }}'
           printf 'zenodo_token_configured=%s\n' '${{ steps.auth.outputs.token_configured }}'
           printf 'zenodo_rights_approved=%s\n' '${{ steps.auth.outputs.rights_approved }}'
+          printf 'zenodo_approval_source=%s\n' '${{ steps.auth.outputs.approval_source }}'
           printf 'zenodo_publication_enabled=%s\n' '${{ steps.auth.outputs.publication_enabled }}'
           printf 'doi=%s\n' '${{ steps.publish.outputs.doi }}'
           printf 'concept_doi=%s\n' '${{ steps.publish.outputs.concept_doi }}'
