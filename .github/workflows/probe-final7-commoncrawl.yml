@@ -1,0 +1,102 @@
+name: Probe final seven Common Crawl archives
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/probe-final7-commoncrawl.yml]
+
+permissions:
+  contents: write
+
+env:
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/recover-final-8-archives
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; t="$RUNNER_TEMP/tools"; mkdir -p "$t"
+          curl --fail --silent --show-error --location --retry 3 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "$KUBO_LINUX_AMD64_SHA512  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$t" kubo/ipfs; chmod +x "$t/kubo/ipfs"
+          echo "KUBO=$t/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Query indexes, fetch WARC records, verify bodies
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures, gzip, hashlib, json, os, pathlib, subprocess, tempfile, urllib.parse, urllib.request
+          targets=['QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT','QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva','QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1','QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah','QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC','bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy','bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54']
+          ua={'User-Agent':'trinity-accord-evidence-recovery/1.0'}; kubo=os.environ['KUBO']
+          def get(url,timeout=15,headers=None):
+            h=dict(ua); h.update(headers or {}); req=urllib.request.Request(url,headers=h)
+            with urllib.request.urlopen(req,timeout=timeout) as r:return r.read()
+          try:
+            cols=json.loads(get('https://index.commoncrawl.org/collinfo.json',15))
+            indexes=[x['id'] for x in cols if x.get('id','').startswith(('CC-MAIN-2024-','CC-MAIN-2025-','CC-MAIN-2026-'))]
+          except Exception:
+            indexes=['CC-MAIN-2025-30','CC-MAIN-2025-26','CC-MAIN-2025-21','CC-MAIN-2025-18','CC-MAIN-2025-13','CC-MAIN-2025-08','CC-MAIN-2025-05','CC-MAIN-2024-51','CC-MAIN-2024-46','CC-MAIN-2024-42']
+          # Newest first, cap to keep this bounded.
+          indexes=indexes[:24]
+          urls={cid:[f'https://ipfs.io/ipfs/{cid}',f'https://dweb.link/ipfs/{cid}'] for cid in targets}
+          # The one directory root is referenced as token.json, not the root body.
+          urls['bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54'] += [f'https://ipfs.io/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json',f'https://dweb.link/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json']
+          def verify(cid,data):
+            with tempfile.NamedTemporaryFile() as f:
+              f.write(data); f.flush()
+              modes=[False] if cid.startswith('Qm') else [True,False]
+              vals=[]
+              for raw in modes:
+                args=[kubo,'add','-Q','--only-hash','--pin=false',f'--cid-version={0 if cid.startswith("Qm") else 1}',f'--raw-leaves={str(raw).lower()}',f.name]
+                try:
+                  got=subprocess.check_output(args,text=True,stderr=subprocess.DEVNULL,timeout=30).strip(); vals.append({'raw':raw,'cid':got})
+                  if got==cid:return True,vals
+                except Exception as e:vals.append({'raw':raw,'error':str(e)[:100]})
+              return False,vals
+          def query_one(args):
+            cid,url,index=args; q=f'https://index.commoncrawl.org/{index}-index?url={urllib.parse.quote(url,safe="")}&output=json&filter=status:200'
+            try:text=get(q,10).decode('utf-8','replace')
+            except Exception as e:return cid,{'index':index,'url':url,'error':str(e)[:200]}
+            records=[]
+            for line in text.splitlines():
+              try:records.append(json.loads(line))
+              except:pass
+            return cid,{'index':index,'url':url,'records':records[:4]}
+          queries=[(cid,u,idx) for cid,us in urls.items() for u in us for idx in indexes]
+          grouped={cid:{'index_hits':[],'exact':[]} for cid in targets}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=16) as ex:
+            for cid,res in ex.map(query_one,queries):
+              if res.get('records'):grouped[cid]['index_hits'].append(res)
+          for cid,row in grouped.items():
+            for hit in row['index_hits']:
+              for rec in hit['records']:
+                try:
+                  off=int(rec['offset']); ln=int(rec['length']); fn=rec['filename']
+                  blob=get('https://data.commoncrawl.org/'+fn,20,{'Range':f'bytes={off}-{off+ln-1}'})
+                  try:warc=gzip.decompress(blob)
+                  except:warc=blob
+                  # WARC header, then embedded HTTP response header, then entity body.
+                  p=warc.find(b'\r\n\r\n'); q=warc.find(b'\r\n\r\n',p+4) if p>=0 else -1
+                  body=warc[q+4:] if q>=0 else b''
+                  # Strip WARC record separators at tail when present.
+                  body=body.rstrip(b'\r\n')
+                  ok,computed=verify(cid,body)
+                  item={'index':hit['index'],'url':hit['url'],'timestamp':rec.get('timestamp'),'filename':fn,'offset':off,'length':ln,'body_bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'computed':computed,'exact':ok}
+                  if ok:row['exact'].append(item)
+                except Exception as e: row.setdefault('fetch_errors',[]).append({'url':hit['url'],'index':hit['index'],'error':str(e)[:300]})
+          pathlib.Path('final7-commoncrawl-probe.json').write_text(json.dumps({'indexes':indexes,'targets':grouped},indent=2)+'\n')
+          print(json.dumps({cid:{'hits':len(v['index_hits']),'exact':len(v['exact'])} for cid,v in grouped.items()},indent=2))
+          PY
+      - name: Commit result
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add final7-commoncrawl-probe.json
+          git commit -m "Record final seven Common Crawl probe"
+          git push origin HEAD:agent/recover-final-8-archives
