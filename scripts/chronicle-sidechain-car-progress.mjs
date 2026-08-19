@@ -50,6 +50,10 @@ export function updateCarProgressFromLine(state, line) {
     ['[CAR WHOLE-DAG FAILED]', 'whole_dag_failed'],
     ['[CAR BLOCKWISE COMPLETE]', 'blockwise_completed'],
     ['[CAR HISTORICAL CHUNK VERIFIED]', 'historical_chunk_verified'],
+    ['[CAR HISTORICAL REBUILD HASH]', 'historical_rebuild_hash_attempts'],
+    ['[CAR HISTORICAL ROOT REBUILT]', 'historical_roots_rebuilt'],
+    ['[CAR HISTORICAL REBUILD COMPLETE]', 'historical_rebuild_completed'],
+    ['[CAR HISTORICAL REBUILD MISS]', 'historical_rebuild_misses'],
     ['[CAR BLOCK CACHED]', 'block_cache_writes'],
     ['[CAR DELEGATED PROVIDERS]', 'delegated_provider_lookups'],
     ['[CAR DELEGATED PROVIDERS FAILED]', 'delegated_provider_failures'],
@@ -124,7 +128,7 @@ function checkoutAuthorization() {
 
 export function createCarProgress({ out, audit, intervalMs = 30000 }) {
   const state = {
-    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v4',
+    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v5',
     phase: 'car_l1',
     status: 'running',
     run_id: process.env.GITHUB_RUN_ID || null,
@@ -184,7 +188,7 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
           authorization,
           accept: 'application/vnd.github+json',
           'content-type': 'application/json',
-          'user-agent': 'trinity-accord-sidechain-car-progress/4.0',
+          'user-agent': 'trinity-accord-sidechain-car-progress/5.0',
           'x-github-api-version': '2022-11-28',
         },
         body: JSON.stringify({ body }),
