@@ -46,10 +46,8 @@ def read_json(path:pathlib.Path)->dict[str,Any]:
 
 def parse_checksums(path:pathlib.Path)->dict[str,str]:
     out={}
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding='utf-8').splitlines():
         if not line.strip(): continue
-        try,dummy=(None,None)
-        except Exception: pass
         parts=line.split('  ',1)
         if len(parts)!=2 or len(parts[0])!=64: raise SystemExit(f'invalid checksum line: {line!r}')
         digest,name=parts
