@@ -4,6 +4,11 @@
 Posts a compact commit status that exposes the current stage/run URL, writes
 machine-readable workflow telemetry, and emits periodic heartbeats while a
 child process runs. Observability failures never change proof acceptance.
+
+The compact heartbeat is also encoded in the status target URL fragment.  This
+is deliberate: some API/connector views expose context/state/target_url but
+omit the GitHub status description.  The fragment keeps the Actions run link
+clickable while making stage/heartbeat data observable through those views.
 """
 from __future__ import annotations
 
@@ -13,9 +18,8 @@ import json
 import os
 import pathlib
 import subprocess
-import sys
 import time
-import urllib.error
+import urllib.parse
 import urllib.request
 
 DEFAULT_ROOT = pathlib.Path(
@@ -61,6 +65,21 @@ def run_url() -> str:
     return server
 
 
+def status_target_url(state: str, stage: str, message: str) -> str:
+    """Return the run URL plus a connector-visible, navigation-safe fragment."""
+    compact = urllib.parse.urlencode(
+        {
+            "state": state,
+            "stage": stage,
+            "message": message[:220],
+            "attempt": os.getenv("GITHUB_RUN_ATTEMPT", ""),
+        },
+        quote_via=urllib.parse.quote,
+        safe="",
+    )
+    return f"{run_url()}#trinity-observe?{compact}"
+
+
 def state_path() -> pathlib.Path:
     return out_root() / "CURRENT-STAGE.json"
 
@@ -77,6 +96,7 @@ def write_stage(state: str, stage: str, message: str) -> None:
                 "run_attempt": os.getenv("GITHUB_RUN_ATTEMPT"),
                 "sha": os.getenv("GITHUB_SHA"),
                 "url": run_url(),
+                "status_target_url": status_target_url(state, stage, message),
             },
             indent=2,
             sort_keys=True,
@@ -95,11 +115,13 @@ def post_status(state: str, stage: str, message: str) -> bool:
     description = f"{stage}: {message}"
     if len(description) > 140:
         description = description[:137] + "..."
+    target = status_target_url(state, stage, message)
     telemetry(
         "status_update",
         state=state,
         stage=stage,
         description=description,
+        target_url=target,
         run_id=os.getenv("GITHUB_RUN_ID"),
     )
     if not (repo and sha and token):
@@ -115,7 +137,7 @@ def post_status(state: str, stage: str, message: str) -> bool:
             "state": state,
             "context": STATUS_CONTEXT,
             "description": description,
-            "target_url": run_url(),
+            "target_url": target,
         }
     ).encode("utf-8")
     url = f"{api}/repos/{repo}/statuses/{sha}"
@@ -131,7 +153,7 @@ def post_status(state: str, stage: str, message: str) -> bool:
                 "accept": "application/vnd.github+json",
                 "authorization": f"Bearer {token}",
                 "content-type": "application/json",
-                "user-agent": "trinity-accord-ci-observe/1.0",
+                "user-agent": "trinity-accord-ci-observe/1.1",
                 "x-github-api-version": "2022-11-28",
             },
         )
