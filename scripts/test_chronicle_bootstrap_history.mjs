@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 import assert from 'assert/strict';
 import fs from 'fs';
+import { execFileSync } from 'child_process';
 
 const wrapper = fs.readFileSync('scripts/build-chronicle-sidechain-evidence.mjs', 'utf8');
 const corePath = 'scripts/build-chronicle-sidechain-evidence-core.mjs';
 assert.ok(fs.existsSync(corePath), `sidechain evidence builder core missing: ${corePath}`);
 const build = fs.readFileSync(corePath, 'utf8');
+const rebuildPath = 'scripts/rebuild-chronicle-sidechain-cars-from-history.mjs';
+assert.ok(fs.existsSync(rebuildPath), `historical CAR rebuilder missing: ${rebuildPath}`);
+execFileSync(process.execPath, ['--check', rebuildPath], { stdio: 'pipe' });
+const rebuild = fs.readFileSync(rebuildPath, 'utf8');
 const workflowPath = '.github/workflows/chronicle-sidechain-mirror-v3.yml';
 assert.ok(fs.existsSync(workflowPath), `active sidechain workflow missing: ${workflowPath}`);
 assert.ok(!fs.existsSync('.github/workflows/chronicle-sidechain-mirror.yml'), 'retired serial sidechain workflow must remain absent');
@@ -13,7 +18,14 @@ const workflow = fs.readFileSync(workflowPath, 'utf8');
 
 assert.match(wrapper, /auditWholeCarCache/);
 assert.match(wrapper, /installWholeDagFetchGuard/);
+assert.match(wrapper, /rebuildCarsFromHistoricalPayloads/);
+assert.match(wrapper, /cache_audit_after_historical_rebuild/);
 assert.match(wrapper, /build-chronicle-sidechain-evidence-core\.mjs/);
+assert.match(rebuild, /verifyCompleteCar/);
+assert.match(rebuild, /cidSha256Digest/);
+assert.match(rebuild, /kubo_unixfs_exact_root_match/);
+assert.match(rebuild, /\['dag', 'export', rootCid\]/);
+assert.match(rebuild, /computed !== rootCid/);
 assert.match(build, /CHRONICLE_EVIDENCE_REFRESH_HISTORY/);
 assert.match(build, /verified_recovered_tokens_snapshot/);
 assert.match(build, /snapshotHistory\(t\)/);
@@ -36,4 +48,4 @@ assert.match(build, /CAR LASSIE ROOT REUSE/);
 assert.match(build, /CAR KUBO BLOCK VERIFIED/);
 assert.match(build, /singleBlockCar\(cid, data\)/);
 
-console.log('[BOOTSTRAP HISTORY TEST PASS] strict wrapper + preserved snapshot history + layered CAR caches + active v3 workflow');
+console.log('[BOOTSTRAP HISTORY TEST PASS] strict wrapper + historical payload CAR reconstruction + preserved snapshot history + layered CAR caches + active v3 workflow');
