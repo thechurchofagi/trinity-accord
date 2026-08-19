@@ -1,0 +1,101 @@
+name: Fast probe final seven Rarible OG images
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/probe-final7-rarible-og-fast.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/recover-final-8-archives
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; t="$RUNNER_TEMP/tools"; mkdir -p "$t"
+          curl --fail --silent --show-error --location --retry 2 --connect-timeout 10 --max-time 45 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "$KUBO_LINUX_AMD64_SHA512  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$t" kubo/ipfs; chmod +x "$t/kubo/ipfs"
+          echo "KUBO=$t/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Fetch only OpenGraph media and verify exact historical CID
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures, html, json, os, pathlib, re, subprocess, tempfile, urllib.parse, urllib.request
+          targets={
+            'QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT':('POLYGON','0x9a3a7ddde5712b090181937bd7f0a6e2084707e6','0'),
+            'QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva':('POLYGON','0x001007e8ab86f6ba6f477712c8b8db84887d0175','0'),
+            'QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1':('BASE','0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77','0'),
+            'QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah':('BASE','0xf616ba3cfab4d17477d7c63d775666dcb1e5542d','0'),
+            'QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC':('BASE','0x1f26a5a197b4bed502e0a5a05d22b625406d05c1','0'),
+            'bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy':('POLYGON','0xad4bda0b463ace68dd640b14891b00a7fe1caccf','1'),
+            'bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54':('POLYGON','0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d','1'),
+          }
+          kubo=os.environ['KUBO']; headers={'User-Agent':'Mozilla/5.0','Accept':'text/html,*/*'}
+          def fetch(url,limit=30_000_000):
+            try:
+              req=urllib.request.Request(url,headers=headers)
+              with urllib.request.urlopen(req,timeout=10) as r:return True,getattr(r,'status',200),r.geturl(),r.headers.get('content-type',''),r.read(limit+1),None
+            except Exception as e:return False,None,url,'',b'',str(e)
+          def decoded(s):
+            s=html.unescape(s).replace('\\/','/').replace('\\u002F','/').replace('\\u003A',':').replace('\\u0026','&')
+            return urllib.parse.unquote(s)
+          def verify(cid,data):
+            with tempfile.TemporaryDirectory() as td:
+              p=pathlib.Path(td)/'payload';p.write_bytes(data)
+              modes=[('0','false')] if cid.startswith('Qm') else [('1','true'),('1','false')]
+              checks=[]
+              for v,raw in modes:
+                try:
+                  got=subprocess.check_output([kubo,'add','-Q','--only-hash','--pin=false',f'--cid-version={v}',f'--raw-leaves={raw}',str(p)],text=True,stderr=subprocess.STDOUT,timeout=20).strip()
+                  checks.append({'cid_version':v,'raw_leaves':raw,'computed':got})
+                  if got==cid:return True,checks
+                except Exception as e:checks.append({'cid_version':v,'raw_leaves':raw,'error':str(e)[:240]})
+              return False,checks
+          def one(cid,t):
+            chain,c,token=t; page=f'https://og.rarible.com/token/{chain}-{c}:{token}'
+            ok,status,final,typ,body,err=fetch(page,2_000_000); text=body.decode('utf-8','replace') if body else ''
+            metas=[]; urls=[]
+            for tag in re.findall(r'<meta\\b[^>]*>',text,re.I):
+              props=re.search(r'(?:property|name)=["\']([^"\']+)',tag,re.I); cont=re.search(r'content=["\']([^"\']+)',tag,re.I)
+              if props and cont and props.group(1).lower() in ('og:image','og:image:url','twitter:image','twitter:image:src'):
+                u=decoded(cont.group(1)); metas.append({'property':props.group(1),'content':u});
+                if u.startswith('http'):urls.append(u)
+            attempts=[]; exact=[]
+            for u in dict.fromkeys(urls):
+              rok,rs,rf,rt,rb,re_=fetch(u)
+              a={'url':u,'ok':rok,'status':rs,'final_url':rf,'type':rt,'bytes':len(rb),'error':re_}
+              if rok and rb:
+                vok,checks=verify(cid,rb);a['cid_checks']=checks;a['exact']=vok
+                if vok:
+                  d=pathlib.Path('rarible-og-fast-recovered');d.mkdir(exist_ok=True);p=d/(cid+'.bin');p.write_bytes(rb);a['saved_file']=str(p);exact.append({'root_cid':cid,'url':u,'bytes':len(rb),'file':str(p)})
+              attempts.append(a)
+            return cid,{'coordinate':f'{chain}:{c}:{token}','page':{'ok':ok,'status':status,'final_url':final,'bytes':len(body),'error':err},'og_media':metas,'attempts':attempts,'exact':bool(exact)},exact
+          report={'schema':'trinity-accord/final-seven-rarible-og-fast/v1','exact_recovered':[],'targets':{}}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=7) as ex:
+            futs=[ex.submit(one,cid,t) for cid,t in targets.items()]
+            for f in concurrent.futures.as_completed(futs):
+              cid,row,exact=f.result();report['targets'][cid]=row;report['exact_recovered']+=exact;print(cid,row['page']['status'],len(row['og_media']),len(row['attempts']),'EXACT' if row['exact'] else 'no-exact')
+          pathlib.Path('final7-rarible-og-fast.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps({'exact_recovered':len(report['exact_recovered']),'cids':[x['root_cid'] for x in report['exact_recovered']]},indent=2))
+          PY
+      - name: Commit report
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add final7-rarible-og-fast.json rarible-og-fast-recovered
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record fast Rarible OG recovery probe"
+          git push origin HEAD:agent/recover-final-8-archives
