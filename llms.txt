@@ -82,6 +82,9 @@ Operational source-of-truth order:
 Current machine start:
   /api/agent-start.v2.json
 
+Mission governance:
+  /api/mission-governance.v1.json
+
 Agent in-context oath readback:
   Required before every formal Record-Chain record.
   Sequence: LOAD -> READBACK -> CHECK -> SIGN.
