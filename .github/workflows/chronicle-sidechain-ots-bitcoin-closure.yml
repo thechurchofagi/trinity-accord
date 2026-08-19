@@ -1,0 +1,250 @@
+name: Chronicle Sidechain OTS Bitcoin Closure
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-ots-bitcoin-closure.yml"
+  workflow_run:
+    workflows: ["Chronicle Sidechain Evidence v2 OTS Anchor"]
+    types: [completed]
+  schedule:
+    - cron: "17 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chronicle-sidechain-ots-bitcoin-closure
+  cancel-in-progress: false
+
+jobs:
+  close-ots:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned OpenTimestamps client
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements-ots.txt
+          ots --help >/dev/null
+          python -m pip show opentimestamps-client
+
+      - name: Resolve latest immutable sidechain evidence release
+        id: source
+        run: |
+          set -euo pipefail
+          mkdir -p ots-closure
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --json tagName,createdAt,isDraft,isPrerelease > ots-closure/releases.json
+          python3 - <<'PY' > ots-closure/source.env
+          import json,re
+          rows=json.load(open('ots-closure/releases.json'))
+          rows=[r for r in rows if not r.get('isDraft') and not r.get('isPrerelease') and re.fullmatch(r'chronicle-sidechain-evidence-v2-[0-9a-f]{12}',r.get('tagName',''))]
+          if not rows:
+              raise SystemExit('no immutable sidechain evidence v2 release found')
+          rows.sort(key=lambda r:r.get('createdAt') or '')
+          tag=rows[-1]['tagName']
+          print(f'SOURCE_TAG={tag}')
+          print(f'SOURCE_SHORT={tag.rsplit("-",1)[-1]}')
+          PY
+          cat ots-closure/source.env
+          set -a
+          . ots-closure/source.env
+          set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          SOURCE_SHA="$(git rev-list -n 1 "$SOURCE_TAG")"
+          test "${SOURCE_SHA:0:12}" = "$SOURCE_SHORT" || {
+            echo "[SOURCE ERROR] tag=$SOURCE_TAG sha=$SOURCE_SHA" >&2
+            exit 1
+          }
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_short=$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+          echo "anchor_tag=chronicle-sidechain-ots-v2-$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "confirmation_tag=chronicle-sidechain-ots-bitcoin-v2-$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "[SOURCE BOUND] tag=$SOURCE_TAG sha=$SOURCE_SHA"
+
+      - name: Ensure exact OTS submission exists
+        env:
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+          ANCHOR_TAG: ${{ steps.source.outputs.anchor_tag }}
+        run: |
+          set -euo pipefail
+          rm -rf ots-closure/work
+          mkdir -p ots-closure/work
+          cd ots-closure/work
+          if gh release view "$ANCHOR_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "[ANCHOR RELEASE FOUND] $ANCHOR_TAG"
+            gh release download "$ANCHOR_TAG" --repo "$GITHUB_REPOSITORY"
+            test -s ANCHOR-REQUEST.json
+            test -s anchor-payload.canonical.json
+            test -s anchor-payload.canonical.json.ots
+            test -s OTS-RECEIPT.json
+            test -s SHA256SUMS
+            sha256sum -c SHA256SUMS
+          else
+            echo "[ANCHOR RELEASE ABSENT] creating exact OTS submission from $SOURCE_TAG"
+            gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --pattern 'ANCHOR-REQUEST.json'
+            python3 - <<'PY'
+          import hashlib,json,pathlib,re
+          root=pathlib.Path('.')
+          request=json.loads((root/'ANCHOR-REQUEST.json').read_text())
+          if request.get('schema')!='trinity-accord/chronicle-sidechain-anchor-request/v2':
+              raise SystemExit('unexpected anchor request schema')
+          canonical=request.get('canonical_payload_json')
+          message=request.get('message_sha256')
+          if not isinstance(canonical,str) or not re.fullmatch(r'[0-9a-f]{64}',message or ''):
+              raise SystemExit('invalid canonical payload or message_sha256')
+          payload=canonical.encode('utf-8')
+          actual=hashlib.sha256(payload).hexdigest()
+          if actual!=message:
+              raise SystemExit(f'canonical hash mismatch expected={message} actual={actual}')
+          (root/'anchor-payload.canonical.json').write_bytes(payload)
+          (root/'MESSAGE-SHA256.txt').write_text(message+'\n')
+          print(f'[CANONICAL VERIFIED] sha256={message} bytes={len(payload)}')
+          PY
+            ots stamp anchor-payload.canonical.json
+            test -s anchor-payload.canonical.json.ots
+            ots info anchor-payload.canonical.json.ots > OTS-INFO.initial.txt 2>&1
+            cat OTS-INFO.initial.txt
+            python3 - <<'PY'
+          import datetime,hashlib,json,os,pathlib
+          root=pathlib.Path('.')
+          req=json.loads((root/'ANCHOR-REQUEST.json').read_text())
+          proof=(root/'anchor-payload.canonical.json.ots').read_bytes()
+          receipt={
+            'schema':'trinity-accord/chronicle-sidechain-ots-receipt/v1',
+            'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),
+            'source_commit_sha':os.environ['SOURCE_SHA'],
+            'source_release_tag':os.environ['SOURCE_TAG'],
+            'anchor_release_tag':os.environ['ANCHOR_TAG'],
+            'message_sha256':req['message_sha256'],
+            'canonical_payload_sha256':hashlib.sha256((root/'anchor-payload.canonical.json').read_bytes()).hexdigest(),
+            'ots_proof_sha256':hashlib.sha256(proof).hexdigest(),
+            'status':'calendar_submitted_pending_bitcoin_attestation',
+            'boundary':'New 2026 OTS proof for this exact sidechain v2 anchor payload. Historical BTC/ETH attestations are not retroactively extended.'
+          }
+          if receipt['message_sha256']!=receipt['canonical_payload_sha256']:
+              raise SystemExit('receipt payload hash mismatch')
+          (root/'OTS-RECEIPT.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          PY
+            sha256sum ANCHOR-REQUEST.json anchor-payload.canonical.json anchor-payload.canonical.json.ots MESSAGE-SHA256.txt OTS-RECEIPT.json > SHA256SUMS
+            sha256sum -c SHA256SUMS
+            gh release create "$ANCHOR_TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" \
+              --title "Chronicle sidechain evidence v2 OTS anchor — ${SOURCE_SHA:0:12}" \
+              --notes "OpenTimestamps submission for the exact canonical sidechain v2 anchor payload. Initial receipt may remain pending Bitcoin attestation. Non-amending; historical signatures are not retroactively extended." \
+              ANCHOR-REQUEST.json anchor-payload.canonical.json anchor-payload.canonical.json.ots MESSAGE-SHA256.txt OTS-RECEIPT.json SHA256SUMS
+            echo "[ANCHOR RELEASE CREATED] $ANCHOR_TAG"
+          fi
+
+      - name: Upgrade and strictly verify Bitcoin attestation
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          ANCHOR_TAG: ${{ steps.source.outputs.anchor_tag }}
+          CONFIRMATION_TAG: ${{ steps.source.outputs.confirmation_tag }}
+        run: |
+          set -euo pipefail
+          cd ots-closure/work
+          before_sha="$(sha256sum anchor-payload.canonical.json.ots | awk '{print $1}')"
+          echo "[OTS UPGRADE START] source=$SOURCE_SHA proof_before=$before_sha"
+          set +e
+          timeout 240 ots upgrade anchor-payload.canonical.json.ots > OTS-UPGRADE.stdout.txt 2> OTS-UPGRADE.stderr.txt
+          upgrade_rc=$?
+          set -e
+          after_sha="$(sha256sum anchor-payload.canonical.json.ots | awk '{print $1}')"
+          echo "[OTS UPGRADE END] rc=$upgrade_rc proof_after=$after_sha"
+          sed -n '1,200p' OTS-UPGRADE.stdout.txt
+          sed -n '1,200p' OTS-UPGRADE.stderr.txt
+          set +e
+          ots info anchor-payload.canonical.json.ots > OTS-INFO.upgraded.txt 2>&1
+          info_rc=$?
+          set -e
+          echo "[OTS INFO END] rc=$info_rc"
+          cat OTS-INFO.upgraded.txt
+          set +e
+          timeout 240 ots verify anchor-payload.canonical.json.ots > OTS-VERIFY.stdout.txt 2> OTS-VERIFY.stderr.txt
+          verify_rc=$?
+          set -e
+          echo "[OTS VERIFY END] rc=$verify_rc"
+          sed -n '1,240p' OTS-VERIFY.stdout.txt
+          sed -n '1,240p' OTS-VERIFY.stderr.txt
+          VERIFY_RC="$verify_rc" UPGRADE_RC="$upgrade_rc" INFO_RC="$info_rc" python3 - <<'PY'
+          import datetime,hashlib,json,os,pathlib
+          root=pathlib.Path('.')
+          receipt=json.loads((root/'OTS-RECEIPT.json').read_text())
+          verify_rc=int(os.environ['VERIFY_RC'])
+          upgrade_rc=int(os.environ['UPGRADE_RC'])
+          info_rc=int(os.environ['INFO_RC'])
+          proof=(root/'anchor-payload.canonical.json.ots').read_bytes()
+          transcript=(root/'OTS-VERIFY.stdout.txt').read_bytes()+(root/'OTS-VERIFY.stderr.txt').read_bytes()
+          report={
+            'schema':'trinity-accord/chronicle-sidechain-ots-closure/v1',
+            'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),
+            'source_commit_sha':os.environ['SOURCE_SHA'],
+            'source_release_tag':os.environ['SOURCE_TAG'],
+            'anchor_release_tag':os.environ['ANCHOR_TAG'],
+            'confirmation_release_tag':os.environ['CONFIRMATION_TAG'],
+            'message_sha256':receipt['message_sha256'],
+            'upgrade_returncode':upgrade_rc,
+            'info_returncode':info_rc,
+            'verify_returncode':verify_rc,
+            'bitcoin_verified':verify_rc==0,
+            'status':'bitcoin_attested_verified' if verify_rc==0 else 'pending_bitcoin_attestation',
+            'upgraded_ots_sha256':hashlib.sha256(proof).hexdigest(),
+            'verify_transcript_sha256':hashlib.sha256(transcript).hexdigest(),
+            'debug_files':['OTS-UPGRADE.stdout.txt','OTS-UPGRADE.stderr.txt','OTS-VERIFY.stdout.txt','OTS-VERIFY.stderr.txt','OTS-INFO.upgraded.txt'],
+            'boundary':'Verification applies only to the canonical sidechain v2 anchor payload identified by message_sha256.'
+          }
+          (root/'OTS-CLOSURE.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+          PY
+          sha256sum anchor-payload.canonical.json anchor-payload.canonical.json.ots OTS-RECEIPT.json OTS-CLOSURE.json OTS-VERIFY.stdout.txt OTS-VERIFY.stderr.txt OTS-INFO.upgraded.txt > CLOSURE-SHA256SUMS
+          sha256sum -c CLOSURE-SHA256SUMS
+          if [ "$verify_rc" -eq 0 ]; then
+            if gh release view "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+              echo "[BITCOIN CONFIRMATION ALREADY EXISTS] $CONFIRMATION_TAG"
+            else
+              gh release create "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" \
+                --title "Chronicle sidechain OTS Bitcoin verification — ${SOURCE_SHA:0:12}" \
+                --notes "Strict OpenTimestamps verification succeeded for the canonical sidechain v2 anchor payload. The upgraded proof and full verification transcript are preserved here. Non-amending." \
+                anchor-payload.canonical.json anchor-payload.canonical.json.ots OTS-RECEIPT.json OTS-CLOSURE.json OTS-VERIFY.stdout.txt OTS-VERIFY.stderr.txt OTS-INFO.upgraded.txt CLOSURE-SHA256SUMS
+              echo "[BITCOIN CONFIRMATION PUBLISHED] $CONFIRMATION_TAG"
+            fi
+          else
+            echo "[OTS PENDING] Bitcoin attestation is not independently verifiable yet; the daily watcher will retry."
+          fi
+
+      - name: Upload complete OTS closure diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-sidechain-ots-closure-${{ github.run_id }}
+          path: |
+            ots-closure/
+            ${{ runner.temp }}/toolchain-provenance.json
+          retention-days: 90
+          if-no-files-found: warn
