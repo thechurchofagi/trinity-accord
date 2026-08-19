@@ -37,6 +37,16 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          mkdir -p ots-confirmation-publish/source-artifact
+          python3 scripts/toolchain_provenance.py | tee ots-confirmation-publish/source-artifact/TOOLCHAIN-PROVENANCE.json
+          test -s ots-confirmation-publish/source-artifact/TOOLCHAIN-PROVENANCE.json
+          echo "[TOOLCHAIN PROVENANCE]"
+          stat -c '%n bytes=%s' ots-confirmation-publish/source-artifact/TOOLCHAIN-PROVENANCE.json
+          sha256sum ots-confirmation-publish/source-artifact/TOOLCHAIN-PROVENANCE.json
+
       - name: Download successful strict-verification artifact
         run: |
           set -euo pipefail
