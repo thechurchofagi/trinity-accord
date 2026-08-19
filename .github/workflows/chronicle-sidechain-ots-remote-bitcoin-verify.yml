@@ -25,7 +25,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       BITCOIN_RPC_URL_SECRET: ${{ secrets.BITCOIN_RPC_URL }}
-      BITCOIN_PUBLIC_RPC_URL: https://bitcoin-rpc.publicnode.com
+      BITCOIN_PUBLIC_RPC_URL: https://bitcoin.drpc.org
       STATUS_CONTEXT: trinity/sidechain-ots
     steps:
       - name: Checkout current source
@@ -137,7 +137,7 @@ jobs:
             rpc_source="secret"
           else
             bitcoin_rpc="$BITCOIN_PUBLIC_RPC_URL"
-            rpc_source="publicnode"
+            rpc_source="drpc"
           fi
           export BITCOIN_RPC_SELECTED="$bitcoin_rpc"
           python3 - <<'PY'
@@ -148,7 +148,7 @@ jobs:
           print(f'[BITCOIN RPC SELECTED] endpoint={safe}')
           req=urllib.request.Request(
               url,
-              data=json.dumps({'jsonrpc':'1.0','id':'trinity-ots-preflight','method':'getblockchaininfo','params':[]}).encode(),
+              data=json.dumps({'jsonrpc':'2.0','id':'trinity-ots-preflight','method':'getblockchaininfo','params':[]}).encode(),
               headers={'Content-Type':'application/json'},
               method='POST',
           )
