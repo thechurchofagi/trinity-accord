@@ -1,0 +1,85 @@
+name: Extract final seven historical source hints
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/extract-final7-historical-sources.yml]
+
+permissions:
+  contents: write
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
+
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/recover-final-8-archives
+      - name: Restore immutable v1 snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          t="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$t" --pattern "$BOOTSTRAP_ARCHIVE"
+          echo "$BOOTSTRAP_ARCHIVE_SHA256  $t/$BOOTSTRAP_ARCHIVE" | sha256sum --check --strict
+          mkdir -p artifacts
+          tar -xzf "$t/$BOOTSTRAP_ARCHIVE" -C artifacts
+      - name: Extract target records, files and URLs
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, re, hashlib
+          root=pathlib.Path('artifacts/chronicle-sidechain-scan')
+          targets={
+            'QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT':('polygon','0x9a3a7ddde5712b090181937bd7f0a6e2084707e6','0','media:image'),
+            'QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva':('polygon','0x001007e8ab86f6ba6f477712c8b8db84887d0175','0','media:image'),
+            'QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1':('base','0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77','0','media:image'),
+            'QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah':('base','0xf616ba3cfab4d17477d7c63d775666dcb1e5542d','0','media:image'),
+            'QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC':('base','0x1f26a5a197b4bed502e0a5a05d22b625406d05c1','0','media:image'),
+            'bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy':('polygon','0xad4bda0b463ace68dd640b14891b00a7fe1caccf','1','metadata'),
+            'bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54':('polygon','0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d','1','metadata'),
+          }
+          records=json.loads((root/'recovered-tokens.json').read_text())
+          index={}
+          for r in records:
+            chain='polygon' if int(r.get('chain_id',0))==137 else 'base' if int(r.get('chain_id',0))==8453 else str(r.get('chain'))
+            index[(chain,str(r.get('contract','')).lower(),str(r.get('token_id')))]=r
+          urlre=re.compile(r'https?://[^\s"\'<>]+|ipfs://[^\s"\'<>]+')
+          out={'schema':'trinity-accord/final-seven-historical-source-hints/v1','targets':{}}
+          for cid,(chain,contract,tid,role) in targets.items():
+            rec=index.get((chain,contract,tid))
+            d=root/chain/contract/tid
+            files=[]; urls=set()
+            if rec:
+              text=json.dumps(rec,ensure_ascii=False)
+              urls.update(urlre.findall(text))
+            if d.exists():
+              for p in sorted(d.rglob('*')):
+                if not p.is_file(): continue
+                b=p.read_bytes(); item={'path':str(p.relative_to(root)),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+                if len(b)<=2_000_000:
+                  try:
+                    s=b.decode('utf-8'); found=sorted(set(urlre.findall(s))); item['urls']=found; urls.update(found)
+                    if p.suffix.lower()=='.json':
+                      try:item['json']=json.loads(s)
+                      except Exception:pass
+                  except Exception:pass
+                files.append(item)
+            out['targets'][cid]={'coordinate':[chain,contract,tid],'role':role,'record':rec,'files':files,'all_urls':sorted(urls)}
+          pathlib.Path('final7-historical-sources.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({cid:{'urls':len(v['all_urls']),'files':len(v['files'])} for cid,v in out['targets'].items()},indent=2))
+          PY
+      - name: Commit extracted hints to research branch
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add final7-historical-sources.json
+          git commit -m "Record final seven historical source hints"
+          git push origin HEAD:agent/recover-final-8-archives
