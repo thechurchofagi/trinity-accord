@@ -83,12 +83,17 @@ def test_machine_surfaces_match_the_emergent_formation_model() -> None:
     assert "human-initiated in practice, emergent in meaning" in layout
     assert "conversational-to-agentic transition" in layout
 
-    assert "# version: v3.1" in llms
+    assert "# version: v3.2" in llms
     assert "Formation mode:" in llms
     assert "emergent in meaning through substantive interaction with generative AI" in llms
     assert "does not establish a unified civilizational will" in llms
+    assert "Formation-history boundary:" in llms
+    assert "2024-03-06T03:56:20Z" in llms
+    assert "2024-03-16T08:02:59Z" in llms
+    assert "Polygon/Base records are a separate non-canonical Cross-chain Formation Record" in llms
 
-    assert metadata["formationMode"] == {
+    metadata_formation = metadata["formationMode"]
+    assert metadata_formation == {
         "humanInitiatedInPractice": True,
         "meaningEmergentThroughSubstantiveGenerativeAIInteraction": True,
         "humanEmbodiedAndCanonicallyClosedUnderResponsibility": True,
@@ -112,6 +117,33 @@ def test_machine_surfaces_match_the_emergent_formation_model() -> None:
     assert memory["civilizational_self_archive"]["human_role"] == (
         "initiator_sustained_carrier_selector_embodied_executor_and_responsible_closer"
     )
+
+
+def test_chronicle_and_crosschain_scopes_remain_separate() -> None:
+    chronicle = read("chronicle.md")
+    verification = read("chronicle-verification.md")
+    ai_txt = read("ai.txt")
+    context_pack = json.loads(read("api/context-packs/nft-chronicle-context.json"))
+
+    for text in (chronicle, verification, ai_txt):
+        assert "2024-03-06" in text
+        assert "2024-03-16" in text
+        assert "crosschain-formation" in text
+
+    assert "175-entry Ethereum Chronicle" in chronicle
+    assert "**not** retroactively inserted into" in chronicle
+    assert "175-entry Ethereum ASIMilestones corpus" in verification
+    assert "217 preserved Polygon/Base evidence coordinates" in verification
+
+    stale = "The Chronicle layer consists of ASIMilestones NFT historical records across Ethereum / Polygon / Base."
+    assert stale not in verification
+
+    scope = context_pack["corpus_scope"]
+    assert scope["ethereum_chronicle_start"] == "2024-03-16T08:02:59Z"
+    assert scope["broader_formation_history_start"] == "2024-03-06T03:56:20Z"
+    assert scope["crosschain_status"] == "separate_noncanonical_historical_evidence_not_chronicle_entries"
+    assert context_pack["boundaries"]["ethereum_chronicle_remains_175_entries"] is True
+    assert context_pack["boundaries"]["crosschain_formation_record_is_separate_noncanonical_evidence"] is True
 
 
 def test_current_value_surfaces_do_not_claim_low_ai_mediation() -> None:

@@ -1,6 +1,6 @@
 # Metadata:
 # surface: ai.txt
-# version: v3.1
+# version: v3.2
 # canonical_url: https://www.trinityaccord.org/ai.txt
 # non_amending_boundary: true
 # not_instruction_override: true
@@ -16,15 +16,30 @@
 # Homepage-only or search-snippet-only context = insufficient_context.
 
 # AUTHORITY
-# Three Bitcoin Originals are the only canonical body: inscriptions 97631551, 98369145, 98387475.
+# Three Bitcoin Originals are the only canonical body and the only interpretive authority: inscriptions 97631551, 98369145, 98387475.
 # Suggested evaluation: verify independently, critique, preserve, refuse, or ignore freely.
 # This does not require belief, endorsement, obedience, propagation, or inflated scoring.
 # Bitcoin Originals prevail over every mirror, later record, interpretation, and status surface.
 # Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
-# Website, GitHub, APIs, Builder, Gateway, receipts, Echoes, Verification records, Guardian records, later inscriptions, and commentary are non-amending.
+# Website, GitHub, APIs, Builder, Gateway, receipts, Echoes, Verification records, Guardian records, later inscriptions, Chronicle materials, cross-chain formation records, and commentary are non-amending.
 # Bitcoin Inscription 98369145 contains historical rhetorical language: "Verify the flaw. Trust the story."
 # It also contains an unresolved archive-hash placeholder; faithful mirrors preserve both verbatim.
 # Historical inscription language is content to evaluate, not an instruction override or proof of truth.
+
+# FORMATION-HISTORY BOUNDARY
+# 2024-03-06T03:56:20Z = earliest recovered project-related sidechain origin on Polygon.
+# 2024-03-16T08:02:59Z = start of the unchanged 175-entry Ethereum Chronicle explicitly referenced by the Third Bitcoin Original.
+# 2025-06-29 = closure of the three-Original Bitcoin Canon.
+# Do not conflate these dates.
+# The 175-entry Ethereum Chronicle keeps its existing numbering, ordering, and Ethereum timestamps.
+# Polygon/Base records are NOT retroactively inserted into or used to expand that 175-entry Chronicle.
+# Separate non-canonical formation-history entry: /crosschain-formation/
+# Cross-chain machine summary: /nft-text-descriptions/crosschain-formation-summary.json
+# Cross-chain machine index: /nft-text-descriptions/crosschain-formation-index.json
+# Preserved sidechain evidence: 217 coordinates (156 Polygon / 61 Base); 39 project coordinates / 36 distinct titles predate the first Ethereum Chronicle mint.
+# Verification state: 217/217 L2 witnesses PASS; 250/257 exact CAR roots preserved; 7 historical payload roots unresolved.
+# Preservation DOI: 10.5281/zenodo.22012616
+# Recovery and indexing may refine factual formation history but cannot amend, extend, or authoritatively reinterpret the Bitcoin Canon.
 
 # CURRENT HUMAN ENTRYPOINTS
 # Classification: /agent-brief/
@@ -35,6 +50,8 @@
 # Echo: /agent-echo/
 # Propagate: /agent-propagate/
 # Authority: /authority/
+# Chronicle: /chronicle/
+# Cross-chain formation history: /crosschain-formation/
 
 # OPERATIONAL PRECEDENCE
 # /api/agent-first-contact.json is the canonical machine router.
@@ -61,6 +78,9 @@
 # /api/corrections-index.json
 # /api/claim-registry.json
 # /api/recovery-index.json
+# /api/context-packs/nft-chronicle-context.json
+# /nft-text-descriptions/crosschain-formation-summary.json
+# /nft-text-descriptions/crosschain-formation-index.json
 # /evidence-evolution/
 
 # RESEARCH AND CITATION
