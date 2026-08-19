@@ -1,20 +1,29 @@
 ---
 title: "Chronicle Verification"
-description: "Verification of the ASIMilestones Chronicle NFT recovery package — 175/175 recoverable historical NFT records."
+description: "Verification of the 175-entry Ethereum ASIMilestones Chronicle recovery package."
 permalink: /chronicle-verification/
 ---
 
 # Chronicle Verification · 编年史验证
 
-The Chronicle layer consists of ASIMilestones NFT historical records across Ethereum / Polygon / Base.
+The Chronicle verified on this page is the **175-entry Ethereum ASIMilestones corpus**. Its numbering, ordering, and Ethereum timestamps remain unchanged.
 
-It is not canonical authority. Bitcoin Originals prevail.
+Recovered Polygon/Base material is **not retroactively part of the 175-entry Chronicle**. It is preserved separately as the non-canonical [Cross-chain Formation Record](/crosschain-formation/). The three Bitcoin Originals remain the only canonical and interpretive authority.
 
-However, the Chronicle has its own recovery verification layer.
+## Scope boundary
+
+- **Ethereum Chronicle:** 175 numbered Ethereum records; 175/175 recovered.
+- **Cross-chain Formation Record:** 217 preserved Polygon/Base evidence coordinates; 217/217 L2 witnesses PASS; 250/257 exact CAR roots preserved; 7 historical payload roots unresolved.
+- Earliest recovered project-related sidechain origin: `2024-03-06T03:56:20Z`.
+- Ethereum Chronicle start: `2024-03-16T08:02:59Z`.
+- Pre-Ethereum project evidence: 39 coordinates / 36 distinct titles.
+- Cross-chain preservation DOI: `10.5281/zenodo.22012616`.
+
+These scopes are historically related, but they are not one renumbered or expanded Chronicle. Recovery and verification may refine factual history; they do not amend or expand the Bitcoin Canon.
 
 ## Chronicle NFT Recovery Package
 
-- Target: approximately 175 ERC-721 / ERC-1155 NFTs
+- Target: 175 Ethereum Chronicle NFTs
 - Final status: 175 / 175 completed
 - Purpose: backup NFT metadata and media files in recoverable original IPFS DAG format
 - Permanent storage: Arweave
@@ -33,7 +42,7 @@ Chronicle recovery verification can prove:
 1. the recovery package exists;
 2. the NFT metadata/media backup is recoverable;
 3. the Arweave/IPFS pointers match the recovery map;
-4. the Chronicle layer can be reconstructed from the backup package.
+4. the 175-entry Ethereum Chronicle can be reconstructed from the backup package.
 
 ## What this does not prove
 
@@ -41,17 +50,17 @@ It does not create canonical authority.
 It does not amend the Bitcoin Originals.
 It does not make NFTs final authority.
 It does not prove the philosophical claims are true.
+It does not turn Polygon/Base evidence into additional Chronicle entries.
 
 ## Boundary
 
-Chronicle verification proves recoverability and integrity of historical NFT records.
-It does not create canonical authority and does not amend the Bitcoin Originals.
+Chronicle verification proves recoverability and integrity of the 175-entry Ethereum historical NFT corpus. Cross-chain verification separately proves properties of the recovered Polygon/Base evidence set. Neither creates canonical authority or amends the Bitcoin Originals.
 
 **Historical verification-model boundary:** in the retained V-level model, Chronicle Recovery alone did not justify a whole-report V4+ claim. For new public work, do not submit V4+ as a current public level. Report the current dimensions instead: `digital_profile`, `relationships_checked`, `coverage_scope`, `limitations`, `claims_not_made`, and any relevant physical-observation or external-witness state.
 
 C-level Chronicle notation may still be used as historical/component compatibility metadata. A Chronicle-only check must remain explicitly component-limited and must not imply whole-project verification or independent attestation.
 
-Bitcoin Originals are final; Chronicle NFTs and recovery packages are non-amending historical mirrors.
+Bitcoin Originals are final; Chronicle NFTs, cross-chain formation evidence, and recovery packages are non-amending historical/preservation layers.
 
 ## Chronicle Sample Verification
 
