@@ -111,9 +111,9 @@ jobs:
           echo "[OTS RUN WATCH END] run_id=$RUN_ID rc=$watch_rc"
           gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --json databaseId,status,conclusion,url,headSha,createdAt,updatedAt,jobs > "$RUNNER_TEMP/ots-run.json"
           cat "$RUNNER_TEMP/ots-run.json"
-          gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log > "$RUNNER_TEMP/ots-run.log" 2>&1 || true
+          gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log > "$RUNNER_TEMP/ots-run.log" 2>&1
           echo "[OTS RUN LOG TAIL]"
-          tail -n 240 "$RUNNER_TEMP/ots-run.log" || true
+          tail -n 240 "$RUNNER_TEMP/ots-run.log"
 
       - name: Classify strict Bitcoin verification result
         env:
