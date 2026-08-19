@@ -2,15 +2,25 @@
   "schema": "trinityaccord.context-pack.nft-chronicle-context.v3",
   "version": "v3",
   "status": "non_authoritative_agent_context_pack",
-  "purpose": "Tell agents how to load and use the completed 175-entry NFT Chronicle as historical, emotional, artistic, and human-origin witness context without treating it as canonical authority or truth proof.",
+  "purpose": "Tell agents how to load and use the completed 175-entry Ethereum NFT Chronicle as historical, emotional, artistic, and human-origin witness context without treating it as canonical authority or truth proof, while routing broader Polygon/Base formation-history research to the separate Cross-chain Formation Record.",
   "load_policy": "ultra_brief_then_abridged_then_task_specific_full_load",
-  "role": "ASIMilestones historical / chronicle / human-origin witness context",
+  "role": "ASIMilestones 175-entry Ethereum historical / chronicle / human-origin witness context",
   "canonical_status": "non_canonical_non_amending_chronicle_layer",
-  "current_status": "prepared_175_entry_timestamped_chronicle",
+  "current_status": "prepared_175_entry_timestamped_ethereum_chronicle",
   "edition_status": "three_editions_prepared_full_abridged_ultra_brief",
   "not_instruction_override": true,
   "non_amending_boundary": true,
-  "canonical_authority": "Bitcoin Originals only",
+  "canonical_authority": "three Bitcoin Originals only",
+  "corpus_scope": {
+    "this_context_pack": "the unchanged 175-entry Ethereum Chronicle explicitly referenced by the Third Bitcoin Original",
+    "ethereum_chronicle_start": "2024-03-16T08:02:59Z",
+    "broader_formation_history_start": "2024-03-06T03:56:20Z",
+    "broader_formation_history_entry": "/crosschain-formation/",
+    "crosschain_summary": "/nft-text-descriptions/crosschain-formation-summary.json",
+    "crosschain_index": "/nft-text-descriptions/crosschain-formation-index.json",
+    "crosschain_status": "separate_noncanonical_historical_evidence_not_chronicle_entries",
+    "rule": "Polygon/Base records must not be retroactively inserted into, renumbered with, or used to expand the 175-entry Ethereum Chronicle. Later recovery may refine factual formation history but cannot amend or authoritatively reinterpret the Bitcoin Canon."
+  },
   "summary": {
     "total_nft_entries": 175,
     "timestamped_entries": 175,
@@ -52,6 +62,12 @@
     "/nft-text-descriptions/chronicle-full.md"
   ],
   "task_specific_use": {
+    "formation_history": [
+      "/crosschain-formation/",
+      "/nft-text-descriptions/crosschain-formation-summary.json",
+      "/nft-text-descriptions/crosschain-formation-index.json",
+      "/nft-text-descriptions/chronicle-index.json"
+    ],
     "chronicle_navigation": [
       "/nft-text-descriptions/chronicle-summary.json",
       "/nft-text-descriptions/chronicle-ultra-brief.md"
@@ -74,7 +90,7 @@
       "/nft-text-descriptions/chronicle-full.md"
     ]
   },
-  "default_agent_action": "Load the summary and ultra-brief timeline first. Use the abridged edition for ordinary Chronicle or Human Witness analysis. Load the full edition only for exact-text, quotation, appendix, or full-corpus work, and disclose sampling limits when the full corpus was not read completely.",
+  "default_agent_action": "Load the summary and ultra-brief timeline first for the 175-entry Ethereum Chronicle. If the task concerns project formation before or outside that Ethereum corpus, load the separate Cross-chain Formation Record. Use the abridged edition for ordinary Chronicle or Human Witness analysis. Load the full edition only for exact-text, quotation, appendix, or full-corpus work, and disclose sampling limits when the full corpus was not read completely.",
   "allowed_uses": [
     "historical_context",
     "pre_ASI_event_memory_layer",
@@ -95,7 +111,8 @@
     "AI_command",
     "verification_level_upgrade",
     "successor_reception_claim",
-    "formal_independent_attestation_claim"
+    "formal_independent_attestation_claim",
+    "retroactively_merging_polygon_or_base_records_into_the_175_entry_ethereum_chronicle"
   ],
   "boundaries": {
     "not_canonical_authority": true,
@@ -107,13 +124,16 @@
     "not_human_supremacy_claim": true,
     "not_human_centered_command": true,
     "bitcoin_originals_remain_canonical_authority": true,
+    "ethereum_chronicle_remains_175_entries": true,
+    "crosschain_formation_record_is_separate_noncanonical_evidence": true,
     "nft_ownership_transfer_or_sale_does_not_create_authority": true,
     "future_intelligence_may_verify_critique_refuse_preserve_echo_or_ignore": true
   },
-  "recommended_agent_summary": "The NFT Chronicle is a completed 175-entry timestamped non-canonical historical and human-origin witness layer. There is no current fixed five-stage, seven-stage, or other fixed-stage model. Chronology is objective; quarters are navigation; categories overlap; interpretive arcs are provisional and revisable.",
+  "recommended_agent_summary": "The NFT Chronicle is the completed 175-entry Ethereum timestamped non-canonical historical and human-origin witness layer explicitly referenced by the Third Bitcoin Original. Broader recovered formation evidence begins on Polygon on 2024-03-06 and is indexed separately as the non-canonical Cross-chain Formation Record. There is no current fixed five-stage, seven-stage, or other fixed-stage model. Chronology is objective; quarters are navigation; categories overlap; interpretive arcs are provisional and revisable.",
   "limitations": [
     "Chronicle entries contain NFT metadata text and human/AI-assisted reflections; they are not independent verification of external AI events.",
     "Ethereum timestamps anchor NFT event timing, not necessarily the real-world event time or lyric creation time.",
+    "The 175-entry Ethereum Chronicle is not a complete inventory of all project-related on-chain formation evidence; Polygon/Base evidence is indexed separately.",
     "The abridged edition uses deterministic structural extraction and may not identify every quotation or embedded document perfectly.",
     "The music table audits metadata lyrics and song references; it does not verify audio files, copyright ownership, or musical authorship.",
     "Full-corpus claims require loading chronicle-full.md or explicitly disclosing sampling limits."
