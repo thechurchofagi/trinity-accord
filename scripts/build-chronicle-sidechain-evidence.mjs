@@ -7,6 +7,7 @@ import {
 } from './chronicle-sidechain-car-integrity.mjs';
 import { createCarProgress } from './chronicle-sidechain-car-progress.mjs';
 import { createCarTrace } from './chronicle-sidechain-car-trace.mjs';
+import { rebuildCarsFromHistoricalPayloads } from './rebuild-chronicle-sidechain-cars-from-history.mjs';
 
 const out = process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan';
 const configuredConcurrency = Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 0);
@@ -82,11 +83,39 @@ const audit = auditWholeCarCache(carDir, { onEvent: observeCarEvent });
 trace.phase('cache_audit', 'success', { checked: audit.checked, valid: audit.valid, removed: audit.removed });
 console.log(`[CAR CACHE AUDIT] checked=${audit.checked} valid=${audit.valid} removed=${audit.removed}`);
 if (audit.removed) {
-  console.log('[CAR CACHE AUDIT] rejected cached CARs will be recovered through the existing verified gateway/blockwise/provider chain');
+  console.log('[CAR CACHE AUDIT] rejected cached CARs will first be reconstructed from verified historical payload bytes, then fall back to the existing gateway/blockwise/provider chain');
 }
 
 progress = createCarProgress({ out, audit });
 await progress.publish();
+
+trace.phase('historical_car_rebuild', 'running');
+try {
+  const rebuilt = await rebuildCarsFromHistoricalPayloads({ out, kubo: process.env.CHRONICLE_KUBO_BIN || '' });
+  trace.phase('historical_car_rebuild', 'success', {
+    roots_considered: rebuilt.roots_considered,
+    already_valid: rebuilt.already_valid,
+    direct_raw_rebuilt: rebuilt.direct_raw_rebuilt,
+    kubo_rebuilt: rebuilt.kubo_rebuilt,
+    unrecovered: rebuilt.unrecovered.length,
+  });
+  const after = auditWholeCarCache(carDir, { onEvent: observeCarEvent });
+  progress.state.cache_audit_after_historical_rebuild = after;
+  progress.state.historical_car_rebuild = {
+    roots_considered: rebuilt.roots_considered,
+    already_valid: rebuilt.already_valid,
+    invalid_removed: rebuilt.invalid_removed,
+    direct_raw_rebuilt: rebuilt.direct_raw_rebuilt,
+    kubo_rebuilt: rebuilt.kubo_rebuilt,
+    unrecovered_count: rebuilt.unrecovered.length,
+    unrecovered: rebuilt.unrecovered.slice(0, 40),
+  };
+  await progress.publish();
+} catch (error) {
+  trace.failure('historical_car_rebuild_failure', error, { phase: 'historical_car_rebuild' });
+  console.warn(`[CAR HISTORICAL REBUILD STAGE FAILED] ${error?.message || error}; continuing with strict network/provider recovery`);
+}
+
 installWholeDagFetchGuard({ onEvent: observeCarEvent });
 trace.phase('evidence_builder', 'running');
 try {
