@@ -4,10 +4,12 @@ on:
   pull_request:
     paths:
       - ".github/workflows/chronicle-sidechain-ots-remote-bitcoin-verify.yml"
+      - "scripts/bitcoin_esplora_rpc_proxy.py"
   push:
     branches: [main]
     paths:
       - ".github/workflows/chronicle-sidechain-ots-remote-bitcoin-verify.yml"
+      - "scripts/bitcoin_esplora_rpc_proxy.py"
   workflow_dispatch:
 
 permissions:
@@ -24,8 +26,6 @@ jobs:
     timeout-minutes: 20
     env:
       GH_TOKEN: ${{ github.token }}
-      BITCOIN_RPC_URL_SECRET: ${{ secrets.BITCOIN_RPC_URL }}
-      BITCOIN_PUBLIC_RPC_URL: https://bitcoin.drpc.org
       STATUS_CONTEXT: trinity/sidechain-ots
     steps:
       - name: Checkout current source
@@ -49,6 +49,7 @@ jobs:
           python -m pip install -r requirements-ots.txt
           python -m pip show opentimestamps-client
           ots --help >/dev/null
+          python3 -m py_compile scripts/bitcoin_esplora_rpc_proxy.py
 
       - name: Resolve immutable source and anchor releases
         id: source
@@ -128,67 +129,82 @@ jobs:
           grep -q 'BitcoinBlockHeaderAttestation' OTS-INFO.upgraded.txt
           echo "[OTS BITCOIN ATTESTATION PRESENT] upgraded proof contains BitcoinBlockHeaderAttestation"
 
-      - name: Select and preflight Bitcoin RPC
-        id: bitcoin_rpc
-        run: |
-          set -euo pipefail
-          if [ -n "$BITCOIN_RPC_URL_SECRET" ]; then
-            bitcoin_rpc="$BITCOIN_RPC_URL_SECRET"
-            rpc_source="secret"
-          else
-            bitcoin_rpc="$BITCOIN_PUBLIC_RPC_URL"
-            rpc_source="drpc"
-          fi
-          export BITCOIN_RPC_SELECTED="$bitcoin_rpc"
-          python3 - <<'PY'
-          import json,os,urllib.parse,urllib.request
-          url=os.environ['BITCOIN_RPC_SELECTED']
-          p=urllib.parse.urlsplit(url)
-          safe=f'{p.scheme}://{p.hostname}' + (f':{p.port}' if p.port else '')
-          print(f'[BITCOIN RPC SELECTED] endpoint={safe}')
-          req=urllib.request.Request(
-              url,
-              data=json.dumps({'jsonrpc':'2.0','id':'trinity-ots-preflight','method':'getblockchaininfo','params':[]}).encode(),
-              headers={'Content-Type':'application/json'},
-              method='POST',
-          )
-          with urllib.request.urlopen(req,timeout=20) as r:
-              body=json.loads(r.read())
-          if body.get('error') is not None:
-              raise SystemExit(f'bitcoin RPC error: {body["error"]}')
-          result=body.get('result') or {}
-          if result.get('chain')!='main':
-              raise SystemExit(f'unexpected Bitcoin chain: {result.get("chain")!r}')
-          print(f'[BITCOIN RPC PREFLIGHT PASS] chain={result.get("chain")} blocks={result.get("blocks")} headers={result.get("headers")}')
-          PY
-          {
-            echo "bitcoin_rpc<<__BITCOIN_RPC__"
-            echo "$bitcoin_rpc"
-            echo "__BITCOIN_RPC__"
-            echo "rpc_source=$rpc_source"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Strictly verify upgraded OTS proof against Bitcoin RPC
+      - name: Strictly verify upgraded OTS proof through dual-source Bitcoin RPC shim
         id: verify
-        env:
-          BITCOIN_RPC_SELECTED: ${{ steps.bitcoin_rpc.outputs.bitcoin_rpc }}
         run: |
           set -euo pipefail
+          proxy_trace="$GITHUB_WORKSPACE/ots-remote-verify/BITCOIN-RPC-PROXY.jsonl"
+          proxy_stdout="$GITHUB_WORKSPACE/ots-remote-verify/BITCOIN-RPC-PROXY.stdout.txt"
+          proxy_stderr="$GITHUB_WORKSPACE/ots-remote-verify/BITCOIN-RPC-PROXY.stderr.txt"
+          python3 scripts/bitcoin_esplora_rpc_proxy.py \
+            --host 127.0.0.1 \
+            --port 18443 \
+            --trace "$proxy_trace" \
+            > "$proxy_stdout" 2> "$proxy_stderr" &
+          proxy_pid=$!
+          echo "[BITCOIN RPC PROXY START] pid=$proxy_pid providers=blockstream,mempool"
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+              wait "$proxy_pid" 2>/dev/null
+            fi
+          }
+          trap cleanup_proxy EXIT
+          python3 - <<'PY'
+          import json,time,urllib.request
+          url='http://127.0.0.1:18443/'
+          last=None
+          for attempt in range(1,31):
+              try:
+                  req=urllib.request.Request(
+                      url,
+                      data=json.dumps({'jsonrpc':'1.0','id':'preflight','method':'getblockcount','params':[]}).encode(),
+                      headers={'Content-Type':'application/json'},
+                      method='POST',
+                  )
+                  with urllib.request.urlopen(req,timeout=45) as r:
+                      body=json.loads(r.read())
+                  if body.get('error') is not None:
+                      raise RuntimeError(body['error'])
+                  height=body.get('result')
+                  if not isinstance(height,int) or height < 963148:
+                      raise RuntimeError(f'unexpected conservative Bitcoin tip: {height!r}')
+                  print(f'[BITCOIN RPC PROXY PREFLIGHT PASS] conservative_tip={height} attempt={attempt}')
+                  break
+              except Exception as exc:
+                  last=exc
+                  print(f'[BITCOIN RPC PROXY PREFLIGHT RETRY] attempt={attempt} error={type(exc).__name__}: {exc}')
+                  time.sleep(1)
+          else:
+              raise SystemExit(f'local Bitcoin RPC proxy never became healthy: {last}')
+          PY
           cd ots-remote-verify/work
-          echo "[OTS VERIFY START] rpc_source=${{ steps.bitcoin_rpc.outputs.rpc_source }}"
+          echo "[OTS VERIFY START] rpc_source=dual_esplora_proxy:blockstream+mempool"
           set +e
-          timeout 240 ots --bitcoin-node "$BITCOIN_RPC_SELECTED" verify anchor-payload.canonical.json.ots > OTS-VERIFY.stdout.txt 2> OTS-VERIFY.stderr.txt
+          timeout 240 ots --bitcoin-node "http://127.0.0.1:18443/" verify anchor-payload.canonical.json.ots > OTS-VERIFY.stdout.txt 2> OTS-VERIFY.stderr.txt
           verify_rc=$?
           set -e
           echo "verify_rc=$verify_rc" >> "$GITHUB_OUTPUT"
           echo "[OTS VERIFY END] rc=$verify_rc"
           cat OTS-VERIFY.stdout.txt
           cat OTS-VERIFY.stderr.txt
+          echo "[BITCOIN RPC PROXY TRACE]"
+          cat "$proxy_trace"
+          echo "[BITCOIN RPC PROXY STDOUT]"
+          cat "$proxy_stdout"
+          echo "[BITCOIN RPC PROXY STDERR]"
+          cat "$proxy_stderr"
           if [ "$verify_rc" -ne 0 ]; then
             exit "$verify_rc"
           fi
-          grep -q 'Success! Bitcoin block' OTS-VERIFY.stdout.txt
-          echo "[OTS STRICT BITCOIN VERIFY PASS] native OpenTimestamps verification returned zero"
+          python3 - <<'PY'
+          import pathlib
+          root=pathlib.Path('.')
+          text=(root/'OTS-VERIFY.stdout.txt').read_text(errors='replace')+(root/'OTS-VERIFY.stderr.txt').read_text(errors='replace')
+          if 'Success! Bitcoin block' not in text:
+              raise SystemExit('native ots verify returned zero without Bitcoin success transcript')
+          print('[OTS STRICT BITCOIN VERIFY PASS] native OpenTimestamps verification returned zero with Bitcoin success transcript')
+          PY
 
       - name: Build strict verification report
         if: success()
@@ -197,7 +213,6 @@ jobs:
           SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
           ANCHOR_TAG: ${{ steps.source.outputs.anchor_tag }}
           CONFIRMATION_TAG: ${{ steps.source.outputs.confirmation_tag }}
-          RPC_SOURCE: ${{ steps.bitcoin_rpc.outputs.rpc_source }}
           PROOF_BEFORE_SHA: ${{ steps.upgrade.outputs.proof_before_sha }}
           PROOF_AFTER_SHA: ${{ steps.upgrade.outputs.proof_after_sha }}
         run: |
@@ -219,7 +234,8 @@ jobs:
             'source_release_tag':os.environ['SOURCE_TAG'],
             'anchor_release_tag':os.environ['ANCHOR_TAG'],
             'confirmation_release_tag':os.environ['CONFIRMATION_TAG'],
-            'rpc_source':os.environ['RPC_SOURCE'],
+            'rpc_source':'dual_esplora_proxy:blockstream+mempool',
+            'rpc_consensus_rule':'exact block-hash and raw-header agreement; local double-SHA256 header-hash check',
             'upgrade_returncode':0,
             'verify_returncode':0,
             'bitcoin_verified':True,
@@ -228,7 +244,7 @@ jobs:
             'proof_before_sha256':os.environ['PROOF_BEFORE_SHA'],
             'upgraded_ots_sha256':os.environ['PROOF_AFTER_SHA'],
             'verify_transcript_sha256':hashlib.sha256(verify.encode()).hexdigest(),
-            'boundary':'Strict native OpenTimestamps verification against Bitcoin mainnet RPC. Confirmation applies only to the canonical sidechain v2 anchor payload.'
+            'boundary':'Strict native OpenTimestamps verification against a fail-closed local JSON-RPC shim backed by independent Blockstream and mempool.space Bitcoin mainnet header data. Confirmation applies only to the canonical sidechain v2 anchor payload.'
           }
           (root/'OTS-STRICT-BITCOIN-VERIFICATION.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
           print(json.dumps(report,indent=2,sort_keys=True))
@@ -243,7 +259,10 @@ jobs:
             OTS-UPGRADE.stderr.txt \
             OTS-VERIFY.stdout.txt \
             OTS-VERIFY.stderr.txt \
-            OTS-STRICT-BITCOIN-VERIFICATION.json > STRICT-BITCOIN-SHA256SUMS
+            OTS-STRICT-BITCOIN-VERIFICATION.json \
+            ../BITCOIN-RPC-PROXY.jsonl \
+            ../BITCOIN-RPC-PROXY.stdout.txt \
+            ../BITCOIN-RPC-PROXY.stderr.txt > STRICT-BITCOIN-SHA256SUMS
           sha256sum -c STRICT-BITCOIN-SHA256SUMS
 
       - name: Publish immutable Bitcoin confirmation release
@@ -263,7 +282,7 @@ jobs:
           else
             gh release create "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" \
               --title "Chronicle sidechain OTS Bitcoin verification — ${SOURCE_SHA:0:12}" \
-              --notes "Strict native OpenTimestamps verification succeeded against Bitcoin mainnet RPC for the canonical sidechain v2 anchor payload. The upgraded proof, verification transcript, and machine-readable report are preserved here. Non-amending." \
+              --notes "Strict native OpenTimestamps verification succeeded for the canonical sidechain v2 anchor payload using a fail-closed local RPC shim requiring independent Blockstream and mempool.space agreement on Bitcoin mainnet block hashes and raw headers. The upgraded proof, verification transcript, proxy trace, and machine-readable report are preserved here. Non-amending." \
               anchor-payload.canonical.json \
               anchor-payload.canonical.json.ots \
               OTS-RECEIPT.json \
@@ -273,7 +292,10 @@ jobs:
               OTS-VERIFY.stdout.txt \
               OTS-VERIFY.stderr.txt \
               OTS-STRICT-BITCOIN-VERIFICATION.json \
-              STRICT-BITCOIN-SHA256SUMS
+              STRICT-BITCOIN-SHA256SUMS \
+              ../BITCOIN-RPC-PROXY.jsonl \
+              ../BITCOIN-RPC-PROXY.stdout.txt \
+              ../BITCOIN-RPC-PROXY.stderr.txt
             echo "[BITCOIN CONFIRMATION PUBLISHED] $CONFIRMATION_TAG"
           fi
 
