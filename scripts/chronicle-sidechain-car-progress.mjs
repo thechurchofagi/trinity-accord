@@ -47,13 +47,20 @@ export function updateCarProgressFromLine(state, line) {
 
   const counters = [
     ['[CAR WHOLE-DAG VERIFIED]', 'whole_dag_verified'],
+    ['[CAR WHOLE-DAG FAILED]', 'whole_dag_failed'],
     ['[CAR BLOCKWISE COMPLETE]', 'blockwise_completed'],
     ['[CAR HISTORICAL CHUNK VERIFIED]', 'historical_chunk_verified'],
+    ['[CAR BLOCK CACHED]', 'block_cache_writes'],
+    ['[CAR DELEGATED PROVIDERS]', 'delegated_provider_lookups'],
+    ['[CAR DELEGATED PROVIDERS FAILED]', 'delegated_provider_failures'],
+    ['[CAR KUBO CONNECT]', 'kubo_connect_attempts'],
     ['[CAR KUBO BLOCK VERIFIED]', 'kubo_blocks_verified'],
     ['[CAR LASSIE START]', 'lassie_starts'],
+    ['[CAR LASSIE RECEIVED]', 'lassie_received'],
     ['[CAR LASSIE ROOT REUSE]', 'lassie_root_reuse'],
     ['[CAR RAW BLOCK VERIFIED]', 'raw_blocks_verified'],
     ['[CAR CACHE REJECTED]', 'cache_rejected_events'],
+    ['[EVIDENCE RETRY]', 'evidence_retry_events'],
   ];
   for (const [needle, key] of counters) {
     if (line.includes(needle)) {
@@ -63,6 +70,11 @@ export function updateCarProgressFromLine(state, line) {
       state.last_event = needle.slice(1, -1).toLowerCase().replaceAll(' ', '_');
       state.last_event_detail = sanitizeTraceText(line);
       state.last_event_at = nowIso();
+      state.recent_provider_events ||= [];
+      if (needle.includes('KUBO') || needle.includes('LASSIE') || needle.includes('DELEGATED') || needle.includes('BLOCKWISE') || needle.includes('HISTORICAL') || needle.includes('RETRY')) {
+        state.recent_provider_events.push({ timestamp: state.last_event_at, event: state.last_event, cid: cid || null, detail: state.last_event_detail });
+        if (state.recent_provider_events.length > 30) state.recent_provider_events.splice(0, state.recent_provider_events.length - 30);
+      }
       return true;
     }
   }
@@ -112,7 +124,7 @@ function checkoutAuthorization() {
 
 export function createCarProgress({ out, audit, intervalMs = 30000 }) {
   const state = {
-    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v3',
+    schema: 'trinity-accord/chronicle-sidechain-car-live-progress/v4',
     phase: 'car_l1',
     status: 'running',
     run_id: process.env.GITHUB_RUN_ID || null,
@@ -121,6 +133,10 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
     evidence_concurrency: Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY || 0) || null,
     car_block_concurrency: Number(process.env.CHRONICLE_CAR_BLOCK_CONCURRENCY || 0) || null,
     whole_dag_endpoint_limit: Number(process.env.CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT || 0) || null,
+    kubo_connect_timeout_ms: Number(process.env.CHRONICLE_KUBO_CONNECT_TIMEOUT_MS || 0) || null,
+    kubo_block_timeout_ms: Number(process.env.CHRONICLE_KUBO_BLOCK_TIMEOUT_MS || 0) || null,
+    lassie_provider_timeout_ms: Number(process.env.CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS || 0) || null,
+    lassie_global_timeout_ms: Number(process.env.CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS || 0) || null,
     cache_audit: audit,
     records_completed: 0,
     records_expected: 217,
@@ -129,6 +145,7 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
     recovery_event_counts: {},
     recent_recovery_events: [],
     recent_recovery_failures: [],
+    recent_provider_events: [],
     started_at: nowIso(),
     published_at: null,
   };
@@ -167,7 +184,7 @@ export function createCarProgress({ out, audit, intervalMs = 30000 }) {
           authorization,
           accept: 'application/vnd.github+json',
           'content-type': 'application/json',
-          'user-agent': 'trinity-accord-sidechain-car-progress/3.0',
+          'user-agent': 'trinity-accord-sidechain-car-progress/4.0',
           'x-github-api-version': '2022-11-28',
         },
         body: JSON.stringify({ body }),
