@@ -22,7 +22,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Bootstrap immutable v1 snapshot
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
@@ -49,6 +54,7 @@ jobs:
           path: |
             directory-root-research.json
             directory-root-output.txt
+            ${{ runner.temp }}/toolchain-provenance.json
           retention-days: 7
       - name: Comment result
         env: { GH_TOKEN: "${{ github.token }}" }
