@@ -42,6 +42,10 @@ def main():
     topic='0x'+keccak(b'NewHeaderBlock(address,uint256,uint256,uint256,uint256,bytes32)').hex()
     if mod.NEW_HEADER_TOPIC!=topic: raise AssertionError('event topic mismatch')
     if mod.HEADER_STRIDE!=10_000: raise AssertionError('RootChain header stride mismatch')
+    # Bor checkpoint leaf formula is keccak(bytes32(number)||bytes32(timestamp)||txRoot||receiptRoot).
+    number=54319195; timestamp=1709699000; txroot=keccak(b'txroot'); recroot=keccak(b'recroot')
+    expected=keccak(mod.word(number)+mod.word(timestamp)+txroot+recroot)
+    if len(expected)!=32: raise AssertionError('checkpoint leaf formula')
     print('PASS: Polygon checkpoint Merkle proof algorithm matches padded keccak tree for counts 1..33')
 
 

@@ -319,15 +319,57 @@ def checkpoint_receipt_proof(log, block):
     }
 
 
+def polygon_checkpoint_leaf(rec):
+    """Recompute the exact Bor checkpoint leaf from an already verified L2 witness.
+
+    Bor's GetRootHash does *not* use blockHash as a Merkle leaf.  It uses
+    keccak256(bytes32(number) || bytes32(timestamp) || txRoot || receiptRoot).
+    The witness block header is re-hashed here again so neither RPC nor metadata
+    can silently substitute any of those four leaf fields.
+    """
+    origin=rec.get("origin") or {}
+    chain=rec.get("chain") or {}
+    bn=int(origin["block_number"]); expected_hash=str(origin["block_hash"]).lower()
+    witness_file=SOURCE/"evidence-v2"/"l2"/str(chain["name"])/str(rec["contract"])/str(rec["token_id"])/"witness.json"
+    w=json.loads(witness_file.read_text())
+    header_rlp=h2b(w["block_header_rlp"]); fields=rlp.decode(header_rlp)
+    if len(fields)<12: raise ValueError(f"Polygon header has too few RLP fields block={bn} fields={len(fields)}")
+    local_hash="0x"+keccak(header_rlp).hex()
+    if local_hash.lower()!=expected_hash: raise ValueError(f"Polygon witness block hash mismatch block={bn} computed={local_hash} expected={expected_hash}")
+    if str(w.get("block_hash","")).lower()!=expected_hash: raise ValueError(f"Polygon witness declared block hash mismatch block={bn}")
+    header_number=int.from_bytes(fields[8],"big") if fields[8] else 0
+    header_timestamp=int.from_bytes(fields[11],"big") if fields[11] else 0
+    tx_root=bytes(fields[4]); receipt_root=bytes(fields[5])
+    if header_number!=bn: raise ValueError(f"Polygon header number mismatch expected={bn} actual={header_number}")
+    if header_timestamp!=int(origin["timestamp_unix"]): raise ValueError(f"Polygon header timestamp mismatch block={bn} expected={origin['timestamp_unix']} actual={header_timestamp}")
+    if tx_root!=h2b(w["transactions_root"]): raise ValueError(f"Polygon transaction root mismatch block={bn}")
+    if receipt_root!=h2b(w["receipts_root"]): raise ValueError(f"Polygon receipt root mismatch block={bn}")
+    preimage=word(header_number)+word(header_timestamp)+tx_root+receipt_root
+    leaf=keccak(preimage)
+    meta={
+        "witness_file":str(witness_file.relative_to(SOURCE)),
+        "block_header_sha256":hashlib.sha256(header_rlp).hexdigest(),
+        "header_number":header_number,
+        "header_timestamp":header_timestamp,
+        "transactions_root":"0x"+tx_root.hex(),
+        "receipts_root":"0x"+receipt_root.hex(),
+        "checkpoint_leaf":"0x"+leaf.hex(),
+        "checkpoint_leaf_preimage_sha256":hashlib.sha256(preimage).hexdigest(),
+    }
+    debug("polygon_checkpoint_leaf", polygon_block=bn, block_hash=expected_hash, **meta)
+    return leaf,meta
+
+
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
     if DEBUG.exists(): DEBUG.unlink()
     idx_path=SOURCE/"evidence-v2"/"SIDECHAIN-NFT-IDENTITY-INDEX.json"
     idx=json.loads(idx_path.read_text())
-    targets={}
+    targets={}; records_by_asset={}
     for rec in idx.get("records",[]):
         chain_id=int(rec.get("chain",{}).get("chain_id",0))
         if chain_id!=137: continue
+        records_by_asset[rec["asset_id"]]=rec
         origin=rec.get("origin") or {}; bn=int(origin["block_number"]); bh=str(origin["block_hash"]).lower()
         key=(bn,bh); targets.setdefault(key,[]).append(rec["asset_id"])
     if not targets: raise SystemExit("no Polygon records found")
@@ -337,10 +379,14 @@ def main():
         info,search=find_header(bn,current)
         checkpoint_cache[info["header_block_id"]]=info
         proof=polygon_block_proof(bn,info["start"],info["end"])
-        computed=verify_merkle(h2b(bh),bn-info["start"],proof)
-        if "0x"+computed.hex()!=info["root"].lower(): raise ValueError(f"Polygon block checkpoint root mismatch block={bn} computed=0x{computed.hex()} expected={info['root']}")
-        block_results.append({"polygon_block_number":bn,"polygon_block_hash":bh,"asset_ids":sorted(assets),"header_block_id":info["header_block_id"],"checkpoint_start":info["start"],"checkpoint_end":info["end"],"checkpoint_root":info["root"],"checkpoint_created_at":info["created_at"],"checkpoint_proposer":info["proposer"],"proof_siblings":["0x"+x.hex() for x in proof],"proof_index":bn-info["start"],"computed_root":"0x"+computed.hex(),"binary_search":search,"pass":True})
-        debug("polygon_membership_pass", polygon_block=bn, block_hash=bh, header_block_id=info["header_block_id"], proof_nodes=len(proof), checkpoint_root=info["root"])
+        source_rec=records_by_asset[sorted(assets)[0]]
+        leaf,leaf_meta=polygon_checkpoint_leaf(source_rec)
+        computed=verify_merkle(leaf,bn-info["start"],proof)
+        if "0x"+computed.hex()!=info["root"].lower():
+            debug("polygon_membership_mismatch", polygon_block=bn, block_hash=bh, checkpoint_leaf="0x"+leaf.hex(), computed_root="0x"+computed.hex(), expected_root=info["root"], proof_index=bn-info["start"], proof_nodes=len(proof))
+            raise ValueError(f"Polygon checkpoint leaf membership mismatch block={bn} computed=0x{computed.hex()} expected={info['root']}")
+        block_results.append({"polygon_block_number":bn,"polygon_block_hash":bh,"asset_ids":sorted(assets),"header_block_id":info["header_block_id"],"checkpoint_start":info["start"],"checkpoint_end":info["end"],"checkpoint_root":info["root"],"checkpoint_created_at":info["created_at"],"checkpoint_proposer":info["proposer"],"proof_siblings":["0x"+x.hex() for x in proof],"proof_index":bn-info["start"],"computed_root":"0x"+computed.hex(),"checkpoint_leaf":leaf_meta,"binary_search":search,"pass":True})
+        debug("polygon_membership_pass", polygon_block=bn, block_hash=bh, checkpoint_leaf="0x"+leaf.hex(), header_block_id=info["header_block_id"], proof_nodes=len(proof), checkpoint_root=info["root"])
     checkpoint_results=[]
     for hid,info in sorted(checkpoint_cache.items()):
         log,eth_block=find_checkpoint_log(info); rp=checkpoint_receipt_proof(log,eth_block)
@@ -364,7 +410,7 @@ def main():
         "polygon_records":sum(len(x) for x in targets.values()),"unique_polygon_blocks":len(block_results),"unique_checkpoints":len(checkpoint_results),
         "polygon_block_membership_pass":all(x["pass"] for x in block_results),"ethereum_checkpoint_receipt_inclusion_pass":all(x["pass"] for x in checkpoint_results),
         "ethereum_rpc_finalized_boundary":finalized_summary,
-        "proof_model":"Polygon block hash is locally Merkle-verified to the RootChain checkpoint root; the exact NewHeaderBlock event receipt is locally MPT-verified to an Ethereum receiptsRoot and the Ethereum block header is locally re-hashed. The finalized tag is an RPC boundary, not an independent Beacon consensus proof.",
+        "proof_model":"The Bor checkpoint leaf keccak(bytes32(blockNumber)||bytes32(timestamp)||transactionsRoot||receiptsRoot)) is locally recomputed from an already block-hash-verified L2 witness and Merkle-verified to the RootChain checkpoint root; the exact NewHeaderBlock event receipt is locally MPT-verified to an Ethereum receiptsRoot and the Ethereum block header is locally re-hashed. The finalized tag is an RPC boundary, not an independent Beacon consensus proof.",
         "blocks":block_results,"checkpoints":checkpoint_results,
         "pass":bool(block_results) and bool(checkpoint_results) and finalized_summary is not None,
         "boundary":"Non-amending supplementary evidence. This proves Polygon checkpoint inclusion in Ethereum execution history; independent Beacon ancestry/finality can be added as a separate layer."
