@@ -1,0 +1,102 @@
+name: Research final 13 sidechain CIDs
+
+on:
+  push:
+    branches: [agent/research-final-13-cids]
+    paths:
+      - "scripts/research-chronicle-final-13.py"
+      - ".github/workflows/research-chronicle-final-13.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: research-chronicle-final-13
+  cancel-in-progress: true
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Bootstrap immutable v1 sidechain snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$tmp" --pattern "$BOOTSTRAP_ARCHIVE"
+          actual="$(sha256sum "$tmp/$BOOTSTRAP_ARCHIVE" | awk '{print $1}')"
+          test "$actual" = "$BOOTSTRAP_ARCHIVE_SHA256"
+          mkdir -p artifacts
+          tar -xzf "$tmp/$BOOTSTRAP_ARCHIVE" -C artifacts
+          test -s artifacts/chronicle-sidechain-scan/recovered-tokens.json
+      - name: Install checksum-pinned Kubo hash oracle
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz"
+          tools="$RUNNER_TEMP/trinity-tools"
+          mkdir -p "$tools"
+          curl --fail --show-error --silent --location --retry 3 \
+            "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" \
+            --output "$archive"
+          echo "${KUBO_LINUX_AMD64_SHA512}  $archive" | sha512sum --check --strict
+          tar --no-same-owner -xzf "$archive" -C "$tools" kubo/ipfs
+          chmod 0755 "$tools/kubo/ipfs"
+          echo "CHRONICLE_KUBO_BIN=$tools/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Run exact reconstruction research
+        run: |
+          set -euo pipefail
+          python3 scripts/research-chronicle-final-13.py
+      - name: Build concise research summary
+        run: |
+          python3 - <<'PY'
+          import json
+          r=json.load(open('final-13-research.json'))
+          lines=[
+            '<!-- trinity-final-13-research -->',
+            f"### Final-13 exact recovery research — run `{__import__('os').environ.get('GITHUB_RUN_ID')}`",
+            '',
+            f"- Exact metadata serialization matches: **{len(r['matched_metadata'])}** — {', '.join('`'+x+'`' for x in r['matched_metadata']) or 'none'}",
+            f"- Exact residual local-file matches: **{len(r['matched_local_files'])}** — {', '.join('`'+x+'`' for x in r['matched_local_files']) or 'none'}",
+            '- Acceptance: exact target CID only; no approximation.',
+            '',
+            '| CID | role | metadata candidates checked | token files | result |',
+            '|---|---|---:|---:|---|',
+          ]
+          for cid,row in r['results'].items():
+            s=row.get('serialization_search',{})
+            result='metadata exact' if s.get('matched') else ('local exact' if any(f.get('direct_exact') or f.get('kubo_exact') for f in row.get('local_files',[])) else 'unresolved')
+            lines.append(f"| `{cid[:16]}…` | {row['role']} | {s.get('checked',0)} | {len(row.get('local_files',[]))} | {result} |")
+          open('final-13-research.md','w').write('\n'.join(lines)+'\n')
+          PY
+          cat final-13-research.md
+      - name: Publish research artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-13-research-${{ github.run_id }}
+          path: |
+            final-13-research.json
+            final-13-research.md
+          if-no-files-found: error
+          retention-days: 7
+      - name: Post result to research PR
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s final-13-research.md ]; then
+            gh pr comment 1037 --repo "$GITHUB_REPOSITORY" --body-file final-13-research.md
+          else
+            gh pr comment 1037 --repo "$GITHUB_REPOSITORY" --body "Final-13 research run $GITHUB_RUN_ID failed before producing the report."
+          fi
