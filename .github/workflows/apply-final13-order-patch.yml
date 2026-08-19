@@ -15,8 +15,14 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           ref: agent/research-final-13-cids
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Apply exact metadata ordering variant and regression guard
         run: |
+          set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
           p=Path('scripts/rebuild-chronicle-sidechain-cars-from-history.mjs')
