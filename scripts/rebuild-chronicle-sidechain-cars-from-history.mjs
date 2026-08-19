@@ -376,6 +376,10 @@ function metadataCandidates(metadata) {
     ['snapshot_order', metadata],
     ['sorted_recursive', sortedKeys(metadata)],
     ['nft_common_name_description_image', orderedTopLevel(metadata, ['name', 'description', 'image', 'animation_url', 'external_url', 'attributes', 'properties'])],
+    // Historical spam-airdrop metadata in the immutable v1 snapshot was serialized
+    // by Python-style JSON with external_url before image. Preserve that exact
+    // ordering as another candidate; acceptance still requires target CID equality.
+    ['nft_common_name_description_external_image', orderedTopLevel(metadata, ['name', 'description', 'external_url', 'image', 'animation_url', 'attributes', 'properties'])],
     ['nft_common_name_image_description', orderedTopLevel(metadata, ['name', 'image', 'description', 'animation_url', 'external_url', 'attributes', 'properties'])],
   ];
   const out = [];

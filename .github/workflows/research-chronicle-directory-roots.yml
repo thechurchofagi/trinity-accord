@@ -1,0 +1,62 @@
+name: Research CIDv1 directory roots
+
+on:
+  push:
+    branches: [agent/research-final-13-cids]
+    paths: [.github/workflows/research-chronicle-directory-roots.yml]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Bootstrap immutable v1 snapshot
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          set -euo pipefail
+          t="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$t" --pattern "$BOOTSTRAP_ARCHIVE"
+          echo "${BOOTSTRAP_ARCHIVE_SHA256}  $t/$BOOTSTRAP_ARCHIVE" | sha256sum --check --strict
+          mkdir -p artifacts
+          tar -xzf "$t/$BOOTSTRAP_ARCHIVE" -C artifacts
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; tools="$RUNNER_TEMP/tools"; mkdir -p "$tools"
+          curl --fail --silent --show-error --location --retry 3 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "${KUBO_LINUX_AMD64_SHA512}  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$tools" kubo/ipfs
+          chmod +x "$tools/kubo/ipfs"
+          echo "CHRONICLE_KUBO_BIN=$tools/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Probe directory roots
+        run: python3 scripts/research-chronicle-directory-roots.py > directory-root-output.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: directory-root-research-${{ github.run_id }}
+          path: |
+            directory-root-research.json
+            directory-root-output.txt
+          retention-days: 7
+      - name: Comment result
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          python3 - <<'PY' > comment.md
+          import json,os
+          r=json.load(open('directory-root-research.json'))
+          print(f"### CIDv1 directory-root probe — run `{os.environ['GITHUB_RUN_ID']}`")
+          for cid,row in r.items(): print(f"- `{cid}`: **{row['match'] or 'no match'}** (checked {row['checked']})")
+          PY
+          gh pr comment 1037 --repo "$GITHUB_REPOSITORY" --body-file comment.md
