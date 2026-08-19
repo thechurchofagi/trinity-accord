@@ -1,0 +1,30 @@
+{
+  "api_base": "https://zenodo.org/api",
+  "concept_doi": "10.5281/zenodo.22012615",
+  "deposition_id": 22012616,
+  "doi": "10.5281/zenodo.22012616",
+  "latest_version": "f64cc872b3b5",
+  "legacy_generated_at": "2026-08-19T12:30:54.811318Z",
+  "legacy_nondeterministic_builder_field_reconciled": true,
+  "local_rebuild_package_identity_sha256": "98f77fe29befed3919a29ee477a3faaad490fd79961f4a0c46d7716ac0378ae7",
+  "package_identity_sha256": "5cbc5efe7dd65e8d362b97ae58af6bfc6105e0d9e7f878e38a0e0f78398623cb",
+  "public_file_sha256": {
+    "README.md": "c60181587e8b046dc157181d95ab6ffd56e2e22fde9398b063ccdc900031b245",
+    "RECOVERY-VERIFICATION.json": "a0cfe6fc74a3707f8425383385eff727d7e3679281d8ee9e78de76b808d22647",
+    "SHA256SUMS": "6aa53721a98f5f3fac4f5259deb49f14e6ecbc50820874bb59257dcb6578e9cf",
+    "SIDECHAIN-ZENODO-DEPOSIT.json": "3c4fd1d9da56dc0d156dc3843f6cbbb9141694b0e79cd59d273b8724b521b4a6",
+    "SOURCE-BINDING.json": "f29903dca0623eb0a942fd6a5617dae9fc21d90b65d04e4a6b3be04ef7a19ba2",
+    "chronicle-sidechain-evidence-v2-f64cc872b3b5.tar.gz": "64152b7fc861dbf8aa9cec447ab7078a6a815136ccfc1b9bb0285aaca2ff1572",
+    "chronicle-sidechain-evidence-v2-f64cc872b3b5.tar.gz.sha256": "2ddb02ac9816d706d2739028e11f31e0427842e4809b9665db7418c29d10aacb"
+  },
+  "public_record_api": "https://zenodo.org/api/records/22012616",
+  "published_reconcile": true,
+  "record_id": 22012616,
+  "remote_full_readback_sha256_verified": true,
+  "remote_readback_surface": "public_records_api",
+  "schema": "trinity-accord/chronicle-sidechain-zenodo-state/v1",
+  "source_commit_sha": "f64cc872b3b5cf70a891621615e2b56ede004a2d",
+  "source_release_tag": "chronicle-sidechain-evidence-v2-f64cc872b3b5",
+  "updated_at": "2026-08-19T13:28:41.756439Z",
+  "verified_file_count": 7
+}
