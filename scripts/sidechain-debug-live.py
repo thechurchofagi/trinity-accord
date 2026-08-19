@@ -38,6 +38,8 @@ def read_json(path: pathlib.Path) -> Any:
 
 def first_json(patterns: list[str]) -> tuple[str | None, Any]:
     for pattern in patterns:
+        if not pattern:
+            continue
         for raw in glob.glob(pattern, recursive=True):
             p = pathlib.Path(raw)
             if p.is_file():
@@ -93,7 +95,7 @@ def latest_trace_tail(limit: int = 12) -> list[Any]:
 def active_workers(car: dict[str, Any]) -> list[dict[str, Any]]:
     workers = car.get("workers") or {}
     if isinstance(workers, list):
-        vals = workers
+        vals = [dict(v) if isinstance(v, dict) else {"detail": v} for v in workers]
     elif isinstance(workers, dict):
         vals = [{"worker": k, **(v if isinstance(v, dict) else {"detail": v})} for k, v in workers.items()]
     else:
@@ -101,13 +103,78 @@ def active_workers(car: dict[str, Any]) -> list[dict[str, Any]]:
     stamp = dt.datetime.now(dt.timezone.utc)
     for item in vals:
         started = item.get("started_at")
-        if started and "elapsed_seconds" not in item:
+        if started:
             try:
                 t = dt.datetime.fromisoformat(str(started).replace("Z", "+00:00"))
                 item["elapsed_seconds"] = max(0, int((stamp - t).total_seconds()))
             except Exception:
                 pass
+        if not item.get("asset_id") and item.get("chain") and item.get("contract") and item.get("token_id") is not None:
+            item["asset_id"] = f"{item.get('chain')}:{item.get('contract')}/{item.get('token_id')}"
     return vals
+
+
+def summarize_rebuild(rebuild: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(rebuild, dict):
+        return {}
+    return {
+        "schema": rebuild.get("schema"),
+        "started_at": rebuild.get("started_at"),
+        "finished_at": rebuild.get("finished_at"),
+        "roots_mapped": rebuild.get("roots_mapped"),
+        "refs_mapped": rebuild.get("refs_mapped"),
+        "roots_with_candidates": rebuild.get("roots_with_candidates"),
+        "roots_without_candidates": rebuild.get("roots_without_candidates"),
+        "roots_considered": rebuild.get("roots_considered"),
+        "already_valid": rebuild.get("already_valid"),
+        "invalid_removed": rebuild.get("invalid_removed"),
+        "direct_raw_rebuilt": rebuild.get("direct_raw_rebuilt"),
+        "kubo_rebuilt": rebuild.get("kubo_rebuilt"),
+        "recovered_count": len(rebuild.get("recovered") or []),
+        "unrecovered_count": len(rebuild.get("unrecovered") or []),
+        "recovered": (rebuild.get("recovered") or [])[:20],
+        "unrecovered": (rebuild.get("unrecovered") or [])[:20],
+    }
+
+
+def problem_root_mapping(cache: dict[str, Any], root_map: dict[str, Any], failed: list[str]) -> list[dict[str, Any]]:
+    problem_roots: list[str] = []
+    for error in cache.get("errors") or []:
+        if isinstance(error, dict) and error.get("root_cid") and error["root_cid"] not in problem_roots:
+            problem_roots.append(error["root_cid"])
+    for cid in failed:
+        if cid and cid not in problem_roots:
+            problem_roots.append(cid)
+    mapped = {}
+    for row in root_map.get("roots") or []:
+        if isinstance(row, dict) and row.get("root_cid"):
+            mapped[row["root_cid"]] = row
+    out = []
+    for cid in problem_roots[:40]:
+        row = mapped.get(cid) or {}
+        refs = []
+        for ref in (row.get("refs") or [])[:8]:
+            if not isinstance(ref, dict):
+                continue
+            refs.append({
+                "asset_id": ref.get("asset_id"),
+                "role": ref.get("role"),
+                "leaf_path": ref.get("leaf_path"),
+                "original_uri": ref.get("original_uri"),
+                "payload_status": ref.get("payload_status"),
+                "declared_file": ref.get("declared_file"),
+                "declared_file_exists": ref.get("declared_file_exists"),
+                "candidate_count": len(ref.get("candidates") or []),
+                "candidates": (ref.get("candidates") or [])[:8],
+            })
+        out.append({
+            "root_cid": cid,
+            "mapped": bool(row),
+            "ref_count": row.get("ref_count"),
+            "candidate_count": row.get("candidate_count"),
+            "refs": refs,
+        })
+    return out
 
 
 def build_snapshot() -> dict[str, Any]:
@@ -122,8 +189,12 @@ def build_snapshot() -> dict[str, Any]:
         "**/chronicle-sidechain-l2-progress.json",
     ])
     rebuild_path, rebuild = first_json([
-        "artifacts/chronicle-sidechain-scan/**/CAR-HISTORICAL-REBUILD.json",
-        "runtime/CAR-HISTORICAL-REBUILD.json",
+        "artifacts/chronicle-sidechain-scan/**/HISTORICAL-CAR-REBUILD.json",
+        "runtime/HISTORICAL-CAR-REBUILD.json",
+    ])
+    root_map_path, root_map = first_json([
+        "artifacts/chronicle-sidechain-scan/**/HISTORICAL-CAR-ROOT-MAP.json",
+        "runtime/HISTORICAL-CAR-ROOT-MAP.json",
     ])
     offline_path, offline = first_json(["artifacts/chronicle-sidechain-scan/**/OFFLINE-VERIFICATION.json"])
     l1_path, l1 = first_json([
@@ -133,13 +204,15 @@ def build_snapshot() -> dict[str, Any]:
     car = car if isinstance(car, dict) else {}
     l2 = l2 if isinstance(l2, dict) else {}
     rebuild = rebuild if isinstance(rebuild, dict) else {}
+    root_map = root_map if isinstance(root_map, dict) else {}
     offline = offline if isinstance(offline, dict) else {}
     l1 = l1 if isinstance(l1, dict) else {}
 
     cache = car.get("cache_audit") or {}
     failed = car.get("failed_cids") or []
+    root_details = problem_root_mapping(cache, root_map, failed)
     snapshot = {
-        "schema": "trinity-accord/chronicle-sidechain-debug/v1",
+        "schema": "trinity-accord/chronicle-sidechain-debug/v2",
         "operational_only": True,
         "timestamp": now(),
         "run_id": os.environ.get("GITHUB_RUN_ID"),
@@ -155,6 +228,8 @@ def build_snapshot() -> dict[str, Any]:
             "cache_checked": cache.get("checked"),
             "cache_valid": cache.get("valid"),
             "cache_removed": cache.get("removed"),
+            "problem_root_count": len(root_details),
+            "problem_roots": root_details,
             "failed_count": len(failed),
             "failed_cids": failed,
             "last_cid": car.get("last_cid"),
@@ -174,7 +249,7 @@ def build_snapshot() -> dict[str, Any]:
             "records_expected": l2.get("records_expected"),
             "last_event": (l2.get("events") or [])[-1] if isinstance(l2.get("events"), list) and l2.get("events") else None,
         },
-        "historical_rebuild": rebuild,
+        "historical_rebuild": summarize_rebuild(rebuild),
         "offline_verification": {
             "pass": offline.get("pass"),
             "error_count": len(offline.get("errors") or []) if isinstance(offline.get("errors"), list) else offline.get("error_count"),
@@ -182,7 +257,14 @@ def build_snapshot() -> dict[str, Any]:
         },
         "l1_diagnostics": l1,
         "trace_tail": latest_trace_tail(),
-        "sources": {"car": car_path, "l2": l2_path, "historical_rebuild": rebuild_path, "offline": offline_path, "l1": l1_path},
+        "sources": {
+            "car": car_path,
+            "l2": l2_path,
+            "historical_rebuild": rebuild_path,
+            "historical_root_map": root_map_path,
+            "offline": offline_path,
+            "l1": l1_path,
+        },
     }
     return snapshot
 
@@ -197,6 +279,16 @@ def compact_markdown(s: dict[str, Any]) -> str:
         )
     if not worker_lines:
         worker_lines = ["- no active worker snapshot"]
+    root_lines = []
+    for row in (c.get("problem_roots") or [])[:20]:
+        refs = row.get("refs") or []
+        first = refs[0] if refs else {}
+        root_lines.append(
+            f"- `{row.get('root_cid')}` mapped={row.get('mapped')} candidates={row.get('candidate_count')} refs={row.get('ref_count')} asset=`{first.get('asset_id')}` role=`{first.get('role')}` status=`{first.get('payload_status')}`"
+        )
+    if not root_lines:
+        root_lines = ["- no strict-cache problem roots"]
+    rebuild = s.get("historical_rebuild") or {}
     last_problem = None
     failures = c.get("recent_failures") or []
     if failures:
@@ -213,11 +305,15 @@ def compact_markdown(s: dict[str, Any]) -> str:
         f"- Current phase: **{s.get('phase')}**",
         f"- Current step: **{s.get('step')}** — `{s.get('step_status')}`",
         f"- Heartbeat: `{s.get('timestamp')}`",
-        f"- CAR records: **{c.get('records_completed')}/{c.get('records_expected')}**; strict cache **{c.get('cache_valid')}/{c.get('cache_checked')}**; failed roots **{c.get('failed_count')}**",
+        f"- CAR records: **{c.get('records_completed')}/{c.get('records_expected')}**; strict cache **{c.get('cache_valid')}/{c.get('cache_checked')}**; problem roots **{c.get('problem_root_count')}**; final failed roots **{c.get('failed_count')}**",
+        f"- Historical local rebuild: mapped **{rebuild.get('roots_mapped')}** roots, with candidates **{rebuild.get('roots_with_candidates')}**, without candidates **{rebuild.get('roots_without_candidates')}**, exact rebuilt **{(rebuild.get('direct_raw_rebuilt') or 0) + (rebuild.get('kubo_rebuilt') or 0)}**, unrecovered **{rebuild.get('unrecovered_count')}**",
         f"- L2: blocks **{l2.get('blocks_completed')}/{l2.get('unique_blocks_total')}**, failed **{l2.get('blocks_failed')}**, records pass **{l2.get('records_pass')}/{l2.get('records_expected')}**",
         "",
         "## Active workers",
         *worker_lines,
+        "",
+        "## Strict-cache problem roots",
+        *root_lines,
         "",
         f"## Last event\n`{str(c.get('last_event_detail') or c.get('last_event') or 'none')[:1800]}`",
         "",
@@ -249,15 +345,19 @@ def snapshot_and_publish(event: str = "heartbeat") -> dict[str, Any]:
     s = build_snapshot()
     atomic_json(DEBUG_FILE, s)
     append_event(event, {
-        "phase": s.get("phase"), "step": s.get("step"), "step_status": s.get("step_status"),
+        "phase": s.get("phase"),
+        "step": s.get("step"),
+        "step_status": s.get("step_status"),
         "car_records_completed": s["car"].get("records_completed"),
+        "car_problem_root_count": s["car"].get("problem_root_count"),
         "car_failed_count": s["car"].get("failed_count"),
         "l2_blocks_completed": s["l2"].get("blocks_completed"),
     })
     publish_issue(s)
     print(
         f"[SIDECHAIN DEBUG] phase={s.get('phase')} step={s.get('step')} status={s.get('step_status')} "
-        f"car={s['car'].get('records_completed')}/{s['car'].get('records_expected')} failed={s['car'].get('failed_count')} "
+        f"car={s['car'].get('records_completed')}/{s['car'].get('records_expected')} "
+        f"problem_roots={s['car'].get('problem_root_count')} failed={s['car'].get('failed_count')} "
         f"l2={s['l2'].get('blocks_completed')}/{s['l2'].get('unique_blocks_total')}",
         flush=True,
     )
