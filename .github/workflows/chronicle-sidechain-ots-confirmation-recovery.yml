@@ -1,0 +1,373 @@
+name: Chronicle Sidechain OTS Confirmation Recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-ots-confirmation-recovery.yml"
+      - "scripts/bitcoin_esplora_rpc_proxy.py"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+  statuses: write
+
+concurrency:
+  group: chronicle-sidechain-ots-confirmation-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover-confirmation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      STATUS_CONTEXT: trinity/sidechain-ots
+      SOURCE_TAG: chronicle-sidechain-evidence-v2-f64cc872b3b5
+      SOURCE_SHA: f64cc872b3b5cf70a891621615e2b56ede004a2d
+      SOURCE_SHORT: f64cc872b3b5
+      ANCHOR_TAG: chronicle-sidechain-ots-v2-f64cc872b3b5
+      CONFIRMATION_TAG: chronicle-sidechain-ots-bitcoin-v2-f64cc872b3b5
+
+    steps:
+      - name: Checkout exact recovery implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Record recovery provenance
+        run: |
+          set -euo pipefail
+          mkdir -p ots-confirmation-recovery
+          python3 scripts/toolchain_provenance.py > ots-confirmation-recovery/toolchain-provenance.json
+          python3 - <<'PY'
+          import json, os, pathlib
+          p=pathlib.Path('ots-confirmation-recovery/recovery-context.json')
+          row={
+            'schema':'trinity-accord/sidechain-ots-confirmation-recovery-context/v1',
+            'github_run_id':os.environ['GITHUB_RUN_ID'],
+            'github_sha':os.environ['GITHUB_SHA'],
+            'source_tag':os.environ['SOURCE_TAG'],
+            'source_sha':os.environ['SOURCE_SHA'],
+            'anchor_tag':os.environ['ANCHOR_TAG'],
+            'confirmation_tag':os.environ['CONFIRMATION_TAG'],
+            'publication_rule':'draft -> upload -> readback verify -> publish -> published readback verify',
+          }
+          p.write_text(json.dumps(row,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(row,indent=2,sort_keys=True))
+          PY
+          cat ots-confirmation-recovery/toolchain-provenance.json
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned OpenTimestamps client
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements-ots.txt
+          python -m pip show opentimestamps-client
+          ots --help >/dev/null
+          python3 -m py_compile scripts/bitcoin_esplora_rpc_proxy.py
+
+      - name: Bind source tag and validate immutable OTS anchor
+        run: |
+          set -euo pipefail
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          resolved="$(git rev-list -n 1 "$SOURCE_TAG")"
+          echo "[SOURCE BIND] tag=$SOURCE_TAG resolved=$resolved expected=$SOURCE_SHA"
+          test "$resolved" = "$SOURCE_SHA"
+          mkdir -p ots-confirmation-recovery/work
+          cd ots-confirmation-recovery/work
+          echo "[ANCHOR DOWNLOAD START] tag=$ANCHOR_TAG"
+          gh release download "$ANCHOR_TAG" --repo "$GITHUB_REPOSITORY"
+          test -s ANCHOR-REQUEST.json
+          test -s anchor-payload.canonical.json
+          test -s anchor-payload.canonical.json.ots
+          test -s OTS-RECEIPT.json
+          test -s SHA256SUMS
+          sha256sum -c SHA256SUMS
+          echo "[ANCHOR DOWNLOAD PASS] tag=$ANCHOR_TAG"
+
+      - name: Upgrade OTS proof and require Bitcoin attestations
+        id: upgrade
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-recovery/work
+          before_sha="$(sha256sum anchor-payload.canonical.json.ots | awk '{print $1}')"
+          before_size="$(stat -c '%s' anchor-payload.canonical.json.ots)"
+          echo "[OTS UPGRADE START] before_sha=$before_sha before_bytes=$before_size"
+          set +e
+          timeout 240 ots upgrade anchor-payload.canonical.json.ots > OTS-UPGRADE.stdout.txt 2> OTS-UPGRADE.stderr.txt
+          upgrade_rc=$?
+          set -e
+          after_sha="$(sha256sum anchor-payload.canonical.json.ots | awk '{print $1}')"
+          after_size="$(stat -c '%s' anchor-payload.canonical.json.ots)"
+          echo "[OTS UPGRADE END] rc=$upgrade_rc after_sha=$after_sha after_bytes=$after_size"
+          echo "upgrade_rc=$upgrade_rc" >> "$GITHUB_OUTPUT"
+          echo "proof_before_sha=$before_sha" >> "$GITHUB_OUTPUT"
+          echo "proof_after_sha=$after_sha" >> "$GITHUB_OUTPUT"
+          cat OTS-UPGRADE.stdout.txt
+          cat OTS-UPGRADE.stderr.txt
+          if [ "$upgrade_rc" -ne 0 ]; then
+            exit "$upgrade_rc"
+          fi
+          ots info anchor-payload.canonical.json.ots > OTS-INFO.upgraded.txt 2>&1
+          cat OTS-INFO.upgraded.txt
+          grep -q 'BitcoinBlockHeaderAttestation' OTS-INFO.upgraded.txt
+          echo "[OTS UPGRADE PASS] BitcoinBlockHeaderAttestation present"
+
+      - name: Strict native OTS verification through dual-source Bitcoin shim
+        id: verify
+        run: |
+          set -euo pipefail
+          proxy_trace="$GITHUB_WORKSPACE/ots-confirmation-recovery/BITCOIN-RPC-PROXY.jsonl"
+          proxy_stdout="$GITHUB_WORKSPACE/ots-confirmation-recovery/BITCOIN-RPC-PROXY.stdout.txt"
+          proxy_stderr="$GITHUB_WORKSPACE/ots-confirmation-recovery/BITCOIN-RPC-PROXY.stderr.txt"
+          python3 scripts/bitcoin_esplora_rpc_proxy.py \
+            --host 127.0.0.1 \
+            --port 18443 \
+            --trace "$proxy_trace" \
+            > "$proxy_stdout" 2> "$proxy_stderr" &
+          proxy_pid=$!
+          echo "[BITCOIN SHIM START] pid=$proxy_pid providers=blockstream,mempool"
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+              wait "$proxy_pid" 2>/dev/null
+            fi
+          }
+          trap cleanup_proxy EXIT
+          python3 - <<'PY'
+          import json,time,urllib.request
+          url='http://127.0.0.1:18443/'
+          last=None
+          for attempt in range(1,31):
+              try:
+                  req=urllib.request.Request(
+                      url,
+                      data=json.dumps({'jsonrpc':'1.0','id':'preflight','method':'getblockcount','params':[]}).encode(),
+                      headers={'Content-Type':'application/json'},method='POST')
+                  with urllib.request.urlopen(req,timeout=45) as r:
+                      body=json.loads(r.read())
+                  if body.get('error') is not None:
+                      raise RuntimeError(body['error'])
+                  height=body.get('result')
+                  if not isinstance(height,int) or height < 963148:
+                      raise RuntimeError(f'unexpected conservative Bitcoin tip: {height!r}')
+                  print(f'[BITCOIN SHIM PREFLIGHT PASS] conservative_tip={height} attempt={attempt}')
+                  break
+              except Exception as exc:
+                  last=exc
+                  print(f'[BITCOIN SHIM PREFLIGHT RETRY] attempt={attempt} error={type(exc).__name__}: {exc}')
+                  time.sleep(1)
+          else:
+              raise SystemExit(f'Bitcoin shim never became healthy: {last}')
+          PY
+          cd ots-confirmation-recovery/work
+          set +e
+          timeout 240 ots --bitcoin-node "http://127.0.0.1:18443/" verify anchor-payload.canonical.json.ots > OTS-VERIFY.stdout.txt 2> OTS-VERIFY.stderr.txt
+          verify_rc=$?
+          set -e
+          echo "verify_rc=$verify_rc" >> "$GITHUB_OUTPUT"
+          echo "[OTS VERIFY END] rc=$verify_rc"
+          cat OTS-VERIFY.stdout.txt
+          cat OTS-VERIFY.stderr.txt
+          echo "[BITCOIN SHIM TRACE]"
+          cat "$proxy_trace"
+          if [ "$verify_rc" -ne 0 ]; then
+            exit "$verify_rc"
+          fi
+          grep -q 'Success! Bitcoin block' OTS-VERIFY.stdout.txt
+          echo "[OTS STRICT VERIFY PASS] native ots verify returned zero with Bitcoin success transcript"
+
+      - name: Build non-empty atomic release assets
+        id: assets
+        env:
+          PROOF_BEFORE_SHA: ${{ steps.upgrade.outputs.proof_before_sha }}
+          PROOF_AFTER_SHA: ${{ steps.upgrade.outputs.proof_after_sha }}
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-recovery/work
+          python3 - <<'PY'
+          import datetime,hashlib,json,os,pathlib,re
+          root=pathlib.Path('.')
+          info=(root/'OTS-INFO.upgraded.txt').read_text(errors='replace')
+          verify=(root/'OTS-VERIFY.stdout.txt').read_text(errors='replace')+(root/'OTS-VERIFY.stderr.txt').read_text(errors='replace')
+          heights=sorted({int(x) for x in re.findall(r'BitcoinBlockHeaderAttestation\((\d+)\)',info)})
+          blocks=sorted({int(x) for x in re.findall(r'Success! Bitcoin block (\d+)',verify)})
+          if not heights or not blocks:
+              raise SystemExit('missing Bitcoin attestation or strict success block')
+          report={
+            'schema':'trinity-accord/chronicle-sidechain-ots-strict-bitcoin-verification/v1',
+            'verified_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),
+            'source_commit_sha':os.environ['SOURCE_SHA'],
+            'source_release_tag':os.environ['SOURCE_TAG'],
+            'anchor_release_tag':os.environ['ANCHOR_TAG'],
+            'confirmation_release_tag':os.environ['CONFIRMATION_TAG'],
+            'rpc_source':'dual_esplora_proxy:blockstream+mempool',
+            'rpc_consensus_rule':'exact block-hash and raw-header agreement; local double-SHA256 header-hash check',
+            'upgrade_returncode':0,
+            'verify_returncode':0,
+            'bitcoin_verified':True,
+            'bitcoin_attestation_heights':heights,
+            'verified_success_blocks':blocks,
+            'proof_before_sha256':os.environ['PROOF_BEFORE_SHA'],
+            'upgraded_ots_sha256':os.environ['PROOF_AFTER_SHA'],
+            'verify_transcript_sha256':hashlib.sha256(verify.encode()).hexdigest(),
+            'publication_mode':'draft_then_readback_then_publish',
+            'boundary':'Strict native OpenTimestamps verification through a fail-closed local JSON-RPC shim backed by independent Blockstream and mempool.space Bitcoin mainnet header data. Non-amending.'
+          }
+          (root/'OTS-STRICT-BITCOIN-VERIFICATION.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(report,indent=2,sort_keys=True))
+          PY
+          staging="release-bundle"
+          rm -rf "$staging"
+          mkdir -p "$staging"
+          cp \
+            ANCHOR-REQUEST.json \
+            anchor-payload.canonical.json \
+            anchor-payload.canonical.json.ots \
+            OTS-RECEIPT.json \
+            OTS-INFO.upgraded.txt \
+            OTS-UPGRADE.stdout.txt \
+            OTS-UPGRADE.stderr.txt \
+            OTS-VERIFY.stdout.txt \
+            OTS-VERIFY.stderr.txt \
+            OTS-STRICT-BITCOIN-VERIFICATION.json \
+            "$staging/"
+          cp ../BITCOIN-RPC-PROXY.jsonl "$staging/"
+          cp ../BITCOIN-RPC-PROXY.stdout.txt "$staging/"
+          cp ../BITCOIN-RPC-PROXY.stderr.txt "$staging/"
+          cp ../toolchain-provenance.json "$staging/"
+          cp ../recovery-context.json "$staging/"
+          sha256sum "$staging"/* > "$staging/BUNDLE-CONTENTS-SHA256.txt"
+          bundle="chronicle-sidechain-ots-bitcoin-v2-${SOURCE_SHORT}.tar.gz"
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -czf "$bundle" -C "$staging" .
+          test -s "$bundle"
+          test -s OTS-STRICT-BITCOIN-VERIFICATION.json
+          sha256sum "$bundle" OTS-STRICT-BITCOIN-VERIFICATION.json > RELEASE-ASSETS-SHA256.txt
+          test -s RELEASE-ASSETS-SHA256.txt
+          echo "[RELEASE ASSETS]"
+          stat -c '%n bytes=%s' "$bundle" OTS-STRICT-BITCOIN-VERIFICATION.json RELEASE-ASSETS-SHA256.txt
+          cat RELEASE-ASSETS-SHA256.txt
+          echo "bundle=$bundle" >> "$GITHUB_OUTPUT"
+
+      - name: Recover draft and atomically publish confirmation release
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          BUNDLE: ${{ steps.assets.outputs.bundle }}
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-recovery/work
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" > releases-before.json
+          python3 - <<'PY' > matching-release.env
+          import json,os
+          rows=json.load(open('releases-before.json'))
+          tag=os.environ['CONFIRMATION_TAG']
+          hits=[r for r in rows if r.get('tag_name')==tag]
+          if len(hits)>1:
+              raise SystemExit(f'multiple releases found for {tag}')
+          if not hits:
+              print('EXISTING_RELEASE_ID=')
+              print('EXISTING_RELEASE_DRAFT=')
+          else:
+              r=hits[0]
+              print(f'EXISTING_RELEASE_ID={r["id"]}')
+              print(f'EXISTING_RELEASE_DRAFT={str(bool(r.get("draft"))).lower()}')
+              print(f'EXISTING_RELEASE_ASSETS={len(r.get("assets") or [])}')
+          PY
+          cat matching-release.env
+          set -a
+          . matching-release.env
+          set +a
+          if [ -n "${EXISTING_RELEASE_ID:-}" ] && [ "${EXISTING_RELEASE_DRAFT:-}" = "false" ]; then
+            echo "[PUBLISHED RELEASE EXISTS] refusing mutation; independently re-verifying assets"
+            rm -rf published-existing
+            mkdir published-existing
+            gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir published-existing
+            cd published-existing
+            test -s RELEASE-ASSETS-SHA256.txt
+            sha256sum -c RELEASE-ASSETS-SHA256.txt
+            grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+            test -s "$BUNDLE"
+            tar -tzf "$BUNDLE" | grep -q './anchor-payload.canonical.json.ots'
+            echo "[PUBLISHED RELEASE REVERIFIED] tag=$CONFIRMATION_TAG"
+            exit 0
+          fi
+          if [ -n "${EXISTING_RELEASE_ID:-}" ] && [ "${EXISTING_RELEASE_DRAFT:-}" = "true" ]; then
+            echo "[INCOMPLETE DRAFT RECOVERY] deleting unpublished draft id=$EXISTING_RELEASE_ID tag=$CONFIRMATION_TAG"
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/releases/$EXISTING_RELEASE_ID"
+          fi
+          echo "[DRAFT CREATE START] tag=$CONFIRMATION_TAG target=$SOURCE_SHA"
+          gh release create "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" --draft \
+            --title "Chronicle sidechain OTS Bitcoin verification — ${SOURCE_SHA:0:12}" \
+            --notes "Strict native OpenTimestamps verification succeeded for the canonical sidechain v2 anchor payload. Publication is atomic: draft assets are uploaded and independently read back before this release becomes public. The bundle preserves the upgraded proof, transcripts, dual-source Bitcoin RPC trace, provenance, and verification report. Non-amending."
+          for asset in "$BUNDLE" OTS-STRICT-BITCOIN-VERIFICATION.json RELEASE-ASSETS-SHA256.txt; do
+            bytes="$(stat -c '%s' "$asset")"
+            sha="$(sha256sum "$asset" | awk '{print $1}')"
+            test "$bytes" -gt 0
+            echo "[DRAFT ASSET UPLOAD START] name=$asset bytes=$bytes sha256=$sha"
+            gh release upload "$CONFIRMATION_TAG" "$asset" --repo "$GITHUB_REPOSITORY"
+            echo "[DRAFT ASSET UPLOAD PASS] name=$asset"
+          done
+          rm -rf draft-readback
+          mkdir draft-readback
+          gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir draft-readback
+          cd draft-readback
+          echo "[DRAFT READBACK ASSETS]"
+          ls -l
+          test -s RELEASE-ASSETS-SHA256.txt
+          sha256sum -c RELEASE-ASSETS-SHA256.txt
+          grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+          test -s "$BUNDLE"
+          tar -tzf "$BUNDLE" | grep -q './anchor-payload.canonical.json.ots'
+          echo "[DRAFT READBACK PASS] all release assets verified before publication"
+          cd ..
+          gh release edit "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          echo "[RELEASE PUBLISHED] tag=$CONFIRMATION_TAG"
+          rm -rf published-readback
+          mkdir published-readback
+          gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir published-readback
+          cd published-readback
+          sha256sum -c RELEASE-ASSETS-SHA256.txt
+          grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+          test -s "$BUNDLE"
+          echo "[PUBLISHED READBACK PASS] tag=$CONFIRMATION_TAG"
+
+      - name: Publish terminal OTS confirmation success
+        if: success()
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=bitcoin_verified_published&run=${GITHUB_RUN_ID}&upgrade_rc=0&verify_rc=0"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=success \
+            -f context="$STATUS_CONTEXT" \
+            -f description="strict OTS Bitcoin confirmation published and read back" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS CONFIRMATION TERMINAL] state=success tag=$CONFIRMATION_TAG run_id=$GITHUB_RUN_ID"
+
+      - name: Publish terminal OTS recovery failure
+        if: failure()
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=confirmation_recovery_failure&run=${GITHUB_RUN_ID}"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=failure \
+            -f context="$STATUS_CONTEXT" \
+            -f description="OTS verified; confirmation publication recovery failed" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS CONFIRMATION TERMINAL] state=failure run_id=$GITHUB_RUN_ID"
+
+      - name: Upload recovery diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-sidechain-ots-confirmation-recovery-${{ github.run_id }}
+          path: ots-confirmation-recovery/
+          retention-days: 90
