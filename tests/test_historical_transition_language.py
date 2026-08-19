@@ -131,7 +131,7 @@ def test_chronicle_and_crosschain_scopes_remain_separate() -> None:
         assert "crosschain-formation" in text
 
     assert "175-entry Ethereum Chronicle" in chronicle
-    assert "not retroactively inserted" in chronicle
+    assert "**not** retroactively inserted into" in chronicle
     assert "175-entry Ethereum ASIMilestones corpus" in verification
     assert "217 preserved Polygon/Base evidence coordinates" in verification
 
