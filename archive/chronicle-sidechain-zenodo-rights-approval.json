@@ -1,0 +1,8 @@
+{
+  "schema": "trinity-accord/chronicle-sidechain-zenodo-rights-approval/v1",
+  "approval": "TRINITY_SIDECHAIN_EVIDENCE_MIXED_RIGHTS_V1_APPROVED",
+  "scope": "Publication of the current Chronicle sidechain evidence v2 mixed-rights cold-recovery package to Zenodo, with the package's existing rights metadata and boundaries preserved.",
+  "boundary": "This approval does not claim ownership of third-party material, does not relicense third-party material, does not alter Canon or canonical authority, and does not authorize publication outside the bounded sidechain evidence recovery package.",
+  "recorded_at": "2026-08-19T12:20:00Z",
+  "status": "approved"
+}
