@@ -1,0 +1,79 @@
+name: Probe final sidechain archive recovery
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/probe-final8-archives.yml]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Restore immutable v1 snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          t="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$t" --pattern "$BOOTSTRAP_ARCHIVE"
+          echo "$BOOTSTRAP_ARCHIVE_SHA256  $t/$BOOTSTRAP_ARCHIVE" | sha256sum --check --strict
+          mkdir -p artifacts
+          tar -xzf "$t/$BOOTSTRAP_ARCHIVE" -C artifacts
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; tools="$RUNNER_TEMP/tools"; mkdir -p "$tools"
+          curl --fail --silent --show-error --location --retry 3 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "$KUBO_LINUX_AMD64_SHA512  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$tools" kubo/ipfs
+          chmod +x "$tools/kubo/ipfs"
+          echo "CHRONICLE_KUBO_BIN=$tools/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Probe alternate historical image sources
+        run: python3 scripts/research-chronicle-image-sources.py
+      - name: Probe CIDv1 directory-root constructions
+        run: python3 scripts/research-chronicle-directory-roots.py
+      - name: Build result summary
+        run: |
+          python3 - <<'PY'
+          import json
+          images=json.load(open('image-source-research.json'))
+          dirs=json.load(open('directory-root-research.json'))
+          lines=['### Final-root archival probe', '']
+          exact=[]
+          for cid,row in images.items():
+              hits=row.get('exact_sources',[])
+              if hits: exact.append(cid)
+              lines.append(f"- image `{cid}`: source URLs={len(row.get('source_urls',[]))}, exact sources={len(hits)}")
+          for cid,row in dirs.items():
+              lines.append(f"- metadata directory `{cid}`: {row.get('match') or 'no exact match'}; checked={row.get('checked')}")
+          lines += ['', f"Exact archival hits: **{len(exact)}**" + ((' — '+', '.join('`'+x+'`' for x in exact)) if exact else '')]
+          open('final8-probe-summary.md','w').write('\n'.join(lines)+'\n')
+          PY
+          cat final8-probe-summary.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final8-archive-probe-${{ github.run_id }}
+          path: |
+            image-source-research.json
+            directory-root-research.json
+            final8-probe-summary.md
+          retention-days: 7
+      - name: Comment matching PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$GITHUB_REF_NAME" --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$n" ]; then gh pr comment "$n" --repo "$GITHUB_REPOSITORY" --body-file final8-probe-summary.md; fi
