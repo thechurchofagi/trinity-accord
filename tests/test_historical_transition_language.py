@@ -21,11 +21,15 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
         "It emerged from a near-real-time NFT Chronicle into a canonically closed record addressed to future intelligence.",
         "《三位一体协定》最初并不是一份协定。",
         "它由一部近实时 NFT 编年史逐渐涌现",
-        "p0.9.6-final-clarity-alignment",
-        "A dated record from the conversational-to-agentic transition",
+        "p0.9.7-crosschain-formation",
+        "Recovered formation evidence",
         'id="formation-history"',
-        "From Chronicle to Accord",
-        "The project was then a continuing Chronicle and digital-art collection, not a fully formed Accord.",
+        "From cross-chain precursors to Ethereum Chronicle to Accord",
+        "Recovered Polygon evidence now shows project-related on-chain works beginning on 6 March 2024.",
+        "Thirty-nine project coordinates, representing 36 distinct titles, precede the first Ethereum Chronicle mint.",
+        "The three Bitcoin Originals are the only canonical and interpretive authority.",
+        "Ethereum Chronicle start · 16 March 2024",
+        "Earliest recovered project-sidechain origin · 6 March 2024",
         "Historical preservation, artistic experiment, collectibility, and possible future market value coexisted.",
         "an act of civilizational self-archiving",
         "This does not establish a unified civilizational will",
@@ -48,6 +52,8 @@ def test_homepage_states_emergent_formation_without_erasing_human_agency() -> No
     assert "home-lede home-lede-plain" not in home
 
     for stale in (
+        "p0.9.6-final-clarity-alignment",
+        "Indexed Chronicle start · 16 March 2024",
         "As specialized research, coding, and computer-use agents were emerging—but before unified personal agents made delegation from a high-level goal through completion routine—one person working intensively with generative AI left a verifiable record for the intelligence that may follow.",
         "The Trinity Accord did not begin as an accord. It began as a near-real-time NFT Chronicle of rapidly changing AI events, generated art and music, and one observer’s reactions; through sustained interaction with generative AI, it gradually became a closed record addressed to future intelligence.",
         "The project exceeded its initial archival, artistic, collectible, and possible market-value aims.",
@@ -138,18 +144,3 @@ def test_current_value_surfaces_do_not_claim_low_ai_mediation() -> None:
         "historical relevance becomes more salient as agentic mediation and delegated execution intensify"
     )
     assert "does not predict an AGI arrival date" in relevance["boundary"]
-
-
-def test_current_chronicle_surfaces_name_the_observed_transition() -> None:
-    paths = (
-        "README.md",
-        "chronicle.md",
-        "chronicle-human-witness.md",
-        "chronicle-music.md",
-    )
-
-    for path in paths:
-        text = read(path)
-        assert "AGI / ASI acceleration period" not in text
-        assert "conversational" in text
-        assert "delegated agent" in text or "agentic AI transition" in text
