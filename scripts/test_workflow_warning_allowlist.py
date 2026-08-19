@@ -36,6 +36,10 @@ allowed_warning_fragments = {
     'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase release --status running || true',
     'python3 scripts/publish-chronicle-sidechain-progress.py --phase workflow_complete --status "${{ job.status }}" || true',
     'python3 scripts/sidechain-debug-live.py mark --phase workflow_complete --step terminal --status "${{ job.status }}" --detail "terminal workflow status" || true',
+    # This command runs only inside the reconcile job's `if: failure()` reporter.
+    # The reconciliation has already failed at that point; failure-status publication
+    # is best-effort telemetry and cannot turn evidence verification into success.
+    '-f target_url="${run_url}#trinity-zenodo?state=public_reconcile_failure" >/dev/null || true',
 }
 
 bad = []
