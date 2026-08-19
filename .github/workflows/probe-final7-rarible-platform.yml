@@ -1,0 +1,160 @@
+name: Probe final seven Rarible platform copies
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/probe-final7-rarible-platform.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/recover-final-8-archives
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; t="$RUNNER_TEMP/tools"; mkdir -p "$t"
+          curl --fail --silent --show-error --location --retry 3 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "$KUBO_LINUX_AMD64_SHA512  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$t" kubo/ipfs
+          chmod +x "$t/kubo/ipfs"
+          echo "KUBO=$t/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Fetch Rarible pages APIs and media candidates then verify exact CIDs
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, re, subprocess, tempfile, urllib.error, urllib.parse, urllib.request
+
+          targets = {
+            'QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT': {'chain':'POLYGON','contract':'0x9a3a7ddde5712b090181937bd7f0a6e2084707e6','token':'0','role':'media:image'},
+            'QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva': {'chain':'POLYGON','contract':'0x001007e8ab86f6ba6f477712c8b8db84887d0175','token':'0','role':'media:image'},
+            'QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1': {'chain':'BASE','contract':'0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77','token':'0','role':'media:image'},
+            'QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah': {'chain':'BASE','contract':'0xf616ba3cfab4d17477d7c63d775666dcb1e5542d','token':'0','role':'media:image'},
+            'QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC': {'chain':'BASE','contract':'0x1f26a5a197b4bed502e0a5a05d22b625406d05c1','token':'0','role':'media:image'},
+            'bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy': {'chain':'POLYGON','contract':'0xad4bda0b463ace68dd640b14891b00a7fe1caccf','token':'1','role':'metadata'},
+            'bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54': {'chain':'POLYGON','contract':'0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d','token':'1','role':'metadata','leaf_path':'token.json'},
+          }
+          kubo=os.environ['KUBO']
+          ua={'User-Agent':'Mozilla/5.0 (compatible; TrinityAccordEvidenceRecovery/1.0)','Accept':'*/*'}
+          out={'schema':'trinity-accord/final-seven-rarible-platform-probe/v1','exact_recovered':[],'targets':{}}
+          recovered=pathlib.Path('rarible-recovered'); recovered.mkdir(exist_ok=True)
+
+          def fetch(url, timeout=20, max_bytes=25_000_000):
+            req=urllib.request.Request(url,headers=ua)
+            try:
+              with urllib.request.urlopen(req,timeout=timeout) as r:
+                b=r.read(max_bytes+1)
+                if len(b)>max_bytes: raise RuntimeError('body too large')
+                return {'ok':True,'status':getattr(r,'status',200),'url':r.geturl(),'type':r.headers.get('content-type',''),'body':b}
+            except urllib.error.HTTPError as e:
+              try:b=e.read(1_000_000)
+              except Exception:b=b''
+              return {'ok':False,'status':e.code,'url':url,'type':e.headers.get('content-type','') if e.headers else '','body':b,'error':str(e)}
+            except Exception as e:
+              return {'ok':False,'status':None,'url':url,'type':'','body':b'','error':str(e)}
+
+          def hash_file(cid, data):
+            results=[]
+            with tempfile.TemporaryDirectory() as td:
+              p=pathlib.Path(td)/'payload'; p.write_bytes(data)
+              modes=[]
+              if cid.startswith('Qm'):
+                modes=[['--cid-version=0','--raw-leaves=false']]
+              else:
+                modes=[['--cid-version=1','--raw-leaves=true'],['--cid-version=1','--raw-leaves=false']]
+              for mode in modes:
+                cmd=[kubo,'add','-Q','--only-hash','--pin=false',*mode,str(p)]
+                try:
+                  got=subprocess.check_output(cmd,text=True,stderr=subprocess.DEVNULL,timeout=40).strip()
+                  results.append({'mode':mode,'cid':got})
+                  if got==cid:return True,results
+                except Exception as e:results.append({'mode':mode,'error':str(e)[:160]})
+            return False,results
+
+          def hash_token_json_directory(cid, data):
+            results=[]
+            with tempfile.TemporaryDirectory() as td:
+              d=pathlib.Path(td)/'root'; d.mkdir(); (d/'token.json').write_bytes(data)
+              for raw in ('true','false'):
+                cmd=[kubo,'add','-Qr','--only-hash','--pin=false','--cid-version=1',f'--raw-leaves={raw}',str(d)]
+                try:
+                  got=subprocess.check_output(cmd,text=True,stderr=subprocess.DEVNULL,timeout=40).strip().splitlines()[-1]
+                  results.append({'raw_leaves':raw,'cid':got})
+                  if got==cid:return True,results
+                except Exception as e:results.append({'raw_leaves':raw,'error':str(e)[:160]})
+            return False,results
+
+          url_re=re.compile(r'https?://[^\\s"\'<>]+')
+          def extract_urls(body):
+            if not body:return []
+            text=body.decode('utf-8','replace')
+            for old,new in [('\\u002F','/'),('\\/','/'),('&amp;','&')]:text=text.replace(old,new)
+            urls=set(url_re.findall(text))
+            cleaned=[]
+            for u in urls:
+              u=u.rstrip('\\,)}];')
+              if any(k in u.lower() for k in ['ipfs','rarible','cdn','cloudfront','media','image','content','storage','.png','.jpg','.jpeg','.webp','.gif','.json']): cleaned.append(u)
+            return sorted(set(cleaned))[:200]
+
+          for cid,t in targets.items():
+            chain=t['chain']; c=t['contract']; token=t['token']; lower=chain.lower()
+            item=f'{chain}:{c}:{token}'
+            seeds=[
+              f'https://rarible.com/token/{chain}-{c}:{token}',
+              f'https://rarible.com/token/{c}:{token}',
+              f'https://rarible.com/token/{lower}/{c}:{token}',
+              f'https://api.rarible.org/v0.1/items/{urllib.parse.quote(item,safe=":")}',
+              f'https://api-mainnet.rarible.com/marketplace/api/v4/items/{urllib.parse.quote(item,safe=":")}',
+            ]
+            row={'coordinate':item,'role':t['role'],'seed_requests':[],'candidate_requests':[],'exact':False,'verification':[]}
+            candidates=set()
+            for u in seeds:
+              r=fetch(u)
+              row['seed_requests'].append({'url':u,'ok':r['ok'],'status':r['status'],'final_url':r['url'],'type':r['type'],'bytes':len(r['body']),'error':r.get('error')})
+              candidates.update(extract_urls(r['body']))
+            # Also ask Rarible's own IPFS hosts without CAR negotiation, in case the
+            # platform still serves ordinary payload bytes even when trustless CAR fails.
+            leaf='/' + t['leaf_path'] if t.get('leaf_path') else ''
+            candidates.update([
+              f'https://ipfs.raribleuserdata.com/ipfs/{cid}{leaf}',
+              f'https://rarible.mypinata.cloud/ipfs/{cid}{leaf}',
+            ])
+            for u in sorted(candidates)[:120]:
+              r=fetch(u)
+              info={'url':u,'ok':r['ok'],'status':r['status'],'final_url':r['url'],'type':r['type'],'bytes':len(r['body']),'error':r.get('error')}
+              if r['ok'] and r['body']:
+                if t.get('leaf_path')=='token.json': ok,checks=hash_token_json_directory(cid,r['body'])
+                else: ok,checks=hash_file(cid,r['body'])
+                info['cid_checks']=checks
+                if ok:
+                  info['exact']=True; row['exact']=True
+                  ext='.json' if 'json' in r['type'].lower() or t['role']=='metadata' else '.bin'
+                  file=recovered/(cid+ext); file.write_bytes(r['body'])
+                  info['saved_file']=str(file)
+                  out['exact_recovered'].append({'root_cid':cid,'url':u,'file':str(file),'bytes':len(r['body'])})
+              row['candidate_requests'].append(info)
+            out['targets'][cid]=row
+            print(cid, 'EXACT' if row['exact'] else 'not recovered', 'seeds',len(row['seed_requests']),'candidates',len(row['candidate_requests']))
+
+          pathlib.Path('final7-rarible-platform-probe.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps({'exact_recovered':len(out['exact_recovered']),'cids':[x['root_cid'] for x in out['exact_recovered']]},indent=2))
+          PY
+      - name: Commit probe report and exact recovered bytes
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add final7-rarible-platform-probe.json rarible-recovered
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record Rarible platform recovery probe"
+          git push origin HEAD:agent/recover-final-8-archives
