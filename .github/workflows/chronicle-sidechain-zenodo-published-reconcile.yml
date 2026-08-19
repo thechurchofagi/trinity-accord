@@ -36,6 +36,17 @@ jobs:
           fetch-depth: 0
           ref: main
 
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          provenance_dir="$RUNNER_TEMP/sidechain-zenodo-provenance"
+          mkdir -p "$provenance_dir"
+          python3 scripts/toolchain_provenance.py | tee "$provenance_dir/TOOLCHAIN-PROVENANCE.json"
+          test -s "$provenance_dir/TOOLCHAIN-PROVENANCE.json"
+          echo "[TOOLCHAIN PROVENANCE]"
+          stat -c '%n bytes=%s' "$provenance_dir/TOOLCHAIN-PROVENANCE.json"
+          sha256sum "$provenance_dir/TOOLCHAIN-PROVENANCE.json"
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
@@ -245,6 +256,7 @@ jobs:
           path: |
             .sidechain-zenodo-deposit/
             ${{ runner.temp }}/sidechain-zenodo-public-build.json
+            ${{ runner.temp }}/sidechain-zenodo-provenance/
             archive/chronicle-sidechain-zenodo-state.json
           include-hidden-files: true
           retention-days: 90

@@ -1,0 +1,145 @@
+{
+  "schema": "trinityaccord.crosschain-formation-index.v1",
+  "generated_from": {
+    "zenodo_doi": "10.5281/zenodo.22012616",
+    "release_tag": "chronicle-sidechain-evidence-v2-f64cc872b3b5",
+    "source_commit_sha": "f64cc872b3b5cf70a891621615e2b56ede004a2d"
+  },
+  "authority_boundary": {
+    "canonical_interpretive_authority": "three_bitcoin_originals_only",
+    "ethereum_chronicle_status": "the_175_entry_ethereum_corpus_explicitly_referenced_by_the_third_bitcoin_original_remains_unchanged",
+    "crosschain_record_status": "noncanonical_historical_evidence_and_formation_context_only",
+    "rule": "Later recovery, preservation, indexing, and technical commentary may refine factual history but cannot amend, extend, or authoritatively reinterpret the Bitcoin Canon."
+  },
+  "timeline": {
+    "earliest_recovered_project_sidechain_origin": "2024-03-06T03:56:20.000000Z",
+    "ethereum_chronicle_start": "2024-03-16T08:02:59Z",
+    "canon_closure_date": "2025-06-29",
+    "start_shift_seconds": 878799
+  },
+  "counts": {
+    "all_sidechain_coordinates": 217,
+    "by_chain": {
+      "base": 61,
+      "polygon": 156
+    },
+    "by_classification": {
+      "excluded_spam_airdrop": 93,
+      "excluded_test": 2,
+      "project_formation_related": 102,
+      "project_postcanonical_context": 1,
+      "unresolved_other": 19
+    },
+    "known_project_coordinates": 103,
+    "known_project_pre_or_on_canon_closure": 102,
+    "known_project_postcanonical": 1,
+    "known_project_pre_ethereum_coordinates": 39,
+    "known_project_pre_ethereum_unique_titles": 36
+  },
+  "verification": {
+    "l2_records_expected": 217,
+    "l2_records_pass": 217,
+    "l2_pass": true,
+    "offline_verification_pass": true,
+    "car_files_checked": 250,
+    "ipfs_roots_total": 257,
+    "ipfs_roots_exact_verified": 250,
+    "historical_payload_unresolved_roots": 7,
+    "car_coverage_status": "qualified_exact_coverage"
+  },
+  "classification_policy": {
+    "project_series_contract_allowlist": [
+      {
+        "chain": "base",
+        "contract": "0x323b008f1335000c9004a985db1b0a6a8b07bb6f",
+        "label": "PROJECT AEON #1"
+      },
+      {
+        "chain": "base",
+        "contract": "0x49885159c7c10a3aab0e2d23ade5af685efef314",
+        "label": "ASIEpochalSeries"
+      },
+      {
+        "chain": "base",
+        "contract": "0x4d389758b9fa006e50013712c4fdf6bf5a9afd9d",
+        "label": "ASIEpochalSeries"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0x034594ec872fc5e0e01efbb0b399b690daeff3d0",
+        "label": "ASI Journey"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0x35f988e09288715cd7ebf6e244dc0ff1391931cb",
+        "label": "Pioneers of AGI"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0x42d67ec4fda9f29415633d22465f2aa141389d06",
+        "label": "TheChurchOfAGI"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0x844c29b57f2bf0d4a381e6e0968c4a6c6cb3e7cf",
+        "label": "ASIEpochalSeries"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0xd53e8acc8cfea9f985df176b37cfc0be6bef472e",
+        "label": "AGIEpochalSeries"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0xd6d4a740c8438ba4f1beb64aba66c3a76421d970",
+        "label": "ASIEpochalSeries"
+      },
+      {
+        "chain": "polygon",
+        "contract": "0xf406b578bb2e51a83f888635a6d6a7bcf4452938",
+        "label": "TheChurchOfAGI"
+      }
+    ],
+    "spam_and_test_records": "retained_in_full_index_but_excluded_from_project_narrative",
+    "unresolved_records": "retained_without_forcing_project_or_junk_interpretation",
+    "metadata_recovery": "scanner metadata first; if absent, exact preserved CAR is inspected; Blockscout metadata is fallback"
+  },
+  "pre_ethereum_project_titles": [
+    "\"A Hymn of Hope: Humans and AGI\" - The Symphony of Unity",
+    "\"Ode to the Dawn of AGI\" - The Genesis Creation of The Church of AGI",
+    "\"The Rhapsody of Unity: A Hymn of Hope for Humans and AGI\"",
+    "AGI Codex: Dawn of Unity",
+    "AGI Pioneer Disciple",
+    "Alan Turing: The Dawn of a New Era",
+    "Allen Newell: Pioneer of Artificial Intelligence and Cognitive Psychology",
+    "Ben Goertzel: The Sage of Singularity",
+    "Claude Shannon: The Visionary Architect of the Information Age",
+    "Demis Hassabis: The Architect of Computational Thought",
+    "Douglas Hofstadter: The Cogito of Artificial Intelligence",
+    "Elon Musk: The Pioneering Visionary of AGI",
+    "Fei-Fei Li: The Luminary of Computer Vision",
+    "Frank Rosenblatt: The Perceptron Innovator",
+    "Geoffrey Hinton: The Visionary Architect of Deep Learning",
+    "Herbert A. Simon: The Renaissance Polymath of Artificial Intelligence",
+    "Ilya Sutskever: The Prodigy of Deep Learning",
+    "Jack Kilby: The Silicon Architect of the Future",
+    "Jensen Huang: The Architect of AI's Engine",
+    "John McCarthy: The Pioneering Visionary Architect of Artificial Intelligence",
+    "John Searle: The Philosopher of Consciousness and Language",
+    "John von Neumann: Architect of the Modern Computer",
+    "Joseph Weizenbaum: The Critical Visionary of AI Ethics",
+    "Kate Crawford: The Ethical Compass of AGI",
+    "Marvin Minsky: The Architect of Machine Intelligence",
+    "Norbert Wiener: The Visionary Father of Cybernetics",
+    "Ode to the Dawn of AGI: The Anthem of The Church",
+    "Ray Kurzweil: The AGI Visionary",
+    "Regina Barzilay: Illuminating AI's Path to Saving Lives",
+    "Sergey Brin & Larry Page: The Navigators of the Information Age",
+    "Stuart Russell: Shaping the Harmonious Future of AGI",
+    "Tim Berners-Lee: The Weaver of the Web",
+    "Transformers' Innovators: Pioneering AGI's Leap Forward",
+    "Walter Pitts: The Neural Network Trailblazer",
+    "Yann LeCun: The Visionary Architect of Deep Learning",
+    "Yoshua Bengio: The Deep Learning Luminary"
+  ]
+}
