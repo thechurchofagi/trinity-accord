@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  statuses: write
 
 concurrency:
   group: main-write-lock
@@ -23,6 +24,7 @@ jobs:
     timeout-minutes: 90
     env:
       GH_TOKEN: ${{ github.token }}
+      STATUS_CONTEXT: trinity/sidechain-zenodo
       ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
       ZENODO_API_BASE: ${{ vars.ZENODO_API_BASE || 'https://zenodo.org/api' }}
       CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK: ${{ vars.CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK }}
@@ -38,6 +40,7 @@ jobs:
           set -euo pipefail
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
+          echo "[ZENODO RUN] run_id=$GITHUB_RUN_ID event_sha=$GITHUB_SHA started=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
@@ -55,6 +58,7 @@ jobs:
           set -euo pipefail
           root="$RUNNER_TEMP/sidechain-zenodo-source"
           mkdir -p "$root"
+          echo "[SOURCE RESOLVE START] $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt,isDraft,isPrerelease > "$root/releases.json"
           python3 - <<'PY' > "$RUNNER_TEMP/sidechain-zenodo-source/source.env"
           import json,os,re
@@ -93,6 +97,7 @@ jobs:
           CHRONICLE_OUT: ${{ steps.source.outputs.source_root }}/extracted/chronicle-sidechain-scan
         run: |
           set -euo pipefail
+          echo "[COLD VERIFY START] $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           python3 scripts/verify-chronicle-sidechain-evidence.py
           python3 - <<'PY'
           import json,os,pathlib
@@ -114,6 +119,7 @@ jobs:
         run: |
           set -euo pipefail
           deposit=".sidechain-zenodo-deposit/${SOURCE_SHORT}"
+          echo "[DOI PACKAGE START] source=$SOURCE_TAG output=$deposit"
           python3 scripts/build_chronicle_sidechain_zenodo_deposit.py \
             --archive "$SOURCE_ROOT/$ARCHIVE" \
             --archive-sha256 "$SOURCE_ROOT/$ARCHIVE.sha256" \
@@ -123,7 +129,7 @@ jobs:
             --output-dir "$deposit" | tee "$RUNNER_TEMP/sidechain-zenodo-build.json"
           (cd "$deposit" && sha256sum -c SHA256SUMS)
           echo "deposit_dir=$deposit" >> "$GITHUB_OUTPUT"
-          echo "[DOI READY] deposit=$deposit"
+          echo "[DOI READY] deposit=$deposit files=$(find "$deposit" -maxdepth 1 -type f | wc -l) bytes=$(du -sb "$deposit" | awk '{print $1}')"
 
       - name: Resolve publication authorization
         id: auth
@@ -140,20 +146,61 @@ jobs:
           echo "publication_enabled=$publication_enabled" >> "$GITHUB_OUTPUT"
           echo "[ZENODO AUTH] token_configured=$token_configured rights_approved=$rights_approved publication_enabled=$publication_enabled"
 
+      - name: Publish observable authorization state
+        env:
+          TOKEN_CONFIGURED: ${{ steps.auth.outputs.token_configured }}
+          RIGHTS_APPROVED: ${{ steps.auth.outputs.rights_approved }}
+          PUBLICATION_ENABLED: ${{ steps.auth.outputs.publication_enabled }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ "$PUBLICATION_ENABLED" = "true" ]; then
+            target="${run_url}#trinity-zenodo?state=authorized&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}"
+            gh api --method POST -H "Accept: application/vnd.github+json" \
+              "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+              -f state=pending \
+              -f context="$STATUS_CONTEXT" \
+              -f description="Zenodo authorization present; publication in progress" \
+              -f target_url="$target" >/dev/null
+            echo "[ZENODO AUTHORIZED] publication may proceed"
+          else
+            target="${run_url}#trinity-zenodo?state=authorization_missing&token=${TOKEN_CONFIGURED}&rights=${RIGHTS_APPROVED}"
+            gh api --method POST -H "Accept: application/vnd.github+json" \
+              "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+              -f state=failure \
+              -f context="$STATUS_CONTEXT" \
+              -f description="Zenodo publication authorization incomplete" \
+              -f target_url="$target" >/dev/null
+            echo "[ZENODO AUTH BLOCKED] token_configured=$TOKEN_CONFIGURED rights_approved=$RIGHTS_APPROVED" >&2
+            exit 1
+          fi
+
       - name: Publish and full-readback verify independent Zenodo version
         id: publish
-        if: steps.auth.outputs.publication_enabled == 'true'
+        if: steps.auth.outputs.publication_enabled == 'true' && success()
         env:
           DEPOSIT_DIR: ${{ steps.package.outputs.deposit_dir }}
         run: |
           set -euo pipefail
+          echo "[ZENODO PUBLISH START] api_base=$ZENODO_API_BASE deposit=$DEPOSIT_DIR"
           python3 scripts/publish_chronicle_sidechain_to_zenodo.py \
             --deposit-dir "$DEPOSIT_DIR" \
             --api-base "$ZENODO_API_BASE" \
             --rights-boundary-ack "$CHRONICLE_SIDECHAIN_ZENODO_RIGHTS_ACK"
+          test -s archive/chronicle-sidechain-zenodo-state.json
+          python3 - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('archive/chronicle-sidechain-zenodo-state.json')
+          r=json.loads(p.read_text())
+          doi=r.get('doi') or r.get('version_doi')
+          if not doi:
+              raise SystemExit('Zenodo publisher returned without a DOI in state file')
+          print(f'[ZENODO PUBLISH PASS] doi={doi} concept_doi={r.get("concept_doi") or r.get("conceptdoi") or ""}')
+          PY
 
       - name: Commit verified DOI state
-        if: steps.auth.outputs.publication_enabled == 'true'
+        id: state
+        if: steps.auth.outputs.publication_enabled == 'true' && success()
         run: |
           set -euo pipefail
           test -s archive/chronicle-sidechain-zenodo-state.json
@@ -162,11 +209,17 @@ jobs:
           git add archive/chronicle-sidechain-zenodo-state.json
           if git diff --cached --quiet; then
             echo "[DOI STATE] already current"
+            echo "state_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "archive: record sidechain evidence DOI"
           for attempt in 1 2 3; do
-            if git push origin HEAD:main; then exit 0; fi
+            echo "[DOI STATE PUSH] attempt=$attempt commit=$(git rev-parse HEAD)"
+            if git push origin HEAD:main; then
+              echo "state_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+              echo "[DOI STATE PUSH PASS] commit=$(git rev-parse HEAD)"
+              exit 0
+            fi
             echo "[DOI STATE PUSH RETRY] attempt=$attempt"
             git fetch origin main --prune
             git rebase origin/main
@@ -177,6 +230,48 @@ jobs:
           echo "Zenodo publication succeeded but DOI state could not be committed" >&2
           exit 1
 
+      - name: Publish observable terminal success
+        if: steps.auth.outputs.publication_enabled == 'true' && success()
+        env:
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          STATE_COMMIT: ${{ steps.state.outputs.state_commit }}
+        run: |
+          set -euo pipefail
+          test -s archive/chronicle-sidechain-zenodo-state.json
+          eval "$(python3 - <<'PY'
+          import json,shlex
+          r=json.load(open('archive/chronicle-sidechain-zenodo-state.json'))
+          doi=r.get('doi') or r.get('version_doi') or ''
+          concept=r.get('concept_doi') or r.get('conceptdoi') or ''
+          if not doi: raise SystemExit('missing DOI at terminal success gate')
+          print('DOI='+shlex.quote(str(doi)))
+          print('CONCEPT_DOI='+shlex.quote(str(concept)))
+          PY
+          )"
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-zenodo?state=published&source=${SOURCE_TAG}&state_commit=${STATE_COMMIT}"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=success \
+            -f context="$STATUS_CONTEXT" \
+            -f description="Sidechain Zenodo DOI published, read back, and state committed" \
+            -f target_url="$target" >/dev/null
+          echo "[ZENODO TERMINAL SUCCESS] doi=$DOI concept_doi=$CONCEPT_DOI state_commit=$STATE_COMMIT"
+
+      - name: Publish observable terminal failure
+        if: failure() && steps.auth.outputs.publication_enabled == 'true'
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-zenodo?state=publication_or_state_failure&run=${GITHUB_RUN_ID}"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=failure \
+            -f context="$STATUS_CONTEXT" \
+            -f description="Zenodo publication/readback/state commit failed" \
+            -f target_url="$target" >/dev/null
+          echo "[ZENODO TERMINAL FAILURE] run_id=$GITHUB_RUN_ID"
+
       - name: Upload DOI-ready package and diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -186,8 +281,9 @@ jobs:
             .sidechain-zenodo-deposit/
             ${{ runner.temp }}/sidechain-zenodo-build.json
             ${{ runner.temp }}/toolchain-provenance.json
+            archive/chronicle-sidechain-zenodo-state.json
           retention-days: 90
-          if-no-files-found: error
+          if-no-files-found: warn
 
       - name: Cold recovery summary
         if: always()
@@ -200,3 +296,5 @@ jobs:
           printf 'zenodo_publication_enabled=%s\n' '${{ steps.auth.outputs.publication_enabled }}'
           printf 'doi=%s\n' '${{ steps.publish.outputs.doi }}'
           printf 'concept_doi=%s\n' '${{ steps.publish.outputs.concept_doi }}'
+          printf 'state_commit=%s\n' '${{ steps.state.outputs.state_commit }}'
+          printf 'run_id=%s\n' "$GITHUB_RUN_ID"
