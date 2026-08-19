@@ -1,0 +1,179 @@
+name: Chronicle Polygon Ethereum Settlement Proof
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/capture-chronicle-polygon-ethereum-settlement.py"
+      - "scripts/test_chronicle_polygon_ethereum_settlement.py"
+      - ".github/workflows/chronicle-polygon-ethereum-settlement.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chronicle-polygon-ethereum-settlement
+  cancel-in-progress: false
+
+jobs:
+  prove:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
+      POLYGON_RPC_URL: ${{ secrets.POLYGON_RPC_URL }}
+      CHRONICLE_ETH_RPC_FALLBACK_URLS: "https://ethereum-rpc.publicnode.com,https://eth.drpc.org"
+      CHRONICLE_POLYGON_RPC_FALLBACK_URLS: "https://polygon-bor-rpc.publicnode.com,https://polygon.drpc.org"
+      CHRONICLE_SETTLEMENT_HTTP_TIMEOUT_SECONDS: "45"
+      CHRONICLE_SETTLEMENT_HTTP_RETRIES: "2"
+    steps:
+      - name: Checkout proof implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Bind implementation to event source
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$GITHUB_SHA"
+          echo "[IMPLEMENTATION BOUND] sha=$actual"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install proof dependencies
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt
+          python3 scripts/test_chronicle_polygon_ethereum_settlement.py
+          python3 -m py_compile scripts/capture-chronicle-polygon-ethereum-settlement.py
+
+      - name: Resolve latest immutable sidechain evidence release
+        id: source
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/sidechain-source"
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --json tagName,createdAt,isDraft,isPrerelease > "$RUNNER_TEMP/sidechain-source/releases.json"
+          python3 - <<'PY' > "$RUNNER_TEMP/sidechain-source/source.env"
+          import json,re,os
+          p=os.environ['RUNNER_TEMP']+'/sidechain-source/releases.json'
+          rows=json.load(open(p))
+          rows=[r for r in rows if not r.get('isDraft') and not r.get('isPrerelease') and re.fullmatch(r'chronicle-sidechain-evidence-v2-[0-9a-f]{12}',r.get('tagName',''))]
+          if not rows: raise SystemExit('no immutable sidechain evidence release')
+          rows.sort(key=lambda r:r.get('createdAt') or '')
+          tag=rows[-1]['tagName']; short=tag.rsplit('-',1)[-1]
+          print(f'SOURCE_TAG={tag}'); print(f'SOURCE_SHORT={short}')
+          PY
+          set -a
+          . "$RUNNER_TEMP/sidechain-source/source.env"
+          set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          SOURCE_SHA="$(git rev-list -n 1 "$SOURCE_TAG")"
+          test "${SOURCE_SHA:0:12}" = "$SOURCE_SHORT"
+          archive="chronicle-sidechain-evidence-v2-${SOURCE_SHORT}.tar.gz"
+          gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/sidechain-source" --pattern "$archive" --pattern "$archive.sha256"
+          cd "$RUNNER_TEMP/sidechain-source"
+          sha256sum -c "$archive.sha256"
+          mkdir extracted
+          tar -xzf "$archive" -C extracted
+          test -s extracted/chronicle-sidechain-scan/evidence-v2/SIDECHAIN-NFT-IDENTITY-INDEX.json
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_short=$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+          echo "[SOURCE VERIFIED] tag=$SOURCE_TAG sha=$SOURCE_SHA archive=$archive"
+
+      - name: Re-run source sidechain offline verification after cold extraction
+        env:
+          CHRONICLE_OUT: ${{ runner.temp }}/sidechain-source/extracted/chronicle-sidechain-scan
+        run: |
+          set -euo pipefail
+          python3 scripts/verify-chronicle-sidechain-evidence.py
+          python3 - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path(os.environ['CHRONICLE_OUT'])/'evidence-v2'/'OFFLINE-VERIFICATION.json'
+          r=json.loads(p.read_text())
+          if not r.get('pass'): raise SystemExit('cold-extracted source offline verification failed')
+          print(f"[SOURCE OFFLINE PASS] records={r.get('records')} cars={r.get('car_files_checked')} l2={r.get('l2_records_checked')}")
+          PY
+
+      - name: Capture Polygon to Ethereum checkpoint proofs
+        env:
+          CHRONICLE_SOURCE_DIR: ${{ runner.temp }}/sidechain-source/extracted/chronicle-sidechain-scan
+          CHRONICLE_POLYGON_ETH_OUT: artifacts/chronicle-polygon-ethereum-settlement
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-chronicle-polygon-ethereum-settlement.py
+          python3 - <<'PY'
+          import json
+          r=json.load(open('artifacts/chronicle-polygon-ethereum-settlement/POLYGON-ETHEREUM-SETTLEMENT.json'))
+          if not r.get('pass'): raise SystemExit('settlement report did not pass')
+          if not r.get('polygon_block_membership_pass'): raise SystemExit('Polygon checkpoint membership incomplete')
+          if not r.get('ethereum_checkpoint_receipt_inclusion_pass'): raise SystemExit('Ethereum receipt inclusion incomplete')
+          print(f"[SETTLEMENT PASS] records={r['polygon_records']} blocks={r['unique_polygon_blocks']} checkpoints={r['unique_checkpoints']}")
+          PY
+
+      - name: Build immutable supplementary archive
+        id: package
+        env:
+          SOURCE_SHORT: ${{ steps.source.outputs.source_short }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+        run: |
+          set -euo pipefail
+          root=artifacts/chronicle-polygon-ethereum-settlement
+          python3 - <<'PY'
+          import datetime,json,os,pathlib
+          root=pathlib.Path('artifacts/chronicle-polygon-ethereum-settlement')
+          receipt={
+            'schema':'trinity-accord/chronicle-polygon-ethereum-settlement-release/v1',
+            'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),
+            'source_sidechain_release_tag':os.environ['SOURCE_TAG'],
+            'source_sidechain_commit_sha':os.environ['SOURCE_SHA'],
+            'proof_implementation_commit_sha':os.environ['GITHUB_SHA'],
+            'boundary':'Supplementary non-amending proof. It does not rewrite the immutable source sidechain release.'
+          }
+          (root/'SOURCE-BINDING.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          PY
+          archive="chronicle-polygon-ethereum-settlement-v1-${SOURCE_SHORT}.tar.gz"
+          tar -C artifacts -czf "$archive" chronicle-polygon-ethereum-settlement
+          sha256sum "$archive" > "$archive.sha256"
+          tag="chronicle-polygon-ethereum-settlement-v1-${SOURCE_SHORT}"
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "[PACKAGE READY] tag=$tag archive=$archive sha256=$(awk '{print $1}' "$archive.sha256")"
+
+      - name: Publish immutable Polygon Ethereum settlement release
+        env:
+          TAG: ${{ steps.package.outputs.tag }}
+          ARCHIVE: ${{ steps.package.outputs.archive }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; immutable settlement evidence will not be mutated." >&2
+            exit 1
+          fi
+          root=artifacts/chronicle-polygon-ethereum-settlement
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" \
+            --title "Chronicle Polygon → Ethereum settlement proof — ${SOURCE_SHA:0:12}" \
+            --notes "Supplementary non-amending proof that locally verifies Polygon Bor origin block hashes into Ethereum RootChain checkpoint roots and locally verifies the corresponding NewHeaderBlock receipts into Ethereum execution block receiptsRoots. The Ethereum finalized tag is recorded only as an RPC boundary; independent Beacon ancestry is a separate layer." \
+            "$ARCHIVE" "$ARCHIVE.sha256" \
+            "$root/POLYGON-ETHEREUM-SETTLEMENT.json" "$root/SUMMARY.json" \
+            "$root/MANIFEST.sha256.json" "$root/MANIFEST.sha256" "$root/SOURCE-BINDING.json"
+          echo "[RELEASE PUBLISHED] $TAG"
+
+      - name: Upload complete settlement diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-polygon-ethereum-settlement-${{ github.run_id }}
+          path: artifacts/chronicle-polygon-ethereum-settlement/
+          retention-days: 90
+          if-no-files-found: warn
