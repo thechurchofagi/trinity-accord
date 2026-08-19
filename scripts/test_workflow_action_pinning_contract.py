@@ -6,6 +6,10 @@ All GitHub Actions workflows must:
 - Pin all actions to full SHA (40-char hex)
 - Not use bare tag refs like @v4, @v5
 - Not use third-party actions unless allowlisted
+
+The `uses:` parser is intentionally anchored to the YAML key.  Do not use a
+substring search here: permission keys such as `statuses: write` contain the
+letters `uses:` and used to produce false action-pinning failures.
 """
 from __future__ import annotations
 
@@ -40,7 +44,10 @@ ALLOWED_PREFIXES = [
 ]
 
 SHA_PATTERN = re.compile(r"^[0-9a-f]{40}$")
-USES_PATTERN = re.compile(r"uses:\s*([^\s#]+)")
+# Match only an actual YAML `uses` key, optionally in a list item.  Anchoring
+# prevents `statuses: write`, comments, shell text, and other substrings from
+# being interpreted as action references.
+USES_PATTERN = re.compile(r"^\s*(?:-\s*)?uses:\s*([^\s#]+)")
 
 
 def fail(msg: str) -> None:
@@ -52,8 +59,31 @@ def ok(msg: str) -> None:
     print(f"PASS: {msg}")
 
 
+def _uses_ref(line: str) -> str | None:
+    match = USES_PATTERN.match(line)
+    return match.group(1) if match else None
+
+
+def verify_parser_regressions(errors: list[str]) -> None:
+    """Guard against broadening the parser back into substring matching."""
+    false_positives = [
+        "  statuses: write",
+        "  issues: write",
+        "  # uses: actions/checkout@not-real",
+        "  run: echo 'uses: actions/checkout@not-real'",
+    ]
+    for sample in false_positives:
+        if _uses_ref(sample) is not None:
+            errors.append(f"action-pinning parser false positive for line: {sample!r}")
+
+    positive = "      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5"
+    if _uses_ref(positive) != "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5":
+        errors.append("action-pinning parser regression: real `uses:` key was not recognized")
+
+
 def main() -> int:
     errors: list[str] = []
+    verify_parser_regressions(errors)
 
     for wf_path in sorted(WORKFLOWS.glob("*.yml")):
         rel = wf_path.relative_to(ROOT)
@@ -68,12 +98,11 @@ def main() -> int:
                 if value == "ubuntu-latest":
                     errors.append(f"{rel}:{i}: runs-on uses ubuntu-latest (must be ubuntu-24.04)")
 
-        # Check uses
+        # Check actual YAML `uses:` keys only.
         for i, line in enumerate(lines, 1):
-            match = USES_PATTERN.search(line)
-            if not match:
+            action_ref = _uses_ref(line)
+            if action_ref is None:
                 continue
-            action_ref = match.group(1)
 
             # Split action@ref
             if "@" in action_ref:
