@@ -1,0 +1,120 @@
+name: Chronicle Polygon Ethereum Settlement PR Proof
+
+on:
+  pull_request:
+    paths:
+      - "scripts/capture-chronicle-polygon-ethereum-settlement.py"
+      - "scripts/test_chronicle_polygon_ethereum_settlement.py"
+      - ".github/workflows/chronicle-polygon-ethereum-settlement.yml"
+      - ".github/workflows/chronicle-polygon-ethereum-settlement-pr.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: chronicle-polygon-ethereum-settlement-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  prove-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CHRONICLE_ETH_RPC_FALLBACK_URLS: "https://ethereum-rpc.publicnode.com,https://eth.drpc.org"
+      CHRONICLE_POLYGON_RPC_FALLBACK_URLS: "https://polygon-bor-rpc.publicnode.com,https://polygon.drpc.org"
+      CHRONICLE_SETTLEMENT_HTTP_TIMEOUT_SECONDS: "45"
+      CHRONICLE_SETTLEMENT_HTTP_RETRIES: "2"
+    steps:
+      - name: Checkout PR implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install and test proof implementation
+        run: |
+          set -euo pipefail
+          python3 -m pip install -r requirements-ci.txt
+          python3 -m py_compile scripts/capture-chronicle-polygon-ethereum-settlement.py
+          python3 scripts/test_chronicle_polygon_ethereum_settlement.py
+
+      - name: Download and verify immutable source release
+        id: source
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/sidechain-source"
+          mkdir -p "$root"
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName,createdAt,isDraft,isPrerelease > "$root/releases.json"
+          python3 - <<'PY' > "$RUNNER_TEMP/sidechain-source/source.env"
+          import json,os,re
+          root=os.environ['RUNNER_TEMP']+'/sidechain-source'
+          rows=json.load(open(root+'/releases.json'))
+          rows=[r for r in rows if not r.get('isDraft') and not r.get('isPrerelease') and re.fullmatch(r'chronicle-sidechain-evidence-v2-[0-9a-f]{12}',r.get('tagName',''))]
+          if not rows: raise SystemExit('no immutable sidechain evidence release found')
+          rows.sort(key=lambda r:r.get('createdAt') or '')
+          tag=rows[-1]['tagName']; short=tag.rsplit('-',1)[-1]
+          print(f'SOURCE_TAG={tag}'); print(f'SOURCE_SHORT={short}')
+          PY
+          set -a
+          . "$root/source.env"
+          set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          SOURCE_SHA="$(git rev-list -n 1 "$SOURCE_TAG")"
+          test "${SOURCE_SHA:0:12}" = "$SOURCE_SHORT"
+          archive="chronicle-sidechain-evidence-v2-${SOURCE_SHORT}.tar.gz"
+          gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root" --pattern "$archive" --pattern "$archive.sha256"
+          (cd "$root" && sha256sum -c "$archive.sha256")
+          mkdir "$root/extracted"
+          tar -xzf "$root/$archive" -C "$root/extracted"
+          echo "source_root=$root" >> "$GITHUB_OUTPUT"
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+          echo "[SOURCE VERIFIED] tag=$SOURCE_TAG sha=$SOURCE_SHA"
+
+      - name: Cold verify source evidence before settlement proof
+        env:
+          CHRONICLE_OUT: ${{ steps.source.outputs.source_root }}/extracted/chronicle-sidechain-scan
+        run: |
+          set -euo pipefail
+          python3 scripts/verify-chronicle-sidechain-evidence.py
+          python3 - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path(os.environ['CHRONICLE_OUT'])/'evidence-v2'/'OFFLINE-VERIFICATION.json'
+          r=json.loads(p.read_text())
+          if r.get('pass') is not True or r.get('records') != 217 or r.get('l2_records_checked') != 217:
+              raise SystemExit('source cold verification failed')
+          print(f"[SOURCE COLD PASS] records={r['records']} cars={r.get('car_files_checked')} l2={r['l2_records_checked']}")
+          PY
+
+      - name: Execute full read-only Polygon to Ethereum proof
+        env:
+          CHRONICLE_SOURCE_DIR: ${{ steps.source.outputs.source_root }}/extracted/chronicle-sidechain-scan
+          CHRONICLE_POLYGON_ETH_OUT: artifacts/chronicle-polygon-ethereum-settlement-pr
+        run: |
+          set -euo pipefail
+          python3 scripts/capture-chronicle-polygon-ethereum-settlement.py
+          python3 - <<'PY'
+          import json
+          r=json.load(open('artifacts/chronicle-polygon-ethereum-settlement-pr/POLYGON-ETHEREUM-SETTLEMENT.json'))
+          if r.get('pass') is not True: raise SystemExit('Polygon to Ethereum proof did not pass')
+          print(f"[PR SETTLEMENT PASS] polygon_records={r['polygon_records']} unique_blocks={r['unique_polygon_blocks']} checkpoints={r['unique_checkpoints']}")
+          PY
+
+      - name: Upload full proof diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-polygon-ethereum-pr-proof-${{ github.run_id }}
+          path: |
+            artifacts/chronicle-polygon-ethereum-settlement-pr/
+            ${{ runner.temp }}/toolchain-provenance.json
+          retention-days: 30
+          if-no-files-found: warn
