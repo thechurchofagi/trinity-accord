@@ -1,0 +1,92 @@
+name: Probe final seven web archives
+
+on:
+  push:
+    branches: [agent/recover-final-8-archives]
+    paths: [.github/workflows/probe-final7-wayback.yml]
+
+permissions:
+  contents: write
+
+env:
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: agent/recover-final-8-archives
+      - name: Install pinned Kubo
+        run: |
+          set -euo pipefail
+          a="$RUNNER_TEMP/kubo.tgz"; t="$RUNNER_TEMP/tools"; mkdir -p "$t"
+          curl --fail --silent --show-error --location --retry 3 "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" -o "$a"
+          echo "$KUBO_LINUX_AMD64_SHA512  $a" | sha512sum --check --strict
+          tar -xzf "$a" -C "$t" kubo/ipfs
+          chmod +x "$t/kubo/ipfs"
+          echo "KUBO=$t/kubo/ipfs" >> "$GITHUB_ENV"
+      - name: Query Wayback and verify archived bytes
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures, hashlib, json, os, pathlib, subprocess, tempfile, urllib.parse, urllib.request, base64
+          targets=[
+          'QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT','QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva','QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1','QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah','QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC','bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy','bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54']
+          gateways=['https://ipfs.io/ipfs/{cid}','https://dweb.link/ipfs/{cid}','https://gateway.pinata.cloud/ipfs/{cid}','https://nftstorage.link/ipfs/{cid}','https://w3s.link/ipfs/{cid}','https://4everland.io/ipfs/{cid}']
+          ua={'User-Agent':'trinity-accord-evidence-recovery/1.0'}
+          kubo=os.environ['KUBO']
+          def get(url,timeout=12):
+            req=urllib.request.Request(url,headers=ua)
+            with urllib.request.urlopen(req,timeout=timeout) as r: return r.read(160_000_000), r.geturl(), dict(r.headers)
+          def cid_for_file(path,cid,raw=False):
+            args=[kubo,'add','-Q','--only-hash','--pin=false','--cid-version=0' if cid.startswith('Qm') else '--cid-version=1','--raw-leaves=true' if raw else '--raw-leaves=false',path]
+            return subprocess.check_output(args,text=True,timeout=30).strip()
+          def verify(cid,data):
+            with tempfile.NamedTemporaryFile() as f:
+              f.write(data); f.flush()
+              modes=[True] if cid.startswith('bafk') else [False,True] if cid.startswith('bafy') else [False]
+              vals=[]
+              for raw in modes:
+                try:
+                  got=cid_for_file(f.name,cid,raw); vals.append({'raw':raw,'cid':got})
+                  if got==cid:return True,vals
+                except Exception as e: vals.append({'raw':raw,'error':str(e)[:200]})
+              return False,vals
+          def probe(cid):
+            row={'snapshots':[],'exact':[],'errors':[]}
+            for tmpl in gateways:
+              original=tmpl.format(cid=cid)
+              cdx='https://web.archive.org/cdx/search/cdx?url='+urllib.parse.quote(original,safe='')+'&output=json&fl=timestamp,original,statuscode,mimetype,digest&filter=statuscode:200&collapse=digest'
+              try:
+                body,_,_=get(cdx,10); arr=json.loads(body)
+              except Exception as e:
+                row['errors'].append({'url':original,'stage':'cdx','error':str(e)[:300]}); continue
+              for item in (arr[1:] if isinstance(arr,list) and len(arr)>1 else [])[-8:]:
+                ts,orig=item[0],item[1]
+                snap=f'https://web.archive.org/web/{ts}id_/{orig}'
+                entry={'timestamp':ts,'original':orig,'archive_url':snap,'mimetype':item[3] if len(item)>3 else None}
+                try:
+                  data,final,h=get(snap,20); ok,computed=verify(cid,data)
+                  entry.update({'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'final_url':final,'computed':computed,'exact':ok})
+                  if ok: row['exact'].append(entry)
+                except Exception as e: entry['error']=str(e)[:500]
+                row['snapshots'].append(entry)
+                if row['exact']: break
+              if row['exact']: break
+            return cid,row
+          out={}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:
+            for cid,row in ex.map(probe,targets): out[cid]=row; print(cid,'snapshots',len(row['snapshots']),'exact',len(row['exact']))
+          pathlib.Path('final7-wayback-probe.json').write_text(json.dumps(out,indent=2)+'\n')
+          PY
+      - name: Commit probe result
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add final7-wayback-probe.json
+          git commit -m "Record final seven Wayback recovery probe"
+          git push origin HEAD:agent/recover-final-8-archives
