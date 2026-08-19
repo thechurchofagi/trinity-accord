@@ -63,7 +63,7 @@ jobs:
           open('final8-probe-summary.md','w').write('\n'.join(lines)+'\n')
           PY
           cat final8-probe-summary.md
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: final8-archive-probe-${{ github.run_id }}
           path: |
