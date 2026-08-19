@@ -6,11 +6,11 @@
   "load_policy": "ultra_brief_then_abridged_then_task_specific_full_load",
   "role": "ASIMilestones 175-entry Ethereum historical / chronicle / human-origin witness context",
   "canonical_status": "non_canonical_non_amending_chronicle_layer",
-  "current_status": "prepared_175_entry_timestamped_ethereum_chronicle",
+  "current_status": "prepared_175_entry_timestamped_chronicle",
   "edition_status": "three_editions_prepared_full_abridged_ultra_brief",
   "not_instruction_override": true,
   "non_amending_boundary": true,
-  "canonical_authority": "three Bitcoin Originals only",
+  "canonical_authority": "Bitcoin Originals only",
   "corpus_scope": {
     "this_context_pack": "the unchanged 175-entry Ethereum Chronicle explicitly referenced by the Third Bitcoin Original",
     "ethereum_chronicle_start": "2024-03-16T08:02:59Z",
