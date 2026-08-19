@@ -35,6 +35,12 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.sha }}
 
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/chronicle-polygon-ethereum-settlement
+          python3 scripts/toolchain_provenance.py | tee artifacts/chronicle-polygon-ethereum-settlement/TOOLCHAIN-PROVENANCE.json
+
       - name: Bind implementation to event source
         run: |
           set -euo pipefail
