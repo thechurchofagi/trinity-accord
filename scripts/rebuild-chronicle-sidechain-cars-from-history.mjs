@@ -5,34 +5,43 @@ import os from 'os';
 import crypto from 'crypto';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
-import { cidSha256Digest, singleBlockCar } from './ipfs-car-blockwise.mjs';
+import {
+  rebuildCarsFromHistoricalPayloads as baseRebuildCarsFromHistoricalPayloads,
+  refsFromSnapshot,
+} from './rebuild-chronicle-sidechain-cars-from-history-base.mjs';
+import {
+  cidSha256Digest,
+  singleBlockCar,
+} from './ipfs-car-blockwise.mjs';
 import { verifyCompleteCar } from './chronicle-sidechain-car-integrity.mjs';
+
+export * from './rebuild-chronicle-sidechain-cars-from-history-base.mjs';
 
 const execFileAsync = promisify(execFile);
 const MAX = Number(process.env.CHRONICLE_CAR_MAX_BYTES || 157286400);
+const HTTP_TIMEOUT = Math.max(
+  3000,
+  Math.min(30000, Number(process.env.CHRONICLE_HISTORICAL_CONTENT_TIMEOUT_MS || 12000)),
+);
+const ROOT_CONCURRENCY = Math.max(
+  1,
+  Math.min(8, Number(process.env.CHRONICLE_HISTORICAL_CONTENT_CONCURRENCY || 4)),
+);
+const EXTRA_GATEWAYS = [
+  'https://ipfs.io/ipfs/{cid}',
+  'https://dweb.link/ipfs/{cid}',
+  'https://w3s.link/ipfs/{cid}',
+  'https://gateway.pinata.cloud/ipfs/{cid}',
+  'https://nftstorage.link/ipfs/{cid}',
+  'https://4everland.io/ipfs/{cid}',
+];
 
 function sha256(buffer) {
   return crypto.createHash('sha256').update(buffer).digest();
 }
 
 function sha256Hex(buffer) {
-  return crypto.createHash('sha256').update(buffer).digest('hex');
-}
-
-export function ipfsRef(uri) {
-  if (typeof uri !== 'string' || !uri) return null;
-  if (uri.startsWith('ipfs://')) {
-    const parts = uri.slice(7).replace(/^ipfs\//, '').split('/');
-    return { root_cid: parts.shift(), leaf_path: parts.join('/') || null };
-  }
-  try {
-    const url = new URL(uri);
-    const pathMatch = url.pathname.match(/\/ipfs\/([^/]+)(?:\/(.*))?$/);
-    const subdomain = url.hostname.match(/^([^.]*)\.ipfs\./);
-    if (pathMatch) return { root_cid: pathMatch[1], leaf_path: pathMatch[2] || null };
-    if (subdomain) return { root_cid: subdomain[1], leaf_path: url.pathname.replace(/^\//, '') || null };
-  } catch {}
-  return null;
+  return sha256(buffer).toString('hex');
 }
 
 function safeLeafSegments(value) {
@@ -50,131 +59,49 @@ function safeLeafSegments(value) {
   return out;
 }
 
-function safeName(value) {
-  return String(value).replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 180);
-}
-
-function safeExistingFile(out, declaredFile) {
-  if (typeof declaredFile !== 'string' || !declaredFile) return null;
-  const root = path.resolve(out);
-  const file = path.resolve(declaredFile);
-  if (file !== root && !file.startsWith(`${root}${path.sep}`)) return null;
-  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return null;
-  return file;
-}
-
-function addCandidate(out, list, file, source, details = {}) {
-  const resolved = safeExistingFile(out, file);
-  if (!resolved) return;
-  const relative = path.relative(out, resolved).replaceAll('\\', '/');
-  if (list.some(item => item.file === resolved)) return;
-  list.push({ file: resolved, file_relative: relative, source, ...details });
-}
-
-function writeRuntimeCandidate(out, asset, role, variant, buffer) {
-  const name = `${safeName(asset)}--${safeName(role)}--${safeName(variant)}--${sha256Hex(buffer).slice(0, 16)}.bin`;
-  const file = path.join(out, 'runtime', 'historical-candidates', name);
+function atomicWrite(file, buffer) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  if (!fs.existsSync(file) || !fs.readFileSync(file).equals(buffer)) fs.writeFileSync(file, buffer);
-  return file;
+  const tmp = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
+  fs.writeFileSync(tmp, buffer);
+  fs.renameSync(tmp, file);
 }
 
-function localCandidates(out, token, asset, role, payload) {
-  const candidates = [];
-  const tokenDir = path.join(out, token.chain, token.contract, token.token_id);
-
-  // Keep historical bytes whenever they actually exist, even if the old mirror
-  // status field says failed/partial. The bytes themselves are still subjected
-  // to exact-CID reconstruction and strict CAR verification below.
-  addCandidate(out, candidates, payload?.file, 'declared_mirror_file', { payload_status: payload?.status || null });
-
-  if (role === 'metadata') {
-    addCandidate(out, candidates, path.join(tokenDir, 'metadata.bin'), 'deterministic_metadata_mirror');
-    addCandidate(out, candidates, path.join(tokenDir, 'metadata.normalized.json'), 'normalized_metadata_file');
-    if (token.metadata && typeof token.metadata === 'object') {
-      const variants = [
-        ['json_compact', Buffer.from(JSON.stringify(token.metadata), 'utf8')],
-        ['json_compact_newline', Buffer.from(JSON.stringify(token.metadata) + '\n', 'utf8')],
-        ['json_pretty2', Buffer.from(JSON.stringify(token.metadata, null, 2), 'utf8')],
-        ['json_pretty2_newline', Buffer.from(JSON.stringify(token.metadata, null, 2) + '\n', 'utf8')],
-      ];
-      for (const [variant, buffer] of variants) {
-        const file = writeRuntimeCandidate(out, asset, role, variant, buffer);
-        addCandidate(out, candidates, file, 'synthesized_metadata', { variant });
-      }
-    }
-  } else {
-    addCandidate(out, candidates, path.join(tokenDir, `media-${safeName(role)}.bin`), 'deterministic_media_mirror');
-  }
-  return candidates;
+function appendTrace(out, event) {
+  const file = path.join(out, 'runtime', 'HISTORICAL-CONTENT-RECOVERY.ndjson');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.appendFileSync(file, JSON.stringify({ timestamp: new Date().toISOString(), ...event }) + '\n');
 }
 
-export function refsFromSnapshot(out, records) {
-  const byRoot = new Map();
-  const add = (token, asset, role, uri, payload) => {
-    const ref = ipfsRef(uri);
-    if (!ref?.root_cid) return;
-    const candidates = localCandidates(out, token, asset, role, payload);
-    const row = {
-      asset_id: asset,
-      role,
-      root_cid: ref.root_cid,
-      leaf_path: ref.leaf_path,
-      original_uri: uri,
-      payload_status: payload?.status || null,
-      declared_file: typeof payload?.file === 'string' ? payload.file : null,
-      declared_file_exists: Boolean(safeExistingFile(out, payload?.file)),
-      candidates,
-    };
-    const rows = byRoot.get(ref.root_cid) || [];
-    const key = `${row.asset_id}|${row.role}|${row.leaf_path || ''}|${row.original_uri || ''}`;
-    if (!rows.some(existing => `${existing.asset_id}|${existing.role}|${existing.leaf_path || ''}|${existing.original_uri || ''}` === key)) rows.push(row);
-    byRoot.set(ref.root_cid, rows);
-  };
-  for (const token of records) {
-    const asset = `eip155:${token.chain_id}/${String(token.standard || '').toLowerCase().replace('-', '')}:${token.contract}/${token.token_id}`;
-    add(token, asset, 'metadata', token.token_uri?.uri || null, token.metadata_mirror);
-    for (const media of token.media || []) {
-      add(token, asset, media.role || 'media', media.original_uri || token.metadata?.[media.role] || null, media);
-    }
-  }
-  return byRoot;
+function rootCodecHint(rootCid) {
+  if (String(rootCid).startsWith('Qm')) return 'cidv0-dag-pb';
+  if (String(rootCid).startsWith('bafk')) return 'cidv1-raw-likely';
+  if (String(rootCid).startsWith('bafy')) return 'cidv1-dag-pb-likely';
+  return 'unknown';
 }
 
-function flattenCandidates(refRows) {
-  const out = [];
-  const seen = new Set();
-  for (const ref of refRows) {
-    for (const candidate of ref.candidates || []) {
-      const key = `${candidate.file}|${ref.leaf_path || ''}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      out.push({
-        asset_id: ref.asset_id,
-        role: ref.role,
-        root_cid: ref.root_cid,
-        leaf_path: ref.leaf_path,
-        original_uri: ref.original_uri,
-        payload_status: ref.payload_status,
-        ...candidate,
-      });
-    }
-  }
-  return out;
-}
-
-function importerVariants(rootCid) {
+function importerVariants(rootCid, bytes) {
+  // For a single small file, chunk size/layout cannot change a one-block DAG.
+  // Keep the matrix minimal there; expand only for larger payloads.
   if (String(rootCid).startsWith('Qm')) {
+    if (bytes <= 262144) {
+      return [{ cidVersion: 0, rawLeaves: false, chunker: 'size-262144', layout: 'balanced' }];
+    }
     return [
       { cidVersion: 0, rawLeaves: false, chunker: 'size-262144', layout: 'balanced' },
+      { cidVersion: 0, rawLeaves: false, chunker: 'size-524288', layout: 'balanced' },
       { cidVersion: 0, rawLeaves: false, chunker: 'size-1048576', layout: 'balanced' },
       { cidVersion: 0, rawLeaves: false, chunker: 'size-262144', layout: 'trickle' },
       { cidVersion: 0, rawLeaves: false, chunker: 'size-1048576', layout: 'trickle' },
     ];
   }
+  if (bytes <= 262144) {
+    return [{ cidVersion: 1, rawLeaves: false, chunker: 'size-262144', layout: 'balanced' }];
+  }
   return [
     { cidVersion: 1, rawLeaves: true, chunker: 'size-262144', layout: 'balanced' },
     { cidVersion: 1, rawLeaves: false, chunker: 'size-262144', layout: 'balanced' },
+    { cidVersion: 1, rawLeaves: true, chunker: 'size-524288', layout: 'balanced' },
+    { cidVersion: 1, rawLeaves: false, chunker: 'size-524288', layout: 'balanced' },
     { cidVersion: 1, rawLeaves: true, chunker: 'size-1048576', layout: 'balanced' },
     { cidVersion: 1, rawLeaves: false, chunker: 'size-1048576', layout: 'balanced' },
     { cidVersion: 1, rawLeaves: true, chunker: 'size-262144', layout: 'trickle' },
@@ -183,7 +110,14 @@ function importerVariants(rootCid) {
 }
 
 function addArgs(input, recursive, variant, onlyHash) {
-  const args = ['add', '-Q', '--pin=false', `--cid-version=${variant.cidVersion}`, `--raw-leaves=${variant.rawLeaves ? 'true' : 'false'}`, `--chunker=${variant.chunker}`];
+  const args = [
+    'add',
+    '-Q',
+    '--pin=false',
+    `--cid-version=${variant.cidVersion}`,
+    `--raw-leaves=${variant.rawLeaves ? 'true' : 'false'}`,
+    `--chunker=${variant.chunker}`,
+  ];
   if (variant.layout === 'trickle') args.push('--trickle');
   if (onlyHash) args.push('--only-hash');
   if (recursive) args.push('-r');
@@ -198,8 +132,7 @@ async function kuboAddCid(kubo, input, recursive, variant, onlyHash) {
     encoding: 'utf8',
     windowsHide: true,
   });
-  const lines = String(stdout || '').trim().split(/\s+/).filter(Boolean);
-  return lines.at(-1) || null;
+  return String(stdout || '').trim().split(/\s+/).filter(Boolean).at(-1) || null;
 }
 
 async function exportCar(kubo, rootCid) {
@@ -216,16 +149,8 @@ async function exportCar(kubo, rootCid) {
   return buffer;
 }
 
-function writeAtomic(file, buffer) {
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  const tmp = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
-  fs.writeFileSync(tmp, buffer);
-  fs.renameSync(tmp, file);
-}
-
-async function tryDirectRaw(rootCid, candidate) {
-  if (candidate.leaf_path) return null;
-  const data = fs.readFileSync(candidate.file);
+function directRawCar(rootCid, data, leafPath) {
+  if (leafPath) return null;
   let digest;
   try { digest = cidSha256Digest(rootCid); } catch { return null; }
   if (!sha256(data).equals(digest)) return null;
@@ -234,35 +159,68 @@ async function tryDirectRaw(rootCid, candidate) {
   return car;
 }
 
-async function tryKuboRebuild(kubo, rootCid, candidate) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-history-rebuild-'));
+async function exactCarFromBytes({ kubo, rootCid, data, leafPath, out, source, variantLabel }) {
+  const direct = directRawCar(rootCid, data, leafPath);
+  if (direct) {
+    appendTrace(out, {
+      event: 'candidate_exact_match',
+      root_cid: rootCid,
+      source,
+      candidate_variant: variantLabel || null,
+      method: 'direct_raw_block',
+      bytes: data.length,
+      sha256: sha256Hex(data),
+    });
+    return { car: direct, method: 'direct_raw_block', importer: null };
+  }
+  if (!kubo) return null;
+
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'chronicle-content-rebuild-'));
   try {
-    let input = candidate.file;
+    let input = path.join(tmp, 'candidate.bin');
     let recursive = false;
-    const segments = safeLeafSegments(candidate.leaf_path);
+    const segments = safeLeafSegments(leafPath);
     if (segments.length) {
       const tree = path.join(tmp, 'root');
-      const target = path.join(tree, ...segments);
-      fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.copyFileSync(candidate.file, target);
-      input = tree;
+      input = path.join(tree, ...segments);
+      fs.mkdirSync(path.dirname(input), { recursive: true });
       recursive = true;
     }
-    for (const variant of importerVariants(rootCid)) {
+    fs.writeFileSync(input, data);
+
+    for (const importer of importerVariants(rootCid, data.length)) {
+      const mode = `v${importer.cidVersion}/raw=${importer.rawLeaves}/${importer.chunker}/${importer.layout}`;
       let computed;
       try {
-        computed = await kuboAddCid(kubo, input, recursive, variant, true);
+        computed = await kuboAddCid(kubo, recursive ? path.join(tmp, 'root') : input, recursive, importer, true);
       } catch (error) {
-        console.warn(`[CAR HISTORICAL REBUILD HASH FAILED] cid=${rootCid} mode=v${variant.cidVersion}/raw=${variant.rawLeaves}/${variant.chunker}/${variant.layout} error=${String(error.message || error).replace(/\s+/g, ' ').slice(0, 300)}`);
+        appendTrace(out, {
+          event: 'candidate_hash_error',
+          root_cid: rootCid,
+          source,
+          candidate_variant: variantLabel || null,
+          mode,
+          error: String(error.message || error).replace(/\s+/g, ' ').slice(0, 600),
+        });
         continue;
       }
-      console.log(`[CAR HISTORICAL REBUILD HASH] cid=${rootCid} computed=${computed || 'none'} mode=v${variant.cidVersion}/raw=${variant.rawLeaves}/${variant.chunker}/${variant.layout} file=${candidate.file_relative} leaf=${candidate.leaf_path || '(root)'}`);
+      appendTrace(out, {
+        event: 'candidate_hash',
+        root_cid: rootCid,
+        source,
+        candidate_variant: variantLabel || null,
+        mode,
+        bytes: data.length,
+        sha256: sha256Hex(data),
+        computed_cid: computed,
+        exact: computed === rootCid,
+      });
       if (computed !== rootCid) continue;
-      const imported = await kuboAddCid(kubo, input, recursive, variant, false);
+
+      const imported = await kuboAddCid(kubo, recursive ? path.join(tmp, 'root') : input, recursive, importer, false);
       if (imported !== rootCid) throw Error(`Kubo import drift expected=${rootCid} actual=${imported}`);
       const car = await exportCar(kubo, rootCid);
-      console.log(`[CAR HISTORICAL ROOT REBUILT] cid=${rootCid} bytes=${car.length} mode=v${variant.cidVersion}/raw=${variant.rawLeaves}/${variant.chunker}/${variant.layout} file=${candidate.file_relative} leaf=${candidate.leaf_path || '(root)'}`);
-      return car;
+      return { car, method: 'kubo_exact_content_rebuild', importer: mode };
     }
     return null;
   } finally {
@@ -270,127 +228,374 @@ async function tryKuboRebuild(kubo, rootCid, candidate) {
   }
 }
 
-export async function rebuildCarsFromHistoricalPayloads({ out = process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan', kubo = process.env.CHRONICLE_KUBO_BIN || '' } = {}) {
-  const snapshotFile = path.join(out, 'recovered-tokens.json');
-  const carDir = path.join(out, 'evidence-v2', 'cars');
-  const summary = {
-    schema: 'trinity-accord/chronicle-sidechain-historical-car-rebuild/v2',
-    started_at: new Date().toISOString(),
-    roots_mapped: 0,
-    refs_mapped: 0,
-    roots_with_candidates: 0,
-    roots_without_candidates: 0,
-    roots_considered: 0,
-    already_valid: 0,
-    invalid_removed: 0,
-    direct_raw_rebuilt: 0,
-    kubo_rebuilt: 0,
-    unrecovered: [],
-    recovered: [],
-  };
-  if (!fs.existsSync(snapshotFile)) return summary;
-  const records = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
-  const refs = refsFromSnapshot(out, records);
-  summary.roots_mapped = refs.size;
-  summary.refs_mapped = [...refs.values()].reduce((n, rows) => n + rows.length, 0);
-  summary.roots_with_candidates = [...refs.values()].filter(rows => flattenCandidates(rows).length > 0).length;
-  summary.roots_without_candidates = refs.size - summary.roots_with_candidates;
-  summary.roots_considered = refs.size;
-  fs.mkdirSync(carDir, { recursive: true });
+function contentGateways() {
+  const configured = String(process.env.CHRONICLE_HISTORICAL_CONTENT_GATEWAYS || '')
+    .split(/[\n,]/)
+    .map(x => x.trim())
+    .filter(Boolean);
+  const inherited = String(process.env.CHRONICLE_CAR_GATEWAYS || '')
+    .split(/[\n,]/)
+    .map(x => x.trim())
+    .filter(Boolean)
+    .map(value => {
+      try {
+        const cleaned = value.replaceAll('{cid}', '__CID__');
+        const url = new URL(cleaned);
+        url.searchParams.delete('format');
+        url.searchParams.delete('dag-scope');
+        url.searchParams.delete('entity-bytes');
+        return url.toString().replaceAll('__CID__', '{cid}');
+      } catch {
+        return value.replace(/[?&](?:format|dag-scope|entity-bytes)=[^&]*/g, '').replace(/[?&]$/, '');
+      }
+    });
+  return [...new Set([...configured, ...inherited, ...EXTRA_GATEWAYS])];
+}
 
-  const rootMap = [...refs.entries()].map(([rootCid, rows]) => {
-    const candidates = flattenCandidates(rows);
-    return {
+function gatewayUrl(template, rootCid, leafPath) {
+  const raw = template.includes('{cid}')
+    ? template.replaceAll('{cid}', encodeURIComponent(rootCid))
+    : `${template.replace(/\/$/, '')}/ipfs/${encodeURIComponent(rootCid)}`;
+  const url = new URL(raw);
+  url.searchParams.delete('format');
+  url.searchParams.delete('dag-scope');
+  url.searchParams.delete('entity-bytes');
+  if (leafPath) {
+    const suffix = safeLeafSegments(leafPath).map(encodeURIComponent).join('/');
+    url.pathname = `${url.pathname.replace(/\/$/, '')}/${suffix}`;
+  }
+  return url.toString();
+}
+
+async function fetchContent(url, rootCid, out, endpointIndex) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), HTTP_TIMEOUT);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      redirect: 'follow',
+      headers: {
+        accept: '*/*',
+        'user-agent': 'trinity-accord-historical-content-recovery/1.0',
+      },
+    });
+    if (!response.ok) throw Error(`HTTP ${response.status}`);
+    const length = Number(response.headers.get('content-length') || 0);
+    if (Number.isFinite(length) && length > MAX) throw Error(`content-length ${length}>${MAX}`);
+    const data = Buffer.from(await response.arrayBuffer());
+    if (!data.length) throw Error('empty body');
+    if (data.length > MAX) throw Error(`body ${data.length}>${MAX}`);
+    appendTrace(out, {
+      event: 'http_content_received',
       root_cid: rootCid,
-      ref_count: rows.length,
-      candidate_count: candidates.length,
-      refs: rows.map(row => ({
-        asset_id: row.asset_id,
-        role: row.role,
-        leaf_path: row.leaf_path,
-        original_uri: row.original_uri,
-        payload_status: row.payload_status,
-        declared_file: row.declared_file,
-        declared_file_exists: row.declared_file_exists,
-        candidates: row.candidates.map(candidate => ({
-          source: candidate.source,
-          file: candidate.file_relative,
-          variant: candidate.variant || null,
-          payload_status: candidate.payload_status || null,
-        })),
-      })),
-    };
-  });
-  const rootMapFile = path.join(out, 'runtime', 'HISTORICAL-CAR-ROOT-MAP.json');
-  fs.mkdirSync(path.dirname(rootMapFile), { recursive: true });
-  fs.writeFileSync(rootMapFile, JSON.stringify({
-    schema: 'trinity-accord/chronicle-sidechain-historical-car-root-map/v1',
-    generated_at: new Date().toISOString(),
-    roots: rootMap,
-  }, null, 2) + '\n');
-  console.log(`[CAR HISTORICAL ROOT MAP] roots=${summary.roots_mapped} refs=${summary.refs_mapped} with_candidates=${summary.roots_with_candidates} without_candidates=${summary.roots_without_candidates}`);
+      endpoint_index: endpointIndex,
+      url: response.url,
+      content_type: response.headers.get('content-type') || null,
+      bytes: data.length,
+      sha256: sha256Hex(data),
+    });
+    return { data, finalUrl: response.url, contentType: response.headers.get('content-type') || null };
+  } catch (error) {
+    appendTrace(out, {
+      event: 'http_content_failed',
+      root_cid: rootCid,
+      endpoint_index: endpointIndex,
+      url,
+      error: error?.name === 'AbortError' ? 'timeout' : String(error.message || error).slice(0, 500),
+    });
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
-  for (const [rootCid, refRows] of refs) {
-    const candidates = flattenCandidates(refRows);
-    const carFile = path.join(carDir, `${rootCid}.car`);
-    if (fs.existsSync(carFile)) {
-      try {
-        verifyCompleteCar(fs.readFileSync(carFile), rootCid);
-        summary.already_valid++;
-        continue;
-      } catch (error) {
-        fs.rmSync(carFile, { force: true });
-        summary.invalid_removed++;
-        console.warn(`[CAR HISTORICAL REBUILD INVALID CACHE] cid=${rootCid} error=${error.message || error}`);
-      }
-    }
+function orderedTopLevel(value, preferred) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+  const out = {};
+  for (const key of preferred) if (Object.prototype.hasOwnProperty.call(value, key)) out[key] = value[key];
+  for (const key of Object.keys(value)) if (!Object.prototype.hasOwnProperty.call(out, key)) out[key] = value[key];
+  return out;
+}
 
-    let rebuilt = null;
-    let method = null;
-    let used = null;
-    for (const candidate of candidates) {
-      try {
-        rebuilt = await tryDirectRaw(rootCid, candidate);
-        if (rebuilt) {
-          method = 'direct_raw_payload';
-          used = candidate;
-          break;
-        }
-        if (kubo) {
-          rebuilt = await tryKuboRebuild(kubo, rootCid, candidate);
-          if (rebuilt) {
-            method = 'kubo_unixfs_exact_root_match';
-            used = candidate;
-            break;
-          }
-        }
-      } catch (error) {
-        console.warn(`[CAR HISTORICAL REBUILD CANDIDATE FAILED] cid=${rootCid} file=${candidate.file_relative} leaf=${candidate.leaf_path || '(root)'} error=${String(error.message || error).replace(/\s+/g, ' ').slice(0, 500)}`);
-      }
-    }
-    if (rebuilt) {
-      verifyCompleteCar(rebuilt, rootCid);
-      writeAtomic(carFile, rebuilt);
-      if (method === 'direct_raw_payload') summary.direct_raw_rebuilt++;
-      else summary.kubo_rebuilt++;
-      const row = { root_cid: rootCid, method, bytes: rebuilt.length, file: used.file_relative, leaf_path: used.leaf_path, source: used.source };
-      summary.recovered.push(row);
-      console.log(`[CAR HISTORICAL REBUILD COMPLETE] cid=${rootCid} method=${method} bytes=${rebuilt.length}`);
+function sortedKeys(value) {
+  if (Array.isArray(value)) return value.map(sortedKeys);
+  if (!value || typeof value !== 'object') return value;
+  const out = {};
+  for (const key of Object.keys(value).sort()) out[key] = sortedKeys(value[key]);
+  return out;
+}
+
+function jsonAsciiString(value) {
+  const quoted = JSON.stringify(String(value));
+  let out = '"';
+  for (const char of quoted.slice(1, -1)) {
+    const cp = char.codePointAt(0);
+    if (cp <= 0x7f) {
+      out += char;
+    } else if (cp <= 0xffff) {
+      out += `\\u${cp.toString(16).padStart(4, '0')}`;
     } else {
-      summary.unrecovered.push({
-        root_cid: rootCid,
-        refs: refRows.map(ref => ({ asset_id: ref.asset_id, role: ref.role, leaf_path: ref.leaf_path, original_uri: ref.original_uri, payload_status: ref.payload_status })),
-        candidates: candidates.map(x => ({ asset_id: x.asset_id, role: x.role, source: x.source, file: x.file_relative, leaf_path: x.leaf_path, variant: x.variant || null })),
-      });
-      console.warn(`[CAR HISTORICAL REBUILD MISS] cid=${rootCid} refs=${refRows.length} candidates=${candidates.length}`);
+      const n = cp - 0x10000;
+      const hi = 0xd800 + (n >> 10);
+      const lo = 0xdc00 + (n & 0x3ff);
+      out += `\\u${hi.toString(16).padStart(4, '0')}\\u${lo.toString(16).padStart(4, '0')}`;
     }
   }
-  summary.finished_at = new Date().toISOString();
-  const report = path.join(out, 'runtime', 'HISTORICAL-CAR-REBUILD.json');
-  fs.mkdirSync(path.dirname(report), { recursive: true });
-  fs.writeFileSync(report, JSON.stringify(summary, null, 2) + '\n');
-  console.log(`[CAR HISTORICAL REBUILD SUMMARY] mapped=${summary.roots_mapped} refs=${summary.refs_mapped} with_candidates=${summary.roots_with_candidates} without_candidates=${summary.roots_without_candidates} valid=${summary.already_valid} invalid_removed=${summary.invalid_removed} direct=${summary.direct_raw_rebuilt} kubo=${summary.kubo_rebuilt} unrecovered=${summary.unrecovered.length}`);
-  return summary;
+  return out + '"';
+}
+
+function jsonSpaced(value, ascii = false) {
+  if (value === null) return 'null';
+  if (typeof value === 'string') return ascii ? jsonAsciiString(value) : JSON.stringify(value);
+  if (typeof value === 'number' || typeof value === 'boolean') return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(item => jsonSpaced(item, ascii)).join(', ')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.entries(value).map(([key, item]) =>
+      `${ascii ? jsonAsciiString(key) : JSON.stringify(key)}: ${jsonSpaced(item, ascii)}`
+    ).join(', ')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function asciiCompact(value) {
+  if (value === null) return 'null';
+  if (typeof value === 'string') return jsonAsciiString(value);
+  if (typeof value === 'number' || typeof value === 'boolean') return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(asciiCompact).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.entries(value).map(([key, item]) =>
+      `${jsonAsciiString(key)}:${asciiCompact(item)}`
+    ).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function metadataCandidates(metadata) {
+  if (!metadata || typeof metadata !== 'object') return [];
+  const orderings = [
+    ['snapshot_order', metadata],
+    ['sorted_recursive', sortedKeys(metadata)],
+    ['nft_common_name_description_image', orderedTopLevel(metadata, ['name', 'description', 'image', 'animation_url', 'external_url', 'attributes', 'properties'])],
+    ['nft_common_name_image_description', orderedTopLevel(metadata, ['name', 'image', 'description', 'animation_url', 'external_url', 'attributes', 'properties'])],
+  ];
+  const out = [];
+  const seen = new Set();
+  const add = (label, text) => {
+    const variants = [
+      [label, text],
+      [`${label}_lf`, `${text}\n`],
+      [`${label}_crlf`, `${text}\r\n`],
+    ];
+    for (const [variant, body] of variants) {
+      const data = Buffer.from(body, 'utf8');
+      const key = sha256Hex(data);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ variant, data });
+    }
+  };
+  for (const [orderName, value] of orderings) {
+    add(`${orderName}_compact`, JSON.stringify(value));
+    add(`${orderName}_spaced`, jsonSpaced(value, false));
+    add(`${orderName}_pretty2`, JSON.stringify(value, null, 2));
+    add(`${orderName}_pretty4`, JSON.stringify(value, null, 4));
+    add(`${orderName}_tabs`, JSON.stringify(value, null, '\t'));
+    add(`${orderName}_ascii_compact`, asciiCompact(value));
+    add(`${orderName}_ascii_spaced`, jsonSpaced(value, true));
+  }
+  return out;
+}
+
+function assetId(token) {
+  return `eip155:${token.chain_id}/${String(token.standard || '').toLowerCase().replace('-', '')}:${token.contract}/${token.token_id}`;
+}
+
+async function mapLimit(items, limit, fn) {
+  let next = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (true) {
+      const index = next++;
+      if (index >= items.length) return;
+      await fn(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+}
+
+async function recoverOneRoot({ out, kubo, rootCid, refRows, tokenByAsset, carDir }) {
+  const carFile = path.join(carDir, `${rootCid}.car`);
+  if (fs.existsSync(carFile)) {
+    try {
+      verifyCompleteCar(fs.readFileSync(carFile), rootCid);
+      return { root_cid: rootCid, status: 'already_valid' };
+    } catch {
+      fs.rmSync(carFile, { force: true });
+    }
+  }
+
+  const refs = [...refRows];
+  const leafPaths = [...new Set(refs.map(ref => ref.leaf_path || null))];
+  const gateways = contentGateways();
+  const responseCandidates = [];
+  const responseSeen = new Set();
+
+  for (const leafPath of leafPaths) {
+    const urls = gateways.map((gateway, i) => ({ url: gatewayUrl(gateway, rootCid, leafPath), i: i + 1, leafPath }));
+    for (let start = 0; start < urls.length; start += 4) {
+      const batch = urls.slice(start, start + 4);
+      const results = await Promise.allSettled(batch.map(item =>
+        fetchContent(item.url, rootCid, out, item.i).then(response => ({ ...item, ...response }))
+      ));
+      for (const result of results) {
+        if (result.status !== 'fulfilled') continue;
+        const key = `${result.value.leafPath || ''}:${sha256Hex(result.value.data)}`;
+        if (responseSeen.has(key)) continue;
+        responseSeen.add(key);
+        responseCandidates.push(result.value);
+      }
+      // Try received bytes immediately before spending time on more gateways.
+      for (const candidate of responseCandidates.splice(0)) {
+        const exact = await exactCarFromBytes({
+          kubo,
+          rootCid,
+          data: candidate.data,
+          leafPath: candidate.leafPath,
+          out,
+          source: `http_gateway_${candidate.i}`,
+          variantLabel: candidate.contentType || null,
+        });
+        if (!exact) continue;
+        atomicWrite(carFile, exact.car);
+        console.log(`[CAR HISTORICAL CONTENT RECOVERED] cid=${rootCid} method=${exact.method} endpoint=${candidate.i} bytes=${candidate.data.length} codec_hint=${rootCodecHint(rootCid)}`);
+        appendTrace(out, {
+          event: 'root_recovered',
+          root_cid: rootCid,
+          method: exact.method,
+          importer: exact.importer,
+          endpoint_index: candidate.i,
+          source_url: candidate.finalUrl,
+          bytes: candidate.data.length,
+          sha256: sha256Hex(candidate.data),
+        });
+        return { root_cid: rootCid, status: 'recovered', source: 'http_gateway', method: exact.method, importer: exact.importer, endpoint_index: candidate.i };
+      }
+    }
+  }
+
+  // If the exact historical bytes are no longer available from gateways,
+  // enumerate common historical JSON serializations. Acceptance still requires
+  // exact root CID equality; this is reconstruction, not approximation.
+  const metadataRefs = refs.filter(ref => ref.role === 'metadata');
+  const metadataSeen = new Set();
+  for (const ref of metadataRefs) {
+    const token = tokenByAsset.get(ref.asset_id);
+    for (const candidate of metadataCandidates(token?.metadata)) {
+      const key = sha256Hex(candidate.data);
+      if (metadataSeen.has(key)) continue;
+      metadataSeen.add(key);
+      const exact = await exactCarFromBytes({
+        kubo,
+        rootCid,
+        data: candidate.data,
+        leafPath: ref.leaf_path || null,
+        out,
+        source: 'metadata_serialization_matrix',
+        variantLabel: candidate.variant,
+      });
+      if (!exact) continue;
+      atomicWrite(carFile, exact.car);
+      console.log(`[CAR HISTORICAL METADATA REBUILT] cid=${rootCid} method=${exact.method} variant=${candidate.variant} bytes=${candidate.data.length}`);
+      appendTrace(out, {
+        event: 'root_recovered',
+        root_cid: rootCid,
+        method: exact.method,
+        importer: exact.importer,
+        source: 'metadata_serialization_matrix',
+        candidate_variant: candidate.variant,
+        bytes: candidate.data.length,
+        sha256: key,
+      });
+      return { root_cid: rootCid, status: 'recovered', source: 'metadata_serialization_matrix', method: exact.method, importer: exact.importer, variant: candidate.variant };
+    }
+  }
+
+  appendTrace(out, {
+    event: 'root_unrecovered',
+    root_cid: rootCid,
+    refs: refs.map(ref => ({ asset_id: ref.asset_id, role: ref.role, leaf_path: ref.leaf_path, original_uri: ref.original_uri })),
+    http_gateway_count: gateways.length,
+    metadata_candidate_count: metadataSeen.size,
+  });
+  return { root_cid: rootCid, status: 'unrecovered', http_gateway_count: gateways.length, metadata_candidate_count: metadataSeen.size };
+}
+
+async function extendedRecovery({ out, kubo, unrecovered }) {
+  const snapshotFile = path.join(out, 'recovered-tokens.json');
+  const carDir = path.join(out, 'evidence-v2', 'cars');
+  if (!fs.existsSync(snapshotFile) || !unrecovered?.length) {
+    return { attempted: 0, recovered: [], unrecovered: [] };
+  }
+
+  const records = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
+  const refs = refsFromSnapshot(out, records);
+  const tokenByAsset = new Map(records.map(token => [assetId(token), token]));
+  const targets = unrecovered
+    .map(row => row?.root_cid)
+    .filter(Boolean)
+    .map(rootCid => ({ rootCid, refRows: refs.get(rootCid) || [] }));
+
+  const results = new Array(targets.length);
+  await mapLimit(targets, ROOT_CONCURRENCY, async (target, index) => {
+    try {
+      results[index] = await recoverOneRoot({
+        out,
+        kubo,
+        rootCid: target.rootCid,
+        refRows: target.refRows,
+        tokenByAsset,
+        carDir,
+      });
+    } catch (error) {
+      console.warn(`[CAR HISTORICAL CONTENT ROOT FAILED] cid=${target.rootCid} error=${String(error.message || error).replace(/\s+/g, ' ').slice(0, 800)}`);
+      appendTrace(out, {
+        event: 'root_recovery_error',
+        root_cid: target.rootCid,
+        error: String(error.message || error).replace(/\s+/g, ' ').slice(0, 1200),
+      });
+      results[index] = { root_cid: target.rootCid, status: 'error', error: String(error.message || error).slice(0, 800) };
+    }
+  });
+
+  const report = {
+    schema: 'trinity-accord/chronicle-sidechain-historical-content-recovery/v1',
+    generated_at: new Date().toISOString(),
+    operational_only: true,
+    acceptance_rule: 'exact target CID plus complete CAR verification only',
+    attempted: targets.length,
+    recovered: results.filter(row => row?.status === 'recovered'),
+    unrecovered: results.filter(row => row?.status !== 'recovered' && row?.status !== 'already_valid'),
+    results,
+  };
+  const reportFile = path.join(out, 'runtime', 'HISTORICAL-CONTENT-RECOVERY.json');
+  atomicWrite(reportFile, Buffer.from(JSON.stringify(report, null, 2) + '\n'));
+  console.log(`[CAR HISTORICAL CONTENT SUMMARY] attempted=${report.attempted} recovered=${report.recovered.length} unrecovered=${report.unrecovered.length}`);
+  return report;
+}
+
+export async function rebuildCarsFromHistoricalPayloads(options = {}) {
+  const out = options.out || process.env.CHRONICLE_OUT || 'artifacts/chronicle-sidechain-scan';
+  const kubo = options.kubo || process.env.CHRONICLE_KUBO_BIN || '';
+  const first = await baseRebuildCarsFromHistoricalPayloads({ ...options, out, kubo });
+  if (!first.unrecovered?.length) return first;
+
+  console.log(`[CAR HISTORICAL CONTENT START] unresolved=${first.unrecovered.length} strict=true`);
+  const recovery = await extendedRecovery({ out, kubo, unrecovered: first.unrecovered });
+  if (!recovery.recovered.length) return { ...first, extended_content_recovery: recovery };
+
+  // Re-run the original strict scanner. Newly recovered CARs are accepted only
+  // if the original verifier agrees they are complete and rooted at the exact CID.
+  const second = await baseRebuildCarsFromHistoricalPayloads({ ...options, out, kubo });
+  return { ...second, extended_content_recovery: recovery };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
