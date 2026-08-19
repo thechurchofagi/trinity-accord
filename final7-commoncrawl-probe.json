@@ -1,0 +1,58 @@
+{
+  "indexes": [
+    "CC-MAIN-2026-30",
+    "CC-MAIN-2026-25",
+    "CC-MAIN-2026-21",
+    "CC-MAIN-2026-17",
+    "CC-MAIN-2026-12",
+    "CC-MAIN-2026-08",
+    "CC-MAIN-2026-04",
+    "CC-MAIN-2025-51",
+    "CC-MAIN-2025-47",
+    "CC-MAIN-2025-43",
+    "CC-MAIN-2025-38",
+    "CC-MAIN-2025-33",
+    "CC-MAIN-2025-30",
+    "CC-MAIN-2025-26",
+    "CC-MAIN-2025-21",
+    "CC-MAIN-2025-18",
+    "CC-MAIN-2025-13",
+    "CC-MAIN-2025-08",
+    "CC-MAIN-2025-05",
+    "CC-MAIN-2024-51",
+    "CC-MAIN-2024-46",
+    "CC-MAIN-2024-42",
+    "CC-MAIN-2024-38",
+    "CC-MAIN-2024-33"
+  ],
+  "targets": {
+    "QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT": {
+      "index_hits": [],
+      "exact": []
+    },
+    "QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva": {
+      "index_hits": [],
+      "exact": []
+    },
+    "QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1": {
+      "index_hits": [],
+      "exact": []
+    },
+    "QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah": {
+      "index_hits": [],
+      "exact": []
+    },
+    "QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC": {
+      "index_hits": [],
+      "exact": []
+    },
+    "bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy": {
+      "index_hits": [],
+      "exact": []
+    },
+    "bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54": {
+      "index_hits": [],
+      "exact": []
+    }
+  }
+}

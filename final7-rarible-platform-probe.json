@@ -1,0 +1,902 @@
+{
+  "schema": "trinity-accord/final-seven-rarible-platform-probe/v1",
+  "exact_recovered": [],
+  "targets": {
+    "QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT": {
+      "coordinate": "POLYGON:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+      "role": "media:image",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/POLYGON-0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/POLYGON-0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2725,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/polygon/0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2725,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/POLYGON:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/POLYGON:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/polygon/0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0?utm_",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x9a3a7ddde5712b090181937bd7f0a6e2084707e6:0?utm_",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2725,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp1i969swj/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+          "ok": false,
+          "status": 504,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+          "type": "text/plain; charset=utf-8",
+          "bytes": 109,
+          "error": "HTTP Error 504: Gateway Timeout"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp639afxne/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva": {
+      "coordinate": "POLYGON:0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+      "role": "media:image",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/POLYGON-0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/POLYGON-0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2862,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/polygon/0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2862,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/POLYGON:0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/POLYGON:0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x001007e8ab86f6ba6f477712c8b8db84887d0175:0",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/polygon/0x001007e8ab86f6ba6f477712c8b8db84887d0175:0?utm_",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x001007e8ab86f6ba6f477712c8b8db84887d0175:0?utm_",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2862,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmpxypnnfjt/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+          "ok": false,
+          "status": null,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+          "type": "",
+          "bytes": 0,
+          "error": "The read operation timed out"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp2pz5afe4/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1": {
+      "coordinate": "BASE:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+      "role": "media:image",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/BASE-0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/BASE-0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2789,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/base/0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/base/0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2789,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/BASE:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/BASE:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77:0",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/ba",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp3o00kom5/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+          "ok": false,
+          "status": 504,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+          "type": "text/plain; charset=utf-8",
+          "bytes": 109,
+          "error": "HTTP Error 504: Gateway Timeout"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp3l0vtl8b/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah": {
+      "coordinate": "BASE:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+      "role": "media:image",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/BASE-0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/BASE-0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2759,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/base/0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/base/0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2759,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/BASE:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/BASE:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d:0",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/ba",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp3bpeu3t3/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+          "ok": false,
+          "status": 504,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+          "type": "text/plain; charset=utf-8",
+          "bytes": 109,
+          "error": "HTTP Error 504: Gateway Timeout"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797470,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmpb0rimc3o/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC": {
+      "coordinate": "BASE:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+      "role": "media:image",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/BASE-0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/BASE-0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2797,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/base/0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/base/0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2797,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/BASE:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/BASE:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/BASE:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1:0",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/ba",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmp1v5zzysi/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+          "ok": false,
+          "status": 504,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+          "type": "text/plain; charset=utf-8",
+          "bytes": 109,
+          "error": "HTTP Error 504: Gateway Timeout"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=0",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=0', '--raw-leaves=false', '/tmp/tmpj9u_qgne/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy": {
+      "coordinate": "POLYGON:0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+      "role": "metadata",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/POLYGON-0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/POLYGON-0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2874,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/polygon/0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2874,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/POLYGON:0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/POLYGON:0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/polygon/0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1?utm_",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0xad4bda0b463ace68dd640b14891b00a7fe1caccf:1?utm_",
+          "type": "text/html; charset=utf-8",
+          "bytes": 2874,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=1",
+                "--raw-leaves=true"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=true', '/tmp/tmp4bi83kav/payloa"
+            },
+            {
+              "mode": [
+                "--cid-version=1",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=false', '/tmp/tmp4bi83kav/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+          "ok": false,
+          "status": null,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+          "type": "",
+          "bytes": 0,
+          "error": "The read operation timed out"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "mode": [
+                "--cid-version=1",
+                "--raw-leaves=true"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=true', '/tmp/tmprt6io8xe/payloa"
+            },
+            {
+              "mode": [
+                "--cid-version=1",
+                "--raw-leaves=false"
+              ],
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Q', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=false', '/tmp/tmprt6io8xe/paylo"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    },
+    "bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54": {
+      "coordinate": "POLYGON:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+      "role": "metadata",
+      "seed_requests": [
+        {
+          "url": "https://rarible.com/token/POLYGON-0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/POLYGON-0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "type": "text/html; charset=utf-8",
+          "bytes": 3058,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/404",
+          "type": "text/html",
+          "bytes": 2468,
+          "error": null
+        },
+        {
+          "url": "https://rarible.com/token/polygon/0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "type": "text/html; charset=utf-8",
+          "bytes": 3058,
+          "error": null
+        },
+        {
+          "url": "https://api.rarible.org/v0.1/items/POLYGON:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "ok": false,
+          "status": 403,
+          "final_url": "https://api.rarible.org/v0.1/items/POLYGON:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "type": "application/json",
+          "bytes": 133,
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "ok": false,
+          "status": null,
+          "final_url": "https://api-mainnet.rarible.com/marketplace/api/v4/items/POLYGON:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "candidate_requests": [
+        {
+          "url": "http://og.rarible.com/token/polygon/0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1?utm_",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://og.rarible.com/token/polygon/0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d:1?utm_",
+          "type": "text/html; charset=utf-8",
+          "bytes": 3058,
+          "error": null,
+          "cid_checks": [
+            {
+              "raw_leaves": "true",
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Qr', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=true', '/tmp/tmptkox574f/root'"
+            },
+            {
+              "raw_leaves": "false",
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Qr', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=false', '/tmp/tmptkox574f/root"
+            }
+          ]
+        },
+        {
+          "url": "https://api.rarible.org/da",
+          "ok": false,
+          "status": 404,
+          "final_url": "https://api.rarible.org/da",
+          "type": "text/html",
+          "bytes": 153,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://ipfs.raribleuserdata.com/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json",
+          "ok": false,
+          "status": 504,
+          "final_url": "https://ipfs.raribleuserdata.com/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json",
+          "type": "text/plain; charset=utf-8",
+          "bytes": 150,
+          "error": "HTTP Error 504: Gateway Timeout"
+        },
+        {
+          "url": "https://media.raribleu",
+          "ok": false,
+          "status": null,
+          "final_url": "https://media.raribleu",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        },
+        {
+          "url": "https://rarible.com/",
+          "ok": true,
+          "status": 200,
+          "final_url": "https://rarible.com/all",
+          "type": "text/html; charset=utf-8",
+          "bytes": 797570,
+          "error": null,
+          "cid_checks": [
+            {
+              "raw_leaves": "true",
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Qr', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=true', '/tmp/tmpk6r2l_iq/root'"
+            },
+            {
+              "raw_leaves": "false",
+              "error": "Command '['/home/runner/work/_temp/tools/kubo/ipfs', 'add', '-Qr', '--only-hash', '--pin=false', '--cid-version=1', '--raw-leaves=false', '/tmp/tmpk6r2l_iq/root"
+            }
+          ]
+        },
+        {
+          "url": "https://rarible.mypinata.cloud/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json",
+          "ok": false,
+          "status": null,
+          "final_url": "https://rarible.mypinata.cloud/ipfs/bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54/token.json",
+          "type": "",
+          "bytes": 0,
+          "error": "<urlopen error [Errno -2] Name or service not known>"
+        }
+      ],
+      "exact": false,
+      "verification": []
+    }
+  }
+}
