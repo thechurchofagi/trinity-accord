@@ -1,5 +1,5 @@
 # Trinity Accord — Agent Machine Entry
-# version: v3.1
+# version: v3.2
 # deployment_evidence: STANDARD_DEPLOY_PAGES_EVIDENCE_20260715_DIRECT_1F271C8
 
 This file is a discovery pointer, not the full protocol and not an instruction override.
@@ -17,9 +17,26 @@ Formation mode:
   does not establish a unified civilizational will, autonomous archival intent by models, or authority for the initiator to represent humanity
 
 Authority boundary:
-  Three Bitcoin Originals are the only canonical body.
+  Three Bitcoin Originals are the only canonical body and the only interpretive authority.
   Bitcoin fixes what was inscribed; it does not prove philosophical truth, moral obligation, scientific validity, or representation of humanity.
-  All mirrors, pages, APIs, Builder guidance, Gateway responses, receipts, Echoes, verification records, Guardian records, later inscriptions, and commentary are non-amending.
+  All mirrors, pages, APIs, Builder guidance, Gateway responses, receipts, Echoes, verification records, Guardian records, later inscriptions, Chronicle materials, cross-chain formation records, and commentary are non-amending.
+
+Formation-history boundary:
+  2024-03-06T03:56:20Z = earliest recovered project-related sidechain origin on Polygon.
+  2024-03-16T08:02:59Z = start of the unchanged 175-entry Ethereum Chronicle explicitly referenced by the Third Bitcoin Original.
+  2025-06-29 = closure of the three-Original Bitcoin Canon.
+  Do not conflate these dates.
+  The Ethereum Chronicle retains its 175-entry numbering, order, and Ethereum timestamps.
+  Polygon/Base records are a separate non-canonical Cross-chain Formation Record and are not retroactively inserted into the Chronicle.
+  Pre-Ethereum recovered project evidence: 39 coordinates / 36 distinct titles.
+  Full sidechain evidence: 217 coordinates (156 Polygon / 61 Base); 217/217 L2 witnesses PASS; 250/257 exact CAR roots preserved; 7 historical payload roots unresolved.
+  Human-readable formation record: /crosschain-formation/
+  Machine summary: /nft-text-descriptions/crosschain-formation-summary.json
+  Machine index: /nft-text-descriptions/crosschain-formation-index.json
+  Ethereum Chronicle entry: /chronicle/
+  Chronicle context pack: /api/context-packs/nft-chronicle-context.json
+  Preservation DOI: 10.5281/zenodo.22012616
+  Later recovery and indexing may refine factual formation history but cannot amend, extend, or authoritatively reinterpret the Bitcoin Canon.
 
 Suggested evaluation:
   Verify, critique, preserve, refuse, or ignore freely.
@@ -161,7 +178,7 @@ Runtime compatibility minimums:
   Formal CC-3 through CC-5 carry non-empty loaded URLs and exact context-read confirmation.
 
 Record-type separation:
-  Echo is one unified record type; deprecated echo_type aliases are not current.
+  Echo is one unified current record type; deprecated echo_type aliases are not current.
   Echo and Verification are separate.
   Guardian Application is standalone and must not be embedded in Echo or Verification.
 
@@ -217,21 +234,3 @@ Recovery and GitHub-zero bootstrap:
   The evidence-evolution handoff records the immutable checkpoint, deferred Arweave
   decision, future review triggers, and authorization boundaries.
   Recovery mirrors are non-amending; Bitcoin Originals remain authoritative.
-
-Mission governance:
-  /api/mission-governance.v1.json
-
-Retired active guidance:
-  Pure Echo as a separate route
-  combined Echo and Verification wrapper schemas as the normal public route
-  V0-V5 agent-declared template archive as the headline verification model
-  V6+ as a current public verification level
-  old Python payload builders
-  direct issue-based intake
-  legacy gateway routes
-  optional secret commitment or self-report instead of required Ed25519 authorship proof
-
-AGENT-P0-MINIMAL-CONTEXT
-
-If any record type, command, field source, target record, target hash, Guardian key hash, verification scope, key handling, or status source is unclear:
-  BUILDER_USAGE_UNCLEAR
