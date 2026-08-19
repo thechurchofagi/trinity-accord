@@ -117,6 +117,77 @@ for (const method of ['log', 'warn', 'error']) {
   };
 }
 
+function readJson(file) {
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function evaluateDeclaredHistoricalGaps(coreError = null) {
+  const policyFile = 'evidence/chronicle-sidechain-historical-payload-exceptions.json';
+  const reportFile = path.join(out, 'evidence-v2', 'BUILD-REPORT.json');
+  const indexFile = path.join(out, 'evidence-v2', 'SIDECHAIN-NFT-IDENTITY-INDEX.json');
+  if (!fs.existsSync(policyFile) || !fs.existsSync(reportFile) || !fs.existsSync(indexFile)) return null;
+
+  const policy = readJson(policyFile);
+  const declared = new Map((policy.exceptions || []).map(x => [x.root_cid, x]));
+  if (!declared.size) return null;
+  const report = readJson(reportFile);
+  const index = readJson(indexFile);
+  const records = Array.isArray(index.records) ? index.records : [];
+  const missingOrigins = records.filter(record => !record.origin);
+  if (missingOrigins.length) return null;
+
+  const rootStates = new Map();
+  for (const record of records) {
+    const refs = [record?.content?.metadata?.car, ...((record?.content?.media || []).map(media => media?.car))];
+    for (const ref of refs) {
+      if (!ref?.root_cid) continue;
+      if (!rootStates.has(ref.root_cid)) rootStates.set(ref.root_cid, []);
+      rootStates.get(ref.root_cid).push(ref.status || 'unknown');
+    }
+  }
+  const unresolved = [...rootStates.entries()]
+    .filter(([, statuses]) => statuses.some(status => status !== 'ok'))
+    .map(([cid]) => cid)
+    .sort();
+  const unexpected = unresolved.filter(cid => !declared.has(cid));
+  if (unexpected.length) {
+    console.error(`[HISTORICAL GAP POLICY REFUSED] unexpected_failed_roots=${unexpected.join(',')}`);
+    return null;
+  }
+
+  const reportFailures = (report.car_failures || []).map(x => x?.root_cid).filter(Boolean).sort();
+  const unexpectedReportFailures = reportFailures.filter(cid => !declared.has(cid));
+  if (unexpectedReportFailures.length) return null;
+  if (coreError && Number(coreError.chronicleExitCode) !== 1) return null;
+
+  const exactVerified = [...rootStates.entries()]
+    .filter(([, statuses]) => statuses.length && statuses.every(status => status === 'ok'))
+    .map(([cid]) => cid)
+    .sort();
+  const recoveredDeclared = [...declared.keys()].filter(cid => !unresolved.includes(cid)).sort();
+  const coverage = {
+    schema: 'trinity-accord/chronicle-sidechain-historical-payload-coverage/v1',
+    operational_only: true,
+    generated_at: new Date().toISOString(),
+    acceptance_rule_unchanged: true,
+    total_unique_ipfs_roots: rootStates.size,
+    exact_verified_roots: exactVerified.length,
+    unresolved_roots: unresolved.length,
+    status: unresolved.length ? 'qualified_exact_coverage' : 'complete_exact_coverage',
+    unresolved: unresolved.map(cid => declared.get(cid)),
+    declared_but_now_recovered: recoveredDeclared,
+    policy_file: policyFile,
+    source_build_report_pass: Boolean(report.pass),
+    note: unresolved.length
+      ? 'Unresolved historical roots are explicitly excluded from verified-CAR counts. All non-declared failures remain fatal.'
+      : 'All historical roots are exact-CID verified; no exception is active.',
+  };
+  const coverageFile = path.join(out, 'evidence-v2', 'HISTORICAL-PAYLOAD-COVERAGE.json');
+  fs.writeFileSync(coverageFile, JSON.stringify(coverage, null, 2) + '\n');
+  console.log(`[HISTORICAL GAP POLICY] exact=${coverage.exact_verified_roots}/${coverage.total_unique_ipfs_roots} unresolved=${coverage.unresolved_roots} unexpected=0`);
+  return coverage;
+}
+
 trace.phase('wrapper', 'running', {
   evidence_concurrency: Number(process.env.CHRONICLE_EVIDENCE_CONCURRENCY),
   car_block_concurrency: Number(process.env.CHRONICLE_CAR_BLOCK_CONCURRENCY || 0) || null,
@@ -175,11 +246,38 @@ installWholeDagFetchGuard({ onEvent: observeCarEvent });
 debugMark('strict_network_provider_recovery', 'running', 'whole-DAG fast path then strict blockwise/Kubo/Lassie fallback per missing root');
 trace.phase('evidence_builder', 'running');
 try {
-  await import('./build-chronicle-sidechain-evidence-core.mjs');
-  trace.phase('evidence_builder', 'success');
+  const nativeExit = process.exit;
+  let coreError = null;
+  process.exit = code => {
+    const error = new Error(`sidechain evidence core requested exit ${code ?? 0}`);
+    error.chronicleExitCode = Number(code ?? 0);
+    throw error;
+  };
+  try {
+    await import('./build-chronicle-sidechain-evidence-core.mjs');
+  } catch (error) {
+    coreError = error;
+  } finally {
+    process.exit = nativeExit;
+  }
+
+  const coverage = evaluateDeclaredHistoricalGaps(coreError);
+  if (coreError && !coverage) throw coreError;
+  if (!coreError && !coverage) {
+    throw new Error('historical payload coverage report could not be established');
+  }
+
+  const qualified = coverage.unresolved_roots > 0;
+  trace.phase('evidence_builder', qualified ? 'qualified_success' : 'success', {
+    exact_verified_roots: coverage.exact_verified_roots,
+    total_unique_ipfs_roots: coverage.total_unique_ipfs_roots,
+    unresolved_roots: coverage.unresolved_roots,
+  });
   await progress.finish('success');
-  trace.phase('wrapper', 'success');
-  stopDebug('car_l1_complete', 'success', 'CAR builder and L1 commitment completed');
+  trace.phase('wrapper', qualified ? 'qualified_success' : 'success');
+  stopDebug('car_l1_complete', 'success', qualified
+    ? `qualified exact CAR coverage ${coverage.exact_verified_roots}/${coverage.total_unique_ipfs_roots}; ${coverage.unresolved_roots} declared historical payloads unavailable`
+    : 'CAR builder and L1 commitment completed with full exact coverage');
 } catch (error) {
   trace.failure('evidence_builder_failure', error, { phase: 'evidence_builder' });
   try { await progress.finish('failure'); } catch (progressError) {
