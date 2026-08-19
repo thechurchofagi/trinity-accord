@@ -6,7 +6,7 @@
   "latest_version": "f64cc872b3b5",
   "legacy_generated_at": "2026-08-19T12:30:54.811318Z",
   "legacy_nondeterministic_builder_field_reconciled": true,
-  "local_rebuild_package_identity_sha256": "98f77fe29befed3919a29ee477a3faaad490fd79961f4a0c46d7716ac0378ae7",
+  "local_rebuild_package_identity_sha256": "f56e473ae675b2b4c6d3b4aa91affbe54fba1add2ba55693b50f7ef2f9056a0f",
   "package_identity_sha256": "5cbc5efe7dd65e8d362b97ae58af6bfc6105e0d9e7f878e38a0e0f78398623cb",
   "public_file_sha256": {
     "README.md": "c60181587e8b046dc157181d95ab6ffd56e2e22fde9398b063ccdc900031b245",
@@ -25,6 +25,6 @@
   "schema": "trinity-accord/chronicle-sidechain-zenodo-state/v1",
   "source_commit_sha": "f64cc872b3b5cf70a891621615e2b56ede004a2d",
   "source_release_tag": "chronicle-sidechain-evidence-v2-f64cc872b3b5",
-  "updated_at": "2026-08-19T13:28:41.756439Z",
+  "updated_at": "2026-08-19T23:06:19.019580Z",
   "verified_file_count": 7
 }
