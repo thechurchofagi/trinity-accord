@@ -144,3 +144,18 @@ def test_current_value_surfaces_do_not_claim_low_ai_mediation() -> None:
         "historical relevance becomes more salient as agentic mediation and delegated execution intensify"
     )
     assert "does not predict an AGI arrival date" in relevance["boundary"]
+
+
+def test_current_chronicle_surfaces_name_the_observed_transition() -> None:
+    paths = (
+        "README.md",
+        "chronicle.md",
+        "chronicle-human-witness.md",
+        "chronicle-music.md",
+    )
+
+    for path in paths:
+        text = read(path)
+        assert "AGI / ASI acceleration period" not in text
+        assert "conversational" in text
+        assert "delegated agent" in text or "agentic AI transition" in text
