@@ -5,6 +5,8 @@ on:
     paths:
       - "scripts/build-chronicle-sidechain-evidence.mjs"
       - "scripts/build-chronicle-sidechain-evidence-core.mjs"
+      - "scripts/rebuild-chronicle-sidechain-cars-from-history.mjs"
+      - "scripts/sidechain-debug-live.py"
       - "scripts/chronicle-sidechain-car-integrity.mjs"
       - "scripts/test_chronicle_sidechain_car_integrity.mjs"
       - "scripts/test_chronicle_bootstrap_history.mjs"
@@ -42,11 +44,13 @@ jobs:
           node scripts/test_chronicle_sidechain_car_integrity.mjs
           node --check scripts/build-chronicle-sidechain-evidence.mjs
           node --check scripts/build-chronicle-sidechain-evidence-core.mjs
+          node --check scripts/rebuild-chronicle-sidechain-cars-from-history.mjs
           node --check scripts/chronicle-sidechain-car-integrity.mjs
           python3 scripts/test_chronicle_sidechain_l2.py
           python3 scripts/test_chronicle_sidechain_l2_parallel.py
           python3 scripts/test_chronicle_progress_publisher.py
           python3 -m py_compile \
+            scripts/sidechain-debug-live.py \
             scripts/capture-chronicle-sidechain-l2.py \
             scripts/capture-chronicle-sidechain-l2-parallel.py \
             scripts/publish-chronicle-sidechain-progress.py \
@@ -54,4 +58,4 @@ jobs:
             scripts/verify-chronicle-sidechain-evidence-core.py \
             scripts/diagnose-chronicle-sidechain-l1.py
           bash -n scripts/stream-chronicle-sidechain-progress.sh
-          echo "[PREFLIGHT PASS] bootstrap + strict CAR integrity gate + legacy correctness + endpoint parallelism + telemetry + offline/L1 diagnostics"
+          echo "[PREFLIGHT PASS] bootstrap + strict CAR integrity + historical rebuild + live debug + endpoint parallelism + telemetry + offline/L1 diagnostics"
