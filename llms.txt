@@ -187,6 +187,7 @@ Record-type separation:
   Guardian Application is standalone and must not be embedded in Echo or Verification.
 
 zero-clone Builder flow:
+  If Builder usage is unclear, stop with BUILDER_USAGE_UNCLEAR.
   download Builder
   verify Builder manifest
   read field guidance
