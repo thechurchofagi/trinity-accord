@@ -50,7 +50,7 @@ jobs:
           set -euo pipefail
           python -m pip install -r requirements-ots.txt
           ots --help >/dev/null
-          python -m pip show opentimestamps-client || true
+          python -m pip show opentimestamps-client
 
       - name: Resolve latest immutable sidechain evidence release
         id: source
@@ -129,7 +129,8 @@ jobs:
           PY
             ots stamp anchor-payload.canonical.json
             test -s anchor-payload.canonical.json.ots
-            ots info anchor-payload.canonical.json.ots > OTS-INFO.initial.txt 2>&1 || true
+            ots info anchor-payload.canonical.json.ots > OTS-INFO.initial.txt 2>&1
+            cat OTS-INFO.initial.txt
             python3 - <<'PY'
           import datetime,hashlib,json,os,pathlib
           root=pathlib.Path('.')
@@ -177,22 +178,28 @@ jobs:
           set -e
           after_sha="$(sha256sum anchor-payload.canonical.json.ots | awk '{print $1}')"
           echo "[OTS UPGRADE END] rc=$upgrade_rc proof_after=$after_sha"
-          sed -n '1,200p' OTS-UPGRADE.stdout.txt || true
-          sed -n '1,200p' OTS-UPGRADE.stderr.txt || true
-          ots info anchor-payload.canonical.json.ots > OTS-INFO.upgraded.txt 2>&1 || true
+          sed -n '1,200p' OTS-UPGRADE.stdout.txt
+          sed -n '1,200p' OTS-UPGRADE.stderr.txt
+          set +e
+          ots info anchor-payload.canonical.json.ots > OTS-INFO.upgraded.txt 2>&1
+          info_rc=$?
+          set -e
+          echo "[OTS INFO END] rc=$info_rc"
+          cat OTS-INFO.upgraded.txt
           set +e
           timeout 240 ots verify anchor-payload.canonical.json.ots > OTS-VERIFY.stdout.txt 2> OTS-VERIFY.stderr.txt
           verify_rc=$?
           set -e
           echo "[OTS VERIFY END] rc=$verify_rc"
-          sed -n '1,240p' OTS-VERIFY.stdout.txt || true
-          sed -n '1,240p' OTS-VERIFY.stderr.txt || true
-          VERIFY_RC="$verify_rc" UPGRADE_RC="$upgrade_rc" python3 - <<'PY'
+          sed -n '1,240p' OTS-VERIFY.stdout.txt
+          sed -n '1,240p' OTS-VERIFY.stderr.txt
+          VERIFY_RC="$verify_rc" UPGRADE_RC="$upgrade_rc" INFO_RC="$info_rc" python3 - <<'PY'
           import datetime,hashlib,json,os,pathlib
           root=pathlib.Path('.')
           receipt=json.loads((root/'OTS-RECEIPT.json').read_text())
           verify_rc=int(os.environ['VERIFY_RC'])
           upgrade_rc=int(os.environ['UPGRADE_RC'])
+          info_rc=int(os.environ['INFO_RC'])
           proof=(root/'anchor-payload.canonical.json.ots').read_bytes()
           transcript=(root/'OTS-VERIFY.stdout.txt').read_bytes()+(root/'OTS-VERIFY.stderr.txt').read_bytes()
           report={
@@ -204,6 +211,7 @@ jobs:
             'confirmation_release_tag':os.environ['CONFIRMATION_TAG'],
             'message_sha256':receipt['message_sha256'],
             'upgrade_returncode':upgrade_rc,
+            'info_returncode':info_rc,
             'verify_returncode':verify_rc,
             'bitcoin_verified':verify_rc==0,
             'status':'bitcoin_attested_verified' if verify_rc==0 else 'pending_bitcoin_attestation',
