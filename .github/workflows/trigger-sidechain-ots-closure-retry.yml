@@ -1,3 +1,4 @@
+# Operational touch: intentionally triggers an immediate strict Sidechain OTS closure retry.
 name: Trigger Sidechain OTS Closure Retry
 
 on:
