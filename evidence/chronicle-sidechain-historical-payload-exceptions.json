@@ -1,0 +1,100 @@
+{
+  "schema": "trinity-accord/chronicle-sidechain-historical-payload-exceptions/v1",
+  "operational_only": true,
+  "canon_boundary": "non-amending; the three Bitcoin inscriptions remain Canon",
+  "policy": {
+    "purpose": "Allow independently verified sidechain evidence to complete while a closed, explicit set of historical IPFS payloads remains unavailable.",
+    "acceptance_rule_unchanged": true,
+    "unresolved_roots_are_not_verified": true,
+    "unexpected_failures_are_fatal": true,
+    "declared_roots_recover_automatically_when_exact_bytes_become_available": true
+  },
+  "source_observation": {
+    "run_id": "32212277838",
+    "source_sha": "ad8790e1f7ee3dbc06fb8bf624a4cc06397d10b9",
+    "records_completed": 217,
+    "strict_cache_valid": 245,
+    "strict_cache_total": 257,
+    "final_exact_verified_roots": 250,
+    "final_unresolved_roots": 7
+  },
+  "exceptions": [
+    {
+      "root_cid": "bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54",
+      "asset_id": "eip155:137/erc1155:0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d/1",
+      "chain": "polygon",
+      "contract": "0x5ed7eb7b81068ea23bc170be48b4a0e99262aa6d",
+      "token_id": "1",
+      "role": "metadata",
+      "original_uri": "ipfs://bafybeieofybnvwz4qkmseon5zhye7fshzqosbsbsvl46buqoxtzzjzbf54",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+      "asset_id": "eip155:8453/erc1155:0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77/0",
+      "chain": "base",
+      "contract": "0x3acfeebf6cd63f61ae6096dafc7dab7675bf7e77",
+      "token_id": "0",
+      "role": "media:image",
+      "original_uri": "ipfs://QmYxaovCTVY2EiXBWgvBdtpFCKyoom6bYSBTcxJ5UJweJ1",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+      "asset_id": "eip155:8453/erc1155:0xf616ba3cfab4d17477d7c63d775666dcb1e5542d/0",
+      "chain": "base",
+      "contract": "0xf616ba3cfab4d17477d7c63d775666dcb1e5542d",
+      "token_id": "0",
+      "role": "media:image",
+      "original_uri": "ipfs://QmRTbRbkfpjnU3cW4p8FW4rjuKjHx7B2MuhE2n8qLZtMah",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+      "asset_id": "eip155:8453/erc1155:0x1f26a5a197b4bed502e0a5a05d22b625406d05c1/0",
+      "chain": "base",
+      "contract": "0x1f26a5a197b4bed502e0a5a05d22b625406d05c1",
+      "token_id": "0",
+      "role": "media:image",
+      "original_uri": "ipfs://QmS4RcwE3J4JzNRAE1crQXM2Joex53TEgAXtN6nBDkWtRC",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+      "asset_id": "eip155:137/erc1155:0x9a3a7ddde5712b090181937bd7f0a6e2084707e6/0",
+      "chain": "polygon",
+      "contract": "0x9a3a7ddde5712b090181937bd7f0a6e2084707e6",
+      "token_id": "0",
+      "role": "media:image",
+      "original_uri": "ipfs://QmNTjiSRWuZfxzjH3QH9j5D3bEB957jS1psMuc9RFqB4QT",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+      "asset_id": "eip155:137/erc1155:0x001007e8ab86f6ba6f477712c8b8db84887d0175/0",
+      "chain": "polygon",
+      "contract": "0x001007e8ab86f6ba6f477712c8b8db84887d0175",
+      "token_id": "0",
+      "role": "media:image",
+      "original_uri": "ipfs://QmRX4GtfNvGrG2FgbtJdhUUx4ocyGk9aEqzgD7zsTEUAva",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    },
+    {
+      "root_cid": "bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+      "asset_id": "eip155:137/erc1155:0xad4bda0b463ace68dd640b14891b00a7fe1caccf/1",
+      "chain": "polygon",
+      "contract": "0xad4bda0b463ace68dd640b14891b00a7fe1caccf",
+      "token_id": "1",
+      "role": "metadata",
+      "original_uri": "ipfs://bafkreiddsyhct5vz2ludy2sgmh2hgx3vkk4sno2yaybukrnwrnmo4a6fcy",
+      "status": "historical_payload_unavailable",
+      "exact_recovery_pending": true
+    }
+  ]
+}
