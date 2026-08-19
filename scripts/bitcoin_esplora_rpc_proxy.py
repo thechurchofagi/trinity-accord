@@ -25,6 +25,7 @@ import hashlib
 import json
 import pathlib
 import re
+import signal
 import threading
 import time
 import urllib.error
@@ -264,6 +265,13 @@ def main() -> int:
     trace = Trace(pathlib.Path(args.trace))
     source = ConsensusSource(trace, timeout=args.timeout)
     server = RpcServer((args.host, args.port), RpcHandler, source, trace)
+
+    def handle_termination(signum: int, _frame: Any) -> None:
+        trace.emit("termination_signal", signal=signum)
+        raise KeyboardInterrupt
+
+    signal.signal(signal.SIGTERM, handle_termination)
+    signal.signal(signal.SIGINT, handle_termination)
     trace.emit(
         "proxy_started",
         host=args.host,
