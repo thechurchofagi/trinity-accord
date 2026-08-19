@@ -1,0 +1,242 @@
+name: Chronicle Sidechain OTS Confirmation Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-ots-confirmation-publish.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+  statuses: write
+
+concurrency:
+  group: chronicle-sidechain-ots-confirmation-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      STATUS_CONTEXT: trinity/sidechain-ots
+      SOURCE_RUN_ID: "32250892595"
+      SOURCE_SHA: f64cc872b3b5cf70a891621615e2b56ede004a2d
+      SOURCE_SHORT: f64cc872b3b5
+      SOURCE_TAG: chronicle-sidechain-evidence-v2-f64cc872b3b5
+      ANCHOR_TAG: chronicle-sidechain-ots-v2-f64cc872b3b5
+      CONFIRMATION_TAG: chronicle-sidechain-ots-bitcoin-v2-f64cc872b3b5
+      EXPECTED_UPGRADED_OTS_SHA256: e421f7b4ff480d54a759e20609bb06cdac2b4efc4561b31bd30881cea1e6a1a0
+
+    steps:
+      - name: Checkout publication workflow source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Download successful strict-verification artifact
+        run: |
+          set -euo pipefail
+          mkdir -p ots-confirmation-publish/source-artifact
+          echo "[SOURCE ARTIFACT DOWNLOAD START] run_id=$SOURCE_RUN_ID"
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --dir ots-confirmation-publish/source-artifact
+          echo "[SOURCE ARTIFACT DOWNLOAD PASS]"
+          find ots-confirmation-publish/source-artifact -type f -printf '%p bytes=%s\n' | sort
+
+      - name: Fail-closed validation of source verification evidence
+        id: validate
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path('ots-confirmation-publish/source-artifact')
+          reports=list(root.rglob('OTS-STRICT-BITCOIN-VERIFICATION.json'))
+          proofs=list(root.rglob('anchor-payload.canonical.json.ots'))
+          verify_out=list(root.rglob('OTS-VERIFY.stdout.txt'))
+          verify_err=list(root.rglob('OTS-VERIFY.stderr.txt'))
+          if len(reports)!=1:
+              raise SystemExit(f'expected exactly one strict report, found {len(reports)}: {reports}')
+          if len(proofs)!=1:
+              raise SystemExit(f'expected exactly one upgraded OTS proof, found {len(proofs)}: {proofs}')
+          if len(verify_out)!=1 or len(verify_err)!=1:
+              raise SystemExit(f'expected one stdout/stderr transcript pair; stdout={verify_out}, stderr={verify_err}')
+          report=json.loads(reports[0].read_text())
+          checks={
+              'bitcoin_verified': report.get('bitcoin_verified') is True,
+              'upgrade_returncode': report.get('upgrade_returncode') == 0,
+              'verify_returncode': report.get('verify_returncode') == 0,
+              'source_commit_sha': report.get('source_commit_sha') == os.environ['SOURCE_SHA'],
+              'source_release_tag': report.get('source_release_tag') == os.environ['SOURCE_TAG'],
+              'anchor_release_tag': report.get('anchor_release_tag') == os.environ['ANCHOR_TAG'],
+              'confirmation_release_tag': report.get('confirmation_release_tag') == os.environ['CONFIRMATION_TAG'],
+          }
+          print('[STRICT REPORT CHECKS] '+json.dumps(checks,sort_keys=True))
+          if not all(checks.values()):
+              raise SystemExit(f'strict report validation failed: {checks}')
+          proof_sha=hashlib.sha256(proofs[0].read_bytes()).hexdigest()
+          print(f'[UPGRADED OTS SHA256] actual={proof_sha} expected={os.environ["EXPECTED_UPGRADED_OTS_SHA256"]}')
+          if proof_sha != os.environ['EXPECTED_UPGRADED_OTS_SHA256']:
+              raise SystemExit('upgraded OTS proof sha256 mismatch')
+          transcript=verify_out[0].read_text(errors='replace')+verify_err[0].read_text(errors='replace')
+          success='Success! Bitcoin block 963137 attests existence as of 2026-08-19 UTC'
+          if success not in transcript:
+              raise SystemExit('strict native OTS Bitcoin success transcript missing')
+          heights=report.get('bitcoin_attestation_heights') or []
+          if heights != [963137,963140,963143,963148]:
+              raise SystemExit(f'unexpected Bitcoin attestation heights: {heights}')
+          blocks=report.get('verified_success_blocks') or []
+          if 963137 not in blocks:
+              raise SystemExit(f'Bitcoin block 963137 missing from verified success blocks: {blocks}')
+          pathlib.Path('ots-confirmation-publish/source-report-path.txt').write_text(str(reports[0])+'\n')
+          pathlib.Path('ots-confirmation-publish/source-proof-path.txt').write_text(str(proofs[0])+'\n')
+          print('[SOURCE VERIFICATION EVIDENCE PASS] bitcoin_verified=true upgrade_rc=0 verify_rc=0 block=963137')
+          PY
+
+      - name: Build non-empty release assets
+        id: assets
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-publish
+          report_path="$(cat source-report-path.txt)"
+          test -s "$GITHUB_WORKSPACE/$report_path"
+          cp "$GITHUB_WORKSPACE/$report_path" OTS-STRICT-BITCOIN-VERIFICATION.json
+          bundle="chronicle-sidechain-ots-bitcoin-v2-${SOURCE_SHORT}.tar.gz"
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -czf "$bundle" source-artifact
+          test -s "$bundle"
+          test -s OTS-STRICT-BITCOIN-VERIFICATION.json
+          sha256sum "$bundle" OTS-STRICT-BITCOIN-VERIFICATION.json > RELEASE-ASSETS-SHA256.txt
+          test -s RELEASE-ASSETS-SHA256.txt
+          echo "[RELEASE ASSETS READY]"
+          stat -c '%n bytes=%s' "$bundle" OTS-STRICT-BITCOIN-VERIFICATION.json RELEASE-ASSETS-SHA256.txt
+          cat RELEASE-ASSETS-SHA256.txt
+          echo "bundle=$bundle" >> "$GITHUB_OUTPUT"
+
+      - name: Remove only an unpublished incomplete draft for this exact tag
+        id: existing
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-publish
+          gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" > releases-before.json
+          python3 - <<'PY' > existing.env
+          import json,os
+          rows=json.load(open('releases-before.json'))
+          tag=os.environ['CONFIRMATION_TAG']
+          hits=[r for r in rows if r.get('tag_name')==tag]
+          if len(hits)>1:
+              raise SystemExit(f'multiple releases found for {tag}')
+          if not hits:
+              print('EXISTING_ID=')
+              print('EXISTING_DRAFT=')
+              print('EXISTING_ASSET_COUNT=0')
+          else:
+              r=hits[0]
+              print(f'EXISTING_ID={r["id"]}')
+              print(f'EXISTING_DRAFT={str(bool(r.get("draft"))).lower()}')
+              print(f'EXISTING_ASSET_COUNT={len(r.get("assets") or [])}')
+          PY
+          cat existing.env
+          set -a
+          . existing.env
+          set +a
+          if [ -n "${EXISTING_ID:-}" ] && [ "${EXISTING_DRAFT:-}" = "true" ]; then
+            echo "[UNPUBLISHED DRAFT RECOVERY] delete draft_id=$EXISTING_ID assets=$EXISTING_ASSET_COUNT"
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/releases/$EXISTING_ID"
+            echo "[UNPUBLISHED DRAFT REMOVED] id=$EXISTING_ID"
+          fi
+          echo "existing_id=${EXISTING_ID:-}" >> "$GITHUB_OUTPUT"
+          echo "existing_draft=${EXISTING_DRAFT:-}" >> "$GITHUB_OUTPUT"
+
+      - name: Reverify existing published confirmation or create atomic draft
+        env:
+          BUNDLE: ${{ steps.assets.outputs.bundle }}
+          EXISTING_ID: ${{ steps.existing.outputs.existing_id }}
+          EXISTING_DRAFT: ${{ steps.existing.outputs.existing_draft }}
+        run: |
+          set -euo pipefail
+          cd ots-confirmation-publish
+          if [ -n "${EXISTING_ID:-}" ] && [ "${EXISTING_DRAFT:-}" = "false" ]; then
+            echo "[PUBLISHED RELEASE EXISTS] refusing mutation and re-verifying"
+            rm -rf published-existing
+            mkdir published-existing
+            gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir published-existing
+            cd published-existing
+            test -s RELEASE-ASSETS-SHA256.txt
+            sha256sum -c RELEASE-ASSETS-SHA256.txt
+            grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+            test -s "$BUNDLE"
+            echo "[PUBLISHED RELEASE REVERIFIED] tag=$CONFIRMATION_TAG"
+            exit 0
+          fi
+          echo "[DRAFT CREATE START] tag=$CONFIRMATION_TAG target=$SOURCE_SHA"
+          gh release create "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" --draft \
+            --title "Chronicle sidechain OTS Bitcoin verification — ${SOURCE_SHA:0:12}" \
+            --notes "Strict native OpenTimestamps verification succeeded for the canonical sidechain v2 anchor payload. Source verification: Actions run ${SOURCE_RUN_ID}. The upgraded OTS proof is Bitcoin-attested and was natively verified against independently agreeing Blockstream and mempool.space block data. Publication uses draft upload and readback before becoming public. Non-amending."
+          for asset in "$BUNDLE" OTS-STRICT-BITCOIN-VERIFICATION.json RELEASE-ASSETS-SHA256.txt; do
+            bytes="$(stat -c '%s' "$asset")"
+            sha="$(sha256sum "$asset" | awk '{print $1}')"
+            test "$bytes" -gt 0
+            echo "[ASSET UPLOAD START] name=$asset bytes=$bytes sha256=$sha"
+            gh release upload "$CONFIRMATION_TAG" "$asset" --repo "$GITHUB_REPOSITORY"
+            echo "[ASSET UPLOAD PASS] name=$asset"
+          done
+          rm -rf draft-readback
+          mkdir draft-readback
+          gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir draft-readback
+          cd draft-readback
+          echo "[DRAFT READBACK]"
+          ls -l
+          test -s RELEASE-ASSETS-SHA256.txt
+          sha256sum -c RELEASE-ASSETS-SHA256.txt
+          grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+          test -s "$BUNDLE"
+          echo "[DRAFT READBACK PASS]"
+          cd ..
+          gh release edit "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          echo "[RELEASE PUBLISHED] tag=$CONFIRMATION_TAG"
+          rm -rf published-readback
+          mkdir published-readback
+          gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir published-readback
+          cd published-readback
+          sha256sum -c RELEASE-ASSETS-SHA256.txt
+          grep -q '"bitcoin_verified": true' OTS-STRICT-BITCOIN-VERIFICATION.json
+          test -s "$BUNDLE"
+          echo "[PUBLISHED READBACK PASS] tag=$CONFIRMATION_TAG"
+
+      - name: Publish terminal success state
+        if: success()
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=bitcoin_verified_published&source_run=${SOURCE_RUN_ID}&run=${GITHUB_RUN_ID}"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=success \
+            -f context="$STATUS_CONTEXT" \
+            -f description="strict OTS Bitcoin confirmation published and read back" \
+            -f target_url="$target" >/dev/null
+          echo "[TERMINAL] success tag=$CONFIRMATION_TAG source_run=$SOURCE_RUN_ID run=$GITHUB_RUN_ID"
+
+      - name: Publish terminal failure state
+        if: failure()
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=confirmation_publish_failure&source_run=${SOURCE_RUN_ID}&run=${GITHUB_RUN_ID}"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=failure \
+            -f context="$STATUS_CONTEXT" \
+            -f description="strict OTS verified; confirmation publish failed" \
+            -f target_url="$target" >/dev/null
+          echo "[TERMINAL] failure source_run=$SOURCE_RUN_ID run=$GITHUB_RUN_ID"
+
+      - name: Upload publication diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-sidechain-ots-confirmation-publish-${{ github.run_id }}
+          path: ots-confirmation-publish/
+          retention-days: 90
