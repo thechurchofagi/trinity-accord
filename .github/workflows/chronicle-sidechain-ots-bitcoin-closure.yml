@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  statuses: write
 
 concurrency:
   group: chronicle-sidechain-ots-bitcoin-closure
@@ -28,12 +29,28 @@ jobs:
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
+      STATUS_CONTEXT: trinity/sidechain-ots
     steps:
       - name: Checkout current main
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 0
           ref: main
+
+      - name: Publish observable OTS closure start
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=running&run=${GITHUB_RUN_ID}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=pending \
+            -f context="$STATUS_CONTEXT" \
+            -f description="strict OTS Bitcoin upgrade and verification running" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS OBSERVE START] run_id=$GITHUB_RUN_ID sha=$GITHUB_SHA target=$target"
 
       - name: Record toolchain provenance
         run: |
@@ -234,9 +251,42 @@ jobs:
                 anchor-payload.canonical.json anchor-payload.canonical.json.ots OTS-RECEIPT.json OTS-CLOSURE.json OTS-VERIFY.stdout.txt OTS-VERIFY.stderr.txt OTS-INFO.upgraded.txt CLOSURE-SHA256SUMS
               echo "[BITCOIN CONFIRMATION PUBLISHED] $CONFIRMATION_TAG"
             fi
+            final_state="success"
+            marker="bitcoin_verified"
+            description="strict OTS Bitcoin confirmation verified"
           else
             echo "[OTS PENDING] Bitcoin attestation is not independently verifiable yet; the daily watcher will retry."
+            final_state="pending"
+            marker="pending_attestation"
+            description="OTS calendars not Bitcoin-verifiable yet"
           fi
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=${marker}&run=${GITHUB_RUN_ID}&upgrade_rc=${upgrade_rc}&verify_rc=${verify_rc}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state="$final_state" \
+            -f context="$STATUS_CONTEXT" \
+            -f description="$description" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS OBSERVE FINAL] state=$final_state marker=$marker upgrade_rc=$upgrade_rc verify_rc=$verify_rc run_id=$GITHUB_RUN_ID target=$target"
+
+      - name: Publish OTS closure failure status
+        if: failure()
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=workflow_failure&run=${GITHUB_RUN_ID}"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=failure \
+            -f context="$STATUS_CONTEXT" \
+            -f description="OTS closure workflow failed; inspect run" \
+            -f target_url="$target" >/dev/null
+          echo "[OTS OBSERVE FAILURE] run_id=$GITHUB_RUN_ID target=$target"
 
       - name: Upload complete OTS closure diagnostics
         if: always()
