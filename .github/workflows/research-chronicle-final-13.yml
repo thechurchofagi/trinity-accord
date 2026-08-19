@@ -29,6 +29,11 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
       - name: Bootstrap immutable v1 sidechain snapshot
         env:
           GH_TOKEN: ${{ github.token }}
@@ -60,6 +65,7 @@ jobs:
           python3 scripts/research-chronicle-final-13.py
       - name: Build concise research summary
         run: |
+          set -euo pipefail
           python3 - <<'PY'
           import json
           r=json.load(open('final-13-research.json'))
@@ -88,6 +94,7 @@ jobs:
           path: |
             final-13-research.json
             final-13-research.md
+            ${{ runner.temp }}/toolchain-provenance.json
           if-no-files-found: error
           retention-days: 7
       - name: Post result to research PR
@@ -95,6 +102,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           if [ -s final-13-research.md ]; then
             gh pr comment 1037 --repo "$GITHUB_REPOSITORY" --body-file final-13-research.md
           else
