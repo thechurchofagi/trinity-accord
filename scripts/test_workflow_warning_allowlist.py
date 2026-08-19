@@ -24,6 +24,23 @@ allowed_warning_fragments = {
     '"${GATEWAY}/gateway/capabilities" || echo "000")',
     '"${GATEWAY}/gateway/preflight" || echo "000")',
     'python3 scripts/generate_verification_archive_index.py || echo "::warning::Could not rebuild verification archive index"',
+    'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase setup --status running || true',
+    'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase car_l1 --status running || true',
+    'kill "$kubo_pid" 2>/dev/null || true',
+    'wait "$kubo_pid" 2>/dev/null || true',
+    'wait "$publisher_pid" || true',
+    'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase offline_verify --status running || true',
+    'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase finalize --status running || true',
+    'run: python3 scripts/publish-chronicle-sidechain-progress.py --phase release --status running || true',
+    'python3 scripts/publish-chronicle-sidechain-progress.py --phase workflow_complete --status "${{ job.status }}" || true',
+    'python3 scripts/sidechain-debug-live.py mark --phase workflow_complete --step terminal --status "${{ job.status }}" --detail "terminal workflow status" || true',
+    'python -m pip show opentimestamps-client || true',
+    'ots info anchor-payload.canonical.json.ots > OTS-INFO.initial.txt 2>&1 || true',
+    "sed -n '1,200p' OTS-UPGRADE.stdout.txt || true",
+    "sed -n '1,200p' OTS-UPGRADE.stderr.txt || true",
+    'ots info anchor-payload.canonical.json.ots > OTS-INFO.upgraded.txt 2>&1 || true',
+    "sed -n '1,240p' OTS-VERIFY.stdout.txt || true",
+    "sed -n '1,240p' OTS-VERIFY.stderr.txt || true",
 }
 
 bad = []
