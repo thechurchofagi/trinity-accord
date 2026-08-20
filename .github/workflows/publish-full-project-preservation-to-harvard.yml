@@ -121,7 +121,7 @@ jobs:
           if [ -n "$SOURCE_HEAD_SHA" ]; then
             args+=(--source-head-sha "$SOURCE_HEAD_SHA")
           fi
-          python3 scripts/publish_full_project_bundle_to_harvard_dataverse_v3.py "${args[@]}" \
+          python3 scripts/publish_full_project_bundle_to_harvard_dataverse_v4.py "${args[@]}" \
             2>&1 | tee "$RUNNER_TEMP/harvard-dataverse-publish.log"
 
       - name: Surface final publication receipt
@@ -150,7 +150,7 @@ jobs:
               f"- Source Git SHA: `{receipt['source_git_commit_sha']}`\n"
               f"- Artifact bytes: **{receipt['artifact_bytes']}**\n"
               f"- Artifact SHA-256: `{receipt['artifact_sha256']}`\n"
-              f"- Bundle identity: `{receipt['bundle_identity_sha256']}\n"
+              f"- Bundle identity: `{receipt['bundle_identity_sha256']}`\n"
               '- Harvard full public-byte readback: **PASS**\n'
               '- Authority role: **non-amending archival mirror**\n',
               encoding='utf-8',
