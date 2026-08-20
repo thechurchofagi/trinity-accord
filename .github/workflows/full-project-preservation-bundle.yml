@@ -66,26 +66,83 @@ jobs:
           print('preservation prerequisites PASS')
           PY
 
-      - name: Build complete content-addressed project bundle
+      - name: Build complete content-addressed project bundle with live heartbeat
         env:
           GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$BUNDLE_DIR"
+          BUILD_LOG="$RUNNER_TEMP/full-project-preservation-build.log"
+          HEARTBEAT_LOG="$RUNNER_TEMP/full-project-preservation-heartbeat.log"
+          LAST_HEARTBEAT="$RUNNER_TEMP/full-project-preservation-last-heartbeat.txt"
+          : > "$BUILD_LOG"
+          : > "$HEARTBEAT_LOG"
+          : > "$LAST_HEARTBEAT"
+
+          echo "[observer] starting full preservation builder at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           python3 scripts/build_full_project_preservation_bundle.py \
             --repository "$GITHUB_REPOSITORY" \
             --output-dir "$BUNDLE_DIR" \
-            2>&1 | tee "$RUNNER_TEMP/full-project-preservation-build.log"
+            > >(tee "$BUILD_LOG") 2>&1 &
+          build_pid=$!
+          echo "[observer] builder_pid=$build_pid"
+
+          heartbeat=0
+          while kill -0 "$build_pid" 2>/dev/null; do
+            sleep 30
+            heartbeat=$((heartbeat + 1))
+            timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+            last_event=$(tail -n 1 "$BUILD_LOG" 2>/dev/null || true)
+            object_count=$(find "$BUNDLE_DIR/objects/sha256" -type f 2>/dev/null | wc -l | tr -d ' ')
+            object_bytes=$(du -sb "$BUNDLE_DIR/objects" 2>/dev/null | awk '{print $1}' || true)
+            object_bytes=${object_bytes:-0}
+            bundle_bytes=$(du -sb "$BUNDLE_DIR" 2>/dev/null | awk '{print $1}' || true)
+            bundle_bytes=${bundle_bytes:-0}
+            free_kb=$(df -Pk "$RUNNER_TEMP" | awk 'NR==2 {print $4}')
+            partial=$(find "$RUNNER_TEMP" /tmp \
+              -path '*trinity-full-preservation-*' \
+              -type f -name '*.part-*' \
+              -printf '%s %p\n' 2>/dev/null | sort -nr | head -n 1 || true)
+            partial=${partial:-none}
+
+            {
+              echo "[observer-heartbeat] n=$heartbeat utc=$timestamp"
+              echo "[observer-heartbeat] last_event=${last_event:-none}"
+              echo "[observer-heartbeat] unique_objects_now=$object_count object_bytes_now=$object_bytes bundle_bytes_now=$bundle_bytes free_kb=$free_kb"
+              echo "[observer-heartbeat] largest_active_partial=$partial"
+            } | tee -a "$HEARTBEAT_LOG" "$LAST_HEARTBEAT"
+
+            # Keep LAST_HEARTBEAT bounded to the most recent heartbeat only.
+            tail -n 4 "$HEARTBEAT_LOG" > "$LAST_HEARTBEAT.tmp"
+            mv "$LAST_HEARTBEAT.tmp" "$LAST_HEARTBEAT"
+          done
+
+          set +e
+          wait "$build_pid"
+          rc=$?
+          set -e
+          echo "[observer] builder_exit_code=$rc at $(date -u +'%Y-%m-%dT%H:%M:%SZ')" | tee -a "$HEARTBEAT_LOG"
+          if [ "$rc" -ne 0 ]; then
+            echo "[observer] BUILD FAILED; last 100 build-log lines follow"
+            tail -n 100 "$BUILD_LOG" || true
+            echo "[observer] latest heartbeat snapshot"
+            cat "$LAST_HEARTBEAT" || true
+            exit "$rc"
+          fi
+          echo "[observer] BUILD PASS"
 
       - name: Independently verify staged bundle offline
         run: |
           set -euo pipefail
+          echo "[stage] offline independent verification START $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           python3 scripts/verify_full_project_preservation_bundle.py \
             --bundle-dir "$BUNDLE_DIR" \
             --report "$RUNNER_TEMP/full-project-preservation-verification.json"
           diff -u \
             "$BUNDLE_DIR/verification-report.json" \
             "$RUNNER_TEMP/full-project-preservation-verification.json"
+          echo "[stage] offline independent verification PASS $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: Emit preservation telemetry
         run: |
@@ -116,6 +173,7 @@ jobs:
             f"- Unique bytes: **{c['unique_object_bytes']}**\n"
             '- Current repository GitHub-zero cold restore: **PASS**\n'
             '- Polygon/Base DOI public-byte readback: **PASS**\n'
+            '- Live build heartbeat: **ENABLED (30 s)**\n'
             '- Arweave write: **NONE**\n'
             '- External Dataverse publication: **NOT PERFORMED by this staging workflow**\n',
             encoding='utf-8'
@@ -131,6 +189,8 @@ jobs:
           name: full-project-preservation-audit-index
           path: |
             ${{ runner.temp }}/full-project-preservation-build.log
+            ${{ runner.temp }}/full-project-preservation-heartbeat.log
+            ${{ runner.temp }}/full-project-preservation-last-heartbeat.txt
             ${{ runner.temp }}/full-project-preservation-verification.json
             ${{ runner.temp }}/toolchain-provenance.json
             ${{ runner.temp }}/full-project-preservation-bundle/full-project-manifest.json
@@ -139,6 +199,13 @@ jobs:
             ${{ runner.temp }}/full-project-preservation-bundle/verify-and-restore-full-project.py
           retention-days: 90
           if-no-files-found: warn
+
+      - name: Record bundle size before artifact upload
+        run: |
+          set -euo pipefail
+          echo "[stage] artifact upload will begin next"
+          du -sh "$BUNDLE_DIR"
+          find "$BUNDLE_DIR/objects/sha256" -type f | wc -l | xargs echo "unique_objects_to_upload="
 
       - name: Upload complete staged preservation bundle
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
