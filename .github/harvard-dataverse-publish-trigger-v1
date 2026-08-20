@@ -1,0 +1,6 @@
+Harvard Dataverse publication retry v1.
+Source Full Project Preservation Bundle run: 32368866492
+Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
+Reason: publisher schema fix accepts verifier result=pass; first attempt failed before any Harvard write.
+Use latest successful Full Project Preservation Bundle on main; require full public-byte SHA-256 readback before receipt.
+Non-amending archival mirror only. No Arweave, Bitcoin, or Ethereum write.
