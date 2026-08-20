@@ -1,8 +1,14 @@
-Full Project Preservation staging trigger v1.
+Full Project Preservation + Harvard publication activation v1.
 
 Capture the safe current repository baseline, every custom GitHub Release asset,
 and exact published Polygon/Base sidechain DOI bytes into one content-addressed,
-non-amending preservation bundle. No Arweave write and no external Dataverse
-publication is authorized by this trigger.
+non-amending preservation bundle. No Arweave write is authorized by this trigger.
 
+After the full bundle succeeds, Harvard Dataverse publication is authorized only
+through the dedicated fail-closed publisher: preserve the exact GitHub artifact
+bytes as an opaque file, publish as a non-amending archival mirror, and require a
+complete public-byte SHA-256 readback before the final receipt is released.
+
+Harvard Dataverse publication authorized: v1
+Authority role: non-amending archival mirror; canonical authority unchanged.
 Activation source: merged #1057 at 56cb159666c3ebad8339d3d24fbea33708635941.
