@@ -9,7 +9,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: current-repository-doi-publication-observer
+  group: main-write-lock
+  queue: max
   cancel-in-progress: false
 
 jobs:
