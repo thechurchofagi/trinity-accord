@@ -134,13 +134,12 @@ jobs:
         id: zenodo
         run: |
           set -euo pipefail
-          cp preservation/zenodo-state.json "$RUNNER_TEMP/zenodo-work-state.json"
           python3 scripts/publish_preservation_capsule_to_zenodo_v3.py \
             --capsule-dir "$RUNNER_TEMP/repository-capsule" \
-            --state "$RUNNER_TEMP/zenodo-work-state.json" \
+            --state preservation/zenodo-state.json \
             --api-base "$ZENODO_API_BASE" \
             --rights-boundary-ack "$RIGHTS_ACK"
-          STATE="$RUNNER_TEMP/zenodo-work-state.json" python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          STATE=preservation/zenodo-state.json python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json,os
           s=json.load(open(os.environ['STATE']))
           if s.get('concept_doi')!='10.5281/zenodo.21739343': raise SystemExit('Concept DOI mismatch')
@@ -177,7 +176,7 @@ jobs:
           RECORD_ID: ${{ steps.zenodo.outputs.record_id }}
         run: |
           set -euo pipefail
-          WORK_STATE="$RUNNER_TEMP/zenodo-work-state.json" python3 - <<'PY'
+          WORK_STATE=preservation/zenodo-state.json python3 - <<'PY'
           import json,os
           from pathlib import Path
 
