@@ -25,6 +25,9 @@ jobs:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
       - name: Record toolchain provenance
         run: |
           set -euo pipefail
