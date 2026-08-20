@@ -499,10 +499,10 @@
     "zenodo": {
       "core_repository_series": {
         "concept_doi": "10.5281/zenodo.21739343",
-        "version_doi": "10.5281/zenodo.22020122",
-        "source_git_commit_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
-        "git_tree_oid": "d8dfcaf5b8c2c7f7ba98795d27998e4b37f95801",
-        "package_identity_sha256": "8f6ccead0f2eb37f4701b6aa660f00642dc987bf2dad7bf556363668c3fab067",
+        "version_doi": "10.5281/zenodo.21859437",
+        "source_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+        "git_tree_oid": "8afbf03dc102664186c24496d14c4b2b51c2287c",
+        "package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36",
         "status": "published_and_publicly_restored",
         "public_cold_restore": "passed",
         "boundary": "A version DOI freezes one exact Git-tracked publication baseline. The Concept DOI resolves the latest published version; neither is a moving GitHub main."
@@ -578,5 +578,5 @@
     "Mirrors and DOI capsules preserve evidence but do not amend the three Bitcoin Originals."
   ],
   "source_digest_algorithm": "sha256(canonical_json_without_source_digest)[:16]",
-  "source_digest": "6baac12ee79508bc"
+  "source_digest": "344a9c5e0efb61da"
 }
