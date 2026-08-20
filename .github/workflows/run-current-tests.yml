@@ -118,6 +118,22 @@ jobs:
           print('NFT_L2_MINT_TRANSACTIONS=' + str(generated['L2_EXECUTION_INCLUSION']['mint_transactions']))
           print('NFT_L3_EXECUTION_BLOCKS=' + str(generated['L3_CONSENSUS_FINALITY']['unique_execution_blocks']))
           PY
+      - name: Capture exact regenerated evidence inventory preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/build_final_evidence_inventory.py
+          mkdir -p /tmp/final-evidence-regenerated/api
+          cp api/final-evidence-inventory.v1.json /tmp/final-evidence-regenerated/api/final-evidence-inventory.v1.json
+          cp FINAL-EVIDENCE-FREEZE.md /tmp/final-evidence-regenerated/FINAL-EVIDENCE-FREEZE.md
+          git checkout -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
+      - name: Upload exact regenerated evidence inventory preview
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: final-evidence-regenerated
+          path: /tmp/final-evidence-regenerated
+          retention-days: 7
+          if-no-files-found: error
       - name: Verify unified evidence and DOI checkpoint contract
         shell: bash
         run: |
