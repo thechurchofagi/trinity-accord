@@ -1,9 +1,9 @@
 {
   "schema": "trinity-accord/preservation-runtime-status/v4",
-  "generated_at": "2026-08-20T12:22:56.043548+00:00",
+  "generated_at": "2026-08-20T12:26:02.334239+00:00",
   "repository": "thechurchofagi/trinity-accord",
   "target_source_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
-  "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n.github/workflows/full-project-preservation-bundle.yml:22:23: context \"runner\" is not allowed here. available contexts are \"github\", \"inputs\", \"matrix\", \"needs\", \"secrets\", \"strategy\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n   |\n22 |       BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle\n   |                       ^~~~~~~~~~~\n.github/workflows/publish-full-project-preservation-to-harvard.yml:40:23: context \"runner\" is not allowed here. available contexts are \"github\", \"inputs\", \"matrix\", \"needs\", \"secrets\", \"strategy\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n   |\n40 |       OUTPUT_DIR: ${{ runner.temp }}/harvard-publication\n   |                       ^~~~~~~~~~~\nexit status 1\n",
+  "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n",
   "workflows": {
     "bundle": {
       "workflow_file": "full-project-preservation-bundle.yml",
@@ -202,6 +202,18 @@
       "workflow_file": "publish-full-project-preservation-to-harvard.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368741371,
+          "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "39f699ee9becf9d3692b55971443a42b6939c5e9",
+          "created_at": "2026-08-20T12:25:13Z",
+          "updated_at": "2026-08-20T12:25:13Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368741371",
+          "check_suite_id": 87744514620
+        },
         {
           "id": 32368505019,
           "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
