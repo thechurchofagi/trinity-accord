@@ -41,7 +41,7 @@ jobs:
       - name: Regenerate final evidence inventory
         run: |
           set -euo pipefail
-          python3 scripts/build_final_evidence_inventory.py
+          python3 scripts/build_final_evidence_inventory.py --write
           python3 scripts/build_final_evidence_inventory.py --check
           git diff --check -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
           git diff -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
