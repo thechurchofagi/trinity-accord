@@ -1,6 +1,6 @@
 {
-  "schema": "trinity-accord/preservation-runtime-status/v5",
-  "generated_at": "2026-08-20T12:48:39.892936+00:00",
+  "schema": "trinity-accord/preservation-runtime-status/v6",
+  "generated_at": "2026-08-20T13:06:48.134952+00:00",
   "repository": "thechurchofagi/trinity-accord",
   "target_source_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
   "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n",
@@ -209,7 +209,105 @@
           "id": 96424536282,
           "name": "build-and-verify",
           "status": "completed",
-          "conclusion": "success"
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout exact source baseline",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install verification dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Record toolchain provenance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Record staging capacity and source identity",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Verify preservation prerequisites",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Build complete content-addressed project bundle with live heartbeat",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Independently verify staged bundle offline",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Emit preservation telemetry",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Upload compact audit index",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Record bundle size before artifact upload",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Upload complete staged preservation bundle",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Post Set up Python",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Post Checkout exact source baseline",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            }
+          ]
         }
       ],
       "logs_available": true,
@@ -235,11 +333,11 @@
           "id": 32370735338,
           "name": "Publish Full Project Preservation to Harvard Dataverse",
           "event": "push",
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "failure",
           "head_sha": "24722743cd2dba2c476b76de9789405311c5dfab",
           "created_at": "2026-08-20T12:48:07Z",
-          "updated_at": "2026-08-20T12:48:11Z",
+          "updated_at": "2026-08-20T12:49:05Z",
           "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32370735338",
           "check_suite_id": 87750112333
         },
@@ -426,6 +524,137 @@
       ],
       "workflow_run_event_found": false,
       "target_found": false
+    },
+    "harvard_state": {
+      "workflow_file": "harvard-preservation-state-machine.yml",
+      "found": true,
+      "recent_runs": [
+        {
+          "id": 32372228400,
+          "name": "Harvard Dataverse Preservation State Machine",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "3ebc221199500d75f0869c97044336401ab6380d",
+          "created_at": "2026-08-20T13:04:32Z",
+          "updated_at": "2026-08-20T13:05:57Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32372228400",
+          "check_suite_id": 87754310820
+        },
+        {
+          "id": 32371973559,
+          "name": "Harvard Dataverse Preservation State Machine",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "head_sha": "e11b21c57e819391fb7868b7a238d2b867125fef",
+          "created_at": "2026-08-20T13:01:49Z",
+          "updated_at": "2026-08-20T13:04:33Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32371973559",
+          "check_suite_id": 87753596608
+        }
+      ],
+      "workflow_run_event_found": false,
+      "target_found": true,
+      "target_run": {
+        "id": 32372228400,
+        "name": "Harvard Dataverse Preservation State Machine",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "3ebc221199500d75f0869c97044336401ab6380d",
+        "created_at": "2026-08-20T13:04:32Z",
+        "updated_at": "2026-08-20T13:05:57Z",
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32372228400",
+        "check_suite_id": 87754310820
+      },
+      "jobs": [
+        {
+          "id": 96435362010,
+          "name": "advance",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Checkout exact workflow branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Install pinned HTTP client",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Advance Harvard preservation state",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 5
+            },
+            {
+              "name": "Validate machine state",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 6
+            },
+            {
+              "name": "Commit state transition to repository",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 7
+            },
+            {
+              "name": "Upload state-machine audit",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Post Set up Python",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 15
+            },
+            {
+              "name": "Post Checkout exact workflow branch",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            }
+          ]
+        }
+      ],
+      "logs_available": true,
+      "logs_http_status": 200,
+      "build_pass": false,
+      "harvard_complete": false,
+      "persistent_id": "doi:10.7910/DVN/YUCG12",
+      "failure_lines": [
+        "2026-08-20T13:05:52.7185872Z [harvard-state] FAIL StateMachineError: Harvard submitForReview phase=v1.0: HTTP 403: {\"status\":\"ERROR\",\"message\":\"You cannot submit this dataset for review because it is already in review.\"}",
+        "2026-08-20T13:05:52.7408382Z ##[error]Process completed with exit code 1.",
+        "2026-08-20T13:05:52.7185853Z [harvard-state] FAIL StateMachineError: Harvard submitForReview phase=v1.0: HTTP 403: {\"status\":\"ERROR\",\"message\":\"You cannot submit this dataset for review because it is already in review.\"}",
+        "2026-08-20T13:05:52.7408360Z ##[error]Process completed with exit code 1."
+      ]
     }
   }
 }
