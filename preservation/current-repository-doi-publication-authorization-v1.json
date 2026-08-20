@@ -1,0 +1,21 @@
+{
+  "schema": "trinityaccord.current-repository-doi-publication-authorization.v1",
+  "sequence": 1,
+  "status": "pending",
+  "authorized_by": "thechurchofagi",
+  "authorized_at_utc": "2026-08-20T01:18:00Z",
+  "authorization_basis": "The repository owner explicitly authorized refreshing the complete Repository Preservation DOI Capsule and explicitly declined a new Arweave publication because it would incur additional cost.",
+  "authorized_purpose": "Publish one new exact full-repository preservation capsule under the existing core Concept DOI after the cross-chain formation, Chronicle-boundary and public-archive updates; prove local and public DOI-only cold recovery; do not write Arweave.",
+  "core_concept_doi": "10.5281/zenodo.21739343",
+  "previous_repository_version_doi": "10.5281/zenodo.21930809",
+  "required_ancestor_commit_sha": "4b9292afcefbe4b90bbc0600629d00dc13d164d7",
+  "publish_new_repository_doi_version": true,
+  "publish_new_repository_arweave_capsule": false,
+  "arweave_publication_status": "deferred_by_owner_cost_boundary",
+  "public_doi_cold_restore_required": true,
+  "public_arweave_readback_required": false,
+  "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
+  "non_amending_boundary": true,
+  "three_bitcoin_originals_remain_canonical": true,
+  "live_main_equivalence_claimed": false
+}
