@@ -17,5 +17,6 @@
   "zenodo_rights_acknowledgement": "TRINITY_PRESERVATION_CAPSULE_RIGHTS_V1_APPROVED",
   "non_amending_boundary": true,
   "three_bitcoin_originals_remain_canonical": true,
-  "live_main_equivalence_claimed": false
+  "live_main_equivalence_claimed": false,
+  "failure_observer_enabled": true
 }
