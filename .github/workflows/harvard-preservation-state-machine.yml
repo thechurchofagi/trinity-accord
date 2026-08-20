@@ -56,6 +56,8 @@ jobs:
             --output-dir "$OUTPUT_DIR" \
             --state-path preservation/harvard-dataverse-state.json \
             2>&1 | tee "$RUNNER_TEMP/harvard-state-machine.log"
+          cp preservation/harvard-dataverse-state.json \
+            "$OUTPUT_DIR/harvard-dataverse-state-observed.json"
 
       - name: Validate machine state
         shell: bash
@@ -85,13 +87,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- preservation/harvard-dataverse-state.json; then
-            echo "Harvard state file unchanged; no commit needed."
+          old_status="$(git show HEAD:preservation/harvard-dataverse-state.json | python3 -c 'import json,sys; print(json.load(sys.stdin).get("status",""))')"
+          new_status="$(python3 -c 'import json; print(json.load(open("preservation/harvard-dataverse-state.json", encoding="utf-8")).get("status",""))')"
+          echo "old_status=$old_status new_status=$new_status"
+          if [ "$old_status" = "$new_status" ]; then
+            git restore -- preservation/harvard-dataverse-state.json
+            echo "Harvard status unchanged; observation retained only in audit artifact."
           else
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add -- preservation/harvard-dataverse-state.json
-            git commit -m 'preservation: advance Harvard Dataverse state'
+            git commit -m "preservation: Harvard state ${old_status} -> ${new_status}"
             git push
           fi
 
@@ -103,6 +109,7 @@ jobs:
           path: |
             ${{ runner.temp }}/harvard-state-machine.log
             ${{ runner.temp }}/harvard-state-machine/harvard-publication-receipt.json
+            ${{ runner.temp }}/harvard-state-machine/harvard-dataverse-state-observed.json
             preservation/harvard-dataverse-state.json
           retention-days: 90
           if-no-files-found: warn
