@@ -37,7 +37,6 @@ jobs:
     env:
       HD_API_TOKEN: ${{ secrets.HD }}
       GITHUB_TOKEN: ${{ github.token }}
-      OUTPUT_DIR: ${{ runner.temp }}/harvard-publication
     steps:
       - name: Checkout publisher from main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -107,6 +106,7 @@ jobs:
         env:
           SOURCE_RUN_ID: ${{ steps.source.outputs.source_run_id }}
           SOURCE_HEAD_SHA: ${{ steps.source.outputs.source_head_sha }}
+          OUTPUT_DIR: ${{ runner.temp }}/harvard-publication
         run: |
           set -euo pipefail
           mkdir -p "$OUTPUT_DIR"
@@ -126,6 +126,8 @@ jobs:
       - name: Surface final publication receipt
         if: success()
         shell: bash
+        env:
+          OUTPUT_DIR: ${{ runner.temp }}/harvard-publication
         run: |
           set -euo pipefail
           python3 - <<'PY'
