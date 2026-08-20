@@ -1,13 +1,38 @@
 {
-  "schema": "trinity-accord/preservation-runtime-status/v3",
-  "generated_at": "2026-08-20T12:21:04.741975+00:00",
+  "schema": "trinity-accord/preservation-runtime-status/v4",
+  "generated_at": "2026-08-20T12:22:56.043548+00:00",
   "repository": "thechurchofagi/trinity-accord",
   "target_source_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
+  "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n.github/workflows/full-project-preservation-bundle.yml:22:23: context \"runner\" is not allowed here. available contexts are \"github\", \"inputs\", \"matrix\", \"needs\", \"secrets\", \"strategy\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n   |\n22 |       BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle\n   |                       ^~~~~~~~~~~\n.github/workflows/publish-full-project-preservation-to-harvard.yml:40:23: context \"runner\" is not allowed here. available contexts are \"github\", \"inputs\", \"matrix\", \"needs\", \"secrets\", \"strategy\", \"vars\". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]\n   |\n40 |       OUTPUT_DIR: ${{ runner.temp }}/harvard-publication\n   |                       ^~~~~~~~~~~\nexit status 1\n",
   "workflows": {
     "bundle": {
       "workflow_file": "full-project-preservation-bundle.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368506239,
+          "name": ".github/workflows/full-project-preservation-bundle.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "5ec9d4772c10148c14a7a99457077e096b25e9ca",
+          "created_at": "2026-08-20T12:22:29Z",
+          "updated_at": "2026-08-20T12:22:29Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368506239",
+          "check_suite_id": 87743860849
+        },
+        {
+          "id": 32368492253,
+          "name": ".github/workflows/full-project-preservation-bundle.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "9eba25f56333d98556d109fd79a33c5404121611",
+          "created_at": "2026-08-20T12:22:19Z",
+          "updated_at": "2026-08-20T12:22:19Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368492253",
+          "check_suite_id": 87743821069
+        },
         {
           "id": 32368377655,
           "name": ".github/workflows/full-project-preservation-bundle.yml",
@@ -170,7 +195,6 @@
       "jobs": [],
       "logs_available": false,
       "logs_http_status": 404,
-      "check_diagnostics": [],
       "build_pass": false,
       "harvard_complete": false
     },
@@ -178,6 +202,30 @@
       "workflow_file": "publish-full-project-preservation-to-harvard.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368505019,
+          "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "5ec9d4772c10148c14a7a99457077e096b25e9ca",
+          "created_at": "2026-08-20T12:22:28Z",
+          "updated_at": "2026-08-20T12:22:28Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368505019",
+          "check_suite_id": 87743857456
+        },
+        {
+          "id": 32368493247,
+          "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "9eba25f56333d98556d109fd79a33c5404121611",
+          "created_at": "2026-08-20T12:22:20Z",
+          "updated_at": "2026-08-20T12:22:20Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368493247",
+          "check_suite_id": 87743824151
+        },
         {
           "id": 32368376839,
           "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
@@ -304,7 +352,6 @@
       "jobs": [],
       "logs_available": false,
       "logs_http_status": 404,
-      "check_diagnostics": [],
       "build_pass": false,
       "harvard_complete": false
     }
