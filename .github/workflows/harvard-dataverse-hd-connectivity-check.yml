@@ -28,7 +28,7 @@ jobs:
           echo "HD_SECRET_PRESENT=true"
           echo "HD_SECRET_LENGTH=${#HD_TOKEN}"
 
-      - name: Probe Harvard Dataverse authenticated API safely
+      - name: Probe authenticated API and AddDataset capability without mutation
         shell: bash
         run: |
           set -euo pipefail
@@ -36,19 +36,23 @@ jobs:
           import json
           import os
           import urllib.error
-          import urllib.parse
           import urllib.request
 
           base = os.environ['DATAVERSE_URL'].rstrip('/')
           token = os.environ['HD_TOKEN']
-          headers = {
+          common_headers = {
               'X-Dataverse-key': token,
               'Accept': 'application/json',
-              'User-Agent': 'trinity-accord-preservation-connectivity-check/1.1',
+              'User-Agent': 'trinity-accord-preservation-connectivity-check/1.2',
           }
 
-          def get(path: str):
-              req = urllib.request.Request(base + path, headers=headers, method='GET')
+          def call(path: str, method='GET', payload=None):
+              headers = dict(common_headers)
+              data = None
+              if payload is not None:
+                  data = json.dumps(payload).encode('utf-8')
+                  headers['Content-Type'] = 'application/json'
+              req = urllib.request.Request(base + path, headers=headers, data=data, method=method)
               try:
                   with urllib.request.urlopen(req, timeout=30) as response:
                       raw = response.read()
@@ -59,76 +63,120 @@ jobs:
               except Exception as exc:
                   raise SystemExit(f'network_error path={path!r} type={type(exc).__name__}: {exc}')
               try:
-                  payload = json.loads(raw.decode('utf-8')) if raw else None
+                  body = json.loads(raw.decode('utf-8')) if raw else None
               except Exception:
-                  payload = {'non_json_body': True, 'bytes': len(raw)}
-              return code, payload
+                  body = {'non_json_body': True, 'bytes': len(raw)}
+              return code, body
 
           summary = {'server': base, 'token_present': True}
 
-          code, token_info = get('/api/users/token')
+          code, version = call('/api/info/version')
+          summary['version_http'] = code
+          if isinstance(version, dict):
+              summary['version_status'] = version.get('status')
+              data = version.get('data')
+              if isinstance(data, dict):
+                  summary['dataverse_version'] = data.get('version') or data.get('build')
+
+          code, token_info = call('/api/users/token')
           summary['token_endpoint_http'] = code
           summary['token_endpoint_status'] = token_info.get('status') if isinstance(token_info, dict) else None
           if code != 200 or not isinstance(token_info, dict) or token_info.get('status') != 'OK':
               print(json.dumps(summary, indent=2, sort_keys=True))
               raise SystemExit('HD token was not accepted by Harvard Dataverse')
 
-          code, me = get('/api/users/:me')
+          code, me = call('/api/users/:me')
           summary['me_endpoint_http'] = code
           summary['me_endpoint_status'] = me.get('status') if isinstance(me, dict) else None
           if code != 200 or not isinstance(me, dict) or me.get('status') != 'OK':
               print(json.dumps(summary, indent=2, sort_keys=True))
               raise SystemExit('HD token authenticated but /api/users/:me did not return OK')
 
-          user = me.get('data') if isinstance(me.get('data'), dict) else {}
-          summary['user_fields_present'] = sorted(k for k in user.keys() if k not in {'email', 'firstName', 'lastName', 'displayName'})
+          # Non-mutating permission probe. Dataverse documents this endpoint as
+          # requiring Add Dataset permission on the target collection. It only
+          # validates the JSON and does not create a dataset.
+          probe_dataset = {
+              'datasetVersion': {
+                  'metadataBlocks': {
+                      'citation': {
+                          'fields': [
+                              {
+                                  'typeName': 'title',
+                                  'multiple': False,
+                                  'typeClass': 'primitive',
+                                  'value': 'Trinity Accord preservation permission probe'
+                              },
+                              {
+                                  'typeName': 'author',
+                                  'multiple': True,
+                                  'typeClass': 'compound',
+                                  'value': [
+                                      {
+                                          'authorName': {
+                                              'typeName': 'authorName',
+                                              'multiple': False,
+                                              'typeClass': 'primitive',
+                                              'value': 'Trinity Accord Preservation'
+                                          }
+                                      }
+                                  ]
+                              },
+                              {
+                                  'typeName': 'datasetContact',
+                                  'multiple': True,
+                                  'typeClass': 'compound',
+                                  'value': [
+                                      {
+                                          'datasetContactEmail': {
+                                              'typeName': 'datasetContactEmail',
+                                              'multiple': False,
+                                              'typeClass': 'primitive',
+                                              'value': 'noreply@example.com'
+                                          }
+                                      }
+                                  ]
+                              },
+                              {
+                                  'typeName': 'dsDescription',
+                                  'multiple': True,
+                                  'typeClass': 'compound',
+                                  'value': [
+                                      {
+                                          'dsDescriptionValue': {
+                                              'typeName': 'dsDescriptionValue',
+                                              'multiple': False,
+                                              'typeClass': 'primitive',
+                                              'value': 'Non-publishing API capability probe; no dataset is created.'
+                                          }
+                                      }
+                                  ]
+                              },
+                              {
+                                  'typeName': 'subject',
+                                  'multiple': True,
+                                  'typeClass': 'controlledVocabulary',
+                                  'value': ['Computer and Information Science']
+                              }
+                          ]
+                      }
+                  }
+              }
+          }
+          code, validation = call('/api/dataverses/root/validateDatasetJson', method='POST', payload=probe_dataset)
+          summary['add_dataset_permission_probe_http'] = code
+          if isinstance(validation, dict):
+              summary['add_dataset_permission_probe_status'] = validation.get('status')
+              message = validation.get('message')
+              if isinstance(message, str):
+                  summary['add_dataset_permission_probe_message'] = message[:300]
+              data = validation.get('data')
+              if isinstance(data, dict):
+                  # Only boolean/status-like fields; never echo account PII.
+                  safe = {k: v for k, v in data.items() if isinstance(v, (bool, int)) or k in {'status'}}
+                  if safe:
+                      summary['add_dataset_permission_probe_data'] = safe
 
-          code, root_user_perms = get('/api/dataverses/root/userPermissions')
-          summary['root_user_permissions_http'] = code
-          if isinstance(root_user_perms, dict):
-              summary['root_user_permissions_status'] = root_user_perms.get('status')
-              pdata = root_user_perms.get('data')
-              if isinstance(pdata, dict):
-                  safe = {}
-                  for key, value in pdata.items():
-                      if isinstance(value, bool):
-                          safe[key] = value
-                  summary['root_user_permissions'] = safe
-
-          candidates = []
-          for field in ('identifier', 'userName', 'username'):
-              value = user.get(field)
-              if isinstance(value, str) and value:
-                  candidates.append((field, value))
-                  if not value.startswith('@'):
-                      candidates.append((field + '_at_prefixed', '@' + value))
-
-          def allowed(permission: str):
-              attempts = []
-              for label, value in candidates:
-                  ident = urllib.parse.quote(value, safe='')
-                  p = urllib.parse.quote(permission, safe='')
-                  code, payload = get(f'/api/users/{ident}/allowedCollections/{p}')
-                  status = payload.get('status') if isinstance(payload, dict) else None
-                  attempts.append({'candidate': label, 'http': code, 'status': status})
-                  if code == 200 and isinstance(payload, dict) and status == 'OK':
-                      pdata = payload.get('data')
-                      result = {'http': code, 'status': status, 'candidate': label}
-                      if isinstance(pdata, list):
-                          result['count'] = len(pdata)
-                          aliases = []
-                          for item in pdata:
-                              if isinstance(item, dict):
-                                  alias = item.get('alias') or item.get('identifier')
-                                  if alias:
-                                      aliases.append(str(alias))
-                          result['aliases'] = sorted(aliases)[:50]
-                      return result
-              return {'status': 'NO_OK_RESPONSE', 'attempts': attempts}
-
-          summary['allowed_add_dataset'] = allowed('AddDataset')
-          summary['allowed_edit_dataverse'] = allowed('EditDataverse')
           summary['authenticated_api_ok'] = True
-
+          summary['can_invoke_add_dataset_validation'] = (code == 200)
           print(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True))
           PY
