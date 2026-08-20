@@ -1,3 +1,5 @@
-Public Internet Archive production trigger v4.3.
+Public Internet Archive production trigger v4.4.
 
-This marker restarts the resilient two-phase capture workflow after excluding eight live-404 non-public routes from the canonical sitemap.
+This marker captures the post-crosschain-formation public site and requests a fresh Software Heritage repository snapshot.
+Baseline before trigger: 26fa0abf473aab5def3d5681b378e3e37563cca6.
+This preservation action is archival only and does not amend the three Bitcoin Originals.
