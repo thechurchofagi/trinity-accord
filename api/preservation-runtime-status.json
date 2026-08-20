@@ -1,6 +1,6 @@
 {
   "schema": "trinity-accord/preservation-runtime-status/v4",
-  "generated_at": "2026-08-20T12:26:02.334239+00:00",
+  "generated_at": "2026-08-20T12:27:17.749760+00:00",
   "repository": "thechurchofagi/trinity-accord",
   "target_source_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
   "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n",
@@ -9,6 +9,18 @@
       "workflow_file": "full-project-preservation-bundle.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368866492,
+          "name": "Full Project Preservation Bundle",
+          "event": "push",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
+          "created_at": "2026-08-20T12:26:40Z",
+          "updated_at": "2026-08-20T12:26:44Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368866492",
+          "check_suite_id": 87744871812
+        },
         {
           "id": 32368506239,
           "name": ".github/workflows/full-project-preservation-bundle.yml",
