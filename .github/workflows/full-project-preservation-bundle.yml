@@ -93,18 +93,38 @@ jobs:
             sleep 30
             heartbeat=$((heartbeat + 1))
             timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-            last_event=$(tail -n 1 "$BUILD_LOG" 2>/dev/null || true)
-            object_count=$(find "$BUNDLE_DIR/objects/sha256" -type f 2>/dev/null | wc -l | tr -d ' ')
-            object_bytes=$(du -sb "$BUNDLE_DIR/objects" 2>/dev/null | awk '{print $1}' || true)
-            object_bytes=${object_bytes:-0}
-            bundle_bytes=$(du -sb "$BUNDLE_DIR" 2>/dev/null | awk '{print $1}' || true)
-            bundle_bytes=${bundle_bytes:-0}
+
+            last_event=""
+            if last_event_read=$(tail -n 1 "$BUILD_LOG" 2>/dev/null); then
+              last_event=$last_event_read
+            fi
+
+            object_count=0
+            if object_count_read=$(find "$BUNDLE_DIR/objects/sha256" -type f 2>/dev/null | wc -l | tr -d ' '); then
+              object_count=$object_count_read
+            fi
+
+            object_bytes=0
+            if object_bytes_read=$(du -sb "$BUNDLE_DIR/objects" 2>/dev/null | awk '{print $1}'); then
+              object_bytes=${object_bytes_read:-0}
+            fi
+
+            bundle_bytes=0
+            if bundle_bytes_read=$(du -sb "$BUNDLE_DIR" 2>/dev/null | awk '{print $1}'); then
+              bundle_bytes=${bundle_bytes_read:-0}
+            fi
+
             free_kb=$(df -Pk "$RUNNER_TEMP" | awk 'NR==2 {print $4}')
-            partial=$(find "$RUNNER_TEMP" /tmp \
+
+            partial=none
+            if partial_read=$(find "$RUNNER_TEMP" /tmp \
               -path '*trinity-full-preservation-*' \
               -type f -name '*.part-*' \
-              -printf '%s %p\n' 2>/dev/null | sort -nr | head -n 1 || true)
-            partial=${partial:-none}
+              -printf '%s %p\n' 2>/dev/null | sort -nr | sed -n '1p'); then
+              if [ -n "$partial_read" ]; then
+                partial=$partial_read
+              fi
+            fi
 
             {
               echo "[observer-heartbeat] n=$heartbeat utc=$timestamp"
@@ -125,9 +145,17 @@ jobs:
           echo "[observer] builder_exit_code=$rc at $(date -u +'%Y-%m-%dT%H:%M:%SZ')" | tee -a "$HEARTBEAT_LOG"
           if [ "$rc" -ne 0 ]; then
             echo "[observer] BUILD FAILED; last 100 build-log lines follow"
-            tail -n 100 "$BUILD_LOG" || true
+            if [ -f "$BUILD_LOG" ]; then
+              tail -n 100 "$BUILD_LOG"
+            else
+              echo "[observer] build log is unavailable"
+            fi
             echo "[observer] latest heartbeat snapshot"
-            cat "$LAST_HEARTBEAT" || true
+            if [ -s "$LAST_HEARTBEAT" ]; then
+              cat "$LAST_HEARTBEAT"
+            else
+              echo "[observer] no heartbeat snapshot was recorded"
+            fi
             exit "$rc"
           fi
           echo "[observer] BUILD PASS"
@@ -170,7 +198,7 @@ jobs:
             f"- Releases enumerated: **{c['release_count']}**\n"
             f"- Custom Release assets captured: **{c['release_asset_count']}**\n"
             f"- Unique content-addressed objects: **{c['unique_object_count']}**\n"
-            f"- Unique bytes: **{c['unique_object_bytes']}**\n"
+            f"- Unique bytes: **{c['unique_object_bytes']}\n"
             '- Current repository GitHub-zero cold restore: **PASS**\n'
             '- Polygon/Base DOI public-byte readback: **PASS**\n'
             '- Live build heartbeat: **ENABLED (30 s)**\n'
