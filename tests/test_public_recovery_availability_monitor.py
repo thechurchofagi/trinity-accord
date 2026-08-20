@@ -69,7 +69,10 @@ def test_checked_in_topology_is_self_consistent() -> None:
     ]
     records = {item["record_id"]: item for item in expected["zenodo_records"]}
     assert records[21754229]["doi"] == "10.5281/zenodo.21754229"
-    assert records[21930809]["doi"] == "10.5281/zenodo.21930809"
+    repository_state = json.loads(
+        (ROOT / "preservation/zenodo-state.json").read_text(encoding="utf-8")
+    )
+    assert records[repository_state["latest_record_id"]]["doi"] == repository_state["latest_doi"]
 
 
 def test_release_validation_is_exact_and_fail_closed() -> None:
