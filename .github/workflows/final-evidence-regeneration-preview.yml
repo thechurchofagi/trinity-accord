@@ -10,17 +10,20 @@ on:
       - .github/workflows/final-evidence-regeneration-preview.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   regenerate:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/full-project-preservation-staging-v1'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - name: Checkout exact PR merge candidate
+      - name: Checkout exact PR head branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
+          ref: agent/full-project-preservation-staging-v1
           fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -38,15 +41,25 @@ jobs:
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
 
-      - name: Regenerate final evidence inventory
+      - name: Regenerate and commit exact evidence outputs to PR branch only
         run: |
           set -euo pipefail
           python3 scripts/build_final_evidence_inventory.py --write
           python3 scripts/build_final_evidence_inventory.py --check
           git diff --check -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
           git diff -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
+          if git diff --quiet -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md; then
+            echo 'Generated evidence outputs are already current.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- api/final-evidence-inventory.v1.json FINAL-EVIDENCE-FREEZE.md
+          git commit -m 'evidence: synchronize inventory with latest repository DOI'
+          git push origin HEAD:agent/full-project-preservation-staging-v1
 
       - name: Upload exact generated outputs
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: final-evidence-regenerated
