@@ -2,15 +2,15 @@
   "schema": "trinityaccord.repository-preservation-zenodo-state.v2",
   "publication_status": "published_and_publicly_restored",
   "rights_boundary_schema": "trinityaccord.repository-preservation-rights.v1",
-  "latest_capsule_id": "repository-b61a10e19484",
-  "latest_git_commit_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
-  "latest_git_tree_oid": "d8dfcaf5b8c2c7f7ba98795d27998e4b37f95801",
-  "latest_record_id": 22020122,
-  "latest_doi": "10.5281/zenodo.22020122",
-  "latest_doi_url": "https://doi.org/10.5281/zenodo.22020122",
+  "latest_capsule_id": "repository-ba34564c579d",
+  "latest_git_commit_sha": "ba34564c579d645a5a1595f0538223e0e957155e",
+  "latest_git_tree_oid": "8afbf03dc102664186c24496d14c4b2b51c2287c",
+  "latest_record_id": 21859437,
+  "latest_doi": "10.5281/zenodo.21859437",
+  "latest_doi_url": "https://doi.org/10.5281/zenodo.21859437",
   "concept_record_id": "21739343",
   "concept_doi": "10.5281/zenodo.21739343",
-  "latest_package_identity_sha256": "8f6ccead0f2eb37f4701b6aa660f00642dc987bf2dad7bf556363668c3fab067",
+  "latest_package_identity_sha256": "fda45c9766a060f1d9634ff7912647728c44999ec79f41af724c4c8fe8bc8b36",
   "versions": [
     {
       "capsule_id": "repository-d3f3582912ca",
@@ -269,58 +269,6 @@
           "bytes": 1975,
           "sha256": "134a9fd7fff0fd172ec58dc72bc4e379a3110d04e90cd096a756958edbee5ed4",
           "md5": "71fdcb9f53cf886ee3f91a4277330059"
-        }
-      }
-    },
-    {
-      "capsule_id": "repository-b61a10e19484",
-      "deposition_id": 22020122,
-      "record_id": 22020122,
-      "doi": "10.5281/zenodo.22020122",
-      "doi_url": "https://doi.org/10.5281/zenodo.22020122",
-      "git_commit_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
-      "git_tree_oid": "d8dfcaf5b8c2c7f7ba98795d27998e4b37f95801",
-      "package_identity_sha256": "8f6ccead0f2eb37f4701b6aa660f00642dc987bf2dad7bf556363668c3fab067",
-      "files": {
-        "trinity-accord-source.tar.gz": {
-          "bytes": 30374296,
-          "sha256": "ead4878f30a3c2ccc53e143af4a1034364550636d0f31032311c9310376ba12e",
-          "md5": "d4c2e694e74570913903303d892c16b0"
-        },
-        "trinity-accord-recovery.bundle": {
-          "bytes": 21958755,
-          "sha256": "2211239cb5030184dfbe511768b1a935cc06b8ea1815e216d84e64fe192df76e",
-          "md5": "4da8f2310d46f0d2c5e114c56196a485"
-        },
-        "tracked-files.json": {
-          "bytes": 1595410,
-          "sha256": "2d092dbfb7320649f261b3457303f0479574a03757082d56ae8d323f0ce889d0",
-          "md5": "484baa67af636822317f998aefe90242"
-        },
-        "preservation-manifest.json": {
-          "bytes": 6977,
-          "sha256": "14f70f5cd326e29a0f64975ead4314e4ce4c25a19e6be89560397b73cb331bc7",
-          "md5": "1ca1be237b171228a6c3f357e5a3557d"
-        },
-        "checksums.sha256": {
-          "bytes": 533,
-          "sha256": "a30d9acb0b4f449a27bda11eb59c326f630c7452bf2af82106b10d2ea198f2f8",
-          "md5": "d6fc2b1e4678c39e73289da53fb17287"
-        },
-        "README.txt": {
-          "bytes": 1396,
-          "sha256": "7a1a1e47878e3e425ff729e5f1b7994f907a0fbbfc5b344d24913ebdfc26d6c0",
-          "md5": "caf0f2a4a945a776fcddb26a6adca69b"
-        },
-        "restore-trinity-accord.py": {
-          "bytes": 24011,
-          "sha256": "81e159e4a2ec62a4e2c6a5dc5d5677f55eb4134688bc7708c307d64f351c0558",
-          "md5": "b9c5955f7393f73a5b2d1b2ce63f1591"
-        },
-        "zenodo-metadata.json": {
-          "bytes": 1975,
-          "sha256": "8c0ef9d3a23a053729331e8dc7f06baa1297025d3e6c4cac638aaf7819759c36",
-          "md5": "1769f41424411f7cee41c44b9a9d6a64"
         }
       }
     }
