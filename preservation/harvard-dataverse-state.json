@@ -1,12 +1,11 @@
 {
   "schema": "trinity-accord.harvard-dataverse-state.v1",
-  "observed_at": "2026-08-20T12:49:02Z",
+  "observed_at": "2026-08-20T13:08:30.521379+00:00",
   "server": "https://dataverse.harvard.edu",
   "persistent_id": "doi:10.7910/DVN/YUCG12",
   "dataset_id": 14153533,
   "version_state": "DRAFT",
-  "status": "archive_registered_awaiting_review_submission",
-  "archive_file_id": null,
+  "status": "submitted_for_review_v1_0",
   "source": {
     "repository": "thechurchofagi/trinity-accord",
     "workflow_run_id": 32368866492,
@@ -29,6 +28,10 @@
     "canonical_authority_changed": false,
     "zenodo_superseded": false
   },
-  "last_completed_transition": "multipart_complete_and_archive_registered",
-  "last_blocker": "Harvard root collection requires Submit for Review; depositor does not have direct PublishDataset permission."
+  "archive_file_id": 14153535,
+  "authenticated_readback_verified": true,
+  "authenticated_readback_bytes": 1951603950,
+  "authenticated_readback_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
+  "review_submission": "already_pending",
+  "public_readback_verified": false
 }
