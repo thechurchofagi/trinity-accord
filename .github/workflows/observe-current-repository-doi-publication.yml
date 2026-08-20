@@ -1,0 +1,79 @@
+name: Observe Current Repository DOI Publication
+
+on:
+  workflow_run:
+    workflows: ["Publish Current Repository DOI Capsule"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: current-repository-doi-publication-observer
+  cancel-in-progress: false
+
+jobs:
+  record-terminal-failure:
+    if: ${{ github.event.workflow_run.conclusion != 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Record failure only while authorization is still pending
+        env:
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_EVENT: ${{ github.event.workflow_run.event }}
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_ACTOR: ${{ github.event.workflow_run.actor.login }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          auth_path = Path('preservation/current-repository-doi-publication-authorization-v1.json')
+          auth = json.loads(auth_path.read_text(encoding='utf-8'))
+          if auth.get('status') != 'pending':
+              print('Authorization already sealed; suppressing stale failure telemetry.')
+              raise SystemExit(0)
+
+          out = {
+              'schema': 'trinityaccord.current-repository-doi-publication-failure.v1',
+              'status': 'workflow_terminal_failure',
+              'workflow_run_id': int(os.environ['RUN_ID']),
+              'conclusion': os.environ['RUN_CONCLUSION'],
+              'event': os.environ['RUN_EVENT'],
+              'head_sha': os.environ['RUN_HEAD_SHA'],
+              'actor': os.environ['RUN_ACTOR'],
+              'workflow_run_url': os.environ['RUN_URL'],
+              'authorization_status_observed': 'pending',
+              'arweave_write_enabled': False,
+          }
+          Path('preservation/current-repository-doi-publication-failure-v1.json').write_text(
+              json.dumps(out, indent=2, sort_keys=True) + '\n', encoding='utf-8'
+          )
+          PY
+
+          if [ ! -f preservation/current-repository-doi-publication-failure-v1.json ]; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add preservation/current-repository-doi-publication-failure-v1.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'ci: record current repository DOI publication failure'
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main --prune
+            git rebase origin/main
+            sleep $((attempt * 2))
+          done
+          exit 1
