@@ -1,0 +1,139 @@
+name: Harvard Dataverse HD Connectivity Check
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  connectivity:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/harvard-dataverse-hd-connectivity-check'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      HD_TOKEN: ${{ secrets.HD }}
+      DATAVERSE_URL: https://dataverse.harvard.edu
+    steps:
+      - name: Verify HD secret is available without printing it
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${HD_TOKEN:-}" ]; then
+            echo "HD_SECRET_PRESENT=false"
+            exit 2
+          fi
+          echo "HD_SECRET_PRESENT=true"
+          echo "HD_SECRET_LENGTH=${#HD_TOKEN}"
+
+      - name: Probe Harvard Dataverse authenticated API safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import sys
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          base = os.environ['DATAVERSE_URL'].rstrip('/')
+          token = os.environ['HD_TOKEN']
+          headers = {
+              'X-Dataverse-key': token,
+              'Accept': 'application/json',
+              'User-Agent': 'trinity-accord-preservation-connectivity-check/1.0',
+          }
+
+          def get(path: str):
+              url = base + path
+              req = urllib.request.Request(url, headers=headers, method='GET')
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as response:
+                      raw = response.read()
+                      code = response.status
+              except urllib.error.HTTPError as exc:
+                  raw = exc.read()
+                  code = exc.code
+              except Exception as exc:
+                  raise SystemExit(f'network_error path={path!r} type={type(exc).__name__}: {exc}')
+              try:
+                  payload = json.loads(raw.decode('utf-8')) if raw else None
+              except Exception:
+                  payload = {'non_json_body': True, 'bytes': len(raw)}
+              return code, payload
+
+          summary = {
+              'server': base,
+              'token_present': True,
+              'token_sha256_prefix': hashlib.sha256(token.encode()).hexdigest()[:12],
+          }
+
+          code, token_info = get('/api/users/token')
+          summary['token_endpoint_http'] = code
+          summary['token_endpoint_status'] = token_info.get('status') if isinstance(token_info, dict) else None
+          if code != 200 or not isinstance(token_info, dict) or token_info.get('status') != 'OK':
+              print(json.dumps(summary, indent=2, sort_keys=True))
+              raise SystemExit('HD token was not accepted by Harvard Dataverse /api/users/token')
+          data = token_info.get('data')
+          if isinstance(data, dict):
+              for key in ('expirationTime', 'expirationDate', 'message'):
+                  if key in data and key != 'message':
+                      summary['token_' + key] = data[key]
+
+          code, me = get('/api/users/:me')
+          summary['me_endpoint_http'] = code
+          summary['me_endpoint_status'] = me.get('status') if isinstance(me, dict) else None
+          if code != 200 or not isinstance(me, dict) or me.get('status') != 'OK':
+              print(json.dumps(summary, indent=2, sort_keys=True))
+              raise SystemExit('HD token authenticated but /api/users/:me did not return OK')
+
+          user = me.get('data') if isinstance(me.get('data'), dict) else {}
+          username = user.get('userName') or user.get('username') or user.get('identifier')
+          summary['authenticated_user_resolved'] = isinstance(username, str) and bool(username)
+          if isinstance(username, str) and username:
+              summary['authenticated_user_sha256_prefix'] = hashlib.sha256(username.encode()).hexdigest()[:12]
+
+          code, root_perms = get('/api/admin/permissions/root')
+          summary['root_permissions_http'] = code
+          if isinstance(root_perms, dict):
+              summary['root_permissions_status'] = root_perms.get('status')
+              perms_data = root_perms.get('data')
+              if isinstance(perms_data, dict):
+                  perms = perms_data.get('permissions')
+                  if isinstance(perms, list):
+                      summary['root_permissions'] = sorted(str(x) for x in perms)
+              elif isinstance(perms_data, list):
+                  summary['root_permissions'] = sorted(str(x) for x in perms_data)
+
+          def allowed(permission: str):
+              if not isinstance(username, str) or not username:
+                  return {'skipped': 'username_not_resolved'}
+              ident = urllib.parse.quote(username, safe='')
+              p = urllib.parse.quote(permission, safe='')
+              c, payload = get(f'/api/users/{ident}/allowedCollections/{p}')
+              out = {'http': c}
+              if isinstance(payload, dict):
+                  out['status'] = payload.get('status')
+                  pdata = payload.get('data')
+                  if isinstance(pdata, list):
+                      out['count'] = len(pdata)
+                      aliases = []
+                      for item in pdata:
+                          if isinstance(item, dict):
+                              alias = item.get('alias') or item.get('identifier')
+                              if alias:
+                                  aliases.append(str(alias))
+                      out['aliases'] = sorted(aliases)[:50]
+              return out
+
+          summary['allowed_add_dataset'] = allowed('AddDataset')
+          summary['allowed_edit_dataverse'] = allowed('EditDataverse')
+          summary['authenticated_api_ok'] = True
+
+          print(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True))
+          PY
