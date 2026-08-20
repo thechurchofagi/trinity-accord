@@ -179,6 +179,7 @@
   <url><loc>https://www.trinityaccord.org/api/operational-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/origin-classification-policy.v1.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/origin-classification-schema.v1.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/preservation-runtime-status.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/propagation-invitation.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/propagation-policy.json</loc></url>
   <url><loc>https://www.trinityaccord.org/api/protocol-terms.v1.json</loc></url>
