@@ -1,7 +1,7 @@
 {
   "schema": "trinityaccord.current-repository-doi-publication-authorization.v1",
   "sequence": 1,
-  "status": "pending",
+  "status": "published_and_publicly_restored",
   "authorized_by": "thechurchofagi",
   "authorized_at_utc": "2026-08-20T01:18:00Z",
   "authorization_basis": "The repository owner explicitly authorized refreshing the complete Repository Preservation DOI Capsule and explicitly declined a new Arweave publication because it would incur additional cost.",
@@ -18,5 +18,9 @@
   "non_amending_boundary": true,
   "three_bitcoin_originals_remain_canonical": true,
   "live_main_equivalence_claimed": false,
-  "failure_observer_enabled": true
+  "failure_observer_enabled": true,
+  "published_source_baseline_commit_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
+  "published_repository_doi": "10.5281/zenodo.22020122",
+  "published_repository_record_id": 22020122,
+  "published_package_identity_sha256": "8f6ccead0f2eb37f4701b6aa660f00642dc987bf2dad7bf556363668c3fab067"
 }

@@ -1,0 +1,17 @@
+{
+  "schema": "trinityaccord.current-repository-doi-publication-observation.v1",
+  "status": "passed",
+  "source_git_commit_sha": "b61a10e19484d988c4cc3024a3c56af83ad3fe8b",
+  "git_tree_oid": "d8dfcaf5b8c2c7f7ba98795d27998e4b37f95801",
+  "capsule_id": "repository-b61a10e19484",
+  "package_identity_sha256": "8f6ccead0f2eb37f4701b6aa660f00642dc987bf2dad7bf556363668c3fab067",
+  "repository_doi": "10.5281/zenodo.22020122",
+  "zenodo_record_id": 22020122,
+  "local_github_zero_cold_restore": "passed",
+  "public_doi_only_cold_restore": "passed",
+  "arweave_publication_status": "deferred_by_owner_cost_boundary",
+  "new_arweave_transaction_created": false,
+  "non_amending_boundary": true,
+  "three_bitcoin_originals_remain_canonical": true,
+  "live_main_equivalence_claimed": false
+}
