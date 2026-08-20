@@ -120,7 +120,7 @@ jobs:
           if [ -n "$SOURCE_HEAD_SHA" ]; then
             args+=(--source-head-sha "$SOURCE_HEAD_SHA")
           fi
-          python3 scripts/publish_full_project_bundle_to_harvard_dataverse.py "${args[@]}" \
+          python3 scripts/publish_full_project_bundle_to_harvard_dataverse_v2.py "${args[@]}" \
             2>&1 | tee "$RUNNER_TEMP/harvard-dataverse-publish.log"
 
       - name: Surface final publication receipt
