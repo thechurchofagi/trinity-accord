@@ -4,3 +4,5 @@ Capture the safe current repository baseline, every custom GitHub Release asset,
 and exact published Polygon/Base sidechain DOI bytes into one content-addressed,
 non-amending preservation bundle. No Arweave write and no external Dataverse
 publication is authorized by this trigger.
+
+Activation source: merged #1057 at 56cb159666c3ebad8339d3d24fbea33708635941.
