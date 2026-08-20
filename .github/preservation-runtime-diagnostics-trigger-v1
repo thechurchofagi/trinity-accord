@@ -1,6 +1,6 @@
 Preservation runtime diagnostics trigger v1.
 Read-only inspection of GitHub Actions runtime state for the full-project bundle and Harvard Dataverse publisher.
-Inspect formal source SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
-Bundle run 32368866492 succeeded; inspect automatic Harvard workflow_run publication.
-Diagnostics retargeted to formal source SHA and workflow_run event.
-No evidence mutation. No external publication. No Arweave, Bitcoin, Ethereum, or Dataverse write.
+Formal Bundle source SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
+Bundle run 32368866492 succeeded; inspect Harvard retry triggered by 4561e44d1e07db829bc02e7fabf05d288e68a6a6.
+Publisher v2 accepts verifier result=pass; first Harvard attempt failed before any Harvard write.
+No evidence mutation. No external publication by diagnostics. No Arweave, Bitcoin, Ethereum, or Dataverse write.
