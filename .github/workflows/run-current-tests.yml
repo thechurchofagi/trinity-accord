@@ -122,7 +122,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 scripts/build_final_evidence_inventory.py
+          python3 scripts/build_final_evidence_inventory.py --write
           mkdir -p /tmp/final-evidence-regenerated/api
           cp api/final-evidence-inventory.v1.json /tmp/final-evidence-regenerated/api/final-evidence-inventory.v1.json
           cp FINAL-EVIDENCE-FREEZE.md /tmp/final-evidence-regenerated/FINAL-EVIDENCE-FREEZE.md
