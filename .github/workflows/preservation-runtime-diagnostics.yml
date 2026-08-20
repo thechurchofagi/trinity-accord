@@ -33,6 +33,7 @@ jobs:
           go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.7 \
             .github/workflows/full-project-preservation-bundle.yml \
             .github/workflows/publish-full-project-preservation-to-harvard.yml \
+            .github/workflows/harvard-preservation-state-machine.yml \
             >"$OUT" 2>&1
           rc=$?
           set -e
@@ -52,7 +53,7 @@ jobs:
 
           repo=os.environ['GITHUB_REPOSITORY']; token=os.environ['GH_TOKEN']; target_sha=os.environ['TARGET_SOURCE_SHA']
           api='https://api.github.com'
-          headers={'Authorization':f'Bearer {token}','Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'trinity-accord-preservation-diagnostics/1.4'}
+          headers={'Authorization':f'Bearer {token}','Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'trinity-accord-preservation-diagnostics/1.5'}
 
           def request(url, method='GET', body=None):
               data=None if body is None else json.dumps(body).encode(); h=dict(headers)
@@ -83,29 +84,39 @@ jobs:
                   ms=list(re.finditer(pat,text))
                   if ms:
                       v=ms[-1].group(1); out[key]=int(v) if key.endswith('_count') or key.endswith('_bytes') or key=='logical_bytes_before_sha256_deduplication' else v
-              ms=list(re.finditer(r'PUBLIC BYTE READBACK PASS bytes=(\d+) sha256=([0-9a-f]{64})',text))
+              ms=list(re.finditer(r'(?:PUBLIC BYTE READBACK PASS|PUBLIC_READBACK PASS|PUBLIC_READBACK PASS|PUBLIC_READBACK PASS) bytes=(\d+) sha256=([0-9a-f]{64})',text))
               if ms:
                   m=ms[-1]; out.update(public_readback_verified=True,public_readback_bytes=int(m.group(1)),public_readback_sha256=m.group(2))
-              fails=[ln[-1200:] for ln in text.splitlines() if '[harvard-preservation] FAIL ' in ln or '[observer] BUILD FAILED' in ln]
-              if fails: out['failure_lines']=fails[-5:]
+              state_ms=list(re.finditer(r'\[harvard-state\] STATE ([^\s]+)',text))
+              if state_ms: out['harvard_state_transition']=state_ms[-1].group(1)
+              review_ms=list(re.finditer(r'\[harvard-state\] SUBMIT FOR REVIEW ([^\n]+)',text))
+              if review_ms: out['review_submission_log']=review_ms[-1].group(1).strip()
+              fails=[ln[-1200:] for ln in text.splitlines() if '[harvard-preservation] FAIL ' in ln or '[harvard-state] FAIL ' in ln or '[observer] BUILD FAILED' in ln or '##[error]' in ln]
+              if fails: out['failure_lines']=fails[-8:]
               return out
 
           def summarize_run(r):
               return {k:r.get(k) for k in ('id','name','event','status','conclusion','head_sha','created_at','updated_at','html_url','check_suite_id')}
 
-          workflows={'bundle':'full-project-preservation-bundle.yml','harvard':'publish-full-project-preservation-to-harvard.yml'}
+          workflows={
+              'bundle':'full-project-preservation-bundle.yml',
+              'harvard':'publish-full-project-preservation-to-harvard.yml',
+              'harvard_state':'harvard-preservation-state-machine.yml',
+          }
           lint_path=Path(os.environ['RUNNER_TEMP'])/'preservation-actionlint.txt'
-          result={'schema':'trinity-accord/preservation-runtime-status/v5','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'actionlint_output':lint_path.read_text(errors='replace')[-12000:] if lint_path.exists() else 'actionlint output missing','workflows':{}}
+          result={'schema':'trinity-accord/preservation-runtime-status/v6','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'actionlint_output':lint_path.read_text(errors='replace')[-12000:] if lint_path.exists() else 'actionlint output missing','workflows':{}}
           for key,wf in workflows.items():
               runs=get_json(f'{api}/repos/{repo}/actions/workflows/{urllib.parse.quote(wf)}/runs?branch=main&per_page=20').get('workflow_runs',[])
               target=next((r for r in runs if r.get('head_sha')==target_sha),None)
               workflow_run_event=next((r for r in runs if r.get('event')=='workflow_run' and r.get('head_sha')==target_sha),None)
               if key=='harvard' and workflow_run_event is not None:
                   target=workflow_run_event
+              if key=='harvard_state' and runs:
+                  target=runs[0]
               entry={'workflow_file':wf,'found':bool(runs),'recent_runs':[summarize_run(r) for r in runs],'workflow_run_event_found':workflow_run_event is not None,'target_found':target is not None}
               if target:
                   rid=int(target['id']); jobs=get_json(f'{api}/repos/{repo}/actions/runs/{rid}/jobs?per_page=100').get('jobs',[]); logs_ok,logs_status,text=read_logs(rid)
-                  entry.update(target_run=summarize_run(target),jobs=[{'id':j.get('id'),'name':j.get('name'),'status':j.get('status'),'conclusion':j.get('conclusion')} for j in jobs],logs_available=logs_ok,logs_http_status=logs_status)
+                  entry.update(target_run=summarize_run(target),jobs=[{'id':j.get('id'),'name':j.get('name'),'status':j.get('status'),'conclusion':j.get('conclusion'),'steps':[{'name':s.get('name'),'status':s.get('status'),'conclusion':s.get('conclusion'),'number':s.get('number')} for s in j.get('steps',[])]} for j in jobs],logs_available=logs_ok,logs_http_status=logs_status)
                   entry.update(extract(text))
               result['workflows'][key]=entry
 
