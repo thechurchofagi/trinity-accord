@@ -11,4 +11,4 @@ complete public-byte SHA-256 readback before the final receipt is released.
 
 Harvard Dataverse publication authorized: v1
 Authority role: non-amending archival mirror; canonical authority unchanged.
-Activation source: merged #1057 at 56cb159666c3ebad8339d3d24fbea33708635941.
+Activation source: post-entry-fix verified workflow run; actionlint clean on both preservation workflows.
