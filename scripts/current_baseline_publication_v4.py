@@ -263,6 +263,64 @@ def validate_prepared(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     return prepared
 
 
+def validate_consumed_repository_series_state(
+    state: dict[str, Any],
+    source: str,
+    doi: str,
+    record_id: int,
+    package: str,
+) -> None:
+    """Validate immutable v4 history while allowing a later repository-series head."""
+    require_equal(state.get("publication_status"), "published_and_publicly_restored", "state.publication_status")
+    require_equal(state.get("concept_doi"), CONCEPT_DOI, "state.concept_doi")
+    versions = state.get("versions")
+    require(isinstance(versions, list), "state.versions missing")
+
+    checkpoint_matches = [
+        item for item in versions if isinstance(item, dict) and item.get("doi") == doi
+    ]
+    require(len(checkpoint_matches) == 1, "sequence-4 DOI must appear exactly once in preservation history")
+    checkpoint = checkpoint_matches[0]
+    require_equal(checkpoint.get("record_id"), record_id, "state.checkpoint_history.record_id")
+    require_equal(checkpoint.get("git_commit_sha"), source, "state.checkpoint_history.source")
+    require_equal(
+        checkpoint.get("package_identity_sha256"),
+        package,
+        "state.checkpoint_history.package",
+    )
+
+    current_doi = state.get("latest_doi")
+    current_match = DOI_RE.fullmatch(str(current_doi))
+    require(current_match is not None, "state latest DOI is invalid")
+    current_record = state.get("latest_record_id")
+    require(
+        isinstance(current_record, int) and int(current_match.group(1)) == current_record,
+        "state latest DOI/record mismatch",
+    )
+    current_source = state.get("latest_git_commit_sha")
+    require(
+        isinstance(current_source, str) and COMMIT_RE.fullmatch(current_source) is not None,
+        "state latest source commit is invalid",
+    )
+    current_package = state.get("latest_package_identity_sha256")
+    require(
+        isinstance(current_package, str) and SHA256_RE.fullmatch(current_package) is not None,
+        "state latest package identity is invalid",
+    )
+    current_matches = [
+        item for item in versions if isinstance(item, dict) and item.get("doi") == current_doi
+    ]
+    require(len(current_matches) == 1, "current repository DOI must appear exactly once in preservation history")
+    current = current_matches[0]
+    require_equal(current.get("record_id"), current_record, "state.current_history.record_id")
+    require_equal(current.get("git_commit_sha"), current_source, "state.current_history.source")
+    require_equal(
+        current.get("package_identity_sha256"),
+        current_package,
+        "state.current_history.package",
+    )
+
+
 def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[str, Any]) -> None:
     require_equal(auth.get("status"), "consumed", "authorization.status")
     source = auth.get("published_source_baseline_commit_sha")
@@ -274,12 +332,7 @@ def validate_consumed(auth: dict[str, Any], state: dict[str, Any], index: dict[s
     require(match is not None and doi != PREVIOUS_DOI, "invalid or non-new checkpoint DOI")
     require(isinstance(record_id, int) and int(match.group(1)) == record_id, "checkpoint DOI/record mismatch")
     require(isinstance(package, str) and SHA256_RE.fullmatch(package) is not None, "invalid checkpoint package identity")
-    require_equal(state.get("publication_status"), "published_and_publicly_restored", "state.publication_status")
-    require_equal(state.get("latest_git_commit_sha"), source, "state.latest_source")
-    require_equal(state.get("latest_doi"), doi, "state.latest_doi")
-    require_equal(state.get("latest_record_id"), record_id, "state.latest_record_id")
-    require_equal(state.get("latest_package_identity_sha256"), package, "state.latest_package")
-    require_equal(state.get("concept_doi"), CONCEPT_DOI, "state.concept_doi")
+    validate_consumed_repository_series_state(state, source, doi, record_id, package)
     require_equal(state.get("public_metadata_verification"), "passed", "state.public_metadata")
     require_equal(state.get("public_cold_restore"), "passed", "state.public_restore")
     require_equal(state.get("live_main_equivalence_claimed"), False, "state.live_main_equivalence")

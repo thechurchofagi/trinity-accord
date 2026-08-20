@@ -128,11 +128,24 @@ def test_sequence4_prepare_and_seal_transition_or_consumed_terminal_state(tmp_pa
         observation = load(
             ROOT / "preservation/current-baseline-publication-observation-v4.json"
         )
-        assert source_auth["published_doi"] == final["latest_doi"]
-        assert source_auth["published_source_baseline_commit_sha"] == final[
-            "latest_git_commit_sha"
+        historical = [
+            item
+            for item in final["versions"]
+            if item.get("doi") == source_auth["published_doi"]
         ]
-        assert source_auth["published_package_identity_sha256"] == final[
+        assert len(historical) == 1
+        assert historical[0]["record_id"] == source_auth["published_record_id"]
+        assert historical[0]["git_commit_sha"] == source_auth[
+            "published_source_baseline_commit_sha"
+        ]
+        assert historical[0]["package_identity_sha256"] == source_auth[
+            "published_package_identity_sha256"
+        ]
+        current = [item for item in final["versions"] if item.get("doi") == final["latest_doi"]]
+        assert len(current) == 1
+        assert current[0]["record_id"] == final["latest_record_id"]
+        assert current[0]["git_commit_sha"] == final["latest_git_commit_sha"]
+        assert current[0]["package_identity_sha256"] == final[
             "latest_package_identity_sha256"
         ]
         assert final["current_evidence_checkpoint"]["status"] == (
