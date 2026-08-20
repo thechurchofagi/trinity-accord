@@ -17,7 +17,6 @@ concurrency:
 
 jobs:
   publish:
-    if: github.actor == 'thechurchofagi'
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     env:
