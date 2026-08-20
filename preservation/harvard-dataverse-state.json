@@ -1,0 +1,34 @@
+{
+  "schema": "trinity-accord.harvard-dataverse-state.v1",
+  "observed_at": "2026-08-20T12:49:02Z",
+  "server": "https://dataverse.harvard.edu",
+  "persistent_id": "doi:10.7910/DVN/YUCG12",
+  "dataset_id": 14153533,
+  "version_state": "DRAFT",
+  "status": "archive_registered_awaiting_review_submission",
+  "archive_file_id": null,
+  "source": {
+    "repository": "thechurchofagi/trinity-accord",
+    "workflow_run_id": 32368866492,
+    "git_commit_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
+    "artifact_filename": "trinity-accord-full-project-preservation-bundle.github-artifact.zip.bin",
+    "artifact_bytes": 1951603950,
+    "artifact_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
+    "bundle_identity_sha256": "4930b9d6cd4968f3ba75de9dc46a396af7f37f97d128d1619ae829239656989d"
+  },
+  "doi_relationship": {
+    "core_repository_concept_doi": "10.5281/zenodo.21739343",
+    "current_verified_repository_version_doi": "10.5281/zenodo.22020122",
+    "immutable_sequence_4_evidence_checkpoint_doi": "10.5281/zenodo.21859437",
+    "polygon_base_sidechain_doi": "10.5281/zenodo.22012616",
+    "relationship": "Harvard DOI is a second-institutional non-amending preservation mirror of the full-project preservation bundle. It does not supersede the Zenodo concept DOI, any immutable Zenodo version DOI, or the Sequence-4 evidence checkpoint DOI."
+  },
+  "publication_semantics": {
+    "role": "second_institutional_non_amending_mirror",
+    "canonical_authority": "Bitcoin Originals only",
+    "canonical_authority_changed": false,
+    "zenodo_superseded": false
+  },
+  "last_completed_transition": "multipart_complete_and_archive_registered",
+  "last_blocker": "Harvard root collection requires Submit for Review; depositor does not have direct PublishDataset permission."
+}
