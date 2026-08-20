@@ -1,6 +1,6 @@
 Preservation runtime diagnostics trigger v1.
 Read-only inspection of GitHub Actions runtime state for the full-project bundle and Harvard Dataverse publisher.
 Formal Bundle source SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
-Bundle run 32368866492 succeeded; inspect Harvard retry triggered by 0ead6b81b05976a44cd634b269a5ae37e880d0da.
-Resume PID doi:10.7910/DVN/YUCG12 with presigned multipart header fix.
+Bundle run 32368866492 succeeded; inspect Harvard retry triggered by 24722743cd2dba2c476b76de9789405311c5dfab.
+Resume PID doi:10.7910/DVN/YUCG12; authenticate multipart complete/abort URIs.
 No evidence mutation. No external publication by diagnostics. No Arweave, Bitcoin, Ethereum, or Dataverse write.
