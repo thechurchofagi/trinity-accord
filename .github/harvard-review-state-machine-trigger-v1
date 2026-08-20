@@ -1,8 +1,9 @@
-Harvard Dataverse preservation state-machine activation v1.
+Harvard Dataverse preservation state-machine activation v2.
 Persistent ID: doi:10.7910/DVN/YUCG12
 Source preservation run: 32368866492
 Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
 Exact archive SHA-256: 9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2
+Workflow is already present on the default branch before this activation push.
 Submit the existing Dataset through Harvard's required review workflow; never create a replacement PID.
 After release, require anonymous full-byte SHA-256 readback before complete status.
 Non-amending institutional mirror only; Bitcoin Originals remain canonical authority.
