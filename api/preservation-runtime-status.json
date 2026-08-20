@@ -1,8 +1,8 @@
 {
-  "schema": "trinity-accord/preservation-runtime-status/v4",
-  "generated_at": "2026-08-20T12:37:34.905982+00:00",
+  "schema": "trinity-accord/preservation-runtime-status/v5",
+  "generated_at": "2026-08-20T12:38:12.703768+00:00",
   "repository": "thechurchofagi/trinity-accord",
-  "target_source_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
+  "target_source_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
   "actionlint_output": "go: downloading github.com/rhysd/actionlint v1.7.7\ngo: downloading github.com/bmatcuk/doublestar/v4 v4.8.0\ngo: downloading github.com/fatih/color v1.18.0\ngo: downloading github.com/mattn/go-colorable v0.1.14\ngo: downloading github.com/mattn/go-runewidth v0.0.16\ngo: downloading github.com/mattn/go-shellwords v1.0.12\ngo: downloading github.com/robfig/cron/v3 v3.0.1\ngo: downloading golang.org/x/sync v0.10.0\ngo: downloading golang.org/x/sys v0.29.0\ngo: downloading gopkg.in/yaml.v3 v3.0.1\ngo: downloading github.com/mattn/go-isatty v0.0.20\ngo: downloading github.com/rivo/uniseg v0.4.7\n",
   "workflows": {
     "bundle": {
@@ -193,22 +193,39 @@
       "workflow_run_event_found": false,
       "target_found": true,
       "target_run": {
-        "id": 32334276099,
-        "name": ".github/workflows/full-project-preservation-bundle.yml",
+        "id": 32368866492,
+        "name": "Full Project Preservation Bundle",
         "event": "push",
         "status": "completed",
-        "conclusion": "failure",
-        "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
-        "created_at": "2026-08-20T05:05:30Z",
-        "updated_at": "2026-08-20T05:05:30Z",
-        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276099",
-        "check_suite_id": 87653369134
+        "conclusion": "success",
+        "head_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
+        "created_at": "2026-08-20T12:26:40Z",
+        "updated_at": "2026-08-20T12:35:49Z",
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368866492",
+        "check_suite_id": 87744871812
       },
-      "jobs": [],
-      "logs_available": false,
-      "logs_http_status": 404,
-      "build_pass": false,
-      "harvard_complete": false
+      "jobs": [
+        {
+          "id": 96424536282,
+          "name": "build-and-verify",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "logs_available": true,
+      "logs_http_status": 200,
+      "build_pass": true,
+      "harvard_complete": false,
+      "bundle_identity_sha256": "4930b9d6cd4968f3ba75de9dc46a396af7f37f97d128d1619ae829239656989d",
+      "release_count": 24,
+      "release_asset_count": 113,
+      "unique_object_count": 114,
+      "unique_object_bytes": 1951456070,
+      "logical_bytes_before_sha256_deduplication": 2476445961,
+      "failure_lines": [
+        "2026-08-20T12:27:01.4202069Z \u001b[36;1m  echo \"[observer] BUILD FAILED; last 100 build-log lines follow\"\u001b[0m",
+        "2026-08-20T12:27:01.4202067Z \u001b[36;1m  echo \"[observer] BUILD FAILED; last 100 build-log lines follow\"\u001b[0m"
+      ]
     },
     "harvard": {
       "workflow_file": "publish-full-project-preservation-to-harvard.yml",
@@ -371,25 +388,8 @@
           "check_suite_id": 87653185924
         }
       ],
-      "workflow_run_event_found": true,
-      "target_found": true,
-      "target_run": {
-        "id": 32334276606,
-        "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
-        "event": "push",
-        "status": "completed",
-        "conclusion": "failure",
-        "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
-        "created_at": "2026-08-20T05:05:31Z",
-        "updated_at": "2026-08-20T05:05:31Z",
-        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276606",
-        "check_suite_id": 87653370437
-      },
-      "jobs": [],
-      "logs_available": false,
-      "logs_http_status": 404,
-      "build_pass": false,
-      "harvard_complete": false
+      "workflow_run_event_found": false,
+      "target_found": false
     }
   }
 }
