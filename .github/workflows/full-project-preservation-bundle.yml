@@ -198,7 +198,7 @@ jobs:
             f"- Releases enumerated: **{c['release_count']}**\n"
             f"- Custom Release assets captured: **{c['release_asset_count']}**\n"
             f"- Unique content-addressed objects: **{c['unique_object_count']}**\n"
-            f"- Unique bytes: **{c['unique_object_bytes']}\n"
+            f"- Unique bytes: **{c['unique_object_bytes']}**\n"
             '- Current repository GitHub-zero cold restore: **PASS**\n'
             '- Polygon/Base DOI public-byte readback: **PASS**\n'
             '- Live build heartbeat: **ENABLED (30 s)**\n'
