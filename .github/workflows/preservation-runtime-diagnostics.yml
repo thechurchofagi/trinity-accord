@@ -19,8 +19,26 @@ concurrency:
 jobs:
   diagnose:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Actionlint preservation workflows
+        shell: bash
+        run: |
+          set -uo pipefail
+          OUT="$RUNNER_TEMP/preservation-actionlint.txt"
+          set +e
+          go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.7 \
+            .github/workflows/full-project-preservation-bundle.yml \
+            .github/workflows/publish-full-project-preservation-to-harvard.yml \
+            >"$OUT" 2>&1
+          rc=$?
+          set -e
+          echo "actionlint_exit_code=$rc"
+          cat "$OUT"
+
       - name: Read Actions runtime state and publish machine diagnostics
         env:
           GH_TOKEN: ${{ github.token }}
@@ -30,10 +48,11 @@ jobs:
           python3 - <<'PY'
           import base64, io, json, os, re, urllib.error, urllib.parse, urllib.request, zipfile
           from datetime import datetime, timezone
+          from pathlib import Path
 
           repo=os.environ['GITHUB_REPOSITORY']; token=os.environ['GH_TOKEN']; target_sha=os.environ['TARGET_SOURCE_SHA']
           api='https://api.github.com'
-          headers={'Authorization':f'Bearer {token}','Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'trinity-accord-preservation-diagnostics/1.2'}
+          headers={'Authorization':f'Bearer {token}','Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'trinity-accord-preservation-diagnostics/1.3'}
 
           def request(url, method='GET', body=None):
               data=None if body is None else json.dumps(body).encode(); h=dict(headers)
@@ -74,36 +93,17 @@ jobs:
           def summarize_run(r):
               return {k:r.get(k) for k in ('id','name','event','status','conclusion','head_sha','created_at','updated_at','html_url','check_suite_id')}
 
-          def parser_annotations(run):
-              suite=run.get('check_suite_id')
-              if not suite: return []
-              status,raw=request(f'{api}/repos/{repo}/check-suites/{suite}/check-runs?per_page=100')
-              if status!=200: return [{'lookup_http_status':status}]
-              checks=json.loads(raw).get('check_runs',[]); out=[]
-              for check in checks:
-                  cid=check.get('id')
-                  item={'check_run_id':cid,'name':check.get('name'),'status':check.get('status'),'conclusion':check.get('conclusion'),'details_url':check.get('details_url'),'annotations':[]}
-                  astatus,araw=request(f'{api}/repos/{repo}/check-runs/{cid}/annotations?per_page=100')
-                  if astatus==200:
-                      for a in json.loads(araw):
-                          item['annotations'].append({k:a.get(k) for k in ('path','start_line','end_line','annotation_level','message','title','raw_details')})
-                  else:
-                      item['annotations_lookup_http_status']=astatus
-                  out.append(item)
-              return out
-
           workflows={'bundle':'full-project-preservation-bundle.yml','harvard':'publish-full-project-preservation-to-harvard.yml'}
-          result={'schema':'trinity-accord/preservation-runtime-status/v3','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'workflows':{}}
+          lint_path=Path(os.environ['RUNNER_TEMP'])/'preservation-actionlint.txt'
+          result={'schema':'trinity-accord/preservation-runtime-status/v4','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'actionlint_output':lint_path.read_text(errors='replace')[-12000:] if lint_path.exists() else 'actionlint output missing','workflows':{}}
           for key,wf in workflows.items():
               runs=get_json(f'{api}/repos/{repo}/actions/workflows/{urllib.parse.quote(wf)}/runs?branch=main&per_page=20').get('workflow_runs',[])
-              recent=[summarize_run(r) for r in runs]
               target=next((r for r in runs if r.get('head_sha')==target_sha),None)
               workflow_run_event=next((r for r in runs if r.get('event')=='workflow_run'),None)
-              if target is None and runs: target=runs[0]
-              entry={'workflow_file':wf,'found':bool(runs),'recent_runs':recent,'workflow_run_event_found':workflow_run_event is not None,'target_found':target is not None}
+              entry={'workflow_file':wf,'found':bool(runs),'recent_runs':[summarize_run(r) for r in runs],'workflow_run_event_found':workflow_run_event is not None,'target_found':target is not None}
               if target:
                   rid=int(target['id']); jobs=get_json(f'{api}/repos/{repo}/actions/runs/{rid}/jobs?per_page=100').get('jobs',[]); logs_ok,logs_status,text=read_logs(rid)
-                  entry.update(target_run=summarize_run(target),jobs=[{'id':j.get('id'),'name':j.get('name'),'status':j.get('status'),'conclusion':j.get('conclusion'),'started_at':j.get('started_at'),'completed_at':j.get('completed_at')} for j in jobs],logs_available=logs_ok,logs_http_status=logs_status,check_diagnostics=parser_annotations(target))
+                  entry.update(target_run=summarize_run(target),jobs=[{'id':j.get('id'),'name':j.get('name'),'status':j.get('status'),'conclusion':j.get('conclusion')} for j in jobs],logs_available=logs_ok,logs_http_status=logs_status)
                   entry.update(extract(text))
               result['workflows'][key]=entry
 
