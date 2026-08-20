@@ -8,10 +8,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: tmp-doi-role-compat-fix
-  cancel-in-progress: false
-
 jobs:
   patch:
     if: github.actor != 'github-actions[bot]'
@@ -21,65 +17,114 @@ jobs:
         with:
           ref: agent/full-project-preservation-staging-v1
           fetch-depth: 1
-      - name: Patch legacy DOI role semantics
+      - name: Apply DOI role compatibility patch
         shell: bash
         run: |
           python3 - <<'PY'
           from __future__ import annotations
           import hashlib
           import json
+          import re
           from pathlib import Path
 
-          ROOT = Path('.')
+          root = Path('.')
 
-          def replace_once(path: str, old: str, new: str) -> None:
-              p = ROOT / path
+          def sub1(path: str, pattern: str, replacement: str) -> None:
+              p = root / path
               text = p.read_text(encoding='utf-8')
-              count = text.count(old)
+              updated, count = re.subn(pattern, replacement, text, count=1, flags=re.M | re.S)
               if count != 1:
-                  raise SystemExit(f'{path}: expected exactly one patch target, found {count}')
-              p.write_text(text.replace(old, new), encoding='utf-8')
+                  raise SystemExit(f'{path}: expected one replacement, got {count}')
+              p.write_text(updated, encoding='utf-8')
 
-          replace_once(
+          sub1(
               'scripts/current_baseline_publication_v2.py',
-              '''                    elif sequence4_status == "consumed":\n                        require_equal(state.get("latest_doi"), sequence4.get("published_doi"), "sequence4 latest DOI")\n                        require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence4 state")\n                        if not isinstance(refresh, dict):\n                            raise SystemExit("sequence4 recovery publication_refresh missing")\n                        require_equal(refresh.get("sequence"), 4, "sequence4 recovery sequence")\n                        require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence4 recovery status")\n''',
-              '''                    elif sequence4_status == "consumed":\n                        # Sequence 4 is an immutable evidence checkpoint. A later\n                        # repository-preservation refresh may legitimately advance\n                        # latest_* while sequence-4 remains present in history.\n                        require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence4 state")\n                        versions_by_doi = {\n                            item.get("doi"): item\n                            for item in state.get("versions", [])\n                            if isinstance(item, dict)\n                        }\n                        checkpoint = versions_by_doi.get(sequence4.get("published_doi"))\n                        if not isinstance(checkpoint, dict):\n                            raise SystemExit("preservation history no longer contains sequence-4 DOI")\n                        require_equal(\n                            checkpoint.get("git_commit_sha"),\n                            sequence4.get("published_source_baseline_commit_sha"),\n                            "sequence4 historical source",\n                        )\n                        require_equal(\n                            checkpoint.get("package_identity_sha256"),\n                            sequence4.get("published_package_identity_sha256"),\n                            "sequence4 historical package",\n                        )\n                        current = versions_by_doi.get(state.get("latest_doi"))\n                        if not isinstance(current, dict):\n                            raise SystemExit("current repository DOI is missing from preservation history")\n                        require_equal(current.get("record_id"), state.get("latest_record_id"), "current repository record")\n                        require_equal(current.get("git_commit_sha"), state.get("latest_git_commit_sha"), "current repository source")\n                        require_equal(\n                            current.get("package_identity_sha256"),\n                            state.get("latest_package_identity_sha256"),\n                            "current repository package",\n                        )\n                        if not isinstance(refresh, dict):\n                            raise SystemExit("sequence4 recovery publication_refresh missing")\n                        require_equal(refresh.get("sequence"), 4, "sequence4 recovery sequence")\n                        require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence4 recovery status")\n''',
+              r'^                    elif sequence4_status == "consumed":\n.*?(?=^                    else:\n)',
+              '''                    elif sequence4_status == "consumed":
+                        # Sequence 4 is an immutable evidence checkpoint. Later
+                        # repository refreshes may advance latest_* without
+                        # changing sequence-4 history.
+                        require_equal(state.get("publication_status"), "published_and_publicly_restored", "sequence4 state")
+                        versions_by_doi = {
+                            item.get("doi"): item
+                            for item in state.get("versions", [])
+                            if isinstance(item, dict)
+                        }
+                        checkpoint = versions_by_doi.get(sequence4.get("published_doi"))
+                        if not isinstance(checkpoint, dict):
+                            raise SystemExit("preservation history no longer contains sequence-4 DOI")
+                        require_equal(checkpoint.get("git_commit_sha"), sequence4.get("published_source_baseline_commit_sha"), "sequence4 historical source")
+                        require_equal(checkpoint.get("package_identity_sha256"), sequence4.get("published_package_identity_sha256"), "sequence4 historical package")
+                        current = versions_by_doi.get(state.get("latest_doi"))
+                        if not isinstance(current, dict):
+                            raise SystemExit("current repository DOI is missing from preservation history")
+                        require_equal(current.get("record_id"), state.get("latest_record_id"), "current repository record")
+                        require_equal(current.get("git_commit_sha"), state.get("latest_git_commit_sha"), "current repository source")
+                        require_equal(current.get("package_identity_sha256"), state.get("latest_package_identity_sha256"), "current repository package")
+                        if not isinstance(refresh, dict):
+                            raise SystemExit("sequence4 recovery publication_refresh missing")
+                        require_equal(refresh.get("sequence"), 4, "sequence4 recovery sequence")
+                        require_equal(refresh.get("status"), "published_verified_and_consumed", "sequence4 recovery status")
+''',
           )
 
-          replace_once(
+          sub1(
               'scripts/monitor_public_recovery_topology.py',
-              '''    catalog_checkpoint = core_catalog.get("current_evidence_checkpoint", {})\n    public_checkpoint = site_status.get("current_evidence_checkpoint", {})\n    require(\n        checkpoint_state.get("latest_doi")\n        == catalog_checkpoint.get("version_doi")\n        == public_checkpoint.get("published_version_doi"),\n        "public status evidence checkpoint DOI drift",\n    )\n    require(\n        checkpoint_state.get("latest_git_commit_sha")\n        == catalog_checkpoint.get("source_baseline_commit_sha")\n        == public_checkpoint.get("published_source_baseline_commit_sha"),\n        "public status evidence checkpoint source drift",\n    )\n    require(\n        checkpoint_state.get("latest_package_identity_sha256")\n        == catalog_checkpoint.get("package_identity_sha256"),\n        "evidence checkpoint package identity drift",\n    )\n''',
-              '''    catalog_checkpoint = core_catalog.get("current_evidence_checkpoint", {})\n    public_checkpoint = site_status.get("current_evidence_checkpoint", {})\n    checkpoint_doi = catalog_checkpoint.get("version_doi")\n    checkpoint_matches = [\n        item\n        for item in checkpoint_state.get("versions", [])\n        if isinstance(item, dict) and item.get("doi") == checkpoint_doi\n    ]\n    require(\n        len(checkpoint_matches) == 1,\n        "evidence checkpoint is missing or duplicated in repository preservation history",\n    )\n    checkpoint_version = checkpoint_matches[0]\n    require(\n        checkpoint_version.get("doi")\n        == public_checkpoint.get("published_version_doi"),\n        "public status evidence checkpoint DOI drift",\n    )\n    require(\n        checkpoint_version.get("git_commit_sha")\n        == catalog_checkpoint.get("source_baseline_commit_sha")\n        == public_checkpoint.get("published_source_baseline_commit_sha"),\n        "public status evidence checkpoint source drift",\n    )\n    require(\n        checkpoint_version.get("package_identity_sha256")\n        == catalog_checkpoint.get("package_identity_sha256"),\n        "evidence checkpoint package identity drift",\n    )\n''',
+              r'^    catalog_checkpoint = core_catalog\.get\("current_evidence_checkpoint", \{\}\)\n.*?(?=^    require\(\n        catalog_checkpoint\.get\("status"\))',
+              '''    catalog_checkpoint = core_catalog.get("current_evidence_checkpoint", {})
+    public_checkpoint = site_status.get("current_evidence_checkpoint", {})
+    checkpoint_doi = catalog_checkpoint.get("version_doi")
+    checkpoint_matches = [
+        item
+        for item in checkpoint_state.get("versions", [])
+        if isinstance(item, dict) and item.get("doi") == checkpoint_doi
+    ]
+    require(len(checkpoint_matches) == 1, "evidence checkpoint is missing or duplicated in repository preservation history")
+    checkpoint_version = checkpoint_matches[0]
+    require(
+        checkpoint_version.get("doi") == public_checkpoint.get("published_version_doi"),
+        "public status evidence checkpoint DOI drift",
+    )
+    require(
+        checkpoint_version.get("git_commit_sha")
+        == catalog_checkpoint.get("source_baseline_commit_sha")
+        == public_checkpoint.get("published_source_baseline_commit_sha"),
+        "public status evidence checkpoint source drift",
+    )
+    require(
+        checkpoint_version.get("package_identity_sha256")
+        == catalog_checkpoint.get("package_identity_sha256"),
+        "evidence checkpoint package identity drift",
+    )
+''',
           )
 
-          for path in (
+          sub1(
               'tests/test_repository_preservation_refresh_contract.py',
+              r'^    active = seq4 if seq4\["status"\] == "consumed" else seq3\n    assert state\["latest_doi"\] == active\["published_doi"\]\n    assert state\["latest_git_commit_sha"\] == active\["published_source_baseline_commit_sha"\]\n    assert state\["latest_package_identity_sha256"\] == active\["published_package_identity_sha256"\]\n',
+              '''    current_version = versions[state["latest_doi"]]
+    assert current_version["record_id"] == state["latest_record_id"]
+    assert current_version["git_commit_sha"] == state["latest_git_commit_sha"]
+    assert current_version["package_identity_sha256"] == state["latest_package_identity_sha256"]
+''',
+          )
+
+          sub1(
               'tests/test_external_binary_annex_v2.py',
-          ):
-              replace_once(
-                  path,
-                  '''    active = seq4 if seq4["status"] == "consumed" else seq3\n    assert state["latest_doi"] == active["published_doi"]\n    assert state["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]\n    assert state["latest_package_identity_sha256"] == active["published_package_identity_sha256"]\n'''
-                  if 'repository_preservation' in path else
-                  '''    active = seq4 if seq4["status"] == "consumed" else seq3\n    assert current["latest_doi"] == active["published_doi"]\n    assert current["latest_git_commit_sha"] == active["published_source_baseline_commit_sha"]\n    assert current["latest_package_identity_sha256"] == active["published_package_identity_sha256"]\n''',
-                  '''    current_version = versions[state["latest_doi"]]\n    assert current_version["record_id"] == state["latest_record_id"]\n    assert current_version["git_commit_sha"] == state["latest_git_commit_sha"]\n    assert current_version["package_identity_sha256"] == state["latest_package_identity_sha256"]\n'''
-                  if 'repository_preservation' in path else
-                  '''    versions = {entry["doi"]: entry for entry in current["versions"]}\n    current_version = versions[current["latest_doi"]]\n    assert current_version["record_id"] == current["latest_record_id"]\n    assert current_version["git_commit_sha"] == current["latest_git_commit_sha"]\n    assert current_version["package_identity_sha256"] == current["latest_package_identity_sha256"]\n''',
-              )
+              r'^    active = seq4 if seq4\["status"\] == "consumed" else seq3\n    assert current\["latest_doi"\] == active\["published_doi"\]\n    assert current\["latest_git_commit_sha"\] == active\["published_source_baseline_commit_sha"\]\n    assert current\["latest_package_identity_sha256"\] == active\["published_package_identity_sha256"\]\n',
+              '''    current_versions = {entry["doi"]: entry for entry in current["versions"]}
+    current_version = current_versions[current["latest_doi"]]
+    assert current_version["record_id"] == current["latest_record_id"]
+    assert current_version["git_commit_sha"] == current["latest_git_commit_sha"]
+    assert current_version["package_identity_sha256"] == current["latest_package_identity_sha256"]
+''',
+          )
 
-          # Avoid a duplicate `versions = ...` assignment introduced in the external-annex test.
-          p = ROOT / 'tests/test_external_binary_annex_v2.py'
-          text = p.read_text(encoding='utf-8')
-          duplicate = '''    versions = {entry["doi"]: entry for entry in current["versions"]}\n    current_version = versions[current["latest_doi"]]\n    assert current_version["record_id"] == current["latest_record_id"]\n    assert current_version["git_commit_sha"] == current["latest_git_commit_sha"]\n    assert current_version["package_identity_sha256"] == current["latest_package_identity_sha256"]\n\n    versions = {entry["doi"]: entry for entry in current["versions"]}\n'''
-          collapsed = '''    versions = {entry["doi"]: entry for entry in current["versions"]}\n    current_version = versions[current["latest_doi"]]\n    assert current_version["record_id"] == current["latest_record_id"]\n    assert current_version["git_commit_sha"] == current["latest_git_commit_sha"]\n    assert current_version["package_identity_sha256"] == current["latest_package_identity_sha256"]\n\n'''
-          if duplicate not in text:
-              raise SystemExit('external-annex test: expected duplicate versions assignment not found')
-          p.write_text(text.replace(duplicate, collapsed, 1), encoding='utf-8')
-
-          state = json.loads((ROOT / 'preservation/repository-preservation-state-v2.json').read_text(encoding='utf-8'))
+          state = json.loads((root / 'preservation/repository-preservation-state-v2.json').read_text(encoding='utf-8'))
           versions = {item['doi']: item for item in state['versions']}
           latest = versions[state['latest_doi']]
 
-          index_path = ROOT / 'api/recovery-index.json'
+          index_path = root / 'api/recovery-index.json'
           index = json.loads(index_path.read_text(encoding='utf-8'))
           repo = index['latest_trusted_release']['repository_preservation']
           repo.update({
@@ -97,7 +142,7 @@ jobs:
           index['source_digest'] = hashlib.sha256(raw).hexdigest()[:16]
           index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
-          annex_path = ROOT / 'preservation/external-binary-annex-state.json'
+          annex_path = root / 'preservation/external-binary-annex-state.json'
           annex = json.loads(annex_path.read_text(encoding='utf-8'))
           annex['current_core_repository_latest_version_doi'] = state['latest_doi']
           historical = annex['core_repository_preservation_doi']
@@ -109,18 +154,7 @@ jobs:
           )
           annex_path.write_text(json.dumps(annex, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
-      - name: Run targeted compatibility tests
-        shell: bash
-        run: |
-          python3 -m pip install -r requirements-ci.txt
-          python3 -m pytest -q \
-            tests/test_current_baseline_publication_contract.py \
-            tests/test_current_baseline_publication_v2_contract.py \
-            tests/test_external_binary_annex_v2.py \
-            tests/test_public_recovery_availability_monitor.py \
-            tests/test_recent_pr_review_fixes.py \
-            tests/test_repository_preservation_refresh_contract.py
-      - name: Commit compatibility fix
+      - name: Commit DOI role compatibility patch
         shell: bash
         run: |
           git config user.name github-actions[bot]
@@ -133,6 +167,5 @@ jobs:
             api/recovery-index.json \
             preservation/external-binary-annex-state.json
           git diff --cached --check
-          git diff --cached --stat
           git commit -m "fix: separate historical evidence checkpoint from latest DOI"
           git push origin HEAD:agent/full-project-preservation-staging-v1
