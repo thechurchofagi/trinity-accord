@@ -1,6 +1,6 @@
 {
-  "schema": "trinity-accord/preservation-runtime-status/v2",
-  "generated_at": "2026-08-20T12:19:55.880017+00:00",
+  "schema": "trinity-accord/preservation-runtime-status/v3",
+  "generated_at": "2026-08-20T12:21:04.741975+00:00",
   "repository": "thechurchofagi/trinity-accord",
   "target_source_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
   "workflows": {
@@ -8,6 +8,30 @@
       "workflow_file": "full-project-preservation-bundle.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368377655,
+          "name": ".github/workflows/full-project-preservation-bundle.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "29181c913e81474e94f95f86c20548352503a931",
+          "created_at": "2026-08-20T12:20:58Z",
+          "updated_at": "2026-08-20T12:20:58Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368377655",
+          "check_suite_id": 87743493204
+        },
+        {
+          "id": 32368363866,
+          "name": ".github/workflows/full-project-preservation-bundle.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "1808c075560f2bfbe2ef939105d0dc80f67a101f",
+          "created_at": "2026-08-20T12:20:48Z",
+          "updated_at": "2026-08-20T12:20:48Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368363866",
+          "check_suite_id": 87743454754
+        },
         {
           "id": 32368281158,
           "name": ".github/workflows/full-project-preservation-bundle.yml",
@@ -17,7 +41,8 @@
           "head_sha": "b8d557629a3d3c659ad5609cd78a2277a698b5ec",
           "created_at": "2026-08-20T12:19:50Z",
           "updated_at": "2026-08-20T12:19:50Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368281158"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368281158",
+          "check_suite_id": 87743227306
         },
         {
           "id": 32368269192,
@@ -28,7 +53,8 @@
           "head_sha": "bcb5e06b32146d7839031f35060bcf13f29293d3",
           "created_at": "2026-08-20T12:19:41Z",
           "updated_at": "2026-08-20T12:19:41Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368269192"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368269192",
+          "check_suite_id": 87743193221
         },
         {
           "id": 32368150447,
@@ -39,7 +65,8 @@
           "head_sha": "4819cb943f0cb5db5d18721ccdaf5990c10f5f56",
           "created_at": "2026-08-20T12:18:15Z",
           "updated_at": "2026-08-20T12:18:15Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368150447"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368150447",
+          "check_suite_id": 87742852840
         },
         {
           "id": 32368141467,
@@ -50,7 +77,8 @@
           "head_sha": "92408626da95c14d2100fcda3f2a01e4b5e571d0",
           "created_at": "2026-08-20T12:18:09Z",
           "updated_at": "2026-08-20T12:18:09Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368141467"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368141467",
+          "check_suite_id": 87742827636
         },
         {
           "id": 32334276099,
@@ -61,7 +89,8 @@
           "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
           "created_at": "2026-08-20T05:05:30Z",
           "updated_at": "2026-08-20T05:05:30Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276099"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276099",
+          "check_suite_id": 87653369134
         },
         {
           "id": 32334264468,
@@ -72,7 +101,8 @@
           "head_sha": "a4c3789b5de48715376bda7f252f1f594467f936",
           "created_at": "2026-08-20T05:05:19Z",
           "updated_at": "2026-08-20T05:05:19Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334264468"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334264468",
+          "check_suite_id": 87653339222
         },
         {
           "id": 32334204271,
@@ -83,7 +113,8 @@
           "head_sha": "064f059453ad9df25420c8899cdd9451f3124b89",
           "created_at": "2026-08-20T05:04:21Z",
           "updated_at": "2026-08-20T05:04:21Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334204271"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334204271",
+          "check_suite_id": 87653184308
         },
         {
           "id": 32334181368,
@@ -94,7 +125,8 @@
           "head_sha": "dccc3c87ff76b6015771d1f6101da3fd715a8ce3",
           "created_at": "2026-08-20T05:04:01Z",
           "updated_at": "2026-08-20T05:04:01Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334181368"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334181368",
+          "check_suite_id": 87653124625
         },
         {
           "id": 32333714608,
@@ -105,7 +137,8 @@
           "head_sha": "3e64044cf9e039156411abc89dbd0b59d6102aa7",
           "created_at": "2026-08-20T04:56:30Z",
           "updated_at": "2026-08-20T04:56:30Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32333714608"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32333714608",
+          "check_suite_id": 87651939707
         },
         {
           "id": 32333624348,
@@ -116,9 +149,11 @@
           "head_sha": "56cb159666c3ebad8339d3d24fbea33708635941",
           "created_at": "2026-08-20T04:55:03Z",
           "updated_at": "2026-08-20T04:55:03Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32333624348"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32333624348",
+          "check_suite_id": 87651718514
         }
       ],
+      "workflow_run_event_found": false,
       "target_found": true,
       "target_run": {
         "id": 32334276099,
@@ -129,11 +164,13 @@
         "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
         "created_at": "2026-08-20T05:05:30Z",
         "updated_at": "2026-08-20T05:05:30Z",
-        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276099"
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276099",
+        "check_suite_id": 87653369134
       },
       "jobs": [],
       "logs_available": false,
       "logs_http_status": 404,
+      "check_diagnostics": [],
       "build_pass": false,
       "harvard_complete": false
     },
@@ -141,6 +178,30 @@
       "workflow_file": "publish-full-project-preservation-to-harvard.yml",
       "found": true,
       "recent_runs": [
+        {
+          "id": 32368376839,
+          "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "29181c913e81474e94f95f86c20548352503a931",
+          "created_at": "2026-08-20T12:20:57Z",
+          "updated_at": "2026-08-20T12:20:57Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368376839",
+          "check_suite_id": 87743490836
+        },
+        {
+          "id": 32368364726,
+          "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+          "event": "push",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "1808c075560f2bfbe2ef939105d0dc80f67a101f",
+          "created_at": "2026-08-20T12:20:48Z",
+          "updated_at": "2026-08-20T12:20:48Z",
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368364726",
+          "check_suite_id": 87743457003
+        },
         {
           "id": 32368282127,
           "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
@@ -150,7 +211,8 @@
           "head_sha": "b8d557629a3d3c659ad5609cd78a2277a698b5ec",
           "created_at": "2026-08-20T12:19:50Z",
           "updated_at": "2026-08-20T12:19:50Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368282127"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368282127",
+          "check_suite_id": 87743229938
         },
         {
           "id": 32368268496,
@@ -161,7 +223,8 @@
           "head_sha": "bcb5e06b32146d7839031f35060bcf13f29293d3",
           "created_at": "2026-08-20T12:19:40Z",
           "updated_at": "2026-08-20T12:19:40Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368268496"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368268496",
+          "check_suite_id": 87743191017
         },
         {
           "id": 32368149693,
@@ -172,7 +235,8 @@
           "head_sha": "4819cb943f0cb5db5d18721ccdaf5990c10f5f56",
           "created_at": "2026-08-20T12:18:15Z",
           "updated_at": "2026-08-20T12:18:15Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368149693"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368149693",
+          "check_suite_id": 87742850709
         },
         {
           "id": 32368142410,
@@ -183,7 +247,8 @@
           "head_sha": "92408626da95c14d2100fcda3f2a01e4b5e571d0",
           "created_at": "2026-08-20T12:18:10Z",
           "updated_at": "2026-08-20T12:18:10Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368142410"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368142410",
+          "check_suite_id": 87742830404
         },
         {
           "id": 32334276606,
@@ -194,7 +259,8 @@
           "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
           "created_at": "2026-08-20T05:05:31Z",
           "updated_at": "2026-08-20T05:05:31Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276606"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276606",
+          "check_suite_id": 87653370437
         },
         {
           "id": 32334264973,
@@ -205,7 +271,8 @@
           "head_sha": "a4c3789b5de48715376bda7f252f1f594467f936",
           "created_at": "2026-08-20T05:05:19Z",
           "updated_at": "2026-08-20T05:05:19Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334264973"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334264973",
+          "check_suite_id": 87653340599
         },
         {
           "id": 32334204877,
@@ -216,24 +283,28 @@
           "head_sha": "064f059453ad9df25420c8899cdd9451f3124b89",
           "created_at": "2026-08-20T05:04:22Z",
           "updated_at": "2026-08-20T05:04:22Z",
-          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334204877"
+          "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334204877",
+          "check_suite_id": 87653185924
         }
       ],
+      "workflow_run_event_found": false,
       "target_found": true,
       "target_run": {
-        "id": 32368282127,
+        "id": 32334276606,
         "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
         "event": "push",
         "status": "completed",
         "conclusion": "failure",
-        "head_sha": "b8d557629a3d3c659ad5609cd78a2277a698b5ec",
-        "created_at": "2026-08-20T12:19:50Z",
-        "updated_at": "2026-08-20T12:19:50Z",
-        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368282127"
+        "head_sha": "3376516ec9f4927e38b987ec0eaeb3c23b7172ee",
+        "created_at": "2026-08-20T05:05:31Z",
+        "updated_at": "2026-08-20T05:05:31Z",
+        "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32334276606",
+        "check_suite_id": 87653370437
       },
       "jobs": [],
       "logs_available": false,
       "logs_http_status": 404,
+      "check_diagnostics": [],
       "build_pass": false,
       "harvard_complete": false
     }
