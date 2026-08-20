@@ -1,0 +1,43 @@
+{
+  "schema": "trinity-accord/preservation-runtime-status/v1",
+  "generated_at": "2026-08-20T12:18:21.787799+00:00",
+  "repository": "thechurchofagi/trinity-accord",
+  "workflows": {
+    "bundle": {
+      "workflow_file": "full-project-preservation-bundle.yml",
+      "found": true,
+      "run_id": 32368150447,
+      "name": ".github/workflows/full-project-preservation-bundle.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "4819cb943f0cb5db5d18721ccdaf5990c10f5f56",
+      "created_at": "2026-08-20T12:18:15Z",
+      "updated_at": "2026-08-20T12:18:15Z",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368150447",
+      "jobs": [],
+      "logs_available": false,
+      "logs_http_status": 404,
+      "build_pass": false,
+      "harvard_complete": false
+    },
+    "harvard": {
+      "workflow_file": "publish-full-project-preservation-to-harvard.yml",
+      "found": true,
+      "run_id": 32368149693,
+      "name": ".github/workflows/publish-full-project-preservation-to-harvard.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "4819cb943f0cb5db5d18721ccdaf5990c10f5f56",
+      "created_at": "2026-08-20T12:18:15Z",
+      "updated_at": "2026-08-20T12:18:15Z",
+      "html_url": "https://github.com/thechurchofagi/trinity-accord/actions/runs/32368149693",
+      "jobs": [],
+      "logs_available": false,
+      "logs_http_status": 404,
+      "build_pass": false,
+      "harvard_complete": false
+    }
+  }
+}
