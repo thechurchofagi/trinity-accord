@@ -52,7 +52,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$OUTPUT_DIR"
-          python3 scripts/harvard_preservation_state_machine.py \
+          python3 scripts/harvard_preservation_state_machine_v2.py \
             --output-dir "$OUTPUT_DIR" \
             --state-path preservation/harvard-dataverse-state.json \
             2>&1 | tee "$RUNNER_TEMP/harvard-state-machine.log"
