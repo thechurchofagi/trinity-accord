@@ -36,6 +36,7 @@ jobs:
           import json
           import os
           import urllib.error
+          import urllib.parse
           import urllib.request
 
           base = os.environ['DATAVERSE_URL'].rstrip('/')
@@ -43,7 +44,7 @@ jobs:
           common_headers = {
               'X-Dataverse-key': token,
               'Accept': 'application/json',
-              'User-Agent': 'trinity-accord-preservation-connectivity-check/1.2',
+              'User-Agent': 'trinity-accord-preservation-connectivity-check/1.3',
           }
 
           def call(path: str, method='GET', payload=None):
@@ -92,91 +93,56 @@ jobs:
               print(json.dumps(summary, indent=2, sort_keys=True))
               raise SystemExit('HD token authenticated but /api/users/:me did not return OK')
 
-          # Non-mutating permission probe. Dataverse documents this endpoint as
-          # requiring Add Dataset permission on the target collection. It only
-          # validates the JSON and does not create a dataset.
+          # Resolve Harvard Dataverse's actual top-level collection alias from DB id 1.
+          code, top = call('/api/dataverses/1')
+          summary['top_collection_lookup_http'] = code
+          alias = None
+          if isinstance(top, dict):
+              summary['top_collection_lookup_status'] = top.get('status')
+              data = top.get('data')
+              if isinstance(data, dict):
+                  alias = data.get('alias')
+                  if isinstance(alias, str):
+                      summary['top_collection_alias'] = alias
+          if code != 200 or not isinstance(alias, str) or not alias:
+              print(json.dumps(summary, indent=2, sort_keys=True))
+              raise SystemExit('could not resolve top-level Harvard Dataverse collection alias')
+
+          quoted_alias = urllib.parse.quote(alias, safe='')
+          code, permissions = call(f'/api/dataverses/{quoted_alias}/userPermissions')
+          summary['top_user_permissions_http'] = code
+          if isinstance(permissions, dict):
+              summary['top_user_permissions_status'] = permissions.get('status')
+              pdata = permissions.get('data')
+              if isinstance(pdata, dict):
+                  summary['top_user_permissions'] = {
+                      k: v for k, v in pdata.items() if isinstance(v, bool)
+                  }
+
           probe_dataset = {
               'datasetVersion': {
                   'metadataBlocks': {
                       'citation': {
                           'fields': [
-                              {
-                                  'typeName': 'title',
-                                  'multiple': False,
-                                  'typeClass': 'primitive',
-                                  'value': 'Trinity Accord preservation permission probe'
-                              },
-                              {
-                                  'typeName': 'author',
-                                  'multiple': True,
-                                  'typeClass': 'compound',
-                                  'value': [
-                                      {
-                                          'authorName': {
-                                              'typeName': 'authorName',
-                                              'multiple': False,
-                                              'typeClass': 'primitive',
-                                              'value': 'Trinity Accord Preservation'
-                                          }
-                                      }
-                                  ]
-                              },
-                              {
-                                  'typeName': 'datasetContact',
-                                  'multiple': True,
-                                  'typeClass': 'compound',
-                                  'value': [
-                                      {
-                                          'datasetContactEmail': {
-                                              'typeName': 'datasetContactEmail',
-                                              'multiple': False,
-                                              'typeClass': 'primitive',
-                                              'value': 'noreply@example.com'
-                                          }
-                                      }
-                                  ]
-                              },
-                              {
-                                  'typeName': 'dsDescription',
-                                  'multiple': True,
-                                  'typeClass': 'compound',
-                                  'value': [
-                                      {
-                                          'dsDescriptionValue': {
-                                              'typeName': 'dsDescriptionValue',
-                                              'multiple': False,
-                                              'typeClass': 'primitive',
-                                              'value': 'Non-publishing API capability probe; no dataset is created.'
-                                          }
-                                      }
-                                  ]
-                              },
-                              {
-                                  'typeName': 'subject',
-                                  'multiple': True,
-                                  'typeClass': 'controlledVocabulary',
-                                  'value': ['Computer and Information Science']
-                              }
+                              {'typeName': 'title', 'multiple': False, 'typeClass': 'primitive', 'value': 'Trinity Accord preservation permission probe'},
+                              {'typeName': 'author', 'multiple': True, 'typeClass': 'compound', 'value': [{'authorName': {'typeName': 'authorName', 'multiple': False, 'typeClass': 'primitive', 'value': 'Trinity Accord Preservation'}}]},
+                              {'typeName': 'datasetContact', 'multiple': True, 'typeClass': 'compound', 'value': [{'datasetContactEmail': {'typeName': 'datasetContactEmail', 'multiple': False, 'typeClass': 'primitive', 'value': 'noreply@example.com'}}]},
+                              {'typeName': 'dsDescription', 'multiple': True, 'typeClass': 'compound', 'value': [{'dsDescriptionValue': {'typeName': 'dsDescriptionValue', 'multiple': False, 'typeClass': 'primitive', 'value': 'Non-publishing API capability probe; no dataset is created.'}}]},
+                              {'typeName': 'subject', 'multiple': True, 'typeClass': 'controlledVocabulary', 'value': ['Computer and Information Science']}
                           ]
                       }
                   }
               }
           }
-          code, validation = call('/api/dataverses/root/validateDatasetJson', method='POST', payload=probe_dataset)
+          code, validation = call(f'/api/dataverses/{quoted_alias}/validateDatasetJson', method='POST', payload=probe_dataset)
           summary['add_dataset_permission_probe_http'] = code
           if isinstance(validation, dict):
               summary['add_dataset_permission_probe_status'] = validation.get('status')
               message = validation.get('message')
               if isinstance(message, str):
                   summary['add_dataset_permission_probe_message'] = message[:300]
-              data = validation.get('data')
-              if isinstance(data, dict):
-                  # Only boolean/status-like fields; never echo account PII.
-                  safe = {k: v for k, v in data.items() if isinstance(v, (bool, int)) or k in {'status'}}
-                  if safe:
-                      summary['add_dataset_permission_probe_data'] = safe
-
           summary['authenticated_api_ok'] = True
           summary['can_invoke_add_dataset_validation'] = (code == 200)
+
           print(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True))
           PY
