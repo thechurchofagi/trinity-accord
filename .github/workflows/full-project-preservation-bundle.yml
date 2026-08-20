@@ -18,8 +18,6 @@ jobs:
   build-and-verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 240
-    env:
-      BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle
     steps:
       - name: Checkout exact source baseline
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -69,6 +67,7 @@ jobs:
       - name: Build complete content-addressed project bundle with live heartbeat
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle
         shell: bash
         run: |
           set -euo pipefail
@@ -133,7 +132,6 @@ jobs:
               echo "[observer-heartbeat] largest_active_partial=$partial"
             } | tee -a "$HEARTBEAT_LOG" "$LAST_HEARTBEAT"
 
-            # Keep LAST_HEARTBEAT bounded to the most recent heartbeat only.
             tail -n 4 "$HEARTBEAT_LOG" > "$LAST_HEARTBEAT.tmp"
             mv "$LAST_HEARTBEAT.tmp" "$LAST_HEARTBEAT"
           done
@@ -161,6 +159,8 @@ jobs:
           echo "[observer] BUILD PASS"
 
       - name: Independently verify staged bundle offline
+        env:
+          BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle
         run: |
           set -euo pipefail
           echo "[stage] offline independent verification START $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
@@ -173,6 +173,8 @@ jobs:
           echo "[stage] offline independent verification PASS $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
       - name: Emit preservation telemetry
+        env:
+          BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -229,6 +231,8 @@ jobs:
           if-no-files-found: warn
 
       - name: Record bundle size before artifact upload
+        env:
+          BUNDLE_DIR: ${{ runner.temp }}/full-project-preservation-bundle
         run: |
           set -euo pipefail
           echo "[stage] artifact upload will begin next"
