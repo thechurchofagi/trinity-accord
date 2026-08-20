@@ -2,7 +2,7 @@
   "schema": "trinityaccord.repository-recovery-catalog.v1",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
-  "purpose": "Stable GitHub-independent discovery catalog for the complete published Trinity Accord recovery set.",
+  "purpose": "Stable discovery catalog for the complete Trinity Accord recovery set, including versioned Zenodo recovery publications and separately scoped institutional mirrors.",
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
@@ -88,6 +88,38 @@
       "restore_program_name": "restore-trinity-annex.py"
     }
   },
+  "external_institutional_mirrors": {
+    "harvard_dataverse": {
+      "persistent_id": "doi:10.7910/DVN/YUCG12",
+      "doi": "10.7910/DVN/YUCG12",
+      "server": "https://dataverse.harvard.edu",
+      "role": "second_institutional_non_amending_full_project_mirror",
+      "state_record": "preservation/harvard-dataverse-state.json",
+      "human_documentation": "preservation/FULL-PROJECT-PRESERVATION.md",
+      "source_workflow_run_id": 32368866492,
+      "source_git_commit_sha": "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
+      "archive_filename": "trinity-accord-full-project-preservation-bundle.github-artifact.zip.bin",
+      "archive_bytes": 1951603950,
+      "archive_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
+      "bundle_identity_sha256": "4930b9d6cd4968f3ba75de9dc46a396af7f37f97d128d1619ae829239656989d",
+      "verification_rule": "Treat Harvard as publicly verified only when preservation/harvard-dataverse-state.json has status=complete and public_readback_verified=true for the exact archive SHA-256 and byte count.",
+      "relationship_to_zenodo": {
+        "core_repository_concept_doi": "10.5281/zenodo.21739343",
+        "current_verified_repository_version_doi": "10.5281/zenodo.22020122",
+        "immutable_sequence_4_evidence_checkpoint_doi": "10.5281/zenodo.21859437",
+        "polygon_base_sidechain_doi": "10.5281/zenodo.22012616",
+        "supersedes_zenodo": false,
+        "byte_equivalent_to_current_zenodo_core_version": false,
+        "scope_note": "The Harvard object is a broader, later full-project preservation bundle assembled from the named Git source, every GitHub Release asset, and the separately published Polygon/Base DOI. It is not a new version of the Zenodo concept DOI and no byte-equality claim is made against Zenodo repository version 10.5281/zenodo.22020122."
+      },
+      "authority_boundary": {
+        "canonical_authority": "Bitcoin Originals only",
+        "canonical_authority_changed": false,
+        "interpretive_authority_granted": false,
+        "amendment_power_granted": false
+      }
+    }
+  },
   "recovery_order": [
     "Resolve and restore the latest core repository version from concept DOI 10.5281/zenodo.21739343, or retrieve the exact verified Arweave repository capsule mirror identified in core_repository.verified_arweave_mirror.",
     "Verify the recovered preservation manifest and tracked-file inventory.",
@@ -95,6 +127,7 @@
     "Run the checked-in current offline verifier for the 12-item Bitcoin v2 snapshot, plus the Ethereum and 175-item NFT verifiers; when restoring an older DOI, respect that version's historical Bitcoin scope.",
     "Restore evidence annex DOI 10.5281/zenodo.21753937.",
     "Restore Chronicle NFT annex DOI 10.5281/zenodo.21754229.",
+    "If preservation/harvard-dataverse-state.json records status=complete, Harvard DOI 10.7910/DVN/YUCG12 is an independently verified second-institutional full-project mirror and may be used as an additional recovery source; do not substitute its scope for the frozen Zenodo checkpoint semantics.",
     "Verify Bitcoin Originals, authority manifests, signatures, digest manifests and corrections-index before making authority-level claims."
   ],
   "github_required_for_discovery": false,
