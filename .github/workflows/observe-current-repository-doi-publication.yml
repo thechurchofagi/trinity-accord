@@ -23,6 +23,12 @@ jobs:
           ref: main
           fetch-depth: 1
 
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
       - name: Record failure only while authorization is still pending
         env:
           RUN_ID: ${{ github.event.workflow_run.id }}
