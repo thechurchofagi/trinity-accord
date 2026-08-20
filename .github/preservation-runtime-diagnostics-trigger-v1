@@ -1,5 +1,5 @@
 Preservation runtime diagnostics trigger v1.
 Read-only inspection of GitHub Actions runtime state for the full-project bundle and Harvard Dataverse publisher.
-Target source SHA: 3376516ec9f4927e38b987ec0eaeb3c23b7172ee
+Inspect formal source SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
 Run pinned actionlint v1.7.7 after runner-context fix.
 No evidence mutation. No external publication. No Arweave, Bitcoin, Ethereum, or Dataverse write.
