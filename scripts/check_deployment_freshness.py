@@ -90,6 +90,18 @@ HEAD_MODE_START_TAGS = {
     "template",
     "title",
 }
+AFTER_HEAD_MODE_START_TAGS = {
+    "base",
+    "basefont",
+    "bgsound",
+    "html",
+    "link",
+    "meta",
+    "noframes",
+    "script",
+    "style",
+    "template",
+}
 HEAD_TEXT_TAGS = {"noframes", "noscript", "script", "style", "title"}
 HTML_VOID_ELEMENTS = {
     "area",
@@ -134,8 +146,12 @@ SCHOLARLY_SCHEMA_TERMS = {
     "propertyID",
     "value",
 }
-SchemaContextState = tuple[bool, dict[str, bool], dict[str, str], bool]
-DEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (False, {}, {}, False)
+SchemaContextState = tuple[
+    bool, dict[str, bool], dict[str, str], bool, frozenset[str]
+]
+DEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (
+    False, {}, {}, False, frozenset()
+)
 
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
 # connection during propagation. Retry each individual live read so a single
@@ -346,6 +362,7 @@ class ScholarlyHTMLParser(HTMLParser):
         self.json_ld_blocks: list[str] = []
         self.errors: list[str] = []
         self._in_head = False
+        self._after_head = False
         self._head_seen = False
         self._body_started = False
         self._template_depth = 0
@@ -493,6 +510,20 @@ class ScholarlyHTMLParser(HTMLParser):
             and tag not in HEAD_MODE_START_TAGS
         ):
             self._in_head = False
+            self._after_head = False
+            self._body_started = True
+
+        # In the tree builder's after-head insertion mode, a small set of
+        # metadata-bearing tokens are processed using the head element pointer.
+        # Other HTML start tags begin the body-effective portion of the document.
+        if (
+            namespace == "html"
+            and self._after_head
+            and self._template_depth == 0
+            and not self._head_text_stack
+            and tag not in AFTER_HEAD_MODE_START_TAGS
+        ):
+            self._after_head = False
             self._body_started = True
 
         if (
@@ -503,6 +534,7 @@ class ScholarlyHTMLParser(HTMLParser):
         ):
             self._body_started = True
             self._in_head = False
+            self._after_head = False
 
         if (
             namespace == "html"
@@ -512,6 +544,7 @@ class ScholarlyHTMLParser(HTMLParser):
         ):
             self._head_seen = True
             self._in_head = True
+            self._after_head = False
 
         # Foreign-content self-closing syntax is acknowledged; HTML
         # self-closing syntax on non-void elements is ignored.
@@ -526,7 +559,7 @@ class ScholarlyHTMLParser(HTMLParser):
         if (
             namespace == "html"
             and tag in HEAD_TEXT_TAGS
-            and self._in_head
+            and (self._in_head or self._after_head)
             and self._template_depth == 0
         ):
             self._head_text_stack.append(tag)
@@ -538,7 +571,7 @@ class ScholarlyHTMLParser(HTMLParser):
         if (
             namespace == "html"
             and tag == "meta"
-            and self._in_head
+            and (self._in_head or self._after_head)
             and self._template_depth == 0
         ):
             name_values = [
@@ -594,12 +627,13 @@ class ScholarlyHTMLParser(HTMLParser):
         if self._in_json_ld:
             self._json_ld_chunks.append(data)
         if (
-            self._in_head
+            (self._in_head or self._after_head)
             and self._template_depth == 0
             and not self._head_text_stack
-            and data.strip()
+            and data.strip("\t\n\f\r ")
         ):
             self._in_head = False
+            self._after_head = False
             self._body_started = True
 
     def handle_endtag(self, tag: str) -> None:
@@ -616,11 +650,12 @@ class ScholarlyHTMLParser(HTMLParser):
             self._json_ld_chunks = []
         if (
             tag in {"body", "html", "br"}
-            and self._in_head
+            and (self._in_head or self._after_head)
             and self._template_depth == 0
             and not self._head_text_stack
         ):
             self._in_head = False
+            self._after_head = False
             self._body_started = True
         if self._head_text_stack and tag == self._head_text_stack[-1]:
             self._head_text_stack.pop()
@@ -634,6 +669,7 @@ class ScholarlyHTMLParser(HTMLParser):
             and self._template_depth == 0
         ):
             self._in_head = False
+            self._after_head = True
         if (
             tag == "body"
             and matched_namespace == "html"
@@ -641,6 +677,7 @@ class ScholarlyHTMLParser(HTMLParser):
         ):
             self._body_started = True
             self._in_head = False
+            self._after_head = False
 
 
 def sha256(data: bytes) -> str:
@@ -796,25 +833,38 @@ def _schema_context_state(
     context: object,
     inherited: SchemaContextState,
 ) -> SchemaContextState:
-    """Track the Schema vocabulary, relevant term mappings, prefixes, and unsupported contexts."""
+    """Track Schema vocabulary, term mappings, prefixes, unsupported contexts, and protection."""
     if context is None:
         return DEFAULT_SCHEMA_CONTEXT_STATE
 
-    vocab_is_schema, inherited_overrides, inherited_prefixes, unsupported = inherited
+    (
+        vocab_is_schema,
+        inherited_overrides,
+        inherited_prefixes,
+        unsupported,
+        inherited_protected,
+    ) = inherited
     term_overrides = dict(inherited_overrides)
     prefixes = dict(inherited_prefixes)
+    protected_terms = set(inherited_protected)
 
     if isinstance(context, str):
         is_schema = _normalized_schema_url(context) in SCHEMA_ORG_REMOTE_CONTEXTS
         if is_schema:
-            return (True, term_overrides, prefixes, unsupported)
-        return (vocab_is_schema, term_overrides, prefixes, True)
+            return (
+                True, term_overrides, prefixes, unsupported, frozenset(protected_terms)
+            )
+        return (
+            vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+        )
 
     if isinstance(context, dict):
         # Resolving arbitrary imported contexts would require network dereference.
         # This verifier is deterministic/offline, so imported contexts fail closed.
         if "@import" in context:
-            return (vocab_is_schema, term_overrides, prefixes, True)
+            return (
+                vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+            )
 
         if "@vocab" in context:
             raw_vocab = context.get("@vocab")
@@ -825,14 +875,34 @@ def _schema_context_state(
             )
             vocab_is_schema = expanded_vocab in SCHEMA_ORG_VOCAB_BASES
 
-        # Context definitions may use compact IRIs in later term mappings. Build
-        # direct prefix definitions first, iterating so same-context prefixes can
-        # depend on an earlier resolved prefix. Redefinition removes stale prefixes.
         definitions = [
             (term, definition)
             for term, definition in context.items()
             if not term.startswith("@")
         ]
+
+        # JSON-LD rejects a later redefinition of a protected term. This verifier
+        # intentionally fails closed for any redefinition of a protected scholarly
+        # term rather than attempting to recover from an invalid active context.
+        context_protected = context.get("@protected") is True
+        for term, definition in definitions:
+            if term in SCHOLARLY_SCHEMA_TERMS and term in protected_terms:
+                unsupported = True
+            if (
+                term in SCHOLARLY_SCHEMA_TERMS
+                and (
+                    context_protected
+                    or (
+                        isinstance(definition, dict)
+                        and definition.get("@protected") is True
+                    )
+                )
+            ):
+                protected_terms.add(term)
+
+        # Context definitions may use compact IRIs in later term mappings. Build
+        # direct prefix definitions first, iterating so same-context prefixes can
+        # depend on an earlier resolved prefix. Redefinition removes stale prefixes.
         for term, _ in definitions:
             prefixes.pop(term, None)
         for _ in range(max(1, len(definitions))):
@@ -850,7 +920,13 @@ def _schema_context_state(
                 term_overrides[term] = _term_maps_to_schema_term(
                     context.get(term), term, vocab_is_schema, prefixes
                 )
-        return (vocab_is_schema, term_overrides, prefixes, unsupported)
+        return (
+            vocab_is_schema,
+            term_overrides,
+            prefixes,
+            unsupported,
+            frozenset(protected_terms),
+        )
 
     if isinstance(context, list):
         state = inherited
@@ -858,7 +934,9 @@ def _schema_context_state(
             state = _schema_context_state(item, state)
         return state
 
-    return (vocab_is_schema, term_overrides, prefixes, True)
+    return (
+        vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+    )
 
 
 def _context_propagates(context: object) -> bool:
@@ -915,7 +993,7 @@ def _property_scoped_contexts(
 
 
 def _schema_term_is_valid(state: SchemaContextState, term: str) -> bool:
-    vocab_is_schema, term_overrides, _prefixes, unsupported = state
+    vocab_is_schema, term_overrides, _prefixes, unsupported, _protected = state
     if unsupported:
         return False
     return term_overrides.get(term, vocab_is_schema)
@@ -1222,7 +1300,7 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.sameAs missing {expected!r}"
             )
 
-    identifier_state, _identifier_scopes = _property_child_state(
+    identifier_state, identifier_scopes = _property_child_state(
         "identifier",
         schema_state,
         child_schema_state,
@@ -1238,9 +1316,30 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         for identifier in identifiers:
             if isinstance(identifier, dict):
                 item_state = identifier_state
+                item_scopes = identifier_scopes
                 if "@context" in identifier:
-                    item_state = _schema_context_state(
-                        identifier.get("@context"), item_state
+                    identifier_context = identifier.get("@context")
+                    item_state = _schema_context_state(identifier_context, item_state)
+                    item_scopes = _property_scoped_contexts(
+                        identifier_context, item_scopes
+                    )
+                identifier_type = identifier.get("@type")
+                identifier_type_terms = (
+                    [identifier_type]
+                    if isinstance(identifier_type, str)
+                    else [
+                        term for term in identifier_type if isinstance(term, str)
+                    ]
+                    if isinstance(identifier_type, list)
+                    else []
+                )
+                for type_term in sorted(identifier_type_terms):
+                    if type_term not in item_scopes:
+                        continue
+                    type_context = item_scopes[type_term]
+                    item_state = _schema_context_state(type_context, item_state)
+                    item_scopes = _property_scoped_contexts(
+                        type_context, item_scopes
                     )
                 for field in ("propertyID", "value"):
                     if not _schema_term_is_valid(item_state, field):
@@ -1248,7 +1347,10 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                             f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.identifier.{field} "
                             f"is not mapped to Schema.org/{field}"
                         )
-                property_values.add((identifier.get("propertyID"), identifier.get("value")))
+                property_values.add(
+                    (identifier.get("propertyID"), identifier.get("value"))
+                )
+
     expected_properties = {
         ("Technical report number", SCHOLARLY_REPORT_NUMBER),
         ("DOI", SCHOLARLY_DOI),

@@ -654,3 +654,72 @@ def test_absolute_schema_iri_is_not_rewritten_by_https_prefix() -> None:
     errors: list[str] = []
     deployment.check_scholarly_landing(page, errors)
     assert errors == []
+
+
+def test_non_html_whitespace_character_token_implicitly_ends_head() -> None:
+    for text in ("\u00a0", "\v"):
+        parser = deployment.ScholarlyHTMLParser()
+        parser.feed(
+  "<!doctype html><html><head>"
+  + text
+  + '<meta name="citation_title" content="after-non-html-space">'
+  + "</html>"
+        )
+        parser.close()
+
+        assert "citation_title" not in parser.meta
+        assert parser._body_started is True
+        assert parser._in_head is False
+
+
+def test_after_head_meta_is_processed_as_head_metadata() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head></head>"
+        '<meta name="citation_title" content="after-head">'
+        "<body></body></html>"
+    )
+    parser.close()
+
+    assert parser.meta.get("citation_title") == ["after-head"]
+    assert parser.errors == []
+
+
+def test_identifier_type_scoped_context_is_applied_to_properties() -> None:
+    page = _landing({
+        "@context": {
+  "@vocab": "https://schema.org/",
+  "PropertyValue": {
+      "@id": "https://schema.org/PropertyValue",
+      "@context": {
+          "propertyID": "https://example.invalid/not-property-id"
+      },
+  },
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any(
+        "ScholarlyArticle.identifier.propertyID is not mapped" in error
+        for error in errors
+    )
+
+
+def test_protected_schema_term_redefinition_fails_closed() -> None:
+    page = _landing({
+        "@context": [
+  {
+      "@vocab": "https://schema.org/",
+      "name": {
+          "@id": "https://example.invalid/not-name",
+          "@protected": True,
+      },
+  },
+  {"name": "https://schema.org/name"},
+        ],
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors
