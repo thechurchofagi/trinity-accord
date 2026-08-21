@@ -8,6 +8,14 @@ permalink: /research/
 
 This page collects bounded research outputs about the Trinity Accord. Research papers, technical reports, citations, and repository deposits are **non-amending interpretation and analysis**. They do not join or alter the three Bitcoin Originals.
 
+## Research positioning
+
+For researchers approaching this artifact, see the bounded research positioning guide:
+
+- [Research Positioning](/research/research-positioning/)
+
+The guide maps possible research contexts including digital preservation, archival studies, history of technology, STS, AI ethics, and provenance research. It does not claim external consensus or scientific validation.
+
 ## Current technical report
 
 ### Designing a Verifiable, Non-Amending Civilizational Memory Record for Future AI Agents
