@@ -17,6 +17,7 @@ COMMANDS = {
     "pip": ["python3", "-m", "pip", "--version"],
     "node": ["node", "--version"],
     "npm": ["npm", "--version"],
+    "go": ["go", "version"],
     "git": ["git", "--version"],
     "gh": ["gh", "--version"],
     "curl": ["curl", "--version"],
