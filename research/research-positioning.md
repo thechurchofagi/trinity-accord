@@ -1,3 +1,9 @@
+---
+title: "Research Positioning"
+description: "A bounded research-classification guide for studying the Trinity Accord across digital preservation, archival studies, STS, AI ethics, and provenance research."
+permalink: /research/research-positioning/
+---
+
 # Research Positioning
 
 ## Purpose
