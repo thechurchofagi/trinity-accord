@@ -56,16 +56,21 @@ jobs:
       - name: Resolve exact source preservation run
         id: source
         shell: bash
+        env:
+          EVENT_SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+          EVENT_SOURCE_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          INPUT_SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          INPUT_SOURCE_HEAD_SHA: ${{ inputs.source_head_sha }}
         run: |
           set -euo pipefail
           source_run_id=""
           source_head_sha=""
           if [ "$GITHUB_EVENT_NAME" = "workflow_run" ]; then
-            source_run_id='${{ github.event.workflow_run.id }}'
-            source_head_sha='${{ github.event.workflow_run.head_sha }}'
+            source_run_id="$EVENT_SOURCE_RUN_ID"
+            source_head_sha="$EVENT_SOURCE_HEAD_SHA"
           elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            source_run_id='${{ inputs.source_run_id }}'
-            source_head_sha='${{ inputs.source_head_sha }}'
+            source_run_id="$INPUT_SOURCE_RUN_ID"
+            source_head_sha="$INPUT_SOURCE_HEAD_SHA"
           fi
           echo "source_run_id=$source_run_id" >> "$GITHUB_OUTPUT"
           echo "source_head_sha=$source_head_sha" >> "$GITHUB_OUTPUT"
