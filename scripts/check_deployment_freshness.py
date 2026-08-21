@@ -181,6 +181,18 @@ STATIC_PAGE_MARKERS = {
         "Current verification model",
         "Retired active guidance",
     ],
+    "/research/trinity-accord-design-and-limits/": [
+        'name="citation_title"',
+        'name="citation_author"',
+        'name="citation_publication_date"',
+        'name="citation_doi"',
+        'name="citation_pdf_url"',
+        'name="citation_technical_report_institution"',
+        'name="citation_technical_report_number"',
+        '"@type": "ScholarlyArticle"',
+        "10.5281/zenodo.21699878",
+        "TA-TR-2026-01",
+    ],
 }
 STATIC_SOURCE_FILES = [
     "index.md",
@@ -205,6 +217,7 @@ STATIC_SOURCE_FILES = [
     "agent-start.md",
     "agent-propagate.md",
     "agent-record-chain-guidance/index.html",
+    "research/trinity-accord-design-and-limits/index.md",
 ]
 
 
