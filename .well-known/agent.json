@@ -59,6 +59,7 @@
     "final_inclusion_requires_public_status_and_index_readback": true
   },
   "discovery": {
+    "discovery_sitemap": "/sitemap-discovery.xml",
     "core_sitemap": "/sitemap-core.xml",
     "complete_sitemap": "/sitemap.xml",
     "structured_metadata": "/metadata.json",
