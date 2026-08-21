@@ -9,11 +9,13 @@ from __future__ import annotations
 import argparse
 import hashlib
 import http.client
+import json
 import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,6 +43,33 @@ FORBIDDEN_ACTIVE = [
     "/api/gateway-builder-route-map.v1.json",
     "/api/gateway-workflows.v1.json",
 ]
+
+SCHOLARLY_LANDING_PATH = "/research/trinity-accord-design-and-limits/"
+SCHOLARLY_TITLE = (
+    "Designing a Verifiable, Non-Amending Civilizational Memory Record for "
+    "Future AI Agents: The Trinity Accord Case Study"
+)
+SCHOLARLY_DOI = "10.5281/zenodo.21699878"
+SCHOLARLY_REPORT_NUMBER = "TA-TR-2026-01"
+SCHOLARLY_HTML_URL = "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/"
+SCHOLARLY_PDF_URL = (
+    "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/"
+    "trinity-accord-design-and-limits-v1.1.pdf"
+)
+SCHOLARLY_DOI_URL = f"https://doi.org/{SCHOLARLY_DOI}"
+SCHOLARLY_ZENODO_URL = "https://zenodo.org/records/21699878"
+SCHOLARLY_META_EXPECTED = {
+    "citation_title": SCHOLARLY_TITLE,
+    "citation_author": "Hongju Liu",
+    "citation_publication_date": "2026/07/29",
+    "citation_online_date": "2026/07/29",
+    "citation_doi": SCHOLARLY_DOI,
+    "citation_pdf_url": SCHOLARLY_PDF_URL,
+    "citation_fulltext_html_url": SCHOLARLY_HTML_URL,
+    "citation_technical_report_institution": "The Trinity Accord Project",
+    "citation_technical_report_number": SCHOLARLY_REPORT_NUMBER,
+    "citation_language": "en",
+}
 
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
 # connection during propagation. Retry each individual live read so a single
@@ -181,17 +210,9 @@ STATIC_PAGE_MARKERS = {
         "Current verification model",
         "Retired active guidance",
     ],
-    "/research/trinity-accord-design-and-limits/": [
-        'name="citation_title"',
-        'name="citation_author"',
-        'name="citation_publication_date"',
-        'name="citation_doi"',
-        'name="citation_pdf_url"',
-        'name="citation_technical_report_institution"',
-        'name="citation_technical_report_number"',
-        '"@type": "ScholarlyArticle"',
-        "10.5281/zenodo.21699878",
-        "TA-TR-2026-01",
+    SCHOLARLY_LANDING_PATH: [
+        "Trinity Accord Technical Report",
+        "Preprint, not peer reviewed",
     ],
 }
 STATIC_SOURCE_FILES = [
@@ -219,6 +240,38 @@ STATIC_SOURCE_FILES = [
     "agent-record-chain-guidance/index.html",
     "research/trinity-accord-design-and-limits/index.md",
 ]
+
+
+class ScholarlyHTMLParser(HTMLParser):
+    """Extract named meta values and raw JSON-LD blocks from rendered HTML."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.meta: dict[str, list[str]] = {}
+        self.json_ld_blocks: list[str] = []
+        self._in_json_ld = False
+        self._json_ld_chunks: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "meta":
+            name = attributes.get("name")
+            content = attributes.get("content")
+            if name is not None:
+                self.meta.setdefault(name, []).append(content or "")
+        elif tag == "script" and (attributes.get("type") or "").lower() == "application/ld+json":
+            self._in_json_ld = True
+            self._json_ld_chunks = []
+
+    def handle_data(self, data: str) -> None:
+        if self._in_json_ld:
+            self._json_ld_chunks.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "script" and self._in_json_ld:
+            self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
+            self._in_json_ld = False
+            self._json_ld_chunks = []
 
 
 def sha256(data: bytes) -> str:
@@ -305,6 +358,124 @@ def check_forbidden(path: str, text: str, errors: list[str]) -> None:
                 )
 
 
+def collect_scholarly_articles(value: object, articles: list[dict]) -> None:
+    if isinstance(value, dict):
+        article_type = value.get("@type")
+        if article_type == "ScholarlyArticle" or (
+            isinstance(article_type, list) and "ScholarlyArticle" in article_type
+        ):
+            articles.append(value)
+        for child in value.values():
+            collect_scholarly_articles(child, articles)
+    elif isinstance(value, list):
+        for child in value:
+            collect_scholarly_articles(child, articles)
+
+
+def check_scholarly_landing(page: str, errors: list[str]) -> None:
+    parser = ScholarlyHTMLParser()
+    try:
+        parser.feed(page)
+        parser.close()
+    except Exception as exc:  # noqa: BLE001 - diagnostics should report malformed HTML
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: failed to parse rendered HTML: {exc}")
+        return
+
+    for name, expected in SCHOLARLY_META_EXPECTED.items():
+        observed = parser.meta.get(name, [])
+        if expected not in observed:
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: {name} expected {expected!r}, "
+                f"observed {observed!r}"
+            )
+
+    documents: list[object] = []
+    for raw in parser.json_ld_blocks:
+        if not raw:
+            continue
+        try:
+            documents.append(json.loads(raw))
+        except json.JSONDecodeError as exc:
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: invalid rendered JSON-LD: {exc}"
+            )
+
+    articles: list[dict] = []
+    for document in documents:
+        collect_scholarly_articles(document, articles)
+
+    matching = [article for article in articles if article.get("name") == SCHOLARLY_TITLE]
+    if not matching:
+        observed_names = [article.get("name") for article in articles]
+        errors.append(
+            f"{SCHOLARLY_LANDING_PATH}: rendered ScholarlyArticle with exact title "
+            f"not found; observed={observed_names!r}"
+        )
+        return
+
+    article = matching[0]
+    expected_fields = {
+        "headline": SCHOLARLY_TITLE,
+        "datePublished": "2026-07-29",
+        "version": "1.1",
+        "url": SCHOLARLY_HTML_URL,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": True,
+    }
+    for field, expected in expected_fields.items():
+        if article.get(field) != expected:
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.{field} expected "
+                f"{expected!r}, observed {article.get(field)!r}"
+            )
+
+    encoding = article.get("encoding")
+    if not isinstance(encoding, dict):
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.encoding is missing")
+    else:
+        if encoding.get("contentUrl") != SCHOLARLY_PDF_URL:
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle PDF contentUrl mismatch: "
+                f"{encoding.get('contentUrl')!r}"
+            )
+        if encoding.get("encodingFormat") != "application/pdf":
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle encodingFormat mismatch: "
+                f"{encoding.get('encodingFormat')!r}"
+            )
+
+    same_as = article.get("sameAs", [])
+    if isinstance(same_as, str):
+        same_as = [same_as]
+    if not isinstance(same_as, list):
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.sameAs is not a list")
+        same_as = []
+    for expected in [SCHOLARLY_DOI_URL, SCHOLARLY_ZENODO_URL]:
+        if expected not in same_as:
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.sameAs missing {expected!r}"
+            )
+
+    identifiers = article.get("identifier", [])
+    if isinstance(identifiers, dict):
+        identifiers = [identifiers]
+    property_values: set[tuple[object, object]] = set()
+    if isinstance(identifiers, list):
+        for identifier in identifiers:
+            if isinstance(identifier, dict):
+                property_values.add((identifier.get("propertyID"), identifier.get("value")))
+    expected_properties = {
+        ("Technical report number", SCHOLARLY_REPORT_NUMBER),
+        ("DOI", SCHOLARLY_DOI),
+    }
+    missing_properties = expected_properties - property_values
+    if missing_properties:
+        errors.append(
+            f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle identifier properties missing "
+            f"{sorted(missing_properties)!r}; observed={sorted(property_values, key=repr)!r}"
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     src = parser.add_mutually_exclusive_group(required=True)
@@ -359,6 +530,11 @@ def main() -> int:
                 errors.append(f"{path}: missing current static marker {marker!r}")
         else:
             print(f"{path}: current static markers present")
+
+        if path == SCHOLARLY_LANDING_PATH:
+            check_scholarly_landing(page, errors)
+            if not any(error.startswith(f"{SCHOLARLY_LANDING_PATH}:") for error in errors):
+                print(f"{path}: exact scholarly metadata and JSON-LD values verified")
 
     if errors:
         print("FAIL: deployment freshness check errors:")
