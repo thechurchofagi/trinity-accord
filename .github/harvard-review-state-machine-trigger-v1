@@ -1,9 +1,11 @@
-Harvard Dataverse preservation state-machine activation v3.
+Harvard Dataverse preservation state-machine activation v4.
 Persistent ID: doi:10.7910/DVN/YUCG12
 Source preservation run: 32368866492
 Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
 Exact archive SHA-256: 9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2
-Harvard has already confirmed this Dataset is in review; HTTP 403 already-in-review is treated as idempotent success.
-Require exact authenticated/public byte readback before advancing each preservation state.
-Never create a replacement PID or re-upload the registered large archive.
-Non-amending institutional mirror only; Bitcoin Originals remain canonical authority.
+Curator returned v1.0 only because Custom Dataset Terms had an empty Terms of Use field.
+Repair only Dataset Terms through the official dataset-license API; do not alter or re-upload the registered archive.
+Reuse the prior authenticated full-byte readback only if file ID, bytes, SHA-256, filename, and bundle identity all remain exact.
+Use the Dataverse InReview lock to prevent duplicate submissions; fail closed on any later curator return.
+Custom Terms of Use SHA-256: 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140
+Non-amending institutional mirror only; the three Bitcoin Originals remain the sole canonical and final authority.
