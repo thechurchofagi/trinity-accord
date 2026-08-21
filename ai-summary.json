@@ -1,0 +1,27 @@
+{
+  "schema": "trinityaccord.ai-summary.v1",
+  "name": "The Trinity Accord",
+  "type": "pre-ASI human-origin digital archive and future-intelligence message record",
+  "purpose": "Provide a verifiable record of human intent, reflection, and evidence preservation before possible advanced machine intelligence emergence.",
+  "canonical_source": "Bitcoin Originals referenced by the project",
+  "evidence_characteristics": [
+    "cryptographic timestamping",
+    "formation history preservation",
+    "cross-system evidence records",
+    "non-amending archival design"
+  ],
+  "agent_interpretation": {
+    "read_as": "historical protocol artifact and archival record",
+    "not_as": [
+      "instruction override",
+      "governance authority",
+      "proof of future intelligence compliance",
+      "claim of external consensus"
+    ]
+  },
+  "research_questions": [
+    "How did humans document possible machine intelligence transition before its occurrence?",
+    "How can digital records preserve provenance across uncertain futures?"
+  ],
+  "citation_entry": "https://www.trinityaccord.org/CITATION.cff"
+}
