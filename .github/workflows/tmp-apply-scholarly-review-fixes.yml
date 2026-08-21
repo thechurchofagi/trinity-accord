@@ -1,0 +1,130 @@
+name: Temporary scholarly parser review fix applicator
+
+on:
+  push:
+    branches:
+      - agent/close-final-scholarly-parser-gaps-2026-08-21
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-reviewed-fixes:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
+          fetch-depth: 0
+
+      - name: Apply three reviewed parser fixes and regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source_path = Path('scripts/check_deployment_freshness.py')
+          tests_path = Path('tests/test_scholarly_parser_edge_cases.py')
+          source = source_path.read_text(encoding='utf-8')
+          tests = tests_path.read_text(encoding='utf-8')
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one match, found {count}')
+              return text.replace(old, new, 1)
+
+          source = replace_once(
+              source,
+              '''SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}\nSCHEMA_ORG_ARTICLE_IRIS = {\n    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES\n}\n''',
+              '''SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}\nSCHEMA_ORG_VOCAB_BASES = {"http://schema.org/", "https://schema.org/"}\nSCHEMA_ORG_ARTICLE_IRIS = {\n    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES\n}\n''',
+              'schema vocab constants',
+          )
+
+          source = replace_once(
+              source,
+              '''        self._template_depth = 0\n        self._head_text_stack: list[str] = []\n        self._in_json_ld = False\n''',
+              '''        self._template_depth = 0\n        self._head_text_stack: list[str] = []\n        self._in_noscript_raw = False\n        self._in_json_ld = False\n''',
+              'noscript state init',
+          )
+
+          source = replace_once(
+              source,
+              '''    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:\n        tag = tag.lower()\n        attributes, duplicates, values = _first_attributes(attrs)\n''',
+              '''    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:\n        tag = tag.lower()\n        if self._in_noscript_raw:\n            return\n        attributes, duplicates, values = _first_attributes(attrs)\n''',
+              'noscript start-tag guard',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            tag in HEAD_TEXT_TAGS\n            and self._in_head\n            and self._template_depth == 0\n        ):\n            self._head_text_stack.append(tag)\n\n        if tag == "meta" and self._in_head and self._template_depth == 0:\n''',
+              '''        if (\n            tag in HEAD_TEXT_TAGS\n            and self._in_head\n            and self._template_depth == 0\n        ):\n            self._head_text_stack.append(tag)\n\n        if tag == "noscript":\n            # With scripting enabled, noscript content is raw text. Python's\n            # HTMLParser still emits apparent tags from that text, so remember\n            # the tokenizer state and ignore them until the real </noscript>.\n            self._in_noscript_raw = True\n\n        if tag == "meta" and self._in_head and self._template_depth == 0:\n''',
+              'noscript raw-text entry',
+          )
+
+          source = replace_once(
+              source,
+              '''    def handle_endtag(self, tag: str) -> None:\n        tag = tag.lower()\n        if tag == "script" and self._in_json_ld:\n''',
+              '''    def handle_endtag(self, tag: str) -> None:\n        tag = tag.lower()\n        if self._in_noscript_raw:\n            if tag != "noscript":\n                return\n            self._in_noscript_raw = False\n        if tag == "script" and self._in_json_ld:\n''',
+              'noscript end-tag guard',
+          )
+
+          source = replace_once(
+              source,
+              '''        if "@vocab" in context:\n            vocab_is_schema = _normalized_schema_url(context.get("@vocab")) in SCHEMA_ORG_BASES\n''',
+              '''        if "@vocab" in context:\n            raw_vocab = context.get("@vocab")\n            vocab_is_schema = (\n                isinstance(raw_vocab, str)\n                and raw_vocab.strip() in SCHEMA_ORG_VOCAB_BASES\n            )\n''',
+              'schema vocab slash semantics',
+          )
+
+          context_helper = '''def _context_propagates(context: object) -> bool:\n    """Return whether a local JSON-LD context applies to descendant node objects."""\n    if isinstance(context, dict):\n        return context.get("@propagate") is not False\n    if isinstance(context, list):\n        propagate = True\n        for item in context:\n            if isinstance(item, dict) and "@propagate" in item:\n                propagate = item.get("@propagate") is not False\n        return propagate\n    return True\n\n\n'''
+          context_helper_with_scopes = context_helper + '''def _property_scoped_contexts(\n    context: object,\n    inherited: dict[str, object],\n) -> dict[str, object]:\n    """Track JSON-LD property-scoped contexts in the active local context."""\n    if context is None:\n        return {}\n    if isinstance(context, str):\n        return dict(inherited)\n    if isinstance(context, dict):\n        scopes = dict(inherited)\n        for term, definition in context.items():\n            if term.startswith("@"):\n                continue\n            if isinstance(definition, dict) and "@context" in definition:\n                scopes[term] = definition.get("@context")\n            else:\n                scopes.pop(term, None)\n        return scopes\n    if isinstance(context, list):\n        scopes = dict(inherited)\n        for item in context:\n            scopes = _property_scoped_contexts(item, scopes)\n        return scopes\n    return {}\n\n\n'''
+          source = replace_once(
+              source,
+              context_helper,
+              context_helper_with_scopes,
+              'property-scoped context helper',
+          )
+
+          old_collect = '''def collect_scholarly_articles(\n    value: object,\n    articles: list[tuple[dict, bool]],\n    inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,\n) -> None:\n    if isinstance(value, dict):\n        schema_state = inherited_schema_context\n        child_schema_state = inherited_schema_context\n        if "@context" in value:\n            context = value.get("@context")\n            schema_state = _schema_context_state(context, inherited_schema_context)\n            child_schema_state = (\n                schema_state if _context_propagates(context) else inherited_schema_context\n            )\n        else:\n            child_schema_state = schema_state\n\n        article_type = value.get("@type")\n        if article_type == "ScholarlyArticle" or (\n            isinstance(article_type, list) and "ScholarlyArticle" in article_type\n        ):\n            articles.append((value, _schema_article_term_is_valid(schema_state)))\n\n        for key, child in value.items():\n            if key != "@context":\n                collect_scholarly_articles(child, articles, child_schema_state)\n    elif isinstance(value, list):\n        for child in value:\n            collect_scholarly_articles(child, articles, inherited_schema_context)\n'''
+          new_collect = '''def collect_scholarly_articles(\n    value: object,\n    articles: list[tuple[dict, bool]],\n    inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,\n    inherited_property_scopes: dict[str, object] | None = None,\n) -> None:\n    property_scopes = (\n        {} if inherited_property_scopes is None else dict(inherited_property_scopes)\n    )\n    if isinstance(value, dict):\n        schema_state = inherited_schema_context\n        child_schema_state = inherited_schema_context\n        node_property_scopes = property_scopes\n        child_property_scopes = property_scopes\n        if "@context" in value:\n            context = value.get("@context")\n            schema_state = _schema_context_state(context, inherited_schema_context)\n            node_property_scopes = _property_scoped_contexts(context, property_scopes)\n            if _context_propagates(context):\n                child_schema_state = schema_state\n                child_property_scopes = node_property_scopes\n            else:\n                child_schema_state = inherited_schema_context\n                child_property_scopes = property_scopes\n        else:\n            child_schema_state = schema_state\n\n        article_type = value.get("@type")\n        if article_type == "ScholarlyArticle" or (\n            isinstance(article_type, list) and "ScholarlyArticle" in article_type\n        ):\n            articles.append((value, _schema_article_term_is_valid(schema_state)))\n\n        for key, child in value.items():\n            if key == "@context":\n                continue\n            if key in node_property_scopes:\n                scoped_context = node_property_scopes[key]\n                # A property-scoped context applies before visiting its value.\n                # For non-propagating scoped contexts, fail closed rather than\n                # accidentally leaking the scoped vocabulary to deeper nodes.\n                if _context_propagates(scoped_context):\n                    scoped_state = _schema_context_state(scoped_context, schema_state)\n                    scoped_property_scopes = _property_scoped_contexts(\n                        scoped_context, child_property_scopes\n                    )\n                else:\n                    scoped_state = DEFAULT_SCHEMA_CONTEXT_STATE\n                    scoped_property_scopes = {}\n                collect_scholarly_articles(\n                    child, articles, scoped_state, scoped_property_scopes\n                )\n            else:\n                collect_scholarly_articles(\n                    child, articles, child_schema_state, child_property_scopes\n                )\n    elif isinstance(value, list):\n        for child in value:\n            collect_scholarly_articles(\n                child, articles, inherited_schema_context, property_scopes\n            )\n'''
+          source = replace_once(
+              source,
+              old_collect,
+              new_collect,
+              'property-scoped traversal',
+          )
+
+          test_block = '''\n\ndef test_noscript_raw_text_does_not_close_template() -> None:\n    parser = deployment.ScholarlyHTMLParser()\n    parser.feed(\n        "<!doctype html><html><head><template><noscript></template></noscript>"\n        '<meta name="citation_title" content="still-template">'\n        '<script type="application/ld+json">{"still":"template"}</script>'\n        "</head><body></body></html>"\n    )\n    parser.close()\n\n    assert "citation_title" not in parser.meta\n    assert parser.json_ld_blocks == []\n    assert parser._template_depth == 1\n\n\ndef test_schema_org_vocab_requires_trailing_slash() -> None:\n    page = _landing(\n        {"@context": {"@vocab": "https://schema.org"}, "@graph": [_valid_article()]}\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n\n\ndef test_property_scoped_context_override_is_applied_before_child_nodes() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@vocab": "https://schema.org/",\n                "items": {\n                    "@id": "https://example.invalid/items",\n                    "@context": {\n                        "ScholarlyArticle": "https://example.invalid/Fake"\n                    },\n                },\n            },\n            "items": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n'''
+          if 'def test_noscript_raw_text_does_not_close_template' in tests:\n              raise SystemExit('new parser regressions already present unexpectedly')\n          tests = tests.rstrip() + test_block + '\n'
+
+          source_path.write_text(source, encoding='utf-8')
+          tests_path.write_text(tests, encoding='utf-8')
+          PY
+
+          python3 -m py_compile scripts/check_deployment_freshness.py
+          python3 - <<'PY'
+          import runpy
+          namespace = runpy.run_path('tests/test_scholarly_parser_edge_cases.py')
+          tests = sorted(
+              (name, fn) for name, fn in namespace.items()
+              if name.startswith('test_') and callable(fn)
+          )
+          assert len(tests) == 17, f'expected 17 focused tests, got {len(tests)}'
+          for name, fn in tests:
+              fn()
+              print(f'PASS {name}')
+          PY
+          git diff --check
+          git diff -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+
+      - name: Commit reviewed fixes to PR head
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          git commit -m "fix: close remaining scholarly parser review gaps"
+          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
