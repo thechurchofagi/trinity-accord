@@ -1,0 +1,208 @@
+name: Temporary fifth scholarly parser review applicator
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+    paths:
+      - ".github/workflows/tmp-close-fifth-scholarly-review.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fifth-review-fixes:
+    if: github.event.pull_request.number == 1071 && github.event.pull_request.head.ref == 'agent/close-final-scholarly-parser-gaps-2026-08-21'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+
+      - name: Apply fifth-round Codex review fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source_path = Path('scripts/check_deployment_freshness.py')
+          tests_path = Path('tests/test_scholarly_parser_edge_cases.py')
+          source = source_path.read_text(encoding='utf-8')
+          tests = tests_path.read_text(encoding='utf-8')
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one match, found {count}')
+              return text.replace(old, new, 1)
+
+          source = replace_once(
+              source,
+              '''SCHEMA_ORG_ARTICLE_IRIS = {\n    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES\n}\nSchemaContextState = tuple[bool, bool | None]\nDEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (False, None)\n''',
+              '''SCHEMA_ORG_ARTICLE_IRIS = {\n    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES\n}\nSCHOLARLY_SCHEMA_TERMS = {\n    "ScholarlyArticle",\n    "name",\n    "headline",\n    "datePublished",\n    "version",\n    "url",\n    "license",\n    "isAccessibleForFree",\n    "encoding",\n    "contentUrl",\n    "encodingFormat",\n    "sameAs",\n    "identifier",\n    "propertyID",\n    "value",\n}\nSchemaContextState = tuple[bool, dict[str, bool], dict[str, str], bool]\nDEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (False, {}, {}, False)\n''',
+              'schema context state constants',
+          )
+
+          source = replace_once(
+              source,
+              '''        self._template_depth = 0\n        self._head_text_stack: list[str] = []\n''',
+              '''        self._template_depth = 0\n        self._foreign_content_depth = 0\n        self._head_text_stack: list[str] = []\n''',
+              'foreign content state init',
+          )
+          source = replace_once(
+              source,
+              '''        attributes, duplicates, values = _first_attributes(attrs)\n\n        # A non-head start tag implicitly ends the optional document head even\n''',
+              '''        attributes, duplicates, values = _first_attributes(attrs)\n        in_foreign_content = self._foreign_content_depth > 0\n\n        # A non-head start tag implicitly ends the optional document head even\n''',
+              'capture foreign content state',
+          )
+          source = replace_once(
+              source,
+              '''        if tag == "template":\n            self._template_depth += 1\n''',
+              '''        if tag in {"svg", "math"}:\n            self._foreign_content_depth += 1\n\n        if tag == "template" and not in_foreign_content:\n            self._template_depth += 1\n''',
+              'foreign template semantics',
+          )
+          source = replace_once(
+              source,
+              '''        if tag == "noscript":\n''',
+              '''        if tag == "noscript" and not in_foreign_content:\n''',
+              'foreign noscript semantics',
+          )
+          source = replace_once(
+              source,
+              '''        if tag == "meta" and self._in_head and self._template_depth == 0:\n''',
+              '''        if (\n            tag == "meta"\n            and self._in_head\n            and self._template_depth == 0\n            and self._foreign_content_depth == 0\n        ):\n''',
+              'foreign meta semantics',
+          )
+          source = replace_once(
+              source,
+              '''        if tag == "script" and self._template_depth == 0:\n''',
+              '''        if (\n            tag == "script"\n            and self._template_depth == 0\n            and self._foreign_content_depth == 0\n        ):\n''',
+              'foreign script semantics',
+          )
+          source = replace_once(
+              source,
+              '''        # HTML ignores a self-closing slash on non-void elements. In particular,\n        # <template/> starts an inert template and remains open until </template>\n        # (or EOF); treating it as XML would expose metadata browsers keep inert.\n        self.handle_starttag(tag, attrs)\n        if tag.lower() in HTML_VOID_ELEMENTS:\n            self.handle_endtag(tag)\n''',
+              '''        # HTML ignores a self-closing slash on non-void HTML elements, but\n        # foreign SVG/MathML content acknowledges the slash. Preserve HTML template\n        # inertness while allowing <svg><template/></svg> to close immediately.\n        was_foreign = self._foreign_content_depth > 0\n        self.handle_starttag(tag, attrs)\n        if (\n            was_foreign\n            or tag.lower() in HTML_VOID_ELEMENTS\n            or tag.lower() in {"svg", "math"}\n        ):\n            self.handle_endtag(tag)\n''',
+              'foreign self-closing semantics',
+          )
+          source = replace_once(
+              source,
+              '''        if self._head_text_stack and tag == self._head_text_stack[-1]:\n            self._head_text_stack.pop()\n        if tag == "template" and self._template_depth > 0:\n''',
+              '''        if self._head_text_stack and tag == self._head_text_stack[-1]:\n            self._head_text_stack.pop()\n        if tag in {"svg", "math"} and self._foreign_content_depth > 0:\n            self._foreign_content_depth -= 1\n        if tag == "template" and self._template_depth > 0:\n''',
+              'foreign content exit',
+          )
+
+          old_context = '''def _term_maps_to_schema_article(value: object, vocab_is_schema: bool) -> bool:\n    if isinstance(value, dict):\n        value = value.get("@id")\n    if not isinstance(value, str):\n        return False\n    stripped = value.strip()\n    if stripped in SCHEMA_ORG_ARTICLE_IRIS:\n        return True\n    return vocab_is_schema and stripped == "ScholarlyArticle"\n\n\ndef _schema_context_state(\n    context: object,\n    inherited: SchemaContextState,\n) -> SchemaContextState:\n    """Track Schema.org vocabulary plus any explicit ScholarlyArticle override."""\n    if context is None:\n        return DEFAULT_SCHEMA_CONTEXT_STATE\n    if isinstance(context, str):\n        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_BASES\n        # A canonical Schema.org remote context establishes the active\n        # vocabulary, not a permanent explicit ScholarlyArticle term override.\n        # This allows a later @vocab in a context list to replace that vocabulary.\n        # Unknown remote contexts still fail closed.\n        return (is_schema, None if is_schema else False)\n    if isinstance(context, dict):\n        vocab_is_schema, article_override = inherited\n        if "@vocab" in context:\n            raw_vocab = context.get("@vocab")\n            vocab_is_schema = (\n                isinstance(raw_vocab, str)\n                and raw_vocab.strip() in SCHEMA_ORG_VOCAB_BASES\n            )\n        if "ScholarlyArticle" in context:\n            article_override = _term_maps_to_schema_article(\n                context.get("ScholarlyArticle"), vocab_is_schema\n            )\n        return (vocab_is_schema, article_override)\n    if isinstance(context, list):\n        state = inherited\n        for item in context:\n            state = _schema_context_state(item, state)\n        return state\n    return DEFAULT_SCHEMA_CONTEXT_STATE\n'''
+          new_context = '''def _expand_compact_iri(value: str, prefixes: dict[str, str]) -> str:\n    stripped = value.strip()\n    if ":" not in stripped:\n        return stripped\n    prefix, suffix = stripped.split(":", 1)\n    base = prefixes.get(prefix)\n    if base is None:\n        return stripped\n    return base + suffix\n\n\ndef _prefix_mapping(\n    definition: object,\n    prefixes: dict[str, str],\n) -> str | None:\n    explicit_prefix = False\n    if isinstance(definition, dict):\n        explicit_prefix = definition.get("@prefix") is True\n        definition = definition.get("@id")\n    if not isinstance(definition, str):\n        return None\n    expanded = _expand_compact_iri(definition, prefixes)\n    if not expanded.startswith(("http://", "https://")):\n        return None\n    if explicit_prefix or expanded.endswith(("/", "#")):\n        return expanded\n    return None\n\n\ndef _term_maps_to_schema_term(\n    value: object,\n    term: str,\n    vocab_is_schema: bool,\n    prefixes: dict[str, str],\n) -> bool:\n    if isinstance(value, dict):\n        if "@id" not in value:\n            return vocab_is_schema\n        value = value.get("@id")\n    if not isinstance(value, str):\n        return False\n    stripped = value.strip()\n    expanded = _expand_compact_iri(stripped, prefixes)\n    if expanded in {f"{base}/{term}" for base in SCHEMA_ORG_BASES}:\n        return True\n    return vocab_is_schema and stripped == term\n\n\ndef _schema_context_state(\n    context: object,\n    inherited: SchemaContextState,\n) -> SchemaContextState:\n    """Track the Schema vocabulary, relevant term mappings, prefixes, and unsupported contexts."""\n    if context is None:\n        return DEFAULT_SCHEMA_CONTEXT_STATE\n\n    vocab_is_schema, inherited_overrides, inherited_prefixes, unsupported = inherited\n    term_overrides = dict(inherited_overrides)\n    prefixes = dict(inherited_prefixes)\n\n    if isinstance(context, str):\n        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_BASES\n        if is_schema:\n            # Treat the known Schema.org remote context as the vocabulary source.\n            # It replaces earlier relevant term overrides, but remains overridable\n            # by a later local @vocab in a context list.\n            for term in SCHOLARLY_SCHEMA_TERMS:\n                term_overrides.pop(term, None)\n            return (True, term_overrides, prefixes, unsupported)\n        return (vocab_is_schema, term_overrides, prefixes, True)\n\n    if isinstance(context, dict):\n        # Resolving arbitrary imported contexts would require network dereference.\n        # This verifier is deterministic/offline, so imported contexts fail closed.\n        if "@import" in context:\n            return (vocab_is_schema, term_overrides, prefixes, True)\n\n        if "@vocab" in context:\n            raw_vocab = context.get("@vocab")\n            vocab_is_schema = (\n                isinstance(raw_vocab, str)\n                and raw_vocab.strip() in SCHEMA_ORG_VOCAB_BASES\n            )\n\n        # Context definitions may use compact IRIs in later term mappings. Build\n        # direct prefix definitions first, iterating so same-context prefixes can\n        # depend on an earlier resolved prefix. Redefinition removes stale prefixes.\n        definitions = [\n            (term, definition)\n            for term, definition in context.items()\n            if not term.startswith("@")\n        ]\n        for term, _ in definitions:\n            prefixes.pop(term, None)\n        for _ in range(max(1, len(definitions))):\n            changed = False\n            for term, definition in definitions:\n                mapping = _prefix_mapping(definition, prefixes)\n                if mapping is not None and prefixes.get(term) != mapping:\n                    prefixes[term] = mapping\n                    changed = True\n            if not changed:\n                break\n\n        for term in SCHOLARLY_SCHEMA_TERMS:\n            if term in context:\n                term_overrides[term] = _term_maps_to_schema_term(\n                    context.get(term), term, vocab_is_schema, prefixes\n                )\n        return (vocab_is_schema, term_overrides, prefixes, unsupported)\n\n    if isinstance(context, list):\n        state = inherited\n        for item in context:\n            state = _schema_context_state(item, state)\n        return state\n\n    return (vocab_is_schema, term_overrides, prefixes, True)\n'''
+          source = replace_once(source, old_context, new_context, 'expanded schema context model')
+
+          old_propagates = '''def _context_propagates(context: object) -> bool:\n    """Return whether a local JSON-LD context applies to descendant node objects."""\n    if isinstance(context, dict):\n        return context.get("@propagate") is not False\n    if isinstance(context, list):\n        propagate = True\n        for item in context:\n            if isinstance(item, dict) and "@propagate" in item:\n                propagate = item.get("@propagate") is not False\n        return propagate\n    return True\n\n\n'''
+          new_propagates = old_propagates + '''def _type_context_propagates(context: object) -> bool:\n    """Type-scoped contexts stop at the next node unless explicitly propagated."""\n    if isinstance(context, dict):\n        return context.get("@propagate") is True\n    if isinstance(context, list):\n        propagate = False\n        for item in context:\n            if isinstance(item, dict) and "@propagate" in item:\n                propagate = item.get("@propagate") is True\n        return propagate\n    return False\n\n\n'''
+          source = replace_once(source, old_propagates, new_propagates, 'type-scoped propagation helper')
+
+          source = replace_once(
+              source,
+              '''def _schema_article_term_is_valid(state: SchemaContextState) -> bool:\n    vocab_is_schema, article_override = state\n    if article_override is not None:\n        return article_override\n    return vocab_is_schema\n''',
+              '''def _schema_term_is_valid(state: SchemaContextState, term: str) -> bool:\n    vocab_is_schema, term_overrides, _prefixes, unsupported = state\n    if unsupported:\n        return False\n    return term_overrides.get(term, vocab_is_schema)\n\n\ndef _schema_article_term_is_valid(state: SchemaContextState) -> bool:\n    return _schema_term_is_valid(state, "ScholarlyArticle")\n''',
+              'schema term validation helper',
+          )
+
+          source = replace_once(
+              source,
+              '''    articles: list[tuple[dict, bool]],\n''',
+              '''    articles: list[tuple[dict, SchemaContextState, dict[str, object]]],\n''',
+              'collector article tuple type',
+          )
+          source = replace_once(
+              source,
+              '''        article_type = value.get("@type")\n        if article_type == "ScholarlyArticle" or (\n            isinstance(article_type, list) and "ScholarlyArticle" in article_type\n        ):\n            articles.append((value, _schema_article_term_is_valid(schema_state)))\n''',
+              '''        article_type = value.get("@type")\n        type_terms = (\n            [article_type]\n            if isinstance(article_type, str)\n            else [term for term in article_type if isinstance(term, str)]\n            if isinstance(article_type, list)\n            else []\n        )\n        for type_term in sorted(type_terms):\n            if type_term not in node_property_scopes:\n                continue\n            type_context = node_property_scopes[type_term]\n            schema_state = _schema_context_state(type_context, schema_state)\n            node_property_scopes = _property_scoped_contexts(\n                type_context, node_property_scopes\n            )\n            if _type_context_propagates(type_context):\n                child_schema_state = schema_state\n                child_property_scopes = node_property_scopes\n\n        if article_type == "ScholarlyArticle" or (\n            isinstance(article_type, list) and "ScholarlyArticle" in article_type\n        ):\n            articles.append((value, schema_state, node_property_scopes))\n''',
+              'type-scoped context traversal',
+          )
+
+          source = replace_once(
+              source,
+              '''    articles: list[tuple[dict, bool]] = []\n''',
+              '''    articles: list[tuple[dict, SchemaContextState, dict[str, object]]] = []\n''',
+              'landing article tuple type',
+          )
+          source = replace_once(
+              source,
+              '''    matching = [\n        (article, schema_context)\n        for article, schema_context in articles\n        if article.get("name") == SCHOLARLY_TITLE\n    ]\n    if len(matching) != 1:\n        observed_names = [article.get("name") for article, _ in articles]\n''',
+              '''    matching = [\n        (article, schema_state, article_scopes)\n        for article, schema_state, article_scopes in articles\n        if article.get("name") == SCHOLARLY_TITLE\n    ]\n    if len(matching) != 1:\n        observed_names = [article.get("name") for article, _, _ in articles]\n''',
+              'landing matching tuple shape',
+          )
+          source = replace_once(
+              source,
+              '''    article, schema_context = matching[0]\n    if not schema_context:\n        errors.append(\n            f"{SCHOLARLY_LANDING_PATH}: matching ScholarlyArticle lacks an applicable "\n            "Schema.org JSON-LD context"\n        )\n\n    expected_fields = {\n''',
+              '''    article, schema_state, article_scopes = matching[0]\n    if not _schema_article_term_is_valid(schema_state):\n        errors.append(\n            f"{SCHOLARLY_LANDING_PATH}: matching ScholarlyArticle lacks an applicable "\n            "Schema.org JSON-LD context"\n        )\n\n    expected_fields = {\n''',
+              'landing schema state use',
+          )
+          source = replace_once(
+              source,
+              '''    for field, expected in expected_fields.items():\n        if article.get(field) != expected:\n            errors.append(\n                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.{field} expected "\n                f"{expected!r}, observed {article.get(field)!r}"\n            )\n\n    encoding = article.get("encoding")\n''',
+              '''    required_schema_properties = {\n        "name",\n        *expected_fields.keys(),\n        "encoding",\n        "sameAs",\n        "identifier",\n    }\n    for field in sorted(required_schema_properties):\n        if not _schema_term_is_valid(schema_state, field):\n            errors.append(\n                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.{field} is not mapped "\n                f"to Schema.org/{field}"\n            )\n\n    for field, expected in expected_fields.items():\n        if article.get(field) != expected:\n            errors.append(\n                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.{field} expected "\n                f"{expected!r}, observed {article.get(field)!r}"\n            )\n\n    encoding_state = schema_state\n    if "encoding" in article_scopes:\n        encoding_context = article_scopes["encoding"]\n        if _context_propagates(encoding_context):\n            encoding_state = _schema_context_state(encoding_context, encoding_state)\n        else:\n            encoding_state = DEFAULT_SCHEMA_CONTEXT_STATE\n\n    encoding = article.get("encoding")\n''',
+              'required schema property validation',
+          )
+          source = replace_once(
+              source,
+              '''    else:\n        if encoding.get("contentUrl") != SCHOLARLY_PDF_URL:\n''',
+              '''    else:\n        if "@context" in encoding:\n            encoding_state = _schema_context_state(\n                encoding.get("@context"), encoding_state\n            )\n        for field in ("contentUrl", "encodingFormat"):\n            if not _schema_term_is_valid(encoding_state, field):\n                errors.append(\n                    f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.encoding.{field} "\n                    f"is not mapped to Schema.org/{field}"\n                )\n        if encoding.get("contentUrl") != SCHOLARLY_PDF_URL:\n''',
+              'encoding nested schema mappings',
+          )
+          source = replace_once(
+              source,
+              '''    identifiers = article.get("identifier", [])\n    if isinstance(identifiers, dict):\n        identifiers = [identifiers]\n    property_values: set[tuple[object, object]] = set()\n    if isinstance(identifiers, list):\n        for identifier in identifiers:\n            if isinstance(identifier, dict):\n                property_values.add((identifier.get("propertyID"), identifier.get("value")))\n''',
+              '''    identifier_state = schema_state\n    if "identifier" in article_scopes:\n        identifier_context = article_scopes["identifier"]\n        if _context_propagates(identifier_context):\n            identifier_state = _schema_context_state(identifier_context, identifier_state)\n        else:\n            identifier_state = DEFAULT_SCHEMA_CONTEXT_STATE\n\n    identifiers = article.get("identifier", [])\n    if isinstance(identifiers, dict):\n        identifiers = [identifiers]\n    property_values: set[tuple[object, object]] = set()\n    if isinstance(identifiers, list):\n        for identifier in identifiers:\n            if isinstance(identifier, dict):\n                item_state = identifier_state\n                if "@context" in identifier:\n                    item_state = _schema_context_state(\n                        identifier.get("@context"), item_state\n                    )\n                for field in ("propertyID", "value"):\n                    if not _schema_term_is_valid(item_state, field):\n                        errors.append(\n                            f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.identifier.{field} "\n                            f"is not mapped to Schema.org/{field}"\n                        )\n                property_values.add((identifier.get("propertyID"), identifier.get("value")))\n''',
+              'identifier nested schema mappings',
+          )
+
+          tests = replace_once(
+              tests,
+              '''                "@vocab": "https://example.invalid/vocab/",\n                "ScholarlyArticle": "https://schema.org/ScholarlyArticle",\n''',
+              '''                "@vocab": "https://schema.org/",\n                "ScholarlyArticle": "https://schema.org/ScholarlyArticle",\n''',
+              'keep explicit schema article acceptance valid under property mapping checks',
+          )
+
+          test_block = '''\n\ndef test_type_scoped_context_applies_before_descendant_traversal() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@vocab": "https://schema.org/",\n                "Outer": {\n                    "@id": "https://example.invalid/Outer",\n                    "@context": {\n                        "@propagate": True,\n                        "ScholarlyArticle": "https://example.invalid/Fake",\n                    },\n                },\n            },\n            "@type": "Outer",\n            "items": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n\n\ndef test_imported_context_fails_closed() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@import": "https://example.invalid/context.jsonld",\n                "@vocab": "https://schema.org/",\n            },\n            "@graph": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n\n\ndef test_compact_iri_article_mapping_is_accepted() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@vocab": "https://schema.org/",\n                "schema": "https://schema.org/",\n                "ScholarlyArticle": "schema:ScholarlyArticle",\n            },\n            "@graph": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert errors == []\n\n\ndef test_self_closing_template_in_svg_does_not_open_html_template() -> None:\n    parser = deployment.ScholarlyHTMLParser()\n    parser.feed(\n        "<!doctype html><html><head></head><body>"\n        "<svg><template/></svg>"\n        '<script type="application/ld+json">{"ok":true}</script>'\n        "</body></html>"\n    )\n    parser.close()\n\n    assert parser._foreign_content_depth == 0\n    assert parser._template_depth == 0\n    assert parser.json_ld_blocks == ['{"ok":true}']\n\n\ndef test_required_schema_property_remap_is_rejected() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@vocab": "https://schema.org/",\n                "name": "https://example.invalid/not-name",\n            },\n            "@graph": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "ScholarlyArticle.name is not mapped to Schema.org/name" in error\n        for error in errors\n    )\n'''
+          if 'def test_type_scoped_context_applies_before_descendant_traversal' in tests:
+              raise SystemExit('fifth-round regressions already present unexpectedly')
+          tests = tests.rstrip() + test_block.rstrip() + '\n'
+
+          source_path.write_text(source, encoding='utf-8')
+          tests_path.write_text(tests, encoding='utf-8')
+          PY
+
+          python3 -m py_compile scripts/check_deployment_freshness.py
+          python3 - <<'PY'
+          import runpy
+          namespace = runpy.run_path('tests/test_scholarly_parser_edge_cases.py')
+          focused = sorted(
+              (name, fn) for name, fn in namespace.items()
+              if name.startswith('test_') and callable(fn)
+          )
+          assert len(focused) == 25, f'expected 25 focused tests, got {len(focused)}'
+          for name, fn in focused:
+              fn()
+              print(f'PASS {name}')
+          PY
+          git diff --check
+          git diff -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+
+      - name: Commit fifth-round review fixes and remove temporary applicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- .github/workflows/tmp-close-fifth-scholarly-review.yml
+          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          git commit -m "fix: close fifth scholarly review findings"
+          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
