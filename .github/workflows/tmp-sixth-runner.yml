@@ -47,6 +47,14 @@ jobs:
           if start < 0 or end < 0:
               raise SystemExit('failed to locate broken normalization block')
           corrected = text[:start] + text[end:]
+
+          old = '''    def _pop_through_matching_element(self, tag: str) -> str | None:\n        match_index = None\n        for index in range(len(self._element_stack) - 1, -1, -1):\n            if self._element_stack[index][0] == tag:\n                match_index = index\n                break\n'''
+          new = '''    def _pop_through_matching_element(self, tag: str) -> str | None:\n        match_index = None\n        for index in range(len(self._element_stack) - 1, -1, -1):\n            stack_tag, stack_namespace, _attributes = self._element_stack[index]\n            if (\n                stack_tag == "template"\n                and stack_namespace == "html"\n                and tag != "template"\n            ):\n                # HTML template contents form a tree-builder boundary. An end\n                # tag outside the template insertion mode cannot pop through an\n                # open HTML template to close an ancestor document element.\n                break\n            if stack_tag == tag:\n                match_index = index\n                break\n'''
+          if corrected.count(old) != 1:
+              raise SystemExit(
+                  f'template-boundary patch expected one match, found {corrected.count(old)}'
+              )
+          corrected = corrected.replace(old, new, 1)
           Path('/tmp/sixth-corrected.sh').write_text(corrected, encoding='utf-8')
           PY
 
