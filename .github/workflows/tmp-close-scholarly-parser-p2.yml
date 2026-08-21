@@ -1,0 +1,252 @@
+name: Temporary scholarly parser closure
+
+on:
+  push:
+    branches:
+      - agent/close-final-scholarly-parser-gaps-2026-08-21
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tmp-close-scholarly-parser-p2
+  cancel-in-progress: false
+
+jobs:
+  patch-test-self-clean:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
+          fetch-depth: 0
+
+      - name: Apply exact-head fixes and regressions
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          source_path = Path('scripts/check_deployment_freshness.py')
+          tests_path = Path('tests/test_scholarly_parser_edge_cases.py')
+          source = source_path.read_text(encoding='utf-8')
+          tests = tests_path.read_text(encoding='utf-8')
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one match, found {count}')
+              return text.replace(old, new, 1)
+
+          def replace_regex_once(text: str, pattern: str, new: str, label: str) -> str:
+              result, count = re.subn(pattern, new, text, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one match, found {count}')
+              return result
+
+          source = replace_once(
+              source,
+              'SchemaContextState = tuple[bool, dict[str, bool], dict[str, str], bool]\nDEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (False, {}, {}, False)',
+              '''SchemaContextState = tuple[\n    bool, dict[str, bool], dict[str, str], bool, frozenset[str]\n]\nDEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (\n    False, {}, {}, False, frozenset()\n)''',
+              'extend SchemaContextState with protected terms',
+          )
+
+          source = replace_once(
+              source,
+              'HEAD_TEXT_TAGS = {"noframes", "noscript", "script", "style", "title"}',
+              '''AFTER_HEAD_MODE_START_TAGS = {\n    "base",\n    "basefont",\n    "bgsound",\n    "html",\n    "link",\n    "meta",\n    "noframes",\n    "script",\n    "style",\n    "template",\n}\nHEAD_TEXT_TAGS = {"noframes", "noscript", "script", "style", "title"}''',
+              'add after-head allowed start tags',
+          )
+
+          source = replace_once(
+              source,
+              '''        self._in_head = False\n        self._head_seen = False\n        self._body_started = False''',
+              '''        self._in_head = False\n        self._after_head = False\n        self._head_seen = False\n        self._body_started = False''',
+              'add after-head parser state',
+          )
+
+          source = replace_once(
+              source,
+              '''        # A non-head HTML start tag implicitly ends the optional document\n        # head even when both </head> and <body> are omitted.\n        if (\n            namespace == "html"\n            and self._in_head\n            and self._template_depth == 0\n            and not self._head_text_stack\n            and tag not in HEAD_MODE_START_TAGS\n        ):\n            self._in_head = False\n            self._body_started = True\n''',
+              '''        # A non-head HTML start tag implicitly ends the optional document\n        # head even when both </head> and <body> are omitted.\n        if (\n            namespace == "html"\n            and self._in_head\n            and self._template_depth == 0\n            and not self._head_text_stack\n            and tag not in HEAD_MODE_START_TAGS\n        ):\n            self._in_head = False\n            self._after_head = False\n            self._body_started = True\n\n        # In the tree builder's after-head insertion mode, a small set of\n        # metadata-bearing tokens are processed using the head element pointer.\n        # Other HTML start tags begin the body-effective portion of the document.\n        if (\n            namespace == "html"\n            and self._after_head\n            and self._template_depth == 0\n            and not self._head_text_stack\n            and tag not in AFTER_HEAD_MODE_START_TAGS\n        ):\n            self._after_head = False\n            self._body_started = True\n''',
+              'track after-head start-tag transition',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            namespace == "html"\n            and tag == "body"\n            and self._template_depth == 0\n            and not self._head_text_stack\n        ):\n            self._body_started = True\n            self._in_head = False''',
+              '''        if (\n            namespace == "html"\n            and tag == "body"\n            and self._template_depth == 0\n            and not self._head_text_stack\n        ):\n            self._body_started = True\n            self._in_head = False\n            self._after_head = False''',
+              'body start clears after-head',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            namespace == "html"\n            and tag == "head"\n            and not self._head_seen\n            and not self._body_started\n        ):\n            self._head_seen = True\n            self._in_head = True''',
+              '''        if (\n            namespace == "html"\n            and tag == "head"\n            and not self._head_seen\n            and not self._body_started\n        ):\n            self._head_seen = True\n            self._in_head = True\n            self._after_head = False''',
+              'head start clears after-head',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            namespace == "html"\n            and tag in HEAD_TEXT_TAGS\n            and self._in_head\n            and self._template_depth == 0\n        ):''',
+              '''        if (\n            namespace == "html"\n            and tag in HEAD_TEXT_TAGS\n            and (self._in_head or self._after_head)\n            and self._template_depth == 0\n        ):''',
+              'head text supports after-head processing',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            namespace == "html"\n            and tag == "meta"\n            and self._in_head\n            and self._template_depth == 0\n        ):''',
+              '''        if (\n            namespace == "html"\n            and tag == "meta"\n            and (self._in_head or self._after_head)\n            and self._template_depth == 0\n        ):''',
+              'accept browser-effective after-head meta',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            self._in_head\n            and self._template_depth == 0\n            and not self._head_text_stack\n            and data.strip()\n        ):\n            self._in_head = False\n            self._body_started = True''',
+              '''        if (\n            (self._in_head or self._after_head)\n            and self._template_depth == 0\n            and not self._head_text_stack\n            and data.strip("\\t\\n\\f\\r ")\n        ):\n            self._in_head = False\n            self._after_head = False\n            self._body_started = True''',
+              'use HTML space characters for head text',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            tag in {"body", "html", "br"}\n            and self._in_head\n            and self._template_depth == 0\n            and not self._head_text_stack\n        ):\n            self._in_head = False\n            self._body_started = True''',
+              '''        if (\n            tag in {"body", "html", "br"}\n            and (self._in_head or self._after_head)\n            and self._template_depth == 0\n            and not self._head_text_stack\n        ):\n            self._in_head = False\n            self._after_head = False\n            self._body_started = True''',
+              'special end tags leave head modes',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            tag == "head"\n            and matched_namespace == "html"\n            and self._in_head\n            and self._template_depth == 0\n        ):\n            self._in_head = False''',
+              '''        if (\n            tag == "head"\n            and matched_namespace == "html"\n            and self._in_head\n            and self._template_depth == 0\n        ):\n            self._in_head = False\n            self._after_head = True''',
+              'explicit head end enters after-head mode',
+          )
+
+          source = replace_once(
+              source,
+              '''        if (\n            tag == "body"\n            and matched_namespace == "html"\n            and self._template_depth == 0\n        ):\n            self._body_started = True\n            self._in_head = False''',
+              '''        if (\n            tag == "body"\n            and matched_namespace == "html"\n            and self._template_depth == 0\n        ):\n            self._body_started = True\n            self._in_head = False\n            self._after_head = False''',
+              'body end clears after-head',
+          )
+
+          new_schema_context = '''def _schema_context_state(\n    context: object,\n    inherited: SchemaContextState,\n) -> SchemaContextState:\n    """Track Schema vocabulary, term mappings, prefixes, unsupported contexts, and protection."""\n    if context is None:\n        return DEFAULT_SCHEMA_CONTEXT_STATE\n\n    (\n        vocab_is_schema,\n        inherited_overrides,\n        inherited_prefixes,\n        unsupported,\n        inherited_protected,\n    ) = inherited\n    term_overrides = dict(inherited_overrides)\n    prefixes = dict(inherited_prefixes)\n    protected_terms = set(inherited_protected)\n\n    if isinstance(context, str):\n        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_REMOTE_CONTEXTS\n        if is_schema:\n            return (\n                True, term_overrides, prefixes, unsupported, frozenset(protected_terms)\n            )\n        return (\n            vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)\n        )\n\n    if isinstance(context, dict):\n        # Resolving arbitrary imported contexts would require network dereference.\n        # This verifier is deterministic/offline, so imported contexts fail closed.\n        if "@import" in context:\n            return (\n                vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)\n            )\n\n        if "@vocab" in context:\n            raw_vocab = context.get("@vocab")\n            expanded_vocab = (\n                _expand_compact_iri(raw_vocab, prefixes)\n                if isinstance(raw_vocab, str)\n                else None\n            )\n            vocab_is_schema = expanded_vocab in SCHEMA_ORG_VOCAB_BASES\n\n        definitions = [\n            (term, definition)\n            for term, definition in context.items()\n            if not term.startswith("@")\n        ]\n\n        # JSON-LD rejects a later redefinition of a protected term. This verifier\n        # intentionally fails closed for any redefinition of a protected scholarly\n        # term rather than attempting to recover from an invalid active context.\n        context_protected = context.get("@protected") is True\n        for term, definition in definitions:\n            if term in SCHOLARLY_SCHEMA_TERMS and term in protected_terms:\n                unsupported = True\n            if (\n                term in SCHOLARLY_SCHEMA_TERMS\n                and (\n                    context_protected\n                    or (\n                        isinstance(definition, dict)\n                        and definition.get("@protected") is True\n                    )\n                )\n            ):\n                protected_terms.add(term)\n\n        # Context definitions may use compact IRIs in later term mappings. Build\n        # direct prefix definitions first, iterating so same-context prefixes can\n        # depend on an earlier resolved prefix. Redefinition removes stale prefixes.\n        for term, _ in definitions:\n            prefixes.pop(term, None)\n        for _ in range(max(1, len(definitions))):\n            changed = False\n            for term, definition in definitions:\n                mapping = _prefix_mapping(definition, prefixes)\n                if mapping is not None and prefixes.get(term) != mapping:\n                    prefixes[term] = mapping\n                    changed = True\n            if not changed:\n                break\n\n        for term in SCHOLARLY_SCHEMA_TERMS:\n            if term in context:\n                term_overrides[term] = _term_maps_to_schema_term(\n                    context.get(term), term, vocab_is_schema, prefixes\n                )\n        return (\n            vocab_is_schema,\n            term_overrides,\n            prefixes,\n            unsupported,\n            frozenset(protected_terms),\n        )\n\n    if isinstance(context, list):\n        state = inherited\n        for item in context:\n            state = _schema_context_state(item, state)\n        return state\n\n    return (\n        vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)\n    )\n'''
+          source = replace_regex_once(
+              source,
+              r'def _schema_context_state\(.*?\n\ndef _context_propagates',
+              new_schema_context + '\n\ndef _context_propagates',
+              'replace schema context state implementation',
+          )
+
+          source = replace_once(
+              source,
+              '''def _schema_term_is_valid(state: SchemaContextState, term: str) -> bool:\n    vocab_is_schema, term_overrides, _prefixes, unsupported = state\n    if unsupported:\n        return False\n    return term_overrides.get(term, vocab_is_schema)''',
+              '''def _schema_term_is_valid(state: SchemaContextState, term: str) -> bool:\n    vocab_is_schema, term_overrides, _prefixes, unsupported, _protected = state\n    if unsupported:\n        return False\n    return term_overrides.get(term, vocab_is_schema)''',
+              'unpack protected context state',
+          )
+
+          identifier_block = '''    identifier_state, identifier_scopes = _property_child_state(\n        "identifier",\n        schema_state,\n        child_schema_state,\n        article_scopes,\n        child_scopes,\n    )\n\n    identifiers = article.get("identifier", [])\n    if isinstance(identifiers, dict):\n        identifiers = [identifiers]\n    property_values: set[tuple[object, object]] = set()\n    if isinstance(identifiers, list):\n        for identifier in identifiers:\n            if isinstance(identifier, dict):\n                item_state = identifier_state\n                item_scopes = identifier_scopes\n                if "@context" in identifier:\n                    identifier_context = identifier.get("@context")\n                    item_state = _schema_context_state(identifier_context, item_state)\n                    item_scopes = _property_scoped_contexts(\n                        identifier_context, item_scopes\n                    )\n                identifier_type = identifier.get("@type")\n                identifier_type_terms = (\n                    [identifier_type]\n                    if isinstance(identifier_type, str)\n                    else [\n                        term for term in identifier_type if isinstance(term, str)\n                    ]\n                    if isinstance(identifier_type, list)\n                    else []\n                )\n                for type_term in sorted(identifier_type_terms):\n                    if type_term not in item_scopes:\n                        continue\n                    type_context = item_scopes[type_term]\n                    item_state = _schema_context_state(type_context, item_state)\n                    item_scopes = _property_scoped_contexts(\n                        type_context, item_scopes\n                    )\n                for field in ("propertyID", "value"):\n                    if not _schema_term_is_valid(item_state, field):\n                        errors.append(\n                            f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.identifier.{field} "\n                            f"is not mapped to Schema.org/{field}"\n                        )\n                property_values.add(\n                    (identifier.get("propertyID"), identifier.get("value"))\n                )\n'''
+          source = replace_regex_once(
+              source,
+              r'    identifier_state, _identifier_scopes = _property_child_state\(.*?\n    expected_properties = \{',
+              identifier_block + '\n    expected_properties = {',
+              'apply identifier type-scoped contexts',
+          )
+
+          new_tests = r'''
+
+
+def test_non_html_whitespace_character_token_implicitly_ends_head() -> None:
+    for text in ("\u00a0", "\v"):
+        parser = deployment.ScholarlyHTMLParser()
+        parser.feed(
+            "<!doctype html><html><head>"
+            + text
+            + '<meta name="citation_title" content="after-non-html-space">'
+            + "</html>"
+        )
+        parser.close()
+
+        assert "citation_title" not in parser.meta
+        assert parser._body_started is True
+        assert parser._in_head is False
+
+
+def test_after_head_meta_is_processed_as_head_metadata() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head></head>"
+        '<meta name="citation_title" content="after-head">'
+        "<body></body></html>"
+    )
+    parser.close()
+
+    assert parser.meta.get("citation_title") == ["after-head"]
+    assert parser.errors == []
+
+
+def test_identifier_type_scoped_context_is_applied_to_properties() -> None:
+    page = _landing({
+        "@context": {
+            "@vocab": "https://schema.org/",
+            "PropertyValue": {
+                "@id": "https://schema.org/PropertyValue",
+                "@context": {
+                    "propertyID": "https://example.invalid/not-property-id"
+                },
+            },
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any(
+        "ScholarlyArticle.identifier.propertyID is not mapped" in error
+        for error in errors
+    )
+
+
+def test_protected_schema_term_redefinition_fails_closed() -> None:
+    page = _landing({
+        "@context": [
+            {
+                "@vocab": "https://schema.org/",
+                "name": {
+                    "@id": "https://example.invalid/not-name",
+                    "@protected": True,
+                },
+            },
+            {"name": "https://schema.org/name"},
+        ],
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors
+'''
+          marker = 'def test_non_html_whitespace_character_token_implicitly_ends_head()'
+          if marker in tests:
+              raise SystemExit('new regression tests already present unexpectedly')
+          tests = tests.rstrip() + new_tests + '\n'
+
+          source_path.write_text(source, encoding='utf-8')
+          tests_path.write_text(tests, encoding='utf-8')
+          PY
+
+          python -m pytest -q tests/test_scholarly_parser_edge_cases.py
+          python -m py_compile scripts/check_deployment_freshness.py
+          python -m ruff check scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py || ruff check scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          git diff --check
+
+      - name: Self-clean and push only final two-file patch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- .github/workflows/tmp-close-scholarly-parser-p2.yml
+          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          echo "Staged paths:"
+          git diff --cached --name-only
+          test "$(git diff --cached --name-only | sort | tr '\n' ' ')" = ".github/workflows/tmp-close-scholarly-parser-p2.yml scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py "
+          git commit -m "fix: close final scholarly parser review gaps"
+          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
