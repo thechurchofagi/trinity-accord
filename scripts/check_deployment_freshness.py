@@ -113,6 +113,7 @@ HTML_VOID_ELEMENTS = {
 }
 SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}
 SCHEMA_ORG_VOCAB_BASES = {"http://schema.org/", "https://schema.org/"}
+SCHEMA_ORG_REMOTE_CONTEXTS = SCHEMA_ORG_BASES | SCHEMA_ORG_VOCAB_BASES
 SCHEMA_ORG_ARTICLE_IRIS = {
     f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES
 }
@@ -330,6 +331,14 @@ class ScholarlyHTMLParser(HTMLParser):
     _SVG_HTML_INTEGRATION_POINTS = {"foreignobject", "desc", "title"}
     _MATHML_TEXT_INTEGRATION_POINTS = {"mi", "mo", "mn", "ms", "mtext"}
     _MATHML_HTML_ENCODINGS = {"text/html", "application/xhtml+xml"}
+    _FOREIGN_HTML_BREAKOUT_TAGS = {
+        "b", "big", "blockquote", "body", "br", "center", "code",
+        "dd", "div", "dl", "dt", "em", "embed", "h1", "h2",
+        "h3", "h4", "h5", "h6", "head", "hr", "i", "img",
+        "li", "listing", "menu", "meta", "nobr", "ol", "p",
+        "pre", "ruby", "s", "small", "span", "strong", "strike",
+        "sub", "sup", "table", "tt", "u", "ul", "var",
+    }
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -395,6 +404,24 @@ class ScholarlyHTMLParser(HTMLParser):
             return "math"
         return "html"
 
+    @classmethod
+    def _is_foreign_html_breakout(
+        cls, tag: str, attributes: dict[str, str | None]
+    ) -> bool:
+        if tag in cls._FOREIGN_HTML_BREAKOUT_TAGS:
+            return True
+        return tag == "font" and any(
+            name in attributes for name in {"color", "face", "size"}
+        )
+
+    def _pop_open_foreign_content(self) -> None:
+        while self._element_stack and self._element_stack[-1][1] != "html":
+            _tag, namespace, _attributes = self._element_stack.pop()
+            if namespace != "html":
+                self._foreign_content_depth = max(
+                    0, self._foreign_content_depth - 1
+                )
+
     def _push_element(
         self,
         tag: str,
@@ -449,6 +476,12 @@ class ScholarlyHTMLParser(HTMLParser):
             return
         attributes, duplicates, values = _first_attributes(attrs)
         namespace = self._namespace_for_start(tag, attributes)
+        if (
+            namespace != "html"
+            and self._is_foreign_html_breakout(tag, attributes)
+        ):
+            self._pop_open_foreign_content()
+            namespace = self._namespace_for_start(tag, attributes)
 
         # A non-head HTML start tag implicitly ends the optional document
         # head even when both </head> and <body> are omitted.
@@ -697,14 +730,18 @@ def check_forbidden(path: str, text: str, errors: list[str]) -> None:
 def _normalized_schema_url(value: object) -> str | None:
     if not isinstance(value, str):
         return None
-    return value.strip().rstrip("/")
+    return value
 
 
 def _expand_compact_iri(value: str, prefixes: dict[str, str]) -> str:
-    stripped = value.strip()
+    if value != value.strip():
+        return value
+    stripped = value
     if ":" not in stripped:
         return stripped
     prefix, suffix = stripped.split(":", 1)
+    if suffix.startswith("//"):
+        return stripped
     base = prefixes.get(prefix)
     if base is None:
         return stripped
@@ -741,6 +778,8 @@ def _term_maps_to_schema_term(
     prefixes: dict[str, str],
 ) -> bool:
     if isinstance(value, dict):
+        if "@reverse" in value:
+            return False
         if "@id" not in value:
             return vocab_is_schema
         value = value.get("@id")
@@ -766,13 +805,8 @@ def _schema_context_state(
     prefixes = dict(inherited_prefixes)
 
     if isinstance(context, str):
-        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_BASES
+        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_REMOTE_CONTEXTS
         if is_schema:
-            # Treat the known Schema.org remote context as the vocabulary source.
-            # It replaces earlier relevant term overrides, but remains overridable
-            # by a later local @vocab in a context list.
-            for term in SCHOLARLY_SCHEMA_TERMS:
-                term_overrides.pop(term, None)
             return (True, term_overrides, prefixes, unsupported)
         return (vocab_is_schema, term_overrides, prefixes, True)
 
@@ -784,10 +818,12 @@ def _schema_context_state(
 
         if "@vocab" in context:
             raw_vocab = context.get("@vocab")
-            vocab_is_schema = (
-                isinstance(raw_vocab, str)
-                and raw_vocab.strip() in SCHEMA_ORG_VOCAB_BASES
+            expanded_vocab = (
+                _expand_compact_iri(raw_vocab, prefixes)
+                if isinstance(raw_vocab, str)
+                else None
             )
+            vocab_is_schema = expanded_vocab in SCHEMA_ORG_VOCAB_BASES
 
         # Context definitions may use compact IRIs in later term mappings. Build
         # direct prefix definitions first, iterating so same-context prefixes can
@@ -1123,7 +1159,7 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{expected!r}, observed {article.get(field)!r}"
             )
 
-    encoding_state, _encoding_scopes = _property_child_state(
+    encoding_state, encoding_scopes = _property_child_state(
         "encoding",
         schema_state,
         child_schema_state,
@@ -1136,8 +1172,26 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         errors.append(f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.encoding is missing")
     else:
         if "@context" in encoding:
-            encoding_state = _schema_context_state(
-                encoding.get("@context"), encoding_state
+            encoding_context = encoding.get("@context")
+            encoding_state = _schema_context_state(encoding_context, encoding_state)
+            encoding_scopes = _property_scoped_contexts(
+                encoding_context, encoding_scopes
+            )
+        encoding_type = encoding.get("@type")
+        encoding_type_terms = (
+            [encoding_type]
+            if isinstance(encoding_type, str)
+            else [term for term in encoding_type if isinstance(term, str)]
+            if isinstance(encoding_type, list)
+            else []
+        )
+        for type_term in sorted(encoding_type_terms):
+            if type_term not in encoding_scopes:
+                continue
+            type_context = encoding_scopes[type_term]
+            encoding_state = _schema_context_state(type_context, encoding_state)
+            encoding_scopes = _property_scoped_contexts(
+                type_context, encoding_scopes
             )
         for field in ("contentUrl", "encodingFormat"):
             if not _schema_term_is_valid(encoding_state, field):

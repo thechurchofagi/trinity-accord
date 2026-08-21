@@ -565,3 +565,92 @@ def test_type_scoped_context_does_not_rewrite_activating_type() -> None:
         "lacks an applicable Schema.org JSON-LD context" in error
         for error in errors
     )
+
+
+def test_html_breakout_tag_exits_svg_for_jsonld_script() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head></head><body><svg><p>"
+        '<script type="application/ld+json">{"ok":true}</script>'
+        "</p></svg></body></html>"
+    )
+    parser.close()
+    assert parser.json_ld_blocks == ['{"ok":true}']
+    assert parser._foreign_content_depth == 0
+
+
+def test_reverse_definition_for_required_schema_term_is_rejected() -> None:
+    page = _landing({
+        "@context": {
+            "@vocab": "https://schema.org/",
+            "name": {"@reverse": "https://example.invalid/not-name"},
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any("ScholarlyArticle.name is not mapped to Schema.org/name" in e for e in errors)
+
+
+def test_encoding_type_scoped_context_is_applied_to_properties() -> None:
+    page = _landing({
+        "@context": {
+            "@vocab": "https://schema.org/",
+            "MediaObject": {
+                "@id": "https://schema.org/MediaObject",
+                "@context": {"contentUrl": "https://example.invalid/not-content-url"},
+            },
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any("ScholarlyArticle.encoding.contentUrl is not mapped" in e for e in errors)
+
+
+def test_remote_schema_context_urls_are_matched_exactly() -> None:
+    for context in (" https://schema.org ", "https://schema.org////"):
+        page = _landing({"@context": context, "@graph": [_valid_article()]})
+        errors: list[str] = []
+        deployment.check_scholarly_landing(page, errors)
+        assert any("lacks an applicable Schema.org JSON-LD context" in e for e in errors)
+
+
+def test_compact_iri_vocab_is_expanded_from_prior_prefix() -> None:
+    page = _landing({
+        "@context": [
+            {"schema": {"@id": "https://schema.org/", "@prefix": True}},
+            {"@vocab": "schema:"},
+        ],
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors == []
+
+
+def test_remote_schema_context_preserves_prior_term_override() -> None:
+    page = _landing({
+        "@context": [
+            {"name": "https://example.invalid/not-name"},
+            "https://schema.org",
+        ],
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any("ScholarlyArticle.name is not mapped to Schema.org/name" in e for e in errors)
+
+
+def test_absolute_schema_iri_is_not_rewritten_by_https_prefix() -> None:
+    page = _landing({
+        "@context": {
+            "@vocab": "https://schema.org/",
+            "https": "https://example.invalid/",
+            "name": "https://schema.org/name",
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors == []
