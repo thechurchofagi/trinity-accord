@@ -1,0 +1,51 @@
+name: Temporary sixth scholarly review runner
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+
+permissions:
+  contents: write
+
+jobs:
+  run-sixth-applicator:
+    if: github.event.pull_request.number == 1071 && github.event.pull_request.head.ref == 'agent/close-final-scholarly-parser-gaps-2026-08-21'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
+          fetch-depth: 0
+
+      - name: Record toolchain provenance
+        run: python3 scripts/toolchain_provenance.py
+
+      - name: Execute retained sixth-round applicator
+        shell: bash
+        run: |
+          set -euo pipefail
+          awk '
+            /      - name: Apply sixth-round Codex review fixes/ { in_step=1; next }
+            in_step && /        run: \|/ { in_run=1; next }
+            in_run && /^      - name:/ { exit }
+            in_run { sub(/^          /, ""); print }
+          ' .github/workflows/tmp-sixth-scholarly-review.yml > /tmp/sixth-apply.sh
+          test -s /tmp/sixth-apply.sh
+          bash /tmp/sixth-apply.sh
+
+      - name: Commit sixth-round fixes and remove temporary machinery
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- .github/workflows/tmp-sixth-scholarly-review.yml .github/workflows/tmp-sixth-runner.yml
+          if [[ -f .github/tmp-sixth-trigger.txt ]]; then
+            git rm -- .github/tmp-sixth-trigger.txt
+          fi
+          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          git commit -m "fix: close sixth scholarly review findings"
+          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
