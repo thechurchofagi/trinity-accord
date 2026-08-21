@@ -53,6 +53,7 @@ def scholarly_html_fixture(
     omit_head_meta: set[str] | None = None,
     body_meta: list[tuple[str, str]] | None = None,
     article_overrides: dict[str, object] | None = None,
+    stray_body_head: bool = False,
 ) -> str:
     meta_values = dict(deployment.SCHOLARLY_META_EXPECTED)
     meta_values.update(meta_overrides or {})
@@ -95,11 +96,22 @@ def scholarly_html_fixture(
     }
     article.update(article_overrides or {})
     json_ld = json.dumps({"@context": "https://schema.org", "@graph": [article]})
+    scholarly_head = (
+        "".join(head_meta)
+        + f'<script type="application/ld+json">{json_ld}</script>'
+    )
     body = "".join(_meta(name, value) for name, value in (body_meta or []))
+    if stray_body_head:
+        return (
+            "<!doctype html><html><head></head><body><head>"
+            + scholarly_head
+            + "</head>"
+            + body
+            + "</body></html>"
+        )
     return (
         "<!doctype html><html><head>"
-        + "".join(head_meta)
-        + f'<script type="application/ld+json">{json_ld}</script>'
+        + scholarly_head
         + "</head><body>"
         + body
         + "</body></html>"
@@ -229,6 +241,20 @@ def main() -> int:
     require(
         any("citation_title expected exactly one value" in error for error in body_only_errors),
         "citation metadata outside document head was incorrectly accepted",
+    )
+
+    stray_head_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(stray_body_head=True),
+        stray_head_errors,
+    )
+    require(
+        any("citation_title expected exactly one value" in error for error in stray_head_errors),
+        "scholarly metadata in a second head after body start was incorrectly accepted",
+    )
+    require(
+        any("rendered ScholarlyArticle" in error for error in stray_head_errors),
+        "ScholarlyArticle JSON-LD in a second head after body start was incorrectly accepted",
     )
 
     json_ld_errors: list[str] = []
