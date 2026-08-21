@@ -8,6 +8,7 @@ on:
       - synchronize
     paths:
       - ".github/tmp-seventh-trigger.txt"
+      - ".github/workflows/tmp-seventh-scholarly-review.yml"
 
 permissions:
   contents: write
