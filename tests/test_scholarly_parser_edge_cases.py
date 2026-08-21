@@ -268,3 +268,52 @@ def test_propagate_false_does_not_apply_context_to_graph_descendants() -> None:
     assert any(
         "lacks an applicable Schema.org JSON-LD context" in error for error in errors
     )
+
+def test_noscript_raw_text_does_not_close_template() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head><template><noscript></template></noscript>"
+        '<meta name="citation_title" content="still-template">'
+        '<script type="application/ld+json">{"still":"template"}</script>'
+        "</head><body></body></html>"
+    )
+    parser.close()
+
+    assert "citation_title" not in parser.meta
+    assert parser.json_ld_blocks == []
+    assert parser._template_depth == 1
+
+
+def test_schema_org_vocab_requires_trailing_slash() -> None:
+    page = _landing(
+        {"@context": {"@vocab": "https://schema.org"}, "@graph": [_valid_article()]}
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_property_scoped_context_override_is_applied_before_child_nodes() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "items": {
+                    "@id": "https://example.invalid/items",
+                    "@context": {
+                        "ScholarlyArticle": "https://example.invalid/Fake"
+                    },
+                },
+            },
+            "items": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )

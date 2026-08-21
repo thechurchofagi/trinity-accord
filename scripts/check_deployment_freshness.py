@@ -112,6 +112,7 @@ HTML_VOID_ELEMENTS = {
     "wbr",
 }
 SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}
+SCHEMA_ORG_VOCAB_BASES = {"http://schema.org/", "https://schema.org/"}
 SCHEMA_ORG_ARTICLE_IRIS = {
     f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES
 }
@@ -319,11 +320,14 @@ class ScholarlyHTMLParser(HTMLParser):
         self._body_started = False
         self._template_depth = 0
         self._head_text_stack: list[str] = []
+        self._in_noscript_raw = False
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
+        if self._in_noscript_raw:
+            return
         attributes, duplicates, values = _first_attributes(attrs)
 
         # A non-head start tag implicitly ends the optional document head even
@@ -355,6 +359,12 @@ class ScholarlyHTMLParser(HTMLParser):
             and self._template_depth == 0
         ):
             self._head_text_stack.append(tag)
+
+        if tag == "noscript":
+            # With scripting enabled, noscript content is raw text. Python's
+            # HTMLParser still emits apparent tags from that text, so remember
+            # the tokenizer state and ignore them until the real </noscript>.
+            self._in_noscript_raw = True
 
         if tag == "meta" and self._in_head and self._template_depth == 0:
             name_values = [value for value in values.get("name", []) if value is not None]
@@ -411,6 +421,10 @@ class ScholarlyHTMLParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.lower()
+        if self._in_noscript_raw:
+            if tag != "noscript":
+                return
+            self._in_noscript_raw = False
         if tag == "script" and self._in_json_ld:
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
@@ -543,7 +557,11 @@ def _schema_context_state(
     if isinstance(context, dict):
         vocab_is_schema, article_override = inherited
         if "@vocab" in context:
-            vocab_is_schema = _normalized_schema_url(context.get("@vocab")) in SCHEMA_ORG_BASES
+            raw_vocab = context.get("@vocab")
+            vocab_is_schema = (
+                isinstance(raw_vocab, str)
+                and raw_vocab.strip() in SCHEMA_ORG_VOCAB_BASES
+            )
         if "ScholarlyArticle" in context:
             article_override = _term_maps_to_schema_article(
                 context.get("ScholarlyArticle"), vocab_is_schema
@@ -570,6 +588,33 @@ def _context_propagates(context: object) -> bool:
     return True
 
 
+def _property_scoped_contexts(
+    context: object,
+    inherited: dict[str, object],
+) -> dict[str, object]:
+    """Track JSON-LD property-scoped contexts in the active local context."""
+    if context is None:
+        return {}
+    if isinstance(context, str):
+        return dict(inherited)
+    if isinstance(context, dict):
+        scopes = dict(inherited)
+        for term, definition in context.items():
+            if term.startswith("@"):
+                continue
+            if isinstance(definition, dict) and "@context" in definition:
+                scopes[term] = definition.get("@context")
+            else:
+                scopes.pop(term, None)
+        return scopes
+    if isinstance(context, list):
+        scopes = dict(inherited)
+        for item in context:
+            scopes = _property_scoped_contexts(item, scopes)
+        return scopes
+    return {}
+
+
 def _schema_article_term_is_valid(state: SchemaContextState) -> bool:
     vocab_is_schema, article_override = state
     if article_override is not None:
@@ -581,16 +626,26 @@ def collect_scholarly_articles(
     value: object,
     articles: list[tuple[dict, bool]],
     inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,
+    inherited_property_scopes: dict[str, object] | None = None,
 ) -> None:
+    property_scopes = (
+        {} if inherited_property_scopes is None else dict(inherited_property_scopes)
+    )
     if isinstance(value, dict):
         schema_state = inherited_schema_context
         child_schema_state = inherited_schema_context
+        node_property_scopes = property_scopes
+        child_property_scopes = property_scopes
         if "@context" in value:
             context = value.get("@context")
             schema_state = _schema_context_state(context, inherited_schema_context)
-            child_schema_state = (
-                schema_state if _context_propagates(context) else inherited_schema_context
-            )
+            node_property_scopes = _property_scoped_contexts(context, property_scopes)
+            if _context_propagates(context):
+                child_schema_state = schema_state
+                child_property_scopes = node_property_scopes
+            else:
+                child_schema_state = inherited_schema_context
+                child_property_scopes = property_scopes
         else:
             child_schema_state = schema_state
 
@@ -601,11 +656,33 @@ def collect_scholarly_articles(
             articles.append((value, _schema_article_term_is_valid(schema_state)))
 
         for key, child in value.items():
-            if key != "@context":
-                collect_scholarly_articles(child, articles, child_schema_state)
+            if key == "@context":
+                continue
+            if key in node_property_scopes:
+                scoped_context = node_property_scopes[key]
+                # A property-scoped context applies before visiting its value.
+                # For non-propagating scoped contexts, fail closed rather than
+                # accidentally leaking the scoped vocabulary to deeper nodes.
+                if _context_propagates(scoped_context):
+                    scoped_state = _schema_context_state(scoped_context, schema_state)
+                    scoped_property_scopes = _property_scoped_contexts(
+                        scoped_context, child_property_scopes
+                    )
+                else:
+                    scoped_state = DEFAULT_SCHEMA_CONTEXT_STATE
+                    scoped_property_scopes = {}
+                collect_scholarly_articles(
+                    child, articles, scoped_state, scoped_property_scopes
+                )
+            else:
+                collect_scholarly_articles(
+                    child, articles, child_schema_state, child_property_scopes
+                )
     elif isinstance(value, list):
         for child in value:
-            collect_scholarly_articles(child, articles, inherited_schema_context)
+            collect_scholarly_articles(
+                child, articles, inherited_schema_context, property_scopes
+            )
 
 
 def check_scholarly_landing(page: str, errors: list[str]) -> None:
