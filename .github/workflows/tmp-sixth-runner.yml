@@ -23,7 +23,7 @@ jobs:
       - name: Record toolchain provenance
         run: python3 scripts/toolchain_provenance.py
 
-      - name: Execute retained sixth-round applicator
+      - name: Execute corrected retained sixth-round applicator
         shell: bash
         run: |
           set -euo pipefail
@@ -32,9 +32,25 @@ jobs:
             in_step && /        run: \|/ { in_run=1; next }
             in_run && /^      - name:/ { exit }
             in_run { sub(/^          /, ""); print }
-          ' .github/workflows/tmp-sixth-scholarly-review.yml > /tmp/sixth-apply.sh
-          test -s /tmp/sixth-apply.sh
-          bash /tmp/sixth-apply.sh
+          ' .github/workflows/tmp-sixth-scholarly-review.yml > /tmp/sixth-raw.sh
+          test -s /tmp/sixth-raw.sh
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('/tmp/sixth-raw.sh')
+          text = path.read_text(encoding='utf-8')
+          start_marker = '# The raw replacement blocks above are indented for YAML readability.'
+          end_marker = "source_path.write_text(source, encoding='utf-8')"
+          start = text.find(start_marker)
+          end = text.find(end_marker, start)
+          if start < 0 or end < 0:
+              raise SystemExit('failed to locate broken normalization block')
+          corrected = text[:start] + text[end:]
+          Path('/tmp/sixth-corrected.sh').write_text(corrected, encoding='utf-8')
+          PY
+
+          bash /tmp/sixth-corrected.sh
 
       - name: Commit sixth-round fixes and remove temporary machinery
         shell: bash
