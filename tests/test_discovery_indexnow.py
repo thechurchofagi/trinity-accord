@@ -47,7 +47,7 @@ def test_agent_pointer_exposes_discovery_without_claiming_a2a() -> None:
     assert agent["discovery"]["indexnow"]["key_location"].endswith(".txt")
 
 
-def test_indexnow_batch_dry_run_is_network_free_and_valid() -> None:
+def test_indexnow_batch_dry_run_is_network_free_and_dedicated() -> None:
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "submit_indexnow.py"), "--dry-run"],
         cwd=ROOT,
@@ -58,6 +58,8 @@ def test_indexnow_batch_dry_run_is_network_free_and_valid() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert "DRY RUN PASS" in result.stdout
+    assert "sitemap-discovery.xml" in result.stdout
+    assert "URL count: 12" in result.stdout
     assert "https://www.trinityaccord.org/DISCOVERY.md" in result.stdout
     assert "https://www.trinityaccord.org/discovery.json" in result.stdout
     assert "https://www.trinityaccord.org/api/agent-first-contact.json" in result.stdout
