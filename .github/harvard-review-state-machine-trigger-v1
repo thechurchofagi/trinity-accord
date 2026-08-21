@@ -1,4 +1,4 @@
-Harvard Dataverse preservation state-machine activation v4.
+Harvard Dataverse preservation state-machine activation v5.
 Persistent ID: doi:10.7910/DVN/YUCG12
 Source preservation run: 32368866492
 Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
@@ -8,4 +8,5 @@ Repair only Dataset Terms through the official dataset-license API; do not alter
 Reuse the prior authenticated full-byte readback only if file ID, bytes, SHA-256, filename, and bundle identity all remain exact.
 Use the Dataverse InReview lock to prevent duplicate submissions; fail closed on any later curator return.
 Custom Terms of Use SHA-256: 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140
+Dedicated finalization branch execution isolates state commits from unrelated main-branch automation.
 Non-amending institutional mirror only; the three Bitcoin Originals remain the sole canonical and final authority.
