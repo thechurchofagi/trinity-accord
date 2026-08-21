@@ -772,7 +772,7 @@ def test_identical_protected_schema_term_redefinition_is_allowed() -> None:
     page = _landing({
         "@context": [
   {"@vocab": "https://schema.org/", "name": protected_name},
-  {"name": protected_name},
+  {"name": "https://schema.org/name"},
         ],
         "@graph": [_valid_article()],
     })

@@ -844,13 +844,19 @@ def _expand_term_iri(value: str, prefixes: dict[str, str]) -> str:
     return current
 
 
-def _protected_term_signature(definition: object, protected: bool) -> str:
-    canonical = definition
-    if isinstance(definition, dict):
+def _protected_term_signature(definition: object) -> str:
+    # JSON-LD compares protected term definitions modulo the @protected flag.
+    # Normalize simple string definitions to their expanded {"@id": ...} shape
+    # so syntactically different but identical definitions are not rejected.
+    if isinstance(definition, str):
+        canonical: object = {"@id": definition}
+    elif isinstance(definition, dict):
         canonical = dict(definition)
         canonical.pop("@protected", None)
+    else:
+        canonical = definition
     return json.dumps(
-        {"protected": protected, "definition": canonical},
+        canonical,
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -935,7 +941,7 @@ def _schema_context_state(
                 definition_protected = definition.get("@protected") is True
             else:
                 definition_protected = context_protected
-            signature = _protected_term_signature(definition, definition_protected)
+            signature = _protected_term_signature(definition)
             if term in protected_definitions:
                 if signature != protected_definitions[term]:
                     unsupported = True
