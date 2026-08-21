@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: discovery-indexnow
@@ -81,62 +82,80 @@ jobs:
               "/DISCOVERY.md",
               "/.well-known/agent.json",
           )
-          token = f"{deploy_ref}-{time.time_ns()}"
+          max_attempts = 6
+          retry_seconds = 10
 
           def sha256(data: bytes) -> str:
               return hashlib.sha256(data).hexdigest()
 
-          failures: list[str] = []
-          for path in surfaces:
-              local_path = root / path.lstrip("/")
-              expected = local_path.read_bytes()
+          def fetch(path: str, token: str) -> tuple[int, bytes, str]:
               query = urllib.parse.urlencode({"cb": token})
               url = f"{site}{path}?{query}"
               request = urllib.request.Request(
                   url,
                   headers={
-                      "User-Agent": "trinity-accord-discovery-live-preflight/1.0",
+                      "User-Agent": "trinity-accord-discovery-live-preflight/1.1",
                       "Accept": "application/json,text/markdown,text/plain,application/xml,text/xml,*/*",
                       "Cache-Control": "no-cache, no-store, max-age=0",
                       "Pragma": "no-cache",
                   },
               )
-              try:
-                  with urllib.request.urlopen(request, timeout=20) as response:
-                      actual = response.read()
-                      status = response.status
-                      content_type = response.headers.get("Content-Type", "")
-              except urllib.error.HTTPError as exc:
-                  failures.append(f"{path}: HTTP {exc.code} {exc.reason}")
-                  continue
-              except urllib.error.URLError as exc:
-                  failures.append(f"{path}: fetch failed: {exc.reason}")
-                  continue
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  return response.status, response.read(), response.headers.get("Content-Type", "")
 
-              expected_sha = sha256(expected)
-              actual_sha = sha256(actual)
-              print(
-                  f"LIVE {path} status={status} bytes={len(actual)} "
-                  f"sha256={actual_sha} content_type={content_type!r}"
-              )
-              print(
-                  f"REPO {path} ref={deploy_ref} bytes={len(expected)} "
-                  f"sha256={expected_sha}"
-              )
-              if status != 200:
-                  failures.append(f"{path}: expected HTTP 200, got {status}")
-              if actual != expected:
-                  failures.append(
-                      f"{path}: live/repo mismatch {actual_sha} != {expected_sha}"
+          final_failures: list[str] = []
+          for attempt in range(1, max_attempts + 1):
+              token = f"{deploy_ref}-{attempt}-{time.time_ns()}"
+              failures: list[str] = []
+              print(f"DISCOVERY LIVE PREFLIGHT attempt={attempt}/{max_attempts}")
+              for path in surfaces:
+                  local_path = root / path.lstrip("/")
+                  expected = local_path.read_bytes()
+                  expected_sha = sha256(expected)
+                  try:
+                      status, actual, content_type = fetch(path, token)
+                  except urllib.error.HTTPError as exc:
+                      failures.append(f"{path}: HTTP {exc.code} {exc.reason}")
+                      continue
+                  except urllib.error.URLError as exc:
+                      failures.append(f"{path}: fetch failed: {exc.reason}")
+                      continue
+
+                  actual_sha = sha256(actual)
+                  print(
+                      f"LIVE {path} status={status} bytes={len(actual)} "
+                      f"sha256={actual_sha} content_type={content_type!r}"
                   )
+                  print(
+                      f"REPO {path} ref={deploy_ref} bytes={len(expected)} "
+                      f"sha256={expected_sha}"
+                  )
+                  if status != 200:
+                      failures.append(f"{path}: expected HTTP 200, got {status}")
+                  if actual != expected:
+                      failures.append(
+                          f"{path}: live/repo mismatch {actual_sha} != {expected_sha}"
+                      )
 
-          if failures:
-              print("DISCOVERY LIVE PREFLIGHT FAILED")
+              if not failures:
+                  print(
+                      "DISCOVERY LIVE PREFLIGHT PASS: all discovery surfaces "
+                      f"match deployed source on attempt {attempt}"
+                  )
+                  raise SystemExit(0)
+
+              final_failures = failures
+              print(f"DISCOVERY LIVE PREFLIGHT attempt {attempt} not ready")
               for failure in failures:
                   print(f"  - {failure}")
-              raise SystemExit(1)
+              if attempt < max_attempts:
+                  print(f"Retrying after {retry_seconds}s")
+                  time.sleep(retry_seconds)
 
-          print("DISCOVERY LIVE PREFLIGHT PASS: all discovery surfaces match deployed source")
+          print("DISCOVERY LIVE PREFLIGHT FAILED after bounded retries")
+          for failure in final_failures:
+              print(f"  - {failure}")
+          raise SystemExit(1)
           PY
 
       - name: Submit high-signal discovery URLs
@@ -170,3 +189,87 @@ jobs:
             tail -n 40 indexnow-dry-run.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish public discovery receipt
+        if: ${{ always() && (github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISCOVERY_STATUS_ISSUE: "1062"
+          DISCOVERY_SOURCE_REF: ${{ steps.source.outputs.ref }}
+          DISCOVERY_MODE: ${{ steps.source.outputs.mode }}
+          DISCOVERY_PRIOR_STATUS: ${{ job.status }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from pathlib import Path
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          issue = os.environ["DISCOVERY_STATUS_ISSUE"]
+          token = os.environ["GH_TOKEN"]
+          source = os.environ.get("DISCOVERY_SOURCE_REF") or "unresolved"
+          mode = os.environ.get("DISCOVERY_MODE") or "unresolved"
+          prior_status = os.environ.get("DISCOVERY_PRIOR_STATUS") or "unknown"
+
+          def read_tail(path: str, lines: int = 24) -> str:
+              p = Path(path)
+              if not p.is_file():
+                  return "NOT_RUN"
+              text = p.read_text(encoding="utf-8", errors="replace")
+              return "\n".join(text.splitlines()[-lines:]) or "EMPTY"
+
+          preflight = read_tail("discovery-live-preflight.log")
+          submit = read_tail("indexnow-submit.log")
+          preflight_status = (
+              "PASS" if "DISCOVERY LIVE PREFLIGHT PASS" in preflight else
+              "FAILED" if "DISCOVERY LIVE PREFLIGHT FAILED" in preflight else
+              "NOT_RUN"
+          )
+          indexnow_line = next(
+              (line for line in reversed(submit.splitlines()) if line.startswith("INDEXNOW HTTP ")),
+              "INDEXNOW NOT_RUN",
+          )
+
+          body = (
+              "### Discovery IndexNow receipt\n\n"
+              f"- Source: `{source}`\n"
+              f"- Mode: `{mode}`\n"
+              f"- Workflow status before receipt publication: `{prior_status}`\n"
+              f"- Live byte-for-byte preflight: **{preflight_status}**\n"
+              f"- IndexNow response: **{indexnow_line}**\n"
+              "- Meaning: operational submission evidence only; not proof of indexing, ranking, or endorsement.\n\n"
+              "<details><summary>Bounded diagnostic tail</summary>\n\n"
+              "```text\n"
+              f"{preflight}\n{submit}\n"
+              "```\n\n"
+              "</details>"
+          )
+
+          url = f"https://api.github.com/repos/{repo}/issues/{issue}/comments"
+          payload = json.dumps({"body": body}).encode("utf-8")
+          request = urllib.request.Request(
+              url,
+              data=payload,
+              method="POST",
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Accept": "application/vnd.github+json",
+                  "Content-Type": "application/json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "User-Agent": "trinity-accord-discovery-receipt/1.0",
+              },
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  print(f"DISCOVERY RECEIPT HTTP {response.status}")
+                  if response.status not in (200, 201):
+                      raise SystemExit(f"unexpected receipt HTTP {response.status}")
+          except urllib.error.HTTPError as exc:
+              diagnostic = exc.read().decode("utf-8", errors="replace")[:1000]
+              raise SystemExit(f"receipt HTTP {exc.code}: {diagnostic}") from exc
+          PY
