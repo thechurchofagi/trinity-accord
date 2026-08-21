@@ -100,7 +100,7 @@ def main() -> int:
         except ValueError as exc:
             errors.append(str(exc))
 
-    for path, markers in legacy.STATIC_PAGE_MARKERS.items():
+    for path in legacy.STATIC_PAGE_MARKERS:
         try:
             page_bytes = (
                 legacy.read_static_site_dir(args.site_dir, path)
@@ -111,11 +111,7 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             errors.append(f"{path}: failed to read static page: {exc}")
             continue
-        for marker in markers:
-            if marker not in page:
-                errors.append(f"{path}: missing current static marker {marker!r}")
-        if not any(marker not in page for marker in markers):
-            print(f"{path}: current static markers present")
+        legacy.check_static_page(path, page, errors)
 
     if errors:
         print("FAIL: deployment freshness check errors:")
