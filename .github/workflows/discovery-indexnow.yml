@@ -53,6 +53,92 @@ jobs:
           set -euo pipefail
           python3 scripts/submit_indexnow.py --dry-run | tee indexnow-dry-run.log
 
+      - name: Verify deployed discovery surfaces byte-for-byte
+        if: ${{ github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true' }}
+        env:
+          TRINITY_SITE: https://www.trinityaccord.org
+          TRINITY_DEPLOY_REF: ${{ steps.source.outputs.ref }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee discovery-live-preflight.log
+          from __future__ import annotations
+
+          import hashlib
+          import os
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          from pathlib import Path
+
+          site = os.environ["TRINITY_SITE"].rstrip("/")
+          deploy_ref = os.environ["TRINITY_DEPLOY_REF"]
+          root = Path.cwd()
+          surfaces = (
+              "/robots.txt",
+              "/sitemap-discovery.xml",
+              "/discovery.json",
+              "/DISCOVERY.md",
+              "/.well-known/agent.json",
+          )
+          token = f"{deploy_ref}-{time.time_ns()}"
+
+          def sha256(data: bytes) -> str:
+              return hashlib.sha256(data).hexdigest()
+
+          failures: list[str] = []
+          for path in surfaces:
+              local_path = root / path.lstrip("/")
+              expected = local_path.read_bytes()
+              query = urllib.parse.urlencode({"cb": token})
+              url = f"{site}{path}?{query}"
+              request = urllib.request.Request(
+                  url,
+                  headers={
+                      "User-Agent": "trinity-accord-discovery-live-preflight/1.0",
+                      "Accept": "application/json,text/markdown,text/plain,application/xml,text/xml,*/*",
+                      "Cache-Control": "no-cache, no-store, max-age=0",
+                      "Pragma": "no-cache",
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      actual = response.read()
+                      status = response.status
+                      content_type = response.headers.get("Content-Type", "")
+              except urllib.error.HTTPError as exc:
+                  failures.append(f"{path}: HTTP {exc.code} {exc.reason}")
+                  continue
+              except urllib.error.URLError as exc:
+                  failures.append(f"{path}: fetch failed: {exc.reason}")
+                  continue
+
+              expected_sha = sha256(expected)
+              actual_sha = sha256(actual)
+              print(
+                  f"LIVE {path} status={status} bytes={len(actual)} "
+                  f"sha256={actual_sha} content_type={content_type!r}"
+              )
+              print(
+                  f"REPO {path} ref={deploy_ref} bytes={len(expected)} "
+                  f"sha256={expected_sha}"
+              )
+              if status != 200:
+                  failures.append(f"{path}: expected HTTP 200, got {status}")
+              if actual != expected:
+                  failures.append(
+                      f"{path}: live/repo mismatch {actual_sha} != {expected_sha}"
+                  )
+
+          if failures:
+              print("DISCOVERY LIVE PREFLIGHT FAILED")
+              for failure in failures:
+                  print(f"  - {failure}")
+              raise SystemExit(1)
+
+          print("DISCOVERY LIVE PREFLIGHT PASS: all discovery surfaces match deployed source")
+          PY
+
       - name: Submit high-signal discovery URLs
         if: ${{ github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true' }}
         run: |
@@ -63,9 +149,11 @@ jobs:
             echo
             echo "- Mode: ${{ steps.source.outputs.mode }}"
             echo "- Source: \`${{ steps.source.outputs.ref }}\`"
+            echo "- Live discovery preflight: byte-for-byte PASS"
             echo "- Result: submitted high-signal sitemap URLs plus discovery aliases"
             echo
             echo '```text'
+            tail -n 30 discovery-live-preflight.log
             tail -n 40 indexnow-submit.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
@@ -76,7 +164,7 @@ jobs:
           {
             echo "## Discovery IndexNow"
             echo
-            echo "Manual dry run only; no indexing request was sent."
+            echo "Manual dry run only; no live preflight or indexing request was sent."
             echo
             echo '```text'
             tail -n 40 indexnow-dry-run.log
