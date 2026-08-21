@@ -243,7 +243,7 @@ STATIC_SOURCE_FILES = [
 
 
 class ScholarlyHTMLParser(HTMLParser):
-    """Extract scholarly metadata from the one real document head plus JSON-LD."""
+    """Extract head-only scholarly meta and document-wide JSON-LD."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -272,11 +272,7 @@ class ScholarlyHTMLParser(HTMLParser):
             content = attributes.get("content")
             if name is not None:
                 self.meta.setdefault(name, []).append(content or "")
-        elif (
-            tag == "script"
-            and self._in_head
-            and (attributes.get("type") or "").lower() == "application/ld+json"
-        ):
+        elif tag == "script" and (attributes.get("type") or "").lower() == "application/ld+json":
             self._in_json_ld = True
             self._json_ld_chunks = []
 
