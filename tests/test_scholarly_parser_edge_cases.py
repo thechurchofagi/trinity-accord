@@ -78,6 +78,20 @@ def test_non_head_start_tag_implicitly_ends_head_without_body_tag() -> None:
     assert parser._in_head is False
 
 
+def test_non_whitespace_character_token_implicitly_ends_head() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head>body-effective text"
+        '<meta name="citation_title" content="after-text">'
+        "</html>"
+    )
+    parser.close()
+
+    assert "citation_title" not in parser.meta
+    assert parser._body_started is True
+    assert parser._in_head is False
+
+
 def test_duplicate_meta_attributes_use_first_values_and_fail_closed() -> None:
     parser = deployment.ScholarlyHTMLParser()
     parser.feed(
@@ -146,6 +160,21 @@ def test_template_contents_are_inert_for_scholarly_metadata() -> None:
     assert parser.errors == []
 
 
+def test_self_closing_template_slash_does_not_end_html_template() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head><template/>"
+        '<meta name="citation_title" content="still-template">'
+        '<script type="application/ld+json">{"still":"template"}</script>'
+        "</head><body></body></html>"
+    )
+    parser.close()
+
+    assert "citation_title" not in parser.meta
+    assert parser.json_ld_blocks == []
+    assert parser._template_depth == 1
+
+
 def test_scholarly_article_inherits_root_schema_org_context() -> None:
     page = _landing(
         {"@context": "https://schema.org", "@graph": [_valid_article()]}
@@ -181,6 +210,58 @@ def test_scholarly_article_with_non_schema_context_is_rejected() -> None:
 def test_child_context_can_reset_inherited_schema_org_context() -> None:
     article = _valid_article(**{"@context": None})
     page = _landing({"@context": "https://schema.org", "@graph": [article]})
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_explicit_scholarly_article_term_override_is_honored() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "ScholarlyArticle": "https://example.invalid/Fake",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_explicit_schema_org_scholarly_article_term_is_accepted() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://example.invalid/vocab/",
+                "ScholarlyArticle": "https://schema.org/ScholarlyArticle",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert errors == []
+
+
+def test_propagate_false_does_not_apply_context_to_graph_descendants() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "@propagate": False,
+            },
+            "@graph": [_valid_article()],
+        }
+    )
     errors: list[str] = []
     deployment.check_scholarly_landing(page, errors)
 
