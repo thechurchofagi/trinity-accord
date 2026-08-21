@@ -1,11 +1,11 @@
 {
   "schema": "trinity-accord.harvard-dataverse-state.v1",
-  "observed_at": "2026-08-20T13:08:30.521379+00:00",
+  "observed_at": "2026-08-21T23:20:12+00:00",
   "server": "https://dataverse.harvard.edu",
   "persistent_id": "doi:10.7910/DVN/YUCG12",
   "dataset_id": 14153533,
   "version_state": "DRAFT",
-  "status": "submitted_for_review_v1_0",
+  "status": "blocked_in_review_awaiting_curator_return_for_terms_fix",
   "source": {
     "repository": "thechurchofagi/trinity-accord",
     "workflow_run_id": 32368866492,
@@ -32,6 +32,32 @@
   "authenticated_readback_verified": true,
   "authenticated_readback_bytes": 1951603950,
   "authenticated_readback_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
-  "review_submission": "already_pending",
+  "review_submission": "legacy_automation_resubmitted_unfixed_draft_after_curator_return",
+  "in_review_lock_present": true,
+  "curator_return": {
+    "received_at": "2026-08-21T20:36:35+00:00",
+    "reason": "Custom Dataset Terms was selected but no custom Terms of Use were provided.",
+    "requested_action": "Enter custom terms or select an appropriate license, then resubmit the dataset."
+  },
+  "terms_correction": {
+    "required": true,
+    "mode": "Custom Dataset Terms",
+    "target_terms_of_use_sha256": "81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140",
+    "correction_applied": false,
+    "blocked_by": "Harvard InReview lock created by an unintended legacy-automation resubmission",
+    "safe_state_machine": "scripts/harvard_preservation_state_machine_v3.py",
+    "fail_closed_on_review_lock": true
+  },
+  "last_state_machine_attempt": {
+    "run_id": 32536414095,
+    "run_attempt": 1,
+    "workflow_sha": "da8f1ff239d55dbb6a82f3ecc2bdbe9fbef5f957",
+    "result": "fail_closed",
+    "reason": "Dataset is InReview while custom terms are missing or mismatched; no mutation was attempted."
+  },
+  "coordination": {
+    "harvard_support_ticket": 423683,
+    "return_unlock_requested": true
+  },
   "public_readback_verified": false
 }
