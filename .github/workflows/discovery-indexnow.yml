@@ -8,54 +8,76 @@ on:
         required: false
         default: false
         type: boolean
-  workflow_run:
-    workflows:
-      - Deploy Pages
-    types:
-      - completed
+  push:
+    branches:
+      - main
+    paths:
+      - "index.md"
+      - "index.html"
+      - "robots.txt"
+      - "sitemap-core.xml"
+      - "sitemap-discovery.xml"
+      - "discovery.json"
+      - "DISCOVERY.md"
+      - "metadata.json"
+      - "llms.txt"
+      - ".well-known/**"
+      - "agent-first-contact*"
+      - "agent-brief*"
+      - "research/**"
+      - "CITATION.cff"
+      - "api/agent-first-contact.json"
+      - "api/agent-minimal-context.v1.json"
+      - "api/authority.json"
+      - "api/evidence-manifest.json"
+      - "api/research-preprint.v1.json"
+      - ".github/workflows/discovery-indexnow.yml"
+      - "scripts/submit_indexnow.py"
+      - "tests/test_discovery_indexnow.py"
+      - "tests/test_discovery_indexnow_workflow.py"
 
 permissions:
   contents: read
   issues: write
 
 concurrency:
-  group: discovery-indexnow
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'push' && 'discovery-indexnow-main' || format('discovery-indexnow-manual-{0}', github.run_id) }}
+  cancel-in-progress: true
 
 jobs:
   submit-high-signal-urls:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 12
 
     steps:
-      - name: Resolve deployed source
+      - name: Checkout source to be observed in production
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event_name == 'push' && github.sha || 'main' }}
+          fetch-depth: 1
+
+      - name: Resolve exact source revision
         id: source
         shell: bash
         run: |
           set -euo pipefail
-          if [ "${GITHUB_EVENT_NAME}" = "workflow_run" ]; then
-            echo "ref=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
-            echo "mode=post-deploy" >> "$GITHUB_OUTPUT"
+          source_sha="$(git rev-parse HEAD)"
+          git cat-file -e "${source_sha}^{commit}"
+          echo "ref=${source_sha}" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            echo "mode=main-push-production-byte-gate" >> "$GITHUB_OUTPUT"
           else
-            echo "ref=main" >> "$GITHUB_OUTPUT"
-            echo "mode=manual" >> "$GITHUB_OUTPUT"
+            echo "mode=manual-production-byte-gate" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Checkout deployed source
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          ref: ${{ steps.source.outputs.ref }}
+          echo "source_sha=${source_sha}"
 
       - name: Validate IndexNow batch offline
         run: |
           set -euo pipefail
           python3 scripts/submit_indexnow.py --dry-run | tee indexnow-dry-run.log
 
-      - name: Verify deployed discovery surfaces byte-for-byte
-        if: ${{ github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true' }}
+      - name: Wait for production discovery surfaces to match source byte-for-byte
+        if: ${{ github.event_name == 'push' || github.event.inputs.dry_run != 'true' }}
         env:
           TRINITY_SITE: https://www.trinityaccord.org
           TRINITY_DEPLOY_REF: ${{ steps.source.outputs.ref }}
@@ -70,6 +92,7 @@ jobs:
           import urllib.error
           import urllib.parse
           import urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
           from pathlib import Path
 
           site = os.environ["TRINITY_SITE"].rstrip("/")
@@ -82,7 +105,7 @@ jobs:
               "/DISCOVERY.md",
               "/.well-known/agent.json",
           )
-          max_attempts = 6
+          max_attempts = 30
           retry_seconds = 10
 
           def sha256(data: bytes) -> str:
@@ -94,33 +117,51 @@ jobs:
               request = urllib.request.Request(
                   url,
                   headers={
-                      "User-Agent": "trinity-accord-discovery-live-preflight/1.1",
+                      "User-Agent": "trinity-accord-discovery-live-preflight/1.2",
                       "Accept": "application/json,text/markdown,text/plain,application/xml,text/xml,*/*",
                       "Cache-Control": "no-cache, no-store, max-age=0",
                       "Pragma": "no-cache",
                   },
               )
-              with urllib.request.urlopen(request, timeout=20) as response:
+              with urllib.request.urlopen(request, timeout=15) as response:
                   return response.status, response.read(), response.headers.get("Content-Type", "")
 
+          expected_by_path = {
+              path: (root / path.lstrip("/")).read_bytes()
+              for path in surfaces
+          }
           final_failures: list[str] = []
+
           for attempt in range(1, max_attempts + 1):
               token = f"{deploy_ref}-{attempt}-{time.time_ns()}"
               failures: list[str] = []
+              observed: dict[str, tuple[int, bytes, str] | Exception] = {}
               print(f"DISCOVERY LIVE PREFLIGHT attempt={attempt}/{max_attempts}")
+
+              with ThreadPoolExecutor(max_workers=len(surfaces)) as pool:
+                  futures = {pool.submit(fetch, path, token): path for path in surfaces}
+                  for future in as_completed(futures):
+                      path = futures[future]
+                      try:
+                          observed[path] = future.result()
+                      except Exception as exc:  # bounded network diagnostic
+                          observed[path] = exc
+
               for path in surfaces:
-                  local_path = root / path.lstrip("/")
-                  expected = local_path.read_bytes()
+                  expected = expected_by_path[path]
                   expected_sha = sha256(expected)
-                  try:
-                      status, actual, content_type = fetch(path, token)
-                  except urllib.error.HTTPError as exc:
-                      failures.append(f"{path}: HTTP {exc.code} {exc.reason}")
+                  result = observed[path]
+                  if isinstance(result, urllib.error.HTTPError):
+                      failures.append(f"{path}: HTTP {result.code} {result.reason}")
                       continue
-                  except urllib.error.URLError as exc:
-                      failures.append(f"{path}: fetch failed: {exc.reason}")
+                  if isinstance(result, urllib.error.URLError):
+                      failures.append(f"{path}: fetch failed: {result.reason}")
+                      continue
+                  if isinstance(result, Exception):
+                      failures.append(f"{path}: fetch failed: {type(result).__name__}: {result}")
                       continue
 
+                  status, actual, content_type = result
                   actual_sha = sha256(actual)
                   print(
                       f"LIVE {path} status={status} bytes={len(actual)} "
@@ -139,8 +180,8 @@ jobs:
 
               if not failures:
                   print(
-                      "DISCOVERY LIVE PREFLIGHT PASS: all discovery surfaces "
-                      f"match deployed source on attempt {attempt}"
+                      "DISCOVERY LIVE PREFLIGHT PASS: production discovery bytes "
+                      f"match source {deploy_ref} on attempt {attempt}"
                   )
                   raise SystemExit(0)
 
@@ -149,17 +190,17 @@ jobs:
               for failure in failures:
                   print(f"  - {failure}")
               if attempt < max_attempts:
-                  print(f"Retrying after {retry_seconds}s")
+                  print(f"Retrying after {retry_seconds}s while production converges")
                   time.sleep(retry_seconds)
 
-          print("DISCOVERY LIVE PREFLIGHT FAILED after bounded retries")
+          print("DISCOVERY LIVE PREFLIGHT FAILED after bounded production wait")
           for failure in final_failures:
               print(f"  - {failure}")
           raise SystemExit(1)
           PY
 
       - name: Submit high-signal discovery URLs
-        if: ${{ github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true' }}
+        if: ${{ github.event_name == 'push' || github.event.inputs.dry_run != 'true' }}
         run: |
           set -euo pipefail
           python3 scripts/submit_indexnow.py | tee indexnow-submit.log
@@ -168,8 +209,8 @@ jobs:
             echo
             echo "- Mode: ${{ steps.source.outputs.mode }}"
             echo "- Source: \`${{ steps.source.outputs.ref }}\`"
-            echo "- Live discovery preflight: byte-for-byte PASS"
-            echo "- Result: submitted high-signal sitemap URLs plus discovery aliases"
+            echo "- Production discovery bytes: exact-match PASS"
+            echo "- Result: submitted dedicated high-signal discovery sitemap"
             echo
             echo '```text'
             tail -n 30 discovery-live-preflight.log
@@ -183,7 +224,7 @@ jobs:
           {
             echo "## Discovery IndexNow"
             echo
-            echo "Manual dry run only; no live preflight or indexing request was sent."
+            echo "Manual dry run only; no production preflight or indexing request was sent."
             echo
             echo '```text'
             tail -n 40 indexnow-dry-run.log
@@ -191,7 +232,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publish public discovery receipt
-        if: ${{ always() && (github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true') }}
+        if: ${{ always() && (github.event_name == 'push' || github.event.inputs.dry_run != 'true') }}
         env:
           GH_TOKEN: ${{ github.token }}
           DISCOVERY_STATUS_ISSUE: "1062"
@@ -240,7 +281,7 @@ jobs:
               f"- Source: `{source}`\n"
               f"- Mode: `{mode}`\n"
               f"- Workflow status before receipt publication: `{prior_status}`\n"
-              f"- Live byte-for-byte preflight: **{preflight_status}**\n"
+              f"- Production byte-for-byte preflight: **{preflight_status}**\n"
               f"- IndexNow response: **{indexnow_line}**\n"
               "- Meaning: operational submission evidence only; not proof of indexing, ranking, or endorsement.\n\n"
               "<details><summary>Bounded diagnostic tail</summary>\n\n"
@@ -261,7 +302,7 @@ jobs:
                   "Accept": "application/vnd.github+json",
                   "Content-Type": "application/json",
                   "X-GitHub-Api-Version": "2022-11-28",
-                  "User-Agent": "trinity-accord-discovery-receipt/1.0",
+                  "User-Agent": "trinity-accord-discovery-receipt/1.1",
               },
           )
           try:

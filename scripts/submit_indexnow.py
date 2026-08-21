@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Submit Trinity Accord high-signal discovery URLs to IndexNow.
 
-This is a non-amending discoverability utility. It reads the existing core
-sitemap plus a small set of discovery-only static aliases, verifies that every
-URL belongs to the configured public host, verifies the already-public root
-IndexNow key when running live, and submits one bounded batch.
+This is a non-amending discoverability utility. It reads the dedicated
+high-signal discovery sitemap, verifies that every URL belongs to the configured
+public host, verifies the already-public root IndexNow key when running live,
+and submits one bounded batch.
 
 The script intentionally has no secrets and no hidden URL generation. Use
 --dry-run to inspect the exact URL set without network access.
@@ -25,12 +25,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SITE = "https://www.trinityaccord.org"
 DEFAULT_ENDPOINT = "https://api.indexnow.org/indexnow"
-DEFAULT_SITEMAP = ROOT / "sitemap-core.xml"
+DEFAULT_SITEMAP = ROOT / "sitemap-discovery.xml"
 DEFAULT_KEY_FILE = ROOT / "4c23c01d8a12d488d40469e5e5d01941.txt"
-DEFAULT_EXTRA_PATHS = (
-    "/DISCOVERY.md",
-    "/discovery.json",
-)
+DEFAULT_EXTRA_PATHS: tuple[str, ...] = ()
 KEY_PATTERN = re.compile(r"^[A-Za-z0-9-]{8,128}$")
 MAX_URLS = 10_000
 
@@ -112,7 +109,7 @@ def fetch_bytes(url: str, timeout: int) -> bytes:
     request = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "trinity-accord-indexnow/1.0",
+            "User-Agent": "trinity-accord-indexnow/1.1",
             "Accept": "text/plain,*/*",
             "Cache-Control": "no-cache, no-store, max-age=0",
             "Pragma": "no-cache",
@@ -149,7 +146,7 @@ def submit(endpoint: str, payload: dict, timeout: int) -> int:
         headers={
             "Content-Type": "application/json; charset=utf-8",
             "Accept": "application/json,text/plain,*/*",
-            "User-Agent": "trinity-accord-indexnow/1.0",
+            "User-Agent": "trinity-accord-indexnow/1.1",
         },
     )
     try:
