@@ -243,18 +243,21 @@ STATIC_SOURCE_FILES = [
 
 
 class ScholarlyHTMLParser(HTMLParser):
-    """Extract named meta values and raw JSON-LD blocks from rendered HTML."""
+    """Extract scholarly head metadata and raw JSON-LD blocks from rendered HTML."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.meta: dict[str, list[str]] = {}
         self.json_ld_blocks: list[str] = []
+        self._in_head = False
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
-        if tag == "meta":
+        if tag == "head":
+            self._in_head = True
+        if tag == "meta" and self._in_head:
             name = attributes.get("name")
             content = attributes.get("content")
             if name is not None:
@@ -272,6 +275,8 @@ class ScholarlyHTMLParser(HTMLParser):
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
             self._json_ld_chunks = []
+        if tag == "head":
+            self._in_head = False
 
 
 def sha256(data: bytes) -> str:
@@ -383,10 +388,10 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
 
     for name, expected in SCHOLARLY_META_EXPECTED.items():
         observed = parser.meta.get(name, [])
-        if expected not in observed:
+        if observed != [expected]:
             errors.append(
-                f"{SCHOLARLY_LANDING_PATH}: {name} expected {expected!r}, "
-                f"observed {observed!r}"
+                f"{SCHOLARLY_LANDING_PATH}: {name} expected exactly one value "
+                f"{expected!r}, observed {observed!r}"
             )
 
     documents: list[object] = []
@@ -405,11 +410,11 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         collect_scholarly_articles(document, articles)
 
     matching = [article for article in articles if article.get("name") == SCHOLARLY_TITLE]
-    if not matching:
+    if len(matching) != 1:
         observed_names = [article.get("name") for article in articles]
         errors.append(
-            f"{SCHOLARLY_LANDING_PATH}: rendered ScholarlyArticle with exact title "
-            f"not found; observed={observed_names!r}"
+            f"{SCHOLARLY_LANDING_PATH}: expected exactly one rendered ScholarlyArticle "
+            f"with the exact title; matching={len(matching)}, observed={observed_names!r}"
         )
         return
 
@@ -476,6 +481,24 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         )
 
 
+def check_static_page(path: str, page: str, errors: list[str]) -> None:
+    """Apply the one shared rendered-page contract used by legacy and v2 checks."""
+    before = len(errors)
+    markers = STATIC_PAGE_MARKERS.get(path, [])
+    for marker in markers:
+        if marker not in page:
+            errors.append(f"{path}: missing current static marker {marker!r}")
+
+    if path == SCHOLARLY_LANDING_PATH:
+        check_scholarly_landing(page, errors)
+
+    if len(errors) == before:
+        if path == SCHOLARLY_LANDING_PATH:
+            print(f"{path}: exact scholarly head metadata and JSON-LD values verified")
+        else:
+            print(f"{path}: current static markers present")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     src = parser.add_mutually_exclusive_group(required=True)
@@ -512,7 +535,7 @@ def main() -> int:
         except UnicodeDecodeError:
             pass
 
-    for path, markers in STATIC_PAGE_MARKERS.items():
+    for path in STATIC_PAGE_MARKERS:
         try:
             page_bytes = (
                 read_static_site_dir(args.site_dir, path)
@@ -524,17 +547,7 @@ def main() -> int:
             errors.append(f"{path}: failed to read static page: {exc}")
             continue
 
-        missing = [marker for marker in markers if marker not in page]
-        if missing:
-            for marker in missing:
-                errors.append(f"{path}: missing current static marker {marker!r}")
-        else:
-            print(f"{path}: current static markers present")
-
-        if path == SCHOLARLY_LANDING_PATH:
-            check_scholarly_landing(page, errors)
-            if not any(error.startswith(f"{SCHOLARLY_LANDING_PATH}:") for error in errors):
-                print(f"{path}: exact scholarly metadata and JSON-LD values verified")
+        check_static_page(path, page, errors)
 
     if errors:
         print("FAIL: deployment freshness check errors:")
