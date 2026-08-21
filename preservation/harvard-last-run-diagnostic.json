@@ -1,0 +1,10 @@
+{
+  "schema": "trinity-accord.harvard-failure-diagnostic.v1",
+  "run_id": "32536414095",
+  "run_attempt": "1",
+  "event_name": "push",
+  "ref_name": "harvard-review-finalization",
+  "workflow_sha": "da8f1ff239d55dbb6a82f3ecc2bdbe9fbef5f957",
+  "persistent_id": "doi:10.7910/DVN/YUCG12",
+  "state_machine_log_tail": "[harvard-state] archive_metadata PASS file_id=14153535 bytes=1951603950 sha256=9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2\n[harvard-state] dataset PASS persistent_id=doi:10.7910/DVN/YUCG12 dataset_id=14153533 version_state=DRAFT files=1\n[harvard-state] IN_REVIEW_LOCK present\n[harvard-state] FAIL StateMachineError: Dataset is InReview but custom terms are missing/mismatched; refusing to mutate a locked review submission\nTraceback (most recent call last):\n  File \"/home/runner/work/trinity-accord/trinity-accord/scripts/harvard_preservation_state_machine_v3.py\", line 331, in <module>\n    raise SystemExit(impl.main())\n                     ^^^^^^^^^^^\n  File \"/home/runner/work/trinity-accord/trinity-accord/scripts/harvard_preservation_state_machine.py\", line 494, in main\n    return run(Path(args.output_dir), Path(args.state_path))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/trinity-accord/trinity-accord/scripts/harvard_preservation_state_machine_v3.py\", line 249, in run_v3\n    raise impl.StateMachineError(\nharvard_preservation_state_machine.StateMachineError: Dataset is InReview but custom terms are missing/mismatched; refusing to mutate a locked review submission\n"
+}
