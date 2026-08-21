@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 from pathlib import Path
+
+import check_deployment_freshness as deployment
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +37,73 @@ def strict_json(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
     require(isinstance(value, dict), f"expected JSON object: {path}")
     return value
+
+
+def _meta(name: str, value: str) -> str:
+    return (
+        f'<meta name="{html.escape(name, quote=True)}" '
+        f'content="{html.escape(value, quote=True)}">'
+    )
+
+
+def scholarly_html_fixture(
+    *,
+    meta_overrides: dict[str, str] | None = None,
+    extra_head_meta: list[tuple[str, str]] | None = None,
+    omit_head_meta: set[str] | None = None,
+    body_meta: list[tuple[str, str]] | None = None,
+    article_overrides: dict[str, object] | None = None,
+) -> str:
+    meta_values = dict(deployment.SCHOLARLY_META_EXPECTED)
+    meta_values.update(meta_overrides or {})
+    omitted = omit_head_meta or set()
+    head_meta = [
+        _meta(name, value)
+        for name, value in meta_values.items()
+        if name not in omitted
+    ]
+    head_meta.extend(_meta(name, value) for name, value in (extra_head_meta or []))
+
+    article: dict[str, object] = {
+        "@type": "ScholarlyArticle",
+        "name": deployment.SCHOLARLY_TITLE,
+        "headline": deployment.SCHOLARLY_TITLE,
+        "datePublished": "2026-07-29",
+        "version": "1.1",
+        "identifier": [
+            {
+                "@type": "PropertyValue",
+                "propertyID": "Technical report number",
+                "value": deployment.SCHOLARLY_REPORT_NUMBER,
+            },
+            {
+                "@type": "PropertyValue",
+                "propertyID": "DOI",
+                "value": deployment.SCHOLARLY_DOI,
+                "url": deployment.SCHOLARLY_DOI_URL,
+            },
+        ],
+        "url": deployment.SCHOLARLY_HTML_URL,
+        "sameAs": [deployment.SCHOLARLY_DOI_URL, deployment.SCHOLARLY_ZENODO_URL],
+        "isAccessibleForFree": True,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "encoding": {
+            "@type": "MediaObject",
+            "contentUrl": deployment.SCHOLARLY_PDF_URL,
+            "encodingFormat": "application/pdf",
+        },
+    }
+    article.update(article_overrides or {})
+    json_ld = json.dumps({"@context": "https://schema.org", "@graph": [article]})
+    body = "".join(_meta(name, value) for name, value in (body_meta or []))
+    return (
+        "<!doctype html><html><head>"
+        + "".join(head_meta)
+        + f'<script type="application/ld+json">{json_ld}</script>'
+        + "</head><body>"
+        + body
+        + "</body></html>"
+    )
 
 
 def main() -> int:
@@ -133,6 +203,51 @@ def main() -> int:
         '"propertyID": "DOI"',
     ]:
         require(marker in layout, f"scholarly layout metadata is missing: {marker}")
+
+    valid_errors: list[str] = []
+    deployment.check_scholarly_landing(scholarly_html_fixture(), valid_errors)
+    require(not valid_errors, f"valid scholarly HTML fixture failed: {valid_errors!r}")
+
+    duplicate_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(extra_head_meta=[("citation_doi", "10.0000/conflict")]),
+        duplicate_errors,
+    )
+    require(
+        any("citation_doi expected exactly one value" in error for error in duplicate_errors),
+        "conflicting duplicate citation DOI was not rejected",
+    )
+
+    body_only_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(
+            omit_head_meta={"citation_title"},
+            body_meta=[("citation_title", deployment.SCHOLARLY_TITLE)],
+        ),
+        body_only_errors,
+    )
+    require(
+        any("citation_title expected exactly one value" in error for error in body_only_errors),
+        "citation metadata outside document head was incorrectly accepted",
+    )
+
+    json_ld_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(article_overrides={"version": "0.0"}),
+        json_ld_errors,
+    )
+    require(
+        any("ScholarlyArticle.version" in error for error in json_ld_errors),
+        "wrong rendered ScholarlyArticle value was not rejected",
+    )
+
+    v2_core = (ROOT / "scripts" / "check_deployment_freshness_v2_core.py").read_text(
+        encoding="utf-8"
+    )
+    require(
+        "legacy.check_static_page(path, page, errors)" in v2_core,
+        "v2 deployment checker bypasses shared scholarly static-page validation",
+    )
 
     machine = strict_json(ROOT / "api" / "research-preprint.v1.json")
     citation = machine.get("citation", {})
