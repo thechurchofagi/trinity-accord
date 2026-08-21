@@ -1,0 +1,84 @@
+name: Discovery IndexNow
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Validate the IndexNow batch without submitting it"
+        required: false
+        default: false
+        type: boolean
+  workflow_run:
+    workflows:
+      - Deploy Pages
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discovery-indexnow
+  cancel-in-progress: false
+
+jobs:
+  submit-high-signal-urls:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Resolve deployed source
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_run" ]; then
+            echo "ref=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+            echo "mode=post-deploy" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=main" >> "$GITHUB_OUTPUT"
+            echo "mode=manual" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout deployed source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ steps.source.outputs.ref }}
+
+      - name: Validate IndexNow batch offline
+        run: |
+          set -euo pipefail
+          python3 scripts/submit_indexnow.py --dry-run | tee indexnow-dry-run.log
+
+      - name: Submit high-signal discovery URLs
+        if: ${{ github.event_name == 'workflow_run' || github.event.inputs.dry_run != 'true' }}
+        run: |
+          set -euo pipefail
+          python3 scripts/submit_indexnow.py | tee indexnow-submit.log
+          {
+            echo "## Discovery IndexNow"
+            echo
+            echo "- Mode: ${{ steps.source.outputs.mode }}"
+            echo "- Source: \`${{ steps.source.outputs.ref }}\`"
+            echo "- Result: submitted high-signal sitemap URLs plus discovery aliases"
+            echo
+            echo '```text'
+            tail -n 40 indexnow-submit.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record dry-run summary
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
+        run: |
+          {
+            echo "## Discovery IndexNow"
+            echo
+            echo "Manual dry run only; no indexing request was sent."
+            echo
+            echo '```text'
+            tail -n 40 indexnow-dry-run.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
