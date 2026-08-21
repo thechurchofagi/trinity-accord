@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.trinityaccord.org/</loc></url>
+  <url><loc>https://www.trinityaccord.org/agent-first-contact/</loc></url>
+  <url><loc>https://www.trinityaccord.org/api/agent-first-contact.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/trinity-accord.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/.well-known/agent.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/metadata.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/llms.txt</loc></url>
+  <url><loc>https://www.trinityaccord.org/DISCOVERY.md</loc></url>
+  <url><loc>https://www.trinityaccord.org/discovery.json</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/</loc></url>
+  <url><loc>https://www.trinityaccord.org/research/trinity-accord-design-and-limits/</loc></url>
+  <url><loc>https://www.trinityaccord.org/CITATION.cff</loc></url>
+</urlset>
