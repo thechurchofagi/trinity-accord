@@ -90,7 +90,33 @@ HEAD_MODE_START_TAGS = {
     "template",
     "title",
 }
+HEAD_TEXT_TAGS = {"noframes", "noscript", "script", "style", "title"}
+HTML_VOID_ELEMENTS = {
+    "area",
+    "base",
+    "basefont",
+    "bgsound",
+    "br",
+    "col",
+    "embed",
+    "frame",
+    "hr",
+    "img",
+    "input",
+    "keygen",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+}
 SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}
+SCHEMA_ORG_ARTICLE_IRIS = {
+    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES
+}
+SchemaContextState = tuple[bool, bool | None]
+DEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (False, None)
 
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
 # connection during propagation. Retry each individual live read so a single
@@ -292,6 +318,7 @@ class ScholarlyHTMLParser(HTMLParser):
         self._head_seen = False
         self._body_started = False
         self._template_depth = 0
+        self._head_text_stack: list[str] = []
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
@@ -300,17 +327,18 @@ class ScholarlyHTMLParser(HTMLParser):
         attributes, duplicates, values = _first_attributes(attrs)
 
         # A non-head start tag implicitly ends the optional document head even
-        # when both </head> and <body> are omitted. Template contents use their
-        # own parsing context and must not close the real document head.
+        # when both </head> and <body> are omitted. Template contents and text
+        # elements such as <title>/<script> use their own parsing modes.
         if (
             self._in_head
             and self._template_depth == 0
+            and not self._head_text_stack
             and tag not in HEAD_MODE_START_TAGS
         ):
             self._in_head = False
             self._body_started = True
 
-        if tag == "body" and self._template_depth == 0:
+        if tag == "body" and self._template_depth == 0 and not self._head_text_stack:
             self._body_started = True
             self._in_head = False
 
@@ -320,6 +348,13 @@ class ScholarlyHTMLParser(HTMLParser):
 
         if tag == "template":
             self._template_depth += 1
+
+        if (
+            tag in HEAD_TEXT_TAGS
+            and self._in_head
+            and self._template_depth == 0
+        ):
+            self._head_text_stack.append(tag)
 
         if tag == "meta" and self._in_head and self._template_depth == 0:
             name_values = [value for value in values.get("name", []) if value is not None]
@@ -347,9 +382,32 @@ class ScholarlyHTMLParser(HTMLParser):
                 self._in_json_ld = True
                 self._json_ld_chunks = []
 
+    def handle_startendtag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        # HTML ignores a self-closing slash on non-void elements. In particular,
+        # <template/> starts an inert template and remains open until </template>
+        # (or EOF); treating it as XML would expose metadata browsers keep inert.
+        self.handle_starttag(tag, attrs)
+        if tag.lower() in HTML_VOID_ELEMENTS:
+            self.handle_endtag(tag)
+
     def handle_data(self, data: str) -> None:
         if self._in_json_ld:
             self._json_ld_chunks.append(data)
+        if (
+            self._in_head
+            and self._template_depth == 0
+            and not self._head_text_stack
+            and data.strip()
+        ):
+            # In the HTML tree builder's "in head" mode, non-whitespace
+            # character tokens close the optional head and are reprocessed in
+            # the body. Subsequent citation meta must therefore be ignored.
+            self._in_head = False
+            self._body_started = True
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.lower()
@@ -357,6 +415,8 @@ class ScholarlyHTMLParser(HTMLParser):
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
             self._json_ld_chunks = []
+        if self._head_text_stack and tag == self._head_text_stack[-1]:
+            self._head_text_stack.pop()
         if tag == "template" and self._template_depth > 0:
             self._template_depth -= 1
         if tag == "head" and self._in_head and self._template_depth == 0:
@@ -456,43 +516,93 @@ def _normalized_schema_url(value: object) -> str | None:
     return value.strip().rstrip("/")
 
 
-def _schema_context_state(context: object, inherited: bool) -> bool:
-    """Track whether unprefixed JSON-LD terms inherit Schema.org vocabulary."""
-    if context is None:
+def _term_maps_to_schema_article(value: object, vocab_is_schema: bool) -> bool:
+    if isinstance(value, dict):
+        value = value.get("@id")
+    if not isinstance(value, str):
         return False
+    stripped = value.strip()
+    normalized = stripped.rstrip("/")
+    if normalized in SCHEMA_ORG_ARTICLE_IRIS:
+        return True
+    return vocab_is_schema and stripped == "ScholarlyArticle"
+
+
+def _schema_context_state(
+    context: object,
+    inherited: SchemaContextState,
+) -> SchemaContextState:
+    """Track Schema.org vocabulary plus any explicit ScholarlyArticle override."""
+    if context is None:
+        return DEFAULT_SCHEMA_CONTEXT_STATE
     if isinstance(context, str):
-        return _normalized_schema_url(context) in SCHEMA_ORG_BASES
+        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_BASES
+        # The canonical Schema.org remote context defines its own terms. For an
+        # unknown remote context, fail closed instead of preserving a stale term.
+        return (is_schema, True if is_schema else False)
     if isinstance(context, dict):
+        vocab_is_schema, article_override = inherited
         if "@vocab" in context:
-            return _normalized_schema_url(context.get("@vocab")) in SCHEMA_ORG_BASES
-        return inherited
+            vocab_is_schema = _normalized_schema_url(context.get("@vocab")) in SCHEMA_ORG_BASES
+        if "ScholarlyArticle" in context:
+            article_override = _term_maps_to_schema_article(
+                context.get("ScholarlyArticle"), vocab_is_schema
+            )
+        return (vocab_is_schema, article_override)
     if isinstance(context, list):
         state = inherited
         for item in context:
             state = _schema_context_state(item, state)
         return state
-    return False
+    return DEFAULT_SCHEMA_CONTEXT_STATE
+
+
+def _context_propagates(context: object) -> bool:
+    """Return whether a local JSON-LD context applies to descendant node objects."""
+    if isinstance(context, dict):
+        return context.get("@propagate") is not False
+    if isinstance(context, list):
+        propagate = True
+        for item in context:
+            if isinstance(item, dict) and "@propagate" in item:
+                propagate = item.get("@propagate") is not False
+        return propagate
+    return True
+
+
+def _schema_article_term_is_valid(state: SchemaContextState) -> bool:
+    vocab_is_schema, article_override = state
+    if article_override is not None:
+        return article_override
+    return vocab_is_schema
 
 
 def collect_scholarly_articles(
     value: object,
     articles: list[tuple[dict, bool]],
-    inherited_schema_context: bool = False,
+    inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,
 ) -> None:
     if isinstance(value, dict):
-        schema_context = inherited_schema_context
+        schema_state = inherited_schema_context
+        child_schema_state = inherited_schema_context
         if "@context" in value:
-            schema_context = _schema_context_state(value.get("@context"), schema_context)
+            context = value.get("@context")
+            schema_state = _schema_context_state(context, inherited_schema_context)
+            child_schema_state = (
+                schema_state if _context_propagates(context) else inherited_schema_context
+            )
+        else:
+            child_schema_state = schema_state
 
         article_type = value.get("@type")
         if article_type == "ScholarlyArticle" or (
             isinstance(article_type, list) and "ScholarlyArticle" in article_type
         ):
-            articles.append((value, schema_context))
+            articles.append((value, _schema_article_term_is_valid(schema_state)))
 
         for key, child in value.items():
             if key != "@context":
-                collect_scholarly_articles(child, articles, schema_context)
+                collect_scholarly_articles(child, articles, child_schema_state)
     elif isinstance(value, list):
         for child in value:
             collect_scholarly_articles(child, articles, inherited_schema_context)
