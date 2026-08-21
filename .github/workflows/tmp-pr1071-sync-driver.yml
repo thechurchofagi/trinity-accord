@@ -25,14 +25,7 @@ jobs:
           lines = workflow.read_text(encoding='utf-8').splitlines()
           start = lines.index("          python - <<'PY'") + 1
           end = lines.index('          PY', start)
-          code_lines = []
-          for line in lines[start:end]:
-              if not line:
-                  code_lines.append("")
-                  continue
-              if not line.startswith('          '):
-                  raise SystemExit(f'unexpected patch indentation: {line!r}')
-              code_lines.append(line[10:])
+          code_lines = [line[10:] if line.startswith('          ') else line for line in lines[start:end]]
           Path('/tmp/apply_scholarly_patch.py').write_text('\n'.join(code_lines) + '\n', encoding='utf-8')
           PY
           python /tmp/apply_scholarly_patch.py
