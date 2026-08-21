@@ -120,7 +120,11 @@ jobs:
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add -- preservation/harvard-dataverse-state.json
             git commit -m "preservation: Harvard state ${old_status} -> ${new_status}"
-            git push
+            if ! git push; then
+              echo "Initial push raced with branch movement; rebasing exact state commit once."
+              git pull --rebase origin "$GITHUB_REF_NAME"
+              git push
+            fi
           fi
 
       - name: Upload state-machine audit
