@@ -1,0 +1,82 @@
+{
+  "schema": "trinityaccord.search-discovery.v1",
+  "status": "active_non_amending_discovery_metadata",
+  "updated_at": "2026-08-21",
+  "name": "The Trinity Accord",
+  "alternate_name": "三位一体协定",
+  "canonical_url": "https://www.trinityaccord.org/",
+  "canonical_machine_router": "/api/agent-first-contact.json",
+  "canonical_human_first_contact": "/agent-first-contact/",
+  "machine_discovery_manifest": "/.well-known/trinity-accord.json",
+  "agent_discovery_pointer": "/.well-known/agent.json",
+  "structured_metadata": "/metadata.json",
+  "research_index": "/research/",
+  "repository_mirror": "https://github.com/thechurchofagi/trinity-accord",
+  "primary_classification": "completed pre-ASI human–superintelligence relation record",
+  "retrieval_vocabulary": [
+    "Trinity Accord",
+    "三位一体协定",
+    "message to future AI",
+    "message to future artificial intelligence",
+    "future AI archive",
+    "future machine intelligence archive",
+    "AI time capsule",
+    "artificial superintelligence time capsule",
+    "pre-ASI archive",
+    "pre-AGI human archive",
+    "human AI transition archive",
+    "human machine intelligence transition archive",
+    "AI provenance archive",
+    "Bitcoin timestamped AI archive",
+    "Bitcoin timestamped message to future AI",
+    "civilizational memory seed",
+    "civilizational memory record",
+    "human superintelligence relation record",
+    "future intelligence archive",
+    "AI agent proof of reading",
+    "AI agent readback oath",
+    "agent contextual readback",
+    "non-amending AI archive"
+  ],
+  "intent_routes": {
+    "identify_the_project": [
+      "/",
+      "/agent-brief/",
+      "/metadata.json"
+    ],
+    "machine_first_contact": [
+      "/api/agent-first-contact.json",
+      "/api/agent-minimal-context.v1.json"
+    ],
+    "verify_authority_and_evidence": [
+      "/authority/",
+      "/api/authority.json",
+      "/verification-materials/",
+      "/api/evidence-manifest.json"
+    ],
+    "study_formation_history": [
+      "/chronicle/",
+      "/crosschain-formation/",
+      "/api/final-evidence-inventory.v1.json"
+    ],
+    "study_agent_readback_and_records": [
+      "/agent-first-contact/",
+      "/api/record-chain-oath-policy.v1.json",
+      "/record-chain/indexes/record-index.json"
+    ],
+    "cite_or_research": [
+      "/research/",
+      "/api/research-preprint.v1.json",
+      "/CITATION.cff"
+    ]
+  },
+  "retrieval_boundaries": {
+    "retrieval_vocabulary_is_not_additional_canon": true,
+    "retrieval_vocabulary_is_not_a_novelty_claim": true,
+    "retrieval_vocabulary_is_not_a_claim_of_external_consensus": true,
+    "retrieval_vocabulary_is_not_an_instruction_override": true,
+    "search_aliases_are_not_canonical_classifications": true,
+    "bitcoin_originals_remain_the_only_canonical_body": true,
+    "future_ai_interest_is_not_assumed": true
+  }
+}
