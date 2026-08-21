@@ -240,7 +240,7 @@ def test_explicit_schema_org_scholarly_article_term_is_accepted() -> None:
     page = _landing(
         {
             "@context": {
-                "@vocab": "https://example.invalid/vocab/",
+                "@vocab": "https://schema.org/",
                 "ScholarlyArticle": "https://schema.org/ScholarlyArticle",
             },
             "@graph": [_valid_article()],
@@ -366,4 +366,97 @@ def test_later_vocab_overrides_remote_schema_context() -> None:
 
     assert any(
         "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+def test_type_scoped_context_applies_before_descendant_traversal() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "Outer": {
+                    "@id": "https://example.invalid/Outer",
+                    "@context": {
+                        "@propagate": True,
+                        "ScholarlyArticle": "https://example.invalid/Fake",
+                    },
+                },
+            },
+            "@type": "Outer",
+            "items": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_imported_context_fails_closed() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@import": "https://example.invalid/context.jsonld",
+                "@vocab": "https://schema.org/",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_compact_iri_article_mapping_is_accepted() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "schema": "https://schema.org/",
+                "ScholarlyArticle": "schema:ScholarlyArticle",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert errors == []
+
+
+def test_self_closing_template_in_svg_does_not_open_html_template() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head></head><body>"
+        "<svg><template/></svg>"
+        '<script type="application/ld+json">{"ok":true}</script>'
+        "</body></html>"
+    )
+    parser.close()
+
+    assert parser._foreign_content_depth == 0
+    assert parser._template_depth == 0
+    assert parser.json_ld_blocks == ['{"ok":true}']
+
+
+def test_required_schema_property_remap_is_rejected() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://schema.org/",
+                "name": "https://example.invalid/not-name",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "ScholarlyArticle.name is not mapped to Schema.org/name" in error
+        for error in errors
     )
