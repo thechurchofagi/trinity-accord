@@ -71,6 +71,27 @@ SCHOLARLY_META_EXPECTED = {
     "citation_language": "en",
 }
 
+# In the HTML tree builder's "in head" insertion mode, these start tags do not
+# implicitly close the document head. A body-content start tag such as <main>
+# does. Tracking this prevents metadata from an implied body from being accepted
+# when optional </head> and <body> tags are omitted.
+HEAD_MODE_START_TAGS = {
+    "base",
+    "basefont",
+    "bgsound",
+    "head",
+    "html",
+    "link",
+    "meta",
+    "noframes",
+    "noscript",
+    "script",
+    "style",
+    "template",
+    "title",
+}
+SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}
+
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
 # connection during propagation. Retry each individual live read so a single
 # transient edge failure does not invalidate an otherwise exact deployment.
@@ -242,24 +263,54 @@ STATIC_SOURCE_FILES = [
 ]
 
 
+def _first_attributes(
+    attrs: list[tuple[str, str | None]],
+) -> tuple[dict[str, str | None], set[str], dict[str, list[str | None]]]:
+    """Return browser-first attributes plus duplicate names and all raw values."""
+    first: dict[str, str | None] = {}
+    duplicates: set[str] = set()
+    values: dict[str, list[str | None]] = {}
+    for raw_name, value in attrs:
+        name = raw_name.lower()
+        values.setdefault(name, []).append(value)
+        if name in first:
+            duplicates.add(name)
+        else:
+            first[name] = value
+    return first, duplicates, values
+
+
 class ScholarlyHTMLParser(HTMLParser):
-    """Extract head-only scholarly meta and document-wide JSON-LD."""
+    """Extract browser-visible head citation meta and document-wide JSON-LD."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.meta: dict[str, list[str]] = {}
         self.json_ld_blocks: list[str] = []
+        self.errors: list[str] = []
         self._in_head = False
         self._head_seen = False
         self._body_started = False
+        self._template_depth = 0
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attributes = dict(attrs)
         tag = tag.lower()
+        attributes, duplicates, values = _first_attributes(attrs)
 
-        if tag == "body":
+        # A non-head start tag implicitly ends the optional document head even
+        # when both </head> and <body> are omitted. Template contents use their
+        # own parsing context and must not close the real document head.
+        if (
+            self._in_head
+            and self._template_depth == 0
+            and tag not in HEAD_MODE_START_TAGS
+        ):
+            self._in_head = False
+            self._body_started = True
+
+        if tag == "body" and self._template_depth == 0:
             self._body_started = True
             self._in_head = False
 
@@ -267,14 +318,34 @@ class ScholarlyHTMLParser(HTMLParser):
             self._head_seen = True
             self._in_head = True
 
-        if tag == "meta" and self._in_head:
+        if tag == "template":
+            self._template_depth += 1
+
+        if tag == "meta" and self._in_head and self._template_depth == 0:
+            name_values = [value for value in values.get("name", []) if value is not None]
+            scholarly_candidate = any(value in SCHOLARLY_META_EXPECTED for value in name_values)
+            relevant_duplicates = duplicates & {"name", "content"}
+            if scholarly_candidate and relevant_duplicates:
+                self.errors.append(
+                    "scholarly meta contains duplicate attribute(s): "
+                    + ", ".join(sorted(relevant_duplicates))
+                )
             name = attributes.get("name")
             content = attributes.get("content")
             if name is not None:
                 self.meta.setdefault(name, []).append(content or "")
-        elif tag == "script" and (attributes.get("type") or "").lower() == "application/ld+json":
-            self._in_json_ld = True
-            self._json_ld_chunks = []
+
+        if tag == "script" and self._template_depth == 0:
+            type_values = [value for value in values.get("type", []) if value is not None]
+            contains_json_ld_type = any(
+                value.lower() == "application/ld+json" for value in type_values
+            )
+            if contains_json_ld_type and "type" in duplicates:
+                self.errors.append("scholarly JSON-LD script contains duplicate type attribute")
+            script_type = attributes.get("type") or ""
+            if script_type.lower() == "application/ld+json":
+                self._in_json_ld = True
+                self._json_ld_chunks = []
 
     def handle_data(self, data: str) -> None:
         if self._in_json_ld:
@@ -286,10 +357,13 @@ class ScholarlyHTMLParser(HTMLParser):
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
             self._json_ld_chunks = []
-        if tag == "head" and self._in_head:
+        if tag == "template" and self._template_depth > 0:
+            self._template_depth -= 1
+        if tag == "head" and self._in_head and self._template_depth == 0:
             self._in_head = False
-        if tag == "body":
+        if tag == "body" and self._template_depth == 0:
             self._body_started = True
+            self._in_head = False
 
 
 def sha256(data: bytes) -> str:
@@ -376,18 +450,52 @@ def check_forbidden(path: str, text: str, errors: list[str]) -> None:
                 )
 
 
-def collect_scholarly_articles(value: object, articles: list[dict]) -> None:
+def _normalized_schema_url(value: object) -> str | None:
+    if not isinstance(value, str):
+        return None
+    return value.strip().rstrip("/")
+
+
+def _schema_context_state(context: object, inherited: bool) -> bool:
+    """Track whether unprefixed JSON-LD terms inherit Schema.org vocabulary."""
+    if context is None:
+        return False
+    if isinstance(context, str):
+        return _normalized_schema_url(context) in SCHEMA_ORG_BASES
+    if isinstance(context, dict):
+        if "@vocab" in context:
+            return _normalized_schema_url(context.get("@vocab")) in SCHEMA_ORG_BASES
+        return inherited
+    if isinstance(context, list):
+        state = inherited
+        for item in context:
+            state = _schema_context_state(item, state)
+        return state
+    return False
+
+
+def collect_scholarly_articles(
+    value: object,
+    articles: list[tuple[dict, bool]],
+    inherited_schema_context: bool = False,
+) -> None:
     if isinstance(value, dict):
+        schema_context = inherited_schema_context
+        if "@context" in value:
+            schema_context = _schema_context_state(value.get("@context"), schema_context)
+
         article_type = value.get("@type")
         if article_type == "ScholarlyArticle" or (
             isinstance(article_type, list) and "ScholarlyArticle" in article_type
         ):
-            articles.append(value)
-        for child in value.values():
-            collect_scholarly_articles(child, articles)
+            articles.append((value, schema_context))
+
+        for key, child in value.items():
+            if key != "@context":
+                collect_scholarly_articles(child, articles, schema_context)
     elif isinstance(value, list):
         for child in value:
-            collect_scholarly_articles(child, articles)
+            collect_scholarly_articles(child, articles, inherited_schema_context)
 
 
 def check_scholarly_landing(page: str, errors: list[str]) -> None:
@@ -398,6 +506,9 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
     except Exception as exc:  # noqa: BLE001 - diagnostics should report malformed HTML
         errors.append(f"{SCHOLARLY_LANDING_PATH}: failed to parse rendered HTML: {exc}")
         return
+
+    for parser_error in parser.errors:
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: {parser_error}")
 
     if not parser._head_seen:
         errors.append(f"{SCHOLARLY_LANDING_PATH}: document head was not found")
@@ -421,20 +532,30 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: invalid rendered JSON-LD: {exc}"
             )
 
-    articles: list[dict] = []
+    articles: list[tuple[dict, bool]] = []
     for document in documents:
         collect_scholarly_articles(document, articles)
 
-    matching = [article for article in articles if article.get("name") == SCHOLARLY_TITLE]
+    matching = [
+        (article, schema_context)
+        for article, schema_context in articles
+        if article.get("name") == SCHOLARLY_TITLE
+    ]
     if len(matching) != 1:
-        observed_names = [article.get("name") for article in articles]
+        observed_names = [article.get("name") for article, _ in articles]
         errors.append(
             f"{SCHOLARLY_LANDING_PATH}: expected exactly one rendered ScholarlyArticle "
             f"with the exact title; matching={len(matching)}, observed={observed_names!r}"
         )
         return
 
-    article = matching[0]
+    article, schema_context = matching[0]
+    if not schema_context:
+        errors.append(
+            f"{SCHOLARLY_LANDING_PATH}: matching ScholarlyArticle lacks an applicable "
+            "Schema.org JSON-LD context"
+        )
+
     expected_fields = {
         "headline": SCHOLARLY_TITLE,
         "datePublished": "2026-07-29",
