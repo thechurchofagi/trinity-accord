@@ -460,3 +460,108 @@ def test_required_schema_property_remap_is_rejected() -> None:
         "ScholarlyArticle.name is not mapped to Schema.org/name" in error
         for error in errors
     )
+
+def test_foreign_template_end_does_not_close_outer_html_template() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head><template>"
+        "<svg><template/></svg>"
+        '<meta name="citation_title" content="still-inert">'
+        '<script type="application/ld+json">{"still":"inert"}</script>'
+        "</template></head><body></body></html>"
+    )
+    parser.close()
+
+    assert "citation_title" not in parser.meta
+    assert parser.json_ld_blocks == []
+    assert parser._template_depth == 0
+    assert parser._foreign_content_depth == 0
+
+
+def test_non_propagating_article_context_does_not_leak_to_nested_nodes() -> None:
+    article = _valid_article(
+        **{
+  "@context": {
+      "@vocab": "https://schema.org/",
+      "@propagate": False,
+  }
+        }
+    )
+    page = _landing({"@graph": [article]})
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "ScholarlyArticle.encoding.contentUrl is not mapped"
+        in error
+        for error in errors
+    )
+    assert any(
+        "ScholarlyArticle.identifier.propertyID is not mapped"
+        in error
+        for error in errors
+    )
+
+
+def test_jsonld_script_inside_svg_foreignobject_is_html_content() -> None:
+    parser = deployment.ScholarlyHTMLParser()
+    parser.feed(
+        "<!doctype html><html><head></head><body>"
+        "<svg><foreignObject>"
+        '<script type="application/ld+json">{"ok":true}</script>'
+        "</foreignObject></svg>"
+        "</body></html>"
+    )
+    parser.close()
+
+    assert parser.json_ld_blocks == ['{"ok":true}']
+    assert parser._foreign_content_depth == 0
+
+
+def test_explicit_prefix_false_disables_compact_iri_prefix() -> None:
+    page = _landing(
+        {
+  "@context": {
+      "@vocab": "https://schema.org/",
+      "schema": {
+          "@id": "https://schema.org/",
+          "@prefix": False,
+      },
+      "ScholarlyArticle": "schema:ScholarlyArticle",
+  },
+  "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error
+        for error in errors
+    )
+
+
+def test_type_scoped_context_does_not_rewrite_activating_type() -> None:
+    page = _landing(
+        {
+  "@context": {
+      "@vocab": "https://schema.org/",
+      "ScholarlyArticle": {
+          "@id": "https://example.invalid/Fake",
+          "@context": {
+              "ScholarlyArticle": (
+                  "https://schema.org/ScholarlyArticle"
+              )
+          },
+      },
+  },
+  "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error
+        for error in errors
+    )

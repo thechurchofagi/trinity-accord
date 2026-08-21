@@ -327,6 +327,10 @@ def _first_attributes(
 class ScholarlyHTMLParser(HTMLParser):
     """Extract browser-visible head citation meta and document-wide JSON-LD."""
 
+    _SVG_HTML_INTEGRATION_POINTS = {"foreignobject", "desc", "title"}
+    _MATHML_TEXT_INTEGRATION_POINTS = {"mi", "mo", "mn", "ms", "mtext"}
+    _MATHML_HTML_ENCODINGS = {"text/html", "application/xhtml+xml"}
+
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.meta: dict[str, list[str]] = {}
@@ -336,24 +340,121 @@ class ScholarlyHTMLParser(HTMLParser):
         self._head_seen = False
         self._body_started = False
         self._template_depth = 0
+        # Retained as a diagnostic counter for open SVG/MathML-namespace
+        # elements. Namespace-sensitive decisions use _element_stack so
+        # HTML integration points are handled correctly.
         self._foreign_content_depth = 0
+        self._element_stack: list[
+            tuple[str, str, dict[str, str | None]]
+        ] = []
         self._head_text_stack: list[str] = []
         self._in_noscript_raw = False
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+    def _namespace_for_start(
+        self,
+        tag: str,
+        attributes: dict[str, str | None],
+    ) -> str:
+        if not self._element_stack:
+            return "html"
+        parent_tag, parent_namespace, parent_attributes = self._element_stack[-1]
+        if parent_namespace == "html":
+            if tag == "svg":
+                return "svg"
+            if tag == "math":
+                return "math"
+            return "html"
+        if parent_namespace == "svg":
+            if parent_tag in self._SVG_HTML_INTEGRATION_POINTS:
+                if tag == "svg":
+                    return "svg"
+                if tag == "math":
+                    return "math"
+                return "html"
+            return "svg"
+        if parent_namespace == "math":
+            if (
+                parent_tag in self._MATHML_TEXT_INTEGRATION_POINTS
+                and tag not in {"mglyph", "malignmark"}
+            ):
+                if tag == "svg":
+                    return "svg"
+                if tag == "math":
+                    return "math"
+                return "html"
+            if parent_tag == "annotation-xml":
+                encoding = (parent_attributes.get("encoding") or "").lower()
+                if encoding in self._MATHML_HTML_ENCODINGS:
+                    if tag == "svg":
+                        return "svg"
+                    if tag == "math":
+                        return "math"
+                    return "html"
+            return "math"
+        return "html"
+
+    def _push_element(
+        self,
+        tag: str,
+        namespace: str,
+        attributes: dict[str, str | None],
+    ) -> None:
+        self._element_stack.append((tag, namespace, attributes))
+        if namespace != "html":
+            self._foreign_content_depth += 1
+        if tag == "template" and namespace == "html":
+            self._template_depth += 1
+
+    def _pop_through_matching_element(self, tag: str) -> str | None:
+        match_index = None
+        for index in range(len(self._element_stack) - 1, -1, -1):
+            stack_tag, stack_namespace, _attributes = self._element_stack[index]
+            if (
+                stack_tag == "template"
+                and stack_namespace == "html"
+                and tag != "template"
+            ):
+                # HTML template contents form a tree-builder boundary. An end
+                # tag outside the template insertion mode cannot pop through an
+                # open HTML template to close an ancestor document element.
+                break
+            if stack_tag == tag:
+                match_index = index
+                break
+        if match_index is None:
+            return None
+        matched_namespace = self._element_stack[match_index][1]
+        popped = self._element_stack[match_index:]
+        del self._element_stack[match_index:]
+        for popped_tag, namespace, _attributes in popped:
+            if namespace != "html":
+                self._foreign_content_depth = max(
+                    0, self._foreign_content_depth - 1
+                )
+            if popped_tag == "template" and namespace == "html":
+                self._template_depth = max(0, self._template_depth - 1)
+        return matched_namespace
+
+    def _handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+        *,
+        self_closing: bool,
+    ) -> None:
         tag = tag.lower()
         if self._in_noscript_raw:
             return
         attributes, duplicates, values = _first_attributes(attrs)
-        in_foreign_content = self._foreign_content_depth > 0
+        namespace = self._namespace_for_start(tag, attributes)
 
-        # A non-head start tag implicitly ends the optional document head even
-        # when both </head> and <body> are omitted. Template contents and text
-        # elements such as <title>/<script> use their own parsing modes.
+        # A non-head HTML start tag implicitly ends the optional document
+        # head even when both </head> and <body> are omitted.
         if (
-            self._in_head
+            namespace == "html"
+            and self._in_head
             and self._template_depth == 0
             and not self._head_text_stack
             and tag not in HEAD_MODE_START_TAGS
@@ -361,41 +462,58 @@ class ScholarlyHTMLParser(HTMLParser):
             self._in_head = False
             self._body_started = True
 
-        if tag == "body" and self._template_depth == 0 and not self._head_text_stack:
+        if (
+            namespace == "html"
+            and tag == "body"
+            and self._template_depth == 0
+            and not self._head_text_stack
+        ):
             self._body_started = True
             self._in_head = False
 
-        if tag == "head" and not self._head_seen and not self._body_started:
+        if (
+            namespace == "html"
+            and tag == "head"
+            and not self._head_seen
+            and not self._body_started
+        ):
             self._head_seen = True
             self._in_head = True
 
-        if tag in {"svg", "math"}:
-            self._foreign_content_depth += 1
-
-        if tag == "template" and not in_foreign_content:
-            self._template_depth += 1
+        # Foreign-content self-closing syntax is acknowledged; HTML
+        # self-closing syntax on non-void elements is ignored.
+        should_push = not (
+            namespace != "html" and self_closing
+        ) and not (
+            namespace == "html" and tag in HTML_VOID_ELEMENTS
+        )
+        if should_push:
+            self._push_element(tag, namespace, attributes)
 
         if (
-            tag in HEAD_TEXT_TAGS
+            namespace == "html"
+            and tag in HEAD_TEXT_TAGS
             and self._in_head
             and self._template_depth == 0
         ):
             self._head_text_stack.append(tag)
 
-        if tag == "noscript" and not in_foreign_content:
-            # With scripting enabled, noscript content is raw text. Python's
-            # HTMLParser still emits apparent tags from that text, so remember
-            # the tokenizer state and ignore them until the real </noscript>.
+        if namespace == "html" and tag == "noscript":
+            # With scripting enabled, noscript content is raw text.
             self._in_noscript_raw = True
 
         if (
-            tag == "meta"
+            namespace == "html"
+            and tag == "meta"
             and self._in_head
             and self._template_depth == 0
-            and self._foreign_content_depth == 0
         ):
-            name_values = [value for value in values.get("name", []) if value is not None]
-            scholarly_candidate = any(value in SCHOLARLY_META_EXPECTED for value in name_values)
+            name_values = [
+                value for value in values.get("name", []) if value is not None
+            ]
+            scholarly_candidate = any(
+                value in SCHOLARLY_META_EXPECTED for value in name_values
+            )
             relevant_duplicates = duplicates & {"name", "content"}
             if scholarly_candidate and relevant_duplicates:
                 self.errors.append(
@@ -408,37 +526,36 @@ class ScholarlyHTMLParser(HTMLParser):
                 self.meta.setdefault(name, []).append(content or "")
 
         if (
-            tag == "script"
+            namespace == "html"
+            and tag == "script"
             and self._template_depth == 0
-            and self._foreign_content_depth == 0
         ):
-            type_values = [value for value in values.get("type", []) if value is not None]
+            type_values = [
+                value for value in values.get("type", []) if value is not None
+            ]
             contains_json_ld_type = any(
                 value.lower() == "application/ld+json" for value in type_values
             )
             if contains_json_ld_type and "type" in duplicates:
-                self.errors.append("scholarly JSON-LD script contains duplicate type attribute")
+                self.errors.append(
+                    "scholarly JSON-LD script contains duplicate type attribute"
+                )
             script_type = attributes.get("type") or ""
             if script_type.lower() == "application/ld+json":
                 self._in_json_ld = True
                 self._json_ld_chunks = []
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self._handle_starttag(tag, attrs, self_closing=False)
 
     def handle_startendtag(
         self,
         tag: str,
         attrs: list[tuple[str, str | None]],
     ) -> None:
-        # HTML ignores a self-closing slash on non-void HTML elements, but
-        # foreign SVG/MathML content acknowledges the slash. Preserve HTML template
-        # inertness while allowing <svg><template/></svg> to close immediately.
-        was_foreign = self._foreign_content_depth > 0
-        self.handle_starttag(tag, attrs)
-        if (
-            was_foreign
-            or tag.lower() in HTML_VOID_ELEMENTS
-            or tag.lower() in {"svg", "math"}
-        ):
-            self.handle_endtag(tag)
+        self._handle_starttag(tag, attrs, self_closing=True)
 
     def handle_data(self, data: str) -> None:
         if self._in_json_ld:
@@ -449,9 +566,6 @@ class ScholarlyHTMLParser(HTMLParser):
             and not self._head_text_stack
             and data.strip()
         ):
-            # In the HTML tree builder's "in head" mode, non-whitespace
-            # character tokens close the optional head and are reprocessed in
-            # the body. Subsequent citation meta must therefore be ignored.
             self._in_head = False
             self._body_started = True
 
@@ -462,7 +576,9 @@ class ScholarlyHTMLParser(HTMLParser):
                 return
             self._in_noscript_raw = False
         if tag == "script" and self._in_json_ld:
-            self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
+            self.json_ld_blocks.append(
+                "".join(self._json_ld_chunks).strip()
+            )
             self._in_json_ld = False
             self._json_ld_chunks = []
         if (
@@ -471,20 +587,25 @@ class ScholarlyHTMLParser(HTMLParser):
             and self._template_depth == 0
             and not self._head_text_stack
         ):
-            # In the HTML tree builder's "in head" mode, these special end
-            # tags pop the optional head and are reprocessed after the head.
-            # Metadata that follows is therefore body-effective, not head meta.
             self._in_head = False
             self._body_started = True
         if self._head_text_stack and tag == self._head_text_stack[-1]:
             self._head_text_stack.pop()
-        if tag in {"svg", "math"} and self._foreign_content_depth > 0:
-            self._foreign_content_depth -= 1
-        if tag == "template" and self._template_depth > 0:
-            self._template_depth -= 1
-        if tag == "head" and self._in_head and self._template_depth == 0:
+
+        matched_namespace = self._pop_through_matching_element(tag)
+
+        if (
+            tag == "head"
+            and matched_namespace == "html"
+            and self._in_head
+            and self._template_depth == 0
+        ):
             self._in_head = False
-        if tag == "body" and self._template_depth == 0:
+        if (
+            tag == "body"
+            and matched_namespace == "html"
+            and self._template_depth == 0
+        ):
             self._body_started = True
             self._in_head = False
 
@@ -594,16 +715,21 @@ def _prefix_mapping(
     definition: object,
     prefixes: dict[str, str],
 ) -> str | None:
-    explicit_prefix = False
+    explicit_prefix: bool | None = None
     if isinstance(definition, dict):
-        explicit_prefix = definition.get("@prefix") is True
+        if definition.get("@prefix") is False:
+            return None
+        if definition.get("@prefix") is True:
+            explicit_prefix = True
         definition = definition.get("@id")
     if not isinstance(definition, str):
         return None
     expanded = _expand_compact_iri(definition, prefixes)
     if not expanded.startswith(("http://", "https://")):
         return None
-    if explicit_prefix or expanded.endswith(("/", "#")):
+    if explicit_prefix is True or (
+        explicit_prefix is None and expanded.endswith(("/", "#"))
+    ):
         return expanded
     return None
 
@@ -763,9 +889,39 @@ def _schema_article_term_is_valid(state: SchemaContextState) -> bool:
     return _schema_term_is_valid(state, "ScholarlyArticle")
 
 
+def _property_child_state(
+    key: str,
+    node_schema_state: SchemaContextState,
+    child_schema_state: SchemaContextState,
+    node_property_scopes: dict[str, object],
+    child_property_scopes: dict[str, object],
+) -> tuple[SchemaContextState, dict[str, object]]:
+    """Return the active state for a property value before visiting it."""
+    if key not in node_property_scopes:
+        return child_schema_state, child_property_scopes
+    scoped_context = node_property_scopes[key]
+    if not _context_propagates(scoped_context):
+        return DEFAULT_SCHEMA_CONTEXT_STATE, {}
+    return (
+        _schema_context_state(scoped_context, node_schema_state),
+        _property_scoped_contexts(
+            scoped_context, child_property_scopes
+        ),
+    )
+
+
 def collect_scholarly_articles(
     value: object,
-    articles: list[tuple[dict, SchemaContextState, dict[str, object]]],
+    articles: list[
+        tuple[
+            dict,
+            SchemaContextState,
+            SchemaContextState,
+            SchemaContextState,
+            dict[str, object],
+            dict[str, object],
+        ]
+    ],
     inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,
     inherited_property_scopes: dict[str, object] | None = None,
 ) -> None:
@@ -780,7 +936,9 @@ def collect_scholarly_articles(
         if "@context" in value:
             context = value.get("@context")
             schema_state = _schema_context_state(context, inherited_schema_context)
-            node_property_scopes = _property_scoped_contexts(context, property_scopes)
+            node_property_scopes = _property_scoped_contexts(
+                context, property_scopes
+            )
             if _context_propagates(context):
                 child_schema_state = schema_state
                 child_property_scopes = node_property_scopes
@@ -798,6 +956,9 @@ def collect_scholarly_articles(
             if isinstance(article_type, list)
             else []
         )
+        # The activating @type is expanded before any type-scoped context
+        # defined by that term becomes active on the node properties.
+        type_validation_state = schema_state
         for type_term in sorted(type_terms):
             if type_term not in node_property_scopes:
                 continue
@@ -811,33 +972,33 @@ def collect_scholarly_articles(
                 child_property_scopes = node_property_scopes
 
         if article_type == "ScholarlyArticle" or (
-            isinstance(article_type, list) and "ScholarlyArticle" in article_type
+            isinstance(article_type, list)
+            and "ScholarlyArticle" in article_type
         ):
-            articles.append((value, schema_state, node_property_scopes))
+            articles.append(
+                (
+                    value,
+                    type_validation_state,
+                    schema_state,
+                    child_schema_state,
+                    node_property_scopes,
+                    child_property_scopes,
+                )
+            )
 
         for key, child in value.items():
             if key == "@context":
                 continue
-            if key in node_property_scopes:
-                scoped_context = node_property_scopes[key]
-                # A property-scoped context applies before visiting its value.
-                # For non-propagating scoped contexts, fail closed rather than
-                # accidentally leaking the scoped vocabulary to deeper nodes.
-                if _context_propagates(scoped_context):
-                    scoped_state = _schema_context_state(scoped_context, schema_state)
-                    scoped_property_scopes = _property_scoped_contexts(
-                        scoped_context, child_property_scopes
-                    )
-                else:
-                    scoped_state = DEFAULT_SCHEMA_CONTEXT_STATE
-                    scoped_property_scopes = {}
-                collect_scholarly_articles(
-                    child, articles, scoped_state, scoped_property_scopes
-                )
-            else:
-                collect_scholarly_articles(
-                    child, articles, child_schema_state, child_property_scopes
-                )
+            scoped_state, scoped_scopes = _property_child_state(
+                key,
+                schema_state,
+                child_schema_state,
+                node_property_scopes,
+                child_property_scopes,
+            )
+            collect_scholarly_articles(
+                child, articles, scoped_state, scoped_scopes
+            )
     elif isinstance(value, list):
         for child in value:
             collect_scholarly_articles(
@@ -879,25 +1040,55 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: invalid rendered JSON-LD: {exc}"
             )
 
-    articles: list[tuple[dict, SchemaContextState, dict[str, object]]] = []
+    articles: list[
+        tuple[
+            dict,
+            SchemaContextState,
+            SchemaContextState,
+            SchemaContextState,
+            dict[str, object],
+            dict[str, object],
+        ]
+    ] = []
     for document in documents:
         collect_scholarly_articles(document, articles)
 
     matching = [
-        (article, schema_state, article_scopes)
-        for article, schema_state, article_scopes in articles
+        (
+            article,
+            type_state,
+            schema_state,
+            child_schema_state,
+            article_scopes,
+            child_scopes,
+        )
+        for (
+            article,
+            type_state,
+            schema_state,
+            child_schema_state,
+            article_scopes,
+            child_scopes,
+        ) in articles
         if article.get("name") == SCHOLARLY_TITLE
     ]
     if len(matching) != 1:
-        observed_names = [article.get("name") for article, _, _ in articles]
+        observed_names = [article.get("name") for article, *_rest in articles]
         errors.append(
             f"{SCHOLARLY_LANDING_PATH}: expected exactly one rendered ScholarlyArticle "
             f"with the exact title; matching={len(matching)}, observed={observed_names!r}"
         )
         return
 
-    article, schema_state, article_scopes = matching[0]
-    if not _schema_article_term_is_valid(schema_state):
+    (
+        article,
+        type_state,
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    ) = matching[0]
+    if not _schema_article_term_is_valid(type_state):
         errors.append(
             f"{SCHOLARLY_LANDING_PATH}: matching ScholarlyArticle lacks an applicable "
             "Schema.org JSON-LD context"
@@ -932,13 +1123,13 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{expected!r}, observed {article.get(field)!r}"
             )
 
-    encoding_state = schema_state
-    if "encoding" in article_scopes:
-        encoding_context = article_scopes["encoding"]
-        if _context_propagates(encoding_context):
-            encoding_state = _schema_context_state(encoding_context, encoding_state)
-        else:
-            encoding_state = DEFAULT_SCHEMA_CONTEXT_STATE
+    encoding_state, _encoding_scopes = _property_child_state(
+        "encoding",
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    )
 
     encoding = article.get("encoding")
     if not isinstance(encoding, dict):
@@ -977,13 +1168,13 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.sameAs missing {expected!r}"
             )
 
-    identifier_state = schema_state
-    if "identifier" in article_scopes:
-        identifier_context = article_scopes["identifier"]
-        if _context_propagates(identifier_context):
-            identifier_state = _schema_context_state(identifier_context, identifier_state)
-        else:
-            identifier_state = DEFAULT_SCHEMA_CONTEXT_STATE
+    identifier_state, _identifier_scopes = _property_child_state(
+        "identifier",
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    )
 
     identifiers = article.get("identifier", [])
     if isinstance(identifiers, dict):
