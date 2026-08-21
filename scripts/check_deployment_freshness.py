@@ -261,6 +261,7 @@ class ScholarlyHTMLParser(HTMLParser):
 
         if tag == "body":
             self._body_started = True
+            self._in_head = False
 
         if tag == "head" and not self._head_seen and not self._body_started:
             self._head_seen = True
