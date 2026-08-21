@@ -25,3 +25,5 @@ tests = tests.replace(old_test, new_test, 1)
 
 source_path.write_text(source, encoding='utf-8')
 tests_path.write_text(tests, encoding='utf-8')
+
+# trigger registered PR workflow
