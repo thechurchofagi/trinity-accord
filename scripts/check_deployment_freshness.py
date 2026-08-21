@@ -243,26 +243,39 @@ STATIC_SOURCE_FILES = [
 
 
 class ScholarlyHTMLParser(HTMLParser):
-    """Extract scholarly head metadata and raw JSON-LD blocks from rendered HTML."""
+    """Extract scholarly metadata from the one real document head plus JSON-LD."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.meta: dict[str, list[str]] = {}
         self.json_ld_blocks: list[str] = []
         self._in_head = False
+        self._head_seen = False
+        self._body_started = False
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
-        if tag == "head":
+        tag = tag.lower()
+
+        if tag == "body":
+            self._body_started = True
+
+        if tag == "head" and not self._head_seen and not self._body_started:
+            self._head_seen = True
             self._in_head = True
+
         if tag == "meta" and self._in_head:
             name = attributes.get("name")
             content = attributes.get("content")
             if name is not None:
                 self.meta.setdefault(name, []).append(content or "")
-        elif tag == "script" and (attributes.get("type") or "").lower() == "application/ld+json":
+        elif (
+            tag == "script"
+            and self._in_head
+            and (attributes.get("type") or "").lower() == "application/ld+json"
+        ):
             self._in_json_ld = True
             self._json_ld_chunks = []
 
@@ -271,12 +284,15 @@ class ScholarlyHTMLParser(HTMLParser):
             self._json_ld_chunks.append(data)
 
     def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
         if tag == "script" and self._in_json_ld:
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
             self._json_ld_chunks = []
-        if tag == "head":
+        if tag == "head" and self._in_head:
             self._in_head = False
+        if tag == "body":
+            self._body_started = True
 
 
 def sha256(data: bytes) -> str:
@@ -385,6 +401,9 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
     except Exception as exc:  # noqa: BLE001 - diagnostics should report malformed HTML
         errors.append(f"{SCHOLARLY_LANDING_PATH}: failed to parse rendered HTML: {exc}")
         return
+
+    if not parser._head_seen:
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: document head was not found")
 
     for name, expected in SCHOLARLY_META_EXPECTED.items():
         observed = parser.meta.get(name, [])
