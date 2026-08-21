@@ -54,6 +54,7 @@ def scholarly_html_fixture(
     body_meta: list[tuple[str, str]] | None = None,
     article_overrides: dict[str, object] | None = None,
     stray_body_head: bool = False,
+    omit_head_close_before_body: bool = False,
 ) -> str:
     meta_values = dict(deployment.SCHOLARLY_META_EXPECTED)
     meta_values.update(meta_overrides or {})
@@ -106,6 +107,14 @@ def scholarly_html_fixture(
             "<!doctype html><html><head></head><body><head>"
             + scholarly_head
             + "</head>"
+            + body
+            + "</body></html>"
+        )
+    if omit_head_close_before_body:
+        return (
+            "<!doctype html><html><head>"
+            + scholarly_head
+            + "<body>"
             + body
             + "</body></html>"
         )
@@ -255,6 +264,23 @@ def main() -> int:
     require(
         any("rendered ScholarlyArticle" in error for error in stray_head_errors),
         "ScholarlyArticle JSON-LD in a second head after body start was incorrectly accepted",
+    )
+
+    implicit_head_close_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(
+            omit_head_meta={"citation_title"},
+            body_meta=[("citation_title", deployment.SCHOLARLY_TITLE)],
+            omit_head_close_before_body=True,
+        ),
+        implicit_head_close_errors,
+    )
+    require(
+        any(
+            "citation_title expected exactly one value" in error
+            for error in implicit_head_close_errors
+        ),
+        "body metadata was accepted after body implicitly closed the document head",
     )
 
     json_ld_errors: list[str] = []
