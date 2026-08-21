@@ -55,6 +55,8 @@ def scholarly_html_fixture(
     article_overrides: dict[str, object] | None = None,
     stray_body_head: bool = False,
     omit_head_close_before_body: bool = False,
+    json_ld_in_body: bool = False,
+    duplicate_body_json_ld: bool = False,
 ) -> str:
     meta_values = dict(deployment.SCHOLARLY_META_EXPECTED)
     meta_values.update(meta_overrides or {})
@@ -97,11 +99,16 @@ def scholarly_html_fixture(
     }
     article.update(article_overrides or {})
     json_ld = json.dumps({"@context": "https://schema.org", "@graph": [article]})
-    scholarly_head = (
-        "".join(head_meta)
-        + f'<script type="application/ld+json">{json_ld}</script>'
-    )
+    json_script = f'<script type="application/ld+json">{json_ld}</script>'
+    scholarly_head = "".join(head_meta)
+    if not json_ld_in_body:
+        scholarly_head += json_script
     body = "".join(_meta(name, value) for name, value in (body_meta or []))
+    if json_ld_in_body:
+        body += json_script
+    if duplicate_body_json_ld:
+        body += json_script
+
     if stray_body_head:
         return (
             "<!doctype html><html><head></head><body><head>"
@@ -261,10 +268,6 @@ def main() -> int:
         any("citation_title expected exactly one value" in error for error in stray_head_errors),
         "scholarly metadata in a second head after body start was incorrectly accepted",
     )
-    require(
-        any("rendered ScholarlyArticle" in error for error in stray_head_errors),
-        "ScholarlyArticle JSON-LD in a second head after body start was incorrectly accepted",
-    )
 
     implicit_head_close_errors: list[str] = []
     deployment.check_scholarly_landing(
@@ -281,6 +284,29 @@ def main() -> int:
             for error in implicit_head_close_errors
         ),
         "body metadata was accepted after body implicitly closed the document head",
+    )
+
+    body_json_ld_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(json_ld_in_body=True),
+        body_json_ld_errors,
+    )
+    require(
+        not body_json_ld_errors,
+        f"valid body JSON-LD was incorrectly rejected: {body_json_ld_errors!r}",
+    )
+
+    duplicate_json_ld_errors: list[str] = []
+    deployment.check_scholarly_landing(
+        scholarly_html_fixture(duplicate_body_json_ld=True),
+        duplicate_json_ld_errors,
+    )
+    require(
+        any(
+            "expected exactly one rendered ScholarlyArticle" in error
+            for error in duplicate_json_ld_errors
+        ),
+        "duplicate ScholarlyArticle JSON-LD across head and body was not rejected",
     )
 
     json_ld_errors: list[str] = []
