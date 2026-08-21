@@ -1,18 +1,20 @@
 name: Temporary scholarly parser review fix applicator
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/close-final-scholarly-parser-gaps-2026-08-21
+      - main
+    types:
+      - synchronize
     paths:
       - ".github/workflows/tmp-apply-scholarly-review-fixes.yml"
-  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   apply-reviewed-fixes:
+    if: github.event.pull_request.number == 1071 && github.event.pull_request.head.ref == 'agent/close-final-scholarly-parser-gaps-2026-08-21'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -102,7 +104,8 @@ jobs:
           )
 
           test_block = '''\n\ndef test_noscript_raw_text_does_not_close_template() -> None:\n    parser = deployment.ScholarlyHTMLParser()\n    parser.feed(\n        "<!doctype html><html><head><template><noscript></template></noscript>"\n        '<meta name="citation_title" content="still-template">'\n        '<script type="application/ld+json">{"still":"template"}</script>'\n        "</head><body></body></html>"\n    )\n    parser.close()\n\n    assert "citation_title" not in parser.meta\n    assert parser.json_ld_blocks == []\n    assert parser._template_depth == 1\n\n\ndef test_schema_org_vocab_requires_trailing_slash() -> None:\n    page = _landing(\n        {"@context": {"@vocab": "https://schema.org"}, "@graph": [_valid_article()]}\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n\n\ndef test_property_scoped_context_override_is_applied_before_child_nodes() -> None:\n    page = _landing(\n        {\n            "@context": {\n                "@vocab": "https://schema.org/",\n                "items": {\n                    "@id": "https://example.invalid/items",\n                    "@context": {\n                        "ScholarlyArticle": "https://example.invalid/Fake"\n                    },\n                },\n            },\n            "items": [_valid_article()],\n        }\n    )\n    errors: list[str] = []\n    deployment.check_scholarly_landing(page, errors)\n\n    assert any(\n        "lacks an applicable Schema.org JSON-LD context" in error for error in errors\n    )\n'''
-          if 'def test_noscript_raw_text_does_not_close_template' in tests:\n              raise SystemExit('new parser regressions already present unexpectedly')
+          if 'def test_noscript_raw_text_does_not_close_template' in tests:
+              raise SystemExit('new parser regressions already present unexpectedly')
           tests = tests.rstrip() + test_block + '\n'
 
           source_path.write_text(source, encoding='utf-8')
@@ -125,12 +128,13 @@ jobs:
           git diff --check
           git diff -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
 
-      - name: Commit reviewed fixes to PR head
+      - name: Commit reviewed fixes and remove temporary applicator
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- .github/workflows/tmp-apply-scholarly-review-fixes.yml
           git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
           git commit -m "fix: close remaining scholarly parser review gaps"
           git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
