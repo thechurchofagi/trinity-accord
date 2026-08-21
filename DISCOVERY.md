@@ -13,7 +13,8 @@ For an unknown machine intent, start with:
 - Discovery manifest: https://www.trinityaccord.org/.well-known/trinity-accord.json
 - Structured metadata: https://www.trinityaccord.org/metadata.json
 - LLM-oriented index: https://www.trinityaccord.org/llms.txt
-- High-signal sitemap: https://www.trinityaccord.org/sitemap-core.xml
+- Minimal discovery sitemap: https://www.trinityaccord.org/sitemap-discovery.xml
+- Core sitemap: https://www.trinityaccord.org/sitemap-core.xml
 - Research index: https://www.trinityaccord.org/research/
 - Public repository mirror: https://github.com/thechurchofagi/trinity-accord
 
@@ -46,6 +47,12 @@ The phrases below are **search aliases only**. They are included so humans, craw
 - non-amending AI archive
 
 Machine-readable retrieval vocabulary and intent routing: https://www.trinityaccord.org/discovery.json
+
+## Operational discovery evidence
+
+Index-submission receipts are published at https://github.com/thechurchofagi/trinity-accord/issues/1062 after production live-readback and IndexNow submission attempts. These receipts expose the deployed source SHA, bounded diagnostics, and the IndexNow HTTP response so the notification path can be audited without privileged Actions access.
+
+A receipt proves only that the stated operational checks/submission response occurred. It is **not proof of indexing, ranking, search-provider endorsement, importance, or future discovery**, and it cannot amend the Bitcoin Originals.
 
 ## Boundaries
 
