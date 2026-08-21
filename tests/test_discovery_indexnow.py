@@ -27,6 +27,7 @@ def test_search_discovery_metadata_is_bounded_and_routed() -> None:
 
 def test_agent_pointer_exposes_discovery_without_claiming_a2a() -> None:
     agent = json.loads((ROOT / ".well-known" / "agent.json").read_text(encoding="utf-8"))
+    assert agent["schema"] == "trinity-accord.agent-discovery.v2"
     boundary = agent["discovery_protocol_boundary"]
     assert boundary["this_is_custom_trinity_accord_discovery_metadata"] is True
     assert boundary["this_is_not_an_a2a_agent_card"] is True
