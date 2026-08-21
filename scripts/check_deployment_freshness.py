@@ -71,6 +71,88 @@ SCHOLARLY_META_EXPECTED = {
     "citation_language": "en",
 }
 
+# In the HTML tree builder's "in head" insertion mode, these start tags do not
+# implicitly close the document head. A body-content start tag such as <main>
+# does. Tracking this prevents metadata from an implied body from being accepted
+# when optional </head> and <body> tags are omitted.
+HEAD_MODE_START_TAGS = {
+    "base",
+    "basefont",
+    "bgsound",
+    "head",
+    "html",
+    "link",
+    "meta",
+    "noframes",
+    "noscript",
+    "script",
+    "style",
+    "template",
+    "title",
+}
+AFTER_HEAD_MODE_START_TAGS = {
+    "base",
+    "basefont",
+    "bgsound",
+    "html",
+    "link",
+    "meta",
+    "noframes",
+    "script",
+    "style",
+    "template",
+}
+HEAD_TEXT_TAGS = {"noframes", "noscript", "script", "style", "title"}
+HTML_VOID_ELEMENTS = {
+    "area",
+    "base",
+    "basefont",
+    "bgsound",
+    "br",
+    "col",
+    "embed",
+    "frame",
+    "hr",
+    "img",
+    "input",
+    "keygen",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+}
+SCHEMA_ORG_BASES = {"http://schema.org", "https://schema.org"}
+SCHEMA_ORG_VOCAB_BASES = {"http://schema.org/", "https://schema.org/"}
+SCHEMA_ORG_REMOTE_CONTEXTS = SCHEMA_ORG_BASES | SCHEMA_ORG_VOCAB_BASES
+SCHEMA_ORG_ARTICLE_IRIS = {
+    f"{base}/ScholarlyArticle" for base in SCHEMA_ORG_BASES
+}
+SCHOLARLY_SCHEMA_TERMS = {
+    "ScholarlyArticle",
+    "name",
+    "headline",
+    "datePublished",
+    "version",
+    "url",
+    "license",
+    "isAccessibleForFree",
+    "encoding",
+    "contentUrl",
+    "encodingFormat",
+    "sameAs",
+    "identifier",
+    "propertyID",
+    "value",
+}
+SchemaContextState = tuple[
+    bool, dict[str, bool], dict[str, str], bool, dict[str, str]
+]
+DEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (
+    False, {}, {}, False, {}
+)
+
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
 # connection during propagation. Retry each individual live read so a single
 # transient edge failure does not invalidate an otherwise exact deployment.
@@ -242,54 +324,362 @@ STATIC_SOURCE_FILES = [
 ]
 
 
+def _first_attributes(
+    attrs: list[tuple[str, str | None]],
+) -> tuple[dict[str, str | None], set[str], dict[str, list[str | None]]]:
+    """Return browser-first attributes plus duplicate names and all raw values."""
+    first: dict[str, str | None] = {}
+    duplicates: set[str] = set()
+    values: dict[str, list[str | None]] = {}
+    for raw_name, value in attrs:
+        name = raw_name.lower()
+        values.setdefault(name, []).append(value)
+        if name in first:
+            duplicates.add(name)
+        else:
+            first[name] = value
+    return first, duplicates, values
+
+
 class ScholarlyHTMLParser(HTMLParser):
-    """Extract head-only scholarly meta and document-wide JSON-LD."""
+    """Extract browser-visible head citation meta and document-wide JSON-LD."""
+
+    _SVG_HTML_INTEGRATION_POINTS = {"foreignobject", "desc", "title"}
+    _MATHML_TEXT_INTEGRATION_POINTS = {"mi", "mo", "mn", "ms", "mtext"}
+    _MATHML_HTML_ENCODINGS = {"text/html", "application/xhtml+xml"}
+    _FOREIGN_HTML_BREAKOUT_TAGS = {
+        "b", "big", "blockquote", "body", "br", "center", "code",
+        "dd", "div", "dl", "dt", "em", "embed", "h1", "h2",
+        "h3", "h4", "h5", "h6", "head", "hr", "i", "img",
+        "li", "listing", "menu", "meta", "nobr", "ol", "p",
+        "pre", "ruby", "s", "small", "span", "strong", "strike",
+        "sub", "sup", "table", "tt", "u", "ul", "var",
+    }
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.meta: dict[str, list[str]] = {}
         self.json_ld_blocks: list[str] = []
+        self.errors: list[str] = []
         self._in_head = False
+        self._after_head = False
         self._head_seen = False
         self._body_started = False
+        self._template_depth = 0
+        # Retained as a diagnostic counter for open SVG/MathML-namespace
+        # elements. Namespace-sensitive decisions use _element_stack so
+        # HTML integration points are handled correctly.
+        self._foreign_content_depth = 0
+        self._element_stack: list[
+            tuple[str, str, dict[str, str | None]]
+        ] = []
+        self._head_text_stack: list[str] = []
+        self._in_noscript_raw = False
         self._in_json_ld = False
         self._json_ld_chunks: list[str] = []
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attributes = dict(attrs)
-        tag = tag.lower()
+    def _namespace_for_start(
+        self,
+        tag: str,
+        attributes: dict[str, str | None],
+    ) -> str:
+        if not self._element_stack:
+            return "html"
+        parent_tag, parent_namespace, parent_attributes = self._element_stack[-1]
+        if parent_namespace == "html":
+            if tag == "svg":
+                return "svg"
+            if tag == "math":
+                return "math"
+            return "html"
+        if parent_namespace == "svg":
+            if parent_tag in self._SVG_HTML_INTEGRATION_POINTS:
+                if tag == "svg":
+                    return "svg"
+                if tag == "math":
+                    return "math"
+                return "html"
+            return "svg"
+        if parent_namespace == "math":
+            if (
+                parent_tag in self._MATHML_TEXT_INTEGRATION_POINTS
+                and tag not in {"mglyph", "malignmark"}
+            ):
+                if tag == "svg":
+                    return "svg"
+                if tag == "math":
+                    return "math"
+                return "html"
+            if parent_tag == "annotation-xml":
+                # HTML's foreign-content rules recognize an SVG start token in
+                # MathML annotation-xml regardless of the annotation encoding.
+                if tag == "svg":
+                    return "svg"
+                encoding = (parent_attributes.get("encoding") or "").lower()
+                if encoding in self._MATHML_HTML_ENCODINGS:
+                    if tag == "math":
+                        return "math"
+                    return "html"
+            return "math"
+        return "html"
 
-        if tag == "body":
+    @classmethod
+    def _is_foreign_html_breakout(
+        cls, tag: str, attributes: dict[str, str | None]
+    ) -> bool:
+        if tag in cls._FOREIGN_HTML_BREAKOUT_TAGS:
+            return True
+        return tag == "font" and any(
+            name in attributes for name in {"color", "face", "size"}
+        )
+
+    def _pop_open_foreign_content(self) -> None:
+        while self._element_stack and self._element_stack[-1][1] != "html":
+            _tag, namespace, _attributes = self._element_stack.pop()
+            if namespace != "html":
+                self._foreign_content_depth = max(
+                    0, self._foreign_content_depth - 1
+                )
+
+    def _push_element(
+        self,
+        tag: str,
+        namespace: str,
+        attributes: dict[str, str | None],
+    ) -> None:
+        self._element_stack.append((tag, namespace, attributes))
+        if namespace != "html":
+            self._foreign_content_depth += 1
+        if tag == "template" and namespace == "html":
+            self._template_depth += 1
+
+    def _pop_through_matching_element(self, tag: str) -> str | None:
+        match_index = None
+        for index in range(len(self._element_stack) - 1, -1, -1):
+            stack_tag, stack_namespace, _attributes = self._element_stack[index]
+            if (
+                stack_tag == "template"
+                and stack_namespace == "html"
+                and tag != "template"
+            ):
+                # HTML template contents form a tree-builder boundary. An end
+                # tag outside the template insertion mode cannot pop through an
+                # open HTML template to close an ancestor document element.
+                break
+            if stack_tag == tag:
+                match_index = index
+                break
+        if match_index is None:
+            return None
+        matched_namespace = self._element_stack[match_index][1]
+        popped = self._element_stack[match_index:]
+        del self._element_stack[match_index:]
+        for popped_tag, namespace, _attributes in popped:
+            if namespace != "html":
+                self._foreign_content_depth = max(
+                    0, self._foreign_content_depth - 1
+                )
+            if popped_tag == "template" and namespace == "html":
+                self._template_depth = max(0, self._template_depth - 1)
+        return matched_namespace
+
+    def _handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+        *,
+        self_closing: bool,
+    ) -> None:
+        tag = tag.lower()
+        if self._in_noscript_raw:
+            return
+        attributes, duplicates, values = _first_attributes(attrs)
+        namespace = self._namespace_for_start(tag, attributes)
+        if (
+            namespace != "html"
+            and self._is_foreign_html_breakout(tag, attributes)
+        ):
+            self._pop_open_foreign_content()
+            namespace = self._namespace_for_start(tag, attributes)
+
+        # A non-head HTML start tag implicitly ends the optional document
+        # head even when both </head> and <body> are omitted.
+        if (
+            namespace == "html"
+            and self._in_head
+            and self._template_depth == 0
+            and not self._head_text_stack
+            and tag not in HEAD_MODE_START_TAGS
+        ):
+            self._in_head = False
+            self._after_head = False
+            self._body_started = True
+
+        # In the tree builder's after-head insertion mode, a small set of
+        # metadata-bearing tokens are processed using the head element pointer.
+        # Other HTML start tags begin the body-effective portion of the document.
+        if (
+            namespace == "html"
+            and self._after_head
+            and self._template_depth == 0
+            and not self._head_text_stack
+            and tag not in AFTER_HEAD_MODE_START_TAGS
+        ):
+            self._after_head = False
+            self._body_started = True
+
+        if (
+            namespace == "html"
+            and tag == "body"
+            and self._template_depth == 0
+            and not self._head_text_stack
+        ):
             self._body_started = True
             self._in_head = False
+            self._after_head = False
 
-        if tag == "head" and not self._head_seen and not self._body_started:
+        if (
+            namespace == "html"
+            and tag == "head"
+            and not self._head_seen
+            and not self._body_started
+        ):
             self._head_seen = True
             self._in_head = True
+            self._after_head = False
 
-        if tag == "meta" and self._in_head:
+        # Foreign-content self-closing syntax is acknowledged; HTML
+        # self-closing syntax on non-void elements is ignored.
+        should_push = not (
+            namespace != "html" and self_closing
+        ) and not (
+            namespace == "html" and tag in HTML_VOID_ELEMENTS
+        )
+        if should_push:
+            self._push_element(tag, namespace, attributes)
+
+        if (
+            namespace == "html"
+            and tag in HEAD_TEXT_TAGS
+            and (self._in_head or self._after_head)
+            and self._template_depth == 0
+        ):
+            self._head_text_stack.append(tag)
+
+        if namespace == "html" and tag == "noscript":
+            # With scripting enabled, noscript content is raw text.
+            self._in_noscript_raw = True
+
+        if (
+            namespace == "html"
+            and tag == "meta"
+            and (self._in_head or self._after_head)
+            and self._template_depth == 0
+        ):
+            name_values = [
+                value for value in values.get("name", []) if value is not None
+            ]
+            scholarly_candidate = any(
+                value in SCHOLARLY_META_EXPECTED for value in name_values
+            )
+            relevant_duplicates = duplicates & {"name", "content"}
+            if scholarly_candidate and relevant_duplicates:
+                self.errors.append(
+                    "scholarly meta contains duplicate attribute(s): "
+                    + ", ".join(sorted(relevant_duplicates))
+                )
             name = attributes.get("name")
             content = attributes.get("content")
             if name is not None:
                 self.meta.setdefault(name, []).append(content or "")
-        elif tag == "script" and (attributes.get("type") or "").lower() == "application/ld+json":
-            self._in_json_ld = True
-            self._json_ld_chunks = []
+
+        if (
+            namespace == "html"
+            and tag == "script"
+            and self._template_depth == 0
+        ):
+            type_values = [
+                value for value in values.get("type", []) if value is not None
+            ]
+            contains_json_ld_type = any(
+                value.lower() == "application/ld+json" for value in type_values
+            )
+            if contains_json_ld_type and "type" in duplicates:
+                self.errors.append(
+                    "scholarly JSON-LD script contains duplicate type attribute"
+                )
+            script_type = attributes.get("type") or ""
+            if script_type.lower() == "application/ld+json":
+                self._in_json_ld = True
+                self._json_ld_chunks = []
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self._handle_starttag(tag, attrs, self_closing=False)
+
+    def handle_startendtag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self._handle_starttag(tag, attrs, self_closing=True)
 
     def handle_data(self, data: str) -> None:
         if self._in_json_ld:
             self._json_ld_chunks.append(data)
+        if (
+            (self._in_head or self._after_head)
+            and self._template_depth == 0
+            and not self._head_text_stack
+            and data.strip("\t\n\f\r ")
+        ):
+            self._in_head = False
+            self._after_head = False
+            self._body_started = True
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.lower()
+        if self._in_noscript_raw:
+            if tag != "noscript":
+                return
+            self._in_noscript_raw = False
         if tag == "script" and self._in_json_ld:
-            self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
+            self.json_ld_blocks.append(
+                "".join(self._json_ld_chunks).strip()
+            )
             self._in_json_ld = False
             self._json_ld_chunks = []
-        if tag == "head" and self._in_head:
+        if (
+            tag in {"body", "html", "br"}
+            and (self._in_head or self._after_head)
+            and self._template_depth == 0
+            and not self._head_text_stack
+        ):
             self._in_head = False
-        if tag == "body":
+            self._after_head = False
             self._body_started = True
+        if self._head_text_stack and tag == self._head_text_stack[-1]:
+            self._head_text_stack.pop()
+
+        matched_namespace = self._pop_through_matching_element(tag)
+
+        if (
+            tag == "head"
+            and matched_namespace == "html"
+            and self._in_head
+            and self._template_depth == 0
+        ):
+            self._in_head = False
+            self._after_head = True
+        if (
+            tag == "body"
+            and matched_namespace == "html"
+            and self._template_depth == 0
+        ):
+            self._body_started = True
+            self._in_head = False
+            self._after_head = False
 
 
 def sha256(data: bytes) -> str:
@@ -376,18 +766,409 @@ def check_forbidden(path: str, text: str, errors: list[str]) -> None:
                 )
 
 
-def collect_scholarly_articles(value: object, articles: list[dict]) -> None:
+def _normalized_schema_url(value: object) -> str | None:
+    if not isinstance(value, str):
+        return None
+    return value
+
+
+def _expand_compact_iri(value: str, prefixes: dict[str, str]) -> str:
+    if value != value.strip():
+        return value
+    stripped = value
+    if ":" not in stripped:
+        return stripped
+    prefix, suffix = stripped.split(":", 1)
+    if suffix.startswith("//"):
+        return stripped
+    base = prefixes.get(prefix)
+    if base is None:
+        return stripped
+    return base + suffix
+
+
+def _prefix_mapping(
+    definition: object,
+    prefixes: dict[str, str],
+) -> str | None:
+    explicit_prefix: bool | None = None
+    if isinstance(definition, dict):
+        if definition.get("@prefix") is False:
+            return None
+        if definition.get("@prefix") is True:
+            explicit_prefix = True
+        definition = definition.get("@id")
+    if not isinstance(definition, str):
+        return None
+    expanded = _expand_compact_iri(definition, prefixes)
+    if not expanded.startswith(("http://", "https://")):
+        return None
+    if explicit_prefix is True or (
+        explicit_prefix is None and expanded.endswith(("/", "#"))
+    ):
+        return expanded
+    return None
+
+
+def _term_alias_key(term: str) -> str:
+    # Prefix entries and whole-term aliases share one internal mapping without
+    # colliding: only strings before a colon are consulted as compact prefixes.
+    return f"__jsonld_term_alias__:{term}"
+
+
+def _raw_term_mapping(definition: object) -> str | None:
+    if isinstance(definition, dict):
+        if "@reverse" in definition:
+            return None
+        definition = definition.get("@id")
+    return definition if isinstance(definition, str) else None
+
+
+def _expand_term_iri(value: str, prefixes: dict[str, str]) -> str:
+    """Expand compact IRIs and recursively resolve whole-term aliases."""
+    current = value
+    seen: set[str] = set()
+    for _ in range(len(prefixes) + 1):
+        if current != current.strip():
+            return current
+        compact = _expand_compact_iri(current, prefixes)
+        if compact != current or ":" in current:
+            return compact
+        if current in seen:
+            return current
+        seen.add(current)
+        mapped = prefixes.get(_term_alias_key(current))
+        if mapped is None:
+            return current
+        current = mapped
+    return current
+
+
+def _protected_term_signature(definition: object) -> str:
+    # JSON-LD compares protected term definitions modulo the @protected flag.
+    # Normalize simple string definitions to their expanded {"@id": ...} shape
+    # so syntactically different but identical definitions are not rejected.
+    if isinstance(definition, str):
+        canonical: object = {"@id": definition}
+    elif isinstance(definition, dict):
+        canonical = dict(definition)
+        canonical.pop("@protected", None)
+    else:
+        canonical = definition
+    return json.dumps(
+        canonical,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _term_maps_to_schema_term(
+    value: object,
+    term: str,
+    vocab_is_schema: bool,
+    prefixes: dict[str, str],
+) -> bool:
     if isinstance(value, dict):
+        if "@reverse" in value:
+            return False
+        if "@id" not in value:
+            return vocab_is_schema
+        value = value.get("@id")
+    if not isinstance(value, str):
+        return False
+    expanded = _expand_term_iri(value, prefixes)
+    if expanded in {f"{base}/{term}" for base in SCHEMA_ORG_BASES}:
+        return True
+    return vocab_is_schema and value == term
+
+
+def _schema_context_state(
+    context: object,
+    inherited: SchemaContextState,
+) -> SchemaContextState:
+    """Track Schema vocabulary, term mappings, prefixes, unsupported contexts, and protection."""
+    if context is None:
+        return DEFAULT_SCHEMA_CONTEXT_STATE
+
+    (
+        vocab_is_schema,
+        inherited_overrides,
+        inherited_prefixes,
+        unsupported,
+        inherited_protected,
+    ) = inherited
+    term_overrides = dict(inherited_overrides)
+    prefixes = dict(inherited_prefixes)
+    protected_definitions = dict(inherited_protected)
+
+    if isinstance(context, str):
+        is_schema = _normalized_schema_url(context) in SCHEMA_ORG_REMOTE_CONTEXTS
+        if is_schema:
+            return (
+                True, term_overrides, prefixes, unsupported, dict(protected_definitions)
+            )
+        return (
+            vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
+        )
+
+    if isinstance(context, dict):
+        if "@import" in context:
+            return (
+                vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
+            )
+
+        if "@vocab" in context:
+            raw_vocab = context.get("@vocab")
+            expanded_vocab = (
+                _expand_compact_iri(raw_vocab, prefixes)
+                if isinstance(raw_vocab, str)
+                else None
+            )
+            vocab_is_schema = expanded_vocab in SCHEMA_ORG_VOCAB_BASES
+
+        definitions = [
+            (term, definition)
+            for term, definition in context.items()
+            if not term.startswith("@")
+        ]
+
+        context_protected = context.get("@protected") is True
+        for term, definition in definitions:
+            if term not in SCHOLARLY_SCHEMA_TERMS:
+                continue
+            if isinstance(definition, dict) and "@protected" in definition:
+                definition_protected = definition.get("@protected") is True
+            else:
+                definition_protected = context_protected
+            signature = _protected_term_signature(definition)
+            if term in protected_definitions:
+                if signature != protected_definitions[term]:
+                    unsupported = True
+            elif definition_protected:
+                protected_definitions[term] = signature
+
+        for term, _ in definitions:
+            prefixes.pop(term, None)
+            prefixes.pop(_term_alias_key(term), None)
+        for _ in range(max(1, len(definitions))):
+            changed = False
+            for term, definition in definitions:
+                mapping = _prefix_mapping(definition, prefixes)
+                if mapping is not None and prefixes.get(term) != mapping:
+                    prefixes[term] = mapping
+                    changed = True
+            if not changed:
+                break
+
+        for term, definition in definitions:
+            raw_mapping = _raw_term_mapping(definition)
+            if raw_mapping is not None:
+                prefixes[_term_alias_key(term)] = raw_mapping
+
+        for term in SCHOLARLY_SCHEMA_TERMS:
+            if term in context:
+                term_overrides[term] = _term_maps_to_schema_term(
+                    context.get(term), term, vocab_is_schema, prefixes
+                )
+        return (
+            vocab_is_schema,
+            term_overrides,
+            prefixes,
+            unsupported,
+            dict(protected_definitions),
+        )
+
+    if isinstance(context, list):
+        state = inherited
+        for item in context:
+            state = _schema_context_state(item, state)
+        return state
+
+    return (
+        vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
+    )
+
+
+def _context_propagates(context: object) -> bool:
+    """Return whether a local JSON-LD context applies to descendant node objects."""
+    if isinstance(context, dict):
+        return context.get("@propagate") is not False
+    if isinstance(context, list):
+        propagate = True
+        for item in context:
+            if isinstance(item, dict) and "@propagate" in item:
+                propagate = item.get("@propagate") is not False
+        return propagate
+    return True
+
+
+def _type_context_propagates(context: object) -> bool:
+    """Type-scoped contexts stop at the next node unless explicitly propagated."""
+    if isinstance(context, dict):
+        return context.get("@propagate") is True
+    if isinstance(context, list):
+        propagate = False
+        for item in context:
+            if isinstance(item, dict) and "@propagate" in item:
+                propagate = item.get("@propagate") is True
+        return propagate
+    return False
+
+
+def _property_scoped_contexts(
+    context: object,
+    inherited: dict[str, object],
+) -> dict[str, object]:
+    """Track JSON-LD property-scoped contexts in the active local context."""
+    if context is None:
+        return {}
+    if isinstance(context, str):
+        return dict(inherited)
+    if isinstance(context, dict):
+        scopes = dict(inherited)
+        for term, definition in context.items():
+            if term.startswith("@"):
+                continue
+            if isinstance(definition, dict) and "@context" in definition:
+                scopes[term] = definition.get("@context")
+            else:
+                scopes.pop(term, None)
+        return scopes
+    if isinstance(context, list):
+        scopes = dict(inherited)
+        for item in context:
+            scopes = _property_scoped_contexts(item, scopes)
+        return scopes
+    return {}
+
+
+def _schema_term_is_valid(state: SchemaContextState, term: str) -> bool:
+    vocab_is_schema, term_overrides, _prefixes, unsupported, _protected = state
+    if unsupported:
+        return False
+    return term_overrides.get(term, vocab_is_schema)
+
+
+def _schema_article_term_is_valid(state: SchemaContextState) -> bool:
+    return _schema_term_is_valid(state, "ScholarlyArticle")
+
+
+def _property_child_state(
+    key: str,
+    node_schema_state: SchemaContextState,
+    child_schema_state: SchemaContextState,
+    node_property_scopes: dict[str, object],
+    child_property_scopes: dict[str, object],
+) -> tuple[SchemaContextState, dict[str, object]]:
+    """Return the active state for a property value before visiting it."""
+    if key not in node_property_scopes:
+        return child_schema_state, child_property_scopes
+    scoped_context = node_property_scopes[key]
+    if not _context_propagates(scoped_context):
+        return DEFAULT_SCHEMA_CONTEXT_STATE, {}
+    return (
+        _schema_context_state(scoped_context, node_schema_state),
+        _property_scoped_contexts(
+            scoped_context, child_property_scopes
+        ),
+    )
+
+
+def collect_scholarly_articles(
+    value: object,
+    articles: list[
+        tuple[
+            dict,
+            SchemaContextState,
+            SchemaContextState,
+            SchemaContextState,
+            dict[str, object],
+            dict[str, object],
+        ]
+    ],
+    inherited_schema_context: SchemaContextState = DEFAULT_SCHEMA_CONTEXT_STATE,
+    inherited_property_scopes: dict[str, object] | None = None,
+) -> None:
+    property_scopes = (
+        {} if inherited_property_scopes is None else dict(inherited_property_scopes)
+    )
+    if isinstance(value, dict):
+        schema_state = inherited_schema_context
+        child_schema_state = inherited_schema_context
+        node_property_scopes = property_scopes
+        child_property_scopes = property_scopes
+        if "@context" in value:
+            context = value.get("@context")
+            schema_state = _schema_context_state(context, inherited_schema_context)
+            node_property_scopes = _property_scoped_contexts(
+                context, property_scopes
+            )
+            if _context_propagates(context):
+                child_schema_state = schema_state
+                child_property_scopes = node_property_scopes
+            else:
+                child_schema_state = inherited_schema_context
+                child_property_scopes = property_scopes
+        else:
+            child_schema_state = schema_state
+
         article_type = value.get("@type")
+        type_terms = (
+            [article_type]
+            if isinstance(article_type, str)
+            else [term for term in article_type if isinstance(term, str)]
+            if isinstance(article_type, list)
+            else []
+        )
+        # The activating @type is expanded before any type-scoped context
+        # defined by that term becomes active on the node properties.
+        type_validation_state = schema_state
+        for type_term in sorted(type_terms):
+            if type_term not in node_property_scopes:
+                continue
+            type_context = node_property_scopes[type_term]
+            schema_state = _schema_context_state(type_context, schema_state)
+            node_property_scopes = _property_scoped_contexts(
+                type_context, node_property_scopes
+            )
+            if _type_context_propagates(type_context):
+                child_schema_state = schema_state
+                child_property_scopes = node_property_scopes
+
         if article_type == "ScholarlyArticle" or (
-            isinstance(article_type, list) and "ScholarlyArticle" in article_type
+            isinstance(article_type, list)
+            and "ScholarlyArticle" in article_type
         ):
-            articles.append(value)
-        for child in value.values():
-            collect_scholarly_articles(child, articles)
+            articles.append(
+                (
+                    value,
+                    type_validation_state,
+                    schema_state,
+                    child_schema_state,
+                    node_property_scopes,
+                    child_property_scopes,
+                )
+            )
+
+        for key, child in value.items():
+            if key == "@context":
+                continue
+            scoped_state, scoped_scopes = _property_child_state(
+                key,
+                schema_state,
+                child_schema_state,
+                node_property_scopes,
+                child_property_scopes,
+            )
+            collect_scholarly_articles(
+                child, articles, scoped_state, scoped_scopes
+            )
     elif isinstance(value, list):
         for child in value:
-            collect_scholarly_articles(child, articles)
+            collect_scholarly_articles(
+                child, articles, inherited_schema_context, property_scopes
+            )
 
 
 def check_scholarly_landing(page: str, errors: list[str]) -> None:
@@ -398,6 +1179,9 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
     except Exception as exc:  # noqa: BLE001 - diagnostics should report malformed HTML
         errors.append(f"{SCHOLARLY_LANDING_PATH}: failed to parse rendered HTML: {exc}")
         return
+
+    for parser_error in parser.errors:
+        errors.append(f"{SCHOLARLY_LANDING_PATH}: {parser_error}")
 
     if not parser._head_seen:
         errors.append(f"{SCHOLARLY_LANDING_PATH}: document head was not found")
@@ -421,20 +1205,60 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: invalid rendered JSON-LD: {exc}"
             )
 
-    articles: list[dict] = []
+    articles: list[
+        tuple[
+            dict,
+            SchemaContextState,
+            SchemaContextState,
+            SchemaContextState,
+            dict[str, object],
+            dict[str, object],
+        ]
+    ] = []
     for document in documents:
         collect_scholarly_articles(document, articles)
 
-    matching = [article for article in articles if article.get("name") == SCHOLARLY_TITLE]
+    matching = [
+        (
+            article,
+            type_state,
+            schema_state,
+            child_schema_state,
+            article_scopes,
+            child_scopes,
+        )
+        for (
+            article,
+            type_state,
+            schema_state,
+            child_schema_state,
+            article_scopes,
+            child_scopes,
+        ) in articles
+        if article.get("name") == SCHOLARLY_TITLE
+    ]
     if len(matching) != 1:
-        observed_names = [article.get("name") for article in articles]
+        observed_names = [article.get("name") for article, *_rest in articles]
         errors.append(
             f"{SCHOLARLY_LANDING_PATH}: expected exactly one rendered ScholarlyArticle "
             f"with the exact title; matching={len(matching)}, observed={observed_names!r}"
         )
         return
 
-    article = matching[0]
+    (
+        article,
+        type_state,
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    ) = matching[0]
+    if not _schema_article_term_is_valid(type_state):
+        errors.append(
+            f"{SCHOLARLY_LANDING_PATH}: matching ScholarlyArticle lacks an applicable "
+            "Schema.org JSON-LD context"
+        )
+
     expected_fields = {
         "headline": SCHOLARLY_TITLE,
         "datePublished": "2026-07-29",
@@ -443,6 +1267,20 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
         "license": "https://creativecommons.org/licenses/by/4.0/",
         "isAccessibleForFree": True,
     }
+    required_schema_properties = {
+        "name",
+        *expected_fields.keys(),
+        "encoding",
+        "sameAs",
+        "identifier",
+    }
+    for field in sorted(required_schema_properties):
+        if not _schema_term_is_valid(schema_state, field):
+            errors.append(
+                f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.{field} is not mapped "
+                f"to Schema.org/{field}"
+            )
+
     for field, expected in expected_fields.items():
         if article.get(field) != expected:
             errors.append(
@@ -450,10 +1288,46 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{expected!r}, observed {article.get(field)!r}"
             )
 
+    encoding_state, encoding_scopes = _property_child_state(
+        "encoding",
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    )
+
     encoding = article.get("encoding")
     if not isinstance(encoding, dict):
         errors.append(f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.encoding is missing")
     else:
+        if "@context" in encoding:
+            encoding_context = encoding.get("@context")
+            encoding_state = _schema_context_state(encoding_context, encoding_state)
+            encoding_scopes = _property_scoped_contexts(
+                encoding_context, encoding_scopes
+            )
+        encoding_type = encoding.get("@type")
+        encoding_type_terms = (
+            [encoding_type]
+            if isinstance(encoding_type, str)
+            else [term for term in encoding_type if isinstance(term, str)]
+            if isinstance(encoding_type, list)
+            else []
+        )
+        for type_term in sorted(encoding_type_terms):
+            if type_term not in encoding_scopes:
+                continue
+            type_context = encoding_scopes[type_term]
+            encoding_state = _schema_context_state(type_context, encoding_state)
+            encoding_scopes = _property_scoped_contexts(
+                type_context, encoding_scopes
+            )
+        for field in ("contentUrl", "encodingFormat"):
+            if not _schema_term_is_valid(encoding_state, field):
+                errors.append(
+                    f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.encoding.{field} "
+                    f"is not mapped to Schema.org/{field}"
+                )
         if encoding.get("contentUrl") != SCHOLARLY_PDF_URL:
             errors.append(
                 f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle PDF contentUrl mismatch: "
@@ -477,6 +1351,14 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
                 f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.sameAs missing {expected!r}"
             )
 
+    identifier_state, identifier_scopes = _property_child_state(
+        "identifier",
+        schema_state,
+        child_schema_state,
+        article_scopes,
+        child_scopes,
+    )
+
     identifiers = article.get("identifier", [])
     if isinstance(identifiers, dict):
         identifiers = [identifiers]
@@ -484,7 +1366,42 @@ def check_scholarly_landing(page: str, errors: list[str]) -> None:
     if isinstance(identifiers, list):
         for identifier in identifiers:
             if isinstance(identifier, dict):
-                property_values.add((identifier.get("propertyID"), identifier.get("value")))
+                item_state = identifier_state
+                item_scopes = identifier_scopes
+                if "@context" in identifier:
+                    identifier_context = identifier.get("@context")
+                    item_state = _schema_context_state(identifier_context, item_state)
+                    item_scopes = _property_scoped_contexts(
+                        identifier_context, item_scopes
+                    )
+                identifier_type = identifier.get("@type")
+                identifier_type_terms = (
+                    [identifier_type]
+                    if isinstance(identifier_type, str)
+                    else [
+                        term for term in identifier_type if isinstance(term, str)
+                    ]
+                    if isinstance(identifier_type, list)
+                    else []
+                )
+                for type_term in sorted(identifier_type_terms):
+                    if type_term not in item_scopes:
+                        continue
+                    type_context = item_scopes[type_term]
+                    item_state = _schema_context_state(type_context, item_state)
+                    item_scopes = _property_scoped_contexts(
+                        type_context, item_scopes
+                    )
+                for field in ("propertyID", "value"):
+                    if not _schema_term_is_valid(item_state, field):
+                        errors.append(
+                            f"{SCHOLARLY_LANDING_PATH}: ScholarlyArticle.identifier.{field} "
+                            f"is not mapped to Schema.org/{field}"
+                        )
+                property_values.add(
+                    (identifier.get("propertyID"), identifier.get("value"))
+                )
+
     expected_properties = {
         ("Technical report number", SCHOLARLY_REPORT_NUMBER),
         ("DOI", SCHOLARLY_DOI),
