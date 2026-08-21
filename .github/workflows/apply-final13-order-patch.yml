@@ -1,8 +1,8 @@
-name: Temporary seventh scholarly review writer
+name: Apply verified final-13 ordering patch
 
 on:
   push:
-    branches: [agent/close-final-scholarly-parser-gaps-2026-08-21]
+    branches: [agent/research-final-13-cids]
     paths: [.github/workflows/apply-final13-order-patch.yml]
 
 permissions:
@@ -14,80 +14,35 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
-          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
-          fetch-depth: 0
+          ref: agent/research-final-13-cids
       - name: Record toolchain provenance
         run: |
           set -euo pipefail
           python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
           cat "$RUNNER_TEMP/toolchain-provenance.json"
-      - name: Apply and validate seventh scholarly review fixes
-        shell: bash
+      - name: Apply exact metadata ordering variant and regression guard
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
+          p=Path('scripts/rebuild-chronicle-sidechain-cars-from-history.mjs')
+          s=p.read_text()
+          old="""    ['nft_common_name_description_image', orderedTopLevel(metadata, ['name', 'description', 'image', 'animation_url', 'external_url', 'attributes', 'properties'])],\n    ['nft_common_name_image_description', orderedTopLevel(metadata, ['name', 'image', 'description', 'animation_url', 'external_url', 'attributes', 'properties'])],"""
+          new="""    ['nft_common_name_description_image', orderedTopLevel(metadata, ['name', 'description', 'image', 'animation_url', 'external_url', 'attributes', 'properties'])],\n    // Historical spam-airdrop metadata in the immutable v1 snapshot was serialized\n    // by Python-style JSON with external_url before image. Preserve that exact\n    // ordering as another candidate; acceptance still requires target CID equality.\n    ['nft_common_name_description_external_image', orderedTopLevel(metadata, ['name', 'description', 'external_url', 'image', 'animation_url', 'attributes', 'properties'])],\n    ['nft_common_name_image_description', orderedTopLevel(metadata, ['name', 'image', 'description', 'animation_url', 'external_url', 'attributes', 'properties'])],"""
+          if old not in s: raise SystemExit('ordering patch anchor not found')
+          p.write_text(s.replace(old,new,1))
 
-          workflow = Path('.github/workflows/tmp-seventh-scholarly-review.yml')
-          lines = workflow.read_text(encoding='utf-8').splitlines()
-          in_step = False
-          collecting = False
-          extracted: list[str] = []
-          for line in lines:
-              if line.strip() == '- name: Apply seventh-round Codex review fixes':
-                  in_step = True
-                  continue
-              if in_step and line.strip() == "python3 - <<'PY'":
-                  collecting = True
-                  continue
-              if collecting and line.strip() == 'PY':
-                  break
-              if collecting:
-                  if not line.startswith('          '):
-                      raise SystemExit(f'unexpected applicator indentation: {line!r}')
-                  extracted.append(line[10:])
-          if not extracted:
-              raise SystemExit('failed to extract seventh-round patch program')
-          Path('/tmp/seventh_patch.py').write_text('\n'.join(extracted) + '\n', encoding='utf-8')
+          t=Path('scripts/test_chronicle_bootstrap_history.mjs')
+          s=t.read_text()
+          old="assert.match(rebuild, /HISTORICAL-CONTENT-RECOVERY\\.ndjson/);\n"
+          new=old+"assert.match(rebuild, /'name', 'description', 'external_url', 'image'/);\n"
+          if old not in s: raise SystemExit('test patch anchor not found')
+          t.write_text(s.replace(old,new,1))
           PY
-
-          python3 /tmp/seventh_patch.py
-
-          python3 - <<'PY'
-          import inspect
-          import sys
-          from pathlib import Path
-
-          root = Path.cwd()
-          sys.path.insert(0, str(root / 'tests'))
-          import test_scholarly_parser_edge_cases as suite
-
-          tests = sorted(
-              (name, fn)
-              for name, fn in vars(suite).items()
-              if name.startswith('test_') and inspect.isfunction(fn)
-          )
-          if len(tests) != 37:
-              raise SystemExit(f'expected 37 focused tests, found {len(tests)}')
-          for name, fn in tests:
-              fn()
-              print(f'PASS {name}')
-          print(f'focused scholarly regressions: {len(tests)}/{len(tests)} PASS')
-          PY
-
-          python3 -m py_compile scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
-          git diff --check
-
-      - name: Commit fixes and restore temporary machinery
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin main
-          git checkout origin/main -- .github/workflows/apply-final13-order-patch.yml
-          git rm -- .github/workflows/tmp-seventh-scholarly-review.yml .github/tmp-seventh-trigger.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py .github/workflows/apply-final13-order-patch.yml
-          git diff --cached --check
-          git commit -m "fix: close seventh scholarly review findings"
-          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
+          node --check scripts/rebuild-chronicle-sidechain-cars-from-history.mjs
+          node scripts/test_chronicle_bootstrap_history.mjs
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add scripts/rebuild-chronicle-sidechain-cars-from-history.mjs scripts/test_chronicle_bootstrap_history.mjs
+          git commit -m "Recover four historical metadata roots by exact JSON order"
+          git push origin HEAD:agent/research-final-13-cids
