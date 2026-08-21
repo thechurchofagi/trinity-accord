@@ -43,5 +43,6 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+Sitemap: https://www.trinityaccord.org/sitemap-discovery.xml
 Sitemap: https://www.trinityaccord.org/sitemap-core.xml
 Sitemap: https://www.trinityaccord.org/sitemap.xml
