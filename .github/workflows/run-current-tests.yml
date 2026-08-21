@@ -161,3 +161,60 @@ jobs:
       - name: Show current-system success tail
         if: steps.current_system_tests.outcome == 'success'
         run: tail -n 40 /tmp/current-system-tests.log
+
+  seventh-scholarly-fix:
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 1071 && github.head_ref == 'agent/close-final-scholarly-parser-gaps-2026-08-21'
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: agent/close-final-scholarly-parser-gaps-2026-08-21
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Record toolchain provenance
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+      - name: Apply seventh-round fixes
+        run: |
+          set -euo pipefail
+          python3 .github/tmp-seventh-apply.py
+      - name: Run focused regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import inspect
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, str(Path.cwd() / 'tests'))
+          import test_scholarly_parser_edge_cases as suite
+          tests = sorted((name, fn) for name, fn in vars(suite).items() if name.startswith('test_') and inspect.isfunction(fn))
+          if len(tests) != 37:
+              raise SystemExit(f'expected 37 focused tests, found {len(tests)}')
+          for name, fn in tests:
+              fn()
+              print(f'PASS {name}')
+          print(f'focused scholarly regressions: {len(tests)}/{len(tests)} PASS')
+          PY
+          python3 -m py_compile scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
+          git diff --check
+      - name: Commit fixes and restore workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout origin/main -- .github/workflows/run-current-tests.yml
+          git rm -- .github/tmp-seventh-apply.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py .github/workflows/run-current-tests.yml
+          git diff --cached --check
+          git commit -m "fix: close seventh scholarly review findings"
+          git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
