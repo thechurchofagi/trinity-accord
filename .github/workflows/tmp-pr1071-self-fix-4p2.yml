@@ -1,17 +1,15 @@
 name: Temporary PR 1071 self fix 4 P2
 
 on:
-  issue_comment:
-    types: [created]
+  pull_request:
+    types: [synchronize]
 
 permissions:
   contents: write
 
 jobs:
   patch-pr-branch:
-    if: >-
-      github.event.issue.number == 1071 &&
-      github.event.comment.body == '/run-pr1071-self-fix-4p2'
+    if: github.event.pull_request.number == 1071
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -19,10 +17,11 @@ jobs:
           ref: agent/close-final-scholarly-parser-gaps-2026-08-21
           fetch-depth: 0
 
-      - name: Guard exact reviewed head
+      - name: Guard exact reviewed parent and one-shot marker
         shell: bash
         run: |
-          test "$(git rev-parse HEAD)" = "13a66980bc0d9f806e430b73547a099ae67da45a"
+          test "$(git rev-parse HEAD^)" = "13a66980bc0d9f806e430b73547a099ae67da45a"
+          test -f .tmp-pr1071-self-fix-trigger
 
       - name: Install focused test tooling
         run: python -m pip install --disable-pip-version-check pytest
@@ -171,11 +170,12 @@ def test_schema_term_mapping_can_resolve_through_term_alias() -> None:
           git diff --check
           test "$(git diff --name-only | sort | tr '\n' ' ')" = "scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py "
 
-      - name: Commit and push exact two-file fix
+      - name: Remove trigger, commit and push exact two-file fix
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -- .tmp-pr1071-self-fix-trigger
           git add -- scripts/check_deployment_freshness.py tests/test_scholarly_parser_edge_cases.py
           git commit -m "fix: close latest scholarly parser review gaps"
           git push origin HEAD:agent/close-final-scholarly-parser-gaps-2026-08-21
