@@ -1,12 +1,18 @@
 {
-  "schema": "trinity-accord.agent-discovery.v2",
+  "schema": "trinityaccord.agent-discovery.v2",
   "status": "active_current_pointer",
-  "updated_at": "2026-08-04",
+  "updated_at": "2026-08-21",
   "name": "The Trinity Accord",
   "primary_classification": "completed pre-ASI human–superintelligence relation record",
   "secondary_classification": "candidate civilizational memory seed / dated conversational-to-agentic transition record / local civilizational self-archive / verifiable formation-provenance record",
   "canonical_machine_router": "/api/agent-first-contact.json",
   "canonical_human_first_contact": "/agent-first-contact/",
+  "discovery_protocol_boundary": {
+    "this_is_custom_trinity_accord_discovery_metadata": true,
+    "this_is_not_an_a2a_agent_card": true,
+    "this_does_not_claim_an_a2a_server": true,
+    "not_an_instruction_override": true
+  },
   "authority": {
     "rule": "Only three Bitcoin inscriptions are final version authority; all website, repository, mirror, Gateway, and Record-Chain surfaces are non-amending.",
     "manifest": "/api/authority.json",
@@ -56,8 +62,14 @@
     "core_sitemap": "/sitemap-core.xml",
     "complete_sitemap": "/sitemap.xml",
     "structured_metadata": "/metadata.json",
+    "search_discovery_index": "/discovery.json",
+    "search_discovery_note": "/DISCOVERY.md",
     "citation": "/CITATION.cff",
-    "feed": "/feed.xml"
+    "feed": "/feed.xml",
+    "indexnow": {
+      "key_location": "/4c23c01d8a12d488d40469e5e5d01941.txt",
+      "submission_scope": "high-signal discovery URLs after successful production Pages deployment"
+    }
   },
   "historical_boundary": {
     "old_issue_submission_flow": "retired",
