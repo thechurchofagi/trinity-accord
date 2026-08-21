@@ -120,8 +120,46 @@ jobs:
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add -- preservation/harvard-dataverse-state.json
             git commit -m "preservation: Harvard state ${old_status} -> ${new_status}"
-            git push
+            if ! git push; then
+              echo "Initial push raced with branch movement; rebasing exact state commit once."
+              git pull --rebase origin "$GITHUB_REF_NAME"
+              git push
+            fi
           fi
+
+      - name: Persist failure diagnostic
+        if: failure()
+        shell: bash
+        run: |
+          set -u
+          mkdir -p preservation
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          log = Path(os.environ.get('RUNNER_TEMP','')) / 'harvard-state-machine.log'
+          tail = ''
+          if log.exists():
+              text = log.read_text(encoding='utf-8', errors='replace')
+              tail = text[-12000:]
+          payload = {
+              'schema': 'trinity-accord.harvard-failure-diagnostic.v1',
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'event_name': os.environ.get('GITHUB_EVENT_NAME'),
+              'ref_name': os.environ.get('GITHUB_REF_NAME'),
+              'workflow_sha': os.environ.get('GITHUB_SHA'),
+              'persistent_id': 'doi:10.7910/DVN/YUCG12',
+              'state_machine_log_tail': tail,
+          }
+          Path('preservation/harvard-last-run-diagnostic.json').write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- preservation/harvard-last-run-diagnostic.json
+          git commit -m "ops: record Harvard preservation failure diagnostic" || true
+          git push || true
 
       - name: Upload state-machine audit
         if: always()
@@ -134,5 +172,6 @@ jobs:
             ${{ runner.temp }}/harvard-state-machine/harvard-publication-receipt.json
             ${{ runner.temp }}/harvard-state-machine/harvard-dataverse-state-observed.json
             preservation/harvard-dataverse-state.json
+            preservation/harvard-last-run-diagnostic.json
           retention-days: 90
           if-no-files-found: warn
