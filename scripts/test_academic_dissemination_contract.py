@@ -9,7 +9,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RESEARCH = ROOT / "research" / "trinity-accord-design-and-limits"
+TITLE = (
+    "Designing a Verifiable, Non-Amending Civilizational Memory Record for "
+    "Future AI Agents: The Trinity Accord Case Study"
+)
+AUTHOR = "Hongju Liu"
+PUBLICATION_DATE = "2026/07/29"
 DOI = "10.5281/zenodo.21699878"
+REPORT_NUMBER = "TA-TR-2026-01"
+PDF_URL = (
+    "https://www.trinityaccord.org/research/trinity-accord-design-and-limits/"
+    "trinity-accord-design-and-limits-v1.1.pdf"
+)
 PDF_SHA256 = "b391776db76f533799dc582f39af54d2e885fe2ed1982cfe3024a1400a403e9c"
 BRIEF_SHA256 = "57a4bda56a50e662313a1de0853393c61ecf7fd6348c73c442cffb56d5087036"
 
@@ -27,10 +38,29 @@ def strict_json(path: Path) -> dict:
 
 def main() -> int:
     current_pdf = RESEARCH / "trinity-accord-design-and-limits-v1.1.pdf"
+    require(current_pdf.read_bytes().startswith(b"%PDF-"), "published preprint is not a PDF")
     require(
         hashlib.sha256(current_pdf.read_bytes()).hexdigest() == PDF_SHA256,
         "published preprint bytes changed",
     )
+    require(current_pdf.stat().st_size < 5_000_000, "published preprint exceeds crawler size target")
+
+    landing = (RESEARCH / "index.md").read_text(encoding="utf-8")
+    for marker in [
+        f'citation_title: "{TITLE}"',
+        f'citation_author: "{AUTHOR}"',
+        f'citation_publication_date: "{PUBLICATION_DATE}"',
+        f'citation_doi: "{DOI}"',
+        f'citation_pdf_url: "{PDF_URL}"',
+        'citation_technical_report_institution: "The Trinity Accord Project"',
+        f'citation_technical_report_number: "{REPORT_NUMBER}"',
+        'citation_language: "en"',
+        "scholarly_article: true",
+        f'article_identifier: "{REPORT_NUMBER}"',
+        f'article_doi: "{DOI}"',
+        'article_version: "1.1"',
+    ]:
+        require(marker in landing, f"scholarly landing metadata is missing: {marker}")
 
     brief_pdf = RESEARCH / "trinity-accord-academic-brief-v1.1.pdf"
     require(brief_pdf.read_bytes().startswith(b"%PDF-"), "academic brief is not a PDF")
@@ -88,11 +118,18 @@ def main() -> int:
 
     layout = (ROOT / "_layouts" / "default.html").read_text(encoding="utf-8")
     for marker in [
+        'name="citation_title"',
+        'name="citation_author"',
+        'name="citation_publication_date"',
         'name="citation_doi"',
+        'name="citation_pdf_url"',
+        'name="citation_technical_report_institution"',
+        'name="citation_technical_report_number"',
         'name="citation_keywords"',
         'name="citation_fulltext_html_url"',
         'type="application/x-research-info-systems"',
         'type="application/vnd.citationstyles.csl+json"',
+        '"@type": "ScholarlyArticle"',
         '"propertyID": "DOI"',
     ]:
         require(marker in layout, f"scholarly layout metadata is missing: {marker}")
@@ -118,11 +155,28 @@ def main() -> int:
         "machine HAL state overclaims submission",
     )
 
+    discovery = strict_json(ROOT / "discovery.json")
+    research_routes = discovery.get("intent_routes", {}).get("cite_or_research", [])
+    require(isinstance(research_routes, list), "cite_or_research route must be a list")
+    require(
+        "/research/research-positioning/" in research_routes,
+        "research positioning guide is missing from scholarly discovery routing",
+    )
+    require(
+        len(research_routes) == len(set(research_routes)),
+        "cite_or_research route contains duplicate entries",
+    )
+
     for relative, markers in {
         "research/index.md": ["academic brief", "Download RIS", "Download CSL-JSON"],
         "ai.txt": ["/academic-brief/", "trinity-accord-academic-brief-v1.1.pdf"],
         "llms.txt": ["/academic-brief/", "trinity-accord-academic-brief-v1.1.pdf"],
-        "sitemap.xml": ["/academic-brief/", "citation.ris", "citation.csl.json"],
+        "sitemap.xml": [
+            "/academic-brief/",
+            "/research/research-positioning/",
+            "citation.ris",
+            "citation.csl.json",
+        ],
     }.items():
         text = (ROOT / relative).read_text(encoding="utf-8")
         for marker in markers:

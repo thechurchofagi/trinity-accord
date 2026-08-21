@@ -74,6 +74,7 @@
     ],
     "cite_or_research": [
       "/research/",
+      "/research/research-positioning/",
       "/api/research-preprint.v1.json",
       "/CITATION.cff"
     ]
