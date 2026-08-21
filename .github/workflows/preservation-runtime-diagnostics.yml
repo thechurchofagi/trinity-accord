@@ -24,6 +24,12 @@ jobs:
       - name: Checkout current main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
 
+      - name: Record toolchain provenance before repository write
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/toolchain_provenance.py | tee "$RUNNER_TEMP/preservation-runtime-toolchain-provenance.json"
+
       - name: Actionlint preservation workflows
         shell: bash
         run: |
@@ -104,7 +110,9 @@ jobs:
               'harvard_state':'harvard-preservation-state-machine.yml',
           }
           lint_path=Path(os.environ['RUNNER_TEMP'])/'preservation-actionlint.txt'
-          result={'schema':'trinity-accord/preservation-runtime-status/v6','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'actionlint_output':lint_path.read_text(errors='replace')[-12000:] if lint_path.exists() else 'actionlint output missing','workflows':{}}
+          toolchain_path=Path(os.environ['RUNNER_TEMP'])/'preservation-runtime-toolchain-provenance.json'
+          toolchain=json.loads(toolchain_path.read_text(encoding='utf-8')) if toolchain_path.exists() else {'error':'toolchain provenance missing'}
+          result={'schema':'trinity-accord/preservation-runtime-status/v6','generated_at':datetime.now(timezone.utc).isoformat(),'repository':repo,'target_source_sha':target_sha,'toolchain_provenance':toolchain,'actionlint_output':lint_path.read_text(errors='replace')[-12000:] if lint_path.exists() else 'actionlint output missing','workflows':{}}
           for key,wf in workflows.items():
               runs=get_json(f'{api}/repos/{repo}/actions/workflows/{urllib.parse.quote(wf)}/runs?branch=main&per_page=20').get('workflow_runs',[])
               target=next((r for r in runs if r.get('head_sha')==target_sha),None)

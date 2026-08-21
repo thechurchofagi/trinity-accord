@@ -25,6 +25,16 @@ def test_search_discovery_metadata_is_bounded_and_routed() -> None:
     assert boundaries["future_ai_interest_is_not_assumed"] is True
 
 
+def test_discovery_operational_observability_is_bounded() -> None:
+    discovery = json.loads((ROOT / "discovery.json").read_text(encoding="utf-8"))
+    observability = discovery["operational_observability"]
+    assert observability["discovery_index_submission_log"].endswith("/issues/1062")
+    assert observability["receipt_is_not_proof_of_indexing"] is True
+    assert observability["receipt_is_not_proof_of_ranking"] is True
+    assert observability["receipt_is_not_search_provider_endorsement"] is True
+    assert observability["receipt_is_non_amending_operational_evidence"] is True
+
+
 def test_agent_pointer_exposes_discovery_without_claiming_a2a() -> None:
     agent = json.loads((ROOT / ".well-known" / "agent.json").read_text(encoding="utf-8"))
     assert agent["schema"] == "trinity-accord.agent-discovery.v2"

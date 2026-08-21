@@ -26,7 +26,7 @@ for k in required_top:
         print(f"FAIL: missing top-level key {k}")
         sys.exit(1)
 
-required_tools = ["python", "pip", "node", "git", "curl", "tar", "gzip", "sha256sum", "ots"]
+required_tools = ["python", "pip", "node", "go", "git", "curl", "tar", "gzip", "sha256sum", "ots"]
 for tool in required_tools:
     if tool not in data["tools"]:
         print(f"FAIL: missing tool provenance for {tool}")

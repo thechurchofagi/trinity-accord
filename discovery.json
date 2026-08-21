@@ -13,6 +13,14 @@
   "research_index": "/research/",
   "repository_mirror": "https://github.com/thechurchofagi/trinity-accord",
   "primary_classification": "completed pre-ASI human–superintelligence relation record",
+  "operational_observability": {
+    "discovery_index_submission_log": "https://github.com/thechurchofagi/trinity-accord/issues/1062",
+    "receipt_scope": "production discovery live-readback and IndexNow submission responses",
+    "receipt_is_not_proof_of_indexing": true,
+    "receipt_is_not_proof_of_ranking": true,
+    "receipt_is_not_search_provider_endorsement": true,
+    "receipt_is_non_amending_operational_evidence": true
+  },
   "retrieval_vocabulary": [
     "Trinity Accord",
     "三位一体协定",
