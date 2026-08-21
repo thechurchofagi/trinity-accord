@@ -429,6 +429,17 @@ class ScholarlyHTMLParser(HTMLParser):
             self.json_ld_blocks.append("".join(self._json_ld_chunks).strip())
             self._in_json_ld = False
             self._json_ld_chunks = []
+        if (
+            tag in {"body", "html", "br"}
+            and self._in_head
+            and self._template_depth == 0
+            and not self._head_text_stack
+        ):
+            # In the HTML tree builder's "in head" mode, these special end
+            # tags pop the optional head and are reprocessed after the head.
+            # Metadata that follows is therefore body-effective, not head meta.
+            self._in_head = False
+            self._body_started = True
         if self._head_text_stack and tag == self._head_text_stack[-1]:
             self._head_text_stack.pop()
         if tag == "template" and self._template_depth > 0:
@@ -536,8 +547,7 @@ def _term_maps_to_schema_article(value: object, vocab_is_schema: bool) -> bool:
     if not isinstance(value, str):
         return False
     stripped = value.strip()
-    normalized = stripped.rstrip("/")
-    if normalized in SCHEMA_ORG_ARTICLE_IRIS:
+    if stripped in SCHEMA_ORG_ARTICLE_IRIS:
         return True
     return vocab_is_schema and stripped == "ScholarlyArticle"
 
@@ -551,9 +561,11 @@ def _schema_context_state(
         return DEFAULT_SCHEMA_CONTEXT_STATE
     if isinstance(context, str):
         is_schema = _normalized_schema_url(context) in SCHEMA_ORG_BASES
-        # The canonical Schema.org remote context defines its own terms. For an
-        # unknown remote context, fail closed instead of preserving a stale term.
-        return (is_schema, True if is_schema else False)
+        # A canonical Schema.org remote context establishes the active
+        # vocabulary, not a permanent explicit ScholarlyArticle term override.
+        # This allows a later @vocab in a context list to replace that vocabulary.
+        # Unknown remote contexts still fail closed.
+        return (is_schema, None if is_schema else False)
     if isinstance(context, dict):
         vocab_is_schema, article_override = inherited
         if "@vocab" in context:

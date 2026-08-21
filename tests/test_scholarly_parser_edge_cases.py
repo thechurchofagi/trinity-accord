@@ -317,3 +317,53 @@ def test_property_scoped_context_override_is_applied_before_child_nodes() -> Non
     assert any(
         "lacks an applicable Schema.org JSON-LD context" in error for error in errors
     )
+
+def test_special_end_tags_implicitly_end_head() -> None:
+    for tag in ("html", "br"):
+        parser = deployment.ScholarlyHTMLParser()
+        parser.feed(
+            "<!doctype html><html><head>"
+            f"</{tag}>"
+            '<meta name="citation_title" content="body-effective">'
+        )
+        parser.close()
+
+        assert "citation_title" not in parser.meta
+        assert parser._body_started is True
+        assert parser._in_head is False
+
+
+def test_explicit_schema_article_iri_with_trailing_slash_is_rejected() -> None:
+    page = _landing(
+        {
+            "@context": {
+                "@vocab": "https://example.invalid/",
+                "ScholarlyArticle": "https://schema.org/ScholarlyArticle/",
+            },
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
+
+
+def test_later_vocab_overrides_remote_schema_context() -> None:
+    page = _landing(
+        {
+            "@context": [
+                "https://schema.org",
+                {"@vocab": "https://example.invalid/"},
+            ],
+            "@graph": [_valid_article()],
+        }
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+
+    assert any(
+        "lacks an applicable Schema.org JSON-LD context" in error for error in errors
+    )
