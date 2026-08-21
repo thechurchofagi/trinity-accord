@@ -177,7 +177,7 @@ def test_absolute_schema_iri_is_not_rewritten_by_https_prefix() -> None:
 
 if "def test_html_breakout_tag_exits_svg_for_jsonld_script()" in tests:
     raise SystemExit("seventh-round tests already present unexpectedly")
-tests = tests.rstrip() + additions + "\n"
+tests = tests.rstrip() + additions.rstrip() + "\n"
 
 source_path.write_text(source, encoding="utf-8")
 tests_path.write_text(tests, encoding="utf-8")
