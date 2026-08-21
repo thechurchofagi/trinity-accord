@@ -147,10 +147,10 @@ SCHOLARLY_SCHEMA_TERMS = {
     "value",
 }
 SchemaContextState = tuple[
-    bool, dict[str, bool], dict[str, str], bool, frozenset[str]
+    bool, dict[str, bool], dict[str, str], bool, dict[str, str]
 ]
 DEFAULT_SCHEMA_CONTEXT_STATE: SchemaContextState = (
-    False, {}, {}, False, frozenset()
+    False, {}, {}, False, {}
 )
 
 # A Pages deployment can be correct while one CDN edge briefly resets a TCP
@@ -411,10 +411,12 @@ class ScholarlyHTMLParser(HTMLParser):
                     return "math"
                 return "html"
             if parent_tag == "annotation-xml":
+                # HTML's foreign-content rules recognize an SVG start token in
+                # MathML annotation-xml regardless of the annotation encoding.
+                if tag == "svg":
+                    return "svg"
                 encoding = (parent_attributes.get("encoding") or "").lower()
                 if encoding in self._MATHML_HTML_ENCODINGS:
-                    if tag == "svg":
-                        return "svg"
                     if tag == "math":
                         return "math"
                     return "html"
@@ -808,6 +810,53 @@ def _prefix_mapping(
     return None
 
 
+def _term_alias_key(term: str) -> str:
+    # Prefix entries and whole-term aliases share one internal mapping without
+    # colliding: only strings before a colon are consulted as compact prefixes.
+    return f"__jsonld_term_alias__:{term}"
+
+
+def _raw_term_mapping(definition: object) -> str | None:
+    if isinstance(definition, dict):
+        if "@reverse" in definition:
+            return None
+        definition = definition.get("@id")
+    return definition if isinstance(definition, str) else None
+
+
+def _expand_term_iri(value: str, prefixes: dict[str, str]) -> str:
+    """Expand compact IRIs and recursively resolve whole-term aliases."""
+    current = value
+    seen: set[str] = set()
+    for _ in range(len(prefixes) + 1):
+        if current != current.strip():
+            return current
+        compact = _expand_compact_iri(current, prefixes)
+        if compact != current or ":" in current:
+            return compact
+        if current in seen:
+            return current
+        seen.add(current)
+        mapped = prefixes.get(_term_alias_key(current))
+        if mapped is None:
+            return current
+        current = mapped
+    return current
+
+
+def _protected_term_signature(definition: object, protected: bool) -> str:
+    canonical = definition
+    if isinstance(definition, dict):
+        canonical = dict(definition)
+        canonical.pop("@protected", None)
+    return json.dumps(
+        {"protected": protected, "definition": canonical},
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
 def _term_maps_to_schema_term(
     value: object,
     term: str,
@@ -822,11 +871,10 @@ def _term_maps_to_schema_term(
         value = value.get("@id")
     if not isinstance(value, str):
         return False
-    stripped = value.strip()
-    expanded = _expand_compact_iri(stripped, prefixes)
+    expanded = _expand_term_iri(value, prefixes)
     if expanded in {f"{base}/{term}" for base in SCHEMA_ORG_BASES}:
         return True
-    return vocab_is_schema and stripped == term
+    return vocab_is_schema and value == term
 
 
 def _schema_context_state(
@@ -846,24 +894,22 @@ def _schema_context_state(
     ) = inherited
     term_overrides = dict(inherited_overrides)
     prefixes = dict(inherited_prefixes)
-    protected_terms = set(inherited_protected)
+    protected_definitions = dict(inherited_protected)
 
     if isinstance(context, str):
         is_schema = _normalized_schema_url(context) in SCHEMA_ORG_REMOTE_CONTEXTS
         if is_schema:
             return (
-                True, term_overrides, prefixes, unsupported, frozenset(protected_terms)
+                True, term_overrides, prefixes, unsupported, dict(protected_definitions)
             )
         return (
-            vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+            vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
         )
 
     if isinstance(context, dict):
-        # Resolving arbitrary imported contexts would require network dereference.
-        # This verifier is deterministic/offline, so imported contexts fail closed.
         if "@import" in context:
             return (
-                vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+                vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
             )
 
         if "@vocab" in context:
@@ -881,30 +927,24 @@ def _schema_context_state(
             if not term.startswith("@")
         ]
 
-        # JSON-LD rejects a later redefinition of a protected term. This verifier
-        # intentionally fails closed for any redefinition of a protected scholarly
-        # term rather than attempting to recover from an invalid active context.
         context_protected = context.get("@protected") is True
         for term, definition in definitions:
-            if term in SCHOLARLY_SCHEMA_TERMS and term in protected_terms:
-                unsupported = True
-            if (
-                term in SCHOLARLY_SCHEMA_TERMS
-                and (
-                    context_protected
-                    or (
-                        isinstance(definition, dict)
-                        and definition.get("@protected") is True
-                    )
-                )
-            ):
-                protected_terms.add(term)
+            if term not in SCHOLARLY_SCHEMA_TERMS:
+                continue
+            if isinstance(definition, dict) and "@protected" in definition:
+                definition_protected = definition.get("@protected") is True
+            else:
+                definition_protected = context_protected
+            signature = _protected_term_signature(definition, definition_protected)
+            if term in protected_definitions:
+                if signature != protected_definitions[term]:
+                    unsupported = True
+            elif definition_protected:
+                protected_definitions[term] = signature
 
-        # Context definitions may use compact IRIs in later term mappings. Build
-        # direct prefix definitions first, iterating so same-context prefixes can
-        # depend on an earlier resolved prefix. Redefinition removes stale prefixes.
         for term, _ in definitions:
             prefixes.pop(term, None)
+            prefixes.pop(_term_alias_key(term), None)
         for _ in range(max(1, len(definitions))):
             changed = False
             for term, definition in definitions:
@@ -914,6 +954,11 @@ def _schema_context_state(
                     changed = True
             if not changed:
                 break
+
+        for term, definition in definitions:
+            raw_mapping = _raw_term_mapping(definition)
+            if raw_mapping is not None:
+                prefixes[_term_alias_key(term)] = raw_mapping
 
         for term in SCHOLARLY_SCHEMA_TERMS:
             if term in context:
@@ -925,7 +970,7 @@ def _schema_context_state(
             term_overrides,
             prefixes,
             unsupported,
-            frozenset(protected_terms),
+            dict(protected_definitions),
         )
 
     if isinstance(context, list):
@@ -935,7 +980,7 @@ def _schema_context_state(
         return state
 
     return (
-        vocab_is_schema, term_overrides, prefixes, True, frozenset(protected_terms)
+        vocab_is_schema, term_overrides, prefixes, True, dict(protected_definitions)
     )
 
 

@@ -723,3 +723,73 @@ def test_protected_schema_term_redefinition_fails_closed() -> None:
     errors: list[str] = []
     deployment.check_scholarly_landing(page, errors)
     assert errors
+
+
+def test_explicit_schema_term_mapping_with_surrounding_whitespace_fails_closed() -> None:
+    page = _landing({
+        "@context": {
+  "@vocab": "https://schema.org/",
+  "name": " https://schema.org/name ",
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert any(
+        "ScholarlyArticle.name is not mapped to Schema.org/name" in error
+        for error in errors
+    )
+
+
+def test_unencoded_annotation_xml_svg_foreignobject_exposes_html_jsonld() -> None:
+    meta = "".join(
+        f'<meta name="{html.escape(name, quote=True)}" '
+        f'content="{html.escape(value, quote=True)}">'
+        for name, value in deployment.SCHOLARLY_META_EXPECTED.items()
+    )
+    document = {
+        "@context": "https://schema.org",
+        "@graph": [_valid_article()],
+    }
+    json_ld = json.dumps(document)
+    page = (
+        "<!doctype html><html><head>" + meta + "</head><body>"
+        "<math><annotation-xml><svg><foreignObject>"
+        f'<script type="application/ld+json">{json_ld}</script>'
+        "</foreignObject></svg></annotation-xml></math>"
+        "</body></html>"
+    )
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors == []
+
+
+def test_identical_protected_schema_term_redefinition_is_allowed() -> None:
+    protected_name = {
+        "@id": "https://schema.org/name",
+        "@protected": True,
+    }
+    page = _landing({
+        "@context": [
+  {"@vocab": "https://schema.org/", "name": protected_name},
+  {"name": protected_name},
+        ],
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors == []
+
+
+def test_schema_term_mapping_can_resolve_through_term_alias() -> None:
+    page = _landing({
+        "@context": {
+  "@vocab": "https://schema.org/",
+  "schemaName": "https://schema.org/name",
+  "name": "schemaName",
+        },
+        "@graph": [_valid_article()],
+    })
+    errors: list[str] = []
+    deployment.check_scholarly_landing(page, errors)
+    assert errors == []
