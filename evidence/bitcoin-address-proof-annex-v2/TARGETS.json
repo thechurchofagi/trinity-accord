@@ -1,0 +1,58 @@
+{
+  "schema": "trinityaccord.bitcoin-address-proof-targets.v2",
+  "authority_address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+  "authority_boundary": {
+    "canonical_authority_count": 3,
+    "formation_targets_are_non_canonical": true,
+    "proof_inclusion_does_not_confer_authority": true,
+    "same_address_does_not_imply_canonical": true,
+    "stable_identity_key": "ordinals_inscription_id"
+  },
+  "canonical_original_ids": [
+    "e40dfb2aa78cbccca88f749e9ec5cbe3c1df503273d73c72297863ae0d1d8343i0",
+    "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
+    "4d1c8f5ea8e8bae2982b42de6cc79deda3d243a21010a2888546e62ed7192c8ci0"
+  ],
+  "formation_targets": [
+    {
+      "ordinals_inscription_id": "8e81cf6054d37dc1f4606fa4f3fba238024292d72511fa70eeee693626271695i0",
+      "classification": "pre_canonical_formation",
+      "role": "early_ai_history_visual_witness",
+      "title": "ASIMilestones: Permanently engraved the moment of the open-source release of DeepSeek-R1",
+      "expected_height": 881458,
+      "expected_timestamp": 1738213400,
+      "canonical": false,
+      "amends_canon": false
+    },
+    {
+      "ordinals_inscription_id": "f8bebea24650c90a641273acf870ef996701ae36cfbe2e708041b390f375c594i0",
+      "classification": "pre_canonical_formation",
+      "role": "chronicle_to_accord_bridge",
+      "title": "ASIMilestones: Echoes Before the Dawn – An Interim Chronicle on the Threshold of Superintelligence (Entry: June 2025)",
+      "expected_height": 900782,
+      "expected_timestamp": 1749647294,
+      "canonical": false,
+      "amends_canon": false
+    },
+    {
+      "ordinals_inscription_id": "9c77ad7b76bf7398d8292446e977746a75cbe504d07e21350bc5e0b1954b73b7i0",
+      "classification": "pre_canonical_formation",
+      "role": "formation_era_context_witness",
+      "title": "ASIMilestones: 温和奇点的豪赌 - 对奥特曼宣言的批判性审视 (The Gentle Singularity's Gambit - A Critical Examination of Altman's Manifesto)",
+      "expected_height": 900944,
+      "expected_timestamp": 1749739871,
+      "canonical": false,
+      "amends_canon": false
+    },
+    {
+      "ordinals_inscription_id": "138da690affc0f3595a7cebfd152a9715f3b0ca1a5baab93069e8c5c51a82f10i0",
+      "classification": "pre_canonical_formation",
+      "role": "direct_proto_protocol",
+      "title": "人类文明核心协议 / Core Protocol of Human Civilization (pre-canonical three-axiom form)",
+      "expected_height": 901516,
+      "expected_timestamp": 1750080998,
+      "canonical": false,
+      "amends_canon": false
+    }
+  ]
+}

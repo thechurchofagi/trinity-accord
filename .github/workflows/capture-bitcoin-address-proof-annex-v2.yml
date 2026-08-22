@@ -1,0 +1,146 @@
+name: Capture Bitcoin address proof annex v2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/capture-bitcoin-address-proof-annex-v2.yml
+      - evidence/bitcoin-address-proof-annex-v2/TARGETS.json
+      - evidence/bitcoin-address-proof-annex-v2/README.md
+      - evidence/bitcoin-address-proof-annex-v2/verification/capture_address_wide_v2.py
+      - evidence/bitcoin-address-proof-annex-v2/verification/verify_address_wide_v2.py
+      - tests/test_bitcoin_address_proof_annex_v2.py
+  pull_request:
+    paths:
+      - .github/workflows/capture-bitcoin-address-proof-annex-v2.yml
+      - evidence/bitcoin-address-proof-annex-v2/TARGETS.json
+      - evidence/bitcoin-address-proof-annex-v2/README.md
+      - evidence/bitcoin-address-proof-annex-v2/verification/capture_address_wide_v2.py
+      - evidence/bitcoin-address-proof-annex-v2/verification/verify_address_wide_v2.py
+      - tests/test_bitcoin_address_proof_annex_v2.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SNAPSHOT_BRANCH: automation/bitcoin-address-proof-annex-v2
+  ANNEX_DIR: evidence/bitcoin-address-proof-annex-v2
+
+jobs:
+  contract:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Verify v2 composition contract
+        run: python3 -m pytest -q tests/test_bitcoin_address_proof_annex_v2.py
+
+      - name: Preserve frozen eight-item proof baseline
+        run: python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py
+
+  capture:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Install test dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Re-verify frozen eight-item proof baseline
+        run: python3 evidence/bitcoin-inscription-proof-annex-v1/verification/verify_annex.py
+
+      - name: Capture four pre-canonical formation proofs
+        run: python3 evidence/bitcoin-address-proof-annex-v2/verification/capture_address_wide_v2.py
+
+      - name: Verify composed twelve-item proof annex offline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$ANNEX_DIR/reports"
+          python3 "$ANNEX_DIR/verification/verify_address_wide_v2.py" \
+            > "$ANNEX_DIR/reports/offline-verification.json"
+          cat "$ANNEX_DIR/reports/offline-verification.json"
+
+      - name: Verify v2 repository contract
+        run: python3 -m pytest -q tests/test_bitcoin_address_proof_annex_v2.py
+
+      - name: Publish generated proof branch and open or update PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$SNAPSHOT_BRANCH"
+          git add -- \
+            "$ANNEX_DIR/ANNEX-MANIFEST.json" \
+            "$ANNEX_DIR/proof-material" \
+            "$ANNEX_DIR/reports"
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "Generated v2 proof annex already matches main; nothing to publish."
+            exit 0
+          fi
+          git commit -m "evidence: capture 12-item Bitcoin address proof annex v2"
+
+          if git ls-remote --exit-code --heads origin "$SNAPSHOT_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$SNAPSHOT_BRANCH:refs/remotes/origin/$SNAPSHOT_BRANCH"
+          fi
+          git push --force-with-lease origin "HEAD:refs/heads/$SNAPSHOT_BRANCH"
+
+          existing="$(
+            gh pr list \
+              --repo "$GITHUB_REPOSITORY" \
+              --state open \
+              --base main \
+              --head "$SNAPSHOT_BRANCH" \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+          if [[ -n "$existing" ]]; then
+            echo "Updated existing proof snapshot PR #$existing"
+            exit 0
+          fi
+
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head "$SNAPSHOT_BRANCH" \
+            --draft \
+            --title "evidence: capture 12-item Bitcoin address proof annex v2" \
+            --body "Automated proof-material capture for the four pre-canonical formation inscriptions, composed with the frozen eight-item v1 annex. The generated offline report requires 12/12 L1/L2/L3 coverage and witness-derived tag-5 metadata checks for all 12 stable inscription IDs. Proof coverage does not confer authority: only the three designated Bitcoin Originals remain canonical."
