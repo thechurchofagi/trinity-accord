@@ -1,4 +1,4 @@
-name: Harvard Software Review Components v1
+name: Harvard Software Review Components v2
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: harvard-software-review-components-v1
+  group: harvard-software-review-components-v2
   cancel-in-progress: false
 
 jobs:
@@ -50,20 +50,102 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/harvard-review"
+          SOURCE_SHORT="${SOURCE_COMMIT:0:12}"
+          SOURCE_ZIP="trinity-accord-source-${SOURCE_SHORT}.zip"
+          SOURCE_WRAPPER="trinity-accord-source-${SOURCE_SHORT}.upload-wrapper.zip"
           git archive --format=zip \
             --prefix=trinity-accord-07cd79ba7b98/ \
-            -o "$RUNNER_TEMP/harvard-review/trinity-accord-source-07cd79ba7b98.zip" \
+            -o "$RUNNER_TEMP/harvard-review/$SOURCE_ZIP" \
             "$SOURCE_COMMIT"
           git show "$SOURCE_COMMIT:README.md" > "$RUNNER_TEMP/harvard-review/README-07cd79ba7b98.md"
           git show "$SOURCE_COMMIT:CITATION.cff" > "$RUNNER_TEMP/harvard-review/CITATION-07cd79ba7b98.cff"
           git show "$SOURCE_COMMIT:package.json" > "$RUNNER_TEMP/harvard-review/package-07cd79ba7b98.json"
+          git show "$SOURCE_COMMIT:package-lock.json" > "$RUNNER_TEMP/harvard-review/package-lock-07cd79ba7b98.json"
+          git show "$SOURCE_COMMIT:requirements-ci.txt" > "$RUNNER_TEMP/harvard-review/requirements-ci-07cd79ba7b98.txt"
+          git show "$SOURCE_COMMIT:requirements-ots.txt" > "$RUNNER_TEMP/harvard-review/requirements-ots-07cd79ba7b98.txt"
+          git ls-tree -r -l "$SOURCE_COMMIT" > "$RUNNER_TEMP/harvard-review/SOURCE-TREE-07cd79ba7b98.txt"
+          test "$(wc -l < "$RUNNER_TEMP/harvard-review/SOURCE-TREE-07cd79ba7b98.txt")" -eq 5379
+          cat > "$RUNNER_TEMP/harvard-review/SOFTWARE-REVIEW-README-v2.md" <<'EOF'
+          # Trinity Accord software-resource review guide
+
+          This guide was added in response to the Harvard Dataverse curator's request for software-research resources in reviewable formats. It is supplementary only: it does not replace, revise, or amend the preserved full-project archive or the project's three canonical Bitcoin Originals.
+
+          ## Frozen source identity
+
+          - Git commit: `07cd79ba7b98294a0ff9bc45d76f305609f8a0aa`
+          - Reviewable source file: `trinity-accord-source-07cd79ba7b98.zip`
+          - Generation method: `git archive` from that exact commit
+          - Complete tree listing: `SOURCE-TREE-07cd79ba7b98.txt`
+
+          The source ZIP is uploaded through a one-file outer ZIP because Harvard Dataverse automatically expands an uploaded ZIP and limits that operation to 1,500 entries, while this exact source snapshot contains 5,379 tracked files. Dataverse expands only the outer transport wrapper, leaving the inner source ZIP as one downloadable and locally inspectable software resource.
+
+          ## Human- and machine-readable components
+
+          - `README-07cd79ba7b98.md`: project overview and navigation from the frozen commit.
+          - `CITATION-07cd79ba7b98.cff`: citation metadata from the frozen commit.
+          - `package-07cd79ba7b98.json` and `package-lock-07cd79ba7b98.json`: Node.js direct and locked dependencies.
+          - `requirements-ci-07cd79ba7b98.txt`: Python dependencies used by repository verification and CI.
+          - `requirements-ots-07cd79ba7b98.txt`: Python dependencies used for OpenTimestamps verification.
+          - `harvard-software-review-manifest-v2.json`: machine-readable provenance, preserved-archive invariants, and component hashes.
+          - `SHA256SUMS-v2.txt`: SHA-256 checksums for the review components.
+
+          ## Inspection and execution
+
+          1. Download and extract `trinity-accord-source-07cd79ba7b98.zip` locally.
+          2. Start with the root `README.md`, then inspect `.github/workflows/` for the exact automated verification commands and `tests/` for executable tests.
+          3. For Node.js verification paths, use the frozen lock file with `npm ci`.
+          4. For Python verification paths, create an isolated environment and install the task-appropriate frozen requirements file, for example `python -m pip install -r requirements-ci.txt` or `python -m pip install -r requirements-ots.txt`.
+
+          This repository is an archival and verification system rather than one monolithic application with a single universal start command. Expected outputs are workflow/test pass-or-fail results plus generated evidence and verification reports documented by the corresponding scripts and workflows.
+
+          ## Rights and scope
+
+          The frozen source commit does not contain a repository-wide software license. The Harvard Dataset Terms of Use and component-specific copyright, license, and third-party-rights notices therefore govern. These supplementary review files grant no new license or interpretive, canonical, governance, succession, or attestation authority.
+          EOF
+          sed -i 's/^          //' "$RUNNER_TEMP/harvard-review/SOFTWARE-REVIEW-README-v2.md"
+          python3 - <<'PY'
+          import hashlib, os, shutil, zipfile
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'harvard-review'
+          short=os.environ['SOURCE_COMMIT'][:12]
+          source=root/f'trinity-accord-source-{short}.zip'
+          wrapper=root/f'trinity-accord-source-{short}.upload-wrapper.zip'
+          info=zipfile.ZipInfo(source.name, date_time=(1980, 1, 1, 0, 0, 0))
+          info.compress_type=zipfile.ZIP_STORED
+          info.external_attr=0o100644 << 16
+          with zipfile.ZipFile(wrapper, 'w', allowZip64=True) as zf:
+              with source.open('rb') as src, zf.open(info, 'w', force_zip64=True) as dst:
+                  shutil.copyfileobj(src, dst, length=1024*1024)
+          def sha256_stream(stream):
+              h=hashlib.sha256(); size=0
+              for chunk in iter(lambda:stream.read(1024*1024), b''):
+                  size += len(chunk); h.update(chunk)
+              return size,h.hexdigest()
+          with source.open('rb') as src:
+              source_size,source_sha=sha256_stream(src)
+          with zipfile.ZipFile(wrapper) as zf:
+              if zf.namelist() != [source.name]:
+                  raise SystemExit('double-ZIP transport contains unexpected entries')
+              with zf.open(source.name) as inner:
+                  inner_size,inner_sha=sha256_stream(inner)
+              if (inner_size,inner_sha) != (source_size,source_sha):
+                  raise SystemExit('double-ZIP transport verification failed')
+          PY
           python3 - <<'PY'
           import hashlib, json, os
           from pathlib import Path
           root=Path(os.environ['RUNNER_TEMP'])/'harvard-review'
+          short=os.environ['SOURCE_COMMIT'][:12]
+          source_name=f'trinity-accord-source-{short}.zip'
+          wrapper_name=f'trinity-accord-source-{short}.upload-wrapper.zip'
+          def file_sha256(path):
+              h=hashlib.sha256()
+              with path.open('rb') as f:
+                  for chunk in iter(lambda:f.read(1024*1024), b''): h.update(chunk)
+              return h.hexdigest()
           files=[]
           for p in sorted(root.iterdir()):
-              if p.name == 'harvard-software-review-manifest-v1.json':
+              if p.name in {wrapper_name, 'harvard-software-review-manifest-v2.json', 'SHA256SUMS-v2.txt'}:
                   continue
               h=hashlib.sha256(); size=0
               with p.open('rb') as f:
@@ -71,7 +153,7 @@ jobs:
                       size += len(chunk); h.update(chunk)
               files.append({'filename':p.name,'bytes':size,'sha256':h.hexdigest()})
           manifest={
-              'schema':'trinity-accord.harvard-software-review-manifest.v1',
+              'schema':'trinity-accord.harvard-software-review-manifest.v2',
               'purpose':'Supplementary review companions requested by Harvard Dataverse curator; these files improve software-resource inspectability and do not replace or amend the preserved archive.',
               'persistent_id':os.environ['HARVARD_PID'],
               'dataset_id':int(os.environ['HARVARD_DATASET_ID']),
@@ -90,11 +172,27 @@ jobs:
                   'canonical_authority':'three Bitcoin Originals only',
                   'canonical_authority_changed':False,
               },
+              'software_packaging':{
+                  'tracked_file_count':sum(1 for _ in (root/'SOURCE-TREE-07cd79ba7b98.txt').open('r',encoding='utf-8')),
+                  'source_zip':source_name,
+                  'source_zip_generation':'git archive from exact source_commit',
+                  'dataverse_zip_ingest_limit':1500,
+                  'upload_transport':'single-entry outer ZIP; outer layer is ingested and inner source ZIP remains as one DataFile',
+              },
+              'transport_wrapper':{
+                  'filename':wrapper_name,
+                  'bytes':(root/wrapper_name).stat().st_size,
+                  'sha256':file_sha256(root/wrapper_name),
+              },
               'review_components':files,
           }
-          (root/'harvard-software-review-manifest-v1.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          (root/'harvard-software-review-manifest-v2.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
           PY
-          sha256sum "$RUNNER_TEMP"/harvard-review/* | sed "s#${RUNNER_TEMP}/harvard-review/##" > "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt"
+          find "$RUNNER_TEMP/harvard-review" -maxdepth 1 -type f \
+            ! -name "$SOURCE_WRAPPER" ! -name 'SHA256SUMS-v2.txt' -print0 \
+            | sort -z | xargs -0 sha256sum \
+            | sed "s#${RUNNER_TEMP}/harvard-review/##" \
+            > "$RUNNER_TEMP/harvard-review/SHA256SUMS-v2.txt"
 
       - name: Verify live Harvard draft and upload only supplementary review files
         shell: bash
@@ -118,7 +216,7 @@ jobs:
           bundle_identity=os.environ['HARVARD_BUNDLE_IDENTITY_SHA256'].lower()
           terms_sha=os.environ['HARVARD_TERMS_SHA256'].lower()
           root=Path(os.environ['RUNNER_TEMP'])/'harvard-review'
-          headers={'X-Dataverse-key':token,'User-Agent':'trinity-accord-harvard-review-components-v1'}
+          headers={'X-Dataverse-key':token,'User-Agent':'trinity-accord-harvard-review-components-v2'}
 
           def req_ok(r, expected, label):
               if r.status_code not in expected:
@@ -132,6 +230,30 @@ jobs:
           def file_meta(item):
               df=item.get('dataFile') or {}
               return int(df.get('id') or -1), str(df.get('filename') or ''), int(df.get('filesize') or -1)
+          def digest(path, algorithm):
+              h=hashlib.new(algorithm)
+              with path.open('rb') as f:
+                  for chunk in iter(lambda:f.read(1024*1024), b''): h.update(chunk)
+              return h.hexdigest().lower()
+          def verify_existing(item, path, label):
+              file_id,name,size=file_meta(item)
+              if size != path.stat().st_size:
+                  raise SystemExit(f'{label}: existing file size mismatch id={file_id} observed={size} expected={path.stat().st_size}')
+              checksum=(item.get('dataFile') or {}).get('checksum') or {}
+              ctype=str(checksum.get('type') or '').upper()
+              cvalue=str(checksum.get('value') or '').lower()
+              algorithms={'MD5':'md5','SHA-1':'sha1','SHA-256':'sha256','SHA-512':'sha512'}
+              if ctype not in algorithms or not cvalue:
+                  raise SystemExit(f'{label}: existing file has no supported checksum id={file_id} type={ctype!r}')
+              if cvalue != digest(path,algorithms[ctype]):
+                  raise SystemExit(f'{label}: existing file checksum mismatch id={file_id} type={ctype}')
+              print(f'COMPANION VERIFIED existing id={file_id} name={name} checksum_type={ctype}')
+          def upload(client, path, upload_name, mime, description, category):
+              meta=json.dumps({'description':description,'directoryLabel':'software-review','categories':[category],'restrict':'false','tabIngest':'false'})
+              with path.open('rb') as f:
+                  response=client.post(f'{SERVER}/api/datasets/:persistentId/add',headers=headers,params={'persistentId':pid},files={'file':(upload_name,f,mime)},data={'jsonData':meta},timeout=600)
+              req_ok(response,{200,201},f'upload {upload_name}')
+              print(f'UPLOAD PASS {upload_name}')
 
           with httpx.Client(follow_redirects=True, timeout=httpx.Timeout(120.0,read=300.0)) as c:
               r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'dataset read')
@@ -156,24 +278,41 @@ jobs:
               if not invariants: raise SystemExit('immutable archive/readback invariants do not match; refusing supplementary upload')
 
               existing={file_meta(x)[1]:x for x in items}
-              upload_names=['README-07cd79ba7b98.md','CITATION-07cd79ba7b98.cff','package-07cd79ba7b98.json','trinity-accord-source-07cd79ba7b98.zip','harvard-software-review-manifest-v1.json','SHA256SUMS.txt']
-              for name in upload_names:
-                  p=root/name
+              components={
+                  'README-07cd79ba7b98.md':('text/markdown','Human-readable project overview from the exact preserved source commit.','Documentation'),
+                  'CITATION-07cd79ba7b98.cff':('application/x-yaml','Citation metadata from the exact preserved source commit.','Documentation'),
+                  'package-07cd79ba7b98.json':('application/json','Node.js direct dependency metadata from the exact preserved source commit.','Code'),
+                  'package-lock-07cd79ba7b98.json':('application/json','Node.js locked dependency graph from the exact preserved source commit.','Code'),
+                  'requirements-ci-07cd79ba7b98.txt':('text/plain','Python verification and CI dependency metadata from the exact preserved source commit.','Code'),
+                  'requirements-ots-07cd79ba7b98.txt':('text/plain','Python OpenTimestamps dependency metadata from the exact preserved source commit.','Code'),
+                  'SOURCE-TREE-07cd79ba7b98.txt':('text/plain','Complete Git tree listing with blob identities and sizes for the exact preserved source commit.','Documentation'),
+                  'SOFTWARE-REVIEW-README-v2.md':('text/markdown','Software-resource packaging, inspection, execution, dependency, output, rights, and authority guide.','Documentation'),
+                  'harvard-software-review-manifest-v2.json':('application/json','Machine-readable manifest tying review companions to the unchanged preserved archive.','Documentation'),
+                  'SHA256SUMS-v2.txt':('text/plain','SHA-256 checksums for the supplementary review companions.','Documentation'),
+              }
+              # Verify every pre-existing partial v1/v2 component before making
+              # any new mutation. A same-name mismatch is never silently skipped.
+              for name in components:
                   if name in existing:
-                      print(f'COMPANION already present: {name}'); continue
-                  desc={
-                      'README-07cd79ba7b98.md':'Human-readable project overview from the exact preserved source commit.',
-                      'CITATION-07cd79ba7b98.cff':'Citation metadata from the exact preserved source commit.',
-                      'package-07cd79ba7b98.json':'Software dependency metadata from the exact preserved source commit.',
-                      'trinity-accord-source-07cd79ba7b98.zip':'Reviewable source-code snapshot generated with git archive from the exact preserved source commit; supplementary only.',
-                      'harvard-software-review-manifest-v1.json':'Machine-readable manifest tying review companions to the unchanged preserved archive.',
-                      'SHA256SUMS.txt':'SHA-256 checksums for the supplementary review companions.',
-                  }[name]
-                  meta=json.dumps({'description':desc,'directoryLabel':'software-review','categories':['Documentation' if name!='trinity-accord-source-07cd79ba7b98.zip' else 'Code'],'restrict':'false','tabIngest':'false'})
-                  with p.open('rb') as f:
-                      rr=c.post(f'{SERVER}/api/datasets/:persistentId/add',headers=headers,params={'persistentId':pid},files={'file':(name,f,'application/octet-stream')},data={'jsonData':meta},timeout=300)
-                  req_ok(rr,{200,201},f'upload {name}')
-                  print(f'UPLOAD PASS {name}')
+                      verify_existing(existing[name],root/name,name)
+
+              # The failed v1 attempt proved that Harvard expands ZIP uploads and
+              # enforces a 1,500-entry limit. A single-entry outer ZIP is the
+              # Dataverse-supported workaround: only the outer layer is ingested,
+              # leaving the exact 5,379-file git-archive ZIP as one DataFile.
+              source_name='trinity-accord-source-07cd79ba7b98.zip'
+              source_path=root/source_name
+              if source_name in existing:
+                  verify_existing(existing[source_name],source_path,source_name)
+              else:
+                  wrapper=root/'trinity-accord-source-07cd79ba7b98.upload-wrapper.zip'
+                  upload(c,wrapper,wrapper.name,'application/zip','Transport wrapper containing exactly one reviewable source ZIP; used only to satisfy Dataverse ZIP-ingest limits.','Code')
+
+              # Add the small open-format companions only after the source-package
+              # transport succeeds, minimizing partial draft changes on failure.
+              for name,(mime,desc,category) in components.items():
+                  if name not in existing:
+                      upload(c,root/name,name,mime,desc,category)
 
               r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'post-upload dataset read')
               data2=r.json().get('data') or {}
@@ -185,9 +324,14 @@ jobs:
               items2=files_in(v2)
               amap=[x for x in items2 if file_meta(x)[1]==archive_name]
               if len(amap)!=1 or file_meta(amap[0])!=(archive_file_id,archive_name,archive_bytes): raise SystemExit('archive identity changed during companion upload')
-              names2={file_meta(x)[1] for x in items2}
-              missing=[n for n in upload_names if n not in names2]
+              by_name2={file_meta(x)[1]:x for x in items2}
+              required_names=list(components)+[source_name]
+              missing=[n for n in required_names if n not in by_name2]
               if missing: raise SystemExit(f'review companions missing after upload: {missing}')
+              for name in required_names:
+                  verify_existing(by_name2[name],root/name,name)
+              if 'trinity-accord-source-07cd79ba7b98.upload-wrapper.zip' in by_name2:
+                  raise SystemExit('Dataverse preserved the outer transport wrapper instead of exposing the inner reviewable source ZIP')
               sr=c.post(f'{SERVER}/api/datasets/:persistentId/submitForReview',headers=headers,params={'persistentId':pid},timeout=120)
               req_ok(sr,{200,201,202},'submit for review')
               print('HARVARD SOFTWARE REVIEW COMPONENTS SUBMITTED')
@@ -197,7 +341,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: harvard-software-review-components-v1
+          name: harvard-software-review-components-v2
           path: ${{ runner.temp }}/harvard-review/
           retention-days: 90
           if-no-files-found: warn
