@@ -1,6 +1,7 @@
-Harvard Dataverse curator review-components trigger v1
+Harvard Dataverse curator review-components trigger v2
 PID: doi:10.7910/DVN/YUCG12
 Dataset ID: 14153533
 Archive file ID: 14153535
 Source commit: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
 Purpose: add supplementary reviewable software-sharing components only; never replace or re-upload the preserved archive.
+Retry reason: use a single-entry outer ZIP after Dataverse rejected the 5,379-entry source ZIP at its 1,500-file ingest limit.
