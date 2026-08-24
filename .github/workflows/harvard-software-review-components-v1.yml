@@ -1,0 +1,225 @@
+name: Harvard Software Review Components v1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/harvard-software-review-components-trigger-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harvard-software-review-components-v1
+  cancel-in-progress: false
+
+jobs:
+  upload-review-components:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      HD_API_TOKEN: ${{ secrets.HD }}
+      HARVARD_PID: doi:10.7910/DVN/YUCG12
+      HARVARD_DATASET_ID: '14153533'
+      HARVARD_ARCHIVE_FILE_ID: '14153535'
+      HARVARD_ARCHIVE_NAME: trinity-accord-full-project-preservation-bundle.github-artifact.zip.bin
+      HARVARD_ARTIFACT_BYTES: '1951603950'
+      HARVARD_ARTIFACT_SHA256: 9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2
+      HARVARD_BUNDLE_IDENTITY_SHA256: 4930b9d6cd4968f3ba75de9dc46a396af7f37f97d128d1619ae829239656989d
+      HARVARD_TERMS_SHA256: 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140
+      SOURCE_COMMIT: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
+    steps:
+      - name: Checkout exact preserved source commit
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
+          fetch-depth: 1
+          lfs: false
+
+      - name: Build reviewable software-sharing companions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/harvard-review"
+          git archive --format=zip \
+            --prefix=trinity-accord-07cd79ba7b98/ \
+            -o "$RUNNER_TEMP/harvard-review/trinity-accord-source-07cd79ba7b98.zip" \
+            HEAD
+          cp README.md "$RUNNER_TEMP/harvard-review/README-07cd79ba7b98.md"
+          cp CITATION.cff "$RUNNER_TEMP/harvard-review/CITATION-07cd79ba7b98.cff"
+          cp package.json "$RUNNER_TEMP/harvard-review/package-07cd79ba7b98.json"
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'harvard-review'
+          files=[]
+          for p in sorted(root.iterdir()):
+              if p.name == 'harvard-software-review-manifest-v1.json':
+                  continue
+              h=hashlib.sha256()
+              size=0
+              with p.open('rb') as f:
+                  for chunk in iter(lambda:f.read(1024*1024), b''):
+                      size += len(chunk); h.update(chunk)
+              files.append({'filename':p.name,'bytes':size,'sha256':h.hexdigest()})
+          manifest={
+              'schema':'trinity-accord.harvard-software-review-manifest.v1',
+              'purpose':'Supplementary review companions requested by Harvard Dataverse curator; these files improve software-resource inspectability and do not replace or amend the preserved archive.',
+              'persistent_id':os.environ['HARVARD_PID'],
+              'dataset_id':int(os.environ['HARVARD_DATASET_ID']),
+              'source_commit':os.environ['SOURCE_COMMIT'],
+              'preserved_archive':{
+                  'file_id':int(os.environ['HARVARD_ARCHIVE_FILE_ID']),
+                  'filename':os.environ['HARVARD_ARCHIVE_NAME'],
+                  'bytes':int(os.environ['HARVARD_ARTIFACT_BYTES']),
+                  'sha256':os.environ['HARVARD_ARTIFACT_SHA256'],
+                  'bundle_identity_sha256':os.environ['HARVARD_BUNDLE_IDENTITY_SHA256'],
+                  'replaced':False,
+                  'reuploaded':False,
+              },
+              'authority':{
+                  'deposit_role':'second_institutional_non_amending_mirror',
+                  'canonical_authority':'three Bitcoin Originals only',
+                  'canonical_authority_changed':False,
+              },
+              'review_components':files,
+          }
+          (root/'harvard-software-review-manifest-v1.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          PY
+          sha256sum "$RUNNER_TEMP"/harvard-review/* | tee "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp"
+          sed "s#${RUNNER_TEMP}/harvard-review/##" "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp" > "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt"
+          rm "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp"
+
+      - name: Verify live Harvard draft and upload only supplementary review files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install 'httpx==0.27.0'
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import httpx
+
+          SERVER='https://dataverse.harvard.edu'
+          token=os.environ['HD_API_TOKEN'].strip()
+          if not token:
+              raise SystemExit('HD_API_TOKEN missing')
+          pid=os.environ['HARVARD_PID']
+          dataset_id=int(os.environ['HARVARD_DATASET_ID'])
+          archive_file_id=int(os.environ['HARVARD_ARCHIVE_FILE_ID'])
+          archive_name=os.environ['HARVARD_ARCHIVE_NAME']
+          archive_bytes=int(os.environ['HARVARD_ARTIFACT_BYTES'])
+          archive_sha=os.environ['HARVARD_ARTIFACT_SHA256'].lower()
+          bundle_identity=os.environ['HARVARD_BUNDLE_IDENTITY_SHA256'].lower()
+          terms_sha=os.environ['HARVARD_TERMS_SHA256'].lower()
+          root=Path(os.environ['RUNNER_TEMP'])/'harvard-review'
+          headers={'X-Dataverse-key':token,'User-Agent':'trinity-accord-harvard-review-components-v1'}
+
+          def req_ok(r, expected, label):
+              if r.status_code not in expected:
+                  raise SystemExit(f'{label}: HTTP {r.status_code}: {r.text[:1500]}')
+              return r
+
+          def latest_version(data):
+              v=data.get('latestVersion') or data.get('latestVersionInfo')
+              if not isinstance(v,dict):
+                  raise SystemExit('Harvard latestVersion missing')
+              return v
+
+          def files_in(v):
+              out=[]
+              for item in v.get('files') or []:
+                  if isinstance(item,dict): out.append(item)
+              return out
+
+          def file_meta(item):
+              df=item.get('dataFile') or {}
+              return int(df.get('id') or -1), str(df.get('filename') or ''), int(df.get('filesize') or -1)
+
+          with httpx.Client(follow_redirects=True, timeout=httpx.Timeout(120.0,read=300.0)) as c:
+              r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'dataset read')
+              data=r.json().get('data') or {}
+              if int(data.get('id') or -1) != dataset_id:
+                  raise SystemExit('dataset id mismatch')
+              v=latest_version(data)
+              if str(v.get('versionState') or '') != 'DRAFT':
+                  raise SystemExit(f'expected returned DRAFT, got {v.get("versionState")!r}')
+
+              lock=req_ok(c.get(f'{SERVER}/api/datasets/{dataset_id}/locks',headers=headers,params={'type':'InReview'}),{200},'lock read').json().get('data') or []
+              if any(isinstance(x,dict) and x.get('lockType')=='InReview' for x in lock):
+                  raise SystemExit('InReview lock present; refusing review-component mutation')
+
+              terms=str(v.get('termsOfUse') or '').replace('\r\n','\n').replace('\r','\n').strip()
+              if hashlib.sha256(terms.encode('utf-8')).hexdigest().lower() != terms_sha:
+                  raise SystemExit('frozen Terms of Use hash mismatch; refusing upload')
+
+              items=files_in(v)
+              archive=[x for x in items if file_meta(x)[1]==archive_name]
+              if len(archive)!=1:
+                  raise SystemExit('required preserved archive not uniquely present')
+              aid,aname,asize=file_meta(archive[0])
+              if aid!=archive_file_id or aname!=archive_name or asize!=archive_bytes:
+                  raise SystemExit(f'preserved archive identity mismatch id={aid} name={aname} size={asize}')
+
+              # The archive bytes were already authenticated and fully read back. Prove the frozen local state
+              # still matches before relying on that prior readback; never re-upload or replace the archive.
+              state=json.loads(Path('preservation/harvard-dataverse-state.json').read_text(encoding='utf-8')) if Path('preservation/harvard-dataverse-state.json').exists() else None
+              if not isinstance(state,dict):
+                  raise SystemExit('prior Harvard state missing')
+              src=state.get('source') or {}
+              invariants=(state.get('persistent_id')==pid and int(state.get('dataset_id') or -1)==dataset_id and int(state.get('archive_file_id') or -1)==archive_file_id and state.get('authenticated_readback_verified') is True and int(state.get('authenticated_readback_bytes') or -1)==archive_bytes and str(state.get('authenticated_readback_sha256') or '').lower()==archive_sha and str(src.get('artifact_filename') or '')==archive_name and int(src.get('artifact_bytes') or -1)==archive_bytes and str(src.get('artifact_sha256') or '').lower()==archive_sha and str(src.get('bundle_identity_sha256') or '').lower()==bundle_identity)
+              if not invariants:
+                  raise SystemExit('immutable archive/readback invariants do not match; refusing supplementary upload')
+
+              existing={file_meta(x)[1]:x for x in items}
+              upload_names=['README-07cd79ba7b98.md','CITATION-07cd79ba7b98.cff','package-07cd79ba7b98.json','trinity-accord-source-07cd79ba7b98.zip','harvard-software-review-manifest-v1.json','SHA256SUMS.txt']
+              for name in upload_names:
+                  p=root/name
+                  if name in existing:
+                      print(f'COMPANION already present: {name}')
+                      continue
+                  desc={
+                      'README-07cd79ba7b98.md':'Human-readable project overview from the exact preserved source commit.',
+                      'CITATION-07cd79ba7b98.cff':'Citation metadata from the exact preserved source commit.',
+                      'package-07cd79ba7b98.json':'Software dependency metadata from the exact preserved source commit.',
+                      'trinity-accord-source-07cd79ba7b98.zip':'Reviewable source-code snapshot generated with git archive from the exact preserved source commit; supplementary only.',
+                      'harvard-software-review-manifest-v1.json':'Machine-readable manifest tying review companions to the unchanged preserved archive.',
+                      'SHA256SUMS.txt':'SHA-256 checksums for the supplementary review companions.',
+                  }[name]
+                  meta=json.dumps({'description':desc,'directoryLabel':'software-review','categories':['Documentation' if name!='trinity-accord-source-07cd79ba7b98.zip' else 'Code'],'restrict':'false','tabIngest':'false'})
+                  with p.open('rb') as f:
+                      rr=c.post(f'{SERVER}/api/datasets/:persistentId/add',headers=headers,params={'persistentId':pid},files={'file':(name,f,'application/octet-stream')},data={'jsonData':meta},timeout=300)
+                  req_ok(rr,{200,201},f'upload {name}')
+                  print(f'UPLOAD PASS {name}')
+
+              # Re-read and verify archive + terms still unchanged, and all review companions present.
+              r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'post-upload dataset read')
+              data2=r.json().get('data') or {}
+              if int(data2.get('id') or -1)!=dataset_id: raise SystemExit('dataset id changed after upload')
+              v2=latest_version(data2)
+              if str(v2.get('versionState') or '')!='DRAFT': raise SystemExit('version state changed during companion upload')
+              terms2=str(v2.get('termsOfUse') or '').replace('\r\n','\n').replace('\r','\n').strip()
+              if hashlib.sha256(terms2.encode('utf-8')).hexdigest().lower()!=terms_sha: raise SystemExit('terms changed during companion upload')
+              items2=files_in(v2)
+              amap=[x for x in items2 if file_meta(x)[1]==archive_name]
+              if len(amap)!=1 or file_meta(amap[0])!=(archive_file_id,archive_name,archive_bytes): raise SystemExit('archive identity changed during companion upload')
+              names2={file_meta(x)[1] for x in items2}
+              missing=[n for n in upload_names if n not in names2]
+              if missing: raise SystemExit(f'review companions missing after upload: {missing}')
+
+              # Submit corrected and curator-requested v1.0 back for review.
+              sr=c.post(f'{SERVER}/api/datasets/:persistentId/submitForReview',headers=headers,params={'persistentId':pid},timeout=120)
+              req_ok(sr,{200,201,202},'submit for review')
+              print('HARVARD SOFTWARE REVIEW COMPONENTS SUBMITTED')
+          PY
+
+      - name: Upload audit manifest
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: harvard-software-review-components-v1
+          path: ${{ runner.temp }}/harvard-review/
+          retention-days: 90
+          if-no-files-found: warn
