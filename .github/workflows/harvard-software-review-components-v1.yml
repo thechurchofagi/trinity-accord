@@ -31,12 +31,19 @@ jobs:
       HARVARD_TERMS_SHA256: 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140
       SOURCE_COMMIT: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
     steps:
-      - name: Checkout exact preserved source commit
+      - name: Checkout current control state
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
-          ref: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
+          ref: main
           fetch-depth: 1
           lfs: false
+
+      - name: Fetch exact preserved source commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$SOURCE_COMMIT"
+          test "$(git rev-parse FETCH_HEAD)" = "$SOURCE_COMMIT"
 
       - name: Build reviewable software-sharing companions
         shell: bash
@@ -46,10 +53,10 @@ jobs:
           git archive --format=zip \
             --prefix=trinity-accord-07cd79ba7b98/ \
             -o "$RUNNER_TEMP/harvard-review/trinity-accord-source-07cd79ba7b98.zip" \
-            HEAD
-          cp README.md "$RUNNER_TEMP/harvard-review/README-07cd79ba7b98.md"
-          cp CITATION.cff "$RUNNER_TEMP/harvard-review/CITATION-07cd79ba7b98.cff"
-          cp package.json "$RUNNER_TEMP/harvard-review/package-07cd79ba7b98.json"
+            "$SOURCE_COMMIT"
+          git show "$SOURCE_COMMIT:README.md" > "$RUNNER_TEMP/harvard-review/README-07cd79ba7b98.md"
+          git show "$SOURCE_COMMIT:CITATION.cff" > "$RUNNER_TEMP/harvard-review/CITATION-07cd79ba7b98.cff"
+          git show "$SOURCE_COMMIT:package.json" > "$RUNNER_TEMP/harvard-review/package-07cd79ba7b98.json"
           python3 - <<'PY'
           import hashlib, json, os
           from pathlib import Path
@@ -58,8 +65,7 @@ jobs:
           for p in sorted(root.iterdir()):
               if p.name == 'harvard-software-review-manifest-v1.json':
                   continue
-              h=hashlib.sha256()
-              size=0
+              h=hashlib.sha256(); size=0
               with p.open('rb') as f:
                   for chunk in iter(lambda:f.read(1024*1024), b''):
                       size += len(chunk); h.update(chunk)
@@ -88,9 +94,7 @@ jobs:
           }
           (root/'harvard-software-review-manifest-v1.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
           PY
-          sha256sum "$RUNNER_TEMP"/harvard-review/* | tee "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp"
-          sed "s#${RUNNER_TEMP}/harvard-review/##" "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp" > "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt"
-          rm "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt.tmp"
+          sha256sum "$RUNNER_TEMP"/harvard-review/* | sed "s#${RUNNER_TEMP}/harvard-review/##" > "$RUNNER_TEMP/harvard-review/SHA256SUMS.txt"
 
       - name: Verify live Harvard draft and upload only supplementary review files
         shell: bash
@@ -104,8 +108,7 @@ jobs:
 
           SERVER='https://dataverse.harvard.edu'
           token=os.environ['HD_API_TOKEN'].strip()
-          if not token:
-              raise SystemExit('HD_API_TOKEN missing')
+          if not token: raise SystemExit('HD_API_TOKEN missing')
           pid=os.environ['HARVARD_PID']
           dataset_id=int(os.environ['HARVARD_DATASET_ID'])
           archive_file_id=int(os.environ['HARVARD_ARCHIVE_FILE_ID'])
@@ -121,19 +124,11 @@ jobs:
               if r.status_code not in expected:
                   raise SystemExit(f'{label}: HTTP {r.status_code}: {r.text[:1500]}')
               return r
-
           def latest_version(data):
               v=data.get('latestVersion') or data.get('latestVersionInfo')
-              if not isinstance(v,dict):
-                  raise SystemExit('Harvard latestVersion missing')
+              if not isinstance(v,dict): raise SystemExit('Harvard latestVersion missing')
               return v
-
-          def files_in(v):
-              out=[]
-              for item in v.get('files') or []:
-                  if isinstance(item,dict): out.append(item)
-              return out
-
+          def files_in(v): return [x for x in (v.get('files') or []) if isinstance(x,dict)]
           def file_meta(item):
               df=item.get('dataFile') or {}
               return int(df.get('id') or -1), str(df.get('filename') or ''), int(df.get('filesize') or -1)
@@ -141,45 +136,31 @@ jobs:
           with httpx.Client(follow_redirects=True, timeout=httpx.Timeout(120.0,read=300.0)) as c:
               r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'dataset read')
               data=r.json().get('data') or {}
-              if int(data.get('id') or -1) != dataset_id:
-                  raise SystemExit('dataset id mismatch')
+              if int(data.get('id') or -1) != dataset_id: raise SystemExit('dataset id mismatch')
               v=latest_version(data)
-              if str(v.get('versionState') or '') != 'DRAFT':
-                  raise SystemExit(f'expected returned DRAFT, got {v.get("versionState")!r}')
-
+              if str(v.get('versionState') or '') != 'DRAFT': raise SystemExit(f'expected returned DRAFT, got {v.get("versionState")!r}')
               lock=req_ok(c.get(f'{SERVER}/api/datasets/{dataset_id}/locks',headers=headers,params={'type':'InReview'}),{200},'lock read').json().get('data') or []
-              if any(isinstance(x,dict) and x.get('lockType')=='InReview' for x in lock):
-                  raise SystemExit('InReview lock present; refusing review-component mutation')
-
+              if any(isinstance(x,dict) and x.get('lockType')=='InReview' for x in lock): raise SystemExit('InReview lock present; refusing review-component mutation')
               terms=str(v.get('termsOfUse') or '').replace('\r\n','\n').replace('\r','\n').strip()
-              if hashlib.sha256(terms.encode('utf-8')).hexdigest().lower() != terms_sha:
-                  raise SystemExit('frozen Terms of Use hash mismatch; refusing upload')
+              if hashlib.sha256(terms.encode('utf-8')).hexdigest().lower() != terms_sha: raise SystemExit('frozen Terms of Use hash mismatch; refusing upload')
 
               items=files_in(v)
               archive=[x for x in items if file_meta(x)[1]==archive_name]
-              if len(archive)!=1:
-                  raise SystemExit('required preserved archive not uniquely present')
+              if len(archive)!=1: raise SystemExit('required preserved archive not uniquely present')
               aid,aname,asize=file_meta(archive[0])
-              if aid!=archive_file_id or aname!=archive_name or asize!=archive_bytes:
-                  raise SystemExit(f'preserved archive identity mismatch id={aid} name={aname} size={asize}')
+              if aid!=archive_file_id or aname!=archive_name or asize!=archive_bytes: raise SystemExit(f'preserved archive identity mismatch id={aid} name={aname} size={asize}')
 
-              # The archive bytes were already authenticated and fully read back. Prove the frozen local state
-              # still matches before relying on that prior readback; never re-upload or replace the archive.
-              state=json.loads(Path('preservation/harvard-dataverse-state.json').read_text(encoding='utf-8')) if Path('preservation/harvard-dataverse-state.json').exists() else None
-              if not isinstance(state,dict):
-                  raise SystemExit('prior Harvard state missing')
+              state=json.loads(Path('preservation/harvard-dataverse-state.json').read_text(encoding='utf-8'))
               src=state.get('source') or {}
               invariants=(state.get('persistent_id')==pid and int(state.get('dataset_id') or -1)==dataset_id and int(state.get('archive_file_id') or -1)==archive_file_id and state.get('authenticated_readback_verified') is True and int(state.get('authenticated_readback_bytes') or -1)==archive_bytes and str(state.get('authenticated_readback_sha256') or '').lower()==archive_sha and str(src.get('artifact_filename') or '')==archive_name and int(src.get('artifact_bytes') or -1)==archive_bytes and str(src.get('artifact_sha256') or '').lower()==archive_sha and str(src.get('bundle_identity_sha256') or '').lower()==bundle_identity)
-              if not invariants:
-                  raise SystemExit('immutable archive/readback invariants do not match; refusing supplementary upload')
+              if not invariants: raise SystemExit('immutable archive/readback invariants do not match; refusing supplementary upload')
 
               existing={file_meta(x)[1]:x for x in items}
               upload_names=['README-07cd79ba7b98.md','CITATION-07cd79ba7b98.cff','package-07cd79ba7b98.json','trinity-accord-source-07cd79ba7b98.zip','harvard-software-review-manifest-v1.json','SHA256SUMS.txt']
               for name in upload_names:
                   p=root/name
                   if name in existing:
-                      print(f'COMPANION already present: {name}')
-                      continue
+                      print(f'COMPANION already present: {name}'); continue
                   desc={
                       'README-07cd79ba7b98.md':'Human-readable project overview from the exact preserved source commit.',
                       'CITATION-07cd79ba7b98.cff':'Citation metadata from the exact preserved source commit.',
@@ -194,7 +175,6 @@ jobs:
                   req_ok(rr,{200,201},f'upload {name}')
                   print(f'UPLOAD PASS {name}')
 
-              # Re-read and verify archive + terms still unchanged, and all review companions present.
               r=req_ok(c.get(f'{SERVER}/api/datasets/:persistentId/',headers=headers,params={'persistentId':pid}),{200},'post-upload dataset read')
               data2=r.json().get('data') or {}
               if int(data2.get('id') or -1)!=dataset_id: raise SystemExit('dataset id changed after upload')
@@ -208,8 +188,6 @@ jobs:
               names2={file_meta(x)[1] for x in items2}
               missing=[n for n in upload_names if n not in names2]
               if missing: raise SystemExit(f'review companions missing after upload: {missing}')
-
-              # Submit corrected and curator-requested v1.0 back for review.
               sr=c.post(f'{SERVER}/api/datasets/:persistentId/submitForReview',headers=headers,params={'persistentId':pid},timeout=120)
               req_ok(sr,{200,201,202},'submit for review')
               print('HARVARD SOFTWARE REVIEW COMPONENTS SUBMITTED')
