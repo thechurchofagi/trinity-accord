@@ -116,6 +116,44 @@ def can_reuse_authenticated_readback(
     )
 
 
+def can_short_circuit_complete(
+    previous: dict[str, Any] | None,
+    *,
+    dataset_id: int,
+    archive_file_id: int,
+    receipt_file_id: int,
+) -> bool:
+    """Return true only for the exact already-verified released dataset.
+
+    A completed Harvard version is immutable. Requiring the frozen local state,
+    live released-version metadata, both stable file IDs, and every source
+    identity field lets scheduled observations avoid re-downloading the 1.95 GB
+    archive every hour. The small public receipt is still read and validated by
+    the caller before the run succeeds.
+    """
+    if not previous:
+        return False
+    source = previous.get("source")
+    if not isinstance(source, dict):
+        return False
+    return (
+        previous.get("status") == "complete"
+        and previous.get("persistent_id") == impl.PID
+        and int(previous.get("dataset_id") or -1) == dataset_id
+        and previous.get("version_state") == "RELEASED"
+        and int(previous.get("archive_file_id") or -1) == archive_file_id
+        and int(previous.get("receipt_file_id") or -1) == receipt_file_id
+        and previous.get("public_readback_verified") is True
+        and int(previous.get("public_readback_bytes") or -1) == impl.EXPECTED_BYTES
+        and str(previous.get("public_readback_sha256") or "").lower() == impl.EXPECTED_SHA256
+        and previous.get("receipt_verified") is True
+        and str(source.get("artifact_filename") or "") == impl.ARCHIVE_NAME
+        and int(source.get("artifact_bytes") or -1) == impl.EXPECTED_BYTES
+        and str(source.get("artifact_sha256") or "").lower() == impl.EXPECTED_SHA256
+        and str(source.get("bundle_identity_sha256") or "").lower() == impl.BUNDLE_IDENTITY
+    )
+
+
 def submit_for_review(client: httpx.Client, token: str, phase: str) -> str:
     response = client.post(
         f"{impl.SERVER}/api/datasets/:persistentId/submitForReview",
@@ -206,9 +244,30 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             f"version_state={state} files={len(files)}"
         )
 
+        if state == "RELEASED" and receipt_item is not None:
+            receipt_file_id = impl.get_file_id(receipt_item)
+            if can_short_circuit_complete(
+                previous,
+                dataset_id=dataset_id,
+                archive_file_id=archive_file_id,
+                receipt_file_id=receipt_file_id,
+            ):
+                # Published Dataverse versions are immutable. Re-read the small
+                # public receipt on every scheduled observation, but do not fetch
+                # the already-proven 1.95 GB archive again when all live and frozen
+                # identity fields still match.
+                impl.validate_receipt_file(client, receipt_item)
+                impl.log(
+                    "HARVARD PRESERVATION COMPLETE ALREADY VERIFIED "
+                    f"persistent_id={impl.PID} archive_file_id={archive_file_id} "
+                    f"receipt_file_id={receipt_file_id} large_readback=skipped"
+                )
+                return 0
+
         if state != "DRAFT":
             # Released-state receipt/public-readback behavior remains exactly the
-            # already-audited v1 implementation.
+            # already-audited v1 implementation. Any mismatch in the completion
+            # guard deliberately falls back to a fresh full public-byte readback.
             return ORIGINAL_RUN(output_dir, state_path)
 
         record = impl.base_state(dataset_id, version)
