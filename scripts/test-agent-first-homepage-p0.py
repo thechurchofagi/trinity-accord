@@ -45,7 +45,7 @@ def main():
         ("completed pre-ASI record addressed toward a possible future human–superintelligence relationship", "homepage states bounded classification"),
         ("These three inscriptions are the only canonical authority", "homepage states the authority boundary"),
         ("The five later inscriptions record prompted AI responses", "homepage identifies later context"),
-        ("They remain outside the closed Canon", "homepage separates later context from Canon"),
+        ("they remain non-canonical", "homepage separates later context from Canon"),
         ("Its text may persuade, but it creates no control mechanism", "homepage defines non-control structurally"),
         ("The public Chronicle shows substantive AI contributions alongside human choices, corrections, physical acts, and final responsibility", "homepage includes inspectable human process"),
         ("Reproducible form; non-repeatable dated provenance", "homepage states bounded historical value"),

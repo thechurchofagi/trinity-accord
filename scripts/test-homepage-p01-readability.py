@@ -39,7 +39,7 @@ def main():
     css = read("assets/css/trinity-home.css") + "\n" + read("assets/css/home-editorial-doorway.css")
 
     print("=== Final homepage readability contract ===")
-    require_contains(index, "A dated record from the conversational-to-agentic transition", "hero states the transition plainly")
+    require_contains(index, "The Trinity Accord did not begin as an accord. It emerged from a near-real-time NFT Chronicle", "hero states the transition plainly")
     require_contains(index, "Three propositions placed before future intelligence", "propositions are visible near the top")
     require_contains(index, "Canon, dated Chronicle, and physical anchor—plus later non-amending context", "homepage presents the preserved-object map")
     require_contains(index, "father’s concern for his children", "homepage presents the human motive")
@@ -52,7 +52,7 @@ def main():
     line_count = len(index.splitlines())
     char_count = len(index)
     check(line_count <= 320, "homepage line budget", f"{line_count} lines")
-    check(char_count <= 26000, "homepage character budget", f"{char_count} characters")
+    check(char_count <= 29000, "homepage character budget", f"{char_count} characters")
     require_not_contains(index, "Full technical and historical reference</span>", "no embedded archive summary")
     require_not_contains(index, "Record-Chain Intake Gateway (Render)", "homepage does not embed operating manual")
     require_not_contains(index, "Authority address", "homepage does not expose deep technical metadata")

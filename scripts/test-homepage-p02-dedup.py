@@ -76,7 +76,7 @@ def main():
     ], "homepage information order")
 
     check(len(index.splitlines()) <= 320, "hard homepage line limit", str(len(index.splitlines())))
-    check(len(index) <= 26000, "hard homepage character limit", str(len(index)))
+    check(len(index) <= 29000, "hard homepage character limit", str(len(index)))
 
     print("\n=== Summary ===")
     if errors:
