@@ -120,11 +120,26 @@ def latest_version(data: dict[str, Any]) -> dict[str, Any]:
     return version
 
 
-def require_v10(version: dict[str, Any]) -> None:
-    """Fail closed unless Harvard reports the sole authorized version, 1.0."""
+def require_v10(
+    version: dict[str, Any], *, allow_unversioned_draft: bool = False
+) -> bool:
+    """Fail closed unless Harvard reports v1.0 or its unnumbered initial draft.
+
+    Harvard omits versionNumber/versionMinorNumber on the initial DRAFT. The v3
+    wrapper separately binds that unnumbered representation to the frozen prior
+    v1.0 review state. Released versions must always report exact 1.0 numbers.
+    """
+    major_raw = version.get("versionNumber")
+    minor_raw = version.get("versionMinorNumber")
+    state = str(version.get("versionState") or "")
+    if major_raw is None and minor_raw is None:
+        if allow_unversioned_draft and state == "DRAFT":
+            log("VERSION PASS unnumbered_initial_draft target=1.0")
+            return False
+        raise StateMachineError("Harvard latestVersion has no valid numeric version")
     try:
-        major = int(version.get("versionNumber"))
-        minor = int(version.get("versionMinorNumber"))
+        major = int(major_raw)
+        minor = int(minor_raw)
     except (TypeError, ValueError) as exc:
         raise StateMachineError("Harvard latestVersion has no valid numeric version") from exc
     if (major, minor) != (1, 0):
@@ -132,6 +147,7 @@ def require_v10(version: dict[str, Any]) -> None:
             f"Harvard latestVersion is {major}.{minor}; v1.0-only policy forbids continuing"
         )
     log("VERSION PASS exact=1.0")
+    return True
 
 
 def data_files(version: dict[str, Any]) -> list[dict[str, Any]]:
@@ -316,7 +332,7 @@ def run(output_dir: Path, state_path: Path) -> int:
         dataset_id_value = data.get("id")
         dataset_id = int(dataset_id_value) if dataset_id_value is not None else None
         version = latest_version(data)
-        require_v10(version)
+        require_v10(version, allow_unversioned_draft=True)
         state = str(version.get("versionState") or "")
         files = data_files(version)
         archive_item = find_named_file(version, ARCHIVE_NAME)

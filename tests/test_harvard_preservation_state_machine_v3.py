@@ -56,15 +56,16 @@ def dataset(
     files = [archive_file()]
     if with_legacy_receipt:
         files.append(legacy_receipt_file())
+    latest: dict[str, object] = {
+        "versionState": state,
+        "termsOfUse": terms,
+        "files": files,
+    }
+    if state == "RELEASED":
+        latest.update({"versionNumber": 1, "versionMinorNumber": 0})
     return {
         "id": 14153533,
-        "latestVersion": {
-            "versionNumber": 1,
-            "versionMinorNumber": 0,
-            "versionState": state,
-            "termsOfUse": terms,
-            "files": files,
-        },
+        "latestVersion": latest,
     }
 
 
@@ -298,6 +299,7 @@ def test_v11_version_fails_closed_before_readback_or_submission(
     returned = dataset(state="DRAFT", terms=v3.CUSTOM_TERMS)
     latest = returned["latestVersion"]
     assert isinstance(latest, dict)
+    latest["versionNumber"] = 1
     latest["versionMinorNumber"] = 1
     monkeypatch.setattr(impl, "get_dataset", lambda *_args: returned)
     monkeypatch.setattr(
@@ -312,6 +314,23 @@ def test_v11_version_fails_closed_before_readback_or_submission(
     )
 
     with pytest.raises(impl.StateMachineError, match="v1.0-only policy"):
+        v3.run_v3(tmp_path / "out", state_path)
+
+
+def test_unversioned_draft_without_frozen_v10_state_fails_closed(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    install_client(monkeypatch)
+    state_path = tmp_path / "state.json"
+    previous = completed_state()
+    write_state(state_path, previous)
+    monkeypatch.setattr(
+        impl,
+        "get_dataset",
+        lambda *_args: dataset(state="DRAFT", terms=v3.CUSTOM_TERMS),
+    )
+
+    with pytest.raises(impl.StateMachineError, match="not bound to the frozen v1.0"):
         v3.run_v3(tmp_path / "out", state_path)
 
 

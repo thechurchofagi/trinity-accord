@@ -154,6 +154,34 @@ def can_short_circuit_complete(
     )
 
 
+def can_continue_unversioned_v10_draft(
+    previous: dict[str, Any] | None,
+    *,
+    dataset_id: int,
+    archive_file_id: int,
+) -> bool:
+    """Bind Dataverse's unnumbered initial DRAFT to the frozen v1.0 review."""
+    if not previous:
+        return False
+    source = previous.get("source")
+    if not isinstance(source, dict):
+        return False
+    return (
+        previous.get("status")
+        in {"submitted_for_review_v1_0", "terms_corrected_submitted_for_review_v1_0"}
+        and previous.get("persistent_id") == impl.PID
+        and int(previous.get("dataset_id") or -1) == dataset_id
+        and previous.get("version_state") == "DRAFT"
+        and int(previous.get("archive_file_id") or -1) == archive_file_id
+        and previous.get("target_completion_policy") == "v1_0_public_readback_only"
+        and previous.get("post_release_harvard_mutation_authorized") is False
+        and str(source.get("artifact_filename") or "") == impl.ARCHIVE_NAME
+        and int(source.get("artifact_bytes") or -1) == impl.EXPECTED_BYTES
+        and str(source.get("artifact_sha256") or "").lower() == impl.EXPECTED_SHA256
+        and str(source.get("bundle_identity_sha256") or "").lower() == impl.BUNDLE_IDENTITY
+    )
+
+
 def submit_for_review(client: httpx.Client, token: str, phase: str) -> str:
     response = client.post(
         f"{impl.SERVER}/api/datasets/:persistentId/submitForReview",
@@ -232,7 +260,7 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             raise impl.StateMachineError("Harvard Dataset has no numeric id")
         dataset_id = int(dataset_id_value)
         version = impl.latest_version(data)
-        impl.require_v10(version)
+        numbered_v10 = impl.require_v10(version, allow_unversioned_draft=True)
         state = str(version.get("versionState") or "")
         files = impl.data_files(version)
         archive_item = impl.find_named_file(version, impl.ARCHIVE_NAME)
@@ -242,6 +270,15 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
                 f"Dataset {impl.PID} does not contain required archive {impl.ARCHIVE_NAME!r}"
             )
         archive_file_id = impl.verify_archive_metadata(archive_item)
+        if not numbered_v10 and not can_continue_unversioned_v10_draft(
+            previous,
+            dataset_id=dataset_id,
+            archive_file_id=archive_file_id,
+        ):
+            raise impl.StateMachineError(
+                "unnumbered Harvard DRAFT is not bound to the frozen v1.0 review state; "
+                "refusing to assume it is v1.0"
+            )
         impl.log(
             f"dataset PASS persistent_id={impl.PID} dataset_id={dataset_id} "
             f"version_state={state} files={len(files)}"
@@ -297,7 +334,7 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             if int(data.get("id") or -1) != dataset_id:
                 raise impl.StateMachineError("Harvard dataset id changed after terms update")
             version = impl.latest_version(data)
-            impl.require_v10(version)
+            impl.require_v10(version, allow_unversioned_draft=True)
             if str(version.get("versionState") or "") != "DRAFT":
                 raise impl.StateMachineError("Harvard versionState changed during terms repair")
             verify_custom_terms(version)
