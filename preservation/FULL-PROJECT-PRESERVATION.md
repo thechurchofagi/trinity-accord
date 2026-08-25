@@ -83,9 +83,11 @@ contains `status: "complete"` after an anonymous full-byte SHA-256 readback.
 The state machine in `scripts/harvard_preservation_state_machine.py` is fail-closed:
 it never creates a replacement Harvard Dataset, never changes the Harvard PID, and
 never re-uploads the large archive when the exact registered file is already
-present. It submits the existing Dataset for review, verifies the released archive
-byte-for-byte, uploads a public-readback receipt, submits the resulting minor
-version for review, and finally verifies the released receipt.
+present. It submits the existing Dataset for v1.0 review and, after Harvard
+publishes that version, verifies the released archive anonymously and
+byte-for-byte. A matching byte count and SHA-256 mark preservation complete in the
+repository state and workflow audit. The machine does not upload a verification
+receipt into Harvard, create a v1.1 draft, or request a second review.
 
 No Dataverse credential is stored in this repository. The API token is supplied at
 runtime through the GitHub Actions secret `HD`.

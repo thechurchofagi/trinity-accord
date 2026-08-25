@@ -5,7 +5,8 @@ Adds fail-closed repair for a curator return caused by selecting Custom Dataset
 Terms without providing Terms of Use. It preserves the exact archive identity,
 reuses the already-recorded authenticated full-byte readback only when every
 identity field still matches, and prevents automatic resubmission loops after a
-subsequent curator return.
+subsequent curator return. After v1.0 publication it performs one anonymous
+full-byte readback and completes without modifying Harvard or creating v1.1.
 """
 from __future__ import annotations
 
@@ -121,15 +122,13 @@ def can_short_circuit_complete(
     *,
     dataset_id: int,
     archive_file_id: int,
-    receipt_file_id: int,
 ) -> bool:
     """Return true only for the exact already-verified released dataset.
 
     A completed Harvard version is immutable. Requiring the frozen local state,
-    live released-version metadata, both stable file IDs, and every source
-    identity field lets scheduled observations avoid re-downloading the 1.95 GB
-    archive every hour. The small public receipt is still read and validated by
-    the caller before the run succeeds.
+    live released-version metadata, the stable archive file ID, the explicit
+    v1.0-only policy, and every source identity field lets scheduled observations
+    avoid re-downloading the 1.95 GB archive every hour.
     """
     if not previous:
         return False
@@ -141,12 +140,13 @@ def can_short_circuit_complete(
         and previous.get("persistent_id") == impl.PID
         and int(previous.get("dataset_id") or -1) == dataset_id
         and previous.get("version_state") == "RELEASED"
+        and previous.get("released_version") == "1.0"
         and int(previous.get("archive_file_id") or -1) == archive_file_id
-        and int(previous.get("receipt_file_id") or -1) == receipt_file_id
         and previous.get("public_readback_verified") is True
         and int(previous.get("public_readback_bytes") or -1) == impl.EXPECTED_BYTES
         and str(previous.get("public_readback_sha256") or "").lower() == impl.EXPECTED_SHA256
-        and previous.get("receipt_verified") is True
+        and previous.get("completion_policy") == "v1_0_public_readback_only"
+        and previous.get("harvard_dataset_mutated_after_release") is False
         and str(source.get("artifact_filename") or "") == impl.ARCHIVE_NAME
         and int(source.get("artifact_bytes") or -1) == impl.EXPECTED_BYTES
         and str(source.get("artifact_sha256") or "").lower() == impl.EXPECTED_SHA256
@@ -200,6 +200,8 @@ def write_v10_record(
             "authenticated_readback_reused": reused,
             "review_submission": review_result,
             "public_readback_verified": False,
+            "target_completion_policy": "v1_0_public_readback_only",
+            "post_release_harvard_mutation_authorized": False,
             "dataset_terms": {
                 "mode": "Custom Dataset Terms",
                 "terms_of_use_sha256": CUSTOM_TERMS_SHA256,
@@ -230,10 +232,11 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             raise impl.StateMachineError("Harvard Dataset has no numeric id")
         dataset_id = int(dataset_id_value)
         version = impl.latest_version(data)
+        impl.require_v10(version)
         state = str(version.get("versionState") or "")
         files = impl.data_files(version)
         archive_item = impl.find_named_file(version, impl.ARCHIVE_NAME)
-        receipt_item = impl.find_named_file(version, impl.RECEIPT_NAME)
+        legacy_receipt_item = impl.find_named_file(version, impl.LEGACY_RECEIPT_NAME)
         if archive_item is None:
             raise impl.StateMachineError(
                 f"Dataset {impl.PID} does not contain required archive {impl.ARCHIVE_NAME!r}"
@@ -243,61 +246,37 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             f"dataset PASS persistent_id={impl.PID} dataset_id={dataset_id} "
             f"version_state={state} files={len(files)}"
         )
+        if legacy_receipt_item is not None:
+            raise impl.StateMachineError(
+                "Harvard Dataset contains a legacy public-readback receipt; "
+                "v1.0-only policy forbids creating or continuing a v1.1 mutation"
+            )
 
-        if state == "RELEASED" and receipt_item is not None:
-            receipt_file_id = impl.get_file_id(receipt_item)
+        if state == "RELEASED":
             if can_short_circuit_complete(
                 previous,
                 dataset_id=dataset_id,
                 archive_file_id=archive_file_id,
-                receipt_file_id=receipt_file_id,
             ):
-                # Published Dataverse versions are immutable. Re-read the small
-                # public receipt on every scheduled observation, but do not fetch
-                # the already-proven 1.95 GB archive again when all live and frozen
-                # identity fields still match.
-                impl.validate_receipt_file(client, receipt_item)
+                # The released Dataset and exact archive metadata are unchanged;
+                # retain the already-proven public-byte result without downloading
+                # the same 1.95 GB file on every hourly observation.
                 impl.log(
-                    "HARVARD PRESERVATION COMPLETE ALREADY VERIFIED "
+                    "HARVARD PRESERVATION COMPLETE V1.0 ALREADY VERIFIED "
                     f"persistent_id={impl.PID} archive_file_id={archive_file_id} "
-                    f"receipt_file_id={receipt_file_id} large_readback=skipped"
+                    "large_readback=skipped"
                 )
                 return 0
 
         if state != "DRAFT":
-            # Released-state receipt/public-readback behavior remains exactly the
-            # already-audited v1 implementation. Any mismatch in the completion
-            # guard deliberately falls back to a fresh full public-byte readback.
+            # Any mismatch in the completion guard deliberately falls back to a
+            # fresh full public-byte readback. The underlying implementation marks
+            # the released v1.0 complete without uploading anything to Harvard.
             return ORIGINAL_RUN(output_dir, state_path)
 
         record = impl.base_state(dataset_id, version)
         record["archive_file_id"] = archive_file_id
         in_review = get_in_review_lock(client, token, dataset_id)
-
-        if receipt_item is not None:
-            # v1.1 draft: do not spam resubmissions if already in review, and fail
-            # closed if it was returned again after a previous v1.1 submission.
-            if in_review:
-                review_result = "already_pending_via_lock"
-            else:
-                previous_status = str((previous or {}).get("status") or "")
-                if previous_status == "submitted_for_review_v1_1":
-                    raise impl.StateMachineError(
-                        "v1.1 is DRAFT with no InReview lock after prior submission; "
-                        "treating as curator return and refusing automatic resubmission"
-                    )
-                review_result = submit_for_review(client, token, "v1.1")
-            record.update(
-                {
-                    "status": "submitted_for_review_v1_1",
-                    "review_submission": review_result,
-                    "public_readback_verified": True,
-                    "note": "Public v1.0 archive readback was completed before receipt upload.",
-                }
-            )
-            impl.write_json(state_path, record)
-            impl.log("STATE submitted_for_review_v1_1")
-            return 0
 
         observed_terms = normalize_terms(version.get("termsOfUse"))
         expected_terms = normalize_terms(CUSTOM_TERMS)
@@ -318,6 +297,7 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             if int(data.get("id") or -1) != dataset_id:
                 raise impl.StateMachineError("Harvard dataset id changed after terms update")
             version = impl.latest_version(data)
+            impl.require_v10(version)
             if str(version.get("versionState") or "") != "DRAFT":
                 raise impl.StateMachineError("Harvard versionState changed during terms repair")
             verify_custom_terms(version)
@@ -327,7 +307,7 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
             archive_file_id_after = impl.verify_archive_metadata(archive_item)
             if archive_file_id_after != archive_file_id:
                 raise impl.StateMachineError("archive file id changed after metadata-only terms update")
-            if impl.find_named_file(version, impl.RECEIPT_NAME) is not None:
+            if impl.find_named_file(version, impl.LEGACY_RECEIPT_NAME) is not None:
                 raise impl.StateMachineError("unexpected receipt appeared during v1.0 terms repair")
             record = impl.base_state(dataset_id, version)
             record["archive_file_id"] = archive_file_id

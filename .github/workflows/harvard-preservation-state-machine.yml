@@ -86,7 +86,6 @@ jobs:
           allowed={
               'submitted_for_review_v1_0',
               'terms_corrected_submitted_for_review_v1_0',
-              'submitted_for_review_v1_1',
               'complete',
           }
           status=data.get('status')
@@ -102,6 +101,26 @@ jobs:
                   raise SystemExit('Harvard custom Terms of Use hash mismatch')
               if terms.get('non_amending_authority_preserved') is not True:
                   raise SystemExit('Harvard non-amending authority invariant not preserved')
+          if status in {'submitted_for_review_v1_0', 'terms_corrected_submitted_for_review_v1_0'}:
+              if data.get('target_completion_policy') != 'v1_0_public_readback_only':
+                  raise SystemExit('Harvard waiting state does not target v1.0-only completion')
+              if data.get('post_release_harvard_mutation_authorized') is not False:
+                  raise SystemExit('Harvard waiting state authorizes a forbidden post-release mutation')
+          if status == 'complete':
+              if data.get('version_state') != 'RELEASED':
+                  raise SystemExit('complete Harvard state is not RELEASED v1.0')
+              if data.get('released_version') != '1.0':
+                  raise SystemExit('complete Harvard state is not exact version 1.0')
+              if data.get('public_readback_verified') is not True:
+                  raise SystemExit('complete Harvard state lacks public readback verification')
+              if data.get('public_readback_bytes') != 1951603950:
+                  raise SystemExit('complete Harvard public readback byte count mismatch')
+              if data.get('public_readback_sha256') != '9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2':
+                  raise SystemExit('complete Harvard public readback SHA-256 mismatch')
+              if data.get('completion_policy') != 'v1_0_public_readback_only':
+                  raise SystemExit('complete Harvard state does not preserve v1.0-only policy')
+              if data.get('harvard_dataset_mutated_after_release') is not False:
+                  raise SystemExit('Harvard Dataset was mutated after v1.0 release')
           print(f"state_validation PASS status={status}")
           PY
 
@@ -135,7 +154,6 @@ jobs:
           path: |
             ${{ runner.temp }}/harvard-toolchain-provenance.json
             ${{ runner.temp }}/harvard-state-machine.log
-            ${{ runner.temp }}/harvard-state-machine/harvard-publication-receipt.json
             ${{ runner.temp }}/harvard-state-machine/harvard-dataverse-state-observed.json
             preservation/harvard-dataverse-state.json
           retention-days: 90

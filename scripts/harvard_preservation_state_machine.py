@@ -14,13 +14,11 @@ State transitions:
 
   RELEASED archive-only
     -> anonymous/public full-byte readback
-    -> generate and upload public-readback receipt
-    -> submitForReview for v1.1
-
-  RELEASED archive + receipt
-    -> anonymous/public full-byte readback of archive
-    -> validate receipt
     -> COMPLETE
+
+The public-readback evidence is retained in the repository state and workflow
+audit only. The released Harvard Dataset is not modified after v1.0 publication,
+so this machine never creates or submits a v1.1 draft.
 
 The Harvard Dataset is always a non-amending institutional preservation mirror.
 The Bitcoin Originals remain the canonical authority. Zenodo concept/version/
@@ -59,7 +57,7 @@ SOURCE_SHA = os.environ.get(
     "HARVARD_SOURCE_GIT_SHA",
     "07cd79ba7b98294a0ff9bc45d76f305609f8a0aa",
 ).strip()
-RECEIPT_NAME = "harvard-publication-receipt.json"
+LEGACY_RECEIPT_NAME = "harvard-publication-receipt.json"
 USER_AGENT = "trinity-accord-harvard-preservation-state-machine/1.0"
 CHUNK = 8 * 1024 * 1024
 
@@ -120,6 +118,20 @@ def latest_version(data: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(version, dict):
         raise StateMachineError("Harvard Dataset has no latestVersion object")
     return version
+
+
+def require_v10(version: dict[str, Any]) -> None:
+    """Fail closed unless Harvard reports the sole authorized version, 1.0."""
+    try:
+        major = int(version.get("versionNumber"))
+        minor = int(version.get("versionMinorNumber"))
+    except (TypeError, ValueError) as exc:
+        raise StateMachineError("Harvard latestVersion has no valid numeric version") from exc
+    if (major, minor) != (1, 0):
+        raise StateMachineError(
+            f"Harvard latestVersion is {major}.{minor}; v1.0-only policy forbids continuing"
+        )
+    log("VERSION PASS exact=1.0")
 
 
 def data_files(version: dict[str, Any]) -> list[dict[str, Any]]:
@@ -256,30 +268,6 @@ def submit_for_review(client: httpx.Client, token: str, phase: str) -> str:
     )
 
 
-def upload_receipt(client: httpx.Client, token: str, path: Path) -> None:
-    metadata = {
-        "description": (
-            "Machine-readable receipt proving exact public-byte equivalence between "
-            "the released Harvard archive and the verified GitHub preservation artifact."
-        ),
-        "categories": ["Documentation"],
-        "restrict": "false",
-    }
-    with path.open("rb") as fh:
-        response = client.post(
-            f"{SERVER}/api/datasets/:persistentId/add",
-            headers=hd_headers(token),
-            params={"persistentId": PID},
-            files={
-                "file": (RECEIPT_NAME, fh, "application/json"),
-                "jsonData": (None, json.dumps(metadata, separators=(",", ":"))),
-            },
-            timeout=120,
-        )
-    require(response, (200, 201), "Harvard receipt upload")
-    log("receipt_upload PASS")
-
-
 def base_state(dataset_id: int | None, version: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema": "trinity-accord.harvard-dataverse-state.v1",
@@ -313,39 +301,12 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def validate_receipt_file(client: httpx.Client, item: dict[str, Any]) -> dict[str, Any]:
-    file_id = get_file_id(item)
-    response = client.get(
-        f"{SERVER}/api/access/datafile/{file_id}",
-        headers={"User-Agent": USER_AGENT},
-        follow_redirects=True,
-        timeout=120,
-    )
-    require(response, (200,), "Harvard public receipt readback")
-    try:
-        payload = response.json()
-    except Exception as exc:
-        raise StateMachineError(f"public receipt is not JSON: {exc}") from exc
-    if payload.get("artifact_sha256") != EXPECTED_SHA256:
-        raise StateMachineError("public receipt artifact_sha256 mismatch")
-    if payload.get("artifact_bytes") != EXPECTED_BYTES:
-        raise StateMachineError("public receipt artifact_bytes mismatch")
-    if payload.get("public_readback_verified") is not True:
-        raise StateMachineError("public receipt does not assert public_readback_verified=true")
-    if payload.get("persistent_id") != PID:
-        raise StateMachineError("public receipt persistent_id mismatch")
-    log(f"PUBLIC RECEIPT READBACK PASS file_id={file_id}")
-    return payload
-
-
 def run(output_dir: Path, state_path: Path) -> int:
     token = os.environ.get("HD_API_TOKEN", "").strip()
     if not token:
         raise StateMachineError("HD_API_TOKEN is missing")
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    receipt_path = output_dir / RECEIPT_NAME
-
     with httpx.Client(
         headers={"User-Agent": USER_AGENT},
         follow_redirects=True,
@@ -355,10 +316,11 @@ def run(output_dir: Path, state_path: Path) -> int:
         dataset_id_value = data.get("id")
         dataset_id = int(dataset_id_value) if dataset_id_value is not None else None
         version = latest_version(data)
+        require_v10(version)
         state = str(version.get("versionState") or "")
         files = data_files(version)
         archive_item = find_named_file(version, ARCHIVE_NAME)
-        receipt_item = find_named_file(version, RECEIPT_NAME)
+        legacy_receipt_item = find_named_file(version, LEGACY_RECEIPT_NAME)
         if archive_item is None:
             raise StateMachineError(
                 f"Dataset {PID} does not contain required archive {ARCHIVE_NAME!r}"
@@ -368,46 +330,36 @@ def run(output_dir: Path, state_path: Path) -> int:
             f"dataset PASS persistent_id={PID} dataset_id={dataset_id} "
             f"version_state={state} files={len(files)}"
         )
+        if legacy_receipt_item is not None:
+            raise StateMachineError(
+                "Harvard Dataset contains a legacy public-readback receipt; "
+                "v1.0-only policy forbids creating or continuing a v1.1 mutation"
+            )
 
         record = base_state(dataset_id, version)
         record["archive_file_id"] = archive_file_id
 
         if state == "DRAFT":
-            # A draft containing the exact archive but no receipt is the initial v1.0
-            # review stage. The full authenticated readback proves the registered file
-            # bytes before handing control to Harvard staff.
-            if receipt_item is None:
-                rb_bytes, rb_sha = verify_archive_bytes(
-                    client, archive_file_id, token=token, public=False
-                )
-                review_result = submit_for_review(client, token, "v1.0")
-                record.update(
-                    {
-                        "status": "submitted_for_review_v1_0",
-                        "authenticated_readback_verified": True,
-                        "authenticated_readback_bytes": rb_bytes,
-                        "authenticated_readback_sha256": rb_sha,
-                        "review_submission": review_result,
-                        "public_readback_verified": False,
-                    }
-                )
-                write_json(state_path, record)
-                log("STATE submitted_for_review_v1_0")
-                return 0
-
-            # A draft with the receipt is the v1.1 review stage. This can occur on a
-            # retry after receipt upload but before/after submitForReview.
-            review_result = submit_for_review(client, token, "v1.1")
+            # The authenticated readback proves the registered v1.0 bytes before
+            # handing publication control to Harvard staff.
+            rb_bytes, rb_sha = verify_archive_bytes(
+                client, archive_file_id, token=token, public=False
+            )
+            review_result = submit_for_review(client, token, "v1.0")
             record.update(
                 {
-                    "status": "submitted_for_review_v1_1",
+                    "status": "submitted_for_review_v1_0",
+                    "authenticated_readback_verified": True,
+                    "authenticated_readback_bytes": rb_bytes,
+                    "authenticated_readback_sha256": rb_sha,
                     "review_submission": review_result,
-                    "public_readback_verified": True,
-                    "note": "Public v1.0 archive readback was completed before receipt upload.",
+                    "public_readback_verified": False,
+                    "target_completion_policy": "v1_0_public_readback_only",
+                    "post_release_harvard_mutation_authorized": False,
                 }
             )
             write_json(state_path, record)
-            log("STATE submitted_for_review_v1_1")
+            log("STATE submitted_for_review_v1_0")
             return 0
 
         if state != "RELEASED":
@@ -419,65 +371,19 @@ def run(output_dir: Path, state_path: Path) -> int:
         )
         record.update(
             {
-                "public_readback_verified": True,
-                "public_readback_bytes": rb_bytes,
-                "public_readback_sha256": rb_sha,
-            }
-        )
-
-        if receipt_item is None:
-            receipt = {
-                "schema": "trinity-accord-harvard-publication-receipt-v1",
-                "generated_at": now_iso(),
-                "server": SERVER,
-                "persistent_id": PID,
-                "dataset_id": dataset_id,
-                "source_repository": "thechurchofagi/trinity-accord",
-                "source_workflow_run_id": SOURCE_RUN_ID,
-                "source_git_commit_sha": SOURCE_SHA,
-                "harvard_archive_filename": ARCHIVE_NAME,
-                "artifact_bytes": EXPECTED_BYTES,
-                "artifact_sha256": EXPECTED_SHA256,
-                "bundle_identity_sha256": BUNDLE_IDENTITY,
-                "public_readback_verified": True,
-                "public_readback_bytes": rb_bytes,
-                "public_readback_sha256": rb_sha,
-                "doi_relationship": ZENODO_RELATIONSHIP,
-                "publication_semantics": {
-                    "role": "second_institutional_non_amending_mirror",
-                    "canonical_authority_changed": False,
-                    "bitcoin_originals_replaced": False,
-                    "zenodo_superseded": False,
-                },
-            }
-            write_json(receipt_path, receipt)
-            upload_receipt(client, token, receipt_path)
-            # Adding the receipt creates the v1.1 draft. Submit it for the repository's
-            # required administrative review.
-            review_result = submit_for_review(client, token, "v1.1")
-            record.update(
-                {
-                    "status": "submitted_for_review_v1_1",
-                    "review_submission": review_result,
-                    "receipt_uploaded": True,
-                }
-            )
-            write_json(state_path, record)
-            log("STATE released_v1_0_public_readback_pass_submitted_v1_1")
-            return 0
-
-        receipt_payload = validate_receipt_file(client, receipt_item)
-        record.update(
-            {
                 "status": "complete",
-                "receipt_file_id": get_file_id(receipt_item),
-                "receipt_verified": True,
-                "receipt_schema": receipt_payload.get("schema"),
+                "public_readback_verified": True,
+                "public_readback_bytes": rb_bytes,
+                "public_readback_sha256": rb_sha,
+                "completion_policy": "v1_0_public_readback_only",
+                "released_version": "1.0",
+                "harvard_dataset_mutated_after_release": False,
+                "verification_evidence_location": "repository_state_and_workflow_audit",
             }
         )
         write_json(state_path, record)
         log(
-            f"HARVARD PRESERVATION COMPLETE persistent_id={PID} "
+            f"HARVARD PRESERVATION COMPLETE V1.0 PUBLIC READBACK persistent_id={PID} "
             f"bytes={rb_bytes} sha256={rb_sha}"
         )
         return 0

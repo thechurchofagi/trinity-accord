@@ -35,6 +35,8 @@
   "authenticated_readback_reused": true,
   "review_submission": "submitted",
   "public_readback_verified": false,
+  "target_completion_policy": "v1_0_public_readback_only",
+  "post_release_harvard_mutation_authorized": false,
   "dataset_terms": {
     "mode": "Custom Dataset Terms",
     "terms_of_use_sha256": "81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140",

@@ -157,6 +157,7 @@ GROUPS = {
         ["python3", "scripts/test_runner_image_pinning.py"],
         ["python3", "scripts/test_python_dependency_pinning.py"],
         ["python3", "scripts/test_harvard_software_review_guide_contract.py"],
+        ["python3", "-m", "pytest", "-q", "tests/test_harvard_preservation_state_machine_v3.py"],
         ["python3", "scripts/test_node_dependency_pinning.py"],
         ["python3", "scripts/test_toolchain_provenance.py"],
         ["python3", "scripts/test_write_workflow_toolchain_provenance.py"],
