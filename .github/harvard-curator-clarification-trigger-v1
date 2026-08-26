@@ -5,6 +5,6 @@ Requested action: make explicit what constitutes the research data, explain repo
 No v1.1 creation authorized
 No post-publication Harvard mutation authorized
 Do not bypass an InReview lock
-Stable workflow: ubuntu-slim + repository-fit orchestrator
-Runner timeout: 15 minutes (GitHub single-CPU limit)
-Execution nonce: 2026-08-26-slim-timeout-fixed-v11
+Stable execution fallback: Run Current Tests preflight + repository-fit orchestrator
+Dedicated runner: ubuntu-slim, 15-minute limit
+Execution nonce: 2026-08-26-final-run-current-tests-v12
