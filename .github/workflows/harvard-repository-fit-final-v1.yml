@@ -19,8 +19,8 @@ concurrency:
 jobs:
   apply:
     # One-shot, lightweight Python/HTTP orchestration on a separate workflow ID
-    # and hosted runner pool, isolated from the stalled legacy workflow queue.
-    runs-on: ubuntu-slim
+    # and hosted runner pool, isolated on the same pinned macOS pool as the final curator clarification.
+    runs-on: macos-15
     timeout-minutes: 30
     steps:
       - name: Checkout
