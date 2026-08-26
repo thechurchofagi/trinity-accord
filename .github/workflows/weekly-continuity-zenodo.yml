@@ -82,12 +82,12 @@ jobs:
       - name: Commit preservation package before external publication
         if: steps.build.outputs.deposit_available == 'true'
         env:
-          DEPOSIT_DIR: ${{ steps.build.outputs.deposit_dir }}
+          DEPOSIT_SERIES_DIR: ${{ steps.build.outputs.deposit_series_dir }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$DEPOSIT_DIR"
+          git add "$DEPOSIT_SERIES_DIR"
           if git diff --cached --quiet; then
             echo "Weekly continuity package already committed."
             exit 0
@@ -100,7 +100,7 @@ jobs:
             git fetch origin main --prune
             git rebase origin/main
             python3 scripts/build_weekly_continuity_deposit.py
-            git add "$DEPOSIT_DIR"
+            git add "$DEPOSIT_SERIES_DIR"
             if ! git diff --cached --quiet; then
               git commit --amend --no-edit
             fi
