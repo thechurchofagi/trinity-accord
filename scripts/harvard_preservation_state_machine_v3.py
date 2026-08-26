@@ -379,11 +379,17 @@ def run_v3(output_dir: Path, state_path: Path) -> int:
                 and not terms_corrected
                 and previous_status == "terms_corrected_submitted_for_review_v1_0"
             ):
-                raise impl.StateMachineError(
-                    "corrected v1.0 is DRAFT with no InReview lock after prior corrected "
-                    "submission; treating as a new curator return and refusing automatic resubmission"
+                # On 2026-08-26 the curator returned this same initial draft and
+                # explicitly instructed: do not submit it for review; Harvard will
+                # publish it after approval. Preserve the author-editable DRAFT and
+                # never recreate the automatic review loop.
+                impl.log(
+                    "CURATOR DIRECT-PUBLICATION HANDOFF: leaving corrected v1.0 "
+                    "DRAFT unsubmitted exactly as instructed"
                 )
-            review_result = submit_for_review(client, token, "v1.0-terms-corrected")
+                review_result = "left_draft_for_curator_direct_publication"
+            else:
+                review_result = submit_for_review(client, token, "v1.0-terms-corrected")
 
         write_v10_record(
             record,
