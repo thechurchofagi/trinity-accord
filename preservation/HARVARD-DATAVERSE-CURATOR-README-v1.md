@@ -2,7 +2,7 @@
 
 ## What this project is
 
-Trinity Accord is a **human-led, generative-AI-assisted archival research and software project**. It preserves a dated record of human–AI collaboration together with the technical provenance needed to inspect, reconstruct, and audit that record over time.
+Trinity Accord is a **human-led, generative-AI-assisted archival research and software project**. It preserves a dated record of human–AI collaboration together with the technical provenance needed to inspect, reconstruct, compare, and audit that record over time.
 
 The project combines several kinds of material:
 
@@ -10,9 +10,32 @@ The project combines several kinds of material:
 - source code and machine-readable manifests used for discovery, preservation, and verification;
 - provenance and timestamp evidence, cryptographic checksums, and recovery materials;
 - historical context documenting how the project developed; and
-- verification tools and records that allow later readers to distinguish what is preserved, what can be independently checked, and what remains an interpretation or claim.
+- verification tools and records that allow later researchers to distinguish what is preserved, what can be independently checked, and what remains an interpretation or claim.
 
 Within the project's own architecture, its fixed canonical core consists of three Bitcoin-inscribed records: a short Protocol, a Covenant connected to a preserved physical object and its documented flaws, and a Meta-record that binds the Protocol, Covenant, and historical Chronicle into one project record. The broader repository and this Dataverse deposit preserve the surrounding research/software object and its provenance; they do not alter those fixed source records.
+
+## What the research data are
+
+**The research data in this deposit are the fixed digital artifacts and machine-readable evidence produced or collected during the project.** They are not a claim that future AI systems exist, and they are not merely a backup of a website.
+
+The deposited research data include:
+
+- versioned project texts and historical records that document the content and development of the project;
+- the frozen source-code snapshot and dependency/configuration files needed to inspect the software state;
+- machine-readable manifests, Git tree/file inventories, and checksum records that identify the preserved digital objects;
+- timestamp, blockchain-identifier, provenance, and preservation records that document chronology and custody where specifically recorded;
+- recovery and verification outputs that allow later researchers to test whether preserved files can be reconstructed and matched to their recorded identities; and
+- documentation of the human–AI production process, including explicit disclosure of generative-AI participation.
+
+These materials are inspectable research objects. They can be independently compared, verified, reconstructed, cited, and reused for secondary research on human–AI collaboration, digital preservation, provenance, reproducible research artifacts, and the historical development of a documented sociotechnical project. The software and code are deposited as related research software that helps inspect, reconstruct, and verify the data.
+
+## Why this is a Dataverse dataset
+
+This deposit is organized as a **research dataset**, not as a live-site mirror. The live website is one presentation layer; the deposited files are the fixed, citable research record.
+
+The dataset brings the research objects, provenance evidence, checksums, software, documentation, and recovery/verification materials together under one persistent identifier so that another researcher can understand exactly what was preserved and independently inspect or reuse it without depending on the continued operation of the original website or Git hosting account.
+
+That is the repository function this deposit is intended to serve: long-term sharing, citation, access, preservation, and reuse of a defined set of digital research artifacts together with the code and documentation needed to interpret and verify them.
 
 ## Why this deposit exists
 
