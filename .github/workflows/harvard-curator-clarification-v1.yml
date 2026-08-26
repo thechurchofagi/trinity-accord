@@ -12,18 +12,15 @@ on:
 permissions:
   contents: read
 
-# Keep only one repository-fit clarification active at a time. This job is
-# idempotent and fail-closed, but duplicate queued executions only increase
-# runner-assignment pressure.
 concurrency:
   group: harvard-curator-clarification-v1
   cancel-in-progress: true
 
 jobs:
   clarify:
-    # Lightweight, short-lived HTTP/Python orchestration is a good fit for the
-    # single-CPU hosted pool and avoids the currently stalled standard-VM queue.
-    runs-on: ubuntu-slim
+    # This task is architecture-independent Python + HTTPS. Use a separate
+    # hosted-runner pool so Linux queue pressure cannot block curator work.
+    runs-on: macos-15
     timeout-minutes: 15
     steps:
       - name: Checkout
