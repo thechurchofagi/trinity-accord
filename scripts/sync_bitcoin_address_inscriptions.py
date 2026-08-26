@@ -22,6 +22,7 @@ import struct
 import time
 import urllib.error
 import urllib.request
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
@@ -30,7 +31,49 @@ DEFAULT_BASE_URL = "https://ordinals.com"
 DEFAULT_OUTPUT = Path("bitcoin-inscription-mirrors/address-wide")
 ID_RE = re.compile(r"^[0-9a-f]{64}i(?:0|[1-9][0-9]*)$")
 HEX_RE = re.compile(r"^(?:[0-9a-fA-F]{2})*$")
-USER_AGENT = "trinity-accord-address-inscription-sync/1.3"
+USER_AGENT = "trinity-accord-address-inscription-sync/1.4"
+
+
+class FetchError(RuntimeError):
+    """A fetch failure that preserves the HTTP status for narrow fallbacks."""
+
+    def __init__(self, url: str, cause: Exception | None, status: int | None = None):
+        super().__init__(f"failed to fetch {url}: {cause}")
+        self.url = url
+        self.status = status
+
+
+class AddressInscriptionHTMLParser(HTMLParser):
+    """Extract inscription links only from ord's address thumbnail container."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.ids: list[str] = []
+        self.invalid_ids: list[str] = []
+        self.thumbnail_sections = 0
+        self.in_thumbnails = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if tag == "dd" and "thumbnails" in (attributes.get("class") or "").split():
+            self.thumbnail_sections += 1
+            self.in_thumbnails = True
+            return
+        if tag != "a" or not self.in_thumbnails:
+            return
+        href = attributes.get("href") or ""
+        prefix = "/inscription/"
+        if not href.startswith(prefix):
+            return
+        inscription_id = href[len(prefix) :]
+        if ID_RE.fullmatch(inscription_id):
+            self.ids.append(inscription_id)
+        else:
+            self.invalid_ids.append(inscription_id)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "dd" and self.in_thumbnails:
+            self.in_thumbnails = False
 
 
 class _Break:
@@ -226,6 +269,7 @@ def fetch_bytes(
         headers["Accept"] = accept
 
     last: Exception | None = None
+    last_status: int | None = None
     for attempt in range(1, attempts + 1):
         try:
             req = urllib.request.Request(url, headers=headers)
@@ -235,16 +279,18 @@ def fetch_bytes(
             if exc.code in absent_statuses:
                 return None
             last = exc
+            last_status = exc.code
             if 400 <= exc.code < 500:
                 break
         except (urllib.error.URLError, TimeoutError) as exc:
             last = exc
+            last_status = None
 
         if attempt == attempts:
             break
         time.sleep(attempt * 2)
 
-    raise RuntimeError(f"failed to fetch {url}: {last}")
+    raise FetchError(url, last, last_status)
 
 
 def fetch_json(url: str, *, negotiate: bool = True) -> dict:
@@ -272,16 +318,48 @@ def fetch_inscription_metadata_cbor(base_url: str, inscription_id: str) -> bytes
     return bytes.fromhex(value)
 
 
-def discover_ids(base_url: str, address: str) -> list[str]:
-    payload = fetch_json(f"{base_url.rstrip('/')}/address/{address}")
-    ids = payload.get("inscriptions")
+def validate_discovered_ids(ids: Any, source: str) -> list[str]:
     if not isinstance(ids, list):
-        raise RuntimeError("ord address response has no inscriptions array")
+        raise RuntimeError(f"{source} has no inscriptions array")
     if any(not isinstance(item, str) or not ID_RE.fullmatch(item) for item in ids):
-        raise RuntimeError("ord address response contains an invalid inscription id")
+        raise RuntimeError(f"{source} contains an invalid inscription id")
     if len(ids) != len(set(ids)):
-        raise RuntimeError("ord address response contains duplicate inscription ids")
+        raise RuntimeError(f"{source} contains duplicate inscription ids")
     return sorted(ids)
+
+
+def discover_ids_from_html(raw: bytes, url: str) -> list[str]:
+    try:
+        html = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError(f"ord address HTML is not UTF-8: {url}") from exc
+    parser = AddressInscriptionHTMLParser()
+    parser.feed(html)
+    parser.close()
+    if parser.thumbnail_sections != 1 or parser.in_thumbnails:
+        raise RuntimeError("ord address HTML has no single complete thumbnails section")
+    if parser.invalid_ids:
+        raise RuntimeError("ord address HTML contains an invalid inscription id")
+    return validate_discovered_ids(parser.ids, "ord address HTML")
+
+
+def discover_ids(base_url: str, address: str) -> list[str]:
+    url = f"{base_url.rstrip('/')}/address/{address}"
+    try:
+        payload = fetch_json(url)
+    except FetchError as exc:
+        if exc.status != 406:
+            raise
+        # ordinals.com may expose this documented address view as HTML while
+        # refusing JSON content negotiation. The HTML view contains the same
+        # complete address inscription set. Object-level address checks below
+        # still fail closed for every discovered ID.
+        raw = fetch_bytes(url, accept="text/html")
+        if raw is None:
+            raise RuntimeError(f"unexpected absent response from {url}")
+        print("ord address JSON returned HTTP 406; using validated HTML view", flush=True)
+        return discover_ids_from_html(raw, url)
+    return validate_discovered_ids(payload.get("inscriptions"), "ord address JSON")
 
 
 def write_object(base_url: str, address: str, inscription_id: str, root: Path) -> dict:
@@ -396,7 +474,10 @@ def build_manifest(address: str, current_ids: list[str], objects: list[dict]) ->
         "objects": objects,
         "discovery": {
             "fixed_count": False,
-            "semantics": "stable complete current set returned by the ord address endpoint",
+            "semantics": (
+                "stable complete current set returned by the ord address endpoint; "
+                "validated HTML is used only when JSON negotiation returns HTTP 406"
+            ),
         },
         "archive": {
             "objects_are_cumulative": True,
@@ -442,6 +523,9 @@ def sync(base_url: str, address: str, output: Path) -> dict:
         "# Address-wide Bitcoin inscription mirror\n\n"
         f"Authority address: `{address}`.\n\n"
         "The current set is discovered at runtime; no inscription count is hard-coded. "
+        "The documented JSON address representation is preferred; when the server "
+        "returns HTTP 406 for JSON negotiation, the same address page's inscription "
+        "thumbnail links are parsed and strictly validated instead. "
         "Objects are cumulative, so previously observed inscriptions remain preserved "
         "if they later leave the address.\n\n"
         "For every inscription, the archive preserves the inscription body returned by "
