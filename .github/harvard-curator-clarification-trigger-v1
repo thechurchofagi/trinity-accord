@@ -1,7 +1,8 @@
 Harvard curator clarification authorized: existing initial v1.0 draft only
 Ticket: #423683
 Persistent ID: doi:10.7910/DVN/YUCG12
-Requested action: clarify what the project is, add explicit generative-AI disclosure, resubmit same draft for review
+Requested action: make explicit what constitutes the research data, explain repository fit, preserve AI disclosure, and update/resubmit the same initial draft only if it is author-editable
 No v1.1 creation authorized
 No post-publication Harvard mutation authorized
-Execution nonce: 2026-08-26T15:12Z-4
+Do not bypass an InReview lock
+Execution nonce: 2026-08-26T15:20Z-5
