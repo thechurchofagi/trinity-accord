@@ -24,7 +24,7 @@ jobs:
     # Lightweight, short-lived HTTP/Python orchestration is a good fit for the
     # single-CPU hosted pool and avoids the currently stalled standard-VM queue.
     runs-on: ubuntu-slim
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
