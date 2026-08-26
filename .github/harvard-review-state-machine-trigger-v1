@@ -1,4 +1,4 @@
-Harvard Dataverse curator-clarification activation v9.
+Harvard Dataverse curator-clarification activation v10.
 Persistent ID: doi:10.7910/DVN/YUCG12
 Ticket: #423683
 Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
@@ -9,4 +9,5 @@ If an InReview lock is active, do not bypass it and do not mutate; record a succ
 Preserve the exact full-project archive and frozen historical source README unchanged.
 Preserve verified Custom Terms exactly: SHA-256 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140.
 Only existing initial v1.0 is authorized. No v1.1, no new Dataset, no post-publication Harvard mutation.
-Execution nonce: 2026-08-26-curator-research-data-fit-v9
+Execution channel: isolated harvard-review-finalization branch.
+Execution nonce: 2026-08-26T15:32Z-isolated-v10
