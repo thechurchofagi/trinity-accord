@@ -10,7 +10,9 @@ making two narrowly scoped improvements requested by curator feedback:
 If the Dataverse-specific README already exists with older content, it is
 replaced in the same unreleased initial draft using Dataverse's file-replace API.
 The fixed preservation archive is never replaced. No v1.1 or post-publication
-mutation is authorized.
+mutation is authorized. After the curator's 2026-08-26 return, the updated
+DRAFT is intentionally left unsubmitted because the curator explicitly said
+that no further review submission is needed and Harvard will publish after approval.
 """
 from __future__ import annotations
 
@@ -112,10 +114,22 @@ def ensure_repository_fit_readme(client, token):
     return verified_id, "verified_existing"
 
 
+def leave_for_curator_publication(client, token):
+    """Honor the curator instruction not to resubmit after this final return."""
+    if base.in_review(client, token):
+        raise base.ClarificationError("unexpected InReview lock before curator-direct publication handoff")
+    base.log(
+        "CURATOR_DIRECT_PUBLICATION_HANDOFF PASS "
+        "draft left unsubmitted exactly as instructed on 2026-08-26"
+    )
+    return "left_draft_for_curator_direct_publication"
+
+
 def main() -> int:
     base.DESCRIPTION = DESCRIPTION
-    base.USER_AGENT = "trinity-accord-harvard-research-data-scope/1.0"
+    base.USER_AGENT = "trinity-accord-harvard-research-data-scope/1.1"
     base.ensure_readme = ensure_repository_fit_readme
+    base.submit = leave_for_curator_publication
     return base.main()
 
 
