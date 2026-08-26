@@ -7,4 +7,4 @@ No post-publication Harvard mutation authorized
 Do not bypass an InReview lock
 Stable execution fallback: Run Current Tests preflight + repository-fit orchestrator
 Dedicated runner: macos-15, 15-minute limit
-Execution nonce: 2026-08-26-curator-returned-direct-publication-v13
+Execution nonce: 2026-08-26-curator-direct-publication-exact-head-v14
