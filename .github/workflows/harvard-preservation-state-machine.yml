@@ -52,7 +52,10 @@ jobs:
           python3 -m py_compile \
             scripts/harvard_preservation_state_machine.py \
             scripts/harvard_preservation_state_machine_v2.py \
-            scripts/harvard_preservation_state_machine_v3.py
+            scripts/harvard_preservation_state_machine_v3.py \
+            scripts/harvard_curator_clarification_v1.py \
+            scripts/harvard_repository_fit_clarification_v1.py \
+            scripts/harvard_repository_fit_orchestrator_v1.py
 
       - name: Record toolchain provenance before mutation
         shell: bash
@@ -67,12 +70,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$OUTPUT_DIR"
-          python3 scripts/harvard_preservation_state_machine_v3.py \
-            --output-dir "$OUTPUT_DIR" \
-            --state-path preservation/harvard-dataverse-state.json \
-            2>&1 | tee "$RUNNER_TEMP/harvard-state-machine.log"
-          cp preservation/harvard-dataverse-state.json \
-            "$OUTPUT_DIR/harvard-dataverse-state-observed.json"
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            python3 scripts/harvard_repository_fit_orchestrator_v1.py \
+              2>&1 | tee "$RUNNER_TEMP/harvard-state-machine.log"
+          else
+            python3 scripts/harvard_preservation_state_machine_v3.py \
+              --output-dir "$OUTPUT_DIR" \
+              --state-path preservation/harvard-dataverse-state.json \
+              2>&1 | tee "$RUNNER_TEMP/harvard-state-machine.log"
+            cp preservation/harvard-dataverse-state.json \
+              "$OUTPUT_DIR/harvard-dataverse-state-observed.json"
+          fi
 
       - name: Validate machine state
         shell: bash
@@ -155,6 +163,8 @@ jobs:
             ${{ runner.temp }}/harvard-toolchain-provenance.json
             ${{ runner.temp }}/harvard-state-machine.log
             ${{ runner.temp }}/harvard-state-machine/harvard-dataverse-state-observed.json
+            ${{ runner.temp }}/harvard-state-machine/harvard-repository-fit-orchestrator.json
+            ${{ runner.temp }}/harvard-state-machine/harvard-curator-clarification-audit.json
             preservation/harvard-dataverse-state.json
           retention-days: 90
           if-no-files-found: warn
