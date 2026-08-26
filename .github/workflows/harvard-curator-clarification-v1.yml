@@ -7,13 +7,14 @@ on:
       - main
     paths:
       - '.github/harvard-curator-clarification-trigger-v1'
+      - '.github/workflows/harvard-curator-clarification-v1.yml'
 
 permissions:
   contents: read
 
 jobs:
   clarify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -27,18 +28,22 @@ jobs:
       - name: Install httpx
         run: python3 -m pip install httpx==0.27.0
 
-      - name: Validate and apply curator clarification
+      - name: Validate and apply curator clarification safely
         env:
           HD_API_TOKEN: ${{ secrets.HD }}
           OUTPUT_DIR: ${{ runner.temp }}/harvard-curator-clarification
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile scripts/harvard_curator_clarification_v1.py scripts/harvard_repository_fit_clarification_v1.py
+          python3 -m py_compile \
+            scripts/harvard_curator_clarification_v1.py \
+            scripts/harvard_repository_fit_clarification_v1.py \
+            scripts/harvard_repository_fit_orchestrator_v1.py
           test -s preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'human-led, generative-AI-assisted archival research and software project' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'The research data in this deposit are the fixed digital artifacts and machine-readable evidence' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'This deposit is organized as a **research dataset**, not as a live-site mirror.' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'This deposit contains AI-generated and AI-assisted content.' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           mkdir -p "$OUTPUT_DIR"
-          python3 scripts/harvard_repository_fit_clarification_v1.py 2>&1 | tee "$OUTPUT_DIR/harvard-curator-clarification.log"
+          python3 scripts/harvard_repository_fit_orchestrator_v1.py \
+            2>&1 | tee "$OUTPUT_DIR/harvard-curator-clarification.log"
