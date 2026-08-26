@@ -1,0 +1,35 @@
+{
+  "upload_type": "dataset",
+  "title": "Trinity Accord Weekly Continuity Archive",
+  "creators": [
+    {
+      "name": "Liu, Hongju"
+    }
+  ],
+  "description": "A versioned, non-authoritative preservation mirror of the Trinity Accord native Record-Chain. This version contains all native Record-Chain records added since the previous verified archive, a Waiting Heartbeat period index, and the latest mature Native OpenTimestamps proof covering the archived chain head. The three Bitcoin Originals remain authoritative; this dataset is not governance, attestation, amendment, or successor reception.",
+  "access_right": "open",
+  "license": "other-closed",
+  "publication_date": "2026-08-26",
+  "version": "archive-native-R-000000134-449aae0b2a1c",
+  "keywords": [
+    "Trinity Accord",
+    "Record-Chain",
+    "civilizational memory",
+    "OpenTimestamps",
+    "Arweave",
+    "weekly continuity archive"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/thechurchofagi/trinity-accord",
+      "relation": "isDerivedFrom",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://www.trinityaccord.org",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    }
+  ],
+  "notes": "Archive archive-native-R-000000134-449aae0b2a1c; records through R-000000134; Arweave transaction 6K225Hy2KYHJx6G_YXF0gsIVt1gkZ7XTpUBQr24bkus; heartbeat span 2026-08-20 through 2026-08-26. Rights boundary: the record is publicly readable for preservation and research, but the deposit grants no blanket reuse licence. Project-authored and embedded Record-Chain materials remain subject to their respective rights; inclusion does not transfer copyright or grant rights the archive publisher does not possess."
+}
