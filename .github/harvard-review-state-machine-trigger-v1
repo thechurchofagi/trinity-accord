@@ -1,13 +1,12 @@
-Harvard Dataverse preservation state-machine activation v8.
+Harvard Dataverse curator-clarification activation v9.
 Persistent ID: doi:10.7910/DVN/YUCG12
-Source preservation run: 32368866492
+Ticket: #423683
 Source Git SHA: 07cd79ba7b98294a0ff9bc45d76f305609f8a0aa
 Exact archive SHA-256: 9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2
-Curator returned v1.0 only because Custom Dataset Terms had an empty Terms of Use field.
-Harvard support ticket 423683 confirmed the author-requested return/unlock on 2026-08-24 at 09:15 EDT; execute the safe terms repair immediately.
-Repair only Dataset Terms through the official dataset-license API; do not alter or re-upload the registered archive.
-Reuse the prior authenticated full-byte readback only if file ID, bytes, SHA-256, filename, and bundle identity all remain exact.
-Use the Dataverse InReview lock to prevent duplicate submissions; fail closed on any later curator return.
-Only Harvard version 1.0 is authorized. After publication, perform one anonymous full-byte readback and mark complete without uploading a receipt, creating v1.1, or requesting a second review.
-Custom Terms of Use SHA-256: 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140
-Non-amending institutional mirror only; the three Bitcoin Originals remain the sole canonical and final authority.
+Curator feedback requires the deposit to leave no doubt what constitutes the research data and why the fixed digital research record belongs in this repository.
+Apply the strengthened Dataset Description and Harvard-specific README only if the same initial v1.0 DRAFT is author-editable.
+If an InReview lock is active, do not bypass it and do not mutate; record a successful defer observation instead.
+Preserve the exact full-project archive and frozen historical source README unchanged.
+Preserve verified Custom Terms exactly: SHA-256 81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140.
+Only existing initial v1.0 is authorized. No v1.1, no new Dataset, no post-publication Harvard mutation.
+Execution nonce: 2026-08-26-curator-research-data-fit-v9
