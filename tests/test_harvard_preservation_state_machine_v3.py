@@ -182,8 +182,11 @@ def test_second_curator_return_does_not_create_resubmission_loop(
         lambda *_args: pytest.fail("a second curator return must not be resubmitted"),
     )
 
-    with pytest.raises(impl.StateMachineError, match="new curator return"):
-        v3.run_v3(tmp_path / "out", state_path)
+    assert v3.run_v3(tmp_path / "out", state_path) == 0
+    result = json.loads(state_path.read_text(encoding="utf-8"))
+    assert result["review_submission"] == "left_draft_for_curator_direct_publication"
+    assert result["status"] == "terms_corrected_submitted_for_review_v1_0"
+    assert result["version_state"] == "DRAFT"
 
 
 def test_complete_v10_state_skips_repeated_large_readback(
