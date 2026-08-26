@@ -5,4 +5,5 @@ Requested action: make explicit what constitutes the research data, explain repo
 No v1.1 creation authorized
 No post-publication Harvard mutation authorized
 Do not bypass an InReview lock
-Execution nonce: 2026-08-26T15:31Z-6
+Stable workflow: ubuntu-24.04 + repository-fit orchestrator
+Execution nonce: 2026-08-26-final-repository-fit-v10
