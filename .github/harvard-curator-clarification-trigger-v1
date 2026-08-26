@@ -1,10 +1,10 @@
 Harvard curator clarification authorized: existing initial v1.0 draft only
 Ticket: #423683
 Persistent ID: doi:10.7910/DVN/YUCG12
-Requested action: make explicit what constitutes the research data, explain repository fit, preserve AI disclosure, and update/resubmit the same initial draft only if it is author-editable
+Requested action: make explicit what constitutes the research data, explain repository fit, preserve AI disclosure, and update the same initial draft only if it is author-editable; leave it unsubmitted for curator direct publication
 No v1.1 creation authorized
 No post-publication Harvard mutation authorized
 Do not bypass an InReview lock
 Stable execution fallback: Run Current Tests preflight + repository-fit orchestrator
-Dedicated runner: ubuntu-slim, 15-minute limit
-Execution nonce: 2026-08-26-final-run-current-tests-v12
+Dedicated runner: macos-15, 15-minute limit
+Execution nonce: 2026-08-26-curator-returned-direct-publication-v13
