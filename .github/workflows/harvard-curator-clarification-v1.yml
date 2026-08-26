@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: harvard-curator-clarification-v1
+  group: harvard-curator-clarification-macos-v1
   cancel-in-progress: true
 
 jobs:
