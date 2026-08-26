@@ -1,0 +1,57 @@
+name: Harvard Repository Fit Final v1
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/harvard-repository-fit-final-v1.yml'
+      - '.github/harvard-repository-fit-final-trigger-v1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harvard-repository-fit-final-v1
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    # One-shot, lightweight Python/HTTP orchestration on a separate workflow ID
+    # and hosted runner pool, isolated from the stalled legacy workflow queue.
+    runs-on: ubuntu-slim
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned HTTP client
+        run: python3 -m pip install httpx==0.27.0
+
+      - name: Apply and verify the curator-requested v1.0 clarification
+        env:
+          HD_API_TOKEN: ${{ secrets.HD }}
+          OUTPUT_DIR: ${{ runner.temp }}/harvard-repository-fit-final-v1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/harvard_curator_clarification_v1.py \
+            scripts/harvard_repository_fit_clarification_v1.py \
+            scripts/harvard_repository_fit_orchestrator_v1.py
+          test -s preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
+          grep -F 'The research data in this deposit are the fixed digital artifacts and machine-readable evidence' \
+            preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
+          grep -F 'This deposit is organized as a **research dataset**, not as a live-site mirror.' \
+            preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
+          grep -F 'This deposit contains AI-generated and AI-assisted content.' \
+            preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
+          mkdir -p "$OUTPUT_DIR"
+          python3 scripts/harvard_repository_fit_orchestrator_v1.py \
+            2>&1 | tee "$OUTPUT_DIR/harvard-repository-fit-final.log"
