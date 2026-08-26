@@ -16,7 +16,7 @@
   "count": 12,
   "discovery": {
     "fixed_count": false,
-    "semantics": "stable complete current set returned by the ord address endpoint"
+    "semantics": "stable complete current set returned by the ord address endpoint; validated HTML is used only when JSON negotiation returns HTTP 406"
   },
   "ids": [
     "0eecd48430f8239f5d543b5cf2ee928969a1aac7660808fd869a78aa27949c9ci0",

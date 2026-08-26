@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -53,7 +54,7 @@ def make_package(tmp_path: Path, archive_id: str = "archive-test") -> Path:
             "txid": "A" * 43,
         },
     }
-    archive_manifest["archive_manifest_sha256"] = package.canonical_sha256(
+    archive_manifest["archive_manifest_sha256"] = package.archive_manifest_sha256(
         archive_manifest
     )
     write_json(deposit / "archive-manifest.json", archive_manifest)
@@ -100,6 +101,26 @@ def make_package(tmp_path: Path, archive_id: str = "archive-test") -> Path:
         },
     )
     return deposit
+
+
+def test_archive_manifest_hash_matches_record_chain_canonical_file_contract():
+    manifest = {"archive_id": "archive-test", "archive_manifest_sha256": None}
+    canonical_file = (
+        json.dumps(
+            manifest,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+        + "\n"
+    ).encode("utf-8")
+    assert package.archive_manifest_sha256(manifest) == hashlib.sha256(
+        canonical_file
+    ).hexdigest()
+    assert package.archive_manifest_sha256(manifest) != package.canonical_sha256(
+        manifest
+    )
 
 
 def test_local_package_requires_exact_six_files_and_mixed_rights_boundary(tmp_path):

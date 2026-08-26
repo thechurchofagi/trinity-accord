@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import json
+import urllib.error
 from pathlib import Path
 from unittest.mock import patch
 
@@ -21,6 +23,68 @@ def test_inscription_id_validation_is_strict():
     assert not sync_mod.ID_RE.fullmatch("A" * 64 + "i0")
     assert not sync_mod.ID_RE.fullmatch("0" * 63 + "i0")
     assert not sync_mod.ID_RE.fullmatch("0" * 64 + "i01")
+
+
+def test_address_discovery_falls_back_to_validated_html_on_json_406():
+    first = "0" * 64 + "i0"
+    second = "a" * 64 + "i42"
+    error = sync_mod.FetchError(
+        "https://ordinals.example/address/test",
+        urllib.error.HTTPError(
+            url="https://ordinals.example/address/test",
+            code=406,
+            msg="Not Acceptable",
+            hdrs=None,
+            fp=io.BytesIO(b""),
+        ),
+        406,
+    )
+    html = (
+        "<html><dd class=thumbnails>"
+        f"<a href=/inscription/{second}></a>"
+        f"<a href=/inscription/{first}></a>"
+        "</dd></html>"
+    ).encode()
+    with patch.object(sync_mod, "fetch_json", side_effect=error), patch.object(
+        sync_mod, "fetch_bytes", return_value=html
+    ) as fetch_bytes:
+        assert sync_mod.discover_ids("https://ordinals.example", "test") == [first, second]
+    fetch_bytes.assert_called_once_with(
+        "https://ordinals.example/address/test", accept="text/html"
+    )
+
+
+def test_address_html_fallback_rejects_duplicate_or_unscoped_ids():
+    inscription_id = "0" * 64 + "i0"
+    duplicate = (
+        "<a href=/inscription/" + inscription_id + "></a>"
+        "<dd class=thumbnails>"
+        "<a href=/inscription/" + inscription_id + "></a>"
+        "<a href=/inscription/" + inscription_id + "></a>"
+        "</dd>"
+    ).encode()
+    try:
+        sync_mod.discover_ids_from_html(duplicate, "https://ordinals.example/address/test")
+    except RuntimeError as exc:
+        assert "duplicate" in str(exc)
+    else:
+        raise AssertionError("duplicate HTML inscription IDs must fail closed")
+
+
+def test_address_discovery_does_not_mask_non_406_failure():
+    error = sync_mod.FetchError(
+        "https://ordinals.example/address/test", RuntimeError("boom"), 500
+    )
+    with patch.object(sync_mod, "fetch_json", side_effect=error), patch.object(
+        sync_mod, "fetch_bytes"
+    ) as fetch_bytes:
+        try:
+            sync_mod.discover_ids("https://ordinals.example", "test")
+        except sync_mod.FetchError as exc:
+            assert exc.status == 500
+        else:
+            raise AssertionError("non-406 discovery failures must remain fail-closed")
+    fetch_bytes.assert_not_called()
 
 
 def test_manifest_has_no_fixed_expected_count_and_declares_dual_payload_archive():

@@ -87,6 +87,23 @@ def canonical_sha256(value: Any) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def archive_manifest_sha256(value: Any) -> str:
+    """Hash an Arweave archive manifest using its canonical-file contract.
+
+    Record-Chain archive manifests are produced by ``canonical_dumps``, whose
+    canonical bytes include one final LF. Package identities intentionally use
+    ``canonical_sha256`` above without that file terminator.
+    """
+    raw = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8") + b"\n"
+    return hashlib.sha256(raw).hexdigest()
+
+
 def file_inventory(deposit_dir: Path) -> dict[str, dict[str, Any]]:
     return {
         name: {
@@ -232,7 +249,7 @@ def verify_local_package(deposit_dir: Path) -> dict[str, Any]:
     stored_manifest_sha = archive_manifest.get("archive_manifest_sha256")
     manifest_for_hash = dict(archive_manifest)
     manifest_for_hash["archive_manifest_sha256"] = None
-    if stored_manifest_sha != canonical_sha256(manifest_for_hash):
+    if stored_manifest_sha != archive_manifest_sha256(manifest_for_hash):
         raise SystemExit("archive manifest self-hash mismatch")
 
     inventory = file_inventory(deposit_dir)
