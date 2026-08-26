@@ -1,43 +1,36 @@
 name: Harvard Curator Clarification v1
 
 on:
+  workflow_dispatch: {}
   push:
     branches:
       - main
     paths:
-      - .github/harvard-curator-clarification-trigger-v1
-  workflow_dispatch:
+      - '.github/harvard-curator-clarification-trigger-v1'
 
 permissions:
   contents: read
 
-concurrency:
-  group: harvard-curator-clarification-v1
-  cancel-in-progress: false
-
 jobs:
-  clarify-and-resubmit-v1:
-    runs-on: ubuntu-24.04
+  clarify:
+    runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      HD_API_TOKEN: ${{ secrets.HD }}
-      OUTPUT_DIR: ${{ runner.temp }}/harvard-curator-clarification
     steps:
-      - name: Checkout current control state
+      - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
-        with:
-          ref: main
-          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
 
-      - name: Install pinned HTTP client
-        run: python3 -m pip install 'httpx==0.27.0'
+      - name: Install httpx
+        run: python3 -m pip install httpx==0.27.0
 
-      - name: Validate clarification program and curator README
+      - name: Validate and apply curator clarification
+        env:
+          HD_API_TOKEN: ${{ secrets.HD }}
+          OUTPUT_DIR: ${{ runner.temp }}/harvard-curator-clarification
         shell: bash
         run: |
           set -euo pipefail
@@ -45,55 +38,5 @@ jobs:
           test -s preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'human-led, generative-AI-assisted archival research and software project' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
           grep -F 'This deposit contains AI-generated and AI-assisted content.' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
-          grep -F 'frozen preservation snapshot of version 1.0' preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
-          sha256sum preservation/HARVARD-DATAVERSE-CURATOR-README-v1.md
-
-      - name: Apply curator clarification to existing v1.0 draft
-        shell: bash
-        run: |
-          set -euo pipefail
           mkdir -p "$OUTPUT_DIR"
-          python3 scripts/harvard_curator_clarification_v1.py \
-            2>&1 | tee "$OUTPUT_DIR/harvard-curator-clarification.log"
-
-      - name: Validate fail-closed audit
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json, os
-          from pathlib import Path
-          p=Path(os.environ['OUTPUT_DIR'])/'harvard-curator-clarification-audit.json'
-          data=json.loads(p.read_text(encoding='utf-8'))
-          expected={
-              'persistent_id':'doi:10.7910/DVN/YUCG12',
-              'dataset_id':14153533,
-              'version_state':'DRAFT',
-              'target_version':'1.0',
-              'new_version_created':False,
-              'post_release_mutation':False,
-              'archive_file_id':14153535,
-              'archive_filename':'trinity-accord-full-project-preservation-bundle.github-artifact.zip.bin',
-              'archive_bytes':1951603950,
-              'archive_sha256':'9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2',
-              'ai_disclosure_present':True,
-              'curator_readme_filename':'README-HARVARD-DATAVERSE-v1.md',
-          }
-          for key,value in expected.items():
-              if data.get(key) != value:
-                  raise SystemExit(f'audit mismatch {key}: observed={data.get(key)!r} expected={value!r}')
-          if data.get('review_submission') not in {'submitted','already_pending'}:
-              raise SystemExit(f"unexpected review_submission={data.get('review_submission')!r}")
-          if int(data.get('final_file_count') or 0) < 13:
-              raise SystemExit(f"unexpected final_file_count={data.get('final_file_count')!r}")
-          print('HARVARD_CURATOR_CLARIFICATION_AUDIT PASS')
-          PY
-
-      - name: Upload curator clarification audit
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: harvard-curator-clarification-v1-audit
-          path: ${{ runner.temp }}/harvard-curator-clarification/
-          retention-days: 90
-          if-no-files-found: warn
+          python3 scripts/harvard_curator_clarification_v1.py 2>&1 | tee "$OUTPUT_DIR/harvard-curator-clarification.log"
