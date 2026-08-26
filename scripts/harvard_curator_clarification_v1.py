@@ -400,7 +400,7 @@ def main() -> int:
             (output_dir / "harvard-curator-clarification-audit.json").write_text(
                 json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(json.dumps(audit, indent=2, ensure_ascii=False))
-        log("COMPLETE same initial v1.0 draft resubmitted; no v1.1 created")
+        log(f"COMPLETE same initial v1.0 draft finalized review_submission={review}; no v1.1 created")
     return 0
 
 
