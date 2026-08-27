@@ -1,11 +1,11 @@
 {
   "schema": "trinity-accord.harvard-dataverse-state.v1",
-  "observed_at": "2026-08-24T13:29:16.230940+00:00",
+  "observed_at": "2026-08-27T14:59:37.967928+00:00",
   "server": "https://dataverse.harvard.edu",
   "persistent_id": "doi:10.7910/DVN/YUCG12",
   "dataset_id": 14153533,
-  "version_state": "DRAFT",
-  "status": "terms_corrected_submitted_for_review_v1_0",
+  "version_state": "RELEASED",
+  "status": "complete",
   "source": {
     "repository": "thechurchofagi/trinity-accord",
     "workflow_run_id": 32368866492,
@@ -29,18 +29,11 @@
     "zenodo_superseded": false
   },
   "archive_file_id": 14153535,
-  "authenticated_readback_verified": true,
-  "authenticated_readback_bytes": 1951603950,
-  "authenticated_readback_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
-  "authenticated_readback_reused": true,
-  "review_submission": "submitted",
-  "public_readback_verified": false,
-  "target_completion_policy": "v1_0_public_readback_only",
-  "post_release_harvard_mutation_authorized": false,
-  "dataset_terms": {
-    "mode": "Custom Dataset Terms",
-    "terms_of_use_sha256": "81499f397fa433c9fa50ce36def425bb3ae318e28fe7eab9b0f5e02063b5b140",
-    "terms_corrected_after_curator_return": true,
-    "non_amending_authority_preserved": true
-  }
+  "public_readback_verified": true,
+  "public_readback_bytes": 1951603950,
+  "public_readback_sha256": "9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2",
+  "completion_policy": "v1_0_public_readback_only",
+  "released_version": "1.0",
+  "harvard_dataset_mutated_after_release": false,
+  "verification_evidence_location": "repository_state_and_workflow_audit"
 }
