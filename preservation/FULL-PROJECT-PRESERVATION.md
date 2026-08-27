@@ -67,30 +67,36 @@ Git commit `07cd79ba7b98294a0ff9bc45d76f305609f8a0aa`, is bound to one Harvard
 Dataverse Dataset:
 
 - Harvard persistent identifier / DOI: `doi:10.7910/DVN/YUCG12`
+- released version: `1.0`
 - archive filename: `trinity-accord-full-project-preservation-bundle.github-artifact.zip.bin`
 - archive bytes: `1,951,603,950`
 - archive SHA-256: `9c3c8bd513dfe4919efe56084c138fce18de313f59d67cd7c9484d9b5b75c9f2`
 - bundle identity SHA-256: `4930b9d6cd4968f3ba75de9dc46a396af7f37f97d128d1619ae829239656989d`
 
-Harvard requires ordinary depositors to use its administrative **Submit for
-Review** workflow rather than directly publishing the Dataset. The repository's
-machine-readable live state is therefore kept in
-`preservation/harvard-dataverse-state.json`. Do not infer that the Harvard Dataset
-is publicly released merely because the DOI has been allocated or the archive has
-been registered. Public equivalence is established only when that state record
-contains `status: "complete"` after an anonymous full-byte SHA-256 readback.
+Harvard Dataverse v1.0 is now **publicly released and byte-for-byte readback
+verified**. The machine-readable completion record is
+`preservation/harvard-dataverse-state.json`, which records
+`version_state: "RELEASED"`, `status: "complete"`, and
+`public_readback_verified: true` for the exact archive SHA-256 and byte count.
+The same state record records `harvard_dataset_mutated_after_release: false`.
 
-The state machine in `scripts/harvard_preservation_state_machine.py` is fail-closed:
-it never creates a replacement Harvard Dataset, never changes the Harvard PID, and
-never re-uploads the large archive when the exact registered file is already
-present. It submits the existing Dataset for v1.0 review and, after Harvard
-publishes that version, verifies the released archive anonymously and
-byte-for-byte. A matching byte count and SHA-256 mark preservation complete in the
-repository state and workflow audit. The machine does not upload a verification
-receipt into Harvard, create a v1.1 draft, or request a second review.
+The state machine in `scripts/harvard_preservation_state_machine.py` remains
+fail-closed: it does not create a replacement Harvard Dataset, change the Harvard
+PID, or re-upload the large archive when the exact registered file is already
+present. Its completed v1.0 path submitted the existing Dataset for review and,
+after publication, verified the released archive anonymously and byte-for-byte.
+A matching byte count and SHA-256 marked preservation complete in the repository
+state and workflow audit. The machine does not upload a verification receipt into
+Harvard, create a v1.1 draft, or request a second review.
 
 No Dataverse credential is stored in this repository. The API token is supplied at
 runtime through the GitHub Actions secret `HD`.
+
+Publication in Harvard Dataverse records institutional repository preservation
+following curator review for repository fit, clarity, and repository best
+practices. It must not be described as peer review, endorsement by Harvard
+University, canonical authority, interpretive authority, or amendment of the
+Trinity Accord.
 
 ## DOI relationship — do not collapse these roles
 
