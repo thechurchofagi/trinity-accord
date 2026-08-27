@@ -70,11 +70,36 @@ def dataset(
 
 
 def current_waiting_state() -> dict[str, object]:
-    return json.loads(
-        (ROOT / "preservation" / "harvard-dataverse-state.json").read_text(
-            encoding="utf-8"
-        )
+    """Return a frozen synthetic pre-publication v1.0 state.
+
+    Do not derive this fixture from the live repository state file: that file is
+    expected to advance from DRAFT/review to RELEASED/complete, while these tests
+    intentionally exercise the historical curator-return transition.
+    """
+    version = dataset(state="DRAFT")["latestVersion"]
+    assert isinstance(version, dict)
+    record = impl.base_state(14153533, version)
+    record.update(
+        {
+            "status": "terms_corrected_submitted_for_review_v1_0",
+            "archive_file_id": 14153535,
+            "authenticated_readback_verified": True,
+            "authenticated_readback_bytes": impl.EXPECTED_BYTES,
+            "authenticated_readback_sha256": impl.EXPECTED_SHA256,
+            "authenticated_readback_reused": True,
+            "review_submission": "submitted",
+            "public_readback_verified": False,
+            "target_completion_policy": "v1_0_public_readback_only",
+            "post_release_harvard_mutation_authorized": False,
+            "dataset_terms": {
+                "mode": "Custom Dataset Terms",
+                "terms_of_use_sha256": v3.CUSTOM_TERMS_SHA256,
+                "terms_corrected_after_curator_return": True,
+                "non_amending_authority_preserved": True,
+            },
+        }
     )
+    return record
 
 
 def completed_state() -> dict[str, object]:
