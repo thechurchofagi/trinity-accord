@@ -81,12 +81,13 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m venv "$RUNNER_TEMP/offline-python"
-          "$RUNNER_TEMP/offline-python/bin/python" -m pip install \
+          source "$RUNNER_TEMP/offline-python/bin/activate"
+          python3 -m pip install \
             --disable-pip-version-check \
             --no-index \
             --find-links "$RUNNER_TEMP/offline-dependency-capsule/python/wheels" \
             -r "$RUNNER_TEMP/offline-dependency-capsule/python/requirements-ci.txt"
-          "$RUNNER_TEMP/offline-python/bin/python" scripts/audit_recovery_readiness.py
+          python3 scripts/audit_recovery_readiness.py
 
       - name: Prove root Node installation from preserved tarballs only
         run: |
