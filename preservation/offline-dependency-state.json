@@ -1,11 +1,10 @@
 {
-  "artifact_id": 9673234514,
   "authority_effect": "none",
   "capsule_archive": {
-    "bytes": 42626242,
-    "manifest_sha256": "59629ebd756ab4b00d22dc440bd17272dad5d18458c2149fe9fa437a730e0262",
+    "bytes": 43033187,
+    "manifest_sha256": "e4ab7739aa327eab50f923a0ab8bf6e594a25e18f05e0dc86b10461d6936f9f6",
     "payload_file_count": 130,
-    "sha256": "eda2d54742e549798e829688a99286375c3bab1ac8e40d2feccb30e8c7b9a2fa"
+    "sha256": "64ad6caa80435f388aa1ca4c64a05d68a85291b300c524306b6c52ddde799a79"
   },
   "node": {
     "ethereum-verification": [
@@ -51,7 +50,7 @@
       "attrs==26.1.0|attrs-26.1.0.tar.gz|sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32",
       "certifi==2026.7.22|certifi-2026.7.22.tar.gz|sha256:741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55",
       "cffi==2.1.1|cffi-2.1.1.tar.gz|sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
-      "cryptography==46.0.7|cryptography-46.0.7.tar.gz|sha256:e4cfd68c5f3e0bfdad0d38e023239b96a2fe84146481852dffbcca442c245aa5",
+      "cryptography==50.0.1|cryptography-50.0.1.tar.gz|sha256:5dd9bda1c12b4162f6ff568eeb5e0ff956c28d14406e875cfe8a63a2d414ff20",
       "cytoolz==1.1.0|cytoolz-1.1.0.tar.gz|sha256:13a7bf254c3c0d28b12e2290b82aed0f0977a4c2a2bf84854fcdc7796a29f3b0",
       "eth-hash==0.7.1|eth_hash-0.7.1.tar.gz|sha256:d2411a403a0b0a62e8247b4117932d900ffb4c8c64b15f92620547ca5ce46be5",
       "eth-typing==6.0.0|eth_typing-6.0.0.tar.gz|sha256:315dd460dc0b71c15a6cd51e3c0b70d237eec8771beb844144f3a1fb4adb2392",
@@ -101,7 +100,7 @@
     "institutional_binary_publication_requires_separate_rights_approval": true
   },
   "schema": "trinityaccord.offline-dependency-state.v1",
-  "source_git_commit_sha": "5f4378dc2998d5eaba8a86e30ad5cbab91d8e3b3",
+  "source_git_commit_sha": "4320459034b2507aa9bb091ec7cf57bb2d99ecfe",
   "source_repository": "https://github.com/thechurchofagi/trinity-accord",
-  "workflow_run_id": 33139156227
+  "workflow_run_id": 33160624136
 }
