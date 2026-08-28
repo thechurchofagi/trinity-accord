@@ -74,9 +74,27 @@ def validate(value: dict[str, Any], origin: str) -> None:
         raise SystemExit(f"unexpected Software Heritage request status: {request_status}")
     task_status = value.get("save_task_status")
     if task_status == "succeeded":
+        if value.get("visit_status") != "full":
+            raise SystemExit("successful Software Heritage task lacks a full archival visit")
         swhid = value.get("snapshot_swhid")
         if not isinstance(swhid, str) or not swhid.startswith("swh:1:snp:"):
             raise SystemExit("successful Software Heritage visit lacks snapshot SWHID")
+
+
+def result_exit_code(value: dict[str, Any]) -> int:
+    """Return zero only for a fully succeeded archival visit.
+
+    Save Code Now is an external preservation boundary. A request that is still
+    pending when our polling budget expires is not silently treated as success.
+    """
+    if value.get("save_request_status") == "rejected":
+        return 2
+    task_status = value.get("save_task_status")
+    if task_status == "failed":
+        return 3
+    if task_status != "succeeded":
+        return 4
+    return 0
 
 
 def write(path: Path, value: dict[str, Any]) -> None:
@@ -105,12 +123,7 @@ def main() -> int:
     validate(value, args.origin)
     write(Path(args.output), value)
     print(json.dumps(value, sort_keys=True))
-
-    if value.get("save_request_status") == "rejected":
-        return 2
-    if value.get("save_task_status") == "failed":
-        return 3
-    return 0
+    return result_exit_code(value)
 
 
 if __name__ == "__main__":

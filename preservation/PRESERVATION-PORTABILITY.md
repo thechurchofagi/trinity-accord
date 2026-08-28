@@ -31,13 +31,30 @@ The source-distribution set is a future-portability aid. It does not claim that
 an arbitrary future CPU/OS/ABI can rebuild every dependency without a suitable
 compiler and language toolchain.
 
+The generated package contains third-party software under its upstream licenses.
+It is therefore kept outside the canonical Accord and outside the existing DOI
+objects unless a separate redistribution-rights acknowledgement explicitly
+covers such an annex. This avoids silently expanding the legal or maintenance
+scope of the frozen Harvard Dataverse v1.0 or the existing Zenodo recovery layer.
+
 ## 2. Software Heritage
 
 `scripts/request_software_heritage_save.py` submits the public Git repository to
 Software Heritage's **Save Code Now** API and records the returned archival
-receipt. When the archival visit completes, the receipt contains the snapshot
-SWHID (`swh:1:snp:...`).
+receipt. The client is fail-closed: an archival request that is rejected, fails,
+or remains incomplete when the polling budget expires does not return success.
+A successful result must include both a full archival visit and a snapshot SWHID
+(`swh:1:snp:...`).
 
+The first verified full snapshot for this layer is committed in
+`preservation/software-heritage-state.json`:
+
+- workflow head: `21e56651181bacb3c9e628d567e8bbb7cadbe3c8`
+- visit status: `full`
+- snapshot SWHID: `swh:1:snp:1ef75d896f698c0fc8fb10e5306ee3d8567a7bab`
+
+The committed workflow head records which GitHub state triggered the archival
+run; the Software Heritage snapshot SWHID is the immutable archive identifier.
 The SWHID is a software-preservation identifier. It is not a Trinity Accord
 original and does not create or modify canonical authority.
 
@@ -52,8 +69,9 @@ This layer is additive:
 - Harvard Dataverse v1.0 remains frozen and is not amended by this mechanism.
 - Existing Zenodo repository/cold-recovery publication logic remains the DOI
   recovery layer.
-- Software Heritage adds a source-code archive and SWHID identity.
+- Software Heritage adds an independent source-code archive and immutable SWHID
+  identity.
 - The offline dependency capsule closes a practical package-index dependency
-  in cold verification.
+  in cold verification without being promoted into canonical or DOI authority.
 
 No new blockchain or governance layer is introduced.

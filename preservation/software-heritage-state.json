@@ -1,0 +1,18 @@
+{
+  "schema": "trinity-accord-software-heritage-state-v1",
+  "authority_effect": "none",
+  "origin_url": "https://github.com/thechurchofagi/trinity-accord",
+  "workflow_run_id": 33140234339,
+  "workflow_head_sha": "21e56651181bacb3c9e628d567e8bbb7cadbe3c8",
+  "receipt_artifact_id": 9673680873,
+  "save_request_id": 2456057,
+  "save_request_status": "accepted",
+  "save_task_status": "succeeded",
+  "visit_status": "full",
+  "visit_type": "git",
+  "visit_date": "2026-08-28T03:54:15.693000+00:00",
+  "snapshot_swhid": "swh:1:snp:1ef75d896f698c0fc8fb10e5306ee3d8567a7bab",
+  "snapshot_url": "https://archive.softwareheritage.org/api/1/snapshot/1ef75d896f698c0fc8fb10e5306ee3d8567a7bab/",
+  "request_url": "https://archive.softwareheritage.org/api/1/origin/save/2456057/",
+  "note": "Immutable archival receipt for the successful full Software Heritage visit triggered from the recorded workflow head. This SWHID is a source-preservation identifier and does not create or modify Trinity Accord canonical authority."
+}

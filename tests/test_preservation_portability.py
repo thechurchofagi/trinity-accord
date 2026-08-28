@@ -84,17 +84,68 @@ def test_dependency_capsule_verifier_detects_tamper(tmp_path):
         deps.verify(tmp_path / "capsule")
 
 
-def test_software_heritage_success_requires_snapshot_swhid():
+def test_software_heritage_success_requires_full_visit_and_snapshot_swhid():
     value = {
         "origin_url": swh.DEFAULT_ORIGIN,
         "save_request_status": "accepted",
         "save_task_status": "succeeded",
+        "visit_status": "full",
         "snapshot_swhid": "swh:1:snp:" + "a" * 40,
     }
     swh.validate(value, swh.DEFAULT_ORIGIN)
+
     value["snapshot_swhid"] = None
     with pytest.raises(SystemExit, match="snapshot SWHID"):
         swh.validate(value, swh.DEFAULT_ORIGIN)
+
+    value["snapshot_swhid"] = "swh:1:snp:" + "a" * 40
+    value["visit_status"] = "partial"
+    with pytest.raises(SystemExit, match="full archival visit"):
+        swh.validate(value, swh.DEFAULT_ORIGIN)
+
+
+def test_software_heritage_pending_or_failed_result_is_fail_closed():
+    assert (
+        swh.result_exit_code(
+            {
+                "save_request_status": "accepted",
+                "save_task_status": "pending",
+            }
+        )
+        == 4
+    )
+    assert (
+        swh.result_exit_code(
+            {
+                "save_request_status": "accepted",
+                "save_task_status": "failed",
+            }
+        )
+        == 3
+    )
+    assert (
+        swh.result_exit_code(
+            {
+                "save_request_status": "accepted",
+                "save_task_status": "succeeded",
+            }
+        )
+        == 0
+    )
+
+
+def test_committed_software_heritage_state_is_a_full_immutable_snapshot():
+    value = json.loads(
+        (ROOT / "preservation/software-heritage-state.json").read_text(encoding="utf-8")
+    )
+    assert value["schema"] == "trinity-accord-software-heritage-state-v1"
+    assert value["authority_effect"] == "none"
+    assert value["origin_url"] == swh.DEFAULT_ORIGIN
+    assert value["save_task_status"] == "succeeded"
+    assert value["visit_status"] == "full"
+    assert value["snapshot_swhid"].startswith("swh:1:snp:")
+    assert len(value["snapshot_swhid"].removeprefix("swh:1:snp:")) == 40
+    assert len(value["workflow_head_sha"]) == 40
 
 
 def test_portability_workflow_never_runs_external_save_on_pull_request():
