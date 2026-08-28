@@ -104,7 +104,56 @@ jobs:
           echo "confirmation_tag=chronicle-sidechain-ots-bitcoin-v2-$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
           echo "[SOURCE BOUND] tag=$SOURCE_TAG sha=$SOURCE_SHA"
 
+      - name: Reverify terminal Bitcoin confirmation if already published
+        id: terminal_confirmation
+        run: |
+          set -euo pipefail
+          set -a
+          . ots-closure/source.env
+          set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          SOURCE_SHA="$(git rev-list -n 1 "$SOURCE_TAG")"
+          CONFIRMATION_TAG="chronicle-sidechain-ots-bitcoin-v2-${SOURCE_SHORT}"
+          export SOURCE_SHA CONFIRMATION_TAG
+          if ! gh release view "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "closed=false" >> "$GITHUB_OUTPUT"
+            echo "[OTS CONFIRMATION ABSENT] closure work remains"
+            exit 0
+          fi
+          root="$RUNNER_TEMP/existing-ots-confirmation"
+          rm -rf "$root"
+          mkdir -p "$root"
+          gh release download "$CONFIRMATION_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root"
+          if [ -s "$root/RELEASE-ASSETS-SHA256.txt" ]; then
+            (cd "$root" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+          fi
+          if [ -s "$root/CLOSURE-SHA256SUMS" ]; then
+            (cd "$root" && sha256sum -c CLOSURE-SHA256SUMS)
+          fi
+          EXISTING_ROOT="$root" python3 - <<'PYVERIFY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ['EXISTING_ROOT'])
+          candidates = [root / 'OTS-STRICT-BITCOIN-VERIFICATION.json', root / 'OTS-CLOSURE.json']
+          reports = [p for p in candidates if p.is_file() and p.stat().st_size > 0]
+          if not reports:
+              raise SystemExit('published confirmation has no recognized Bitcoin verification report')
+          report = json.loads(reports[0].read_text())
+          checks = {
+              'bitcoin_verified': report.get('bitcoin_verified') is True,
+              'source_sha': report.get('source_commit_sha') == os.environ['SOURCE_SHA'],
+              'confirmation_tag': report.get('confirmation_release_tag') == os.environ['CONFIRMATION_TAG'],
+          }
+          if not all(checks.values()):
+              raise SystemExit(f'published Bitcoin confirmation failed terminal checks: {checks}')
+          print(f'[TERMINAL OTS CONFIRMATION REVERIFIED] report={reports[0].name} checks={checks}')
+          PYVERIFY
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          target="${run_url}#trinity-ots?state=already_verified&run=${GITHUB_RUN_ID}"
+          gh api --method POST -H "Accept: application/vnd.github+json" "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=success -f context="$STATUS_CONTEXT" -f description="existing OTS Bitcoin confirmation reverified" -f target_url="$target" >/dev/null
+          echo "closed=true" >> "$GITHUB_OUTPUT"
+
       - name: Ensure exact OTS submission exists
+        if: steps.terminal_confirmation.outputs.closed != 'true'
         env:
           SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
           SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
@@ -179,6 +228,7 @@ jobs:
           fi
 
       - name: Upgrade and strictly verify Bitcoin attestation
+        if: steps.terminal_confirmation.outputs.closed != 'true'
         env:
           SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
           SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
