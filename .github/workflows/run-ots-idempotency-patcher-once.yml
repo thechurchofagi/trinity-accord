@@ -31,5 +31,6 @@ jobs:
             .github/workflows/chronicle-sidechain-ots-anchor.yml
             .github/workflows/chronicle-sidechain-ots-bitcoin-closure.yml
             /tmp/ots-idempotency.patch
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 3
