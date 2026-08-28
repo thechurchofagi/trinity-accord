@@ -15,10 +15,10 @@ import argparse
 import base64
 import hashlib
 import json
-import os
 import shutil
 import subprocess
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -33,6 +33,8 @@ DEFAULT_LOCKS = (
     ),
 )
 ALLOWED_NPM_PREFIX = "https://registry.npmjs.org/"
+ALLOWED_PYPI_FILE_PREFIX = "https://files.pythonhosted.org/"
+PYPI_API_BASE = "https://pypi.org/pypi"
 
 
 def sha256_file(path: Path) -> str:
@@ -55,22 +57,18 @@ def run(command: list[str], *, cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=cwd, check=True)
 
 
-def requirement_lines(path: Path) -> list[str]:
-    result: list[str] = []
-    for raw in path.read_text(encoding="utf-8").splitlines():
-        line = raw.split("#", 1)[0].strip()
-        if line:
-            result.append(line)
-    if not result:
-        raise SystemExit(f"requirements file is empty: {path}")
-    return result
-
-
 def safe_name(value: str) -> str:
     path = PurePosixPath(value)
-    if path.is_absolute() or ".." in path.parts or "\x00" in value:
+    if not value or path.is_absolute() or ".." in path.parts or "\x00" in value:
         raise SystemExit(f"unsafe path: {value!r}")
     return str(path)
+
+
+def safe_basename(value: str) -> str:
+    name = PurePosixPath(value).name
+    if not name or name in {".", ".."} or "\x00" in name:
+        raise SystemExit(f"unsafe filename: {value!r}")
+    return name
 
 
 def npm_tarball_entries(lock_path: Path) -> list[dict[str, str]]:
@@ -135,7 +133,83 @@ def download(url: str) -> bytes:
         return response.read()
 
 
-def copy_lock_inputs(root: Path, output: Path, label: str, package_json: str, lock_json: str) -> tuple[Path, Path]:
+def download_json(url: str) -> Any:
+    return json.loads(download(url).decode("utf-8"))
+
+
+def resolved_python_distributions(report: dict[str, Any]) -> list[dict[str, str]]:
+    resolved: dict[tuple[str, str], dict[str, str]] = {}
+    for item in report.get("install", []):
+        metadata = item.get("metadata") if isinstance(item, dict) else None
+        if not isinstance(metadata, dict):
+            continue
+        name = metadata.get("name")
+        version = metadata.get("version")
+        if isinstance(name, str) and name and isinstance(version, str) and version:
+            key = (name.casefold(), version)
+            resolved[key] = {"name": name, "version": version}
+    return [resolved[key] for key in sorted(resolved)]
+
+
+def preserve_pypi_sdist(
+    distribution: dict[str, str], target_dir: Path, index: int
+) -> dict[str, Any]:
+    name = distribution["name"]
+    version = distribution["version"]
+    metadata_url = (
+        f"{PYPI_API_BASE}/{urllib.parse.quote(name, safe='')}/"
+        f"{urllib.parse.quote(version, safe='')}/json"
+    )
+    metadata = download_json(metadata_url)
+    urls = metadata.get("urls") if isinstance(metadata, dict) else None
+    if not isinstance(urls, list):
+        raise SystemExit(f"PyPI metadata has no release file list: {name}=={version}")
+    candidates = [
+        item
+        for item in urls
+        if isinstance(item, dict) and item.get("packagetype") == "sdist"
+    ]
+    if not candidates:
+        raise SystemExit(f"PyPI release has no source distribution: {name}=={version}")
+    candidates.sort(key=lambda item: str(item.get("filename") or item.get("url") or ""))
+    selected = candidates[0]
+    url = selected.get("url")
+    filename = selected.get("filename")
+    digests = selected.get("digests")
+    expected_sha256 = digests.get("sha256") if isinstance(digests, dict) else None
+    if not isinstance(url, str) or not url.startswith(ALLOWED_PYPI_FILE_PREFIX):
+        raise SystemExit(f"refusing non-PyPI sdist URL: {name}=={version}: {url}")
+    if not isinstance(filename, str) or not filename:
+        raise SystemExit(f"PyPI source distribution has no filename: {name}=={version}")
+    if not isinstance(expected_sha256, str) or len(expected_sha256) != 64:
+        raise SystemExit(f"PyPI source distribution lacks SHA-256: {name}=={version}")
+    raw = download(url)
+    observed_sha256 = hashlib.sha256(raw).hexdigest()
+    if observed_sha256 != expected_sha256.lower():
+        raise SystemExit(f"PyPI source distribution SHA-256 mismatch: {name}=={version}")
+    stored_name = f"{index:04d}-{safe_basename(filename)}"
+    target = target_dir / stored_name
+    target.write_bytes(raw)
+    return {
+        "name": name,
+        "version": version,
+        "metadata_url": metadata_url,
+        "source_url": url,
+        "original_filename": filename,
+        "file": f"python/sdists/{stored_name}",
+        "bytes": len(raw),
+        "sha256": observed_sha256,
+        "pypi_sha256_verified": True,
+    }
+
+
+def copy_lock_inputs(
+    root: Path,
+    output: Path,
+    label: str,
+    package_json: str,
+    lock_json: str,
+) -> tuple[Path, Path]:
     target = output / "node" / label
     target.mkdir(parents=True, exist_ok=True)
     src_package = root / package_json
@@ -164,7 +238,7 @@ def build(root: Path, output: Path, python: str) -> dict[str, Any]:
 
     python_dir = output / "python"
     wheels = python_dir / "wheels"
-    sdists = python_dir / "direct-sdists"
+    sdists = python_dir / "sdists"
     wheels.mkdir(parents=True)
     sdists.mkdir(parents=True)
     shutil.copy2(requirements, python_dir / "requirements-ci.txt")
@@ -185,10 +259,9 @@ def build(root: Path, output: Path, python: str) -> dict[str, Any]:
         cwd=root,
     )
 
-    # Ask pip to record the exact resolved graph, then preserve a source
-    # distribution for every resolved Python distribution. The wheelhouse is
-    # the immediately executable offline layer; the full sdist set is the
-    # longer-horizon portability layer.
+    # Ask pip to record the exact graph chosen for the current environment.
+    # Source releases are then fetched directly from PyPI's version metadata,
+    # avoiding execution of package build backends merely to obtain an sdist.
     resolution = python_dir / "pip-resolution.json"
     run(
         [
@@ -207,34 +280,13 @@ def build(root: Path, output: Path, python: str) -> dict[str, Any]:
         cwd=root,
     )
     report = json.loads(resolution.read_text(encoding="utf-8"))
-    resolved: list[str] = []
-    for item in report.get("install", []):
-        metadata = item.get("metadata") if isinstance(item, dict) else None
-        if not isinstance(metadata, dict):
-            continue
-        name = metadata.get("name")
-        version = metadata.get("version")
-        if isinstance(name, str) and name and isinstance(version, str) and version:
-            resolved.append(f"{name}=={version}")
-    resolved = sorted(set(resolved), key=str.lower)
+    resolved = resolved_python_distributions(report)
     if not resolved:
         raise SystemExit("pip resolution report did not contain any distributions")
-    for requirement in resolved:
-        run(
-            [
-                python,
-                "-m",
-                "pip",
-                "download",
-                "--disable-pip-version-check",
-                "--no-deps",
-                "--no-binary=:all:",
-                "--dest",
-                str(sdists),
-                requirement,
-            ],
-            cwd=root,
-        )
+    preserved_sdists = [
+        preserve_pypi_sdist(distribution, sdists, index)
+        for index, distribution in enumerate(resolved, start=1)
+    ]
 
     node_groups: list[dict[str, Any]] = []
     for label, package_json, lock_json in DEFAULT_LOCKS:
@@ -248,7 +300,7 @@ def build(root: Path, output: Path, python: str) -> dict[str, Any]:
         for index, entry in enumerate(entries, start=1):
             raw = download(entry["resolved"])
             sri_algorithm = verify_sri(raw, entry["integrity"])
-            basename = entry["resolved"].rsplit("/", 1)[-1] or f"package-{index}.tgz"
+            basename = safe_basename(entry["resolved"].rsplit("/", 1)[-1])
             filename = f"{index:04d}-{basename}"
             target = tarball_dir / filename
             target.write_bytes(raw)
@@ -289,9 +341,11 @@ was built. Install it with:
   python -m pip install --no-index --find-links python/wheels \
       -r python/requirements-ci.txt
 
-python/direct-sdists/ additionally preserves source distributions for every resolved Python distribution. It is a portability aid for future
-platforms, not a claim that arbitrary future ABIs can be rebuilt without any
-toolchain.
+python/sdists/ additionally preserves the official PyPI source distribution
+for every distribution in pip's resolved dependency graph. Each source archive
+is verified against the SHA-256 published by PyPI. This is a portability aid
+for future platforms, not a claim that arbitrary future ABIs can be rebuilt
+without a suitable compiler and language toolchain.
 
 Node.js
 -------
@@ -323,11 +377,13 @@ governance rule, or successor relation. It is a recovery/verification aid only.
         "authority_effect": "none",
         "python": {
             "requirements": "python/requirements-ci.txt",
+            "resolution_report": "python/pip-resolution.json",
             "wheelhouse": "python/wheels",
-            "direct_source_distributions": "python/direct-sdists",
+            "source_distributions": "python/sdists",
             "wheel_count": len(list(wheels.iterdir())),
             "resolved_distribution_count": len(resolved),
-            "sdist_count": len(list(sdists.iterdir())),
+            "sdist_count": len(preserved_sdists),
+            "sdists": preserved_sdists,
         },
         "node": node_groups,
         "payload_file_count": len(payloads),
