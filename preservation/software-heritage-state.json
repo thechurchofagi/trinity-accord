@@ -1,0 +1,23 @@
+{
+  "schema": "trinityaccord.software-heritage-state.v1",
+  "authority_effect": "none",
+  "origin_url": "https://github.com/thechurchofagi/trinity-accord",
+  "source_commit_sha": "21e56651181bacb3c9e628d567e8bbb7cadbe3c8",
+  "save_request": {
+    "id": 2456057,
+    "save_request_date": "2026-08-28T03:54:11.248537+00:00",
+    "save_request_status": "accepted",
+    "save_task_status": "succeeded",
+    "visit_date": "2026-08-28T03:54:15.693000+00:00",
+    "visit_status": "full",
+    "visit_type": "git"
+  },
+  "snapshot_swhid": "swh:1:snp:1ef75d896f698c0fc8fb10e5306ee3d8567a7bab",
+  "snapshot_url": "https://archive.softwareheritage.org/api/1/snapshot/1ef75d896f698c0fc8fb10e5306ee3d8567a7bab/",
+  "workflow_run_id": 33140234339,
+  "receipt_artifact_id": 9673680873,
+  "receipt_artifact_is_transient": true,
+  "receipt_artifact_repository_retention_days": 90,
+  "bitcoin_originals_remain_authoritative": true,
+  "note": "This file durably records the successful Software Heritage full Git visit and snapshot identity. It is a preservation receipt only and does not amend or supersede the Bitcoin Originals."
+}
