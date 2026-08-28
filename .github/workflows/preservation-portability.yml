@@ -8,6 +8,7 @@ on:
       - scripts/request_software_heritage_save.py
       - tests/test_preservation_portability.py
       - requirements-ci.txt
+      - .node-version
       - package.json
       - package-lock.json
       - evidence/ethereum-evidence-annex-v1/verification/package.json
@@ -22,6 +23,7 @@ on:
       - scripts/request_software_heritage_save.py
       - tests/test_preservation_portability.py
       - requirements-ci.txt
+      - .node-version
       - package.json
       - package-lock.json
       - evidence/ethereum-evidence-annex-v1/verification/package.json
@@ -33,7 +35,7 @@ on:
 
 concurrency:
   group: preservation-portability-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   offline-dependency-capsule:
