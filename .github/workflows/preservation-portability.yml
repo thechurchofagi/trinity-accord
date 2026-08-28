@@ -6,7 +6,9 @@ on:
       - .github/workflows/preservation-portability.yml
       - scripts/build_offline_dependency_capsule.py
       - scripts/request_software_heritage_save.py
+      - scripts/verify_offline_dependency_state.py
       - tests/test_preservation_portability.py
+      - preservation/offline-dependency-state.json
       - requirements-ci.txt
       - .node-version
       - package.json
@@ -21,7 +23,9 @@ on:
       - .github/workflows/preservation-portability.yml
       - scripts/build_offline_dependency_capsule.py
       - scripts/request_software_heritage_save.py
+      - scripts/verify_offline_dependency_state.py
       - tests/test_preservation_portability.py
+      - preservation/offline-dependency-state.json
       - requirements-ci.txt
       - .node-version
       - package.json
@@ -119,6 +123,18 @@ jobs:
             -czf offline-dependency-capsule.tar.gz offline-dependency-capsule
           sha256sum offline-dependency-capsule.tar.gz \
             > offline-dependency-capsule.tar.gz.sha256
+
+      - name: Verify committed dependency identity state
+        run: |
+          set -euo pipefail
+          if [[ ! -f preservation/offline-dependency-state.json ]]; then
+            echo "No committed dependency identity state yet; bootstrap verification only."
+            exit 0
+          fi
+          python3 scripts/verify_offline_dependency_state.py \
+            --state preservation/offline-dependency-state.json \
+            --capsule-dir "$RUNNER_TEMP/offline-dependency-capsule" \
+            --archive "$RUNNER_TEMP/offline-dependency-capsule.tar.gz"
 
       - name: Upload verified offline dependency capsule
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
