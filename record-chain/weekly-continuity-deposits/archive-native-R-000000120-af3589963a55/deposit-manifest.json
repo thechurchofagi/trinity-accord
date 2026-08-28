@@ -1,0 +1,59 @@
+{
+  "schema": "trinityaccord.weekly-continuity-deposit.v1",
+  "archive_id": "archive-native-R-000000120-af3589963a55",
+  "source_archive_manifest": "record-chain/arweave-archives/archive-native-R-000000120-af3589963a55/manifest.json",
+  "source_payload": "record-chain/arweave-archives/archive-native-R-000000120-af3589963a55/payload.json",
+  "files": [
+    {
+      "name": "weekly-continuity-bundle.json",
+      "bytes": 1433770,
+      "sha256": "4abe7ec7eb62bf369a901ed75a9b0f247eac435715118f1584d97dd2d3daad7d"
+    },
+    {
+      "name": "archive-manifest.json",
+      "bytes": 40347,
+      "sha256": "895c53dc98976e5ccca36dc54de454ab9f3342158847344e869920d9af34a66e"
+    },
+    {
+      "name": "zenodo-metadata.json",
+      "bytes": 1738,
+      "sha256": "37177cbb0ec91b2306588ba902bb6ff9cbc3157e24d76029ed86ebb40d4a86b8"
+    },
+    {
+      "name": "README.txt",
+      "bytes": 1130,
+      "sha256": "4123a84045b3b2628ae0b879bdc3e715b3292f0d64f783fcc4d1ab9cc4cc7159"
+    },
+    {
+      "name": "checksums.sha256",
+      "bytes": 348,
+      "sha256": "b3e7d1b8740252c1035088782937addfb55bb2aa0b6c66c2a404a35fcb32d04d"
+    }
+  ],
+  "published_file_names": [
+    "weekly-continuity-bundle.json",
+    "archive-manifest.json",
+    "deposit-manifest.json",
+    "checksums.sha256",
+    "README.txt",
+    "zenodo-metadata.json"
+  ],
+  "rights_boundary": {
+    "schema": "trinityaccord.weekly-continuity-rights.v2",
+    "license_identifier": "other-closed",
+    "publicly_readable_for_preservation_and_research": true,
+    "deposit_grants_no_new_reuse_rights": true,
+    "embedded_record_chain_entries_retain_their_respective_rights": true,
+    "third_party_rights_are_not_transferred": true,
+    "publisher_grants_no_rights_it_does_not_possess": true,
+    "public_availability_is_not_ownership": true
+  },
+  "boundary": {
+    "deposit_is_mirror_only": true,
+    "deposit_is_not_authority": true,
+    "deposit_is_not_attestation": true,
+    "deposit_is_not_amendment": true,
+    "deposit_is_not_successor_reception": true,
+    "bitcoin_originals_prevail": true
+  }
+}
