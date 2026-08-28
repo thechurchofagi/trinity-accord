@@ -6,7 +6,7 @@ on:
     paths: [.github/workflows/run-ots-idempotency-patcher-once.yml]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   patch:
@@ -16,14 +16,20 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           ref: agent/ots-idempotency-retire-spent-writers-20260828
-      - name: Apply exact patch and self-clean
+      - name: Generate exact candidate workflows
         run: |
           set -euo pipefail
           python3 scripts/patch_ots_idempotency_once.py
           git diff --check
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm scripts/patch_ots_idempotency_once.py .github/workflows/run-ots-idempotency-patcher-once.yml
-          git add .github/workflows/chronicle-sidechain-ots-anchor.yml .github/workflows/chronicle-sidechain-ots-bitcoin-closure.yml scripts/patch_ots_idempotency_once.py .github/workflows/run-ots-idempotency-patcher-once.yml
-          git commit -m "fix: make sidechain OTS lifecycle idempotent"
-          git push origin HEAD:agent/ots-idempotency-retire-spent-writers-20260828
+          git diff -- .github/workflows/chronicle-sidechain-ots-anchor.yml .github/workflows/chronicle-sidechain-ots-bitcoin-closure.yml > /tmp/ots-idempotency.patch
+          test -s /tmp/ots-idempotency.patch
+      - name: Upload exact candidates
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ots-idempotency-candidates
+          path: |
+            .github/workflows/chronicle-sidechain-ots-anchor.yml
+            .github/workflows/chronicle-sidechain-ots-bitcoin-closure.yml
+            /tmp/ots-idempotency.patch
+          if-no-files-found: error
+          retention-days: 3
