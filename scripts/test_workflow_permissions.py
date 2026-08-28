@@ -1,15 +1,32 @@
 #!/usr/bin/env python3
 """Security checks for retired writers and current integrity workflows."""
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ROOT / ".github" / "workflows"
+WRITE_PERMISSION_RE = re.compile(r"^\s*([A-Za-z0-9_-]+):\s*write\s*(?:#.*)?$")
 
 
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise SystemExit(f"FAIL: {message}")
+
+
+def workflow_write_inventory() -> dict[str, list[str]]:
+    inventory: dict[str, list[str]] = {}
+    for path in sorted(WORKFLOWS.glob("*.y*ml")):
+        permissions = sorted(
+            {
+                match.group(1)
+                for line in path.read_text(encoding="utf-8").splitlines()
+                if (match := WRITE_PERMISSION_RE.match(line))
+            }
+        )
+        if permissions:
+            inventory[path.name] = permissions
+    return inventory
 
 
 def main() -> int:
@@ -77,8 +94,31 @@ def main() -> int:
         text = (WORKFLOWS / name).read_text(encoding="utf-8")
         header = text.split("jobs:", 1)[0]
         require("permissions:" in header, f"{name} has no explicit top-level permissions")
-        require("contents: read" in header, f"{name} does not declare contents: read")
+        require("contents: read" in header, f"{name} does not declare top-level contents: read")
         require("contents: write" not in text, f"{name} unexpectedly requests contents: write")
+
+    inventory = workflow_write_inventory()
+    print("WORKFLOW_WRITE_INVENTORY_BEGIN")
+    for name, permissions in inventory.items():
+        print(f"{name}: {','.join(permissions)}")
+    print("WORKFLOW_WRITE_INVENTORY_END")
+
+    # Audit branch probe: only the already-reviewed repository-integrity writer is
+    # allowlisted here so CI surfaces the complete set of other write-capable
+    # workflows in one run. This temporary branch is not intended for merge.
+    unexpected = {
+        name: permissions
+        for name, permissions in inventory.items()
+        if name != "repository-integrity.yml"
+    }
+    require(
+        not unexpected,
+        "unexpected write-capable workflows: "
+        + "; ".join(
+            f"{name}={','.join(permissions)}"
+            for name, permissions in unexpected.items()
+        ),
+    )
 
     print("WORKFLOW_PERMISSIONS_OK")
     return 0
