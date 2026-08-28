@@ -125,6 +125,26 @@ jobs:
           sha256sum offline-dependency-capsule.tar.gz \
             > offline-dependency-capsule.tar.gz.sha256
 
+      - name: Generate candidate dependency identity state
+        run: |
+          set -euo pipefail
+          python3 scripts/verify_offline_dependency_state.py \
+            --write-state "$RUNNER_TEMP/offline-dependency-state-candidate.json" \
+            --capsule-dir "$RUNNER_TEMP/offline-dependency-capsule" \
+            --archive "$RUNNER_TEMP/offline-dependency-capsule.tar.gz"
+          cat "$RUNNER_TEMP/offline-dependency-state-candidate.json"
+
+      - name: Upload candidate dependency identity
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: offline-dependency-state-candidate
+          path: |
+            ${{ runner.temp }}/offline-dependency-state-candidate.json
+            ${{ runner.temp }}/offline-dependency-capsule.tar.gz.sha256
+            ${{ runner.temp }}/offline-dependency-capsule/manifest.json
+          retention-days: 365
+          if-no-files-found: error
+
       - name: Verify committed dependency identity state
         run: |
           set -euo pipefail
