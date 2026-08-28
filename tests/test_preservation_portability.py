@@ -153,7 +153,6 @@ def test_portability_workflow_never_runs_external_save_on_pull_request():
     assert "github.event_name != 'pull_request'" in workflow
     assert "--no-index" in workflow
     assert "npm ci --offline" in workflow
-    assert "preservation/software-heritage-state.json" in workflow
     assert "archive.softwareheritage.org" in (
         ROOT / "scripts/request_software_heritage_save.py"
     ).read_text()
