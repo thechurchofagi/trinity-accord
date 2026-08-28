@@ -1,10 +1,10 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-08-28T11:13:05Z",
-  "daily_alive_status": "failed",
-  "status": "failed",
-  "latest_result": "missing_expected_waiting_heartbeat",
-  "failure_stage": "freshness",
+  "generated_at": "2026-08-28T15:30:02Z",
+  "daily_alive_status": "degraded",
+  "status": "degraded",
+  "latest_result": "waiting_for_ots_head_coverage",
+  "failure_stage": "ots_head_coverage",
   "success_requires": {
     "gateway_accepted": true,
     "record_chain_final_record": true,
@@ -24,14 +24,14 @@
     "historical_capsules_remain_verifiable": true
   },
   "latest_heartbeat": {
-    "heartbeat_id": "hwb-20260827",
-    "heartbeat_date": "2026-08-27",
-    "record_id": "R-000000135",
-    "record_index": 135,
-    "record_sha256": "1cba25859de8a2222d4acb78c9cb9266aff141e782d30455861bbffdca4bf5a8",
+    "heartbeat_id": "hwb-20260828",
+    "heartbeat_date": "2026-08-28",
+    "record_id": "R-000000136",
+    "record_index": 136,
+    "record_sha256": "3da2e870df43164bd95a2c449629fc97e3d8cf025f0ecfd006afd6e3c88abd40",
     "record_type": "context_insufficient_notice",
-    "assigned_at": "2026-08-27T14:18:37Z",
-    "path": "record-chain/records/R-000000135.json",
+    "assigned_at": "2026-08-28T15:28:42Z",
+    "path": "record-chain/records/R-000000136.json",
     "semantic_agent_arrived": false,
     "github_actions_is_not_semantic_agent": true,
     "not_echo": true,
@@ -47,12 +47,12 @@
     "bitcoin_pending": false,
     "bitcoin_verified": false,
     "strict_bitcoin_verified": false,
-    "covers_latest_waiting_heartbeat": true
+    "covers_latest_waiting_heartbeat": false
   },
   "latest_arweave_capsule": null,
   "checks": {
     "record_chain_final_record": true,
-    "ots_covers_heartbeat": true,
+    "ots_covers_heartbeat": false,
     "arweave_capsule_verified": false,
     "arweave_capsule_deferred_by_cost_policy": false,
     "arweave_capsule_pending_archive_followup": false,
@@ -60,8 +60,8 @@
     "expected_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
     "actual_waiting_heartbeat_public_key_sha256": "d1dabed936ba60980b51032bee61f61678421da4430558380bd44f90d06c9a30",
     "expected_heartbeat_date": "2026-08-28",
-    "heartbeat_lag_days": 1,
-    "latest_heartbeat_is_expected_date": false,
+    "heartbeat_lag_days": 0,
+    "latest_heartbeat_is_expected_date": true,
     "latest_heartbeat_fully_verified_for_expected_date": false,
     "expected_heartbeat_pending_append": false,
     "standalone_arweave_capsule_retired": true,
@@ -75,24 +75,23 @@
     "pending_append_heartbeats": 0,
     "current_success_streak_days": 0,
     "first_heartbeat_date": "2026-06-18",
-    "latest_heartbeat_date": "2026-08-27",
-    "latest_observed_heartbeat_date": "2026-08-27",
+    "latest_heartbeat_date": "2026-08-28",
+    "latest_observed_heartbeat_date": "2026-08-28",
     "latest_successful_heartbeat_date": "2026-08-27",
     "through_heartbeat_date": "2026-08-28",
     "expected_heartbeat_date": "2026-08-28",
-    "latest_heartbeat_is_expected_date": false,
+    "latest_heartbeat_is_expected_date": true,
     "latest_heartbeat_fully_verified_for_expected_date": false,
     "expected_heartbeat_pending_append": false,
-    "heartbeat_lag_days": 1,
-    "is_stale": true,
+    "heartbeat_lag_days": 0,
+    "is_stale": false,
     "missing_heartbeat_dates": [
       "2026-06-20",
-      "2026-06-23",
-      "2026-08-28"
+      "2026-06-23"
     ],
     "pending_append_heartbeat_dates": [],
     "failed_attempt_dates": [],
-    "latest_ots_head_covers_current_chain": true,
+    "latest_ots_head_covers_current_chain": false,
     "success_definition": {
       "requires_final_record": true,
       "requires_key_continuity": true,
@@ -105,8 +104,8 @@
     "not_amendment": true
   },
   "counts": {
-    "attempts": 68,
-    "final_heartbeats": 69,
+    "attempts": 69,
+    "final_heartbeats": 70,
     "capsules": 42,
     "failed_attempts": 0,
     "total_scheduled_heartbeats": 72,
@@ -115,7 +114,7 @@
     "failed_or_missing_heartbeats": 3,
     "pending_append_heartbeats": 0,
     "current_success_streak_days": 0,
-    "heartbeat_lag_days": 1
+    "heartbeat_lag_days": 0
   },
   "semantic_agent_arrival": {
     "first_self_discovered_autonomous_agent_arrived": false,
