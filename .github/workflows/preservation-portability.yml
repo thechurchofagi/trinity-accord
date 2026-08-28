@@ -1,0 +1,187 @@
+name: Preservation Portability
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/preservation-portability.yml
+      - scripts/build_offline_dependency_capsule.py
+      - scripts/request_software_heritage_save.py
+      - tests/test_preservation_portability.py
+      - requirements-ci.txt
+      - package.json
+      - package-lock.json
+      - evidence/ethereum-evidence-annex-v1/verification/package.json
+      - evidence/ethereum-evidence-annex-v1/verification/package-lock.json
+      - preservation/PRESERVATION-PORTABILITY.md
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/preservation-portability.yml
+      - scripts/build_offline_dependency_capsule.py
+      - scripts/request_software_heritage_save.py
+      - tests/test_preservation_portability.py
+      - requirements-ci.txt
+      - package.json
+      - package-lock.json
+      - evidence/ethereum-evidence-annex-v1/verification/package.json
+      - evidence/ethereum-evidence-annex-v1/verification/package-lock.json
+      - preservation/PRESERVATION-PORTABILITY.md
+  schedule:
+    - cron: "47 10 1 1,4,7,10 *"
+  workflow_dispatch:
+
+concurrency:
+  group: preservation-portability-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-dependency-capsule:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22.19.0"
+
+      - name: Build dependency capsule
+        run: |
+          set -euo pipefail
+          python3 scripts/build_offline_dependency_capsule.py \
+            --repository-root . \
+            --output-dir "$RUNNER_TEMP/offline-dependency-capsule"
+
+      - name: Reverify dependency capsule byte identities
+        run: |
+          set -euo pipefail
+          python3 scripts/build_offline_dependency_capsule.py \
+            --output-dir "$RUNNER_TEMP/offline-dependency-capsule" \
+            --verify-only
+
+      - name: Prove Python installation with package indexes disabled
+        run: |
+          set -euo pipefail
+          python3 -m venv "$RUNNER_TEMP/offline-python"
+          "$RUNNER_TEMP/offline-python/bin/python" -m pip install \
+            --disable-pip-version-check \
+            --no-index \
+            --find-links "$RUNNER_TEMP/offline-dependency-capsule/python/wheels" \
+            -r "$RUNNER_TEMP/offline-dependency-capsule/python/requirements-ci.txt"
+          "$RUNNER_TEMP/offline-python/bin/python" scripts/audit_recovery_readiness.py
+
+      - name: Prove root Node installation from preserved tarballs only
+        run: |
+          set -euo pipefail
+          cache="$RUNNER_TEMP/npm-cache-root"
+          while IFS= read -r -d '' tarball; do
+            npm cache add --cache "$cache" "$tarball"
+          done < <(find "$RUNNER_TEMP/offline-dependency-capsule/node/root/packages" \
+            -type f -name '*.tgz' -print0 | sort -z)
+          rm -rf node_modules
+          npm ci --offline --ignore-scripts --no-audit --no-fund --cache "$cache"
+          npm run test:arweave-cost-gate
+          npm run test:arweave-readback
+
+      - name: Prove Ethereum verifier Node installation from preserved tarballs only
+        run: |
+          set -euo pipefail
+          cache="$RUNNER_TEMP/npm-cache-ethereum"
+          while IFS= read -r -d '' tarball; do
+            npm cache add --cache "$cache" "$tarball"
+          done < <(find "$RUNNER_TEMP/offline-dependency-capsule/node/ethereum-verification/packages" \
+            -type f -name '*.tgz' -print0 | sort -z)
+          cd evidence/ethereum-evidence-annex-v1/verification
+          rm -rf node_modules
+          npm ci --offline --ignore-scripts --no-audit --no-fund --cache "$cache"
+          node --input-type=module -e \
+            "await import('@chainsafe/persistent-merkle-tree'); await import('@lodestar/types');"
+
+      - name: Create deterministic transport archive
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
+            -czf offline-dependency-capsule.tar.gz offline-dependency-capsule
+          sha256sum offline-dependency-capsule.tar.gz \
+            > offline-dependency-capsule.tar.gz.sha256
+
+      - name: Upload verified offline dependency capsule
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: offline-dependency-capsule
+          path: |
+            ${{ runner.temp }}/offline-dependency-capsule/
+            ${{ runner.temp }}/offline-dependency-capsule.tar.gz
+            ${{ runner.temp }}/offline-dependency-capsule.tar.gz.sha256
+          retention-days: 365
+          if-no-files-found: error
+
+  software-heritage:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout preservation client
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Request Software Heritage Save Code Now visit
+        run: |
+          set -euo pipefail
+          python3 scripts/request_software_heritage_save.py \
+            --origin https://github.com/thechurchofagi/trinity-accord \
+            --output "$RUNNER_TEMP/software-heritage-save.json" \
+            --timeout-seconds 600 \
+            --poll-seconds 20
+
+      - name: Summarize Software Heritage result
+        if: always()
+        run: |
+          set -euo pipefail
+          if [[ ! -f "$RUNNER_TEMP/software-heritage-save.json" ]]; then
+            echo "Software Heritage did not return a durable response." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          value = json.loads((Path(os.environ["RUNNER_TEMP"]) / "software-heritage-save.json").read_text())
+          summary = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          with summary.open("a", encoding="utf-8") as handle:
+              handle.write("## Software Heritage preservation\n\n")
+              handle.write(f"- request id: `{value.get('id')}`\n")
+              handle.write(f"- request status: `{value.get('save_request_status')}`\n")
+              handle.write(f"- task status: `{value.get('save_task_status')}`\n")
+              handle.write(f"- visit status: `{value.get('visit_status')}`\n")
+              handle.write(f"- snapshot SWHID: `{value.get('snapshot_swhid')}`\n")
+          PY
+
+      - name: Upload Software Heritage archival receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: software-heritage-save-receipt
+          path: ${{ runner.temp }}/software-heritage-save.json
+          retention-days: 365
+          if-no-files-found: warn
