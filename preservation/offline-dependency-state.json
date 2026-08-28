@@ -1,11 +1,11 @@
 {
-  "artifact_id": 9673234514,
+  "artifact_id": 9681390576,
   "authority_effect": "none",
   "capsule_archive": {
-    "bytes": 42626242,
-    "manifest_sha256": "59629ebd756ab4b00d22dc440bd17272dad5d18458c2149fe9fa437a730e0262",
+    "bytes": 43033187,
+    "manifest_sha256": "e4ab7739aa327eab50f923a0ab8bf6e594a25e18f05e0dc86b10461d6936f9f6",
     "payload_file_count": 130,
-    "sha256": "eda2d54742e549798e829688a99286375c3bab1ac8e40d2feccb30e8c7b9a2fa"
+    "sha256": "64ad6caa80435f388aa1ca4c64a05d68a85291b300c524306b6c52ddde799a79"
   },
   "node": {
     "ethereum-verification": [
@@ -51,7 +51,7 @@
       "attrs==26.1.0|attrs-26.1.0.tar.gz|sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32",
       "certifi==2026.7.22|certifi-2026.7.22.tar.gz|sha256:741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55",
       "cffi==2.1.1|cffi-2.1.1.tar.gz|sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be",
-      "cryptography==46.0.7|cryptography-46.0.7.tar.gz|sha256:e4cfd68c5f3e0bfdad0d38e023239b96a2fe84146481852dffbcca442c245aa5",
+      "cryptography==50.0.1|cryptography-50.0.1.tar.gz|sha256:5dd9bda1c12b4162f6ff568eeb5e0ff956c28d14406e875cfe8a63a2d414ff20",
       "cytoolz==1.1.0|cytoolz-1.1.0.tar.gz|sha256:13a7bf254c3c0d28b12e2290b82aed0f0977a4c2a2bf84854fcdc7796a29f3b0",
       "eth-hash==0.7.1|eth_hash-0.7.1.tar.gz|sha256:d2411a403a0b0a62e8247b4117932d900ffb4c8c64b15f92620547ca5ce46be5",
       "eth-typing==6.0.0|eth_typing-6.0.0.tar.gz|sha256:315dd460dc0b71c15a6cd51e3c0b70d237eec8771beb844144f3a1fb4adb2392",
@@ -59,7 +59,7 @@
       "fastapi==0.115.0|fastapi-0.115.0.tar.gz|sha256:f93b4ca3529a8ebc6fc3fcf710e5efa8de3df9b41570958abf1d97d843138004",
       "gitdb==4.0.12|gitdb-4.0.12.tar.gz|sha256:5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571",
       "GitPython==3.1.60|gitpython-3.1.60.tar.gz|sha256:e936431879fa85581b4311fa63492ea52251909e2d655b6529c704c904ddcc24",
-      "h11==0.16.0|h11-0.16.0.tar.gz|sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1",
+      "h11==0.16.0|h11-0.16.0.tar.gz|sha256:4e35b956cf45792e4caa5885e69a00bdbc6ffafbfa020300e549b208ee5ff1",
       "hexbytes==2.0.0|hexbytes-2.0.0.tar.gz|sha256:01312fcd5c57e8a8d2d7dd3274dcf84ea50422aff2abcc2d9fd89ad6a32498e5",
       "httpcore==1.0.9|httpcore-1.0.9.tar.gz|sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8",
       "httpx==0.27.0|httpx-0.27.0.tar.gz|sha256:a0cb88a46f32dc874e04ee956e4c2764aba2aa228f650b06788ba6bda2962ab5",
@@ -81,7 +81,7 @@
       "pytest-asyncio==0.25.3|pytest_asyncio-0.25.3.tar.gz|sha256:fc1da2cf9f125ada7e710b4ddad05518d4cee187ae9412e9ac9271003497f07a",
       "python-bitcoinlib==0.12.2|python-bitcoinlib-0.12.2.tar.gz|sha256:c65ab61427c77c38d397bfc431f71d86fd355b453a536496ec3fcb41bd10087d",
       "python-dotenv==1.0.1|python-dotenv-1.0.1.tar.gz|sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca",
-      "PyYAML==6.0.1|PyYAML-6.0.1.tar.gz|sha256:bfdf460b1736c775f2ba9f6a92bca30bc2095067b8a9d77876d1fad6cc3b4a43",
+      "PyYAML==6.0.1|PyYAML-6.0.1.tar.gz|sha256:bfdf4601736c775f2ba9f6a92bca30bc2095067b8a9d77876d1fad6cc3b4a43",
       "referencing==0.35.1|referencing-0.35.1.tar.gz|sha256:25b42124a6c8b632a425174f24087783efb348a6f1e0008e63cd4466fedf703c",
       "rlp==4.1.0|rlp-4.1.0.tar.gz|sha256:be07564270a96f3e225e2c107db263de96b5bc1f27722d2855bd3459a08e95a9",
       "rpds-py==0.20.0|rpds_py-0.20.0.tar.gz|sha256:d72a210824facfdaf8768cf2d7ca25a042c30320b3020de2fa04640920d4e121",
@@ -101,7 +101,7 @@
     "institutional_binary_publication_requires_separate_rights_approval": true
   },
   "schema": "trinityaccord.offline-dependency-state.v1",
-  "source_git_commit_sha": "5f4378dc2998d5eaba8a86e30ad5cbab91d8e3b3",
+  "source_git_commit_sha": "067bdeda4f60dcdb88e570909cad979bf42ed802",
   "source_repository": "https://github.com/thechurchofagi/trinity-accord",
-  "workflow_run_id": 33139156227
+  "workflow_run_id": 33160403305
 }
