@@ -1,0 +1,89 @@
+{
+  "concept_doi": "10.5281/zenodo.22159954",
+  "deposition_id": 22159955,
+  "doi": "10.5281/zenodo.22159955",
+  "prior_prepublish_full_readback_run_id": 33246735026,
+  "public_record_api": "https://zenodo.org/api/records/22159955",
+  "public_record_url": "https://zenodo.org/records/22159955",
+  "record_id": 22159955,
+  "remote_full_readback_sha256_verified": true,
+  "schema": "trinity-accord/second-star-moon-zenodo-state/v1",
+  "source_inventory": {
+    "ARCHIVE-README.md": {
+      "bytes": 2280,
+      "md5": "1c668439ef8fcf403331029ae3422ca3",
+      "sha256": "12ff4165b96bfa61b357c8f4e5c541373ecfba0a95bec9d1bd96e320c48ac102"
+    },
+    "ATTACK-COST-BENCHMARK.json": {
+      "bytes": 1061,
+      "md5": "f2017a750185767710414a2afd505fe5",
+      "sha256": "c05b6a5ad6a345ae9d93c07b71102e576e19b2710006b88eab3d953ef8cee5de"
+    },
+    "DECRYPTION-VERIFICATION.json": {
+      "bytes": 248,
+      "md5": "255b5f8e01f55360fa57088e5b8ff289",
+      "sha256": "7c23ea8802d0a066e00cb2872f8b71e9e43d356af9385c7e5c5358f3df48f605"
+    },
+    "ENCRYPTION-REPORT.json": {
+      "bytes": 1774,
+      "md5": "88e4e8ac08f28a171d85e88cbf49094a",
+      "sha256": "68eaa9ed0115122a34f9faec856a99413943c4ab41e8fc6d116d3e19083ba72e"
+    },
+    "FORMAT-AND-RECOVERY.md": {
+      "bytes": 1608,
+      "md5": "4e23d9dcdd88a381cce67f75a071fd8e",
+      "sha256": "9cce86c3fa544ff435eda4572273939205c9c28eacc28a34f21d0698e5e103a6"
+    },
+    "JOIN-VERIFICATION.json": {
+      "bytes": 371,
+      "md5": "2294c32a4c90cfdae0ac1247a9266e2b",
+      "sha256": "d808863b471ed39b7d72d4c3ec0d0ff45693e15ec5652ccdc400ccacbbc4001c"
+    },
+    "PUBLIC-ARCHIVE-CHECKSUMS.sha256": {
+      "bytes": 1241,
+      "md5": "ee37aa6a04b4625ae04083a105bb1c78",
+      "sha256": "c060e760b8dceffec9dff31b65b33ce3a474598d75d8efc977a20a253d0665bc"
+    },
+    "SECOND-STAR-MOON-ENCRYPTED-MANIFEST.json": {
+      "bytes": 4767,
+      "md5": "aa658d0bb0359f0131f140ebf3ca9f08",
+      "sha256": "86548696217f5d02de96e86c243bfe95d48d0049920cb5b4e2fe92231e847a51"
+    },
+    "SPLIT-REPORT.json": {
+      "bytes": 815,
+      "md5": "539c61003fe777673f9c537b1c936129",
+      "sha256": "d8b9d56b9d8264ced3e2a8c505b65f9e18d6b7cfa6b7788e6d89366bdb65bc3f"
+    },
+    "requirements.txt": {
+      "bytes": 41,
+      "md5": "be3b81d79a1a417fa06ff2f55856aca7",
+      "sha256": "4d338366992581573f37b5d34b83d50d6754513be20ddf7ef52b4cc268a0b856"
+    },
+    "second-star-moon-witness.v1.pqtime.enc.part001": {
+      "bytes": 419430400,
+      "md5": "4da7d8e4dc8687d79e4c9d46fa80a7be",
+      "sha256": "e1a5f29b98084c5623ac4639ddfa2f948c1a4eb309e88fed1c483988642df639"
+    },
+    "second-star-moon-witness.v1.pqtime.enc.part002": {
+      "bytes": 419430400,
+      "md5": "c755eafe8f0b1023d6b1e2f3f90ba7bf",
+      "sha256": "e0a1719d275313e3ccec3c2b4008c8ef026e59dec8ac3ff41ae4e8ac1251d359"
+    },
+    "second-star-moon-witness.v1.pqtime.enc.part003": {
+      "bytes": 364639252,
+      "md5": "3c16e2def06d230b0f5c0a78988156ee",
+      "sha256": "0c12ebadc008a397260f3bcafcace9c055e903161c70331e5f019fcb5f75c985"
+    },
+    "ta_pqtime_container.py": {
+      "bytes": 17813,
+      "md5": "274c5e52f7908be5268cd0aed1272549",
+      "sha256": "e3b82eb20a3d3af5eab1d02c50e3c27cef5f77ed03a4c2390542f37be69867d5"
+    }
+  },
+  "source_release_tag": "second-star-moon-witness-encrypted-archive-v1",
+  "source_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/second-star-moon-witness-encrypted-archive-v1",
+  "title": "The Second Star-Moon Witness: A Computationally Delayed Human-Witness Archive",
+  "updated_at": "2026-08-29T10:21:40.946215Z",
+  "verified_file_count": 14,
+  "verified_total_bytes": 1203532071
+}
