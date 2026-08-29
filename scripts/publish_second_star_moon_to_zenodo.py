@@ -75,6 +75,14 @@ def md5_file(path: pathlib.Path) -> str:
     return h.hexdigest()
 
 
+def normalize_md5(value: Any) -> str:
+    """Normalize Zenodo checksum metadata across legacy and current API shapes."""
+    checksum = str(value or "").strip().lower()
+    if checksum.startswith("md5:"):
+        checksum = checksum[4:]
+    return checksum
+
+
 def write_json(path: pathlib.Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -363,9 +371,9 @@ def verify_remote_rows(
             raise SystemExit(
                 f"Zenodo remote size mismatch {name}: {size}/{inv['bytes']}"
             )
-        if checksum and checksum != f"md5:{inv['md5']}":
+        if checksum and normalize_md5(checksum) != inv["md5"]:
             raise SystemExit(
-                f"Zenodo remote MD5 mismatch {name}: {checksum}/md5:{inv['md5']}"
+                f"Zenodo remote MD5 mismatch {name}: {checksum}/{inv['md5']}"
             )
     return by_name
 
@@ -429,7 +437,7 @@ def main() -> int:
                 size = int(row.get("filesize") or row.get("size") or -1)
                 checksum = str(row.get("checksum") or "")
                 correct = size == inv["bytes"] and (
-                    not checksum or checksum == f"md5:{inv['md5']}"
+                    not checksum or normalize_md5(checksum) == inv["md5"]
                 )
             if correct:
                 print(f"[ZENODO] upload_skip_existing name={name}", flush=True)
