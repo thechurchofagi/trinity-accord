@@ -1,0 +1,98 @@
+{
+  "concept_doi": "10.5281/zenodo.22170071",
+  "deposition_id": 22170072,
+  "doi": "10.5281/zenodo.22170072",
+  "public_record_api": "https://zenodo.org/api/records/22170072",
+  "public_record_url": "https://zenodo.org/records/22170072",
+  "record_id": 22170072,
+  "remote_full_readback_sha256_verified": true,
+  "schema": "trinity-accord/bubble-constellation-zenodo-state/v1",
+  "source_inventory": {
+    "ARCHIVE-README.md": {
+      "bytes": 1115,
+      "md5": "5159fdde5799bcd63d404823c742cb87",
+      "sha256": "631f66ba401554883e78a7ed2d7decafbfc96c0e490b5dead743908fc629e361"
+    },
+    "ATTACK-COST-BENCHMARK.json": {
+      "bytes": 1061,
+      "md5": "3b943a87c684554740ab14cf1787731c",
+      "sha256": "b367defa31db82394e58bd2723eb88c620555f7e1cc6d3af0508900c7c621731"
+    },
+    "BUBBLE-CONSTELLATION-ENCRYPTED-MANIFEST.json": {
+      "bytes": 3372,
+      "md5": "21de6cd9da469135befe3cb7ec821d49",
+      "sha256": "76b267e51436232433fd35d11f4c8c0d066994f9fc594ed0e19bf2e9a163474c"
+    },
+    "DECRYPTION-VERIFICATION.json": {
+      "bytes": 278,
+      "md5": "55e1f10cb1d8ad709e89a48cc9392723",
+      "sha256": "0baa9f23536c3095aec40b329d417809e019bb422d53b826d22336f317b65162"
+    },
+    "ENCRYPTION-REPORT.json": {
+      "bytes": 1759,
+      "md5": "120857195bdc748ee7d8fb277fcf7c1b",
+      "sha256": "f4f74ba2927ff7be0b78e07a934e5adcb5d9ae297e1ea4e8d76f264db81fe5e9"
+    },
+    "FORMAT-AND-RECOVERY.md": {
+      "bytes": 1800,
+      "md5": "bb590f82a4435a5415341aaf4284ec16",
+      "sha256": "45035b0ac757d6d43a7c5e67811b7f755ef20bc8af80a0699553e510ea262041"
+    },
+    "JOIN-VERIFICATION.json": {
+      "bytes": 233,
+      "md5": "2a346235cceace7377e4a7c72cf28a38",
+      "sha256": "469c78a116f036e294e7ce0a393b1da990869bf6e06c7cd1420876ce7fef9c39"
+    },
+    "PLAINTEXT-DELETION-RECEIPT.json": {
+      "bytes": 281,
+      "md5": "aa9a51fe29f6b7e18270ab72dfd677ad",
+      "sha256": "615959a7094ac6162f4bda902d93cacbccce9127f7ef616c4b9d8f1e7e165755"
+    },
+    "PUBLIC-ARCHIVE-CHECKSUMS.sha256": {
+      "bytes": 1387,
+      "md5": "2f24e1430c76a5da6904d32045403cd4",
+      "sha256": "e61de1f4c574e746950ab42efbf65e25d0bca75c936e4d8399a626c2daac1519"
+    },
+    "SECRET-DESTRUCTION-RECEIPT.json": {
+      "bytes": 322,
+      "md5": "1850b5eafa15d6e9b94c6e91854d7ad0",
+      "sha256": "a95312df811ee1efff29f9626b789e24c9179fe267194ff867b564ec3a696d5a"
+    },
+    "SOURCE-INTEGRITY.json": {
+      "bytes": 1233,
+      "md5": "55cbc45c9163d328cda443c0fe6a1131",
+      "sha256": "5979edec2538e4ed634238678c9302b596f1af59f71f31d750a3650535c29249"
+    },
+    "SPLIT-REPORT.json": {
+      "bytes": 424,
+      "md5": "d6ef34821ecc8f559629837d37cd9427",
+      "sha256": "b58b977c903012e88b66c8815b6611c7da9c66b44c41a3e63c59279fb2feae73"
+    },
+    "TAMPER-REJECTION.json": {
+      "bytes": 192,
+      "md5": "8c3e78f1e9bf42c2fb472dc090ced1e6",
+      "sha256": "64e71d36a77643bf4eff6ad89c813f84942913811475d8877fca74334eed8266"
+    },
+    "bubble-constellation.v1.pqtime.enc.part001": {
+      "bytes": 361420893,
+      "md5": "1479c51d1e8d58771f92576e26465a32",
+      "sha256": "7a449d7a3e2c85130b9cb19785a8851c1d4aab22d47fca21077f337ba473243d"
+    },
+    "requirements.txt": {
+      "bytes": 41,
+      "md5": "be3b81d79a1a417fa06ff2f55856aca7",
+      "sha256": "4d338366992581573f37b5d34b83d50d6754513be20ddf7ef52b4cc268a0b856"
+    },
+    "ta_pqtime_container.py": {
+      "bytes": 17788,
+      "md5": "3016cdde120a9b787731e6669f52b285",
+      "sha256": "a2938bdb4687d0f39a6728ae970c5e6325c1b21e7293a470176d68722a76fd70"
+    }
+  },
+  "source_release_tag": "bubble-constellation-encrypted-archive-v1",
+  "source_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/bubble-constellation-encrypted-archive-v1",
+  "title": "Bubble Constellation: A Computationally Delayed Human-Witness Archive",
+  "updated_at": "2026-08-30T06:43:07.780252Z",
+  "verified_file_count": 16,
+  "verified_total_bytes": 361452179
+}
