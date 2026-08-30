@@ -44,6 +44,32 @@ def main() -> int:
     if len(canonical_bytes) != builder["size_bytes"]:
         fail("canonical builder size differs from API contract")
 
+    witness_index_path = ROOT / "archive/encrypted-witness-archives.v1.json"
+    witness_index = json.loads(witness_index_path.read_text(encoding="utf-8"))
+    published_index = site_dir / "archive/encrypted-witness-archives.v1.json"
+    if not published_index.is_file():
+        fail(f"missing encrypted-witness machine index: {published_index}")
+    if published_index.read_bytes() != witness_index_path.read_bytes():
+        fail("published encrypted-witness machine index differs from source")
+
+    archives = witness_index.get("archives")
+    if not isinstance(archives, dict) or set(archives) != {
+        "first_star_moon_witness",
+        "second_star_moon_witness",
+        "bubble_constellation",
+    }:
+        fail("encrypted-witness machine index does not contain the exact archive set")
+    for archive in archives.values():
+        state_record = archive.get("state_record")
+        if not isinstance(state_record, str) or not state_record.startswith("archive/"):
+            fail("encrypted-witness archive has an invalid state_record")
+        source_state = ROOT / state_record
+        published_state = site_dir / state_record
+        if not published_state.is_file():
+            fail(f"missing encrypted-witness state record: {published_state}")
+        if published_state.read_bytes() != source_state.read_bytes():
+            fail(f"published encrypted-witness state differs from source: {state_record}")
+
     subprocess.run(["node", "--check", str(canonical)], check=True)
     print("PASS: Pages builder artifact contract")
     return 0

@@ -2,7 +2,7 @@
   "schema": "trinityaccord.repository-recovery-catalog.v1",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
-  "purpose": "Stable discovery catalog for the complete Trinity Accord recovery set, including versioned Zenodo recovery publications and separately scoped institutional mirrors.",
+  "purpose": "Stable discovery catalog for the complete Trinity Accord recovery set, including versioned Zenodo recovery publications, encrypted delayed-access witness archives, and separately scoped institutional mirrors.",
   "core_repository": {
     "concept_doi": "10.5281/zenodo.21739343",
     "resolution_rule": "Resolve the concept DOI and select its latest published version.",
@@ -88,6 +88,53 @@
       "restore_program_name": "restore-trinity-annex.py"
     }
   },
+  "encrypted_witness_archives": {
+    "index": "archive/encrypted-witness-archives.v1.json",
+    "security_boundary": "Public preservation contains ciphertext plus recovery/integrity/verification metadata and deletion/destruction receipts; no public plaintext source material or unlock material is intentionally included.",
+    "cold_recovery_integration": {
+      "status": "pending_next_verified_core_repository_version",
+      "current_core_version_includes_index": false,
+      "current_core_version_doi": "10.5281/zenodo.22020122",
+      "current_discovery_requires_github_or_pages": true,
+      "integration_rule": "Do not treat this layer as part of the GitHub-independent core recovery order until a later verified core repository version contains this index and these DOI pointers."
+    },
+    "first_star_moon_witness": {
+      "status": "published_verified",
+      "github_release_tag": "first-star-moon-witness-encrypted-archive-v1",
+      "doi": "10.5281/zenodo.22169173",
+      "concept_doi": "10.5281/zenodo.22169172",
+      "record_id": 22169173,
+      "state_record": "archive/first-star-moon-zenodo-state.json",
+      "verified_file_count": 18,
+      "verified_total_bytes": 1233214975,
+      "remote_full_readback_sha256_verified": true,
+      "role": "non-amending computationally delayed witness preservation archive"
+    },
+    "second_star_moon_witness": {
+      "status": "published_verified",
+      "github_release_tag": "second-star-moon-witness-encrypted-archive-v1",
+      "doi": "10.5281/zenodo.22159955",
+      "concept_doi": "10.5281/zenodo.22159954",
+      "record_id": 22159955,
+      "state_record": "archive/second-star-moon-zenodo-state.json",
+      "verified_file_count": 14,
+      "verified_total_bytes": 1203532071,
+      "remote_full_readback_sha256_verified": true,
+      "role": "non-amending computationally delayed witness preservation archive"
+    },
+    "bubble_constellation": {
+      "status": "published_verified",
+      "github_release_tag": "bubble-constellation-encrypted-archive-v1",
+      "doi": "10.5281/zenodo.22170072",
+      "concept_doi": "10.5281/zenodo.22170071",
+      "record_id": 22170072,
+      "state_record": "archive/bubble-constellation-zenodo-state.json",
+      "verified_file_count": 16,
+      "verified_total_bytes": 361452179,
+      "remote_full_readback_sha256_verified": true,
+      "role": "non-amending computationally delayed witness preservation archive"
+    }
+  },
   "external_institutional_mirrors": {
     "harvard_dataverse": {
       "persistent_id": "doi:10.7910/DVN/YUCG12",
@@ -131,5 +178,6 @@
     "Verify Bitcoin Originals, authority manifests, signatures, digest manifests and corrections-index before making authority-level claims."
   ],
   "github_required_for_discovery": false,
-  "github_required_for_recovery": false
+  "github_required_for_recovery": false,
+  "github_independent_scope_note": "The two false flags apply to the currently verified core repository and binary-annex recovery order only. The encrypted delayed-access witness index remains outside that order until a later verified core repository version contains it."
 }

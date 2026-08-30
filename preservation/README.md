@@ -2,8 +2,8 @@
 
 This directory records the public state of the Trinity Accord's independent
 preservation and recovery layers. It includes the versioned Zenodo repository
-preservation series and the separately scoped Harvard Dataverse institutional
-full-project mirror.
+preservation series, separately scoped binary annexes, the encrypted delayed-access
+witness archives, and the Harvard Dataverse institutional full-project mirror.
 
 These preservation records are distinct from:
 
@@ -32,6 +32,39 @@ separate mixed-rights publication decision.
 
 `zenodo-state.json` is updated only after a published record is downloaded and
 verified byte-for-byte.
+
+## Encrypted delayed-access witness archives
+
+Three non-amending witness archives were completed by 2026-08-30 as public
+ciphertext preservation records with GitHub Release and Zenodo copies:
+
+| Archive | GitHub Release | Zenodo DOI | Verified inventory |
+|---|---|---|---:|
+| The First Star-Moon Witness | `first-star-moon-witness-encrypted-archive-v1` | `10.5281/zenodo.22169173` | 18 files / 1,233,214,975 bytes |
+| The Second Star-Moon Witness | `second-star-moon-witness-encrypted-archive-v1` | `10.5281/zenodo.22159955` | 14 files / 1,203,532,071 bytes |
+| Bubble Constellation | `bubble-constellation-encrypted-archive-v1` | `10.5281/zenodo.22170072` | 16 files / 361,452,179 bytes |
+
+All three state records report full remote SHA-256 readback verification. The public
+archives contain ciphertext plus recovery, integrity, verification, benchmark,
+and deletion/destruction-receipt metadata; they do not intentionally publish
+plaintext source material or unlock material.
+
+The machine-readable discovery entry is
+`../archive/encrypted-witness-archives.v1.json`. The corresponding verified
+Zenodo state records are `../archive/first-star-moon-zenodo-state.json`,
+`../archive/second-star-moon-zenodo-state.json`, and
+`../archive/bubble-constellation-zenodo-state.json`.
+
+The currently verified core repository DOI `10.5281/zenodo.22020122` predates
+this machine index. Consequently, these archives remain outside the declared
+GitHub-independent cold-recovery order until a later verified core repository
+version contains the index and DOI pointers. Their GitHub Releases and Zenodo
+records are nevertheless published, independently readable, and covered by the
+weekly metadata-availability monitor.
+
+The deletion/destruction receipts document the completed workflow boundary; they
+do not constitute forensic inspection of device sectors, cloud-sync snapshots,
+operating-system caches, or service-provider internal backups.
 
 ## Harvard Dataverse institutional mirror
 

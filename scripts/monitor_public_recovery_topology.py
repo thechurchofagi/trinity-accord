@@ -31,6 +31,11 @@ EXPECTED_GATEWAY_SERVICE = "record-chain-intake-gateway"
 EXPECTED_PROTECTION_ENTRYPOINT = (
     "apps.record_chain_intake_gateway.secure_entrypoint_hardened:app"
 )
+EXPECTED_ENCRYPTED_WITNESS_ARCHIVES = {
+    "first_star_moon_witness",
+    "second_star_moon_witness",
+    "bubble_constellation",
+}
 
 
 class MonitorError(RuntimeError):
@@ -69,6 +74,7 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
     annex_state = load_object(root / "preservation/external-binary-annex-state.json")
     checkpoint_state = load_object(root / "preservation/repository-preservation-state-v2.json")
     repository_state = load_object(root / "preservation/zenodo-state.json")
+    witness_index = load_object(root / "archive/encrypted-witness-archives.v1.json")
 
     status_nft = site_status.get("nft_media_availability", {})
     historical_status = status_nft.get("historical_individual_archive_release", {})
@@ -199,18 +205,165 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
         "recovery catalog evidence checkpoint is not consumed",
     )
 
+    index_archives = witness_index.get("archives")
+    catalog_archives = recovery_catalog.get("encrypted_witness_archives", {})
+    require(isinstance(index_archives, dict), "encrypted witness index lacks archives")
+    require(
+        set(index_archives) == EXPECTED_ENCRYPTED_WITNESS_ARCHIVES,
+        "encrypted witness index must contain the exact three-archive set",
+    )
+    require(isinstance(catalog_archives, dict), "recovery catalog lacks encrypted archives")
+    catalog_archive_keys = set(catalog_archives) - {
+        "index",
+        "security_boundary",
+        "cold_recovery_integration",
+    }
+    require(
+        catalog_archive_keys == EXPECTED_ENCRYPTED_WITNESS_ARCHIVES,
+        "recovery catalog encrypted witness set differs from the machine index",
+    )
+
+    cold_integration = catalog_archives.get("cold_recovery_integration", {})
+    require(
+        cold_integration.get("status") == "pending_next_verified_core_repository_version",
+        "encrypted witness cold-recovery boundary is missing",
+    )
+    require(
+        cold_integration.get("current_core_version_includes_index") is False,
+        "current core version must not claim to include the encrypted witness index",
+    )
+    require(
+        cold_integration.get("current_core_version_doi") == latest_doi,
+        "encrypted witness cold-recovery boundary names the wrong core DOI",
+    )
+    require(
+        all("delayed-access witness layer" not in step for step in recovery_catalog.get("recovery_order", [])),
+        "encrypted witness layer entered cold recovery before its index was preserved",
+    )
+
+    witness_releases: list[dict[str, Any]] = []
+    witness_records: list[dict[str, Any]] = []
+    aggregate_file_count = 0
+    aggregate_total_bytes = 0
+    for archive_key in sorted(EXPECTED_ENCRYPTED_WITNESS_ARCHIVES):
+        indexed = index_archives[archive_key]
+        catalogued = catalog_archives[archive_key]
+        require(isinstance(indexed, dict), f"{archive_key}: index entry must be an object")
+        require(isinstance(catalogued, dict), f"{archive_key}: catalog entry must be an object")
+        state_record = indexed.get("state_record")
+        require(
+            isinstance(state_record, str)
+            and Path(state_record).parts[:1] == ("archive",)
+            and ".." not in Path(state_record).parts,
+            f"{archive_key}: invalid state record path",
+        )
+        require(
+            catalogued.get("state_record") == state_record,
+            f"{archive_key}: state record drift between index and catalog",
+        )
+        state = load_object(root / state_record)
+        inventory = state.get("source_inventory")
+        require(isinstance(inventory, dict) and inventory, f"{archive_key}: source inventory missing")
+        require(
+            all(
+                isinstance(name, str)
+                and name
+                and isinstance(metadata, dict)
+                and isinstance(metadata.get("bytes"), int)
+                and metadata["bytes"] > 0
+                and isinstance(metadata.get("md5"), str)
+                and len(metadata["md5"]) == 32
+                and isinstance(metadata.get("sha256"), str)
+                and len(metadata["sha256"]) == 64
+                for name, metadata in inventory.items()
+            ),
+            f"{archive_key}: invalid source inventory metadata",
+        )
+        file_count = len(inventory)
+        total_bytes = sum(item["bytes"] for item in inventory.values())
+        require(
+            file_count
+            == state.get("verified_file_count")
+            == indexed.get("verified_file_count")
+            == catalogued.get("verified_file_count"),
+            f"{archive_key}: verified file count drift",
+        )
+        require(
+            total_bytes
+            == state.get("verified_total_bytes")
+            == indexed.get("verified_total_bytes")
+            == catalogued.get("verified_total_bytes"),
+            f"{archive_key}: verified byte count drift",
+        )
+        require(
+            state.get("remote_full_readback_sha256_verified")
+            is indexed.get("remote_full_readback_sha256_verified")
+            is catalogued.get("remote_full_readback_sha256_verified")
+            is True,
+            f"{archive_key}: remote full readback is not verified",
+        )
+        require(
+            indexed.get("status") == catalogued.get("status") == "published_verified",
+            f"{archive_key}: publication status drift",
+        )
+        require(
+            indexed.get("github_release_tag")
+            == catalogued.get("github_release_tag")
+            == state.get("source_release_tag"),
+            f"{archive_key}: GitHub Release tag drift",
+        )
+        require(
+            indexed.get("zenodo_doi") == catalogued.get("doi") == state.get("doi"),
+            f"{archive_key}: Zenodo DOI drift",
+        )
+        require(
+            indexed.get("zenodo_record_id")
+            == catalogued.get("record_id")
+            == state.get("record_id"),
+            f"{archive_key}: Zenodo record id drift",
+        )
+        witness_releases.append(
+            {
+                "label": f"encrypted witness archive {archive_key}",
+                "tag": state["source_release_tag"],
+                "assets": inventory,
+            }
+        )
+        witness_records.append(
+            {
+                "label": f"encrypted witness archive {archive_key}",
+                "record_id": state["record_id"],
+                "doi": state["doi"],
+                "files": inventory,
+            }
+        )
+        aggregate_file_count += file_count
+        aggregate_total_bytes += total_bytes
+
+    aggregate = witness_index.get("aggregate", {})
+    require(
+        aggregate
+        == {
+            "archive_count": len(EXPECTED_ENCRYPTED_WITNESS_ARCHIVES),
+            "verified_file_count": aggregate_file_count,
+            "verified_total_bytes": aggregate_total_bytes,
+        },
+        "encrypted witness aggregate drift",
+    )
+
     return {
         "releases": [
             {
                 "label": "historical empty NFT release",
                 "tag": historical_tag,
-                "asset_names": list(observed_historical_names),
+                "assets": {name: None for name in observed_historical_names},
             },
             {
                 "label": "content-complete NFT backup release",
                 "tag": backup_tag,
-                "asset_names": list(expected_backup_names),
+                "assets": {name: None for name in expected_backup_names},
             },
+            *witness_releases,
         ],
         "zenodo_records": [
             {
@@ -225,13 +378,14 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
                 "doi": latest_doi,
                 "files": latest_version.get("files"),
             },
+            *witness_records,
         ],
         "site_status": site_status,
     }
 
 
 def validate_release(
-    payload: Any, *, label: str, tag: str, expected_asset_names: list[str]
+    payload: Any, *, label: str, tag: str, expected_assets: dict[str, Any]
 ) -> None:
     require(isinstance(payload, dict), f"{label}: GitHub response is not an object")
     require(payload.get("tag_name") == tag, f"{label}: release tag drift")
@@ -244,8 +398,8 @@ def validate_release(
     require(all(actual_names), f"{label}: release asset without a name")
     require(len(actual_names) == len(set(actual_names)), f"{label}: duplicate release asset name")
     require(
-        set(actual_names) == set(expected_asset_names),
-        f"{label}: asset set mismatch; expected={sorted(expected_asset_names)!r} "
+        set(actual_names) == set(expected_assets),
+        f"{label}: asset set mismatch; expected={sorted(expected_assets)!r} "
         f"actual={sorted(actual_names)!r}",
     )
     for item in assets:
@@ -253,6 +407,16 @@ def validate_release(
         require(item.get("state") == "uploaded", f"{label}: {name} is not uploaded")
         size = item.get("size")
         require(isinstance(size, int) and size > 0, f"{label}: {name} has no bytes")
+        expected = expected_assets[name]
+        if isinstance(expected, dict):
+            require(size == expected.get("bytes"), f"{label}: {name} byte count drift")
+            digest = item.get("digest")
+            if digest is not None:
+                require(
+                    str(digest).lower().removeprefix("sha256:")
+                    == str(expected.get("sha256") or "").lower(),
+                    f"{label}: {name} SHA-256 digest drift",
+                )
 
 
 def _normalise_md5(value: Any) -> str:
@@ -380,7 +544,7 @@ def run_live_checks(
                 payload,
                 label=release["label"],
                 tag=release["tag"],
-                expected_asset_names=release["asset_names"],
+                expected_assets=release["assets"],
             )
 
         check(f"github_release:{tag}", release_check)

@@ -29,6 +29,7 @@ required_machine = {
     "/api/record-chain-intake-gateway.v1.json",
     "/api/record-chain-builder-bundles.v1.json",
     "/api/public-home-status.json",
+    "/archive/encrypted-witness-archives.v1.json",
 }
 
 # Current pages that MUST be in key_pages
@@ -67,11 +68,16 @@ wk_api = well_known.get("api", {})
 required_wk_api = {
     "agent_first_contact": "/api/agent-first-contact.json",
     "agent_required_reading": "/api/agent-required-reading.json",
+    "encrypted_witness_archives": "/archive/encrypted-witness-archives.v1.json",
 }
 
 for key, expected in required_wk_api.items():
     if wk_api.get(key) != expected:
         errors.append(f".well-known api.{key} expected {expected!r}, got {wk_api.get(key)!r}")
+
+wk_machine_endpoints = set(well_known.get("machine_readable_endpoints", []))
+if "/archive/encrypted-witness-archives.v1.json" not in wk_machine_endpoints:
+    errors.append(".well-known machine_readable_endpoints missing encrypted witness index")
 
 # .well-known: current_public_submission must exist and point to record-chain
 cps = well_known.get("current_public_submission", {})
@@ -92,6 +98,10 @@ required_files = [
     "api/agent-first-contact.json",
     "api/record-chain-intake-gateway.v1.json",
     "api/record-chain-builder-bundles.v1.json",
+    "archive/encrypted-witness-archives.v1.json",
+    "archive/first-star-moon-zenodo-state.json",
+    "archive/second-star-moon-zenodo-state.json",
+    "archive/bubble-constellation-zenodo-state.json",
 ]
 
 for rel in required_files:
