@@ -37,7 +37,7 @@ jobs:
       - name: Validate publisher and authorization
         run: |
           set -euo pipefail
-          python3 -m py_compile scripts/publish_second_star_moon_to_zenodo.py
+          python3 -m py_compile scripts/publish_first_star_moon_to_zenodo.py
           if [ -z "${ZENODO_ACCESS_TOKEN:-}" ]; then
             echo "ZENODO_ACCESS_TOKEN is not configured" >&2
             exit 1
@@ -69,7 +69,7 @@ jobs:
         id: publish
         run: |
           set -euo pipefail
-          python3 scripts/publish_second_star_moon_to_zenodo.py \
+          python3 scripts/publish_first_star_moon_to_zenodo.py \
             --source-dir "${{ steps.source.outputs.source_dir }}" \
             --state-file archive/first-star-moon-zenodo-state.json \
             --api-base "$ZENODO_API_BASE" | tee "$RUNNER_TEMP/zenodo-publish.log"
