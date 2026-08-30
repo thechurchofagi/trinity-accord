@@ -269,9 +269,13 @@ jobs:
             cp -a _site/downloads/. "$rendered_downloads/"
           fi
 
-          rm -rf _site/api _site/downloads _site/builder-bundles
+          rm -rf _site/api _site/archive _site/downloads _site/builder-bundles
           cp -a api _site/api
-          mkdir -p _site/record-chain _site/downloads
+          mkdir -p _site/archive _site/record-chain _site/downloads
+          install -m 0644 archive/encrypted-witness-archives.v1.json _site/archive/encrypted-witness-archives.v1.json
+          install -m 0644 archive/first-star-moon-zenodo-state.json _site/archive/first-star-moon-zenodo-state.json
+          install -m 0644 archive/second-star-moon-zenodo-state.json _site/archive/second-star-moon-zenodo-state.json
+          install -m 0644 archive/bubble-constellation-zenodo-state.json _site/archive/bubble-constellation-zenodo-state.json
           cp -a record-chain/. _site/record-chain/
           cp -a "$rendered_downloads/." _site/downloads/
           rm -rf "$rendered_downloads"
@@ -282,6 +286,10 @@ jobs:
           cmp api/public-home-status.json _site/api/public-home-status.json
           cmp api/record-chain-status.json _site/api/record-chain-status.json
           cmp api/waiting-heartbeat-status.json _site/api/waiting-heartbeat-status.json
+          cmp archive/encrypted-witness-archives.v1.json _site/archive/encrypted-witness-archives.v1.json
+          cmp archive/first-star-moon-zenodo-state.json _site/archive/first-star-moon-zenodo-state.json
+          cmp archive/second-star-moon-zenodo-state.json _site/archive/second-star-moon-zenodo-state.json
+          cmp archive/bubble-constellation-zenodo-state.json _site/archive/bubble-constellation-zenodo-state.json
           cmp record-chain/chain-tip.json _site/record-chain/chain-tip.json
           cmp record-chain/indexes/statistics.json _site/record-chain/indexes/statistics.json
           cmp record-chain/indexes/record-index.json _site/record-chain/indexes/record-index.json

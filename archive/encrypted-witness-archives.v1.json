@@ -2,7 +2,7 @@
   "schema": "trinity-accord/encrypted-witness-archives/v1",
   "non_amending_boundary": true,
   "canonical_authority": "Bitcoin Originals only",
-  "purpose": "Machine-readable discovery index for the two published encrypted delayed-access witness archives completed on 2026-08-30.",
+  "purpose": "Machine-readable discovery index for the three published encrypted delayed-access witness archives completed by 2026-08-30.",
   "security_boundary": {
     "public_plaintext_in_archives": false,
     "public_unlock_material_in_archives": false,
@@ -24,6 +24,20 @@
       "verified_total_bytes": 1233214975,
       "remote_full_readback_sha256_verified": true
     },
+    "second_star_moon_witness": {
+      "title": "The Second Star-Moon Witness: A Computationally Delayed Human-Witness Archive",
+      "status": "published_verified",
+      "github_release_tag": "second-star-moon-witness-encrypted-archive-v1",
+      "github_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/second-star-moon-witness-encrypted-archive-v1",
+      "zenodo_doi": "10.5281/zenodo.22159955",
+      "zenodo_concept_doi": "10.5281/zenodo.22159954",
+      "zenodo_record_id": 22159955,
+      "zenodo_record_url": "https://zenodo.org/records/22159955",
+      "state_record": "archive/second-star-moon-zenodo-state.json",
+      "verified_file_count": 14,
+      "verified_total_bytes": 1203532071,
+      "remote_full_readback_sha256_verified": true
+    },
     "bubble_constellation": {
       "title": "Bubble Constellation: A Computationally Delayed Human-Witness Archive",
       "status": "published_verified",
@@ -40,9 +54,9 @@
     }
   },
   "aggregate": {
-    "archive_count": 2,
-    "verified_file_count": 34,
-    "verified_total_bytes": 1594667154
+    "archive_count": 3,
+    "verified_file_count": 48,
+    "verified_total_bytes": 2798199225
   },
   "updated_at": "2026-08-30"
 }

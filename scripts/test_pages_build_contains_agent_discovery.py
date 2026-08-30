@@ -92,6 +92,10 @@ required_files = [
     "api/agent-first-contact.json",
     "api/record-chain-intake-gateway.v1.json",
     "api/record-chain-builder-bundles.v1.json",
+    "archive/encrypted-witness-archives.v1.json",
+    "archive/first-star-moon-zenodo-state.json",
+    "archive/second-star-moon-zenodo-state.json",
+    "archive/bubble-constellation-zenodo-state.json",
 ]
 
 for rel in required_files:

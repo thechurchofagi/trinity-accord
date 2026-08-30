@@ -15,8 +15,8 @@
     },
     {
       "path": "archive/README.md",
-      "sha256": "e4ee02f5f48c076526c79f646da608214700eb12c6161232f768127d95597ba3",
-      "size_bytes": 2341,
+      "sha256": "a3e097907c68f089890e2199725177336e084ffdedac6f5c83cdf605b4d188a6",
+      "size_bytes": 4195,
       "verified": null,
       "note": "no expected hash from Arweave; actual hash recorded",
       "storage_domain": "repo",

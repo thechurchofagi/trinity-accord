@@ -32,18 +32,21 @@ This current checkpoint model supersedes the old verifier as the normal verifica
 
 ## Encrypted delayed-access witness archives · 延迟访问加密见证档案
 
-**Status:** ✅ BOTH PUBLISHED AND REMOTE SHA-256 READBACK VERIFIED
+**Status:** ✅ ALL THREE PUBLISHED AND REMOTE SHA-256 READBACK VERIFIED
 
-On 2026-08-30, two previously non-public witness archives were converted into public ciphertext preservation records. Each has a GitHub Release and an independent Zenodo record. These archives are non-amending evidence-preservation layers and do not create or modify canonical authority.
+By 2026-08-30, three witness archives had been converted into public ciphertext preservation records. Each has a GitHub Release and an independent Zenodo record. These archives are non-amending evidence-preservation layers and do not create or modify canonical authority.
 
 | Archive | GitHub Release | Zenodo DOI | Verified remote inventory |
 |---|---|---|---:|
 | The First Star-Moon Witness | `first-star-moon-witness-encrypted-archive-v1` | `10.5281/zenodo.22169173` | 18 files / 1,233,214,975 bytes |
+| The Second Star-Moon Witness | `second-star-moon-witness-encrypted-archive-v1` | `10.5281/zenodo.22159955` | 14 files / 1,203,532,071 bytes |
 | Bubble Constellation | `bubble-constellation-encrypted-archive-v1` | `10.5281/zenodo.22170072` | 16 files / 361,452,179 bytes |
 
-Both checked-in Zenodo state files record `remote_full_readback_sha256_verified: true`. The public inventories contain ciphertext plus recovery, integrity, verification, benchmark and deletion/destruction-receipt metadata; they do not intentionally publish plaintext source material or unlock material.
+All three checked-in Zenodo state files record `remote_full_readback_sha256_verified: true`. The public inventories contain ciphertext plus recovery, integrity, verification, benchmark and applicable deletion/destruction-receipt metadata; they do not intentionally publish plaintext source material or unlock material.
 
-Machine-readable index: [`/archive/encrypted-witness-archives.v1.json`](/archive/encrypted-witness-archives.v1.json). Verified state records: `archive/first-star-moon-zenodo-state.json` and `archive/bubble-constellation-zenodo-state.json`.
+Machine-readable index: [`/archive/encrypted-witness-archives.v1.json`](/archive/encrypted-witness-archives.v1.json). Verified state records: `archive/first-star-moon-zenodo-state.json`, `archive/second-star-moon-zenodo-state.json`, and `archive/bubble-constellation-zenodo-state.json`.
+
+The currently verified core repository DOI `10.5281/zenodo.22020122` predates this index. These three archives therefore remain outside the declared GitHub-independent cold-recovery order until a later verified core repository version contains the index and DOI pointers; their existing GitHub and Zenodo copies are already covered by weekly metadata-availability checks.
 
 Deletion/destruction receipts document the completed workflow boundary. They are not a claim of forensic inspection of device sectors, operating-system caches, cloud-sync snapshots or service-provider internal backups.
 
@@ -119,6 +122,7 @@ Machine-readable sources:
 | Arweave (covenant archive) | ✅ Verified | ANS-104 bundle, SHA-256 confirmed |
 | Arweave (verification kit) | ✅ Available | TX: `X4KOUkf...`, direct download |
 | First Star-Moon encrypted archive | ✅ GitHub + Zenodo verified | DOI `10.5281/zenodo.22169173`; 18-file / 1,233,214,975-byte remote full-readback SHA-256 PASS |
+| Second Star-Moon encrypted archive | ✅ GitHub + Zenodo verified | DOI `10.5281/zenodo.22159955`; 14-file / 1,203,532,071-byte remote full-readback SHA-256 PASS |
 | Bubble Constellation encrypted archive | ✅ GitHub + Zenodo verified | DOI `10.5281/zenodo.22170072`; 16-file / 361,452,179-byte remote full-readback SHA-256 PASS |
 | NFT individual-tar Release (`nft-arweave-mirror-175-v1`) | ⚠️ 0 custom assets | Historical Release text is retained, but it is not current byte evidence or a usable recovery source |
 | NFT content recovery | ✅ Verified | `nft-backup-v1` has 10 package assets; Zenodo NFT annex DOI `10.5281/zenodo.21754229` passed public cold restore |
@@ -138,9 +142,10 @@ Machine-readable sources:
 If a mirror is unavailable, try in this order:
 1. **Zenodo recovery set** — resolve core concept DOI `10.5281/zenodo.21739343`, then use the evidence and NFT annex DOIs in `preservation/recovery-catalog.json`.
 2. **GitHub repository** — [github.com/thechurchofagi/trinity-accord](https://github.com/thechurchofagi/trinity-accord) for the moving source and checked-in proof set.
-3. **Encrypted witness archive layer** — read `archive/encrypted-witness-archives.v1.json`, then retrieve DOI `10.5281/zenodo.22169173` and DOI `10.5281/zenodo.22170072` or their matching GitHub Releases when those delayed-access witness records are needed.
-4. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification).
-5. **Alternative IPFS or chain explorer** — try `dweb.link`, `gateway.pinata.cloud`, or [Etherscan](https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628) for the relevant pointer.
+3. **Arweave bundle extraction** — see [downloads/arweave-bundle-verification.md](/downloads/arweave-bundle-verification).
+4. **Alternative IPFS or chain explorer** — try `dweb.link`, `gateway.pinata.cloud`, or [Etherscan](https://etherscan.io/tx/0x7bdff0d696337ceb04539b44a746d0f13ce731ac25de259d8a4faf69b276a628) for the relevant pointer.
+
+The encrypted witness layer has direct DOI copies (`10.5281/zenodo.22169173`, `10.5281/zenodo.22159955`, and `10.5281/zenodo.22170072`), but it is deliberately not listed as part of the GitHub-independent fallback order until the unified index is included in a later verified core repository DOI.
 
 ## Known issues
 - IPFS CID `bafybeigunzabyyorckfcbvurbmq62itcs6msbspvzhvf2ca6u5elwwlbay` may timeout on public gateways. Try alternative gateways or use GitHub fallback.
@@ -151,12 +156,12 @@ If a mirror is unavailable, try in this order:
 - `/.well-known/trinity-accord.json` — machine-readable discovery manifest
 - `/api/public-home-status.json` — current lifecycle counters and status
 - `/api/guardian-registry.json` — historical legacy Guardian key listing (not current active status)
-- `/archive/encrypted-witness-archives.v1.json` — two verified encrypted delayed-access witness archives
+- `/archive/encrypted-witness-archives.v1.json` — three verified encrypted delayed-access witness archives
 - `/agent-start` — entry point for autonomous agents
 - IndexNow — active for Bing/Yandex
 
 ## Last verified
-- Encrypted delayed-access witness archives: 2026-08-30; First Star-Moon Witness DOI `10.5281/zenodo.22169173` 18/18 files and Bubble Constellation DOI `10.5281/zenodo.22170072` 16/16 files; both remote full-readback SHA-256 PASS.
+- Encrypted delayed-access witness archives: 2026-08-30; First Star-Moon Witness DOI `10.5281/zenodo.22169173` 18/18 files, Second Star-Moon Witness DOI `10.5281/zenodo.22159955` 14/14 files, and Bubble Constellation DOI `10.5281/zenodo.22170072` 16/16 files; all three remote full-readback SHA-256 PASS.
 - Current Evidence Checkpoint: 2026-08-09 publication v4; Bitcoin 8/8, non-NFT Ethereum 12/12 and Chronicle NFT 175/175 offline proof sets PASS; DOI public cold restore PASS.
 - Legacy Full Evidence Chain: 2026-05-01 (commit 3741e78, workflow #8, historical PASS only)
 - OTS Finalization: 2026-05-01 (commit a1a02ec, client v0.7.2, complete and Bitcoin-anchored)

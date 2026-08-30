@@ -67,8 +67,16 @@ def test_checked_in_topology_is_self_consistent() -> None:
         "nft-cars-manifest.tar.gz",
         *[f"nft-cars-part{index:02d}.tar.gz" for index in range(1, 10)],
     ]
+    assert {
+        "first-star-moon-witness-encrypted-archive-v1",
+        "second-star-moon-witness-encrypted-archive-v1",
+        "bubble-constellation-encrypted-archive-v1",
+    } <= set(releases)
     records = {item["record_id"]: item for item in expected["zenodo_records"]}
     assert records[21754229]["doi"] == "10.5281/zenodo.21754229"
+    assert records[22169173]["doi"] == "10.5281/zenodo.22169173"
+    assert records[22159955]["doi"] == "10.5281/zenodo.22159955"
+    assert records[22170072]["doi"] == "10.5281/zenodo.22170072"
     repository_state = json.loads(
         (ROOT / "preservation/zenodo-state.json").read_text(encoding="utf-8")
     )
@@ -114,7 +122,7 @@ def test_zenodo_validation_checks_inventory_size_and_md5_without_payload_downloa
         )
 
 
-def test_live_checks_cover_all_six_public_surfaces() -> None:
+def test_live_checks_cover_all_twelve_public_surfaces() -> None:
     expected = monitor.load_expected_contract(ROOT)
 
     def fake_fetch(url: str, **_: object) -> dict:
@@ -146,7 +154,19 @@ def test_live_checks_cover_all_six_public_surfaces() -> None:
         fetcher=fake_fetch,
     )
     assert errors == []
-    assert len(checks) == 6
+    assert len(checks) == 12
+
+
+def test_pages_workflow_publishes_the_exact_witness_discovery_set() -> None:
+    workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
+    for path in (
+        "archive/encrypted-witness-archives.v1.json",
+        "archive/first-star-moon-zenodo-state.json",
+        "archive/second-star-moon-zenodo-state.json",
+        "archive/bubble-constellation-zenodo-state.json",
+    ):
+        assert f"install -m 0644 {path} _site/{path}" in workflow
+        assert f"cmp {path} _site/{path}" in workflow
 
 
 def test_gateway_health_requires_the_hardened_protection_layer() -> None:
