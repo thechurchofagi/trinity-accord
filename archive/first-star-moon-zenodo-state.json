@@ -1,0 +1,108 @@
+{
+  "concept_doi": "10.5281/zenodo.22169172",
+  "deposition_id": 22169173,
+  "doi": "10.5281/zenodo.22169173",
+  "public_record_api": "https://zenodo.org/api/records/22169173",
+  "public_record_url": "https://zenodo.org/records/22169173",
+  "record_id": 22169173,
+  "remote_full_readback_sha256_verified": true,
+  "schema": "trinity-accord/first-star-moon-zenodo-state/v1",
+  "source_inventory": {
+    "ARCHIVE-README.md": {
+      "bytes": 1441,
+      "md5": "ca80d0e6deaba86509b5380997e52c93",
+      "sha256": "f72c0aa719572b284bfeb42f87fe91dfcf76f0e532fef6504a5a3418715ea6af"
+    },
+    "ATTACK-COST-BENCHMARK.json": {
+      "bytes": 1060,
+      "md5": "021e42e3fb8a7446ab1bebb669c68809",
+      "sha256": "2e2d47547e783f2d5340a606824b708cc3d6431872e0fe05c79635890efcf8a2"
+    },
+    "DECRYPTION-VERIFICATION.json": {
+      "bytes": 280,
+      "md5": "e0f8e4ee5e52c6804313af1ae5a00813",
+      "sha256": "d7e8586dfca91f6219350da5928f4fe0fa1bdc9655860a1c9b14dc66f86bb5ca"
+    },
+    "ENCRYPTION-REPORT.json": {
+      "bytes": 1763,
+      "md5": "37c70190e19f896b95f1fd6f1f8d03d9",
+      "sha256": "8747f5d31bb81798c40f80783ebb4f0419d53e76ad58726ed46c56618c7f853a"
+    },
+    "FIRST-STAR-MOON-ENCRYPTED-MANIFEST.json": {
+      "bytes": 3789,
+      "md5": "ab5af202c1bed56d03546a20a865d652",
+      "sha256": "850d8f0e539a713b2d65bfef089f1be9e2e135560da4ea01ff4ddaf88d7d36ff"
+    },
+    "FORMAT-AND-RECOVERY.md": {
+      "bytes": 1809,
+      "md5": "bf21ef14f63ed69cb6e93ed75b2ecbf5",
+      "sha256": "bb1aee3ea1f944e3f3bd95e765b713ab0dd266bb85de2a8f7df324fba3b9f3cd"
+    },
+    "JOIN-VERIFICATION.json": {
+      "bytes": 343,
+      "md5": "fa05ff6ac9f9235589b63a6df2131a73",
+      "sha256": "d334660094bc7bf0b7a774618abfadf7860ba61aee2c255c7dfa02370e1fcb2a"
+    },
+    "PLAINTEXT-DELETION-RECEIPT.json": {
+      "bytes": 282,
+      "md5": "97b1e05f01ccb1a81a40894f2584c654",
+      "sha256": "9837426dfac1b481987d8df0368c97f30161f48b544fc878bbc354872cc34692"
+    },
+    "PUBLIC-ARCHIVE-CHECKSUMS.sha256": {
+      "bytes": 1609,
+      "md5": "0a532c7201a5a8e6de3e9c0edbf39018",
+      "sha256": "7608c11c182d1bfc41945b2c50eafe8dea8206326db1ee3720c51666a57bc31e"
+    },
+    "SECRET-DESTRUCTION-RECEIPT.json": {
+      "bytes": 322,
+      "md5": "d15380663712df6a1aa51361272edeba",
+      "sha256": "87439a99f121d7cbae06059930407a83d30cf9626ad0dd06edcce25a58970dd0"
+    },
+    "SOURCE-INTEGRITY.json": {
+      "bytes": 1800,
+      "md5": "ec7002eb340a7634e2999dd297af08eb",
+      "sha256": "6462d0e65d0c3dc1614c3d6b79a0c5cb740d242b26db206533632906ca76710a"
+    },
+    "SPLIT-REPORT.json": {
+      "bytes": 811,
+      "md5": "24b6ca872bae904527763fe17630e25b",
+      "sha256": "7872d2ec05c737c831e7905ae5fa020465bf9751520c55ad8432f8323bd537bc"
+    },
+    "TAMPER-REJECTION.json": {
+      "bytes": 192,
+      "md5": "0b952ab29e5e33d526c925fc3ba914ff",
+      "sha256": "ba6e902c60d9bda905607eadd9069677e542111c876a0a9c6e360dfc2d5907ee"
+    },
+    "first-star-moon-witness.v1.pqtime.enc.part001": {
+      "bytes": 419430400,
+      "md5": "e78c4a5f3d189963fbed170d46a1d1da",
+      "sha256": "89dfbdd5f620e2d3aa7033b8ca9f30b327d475fb8937a7b85751189ff4b855d0"
+    },
+    "first-star-moon-witness.v1.pqtime.enc.part002": {
+      "bytes": 419430400,
+      "md5": "da484f9f115b2e07a7d3b1a581617c37",
+      "sha256": "911d22e79905a2c686782b506f1d2f36348ca76ba58475882c0a984bef3963e7"
+    },
+    "first-star-moon-witness.v1.pqtime.enc.part003": {
+      "bytes": 394320845,
+      "md5": "a88e8ddc4ef2600a40f28744b472ac9f",
+      "sha256": "86776c9fbbbb1cd1e01c10d5e82f4973e15a26eaff02069b496e5a000b8aff67"
+    },
+    "requirements.txt": {
+      "bytes": 41,
+      "md5": "be3b81d79a1a417fa06ff2f55856aca7",
+      "sha256": "4d338366992581573f37b5d34b83d50d6754513be20ddf7ef52b4cc268a0b856"
+    },
+    "ta_pqtime_container.py": {
+      "bytes": 17788,
+      "md5": "3016cdde120a9b787731e6669f52b285",
+      "sha256": "a2938bdb4687d0f39a6728ae970c5e6325c1b21e7293a470176d68722a76fd70"
+    }
+  },
+  "source_release_tag": "first-star-moon-witness-encrypted-archive-v1",
+  "source_release_url": "https://github.com/thechurchofagi/trinity-accord/releases/tag/first-star-moon-witness-encrypted-archive-v1",
+  "title": "The First Star-Moon Witness: A Computationally Delayed Human-Witness Archive",
+  "updated_at": "2026-08-30T05:35:35.104643Z",
+  "verified_file_count": 18,
+  "verified_total_bytes": 1233214975
+}
