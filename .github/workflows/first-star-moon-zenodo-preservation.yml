@@ -103,7 +103,7 @@ jobs:
             echo "Zenodo state already recorded"
             exit 0
           fi
-          git commit -m "archive: record Second Star-Moon Zenodo DOI"
+          git commit -m "archive: record First Star-Moon Zenodo DOI"
           for attempt in 1 2 3 4; do
             git fetch origin main --prune
             git rebase origin/main
