@@ -4,7 +4,8 @@
 Exact Release coverage comes from GitHub asset digests, so small Release metadata
 needs downloading only for encrypted/future-access containers whose ciphertext
 must be bound back to a plaintext six-hash row. Frozen Git snapshots are hashed
-with one `git cat-file --batch` process instead of thousands of `git show` calls.
+with one streaming `git cat-file --batch` process instead of thousands of
+`git show` calls.
 """
 from collections import defaultdict
 import hashlib
@@ -53,7 +54,7 @@ def _batch_git_hash_index(commit: str):
             continue
         try:
             meta, path_b = entry.split(b"\t", 1)
-            mode, typ, blob = meta.split(b" ", 2)
+            _mode, typ, blob = meta.split(b" ", 2)
             if typ != b"blob":
                 continue
             path = path_b.decode("utf-8", "replace")
@@ -66,6 +67,7 @@ def _batch_git_hash_index(commit: str):
     if not blob_paths:
         return out
 
+    proc = None
     try:
         proc = subprocess.Popen(
             ["git", "cat-file", "--batch"],
@@ -75,11 +77,12 @@ def _batch_git_hash_index(commit: str):
             stderr=subprocess.DEVNULL,
         )
         assert proc.stdin is not None and proc.stdout is not None
-        for blob in blob_paths:
-            proc.stdin.write((blob + "\n").encode("ascii"))
-        proc.stdin.close()
 
-        for blob in blob_paths:
+        # Request one blob, immediately consume its response, then continue.
+        # This keeps both pipes bounded and cannot deadlock on a large repository.
+        for blob, paths in blob_paths.items():
+            proc.stdin.write((blob + "\n").encode("ascii"))
+            proc.stdin.flush()
             header = proc.stdout.readline().decode("ascii", "replace").strip()
             parts = header.split()
             if len(parts) < 3 or parts[1] != "blob":
@@ -94,9 +97,16 @@ def _batch_git_hash_index(commit: str):
                 h.update(chunk)
                 remaining -= len(chunk)
             proc.stdout.read(1)  # trailing newline after batch object body
-            out[h.hexdigest()].extend(blob_paths[blob])
+            out[h.hexdigest()].extend(paths)
+
+        proc.stdin.close()
         proc.wait(timeout=60)
     except Exception:
+        if proc is not None:
+            try:
+                proc.kill()
+            except Exception:
+                pass
         return defaultdict(list)
     return out
 
