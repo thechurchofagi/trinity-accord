@@ -326,7 +326,7 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
             {
                 "label": f"encrypted witness archive {archive_key}",
                 "tag": state["source_release_tag"],
-                "asset_names": list(inventory),
+                "assets": inventory,
             }
         )
         witness_records.append(
@@ -356,12 +356,12 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
             {
                 "label": "historical empty NFT release",
                 "tag": historical_tag,
-                "asset_names": list(observed_historical_names),
+                "assets": {name: None for name in observed_historical_names},
             },
             {
                 "label": "content-complete NFT backup release",
                 "tag": backup_tag,
-                "asset_names": list(expected_backup_names),
+                "assets": {name: None for name in expected_backup_names},
             },
             *witness_releases,
         ],
@@ -385,7 +385,7 @@ def load_expected_contract(root: Path = ROOT) -> dict[str, Any]:
 
 
 def validate_release(
-    payload: Any, *, label: str, tag: str, expected_asset_names: list[str]
+    payload: Any, *, label: str, tag: str, expected_assets: dict[str, Any]
 ) -> None:
     require(isinstance(payload, dict), f"{label}: GitHub response is not an object")
     require(payload.get("tag_name") == tag, f"{label}: release tag drift")
@@ -398,8 +398,8 @@ def validate_release(
     require(all(actual_names), f"{label}: release asset without a name")
     require(len(actual_names) == len(set(actual_names)), f"{label}: duplicate release asset name")
     require(
-        set(actual_names) == set(expected_asset_names),
-        f"{label}: asset set mismatch; expected={sorted(expected_asset_names)!r} "
+        set(actual_names) == set(expected_assets),
+        f"{label}: asset set mismatch; expected={sorted(expected_assets)!r} "
         f"actual={sorted(actual_names)!r}",
     )
     for item in assets:
@@ -407,6 +407,16 @@ def validate_release(
         require(item.get("state") == "uploaded", f"{label}: {name} is not uploaded")
         size = item.get("size")
         require(isinstance(size, int) and size > 0, f"{label}: {name} has no bytes")
+        expected = expected_assets[name]
+        if isinstance(expected, dict):
+            require(size == expected.get("bytes"), f"{label}: {name} byte count drift")
+            digest = item.get("digest")
+            if digest is not None:
+                require(
+                    str(digest).lower().removeprefix("sha256:")
+                    == str(expected.get("sha256") or "").lower(),
+                    f"{label}: {name} SHA-256 digest drift",
+                )
 
 
 def _normalise_md5(value: Any) -> str:
@@ -534,7 +544,7 @@ def run_live_checks(
                 payload,
                 label=release["label"],
                 tag=release["tag"],
-                expected_asset_names=release["asset_names"],
+                expected_assets=release["assets"],
             )
 
         check(f"github_release:{tag}", release_check)

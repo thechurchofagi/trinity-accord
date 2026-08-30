@@ -15,14 +15,23 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import monitor_public_recovery_topology as monitor  # noqa: E402
 
 
-def release_payload(tag: str, names: list[str]) -> dict:
+def release_payload(tag: str, assets: dict[str, dict | None]) -> dict:
     return {
         "tag_name": tag,
         "draft": False,
         "prerelease": False,
         "assets": [
-            {"name": name, "state": "uploaded", "size": index + 1}
-            for index, name in enumerate(names)
+            {
+                "name": name,
+                "state": "uploaded",
+                "size": metadata["bytes"] if metadata else index + 1,
+                **(
+                    {"digest": f"sha256:{metadata['sha256']}"}
+                    if metadata and metadata.get("sha256")
+                    else {}
+                ),
+            }
+            for index, (name, metadata) in enumerate(assets.items())
         ],
     }
 
@@ -62,8 +71,8 @@ def gateway_payload() -> dict:
 def test_checked_in_topology_is_self_consistent() -> None:
     expected = monitor.load_expected_contract(ROOT)
     releases = {item["tag"]: item for item in expected["releases"]}
-    assert releases["nft-arweave-mirror-175-v1"]["asset_names"] == []
-    assert releases["nft-backup-v1"]["asset_names"] == [
+    assert list(releases["nft-arweave-mirror-175-v1"]["assets"]) == []
+    assert list(releases["nft-backup-v1"]["assets"]) == [
         "nft-cars-manifest.tar.gz",
         *[f"nft-cars-part{index:02d}.tar.gz" for index in range(1, 10)],
     ]
@@ -85,19 +94,51 @@ def test_checked_in_topology_is_self_consistent() -> None:
 
 def test_release_validation_is_exact_and_fail_closed() -> None:
     names = ["manifest.tar.gz", "part01.tar.gz"]
+    expected = {name: None for name in names}
     monitor.validate_release(
-        release_payload("backup-v1", names),
+        release_payload("backup-v1", expected),
         label="backup",
         tag="backup-v1",
-        expected_asset_names=names,
+        expected_assets=expected,
     )
-    bad = release_payload("backup-v1", names + ["unexpected.tar.gz"])
+    bad_assets = {**expected, "unexpected.tar.gz": None}
+    bad = release_payload("backup-v1", bad_assets)
     with pytest.raises(monitor.MonitorError, match="asset set mismatch"):
         monitor.validate_release(
             bad,
             label="backup",
             tag="backup-v1",
-            expected_asset_names=names,
+            expected_assets=expected,
+        )
+
+
+def test_witness_release_validation_checks_bytes_and_available_sha256() -> None:
+    expected = {
+        "part001.bin": {"bytes": 42, "sha256": "a" * 64},
+    }
+    payload = release_payload("witness-v1", expected)
+    monitor.validate_release(
+        payload,
+        label="witness",
+        tag="witness-v1",
+        expected_assets=expected,
+    )
+    payload["assets"][0]["size"] = 41
+    with pytest.raises(monitor.MonitorError, match="byte count drift"):
+        monitor.validate_release(
+            payload,
+            label="witness",
+            tag="witness-v1",
+            expected_assets=expected,
+        )
+    payload = release_payload("witness-v1", expected)
+    payload["assets"][0]["digest"] = "sha256:" + "b" * 64
+    with pytest.raises(monitor.MonitorError, match="SHA-256 digest drift"):
+        monitor.validate_release(
+            payload,
+            label="witness",
+            tag="witness-v1",
+            expected_assets=expected,
         )
 
 
@@ -129,7 +170,7 @@ def test_live_checks_cover_all_twelve_public_surfaces() -> None:
         if "/releases/tags/" in url:
             tag = url.rsplit("/", 1)[-1]
             release = next(item for item in expected["releases"] if item["tag"] == tag)
-            return release_payload(tag, release["asset_names"])
+            return release_payload(tag, release["assets"])
         if "/records/" in url:
             record_id = int(url.rsplit("/", 1)[-1])
             record = next(
@@ -184,6 +225,7 @@ def test_workflow_is_read_only_weekly_manual_and_preserves_reports() -> None:
     assert set(parsed["on"]) == {"workflow_dispatch", "schedule"}
     assert parsed["permissions"] == {"contents": "read"}
     assert parsed["jobs"]["verify"]["runs-on"] == "ubuntu-24.04"
+    assert parsed["jobs"]["verify"]["timeout-minutes"] == "20"
     assert "scripts/check_legacy_pointer_coverage.py" in text
     assert "scripts/monitor_public_recovery_topology.py" in text
     assert "large payloads are never downloaded" in text
