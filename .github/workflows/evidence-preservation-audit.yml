@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - agent/evidence-preservation-audit-2026-08-30
+    paths-ignore:
+      - 'audit/evidence-preservation/**'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   PYTHONUNBUFFERED: "1"
@@ -47,6 +49,18 @@ jobs:
               'notary_annex': summary['notary_annex'],
           }, ensure_ascii=False, indent=2, default=str))
           PY
+
+      - name: Commit auditable matrix to branch
+        run: |
+          git config user.name "trinity-evidence-audit-bot"
+          git config user.email "actions@github.com"
+          git add audit/evidence-preservation
+          if git diff --cached --quiet; then
+            echo "No audit output changes to commit."
+          else
+            git commit -m "audit: publish six-hash preservation matrix"
+            git push origin HEAD:agent/evidence-preservation-audit-2026-08-30
+          fi
 
       - name: Upload audit artifact
         uses: actions/upload-artifact@v4
