@@ -3,10 +3,14 @@ name: Evidence Preservation Audit
 on:
   push:
     branches:
-      - agent/evidence-preservation-audit-2026-08-30
+      - agent/evidence-preservation-audit-final-2026-08-30
     paths-ignore:
       - 'audit/evidence-preservation/**'
   workflow_dispatch:
+
+concurrency:
+  group: evidence-preservation-audit-final
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -59,7 +63,7 @@ jobs:
             echo "No audit output changes to commit."
           else
             git commit -m "audit: publish six-hash preservation matrix"
-            git push origin HEAD:agent/evidence-preservation-audit-2026-08-30
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
       - name: Upload audit artifact
