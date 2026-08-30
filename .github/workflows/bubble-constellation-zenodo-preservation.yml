@@ -1,6 +1,11 @@
 name: Bubble Constellation Zenodo Preservation
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/bubble-constellation-zenodo-preservation.yml"
   workflow_dispatch:
 
 permissions:
