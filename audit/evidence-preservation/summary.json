@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.evidence-preservation-audit.v1",
-  "generated_at": "2026-08-30T01:05:52Z",
+  "generated_at": "2026-08-30T01:06:48Z",
   "baseline": {
     "file": "archive/evidence/digest-manifest.csv",
     "rows": 884,
@@ -18,8 +18,8 @@
         "old_wallet_candidate": 1
       },
       "wallet_addresses_redacted": true,
-      "link_rule": "exact SHA plus structured/explicit Arweave TX field or arweave.net URL; arbitrary 43-character tokens are rejected",
-      "owner_group_method": "checked-in provenance: legacy arweave-backup/manifest.json (4EVERLAND/ANS-104) versus record-chain/arweave-wallet-ledger.json (current native wallet); unknown TXs remain unresolved"
+      "link_rule": "exact SHA plus structured/explicit Arweave TX field or Arweave URL; arbitrary 43-character tokens rejected",
+      "owner_group_method": "checked-in legacy 4EVERLAND/ANS-104 manifest vs current native-wallet ledger; unknown TXs unresolved"
     },
     "zenodo": {
       "10.5281/zenodo.21753937": {
@@ -8007,6 +8007,6 @@
     "Harvard v1 coverage is frozen at its source workflow run; Release assets created after that cutoff are not inferred into v1.",
     "Encrypted derivatives are never counted as exact plaintext byte mirrors, even when they bind to a plaintext six-hash row.",
     "Zenodo external-evidence coverage is inferred only where the repository preservation contract explicitly guarantees byte-for-byte embedding of named Release assets, or where an exact repo-byte match is established for the core capsule.",
-    "AR old/new grouping is based on checked-in preservation provenance rather than live owner lookups; unknown TXs are not forced into either group."
+    "AR old/new grouping uses checked-in preservation provenance; unknown TXs are not forced into either group."
   ]
 }
