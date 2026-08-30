@@ -1,22 +1,24 @@
 {
   "schema": "trinityaccord.evidence-preservation-audit.v1",
-  "generated_at": "2026-08-30T01:02:52Z",
+  "generated_at": "2026-08-30T01:05:52Z",
   "baseline": {
     "file": "archive/evidence/digest-manifest.csv",
     "rows": 884,
     "unique_sha256": 794,
     "ots_committed": true,
-    "note": "OTS commits the historical digest manifest; it does not itself preserve original bytes."
+    "note": "OTS commits the historical digest manifest; it does not itself preserve original bytes.",
+    "size_recovery_rule": "zero-size duplicate rows inherit max nonzero size of identical SHA-256"
   },
   "storage_domains": {
     "arweave": {
-      "tx_links_found": 479,
+      "tx_links_found": 456,
       "native_owner_groups": 1,
       "current_wallet_fingerprint_present": true,
       "owner_role_counts": {
         "old_wallet_candidate": 1
       },
       "wallet_addresses_redacted": true,
+      "link_rule": "exact SHA plus structured/explicit Arweave TX field or arweave.net URL; arbitrary 43-character tokens are rejected",
       "owner_group_method": "checked-in provenance: legacy arweave-backup/manifest.json (4EVERLAND/ANS-104) versus record-chain/arweave-wallet-ledger.json (current native wallet); unknown TXs remain unresolved"
     },
     "zenodo": {
@@ -8005,6 +8007,6 @@
     "Harvard v1 coverage is frozen at its source workflow run; Release assets created after that cutoff are not inferred into v1.",
     "Encrypted derivatives are never counted as exact plaintext byte mirrors, even when they bind to a plaintext six-hash row.",
     "Zenodo external-evidence coverage is inferred only where the repository preservation contract explicitly guarantees byte-for-byte embedding of named Release assets, or where an exact repo-byte match is established for the core capsule.",
-    "AR old/new grouping is based on checked-in preservation provenance rather than live owner lookups; this avoids network-dependent false negatives and respects the current wallet redaction policy."
+    "AR old/new grouping is based on checked-in preservation provenance rather than live owner lookups; unknown TXs are not forced into either group."
   ]
 }
