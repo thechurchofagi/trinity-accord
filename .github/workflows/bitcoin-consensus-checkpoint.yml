@@ -10,6 +10,13 @@ on:
         default: false
   schedule:
     - cron: "17 */6 * * *"
+  # Temporary self-start path for the first corrected main run. Remove after
+  # the run is observed past the Release preflight.
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/bitcoin-consensus-checkpoint.yml"
 
 permissions:
   contents: write
@@ -23,6 +30,7 @@ jobs:
   advance-checkpoint:
     name: Advance independently validated Bitcoin checkpoint
     runs-on: ubuntu-24.04
+    environment: release-publish
     timeout-minutes: 350
     env:
       GH_TOKEN: ${{ github.token }}
@@ -127,6 +135,36 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Verify checkpoint Release write permission
+        if: steps.latest.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          probe_tag="bitcoin-consensus-release-preflight-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          probe_json="${RUNNER_TEMP}/bitcoin-release-preflight.json"
+          probe_id=""
+
+          cleanup_probe() {
+            if [[ -n "$probe_id" ]]; then
+              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${probe_id}" >/dev/null 2>&1 || true
+            fi
+          }
+          trap cleanup_probe EXIT
+
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/releases" \
+            -f tag_name="$probe_tag" \
+            -f target_commitish="$GITHUB_SHA" \
+            -f name="Bitcoin checkpoint Release permission preflight" \
+            -f body="Ephemeral fail-fast permission probe; not a checkpoint and never authoritative." \
+            -F draft=true > "$probe_json"
+          probe_id="$(jq -r '.id // empty' "$probe_json")"
+          [[ "$probe_id" =~ ^[0-9]+$ ]] || { echo "Release preflight returned no valid release id" >&2; exit 1; }
+
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${probe_id}"
+          probe_id=""
+          trap - EXIT
+          echo "Checkpoint Release write preflight succeeded before Bitcoin IBD."
 
       - name: Restore previous checkpoint as a verified stream
         if: steps.latest.outputs.skip != 'true' && steps.latest.outputs.has_previous == 'true'
