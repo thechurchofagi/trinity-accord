@@ -1,0 +1,370 @@
+name: Bitcoin Consensus Checkpoint
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_checkpoint:
+        description: "Continue even if the latest sealed checkpoint already completed IBD"
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bitcoin-consensus-checkpoint-mainnet
+  cancel-in-progress: false
+
+jobs:
+  advance-checkpoint:
+    name: Advance independently validated Bitcoin checkpoint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FORCE_CHECKPOINT: ${{ inputs.force_checkpoint || false }}
+      BITCOIN_VERSION: "31.1"
+      PRUNE_MIB: "550"
+      SYNC_SECONDS: "14400"
+      DATADIR: ${{ runner.temp }}/bitcoin-mainnet
+      CHECKPOINT_MANIFEST: ${{ runner.temp }}/bitcoin-consensus-checkpoint.json
+      PREVIOUS_MANIFEST: ${{ runner.temp }}/previous-bitcoin-consensus-checkpoint.json
+      LATEST_RELEASE_JSON: ${{ runner.temp }}/latest-bitcoin-checkpoint-release.json
+      ASSET_CATALOG: ${{ runner.temp }}/bitcoin-checkpoint-assets.tsv
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Record toolchain provenance
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Reclaim runner disk and install checkpoint tools
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          df -h /
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends zstd jq
+          df -h /
+          python3 scripts/bitcoin_consensus_checkpoint.py --help >/dev/null
+
+      - name: Locate latest sealed checkpoint
+        id: latest
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          releases="${RUNNER_TEMP}/bitcoin-releases.json"
+          gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" > "$releases"
+
+          jq '
+            [
+              .[]
+              | select(.draft == false and .prerelease == false)
+              | select(.tag_name | test("^bitcoin-consensus-checkpoint-[0-9]{6}$"))
+            ]
+            | sort_by(.tag_name)
+            | last // null
+          ' "$releases" > "$LATEST_RELEASE_JSON"
+
+          latest_tag="$(jq -r 'if . == null then "" else .tag_name end' "$LATEST_RELEASE_JSON")"
+          if [[ -z "$latest_tag" ]]; then
+            echo "No sealed checkpoint exists; this run will start from a fresh Bitcoin Core datadir."
+            echo "has_previous=false" >> "$GITHUB_OUTPUT"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          manifest_url="$(
+            jq -r '
+              .assets[]
+              | select(.name == "bitcoin-consensus-checkpoint.json")
+              | .url
+            ' "$LATEST_RELEASE_JSON"
+          )"
+          if [[ -z "$manifest_url" || "$manifest_url" == "null" ]]; then
+            echo "Published checkpoint release is missing its manifest" >&2
+            exit 1
+          fi
+
+          gh api -H "Accept: application/octet-stream" "$manifest_url" > "$PREVIOUS_MANIFEST"
+          python3 scripts/bitcoin_consensus_checkpoint.py validate-manifest "$PREVIOUS_MANIFEST"
+
+          manifest_tag="$(jq -r '.checkpoint.tag' "$PREVIOUS_MANIFEST")"
+          if [[ "$manifest_tag" != "$latest_tag" ]]; then
+            echo "Release tag and checkpoint manifest tag disagree" >&2
+            exit 1
+          fi
+
+          manifest_sha="$(python3 scripts/bitcoin_consensus_checkpoint.py manifest-sha256 "$PREVIOUS_MANIFEST")"
+          echo "has_previous=true" >> "$GITHUB_OUTPUT"
+          echo "previous_tag=$latest_tag" >> "$GITHUB_OUTPUT"
+          echo "previous_manifest_sha256=$manifest_sha" >> "$GITHUB_OUTPUT"
+
+          ibd="$(jq -r '.initialblockdownload' "$PREVIOUS_MANIFEST")"
+          if [[ "$ibd" == "false" && "$FORCE_CHECKPOINT" != "true" ]]; then
+            echo "Latest sealed checkpoint already completed initial block download."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore previous checkpoint as a verified stream
+        if: steps.latest.outputs.skip != 'true' && steps.latest.outputs.has_previous == 'true'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$DATADIR"
+          tmp_part="${RUNNER_TEMP}/checkpoint-part.tmp"
+
+          {
+            while IFS= read -r name; do
+              asset_url="$(
+                jq -r --arg name "$name" '
+                  .assets[]
+                  | select(.name == $name)
+                  | .url
+                ' "$LATEST_RELEASE_JSON"
+              )"
+              if [[ -z "$asset_url" || "$asset_url" == "null" ]]; then
+                echo "Release is missing declared asset: $name" >&2
+                exit 1
+              fi
+              rm -f "$tmp_part"
+              gh api -H "Accept: application/octet-stream" "$asset_url" > "$tmp_part"
+              python3 scripts/bitcoin_consensus_checkpoint.py \
+                verify-asset "$PREVIOUS_MANIFEST" "$name" "$tmp_part"
+              cat "$tmp_part"
+              rm -f "$tmp_part"
+            done < <(jq -r '.assets[].name' "$PREVIOUS_MANIFEST")
+          } | zstd -d -c | tar -xf - -C "$DATADIR"
+
+          rm -f "$tmp_part"
+          echo "Checkpoint restore completed only after every archive part passed SHA-256 and size validation."
+
+      - name: Download and verify Bitcoin Core distribution
+        if: steps.latest.outputs.skip != 'true'
+        id: core
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          base="https://bitcoincore.org/bin/bitcoin-core-${BITCOIN_VERSION}"
+          archive="bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz"
+          cd "$RUNNER_TEMP"
+          curl --fail --silent --show-error --location --retry 5 \
+            --output "$archive" "$base/$archive"
+          curl --fail --silent --show-error --location --retry 5 \
+            --output SHA256SUMS "$base/SHA256SUMS"
+
+          expected_line="$(awk -v archive="$archive" '$2 == archive && $1 ~ /^[0-9a-f]{64}$/ { print; exit }' SHA256SUMS)"
+          if [[ -z "$expected_line" ]]; then
+            echo "Official SHA256SUMS does not contain the expected Bitcoin Core archive" >&2
+            exit 1
+          fi
+          printf '%s\n' "$expected_line" | sha256sum --check --strict -
+          archive_sha="$(sha256sum "$archive" | awk '{print $1}')"
+          echo "archive_sha256=$archive_sha" >> "$GITHUB_OUTPUT"
+
+          tar -xzf "$archive"
+          echo "${RUNNER_TEMP}/bitcoin-${BITCOIN_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Verify restored chainstate matches its sealed predecessor
+        if: steps.latest.outputs.skip != 'true' && steps.latest.outputs.has_previous == 'true'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bitcoind -datadir="$DATADIR" -connect=0 -dnsseed=0 -listen=0 -daemonwait
+          offline_info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
+
+          expected_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
+          expected_hash="$(jq -r '.best_block_hash' "$PREVIOUS_MANIFEST")"
+          actual_height="$(jq -r '.blocks' <<<"$offline_info")"
+          actual_hash="$(jq -r '.bestblockhash' <<<"$offline_info")"
+
+          if [[ "$actual_height" != "$expected_height" || "$actual_hash" != "$expected_hash" ]]; then
+            echo "Restored Bitcoin Core state does not match the sealed predecessor manifest" >&2
+            bitcoin-cli -datadir="$DATADIR" stop
+            exit 1
+          fi
+
+          bitcoin-cli -datadir="$DATADIR" stop >/dev/null
+          while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
+          echo "Restored chainstate exactly matches predecessor height/hash."
+
+      - name: Advance Bitcoin Core consensus validation
+        if: steps.latest.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$DATADIR"
+          cat > "$DATADIR/bitcoin.conf" <<EOF
+          server=1
+          disablewallet=1
+          prune=${PRUNE_MIB}
+          assumevalid=0
+          dbcache=1024
+          listen=1
+          dnsseed=1
+          EOF
+
+          stop_core() {
+            bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1
+          }
+          trap stop_core EXIT INT TERM
+
+          bitcoind -datadir="$DATADIR" -daemonwait
+          start_height="$(bitcoin-cli -datadir="$DATADIR" getblockcount)"
+          deadline=$(( $(date +%s) + SYNC_SECONDS ))
+
+          while (( $(date +%s) < deadline )); do
+            info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
+            height="$(jq -r '.blocks' <<<"$info")"
+            headers="$(jq -r '.headers' <<<"$info")"
+            progress="$(jq -r '.verificationprogress' <<<"$info")"
+            ibd="$(jq -r '.initialblockdownload' <<<"$info")"
+            free_kib="$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')"
+
+            printf 'height=%s headers=%s verificationprogress=%s ibd=%s free_kib=%s\n' \
+              "$height" "$headers" "$progress" "$ibd" "$free_kib"
+
+            if [[ "$ibd" == "false" ]]; then
+              echo "Bitcoin Core reports IBD complete."
+              break
+            fi
+            if (( free_kib < 3145728 )); then
+              echo "Free disk fell below 3 GiB; sealing a checkpoint before disk exhaustion."
+              break
+            fi
+            sleep 60
+          done
+
+          bitcoin-cli -datadir="$DATADIR" stop >/dev/null
+          while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
+          trap - EXIT INT TERM
+
+          # Re-open with networking disabled so the manifest describes the exact
+          # clean state that will be archived, with no race against a new block.
+          bitcoind -datadir="$DATADIR" -connect=0 -dnsseed=0 -listen=0 -daemonwait
+          bitcoin-cli -datadir="$DATADIR" getblockchaininfo > "${RUNNER_TEMP}/final-chain-info.json"
+          bitcoin-cli -datadir="$DATADIR" stop >/dev/null
+          while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
+
+          final_height="$(jq -r '.blocks' "${RUNNER_TEMP}/final-chain-info.json")"
+          if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
+            previous_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
+            if (( final_height <= previous_height )); then
+              echo "Bitcoin Core made no forward block-height progress; refusing to publish a duplicate checkpoint." >&2
+              exit 1
+            fi
+          fi
+          echo "Advanced independently validated chain from height ${start_height} to ${final_height}."
+
+      - name: Seal immutable checkpoint into a draft Release
+        if: steps.latest.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          : > "$ASSET_CATALOG"
+
+          if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
+            previous_sequence="$(jq -r '.checkpoint.sequence' "$PREVIOUS_MANIFEST")"
+            sequence=$(( previous_sequence + 1 ))
+          else
+            sequence=1
+          fi
+          tag="$(printf 'bitcoin-consensus-checkpoint-%06d' "$sequence")"
+          export CHECKPOINT_TAG="$tag"
+          export ASSET_CATALOG
+
+          # A killed job may have left this exact next checkpoint as an
+          # unpublished draft. It is not authoritative and is safe to replace.
+          all_releases="${RUNNER_TEMP}/all-releases-before-seal.json"
+          gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" > "$all_releases"
+          stale_id="$(
+            jq -r --arg tag "$tag" '
+              .[]
+              | select(.tag_name == $tag and .draft == true)
+              | .id
+            ' "$all_releases" | head -n1
+          )"
+          published_same_tag="$(
+            jq -r --arg tag "$tag" '
+              .[]
+              | select(.tag_name == $tag and .draft == false)
+              | .id
+            ' "$all_releases" | head -n1
+          )"
+          if [[ -n "$published_same_tag" ]]; then
+            echo "Refusing to replace an already-published checkpoint: $tag" >&2
+            exit 1
+          fi
+          if [[ -n "$stale_id" ]]; then
+            echo "Removing incomplete draft from an interrupted prior attempt: $tag"
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"
+          fi
+
+          gh release create "$tag" \
+            --draft \
+            --target "$GITHUB_SHA" \
+            --title "Bitcoin Consensus Checkpoint ${sequence}" \
+            --notes "GitHub-hosted Bitcoin Core pruned-mainnet checkpoint. Persistence only; the manifest records the verification boundary."
+
+          part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
+          export GH_TOKEN CHECKPOINT_TAG ASSET_CATALOG
+          tar -C "$DATADIR" \
+            --exclude='./bitcoin.conf' \
+            --exclude='./debug.log' \
+            --exclude='./.cookie' \
+            --exclude='./.lock' \
+            -cf - . \
+            | zstd -3 -T0 \
+            | split -d -a 4 -b 900M - "$part_prefix" \
+                --filter='
+                  set -Eeuo pipefail
+                  name="$(basename "$FILE")"
+                  size="$(stat -c %s "$FILE")"
+                  digest="$(sha256sum "$FILE" | awk "{print \$1}")"
+                  gh release upload "$CHECKPOINT_TAG" "$FILE"
+                  printf "%s\t%s\t%s\n" "$name" "$size" "$digest" >> "$ASSET_CATALOG"
+                  rm -f "$FILE"
+                '
+
+          [[ -s "$ASSET_CATALOG" ]] || { echo "No checkpoint assets were produced" >&2; exit 1; }
+
+          previous_args=()
+          if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
+            previous_args+=(
+              --previous-tag "${{ steps.latest.outputs.previous_tag }}"
+              --previous-manifest-sha256 "${{ steps.latest.outputs.previous_manifest_sha256 }}"
+            )
+          fi
+
+          python3 scripts/bitcoin_consensus_checkpoint.py build-manifest \
+            --catalog "$ASSET_CATALOG" \
+            --chain-info "${RUNNER_TEMP}/final-chain-info.json" \
+            --sequence "$sequence" \
+            "${previous_args[@]}" \
+            --bitcoin-core-version "$BITCOIN_VERSION" \
+            --bitcoin-core-archive-sha256 "${{ steps.core.outputs.archive_sha256 }}" \
+            --prune-mib "$PRUNE_MIB" \
+            --repository "$GITHUB_REPOSITORY" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --workflow-sha "$GITHUB_SHA" \
+            --created-at "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            --output "$CHECKPOINT_MANIFEST"
+
+          python3 scripts/bitcoin_consensus_checkpoint.py validate-manifest "$CHECKPOINT_MANIFEST"
+          gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"
+          gh release edit "$tag" --draft=false
+
+          echo "Published sealed checkpoint: $tag"
+          python3 scripts/bitcoin_consensus_checkpoint.py manifest-sha256 "$CHECKPOINT_MANIFEST"
