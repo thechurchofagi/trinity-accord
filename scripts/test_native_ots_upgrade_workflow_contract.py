@@ -92,6 +92,9 @@ def main() -> None:
         'run("git", "rebase", "origin/main"',
         'run("git", "push", "origin", "HEAD:main"',
         "assert_clean_tracked_worktree()",
+        'result.startswith("verified_")',
+        'result.startswith("already_verified")',
+        'commit_message = "chore: verify native OTS proof"',
     ]:
         require(orchestrator, marker, "no-cost orchestrator")
 
