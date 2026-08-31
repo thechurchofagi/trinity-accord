@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  checks: write
 
 concurrency:
   group: bitcoin-consensus-checkpoint-mainnet
@@ -45,6 +46,7 @@ jobs:
             echo "LATEST_RELEASE_JSON=$RUNNER_TEMP/latest-bitcoin-checkpoint-release.json"
             echo "ASSET_CATALOG=$RUNNER_TEMP/bitcoin-checkpoint-assets.tsv"
             echo "BITCOIN_LIVE_TELEMETRY_JSON=$RUNNER_TEMP/bitcoin-consensus-live.json"
+            echo "BITCOIN_LIVE_CHECK_RUN_ID_FILE=$RUNNER_TEMP/bitcoin-consensus-live-check-id"
           } >> "$GITHUB_ENV"
 
       - name: Record toolchain provenance
@@ -419,3 +421,26 @@ jobs:
 
           echo "Published sealed checkpoint: $tag"
           python3 scripts/bitcoin_consensus_checkpoint.py manifest-sha256 "$CHECKPOINT_MANIFEST"
+
+      - name: Finalize live telemetry check
+        if: always()
+        env:
+          BITCOIN_TELEMETRY_JOB_STATUS: ${{ job.status }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [[ ! -f "$BITCOIN_LIVE_CHECK_RUN_ID_FILE" ]]; then
+            echo "No live telemetry check was created in this run."
+            exit 0
+          fi
+
+          telemetry_args=()
+          if [[ -f "${RUNNER_TEMP}/final-chain-info.json" ]]; then
+            telemetry_args+=(--chain-info-file "${RUNNER_TEMP}/final-chain-info.json")
+          fi
+
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase workflow_finished \
+            "${telemetry_args[@]}" \
+            --complete \
+            --conclusion neutral
