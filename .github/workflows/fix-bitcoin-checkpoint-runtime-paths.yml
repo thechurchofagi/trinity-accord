@@ -1,0 +1,57 @@
+name: Fix Bitcoin Checkpoint Runtime Paths
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/fix-bitcoin-checkpoint-runtime-paths.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Patch invalid runner context usage
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/bitcoin-consensus-checkpoint.yml')
+          text = path.read_text()
+
+          old = '''      DATADIR: ${{ runner.temp }}/bitcoin-mainnet\n      CHECKPOINT_MANIFEST: ${{ runner.temp }}/bitcoin-consensus-checkpoint.json\n      PREVIOUS_MANIFEST: ${{ runner.temp }}/previous-bitcoin-consensus-checkpoint.json\n      LATEST_RELEASE_JSON: ${{ runner.temp }}/latest-bitcoin-checkpoint-release.json\n      ASSET_CATALOG: ${{ runner.temp }}/bitcoin-checkpoint-assets.tsv\n'''
+          if old not in text:
+              raise SystemExit('expected invalid runner.temp env block not found')
+          text = text.replace(old, '', 1)
+
+          anchor = '''      - name: Check out repository\n        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5\n\n'''
+          runtime = '''      - name: Initialize runner-local checkpoint paths\n        shell: bash\n        run: |\n          set -Eeuo pipefail\n          {\n            echo "DATADIR=$RUNNER_TEMP/bitcoin-mainnet"\n            echo "CHECKPOINT_MANIFEST=$RUNNER_TEMP/bitcoin-consensus-checkpoint.json"\n            echo "PREVIOUS_MANIFEST=$RUNNER_TEMP/previous-bitcoin-consensus-checkpoint.json"\n            echo "LATEST_RELEASE_JSON=$RUNNER_TEMP/latest-bitcoin-checkpoint-release.json"\n            echo "ASSET_CATALOG=$RUNNER_TEMP/bitcoin-checkpoint-assets.tsv"\n          } >> "$GITHUB_ENV"\n\n'''
+          if anchor not in text:
+              raise SystemExit('checkout anchor not found')
+          text = text.replace(anchor, anchor + runtime, 1)
+          path.write_text(text)
+          PY
+
+          git diff --check
+          git diff -- .github/workflows/bitcoin-consensus-checkpoint.yml
+
+      - name: Commit fix to main
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          git config user.name "trinity-bitcoin-checkpoint-bot"
+          git config user.email "actions@github.com"
+          git add .github/workflows/bitcoin-consensus-checkpoint.yml
+          git diff --cached --quiet && { echo "No patch needed"; exit 0; }
+          git commit -m "fix: initialize Bitcoin checkpoint runtime paths on runner"
+          git push origin HEAD:main
