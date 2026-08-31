@@ -56,7 +56,7 @@
         "status": "registered_without_arweave_tx",
         "archive_status": "registered_without_arweave_tx",
         "latest_bundle_file": "record-chain/ots/native-arweave-bundles/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.verified.arweave-bundle.json",
-        "latest_bundle_sha256": "62e5b1da494171b7f8bb442c1d3b5ce9808928090d835dafe902f3b775ee1145",
+        "latest_bundle_sha256": "b9fc101f0ed5a03ae76c63c41b245a67dbb2391174d76e80d24a8870a6a75a92",
         "latest_tx_id": null,
         "latest_gateway_url": null,
         "latest_ots_status": "verified",
