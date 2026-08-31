@@ -539,15 +539,15 @@ def native_ots_archivable_for_chain(native_ots_latest: dict, chain_tip: dict) ->
     )
 
     has_bitcoin_attestation = (
-        native_ots_latest.get("ots_status") == "upgraded"
+        native_ots_latest.get("ots_status") in {"upgraded", "verified"}
         and native_ots_latest.get("bitcoin_attestation_embedded") is True
         and native_ots_latest.get("bitcoin_pending") is False
     )
 
     if not (is_strictly_verified or has_bitcoin_attestation):
         errors.append(
-            "native OTS is not archivable; expected verified+bitcoin_verified=true+strict_bitcoin_verified=true "
-            "or upgraded+bitcoin_attestation_embedded=true+bitcoin_pending=false"
+            "native OTS is not archivable; expected local-full-node strict verification "
+            "or upgraded/verified+bitcoin_attestation_embedded=true+bitcoin_pending=false"
         )
 
     return not errors, errors

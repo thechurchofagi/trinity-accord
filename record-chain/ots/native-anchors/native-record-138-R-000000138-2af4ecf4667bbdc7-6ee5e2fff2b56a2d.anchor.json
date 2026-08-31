@@ -99,9 +99,14 @@
     }
   },
   "source_semantics": "native_chain_tip_records_indexes_batches.v1",
-  "strict_bitcoin_verified": true,
-  "strict_bitcoin_verified_at": "2026-08-31T02:03:23Z",
-  "strict_verify_unavailable_reason": null,
+  "strict_bitcoin_verified": false,
+  "strict_verify_unavailable_reason": "verification_profile_is_not_local_full_node",
   "upgraded_at": "2026-08-31T02:03:21Z",
-  "verified_at": "2026-08-31T02:03:23Z"
+  "verified_at": "2026-08-31T02:03:23Z",
+  "local_full_node_verified": false,
+  "remote_dual_source_verified": true,
+  "bitcoin_verification_profile": "dual_remote_esplora",
+  "bitcoin_verification_trust_boundary": "blockstream_and_mempool_remote_agreement_with_local_header_hash_check",
+  "bitcoin_verification_independent_consensus": false,
+  "verification_semantics_corrected_at": "2026-08-31T02:18:08Z"
 }

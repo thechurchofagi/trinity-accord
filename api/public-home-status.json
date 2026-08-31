@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.public-home-status.v3",
-  "generated_at": "2026-08-31T02:04:28.848524+00:00",
+  "generated_at": "2026-08-31T02:20:16.509741+00:00",
   "generated_from": [
     "/api/record-chain-status.json",
     "/api/record-chain-anchor-status.json",
@@ -23,7 +23,7 @@
     "/api/agent-declared-verification-index.json",
     "/api/waiting-heartbeat-status.json"
   ],
-  "source_digest": "a4f67543ee98b542",
+  "source_digest": "63ddc197da8422d8",
   "current_record_chain_status": {
     "phase": "production_live",
     "total_records": 138,
@@ -65,7 +65,7 @@
         "native_head_workflow": "/.github/workflows/record-chain-head-ots-anchor.yml",
         "native_latest_api": "/api/record-chain-native-ots-latest.json",
         "native_record_count": 138,
-        "status": "verified-bitcoin",
+        "status": "verified-bitcoin-remote-dual-source",
         "status_api": "/api/record-chain-native-ots-latest.json",
         "latest_record_index": 138,
         "latest_anchor_file": "record-chain/ots/native-anchors/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.json",
@@ -80,7 +80,7 @@
           "status": "registered_without_arweave_tx",
           "archive_status": "registered_without_arweave_tx",
           "latest_bundle_file": "record-chain/ots/native-arweave-bundles/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.verified.arweave-bundle.json",
-          "latest_bundle_sha256": "b9fc101f0ed5a03ae76c63c41b245a67dbb2391174d76e80d24a8870a6a75a92",
+          "latest_bundle_sha256": "17fb49daaeee5707db440740cbf60ae1e8fa74bbdd640a5791a0a2321093bfd3",
           "latest_tx_id": null,
           "latest_gateway_url": null,
           "latest_ots_status": "verified",
@@ -96,10 +96,15 @@
             "ots_proof_bundle_arweave_archive_is_not_successor_reception": true
           }
         },
-        "strict_bitcoin_verified": true,
+        "strict_bitcoin_verified": false,
         "checked_at": null,
         "upgraded_at": null,
-        "strict_bitcoin_verified_at": null
+        "strict_bitcoin_verified_at": null,
+        "local_full_node_verified": false,
+        "remote_dual_source_verified": true,
+        "bitcoin_verification_profile": "dual_remote_esplora",
+        "bitcoin_verification_trust_boundary": "blockstream_and_mempool_remote_agreement_with_local_header_hash_check",
+        "bitcoin_verification_independent_consensus": false
       },
       "arweave_archive": {
         "arweave_archive_is_mirror_only": true,
@@ -991,7 +996,7 @@
   },
   "waiting_heartbeat": {
     "schema": "trinityaccord.waiting-heartbeat-status.v1",
-    "generated_at": "2026-08-31T01:56:36Z",
+    "generated_at": "2026-08-31T02:18:25Z",
     "daily_alive_status": "success",
     "status": "success",
     "latest_result": "success",
@@ -1037,7 +1042,7 @@
       "ots_status": "verified",
       "bitcoin_pending": false,
       "bitcoin_verified": true,
-      "strict_bitcoin_verified": true,
+      "strict_bitcoin_verified": false,
       "covers_latest_waiting_heartbeat": true
     },
     "latest_arweave_capsule": null,

@@ -17,6 +17,20 @@ from record_chain_hashing import (
 )
 
 
+BITCOIN_VERIFICATION_PROFILES = (
+    "external_rpc",
+    "dual_remote_esplora",
+    "local_full_node",
+)
+
+BITCOIN_VERIFICATION_TRUST_BOUNDARIES = {
+    "none": "no_bitcoin_rpc_verification",
+    "external_rpc": "operator_configured_external_rpc",
+    "dual_remote_esplora": "blockstream_and_mempool_remote_agreement_with_local_header_hash_check",
+    "local_full_node": "locally_controlled_bitcoin_core_consensus",
+}
+
+
 def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -85,10 +99,28 @@ def main() -> None:
     parser.add_argument("--anchor-file", required=True)
     parser.add_argument("--ots-bin", default="ots")
     parser.add_argument("--upgrade", action="store_true")
-    parser.add_argument("--strict-bitcoin", action="store_true")
+    parser.add_argument(
+        "--require-bitcoin-verification",
+        "--strict-bitcoin",
+        dest="require_bitcoin_verification",
+        action="store_true",
+        help=(
+            "Fail closed unless OTS verifies against the configured Bitcoin RPC. "
+            "This requirement does not by itself make that RPC a local full node."
+        ),
+    )
     parser.add_argument("--allow-dry-run", action="store_true")
     parser.add_argument("--write-updated-anchor", action="store_true")
     parser.add_argument("--bitcoin-node-url", default=None)
+    parser.add_argument(
+        "--bitcoin-verification-profile",
+        choices=BITCOIN_VERIFICATION_PROFILES,
+        default="external_rpc",
+        help=(
+            "Trust boundary of --bitcoin-node-url. Only local_full_node may set "
+            "strict_bitcoin_verified=true."
+        ),
+    )
     args = parser.parse_args()
 
     anchor_path = Path(args.anchor_file)
@@ -154,6 +186,9 @@ def main() -> None:
     calendar_attested = False
     bitcoin_attestation_embedded = False
     strict_bitcoin_verified = False
+    local_full_node_verified = False
+    remote_dual_source_verified = False
+    bitcoin_verification_profile = "none"
     strict_verify_unavailable_reason = None
 
     ots_info_command = None
@@ -200,6 +235,10 @@ def main() -> None:
                 if not args.bitcoin_node_url:
                     # No Bitcoin node available; cannot do strict verify
                     strict_verify_unavailable_reason = "no_bitcoin_node"
+                    if args.require_bitcoin_verification:
+                        errors.append(
+                            "Bitcoin verification was required but --bitcoin-node-url was not provided"
+                        )
                     if bitcoin_attestation_embedded:
                         # ots info shows BitcoinBlockHeaderAttestation — proof is upgraded
                         bitcoin_pending = False
@@ -221,7 +260,10 @@ def main() -> None:
                             bitcoin_pending = True
                             calendar_attested = True
                 else:
-                    # Bitcoin node available — do strict verify
+                    # A Bitcoin-RPC-compatible endpoint is available. Verification
+                    # success proves the OTS path against that endpoint, but the
+                    # endpoint's trust profile decides whether this is independent
+                    # local-full-node verification or remote corroboration.
                     ots_verify_command = [args.ots_bin]
                     ots_verify_command += ["--bitcoin-node", args.bitcoin_node_url]
                     ots_verify_command += ["verify", str(ots_file)]
@@ -239,11 +281,18 @@ def main() -> None:
 
                     if verify.returncode == 0 and is_success_output(combined):
                         bitcoin_verified = True
-                        strict_bitcoin_verified = True
+                        bitcoin_verification_profile = args.bitcoin_verification_profile
+                        local_full_node_verified = (
+                            bitcoin_verification_profile == "local_full_node"
+                        )
+                        remote_dual_source_verified = (
+                            bitcoin_verification_profile == "dual_remote_esplora"
+                        )
+                        strict_bitcoin_verified = local_full_node_verified
                     elif is_pending_output(combined):
                         bitcoin_pending = True
                         calendar_attested = True
-                        if args.strict_bitcoin:
+                        if args.require_bitcoin_verification:
                             errors.append("OTS proof is pending and not Bitcoin-verified yet")
                     elif upgrade_timed_out:
                         bitcoin_pending = True
@@ -259,9 +308,14 @@ def main() -> None:
     anchor["checked_at"] = now
     if bitcoin_attestation_embedded and (args.upgrade or not anchor.get("upgraded_at")):
         anchor["upgraded_at"] = now
-    if strict_bitcoin_verified:
+    if bitcoin_verified:
         anchor["verified_at"] = now
+    if strict_bitcoin_verified:
         anchor["strict_bitcoin_verified_at"] = now
+    else:
+        # Remove stale claims produced by older code that equated an RPC shim
+        # with a locally controlled, consensus-validating Bitcoin full node.
+        anchor.pop("strict_bitcoin_verified_at", None)
     anchor["ots_verify_command"] = ots_verify_command
     anchor["ots_verify_exit_code"] = ots_verify_exit_code
     anchor["ots_verify_stdout"] = ots_verify_stdout
@@ -283,8 +337,17 @@ def main() -> None:
     anchor["calendar_attested"] = calendar_attested
     anchor["bitcoin_attestation_embedded"] = bitcoin_attestation_embedded
     anchor["strict_bitcoin_verified"] = strict_bitcoin_verified
+    anchor["local_full_node_verified"] = local_full_node_verified
+    anchor["remote_dual_source_verified"] = remote_dual_source_verified
+    anchor["bitcoin_verification_profile"] = bitcoin_verification_profile
+    anchor["bitcoin_verification_trust_boundary"] = BITCOIN_VERIFICATION_TRUST_BOUNDARIES[
+        bitcoin_verification_profile
+    ]
+    anchor["bitcoin_verification_independent_consensus"] = local_full_node_verified
+    if bitcoin_verified and not strict_bitcoin_verified:
+        strict_verify_unavailable_reason = "verification_profile_is_not_local_full_node"
     anchor["strict_verify_unavailable_reason"] = strict_verify_unavailable_reason
-    anchor["ots_status"] = "verified" if strict_bitcoin_verified else ("upgraded" if bitcoin_attestation_embedded else "pending")
+    anchor["ots_status"] = "verified" if bitcoin_verified else ("upgraded" if bitcoin_attestation_embedded else "pending")
 
     if args.write_updated_anchor:
         write_json_atomic(anchor_path, anchor)
@@ -302,8 +365,15 @@ def main() -> None:
         "calendar_attested": calendar_attested,
         "bitcoin_attestation_embedded": bitcoin_attestation_embedded,
         "strict_bitcoin_verified": strict_bitcoin_verified,
+        "local_full_node_verified": local_full_node_verified,
+        "remote_dual_source_verified": remote_dual_source_verified,
+        "bitcoin_verification_profile": bitcoin_verification_profile,
+        "bitcoin_verification_trust_boundary": BITCOIN_VERIFICATION_TRUST_BOUNDARIES[
+            bitcoin_verification_profile
+        ],
+        "bitcoin_verification_independent_consensus": local_full_node_verified,
         "strict_verify_unavailable_reason": strict_verify_unavailable_reason,
-        "strict_bitcoin": args.strict_bitcoin,
+        "require_bitcoin_verification": args.require_bitcoin_verification,
         "errors": errors,
         "generated_at": utc_now(),
     }

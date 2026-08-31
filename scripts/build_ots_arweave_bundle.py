@@ -107,6 +107,16 @@ def main() -> None:
         "anchored_file_sha256": anchor.get("anchored_file_sha256"),
         "ots_status": anchor.get("ots_status"),
         "bitcoin_verified": anchor.get("bitcoin_verified"),
+        "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified", False),
+        "local_full_node_verified": anchor.get("local_full_node_verified", False),
+        "remote_dual_source_verified": anchor.get("remote_dual_source_verified", False),
+        "bitcoin_verification_profile": anchor.get("bitcoin_verification_profile", "none"),
+        "bitcoin_verification_trust_boundary": anchor.get(
+            "bitcoin_verification_trust_boundary", "no_bitcoin_rpc_verification"
+        ),
+        "bitcoin_verification_independent_consensus": anchor.get(
+            "bitcoin_verification_independent_consensus", False
+        ),
         "bitcoin_pending": anchor.get("bitcoin_pending"),
         "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded", False),
         "created_at": utc_now(),

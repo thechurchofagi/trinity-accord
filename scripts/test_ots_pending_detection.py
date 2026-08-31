@@ -9,6 +9,9 @@ from __future__ import annotations
 import sys
 import tempfile
 import json
+import hashlib
+import os
+import subprocess
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -197,6 +200,79 @@ def test_upgrade_success_no_bitcoin_node_produces_upgraded_state() -> None:
     #   ots_status = "upgraded"
 
 
+def test_verification_profile_controls_strict_full_node_claim() -> None:
+    """RPC compatibility must never be mistaken for a local full node."""
+    with tempfile.TemporaryDirectory(prefix="trinity-ots-profile-") as tmp:
+        work = Path(tmp)
+        anchored_file = work / "head.json"
+        ots_file = work / "head.json.ots"
+        anchor_file = work / "anchor.json"
+        fake_ots = work / "ots"
+
+        anchored_file.write_text('{"head":"abc"}\n', encoding="utf-8")
+        ots_file.write_bytes(b"fake-ots-proof")
+        fake_ots.write_text(
+            "#!/bin/sh\n"
+            "if [ \"$1\" = \"info\" ]; then\n"
+            "  echo 'BitcoinBlockHeaderAttestation(block_height=1)'\n"
+            "else\n"
+            "  echo 'Success! Bitcoin timestamp complete'\n"
+            "fi\n",
+            encoding="utf-8",
+        )
+        os.chmod(fake_ots, 0o755)
+
+        def reset_anchor() -> None:
+            write_json_atomic(anchor_file, {
+                "schema": "trinityaccord.native-record-chain-ots-anchor.v1",
+                "anchored_file": str(anchored_file),
+                "anchored_file_sha256": hashlib.sha256(anchored_file.read_bytes()).hexdigest(),
+                "ots_file": str(ots_file),
+                "ots_file_sha256": hashlib.sha256(ots_file.read_bytes()).hexdigest(),
+                "ots_status": "upgraded",
+            })
+
+        def verify(profile: str) -> dict:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(REPO_ROOT / "scripts/ots_verify_record_chain_anchor.py"),
+                    "--anchor-file", str(anchor_file),
+                    "--ots-bin", str(fake_ots),
+                    "--bitcoin-node-url", "http://127.0.0.1:18443/",
+                    "--bitcoin-verification-profile", profile,
+                    "--require-bitcoin-verification",
+                    "--write-updated-anchor",
+                ],
+                text=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            assert result.returncode == 0, result.stderr
+            return json.loads(anchor_file.read_text(encoding="utf-8"))
+
+        reset_anchor()
+        remote = verify("dual_remote_esplora")
+        assert remote["ots_status"] == "verified"
+        assert remote["bitcoin_verified"] is True
+        assert remote["remote_dual_source_verified"] is True
+        assert remote["local_full_node_verified"] is False
+        assert remote["strict_bitcoin_verified"] is False
+        assert remote["bitcoin_verification_independent_consensus"] is False
+        assert remote["strict_verify_unavailable_reason"] == "verification_profile_is_not_local_full_node"
+        assert "strict_bitcoin_verified_at" not in remote
+
+        reset_anchor()
+        local = verify("local_full_node")
+        assert local["bitcoin_verified"] is True
+        assert local["local_full_node_verified"] is True
+        assert local["remote_dual_source_verified"] is False
+        assert local["strict_bitcoin_verified"] is True
+        assert local["bitcoin_verification_independent_consensus"] is True
+        assert "strict_bitcoin_verified_at" in local
+
+
 def main() -> None:
     test_is_pending_output_detects_upgrade_markers()
     test_is_success_output_rejects_bitcoin_node_error()
@@ -205,6 +281,7 @@ def main() -> None:
     test_upgrade_success_marks_calendar_attested_not_bitcoin_verified()
     test_strict_verify_unavailable_does_not_fail_upgraded_proof()
     test_upgrade_success_no_bitcoin_node_produces_upgraded_state()
+    test_verification_profile_controls_strict_full_node_claim()
     print("PASS: OTS pending detection fixture tests")
 
 

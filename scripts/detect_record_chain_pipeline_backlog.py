@@ -47,9 +47,13 @@ def native_ots_is_strictly_verified(ots: dict[str, Any]) -> bool:
 
 
 def native_ots_has_bitcoin_attestation(ots: dict[str, Any]) -> bool:
-    """Return True for upgraded proofs with embedded BitcoinBlockHeaderAttestation."""
+    """Return True for proofs with an embedded BitcoinBlockHeaderAttestation.
+
+    A proof can remain archivable after remote Bitcoin verification changes its
+    lifecycle status from upgraded to verified.
+    """
     return (
-        ots.get("ots_status") == "upgraded"
+        ots.get("ots_status") in {"upgraded", "verified"}
         and ots.get("bitcoin_attestation_embedded") is True
         and ots.get("bitcoin_pending") is False
     )

@@ -213,7 +213,20 @@ def sync_latest_ots_from_anchor(anchor_rel: str) -> dict[str, Any]:
     latest["calendar_attested"] = anchor.get("calendar_attested", latest.get("calendar_attested", False))
     latest["bitcoin_attestation_embedded"] = anchor.get("bitcoin_attestation_embedded", latest.get("bitcoin_attestation_embedded", False))
     latest["strict_bitcoin_verified"] = anchor.get("strict_bitcoin_verified", latest.get("strict_bitcoin_verified", False))
+    latest["local_full_node_verified"] = anchor.get("local_full_node_verified", False)
+    latest["remote_dual_source_verified"] = anchor.get("remote_dual_source_verified", False)
+    latest["bitcoin_verification_profile"] = anchor.get("bitcoin_verification_profile", "none")
+    latest["bitcoin_verification_trust_boundary"] = anchor.get(
+        "bitcoin_verification_trust_boundary", "no_bitcoin_rpc_verification"
+    )
+    latest["bitcoin_verification_independent_consensus"] = anchor.get(
+        "bitcoin_verification_independent_consensus", False
+    )
     latest["strict_verify_unavailable_reason"] = anchor.get("strict_verify_unavailable_reason", latest.get("strict_verify_unavailable_reason"))
+    if anchor.get("strict_bitcoin_verified_at"):
+        latest["strict_bitcoin_verified_at"] = anchor["strict_bitcoin_verified_at"]
+    else:
+        latest.pop("strict_bitcoin_verified_at", None)
     latest["updated_at"] = now
     if anchor.get("verified_at"):
         latest["verified_at"] = anchor["verified_at"]
@@ -261,6 +274,7 @@ def ots_upgrade_and_verify(
     log_dir: Path,
     ots_bin: str,
     bitcoin_node_url: str | None,
+    bitcoin_verification_profile: str,
     strict: bool,
     skip_upgrade: bool = False,
 ) -> tuple[dict[str, Any], bool]:
@@ -278,8 +292,9 @@ def ots_upgrade_and_verify(
         cmd.append("--upgrade")
     if bitcoin_node_url:
         cmd += ["--bitcoin-node-url", bitcoin_node_url]
+        cmd += ["--bitcoin-verification-profile", bitcoin_verification_profile]
     if strict:
-        cmd.append("--strict-bitcoin")
+        cmd.append("--require-bitcoin-verification")
 
     result = run_cmd(
         cmd,
@@ -524,6 +539,11 @@ def main() -> int:
     parser.add_argument("--log-dir", default=None)
     parser.add_argument("--ots-bin", default="ots")
     parser.add_argument("--bitcoin-node-url", default=os.environ.get("OTS_BITCOIN_NODE_URL"))
+    parser.add_argument(
+        "--bitcoin-verification-profile",
+        choices=("external_rpc", "dual_remote_esplora", "local_full_node"),
+        default=os.environ.get("OTS_BITCOIN_VERIFICATION_PROFILE", "external_rpc"),
+    )
     parser.add_argument("--skip-upgrade", action="store_true",
                         default=(os.environ.get("OTS_SKIP_UPGRADE", "").strip().lower() in {"1", "true", "yes", "on"}),
                         help="Skip ots upgrade step (use when calendar servers are unreachable)")
@@ -587,6 +607,7 @@ def main() -> int:
         log_dir=log_dir,
         ots_bin=args.ots_bin,
         bitcoin_node_url=args.bitcoin_node_url,
+        bitcoin_verification_profile=args.bitcoin_verification_profile,
         strict=False,
         skip_upgrade=args.skip_upgrade,
     )
@@ -602,6 +623,7 @@ def main() -> int:
             log_dir=log_dir,
             ots_bin=args.ots_bin,
             bitcoin_node_url=args.bitcoin_node_url,
+            bitcoin_verification_profile=args.bitcoin_verification_profile,
             strict=True,
             skip_upgrade=args.skip_upgrade,
         )
