@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  checks: write
 
 concurrency:
   group: bitcoin-consensus-checkpoint-mainnet
@@ -44,6 +45,8 @@ jobs:
             echo "PREVIOUS_MANIFEST=$RUNNER_TEMP/previous-bitcoin-consensus-checkpoint.json"
             echo "LATEST_RELEASE_JSON=$RUNNER_TEMP/latest-bitcoin-checkpoint-release.json"
             echo "ASSET_CATALOG=$RUNNER_TEMP/bitcoin-checkpoint-assets.tsv"
+            echo "BITCOIN_LIVE_TELEMETRY_JSON=$RUNNER_TEMP/bitcoin-consensus-live.json"
+            echo "BITCOIN_LIVE_CHECK_RUN_ID_FILE=$RUNNER_TEMP/bitcoin-consensus-live-check-id"
           } >> "$GITHUB_ENV"
 
       - name: Record toolchain provenance
@@ -63,6 +66,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends zstd jq
           df -h /
           python3 scripts/bitcoin_consensus_checkpoint.py --help >/dev/null
+          python3 scripts/bitcoin_checkpoint_telemetry.py --help >/dev/null
 
       - name: Locate latest sealed checkpoint
         id: latest
@@ -230,17 +234,34 @@ jobs:
           bitcoind -datadir="$DATADIR" -daemonwait
           start_height="$(bitcoin-cli -datadir="$DATADIR" getblockcount)"
           deadline=$(( $(date +%s) + SYNC_SECONDS ))
+          live_chain_info="${RUNNER_TEMP}/live-chain-info.json"
+          live_network_info="${RUNNER_TEMP}/live-network-info.json"
 
           while (( $(date +%s) < deadline )); do
-            info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
+            bitcoin-cli -datadir="$DATADIR" getblockchaininfo > "$live_chain_info"
+            bitcoin-cli -datadir="$DATADIR" getnetworkinfo > "$live_network_info"
+            info="$(cat "$live_chain_info")"
             height="$(jq -r '.blocks' <<<"$info")"
             headers="$(jq -r '.headers' <<<"$info")"
             progress="$(jq -r '.verificationprogress' <<<"$info")"
             ibd="$(jq -r '.initialblockdownload' <<<"$info")"
             free_kib="$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')"
+            now="$(date +%s)"
+            remaining=$(( deadline - now ))
+            if (( remaining < 0 )); then
+              remaining=0
+            fi
 
-            printf 'height=%s headers=%s verificationprogress=%s ibd=%s free_kib=%s\n' \
-              "$height" "$headers" "$progress" "$ibd" "$free_kib"
+            printf 'height=%s headers=%s verificationprogress=%s ibd=%s free_kib=%s connections=%s\n' \
+              "$height" "$headers" "$progress" "$ibd" "$free_kib" \
+              "$(jq -r '.connections' "$live_network_info")"
+
+            python3 scripts/bitcoin_checkpoint_telemetry.py \
+              --phase syncing \
+              --chain-info-file "$live_chain_info" \
+              --network-info-file "$live_network_info" \
+              --free-kib "$free_kib" \
+              --seconds-remaining "$remaining"
 
             if [[ "$ibd" == "false" ]]; then
               echo "Bitcoin Core reports IBD complete."
@@ -253,6 +274,13 @@ jobs:
             sleep 60
           done
 
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase sync_window_finished \
+            --chain-info-file "$live_chain_info" \
+            --network-info-file "$live_network_info" \
+            --free-kib "$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')" \
+            --seconds-remaining 0
+
           bitcoin-cli -datadir="$DATADIR" stop >/dev/null
           while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
           trap - EXIT INT TERM
@@ -263,6 +291,12 @@ jobs:
           bitcoin-cli -datadir="$DATADIR" getblockchaininfo > "${RUNNER_TEMP}/final-chain-info.json"
           bitcoin-cli -datadir="$DATADIR" stop >/dev/null
           while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
+
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase validated_clean_state \
+            --chain-info-file "${RUNNER_TEMP}/final-chain-info.json" \
+            --free-kib "$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')" \
+            --seconds-remaining 0
 
           final_height="$(jq -r '.blocks' "${RUNNER_TEMP}/final-chain-info.json")"
           if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
@@ -280,6 +314,12 @@ jobs:
         run: |
           set -Eeuo pipefail
           : > "$ASSET_CATALOG"
+
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase sealing_checkpoint \
+            --chain-info-file "${RUNNER_TEMP}/final-chain-info.json" \
+            --free-kib "$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')" \
+            --seconds-remaining 0
 
           if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
             previous_sequence="$(jq -r '.checkpoint.sequence' "$PREVIOUS_MANIFEST")"
@@ -373,5 +413,34 @@ jobs:
           gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"
           gh release edit "$tag" --draft=false
 
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase checkpoint_published \
+            --chain-info-file "${RUNNER_TEMP}/final-chain-info.json" \
+            --free-kib "$(df --output=avail "$DATADIR" | tail -n1 | tr -d ' ')" \
+            --seconds-remaining 0
+
           echo "Published sealed checkpoint: $tag"
           python3 scripts/bitcoin_consensus_checkpoint.py manifest-sha256 "$CHECKPOINT_MANIFEST"
+
+      - name: Finalize live telemetry check
+        if: always()
+        env:
+          BITCOIN_TELEMETRY_JOB_STATUS: ${{ job.status }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [[ ! -f "$BITCOIN_LIVE_CHECK_RUN_ID_FILE" ]]; then
+            echo "No live telemetry check was created in this run."
+            exit 0
+          fi
+
+          telemetry_args=()
+          if [[ -f "${RUNNER_TEMP}/final-chain-info.json" ]]; then
+            telemetry_args+=(--chain-info-file "${RUNNER_TEMP}/final-chain-info.json")
+          fi
+
+          python3 scripts/bitcoin_checkpoint_telemetry.py \
+            --phase workflow_finished \
+            "${telemetry_args[@]}" \
+            --complete \
+            --conclusion neutral
