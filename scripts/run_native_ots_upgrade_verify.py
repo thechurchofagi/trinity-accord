@@ -674,7 +674,9 @@ def main() -> int:
         anchor_rel=anchor_rel,
         log_dir=log_dir,
         ots_bin=args.ots_bin,
-        bitcoin_node_url=args.bitcoin_node_url,
+        # Upgrade and inspect the proof first. Strict verification is a separate,
+        # fail-closed phase below so the Bitcoin transport is used exactly once.
+        bitcoin_node_url=None,
         strict=False,
         skip_upgrade=args.skip_upgrade,
     )
@@ -690,6 +692,9 @@ def main() -> int:
             ots_bin=args.ots_bin,
             bitcoin_node_url=args.bitcoin_node_url,
             strict=True,
+            # The non-strict phase already contacted the calendars and updated
+            # the proof. Do not repeat that network mutation during verification.
+            skip_upgrade=True,
         )
 
     # Sync latest only when the selected anchor is the current latest.

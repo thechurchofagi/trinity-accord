@@ -257,7 +257,7 @@ def main() -> None:
 
     now = utc_now()
     anchor["checked_at"] = now
-    if bitcoin_attestation_embedded:
+    if bitcoin_attestation_embedded and (args.upgrade or not anchor.get("upgraded_at")):
         anchor["upgraded_at"] = now
     if strict_bitcoin_verified:
         anchor["verified_at"] = now
@@ -266,10 +266,14 @@ def main() -> None:
     anchor["ots_verify_exit_code"] = ots_verify_exit_code
     anchor["ots_verify_stdout"] = ots_verify_stdout
     anchor["ots_verify_stderr"] = ots_verify_stderr
-    anchor["ots_upgrade_command"] = ots_upgrade_command
-    anchor["ots_upgrade_exit_code"] = ots_upgrade_exit_code
-    anchor["ots_upgrade_stdout"] = ots_upgrade_stdout
-    anchor["ots_upgrade_stderr"] = ots_upgrade_stderr
+    # A verify-only pass must not erase the prior calendar-upgrade transcript.
+    # Those fields describe how the current .ots bytes were obtained and remain
+    # useful provenance after strict Bitcoin verification succeeds.
+    if args.upgrade:
+        anchor["ots_upgrade_command"] = ots_upgrade_command
+        anchor["ots_upgrade_exit_code"] = ots_upgrade_exit_code
+        anchor["ots_upgrade_stdout"] = ots_upgrade_stdout
+        anchor["ots_upgrade_stderr"] = ots_upgrade_stderr
     anchor["ots_info_command"] = ots_info_command
     anchor["ots_info_exit_code"] = ots_info_exit_code
     anchor["ots_info_stdout"] = ots_info_stdout
