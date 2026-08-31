@@ -204,7 +204,11 @@ def main() -> int:
 
     if combined_returncode != 0:
         commit_message = "chore: checkpoint incomplete native OTS lifecycle"
-    elif result in {"verified", "already_verified"}:
+    elif (
+        result == "verified"
+        or result.startswith("verified_")
+        or result.startswith("already_verified")
+    ):
         commit_message = "chore: verify native OTS proof"
     else:
         commit_message = "chore: sync upgraded native OTS anchor and registry"
