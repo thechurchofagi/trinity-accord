@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.native-ots-backlog.v1",
-  "updated_at": "2026-08-31T01:56:05Z",
+  "updated_at": "2026-08-31T02:03:24Z",
   "items": [
     {
       "key": "9500673381367a9c586dcac6cc6994383dca1993e92d9ae11cf9f183c8878b22",
@@ -499,7 +499,7 @@
       "next_action": "upload_native_ots_bundle"
     },
     {
-      "key": "6f25233b0e5d293b15d864bac64343aaa89fd0619bc0bb9fe77113da08152944",
+      "key": "6313bf6fde0a122fea0dee23b053fa3cade36cbe1b6ee78cff4b851958ea405e",
       "kind": "native_ots_bundle",
       "record_index": 138,
       "archive_status": "pending_upload",
@@ -507,7 +507,7 @@
       "ots_status": "verified",
       "anchor_file": "record-chain/ots/native-anchors/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.json",
       "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.verified.arweave-bundle.json",
-      "bundle_sha256": "62e5b1da494171b7f8bb442c1d3b5ce9808928090d835dafe902f3b775ee1145",
+      "bundle_sha256": "b9fc101f0ed5a03ae76c63c41b245a67dbb2391174d76e80d24a8870a6a75a92",
       "tx_id": null,
       "retry_count": 0,
       "last_attempt_at": null,
