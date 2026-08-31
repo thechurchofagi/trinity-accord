@@ -29,15 +29,22 @@ jobs:
       BITCOIN_VERSION: "31.1"
       PRUNE_MIB: "550"
       SYNC_SECONDS: "14400"
-      DATADIR: ${{ runner.temp }}/bitcoin-mainnet
-      CHECKPOINT_MANIFEST: ${{ runner.temp }}/bitcoin-consensus-checkpoint.json
-      PREVIOUS_MANIFEST: ${{ runner.temp }}/previous-bitcoin-consensus-checkpoint.json
-      LATEST_RELEASE_JSON: ${{ runner.temp }}/latest-bitcoin-checkpoint-release.json
-      ASSET_CATALOG: ${{ runner.temp }}/bitcoin-checkpoint-assets.tsv
 
     steps:
       - name: Check out repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Initialize runner-local checkpoint paths
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          {
+            echo "DATADIR=$RUNNER_TEMP/bitcoin-mainnet"
+            echo "CHECKPOINT_MANIFEST=$RUNNER_TEMP/bitcoin-consensus-checkpoint.json"
+            echo "PREVIOUS_MANIFEST=$RUNNER_TEMP/previous-bitcoin-consensus-checkpoint.json"
+            echo "LATEST_RELEASE_JSON=$RUNNER_TEMP/latest-bitcoin-checkpoint-release.json"
+            echo "ASSET_CATALOG=$RUNNER_TEMP/bitcoin-checkpoint-assets.tsv"
+          } >> "$GITHUB_ENV"
 
       - name: Record toolchain provenance
         shell: bash
