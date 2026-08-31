@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.native-ots-backlog.v1",
-  "updated_at": "2026-08-30T12:12:36Z",
+  "updated_at": "2026-08-31T01:56:05Z",
   "items": [
     {
       "key": "9500673381367a9c586dcac6cc6994383dca1993e92d9ae11cf9f183c8878b22",
@@ -499,15 +499,15 @@
       "next_action": "upload_native_ots_bundle"
     },
     {
-      "key": "87d840cc36c30596f5976fae43c2327148c0a35170d1d7a0a707d059bd4e3841",
+      "key": "6f25233b0e5d293b15d864bac64343aaa89fd0619bc0bb9fe77113da08152944",
       "kind": "native_ots_bundle",
       "record_index": 138,
       "archive_status": "pending_upload",
       "anchored_file_sha256": "6ee5e2fff2b56a2d321a035e7369ae94e2e7ae7eca4cf07d37707930c8caaf23",
-      "ots_status": "upgraded",
+      "ots_status": "verified",
       "anchor_file": "record-chain/ots/native-anchors/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.json",
-      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.upgraded.arweave-bundle.json",
-      "bundle_sha256": "70ed5a9f5199e9335202e634f960e415cbfac66e49c10dbfbebae7c3fc2720bb",
+      "bundle_file": "record-chain/ots/native-arweave-bundles/native-record-138-R-000000138-2af4ecf4667bbdc7-6ee5e2fff2b56a2d.anchor.verified.arweave-bundle.json",
+      "bundle_sha256": "62e5b1da494171b7f8bb442c1d3b5ce9808928090d835dafe902f3b775ee1145",
       "tx_id": null,
       "retry_count": 0,
       "last_attempt_at": null,
@@ -530,8 +530,8 @@
     "scan_scope": "all_native_anchors",
     "native_anchor_count": 106,
     "native_anchor_pending_count": 0,
-    "native_anchor_upgraded_count": 106,
-    "native_anchor_verified_count": 0,
+    "native_anchor_upgraded_count": 105,
+    "native_anchor_verified_count": 1,
     "native_anchor_upgraded_or_verified_count": 106,
     "upgrade_completed_prefix_record_index": 106,
     "arweave_archive_completed_prefix_record_index": 106
