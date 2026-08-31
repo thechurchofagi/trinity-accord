@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 350
     env:
       GH_TOKEN: ${{ github.token }}
+      FORCE_CHECKPOINT: ${{ inputs.force_checkpoint || false }}
       BITCOIN_VERSION: "31.1"
       PRUNE_MIB: "550"
       SYNC_SECONDS: "14400"
@@ -109,7 +110,7 @@ jobs:
           echo "previous_manifest_sha256=$manifest_sha" >> "$GITHUB_OUTPUT"
 
           ibd="$(jq -r '.initialblockdownload' "$PREVIOUS_MANIFEST")"
-          if [[ "$ibd" == "false" && "${{ inputs.force_checkpoint || false }}" != "true" ]]; then
+          if [[ "$ibd" == "false" && "$FORCE_CHECKPOINT" != "true" ]]; then
             echo "Latest sealed checkpoint already completed initial block download."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
