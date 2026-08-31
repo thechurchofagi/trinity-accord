@@ -30,10 +30,14 @@ def main() -> None:
         "branches:",
         "- main",
         '".github/workflows/native-ots-upgrade-watch.yml"',
+        '"scripts/bitcoin_esplora_rpc_proxy.py"',
+        '"scripts/ots_verify_record_chain_anchor.py"',
         '"scripts/run_native_ots_workflow_once.py"',
         '"scripts/run_native_ots_upgrade_verify.py"',
         '"scripts/reconcile_native_ots_generated_state.py"',
         '"scripts/detect_archive_backlog.py"',
+        '"scripts/test_native_ots_upgrade_workflow_contract.py"',
+        '"tests/test_bitcoin_esplora_rpc_proxy.py"',
         "workflow_dispatch:",
         'cron: "42 6 * * *"',
         "contents: write",
@@ -48,8 +52,14 @@ def main() -> None:
         "Run Native OTS workflow contract tests",
         "scripts/test_native_ots_upgrade_workflow_contract.py",
         "scripts/test_native_ots_complete_staging_contract.py",
+        "tests/test_bitcoin_esplora_rpc_proxy.py",
         "run_native_ots_workflow_once.py",
         "record-chain/audit/native-ots/",
+        "OTS_BITCOIN_NODE_URL",
+        "scripts/bitcoin_esplora_rpc_proxy.py",
+        "blockstream,mempool",
+        "NATIVE OTS BITCOIN RPC PREFLIGHT PASS",
+        "trap cleanup_proxy EXIT",
     ]:
         require(workflow, marker, "daily no-cost workflow")
 
@@ -127,6 +137,37 @@ def main() -> None:
         "strict_bitcoin_verified",
     ]:
         require(runner, marker, "local Native OTS lifecycle")
+
+    lifecycle = runner.split("# Step 1: Non-strict upgrade+verify", 1)[-1].split(
+        "# Sync latest only when the selected anchor is the current latest.", 1
+    )[0]
+    require(
+        lifecycle,
+        "bitcoin_node_url=None",
+        "single-purpose non-strict upgrade phase",
+    )
+    require(
+        lifecycle,
+        "bitcoin_node_url=args.bitcoin_node_url",
+        "strict Bitcoin verification transport",
+    )
+    require(
+        lifecycle,
+        "skip_upgrade=True",
+        "non-duplicating strict verification phase",
+    )
+
+    verifier = (ROOT / "scripts/ots_verify_record_chain_anchor.py").read_text(encoding="utf-8")
+    require(
+        verifier,
+        "if args.upgrade:",
+        "verify-only preservation of prior upgrade provenance",
+    )
+    require(
+        verifier,
+        'args.upgrade or not anchor.get("upgraded_at")',
+        "verify-only preservation of the original upgrade timestamp",
+    )
 
     for marker in [
         "never upgrades an OTS proof and never uploads to Arweave",

@@ -6,10 +6,14 @@ on:
       - main
     paths:
       - ".github/workflows/native-ots-upgrade-watch.yml"
+      - "scripts/bitcoin_esplora_rpc_proxy.py"
+      - "scripts/ots_verify_record_chain_anchor.py"
       - "scripts/run_native_ots_workflow_once.py"
       - "scripts/run_native_ots_upgrade_verify.py"
       - "scripts/reconcile_native_ots_generated_state.py"
       - "scripts/detect_archive_backlog.py"
+      - "scripts/test_native_ots_upgrade_workflow_contract.py"
+      - "tests/test_bitcoin_esplora_rpc_proxy.py"
   schedule:
     # Daily no-cost OTS upgrade/verification. Arweave publication is owned only
     # by the weekly continuity archive workflow.
@@ -69,15 +73,19 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -euo pipefail
           python3 -m pip install -r requirements-ci.txt
           python3 -m pip install -r requirements-ots.txt
           ots --help
+          python3 -m py_compile scripts/bitcoin_esplora_rpc_proxy.py
 
       - name: Run Native OTS workflow contract tests
         run: |
           python3 scripts/test_native_ots_upgrade_workflow_contract.py
           python3 scripts/test_native_ots_complete_staging_contract.py
-          python3 -m pytest -q tests/test_arweave_cost_boundaries.py
+          python3 -m pytest -q \
+            tests/test_arweave_cost_boundaries.py \
+            tests/test_bitcoin_esplora_rpc_proxy.py
 
       - name: Resolve Native OTS mode
         id: mode
@@ -96,11 +104,82 @@ jobs:
           esac
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
-      - name: Run one bounded no-cost Native OTS lifecycle attempt
+      - name: Run one bounded no-cost Native OTS lifecycle attempt with strict Bitcoin verification
         env:
           NATIVE_OTS_MODE: ${{ steps.mode.outputs.mode }}
           OTS_UPGRADE_TIMEOUT: "180"
-        run: python3 scripts/run_native_ots_workflow_once.py
+          OTS_BITCOIN_NODE_URL: "http://127.0.0.1:18443/"
+        run: |
+          set -euo pipefail
+          audit_dir="record-chain/audit/native-ots/${NATIVE_OTS_RUN_ID}"
+          mkdir -p "$audit_dir"
+          proxy_trace="$audit_dir/bitcoin-rpc-proxy.jsonl"
+          proxy_stdout="$audit_dir/bitcoin-rpc-proxy.stdout.txt"
+          proxy_stderr="$audit_dir/bitcoin-rpc-proxy.stderr.txt"
+
+          python3 scripts/bitcoin_esplora_rpc_proxy.py \
+            --host 127.0.0.1 \
+            --port 18443 \
+            --trace "$proxy_trace" \
+            --timeout 20 \
+            > "$proxy_stdout" 2> "$proxy_stderr" &
+          proxy_pid=$!
+          echo "[NATIVE OTS BITCOIN RPC START] pid=$proxy_pid providers=blockstream,mempool"
+          cleanup_proxy() {
+            if kill -0 "$proxy_pid" 2>/dev/null; then
+              kill "$proxy_pid"
+              wait "$proxy_pid" 2>/dev/null || true
+            fi
+          }
+          trap cleanup_proxy EXIT
+
+          python3 - <<'PY'
+          import json
+          import time
+          import urllib.request
+
+          url = "http://127.0.0.1:18443/"
+          last_error = None
+          for attempt in range(1, 6):
+              try:
+                  request = urllib.request.Request(
+                      url,
+                      data=json.dumps({
+                          "jsonrpc": "1.0",
+                          "id": "native-ots-preflight",
+                          "method": "getblockcount",
+                          "params": [],
+                      }).encode(),
+                      headers={"Content-Type": "application/json"},
+                      method="POST",
+                  )
+                  with urllib.request.urlopen(request, timeout=45) as response:
+                      body = json.loads(response.read())
+                  if body.get("error") is not None:
+                      raise RuntimeError(body["error"])
+                  height = body.get("result")
+                  if not isinstance(height, int) or isinstance(height, bool) or height < 1:
+                      raise RuntimeError(f"unexpected conservative Bitcoin tip: {height!r}")
+                  print(
+                      "[NATIVE OTS BITCOIN RPC PREFLIGHT PASS] "
+                      f"conservative_tip={height} attempt={attempt}"
+                  )
+                  break
+              except Exception as exc:
+                  last_error = exc
+                  print(
+                      "[NATIVE OTS BITCOIN RPC PREFLIGHT RETRY] "
+                      f"attempt={attempt} error={type(exc).__name__}: {exc}"
+                  )
+                  time.sleep(2)
+          else:
+              raise SystemExit(
+                  "dual-source Bitcoin RPC proxy never became healthy: "
+                  f"{last_error}"
+              )
+          PY
+
+          python3 scripts/run_native_ots_workflow_once.py
 
       - name: Upload Native OTS audit logs
         if: always()
