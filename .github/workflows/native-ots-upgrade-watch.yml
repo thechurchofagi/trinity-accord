@@ -128,7 +128,7 @@ jobs:
           cleanup_proxy() {
             if kill -0 "$proxy_pid" 2>/dev/null; then
               kill "$proxy_pid"
-              wait "$proxy_pid" 2>/dev/null || true
+              wait "$proxy_pid" 2>/dev/null
             fi
           }
           trap cleanup_proxy EXIT
