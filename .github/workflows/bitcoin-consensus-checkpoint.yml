@@ -10,13 +10,6 @@ on:
         default: false
   schedule:
     - cron: "17 */6 * * *"
-  # Temporary self-start path for the first corrected main run. Remove after
-  # the run is observed past the Release preflight.
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/bitcoin-consensus-checkpoint.yml"
 
 permissions:
   contents: write
