@@ -43,7 +43,7 @@ jobs:
         run: |
           set -Eeuo pipefail
           df -h /
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc || true
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends zstd jq
           df -h /
@@ -156,7 +156,7 @@ jobs:
           curl --fail --silent --show-error --location --retry 5 \
             --output SHA256SUMS "$base/SHA256SUMS"
 
-          expected_line="$(grep -E "^[0-9a-f]{64}  ${archive}$" SHA256SUMS || true)"
+          expected_line="$(awk -v archive="$archive" '$2 == archive && $1 ~ /^[0-9a-f]{64}$/ { print; exit }' SHA256SUMS)"
           if [[ -z "$expected_line" ]]; then
             echo "Official SHA256SUMS does not contain the expected Bitcoin Core archive" >&2
             exit 1
@@ -183,7 +183,7 @@ jobs:
 
           if [[ "$actual_height" != "$expected_height" || "$actual_hash" != "$expected_hash" ]]; then
             echo "Restored Bitcoin Core state does not match the sealed predecessor manifest" >&2
-            bitcoin-cli -datadir="$DATADIR" stop || true
+            bitcoin-cli -datadir="$DATADIR" stop
             exit 1
           fi
 
@@ -208,7 +208,7 @@ jobs:
           EOF
 
           stop_core() {
-            bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1 || true
+            bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1
           }
           trap stop_core EXIT INT TERM
 
@@ -301,7 +301,6 @@ jobs:
           if [[ -n "$stale_id" ]]; then
             echo "Removing incomplete draft from an interrupted prior attempt: $tag"
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/tags/${tag}" >/dev/null 2>&1 || true
           fi
 
           gh release create "$tag" \
