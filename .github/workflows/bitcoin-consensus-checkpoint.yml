@@ -147,7 +147,7 @@ jobs:
 
           cleanup_probe() {
             if [[ -n "$probe_id" ]]; then
-              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${probe_id}" >/dev/null 2>&1 || true
+              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${probe_id}" >/dev/null
             fi
           }
           trap cleanup_probe EXIT
