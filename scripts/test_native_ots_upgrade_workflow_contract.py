@@ -56,6 +56,7 @@ def main() -> None:
         "run_native_ots_workflow_once.py",
         "record-chain/audit/native-ots/",
         "OTS_BITCOIN_NODE_URL",
+        'OTS_BITCOIN_VERIFICATION_PROFILE: "dual_remote_esplora"',
         "scripts/bitcoin_esplora_rpc_proxy.py",
         "blockstream,mempool",
         "NATIVE OTS BITCOIN RPC PREFLIGHT PASS",
@@ -138,6 +139,8 @@ def main() -> None:
         "ots_upgrade_and_verify",
         "bitcoin_attestation_embedded",
         "strict_bitcoin_verified",
+        "bitcoin_verification_profile",
+        "remote_dual_source_verified",
     ]:
         require(runner, marker, "local Native OTS lifecycle")
 
@@ -159,6 +162,11 @@ def main() -> None:
         "skip_upgrade=True",
         "non-duplicating strict verification phase",
     )
+    require(
+        lifecycle,
+        "bitcoin_verification_profile=args.bitcoin_verification_profile",
+        "explicit Bitcoin verification trust profile",
+    )
 
     verifier = (ROOT / "scripts/ots_verify_record_chain_anchor.py").read_text(encoding="utf-8")
     require(
@@ -170,6 +178,16 @@ def main() -> None:
         verifier,
         'args.upgrade or not anchor.get("upgraded_at")',
         "verify-only preservation of the original upgrade timestamp",
+    )
+    require(
+        verifier,
+        'bitcoin_verification_profile == "local_full_node"',
+        "strict verification reserved for local full nodes",
+    )
+    require(
+        verifier,
+        'bitcoin_verification_profile == "dual_remote_esplora"',
+        "dual remote source classification",
     )
 
     for marker in [

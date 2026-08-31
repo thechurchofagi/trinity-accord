@@ -1,6 +1,6 @@
 {
   "schema": "trinityaccord.waiting-heartbeat-status.v1",
-  "generated_at": "2026-08-31T01:56:36Z",
+  "generated_at": "2026-08-31T02:18:25Z",
   "daily_alive_status": "success",
   "status": "success",
   "latest_result": "success",
@@ -46,7 +46,7 @@
     "ots_status": "verified",
     "bitcoin_pending": false,
     "bitcoin_verified": true,
-    "strict_bitcoin_verified": true,
+    "strict_bitcoin_verified": false,
     "covers_latest_waiting_heartbeat": true
   },
   "latest_arweave_capsule": null,

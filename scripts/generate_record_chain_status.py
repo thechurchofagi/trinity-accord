@@ -100,7 +100,7 @@ def native_ots_is_strictly_verified(ots: dict[str, Any]) -> bool:
 
 def native_ots_has_bitcoin_attestation(ots: dict[str, Any]) -> bool:
     return (
-        ots.get("ots_status") == "upgraded"
+        ots.get("ots_status") in {"upgraded", "verified"}
         and ots.get("bitcoin_attestation_embedded") is True
         and ots.get("bitcoin_pending") is False
     )
@@ -359,15 +359,28 @@ def build_expected(existing: dict[str, Any]) -> dict[str, Any]:
     ot["bitcoin_pending"] = ots.get("bitcoin_pending")
     ot["bitcoin_verified"] = ots.get("bitcoin_verified")
     ot["strict_bitcoin_verified"] = ots.get("strict_bitcoin_verified")
+    ot["local_full_node_verified"] = ots.get("local_full_node_verified")
+    ot["remote_dual_source_verified"] = ots.get("remote_dual_source_verified")
+    ot["bitcoin_verification_profile"] = ots.get("bitcoin_verification_profile")
+    ot["bitcoin_verification_trust_boundary"] = ots.get("bitcoin_verification_trust_boundary")
+    ot["bitcoin_verification_independent_consensus"] = ots.get(
+        "bitcoin_verification_independent_consensus"
+    )
     ot["checked_at"] = ots.get("checked_at")
     ot["upgraded_at"] = ots.get("upgraded_at")
     ot["strict_bitcoin_verified_at"] = ots.get("strict_bitcoin_verified_at")
     ot["legacy_main_chain_jsonl_is_not_source"] = ots.get("legacy_main_chain_jsonl_is_not_source")
     ot["status"] = (
-        "verified-bitcoin"
+        "verified-bitcoin-local-full-node"
         if ots.get("strict_bitcoin_verified") is True
+        else "verified-bitcoin-remote-dual-source"
+        if (
+            pipeline["ots_matches_chain"]
+            and ots.get("bitcoin_verified") is True
+            and ots.get("remote_dual_source_verified") is True
+        )
         else "current-upgraded-timestamp-proof"
-        if pipeline["ots_matches_chain"] and ots.get("ots_status") == "upgraded"
+        if pipeline["ots_matches_chain"] and native_ots_has_bitcoin_attestation(ots)
         else "current-pending-bitcoin"
         if pipeline["ots_matches_chain"] and ots.get("ots_status") == "pending"
         else "anchor-needed"

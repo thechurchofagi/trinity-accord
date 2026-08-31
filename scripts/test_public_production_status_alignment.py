@@ -126,9 +126,15 @@ def main() -> None:
         and native_ots.get("latest_record_sha256") == latest_record_sha256
         and native_ots.get("native_record_count") == native_record_count
     )
-    if native_ots.get("bitcoin_verified") is True:
-        expected_ots_status = "verified-bitcoin"
-    elif ots_matches_chain and native_ots.get("ots_status") == "upgraded":
+    if native_ots.get("strict_bitcoin_verified") is True:
+        expected_ots_status = "verified-bitcoin-local-full-node"
+    elif (
+        ots_matches_chain
+        and native_ots.get("bitcoin_verified") is True
+        and native_ots.get("remote_dual_source_verified") is True
+    ):
+        expected_ots_status = "verified-bitcoin-remote-dual-source"
+    elif ots_matches_chain and native_ots.get("ots_status") in {"upgraded", "verified"}:
         expected_ots_status = "current-upgraded-timestamp-proof"
     elif ots_matches_chain and native_ots.get("ots_status") == "pending":
         expected_ots_status = "current-pending-bitcoin"

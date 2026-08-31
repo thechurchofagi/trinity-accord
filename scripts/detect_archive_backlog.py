@@ -68,7 +68,7 @@ def native_ots_archivable_for_current_chain() -> bool:
                 and ots.get("strict_bitcoin_verified") is True
             )
             or (
-                ots.get("ots_status") == "upgraded"
+                ots.get("ots_status") in {"upgraded", "verified"}
                 and ots.get("bitcoin_attestation_embedded") is True
                 and ots.get("bitcoin_pending") is False
             )

@@ -11,7 +11,8 @@ Adapts Phase6 semantics to native Record-Chain OTS paths:
 Lifecycle:
   pending  -> initial OTS stamp (handled by record-chain-head-ots-anchor workflow)
   upgraded -> BitcoinBlockHeaderAttestation embedded, bitcoin_verified=false
-  verified -> strict Bitcoin verification succeeded, bitcoin_verified=true
+  verified -> Bitcoin verification succeeded; the explicit verification profile
+              determines whether this is remote corroboration or local-full-node strict verification
 """
 from __future__ import annotations
 
@@ -194,6 +195,18 @@ def validate_native_latest_ots() -> dict[str, Any]:
         raise SystemExit(f"unexpected native OTS status: {latest.get('ots_status')}")
     if latest.get("bitcoin_verified") is True and latest.get("ots_status") != "verified":
         raise SystemExit("invalid state: bitcoin_verified=true but ots_status is not verified")
+    if (
+        latest.get("strict_bitcoin_verified") is True
+        and latest.get("bitcoin_verification_profile") != "local_full_node"
+    ):
+        raise SystemExit(
+            "invalid state: strict_bitcoin_verified=true requires bitcoin_verification_profile=local_full_node"
+        )
+    if latest.get("remote_dual_source_verified") is True and (
+        latest.get("bitcoin_verification_profile") != "dual_remote_esplora"
+        or latest.get("strict_bitcoin_verified") is True
+    ):
+        raise SystemExit("invalid state: dual-remote verification cannot be strict full-node verification")
     return latest
 
 
@@ -208,6 +221,18 @@ def validate_native_anchor(anchor_rel: str) -> dict[str, Any]:
         raise SystemExit(f"unexpected native anchor ots_status: {anchor.get('ots_status')}")
     if anchor.get("bitcoin_verified") is True and anchor.get("ots_status") != "verified":
         raise SystemExit("native anchor: bitcoin_verified=true but ots_status is not verified")
+    if (
+        anchor.get("strict_bitcoin_verified") is True
+        and anchor.get("bitcoin_verification_profile") != "local_full_node"
+    ):
+        raise SystemExit(
+            "native anchor: strict_bitcoin_verified=true requires bitcoin_verification_profile=local_full_node"
+        )
+    if anchor.get("remote_dual_source_verified") is True and (
+        anchor.get("bitcoin_verification_profile") != "dual_remote_esplora"
+        or anchor.get("strict_bitcoin_verified") is True
+    ):
+        raise SystemExit("native anchor: dual-remote verification cannot be strict full-node verification")
     return anchor
 
 
@@ -225,6 +250,20 @@ def sync_native_latest_from_anchor(anchor_rel: str) -> dict[str, Any]:
     latest["strict_bitcoin_verified"] = anchor.get(
         "strict_bitcoin_verified", latest.get("strict_bitcoin_verified", False)
     )
+    latest["local_full_node_verified"] = anchor.get("local_full_node_verified", False)
+    latest["remote_dual_source_verified"] = anchor.get("remote_dual_source_verified", False)
+    latest["bitcoin_verification_profile"] = anchor.get("bitcoin_verification_profile", "none")
+    latest["bitcoin_verification_trust_boundary"] = anchor.get(
+        "bitcoin_verification_trust_boundary", "no_bitcoin_rpc_verification"
+    )
+    latest["bitcoin_verification_independent_consensus"] = anchor.get(
+        "bitcoin_verification_independent_consensus", False
+    )
+    latest["strict_verify_unavailable_reason"] = anchor.get("strict_verify_unavailable_reason")
+    if anchor.get("strict_bitcoin_verified_at"):
+        latest["strict_bitcoin_verified_at"] = anchor["strict_bitcoin_verified_at"]
+    else:
+        latest.pop("strict_bitcoin_verified_at", None)
     latest["updated_at"] = utc_now()
     if anchor.get("verified_at"):
         latest["verified_at"] = anchor["verified_at"]
@@ -307,6 +346,7 @@ def ots_upgrade_and_verify(
     log_dir: Path,
     ots_bin: str,
     bitcoin_node_url: str | None,
+    bitcoin_verification_profile: str,
     strict: bool,
     skip_upgrade: bool = False,
 ) -> tuple[dict[str, Any], bool]:
@@ -332,8 +372,9 @@ def ots_upgrade_and_verify(
     print(f"[ots-upgrade] cmd={' '.join(cmd)}", file=sys.stderr)
     if bitcoin_node_url:
         cmd += ["--bitcoin-node-url", bitcoin_node_url]
+        cmd += ["--bitcoin-verification-profile", bitcoin_verification_profile]
     if strict:
-        cmd.append("--strict-bitcoin")
+        cmd.append("--require-bitcoin-verification")
 
     result = run_cmd(
         cmd,
@@ -401,7 +442,7 @@ def build_native_verified_bundle(anchor_rel: str) -> Path:
     """Build verified bundle for native anchor."""
     anchor = validate_native_anchor(anchor_rel)
     if anchor.get("ots_status") != "verified" or anchor.get("bitcoin_verified") is not True:
-        raise SystemExit("cannot build verified bundle before strict Bitcoin verification")
+        raise SystemExit("cannot build verified bundle before Bitcoin verification")
 
     safe_stem = Path(anchor_rel).stem
     out = NATIVE_BUNDLES_DIR / f"{safe_stem}.verified.arweave-bundle.json"
@@ -447,6 +488,15 @@ def update_native_registry(
         "bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded", False),
         "bitcoin_verified": anchor.get("bitcoin_verified", False),
         "strict_bitcoin_verified": anchor.get("strict_bitcoin_verified", False),
+        "local_full_node_verified": anchor.get("local_full_node_verified", False),
+        "remote_dual_source_verified": anchor.get("remote_dual_source_verified", False),
+        "bitcoin_verification_profile": anchor.get("bitcoin_verification_profile", "none"),
+        "bitcoin_verification_trust_boundary": anchor.get(
+            "bitcoin_verification_trust_boundary", "no_bitcoin_rpc_verification"
+        ),
+        "bitcoin_verification_independent_consensus": anchor.get(
+            "bitcoin_verification_independent_consensus", False
+        ),
         "tx_id": tx_id,
         "gateway_url": gateway_url,
         "wallet_address": wallet_address,
@@ -599,6 +649,11 @@ def main() -> int:
     parser.add_argument("--log-dir", default=None)
     parser.add_argument("--ots-bin", default="ots")
     parser.add_argument("--bitcoin-node-url", default=os.environ.get("OTS_BITCOIN_NODE_URL"))
+    parser.add_argument(
+        "--bitcoin-verification-profile",
+        choices=("external_rpc", "dual_remote_esplora", "local_full_node"),
+        default=os.environ.get("OTS_BITCOIN_VERIFICATION_PROFILE", "external_rpc"),
+    )
     parser.add_argument("--skip-upgrade", action="store_true",
                         default=(os.environ.get("OTS_SKIP_UPGRADE", "").strip().lower() in {"1", "true", "yes", "on"}),
                         help="Skip ots upgrade step")
@@ -677,6 +732,7 @@ def main() -> int:
         # Upgrade and inspect the proof first. Strict verification is a separate,
         # fail-closed phase below so the Bitcoin transport is used exactly once.
         bitcoin_node_url=None,
+        bitcoin_verification_profile="external_rpc",
         strict=False,
         skip_upgrade=args.skip_upgrade,
     )
@@ -691,6 +747,7 @@ def main() -> int:
             log_dir=log_dir,
             ots_bin=args.ots_bin,
             bitcoin_node_url=args.bitcoin_node_url,
+            bitcoin_verification_profile=args.bitcoin_verification_profile,
             strict=True,
             # The non-strict phase already contacted the calendars and updated
             # the proof. Do not repeat that network mutation during verification.
@@ -775,6 +832,9 @@ def main() -> int:
         "result": result,
         "anchor_ots_status": anchor.get("ots_status"),
         "anchor_bitcoin_verified": anchor.get("bitcoin_verified"),
+        "anchor_strict_bitcoin_verified": anchor.get("strict_bitcoin_verified"),
+        "anchor_bitcoin_verification_profile": anchor.get("bitcoin_verification_profile"),
+        "anchor_remote_dual_source_verified": anchor.get("remote_dual_source_verified"),
         "anchor_bitcoin_attestation_embedded": anchor.get("bitcoin_attestation_embedded", False),
         "paid_upload_performed": paid_upload_performed,
         "registry_updated": registry_updated,

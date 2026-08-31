@@ -104,11 +104,12 @@ jobs:
           esac
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
-      - name: Run one bounded no-cost Native OTS lifecycle attempt with strict Bitcoin verification
+      - name: Run one bounded no-cost Native OTS lifecycle attempt with dual-source Bitcoin verification
         env:
           NATIVE_OTS_MODE: ${{ steps.mode.outputs.mode }}
           OTS_UPGRADE_TIMEOUT: "180"
           OTS_BITCOIN_NODE_URL: "http://127.0.0.1:18443/"
+          OTS_BITCOIN_VERIFICATION_PROFILE: "dual_remote_esplora"
         run: |
           set -euo pipefail
           audit_dir="record-chain/audit/native-ots/${NATIVE_OTS_RUN_ID}"
