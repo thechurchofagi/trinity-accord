@@ -1,0 +1,42 @@
+name: Restart Bitcoin Checkpoint With Telemetry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/restart-bitcoin-checkpoint-with-telemetry.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  restart:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Cancel old telemetry-less run and dispatch current workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OLD_RUN_ID: "33366916316"
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          old_status="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${OLD_RUN_ID}" --jq '.status')"
+          echo "Old Bitcoin run status: ${old_status}"
+
+          case "$old_status" in
+            queued|in_progress|waiting|pending|requested)
+              gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/${OLD_RUN_ID}/cancel" >/dev/null
+              echo "Cancellation requested for run ${OLD_RUN_ID}."
+              ;;
+            *)
+              echo "Old run is already terminal; no cancellation required."
+              ;;
+          esac
+
+          printf '%s\n' '{"ref":"main","inputs":{"force_checkpoint":"false"}}' \
+            | gh api --method POST \
+                "repos/${GITHUB_REPOSITORY}/actions/workflows/bitcoin-consensus-checkpoint.yml/dispatches" \
+                --input - >/dev/null
+          echo "Dispatched Bitcoin Consensus Checkpoint from current main."
