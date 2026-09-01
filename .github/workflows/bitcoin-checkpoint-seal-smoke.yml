@@ -53,6 +53,7 @@ jobs:
           part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
           smoke_manifest="${RUNNER_TEMP}/seal-smoke-manifest.json"
           verify_dir="${RUNNER_TEMP}/seal-smoke-readback"
+          assets_snapshot="${RUNNER_TEMP}/seal-smoke-release-assets.json"
           release_created=false
           release_published=false
 
@@ -80,10 +81,8 @@ jobs:
             --notes "Ephemeral non-authoritative smoke test. It is never part of the Bitcoin checkpoint lineage and is deleted after readback verification."
           release_created=true
 
-          # Do not immediately enumerate Releases to recover an id here. GitHub can
-          # expose a newly created draft at an untagged-* URL before list-by-tag is
-          # consistent. The production path addresses the draft by its intended tag,
-          # so the smoke test deliberately exercises that same behavior directly.
+          # A new draft can initially be exposed through an untagged-* URL. Address
+          # the draft by its intended tag, matching the production checkpoint path.
           export CHECKPOINT_TAG="$tag"
           export ASSET_CATALOG="$asset_catalog"
           tar -C "$source_dir" -cf - . \
@@ -138,16 +137,59 @@ jobs:
           [[ "$(jq -r '.draft' <<<"$published")" == "false" ]] || { echo "Smoke Release did not publish" >&2; exit 1; }
           [[ "$(jq -r '.prerelease' <<<"$published")" == "false" ]] || { echo "Smoke Release unexpectedly became a prerelease" >&2; exit 1; }
 
-          gh release download "$tag" --dir "$verify_dir" --pattern 'bitcoin-datadir.tar.zst.part-*'
-          gh release download "$tag" --dir "$verify_dir" --pattern 'bitcoin-consensus-checkpoint.json'
+          # GitHub can briefly expose the published Release before its asset list is
+          # queryable through all read paths. Wait a bounded period for the exact
+          # uploaded names to become visible, while logging the remote inventory.
+          assets_ready=false
+          for attempt in $(seq 1 12); do
+            gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}" > "$assets_snapshot"
+            echo "Remote Release assets (attempt ${attempt}/12):"
+            jq -r '.assets[]? | [.name, (.size | tostring), (.state // ""), (.digest // "")] | @tsv' "$assets_snapshot"
+
+            expected_visible=true
+            while IFS=$'\t' read -r name size digest; do
+              matches="$(jq --arg name "$name" '[.assets[] | select(.name == $name)] | length' "$assets_snapshot")"
+              if [[ "$matches" != "1" ]]; then
+                expected_visible=false
+                break
+              fi
+              remote_size="$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .size' "$assets_snapshot")"
+              remote_state="$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .state' "$assets_snapshot")"
+              [[ "$remote_size" == "$size" ]] || { echo "Remote size mismatch for $name: expected=$size actual=$remote_size" >&2; exit 1; }
+              [[ "$remote_state" == "uploaded" ]] || { expected_visible=false; break; }
+              remote_digest="$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | (.digest // "")' "$assets_snapshot")"
+              if [[ "$remote_digest" == sha256:* ]]; then
+                [[ "${remote_digest#sha256:}" == "$digest" ]] || { echo "Remote SHA-256 mismatch for $name" >&2; exit 1; }
+              fi
+            done < "$asset_catalog"
+
+            manifest_matches="$(jq '[.assets[] | select(.name == "bitcoin-consensus-checkpoint.json")] | length' "$assets_snapshot")"
+            if [[ "$manifest_matches" != "1" ]]; then
+              expected_visible=false
+            fi
+
+            if [[ "$expected_visible" == "true" ]]; then
+              assets_ready=true
+              break
+            fi
+            sleep 5
+          done
+
+          [[ "$assets_ready" == "true" ]] || {
+            echo "Expected smoke assets did not become visible within the bounded readback window" >&2
+            cat "$assets_snapshot" >&2
+            exit 1
+          }
 
           while IFS=$'\t' read -r name size digest; do
+            gh release download "$tag" --dir "$verify_dir" --pattern "$name"
             path="$verify_dir/$name"
             [[ -f "$path" ]] || { echo "Readback missing smoke asset: $name" >&2; exit 1; }
             [[ "$(stat -c %s "$path")" == "$size" ]] || { echo "Readback size mismatch: $name" >&2; exit 1; }
             [[ "$(sha256sum "$path" | awk '{print $1}')" == "$digest" ]] || { echo "Readback SHA-256 mismatch: $name" >&2; exit 1; }
           done < "$asset_catalog"
 
+          gh release download "$tag" --dir "$verify_dir" --pattern 'bitcoin-consensus-checkpoint.json'
           cmp "$smoke_manifest" "$verify_dir/bitcoin-consensus-checkpoint.json"
 
           cleanup
