@@ -1,5 +1,6 @@
 name: Bitcoin Consensus Checkpoint
 
+# One-shot user-push trigger marker; remove together with the temporary push hook after the run starts.
 on:
   push:
     branches:
@@ -367,8 +368,6 @@ jobs:
           export CHECKPOINT_TAG="$tag"
           export ASSET_CATALOG
 
-          # A killed job may have left this exact next checkpoint as an
-          # unpublished draft. It is not authoritative and is safe to replace.
           all_releases="${RUNNER_TEMP}/all-releases-before-seal.json"
           gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" > "$all_releases"
           stale_id="$(
