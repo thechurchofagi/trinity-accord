@@ -150,13 +150,33 @@ def test_release_preflight_cleans_exact_next_draft_before_ibd():
     assert "refusing to start Bitcoin IBD" in preflight
 
 
-def test_restored_pruned_chainstate_reopens_with_matching_prune_mode():
+def test_restore_ignores_archived_file_ownership():
+    source = WORKFLOW_PATH.read_text()
+    restore = source.split(
+        "- name: Restore previous checkpoint as a verified stream", 1
+    )[1].split("- name: Download and verify Bitcoin Core distribution", 1)[0]
+
+    assert '| tar --no-same-owner -xf - -C "$DATADIR"' in restore
+
+
+def test_restored_pruned_chainstate_reopens_with_sealed_prune_mode():
     source = WORKFLOW_PATH.read_text()
     restore_verification = source.split(
         "- name: Verify restored chainstate matches its sealed predecessor", 1
     )[1].split("- name: Advance Bitcoin Core consensus validation", 1)[0]
 
+    assert 'sealed_prune_mib="$(jq -r \'.prune_mib\' "$PREVIOUS_MANIFEST")"' in restore_verification
     assert (
-        'bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" '
+        'bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" '
         "-connect=0 -dnsseed=0 -listen=0 -daemonwait"
     ) in restore_verification
+
+
+def test_restored_chainstate_reopen_failure_prints_debug_tail():
+    source = WORKFLOW_PATH.read_text()
+    restore_verification = source.split(
+        "- name: Verify restored chainstate matches its sealed predecessor", 1
+    )[1].split("- name: Advance Bitcoin Core consensus validation", 1)[0]
+
+    assert 'if ! bitcoind -datadir="$DATADIR"' in restore_verification
+    assert 'tail -n 100 "$DATADIR/debug.log" >&2' in restore_verification
