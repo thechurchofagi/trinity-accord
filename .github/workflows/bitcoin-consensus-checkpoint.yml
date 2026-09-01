@@ -264,7 +264,7 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          bitcoind -datadir="$DATADIR" -connect=0 -dnsseed=0 -listen=0 -daemonwait
+          bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -connect=0 -dnsseed=0 -listen=0 -daemonwait
           offline_info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
 
           expected_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
