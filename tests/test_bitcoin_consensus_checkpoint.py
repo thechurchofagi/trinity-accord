@@ -136,3 +136,15 @@ def test_split_filter_materializes_stdin_before_hashing_and_upload():
     remove = filter_block.index('rm -f "$FILE"')
 
     assert materialize < stat_file < hash_file < upload < remove
+
+
+def test_release_preflight_cleans_exact_next_draft_before_ibd():
+    source = WORKFLOW_PATH.read_text()
+    preflight = source.split(
+        "- name: Verify checkpoint Release write permission", 1
+    )[1].split("- name: Restore previous checkpoint as a verified stream", 1)[0]
+
+    assert "next_tag=" in preflight
+    assert "select(.tag_name == $tag and .draft == true)" in preflight
+    assert 'gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"' in preflight
+    assert "refusing to start Bitcoin IBD" in preflight
