@@ -407,6 +407,7 @@ jobs:
             | split -d -a 4 -b 900M - "$part_prefix" \
                 --filter='
                   set -Eeuo pipefail
+                  cat > "$FILE"
                   name="$(basename "$FILE")"
                   size="$(stat -c %s "$FILE")"
                   digest="$(sha256sum "$FILE" | awk "{print \$1}")"
