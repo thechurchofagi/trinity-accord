@@ -228,7 +228,7 @@ jobs:
               cat "$tmp_part"
               rm -f "$tmp_part"
             done < <(jq -r '.assets[].name' "$PREVIOUS_MANIFEST")
-          } | zstd -d -c | tar -xf - -C "$DATADIR"
+          } | zstd -d -c | tar --no-same-owner -xf - -C "$DATADIR"
 
           rm -f "$tmp_part"
           echo "Checkpoint restore completed only after every archive part passed SHA-256 and size validation."
@@ -264,7 +264,17 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -connect=0 -dnsseed=0 -listen=0 -daemonwait
+          # Reopen under the exact prune contract recorded by the predecessor.
+          # This remains correct if a later workflow intentionally changes its
+          # prune target for the next checkpoint.
+          sealed_prune_mib="$(jq -r '.prune_mib' "$PREVIOUS_MANIFEST")"
+          if ! bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" -connect=0 -dnsseed=0 -listen=0 -daemonwait; then
+            echo "Bitcoin Core could not reopen the restored predecessor; recent debug log follows." >&2
+            if [[ -f "$DATADIR/debug.log" ]]; then
+              tail -n 100 "$DATADIR/debug.log" >&2
+            fi
+            exit 1
+          fi
           offline_info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
 
           expected_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
