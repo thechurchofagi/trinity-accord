@@ -54,20 +54,13 @@ jobs:
           smoke_manifest="${RUNNER_TEMP}/seal-smoke-manifest.json"
           verify_dir="${RUNNER_TEMP}/seal-smoke-readback"
           release_id=""
+          release_created=false
 
           cleanup() {
-            set +e
-            if [[ -z "$release_id" ]]; then
-              release_id="$(
-                gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
-                  --jq ".[] | select(.tag_name == \"${tag}\") | .id" 2>/dev/null \
-                  | head -n1
-              )"
+            if [[ "$release_created" == "true" ]]; then
+              gh release delete "$tag" --yes --cleanup-tag
+              release_created=false
             fi
-            if [[ -n "$release_id" ]]; then
-              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${release_id}" >/dev/null 2>&1 || true
-            fi
-            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/tags/${tag}" >/dev/null 2>&1 || true
           }
           trap cleanup EXIT
 
@@ -81,6 +74,7 @@ jobs:
             --target "$GITHUB_SHA" \
             --title "Bitcoin checkpoint seal smoke ${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}" \
             --notes "Ephemeral non-authoritative smoke test. It is never part of the Bitcoin checkpoint lineage and is deleted after readback verification."
+          release_created=true
 
           release_id="$(
             gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
@@ -155,6 +149,5 @@ jobs:
           cmp "$smoke_manifest" "$verify_dir/bitcoin-consensus-checkpoint.json"
 
           cleanup
-          release_id=""
           trap - EXIT
           echo "Full non-authoritative checkpoint sealing smoke test passed before Bitcoin IBD."
