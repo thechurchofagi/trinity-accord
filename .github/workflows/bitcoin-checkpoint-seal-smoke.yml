@@ -1,0 +1,160 @@
+name: Bitcoin Checkpoint Seal Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/bitcoin-checkpoint-seal-smoke.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bitcoin-checkpoint-seal-smoke
+  cancel-in-progress: false
+
+jobs:
+  seal-smoke:
+    name: Exercise non-authoritative checkpoint sealing path
+    runs-on: ubuntu-24.04
+    environment: release-publish
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Record toolchain provenance
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - name: Install seal-path tools
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends zstd jq
+
+      - name: Exercise split, upload, publish, readback, and cleanup
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          tag="bitcoin-consensus-seal-smoke-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          source_dir="${RUNNER_TEMP}/seal-smoke-source"
+          asset_catalog="${RUNNER_TEMP}/seal-smoke-assets.tsv"
+          part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
+          smoke_manifest="${RUNNER_TEMP}/seal-smoke-manifest.json"
+          verify_dir="${RUNNER_TEMP}/seal-smoke-readback"
+          release_id=""
+
+          cleanup() {
+            set +e
+            if [[ -z "$release_id" ]]; then
+              release_id="$(
+                gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+                  --jq ".[] | select(.tag_name == \"${tag}\") | .id" 2>/dev/null \
+                  | head -n1
+              )"
+            fi
+            if [[ -n "$release_id" ]]; then
+              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${release_id}" >/dev/null 2>&1 || true
+            fi
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/tags/${tag}" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
+          mkdir -p "$source_dir" "$verify_dir"
+          : > "$asset_catalog"
+          dd if=/dev/urandom of="$source_dir/payload.bin" bs=1M count=3 status=none
+          printf '%s\n' "non-authoritative Bitcoin checkpoint seal smoke test" > "$source_dir/README.txt"
+
+          gh release create "$tag" \
+            --draft \
+            --target "$GITHUB_SHA" \
+            --title "Bitcoin checkpoint seal smoke ${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}" \
+            --notes "Ephemeral non-authoritative smoke test. It is never part of the Bitcoin checkpoint lineage and is deleted after readback verification."
+
+          release_id="$(
+            gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+              --jq ".[] | select(.tag_name == \"${tag}\") | .id" \
+              | head -n1
+          )"
+          [[ "$release_id" =~ ^[0-9]+$ ]] || { echo "Smoke Release returned no valid release id" >&2; exit 1; }
+
+          export CHECKPOINT_TAG="$tag"
+          export ASSET_CATALOG="$asset_catalog"
+          tar -C "$source_dir" -cf - . \
+            | zstd -3 -T0 \
+            | split -d -a 4 -b 1M - "$part_prefix" \
+                --filter='
+                  set -Eeuo pipefail
+                  cat > "$FILE"
+                  name="$(basename "$FILE")"
+                  size="$(stat -c %s "$FILE")"
+                  digest="$(sha256sum "$FILE" | awk "{print \$1}")"
+                  gh release upload "$CHECKPOINT_TAG" "$FILE"
+                  printf "%s\t%s\t%s\n" "$name" "$size" "$digest" >> "$ASSET_CATALOG"
+                  rm -f "$FILE"
+                '
+
+          [[ -s "$asset_catalog" ]] || { echo "Smoke split produced no uploaded assets" >&2; exit 1; }
+          asset_count="$(wc -l < "$asset_catalog" | tr -d ' ')"
+          (( asset_count >= 2 )) || { echo "Smoke test expected multiple split assets" >&2; exit 1; }
+
+          python3 - "$asset_catalog" "$smoke_manifest" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          catalog = Path(sys.argv[1])
+          output = Path(sys.argv[2])
+          assets = []
+          for line in catalog.read_text().splitlines():
+              name, size, sha256 = line.split("\t")
+              assets.append({"name": name, "size": int(size), "sha256": sha256})
+          output.write_text(
+              json.dumps(
+                  {
+                      "schema": "trinity-accord.bitcoin-consensus-seal-smoke.v1",
+                      "authoritative": False,
+                      "purpose": "exercise_release_sealing_transport_only",
+                      "assets": assets,
+                  },
+                  sort_keys=True,
+                  separators=(",", ":"),
+              )
+              + "\n"
+          )
+          PY
+
+          gh release upload "$tag" "$smoke_manifest#bitcoin-consensus-checkpoint.json"
+          gh release edit "$tag" --draft=false
+
+          published="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}")"
+          [[ "$(jq -r '.draft' <<<"$published")" == "false" ]] || { echo "Smoke Release did not publish" >&2; exit 1; }
+          [[ "$(jq -r '.prerelease' <<<"$published")" == "false" ]] || { echo "Smoke Release unexpectedly became a prerelease" >&2; exit 1; }
+
+          gh release download "$tag" --dir "$verify_dir" --pattern 'bitcoin-datadir.tar.zst.part-*'
+          gh release download "$tag" --dir "$verify_dir" --pattern 'bitcoin-consensus-checkpoint.json'
+
+          while IFS=$'\t' read -r name size digest; do
+            path="$verify_dir/$name"
+            [[ -f "$path" ]] || { echo "Readback missing smoke asset: $name" >&2; exit 1; }
+            [[ "$(stat -c %s "$path")" == "$size" ]] || { echo "Readback size mismatch: $name" >&2; exit 1; }
+            [[ "$(sha256sum "$path" | awk '{print $1}')" == "$digest" ]] || { echo "Readback SHA-256 mismatch: $name" >&2; exit 1; }
+          done < "$asset_catalog"
+
+          cmp "$smoke_manifest" "$verify_dir/bitcoin-consensus-checkpoint.json"
+
+          cleanup
+          release_id=""
+          trap - EXIT
+          echo "Full non-authoritative checkpoint sealing smoke test passed before Bitcoin IBD."
