@@ -53,12 +53,16 @@ jobs:
           part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
           smoke_manifest="${RUNNER_TEMP}/seal-smoke-manifest.json"
           verify_dir="${RUNNER_TEMP}/seal-smoke-readback"
-          release_id=""
           release_created=false
+          release_published=false
 
           cleanup() {
             if [[ "$release_created" == "true" ]]; then
-              gh release delete "$tag" --yes --cleanup-tag
+              if [[ "$release_published" == "true" ]]; then
+                gh release delete "$tag" --yes --cleanup-tag
+              else
+                gh release delete "$tag" --yes
+              fi
               release_created=false
             fi
           }
@@ -76,13 +80,10 @@ jobs:
             --notes "Ephemeral non-authoritative smoke test. It is never part of the Bitcoin checkpoint lineage and is deleted after readback verification."
           release_created=true
 
-          release_id="$(
-            gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
-              --jq ".[] | select(.tag_name == \"${tag}\") | .id" \
-              | head -n1
-          )"
-          [[ "$release_id" =~ ^[0-9]+$ ]] || { echo "Smoke Release returned no valid release id" >&2; exit 1; }
-
+          # Do not immediately enumerate Releases to recover an id here. GitHub can
+          # expose a newly created draft at an untagged-* URL before list-by-tag is
+          # consistent. The production path addresses the draft by its intended tag,
+          # so the smoke test deliberately exercises that same behavior directly.
           export CHECKPOINT_TAG="$tag"
           export ASSET_CATALOG="$asset_catalog"
           tar -C "$source_dir" -cf - . \
@@ -131,6 +132,7 @@ jobs:
 
           gh release upload "$tag" "$smoke_manifest#bitcoin-consensus-checkpoint.json"
           gh release edit "$tag" --draft=false
+          release_published=true
 
           published="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}")"
           [[ "$(jq -r '.draft' <<<"$published")" == "false" ]] || { echo "Smoke Release did not publish" >&2; exit 1; }
