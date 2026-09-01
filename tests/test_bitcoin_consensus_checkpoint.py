@@ -148,3 +148,15 @@ def test_release_preflight_cleans_exact_next_draft_before_ibd():
     assert "select(.tag_name == $tag and .draft == true)" in preflight
     assert 'gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"' in preflight
     assert "refusing to start Bitcoin IBD" in preflight
+
+
+def test_restored_pruned_chainstate_reopens_with_matching_prune_mode():
+    source = WORKFLOW_PATH.read_text()
+    restore_verification = source.split(
+        "- name: Verify restored chainstate matches its sealed predecessor", 1
+    )[1].split("- name: Advance Bitcoin Core consensus validation", 1)[0]
+
+    assert (
+        'bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" '
+        "-connect=0 -dnsseed=0 -listen=0 -daemonwait"
+    ) in restore_verification
