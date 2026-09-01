@@ -1,0 +1,28 @@
+name: Manual Start Bitcoin Checkpoint 2026-09-01
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/manual-start-bitcoin-checkpoint-20260901.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Dispatch current Bitcoin Consensus Checkpoint workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/bitcoin-consensus-checkpoint.yml/dispatches" \
+            -f ref=main \
+            -F 'inputs[force_checkpoint]=false'
+          echo "Dispatched Bitcoin Consensus Checkpoint from current main."
