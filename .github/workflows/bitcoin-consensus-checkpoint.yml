@@ -1,6 +1,11 @@
 name: Bitcoin Consensus Checkpoint
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/bitcoin-consensus-checkpoint.yml"
   workflow_dispatch:
     inputs:
       force_checkpoint:
