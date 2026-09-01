@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "bitcoin_consensus_checkpoint.py"
+WORKFLOW_PATH = Path(__file__).resolve().parents[1] / ".github" / "workflows" / "bitcoin-consensus-checkpoint.yml"
 SPEC = importlib.util.spec_from_file_location("bitcoin_consensus_checkpoint", MODULE_PATH)
 assert SPEC and SPEC.loader
 checkpoint = importlib.util.module_from_spec(SPEC)
@@ -121,3 +122,17 @@ def test_canonical_manifest_serialization_is_stable(tmp_path: Path):
     checkpoint.write_canonical_json(json.loads(first.read_text()), second)
     assert first.read_bytes() == second.read_bytes()
     assert checkpoint.sha256_file(first) == checkpoint.sha256_file(second)
+
+
+def test_split_filter_materializes_stdin_before_hashing_and_upload():
+    source = WORKFLOW_PATH.read_text()
+    assert "--filter='" in source
+    filter_block = source.split("--filter='", 1)[1].split("\n                '", 1)[0]
+
+    materialize = filter_block.index('cat > "$FILE"')
+    stat_file = filter_block.index('stat -c %s "$FILE"')
+    hash_file = filter_block.index('sha256sum "$FILE"')
+    upload = filter_block.index('gh release upload "$CHECKPOINT_TAG" "$FILE"')
+    remove = filter_block.index('rm -f "$FILE"')
+
+    assert materialize < stat_file < hash_file < upload < remove
