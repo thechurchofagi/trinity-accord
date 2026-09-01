@@ -134,6 +134,47 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
+          if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
+            previous_sequence="$(jq -r '.checkpoint.sequence' "$PREVIOUS_MANIFEST")"
+            next_sequence=$(( previous_sequence + 1 ))
+          else
+            next_sequence=1
+          fi
+          next_tag="$(printf 'bitcoin-consensus-checkpoint-%06d' "$next_sequence")"
+
+          # Exercise the exact cleanup path that sealing will need. A generic
+          # create/delete probe can succeed even when an older draft cannot be
+          # deleted, which would otherwise waste the entire IBD window before
+          # failing at seal time.
+          releases="${RUNNER_TEMP}/bitcoin-releases-preflight.json"
+          gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" > "$releases"
+          published_same_tag="$(
+            jq -r --arg tag "$next_tag" '
+              .[]
+              | select(.tag_name == $tag and .draft == false)
+              | .id
+            ' "$releases" | head -n1
+          )"
+          [[ -z "$published_same_tag" ]] || {
+            echo "Refusing to replace an already-published checkpoint: $next_tag" >&2
+            exit 1
+          }
+
+          stale_id="$(
+            jq -r --arg tag "$next_tag" '
+              .[]
+              | select(.tag_name == $tag and .draft == true)
+              | .id
+            ' "$releases" | head -n1
+          )"
+          if [[ -n "$stale_id" ]]; then
+            echo "Removing incomplete draft during preflight: $next_tag"
+            if ! gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"; then
+              echo "Release preflight cannot remove stale draft $next_tag (release id $stale_id); refusing to start Bitcoin IBD." >&2
+              exit 1
+            fi
+          fi
+
           probe_tag="bitcoin-consensus-release-preflight-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           probe_json="${RUNNER_TEMP}/bitcoin-release-preflight.json"
           probe_id=""
