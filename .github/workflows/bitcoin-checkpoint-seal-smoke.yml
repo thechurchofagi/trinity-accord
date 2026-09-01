@@ -51,7 +51,7 @@ jobs:
           source_dir="${RUNNER_TEMP}/seal-smoke-source"
           asset_catalog="${RUNNER_TEMP}/seal-smoke-assets.tsv"
           part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
-          smoke_manifest="${RUNNER_TEMP}/seal-smoke-manifest.json"
+          smoke_manifest="${RUNNER_TEMP}/bitcoin-consensus-checkpoint.json"
           verify_dir="${RUNNER_TEMP}/seal-smoke-readback"
           assets_snapshot="${RUNNER_TEMP}/seal-smoke-release-assets.json"
           release_created=false
@@ -129,7 +129,7 @@ jobs:
           )
           PY
 
-          gh release upload "$tag" "$smoke_manifest#bitcoin-consensus-checkpoint.json"
+          gh release upload "$tag" "$smoke_manifest"
           gh release edit "$tag" --draft=false
           release_published=true
 
