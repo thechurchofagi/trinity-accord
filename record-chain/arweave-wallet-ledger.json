@@ -1,13 +1,13 @@
 {
   "schema": "trinityaccord.arweave-wallet-ledger.v1",
-  "updated_at": "2026-08-26T08:04:54Z",
+  "updated_at": "2026-09-02T12:08:29Z",
   "wallet": {
     "wallet_address": null,
     "wallet_address_sha256": "e713712111fc5eaa71d4bbb0d1357f5c6e58acd40202f2c542a6176387c1623e",
     "public_address_allowed": false,
     "currency": "AR",
-    "last_known_balance_ar": "14.414539018514",
-    "last_known_balance_at": "2026-08-26T08:00:20.642Z",
+    "last_known_balance_ar": "14.411571061926",
+    "last_known_balance_at": "2026-09-02T12:07:05.191Z",
     "low_balance_threshold_ar": "0.25"
   },
   "entries": [
@@ -1290,6 +1290,16 @@
       "paid_at": "2026-08-26T08:00:20.642Z",
       "status": "paid",
       "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/arweave-archives/archive-native-R-000000134-449aae0b2a1c/upload-result.json"
+    },
+    {
+      "tx_id": "0hVk_0ZkNtBkh6j0QN91ruQZeeqf5TUkmh_QNPP2Ecs",
+      "kind": "record_chain_arweave_archive",
+      "source_path": "record-chain/arweave-archives/archive-native-R-000000141-4dcfd0809abd/payload.json",
+      "amount_ar": null,
+      "winston": "3058290433",
+      "paid_at": "2026-09-02T12:07:05.191Z",
+      "status": "paid",
+      "note": "recorded from /home/runner/work/trinity-accord/trinity-accord/record-chain/arweave-archives/archive-native-R-000000141-4dcfd0809abd/upload-result.json"
     }
   ],
   "boundary": {
