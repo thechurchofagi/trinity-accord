@@ -593,7 +593,9 @@ jobs:
             restored_core_started=false
             stop_restored_core() {
               if [[ "$restored_core_started" == "true" ]]; then
-                bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1 || true
+                if ! bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1; then
+                  echo "Could not stop the remotely restored Bitcoin Core process during failure cleanup." >&2
+                fi
               fi
             }
             trap stop_restored_core EXIT INT TERM
