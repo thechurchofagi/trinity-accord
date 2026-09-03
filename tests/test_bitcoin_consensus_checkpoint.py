@@ -180,3 +180,29 @@ def test_restored_chainstate_reopen_failure_prints_debug_tail():
 
     assert 'if ! bitcoind -datadir="$DATADIR"' in restore_verification
     assert 'tail -n 100 "$DATADIR/debug.log" >&2' in restore_verification
+
+
+def test_completed_ibd_draft_is_remotely_restored_before_publication():
+    source = WORKFLOW_PATH.read_text()
+    sealing = source.split(
+        "- name: Seal immutable checkpoint into a draft Release", 1
+    )[1].split("- name: Finalize live telemetry check", 1)[0]
+
+    manifest_upload = sealing.index(
+        'gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"'
+    )
+    final_gate = sealing.index('if [[ "$final_ibd" == "false" ]]')
+    remote_verify = sealing.index(
+        'verify-asset "$CHECKPOINT_MANIFEST" "$name" "$final_part"'
+    )
+    offline_reopen = sealing.index(
+        'bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -disablewallet=1'
+    )
+    publish = sealing.index('gh release edit "$tag" --draft=false')
+
+    assert manifest_upload < final_gate < remote_verify < offline_reopen < publish
+    assert 'cmp "$CHECKPOINT_MANIFEST" "$remote_manifest"' in sealing
+    assert '"$DATADIR" == "$RUNNER_TEMP/bitcoin-mainnet"' in sealing
+    assert 'restored_height" == "$expected_height' in sealing
+    assert 'restored_hash" == "$expected_hash' in sealing
+    assert 'restored_ibd" == "false' in sealing
