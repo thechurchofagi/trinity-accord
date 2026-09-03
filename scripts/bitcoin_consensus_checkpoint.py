@@ -17,7 +17,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "trinity-accord.bitcoin-consensus-checkpoint.v1"
+SCHEMA_V1 = "trinity-accord.bitcoin-consensus-checkpoint.v1"
+SCHEMA_V2 = "trinity-accord.bitcoin-consensus-checkpoint.v2"
+SCHEMA = SCHEMA_V2
 PROFILE = "github_hosted_pruned_full_node"
 NETWORK = "main"
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
@@ -48,7 +50,7 @@ def _is_int(value: Any) -> bool:
 
 
 def validate_manifest(manifest: dict[str, Any]) -> None:
-    required = {
+    common_required = {
         "schema",
         "profile",
         "network",
@@ -66,8 +68,12 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         "previous_checkpoint",
         "assets",
     }
-    _require(set(manifest) == required, "manifest fields do not match the v1 schema")
-    _require(manifest["schema"] == SCHEMA, "unexpected checkpoint schema")
+    schema = manifest.get("schema")
+    _require(schema in {SCHEMA_V1, SCHEMA_V2}, "unexpected checkpoint schema")
+    required = set(common_required)
+    if schema == SCHEMA_V2:
+        required.update({"state_source_checkpoint", "quarantined_checkpoints"})
+    _require(set(manifest) == required, f"manifest fields do not match the {schema.rsplit('.', 1)[-1]} schema")
     _require(manifest["profile"] == PROFILE, "unexpected verification profile")
     _require(manifest["network"] == NETWORK, "checkpoint is not Bitcoin mainnet")
     _require(
@@ -134,6 +140,58 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
             "invalid predecessor manifest SHA-256",
         )
 
+    if schema == SCHEMA_V2:
+        state_source = manifest["state_source_checkpoint"]
+        quarantined = manifest["quarantined_checkpoints"]
+        _require(isinstance(quarantined, list), "quarantined_checkpoints must be a list")
+        if checkpoint["sequence"] == 1:
+            _require(state_source is None, "first checkpoint must not have a state source")
+            _require(not quarantined, "first checkpoint cannot quarantine predecessors")
+        else:
+            _require(isinstance(state_source, dict), "successor requires a state source")
+            _require(set(state_source) == {"tag", "manifest_sha256"}, "invalid state source fields")
+            source_match = TAG_RE.fullmatch(str(state_source["tag"]))
+            _require(source_match is not None, "invalid state source tag")
+            source_sequence = int(source_match.group(1))
+            _require(source_sequence < checkpoint["sequence"], "state source must precede the checkpoint")
+            _require(
+                isinstance(state_source["manifest_sha256"], str)
+                and bool(HEX64.fullmatch(state_source["manifest_sha256"])),
+                "invalid state source manifest SHA-256",
+            )
+
+            if not quarantined:
+                _require(state_source == previous, "normal successor must restore its immediate predecessor")
+            else:
+                expected_sequence = source_sequence + 1
+                seen_tags: set[str] = set()
+                for item in quarantined:
+                    _require(isinstance(item, dict), "quarantined checkpoint entry must be an object")
+                    _require(
+                        set(item) == {"tag", "manifest_sha256", "reason"},
+                        "invalid quarantined checkpoint fields",
+                    )
+                    quarantine_match = TAG_RE.fullmatch(str(item["tag"]))
+                    _require(quarantine_match is not None, "invalid quarantined checkpoint tag")
+                    _require(
+                        int(quarantine_match.group(1)) == expected_sequence,
+                        "quarantined checkpoints must form a contiguous sequence after the state source",
+                    )
+                    _require(item["tag"] not in seen_tags, "duplicate quarantined checkpoint tag")
+                    _require(
+                        isinstance(item["manifest_sha256"], str)
+                        and bool(HEX64.fullmatch(item["manifest_sha256"])),
+                        "invalid quarantined checkpoint manifest SHA-256",
+                    )
+                    _require(item["reason"] == "remote_restore_failed", "unsupported quarantine reason")
+                    seen_tags.add(item["tag"])
+                    expected_sequence += 1
+                _require(
+                    quarantined[-1]["tag"] == previous["tag"]
+                    and quarantined[-1]["manifest_sha256"] == previous["manifest_sha256"],
+                    "quarantine chain must end at the immediate published predecessor",
+                )
+
     assets = manifest["assets"]
     _require(isinstance(assets, list) and assets, "checkpoint must have at least one archive asset")
     names: list[str] = []
@@ -197,6 +255,41 @@ def build_manifest(args: argparse.Namespace) -> dict[str, Any]:
     else:
         _require(not args.previous_tag and not args.previous_manifest_sha256, "first checkpoint cannot have predecessor metadata")
 
+    state_source = None
+    quarantined: list[dict[str, Any]] = []
+    if args.sequence > 1:
+        source_tag = args.state_source_tag or args.previous_tag
+        source_sha = args.state_source_manifest_sha256 or args.previous_manifest_sha256
+        _require(bool(source_tag) and bool(source_sha), "successor requires state source metadata")
+        state_source = {"tag": source_tag, "manifest_sha256": source_sha}
+        quarantine_values = (
+            args.quarantined_tag,
+            args.quarantined_manifest_sha256,
+            args.quarantine_reason,
+        )
+        if any(quarantine_values):
+            _require(all(quarantine_values), "quarantine metadata must be supplied together")
+            quarantined.append(
+                {
+                    "tag": args.quarantined_tag,
+                    "manifest_sha256": args.quarantined_manifest_sha256,
+                    "reason": args.quarantine_reason,
+                }
+            )
+    else:
+        _require(
+            not any(
+                (
+                    args.state_source_tag,
+                    args.state_source_manifest_sha256,
+                    args.quarantined_tag,
+                    args.quarantined_manifest_sha256,
+                    args.quarantine_reason,
+                )
+            ),
+            "first checkpoint cannot have recovery metadata",
+        )
+
     manifest = {
         "schema": SCHEMA,
         "profile": PROFILE,
@@ -222,6 +315,8 @@ def build_manifest(args: argparse.Namespace) -> dict[str, Any]:
             "created_at": args.created_at,
         },
         "previous_checkpoint": previous,
+        "state_source_checkpoint": state_source,
+        "quarantined_checkpoints": quarantined,
         "assets": read_catalog(args.catalog),
     }
     validate_manifest(manifest)
@@ -254,6 +349,11 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     build.add_argument("--sequence", type=int, required=True)
     build.add_argument("--previous-tag")
     build.add_argument("--previous-manifest-sha256")
+    build.add_argument("--state-source-tag")
+    build.add_argument("--state-source-manifest-sha256")
+    build.add_argument("--quarantined-tag")
+    build.add_argument("--quarantined-manifest-sha256")
+    build.add_argument("--quarantine-reason", choices=("remote_restore_failed",))
     build.add_argument("--bitcoin-core-version", required=True)
     build.add_argument("--bitcoin-core-archive-sha256", required=True)
     build.add_argument("--prune-mib", type=int, required=True)

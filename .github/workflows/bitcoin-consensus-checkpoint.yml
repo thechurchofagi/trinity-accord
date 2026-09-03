@@ -8,6 +8,11 @@ on:
         required: false
         type: boolean
         default: false
+      recovery_from_tag:
+        description: "Manual recovery source after the latest published checkpoint fails remote restore"
+        required: false
+        type: string
+        default: ""
   schedule:
     - cron: "17 */6 * * *"
 
@@ -28,6 +33,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       FORCE_CHECKPOINT: ${{ inputs.force_checkpoint || false }}
+      RECOVERY_FROM_TAG: ${{ inputs.recovery_from_tag || '' }}
       BITCOIN_VERSION: "31.1"
       PRUNE_MIB: "550"
       SYNC_SECONDS: "14400"
@@ -44,7 +50,9 @@ jobs:
             echo "DATADIR=$RUNNER_TEMP/bitcoin-mainnet"
             echo "CHECKPOINT_MANIFEST=$RUNNER_TEMP/bitcoin-consensus-checkpoint.json"
             echo "PREVIOUS_MANIFEST=$RUNNER_TEMP/previous-bitcoin-consensus-checkpoint.json"
+            echo "RESTORE_MANIFEST=$RUNNER_TEMP/restore-bitcoin-consensus-checkpoint.json"
             echo "LATEST_RELEASE_JSON=$RUNNER_TEMP/latest-bitcoin-checkpoint-release.json"
+            echo "RESTORE_RELEASE_JSON=$RUNNER_TEMP/restore-bitcoin-checkpoint-release.json"
             echo "ASSET_CATALOG=$RUNNER_TEMP/bitcoin-checkpoint-assets.tsv"
             echo "BITCOIN_LIVE_TELEMETRY_JSON=$RUNNER_TEMP/bitcoin-consensus-live.json"
             echo "BITCOIN_LIVE_CHECK_RUN_ID_FILE=$RUNNER_TEMP/bitcoin-consensus-live-check-id"
@@ -121,8 +129,72 @@ jobs:
           echo "previous_tag=$latest_tag" >> "$GITHUB_OUTPUT"
           echo "previous_manifest_sha256=$manifest_sha" >> "$GITHUB_OUTPUT"
 
+          cp "$LATEST_RELEASE_JSON" "$RESTORE_RELEASE_JSON"
+          cp "$PREVIOUS_MANIFEST" "$RESTORE_MANIFEST"
+          restore_tag="$latest_tag"
+          restore_manifest_sha="$manifest_sha"
+          recovery_mode=false
+
+          if [[ -n "$RECOVERY_FROM_TAG" ]]; then
+            if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
+              echo "Checkpoint recovery is available only through workflow_dispatch." >&2
+              exit 1
+            fi
+            if [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
+              echo "github-actions[bot] is forbidden from initiating checkpoint recovery." >&2
+              exit 1
+            fi
+            if [[ "$FORCE_CHECKPOINT" != "true" ]]; then
+              echo "Checkpoint recovery requires force_checkpoint=true." >&2
+              exit 1
+            fi
+            if [[ ! "$RECOVERY_FROM_TAG" =~ ^bitcoin-consensus-checkpoint-[0-9]{6}$ ]]; then
+              echo "Invalid recovery checkpoint tag." >&2
+              exit 1
+            fi
+
+            latest_sequence="$(jq -r '.checkpoint.sequence' "$PREVIOUS_MANIFEST")"
+            recovery_sequence="${RECOVERY_FROM_TAG##*-}"
+            recovery_sequence=$((10#$recovery_sequence))
+            if (( recovery_sequence + 1 != latest_sequence )); then
+              echo "The recovery source must be exactly one sequence before the latest published checkpoint." >&2
+              exit 1
+            fi
+
+            gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RECOVERY_FROM_TAG}" > "$RESTORE_RELEASE_JSON"
+            if ! jq -e '.draft == false and .prerelease == false' "$RESTORE_RELEASE_JSON" >/dev/null; then
+              echo "Recovery source must be a public, non-prerelease checkpoint." >&2
+              exit 1
+            fi
+            restore_manifest_url="$(
+              jq -r '
+                .assets[]
+                | select(.name == "bitcoin-consensus-checkpoint.json")
+                | .url
+              ' "$RESTORE_RELEASE_JSON"
+            )"
+            if [[ -z "$restore_manifest_url" || "$restore_manifest_url" == "null" ]]; then
+              echo "Recovery checkpoint release is missing its manifest." >&2
+              exit 1
+            fi
+            gh api -H "Accept: application/octet-stream" "$restore_manifest_url" > "$RESTORE_MANIFEST"
+            python3 scripts/bitcoin_consensus_checkpoint.py validate-manifest "$RESTORE_MANIFEST"
+            [[ "$(jq -r '.checkpoint.tag' "$RESTORE_MANIFEST")" == "$RECOVERY_FROM_TAG" ]] || {
+              echo "Recovery release tag and manifest tag disagree." >&2
+              exit 1
+            }
+            restore_tag="$RECOVERY_FROM_TAG"
+            restore_manifest_sha="$(python3 scripts/bitcoin_consensus_checkpoint.py manifest-sha256 "$RESTORE_MANIFEST")"
+            recovery_mode=true
+            echo "Recovery mode will preserve $latest_tag as quarantined and restore state from $restore_tag."
+          fi
+
+          echo "restore_tag=$restore_tag" >> "$GITHUB_OUTPUT"
+          echo "restore_manifest_sha256=$restore_manifest_sha" >> "$GITHUB_OUTPUT"
+          echo "recovery_mode=$recovery_mode" >> "$GITHUB_OUTPUT"
+
           ibd="$(jq -r '.initialblockdownload' "$PREVIOUS_MANIFEST")"
-          if [[ "$ibd" == "false" && "$FORCE_CHECKPOINT" != "true" ]]; then
+          if [[ "$ibd" == "false" && "$recovery_mode" != "true" ]]; then
             echo "Latest sealed checkpoint already completed initial block download."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
@@ -215,7 +287,7 @@ jobs:
                   .assets[]
                   | select(.name == $name)
                   | .url
-                ' "$LATEST_RELEASE_JSON"
+                ' "$RESTORE_RELEASE_JSON"
               )"
               if [[ -z "$asset_url" || "$asset_url" == "null" ]]; then
                 echo "Release is missing declared asset: $name" >&2
@@ -224,10 +296,10 @@ jobs:
               rm -f "$tmp_part"
               gh api -H "Accept: application/octet-stream" "$asset_url" > "$tmp_part"
               python3 scripts/bitcoin_consensus_checkpoint.py \
-                verify-asset "$PREVIOUS_MANIFEST" "$name" "$tmp_part"
+                verify-asset "$RESTORE_MANIFEST" "$name" "$tmp_part"
               cat "$tmp_part"
               rm -f "$tmp_part"
-            done < <(jq -r '.assets[].name' "$PREVIOUS_MANIFEST")
+            done < <(jq -r '.assets[].name' "$RESTORE_MANIFEST")
           } | zstd -d -c | tar --no-same-owner -xf - -C "$DATADIR"
 
           rm -f "$tmp_part"
@@ -267,8 +339,8 @@ jobs:
           # Reopen under the exact prune contract recorded by the predecessor.
           # This remains correct if a later workflow intentionally changes its
           # prune target for the next checkpoint.
-          sealed_prune_mib="$(jq -r '.prune_mib' "$PREVIOUS_MANIFEST")"
-          if ! bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" -connect=0 -dnsseed=0 -listen=0 -daemonwait; then
+          sealed_prune_mib="$(jq -r '.prune_mib' "$RESTORE_MANIFEST")"
+          if ! bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" -assumevalid=0 -connect=0 -dnsseed=0 -listen=0 -daemonwait; then
             echo "Bitcoin Core could not reopen the restored predecessor; recent debug log follows." >&2
             if [[ -f "$DATADIR/debug.log" ]]; then
               tail -n 100 "$DATADIR/debug.log" >&2
@@ -277,8 +349,8 @@ jobs:
           fi
           offline_info="$(bitcoin-cli -datadir="$DATADIR" getblockchaininfo)"
 
-          expected_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
-          expected_hash="$(jq -r '.best_block_hash' "$PREVIOUS_MANIFEST")"
+          expected_height="$(jq -r '.height' "$RESTORE_MANIFEST")"
+          expected_hash="$(jq -r '.best_block_hash' "$RESTORE_MANIFEST")"
           actual_height="$(jq -r '.blocks' <<<"$offline_info")"
           actual_hash="$(jq -r '.bestblockhash' <<<"$offline_info")"
 
@@ -287,6 +359,8 @@ jobs:
             bitcoin-cli -datadir="$DATADIR" stop
             exit 1
           fi
+          bitcoin-cli -datadir="$DATADIR" gettxoutsetinfo none \
+            > "${RUNNER_TEMP}/restored-state-source-utxo-scan.json"
 
           bitcoin-cli -datadir="$DATADIR" stop >/dev/null
           while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
@@ -382,7 +456,7 @@ jobs:
 
           final_height="$(jq -r '.blocks' "${RUNNER_TEMP}/final-chain-info.json")"
           if [[ "${{ steps.latest.outputs.has_previous }}" == "true" ]]; then
-            previous_height="$(jq -r '.height' "$PREVIOUS_MANIFEST")"
+            previous_height="$(jq -r '.height' "$RESTORE_MANIFEST")"
             if (( final_height <= previous_height )); then
               echo "Bitcoin Core made no forward block-height progress; refusing to publish a duplicate checkpoint." >&2
               exit 1
@@ -440,11 +514,16 @@ jobs:
             gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${stale_id}"
           fi
 
+          release_notes="GitHub-hosted Bitcoin Core pruned-mainnet checkpoint. Persistence only; the manifest records the verification boundary."
+          if [[ "${{ steps.latest.outputs.recovery_mode }}" == "true" ]]; then
+            release_notes+=" Recovery: state restored from ${{ steps.latest.outputs.restore_tag }}; ${{ steps.latest.outputs.previous_tag }} is retained but quarantined after remote restore failure."
+          fi
+
           gh release create "$tag" \
             --draft \
             --target "$GITHUB_SHA" \
             --title "Bitcoin Consensus Checkpoint ${sequence}" \
-            --notes "GitHub-hosted Bitcoin Core pruned-mainnet checkpoint. Persistence only; the manifest records the verification boundary."
+            --notes "$release_notes"
 
           part_prefix="${RUNNER_TEMP}/bitcoin-datadir.tar.zst.part-"
           export GH_TOKEN CHECKPOINT_TAG ASSET_CATALOG
@@ -474,7 +553,16 @@ jobs:
             previous_args+=(
               --previous-tag "${{ steps.latest.outputs.previous_tag }}"
               --previous-manifest-sha256 "${{ steps.latest.outputs.previous_manifest_sha256 }}"
+              --state-source-tag "${{ steps.latest.outputs.restore_tag }}"
+              --state-source-manifest-sha256 "${{ steps.latest.outputs.restore_manifest_sha256 }}"
             )
+            if [[ "${{ steps.latest.outputs.recovery_mode }}" == "true" ]]; then
+              previous_args+=(
+                --quarantined-tag "${{ steps.latest.outputs.previous_tag }}"
+                --quarantined-manifest-sha256 "${{ steps.latest.outputs.previous_manifest_sha256 }}"
+                --quarantine-reason remote_restore_failed
+              )
+            fi
           fi
 
           python3 scripts/bitcoin_consensus_checkpoint.py build-manifest \
@@ -495,9 +583,11 @@ jobs:
           python3 scripts/bitcoin_consensus_checkpoint.py validate-manifest "$CHECKPOINT_MANIFEST"
           gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"
 
-          final_ibd="$(jq -r '.initialblockdownload' "$CHECKPOINT_MANIFEST")"
-          if [[ "$final_ibd" == "false" ]]; then
-            echo "Final IBD checkpoint detected; restoring the remote draft before publication."
+          # Every draft must survive a remote round trip before publication.
+          # This protects intermediate checkpoints too, so a bad archive can
+          # never become the state source for the next scheduled run.
+          {
+            echo "Restoring and fully scanning the remote draft before publication."
             draft_snapshot="${RUNNER_TEMP}/final-checkpoint-draft.json"
             remote_manifest="${RUNNER_TEMP}/remote-bitcoin-consensus-checkpoint.json"
             expected_asset_count=$(( $(jq '.assets | length' "$CHECKPOINT_MANIFEST") + 1 ))
@@ -537,11 +627,11 @@ jobs:
                 draft_ready=true
                 break
               fi
-              echo "Final draft inventory is not complete yet (attempt ${attempt}/12)."
+              echo "Draft inventory is not complete yet (attempt ${attempt}/12)."
               sleep 5
             done
             [[ "$draft_ready" == "true" ]] || {
-              echo "Final draft never exposed the exact manifest-declared asset inventory; refusing publication." >&2
+              echo "Draft never exposed the exact manifest-declared asset inventory; refusing publication." >&2
               exit 1
             }
 
@@ -563,7 +653,7 @@ jobs:
             # prevents an accidental broad deletion if an environment variable is
             # ever changed.
             [[ -n "${RUNNER_TEMP:-}" && "$DATADIR" == "$RUNNER_TEMP/bitcoin-mainnet" ]] || {
-              echo "Refusing to replace an unexpected datadir path during final restore verification." >&2
+              echo "Refusing to replace an unexpected datadir path during remote restore verification." >&2
               exit 1
             }
             rm -rf -- "$DATADIR"
@@ -599,9 +689,9 @@ jobs:
               fi
             }
             trap stop_restored_core EXIT INT TERM
-            if ! bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -disablewallet=1 \
+            if ! bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -assumevalid=0 -disablewallet=1 \
               -connect=0 -dnsseed=0 -listen=0 -daemonwait; then
-              echo "Bitcoin Core could not reopen the remotely restored final draft." >&2
+              echo "Bitcoin Core could not reopen the remotely restored draft." >&2
               if [[ -f "$DATADIR/debug.log" ]]; then
                 tail -n 100 "$DATADIR/debug.log" >&2
               fi
@@ -612,6 +702,7 @@ jobs:
 
             expected_height="$(jq -r '.height' "$CHECKPOINT_MANIFEST")"
             expected_hash="$(jq -r '.best_block_hash' "$CHECKPOINT_MANIFEST")"
+            expected_ibd="$(jq -r '.initialblockdownload' "$CHECKPOINT_MANIFEST")"
             restored_height="$(jq -r '.blocks' "$restored_info")"
             restored_hash="$(jq -r '.bestblockhash' "$restored_info")"
             restored_ibd="$(jq -r '.initialblockdownload' "$restored_info")"
@@ -623,8 +714,22 @@ jobs:
               echo "Remote final draft restored to hash $restored_hash, expected $expected_hash." >&2
               exit 1
             }
-            [[ "$restored_ibd" == "false" ]] || {
-              echo "Remote final draft no longer reports completed IBD; refusing publication." >&2
+            [[ "$restored_ibd" == "$expected_ibd" ]] || {
+              echo "Remote draft IBD state $restored_ibd differs from manifest value $expected_ibd; refusing publication." >&2
+              exit 1
+            }
+
+            # Force a read of the complete UTXO LevelDB. Startup and a height/hash
+            # query may touch only a small subset of SSTables and missed the
+            # truncated tables in the invalid 000008 archive.
+            utxo_scan="${RUNNER_TEMP}/remote-restored-utxo-scan.json"
+            bitcoin-cli -datadir="$DATADIR" gettxoutsetinfo none > "$utxo_scan"
+            [[ "$(jq -r '.height' "$utxo_scan")" == "$expected_height" ]] || {
+              echo "Remote draft UTXO scan height differs from the manifest; refusing publication." >&2
+              exit 1
+            }
+            [[ "$(jq -r '.bestblock' "$utxo_scan")" == "$expected_hash" ]] || {
+              echo "Remote draft UTXO scan best block differs from the manifest; refusing publication." >&2
               exit 1
             }
 
@@ -632,8 +737,8 @@ jobs:
             while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
             restored_core_started=false
             trap - EXIT INT TERM
-            echo "Remote final draft restored cleanly at the manifest height/hash; publication is authorized."
-          fi
+            echo "Remote draft restored cleanly and passed a full UTXO scan; publication is authorized."
+          }
 
           gh release edit "$tag" --draft=false
 
