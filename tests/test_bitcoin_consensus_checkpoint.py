@@ -26,7 +26,7 @@ def valid_manifest(sequence: int = 1) -> dict:
             "tag": f"bitcoin-consensus-checkpoint-{sequence - 1:06d}",
             "manifest_sha256": _sha("previous"),
         }
-    return {
+    manifest = {
         "schema": checkpoint.SCHEMA,
         "profile": checkpoint.PROFILE,
         "network": "main",
@@ -51,6 +51,8 @@ def valid_manifest(sequence: int = 1) -> dict:
             "created_at": "2026-08-31T12:00:00Z",
         },
         "previous_checkpoint": previous,
+        "state_source_checkpoint": previous,
+        "quarantined_checkpoints": [],
         "assets": [
             {
                 "name": "bitcoin-datadir.tar.zst.part-0000",
@@ -59,6 +61,7 @@ def valid_manifest(sequence: int = 1) -> dict:
             }
         ],
     }
+    return manifest
 
 
 def test_accepts_genesis_checkpoint_manifest():
@@ -67,6 +70,47 @@ def test_accepts_genesis_checkpoint_manifest():
 
 def test_accepts_linked_successor_manifest():
     checkpoint.validate_manifest(valid_manifest(2))
+
+
+def test_accepts_legacy_v1_manifest():
+    manifest = valid_manifest(2)
+    manifest["schema"] = checkpoint.SCHEMA_V1
+    del manifest["state_source_checkpoint"]
+    del manifest["quarantined_checkpoints"]
+    checkpoint.validate_manifest(manifest)
+
+
+def test_accepts_recovery_that_quarantines_immediate_published_predecessor():
+    manifest = valid_manifest(9)
+    manifest["state_source_checkpoint"] = {
+        "tag": "bitcoin-consensus-checkpoint-000007",
+        "manifest_sha256": _sha("source-7"),
+    }
+    manifest["quarantined_checkpoints"] = [
+        {
+            "tag": "bitcoin-consensus-checkpoint-000008",
+            "manifest_sha256": manifest["previous_checkpoint"]["manifest_sha256"],
+            "reason": "remote_restore_failed",
+        }
+    ]
+    checkpoint.validate_manifest(manifest)
+
+
+def test_rejects_recovery_that_hides_a_sequence_gap():
+    manifest = valid_manifest(9)
+    manifest["state_source_checkpoint"] = {
+        "tag": "bitcoin-consensus-checkpoint-000006",
+        "manifest_sha256": _sha("source-6"),
+    }
+    manifest["quarantined_checkpoints"] = [
+        {
+            "tag": "bitcoin-consensus-checkpoint-000008",
+            "manifest_sha256": manifest["previous_checkpoint"]["manifest_sha256"],
+            "reason": "remote_restore_failed",
+        }
+    ]
+    with pytest.raises(checkpoint.CheckpointError):
+        checkpoint.validate_manifest(manifest)
 
 
 @pytest.mark.parametrize(
@@ -165,9 +209,9 @@ def test_restored_pruned_chainstate_reopens_with_sealed_prune_mode():
         "- name: Verify restored chainstate matches its sealed predecessor", 1
     )[1].split("- name: Advance Bitcoin Core consensus validation", 1)[0]
 
-    assert 'sealed_prune_mib="$(jq -r \'.prune_mib\' "$PREVIOUS_MANIFEST")"' in restore_verification
+    assert 'sealed_prune_mib="$(jq -r \'.prune_mib\' "$RESTORE_MANIFEST")"' in restore_verification
     assert (
-        'bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" '
+        'bitcoind -datadir="$DATADIR" -prune="$sealed_prune_mib" -assumevalid=0 '
         "-connect=0 -dnsseed=0 -listen=0 -daemonwait"
     ) in restore_verification
 
@@ -182,7 +226,7 @@ def test_restored_chainstate_reopen_failure_prints_debug_tail():
     assert 'tail -n 100 "$DATADIR/debug.log" >&2' in restore_verification
 
 
-def test_completed_ibd_draft_is_remotely_restored_before_publication():
+def test_every_draft_is_remotely_restored_and_scanned_before_publication():
     source = WORKFLOW_PATH.read_text()
     sealing = source.split(
         "- name: Seal immutable checkpoint into a draft Release", 1
@@ -191,18 +235,39 @@ def test_completed_ibd_draft_is_remotely_restored_before_publication():
     manifest_upload = sealing.index(
         'gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"'
     )
-    final_gate = sealing.index('if [[ "$final_ibd" == "false" ]]')
+    remote_gate = sealing.index("Every draft must survive a remote round trip")
     remote_verify = sealing.index(
         'verify-asset "$CHECKPOINT_MANIFEST" "$name" "$final_part"'
     )
     offline_reopen = sealing.index(
-        'bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -disablewallet=1'
+        'bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -assumevalid=0 -disablewallet=1'
     )
     publish = sealing.index('gh release edit "$tag" --draft=false')
 
-    assert manifest_upload < final_gate < remote_verify < offline_reopen < publish
+    utxo_scan = sealing.index('gettxoutsetinfo none')
+
+    assert manifest_upload < remote_gate < remote_verify < offline_reopen < utxo_scan < publish
     assert 'cmp "$CHECKPOINT_MANIFEST" "$remote_manifest"' in sealing
     assert '"$DATADIR" == "$RUNNER_TEMP/bitcoin-mainnet"' in sealing
     assert 'restored_height" == "$expected_height' in sealing
     assert 'restored_hash" == "$expected_hash' in sealing
-    assert 'restored_ibd" == "false' in sealing
+    assert 'restored_ibd" == "$expected_ibd' in sealing
+    assert "-assumevalid=0" in sealing
+
+
+def test_recovery_is_manual_force_only_and_keeps_publication_lineage():
+    source = WORKFLOW_PATH.read_text()
+    locate = source.split("- name: Locate latest sealed checkpoint", 1)[1].split(
+        "- name: Verify checkpoint Release write permission", 1
+    )[0]
+    seal = source.split("- name: Seal immutable checkpoint into a draft Release", 1)[1].split(
+        "- name: Finalize live telemetry check", 1
+    )[0]
+
+    assert '"${{ github.event_name }}" != "workflow_dispatch"' in locate
+    assert '"${{ github.actor }}" == "github-actions[bot]"' in locate
+    assert '"$FORCE_CHECKPOINT" != "true"' in locate
+    assert "recovery source must be exactly one sequence before" in locate
+    assert '--previous-tag "${{ steps.latest.outputs.previous_tag }}"' in seal
+    assert '--state-source-tag "${{ steps.latest.outputs.restore_tag }}"' in seal
+    assert '--quarantined-tag "${{ steps.latest.outputs.previous_tag }}"' in seal
