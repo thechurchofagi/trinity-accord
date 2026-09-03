@@ -494,6 +494,145 @@ jobs:
 
           python3 scripts/bitcoin_consensus_checkpoint.py validate-manifest "$CHECKPOINT_MANIFEST"
           gh release upload "$tag" "$CHECKPOINT_MANIFEST#bitcoin-consensus-checkpoint.json"
+
+          final_ibd="$(jq -r '.initialblockdownload' "$CHECKPOINT_MANIFEST")"
+          if [[ "$final_ibd" == "false" ]]; then
+            echo "Final IBD checkpoint detected; restoring the remote draft before publication."
+            draft_snapshot="${RUNNER_TEMP}/final-checkpoint-draft.json"
+            remote_manifest="${RUNNER_TEMP}/remote-bitcoin-consensus-checkpoint.json"
+            expected_asset_count=$(( $(jq '.assets | length' "$CHECKPOINT_MANIFEST") + 1 ))
+            draft_ready=false
+
+            # GitHub can briefly expose a Release before every uploaded asset is
+            # visible through the API. Wait for the exact draft inventory before
+            # trusting any download URL.
+            for attempt in $(seq 1 12); do
+              gh api "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+                | jq --arg tag "$tag" '
+                    [
+                      .[]
+                      | select(.tag_name == $tag and .draft == true)
+                    ]
+                    | first // null
+                  ' > "$draft_snapshot"
+
+              inventory_ok=true
+              remote_asset_count="$(jq 'if . == null then 0 else (.assets | length) end' "$draft_snapshot")"
+              if [[ "$remote_asset_count" != "$expected_asset_count" ]]; then
+                inventory_ok=false
+              fi
+              while IFS= read -r expected_name; do
+                if ! jq -e --arg name "$expected_name" '
+                  [.assets[]? | select(.name == $name and .state == "uploaded")] | length == 1
+                ' "$draft_snapshot" >/dev/null; then
+                  inventory_ok=false
+                  break
+                fi
+              done < <(
+                jq -r '.assets[].name' "$CHECKPOINT_MANIFEST"
+                printf '%s\n' 'bitcoin-consensus-checkpoint.json'
+              )
+
+              if [[ "$inventory_ok" == "true" ]]; then
+                draft_ready=true
+                break
+              fi
+              echo "Final draft inventory is not complete yet (attempt ${attempt}/12)."
+              sleep 5
+            done
+            [[ "$draft_ready" == "true" ]] || {
+              echo "Final draft never exposed the exact manifest-declared asset inventory; refusing publication." >&2
+              exit 1
+            }
+
+            manifest_asset_url="$(
+              jq -r '
+                .assets[]
+                | select(.name == "bitcoin-consensus-checkpoint.json")
+                | .url
+              ' "$draft_snapshot"
+            )"
+            gh api -H "Accept: application/octet-stream" "$manifest_asset_url" > "$remote_manifest"
+            cmp "$CHECKPOINT_MANIFEST" "$remote_manifest" || {
+              echo "Remote draft manifest differs from the locally validated manifest; refusing publication." >&2
+              exit 1
+            }
+
+            # Reclaim the original datadir only after every upload is visible and
+            # the remote manifest is byte-identical. The exact path assertion
+            # prevents an accidental broad deletion if an environment variable is
+            # ever changed.
+            [[ -n "${RUNNER_TEMP:-}" && "$DATADIR" == "$RUNNER_TEMP/bitcoin-mainnet" ]] || {
+              echo "Refusing to replace an unexpected datadir path during final restore verification." >&2
+              exit 1
+            }
+            rm -rf -- "$DATADIR"
+            mkdir -p "$DATADIR"
+            final_part="${RUNNER_TEMP}/final-checkpoint-part.tmp"
+
+            {
+              while IFS= read -r name; do
+                asset_url="$(
+                  jq -r --arg name "$name" '
+                    .assets[]
+                    | select(.name == $name)
+                    | .url
+                  ' "$draft_snapshot"
+                )"
+                rm -f "$final_part"
+                gh api -H "Accept: application/octet-stream" "$asset_url" > "$final_part"
+                python3 scripts/bitcoin_consensus_checkpoint.py \
+                  verify-asset "$CHECKPOINT_MANIFEST" "$name" "$final_part"
+                cat "$final_part"
+                rm -f "$final_part"
+              done < <(jq -r '.assets[].name' "$CHECKPOINT_MANIFEST")
+            } | zstd -d -c | tar --no-same-owner -xf - -C "$DATADIR"
+            rm -f "$final_part"
+
+            restored_info="${RUNNER_TEMP}/remote-restored-final-chain-info.json"
+            restored_core_started=false
+            stop_restored_core() {
+              if [[ "$restored_core_started" == "true" ]]; then
+                bitcoin-cli -datadir="$DATADIR" stop >/dev/null 2>&1 || true
+              fi
+            }
+            trap stop_restored_core EXIT INT TERM
+            if ! bitcoind -datadir="$DATADIR" -prune="$PRUNE_MIB" -disablewallet=1 \
+              -connect=0 -dnsseed=0 -listen=0 -daemonwait; then
+              echo "Bitcoin Core could not reopen the remotely restored final draft." >&2
+              if [[ -f "$DATADIR/debug.log" ]]; then
+                tail -n 100 "$DATADIR/debug.log" >&2
+              fi
+              exit 1
+            fi
+            restored_core_started=true
+            bitcoin-cli -datadir="$DATADIR" getblockchaininfo > "$restored_info"
+
+            expected_height="$(jq -r '.height' "$CHECKPOINT_MANIFEST")"
+            expected_hash="$(jq -r '.best_block_hash' "$CHECKPOINT_MANIFEST")"
+            restored_height="$(jq -r '.blocks' "$restored_info")"
+            restored_hash="$(jq -r '.bestblockhash' "$restored_info")"
+            restored_ibd="$(jq -r '.initialblockdownload' "$restored_info")"
+            [[ "$restored_height" == "$expected_height" ]] || {
+              echo "Remote final draft restored to height $restored_height, expected $expected_height." >&2
+              exit 1
+            }
+            [[ "$restored_hash" == "$expected_hash" ]] || {
+              echo "Remote final draft restored to hash $restored_hash, expected $expected_hash." >&2
+              exit 1
+            }
+            [[ "$restored_ibd" == "false" ]] || {
+              echo "Remote final draft no longer reports completed IBD; refusing publication." >&2
+              exit 1
+            }
+
+            bitcoin-cli -datadir="$DATADIR" stop >/dev/null
+            while pgrep -f "[b]itcoind.*${DATADIR}" >/dev/null; do sleep 1; done
+            restored_core_started=false
+            trap - EXIT INT TERM
+            echo "Remote final draft restored cleanly at the manifest height/hash; publication is authorized."
+          fi
+
           gh release edit "$tag" --draft=false
 
           python3 scripts/bitcoin_checkpoint_telemetry.py \
