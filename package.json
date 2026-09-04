@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@chainsafe/ssz": "1.7.0",
+    "@lodestar/config": "1.47.0",
+    "@lodestar/params": "1.47.0",
+    "@lodestar/types": "1.47.0",
     "@noble/hashes": "2.2.0",
     "arweave": "1.15.7"
   },

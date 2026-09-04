@@ -75,9 +75,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends zstd zip
           python3 -m pip install -r requirements-ci.txt
-          npm install --no-save --package-lock=false \
-            @lodestar/types@1.47.0 @lodestar/params@1.47.0 \
-            @lodestar/config@1.47.0 @chainsafe/ssz@1.7.0
+          npm ci
           python3 -m py_compile scripts/verify-chronicle-sidechain-strict.py
           python3 scripts/test_chronicle_sidechain_strict.py
 
@@ -110,7 +108,11 @@ jobs:
           gh release download "$SETTLEMENT_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/settlement" --pattern POLYGON-ETHEREUM-SETTLEMENT.json --pattern SOURCE-BINDING.json
           FINALITY_TAG="chronicle-sidechain-finality-v1-${SOURCE_SHORT}"
           finality=""
-          finality_draft="$(gh release view "$FINALITY_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft --jq '.isDraft' 2>/dev/null || true)"
+          if finality_draft="$(gh release view "$FINALITY_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft --jq '.isDraft' 2>/dev/null)"; then
+            :
+          else
+            finality_draft="missing"
+          fi
           if [[ "$finality_draft" == "false" ]]; then
             gh release download "$FINALITY_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/finality-release"
             (cd "$root/finality-release" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
