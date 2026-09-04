@@ -9,23 +9,80 @@ permissions:
 jobs:
   verify-eth-witness:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
 
       - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
         with:
           node-version-file: ".node-version"
 
-      - name: Run ETH Witness Verification
+      - name: Install pinned verification dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+
+      - name: Verify strict Ethereum L1 L2 L3 annexes offline
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 evidence/ethereum-evidence-annex-v1/verification/verify_annex.py \
+            > /tmp/ethereum-mainnet-offline.json
+          cmp --silent \
+            /tmp/ethereum-mainnet-offline.json \
+            evidence/ethereum-evidence-annex-v1/reports/OFFLINE-VERIFICATION.json
+
+          python3 evidence/nft-proof-annex-v1/verification/verify_nft_proof_annex.py \
+            > /tmp/ethereum-nft-offline.json
+          cmp --silent \
+            /tmp/ethereum-nft-offline.json \
+            evidence/nft-proof-annex-v1/reports/OFFLINE-VERIFICATION.json
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          mainnet = json.loads(Path('/tmp/ethereum-mainnet-offline.json').read_text())
+          nft = json.loads(Path('/tmp/ethereum-nft-offline.json').read_text())
+          summary = {
+              'schema': 'trinityaccord.ethereum-strict-verification-run.v1',
+              'network_access_used_by_strict_verifiers': False,
+              'mainnet_non_nft': {
+                  'anchors': mainnet['anchors'],
+                  'L1': mainnet['L1_BYTE_INTEGRITY'],
+                  'L2': mainnet['L2_EXECUTION_INCLUSION'],
+                  'L3': mainnet['L3_CONSENSUS_FINALITY'],
+              },
+              'mainnet_nft': {
+                  'assets': nft['L1_COLLECTION_COMMITMENT']['asset_count'],
+                  'L1': nft['L1_COLLECTION_COMMITMENT']['status'],
+                  'L2': nft['L2_EXECUTION_INCLUSION']['status'],
+                  'L3': nft['L3_CONSENSUS_FINALITY']['status'],
+              },
+              'sidechain_scope_inferred': False,
+          }
+          assert all(value == 'PASS' for section in summary.values() if isinstance(section, dict)
+                     for key, value in section.items() if key in {'L1', 'L2', 'L3'})
+          Path('/tmp/ethereum-strict-verification-summary.json').write_text(
+              json.dumps(summary, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+
+      - name: Run live RPC reference check
         env:
           ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
         run: node scripts/verify-eth-witness.mjs
 
-      - name: Upload ETH-WITNESS-AUDIT.json
+      - name: Upload Ethereum verification audits
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: eth-witness-audit
-          path: ETH-WITNESS-AUDIT.json
+          name: ethereum-verification-audits
+          path: |
+            ETH-WITNESS-AUDIT.json
+            /tmp/ethereum-mainnet-offline.json
+            /tmp/ethereum-nft-offline.json
+            /tmp/ethereum-strict-verification-summary.json
           retention-days: 90
