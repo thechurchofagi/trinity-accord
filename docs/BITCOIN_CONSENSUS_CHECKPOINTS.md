@@ -41,9 +41,9 @@ The workflow uses a concurrency group with `cancel-in-progress: false`, so two r
 
 The first run has no predecessor and starts from a fresh Bitcoin Core mainnet datadir. It does not import a third-party `chainstate` snapshot. The workflow runs with `assumevalid=0`; therefore the intended baseline is validation from Bitcoin's genesis history rather than a prevalidated chainstate supplied by an external provider.
 
-Each run advances for a bounded sync window and seals a checkpoint before the hosted-job deadline. Scheduled runs resume from that checkpoint. If disk space drops below the safety margin, synchronization stops early and the workflow seals the current clean state rather than risking an uncontrolled disk-full failure.
+During initial synchronization, each run advanced for a bounded sync window and sealed a checkpoint before the hosted-job deadline. If disk space dropped below the safety margin, synchronization stopped early and the workflow sealed the current clean state rather than risking an uncontrolled disk-full failure.
 
-Once a sealed checkpoint reports `initialblockdownload=false`, scheduled runs no-op by default. Manual dispatch can force another checkpoint when deliberately required.
+The recurring schedule was retired after the verified `bitcoin-consensus-checkpoint-000009` reported `initialblockdownload=false`. The workflow is now manual-only. Any deliberate future checkpoint or recovery must use the guarded `workflow_dispatch` inputs; quarantined checkpoints remain in the public lineage and must never be selected as state sources.
 
 ## Evidence audit phase
 
