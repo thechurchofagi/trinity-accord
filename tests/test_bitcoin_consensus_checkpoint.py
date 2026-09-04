@@ -271,3 +271,13 @@ def test_recovery_is_manual_force_only_and_keeps_publication_lineage():
     assert '--previous-tag "${{ steps.latest.outputs.previous_tag }}"' in seal
     assert '--state-source-tag "${{ steps.latest.outputs.restore_tag }}"' in seal
     assert '--quarantined-tag "${{ steps.latest.outputs.previous_tag }}"' in seal
+
+
+def test_completed_checkpoint_workflow_is_manual_only():
+    source = WORKFLOW_PATH.read_text()
+    trigger_header = source.split("permissions:", 1)[0]
+
+    assert "workflow_dispatch:" in trigger_header
+    assert "force_checkpoint:" in trigger_header
+    assert "recovery_from_tag:" in trigger_header
+    assert "schedule:" not in trigger_header
