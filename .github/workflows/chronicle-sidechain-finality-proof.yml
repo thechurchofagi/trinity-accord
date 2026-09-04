@@ -1,0 +1,434 @@
+name: Chronicle Sidechain Finality Proof
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/base_blob_archive_proxy.py"
+      - "scripts/capture_chronicle_base_derivation.py"
+      - "scripts/capture_ethereum_beacon_finality.py"
+      - "scripts/verify_base_blob_kzg.go"
+      - "scripts/verify_chronicle_base_derivation.py"
+      - "scripts/verify_ethereum_beacon_ssz.mjs"
+      - "scripts/test_base_blob_archive_proxy.py"
+      - "scripts/test_capture_chronicle_base_derivation.py"
+      - "scripts/test_capture_ethereum_beacon_finality.py"
+      - "scripts/yq_chain_id_compat.py"
+      - ".github/workflows/chronicle-sidechain-finality-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  statuses: write
+
+concurrency:
+  group: chronicle-sidechain-finality-proof
+  cancel-in-progress: false
+
+jobs:
+  prove-and-cold-recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      OPTIMISM_COMMIT: c6f39182c975db976aaaa01ef32884c41b1c9660
+      SUPERCHAIN_REGISTRY_COMMIT: 5b055be4d294ce43814a44c8839d89b2436dc8aa
+      FINALITY_ROOT: artifacts/chronicle-sidechain-finality
+      STATUS_CONTEXT: trinity/sidechain-finality
+
+    steps:
+      - name: Checkout exact proof implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Mark proof run pending
+        run: |
+          set -euo pipefail
+          url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=pending -f context="$STATUS_CONTEXT" \
+            -f description="capturing Base derivation and Ethereum Beacon finality" \
+            -f target_url="$url" >/dev/null
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5
+        with:
+          go-version: "1.25.1"
+          cache: false
+
+      - name: Install deterministic verifier dependencies and test
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jq zstd zip
+          python3 -m pip install -r requirements-ci.txt
+          npm install --no-save --package-lock=false \
+            @lodestar/types@1.47.0 @lodestar/params@1.47.0 \
+            @lodestar/config@1.47.0 @chainsafe/ssz@1.7.0
+          python3 -m py_compile \
+            scripts/base_blob_archive_proxy.py \
+            scripts/capture_chronicle_base_derivation.py \
+            scripts/capture_ethereum_beacon_finality.py \
+            scripts/verify_chronicle_base_derivation.py \
+            scripts/yq_chain_id_compat.py
+          python3 scripts/test_base_blob_archive_proxy.py
+          python3 scripts/test_capture_chronicle_base_derivation.py
+          python3 scripts/test_capture_ethereum_beacon_finality.py
+
+      - name: Build pinned official OP Stack decoder and offline KZG verifier
+        id: op
+        run: |
+          set -euo pipefail
+          tools="$RUNNER_TEMP/finality-tools"
+          mkdir -p "$tools/bin"
+          git clone --filter=blob:none --no-checkout https://github.com/ethereum-optimism/optimism.git "$tools/optimism"
+          git -C "$tools/optimism" checkout "$OPTIMISM_COMMIT"
+          git -C "$tools/optimism" submodule update --init superchain-registry
+          git -C "$tools/optimism/superchain-registry" fetch origin "$SUPERCHAIN_REGISTRY_COMMIT"
+          git -C "$tools/optimism/superchain-registry" checkout "$SUPERCHAIN_REGISTRY_COMMIT"
+          cp scripts/yq_chain_id_compat.py "$tools/bin/yq"
+          chmod +x "$tools/bin/yq"
+          PATH="$tools/bin:$PATH" OP_CORE_SYNC_SUPERCHAIN=1 \
+            "$tools/optimism/op-core/superchain/sync-superchain.sh"
+          (
+            cd "$tools/optimism"
+            go build -trimpath -o "$tools/bin/batch-decoder" ./op-node/cmd/batch_decoder
+            cp "$GITHUB_WORKSPACE/scripts/verify_base_blob_kzg.go" verify_base_blob_kzg.go
+            go build -trimpath -o "$tools/bin/verify-base-blob-kzg" verify_base_blob_kzg.go
+          )
+          test "$(git -C "$tools/optimism" rev-parse HEAD)" = "$OPTIMISM_COMMIT"
+          test "$(git -C "$tools/optimism/superchain-registry" rev-parse HEAD)" = "$SUPERCHAIN_REGISTRY_COMMIT"
+          echo "bin=$tools/bin" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve and cold-verify immutable source releases
+        id: source
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/finality-source"
+          mkdir -p "$root/source" "$root/settlement"
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --json tagName,createdAt,isDraft,isPrerelease > "$root/releases.json"
+          python3 - <<'PY' > "$root/source.env"
+          import json, os, re
+          rows=json.load(open(os.environ['RUNNER_TEMP']+'/finality-source/releases.json'))
+          rows=[r for r in rows if not r['isDraft'] and not r['isPrerelease'] and re.fullmatch(r'chronicle-sidechain-evidence-v2-[0-9a-f]{12}',r['tagName'])]
+          if not rows: raise SystemExit('no immutable sidechain evidence release')
+          rows.sort(key=lambda row:row.get('createdAt') or '')
+          tag=rows[-1]['tagName']; short=tag.rsplit('-',1)[-1]
+          print(f'SOURCE_TAG={tag}')
+          print(f'SOURCE_SHORT={short}')
+          print(f'SETTLEMENT_TAG=chronicle-polygon-ethereum-settlement-v1-{short}')
+          PY
+          set -a; . "$root/source.env"; set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          source_sha="$(git rev-list -n 1 "$SOURCE_TAG")"
+          test "${source_sha:0:12}" = "$SOURCE_SHORT"
+          archive="chronicle-sidechain-evidence-v2-${SOURCE_SHORT}.tar.gz"
+          gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/source" \
+            --pattern "$archive" --pattern "$archive.sha256"
+          (cd "$root/source" && sha256sum -c "$archive.sha256")
+          mkdir "$root/extracted"
+          tar --no-same-owner -xzf "$root/source/$archive" -C "$root/extracted"
+          source_dir="$root/extracted/chronicle-sidechain-scan"
+          CHRONICLE_OUT="$source_dir" python3 scripts/verify-chronicle-sidechain-evidence.py
+          gh release download "$SETTLEMENT_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/settlement" \
+            --pattern POLYGON-ETHEREUM-SETTLEMENT.json --pattern SOURCE-BINDING.json
+          python3 - <<'PY'
+          import json, os
+          root=os.environ['RUNNER_TEMP']+'/finality-source/settlement/'
+          report=json.load(open(root+'POLYGON-ETHEREUM-SETTLEMENT.json'))
+          if report.get('pass') is not True or len(report.get('checkpoints',[])) != 117:
+              raise SystemExit('Polygon settlement is not PASS 117 checkpoints')
+          PY
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_short=$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "source_dir=$source_dir" >> "$GITHUB_OUTPUT"
+          echo "settlement_dir=$root/settlement" >> "$GITHUB_OUTPUT"
+
+      - name: Capture Base OP Stack L1 data and exact batch derivation
+        env:
+          SOURCE_DIR: ${{ steps.source.outputs.source_dir }}
+          TOOL_BIN: ${{ steps.op.outputs.bin }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$FINALITY_ROOT/base/decoder/blobs"
+          python3 scripts/base_blob_archive_proxy.py \
+            --cache "$FINALITY_ROOT/base/decoder/blobs" --port 5052 \
+            > "$FINALITY_ROOT/base/BLOB-ARCHIVE-PROXY.log" 2>&1 &
+          proxy_pid=$!
+          trap 'kill "$proxy_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:5052/eth/v1/beacon/genesis >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:5052/eth/v1/beacon/genesis >/dev/null
+          python3 scripts/capture_chronicle_base_derivation.py \
+            --base-timeline "$SOURCE_DIR/evidence-v2/BASE-TIMELINE.json" \
+            --batch-decoder "$TOOL_BIN/batch-decoder" \
+            --beacon-archive http://127.0.0.1:5052 \
+            --output "$FINALITY_ROOT/base"
+          "$TOOL_BIN/verify-base-blob-kzg" \
+            "$FINALITY_ROOT/base/decoder/transactions" \
+            "$FINALITY_ROOT/base/decoder/blobs"
+          rm -rf "$RUNNER_TEMP/base-fresh-channels"
+          "$TOOL_BIN/batch-decoder" reassemble \
+            --in "$FINALITY_ROOT/base/decoder/transactions" \
+            --out "$RUNNER_TEMP/base-fresh-channels" --l2-chain-id 8453
+          PYTHONPATH=scripts python3 scripts/verify_chronicle_base_derivation.py \
+            --evidence "$FINALITY_ROOT/base" \
+            --base-timeline "$SOURCE_DIR/evidence-v2/BASE-TIMELINE.json" \
+            --channels "$RUNNER_TEMP/base-fresh-channels"
+          cp "$SOURCE_DIR/evidence-v2/BASE-TIMELINE.json" "$FINALITY_ROOT/BASE-TIMELINE.json"
+
+      - name: Capture Polygon and Base Ethereum Beacon finality objects
+        env:
+          SETTLEMENT_DIR: ${{ steps.source.outputs.settlement_dir }}
+          SOURCE_DIR: ${{ steps.source.outputs.source_dir }}
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$FINALITY_ROOT/beacon"
+          cp "$SETTLEMENT_DIR/POLYGON-ETHEREUM-SETTLEMENT.json" "$FINALITY_ROOT/POLYGON-ETHEREUM-SETTLEMENT.json"
+          python3 scripts/capture_ethereum_beacon_finality.py \
+            --polygon-settlement "$FINALITY_ROOT/POLYGON-ETHEREUM-SETTLEMENT.json" \
+            --base-derivation "$FINALITY_ROOT/base/BASE-OP-STACK-DERIVATION.json" \
+            --output "$FINALITY_ROOT/beacon"
+          node scripts/verify_ethereum_beacon_ssz.mjs "$FINALITY_ROOT/beacon"
+          python3 scripts/toolchain_provenance.py > "$FINALITY_ROOT/TOOLCHAIN-PROVENANCE.json"
+          python3 - <<'PY'
+          import datetime, hashlib, json, os, pathlib
+          root=pathlib.Path(os.environ['FINALITY_ROOT'])
+          def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+          value={
+            'schema':'trinity-accord/chronicle-sidechain-finality-release/v1',
+            'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),
+            'source_sidechain_release_tag':os.environ['SOURCE_TAG'],
+            'source_sidechain_commit_sha':os.environ['SOURCE_SHA'],
+            'proof_implementation_commit_sha':os.environ['GITHUB_SHA'],
+            'optimism_commit_sha':os.environ['OPTIMISM_COMMIT'],
+            'superchain_registry_commit_sha':os.environ['SUPERCHAIN_REGISTRY_COMMIT'],
+            'base_timeline_sha256':sha(root/'BASE-TIMELINE.json'),
+            'polygon_settlement_sha256':sha(root/'POLYGON-ETHEREUM-SETTLEMENT.json'),
+            'base_derivation_sha256':sha(root/'base'/'BASE-OP-STACK-DERIVATION.json'),
+            'beacon_finality_sha256':sha(root/'beacon'/'ETHEREUM-BEACON-FINALITY.json'),
+            'ethereum_consensus_boundary':'SSZ roots and execution payload bindings are recomputed offline; finalized/non-optimistic observations require two independent consensus clients and retain Ethereum weak subjectivity.',
+            'base_fault_proof_boundary':'NOT_APPLICABLE to ordinary L2 NFT origin transactions; the seven-day challenge window applies to L2-to-L1 withdrawals.',
+            'publication_rule':'draft upload -> complete remote download -> archive hash/manifest -> fresh OP channel derivation -> KZG replay -> L1 MPT replay -> Beacon SSZ replay -> publish -> published checksum readback',
+          }
+          (root/'SOURCE-BINDING.json').write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+          PY
+          python3 scripts/verify-chronicle-sidechain-strict.py \
+            --source-dir "$SOURCE_DIR" \
+            --polygon-settlement "$FINALITY_ROOT/POLYGON-ETHEREUM-SETTLEMENT.json" \
+            --polygon-binding "$SETTLEMENT_DIR/SOURCE-BINDING.json" \
+            --finality-dir "$FINALITY_ROOT" \
+            --output "$FINALITY_ROOT/STRICT-VERIFICATION.json"
+
+      - name: Build self-verifying immutable proof archive
+        id: package
+        env:
+          SOURCE_TAG: ${{ steps.source.outputs.source_tag }}
+          SOURCE_SHORT: ${{ steps.source.outputs.source_short }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, os, pathlib
+          root=pathlib.Path(os.environ['FINALITY_ROOT'])
+          def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+          rows=[]
+          for path in sorted(root.rglob('*')):
+              if path.is_file() and path.name != 'MANIFEST.sha256':
+                  rows.append(f"{sha(path)}  {path.relative_to(root)}")
+          (root/'MANIFEST.sha256').write_text('\n'.join(rows)+'\n')
+          PY
+          (cd "$FINALITY_ROOT" && sha256sum -c MANIFEST.sha256)
+          archive="chronicle-sidechain-finality-v1-${SOURCE_SHORT}.tar.zst"
+          tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner \
+            -C artifacts -cf - chronicle-sidechain-finality | zstd -3 -T0 -o "$archive"
+          archive_sha="$(sha256sum "$archive" | awk '{print $1}')"
+          split -b 900M -d -a 4 "$archive" "$archive.part-"
+          rm "$archive"
+          tag="chronicle-sidechain-finality-v1-${SOURCE_SHORT}"
+          TAG="$tag" ARCHIVE="$archive" ARCHIVE_SHA="$archive_sha" python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          def sha(path):
+              digest=hashlib.sha256()
+              with path.open('rb') as handle:
+                  for chunk in iter(lambda:handle.read(1024*1024),b''): digest.update(chunk)
+              return digest.hexdigest()
+          parts=[]
+          for path in sorted(pathlib.Path('.').glob(os.environ['ARCHIVE']+'.part-*')):
+              parts.append({'name':path.name,'bytes':path.stat().st_size,'sha256':sha(path)})
+          if not parts: raise SystemExit('no archive parts')
+          value={'schema':'trinity-accord/release-assets/v1','tag':os.environ['TAG'],'archive_name':os.environ['ARCHIVE'],'archive_sha256':os.environ['ARCHIVE_SHA'],'parts':parts}
+          pathlib.Path('RELEASE-ASSETS.json').write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+          PY
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Draft, remote-cold-recover, and atomically publish
+        env:
+          TAG: ${{ steps.package.outputs.tag }}
+          ARCHIVE: ${{ steps.package.outputs.archive }}
+          SOURCE_SHA: ${{ steps.source.outputs.source_sha }}
+          TOOL_BIN: ${{ steps.op.outputs.bin }}
+        run: |
+          set -euo pipefail
+          verify_bundle() {
+            local download="$1"
+            local expected actual
+            DOWNLOAD="$download" python3 - <<'PY'
+            import hashlib,json,os,pathlib
+            root=pathlib.Path(os.environ['DOWNLOAD'])
+            meta=json.loads((root/'RELEASE-ASSETS.json').read_text())
+            expected={item['name']:item for item in meta['parts']}
+            actual={path.name:path for path in root.glob(meta['archive_name']+'.part-*')}
+            if set(actual) != set(expected): raise SystemExit('release archive part inventory mismatch')
+            for name,path in actual.items():
+                digest=hashlib.sha256()
+                with path.open('rb') as handle:
+                    for chunk in iter(lambda:handle.read(1024*1024),b''): digest.update(chunk)
+                if path.stat().st_size != expected[name]['bytes'] or digest.hexdigest() != expected[name]['sha256']:
+                    raise SystemExit(f'release archive part mismatch: {name}')
+            print(f"[REMOTE PART INVENTORY PASS] parts={len(actual)} bytes={sum(p.stat().st_size for p in actual.values())}")
+            PY
+            expected="$(jq -r '.archive_sha256' "$download/RELEASE-ASSETS.json")"
+            actual="$(cat "$download"/"$ARCHIVE".part-* | sha256sum | awk '{print $1}')"
+            test "$actual" = "$expected"
+            rm -rf "$download/extracted" "$download/fresh-channels"
+            mkdir "$download/extracted"
+            cat "$download"/"$ARCHIVE".part-* | zstd -d -c | tar --no-same-owner -xf - -C "$download/extracted"
+            proof="$download/extracted/chronicle-sidechain-finality"
+            (cd "$proof" && sha256sum -c MANIFEST.sha256)
+            "$TOOL_BIN/verify-base-blob-kzg" "$proof/base/decoder/transactions" "$proof/base/decoder/blobs"
+            "$TOOL_BIN/batch-decoder" reassemble \
+              --in "$proof/base/decoder/transactions" --out "$download/fresh-channels" --l2-chain-id 8453
+            PYTHONPATH=scripts python3 scripts/verify_chronicle_base_derivation.py \
+              --evidence "$proof/base" --base-timeline "$proof/BASE-TIMELINE.json" \
+              --channels "$download/fresh-channels"
+            node scripts/verify_ethereum_beacon_ssz.mjs "$proof/beacon"
+          }
+          verify_release() {
+            local download="$1"
+            (cd "$download" && sha256sum -c RELEASE-ASSETS-SHA256.txt)
+            verify_bundle "$download"
+          }
+
+          release_json="$RUNNER_TEMP/finality-release.json"
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            | jq -s --arg tag "$TAG" '[.[][] | select(.tag_name == $tag)] | if length == 0 then empty elif length == 1 then .[0] else error("duplicate release tag") end' \
+            > "$release_json"
+          if [[ -s "$release_json" && "$(jq -r '.draft' "$release_json")" == "false" ]]; then
+            echo "[PUBLISHED RELEASE EXISTS] refusing mutation; verifying all bytes again"
+            mkdir "$RUNNER_TEMP/published-existing"
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-existing"
+            verify_release "$RUNNER_TEMP/published-existing"
+            exit 0
+          fi
+          if [[ -s "$release_json" && "$(jq -r '.draft' "$release_json")" == "true" ]]; then
+            draft_id="$(jq -r '.id' "$release_json")"
+            echo "[UNPUBLISHED DRAFT RECOVERY] removing incomplete non-authoritative draft id=$draft_id"
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/releases/$draft_id"
+          fi
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" --draft \
+            --title "Chronicle Polygon/Base finality proof — ${SOURCE_SHA:0:12}" \
+            --notes "Supplementary non-amending proof. Base: exact OP Stack L1 batch derivation, archived blobs re-bound to signed L1 transactions by KZG, L1 transaction MPT proofs, and Ethereum Beacon binding. Polygon: existing RootChain settlement proofs extended to independently observed finalized Beacon SSZ objects. Ethereum weak subjectivity remains explicit; Base withdrawal challenge finality is not applicable to these ordinary L2 NFT transactions. Publication occurs only after a full remote cold recovery."
+          for asset in "$ARCHIVE".part-* RELEASE-ASSETS.json \
+            "$FINALITY_ROOT/SOURCE-BINDING.json" \
+            "$FINALITY_ROOT/base/BASE-OP-STACK-DERIVATION.json" \
+            "$FINALITY_ROOT/beacon/ETHEREUM-BEACON-FINALITY.json" \
+            "$FINALITY_ROOT/STRICT-VERIFICATION.json"; do
+            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY"
+          done
+          mkdir "$RUNNER_TEMP/draft-readback"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-readback"
+          # No success receipt exists yet: first prove that the remote draft can
+          # actually be reconstructed and verified with fresh decoder output.
+          verify_bundle "$RUNNER_TEMP/draft-readback"
+          python3 - <<'PY'
+          import datetime,json,os,pathlib
+          path=pathlib.Path(os.environ['RUNNER_TEMP'])/'draft-readback'/'COLD-VERIFICATION.json'
+          value={'schema':'trinity-accord/chronicle-sidechain-finality-cold-verification/v1','pass':True,'verified_at':datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z'),'workflow_run_id':os.environ['GITHUB_RUN_ID'],'checks':['archive_sha256','internal_manifest','base_blob_kzg_versioned_hashes','official_op_channel_reassembly','base_exact_transaction_derivation','ethereum_l1_transaction_mpt_proofs','beacon_ssz_hash_tree_roots','beacon_execution_payload_bindings']}
+          path.write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+          PY
+          cp "$RUNNER_TEMP/draft-readback/COLD-VERIFICATION.json" COLD-VERIFICATION.json
+          (
+            cd "$RUNNER_TEMP/draft-readback"
+            for path in *; do
+              [[ -f "$path" && "$path" != COLD-VERIFICATION.json ]] && sha256sum "$path"
+            done
+          ) > RELEASE-ASSETS-SHA256.txt
+          sha256sum COLD-VERIFICATION.json >> RELEASE-ASSETS-SHA256.txt
+          cp RELEASE-ASSETS-SHA256.txt "$RUNNER_TEMP/draft-readback/RELEASE-ASSETS-SHA256.txt"
+          verify_release "$RUNNER_TEMP/draft-readback"
+          gh release upload "$TAG" COLD-VERIFICATION.json RELEASE-ASSETS-SHA256.txt --repo "$GITHUB_REPOSITORY"
+          rm -rf "$RUNNER_TEMP/draft-final-readback"
+          mkdir "$RUNNER_TEMP/draft-final-readback"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/draft-final-readback"
+          verify_release "$RUNNER_TEMP/draft-final-readback"
+          test "$(jq -r '.pass' "$RUNNER_TEMP/draft-final-readback/COLD-VERIFICATION.json")" = true
+          gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+          rm -rf "$RUNNER_TEMP/published-readback"
+          mkdir "$RUNNER_TEMP/published-readback"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/published-readback"
+          verify_release "$RUNNER_TEMP/published-readback"
+          test "$(jq -r '.pass' "$RUNNER_TEMP/published-readback/COLD-VERIFICATION.json")" = true
+          echo "[FINALITY RELEASE PUBLISHED AND COLD-RECOVERED] tag=$TAG"
+
+      - name: Mark terminal success
+        if: success()
+        env:
+          TAG: ${{ steps.package.outputs.tag }}
+        run: |
+          set -euo pipefail
+          url="https://github.com/$GITHUB_REPOSITORY/releases/tag/$TAG"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=success -f context="$STATUS_CONTEXT" \
+            -f description="Polygon/Base finality proof published after cold recovery" \
+            -f target_url="$url" >/dev/null
+
+      - name: Mark terminal failure
+        if: failure()
+        run: |
+          set -euo pipefail
+          url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" \
+            -f state=failure -f context="$STATUS_CONTEXT" \
+            -f description="sidechain finality proof failed closed" \
+            -f target_url="$url" >/dev/null
+
+      - name: Upload bounded diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chronicle-sidechain-finality-${{ github.run_id }}
+          path: |
+            artifacts/chronicle-sidechain-finality/SOURCE-BINDING.json
+            artifacts/chronicle-sidechain-finality/MANIFEST.sha256
+            artifacts/chronicle-sidechain-finality/base/BASE-OP-STACK-DERIVATION.json
+            artifacts/chronicle-sidechain-finality/base/BLOB-ARCHIVE-PROXY.log
+            artifacts/chronicle-sidechain-finality/beacon/ETHEREUM-BEACON-FINALITY.json
+            artifacts/chronicle-sidechain-finality/STRICT-VERIFICATION.json
+            RELEASE-ASSETS.json
+            RELEASE-ASSETS-SHA256.txt
+            COLD-VERIFICATION.json
+          retention-days: 90
+          if-no-files-found: warn

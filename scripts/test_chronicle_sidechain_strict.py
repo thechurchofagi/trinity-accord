@@ -37,6 +37,12 @@ class StrictPrimitives(unittest.TestCase):
         with self.assertRaises(Exception):
             HexaryTrie.get_from_proof(b"\xff" * 32, rlp.encode(0), proof)
 
+    def test_not_applicable_layer_is_terminal_not_missing(self):
+        self.assertTrue(strict.strict_layer_complete({"status": "NOT_APPLICABLE"}))
+        self.assertTrue(strict.strict_layer_complete({"status": "PASS"}))
+        self.assertFalse(strict.strict_layer_complete({"status": "NOT_CAPTURED"}))
+        self.assertFalse(strict.strict_layer_complete({"status": "INCOMPLETE"}))
+
 
 if __name__ == "__main__":
     unittest.main()
