@@ -40,6 +40,7 @@ def test_every_record_is_inbound_external_delivery_with_public_sources():
     for record in provenance["records"]:
         assert record["transfer_to"] == target
         assert record["transfer_from"] != target
+        assert record["transaction_initiator"] != target
         assert record["classification"] == "externally_delivered_not_self_minted"
         assert record["delivery_mode"] in {"external_batch_mint", "external_transfer"}
         assert len(record["sources"]) >= 2
@@ -52,5 +53,6 @@ def test_delivery_mode_totals_are_fail_closed():
 
     assert modes.count("external_batch_mint") == 2
     assert modes.count("external_transfer") == 5
+    assert provenance["summary"]["target_initiated_transactions"] == 0
     assert provenance["methodology"]["ownership_inference_prohibited"] is True
     assert provenance["preservation_boundary"]["legal_or_beneficial_ownership_claimed"] is False
