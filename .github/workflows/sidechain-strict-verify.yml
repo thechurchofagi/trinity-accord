@@ -97,10 +97,13 @@ jobs:
           python3 scripts/verify-chronicle-sidechain-evidence.py
 
       - name: Recompute Polygon settlement and classify all missing layers
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REQUIRE_COMPLETE: ${{ inputs.require_complete }}
         run: |
           set -euo pipefail
           extra=()
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.require_complete }}" == "true" ]]; then extra+=(--require-complete); fi
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$REQUIRE_COMPLETE" == "true" ]]; then extra+=(--require-complete); fi
           python3 scripts/verify-chronicle-sidechain-strict.py \
             --source-dir "${{ steps.evidence.outputs.source }}" \
             --polygon-settlement "${{ steps.evidence.outputs.settlement }}/POLYGON-ETHEREUM-SETTLEMENT.json" \
