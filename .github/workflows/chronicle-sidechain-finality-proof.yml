@@ -26,7 +26,98 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  prefetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ETH_RPC_URL: ${{ secrets.ETHEREUMMAINNET }}
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Install capture dependencies
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Resolve and cold-verify immutable source releases
+        id: source
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/finality-source"
+          mkdir -p "$root/source" "$root/settlement"
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --json tagName,createdAt,isDraft,isPrerelease > "$root/releases.json"
+          python3 - <<'PY' > "$root/source.env"
+          import json, os, re
+          rows=json.load(open(os.environ['RUNNER_TEMP']+'/finality-source/releases.json'))
+          rows=[r for r in rows if not r['isDraft'] and not r['isPrerelease'] and re.fullmatch(r'chronicle-sidechain-evidence-v2-[0-9a-f]{12}',r['tagName'])]
+          if not rows: raise SystemExit('no immutable sidechain evidence release')
+          rows.sort(key=lambda row:row.get('createdAt') or '')
+          tag=rows[-1]['tagName']; short=tag.rsplit('-',1)[-1]
+          print(f'SOURCE_TAG={tag}')
+          print(f'SOURCE_SHORT={short}')
+          print(f'SETTLEMENT_TAG=chronicle-polygon-ethereum-settlement-v1-{short}')
+          PY
+          set -a; . "$root/source.env"; set +a
+          git fetch origin "refs/tags/${SOURCE_TAG}:refs/tags/${SOURCE_TAG}"
+          source_sha="$(git rev-list -n 1 "$SOURCE_TAG")"
+          test "${source_sha:0:12}" = "$SOURCE_SHORT"
+          archive="chronicle-sidechain-evidence-v2-${SOURCE_SHORT}.tar.gz"
+          gh release download "$SOURCE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/source" \
+            --pattern "$archive" --pattern "$archive.sha256"
+          (cd "$root/source" && sha256sum -c "$archive.sha256")
+          mkdir "$root/extracted"
+          tar --no-same-owner -xzf "$root/source/$archive" -C "$root/extracted"
+          source_dir="$root/extracted/chronicle-sidechain-scan"
+          CHRONICLE_OUT="$source_dir" python3 scripts/verify-chronicle-sidechain-evidence.py
+          gh release download "$SETTLEMENT_TAG" --repo "$GITHUB_REPOSITORY" --dir "$root/settlement" \
+            --pattern POLYGON-ETHEREUM-SETTLEMENT.json --pattern SOURCE-BINDING.json
+          python3 - <<'PY'
+          import json, os
+          root=os.environ['RUNNER_TEMP']+'/finality-source/settlement/'
+          report=json.load(open(root+'POLYGON-ETHEREUM-SETTLEMENT.json'))
+          if report.get('pass') is not True or len(report.get('checkpoints',[])) != 117:
+              raise SystemExit('Polygon settlement is not PASS 117 checkpoints')
+          PY
+          echo "source_tag=$SOURCE_TAG" >> "$GITHUB_OUTPUT"
+          echo "source_short=$SOURCE_SHORT" >> "$GITHUB_OUTPUT"
+          echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "source_dir=$source_dir" >> "$GITHUB_OUTPUT"
+          echo "settlement_dir=$root/settlement" >> "$GITHUB_OUTPUT"
+
+
+      - name: Prefetch bounded unverified shard
+        timeout-minutes: 120
+        env:
+          SHARD: ${{ matrix.shard }}
+          SOURCE_DIR: ${{ steps.source.outputs.source_dir }}
+        run: |
+          python3 -u scripts/capture_chronicle_base_derivation.py \
+            --base-timeline "$SOURCE_DIR/evidence-v2/BASE-TIMELINE.json" \
+            --batch-decoder /unused --beacon-archive http://127.0.0.1:5052 \
+            --output prefetch --prefetch-only --shard-index "$SHARD" --shard-count 19
+      - name: Preserve unverified download cache
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: finality-prefetch-${{ matrix.shard }}
+          path: prefetch/decoder/blobs/
+          retention-days: 7
+          if-no-files-found: warn
+
   prove-and-cold-recover:
+    needs: prefetch
     runs-on: ubuntu-24.04
     timeout-minutes: 350
     env:
@@ -156,6 +247,32 @@ jobs:
           echo "source_sha=$source_sha" >> "$GITHUB_OUTPUT"
           echo "source_dir=$source_dir" >> "$GITHUB_OUTPUT"
           echo "settlement_dir=$root/settlement" >> "$GITHUB_OUTPUT"
+
+      - name: Restore this run's unverified blob shards
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: finality-prefetch-*
+          path: ${{ runner.temp }}/finality-prefetch
+      - name: Combine caches with collision checks
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, shutil
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'finality-prefetch'
+          shards=sorted(root.glob('finality-prefetch-*'))
+          if len(shards)!=19: raise SystemExit('missing prefetch shard')
+          out=pathlib.Path(os.environ['FINALITY_ROOT'])/'base/decoder/blobs'
+          out.mkdir(parents=True,exist_ok=True)
+          with (out/'ARCHIVE-PROVENANCE.jsonl').open('wb') as ledger:
+              for shard in shards:
+                  for source in shard.glob('*.blob'):
+                      dest=out/source.name
+                      if dest.exists() and dest.read_bytes()!=source.read_bytes():
+                          raise SystemExit('blob cache collision')
+                      shutil.copyfile(source,dest)
+                  provenance=shard/'ARCHIVE-PROVENANCE.jsonl'
+                  if provenance.exists(): ledger.write(provenance.read_bytes())
+          print('Unverified caches combined; all decoder/KZG/finality checks still required',flush=True)
+          PY
 
       - name: Capture Base OP Stack L1 data and exact batch derivation
         env:

@@ -341,7 +341,14 @@ def main() -> None:
     parser.add_argument("--window-before", type=int, default=160)
     parser.add_argument("--window-after", type=int, default=200)
     parser.add_argument("--concurrency", type=int, default=12)
+    parser.add_argument("--prefetch-only", action="store_true")
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     args = parser.parse_args()
+    if not 0 <= args.shard_index < args.shard_count:
+        parser.error("invalid prefetch shard")
+    if not args.prefetch_only and (args.shard_index != 0 or args.shard_count != 1):
+        parser.error("sharding is only allowed for unverified prefetch")
     base_rpc = RPC(endpoint_list(os.getenv("BASE_RPC_URL"), "https://mainnet.base.org,https://base-rpc.publicnode.com,https://base.drpc.org"))
     eth_rpc_urls = endpoint_list(os.getenv("ETH_RPC_URL"), "https://ethereum-rpc.publicnode.com,https://eth.drpc.org")
     eth_rpc = RPC(eth_rpc_urls)
@@ -402,6 +409,8 @@ def main() -> None:
     completed_blocks = 0
     blob_references = 0
     for window_index, (start, end) in enumerate(windows, 1):
+        if args.prefetch_only and (window_index - 1) % args.shard_count != args.shard_index:
+            continue
         print(f"[PREFETCH START] window={window_index}/{len(windows)} blocks={start}-{end-1} total_blocks={total_blocks}", flush=True)
         for offset in range(start, end, 10):
             numbers = list(range(offset, min(offset + 10, end)))
@@ -419,6 +428,8 @@ def main() -> None:
                         print(f"[BLOB DONE] completed_references={blob_references} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
             completed_blocks += len(numbers)
             print(f"[BLOB PREFETCH] window={window_index}/{len(windows)} blocks={offset}-{numbers[-1]} completed_blocks={completed_blocks}/{total_blocks} blob_references={blob_references} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
+        if args.prefetch_only:
+            continue
         print(f"[DECODE START] window={window_index}/{len(windows)}", flush=True)
         run(
             [
@@ -429,6 +440,9 @@ def main() -> None:
             ]
         )
         print(f"[DECODE DONE] window={window_index}/{len(windows)} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
+    if args.prefetch_only:
+        print(f"[PREFETCH SHARD COMPLETE] shard={args.shard_index}/{args.shard_count} verification=NOT_PERFORMED", flush=True)
+        return
     print("[REASSEMBLE START] all fetch windows complete", flush=True)
     run([str(args.batch_decoder), "reassemble", "--in", str(tx_dir), "--out", str(channel_dir), "--l2-chain-id", str(BASE_CHAIN_ID)])
     derived = find_targets(channel_dir, targets)
