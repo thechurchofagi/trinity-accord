@@ -1,0 +1,223 @@
+name: Chronicle seven-root strict CAR recovery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: chronicle-sidechain-seven-root-recovery
+  cancel-in-progress: false
+
+env:
+  BOOTSTRAP_TAG: chronicle-sidechain-mirror-v1-b1a074fd0b0a
+  BOOTSTRAP_ARCHIVE: chronicle-sidechain-mirror-b1a074fd0b0a.tar.gz
+  BOOTSTRAP_ARCHIVE_SHA256: d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8
+  BASELINE_CACHE_KEY: chronicle-sidechain-cars-v2-d0fe9d4c5f57d98f784ea9c9726d762a0980c08c19b909e6bdc60e97e29be7c8-32078752685-1
+  LASSIE_VERSION: 0.25.0
+  LASSIE_LINUX_AMD64_SHA256: cbd81ce9625a7db346a1c7f3bb67d4654fba4af0d8c5bdfdd1c0aaddd2c76286
+  KUBO_VERSION: 0.37.0
+  KUBO_LINUX_AMD64_SHA512: b9243e8be52377fc934aedc66161bd51e7c49d1d52678b127b910e5654fa453983a070918e345d8e57e509f1f8c82574f59148d145d23b35d04bb20fed20f5b6
+
+jobs:
+  recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Checkout exact recovery implementation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Bind execution to event source commit
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/toolchain-provenance.json"
+          cat "$RUNNER_TEMP/toolchain-provenance.json"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Bootstrap immutable sidechain snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          gh release download "$BOOTSTRAP_TAG" --repo "$GITHUB_REPOSITORY" --dir "$tmp" --pattern "$BOOTSTRAP_ARCHIVE"
+          echo "${BOOTSTRAP_ARCHIVE_SHA256}  $tmp/$BOOTSTRAP_ARCHIVE" | sha256sum --check --strict
+          mkdir -p artifacts
+          tar --no-same-owner -xzf "$tmp/$BOOTSTRAP_ARCHIVE" -C artifacts
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('artifacts/chronicle-sidechain-scan')
+          rows=json.loads((root/'recovered-tokens.json').read_text())
+          if len(rows) != 217:
+              raise SystemExit(f'expected 217 sidechain NFT coordinates, found {len(rows)}')
+          PY
+
+      - name: Restore complete verified CAR baseline
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/chronicle-sidechain-scan/evidence-v2/cars
+          key: ${{ env.BASELINE_CACHE_KEY }}
+
+      - name: Restore latest accumulated CAR/block cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            artifacts/chronicle-sidechain-scan/evidence-v2/cars
+            artifacts/chronicle-sidechain-car-block-cache
+          key: seven-root-recovery-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            seven-root-recovery-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-
+            chronicle-sidechain-cars-v2-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-
+
+      - name: Install checksum-pinned provider recovery tools
+        run: |
+          set -euo pipefail
+          tools="$RUNNER_TEMP/trinity-tools"
+          mkdir -p "$tools"
+          lassie_archive="$RUNNER_TEMP/lassie_${LASSIE_VERSION}_linux_amd64.tar.gz"
+          curl --fail --show-error --silent --location --retry 3 \
+            "https://github.com/filecoin-project/lassie/releases/download/v${LASSIE_VERSION}/lassie_${LASSIE_VERSION}_linux_amd64.tar.gz" \
+            --output "$lassie_archive"
+          echo "${LASSIE_LINUX_AMD64_SHA256}  $lassie_archive" | sha256sum --check --strict
+          tar --no-same-owner -xzf "$lassie_archive" -C "$tools" lassie
+          chmod 0755 "$tools/lassie"
+          test "$("$tools/lassie" version)" = "lassie version v${LASSIE_VERSION}-215cb2b"
+
+          kubo_archive="$RUNNER_TEMP/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz"
+          curl --fail --show-error --silent --location --retry 3 \
+            "https://dist.ipfs.tech/kubo/v${KUBO_VERSION}/kubo_v${KUBO_VERSION}_linux-amd64.tar.gz" \
+            --output "$kubo_archive"
+          echo "${KUBO_LINUX_AMD64_SHA512}  $kubo_archive" | sha512sum --check --strict
+          tar --no-same-owner -xzf "$kubo_archive" -C "$tools" kubo/ipfs
+          chmod 0755 "$tools/kubo/ipfs"
+          test "$("$tools/kubo/ipfs" version)" = "ipfs version ${KUBO_VERSION}"
+          export IPFS_PATH="$RUNNER_TEMP/chronicle-kubo-repo"
+          "$tools/kubo/ipfs" init --profile server
+          "$tools/kubo/ipfs" config --json Swarm.DisableNatPortMap true
+
+      - name: Retry exact historical roots through strict recovery chain
+        env:
+          GH_TOKEN: operational-telemetry-disabled
+          CHRONICLE_EVIDENCE_REFRESH_HISTORY: "false"
+          CHRONICLE_EVIDENCE_CONCURRENCY: "4"
+          CHRONICLE_CAR_HTTP_TIMEOUT_MS: "10000"
+          CHRONICLE_CAR_HTTP_RETRIES: "0"
+          CHRONICLE_CAR_WHOLE_DAG_ENDPOINT_LIMIT: "4"
+          CHRONICLE_CAR_BLOCK_CONCURRENCY: "2"
+          CHRONICLE_CAR_BLOCK_MAX_COUNT: "4096"
+          CHRONICLE_CAR_BLOCK_GATEWAY_RACE: "4"
+          CHRONICLE_CAR_BLOCK_HTTP_TIMEOUT_MS: "12000"
+          CHRONICLE_CAR_BLOCK_RAW_HTTP_TIMEOUT_MS: "12000"
+          CHRONICLE_CAR_BLOCK_HTTP_RETRIES: "0"
+          CHRONICLE_HISTORICAL_CHUNK_SIZES: "1048576,262144"
+          CHRONICLE_LASSIE_BIN: ${{ runner.temp }}/trinity-tools/lassie
+          CHRONICLE_LASSIE_VERSION: ${{ env.LASSIE_VERSION }}
+          CHRONICLE_LASSIE_ASSET_SHA256: ${{ env.LASSIE_LINUX_AMD64_SHA256 }}
+          CHRONICLE_LASSIE_GLOBAL_TIMEOUT_MS: "60000"
+          CHRONICLE_LASSIE_PROVIDER_TIMEOUT_MS: "15000"
+          CHRONICLE_LASSIE_DELEGATED_ROUTING_ENDPOINT: "https://delegated-ipfs.dev"
+          CHRONICLE_LASSIE_DELEGATED_ROUTING_TIMEOUT_MS: "8000"
+          IPFS_PATH: ${{ runner.temp }}/chronicle-kubo-repo
+          CHRONICLE_KUBO_BIN: ${{ runner.temp }}/trinity-tools/kubo/ipfs
+          CHRONICLE_KUBO_VERSION: ${{ env.KUBO_VERSION }}
+          CHRONICLE_KUBO_ASSET_SHA512: ${{ env.KUBO_LINUX_AMD64_SHA512 }}
+          CHRONICLE_KUBO_CONNECT_TIMEOUT_MS: "8000"
+          CHRONICLE_KUBO_BLOCK_TIMEOUT_MS: "30000"
+          CHRONICLE_CAR_GATEWAYS: "https://ipfs.raribleuserdata.com/ipfs/{cid}?format=car&dag-scope=all,https://rarible.mypinata.cloud/ipfs/{cid}?format=car&dag-scope=all,https://gw-seattle.crustcloud.io/ipfs/{cid}?format=car&dag-scope=all,https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.filebase.io/ipfs/{cid}?format=car&dag-scope=all,https://4everland.io/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
+        run: |
+          set -euo pipefail
+          log="$RUNNER_TEMP/chronicle-kubo-daemon.log"
+          "$CHRONICLE_KUBO_BIN" daemon --migrate=false >"$log" 2>&1 &
+          pid=$!
+          cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
+          trap cleanup EXIT
+          ready=false
+          for _ in $(seq 1 30); do
+            if curl --fail --silent --show-error --request POST http://127.0.0.1:5001/api/v0/version >/dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            sed -n '1,200p' "$log" >&2
+            exit 1
+          fi
+          node scripts/build-chronicle-sidechain-evidence.mjs
+
+      - name: Save accumulated exact recovery cache
+        if: ${{ always() }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            artifacts/chronicle-sidechain-scan/evidence-v2/cars
+            artifacts/chronicle-sidechain-car-block-cache
+          key: seven-root-recovery-${{ env.BOOTSTRAP_ARCHIVE_SHA256 }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Classify original zero-gap criterion
+        id: strict
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          coverage=pathlib.Path('artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json')
+          policy=pathlib.Path('evidence/chronicle-sidechain-historical-payload-exceptions.json')
+          c=json.loads(coverage.read_text())
+          p=json.loads(policy.read_text())
+          expected={row['root_cid'] for row in p['exceptions']}
+          unresolved={row['root_cid'] for row in c.get('unresolved', [])}
+          if len(expected) != 7:
+              raise SystemExit(f'expected exactly seven declared historical roots, found {len(expected)}')
+          if not unresolved.issubset(expected):
+              raise SystemExit(f'unexpected unresolved roots: {sorted(unresolved-expected)}')
+          if c.get('total_unique_ipfs_roots') != 257:
+              raise SystemExit(f"expected 257 unique roots, found {c.get('total_unique_ipfs_roots')}")
+          exact=int(c.get('exact_verified_roots', -1))
+          complete=exact == 257 and not unresolved and c.get('status') == 'complete_exact_coverage'
+          print(f'exact={exact}')
+          print(f'unresolved={len(unresolved)}')
+          print(f'complete={str(complete).lower()}')
+          print('unresolved_roots=' + ','.join(sorted(unresolved)))
+          PY
+          cat artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json
+
+      - name: Upload recovery telemetry
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: seven-root-recovery-${{ github.run_id }}
+          path: |
+            artifacts/chronicle-sidechain-scan/evidence-v2/HISTORICAL-PAYLOAD-COVERAGE.json
+            artifacts/chronicle-sidechain-scan/evidence-v2/BUILD-REPORT.json
+            artifacts/chronicle-sidechain-scan/runtime/HISTORICAL-CAR-REBUILD.json
+            artifacts/chronicle-sidechain-scan/runtime/CAR-BUILDER.log
+            ${{ runner.temp }}/toolchain-provenance.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Trigger full evidence closure only at strict 257/257
+        if: steps.strict.outputs.complete == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          sha="$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)"
+          short="${sha:0:12}"
+          tag="chronicle-sidechain-evidence-v2-${short}"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Strict cache is complete but immutable source tag $tag already exists; refusing mutation." >&2
+            exit 1
+          fi
+          gh workflow run chronicle-sidechain-mirror-v3.yml --repo "$GITHUB_REPOSITORY" --ref main -f refresh_live=false
+          echo "[FULL CLOSURE DISPATCHED] source=$sha exact=${{ steps.strict.outputs.exact }}/257"
