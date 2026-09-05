@@ -1,10 +1,10 @@
 {
   "authority_effect": "none",
   "capsule_archive": {
-    "bytes": 43033187,
-    "manifest_sha256": "e4ab7739aa327eab50f923a0ab8bf6e594a25e18f05e0dc86b10461d6936f9f6",
-    "payload_file_count": 130,
-    "sha256": "64ad6caa80435f388aa1ca4c64a05d68a85291b300c524306b6c52ddde799a79"
+    "bytes": 46647277,
+    "manifest_sha256": "00202eabd76fd85970be56378d14a8ab1740e759257ee7cff518f98dc79564fd",
+    "payload_file_count": 156,
+    "sha256": "a79e7a11c6e743df547695bd7a8708ac334e72c67f4c6696a3c540895fb1234c"
   },
   "node": {
     "ethereum-verification": [
@@ -29,14 +29,40 @@
       "node_modules/ethereum-cryptography@2.2.1|sha256:a53b3e2def1cdca7f4a0dcbe0be3933c0cba3c52a8419f8da722577ab374dd67"
     ],
     "root": [
+      "node_modules/@chainsafe/as-sha256@1.2.5|sha256:096c1b5def6ff206b9960dd07b90e402c4e1e1fc1871c976355652b71bda5da4",
+      "node_modules/@chainsafe/hashtree-darwin-arm64@1.0.2|sha256:5b2b19de2e61da150fecb970a36bcedf8fb2dbfaa6eaef5be6a7c67ff150b160",
+      "node_modules/@chainsafe/hashtree-linux-arm64-gnu@1.0.2|sha256:081ca6e521cc97fe648480e6db8a0a73dcef7bf34c9883b9bb2472993237961d",
+      "node_modules/@chainsafe/hashtree-linux-arm64-musl@1.0.2|sha256:92f9758b26389ee63e8a0140506258c23ab54ab6e1162d47cc30fe6a6703edef",
+      "node_modules/@chainsafe/hashtree-linux-x64-gnu@1.0.2|sha256:6c1f6a3b9e66df8cc466f942adf076534923d14f19bbd5924d4ae3abcbd95279",
+      "node_modules/@chainsafe/hashtree-linux-x64-musl@1.0.2|sha256:5050f689e6707f5ef68a0f75ec80e50b1b241f2bfe2f152b38834ab39eefbf1b",
+      "node_modules/@chainsafe/hashtree-win32-x64-msvc@1.0.2|sha256:99058a3ad9080de080dbc58a98bdd42b4e24d548e98d7bab1386282146df8581",
+      "node_modules/@chainsafe/hashtree@1.0.2|sha256:b918246af6977cf239c05a77b7462a69ef728399d6f1acd11d423118257cf2eb",
+      "node_modules/@chainsafe/persistent-merkle-tree@1.3.1|sha256:d40d4e8497a8b47dd9036f2f7191905f5dbd76025f95c672d8bd4a6606a7df56",
+      "node_modules/@chainsafe/ssz@1.7.0|sha256:3d492215651b004a5ee46dd9195a6f653e91cbcf99b11a13e5688a45abb90392",
+      "node_modules/@lodestar/config@1.47.0|sha256:2982a30992258a76512f7528c9cb1da2ea0fc0dacfb440b30f988cfd83eabbfd",
+      "node_modules/@lodestar/params@1.47.0|sha256:3c4d6b50fc6657f9067192f89a4dddd8c6e6f94578daffc548f16ef561e7394b",
+      "node_modules/@lodestar/types@1.47.0|sha256:19f6236d8e29b8b8a3f966a63b8201c11fcbf6cee9c706d587bb390d5d6e6728",
+      "node_modules/@lodestar/utils@1.47.0|sha256:55165126e97bf3680b38b92cbf64efc13189e0b50374d1869616ef04e9546574",
+      "node_modules/@noble/curves@1.4.2|sha256:b336923f107eebc31b7e76bbfd69bc634d79e325c57cc9ce13f2908d193baa07",
+      "node_modules/ethereum-cryptography/node_modules/@noble/hashes@1.4.0|sha256:c55fa6ad9095c9e7b19ed1f035897cb6d9d22565483a70e4e54164dc809bec39",
+      "node_modules/@chainsafe/persistent-merkle-tree/node_modules/@noble/hashes@1.8.0|sha256:e8a765d92c04faaccba8776411c5038cb195f812ee629fce07e1d2e6aec80ea0",
       "node_modules/@noble/hashes@2.2.0|sha256:018b38bd7af36645fa0ece8f89eba21c828f3e4d219da5aacadd78bd0e654606",
+      "node_modules/@scure/base@1.1.9|sha256:9dfd25eeb5ec53413e5dd45528d4beb58eb4aa0f6c6a4cad4fb575615748d985",
+      "node_modules/@scure/bip32@1.4.0|sha256:9449392bd526fae2990916913eb9abe26b0772bc0dd89d5733d88ed585948749",
+      "node_modules/@scure/bip39@1.3.0|sha256:4e5fc94f78772a8d57c2a3756566ee2022236282210226f8976ba87ff3300fb8",
+      "node_modules/@vekexasia/bigint-buffer2@1.1.1|sha256:d886589c9e1d742331d96e1cedc500d04fc45b43b0aba93d57b3bc9ccf5f1c4e",
+      "node_modules/any-signal@4.2.0|sha256:07a499e32d98c5996ba25a8c047e148ee416c82829669f2cb647293875a70676",
       "node_modules/arconnect@0.4.2|sha256:d3a8d0bc1b533feaa6dd4cb63198a94291243323b69251b5c0c7587136abf870",
+      "node_modules/argparse@2.0.1|sha256:27903847fc8215e6fc5a33e81490f7baba66403f8aade33771b988cca097728c",
       "node_modules/arweave@1.15.7|sha256:f6c5d745027634983d92e2e5d09d72cb9a6c56b9da06c505af85413347b14e4d",
       "node_modules/asn1.js@5.4.1|sha256:9cc59e0b515f254ee8ecc9fe584d6fb02d86b2a10f6de6c5d6923ef0d8f8c2a1",
       "node_modules/base64-js@1.5.1|sha256:b1b7a945b52685269083425216d6597e33d97bf21699d656e92fdb3eb5210a85",
       "node_modules/bignumber.js@9.3.1|sha256:f5a943ea290e66f64cb9adaaed2ff1b7c4ee02a4cca9d709d9c9c6c222512e82",
       "node_modules/bn.js@4.12.3|sha256:1889515a3b038e6bf36d7e180fba980e2c8924f93972a4ff18e7fdee7744dec6",
+      "node_modules/case@1.6.3|sha256:1c511acdab1aae658c886bed9870c1edf30697cb3e1cab2545f0f21f153780fa",
+      "node_modules/ethereum-cryptography@2.2.1|sha256:a53b3e2def1cdca7f4a0dcbe0be3933c0cba3c52a8419f8da722577ab374dd67",
       "node_modules/inherits@2.0.4|sha256:d94dbc6c1bb3c5ac0fb12a73ade187108fc60de273a1b754f55044eb5e24afaf",
+      "node_modules/js-yaml@4.3.2|sha256:c7b241d2224cf9253ff53854aa4cee87da91bd889c4d0fa3a3ffd1041ecee5b1",
       "node_modules/minimalistic-assert@1.0.1|sha256:f16522c947d6dbe3a99f5ff4296ccc253090b838959abdddc45fe81edb03f3a0",
       "node_modules/safer-buffer@2.1.2|sha256:78812f65ae3b98071ce1c9bacbe0666f4220d0b2753c2a11530eb27df440a3b3"
     ]
@@ -45,7 +71,7 @@
     "resolved_distribution_count": 47,
     "sdist_identities": [
       "annotated-types==0.8.0|annotated_types-0.8.0.tar.gz|sha256:13b2beaad985e05e2d6407ee4c4f35590b11f8d693a258a561055cac8f64cab7",
-      "anyio==4.14.2|anyio-4.14.2.tar.gz|sha256:cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f",
+      "anyio==4.15.0|anyio-4.15.0.tar.gz|sha256:b5c620ed540725e2579c31b17bb995b3bf02c9281c9cace04c7d186380bab85e",
       "appdirs==1.4.4|appdirs-1.4.4.tar.gz|sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41",
       "attrs==26.1.0|attrs-26.1.0.tar.gz|sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32",
       "certifi==2026.7.22|certifi-2026.7.22.tar.gz|sha256:741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55",
@@ -57,7 +83,7 @@
       "eth-utils==6.0.0|eth_utils-6.0.0.tar.gz|sha256:eb54b2f82dd300d3142c49a89da195e823f5e5284d43203593f87c67bad92a96",
       "fastapi==0.115.0|fastapi-0.115.0.tar.gz|sha256:f93b4ca3529a8ebc6fc3fcf710e5efa8de3df9b41570958abf1d97d843138004",
       "gitdb==4.0.12|gitdb-4.0.12.tar.gz|sha256:5ef71f855d191a3326fcfbc0d5da835f26b13fbcba60c32c21091c349ffdb571",
-      "GitPython==3.1.60|gitpython-3.1.60.tar.gz|sha256:e936431879fa85581b4311fa63492ea52251909e2d655b6529c704c904ddcc24",
+      "GitPython==3.1.61|gitpython-3.1.61.tar.gz|sha256:f51c24d8c0f733a195447385f5774a5dfe8767f5acfd7994a33755644c6ecc95",
       "h11==0.16.0|h11-0.16.0.tar.gz|sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1",
       "hexbytes==2.0.0|hexbytes-2.0.0.tar.gz|sha256:01312fcd5c57e8a8d2d7dd3274dcf84ea50422aff2abcc2d9fd89ad6a32498e5",
       "httpcore==1.0.9|httpcore-1.0.9.tar.gz|sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8",
@@ -94,13 +120,5 @@
     ],
     "wheel_count": 47
   },
-  "retention_boundary": {
-    "committed_state_preserves_exact_capsule_and_dependency_identities": true,
-    "github_actions_is_not_long_term_preservation": true,
-    "institutional_binary_publication_requires_separate_rights_approval": true
-  },
-  "schema": "trinityaccord.offline-dependency-state.v1",
-  "source_git_commit_sha": "4320459034b2507aa9bb091ec7cf57bb2d99ecfe",
-  "source_repository": "https://github.com/thechurchofagi/trinity-accord",
-  "workflow_run_id": 33160624136
+  "schema": "trinityaccord.offline-dependency-state.v1"
 }
