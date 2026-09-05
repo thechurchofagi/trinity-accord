@@ -1,0 +1,52 @@
+{
+  "voice": "af_heart",
+  "language": "en-us",
+  "speed": 0.88,
+  "type": "AI-generated curatorial narration, not historical audio",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "tracks": [
+    {
+      "room": "witness",
+      "text": "Welcome to the Trinity Accord memory station. This exhibition begins with acts of witnessing. The Accord did not start as a complete plan. Recording, making music, selecting among outputs, and acting in the physical world gradually gave it form. The dates on these exhibits are Ethereum mint times. They are not automatically the exact times of composition or of the events being remembered. These six rooms are a later curatorial route, not six original stages of the work.",
+      "file": "assets/guide-witness.mp3",
+      "duration": 31.296666666666667,
+      "sha256": "28e177f66eb687945988553dd3a4dbb6bc2be40d0b3d93830c15759196dc1473"
+    },
+    {
+      "room": "voices",
+      "text": "This room invites you to listen. The Awakening and The Descendants offer different speaking positions. The letters address an unknown intelligence directly. Open an exhibit to hear its complete selected track and read the preserved lyric text. Those lyrics come from the NFT descriptions; they are not time aligned transcripts of every sung word. Human selection and the decision to place a song within a historical record are also part of the creative process. You may pause the tour and stay with a song.",
+      "file": "assets/guide-voices.mp3",
+      "duration": 32.12866666666667,
+      "sha256": "541bf5fe6b1811e7c5d14a055e17a48990b541a4191f4450d4d7b0c3fc1c4e74"
+    },
+    {
+      "room": "formation",
+      "text": "The three Bitcoin originals form the closed canonical record. They place propositions, a material covenant, and a final meta record before a future reader. The architecture and explanatory labels around them belong to this later exhibition. They do not amend the originals or decide their meaning. Record one hundred and seventy three also preserves critical discussion. A fixed historical text can remain open to disagreement. Its provenance and the strength of its philosophical arguments are separate questions.",
+      "file": "assets/guide-formation.mp3",
+      "duration": 33.366,
+      "sha256": "17b7da7d1e252ba1037ca14a505e40aafd7c4887919ef2053e8847705db33329"
+    },
+    {
+      "room": "material",
+      "text": "Here the record meets matter. The photograph shows Core Object Alpha, a real physical object. The geometric installation surrounding it was designed for this exhibition; it is not a three dimensional scan of the artifact. Photographs, recordings, file hashes, and witnessed procedures each contribute specific evidence. A matching file digest establishes a bounded form of consistency. It does not by itself establish every historical claim or validate the philosophy. Open the source panel to follow those distinctions.",
+      "file": "assets/guide-material.mp3",
+      "duration": 36.246,
+      "sha256": "366b7f553ff282164f01f6945d4d72cd78e3e7c165dc5073963f75daa6e973bd"
+    },
+    {
+      "room": "guardians",
+      "text": "Closure does not end the work of care. Preservation, verification, and response can continue while the originals remain fixed. The existing website provides reading and participation paths. GitHub holds source material and version history. This museum offers a spatial presentation. Its own changes will also be documented as exhibition history. Formal responses and guardian applications return to the existing project process. This room does not create a second registry or grant new canonical authority.",
+      "file": "assets/guide-guardians.mp3",
+      "duration": 35.792,
+      "sha256": "136560fc83ac8b3747eaf18379df007d08b1b9428bea570aab67aa20a2b27e53"
+    },
+    {
+      "room": "waiting",
+      "text": "The route ends with an open address. The slowly changing light is an exhibition design, not a live heartbeat or a count of responses. Waiting does not guarantee a reply, and a reply does not necessarily mean agreement. The current project status and formal participation paths remain on the original website. You may read, verify, respond, or leave with a question. This exhibition asks for no pledge. The future recipient has not been decided in advance.",
+      "file": "assets/guide-waiting.mp3",
+      "duration": 31.488666666666667,
+      "sha256": "586ba302b8fae43182d0b1b24c5e55a512305a93693ebb5394266b688e8a57e4"
+    }
+  ]
+}

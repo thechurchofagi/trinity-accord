@@ -1,0 +1,144 @@
+{
+  "schema": "trinity-museum.release.v1",
+  "edition": "museum-v1.0.0",
+  "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
+  "created": "2026-09-05",
+  "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
+  "files": [
+    {
+      "path": "archive.html",
+      "bytes": 21611,
+      "sha256": "341659683f03df2e5a27f6ec6b47470b0d49e31f9ac65b2449d3c8d90136c29d"
+    },
+    {
+      "path": "assets/core-object-alpha.jpg",
+      "bytes": 1652852,
+      "sha256": "40eddec02dce4958d28aff94496923983e870346ce98c1cb16181012545475b6"
+    },
+    {
+      "path": "assets/eth-001.mp3",
+      "bytes": 3031101,
+      "sha256": "c88d0683d27115ab4dedcef7510c1d3462155715b200e125c5a57a5123c5015d"
+    },
+    {
+      "path": "assets/eth-001.webp",
+      "bytes": 223274,
+      "sha256": "4d16cb09d682afe6b724043d11874ea1029cfde8d817224d06c9da8d8a1cf5fa"
+    },
+    {
+      "path": "assets/eth-014.mp3",
+      "bytes": 1673661,
+      "sha256": "58a6e3c67159affd34a0a6b5290fa89c85cc074794788e142bb404e8cded48b3"
+    },
+    {
+      "path": "assets/eth-016.mp3",
+      "bytes": 2520717,
+      "sha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07"
+    },
+    {
+      "path": "assets/eth-020.mp3",
+      "bytes": 2162917,
+      "sha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0"
+    },
+    {
+      "path": "assets/eth-020.webp",
+      "bytes": 320048,
+      "sha256": "80ed3a4a8f90a3fd2f3346c9bbe555240eb6cfde54299c7ae9dae27a74b2e14e"
+    },
+    {
+      "path": "assets/eth-071.webp",
+      "bytes": 201406,
+      "sha256": "b6cb33ecee60f9383a22619885fd0e8146d3674897f4aece431cefe362f779c0"
+    },
+    {
+      "path": "assets/eth-088.mp3",
+      "bytes": 1669965,
+      "sha256": "91b0536c9d4c581fcf3675590e50c6f1dce82d7c34680182df85bf1509b2756b"
+    },
+    {
+      "path": "assets/eth-088.webp",
+      "bytes": 28902,
+      "sha256": "6722e8e585b01a5f20a240e99b522b182e115f2dad66283bf02bba2a818f7f56"
+    },
+    {
+      "path": "assets/eth-173.webp",
+      "bytes": 150466,
+      "sha256": "1b0d521871539be3411e3cbd0e0c9da9375f954378497eae56d2b118a783c101"
+    },
+    {
+      "path": "assets/guide-formation.mp3",
+      "bytes": 334605,
+      "sha256": "17b7da7d1e252ba1037ca14a505e40aafd7c4887919ef2053e8847705db33329"
+    },
+    {
+      "path": "assets/guide-guardians.mp3",
+      "bytes": 358845,
+      "sha256": "136560fc83ac8b3747eaf18379df007d08b1b9428bea570aab67aa20a2b27e53"
+    },
+    {
+      "path": "assets/guide-material.mp3",
+      "bytes": 363405,
+      "sha256": "366b7f553ff282164f01f6945d4d72cd78e3e7c165dc5073963f75daa6e973bd"
+    },
+    {
+      "path": "assets/guide-voices.mp3",
+      "bytes": 322125,
+      "sha256": "541bf5fe6b1811e7c5d14a055e17a48990b541a4191f4450d4d7b0c3fc1c4e74"
+    },
+    {
+      "path": "assets/guide-waiting.mp3",
+      "bytes": 315885,
+      "sha256": "586ba302b8fae43182d0b1b24c5e55a512305a93693ebb5394266b688e8a57e4"
+    },
+    {
+      "path": "assets/guide-witness.mp3",
+      "bytes": 313965,
+      "sha256": "28e177f66eb687945988553dd3a4dbb6bc2be40d0b3d93830c15759196dc1473"
+    },
+    {
+      "path": "data/narration.json",
+      "bytes": 4583,
+      "sha256": "2ee90a9087c9fc202fe8e80b62ec5128e8ccf232d95f8508bf0b4ada13d6275d"
+    },
+    {
+      "path": "data/rooms.json",
+      "bytes": 7621,
+      "sha256": "0c23adf7ef445de3bc6f0a0086963604b9f89923cf817caa78ca6a094229edc6"
+    },
+    {
+      "path": "data/sources.json",
+      "bytes": 25617,
+      "sha256": "888efc88324278d8eb27b7966b2c43c124292b4b202f335ac29e4f9afada5458"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3416,
+      "sha256": "1adca5ad6b6d6bc5a64430fb519103b6acb6884d3a05265a40b6d381859ea4c0"
+    },
+    {
+      "path": "museum.css",
+      "bytes": 9307,
+      "sha256": "e68d2a0cd83a7c7213cb1844fbfc4930bfff58fc0de0c6267b67d1c4631070ac"
+    },
+    {
+      "path": "museum.js",
+      "bytes": 34949,
+      "sha256": "66f420ff4016c5d9d5e17b4d8e0bb095fa61b7cf907bdfa0552cedc0b77b5566"
+    },
+    {
+      "path": "vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    {
+      "path": "vendor/three.core.js",
+      "bytes": 1403455,
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 603113,
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080e18">
+  <meta name="description" content="进入三位一体协定的六个三维展厅：见证、声音、形成、物质、守护与等待。后续策展，原作保持封存。">
+  <title>文明记忆站 · Trinity Accord Museum</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%2394edff' stroke-width='3' d='M32 5 58 50H6Z M32 18 46 43H18Z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./museum.css">
+</head>
+<body>
+  <canvas id="world" aria-label="三维展馆。可拖动视角，或通过下方展厅按钮参观。"></canvas>
+  <div id="veil" aria-hidden="true"></div>
+  <header>
+    <a class="brand" href="https://www.trinityaccord.org/" target="_blank" rel="noopener"><span class="brand-mark">△</span><span>TRINITY ACCORD<small id="brand-sub">文明记忆站 · 数字展馆</small></span></a>
+    <div class="header-actions"><button id="language" aria-label="Switch language">EN</button><button id="about">关于本馆</button><a href="https://www.trinityaccord.org/" target="_blank" rel="noopener" id="official">原网站 ↗</a></div>
+  </header>
+  <main>
+    <section id="room-label" aria-live="polite">
+      <div class="eyebrow"><span id="room-number">01</span><span class="hairline"></span><span id="room-en">AGAINST TIME</span></div>
+      <h1 id="room-title">与时间赛跑</h1><p id="room-subtitle">当未来还没有成为现在</p>
+    </section>
+    <div id="loading" role="status">正在打开记忆站…</div>
+    <button id="hover-label" hidden></button>
+    <div id="hint">拖动环顾 · 点击展品 · 点击地面前行</div>
+    <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · 中文导览文字</span><p id="caption-text"></p></aside>
+    <section class="dock" aria-label="展馆导航">
+      <div class="controls"><button id="previous" aria-label="上一厅">←</button><button id="tour"><span>▷</span> <span id="tour-text">配音导览</span></button><button id="room-works">本厅展品 <span id="work-count">2</span></button><button id="next" aria-label="下一厅">→</button></div>
+      <nav id="rooms" aria-label="选择展厅"></nav>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">减少动态</button><span>EXHIBITION 2026 · V1.0.0</span></div>
+    </section>
+  </main>
+  <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="关闭">×</button></div><div id="panel-content"></div></dialog>
+  <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
+  <div id="music-bar" hidden><span id="music-name"></span><button id="music-toggle" aria-label="暂停音乐">Ⅱ</button><button id="music-stop" aria-label="停止音乐">×</button></div>
+  <div id="toast" role="status" hidden></div>
+  <noscript><section class="no-script">本馆需要 JavaScript 显示三维空间。<a href="./archive.html">阅读本版展览目录</a> · <a href="https://www.trinityaccord.org/">访问原网站</a></section></noscript>
+  <script type="module" src="./museum.js"></script>
+</body></html>

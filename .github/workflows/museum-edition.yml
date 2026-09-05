@@ -1,0 +1,69 @@
+# Install this file at .github/workflows/museum-edition.yml in the existing repository.
+name: Museum edition
+on:
+  pull_request:
+    paths: ['museum/**', '.github/workflows/museum-edition.yml']
+  push:
+    branches: [main]
+    paths: ['museum/**', '.github/workflows/museum-edition.yml']
+permissions:
+  contents: read
+concurrency:
+  group: museum-edition-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            museum
+            scripts
+      - name: Validate frozen content and file inventory
+        run: |
+          python3 museum/scripts/validate.py
+          node --check museum/dist/museum.js
+  archive:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            museum
+            scripts
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/museum-toolchain-provenance.json"
+          cat "$RUNNER_TEMP/museum-toolchain-provenance.json"
+      - name: Package a dated immutable-content edition
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, re
+          m=json.loads(pathlib.Path('museum/dist/data/release-manifest.json').read_text())
+          if not re.fullmatch(r'museum-v[0-9]+\.[0-9]+\.[0-9]+',m['edition']):raise SystemExit('Invalid edition tag')
+          pathlib.Path('/tmp/museum-edition-tag').write_text(m['edition'])
+          PY
+          MUSEUM_EDITION_TAG="$(cat /tmp/museum-edition-tag)"
+          if gh release view "$MUSEUM_EDITION_TAG" >/dev/null 2>&1; then
+            echo "This edition is already archived. Existing release remains unchanged; use a new edition number for a new archive."
+            exit 0
+          fi
+          tar --exclude='__pycache__' -czf "/tmp/${MUSEUM_EDITION_TAG}.tar.gz" museum
+          (cd /tmp && sha256sum "${MUSEUM_EDITION_TAG}.tar.gz" > "${MUSEUM_EDITION_TAG}.sha256")
+          cp museum/history/CHANGELOG.md /tmp/museum-release-notes.md
+          printf '\nRepository commit: `%s`\nThis release is a later exhibition archive, not an amendment of the Bitcoin Canon.\n' "$GITHUB_SHA" >> /tmp/museum-release-notes.md
+          gh release create "$MUSEUM_EDITION_TAG" "/tmp/${MUSEUM_EDITION_TAG}.tar.gz" "/tmp/${MUSEUM_EDITION_TAG}.sha256" "$RUNNER_TEMP/museum-toolchain-provenance.json" --target "$GITHUB_SHA" --title "$MUSEUM_EDITION_TAG · Spatial exhibition archive" --notes-file /tmp/museum-release-notes.md
