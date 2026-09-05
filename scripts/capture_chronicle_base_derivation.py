@@ -320,7 +320,16 @@ def l1_transaction_proofs(eth: RPC, frame_rows: list[dict], output: pathlib.Path
 
 def run(command: list[str]) -> None:
     print("[RUN] " + " ".join(command), flush=True)
-    subprocess.run(command, check=True)
+    started = time.monotonic()
+    with subprocess.Popen(command) as process:
+        while True:
+            try:
+                result = process.wait(timeout=30)
+                break
+            except subprocess.TimeoutExpired:
+                print(f"[PROCESS HEARTBEAT] pid={process.pid} elapsed_s={time.monotonic()-started:.1f} state=running_not_verified", flush=True)
+        if result:
+            raise subprocess.CalledProcessError(result, command)
 
 
 def main() -> None:
@@ -388,7 +397,12 @@ def main() -> None:
     # the shared archive first so it never waits on archival HTTP or backoff.
     from base_blob_archive_proxy import Archive
     archive = Archive(out / "decoder" / "blobs", os.getenv("BLOBSCAN_API", "https://api.blobscan.com"))
-    for start, end in windows:
+    capture_started = time.monotonic()
+    total_blocks = sum(end - start for start, end in windows)
+    completed_blocks = 0
+    blob_references = 0
+    for window_index, (start, end) in enumerate(windows, 1):
+        print(f"[PREFETCH START] window={window_index}/{len(windows)} blocks={start}-{end-1} total_blocks={total_blocks}", flush=True)
         for offset in range(start, end, 10):
             numbers = list(range(offset, min(offset + 10, end)))
             blocks = eth_rpc.batch([("eth_getBlockByNumber", [hex(number), True]) for number in numbers])
@@ -399,8 +413,13 @@ def main() -> None:
                     if str(transaction.get("to") or "").lower() != BASE_INBOX:
                         continue
                     for versioned_hash in transaction.get("blobVersionedHashes", []):
+                        print(f"[BLOB START] window={window_index}/{len(windows)} block={number} hash={versioned_hash} completed_references={blob_references}", flush=True)
                         archive.get(versioned_hash)
-            print(f"[BLOB PREFETCH] blocks={offset}-{numbers[-1]} window_end={end}", flush=True)
+                        blob_references += 1
+                        print(f"[BLOB DONE] completed_references={blob_references} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
+            completed_blocks += len(numbers)
+            print(f"[BLOB PREFETCH] window={window_index}/{len(windows)} blocks={offset}-{numbers[-1]} completed_blocks={completed_blocks}/{total_blocks} blob_references={blob_references} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
+        print(f"[DECODE START] window={window_index}/{len(windows)}", flush=True)
         run(
             [
                 str(args.batch_decoder), "fetch", "--start", str(start), "--end", str(end),
@@ -409,6 +428,8 @@ def main() -> None:
                 "--out", str(tx_dir), "--concurrent-requests", str(args.concurrency),
             ]
         )
+        print(f"[DECODE DONE] window={window_index}/{len(windows)} elapsed_s={time.monotonic()-capture_started:.1f}", flush=True)
+    print("[REASSEMBLE START] all fetch windows complete", flush=True)
     run([str(args.batch_decoder), "reassemble", "--in", str(tx_dir), "--out", str(channel_dir), "--l2-chain-id", str(BASE_CHAIN_ID)])
     derived = find_targets(channel_dir, targets)
     all_frames = []

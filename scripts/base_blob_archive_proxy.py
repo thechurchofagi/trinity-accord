@@ -65,9 +65,12 @@ class Archive:
                 time.sleep(max(0.0, self.next_request - time.monotonic()))
                 self.next_request = time.monotonic() + 1.0
                 try:
+                    started = time.monotonic()
+                    print(f"[ARCHIVE REQUEST] attempt={attempt+1}/5 timeout_s={self.timeout}", flush=True)
                     with urllib.request.urlopen(req, timeout=self.timeout) as response:
                         data = response.read()
                         headers = {key.lower(): value for key, value in response.headers.items()}
+                    print(f"[ARCHIVE RESPONSE] bytes={len(data)} elapsed_s={time.monotonic()-started:.1f}", flush=True)
                     return data, headers
                 except urllib.error.HTTPError as exc:
                     if exc.code not in (429, 500, 502, 503, 504) or attempt == 4:
@@ -190,7 +193,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.json_response({"code": 400, "message": "versioned_hashes is required"}, 400)
                 return
             try:
-                blobs = [{"blob": "0x" + self.archive.get(item).hex()} for item in hashes]
+                blobs = ["0x" + self.archive.get(item).hex() for item in hashes]
                 self.json_response({"data": blobs})
             except Exception as exc:
                 self.json_response({"code": 502, "message": str(exc)}, 502)
