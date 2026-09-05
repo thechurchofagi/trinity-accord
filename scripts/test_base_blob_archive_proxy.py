@@ -4,9 +4,12 @@ import json
 import pathlib
 import tempfile
 import urllib.error
+import urllib.request
+import threading
+from http.server import ThreadingHTTPServer
 from unittest.mock import MagicMock, patch
 
-from base_blob_archive_proxy import Archive, BLOB_BYTES, normalize_hash
+from base_blob_archive_proxy import Archive, BLOB_BYTES, Handler, normalize_hash
 
 
 def main():
@@ -24,6 +27,23 @@ def main():
         archive.metadata = lambda _: (metadata, "https://metadata.invalid/blob", hashlib.sha256(json.dumps(metadata).encode()).hexdigest())
         archive.request = lambda _: (blob, {"etag": "test"})
         assert archive.get(versioned_hash) == blob
+        # Exercise the HTTP wire format consumed by APIBeaconBlobsResponse:
+        # data is an ordered array of hex strings, not sidecar objects.
+        class TestHandler(Handler):
+            pass
+        TestHandler.archive = archive
+        server = ThreadingHTTPServer(("127.0.0.1", 0), TestHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            url = f"http://127.0.0.1:{server.server_port}/eth/v1/beacon/blobs/1?versioned_hashes={versioned_hash}"
+            with urllib.request.urlopen(url) as response:
+                value = json.load(response)
+            assert value == {"data": ["0x" + blob.hex()]}
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join()
         assert archive.get(versioned_hash) == blob
         rows = archive.ledger_path.read_text().splitlines()
         assert len(rows) == 1
