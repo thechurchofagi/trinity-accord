@@ -21,6 +21,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             museum
+            scripts
       - name: Validate frozen content and file inventory
         run: |
           python3 museum/scripts/validate.py
@@ -38,6 +39,11 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             museum
+            scripts
+      - name: Record toolchain provenance
+        run: |
+          python3 scripts/toolchain_provenance.py > "$RUNNER_TEMP/museum-toolchain-provenance.json"
+          cat "$RUNNER_TEMP/museum-toolchain-provenance.json"
       - name: Package a dated immutable-content edition
         env:
           GH_TOKEN: ${{ github.token }}
@@ -60,4 +66,4 @@ jobs:
           (cd /tmp && sha256sum "${MUSEUM_EDITION_TAG}.tar.gz" > "${MUSEUM_EDITION_TAG}.sha256")
           cp museum/history/CHANGELOG.md /tmp/museum-release-notes.md
           printf '\nRepository commit: `%s`\nThis release is a later exhibition archive, not an amendment of the Bitcoin Canon.\n' "$GITHUB_SHA" >> /tmp/museum-release-notes.md
-          gh release create "$MUSEUM_EDITION_TAG" "/tmp/${MUSEUM_EDITION_TAG}.tar.gz" "/tmp/${MUSEUM_EDITION_TAG}.sha256" --target "$GITHUB_SHA" --title "$MUSEUM_EDITION_TAG · Spatial exhibition archive" --notes-file /tmp/museum-release-notes.md
+          gh release create "$MUSEUM_EDITION_TAG" "/tmp/${MUSEUM_EDITION_TAG}.tar.gz" "/tmp/${MUSEUM_EDITION_TAG}.sha256" "$RUNNER_TEMP/museum-toolchain-provenance.json" --target "$GITHUB_SHA" --title "$MUSEUM_EDITION_TAG · Spatial exhibition archive" --notes-file /tmp/museum-release-notes.md
