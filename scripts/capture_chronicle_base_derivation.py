@@ -384,7 +384,23 @@ def main() -> None:
     tx_dir.mkdir(parents=True, exist_ok=True)
     channel_dir.mkdir(parents=True, exist_ok=True)
     windows = merge_windows(origins, args.window_before, args.window_after)
+    # The pinned decoder's Beacon request deadline is only ten seconds. Warm
+    # the shared archive first so it never waits on archival HTTP or backoff.
+    from base_blob_archive_proxy import Archive
+    archive = Archive(out / "decoder" / "blobs", os.getenv("BLOBSCAN_API", "https://api.blobscan.com"))
     for start, end in windows:
+        for offset in range(start, end, 10):
+            numbers = list(range(offset, min(offset + 10, end)))
+            blocks = eth_rpc.batch([("eth_getBlockByNumber", [hex(number), True]) for number in numbers])
+            for number, block in zip(numbers, blocks):
+                if h2i(block["number"]) != number:
+                    raise ValueError("prefetch block number mismatch")
+                for transaction in block["transactions"]:
+                    if str(transaction.get("to") or "").lower() != BASE_INBOX:
+                        continue
+                    for versioned_hash in transaction.get("blobVersionedHashes", []):
+                        archive.get(versioned_hash)
+            print(f"[BLOB PREFETCH] blocks={offset}-{numbers[-1]} window_end={end}", flush=True)
         run(
             [
                 str(args.batch_decoder), "fetch", "--start", str(start), "--end", str(end),
