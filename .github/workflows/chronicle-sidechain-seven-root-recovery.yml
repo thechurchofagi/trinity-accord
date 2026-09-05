@@ -141,12 +141,12 @@ jobs:
           CHRONICLE_CAR_GATEWAYS: "https://ipfs.raribleuserdata.com/ipfs/{cid}?format=car&dag-scope=all,https://rarible.mypinata.cloud/ipfs/{cid}?format=car&dag-scope=all,https://gw-seattle.crustcloud.io/ipfs/{cid}?format=car&dag-scope=all,https://nftstorage.link/ipfs/{cid}?format=car&dag-scope=all,https://trustless-gateway.link/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.filebase.io/ipfs/{cid}?format=car&dag-scope=all,https://4everland.io/ipfs/{cid}?format=car&dag-scope=all,https://ipfs.io/ipfs/{cid}?format=car&dag-scope=all,https://dweb.link/ipfs/{cid}?format=car&dag-scope=all,https://w3s.link/ipfs/{cid}?format=car&dag-scope=all,https://gateway.pinata.cloud/ipfs/{cid}?format=car&dag-scope=all"
         run: |
           set -euo pipefail
-          log="$RUNNER_TEMP/chronicle-kubo-daemon.log"
-          "$CHRONICLE_KUBO_BIN" daemon --migrate=false >"$log" 2>&1 &
-          pid=$!
+          kubo_log="$RUNNER_TEMP/chronicle-kubo-daemon.log"
+          "$CHRONICLE_KUBO_BIN" daemon --migrate=false >"$kubo_log" 2>&1 &
+          kubo_pid=$!
           cleanup() {
-            kill "$pid" 2>/dev/null || true
-            wait "$pid" 2>/dev/null || true
+            kill "$kubo_pid" 2>/dev/null || true
+            wait "$kubo_pid" 2>/dev/null || true
           }
           trap cleanup EXIT
           ready=false
@@ -158,7 +158,7 @@ jobs:
             sleep 1
           done
           if [ "$ready" != true ]; then
-            sed -n '1,200p' "$log" >&2
+            sed -n '1,200p' "$kubo_log" >&2
             exit 1
           fi
           node scripts/build-chronicle-sidechain-evidence.mjs
