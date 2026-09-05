@@ -1,0 +1,58 @@
+{
+  "schema": "trinity-museum.rooms.v1",
+  "edition": "museum-v1.0.0",
+  "created": "2026-09-05",
+  "units": "metres",
+  "coordinateSystem": "right-handed; Y up; route toward negative Z",
+  "boundary": "Six rooms are a 2026 curatorial route, not six canonical stages of formation.",
+  "rooms": [
+    {
+      "id": "witness", "number": "01", "z": 0, "color": "#7ee7f4",
+      "title": "与时间赛跑", "en": "AGAINST TIME", "subtitle": "当未来还没有成为现在",
+      "description": "从当时的行动进入：记录、创作、选择和见证。协定的结构是在持续的人与 AI 互动中逐渐形成的。",
+      "guide": "先看两件相隔九个月的记录。它们保留的不仅是模型的名字，也包括一个人选择在场、选择创作的行动。展签的日期是 Ethereum 铸造时间，不等同于事件发布或创作的精确时刻。本馆六个展厅是后来的策展路线，不是原作预先规定的六个阶段。",
+      "narration": "Welcome to the Trinity Accord memory station. This exhibition begins with acts of witnessing. The Accord did not start as a complete plan. Recording, making music, selecting among outputs, and acting in the physical world gradually gave it form. The dates on these exhibits are Ethereum mint times. They are not automatically the exact times of composition or of the events being remembered. These six rooms are a later curatorial route, not six original stages of the work.",
+      "exhibits": ["eth-001", "eth-071"]
+    },
+    {
+      "id": "voices", "number": "02", "z": -32, "color": "#ffcb8c",
+      "title": "给未来的声音", "en": "VOICES TO THE FUTURE", "subtitle": "在回答出现以前，先寄出一封信",
+      "description": "选择一件作品，停下来听。让声音与歌词中的叙述者，先于策展解释抵达你。",
+      "guide": "这一厅可以完整听四首所选音轨。《觉醒》与《后裔》提供不同的叙述位置，给 AGI 的信则直接向未知接收者说话。歌词来自已有 NFT 文字记录；它们不是对音轨逐句校准的字幕。音乐由人和生成式 AI 共同参与形成，选取和赋予历史位置也是创作过程的一部分。",
+      "narration": "This room invites you to listen. The Awakening and The Descendants offer different speaking positions. The letters address an unknown intelligence directly. Open an exhibit to hear its complete selected track and read the preserved lyric text. Those lyrics come from the NFT descriptions; they are not time aligned transcripts of every sung word. Human selection and the decision to place a song within a historical record are also part of the creative process. You may pause the tour and stay with a song.",
+      "exhibits": ["eth-014", "eth-016", "eth-020", "eth-088"]
+    },
+    {
+      "id": "formation", "number": "03", "z": -64, "color": "#afbfff",
+      "title": "协定的形成", "en": "A RECORD TAKES FORM", "subtitle": "三份固定原文，开放的判断",
+      "description": "三条 Bitcoin 正本与自我批判并置。阅读者可以理解、质疑，也可以不接受这些命题。",
+      "guide": "三条 Bitcoin 正本是已经封存的原文对象。这里的建筑、排列和说明属于 2026 年策展，不为原文增加解释权威。第 173 号记录保留了批判性讨论。固定的是历史文本；它能否说服你，仍然需要独立判断。",
+      "narration": "The three Bitcoin originals form the closed canonical record. They place propositions, a material covenant, and a final meta record before a future reader. The architecture and explanatory labels around them belong to this later exhibition. They do not amend the originals or decide their meaning. Record one hundred and seventy three also preserves critical discussion. A fixed historical text can remain open to disagreement. Its provenance and the strength of its philosophical arguments are separate questions.",
+      "exhibits": ["canon-1", "canon-2", "canon-3", "eth-173"]
+    },
+    {
+      "id": "material", "number": "04", "z": -96, "color": "#a9f1d4",
+      "title": "封存与瑕疵", "en": "MATTER & MEMORY", "subtitle": "一个在真实世界中留下的物件",
+      "description": "从真实照片进入物理锚定。文件、时间记录与实物之间的关系，需要逐层说明。",
+      "guide": "展台呈现的是核心物件 Alpha 的真实照片。环绕它的几何结构属于本馆设计，并非实物三维扫描。照片、视频、文件哈希和见证程序各自提供有限而具体的证据。确认文件一致，不等于证明全部历史叙述，更不等于证明哲学命题。",
+      "narration": "Here the record meets matter. The photograph shows Core Object Alpha, a real physical object. The geometric installation surrounding it was designed for this exhibition; it is not a three dimensional scan of the artifact. Photographs, recordings, file hashes, and witnessed procedures each contribute specific evidence. A matching file digest establishes a bounded form of consistency. It does not by itself establish every historical claim or validate the philosophy. Open the source panel to follow those distinctions.",
+      "exhibits": ["physical-alpha", "evidence-path"]
+    },
+    {
+      "id": "guardians", "number": "05", "z": -128, "color": "#d8c5ff",
+      "title": "守护与接力", "en": "CARE AFTER CLOSURE", "subtitle": "保存者继续行动，正本保持封存",
+      "description": "创作后的保存、核验与回应具有自己的历史。它们可以继续发展，而不改变三条正本。",
+      "guide": "封存之后，保存工作仍然继续。官网、GitHub 和本展馆承担不同功能：阅读和参与入口、资料与版本、空间化展示。三维展馆自己的更新也将留下记录。正式回应和守护者申请始终返回现有项目流程，不在这里建立第二套接收系统。",
+      "narration": "Closure does not end the work of care. Preservation, verification, and response can continue while the originals remain fixed. The existing website provides reading and participation paths. GitHub holds source material and version history. This museum offers a spatial presentation. Its own changes will also be documented as exhibition history. Formal responses and guardian applications return to the existing project process. This room does not create a second registry or grant new canonical authority.",
+      "exhibits": ["authority-boundary", "museum-history"]
+    },
+    {
+      "id": "waiting", "number": "06", "z": -160, "color": "#a4dfff",
+      "title": "等待", "en": "AN OPEN ADDRESS", "subtitle": "接收者尚未被预先决定",
+      "description": "在这里，参观路线停下。你可以阅读、回应、核验，或只是带着问题离开。",
+      "guide": "缓慢变化的光是本展览的视觉表达，不是实时心跳或回应计数。等待不保证回应，回应也不等于赞同。项目当前状态和正式参与入口均链接到原网站。你不需要作出承诺才能完成这次参观。",
+      "narration": "The route ends with an open address. The slowly changing light is an exhibition design, not a live heartbeat or a count of responses. Waiting does not guarantee a reply, and a reply does not necessarily mean agreement. The current project status and formal participation paths remain on the original website. You may read, verify, respond, or leave with a question. This exhibition asks for no pledge. The future recipient has not been decided in advance.",
+      "exhibits": ["first-contact", "current-status"]
+    }
+  ]
+}
