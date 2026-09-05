@@ -20,6 +20,10 @@
 - Arweave/CAR integrity proof
 - image or music content verification
 
+## 歌词查找
+
+[歌词集中目录](lyrics/README.md)提供70个书面阅读条目、单曲全文与版本、175条NFT索引，以及单独标注的音频补录草稿。查找歌词无需通读整个编年史。
+
 ## 数据来源
 
 NFT 元数据存储在 Arweave 上的 CAR 文件中。每个 NFT 的 metadata.car 包含 JSON，格式如下：
