@@ -8,6 +8,8 @@ Use Python 3: `python -m http.server 8000 --directory dist`, then open the local
 
 `python scripts/validate.py` checks content, local references, media digests and the release inventory. `node --check dist/museum.js` checks the application syntax. The museum does not import dependencies from the parent site's package.json.
 
+For optional supervised UI development, this edition includes a Vite development server (`npm ci`, then `npm run dev`). It is not a runtime dependency of the exported exhibition. See `history/CHANGELOG.md` for the actual scope and limitations of device testing.
+
 ## Ownership and boundaries
 
 - GitHub `thechurchofagi/trinity-accord`, under `museum/`, holds the maintained exhibition source and history. There is no separately managed user repository.
