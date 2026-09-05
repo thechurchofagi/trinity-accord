@@ -1,6 +1,10 @@
 name: Chronicle seven-root strict CAR recovery
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/chronicle-sidechain-seven-root-recovery.yml"
   workflow_dispatch:
   schedule:
     - cron: "23 */6 * * *"
@@ -140,7 +144,10 @@ jobs:
           log="$RUNNER_TEMP/chronicle-kubo-daemon.log"
           "$CHRONICLE_KUBO_BIN" daemon --migrate=false >"$log" 2>&1 &
           pid=$!
-          cleanup() { kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; }
+          cleanup() {
+            kill "$pid" 2>/dev/null || true
+            wait "$pid" 2>/dev/null || true
+          }
           trap cleanup EXIT
           ready=false
           for _ in $(seq 1 30); do
