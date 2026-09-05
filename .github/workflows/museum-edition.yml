@@ -16,16 +16,15 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           persist-credentials: false
           sparse-checkout: |
             museum
       - name: Validate frozen content and file inventory
-        working-directory: museum
         run: |
-          python3 scripts/validate.py
-          node --check dist/museum.js
+          python3 museum/scripts/validate.py
+          node --check museum/dist/museum.js
   archive:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
@@ -34,7 +33,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           persist-credentials: false
           sparse-checkout: |
