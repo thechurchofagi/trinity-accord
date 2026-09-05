@@ -218,6 +218,7 @@ For agents:
 - Chronicle hub: `/chronicle`
 - Agent context: `/nft-text-descriptions/chronicle-agent-context.md`
 - Music audit: `/nft-text-descriptions/CHRONICLE-MUSIC-TABLE.md`
+- [Full lyrics by song title and NFT number](nft-text-descriptions/lyrics/README.md): written source texts, variants, and separately labeled audio transcription drafts.
 
 ## Central value
 
