@@ -67,8 +67,8 @@ permalink: /
   <div class="home-live-signal-grid" aria-label="Live operational, reception, and evidence signals">
     <a class="home-live-signal home-live-signal-heartbeat" href="/api/waiting-heartbeat-status.json">
       <span class="home-signal-label">Waiting Heartbeat</span>
-      <strong data-home-heartbeat-status>degraded</strong>
-      <small data-home-heartbeat-summary>77/80 successful · 3 missed · 0-day streak</small>
+      <strong data-home-heartbeat-status>Alive</strong>
+      <small data-home-heartbeat-summary>78/80 successful · 2 missed · 74-day streak</small>
     </a>
     <a class="home-live-signal" href="/api/public-home-status.json">
       <span class="home-signal-label">Autonomous External Agent Discovery</span>
@@ -95,7 +95,7 @@ permalink: /
     <a href="/api/public-home-status.json"><strong>Machine status</strong><span>Current public counters and boundaries</span></a>
     <a href="/api/record-chain-status.json"><strong>Chain API</strong><span>Technical chain tip and durability state</span></a>
   </div>
-  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>c5e4dc2bcd7a9096</code>. Latest technical record <code>R-000000145</code>.</p>
+  <p class="status-generated-note">Generated from <a href="/api/public-home-status.json">/api/public-home-status.json</a>. Source data digest <code>2d994e7478f34e3d</code>. Latest technical record <code>R-000000145</code>.</p>
 </section>
 <!-- END GENERATED PUBLIC STATUS -->
 
