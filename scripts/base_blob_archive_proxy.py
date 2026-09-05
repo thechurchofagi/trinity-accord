@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import os
 import pathlib
@@ -85,6 +86,21 @@ class Archive:
                         raise
                     self.next_request = time.monotonic() + delay
                     print(f"[BLOB RETRY] status={exc.code} attempt={attempt + 1}/5 delay={delay}s", flush=True)
+                except (
+                    urllib.error.URLError,
+                    TimeoutError,
+                    ConnectionError,
+                    http.client.HTTPException,
+                ) as exc:
+                    if attempt == 4:
+                        raise
+                    delay = 2 ** (attempt + 1)
+                    self.next_request = time.monotonic() + delay
+                    print(
+                        f"[BLOB RETRY] error={type(exc).__name__} "
+                        f"attempt={attempt + 1}/5 delay={delay}s",
+                        flush=True,
+                    )
 
     def metadata(self, versioned_hash: str) -> tuple[dict, str, str]:
         url = f"{self.api}/blobs/{versioned_hash}"
