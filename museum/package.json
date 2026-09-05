@@ -1,0 +1,12 @@
+{
+  "name": "trinity-memory-museum",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "check": "python3 scripts/validate.py"
+  },
+  "devDependencies": {
+    "vite": "7.1.5"
+  }
+}

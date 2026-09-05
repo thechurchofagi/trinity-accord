@@ -23,11 +23,14 @@
     <div id="loading" role="status">正在打开记忆站…</div>
     <button id="hover-label" hidden></button>
     <div id="hint">拖动环顾 · 点击展品 · 点击地面前行</div>
+    <section id="fallback-gallery" hidden aria-label="作品浏览模式"><button id="fallback-art"></button><span id="fallback-mode"></span></section>
+    <div id="focus-tools"><button id="focus-art">阅读这件作品</button><button id="overview">展厅全景</button></div>
     <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · 中文导览文字</span><p id="caption-text"></p></aside>
     <section class="dock" aria-label="展馆导航">
+      <div id="exhibit-strip" aria-label="选择作品"></div>
       <div class="controls"><button id="previous" aria-label="上一厅">←</button><button id="tour"><span>▷</span> <span id="tour-text">配音导览</span></button><button id="room-works">本厅展品 <span id="work-count">2</span></button><button id="next" aria-label="下一厅">→</button></div>
       <nav id="rooms" aria-label="选择展厅"></nav>
-      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">减少动态</button><span>EXHIBITION 2026 · V1.0.0</span></div>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">减少动态</button><span>EXHIBITION 2026 · V1.1.0</span></div>
     </section>
   </main>
   <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="关闭">×</button></div><div id="panel-content"></div></dialog>

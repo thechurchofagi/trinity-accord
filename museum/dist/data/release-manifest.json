@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.0.0",
+  "edition": "museum-v1.1.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-05",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 21611,
-      "sha256": "341659683f03df2e5a27f6ec6b47470b0d49e31f9ac65b2449d3c8d90136c29d"
+      "bytes": 21602,
+      "sha256": "b9010e09752adc94230fd1a7e7b3b39f0a929acfb1ee86824e8afac1e451a3ce"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -102,28 +102,28 @@
     },
     {
       "path": "data/rooms.json",
-      "bytes": 7621,
-      "sha256": "0c23adf7ef445de3bc6f0a0086963604b9f89923cf817caa78ca6a094229edc6"
+      "bytes": 7976,
+      "sha256": "e572f07d17f5a39a93e9126e844df67358f9a0e792a5453588fde34d4324c4ee"
     },
     {
       "path": "data/sources.json",
       "bytes": 25617,
-      "sha256": "888efc88324278d8eb27b7966b2c43c124292b4b202f335ac29e4f9afada5458"
+      "sha256": "878025b468d5ed274bf977bfe8eaf321c2a07067263b811c61c1cfa83923eb4a"
     },
     {
       "path": "index.html",
-      "bytes": 3416,
-      "sha256": "1adca5ad6b6d6bc5a64430fb519103b6acb6884d3a05265a40b6d381859ea4c0"
+      "bytes": 3757,
+      "sha256": "5dd64a8f757d07be7536d2aef0be91182656c280ac49e255a8728225c53e0d51"
     },
     {
       "path": "museum.css",
-      "bytes": 9307,
-      "sha256": "e68d2a0cd83a7c7213cb1844fbfc4930bfff58fc0de0c6267b67d1c4631070ac"
+      "bytes": 16565,
+      "sha256": "6e5ad7de582fa6e52d34e6da8f08523b5918fbe38b9cdbe4ba163fbbe36e668c"
     },
     {
       "path": "museum.js",
-      "bytes": 34949,
-      "sha256": "66f420ff4016c5d9d5e17b4d8e0bb095fa61b7cf907bdfa0552cedc0b77b5566"
+      "bytes": 37707,
+      "sha256": "3071e43f9ed88c3db3ce04617c0e2e5b83cc409953cf80e1f62158e1cc15729b"
     },
     {
       "path": "vendor/THREE-LICENSE.txt",
