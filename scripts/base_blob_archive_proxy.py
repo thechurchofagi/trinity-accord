@@ -21,6 +21,7 @@ import os
 import pathlib
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -50,15 +51,37 @@ class Archive:
         self.api = api.rstrip("/")
         self.timeout = timeout
         self.lock = threading.Lock()
+        self.request_lock = threading.Lock()
+        self.next_request = 0.0
         self.cache.mkdir(parents=True, exist_ok=True)
         self.ledger_path = self.cache / "ARCHIVE-PROVENANCE.jsonl"
 
     def request(self, url: str) -> tuple[bytes, dict[str, str]]:
         req = urllib.request.Request(url, headers={"user-agent": "trinity-accord-base-blob-proof/1.0"})
-        with urllib.request.urlopen(req, timeout=self.timeout) as response:
-            data = response.read()
-            headers = {key.lower(): value for key, value in response.headers.items()}
-        return data, headers
+        # Share pacing and cooldown across all decoder threads. A retry must not
+        # race a fresh request and amplify an upstream rate limit.
+        with self.request_lock:
+            for attempt in range(5):
+                time.sleep(max(0.0, self.next_request - time.monotonic()))
+                self.next_request = time.monotonic() + 1.0
+                try:
+                    with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                        data = response.read()
+                        headers = {key.lower(): value for key, value in response.headers.items()}
+                    return data, headers
+                except urllib.error.HTTPError as exc:
+                    if exc.code not in (429, 500, 502, 503, 504) or attempt == 4:
+                        raise
+                    delay = 2 ** (attempt + 1)
+                    retry_after = exc.headers.get("Retry-After", "") if exc.headers else ""
+                    if retry_after.isdigit():
+                        delay = max(delay, int(retry_after))
+                    # Do not retry earlier than a long server-requested cooldown.
+                    # Fail closed instead of blocking the decoder indefinitely.
+                    if delay > 60:
+                        raise
+                    self.next_request = time.monotonic() + delay
+                    print(f"[BLOB RETRY] status={exc.code} attempt={attempt + 1}/5 delay={delay}s", flush=True)
 
     def metadata(self, versioned_hash: str) -> tuple[dict, str, str]:
         url = f"{self.api}/blobs/{versioned_hash}"
