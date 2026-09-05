@@ -16,6 +16,8 @@ from trie import HexaryTrie
 
 ROOTCHAIN = "0x86e4dc95c7fbdbf52e33d563bbdb00823894c287"
 NEW_HEADER_TOPIC = "0x" + keccak(b"NewHeaderBlock(address,uint256,uint256,uint256,uint256,bytes32)").hex()
+OPTIMISM_COMMIT = "c6f39182c975db976aaaa01ef32884c41b1c9660"
+SUPERCHAIN_REGISTRY_COMMIT = "5b055be4d294ce43814a44c8839d89b2436dc8aa"
 
 
 def load(path):
@@ -137,6 +139,113 @@ def content_roots(records):
     return roots
 
 
+def verify_finality_bundle(root, source, settlement, settlement_path, source_tag, source_sha):
+    """Verify finality bundle bindings and complete cross-layer populations.
+
+    The workflow separately runs the OP Stack KZG/channel verifier, Ethereum MPT
+    verifier, and Lodestar SSZ verifier.  This classifier recomputes every file
+    binding and makes sure those proof populations are exactly the populations
+    needed by the immutable identity and Polygon settlement sources.
+    """
+    root = pathlib.Path(root)
+    binding = load(root / "SOURCE-BINDING.json")
+    base = load(root / "base" / "BASE-OP-STACK-DERIVATION.json")
+    beacon = load(root / "beacon" / "ETHEREUM-BEACON-FINALITY.json")
+    timeline_path = source / "evidence-v2" / "BASE-TIMELINE.json"
+    errors = []
+    expected_binding = {
+        "source_sidechain_release_tag": source_tag,
+        "source_sidechain_commit_sha": source_sha,
+        "base_timeline_sha256": sha256_file(timeline_path),
+        "polygon_settlement_sha256": sha256_file(settlement_path),
+        "base_derivation_sha256": sha256_file(root / "base" / "BASE-OP-STACK-DERIVATION.json"),
+        "beacon_finality_sha256": sha256_file(root / "beacon" / "ETHEREUM-BEACON-FINALITY.json"),
+    }
+    copied_settlement = root / "POLYGON-ETHEREUM-SETTLEMENT.json"
+    if not copied_settlement.exists() or sha256_file(copied_settlement) != expected_binding["polygon_settlement_sha256"]:
+        errors.append("finality bundle copied Polygon settlement differs from verified source")
+    copied_timeline = root / "BASE-TIMELINE.json"
+    if not copied_timeline.exists() or sha256_file(copied_timeline) != expected_binding["base_timeline_sha256"]:
+        errors.append("finality bundle copied Base timeline differs from verified source")
+    if binding.get("optimism_commit_sha") != OPTIMISM_COMMIT:
+        errors.append("finality bundle Optimism implementation pin mismatch")
+    if binding.get("superchain_registry_commit_sha") != SUPERCHAIN_REGISTRY_COMMIT:
+        errors.append("finality bundle Superchain Registry pin mismatch")
+    if len(binding.get("proof_implementation_commit_sha", "")) != 40:
+        errors.append("finality proof implementation commit is not a full SHA")
+    for key, expected in expected_binding.items():
+        if binding.get(key) != expected:
+            errors.append(f"finality binding mismatch {key}")
+
+    timeline = load(timeline_path)
+    timeline_txs = {item["transaction_hash"].lower() for item in timeline}
+    base_txs = {item["transaction_hash"].lower() for item in base.get("records", [])}
+    if (
+        base.get("schema") != "trinity-accord/chronicle-base-op-stack-derivation/v1"
+        or base.get("pass") is not True
+        or base.get("source_base_timeline_sha256") != sha256_file(timeline_path)
+        or base.get("summary", {}).get("records") != 61
+        or base.get("summary", {}).get("derived_records") != 61
+        or len(timeline) != 61
+        or base_txs != timeline_txs
+    ):
+        errors.append("Base OP Stack derivation is not exact PASS 61/61")
+
+    frame_blocks = set()
+    for record in base.get("records", []):
+        for frame in record.get("derivation", {}).get("channel_frames", []):
+            proof_path = root / "base" / frame.get("l1_transaction_proof_file", "")
+            if not proof_path.is_file():
+                errors.append(f"missing Base L1 transaction proof {proof_path}")
+                continue
+            proof = load(proof_path)
+            if proof.get("transaction_hash", "").lower() != frame.get("transaction_hash", "").lower():
+                errors.append("Base frame/L1 transaction proof hash mismatch")
+            frame_blocks.add(int(proof["ethereum_block_number"]))
+
+    polygon_blocks = {int(item["ethereum_block_number"]) for item in settlement.get("checkpoints", [])}
+    claims = {int(item["execution_block_number"]): item for item in beacon.get("claims", [])}
+    needed_blocks = polygon_blocks | frame_blocks
+    if (
+        beacon.get("schema") != "trinity-accord/chronicle-ethereum-beacon-finality/v1"
+        or beacon.get("pass") is not True
+        or beacon.get("source_polygon_settlement_sha256") != expected_binding["polygon_settlement_sha256"]
+        or beacon.get("source_base_derivation_sha256") != sha256_file(root / "base" / "BASE-OP-STACK-DERIVATION.json")
+        or beacon.get("summary", {}).get("polygon_checkpoint_blocks") != 117
+        or set(claims) != needed_blocks
+    ):
+        errors.append(f"Beacon finality population mismatch claims={len(claims)} needed={len(needed_blocks)}")
+    for number, claim in claims.items():
+        ssz_path = root / "beacon" / claim.get("ssz_file", "")
+        observations = claim.get("observations", [])
+        if not ssz_path.is_file() or sha256_file(ssz_path) != claim.get("ssz_sha256"):
+            errors.append(f"Beacon SSZ object mismatch execution_block={number}")
+        if claim.get("provider_quorum", 0) < 2 or len(observations) < 2:
+            errors.append(f"Beacon provider quorum below two execution_block={number}")
+        for observation in observations:
+            if (
+                observation.get("beacon_root") != claim.get("beacon_root")
+                or observation.get("execution_block_hash") != claim.get("execution_block_hash")
+                or observation.get("finalized") is not True
+                or observation.get("execution_optimistic") is not False
+            ):
+                errors.append(f"Beacon observation mismatch execution_block={number}")
+
+    assurance = base.get("assurance", {})
+    if not str(assurance.get("withdrawal_fault_proof", "")).startswith("NOT_APPLICABLE"):
+        errors.append("Base ordinary-transaction withdrawal boundary is absent")
+    return {
+        "errors": errors,
+        "polygon_execution_blocks": len(polygon_blocks),
+        "base_l1_frame_blocks": len(frame_blocks),
+        "beacon_execution_blocks": len(claims),
+    }
+
+
+def strict_layer_complete(layer):
+    return layer["status"] in {"PASS", "NOT_APPLICABLE"}
+
+
 def audit(args):
     source = pathlib.Path(args.source_dir)
     evidence = source / "evidence-v2"
@@ -222,18 +331,46 @@ def audit(args):
     if seen_polygon != all_polygon or len(checkpoint_by_id) != 117:
         errors.append(f"Polygon settlement coverage mismatch assets={len(seen_polygon)}/156 checkpoints={len(checkpoint_by_id)}/117")
 
+    finality = None
+    if args.finality_dir:
+        try:
+            finality = verify_finality_bundle(
+                args.finality_dir, source, settlement, args.polygon_settlement, source_tag, source_sha
+            )
+            errors.extend(finality["errors"])
+        except Exception as exc:
+            errors.append(f"finality bundle: {exc}")
+
     audit_pass = not errors
+    finality_pass = finality is not None and not finality["errors"]
     layers = {
         "identity_commitment": {"status": "PASS" if audit_pass else "FAIL", "records": len(records)},
         "exact_payload_recovery": {"status": "INCOMPLETE", "verified_roots": len(roots)-len(unresolved), "total_roots": len(roots), "unresolved_roots": sorted(unresolved)},
         "l2_execution_inclusion": {"status": "PASS" if audit_pass else "FAIL", "records": offline.get("l2_records_checked")},
         "polygon_checkpoint_to_ethereum_execution": {"status": "PASS" if audit_pass else "FAIL", "records": len(seen_polygon), "checkpoints": len(checkpoint_by_id)},
-        "polygon_ethereum_beacon_finality": {"status": "NOT_CAPTURED"},
-        "base_op_stack_l1_derivation_and_fault_proof_finality": {"status": "NOT_CAPTURED"},
+        "polygon_ethereum_beacon_finality": {
+            "status": "PASS" if finality_pass else ("FAIL" if args.finality_dir else "NOT_CAPTURED"),
+            "execution_blocks": finality["polygon_execution_blocks"] if finality else 0,
+            "assumption": "Ethereum weak subjectivity; two independent finalized/non-optimistic consensus-client observations plus offline SSZ root and execution-payload verification",
+        },
+        "base_op_stack_l1_data_derivation": {
+            "status": "PASS" if finality_pass else ("FAIL" if args.finality_dir else "NOT_CAPTURED"),
+            "records": 61 if finality_pass else 0,
+            "l1_frame_blocks": finality["base_l1_frame_blocks"] if finality else 0,
+        },
+        "base_ethereum_beacon_finality": {
+            "status": "PASS" if finality_pass else ("FAIL" if args.finality_dir else "NOT_CAPTURED"),
+            "execution_blocks": finality["base_l1_frame_blocks"] if finality else 0,
+            "assumption": "Ethereum weak subjectivity; same consensus evidence boundary as Polygon",
+        },
+        "base_l2_to_l1_withdrawal_fault_proof": {
+            "status": "NOT_APPLICABLE",
+            "reason": "The 61 origins are ordinary Base L2 NFT transactions, not withdrawal claims.",
+        },
     }
-    strict_complete = all(value["status"] == "PASS" for value in layers.values())
+    strict_complete = all(strict_layer_complete(value) for value in layers.values())
     return {
-        "schema": "trinity-accord/chronicle-sidechain-strict-verification/v1",
+        "schema": "trinity-accord/chronicle-sidechain-strict-verification/v2",
         "audit_pass": audit_pass,
         "strict_completion": "PASS" if strict_complete else "INCOMPLETE",
         "strict_completion_pass": strict_complete,
@@ -241,7 +378,7 @@ def audit(args):
         "source": {"release_tag": source_tag, "commit_sha": source_sha, "identity_index_sha256": sha256_file(index_path)},
         "layers": layers,
         "provenance_boundary": "Seven roots were externally delivered, not self-minted by the target. This does not recover or verify their payload bytes and is not a legal ownership conclusion.",
-        "finality_boundary": "Polygon RootChain receipt inclusion is execution-layer evidence, not an independent Ethereum Beacon finality proof. Base has no OP Stack L1 derivation/fault-proof witness in this evidence set.",
+        "finality_boundary": "When the supplementary bundle is supplied, Polygon and Base execution blocks are bound to raw Beacon SSZ objects and two independent finalized/non-optimistic consensus-client observations. This is Ethereum weak-subjectivity evidence, not Bitcoin-style objective proof from genesis. Base's seven-day fault-proof window is not applicable to ordinary L2 origin transactions.",
         "errors": errors,
     }
 
@@ -251,6 +388,7 @@ def main():
     parser.add_argument("--source-dir", required=True)
     parser.add_argument("--polygon-settlement", required=True)
     parser.add_argument("--polygon-binding", required=True)
+    parser.add_argument("--finality-dir")
     parser.add_argument("--exceptions", default="evidence/chronicle-sidechain-historical-payload-exceptions.json")
     parser.add_argument("--provenance", default="evidence/chronicle-sidechain-seven-root-provenance-review.v1.json")
     parser.add_argument("--output", required=True)
