@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.4.0",
+  "edition": "museum-v1.5.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5278,
-      "sha256": "8fe13a04befec1154f89e63d9ac06038270bdaeec5557da03c55cb179e618290"
+      "bytes": 5535,
+      "sha256": "e9329808fa1016473719f27eb5fcd16ba7d4c30de5e1707b575680aa0978db50"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -69,8 +69,8 @@
     },
     {
       "path": "dist/open-space.js",
-      "bytes": 2420,
-      "sha256": "3bdbe301db552998adcba1e5871c1e7ebde409d09bebcc6dda0cef2df6fe32c9"
+      "bytes": 2419,
+      "sha256": "62c2d68901469e315f9b4595bb8f14175dc01fd134645cf2592888f0eefc58f6"
     },
     {
       "path": "dist/data/space-design.json",
@@ -83,6 +83,6 @@
       "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
     }
   ],
-  "revisionMethod": "Remove end walls from retained baked geometry; preserve existing atlas. Add star scenery and waiting installation in open-space.js. No full-gallery rebake.",
-  "previewScope": "entrance-preview.png and export-check.png retain v1.3 architectural reference renders; the live v1.4 end openings and star installation differ."
+  "revisionMethod": "Retain v1.4 baked architecture and atlas. Runtime slim metal frames cover all 30 exhibition slots, with two soft local accent lights, balanced environment illumination, and colour-preserving artwork surfaces. No full-gallery rebake.",
+  "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots."
 }

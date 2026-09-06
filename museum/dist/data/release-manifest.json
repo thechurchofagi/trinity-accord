@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.4.0",
+  "edition": "museum-v1.5.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 31979,
-      "sha256": "d69be5ed81d7a2cb6fdaecbab54a1b24012bb7e057ad5edf78e9610944346d20"
+      "bytes": 39217,
+      "sha256": "a05242dc85149c58157fc6460d998f7f78d49a61ae734c1ffe65bd8275b04f6a"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -24,6 +24,11 @@
       "path": "assets/crystal/crystal-preview.png",
       "bytes": 2724948,
       "sha256": "64a247f11bafcdb06435341e22250b26f3ed5d53561396564c1deea86e156105"
+    },
+    {
+      "path": "assets/curatorial/star-ark-2026.webp",
+      "bytes": 419332,
+      "sha256": "793e288895522919efc54b0cff18b6e50f2f5e4a13ccde84c048620eb693ee8c"
     },
     {
       "path": "assets/eth-001.mp3",
@@ -61,14 +66,44 @@
       "sha256": "80ed3a4a8f90a3fd2f3346c9bbe555240eb6cfde54299c7ae9dae27a74b2e14e"
     },
     {
+      "path": "assets/eth-042.mp3",
+      "bytes": 2971486,
+      "sha256": "6eae147d109002a56d9207a8089c93a09969219c78d3e4dd22f6257e98827465"
+    },
+    {
       "path": "assets/eth-042.webp",
       "bytes": 345162,
       "sha256": "b15a12de338c173ffa2db053bcbd474ddec3483e07f2e2e6cf23c0cf73a04081"
     },
     {
+      "path": "assets/eth-049.mp3",
+      "bytes": 2720997,
+      "sha256": "ff4ef9c424a9c620f623b2aedd1c903d4804ca35b4e34e78824ce376a9303b3e"
+    },
+    {
+      "path": "assets/eth-049.webp",
+      "bytes": 281772,
+      "sha256": "ba0d3b2dce2d63bdad2f5fec6d6ceee4fae03ed4a6449796eec181c0b9bf0d30"
+    },
+    {
+      "path": "assets/eth-056.mp3",
+      "bytes": 3399981,
+      "sha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd"
+    },
+    {
       "path": "assets/eth-056.webp",
       "bytes": 405128,
       "sha256": "6492d021ffb05519e4e697071e98cc2998e7f0ff9a0810cd033da66eefdeff94"
+    },
+    {
+      "path": "assets/eth-070.webp",
+      "bytes": 306048,
+      "sha256": "98db1fd37228442f57da6d3e285b606e3fb8e0ecb445876a51c4fe67a98538e8"
+    },
+    {
+      "path": "assets/eth-071.mp3",
+      "bytes": 2797101,
+      "sha256": "acd325e4ce080415291a9dd7d8e6eb4236e27ddd858cce3cd910eb2cc7816575"
     },
     {
       "path": "assets/eth-071.webp",
@@ -96,14 +131,34 @@
       "sha256": "2168d260d800aea57e4a3899c32852d08287bff088b2ac51461e61964bcb645d"
     },
     {
+      "path": "assets/eth-100.mp3",
+      "bytes": 2267181,
+      "sha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e"
+    },
+    {
       "path": "assets/eth-100.webp",
       "bytes": 321692,
       "sha256": "cf31fed72807772ff342190246f9b9cda9f12f29e81ed1d76064bdb0855f30c0"
     },
     {
+      "path": "assets/eth-117.webp",
+      "bytes": 112890,
+      "sha256": "b385cfd8fc524d938e028856809e485891559b2e898b428253a4c9da9583ee34"
+    },
+    {
+      "path": "assets/eth-142.webp",
+      "bytes": 451376,
+      "sha256": "a2d61f986963cd8a01fbfd1296bc5a367566236afa71205b1f8462de3b07f98b"
+    },
+    {
       "path": "assets/eth-145.webp",
       "bytes": 32706,
       "sha256": "1cc8551c3dfa3b17254731f9d8ebc93a45c77c13227c20c6f3957e960a301a21"
+    },
+    {
+      "path": "assets/eth-146.mp3",
+      "bytes": 3251373,
+      "sha256": "00a7cd19c693709610d9c7aa58be3c3389c7629aab59affb1df1c4e35e0ae67a"
     },
     {
       "path": "assets/eth-146.webp",
@@ -119,6 +174,11 @@
       "path": "assets/eth-173.webp",
       "bytes": 150466,
       "sha256": "1b0d521871539be3411e3cbd0e0c9da9375f954378497eae56d2b118a783c101"
+    },
+    {
+      "path": "assets/eth-174.webp",
+      "bytes": 243466,
+      "sha256": "67b7e2e90df4b2eed67438675c54e1d525f65303723edad9634b432289f7b57f"
     },
     {
       "path": "assets/gallery/entrance-preview.png",
@@ -178,7 +238,7 @@
     {
       "path": "data/crystal-model.json",
       "bytes": 2278,
-      "sha256": "d9145416469982752a3564d4b3427344b466784fabae9babf34d807a0bcef14b"
+      "sha256": "bcebe666c46b7b27efa578e417cb2b99ebebabd5fb2df6d38413d8f86483cdbf"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -187,8 +247,8 @@
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 5278,
-      "sha256": "8fe13a04befec1154f89e63d9ac06038270bdaeec5557da03c55cb179e618290"
+      "bytes": 5535,
+      "sha256": "e9329808fa1016473719f27eb5fcd16ba7d4c30de5e1707b575680aa0978db50"
     },
     {
       "path": "data/narration.json",
@@ -211,9 +271,19 @@
       "sha256": "46d958da20dea7284a554cbfb25ea4e9c58ea20df65b71cd40bb1d9c4810aeef"
     },
     {
+      "path": "data/records/eth-049.md",
+      "bytes": 7855,
+      "sha256": "2b44336709c470a7fa6b05f907d67874a74eef0a84cdefbf3cc7243120702341"
+    },
+    {
       "path": "data/records/eth-056.md",
       "bytes": 5788,
       "sha256": "7e20dc22ed7d6da70c683a202fa5e85f2a06d8bb603d3dbad0b0cda017d13784"
+    },
+    {
+      "path": "data/records/eth-070.md",
+      "bytes": 29575,
+      "sha256": "f3ba87a70d08e4197f6c492d90b7fa31617a4c5fd0d6e6e1277287aeae3a9e1b"
     },
     {
       "path": "data/records/eth-091.md",
@@ -256,14 +326,19 @@
       "sha256": "f58b3f273966aa80872c80406791a036f9705e011bb9a375c4c7ce889e2cc1a6"
     },
     {
+      "path": "data/records/star-ark-100751953.txt",
+      "bytes": 2246,
+      "sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259"
+    },
+    {
       "path": "data/rooms.json",
-      "bytes": 8226,
-      "sha256": "7e9e40cb1556f079057aa75d8f62c8c5f11fe9ae4a3002b3e9934637e7ca3d58"
+      "bytes": 8610,
+      "sha256": "26906bde4448943db568629d2529bed16d4a447ec7f32855d75f8c50260204d2"
     },
     {
       "path": "data/sources.json",
-      "bytes": 56183,
-      "sha256": "3cbc952c4d8aea2eaeff5e006a24231c7f6716cae7b1b83a77a4023ef1102874"
+      "bytes": 73957,
+      "sha256": "ffefb06fe5f75ec091c210f15e221c6b85d6ec32e409cc401338060b568ec264"
     },
     {
       "path": "data/space-design.json",
@@ -271,24 +346,29 @@
       "sha256": "adffde89d9eb9dbe0be0c30170787c65940f8fea5bd4cec74566f264a2d667b7"
     },
     {
+      "path": "data/star-ark-illustration.json",
+      "bytes": 1405,
+      "sha256": "e88e5fb2e527432c3d6e121da0d77b4914403b29fe29b3619e0ae7b58a46df08"
+    },
+    {
       "path": "index.html",
-      "bytes": 3882,
-      "sha256": "04bd6bbae94aa3df6faef5224b56965549bdda09d8cd80b2ea3af5b963069c24"
+      "bytes": 3946,
+      "sha256": "71ba9ade531dfd651756633ef4fa6b0d79fde6e8c41ec2be5e896904d086b145"
     },
     {
       "path": "museum.css",
-      "bytes": 20078,
-      "sha256": "df1511839441bd6fafe4a74f47aadd85b02f73258cdd6625eeb2246f69c69213"
+      "bytes": 21417,
+      "sha256": "cc053d63023d94041efd81ad34d20351557e456da7f67b586e792a838e25be1c"
     },
     {
       "path": "museum.js",
-      "bytes": 38266,
-      "sha256": "e376a14e1555a34cb6f7e3ea7532b50666b933f34d121687b00ef17456603732"
+      "bytes": 44874,
+      "sha256": "3f29bc47beee5f094a828808a26006eb152945286250124935f50cdbe9ec91b1"
     },
     {
       "path": "open-space.js",
-      "bytes": 2420,
-      "sha256": "3bdbe301db552998adcba1e5871c1e7ebde409d09bebcc6dda0cef2df6fe32c9"
+      "bytes": 2419,
+      "sha256": "62c2d68901469e315f9b4595bb8f14175dc01fd134645cf2592888f0eefc58f6"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",

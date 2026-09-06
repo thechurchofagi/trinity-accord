@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.4.0",
+  "edition": "museum-v1.5.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -20,12 +20,14 @@
       "exhibits": [
         "eth-001",
         "eth-007",
-        "eth-010",
         "eth-042",
+        "eth-049",
         "eth-056",
+        "eth-070",
         "eth-071",
         "eth-117"
-      ]
+      ],
+      "subtitleEn": "Before the future became the present"
     },
     {
       "id": "voices",
@@ -45,7 +47,8 @@
         "eth-088",
         "eth-146",
         "eth-171"
-      ]
+      ],
+      "subtitleEn": "Letters sent before an answer"
     },
     {
       "id": "formation",
@@ -68,7 +71,8 @@
         "canon-1",
         "canon-2",
         "canon-3"
-      ]
+      ],
+      "subtitleEn": "Three fixed originals, open judgment"
     },
     {
       "id": "material",
@@ -84,7 +88,8 @@
       "exhibits": [
         "physical-alpha",
         "evidence-path"
-      ]
+      ],
+      "subtitleEn": "A record in the physical world"
     },
     {
       "id": "guardians",
@@ -99,8 +104,10 @@
       "narration": "Closure does not end the work of care. Preservation, verification, and response can continue while the originals remain fixed. The existing website provides reading and participation paths. GitHub holds source material and version history. This museum offers a spatial presentation. Its own changes will also be documented as exhibition history. Formal responses and guardian applications return to the existing project process. This room does not create a second registry or grant new canonical authority.",
       "exhibits": [
         "authority-boundary",
-        "museum-history"
-      ]
+        "museum-history",
+        "star-ark"
+      ],
+      "subtitleEn": "Preservation continues after closure"
     },
     {
       "id": "waiting",
@@ -116,7 +123,8 @@
       "exhibits": [
         "first-contact",
         "current-status"
-      ]
+      ],
+      "subtitleEn": "The recipient remains undetermined"
     }
   ],
   "updated": "2026-09-06"

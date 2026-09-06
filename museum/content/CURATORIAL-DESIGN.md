@@ -38,3 +38,10 @@ The edition contains no scanned artifact model, no live model chatbot, no automa
 ## Future iterations
 
 Improve verified artwork resolution, guide translation, mobile controls or materials without changing source identity. Add a measured artifact model only with adequate input and explicit fidelity limits. If changing the renderer, preserve `sources.json`, stable exhibit IDs, room semantics, media transformations and old release packages. Archive major editions as runnable files and readable documents; record walkthrough video when a recording pass is performed. A walkthrough recording is not included in this initial package.
+
+
+## Complete works and later imagery — 2026-09-06
+
+Show original NFT imagery and its own sound together. File extensions cannot establish media type: decode and inspect bytes. The mirror artwork is #070, while the related playable recording is #049. Present them as linked objects, with their separate dates and identities. New exhibition art may interpret a text inscription only when the image’s creation date, later status and original text remain visible. The Star Ark illustration applies this rule.
+
+Lighting references: https://threejs.org/docs/pages/SpotLight.html ; https://threejs.org/docs/pages/PMREMGenerator.html ; https://threejs.org/manual/en/color-management.html . Uses soft penumbra and environment illumination for material definition; original artwork avoids scene tone-mapping shifts. Retains WebGL compatibility and the existing light atlas rather than migrating engines.

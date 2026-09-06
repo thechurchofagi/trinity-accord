@@ -1,0 +1,19 @@
+{
+  "schema": "trinity-museum.curatorial-image.v1",
+  "created": "2026-09-06",
+  "exhibit": "star-ark",
+  "image": "assets/curatorial/star-ark-2026.webp",
+  "sha256": "793e288895522919efc54b0cff18b6e50f2f5e4a13ccde84c048620eb693ee8c",
+  "originalGenerationSha256": "104bd3d70ee2e360f9c9e144049e4daabfc8e5f455c7c6ffa0b2bc8accb0464a",
+  "method": "AI image generation at the author’s request; complete generated composition converted to WebP quality 95.",
+  "status": "Later exhibition illustration, not historical NFT art and not part of the Bitcoin inscription.",
+  "sourceTitle": "星舟圣约：最终的回响 / The Star Ark Covenant: The Final Echo",
+  "inscriptionNumber": "100751953",
+  "inscriptionId": "4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0",
+  "sourcePath": "bitcoin-inscription-mirrors/raw/100751953.txt",
+  "sourceCommit": "8c9403c95b175e3627a88d7cb34f701d9168aef7",
+  "sourceSha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259",
+  "localRecord": "data/records/star-ark-100751953.txt",
+  "scope": "Later vision-layer inscription, outside the three sealed canonical originals; no new execution obligation.",
+  "promptSummary": "A quiet Earth at lower left with a protective arc. A small fleet of elegant silver arks carries amber memory seeds toward distant stars. Restrained fine-art science fiction; no text, faces or military imagery."
+}
