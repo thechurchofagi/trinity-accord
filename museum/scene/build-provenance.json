@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.9.0",
+  "edition": "museum-v1.10.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5807,
-      "sha256": "fd52d91bd6e9f31c5f0b4e83a1bf0f7015ed9aa28c209d78f12bd6d3931a73da"
+      "bytes": 5808,
+      "sha256": "83b63b90b89f3c885d5172167f266faf4104193e2cc6e170253563cd83335294"
     },
     {
       "path": "scene/memory-gallery.blend",

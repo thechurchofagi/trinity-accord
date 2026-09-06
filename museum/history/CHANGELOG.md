@@ -1,3 +1,11 @@
+# museum-v1.10.0 · Analogue movement and clearer crystal
+
+- Replace the two step buttons with a compact four-way analogue joystick. Pointer capture supports continuous movement, proportional speed, a small dead zone and diagonal speed normalization. Left/right strafe relative to the viewing direction; dragging the scene still changes the view. Release, cancellation, focus loss, hidden page and opening a panel reset movement. Keyboard movement remains available.
+- Position the translucent control at the left edge above the navigation, with visible directional arrows and bilingual drag instructions. Account for navigation height, music controls and short landscape viewports.
+- Fix three crystal visibility contributors: mobile transmission was downsampled, glow overlapped the inscription, and selecting the object focused its wall photograph. Use full-resolution transmission, reduced display refraction distortion, restrained facet highlights and brighter original engraving geometry. Focus the central object from the front.
+- Replace the central light wash with a stronger diffuse gold/white field outside the slab silhouette. The centre stays clear to preserve lettering. The model, original geometry and actual source photograph remain unchanged; display optics and aura remain explicitly curatorial.
+- Validation: four-way/dead-zone/diagonal/view-relative motion checks, module syntax and complete source/media inventory. Browser control-component QA at 390 px width confirmed horizontal/vertical drag input and zero movement after release; the browser still lacks WebGL, so GPU movement and crystal appearance require a capable device.
+
 # museum-v1.9.0 · Central floating crystal and diffuse light
 
 - Move the crystal from x = -2 m to the corridor centre, x = 0 m, at the Material chapter midpoint z = -46 m. Raise its base to 1.42 m and remove the lower circular plinth.

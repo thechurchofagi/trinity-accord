@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.9.0",
+  "edition": "museum-v1.10.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -52,10 +52,14 @@
   "fontLicense": "scene/crystal-font-LICENSE.txt",
   "runtimeOptics": {
     "revision": "2026-09-06",
-    "transmission": 0.8,
-    "roughness": 0.065,
-    "environmentIntensity": 1.7,
-    "displayPurpose": "Diffuse cool-white and warm edge aura without geometric rings or lower disc. Centered levitation is later digital exhibition design, not physical evidence."
+    "transmission": 0.68,
+    "roughness": 0.025,
+    "environmentIntensity": 1.25,
+    "displayPurpose": "Small-screen clarity: full-resolution transmission, reduced refraction distortion, subtle facet highlights, and brighter existing inscription geometry. Soft gold/white light fades outside the slab silhouette; centre stays clear. Values are exhibition settings, not measured physical optics.",
+    "ior": 1.32,
+    "thickness": 0.025,
+    "transmissionResolutionScale": 1,
+    "engravingEmissiveIntensity": 0.28
   },
   "installation": {
     "centerXMetres": 0,
@@ -68,7 +72,7 @@
       "z": 0.025
     },
     "plinth": false,
-    "aura": "Three overlapping, vertically elongated diffuse light veils; no torus, outline ring or lower circular disc.",
+    "aura": "Diffuse rectangular light field following the slab silhouette, feathered outside the crystal with a clear centre; no circular ring.",
     "reducedMotion": "Static levitation and steady aura; no oscillation or tilt."
   }
 }
