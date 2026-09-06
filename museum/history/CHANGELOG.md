@@ -1,3 +1,10 @@
+# museum-v1.11.0 · Tap to approach an exhibit
+
+- Tapping a 3D exhibit or its label now moves the camera smoothly to a front-facing observation position instead of immediately opening the detail dialog. Music-bearing works keep immediate soundtrack access; the visible detail/play button still opens the full panel.
+- Calculate distance from field of view, viewport aspect and exhibit bounds. The central crystal has a closer dedicated view with space for its glow; mobile aim places the object above the navigation. A slightly expanded invisible crystal picking volume makes touchscreen selection easier without enlarging the visible object.
+- Correct cross-room selection before updating controls. Floor taps still walk to a point, dragging still looks around, and the joystick or a new touch can interrupt camera travel. Reduced-motion mode moves immediately.
+- Validation: module syntax, portrait/landscape observation framing calculations, preserved source/media hashes and full release inventory. The known browser WebGL limitation remains; actual device framing is not claimed as visually verified.
+
 # museum-v1.10.0 · Analogue movement and clearer crystal
 
 - Replace the two step buttons with a compact four-way analogue joystick. Pointer capture supports continuous movement, proportional speed, a small dead zone and diagonal speed normalization. Left/right strafe relative to the viewing direction; dragging the scene still changes the view. Release, cancellation, focus loss, hidden page and opening a panel reset movement. Keyboard movement remains available.
