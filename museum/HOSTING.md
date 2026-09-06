@@ -64,7 +64,7 @@ Keep `/deployment.json` rooted at `/srv/trinity-museum/current`, and retain
 redirect the root back to `/museum/`. Legacy HTML normalizes its displayed
 URL before relative resources load, preserving query parameters and fragments.
 Using History API normalization also avoids loops in browsers that cached the
-former permanent redirect from `/` to `/museum/`.
+former redirect from `/` to `/museum/`.
 
 The private health virtual host and sync program keep their original directory
 layout. Changing the public mapping does not change automatic publication.
