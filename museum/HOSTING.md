@@ -44,8 +44,7 @@ Certificate renewal is handled separately by `certbot-renew.timer`.
 
 ## Address cutover
 
-Canonical address: `https://museum.trinityaccord.org/museum/` (the root
-redirects to `/museum/`). The A record `museum` → `47.76.142.75` is configured in the
+Canonical address: `https://museum.trinityaccord.org/` (served directly at the root). The A record `museum` → `47.76.142.75` is configured in the
 authoritative DNS zone for `trinityaccord.org`. Its nameservers are
 `a.share-dns.com` and `b.share-dns.net`; it is not the Alibaba `asi.org.cn` zone.
 
@@ -55,3 +54,20 @@ redirects while preserving the path, query and fragment. The same HTML runs
 on the canonical host without redirecting; there is no separate museum codebase.
 For any future move, verify HTTPS and resources before changing redirects.
 Do not move `www.trinityaccord.org` or the main site as part of this cutover.
+
+## Root-path serving
+
+The public HTTPS virtual host serves `/srv/trinity-museum/current/museum`
+as its document root, with `index index.html` and ordinary `try_files`.
+Keep `/deployment.json` rooted at `/srv/trinity-museum/current`, and retain
+`/museum/` as a compatibility alias to the same museum directory. Do not
+redirect the root back to `/museum/`. Legacy HTML normalizes its displayed
+URL before relative resources load, preserving query parameters and fragments.
+Using History API normalization also avoids loops in browsers that cached the
+former redirect from `/` to `/museum/`.
+
+The private health virtual host and sync program keep their original directory
+layout. Changing the public mapping does not change automatic publication.
+Back up the existing public virtual-host configuration, apply the root mapping,
+run `nginx -t`, reload, and verify HTTPS HTML, JS, media, old paths and receipts.
+Do not replace TLS or unrelated virtual-host configuration.
