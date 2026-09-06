@@ -4,8 +4,9 @@ import {fetchBytes} from './progressive-loading.js';
 // Later exhibition scenery; no astronomical measurement or live reception feed.
 export function addOpenSpace(scene, targets, sculptures){
  const skies=[];let skyStarted=false;
+ const starCanvas=document.createElement('canvas');starCanvas.width=1600;starCanvas.height=900;const starCtx=starCanvas.getContext('2d');const gradient=starCtx.createRadialGradient(800,430,20,800,430,900);gradient.addColorStop(0,'#172d54');gradient.addColorStop(.45,'#08152d');gradient.addColorStop(1,'#01040c');starCtx.fillStyle=gradient;starCtx.fillRect(0,0,1600,900);let seed=271828;const random=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);for(let i=0;i<1250;i++){const x=random()*1600,y=random()*900,r=random()<.94?random()*1.15:1.2+random()*1.8,a=.28+random()*.7;starCtx.fillStyle=`rgba(${190+Math.floor(random()*65)},${205+Math.floor(random()*50)},255,${a})`;starCtx.beginPath();starCtx.arc(x,y,r,0,Math.PI*2);starCtx.fill();}const fallbackMap=new THREE.CanvasTexture(starCanvas);fallbackMap.colorSpace=THREE.SRGBColorSpace;
  for(const [z,rotation] of [[-112,0],[48,Math.PI]]){
-  const sky=new THREE.Mesh(new THREE.PlaneGeometry(170,113),new THREE.MeshBasicMaterial({color:'#030814',fog:false,toneMapped:false}));
+  const sky=new THREE.Mesh(new THREE.PlaneGeometry(170,113),new THREE.MeshBasicMaterial({map:fallbackMap,color:'#ffffff',fog:false,toneMapped:false}));
   sky.position.set(0,15,z);sky.rotation.y=rotation;scene.add(sky);skies.push(sky);
  }
  const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});

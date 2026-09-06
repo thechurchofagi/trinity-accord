@@ -1,3 +1,9 @@
+# museum-v1.15.0 · Glass lyrics and open starfields
+
+- Replace the opaque lyric card with a persistent three-state glass layer: compact current/next line, full scrollable text, or a restorable edge tab. The visitor's choice persists between songs.
+- Improve exhibition cue estimation by excluding structural headings from sung-time allocation, reserving intro and tail time, and weighting each sung phrase independently. Authored timestamps remain preferable when available.
+- Load the Milky Way scenery at museum startup and render a deterministic procedural starfield immediately, so both open ends retain a star view while the detailed texture loads.
+
 # museum-v1.14.2 · Start on the sung text
 
 - Exclude preserved “Lyrics” document headings from the timed lyric rows, so highlighting begins with the song structure and sung phrases rather than source-record metadata.
