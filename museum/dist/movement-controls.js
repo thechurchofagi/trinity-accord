@@ -12,6 +12,22 @@ export function turnView(yaw,pitch,dx,dy,width){
  // A half-screen sweep turns 180 degrees; yaw has no artificial stop.
  return {yaw:yaw-dx*Math.PI*2/Math.max(width,240),pitch:Math.max(-1.15,Math.min(1.15,pitch-dy*.004))};
 }
+// Wheel input queues a short, speed-limited walk in the current viewing direction.
+// Listen only on the scene: scrolling details/lyrics and Ctrl+wheel zoom stay native.
+export function createWheelWalk(canvas,onStart=()=>{},win=window,doc=document){
+ let remaining=0;
+ const reset=()=>{remaining=0;};
+ canvas.addEventListener('wheel',e=>{
+  if(e.ctrlKey||!Number.isFinite(e.deltaY)||!e.deltaY||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+  e.preventDefault();onStart();
+  const pixels=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?win.innerHeight:1);
+  const delta=Math.max(-.8,Math.min(.8,-pixels*.004));
+  if(Math.sign(delta)!==Math.sign(remaining))remaining=0;
+  remaining=Math.max(-1.6,Math.min(1.6,remaining+delta));
+ },{passive:false});
+ win.addEventListener('blur',reset);doc.addEventListener('visibilitychange',()=>{if(doc.hidden)reset();});
+ return {reset,consume(maxDistance){const step=Math.sign(remaining)*Math.min(Math.abs(remaining),Math.max(0,maxDistance));remaining-=step;return step;}};
+}
 export function createJoystick(pad,onStart=()=>{}){
  const state={x:0,y:0,active:false};let pointer=null;
  const reset=()=>{state.x=state.y=0;state.active=false;const old=pointer;pointer=null;if(old!==null&&pad.hasPointerCapture(old))pad.releasePointerCapture(old);pad.classList.remove('active');pad.style.setProperty('--stick-x','0px');pad.style.setProperty('--stick-y','0px');};

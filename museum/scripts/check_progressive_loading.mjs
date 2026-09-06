@@ -18,7 +18,7 @@ const hall=createPreviewHall(layout);assert.equal(hall.group.children.length,6);
 const app=fs.readFileSync(new URL('dist/museum.js',root),'utf8');
 assert.ok(app.includes('roomData=initialData.rooms'));
 assert.ok(app.includes('size:26,width:512,height:384'));
-assert.ok(app.includes('size:46,width:1024,height:260'));
+assert.ok(app.includes('makeWallPlaque(group,wallLabelTexture(e))'));
 assert.ok(app.includes('[e.title,e.en,'));
 assert.ok(!app.includes("await fetch('./data/"));
 assert.ok(!app.includes('addCanonicalPrism'));assert.ok(!app.includes('avoidPrism'));

@@ -1,5 +1,5 @@
 // Quiet shoe contact: filtered friction and a short sole landing, no pitched thud.
-export const FOOTSTEP_GAIN=.13;
+export const FOOTSTEP_GAIN=.065;
 export function footstepSamples(rate=24000){
  const data=new Float32Array(Math.ceil(rate*.19));let seed=173,low=0,high=0;
  for(let i=0;i<data.length;i++){
