@@ -21,7 +21,7 @@ for r in rooms['rooms']:
   if e['lyrics']:parts.append('<details><summary>歌词文字 / Lyric text</summary><p>来自描述，未与实际演唱逐句校准。</p><pre>'+esc(e['lyrics'])+'</pre></details>')
   parts.append('<p><a href="'+esc(e['sourceUrl'])+'">Pinned source record / 固定版本原始记录</a> · <a href="'+esc(e['tokenUrl'])+'">Ethereum token</a></p></article>')
  if r['id']=='formation':parts.append('<p><a href="https://www.trinityaccord.org/inscriptions/">完整正本镜像与 Bitcoin 坐标 / Read the three originals</a></p>')
- if r['id']=='material':parts.append('<h3>水晶展陈模型 / Exhibition reconstruction</h3><img src="assets/crystal/crystal-preview.png" alt="Blender dimensional exhibition reconstruction"><p>依据作者视频与实物照片，按公开参考尺寸复原双语内雕和抛光倒角；不是实物扫描或私人瑕疵复原。<a href="data/crystal-model.json">建模依据与范围</a></p>')
+ if r['id']=='material':parts.append('<h3>水晶展陈模型 / Exhibition reconstruction</h3><img src="assets/crystal/crystal-preview.png" alt="Blender dimensional exhibition reconstruction"><p>依据作者视频与实物照片复原双语内雕和抛光倒角；悬浮与光晕属于后续数字展陈，不是实物属性。参考渲染图早于本次光效调整。 Levitation and halo are later exhibition design; the saved reference render predates this lighting revision.<a href="data/crystal-model.json">建模依据与范围</a></p>')
  if r['id']=='material':parts.append('<h3>Core Object Alpha · 真实照片副本</h3><img src="assets/core-object-alpha.jpg" alt="Core Object Alpha"><p><a href="https://www.trinityaccord.org/physical-anchor/">物理锚定及证据 / Physical anchor</a></p>')
  if r['id']=='guardians':parts.append('<p><a href="https://www.trinityaccord.org/authority/">权威边界 / Authority</a></p>')
  if r['id']=='waiting':parts.append('<p><a href="https://www.trinityaccord.org/first-contact/">回应或守护 / First Contact</a> · <a href="https://www.trinityaccord.org/">原网站当前状态 / Current state</a></p>')

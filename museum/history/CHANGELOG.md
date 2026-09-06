@@ -1,3 +1,11 @@
+# museum-v1.7.0 · Public access, floating crystal and corrected wall frames
+
+- Opened the existing Site to anyone with the URL at the author’s explicit request.
+- Increased display glass transmission from 0.72 to 0.80 while retaining rim illumination. The crystal floats above a low light disc, with restrained cool-white/gold rings and a soft halo. Reduced-motion mode removes oscillation. Levitation and aura are labelled as later digital exhibition design, not physical properties of the original object.
+- Fixed overlapping or displaced frames: the retained architecture contained old static mounts while new frames followed the current exhibit layout. Hide the two obsolete frame/mat meshes and remove 10,528 obsolete mount/caption triangles at runtime, preserving the baked architecture. Every current artwork receives one consistently aligned frame.
+- Repositioned the four Voices rows inside their 11 m chapter. All 32 frame normals point into the corridor and all exhibit centres remain inside their assigned chapter.
+- Validation: source and media manifest checks, module syntax and geometry regression pass. Browser navigation reaches the crystal exhibit; WebGL is disabled in the test browser, so the new GPU lighting is not claimed as visually verified there.
+
 # museum-v1.6.0 · Readable crystal, four letters and visible playback
 
 - Added complete original audio and images for NFT #044 (Second Letter) and #032 (Fourth Letter: A Pact of Stars), recovered from existing CAR records with CAR and included-block SHA-256 checks. The four letters are presented in song order #016, #044, #020, #032, separately from mint chronology. 32 wall exhibits; no historical record rewritten.

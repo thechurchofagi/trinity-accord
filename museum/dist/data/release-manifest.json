@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.6.0",
+  "edition": "museum-v1.7.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 47044,
-      "sha256": "79f604e0e899772737d856e3536bff2b1b4185c3ac47f3da576db6b44a87ad0d"
+      "bytes": 47192,
+      "sha256": "672a6d0c91f0fb4c1af9e41d40db4f85ffedbe13da6886d45d6c90bca3aea603"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -292,8 +292,8 @@
     },
     {
       "path": "crystal-viewer.js",
-      "bytes": 5497,
-      "sha256": "f7435831c04456b49406a320e8db98fc112e1cac99fe3711b404b608fe266632"
+      "bytes": 7459,
+      "sha256": "fb6a6df6d90b04137ec663ddc497e9db575c7704cc488218b516f261c629c835"
     },
     {
       "path": "data/agi-four-letters.json",
@@ -302,8 +302,8 @@
     },
     {
       "path": "data/crystal-model.json",
-      "bytes": 2631,
-      "sha256": "a6498d9f8560909a6c0a7fab46b031c08ba6a3afe2d20fe999e21ca3d837e23a"
+      "bytes": 2834,
+      "sha256": "96bb86c1b871118b465aded801d73cb0c27dcef2bb382db3ce5a47d16e082240"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -317,8 +317,8 @@
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 5835,
-      "sha256": "e932cce96dfa55973e56c8df99e007f3f8547a59b1917be721baddc66fe3c2ab"
+      "bytes": 5807,
+      "sha256": "9e95062bae49a06b2a4d45d29b2f6a5def7457af2603ab7ad1d2db12470ce1e1"
     },
     {
       "path": "data/narration.json",
@@ -413,12 +413,12 @@
     {
       "path": "data/rooms.json",
       "bytes": 8730,
-      "sha256": "ff1d3d414af8c35c15539688f66f9604911c4195c55530e8bad28b9525b3f7d8"
+      "sha256": "688ee0410cf1e97a91e2184fdfd270b0031eb31920695ba50f849fb6b6ad2d1e"
     },
     {
       "path": "data/sources.json",
       "bytes": 84610,
-      "sha256": "871b7fa3439d581441d255c94b0f4e18aaf787752eca5de3455993b46cdde096"
+      "sha256": "c4479eec04a949a7ceebf64560c3a783dbfed4a5afb9a7c8640d41da923cfa67"
     },
     {
       "path": "data/space-design.json",
@@ -433,7 +433,7 @@
     {
       "path": "index.html",
       "bytes": 3946,
-      "sha256": "71ba9ade531dfd651756633ef4fa6b0d79fde6e8c41ec2be5e896904d086b145"
+      "sha256": "a415e94df77b554a907f1ca826fd8305be1643b244873c61c2e0728cbc614eb8"
     },
     {
       "path": "museum.css",
@@ -442,8 +442,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 47333,
-      "sha256": "fa68e74be3001576dbd5a7a02534c26a7e3216611835e118ddd70cf58ed2b9d8"
+      "bytes": 47669,
+      "sha256": "8481c7c613a4e3cf600756c1d1e1c959c2be0b6315ad1991f6d59876b85b8582"
     },
     {
       "path": "open-space.js",
@@ -474,6 +474,11 @@
       "path": "vendor/three.module.js",
       "bytes": 603113,
       "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+    },
+    {
+      "path": "wall-presentation.js",
+      "bytes": 2015,
+      "sha256": "1fe53f834fce45eeec228c2d834ac8ba90afdda59ffcca6f31a227689c436a1e"
     }
   ]
 }
