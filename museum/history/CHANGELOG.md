@@ -1,3 +1,7 @@
+# museum-v1.15.1 · Tail-cue correction
+
+- Keep terminal instrumental and outro headings at the recording tail when no later sung phrase exists, rather than assigning them to the intro window.
+
 # museum-v1.15.0 · Glass lyrics and open starfields
 
 - Replace the opaque lyric card with a persistent three-state glass layer: compact current/next line, full scrollable text, or a restorable edge tab. The visitor's choice persists between songs.

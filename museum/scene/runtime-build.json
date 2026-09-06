@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.15.0",
+  "edition": "museum-v1.15.1",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -16,27 +16,27 @@
     {
       "path": "dist/data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "4d2e043da159f7838364c42de78924721f1f0ce3f4434148363b889679e66802"
+      "sha256": "c30d8e91b8e49c8512a0851dc14298c855cd409cc0b9cfe7072ad1cbcf0633fa"
     },
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "034b492b1d43f607fae93dbbe2ded2f0e3bb413ce9fcddf9da50579fd143a964"
+      "sha256": "6df8bfc39d3fe49c12ba31621cbe6819f9726b4b02a892caac11d85ede8ada65"
     },
     {
       "path": "dist/data/rooms.json",
       "bytes": 8839,
-      "sha256": "56a7e71cf182edc8910ae7bf26d6a3b31cc404e61cf7bb1ca1a656a7e5508a4f"
+      "sha256": "36944dbb11d3b40dac5b10241f50bd619135b379de70741d6f49c0741ac4a72b"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 126331,
-      "sha256": "1cbd359e4b4465447052b5d7a0bd05531e0bfb7aca8780bf77d7c74dea17e3b1"
+      "sha256": "34b80194ddbf7dcf0c0229e3e5cdfe8835f63892b4cf6b94e8cf91e5409ea142"
     },
     {
       "path": "dist/edition-data.js",
       "bytes": 131349,
-      "sha256": "6cd6d26db071c43d526ab8a871cafb2c64bb23cf16373c6fa65b81ca8aace58b"
+      "sha256": "c48a2d0c0bbb59c98c2bead458217d5aa39327e7f28a554b2f1d182b428ebc0f"
     },
     {
       "path": "dist/movement-controls.js",
@@ -45,8 +45,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 59729,
-      "sha256": "6e703173e1cc662aa3e69b5f976fbe591acab4051f8c3456055928f4a1b91364"
+      "bytes": 59738,
+      "sha256": "8a9aec455c0dc5051ad7be0fe96e77a56bb6359e425359b9dcdc6f52096a51d8"
     },
     {
       "path": "dist/observation-view.js",
@@ -97,6 +97,6 @@
   "output": {
     "path": "dist/museum.bundle.js",
     "bytes": 783318,
-    "sha256": "7b5d8b31a30e4d9d4b0b8e69cc25c14992dd8ba92f23894d24cde81d72208419"
+    "sha256": "05d062e62297f96f274e048402026d43b1be9f27ac5cc78b27847a704e86bd27"
   }
 }
