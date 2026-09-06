@@ -1,3 +1,9 @@
+# museum-v1.21.2 · Short museum address
+
+- Use https://museum.trinityaccord.org/ as the public entry and update the main homepage link. Keep GitHub as the sole maintained source.
+- Preserve archive pages, language/query options and room fragments when opening older entries. On the canonical host, normalize the legacy prefix with history.replaceState before relative assets load; this avoids a loop with previously cached root-to-/museum/ redirects.
+- The host root mapping must be applied separately; keep legacy asset paths and the deployment receipt available. Exhibition content and interaction remain unchanged.
+
 # museum-v1.21.1 · Unobstructed artwork walls
 
 - Remove the 12 legacy full-height chapter uprights from the retained, batched titanium mesh. Their positions belonged to the older route and crossed current images and plaques. Identify complete connected pieces so no cut ends remain; preserve other metal fittings.

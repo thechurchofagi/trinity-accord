@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="canonical" href="https://museum.trinityaccord.org/museum/">
-  <script>if (["www.trinityaccord.org", "trinityaccord.org"].includes(location.hostname)) location.replace("https://museum.trinityaccord.org" + location.pathname + location.search + location.hash);</script>
+  <link rel="canonical" href="https://museum.trinityaccord.org/">
+  <script>(() => { const path = location.pathname.replace(/^\/museum(?:\/|$)/, "/"); const suffix = path + location.search + location.hash; if (["www.trinityaccord.org", "trinityaccord.org"].includes(location.hostname)) location.replace("https://museum.trinityaccord.org" + suffix); else if (location.hostname === "museum.trinityaccord.org" && path !== location.pathname) history.replaceState(null, "", suffix); })();</script>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080e18">
   <meta name="description" content="Explore the Trinity Accord: original NFT artwork and music, the formation of the Accord, the crystal and an invitation to future readers.">
@@ -45,12 +45,12 @@
       <div id="exhibit-strip" aria-label="Select a work"></div>
       <div class="controls"><button id="previous" aria-label="Previous room">←</button><button id="tour"><span>▷</span> <span id="tour-text">Guided tour</span></button><button id="room-works">Room works <span id="work-count">2</span></button><button id="next" aria-label="Next room">→</button></div>
       <nav id="rooms" aria-label="Select a room"></nav>
-      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.21.1</span></div>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.21.2</span></div>
     </section>
   </main>
   <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="Close">×</button></div><div id="panel-content"></div></dialog>
   <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
   <div id="toast" role="status" hidden></div>
   <noscript><section class="no-script">JavaScript is required for the 3D museum. <a href="./archive.html">Read the exhibition archive</a> · <a href="https://www.trinityaccord.org/">Visit the source site</a></section></noscript>
-  <script defer src="./boot-loader.js?v=1.21.1.eb07004b2307"></script>
+  <script defer src="./boot-loader.js?v=1.21.2.9e0dfdceb406"></script>
 </body></html>
