@@ -45,6 +45,15 @@ Original artworks, lyrics, photos and music retain their original rights and att
 
 ## Deployment/export
 
+The public GitHub Pages entry is https://www.trinityaccord.org/museum/.
+The main site's Jekyll build excludes the museum source tree. After the build,
+`deploy-pages.yml` copies the complete `museum/dist/` export to `_site/museum/`
+and verifies its file inventory, sizes and SHA-256 digests. This preserves JSON,
+Markdown source copies, modules and local media without Jekyll filtering or
+conversion. The original root/www custom domain remains unchanged. The separately
+hosted Sites copy and its custom hostname are independent deployments; publishing
+this path does not change their DNS or access policies.
+
 The Site working directory is an export of `museum/`. Changes must be copied back into the same repository path through a PR and tied to the corresponding GitHub commit. Sites has its own deployment commit; record the mapping in release/deployment notes rather than pretending it is the same Git commit. Never place source credentials or runtime secrets in either repository.
 
 The first edition is privately hosted for owner review. Public access is a separate audience setting. Existing root website pages and evidence workflows are not rewritten by this directory.

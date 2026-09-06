@@ -14,6 +14,8 @@ include:
 # The Downloads pages are public verification material. deploy-pages.yml preserves
 # Jekyll's rendered Downloads pages before overlaying exact downloadable artifacts.
 exclude:
+  # deploy-pages.yml publishes only museum/dist, intact, at /museum/.
+  - museum/
   - audit/
   - archive/
   - node_modules/
