@@ -1,3 +1,8 @@
+# museum-v1.15.2 · Stable transparent lyric glass
+
+- Reduce the lyric glass fill, blur, and shadow so gallery text and artwork remain visibly present behind it.
+- Lock compact and full lyric-panel dimensions on desktop and mobile; phrase wrapping now stays inside a fixed viewport instead of resizing the entire panel.
+
 # museum-v1.15.1 · Tail-cue correction
 
 - Keep terminal instrumental and outro headings at the recording tail when no later sung phrase exists, rather than assigning them to the intro window.

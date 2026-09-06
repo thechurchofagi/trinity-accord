@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.15.1",
+  "edition": "museum-v1.15.2",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -16,27 +16,27 @@
     {
       "path": "dist/data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "c30d8e91b8e49c8512a0851dc14298c855cd409cc0b9cfe7072ad1cbcf0633fa"
+      "sha256": "3460b7415d622919390a5a8ab0b7a83dff589d7d5326d3f9f1fd11ce00e84961"
     },
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "6df8bfc39d3fe49c12ba31621cbe6819f9726b4b02a892caac11d85ede8ada65"
+      "sha256": "1f8f9dfbc2bb7ad2f70f9a167fa3bafed1611af367bad84d8ad2def58ca43138"
     },
     {
       "path": "dist/data/rooms.json",
       "bytes": 8839,
-      "sha256": "36944dbb11d3b40dac5b10241f50bd619135b379de70741d6f49c0741ac4a72b"
+      "sha256": "eda9ce4fb5e213020232ed07542563ee62054c3310cdac1cdaa87b3ff1a4f80f"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 126331,
-      "sha256": "34b80194ddbf7dcf0c0229e3e5cdfe8835f63892b4cf6b94e8cf91e5409ea142"
+      "sha256": "85e8555d4340fbb6f11b1d4b6c8b2d8d5dd8f0ce0a885d38d0b45f62c6f715f7"
     },
     {
       "path": "dist/edition-data.js",
       "bytes": 131349,
-      "sha256": "c48a2d0c0bbb59c98c2bead458217d5aa39327e7f28a554b2f1d182b428ebc0f"
+      "sha256": "731ebb2b456de7f002120906d95318d72b94b3b7cdb8b1df0f4b1b81a5c443c7"
     },
     {
       "path": "dist/movement-controls.js",
@@ -46,7 +46,7 @@
     {
       "path": "dist/museum.js",
       "bytes": 59738,
-      "sha256": "8a9aec455c0dc5051ad7be0fe96e77a56bb6359e425359b9dcdc6f52096a51d8"
+      "sha256": "d1924cce4a9710a0888f34462141651b72ed6a40ad867e8174ced536a2779058"
     },
     {
       "path": "dist/observation-view.js",
@@ -97,6 +97,6 @@
   "output": {
     "path": "dist/museum.bundle.js",
     "bytes": 783318,
-    "sha256": "05d062e62297f96f274e048402026d43b1be9f27ac5cc78b27847a704e86bd27"
+    "sha256": "4c4456f30715f984b2994f96db86de2d13f45532951538cd057c6138d1179b5a"
   }
 }
