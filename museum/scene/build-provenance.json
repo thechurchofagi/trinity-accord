@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.3.0",
+  "edition": "museum-v1.4.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -14,8 +14,8 @@
   "files": [
     {
       "path": "scene/build_gallery.py",
-      "bytes": 12589,
-      "sha256": "79e9e4b645f28c8fb445ab4f02dd7261bf000e32577fba12c7055198715c6527"
+      "bytes": 12402,
+      "sha256": "6747c7f411c2c328280f22468b51d75b06aeaa7bf5db8fdae3aa6f0b2bb9ea06"
     },
     {
       "path": "scene/denoise_lightmap.py",
@@ -34,13 +34,13 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5277,
-      "sha256": "ccbb2e0c7cd8e68de93cd4d62de36268ded52efc6403aa9dbdd0bb07d0bdec3f"
+      "bytes": 5278,
+      "sha256": "8fe13a04befec1154f89e63d9ac06038270bdaeec5557da03c55cb179e618290"
     },
     {
       "path": "scene/memory-gallery.blend",
-      "bytes": 314796,
-      "sha256": "5a5d51df6eba0a84f2709cb1aac5971196c543f14edbb9f0543cce475aa9d481"
+      "bytes": 291870,
+      "sha256": "9fd3fc282e36bf6c4b83805f778709380c19f3df893507a96f488d8c66391271"
     },
     {
       "path": "scene/export-check.png",
@@ -49,8 +49,8 @@
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 6657844,
-      "sha256": "3d17673f825870d00c141711f7b345953489762ee66ea2053ca332a87036afdc"
+      "bytes": 6491240,
+      "sha256": "51902c47c95e1104f9fa7dac3c9c6d511bb2f9eb9bde706124628d83ecb8a473"
     },
     {
       "path": "dist/assets/gallery/gallery-light.jpg",
@@ -61,6 +61,28 @@
       "path": "dist/assets/gallery/entrance-preview.png",
       "bytes": 2823246,
       "sha256": "1c521eeea60d768c0879075086ba1204b7901e563230254095a7ca01b7f777f5"
+    },
+    {
+      "path": "scene/open_gallery_ends.py",
+      "bytes": 1505,
+      "sha256": "c4cecb0837e28cbf3b338b940c6da95aaa6feed740b7d6301801b0f7a597785f"
+    },
+    {
+      "path": "dist/open-space.js",
+      "bytes": 2420,
+      "sha256": "3bdbe301db552998adcba1e5871c1e7ebde409d09bebcc6dda0cef2df6fe32c9"
+    },
+    {
+      "path": "dist/data/space-design.json",
+      "bytes": 473,
+      "sha256": "adffde89d9eb9dbe0be0c30170787c65940f8fea5bd4cec74566f264a2d667b7"
+    },
+    {
+      "path": "dist/assets/space/milky-way.png",
+      "bytes": 3027264,
+      "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
     }
-  ]
+  ],
+  "revisionMethod": "Remove end walls from retained baked geometry; preserve existing atlas. Add star scenery and waiting installation in open-space.js. No full-gallery rebake.",
+  "previewScope": "entrance-preview.png and export-check.png retain v1.3 architectural reference renders; the live v1.4 end openings and star installation differ."
 }

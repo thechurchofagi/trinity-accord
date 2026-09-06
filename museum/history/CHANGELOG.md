@@ -1,3 +1,10 @@
+# museum-v1.4.0 · Video-guided crystal, open space and continuous movement
+
+- Rebuilt the crystal from the author’s video and existing photograph; bilingual internal lettering, planar bevels and no attached decorative base. Not a scan.
+- Fixed walking buttons to move from the current position in the current direction without recentering or resetting the view.
+- Opened both ends to later AI-generated Milky Way scenery, replaced the destination bar with a breathing ring and participation links, and added a matching non-WebGL waiting view.
+- Original video remains private; observed features and a digest are retained. Original inscriptions and previous edition archives remain unchanged.
+
 # Exhibition history
 
 ## museum-v1.3.0 — 2026-09-06

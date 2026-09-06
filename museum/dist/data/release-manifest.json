@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.3.0",
+  "edition": "museum-v1.4.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 31943,
-      "sha256": "f91083f182e1a5ffb678e1833582cb30b08513108be721d2393afd020a454f4c"
+      "bytes": 31979,
+      "sha256": "d69be5ed81d7a2cb6fdaecbab54a1b24012bb7e057ad5edf78e9610944346d20"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -17,13 +17,13 @@
     },
     {
       "path": "assets/crystal/core-object-alpha.glb",
-      "bytes": 7821172,
-      "sha256": "e50f8a2d5dcddc1e7d23a816f5df02bd1f80c2428344fe37e8a37e87542da467"
+      "bytes": 1468340,
+      "sha256": "95db8341fdd9df0f890c036345031e73590ac387cc3333ca06e39a065480ac44"
     },
     {
       "path": "assets/crystal/crystal-preview.png",
-      "bytes": 2540065,
-      "sha256": "0b6a5c79e7d2cdbfd39609253597bb5ba2112ccaee2f56aafa52720ac878e9d1"
+      "bytes": 2724948,
+      "sha256": "64a247f11bafcdb06435341e22250b26f3ed5d53561396564c1deea86e156105"
     },
     {
       "path": "assets/eth-001.mp3",
@@ -132,8 +132,8 @@
     },
     {
       "path": "assets/gallery/memory-gallery.glb",
-      "bytes": 6657844,
-      "sha256": "3d17673f825870d00c141711f7b345953489762ee66ea2053ca332a87036afdc"
+      "bytes": 6491240,
+      "sha256": "51902c47c95e1104f9fa7dac3c9c6d511bb2f9eb9bde706124628d83ecb8a473"
     },
     {
       "path": "assets/guide-formation.mp3",
@@ -166,19 +166,29 @@
       "sha256": "28e177f66eb687945988553dd3a4dbb6bc2be40d0b3d93830c15759196dc1473"
     },
     {
+      "path": "assets/space/milky-way.png",
+      "bytes": 3027264,
+      "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
+    },
+    {
       "path": "crystal-viewer.js",
-      "bytes": 4784,
-      "sha256": "9460dda270451e067be7e5a1486952bf6f09d9bed1eaeb44949f86d93ffbbdfc"
+      "bytes": 4922,
+      "sha256": "35b3560cf9db5e011cda69fa35c5119362e089f599a70169f14ad8c5d7e3d25d"
     },
     {
       "path": "data/crystal-model.json",
-      "bytes": 1650,
-      "sha256": "fd630d10606b993c8ac2c27808d6a108232a682f39d2d4ec7ed78271bf390872"
+      "bytes": 2278,
+      "sha256": "d9145416469982752a3564d4b3427344b466784fabae9babf34d807a0bcef14b"
+    },
+    {
+      "path": "data/crystal-video-reference.json",
+      "bytes": 1025,
+      "sha256": "3929663c1a527954c137a901e70bb7f0ae3c774c81d81c6d2f66b66401593fb4"
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 5277,
-      "sha256": "ccbb2e0c7cd8e68de93cd4d62de36268ded52efc6403aa9dbdd0bb07d0bdec3f"
+      "bytes": 5278,
+      "sha256": "8fe13a04befec1154f89e63d9ac06038270bdaeec5557da03c55cb179e618290"
     },
     {
       "path": "data/narration.json",
@@ -247,13 +257,18 @@
     },
     {
       "path": "data/rooms.json",
-      "bytes": 8225,
-      "sha256": "21ba07f5a45288a1f010acb9e2a1bc5182268517184d5cb448303fd06485812c"
+      "bytes": 8226,
+      "sha256": "7e9e40cb1556f079057aa75d8f62c8c5f11fe9ae4a3002b3e9934637e7ca3d58"
     },
     {
       "path": "data/sources.json",
-      "bytes": 56182,
-      "sha256": "68a445ae57f7ec946d3e592d7ee7595249b7ea1f9bd4d9cecfb0989b2995e018"
+      "bytes": 56183,
+      "sha256": "3cbc952c4d8aea2eaeff5e006a24231c7f6716cae7b1b83a77a4023ef1102874"
+    },
+    {
+      "path": "data/space-design.json",
+      "bytes": 473,
+      "sha256": "adffde89d9eb9dbe0be0c30170787c65940f8fea5bd4cec74566f264a2d667b7"
     },
     {
       "path": "index.html",
@@ -262,13 +277,18 @@
     },
     {
       "path": "museum.css",
-      "bytes": 19486,
-      "sha256": "02566aeba9e71c8c30864ab53bce272364604b2dc5ef6cb6b5fe737e0d538204"
+      "bytes": 20078,
+      "sha256": "df1511839441bd6fafe4a74f47aadd85b02f73258cdd6625eeb2246f69c69213"
     },
     {
       "path": "museum.js",
-      "bytes": 37681,
-      "sha256": "42edb037feed066a38d0902a5c83c97b1251507d17aef58266c42c1cc75432e3"
+      "bytes": 38266,
+      "sha256": "e376a14e1555a34cb6f7e3ea7532b50666b933f34d121687b00ef17456603732"
+    },
+    {
+      "path": "open-space.js",
+      "bytes": 2420,
+      "sha256": "3bdbe301db552998adcba1e5871c1e7ebde409d09bebcc6dda0cef2df6fe32c9"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",

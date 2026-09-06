@@ -1,6 +1,13 @@
 import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 
+export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#fbfdff',roughness:.025,transmission:1,thickness:.04,ior:1.52,metalness:0,envMapIntensity:.9,clearcoat:1,clearcoatRoughness:.025});}
+export function crystalEnvironment(renderer){
+ const studio=new THREE.Scene();studio.background=new THREE.Color('#182433');
+ for(const [x,y,z,w,h,c] of [[-.6,.3,.2,.15,1,'#e0eeff'],[.6,.3,-.2,.045,1,'#fff5e7'],[0,1,0,1,1,'#ffffff']]){const b=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide}));b.position.set(x,y,z);b.lookAt(0,.15,0);studio.add(b);}
+ const pmrem=new THREE.PMREMGenerator(renderer),env=pmrem.fromScene(studio,.025);pmrem.dispose();studio.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});return env;
+}
+
 // One disposable inspection renderer. The corridor pauses while its dialog is open.
 export async function inspectCrystal(host, english=false){
  let renderer,frame,disposed=false,observer,releaseResources=()=>{};
@@ -11,13 +18,10 @@ export async function inspectCrystal(host, english=false){
   const scene=new THREE.Scene();scene.background=new THREE.Color('#06111f');const camera=new THREE.PerspectiveCamera(34,1,.005,10);
   scene.add(new THREE.HemisphereLight('#e6f4ff','#365d80',2));
   for(const [x,y,z,color,power] of [[-.4,.5,.5,'#abdfff',4],[.4,.3,-.2,'#ffc999',3],[0,.7,0,'#ffffff',2]]){const l=new THREE.DirectionalLight(color,power);l.position.set(x,y,z);scene.add(l);}
-  // Reflection environment is a deliberately designed studio, not a photograph of the object.
-  const studio=new THREE.Scene();studio.background=new THREE.Color('#31455c');
-  for(const [x,y,z,w,h,c] of [[-.6,.3,.2,.16,1,'#c2e9ff'],[.6,.3,-.2,.06,1,'#fff0d1'],[0,1,0,1,1,'#ffffff']]){const b=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide}));b.position.set(x,y,z);b.lookAt(0,.15,0);studio.add(b);}
-  const pmrem=new THREE.PMREMGenerator(renderer),env=pmrem.fromScene(studio,.025);scene.environment=env.texture;pmrem.dispose();
+  const env=crystalEnvironment(renderer);scene.environment=env.texture;
   const model=await new GLTFLoader().loadAsync('./assets/crystal/core-object-alpha.glb');if(disposed||!host.isConnected){env.dispose();return clean;}scene.add(model.scene);
-  model.scene.traverse(o=>{if(o.isMesh&&o.name.startsWith('Crystal_')){o.material=new THREE.MeshPhysicalMaterial({color:'#edfaff',roughness:.045,transmission:1,thickness:.04,ior:1.46,metalness:0,envMapIntensity:1.25,clearcoat:1,clearcoatRoughness:.06});}});
-  let azimuth=.36,elevation=.13,distance=.77,down=null;const target=new THREE.Vector3(0,.165,0),canvas=renderer.domElement;
+  model.scene.traverse(o=>{if(o.isMesh&&o.name.startsWith('Crystal_')){o.material=crystalGlass();}});
+  let azimuth=.31,elevation=.05,distance=.79,down=null;const target=new THREE.Vector3(0,.165,0),canvas=renderer.domElement;
   host.querySelector('.crystal-status').remove();host.append(canvas);host.querySelector('img').hidden=true;canvas.setAttribute('aria-label',english?'Drag to rotate crystal':'拖动旋转水晶');canvas.style.touchAction='none';
   const toolbar=document.createElement('div');toolbar.className='crystal-toolbar';toolbar.innerHTML=`<button data-c="minus" aria-label="${english?'Zoom out':'缩小'}">−</button><span>${english?'DRAG TO ROTATE':'拖动旋转 · 查看内雕'}</span><button data-c="plus" aria-label="${english?'Zoom in':'放大'}">＋</button><button data-c="reset">${english?'Front':'正面'}</button>`;host.append(toolbar);
   toolbar.querySelector('[data-c=plus]').onclick=()=>distance=Math.max(.32,distance-.1);toolbar.querySelector('[data-c=minus]').onclick=()=>distance=Math.min(1.25,distance+.1);toolbar.querySelector('[data-c=reset]').onclick=()=>{azimuth=0;elevation=0;distance=.72;};

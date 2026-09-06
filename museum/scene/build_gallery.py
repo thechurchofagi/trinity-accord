@@ -34,9 +34,6 @@ def area(name,loc,target,power,size=3,color=(.85,.92,1),size_y=None):
  data=bpy.data.lights.new(name,'AREA');data.energy=power;data.shape='RECTANGLE';data.size=size;data.size_y=size_y or size;data.color=color;o=bpy.data.objects.new(name,data);scene.collection.objects.link(o);o.location=loc;aim(o,target);return o
 # Human-scale continuous passage: 8.8 m clear width, 4.8 m ceiling, 52 m length.
 cube('Continuous stone floor',(0,C,-.13),(9.2,L,.25),floorMat,.035)
-cube('Entrance back wall',(0,-3,2.4),(9.2,.24,4.8),black)
-cube('End wall',(0,END,2.4),(9.2,.24,4.8),ivory)
-cube('Luminous destination',(0,END-.15,2.55),(1.5,.025,3.7),cyan,.08,emissions)
 for side in [-1,1]:
  cube('Wall backing',(side*4.55,C,2.4),(.25,L,4.8),black)
  cube('Low recessed skirting',(side*4.43,C,.18),(.1,L,.32),metal,.015)

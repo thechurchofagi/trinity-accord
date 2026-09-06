@@ -59,8 +59,14 @@ Technical references: Andrew Woan, [Building a Fully-Featured 3D World in the Br
 
 ## Material inspection and formation expansion (v1.3)
 
-The corridor is now 70 m long with 28 exhibits. Large surfaces and small architectural fittings use separate rendering strategies. `scene/build_crystal.py` creates the dimensional exhibition reconstruction, its packed editable `.blend`, GLB and reference image; `dist/data/crystal-model.json` documents scope and hashes. `dist/crystal-viewer.js` provides drag rotation, zoom and front view, with a rendered fallback when WebGL is unavailable. The model contains newly arranged English vector text, not an exact reproduction of the physical bilingual layout or identity flaws.
+The corridor is now 70 m long with 28 exhibits. Large surfaces and small architectural fittings use separate rendering strategies. `scene/build_crystal.py` creates the dimensional exhibition reconstruction, its packed editable `.blend`, GLB and reference image; `dist/data/crystal-model.json` documents scope and hashes. `dist/crystal-viewer.js` provides drag rotation, zoom and front view, with a rendered fallback when WebGL is unavailable. The v1.3 model contained newly arranged English vector text; v1.4 replaces it with the video-guided bilingual reconstruction described below.
 
 Additional exact Markdown source copies live in `dist/data/records/`. Each has its own pinned source commit; older records retain their earlier pin. Seven new image copies and two additional full music tracks are bound to their recovered CAR hashes. Two CAR entries named `animation.mpga` decode as still images; the museum displays their actual media type and records the index mismatch.
 
 For the preserved v1.3 batched export, run `python scene/optimize_gallery.py` after building. This joins static fittings by material without rebaking. Emissive destination lights retain their separate names.
+
+## Video-guided crystal and open ends — v1.4
+
+The crystal now follows the supplied video and the physical-anchor photograph, with bilingual vector lettering inside a clear bevelled slab. The private reference video is not republished; its digest and inspection notes are in `dist/data/crystal-video-reference.json`. Editable layout, subset font with OFL license, Blender source and render are retained. Run `python scene/build_crystal.py` in the documented bpy environment.
+
+The two corridor end walls and the former destination bar are removed without rebaking the existing atlas (`scene/open_gallery_ends.py`). `dist/open-space.js` adds the later star-field scenery and waiting ring. Movement buttons preserve the current position and heading, including when an animation is interrupted.

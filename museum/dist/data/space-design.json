@@ -1,0 +1,8 @@
+{
+  "edition": "museum-v1.4.0",
+  "role": "Later exhibition scenery, not astronomical evidence or live telemetry",
+  "image": "assets/space/milky-way.png",
+  "method": "OpenAI image generation",
+  "prompt": "Photographic deep-space Milky Way panorama; midnight blue, fine stars, diagonal dust band, no Earth horizon, planets or text.",
+  "installation": "Open ends; a breathing circular light facing the star field. The ring links to the existing First Contact exhibit."
+}

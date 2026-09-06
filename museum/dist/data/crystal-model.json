@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.3.0",
+  "edition": "museum-v1.4.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -9,13 +9,13 @@
   "dimensionSource": "https://www.trinityaccord.org/archive_legacy_index_2025_09/",
   "photograph": "assets/core-object-alpha.jpg",
   "textSource": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/bitcoin-inscription-mirrors/raw/97631551.txt",
-  "scope": "Approximate dimensional exhibition reconstruction. English protocol laid out anew inside the slab. Physical object has bilingual engraving; this model does not claim a facsimile of that layout. No private flaws reconstructed. Plinth and lighting are exhibition design.",
+  "scope": "Video-guided exhibition reconstruction: 246 x 353 x 40 mm clear slab, approximately 6 mm planar bevel, bilingual internal lettering, left-aligned third axiom and lower-right colophon. Text and placement cross-checked against the existing physical-anchor photograph. Typography and optical response remain approximations, not a photogrammetric scan or exact facsimile. No identity flaws reconstructed. Studio lighting and museum plinth are exhibition design.",
   "application": "Blender 4.5.3 LTS",
   "files": [
     {
       "path": "scene/build_crystal.py",
-      "bytes": 6148,
-      "sha256": "982b2db26ff7ae82d55fca88b1be8593ce8a1c6cc44e7cdd5ff8591ad6998ca2"
+      "bytes": 6562,
+      "sha256": "c954472ea4c18bdf93b73b55967716969fe1f60a8e681e136c0c0ade0017d2fb"
     },
     {
       "path": "scene/protocol-97631551.txt",
@@ -23,19 +23,31 @@
       "sha256": "4f6cb2a32df7a4033ed639c02943d8c860a414d320fb2799c1710c75e9a589e9"
     },
     {
+      "path": "scene/crystal-bilingual-layout.json",
+      "bytes": 3339,
+      "sha256": "9b41f6f97e70f70bf78ee27335280c5f554096ea78da985ea6fced97c93b3ba3"
+    },
+    {
+      "path": "scene/crystal-glyphs.otf",
+      "bytes": 83552,
+      "sha256": "9138565f0cbe89977c34e87e543c536fd45c32dea2b400f3ba251a52bb8442a6"
+    },
+    {
       "path": "scene/core-object-alpha.blend",
-      "bytes": 492956,
-      "sha256": "70113d06fbe6b413d54d25699e4d84962611e533601b7ce043c1d173a7229b2c"
+      "bytes": 168009,
+      "sha256": "1ca9ad2d7231d5c0be9ad2257541430783bbfd383d2af037cd99ed69ab088e05"
     },
     {
       "path": "dist/assets/crystal/core-object-alpha.glb",
-      "bytes": 7821172,
-      "sha256": "e50f8a2d5dcddc1e7d23a816f5df02bd1f80c2428344fe37e8a37e87542da467"
+      "bytes": 1468340,
+      "sha256": "95db8341fdd9df0f890c036345031e73590ac387cc3333ca06e39a065480ac44"
     },
     {
       "path": "dist/assets/crystal/crystal-preview.png",
-      "bytes": 2540065,
-      "sha256": "0b6a5c79e7d2cdbfd39609253597bb5ba2112ccaee2f56aafa52720ac878e9d1"
+      "bytes": 2724948,
+      "sha256": "64a247f11bafcdb06435341e22250b26f3ed5d53561396564c1deea86e156105"
     }
-  ]
+  ],
+  "referenceNotes": "data/crystal-video-reference.json",
+  "fontLicense": "scene/crystal-font-LICENSE.txt"
 }
