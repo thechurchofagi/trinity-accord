@@ -29,6 +29,37 @@ export function removeLegacyWallMounts(root){
  });return {hiddenMeshes,removedTriangles};
 }
 
+// The old chapter door-posts were batched with benches/skirting/ceiling metal.
+// Recover connected pieces (welding split face normals) and remove only the
+// full-height narrow posts standing in front of the exhibition walls.
+export function removeLegacyChapterPosts(root){
+ root.updateMatrixWorld(true);let removedPosts=0,removedTriangles=0;
+ root.traverse(o=>{
+  if(!o.isMesh||o.material?.name!=='Brushed titanium')return;
+  const g=o.geometry,p=g.attributes.position,index=g.index,n=index?index.count:p.count;
+  const parents=Uint32Array.from({length:p.count},(_,i)=>i),points=[],welded=new Map();
+  const find=i=>{while(parents[i]!==i){parents[i]=parents[parents[i]];i=parents[i];}return i;};
+  const join=(a,b)=>{parents[find(a)]=find(b);};
+  const vertex=i=>index?index.getX(i):i;
+  for(let i=0;i<p.count;i++){
+   const v=new THREE.Vector3().fromBufferAttribute(p,i).applyMatrix4(o.matrixWorld);points.push(v);
+   const key=[v.x,v.y,v.z].map(x=>Math.round(x*10000)).join(',');
+   if(welded.has(key))join(i,welded.get(key));else welded.set(key,i);
+  }
+  for(let i=0;i<n;i+=3){join(vertex(i),vertex(i+1));join(vertex(i),vertex(i+2));}
+  const boxes=new Map();
+  for(let i=0;i<p.count;i++){const id=find(i);if(!boxes.has(id))boxes.set(id,new THREE.Box3());boxes.get(id).expandByPoint(points[i]);}
+  const posts=new Set();
+  for(const [id,box] of boxes){
+   const size=box.getSize(new THREE.Vector3()),centre=box.getCenter(new THREE.Vector3());
+   if(Math.abs(centre.x)>4.30&&Math.abs(centre.x)<4.41&&size.x<.12&&size.z<.20&&size.y>3){posts.add(id);removedPosts++;}
+  }
+  const kept=[];
+  for(let i=0;i<n;i+=3){const a=vertex(i),b=vertex(i+1),c=vertex(i+2);if(posts.has(find(a)))removedTriangles++;else kept.push(a,b,c);}
+  if(posts.size){g.setIndex(kept);g.computeBoundingSphere();}
+ });return {removedPosts,removedTriangles};
+}
+
 // The baked wall texture contains silhouettes of the old exhibition. Replace
 // only side-wall surfaces with clean plaster; preserve the floor/ceiling bake.
 export function clearBakedWallShadows(root){
