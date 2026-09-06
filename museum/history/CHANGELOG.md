@@ -1,3 +1,9 @@
+# museum-v1.13.1 · Smaller startup text textures
+
+- Cap image loading/error placeholders at 512 × 384, wall labels at 1024 × 180, and the three canonical text panels at 1024 × 768. This removes about 447 MiB of raw RGBA canvas/texture backing from the 34-frame startup design before mipmaps, while preserving original artwork files and image resolution.
+- Show Chinese and English once each on canonical wall panels, independent of UI language.
+- Validation: generated runtime/source hashes, full export inventory, wall geometry and loading regression checks. Canonical live v1.13.0 browser checks already confirmed startup completion and the reading-mode fallback; the browser's WebGL limitation still applies.
+
 # museum-v1.13.0 · Wall text and progressive loading
 
 - Restore Protocol, Covenant of the Flaw and Chronicle via the sealed meta-record to three text-only wall panels. Remove the freestanding prism and its collision boundary. The original identities, source links and readable records remain.
