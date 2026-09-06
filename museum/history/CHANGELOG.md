@@ -1,3 +1,10 @@
+# museum-v1.9.0 · Central floating crystal and diffuse light
+
+- Move the crystal from x = -2 m to the corridor centre, x = 0 m, at the Material chapter midpoint z = -46 m. Raise its base to 1.42 m and remove the lower circular plinth.
+- Replace both geometric halo rings and the lower ring with three overlapping diffuse light veils. Cool-white body glow and a gentle warm edge fade smoothly into the room, without circular outlines.
+- Share floating motion between the corridor and detail inspector: a roughly six-second vertical cycle, 7 cm amplitude in the corridor, and slight independent tilts. Reduced-motion mode keeps the object and glow steady. Model geometry, engraving, images and all sound associations remain intact.
+- Validation: module syntax, source/media inventory and motion-transform checks. No new browser GPU test; the prior test environment did not support WebGL. Domestic-China connectivity is not measured from this environment.
+
 # museum-v1.8.0 · Complete song associations and explicit playback states
 
 - Fixed seven displayed NFTs whose source texts name songs but whose panels offered no playback: #007, #117, #142, #145, #171, #173 and #174. All 22 musical NFTs among 32 wall entries now resolve playable audio. The remaining ten text/object/context entries explicitly state that no accompanying song is assigned; the three originals remain text-only.

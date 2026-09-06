@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.8.0",
+  "edition": "museum-v1.9.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -9,7 +9,7 @@
   "dimensionSource": "https://www.trinityaccord.org/archive_legacy_index_2025_09/",
   "photograph": "assets/core-object-alpha.jpg",
   "textSource": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/bitcoin-inscription-mirrors/raw/97631551.txt",
-  "scope": "Video-guided exhibition reconstruction: 246 x 353 x 40 mm clear slab, approximately 6 mm planar bevel, bilingual internal lettering, left-aligned third axiom and lower-right colophon. Text and placement cross-checked against the existing physical-anchor photograph. Typography and optical response remain approximations, not a photogrammetric scan or exact facsimile. No identity flaws reconstructed. Studio lighting and museum plinth are exhibition design.",
+  "scope": "Video-guided exhibition reconstruction: 246 x 353 x 40 mm clear slab, approximately 6 mm planar bevel, bilingual internal lettering, left-aligned third axiom and lower-right colophon. Text and placement cross-checked against the existing physical-anchor photograph. Typography and optical response remain approximations, not a photogrammetric scan or exact facsimile. No identity flaws reconstructed. Studio lighting and floating installation are exhibition design.",
   "application": "Blender 4.5.3 LTS",
   "files": [
     {
@@ -55,13 +55,20 @@
     "transmission": 0.8,
     "roughness": 0.065,
     "environmentIntensity": 1.7,
-    "displayPurpose": "Slightly clearer glass, soft cool/warm rim light and restrained halo. Levitation, halo and lower light disc are explicitly later digital exhibition design, not physical evidence."
+    "displayPurpose": "Diffuse cool-white and warm edge aura without geometric rings or lower disc. Centered levitation is later digital exhibition design, not physical evidence."
   },
   "installation": {
-    "baseHeightMetres": 1.27,
-    "plinthTopMetres": 0.88,
-    "floatGapMetres": 0.39,
-    "motionAmplitudeMetres": 0.008,
-    "reducedMotion": "Static levitation and halo; no oscillation."
+    "centerXMetres": 0,
+    "centerZMetres": -46,
+    "baseHeightMetres": 1.42,
+    "motionAmplitudeMetres": 0.07,
+    "motionPeriodSeconds": 5.984,
+    "tiltRadians": {
+      "x": 0.018,
+      "z": 0.025
+    },
+    "plinth": false,
+    "aura": "Three overlapping, vertically elongated diffuse light veils; no torus, outline ring or lower circular disc.",
+    "reducedMotion": "Static levitation and steady aura; no oscillation or tilt."
   }
 }

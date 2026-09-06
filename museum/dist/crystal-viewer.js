@@ -39,24 +39,29 @@ export async function inspectCrystal(host, english=false){
   canvas.onpointerdown=e=>{down=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!down)return;azimuth-=(e.clientX-down[0])*.008;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-down[1])*.006,-.6,.6);down=[e.clientX,e.clientY];};canvas.onpointerup=canvas.onpointercancel=()=>down=null;canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance+e.deltaY*.0007,.32,1.25);},{passive:false});
   const resize=()=>{const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();};observer=new ResizeObserver(resize);observer.observe(host);resize();
   releaseResources=()=>{aura.dispose();env.dispose();model.scene.traverse(o=>{if(o.isMesh){o.geometry.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material])m.dispose();}});};
-  const draw=()=>{if(disposed)return;aura.update(performance.now(),matchMedia('(prefers-reduced-motion: reduce)').matches);camera.position.set(Math.sin(azimuth)*distance,target.y+Math.sin(elevation)*distance,Math.cos(azimuth)*Math.cos(elevation)*distance);camera.lookAt(target);renderer.render(scene,camera);frame=requestAnimationFrame(draw);};draw();
+  const draw=()=>{if(disposed)return;floatCrystal(model.scene,aura,performance.now(),matchMedia('(prefers-reduced-motion: reduce)').matches);camera.position.set(Math.sin(azimuth)*distance,target.y+Math.sin(elevation)*distance,Math.cos(azimuth)*Math.cos(elevation)*distance);camera.lookAt(target);renderer.render(scene,camera);frame=requestAnimationFrame(draw);};draw();
  }catch(err){renderer?.dispose();host.querySelector('.crystal-status').textContent=english?'Rendered model · interactive 3D unavailable on this device':'模型渲染图 · 此设备暂不支持三维交互';}
  return clean;
 }
 
-// A later digital installation around the unchanged crystal reconstruction.
+// Later exhibition light: diffuse vertical aura with no geometric rings.
+export function floatCrystal(model,aura,now,reduced,baseY=0,scale=1){
+ const t=now*.001;
+ model.position.y=baseY+(reduced?0:.035*scale*Math.sin(t*1.05));
+ model.rotation.x=reduced?0:.018*Math.sin(t*.63);
+ model.rotation.z=reduced?0:.025*Math.sin(t*.81);
+ aura.group.position.copy(model.position);aura.group.rotation.copy(model.rotation);aura.update(now,reduced);
+}
 export function addCrystalAura(scene,center,scale=1){
  const group=new THREE.Group();group.position.copy(center);group.scale.setScalar(scale);scene.add(group);
  const c=document.createElement('canvas');c.width=c.height=256;const ctx=c.getContext('2d');
- const glow=ctx.createRadialGradient(128,128,10,128,128,128);glow.addColorStop(0,'rgba(181,219,255,.26)');glow.addColorStop(.38,'rgba(118,177,247,.10)');glow.addColorStop(1,'rgba(72,122,215,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,256,256);
+ const glow=ctx.createRadialGradient(128,128,0,128,128,128);
+ glow.addColorStop(0,'rgba(220,242,255,.6)');glow.addColorStop(.25,'rgba(175,220,255,.35)');glow.addColorStop(.6,'rgba(125,191,245,.11)');glow.addColorStop(1,'rgba(105,170,235,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,256,256);
  const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
- const halo=new THREE.Sprite(new THREE.SpriteMaterial({map,transparent:true,opacity:.65,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));halo.position.set(0,.176,-.045);halo.scale.set(.65,.65,1);group.add(halo);
- const materials=[];
- for(const [radius,tube,z,color,opacity] of [[.253,.0014,-.063,'#b3d9ef',.65],[.28,.00065,-.07,'#ecd2a3',.48]]){
-  const material=new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,toneMapped:false});materials.push(material);
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(radius,tube,6,100),material);ring.position.set(0,.176,z);group.add(ring);
+ const veils=[];
+ for(const [x,y,z,w,h,color,opacity] of [[0,.176,-.07,.65,.88,'#b5dcff',.65],[-.13,.19,-.045,.22,.59,'#d0eaff',.4],[.13,.16,-.045,.20,.57,'#ffe4b5',.32]]){
+  const veil=new THREE.Sprite(new THREE.SpriteMaterial({map,color,transparent:true,opacity,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));
+  veil.position.set(x,y,z);veil.scale.set(w,h,1);veil.userData.baseOpacity=opacity;group.add(veil);veils.push(veil);
  }
- const ringMat=new THREE.MeshBasicMaterial({color:'#a2d1e6',transparent:true,opacity:.3,side:THREE.DoubleSide,depthWrite:false});materials.push(ringMat);
- const pool=new THREE.Mesh(new THREE.RingGeometry(.125,.17,72),ringMat);pool.rotation.x=-Math.PI/2;pool.position.set(0,-.16,0);group.add(pool);
- return {group,update(now,reduced){halo.material.opacity=reduced?.65:.65+.045*Math.sin(now*.0007);},dispose(){group.traverse(o=>{o.geometry?.dispose();if(o.material)o.material.dispose();});map.dispose();scene.remove(group);}};
+ return {group,update(now,reduced){for(const veil of veils)veil.material.opacity=veil.userData.baseOpacity*(reduced?1:1+.08*Math.sin(now*.00105));},dispose(){group.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});map.dispose();scene.remove(group);}};
 }
