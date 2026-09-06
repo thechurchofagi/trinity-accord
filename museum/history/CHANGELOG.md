@@ -1,3 +1,11 @@
+# museum-v1.20.0 · Original artwork and attached wall labels
+
+- Withdraw all nine 2026 illustration assets from the live export, including Star Ark. Retain them only in exhibition history. Original NFT images, audio, texts, the physical photograph and canonical documents retain their provenance. Records without original images use plain text/audio entries, not replacement artwork.
+- Remove the former wall-mount silhouettes from the baked side-wall material while preserving the floor and ceiling lighting. Remove large mats/backboards; fit four thin edges to each original image at its native aspect ratio, close to the wall.
+- Attach a small two-line plaque above each work: “Number 01” / “编号 01” and its actual mint date. Preserve original ordinals; use inscription labels for Bitcoin documents. Remove the screen-fixed provenance overlay. Context remains unframed explanatory text.
+- Replace the pitched heel thud with quiet, filtered shoe contact, reduce its gain and retain default-on, distance-driven footsteps. No off switch is added.
+- Validation checks withdrawn-asset absence, source/media preservation, cleaned wall triangles, thin frame bounds, projected frame/label clearance, quiet audio levels and trigger cadence. Browser checks confirm original image binding, missing-image text entries and removal of floating metadata; this cloud browser cannot render WebGL or substitute for phone-speaker listening.
+
 # museum-v1.19.0 · Six viewing areas, higher walls and free turning
 
 - Reorganize 36 exhibits into entrance, Chronicle, formation and criticism, three Bitcoin originals, crystal, and waiting. Preserve all 24 musical NFTs and independent-recording attribution. Feature NFT #173 and a separate critical reading, with unchanged source text.

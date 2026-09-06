@@ -16,8 +16,6 @@ for r in rooms['rooms']:
    if c.get('date'):parts.append('<p>Bitcoin inscription #'+esc(c['number'])+' · '+esc(c['date'][:10])+' UTC / Bitcoin 上链日期</p>')
    if c.get('originalText'):parts.append('<details><summary>完整原文 / Complete original</summary><pre>'+esc(c['originalText'])+'</pre></details>')
    parts.append('</article>')
-  if id=='star-ark':
-   parts.append('<article><h3>The Star Ark Covenant: The Final Echo · 星舟圣约：最终的回响</h3><img loading="lazy" src="assets/curatorial/star-ark-2026.webp" alt="2026 curatorial illustration of arks carrying memory away from Earth"><p class="note"><strong>2026 CURATORIAL ILLUSTRATION · NOT ORIGINAL INSCRIPTION CONTENT</strong><br>Generated with AI on 2026-09-06 for this exhibition at the author’s request. The source is a later text inscription, outside the three sealed originals.<br>2026 年后续策展配图；原作为文字铭文，图像不是历史原作，不修订三条正本。</p><p><a href="data/records/star-ark-100751953.txt">Original text / 原文</a> · <a href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0">Bitcoin inscription #100751953</a> · <a href="data/star-ark-illustration.json">Illustration provenance</a></p></article>')
   if id in art:
    a=art[id];parts.append('<figure><img loading="lazy" src="'+esc(a['file'])+'" alt="'+esc(a['title'])+'"><figcaption>2026 年后续策展配图 · AI 生成 · 非历史原图 / Later AI-generated curatorial illustration, not historical source art. <a href="data/curatorial-illustrations.json">Provenance / 来源</a></figcaption></figure>')
   if id.startswith('canon-'):
@@ -26,7 +24,7 @@ for r in rooms['rooms']:
    if id=='canon-3':parts.append('<p>编年史由封存元记录指向其 Ethereum 合约；铭文本身未嵌入全部编年史媒体。/ The sealed meta-record points to the Ethereum Chronicle; it does not embed all Chronicle media.</p>')
   if id not in items:
    parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
-  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>NFT #'+str(e['ordinal'])+' · '+esc(e['date'][:10])+' UTC · Ethereum mint / 铸造日期</small>')
+  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>Number '+str(e['ordinal'])+' · '+esc(e['date'][:10])+' UTC · Ethereum mint / 铸造日期</small>')
   for m in sorted(e['media'],key=lambda m:0 if m['kind']=='image' else 1):
    parts.append(('<img loading="lazy" src="'+m['file']+'" alt="'+esc(e['title'])+'">') if m['kind']=='image' else '<audio controls preload="none" src="'+m['file']+'"></audio>')
   if e.get('relatedSoundExhibit'):

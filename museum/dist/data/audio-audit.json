@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.19.0",
+  "edition": "museum-v1.20.0",
   "checked": "2026-09-06",
   "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
   "counts": {

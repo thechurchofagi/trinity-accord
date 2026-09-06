@@ -1,13 +1,14 @@
-// Default-on stone-floor footsteps. Unlock synchronously from a trusted gesture.
-// Midrange heel/contact sound remains audible on small phone speakers.
+// Quiet shoe contact: filtered friction and a short sole landing, no pitched thud.
+export const FOOTSTEP_GAIN=.13;
 export function footstepSamples(rate=24000){
- const data=new Float32Array(Math.ceil(rate*.22));let seed=173;
+ const data=new Float32Array(Math.ceil(rate*.19));let seed=173,low=0,high=0;
  for(let i=0;i<data.length;i++){
   const t=i/rate;seed=(Math.imul(seed,1664525)+1013904223)>>>0;
   const noise=seed/2147483648-1;
-  const heel=Math.sin(2*Math.PI*(210*t-190*t*t))*Math.exp(-t*35);
-  const contact=noise*(Math.exp(-t*65)+.35*Math.exp(-Math.abs(t-.045)*100));
-  data[i]=Math.min(1,t/.003)*(.52*heel+.42*contact);
+  low+=(1-Math.exp(-2*Math.PI*260/rate))*(noise-low);
+  high+=(1-Math.exp(-2*Math.PI*1900/rate))*((noise-low)-high);
+  const landing=Math.exp(-(((t-.024)/.014)**2)),sole=.45*Math.exp(-(((t-.074)/.031)**2));
+  data[i]=high*(landing+sole)*.75;
  }
  return data;
 }
@@ -22,7 +23,7 @@ export function createFootsteps({Context=globalThis.AudioContext||globalThis.web
  function play(){
   if(context?.state!=='running')return;
   const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;
-  source.playbackRate.value=step++%2?1.04:.97;gain.gain.value=.32;
+  source.playbackRate.value=step++%2?1.03:.98;gain.gain.value=FOOTSTEP_GAIN;
   source.connect(gain).connect(context.destination);source.onended=()=>{source.disconnect();gain.disconnect();};source.start();
  }
  return {unlock,get state(){return context?.state||'locked';},update(metres,active){

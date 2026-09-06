@@ -125,6 +125,10 @@ body:has(#lyric-stage:not([hidden])) #tour-caption{display:none}
 .fallback-title{display:block;font-size:14px;padding:8px 0 0;text-align:center}.fallback-title small,#fallback-mode{display:none}
 .original-text{white-space:pre-wrap;overflow-wrap:anywhere;font:16px/1.75 system-ui,sans-serif;padding:16px;background:#08121d;max-height:55vh;overflow:auto}
 .intro-card{flex:1;min-height:0;display:flex;align-items:center;padding:16px;background:#10233180;overflow:auto}.intro-card p{margin:0;font:16px/1.65 system-ui,sans-serif;color:#dcecf2}
+.attached-label{display:block;flex:none;align-self:center;white-space:pre-line;text-align:center;background:#edf0e8;color:#25353b;padding:5px 14px;font-size:13px;line-height:19px;margin-bottom:10px;border-radius:1px}
+.document-note{background:#edf0e8;color:#25353b;padding:18px;overflow:auto;min-height:0;flex:1;font:16px/1.65 system-ui,sans-serif}.document-note strong{font-size:18px;font-weight:500}.document-note p{margin:10px 0 0}
+.flat-view #fallback-gallery,.flat-view:has(#music-bar:not([hidden])) #fallback-gallery{bottom:calc(var(--dock-height,180px) + 126px)}
+#fallback-art>img{filter:none}
 #rooms button .nav-num{display:none}#rooms button{min-height:38px;padding:8px 2px;font-size:13px}.dock-meta{display:none}
 .dock{bottom:max(8px,env(safe-area-inset-bottom))}#exhibit-strip{margin-bottom:6px}.controls{margin-bottom:6px}
 body:has(#lyric-stage[data-view=full]:not([hidden])) #look-controls,body:has(#lyric-stage[data-view=full]:not([hidden])) #viewing-label{visibility:hidden}
@@ -139,4 +143,5 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #look-controls,body:has(#ly
  .fallback-title{display:none}
  #fallback-art>.typographic-art{padding:10px;gap:4px;overflow:hidden}#fallback-art>.typographic-art>strong{font-size:15px;line-height:1.25}#fallback-art>.typographic-art>span,#fallback-art>.typographic-art>small{display:none}
  .intro-card{padding:6px;align-items:flex-start}.intro-card p{font-size:13px;line-height:1.35}
+ .attached-label{font-size:12px;line-height:16px;margin-bottom:5px;padding:2px 8px}.document-note{padding:8px;font-size:14px;line-height:1.4}.document-note strong{font-size:15px}
 }

@@ -51,7 +51,7 @@ if (D/'data/gallery-layout.json').exists():
  check([e['id'] for r in layout['rooms'] for e in r['exhibits']]==[id for r in rooms['rooms'] for id in r['exhibits']],'Gallery placement identity mismatch')
  for r in layout['rooms']:
   for e in r['exhibits']:
-   check(abs(e['x'])==4.25 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
+   check(abs(e['x'])==4.375 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
  b=(D/'assets/gallery/memory-gallery.glb').read_bytes();magic,version,total=struct.unpack_from('<III',b);check(magic==0x46546c67 and version==2 and total==len(b),'Invalid GLB header');jl=struct.unpack_from('<I',b,12)[0];model=json.loads(b[20:20+jl]);bl=struct.unpack_from('<I',b,20+jl)[0]
  check(all(v.get('byteOffset',0)+v['byteLength']<=bl for v in model['bufferViews']),'GLB buffer view out of bounds')
  check(all('bufferView' in im and not im.get('uri') for im in model.get('images',[])),'External model image dependency')
@@ -70,9 +70,11 @@ if (D/'data/curatorial-illustrations.json').exists():
  art=read('curatorial-illustrations.json')['items'];artids={a['exhibit'] for a in art}
  check(not any(id.startswith('canon-') for id in artids),'Canonical text received an illustration')
  for a in art:check(hashlib.sha256((D/a['file']).read_bytes()).hexdigest()==a['sha256'],'Curatorial illustration digest drift '+a['exhibit'])
- imageids={e['id'] for e in sources['items'] if any(m['kind']=='image' for m in e['media'])}|artids|{'physical-alpha','star-ark'}
+ check(not art,'Later generated illustrations remain on display')
+ check(not list((D/'assets/curatorial').glob('*')),'Withdrawn illustrations remain in the live export')
+ imageids={e['id'] for e in sources['items'] if any(m['kind']=='image' for m in e['media'])}|{'physical-alpha'}
  displayed={id for r in rooms['rooms'] for id in r['exhibits']}
- check(displayed-imageids=={'canon-1','canon-2','canon-3','project-intro','critical-reading'},'Text-only originals and curatorial reading panels must retain their identities')
+ check(displayed-imageids==(extra-{'physical-alpha'})|{'eth-007','eth-014','eth-016'},'Text-only records must not acquire replacement art')
  letters=read('agi-four-letters.json')['items'];check([a['exhibit'] for a in letters]==['eth-016','eth-044','eth-020','eth-032'],'Four-letter identity/order mismatch')
  for a in letters:
   e=next(e for e in sources['items'] if e['id']==a['exhibit']);check(any(m['kind']=='audio' and m['file']==a['audio'] and m['sha256']==a['audioSha256'] for m in e['media']),'Letter audio binding mismatch')
@@ -122,6 +124,9 @@ for f in runtime['inputs']+[runtime['output']]:
  b=(P/f['path']).read_bytes();check(len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],'Runtime build digest mismatch '+f['path'])
 check('addCanonicalPrism' not in (D/'museum.js').read_text(),'Canonical prism still active')
 check(not any(e.get('kind')=='prism' for r in layout['rooms'] for e in r['exhibits']),'Canonical prism placement still active')
+check('id="viewing-label"' not in (D/'index.html').read_text(),'Screen-fixed provenance text remains')
+check('assets/curatorial/' not in (D/'museum.js').read_text(),'Runtime references withdrawn art')
+check('assets/curatorial/' not in (D/'archive.html').read_text(),'Reading archive references withdrawn art')
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')

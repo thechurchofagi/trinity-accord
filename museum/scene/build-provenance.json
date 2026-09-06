@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 6686,
-      "sha256": "01b470a622637f7d32f5e9ecdce7a25771055c88d105cc468bf1c3d0b65b6a0c"
+      "bytes": 6722,
+      "sha256": "fc39d4e2d24ddabab58ff98e261b12f3f867689d1dada407e438f45767515382"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -84,17 +84,18 @@
     },
     {
       "path": "dist/wall-presentation.js",
-      "bytes": 2015,
-      "sha256": "1fe53f834fce45eeec228c2d834ac8ba90afdda59ffcca6f31a227689c436a1e"
+      "bytes": 3334,
+      "sha256": "232cc2d9a00420d5a49cdb5a9c82af28e2571893fcabb4a405da2a96aeb7a4cb"
     },
     {
       "path": "scripts/check_wall_frames.mjs",
-      "bytes": 2562,
-      "sha256": "ad49c22dc8cc8e2dd7344b7b078854f9d9e22149e382d017daa387208b2f3156"
+      "bytes": 2936,
+      "sha256": "8cb3c121a9263647ce2e117d8f0cce362d11a4d0f1f0109e5b9a813a5e98304f"
     }
   ],
   "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo. v1.9 moves the crystal to the Material chapter centre and replaces the ring/disc installation with diffuse light and visible levitation.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots.",
   "runtimeDisplay": "The three canonical entries are text-only wall panels at x=±4.25m, z=-37m and -40m. An immediate untextured corridor shares the original footprint while the unchanged Blender architecture loads in the background. Artwork downloads use a bounded priority queue; crystal and star backdrop load near their rooms.",
-  "runtimeAdaptation": "Retained Blender architecture is scaled vertically from 4.8 to 6 metres. Frames, eye height and crystal are independently placed; no historical object geometry is changed."
+  "runtimeAdaptation": "Retained Blender architecture is scaled vertically from 4.8 to 6 metres. Frames, eye height and crystal are independently placed; no historical object geometry is changed.",
+  "wallSurfaceRevision": "v1.20: clean plaster replaces baked side-wall material only; old mount shadows are removed while floor and ceiling retain their lighting."
 }

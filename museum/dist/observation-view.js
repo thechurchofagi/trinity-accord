@@ -11,6 +11,6 @@ export function observationView(width,height,fov,aspect,mobile=false,viewport=nu
 }
 export function galleryCamera(width,height,top,bottom){
  const available=Math.max(80,bottom-top),fraction=available/height;
- const fov=Math.max(width<650?76:66,2*Math.atan(2.04/(2*6.3*fraction*.82))*180/Math.PI);
+ const fov=Math.max(width<650?76:66,2*Math.atan(2.44/(2*6.3*fraction*.82))*180/Math.PI);
  return {fov:Math.min(115,fov),offsetY:height/2-(top+bottom)/2};
 }

@@ -18,14 +18,32 @@ export function removeLegacyWallMounts(root){
  });return {hiddenMeshes,removedTriangles};
 }
 
-const railMaterial=new THREE.MeshStandardMaterial({color:'#afc0c5',metalness:.82,roughness:.29});
-const mountMaterial=new THREE.MeshStandardMaterial({color:'#e1e3dc',roughness:.9});
-const backMaterial=new THREE.MeshStandardMaterial({color:'#14242d',roughness:.7});
-export function makeWallFrame(group){
- const backing=new THREE.Mesh(new THREE.BoxGeometry(2.16,2,.055),backMaterial);backing.position.z=-.09;group.add(backing);
- const mat=new THREE.Mesh(new THREE.PlaneGeometry(2.09,1.93),mountMaterial);mat.position.z=-.058;group.add(mat);
- for(const [w,h,x,y] of [[2.17,.034,0,.985],[2.17,.034,0,-.985],[.034,2,-1.068,0],[.034,2,1.068,0]]){
-  const edge=new THREE.Mesh(new THREE.BoxGeometry(w,h,.052),railMaterial);edge.position.set(x,y,-.034);group.add(edge);
+// The baked wall texture contains silhouettes of the old exhibition. Replace
+// only side-wall surfaces with clean plaster; preserve the floor/ceiling bake.
+export function clearBakedWallShadows(root){
+ root.updateMatrixWorld(true);let cleanTriangles=0;
+ const plaster=new THREE.MeshStandardMaterial({name:'Clean exhibition plaster',color:'#e0e1db',roughness:.95});
+ root.traverse(o=>{
+  if(!o.isMesh||o.material?.name!=='Baked architectural illumination')return;
+  const g=o.geometry,p=g.attributes.position,idx=g.index,original=[],walls=[];
+  const a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3(),normal=new THREE.Vector3(),edge=new THREE.Vector3();
+  for(let i=0;i<(idx?idx.count:p.count);i+=3){
+   const ids=[0,1,2].map(k=>idx?idx.getX(i+k):i+k);
+   a.fromBufferAttribute(p,ids[0]).applyMatrix4(o.matrixWorld);b.fromBufferAttribute(p,ids[1]).applyMatrix4(o.matrixWorld);c.fromBufferAttribute(p,ids[2]).applyMatrix4(o.matrixWorld);
+   normal.subVectors(b,a).cross(edge.subVectors(c,a)).normalize();
+   const x=Math.abs((a.x+b.x+c.x)/3),y=(a.y+b.y+c.y)/3;
+   const wall=x>4.36&&x<4.7&&y>.40&&y<4.76&&Math.abs(normal.x)>.9;
+   (wall?walls:original).push(...ids);if(wall)cleanTriangles++;
+  }
+  const baked=o.material;o.material=[baked,plaster];g.setIndex([...original,...walls]);g.clearGroups();g.addGroup(0,original.length,0);g.addGroup(original.length,walls.length,1);
+ });return {cleanTriangles};
+}
+const railMaterial=new THREE.MeshStandardMaterial({color:'#a7b1b3',metalness:.55,roughness:.5});
+export function makeWallFrame(group,width=1.9,height=1.7){
+ const frame=new THREE.Group();frame.name='Thin original-art frame';group.add(frame);
+ const border=.018;
+ for(const [w,h,x,y] of [[width+2*border,border,0,(height+border)/2],[width+2*border,border,0,-(height+border)/2],[border,height,-(width+border)/2,0],[border,height,(width+border)/2,0]]){
+  const edge=new THREE.Mesh(new THREE.BoxGeometry(w,h,.016),railMaterial);edge.position.set(x,y,-.002);frame.add(edge);
  }
- return {backing,mat};
+ return {frame,dispose(){frame.removeFromParent();for(const edge of frame.children)edge.geometry.dispose();}};
 }
