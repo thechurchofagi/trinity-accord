@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 6722,
-      "sha256": "210b0eb85d9ea006158bc7c64b6559793e3063d04d929d895fdc953c5c821280"
+      "bytes": 7264,
+      "sha256": "c2328331f08d43972f50da96350ef210b7d9bd35bce992abc974d106bab4b388"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -95,5 +95,6 @@
   "wallSurfaceRevision": "v1.20: clean plaster replaces baked side-wall material only; old mount shadows are removed while floor and ceiling retain their lighting.",
   "runtimePlaques": "v1.21: uniform satin titanium plaques, 1.55 x 0.46 metres, common centre 1.16 metres above each artwork mount; no dependence on loaded image aspect ratio.",
   "runtimeObservation": "v1.21: approach camera and target use the same display height for a parallel, horizontal frontal view; original image aspect ratio remains unchanged.",
-  "chapterPostRevision": "v1.21.1: remove 12 connected full-height chapter uprights (2256 triangles) from the retained batched titanium geometry before display; keep benches, skirting and overhead metal. The source builder no longer creates these upright posts."
+  "chapterPostRevision": "v1.21.1: remove 12 connected full-height chapter uprights (2256 triangles) from the retained batched titanium geometry before display; keep benches, skirting and overhead metal. The source builder no longer creates these upright posts.",
+  "runtimeLayoutNote": "v1.23.0 places four additional original NFTs through the browser wall renderer. The retained Blender architecture and reference renders were not rebuilt; scene/gallery-layout.json is the current runtime placement configuration."
 }

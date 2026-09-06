@@ -98,8 +98,8 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==24 and len(wall)==36,'Expected 24 musical NFTs among 36 exhibit entries')
-check(audit['counts']=={'wallExhibits':36,'withSound':24,'withoutAssignedSong':12},'Audio audit counts mismatch')
+check(playable==28 and len(wall)==40,'Expected 28 musical NFTs among 40 exhibit entries')
+check(audit['counts']=={'wallExhibits':40,'withSound':28,'withoutAssignedSong':12},'Audio audit counts mismatch')
 check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','material','waiting'],'Six-zone narrative drift')
 check(rooms['rooms'][2]['featuredExhibit']=='eth-173','Critical NFT must be prominent')
 curation=read('curation.json')
