@@ -8,6 +8,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
+import tempfile
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +52,29 @@ def ordinary_museum_tree(head: str, root: Path = ROOT) -> bool:
     return all(not row or row.split(b" ", 1)[0] in (b"100644", b"100755") for row in rows)
 
 
+def manual_run_source(repo: str, run: dict, token: str) -> str:
+    """Bind an automatic/manual dispatch to its actual published source receipt."""
+    run_id = str(run["id"])
+    if not run_id.isdigit():
+        raise ValueError("invalid Pages run ID")
+    with tempfile.TemporaryDirectory(prefix="museum-pages-baseline-") as directory:
+        # gh handles authenticated artifact redirects without forwarding the API
+        # credential to the artifact storage host. It is installed on CI runners.
+        subprocess.run(["gh", "run", "download", run_id, "--repo", repo,
+                        "--name", "pages-source-receipt-" + run_id, "--dir", directory],
+                       check=True, capture_output=True, timeout=30,
+                       env={**os.environ, "GH_TOKEN": token})
+        receipt = json.loads((Path(directory) / "pages-source-receipt.json").read_text())
+    if (receipt.get("schema") != "trinity-pages-source-receipt.v1"
+            or str(receipt.get("workflow_run_id")) != run_id
+            or receipt.get("event_name") != "workflow_dispatch"
+            or receipt.get("source_sha") != run.get("head_sha")
+            or not isinstance(receipt.get("source_sha"), str)
+            or not SHA.fullmatch(receipt["source_sha"])):
+        raise ValueError("manual Pages baseline is not bound to its published source")
+    return receipt["source_sha"]
+
+
 def previous_pages_sha(repo: str, current_id: str, created: str, token: str) -> str:
     if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo) or not token:
         raise ValueError("Pages baseline lookup unavailable")
@@ -64,13 +88,16 @@ def previous_pages_sha(repo: str, current_id: str, created: str, token: str) -> 
     with urllib.request.urlopen(request, timeout=20) as response:
         runs = json.load(response)["workflow_runs"]
     candidates = [r for r in runs if str(r["id"]) != current_id
-                  and r.get("conclusion") == "success" and r.get("event") == "push"
+                  and r.get("conclusion") == "success" and r.get("event") in ("push", "workflow_dispatch")
                   and r.get("head_branch") == "main"
                   and r.get("head_repository", {}).get("full_name") == repo
                   and (not created or r.get("created_at", "") < created)]
     if not candidates:
-        raise ValueError("no prior successful main Pages push")
-    return max(candidates, key=lambda r: r["created_at"])["head_sha"]
+        raise ValueError("no prior successful main Pages publication")
+    latest = max(candidates, key=lambda r: r["created_at"])
+    if latest["event"] == "workflow_dispatch":
+        return manual_run_source(repo, latest, token)
+    return latest["head_sha"]
 
 
 def classify(event: dict, event_name: str, head: str, *, deployment: bool = False,

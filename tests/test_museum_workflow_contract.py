@@ -12,6 +12,15 @@ def workflow(name):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_archive_uses_one_automatic_pages_dispatch_owner(self):
+        legacy = workflow("deploy-pages-after-record-chain-archive.yml")
+        self.assertEqual(set(legacy.get("on", legacy.get(True))), {"workflow_dispatch"})
+        sync = workflow("homepage-status-sync.yml")
+        trigger = sync.get("on", sync.get(True))
+        self.assertIn("Record Chain Arweave Archive", trigger["workflow_run"]["workflows"])
+        self.assertTrue(any("gh workflow run deploy-pages.yml" in s.get("run", "")
+                            for s in sync["jobs"]["deploy"]["steps"]))
+
     def test_required_jobs_always_report_and_heavy_steps_require_full_scope(self):
         jobs = {
             "repository-integrity.yml": ["current-system-integrity"],
