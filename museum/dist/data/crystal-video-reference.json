@@ -1,0 +1,33 @@
+{
+  "schema": "trinity-museum.visual-reference.v1",
+  "edition": "museum-v1.4.0",
+  "video": {
+    "suppliedName": "1000042845.mp4",
+    "bytes": 3116173,
+    "sha256": "dae9af0ede4115356500a993fa5ed9cbeaa6a24a6ccc3eabb18a0ae0a8230de9",
+    "durationSeconds": 20.533333,
+    "resolution": [
+      720,
+      1280
+    ],
+    "inspectedSeconds": [
+      0.5,
+      4,
+      12,
+      18
+    ],
+    "embeddedOrPublished": false
+  },
+  "observations": [
+    "Clear rectangular slab; substantial thickness and polished planar bevels",
+    "Centred bilingual title and first two axioms",
+    "Third axiom left aligned, bilingual colophon at lower right",
+    "White internal engraving, visible through rotating transparent surfaces"
+  ],
+  "limits": [
+    "Dimensions retained from the final guardian statement; video alone is not a scale calibration",
+    "Approximate typography, depth and optics; not photogrammetry or authentication",
+    "No private flaw reconstruction"
+  ],
+  "imageSource": "assets/core-object-alpha.jpg"
+}
