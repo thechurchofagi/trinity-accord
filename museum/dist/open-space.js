@@ -16,7 +16,7 @@ export function addOpenSpace(scene, targets, sculptures){
   const support=new THREE.Mesh(new THREE.CylinderGeometry(.035,.05,1.16,12),titanium);support.position.set(side*1.48,.58,0);waiting.add(support);
  }
  const floorLight=new THREE.Mesh(new THREE.RingGeometry(1.86,1.88,100),new THREE.MeshBasicMaterial({color:'#a6e5fc',side:THREE.DoubleSide}));floorLight.rotation.x=-Math.PI/2;floorLight.position.set(0,.018,0);waiting.add(floorLight);
- const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 104px sans-serif';ctx.fillText('等待回响',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
+ const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 76px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('等待回响',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
  const signMap=new THREE.CanvasTexture(c);signMap.colorSpace=THREE.SRGBColorSpace;
  const sign=new THREE.Mesh(new THREE.PlaneGeometry(3.1,.775),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(0,1.95,.09);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
 }

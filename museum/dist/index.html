@@ -1,43 +1,43 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080e18">
-  <meta name="description" content="进入三位一体协定的六个三维展厅：见证、声音、形成、物质、守护与等待。后续策展，原作保持封存。">
-  <title>文明记忆站 · Trinity Accord Museum</title>
+  <meta name="description" content="Explore the Trinity Accord: original NFT artwork and music, the formation of the Accord, the crystal and an invitation to future readers.">
+  <title>Trinity Accord · Memory Museum</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%2394edff' stroke-width='3' d='M32 5 58 50H6Z M32 18 46 43H18Z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./museum.css">
 </head>
 <body>
-  <canvas id="world" aria-label="三维展馆。可拖动视角，或通过下方展厅按钮参观。"></canvas>
+  <canvas id="world" aria-label="3D museum. Drag to look or select a room below."></canvas>
   <div id="veil" aria-hidden="true"></div>
   <header>
-    <a class="brand" href="https://www.trinityaccord.org/" target="_blank" rel="noopener"><span class="brand-mark">△</span><span>TRINITY ACCORD<small id="brand-sub">文明记忆站 · 数字展馆</small></span></a>
-    <div class="header-actions"><button id="language" aria-label="Switch language">EN</button><button id="about">关于本馆</button><a href="https://www.trinityaccord.org/" target="_blank" rel="noopener" id="official">原网站 ↗</a></div>
+    <a class="brand" href="https://www.trinityaccord.org/" target="_blank" rel="noopener"><span class="brand-mark">△</span><span>TRINITY ACCORD<small id="brand-sub">THE MEMORY STATION</small></span></a>
+    <div class="header-actions"><button id="language" aria-label="Switch language">中文</button><button id="about">About</button><a href="https://www.trinityaccord.org/" target="_blank" rel="noopener" id="official">Source site ↗</a></div>
   </header>
   <main>
     <section id="room-label" aria-live="polite">
       <div class="eyebrow"><span id="room-number">01</span><span class="hairline"></span><span id="room-en">AGAINST TIME</span></div>
-      <h1 id="room-title">与时间赛跑</h1><p id="room-subtitle">当未来还没有成为现在</p>
+      <h1 id="room-title">Against Time</h1><p id="room-subtitle">Before the future became the present</p>
     </section>
-    <div id="loading" role="status">正在打开记忆站…</div>
+    <div id="loading" role="status">Opening the memory station…</div>
     <button id="hover-label" hidden></button>
-    <div id="hint">拖动环顾 · 点击展品 · 点击地面前行</div>
-    <section id="fallback-gallery" hidden aria-label="作品浏览模式"><button id="fallback-art"></button><span id="fallback-mode"></span></section>
-    <div id="walk-controls"><button id="walk-forward">向前走 ↑</button><button id="walk-back">后退 ↓</button></div>
-    <div id="focus-tools"><button id="focus-art">阅读这件作品</button><button id="overview">展厅全景</button></div>
-    <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · 中文导览文字</span><p id="caption-text"></p></aside>
-    <section class="dock" aria-label="展馆导航">
-      <div id="exhibit-strip" aria-label="选择作品"></div>
-      <div class="controls"><button id="previous" aria-label="上一厅">←</button><button id="tour"><span>▷</span> <span id="tour-text">配音导览</span></button><button id="room-works">本厅展品 <span id="work-count">2</span></button><button id="next" aria-label="下一厅">→</button></div>
-      <nav id="rooms" aria-label="选择展厅"></nav>
-      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">减少动态</button><span>EXHIBITION 2026 · V1.3.0</span></div>
+    <div id="hint">DRAG TO LOOK · TAP A WORK TO VIEW & LISTEN</div>
+    <section id="fallback-gallery" hidden aria-label="Gallery mode"><button id="fallback-art"></button><span id="fallback-mode"></span></section>
+    <div id="walk-controls"><button id="walk-forward">Walk forward ↑</button><button id="walk-back">Step back ↓</button></div>
+    <div id="focus-tools"><button id="focus-art">Open this work</button><button id="overview">Corridor view</button></div>
+    <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · RECORDED GUIDE</span><p id="caption-text"></p></aside>
+    <section class="dock" aria-label="Museum navigation">
+      <div id="exhibit-strip" aria-label="Select a work"></div>
+      <div class="controls"><button id="previous" aria-label="Previous room">←</button><button id="tour"><span>▷</span> <span id="tour-text">Guided tour</span></button><button id="room-works">Room works <span id="work-count">2</span></button><button id="next" aria-label="Next room">→</button></div>
+      <nav id="rooms" aria-label="Select a room"></nav>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.5.0</span></div>
     </section>
   </main>
-  <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="关闭">×</button></div><div id="panel-content"></div></dialog>
+  <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="Close">×</button></div><div id="panel-content"></div></dialog>
   <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
-  <div id="music-bar" hidden><span id="music-name"></span><button id="music-toggle" aria-label="暂停音乐">Ⅱ</button><button id="music-stop" aria-label="停止音乐">×</button></div>
+  <div id="music-bar" hidden><button id="music-open" aria-label="Return to the playing NFT"><img id="music-cover" alt="" hidden><span id="music-name"></span></button><button id="music-toggle" aria-label="Pause music">Ⅱ</button><button id="music-stop" aria-label="Stop music">×</button></div>
   <div id="toast" role="status" hidden></div>
-  <noscript><section class="no-script">本馆需要 JavaScript 显示三维空间。<a href="./archive.html">阅读本版展览目录</a> · <a href="https://www.trinityaccord.org/">访问原网站</a></section></noscript>
+  <noscript><section class="no-script">JavaScript is required for the 3D museum. <a href="./archive.html">Read the exhibition archive</a> · <a href="https://www.trinityaccord.org/">Visit the source site</a></section></noscript>
   <script type="module" src="./museum.js"></script>
 </body></html>

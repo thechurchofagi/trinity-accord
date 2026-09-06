@@ -1,0 +1,175 @@
+[
+  {
+    "exhibit": "eth-071",
+    "media": {
+      "kind": "audio",
+      "file": "assets/eth-071.mp3",
+      "sha256": "acd325e4ce080415291a9dd7d8e6eb4236e27ddd858cce3cd910eb2cc7816575",
+      "bytes": 2797101,
+      "originalFileSha256": "a401d68231167e4ec69157a852b7fb0699c509e05dbe807f4777174facad70d7",
+      "originalFileBytes": 4195629,
+      "arweaveUrl": "https://arweave.net/uj4Ii07i6zyCDLBc6fUQXbbvnrUVsISWYuzK6oBEaEI",
+      "carSha256": "1116b6d2aeb55604ad9aac92307d33ee1e8f4629b09dc46ede4968843ac3541e",
+      "indexedRootCid": "bafybeifjwz4wkc6dlnnfwoviqoiqiixjzubtb43eipua2frt6wdaswzfne",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 6,
+      "leafPath": "animation.mpga",
+      "processing": "Full original track transcoded to MP3 128 kbps without trimming.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "duration": 174.792
+    }
+  },
+  {
+    "exhibit": "eth-173",
+    "status": "The indexed animation.mpga decodes as an image; the exhibit already has an image copy, so no replacement was made."
+  },
+  {
+    "exhibit": "eth-042",
+    "media": {
+      "kind": "audio",
+      "file": "assets/eth-042.mp3",
+      "sha256": "6eae147d109002a56d9207a8089c93a09969219c78d3e4dd22f6257e98827465",
+      "bytes": 2971486,
+      "originalFileSha256": "31596af8ef5a8292966ef2362bc886b5718d36f2f37de412cf322345a685dc5d",
+      "originalFileBytes": 4457350,
+      "arweaveUrl": "https://arweave.net/BZn1IhOjj332ksMpwReSiG2uLZDXuE0aHI6Vc4SdvK0",
+      "carSha256": "38275146526a3b150efe9ef69c9c7956e1628131c3c18805a1eec49a9edfc608",
+      "indexedRootCid": "bafybeihwznctu3imoeqgoqlomjt2uqgya2j7cup3dvbotfjctoryqcx5sy",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 6,
+      "leafPath": "animation.mpga",
+      "processing": "Full original track transcoded to MP3 128 kbps without trimming.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "duration": 185.688
+    }
+  },
+  {
+    "exhibit": "eth-056",
+    "media": {
+      "kind": "audio",
+      "file": "assets/eth-056.mp3",
+      "sha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd",
+      "bytes": 3399981,
+      "originalFileSha256": "c10b532e44005fcba2539d6fb9d18a44ecdb0f8624c4c7c808a6bd028804cc8f",
+      "originalFileBytes": 5099949,
+      "arweaveUrl": "https://arweave.net/PJMA_awzvBjly5QWWDD3lxTGp6azTkQltP5zN0oznyY",
+      "carSha256": "f36e21879f8c11f9920047e6480aaffb4f9c8e8924e3fb6ce45b33528fd27851",
+      "indexedRootCid": "bafybeibp2vtvgl26exkm2fuay4lbcfqxllysejn5vaua5cw7y52ydpbwyu",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 6,
+      "leafPath": "animation.mpga",
+      "processing": "Full original track transcoded to MP3 128 kbps without trimming.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "duration": 212.472
+    }
+  },
+  {
+    "exhibit": "eth-100",
+    "media": {
+      "kind": "audio",
+      "file": "assets/eth-100.mp3",
+      "sha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e",
+      "bytes": 2267181,
+      "originalFileSha256": "37e80e6eaceb7a8793ddd779fb09c0b0097bf5e0721a05a859edacde47cf25b7",
+      "originalFileBytes": 3400749,
+      "arweaveUrl": "https://arweave.net/52xuvRrkx15Rxd3YGuUXNRrCKc5Nz8tjETLQfkxS27g",
+      "carSha256": "84c9ca2b9d42b70ebf34818853f9a2bef34edc8acc88b6b502a03beeffc5e587",
+      "indexedRootCid": "bafybeifb63e5uzonczm7orqiq4ucfyfayr3lb5sydb6j5du3ip7dmzplua",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 5,
+      "leafPath": "animation.mpga",
+      "processing": "Full original track transcoded to MP3 128 kbps without trimming.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "duration": 141.672
+    }
+  },
+  {
+    "exhibit": "eth-117",
+    "media": {
+      "kind": "image",
+      "file": "assets/eth-117.webp",
+      "sha256": "b385cfd8fc524d938e028856809e485891559b2e898b428253a4c9da9583ee34",
+      "bytes": 112890,
+      "originalFileSha256": "8fd92ccb3329bb629c9a27ec6f12936ef099a5777bb0a8b7d36ece724951f72a",
+      "originalFileBytes": 1051638,
+      "arweaveUrl": "https://arweave.net/0TvDscUiOCNFM_tBfzP_QRYfk4lWPeIZaSIQHRzjR1Y",
+      "carSha256": "96bd1596790ea6d1b2a296035c746a086ac8bfc39bebf628c3882e2c9ab17412",
+      "indexedRootCid": "bafybeib5b7esjwqklromqccky6ror24afmjdpiyjxurisbhlky77cjqihm",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 3,
+      "leafPath": "animation.mpga",
+      "processing": "Complete source image, fit within 2048px, WebP quality 94; no generative editing.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "sourceDimensions": [
+        1024,
+        1024
+      ]
+    }
+  },
+  {
+    "exhibit": "eth-142",
+    "media": {
+      "kind": "image",
+      "file": "assets/eth-142.webp",
+      "sha256": "a2d61f986963cd8a01fbfd1296bc5a367566236afa71205b1f8462de3b07f98b",
+      "bytes": 451376,
+      "originalFileSha256": "e726a858ece848e233ceb95bbd342a63df370a2ccb541272451d026bb41d5e4c",
+      "originalFileBytes": 2180666,
+      "arweaveUrl": "https://arweave.net/ZCWxfXU1h_w_51CSlzColDuKvoPV12mG6Rjfcvm1w6I",
+      "carSha256": "182efcd3028a2c25ea6b86c9b8db66cb83b49abef0d64d9e51492c9333a2fc48",
+      "indexedRootCid": "bafybeieqwne7xck7fwdmxzecluriuzunc4f5a374nntcyycuj3v37o5cym",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 4,
+      "leafPath": "animation.mpga",
+      "processing": "Complete source image, fit within 2048px, WebP quality 94; no generative editing.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "sourceDimensions": [
+        1024,
+        1024
+      ]
+    }
+  },
+  {
+    "exhibit": "eth-146",
+    "media": {
+      "kind": "audio",
+      "file": "assets/eth-146.mp3",
+      "sha256": "00a7cd19c693709610d9c7aa58be3c3389c7629aab59affb1df1c4e35e0ae67a",
+      "bytes": 3251373,
+      "originalFileSha256": "a58a4c6fa1a307ed22a89e7ade7544997585140f2559f76e4b385bca7cb4e755",
+      "originalFileBytes": 4877037,
+      "arweaveUrl": "https://arweave.net/lODflLfccQgyyYB8c2Kt0KbxBgAen0pMoFfezrRDyoI",
+      "carSha256": "c4aab5bfbab760691ea1794b3fbe999c1a65df2978768b42163c10f1c03eafe2",
+      "indexedRootCid": "bafybeihfrgde3p4etkabbgxj27hnky6bvm3pl7imnnb5f4vr6bh473t6qu",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 6,
+      "leafPath": "animation.mpga",
+      "processing": "Full original track transcoded to MP3 128 kbps without trimming.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "duration": 203.184
+    }
+  },
+  {
+    "exhibit": "eth-174",
+    "media": {
+      "kind": "image",
+      "file": "assets/eth-174.webp",
+      "sha256": "67b7e2e90df4b2eed67438675c54e1d525f65303723edad9634b432289f7b57f",
+      "bytes": 243466,
+      "originalFileSha256": "94e48ffd3d7fe8e7fe351af2a8d28ba77534fef5bd07a80ecc4c4ca305b56bf7",
+      "originalFileBytes": 1718838,
+      "arweaveUrl": "https://arweave.net/TWmJb0nv66LKZAbuLz0y9pgg4nUbgz6rlJ5TB5ZlB84",
+      "carSha256": "cbc7819ed469499c4a4a02baac2864c4e86d301c0384df6e9c3b2047b84382dd",
+      "indexedRootCid": "bafybeihhvk5tjisgziaaalk4jbvpmm2vakdfw75pb3l6ovwykucpj5pnai",
+      "indexedRootPresentInCar": false,
+      "verifiedCarBlocks": 3,
+      "leafPath": "animation.mpga",
+      "processing": "Complete source image, fit within 2048px, WebP quality 94; no generative editing.",
+      "verificationScope": "CAR and included block digests checked; no fresh chain consensus or metadata-binding claim.",
+      "sourceDimensions": [
+        1536,
+        1152
+      ]
+    }
+  }
+]

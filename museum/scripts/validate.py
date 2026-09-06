@@ -9,7 +9,7 @@ def read(n):return json.loads((D/'data'/n).read_text())
 rooms=read('rooms.json');sources=read('sources.json');guides=read('narration.json');release=read('release-manifest.json')
 check(rooms['edition']==sources['edition']==release['edition'],'Edition mismatch')
 ids=[e['id'] for e in sources['items']];check(len(ids)==len(set(ids)),'Duplicate source ID')
-extra={'canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
+extra={'star-ark','canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
 for r in rooms['rooms']:
  for id in r['exhibits']:check(id in ids or id in extra,'Missing exhibit '+id)
  check(any(t['room']==r['id'] for t in guides['tracks']),'Missing narration '+r['id'])
@@ -61,6 +61,10 @@ if (D/'data/crystal-model.json').exists():
  crystal=read('crystal-model.json');check(crystal['edition']==rooms['edition'],'Crystal edition mismatch')
  for f in crystal['files']:
   b=(P/f['path']).read_bytes();check(len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],'Crystal build digest mismatch '+f['path'])
+if (D/'data/star-ark-illustration.json').exists():
+ art=read('star-ark-illustration.json')
+ check(hashlib.sha256((D/art['image']).read_bytes()).hexdigest()==art['sha256'],'Curatorial image digest mismatch')
+ check(hashlib.sha256((D/art['localRecord']).read_bytes()).hexdigest()==art['sourceSha256'],'Star Ark source text drift')
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')

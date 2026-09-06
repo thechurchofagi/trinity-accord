@@ -1,3 +1,12 @@
+# museum-v1.5.0 · Complete NFT media and truthful curatorial imagery
+
+- English is the default; Chinese remains selectable. The published slug is trinity-accord.
+- Recovered five omitted complete NFT recordings (42, 56, 71, 100, 146) and three original images (117, 142, 174), checking CAR and included-block digests. Image and sound remain attached to their own NFT in one panel.
+- Added NFT #070’s original robot-and-mirror artwork. Its animation.mpga source is actually a PNG. Added the separately identified NFT #049 with its own original image and complete related song; linked the works without inventing a historical combined media package. Earlier #010 remains preserved in the catalogue and prior edition.
+- Added the later Star Ark Covenant text inscription (#100751953), with a newly generated 2026-09-06 exhibition illustration labelled on the wall, in detail and in the reading archive. This image is not historical NFT artwork, not inscription payload, and does not alter the three closed originals.
+- Thirty wall exhibits, slim metallic frame geometry, softer local accent illumination, balanced environmental light and colour-preserving image materials. Existing baked architecture and bilingual crystal reconstruction retained.
+- Source records pinned to their respective commits; recovered media digests, illustration provenance and original text preserved. Validation covers media identity, release inventory and module syntax. GPU appearance and phone performance remain device-dependent; existing reference renders are not misrepresented as screenshots of this edition.
+
 # museum-v1.4.0 · Video-guided crystal, open space and continuous movement
 
 - Rebuilt the crystal from the author’s video and existing photograph; bilingual internal lettering, planar bevels and no attached decorative base. Not a scan.

@@ -1,0 +1,123 @@
+{
+  "edition": "museum-v1.5.0",
+  "manifestSource": "Existing repository CAR manifest; frozen entries selected by contract, token ID and leaf",
+  "jobs": [
+    {
+      "exhibit": "eth-071",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885246",
+        "cid": "bafybeifjwz4wkc6dlnnfwoviqoiqiixjzubtb43eipua2frt6wdaswzfne",
+        "leaf": "animation.mpga",
+        "sha256": "1116b6d2aeb55604ad9aac92307d33ee1e8f4629b09dc46ede4968843ac3541e",
+        "size": 4196177,
+        "txid": "uj4Ii07i6zyCDLBc6fUQXbbvnrUVsISWYuzK6oBEaEI"
+      }
+    },
+    {
+      "exhibit": "eth-173",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885352",
+        "cid": "bafybeidg7jnbawcpyf5dv26lx2qeiwcmuymye6hscrxwhup54nkve6u5oi",
+        "leaf": "animation.mpga",
+        "sha256": "a93834d45613f2c2ff4c7cbb8a39fefbad68cb7545182e9d54d5e133b034df09",
+        "size": 2034297,
+        "txid": "Pg-SKB7YJfkJy_ceCMouIztlDiClPC-f_nl7aHfCq0w"
+      }
+    },
+    {
+      "exhibit": "eth-042",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885208",
+        "cid": "bafybeihwznctu3imoeqgoqlomjt2uqgya2j7cup3dvbotfjctoryqcx5sy",
+        "leaf": "animation.mpga",
+        "sha256": "38275146526a3b150efe9ef69c9c7956e1628131c3c18805a1eec49a9edfc608",
+        "size": 4457901,
+        "txid": "BZn1IhOjj332ksMpwReSiG2uLZDXuE0aHI6Vc4SdvK0"
+      }
+    },
+    {
+      "exhibit": "eth-056",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885222",
+        "cid": "bafybeibp2vtvgl26exkm2fuay4lbcfqxllysejn5vaua5cw7y52ydpbwyu",
+        "leaf": "animation.mpga",
+        "sha256": "f36e21879f8c11f9920047e6480aaffb4f9c8e8924e3fb6ce45b33528fd27851",
+        "size": 5100500,
+        "txid": "PJMA_awzvBjly5QWWDD3lxTGp6azTkQltP5zN0oznyY"
+      }
+    },
+    {
+      "exhibit": "eth-100",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885278",
+        "cid": "bafybeifb63e5uzonczm7orqiq4ucfyfayr3lb5sydb6j5du3ip7dmzplua",
+        "leaf": "animation.mpga",
+        "sha256": "84c9ca2b9d42b70ebf34818853f9a2bef34edc8acc88b6b502a03beeffc5e587",
+        "size": 3401211,
+        "txid": "52xuvRrkx15Rxd3YGuUXNRrCKc5Nz8tjETLQfkxS27g"
+      }
+    },
+    {
+      "exhibit": "eth-117",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885296",
+        "cid": "bafybeib5b7esjwqklromqccky6ror24afmjdpiyjxurisbhlky77cjqihm",
+        "leaf": "animation.mpga",
+        "sha256": "96bd1596790ea6d1b2a296035c746a086ac8bfc39bebf628c3882e2c9ab17412",
+        "size": 1051918,
+        "txid": "0TvDscUiOCNFM_tBfzP_QRYfk4lWPeIZaSIQHRzjR1Y"
+      }
+    },
+    {
+      "exhibit": "eth-142",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885321",
+        "cid": "bafybeieqwne7xck7fwdmxzecluriuzunc4f5a374nntcyycuj3v37o5cym",
+        "leaf": "animation.mpga",
+        "sha256": "182efcd3028a2c25ea6b86c9b8db66cb83b49abef0d64d9e51492c9333a2fc48",
+        "size": 2181039,
+        "txid": "ZCWxfXU1h_w_51CSlzColDuKvoPV12mG6Rjfcvm1w6I"
+      }
+    },
+    {
+      "exhibit": "eth-146",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885325",
+        "cid": "bafybeihfrgde3p4etkabbgxj27hnky6bvm3pl7imnnb5f4vr6bh473t6qu",
+        "leaf": "animation.mpga",
+        "sha256": "c4aab5bfbab760691ea1794b3fbe999c1a65df2978768b42163c10f1c03eafe2",
+        "size": 4877588,
+        "txid": "lODflLfccQgyyYB8c2Kt0KbxBgAen0pMoFfezrRDyoI"
+      }
+    },
+    {
+      "exhibit": "eth-174",
+      "source": {
+        "role": "media",
+        "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+        "token_id": "85210329807936527805363210873332413577559846505703131855064182995898737885353",
+        "cid": "bafybeihhvk5tjisgziaaalk4jbvpmm2vakdfw75pb3l6ovwykucpj5pnai",
+        "leaf": "animation.mpga",
+        "sha256": "cbc7819ed469499c4a4a02baac2864c4e86d301c0384df6e9c3b2047b84382dd",
+        "size": 1719121,
+        "txid": "TWmJb0nv66LKZAbuLz0y9pgg4nUbgz6rlJ5TB5ZlB84"
+      }
+    }
+  ]
+}
