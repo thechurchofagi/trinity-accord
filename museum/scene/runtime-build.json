@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.13.0",
+  "edition": "museum-v1.13.1",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -16,27 +16,27 @@
     {
       "path": "dist/data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "25fddbcc1cbd4563c8644c894c4f0c01f8490db890908eb353504b83811dea84"
+      "sha256": "b4d1405a5d0db9a7f3b7b71c7202e5d31427cb759fe9d2fe6a79f3138c7fb68d"
     },
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "d6dcd17c16f81cdaae0db74d4ab65faad46acaf3bba0ebd6ddcb078a735b61e3"
+      "sha256": "67870e8bdf682ee9b0e8cf262a946dd4d206fe29607b84b31d714f0625201c80"
     },
     {
       "path": "dist/data/rooms.json",
       "bytes": 8839,
-      "sha256": "921d71965445e051be8a4f5aec84a7f598194a4818b4a22d02f9acf4ecbc68e7"
+      "sha256": "d9c69d24818d3c47736c1e907ca732c1dd429571fc04fd4a928ee84e74a37cce"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 126331,
-      "sha256": "d8f188dfc05f962fb4439390fbee96765237e8ff39a892382e7b72ce33406121"
+      "sha256": "27047f51e9f53fcf594412afb0fba8b05947294e35c2aafb1c6ae42d42e72932"
     },
     {
       "path": "dist/edition-data.js",
       "bytes": 131349,
-      "sha256": "5185c6550709e0ebe30d43ce2f3734c020c24dac09f98ef57140410ca1923700"
+      "sha256": "a59e1a192e37720ae967c5029b86379f1e9f4e68849e849229188c64037f0bf2"
     },
     {
       "path": "dist/movement-controls.js",
@@ -45,8 +45,8 @@
     },
     {
       "path": "dist/museum.js",
-      "bytes": 53099,
-      "sha256": "50166c7537fddf43ba6bd0fa62f33999f247fe6d8080e9bbe8834b3d0d7e6c17"
+      "bytes": 53183,
+      "sha256": "cfb9a2423a8518b64d0988406d2c9d56b2c72473a9e60867c08c0ee78e664756"
     },
     {
       "path": "dist/observation-view.js",
@@ -96,7 +96,7 @@
   ],
   "output": {
     "path": "dist/museum.bundle.js",
-    "bytes": 777264,
-    "sha256": "b803963347a18fc073fc1ed7622d3a5fbebd3a3a2608f94be2a6473016550963"
+    "bytes": 777351,
+    "sha256": "595cbb689e65ba3de16346684368eb10d52955817c700de2b4a3e4b2b5af09e4"
   }
 }

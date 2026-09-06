@@ -17,6 +17,9 @@ const layout=JSON.parse(fs.readFileSync(new URL('dist/data/gallery-layout.json',
 const hall=createPreviewHall(layout);assert.equal(hall.group.children.length,6);assert.ok(hall.group.children.every(x=>x.isMesh&&!x.material.map));hall.dispose();
 const app=fs.readFileSync(new URL('dist/museum.js',root),'utf8');
 assert.ok(app.includes('roomData=initialData.rooms'));
+assert.ok(app.includes('size:26,width:512,height:384'));
+assert.ok(app.includes('size:35,width:1024,height:180'));
+assert.ok(app.includes('[e.title,e.en,'));
 assert.ok(!app.includes("await fetch('./data/"));
 assert.ok(!app.includes('addCanonicalPrism'));assert.ok(!app.includes('avoidPrism'));
 assert.ok(!app.includes("await new GLTFLoader().loadAsync('./assets/gallery"));
