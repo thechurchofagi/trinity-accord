@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.7.0",
+  "edition": "museum-v1.11.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5807,
-      "sha256": "9e95062bae49a06b2a4d45d29b2f6a5def7457af2603ab7ad1d2db12470ce1e1"
+      "bytes": 5808,
+      "sha256": "55bfcd07ee4a266bcd62c56cc2e0ae48dab425f1fe0c05c7ca77ffd9b74890f6"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -93,6 +93,6 @@
       "sha256": "7c9f9447bbdd024af10469f7b475f313e7b95e07672768b4ffbaf7e1807cee7a"
     }
   ],
-  "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo.",
+  "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo. v1.9 moves the crystal to the Material chapter centre and replaces the ring/disc installation with diffuse light and visible levitation.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots."
 }

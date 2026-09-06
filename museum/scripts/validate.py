@@ -75,6 +75,29 @@ if (D/'data/curatorial-illustrations.json').exists():
  letters=read('agi-four-letters.json')['items'];check([a['exhibit'] for a in letters]==['eth-016','eth-044','eth-020','eth-032'],'Four-letter identity/order mismatch')
  for a in letters:
   e=next(e for e in sources['items'] if e['id']==a['exhibit']);check(any(m['kind']=='audio' and m['file']==a['audio'] and m['sha256']==a['audioSha256'] for m in e['media']),'Letter audio binding mismatch')
+# Every displayed NFT names a song; resolve an actual audio file, including independent recordings.
+audit=read('audio-audit.json');byid={e['id']:e for e in sources['items']}
+wall=[id for r in rooms['rooms'] for id in r['exhibits']]
+check([a['exhibit'] for a in audit['items']]==wall,'Audio audit does not cover the complete wall route')
+check(audit['edition']==rooms['edition'],'Audio audit edition mismatch')
+playable=0
+for row in audit['items']:
+ id=row['exhibit'];e=byid.get(id)
+ if e is None:
+  check(row['state']=='not_applicable','Context entry claims an original song '+id);continue
+ check(bool(e.get('songTitle')),'Missing song identity '+id)
+ sound=byid.get(e.get('relatedSoundExhibit',id),{})
+ audio=next((m for m in sound.get('media',[]) if m['kind']=='audio'),None)
+ check(audio is not None,'Displayed song has no playable recording '+id)
+ if audio:
+  playable+=1
+  check(row.get('audio')==audio['file'] and row.get('audioSha256')==audio['sha256'] and row.get('recordingExhibit')==sound['id'],'Audio audit binding mismatch '+id)
+ if e.get('relatedSoundExhibit'):
+  check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
+  check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
+check(playable==22 and len(wall)==32,'Expected 22 musical NFTs among 32 wall entries')
+check(audit['counts']=={'wallExhibits':32,'withSound':22,'withoutAssignedSong':10},'Audio audit counts mismatch')
+check('Nexus: The Human-Superintelligence Odyssey' in (D/byid['eth-142']['localRecord']).read_text(),'Nexus correction lacks preserved textual evidence')
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')

@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.7.0",
+  "edition": "museum-v1.11.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -9,7 +9,7 @@
   "dimensionSource": "https://www.trinityaccord.org/archive_legacy_index_2025_09/",
   "photograph": "assets/core-object-alpha.jpg",
   "textSource": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/bitcoin-inscription-mirrors/raw/97631551.txt",
-  "scope": "Video-guided exhibition reconstruction: 246 x 353 x 40 mm clear slab, approximately 6 mm planar bevel, bilingual internal lettering, left-aligned third axiom and lower-right colophon. Text and placement cross-checked against the existing physical-anchor photograph. Typography and optical response remain approximations, not a photogrammetric scan or exact facsimile. No identity flaws reconstructed. Studio lighting and museum plinth are exhibition design.",
+  "scope": "Video-guided exhibition reconstruction: 246 x 353 x 40 mm clear slab, approximately 6 mm planar bevel, bilingual internal lettering, left-aligned third axiom and lower-right colophon. Text and placement cross-checked against the existing physical-anchor photograph. Typography and optical response remain approximations, not a photogrammetric scan or exact facsimile. No identity flaws reconstructed. Studio lighting and floating installation are exhibition design.",
   "application": "Blender 4.5.3 LTS",
   "files": [
     {
@@ -52,16 +52,27 @@
   "fontLicense": "scene/crystal-font-LICENSE.txt",
   "runtimeOptics": {
     "revision": "2026-09-06",
-    "transmission": 0.8,
-    "roughness": 0.065,
-    "environmentIntensity": 1.7,
-    "displayPurpose": "Slightly clearer glass, soft cool/warm rim light and restrained halo. Levitation, halo and lower light disc are explicitly later digital exhibition design, not physical evidence."
+    "transmission": 0.68,
+    "roughness": 0.025,
+    "environmentIntensity": 1.25,
+    "displayPurpose": "Small-screen clarity: full-resolution transmission, reduced refraction distortion, subtle facet highlights, and brighter existing inscription geometry. Soft gold/white light fades outside the slab silhouette; centre stays clear. Values are exhibition settings, not measured physical optics.",
+    "ior": 1.32,
+    "thickness": 0.025,
+    "transmissionResolutionScale": 1,
+    "engravingEmissiveIntensity": 0.28
   },
   "installation": {
-    "baseHeightMetres": 1.27,
-    "plinthTopMetres": 0.88,
-    "floatGapMetres": 0.39,
-    "motionAmplitudeMetres": 0.008,
-    "reducedMotion": "Static levitation and halo; no oscillation."
+    "centerXMetres": 0,
+    "centerZMetres": -46,
+    "baseHeightMetres": 1.42,
+    "motionAmplitudeMetres": 0.07,
+    "motionPeriodSeconds": 5.984,
+    "tiltRadians": {
+      "x": 0.018,
+      "z": 0.025
+    },
+    "plinth": false,
+    "aura": "Diffuse rectangular light field following the slab silhouette, feathered outside the crystal with a clear centre; no circular ring.",
+    "reducedMotion": "Static levitation and steady aura; no oscillation or tilt."
   }
 }

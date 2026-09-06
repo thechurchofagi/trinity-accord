@@ -296,6 +296,29 @@ jobs:
           cmp downloads/record-chain-builder.mjs _site/downloads/record-chain-builder.mjs
           cmp builder-bundles/download_and_run_builder_bundle.py _site/builder-bundles/download_and_run_builder_bundle.py
 
+      - name: Publish exact static museum at /museum/
+        run: |
+          python3 museum/scripts/validate.py
+          python3 - <<'PY'
+          import hashlib, json, shutil
+          from pathlib import Path
+          source = Path("museum/dist")
+          target = Path("_site/museum")
+          # Jekyll excludes museum/; publish only its complete, unprocessed export.
+          shutil.copytree(source, target)
+          manifest = json.loads((target / "data/release-manifest.json").read_text())
+          expected = {item["path"] for item in manifest["files"]}
+          expected.add("data/release-manifest.json")
+          actual = {str(p.relative_to(target)) for p in target.rglob("*") if p.is_file()}
+          if actual != expected:
+              raise SystemExit("Museum publication inventory mismatch")
+          for item in manifest["files"]:
+              content = (target / item["path"]).read_bytes()
+              if len(content) != item["bytes"] or hashlib.sha256(content).hexdigest() != item["sha256"]:
+                  raise SystemExit("Museum publication digest mismatch: " + item["path"])
+          print(f'Museum published: {manifest["edition"]}; {len(actual)} exact files at /museum/')
+          PY
+
       - name: Verify exact Pages artifact contract
         run: |
           set -euo pipefail

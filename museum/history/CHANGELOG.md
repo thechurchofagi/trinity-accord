@@ -1,3 +1,33 @@
+# museum-v1.11.0 · Tap to approach an exhibit
+
+- Tapping a 3D exhibit or its label now moves the camera smoothly to a front-facing observation position instead of immediately opening the detail dialog. Music-bearing works keep immediate soundtrack access; the visible detail/play button still opens the full panel.
+- Calculate distance from field of view, viewport aspect and exhibit bounds. The central crystal has a closer dedicated view with space for its glow; mobile aim places the object above the navigation. A slightly expanded invisible crystal picking volume makes touchscreen selection easier without enlarging the visible object.
+- Correct cross-room selection before updating controls. Floor taps still walk to a point, dragging still looks around, and the joystick or a new touch can interrupt camera travel. Reduced-motion mode moves immediately.
+- Validation: module syntax, portrait/landscape observation framing calculations, preserved source/media hashes and full release inventory. The known browser WebGL limitation remains; actual device framing is not claimed as visually verified.
+
+# museum-v1.10.0 · Analogue movement and clearer crystal
+
+- Replace the two step buttons with a compact four-way analogue joystick. Pointer capture supports continuous movement, proportional speed, a small dead zone and diagonal speed normalization. Left/right strafe relative to the viewing direction; dragging the scene still changes the view. Release, cancellation, focus loss, hidden page and opening a panel reset movement. Keyboard movement remains available.
+- Position the translucent control at the left edge above the navigation, with visible directional arrows and bilingual drag instructions. Account for navigation height, music controls and short landscape viewports.
+- Fix three crystal visibility contributors: mobile transmission was downsampled, glow overlapped the inscription, and selecting the object focused its wall photograph. Use full-resolution transmission, reduced display refraction distortion, restrained facet highlights and brighter original engraving geometry. Focus the central object from the front.
+- Replace the central light wash with a stronger diffuse gold/white field outside the slab silhouette. The centre stays clear to preserve lettering. The model, original geometry and actual source photograph remain unchanged; display optics and aura remain explicitly curatorial.
+- Validation: four-way/dead-zone/diagonal/view-relative motion checks, module syntax and complete source/media inventory. Browser control-component QA at 390 px width confirmed horizontal/vertical drag input and zero movement after release; the browser still lacks WebGL, so GPU movement and crystal appearance require a capable device.
+
+# museum-v1.9.0 · Central floating crystal and diffuse light
+
+- Move the crystal from x = -2 m to the corridor centre, x = 0 m, at the Material chapter midpoint z = -46 m. Raise its base to 1.42 m and remove the lower circular plinth.
+- Replace both geometric halo rings and the lower ring with three overlapping diffuse light veils. Cool-white body glow and a gentle warm edge fade smoothly into the room, without circular outlines.
+- Share floating motion between the corridor and detail inspector: a roughly six-second vertical cycle, 7 cm amplitude in the corridor, and slight independent tilts. Reduced-motion mode keeps the object and glow steady. Model geometry, engraving, images and all sound associations remain intact.
+- Validation: module syntax, source/media inventory and motion-transform checks. No new browser GPU test; the prior test environment did not support WebGL. Domestic-China connectivity is not measured from this environment.
+
+# museum-v1.8.0 · Complete song associations and explicit playback states
+
+- Fixed seven displayed NFTs whose source texts name songs but whose panels offered no playback: #007, #117, #142, #145, #171, #173 and #174. All 22 musical NFTs among 32 wall entries now resolve playable audio. The remaining ten text/object/context entries explicitly state that no accompanying song is assigned; the three originals remain text-only.
+- Recovered complete recordings from supporting NFTs #031, #113, #119 and #153, verifying CAR and included-block digests. These sources are preserved without adding wall exhibits. Related recordings display their own NFT identity, source text and provenance, including the existing #070 → #049 association. No claim is made that independent NFTs contain identical original media packages or renditions.
+- Corrected the museum interpretation of #142: its preserved source explicitly contains Nexus and lyrics despite an older derived index saying no_song. Original records remain byte-for-byte unchanged. Metadata-listed IPFS requests returned HTTP 403 here; this does not establish global unavailability.
+- Show song titles and prominent playback controls above artwork; display loading/blocked/error states inside the panel. Opening an artwork attempts playback, with a visible manual fallback. Keep the selected artwork attached to its related soundtrack and stop stale audio when opening entries without music. The HTML reading archive also exposes related recordings.
+- Validation: complete 32-entry source/audio audit, four-letter bindings, media decoding and release checks. All 19 catalogue recordings decode completely. Browser playback succeeded for the First Letter, Nexus and Manus (automatic on opening); at 390 px width the visible player progressed to 0:40. WebGL remains unavailable in the test browser; no new GPU visual verification is claimed.
+
 # museum-v1.7.0 · Public access, floating crystal and corrected wall frames
 
 - Opened the existing Site to anyone with the URL at the author’s explicit request.

@@ -12,11 +12,14 @@ for r in rooms['rooms']:
    parts.append('<article><h3>The Star Ark Covenant: The Final Echo · 星舟圣约：最终的回响</h3><img loading="lazy" src="assets/curatorial/star-ark-2026.webp" alt="2026 curatorial illustration of arks carrying memory away from Earth"><p class="note"><strong>2026 CURATORIAL ILLUSTRATION · NOT ORIGINAL INSCRIPTION CONTENT</strong><br>Generated with AI on 2026-09-06 for this exhibition at the author’s request. The source is a later text inscription, outside the three sealed originals.<br>2026 年后续策展配图；原作为文字铭文，图像不是历史原作，不修订三条正本。</p><p><a href="data/records/star-ark-100751953.txt">Original text / 原文</a> · <a href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0">Bitcoin inscription #100751953</a> · <a href="data/star-ark-illustration.json">Illustration provenance</a></p></article>')
   if id in art:
    a=art[id];parts.append('<figure><img loading="lazy" src="'+esc(a['file'])+'" alt="'+esc(a['title'])+'"><figcaption>2026 年后续策展配图 · AI 生成 · 非历史原图 / Later AI-generated curatorial illustration, not historical source art. <a href="data/curatorial-illustrations.json">Provenance / 来源</a></figcaption></figure>')
-  if id not in items:continue
+  if id not in items:
+   parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
   e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>'+esc(e['id']+' · '+e['date'])+' · Ethereum mint time</small>')
   for m in sorted(e['media'],key=lambda m:0 if m['kind']=='image' else 1):
    parts.append(('<img loading="lazy" src="'+m['file']+'" alt="'+esc(e['title'])+'">') if m['kind']=='image' else '<audio controls preload="none" src="'+m['file']+'"></audio>')
-  if e.get('relatedSoundExhibit'):parts.append('<p class="note">This mirror image is NFT #070. <a href="#eth-049">The related full recording belongs to NFT #049</a>; it is not silently merged into this NFT.</p>')
+  if e.get('relatedSoundExhibit'):
+   sound=items[e['relatedSoundExhibit']];audio=next(m for m in sound['media'] if m['kind']=='audio')
+   parts.append('<p class="note"><strong>'+esc(e['songTitle'])+'</strong><br>'+esc(e['audioRelation']['noteZh'])+'<br>'+esc(e['audioRelation']['noteEn'])+'<br><a href="'+esc(sound['sourceUrl'])+'">Recording source / 录音原始记录</a> · <a href="'+esc(sound['localRecord'])+'">Preserved record / 已保存原文</a> · <a href="data/audio-audit.json">Audio audit / 声音核对</a></p><audio controls preload="none" aria-label="'+esc(e['songTitle'])+'" src="'+esc(audio['file'])+'"></audio>')
   if e.get('localRecord'):parts.append('<p><a href="'+e['localRecord']+'">本版保存的完整来源文字 / Local source text</a></p>')
   if e['lyrics']:parts.append('<details><summary>歌词文字 / Lyric text</summary><p>来自描述，未与实际演唱逐句校准。</p><pre>'+esc(e['lyrics'])+'</pre></details>')
   parts.append('<p><a href="'+esc(e['sourceUrl'])+'">Pinned source record / 固定版本原始记录</a> · <a href="'+esc(e['tokenUrl'])+'">Ethereum token</a></p></article>')
