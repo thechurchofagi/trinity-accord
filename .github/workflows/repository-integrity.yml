@@ -2,6 +2,7 @@ name: Repository Integrity Check
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -16,124 +17,170 @@ jobs:
   current-system-integrity:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    outputs:
+      museum_only: ${{ steps.museum_scope.outputs.museum_only }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           show-progress: false
 
-      # These contracts are stdlib-only. Run them before dependency setup so
-      # stale active guidance fails fast and the failing contract family is
-      # visible directly in the job step summary.
+      - name: Verify museum CI boundaries
+        run: python3 -m unittest tests.test_museum_ci_scope -q
+
+      - name: Classify isolated museum changes
+        id: museum_scope
+        run: python3 scripts/museum_change_scope.py
+
+      - name: Validate isolated museum export
+        if: steps.museum_scope.outputs.museum_only == 'true'
+        run: |
+          python3 museum/scripts/validate.py
+          while IFS= read -r -d '' script; do node --check "$script"; done < <(find museum/dist -type f -name '*.js' -print0)
+
       - name: Verify Agent Start current contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_agent_start_docs.py agent-start
 
       - name: Verify Guardian current-route contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_agent_start_docs.py guardian-current
 
       - name: Verify Guardian retired-route omissions
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_agent_start_docs.py guardian-retired
 
       - name: Verify active agent docs current-model clarity
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_external_agent_docs_core_routes_clarity.py
 
       - name: Verify public wording and submission routes
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_public_wording_phase6_contract.py
 
       - name: Verify production-status wording
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_public_production_status_alignment.py
 
       - name: Verify external-agent first-contact rules
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_external_agent_first_contact_rules_contract.py
 
       - name: Verify external-agent entrypoint consistency
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_external_agent_entrypoint_consistency_contract.py
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        if: steps.museum_scope.outputs.museum_only != 'true'
         with:
           python-version: "3.12"
           cache: "pip"
           cache-dependency-path: requirements-ci.txt
 
       - name: Verify Builder receipt boundary fields are synchronized
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/check_builder_receipt_boundary_sync.py
 
       - name: Install Python dependencies
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Verify CI and code alignment
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_ci_code_alignment.py
 
       - name: Reject missing workflow and CI-group executables
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_workflows_do_not_reference_missing_scripts.py
 
       - name: Verify workflow permissions and retired writers
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_workflow_permissions.py
 
       - name: Compile current Python sources
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 -m compileall -q scripts apps tests
 
       - name: Verify agent-start API contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_agent_start_api.py
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: steps.museum_scope.outputs.museum_only != 'true'
         with:
           node-version-file: ".node-version"
           cache: "npm"
 
       - name: Verify root Node dependency lockfile
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: npm ci
 
       - name: Verify retired Node service dependency lockfile
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           npm ci --ignore-scripts --prefix examples/github-app-backend
           node --check examples/github-app-backend/server.js
 
       - name: Verify gateway error recovery context
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: node examples/github-app-backend/test-gateway-error-recovery-context.mjs
 
       - name: Verify Pages deployment contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_deploy_pages_workflow_contract.py
 
       - name: Verify academic dissemination package
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_academic_dissemination_contract.py
 
       - name: Verify bounded Zenodo preprint file repair
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           python3 scripts/test_research_preprint_zenodo_file_repair.py
           python3 scripts/test_research_preprint_zenodo_file_repair_workflow.py
 
       - name: Verify mission governance contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_mission_governance_contract.py
 
       - name: Verify current Echo taxonomy
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_no_stale_echo_taxonomy_names.py
 
       - name: Verify concurrent preflight swarm contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_concurrent_preflight_swarm_contract.py
 
       - name: Verify external-agent E2E journey matrix
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_agent_e2e_journey_matrix.py
 
       - name: Verify interpretation and verification migration
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 tests/test_interpretation_and_verification_migration.py
 
       - name: Verify verification procedure model
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 tests/test_verification_procedure_model.py
 
       - name: Verify Builder multidimensional verification
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/test_builder_multidimensional_verification.py
 
       - name: Validate strict repository JSON
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/validate_json_strict.py
 
       - name: Verify record-chain
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/trinity_record_chain.py verify
 
       - name: Verify sitemap has no committed drift
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python3 scripts/generate_sitemap.py --check
 
       - name: Run current system tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         shell: bash
         run: |
           set +e
@@ -148,6 +195,7 @@ jobs:
           tail -n 40 /tmp/current-system-tests.log
 
       - name: Verify public home status contracts
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           set -euo pipefail
           # Dynamic homepage generated-file drift is owned by homepage-status-sync.yml.
@@ -166,6 +214,7 @@ jobs:
         run: python3 scripts/test_no_private_key_material_committed.py
 
       - name: Run P0 current fast gate
+        if: steps.museum_scope.outputs.museum_only != 'true'
         id: p0_current
         continue-on-error: true
         shell: bash
@@ -195,7 +244,7 @@ jobs:
 
   refresh-repository-preservation-doi:
     needs: current-system-integrity
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.current-system-integrity.outputs.museum_only != 'true'
     concurrency:
       group: main-write-lock
       queue: max

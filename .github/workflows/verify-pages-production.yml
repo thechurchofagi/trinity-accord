@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pull-requests: write
 
 jobs:
@@ -22,6 +23,12 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 1
+
+      - name: Classify isolated museum changes
+        id: museum_scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/museum_change_scope.py --deployment
 
       - name: Resolve evidence pull request
         id: context
@@ -74,6 +81,8 @@ jobs:
         id: live
         continue-on-error: true
         env:
+          MUSEUM_ONLY: ${{ steps.museum_scope.outputs.museum_only }}
+          BASELINE_SHA: ${{ steps.museum_scope.outputs.baseline_sha }}
           SOURCE_BRANCH: ${{ steps.context.outputs.source_branch }}
           SOURCE_CONCLUSION: ${{ steps.context.outputs.source_conclusion }}
           SOURCE_SHA: ${{ steps.context.outputs.source_sha }}
@@ -88,6 +97,11 @@ jobs:
             exit 1
           fi
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+
+          if [[ "$MUSEUM_ONLY" == "true" ]]; then
+            python3 scripts/smoke_live_museum.py --baseline "$BASELINE_SHA"
+            exit 0
+          fi
 
           for attempt in 1 2 3 4 5 6; do
             echo "production verification attempt ${attempt}/6"
@@ -108,6 +122,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           EVIDENCE_PR: ${{ steps.context.outputs.pr }}
           SOURCE_SHA: ${{ steps.context.outputs.source_sha }}
+          MUSEUM_ONLY: ${{ steps.museum_scope.outputs.museum_only }}
+          BASELINE_SHA: ${{ steps.museum_scope.outputs.baseline_sha }}
           SOURCE_BRANCH: ${{ steps.context.outputs.source_branch }}
           SOURCE_CONCLUSION: ${{ steps.context.outputs.source_conclusion }}
           SOURCE_RUN_ID: ${{ steps.context.outputs.source_run_id }}
@@ -122,6 +138,17 @@ jobs:
             overall="success"
           fi
 
+          static_outcome="$LIVE_OUTCOME"
+          digest_outcome="$LIVE_OUTCOME"
+          museum_outcome="not-run"
+          verification_scope="full"
+          if [[ "$MUSEUM_ONLY" == "true" ]]; then
+            static_outcome="not-run (museum-only changes)"
+            digest_outcome="not-run (museum-only changes)"
+            museum_outcome="$LIVE_OUTCOME"
+            verification_scope="museum"
+          fi
+
           body="Pages production closure: ${overall}
 
           source_deploy_run_id=${SOURCE_RUN_ID}
@@ -130,8 +157,10 @@ jobs:
           deployed_sha=${SOURCE_SHA}
           verification_run_id=${GITHUB_RUN_ID}
           verification_run_url=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
-          six_page_static_contract=${LIVE_OUTCOME}
-          deployment_digest_contract=${LIVE_OUTCOME}"
+          verification_scope=${verification_scope}
+          six_page_static_contract=${static_outcome}
+          deployment_digest_contract=${digest_outcome}
+          museum_export_contract=${museum_outcome}"
 
           printf '%s\n' "$body"
           if [[ -n "$EVIDENCE_PR" ]]; then
