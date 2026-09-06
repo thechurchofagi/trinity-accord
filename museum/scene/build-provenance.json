@@ -35,7 +35,7 @@
     {
       "path": "scene/gallery-layout.json",
       "bytes": 6722,
-      "sha256": "0834203170564f314c2eb5752a0f1d2d921eec800d448195181fa913e928045b"
+      "sha256": "210b0eb85d9ea006158bc7c64b6559793e3063d04d929d895fdc953c5c821280"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -69,18 +69,13 @@
     },
     {
       "path": "dist/open-space.js",
-      "bytes": 3736,
-      "sha256": "9055727f74ba1210cbc6fd1fcd79c0c27a70975b384863acdf321477741924e2"
+      "bytes": 5508,
+      "sha256": "9e23408619746118afd19bd3a374326224e1f0222b4c4f11dfa42ca271b5908f"
     },
     {
       "path": "dist/data/space-design.json",
-      "bytes": 473,
-      "sha256": "adffde89d9eb9dbe0be0c30170787c65940f8fea5bd4cec74566f264a2d667b7"
-    },
-    {
-      "path": "dist/assets/space/milky-way.png",
-      "bytes": 3027264,
-      "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
+      "bytes": 2381,
+      "sha256": "79224ac7b16e9916f99af719358fa686055ad9daa26b3f0baf19eb10c412eef1"
     },
     {
       "path": "dist/wall-presentation.js",

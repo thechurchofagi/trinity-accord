@@ -42,7 +42,7 @@ for r in rooms['rooms']:
  if r['id']=='guardians':parts.append('<p><a href="https://www.trinityaccord.org/authority/">权威边界 / Authority</a></p>')
  if r['id']=='waiting':parts.append('<p><a href="https://www.trinityaccord.org/first-contact/">回应或守护 / First Contact</a> · <a href="https://www.trinityaccord.org/">原网站当前状态 / Current state</a></p>')
  parts.append('</section>')
-parts.append('<h2>版本与来源 / Edition & sources</h2><p><a href="data/sources.json">素材来源与处理清单</a> · <a href="data/rooms.json">空间与导览配置</a> · <a href="data/narration.json">配音记录</a> · <a href="data/release-manifest.json">文件清单与哈希</a></p><p>来源仓库版本：'+esc(sources['sourceCommit'])+'</p><p class="note">数字展馆的沿革属于后续展览史。文件哈希只说明本版文件一致性；恢复旧版也仍受浏览器兼容性影响。外部来源链接需要网络连接。</p></main></html>')
+parts.append('<h2>版本与来源 / Edition & sources</h2><p>窗景 / Window scenery: NASA / NOAA DSCOVR EPIC · HYG v4.1, David Nash / Astronexus (CC BY-SA 4.0). <a href="data/space-design.json">影像与星表来源 / Image and star catalog credits</a>.</p><p><a href="data/sources.json">素材来源与处理清单</a> · <a href="data/rooms.json">空间与导览配置</a> · <a href="data/narration.json">配音记录</a> · <a href="data/release-manifest.json">文件清单与哈希</a></p><p>来源仓库版本：'+esc(sources['sourceCommit'])+'</p><p class="note">数字展馆的沿革属于后续展览史。文件哈希只说明本版文件一致性；恢复旧版也仍受浏览器兼容性影响。外部来源链接需要网络连接。</p></main></html>')
 (D/'archive.html').write_text('\n'.join(parts))
 files=[]
 for p in sorted(D.rglob('*')):

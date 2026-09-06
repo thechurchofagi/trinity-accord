@@ -1,8 +1,36 @@
 {
-  "edition": "museum-v1.4.0",
-  "role": "Later exhibition scenery, not astronomical evidence or live telemetry",
-  "image": "assets/space/milky-way.png",
-  "method": "OpenAI image generation",
-  "prompt": "Photographic deep-space Milky Way panorama; midnight blue, fine stars, diagonal dust band, no Earth horizon, planets or text.",
-  "installation": "Open ends; a breathing circular light facing the star field. The ring links to the existing First Contact exhibit."
+  "edition": "museum-v1.22.0",
+  "role": "Later exhibition window scenery; not an NFT, canonical artwork, live feed or simulated observing location.",
+  "earth": {
+    "file": "assets/space/earth-epic-20220621.png",
+    "credit": "NASA / NOAA / DSCOVR EPIC team",
+    "sourcePage": "https://epic.gsfc.nasa.gov/",
+    "sourceMetadata": "https://epic.gsfc.nasa.gov/api/natural/date/2022-06-21",
+    "sourceImage": "https://epic.gsfc.nasa.gov/archive/natural/2022/06/21/png/epic_1b_20220621201443.png",
+    "imageId": "epic_1b_20220621201443",
+    "date": "2022-06-21",
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "sha256": "46fdb7f82de2ecb1a6cdadae73521c47e6084c80c1f2a17a4194513d47c55e1c",
+    "processing": "Unmodified NASA natural-color PNG, including original black background and limb. Pacific-centred view. No generated land/clouds, saturation filter, artificial terminator or added atmospheric halo.",
+    "installation": "Entrance direction +Z. Camera-relative distant image plane with fixed world orientation; responsive angular size."
+  },
+  "stars": {
+    "file": "data/bright-stars.json",
+    "credit": "David Nash / Astronexus, HYG v4.1",
+    "source": "https://github.com/astronexus/HYG-Database/blob/main/hyg/CURRENT/hygdata_v41.csv",
+    "sourceSha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "licenseFile": "assets/space/HYG-LICENSE.txt",
+    "sha256": "e9f78a46874964ae1ec70ea9bdcec9442ae53aeb6da96ccd0deae6f67ed33d10",
+    "selection": "Exclude Sun, retain visual magnitude <= 3.0; copy catalog ID, right ascension, declination and magnitude. J2000 catalog positions, no current-date precession.",
+    "rows": 179,
+    "orientation": "Exit faces RA 6h, Dec 0 degrees; fixed celestial arrangement, not a claimed Earth-based local sky.",
+    "appearance": "Black background; small neutral star points weighted by catalog magnitude, no twinkling, flares, nebulae or long-exposure Milky Way. Curated visibility for a lit gallery, not a model of fully dark-adapted vision.",
+    "renderingLicense": "Star subset and its rendered arrangement: CC BY-SA 4.0; application code is separate."
+  },
+  "lighting": "Exit point fill reduced 18 to 6; invitation ring emissive baseline 2.1 to 0.65; floor and labels remain readable."
 }

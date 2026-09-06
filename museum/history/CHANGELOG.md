@@ -1,3 +1,11 @@
+# museum-v1.22.0 · Earth at the entrance, quiet stars at the exit
+
+- Replace the shared generated Milky Way and blue random-star fallback. The entrance uses an unmodified 2048 px NASA DSCOVR/EPIC natural-color Pacific Earth photograph from 2022-06-21; initial and entrance-room views face the Earth at eye level.
+- The exit uses HYG v4.1 catalog positions and magnitudes, limited to bright naked-eye stars against black. No nebula, galaxy band, star flares or twinkling. Preserve attribution and CC BY-SA terms for the catalog subset and arrangement.
+- Translate distant scenery with the observer while preserving its world orientation, eliminating nearby-wallpaper parallax. Fit the Earth to narrow screens. Normal depth occlusion keeps the scenery outside the gallery.
+- Reduce exit fill and invitation-ring emission. Keep the original NFT media, artwork navigation, sound and earlier fixes.
+- Source hashes, image identity, catalog selection, licence and presentation limits are recorded in space-design.json; links are available in About and the reading archive.
+
 # museum-v1.21.2 · Short museum address
 
 - Use https://museum.trinityaccord.org/ as the public entry and update the main homepage link. Keep GitHub as the sole maintained source.
