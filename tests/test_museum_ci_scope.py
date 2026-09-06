@@ -135,15 +135,40 @@ class ScopeTests(unittest.TestCase):
                                     deployment=True, root=self.root, baseline_lookup=scope.previous_pages_sha)
         self.assertFalse(result["museum_only"])
 
-    def test_api_baseline_excludes_manual_future_and_wrong_repo(self):
+    def test_api_baseline_binds_manual_and_excludes_current_future_wrong_repo(self):
         def run(id, created, **overrides):
             return {"id": id, "created_at": created, "event": "push", "conclusion": "success",
                     "head_branch": "main", "head_repository": {"full_name": "owner/repo"},
                     "head_sha": str(id) * 40, **overrides}
         runs = [run(1, "01"), run(2, "02", event="workflow_dispatch"), run(3, "03"),
                 run(4, "04", head_repository={"full_name": "fork/repo"}), run(5, "05")]
-        with patch.object(scope.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps({"workflow_runs": runs}).encode())):
-            self.assertEqual(scope.previous_pages_sha("owner/repo", "3", "04", "fixture-token"), "1" * 40)
+        with patch.object(scope.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps({"workflow_runs": runs}).encode())), patch.object(scope, "manual_run_source", return_value="2" * 40) as bind:
+            self.assertEqual(scope.previous_pages_sha("owner/repo", "3", "04", "fixture-token"), "2" * 40)
+            bind.assert_called_once_with("owner/repo", runs[1], "fixture-token")
+
+    def test_manual_baseline_requires_matching_published_source_receipt(self):
+        receipt = {"schema": "trinity-pages-source-receipt.v1", "workflow_run_id": "2",
+                   "event_name": "workflow_dispatch", "source_sha": self.base}
+        run = {"id": 2, "head_sha": self.base}
+
+        def download(command, **kwargs):
+            directory = Path(command[command.index("--dir") + 1])
+            (directory / "pages-source-receipt.json").write_text(json.dumps(receipt))
+
+        with patch.object(scope.subprocess, "run", side_effect=download):
+            self.assertEqual(scope.manual_run_source("owner/repo", run, "fixture-token"), self.base)
+            for key, value in [("workflow_run_id", "3"), ("event_name", "push"),
+                               ("source_sha", "1" * 40), ("schema", "wrong")]:
+                original = receipt[key]
+                receipt[key] = value
+                with self.assertRaises(ValueError):
+                    scope.manual_run_source("owner/repo", run, "fixture-token")
+                receipt[key] = original
+
+    def test_expired_manual_receipt_cannot_enable_fast_path(self):
+        with patch.object(scope.subprocess, "run", side_effect=subprocess.CalledProcessError(1, ["gh"])):
+            with self.assertRaises(subprocess.CalledProcessError):
+                scope.manual_run_source("owner/repo", {"id": 2, "head_sha": self.base}, "fixture-token")
 
 
 class LiveTests(unittest.TestCase):

@@ -25,10 +25,18 @@ existing integrity prerequisite.
 
 ## Publication
 
-The deployment classifier also compares against the last successful **main push**
-of Deploy Pages. This prevents an earlier unpublished main-site edit from being
+The deployment classifier also compares against the last successful main
+publication of Deploy Pages. A manual/automatic dispatch is accepted as a baseline
+only after downloading its immutable source receipt and matching the schema,
+run ID, event and actual source SHA to the run. A dispatch's event head alone is
+not proof of what was published. This prevents an earlier unpublished main-site edit from being
 carried through a museum-only exemption. A failed Actions API lookup or missing
 baseline selects full verification. Manual deployments always use full checks.
+
+Homepage Status Sync is the single automatic Pages dispatch owner after a Record
+Chain Arweave Archive run. The older Dispatch Pages After Record-Chain Archive
+workflow remains available for manual recovery only; its redundant automatic
+dispatch previously replaced pending museum pushes in the Pages queue.
 
 Both routes keep current-main/exact-SHA binding, Jekyll build, main artifact
 contracts, the complete museum export validator, exact museum copy, source

@@ -1,17 +1,19 @@
 name: Dispatch Pages After Record-Chain Archive
 
+# Homepage Status Sync already handles successful Record Chain Arweave Archive
+# runs, synchronizes generated pages, and dispatches the exact current source.
+# A second automatic dispatch here replaced pending museum pushes in the Pages
+# concurrency group. Keep only the explicit manual recovery entrypoint.
 on:
-  workflow_run:
-    workflows: ["Record Chain Arweave Archive"]
-    types: [completed]
+  workflow_dispatch:
 
 permissions:
   actions: write
 
 jobs:
   dispatch-pages:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
       - name: Dispatch Deploy Pages
         env:
