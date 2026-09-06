@@ -1,3 +1,12 @@
+# Hosting update · One public museum address
+
+The v1.13.1 exhibition content and runtime remain unchanged. Hosting now uses
+`museum.trinityaccord.org` on the Hong Kong server, automatically synchronized
+from successful GitHub Museum edition checks. Entry HTML redirects legacy
+main-site URLs and declares the canonical address. This deployment-only change
+is identified by its Git commit and updated export manifest; it does not replace
+the already archived v1.13.1 release.
+
 # museum-v1.13.1 · Smaller startup text textures
 
 - Cap image loading/error placeholders at 512 × 384, wall labels at 1024 × 180, and the three canonical text panels at 1024 × 768. This removes about 447 MiB of raw RGBA canvas/texture backing from the 34-frame startup design before mipmaps, while preserving original artwork files and image resolution.

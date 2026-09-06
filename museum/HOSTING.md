@@ -44,12 +44,14 @@ Certificate renewal is handled separately by `certbot-renew.timer`.
 
 ## Address cutover
 
-Target canonical address: `https://museum.trinityaccord.org/museum/` (the root
-redirects to `/museum/`). Create an A record `museum` → `47.76.142.75` in the
+Canonical address: `https://museum.trinityaccord.org/museum/` (the root
+redirects to `/museum/`). The A record `museum` → `47.76.142.75` is configured in the
 authoritative DNS zone for `trinityaccord.org`. Its nameservers are
 `a.share-dns.com` and `b.share-dns.net`; it is not the Alibaba `asi.org.cn` zone.
 
-Keep `https://museum.asi.org.cn/museum/` live until the canonical address has a
-valid HTTPS certificate and passes resource checks. Only then configure its
-HTTP/HTTPS redirect and the original GitHub Pages museum entry redirect.
+The canonical host has a Let's Encrypt certificate with automatic renewal.
+The `museum.asi.org.cn` alias redirects to it. GitHub Pages entry HTML also
+redirects while preserving the path, query and fragment. The same HTML runs
+on the canonical host without redirecting; there is no separate museum codebase.
+For any future move, verify HTTPS and resources before changing redirects.
 Do not move `www.trinityaccord.org` or the main site as part of this cutover.
