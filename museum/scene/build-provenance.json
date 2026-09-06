@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.6.0",
+  "edition": "museum-v1.7.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5835,
-      "sha256": "e932cce96dfa55973e56c8df99e007f3f8547a59b1917be721baddc66fe3c2ab"
+      "bytes": 5807,
+      "sha256": "9e95062bae49a06b2a4d45d29b2f6a5def7457af2603ab7ad1d2db12470ce1e1"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -81,8 +81,18 @@
       "path": "dist/assets/space/milky-way.png",
       "bytes": 3027264,
       "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
+    },
+    {
+      "path": "dist/wall-presentation.js",
+      "bytes": 2015,
+      "sha256": "1fe53f834fce45eeec228c2d834ac8ba90afdda59ffcca6f31a227689c436a1e"
+    },
+    {
+      "path": "scripts/check_wall_frames.mjs",
+      "bytes": 2158,
+      "sha256": "7c9f9447bbdd024af10469f7b475f313e7b95e07672768b4ffbaf7e1807cee7a"
     }
   ],
-  "revisionMethod": "Preserve baked corridor. Runtime adds 32 slim frames, the complete four-letter song sequence, and visibility-adjusted crystal lighting.",
+  "revisionMethod": "Retain baked architecture. wall-presentation.js removes obsolete static mats/frames and wall-mount/caption triangles, and builds one local frame per current artwork. Voices rows remain inside their chapter. Crystal levitates with a digital halo.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots."
 }

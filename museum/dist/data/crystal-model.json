@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.6.0",
+  "edition": "museum-v1.7.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -52,9 +52,16 @@
   "fontLicense": "scene/crystal-font-LICENSE.txt",
   "runtimeOptics": {
     "revision": "2026-09-06",
-    "transmission": 0.72,
-    "roughness": 0.075,
+    "transmission": 0.8,
+    "roughness": 0.065,
     "environmentIntensity": 1.7,
-    "displayPurpose": "Reduced transmission, broad studio reflections and dedicated rim lighting improve screen visibility. This display adaptation is not a new measured optical property of the physical artifact."
+    "displayPurpose": "Slightly clearer glass, soft cool/warm rim light and restrained halo. Levitation, halo and lower light disc are explicitly later digital exhibition design, not physical evidence."
+  },
+  "installation": {
+    "baseHeightMetres": 1.27,
+    "plinthTopMetres": 0.88,
+    "floatGapMetres": 0.39,
+    "motionAmplitudeMetres": 0.008,
+    "reducedMotion": "Static levitation and halo; no oscillation."
   }
 }

@@ -38,7 +38,7 @@ class Links(HTMLParser):
    if k not in ['src','href'] or not v or v.startswith(('http:','https:','data:','#','mailto:')):continue
    check((D/v.split('#')[0].split('?')[0]).exists(),'Broken local HTML reference '+v)
 for f in ['index.html','archive.html']:Links().feed((D/f).read_text())
-for js in ['museum.js','crystal-viewer.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
+for js in ['wall-presentation.js','museum.js','crystal-viewer.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
  for dep in re.findall(r'(?:from|import)\s*[\'"]([^\'"]+)[\'"]',(D/js).read_text()):
   if dep.startswith('.'):check((D/js).parent.joinpath(dep).exists(),'Missing module '+dep)
 check((D/'assets/core-object-alpha.jpg').exists(),'Missing physical photograph')

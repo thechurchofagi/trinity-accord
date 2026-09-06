@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import * as T from '../dist/vendor/three.module.js';
+import {removeLegacyWallMounts,makeWallFrame} from '../dist/wall-presentation.js';
+const b=fs.readFileSync(new URL('../dist/assets/gallery/memory-gallery.glb',import.meta.url));const len=b.readUInt32LE(12),j=JSON.parse(b.subarray(20,20+len)),bin=b.subarray(28+len);const root=new T.Group();
+function attr(id){const a=j.accessors[id],v=j.bufferViews[a.bufferView],C={5126:Float32Array,5123:Uint16Array,5125:Uint32Array}[a.componentType],n={SCALAR:1,VEC3:3,VEC2:2}[a.type];const raw=bin.subarray((v.byteOffset||0)+(a.byteOffset||0),(v.byteOffset||0)+(a.byteOffset||0)+a.count*n*C.BYTES_PER_ELEMENT);return new T.BufferAttribute(new C(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength)),n);}
+for(const n of j.nodes){if(n.mesh===undefined)continue;for(const p of j.meshes[n.mesh].primitives){const g=new T.BufferGeometry();g.setAttribute('position',attr(p.attributes.POSITION));if(p.indices!==undefined)g.setIndex(attr(p.indices));const m=new T.MeshBasicMaterial();m.name=j.materials[p.material].name;const o=new T.Mesh(g,m);if(n.matrix){o.matrix.fromArray(n.matrix);o.matrix.decompose(o.position,o.quaternion,o.scale);}else{if(n.translation)o.position.fromArray(n.translation);if(n.rotation)o.quaternion.fromArray(n.rotation);if(n.scale)o.scale.fromArray(n.scale);}root.add(o);}}
+const result=removeLegacyWallMounts(root);if(result.hiddenMeshes!==2||result.removedTriangles<100)throw Error(JSON.stringify(result));
+const layout=JSON.parse(fs.readFileSync(new URL('../dist/data/gallery-layout.json',import.meta.url)));let frames=0;
+for(const r of layout.rooms){for(const e of r.exhibits){if(-e.z<=r.start||-e.z>=r.start+r.length)throw Error('Out of room '+e.id);const g=new T.Group();g.position.set(e.x,1.95,e.z);g.rotation.y=e.angle;makeWallFrame(g);g.updateMatrixWorld(true);const normal=new T.Vector3(0,0,1).applyQuaternion(g.quaternion);if(Math.sign(normal.x)!==-Math.sign(e.x))throw Error('Frame faces wall');if(g.children.length!==6)throw Error('Frame incomplete');frames++;}}
+console.log(JSON.stringify({...result,frames,roomBounds:'PASS',inwardNormals:'PASS'}));
