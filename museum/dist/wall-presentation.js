@@ -1,5 +1,16 @@
 import * as THREE from './vendor/three.module.js';
 
+// All plaques share one wall datum, independent of image aspect ratio/loading.
+export const WALL_PLAQUE=Object.freeze({width:1.55,height:.46,centerY:1.16});
+export function makeWallPlaque(group,texture){
+ const {width,height,centerY}=WALL_PLAQUE;
+ const body=new THREE.Mesh(new THREE.BoxGeometry(width,height,.018),new THREE.MeshStandardMaterial({color:'#89979e',metalness:.85,roughness:.34}));
+ body.name='Satin titanium plaque';body.position.set(0,centerY,.015);group.add(body);
+ // The diffuse lettering stays readable even when the metallic edge reflects light.
+ const face=new THREE.Mesh(new THREE.PlaneGeometry(width-.018,height-.018),new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));
+ face.position.set(0,centerY,.025);group.add(face);return face;
+}
+
 // Old baked architecture retained fixed mounts from an earlier exhibition layout.
 // Keep its architecture, but replace every obsolete wall mount with one current frame.
 export function removeLegacyWallMounts(root){

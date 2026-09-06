@@ -24,7 +24,7 @@ for r in rooms['rooms']:
    if id=='canon-3':parts.append('<p>编年史由封存元记录指向其 Ethereum 合约；铭文本身未嵌入全部编年史媒体。/ The sealed meta-record points to the Ethereum Chronicle; it does not embed all Chronicle media.</p>')
   if id not in items:
    parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
-  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>Number '+str(e['ordinal'])+' · '+esc(e['date'][:10])+' UTC · Ethereum mint / 铸造日期</small>')
+  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>No. '+str(e['ordinal'])+' · '+esc(e['date'][:10])+' UTC · Ethereum mint / 铸造日期</small>')
   for m in sorted(e['media'],key=lambda m:0 if m['kind']=='image' else 1):
    parts.append(('<img loading="lazy" src="'+m['file']+'" alt="'+esc(e['title'])+'">') if m['kind']=='image' else '<audio controls preload="none" src="'+m['file']+'"></audio>')
   if e.get('relatedSoundExhibit'):

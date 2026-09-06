@@ -1,3 +1,12 @@
+# museum-v1.21.0 · Wheel walking, level close views and titanium plaques
+
+- Add canvas-only mouse-wheel walking: scroll up to advance, down to retreat. Pixel, line and page wheels use bounded, frame-rate-independent movement. Preserve browser Ctrl+wheel zoom and scrolling in lyrics/details; clear queued movement on input changes, blur and hidden tabs.
+- First artwork selection approaches and plays its existing audio; a second selection opens the full detail view. Replace the duplicate in-gallery Play Music button with View details; retain the bottom player's play/pause controls. Reading-gallery artwork opens details directly.
+- Approach each wall work square-on with a horizontal optical axis at the display's height. Tighten the fitted view while keeping original images, frames and plaques inside the clear viewport. Detail images now use the full panel width.
+- Replace paper-like labels with consistent 1.55 × 0.46 m satin-titanium plaques, centred on one common wall datum independently of image loading/aspect ratio. Enlarge the compact No. ordinal and date. Dates remain the original chain dates (UTC), with full context in details.
+- Halve footstep amplitude again (0.13 → 0.065); retain the filtered shoe-contact sound and default-on behaviour.
+- Validation covers real wheel-event routing and interruption, direction/units/speed, projected framing and parallel edges at four viewport sizes, plaque bounds/material/alignment, audio cadence/gain and original-source integrity. Hardware listening remains unverified.
+
 # museum-v1.20.0 · Original artwork and attached wall labels
 
 - Withdraw all nine 2026 illustration assets from the live export, including Star Ark. Retain them only in exhibition history. Original NFT images, audio, texts, the physical photograph and canonical documents retain their provenance. Records without original images use plain text/audio entries, not replacement artwork.

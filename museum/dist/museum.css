@@ -145,3 +145,10 @@ body:has(#lyric-stage[data-view=full]:not([hidden])) #look-controls,body:has(#ly
  .intro-card{padding:6px;align-items:flex-start}.intro-card p{font-size:13px;line-height:1.35}
  .attached-label{font-size:12px;line-height:16px;margin-bottom:5px;padding:2px 8px}.document-note{padding:8px;font-size:14px;line-height:1.4}.document-note strong{font-size:15px}
 }
+
+/* 1.21: consistent satin-metal labels and large, direct artwork details. */
+.attached-label{box-sizing:border-box;width:min(240px,100%);min-height:70px;display:flex;flex-direction:column;justify-content:center;gap:5px;white-space:normal;padding:8px 12px;background:repeating-linear-gradient(0deg,#ffffff0b 0 1px,transparent 1px 3px),linear-gradient(165deg,#b4c1c7,#d1d9dd 24%,#a3b1b9 49%,#c5cfd4 74%,#8d9da7);border:1px solid #eff6f9;border-bottom-color:#73858f;border-radius:2px;color:#112531;box-shadow:0 2px 2px #0003}
+.attached-label strong{font:650 26px/1.15 system-ui,sans-serif}.attached-label small{font:500 16px/1.2 system-ui,sans-serif}
+.exhibit-layout{display:flex;flex-direction:column;gap:24px}.exhibit-layout .art-image{display:block;width:100%;max-height:72dvh;object-fit:contain}
+#focus-tools button{font-size:14px;min-height:36px;height:36px}
+@media(max-width:650px){.exhibit-layout .art-image{max-height:68dvh}#panel-content{padding-left:16px;padding-right:16px}}
