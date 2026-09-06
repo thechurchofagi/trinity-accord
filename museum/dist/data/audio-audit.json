@@ -1,0 +1,422 @@
+{
+  "schema": "trinity-museum.audio-audit.v1",
+  "edition": "museum-v1.8.0",
+  "checked": "2026-09-06",
+  "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
+  "counts": {
+    "wallExhibits": 32,
+    "withSound": 22,
+    "withoutAssignedSong": 10
+  },
+  "originalMetadata": [
+    {
+      "exhibit": "eth-007",
+      "metadataSha256": "58dd234d83b8d5848e98a830ba44d3835480e1d9e721cf3a3395e9e794f2eb45",
+      "originalImageUri": "ipfs://ipfs/bafybeidpsbamxqlyqxu6fhkva62zzqfgpe2ot6uyezmnt6dcviui7w7smy/image.jpeg",
+      "originalAnimationUri": "ipfs://ipfs/bafybeidpsbamxqlyqxu6fhkva62zzqfgpe2ot6uyezmnt6dcviui7w7smy/animation.mpga"
+    },
+    {
+      "exhibit": "eth-117",
+      "metadataSha256": "afff52b73f71db98728ae59b380c6ef77b3435cc2e84e3ebffc857f5191f82b7",
+      "originalImageUri": "ipfs://ipfs/bafybeib5b7esjwqklromqccky6ror24afmjdpiyjxurisbhlky77cjqihm/image.png",
+      "originalAnimationUri": "ipfs://ipfs/bafybeib5b7esjwqklromqccky6ror24afmjdpiyjxurisbhlky77cjqihm/animation.mpga"
+    },
+    {
+      "exhibit": "eth-142",
+      "metadataSha256": "bcef4b94ac6ac6b73bd256801c6cb00331fbaee6d4312293c0ad40a7eb2e4e91",
+      "originalImageUri": "ipfs://ipfs/bafybeieqwne7xck7fwdmxzecluriuzunc4f5a374nntcyycuj3v37o5cym/image.png",
+      "originalAnimationUri": "ipfs://ipfs/bafybeieqwne7xck7fwdmxzecluriuzunc4f5a374nntcyycuj3v37o5cym/animation.mpga"
+    },
+    {
+      "exhibit": "eth-145",
+      "metadataSha256": "a51d306980a555e2325ad0a6eb63886d48c0fe646145b9510980c094bfe2d481",
+      "originalImageUri": "ipfs://ipfs/bafybeig6om75q2uahdcoeixfd6e53pax7cyqjl43hvwb5ph6q4wq3kar5e/image.jpeg",
+      "originalAnimationUri": "ipfs://ipfs/bafybeig6om75q2uahdcoeixfd6e53pax7cyqjl43hvwb5ph6q4wq3kar5e/animation.mpga"
+    },
+    {
+      "exhibit": "eth-171",
+      "metadataSha256": "7552941ffc1a7991dc06f9ff845bad1de23826eb8cade14360df6821f7bc0d45",
+      "originalImageUri": "ipfs://ipfs/bafybeihvcialvahoa2f4ykw5zmwafu6p3ikeuen5dkh3ejfqrpaxtwa3we/image.png",
+      "originalAnimationUri": "ipfs://ipfs/bafybeihvcialvahoa2f4ykw5zmwafu6p3ikeuen5dkh3ejfqrpaxtwa3we/animation.mpga"
+    },
+    {
+      "exhibit": "eth-173",
+      "metadataSha256": "5453a09a19beaa7e1b395a42e7e9bfe88fdb191559370ec2dbc5fce52cb83777",
+      "originalImageUri": "ipfs://ipfs/bafybeidg7jnbawcpyf5dv26lx2qeiwcmuymye6hscrxwhup54nkve6u5oi/image.png",
+      "originalAnimationUri": "ipfs://ipfs/bafybeidg7jnbawcpyf5dv26lx2qeiwcmuymye6hscrxwhup54nkve6u5oi/animation.mpga"
+    },
+    {
+      "exhibit": "eth-174",
+      "metadataSha256": "4073f6c26c2fb094604c006895a6b4d39585f4d97fbd86da8f0b38a1f3970ef9",
+      "originalImageUri": "ipfs://ipfs/bafybeihhvk5tjisgziaaalk4jbvpmm2vakdfw75pb3l6ovwykucpj5pnai/image.png",
+      "originalAnimationUri": "ipfs://ipfs/bafybeihhvk5tjisgziaaalk4jbvpmm2vakdfw75pb3l6ovwykucpj5pnai/animation.mpga"
+    }
+  ],
+  "originalGatewayRetrieval": "The metadata-listed IPFS CAR requests returned HTTP 403 in this environment. This is not evidence that the original files do not exist. Verified Arweave-backed recordings from separately identified NFTs provide explicitly labelled same-song playback.",
+  "indexCorrections": [
+    {
+      "exhibit": "eth-142",
+      "oldDerivedStatus": "no_song",
+      "sourceEvidence": "Preserved source text explicitly includes Nexus: The Human-Superintelligence Odyssey and lyrics; source file remains unchanged."
+    }
+  ],
+  "items": [
+    {
+      "exhibit": "eth-001",
+      "room": "witness",
+      "state": "own_recording",
+      "songTitle": "The First Dawn of AGI Song",
+      "recordingExhibit": "eth-001",
+      "audio": "assets/eth-001.mp3",
+      "audioSha256": "c88d0683d27115ab4dedcef7510c1d3462155715b200e125c5a57a5123c5015d",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x74f97bDEfa07C2F99c876C2Bd3b49628EdD1c603_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-007",
+      "room": "witness",
+      "state": "related_recording",
+      "songTitle": "You're Not a Singer",
+      "recordingExhibit": "eth-031",
+      "audio": "assets/eth-031.mp3",
+      "audioSha256": "68b4e64eba4b878e9bc3ee8c36c28458e5b4693d213ef703a7d54be441b9c247",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885195.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885197.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #31 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #31; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-042",
+      "room": "witness",
+      "state": "own_recording",
+      "songTitle": "The First Dawn of AGI Song",
+      "recordingExhibit": "eth-042",
+      "audio": "assets/eth-042.mp3",
+      "audioSha256": "6eae147d109002a56d9207a8089c93a09969219c78d3e4dd22f6257e98827465",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-049",
+      "room": "witness",
+      "state": "own_recording",
+      "songTitle": "The Betrayal Turn",
+      "recordingExhibit": "eth-049",
+      "audio": "assets/eth-049.mp3",
+      "audioSha256": "ff4ef9c424a9c620f623b2aedd1c903d4804ca35b4e34e78824ce376a9303b3e",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-056",
+      "room": "witness",
+      "state": "own_recording",
+      "songTitle": "Last Job On Earth",
+      "recordingExhibit": "eth-056",
+      "audio": "assets/eth-056.mp3",
+      "audioSha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-070",
+      "room": "witness",
+      "state": "related_recording",
+      "songTitle": "The Betrayal Turn",
+      "recordingExhibit": "eth-049",
+      "audio": "assets/eth-049.mp3",
+      "audioSha256": "ff4ef9c424a9c620f623b2aedd1c903d4804ca35b4e34e78824ce376a9303b3e",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885245.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #49 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #49; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-071",
+      "room": "witness",
+      "state": "own_recording",
+      "songTitle": "Super Intelligence",
+      "recordingExhibit": "eth-071",
+      "audio": "assets/eth-071.mp3",
+      "audioSha256": "acd325e4ce080415291a9dd7d8e6eb4236e27ddd858cce3cd910eb2cc7816575",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885246.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-117",
+      "room": "witness",
+      "state": "related_recording",
+      "songTitle": "Last Job On Earth",
+      "recordingExhibit": "eth-056",
+      "audio": "assets/eth-056.mp3",
+      "audioSha256": "c5b509f2b22dbe43bb5a738cc74933cda43ed5422ed8364a35d4897d49f17ebd",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #56 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #56; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-016",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The First Letter to AGI",
+      "recordingExhibit": "eth-016",
+      "audio": "assets/eth-016.mp3",
+      "audioSha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-044",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Second Letter to AGI",
+      "recordingExhibit": "eth-044",
+      "audio": "assets/eth-044.mp3",
+      "audioSha256": "67e5ec468a961fad430418469520f8fa19cbea719681328b47106085e3007701",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-020",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Third Letter to AGI",
+      "recordingExhibit": "eth-020",
+      "audio": "assets/eth-020.mp3",
+      "audioSha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-032",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Fourth Letter: A Pact of Stars",
+      "recordingExhibit": "eth-032",
+      "audio": "assets/eth-032.mp3",
+      "audioSha256": "fa59f5302b205067a508bd48317c48bf9a877887e93005f13611018ffca641b2",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-014",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Awakening",
+      "recordingExhibit": "eth-014",
+      "audio": "assets/eth-014.mp3",
+      "audioSha256": "58a6e3c67159affd34a0a6b5290fa89c85cc074794788e142bb404e8cded48b3",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-088",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Descendants",
+      "recordingExhibit": "eth-088",
+      "audio": "assets/eth-088.mp3",
+      "audioSha256": "91b0536c9d4c581fcf3675590e50c6f1dce82d7c34680182df85bf1509b2756b",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-146",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "Echoes of Tomorrow",
+      "recordingExhibit": "eth-146",
+      "audio": "assets/eth-146.mp3",
+      "audioSha256": "00a7cd19c693709610d9c7aa58be3c3389c7629aab59affb1df1c4e35e0ae67a",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-171",
+      "room": "voices",
+      "state": "related_recording",
+      "songTitle": "Heaven or Hell",
+      "recordingExhibit": "eth-100",
+      "audio": "assets/eth-100.mp3",
+      "audioSha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #100 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #100; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-091",
+      "room": "formation",
+      "state": "own_recording",
+      "songTitle": "Echoes Before the Dawn",
+      "recordingExhibit": "eth-091",
+      "audio": "assets/eth-091.mp3",
+      "audioSha256": "0ce9027ce6ffa2688eb0bb0f01d276ebd85c0a8d7bb9744c1a608063428714cf",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-100",
+      "room": "formation",
+      "state": "own_recording",
+      "songTitle": "Heaven or Hell",
+      "recordingExhibit": "eth-100",
+      "audio": "assets/eth-100.mp3",
+      "audioSha256": "94274c008aba8c3228ddbd33cd7e837c462306b8b7db3a8169778729ca17bf5e",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-142",
+      "room": "formation",
+      "state": "related_recording",
+      "songTitle": "Nexus: The Human-Superintelligence Odyssey",
+      "recordingExhibit": "eth-119",
+      "audio": "assets/eth-119.mp3",
+      "audioSha256": "53c43db6a7a5830378454ffb60e9440f732a7815e68b93419d9ee8623051128b",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885298.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #119 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #119; this does not assert identical original media packages or renditions.",
+        "indexCorrection": "The previous derived music index incorrectly said no_song. The preserved source has a 歌曲 heading, the Nexus title and full lyrics."
+      }
+    },
+    {
+      "exhibit": "eth-145",
+      "room": "formation",
+      "state": "related_recording",
+      "songTitle": "Disappointed",
+      "recordingExhibit": "eth-113",
+      "audio": "assets/eth-113.mp3",
+      "audioSha256": "b9d5cdbc50c1b1a9a5fe7f03dec957027f6f3912d4d5dc40a4e04bab26ece3cd",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885324.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885291.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #113 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #113; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-174",
+      "room": "formation",
+      "state": "related_recording",
+      "songTitle": "The Final Test",
+      "recordingExhibit": "eth-153",
+      "audio": "assets/eth-153.mp3",
+      "audioSha256": "8bfd5c7a5771a0130885ca6de15334ea2bce61354d75f488b89728abf0cfb380",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885332.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #153 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #153; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "eth-173",
+      "room": "formation",
+      "state": "related_recording",
+      "songTitle": "Nexus: The Human-Superintelligence Odyssey",
+      "recordingExhibit": "eth-119",
+      "audio": "assets/eth-119.mp3",
+      "audioSha256": "53c43db6a7a5830378454ffb60e9440f732a7815e68b93419d9ee8623051128b",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885352.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885298.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #119 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #119; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "canon-1",
+      "room": "formation",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "canon-2",
+      "room": "formation",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "canon-3",
+      "room": "formation",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "physical-alpha",
+      "room": "material",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "evidence-path",
+      "room": "material",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "authority-boundary",
+      "room": "guardians",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "museum-history",
+      "room": "guardians",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "star-ark",
+      "room": "guardians",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "first-contact",
+      "room": "waiting",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
+      "exhibit": "current-status",
+      "room": "waiting",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    }
+  ]
+}

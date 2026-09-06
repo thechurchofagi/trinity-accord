@@ -1,3 +1,11 @@
+# museum-v1.8.0 · Complete song associations and explicit playback states
+
+- Fixed seven displayed NFTs whose source texts name songs but whose panels offered no playback: #007, #117, #142, #145, #171, #173 and #174. All 22 musical NFTs among 32 wall entries now resolve playable audio. The remaining ten text/object/context entries explicitly state that no accompanying song is assigned; the three originals remain text-only.
+- Recovered complete recordings from supporting NFTs #031, #113, #119 and #153, verifying CAR and included-block digests. These sources are preserved without adding wall exhibits. Related recordings display their own NFT identity, source text and provenance, including the existing #070 → #049 association. No claim is made that independent NFTs contain identical original media packages or renditions.
+- Corrected the museum interpretation of #142: its preserved source explicitly contains Nexus and lyrics despite an older derived index saying no_song. Original records remain byte-for-byte unchanged. Metadata-listed IPFS requests returned HTTP 403 here; this does not establish global unavailability.
+- Show song titles and prominent playback controls above artwork; display loading/blocked/error states inside the panel. Opening an artwork attempts playback, with a visible manual fallback. Keep the selected artwork attached to its related soundtrack and stop stale audio when opening entries without music. The HTML reading archive also exposes related recordings.
+- Validation: complete 32-entry source/audio audit, four-letter bindings, media decoding and release checks. All 19 catalogue recordings decode completely. Browser playback succeeded for the First Letter, Nexus and Manus (automatic on opening); at 390 px width the visible player progressed to 0:40. WebGL remains unavailable in the test browser; no new GPU visual verification is claimed.
+
 # museum-v1.7.0 · Public access, floating crystal and corrected wall frames
 
 - Opened the existing Site to anyone with the URL at the author’s explicit request.
