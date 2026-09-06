@@ -1,3 +1,9 @@
+# museum-v1.16.0 · Mobile subtitle strip
+
+- Remove repeated mobile identity and room metadata, retaining only the Trinity Accord mark and a compact room title.
+- Reset an expanded lyric view to compact when a new song starts on mobile. The compact view now contains only current/next lyrics plus minimal playback and view controls; song metadata remains available in the optional full view.
+- Replace the compact mobile glass card with a fixed 122 px transparent subtitle strip without backdrop blur.
+
 # museum-v1.15.2 · Stable transparent lyric glass
 
 - Reduce the lyric glass fill, blur, and shadow so gallery text and artwork remain visibly present behind it.
