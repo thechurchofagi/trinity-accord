@@ -23,18 +23,26 @@ jobs:
         with:
           show-progress: false
 
+      - name: Classify isolated museum changes
+        id: museum_scope
+        run: python3 scripts/museum_change_scope.py
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.museum_scope.outputs.museum_only != 'true'
         with:
           python-version: "3.11"
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        if: steps.museum_scope.outputs.museum_only != 'true'
         with:
           node-version-file: ".node-version"
 
       - name: Install dependencies
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
 
       - name: Validate strict repository JSON
+        if: steps.museum_scope.outputs.museum_only != 'true'
         id: strict_json
         continue-on-error: true
         shell: bash
@@ -56,21 +64,27 @@ jobs:
           exit 1
 
       - name: Verify receipt contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python scripts/test_record_chain_receipt_contract.py
 
       - name: Verify submission schema/runtime contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python scripts/test_record_chain_submission_schema_runtime_contract.py
 
       - name: Verify public agent entrypoints
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python scripts/check_public_agent_entrypoints.py api
 
       - name: Verify archived public web contract
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python -m scripts.test_archive_public_web
 
       - name: Run full current system tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python scripts/run_current_system_tests.py
 
       - name: Run gateway unit tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         id: gateway_unit_tests
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
@@ -97,9 +111,11 @@ jobs:
           retention-days: 3
 
       - name: Run top-level protocol and lifecycle tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python -m pytest tests -q
 
       - name: Run phase6b pytest-strict tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
         run: |
@@ -107,6 +123,7 @@ jobs:
           python scripts/test_phase6b_hotfix.py
 
       - name: Verify issue templates do not advertise retired submit paths
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           if grep -R "/agent-submit" -n .github/ISSUE_TEMPLATE | grep -v "retired\|Legacy\|do not use\|is retired"; then
             echo "::error::Issue templates contain active retired gateway paths"
@@ -114,6 +131,7 @@ jobs:
           fi
 
       - name: Run builder Node tests
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           node scripts/test_builder_linked_guardian_disabled.mjs
           node scripts/test_legacy_guardian_retirement_tool_deprecated.mjs
@@ -130,12 +148,19 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           show-progress: false
+      - name: Classify isolated museum changes
+        id: museum_scope
+        run: python3 scripts/museum_change_scope.py
+
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: steps.museum_scope.outputs.museum_only != 'true'
         with:
           python-version: "3.12"
       - name: Install Gateway test dependencies
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: python -m pip install -r requirements-ci.txt -r apps/record_chain_intake_gateway/requirements.txt
       - name: Compile and test Gateway on Python 3.12
+        if: steps.museum_scope.outputs.museum_only != 'true'
         env:
           PYTHONPATH: apps/record_chain_intake_gateway
         run: |

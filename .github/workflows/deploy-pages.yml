@@ -59,6 +59,7 @@ on:
       - ".github/workflows/homepage-deployment-receipt.yml"
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -73,6 +74,8 @@ jobs:
     outputs:
       source_sha: ${{ steps.source.outputs.source_sha }}
       requested_ref: ${{ steps.source.outputs.requested_ref }}
+      museum_only: ${{ steps.museum_scope.outputs.museum_only }}
+      baseline_sha: ${{ steps.museum_scope.outputs.baseline_sha }}
     steps:
       - name: Checkout requested source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -100,23 +103,39 @@ jobs:
           echo "immutable_source_sha=${source_sha}"
           echo "current_main_sha=${main_sha}"
 
+      - name: Classify isolated museum changes
+        id: museum_scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/museum_change_scope.py --deployment
+
+      - name: Validate isolated museum export
+        if: steps.museum_scope.outputs.museum_only == 'true'
+        run: |
+          python3 museum/scripts/validate.py
+          while IFS= read -r -d '' script; do node --check "$script"; done < <(find museum/dist -type f -name '*.js' -print0)
+
       - name: Setup Python
+        if: steps.museum_scope.outputs.museum_only != 'true'
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
       - name: Setup Node
+        if: steps.museum_scope.outputs.museum_only != 'true'
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: ".node-version"
 
       - name: Install verification dependencies
+        if: steps.museum_scope.outputs.museum_only != 'true'
         env:
           PIP_PREFER_BINARY: "1"
           PIP_ONLY_BINARY: "cryptography,cffi"
         run: python3 -m pip install -r requirements-ci.txt
 
       - name: Verify public source state
+        if: steps.museum_scope.outputs.museum_only != 'true'
         run: |
           set -euo pipefail
           python3 scripts/trinity_record_chain.py verify
@@ -129,6 +148,12 @@ jobs:
           python3 scripts/test_homepage_status_sync_contract.py
           python3 scripts/verify_retired_builder_bundle_archive.py
           python3 scripts/run_current_system_tests.py
+          python3 scripts/test_no_secret_material_committed.py
+          python3 scripts/test_no_private_key_material_committed.py
+
+      - name: Scan isolated museum publication for secrets
+        if: steps.museum_scope.outputs.museum_only == 'true'
+        run: |
           python3 scripts/test_no_secret_material_committed.py
           python3 scripts/test_no_private_key_material_committed.py
 
@@ -241,6 +266,8 @@ jobs:
     outputs:
       source_sha: ${{ needs.verify.outputs.source_sha }}
       requested_ref: ${{ needs.verify.outputs.requested_ref }}
+      museum_only: ${{ needs.verify.outputs.museum_only }}
+      baseline_sha: ${{ needs.verify.outputs.baseline_sha }}
     steps:
       - name: Checkout immutable verified source
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -334,6 +361,8 @@ jobs:
 
       - name: Write immutable source receipt
         env:
+          MUSEUM_ONLY: ${{ needs.verify.outputs.museum_only }}
+          BASELINE_SHA: ${{ needs.verify.outputs.baseline_sha }}
           SOURCE_SHA: ${{ needs.verify.outputs.source_sha }}
           REQUESTED_REF: ${{ needs.verify.outputs.requested_ref }}
         run: |
@@ -346,6 +375,8 @@ jobs:
               "event_name": os.environ["GITHUB_EVENT_NAME"],
               "requested_ref": os.environ["REQUESTED_REF"],
               "source_sha": os.environ["SOURCE_SHA"],
+              "verification_scope": "museum" if os.environ["MUSEUM_ONLY"] == "true" else "full",
+              "baseline_source_sha": os.environ["BASELINE_SHA"],
           }
           Path("pages-source-receipt.json").write_text(
               json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -509,7 +540,14 @@ jobs:
             exit 1
           fi
 
+      - name: Verify live museum export
+        if: needs.build.outputs.museum_only == 'true'
+        env:
+          BASELINE_SHA: ${{ needs.build.outputs.baseline_sha }}
+        run: python3 scripts/smoke_live_museum.py --baseline "$BASELINE_SHA"
+
       - name: Verify live machine contract after edge propagation
+        if: needs.build.outputs.museum_only != 'true'
         run: |
           set -euo pipefail
           for attempt in $(seq 1 12); do

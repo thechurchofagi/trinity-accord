@@ -37,6 +37,8 @@ jobs:
         run: |
           set -euo pipefail
 
+          verification_scope="unavailable"
+          baseline_source_sha="unavailable"
           source_sha="unavailable"
           requested_ref="unavailable"
           provenance="source receipt unavailable"
@@ -84,16 +86,26 @@ jobs:
           requested = data.get("requested_ref")
           if not isinstance(requested, str) or not requested:
               raise SystemExit("invalid source receipt requested_ref")
+          scope = data.get("verification_scope", "full")
+          baseline = data.get("baseline_source_sha", "")
+          if scope not in ("full", "museum"):
+              raise SystemExit("invalid verification scope")
+          if scope == "museum" and (expected_event != "push" or not isinstance(baseline, str) or not re.fullmatch(r"[0-9a-f]{40}", baseline)):
+              raise SystemExit("museum receipt requires a successful publication baseline")
           print(source)
           print(requested)
+          print(scope)
+          print(baseline or "not-applicable")
           PY
             mapfile -t receipt_fields < "${tmpdir}/receipt-fields"
-            if [[ "${#receipt_fields[@]}" -ne 2 ]]; then
-              echo "::error::Source receipt validator did not return exactly two bound fields."
+            if [[ "${#receipt_fields[@]}" -ne 4 ]]; then
+              echo "::error::Source receipt validator did not return exactly four bound fields."
               exit 1
             fi
             source_sha="${receipt_fields[0]}"
             requested_ref="${receipt_fields[1]}"
+            verification_scope="${receipt_fields[2]}"
+            baseline_source_sha="${receipt_fields[3]}"
             provenance="validated immutable source receipt"
           fi
 
@@ -102,6 +114,9 @@ jobs:
             heading="Homepage deployment provenance incomplete"
             contract="not established: workflow succeeded but immutable source receipt is unavailable"
             effective_conclusion="provenance_missing"
+          elif [[ "${CONCLUSION}" == "success" && "$verification_scope" == "museum" ]]; then
+            heading="Successful museum deployment"
+            contract="passed: current-main source binding, exact-source build, museum inventory and canonical live file hashes; unrelated main-site live contracts were not rerun"
           elif [[ "${CONCLUSION}" == "success" ]]; then
             heading="Successful homepage deployment"
             contract="passed, including current-main source binding, exact-source build binding, cache-safe live discovery, and complete deployment freshness checks"
@@ -125,6 +140,8 @@ jobs:
           - Trigger: \`${TRIGGER_EVENT}\`
           - Started: \`${CREATED_AT}\`
           - Completed: \`${UPDATED_AT}\`
+          - Verification scope: ${verification_scope}
+          - Previous successful source: ${baseline_source_sha}
           - Live contract: ${contract}
 
           Operational deployment evidence only. This receipt has no canonical effect and is not authority, attestation, amendment, verification of the Accord's ideas, or successor reception.
