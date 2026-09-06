@@ -14,7 +14,9 @@ for r in rooms['rooms']:
  for id in r['exhibits']:check(id in ids or id in extra,'Missing exhibit '+id)
  check(any(t['room']==r['id'] for t in guides['tracks']),'Missing narration '+r['id'])
 for e in sources['items']:
- check('/blob/'+sources['sourceCommit']+'/' in e['sourceUrl'],'Unpinned source '+e['id'])
+ check('/blob/'+e['sourceCommit']+'/' in e['sourceUrl'],'Unpinned source '+e['id'])
+ if e.get('localRecord'):
+  f=D/e['localRecord'];check(f.exists() and hashlib.sha256(f.read_bytes()).hexdigest()==e['sourceSha256'],'Source text copy drift '+e['id'])
  for m in e['media']:
   f=D/m['file'];check(f.exists(),'Missing media '+m['file'])
   if f.exists():check(hashlib.sha256(f.read_bytes()).hexdigest()==m['sha256'],'Wrong media digest '+m['file'])
@@ -36,7 +38,7 @@ class Links(HTMLParser):
    if k not in ['src','href'] or not v or v.startswith(('http:','https:','data:','#','mailto:')):continue
    check((D/v.split('#')[0].split('?')[0]).exists(),'Broken local HTML reference '+v)
 for f in ['index.html','archive.html']:Links().feed((D/f).read_text())
-for js in ['museum.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
+for js in ['museum.js','crystal-viewer.js','vendor/three.module.js','vendor/three.core.js','vendor/GLTFLoader.js','vendor/BufferGeometryUtils.js']:
  for dep in re.findall(r'(?:from|import)\s*[\'"]([^\'"]+)[\'"]',(D/js).read_text()):
   if dep.startswith('.'):check((D/js).parent.joinpath(dep).exists(),'Missing module '+dep)
 check((D/'assets/core-object-alpha.jpg').exists(),'Missing physical photograph')
@@ -48,13 +50,17 @@ if (D/'data/gallery-layout.json').exists():
  check((D/'data/gallery-layout.json').read_bytes()==(P/'scene/gallery-layout.json').read_bytes(),'Gallery source/config drift')
  check([e['id'] for r in layout['rooms'] for e in r['exhibits']]==[id for r in rooms['rooms'] for id in r['exhibits']],'Gallery placement identity mismatch')
  for r in layout['rooms']:
-  for e in r['exhibits']:check(abs(e['x'])==4.25 and -48<e['z']<0,'Exhibit outside wall bounds '+e['id'])
+  for e in r['exhibits']:check(abs(e['x'])==4.25 and -layout['dimensions']['length']<e['z']<0,'Exhibit outside wall bounds '+e['id'])
  b=(D/'assets/gallery/memory-gallery.glb').read_bytes();magic,version,total=struct.unpack_from('<III',b);check(magic==0x46546c67 and version==2 and total==len(b),'Invalid GLB header');jl=struct.unpack_from('<I',b,12)[0];model=json.loads(b[20:20+jl]);bl=struct.unpack_from('<I',b,20+jl)[0]
  check(all(v.get('byteOffset',0)+v['byteLength']<=bl for v in model['bufferViews']),'GLB buffer view out of bounds')
  check(all('bufferView' in im and not im.get('uri') for im in model.get('images',[])),'External model image dependency')
  build=json.loads((P/'scene/build-provenance.json').read_text())
  for f in build['files']:
   b=(P/f['path']).read_bytes();check(len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],'Scene build digest mismatch '+f['path'])
+if (D/'data/crystal-model.json').exists():
+ crystal=read('crystal-model.json');check(crystal['edition']==rooms['edition'],'Crystal edition mismatch')
+ for f in crystal['files']:
+  b=(P/f['path']).read_bytes();check(len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],'Crystal build digest mismatch '+f['path'])
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')

@@ -1,0 +1,41 @@
+{
+  "schema": "trinity-museum.crystal-reconstruction.v1",
+  "edition": "museum-v1.3.0",
+  "dimensionsMetres": {
+    "width": 0.246,
+    "height": 0.353,
+    "thickness": 0.04
+  },
+  "dimensionSource": "https://www.trinityaccord.org/archive_legacy_index_2025_09/",
+  "photograph": "assets/core-object-alpha.jpg",
+  "textSource": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/bitcoin-inscription-mirrors/raw/97631551.txt",
+  "scope": "Approximate dimensional exhibition reconstruction. English protocol laid out anew inside the slab. Physical object has bilingual engraving; this model does not claim a facsimile of that layout. No private flaws reconstructed. Plinth and lighting are exhibition design.",
+  "application": "Blender 4.5.3 LTS",
+  "files": [
+    {
+      "path": "scene/build_crystal.py",
+      "bytes": 6148,
+      "sha256": "982b2db26ff7ae82d55fca88b1be8593ce8a1c6cc44e7cdd5ff8591ad6998ca2"
+    },
+    {
+      "path": "scene/protocol-97631551.txt",
+      "bytes": 1184,
+      "sha256": "4f6cb2a32df7a4033ed639c02943d8c860a414d320fb2799c1710c75e9a589e9"
+    },
+    {
+      "path": "scene/core-object-alpha.blend",
+      "bytes": 492956,
+      "sha256": "70113d06fbe6b413d54d25699e4d84962611e533601b7ce043c1d173a7229b2c"
+    },
+    {
+      "path": "dist/assets/crystal/core-object-alpha.glb",
+      "bytes": 7821172,
+      "sha256": "e50f8a2d5dcddc1e7d23a816f5df02bd1f80c2428344fe37e8a37e87542da467"
+    },
+    {
+      "path": "dist/assets/crystal/crystal-preview.png",
+      "bytes": 2540065,
+      "sha256": "0b6a5c79e7d2cdbfd39609253597bb5ba2112ccaee2f56aafa52720ac878e9d1"
+    }
+  ]
+}

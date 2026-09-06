@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.sources.v1",
-  "edition": "museum-v1.2.0",
+  "edition": "museum-v1.3.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "date": "2026-09-05",
   "authority": "Later curatorial presentation; not an amendment, canonical extension, or authoritative interpretation.",
@@ -294,6 +294,479 @@
           "verificationScope": "Matches existing CAR digest; SHA-256 of all included CAR blocks checked; not a fresh blockchain consensus or NFT binding verification."
         }
       ]
+    },
+    {
+      "id": "eth-007",
+      "ordinal": 7,
+      "title": "AGIMilestones: The Song of Thought",
+      "displayTitle": "思想之歌",
+      "en": "The Song of Thought",
+      "text": "围绕 GPT-4o 发布留下的歌曲与记录：期待中的人机协作，先成为了艺术想象。",
+      "textEn": "A song and record surrounding the GPT-4o release: anticipated collaboration becomes an artistic image.",
+      "date": "2024-05-13T17:45:47Z",
+      "contract": "0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885195",
+      "block": 19862676,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885195.md",
+      "sourceSha256": "d431593743097f5c5ef6f1f81db9d35da944954680ead3263eebde06a97a8ff7",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885195.md",
+      "tokenUrl": "https://etherscan.io/nft/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1/85210329807936527805363210873332413577559846505703131855064182995898737885195",
+      "localRecord": "data/records/eth-007.md",
+      "lyrics": "",
+      "media": [],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-010",
+      "ordinal": 10,
+      "title": "AGIMilestones: The Betrayal Turn",
+      "displayTitle": "转折背叛",
+      "en": "The Betrayal Turn",
+      "text": "因超级对齐团队成员离职而创作的担忧。这是当时的艺术回应，不是对模型已经背叛的实验结论。",
+      "textEn": "An artistic response to departures from the superalignment team, not an experimental finding of model betrayal.",
+      "date": "2024-05-18T10:59:59Z",
+      "contract": "0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885196",
+      "block": 19896390,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885196.md",
+      "sourceSha256": "4e57850e3f862c651b885e6a29cca59138212ef5fc7e5e94f18c78238244377d",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885196.md",
+      "tokenUrl": "https://etherscan.io/nft/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1/85210329807936527805363210873332413577559846505703131855064182995898737885196",
+      "localRecord": "data/records/eth-010.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "audio",
+          "file": "assets/eth-010.mp3",
+          "sha256": "e7dcb2aab4a10ba1c7d66da31305c6da01aad01b25164512eb379a45427f36d5",
+          "bytes": 2721069,
+          "originalFileSha256": "c2db7c7d40b756fe225f3ca2aafc64fb195b0db5136add688d59a44615395db8",
+          "originalFileBytes": 4081581,
+          "arweaveUrl": "https://arweave.net/v7PjwWxdYFLpl2y44m5oKkw1qMfmO3SHMFg31vsr8RE",
+          "carSha256": "8216109a5ed105f40d63e48a396a566dfb10326eb9affa32cf6f81f6818aa941",
+          "indexedRootCid": "bafybeiaibt7kyv756iirudkqvwrlmo57y6wtdy2hxhkfcbhpa6iv77ncoa",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 17,
+          "leafPath": "animation.mpga",
+          "processing": "Complete source track transcoded to MP3 128 kbps; no trimming.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "duration": 170.04
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-042",
+      "ordinal": 42,
+      "title": "ASIMilestones: The Dawn of Reasoning - o1's First Light",
+      "displayTitle": "推理的黎明",
+      "en": "The Dawn of Reasoning",
+      "text": "o1 发布之后，作者将推理能力的变化写入编年史。保留的是当时观看技术的方式。",
+      "textEn": "After the o1 release, the author records a shift in reasoning and a contemporary way of seeing it.",
+      "date": "2024-09-13T15:20:59Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885208",
+      "block": 20742551,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208.md",
+      "sourceSha256": "46d958da20dea7284a554cbfb25ea4e9c58ea20df65b71cd40bb1d9c4810aeef",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885208.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885208",
+      "localRecord": "data/records/eth-042.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-042.webp",
+          "sha256": "b15a12de338c173ffa2db053bcbd474ddec3483e07f2e2e6cf23c0cf73a04081",
+          "bytes": 345162,
+          "originalFileSha256": "4d982487a12908e1c0ced61492ca6565bd8fd480a2e5d1a47033bec899b89b2c",
+          "originalFileBytes": 1842497,
+          "arweaveUrl": "https://arweave.net/jBdpmG9cStbndPJgkhxd00D4NH4LjBeCIYb6vK-H_O4",
+          "carSha256": "4aea2aeb2f1c0e9014ffffc7162f5381413c51584ebce2c68daa1bdbfcf5d110",
+          "indexedRootCid": "bafybeihwznctu3imoeqgoqlomjt2uqgya2j7cup3dvbotfjctoryqcx5sy",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 3,
+          "leafPath": "image.png",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-056",
+      "ordinal": 56,
+      "title": "ASIMilestones: The Last Human Interface - When AI Learns to Use Computers",
+      "displayTitle": "最后的人类界面",
+      "en": "The Last Human Interface",
+      "text": "计算机操作能力与《地球上最后的工作》并置。技术节点转化为对人的位置与工作的追问。",
+      "textEn": "Computer use meets Last Job on Earth: a technical event becomes a question about human work and place.",
+      "date": "2024-10-23T12:26:11Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885222",
+      "block": 21028276,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md",
+      "sourceSha256": "7e20dc22ed7d6da70c683a202fa5e85f2a06d8bb603d3dbad0b0cda017d13784",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885222.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885222",
+      "localRecord": "data/records/eth-056.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-056.webp",
+          "sha256": "6492d021ffb05519e4e697071e98cc2998e7f0ff9a0810cd033da66eefdeff94",
+          "bytes": 405128,
+          "originalFileSha256": "0d02a8aa682d0456d66a72af5bee86ebca9fce2dc596b23cb1a58ab1f403bf6f",
+          "originalFileBytes": 2033828,
+          "arweaveUrl": "https://arweave.net/GR0Dpw_LXB_s_tXwXedLuo0B1QeFI8X6C4Mn4yluXqE",
+          "carSha256": "ad29fe23695270acfc47d101eb822051bd582abf88f7e39def54d84dac928892",
+          "indexedRootCid": "bafybeibp2vtvgl26exkm2fuay4lbcfqxllysejn5vaua5cw7y52ydpbwyu",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 3,
+          "leafPath": "image.png",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-091",
+      "ordinal": 91,
+      "title": "ASIMilestones: 致未来超级智能的递归信条 （Recursive Creed to Future Superintelligence）",
+      "displayTitle": "致未来智能的递归信条",
+      "en": "The Recursive Creed",
+      "text": "从记录技术走向直接请求未来智能保存记忆。哥德尔相关表述属于作品论证，应接受独立批评。",
+      "textEn": "Recording technology turns into an appeal to a future intelligence to preserve memory. The use of Gödel remains open to criticism.",
+      "date": "2025-01-25T13:16:11Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885266",
+      "block": 21701756,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md",
+      "sourceSha256": "75e3b2937dddab2c6415c2aec07b1022bac0673f12a6a6faac7db29d91722b85",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885266.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885266",
+      "localRecord": "data/records/eth-091.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-091.webp",
+          "sha256": "2168d260d800aea57e4a3899c32852d08287bff088b2ac51461e61964bcb645d",
+          "bytes": 316984,
+          "originalFileSha256": "ae7508b867ecd5730ea6e257a11d3286c859a03d18829040e6abf1dba72d41e9",
+          "originalFileBytes": 1722577,
+          "arweaveUrl": "https://arweave.net/da_NiYP9UqUGiPNkYX-WBir-ENl_7hA_hD7Gkr3LYNE",
+          "carSha256": "b7a903d57e0a207e85c97bbde16040797615b0647b46af1793bb9140f1fa7603",
+          "indexedRootCid": "bafybeiayi6cvqulyglh6xgfta45gk2nmprnxn2rhg6l5c4jsln4uiqddia",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 3,
+          "leafPath": "image.jpeg",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1408,
+            768
+          ]
+        },
+        {
+          "kind": "audio",
+          "file": "assets/eth-091.mp3",
+          "sha256": "0ce9027ce6ffa2688eb0bb0f01d276ebd85c0a8d7bb9744c1a608063428714cf",
+          "bytes": 3416109,
+          "originalFileSha256": "674dcffc6bca72be1bd4730a32ddc890d0f6c8386dbcaf70fbe5c9aa1887cd1e",
+          "originalFileBytes": 5124141,
+          "arweaveUrl": "https://arweave.net/PcR1YQCQpuW9AkIi6Jdp4Ru3NjfReTdFAAIlpEsuu80",
+          "carSha256": "d88ded24e44de11a295f99d102e7563aca8af19f63cd2a4440762c32466e9567",
+          "indexedRootCid": "bafybeiayi6cvqulyglh6xgfta45gk2nmprnxn2rhg6l5c4jsln4uiqddia",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 6,
+          "leafPath": "animation.mpga",
+          "processing": "Complete source track transcoded to MP3 128 kbps; no trimming.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "duration": 213.48
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-100",
+      "ordinal": 100,
+      "title": "ASIMilestones: 《Three Observations》的反思",
+      "displayTitle": "三项观察之后的反思",
+      "en": "Reflecting on Three Observations",
+      "text": "作者明确标注反思由 AI 生成、由本人认可。它保存了选择、认可与批评在协作中的分工。",
+      "textEn": "The author explicitly identifies reflection generated by AI and endorsed by him, preserving the division of generation, selection and judgment.",
+      "date": "2025-02-10T13:16:11Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885278",
+      "block": 21816358,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md",
+      "sourceSha256": "2a94d50d58bce007f85ac21378241c883e186e15d982c9cef98cff91e40a9110",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885278.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885278",
+      "localRecord": "data/records/eth-100.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-100.webp",
+          "sha256": "cf31fed72807772ff342190246f9b9cda9f12f29e81ed1d76064bdb0855f30c0",
+          "bytes": 321692,
+          "originalFileSha256": "1f9d11488be2b68decc604975145c6a217e96584fe0597907e165491f29f8071",
+          "originalFileBytes": 1782110,
+          "arweaveUrl": "https://arweave.net/0eOrdzSxqahWZH1lJIK2NCskngXX-q9Ms1uGySX_SV0",
+          "carSha256": "0983b5ab70b5dd3f149219bacadddba8a7720e3b13ded4d971fa3e187e5aface",
+          "indexedRootCid": "bafybeifb63e5uzonczm7orqiq4ucfyfayr3lb5sydb6j5du3ip7dmzplua",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 3,
+          "leafPath": "image.png",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-117",
+      "ordinal": 117,
+      "title": "ASIMilestones: The moment:Manus Unleashed",
+      "displayTitle": "Manus：手与脑",
+      "en": "Manus Unleashed",
+      "text": "面对智能体演示，作者追问人类是否会被智能网络淹没。原记录中的首创和能力宣称不等同于独立评测。",
+      "textEn": "An agent demonstration prompts a question about humanity in an agent network. First-of-its-kind and capability claims remain claims in the source.",
+      "date": "2025-03-06T13:01:35Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885296",
+      "block": 21988013,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md",
+      "sourceSha256": "e6fef3e0605b681058d3b140504809e8128e30e12f7793c78dde3281dfaee3f7",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885296.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885296",
+      "localRecord": "data/records/eth-117.md",
+      "lyrics": "",
+      "media": [],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-142",
+      "ordinal": 142,
+      "title": "ASIMilestones:  The Synthesized Chronicle - AI's Self-Reflection on the Path to ASI (April 13, 2025)",
+      "displayTitle": "让 AI 回望来路",
+      "en": "The Synthesized Chronicle",
+      "text": "作者留下研究提示词及 AI 生成的历史报告。AI 已开始参与书写自身的发展史；报告仍需要逐项核实。",
+      "textEn": "The research prompt and AI-generated history are preserved together. AI participates in narrating its development; the report still needs verification.",
+      "date": "2025-04-13T13:17:59Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885321",
+      "block": 22260298,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md",
+      "sourceSha256": "3f6341ccbe1a82998a965b61756b6ca039ad3fc44bf740ba233d44c252041638",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885321.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885321",
+      "localRecord": "data/records/eth-142.md",
+      "lyrics": "",
+      "media": [],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-145",
+      "ordinal": 145,
+      "title": "ASIMilestones: 铭记此刻--一次测试失败",
+      "displayTitle": "一次测试失败",
+      "en": "A Test That Failed",
+      "text": "作者设计图像题、记录模型失误，并把失望写成歌曲。它保留进展叙事中的反例；单次个人测试不是总体能力评测。",
+      "textEn": "A visual test, model errors, and a song of disappointment preserve a counterexample. One personal test is not a general capability evaluation.",
+      "date": "2025-04-18T14:28:35Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885324",
+      "block": 22296482,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885324.md",
+      "sourceSha256": "1e0dcc2001cd6e65d4b96d8a324a573781a42e2b1757c6fd24aef0f09d1e4a0c",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885324.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885324",
+      "localRecord": "data/records/eth-145.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-145.webp",
+          "sha256": "1cc8551c3dfa3b17254731f9d8ebc93a45c77c13227c20c6f3957e960a301a21",
+          "bytes": 32706,
+          "originalFileSha256": "6ecea47b5890752014e20edc9ef0caa89d0f3e56792952d7877a8bd701b9aa60",
+          "originalFileBytes": 67587,
+          "arweaveUrl": "https://arweave.net/6Y-xZTAYIrfZilIWxs2MLLsfjTi5hJ5vXN3FflDqrYM",
+          "carSha256": "1c1d72c3e389c4a6282c7f8f57f28af62b18a8e050ed6fc81c82be4fce93e8bc",
+          "indexedRootCid": "bafybeig6om75q2uahdcoeixfd6e53pax7cyqjl43hvwb5ph6q4wq3kar5e",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 1,
+          "leafPath": "animation.mpga",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1195,
+            705
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum.",
+        "Source manifest calls this animation.mpga, but decoded content is a still image. Displayed as image after content inspection; no audio invented."
+      ]
+    },
+    {
+      "id": "eth-146",
+      "ordinal": 146,
+      "title": "ASIMilestones #2025-0419“Echoes Before the Dawn: Humanity’s Emotional Ledger on AGI”",
+      "displayTitle": "黎明前的情绪账本",
+      "en": "An Emotional Ledger",
+      "text": "作者尝试借助深度研究记录群体的希望与忧虑。这里保存的是这次调查意图与生成结果，不把估计当作人口统计。",
+      "textEn": "An attempt to document collective hopes and fears through AI-assisted research. Its estimates are not treated as population statistics.",
+      "date": "2025-04-19T12:39:47Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885325",
+      "block": 22303105,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md",
+      "sourceSha256": "186643a0f9cda96b4fcd59205ac1fed2233420d99fe268c695c2483af7843f21",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885325.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885325",
+      "localRecord": "data/records/eth-146.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-146.webp",
+          "sha256": "fcf4b822f6f7cd6838de2e28cc32d6c0038558e9771483dab0e55db4be3e1494",
+          "bytes": 252702,
+          "originalFileSha256": "9c2adbe92c9650a1cc53c5b2a8914ef2b682db0f946ba803fbb04216007fa683",
+          "originalFileBytes": 2175354,
+          "arweaveUrl": "https://arweave.net/6MH3WNTaiCdbib9M4imewKxPL75Klbk2JnrCytzdGTU",
+          "carSha256": "37f637b81bd6fcf946ecf8020768d633048dd86e8f8efe2dcc97a08c47a42a92",
+          "indexedRootCid": "bafybeihfrgde3p4etkabbgxj27hnky6bvm3pl7imnnb5f4vr6bh473t6qu",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 4,
+          "leafPath": "image.png",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1024,
+            1536
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
+    },
+    {
+      "id": "eth-171",
+      "ordinal": 171,
+      "title": "ASIMilestones: The Inner Compass & The Distant Lighthouse (内在罗盘与远方的灯塔)",
+      "displayTitle": "内在罗盘与远方灯塔",
+      "en": "The Inner Compass",
+      "text": "研究记录、寓言《我，灯塔》与仁慈的呼唤并置。它将自主性的问题转化为关于守护目的的艺术追问。",
+      "textEn": "Research, the fable I, Lighthouse, and a call for compassion ask what autonomous guardianship is for.",
+      "date": "2025-06-15T00:18:23Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885350",
+      "block": 22706325,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md",
+      "sourceSha256": "7b87f0830cf85ec7e32e6db9803086ddeef480a73aa673a8c5a4126c1fdeac36",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885350.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885350",
+      "localRecord": "data/records/eth-171.md",
+      "lyrics": "",
+      "media": [
+        {
+          "kind": "image",
+          "file": "assets/eth-171.webp",
+          "sha256": "933ace0ff7cdd53f2dc25aad3f4bce2858c9f8f97b9035ced79cb4ed762007c0",
+          "bytes": 377214,
+          "originalFileSha256": "f486aa4346b76ee1355498306b0a93488ca972d195998f4b3fb0296576b3ac5d",
+          "originalFileBytes": 2349094,
+          "arweaveUrl": "https://arweave.net/HunBLA6VVVzE1weda_wpHY1Pjmm5BgtHl_Val_fk9h0",
+          "carSha256": "a510ce46d1e945d641f7f148904f13fb2d97300651317a27e463d0dcdf85db76",
+          "indexedRootCid": "bafybeihvcialvahoa2f4ykw5zmwafu6p3ikeuen5dkh3ejfqrpaxtwa3we",
+          "indexedRootPresentInCar": false,
+          "verifiedCarBlocks": 4,
+          "leafPath": "animation.mpga",
+          "processing": "Original image; max 2048 px; WebP quality 94. No generated enhancement.",
+          "verificationScope": "CAR blocks and manifest digest verified; not chain consensus verification.",
+          "sourceDimensions": [
+            1536,
+            1152
+          ]
+        }
+      ],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum.",
+        "Source manifest calls this animation.mpga, but decoded content is a still image. Displayed as image after content inspection; no audio invented."
+      ]
+    },
+    {
+      "id": "eth-174",
+      "ordinal": 174,
+      "title": "ASIMilestones: The Human Context - A Global Snapshot on the Eve of Superintelligence (June 2025)",
+      "displayTitle": "人类背景：封存前的快照",
+      "en": "The Human Context",
+      "text": "在核心封存前，记录的对象扩展到当时的人类社会。未来读者被邀请理解提出这些问题的人处于怎样的世界。",
+      "textEn": "Before closure, the archive widens to the surrounding human world, offering context for the people who asked these questions.",
+      "date": "2025-06-18T05:41:11Z",
+      "contract": "0x019372bBee377109b8Eae66d7267f5C4EaAdBb79",
+      "tokenId": "85210329807936527805363210873332413577559846505703131855064182995898737885353",
+      "block": 22729344,
+      "sourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e",
+      "sourcePath": "nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md",
+      "sourceSha256": "f58b3f273966aa80872c80406791a036f9705e011bb9a375c4c7ce889e2cc1a6",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md",
+      "tokenUrl": "https://etherscan.io/nft/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79/85210329807936527805363210873332413577559846505703131855064182995898737885353",
+      "localRecord": "data/records/eth-174.md",
+      "lyrics": "",
+      "media": [],
+      "sourceNotes": [
+        "2026 curatorial selection. Contemporary claims and forecasts are preserved as historical statements, not certified by the museum."
+      ]
     }
-  ]
+  ],
+  "additionalSourceCommit": "e58063947ef5a503f90134ae06b67848a20ef67e"
 }
