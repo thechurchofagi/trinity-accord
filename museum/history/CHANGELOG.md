@@ -1,3 +1,12 @@
+# museum-v1.18.0 · Caption reliability and default footsteps
+
+- Replace layered lyric-card CSS with independent caption and playback lanes. Compact captions contain only up to two physical lines, with no panel, blur, title, or clipped overflow. Long phrases page using measured font width.
+- Keep pause/stop available when captions are hidden; restore reachable expand/hide controls and room focus actions. Start artwork-strip selection at its reachable left edge and play the selected artwork's recording.
+- Derive sung text without changing preserved source records: retain inline first verses, remove title/section headers, and stop before the Betrayal Turn's explanatory NFT prose.
+- Cancel stale lyric fetch results, clear previous-track captions, and leave estimated intro/tail intervals blank. Caption timing is still estimated, not verified audio alignment.
+- Keep synthesized footsteps enabled by default without an off switch. Use elapsed-time walking at 1.38 m/s, remove accelerated floor-tap easing, turn laterally, respect reduced-motion head roll, and clean up audio nodes.
+- Regression: 21 audio records / 675 derived sung lines, lossless two-line pagination, cue boundaries, and walking at 10/20/30/60/120 fps. Browser checks include multiple song switches and 390/320 px layouts. WebGL motion and audible timing still require a capable browser/listening verification.
+
 # museum-v1.17.0 · Cinematic captions and natural walking
 
 - Replace the compact lyric card with television-style current/next subtitles: no panel fill, blur, title, cover, time label, or detail button. Keep only small playback and lyric-view controls outside the caption text, and hide the overlapping focus controls while lyrics are visible.

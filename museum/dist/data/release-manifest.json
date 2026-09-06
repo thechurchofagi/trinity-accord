@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.17.0",
+  "edition": "museum-v1.18.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
@@ -8,7 +8,7 @@
     {
       "path": "archive.html",
       "bytes": 67861,
-      "sha256": "342ecb5ec99a87050b9661bf240134ef498b3fb99932c9b7e203e69035887521"
+      "sha256": "f68ecfd91e4023169c360cf08ed8a119ea7856fa3c0a5251798af42ca7afa98c"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -353,7 +353,12 @@
     {
       "path": "boot-loader.js",
       "bytes": 1004,
-      "sha256": "3dc717f840187f1905f9e0ffb01762ae7f8afd2a647e93229be0347b0c748423"
+      "sha256": "ca0ba0b39d5ec4e78045686c8c4b938262c937d40b3638a6bdafde96123629d0"
+    },
+    {
+      "path": "caption-utils.js",
+      "bytes": 3439,
+      "sha256": "14eb7c1c389f6876ef452f8be2673732aeb2d49b983898afc82598641194e6d9"
     },
     {
       "path": "crystal-inscription.js",
@@ -373,12 +378,12 @@
     {
       "path": "data/audio-audit.json",
       "bytes": 29391,
-      "sha256": "7a79c82dd83e4863396b75adf32e5bf6a2f7cc46388966892caa13dae9f65cbd"
+      "sha256": "7d5dab38ddff10ed0f6e85330f4bf3a1cf7bd3aad4432ca824d6d7f9d1f6de90"
     },
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "6c3ed64a373920f2ace019222349003c1108a812f1a61ed61aaf5c065fc7ccb8"
+      "sha256": "a65c4ffd1502f0e637ecbf22b674ce499a51a82047e7d993462f16eeca329ea1"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -388,12 +393,12 @@
     {
       "path": "data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "37076e1c9b65718b06768bf8ff4084d5d618fb0b5a645296ba209838d0ec89fa"
+      "sha256": "65863bcd5ea03116a28af2e1925f7e457679c9e0c9a97e32e5ade5ce0a0ea2fe"
     },
     {
       "path": "data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "83ce9c1f01f6b12d2fd3f273906a52fe77c3b4ca8cf159888b8619870dea3303"
+      "sha256": "da00081ecdbdc0d01d98095c31f8c5757b8c72f22ae17269ec697b23ca898fff"
     },
     {
       "path": "data/narration.json",
@@ -518,12 +523,12 @@
     {
       "path": "data/rooms.json",
       "bytes": 8839,
-      "sha256": "758131d39710ea2a91d7bdf9f228b67dec3d8ee2f52e2c8fb3316a97915873af"
+      "sha256": "0414635a800bf8622c0b4e7c7486059b976135614be050d6500927b4106783b3"
     },
     {
       "path": "data/sources.json",
       "bytes": 126331,
-      "sha256": "602e98297ed42866f0586a2d0a28167738ac51dfd6109e9e863e9d2c230ee6dc"
+      "sha256": "d353c194b6865e9f8cc882bba3efeee107881df3680feed9d3372fce30117de8"
     },
     {
       "path": "data/space-design.json",
@@ -538,12 +543,12 @@
     {
       "path": "edition-data.js",
       "bytes": 131349,
-      "sha256": "bf98e895fb0d1791e4c6b40c125ea74429e01c85bf3d4c4c3aabf353ec329872"
+      "sha256": "feebad3c398e8bb58bc65c5d81e6a853c9e9aeba7da6f88e9cf52e91680f766c"
     },
     {
       "path": "index.html",
-      "bytes": 5577,
-      "sha256": "95c256b0e63adb2175c2057cebbe988b962f5b88cd4411a722fe07385b11c75f"
+      "bytes": 5444,
+      "sha256": "5210a4816c173f5317e964040bd82dbc2f5c1d4e8d0c7e33fceea5c75749f3a4"
     },
     {
       "path": "movement-controls.js",
@@ -552,18 +557,18 @@
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 784998,
-      "sha256": "d63c368c5887d17369ff0a2e12567a9740b7f5ddc1a039c27529e7a445be0ecb"
+      "bytes": 786775,
+      "sha256": "94aa100d9789745095d60505515af1cf8183a55461b33c7989d72f4c6c9cfb31"
     },
     {
       "path": "museum.css",
-      "bytes": 35440,
-      "sha256": "32269c8b22f7a3b59a13d6dc41d14f62aaa341fcfc1e72eac56981fbd30c16e1"
+      "bytes": 30923,
+      "sha256": "45e6394698074a8b0cccd2688fb5af1687f4a6716a7a2088f3c4ae30d990e7af"
     },
     {
       "path": "museum.js",
-      "bytes": 62300,
-      "sha256": "dc53890053a1256ef43c5c37c745ec151053fdff46a1303f6695c4cd6f35bdb2"
+      "bytes": 62764,
+      "sha256": "743714742a349623eeca6d4ce4cc8ffc2ead9ea674b5d0ddbf8ef7867b94491f"
     },
     {
       "path": "observation-view.js",
