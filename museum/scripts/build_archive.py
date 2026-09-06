@@ -25,6 +25,6 @@ files=[]
 for p in sorted(D.rglob('*')):
  if not p.is_file() or p.name=='release-manifest.json':continue
  b=p.read_bytes();files.append({'path':p.relative_to(D).as_posix(),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()})
-manifest={'schema':'trinity-museum.release.v1','edition':rooms['edition'],'sourceCommit':sources['sourceCommit'],'created':'2026-09-05','scope':'Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.','files':files}
+manifest={'schema':'trinity-museum.release.v1','edition':rooms['edition'],'sourceCommit':sources['sourceCommit'],'created':rooms.get('updated',rooms['created']),'scope':'Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.','files':files}
 (D/'data/release-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 print('Archive and manifest ready:',len(files),'files,',sum(f['bytes'] for f in files),'bytes')
