@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.runtime-build.v1",
-  "edition": "museum-v1.14.0",
+  "edition": "museum-v1.14.1",
   "esbuild": "0.25.12",
   "inputs": [
     {
@@ -16,27 +16,27 @@
     {
       "path": "dist/data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "086508afe3627e03cb3557b15fd61248d8775ede7a6c48d7ef5981ff21d1a553"
+      "sha256": "2a7a42d6f6ef3463c4f56effca1d629220cf578cde761e106a2224bdcea4a039"
     },
     {
       "path": "dist/data/gallery-layout.json",
       "bytes": 6068,
-      "sha256": "89670720c0b5d81d011c85d823db86e5baa579cd2ded78be3f8629a222b9f465"
+      "sha256": "3e11d4229570a6710f68337d403fdaac9b2ccf20e99be80580eab65c22a3a889"
     },
     {
       "path": "dist/data/rooms.json",
       "bytes": 8839,
-      "sha256": "017466ace94f0081e915af41988fe7a0d85f1e78a61bbc2d549939de24b6b5c9"
+      "sha256": "3e8ef7f1adb0ffabfbd62e4cb98513e1991ec28aeac5758bb671a94b66493986"
     },
     {
       "path": "dist/data/sources.json",
       "bytes": 126331,
-      "sha256": "33ce6e619225e5a835e93f2ed55522de06989fe21566c6270d02ad3ef7620613"
+      "sha256": "f1394b2b42ab28f5090d03956390759533dc8531ce4cb43148bb7faa81416d58"
     },
     {
       "path": "dist/edition-data.js",
       "bytes": 131349,
-      "sha256": "383cb1d7986c66f56a410656121c63f7ef13791ae494df60d3037215a392fb3a"
+      "sha256": "35154d16600f5c8dd7096bd01a170db592300b31720892e21c73e7f3b4e0aee5"
     },
     {
       "path": "dist/movement-controls.js",
@@ -46,7 +46,7 @@
     {
       "path": "dist/museum.js",
       "bytes": 57912,
-      "sha256": "71d5072ef9cb49d8cfdd34df80cb7e143ac5147abf934f84264247918c3340ec"
+      "sha256": "8955af1e1ee515ce4456498423e5ee9b91dc3808d1280266799315335a1b855e"
     },
     {
       "path": "dist/observation-view.js",
@@ -97,6 +97,6 @@
   "output": {
     "path": "dist/museum.bundle.js",
     "bytes": 781329,
-    "sha256": "c068c897219e2a177dee89e2183c61ecb45d2e3b6bf8b41212567dc3091ad776"
+    "sha256": "98cd1031b890cdb99fd83a03c063ed50630e6287e09bf03311bfe38a736d9d01"
   }
 }
