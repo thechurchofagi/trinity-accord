@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
+import {fetchBytes} from './progressive-loading.js';
 
 export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f4fbff',roughness:.025,transmission:.90,thickness:.012,ior:1.12,metalness:0,envMapIntensity:.65,clearcoat:.45,clearcoatRoughness:.045,attenuationColor:new THREE.Color('#e7f6ff'),attenuationDistance:3});}
 // Keep physical engraving geometry; improve its contrast for a small screen.
@@ -43,7 +44,7 @@ export async function inspectCrystal(host, english=false){
   scene.add(new THREE.HemisphereLight('#e6f4ff','#365d80',2));
   for(const [x,y,z,color,power] of [[-.4,.5,.5,'#abdfff',4],[.4,.3,-.2,'#ffc999',3],[0,.7,0,'#ffffff',2]]){const l=new THREE.DirectionalLight(color,power);l.position.set(x,y,z);scene.add(l);}
   const env=crystalEnvironment(renderer);scene.environment=env.texture;
-  const model=await new GLTFLoader().loadAsync('./assets/crystal/core-object-alpha.glb');if(disposed||!host.isConnected){env.dispose();return clean;}scene.add(model.scene);addCrystalLighting(scene,new THREE.Vector3());const aura=addCrystalAura(scene,new THREE.Vector3());
+  const bytes=await fetchBytes('./assets/crystal/core-object-alpha.glb');const model=await new GLTFLoader().parseAsync(bytes,'./assets/crystal/');if(disposed||!host.isConnected){env.dispose();return clean;}scene.add(model.scene);addCrystalLighting(scene,new THREE.Vector3());const aura=addCrystalAura(scene,new THREE.Vector3());
   refineCrystal(model.scene);
   let azimuth=.12,elevation=.05,distance=.79,down=null;const target=new THREE.Vector3(0,.165,0),canvas=renderer.domElement;
   host.querySelector('.crystal-status').remove();host.append(canvas);host.querySelector('img').hidden=true;canvas.setAttribute('aria-label',english?'Drag to rotate crystal':'拖动旋转水晶');canvas.style.touchAction='none';

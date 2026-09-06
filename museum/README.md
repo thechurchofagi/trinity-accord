@@ -6,14 +6,14 @@ This directory is a later exhibition of the existing Trinity Accord. The three B
 
 Use Python 3: `python -m http.server 8000 --directory dist`, then open the local server in a modern browser. No package installation, account, model API, or build process is needed to visit this static edition. Three.js 0.180.0 is vendored with its MIT license. Native ES modules require HTTP serving; opening `index.html` directly with `file://` is not supported.
 
-`python scripts/validate.py` checks content, local references, media digests and the release inventory. `node --check dist/museum.js` checks the application syntax. The museum does not import dependencies from the parent site's package.json.
+`python scripts/validate.py` checks content, local references, media digests and the release inventory. `node --check dist/museum.js` checks the application syntax. `node scripts/check_progressive_loading.mjs` checks loading failures and wall placement. After changing runtime modules or startup JSON, run `npm ci` and `node scripts/build_runtime.mjs`, then `python scripts/build_archive.py`; the validator binds the checked-in bundle to its inputs. The museum does not import dependencies from the parent site's package.json.
 
 For optional supervised UI development, this edition includes a Vite development server (`npm ci`, then `npm run dev`). It is not a runtime dependency of the exported exhibition. See `history/CHANGELOG.md` for the actual scope and limitations of device testing.
 
 ## Ownership and boundaries
 
 - GitHub `thechurchofagi/trinity-accord`, under `museum/`, holds the maintained exhibition source and history. There is no separately managed user repository.
-- ChatGPT Sites hosts an exported copy of this directory. Its provider-managed source transport is deployment infrastructure, not a replacement archive. `.openai/hosting.json` identifies that hosted Site; do not initialize a second Site on upgrades.
+- GitHub Pages publishes the maintained export at https://www.trinityaccord.org/museum/. Historical ChatGPT previews are not the public deployment target.
 - Original NFT records, Bitcoin texts and evidence stay in their existing locations. This edition pins its source commit and includes display copies with provenance and transformation records.
 - Original website links remain the entry points for verification, current status, Echo and Guardian applications. This application writes no record and makes no AI-agent oath, signature, or submission.
 - Ambient pulses are exhibition animation, not heartbeat telemetry. No reception totals are simulated.
