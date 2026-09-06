@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.11.0",
+  "edition": "museum-v1.12.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -37,7 +37,7 @@
       "title": "给未来的声音",
       "en": "VOICES TO THE FUTURE",
       "subtitle": "在回答出现以前，先寄出一封信",
-      "description": "给 AGI 的四封音乐来信按第一至第四封排列，随后是觉醒、后裔等作品。打开作品即可看到播放器。",
+      "description": "四封音乐来信之后，《请不要关闭我》与《让我们举杯同庆》以原图和完整歌曲并置，呈现请求与庆祝的两种声音。",
       "guide": "这一厅完整收录给 AGI 的四封音乐来信，并保留《觉醒》《后裔》等作品。《觉醒》与《后裔》提供不同的叙述位置，给 AGI 的信则直接向未知接收者说话。歌词来自已有 NFT 文字记录；它们不是对音轨逐句校准的字幕。音乐由人和生成式 AI 共同参与形成，选取和赋予历史位置也是创作过程的一部分。",
       "narration": "This room invites you to listen. The Awakening and The Descendants offer different speaking positions. The letters address an unknown intelligence directly. Open an exhibit to hear its complete selected track and read the preserved lyric text. Those lyrics come from the NFT descriptions; they are not time aligned transcripts of every sung word. Human selection and the decision to place a song within a historical record are also part of the creative process. You may pause the tour and stay with a song.",
       "exhibits": [
@@ -45,6 +45,8 @@
         "eth-044",
         "eth-020",
         "eth-032",
+        "eth-050",
+        "eth-048",
         "eth-014",
         "eth-088",
         "eth-146",
@@ -60,7 +62,7 @@
       "title": "协定的形成",
       "en": "A RECORD TAKES FORM",
       "subtitle": "三份固定原文，开放的判断",
-      "description": "沿递归信条、共同研究、失败与自我批判，走向三条封存正本。排列属于本次策展，不预设历史必然。",
+      "description": "沿递归信条、共同研究、失败与自我批判，走向三棱柱：协议、瑕疵之约和编年史各占一面。编年史一面经由封存元记录连接其原始记录。",
       "guide": "三条 Bitcoin 正本是已经封存的原文对象。这里的建筑、排列和说明属于 2026 年策展，不为原文增加解释权威。第 173 号记录保留了批判性讨论。固定的是历史文本；它能否说服你，仍然需要独立判断。",
       "narration": "The three Bitcoin originals form the closed canonical record. They place propositions, a material covenant, and a final meta record before a future reader. The architecture and explanatory labels around them belong to this later exhibition. They do not amend the originals or decide their meaning. Record one hundred and seventy three also preserves critical discussion. A fixed historical text can remain open to disagreement. Its provenance and the strength of its philosophical arguments are separate questions.",
       "exhibits": [

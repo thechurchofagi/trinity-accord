@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 
-export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#e4f3ff',roughness:.025,transmission:.68,thickness:.025,ior:1.32,metalness:0,envMapIntensity:1.25,clearcoat:1,clearcoatRoughness:.045,attenuationColor:new THREE.Color('#b9e2f4'),attenuationDistance:1.2});}
+export function crystalGlass(){return new THREE.MeshPhysicalMaterial({color:'#f4fbff',roughness:.025,transmission:.90,thickness:.012,ior:1.12,metalness:0,envMapIntensity:.65,clearcoat:.45,clearcoatRoughness:.045,attenuationColor:new THREE.Color('#e7f6ff'),attenuationDistance:3});}
 // Keep physical engraving geometry; improve its contrast for a small screen.
 export function refineCrystal(root){
  const meshes=[];root.traverse(o=>{if(o.isMesh)meshes.push(o);});
@@ -10,7 +10,8 @@ export function refineCrystal(root){
    o.material.dispose();o.material=crystalGlass();
    const edges=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,24),new THREE.LineBasicMaterial({color:'#d7efff',transparent:true,opacity:.38,depthWrite:false}));edges.name='Display facet highlights';o.add(edges);
   }else{
-   const old=o.material;o.material=old.clone();old.dispose();o.material.color.set('#f0f6fc');o.material.emissive.set('#c3def5');o.material.emissiveIntensity=.28;o.material.roughness=.65;
+   o.material.dispose();o.material=new THREE.MeshBasicMaterial({color:'#f0f8ff',toneMapped:false});
+   const outline=new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry,35),new THREE.LineBasicMaterial({color:'#142637',transparent:true,opacity:.8,depthWrite:false,toneMapped:false}));outline.name='Engraving contrast outline';o.add(outline);
   }
  }
 }

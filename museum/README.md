@@ -45,7 +45,11 @@ Original artworks, lyrics, photos and music retain their original rights and att
 
 ## Deployment/export
 
-The public GitHub Pages entry is https://www.trinityaccord.org/museum/.
+The canonical public museum entry is https://www.trinityaccord.org/museum/.
+Public completion requires merging the museum changes into GitHub main and a successful
+GitHub Pages deployment. Publishing the separate ChatGPT Sites copy alone does not
+update this address and must not be reported as completion. Give visitors the canonical
+GitHub Pages URL.
 The main site's Jekyll build excludes the museum source tree. After the build,
 `deploy-pages.yml` copies the complete `museum/dist/` export to `_site/museum/`
 and verifies its file inventory, sizes and SHA-256 digests. This preserves JSON,
