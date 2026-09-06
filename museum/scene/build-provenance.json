@@ -1,21 +1,21 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.2.0",
+  "edition": "museum-v1.3.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
   "source": "scene/build_gallery.py",
   "layout": "scene/gallery-layout.json",
   "baked": true,
-  "bake": "Cycles diffuse / direct + indirect + color; 4096 atlas; 16 samples; OpenImageDenoise compositor",
-  "render": "Cycles CPU; AgX preview, not a browser screenshot",
-  "objects": 45,
-  "sourceMedia": "Existing museum source copies; image planes stay separate from architecture",
+  "bake": "Cycles diffuse/direct/indirect/color; 4096 atlas for large surfaces; 64 samples; OpenImageDenoise",
+  "render": "Cycles reference images, not browser screenshots",
+  "quality": "Small fittings remain separate PBR geometry; exported static meshes batched by material without rebaking. Retina DPR up to 2.5.",
+  "objects": 11,
   "files": [
     {
       "path": "scene/build_gallery.py",
-      "bytes": 11980,
-      "sha256": "921ca688095db81e2f2a6ed70be855d52636e7fa6ba7921ab143a1031313529a"
+      "bytes": 12589,
+      "sha256": "79e9e4b645f28c8fb445ab4f02dd7261bf000e32577fba12c7055198715c6527"
     },
     {
       "path": "scene/denoise_lightmap.py",
@@ -23,36 +23,44 @@
       "sha256": "056b7ff1db56d734e54540b6535bd52d69c711d10c2cd4f63bdf64f4ac2a50aa"
     },
     {
+      "path": "scene/optimize_gallery.py",
+      "bytes": 1065,
+      "sha256": "cca9144936d7305233ac255692300a092b4102be7a9a207fb724ac2ab136ddd7"
+    },
+    {
+      "path": "scene/check_gallery_export.py",
+      "bytes": 589,
+      "sha256": "38ce23b9461054b8ef2dd39a8b83df7afd60cddbbdcab024f2e35da1ef1c6477"
+    },
+    {
       "path": "scene/gallery-layout.json",
-      "bytes": 3531,
-      "sha256": "3d1cde216e0861bebcee472062566310cb78ff68419a86b91dc336f091a0d3c3"
+      "bytes": 5277,
+      "sha256": "ccbb2e0c7cd8e68de93cd4d62de36268ded52efc6403aa9dbdd0bb07d0bdec3f"
     },
     {
       "path": "scene/memory-gallery.blend",
-      "bytes": 241508,
-      "sha256": "ad9cbc6adf9f5007b33671b0058cec45aaa05763660aaacb3551b57c7a7a6895"
+      "bytes": 314796,
+      "sha256": "5a5d51df6eba0a84f2709cb1aac5971196c543f14edbb9f0543cce475aa9d481"
     },
     {
       "path": "scene/export-check.png",
-      "bytes": 832169,
-      "sha256": "e55b87dec18d4dde2205d2e66213cf48b44d24065c64ad821bce88de6c00fd6a"
+      "bytes": 824487,
+      "sha256": "26ce2c3ac10d355580dc931f8e0e1d38daab2bdad059fca28abaabb5aa5c3253"
     },
     {
       "path": "dist/assets/gallery/memory-gallery.glb",
-      "bytes": 5441312,
-      "sha256": "43c10dc8be9043dce842f39d248cfaef1e08ac25e993e51463c646e0c857380c"
+      "bytes": 6657844,
+      "sha256": "3d17673f825870d00c141711f7b345953489762ee66ea2053ca332a87036afdc"
     },
     {
       "path": "dist/assets/gallery/gallery-light.jpg",
-      "bytes": 2193014,
-      "sha256": "9a1e332ae9fca59d89319883f366217b4413c5381d716f07edda1e45dc56fd2f"
+      "bytes": 1321955,
+      "sha256": "8d42f1412f99db4eebb08bcdf7c99704d3f038bf35bc9629059ab2183441892a"
     },
     {
       "path": "dist/assets/gallery/entrance-preview.png",
-      "bytes": 1290836,
-      "sha256": "4030bd81d6c9da05853669899aa3c3a31f268a2952d79002d04d16b0e783063d"
+      "bytes": 2823246,
+      "sha256": "1c521eeea60d768c0879075086ba1204b7901e563230254095a7ca01b7f777f5"
     }
-  ],
-  "created": "2026-09-06",
-  "postprocess": "Denoised atlas embedded in the glTF buffer; exported scene reimported and rendered in Blender."
+  ]
 }

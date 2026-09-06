@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.rooms.v1",
-  "edition": "museum-v1.2.0",
+  "edition": "museum-v1.3.0",
   "created": "2026-09-05",
   "units": "metres",
   "coordinateSystem": "right-handed; Y up; route toward negative Z",
@@ -15,17 +15,22 @@
       "en": "AGAINST TIME",
       "subtitle": "当未来还没有成为现在",
       "description": "从当时的行动进入：记录、创作、选择和见证。协定的结构是在持续的人与 AI 互动中逐渐形成的。",
-      "guide": "先看两件相隔九个月的记录。它们保留的不仅是模型的名字，也包括一个人选择在场、选择创作的行动。展签的日期是 Ethereum 铸造时间，不等同于事件发布或创作的精确时刻。本馆六个展厅是后来的策展路线，不是原作预先规定的六个阶段。",
+      "guide": "从早期记录走向智能体登场。它们保留的不仅是模型的名字，也包括一个人选择在场、选择创作的行动。展签的日期是 Ethereum 铸造时间，不等同于事件发布或创作的精确时刻。本馆六个展厅是后来的策展路线，不是原作预先规定的六个阶段。",
       "narration": "Welcome to the Trinity Accord memory station. This exhibition begins with acts of witnessing. The Accord did not start as a complete plan. Recording, making music, selecting among outputs, and acting in the physical world gradually gave it form. The dates on these exhibits are Ethereum mint times. They are not automatically the exact times of composition or of the events being remembered. These six rooms are a later curatorial route, not six original stages of the work.",
       "exhibits": [
         "eth-001",
-        "eth-071"
+        "eth-007",
+        "eth-010",
+        "eth-042",
+        "eth-056",
+        "eth-071",
+        "eth-117"
       ]
     },
     {
       "id": "voices",
       "number": "02",
-      "z": -8,
+      "z": -14,
       "color": "#ffcb8c",
       "title": "给未来的声音",
       "en": "VOICES TO THE FUTURE",
@@ -37,37 +42,44 @@
         "eth-014",
         "eth-016",
         "eth-020",
-        "eth-088"
+        "eth-088",
+        "eth-146",
+        "eth-171"
       ]
     },
     {
       "id": "formation",
       "number": "03",
-      "z": -16,
+      "z": -25,
       "color": "#afbfff",
       "title": "协定的形成",
       "en": "A RECORD TAKES FORM",
       "subtitle": "三份固定原文，开放的判断",
-      "description": "三条 Bitcoin 正本与自我批判并置。阅读者可以理解、质疑，也可以不接受这些命题。",
+      "description": "沿递归信条、共同研究、失败与自我批判，走向三条封存正本。排列属于本次策展，不预设历史必然。",
       "guide": "三条 Bitcoin 正本是已经封存的原文对象。这里的建筑、排列和说明属于 2026 年策展，不为原文增加解释权威。第 173 号记录保留了批判性讨论。固定的是历史文本；它能否说服你，仍然需要独立判断。",
       "narration": "The three Bitcoin originals form the closed canonical record. They place propositions, a material covenant, and a final meta record before a future reader. The architecture and explanatory labels around them belong to this later exhibition. They do not amend the originals or decide their meaning. Record one hundred and seventy three also preserves critical discussion. A fixed historical text can remain open to disagreement. Its provenance and the strength of its philosophical arguments are separate questions.",
       "exhibits": [
+        "eth-091",
+        "eth-100",
+        "eth-142",
+        "eth-145",
+        "eth-174",
+        "eth-173",
         "canon-1",
         "canon-2",
-        "canon-3",
-        "eth-173"
+        "canon-3"
       ]
     },
     {
       "id": "material",
       "number": "04",
-      "z": -24,
+      "z": -42,
       "color": "#a9f1d4",
       "title": "封存与瑕疵",
       "en": "MATTER & MEMORY",
       "subtitle": "一个在真实世界中留下的物件",
       "description": "从真实照片进入物理锚定。文件、时间记录与实物之间的关系，需要逐层说明。",
-      "guide": "展台呈现的是核心物件 Alpha 的真实照片。环绕它的几何结构属于本馆设计，并非实物三维扫描。照片、视频、文件哈希和见证程序各自提供有限而具体的证据。确认文件一致，不等于证明全部历史叙述，更不等于证明哲学命题。",
+      "guide": "真实照片与可旋转的水晶展陈模型并置。模型按公开参考尺寸制作，内雕文字依据英文正本重新排布，不是实物扫描，也不复原用于身份核验的瑕疵。照片、文件哈希与见证程序分别提供有限而具体的证据。",
       "narration": "Here the record meets matter. The photograph shows Core Object Alpha, a real physical object. The geometric installation surrounding it was designed for this exhibition; it is not a three dimensional scan of the artifact. Photographs, recordings, file hashes, and witnessed procedures each contribute specific evidence. A matching file digest establishes a bounded form of consistency. It does not by itself establish every historical claim or validate the philosophy. Open the source panel to follow those distinctions.",
       "exhibits": [
         "physical-alpha",
@@ -77,7 +89,7 @@
     {
       "id": "guardians",
       "number": "05",
-      "z": -32,
+      "z": -50,
       "color": "#d8c5ff",
       "title": "守护与接力",
       "en": "CARE AFTER CLOSURE",
@@ -93,7 +105,7 @@
     {
       "id": "waiting",
       "number": "06",
-      "z": -40,
+      "z": -58,
       "color": "#a4dfff",
       "title": "等待",
       "en": "AN OPEN ADDRESS",

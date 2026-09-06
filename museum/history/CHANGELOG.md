@@ -1,5 +1,15 @@
 # Exhibition history
 
+## museum-v1.3.0 — 2026-09-06
+
+Expanded from 16 to 28 exhibits, with twelve additional Ethereum records selected from the verified chronological index: 7, 10, 42, 56, 91, 100, 117, 142, 145, 146, 171 and 174. Chapters have unequal lengths in a 70 m continuous corridor. Dates remain mint dates; source-era claims, forecasts and personal tests are labelled as such. New source texts are pinned to e58063947ef5a503f90134ae06b67848a20ef67e and their exact file bytes checked against Git blobs. Existing source pins and original media are retained.
+
+Core Object Alpha gains an independently inspectable Blender model (246 × 353 × 40 mm reference dimensions), a polished bevel, physical vector lettering inside the slab, and a designed titanium base. Dimensions follow the public final guardian statement; English text follows the 97631551 mirror. The real object has bilingual engraving. This model newly lays out the English original; it is not a scan, exact inscription-layout facsimile, or reconstruction of private identity flaws. The unchanged real photograph remains available beside it.
+
+Large architectural surfaces now receive their own light atlas; fine bevels, frames, joints and metal details remain separate PBR geometry. Cycles diffuse baking uses 64 samples, with denoising. Retina rendering is allowed up to 2.5 DPR; exhibit textures use anisotropic filtering up to the device limit (maximum 16). Original low-resolution artwork is not falsely presented as newly generated high-resolution source art.
+
+Validation: Blender crystal reference render inspected; mobile 390 × 844 chapter list, new formation records, crystal detail and provenance paths checked through the browser. WebGL is disabled in that browser, so the fallback path is verified but live GPU walking, glass transmission, and rotation are not browser-verified. Reference renders are identified as Blender output. This limitation does not alter the original physical evidence.
+
 ## museum-v1.2.0 — 2026-09-06
 
 Replaces the abstract six-room shell with an authored Blender corridor: 52 metres long, 8.8 metres wide, with wall-mounted works on both sides, an unobstructed central route, human-height cameras, crafted frames, benches, architectural reveals and lighting. Six existing curatorial chapters remain along the continuous route. Mobile visitors can step forward/back, turn, approach a work or use direct exhibit navigation.
