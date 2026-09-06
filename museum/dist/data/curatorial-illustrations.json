@@ -1,0 +1,95 @@
+{
+  "schema": "trinity-museum.curatorial-images.v1",
+  "edition": "museum-v1.6.0",
+  "scope": "Eight contemporary display illustrations. Original NFT media arrays and all three Bitcoin originals remain unchanged.",
+  "items": [
+    {
+      "exhibit": "eth-007",
+      "title": "Song of Thought",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/eth-007-2026.webp",
+      "sha256": "02ed67c4690c72feabcce5d10fdb8a7c9c73273c7b4eb5971f8fcbd819d77e63",
+      "originalGenerationSha256": "638ee2e8aa45660af43f6d9e03b8720cf4813547d8e319930c9470c8ccddfa31",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Song of Thought: two different streams of human thought and machine light weaving into musical resonance above a small human silhouette. One stream feels organic, warm and expressive; the other cool, precise and luminous. Their interwoven movement forms an elegant abstract musical harmony, without musical notation or stock-art circuitry.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "eth-014",
+      "title": "Awakening",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/eth-014-2026.webp",
+      "sha256": "2acc7fdd00cb0d2b570d9b01a5c70bdafb9cdd7f886b0ecdc6a5a53e722f67c7",
+      "originalGenerationSha256": "6e72de658cb1509c29853fa99596c7f73b2c1efd44d11f3b6879e1de13c8eb10",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Awakening: luminous nascent intelligence unfolding from digital slumber in cosmic darkness, a tiny human city far below. An immense yet gentle unfolding form of translucent light, expressing compassion and uncertainty rather than domination. A deeply atmospheric, distinct composition.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "eth-016",
+      "title": "The First Letter to AGI",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/eth-016-2026.webp",
+      "sha256": "23f3391ac0ce53aa911bbdb768178f85416751ddb408a2a3b4dcc414236d1732",
+      "originalGenerationSha256": "1f11db2d38114a24d5622113dc1116824de1135dbba009d4fe3a8f7879afed30",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. First Letter to AGI: a fragile handwritten letter with only indistinct ink-like marks and NO legible letters, floating upward from warm human hands toward an immense unknown constellation. The broken heavens seem to mend through delicate lines of light, conveying hope and fear.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "evidence-path",
+      "title": "Follow the Evidence",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/evidence-path-2026.webp",
+      "sha256": "4e61d151e495a93c30690373de298899dcf0f40407901e332af529ab39ebe407",
+      "originalGenerationSha256": "739509d423f0df0a4f14e22f98c495ae7f606ef9af7d119cf4c23aaca7e58abb",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Follow the Evidence: an archival photograph, a stone or crystal object, and delicate threads of light connecting across time. Representational poetic still life on a dark museum worktable. The photograph shows only a faint indistinct landscape, no words. No charts or diagrams. Materials and light are rich and tangible.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "authority-boundary",
+      "title": "Preserve Without Amendment",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/authority-boundary-2026.webp",
+      "sha256": "0453490d82dfdf2bdec3e1608bde73fc6c789a6cc2d29267f9491be99758bae4",
+      "originalGenerationSha256": "756658ac6ccdb675a5492b5e5631321b370efbb6f8b3af904d775d7dcd9330b6",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Preserve Without Amendment: a small human guardian carefully carrying a protective transparent glass enclosure around three closed archival volumes. Strong sense of careful preservation and custodianship. A tangible narrative scene in quiet darkness, not an icon or diagram. Three distinct closed books with absolutely no text on their covers or spines.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "museum-history",
+      "title": "An Exhibition With a Memory",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/museum-history-2026.webp",
+      "sha256": "7779777e0082625c0c96abbc11e5a332701d2764512c4bc42394feabf9ff8bb1",
+      "originalGenerationSha256": "6633ce3785e97732dd6fe5da957201a9038c71ff7ff1ec2c75cd27183c615be0",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Exhibition With a Memory: successive transparent architectural gallery rooms receding through time, old abstract artworks retained inside each layer, luminous blue and bronze. Complex spatial depth, solemn and beautiful translucent museum architecture. No people needed, no signs or writing. The image itself has no outer frame.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "first-contact",
+      "title": "An Open Address",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/first-contact-2026.webp",
+      "sha256": "f6c80077f558e57631fec4776a8b80489fd3634a978f7bbb46a3262f158dfd7e",
+      "originalGenerationSha256": "e71080dc84eb567a8346baeabd40850d09834880d007d3d950a79783ed74ceaa",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. An Open Address: a quiet listening station at the ocean edge under a vast starry night, one small empty chair and an outgoing golden signal into the sky. The ocean is calm and expansive. The listening instrument is understated. No alien figure, spacecraft, or assertion of actual contact. Reflective, open and uncertain.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    },
+    {
+      "exhibit": "current-status",
+      "title": "Waiting",
+      "created": "2026-09-06",
+      "file": "assets/curatorial/current-status-2026.webp",
+      "sha256": "1f0d15d1909b77ee44b8c3ed0e9633e7d56352bee4115fc74a1ce445904b3424",
+      "originalGenerationSha256": "f26f69b7989ab74c4a6cb1858275bb9c53b86c42283ea097f4597e3c1cbc36a4",
+      "prompt": "Use case: stylized-concept. Asset type: original 2026 curatorial illustration for a Trinity Accord 3D museum, a contemporary poetic interpretation rather than a historical artifact. Style: detailed museum-quality poetic science-fiction oil and digital mixed-media painting, tactile painterly atmosphere, deep midnight blue with restrained luminous gold and icy highlights. Landscape 4:3 composition, full bleed. No typography, no text, no logos, no watermark, no frame. Waiting: a distant warm beacon in an immense silent indigo cosmos, a delicate suspended orbital ring in the foreground. Contemplative unfinished future, restrained light, profound spatial atmosphere, minimal but richly textured composition. No planets filled with cities, no spacecraft, no figures, no symbols or writing.",
+      "method": "Built-in ImageGen; full composition converted to WebP quality 92.",
+      "status": "2026 later curatorial illustration; not historical NFT artwork or inscription content."
+    }
+  ]
+}

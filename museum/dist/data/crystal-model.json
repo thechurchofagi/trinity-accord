@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.crystal-reconstruction.v1",
-  "edition": "museum-v1.5.0",
+  "edition": "museum-v1.6.0",
   "dimensionsMetres": {
     "width": 0.246,
     "height": 0.353,
@@ -49,5 +49,12 @@
     }
   ],
   "referenceNotes": "data/crystal-video-reference.json",
-  "fontLicense": "scene/crystal-font-LICENSE.txt"
+  "fontLicense": "scene/crystal-font-LICENSE.txt",
+  "runtimeOptics": {
+    "revision": "2026-09-06",
+    "transmission": 0.72,
+    "roughness": 0.075,
+    "environmentIntensity": 1.7,
+    "displayPurpose": "Reduced transmission, broad studio reflections and dedicated rim lighting improve screen visibility. This display adaptation is not a new measured optical property of the physical artifact."
+  }
 }

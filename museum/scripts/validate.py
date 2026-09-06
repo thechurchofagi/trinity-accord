@@ -65,6 +65,16 @@ if (D/'data/star-ark-illustration.json').exists():
  art=read('star-ark-illustration.json')
  check(hashlib.sha256((D/art['image']).read_bytes()).hexdigest()==art['sha256'],'Curatorial image digest mismatch')
  check(hashlib.sha256((D/art['localRecord']).read_bytes()).hexdigest()==art['sourceSha256'],'Star Ark source text drift')
+if (D/'data/curatorial-illustrations.json').exists():
+ art=read('curatorial-illustrations.json')['items'];artids={a['exhibit'] for a in art}
+ check(not any(id.startswith('canon-') for id in artids),'Canonical text received an illustration')
+ for a in art:check(hashlib.sha256((D/a['file']).read_bytes()).hexdigest()==a['sha256'],'Curatorial illustration digest drift '+a['exhibit'])
+ imageids={e['id'] for e in sources['items'] if any(m['kind']=='image' for m in e['media'])}|artids|{'physical-alpha','star-ark'}
+ displayed={id for r in rooms['rooms'] for id in r['exhibits']}
+ check(displayed-imageids=={'canon-1','canon-2','canon-3'},'Displayed artwork coverage differs from the three-text-only requirement')
+ letters=read('agi-four-letters.json')['items'];check([a['exhibit'] for a in letters]==['eth-016','eth-044','eth-020','eth-032'],'Four-letter identity/order mismatch')
+ for a in letters:
+  e=next(e for e in sources['items'] if e['id']==a['exhibit']);check(any(m['kind']=='audio' and m['file']==a['audio'] and m['sha256']==a['audioSha256'] for m in e['media']),'Letter audio binding mismatch')
 if errors:
  print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')
