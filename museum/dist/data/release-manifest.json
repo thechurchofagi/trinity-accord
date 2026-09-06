@@ -142,8 +142,8 @@
     },
     {
       "path": "museum.js",
-      "bytes": 34963,
-      "sha256": "0ffd42dee01d5fdb0fe9d5e5387b0334ef8f7727b13564e176e8e2edbfaaec32"
+      "bytes": 35200,
+      "sha256": "89e28db630309ad93d2e1aab31e846f35aa0e81be7292c56b72826f0c20e4940"
     },
     {
       "path": "vendor/BufferGeometryUtils.js",
