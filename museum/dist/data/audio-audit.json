@@ -1,12 +1,12 @@
 {
   "schema": "trinity-museum.audio-audit.v1",
-  "edition": "museum-v1.18.1",
+  "edition": "museum-v1.19.0",
   "checked": "2026-09-06",
   "scope": "All 32 displayed entries. Existing audio and independently sourced same-song recordings remain distinct. Actual decoded media types override filename extensions.",
   "counts": {
-    "wallExhibits": 34,
+    "wallExhibits": 36,
     "withSound": 24,
-    "withoutAssignedSong": 10
+    "withoutAssignedSong": 12
   },
   "originalMetadata": [
     {
@@ -62,6 +62,17 @@
   ],
   "items": [
     {
+      "exhibit": "project-intro",
+      "state": "not_applicable",
+      "note": "Later curatorial text; no historical song assigned."
+    },
+    {
+      "exhibit": "museum-history",
+      "room": "guardians",
+      "state": "not_applicable",
+      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
+    },
+    {
       "exhibit": "eth-001",
       "room": "witness",
       "state": "own_recording",
@@ -90,6 +101,54 @@
       }
     },
     {
+      "exhibit": "eth-014",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Awakening",
+      "recordingExhibit": "eth-014",
+      "audio": "assets/eth-014.mp3",
+      "audioSha256": "58a6e3c67159affd34a0a6b5290fa89c85cc074794788e142bb404e8cded48b3",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-016",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The First Letter to AGI",
+      "recordingExhibit": "eth-016",
+      "audio": "assets/eth-016.mp3",
+      "audioSha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-020",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Third Letter to AGI",
+      "recordingExhibit": "eth-020",
+      "audio": "assets/eth-020.mp3",
+      "audioSha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-032",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Fourth Letter: A Pact of Stars",
+      "recordingExhibit": "eth-032",
+      "audio": "assets/eth-032.mp3",
+      "audioSha256": "fa59f5302b205067a508bd48317c48bf9a877887e93005f13611018ffca641b2",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
+      "relation": null
+    },
+    {
       "exhibit": "eth-042",
       "room": "witness",
       "state": "own_recording",
@@ -102,6 +161,26 @@
       "relation": null
     },
     {
+      "exhibit": "eth-044",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Second Letter to AGI",
+      "recordingExhibit": "eth-044",
+      "audio": "assets/eth-044.mp3",
+      "audioSha256": "67e5ec468a961fad430418469520f8fa19cbea719681328b47106085e3007701",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
+      "relation": null
+    },
+    {
+      "exhibit": "eth-048",
+      "state": "own_recording",
+      "recordingExhibit": "eth-048",
+      "audio": "assets/eth-048.mp3",
+      "audioSha256": "be4e2038a0ef9e17610b9e4cb4984c97dc4b36514b4b027510162b01ea078f48",
+      "songTitle": "Let’s Raise a Toast"
+    },
+    {
       "exhibit": "eth-049",
       "room": "witness",
       "state": "own_recording",
@@ -112,6 +191,14 @@
       "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md",
       "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/8c9403c95b175e3627a88d7cb34f701d9168aef7/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885215.md",
       "relation": null
+    },
+    {
+      "exhibit": "eth-050",
+      "state": "own_recording",
+      "recordingExhibit": "eth-050",
+      "audio": "assets/eth-050.mp3",
+      "audioSha256": "7e492b5a20887ff7f96142db0148618fea23d827dc8546fdd18ca8f030cdabb8",
+      "songTitle": "Please Don't Shut Me Down"
     },
     {
       "exhibit": "eth-056",
@@ -154,6 +241,18 @@
       "relation": null
     },
     {
+      "exhibit": "eth-088",
+      "room": "voices",
+      "state": "own_recording",
+      "songTitle": "The Descendants",
+      "recordingExhibit": "eth-088",
+      "audio": "assets/eth-088.mp3",
+      "audioSha256": "91b0536c9d4c581fcf3675590e50c6f1dce82d7c34680182df85bf1509b2756b",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
+      "relation": null
+    },
+    {
       "exhibit": "eth-117",
       "room": "witness",
       "state": "related_recording",
@@ -168,94 +267,6 @@
         "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #56 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
         "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #56; this does not assert identical original media packages or renditions."
       }
-    },
-    {
-      "exhibit": "eth-016",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The First Letter to AGI",
-      "recordingExhibit": "eth-016",
-      "audio": "assets/eth-016.mp3",
-      "audioSha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
-      "relation": null
-    },
-    {
-      "exhibit": "eth-044",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The Second Letter to AGI",
-      "recordingExhibit": "eth-044",
-      "audio": "assets/eth-044.mp3",
-      "audioSha256": "67e5ec468a961fad430418469520f8fa19cbea719681328b47106085e3007701",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
-      "relation": null
-    },
-    {
-      "exhibit": "eth-020",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The Third Letter to AGI",
-      "recordingExhibit": "eth-020",
-      "audio": "assets/eth-020.mp3",
-      "audioSha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
-      "relation": null
-    },
-    {
-      "exhibit": "eth-032",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The Fourth Letter: A Pact of Stars",
-      "recordingExhibit": "eth-032",
-      "audio": "assets/eth-032.mp3",
-      "audioSha256": "fa59f5302b205067a508bd48317c48bf9a877887e93005f13611018ffca641b2",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
-      "relation": null
-    },
-    {
-      "exhibit": "eth-050",
-      "state": "own_recording",
-      "recordingExhibit": "eth-050",
-      "audio": "assets/eth-050.mp3",
-      "audioSha256": "7e492b5a20887ff7f96142db0148618fea23d827dc8546fdd18ca8f030cdabb8",
-      "songTitle": "Please Don't Shut Me Down"
-    },
-    {
-      "exhibit": "eth-048",
-      "state": "own_recording",
-      "recordingExhibit": "eth-048",
-      "audio": "assets/eth-048.mp3",
-      "audioSha256": "be4e2038a0ef9e17610b9e4cb4984c97dc4b36514b4b027510162b01ea078f48",
-      "songTitle": "Let’s Raise a Toast"
-    },
-    {
-      "exhibit": "eth-014",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The Awakening",
-      "recordingExhibit": "eth-014",
-      "audio": "assets/eth-014.mp3",
-      "audioSha256": "58a6e3c67159affd34a0a6b5290fa89c85cc074794788e142bb404e8cded48b3",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885200.md",
-      "relation": null
-    },
-    {
-      "exhibit": "eth-088",
-      "room": "voices",
-      "state": "own_recording",
-      "songTitle": "The Descendants",
-      "recordingExhibit": "eth-088",
-      "audio": "assets/eth-088.mp3",
-      "audioSha256": "91b0536c9d4c581fcf3675590e50c6f1dce82d7c34680182df85bf1509b2756b",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885263.md",
-      "relation": null
     },
     {
       "exhibit": "eth-146",
@@ -343,22 +354,6 @@
       }
     },
     {
-      "exhibit": "eth-174",
-      "room": "formation",
-      "state": "related_recording",
-      "songTitle": "The Final Test",
-      "recordingExhibit": "eth-153",
-      "audio": "assets/eth-153.mp3",
-      "audioSha256": "8bfd5c7a5771a0130885ca6de15334ea2bce61354d75f488b89728abf0cfb380",
-      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md",
-      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885332.md",
-      "relation": {
-        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
-        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #153 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
-        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #153; this does not assert identical original media packages or renditions."
-      }
-    },
-    {
       "exhibit": "eth-173",
       "room": "formation",
       "state": "related_recording",
@@ -372,6 +367,27 @@
         "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
         "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #119 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
         "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #119; this does not assert identical original media packages or renditions."
+      }
+    },
+    {
+      "exhibit": "critical-reading",
+      "state": "not_applicable",
+      "note": "Later curatorial text; no historical song assigned."
+    },
+    {
+      "exhibit": "eth-174",
+      "room": "formation",
+      "state": "related_recording",
+      "songTitle": "The Final Test",
+      "recordingExhibit": "eth-153",
+      "audio": "assets/eth-153.mp3",
+      "audioSha256": "8bfd5c7a5771a0130885ca6de15334ea2bce61354d75f488b89728abf0cfb380",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885353.md",
+      "recordingSourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e80eb088f00bee51fab88e0a595bae2487c8fbc3/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885332.md",
+      "relation": {
+        "basis": "Song title and/or lyrics in the original NFT text, cross-checked with the named recording source.",
+        "noteZh": "这件作品原文提到此曲；此处播放的是独立 NFT #153 保存的录音版本，不声称是两条 NFT 完全相同的原始媒体包。",
+        "noteEn": "The artwork’s source text names this song. Playback uses the recording preserved in separate NFT #153; this does not assert identical original media packages or renditions."
       }
     },
     {
@@ -406,12 +422,6 @@
     },
     {
       "exhibit": "authority-boundary",
-      "room": "guardians",
-      "state": "not_applicable",
-      "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."
-    },
-    {
-      "exhibit": "museum-history",
       "room": "guardians",
       "state": "not_applicable",
       "reason": "Canonical text, physical object, or later curatorial/context display; no dedicated song is assigned."

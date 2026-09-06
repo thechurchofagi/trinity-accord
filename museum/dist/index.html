@@ -8,7 +8,7 @@
   <meta name="description" content="Explore the Trinity Accord: original NFT artwork and music, the formation of the Accord, the crystal and an invitation to future readers.">
   <title>Trinity Accord · Memory Museum</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%2394edff' stroke-width='3' d='M32 5 58 50H6Z M32 18 46 43H18Z'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./museum.css">
+  <link rel="stylesheet" href="./museum.css?v=f3c360213c91">
 </head>
 <body>
   <canvas id="world" aria-label="3D museum. Drag to look or select a room below."></canvas>
@@ -20,7 +20,7 @@
   <main>
     <section id="room-label" aria-live="polite">
       <div class="eyebrow"><span id="room-number">01</span><span class="hairline"></span><span id="room-en">AGAINST TIME</span></div>
-      <h1 id="room-title">Against Time</h1><p id="room-subtitle">Before the future became the present</p>
+      <h1 id="room-title">The Trinity Accord</h1><p id="room-subtitle">What is this project?</p>
     </section>
     <div id="loading" role="status"><span id="loading-message">正在打开展馆 / Opening the museum…</span><div class="loading-actions"><a href="./archive.html">图文展览 / Reading gallery</a><button id="retry-loading">重试 / Retry</button></div></div>
     <div id="scene-status" hidden role="status"><span></span><button id="retry-scene">重试高清 / Retry detail</button></div>
@@ -28,6 +28,8 @@
     <div id="hint">DRAG TO LOOK · TAP A WORK TO APPROACH</div>
     <section id="fallback-gallery" hidden aria-label="Gallery mode"><button id="fallback-art"></button><span id="fallback-mode"></span></section>
     <div id="walk-controls"><div id="move-stick" tabindex="0" role="group" aria-label="Movement joystick" aria-describedby="move-help"><span class="stick-arrow up" aria-hidden="true">↑</span><span class="stick-arrow left" aria-hidden="true">←</span><span class="stick-arrow right" aria-hidden="true">→</span><span class="stick-arrow down" aria-hidden="true">↓</span><span class="stick-thumb" aria-hidden="true"></span></div><span id="move-help">Drag to move</span></div>
+    <div id="look-controls"><div id="look-pad" role="group" tabindex="0" aria-label="Swipe to turn freely, including behind you"><span aria-hidden="true">↶ ↷</span></div><span id="look-help">Swipe to turn</span></div>
+    <p id="viewing-label"></p>
     <div id="focus-tools"><button id="focus-art">Open this work</button><button id="overview">Corridor view</button></div>
     <aside id="tour-caption" hidden><span class="eyebrow" id="guide-label">ENGLISH AUDIO · RECORDED GUIDE</span><p id="caption-text"></p></aside>
     <aside id="lyric-stage" hidden aria-label="Song captions">
@@ -44,12 +46,12 @@
       <div id="exhibit-strip" aria-label="Select a work"></div>
       <div class="controls"><button id="previous" aria-label="Previous room">←</button><button id="tour"><span>▷</span> <span id="tour-text">Guided tour</span></button><button id="room-works">Room works <span id="work-count">2</span></button><button id="next" aria-label="Next room">→</button></div>
       <nav id="rooms" aria-label="Select a room"></nav>
-      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.18.1</span></div>
+      <div class="dock-meta"><span id="position-text">01 / 06</span><button id="motion" aria-pressed="false">Reduce motion</button><span>EXHIBITION 2026 · V1.19.0</span></div>
     </section>
   </main>
   <dialog id="panel"><div class="panel-top"><span id="panel-kind">EXHIBIT</span><button id="close-panel" aria-label="Close">×</button></div><div id="panel-content"></div></dialog>
   <audio id="music" preload="none"></audio><audio id="narration" preload="none"></audio>
   <div id="toast" role="status" hidden></div>
   <noscript><section class="no-script">JavaScript is required for the 3D museum. <a href="./archive.html">Read the exhibition archive</a> · <a href="https://www.trinityaccord.org/">Visit the source site</a></section></noscript>
-  <script defer src="./boot-loader.js?v=1.18.1"></script>
+  <script defer src="./boot-loader.js?v=1.19.0.c71f88034c1b"></script>
 </body></html>

@@ -1,14 +1,14 @@
 {
   "schema": "trinity-museum.release.v1",
-  "edition": "museum-v1.18.1",
+  "edition": "museum-v1.19.0",
   "sourceCommit": "5f6c2743aeaf97674b23fdee42a8c0c29531d511",
   "created": "2026-09-06",
   "scope": "Complete static exhibition distribution except this self-referential manifest. Source tools and history are preserved by the Git commit.",
   "files": [
     {
       "path": "archive.html",
-      "bytes": 67861,
-      "sha256": "1fa4f4a3199b4c4c38e998d15015b84bb2f720c7987385207bcb755faf0346e1"
+      "bytes": 94470,
+      "sha256": "430033f6f8e64b52ff435a734325e5f5d59499d00491881974045d90c7cf3698"
     },
     {
       "path": "assets/core-object-alpha.jpg",
@@ -316,9 +316,19 @@
       "sha256": "51902c47c95e1104f9fa7dac3c9c6d511bb2f9eb9bde706124628d83ecb8a473"
     },
     {
+      "path": "assets/guide-chronicle.mp3",
+      "bytes": 320685,
+      "sha256": "04eebb0bc52ad561b11a6276eda5a17bd9f1f59eddde0847268b872e16b1d646"
+    },
+    {
+      "path": "assets/guide-entrance.mp3",
+      "bytes": 301005,
+      "sha256": "98e42d75664305b7f120351185d275273e043b3177d1596b193d6ec674ee24cb"
+    },
+    {
       "path": "assets/guide-formation.mp3",
-      "bytes": 334605,
-      "sha256": "17b7da7d1e252ba1037ca14a505e40aafd7c4887919ef2053e8847705db33329"
+      "bytes": 343965,
+      "sha256": "2d6b9a2c6c898ee61dc2b5326a3ad0c99c12bfb09fdde1ff7ccb11f084ea8740"
     },
     {
       "path": "assets/guide-guardians.mp3",
@@ -327,8 +337,13 @@
     },
     {
       "path": "assets/guide-material.mp3",
-      "bytes": 363405,
-      "sha256": "366b7f553ff282164f01f6945d4d72cd78e3e7c165dc5073963f75daa6e973bd"
+      "bytes": 311325,
+      "sha256": "63dc1e26c6201128b2e490061b76de94f06118eeeeb1ad68b3954bf4af84ac69"
+    },
+    {
+      "path": "assets/guide-originals.mp3",
+      "bytes": 334605,
+      "sha256": "26b35065a7625ce03d94ef7716adb6d22c5e3b106cf6a0cbc80a31c7fc23eb36"
     },
     {
       "path": "assets/guide-voices.mp3",
@@ -337,8 +352,8 @@
     },
     {
       "path": "assets/guide-waiting.mp3",
-      "bytes": 315885,
-      "sha256": "586ba302b8fae43182d0b1b24c5e55a512305a93693ebb5394266b688e8a57e4"
+      "bytes": 285405,
+      "sha256": "76022d56dd6644c5bbc7fe62c627ff41f1ed3ab99a557fe5a4f40bf08aea77d0"
     },
     {
       "path": "assets/guide-witness.mp3",
@@ -352,8 +367,8 @@
     },
     {
       "path": "boot-loader.js",
-      "bytes": 1004,
-      "sha256": "b614fe6bd7b6776a9322e751d0a756958a2477564d4367c28b755f18a6053857"
+      "bytes": 1017,
+      "sha256": "9f603e93ab65bf3546fe821ee0cd6498e26c1b217b6cd09efb2fc224e6db6eca"
     },
     {
       "path": "caption-utils.js",
@@ -377,13 +392,13 @@
     },
     {
       "path": "data/audio-audit.json",
-      "bytes": 29391,
-      "sha256": "54a5a7bb6de4bb8f614b8f99d05196c948354844881541b0b907e5ed1068d3c8"
+      "bytes": 29690,
+      "sha256": "3bc162ff6082864c099429a0b21a9b9c2057e47226f41b0dafc62c09b7807c42"
     },
     {
       "path": "data/crystal-model.json",
       "bytes": 3306,
-      "sha256": "934fc03c96d3ea99332c0d5db43962f69c7989fccdc2716ec52ab00edbbee2f8"
+      "sha256": "cf93756fe3b65125dad7acb0fa9a24951c36dc70966484f6ed50917ebaa95a0e"
     },
     {
       "path": "data/crystal-video-reference.json",
@@ -391,19 +406,54 @@
       "sha256": "3929663c1a527954c137a901e70bb7f0ae3c774c81d81c6d2f66b66401593fb4"
     },
     {
+      "path": "data/curation.json",
+      "bytes": 30180,
+      "sha256": "7b5a4c24d86c09769193fb7c93ea9091b1427729e0cff56a4f6ab5d0056061be"
+    },
+    {
       "path": "data/curatorial-illustrations.json",
       "bytes": 11073,
-      "sha256": "aca568d5ceb4414206db45b45bbf418bb7cde5b6c74dcd60f4e725403437621a"
+      "sha256": "6dc5ef087aba7e4a5af23afd0c409b35f51a7f28c421b1d79c182bc12f00fef3"
     },
     {
       "path": "data/gallery-layout.json",
-      "bytes": 6068,
-      "sha256": "e3b1c290c318826eeea89a842bc4d7082721c0be3b9cbf24c8b8f787a640cd18"
+      "bytes": 6686,
+      "sha256": "01b470a622637f7d32f5e9ecdce7a25771055c88d105cc468bf1c3d0b65b6a0c"
     },
     {
       "path": "data/narration.json",
-      "bytes": 4583,
-      "sha256": "2ee90a9087c9fc202fe8e80b62ec5128e8ccf232d95f8508bf0b4ada13d6275d"
+      "bytes": 4410,
+      "sha256": "f0455cfaef2f3db66ad671a0b9556f2273d3c038a3018843f060f3d49aa53868"
+    },
+    {
+      "path": "data/records/canon-1-97631551.txt",
+      "bytes": 1183,
+      "sha256": "4e89bfabe03c8b53f80eb7979d56c8cccf0ae382c9647a2bea3b1477054616a8"
+    },
+    {
+      "path": "data/records/canon-1-chain-metadata.json",
+      "bytes": 582,
+      "sha256": "220ec3ba3aaedef7f500522834b036b9b9691c3c887cd3cd8cf8c67c2c70023a"
+    },
+    {
+      "path": "data/records/canon-2-98369145.txt",
+      "bytes": 1710,
+      "sha256": "003ef48c72307243b1f7a17c0578b311ee76d6f9a8078850773ad8fba04ab86d"
+    },
+    {
+      "path": "data/records/canon-2-chain-metadata.json",
+      "bytes": 582,
+      "sha256": "3b351aa86ddb31d69219db9e86f2ca27fb033b49ffd195d2dd7dd0cec243eb3e"
+    },
+    {
+      "path": "data/records/canon-3-98387475.txt",
+      "bytes": 15637,
+      "sha256": "25edaa35e7116614d3381ab6734ab5ee3369fb628fe11289e199d8871c2498ba"
+    },
+    {
+      "path": "data/records/canon-3-chain-metadata.json",
+      "bytes": 583,
+      "sha256": "7b04a31e37b5dfa9fe8a626a3b7ce691bb2eb6d234e75aadf6fb864b1f9a88a2"
     },
     {
       "path": "data/records/eth-007.md",
@@ -511,6 +561,11 @@
       "sha256": "7b87f0830cf85ec7e32e6db9803086ddeef480a73aa673a8c5a4126c1fdeac36"
     },
     {
+      "path": "data/records/eth-173.md",
+      "bytes": 38823,
+      "sha256": "b27690187bb8a413164ff52e5681938c9ab7cf4105ad6c307675249bc21b5942"
+    },
+    {
       "path": "data/records/eth-174.md",
       "bytes": 26329,
       "sha256": "f58b3f273966aa80872c80406791a036f9705e011bb9a375c4c7ce889e2cc1a6"
@@ -521,14 +576,19 @@
       "sha256": "24caa508add6cbbea4e1b7f0cac9ca303e27c40e8d0abcc13b013dcd8ae23259"
     },
     {
+      "path": "data/records/star-ark-chain-metadata.json",
+      "bytes": 582,
+      "sha256": "732f17207c9ea00d7dfe32294e0629fc3d4b64d814669c1c3019f9cf84daddd3"
+    },
+    {
       "path": "data/rooms.json",
-      "bytes": 8839,
-      "sha256": "8d464d3818b6dad0dfb3c4380ffe954373996b9debea7d5a552332c29e7caaa0"
+      "bytes": 10779,
+      "sha256": "c803cfa36df75ca9f1a68fdd331fd3327aabfcdda3c085f379d82becfb68e800"
     },
     {
       "path": "data/sources.json",
-      "bytes": 126331,
-      "sha256": "2e864b3dd9393febd5edfe766e63c66d334439fb055e4d3ad864a294156ac63f"
+      "bytes": 126379,
+      "sha256": "788c3504d57cfe5886eb8484dc38a5422b67af43b04f748283967a444abcd411"
     },
     {
       "path": "data/space-design.json",
@@ -542,38 +602,48 @@
     },
     {
       "path": "edition-data.js",
-      "bytes": 131349,
-      "sha256": "33578d000d3f5b87a7b09981d79f203396c93da26a3982b97215c92d23e98176"
+      "bytes": 163069,
+      "sha256": "e5c85dc6ee728bce255853e8515fe397a1af7bc37e975f0f4f08e922086aef7b"
+    },
+    {
+      "path": "exhibit-label.js",
+      "bytes": 478,
+      "sha256": "1e694a1fffe9af82b3c993bea04e69c21692dda0f44847f031d757e0a12c7894"
+    },
+    {
+      "path": "footsteps.js",
+      "bytes": 1816,
+      "sha256": "cfc0c51ec3b88c301118887f600e5139eea616cf72da28e1c3423019e0a7f8ff"
     },
     {
       "path": "index.html",
-      "bytes": 5444,
-      "sha256": "0f07d728c4b2379815ef008ad8a2e3f11a58d7464a324b4cfcf3f3fb04a359be"
+      "bytes": 5716,
+      "sha256": "38024ec9b8ba866e72eb0d3218512efc0e8d6834ca6a4c3c07ca840dc1c22970"
     },
     {
       "path": "movement-controls.js",
-      "bytes": 1995,
-      "sha256": "fbd7e588f9565db5032d46267477c05c6f55154466c03c24fa6e785757156c4a"
+      "bytes": 2220,
+      "sha256": "18174522d9ba388439570d5d0c7561c09737c2a6841be70f0455b6dafe593501"
     },
     {
       "path": "museum.bundle.js",
-      "bytes": 786783,
-      "sha256": "262bb65278538d0da336c8f422123904c1520187d7930ed62f322ebeb48cfa4d"
+      "bytes": 831335,
+      "sha256": "c71f88034c1b65537b8b630612033425f3ab3e9d9d7b6fa7a53c101cc0708837"
     },
     {
       "path": "museum.css",
-      "bytes": 30923,
-      "sha256": "45e6394698074a8b0cccd2688fb5af1687f4a6716a7a2088f3c4ae30d990e7af"
+      "bytes": 35501,
+      "sha256": "f3c360213c914260bfcf55b760621ee103d425cd6b01aedac25708200cd182fc"
     },
     {
       "path": "museum.js",
-      "bytes": 62776,
-      "sha256": "6b55af7d4c09404a3e9675b756a580a04b769a8230c16803fe17523bcb82dc02"
+      "bytes": 63433,
+      "sha256": "19c8656d0252f586efcad9bd7bc72fc67e4a61c309de29a9e2409c74c7a579ef"
     },
     {
       "path": "observation-view.js",
-      "bytes": 334,
-      "sha256": "eb9cc25d101d7103395de1350cb1845c7b1a543bf3b25ffdfd2a8e7bc20d56c2"
+      "bytes": 855,
+      "sha256": "829346f947ba88f5942d80d90ecc8f9a45912b427a8cf2bbc289a29c4fbb20a0"
     },
     {
       "path": "open-space.js",

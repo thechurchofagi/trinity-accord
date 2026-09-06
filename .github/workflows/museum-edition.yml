@@ -26,6 +26,8 @@ jobs:
         run: |
           python3 museum/scripts/validate.py
           node --check museum/dist/museum.js
+          node museum/scripts/check_navigation.mjs
+          node museum/scripts/check_wall_frames.mjs
   archive:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate

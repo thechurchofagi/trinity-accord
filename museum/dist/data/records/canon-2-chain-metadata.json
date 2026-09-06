@@ -1,0 +1,18 @@
+{
+  "address": "bc1ppmwvyxekh44m35x43k55z7r59nn33v8w2xmvu6s6ar4zyx57sxestxq0jf",
+  "charms": [
+    "vindicated"
+  ],
+  "content_length": 1710,
+  "content_type": "text/plain;charset=utf-8",
+  "delegate": null,
+  "fee": 1707,
+  "height": 903192,
+  "id": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258i0",
+  "number": 98369145,
+  "output": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258:0",
+  "sat": 199967561767063,
+  "satpoint": "90116f35de075074f5e5d1fbdda69a646a124e2287d7d58e2520317098cd4258:0:0",
+  "timestamp": 1751189509,
+  "value": 546
+}

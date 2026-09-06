@@ -9,7 +9,7 @@ def read(n):return json.loads((D/'data'/n).read_text())
 rooms=read('rooms.json');sources=read('sources.json');guides=read('narration.json');release=read('release-manifest.json')
 check(rooms['edition']==sources['edition']==release['edition'],'Edition mismatch')
 ids=[e['id'] for e in sources['items']];check(len(ids)==len(set(ids)),'Duplicate source ID')
-extra={'star-ark','canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
+extra={'project-intro','critical-reading','star-ark','canon-1','canon-2','canon-3','physical-alpha','evidence-path','authority-boundary','museum-history','first-contact','current-status'}
 for r in rooms['rooms']:
  for id in r['exhibits']:check(id in ids or id in extra,'Missing exhibit '+id)
  check(any(t['room']==r['id'] for t in guides['tracks']),'Missing narration '+r['id'])
@@ -72,7 +72,7 @@ if (D/'data/curatorial-illustrations.json').exists():
  for a in art:check(hashlib.sha256((D/a['file']).read_bytes()).hexdigest()==a['sha256'],'Curatorial illustration digest drift '+a['exhibit'])
  imageids={e['id'] for e in sources['items'] if any(m['kind']=='image' for m in e['media'])}|artids|{'physical-alpha','star-ark'}
  displayed={id for r in rooms['rooms'] for id in r['exhibits']}
- check(displayed-imageids=={'canon-1','canon-2','canon-3'},'Displayed artwork coverage differs from the three-text-only requirement')
+ check(displayed-imageids=={'canon-1','canon-2','canon-3','project-intro','critical-reading'},'Text-only originals and curatorial reading panels must retain their identities')
  letters=read('agi-four-letters.json')['items'];check([a['exhibit'] for a in letters]==['eth-016','eth-044','eth-020','eth-032'],'Four-letter identity/order mismatch')
  for a in letters:
   e=next(e for e in sources['items'] if e['id']==a['exhibit']);check(any(m['kind']=='audio' and m['file']==a['audio'] and m['sha256']==a['audioSha256'] for m in e['media']),'Letter audio binding mismatch')
@@ -96,8 +96,22 @@ for row in audit['items']:
  if e.get('relatedSoundExhibit'):
   check(all(e.get('audioRelation',{}).get(k) for k in ('basis','noteZh','noteEn')),'Missing independent-recording attribution '+id)
   check(e['songTitle']==sound.get('songTitle'),'Related recording song-title mismatch '+id)
-check(playable==24 and len(wall)==34,'Expected 24 musical NFTs among 34 exhibit entries')
-check(audit['counts']=={'wallExhibits':34,'withSound':24,'withoutAssignedSong':10},'Audio audit counts mismatch')
+check(playable==24 and len(wall)==36,'Expected 24 musical NFTs among 36 exhibit entries')
+check(audit['counts']=={'wallExhibits':36,'withSound':24,'withoutAssignedSong':12},'Audio audit counts mismatch')
+check([r['id'] for r in rooms['rooms']]==['entrance','chronicle','formation','originals','material','waiting'],'Six-zone narrative drift')
+check(rooms['rooms'][2]['featuredExhibit']=='eth-173','Critical NFT must be prominent')
+curation=read('curation.json')
+for e in curation['items']:
+ if e.get('originalText'):
+  raw=(D/e['localRecord']).read_bytes()
+  check(hashlib.sha256(raw).hexdigest()==e['originalSha256'],'Original text digest mismatch '+e['id'])
+  check(raw.decode()==e['originalText'],'Embedded original differs from preserved record '+e['id'])
+  check(bool(re.fullmatch(r'2025-\d\d-\d\dT[\d:.]+Z',e['date'])),'Missing historical inscription date '+e['id'])
+  from datetime import datetime,timezone
+  metadata=(D/e['dateRecord']).read_bytes();check(hashlib.sha256(metadata).hexdigest()==e['dateSourceSha256'],'Chain metadata digest drift '+e['id'])
+  m=json.loads(metadata);check(datetime.fromtimestamp(m['timestamp'],timezone.utc).isoformat().replace('+00:00','Z')==e['date'].replace('.000Z','Z'),'Inscription date differs from source '+e['id'])
+  check(str(m['number'])==e['number'] and m['id']==e['inscription'],'Inscription identity drift '+e['id'])
+for e in sources['items']:check(bool(re.match(r'\d{4}-\d\d-\d\dT',e['date'])),'Missing NFT mint date '+e['id'])
 check('Nexus: The Human-Superintelligence Odyssey' in (D/byid['eth-142']['localRecord']).read_text(),'Nexus correction lacks preserved textual evidence')
 if errors:
  print('\n'.join(errors));sys.exit(1)
@@ -108,5 +122,7 @@ for f in runtime['inputs']+[runtime['output']]:
  b=(P/f['path']).read_bytes();check(len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'],'Runtime build digest mismatch '+f['path'])
 check('addCanonicalPrism' not in (D/'museum.js').read_text(),'Canonical prism still active')
 check(not any(e.get('kind')=='prism' for r in layout['rooms'] for e in r['exhibits']),'Canonical prism placement still active')
+if errors:
+ print('\n'.join(errors));sys.exit(1)
 print('PASS: source identities, derivative digests, guide text/audio bindings, release inventory, HTML references and vendored imports.')
 print(len(rooms['rooms']),'rooms;',len(ids),'Ethereum exhibits;',len(release['files']),'distribution files.')

@@ -8,6 +8,10 @@ export function travelVector(side,forward,yaw){
  const length=Math.max(1,Math.hypot(side,forward));side/=length;forward/=length;
  return {x:-Math.sin(yaw)*forward+Math.cos(yaw)*side,z:-Math.cos(yaw)*forward-Math.sin(yaw)*side};
 }
+export function turnView(yaw,pitch,dx,dy,width){
+ // A half-screen sweep turns 180 degrees; yaw has no artificial stop.
+ return {yaw:yaw-dx*Math.PI*2/Math.max(width,240),pitch:Math.max(-1.15,Math.min(1.15,pitch-dy*.004))};
+}
 export function createJoystick(pad,onStart=()=>{}){
  const state={x:0,y:0,active:false};let pointer=null;
  const reset=()=>{state.x=state.y=0;state.active=false;const old=pointer;pointer=null;if(old!==null&&pad.hasPointerCapture(old))pad.releasePointerCapture(old);pad.classList.remove('active');pad.style.setProperty('--stick-x','0px');pad.style.setProperty('--stick-y','0px');};

@@ -1,143 +1,155 @@
 {
   "schema": "trinity-museum.gallery-layout.v1",
-  "edition": "museum-v1.18.1",
+  "edition": "museum-v1.19.0",
   "dimensions": {
     "width": 8.8,
     "length": 70,
-    "height": 4.8
+    "height": 6
   },
   "coordinates": "metres; Three.js Y up, forward -Z; Blender X=Three X, Y=-Three Z, Z=Three Y",
   "eyeHeight": 1.65,
-  "exhibitCentreHeight": 1.95,
+  "exhibitCentreHeight": 2.6,
   "artMaxWidth": 1.9,
   "artMaxHeight": 1.7,
   "rooms": [
     {
-      "id": "witness",
+      "id": "entrance",
       "number": "01",
-      "title": "与时间赛跑",
-      "en": "AGAINST TIME",
+      "title": "入口",
+      "en": "THE TRINITY ACCORD",
       "start": 0,
       "entryZ": 0.6,
-      "length": 14,
+      "length": 6,
       "exhibits": [
         {
-          "id": "eth-001",
+          "id": "project-intro",
           "x": -4.25,
           "z": -3,
           "angle": 1.5707963267948966
         },
         {
-          "id": "eth-007",
+          "id": "museum-history",
           "x": 4.25,
           "z": -3,
-          "angle": -1.5707963267948966
-        },
-        {
-          "id": "eth-042",
-          "x": -4.25,
-          "z": -6,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-049",
-          "x": 4.25,
-          "z": -6,
-          "angle": -1.5707963267948966
-        },
-        {
-          "id": "eth-056",
-          "x": -4.25,
-          "z": -9,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-070",
-          "x": 4.25,
-          "z": -9,
-          "angle": -1.5707963267948966
-        },
-        {
-          "id": "eth-071",
-          "x": -4.25,
-          "z": -12,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-117",
-          "x": 4.25,
-          "z": -12,
           "angle": -1.5707963267948966
         }
       ]
     },
     {
-      "id": "voices",
+      "id": "chronicle",
       "number": "02",
-      "title": "给未来的声音",
-      "en": "VOICES TO THE FUTURE",
-      "start": 14,
-      "entryZ": -13.4,
-      "length": 11,
+      "title": "编年史",
+      "en": "THE CHRONICLE",
+      "start": 6,
+      "entryZ": -5.4,
+      "length": 24,
       "exhibits": [
         {
-          "id": "eth-016",
+          "id": "eth-001",
           "x": -4.25,
-          "z": -15.5,
+          "z": -8.4,
           "angle": 1.5707963267948966
         },
         {
-          "id": "eth-044",
+          "id": "eth-007",
           "x": 4.25,
-          "z": -15.5,
-          "angle": -1.5707963267948966
-        },
-        {
-          "id": "eth-020",
-          "x": -4.25,
-          "z": -17.6,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-032",
-          "x": 4.25,
-          "z": -17.6,
-          "angle": -1.5707963267948966
-        },
-        {
-          "id": "eth-050",
-          "x": -4.25,
-          "z": -19.7,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-048",
-          "x": 4.25,
-          "z": -19.7,
+          "z": -8.4,
           "angle": -1.5707963267948966
         },
         {
           "id": "eth-014",
           "x": -4.25,
-          "z": -21.8,
+          "z": -10.8,
           "angle": 1.5707963267948966
         },
         {
-          "id": "eth-088",
+          "id": "eth-016",
           "x": 4.25,
-          "z": -21.8,
+          "z": -10.8,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-020",
+          "x": -4.25,
+          "z": -13.2,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-032",
+          "x": 4.25,
+          "z": -13.2,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-042",
+          "x": -4.25,
+          "z": -15.6,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-044",
+          "x": 4.25,
+          "z": -15.6,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-048",
+          "x": -4.25,
+          "z": -18,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-049",
+          "x": 4.25,
+          "z": -18,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-050",
+          "x": -4.25,
+          "z": -20.4,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-056",
+          "x": 4.25,
+          "z": -20.4,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-070",
+          "x": -4.25,
+          "z": -22.8,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-071",
+          "x": 4.25,
+          "z": -22.8,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-088",
+          "x": -4.25,
+          "z": -25.2,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "eth-117",
+          "x": 4.25,
+          "z": -25.2,
           "angle": -1.5707963267948966
         },
         {
           "id": "eth-146",
           "x": -4.25,
-          "z": -23.9,
+          "z": -27.6,
           "angle": 1.5707963267948966
         },
         {
           "id": "eth-171",
           "x": 4.25,
-          "z": -23.9,
+          "z": -27.6,
           "angle": -1.5707963267948966
         }
       ]
@@ -145,117 +157,105 @@
     {
       "id": "formation",
       "number": "03",
-      "title": "协定的形成",
-      "en": "A RECORD TAKES FORM",
-      "start": 25,
-      "entryZ": -24.4,
-      "length": 17,
+      "title": "形成与批判",
+      "en": "FORMATION & CRITICISM",
+      "start": 30,
+      "entryZ": -29.4,
+      "length": 12,
       "exhibits": [
         {
           "id": "eth-091",
           "x": -4.25,
-          "z": -28,
+          "z": -32.4,
           "angle": 1.5707963267948966
         },
         {
           "id": "eth-100",
           "x": 4.25,
-          "z": -28,
+          "z": -32.4,
           "angle": -1.5707963267948966
         },
         {
           "id": "eth-142",
           "x": -4.25,
-          "z": -31,
+          "z": -34.8,
           "angle": 1.5707963267948966
         },
         {
           "id": "eth-145",
           "x": 4.25,
-          "z": -31,
+          "z": -34.8,
+          "angle": -1.5707963267948966
+        },
+        {
+          "id": "eth-173",
+          "x": -4.25,
+          "z": -37.2,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "critical-reading",
+          "x": 4.25,
+          "z": -37.2,
           "angle": -1.5707963267948966
         },
         {
           "id": "eth-174",
           "x": -4.25,
-          "z": -34,
+          "z": -39.6,
           "angle": 1.5707963267948966
-        },
-        {
-          "id": "eth-173",
-          "x": 4.25,
-          "z": -34,
-          "angle": -1.5707963267948966
-        },
+        }
+      ]
+    },
+    {
+      "id": "originals",
+      "number": "04",
+      "title": "三条正本",
+      "en": "THREE BITCOIN ORIGINALS",
+      "start": 42,
+      "entryZ": -41.4,
+      "length": 8,
+      "exhibits": [
         {
           "id": "canon-1",
           "x": -4.25,
-          "z": -37,
+          "z": -44.666666666666664,
           "angle": 1.5707963267948966
         },
         {
           "id": "canon-2",
           "x": 4.25,
-          "z": -37,
+          "z": -44.666666666666664,
           "angle": -1.5707963267948966
         },
         {
           "id": "canon-3",
           "x": -4.25,
-          "z": -40,
+          "z": -47.333333333333336,
           "angle": 1.5707963267948966
         }
       ]
     },
     {
       "id": "material",
-      "number": "04",
-      "title": "封存与瑕疵",
-      "en": "MATTER & MEMORY",
-      "start": 42,
-      "entryZ": -41.4,
-      "length": 8,
+      "number": "05",
+      "title": "水晶",
+      "en": "THE CRYSTAL",
+      "start": 50,
+      "entryZ": -49.4,
+      "length": 6,
       "exhibits": [
         {
           "id": "physical-alpha",
           "x": -4.25,
-          "z": -45,
+          "z": -53,
           "angle": 1.5707963267948966
         },
         {
           "id": "evidence-path",
           "x": 4.25,
-          "z": -45,
-          "angle": -1.5707963267948966
-        }
-      ]
-    },
-    {
-      "id": "guardians",
-      "number": "05",
-      "title": "守护与接力",
-      "en": "CARE AFTER CLOSURE",
-      "start": 50,
-      "entryZ": -49.4,
-      "length": 8,
-      "exhibits": [
-        {
-          "id": "authority-boundary",
-          "x": -4.25,
-          "z": -53,
-          "angle": 1.5707963267948966
-        },
-        {
-          "id": "museum-history",
-          "x": 4.25,
           "z": -53,
           "angle": -1.5707963267948966
-        },
-        {
-          "id": "star-ark",
-          "x": -4.25,
-          "z": -56,
-          "angle": 1.5707963267948966
         }
       ]
     },
@@ -263,25 +263,39 @@
       "id": "waiting",
       "number": "06",
       "title": "等待",
-      "en": "AN OPEN ADDRESS",
-      "start": 58,
-      "entryZ": -57.4,
-      "length": 8,
+      "en": "WAITING FOR A READER",
+      "start": 56,
+      "entryZ": -55.4,
+      "length": 10,
       "exhibits": [
+        {
+          "id": "authority-boundary",
+          "x": -4.25,
+          "z": -59.333333333333336,
+          "angle": 1.5707963267948966
+        },
+        {
+          "id": "star-ark",
+          "x": 4.25,
+          "z": -59.333333333333336,
+          "angle": -1.5707963267948966
+        },
         {
           "id": "first-contact",
           "x": -4.25,
-          "z": -61,
+          "z": -62.666666666666664,
           "angle": 1.5707963267948966
         },
         {
           "id": "current-status",
           "x": 4.25,
-          "z": -61,
+          "z": -62.666666666666664,
           "angle": -1.5707963267948966
         }
       ]
     }
   ],
-  "endZ": -65
+  "endZ": -65,
+  "architectureBaseHeight": 4.8,
+  "runtimeAdaptation": "Retained Blender architecture is scaled vertically from 4.8 to 6 metres. Frames, eye height and crystal are independently placed; no historical object geometry is changed."
 }

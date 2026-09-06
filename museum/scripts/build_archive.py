@@ -3,12 +3,19 @@ from pathlib import Path
 import hashlib, html, json
 P=Path(__file__).resolve().parents[1];D=P/'dist';esc=html.escape
 rooms=json.loads((D/'data/rooms.json').read_text());sources=json.loads((D/'data/sources.json').read_text());items={e['id']:e for e in sources['items']};art={e['exhibit']:e for e in json.loads((D/'data/curatorial-illustrations.json').read_text())['items']}
+curation={e['id']:e for e in json.loads((D/'data/curation.json').read_text())['items']}
 parts=['<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Memory Station · Exhibition Archive</title><style>body{margin:0;background:#09121d;color:#dce7ef;font:17px/1.85 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:45px 24px}a{color:#9be6ed}h1,h2{font-weight:450}h1{font-size:36px}h2{margin-top:65px;border-top:1px solid #355063;padding-top:25px}h3{margin-top:35px}p,pre{overflow-wrap:anywhere}pre{white-space:pre-wrap;font:15px/1.9 system-ui;background:#112331;padding:20px}img{max-width:100%;max-height:500px;object-fit:contain}audio{display:block;max-width:100%;margin:15px 0}small{color:#9bb3c3}.note{padding:20px;background:#122633}summary{cursor:pointer;color:#9be6ed}nav{display:flex;flex-wrap:wrap;gap:18px}</style><main><a href="./index.html">← 进入三维展馆 / Enter 3D museum</a><h1>文明记忆站<br><small>Exhibition archive · '+esc(rooms['edition'])+'</small></h1><p class="note">2026 年后续策展。三条 Bitcoin 正本保持封存；本版空间、路线、导览与展签不增加解释权威。六厅是展览章节，不是原作预先规定的六个历史阶段。</p><p>This is a later exhibition. It does not amend the three Bitcoin originals. This reading archive preserves the room route, guide text, local media and source references without requiring WebGL.</p><nav>']
 parts[0]=parts[0].replace('<title>', '<link rel="canonical" href="https://museum.trinityaccord.org/museum/archive.html">'+'<script>if (["www.trinityaccord.org", "trinityaccord.org"].includes(location.hostname)) location.replace("https://museum.trinityaccord.org" + location.pathname + location.search + location.hash);</script>'+'<title>', 1)
 parts.extend('<a href="#'+r['id']+'">'+r['number']+' '+esc(r['title'])+'</a>' for r in rooms['rooms']);parts.append('</nav>')
 for r in rooms['rooms']:
  parts.extend(['<section id="'+r['id']+'"><h2>'+r['number']+' '+esc(r['title'])+'<br><small>'+esc(r['en'])+'</small></h2><p>'+esc(r['guide'])+'</p><p>'+esc(r['narration'])+'</p><audio controls preload="none" src="assets/guide-'+r['id']+'.mp3"></audio><small>2026 English AI narration / 英文 AI 配音 · Kokoro af_heart</small>'])
  for id in r['exhibits']:
+  if id in curation:
+   c=curation[id]
+   parts.append('<article><h3>'+esc(c.get('title',id))+'</h3><p>'+esc(c.get('text',''))+'</p><p>'+esc(c.get('textEn',''))+'</p>')
+   if c.get('date'):parts.append('<p>Bitcoin inscription #'+esc(c['number'])+' · '+esc(c['date'][:10])+' UTC / Bitcoin 上链日期</p>')
+   if c.get('originalText'):parts.append('<details><summary>完整原文 / Complete original</summary><pre>'+esc(c['originalText'])+'</pre></details>')
+   parts.append('</article>')
   if id=='star-ark':
    parts.append('<article><h3>The Star Ark Covenant: The Final Echo · 星舟圣约：最终的回响</h3><img loading="lazy" src="assets/curatorial/star-ark-2026.webp" alt="2026 curatorial illustration of arks carrying memory away from Earth"><p class="note"><strong>2026 CURATORIAL ILLUSTRATION · NOT ORIGINAL INSCRIPTION CONTENT</strong><br>Generated with AI on 2026-09-06 for this exhibition at the author’s request. The source is a later text inscription, outside the three sealed originals.<br>2026 年后续策展配图；原作为文字铭文，图像不是历史原作，不修订三条正本。</p><p><a href="data/records/star-ark-100751953.txt">Original text / 原文</a> · <a href="https://ordinals.com/inscription/4711ff186613bdd75b7e36070b3097c38efde110f90df94847592ff6997f45f1i0">Bitcoin inscription #100751953</a> · <a href="data/star-ark-illustration.json">Illustration provenance</a></p></article>')
   if id in art:
@@ -19,7 +26,7 @@ for r in rooms['rooms']:
    if id=='canon-3':parts.append('<p>编年史由封存元记录指向其 Ethereum 合约；铭文本身未嵌入全部编年史媒体。/ The sealed meta-record points to the Ethereum Chronicle; it does not embed all Chronicle media.</p>')
   if id not in items:
    parts.append('<p class="note">无配套歌曲：此展位为文字、实物或策展说明。/ No accompanying song: this entry presents text, an object or exhibition context.</p>');continue
-  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>'+esc(e['id']+' · '+e['date'])+' · Ethereum mint time</small>')
+  e=items[id];parts.append('<article id="'+id+'"><h3>'+esc(e['title'])+'</h3><small>NFT #'+str(e['ordinal'])+' · '+esc(e['date'][:10])+' UTC · Ethereum mint / 铸造日期</small>')
   for m in sorted(e['media'],key=lambda m:0 if m['kind']=='image' else 1):
    parts.append(('<img loading="lazy" src="'+m['file']+'" alt="'+esc(e['title'])+'">') if m['kind']=='image' else '<audio controls preload="none" src="'+m['file']+'"></audio>')
   if e.get('relatedSoundExhibit'):

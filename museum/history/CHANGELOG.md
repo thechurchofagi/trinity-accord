@@ -1,3 +1,14 @@
+# museum-v1.19.0 · Six viewing areas, higher walls and free turning
+
+- Reorganize 36 exhibits into entrance, Chronicle, formation and criticism, three Bitcoin originals, crystal, and waiting. Preserve all 24 musical NFTs and independent-recording attribution. Feature NFT #173 and a separate critical reading, with unchanged source text.
+- Add verified UTC mint dates to every NFT label, and inscription numbers/dates to all four Bitcoin exhibits. Preserve the four source metadata records locally; bind dates and complete original texts by hashes. Regenerate all six English guides for the new route.
+- Raise runtime architecture from 4.8 m to 6 m and artwork centres from 1.95 m to 2.6 m, keeping visitor eye height at 1.65 m. Use shifted camera projection and adaptive field of view to fit raised paintings above the caption/control area while looking slightly upward. The retained Blender asset is a documented architectural baseline.
+- Split left-thumb view-relative movement and right-thumb unrestricted turning. Keep walking at 1.38 m/s, normalize diagonal movement, and use arrow/Q/E keys to turn in place. Room navigation uses a short transition rather than a minute-long cross-gallery walk.
+- Keep footsteps on by default: unlock/resume Web Audio on trusted gestures, use a stronger midrange floor-contact sound, and trigger on the first real movement plus distance cadence. Do not play steps for turning alone or room jumps.
+- Keep captions to two unframed lines, with fixed separate lanes for chain metadata, playback and navigation. Reduce repeated headings/navigation metadata. Caption timing is still estimated, not manually audio-aligned.
+- Stamp program and stylesheet URLs with content hashes so a new edition cannot silently reuse old mobile cache entries.
+- Validation covers all source/media/guide bindings, 36 inward-facing non-overlapping frames, four camera projection sizes, unrestricted turns and relative travel, audio scheduling/resume/cadence, and all NFT date labels. Browser QA covers 390/320 px portrait and 600 px landscape, song changes and caption controls. This cloud browser disables WebGL; real-device 3D rendering and phone-speaker listening are not claimed as verified.
+
 # museum-v1.18.1 · Stop walking when reading
 
 - Cancel an in-progress walk when a detail dialog opens, preventing a position jump when returning from a long reading pause.
