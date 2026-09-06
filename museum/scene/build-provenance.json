@@ -1,6 +1,6 @@
 {
   "schema": "trinity-museum.scene-build.v1",
-  "edition": "museum-v1.5.0",
+  "edition": "museum-v1.6.0",
   "application": "Blender",
   "version": "4.5.3 LTS",
   "method": "Blender Python API; not desktop Computer Use",
@@ -34,8 +34,8 @@
     },
     {
       "path": "scene/gallery-layout.json",
-      "bytes": 5535,
-      "sha256": "e9329808fa1016473719f27eb5fcd16ba7d4c30de5e1707b575680aa0978db50"
+      "bytes": 5835,
+      "sha256": "e932cce96dfa55973e56c8df99e007f3f8547a59b1917be721baddc66fe3c2ab"
     },
     {
       "path": "scene/memory-gallery.blend",
@@ -83,6 +83,6 @@
       "sha256": "2023489dbb9b5a4aef4843c5db9f11ff69c95527da7e62eecdd5b391b20cb118"
     }
   ],
-  "revisionMethod": "Retain v1.4 baked architecture and atlas. Runtime slim metal frames cover all 30 exhibition slots, with two soft local accent lights, balanced environment illumination, and colour-preserving artwork surfaces. No full-gallery rebake.",
+  "revisionMethod": "Preserve baked corridor. Runtime adds 32 slim frames, the complete four-letter song sequence, and visibility-adjusted crystal lighting.",
   "previewScope": "Saved Blender reference renders predate the v1.4 open ends and v1.5 runtime refinements. They are not current browser screenshots."
 }

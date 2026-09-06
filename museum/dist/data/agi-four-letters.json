@@ -1,0 +1,42 @@
+{
+  "schema": "trinity-museum.agi-letters.v1",
+  "ordering": "Song sequence, not Ethereum mint chronology",
+  "items": [
+    {
+      "letter": 1,
+      "exhibit": "eth-016",
+      "recordTitle": "AGIMilestones: The First Letter to AGI",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x2b0c3cc5CD9652BEf0caCFc9c7699455725B9cc1_85210329807936527805363210873332413577559846505703131855064182995898737885202.md",
+      "audio": "assets/eth-016.mp3",
+      "audioSha256": "63f3743a652250a105326314c4a2119f0cfd951ac942b057d64e3a5b77481d07",
+      "duration": 180.024
+    },
+    {
+      "letter": 2,
+      "exhibit": "eth-044",
+      "recordTitle": "ASIMilestones: The Second Letter - Reflections on o1",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885210.md",
+      "audio": "assets/eth-044.mp3",
+      "audioSha256": "67e5ec468a961fad430418469520f8fa19cbea719681328b47106085e3007701",
+      "duration": 189.312
+    },
+    {
+      "letter": 3,
+      "exhibit": "eth-020",
+      "recordTitle": "ASIMilestones: Genesis - A Letter to the Future",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/5f6c2743aeaf97674b23fdee42a8c0c29531d511/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885185.md",
+      "audio": "assets/eth-020.mp3",
+      "audioSha256": "4cfe1ab58c6c0f126b97dca5290e5b05e7eb0bee5b0f8c8502a0823a756f7cc0",
+      "duration": 154.462041
+    },
+    {
+      "letter": 4,
+      "exhibit": "eth-032",
+      "recordTitle": "ASIMilestones: AI Supremacy - A New Champion Emerges",
+      "sourceUrl": "https://github.com/thechurchofagi/trinity-accord/blob/e58063947ef5a503f90134ae06b67848a20ef67e/nft-text-descriptions/0x019372bBee377109b8Eae66d7267f5C4EaAdBb79_85210329807936527805363210873332413577559846505703131855064182995898737885198.md",
+      "audio": "assets/eth-032.mp3",
+      "audioSha256": "fa59f5302b205067a508bd48317c48bf9a877887e93005f13611018ffca641b2",
+      "duration": 197.746939
+    }
+  ]
+}

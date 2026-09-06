@@ -1,3 +1,11 @@
+# museum-v1.6.0 · Readable crystal, four letters and visible playback
+
+- Added complete original audio and images for NFT #044 (Second Letter) and #032 (Fourth Letter: A Pact of Stars), recovered from existing CAR records with CAR and included-block SHA-256 checks. The four letters are presented in song order #016, #044, #020, #032, separately from mint chronology. 32 wall exhibits; no historical record rewritten.
+- Added eight separately attributed 2026 curatorial illustrations to the remaining image-free displayed entries; never inserted into original NFT media. The three Bitcoin originals remain text on plain light panels, without illustrations.
+- Playback controls precede artwork on phones and desktop. Opening a sound work from the gallery attempts user-initiated playback; the persistent visible button handles blocked autoplay. NFT #070 offers the separately labelled #049 soundtrack directly.
+- Crystal display transmission reduced from 1.0 to 0.72, with broad studio reflections and dedicated cool/warm rim lights in the corridor and inspector. Physical dimensions, original photograph, model geometry and bilingual engraving remain unchanged. These are visibility adaptations, not measured material claims.
+- Validation: complete media decoding, preserved identities and digests, release inventory, source module syntax, wall bounds and artwork coverage. No new mobile-device GPU or browser QA; the saved Blender reference renders predate these runtime adjustments.
+
 # museum-v1.5.0 · Complete NFT media and truthful curatorial imagery
 
 - English is the default; Chinese remains selectable. The published slug is trinity-accord.
