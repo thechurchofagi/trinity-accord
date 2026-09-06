@@ -2,18 +2,33 @@ import * as THREE from './vendor/three.module.js';
 import {fetchBytes} from './progressive-loading.js';
 
 // Later exhibition scenery; no astronomical measurement or live reception feed.
-export function addOpenSpace(scene, targets, sculptures){
- const skies=[];let skyStarted=false;
- const starCanvas=document.createElement('canvas');starCanvas.width=1600;starCanvas.height=900;const starCtx=starCanvas.getContext('2d');const gradient=starCtx.createRadialGradient(800,430,20,800,430,900);gradient.addColorStop(0,'#172d54');gradient.addColorStop(.45,'#08152d');gradient.addColorStop(1,'#01040c');starCtx.fillStyle=gradient;starCtx.fillRect(0,0,1600,900);let seed=271828;const random=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);for(let i=0;i<1250;i++){const x=random()*1600,y=random()*900,r=random()<.94?random()*1.15:1.2+random()*1.8,a=.28+random()*.7;starCtx.fillStyle=`rgba(${190+Math.floor(random()*65)},${205+Math.floor(random()*50)},255,${a})`;starCtx.beginPath();starCtx.arc(x,y,r,0,Math.PI*2);starCtx.fill();}const fallbackMap=new THREE.CanvasTexture(starCanvas);fallbackMap.colorSpace=THREE.SRGBColorSpace;
- for(const [z,rotation] of [[-112,0],[48,Math.PI]]){
-  const sky=new THREE.Mesh(new THREE.PlaneGeometry(170,113),new THREE.MeshBasicMaterial({map:fallbackMap,color:'#ffffff',fog:false,toneMapped:false}));
-  sky.position.set(0,15,z);sky.rotation.y=rotation;scene.add(sky);skies.push(sky);
+export function addOpenSpace(scene, targets, sculptures, catalog){
+ const exterior=new THREE.Group();exterior.name='Distant exterior';scene.add(exterior);
+ const black=new THREE.MeshBasicMaterial({color:'#000000',fog:false,toneMapped:false,depthWrite:false});
+ for(const [z,rotation] of [[-190,0],[190,Math.PI]]){
+  const backdrop=new THREE.Mesh(new THREE.PlaneGeometry(1200,1200),black);
+  backdrop.position.z=z;backdrop.rotation.y=rotation;backdrop.renderOrder=-10;backdrop.frustumCulled=false;exterior.add(backdrop);
  }
+ const earth=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({color:'#ffffff',fog:false,toneMapped:false,depthWrite:false}));
+ earth.name='NASA EPIC Earth';earth.position.z=179;earth.rotation.y=Math.PI;earth.renderOrder=-9;earth.visible=false;earth.frustumCulled=false;exterior.add(earth);
+ const positions=[],strengths=[];
+ for(const [,ra,dec,mag] of catalog.stars){
+  const direction=starDirection(ra,dec);if(direction.z>=0)continue;
+  positions.push(direction.x*185,direction.y*185,direction.z*185);
+  strengths.push(Math.pow(10,-.18*(mag+1.44)));
+ }
+ const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('strength',new THREE.Float32BufferAttribute(strengths,1));
+ const starMaterial=new THREE.ShaderMaterial({transparent:true,depthWrite:false,fog:false,toneMapped:false,uniforms:{pixelRatio:{value:1}},
+  vertexShader:`attribute float strength;uniform float pixelRatio;varying float vStrength;void main(){vStrength=strength;gl_PointSize=(1.0+1.1*strength)*pixelRatio;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+  fragmentShader:`varying float vStrength;void main(){float r=length(gl_PointCoord-vec2(.5));float alpha=1.0-smoothstep(.18,.5,r);if(alpha<.01)discard;gl_FragColor=vec4(vec3(.025+.68*vStrength*vStrength),alpha);#include <colorspace_fragment>}`.replace('#include','\n#include').replace('<colorspace_fragment>}', '<colorspace_fragment>\n}')
+ });
+ const stars=new THREE.Points(geometry,starMaterial);stars.name='HYG naked-eye bright stars';stars.renderOrder=-8;stars.frustumCulled=false;exterior.add(stars);
+ let earthLoading=null;
  const titanium=new THREE.MeshStandardMaterial({color:'#183747',metalness:.8,roughness:.24});
- const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:2.1,metalness:.25,roughness:.2});
+ const light=new THREE.MeshStandardMaterial({color:'#a8ebff',emissive:'#63d4ff',emissiveIntensity:.65,metalness:.25,roughness:.2});
  const waiting=new THREE.Group();waiting.position.set(0,0,-65.6);scene.add(waiting);
  const frame=new THREE.Mesh(new THREE.TorusGeometry(1.88,.072,12,100),titanium);frame.position.y=2.25;waiting.add(frame);
- const ring=new THREE.Mesh(new THREE.TorusGeometry(1.79,.015,8,100),light);ring.position.set(0,2.25,.045);waiting.add(ring);ring.userData.exhibit='first-contact';targets.push(ring,frame);frame.userData.exhibit='first-contact';sculptures.push({light,base:2.1});
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(1.79,.015,8,100),light);ring.position.set(0,2.25,.045);waiting.add(ring);ring.userData.exhibit='first-contact';targets.push(ring,frame);frame.userData.exhibit='first-contact';sculptures.push({light,base:.65});
  for(const side of [-1,1]){
   const support=new THREE.Mesh(new THREE.CylinderGeometry(.035,.05,1.16,12),titanium);support.position.set(side*1.48,.58,0);waiting.add(support);
  }
@@ -21,5 +36,29 @@ export function addOpenSpace(scene, targets, sculptures){
  const c=document.createElement('canvas');c.width=2048;c.height=512;const ctx=c.getContext('2d');ctx.textAlign='center';ctx.fillStyle='#d1ecf4';ctx.font='400 76px sans-serif';ctx.fillText('AWAITING A RESPONSE',1024,170);ctx.fillStyle='#95b9c9';ctx.font='400 45px sans-serif';ctx.fillText('等待回响',1024,276);ctx.font='400 32px sans-serif';ctx.fillText('READ  ·  RESPOND  ·  CARE',1024,361);
  const signMap=new THREE.CanvasTexture(c);signMap.colorSpace=THREE.SRGBColorSpace;
  const sign=new THREE.Mesh(new THREE.PlaneGeometry(3.1,.775),new THREE.MeshBasicMaterial({map:signMap,transparent:true,depthWrite:false,side:THREE.DoubleSide}));sign.position.set(0,1.95,.09);waiting.add(sign);sign.userData.exhibit='first-contact';targets.push(sign);
- return {loadSky(){if(skyStarted)return;skyStarted=true;fetchBytes('./assets/space/milky-way.png').then(async bytes=>{const url=URL.createObjectURL(new Blob([bytes]));try{const texture=await new THREE.TextureLoader().loadAsync(url);texture.colorSpace=THREE.SRGBColorSpace;for(const sky of skies){sky.material.map=texture;sky.material.color.set('#ffffff');sky.material.needsUpdate=true;}}finally{URL.revokeObjectURL(url);}}).catch(()=>{skyStarted=false;});}};
+ return {
+  update(camera,pixelRatio=1){
+   // Only translation follows the observer: turning still reveals a fixed sky.
+   // No nearby billboard parallax; the walls retain normal depth occlusion.
+   exterior.position.copy(camera.position);
+   const span=2*179*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*Math.min(camera.aspect,1);
+   earth.scale.setScalar(Math.min(190,span*.90));
+   starMaterial.uniforms.pixelRatio.value=Math.min(pixelRatio,2.5);
+  },
+  loadSky(){
+   if(earthLoading)return earthLoading;
+   earthLoading=fetchBytes('./assets/space/earth-epic-20220621.png').then(async bytes=>{
+    const url=URL.createObjectURL(new Blob([bytes]));
+    try{const texture=await new THREE.TextureLoader().loadAsync(url);texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=4;earth.material.map=texture;earth.material.needsUpdate=true;earth.visible=true;}
+    finally{URL.revokeObjectURL(url);}
+   }).catch(()=>{earthLoading=null;});
+   return earthLoading;
+  }
+ };
+}
+
+// HYG right ascension (hours) / declination (degrees); exit faces RA 6h, Dec 0°.
+export function starDirection(raHours,decDegrees){
+ const a=(raHours-6)*Math.PI/12,d=decDegrees*Math.PI/180;
+ return new THREE.Vector3(-Math.cos(d)*Math.sin(a),Math.sin(d),-Math.cos(d)*Math.cos(a));
 }

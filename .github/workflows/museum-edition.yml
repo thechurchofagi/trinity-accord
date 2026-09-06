@@ -28,6 +28,7 @@ jobs:
           node --check museum/dist/museum.js
           node museum/scripts/check_navigation.mjs
           node museum/scripts/check_wall_frames.mjs
+          node museum/scripts/check_exterior.mjs
   archive:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: validate
